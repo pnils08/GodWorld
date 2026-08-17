@@ -703,6 +703,10 @@ function generateCitizensEvents_(ctx) {
     if (has("source:media")) return "Media";
     if (has("source:weather")) return "Weather";
     if (has("source:fame")) return "Reputation"; // engine.32 T3
+    // research.27 2.3: the show routes to Reputation — standing in the city is
+    // what a run on UNDOCKED actually moves. Paired with the source whitelist
+    // entry added in the same commit.
+    if (has("source:undocked")) return "Reputation";
     if (has("relationship:rivalry")) return "Rivalry";
     if (has("relationship:alliance")) return "Alliance";
     if (has("relationship:mentorship")) return "Mentorship";
@@ -2638,6 +2642,9 @@ function generateCitizensEvents_(ctx) {
         // is deliberate: the show's color must never appear in a cycle the show
         // did not actually air.
         undocked: !!(S.undockedFeedEntries && S.undockedFeedEntries.length),
+        // Personal, not citywide — is THIS citizen flying this cycle.
+        undockedpilot: !!(S.undockedPilots &&
+          S.undockedPilots[String(popId).trim().toUpperCase()]),
         // Live dials, 0-100. dialBands is already computed above for the
         // participation weighting, so this reuses that cached read rather than
         // re-parsing DialState. No DialState -> dialBands null -> both null,
@@ -2711,6 +2718,37 @@ function generateCitizensEvents_(ctx) {
         if (isEventEligible_(lifeState, eventClassFromTags_(gEntry.tags || []))) gatedPool.push(gEntry);
       }
       pool = gatedPool;
+    }
+
+    // research.27 §2.4 (builder ruling): a pilot in this cycle's feed is IN SPACE
+    // that cycle — not in Oakland with show-flavoured color. Their week IS the
+    // flight, so the ordinary daily pool is not theirs to draw from. Filtered at
+    // the same seam as the life-state hard-gate above, and like that gate this
+    // only ever NARROWS: it selects from what was already assembled and invents
+    // nothing.
+    //
+    // FAIL-SAFE, deliberately: if the citizen is flying but no show-tagged
+    // content survives, the pool is left ALONE rather than emptied. No UNDOCKED
+    // ECL rows are authored yet (that pool is grok's 2.3 work), so an
+    // unconditional filter would make pilots silently vanish from LifeHistory
+    // the moment this deployed — a citizen with no week at all, which reads as
+    // a bug and erases the very person the show is about. The gate self-activates
+    // the instant show content exists, and is inert until then.
+    if (S.undockedPilots && S.undockedPilots[String(popId).trim().toUpperCase()]) {
+      var showPool = [];
+      for (var upi = 0; upi < pool.length; upi++) {
+        var upTags = pool[upi].tags || [];
+        for (var upt = 0; upt < upTags.length; upt++) {
+          if (upTags[upt] === 'source:undocked') { showPool.push(pool[upi]); break; }
+        }
+      }
+      if (showPool.length) {
+        pool = showPool;
+      } else {
+        Logger.log('generateCitizensEvents_: ' + popId + ' is flying c' +
+          (S.cycle || '?') + ' but no source:undocked content matched — ' +
+          'left on the ordinary pool rather than emitting nothing.');
+      }
     }
 
     if (pool.length === 0) continue;

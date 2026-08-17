@@ -52,7 +52,11 @@ var CONTENT_LEDGER_SOURCE_WHITELIST = {
   // depth-step comment there). Whitelisted S298 so authored rows can extend
   // these pools; typos still fail closed by matching neither block.
   'source:economy': 1, 'source:chaos': 1, 'source:sentiment': 1,
-  'source:season': 1, 'source:age': 1, 'source:familyLife': 1
+  'source:season': 1, 'source:age': 1, 'source:familyLife': 1,
+  // research.27 2.3 (S376): the show. Whitelisted in the SAME commit as its
+  // primaryFromTags branch (Reputation), per the rule above — without both,
+  // an authored UNDOCKED row would be rejected at load and nobody would know why.
+  'source:undocked': 1
 };
 
 // Conditions micro-DSL (S289 resolver table — vocab locked to code enums).
@@ -98,6 +102,11 @@ var CONTENT_LEDGER_DSL_FIELDS = {
   // Missing DialState leaves both null, which fails any warmth/drive term
   // without touching rows that only condition on `undocked`.
   undocked:     { kind: 'flag' },
+  // Pilot-scoped: true only for the citizens actually flying this cycle.
+  // `undocked` is citywide (the show aired); `undockedpilot` is personal (you
+  // were on it). Without this the protagonists of the episode draw the same
+  // lines as everyone watching from Oakland.
+  undockedpilot: { kind: 'flag' },
   warmth:       { kind: 'num' },
   drive:        { kind: 'num' }
 };

@@ -12,9 +12,15 @@
  *   node scripts/undockedShowGate.js --reject <episode_id> --by rb [--note "..."]
  *
  * Approved rows append output/spacemolt-show/feed/c{N}.json.
- * Engine-sheet wires that file into cycle intake later. This script does not.
+ * --push transports an approved pack to the Undocked_Feed tab (research.27 2.3
+ * item 4) — approval always precedes push, so only decided-yes events land.
  */
 
+// --push reads/writes the Undocked_Feed tab via lib/sheets, which needs
+// GODWORLD_SHEET_ID + GOOGLE_APPLICATION_CREDENTIALS. The gate did not load env
+// before because it was disk-only; without this --push dies on "GODWORLD_SHEET_ID
+// not set". Harmless for the disk-only verbs.
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const C = require('./undockedShowContract');
@@ -184,6 +190,69 @@ function appendFeed(event, root) {
   return p;
 }
 
+// ---------------------------------------------------------------------------
+// PUSH — approved feed pack -> Undocked_Feed tab (research.27 2.3 item 4)
+// ---------------------------------------------------------------------------
+// The engine is Apps Script and cannot read repo disk; everything reaches it via
+// sheets. This is the transport, and it is deliberately the LAST step: approval
+// strictly precedes push, so only decided-yes events ever leave disk.
+//
+// Idempotent by construction — reads the EpisodeId column and appends only what
+// is missing. It does NOT record "pushed" state back into the JSON: a
+// writer-side success marker that drifts from the artifact it describes is the
+// exact class that stacked 386 duplicate cards (governance.48). The tab is the
+// authority on what the tab contains.
+//
+// StagedPath is dropped on purpose. It is a repo disk path, and the tab is
+// world-facing — apparatus must not leak into it (contract FOURTH_WALL).
+//
+// TargetCycle vs Cycle: Cycle is provenance, the cycle the episode was flown
+// for. TargetCycle is the cycle it AIRS in, assigned here at push time. An
+// episode approved after its cycle closed airs in the next unfired one instead
+// of silently vanishing, which is what a Cycle-only match would have done.
+const FEED_TAB = 'Undocked_Feed';
+const TAB_HEADERS = Object.freeze([
+  'TargetCycle', 'Cycle', 'EventType', 'POPID', 'Holder', 'EpisodeId',
+  'CreditsDelta', 'Systems', 'CombatEvents', 'MishapCount', 'Magnitude', 'Flags',
+]);
+
+async function pushFeed(cycle, targetCycle, root) {
+  const sheets = require('../lib/sheets');
+  const p = feedPath(cycle, root);
+  if (!fs.existsSync(p)) throw new Error('no feed pack for c' + cycle + ' (' + p + ')');
+  const pack = loadJson(p);
+  const events = (pack.events || []);
+  if (!events.length) return { pushed: 0, skipped: 0, reason: 'feed pack empty' };
+
+  const existing = await sheets.getSheetData(FEED_TAB);
+  if (!existing || !existing.length) throw new Error(FEED_TAB + ' unreadable — refusing to push');
+  const hdr = existing[0];
+  const iEp = hdr.indexOf('EpisodeId');
+  if (iEp < 0) throw new Error(FEED_TAB + ' has no EpisodeId column — refusing to push');
+  const already = {};
+  for (let r = 1; r < existing.length; r++) {
+    const v = String(existing[r][iEp] == null ? '' : existing[r][iEp]).trim();
+    if (v) already[v] = true;
+  }
+
+  const rows = [];
+  let skipped = 0;
+  events.forEach(function (e) {
+    if (already[e.EpisodeId]) { skipped++; return; }
+    rows.push(TAB_HEADERS.map(function (h) {
+      if (h === 'TargetCycle') return Number(targetCycle);
+      const v = e[h];
+      // Arrays (Systems, Flags) serialize comma-joined — the engine-side reader
+      // splits on comma. Decided here rather than left to each reader.
+      if (Array.isArray(v)) return v.join(',');
+      return v == null ? '' : v;
+    }));
+  });
+
+  if (rows.length) await sheets.appendRows(FEED_TAB, rows);
+  return { pushed: rows.length, skipped: skipped, targetCycle: Number(targetCycle) };
+}
+
 function enqueueStagedDir(cycle, root) {
   const dir = paths(root).staged;
   return listSweepEligible(root).map(function (f) {
@@ -193,7 +262,7 @@ function enqueueStagedDir(cycle, root) {
 
 module.exports = {
   INTAKE_V, intakePath, feedPath, enqueue, decide, appendFeed, enqueueStagedDir,
-  archiveStaged, listSweepEligible,
+  archiveStaged, listSweepEligible, pushFeed, FEED_TAB, TAB_HEADERS,
 };
 
 if (require.main === module) {
@@ -228,6 +297,16 @@ if (require.main === module) {
       if (!cycle || !arg('--staged')) throw new Error('--enqueue needs --staged and --cycle');
       const r = enqueue(arg('--staged'), cycle);
       console.log('INTAKE Applied=no ' + r.row.EpisodeId);
+    } else if (argv.includes('--push')) {
+      if (!cycle) throw new Error('--push needs --cycle (the feed pack to push)');
+      // --target defaults to the pack's own cycle; pass it explicitly when a
+      // late approval should air in a later, not-yet-fired cycle.
+      const target = arg('--target') || cycle;
+      pushFeed(cycle, target).then(function (r) {
+        console.log('PUSH c' + cycle + ' -> ' + (r.reason || (
+          r.pushed + ' row(s) appended as TargetCycle=' + r.targetCycle +
+          (r.skipped ? ', ' + r.skipped + ' already present' : ''))));
+      }).catch(function (e) { console.error('push failed: ' + e.message); process.exit(1); });
     } else if (argv.includes('--approve')) {
       const id = arg('--approve');
       const row = decide(id, 'yes', arg('--by'), arg('--note'));
@@ -237,7 +316,7 @@ if (require.main === module) {
       const row = decide(id, 'rejected', arg('--by'), arg('--note'));
       console.log('APPLIED rejected ' + row.EpisodeId);
     } else {
-      console.error('usage: --enqueue --staged FILE --cycle N | --enqueue-staged-dir --cycle N | --approve ID --by WHO | --reject ID --by WHO');
+      console.error('usage: --enqueue --staged FILE --cycle N | --enqueue-staged-dir --cycle N | --approve ID --by WHO | --reject ID --by WHO | --push --cycle N [--target M]');
       process.exit(2);
     }
   } catch (err) {

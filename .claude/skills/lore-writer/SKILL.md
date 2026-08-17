@@ -50,5 +50,5 @@ Nothing promotes without: (1) the Vinnie regression test — a deep-dive on POP-
 
 ## Track record
 
-- 2026-08-17 — `output/lore-quarantine/vinnie_keane_farewell_long.md`: passed the Vinnie test, cited real prior canon quotes correctly, one generic-closer weakness.
-- 2026-08-17 — `output/lore-quarantine/POP-00131-lorenzo-jordan.md`: sparse-citizen eval, held discipline better than Vinnie (wrote the absence of family into the character instead of inventing). Ran manually by antigravity, not through this script — the script itself has zero real executions to date (see `scripts/loreWriter.js` env/model fix, same date).
+- 2026-08-15 (original build, pipeline.56) — `output/lore-quarantine/vinnie_keane_farewell_long.md`: passed the Vinnie test, cited real prior canon quotes correctly, one generic-closer weakness. File timestamp confirms this predates the current session by two days — not a fresh test, the original antigravity build run.
+- 2026-08-17 (this session) — `output/lore-quarantine/POP-00131-lorenzo-jordan.md`: sparse-citizen eval, held discipline better than Vinnie (wrote the absence of family into the character instead of inventing). Antigravity confirmed this one ran manually, not through the script (missing API key). Whether the 2026-08-15 run went through the actual script command or a similar manual/API loop isn't independently confirmed — don't assume either way without checking.

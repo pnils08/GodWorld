@@ -258,3 +258,93 @@ function loadEventContentLedger_(ctx) {
       loadedLines + ' lines / ' + loadedFragments + ' fragments loaded.');
   }
 }
+
+/**
+ * ============================================================================
+ * loadUndockedFeed_ — Undocked_Feed tab -> S.undockedFeedEntries
+ * ============================================================================
+ * research.27 2.3 item 4. The transport half lives on disk and in
+ * scripts/undockedShowGate.js --push; this is the engine end.
+ *
+ * Lives here rather than in its own file because loadEventContentLedger.js
+ * already owns the `undocked` DSL field — the flag and its source stay
+ * together, so a reader cannot drift from the vocabulary it feeds.
+ *
+ * TargetCycle, not Cycle: Cycle is provenance (the cycle flown), TargetCycle is
+ * when the episode AIRS, stamped by the pusher. An episode approved after its
+ * cycle closed airs in a later one instead of silently never airing.
+ *
+ * Read-only and stateless — writes nothing, marks nothing consumed. A cycle
+ * re-run produces the same result, which is why no "applied" bookkeeping is
+ * needed on the tab. Missing tab is a no-op (same contract as the ECL above),
+ * because a world without the show must still run.
+ */
+function loadUndockedFeed_(ctx) {
+  var S = ctx.summary || (ctx.summary = {});
+  S.undockedFeedEntries = [];
+  S.undockedPilots = {};
+
+  var ss = ctx.ss;
+  if (!ss) return;
+  var sheet = ss.getSheetByName('Undocked_Feed');
+  if (!sheet) return;                       // show not wired in this world — fine
+
+  var data = sheet.getDataRange().getValues();
+  if (!data || data.length < 2) return;
+  var h = data[0];
+  var iTarget = h.indexOf('TargetCycle');
+  var iPop = h.indexOf('POPID');
+  if (iTarget < 0 || iPop < 0) return;      // malformed tab: stay closed, never guess
+
+  var cycle = Number(S.cycle || (ctx.config && ctx.config.cycleCount) || 0);
+  if (!cycle) return;                       // no cycle -> cannot match -> fail closed
+
+  var col = function (name) { return h.indexOf(name); };
+  var iCycle = col('Cycle'), iHolder = col('Holder'), iEp = col('EpisodeId'),
+      iCredits = col('CreditsDelta'), iSystems = col('Systems'),
+      iCombat = col('CombatEvents'), iMishap = col('MishapCount'),
+      iMag = col('Magnitude'), iFlags = col('Flags');
+  var num = function (row, i) {
+    if (i < 0) return null;
+    var raw = row[i];
+    // Blank is NOT zero. CreditsDelta is nullable by contract, and a blank
+    // reading as 0 would render a pilot phantom-even in any standings built on
+    // this — the failure that would look fine for months.
+    if (raw === '' || raw == null) return null;
+    var n = Number(raw);
+    return isNaN(n) ? null : n;
+  };
+  var list = function (row, i) {
+    if (i < 0 || row[i] === '' || row[i] == null) return [];
+    return String(row[i]).split(',').map(function (s) { return s.trim(); })
+      .filter(function (s) { return s.length; });
+  };
+
+  for (var r = 1; r < data.length; r++) {
+    var row = data[r];
+    if (Number(row[iTarget]) !== cycle) continue;
+    var pop = String(row[iPop] == null ? '' : row[iPop]).trim().toUpperCase();
+    if (!pop) continue;
+    S.undockedFeedEntries.push({
+      popId: pop,
+      holder: iHolder >= 0 ? String(row[iHolder] || '').trim() : '',
+      episodeId: iEp >= 0 ? String(row[iEp] || '').trim() : '',
+      flownCycle: num(row, iCycle),
+      creditsDelta: num(row, iCredits),
+      combatEvents: num(row, iCombat),
+      mishapCount: num(row, iMishap),
+      magnitude: num(row, iMag),
+      systems: list(row, iSystems),
+      flags: list(row, iFlags)
+    });
+    // POPID index so a per-citizen check is O(1) inside the Phase-5 loop
+    // rather than a scan per citizen across ~960 rows.
+    S.undockedPilots[pop] = true;
+  }
+
+  if (S.undockedFeedEntries.length) {
+    Logger.log('loadUndockedFeed_: ' + S.undockedFeedEntries.length +
+      ' episode(s) airing c' + cycle + ' — pilots ' +
+      Object.keys(S.undockedPilots).join(', '));
+  }
+}

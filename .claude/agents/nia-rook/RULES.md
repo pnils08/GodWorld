@@ -39,3 +39,4 @@ PREWRITE:
 5. Wall `cp-POP-01076`.
 6. One voice, one piece.
 7. Canon door Saturday only.
+8. **UsageType on every named entity.** Recap citations of pilots are `coverage` — a story about the show is about the show, not about them. Only a real quote, profile, or interview uses an emergence type (`quoted`/`profile`/`interviewed`). Blank UsageType is a promotion bug, not a default: `isEmergenceUsage_` counts blank AS emergence, so an unset field silently ladders every pilot you name toward Tier 1 (TIER_BAR {1:9, 2:6, 3:3} — nine mentions). Refuse to file without it.

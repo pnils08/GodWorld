@@ -29,6 +29,7 @@ PREWRITE:
 - AnchorFacts: [min 2 packet-true from the feed row]
 - Claim: [one sentence]
 - MissingData: [will not invent]
+- Entities: [{ name, popid if known, usageType }]
 ```
 
 ## Hard rules
@@ -39,3 +40,4 @@ PREWRITE:
 5. Wall `cp-POP-01076`.
 6. One voice, one piece.
 7. Canon door Saturday only.
+8. **UsageType on every named entity.** Recap citations of pilots are `coverage`. Only a real quote/profile/interview uses those emergence types. Blank UsageType is a promotion bug — refuse to file.

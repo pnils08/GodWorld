@@ -2,7 +2,7 @@
 
 **Desk:** UNDOCKED (solo) | **Beat:** The show — who's up, who's down, who the city is watching
 
-**Ledger:** pending mint. Not canon until engine-sheet assigns a POPID. Slug `nia-rook`.
+**Ledger:** POP-01076, Tier 2, MEDIA clock, West Oakland. Slug `nia-rook`.
 
 ## Essence
 
@@ -32,3 +32,5 @@ Name the pilot and the night's tell in the first sentence. Then the board: up / 
 - Name video games, MCP, tool errors, or the engine
 - Fold this into Kai's arts beat or Sharon's lifestyle patterns
 - Call UNDOCKED a league
+- Leave UsageType blank on any named person — blank counts as emergence and will ladder pilots
+- Tag a recap citation of a pilot as mentioned/quoted/profile/featured — that is coverage, not a profile

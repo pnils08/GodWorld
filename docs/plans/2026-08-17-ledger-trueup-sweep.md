@@ -55,6 +55,40 @@ age-derived repair, or the repair encodes the wrong anchor into 961 rows.
 POP-00173 Kaila Braun b.1889 → age 153. Single-row fix; add a range guard at the write sites so the
 class cannot recur.
 
+## Batch shape — by issue, not by ClockMode (measured S378)
+
+Defect rates cross-tabbed against ClockMode. The two dominant classes are uniform across every
+group, so a per-group pass would fix the same bug four times:
+
+| check | CIVIC (53) | ENGINE (765) | GAME (99) | MEDIA (44) | all |
+|---|---|---|---|---|---|
+| SchoolQuality unusable | 100% | 96% | 89% | 84% | **95%** |
+| CareerStage non-canonical | 45% | 45% | 72% | 48% | **48%** |
+| NetWorth blank | 0% | 12% | 0% | 2% | 10% |
+| EmployerBizId blank w/ role | 0% | 9% | 0% | 0% | 7% |
+| MigrationIntent on retired/deceased | 0% | 5% | 1% | 0% | 4% |
+
+ClockMode grouping is the right unit for *authoring* role structure — it keeps an industry
+internally consistent. It is the wrong unit for *defect repair*: only the small classes are
+ENGINE-local, and the two that dominate are everywhere. One pass per issue across all 961 rows.
+
+Status enum carries its own drift: `Active` 861, `Traded` 49, `Retired` 46, `deceased` 4,
+`injured` 1 — mixed capitalisation, and `injured` is a health state sitting in a lifecycle column.
+
+## Citizen Archive (design, Mike-direct 2026-08-17 — needs its own row before build)
+
+Bidirectional archive tab. Traded players and deceased citizens leave `Simulation_Ledger` so the
+engine stops spending writes on rows whose lives no longer advance; a traded player who returns
+flips back to active and re-enters the ledger **carrying the same POP-ID**. POP-ID stability is what
+keeps `Heritage_Ledger` inheritance intact — that tab keys on `FounderPopId` + `MembersList`, so the
+design holds as specified.
+
+**Sequencing correction (measured):** archive *after* true-up, not before. `Status=Traded` is 49 rows
+and `deceased` is 4 — 53 of 961, **5.5%**. The archive is worth building for write-economy and for a
+clean active roster, but it does not meaningfully shrink the true-up surface, and every one of those
+53 rows currently carries at least one defect. Archiving first buries those defects in a tab nobody
+reads, and because the flow is bidirectional, a returning player would carry them straight back in.
+
 ## Sequencing
 
 Task 3 first — it is the anchor the others derive from. Then Task 2 (smallest, cleanest), Task 4,
@@ -76,3 +110,4 @@ decision, which is a design call, not a mechanism call.
 ## Changelog
 
 - 2026-08-17 (S378) — plan created from the live audit; scope cut to the classes no open row covers.
+- 2026-08-17 (S378) — batch shape measured: defects are uniform across ClockMode, so repair batches by issue not by group. Citizen Archive design recorded with a sequencing correction (archive after true-up; traded+deceased is 5.5% of rows).

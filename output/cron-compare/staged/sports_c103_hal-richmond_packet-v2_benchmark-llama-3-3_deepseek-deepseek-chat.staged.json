@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/cron-compare/staged/sports_c103_hal-richmond_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "A's — player-feature — supplied C103 line card",
+        "sourceRef": "world_summary_c103.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": null,
+    "draftSha256": "5b83ecda369471cff04bd316ca9ea25dc50dc36a78674daeff1d0daa55b409e8",
+    "verdict": "output/cron-compare/sports_c103_hal-richmond_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T15:25:34.950Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T15:25:47.802Z"
+}

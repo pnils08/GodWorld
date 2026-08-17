@@ -2,8 +2,9 @@
   "mode": "wake-write",
   "desk": "civic",
   "cycle": "103",
-  "provider": "openrouter",
-  "model": "anthropic/claude-sonnet-5",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "anthropic/claude-sonnet-5",
   "gateModel": "google/gemini-3.5-flash",
   "persona": "freelance-firebrand",
   "byline": {
@@ -12,13 +13,35 @@
     "beatDomain": "ACCOUNTABILITY"
   },
   "laneEntries": 32,
-  "quotesLanded": 0,
+  "quotesLanded": 2,
   "disposition": "flagged",
-  "rheaPass": false,
-  "rheaFlagCount": 1,
+  "rheaPass": true,
+  "rheaFlagCount": 0,
   "footerPresent": true,
   "toolUse": [],
   "article": "output/cron-compare/flagged/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.md",
   "selfRecord": null,
-  "ranAt": "2026-08-11T23:16:42.426Z"
+  "ranAt": "2026-08-13T07:02:01.162Z",
+  "dispositionReconciledAt": "2026-08-13T17:49:23.083Z",
+  "contamination": {
+    "fail": true,
+    "findings": [
+      {
+        "check": "lattice-quote",
+        "issue": "packet lattice printed as a person: \"What the record shows does not line up with what I expected\""
+      },
+      {
+        "check": "lattice-quote",
+        "issue": "packet lattice printed as a person: \"What explains the gap in the record\""
+      },
+      {
+        "check": "lattice-quote",
+        "issue": "packet lattice printed as a person: \"I am going to keep watching this\""
+      },
+      {
+        "check": "invented-voice",
+        "issue": "Vladimir Gonzalez (POP-00598) cannot be quoted: PRO_ATHLETE_CIVIC_INELIGIBLE"
+      }
+    ]
+  }
 }

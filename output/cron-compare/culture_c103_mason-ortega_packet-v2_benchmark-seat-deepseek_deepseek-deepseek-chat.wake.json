@@ -1,0 +1,26 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "103",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "mason-ortega",
+  "byline": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 23,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_deepseek-deepseek-chat.staged.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-13T16:22:48.688Z",
+  "dispositionReconciledAt": "2026-08-13T16:23:22.676Z"
+}

@@ -1,0 +1,48 @@
+{
+  "draft": "output/cron-compare/culture_c103_maria-keen_packet-v2_benchmark-natural-llama_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "5eb06d1621c6d161c5e33312cd0a13aa8cbca9b4f5bd9151f41ec6ff78e8024d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft accurately reflects the quiet evening state at Nightline Station in West Oakland with no sourcing or canon violations.",
+  "review": {
+    "profileId": "maria-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": null,
+    "manifestId": "AM-a1e4f14ab633",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [],
+    "unverified": [
+      "Evening Texture",
+      "Nightline Station"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0423,
+  "durationMs": 8292,
+  "parseError": false,
+  "ranAt": "2026-08-13T16:00:52.778Z"
+}

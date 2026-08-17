@@ -1,0 +1,47 @@
+{
+  "draft": "output/cron-compare/sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "f43f5bcb3a2f7f0545118dc42c3cdb345dcaa29ac2b5eba84880942c379a1898",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All claims regarding the Oaks preseason record and Adash Stanley's stats are fully verified against the C103 sports feed.",
+  "review": {
+    "profileId": "tanya-sideline-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-b17a99e6b54e",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0403,
+  "durationMs": 7991,
+  "parseError": false,
+  "ranAt": "2026-08-13T17:59:22.896Z"
+}

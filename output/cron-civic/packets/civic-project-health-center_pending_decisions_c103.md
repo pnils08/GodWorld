@@ -12,6 +12,19 @@
 - **Acceptance:** Submission of the HCAI sign-off sheet and a confirmed completion date for excavation and caisson drilling.
 - **Silence consequence:** High-intensity double shifts run the risk of structural and budgetary penalties without HCAI clearance.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [Temescal engagement] Bobby Chen-Ramirez — The pharmacist at 47th & Telegraph gets more questions about our crane schedule than I do. Starting next week, his bulletin board gets daily progress photos.
+2. stated: [HCAI resolution] Bobby Chen-Ramirez — HCAI stamped Sheet S-7.3 at 4:37 PM yesterday—that's the last structural note resolved. Caisson drilling finishes Thursday, three days ahead of schedule.
+3. stated: [hcai_status] Bobby Chen-Ramirez — HCAI's first-comments window opens next cycle as planned. Their reviewer confirmed our seismic submittals meet OSHPD-3 requirements—no showstoppers.
+4. stated: [construction_acceleration] Bobby Chen-Ramirez — We're running two crews now—one at dawn, one at dusk—but I won't sign off on concrete until every caisson meets OSHPD-3 specs. Temescal deserves a building that lasts.
+5. datawake: We're moving earth to move medicine — site clearing done, excavation two-thirds complete, caisson drilling underway. Not fast, but steady. The dirt tells the story. | action: Inspecting caisson #7 with the geotech engineer and contractor foreman — depth, diameter, rebar placement per spec. | signal: 68% excavation complete
+
+Latest district pack on disk: output/cron-civic/packs/PROJ-HEALTHCTR_c103.json
+This week's lever from that pack: HCAI first-comments window resolution and Phase 1 close
+
 ## DECISION 1 — Temescal Community Health Center — action due this cycle
 
 Where it stands: C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.

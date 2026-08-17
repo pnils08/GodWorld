@@ -1,0 +1,45 @@
+{
+  "draft": "output/cron-compare/civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "5211ff36a4797f081a49dd50edcf13a3213067ec681c8fb4404998eefe176e3c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft perfectly reflects the canonical weather data for Cycle 103 with no unauthorized texture or hallucinations.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-17c24984eeec",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0422,
+  "durationMs": 9910,
+  "parseError": false,
+  "ranAt": "2026-08-13T08:11:35.980Z"
+}

@@ -15,7 +15,7 @@
     },
     "task": {
       "goal": "Plan one Article chase without choosing a new assignment",
-      "assignment": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
+      "assignment": "A quiet night at Nightline Station — what the supplied evening record can and cannot explain",
       "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Kai (arts bag): present-tense scene; art as neighborhood act. Named events/artists from packet only. Modes: First Friday Pulse, Room Rewriting Itself, Stage/Mic/Block, What the Block Is Saying Tonight. Assigned pulse: quiet-nightlife — Nightline Station (West Oakland) · quiet night.",
       "creativeBrief": {
         "kind": "evening-life",
@@ -49,7 +49,7 @@
           "Lena Cross — tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4"
         ],
         "streamingTrend": "holiday classics marathon",
-        "sceneRule": "Named places only from Evening Texture / desk_signal. Nightlife meta: volume 3, vibe quiet, movement restricted. Sensory room (weather, light, sound) is free; careers and employees are not.",
+        "sceneRule": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal. Sensory room (weather, light, sound) is free; careers and employees are not.",
         "sourcePointers": [
           "docs/media/KAI_ARTS_BAG.md",
           "output/world_summary_c103.md ## Evening Texture",
@@ -92,80 +92,7 @@
         "editor-assignment",
         "desk-signal"
       ],
-      "candidates": [
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        }
-      ]
+      "candidates": []
     },
     "known": [
       {
@@ -182,9 +109,9 @@
       },
       {
         "t": "FACT",
-        "text": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+        "text": "The supplied evening record describes Nightline Station as open and quiet.",
         "src": "world_summary ## Evening Texture · Nightlife",
-        "id": "F-eb06f26d4668"
+        "id": "F-1590cfdf8f8c"
       },
       {
         "t": "FACT",
@@ -206,27 +133,9 @@
       },
       {
         "t": "FACT",
-        "text": "VOLUME: 3",
+        "text": "EVENING RECORD: open and quiet",
         "src": "world_summary ## Evening Texture · Nightlife",
-        "id": "F-7f9099fbcc1a"
-      },
-      {
-        "t": "FACT",
-        "text": "VIBE: quiet",
-        "src": "world_summary ## Evening Texture · Nightlife",
-        "id": "F-2cc50cb7f1d9"
-      },
-      {
-        "t": "FACT",
-        "text": "MOVEMENT: restricted",
-        "src": "world_summary ## Evening Texture · Nightlife",
-        "id": "F-10f02310d906"
-      },
-      {
-        "t": "FACT",
-        "text": "WEATHER IMPACT: 1.05",
-        "src": "world_summary ## Evening Texture · Nightlife",
-        "id": "F-782d4a339aa5"
+        "id": "F-8b4bdb19a250"
       }
     ],
     "limits": {
@@ -271,9 +180,9 @@
   },
   "assignment": {
     "story": {
-      "angle": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
+      "angle": "A quiet night at Nightline Station — what the supplied evening record can and cannot explain",
       "label": "Nightline Station (West Oakland) · quiet night",
-      "hookLine": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+      "hookLine": "The supplied evening record describes Nightline Station as open and quiet.",
       "hood": "West Oakland",
       "pulseClass": "quiet-nightlife",
       "citizens": [],
@@ -309,17 +218,14 @@
     },
     "prewrite": {
       "pulseClass": "quiet-nightlife",
-      "angle": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
-      "hookLine": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+      "angle": "A quiet night at Nightline Station — what the supplied evening record can and cannot explain",
+      "hookLine": "The supplied evening record describes Nightline Station as open and quiet.",
       "anchorFacts": [
         "NAMED: Nightline Station",
         "HOOD: West Oakland",
         "VENUE: Nightline Station",
         "HOOD: West Oakland",
-        "VOLUME: 3",
-        "VIBE: quiet",
-        "MOVEMENT: restricted",
-        "WEATHER IMPACT: 1.05"
+        "EVENING RECORD: open and quiet"
       ],
       "bagRecommend": "lifestyle",
       "bagSlug": "sharon-okafor"
@@ -468,7 +374,7 @@
         "New Beginnings",
         "Ninth Inning"
       ],
-      "colorRoom": "Named places only from Evening Texture / desk_signal. Nightlife meta: volume 3, vibe quiet, movement restricted.  Sensory room (weather, light, sound) is free; careers and employees are not."
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
     },
     "candidates": [
       {
@@ -571,17 +477,20 @@
   "angleRead": {
     "name": "Kai Marston",
     "popid": "POP-00158",
-    "text": "{\n  \"focus\": \"Nightline Station\",\n  \"why\": \"assigned signal\",\n  \"checks\": [],\n  \"targets\": [],\n  \"interpretation\": \"quiet nightlife scene\",\n  \"unverifiedLead\": [\n    \"restricted movement and quiet vibe\"\n  ],\n  \"closeQuestion\": \"What's behind the quiet night at Nightline Station?\"\n}",
+    "text": "{\n  \"focus\": \"Nightline Station\",\n  \"why\": \"quiet nightlife\",\n  \"checks\": [\n    \"open\",\n    \"quiet\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"a quiet night at Nightline Station\",\n  \"unverifiedLead\": [\n    \"the atmosphere is calm\"\n  ],\n  \"closeQuestion\": \"what is the essence of a quiet night in West Oakland\"\n}",
     "plan": {
       "focus": "Nightline Station",
-      "why": "assigned signal",
-      "checks": [],
-      "targets": [],
-      "interpretation": "quiet nightlife scene",
-      "unverifiedLead": [
-        "restricted movement and quiet vibe"
+      "why": "quiet nightlife",
+      "checks": [
+        "open",
+        "quiet"
       ],
-      "closeQuestion": "What's behind the quiet night at Nightline Station?"
+      "targets": [],
+      "interpretation": "a quiet night at Nightline Station",
+      "unverifiedLead": [
+        "the atmosphere is calm"
+      ],
+      "closeQuestion": "what is the essence of a quiet night in West Oakland"
     }
   },
   "lanePicks": [
@@ -622,5 +531,5 @@
     }
   ],
   "laneEntries": 23,
-  "ranAt": "2026-08-11T11:15:57.518Z"
+  "ranAt": "2026-08-13T11:17:12.169Z"
 }

@@ -7,15 +7,23 @@ LABEL: stuck-initiative (high) | Initiative "Fruitvale Transit Hub Phase II — 
 REF: output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4
 
 ## CONTRADICTION
-A: stuck-initiative (high) | Initiative "Fruitvale Transit Hub Phase II — Visioning" in phase "construction-planning" for 9 cycles
-B: Official voice still treats the initiative as live / on track
-FRAME: Phase stuck in name; the street sees a lot that does not move.
+A: The transit initiative carrying Fruitvale has not advanced in 9 cycles.
+B: The Initiative remains listed in the supplied tracker.
+FRAME: The record shows an Initiative that remains listed but has not advanced; what explains the stall?
 
 ## APPROACH
 Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar) so long as it contradicts nothing on this slice. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.
 
 ## CITIZENS (interview / name pool — RoleType immutable)
-_No POPID pool on this stink — quote stage may fall back to lane; still no invented names._
+- Calvin Turner (POP-00231) — role: Mechanic; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Port & Labor; tier: 2  [stink-handle]
+- Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2  [stink-handle]
+- Tomas Renteria (POP-00744) — role: Podcast Host / Line Cook; neighborhood: Fruitvale; born: 2007; careerStage: mid; wealth: 4; employerBiz: BIZ-00044; tier: 2  [stink-handle]
+- Dana Reeve (POP-00010) — role: Lead Journalist; neighborhood: Chinatown; born: 2001; careerStage: senior; wealth: 6; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3  [same-hood-signal]
+- Simone Ellis (POP-00039) — role: Chief Legal Counsel; neighborhood: Chinatown; born: 1985; careerStage: retired; wealth: 9; employerBiz: BIZ-00017; skills: Professional; tier: 3  [same-hood-signal]
+- Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 6; employerBiz: BIZ-00017; skills: Government & Civic; tier: 3  [same-hood-signal]
+- Robert Jaston (POP-00758) — role: Senior Pastor / Faith Leader; neighborhood: West Oakland; born: 1979; careerStage: entry-level; wealth: 9; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2  [same-hood-signal]
+- Sage Vienta (POP-00771) — role: Actor; neighborhood: West Oakland; born: 2003; careerStage: entry-level; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 2  [same-hood-signal]
+- Jada Rayes (POP-00773) — role: Editor-in-Chief, OakTown Echo; neighborhood: West Oakland; born: 1989; careerStage: entry-level; wealth: 5; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 2  [same-hood-signal]
 
 ## BONDS (real edges — color social graph, do not invent)
 _No active bonds among pool in bond-ledger-live.tsv (or export missing)._

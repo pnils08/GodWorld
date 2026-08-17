@@ -194,22 +194,22 @@
   "angleRead": {
     "name": "Rachel Torres",
     "popid": "POP-00057",
-    "text": "{\n  \"focus\": \"Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods\",\n  \"why\": \"The initiative shows operational status but crime index data contradicts its effectiveness in West Oakland, Fruitvale, and East Oakland\",\n  \"checks\": [\n    \"Compare response metrics between neighborhoods if available in Initiative_Tracker\",\n    \"Verify if resource allocation differs by area\",\n    \"Check for community feedback mechanisms in operational plan\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"The disparity suggests either uneven implementation or external factors undermining the initiative's goals in certain areas\",\n  \"unverifiedLead\": [\n    \"Possible variation in community engagement levels affecting outcomes\",\n    \"Potential overlap with other initiatives causing confusion in reporting\"\n  ],\n  \"closeQuestion\": \"Does the initiative need neighborhood-specific adjustments, or is the crime index data failing to capture its full impact?\"\n}",
+    "text": "{\n  \"focus\": \"Oakland Alternative Response Initiative operational status in West Oakland, Fruitvale, and East Oakland\",\n  \"why\": \"The initiative is marked as operational but shows contradicting CrimeIndex data across the three neighborhoods it serves, raising questions about implementation consistency.\",\n  \"checks\": [\n    \"Review Initiative_Tracker snapshot for response metrics in each neighborhood\",\n    \"Compare operational timelines with recent CrimeIndex fluctuations\",\n    \"Verify if all three areas received equivalent resource allocation\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"Discrepancies may indicate uneven rollout or localized challenges affecting the initiative's impact measurement.\",\n  \"unverifiedLead\": [\n    \"Potential lag in East Oakland deployment due to existing public safety resource strain\",\n    \"Fruitvale's transit hub construction possibly diverting attention from alternative response integration\"\n  ],\n  \"closeQuestion\": \"Does the operational status reflect uniform implementation across all three neighborhoods, or are there unaddressed gaps in service delivery?\"\n}",
     "plan": {
-      "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
-      "why": "The initiative shows operational status but crime index data contradicts its effectiveness in West Oakland, Fruitvale, and East Oakland",
+      "focus": "Oakland Alternative Response Initiative operational status in West Oakland, Fruitvale, and East Oakland",
+      "why": "The initiative is marked as operational but shows contradicting CrimeIndex data across the three neighborhoods it serves, raising questions about implementation consistency.",
       "checks": [
-        "Compare response metrics between neighborhoods if available in Initiative_Tracker",
-        "Verify if resource allocation differs by area",
-        "Check for community feedback mechanisms in operational plan"
+        "Review Initiative_Tracker snapshot for response metrics in each neighborhood",
+        "Compare operational timelines with recent CrimeIndex fluctuations",
+        "Verify if all three areas received equivalent resource allocation"
       ],
       "targets": [],
-      "interpretation": "The disparity suggests either uneven implementation or external factors undermining the initiative's goals in certain areas",
+      "interpretation": "Discrepancies may indicate uneven rollout or localized challenges affecting the initiative's impact measurement.",
       "unverifiedLead": [
-        "Possible variation in community engagement levels affecting outcomes",
-        "Potential overlap with other initiatives causing confusion in reporting"
+        "Potential lag in East Oakland deployment due to existing public safety resource strain",
+        "Fruitvale's transit hub construction possibly diverting attention from alternative response integration"
       ],
-      "closeQuestion": "Does the initiative need neighborhood-specific adjustments, or is the crime index data failing to capture its full impact?"
+      "closeQuestion": "Does the operational status reflect uniform implementation across all three neighborhoods, or are there unaddressed gaps in service delivery?"
     }
   },
   "lanePicks": [
@@ -260,5 +260,5 @@
     }
   ],
   "laneEntries": 32,
-  "ranAt": "2026-08-11T11:15:21.610Z"
+  "ranAt": "2026-08-13T11:15:55.887Z"
 }

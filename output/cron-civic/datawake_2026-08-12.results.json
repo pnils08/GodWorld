@@ -1,0 +1,12 @@
+{
+  "date": "2026-08-12",
+  "cycle": 103,
+  "results": [
+    {
+      "office": "civic-office-crc-faction",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-crc-faction_2026-08-12.json"
+    }
+  ],
+  "ranAt": "2026-08-16T01:05:19.987Z"
+}

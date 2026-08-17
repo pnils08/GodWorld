@@ -1,6 +1,6 @@
 {
   "cycle": 103,
-  "builtAt": "2026-08-11T11:15:07.610Z",
+  "builtAt": "2026-08-12T12:34:32.255Z",
   "empty": false,
   "journalist": {
     "name": "Jax Caldera",
@@ -17,23 +17,134 @@
     "desk": "civic"
   },
   "contradiction": {
-    "a": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
-    "b": "Official voice still treats the initiative as live / on track",
-    "frame": "Phase stuck in name; the street sees a lot that does not move."
+    "a": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+    "b": "The Initiative remains listed in the supplied tracker.",
+    "frame": "The record shows an Initiative that remains listed but has not advanced; what explains the stall?"
   },
   "story": {
     "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-    "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+    "label": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
     "kind": "anomaly",
-    "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+    "angle": "The transit initiative carrying Fruitvale has not advanced in 9 cycles. What record explains the stall?",
     "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
     "hood": "Fruitvale",
-    "popids": [],
-    "citizens": [],
+    "popids": [
+      "POP-00231",
+      "POP-00598",
+      "POP-00744",
+      "POP-00010",
+      "POP-00039",
+      "POP-00635",
+      "POP-00758",
+      "POP-00771",
+      "POP-00773"
+    ],
+    "citizens": [
+      "Calvin Turner — Mechanic, Fruitvale",
+      "Vladimir Gonzalez — Right Fielder, Oakland A's, Fruitvale",
+      "Tomas Renteria — Podcast Host / Line Cook, Fruitvale",
+      "Dana Reeve — Lead Journalist, Chinatown",
+      "Simone Ellis — Chief Legal Counsel, Chinatown",
+      "Mei Chen — Gallery Owner/Curator, Chinatown",
+      "Robert Jaston — Senior Pastor / Faith Leader, West Oakland",
+      "Sage Vienta — Actor, West Oakland",
+      "Jada Rayes — Editor-in-Chief, OakTown Echo, West Oakland"
+    ],
     "stinkClass": "implementation-gap",
     "stinkScore": 50
   },
-  "citizens": [],
+  "citizens": [
+    {
+      "popid": "POP-00231",
+      "name": "Calvin Turner",
+      "role": "Mechanic",
+      "neighborhood": "Fruitvale",
+      "careerStage": "senior",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "Calvin Turner (POP-00231) — role: Mechanic; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Port & Labor; tier: 2",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-00598",
+      "name": "Vladimir Gonzalez",
+      "role": "Right Fielder, Oakland A's",
+      "neighborhood": "Fruitvale",
+      "careerStage": "entry-level",
+      "employerBizId": "BIZ-00005",
+      "profile": "Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-00744",
+      "name": "Tomas Renteria",
+      "role": "Podcast Host / Line Cook",
+      "neighborhood": "Fruitvale",
+      "careerStage": "mid",
+      "employerBizId": "BIZ-00044",
+      "profile": "Tomas Renteria (POP-00744) — role: Podcast Host / Line Cook; neighborhood: Fruitvale; born: 2007; careerStage: mid; wealth: 4; employerBiz: BIZ-00044; tier: 2",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-00010",
+      "name": "Dana Reeve",
+      "role": "Lead Journalist",
+      "neighborhood": "Chinatown",
+      "careerStage": "senior",
+      "employerBizId": "BIZ-00018",
+      "profile": "Dana Reeve (POP-00010) — role: Lead Journalist; neighborhood: Chinatown; born: 2001; careerStage: senior; wealth: 6; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00039",
+      "name": "Simone Ellis",
+      "role": "Chief Legal Counsel",
+      "neighborhood": "Chinatown",
+      "careerStage": "retired",
+      "employerBizId": "BIZ-00017",
+      "profile": "Simone Ellis (POP-00039) — role: Chief Legal Counsel; neighborhood: Chinatown; born: 1985; careerStage: retired; wealth: 9; employerBiz: BIZ-00017; skills: Professional; tier: 3",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00635",
+      "name": "Mei Chen",
+      "role": "Gallery Owner/Curator",
+      "neighborhood": "Chinatown",
+      "careerStage": "senior",
+      "employerBizId": "BIZ-00017",
+      "profile": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 6; employerBiz: BIZ-00017; skills: Government & Civic; tier: 3",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00758",
+      "name": "Robert Jaston",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "West Oakland",
+      "careerStage": "entry-level",
+      "employerBizId": "BIZ-00028",
+      "profile": "Robert Jaston (POP-00758) — role: Senior Pastor / Faith Leader; neighborhood: West Oakland; born: 1979; careerStage: entry-level; wealth: 9; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00771",
+      "name": "Sage Vienta",
+      "role": "Actor",
+      "neighborhood": "West Oakland",
+      "careerStage": "entry-level",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "Sage Vienta (POP-00771) — role: Actor; neighborhood: West Oakland; born: 2003; careerStage: entry-level; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Creative & Arts; tier: 2",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00773",
+      "name": "Jada Rayes",
+      "role": "Editor-in-Chief, OakTown Echo",
+      "neighborhood": "West Oakland",
+      "careerStage": "entry-level",
+      "employerBizId": "BIZ-00018",
+      "profile": "Jada Rayes (POP-00773) — role: Editor-in-Chief, OakTown Echo; neighborhood: West Oakland; born: 1989; careerStage: entry-level; wealth: 5; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 2",
+      "why": "same-hood-signal"
+    }
+  ],
   "bonds": [],
   "scene": {
     "weather": "Season: Winter | Weather: 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",

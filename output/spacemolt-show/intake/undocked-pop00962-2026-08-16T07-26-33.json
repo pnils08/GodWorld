@@ -1,0 +1,42 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-08-16T17:52:44.839Z",
+  "POPID": "POP-00962",
+  "Cycle": 103,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00962-2026-08-16T07-26-33",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-08-16T07-26-33.json",
+  "Holder": "Marcus Walker",
+  "CreditsDelta": -68,
+  "Magnitude": 4,
+  "Flags": [
+    "open_escrow",
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Marcus Walker credits=-68 systems=Sol",
+  "DecidedAt": "2026-08-16T22:09:23.561Z",
+  "DecidedBy": "rb",
+  "Note": "First real Nia Rook test write, Mike-requested",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 103,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00962",
+    "Holder": "Marcus Walker",
+    "EpisodeId": "undocked-pop00962-2026-08-16T07-26-33",
+    "CreditsDelta": -68,
+    "Systems": [
+      "Sol"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 4,
+    "Flags": [
+      "open_escrow",
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-08-16T07-26-33.json"
+  }
+}

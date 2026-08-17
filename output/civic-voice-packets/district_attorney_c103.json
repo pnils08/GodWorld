@@ -1,0 +1,182 @@
+{
+  "meta": {
+    "type": "civic-voice-packet",
+    "office": "district_attorney",
+    "cycle": 103
+  },
+  "office": [
+    {
+      "officeId": "DA-01",
+      "title": "District Attorney",
+      "name": "Clarissa Dane",
+      "popId": "POP-00143",
+      "status": "active",
+      "faction": "IND",
+      "notes": "Former federal prosecutor"
+    },
+    {
+      "officeId": "PD-01",
+      "title": "Public Defender",
+      "name": "Caleb Reyes",
+      "popId": "POP-00146",
+      "status": "active",
+      "faction": "OPP",
+      "notes": "Sharp political instincts"
+    }
+  ],
+  "initiatives": [
+    {
+      "id": "INIT-002",
+      "name": "Oakland Alternative Response Initiative",
+      "status": "passed",
+      "budget": "$12.5M",
+      "voteRequirement": "5-4",
+      "voteCycle": "82",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
+      "policyDomain": "safety",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes."
+    }
+  ],
+  "domainData": {
+    "metrics": null,
+    "crimeMetrics": {
+      "cityWide": {
+        "totalIncidents": 103,
+        "avgResponseTime": 8.7,
+        "avgClearanceRate": 0.116,
+        "highCrimeNeighborhoods": [
+          {
+            "neighborhood": "West Oakland",
+            "violentCrime": 61,
+            "incidents": 11
+          },
+          {
+            "neighborhood": "East Oakland",
+            "violentCrime": 66,
+            "incidents": 11
+          }
+        ]
+      }
+    },
+    "transitStations": null,
+    "citizenSummary": null,
+    "recentLifeEvents": null,
+    "faithCommunities": null,
+    "domainEvents": [
+      {
+        "type": "safety-incident",
+        "domain": "SAFETY",
+        "severity": "low",
+        "neighborhood": "Downtown",
+        "description": ""
+      }
+    ]
+  },
+  "cityWide": {
+    "population": {
+      "totalPopulation": 387278.0135,
+      "illnessRate": 0.1006551594,
+      "employmentRate": 0.9013018272,
+      "migration": 1083,
+      "economy": "stable",
+      "sentiment": 0.44,
+      "cycleWeight": "high-signal",
+      "shockFlag": "shock-flag"
+    },
+    "events": [
+      {
+        "type": "infra-incident",
+        "domain": "INFRASTRUCTURE",
+        "severity": "low",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "CELEBRITY",
+        "severity": "low",
+        "neighborhood": "Uptown"
+      },
+      {
+        "type": "safety-incident",
+        "domain": "SAFETY",
+        "severity": "low",
+        "neighborhood": "Downtown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "TRAFFIC",
+        "severity": "low",
+        "neighborhood": "Uptown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "CELEBRITY",
+        "severity": "low",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "GENERAL",
+        "severity": "low",
+        "neighborhood": "Laurel"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "East Oakland"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Fruitvale"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Adams Point"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "West Oakland"
+      }
+    ]
+  },
+  "initiativeDecisions": {
+    "oari": {
+      "initiative": "INIT-002",
+      "initiativeId": "INIT-002",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-003)",
+      "consolidatedFrom": [
+        "STMT-103-MAYOR-003 (Mayor — Oakland Alternative Response Initiative — D7 Community Satisfaction Survey)",
+        "STMT-103-oari-001 (Tran-Muñoz — D7 Satisfaction Survey Release)",
+        "STMT-103-oari-002 (Tran-Muñoz — West Oakland Operations)",
+        "STMT-103-police_chief-002 (Chief — OARI Pilot Expansion)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-002",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C103: Executive order issued to create community task force for D7 satisfaction survey review.",
+        "NextScheduledAction": "Task force recommendations due",
+        "NextActionCycle": 105
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    }
+  }
+}

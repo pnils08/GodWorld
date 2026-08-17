@@ -1,0 +1,91 @@
+{
+  "cycle": 103,
+  "packets": {
+    "mayor": {
+      "file": "mayor_c103.json",
+      "initiatives": 6
+    },
+    "opp_faction": {
+      "file": "opp_faction_c103.json",
+      "districts": [
+        "D1",
+        "D3",
+        "D5",
+        "D9"
+      ],
+      "citizenCount": 301,
+      "neighborhoods": [
+        "West Oakland",
+        "Brooklyn",
+        "Fruitvale",
+        "San Antonio",
+        "East Oakland",
+        "Baylight District",
+        "Laurel",
+        "Uptown"
+      ]
+    },
+    "crc_faction": {
+      "file": "crc_faction_c103.json",
+      "districts": [
+        "D6",
+        "D7",
+        "D8"
+      ],
+      "citizenCount": 316,
+      "neighborhoods": [
+        "Montclair",
+        "Piedmont Ave",
+        "Temescal",
+        "Rockridge",
+        "KONO",
+        "Lake Merritt",
+        "Adams Point",
+        "Grand Lake",
+        "Eastlake"
+      ]
+    },
+    "ind_swing": {
+      "file": "ind_swing_c103.json",
+      "districts": [
+        "D2",
+        "D4"
+      ],
+      "citizenCount": 223,
+      "neighborhoods": [
+        "Downtown",
+        "Chinatown",
+        "Jack London",
+        "Glenview",
+        "Dimond",
+        "Ivy Hill"
+      ]
+    },
+    "police_chief": {
+      "file": "police_chief_c103.json",
+      "crimeNeighborhoods": 22,
+      "oariDistricts": [
+        "West Oakland",
+        "Brooklyn",
+        "Fruitvale",
+        "San Antonio",
+        "East Oakland",
+        "Baylight District"
+      ]
+    },
+    "baylight_authority": {
+      "file": "baylight_authority_c103.json",
+      "adjacentNeighborhoods": [
+        "Jack London",
+        "Coliseum",
+        "Downtown",
+        "Brooklyn"
+      ],
+      "citizenCount": 151
+    },
+    "district_attorney": {
+      "file": "district_attorney_c103.json",
+      "crimeEvents": 1
+    }
+  }
+}

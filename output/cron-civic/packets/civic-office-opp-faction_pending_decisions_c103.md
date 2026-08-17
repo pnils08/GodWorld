@@ -22,6 +22,20 @@
 - **Uptown** — mood clearly upbeat; street trade busy; crime low; athlete sighting; stalled bus.
 - **Laurel** — mood clearly upbeat; street trade busy; crime low; minor fender-bender.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [Baylight District Phase II Shortlist Credit Claim] Janae Rivers — Slow street trade in Baylight isn’t a ‘quiet victory’—it’s a symptom of a city that still prioritizes stadiums over storefronts. The real credit belongs to residents keeping their heads above water.
+2. stated: [Neighborhood Coherence Task Force for West Oakland, Fruitvale, and East Oakland] Janae Rivers — Incoherence in our neighborhoods isn’t a mystery—it’s the legacy of policies that prioritized developers over residents. This task force must diagnose systemic disinvestment, not just symptoms.
+3. stated: [Fruitvale Transit Hub Phase II Compliance Review] Janae Rivers — Phase II has been ‘visioning’ while Fruitvale’s small businesses bleed. We don’t need more studies—we need construction crews. Today’s compliance approval must trigger shovel-ready timelines.
+4. stated: [West Oakland Stabilization Fund Month-Five Disbursement] Janae Rivers — Forty-five families helped isn’t a victory—it’s a down payment on what Oakland owes West Oakland. We’ll keep pushing until every displaced family has a home.
+5. datawake: Baylight's slow street trade while crime stays low isn't a paradox—it's proof that safety without economic vitality is an incomplete victory. When neighborhoods like ours have 'flat moods' on paper but real people struggling to keep storefronts open, that's the quiet crisis we must treat with urgency. The same disinvestment that hollowed out West Oakland for decades is now playing out in slow motion here. |
+6. stated: [Emergency Neighborhood Investment Hearing] Janae Rivers — When nine neighborhoods are burning, we don’t look away—we light a match under the bureaucracy.
+
+Latest district pack on disk: output/cron-civic/packs/COUNCIL-D5_c103.json
+This week's lever from that pack: D7 next-cycle report and community satisfaction survey
+
 ## DECISION 1 — West Oakland Stabilization Fund — action due this cycle
 
 Where it stands: C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.

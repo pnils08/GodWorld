@@ -8,7 +8,7 @@
     "desk": "civic"
   },
   "task": {
-    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
     "assignment": "Oakland Alternative Response Initiative | Status passed | phase operational",
     "approach": "Measured public-safety approach: choose one packet-backed incident, classification gap, or OARI response question. Third-person only. Use supplied names, places, dates, and numbers; do not invent officers, cases, quotes, crime waves, or public fear.",
     "voice": null,
@@ -30,90 +30,35 @@
       "sourcePointers": [
         "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
       ]
-    }
+    },
+    "writingMode": "SOURCE_BRIEF"
   },
   "signal": {
     "kind": "public-safety",
     "hood": "West Oakland, Fruitvale, East Oakland",
     "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
     "plan": {
-      "focus": "Inconsistent impact of Oakland Alternative Response Initiative across targeted neighborhoods",
-      "closeQuestion": "Does the initiative need neighborhood-specific adjustments, or is the crime index data failing to capture its full impact?"
+      "focus": "Evaluating the Oakland Alternative Response Initiative's operational impact in West Oakland, Fruitvale, and East Oakland given contradictory CrimeIndex data",
+      "closeQuestion": "Does the initiative need neighborhood-specific adjustments, or do the CrimeIndex contradictions point to broader measurement issues in evaluating alternative response programs?"
     }
   },
   "exposure": {
-    "subjects": [
-      {
-        "pop": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "profile": "Vladimir Gonzalez",
-        "quotationEligible": true,
-        "src": "packet.W2.interview"
-      },
-      {
-        "pop": "POP-00744",
-        "name": "Tomas Renteria",
-        "profile": "Tomas Renteria",
-        "quotationEligible": true,
-        "src": "packet.W2.interview"
-      },
-      {
-        "pop": "POP-00010",
-        "name": "Dana Reeve",
-        "profile": "Dana Reeve",
-        "quotationEligible": true,
-        "src": "packet.W2.interview"
-      }
-    ],
-    "sources": [
-      {
-        "id": "Q-POP-00598-fd1096c673",
-        "pop": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-5df54683a1df",
-          "F-d43a7e2d2c43"
-        ],
-        "src": "packet.W2[POP-00598]"
-      },
-      {
-        "id": "Q-POP-00744-fd1096c673",
-        "pop": "POP-00744",
-        "name": "Tomas Renteria",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-5df54683a1df",
-          "F-d43a7e2d2c43"
-        ],
-        "src": "packet.W2[POP-00744]"
-      },
-      {
-        "id": "Q-POP-00010-fd1096c673",
-        "pop": "POP-00010",
-        "name": "Dana Reeve",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-5df54683a1df",
-          "F-d43a7e2d2c43"
-        ],
-        "src": "packet.W2[POP-00010]"
-      }
-    ],
+    "subjects": [],
+    "sources": [],
     "excludedLeads": [
       {
-        "from": "Tomas Renteria",
-        "text": "Feels like the initiative's presence shifts block by block—some corners get all the attention, others feel forgotten. Like they're patching potholes on one street while the next one over's been crumbling for years.",
+        "from": "Sgt. Rachel Torres",
+        "text": "Possible variations in how different community organizations are partnering with the initiative",
         "usable": false
       },
       {
         "from": "Sgt. Rachel Torres",
-        "text": "Possible variation in community engagement levels affecting outcomes",
+        "text": "Potential differences in officer training or resource allocation between precincts",
         "usable": false
       },
       {
         "from": "Sgt. Rachel Torres",
-        "text": "Potential overlap with other initiatives causing confusion in reporting",
+        "text": "Whether certain neighborhood characteristics make alternative responses more or less effective",
         "usable": false
       }
     ]
@@ -167,7 +112,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
   },
   "output": {
     "format": "markdown-article",
@@ -201,8 +146,9 @@
     "canonPolicy": "load-bearing",
     "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
     "articleContract": {
-      "voice": "measured third-person public-safety reporting",
-      "targetWords": "500-800",
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
+      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
       "opening": "a Packet-backed safety signal, place, or resident consequence",
       "closing": "an unresolved accountability or practical-safety question grounded in the record"
     },
@@ -224,7 +170,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-9405edfd8e5b",
+    "id": "AM-bcd9d63c8752",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -258,64 +204,8 @@
         "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
       }
     ],
-    "approvedQuotes": [
-      {
-        "id": "Q-POP-00598-fd1096c673",
-        "speakerId": "POP-00598",
-        "speakerName": "Vladimir Gonzalez",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-5df54683a1df",
-          "F-d43a7e2d2c43"
-        ],
-        "src": "packet.W2[POP-00598]"
-      },
-      {
-        "id": "Q-POP-00744-fd1096c673",
-        "speakerId": "POP-00744",
-        "speakerName": "Tomas Renteria",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-5df54683a1df",
-          "F-d43a7e2d2c43"
-        ],
-        "src": "packet.W2[POP-00744]"
-      },
-      {
-        "id": "Q-POP-00010-fd1096c673",
-        "speakerId": "POP-00010",
-        "speakerName": "Dana Reeve",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-5df54683a1df",
-          "F-d43a7e2d2c43"
-        ],
-        "src": "packet.W2[POP-00010]"
-      }
-    ],
-    "approvedSubjects": [
-      {
-        "id": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "profile": "Vladimir Gonzalez",
-        "src": "packet.W2.interview",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00744",
-        "name": "Tomas Renteria",
-        "profile": "Tomas Renteria",
-        "src": "packet.W2.interview",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00010",
-        "name": "Dana Reeve",
-        "profile": "Dana Reeve",
-        "src": "packet.W2.interview",
-        "quotationEligible": true
-      }
-    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -332,18 +222,18 @@
     ],
     "unverifiedLeads": [
       {
-        "from": "Tomas Renteria",
-        "text": "Feels like the initiative's presence shifts block by block—some corners get all the attention, others feel forgotten. Like they're patching potholes on one street while the next one over's been crumbling for years.",
+        "from": "Sgt. Rachel Torres",
+        "text": "Possible variations in how different community organizations are partnering with the initiative",
         "publishable": false
       },
       {
         "from": "Sgt. Rachel Torres",
-        "text": "Possible variation in community engagement levels affecting outcomes",
+        "text": "Potential differences in officer training or resource allocation between precincts",
         "publishable": false
       },
       {
         "from": "Sgt. Rachel Torres",
-        "text": "Potential overlap with other initiatives causing confusion in reporting",
+        "text": "Whether certain neighborhood characteristics make alternative responses more or less effective",
         "publishable": false
       }
     ],

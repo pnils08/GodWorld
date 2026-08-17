@@ -1,0 +1,11 @@
+{
+  "draft": "civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "issue": "Raw engine labels, system language, and file paths leaked into the text, violating the profile's canon blockers against raw engine labels as public-facing evidence.",
+      "severity": "high"
+    }
+  ],
+  "summary": "Draft contains raw engine labels and system language leaks in the intake section, violating the profile's canon blockers."
+}

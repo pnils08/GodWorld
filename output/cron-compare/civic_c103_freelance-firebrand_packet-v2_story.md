@@ -1,37 +1,34 @@
 # STORY — civic c103 — Jax Caldera
 
 ## §1 ASSIGNMENT
-- ANGLE (assigned by the editor — fixed): Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office
-- HOOK: The transit initiative carrying Fruitvale has not advanced in 9 cycles.
-- WHERE: Fruitvale
-- SOURCE: output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4
-- DESK APPROACH: Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar) so long as it contradicts nothing on this slice. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.
+- ANGLE (assigned by the editor — fixed): West Oakland Stabilization Fund | Month-five disbursement batch review C103
+- SOURCE: Initiative_Tracker (InitiativeID INIT-001)
+- DESK APPROACH: Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
-  "focus": "Fruitvale Transit Hub Phase II initiative stall",
-  "why": "official claims of progress contradict evidence of stagnation",
+  "focus": "West Oakland Stabilization Fund disbursement",
+  "why": "Initiative tracker shows no progress in 9 cycles",
   "checks": [
-    "stuck-initiative",
-    "repeating-event",
-    "coverage-gap",
-    "production-imbalance",
-    "incoherence"
+    "transit initiative status",
+    "disbursement batch review"
   ],
-  "targets": [],
-  "interpretation": "discrepancy between official narrative and actual progress",
+  "targets": [
+    {
+      "pop": "POP-00758",
+      "question": "What is the current status of the West Oakland Stabilization Fund?",
+      "basis": "Initiative tracker"
+    },
+    {
+      "pop": "POP-00771",
+      "question": "How does the lack of progress in the transit initiative affect the community?",
+      "basis": "Neighborhood impact"
+    }
+  ],
+  "interpretation": "Discrepancy between initiative claims and actual progress",
   "unverifiedLead": [
-    "possible lack of accountability or transparency in the initiative's planning phase"
+    "Potential mismanagement of funds",
+    "Lack of transparency in initiative tracking"
   ],
-  "closeQuestion": "Who is responsible for the stalled progress of the Fruitvale Transit Hub Phase II initiative?"
+  "closeQuestion": "Who is responsible for addressing the discrepancies in the West Oakland Stabilization Fund?"
 }
-## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
-(no quotes landed this wake — write from the record; do not invent residents)
-
-## §4 THE ARTICLE (wake 3)
-- draft: output/cron-compare/flagged/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.md
-- disposition: flagged
-- rhea: flagged (1)
-- self-score footer: present
-- tool use: none
-

@@ -18,21 +18,18 @@ Cycle **C103** · kind `evening-life`
 - **kai-marston** (arts): quiet-nightlife — Nightline Station (West Oakland) · quiet night [32]
 - **sharon-okafor** (lifestyle): quiet-nightlife — Nightline Station (West Oakland) · quiet night [32]
 - **maria-keen** (ground): quiet-nightlife — Nightline Station (West Oakland) · quiet night [32]
-- **elliot-graye** (faith): fame-sighting — Claire Ashford at Beth Jacob Congregation (Piedmont Ave) [43]
+- **elliot-graye** (faith): fame-sighting — Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave) [31]
 
 ## PREWRITE
-- Angle: Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing
-- Hook: Nightline Station is open but the night is quiet (volume 3, vibe quiet).
+- Angle: Nightline Station is open and quiet in West Oakland. What that condition means is not yet established.
+- Hook: Nightline Station is open and quiet in West Oakland.
 - Bag: lifestyle
 Anchor facts (sources only):
   - NAMED: Nightline Station
   - HOOD: West Oakland
   - VENUE: Nightline Station
   - HOOD: West Oakland
-  - VOLUME: 3
-  - VIBE: quiet
-  - MOVEMENT: restricted
-  - WEATHER IMPACT: 1.05
+  - EVENING RECORD: open and quiet
 
 ## EVENING TEXTURE (named only)
 **Restaurants:** Piedmont Heights (Piedmont Ave); Festive Feast (Downtown); Rockridge Cellar (Rockridge)
@@ -49,7 +46,7 @@ Anchor facts (sources only):
 
 ## DESK SIGNAL (fame / sightings)
 - fame events: 5 · sightings: 3 · faith pointers: 6
-- sighting: Claire Ashford @ Beth Jacob Congregation (Piedmont Ave)
+- sighting: Claire Ashford @ B'nai Tikvah Synagogue (Piedmont Ave)
 - sighting: Mark Aitken @ Ridgeline Ventures (Lake Merritt)
 - sighting: Tara Ellison @ City of Oakland (Downtown)
 - fame: Vinnie Keane
@@ -61,11 +58,11 @@ Anchor facts (sources only):
 Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.
 
 ## SCENE COLOR
-Named places only from Evening Texture / desk_signal. Nightlife meta: volume 3, vibe quiet, movement restricted.  Sensory room (weather, light, sound) is free; careers and employees are not.
+Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not.
 
 ## OTHER CANDIDATES (scored)
 - [24] quiet-nightlife — Nightline Station (West Oakland) · quiet night
-- [23] fame-sighting — Claire Ashford at Beth Jacob Congregation (Piedmont Ave)
+- [23] fame-sighting — Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)
 - [23] fame-sighting — Mark Aitken at Ridgeline Ventures (Lake Merritt)
 - [23] fame-sighting — Tara Ellison at City of Oakland (Downtown)
 - [20] named-restaurant — Piedmont Heights (Piedmont Ave)

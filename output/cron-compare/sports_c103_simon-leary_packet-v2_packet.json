@@ -1,0 +1,289 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+      "label": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+      "hookLine": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+      "kind": "long-view-signal",
+      "hood": "Lake Merritt",
+      "popids": [
+        "POP-00018"
+      ],
+      "citizens": [
+        "Benji Dillon (POP-00018)"
+      ],
+      "ref": "world_summary_c103.md ## Sports",
+      "cycle": 103
+    }
+  },
+  "angle": "output/cron-compare/sports_c103_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 1,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "To me, moving to the bullpen is about doing whatever it takes to help this team finish strong and make history together.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, moving to the bullpen is about doing whatever it takes to help this team finish strong and make history together.\",\n  \"fact_ids\": [\"F-6e5092023b7c\", \"F-6cf37d5769d3\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": []\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-6e5092023b7c",
+          "F-6cf37d5769d3"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00018-abc63cbaaf",
+        "authoredQuote": true,
+        "publishableQuote": "To me, moving to the bullpen is about doing whatever it takes to help this team finish strong and make history together."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What does the supplied trend \"Benji Dillon's move to the bullpen amidst the A's historic 124-34 season\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Lake Merritt",
+          "focus": "Benji Dillon's move to the bullpen amidst the A's historic 124-34 season",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's — Rockridge",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-6e5092023b7c"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon is moving to the bullpen for the remainder of the season.",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-6fcf7347428e"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 124-34.",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-6cf37d5769d3"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 15 straight.",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a78a1ac34a1f"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-80bf860153a1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "No story-linked lived exposure is supplied. Give exactly one sentence of no more than 28 words beginning I think, I feel, I want, My, To me, or For me. Evaluate only the supplied fact. Use basis direct-reaction and unverifiedLead []. Do not use we, they, everyone, people, keep, still, again, ever, same, promises, updates, meetings, documents, shovels, scenes, effects, history, or community sentiment. Otherwise abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "To me, moving to the bullpen is about doing whatever it takes to help this team finish strong and make history together.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
+      "recorded": false,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, moving to the bullpen is about doing whatever it takes to help this team finish strong and make history together.\",\n  \"fact_ids\": [\"F-6e5092023b7c\", \"F-6cf37d5769d3\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": []\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-6e5092023b7c",
+          "F-6cf37d5769d3"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00018-abc63cbaaf",
+        "authoredQuote": true,
+        "publishableQuote": "To me, moving to the bullpen is about doing whatever it takes to help this team finish strong and make history together."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What does the supplied trend \"Benji Dillon's move to the bullpen amidst the A's historic 124-34 season\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Lake Merritt",
+          "focus": "Benji Dillon's move to the bullpen amidst the A's historic 124-34 season",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's — Rockridge",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-6e5092023b7c"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon is moving to the bullpen for the remainder of the season.",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-6fcf7347428e"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 124-34.",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-6cf37d5769d3"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 15 straight.",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a78a1ac34a1f"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-80bf860153a1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "No story-linked lived exposure is supplied. Give exactly one sentence of no more than 28 words beginning I think, I feel, I want, My, To me, or For me. Evaluate only the supplied fact. Use basis direct-reaction and unverifiedLead []. Do not use we, they, everyone, people, keep, still, again, ever, same, promises, updates, meetings, documents, shovels, scenes, effects, history, or community sentiment. Otherwise abstain."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-13T17:57:05.486Z"
+}

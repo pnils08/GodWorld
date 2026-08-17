@@ -20,6 +20,20 @@
 - **Glenview** — mood clearly upbeat; street trade steady; crime low.
 - **Ivy Hill** — mood clearly upbeat; street trade slow; crime low.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [Oakland Youth Apprenticeship Pipeline — Finance Committee Referral] Ramon Vega — Eighty-six applicants stuck in paperwork isn't a bottleneck—it's a system failure. Finance Committee meets next week.
+2. stated: [Chinatown Infrastructure Incident and Dimond Progress Attribution] Ramon Vega — Dimond's upbeat mood isn't magic—it's the Stabilization Fund working. Chinatown's infrastructure incident needs answers, not silence.
+3. stated: [Baylight District Phase II Shortlist] Ramon Vega — Four qualified bidders, three finalists, one clean site—this is the process I demanded when I voted yes on Baylight.
+4. stated: [OARI D7 Performance Review and D2 Piedmont incident] Ramon Vega — I voted no, and my district wasn't in the pilot. The D7 review is useful for D7. When D4 has comparable data, I'll do my own analysis.
+5. stated: [Downtown and Jack London neighborhood decline] Ramon Vega — Downtown's not waiting for another study. If the Mayor brings me a program with revenue attached and displacement language that holds up, I'm listening.
+6. stated: [Oakland Youth Apprenticeship Pipeline — Recruitment Review] Ramon Vega — Eighty-six applicants and thirty-one placements isn't a bottleneck—it's a broken intake system. I'm pulling this into Finance next week.
+
+Latest district pack on disk: output/cron-civic/packs/COUNCIL-D4_c103.json
+This week's lever from that pack: defend the district or go quiet
+
 ## DECISION 1 — Baylight District — Final Council Vote — action due this cycle
 
 Where it stands: C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…

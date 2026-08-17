@@ -1,0 +1,11 @@
+{
+  "draft": "civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "Calvin Turner, Vladimir Gonzalez, and Tomas Renteria all quoted verbatim with: 'What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.'",
+      "issue": "Identical verbatim quotes are attributed to three different citizens in the same article, representing a critical quote-attribution and recycling failure.",
+      "severity": "high"
+    }
+  ],
+  "summary": "The 9-cycle transit delay claim is canonically accurate, but the draft features identical verbatim quotes duplicated across three different citizens."
+}

@@ -1,0 +1,29 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "mason-ortega",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "angle": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave. What was happening there is not established.",
+      "label": "Piedmont Heights (Piedmont Ave)",
+      "hookLine": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave.",
+      "hood": "Piedmont Ave",
+      "pulseClass": "named-restaurant",
+      "citizens": [],
+      "popids": [],
+      "named": "Piedmont Heights",
+      "venue": "Piedmont Heights",
+      "ref": "world_summary ## Evening Texture · Restaurants",
+      "cycle": 103
+    }
+  },
+  "angle": "output/cron-compare/culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [],
+  "ranAt": "2026-08-13T16:22:48.535Z"
+}

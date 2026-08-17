@@ -1,0 +1,22 @@
+{
+  "draft": "sports_c103_tanya-cruz_packet-v2_benchmark-benchmark-deepseek-v2_deepseek-deepseek-chat.md",
+  "draftSha256": "8b04b1ef23ba4134310401a7b9f88753424c120ac72fd70f73cf8825f1e2ec46",
+  "verdict": "output/cron-compare/sports_c103_tanya-cruz_packet-v2_benchmark-benchmark-deepseek-v2_deepseek-deepseek-chat.rhea.json",
+  "flags": [],
+  "contamination": [
+    {
+      "check": "lattice-quote",
+      "issue": "packet lattice printed as a person: \"I am going to keep watching this\""
+    },
+    {
+      "check": "lattice-quote",
+      "issue": "packet lattice printed as a person: \"This deserves a closer look\""
+    },
+    {
+      "check": "invented-voice",
+      "issue": "Adash Stanley (POP-01023) cannot be quoted: NEVER_WOKEN"
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed",
+  "reviewedAt": "2026-08-13T15:36:55.641Z"
+}

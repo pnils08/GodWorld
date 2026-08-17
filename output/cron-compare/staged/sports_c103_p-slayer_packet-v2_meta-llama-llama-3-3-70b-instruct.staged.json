@@ -1,0 +1,42 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "Pablo Almanzar throws a No No in his MLB debut",
+        "sourceRef": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut"
+      }
+    ]
+  },
+  "approval": {
+    "status": "canon-approved",
+    "approvedBy": "builder",
+    "approvedAt": "2026-08-13"
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-3725377deebc",
+    "draftSha256": "6e3e82bb1f993e76ce296fc9cd9d71bf5fae0a2dbfc1ffe15dabd690cf3ae17c",
+    "verdict": "output/cron-compare/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-08-13T07:04:04.401Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T07:44:52.146Z"
+}

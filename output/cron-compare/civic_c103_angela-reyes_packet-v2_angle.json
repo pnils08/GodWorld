@@ -1,0 +1,402 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00156",
+      "name": "Angela Reyes",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+      "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.",
+      "creativeBrief": {
+        "kind": "education-stability",
+        "method": "PROGRAM_CONTINUITY_ACCESS",
+        "missing": [
+          "a named student, teacher, family member, participant, or program staff member",
+          "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+          "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+        ],
+        "stabilityEvidence": {
+          "state": "UNESTABLISHED",
+          "participants": [],
+          "facts": [],
+          "src": null
+        },
+        "forbidden": [
+          "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "initiative",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "score": null,
+      "src": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "nearby": [
+        {
+          "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+          "src": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+        },
+        {
+          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "src": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+          "src": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "why": "ledger-resident",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — Line cook — Fruitvale",
+          "why": "ledger-resident",
+          "role": "Line cook",
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server — West Oakland",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00210",
+          "name": "Depak Ying",
+          "profile": "Depak Ying — Server — Rockridge",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+        "src": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "id": "F-73329131004f"
+      },
+      {
+        "t": "FACT",
+        "text": "The supplied civic record identifies an education or youth question that needs a clear, humane account.",
+        "src": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "id": "F-a744fec7ce1d"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "label": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+      "kind": "initiative",
+      "angle": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+      "hookLine": "The supplied civic record identifies an education or youth question that needs a clear, humane account.",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "angela-reyes",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "domain": "education-youth"
+    },
+    "pulse": {
+      "className": "education-youth",
+      "score": 45,
+      "label": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "source": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active."
+      ],
+      "forbidden": [
+        "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+      ],
+      "schema": "EDUCATION-STABILITY-BRIEF-1",
+      "method": "PROGRAM_CONTINUITY_ACCESS",
+      "missing": [
+        "a named student, teacher, family member, participant, or program staff member",
+        "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+        "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+      ],
+      "stabilityEvidence": {
+        "state": "UNESTABLISHED",
+        "participants": [],
+        "facts": [],
+        "src": null
+      }
+    },
+    "candidates": [
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Oakland Youth Apprenticeship Pipeline | Status announced | phase pilot-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 15
+      },
+      {
+        "score": 45,
+        "kind": "vote",
+        "label": "Oakland Youth Apprenticeship Pipeline | Review findings and corrective actions report C104",
+        "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 16
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "sentiment/communityEngagement/retail | Oakland Youth Apprenticeship Pipeline is implementation-active — ongoing workforce effects in West Oakland, East Oakland, Fruitvale",
+        "ref": "Ripple_Ledger cycle 103 (CauseType initiative-implementation); rendered: world_summary_c103.md \"## What Moved\" > \"### initiative-implementation\"",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 23
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "approval/district-sentiment | Oakland Alternative Response Initiative performing (+3 aligned); Oakland Youth Apprenticeship Pipeline performing (+3 aligned); decay toward 50 (-1)",
+        "ref": "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\"",
+        "hood": "D3",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 25
+      },
+      {
+        "score": 45,
+        "kind": "season-feel",
+        "label": "Rick Walker — packed school lunches for the morning rush",
+        "ref": "output/world_summary_c103.md ## Who Lived It",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00198"
+        ],
+        "angle": "Rick Walker — packed school lunches for the morning rush",
+        "hookLine": "Rick Walker — packed school lunches for the morning rush",
+        "citizens": [
+          "Rick Walker (POP-00198)"
+        ],
+        "source": "season-feel",
+        "sourceIndex": 40
+      }
+    ],
+    "pointers": [
+      "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-007)",
+      "Ripple_Ledger cycle 103 (CauseType initiative-implementation); rendered: world_summary_c103.md \"## What Moved\" > \"### initiative-implementation\"",
+      "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\"",
+      "output/world_summary_c103.md ## Who Lived It"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "text": "{\n  \"focus\": \"Understanding the Oakland Youth Apprenticeship Pipeline's pilot phase\",\n  \"why\": \"The initiative has been announced and is active, but details about its implementation and impact are unclear.\",\n  \"checks\": [\n    \"Identify any named participants or staff involved in the pilot program\",\n    \"Determine the specific neighborhoods or schools involved in the pilot\",\n    \"Assess the program's eligibility criteria and application process\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00170\",\n      \"question\": \"What is Melton Neilon's perspective on youth apprenticeship programs in Oakland?\",\n      \"basis\": \"ledger-resident\"\n    },\n    {\n      \"pop\": \"POP-00198\",\n      \"question\": \"How does Rick Walker view the potential impact of the apprenticeship pipeline on the Fruitvale community?\",\n      \"basis\": \"ledger-resident\"\n    },\n    {\n      \"pop\": \"POP-00201\",\n      \"question\": \"What are Elio Perez's thoughts on the accessibility of such programs for West Oakland youth?\",\n      \"basis\": \"ledger-resident\"\n    },\n    {\n      \"pop\": \"POP-00210\",\n      \"question\": \"Does Depak Ying see the apprenticeship pipeline as a viable pathway for Rockridge youth?\",\n      \"basis\": \"ledger-resident\"\n    }\n  ],\n  \"interpretation\": \"The Oakland Youth Apprenticeship Pipeline represents a significant step towards bridging the gap between education and employment for local youth. However, without concrete details on its implementation, it's challenging to gauge its effectiveness or reach.\",\n  \"unverifiedLead\": [\n    \"Are there specific industries or sectors the apprenticeship pipeline is targeting?\",\n    \"What support services are available to participants in the program?\",\n    \"How are employers being engaged to ensure meaningful apprenticeship opportunities?\"\n  ],\n  \"closeQuestion\": \"What steps are being taken to ensure the apprenticeship pipeline's success and sustainability in Oakland?\"\n}",
+    "plan": {
+      "focus": "Understanding the Oakland Youth Apprenticeship Pipeline's pilot phase",
+      "why": "The initiative has been announced and is active, but details about its implementation and impact are unclear.",
+      "checks": [
+        "Identify any named participants or staff involved in the pilot program",
+        "Determine the specific neighborhoods or schools involved in the pilot",
+        "Assess the program's eligibility criteria and application process"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00170",
+          "question": "What is Melton Neilon's perspective on youth apprenticeship programs in Oakland?",
+          "basis": "ledger-resident"
+        },
+        {
+          "pop": "POP-00198",
+          "question": "How does Rick Walker view the potential impact of the apprenticeship pipeline on the Fruitvale community?",
+          "basis": "ledger-resident"
+        },
+        {
+          "pop": "POP-00201",
+          "question": "What are Elio Perez's thoughts on the accessibility of such programs for West Oakland youth?",
+          "basis": "ledger-resident"
+        },
+        {
+          "pop": "POP-00210",
+          "question": "Does Depak Ying see the apprenticeship pipeline as a viable pathway for Rockridge youth?",
+          "basis": "ledger-resident"
+        }
+      ],
+      "interpretation": "The Oakland Youth Apprenticeship Pipeline represents a significant step towards bridging the gap between education and employment for local youth. However, without concrete details on its implementation, it's challenging to gauge its effectiveness or reach.",
+      "unverifiedLead": [
+        "Are there specific industries or sectors the apprenticeship pipeline is targeting?",
+        "What support services are available to participants in the program?",
+        "How are employers being engaged to ensure meaningful apprenticeship opportunities?"
+      ],
+      "closeQuestion": "What steps are being taken to ensure the apprenticeship pipeline's success and sustainability in Oakland?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    },
+    {
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00010",
+        "POP-00039",
+        "POP-00635"
+      ]
+    },
+    {
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+      "kind": "anomaly",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+      "popids": [
+        "POP-00758",
+        "POP-00771",
+        "POP-00773"
+      ]
+    }
+  ],
+  "laneEntries": 32,
+  "ranAt": "2026-08-14T11:15:25.349Z"
+}

@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Calvin Turner",
+        "role": "quoted-source",
+        "popid": "POP-00231"
+      },
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "quoted-source",
+        "popid": "POP-00598"
+      },
+      {
+        "name": "Tomas Renteria",
+        "role": "quoted-source",
+        "popid": "POP-00744"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "sourceRef": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      }
+    ]
+  },
+  "approval": {
+    "status": "canon-approved",
+    "approvedBy": "builder",
+    "approvedAt": "2026-08-13"
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-d74993bdcfed",
+    "draftSha256": "200deceefe102f8dd13be585dba887b573804f9c12e31c8b32e5f68d9192b503",
+    "verdict": "output/cron-compare/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T07:04:16.458Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T07:44:52.140Z"
+}

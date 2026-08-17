@@ -12,6 +12,17 @@
 - **Acceptance:** Public release of the Bureau's formal compliance determination and an updated Year 3 construction-planning timeline.
 - **Silence consequence:** Continued bureaucratic stagnation of INIT-003, delaying vital transit infrastructure coordination in Fruitvale.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [Fruitvale Transit Hub Phase II] Elena Soria Dominguez — This isn't just paperwork—it's protection for abuelas crossing to the panadería and proof we're putting Fruitvale residents to work first.
+2. stated: [Fruitvale Transit Hub Phase II compliance] Elena Soria Dominguez — These aren't just paperwork exercises—that staging-lot detour protects abuelas crossing to the panadería, and the pipeline logs prove we're putting Fruitvale residents to work first.
+3. datawake: The Medina compliance report shows real gaps in how we're protecting small businesses and street vendors during construction. I'm calling BART today to ensure the staging-lot pedestrian-path fix includes protection for vendor licenses and business access. | action: Calling BART infrastructure lead to mandate vendor-access protections in staging-lot path fix | signal: Elevated crime rate — we can't let const
+
+Latest district pack on disk: output/cron-civic/packs/PROJ-TRANSITHUB_c103.json
+This week's lever from that pack: Bureau review of compliance submissions
+
 ## DECISION 1 — Fruitvale Transit Hub Phase II — Visioning — action due this cycle
 
 Where it stands: C102: Submitted pipeline exhaustion docs + stamped pedestrian-path redesign

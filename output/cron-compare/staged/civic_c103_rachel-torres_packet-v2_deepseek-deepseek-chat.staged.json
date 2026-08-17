@@ -1,0 +1,42 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland, Fruitvale, East Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "Oakland Alternative Response Initiative is listed as passed, and its supplied phase is operational.",
+        "sourceRef": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      }
+    ]
+  },
+  "approval": {
+    "status": "canon-approved",
+    "approvedBy": "builder",
+    "approvedAt": "2026-08-13"
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-bcd9d63c8752",
+    "draftSha256": "793cd719d50ce600d7ad35263b0178025717ca58af2411d5465f1b6b629c32ee",
+    "verdict": "output/cron-compare/civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T07:03:26.088Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T07:44:52.137Z"
+}

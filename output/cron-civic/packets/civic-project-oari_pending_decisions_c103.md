@@ -14,6 +14,19 @@
 - **Acceptance:** Publication of the D7 satisfaction survey data and a targeted operational adjustment plan addressing the C103 CrimeIndex disparities.
 - **Silence consequence:** The OARI program faces a loss of institutional credibility and budget vulnerability due to unaddressed data mismatches.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [West Oakland Operations] Vanessa Tran-Muñoz — Our West Oakland team is adding evening coverage through the holidays because crisis doesn't follow a 9-to-5 schedule.
+2. stated: [D7 Satisfaction Survey Release] Vanessa Tran-Muñoz — 87% of District 7 residents report feeling safer knowing non-police crisis teams are responding to behavioral health calls — that's the trust we're building citywide.
+3. datawake: D7's successful two-vehicle response under real operating conditions proves what we've known — civilian crisis teams effectively absorb community stress without escalating tensions. Those are the outcomes we're building toward citywide. | action: Finalizing deployment protocols to replicate D7's success model in West Oakland and Fruitvale, where stable moods create ideal conditions for safe pilot expansion.
+4. stated: [District 7 response time analysis] Vanessa Tran-Muñoz — Seven minutes and fifty-two seconds — that's the sound of this team holding the line when Oakland needed us most.
+5. datawake: We're seeing elevated crime across West Oakland and Fruitvale while street trade fluctuates — exactly the conditions where timely mental health support can de-escalate conflicts before they become incidents. | action: Accelerating responder training for West Oakland deployment to stabilize mood shifts. | signal: Crime elevated in both districts
+
+Latest district pack on disk: output/cron-civic/packs/PROJ-OARI_c103.json
+This week's lever from that pack: D7 next-cycle report and community satisfaction survey
+
 ## DECISION 1 — Oakland Alternative Response Initiative — action due this cycle
 
 Where it stands: C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.

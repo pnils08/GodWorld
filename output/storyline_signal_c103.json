@@ -1,0 +1,87 @@
+{
+  "cycle": "103",
+  "signals": [
+    {
+      "slug": "dimond-clarence-moody-hood-cooling",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "business_c103_business-desk_packet-v2_arc"
+      ],
+      "hoods": [
+        "Dimond"
+      ],
+      "citizens": [
+        "POP-00730",
+        "POP-00170",
+        "POP-00201"
+      ],
+      "desks": [
+        "business"
+      ]
+    },
+    {
+      "slug": "west-oakland-east-oakland-fruitvale-melton-neilon-initiative",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c103_angela-reyes_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland, East Oakland, Fruitvale"
+      ],
+      "citizens": [
+        "POP-00170",
+        "POP-00201",
+        "POP-00210"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "west-oakland-marcus-wright-initiative",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c103_carmen-delaine_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00288"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "west-oakland-marcus-wright-quiet-nightlife",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c103_kai-marston_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00288",
+        "POP-00794",
+        "POP-00722"
+      ],
+      "desks": [
+        "culture"
+      ]
+    }
+  ]
+}

@@ -1,6 +1,10 @@
 {
   "doc:boot": {
-    "lastTouched": "2026-08-12T06:55:37.827Z",
-    "reportPath": "output/audit-reports/session-audit_2026-08-12_015537.md"
+    "lastTouched": "2026-08-17T06:12:48.820Z",
+    "reportPath": "output/audit-reports/session-audit_2026-08-17_011248.md"
+  },
+  "doc:engine": {
+    "lastTouched": "2026-08-16T08:00:57.441Z",
+    "reportPath": "output/audit-reports/session-audit_2026-08-16_030057.md"
   }
 }

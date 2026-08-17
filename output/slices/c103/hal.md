@@ -6,8 +6,8 @@ Cycle **C103** · kind `hal-archive` · POP-00007 · desk **sports** (never busi
 - **Class:** threshold
 - **Score:** 68
 - **Team / event:** A's — player-feature
-- **Label:** A's · player-feature — Pablo Almanzar throws a No No in his MLB debut
-- **Receipt (feed only):** 2-3
+- **Label:** A's — player-feature — supplied C103 line card
+- **Receipt (feed only):** 9IP
 - **Closing note:** threshold crossed
 
 ## PREWRITE (archive bag)
@@ -15,24 +15,23 @@ Cycle **C103** · kind `hal-archive` · POP-00007 · desk **sports** (never busi
 - **HistoricalAnchor:** threshold — arrival of youth as history happening
 - **ClosingNote:** threshold crossed
 - **PriorFiling:** NONE — wall may still inject at wake
-- **Claim:** Present fact: 2-3 on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed.
+- **Claim:** Present fact: 9IP on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed.
 **PresentFacts** (min 2, feed only):
-  - StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut
-  - Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
-  - Record/Streak (feed): 124-34 · W15
+  - Vinnie Keane line (feed): 2-3, HR, 3 RBI
+  - Team record (feed): 124-34 · streak W15
   - Event (feed): A's — player-feature (late-season)
-  - NamesUsed: Pablo Almanzar (SP), Vinne Keane (DH)
   - Cycle: C103
 **DossierFacts:**
   - NONE — offline slice; use packet TrueSource only if wake supplies
 **Missing** (do not invent):
+  - Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet
   - No invented seasons or franchise history beyond packet + feed
   - No x-stats / barrel% / invented OPS+
   - Not a business-desk storefront assignment
   - Not P Slayer charge; not Anthony board architecture as spine
 
 ## APPROACH
-Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan "we" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.
+Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan "we" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.
 
 ## FRAME
 A: Present feed fact: Pablo Almanzar throws a No No in his MLB debut
@@ -44,14 +43,12 @@ _No on-disk prior matched — wall may still inject at wake._
 
 ## PLAYERS (feed names — do not invent)
 - Pablo Almanzar (no POPID on snapshot)
-- Vinnie Keane (no POPID on snapshot)
-- No No (no POPID on snapshot)
-- Pablo Alamazar (no POPID on snapshot)
+- Vinnie Keane (POP-00001) — Designated Hitter, Oakland A's Legend
 
 ## SCENE
 HOOD: Downtown
 RECORD/STREAK: 124-34 / W15
-Dawn desk, empty lot after parade, river of franchise time. Sensory free; seasons and stats only from feed/packet. Not a business storefront beat.
+An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.
 
 ## OTHER CANDIDATES
 - [77] C102 A's · era-door · stats — Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging 

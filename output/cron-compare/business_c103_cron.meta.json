@@ -1,0 +1,17 @@
+{
+  "desk": "business",
+  "cycle": "103",
+  "model": "google/gemini-2.5-flash",
+  "turns": 14,
+  "maxTurns": 15,
+  "usageInputTokens": 35832,
+  "usageOutputTokens": 1135,
+  "savedFiles": [
+    "output/cron-compare/business_c103_google-gemini-2-5-flash.md"
+  ],
+  "compareAgainst": "output/desk-output/business_c103.md",
+  "durationMs": 11244,
+  "dryRun": false,
+  "packetOnly": false,
+  "ranAt": "2026-08-16T01:40:54.232Z"
+}

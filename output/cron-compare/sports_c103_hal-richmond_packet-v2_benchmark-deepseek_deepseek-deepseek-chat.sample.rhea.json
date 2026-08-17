@@ -1,0 +1,62 @@
+{
+  "draft": "output/cron-compare/samples/sports_c103_hal-richmond_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.sample.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "6e4d7cbffb4e3a9352035a1d98f675c7241564cedcb1d8dc05ece051492af229",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Pablo Almanzar throws a No No in his MLB debut",
+      "issue": "Pablo Almanzar is used as a person but is not in the ledger.",
+      "severity": "high"
+    },
+    {
+      "claim": "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks",
+      "issue": "Pablo Almanza is used as a person but is not in the ledger.",
+      "severity": "high"
+    },
+    {
+      "claim": "NamesUsed: Pablo Almanzar (SP), Vinne Keane (DH)",
+      "issue": "Vinne Keane is used as a person but is not in the ledger (ledger has Vinnie Keane).",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 3,
+  "highSeverityCount": 3,
+  "summary": "Failed deterministic pre-checks: Pablo Almanzar, Pablo Almanza, and Vinne Keane are used as persons but do not exist in the ledger.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "fail",
+    "texture": "none"
+  },
+  "reviewProfile": null,
+  "nameCheck": {
+    "verified": [
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Pablo Almanza",
+      "Pablo Almanzar",
+      "Vinne Keane"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": false
+  },
+  "apiCostUsd": 0.0505,
+  "durationMs": 12845,
+  "parseError": false,
+  "ranAt": "2026-08-13T15:20:00.341Z"
+}

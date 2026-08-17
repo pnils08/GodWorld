@@ -1,0 +1,582 @@
+{
+  "meta": {
+    "type": "civic-voice-packet",
+    "office": "police_chief",
+    "cycle": 103
+  },
+  "office": [
+    {
+      "officeId": "CHIEF-POLICE",
+      "title": "Police Chief",
+      "name": "Rafael Montez",
+      "popId": "POP-00136",
+      "status": "active",
+      "notes": "27-year OPD veteran"
+    },
+    {
+      "officeId": "CPRB-CHAIR",
+      "title": "Civilian Police Review Chair",
+      "name": "Lamine Sissoko",
+      "popId": "POP-00149",
+      "status": "active",
+      "notes": "Public ethics scholar"
+    }
+  ],
+  "initiatives": [
+    {
+      "id": "INIT-002",
+      "name": "Oakland Alternative Response Initiative",
+      "status": "passed",
+      "budget": "$12.5M",
+      "voteRequirement": "5-4",
+      "voteCycle": "82",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
+      "policyDomain": "safety",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes."
+    }
+  ],
+  "domainData": {
+    "metrics": {
+      "count": 22,
+      "avgSentiment": 0.489,
+      "avgCrimeIndex": 0.7,
+      "avgRetailVitality": 10,
+      "totalIncidents": 103,
+      "neighborhoods": [
+        {
+          "name": "Downtown",
+          "sentiment": 0.41,
+          "crimeIndex": 1.02,
+          "retailVitality": 13.64,
+          "incidents": 14,
+          "responseTime": 10,
+          "demographics": null
+        },
+        {
+          "name": "Temescal",
+          "sentiment": 0.55,
+          "crimeIndex": 0.76,
+          "retailVitality": 13.51,
+          "incidents": 6,
+          "responseTime": 11.7,
+          "demographics": null
+        },
+        {
+          "name": "Laurel",
+          "sentiment": 0.49,
+          "crimeIndex": 0.45,
+          "retailVitality": 10.37,
+          "incidents": 5,
+          "responseTime": 10.5,
+          "demographics": null
+        },
+        {
+          "name": "West Oakland",
+          "sentiment": 0.5,
+          "crimeIndex": 1.19,
+          "retailVitality": 7.91,
+          "incidents": 11,
+          "responseTime": 13,
+          "demographics": null
+        },
+        {
+          "name": "Fruitvale",
+          "sentiment": 0.5,
+          "crimeIndex": 1.04,
+          "retailVitality": 12.22,
+          "incidents": 7,
+          "responseTime": 11.7,
+          "demographics": null
+        },
+        {
+          "name": "Jack London",
+          "sentiment": 0.44,
+          "crimeIndex": 0.96,
+          "retailVitality": 11.06,
+          "incidents": 8,
+          "responseTime": 10.7,
+          "demographics": null
+        },
+        {
+          "name": "Rockridge",
+          "sentiment": 0.53,
+          "crimeIndex": 0.37,
+          "retailVitality": 14.78,
+          "incidents": 2,
+          "responseTime": 10.1,
+          "demographics": null
+        },
+        {
+          "name": "Adams Point",
+          "sentiment": 0.62,
+          "crimeIndex": 0.67,
+          "retailVitality": 8.44,
+          "incidents": 6,
+          "responseTime": 11.6,
+          "demographics": null
+        },
+        {
+          "name": "Grand Lake",
+          "sentiment": 0.55,
+          "crimeIndex": 0.57,
+          "retailVitality": 13.24,
+          "incidents": 3,
+          "responseTime": 10.7,
+          "demographics": null
+        },
+        {
+          "name": "Piedmont Ave",
+          "sentiment": 0.38,
+          "crimeIndex": 0.38,
+          "retailVitality": 10.4,
+          "incidents": 3,
+          "responseTime": 10.2,
+          "demographics": null
+        },
+        {
+          "name": "Chinatown",
+          "sentiment": 0.39,
+          "crimeIndex": 0.89,
+          "retailVitality": 11.39,
+          "incidents": 7,
+          "responseTime": 12.4,
+          "demographics": null
+        },
+        {
+          "name": "Brooklyn",
+          "sentiment": 0.47,
+          "crimeIndex": 0.71,
+          "retailVitality": 7.18,
+          "incidents": 0,
+          "responseTime": 0,
+          "demographics": null
+        },
+        {
+          "name": "Eastlake",
+          "sentiment": 0.51,
+          "crimeIndex": 0.55,
+          "retailVitality": 8.78,
+          "incidents": 0,
+          "responseTime": 0,
+          "demographics": null
+        },
+        {
+          "name": "Glenview",
+          "sentiment": 0.57,
+          "crimeIndex": 0.5,
+          "retailVitality": 7.4,
+          "incidents": 4,
+          "responseTime": 10.8,
+          "demographics": null
+        },
+        {
+          "name": "Dimond",
+          "sentiment": 0.63,
+          "crimeIndex": 0.66,
+          "retailVitality": 8.24,
+          "incidents": 1,
+          "responseTime": 11.8,
+          "demographics": null
+        },
+        {
+          "name": "Ivy Hill",
+          "sentiment": 0.59,
+          "crimeIndex": 0.22,
+          "retailVitality": 5.21,
+          "incidents": 0,
+          "responseTime": 0,
+          "demographics": null
+        },
+        {
+          "name": "San Antonio",
+          "sentiment": 0.39,
+          "crimeIndex": 0.77,
+          "retailVitality": 6.89,
+          "incidents": 0,
+          "responseTime": 0,
+          "demographics": null
+        },
+        {
+          "name": "KONO",
+          "sentiment": 0.27,
+          "crimeIndex": 0.68,
+          "retailVitality": 9.69,
+          "incidents": 7,
+          "responseTime": 11.9,
+          "demographics": null
+        },
+        {
+          "name": "Lake Merritt",
+          "sentiment": 0.45,
+          "crimeIndex": 0.85,
+          "retailVitality": 12.07,
+          "incidents": 4,
+          "responseTime": 11.1,
+          "demographics": null
+        },
+        {
+          "name": "Uptown",
+          "sentiment": 0.45,
+          "crimeIndex": 0.75,
+          "retailVitality": 13.43,
+          "incidents": 4,
+          "responseTime": 9.8,
+          "demographics": null
+        },
+        {
+          "name": "Baylight District",
+          "sentiment": 0.55,
+          "crimeIndex": 0.62,
+          "retailVitality": 5.77,
+          "incidents": 0,
+          "responseTime": 0,
+          "demographics": null
+        },
+        {
+          "name": "East Oakland",
+          "sentiment": 0.51,
+          "crimeIndex": 1.2,
+          "retailVitality": 8.39,
+          "incidents": 11,
+          "responseTime": 13.7,
+          "demographics": null
+        }
+      ]
+    },
+    "crimeMetrics": {
+      "allNeighborhoods": [
+        {
+          "neighborhood": "Downtown",
+          "propertyCrime": 62,
+          "violentCrime": 55,
+          "responseTime": 10,
+          "clearanceRate": 0.15,
+          "incidents": 14
+        },
+        {
+          "neighborhood": "Temescal",
+          "propertyCrime": 43,
+          "violentCrime": 33,
+          "responseTime": 11.7,
+          "clearanceRate": 0.15,
+          "incidents": 6
+        },
+        {
+          "neighborhood": "Laurel",
+          "propertyCrime": 27,
+          "violentCrime": 23,
+          "responseTime": 10.5,
+          "clearanceRate": 0.15,
+          "incidents": 5
+        },
+        {
+          "neighborhood": "West Oakland",
+          "propertyCrime": 58,
+          "violentCrime": 61,
+          "responseTime": 13,
+          "clearanceRate": 0.15,
+          "incidents": 11
+        },
+        {
+          "neighborhood": "Fruitvale",
+          "propertyCrime": 54,
+          "violentCrime": 50,
+          "responseTime": 11.7,
+          "clearanceRate": 0.15,
+          "incidents": 7
+        },
+        {
+          "neighborhood": "Jack London",
+          "propertyCrime": 53,
+          "violentCrime": 43,
+          "responseTime": 10.7,
+          "clearanceRate": 0.15,
+          "incidents": 8
+        },
+        {
+          "neighborhood": "Rockridge",
+          "propertyCrime": 30,
+          "violentCrime": 22,
+          "responseTime": 10.1,
+          "clearanceRate": 0.15,
+          "incidents": 2
+        },
+        {
+          "neighborhood": "Adams Point",
+          "propertyCrime": 38,
+          "violentCrime": 29,
+          "responseTime": 11.6,
+          "clearanceRate": 0.15,
+          "incidents": 6
+        },
+        {
+          "neighborhood": "Grand Lake",
+          "propertyCrime": 35,
+          "violentCrime": 22,
+          "responseTime": 10.7,
+          "clearanceRate": 0.15,
+          "incidents": 3
+        },
+        {
+          "neighborhood": "Piedmont Ave",
+          "propertyCrime": 23,
+          "violentCrime": 15,
+          "responseTime": 10.2,
+          "clearanceRate": 0.15,
+          "incidents": 3
+        },
+        {
+          "neighborhood": "Chinatown",
+          "propertyCrime": 47,
+          "violentCrime": 42,
+          "responseTime": 12.4,
+          "clearanceRate": 0.15,
+          "incidents": 7
+        },
+        {
+          "neighborhood": "Brooklyn",
+          "propertyCrime": 0,
+          "violentCrime": 0,
+          "responseTime": 0,
+          "clearanceRate": 0,
+          "incidents": 0
+        },
+        {
+          "neighborhood": "Eastlake",
+          "propertyCrime": 0,
+          "violentCrime": 0,
+          "responseTime": 0,
+          "clearanceRate": 0,
+          "incidents": 0
+        },
+        {
+          "neighborhood": "Glenview",
+          "propertyCrime": 28,
+          "violentCrime": 22,
+          "responseTime": 10.8,
+          "clearanceRate": 0.15,
+          "incidents": 4
+        },
+        {
+          "neighborhood": "Dimond",
+          "propertyCrime": 39,
+          "violentCrime": 27,
+          "responseTime": 11.8,
+          "clearanceRate": 0.15,
+          "incidents": 1
+        },
+        {
+          "neighborhood": "Ivy Hill",
+          "propertyCrime": 0,
+          "violentCrime": 0,
+          "responseTime": 0,
+          "clearanceRate": 0,
+          "incidents": 0
+        },
+        {
+          "neighborhood": "San Antonio",
+          "propertyCrime": 0,
+          "violentCrime": 0,
+          "responseTime": 0,
+          "clearanceRate": 0,
+          "incidents": 0
+        },
+        {
+          "neighborhood": "KONO",
+          "propertyCrime": 41,
+          "violentCrime": 27,
+          "responseTime": 11.9,
+          "clearanceRate": 0.15,
+          "incidents": 7
+        },
+        {
+          "neighborhood": "Lake Merritt",
+          "propertyCrime": 51,
+          "violentCrime": 35,
+          "responseTime": 11.1,
+          "clearanceRate": 0.15,
+          "incidents": 4
+        },
+        {
+          "neighborhood": "Uptown",
+          "propertyCrime": 50,
+          "violentCrime": 26,
+          "responseTime": 9.8,
+          "clearanceRate": 0.15,
+          "incidents": 4
+        },
+        {
+          "neighborhood": "Baylight District",
+          "propertyCrime": 0,
+          "violentCrime": 0,
+          "responseTime": 0,
+          "clearanceRate": 0,
+          "incidents": 0
+        },
+        {
+          "neighborhood": "East Oakland",
+          "propertyCrime": 54,
+          "violentCrime": 66,
+          "responseTime": 13.7,
+          "clearanceRate": 0.15,
+          "incidents": 11
+        }
+      ],
+      "oariDistricts": {
+        "neighborhoods": [
+          "West Oakland",
+          "Brooklyn",
+          "Fruitvale",
+          "San Antonio",
+          "East Oakland",
+          "Baylight District"
+        ],
+        "avgResponseTime": 6.4,
+        "totalIncidents": 29
+      },
+      "nonOariDistricts": {
+        "neighborhoods": [
+          "Downtown",
+          "Chinatown",
+          "Jack London",
+          "Glenview",
+          "Dimond",
+          "Ivy Hill",
+          "Montclair",
+          "Piedmont Ave",
+          "Temescal",
+          "Rockridge",
+          "KONO",
+          "Lake Merritt",
+          "Adams Point",
+          "Grand Lake",
+          "Eastlake",
+          "Laurel",
+          "Uptown"
+        ],
+        "avgResponseTime": 9.6,
+        "totalIncidents": 74
+      }
+    },
+    "transitStations": null,
+    "citizenSummary": null,
+    "recentLifeEvents": null,
+    "faithCommunities": null,
+    "domainEvents": [
+      {
+        "type": "safety-incident",
+        "domain": "SAFETY",
+        "severity": "low",
+        "neighborhood": "Downtown",
+        "description": ""
+      }
+    ]
+  },
+  "cityWide": {
+    "population": {
+      "totalPopulation": 387278.0135,
+      "illnessRate": 0.1006551594,
+      "employmentRate": 0.9013018272,
+      "migration": 1083,
+      "economy": "stable",
+      "sentiment": 0.44,
+      "cycleWeight": "high-signal",
+      "shockFlag": "shock-flag"
+    },
+    "events": [
+      {
+        "type": "infra-incident",
+        "domain": "INFRASTRUCTURE",
+        "severity": "low",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "CELEBRITY",
+        "severity": "low",
+        "neighborhood": "Uptown"
+      },
+      {
+        "type": "safety-incident",
+        "domain": "SAFETY",
+        "severity": "low",
+        "neighborhood": "Downtown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "TRAFFIC",
+        "severity": "low",
+        "neighborhood": "Uptown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "CELEBRITY",
+        "severity": "low",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "GENERAL",
+        "severity": "low",
+        "neighborhood": "Laurel"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "East Oakland"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Fruitvale"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Adams Point"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "West Oakland"
+      }
+    ]
+  },
+  "initiativeDecisions": {
+    "oari": {
+      "initiative": "INIT-002",
+      "initiativeId": "INIT-002",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-003)",
+      "consolidatedFrom": [
+        "STMT-103-MAYOR-003 (Mayor — Oakland Alternative Response Initiative — D7 Community Satisfaction Survey)",
+        "STMT-103-oari-001 (Tran-Muñoz — D7 Satisfaction Survey Release)",
+        "STMT-103-oari-002 (Tran-Muñoz — West Oakland Operations)",
+        "STMT-103-police_chief-002 (Chief — OARI Pilot Expansion)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-002",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C103: Executive order issued to create community task force for D7 satisfaction survey review.",
+        "NextScheduledAction": "Task force recommendations due",
+        "NextActionCycle": 105
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    }
+  }
+}

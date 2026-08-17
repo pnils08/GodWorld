@@ -1,0 +1,429 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "anthony-raines",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00017",
+      "name": "Anthony Raines",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+      "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-analytics",
+        "pulseClass": "line-card",
+        "bagTools": [
+          "1 Box-Card Read",
+          "5 Repertoire vs Results"
+        ],
+        "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "lineFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 124-34 · W15",
+          "Event kind (feed): A's — player-feature (late-season)",
+          "NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)",
+          "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut"
+        ],
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+          "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies",
+          "Pablo Almanzar has no Simulation_Ledger POPID in the local snapshot — do not invent or interview"
+        ],
+        "sceneRule": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers.",
+        "sourcePointers": [
+          "output/world_summary_c103.md ## Sports",
+          "docs/media/ANTHONY_ANALYSIS_BAG.md",
+          "scripts/sportsSubstrate.js",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 4"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sports-analytics",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c103.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge",
+          "why": "feed-names",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-c3d068124c64"
+      },
+      {
+        "t": "FACT",
+        "text": "Pablo Almanzar throws a No No in his MLB debut",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-9442247b316d"
+      },
+      {
+        "t": "FACT",
+        "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-94954ea5ef3e"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-f9190a7c60c2"
+      },
+      {
+        "t": "FACT",
+        "text": "Team record (feed): 124-34 · W15",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-567f64fcf11e"
+      },
+      {
+        "t": "FACT",
+        "text": "Event kind (feed): A's — player-feature (late-season)",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-3cd772dd1442"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
+  "assignment": {
+    "story": {
+      "kind": "sports-analytics",
+      "angle": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+      "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+      "hookLine": "Pablo Almanzar throws a No No in his MLB debut",
+      "hood": "Downtown",
+      "pulseClass": "line-card",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "citizens": [
+        "Vinnie Keane (POP-00001)"
+      ],
+      "popids": [
+        "POP-00001"
+      ],
+      "ref": "world_summary_c103.md ## Sports",
+      "cycle": 103
+    },
+    "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": {
+    "pulse": {
+      "className": "line-card",
+      "score": 72,
+      "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "seasonType": "late-season",
+      "storyAngle": "Pablo Almanzar throws a No No in his MLB debut",
+      "hasStats": true,
+      "record": "124-34",
+      "streak": "W15",
+      "foilNumber": "9IP",
+      "feedCycle": 103
+    },
+    "bag": {
+      "tools": [
+        {
+          "id": 1,
+          "name": "Box-Card Read"
+        },
+        {
+          "id": 5,
+          "name": "Repertoire vs Results"
+        }
+      ],
+      "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+      "foilNumber": "9IP"
+    },
+    "prewrite": {
+      "reporter": "Anthony Raines",
+      "bagTools": [
+        {
+          "id": 1,
+          "name": "Box-Card Read"
+        },
+        {
+          "id": 5,
+          "name": "Repertoire vs Results"
+        }
+      ],
+      "lineFacts": [
+        "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+        "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+        "Team record (feed): 124-34 · W15",
+        "Event kind (feed): A's — player-feature (late-season)",
+        "NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)",
+        "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut"
+      ],
+      "dossierFacts": [
+        "NONE — offline slice; use packet TrueSource only if wake supplies"
+      ],
+      "feedFacts": [
+        "StoryAngle: Pablo Almanzar throws a No No in his MLB debut",
+        "Notes: Pablo Alamazar (SP) made his major league debut in NY vs the Yankees, Pablo Almanzar just called up for the callup throws a no hitter while striking out 10. Making a major splash in his MLB debut in o",
+        "Record/Streak: 124-34 / W15"
+      ],
+      "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+      "missing": [
+        "x-stats / barrel% / launch angle / OAA not on feed",
+        "contracts or salaries not printed on this feed row",
+        "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+        "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies",
+        "Pablo Almanzar has no Simulation_Ledger POPID in the local snapshot — do not invent or interview"
+      ],
+      "foilNumber": "9IP",
+      "anchorFacts": [
+        "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+        "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+        "Team record (feed): 124-34 · W15",
+        "Event kind (feed): A's — player-feature (late-season)"
+      ]
+    },
+    "friction": {
+      "a": "Feed present fact: Pablo Almanzar throws a No No in his MLB debut",
+      "b": "Soft FO language or bleacher heat that skips the line",
+      "frame": "Evaluate fit and process with numbers — one claim, third person."
+    },
+    "players": [
+      {
+        "name": "Pablo Almanzar",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Vinnie Keane",
+        "popid": "POP-00001",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Downtown",
+      "record": "124-34",
+      "streak": "W15",
+      "colorRoom": "Press-box / clubhouse quiet. Numbers from feed Stats only. No invented Savant cards. RoleType from ledger when present — never invent careers."
+    },
+    "candidates": [
+      {
+        "score": 78,
+        "cycle": 102,
+        "team": "A's",
+        "primary": "roster-architecture",
+        "hasStats": true,
+        "angle": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging "
+      },
+      {
+        "score": 72,
+        "cycle": 103,
+        "team": "A's",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "Pablo Almanzar throws a No No in his MLB debut"
+      },
+      {
+        "score": 66,
+        "cycle": 102,
+        "team": "A's",
+        "primary": "prospect-fit",
+        "hasStats": true,
+        "angle": "The Kids are Alright. Kevin Clark and Sidney Tumolo more than fill the gap production wise but will "
+      },
+      {
+        "score": 66,
+        "cycle": 102,
+        "team": "A's",
+        "primary": "award-board",
+        "hasStats": true,
+        "angle": "As players amongst the elite this award season, Danny Horn, Eric Taveras, Isley Kelley, Ernesto Quin"
+      },
+      {
+        "score": 61,
+        "cycle": 103,
+        "team": "Oaks",
+        "primary": "line-card",
+        "hasStats": true,
+        "angle": "Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance"
+      },
+      {
+        "score": 59,
+        "cycle": 101,
+        "team": "A's",
+        "primary": "roster-architecture",
+        "hasStats": true,
+        "angle": "Martin Richards traded at the deadline, trading a franchise pillar in a title run"
+      }
+    ]
+  },
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "text": "{\n  \"focus\": \"Pablo Almanzar's no-hitter in his MLB debut\",\n  \"why\": \"The line anchors the board with 9IP, 0H, 1BB, 10Ks—a historic debut performance that demands evaluation of whether it's sustainable or a flash of brilliance.\",\n  \"checks\": [\n    \"Verify Almanzar's minor league stats for consistency in control and strikeout rates\",\n    \"Check scouting reports on his pitch repertoire and command progression\",\n    \"Review any previous MLB call-up rumors or expectations\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00001\",\n      \"question\": \"What did you see from Almanzar's stuff tonight that made him unhittable?\",\n      \"basis\": \"Vinnie Keane faced Almanzar in live BP sessions and has veteran hitter's perspective on stuff\"\n    }\n  ],\n  \"interpretation\": \"The BB/K ratio suggests command over pure stuff dominance, but debut adrenaline and unfamiliarity could inflate results\",\n  \"unverifiedLead\": [\n    \"Whether Almanzar's changeup development explains the swing-and-miss numbers\",\n    \"If the organization views this as accelerated development or needs more Triple-A refinement\"\n  ],\n  \"closeQuestion\": \"Is this the emergence of a new rotation anchor or a perfect storm of debut magic?\"\n}",
+    "plan": {
+      "focus": "Pablo Almanzar's no-hitter in his MLB debut",
+      "why": "The line anchors the board with 9IP, 0H, 1BB, 10Ks—a historic debut performance that demands evaluation of whether it's sustainable or a flash of brilliance.",
+      "checks": [
+        "Verify Almanzar's minor league stats for consistency in control and strikeout rates",
+        "Check scouting reports on his pitch repertoire and command progression",
+        "Review any previous MLB call-up rumors or expectations"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00001",
+          "question": "What did you see from Almanzar's stuff tonight that made him unhittable?",
+          "basis": "Vinnie Keane faced Almanzar in live BP sessions and has veteran hitter's perspective on stuff"
+        }
+      ],
+      "interpretation": "The BB/K ratio suggests command over pure stuff dominance, but debut adrenaline and unfamiliarity could inflate results",
+      "unverifiedLead": [
+        "Whether Almanzar's changeup development explains the swing-and-miss numbers",
+        "If the organization views this as accelerated development or needs more Triple-A refinement"
+      ],
+      "closeQuestion": "Is this the emergence of a new rotation anchor or a perfect storm of debut magic?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-08-14T11:15:58.028Z"
+}

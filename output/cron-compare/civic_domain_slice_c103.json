@@ -1,5 +1,5 @@
 {
-  "version": "CIVIC-DOMAIN-SLICE-3",
+  "version": "CIVIC-DOMAIN-SLICE-4",
   "cycle": 103,
   "kind": "civic-domain",
   "empty": false,
@@ -410,6 +410,332 @@
       },
       "source": "desk-signal",
       "sourceIndex": 29
+    },
+    {
+      "kind": "weather",
+      "label": "Cycle 103 weather | Season Winter | 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",
+      "ref": "output/world_summary_c103.md:3",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "world-summary",
+      "sourceIndex": 32
+    },
+    {
+      "kind": "season-feel",
+      "label": "Ricky Wilton — dealt with a seasonal health concern",
+      "ref": "output/world_summary_c103.md ## Who Lived It",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00215"
+      ],
+      "handle": {
+        "angle": "Ricky Wilton — dealt with a seasonal health concern",
+        "hookLine": "Ricky Wilton — dealt with a seasonal health concern",
+        "citizens": [
+          "Ricky Wilton (POP-00215)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 33
+    },
+    {
+      "kind": "season-feel",
+      "label": "Clearence Leighton — recovered from a winter illness",
+      "ref": "output/world_summary_c103.md ## Who Lived It",
+      "hood": "Piedmont Ave",
+      "popids": [
+        "POP-00238"
+      ],
+      "handle": {
+        "angle": "Clearence Leighton — recovered from a winter illness",
+        "hookLine": "Clearence Leighton — recovered from a winter illness",
+        "citizens": [
+          "Clearence Leighton (POP-00238)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 34
+    },
+    {
+      "kind": "season-feel",
+      "label": "Cathy Skeet — dealt with a seasonal health concern",
+      "ref": "output/world_summary_c103.md ## Who Lived It",
+      "hood": "Chinatown",
+      "popids": [
+        "POP-00308"
+      ],
+      "handle": {
+        "angle": "Cathy Skeet — dealt with a seasonal health concern",
+        "hookLine": "Cathy Skeet — dealt with a seasonal health concern",
+        "citizens": [
+          "Cathy Skeet (POP-00308)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 35
+    },
+    {
+      "kind": "season-feel",
+      "label": "Jude Hess — recovered from a winter illness",
+      "ref": "output/world_summary_c103.md ## Who Lived It",
+      "hood": "West Oakland",
+      "popids": [
+        "POP-00521"
+      ],
+      "handle": {
+        "angle": "Jude Hess — recovered from a winter illness",
+        "hookLine": "Jude Hess — recovered from a winter illness",
+        "citizens": [
+          "Jude Hess (POP-00521)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 36
+    },
+    {
+      "kind": "season-feel",
+      "label": "Alma Zhang — recovered from a winter illness",
+      "ref": "output/world_summary_c103.md ## Who Lived It",
+      "hood": "Laurel",
+      "popids": [
+        "POP-00834"
+      ],
+      "handle": {
+        "angle": "Alma Zhang — recovered from a winter illness",
+        "hookLine": "Alma Zhang — recovered from a winter illness",
+        "citizens": [
+          "Alma Zhang (POP-00834)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 37
+    },
+    {
+      "kind": "season-feel",
+      "label": "Ray Samson — relied on familiar social circles during cold period",
+      "ref": "output/world_summary_c103.md ## Who Lived It",
+      "hood": "Laurel",
+      "popids": [
+        "POP-00186"
+      ],
+      "handle": {
+        "angle": "Ray Samson — relied on familiar social circles during cold period",
+        "hookLine": "Ray Samson — relied on familiar social circles during cold period",
+        "citizens": [
+          "Ray Samson (POP-00186)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 38
+    },
+    {
+      "kind": "season-feel",
+      "label": "Jackson Sift — helped the kids with homework at the kitchen table",
+      "ref": "output/world_summary_c103.md ## Who Lived It",
+      "hood": "West Oakland",
+      "popids": [
+        "POP-00190"
+      ],
+      "handle": {
+        "angle": "Jackson Sift — helped the kids with homework at the kitchen table",
+        "hookLine": "Jackson Sift — helped the kids with homework at the kitchen table",
+        "citizens": [
+          "Jackson Sift (POP-00190)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 39
+    },
+    {
+      "kind": "season-feel",
+      "label": "Rick Walker — packed school lunches for the morning rush",
+      "ref": "output/world_summary_c103.md ## Who Lived It",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00198"
+      ],
+      "handle": {
+        "angle": "Rick Walker — packed school lunches for the morning rush",
+        "hookLine": "Rick Walker — packed school lunches for the morning rush",
+        "citizens": [
+          "Rick Walker (POP-00198)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 40
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+      "ref": "output/world_summary_c103.md ## World Events",
+      "hood": "East Oakland",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+        "hookLine": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 41
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — holy_day — Lake Merritt: Cathedral of the Living Word observes Advent and Christmas",
+      "ref": "output/world_summary_c103.md ## World Events",
+      "hood": "Lake Merritt",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — holy_day — Lake Merritt: Cathedral of the Living Word observes Advent and Christmas",
+        "hookLine": "FAITH — holy_day — Lake Merritt: Cathedral of the Living Word observes Advent and Christmas",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 42
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Advent and Christmas",
+      "ref": "output/world_summary_c103.md ## World Events",
+      "hood": "Fruitvale",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Advent and Christmas",
+        "hookLine": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Advent and Christmas",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 43
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — holy_day — Adams Point: Adams Point United Methodist observes Christmas",
+      "ref": "output/world_summary_c103.md ## World Events",
+      "hood": "Adams Point",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — holy_day — Adams Point: Adams Point United Methodist observes Christmas",
+        "hookLine": "FAITH — holy_day — Adams Point: Adams Point United Methodist observes Christmas",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 44
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — holy_day — West Oakland: New Covenant Pentecostal Assembly observes Christmas",
+      "ref": "output/world_summary_c103.md ## World Events",
+      "hood": "West Oakland",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — holy_day — West Oakland: New Covenant Pentecostal Assembly observes Christmas",
+        "hookLine": "FAITH — holy_day — West Oakland: New Covenant Pentecostal Assembly observes Christmas",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 45
+    },
+    {
+      "kind": "season-feel",
+      "label": "Nightline Station in West Oakland is quiet; movement restricted on this weather.",
+      "ref": "output/world_summary_c103.md ## Evening Texture",
+      "hood": "West Oakland",
+      "popids": [],
+      "handle": {
+        "angle": "Nightline Station in West Oakland is quiet; movement restricted on this weather.",
+        "hookLine": "Nightline Station in West Oakland is quiet; movement restricted on this weather.",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 46
+    },
+    {
+      "kind": "season-feel",
+      "label": "Restaurants: Piedmont Heights (Piedmont Ave), Festive Feast (Downtown), Rockridge Cellar (Rockridge)",
+      "ref": "output/world_summary_c103.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "Restaurants: Piedmont Heights (Piedmont Ave), Festive Feast (Downtown), Rockridge Cellar (Rockridge)",
+        "hookLine": "Restaurants: Piedmont Heights (Piedmont Ave), Festive Feast (Downtown), Rockridge Cellar (Rockridge)",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 47
+    },
+    {
+      "kind": "season-feel",
+      "label": "Fast food: SoupStop (Temescal)",
+      "ref": "output/world_summary_c103.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "Fast food: SoupStop (Temescal)",
+        "hookLine": "Fast food: SoupStop (Temescal)",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 48
+    },
+    {
+      "kind": "season-feel",
+      "label": "City events: Jack London Holiday Market, Fruitvale Emergency Town Briefing, Lake Merritt Community Joy Parade, Lake Merritt Festival of Lights",
+      "ref": "output/world_summary_c103.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "City events: Jack London Holiday Market, Fruitvale Emergency Town Briefing, Lake Merritt Community Joy Parade, Lake Merritt Festival of Lights",
+        "hookLine": "City events: Jack London Holiday Market, Fruitvale Emergency Town Briefing, Lake Merritt Community Joy Parade, Lake Merritt Festival of Lights",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 49
+    },
+    {
+      "kind": "season-feel",
+      "label": "Evening media movies: Miracle Season, Holiday Magic, New Beginnings, Ninth Inning",
+      "ref": "output/world_summary_c103.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "Evening media movies: Miracle Season, Holiday Magic, New Beginnings, Ninth Inning",
+        "hookLine": "Evening media movies: Miracle Season, Holiday Magic, New Beginnings, Ninth Inning",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 50
+    },
+    {
+      "kind": "season-feel",
+      "label": "Streaming trend: holiday classics marathon",
+      "ref": "output/world_summary_c103.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "Streaming trend: holiday classics marathon",
+        "hookLine": "Streaming trend: holiday classics marathon",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 51
+    },
+    {
+      "kind": "season-feel",
+      "label": "Food trend: Holiday celebration dining - festive atmosphere",
+      "ref": "output/world_summary_c103.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "Food trend: Holiday celebration dining - festive atmosphere",
+        "hookLine": "Food trend: Holiday celebration dining - festive atmosphere",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 52
     }
   ],
   "packets": {
@@ -448,6 +774,7 @@
           "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
         ]
       },
+      "citizens": [],
       "candidates": [
         {
           "score": 55,
@@ -583,6 +910,24 @@
           "request timestamp and elapsed silence duration",
           "responsible person, office, or duty unless named by the source"
         ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
         "silenceClock": {
           "state": "UNESTABLISHED",
           "value": null,
@@ -595,6 +940,22 @@
           }
         ]
       },
+      "citizens": [
+        {
+          "popid": "POP-00231",
+          "name": "Calvin Turner",
+          "role": "Mechanic",
+          "neighborhood": "Fruitvale",
+          "profile": "Calvin Turner — Mechanic — Fruitvale resident"
+        },
+        {
+          "popid": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook",
+          "neighborhood": "Fruitvale",
+          "profile": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale resident"
+        }
+      ],
       "candidates": [
         {
           "score": 80,
@@ -719,9 +1080,9 @@
       "approach": "Systems approach: trace the supplied infrastructure or transit fact through timeline, place, and implementation state. Dry, technical, and record-backed.",
       "story": {
         "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "label": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
         "kind": "anomaly",
-        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+        "angle": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
         "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
         "hood": "Fruitvale",
         "popids": [
@@ -738,13 +1099,13 @@
       "pulse": {
         "className": "infrastructure-transit",
         "score": 45,
-        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "label": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
         "hood": "Fruitvale",
         "source": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
       },
       "prewrite": {
         "anchorFacts": [
-          "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles"
+          "The transit initiative carrying Fruitvale has not advanced in 9 cycles."
         ],
         "forbidden": [
           "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
@@ -763,6 +1124,7 @@
           "src": null
         }
       },
+      "citizens": [],
       "candidates": [
         {
           "score": 45,
@@ -863,7 +1225,7 @@
     "lila-mezran": {
       "seat": {
         "slug": "lila-mezran",
-        "name": "Lila Mezran",
+        "name": "Dr. Lila Mezran",
         "popid": "POP-00154",
         "domain": "health"
       },
@@ -871,9 +1233,9 @@
       "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.",
       "story": {
         "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
-        "label": "Temescal Community Health Center | Status passed | phase construction-active",
+        "label": "Temescal Community Health Center is approved, and construction is active.",
         "kind": "initiative",
-        "angle": "Temescal Community Health Center | Status passed | phase construction-active",
+        "angle": "Temescal Community Health Center is approved, and construction is active.",
         "hookLine": "The supplied civic record identifies a health-service question that needs careful accounting.",
         "hood": "Temescal",
         "popids": [],
@@ -882,19 +1244,32 @@
       "pulse": {
         "className": "health",
         "score": 45,
-        "label": "Temescal Community Health Center | Status passed | phase construction-active",
+        "label": "Temescal Community Health Center is approved, and construction is active.",
         "hood": "Temescal",
         "source": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
       },
       "prewrite": {
         "anchorFacts": [
-          "Temescal Community Health Center | Status passed | phase construction-active",
-          "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+          "Temescal Community Health Center is approved, and construction is active."
         ],
         "forbidden": [
-          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
-        ]
+          "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+        ],
+        "schema": "HEALTH-SERVICE-BRIEF-1",
+        "method": "ACCESS_TIMELINE_HUMAN_COST",
+        "missing": [
+          "a named affected resident, patient, clinician, or service user",
+          "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+          "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+        ],
+        "humanConsequence": {
+          "state": "UNESTABLISHED",
+          "subjects": [],
+          "facts": [],
+          "src": null
+        }
       },
+      "citizens": [],
       "candidates": [
         {
           "score": 45,
@@ -947,41 +1322,228 @@
           "citizens": [],
           "source": "desk-signal",
           "sourceIndex": 29
+        },
+        {
+          "score": 45,
+          "kind": "season-feel",
+          "label": "Ricky Wilton — dealt with a seasonal health concern",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "Downtown",
+          "popids": [
+            "POP-00215"
+          ],
+          "angle": "Ricky Wilton — dealt with a seasonal health concern",
+          "hookLine": "Ricky Wilton — dealt with a seasonal health concern",
+          "citizens": [
+            "Ricky Wilton (POP-00215)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 33
+        },
+        {
+          "score": 45,
+          "kind": "season-feel",
+          "label": "Cathy Skeet — dealt with a seasonal health concern",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "Chinatown",
+          "popids": [
+            "POP-00308"
+          ],
+          "angle": "Cathy Skeet — dealt with a seasonal health concern",
+          "hookLine": "Cathy Skeet — dealt with a seasonal health concern",
+          "citizens": [
+            "Cathy Skeet (POP-00308)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 35
         }
       ],
       "pointers": [
         "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
         "Initiative_Tracker (InitiativeID INIT-005)",
         "Ripple_Ledger cycle 103 (CauseType initiative-implementation); rendered: world_summary_c103.md \"## What Moved\" > \"### initiative-implementation\"",
-        "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\""
+        "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\"",
+        "output/world_summary_c103.md ## Who Lived It"
       ]
     },
     "noah-tan": {
       "seat": {
         "slug": "noah-tan",
         "name": "Noah Tan",
-        "popid": null,
+        "popid": "POP-00157",
         "domain": "environment"
       },
-      "empty": true,
-      "approach": "Environment approach: translate the supplied environmental or weather signal into grounded civic terms. Do not invent measurements, forecasts, or scientific conclusions.",
-      "candidates": [],
-      "pointers": []
+      "empty": false,
+      "approach": "Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede.",
+      "story": {
+        "ref": "output/world_summary_c103.md ## Who Lived It",
+        "label": "Ricky Wilton — dealt with a seasonal health concern",
+        "kind": "season-feel",
+        "angle": "Ricky Wilton — dealt with a seasonal health concern",
+        "hookLine": "Ricky Wilton — dealt with a seasonal health concern",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00215"
+        ],
+        "citizens": [
+          "Ricky Wilton (POP-00215)"
+        ]
+      },
+      "pulse": {
+        "className": "environment",
+        "score": 80,
+        "label": "Ricky Wilton — dealt with a seasonal health concern",
+        "hood": "Downtown",
+        "source": "output/world_summary_c103.md ## Who Lived It"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Ricky Wilton — dealt with a seasonal health concern"
+        ],
+        "forbidden": [
+          "Do not announce the season or temperature as the story.",
+          "Do not import real-world Oakland winter tropes absent from the Packet.",
+          "Do not add forecasts, agencies, or unsupplied measurements."
+        ],
+        "schema": "SEASON-FEEL-1",
+        "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+        "missing": [
+          "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+        ],
+        "impactEvidence": {
+          "state": "SUPPLIED",
+          "subjects": [
+            "POP-00215"
+          ],
+          "facts": [
+            "Ricky Wilton — dealt with a seasonal health concern"
+          ],
+          "src": "output/world_summary_c103.md ## Who Lived It"
+        }
+      },
+      "citizens": [],
+      "candidates": [
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Ricky Wilton — dealt with a seasonal health concern",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "Downtown",
+          "popids": [
+            "POP-00215"
+          ],
+          "angle": "Ricky Wilton — dealt with a seasonal health concern",
+          "hookLine": "Ricky Wilton — dealt with a seasonal health concern",
+          "citizens": [
+            "Ricky Wilton (POP-00215)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 33
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Clearence Leighton — recovered from a winter illness",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "Piedmont Ave",
+          "popids": [
+            "POP-00238"
+          ],
+          "angle": "Clearence Leighton — recovered from a winter illness",
+          "hookLine": "Clearence Leighton — recovered from a winter illness",
+          "citizens": [
+            "Clearence Leighton (POP-00238)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 34
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Cathy Skeet — dealt with a seasonal health concern",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "Chinatown",
+          "popids": [
+            "POP-00308"
+          ],
+          "angle": "Cathy Skeet — dealt with a seasonal health concern",
+          "hookLine": "Cathy Skeet — dealt with a seasonal health concern",
+          "citizens": [
+            "Cathy Skeet (POP-00308)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 35
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Jude Hess — recovered from a winter illness",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "West Oakland",
+          "popids": [
+            "POP-00521"
+          ],
+          "angle": "Jude Hess — recovered from a winter illness",
+          "hookLine": "Jude Hess — recovered from a winter illness",
+          "citizens": [
+            "Jude Hess (POP-00521)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 36
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Alma Zhang — recovered from a winter illness",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "Laurel",
+          "popids": [
+            "POP-00834"
+          ],
+          "angle": "Alma Zhang — recovered from a winter illness",
+          "hookLine": "Alma Zhang — recovered from a winter illness",
+          "citizens": [
+            "Alma Zhang (POP-00834)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 37
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Ray Samson — relied on familiar social circles during cold period",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "Laurel",
+          "popids": [
+            "POP-00186"
+          ],
+          "angle": "Ray Samson — relied on familiar social circles during cold period",
+          "hookLine": "Ray Samson — relied on familiar social circles during cold period",
+          "citizens": [
+            "Ray Samson (POP-00186)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 38
+        }
+      ],
+      "pointers": [
+        "output/world_summary_c103.md ## Who Lived It"
+      ]
     },
     "angela-reyes": {
       "seat": {
         "slug": "angela-reyes",
         "name": "Angela Reyes",
-        "popid": null,
+        "popid": "POP-00156",
         "domain": "education-youth"
       },
       "empty": false,
       "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.",
       "story": {
         "ref": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
-        "label": "Oakland Youth Apprenticeship Pipeline | Status announced | phase pilot-active",
+        "label": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
         "kind": "initiative",
-        "angle": "Oakland Youth Apprenticeship Pipeline | Status announced | phase pilot-active",
+        "angle": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
         "hookLine": "The supplied civic record identifies an education or youth question that needs a clear, humane account.",
         "hood": "West Oakland, East Oakland, Fruitvale",
         "popids": [],
@@ -990,19 +1552,32 @@
       "pulse": {
         "className": "education-youth",
         "score": 45,
-        "label": "Oakland Youth Apprenticeship Pipeline | Status announced | phase pilot-active",
+        "label": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
         "hood": "West Oakland, East Oakland, Fruitvale",
         "source": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
       },
       "prewrite": {
         "anchorFacts": [
-          "Oakland Youth Apprenticeship Pipeline | Status announced | phase pilot-active",
-          "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+          "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active."
         ],
         "forbidden": [
-          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
-        ]
+          "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+        ],
+        "schema": "EDUCATION-STABILITY-BRIEF-1",
+        "method": "PROGRAM_CONTINUITY_ACCESS",
+        "missing": [
+          "a named student, teacher, family member, participant, or program staff member",
+          "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+          "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+        ],
+        "stabilityEvidence": {
+          "state": "UNESTABLISHED",
+          "participants": [],
+          "facts": [],
+          "src": null
+        }
       },
+      "citizens": [],
       "candidates": [
         {
           "score": 45,
@@ -1055,13 +1630,31 @@
           "citizens": [],
           "source": "desk-signal",
           "sourceIndex": 25
+        },
+        {
+          "score": 45,
+          "kind": "season-feel",
+          "label": "Rick Walker — packed school lunches for the morning rush",
+          "ref": "output/world_summary_c103.md ## Who Lived It",
+          "hood": "Fruitvale",
+          "popids": [
+            "POP-00198"
+          ],
+          "angle": "Rick Walker — packed school lunches for the morning rush",
+          "hookLine": "Rick Walker — packed school lunches for the morning rush",
+          "citizens": [
+            "Rick Walker (POP-00198)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 40
         }
       ],
       "pointers": [
         "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
         "Initiative_Tracker (InitiativeID INIT-007)",
         "Ripple_Ledger cycle 103 (CauseType initiative-implementation); rendered: world_summary_c103.md \"## What Moved\" > \"### initiative-implementation\"",
-        "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\""
+        "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\"",
+        "output/world_summary_c103.md ## Who Lived It"
       ]
     }
   }

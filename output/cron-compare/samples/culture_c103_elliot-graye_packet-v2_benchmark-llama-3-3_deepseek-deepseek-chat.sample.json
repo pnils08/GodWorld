@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/samples/culture_c103_elliot-graye_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.sample-1610.md",
+  "quotesLanded": 0,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-08-13T16:10:08.403Z"
+}

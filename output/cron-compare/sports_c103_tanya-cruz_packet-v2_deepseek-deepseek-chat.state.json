@@ -1,0 +1,236 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00014",
+    "name": "Tanya Cruz",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+    "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sideline-dispatch",
+      "pulseClass": "record-only-sideline",
+      "bagModes": [
+        "10 Inference Close"
+      ],
+      "claim": "The supplied sports record establishes the event; it does not establish what happened in the room.",
+      "anchorFacts": [
+        "Adash Stanley recorded 23 points and 7 assists.",
+        "The Oaks preseason record is 0-1."
+      ],
+      "accessEvidence": {
+        "state": "NOT_SUPPLIED",
+        "facts": []
+      },
+      "quoteEvidence": {
+        "state": "NOT_SUPPLIED",
+        "quotes": []
+      },
+      "observationEvidence": {
+        "state": "NOT_SUPPLIED",
+        "facts": []
+      },
+      "missing": [
+        "reporter attendance or access",
+        "room mood or witnessed action",
+        "quotes or dialogue",
+        "injury detail or team response beyond the supplied record"
+      ],
+      "sceneRule": "No scene is authorized unless the Packet supplies an observed place and action.",
+      "sourcePointers": [
+        "output/world_summary_c103.md ## Sports",
+        "scripts/sportsSubstrate.js",
+        "docs/media/TANYA_SIDELINE_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sideline-signal",
+    "hood": "Jack London",
+    "src": "world_summary_c103.md ## Sports",
+    "plan": {
+      "focus": "Adash Stanley's performance in the Oaks' preseason game",
+      "closeQuestion": "What adjustments will the Oaks make to turn their preseason record around?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "Is Adash Stanley expected to maintain this level of performance throughout the preseason?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+      "src": "world_summary_c103.md ## Sports",
+      "id": "F-b612e3776eb6"
+    },
+    {
+      "t": "FACT",
+      "text": "Adash Stanley recorded 23 points and 7 assists.",
+      "src": "world_summary_c103.md ## Sports",
+      "id": "F-809f4c3d6112"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks preseason record is 0-1.",
+      "src": "world_summary_c103.md ## Sports",
+      "id": "F-df8c4e55c3c4"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "File a short Packet-backed sports dispatch while treating access, observation, mood, dialogue, injuries, and team response as absent unless supplied.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
+      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
+      "opening": "one supplied sports fact",
+      "closing": "the access or observation still needed"
+    },
+    "authorizedTexture": [
+      "first-person interpretation without a claim of attendance or access",
+      "a concise transition carrying no observed place, action, mood, person, or event"
+    ],
+    "textureConditions": [
+      "every access claim, observation, quote, injury detail, team response, person, place, event, and statistic requires Packet support",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "canonBlockers": [
+      "invented clubhouse or sideline access, attendance, room mood, witnessed action, dialogue, injury detail, or team response",
+      "an invented or altered person, quote, statistic, result, roster move, venue, event, or relationship",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  },
+  "manifest": {
+    "id": "AM-b17a99e6b54e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-b612e3776eb6",
+        "t": "FACT",
+        "text": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      {
+        "id": "F-809f4c3d6112",
+        "t": "FACT",
+        "text": "Adash Stanley recorded 23 points and 7 assists.",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      {
+        "id": "F-df8c4e55c3c4",
+        "t": "FACT",
+        "text": "The Oaks preseason record is 0-1.",
+        "src": "world_summary_c103.md ## Sports"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "Is Adash Stanley expected to maintain this level of performance throughout the preseason?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "first-person interpretation without a claim of attendance or access",
+      "a concise transition carrying no observed place, action, mood, person, or event"
+    ],
+    "textureConditions": [
+      "every access claim, observation, quote, injury detail, team response, person, place, event, and statistic requires Packet support",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "forbiddenClaimClasses": [
+      "invented clubhouse or sideline access, attendance, room mood, witnessed action, dialogue, injury detail, or team response",
+      "an invented or altered person, quote, statistic, result, roster move, venue, event, or relationship",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  }
+}

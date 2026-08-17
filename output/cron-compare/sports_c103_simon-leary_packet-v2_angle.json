@@ -1,0 +1,339 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "Benji Dillon is moving to the bullpen for the remainder of the season.",
+          "The A's record is 124-34.",
+          "The A's have won 15 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c103.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "Lake Merritt",
+      "score": null,
+      "src": "world_summary_c103.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's — Rockridge",
+          "why": "feed-names",
+          "role": "Pitcher, Oakland A's",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-6e5092023b7c"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon is moving to the bullpen for the remainder of the season.",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-6fcf7347428e"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's record is 124-34.",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-6cf37d5769d3"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's have won 15 straight.",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-a78a1ac34a1f"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+      "label": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+      "hookLine": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+      "kind": "long-view-signal",
+      "hood": "Lake Merritt",
+      "popids": [
+        "POP-00018"
+      ],
+      "citizens": [
+        "Benji Dillon (POP-00018)"
+      ],
+      "ref": "world_summary_c103.md ## Sports",
+      "cycle": 103
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 66,
+      "label": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "Benji Dillon is moving to the bullpen for the remainder of the season.",
+        "The A's record is 124-34.",
+        "The A's have won 15 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ]
+    },
+    "players": [
+      {
+        "name": "Benji Dillon",
+        "popid": "POP-00018",
+        "role": "Pitcher, Oakland A's",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 66,
+        "cycle": 103,
+        "team": "A's",
+        "label": "Benji Dillon moves to the bullpen, In an effort to give some young arms so run and rest a vet arm Dillon will be moving to the bullpen."
+      },
+      {
+        "score": 54,
+        "cycle": 103,
+        "team": "Oaks",
+        "label": "Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance"
+      },
+      {
+        "score": 54,
+        "cycle": 102,
+        "team": "A's",
+        "label": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?"
+      },
+      {
+        "score": 42,
+        "cycle": 101,
+        "team": "A's",
+        "label": "Martin Richards traded at the deadline, trading a franchise pillar in a title run"
+      },
+      {
+        "score": 38,
+        "cycle": 103,
+        "team": "A's",
+        "label": "Isley Kelly at 499 Homeruns"
+      },
+      {
+        "score": 38,
+        "cycle": 103,
+        "team": "A's",
+        "label": "Pablo Almanzar throws a No No in his MLB debut"
+      }
+    ]
+  },
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "{\n  \"focus\": \"Benji Dillon's move to the bullpen amidst the A's historic 124-34 season\",\n  \"why\": \"A role change within a sustained team record offers a lens into structural continuity rather than organizational intent or franchise history\",\n  \"checks\": [\n    \"Does this interpretation rely solely on supplied facts?\",\n    \"Does it avoid inventing new people, events, or institutions?\",\n    \"Does it maintain the long-view approach without recapping games or speculating on intentions?\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00018\",\n      \"question\": \"How does Benji Dillon perceive this role shift within the context of the team's current dominance?\",\n      \"basis\": \"As a key player undergoing a visible change during a historic run, his personal perspective could reveal how individuals adapt within structural continuity\"\n    }\n  ],\n  \"interpretation\": \"The bullpen move isn't a fracture but a redistribution of load—like a beam shifted in a sound structure to bear weight differently without compromising the whole\",\n  \"unverifiedLead\": [\n    \"Whether this move reflects a planned preservation of Dillon's arm for postseason\",\n    \"If the clubhouse sees this as a temporary adjustment or a longer-term evolution of his role\"\n  ],\n  \"closeQuestion\": \"What does sustained excellence demand of its individual parts when the machine hums this smoothly?\"\n}",
+    "plan": {
+      "focus": "Benji Dillon's move to the bullpen amidst the A's historic 124-34 season",
+      "why": "A role change within a sustained team record offers a lens into structural continuity rather than organizational intent or franchise history",
+      "checks": [
+        "Does this interpretation rely solely on supplied facts?",
+        "Does it avoid inventing new people, events, or institutions?",
+        "Does it maintain the long-view approach without recapping games or speculating on intentions?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00018",
+          "question": "How does Benji Dillon perceive this role shift within the context of the team's current dominance?",
+          "basis": "As a key player undergoing a visible change during a historic run, his personal perspective could reveal how individuals adapt within structural continuity"
+        }
+      ],
+      "interpretation": "The bullpen move isn't a fracture but a redistribution of load—like a beam shifted in a sound structure to bear weight differently without compromising the whole",
+      "unverifiedLead": [
+        "Whether this move reflects a planned preservation of Dillon's arm for postseason",
+        "If the clubhouse sees this as a temporary adjustment or a longer-term evolution of his role"
+      ],
+      "closeQuestion": "What does sustained excellence demand of its individual parts when the machine hums this smoothly?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-08-13T17:56:43.425Z"
+}

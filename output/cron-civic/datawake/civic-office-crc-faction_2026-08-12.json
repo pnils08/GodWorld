@@ -1,0 +1,14 @@
+{
+  "office": "crc_faction",
+  "agentDir": "civic-office-crc-faction",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-08-12",
+  "cycle": 103,
+  "model": "deepseek/deepseek-chat",
+  "statement": "When stable storefronts become the exception rather than the expectation, that's when audits prove their worth. Pulling the last six quarters' small-business retention reports from Economic Development to map service gaps.",
+  "action": "Audit request for small-business retention reports in KONO",
+  "numberMoved": null,
+  "ranAt": "2026-08-16T01:05:18.415Z"
+}

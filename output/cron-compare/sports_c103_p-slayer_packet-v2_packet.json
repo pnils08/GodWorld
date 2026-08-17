@@ -10,17 +10,9 @@
   },
   "assignment": {
     "story": {
-      "angle": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
-      "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
-      "hookLine": "Pablo Almanzar throws a No No in his MLB debut",
-      "hood": "Downtown",
-      "pulseClass": "line-card",
-      "team": "A's",
-      "eventKind": "player-feature",
-      "citizens": [],
-      "popids": [],
-      "ref": "world_summary_c103.md ## Sports",
-      "cycle": 103
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "label": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+      "kind": "feed"
     }
   },
   "angle": "output/cron-compare/sports_c103_p-slayer_packet-v2_angle.json",
@@ -28,5 +20,5 @@
   "quotesLanded": 0,
   "quotes": [],
   "interviews": [],
-  "ranAt": "2026-08-11T18:16:54.803Z"
+  "ranAt": "2026-08-13T18:15:22.081Z"
 }

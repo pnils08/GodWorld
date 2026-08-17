@@ -1,0 +1,16 @@
+{
+  "draft": "sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "flags": [
+    {
+      "claim": "Pablo Almanzar throws a No No in his MLB debut",
+      "issue": "The draft uses 'Pablo Almanzar' and 'Pablo Almanza' as persons (players), which are flagged by deterministic pre-check 1 as not being in the ledger of citizens.",
+      "severity": "high"
+    },
+    {
+      "claim": "StoryAngle (feed) / Team record (feed) / Stats (feed) / <!-- SELF-SCORE: ... -->",
+      "issue": "The draft contains raw system/engine verbiage, template instructions, and metadata comments leaking into the text.",
+      "severity": "high"
+    }
+  ],
+  "summary": "Draft failed verification due to the use of non-ledger names as persons and significant engine/template verbiage leaks."
+}

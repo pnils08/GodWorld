@@ -1,0 +1,42 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Tomas Renteria",
+        "role": "quoted-source",
+        "popid": "POP-00744"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "sourceRef": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-06ea0c2dc11e",
+    "draftSha256": "71114c0392d57b3e672eb104618f0605b8208b0c5600632fe7bd31ed7c941029",
+    "verdict": "output/cron-compare/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T17:53:53.642Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-13T17:53:56.007Z"
+}

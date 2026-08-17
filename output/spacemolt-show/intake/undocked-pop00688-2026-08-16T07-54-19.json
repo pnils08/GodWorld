@@ -1,0 +1,22 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-08-16T17:52:44.839Z",
+  "POPID": "POP-00688",
+  "Cycle": 103,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00688-2026-08-16T07-54-19",
+  "Applied": "no",
+  "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-08-16T07-54-19.json",
+  "Holder": "Merkin Jumper",
+  "CreditsDelta": 42,
+  "Magnitude": 3,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Merkin Jumper credits=42 systems=Sol",
+  "DecidedAt": null,
+  "DecidedBy": null,
+  "Note": "",
+  "FeedEvent": null
+}

@@ -8,9 +8,9 @@
     "desk": "culture"
   },
   "task": {
-    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
-    "assignment": "Adams Point | 1 world event(s) this cycle",
-    "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "A quiet night at Nightline Station — what the supplied evening record can and cannot explain",
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Kai (arts bag): present-tense scene; art as neighborhood act. Named events/artists from packet only. Modes: First Friday Pulse, Room Rewriting Itself, Stage/Mic/Block, What the Block Is Saying Tonight. Assigned pulse: quiet-nightlife — Nightline Station (West Oakland) · quiet night.",
     "voice": null,
     "creativeBrief": {
       "kind": "evening-life",
@@ -44,7 +44,7 @@
         "Lena Cross — tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4"
       ],
       "streamingTrend": "holiday classics marathon",
-      "sceneRule": "Named places only from Evening Texture / desk_signal. Nightlife meta: volume 3, vibe quiet, movement restricted. Sensory room (weather, light, sound) is free; careers and employees are not.",
+      "sceneRule": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal. Sensory room (weather, light, sound) is free; careers and employees are not.",
       "sourcePointers": [
         "docs/media/KAI_ARTS_BAG.md",
         "output/world_summary_c103.md ## Evening Texture",
@@ -52,24 +52,81 @@
         "docs/media/SHARON_LIFESTYLE_BAG.md",
         "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
       ]
-    }
+    },
+    "writingMode": "SOURCE_BRIEF"
   },
   "signal": {
-    "kind": "hood",
-    "hood": "Adams Point",
-    "src": "output/neighborhood_texture_c103.md \"### Adams Point\"; events: world_summary_c103.md \"## World Events\"",
+    "kind": "story-signal",
+    "hood": "West Oakland",
+    "src": "world_summary ## Evening Texture · Nightlife",
     "plan": {
       "focus": "Nightline Station",
-      "closeQuestion": "What's behind the quiet night at Nightline Station?"
+      "closeQuestion": "what is the essence of a quiet night in West Oakland"
     }
   },
   "exposure": {
-    "subjects": [],
-    "sources": [],
+    "subjects": [
+      {
+        "pop": "POP-00288",
+        "name": "Marcus Wright",
+        "profile": "Marcus Wright",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "profile": "Irene Fay",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "profile": "Daniel Cloak",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00288-ce04391d16",
+        "pop": "POP-00288",
+        "name": "Marcus Wright",
+        "quote": "I've been working in this neighborhood for a while, and when I hear that Nightline Station is having a quiet night, it feels off because I'm used to it being more lively, I think the Tribune should ask what's behind the slow nights.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-1590cfdf8f8c"
+        ],
+        "src": "packet.W2[POP-00288]"
+      },
+      {
+        "id": "Q-POP-00794-88f0930097",
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "quote": "I'm not sure what to make of Nightline Station being described as quiet, it just feels off to me, I think the Tribune should ask if that's really the vibe people are getting from the place.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-1590cfdf8f8c"
+        ],
+        "src": "packet.W2[POP-00794]"
+      },
+      {
+        "id": "Q-POP-00722-be2935f65b",
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "quote": "I think what feels off about Nightline Station is that it's usually not that quiet, and I'm wondering if the Tribune should ask if everything is okay over there.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-1590cfdf8f8c"
+        ],
+        "src": "packet.W2[POP-00722]"
+      }
+    ],
     "excludedLeads": [
       {
         "from": "Kai Marston",
-        "text": "restricted movement and quiet vibe",
+        "text": "the atmosphere is calm",
         "usable": false
       }
     ]
@@ -89,9 +146,9 @@
     },
     {
       "t": "FACT",
-      "text": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+      "text": "The supplied evening record describes Nightline Station as open and quiet.",
       "src": "world_summary ## Evening Texture · Nightlife",
-      "id": "F-eb06f26d4668"
+      "id": "F-1590cfdf8f8c"
     },
     {
       "t": "FACT",
@@ -113,27 +170,9 @@
     },
     {
       "t": "FACT",
-      "text": "VOLUME: 3",
+      "text": "EVENING RECORD: open and quiet",
       "src": "world_summary ## Evening Texture · Nightlife",
-      "id": "F-7f9099fbcc1a"
-    },
-    {
-      "t": "FACT",
-      "text": "VIBE: quiet",
-      "src": "world_summary ## Evening Texture · Nightlife",
-      "id": "F-2cc50cb7f1d9"
-    },
-    {
-      "t": "FACT",
-      "text": "MOVEMENT: restricted",
-      "src": "world_summary ## Evening Texture · Nightlife",
-      "id": "F-10f02310d906"
-    },
-    {
-      "t": "FACT",
-      "text": "WEATHER IMPACT: 1.05",
-      "src": "world_summary ## Evening Texture · Nightlife",
-      "id": "F-782d4a339aa5"
+      "id": "F-8b4bdb19a250"
     }
   ],
   "limits": {
@@ -153,7 +192,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -187,6 +226,7 @@
     "canonPolicy": "load-bearing",
     "purpose": "Turn a sourced evening pulse into present-tense arts and entertainment reporting where art, media, and a named place become a neighborhood act. A vivid room grounded in the Packet is success; generic culture roundup and invented nightlife are not.",
     "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
       "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
       "targetWords": "500-800",
       "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
@@ -215,7 +255,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-e7ee6fe95693",
+    "id": "AM-587a2b4f1436",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -231,9 +271,9 @@
         "src": "world_summary ## Evening Texture · Nightlife"
       },
       {
-        "id": "F-eb06f26d4668",
+        "id": "F-1590cfdf8f8c",
         "t": "FACT",
-        "text": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+        "text": "The supplied evening record describes Nightline Station as open and quiet.",
         "src": "world_summary ## Evening Texture · Nightlife"
       },
       {
@@ -255,32 +295,70 @@
         "src": "world_summary ## Evening Texture · Nightlife"
       },
       {
-        "id": "F-7f9099fbcc1a",
+        "id": "F-8b4bdb19a250",
         "t": "FACT",
-        "text": "VOLUME: 3",
-        "src": "world_summary ## Evening Texture · Nightlife"
-      },
-      {
-        "id": "F-2cc50cb7f1d9",
-        "t": "FACT",
-        "text": "VIBE: quiet",
-        "src": "world_summary ## Evening Texture · Nightlife"
-      },
-      {
-        "id": "F-10f02310d906",
-        "t": "FACT",
-        "text": "MOVEMENT: restricted",
-        "src": "world_summary ## Evening Texture · Nightlife"
-      },
-      {
-        "id": "F-782d4a339aa5",
-        "t": "FACT",
-        "text": "WEATHER IMPACT: 1.05",
+        "text": "EVENING RECORD: open and quiet",
         "src": "world_summary ## Evening Texture · Nightlife"
       }
     ],
-    "approvedQuotes": [],
-    "approvedSubjects": [],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00288-ce04391d16",
+        "speakerId": "POP-00288",
+        "speakerName": "Marcus Wright",
+        "text": "I've been working in this neighborhood for a while, and when I hear that Nightline Station is having a quiet night, it feels off because I'm used to it being more lively, I think the Tribune should ask what's behind the slow nights.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-1590cfdf8f8c"
+        ],
+        "src": "packet.W2[POP-00288]"
+      },
+      {
+        "id": "Q-POP-00794-88f0930097",
+        "speakerId": "POP-00794",
+        "speakerName": "Irene Fay",
+        "text": "I'm not sure what to make of Nightline Station being described as quiet, it just feels off to me, I think the Tribune should ask if that's really the vibe people are getting from the place.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-1590cfdf8f8c"
+        ],
+        "src": "packet.W2[POP-00794]"
+      },
+      {
+        "id": "Q-POP-00722-be2935f65b",
+        "speakerId": "POP-00722",
+        "speakerName": "Daniel Cloak",
+        "text": "I think what feels off about Nightline Station is that it's usually not that quiet, and I'm wondering if the Tribune should ask if everything is okay over there.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-1590cfdf8f8c"
+        ],
+        "src": "packet.W2[POP-00722]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00288",
+        "name": "Marcus Wright",
+        "profile": "Marcus Wright",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00794",
+        "name": "Irene Fay",
+        "profile": "Irene Fay",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00722",
+        "name": "Daniel Cloak",
+        "profile": "Daniel Cloak",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -298,7 +376,7 @@
     "unverifiedLeads": [
       {
         "from": "Kai Marston",
-        "text": "restricted movement and quiet vibe",
+        "text": "the atmosphere is calm",
         "publishable": false
       }
     ],

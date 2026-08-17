@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland, East Oakland, Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+        "sourceRef": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-eea7425c7d91",
+    "draftSha256": "0d21ab195df7dc72f630d88815895c9f39f63efe2528a71aa15ee4bee7f94044",
+    "verdict": "output/cron-compare/civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T07:51:56.151Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T07:52:08.420Z"
+}

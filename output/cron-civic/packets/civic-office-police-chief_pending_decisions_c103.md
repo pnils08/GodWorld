@@ -42,6 +42,17 @@ The city stands at about 387,278 people; nearly everyone who wants work has it a
 - **Acceptance:** A coordinated safety response memo detailing patrol-hour adjustments or co-response allocations for East and West Oakland in C104.
 - **Silence consequence:** Continued public safety deterioration in Oakland's most vulnerable neighborhoods and a lack of municipal alignment.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [OARI Pilot Expansion] Rafael Montez — Behavioral health crisis response requires careful operational integration — we're methodically refining the co-deployment model district by district.
+2. stated: [Neighborhood Security Plan] Rafael Montez — Public safety resources must follow the data — that's why we're adjusting patrol deployments to match incident frequency in our highest-need neighborhoods.
+3. stated: [Neighborhood Safety Deployment] Rafael Montez — OPD is adjusting patrol deployments based on call volume data to ensure public safety resources match neighborhood needs.
+4. datawake: Elevated crime across multiple districts requires focused deployment adjustments. OPD is reallocating patrol resources to high-volume areas while maintaining core response capacity district-wide. | action: Diverting additional marked units to Fruitvale, Uptown, and West Oakland based on real-time call volume data. | signal: Six additional patrol units redeployed to highest-call areas
+
+Latest district pack on disk: output/cron-civic/packs/CHIEF-POLICE_c103.json
+
 ## DECISION 1 — Engine review HIGH: incoherence
 
 West Oakland, Fruitvale, East Oakland: incoherence flagged at high severity.

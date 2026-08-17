@@ -1,0 +1,226 @@
+{
+  "cycle": "103",
+  "total": 18,
+  "counts": {
+    "accurate": 6,
+    "corrections-needed": 11,
+    "canon-violation": 1
+  },
+  "accuracyPct": 33.3,
+  "auditModel": "google/gemini-3.5-flash",
+  "trend": [],
+  "articles": [
+    {
+      "stem": "business_c103_business-desk_packet-v2_deepseek-deepseek-chat",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+          "class": "engine-verbiage",
+          "why": "The article leaks raw database table names, internal initiative IDs, and JSON file references in both the body text and the intake section."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "engine_audit_c103.json snapshots.Initiative_Tracker",
+          "class": "engine-verbiage",
+          "why": "The text leaks raw system file names, database paths, and technical identifiers ('engine_audit_c103.json snapshots.Initiative_Tracker', 'InitiativeID INIT-001') into the prose and intake notes."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "The article contains raw system/engine vocabulary and template text in its prose, such as 'The supplied record establishes', 'The supplied civic record', and 'engine_audit_c103.json snapshots.Initiative_Tracker'.",
+          "class": "engine-verbiage",
+          "why": "Raw system-level prompts, template instructions, and JSON file references leaked directly into the published article text."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "The article contains"
+        }
+      ]
+    },
+    {
+      "stem": "civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "The article contains raw engine/system vocabulary and database references.",
+          "class": "engine-verbiage",
+          "why": "Phrases like 'listed as passed', 'supplied phase is operational', and references to 'Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json' leak system/engine vocabulary into the prose."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "The IN"
+        }
+      ]
+    },
+    {
+      "stem": "culture_c103_elliot-graye_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "B'nai Tikvah Synagogue",
+          "class": "data-misrepresentation",
+          "why": "The article claims Claire Ashford was spotted at B'nai Tikvah Synagogue, but the ground truth ledger states she was spotted at Beth Jacob Congregation."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "The text contains raw system/engine vocabulary and template instructions.",
+          "class": "engine-verbiage",
+          "why": "The article includes template prose ('The supplied record establishes', 'EVENING RECORD: open and quiet', 'The record leaves one question open...') and raw intake metadata ('## INTAKE', 'HOOD: Chinatown', 'CLAIM: ...') which leaks system/engine vocabulary into the reader-facing text."
+        }
+      ]
+    },
+    {
+      "stem": "culture_c103_maria-keen_packet-v2_benchmark-natural-llama_deepseek-deepseek-chat",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_deepseek-deepseek-chat",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c103_sharon-okafor_packet-v2_benchmark-benchmark-llama-3-3_deepseek-deepseek-chat",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "INTAKE block and HTML comment",
+          "class": "engine-verbiage",
+          "why": "The article includes raw system metadata, an intake block, and a self-score HTML comment at the end of the text."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Event kind (feed), Team record (feed), Vinnie Keane line (feed), Pablo Almanzar line (feed)",
+          "class": "engine-verbiage",
+          "why": "The article includes raw database/feed labels like '(feed)' and 'Event kind' directly in the prose."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c103_hal-richmond_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "engine-verbiage",
+          "class": "engine-verbiage",
+          "why": "The article contains system-level verbiage and meta-commentary ('supplied C103 line card', 'supplied record', 'supplied condition', and 'INTAKE') rather than a natural news narrative."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Handoff feeling vs funeral feeling — pick a side. / The record leaves one question open: What additional record would explain the supplied condition?",
+          "class": "engine-verbiage",
+          "why": "System prompt instructions and template scaffolding leaked directly into the published article text."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    }
+  ]
+}

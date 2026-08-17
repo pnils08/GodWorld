@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c103_elliot-graye_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)",
+        "sourceRef": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\""
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-62a7abb0ebee",
+    "draftSha256": "5f172c30f8d8e575013c102839db02c7ed50b51a13737d177e5b0e31f569249c",
+    "verdict": "output/cron-compare/culture_c103_elliot-graye_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T16:12:51.498Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T16:13:00.916Z"
+}

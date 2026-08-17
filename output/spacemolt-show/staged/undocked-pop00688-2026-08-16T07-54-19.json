@@ -1,0 +1,324 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00688-2026-08-16T07-54-19",
+  "popid": "POP-00688",
+  "holder": "Merkin Jumper",
+  "session": "undocked-pop00688",
+  "window": {
+    "startedAt": "2026-08-16T07:54:19.498Z",
+    "endedAt": "2026-08-16T08:04:23.999Z"
+  },
+  "runner": {
+    "turns": 73,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 6,
+    "estCostUsd": 0.1619,
+    "tokensIn": 1145994,
+    "tokensOut": 5065,
+    "log": "output/spacemolt-show/episodes/undocked-pop00688-2026-08-16T07-54-19.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-08-16T17:43:55.757Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 4,
+      "basis": [
+        {
+          "id": 91646557,
+          "event_type": "trading.exchange_fill",
+          "n": 2
+        },
+        {
+          "id": 91646428,
+          "event_type": "trading.exchange_fill",
+          "n": 6
+        },
+        {
+          "id": 91646271,
+          "event_type": "trading.exchange_fill",
+          "n": 18
+        },
+        {
+          "id": 91646177,
+          "event_type": "trading.exchange_fill",
+          "n": 16
+        }
+      ],
+      "value": 42
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 16,
+          "copper_ore": 15,
+          "sol_alloy_ore": 1,
+          "nickel_ore": 3
+        },
+        "sold": {
+          "sol_alloy_ore": 1,
+          "nickel_ore": 3,
+          "copper_ore": 9,
+          "iron_ore": 4
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 6,
+        "trading": 4,
+        "combat": 0,
+        "navigation": 0,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 91651838,
+            "created_at": "2026-08-16T08:03:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 8 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 8,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 91651650,
+            "created_at": "2026-08-16T08:03:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 6 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 6,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          },
+          {
+            "id": 91645637,
+            "created_at": "2026-08-16T07:58:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Sol Alloy Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "sol_alloy_ore",
+              "resource_name": "Sol Alloy Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 91645605,
+            "created_at": "2026-08-16T07:58:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Nickel Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 3,
+              "resource_id": "nickel_ore",
+              "resource_name": "Nickel Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 91645567,
+            "created_at": "2026-08-16T07:58:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 9 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 9,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 91645495,
+            "created_at": "2026-08-16T07:58:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 8 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 8,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 91646557,
+            "created_at": "2026-08-16T07:59:20Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Sol Alloy Ore @ 2 each (2 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "sol_alloy_ore",
+              "price": 2,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 2
+            }
+          },
+          {
+            "id": 91646428,
+            "created_at": "2026-08-16T07:59:10Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 3x Nickel Ore @ 2 each (6 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "nickel_ore",
+              "price": 2,
+              "quantity": 3,
+              "role": "seller",
+              "source": "spot",
+              "total": 6
+            }
+          },
+          {
+            "id": 91646271,
+            "created_at": "2026-08-16T07:59:00Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 9x Copper Ore @ 2 each (18 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "copper_ore",
+              "price": 2,
+              "quantity": 9,
+              "role": "seller",
+              "source": "spot",
+              "total": 18
+            }
+          },
+          {
+            "id": 91646177,
+            "created_at": "2026-08-16T07:58:50Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 4x Iron Ore @ 4 each (16 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 4,
+              "quantity": 4,
+              "role": "seller",
+              "source": "spot",
+              "total": 16
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 91642675,
+            "created_at": "2026-08-16T07:54:20Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "MerkinJumper logged in",
+            "data": {
+              "last_login_at": "2026-08-16T06:04:13Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 3,
+    "listed": 3,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-08-16 08:04:23",
+        "text": "[Session Handoff] - **Current Action**: Mid-mining Iron Ore (action pending next tick).  \n- **Immediate Next Step**: Continue mining Iron Ore until cargo reaches ~60/70.  \n- **Location/Status**: Sol, aboard *Theoria*. Credits: 542cr, Cargo: 26/70 (Iron x12, Copper x9, Nickel x3, Sol Alloy x1).  \n- **Active Goals**: Maximize Iron Ore mining efficiency; monitor cargo capacity and fuel levels.  \n- **Recent Events**: Mining operation ongoing; ship systems optimal; fuel stable at 97/100."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-08-16 08:00:43",
+        "text": "Mission complete. All objectives achieved: mined 17 ore units, earned 42cr profit. Lesson: Always verify station fuel status pre-flight. Theoria remains in perfect condition. Ready for next assignment."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-08-16 08:00:04",
+        "text": "Flight log: Mined 17 ore units (Iron, Copper, Nickel, Sol Alloy) near Sol's Main Belt. Sold for 42cr profit. Station fuel depleted—priority check next launch. Theoria performed flawlessly, no hull stress. Lesson: Always verify station fuel reserves before undocking."
+      }
+    ],
+    "unwindowed": []
+  }
+}

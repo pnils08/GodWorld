@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vladimir Gonzalez",
+        "role": "quoted-source",
+        "popid": "POP-00598"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland, East Oakland, Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "sourceRef": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      }
+    ]
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-12T23:15:57.456Z"
+}

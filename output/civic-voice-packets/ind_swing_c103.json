@@ -1,0 +1,829 @@
+{
+  "meta": {
+    "type": "civic-voice-packet",
+    "office": "ind_swing",
+    "cycle": 103
+  },
+  "faction": {
+    "id": "ind_swing",
+    "members": [
+      {
+        "officeId": "COUNCIL-D2",
+        "title": "City Council District 2",
+        "district": "D2",
+        "name": "Leonard Tran",
+        "popId": "POP-00502",
+        "faction": "IND",
+        "status": "active",
+        "votingPower": "yes",
+        "approval": 58,
+        "notes": "Downtown/Chinatown",
+        "neighborhoods": [
+          "Downtown",
+          "Chinatown",
+          "Jack London"
+        ]
+      },
+      {
+        "officeId": "COUNCIL-D4",
+        "title": "City Council District 4",
+        "district": "D4",
+        "name": "Ramon Vega",
+        "popId": "POP-00042",
+        "faction": "IND",
+        "status": "active",
+        "votingPower": "yes",
+        "approval": 54,
+        "notes": "Council President",
+        "neighborhoods": [
+          "Glenview",
+          "Dimond",
+          "Ivy Hill"
+        ]
+      }
+    ],
+    "districtNeighborhoodMap": {
+      "D2": {
+        "member": "Leonard Tran",
+        "faction": "IND",
+        "neighborhoods": [
+          "Downtown",
+          "Chinatown",
+          "Jack London"
+        ],
+        "citizenCount": 222
+      },
+      "D4": {
+        "member": "Ramon Vega",
+        "faction": "IND",
+        "neighborhoods": [
+          "Glenview",
+          "Dimond",
+          "Ivy Hill"
+        ],
+        "citizenCount": 1
+      }
+    }
+  },
+  "initiatives": [
+    {
+      "id": "INIT-001",
+      "name": "West Oakland Stabilization Fund",
+      "status": "passed",
+      "budget": "$28M",
+      "voteRequirement": "6-3",
+      "voteCycle": "78",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "West Oakland",
+      "policyDomain": "economic",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)"
+    },
+    {
+      "id": "INIT-002",
+      "name": "Oakland Alternative Response Initiative",
+      "status": "passed",
+      "budget": "$12.5M",
+      "voteRequirement": "5-4",
+      "voteCycle": "82",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
+      "policyDomain": "safety",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes."
+    },
+    {
+      "id": "INIT-003",
+      "name": "Fruitvale Transit Hub Phase II — Visioning",
+      "status": "visioning-complete",
+      "budget": "$230M",
+      "voteRequirement": "",
+      "voteCycle": "94",
+      "outcome": "COMPLETED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "",
+      "swingVoter": "",
+      "affectedNeighborhoods": "Fruitvale",
+      "policyDomain": "transit",
+      "consequences": "Community input gathered. Next phase: formal proposal.",
+      "notes": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented."
+    },
+    {
+      "id": "INIT-005",
+      "name": "Temescal Community Health Center",
+      "status": "passed",
+      "budget": "$45M",
+      "voteRequirement": "5-4",
+      "voteCycle": "80",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "Temescal",
+      "policyDomain": "health",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)"
+    },
+    {
+      "id": "INIT-006",
+      "name": "Baylight District — Final Council Vote",
+      "status": "passed",
+      "budget": "$2.1B",
+      "voteRequirement": "5-4",
+      "voteCycle": "83",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "Jack London, Downtown",
+      "policyDomain": "sports",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes."
+    },
+    {
+      "id": "INIT-007",
+      "name": "Oakland Youth Apprenticeship Pipeline",
+      "status": "announced",
+      "budget": "$12.5M",
+      "voteRequirement": "",
+      "voteCycle": "",
+      "outcome": "",
+      "leadFaction": "OPP",
+      "oppositionFaction": "",
+      "swingVoter": "",
+      "affectedNeighborhoods": "West Oakland, East Oakland, Fruitvale",
+      "policyDomain": "workforce",
+      "consequences": "Workforce program announced C73 as part of Baylight CBA package. Not a standalone council vote.",
+      "notes": "Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (OUSD MOU C76, Peralta MOU C78, budget allocation C80, A's commitment C83) unverified."
+    }
+  ],
+  "districtData": {
+    "metrics": {
+      "count": 6,
+      "avgSentiment": 0.505,
+      "avgCrimeIndex": 0.7,
+      "avgRetailVitality": 9.5,
+      "totalIncidents": 34,
+      "neighborhoods": [
+        {
+          "name": "Downtown",
+          "sentiment": 0.41,
+          "crimeIndex": 1.02,
+          "retailVitality": 13.64,
+          "incidents": 14,
+          "responseTime": 10,
+          "demographics": null
+        },
+        {
+          "name": "Jack London",
+          "sentiment": 0.44,
+          "crimeIndex": 0.96,
+          "retailVitality": 11.06,
+          "incidents": 8,
+          "responseTime": 10.7,
+          "demographics": null
+        },
+        {
+          "name": "Chinatown",
+          "sentiment": 0.39,
+          "crimeIndex": 0.89,
+          "retailVitality": 11.39,
+          "incidents": 7,
+          "responseTime": 12.4,
+          "demographics": null
+        },
+        {
+          "name": "Glenview",
+          "sentiment": 0.57,
+          "crimeIndex": 0.5,
+          "retailVitality": 7.4,
+          "incidents": 4,
+          "responseTime": 10.8,
+          "demographics": null
+        },
+        {
+          "name": "Dimond",
+          "sentiment": 0.63,
+          "crimeIndex": 0.66,
+          "retailVitality": 8.24,
+          "incidents": 1,
+          "responseTime": 11.8,
+          "demographics": null
+        },
+        {
+          "name": "Ivy Hill",
+          "sentiment": 0.59,
+          "crimeIndex": 0.22,
+          "retailVitality": 5.21,
+          "incidents": 0,
+          "responseTime": 0,
+          "demographics": null
+        }
+      ]
+    },
+    "crimeMetrics": [
+      {
+        "neighborhood": "Downtown",
+        "propertyCrime": 62,
+        "violentCrime": 55,
+        "responseTime": 10,
+        "incidents": 14
+      },
+      {
+        "neighborhood": "Jack London",
+        "propertyCrime": 53,
+        "violentCrime": 43,
+        "responseTime": 10.7,
+        "incidents": 8
+      },
+      {
+        "neighborhood": "Chinatown",
+        "propertyCrime": 47,
+        "violentCrime": 42,
+        "responseTime": 12.4,
+        "incidents": 7
+      },
+      {
+        "neighborhood": "Glenview",
+        "propertyCrime": 28,
+        "violentCrime": 22,
+        "responseTime": 10.8,
+        "incidents": 4
+      },
+      {
+        "neighborhood": "Dimond",
+        "propertyCrime": 39,
+        "violentCrime": 27,
+        "responseTime": 11.8,
+        "incidents": 1
+      },
+      {
+        "neighborhood": "Ivy Hill",
+        "propertyCrime": 0,
+        "violentCrime": 0,
+        "responseTime": 0,
+        "incidents": 0
+      }
+    ],
+    "transitStations": [
+      {
+        "station": "12th St Oakland City Center",
+        "ridership": 6007,
+        "onTimePerformance": 0.84,
+        "trafficIndex": 50,
+        "notes": "light ridership"
+      },
+      {
+        "station": "19th St Oakland",
+        "ridership": 4715,
+        "onTimePerformance": 0.83,
+        "trafficIndex": 50,
+        "notes": "light ridership"
+      },
+      {
+        "station": "Lake Merritt",
+        "ridership": 2298,
+        "onTimePerformance": 0.81,
+        "trafficIndex": 50,
+        "notes": "light ridership"
+      }
+    ],
+    "citizenSummary": {
+      "total": 223,
+      "tierBreakdown": {
+        "1": 6,
+        "2": 16,
+        "3": 44,
+        "4": 157
+      },
+      "statusBreakdown": {
+        "Active": 223
+      },
+      "avgIncome": 859523,
+      "notableCitizens": [
+        {
+          "popId": "POP-00003",
+          "name": "Mark Aitken",
+          "tier": 1,
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "neighborhood": "Jack London",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00007",
+          "name": "Hal Richmond",
+          "tier": 1,
+          "role": "Journalist, Senior Historian",
+          "neighborhood": "Chinatown",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00011",
+          "name": "Carmen Delaine",
+          "tier": 2,
+          "role": "Journalist, Civic Affairs Reporter",
+          "neighborhood": "Chinatown",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00028",
+          "name": "Manfred Owens",
+          "tier": 2,
+          "role": "Booky",
+          "neighborhood": "Jack London",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00036",
+          "name": "Marcus Osei",
+          "tier": 2,
+          "role": "City Council Member",
+          "neighborhood": "Chinatown",
+          "displacementRisk": 1,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00051",
+          "name": "Desmond Morton",
+          "tier": 2,
+          "role": "Left Fielder, Oakland A's",
+          "neighborhood": "Jack London",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00056",
+          "name": "Mint Condition",
+          "tier": 2,
+          "role": "Speculative Internet",
+          "neighborhood": "Downtown",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00127",
+          "name": "Mason Miller",
+          "tier": 2,
+          "role": "Sports Analyst A's / Retired former As Closer",
+          "neighborhood": "Downtown",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00527",
+          "name": "Mike Paulson",
+          "tier": 1,
+          "role": "General Manager, Oakland A's & The Oaks",
+          "neighborhood": "Jack London",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00533",
+          "name": "Travis Coles",
+          "tier": 1,
+          "role": "Starting Pitcher, Oakland A's",
+          "neighborhood": "Downtown",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00555",
+          "name": "Mariano Rosales",
+          "tier": 2,
+          "role": "Club Manager",
+          "neighborhood": "Jack London",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00591",
+          "name": "Selena Grant",
+          "tier": 2,
+          "role": "Journalist - Chicago Sports",
+          "neighborhood": "Chinatown",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00592",
+          "name": "Talia Finch",
+          "tier": 2,
+          "role": "Journalist - Chicago Sports",
+          "neighborhood": "Jack London",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00597",
+          "name": "Eric Taveras",
+          "tier": 1,
+          "role": "Second Baseman, Oakland A's",
+          "neighborhood": "Downtown",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00599",
+          "name": "Jose Colon",
+          "tier": 2,
+          "role": "Catcher, Oakland A's",
+          "neighborhood": "Chinatown",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00753",
+          "name": "Eunice Marston",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Downtown",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00763",
+          "name": "Kenji Tanaka",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Chinatown",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00764",
+          "name": "Tao Lee",
+          "tier": 2,
+          "role": "Community Organizer",
+          "neighborhood": "Downtown",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00776",
+          "name": "Kwame Ellis",
+          "tier": 2,
+          "role": "Civic Opinion Columnist, OakTown Echo",
+          "neighborhood": "Downtown",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-01022",
+          "name": "Wilson Shepard",
+          "tier": 2,
+          "role": "Head Coach, Oakland Oaks",
+          "neighborhood": "Downtown",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-01027",
+          "name": "Austin Reaves",
+          "tier": 1,
+          "role": "SG / The Oaks",
+          "neighborhood": "Downtown",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-01046",
+          "name": "Elliot Abraham",
+          "tier": 2,
+          "role": "General Manager, Oakland Oaks",
+          "neighborhood": "Jack London",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        }
+      ],
+      "atDisplacementRisk": 139,
+      "withMigrationIntent": 1
+    },
+    "recentLifeEvents": [
+      {
+        "popId": "POP-00294",
+        "name": "Miguel Joson",
+        "event": "Education",
+        "text": "engaged with multilingual community resources",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "popId": "POP-00440",
+        "name": "Xing Patel",
+        "event": "Daily|source:familyLife|family:household|household:crisis",
+        "text": "a health scare pulled everyone home early — it passed, but the house held its breath together",
+        "neighborhood": "Jack London"
+      },
+      {
+        "popId": "POP-00678",
+        "name": "Celo Patel",
+        "event": "Daily|source:familyLife|family:household|household:crisis",
+        "text": "a health scare pulled everyone home early — it passed, but the house held its breath together",
+        "neighborhood": "Jack London"
+      },
+      {
+        "popId": "POP-01007",
+        "name": "Mei Patel",
+        "event": "Daily|source:familyLife|family:household|household:crisis",
+        "text": "a health scare pulled everyone home early — it passed, but the house held its breath together",
+        "neighborhood": "Jack London"
+      },
+      {
+        "popId": "POP-00003",
+        "name": "Mark Aitken",
+        "event": "Sports|source:sports|auth:auto|holiday:Holiday|holidayPriority:major|occupation:First Baseman, Oakland A's — Player Rep, Community Liaison|ageGroup:youngAdult|neighborhood:Jack London|tier:1|archetype:Striver",
+        "text": "the city buzzes with energy after the A's third straight win, fans wearing green and gold everywhere.",
+        "neighborhood": "Jack London"
+      },
+      {
+        "popId": "POP-00003",
+        "name": "Mark Aitken",
+        "event": "Personal|source:reflection|holiday:Holiday|holidayPriority:major|venue:local|occupation:First Baseman, Oakland A's — Player Rep, Community Liaison|ageGroup:youngAdult|neighborhood:Jack London|tier:1|archetype:Striver",
+        "text": "found a quiet minute at the waterfront and let the week's noise settle",
+        "neighborhood": "Jack London"
+      },
+      {
+        "popId": "POP-00003",
+        "name": "Mark Aitken",
+        "event": "Micro-Event|source:groove|source:base|holiday:Holiday|holidayPriority:major|occupation:First Baseman, Oakland A's — Player Rep, Community Liaison|ageGroup:youngAdult|neighborhood:Jack London|tier:1|archetype:Striver",
+        "text": "drove the whole way home without remembering a single turn",
+        "neighborhood": "Jack London"
+      },
+      {
+        "popId": "POP-00007",
+        "name": "Hal Richmond",
+        "event": "Personal|source:reflection|source:base|holiday:Holiday|holidayPriority:major|venue:local|occupation:Journalist, Senior Historian|ageGroup:adult|neighborhood:Chinatown|tier:1|archetype:Connector",
+        "text": "couldn't shake a strange dream through the morning coffee near a small bakery line",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "popId": "POP-00009",
+        "name": "Lena Carrow",
+        "event": "Civic Perception|source:civicNews|auth:auto|holiday:Holiday|holidayPriority:major|occupation:Field Reporter|ageGroup:adult|neighborhood:Downtown|tier:3|archetype:Connector",
+        "text": "the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.",
+        "neighborhood": "Downtown"
+      },
+      {
+        "popId": "POP-00009",
+        "name": "Lena Carrow",
+        "event": "Personal|source:listening|source:base|holiday:Holiday|holidayPriority:major|occupation:Field Reporter|ageGroup:adult|neighborhood:Downtown|tier:3|archetype:Connector",
+        "text": "watched a couple argue quietly over groceries and rooted for them anyway",
+        "neighborhood": "Downtown"
+      },
+      {
+        "popId": "POP-00009",
+        "name": "Lena Carrow",
+        "event": "Daily|source:familyLife|source:base|holiday:Holiday|holidayPriority:major|occupation:Field Reporter|ageGroup:adult|neighborhood:Downtown|tier:3|archetype:Connector",
+        "text": "retold an old family story and caught a detail they'd never noticed",
+        "neighborhood": "Downtown"
+      },
+      {
+        "popId": "POP-00009",
+        "name": "Lena Carrow",
+        "event": "Micro-Event|source:groove|source:base|holiday:Holiday|holidayPriority:major|occupation:Field Reporter|ageGroup:adult|neighborhood:Downtown|tier:3|archetype:Connector",
+        "text": "caught the coffee order coming out of their mouth before deciding to order it",
+        "neighborhood": "Downtown"
+      },
+      {
+        "popId": "POP-00010",
+        "name": "Dana Reeve",
+        "event": "Sports|source:sports|auth:manual|holiday:Holiday|holidayPriority:major|occupation:Lead Journalist|ageGroup:adult|neighborhood:Chinatown|tier:3|archetype:Connector",
+        "text": "bought a new A's jersey and felt the season starting to turn",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "popId": "POP-00010",
+        "name": "Dana Reeve",
+        "event": "Neighborhood|source:neighborhood|auth:library-s325|holiday:Holiday|holidayPriority:major|venue:local|occupation:Lead Journalist|ageGroup:adult|neighborhood:Chinatown|tier:3|archetype:Connector",
+        "text": "walked past the old Mandela Parkway encampment site and felt the quiet tension of the new development near a herb shop",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "popId": "POP-00010",
+        "name": "Dana Reeve",
+        "event": "Daily|source:familyLife|source:base|holiday:Holiday|holidayPriority:major|occupation:Lead Journalist|ageGroup:adult|neighborhood:Chinatown|tier:3|archetype:Connector",
+        "text": "played a relative's voicemail twice before saving it again",
+        "neighborhood": "Chinatown"
+      }
+    ],
+    "faithCommunities": [
+      {
+        "name": "Telegraph Presbyterian Fellowship",
+        "tradition": "Protestant",
+        "neighborhood": "Downtown",
+        "congregation": 450,
+        "leader": "Rev. Eunice Marston",
+        "character": "historic mainline, social justice focus"
+      },
+      {
+        "name": "Bay Pure Land Buddhist Temple",
+        "tradition": "Buddhist",
+        "neighborhood": "Chinatown",
+        "congregation": 300,
+        "leader": "Rev. Kenji Tanaka",
+        "character": "Jodo Shinshu, Japanese-American heritage"
+      },
+      {
+        "name": "Lake Merritt Mindfulness Sangha",
+        "tradition": "Buddhist",
+        "neighborhood": "Downtown",
+        "congregation": 500,
+        "leader": "Tao Lee",
+        "character": "diverse sangha, social justice dharma"
+      }
+    ]
+  },
+  "cityWide": {
+    "population": {
+      "totalPopulation": 387278.0135,
+      "illnessRate": 0.1006551594,
+      "employmentRate": 0.9013018272,
+      "migration": 1083,
+      "economy": "stable",
+      "sentiment": 0.44,
+      "cycleWeight": "high-signal",
+      "shockFlag": "shock-flag"
+    },
+    "events": [
+      {
+        "type": "infra-incident",
+        "domain": "INFRASTRUCTURE",
+        "severity": "low",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "CELEBRITY",
+        "severity": "low",
+        "neighborhood": "Uptown"
+      },
+      {
+        "type": "safety-incident",
+        "domain": "SAFETY",
+        "severity": "low",
+        "neighborhood": "Downtown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "TRAFFIC",
+        "severity": "low",
+        "neighborhood": "Uptown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "CELEBRITY",
+        "severity": "low",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "GENERAL",
+        "severity": "low",
+        "neighborhood": "Laurel"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "East Oakland"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Fruitvale"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Adams Point"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "West Oakland"
+      }
+    ]
+  },
+  "initiativeDecisions": {
+    "stabilization-fund": {
+      "initiative": "INIT-001",
+      "initiativeId": "INIT-001",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-002)",
+      "consolidatedFrom": [
+        "STMT-103-MAYOR-002 (Mayor — West Oakland Stabilization Fund — Month-Five Disbursement)",
+        "STMT-103-okoro-001 (okoro — West Oakland Stabilization Fund disbursement)",
+        "STMT-103-opp_faction-001 (OPP — West Oakland Stabilization Fund Month-Five Disbursement)",
+        "STMT-103-stabilization_fund-001 (Webb — Month-five disbursement batch)",
+        "STMT-103-stabilization_fund-002 (Webb — West Oakland service)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C103: Month-five disbursement batch approved (7 households), total disbursed: 52 of ~280.",
+        "NextScheduledAction": "Month-six disbursement batch review",
+        "NextActionCycle": 104
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    },
+    "oari": {
+      "initiative": "INIT-002",
+      "initiativeId": "INIT-002",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-003)",
+      "consolidatedFrom": [
+        "STMT-103-MAYOR-003 (Mayor — Oakland Alternative Response Initiative — D7 Community Satisfaction Survey)",
+        "STMT-103-oari-001 (Tran-Muñoz — D7 Satisfaction Survey Release)",
+        "STMT-103-oari-002 (Tran-Muñoz — West Oakland Operations)",
+        "STMT-103-police_chief-002 (Chief — OARI Pilot Expansion)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-002",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C103: Executive order issued to create community task force for D7 satisfaction survey review.",
+        "NextScheduledAction": "Task force recommendations due",
+        "NextActionCycle": 105
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    },
+    "transit-hub": {
+      "initiative": "INIT-003",
+      "initiativeId": "INIT-003",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-004)",
+      "consolidatedFrom": [
+        "STMT-103-MAYOR-004 (Mayor — Fruitvale Transit Hub Phase II — Visioning Compliance Review)",
+        "STMT-103-opp_faction-002 (OPP — Fruitvale Transit Hub Phase II Compliance Review)",
+        "STMT-103-transit_hub-001 (Soria Dominguez — Fruitvale Transit Hub Phase II)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-003",
+        "ImplementationPhase": "visioning-complete",
+        "MilestoneNotes": "C103: Bureau review approved; visioning phase complete; transitioning to design phase.",
+        "NextScheduledAction": "Design phase kickoff",
+        "NextActionCycle": 105
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    },
+    "health-center": {
+      "initiative": "INIT-005",
+      "initiativeId": "INIT-005",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-005)",
+      "consolidatedFrom": [
+        "STMT-103-health_center-001 (Chen-Ramirez — HCAI resolution)",
+        "STMT-103-health_center-002 (Chen-Ramirez — Temescal engagement)",
+        "STMT-103-MAYOR-005 (Mayor — Temescal Community Health Center — HCAI First-Comments Resolution)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C103: HCAI first-comments window resolved; Phase 1 closed; construction accelerated.",
+        "NextScheduledAction": "Phase 2 construction progress review",
+        "NextActionCycle": 104
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    },
+    "baylight": {
+      "initiative": "INIT-006",
+      "initiativeId": "INIT-006",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-006)",
+      "consolidatedFrom": [
+        "STMT-103-baylight_authority-001 (Ramos — Baylight District Phase II Shortlist)",
+        "STMT-103-baylight_authority-002 (Ramos — Baylight District Vendor Selection)",
+        "STMT-103-crc_faction-003 (CRC — Baylight District Shortlist)",
+        "STMT-103-ind_swing-001 (IND — Baylight District Phase II Shortlist)",
+        "STMT-103-MAYOR-006 (Mayor — Baylight District — Phase II Shortlist Publication)",
+        "STMT-103-opp_faction-004 (OPP — Baylight District Phase II Shortlist Credit Claim)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation.",
+        "NextScheduledAction": "Final bid evaluation and selection",
+        "NextActionCycle": 105
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    }
+  }
+}

@@ -1,0 +1,261 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+      "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record establishes the event; it does not establish what happened in the room.",
+        "anchorFacts": [
+          "Adash Stanley recorded 23 points and 7 assists.",
+          "The Oaks preseason record is 0-1."
+        ],
+        "accessEvidence": {
+          "state": "NOT_SUPPLIED",
+          "facts": []
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "NOT_SUPPLIED",
+          "facts": []
+        },
+        "missing": [
+          "reporter attendance or access",
+          "room mood or witnessed action",
+          "quotes or dialogue",
+          "injury detail or team response beyond the supplied record"
+        ],
+        "sceneRule": "No scene is authorized unless the Packet supplies an observed place and action.",
+        "sourcePointers": [
+          "output/world_summary_c103.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Jack London",
+      "score": null,
+      "src": "world_summary_c103.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01023",
+          "name": "Adash Stanley",
+          "profile": "Adash Stanley — PG / The Oaks — Lake Merritt",
+          "why": "feed-names",
+          "role": "PG / The Oaks ",
+          "hood": "Lake Merritt"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-b612e3776eb6"
+      },
+      {
+        "t": "FACT",
+        "text": "Adash Stanley recorded 23 points and 7 assists.",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-809f4c3d6112"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks preseason record is 0-1.",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-df8c4e55c3c4"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+      "label": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+      "hookLine": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+      "kind": "sideline-signal",
+      "hood": "Jack London",
+      "popids": [
+        "POP-01023"
+      ],
+      "citizens": [
+        "Adash Stanley (POP-01023)"
+      ],
+      "ref": "world_summary_c103.md ## Sports",
+      "cycle": 103
+    },
+    "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "{\n  \"focus\": \"Adash Stanley's performance in the Oaks preseason game\",\n  \"why\": \"Adash Stanley recorded 23 points and 7 assists in the Oaks' preseason opener, which ended in a loss.\",\n  \"checks\": [\n    \"Adash Stanley's role as PG for the Oaks\",\n    \"The Oaks' preseason record now stands at 0-1\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-01023\",\n      \"question\": \"How does Adash Stanley feel about his individual performance despite the team's loss?\",\n      \"basis\": \"Adash Stanley recorded 23 points and 7 assists in the Oaks' preseason opener.\"\n    }\n  ],\n  \"interpretation\": \"Adash Stanley's strong individual performance highlights his potential impact for the Oaks this season, even in a loss.\",\n  \"unverifiedLead\": [\n    \"Is Adash Stanley expected to take on a larger leadership role this season?\",\n    \"How does the coaching staff plan to build on Adash Stanley's performance moving forward?\"\n  ],\n  \"closeQuestion\": \"What adjustments will the Oaks make to turn individual performances like Adash Stanley's into wins?\"\n}",
+    "plan": {
+      "focus": "Adash Stanley's performance in the Oaks preseason game",
+      "why": "Adash Stanley recorded 23 points and 7 assists in the Oaks' preseason opener, which ended in a loss.",
+      "checks": [
+        "Adash Stanley's role as PG for the Oaks",
+        "The Oaks' preseason record now stands at 0-1"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01023",
+          "question": "How does Adash Stanley feel about his individual performance despite the team's loss?",
+          "basis": "Adash Stanley recorded 23 points and 7 assists in the Oaks' preseason opener."
+        }
+      ],
+      "interpretation": "Adash Stanley's strong individual performance highlights his potential impact for the Oaks this season, even in a loss.",
+      "unverifiedLead": [
+        "Is Adash Stanley expected to take on a larger leadership role this season?",
+        "How does the coaching staff plan to build on Adash Stanley's performance moving forward?"
+      ],
+      "closeQuestion": "What adjustments will the Oaks make to turn individual performances like Adash Stanley's into wins?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-08-13T15:35:24.726Z"
+}

@@ -1,0 +1,42 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "West Oakland Stabilization Fund is listed as passed, and its supplied phase is disbursement active.",
+        "sourceRef": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      }
+    ]
+  },
+  "approval": {
+    "status": "canon-approved",
+    "approvedBy": "builder",
+    "approvedAt": "2026-08-13"
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-f1973639de72",
+    "draftSha256": "374334774d7790d1e3ae4f03eebadf9c2cf4434b68e6c1d445e6105ccd83d6d5",
+    "verdict": "output/cron-compare/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T07:03:38.205Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T07:44:52.127Z"
+}

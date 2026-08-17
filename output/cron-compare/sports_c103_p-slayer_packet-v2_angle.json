@@ -15,26 +15,26 @@
     },
     "task": {
       "goal": "Plan one Article chase without choosing a new assignment",
-      "assignment": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "assignment": "Pablo Almanzar throws a No No in his MLB debut",
       "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
       "creativeBrief": {
         "kind": "fan-heat",
-        "fanCharge": "fury",
+        "fanCharge": "dare",
         "bagModes": [
-          "1 Hate the Move",
-          "3 Friction Pivot"
+          "3 Friction Pivot",
+          "9 Breakout Feeling"
         ],
-        "friction": "The stands feel sold out or sold short — write into that gap, not the press release.",
-        "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+        "friction": "Handoff feeling vs funeral feeling — pick a side.",
+        "centralFeeling": "Oakland should feel dared to show up louder tomorrow.",
         "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
         "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
       }
     },
     "signal": {
-      "kind": "roster-move",
-      "hood": "Baylight District",
+      "kind": "prospect-callup",
+      "hood": "Downtown",
       "score": null,
-      "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
+      "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
       "nearby": [
         {
           "text": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
@@ -63,32 +63,7 @@
         "editor-assignment",
         "desk-signal"
       ],
-      "candidates": [
-        {
-          "pop": null,
-          "name": "Isley Kelley",
-          "profile": "Isley Kelley",
-          "why": "feed-names"
-        },
-        {
-          "pop": null,
-          "name": "Isley Kelley",
-          "profile": "Isley Kelley",
-          "why": "feed-names"
-        },
-        {
-          "pop": null,
-          "name": "Mike Paulson",
-          "profile": "Mike Paulson",
-          "why": "feed-names"
-        },
-        {
-          "pop": null,
-          "name": "Isley Kelley",
-          "profile": "Isley Kelley",
-          "why": "feed-names"
-        }
-      ]
+      "candidates": []
     },
     "known": [
       {
@@ -99,39 +74,39 @@
       },
       {
         "t": "FACT",
-        "text": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
-        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
-        "id": "F-bb64a5d01ffa"
+        "text": "Pablo Almanzar throws a No No in his MLB debut",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+        "id": "F-a63e7221f454"
       },
       {
         "t": "FACT",
-        "text": "The stands feel sold out or sold short — write into that gap, not the press release.",
-        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
-        "id": "F-17e052a35c20"
+        "text": "Handoff feeling vs funeral feeling — pick a side.",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+        "id": "F-bb6374332061"
       },
       {
         "t": "FACT",
-        "text": "StoryAngle (feed): Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
-        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
-        "id": "F-f5ccbb8defe4"
+        "text": "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+        "id": "F-e6a443c511ac"
       },
       {
         "t": "FACT",
-        "text": "Team record (feed): 107-31 · streak W3",
-        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
-        "id": "F-4a594bb28620"
+        "text": "Team record (feed): 124-34 · streak W15",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+        "id": "F-087ac6940a86"
       },
       {
         "t": "FACT",
-        "text": "Stats (feed): Isley Kelly, .339avg, 28hr, 92rbi, 7.1war",
-        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
-        "id": "F-8df40afc09fe"
+        "text": "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+        "id": "F-33b60ab127dd"
       },
       {
         "t": "FACT",
-        "text": "Event: A's — re-signing (late-season)",
-        "src": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
-        "id": "F-1a6855793a4e"
+        "text": "Event: A's — player-feature (late-season)",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+        "id": "F-dc813995cd64"
       }
     ],
     "limits": {
@@ -176,27 +151,28 @@
   },
   "assignment": {
     "story": {
-      "ref": "Oakland_Sports_Feed cycle 102; world_summary_c103.md \"## Sports\" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ",
-      "label": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
-      "kind": "roster-move",
-      "angle": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
-      "hookLine": "The stands feel sold out or sold short — write into that gap, not the press release.",
-      "hood": "Baylight District",
+      "ref": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+      "label": "Pablo Almanzar throws a No No in his MLB debut",
+      "kind": "prospect-callup",
+      "angle": "Pablo Almanzar throws a No No in his MLB debut",
+      "hookLine": "Handoff feeling vs funeral feeling — pick a side.",
+      "hood": "Downtown",
       "team": "A's",
-      "eventKind": "re-signing",
-      "popids": [],
-      "citizens": [
-        "Isley Kelley",
-        "Isley Kelley",
-        "Mike Paulson",
-        "Isley Kelley"
+      "eventKind": "player-feature",
+      "popids": [
+        "POP-00001"
       ],
-      "pulseClass": "roster-move",
-      "pulseScore": 79,
-      "fanCharge": "fury",
+      "citizens": [
+        "Pablo Almanzar",
+        "Vinnie Keane — Designated Hitter, Oakland A's Legend, Rockridge",
+        "Pablo Alamazar"
+      ],
+      "pulseClass": "prospect-callup",
+      "pulseScore": 58,
+      "fanCharge": "dare",
       "bagModeIds": [
-        1,
-        3
+        3,
+        9
       ]
     },
     "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average."
@@ -204,41 +180,39 @@
   "jaxSlice": null,
   "pslayerSlice": {
     "pulse": {
-      "className": "roster-move",
+      "className": "prospect-callup",
       "classes": [
-        "roster-move",
-        "injury-load",
-        "win-streak",
-        "award-board"
+        "prospect-callup",
+        "win-streak"
       ],
-      "score": 79,
-      "label": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+      "score": 58,
+      "label": "Pablo Almanzar throws a No No in his MLB debut",
       "team": "A's",
-      "eventKind": "re-signing",
+      "eventKind": "player-feature",
       "seasonType": "late-season",
-      "feedCycle": 102,
-      "record": "107-31",
-      "streak": "W3",
+      "feedCycle": 103,
+      "record": "124-34",
+      "streak": "W15",
       "mood": "electric",
       "fanSentiment": "high",
-      "neighborhood": "Baylight District",
-      "notes": "In a somewhat shocking turn of events Mike Paulson and The Oakland As have decided to resign Isely Kelly to a 2-year $50M contract. Word was that Kelley was seeking 4-years but likely go the boost in per year he was looking for. Kelley who turns 34 next season has shown resurgence this season as he in a battle for the batting title and MVP with fellow teammate Danny Horn. The news comes at an oppu",
-      "stats": "Isley Kelly, .339avg, 28hr, 92rbi, 7.1war"
+      "neighborhood": "Downtown",
+      "notes": "Pablo Alamazar (SP) made his major league debut in NY vs the Yankees, Pablo Almanzar just called up for the callup throws a no hitter while striking out 10. Making a major splash in his MLB debut in one the most historic stadiums on the planet. To make the evening is more festive as As fan Vinnie Keane hits 3 run home run in his final visit to NY.",
+      "stats": "Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI"
     },
     "charge": {
       "bagModes": [
         {
-          "id": 1,
-          "name": "Hate the Move"
-        },
-        {
           "id": 3,
           "name": "Friction Pivot"
+        },
+        {
+          "id": 9,
+          "name": "Breakout Feeling"
         }
       ],
-      "fanCharge": "fury",
-      "foilNumber": "7.1war",
-      "centralFeeling": "Oakland should feel the FO heard the bleachers.",
+      "fanCharge": "dare",
+      "foilNumber": "9IP",
+      "centralFeeling": "Oakland should feel dared to show up louder tomorrow.",
       "palette": [
         "fury",
         "euphoria",
@@ -253,55 +227,48 @@
       "reporter": "P.Slayer",
       "bagModes": [
         {
-          "id": 1,
-          "name": "Hate the Move"
-        },
-        {
           "id": 3,
           "name": "Friction Pivot"
+        },
+        {
+          "id": 9,
+          "name": "Breakout Feeling"
         }
       ],
-      "fanCharge": "fury",
+      "fanCharge": "dare",
       "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
       "anchorFacts": [
-        "StoryAngle (feed): Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
-        "Team record (feed): 107-31 · streak W3",
-        "Stats (feed): Isley Kelly, .339avg, 28hr, 92rbi, 7.1war",
-        "Event: A's — re-signing (late-season)"
+        "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
+        "Team record (feed): 124-34 · streak W15",
+        "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+        "Event: A's — player-feature (late-season)"
       ],
-      "foilNumber": "7.1war",
-      "centralFeeling": "Oakland should feel the FO heard the bleachers."
+      "foilNumber": "9IP",
+      "centralFeeling": "Oakland should feel dared to show up louder tomorrow."
     },
     "friction": {
-      "a": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
-      "b": "FO language (transition / flexibility / prepared) or the tidy \"genius in hindsight\" read",
-      "frame": "The stands feel sold out or sold short — write into that gap, not the press release."
+      "a": "Kids producing / call-ups on the feed",
+      "b": "Farewell-season eulogy habit",
+      "frame": "Handoff feeling vs funeral feeling — pick a side."
     },
     "priorTakes": [],
     "players": [
       {
-        "name": "Isley Kelley",
+        "name": "Pablo Almanzar",
         "popid": null,
         "role": null,
         "neighborhood": null,
         "why": "feed-names"
       },
       {
-        "name": "Isley Kelley",
-        "popid": null,
-        "role": null,
-        "neighborhood": null,
+        "name": "Vinnie Keane",
+        "popid": "POP-00001",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Rockridge",
         "why": "feed-names"
       },
       {
-        "name": "Mike Paulson",
-        "popid": null,
-        "role": null,
-        "neighborhood": null,
-        "why": "feed-names"
-      },
-      {
-        "name": "Isley Kelley",
+        "name": "Pablo Alamazar",
         "popid": null,
         "role": null,
         "neighborhood": null,
@@ -309,9 +276,9 @@
       }
     ],
     "scene": {
-      "neighborhood": "Baylight District",
-      "record": "107-31",
-      "streak": "W3",
+      "neighborhood": "Downtown",
+      "record": "124-34",
+      "streak": "W15",
       "mood": "electric",
       "fanSentiment": "high",
       "colorRoom": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
@@ -322,7 +289,7 @@
         "cycle": 102,
         "team": "A's",
         "primary": "roster-move",
-        "angle": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?",
+        "angle": "Isley Kelley re-signs, don't close the door just yet on the era, is this the right move for an aging star?",
         "priorHits": 0
       },
       {
@@ -378,19 +345,19 @@
   "angleRead": {
     "name": "P Slayer",
     "popid": "POP-00008",
-    "text": "{\n  \"focus\": \"Isley Kelley's resignation\",\n  \"why\": \"the stands feel sold out or sold short\",\n  \"checks\": [\n    \"friction pivot required\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"a move that sparks debate among fans\",\n  \"unverifiedLead\": [\n    \"the right move for an aging star\"\n  ],\n  \"closeQuestion\": \"is this the end of an era for the A's?\"\n}",
+    "text": "{\n  \"focus\": \"Pablo Almanzar's no-hitter\",\n  \"why\": \"It's a historic moment for the A's\",\n  \"checks\": [\n    \"Handoff feeling vs funeral feeling\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"The city should feel dared to show up louder tomorrow\",\n  \"unverifiedLead\": [\n    \"I think this win could be a turning point for the team\"\n  ],\n  \"closeQuestion\": \"Will the A's keep their momentum going?\"\n}",
     "plan": {
-      "focus": "Isley Kelley's resignation",
-      "why": "the stands feel sold out or sold short",
+      "focus": "Pablo Almanzar's no-hitter",
+      "why": "It's a historic moment for the A's",
       "checks": [
-        "friction pivot required"
+        "Handoff feeling vs funeral feeling"
       ],
       "targets": [],
-      "interpretation": "a move that sparks debate among fans",
+      "interpretation": "The city should feel dared to show up louder tomorrow",
       "unverifiedLead": [
-        "the right move for an aging star"
+        "I think this win could be a turning point for the team"
       ],
-      "closeQuestion": "is this the end of an era for the A's?"
+      "closeQuestion": "Will the A's keep their momentum going?"
     }
   },
   "lanePicks": [
@@ -426,5 +393,5 @@
     }
   ],
   "laneEntries": 8,
-  "ranAt": "2026-08-11T11:15:50.661Z"
+  "ranAt": "2026-08-13T11:17:04.694Z"
 }

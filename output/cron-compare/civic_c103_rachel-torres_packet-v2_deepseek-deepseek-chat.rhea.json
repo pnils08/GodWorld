@@ -3,68 +3,42 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
-  "pass": false,
-  "flags": [
-    {
-      "claim": "Vladimir Gonzalez ... 'What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.' / Dana Reeve ... 'What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.'",
-      "issue": "Fabricated and identical duplicated quotes attributed to both Vladimir Gonzalez and Dana Reeve, which do not exist in the ground truth.",
-      "severity": "high"
-    },
-    {
-      "claim": "Similar concerns surfaced in East Oakland, where Tomas Renteria observed the same pattern.",
-      "issue": "Tomas Renteria is canonically from Fruitvale, not East Oakland.",
-      "severity": "high"
-    },
-    {
-      "claim": "Quotes and interviews attributed to Vladimir Gonzalez, Tomas Renteria, and Dana Reeve.",
-      "issue": "Violates the persona-specific sourcing authority for Rachel Torres (rachel-public-safety-v1), which prohibits claiming interviews, observations, or quotes absent from the packet.",
-      "severity": "high"
-    }
-  ],
-  "flagCount": 3,
-  "highSeverityCount": 3,
-  "summary": "Failed due to fabricated and duplicated quotes, citizen neighborhood mismatch, and violation of persona-specific sourcing authority.",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft correctly identifies the operational status and target neighborhoods of the Oakland Alternative Response Initiative without any sourcing or canon violations.",
   "review": {
     "profileId": "rachel-public-safety-v1",
-    "canonIntegrity": "fail",
-    "texture": "overreach"
+    "canonIntegrity": "pass",
+    "texture": "authorized"
   },
   "reviewProfile": {
     "id": "rachel-public-safety-v1",
-    "packageVersion": "RACHEL-LEP2-1",
-    "manifestId": "AM-9405edfd8e5b",
+    "packageVersion": null,
+    "manifestId": "AM-bcd9d63c8752",
     "lexicalObservations": []
   },
   "nameCheck": {
-    "verified": [
-      "Dana Reeve",
-      "Rachel Torres",
-      "Tomas Renteria",
-      "Vladimir Gonzalez"
-    ],
-    "unverified": [
-      "By Sgt",
-      "Oakland's Alternative Response Initiative",
-      "Shows Uneven Footprint",
-      "West Oakland-Fruitvale"
-    ]
+    "verified": [],
+    "unverified": []
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 3,
+      "names": 0,
       "businesses": 0,
-      "storylines": 1,
-      "hoods": 0,
+      "storylines": 0,
+      "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": true
+    "packetChecked": false
   },
-  "apiCostUsd": 0.0667,
-  "durationMs": 24689,
+  "apiCostUsd": 0.0445,
+  "durationMs": 10384,
   "parseError": false,
-  "ranAt": "2026-08-11T23:15:43.757Z"
+  "ranAt": "2026-08-13T07:03:26.088Z"
 }

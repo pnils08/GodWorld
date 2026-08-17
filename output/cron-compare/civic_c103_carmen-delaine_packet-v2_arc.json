@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "storyline": {
+    "slug": "west-oakland-marcus-wright-initiative",
+    "verb": "opened"
+  },
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00288",
+      "name": "Marcus Wright",
+      "quote": "I been hearing folks talk about this fund for months, but ain't nobody on my block seen a dime yet. The Tribune oughta ask why the money's moving so slow when people out here need roofs fixed now."
+    }
+  ],
+  "claim": "I been hearing folks talk about this fund for months, but ain't nobody on my block seen a dime yet. The Tribune oughta ask why the money's moving so slow when people out here need roofs fixed now.",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-14T18:16:35.196Z"
+}

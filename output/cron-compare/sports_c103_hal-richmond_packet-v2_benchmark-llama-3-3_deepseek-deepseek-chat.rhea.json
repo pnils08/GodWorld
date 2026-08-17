@@ -1,0 +1,42 @@
+{
+  "draft": "output/cron-compare/sports_c103_hal-richmond_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "5b83ecda369471cff04bd316ca9ea25dc50dc36a78674daeff1d0daa55b409e8",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All claims regarding Vinnie Keane's C103 stats and the A's record are fully verified against the ground truth.",
+  "review": {
+    "profileId": "rhea-morgan",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": null,
+  "nameCheck": {
+    "verified": [
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": false
+  },
+  "apiCostUsd": 0.0477,
+  "durationMs": 12111,
+  "parseError": false,
+  "ranAt": "2026-08-13T15:25:34.950Z"
+}

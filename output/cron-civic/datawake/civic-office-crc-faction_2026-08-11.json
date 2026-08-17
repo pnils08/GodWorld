@@ -1,0 +1,33 @@
+{
+  "office": "crc_faction",
+  "agentDir": "civic-office-crc-faction",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-08-11",
+  "cycle": 103,
+  "model": "deepseek/deepseek-chat",
+  "statement": {
+    "statementId": "STMT-103-CRC-001",
+    "cycle": 103,
+    "office": "crc_faction",
+    "speaker": "Warren Ashford",
+    "popId": "POP-00504",
+    "type": "fiscal_warning",
+    "topic": "KONO Economic Sentiment & Small Business Retention",
+    "position": "oversight",
+    "quote": "When stable storefronts become the exception rather than the expectation, that's when audits prove their worth.",
+    "fullStatement": "KONO's street trade holding steady while other corridors struggle points to deeper economic trends we need to understand. I'll be requesting the last six quarters' small-business retention reports from Economic Development to map service gaps. A 0.27 sentiment score against citywide 0.489 suggests something systemic - I want to see which interventions are working before we scale programs elsewhere.",
+    "context": "Continuing oversight of small business retention programs district-wide",
+    "tone": "data-sharp",
+    "targets": [
+      "business",
+      "civic"
+    ],
+    "relatedInitiatives": [],
+    "relatedMembers": []
+  },
+  "action": "Audit request for small-business retention reports in KONO",
+  "numberMoved": null,
+  "ranAt": "2026-08-16T01:13:03.586Z"
+}

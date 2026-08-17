@@ -1,0 +1,1004 @@
+{
+  "meta": {
+    "type": "civic-voice-packet",
+    "office": "crc_faction",
+    "cycle": 103
+  },
+  "faction": {
+    "id": "crc_faction",
+    "members": [
+      {
+        "officeId": "COUNCIL-D6",
+        "title": "City Council District 6",
+        "district": "D6",
+        "name": "Elliott Crane",
+        "popId": "POP-00044",
+        "faction": "CRC",
+        "status": "active",
+        "votingPower": "yes",
+        "approval": 54,
+        "notes": "Business Caucus Leader",
+        "neighborhoods": [
+          "Montclair",
+          "Piedmont Ave"
+        ]
+      },
+      {
+        "officeId": "COUNCIL-D7",
+        "title": "City Council District 7",
+        "district": "D7",
+        "name": "Warren Ashford",
+        "popId": "POP-00504",
+        "faction": "CRC",
+        "status": "active",
+        "votingPower": "yes",
+        "approval": 48,
+        "notes": "Temescal/Rockridge",
+        "neighborhoods": [
+          "Temescal",
+          "Rockridge",
+          "KONO"
+        ]
+      },
+      {
+        "officeId": "COUNCIL-D8",
+        "title": "City Council District 8",
+        "district": "D8",
+        "name": "Nina Chen",
+        "popId": "POP-00505",
+        "faction": "CRC",
+        "status": "active",
+        "votingPower": "yes",
+        "approval": 54,
+        "notes": "Lake Merritt",
+        "neighborhoods": [
+          "Lake Merritt",
+          "Adams Point",
+          "Grand Lake",
+          "Eastlake"
+        ]
+      }
+    ],
+    "districtNeighborhoodMap": {
+      "D6": {
+        "member": "Elliott Crane",
+        "faction": "CRC",
+        "neighborhoods": [
+          "Montclair",
+          "Piedmont Ave"
+        ],
+        "citizenCount": 49
+      },
+      "D7": {
+        "member": "Warren Ashford",
+        "faction": "CRC",
+        "neighborhoods": [
+          "Temescal",
+          "Rockridge",
+          "KONO"
+        ],
+        "citizenCount": 167
+      },
+      "D8": {
+        "member": "Nina Chen",
+        "faction": "CRC",
+        "neighborhoods": [
+          "Lake Merritt",
+          "Adams Point",
+          "Grand Lake",
+          "Eastlake"
+        ],
+        "citizenCount": 100
+      }
+    }
+  },
+  "initiatives": [
+    {
+      "id": "INIT-001",
+      "name": "West Oakland Stabilization Fund",
+      "status": "passed",
+      "budget": "$28M",
+      "voteRequirement": "6-3",
+      "voteCycle": "78",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "West Oakland",
+      "policyDomain": "economic",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)"
+    },
+    {
+      "id": "INIT-002",
+      "name": "Oakland Alternative Response Initiative",
+      "status": "passed",
+      "budget": "$12.5M",
+      "voteRequirement": "5-4",
+      "voteCycle": "82",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
+      "policyDomain": "safety",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes."
+    },
+    {
+      "id": "INIT-005",
+      "name": "Temescal Community Health Center",
+      "status": "passed",
+      "budget": "$45M",
+      "voteRequirement": "5-4",
+      "voteCycle": "80",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "Temescal",
+      "policyDomain": "health",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)"
+    },
+    {
+      "id": "INIT-006",
+      "name": "Baylight District — Final Council Vote",
+      "status": "passed",
+      "budget": "$2.1B",
+      "voteRequirement": "5-4",
+      "voteCycle": "83",
+      "outcome": "PASSED",
+      "leadFaction": "OPP",
+      "oppositionFaction": "CRC",
+      "swingVoter": "Ramon Vega",
+      "affectedNeighborhoods": "Jack London, Downtown",
+      "policyDomain": "sports",
+      "consequences": "Initiative approved. Implementation begins.",
+      "notes": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes."
+    }
+  ],
+  "districtData": {
+    "metrics": {
+      "count": 8,
+      "avgSentiment": 0.482,
+      "avgCrimeIndex": 0.6,
+      "avgRetailVitality": 11.4,
+      "totalIncidents": 31,
+      "neighborhoods": [
+        {
+          "name": "Temescal",
+          "sentiment": 0.55,
+          "crimeIndex": 0.76,
+          "retailVitality": 13.51,
+          "incidents": 6,
+          "responseTime": 11.7,
+          "demographics": null
+        },
+        {
+          "name": "Rockridge",
+          "sentiment": 0.53,
+          "crimeIndex": 0.37,
+          "retailVitality": 14.78,
+          "incidents": 2,
+          "responseTime": 10.1,
+          "demographics": null
+        },
+        {
+          "name": "Adams Point",
+          "sentiment": 0.62,
+          "crimeIndex": 0.67,
+          "retailVitality": 8.44,
+          "incidents": 6,
+          "responseTime": 11.6,
+          "demographics": null
+        },
+        {
+          "name": "Grand Lake",
+          "sentiment": 0.55,
+          "crimeIndex": 0.57,
+          "retailVitality": 13.24,
+          "incidents": 3,
+          "responseTime": 10.7,
+          "demographics": null
+        },
+        {
+          "name": "Piedmont Ave",
+          "sentiment": 0.38,
+          "crimeIndex": 0.38,
+          "retailVitality": 10.4,
+          "incidents": 3,
+          "responseTime": 10.2,
+          "demographics": null
+        },
+        {
+          "name": "Eastlake",
+          "sentiment": 0.51,
+          "crimeIndex": 0.55,
+          "retailVitality": 8.78,
+          "incidents": 0,
+          "responseTime": 0,
+          "demographics": null
+        },
+        {
+          "name": "KONO",
+          "sentiment": 0.27,
+          "crimeIndex": 0.68,
+          "retailVitality": 9.69,
+          "incidents": 7,
+          "responseTime": 11.9,
+          "demographics": null
+        },
+        {
+          "name": "Lake Merritt",
+          "sentiment": 0.45,
+          "crimeIndex": 0.85,
+          "retailVitality": 12.07,
+          "incidents": 4,
+          "responseTime": 11.1,
+          "demographics": null
+        }
+      ]
+    },
+    "crimeMetrics": [
+      {
+        "neighborhood": "Temescal",
+        "propertyCrime": 43,
+        "violentCrime": 33,
+        "responseTime": 11.7,
+        "incidents": 6
+      },
+      {
+        "neighborhood": "Rockridge",
+        "propertyCrime": 30,
+        "violentCrime": 22,
+        "responseTime": 10.1,
+        "incidents": 2
+      },
+      {
+        "neighborhood": "Adams Point",
+        "propertyCrime": 38,
+        "violentCrime": 29,
+        "responseTime": 11.6,
+        "incidents": 6
+      },
+      {
+        "neighborhood": "Grand Lake",
+        "propertyCrime": 35,
+        "violentCrime": 22,
+        "responseTime": 10.7,
+        "incidents": 3
+      },
+      {
+        "neighborhood": "Piedmont Ave",
+        "propertyCrime": 23,
+        "violentCrime": 15,
+        "responseTime": 10.2,
+        "incidents": 3
+      },
+      {
+        "neighborhood": "Eastlake",
+        "propertyCrime": 0,
+        "violentCrime": 0,
+        "responseTime": 0,
+        "incidents": 0
+      },
+      {
+        "neighborhood": "KONO",
+        "propertyCrime": 41,
+        "violentCrime": 27,
+        "responseTime": 11.9,
+        "incidents": 7
+      },
+      {
+        "neighborhood": "Lake Merritt",
+        "propertyCrime": 51,
+        "violentCrime": 35,
+        "responseTime": 11.1,
+        "incidents": 4
+      }
+    ],
+    "transitStations": [
+      {
+        "station": "Lake Merritt",
+        "ridership": 2298,
+        "onTimePerformance": 0.81,
+        "trafficIndex": 50,
+        "notes": "light ridership"
+      },
+      {
+        "station": "MacArthur",
+        "ridership": 4235,
+        "onTimePerformance": 0.85,
+        "trafficIndex": 50,
+        "notes": "light ridership"
+      },
+      {
+        "station": "Rockridge",
+        "ridership": 3417,
+        "onTimePerformance": 0.85,
+        "trafficIndex": 50,
+        "notes": "light ridership"
+      }
+    ],
+    "citizenSummary": {
+      "total": 316,
+      "tierBreakdown": {
+        "1": 10,
+        "2": 24,
+        "3": 59,
+        "4": 223
+      },
+      "statusBreakdown": {
+        "Active": 316
+      },
+      "avgIncome": 529657,
+      "notableCitizens": [
+        {
+          "popId": "POP-00001",
+          "name": "Vinnie Keane",
+          "tier": 1,
+          "role": "Designated Hitter, Oakland A's Legend",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00002",
+          "name": "Amara Keane",
+          "tier": 2,
+          "role": "Pianist, Philanthropist",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00005",
+          "name": "Mags Corliss",
+          "tier": 1,
+          "role": "Editor-in-Chief",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00012",
+          "name": "Elliot Graye",
+          "tier": 2,
+          "role": "Journalist, Ethics & Faith Journalist",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00013",
+          "name": "Maria Keen",
+          "tier": 2,
+          "role": "Journalist, Cultural Liason",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00017",
+          "name": "Anthony Raines",
+          "tier": 1,
+          "role": "Journalist, Lead Beat Reporter - Oakland A's",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00018",
+          "name": "Benji Dillon",
+          "tier": 1,
+          "role": "Pitcher, Oakland A's Legend",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00019",
+          "name": "Isley Kelley",
+          "tier": 1,
+          "role": "Shortstop, Oakland A's Legend",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00022",
+          "name": "Danny Horn",
+          "tier": 1,
+          "role": "Center Fielder, Oakland A's - Best player in the MLB",
+          "neighborhood": "Temescal",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00029",
+          "name": "Alisha Peña",
+          "tier": 2,
+          "role": "Female Model",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00034",
+          "name": "Avery Santana",
+          "tier": 1,
+          "role": "Mayor of Oakland",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00038",
+          "name": "Theo Park",
+          "tier": 2,
+          "role": "Communications Director",
+          "neighborhood": "Temescal",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00040",
+          "name": "Aaron Whitfield",
+          "tier": 2,
+          "role": "City Manager",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00042",
+          "name": "Ramon Vega",
+          "tier": 2,
+          "role": "City Council President",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 1,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00507",
+          "name": "Mara Vance",
+          "tier": 1,
+          "role": "City Planning Director",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00514",
+          "name": "Vincent Ramirez",
+          "tier": 2,
+          "role": "OPOA President",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00528",
+          "name": "Deacon Seymour",
+          "tier": 1,
+          "role": "Rookie Manager, Oakland A's",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00540",
+          "name": "Jade Orion",
+          "tier": 2,
+          "role": "Musician",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00742",
+          "name": "Maya Torres-Dillon",
+          "tier": 2,
+          "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00745",
+          "name": "Sonia Parikh",
+          "tier": 2,
+          "role": "Podcast Host / Software Engineer",
+          "neighborhood": "Temescal",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00755",
+          "name": "Antoine Vermeer",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 3,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00757",
+          "name": "Daniel Han",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 3,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00759",
+          "name": "Naomi Sterling",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 3,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00760",
+          "name": "Yael Bauer",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Piedmont Ave",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00761",
+          "name": "Idris Karim",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Temescal",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00765",
+          "name": "Anand Krishnamurthy",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00767",
+          "name": "Miriam Goldstein",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 3,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00768",
+          "name": "Eleanor Bishop",
+          "tier": 2,
+          "role": "Senior Pastor / Faith Leader",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 3,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00769",
+          "name": "Dax Monroe",
+          "tier": 2,
+          "role": "Artist",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 2,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00775",
+          "name": "Sam Alvarez",
+          "tier": 2,
+          "role": "Civic & Neighborhood Reporter, OakTown Echo",
+          "neighborhood": "Temescal",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00779",
+          "name": "Nia Patel",
+          "tier": 2,
+          "role": "Economics Reporter, OakTown Echo",
+          "neighborhood": "Rockridge",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-00799",
+          "name": "Jax  Caldera",
+          "tier": 2,
+          "role": "Journalist, freelance accountability writer",
+          "neighborhood": "Temescal",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-01023",
+          "name": "Adash Stanley",
+          "tier": 1,
+          "role": "PG / The Oaks ",
+          "neighborhood": "Lake Merritt",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        },
+        {
+          "popId": "POP-01024",
+          "name": "AJ Dybantsa",
+          "tier": 2,
+          "role": "SF / The Oaks",
+          "neighborhood": "KONO",
+          "displacementRisk": 0,
+          "migrationIntent": "staying"
+        }
+      ],
+      "atDisplacementRisk": 166,
+      "withMigrationIntent": 3
+    },
+    "recentLifeEvents": [
+      {
+        "popId": "POP-00211",
+        "name": "Christopher Johnson",
+        "event": "Education",
+        "text": "read by Lake Merritt during a break",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "popId": "POP-00265",
+        "name": "Matty Lipo",
+        "event": "Education",
+        "text": "read or studied indoors during winter pace",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "popId": "POP-00001",
+        "name": "Vinnie Keane",
+        "event": "Media|source:media|auth:library-s357|holiday:Holiday|holidayPriority:major|occupation:Designated Hitter, Oakland A's Legend|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Striver",
+        "text": "disagreed with a Tribune column out loud to an empty kitchen",
+        "neighborhood": "Rockridge"
+      },
+      {
+        "popId": "POP-00001",
+        "name": "Vinnie Keane",
+        "event": "Holiday|source:holiday|holiday:Holiday|holidayPriority:major|occupation:Designated Hitter, Oakland A's Legend|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Striver",
+        "text": "enjoyed decorations around town",
+        "neighborhood": "Rockridge"
+      },
+      {
+        "popId": "POP-00001",
+        "name": "Vinnie Keane",
+        "event": "Reputation|source:fame|ecl:domain:tribune|holiday:Holiday|holidayPriority:major|occupation:Designated Hitter, Oakland A's Legend|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Striver",
+        "text": "got recognized by a stranger who'd read about them in the Tribune",
+        "neighborhood": "Rockridge"
+      },
+      {
+        "popId": "POP-00002",
+        "name": "Amara Keane",
+        "event": "PrevEvening|source:prevEvening|evening:traffic|holiday:Holiday|holidayPriority:major|occupation:Pianist, Philanthropist|ageGroup:youngAdult|neighborhood:Rockridge|tier:2",
+        "text": "adjusted today's plans after last night's gridlock",
+        "neighborhood": "Rockridge"
+      },
+      {
+        "popId": "POP-00002",
+        "name": "Amara Keane",
+        "event": "Neighborhood|source:nbhdState|auth:library-s357|holiday:Holiday|holidayPriority:major|occupation:Pianist, Philanthropist|ageGroup:youngAdult|neighborhood:Rockridge|tier:2",
+        "text": "overheard a stranger asking about rents on a block nobody used to ask about",
+        "neighborhood": "Rockridge"
+      },
+      {
+        "popId": "POP-00005",
+        "name": "Mags Corliss",
+        "event": "Neighborhood|source:nbhdState|state:trajectory-up|holiday:Holiday|holidayPriority:major|occupation:Editor-in-Chief|ageGroup:adult|neighborhood:Lake Merritt|tier:1|archetype:Connector",
+        "text": "caught themselves bragging a little about the neighborhood lately",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "popId": "POP-00012",
+        "name": "Elliot Graye",
+        "event": "PrevEvening|source:prevEvening|evening:cityEvent|holiday:Holiday|holidayPriority:major|occupation:Journalist, Ethics & Faith Journalist|ageGroup:adult|neighborhood:Lake Merritt|tier:2|archetype:Striver",
+        "text": "heard about Downtown Cultural Festival over in Downtown last night",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "popId": "POP-00012",
+        "name": "Elliot Graye",
+        "event": "Daily|source:familyLife|auth:library-s325|holiday:Holiday|holidayPriority:major|occupation:Journalist, Ethics & Faith Journalist|ageGroup:adult|neighborhood:Lake Merritt|tier:2|archetype:Striver",
+        "text": "stayed thirty minutes after the service just catching up in the parking lot",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "popId": "POP-00012",
+        "name": "Elliot Graye",
+        "event": "Personal|source:reflection|holiday:Holiday|holidayPriority:major|venue:local|occupation:Journalist, Ethics & Faith Journalist|ageGroup:adult|neighborhood:Lake Merritt|tier:2|archetype:Striver",
+        "text": "found a quiet minute at the pergola and felt the season starting to turn",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "popId": "POP-00013",
+        "name": "Maria Keen",
+        "event": "Holiday|source:holiday|holiday:Holiday|holidayPriority:major|occupation:Journalist, Cultural Liason|ageGroup:youngAdult|neighborhood:Lake Merritt|tier:2|archetype:Watcher",
+        "text": "enjoyed decorations around town",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "popId": "POP-00016",
+        "name": "Simon Leary",
+        "event": "Daily|source:familyLife|source:base|holiday:Holiday|holidayPriority:major|occupation:Journalist, The Long View Columnist|ageGroup:adult|neighborhood:Rockridge|tier:3|archetype:Striver",
+        "text": "found a forgotten photograph tucked in a book and sat with it a while",
+        "neighborhood": "Rockridge"
+      },
+      {
+        "popId": "POP-00017",
+        "name": "Anthony Raines",
+        "event": "Neighborhood|source:neighborhood|auth:library-s325|holiday:Holiday|holidayPriority:major|occupation:Journalist, Lead Beat Reporter - Oakland A's|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Connector",
+        "text": "navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes",
+        "neighborhood": "Rockridge"
+      },
+      {
+        "popId": "POP-00017",
+        "name": "Anthony Raines",
+        "event": "PrevEvening|source:prevEvening|evening:crowd|holiday:Holiday|holidayPriority:major|venue:local|occupation:Journalist, Lead Beat Reporter - Oakland A's|ageGroup:adult|neighborhood:Rockridge|tier:1|archetype:Connector",
+        "text": "heard KONO was packed last night near a bookstore corner",
+        "neighborhood": "Rockridge"
+      }
+    ],
+    "faithCommunities": [
+      {
+        "name": "Cathedral of the Living Word",
+        "tradition": "Catholic",
+        "neighborhood": "Lake Merritt",
+        "congregation": 2000,
+        "leader": "Bishop Antoine Vermeer",
+        "character": "architectural landmark, diverse congregation"
+      },
+      {
+        "name": "Adams Point United Methodist",
+        "tradition": "Methodist",
+        "neighborhood": "Adams Point",
+        "congregation": 300,
+        "leader": "Rev. Daniel Han",
+        "character": "progressive, LGBTQ affirming"
+      },
+      {
+        "name": "Temple Beth Or",
+        "tradition": "Reform Jewish",
+        "neighborhood": "Rockridge",
+        "congregation": 700,
+        "leader": "Rabbi Naomi Sterling",
+        "character": "oldest Jewish congregation, interfaith active"
+      },
+      {
+        "name": "B'nai Tikvah Synagogue",
+        "tradition": "Orthodox Jewish",
+        "neighborhood": "Piedmont Ave",
+        "congregation": 250,
+        "leader": "Rabbi Yael Bauer",
+        "character": "traditional observance, community eruv"
+      },
+      {
+        "name": "Temescal Islamic Center",
+        "tradition": "Muslim",
+        "neighborhood": "Temescal",
+        "congregation": 600,
+        "leader": "Imam Idris Karim",
+        "character": "diverse Muslim community, education focus"
+      },
+      {
+        "name": "Bharat Mandir of the East Bay",
+        "tradition": "Hindu",
+        "neighborhood": "Montclair",
+        "congregation": 400,
+        "leader": "Pandit Anand Krishnamurthy",
+        "character": "South Indian traditions, cultural programs"
+      },
+      {
+        "name": "Or Hashalom Renewal Community",
+        "tradition": "Jewish Renewal",
+        "neighborhood": "Grand Lake",
+        "congregation": 400,
+        "leader": "Rabbi Miriam Goldstein",
+        "character": "progressive, social justice"
+      },
+      {
+        "name": "Lakeshore Unitarian Universalist Fellowship",
+        "tradition": "Unitarian",
+        "neighborhood": "Lake Merritt",
+        "congregation": 350,
+        "leader": "Rev. Eleanor Bishop",
+        "character": "interfaith dialogue, humanist welcome"
+      }
+    ]
+  },
+  "cityWide": {
+    "population": {
+      "totalPopulation": 387278.0135,
+      "illnessRate": 0.1006551594,
+      "employmentRate": 0.9013018272,
+      "migration": 1083,
+      "economy": "stable",
+      "sentiment": 0.44,
+      "cycleWeight": "high-signal",
+      "shockFlag": "shock-flag"
+    },
+    "events": [
+      {
+        "type": "infra-incident",
+        "domain": "INFRASTRUCTURE",
+        "severity": "low",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "CELEBRITY",
+        "severity": "low",
+        "neighborhood": "Uptown"
+      },
+      {
+        "type": "safety-incident",
+        "domain": "SAFETY",
+        "severity": "low",
+        "neighborhood": "Downtown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "TRAFFIC",
+        "severity": "low",
+        "neighborhood": "Uptown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "CELEBRITY",
+        "severity": "low",
+        "neighborhood": "Chinatown"
+      },
+      {
+        "type": "misc-event",
+        "domain": "GENERAL",
+        "severity": "low",
+        "neighborhood": "Laurel"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "East Oakland"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Lake Merritt"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Fruitvale"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "Adams Point"
+      },
+      {
+        "type": "misc-event",
+        "domain": "FAITH",
+        "severity": "low",
+        "neighborhood": "West Oakland"
+      }
+    ]
+  },
+  "initiativeDecisions": {
+    "stabilization-fund": {
+      "initiative": "INIT-001",
+      "initiativeId": "INIT-001",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-002)",
+      "consolidatedFrom": [
+        "STMT-103-MAYOR-002 (Mayor — West Oakland Stabilization Fund — Month-Five Disbursement)",
+        "STMT-103-okoro-001 (okoro — West Oakland Stabilization Fund disbursement)",
+        "STMT-103-opp_faction-001 (OPP — West Oakland Stabilization Fund Month-Five Disbursement)",
+        "STMT-103-stabilization_fund-001 (Webb — Month-five disbursement batch)",
+        "STMT-103-stabilization_fund-002 (Webb — West Oakland service)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C103: Month-five disbursement batch approved (7 households), total disbursed: 52 of ~280.",
+        "NextScheduledAction": "Month-six disbursement batch review",
+        "NextActionCycle": 104
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    },
+    "oari": {
+      "initiative": "INIT-002",
+      "initiativeId": "INIT-002",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-003)",
+      "consolidatedFrom": [
+        "STMT-103-MAYOR-003 (Mayor — Oakland Alternative Response Initiative — D7 Community Satisfaction Survey)",
+        "STMT-103-oari-001 (Tran-Muñoz — D7 Satisfaction Survey Release)",
+        "STMT-103-oari-002 (Tran-Muñoz — West Oakland Operations)",
+        "STMT-103-police_chief-002 (Chief — OARI Pilot Expansion)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-002",
+        "ImplementationPhase": "pilot_evaluation",
+        "MilestoneNotes": "C103: Executive order issued to create community task force for D7 satisfaction survey review.",
+        "NextScheduledAction": "Task force recommendations due",
+        "NextActionCycle": 105
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    },
+    "transit-hub": {
+      "initiative": "INIT-003",
+      "initiativeId": "INIT-003",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-004)",
+      "consolidatedFrom": [
+        "STMT-103-MAYOR-004 (Mayor — Fruitvale Transit Hub Phase II — Visioning Compliance Review)",
+        "STMT-103-opp_faction-002 (OPP — Fruitvale Transit Hub Phase II Compliance Review)",
+        "STMT-103-transit_hub-001 (Soria Dominguez — Fruitvale Transit Hub Phase II)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-003",
+        "ImplementationPhase": "visioning-complete",
+        "MilestoneNotes": "C103: Bureau review approved; visioning phase complete; transitioning to design phase.",
+        "NextScheduledAction": "Design phase kickoff",
+        "NextActionCycle": 105
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    },
+    "health-center": {
+      "initiative": "INIT-005",
+      "initiativeId": "INIT-005",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-005)",
+      "consolidatedFrom": [
+        "STMT-103-health_center-001 (Chen-Ramirez — HCAI resolution)",
+        "STMT-103-health_center-002 (Chen-Ramirez — Temescal engagement)",
+        "STMT-103-MAYOR-005 (Mayor — Temescal Community Health Center — HCAI First-Comments Resolution)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C103: HCAI first-comments window resolved; Phase 1 closed; construction accelerated.",
+        "NextScheduledAction": "Phase 2 construction progress review",
+        "NextActionCycle": 104
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    },
+    "baylight": {
+      "initiative": "INIT-006",
+      "initiativeId": "INIT-006",
+      "cycle": 103,
+      "primaryVoice": "Mayor (MAYOR-006)",
+      "consolidatedFrom": [
+        "STMT-103-baylight_authority-001 (Ramos — Baylight District Phase II Shortlist)",
+        "STMT-103-baylight_authority-002 (Ramos — Baylight District Vendor Selection)",
+        "STMT-103-crc_faction-003 (CRC — Baylight District Shortlist)",
+        "STMT-103-ind_swing-001 (IND — Baylight District Phase II Shortlist)",
+        "STMT-103-MAYOR-006 (Mayor — Baylight District — Phase II Shortlist Publication)",
+        "STMT-103-opp_faction-004 (OPP — Baylight District Phase II Shortlist Credit Claim)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C103: Phase II shortlist published (4 bidders reduced to 3); moving to final bid evaluation.",
+        "NextScheduledAction": "Final bid evaluation and selection",
+        "NextActionCycle": 105
+      },
+      "_notesNormalized": "primary-only (cron-civic-run close, S344)"
+    }
+  }
+}

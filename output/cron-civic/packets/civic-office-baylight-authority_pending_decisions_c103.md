@@ -42,6 +42,17 @@ The city stands at about 387,278 people; nearly everyone who wants work has it a
 - **Acceptance:** Public announcement of the three remaining qualified bidding consortiums selected for the final proposal phase.
 - **Silence consequence:** The selection process stalls, extending the high-risk "construction-planning" phase and jeopardizing developer engagement.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [Baylight District Vendor Selection] Keisha Ramos — Every dollar of the $2.1B budget will be accounted for—starting with these scoring sheets.
+2. stated: [Baylight District Phase II Shortlist] Keisha Ramos — Three qualified consortiums advance to the final proposal phase—we're building Baylight with the teams that can deliver.
+3. datawake: With the city stable and streets quiet, Baylight's workforce mobilization continues on schedule. Phase 1 site remediation remains the critical path. | action: Conducting a site walk to verify remediation progress ahead of next week's environmental compliance review | signal: Crew deployment at full capacity
+
+Latest district pack on disk: output/cron-civic/packs/STAFF-BAYLIGHT_c103.json
+This week's lever from that pack: Phase II shortlist published — 4 qualified bidders reduced to 3
+
 ## DECISION 1 — Baylight District — Final Council Vote — action due this cycle
 
 Where it stands: C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…

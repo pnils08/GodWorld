@@ -8,10 +8,11 @@
     "desk": "civic"
   },
   "task": {
-    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
-    "assignment": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "The transit initiative carrying Fruitvale has not advanced in 9 cycles. What record explains the stall?",
     "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question.  Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
-    "voice": "Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea."
+    "voice": "Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea.",
+    "writingMode": "SOURCE_BRIEF"
   },
   "signal": {
     "kind": "anomaly",
@@ -19,16 +20,64 @@
     "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
     "plan": {
       "focus": "Fruitvale Transit Hub Phase II initiative stall",
-      "closeQuestion": "Who is responsible for the stalled progress of the Fruitvale Transit Hub Phase II initiative?"
+      "closeQuestion": "Who is responsible for the initiative's stall and what is being done to address it?"
     }
   },
   "exposure": {
-    "subjects": [],
-    "sources": [],
+    "subjects": [
+      {
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "profile": "Calvin Turner (POP-00231) — role: Mechanic; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Port & Labor; tier: 2",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "profile": "Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00231-95e98ad3fe",
+        "pop": "POP-00231",
+        "name": "Calvin Turner",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-c4b3917a7eab",
+          "F-f9925b4f532c"
+        ],
+        "src": "packet.W2[POP-00231]"
+      },
+      {
+        "id": "Q-POP-00598-95e98ad3fe",
+        "pop": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-c4b3917a7eab",
+          "F-f9925b4f532c"
+        ],
+        "src": "packet.W2[POP-00598]"
+      }
+    ],
     "excludedLeads": [
       {
+        "from": "Calvin Turner",
+        "text": "Something doesn't feel right about the way things are moving forward, or not moving forward, in our neighborhood.",
+        "usable": false
+      },
+      {
+        "from": "Vladimir Gonzalez",
+        "text": "Something feels off about the lack of progress",
+        "usable": false
+      },
+      {
         "from": "Jax Caldera",
-        "text": "possible lack of accountability or transparency in the initiative's planning phase",
+        "text": "possible lack of funding or resources",
         "usable": false
       }
     ]
@@ -42,21 +91,15 @@
     },
     {
       "t": "FACT",
-      "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
-      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-      "id": "F-11c83bcb168d"
-    },
-    {
-      "t": "FACT",
       "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
       "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
       "id": "F-c4b3917a7eab"
     },
     {
       "t": "FACT",
-      "text": "Official voice still treats the initiative as live / on track",
+      "text": "The Initiative remains listed in the supplied tracker.",
       "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-      "id": "F-47080cc244cb"
+      "id": "F-f9925b4f532c"
     },
     {
       "t": "FACT",
@@ -82,7 +125,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
   },
   "output": {
     "format": "markdown-article",
@@ -116,8 +159,9 @@
     "canonPolicy": "load-bearing",
     "purpose": "Apply public accountability pressure when the record and the official story do not line up. Starting friction is success; resolving the civic problem is not the columnist's job.",
     "articleContract": {
-      "voice": "adversarial first-person accountability column",
-      "targetWords": "400-650",
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
+      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
       "opening": "street-level scene in a bar, laundromat, BART setting, corner, or similarly generic public room",
       "closing": "an unanswered accountability question"
     },
@@ -144,7 +188,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-22bcb4e278fb",
+    "id": "AM-087ec8cff573",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -154,21 +198,15 @@
         "src": "cron-desk-run explicit cycle argument"
       },
       {
-        "id": "F-11c83bcb168d",
-        "t": "FACT",
-        "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
-        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
-      },
-      {
         "id": "F-c4b3917a7eab",
         "t": "FACT",
         "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
         "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
       },
       {
-        "id": "F-47080cc244cb",
+        "id": "F-f9925b4f532c",
         "t": "FACT",
-        "text": "Official voice still treats the initiative as live / on track",
+        "text": "The Initiative remains listed in the supplied tracker.",
         "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
       },
       {
@@ -178,8 +216,46 @@
         "src": "World_Config/weather snapshot for C103"
       }
     ],
-    "approvedQuotes": [],
-    "approvedSubjects": [],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00231-95e98ad3fe",
+        "speakerId": "POP-00231",
+        "speakerName": "Calvin Turner",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-c4b3917a7eab",
+          "F-f9925b4f532c"
+        ],
+        "src": "packet.W2[POP-00231]"
+      },
+      {
+        "id": "Q-POP-00598-95e98ad3fe",
+        "speakerId": "POP-00598",
+        "speakerName": "Vladimir Gonzalez",
+        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "factIds": [
+          "F-c4b3917a7eab",
+          "F-f9925b4f532c"
+        ],
+        "src": "packet.W2[POP-00598]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00231",
+        "name": "Calvin Turner",
+        "profile": "Calvin Turner — role: Mechanic; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Port & Labor; tier: 2",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00598",
+        "name": "Vladimir Gonzalez",
+        "profile": "Vladimir Gonzalez — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -196,8 +272,18 @@
     ],
     "unverifiedLeads": [
       {
+        "from": "Calvin Turner",
+        "text": "Something doesn't feel right about the way things are moving forward, or not moving forward, in our neighborhood.",
+        "publishable": false
+      },
+      {
+        "from": "Vladimir Gonzalez",
+        "text": "Something feels off about the lack of progress",
+        "publishable": false
+      },
+      {
         "from": "Jax Caldera",
-        "text": "possible lack of accountability or transparency in the initiative's planning phase",
+        "text": "possible lack of funding or resources",
         "publishable": false
       }
     ],

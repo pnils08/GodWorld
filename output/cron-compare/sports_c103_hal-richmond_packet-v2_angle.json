@@ -1,0 +1,423 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00007",
+      "name": "Hal Richmond",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "What the supplied C103 line card establishes, and what history remains unsupplied.",
+      "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+      "creativeBrief": {
+        "kind": "sports-history",
+        "pulseClass": "threshold",
+        "bagModes": [
+          "1 Era Comparison",
+          "5 Crossing the Threshold"
+        ],
+        "historicalAnchor": "threshold — arrival of youth as history happening",
+        "presentFacts": [
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 124-34 · streak W15",
+          "Event (feed): A's — player-feature (late-season)",
+          "Cycle: C103"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ],
+        "closingNote": "threshold crossed",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+        "sourcePointers": [
+          "output/world_summary_c103.md ## Sports",
+          "docs/media/HAL_ARCHIVE_BAG.md",
+          "scripts/sportsSubstrate.js",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Downtown",
+      "score": null,
+      "src": "world_summary_c103.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+          "src": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge",
+          "why": "feed-names",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "A's — player-feature — supplied C103 line card",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-a93b6b4ddbd5"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-f9190a7c60c2"
+      },
+      {
+        "t": "FACT",
+        "text": "Team record (feed): 124-34 · streak W15",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-a2d2b18f12fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Event (feed): A's — player-feature (late-season)",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-5f3ac04095b3"
+      },
+      {
+        "t": "FACT",
+        "text": "Cycle: C103",
+        "src": "world_summary_c103.md ## Sports",
+        "id": "F-d8611cde1e4d"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C103 line card establishes, and what history remains unsupplied.",
+      "label": "A's — player-feature — supplied C103 line card",
+      "hookLine": "A's — player-feature — supplied C103 line card",
+      "hood": "Downtown",
+      "pulseClass": "threshold",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "closingNote": "threshold crossed",
+      "citizens": [
+        "Vinnie Keane (POP-00001)"
+      ],
+      "popids": [
+        "POP-00001"
+      ],
+      "ref": "world_summary_c103.md ## Sports",
+      "cycle": 103
+    },
+    "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": {
+    "pulse": {
+      "className": "threshold",
+      "score": 68,
+      "label": "A's — player-feature — supplied C103 line card",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "seasonType": "late-season",
+      "storyAngle": "Pablo Almanzar throws a No No in his MLB debut",
+      "hasStats": true,
+      "record": "124-34",
+      "streak": "W15",
+      "foilNumber": "9IP",
+      "closingNote": "threshold crossed",
+      "feedCycle": 103
+    },
+    "bag": {
+      "modes": [
+        {
+          "id": 1,
+          "name": "Era Comparison"
+        },
+        {
+          "id": 5,
+          "name": "Crossing the Threshold"
+        }
+      ],
+      "historicalAnchor": "threshold — arrival of youth as history happening",
+      "closingNote": "threshold crossed",
+      "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed."
+    },
+    "prewrite": {
+      "reporter": "Hal Richmond",
+      "bagModes": [
+        {
+          "id": 1,
+          "name": "Era Comparison"
+        },
+        {
+          "id": 5,
+          "name": "Crossing the Threshold"
+        }
+      ],
+      "historicalAnchor": "threshold — arrival of youth as history happening",
+      "presentFacts": [
+        "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+        "Team record (feed): 124-34 · streak W15",
+        "Event (feed): A's — player-feature (late-season)",
+        "Cycle: C103"
+      ],
+      "dossierFacts": [
+        "NONE — offline slice; use packet TrueSource only if wake supplies"
+      ],
+      "closingNote": "threshold crossed",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed.",
+      "foilNumber": "9IP",
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ]
+    },
+    "friction": {
+      "a": "Present feed fact: Pablo Almanzar throws a No No in his MLB debut",
+      "b": "Wire copy / FO strategy / bleacher heat that skips time",
+      "frame": "Present first, then echo — end on threshold crossed."
+    },
+    "priorTakes": [],
+    "players": [
+      {
+        "name": "Pablo Almanzar",
+        "popid": null,
+        "role": null,
+        "neighborhood": null,
+        "why": "feed-names"
+      },
+      {
+        "name": "Vinnie Keane",
+        "popid": "POP-00001",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "neighborhood": "Downtown",
+      "record": "124-34",
+      "streak": "W15",
+      "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+    },
+    "candidates": [
+      {
+        "score": 77,
+        "cycle": 102,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging ",
+        "priorHits": 0
+      },
+      {
+        "score": 73,
+        "cycle": 102,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "As players amongst the elite this award season, Danny Horn, Eric Taveras, Isley Kelley, Ernesto Quin",
+        "priorHits": 0
+      },
+      {
+        "score": 70,
+        "cycle": 101,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "MLB #16 prospect Kevin Clark (3B/2B/RF) called up to the big club. Set to debut in Toronto",
+        "priorHits": 0
+      },
+      {
+        "score": 69,
+        "cycle": 102,
+        "team": "A's",
+        "primary": "threshold",
+        "hasStats": true,
+        "angle": "The Kids are Alright. Kevin Clark and Sidney Tumolo more than fill the gap production wise but will ",
+        "priorHits": 0
+      },
+      {
+        "score": 68,
+        "cycle": 103,
+        "team": "A's",
+        "primary": "threshold",
+        "hasStats": true,
+        "angle": "Pablo Almanzar throws a No No in his MLB debut",
+        "priorHits": 0
+      },
+      {
+        "score": 66,
+        "cycle": 101,
+        "team": "A's",
+        "primary": "era-door",
+        "hasStats": true,
+        "angle": "Martin Richards traded at the deadline, trading a franchise pillar in a title run",
+        "priorHits": 0
+      }
+    ]
+  },
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "text": "{\n  \"focus\": \"A's player-feature\",\n  \"why\": \"late-season player feature\",\n  \"checks\": [\n    \"Vinnie Keane's performance\",\n    \"Team's current streak\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00001\",\n      \"question\": \"What does Vinnie Keane's recent performance indicate about the team's momentum?\",\n      \"basis\": \"feed-names\"\n    }\n  ],\n  \"interpretation\": \"The team's success may be attributed to the players' individual performances\",\n  \"unverifiedLead\": [\n    \"The impact of Benji Dillon's move to the bullpen on the team's overall performance\"\n  ],\n  \"closeQuestion\": \"How will the team's current streak be affected by the changes in the roster?\"\n}",
+    "plan": {
+      "focus": "A's player-feature",
+      "why": "late-season player feature",
+      "checks": [
+        "Vinnie Keane's performance",
+        "Team's current streak"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00001",
+          "question": "What does Vinnie Keane's recent performance indicate about the team's momentum?",
+          "basis": "feed-names"
+        }
+      ],
+      "interpretation": "The team's success may be attributed to the players' individual performances",
+      "unverifiedLead": [
+        "The impact of Benji Dillon's move to the bullpen on the team's overall performance"
+      ],
+      "closeQuestion": "How will the team's current streak be affected by the changes in the roster?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | team-update | (preseason) | Adash Stanley (PG), AJ Dybantsa (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek, Dillon Brooks (SF)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Benji Dillon (SP/RP) Pablo Almanzar (SP)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Isley Kelley (SS)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 103; rendered: world_summary_c103.md \"## Sports\" C103 (StoryAngle at the pointer)",
+      "popids": []
+    }
+  ],
+  "laneEntries": 8,
+  "ranAt": "2026-08-14T11:16:09.982Z"
+}

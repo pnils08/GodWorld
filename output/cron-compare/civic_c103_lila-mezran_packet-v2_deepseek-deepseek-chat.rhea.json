@@ -1,0 +1,44 @@
+{
+  "draft": "output/cron-compare/civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft correctly verifies that the Temescal Community Health Center is construction-active without introducing any unverified details or canon violations.",
+  "review": {
+    "profileId": "lila-health-service-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-b605b901d8cb",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": false
+  },
+  "apiCostUsd": 0.0428,
+  "durationMs": 9678,
+  "parseError": false,
+  "ranAt": "2026-08-13T07:13:45.345Z"
+}

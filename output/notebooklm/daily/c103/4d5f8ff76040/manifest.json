@@ -1,0 +1,42 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.6",
+  "canonStatus": "NOT_CANON",
+  "cycle": 103,
+  "generatedAt": "2026-08-12T13:00:08.975Z",
+  "lastAttemptAt": "2026-08-12T13:00:08.975Z",
+  "hours": 36,
+  "packHash": "4d5f8ff76040e0118ae6de1ec47080a0ad3c7353de653293de9d3b3d2edb4c01",
+  "worldSummary": "output/world_summary_c103.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.sample.md"
+    }
+  ],
+  "flaggedExclusions": [
+    "output/cron-compare/flagged/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.flags.json",
+    "output/cron-compare/flagged/civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.flags.json",
+    "output/cron-compare/flagged/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.flags.json"
+  ],
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "boundedSourceHash": "0969412ec1f6325c89b692dd9225ea8276176c1ed608bc68f4fcdf3596c75070",
+  "boundedSource": "output/notebooklm/daily/c103/4d5f8ff76040/bounded-newsroom-source.md",
+  "sourceIds": [
+    "5423a2cf-48c3-4b0c-bf77-d4b3324698d3"
+  ],
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioArtifactId": "d326b9a6-f4ea-48fa-be06-1ff5d1c95663",
+  "audioPath": "output/notebooklm/daily/c103/4d5f8ff76040/godworld_daily_c103.m4a",
+  "driveLink": "https://drive.google.com/file/d/1MNVw6z1cOvZOfdJz0xTFdhZGBvDYXugk/view?usp=drivesdk"
+}

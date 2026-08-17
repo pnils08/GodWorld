@@ -1,0 +1,141 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.6",
+  "canonStatus": "NOT_CANON",
+  "cycle": 103,
+  "generatedAt": "2026-08-14T13:00:06.807Z",
+  "lastAttemptAt": "2026-08-14T13:00:06.807Z",
+  "hours": 36,
+  "packHash": "25e436774259911c47dd24766e65726170c1bcafb72b607aa65ddfb620aee4b1",
+  "worldSummary": "output/world_summary_c103.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/culture_c103_elliot-graye_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/culture_c103_maria-keen_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/culture_c103_maria-keen_packet-v2_benchmark-natural-llama_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/culture_c103_sharon-okafor_packet-v2_benchmark-benchmark-llama-3-3_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/sports_c103_hal-richmond_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/sports_c103_hal-richmond_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/sports_c103_tanya-cruz_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c103_elliot-graye_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c103_maria-keen_packet-v2_benchmark-natural-llama_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c103_sharon-okafor_packet-v2_benchmark-benchmark-llama-3-3_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c103_hal-richmond_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md"
+    }
+  ],
+  "flaggedExclusions": [
+    "output/cron-compare/flagged/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.flags.json",
+    "output/cron-compare/flagged/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/sports_c103_simon-leary_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/sports_c103_tanya-cruz_packet-v2_benchmark-benchmark-deepseek-v2_deepseek-deepseek-chat.flags.json"
+  ],
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "boundedSourceHash": "f3ecf5c2e7c8f6906d30ecb981a404a83bb5812809f084b9b3cf2b7ce60fb06e",
+  "boundedSource": "output/notebooklm/daily/c103/25e436774259/bounded-newsroom-source.md",
+  "sourceIds": [
+    "4f640762-dfdc-46cd-91f4-f0a73f439edf"
+  ],
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioArtifactId": "ee446601-dd6a-423b-aedf-385a6a77ca47",
+  "audioPath": "output/notebooklm/daily/c103/25e436774259/godworld_daily_c103.m4a",
+  "driveLink": "https://drive.google.com/file/d/1JY30HqTqxWrcPwPfIQTL3L6rhP9ssRM3/view?usp=drivesdk"
+}

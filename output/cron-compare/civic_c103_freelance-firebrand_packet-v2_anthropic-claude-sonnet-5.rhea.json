@@ -3,64 +3,47 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
-  "pass": false,
-  "flags": [
-    {
-      "claim": "parked in a phase called 'construction-planning' for nine cycles running.",
-      "issue": "Leaked engine verbiage ('construction-planning') in prose. System status enums must be translated into citizen-facing language.",
-      "severity": "high"
-    }
-  ],
-  "flagCount": 1,
-  "highSeverityCount": 1,
-  "summary": "The article is factually accurate regarding the 9-cycle stall of the Fruitvale Transit Hub initiative, but it leaks the raw engine status enum 'construction-planning' into the prose.",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All claims, names, and roles verified against the cycle 103 world summary and ledger.",
   "review": {
     "profileId": "jax-accountability-v1",
-    "canonIntegrity": "revise",
+    "canonIntegrity": "pass",
     "texture": "authorized"
   },
   "reviewProfile": {
     "id": "jax-accountability-v1",
     "packageVersion": "JAX-LEP2-1",
-    "manifestId": "AM-22bcb4e278fb",
-    "lexicalObservations": [
-      {
-        "code": "UNAPPROVED_QUOTE",
-        "values": [
-          "That fence has been there since I had a different job,",
-          "Whatever's happening back there, it isn't happening fast.",
-          "Fruitvale Transit Hub Phase II — Visioning.",
-          "construction-planning",
-          "on track",
-          "parked for nine cycles",
-          "Visioning",
-          "on track."
-        ]
-      }
-    ]
+    "manifestId": "AM-087ec8cff573",
+    "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [
-      "Jax Caldera"
+      "Calvin Turner",
+      "Vladimir Gonzalez"
     ],
-    "unverified": []
+    "unverified": [
+      "Right Fielder"
+    ]
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 0,
+      "names": 2,
       "businesses": 0,
-      "storylines": 1,
+      "storylines": 0,
       "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": true
+    "packetChecked": false
   },
-  "apiCostUsd": 0.0501,
-  "durationMs": 13414,
+  "apiCostUsd": 0.0452,
+  "durationMs": 10053,
   "parseError": false,
-  "ranAt": "2026-08-11T23:16:42.417Z"
+  "ranAt": "2026-08-13T07:03:08.481Z"
 }

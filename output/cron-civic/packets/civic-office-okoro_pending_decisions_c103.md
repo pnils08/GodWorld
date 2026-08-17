@@ -34,6 +34,19 @@ The city stands at about 387,278 people; nearly everyone who wants work has it a
 - INIT-003 has sat in the same stage for 9 cycles (Fruitvale). The ledger already says that — this cycle you move the phase or take a fail phase.
 - West Oakland, Fruitvale, East Oakland: incoherence flagged at high severity.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [Neighborhood coherence response] Brenda Okoro — Neighborhoods don't become incoherent overnight. The signals we're seeing in West Oakland, Fruitvale and East Oakland have operational solutions — starting with feet on the ground.
+2. stated: [West Oakland Stabilization Fund disbursement] Brenda Okoro — Seven more households stabilized this cycle brings us to fifty-two of two hundred eighty served. The queue behind them tells us where to reset outreach — Fruitvale signals require equal attention.
+3. stated: [Oakland Youth Apprenticeship Pipeline authority] Brenda Okoro — My office holds disbursement authority for workforce stabilization funds only — not placement decisions. That boundary is clean, and we've documented it.
+4. stated: [West Oakland Stabilization Fund disbursement] Brenda Okoro — Forty-five households stabilized so far. The seven cleared this cycle represent real relief — but the queue behind them is why we're resetting outreach to match where the need is growing fastest.
+5. datawake: Stab Fund processing pace is climbing — month-three batch at eight disbursements, running total thirty-eight of two-hundred-eighty. Beverly Hayes (SF-0007) moved this cycle. | action: Walk Emily Lanca at OEWD through Hayes disbursement processing-chain fork-points; capture learnings for next batch. | signal: Eight disbursements this batch, up from six last batch
+
+Latest district pack on disk: output/cron-civic/packs/STAFF-DM-COMM_c103.json
+This week's lever from that pack: no move this cycle
+
 ## DECISION 1 — West Oakland Stabilization Fund — action due this cycle
 
 Where it stands: C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.

@@ -1,0 +1,43 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "103",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "tanya-cruz",
+  "byline": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 8,
+  "quotesLanded": 1,
+  "disposition": "flagged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/sports_c103_tanya-cruz_packet-v2_benchmark-benchmark-deepseek-v2_deepseek-deepseek-chat.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-13T15:36:22.749Z",
+  "dispositionReconciledAt": "2026-08-13T17:49:23.872Z",
+  "contamination": {
+    "fail": true,
+    "findings": [
+      {
+        "check": "lattice-quote",
+        "issue": "packet lattice printed as a person: \"I am going to keep watching this\""
+      },
+      {
+        "check": "lattice-quote",
+        "issue": "packet lattice printed as a person: \"This deserves a closer look\""
+      },
+      {
+        "check": "invented-voice",
+        "issue": "Adash Stanley (POP-01023) cannot be quoted: NEVER_WOKEN"
+      }
+    ]
+  }
+}

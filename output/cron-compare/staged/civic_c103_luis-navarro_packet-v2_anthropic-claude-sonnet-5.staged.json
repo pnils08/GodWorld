@@ -1,0 +1,47 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Calvin Turner",
+        "role": "quoted-source",
+        "popid": "POP-00231"
+      },
+      {
+        "name": "Tomas Renteria",
+        "role": "quoted-source",
+        "popid": "POP-00744"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+        "sourceRef": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-2cfa5f54efbf",
+    "draftSha256": "ef6e85ca4561a60d7ba14dccb03caebf1076d63496c610540d817e3ad36da7fa",
+    "verdict": "output/cron-compare/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-08-13T17:45:40.241Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-13T17:45:43.891Z"
+}

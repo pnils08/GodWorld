@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "103",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "simon-leary",
+  "byline": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 8,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "dotenvx.com]\n{\n  \"popId\": \"POP-00016\",\n  \"name\": \"Simon Leary\",\n  \"recorded\": true,\n  \"text\": \"filed: The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season\"\n}"
+  },
+  "ranAt": "2026-08-13T17:57:56.917Z"
+}

@@ -3,55 +3,47 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
-  "pass": false,
-  "flags": [
-    {
-      "claim": "Isley Kelley, the face of the A's for years, had resigned... time for him to hang up his cleats... It wasn't just Kelley who was gone",
-      "issue": "Isley Kelley did not retire or leave the team; he re-signed a 2-year, $50M contract in C102 and is actively playing in C103, hitting his 499th career home run. The draft misinterpreted 're-signed' (written as 'resigns' in the C102 feed) as retirement.",
-      "severity": "high"
-    },
-    {
-      "claim": "The team's record, 107-31 with a three-game winning streak",
-      "issue": "This is the A's record from C102. In the current cycle (C103), the A's record is 124-34 with a 15-game winning streak (W15).",
-      "severity": "high"
-    }
-  ],
-  "flagCount": 2,
-  "highSeverityCount": 2,
-  "summary": "Critical errors: Misinterpreted Isley Kelley's contract re-signing as retirement/resignation, and used the outdated C102 team record instead of C103.",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft accurately lists the sports feed facts regarding Pablo Almanzar's debut no-hitter without any sourcing violations.",
   "review": {
     "profileId": "p-slayer-fan-heat-v1",
-    "canonIntegrity": "fail",
+    "canonIntegrity": "pass",
     "texture": "authorized"
   },
   "reviewProfile": {
     "id": "p-slayer-fan-heat-v1",
-    "packageVersion": "PSLAYER-LEP2-1",
-    "manifestId": "AM-738c2d5c1347",
+    "packageVersion": null,
+    "manifestId": "AM-3725377deebc",
     "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [
-      "Isley Kelley"
+      "Vinnie Keane"
     ],
-    "unverified": []
+    "unverified": [
+      "Pablo Almanza",
+      "Pablo Almanzar"
+    ]
   },
   "intake": {
     "found": true,
     "counts": {
       "names": 0,
       "businesses": 0,
-      "storylines": 1,
-      "hoods": 0,
+      "storylines": 0,
+      "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": true
+    "packetChecked": false
   },
-  "apiCostUsd": 0.0625,
-  "durationMs": 20224,
+  "apiCostUsd": 0.0552,
+  "durationMs": 16944,
   "parseError": false,
-  "ranAt": "2026-08-11T23:17:48.354Z"
+  "ranAt": "2026-08-13T07:04:04.401Z"
 }

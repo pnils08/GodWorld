@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "culture",
+  "persona": "kai-marston",
+  "storyline": {
+    "slug": "west-oakland-daniel-cloak-quiet-nightlife",
+    "verb": "opened"
+  },
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I think what feels off about Nightline Station is that it's usually quiet, but I'm not sure if that's a good thing or not. The Tribune should ask if this quietness is a sign of something going on that we don't know about."
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I'm not sure what to make of the Nightline Station trend, it just feels kinda off to me, like something's missing from the story, and I think the Tribune should ask what's really going on behind the scenes."
+    },
+    {
+      "pop": "POP-00961",
+      "name": "Darius Clark",
+      "quote": "I'm not sure what to make of the Nightline Station trend, it just feels like something's missing, like it's not really capturing the vibe of our neighborhood. I think the Tribune should ask what's behind the quiet nights, is it really as calm as it seems?"
+    }
+  ],
+  "claim": "I think what feels off about Nightline Station is that it's usually quiet, but I'm not sure if that's a good thing or not. The Tribune should ask if this quietness is a sign of something going on that we don't know about.",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-16T21:31:11.282Z"
+}

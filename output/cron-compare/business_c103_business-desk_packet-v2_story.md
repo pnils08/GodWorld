@@ -9,31 +9,25 @@
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
-  "focus": "Dimond's cooling retail scene compared to the rest of the city",
-  "why": "Foot traffic is visibly down, storefronts feel quieter than usual",
+  "focus": "Dimond's cooling retail scene and its impact on local storefronts",
+  "why": "Foot traffic is down and storefronts are quieter compared to other parts of the city, signaling a shift in economic activity.",
   "checks": [
     "F-2c3c1b14061a",
     "F-5967d0383c65",
-    "F-5f30e356b99b"
+    "F-5f30e356b99b",
+    "F-68dbfc1e6fba",
+    "F-c40d99359f50"
   ],
-  "targets": [],
-  "interpretation": "This feels like more than just seasonal fluctuation—Dimond's usual bustle has dulled noticeably, especially against the city's overall retail uptick.",
+  "targets": [
+    {
+      "pop": "POP-00730",
+      "question": "Have you noticed a change in foot traffic around Dimond's storefronts recently?",
+      "basis": "same-hood-ledger"
+    }
+  ],
+  "interpretation": "The dip in retail vitality suggests a broader cooling trend in Dimond, possibly tied to shifting consumer habits or economic pressures.",
   "unverifiedLead": [
-    "Could this be early ripple effects from transit changes elsewhere in the city?",
-    "Is there a shift in where people are spending their disposable income?"
+    "Are there specific businesses in Dimond that are bucking the trend or adapting in unique ways?"
   ],
-  "closeQuestion": "What's drawing people—or keeping them—away from Dimond's storefronts?"
+  "closeQuestion": "What does this cooling trend mean for Dimond's identity as a neighborhood?"
 }
-## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
-- Calvin Turner (POP-00231): "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
-- Vladimir Gonzalez (POP-00598): "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
-- Tomas Renteria (POP-00744): "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
-- Dana Reeve (POP-00010): "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
-
-## §4 THE ARTICLE (wake 3)
-- draft: output/cron-compare/flagged/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.md
-- disposition: flagged
-- rhea: flagged (5)
-- self-score footer: present
-- tool use: none
-

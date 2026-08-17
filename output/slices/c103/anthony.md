@@ -7,15 +7,15 @@ Cycle **C103** · kind `anthony-analytic` · POP-00017
 - **Score:** 72
 - **Team / event:** A's — player-feature
 - **Label:** A's · player-feature — Pablo Almanzar throws a No No in his MLB debut
-- **Foil (feed only):** 2-3
+- **Foil (feed only):** 9IP
 - **Has Stats line:** yes
 
 ## PREWRITE (analysis bag)
 - **BagTools:** 1 Box-Card Read; 5 Repertoire vs Results
-- **Claim:** One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut
+- **Claim:** One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut
 **LineFacts** (feed only):
-  - Pablo Almanza line (feed): 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3
-  - Feed line: HR, 3 RBI
+  - Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks
+  - Vinnie Keane line (feed): 2-3, HR, 3 RBI
   - Team record (feed): 124-34 · W15
   - Event kind (feed): A's — player-feature (late-season)
   - NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)
@@ -31,6 +31,7 @@ Cycle **C103** · kind `anthony-analytic` · POP-00017
   - contracts or salaries not printed on this feed row
   - As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)
   - TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies
+  - Pablo Almanzar has no Simulation_Ledger POPID in the local snapshot — do not invent or interview
 
 ## APPROACH
 Analytic approach (Anthony Raines): third-person only — never fan "we." One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.
@@ -42,9 +43,7 @@ B: Soft FO language or bleacher heat that skips the line
 
 ## PLAYERS (feed names — do not invent)
 - Pablo Almanzar (no POPID on snapshot)
-- Vinnie Keane (no POPID on snapshot)
-- No No (no POPID on snapshot)
-- Pablo Alamazar (no POPID on snapshot)
+- Vinnie Keane (POP-00001) — Designated Hitter, Oakland A's Legend
 
 ## SCENE
 HOOD: Downtown

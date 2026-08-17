@@ -1,0 +1,11 @@
+{
+  "draft": "civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.md",
+  "flags": [
+    {
+      "claim": "parked in a phase called 'construction-planning' for nine cycles running.",
+      "issue": "Leaked engine verbiage ('construction-planning') in prose. System status enums must be translated into citizen-facing language.",
+      "severity": "high"
+    }
+  ],
+  "summary": "The article is factually accurate regarding the 9-cycle stall of the Fruitvale Transit Hub initiative, but it leaks the raw engine status enum 'construction-planning' into the prose."
+}

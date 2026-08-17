@@ -3,36 +3,26 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
-  "pass": false,
-  "flags": [
-    {
-      "claim": "weather impact score of 1.05",
-      "issue": "Leaking raw engine score and decimal ('weather impact score of 1.05') into the prose, violating the profile's canon blocker against printing raw engine scores/decimals as public-facing cultural evidence.",
-      "severity": "high"
-    },
-    {
-      "claim": "volume of 3",
-      "issue": "Leaking raw engine metric ('volume of 3') into the prose instead of describing the volume level narratively.",
-      "severity": "med"
-    }
-  ],
-  "flagCount": 2,
-  "highSeverityCount": 1,
-  "summary": "The draft successfully captures the authorized sensory texture of Nightline Station, but fails by leaking raw engine metrics and decimals ('weather impact score of 1.05' and 'volume of 3') directly into the prose.",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft accurately reflects the quiet night status of Nightline Station in West Oakland with no sourcing or canon violations.",
   "review": {
     "profileId": "kai-arts-entertainment-v1",
-    "canonIntegrity": "revise",
-    "texture": "authorized"
+    "canonIntegrity": "pass",
+    "texture": "none"
   },
   "reviewProfile": {
     "id": "kai-arts-entertainment-v1",
-    "packageVersion": "KAI-LEP2-1",
-    "manifestId": "AM-e7ee6fe95693",
+    "packageVersion": null,
+    "manifestId": "AM-5a36ed1f08ef",
     "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [],
     "unverified": [
+      "Evening Texture",
       "Nightline Station"
     ]
   },
@@ -41,17 +31,17 @@
     "counts": {
       "names": 0,
       "businesses": 0,
-      "storylines": 1,
-      "hoods": 0,
+      "storylines": 0,
+      "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": true
+    "packetChecked": false
   },
-  "apiCostUsd": 0.0606,
-  "durationMs": 16510,
+  "apiCostUsd": 0.0416,
+  "durationMs": 8893,
   "parseError": false,
-  "ranAt": "2026-08-11T23:18:10.859Z"
+  "ranAt": "2026-08-13T07:03:47.278Z"
 }

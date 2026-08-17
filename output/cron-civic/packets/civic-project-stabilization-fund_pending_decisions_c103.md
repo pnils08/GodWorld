@@ -12,6 +12,18 @@
 - **Acceptance:** A published report detailing the number of households approved in the Month-five batch and the updated cumulative disbursement total.
 - **Silence consequence:** Financial support to vulnerable West Oakland households halts, causing unnecessary economic distress and program delays.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [West Oakland service] Marcus Webb — Every applicant who walks through our door gets two things: the truth about the timeline, and the certainty that their case won't get lost.
+2. stated: [Month-five disbursement batch] Marcus Webb — Fifty-two families now stabilized with relocation assistance—that's eighteen point five percent of target served with zero compliance exceptions.
+3. stated: [Stabilization Fund Disbursements] Marcus Webb — Forty-five households now stabilized with full compliance documentation. The next twelve applications are audit-ready pending authorization.
+4. datawake: Thirty-eight families in West Oakland now have stability checks in hand. That's progress—and it's not enough. We're moving from six disbursements a cycle to eight. The pace must keep climbing. | action: Walking the disbursement authorization packets to Deputy Mayor Osei's front desk to force the next batch ahead of schedule. | signal: Six to eight disbursements per cycle
+
+Latest district pack on disk: output/cron-civic/packs/PROJ-STABFUND_c103.json
+This week's lever from that pack: Month-five disbursement batch review
+
 ## DECISION 1 — West Oakland Stabilization Fund — action due this cycle
 
 Where it stands: C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.

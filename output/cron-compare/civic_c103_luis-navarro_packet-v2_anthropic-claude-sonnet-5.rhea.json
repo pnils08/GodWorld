@@ -1,0 +1,51 @@
+{
+  "draft": "output/cron-compare/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "ef6e85ca4561a60d7ba14dccb03caebf1076d63496c610540d817e3ad36da7fa",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All claims, names, and quotes verified perfectly against the cycle 103 ground truth and the investigative profile.",
+  "review": {
+    "profileId": "luis-investigation-record-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-1",
+    "manifestId": "AM-2cfa5f54efbf",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Calvin Turner",
+      "Tomas Renteria"
+    ],
+    "unverified": [
+      "Line Cook",
+      "Podcast Host"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0482,
+  "durationMs": 12076,
+  "parseError": false,
+  "ranAt": "2026-08-13T17:45:40.241Z"
+}

@@ -2,8 +2,9 @@
   "mode": "wake-write",
   "desk": "culture",
   "cycle": "103",
-  "provider": "openrouter",
-  "model": "meta-llama/llama-3.3-70b-instruct",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "meta-llama/llama-3.3-70b-instruct",
   "gateModel": "google/gemini-3.5-flash",
   "persona": "kai-marston",
   "byline": {
@@ -13,12 +14,13 @@
   },
   "laneEntries": 23,
   "quotesLanded": 0,
-  "disposition": "flagged",
-  "rheaPass": false,
-  "rheaFlagCount": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "article": "output/cron-compare/staged/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
   "selfRecord": null,
-  "ranAt": "2026-08-11T23:18:10.868Z"
+  "ranAt": "2026-08-12T23:16:36.614Z",
+  "dispositionReconciledAt": "2026-08-13T07:44:52.143Z"
 }

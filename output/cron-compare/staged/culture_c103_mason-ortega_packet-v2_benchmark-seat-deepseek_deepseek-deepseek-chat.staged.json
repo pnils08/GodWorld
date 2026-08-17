@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "Piedmont Heights (Piedmont Ave)",
+        "sourceRef": "world_summary ## Evening Texture · Restaurants"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-d7a5d2ba00b7",
+    "draftSha256": "22b42864e7b242bfe5dab1a838535f38e2028803a988310d27521221acf35080",
+    "verdict": "output/cron-compare/culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T16:23:09.643Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T16:23:22.676Z"
+}

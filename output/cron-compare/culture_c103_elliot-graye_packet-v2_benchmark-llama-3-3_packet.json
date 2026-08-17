@@ -1,0 +1,31 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "elliot-graye",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "angle": "Claire Ashford spotted at B'nai Tikvah Synagogue in Piedmont Ave — ground truth only, no invented companions",
+      "label": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)",
+      "hookLine": "sighting | Claire Ashford spotted at B'nai Tikvah Synagogue",
+      "hood": "Piedmont Ave",
+      "pulseClass": "fame-sighting",
+      "citizens": [
+        "Claire Ashford"
+      ],
+      "popids": [],
+      "named": "B'nai Tikvah Synagogue",
+      "venue": "B'nai Tikvah Synagogue",
+      "ref": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "cycle": 103
+    }
+  },
+  "angle": "output/cron-compare/culture_c103_elliot-graye_packet-v2_benchmark-llama-3-3_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [],
+  "ranAt": "2026-08-13T16:09:42.023Z"
+}

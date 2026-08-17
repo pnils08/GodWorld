@@ -1,0 +1,42 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "103",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Dimond"
+    ],
+    "claims": [
+      {
+        "claim": "Dimond cooling",
+        "sourceRef": "world_summary ## What Moved · trajectory"
+      }
+    ]
+  },
+  "approval": {
+    "status": "canon-approved",
+    "approvedBy": "builder",
+    "approvedAt": "2026-08-13"
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-b7d92ca9379b",
+    "draftSha256": "75fdcd4fce2a55a14ffd85b040d38c3f28ac6793f29a2507059ed711d8e6b88a",
+    "verdict": "output/cron-compare/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T07:03:15.532Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T07:44:52.030Z"
+}

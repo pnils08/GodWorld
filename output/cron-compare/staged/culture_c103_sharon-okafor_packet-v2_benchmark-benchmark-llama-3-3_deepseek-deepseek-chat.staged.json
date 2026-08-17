@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "sharon-okafor",
+  "byline": "Sharon Okafor",
+  "bylinePopid": "POP-00159",
+  "article": "output/cron-compare/staged/culture_c103_sharon-okafor_packet-v2_benchmark-benchmark-llama-3-3_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "Nightline Station (West Oakland) · quiet night",
+        "sourceRef": "world_summary ## Evening Texture · Nightlife"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-9ec7414fc406",
+    "draftSha256": "5eb06d1621c6d161c5e33312cd0a13aa8cbca9b4f5bd9151f41ec6ff78e8024d",
+    "verdict": "output/cron-compare/culture_c103_sharon-okafor_packet-v2_benchmark-benchmark-llama-3-3_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T16:31:07.934Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T16:31:29.426Z"
+}

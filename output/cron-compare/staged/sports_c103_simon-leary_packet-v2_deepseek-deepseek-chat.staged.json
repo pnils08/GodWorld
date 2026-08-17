@@ -1,0 +1,42 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Lake Merritt"
+    ],
+    "claims": [
+      {
+        "claim": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+        "sourceRef": "world_summary_c103.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-797bbefff586",
+    "draftSha256": "25288ee7b654d17466939745e46d7bf970f2a87e07ed2cf84c5dc2f49f584c9d",
+    "verdict": "output/cron-compare/sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T17:57:44.011Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-13T17:57:46.600Z"
+}

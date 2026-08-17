@@ -8,111 +8,58 @@
     "desk": "civic"
   },
   "task": {
-    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
     "assignment": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
     "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup.",
-    "voice": null
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF"
   },
   "signal": {
     "kind": "initiative",
     "hood": "West Oakland",
     "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
     "plan": {
-      "focus": "West Oakland Stabilization Fund disbursement progress",
-      "closeQuestion": "What’s the gap between the ledger’s ‘disbursement-active’ status and tangible changes in West Oakland’s economic stability?"
+      "focus": "West Oakland Stabilization Fund disbursement process",
+      "closeQuestion": "Is the disbursement process meeting its stated goals of stabilizing West Oakland communities?"
     }
   },
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-00231",
-        "name": "Calvin Turner",
-        "profile": "Calvin Turner",
+        "pop": "POP-00288",
+        "name": "Marcus Wright",
+        "profile": "Marcus Wright — Server — West Oakland",
         "quotationEligible": true,
-        "src": "packet.W2.interview"
-      },
-      {
-        "pop": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "profile": "Vladimir Gonzalez",
-        "quotationEligible": true,
-        "src": "packet.W2.interview"
-      },
-      {
-        "pop": "POP-00744",
-        "name": "Tomas Renteria",
-        "profile": "Tomas Renteria",
-        "quotationEligible": true,
-        "src": "packet.W2.interview"
-      },
-      {
-        "pop": "POP-00010",
-        "name": "Dana Reeve",
-        "profile": "Dana Reeve",
-        "quotationEligible": true,
-        "src": "packet.W2.interview"
+        "src": "packet.W1.exposure"
       }
     ],
     "sources": [
       {
-        "id": "Q-POP-00231-30f959e497",
-        "pop": "POP-00231",
-        "name": "Calvin Turner",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
+        "id": "Q-POP-00288-ea67affdc8",
+        "pop": "POP-00288",
+        "name": "Marcus Wright",
+        "quote": "I been hearing folks talk about this fund for months, but ain't nobody on my block seen a dime yet. The Tribune oughta ask why the money's moving so slow when people out here need roofs fixed now.",
         "factIds": [
           "F-68d6bc93c2e8",
           "F-97e9f8f2c6df"
         ],
-        "src": "packet.W2[POP-00231]"
-      },
-      {
-        "id": "Q-POP-00598-30f959e497",
-        "pop": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
-        "factIds": [
-          "F-68d6bc93c2e8",
-          "F-97e9f8f2c6df"
-        ],
-        "src": "packet.W2[POP-00598]"
-      },
-      {
-        "id": "Q-POP-00744-b0a7baf333",
-        "pop": "POP-00744",
-        "name": "Tomas Renteria",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-68d6bc93c2e8",
-          "F-97e9f8f2c6df"
-        ],
-        "src": "packet.W2[POP-00744]"
-      },
-      {
-        "id": "Q-POP-00010-30f959e497",
-        "pop": "POP-00010",
-        "name": "Dana Reeve",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
-        "factIds": [
-          "F-68d6bc93c2e8",
-          "F-97e9f8f2c6df"
-        ],
-        "src": "packet.W2[POP-00010]"
+        "src": "packet.W2[POP-00288]"
       }
     ],
     "excludedLeads": [
       {
-        "from": "Calvin Turner",
-        "text": "Feels like the money's moving, but not where it's needed most. Who's tracking where it actually lands?",
+        "from": "Marcus Wright",
+        "text": "Check which community groups actually applied for funding versus who got approved",
         "usable": false
       },
       {
         "from": "Carmen Delaine",
-        "text": "Are disbursements prioritizing areas with visible economic strain, or just those with political optics?",
+        "text": "Possible discrepancy between allocated funds and visible community improvements",
         "usable": false
       },
       {
         "from": "Carmen Delaine",
-        "text": "Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?",
+        "text": "Potential lag between disbursement and measurable impact",
         "usable": false
       }
     ]
@@ -154,7 +101,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -188,6 +135,7 @@
     "canonPolicy": "load-bearing",
     "purpose": "Trace Packet-backed city action across votes, Initiatives, money, and implementation clocks, then show the consequence carried by a named resident. Public clarity and a durable accountability trail are success; a process recap without lived consequence is not.",
     "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
       "voice": "precise third-person civic ledger",
       "targetWords": "500-900",
       "opening": "a Packet-backed chamber, place, person, or resident consequence",
@@ -214,7 +162,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-f1ab59491069",
+    "id": "AM-db1018128883",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -238,77 +186,23 @@
     ],
     "approvedQuotes": [
       {
-        "id": "Q-POP-00231-30f959e497",
-        "speakerId": "POP-00231",
-        "speakerName": "Calvin Turner",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
+        "id": "Q-POP-00288-ea67affdc8",
+        "speakerId": "POP-00288",
+        "speakerName": "Marcus Wright",
+        "text": "I been hearing folks talk about this fund for months, but ain't nobody on my block seen a dime yet. The Tribune oughta ask why the money's moving so slow when people out here need roofs fixed now.",
         "factIds": [
           "F-68d6bc93c2e8",
           "F-97e9f8f2c6df"
         ],
-        "src": "packet.W2[POP-00231]"
-      },
-      {
-        "id": "Q-POP-00598-30f959e497",
-        "speakerId": "POP-00598",
-        "speakerName": "Vladimir Gonzalez",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
-        "factIds": [
-          "F-68d6bc93c2e8",
-          "F-97e9f8f2c6df"
-        ],
-        "src": "packet.W2[POP-00598]"
-      },
-      {
-        "id": "Q-POP-00744-b0a7baf333",
-        "speakerId": "POP-00744",
-        "speakerName": "Tomas Renteria",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-68d6bc93c2e8",
-          "F-97e9f8f2c6df"
-        ],
-        "src": "packet.W2[POP-00744]"
-      },
-      {
-        "id": "Q-POP-00010-30f959e497",
-        "speakerId": "POP-00010",
-        "speakerName": "Dana Reeve",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer.",
-        "factIds": [
-          "F-68d6bc93c2e8",
-          "F-97e9f8f2c6df"
-        ],
-        "src": "packet.W2[POP-00010]"
+        "src": "packet.W2[POP-00288]"
       }
     ],
     "approvedSubjects": [
       {
-        "id": "POP-00231",
-        "name": "Calvin Turner",
-        "profile": "Calvin Turner",
-        "src": "packet.W2.interview",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "profile": "Vladimir Gonzalez",
-        "src": "packet.W2.interview",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00744",
-        "name": "Tomas Renteria",
-        "profile": "Tomas Renteria",
-        "src": "packet.W2.interview",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00010",
-        "name": "Dana Reeve",
-        "profile": "Dana Reeve",
-        "src": "packet.W2.interview",
+        "id": "POP-00288",
+        "name": "Marcus Wright",
+        "profile": "Marcus Wright — Server — West Oakland",
+        "src": "packet.W1.exposure",
         "quotationEligible": true
       }
     ],
@@ -328,18 +222,18 @@
     ],
     "unverifiedLeads": [
       {
-        "from": "Calvin Turner",
-        "text": "Feels like the money's moving, but not where it's needed most. Who's tracking where it actually lands?",
+        "from": "Marcus Wright",
+        "text": "Check which community groups actually applied for funding versus who got approved",
         "publishable": false
       },
       {
         "from": "Carmen Delaine",
-        "text": "Are disbursements prioritizing areas with visible economic strain, or just those with political optics?",
+        "text": "Possible discrepancy between allocated funds and visible community improvements",
         "publishable": false
       },
       {
         "from": "Carmen Delaine",
-        "text": "Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?",
+        "text": "Potential lag between disbursement and measurable impact",
         "publishable": false
       }
     ],

@@ -1,0 +1,47 @@
+{
+  "draft": "output/cron-compare/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "71114c0392d57b3e672eb104618f0605b8208b0c5600632fe7bd31ed7c941029",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All claims verified perfectly against ground truth; Tomas Renteria quote matches exact packet quote.",
+  "review": {
+    "profileId": "trevor-infrastructure-systems-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-1",
+    "manifestId": "AM-06ea0c2dc11e",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Tomas Renteria"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0413,
+  "durationMs": 7724,
+  "parseError": false,
+  "ranAt": "2026-08-13T17:53:53.642Z"
+}

@@ -3,82 +3,50 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
-  "pass": false,
+  "pass": true,
   "flags": [
     {
-      "claim": "“What the record shows does not line up with what I expected,” said Turner, echoing a sentiment shared by the others. “What explains the gap in the record? The Tribune should keep pressing for an answer.”",
-      "issue": "Fabricated quote attributed to Calvin Turner. No such quote or statement exists in the cycle 103 ground truth or packet.",
-      "severity": "high"
-    },
-    {
-      "claim": "Tomas Renteria voiced his concerns plainly: “I am going to keep watching this.”",
-      "issue": "Fabricated quote attributed to Tomas Renteria. No such quote or statement exists in the cycle 103 ground truth or packet.",
-      "severity": "high"
-    },
-    {
-      "claim": "Dana Reeve urged continued scrutiny: “The Tribune should keep pressing for an answer.”",
-      "issue": "Fabricated quote attributed to Dana Reeve. Additionally, Dana Reeve is a Lead Journalist for the Tribune (BIZ-00018) and cannot be quoted as an external source.",
-      "severity": "high"
-    },
-    {
-      "claim": "But for residents like Calvin Turner, Tomas Renteria, Vladimir Gonzalez, and Dana Reeve, the ledger’s status doesn’t align with what they’re seeing on the ground.",
-      "issue": "Misrepresentation of residence. None of these citizens live in West Oakland (Turner, Renteria, and Gonzalez live in Fruitvale; Reeve lives in Chinatown), meaning they cannot witness West Oakland Stabilization Fund effects 'on the ground' as local residents.",
-      "severity": "high"
+      "claim": "its supplied phase is disbursement active",
+      "issue": "Leaking engine verbiage and status enums ('supplied phase', 'disbursement active') into prose.",
+      "severity": "med"
     }
   ],
-  "flagCount": 4,
-  "highSeverityCount": 4,
-  "summary": "Critical sourcing failures: fabricated quotes attributed to ledger citizens, misrepresentation of citizen neighborhoods, and self-citation of a Tribune journalist.",
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "The draft accurately reflects the initiative's status from the ground truth but contains minor engine verbiage leaks.",
   "review": {
     "profileId": "carmen-civic-ledger-v1",
-    "canonIntegrity": "fail",
-    "texture": "overreach"
+    "canonIntegrity": "pass",
+    "texture": "authorized"
   },
   "reviewProfile": {
     "id": "carmen-civic-ledger-v1",
-    "packageVersion": "CARMEN-LEP2-1",
-    "manifestId": "AM-f1ab59491069",
-    "lexicalObservations": [
-      {
-        "code": "UNAPPROVED_QUOTE",
-        "values": [
-          "What the record shows does not line up with what I expected,",
-          "What explains the gap in the record? The Tribune should keep pressing for an answer.",
-          "I am going to keep watching this.",
-          "The Tribune should keep pressing for an answer.",
-          "disbursement-active",
-          "disbursement-active"
-        ]
-      }
-    ]
+    "packageVersion": null,
+    "manifestId": "AM-f1973639de72",
+    "lexicalObservations": []
   },
   "nameCheck": {
-    "verified": [
-      "Calvin Turner",
-      "Dana Reeve",
-      "Tomas Renteria",
-      "Vladimir Gonzalez"
-    ],
+    "verified": [],
     "unverified": [
-      "Initiative Tracker"
+      "West Oakland Stabilization Fund"
     ]
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 4,
+      "names": 0,
       "businesses": 0,
-      "storylines": 1,
+      "storylines": 0,
       "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": true
+    "packetChecked": false
   },
-  "apiCostUsd": 0.0617,
-  "durationMs": 17199,
+  "apiCostUsd": 0.0463,
+  "durationMs": 11942,
   "parseError": false,
-  "ranAt": "2026-08-11T23:17:19.212Z"
+  "ranAt": "2026-08-13T07:03:38.205Z"
 }

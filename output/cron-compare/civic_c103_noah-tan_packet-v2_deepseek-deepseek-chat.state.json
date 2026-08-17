@@ -1,0 +1,212 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00157",
+    "name": "Noah Tan",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write one Article from inside this city, in this reporter's voice, using only Packet-approved facts and exact quotes",
+    "assignment": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+    "approach": "Environment approach: translate the supplied environmental or weather signal into grounded civic terms. Do not invent measurements, forecasts, or scientific conclusions.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "weather-ground",
+      "method": "CONDITION_BASELINE",
+      "missing": [
+        "comparison with a prior Cycle, forecast, seasonal norm, or historical record",
+        "an alert, hazard, health effect, travel effect, infrastructure effect, or causal explanation",
+        "a named monitoring authority, affected resident, observation, quote, or next scheduled update"
+      ],
+      "impactEvidence": {
+        "state": "UNESTABLISHED",
+        "subjects": [],
+        "facts": [],
+        "src": null
+      },
+      "forbidden": [
+        "Do not add forecasts, comparisons, records, alerts, hazards, causes, measurements, agencies, resident reactions, or impacts absent from the supplied weather record."
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "weather",
+    "hood": null,
+    "src": "output/world_summary_c103.md:3",
+    "plan": {
+      "focus": "Winter conditions at the start of Cycle 103",
+      "closeQuestion": "What civic patterns emerge under consistent winter conditions?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "How do residents adapt to these conditions in their daily routines?",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Are there any observable changes in public behavior due to the weather?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "src": "output/world_summary_c103.md:3",
+      "id": "F-d0bb8b04250b"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields and source-path metadata from public copy. Do not write as an auditor of a supplied record."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Narrate each Cycle's Packet-backed weather conditions without inventing comparisons, alerts, impacts, authorities, or resident reactions.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "short science-first third-person weather reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "the supplied Cycle weather condition",
+      "closing": "the next comparison, impact, or monitoring record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of the supplied weather snapshot",
+      "an explicit statement that impacts or comparisons are not established",
+      "transitions that add no forecast, alert, cause, authority, measurement, or human effect"
+    ],
+    "textureConditions": [
+      "every condition and measurement must come from the Packet",
+      "comparisons, records, alerts, hazards, causes, agencies, resident reactions, and impacts require Packet support",
+      "ordinary weather remains news because it narrates the Cycle, but ordinary does not authorize invented significance",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-17c24984eeec",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-d0bb8b04250b",
+        "t": "FACT",
+        "text": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+        "src": "output/world_summary_c103.md:3"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "How do residents adapt to these conditions in their daily routines?",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Are there any observable changes in public behavior due to the weather?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of the supplied weather snapshot",
+      "an explicit statement that impacts or comparisons are not established",
+      "transitions that add no forecast, alert, cause, authority, measurement, or human effect"
+    ],
+    "textureConditions": [
+      "every condition and measurement must come from the Packet",
+      "comparisons, records, alerts, hazards, causes, agencies, resident reactions, and impacts require Packet support",
+      "ordinary weather remains news because it narrates the Cycle, but ordinary does not authorize invented significance",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  }
+}

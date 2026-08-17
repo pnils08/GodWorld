@@ -1,35 +1,33 @@
-# Nine Cycles, No Movement: Fruitvale Transit Hub Phase II Still Stuck in "Planning"
+# Bay Tribune — Civic Investigations
+## Cycle 103
 
-Here's what the record shows: the Fruitvale Transit Hub Phase II — Visioning has sat in construction-planning phase for nine cycles. Not nine weeks of quiet progress. Nine cycles of the same phase, the same status, no forward motion logged anywhere I can find in the tracker.
+Tomas Renteria works the line before sunrise most days, then talks into a microphone about the neighborhood he just walked through to get there. He caught the 1 bus this morning the same way he's caught it for cycles now — the same stop, the same wait, the same stretch of Fruitvale that was supposed to have a transit hub moving through visioning by now.
 
-That's not a delay. That's a stall.
+It hasn't moved.
 
-**What we know.** The Initiative Tracker flags it directly — a stuck-initiative pattern, marked high, tied to row 4 of the tracker. The transit project carrying Fruitvale's name hasn't advanced. That's the fact. It's on the record, and it's the only hard fact I have to work with here.
+That's not my framing. It's the tracker's. Fruitvale Transit Hub Phase II — the visioning stage — is stalled in construction-planning. The initiative carrying it hasn't advanced in nine cycles. Nine. That's not a pause, that's a shape. Something that long stops looking like a delay and starts looking like a default state.
 
-**What we don't know** is everything underneath it. Who owns this phase. What's blocking the transition to the next one. Whether anyone has been asked and declined to answer, or whether no one's been asked at all. The record doesn't say. I'm not going to pretend it does.
+"I feel like the visioning stall means someone's not listening to what actually moves here," Renteria told me. "Who's deciding without riding the 1 bus at 6am?"
 
-I want to be precise about that gap, because it's easy to fill it with something that sounds plausible — a permitting snag, a budget fight, a stakeholder holdout. I've heard versions of all of that around this project. None of it is in the record I've got. So none of it goes in this piece.
+I don't have an answer to that question. Nobody in the record I've been given does either.
 
-Two residents flagged the same gap to me independently, and their language lines up almost exactly with what the tracker shows.
+Here's what I can tell you and what I can't.
 
-Calvin Turner: "What the record shows does not line up with what I expected. Who is responsible for answering this? I am going to keep watching this."
+I can tell you the initiative exists, that it's named, that it's tracked, and that the tracker has it parked at nine cycles without movement. I can tell you Renteria rides the route this project is supposedly about, and that from where he stands — six a.m., bus doors, cold hands — the stall reads as a decision made somewhere else, by someone who isn't on that bus.
 
-Tomas Renteria: "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+What I can't tell you is who owns that decision. No office is named in what I've got. No planner, no commissioner, no agency signed to Phase II visioning has been placed on the record I'm working from. I'm not going to invent one. I'm not going to tell you a request went unanswered when I have no request to point to, and I'm not going to tell you silence is the story when I don't have a clock running on anybody.
 
-Different residents, same complaint, same question. Both are asking who's accountable for a phase that hasn't moved in nine cycles. Neither one gets an answer from me today, because the Packet I'm working from doesn't have one to give.
+That's the honest gap. Renteria's question — who's deciding — is a real question asked by a real Fruitvale rider, and right now it's aimed at nobody in particular, because the record doesn't hand me a body to aim it at. That's not proof no one is responsible. It's proof I don't have the name yet.
 
-**The silence clock:** I can't start it. Starting a silence clock means I have a request on record and a response — or a documented absence of one — with a timestamp. I don't have that here. What I have is a stalled phase and no attached record of anyone asking the responsible office why, or anyone from that office answering. That's a different kind of gap than a silence clock. It's a records gap before the silence gap even begins.
+Nine cycles is long enough that "yet" starts to feel generous. Somewhere there's a person or an office whose job touches this initiative. I don't know who. What I know is the number: nine. What I know is a man who works a kitchen line and hosts a podcast and rides a bus that the plan was supposedly drawn around, still riding it, still waiting, still asking the same question he was asking cycles ago.
 
-**The open question**, the one both Turner and Renteria are circling and the one the tracker itself doesn't resolve: what specific obstacle is keeping this initiative from moving out of construction-planning? Nine cycles is long enough that "still working on it" stops being a satisfying answer on its own. It's long enough that the absence of an answer becomes its own small story.
+The hub hasn't broken ground because it hasn't finished being imagined. Renteria's not asking for concrete. He's asking who's in the room deciding what Fruitvale needs — and whether that room has anyone in it who's stood at his stop at six in the morning.
 
-I don't have a named office to point at yet. I don't have a duty-holder the Packet identifies. What I have is a fact that isn't moving and two residents who noticed before I did.
-
-The next record I need is simple: whatever office or initiative owner sits behind row 4 of that tracker, on the record, explaining what's actually holding this up. Until that shows up, "construction-planning" is a label, not a status.
+I don't have that answer. I'm going to keep looking for who does.
 
 ## INTAKE
-NAMES: Calvin Turner | quoted-source
-NAMES: Tomas Renteria | quoted-source
-STORYLINE: fruitvale-anomaly | referenced
+NAMES: Tomas Renteria | mentioned
+STORYLINE: fruitvale-tomas-renteria-anomaly | opened
 HOOD: Fruitvale
-CLAIM: stuck-initiative (high) — Initiative "Fruitvale Transit Hub Phase II — Visioning" in phase "construction-planning" for 9 cycles | output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4
+CLAIM: I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am? | citizenVoice PRESS Tomas Renteria
 <!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->

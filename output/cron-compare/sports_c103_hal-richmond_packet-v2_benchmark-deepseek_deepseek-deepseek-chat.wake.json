@@ -1,0 +1,25 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "103",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "sonnet",
+  "persona": "hal-richmond",
+  "byline": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 8,
+  "quotesLanded": 1,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/samples/sports_c103_hal-richmond_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.sample.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-13T15:19:31.508Z"
+}

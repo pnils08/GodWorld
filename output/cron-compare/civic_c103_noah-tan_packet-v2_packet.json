@@ -1,0 +1,29 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/world_summary_c103.md:3",
+      "label": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "kind": "weather",
+      "angle": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "hookLine": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "hood": null,
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c103_noah-tan_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [],
+  "ranAt": "2026-08-13T18:15:22.071Z"
+}

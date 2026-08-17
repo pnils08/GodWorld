@@ -85,9 +85,9 @@
     "sightings": [
       {
         "kind": "lifestyle-sighting",
-        "label": "sighting | Claire Ashford spotted at Beth Jacob Congregation",
+        "label": "sighting | Claire Ashford spotted at B'nai Tikvah Synagogue",
         "name": "Claire Ashford",
-        "venue": "Beth Jacob Congregation",
+        "venue": "B'nai Tikvah Synagogue",
         "ref": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
         "hood": "Piedmont Ave",
         "popids": []
@@ -184,8 +184,8 @@
     {
       "className": "fame-sighting",
       "score": 23,
-      "label": "Claire Ashford at Beth Jacob Congregation (Piedmont Ave)",
-      "named": "Beth Jacob Congregation",
+      "label": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)",
+      "named": "B'nai Tikvah Synagogue",
       "hood": "Piedmont Ave"
     },
     {
@@ -271,15 +271,12 @@
       ],
       "requiresName": true,
       "source": "world_summary ## Evening Texture · Nightlife",
-      "angle": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
-      "hookLine": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+      "angle": "Nightline Station is open and quiet in West Oakland. What that condition means is not yet established.",
+      "hookLine": "Nightline Station is open and quiet in West Oakland.",
       "sceneBits": [
         "VENUE: Nightline Station",
         "HOOD: West Oakland",
-        "VOLUME: 3",
-        "VIBE: quiet",
-        "MOVEMENT: restricted",
-        "WEATHER IMPACT: 1.05"
+        "EVENING RECORD: open and quiet"
       ],
       "nightlifeMeta": {
         "volume": 3,
@@ -292,23 +289,23 @@
     {
       "className": "fame-sighting",
       "score": 23,
-      "label": "Claire Ashford at Beth Jacob Congregation (Piedmont Ave)",
-      "named": "Beth Jacob Congregation",
+      "label": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)",
+      "named": "B'nai Tikvah Synagogue",
       "hood": "Piedmont Ave",
       "names": [
         "Claire Ashford",
-        "Beth Jacob Congregation"
+        "B'nai Tikvah Synagogue"
       ],
       "person": "Claire Ashford",
-      "venue": "Beth Jacob Congregation",
+      "venue": "B'nai Tikvah Synagogue",
       "popids": [],
       "requiresName": true,
       "source": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
-      "angle": "Claire Ashford spotted at Beth Jacob Congregation in Piedmont Ave — ground truth only, no invented companions",
-      "hookLine": "sighting | Claire Ashford spotted at Beth Jacob Congregation",
+      "angle": "Claire Ashford spotted at B'nai Tikvah Synagogue in Piedmont Ave — ground truth only, no invented companions",
+      "hookLine": "sighting | Claire Ashford spotted at B'nai Tikvah Synagogue",
       "sceneBits": [
         "PERSON: Claire Ashford",
-        "VENUE: Beth Jacob Congregation",
+        "VENUE: B'nai Tikvah Synagogue",
         "HOOD: Piedmont Ave"
       ],
       "cycle": 103
@@ -372,12 +369,11 @@
       ],
       "requiresName": true,
       "source": "world_summary ## Evening Texture · Restaurants",
-      "angle": "Kitchen / dining room at Piedmont Heights in Piedmont Ave — who works the room and what the night costs them",
-      "hookLine": "Piedmont Heights is on the evening board in Piedmont Ave.",
+      "angle": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave. What was happening there is not established.",
+      "hookLine": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave.",
       "sceneBits": [
         "VENUE: Piedmont Heights",
-        "HOOD: Piedmont Ave",
-        "FOOD TREND: Holiday celebration dining - festive atmosphere"
+        "HOOD: Piedmont Ave"
       ],
       "cycle": 103
     },
@@ -392,12 +388,11 @@
       ],
       "requiresName": true,
       "source": "world_summary ## Evening Texture · Restaurants",
-      "angle": "Kitchen / dining room at Festive Feast in Downtown — who works the room and what the night costs them",
-      "hookLine": "Festive Feast is on the evening board in Downtown.",
+      "angle": "Festive Feast appears on the evening restaurant list in Downtown. What was happening there is not established.",
+      "hookLine": "Festive Feast appears on the evening restaurant list in Downtown.",
       "sceneBits": [
         "VENUE: Festive Feast",
-        "HOOD: Downtown",
-        "FOOD TREND: Holiday celebration dining - festive atmosphere"
+        "HOOD: Downtown"
       ],
       "cycle": 103
     },
@@ -412,12 +407,11 @@
       ],
       "requiresName": true,
       "source": "world_summary ## Evening Texture · Restaurants",
-      "angle": "Kitchen / dining room at Rockridge Cellar in Rockridge — who works the room and what the night costs them",
-      "hookLine": "Rockridge Cellar is on the evening board in Rockridge.",
+      "angle": "Rockridge Cellar appears on the evening restaurant list in Rockridge. What was happening there is not established.",
+      "hookLine": "Rockridge Cellar appears on the evening restaurant list in Rockridge.",
       "sceneBits": [
         "VENUE: Rockridge Cellar",
-        "HOOD: Rockridge",
-        "FOOD TREND: Holiday celebration dining - festive atmosphere"
+        "HOOD: Rockridge"
       ],
       "cycle": 103
     },
@@ -649,8 +643,8 @@
       ],
       "requiresName": true,
       "source": "world_summary ## Evening Texture · Fast food",
-      "angle": "Counter rush at SoupStop — speed, labor, and who still shows up",
-      "hookLine": "SoupStop holds the late-service line in Temescal.",
+      "angle": "SoupStop appears on the evening fast-food list in Temescal. What was happening there is not established.",
+      "hookLine": "SoupStop appears on the evening fast-food list in Temescal.",
       "sceneBits": [
         "VENUE: SoupStop",
         "HOOD: Temescal"
@@ -734,16 +728,16 @@
     },
     "elliot-graye": {
       "pulseClass": "fame-sighting",
-      "label": "Claire Ashford at Beth Jacob Congregation (Piedmont Ave)",
-      "score": 43,
+      "label": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)",
+      "score": 31,
       "bag": "faith"
     }
   },
   "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
   "story": {
-    "angle": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
+    "angle": "Nightline Station is open and quiet in West Oakland. What that condition means is not yet established.",
     "label": "Nightline Station (West Oakland) · quiet night",
-    "hookLine": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+    "hookLine": "Nightline Station is open and quiet in West Oakland.",
     "hood": "West Oakland",
     "pulseClass": "quiet-nightlife",
     "citizens": [],
@@ -755,17 +749,14 @@
   },
   "prewrite": {
     "pulseClass": "quiet-nightlife",
-    "angle": "Quiet nightlife at Nightline Station — low volume, restricted movement, the room still breathing",
-    "hookLine": "Nightline Station is open but the night is quiet (volume 3, vibe quiet).",
+    "angle": "Nightline Station is open and quiet in West Oakland. What that condition means is not yet established.",
+    "hookLine": "Nightline Station is open and quiet in West Oakland.",
     "anchorFacts": [
       "NAMED: Nightline Station",
       "HOOD: West Oakland",
       "VENUE: Nightline Station",
       "HOOD: West Oakland",
-      "VOLUME: 3",
-      "VIBE: quiet",
-      "MOVEMENT: restricted",
-      "WEATHER IMPACT: 1.05"
+      "EVENING RECORD: open and quiet"
     ],
     "bagRecommend": "lifestyle",
     "bagSlug": "sharon-okafor"
@@ -819,7 +810,7 @@
       "New Beginnings",
       "Ninth Inning"
     ],
-    "colorRoom": "Named places only from Evening Texture / desk_signal. Nightlife meta: volume 3, vibe quiet, movement restricted.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
   },
   "pointers": [
     "output/world_summary_c103.md ## Evening Texture",

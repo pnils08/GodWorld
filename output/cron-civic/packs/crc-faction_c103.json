@@ -11,9 +11,7 @@
     "agentDir": "civic-office-crc-faction"
   },
   "task": {
-    "goal": "Live with this district. Remember it. Sunday you fight for what you already know.",
-    "assignment": "weekday-district",
-    "approach": "Speak only from this pack and your prior notes. Do not invent people or counts."
+    "a": "district-week"
   },
   "signal": {
     "kind": "district-heat",
@@ -141,6 +139,18 @@
       "t": "FACT",
       "text": "KONO: sentiment 0.27, retail 9.69, crime index 0.68, housing pressure 1.5",
       "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-chaos-oari_van-neighborhood Rockridge",
+      "t": "FACT",
+      "text": "oari_van substance_intervention → neighborhood Rockridge Sentiment 0.04",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-chaos-garbage_truck-neighborhood KONO",
+      "t": "FACT",
+      "text": "garbage_truck dumping_cleared → neighborhood KONO Sentiment -0.12",
+      "src": "world_summary Chaos_Cars"
     }
   ],
   "role": {

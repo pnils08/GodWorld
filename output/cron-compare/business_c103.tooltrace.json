@@ -1,0 +1,97 @@
+{
+  "model": "google/gemini-2.5-flash",
+  "calls": [
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "West Oakland Stabilization Fund"
+      },
+      "resultChars": 2675
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Oakland Alternative Response Initiative"
+      },
+      "resultChars": 2541
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Fruitvale Transit Hub Phase II — Visioning"
+      },
+      "resultChars": 1122
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Baylight District — Final Council Vote"
+      },
+      "resultChars": 1016
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Oakland Youth Apprenticeship Pipeline"
+      },
+      "resultChars": 2666
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Lena Cross"
+      },
+      "resultChars": 157
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Vinnie Keane"
+      },
+      "resultChars": 51
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Marin Tao"
+      },
+      "resultChars": 51
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Claire Ashford"
+      },
+      "resultChars": 51
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Mark Aitken"
+      },
+      "resultChars": 51
+    },
+    {
+      "tool": "citizen_lookup",
+      "input": {
+        "name": "Tara Ellison"
+      },
+      "resultChars": 51
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Map"
+      },
+      "resultChars": 51
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Civic_Office_Ledger"
+      },
+      "resultChars": 51
+    }
+  ],
+  "ranAt": "2026-08-16T01:40:53.331Z"
+}

@@ -1,0 +1,18 @@
+{
+  "draft": "sports_c103_simon-leary_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.md",
+  "draftSha256": "4dbd829e42d2f990fe7c1a7ace575a9eb05d970bcffd0d8b0738aff1ff304068",
+  "verdict": "output/cron-compare/sports_c103_simon-leary_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.rhea.json",
+  "flags": [],
+  "contamination": [
+    {
+      "check": "lattice-quote",
+      "issue": "packet lattice printed as a person: \"I am going to keep watching this\""
+    },
+    {
+      "check": "lattice-quote",
+      "issue": "packet lattice printed as a person: \"This deserves a closer look\""
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed",
+  "reviewedAt": "2026-08-13T15:47:51.412Z"
+}

@@ -1,0 +1,36 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+        "sourceRef": "world_summary_c103.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-b17a99e6b54e",
+    "draftSha256": "f43f5bcb3a2f7f0545118dc42c3cdb345dcaa29ac2b5eba84880942c379a1898",
+    "verdict": "output/cron-compare/sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T17:59:22.896Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-13T17:59:25.230Z"
+}

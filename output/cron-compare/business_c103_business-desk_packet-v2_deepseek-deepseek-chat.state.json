@@ -8,9 +8,9 @@
     "desk": "business"
   },
   "task": {
-    "goal": "Write one Article and machine-parseable INTAKE from the supplied evidence",
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
     "assignment": "Storefronts quieter in Dimond — foot traffic down",
-    "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+    "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.",
     "voice": null,
     "creativeBrief": {
       "kind": "economic-storefront",
@@ -25,123 +25,96 @@
         "Do not lead with raw RetailVitality decimals — translate to scene"
       ],
       "sceneRule": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts."
-    }
+    },
+    "writingMode": "SOURCE_BRIEF"
   },
   "signal": {
     "kind": "story-signal",
     "hood": "Dimond",
     "src": "world_summary ## What Moved · trajectory",
     "plan": {
-      "focus": "Dimond's cooling retail scene compared to the rest of the city",
-      "closeQuestion": "What's drawing people—or keeping them—away from Dimond's storefronts?"
+      "focus": "Dimond's cooling retail scene compared to citywide trends",
+      "closeQuestion": "Is Dimond's retail cooling an isolated trend or the leading edge of broader economic reordering in East Oakland?"
     }
   },
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-00231",
-        "name": "Calvin Turner",
-        "profile": "Calvin Turner",
+        "pop": "POP-00730",
+        "name": "Clarence Moody",
+        "profile": "Clarence Moody",
         "quotationEligible": true,
         "src": "packet.W2.interview"
       },
       {
-        "pop": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "profile": "Vladimir Gonzalez",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
         "quotationEligible": true,
         "src": "packet.W2.interview"
       },
       {
-        "pop": "POP-00744",
-        "name": "Tomas Renteria",
-        "profile": "Tomas Renteria",
-        "quotationEligible": true,
-        "src": "packet.W2.interview"
-      },
-      {
-        "pop": "POP-00010",
-        "name": "Dana Reeve",
-        "profile": "Dana Reeve",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez",
         "quotationEligible": true,
         "src": "packet.W2.interview"
       }
     ],
     "sources": [
       {
-        "id": "Q-POP-00231-69387c5ed3",
-        "pop": "POP-00231",
-        "name": "Calvin Turner",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "id": "Q-POP-00730-ae15425af9",
+        "pop": "POP-00730",
+        "name": "Clarence Moody",
+        "quote": "I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed.",
         "factIds": [
           "F-2c3c1b14061a",
           "F-5967d0383c65"
         ],
-        "src": "packet.W2[POP-00231]"
+        "src": "packet.W2[POP-00730]"
       },
       {
-        "id": "Q-POP-00598-69387c5ed3",
-        "pop": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "id": "Q-POP-00170-258371abc3",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?",
         "factIds": [
           "F-2c3c1b14061a",
           "F-5967d0383c65"
         ],
-        "src": "packet.W2[POP-00598]"
+        "src": "packet.W2[POP-00170]"
       },
       {
-        "id": "Q-POP-00744-69387c5ed3",
-        "pop": "POP-00744",
-        "name": "Tomas Renteria",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "id": "Q-POP-00201-babd4660dd",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "quote": "I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?",
         "factIds": [
           "F-2c3c1b14061a",
           "F-5967d0383c65"
         ],
-        "src": "packet.W2[POP-00744]"
-      },
-      {
-        "id": "Q-POP-00010-69387c5ed3",
-        "pop": "POP-00010",
-        "name": "Dana Reeve",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-2c3c1b14061a",
-          "F-5967d0383c65"
-        ],
-        "src": "packet.W2[POP-00010]"
+        "src": "packet.W2[POP-00201]"
       }
     ],
     "excludedLeads": [
       {
-        "from": "Calvin Turner",
-        "text": "Might be more about where they're counting foot traffic than actual business slowing down",
+        "from": "Clarence Moody",
+        "text": "Are smaller, family-run businesses being overlooked in the retail vitality metrics?",
         "usable": false
       },
       {
-        "from": "Vladimir Gonzalez",
-        "text": "Are there shifts in local demographics or commuting patterns affecting daytime foot traffic?",
-        "usable": false
-      },
-      {
-        "from": "Tomas Renteria",
-        "text": "Are they counting the pop-up vendors by the rec center? The ones who only show up when the peaches are in season?",
-        "usable": false
-      },
-      {
-        "from": "Dana Reeve",
-        "text": "Check if the foot traffic metrics account for shifts in where people are gathering—maybe it's not less activity, just moved activity.",
+        "from": "Elio Perez",
+        "text": "Why are people avoiding Dimond's stores compared to other neighborhoods?",
         "usable": false
       },
       {
         "from": "Jordan Velez",
-        "text": "Could this be early ripple effects from transit changes elsewhere in the city?",
+        "text": "Potential link between Fruitvale transit issues and Dimond's foot traffic drop",
         "usable": false
       },
       {
         "from": "Jordan Velez",
-        "text": "Is there a shift in where people are spending their disposable income?",
+        "text": "Possible oversaturation of retail in adjacent neighborhoods drawing customers away",
         "usable": false
       }
     ]
@@ -201,7 +174,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -235,6 +208,7 @@
     "canonPolicy": "load-bearing",
     "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
     "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
       "voice": "grounded third-person economics and labor reporting",
       "targetWords": "500-800",
       "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
@@ -263,7 +237,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-1f076183a97d",
+    "id": "AM-e72bbec31789",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -305,76 +279,58 @@
     ],
     "approvedQuotes": [
       {
-        "id": "Q-POP-00231-69387c5ed3",
-        "speakerId": "POP-00231",
-        "speakerName": "Calvin Turner",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "id": "Q-POP-00730-ae15425af9",
+        "speakerId": "POP-00730",
+        "speakerName": "Clarence Moody",
+        "text": "I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed.",
         "factIds": [
           "F-2c3c1b14061a",
           "F-5967d0383c65"
         ],
-        "src": "packet.W2[POP-00231]"
+        "src": "packet.W2[POP-00730]"
       },
       {
-        "id": "Q-POP-00598-69387c5ed3",
-        "speakerId": "POP-00598",
-        "speakerName": "Vladimir Gonzalez",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "id": "Q-POP-00170-258371abc3",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?",
         "factIds": [
           "F-2c3c1b14061a",
           "F-5967d0383c65"
         ],
-        "src": "packet.W2[POP-00598]"
+        "src": "packet.W2[POP-00170]"
       },
       {
-        "id": "Q-POP-00744-69387c5ed3",
-        "speakerId": "POP-00744",
-        "speakerName": "Tomas Renteria",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+        "id": "Q-POP-00201-babd4660dd",
+        "speakerId": "POP-00201",
+        "speakerName": "Elio Perez",
+        "text": "I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?",
         "factIds": [
           "F-2c3c1b14061a",
           "F-5967d0383c65"
         ],
-        "src": "packet.W2[POP-00744]"
-      },
-      {
-        "id": "Q-POP-00010-69387c5ed3",
-        "speakerId": "POP-00010",
-        "speakerName": "Dana Reeve",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-2c3c1b14061a",
-          "F-5967d0383c65"
-        ],
-        "src": "packet.W2[POP-00010]"
+        "src": "packet.W2[POP-00201]"
       }
     ],
     "approvedSubjects": [
       {
-        "id": "POP-00231",
-        "name": "Calvin Turner",
-        "profile": "Calvin Turner",
+        "id": "POP-00730",
+        "name": "Clarence Moody",
+        "profile": "Clarence Moody",
         "src": "packet.W2.interview",
         "quotationEligible": true
       },
       {
-        "id": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "profile": "Vladimir Gonzalez",
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
         "src": "packet.W2.interview",
         "quotationEligible": true
       },
       {
-        "id": "POP-00744",
-        "name": "Tomas Renteria",
-        "profile": "Tomas Renteria",
-        "src": "packet.W2.interview",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00010",
-        "name": "Dana Reeve",
-        "profile": "Dana Reeve",
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez",
         "src": "packet.W2.interview",
         "quotationEligible": true
       }
@@ -395,33 +351,23 @@
     ],
     "unverifiedLeads": [
       {
-        "from": "Calvin Turner",
-        "text": "Might be more about where they're counting foot traffic than actual business slowing down",
+        "from": "Clarence Moody",
+        "text": "Are smaller, family-run businesses being overlooked in the retail vitality metrics?",
         "publishable": false
       },
       {
-        "from": "Vladimir Gonzalez",
-        "text": "Are there shifts in local demographics or commuting patterns affecting daytime foot traffic?",
-        "publishable": false
-      },
-      {
-        "from": "Tomas Renteria",
-        "text": "Are they counting the pop-up vendors by the rec center? The ones who only show up when the peaches are in season?",
-        "publishable": false
-      },
-      {
-        "from": "Dana Reeve",
-        "text": "Check if the foot traffic metrics account for shifts in where people are gathering—maybe it's not less activity, just moved activity.",
+        "from": "Elio Perez",
+        "text": "Why are people avoiding Dimond's stores compared to other neighborhoods?",
         "publishable": false
       },
       {
         "from": "Jordan Velez",
-        "text": "Could this be early ripple effects from transit changes elsewhere in the city?",
+        "text": "Potential link between Fruitvale transit issues and Dimond's foot traffic drop",
         "publishable": false
       },
       {
         "from": "Jordan Velez",
-        "text": "Is there a shift in where people are spending their disposable income?",
+        "text": "Possible oversaturation of retail in adjacent neighborhoods drawing customers away",
         "publishable": false
       }
     ],

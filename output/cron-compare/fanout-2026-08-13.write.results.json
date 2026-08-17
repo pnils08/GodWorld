@@ -1,0 +1,37 @@
+{
+  "date": "2026-08-13",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk civic --state-file output/cron-compare/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.state.json --persona luis-navarro --artifact-tag packet-v2 --provider openrouter --model anthropic/claude-sonnet-5 --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": false,
+      "error": "W2 refused: citizenVoice returned 0 quotes — no summary article"
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": false,
+      "error": "W2 refused: citizenVoice returned 0 quotes — no summary article"
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk culture --state-file output/cron-compare/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.state.json --persona kai-marston --artifact-tag packet-v2 --provider openrouter --model meta-llama/llama-3.3-70b-instruct --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk business --state-file output/cron-compare/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.state.json --persona business-desk --artifact-tag packet-v2 --provider openrouter --model deepseek/deepseek-chat --strict-source-hygiene --packet-only"
+    }
+  ],
+  "ranAt": "2026-08-13T23:19:48.255Z"
+}

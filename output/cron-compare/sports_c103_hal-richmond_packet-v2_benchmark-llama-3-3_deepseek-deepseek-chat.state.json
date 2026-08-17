@@ -1,0 +1,278 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00007",
+    "name": "Hal Richmond",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "What the supplied C103 line card establishes, and what history remains unsupplied.",
+    "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-history",
+      "pulseClass": "threshold",
+      "bagModes": [
+        "1 Era Comparison",
+        "5 Crossing the Threshold"
+      ],
+      "historicalAnchor": "threshold — arrival of youth as history happening",
+      "presentFacts": [
+        "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+        "Team record (feed): 124-34 · streak W15",
+        "Event (feed): A's — player-feature (late-season)",
+        "Cycle: C103"
+      ],
+      "dossierFacts": [
+        "NONE — offline slice; use packet TrueSource only if wake supplies"
+      ],
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "closingNote": "threshold crossed",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+      "sourcePointers": [
+        "output/world_summary_c103.md ## Sports",
+        "docs/media/HAL_ARCHIVE_BAG.md",
+        "scripts/sportsSubstrate.js",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Downtown",
+    "src": "world_summary_c103.md ## Sports",
+    "plan": {
+      "focus": "A's player-feature",
+      "closeQuestion": "How does a player's late-season performance reflect the team's overall strategy?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Vinnie Keane",
+        "text": "The trend seems to be about highlighting a player's performance, but without more context, it's hard to say what it means or where it's going.",
+        "usable": false
+      },
+      {
+        "from": "Hal Richmond",
+        "text": "Potential impact of player features on team momentum",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "A's — player-feature — supplied C103 line card",
+      "src": "world_summary_c103.md ## Sports",
+      "id": "F-a93b6b4ddbd5"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+      "src": "world_summary_c103.md ## Sports",
+      "id": "F-f9190a7c60c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Team record (feed): 124-34 · streak W15",
+      "src": "world_summary_c103.md ## Sports",
+      "id": "F-a2d2b18f12fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Event (feed): A's — player-feature (late-season)",
+      "src": "world_summary_c103.md ## Sports",
+      "id": "F-5f3ac04095b3"
+    },
+    {
+      "t": "FACT",
+      "text": "Cycle: C103",
+      "src": "world_summary_c103.md ## Sports",
+      "id": "F-d8611cde1e4d"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "hal-sports-history-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Frame one Packet-backed present sports fact across time without inventing archive history. A supplied historical record may become an echo; an unsupplied one remains explicitly missing.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
+      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
+      "opening": "one Packet-backed present fact",
+      "closing": "continuity or its loss, without adding a historical claim"
+    },
+    "authorizedTexture": [
+      "the reporter's reflective stance or emotional interpretation without claiming a witnessed event",
+      "an unnamed desk or archive transition carrying no person, place, institution, team, event, date, or statistic",
+      "metaphor about time or continuity grounded in a supplied present fact"
+    ],
+    "textureConditions": [
+      "every named person, place, institution, team, league, organization, event, season, date, and statistic must come from the Packet",
+      "first person may express interpretation but may not assert attendance, memory, reporting, archive access, or prior coverage unless the Packet supplies it",
+      "an era comparison is permitted only when both the present fact and historical echo are supplied facts",
+      "an unresolved feed subject may retain the supplied label but may not receive a POPID, biography, role, quote, or historical connection"
+    ],
+    "canonBlockers": [
+      "a historical person, place, institution, team, event, season, date, record, parade, award, or statistic absent from the Packet",
+      "an invented firsthand memory, witnessed scene, archive lookup, prior filing, or career-history claim",
+      "an invented roster move, player identity, relationship, quote, interview, result, contract, injury, projection, or advanced metric",
+      "an unresolved feed spelling silently assigned a POPID, biography, role, or historical identity",
+      "fan consensus, front-office strategy, or analytic-board grading replacing the supplied present fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-1ea452eb4928",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-a93b6b4ddbd5",
+        "t": "FACT",
+        "text": "A's — player-feature — supplied C103 line card",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      {
+        "id": "F-f9190a7c60c2",
+        "t": "FACT",
+        "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      {
+        "id": "F-a2d2b18f12fe",
+        "t": "FACT",
+        "text": "Team record (feed): 124-34 · streak W15",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      {
+        "id": "F-5f3ac04095b3",
+        "t": "FACT",
+        "text": "Event (feed): A's — player-feature (late-season)",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      {
+        "id": "F-d8611cde1e4d",
+        "t": "FACT",
+        "text": "Cycle: C103",
+        "src": "world_summary_c103.md ## Sports"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Vinnie Keane",
+        "text": "The trend seems to be about highlighting a player's performance, but without more context, it's hard to say what it means or where it's going.",
+        "publishable": false
+      },
+      {
+        "from": "Hal Richmond",
+        "text": "Potential impact of player features on team momentum",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the reporter's reflective stance or emotional interpretation without claiming a witnessed event",
+      "an unnamed desk or archive transition carrying no person, place, institution, team, event, date, or statistic",
+      "metaphor about time or continuity grounded in a supplied present fact"
+    ],
+    "textureConditions": [
+      "every named person, place, institution, team, league, organization, event, season, date, and statistic must come from the Packet",
+      "first person may express interpretation but may not assert attendance, memory, reporting, archive access, or prior coverage unless the Packet supplies it",
+      "an era comparison is permitted only when both the present fact and historical echo are supplied facts",
+      "an unresolved feed subject may retain the supplied label but may not receive a POPID, biography, role, quote, or historical connection"
+    ],
+    "forbiddenClaimClasses": [
+      "a historical person, place, institution, team, event, season, date, record, parade, award, or statistic absent from the Packet",
+      "an invented firsthand memory, witnessed scene, archive lookup, prior filing, or career-history claim",
+      "an invented roster move, player identity, relationship, quote, interview, result, contract, injury, projection, or advanced metric",
+      "an unresolved feed spelling silently assigned a POPID, biography, role, or historical identity",
+      "fan consensus, front-office strategy, or analytic-board grading replacing the supplied present fact"
+    ]
+  }
+}

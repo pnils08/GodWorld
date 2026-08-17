@@ -1,0 +1,37 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "sourceRef": "world_summary_c103.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-47b5584e38bf",
+    "draftSha256": "3ee9711169a93d4cdd36bbe1a277028cdded376eb05d06450685874957ea151e",
+    "verdict": "output/cron-compare/sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T17:55:12.341Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-13T17:55:14.534Z"
+}

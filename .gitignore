@@ -76,3 +76,5 @@ __pycache__/
 .grok/*
 !.grok/skills/
 !.grok/skills/**
+output/kimi/spacemolt-phase0/commander/
+output/kimi/spacemolt-phase0/spacemolt-lib/

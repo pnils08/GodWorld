@@ -1,0 +1,49 @@
+{
+  "draft": "output/cron-compare/sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "3ee9711169a93d4cdd36bbe1a277028cdded376eb05d06450685874957ea151e",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft perfectly aligns with the cycle 103 sports feed, correctly referencing the unresolved feed subject Pablo Almanzar within authorized profile limits.",
+  "review": {
+    "profileId": "anthony-sports-analytics-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-1",
+    "manifestId": "AM-47b5584e38bf",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Pablo Almanzar"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0541,
+  "durationMs": 15345,
+  "parseError": false,
+  "ranAt": "2026-08-13T17:55:12.341Z"
+}

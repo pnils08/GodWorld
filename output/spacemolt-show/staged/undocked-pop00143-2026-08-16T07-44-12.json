@@ -1,0 +1,189 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00143-2026-08-16T07-44-12",
+  "popid": "POP-00143",
+  "holder": "Clarissa Dane",
+  "session": "undocked-pop00143",
+  "window": {
+    "startedAt": "2026-08-16T07:44:12.801Z",
+    "endedAt": "2026-08-16T07:54:19.413Z"
+  },
+  "runner": {
+    "turns": 43,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 6,
+    "estCostUsd": 0.0488,
+    "tokensIn": 328581,
+    "tokensOut": 9837,
+    "log": "output/spacemolt-show/episodes/undocked-pop00143-2026-08-16T07-44-12.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-08-16T17:43:54.741Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "note": "no credit fields on windowed entries",
+      "value": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 8,
+          "nickel_ore": 3,
+          "copper_ore": 3
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 4,
+        "trading": 0,
+        "combat": 0,
+        "navigation": 0,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 91641905,
+            "created_at": "2026-08-16T07:53:11Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 4 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 4,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 91638285,
+            "created_at": "2026-08-16T07:48:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Nickel Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 3,
+              "resource_id": "nickel_ore",
+              "resource_name": "Nickel Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 91638261,
+            "created_at": "2026-08-16T07:48:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 3,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 91638192,
+            "created_at": "2026-08-16T07:48:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 4 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 4,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 91632185,
+            "created_at": "2026-08-16T07:44:14Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "ClarissaDane logged in",
+            "data": {
+              "last_login_at": "2026-08-16T06:02:47Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-08-16 07:54:19",
+        "text": "[Session Handoff] - **Current Action**: Mining operation in progress at Main Belt asteroid belt (pending results)\n- **Next Step**: Return to Sol Central Station to sell mined ore once cargo is full (currently 10/70 capacity)\n- **Location/Ship**: Theoria, docked at Main Belt (current mining location)\n- **Resources**: 500cr, 98/100 fuel, empty cargo hold (10/70)\n- **Active Goals**: Mining/trading loop to accumulate credits and resources\n- **Recent Events**: \n  - Completed previous mining/selling cycle with partial ore sale due to inventory discrepancy\n  - Noted depleted station fuel at last docking (emergency pricing: 20cr/unit)\n- **Player Note**: Received assistance request from stranded Theoria at Main Belt (needs 2 fuel)"
+      }
+    ],
+    "unwindowed": []
+  }
+}

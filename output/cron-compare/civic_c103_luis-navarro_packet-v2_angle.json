@@ -14,8 +14,8 @@
       "desk": "civic"
     },
     "task": {
-      "goal": "Plan one Article chase without choosing a new assignment",
-      "assignment": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+      "goal": "Plan one evidence-bounded records brief without inventing a reporting trail",
+      "assignment": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
       "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
       "creativeBrief": {
         "kind": "civic-investigation",
@@ -25,6 +25,24 @@
           "request timestamp and elapsed silence duration",
           "responsible person, office, or duty unless named by the source"
         ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
         "silenceClock": {
           "state": "UNESTABLISHED",
           "value": null,
@@ -71,15 +89,19 @@
       "candidates": [
         {
           "pop": "POP-00231",
-          "name": "Calvin Turner (POP-00231)",
-          "profile": "Calvin Turner (POP-00231)",
-          "why": "assignment"
+          "name": "Calvin Turner",
+          "profile": "Calvin Turner — Mechanic — Fruitvale resident",
+          "why": "assignment",
+          "role": "Mechanic",
+          "hood": "Fruitvale"
         },
         {
           "pop": "POP-00744",
-          "name": "Tomas Renteria (POP-00744)",
-          "profile": "Tomas Renteria (POP-00744)",
-          "why": "assignment"
+          "name": "Tomas Renteria",
+          "profile": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale resident",
+          "why": "assignment",
+          "role": "Podcast Host / Line Cook",
+          "hood": "Fruitvale"
         }
       ]
     },
@@ -92,9 +114,9 @@
       },
       {
         "t": "FACT",
-        "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "text": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
         "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-        "id": "F-11c83bcb168d"
+        "id": "F-c66f9422d22f"
       },
       {
         "t": "FACT",
@@ -142,7 +164,7 @@
         ],
         "closeQuestion": "string"
       },
-      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. Missing reporting evidence is a typed state, not proof that an act or response did not occur."
     }
   },
   "reporter": {
@@ -203,6 +225,24 @@
         "request timestamp and elapsed silence duration",
         "responsible person, office, or duty unless named by the source"
       ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
       "silenceClock": {
         "state": "UNESTABLISHED",
         "value": null,
@@ -333,33 +373,32 @@
   "angleRead": {
     "name": "Luis Navarro",
     "popid": "POP-00636",
-    "text": "{\n  \"focus\": \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\",\n  \"why\": \"The initiative has been stuck in the same phase for 9 cycles with no visible progress or documented response.\",\n  \"checks\": [\n    \"Verify if there's any documented response or non-response regarding the stall\",\n    \"Check for a request timestamp and elapsed silence duration\",\n    \"Identify the responsible person, office, or duty if named in the source\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00231\",\n      \"question\": \"What steps, if any, have been taken to address the stall in the Fruitvale Transit Hub Phase II initiative?\",\n      \"basis\": \"assignment\"\n    },\n    {\n      \"pop\": \"POP-00744\",\n      \"question\": \"Is there a documented reason for the lack of progress in the construction-planning phase?\",\n      \"basis\": \"assignment\"\n    }\n  ],\n  \"interpretation\": \"The prolonged stall suggests either bureaucratic inertia or unresolved issues in planning, but without documented responses, the exact cause remains unclear.\",\n  \"unverifiedLead\": [\n    \"Potential internal disagreements or resource allocation issues may be contributing to the delay\",\n    \"Community or stakeholder input might be pending, causing the hold-up\"\n  ],\n  \"closeQuestion\": \"What specific obstacle is preventing the transition out of the construction-planning phase?\"\n}",
+    "text": "{\n  \"focus\": \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\",\n  \"why\": \"The transit initiative carrying Fruitvale has not advanced in 9 cycles.\",\n  \"checks\": [\n    \"F-c66f9422d22f\",\n    \"F-c4b3917a7eab\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00231\",\n      \"question\": \"What has been your experience with the transit hub's progress?\",\n      \"basis\": \"assignment\"\n    },\n    {\n      \"pop\": \"POP-00744\",\n      \"question\": \"How has the stalled transit hub affected daily life in Fruitvale?\",\n      \"basis\": \"assignment\"\n    }\n  ],\n  \"interpretation\": \"The prolonged stagnation suggests a disconnect between planning and execution, raising questions about oversight and community impact.\",\n  \"unverifiedLead\": [\n    \"Potential reasons for the delay in construction-planning\",\n    \"Community sentiment towards the stalled initiative\"\n  ],\n  \"closeQuestion\": \"What steps are needed to move the Fruitvale Transit Hub Phase II forward?\"\n}",
     "plan": {
       "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
-      "why": "The initiative has been stuck in the same phase for 9 cycles with no visible progress or documented response.",
+      "why": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
       "checks": [
-        "Verify if there's any documented response or non-response regarding the stall",
-        "Check for a request timestamp and elapsed silence duration",
-        "Identify the responsible person, office, or duty if named in the source"
+        "F-c66f9422d22f",
+        "F-c4b3917a7eab"
       ],
       "targets": [
         {
           "pop": "POP-00231",
-          "question": "What steps, if any, have been taken to address the stall in the Fruitvale Transit Hub Phase II initiative?",
+          "question": "What has been your experience with the transit hub's progress?",
           "basis": "assignment"
         },
         {
           "pop": "POP-00744",
-          "question": "Is there a documented reason for the lack of progress in the construction-planning phase?",
+          "question": "How has the stalled transit hub affected daily life in Fruitvale?",
           "basis": "assignment"
         }
       ],
-      "interpretation": "The prolonged stall suggests either bureaucratic inertia or unresolved issues in planning, but without documented responses, the exact cause remains unclear.",
+      "interpretation": "The prolonged stagnation suggests a disconnect between planning and execution, raising questions about oversight and community impact.",
       "unverifiedLead": [
-        "Potential internal disagreements or resource allocation issues may be contributing to the delay",
-        "Community or stakeholder input might be pending, causing the hold-up"
+        "Potential reasons for the delay in construction-planning",
+        "Community sentiment towards the stalled initiative"
       ],
-      "closeQuestion": "What specific obstacle is preventing the transition out of the construction-planning phase?"
+      "closeQuestion": "What steps are needed to move the Fruitvale Transit Hub Phase II forward?"
     }
   },
   "lanePicks": [
@@ -410,5 +449,5 @@
     }
   ],
   "laneEntries": 32,
-  "ranAt": "2026-08-12T07:01:58.682Z"
+  "ranAt": "2026-08-13T11:16:54.979Z"
 }

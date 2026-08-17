@@ -22,6 +22,19 @@
 - **Eastlake** — mood clearly upbeat; street trade steady; crime low.
 - **Adams Point** — mood clearly upbeat; street trade steady; crime low; Adams Point United Methodist observes Christmas.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. datawake: KONO needs investment, not abandonment—but we need to see the receipts before we sign the check. Pull the monthly small-business retention reports since Measure Z passed and show us where the gaps are. The health of a neighborhood lasts longer than a press cycle. | action: Audit request for small-business retention reports in KONO
+2. datawake: When stable storefronts become the exception rather than the expectation, that's when audits prove their worth. Pulling the last six quarters' small-business retention reports from Economic Development to map service gaps. | action: Audit request for small-business retention reports in KONO
+3. stated: [Stabilization Fund Disbursements] Warren Ashford — The Stabilization Fund works when the numbers work—that's why Crane crossed over to support it.
+4. stated: [Baylight District Shortlist] Warren Ashford — A $2.1B project deserves more transparency than a press release—publish the scoring criteria that produced this shortlist.
+5. stated: [Youth Apprenticeship Pipeline Expansion] Warren Ashford — Cutting red tape shouldn't mean cutting corners—show us the data that justifies scaling this pilot.
+
+Latest district pack on disk: output/cron-civic/packs/COUNCIL-D7_c103.json
+This week's lever from that pack: stand with KONO or leave it
+
 ## DECISION 1 — Temescal Community Health Center — action due this cycle
 
 Where it stands: C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.

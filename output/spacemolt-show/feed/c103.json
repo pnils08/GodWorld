@@ -1,0 +1,26 @@
+{
+  "v": "UNDOCKED-FEED/1",
+  "cycle": 103,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 103,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00962",
+      "Holder": "Marcus Walker",
+      "EpisodeId": "undocked-pop00962-2026-08-16T07-26-33",
+      "CreditsDelta": -68,
+      "Systems": [
+        "Sol"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 4,
+      "Flags": [
+        "open_escrow",
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-08-16T07-26-33.json"
+    }
+  ]
+}

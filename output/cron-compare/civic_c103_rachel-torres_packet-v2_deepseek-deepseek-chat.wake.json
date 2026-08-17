@@ -2,8 +2,9 @@
   "mode": "wake-write",
   "desk": "civic",
   "cycle": "103",
-  "provider": "openrouter",
-  "model": "deepseek/deepseek-chat",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "deepseek/deepseek-chat",
   "gateModel": "google/gemini-3.5-flash",
   "persona": "rachel-torres",
   "byline": {
@@ -12,13 +13,14 @@
     "beatDomain": "SAFETY"
   },
   "laneEntries": 32,
-  "quotesLanded": 3,
-  "disposition": "flagged",
-  "rheaPass": false,
-  "rheaFlagCount": 3,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.md",
+  "article": "output/cron-compare/staged/civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.staged.md",
   "selfRecord": null,
-  "ranAt": "2026-08-11T23:15:43.774Z"
+  "ranAt": "2026-08-12T23:15:12.398Z",
+  "dispositionReconciledAt": "2026-08-13T07:44:52.137Z"
 }

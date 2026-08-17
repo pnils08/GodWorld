@@ -1,0 +1,25 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "103",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "sonnet",
+  "persona": "maria-keen",
+  "byline": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 23,
+  "quotesLanded": 0,
+  "disposition": "ungated-sample",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/samples/culture_c103_maria-keen_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.sample-1555.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-13T15:55:49.127Z"
+}

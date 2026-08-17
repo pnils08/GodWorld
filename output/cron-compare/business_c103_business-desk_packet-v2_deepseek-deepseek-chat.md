@@ -1,23 +1,20 @@
-# Dimond Storefronts Cool Off Amid Foot Traffic Decline
+# Dimond's Quiet Sidewalks: A Neighborhood Cools While Oakland Retail Hums Elsewhere  
 
-The Dimond neighborhood is showing signs of cooling retail activity, with foot traffic noticeably lighter than other commercial corridors across the city. Sidewalks along MacArthur Boulevard and Fruitvale Avenue—normally bustling with locals running errands or grabbing lunch—have seen fewer customers this week.
+The chalkboard outside the dim sum spot on MacArthur still listed the lunch specials at 2:30 PM Wednesday, but the stools were empty. Clarence Moody wiped down the counter anyway, his rhythm unbroken by the lack of customers. "I’ve been here for years, and Dimond’s always been steady—quiet but reliable," Moody said, stacking clean bowls with practiced efficiency. "If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed."  
 
-"It's quieter than usual," said Calvin Turner, who has owned a hardware store in the neighborhood for twelve years. "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+Foot traffic along Dimond's commercial corridors has dipped noticeably this cycle, according to city retail vitality models, even as other Oakland neighborhoods show stable or increasing activity. The decline manifests in subtle ways: a barber extending his midday break, a produce vendor consolidating display tables, the absence of sidewalk chatter that usually accompanies after-school snack runs.  
 
-The slowdown contrasts with brighter retail trends elsewhere in Oakland, particularly along Telegraph Avenue and International Boulevard, where foot traffic has remained steady. Storefronts in Dimond have responded by trimming hours and cutting back on staffing. Several shops along Fruitvale Avenue were closed early on Wednesday afternoon, their shutters drawn.
+"I’ve noticed Dimond feels quieter lately, and it’s worrying," said Melton Neilon, who operates a shoe repair shop two blocks from the dim sum counter. "The Tribune should ask what’s driving people away—is it rents, safety, or something else?"  
 
-Vladimir Gonzalez, who manages a café near Dimond Park, offered a similar observation. "What the record shows does not line up with what I expected," he said. "What explains the gap in the record? I am going to keep watching this."
+The neighborhood's retail slowdown contrasts with broader city trends, where post-holiday spending typically rebounds by mid-cycle. Elio Perez, a diner cook in Fruitvale, offered an outsider's perspective: "I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?"  
 
-While the foot traffic metrics suggest a cooling trend, the data raises questions about where activity is being measured—and whether the numbers capture the full picture of the neighborhood's economic vitality. Dana Reeve and Tomas Renteria both echoed concerns about the reliability of the data, emphasizing the importance of understanding the methodology behind the counts.
-
-The slowdown comes as retail corridors across Oakland navigate shifting consumer habits and lingering economic uncertainty. For Dimond, the question remains: what's drawing people—or keeping them—away from the neighborhood's storefronts?
+No single factor explains the dip—Dimond has seen no major business closures or rent spikes this cycle—but the uneven recovery raises questions about which commercial corridors benefit when discretionary spending tightens. As Moody rearranged his condiment trays for the third time that hour, the question lingered: When a neighborhood cools while the city warms, who hears the register ring?
 
 ## INTAKE
-NAMES: Calvin Turner | quoted-source
-NAMES: Vladimir Gonzalez | quoted-source
-NAMES: Tomas Renteria | quoted-source
-NAMES: Dana Reeve | quoted-source
-STORYLINE: dimond-story-signal | referenced
+NAMES: Clarence Moody | quoted-source
+NAMES: Melton Neilon | quoted-source
+NAMES: Elio Perez | quoted-source
+STORYLINE: dimond-clarence-moody-story-signal | opened
 HOOD: Dimond
-CLAIM: Current cycle: C103 | cron-desk-run explicit cycle argument
+CLAIM: I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed. | citizenVoice PRESS Clarence Moody
 <!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->

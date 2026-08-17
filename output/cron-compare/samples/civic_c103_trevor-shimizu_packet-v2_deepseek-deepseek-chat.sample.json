@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/samples/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.sample-1247.md",
+  "quotesLanded": 3,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-08-12T12:47:05.132Z"
+}

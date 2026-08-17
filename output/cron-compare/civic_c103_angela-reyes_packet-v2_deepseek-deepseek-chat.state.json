@@ -1,0 +1,354 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00156",
+    "name": "Angela Reyes",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+    "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "education-stability",
+      "method": "PROGRAM_CONTINUITY_ACCESS",
+      "missing": [
+        "a named student, teacher, family member, participant, or program staff member",
+        "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+        "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+      ],
+      "stabilityEvidence": {
+        "state": "UNESTABLISHED",
+        "participants": [],
+        "facts": [],
+        "src": null
+      },
+      "forbidden": [
+        "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "initiative",
+    "hood": "West Oakland, East Oakland, Fruitvale",
+    "src": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+    "plan": {
+      "focus": "Understanding the Oakland Youth Apprenticeship Pipeline's pilot phase",
+      "closeQuestion": "What steps are being taken to ensure the apprenticeship pipeline's success and sustainability in Oakland?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "profile": "Depak Ying — Server — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00170-8b32be5367",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I heard about that apprenticeship program—sounds like a solid way to get kids learning real skills instead of just sitting in classrooms. The Tribune should ask how many of those apprentices actually stick with it and land jobs afterward, because that’s what really matters.",
+        "factIds": [
+          "F-73329131004f"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00201-cfbe4f97a2",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "quote": "I heard about that apprenticeship thing—sounds like a real chance for kids who don't see a path after school. The Tribune should ask how many of those spots are actually going to West Oakland kids, 'cause we always get left out.",
+        "factIds": [
+          "F-73329131004f",
+          "F-a744fec7ce1d"
+        ],
+        "src": "packet.W2[POP-00201]"
+      },
+      {
+        "id": "Q-POP-00210-be1e894787",
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "quote": "I heard about that program—sounds like a good start, but the Tribune should ask how they're making sure kids from all over Oakland, not just the easy-to-reach neighborhoods, get a fair shot at those apprenticeships.",
+        "factIds": [
+          "F-73329131004f",
+          "F-a744fec7ce1d"
+        ],
+        "src": "packet.W2[POP-00210]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Elio Perez",
+        "text": "How many apprenticeship slots are allocated to West Oakland youth specifically?",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Are there specific industries or sectors the apprenticeship pipeline is targeting?",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "What support services are available to participants in the program?",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "How are employers being engaged to ensure meaningful apprenticeship opportunities?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+      "src": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "id": "F-73329131004f"
+    },
+    {
+      "t": "FACT",
+      "text": "The supplied civic record identifies an education or youth question that needs a clear, humane account.",
+      "src": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "id": "F-a744fec7ce1d"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed school, youth, or apprenticeship Initiative into a warm account of program stability without inventing participants, institutions, access, or outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm, brief third-person education reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
+      "closing": "the next participant, access, continuity, or outcome record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-aba3be316236",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-73329131004f",
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+        "src": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-a744fec7ce1d",
+        "t": "FACT",
+        "text": "The supplied civic record identifies an education or youth question that needs a clear, humane account.",
+        "src": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00170-8b32be5367",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I heard about that apprenticeship program—sounds like a solid way to get kids learning real skills instead of just sitting in classrooms. The Tribune should ask how many of those apprentices actually stick with it and land jobs afterward, because that’s what really matters.",
+        "factIds": [
+          "F-73329131004f"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00201-cfbe4f97a2",
+        "speakerId": "POP-00201",
+        "speakerName": "Elio Perez",
+        "text": "I heard about that apprenticeship thing—sounds like a real chance for kids who don't see a path after school. The Tribune should ask how many of those spots are actually going to West Oakland kids, 'cause we always get left out.",
+        "factIds": [
+          "F-73329131004f",
+          "F-a744fec7ce1d"
+        ],
+        "src": "packet.W2[POP-00201]"
+      },
+      {
+        "id": "Q-POP-00210-be1e894787",
+        "speakerId": "POP-00210",
+        "speakerName": "Depak Ying",
+        "text": "I heard about that program—sounds like a good start, but the Tribune should ask how they're making sure kids from all over Oakland, not just the easy-to-reach neighborhoods, get a fair shot at those apprenticeships.",
+        "factIds": [
+          "F-73329131004f",
+          "F-a744fec7ce1d"
+        ],
+        "src": "packet.W2[POP-00210]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00210",
+        "name": "Depak Ying",
+        "profile": "Depak Ying — Server — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elio Perez",
+        "text": "How many apprenticeship slots are allocated to West Oakland youth specifically?",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Are there specific industries or sectors the apprenticeship pipeline is targeting?",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "What support services are available to participants in the program?",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "How are employers being engaged to ensure meaningful apprenticeship opportunities?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  }
+}

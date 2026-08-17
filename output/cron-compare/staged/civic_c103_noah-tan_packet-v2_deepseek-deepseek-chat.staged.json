@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+        "sourceRef": "output/world_summary_c103.md:3"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-17c24984eeec",
+    "draftSha256": "5211ff36a4797f081a49dd50edcf13a3213067ec681c8fb4404998eefe176e3c",
+    "verdict": "output/cron-compare/civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T08:11:35.980Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T08:11:46.771Z"
+}

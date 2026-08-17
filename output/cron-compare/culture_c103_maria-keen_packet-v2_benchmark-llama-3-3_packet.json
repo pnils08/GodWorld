@@ -1,0 +1,29 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "angle": "A quiet night at Nightline Station — what the supplied evening record can and cannot explain",
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "hookLine": "The supplied evening record describes Nightline Station as open and quiet.",
+      "hood": "West Oakland",
+      "pulseClass": "quiet-nightlife",
+      "citizens": [],
+      "popids": [],
+      "named": "Nightline Station",
+      "venue": "Nightline Station",
+      "ref": "world_summary ## Evening Texture · Nightlife",
+      "cycle": 103
+    }
+  },
+  "angle": "output/cron-compare/culture_c103_maria-keen_packet-v2_benchmark-llama-3-3_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [],
+  "ranAt": "2026-08-13T15:55:08.396Z"
+}

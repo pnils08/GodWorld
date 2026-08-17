@@ -1,0 +1,123 @@
+{
+  "empty": false,
+  "cycle": 103,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 66,
+    "label": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "Benji Dillon is moving to the bullpen for the remainder of the season.",
+      "The A's record is 124-34.",
+      "The A's have won 15 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ]
+  },
+  "story": {
+    "angle": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+    "label": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+    "hookLine": "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the season.",
+    "kind": "long-view-signal",
+    "hood": "Lake Merritt",
+    "popids": [
+      "POP-00018"
+    ],
+    "citizens": [
+      "Benji Dillon (POP-00018)"
+    ],
+    "ref": "world_summary_c103.md ## Sports",
+    "cycle": 103
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 66,
+      "cycle": 103,
+      "team": "A's",
+      "label": "Benji Dillon moves to the bullpen, In an effort to give some young arms so run and rest a vet arm Dillon will be moving to the bullpen."
+    },
+    {
+      "score": 54,
+      "cycle": 103,
+      "team": "Oaks",
+      "label": "Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance"
+    },
+    {
+      "score": 54,
+      "cycle": 102,
+      "team": "A's",
+      "label": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?"
+    },
+    {
+      "score": 42,
+      "cycle": 101,
+      "team": "A's",
+      "label": "Martin Richards traded at the deadline, trading a franchise pillar in a title run"
+    },
+    {
+      "score": 38,
+      "cycle": 103,
+      "team": "A's",
+      "label": "Isley Kelly at 499 Homeruns"
+    },
+    {
+      "score": 38,
+      "cycle": 103,
+      "team": "A's",
+      "label": "Pablo Almanzar throws a No No in his MLB debut"
+    },
+    {
+      "score": 26,
+      "cycle": 103,
+      "team": "Oaks",
+      "label": "Dillon Brooks claps back at Draymond while Paulson takes the high road"
+    },
+    {
+      "score": 26,
+      "cycle": 102,
+      "team": "A's",
+      "label": "The Kids are Alright. Kevin Clark and Sidney Tumolo more than fill the gap production wise but will it be enough?"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c103.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

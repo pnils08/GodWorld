@@ -1,0 +1,115 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.6",
+  "canonStatus": "NOT_CANON",
+  "cycle": 103,
+  "generatedAt": "2026-08-13T13:00:08.107Z",
+  "lastAttemptAt": "2026-08-13T13:00:08.107Z",
+  "hours": 36,
+  "packHash": "cb1356759f377ee957a07383a5397fc75c54ce0812496b80292a1a420302c25f",
+  "worldSummary": "output/world_summary_c103.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.sample.md"
+    },
+    {
+      "classification": "UNGATED_SAMPLE",
+      "path": "output/cron-compare/samples/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.sample.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md"
+    }
+  ],
+  "flaggedExclusions": [],
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "boundedSourceHash": "9e81050a366b2e65729203411eb6d5838c0aca70c5245c92503291afe74122c4",
+  "boundedSource": "output/notebooklm/daily/c103/cb1356759f37/bounded-newsroom-source.md",
+  "sourceIds": [
+    "9c51e9b0-9474-4785-937b-72b8dcab5901"
+  ],
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioArtifactId": "3a8424c2-1faa-4df2-b83c-c8f058c17d85",
+  "audioPath": "output/notebooklm/daily/c103/cb1356759f37/godworld_daily_c103.m4a",
+  "driveLink": "https://drive.google.com/file/d/10z7l_AEyy346IdM-or12NV0ZQJmGLU9I/view?usp=drivesdk"
+}

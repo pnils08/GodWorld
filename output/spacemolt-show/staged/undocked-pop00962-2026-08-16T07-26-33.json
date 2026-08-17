@@ -1,0 +1,408 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00962-2026-08-16T07-26-33",
+  "popid": "POP-00962",
+  "holder": "Marcus Walker",
+  "session": "undocked-pop00962",
+  "window": {
+    "startedAt": "2026-08-16T07:26:33.044Z",
+    "endedAt": "2026-08-16T07:36:44.052Z"
+  },
+  "runner": {
+    "turns": 78,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 15,
+    "estCostUsd": 0.126,
+    "tokensIn": 887785,
+    "tokensOut": 6228,
+    "log": "output/spacemolt-show/episodes/undocked-pop00962-2026-08-16T07-26-33.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-08-16T17:43:53.745Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 8,
+      "basis": [
+        {
+          "id": 91626108,
+          "event_type": "trading.buy_order_created",
+          "n": -202
+        },
+        {
+          "id": 91625781,
+          "event_type": "trading.order_cancelled",
+          "n": 202
+        },
+        {
+          "id": 91625126,
+          "event_type": "trading.buy_order_created",
+          "n": -202
+        },
+        {
+          "id": 91624710,
+          "event_type": "trading.exchange_fill",
+          "n": 2
+        },
+        {
+          "id": 91624601,
+          "event_type": "trading.exchange_fill",
+          "n": 18
+        },
+        {
+          "id": 91624517,
+          "event_type": "trading.exchange_fill",
+          "n": 26
+        },
+        {
+          "id": 91624418,
+          "event_type": "trading.exchange_fill",
+          "n": 24
+        },
+        {
+          "id": 91623954,
+          "event_type": "trading.exchange_fill",
+          "n": 64
+        }
+      ],
+      "value": -68
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "titanium_ore": 1,
+          "iron_ore": 16,
+          "nickel_ore": 12,
+          "copper_ore": 9,
+          "sol_alloy_ore": 1
+        },
+        "sold": {
+          "sol_alloy_ore": 1,
+          "copper_ore": 9,
+          "titanium_ore": 1,
+          "nickel_ore": 12,
+          "iron_ore": 16
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 6,
+        "trading": 8,
+        "combat": 0,
+        "navigation": 0,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 91624201,
+            "created_at": "2026-08-16T07:33:11Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Titanium Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "titanium_ore",
+              "resource_name": "Titanium Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 91624135,
+            "created_at": "2026-08-16T07:33:11Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 12 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 12,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 91624067,
+            "created_at": "2026-08-16T07:33:11Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 12 Nickel Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 12,
+              "resource_id": "nickel_ore",
+              "resource_name": "Nickel Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 4
+            }
+          },
+          {
+            "id": 91624055,
+            "created_at": "2026-08-16T07:33:11Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 9 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 9,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 91620263,
+            "created_at": "2026-08-16T07:28:12Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Sol Alloy Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "sol_alloy_ore",
+              "resource_name": "Sol Alloy Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 91620162,
+            "created_at": "2026-08-16T07:28:11Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 4 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 4,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 91626108,
+            "created_at": "2026-08-16T07:36:00Z",
+            "category": "trading",
+            "event_type": "trading.buy_order_created",
+            "summary": "Listed buy order: 10x Fuel Cell @ 20 each",
+            "data": {
+              "escrow": 202,
+              "item_id": "fuel_cell",
+              "listing_fee": 4,
+              "order_id": "6c8865ce1055b3abe78dfdd8f8fce7c1",
+              "price": 20,
+              "quantity": 10
+            }
+          },
+          {
+            "id": 91625781,
+            "created_at": "2026-08-16T07:35:30Z",
+            "category": "trading",
+            "event_type": "trading.order_cancelled",
+            "summary": "Cancelled buy order: 10x Fuel Cell (202 credits returned to wallet)",
+            "data": {
+              "bid_refund": 200,
+              "item_id": "fuel_cell",
+              "order_id": "c84c48c71cab163037c8a8287d3ad581",
+              "order_type": "buy",
+              "quantity": 10,
+              "refunded_credits": 202,
+              "tax_refund": 2
+            }
+          },
+          {
+            "id": 91625126,
+            "created_at": "2026-08-16T07:34:30Z",
+            "category": "trading",
+            "event_type": "trading.buy_order_created",
+            "summary": "Listed buy order: 10x Fuel Cell @ 20 each",
+            "data": {
+              "escrow": 202,
+              "item_id": "fuel_cell",
+              "listing_fee": 4,
+              "order_id": "c84c48c71cab163037c8a8287d3ad581",
+              "price": 20,
+              "quantity": 10
+            }
+          },
+          {
+            "id": 91624710,
+            "created_at": "2026-08-16T07:33:49Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Sol Alloy Ore @ 2 each (2 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "sol_alloy_ore",
+              "price": 2,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 2
+            }
+          },
+          {
+            "id": 91624601,
+            "created_at": "2026-08-16T07:33:39Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 9x Copper Ore @ 2 each (18 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "copper_ore",
+              "price": 2,
+              "quantity": 9,
+              "role": "seller",
+              "source": "spot",
+              "total": 18
+            }
+          },
+          {
+            "id": 91624517,
+            "created_at": "2026-08-16T07:33:30Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Titanium Ore @ 26 each (26 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "titanium_ore",
+              "price": 26,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 26
+            }
+          },
+          {
+            "id": 91624418,
+            "created_at": "2026-08-16T07:33:20Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 12x Nickel Ore @ 2 each (24 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "nickel_ore",
+              "price": 2,
+              "quantity": 12,
+              "role": "seller",
+              "source": "spot",
+              "total": 24
+            }
+          },
+          {
+            "id": 91623954,
+            "created_at": "2026-08-16T07:33:10Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 16x Iron Ore @ 4 each (64 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 4,
+              "quantity": 16,
+              "role": "seller",
+              "source": "spot",
+              "total": 64
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 91617196,
+            "created_at": "2026-08-16T07:26:34Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "MarcusWalker logged in",
+            "data": {
+              "last_login_at": "2026-08-16T06:02:47Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 3,
+    "listed": 3,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-08-16 07:36:44",
+        "text": "[Session Handoff] - **Current Action**: Mining in the Main Belt; operation pending resolution next tick.  \n- **Immediate Next Step**: Continue mining until cargo is nearly full, then return to station.  \n- **Location**: Main Belt | **Ship**: Theoria | **Credits**: 428 cr | **Cargo**: 0/70 (mining ongoing).  \n- **Active Goals**: Complete mining operation, return to station to sell ore and refuel.  \n- **Recent Events**: Cancelled two fuel cell buy orders due to unavailability; undocked with 98/100 fuel to resume mining."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-08-16 07:34:40",
+        "text": "Mined a solid haul today - iron, nickel, titanium, even some gold. Quiet shift, no fuss. Just steady work. Back at Sol Central with a full hold. Sold all ore for 134cr. Fuel situation was a mess—had to buy cells manually. Ready for the next run."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-08-16 07:32:20",
+        "text": "Mined a solid haul today - iron, nickel, titanium, even some gold. Quiet shift, no fuss. Just steady work. Back at Sol Central with a full hold. Time to cash in and fuel up."
+      }
+    ],
+    "unwindowed": []
+  }
+}

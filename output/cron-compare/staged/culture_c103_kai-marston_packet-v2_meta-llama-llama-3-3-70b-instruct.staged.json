@@ -1,0 +1,42 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/cron-compare/staged/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Chinatown"
+    ],
+    "claims": [
+      {
+        "claim": "Nightline Station (West Oakland) · quiet night",
+        "sourceRef": "world_summary ## Evening Texture · Nightlife"
+      }
+    ]
+  },
+  "approval": {
+    "status": "canon-approved",
+    "approvedBy": "builder",
+    "approvedAt": "2026-08-13"
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-5a36ed1f08ef",
+    "draftSha256": "f14dd3d8ee3d5e53fd2f526386b6d908b4431ea512c475aaeea0b7a59b4a18d6",
+    "verdict": "output/cron-compare/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-08-13T07:03:47.278Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T07:44:52.143Z"
+}

@@ -1,0 +1,274 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "approach": "Environment approach: translate the supplied environmental or weather signal into grounded civic terms. Do not invent measurements, forecasts, or scientific conclusions.",
+      "creativeBrief": {
+        "kind": "weather-ground",
+        "method": "CONDITION_BASELINE",
+        "missing": [
+          "comparison with a prior Cycle, forecast, seasonal norm, or historical record",
+          "an alert, hazard, health effect, travel effect, infrastructure effect, or causal explanation",
+          "a named monitoring authority, affected resident, observation, quote, or next scheduled update"
+        ],
+        "impactEvidence": {
+          "state": "UNESTABLISHED",
+          "subjects": [],
+          "facts": [],
+          "src": null
+        },
+        "forbidden": [
+          "Do not add forecasts, comparisons, records, alerts, hazards, causes, measurements, agencies, resident reactions, or impacts absent from the supplied weather record."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "weather",
+      "hood": null,
+      "score": null,
+      "src": "output/world_summary_c103.md:3",
+      "nearby": [
+        {
+          "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+          "src": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+        },
+        {
+          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "src": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+          "src": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+        "src": "output/world_summary_c103.md:3",
+        "id": "F-d0bb8b04250b"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+    }
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/world_summary_c103.md:3",
+      "label": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "kind": "weather",
+      "angle": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "hookLine": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "hood": null,
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Environment approach: translate the supplied environmental or weather signal into grounded civic terms. Do not invent measurements, forecasts, or scientific conclusions."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "domain": "environment"
+    },
+    "pulse": {
+      "className": "environment",
+      "score": 60,
+      "label": "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10.",
+      "hood": null,
+      "source": "output/world_summary_c103.md:3"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "Cycle 103 opened in winter conditions: 49°F overcast, NW 11 mph, humidity 67, visibility 10."
+      ],
+      "forbidden": [
+        "Do not add forecasts, comparisons, records, alerts, hazards, causes, measurements, agencies, resident reactions, or impacts absent from the supplied weather record."
+      ],
+      "schema": "WEATHER-GROUND-BRIEF-1",
+      "method": "CONDITION_BASELINE",
+      "missing": [
+        "comparison with a prior Cycle, forecast, seasonal norm, or historical record",
+        "an alert, hazard, health effect, travel effect, infrastructure effect, or causal explanation",
+        "a named monitoring authority, affected resident, observation, quote, or next scheduled update"
+      ],
+      "impactEvidence": {
+        "state": "UNESTABLISHED",
+        "subjects": [],
+        "facts": [],
+        "src": null
+      }
+    },
+    "candidates": [
+      {
+        "score": 60,
+        "kind": "weather",
+        "label": "Cycle 103 weather | Season Winter | 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",
+        "ref": "output/world_summary_c103.md:3",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "world-summary",
+        "sourceIndex": 32
+      }
+    ],
+    "pointers": [
+      "output/world_summary_c103.md:3"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "{\n  \"focus\": \"Winter conditions at the start of Cycle 103\",\n  \"why\": \"The weather signal provides a baseline for understanding the civic environment without introducing new elements.\",\n  \"checks\": [\n    \"Ensure no forecasts or comparisons are added\",\n    \"Avoid introducing new measurements or impacts\",\n    \"Maintain focus on the supplied weather record\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"The weather sets a tone for the cycle, influencing daily activities and civic engagement subtly.\",\n  \"unverifiedLead\": [\n    \"How do residents adapt to these conditions in their daily routines?\",\n    \"Are there any observable changes in public behavior due to the weather?\"\n  ],\n  \"closeQuestion\": \"What civic patterns emerge under consistent winter conditions?\"\n}",
+    "plan": {
+      "focus": "Winter conditions at the start of Cycle 103",
+      "why": "The weather signal provides a baseline for understanding the civic environment without introducing new elements.",
+      "checks": [
+        "Ensure no forecasts or comparisons are added",
+        "Avoid introducing new measurements or impacts",
+        "Maintain focus on the supplied weather record"
+      ],
+      "targets": [],
+      "interpretation": "The weather sets a tone for the cycle, influencing daily activities and civic engagement subtly.",
+      "unverifiedLead": [
+        "How do residents adapt to these conditions in their daily routines?",
+        "Are there any observable changes in public behavior due to the weather?"
+      ],
+      "closeQuestion": "What civic patterns emerge under consistent winter conditions?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    },
+    {
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00010",
+        "POP-00039",
+        "POP-00635"
+      ]
+    },
+    {
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+      "kind": "anomaly",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
+      "popids": [
+        "POP-00758",
+        "POP-00771",
+        "POP-00773"
+      ]
+    }
+  ],
+  "laneEntries": 32,
+  "ranAt": "2026-08-13T11:15:18.718Z"
+}

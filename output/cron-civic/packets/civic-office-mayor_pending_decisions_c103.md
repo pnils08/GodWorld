@@ -43,6 +43,20 @@ The city stands at about 387,278 people; nearly everyone who wants work has it a
 - **Acceptance:** An executive directive instructing the program team on specific intake adjustments to be evaluated in C104.
 - **Silence consequence:** The apprenticeship pipeline will fail its pilot phase, leaving vulnerable youth without jobs and wasting allocated municipal resources.
 
+## This week on the wall
+
+You already lived Mon through Thu. Sunday is decide, not a blank brief.
+Your own lines this week (continuity only, not tracker canon):
+1. stated: [Celebrating Progress in Dimond and KONO] Avery Santana — Dimond and KONO are proof that when we invest in neighborhoods, they thrive.
+2. stated: [Neighborhood Coherence — West Oakland, Fruitvale, and East Oakland] Avery Santana — When neighborhoods are hurting, we don’t look away—we build a plan.
+3. stated: [Baylight District — Phase II Shortlist Publication] Avery Santana — Baylight isn’t just a stadium—it’s the future of Oakland. We’re building it right.
+4. stated: [Temescal Community Health Center — HCAI First-Comments Resolution] Avery Santana — Temescal needs this health center now—not next year, not when the paperwork is perfect.
+5. stated: [Fruitvale Transit Hub Phase II — Visioning Compliance Review] Avery Santana — Fruitvale deserves a transit hub that works for the people who use it every day. We’re moving this forward.
+6. stated: [Oakland Alternative Response Initiative — D7 Community Satisfaction Survey] Avery Santana — Public safety isn’t just about response times—it’s about trust. We’re listening, and we’re acting.
+
+Latest district pack on disk: output/cron-civic/packs/MAYOR-01_c103.json
+This week's lever from that pack: Month-five disbursement batch review
+
 ## DECISION 1 — West Oakland Stabilization Fund — action due this cycle
 
 Where it stands: C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.

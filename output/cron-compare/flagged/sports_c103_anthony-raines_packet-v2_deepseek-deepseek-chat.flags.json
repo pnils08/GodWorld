@@ -1,0 +1,18 @@
+{
+  "draft": "sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.md",
+  "draftSha256": "53282813b6cc7bb21d19843f805118ccba182ba3cd4b3f66cb7769d41c781753",
+  "verdict": "output/cron-compare/sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.rhea.json",
+  "flags": [],
+  "contamination": [
+    {
+      "check": "lattice-quote",
+      "issue": "packet lattice printed as a person: \"I am going to keep watching this\""
+    },
+    {
+      "check": "lattice-quote",
+      "issue": "packet lattice printed as a person: \"This deserves a closer look\""
+    }
+  ],
+  "summary": "deterministic world-contamination blocker failed",
+  "reviewedAt": "2026-08-13T08:30:36.950Z"
+}

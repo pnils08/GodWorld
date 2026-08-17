@@ -1,0 +1,122 @@
+{
+  "empty": false,
+  "cycle": 103,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "Adash Stanley recorded 23 points and 7 assists.",
+      "The Oaks preseason record is 0-1."
+    ],
+    "claim": "The supplied sports record establishes the event; it does not establish what happened in the room.",
+    "accessEvidence": {
+      "state": "NOT_SUPPLIED",
+      "facts": []
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "NOT_SUPPLIED",
+      "facts": []
+    },
+    "missing": [
+      "reporter attendance or access",
+      "room mood or witnessed action",
+      "quotes or dialogue",
+      "injury detail or team response beyond the supplied record"
+    ]
+  },
+  "story": {
+    "angle": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+    "label": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+    "hookLine": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+    "kind": "sideline-signal",
+    "hood": "Jack London",
+    "popids": [
+      "POP-01023"
+    ],
+    "citizens": [
+      "Adash Stanley (POP-01023)"
+    ],
+    "ref": "world_summary_c103.md ## Sports",
+    "cycle": 103
+  },
+  "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+  "players": [
+    {
+      "name": "Adash Stanley",
+      "popid": "POP-01023",
+      "role": "PG / The Oaks ",
+      "neighborhood": "Lake Merritt",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No scene is authorized unless the Packet supplies an observed place and action."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance",
+      "cycle": 103
+    },
+    {
+      "score": 70,
+      "label": "Pablo Almanzar throws a No No in his MLB debut",
+      "cycle": 103
+    },
+    {
+      "score": 58,
+      "label": "Benji Dillon moves to the bullpen, In an effort to give some young arms so run and rest a vet arm Dillon will be moving to the bullpen.",
+      "cycle": 103
+    },
+    {
+      "score": 40,
+      "label": "MLB #16 prospect Kevin Clark (3B/2B/RF) called up to the big club. Set to debut in Toronto",
+      "cycle": 101
+    },
+    {
+      "score": 38,
+      "label": "Dillon Brooks claps back at Draymond while Paulson takes the high road",
+      "cycle": 103
+    },
+    {
+      "score": 38,
+      "label": "Isley Kelly at 499 Homeruns",
+      "cycle": 103
+    },
+    {
+      "score": 20,
+      "label": "The Kids are Alright. Kevin Clark and Sidney Tumolo more than fill the gap production wise but will it be enough?",
+      "cycle": 102
+    },
+    {
+      "score": 20,
+      "label": "Frank Reyna (RF), Pabla Almanzar (SP) are the late season call ups for the As",
+      "cycle": 102
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c103.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

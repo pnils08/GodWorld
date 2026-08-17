@@ -12,7 +12,7 @@
   "pulse": {
     "className": "threshold",
     "score": 68,
-    "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+    "label": "A's — player-feature — supplied C103 line card",
     "team": "A's",
     "eventKind": "player-feature",
     "seasonType": "late-season",
@@ -20,7 +20,7 @@
     "hasStats": true,
     "record": "124-34",
     "streak": "W15",
-    "foilNumber": "2-3",
+    "foilNumber": "9IP",
     "closingNote": "threshold crossed",
     "feedCycle": 103
   },
@@ -37,7 +37,7 @@
     ],
     "historicalAnchor": "threshold — arrival of youth as history happening",
     "closingNote": "threshold crossed",
-    "claim": "Present fact: 2-3 on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed."
+    "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed."
   },
   "friction": {
     "a": "Present feed fact: Pablo Almanzar throws a No No in his MLB debut",
@@ -58,11 +58,9 @@
     ],
     "historicalAnchor": "threshold — arrival of youth as history happening",
     "presentFacts": [
-      "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
-      "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
-      "Record/Streak (feed): 124-34 · W15",
+      "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+      "Team record (feed): 124-34 · streak W15",
       "Event (feed): A's — player-feature (late-season)",
-      "NamesUsed: Pablo Almanzar (SP), Vinne Keane (DH)",
       "Cycle: C103"
     ],
     "dossierFacts": [
@@ -70,9 +68,10 @@
     ],
     "closingNote": "threshold crossed",
     "priorFiling": "NONE — wall may still inject at wake",
-    "claim": "Present fact: 2-3 on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed.",
-    "foilNumber": "2-3",
+    "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed.",
+    "foilNumber": "9IP",
     "missing": [
+      "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
       "No invented seasons or franchise history beyond packet + feed",
       "No x-stats / barrel% / invented OPS+",
       "Not a business-desk storefront assignment",
@@ -81,20 +80,24 @@
   },
   "priorTakes": [],
   "story": {
-    "angle": "Present fact: 2-3 on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed.",
-    "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
-    "hookLine": "Pablo Almanzar throws a No No in his MLB debut",
+    "angle": "What the supplied C103 line card establishes, and what history remains unsupplied.",
+    "label": "A's — player-feature — supplied C103 line card",
+    "hookLine": "A's — player-feature — supplied C103 line card",
     "hood": "Downtown",
     "pulseClass": "threshold",
     "team": "A's",
     "eventKind": "player-feature",
     "closingNote": "threshold crossed",
-    "citizens": [],
-    "popids": [],
+    "citizens": [
+      "Vinnie Keane (POP-00001)"
+    ],
+    "popids": [
+      "POP-00001"
+    ],
     "ref": "world_summary_c103.md ## Sports",
     "cycle": 103
   },
-  "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+  "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
   "players": [
     {
       "name": "Pablo Almanzar",
@@ -105,23 +108,9 @@
     },
     {
       "name": "Vinnie Keane",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
-      "why": "feed-names"
-    },
-    {
-      "name": "No No",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
-      "why": "feed-names"
-    },
-    {
-      "name": "Pablo Alamazar",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Rockridge",
       "why": "feed-names"
     }
   ],
@@ -129,7 +118,7 @@
     "neighborhood": "Downtown",
     "record": "124-34",
     "streak": "W15",
-    "colorRoom": "Dawn desk, empty lot after parade, river of franchise time. Sensory free; seasons and stats only from feed/packet. Not a business storefront beat."
+    "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
   },
   "candidates": [
     {

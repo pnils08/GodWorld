@@ -1,0 +1,584 @@
+RELATIONSHIP_BONDS live export 2026-08-17T04:07:05.502Z
+BondId	CitizenA	CitizenB	BondType	Intensity	Status	Origin	DomainTag	Neighborhood	CycleCreated	LastUpdate	Notes	Holiday	HolidayPriority	FirstFriday	CreationDay	SportsSeason
+BOND-9CF02D7E	POP-00001	POP-00002	family	8	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-39BB228F	POP-00004	POP-01029	family	10	active	household		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-714C9C55	POP-00005	POP-00594	family	10	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A4D01D21	POP-00018	POP-00742	family	9	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-54A4C1B9	POP-00018	POP-00743	family	10	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-EDA1607F	POP-00742	POP-00743	family	9	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-93E80E96	POP-00023	POP-01030	family	8	active	household		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-356EE2CA	POP-00024	POP-01031	family	10	active	household		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B4C1AB67	POP-00035	POP-01033	family	9	active	household		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-FD231179	POP-00037	POP-01034	family	10	active	household		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8AA6D855	POP-00038	POP-01035	family	9	active	household		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-32CF5D96	POP-00040	POP-01036	family	9	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A7591D5D	POP-00231	POP-01037	family	8	active	household		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-076986EF	POP-00316	POP-00348	family	9	active	household		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-62A928EF	POP-00509	POP-01038	family	10	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8FED6A0D	POP-00514	POP-00943	family	8	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-736A1509	POP-00528	POP-01039	family	8	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-94E470A0	POP-00536	POP-01040	family	10	active	household		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5CEE11A6	POP-00591	POP-01041	family	9	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-DE306B11	POP-00641	POP-01018	family	8	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A4C245FE	POP-00642	POP-01017	family	10	active	household		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6F294929	POP-00644	POP-01016	family	8	active	household		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D0552B7A	POP-00647	POP-01015	family	8	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B738CF50	POP-00652	POP-01014	family	10	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-EBBBFA03	POP-00653	POP-01013	family	8	active	household		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-650DDF55	POP-00654	POP-01012	family	8	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-3C5AD2D2	POP-00665	POP-01011	family	9	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-78523185	POP-00666	POP-01010	family	10	active	household		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5872FE3F	POP-00669	POP-01009	family	10	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-EDB01054	POP-00673	POP-01008	family	9	active	household		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4C11323C	POP-00678	POP-01007	family	10	active	household		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7046FE78	POP-00680	POP-01006	family	8	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-E5CF9C92	POP-00683	POP-01005	family	10	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-9D71553B	POP-00685	POP-01004	family	9	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-55D71AA6	POP-00686	POP-01003	family	8	active	household		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8D9F9BB0	POP-00688	POP-01002	family	10	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-362B5FB0	POP-00691	POP-01001	family	8	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-CAFA3FE7	POP-00692	POP-01000	family	10	active	household		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-40D937E9	POP-00696	POP-00998	family	9	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-E4D9173C	POP-00697	POP-00997	family	10	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8CD27D88	POP-00699	POP-00996	family	8	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B972309B	POP-00700	POP-00995	family	10	active	household		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-850E9053	POP-00703	POP-00994	family	8	active	household		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-E0FEED11	POP-00706	POP-00993	family	10	active	household		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C53342A6	POP-00707	POP-00992	family	10	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A5E1A3E7	POP-00708	POP-00991	family	8	active	household		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2C12EE8F	POP-00709	POP-00990	family	8	active	household		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-21FF5113	POP-00710	POP-00989	family	9	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0E3ADFBC	POP-00714	POP-00988	family	9	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6AE638CE	POP-00715	POP-00987	family	8	active	household		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-74542E5E	POP-00716	POP-00986	family	9	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4F30EE71	POP-00718	POP-00985	family	9	active	household		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-E6DF89B3	POP-00722	POP-00984	family	10	active	household		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6FB5C406	POP-00723	POP-00983	family	8	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-663AFCBC	POP-00724	POP-00982	family	8	active	household		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-BC70F354	POP-00726	POP-00981	family	9	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A7CC5E38	POP-00728	POP-00980	family	8	active	household		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-10574FA9	POP-00732	POP-00979	family	8	active	household		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2B801BBC	POP-00737	POP-00978	family	9	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F251303C	POP-00738	POP-00977	family	8	active	household		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-444DE0B7	POP-00740	POP-00976	family	8	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0FB996BF	POP-00741	POP-00975	family	8	active	household		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A340C5E4	POP-00744	POP-01042	family	8	ended	household		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-32221306	POP-00744	POP-01043	family	8	ended	household		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B0E309A8	POP-01042	POP-01043	family	8	active	household		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F175D96B	POP-00747	POP-00750	family	9	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-63D43F84	POP-00747	POP-00974	family	9	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-66519233	POP-00750	POP-00974	family	9	active	household		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-02E4DFB5	POP-00999	POP-01044	family	9	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-BA5ED923	POP-00999	POP-01045	family	10	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2A52F3C6	POP-01044	POP-01045	family	8	active	household		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7E3F2D5E	POP-00476	POP-01036	friendship	5.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B6226F85	POP-01001	POP-00658	friendship	6.41	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8EC28357	POP-00017	POP-00019	friendship	3.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-300FD1EA	POP-00801	POP-00818	professional	5	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C7346B84	POP-00927	POP-00481	friendship	5.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-09109185	POP-00759	POP-00927	professional	5	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5728A723	POP-00016	POP-01001	friendship	5.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D282EDFC	POP-00233	POP-00885	professional	4	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4F70C0D4	POP-00304	POP-00504	professional	5	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6E782677	POP-00842	POP-00864	professional	4	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2148B24F	POP-00870	POP-01036	friendship	3.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-3FC42EBF	POP-00769	POP-00194	friendship	6.84	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-FE90DFEC	POP-00779	POP-00749	friendship	6.4	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-EF8115F1	POP-00016	POP-00885	friendship	3.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-97E6388A	POP-00230	POP-00476	professional	5	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7311BAB9	POP-00121	POP-00556	friendship	4.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8F2061D5	POP-00045	POP-00546	professional	5	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2683DECB	POP-00779	POP-00040	friendship	3.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-947A5403	POP-00230	POP-00504	friendship	4.41	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-57C30EE3	POP-00507	POP-00364	friendship	4.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-BC715A61	POP-00121	POP-00842	professional	6	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C6D24FB6	POP-00860	POP-00996	friendship	6.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8ACE7771	POP-00938	POP-00927	friendship	4.8	active	neighbor		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8EAE7503	POP-00788	POP-00655	friendship	3.82	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-AA0D6A66	POP-00150	POP-00205	professional	3	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-41244A0E	POP-00910	POP-00440	friendship	4.8	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-83D7839F	POP-00634	POP-00642	friendship	6.8	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-70FD7369	POP-00882	POP-00931	friendship	6.8	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8ED81BD1	POP-00003	POP-00705	friendship	5.82	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2CAADC43	POP-00156	POP-00725	friendship	6.8	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-92868367	POP-00935	POP-00910	professional	6	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2AEE3713	POP-00276	POP-01017	professional	4	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-01C50AAA	POP-00690	POP-00273	friendship	4.82	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D663DF67	POP-00655	POP-00051	friendship	3.82	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-FC56F655	POP-00458	POP-00649	professional	5	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-81144C21	POP-00053	POP-00250	friendship	3.82	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D7D99F9A	POP-00634	POP-00493	friendship	3.8	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6B75A231	POP-00020	POP-00678	friendship	6.41	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-206647A3	POP-00705	POP-00555	professional	4	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D110912D	POP-00189	POP-00788	friendship	3.84	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-CF078515	POP-00250	POP-00458	professional	5	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-13015156	POP-00655	POP-00705	friendship	5.84	active	neighbor		Jack London	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6CBC03B7	POP-00231	POP-00339	friendship	6.84	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A592E7AD	POP-00622	POP-00800	friendship	3.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7D996507	POP-00762	POP-00143	friendship	3.41	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2F64328E	POP-00618	POP-00590	friendship	6.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-17FE927C	POP-00766	POP-00298	professional	3	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-14A3382B	POP-00833	POP-01016	friendship	6.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-29BB7A70	POP-00083	POP-00328	friendship	5.82	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-48393C67	POP-01043	POP-00762	friendship	4.82	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-19079E69	POP-00298	POP-01032	friendship	6.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-3408A73B	POP-01032	POP-00829	friendship	3.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-EDFCD2E6	POP-00795	POP-00887	friendship	6.4	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8AA88C34	POP-01043	POP-00590	friendship	5.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-CFE6964A	POP-00756	POP-00728	professional	6	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B26E75ED	POP-00876	POP-01037	friendship	4.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-803696A5	POP-00829	POP-00339	professional	3	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-25FD2697	POP-00231	POP-00361	professional	6	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-E189BA1F	POP-00636	POP-00325	friendship	6.82	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-BE4812D9	POP-00436	POP-00523	friendship	4.4	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-48179F85	POP-00459	POP-00633	friendship	6.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-42D409FD	POP-00503	POP-00929	friendship	3.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F193F53A	POP-00503	POP-00940	friendship	5.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D52B3B58	POP-01029	POP-00876	friendship	4.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-31F45E22	POP-01042	POP-01029	friendship	4.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2D9EE854	POP-00518	POP-00588	friendship	4.8	active	neighbor		Fruitvale	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-90924345	POP-00748	POP-00167	friendship	6.82	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-54320949	POP-00452	POP-00711	friendship	3.82	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-23E8BF2A	POP-00167	POP-00928	professional	3	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5CE3A956	POP-00711	POP-00928	friendship	3.82	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8E8B128D	POP-00740	POP-00669	friendship	4.41	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B39B9AA8	POP-00222	POP-00547	professional	6	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4F53DB76	POP-00542	POP-00843	friendship	4.4	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0338D71D	POP-00447	POP-00906	friendship	4.8	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-97183BF9	POP-00999	POP-00997	friendship	5.8	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-767F4F1C	POP-00939	POP-00005	friendship	6.8	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-714F8E7D	POP-00811	POP-00041	friendship	5.8	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6B59C1A0	POP-00832	POP-01045	friendship	5.8	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5449258A	POP-00079	POP-00363	friendship	3.41	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F9AD45C6	POP-00363	POP-00702	professional	5	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D4A0A434	POP-00013	POP-00871	professional	3	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-00125AC1	POP-00540	POP-00664	friendship	6.82	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-AD70EF31	POP-00748	POP-00906	friendship	3.8	active	neighbor		Lake Merritt	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4494F271	POP-00625	POP-01014	friendship	5.4	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-3F7D5266	POP-00010	POP-01015	professional	6	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-002B9C0A	POP-00908	POP-00251	friendship	6.82	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C8255AAB	POP-00341	POP-00007	professional	3	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F3B4B712	POP-00341	POP-00497	friendship	4.82	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-EFE93D97	POP-00294	POP-00816	friendship	6.84	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-826DAE4A	POP-01014	POP-00803	friendship	6.8	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2A40BFDA	POP-00989	POP-00662	professional	4	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A788066D	POP-00350	POP-00214	friendship	4.84	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8A030045	POP-00981	POP-00294	friendship	5.84	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A5656DF5	POP-00010	POP-00933	friendship	6.8	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F746F08E	POP-00214	POP-00036	professional	6	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B0C33889	POP-00918	POP-00039	friendship	3.8	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-51739EA0	POP-00662	POP-01041	professional	3	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-DA97FEE4	POP-00010	POP-00519	friendship	6.8	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2351F9C4	POP-00908	POP-01014	friendship	6.8	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4900B96A	POP-00591	POP-00812	friendship	5.8	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-768EB085	POP-00246	POP-00933	friendship	6.82	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-38EECED0	POP-01014	POP-00497	professional	6	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-85E0F4A6	POP-00497	POP-00986	friendship	6.4	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1808B4C2	POP-00923	POP-00816	friendship	5.8	active	neighbor		Chinatown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-49FBC961	POP-00275	POP-00573	friendship	4.8	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D06561BB	POP-00758	POP-00722	professional	4	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-59B63B86	POP-01030	POP-00301	professional	3	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-58A48BD7	POP-00275	POP-00984	friendship	5.8	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C3076508	POP-00787	POP-00675	friendship	5.82	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4D90F1A0	POP-00201	POP-00188	friendship	6.84	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0D1213CC	POP-00441	POP-00932	professional	3.8	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-BC647E09	POP-00357	POP-00787	friendship	6.82	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A4A63085	POP-00301	POP-00288	friendship	6.84	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F23077CD	POP-00037	POP-00188	professional	5	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-05DEE6AA	POP-00727	POP-00202	friendship	6.84	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-3A577BAE	POP-00797	POP-00794	professional	3	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-EE96A192	POP-00817	POP-00218	friendship	3.41	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2E9093F7	POP-00668	POP-00037	friendship	6.84	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B011BC53	POP-00278	POP-00722	professional	3	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-549E48F0	POP-00190	POP-00201	friendship	4.86	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D75B6AED	POP-00573	POP-00817	friendship	4.4	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6203B2D4	POP-00190	POP-00037	friendship	3.86	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2BB857F6	POP-00984	POP-00521	professional	3	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0EAD4A15	POP-01030	POP-00787	friendship	3.4	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-525BEC3C	POP-00433	POP-00456	friendship	4.4	active	neighbor		West Oakland	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7BA7596A	POP-01022	POP-00603	friendship	6.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D8155881	POP-00318	POP-00091	professional	4	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-08890D4F	POP-00983	POP-00474	friendship	4.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-05D4B833	POP-00344	POP-00624	professional	6	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D11B2231	POP-00131	POP-00836	friendship	6.82	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0F834087	POP-01006	POP-00244	friendship	5.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C18120A0	POP-00747	POP-00637	friendship	3.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-31F6C870	POP-00165	POP-00747	friendship	6.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F9B83CCC	POP-00351	POP-00685	friendship	6.82	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-777979C4	POP-01027	POP-00554	friendship	6.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B9F1360D	POP-00009	POP-00257	friendship	5.82	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8B148EA4	POP-01005	POP-00533	friendship	4.4	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-13C65C19	POP-00212	POP-00362	friendship	4.82	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-3EB4D47A	POP-00172	POP-00903	friendship	5.42	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-9C8E8572	POP-00257	POP-00543	professional	6	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-DFED6974	POP-01025	POP-01002	friendship	3.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-FE5BD5EC	POP-00359	POP-01006	friendship	4.82	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F931131D	POP-00165	POP-01002	friendship	6.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-37CC78EA	POP-00485	POP-00165	friendship	6.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C794FFED	POP-00474	POP-00337	professional	5	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-54BB442E	POP-00351	POP-01027	professional	6	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C2F179B8	POP-00872	POP-01027	friendship	5.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-730097DD	POP-00048	POP-00335	friendship	4.82	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C27E4E6B	POP-00240	POP-00052	friendship	5.8	active	neighbor		Downtown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1F029FCF	POP-00892	POP-00623	professional	6	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1313FB2D	POP-00500	POP-00186	friendship	3.82	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-BF18D404	POP-00945	POP-00229	friendship	3.84	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-FA3BFFCE	POP-00014	POP-00945	professional	3	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F35573C2	POP-00025	POP-00982	professional	5	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0849CB23	POP-00724	POP-00492	professional	4	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-9D10CB13	POP-00229	POP-00500	professional	5	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7C2FCDD3	POP-00982	POP-00174	friendship	4.84	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-DF67AAEA	POP-00706	POP-00358	friendship	5.82	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-728FA094	POP-00021	POP-00912	professional	5	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-70FD9C45	POP-00724	POP-00837	friendship	5.8	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5FA21B7A	POP-00025	POP-00358	professional	5	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8E807841	POP-00823	POP-00472	friendship	4.8	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-45F1228C	POP-00495	POP-00033	professional	5	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-211563A5	POP-00724	POP-00888	friendship	3.8	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-3F517544	POP-00254	POP-00496	friendship	5.82	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-75A8864E	POP-00837	POP-00092	friendship	5.8	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B1BC4BAD	POP-00229	POP-00823	professional	3	active	neighbor		Laurel	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1DAFBAEF	POP-00863	POP-00228	friendship	6.8	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1353C9BC	POP-00896	POP-00819	friendship	6.8	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B9A09D2F	POP-00347	POP-00799	professional	2.8	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-13429068	POP-00896	POP-00775	friendship	3.4	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5FFA0802	POP-00806	POP-00666	friendship	4.82	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1F85C8E3	POP-00315	POP-00319	professional	5	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-57582DAA	POP-00169	POP-00315	friendship	5.82	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7B376054	POP-00799	POP-00333	professional	4	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-615B1551	POP-00703	POP-00038	friendship	3.41	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7E567261	POP-00286	POP-00475	friendship	3.41	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-AD4C403F	POP-00486	POP-00703	professional	3	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-35BAFDDC	POP-00266	POP-00315	friendship	4.84	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-062DADA0	POP-00221	POP-00292	friendship	4.84	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-36E602E3	POP-00852	POP-00333	friendship	3.82	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-27AA730E	POP-00667	POP-00975	friendship	5.82	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-956BADCE	POP-00169	POP-00863	friendship	4.8	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1AA07B5E	POP-00709	POP-00745	friendship	5.8	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-14408384	POP-00741	POP-00221	friendship	6.82	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-038E668C	POP-00729	POP-00761	friendship	5.82	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-722357A2	POP-00761	POP-00347	friendship	5.41	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4914D9EB	POP-00149	POP-00729	friendship	4.4	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-86C265D0	POP-00799	POP-00324	friendship	3	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7265BDA2	POP-00286	POP-00593	friendship	4.41	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-43544B5E	POP-00347	POP-00055	friendship	4.41	active	neighbor		Temescal	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-DF6AE9B5	POP-00434	POP-00321	friendship	4.82	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7288747D	POP-01031	POP-01033	friendship	6.8	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1691D83F	POP-00153	POP-00506	professional	5	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-40C54EF6	POP-00141	POP-00465	friendship	5.8	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7C4A5ED3	POP-00831	POP-00868	friendship	5.8	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-55FF0F75	POP-00153	POP-00057	friendship	6.8	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-578DDE82	POP-00085	POP-00345	professional	6	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A0017F68	POP-00991	POP-00281	friendship	3.82	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C91A2579	POP-00220	POP-01033	friendship	4.82	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-36E39936	POP-00203	POP-00673	friendship	4.84	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4BEC995B	POP-00302	POP-00085	friendship	3.84	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D8E883AE	POP-00631	POP-00245	friendship	3.41	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C1CC3CB9	POP-00077	POP-00868	friendship	4.8	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6562939E	POP-00653	POP-00831	professional	4	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-9A37196C	POP-00336	POP-00299	professional	5	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A7C8227C	POP-00438	POP-00338	friendship	4.82	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B874A558	POP-01026	POP-00466	friendship	6.8	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1593B1D9	POP-00626	POP-00631	professional	5	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-31BDF80E	POP-00708	POP-01040	friendship	4.8	active	neighbor		Uptown	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-297CF385	POP-00267	POP-00054	friendship	6.4	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-DF8946CA	POP-01028	POP-00330	friendship	4.8	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C3BA546D	POP-00239	POP-00760	friendship	6.84	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-8060DC51	POP-00539	POP-01028	professional	5	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-7C972FDF	POP-00043	POP-00830	friendship	5.84	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-CC475C4D	POP-00671	POP-00646	professional	3	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C3415701	POP-00255	POP-00168	professional	6	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-354C8BF4	POP-00880	POP-00217	friendship	4.82	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-860AEACB	POP-00841	POP-00296	friendship	3.41	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0FDC55AA	POP-00446	POP-00216	friendship	3.82	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-38FBFE04	POP-00255	POP-00352	friendship	6.82	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-80FC970B	POP-00539	POP-00217	friendship	3.82	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-9663751C	POP-00646	POP-00049	professional	5	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4C871ECF	POP-00166	POP-00216	professional	3	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D30CB9D7	POP-00884	POP-00253	friendship	3.82	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-32EF14C9	POP-00352	POP-00826	friendship	6.82	active	neighbor		Piedmont Ave	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-82723190	POP-01024	POP-00899	friendship	5.8	active	neighbor		KONO	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-08BCCAE9	POP-00808	POP-00909	friendship	5.4	active	neighbor		KONO	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6E06822F	POP-00934	POP-00867	friendship	6.8	active	neighbor		KONO	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2235C55D	POP-00509	POP-00723	professional	3	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-0DA7157B	POP-00685	POP-00853	rivalry	5.5	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-DB79A741	POP-00225	POP-00748	professional	2	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-D4E7FE26	POP-00885	POP-00639	friendship	4.8	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-C7157F39	POP-00078	POP-00889	friendship	3.4	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-825EE687	POP-01030	POP-00647	professional	4	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5885344F	POP-00649	POP-00821	professional	4.8	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-76768EB2	POP-00021	POP-01032	friendship	4.84	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-4B0B704C	POP-00436	POP-00987	rivalry	6	active	random		cross-neighborhood	102	102	seeded [Confrontation C103]	none	none	FALSE	FALSE	off-season
+BOND-E3E7B394	POP-00617	POP-00337	professional	3	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-2A20ED9F	POP-00787	POP-00077	friendship	4.8	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-58C552F1	POP-00332	POP-00691	rivalry	7	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-B47F4855	POP-00261	POP-00812	friendship	2.82	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A29D3B98	POP-00527	POP-00120	professional	5	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-A5CC2CCD	POP-00710	POP-00255	rivalry	7	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-6506F8AC	POP-00207	POP-00133	professional	3	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-621637F8	POP-00207	POP-00941	alliance	6.2	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-AB59A26A	POP-00049	POP-00210	professional	5	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-EC073C0C	POP-00830	POP-00181	friendship	2.82	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-93E00BDE	POP-00716	POP-00454	alliance	5.2	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-56DC828D	POP-00148	POP-00033	rivalry	6	active	random		cross-neighborhood	102	102	seeded [Confrontation C103]	none	none	FALSE	FALSE	off-season
+BOND-C7662AFB	POP-00103	POP-00879	friendship	5.8	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-32777EFB	POP-01023	POP-01030	professional	4	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-5B3BF1FF	POP-00434	POP-00681	friendship	2.82	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-27BFD8B0	POP-00717	POP-00624	rivalry	5	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-9E601004	POP-00175	POP-00675	professional	2	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-1BF24CCB	POP-00791	POP-00276	alliance	3.2	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-33D2D740	POP-00037	POP-01011	friendship	3.82	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-28121EC3	POP-00772	POP-00764	friendship	3.82	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-75656677	POP-00080	POP-00897	friendship	3.4	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-309E4FC6	POP-00311	POP-00889	rivalry	6	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-E9968755	POP-00267	POP-00035	friendship	5.4	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-988AEDF0	POP-00746	POP-00467	rivalry	6	active	random		cross-neighborhood	102	102	seeded [Confrontation C103]	none	none	FALSE	FALSE	off-season
+BOND-1DFA7318	POP-00258	POP-00274	alliance	4.2	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+BOND-F363DF47	POP-00902	POP-00459	friendship	2.4	active	random		cross-neighborhood	102	102	seeded	none	none	FALSE	FALSE	off-season
+stqjoh3j	POP-00937	POP-00327	tension	4	active	neighborhood	WORK		102	102	Close quarters, little common ground.	Hanukkah	cultural	FALSE	FALSE	off-season
+7zpzdos1	POP-00937	POP-00830	neighbor	3.5	active	neighborhood		Piedmont Ave	102	102	Neighbors in Piedmont Ave.	Hanukkah	cultural	FALSE	FALSE	off-season
+BOND-A0D3736A	POP-00037	POP-00201	family	9	active	household		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-0A095CEE	POP-00201	POP-01034	family	9	active	household		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-5FE46F29	POP-00162	POP-00679	family	8	active	household		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-9291D055	POP-00199	POP-00289	family	8	active	household		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F501EBBB	POP-00262	POP-00267	family	10	active	household		Piedmont Ave	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F5583C5A	POP-00345	POP-00672	family	10	active	household		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-2D2D7852	POP-00440	POP-00678	family	10	active	household		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-185D5872	POP-00440	POP-01007	family	8	active	household		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-054F4C11	POP-00451	POP-00492	family	8	active	household		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B24F6072	POP-00210	POP-00124	friendship	5.43	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-7450EA5E	POP-00651	POP-00544	professional	5	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-FEEE1BC4	POP-00827	POP-00287	professional	5	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-FBBA29CF	POP-00743	POP-00842	friendship	5.4	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-ECD8434C	POP-00996	POP-00658	professional	6	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8115F106	POP-00001	POP-00305	professional	6	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A2823473	POP-00942	POP-00464	friendship	5.4	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-1D54ABCD	POP-00651	POP-01018	friendship	4.4	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-62683DEC	POP-00765	POP-00779	friendship	2.8	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-7C30EE3E	POP-00364	POP-00017	friendship	4.4	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-FFBC715A	POP-00658	POP-01038	professional	3	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8C9DE13D	POP-00481	POP-00045	professional	6	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-ED1558AC	POP-00779	POP-00464	friendship	6	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-437C9201	POP-00504	POP-00034	friendship	4.4	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-E3AA0D6A	POP-00509	POP-00658	friendship	3	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-EA54BC93	POP-00002	POP-00641	friendship	4.4	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-51664124	POP-00658	POP-00742	friendship	6	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-978805D8	POP-00274	POP-00749	professional	3	active	neighbor		Rockridge	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-5B8ED81B	POP-00493	POP-00649	friendship	3	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-5F2CAADC	POP-00276	POP-00592	professional	3	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-83678FBB	POP-00935	POP-00650	friendship	4.4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3A414401	POP-00946	POP-00910	friendship	3	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A13460AA	POP-00835	POP-00356	friendship	5.41	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D4FB5AC4	POP-00736	POP-00824	professional	6	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-33AF8910	POP-00477	POP-00529	friendship	4.4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-FC56F655	POP-00471	POP-00650	professional	5	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-81144C21	POP-00078	POP-00250	friendship	3	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-96D86212	POP-00444	POP-00458	friendship	4.4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-5FF296BA	POP-00656	POP-00690	professional	4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A72E7206	POP-00440	POP-00690	friendship	3.41	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A2669D7E	POP-00693	POP-00205	friendship	5.42	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-9F72CB26	POP-00205	POP-00078	friendship	4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D110912D	POP-00189	POP-00814	friendship	3.42	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-515E8A9B	POP-00835	POP-01007	friendship	5.4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-156325E7	POP-00030	POP-00205	friendship	4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-4E6CBC03	POP-00458	POP-00910	friendship	3.4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-044E1BEC	POP-00736	POP-00592	friendship	6.4	active	neighbor		Jack London	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-198C013A	POP-01016	POP-01043	professional	3	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-ADF8CCCB	POP-00517	POP-00733	professional	4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-7D996507	POP-00774	POP-00143	friendship	2.8	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-2F64328E	POP-00622	POP-00598	friendship	6.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-17FE927C	POP-00780	POP-00298	professional	3	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-14A3382B	POP-00887	POP-01037	friendship	6	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-29BB7A70	POP-00083	POP-00339	friendship	5.41	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-48393C67	POP-01053	POP-00774	friendship	4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-19079E69	POP-00298	POP-01043	friendship	6.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3408A73B	POP-01043	POP-00838	friendship	3.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-EDFCD2E6	POP-00810	POP-00929	friendship	6.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8AA88C34	POP-01053	POP-00598	friendship	5.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-CFE6964A	POP-00766	POP-00744	professional	6	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-96A506B1	POP-00198	POP-00632	friendship	4.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-702F9337	POP-01050	POP-00929	friendship	5.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-BA1FE230	POP-00944	POP-00995	friendship	5.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-9EDA25BB	POP-00473	POP-00636	friendship	6.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D409FD4A	POP-00325	POP-00746	friendship	3.41	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3A7B7CFD	POP-00754	POP-00728	professional	3	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B58B5B41	POP-00944	POP-00518	professional	3	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F16431F4	POP-00838	POP-01029	friendship	6.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-0DFEF936	POP-00522	POP-01037	friendship	6.4	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C9092434	POP-00503	POP-00762	friendship	3.41	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3209495C	POP-00264	POP-00317	friendship	4.41	active	neighbor		Fruitvale	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-1D61ECC8	POP-00265	POP-01039	friendship	5.42	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B123E8BF	POP-00540	POP-00669	professional	3	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-E9AD3625	POP-00363	POP-00755	friendship	4.42	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-9D66AB87	POP-00707	POP-00740	friendship	6.4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8E8B128D	POP-00740	POP-00697	friendship	4.41	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B39B9AA8	POP-00222	POP-00594	professional	6	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-4F53DB76	POP-00547	POP-00853	friendship	3.8	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-71D67F81	POP-00042	POP-00211	friendship	6.4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-97183BF9	POP-01009	POP-00999	friendship	5.4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-767F4F1C	POP-00943	POP-00005	friendship	6.4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-E1B8D605	POP-00620	POP-00943	professional	4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-51565880	POP-00697	POP-00875	friendship	3.41	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-61425449	POP-00999	POP-00222	friendship	3.41	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-EDACC691	POP-00748	POP-00875	professional	5	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-27B4870C	POP-00115	POP-00235	friendship	5.41	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A0A434BC	POP-00115	POP-01045	professional	4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-AC1EEAFD	POP-00029	POP-00041	friendship	4.4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-AD70EF31	POP-00748	POP-00928	friendship	3.4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-4494F271	POP-00540	POP-01039	friendship	5.4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3F7D5266	POP-00012	POP-01045	professional	6	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-002B9C0A	POP-00897	POP-00222	friendship	6.41	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C8255AAB	POP-00293	POP-00005	professional	3	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F3B4B712	POP-00293	POP-00445	friendship	4.41	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-EFE93D97	POP-00260	POP-00839	friendship	6.4	active	neighbor		Lake Merritt	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-CAA53216	POP-00214	POP-00329	friendship	5.42	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-57E87EEE	POP-00036	POP-00294	friendship	4.42	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C080D11C	POP-00162	POP-00785	professional	5	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C3388941	POP-00116	POP-00354	professional	3	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-7A8A9D0D	POP-00988	POP-00039	friendship	5.4	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-739EA041	POP-00140	POP-01041	friendship	3.4	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-96ACF445	POP-00341	POP-00698	friendship	5.41	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D22D768E	POP-00998	POP-00923	friendship	3	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-96E00F85	POP-00977	POP-00923	professional	4	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-4C238156	POP-00117	POP-00676	friendship	5.41	active	neighbor		Chinatown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-61BBDAA0	POP-00511	POP-00850	friendship	4.4	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-999D4F41	POP-00501	POP-00979	friendship	5.4	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-75983BCD	POP-01034	POP-00684	friendship	3.41	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-58A48BD7	POP-00278	POP-00984	friendship	5.42	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-508FE822	POP-00787	POP-00278	friendship	4.42	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B6E1D40D	POP-00176	POP-00722	professional	6	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C5C37CBC	POP-00164	POP-00190	friendship	6.42	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A4A63085	POP-00301	POP-00291	friendship	6.42	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-34C08E0F	POP-00119	POP-00432	friendship	5.4	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-47DD0E03	POP-00617	POP-00164	friendship	3.4	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3293EE96	POP-00735	POP-00675	professional	6	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-EF9021E2	POP-00521	POP-00275	professional	5	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F7C36A9A	POP-00932	POP-00675	friendship	3	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B011BC53	POP-00280	POP-00722	professional	3	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-549E48F0	POP-00201	POP-00202	friendship	4.43	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D75B6AED	POP-00576	POP-00850	friendship	4.4	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-03B2D4BF	POP-00008	POP-00684	friendship	3.41	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B857F6C1	POP-00188	POP-00850	friendship	5.41	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-4486E074	POP-00712	POP-01034	friendship	5.41	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-AD4A15BF	POP-00185	POP-00368	friendship	6.4	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-03921FF3	POP-00164	POP-00732	professional	6	active	neighbor		West Oakland	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-07708890	POP-00663	POP-00638	professional	4	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-05D4B833	POP-00351	POP-00624	professional	6	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D11B2231	POP-00131	POP-00846	friendship	6	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-0F834087	POP-01022	POP-00257	friendship	5.41	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C18120A0	POP-00747	POP-00638	friendship	3.4	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-9B83CCC3	POP-00685	POP-00148	professional	6	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-777979C4	POP-01048	POP-00597	friendship	6.4	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B9B04299	POP-01002	POP-00225	friendship	5.42	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-507513C6	POP-00337	POP-00215	friendship	3.41	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D0393EB4	POP-00362	POP-00894	friendship	3.41	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-FE5BD5EC	POP-00359	POP-01022	friendship	4.41	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F931131D	POP-00171	POP-01004	friendship	6.41	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C794FFED	POP-00485	POP-00344	professional	5	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-54BB442E	POP-00351	POP-01048	professional	6	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C2F179B8	POP-00879	POP-01048	friendship	5.4	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-730097DD	POP-00048	POP-00337	friendship	4.41	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-EA0DE1F0	POP-01005	POP-00318	professional	6	active	neighbor		Downtown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-BF18D404	POP-00945	POP-00223	friendship	3.41	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3BFFCE0F	POP-00199	POP-00724	professional	5	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B138CB50	POP-00500	POP-00888	friendship	6.4	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3928B61A	POP-00229	POP-00695	professional	3	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-DD31EDA6	POP-00450	POP-00809	professional	6	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-CB728FA0	POP-00701	POP-00809	professional	3	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-9C45061C	POP-00500	POP-00451	professional	6	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A5C962F5	POP-00513	POP-00186	professional	4	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F843B27B	POP-00495	POP-00234	professional	3	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C2858C5D	POP-00993	POP-00134	friendship	5.41	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-1563A5D2	POP-00060	POP-00234	friendship	3.4	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-875A8864	POP-00823	POP-00837	friendship	5.4	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-BC4BADA5	POP-00033	POP-00892	professional	3	active	neighbor		Laurel	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-301C1DAF	POP-00290	POP-00236	friendship	6.41	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-39DC19D1	POP-00905	POP-00430	friendship	2.8	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-13429068	POP-00905	POP-00761	friendship	3	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-5FFA0802	POP-00799	POP-00640	friendship	4	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-14128575	POP-00926	POP-00236	friendship	4.4	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-615B1551	POP-00667	POP-00038	friendship	3	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-7E567261	POP-00284	POP-00462	friendship	3.4	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-AD4C403F	POP-00484	POP-00667	professional	3	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-35BAFDDC	POP-00266	POP-00311	friendship	4.42	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-DA076D05	POP-00161	POP-00430	professional	5	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-36E602E3	POP-00848	POP-00332	friendship	3.41	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-27AA730E	POP-00666	POP-00975	friendship	5.41	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-AB20B1AA	POP-00848	POP-00926	professional	6	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B5259722	POP-00149	POP-00994	professional	3	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-36F0A155	POP-00745	POP-00498	friendship	4	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-9EB3448D	POP-00292	POP-00666	friendship	6.41	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-6C265D00	POP-00319	POP-00175	friendship	5.42	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-74A24ADA	POP-00874	POP-00595	friendship	6.4	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-265BDA22	POP-00538	POP-00022	friendship	4	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-86326D33	POP-00799	POP-00874	friendship	5	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-643544B5	POP-00819	POP-00333	friendship	5.41	active	neighbor		Temescal	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-747D1EE2	POP-00858	POP-00346	friendship	5.41	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-0CE076EA	POP-01033	POP-00307	friendship	4.41	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8C55FF0F	POP-00182	POP-00449	friendship	3.41	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-41DFC678	POP-00366	POP-00299	professional	5	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-BFEC34C4	POP-00336	POP-00263	professional	4	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-488657C8	POP-01008	POP-00449	friendship	5.4	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-7F685E65	POP-00044	POP-00673	friendship	3.41	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3F294C91	POP-00717	POP-00438	professional	4	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-CF92A227	POP-00434	POP-00506	friendship	6.4	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-BEC995BF	POP-00085	POP-00153	friendship	4.4	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-05CF444D	POP-00455	POP-00847	friendship	5.4	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-6BED0375	POP-00160	POP-00831	professional	6	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8C6C6B62	POP-01013	POP-00237	professional	5	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C34BA73D	POP-00858	POP-00455	friendship	4.4	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-874A5587	POP-00466	POP-00220	professional	5	active	neighbor		Uptown	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-31BDF80E	POP-00820	POP-01028	friendship	4	active	neighbor		Piedmont Ave	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F8946CAA	POP-00330	POP-00168	friendship	6	active	neighbor		Piedmont Ave	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8E931AA3	POP-00239	POP-00646	professional	3	active	neighbor		Piedmont Ave	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-DC51B68C	POP-00826	POP-00508	friendship	3.4	active	neighbor		Piedmont Ave	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F7D15DD5	POP-00239	POP-01000	friendship	5	active	neighbor		Piedmont Ave	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-0AEACB7D	POP-00054	POP-00255	friendship	4.4	active	neighbor		Piedmont Ave	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-ACCB3E33	POP-00845	POP-00889	professional	4	active	neighbor		KONO	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-10FDC55A	POP-00859	POP-00867	friendship	4.4	active	neighbor		KONO	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-0FC970BB	POP-00815	POP-00802	friendship	5.4	active	neighbor		KONO	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-900FB966	POP-00856	POP-00845	friendship	6.4	active	neighbor		KONO	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-230C04C8	POP-00645	POP-00798	friendship	4.4	active	neighbor		Adams Point	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F346D409	POP-00494	POP-00137	rivalry	6.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-CB9D7E06	POP-00225	POP-00884	friendship	2.42	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D32EF14C	POP-00517	POP-00807	friendship	3.4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-867EDFEF	POP-00264	POP-00513	professional	2	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-82723190	POP-00682	POP-00143	friendship	4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A06A08BC	POP-00930	POP-01034	professional	2	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C19BD7E6	POP-00818	POP-00718	rivalry	5.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-E06822F0	POP-00215	POP-00498	alliance	3.2	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-520074F3	POP-00942	POP-00554	professional	5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-52235C55	POP-00768	POP-00513	professional	3	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B0DA7157	POP-00901	POP-00690	alliance	5.2	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-E96CC3FB	POP-00764	POP-00720	rivalry	4.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-2DB79A74	POP-01028	POP-00227	professional	4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-AD4E7FE2	POP-00140	POP-00893	professional	3	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-5C7157F3	POP-00478	POP-00078	alliance	3.2	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-A825EE68	POP-00666	POP-01038	professional	4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-E5885344	POP-00503	POP-00653	alliance	4.7	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B76768EB	POP-01034	POP-00021	rivalry	4.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-D4B0B704	POP-00212	POP-00439	rivalry	6.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-7E3E7B39	POP-00839	POP-00621	friendship	4.4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-92A20ED9	POP-00270	POP-00795	friendship	2.41	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B58C552F	POP-01053	POP-00335	professional	5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-2B47F485	POP-00150	POP-00263	alliance	2.7	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-FA29D3B9	POP-00348	POP-00531	friendship	4.41	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8A5CC2CC	POP-00623	POP-00716	friendship	5.4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-76506F8A	POP-00876	POP-00208	friendship	3.4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-21637F80	POP-00950	POP-00895	rivalry	4.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B59A26AC	POP-00211	POP-00715	rivalry	5.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-C073C0CA	POP-00182	POP-00039	friendship	5.41	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-3E00BDE1	POP-00457	POP-00811	professional	4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-6DC828D1	POP-00033	POP-00928	rivalry	4.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-7662AFBF	POP-00886	POP-00283	rivalry	6.5	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-2777EFB5	POP-01037	POP-00675	alliance	2.7	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B3BF1FF7	POP-00686	POP-00016	friendship	3.41	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-8E027BFD	POP-00692	POP-00976	friendship	4.41	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-329909E6	POP-00644	POP-00771	friendship	5.4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-4D01BF24	POP-00014	POP-00010	friendship	4.4	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-F4433D2D	POP-00824	POP-00861	alliance	2.7	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+BOND-B5628121	POP-00537	POP-00313	friendship	4.41	active	random		cross-neighborhood	103	103	seeded	none	none	FALSE	FALSE	off-season
+qnjjztr6	POP-00209	POP-00321	tension	4	active	neighborhood	COMMUNITY	Uptown	103	103	Close quarters, little common ground.	Holiday	major	FALSE	FALSE	off-season
+hwsqmxus	POP-00209	POP-00467	tension	4	active	neighborhood	COMMUNITY	Uptown	103	103	Close quarters, little common ground.	Holiday	major	FALSE	FALSE	off-season
+m7j7koq1	POP-00209	POP-01040	neighbor	4	active	holiday_gathering	COMMUNITY	Uptown	103	103	Connected during Holiday neighborhood gathering.	Holiday	major	FALSE	FALSE	off-season
+7hb6sj2b	POP-00209	POP-01003	neighbor	4	active	holiday_gathering	COMMUNITY	Uptown	103	103	Connected during Holiday neighborhood gathering.	Holiday	major	FALSE	FALSE	off-season

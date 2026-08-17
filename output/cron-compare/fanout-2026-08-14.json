@@ -1,0 +1,478 @@
+{
+  "date": "2026-08-14",
+  "cycle": 103,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "beatDomain": "EDUCATION",
+      "persona": "angela-reyes",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "label": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+        "kind": "initiative",
+        "angle": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+        "hookLine": "The supplied civic record identifies an education or youth question that needs a clear, humane account.",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "angela-reyes",
+      "pulse": {
+        "className": "education-youth",
+        "score": 45,
+        "label": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active.",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "source": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active."
+        ],
+        "forbidden": [
+          "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+        ],
+        "schema": "EDUCATION-STABILITY-BRIEF-1",
+        "method": "PROGRAM_CONTINUITY_ACCESS",
+        "missing": [
+          "a named student, teacher, family member, participant, or program staff member",
+          "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+          "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+        ],
+        "stabilityEvidence": {
+          "state": "UNESTABLISHED",
+          "participants": [],
+          "facts": [],
+          "src": null
+        }
+      },
+      "wakePackage": "ANGELA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "beatDomain": "CIVIC",
+      "persona": "carmen-delaine",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "kind": "initiative",
+        "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "hood": "West Oakland",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "carmen-delaine",
+      "pulse": {
+        "className": "civic-ledger",
+        "score": 55,
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hood": "West Oakland",
+        "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+          "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+        ]
+      },
+      "wakePackage": "CARMEN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "beatDomain": "SPORTS_ANALYTICS",
+      "persona": "anthony-raines",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "kind": "sports-analytics",
+        "angle": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "hookLine": "Pablo Almanzar throws a No No in his MLB debut",
+        "hood": "Downtown",
+        "pulseClass": "line-card",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "citizens": [
+          "Vinnie Keane (POP-00001)"
+        ],
+        "popids": [
+          "POP-00001"
+        ],
+        "ref": "world_summary_c103.md ## Sports",
+        "cycle": 103
+      },
+      "anthonySlice": true,
+      "analytic": true,
+      "pulse": {
+        "className": "line-card",
+        "score": 72,
+        "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "storyAngle": "Pablo Almanzar throws a No No in his MLB debut",
+        "hasStats": true,
+        "record": "124-34",
+        "streak": "W15",
+        "foilNumber": "9IP",
+        "feedCycle": 103
+      },
+      "bag": {
+        "tools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 5,
+            "name": "Repertoire vs Results"
+          }
+        ],
+        "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "foilNumber": "9IP"
+      },
+      "prewrite": {
+        "reporter": "Anthony Raines",
+        "bagTools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 5,
+            "name": "Repertoire vs Results"
+          }
+        ],
+        "lineFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 124-34 · W15",
+          "Event kind (feed): A's — player-feature (late-season)",
+          "NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)",
+          "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "feedFacts": [
+          "StoryAngle: Pablo Almanzar throws a No No in his MLB debut",
+          "Notes: Pablo Alamazar (SP) made his major league debut in NY vs the Yankees, Pablo Almanzar just called up for the callup throws a no hitter while striking out 10. Making a major splash in his MLB debut in o",
+          "Record/Streak: 124-34 / W15"
+        ],
+        "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+          "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies",
+          "Pablo Almanzar has no Simulation_Ledger POPID in the local snapshot — do not invent or interview"
+        ],
+        "foilNumber": "9IP",
+        "anchorFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 124-34 · W15",
+          "Event kind (feed): A's — player-feature (late-season)"
+        ]
+      },
+      "wakePackage": "ANTHONY-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "angle": "What the supplied C103 line card establishes, and what history remains unsupplied.",
+        "label": "A's — player-feature — supplied C103 line card",
+        "hookLine": "A's — player-feature — supplied C103 line card",
+        "hood": "Downtown",
+        "pulseClass": "threshold",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "closingNote": "threshold crossed",
+        "citizens": [
+          "Vinnie Keane (POP-00001)"
+        ],
+        "popids": [
+          "POP-00001"
+        ],
+        "ref": "world_summary_c103.md ## Sports",
+        "cycle": 103
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "threshold",
+        "score": 68,
+        "label": "A's — player-feature — supplied C103 line card",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "storyAngle": "Pablo Almanzar throws a No No in his MLB debut",
+        "hasStats": true,
+        "record": "124-34",
+        "streak": "W15",
+        "foilNumber": "9IP",
+        "closingNote": "threshold crossed",
+        "feedCycle": 103
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 5,
+            "name": "Crossing the Threshold"
+          }
+        ],
+        "historicalAnchor": "threshold — arrival of youth as history happening",
+        "closingNote": "threshold crossed",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 5,
+            "name": "Crossing the Threshold"
+          }
+        ],
+        "historicalAnchor": "threshold — arrival of youth as history happening",
+        "presentFacts": [
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 124-34 · streak W15",
+          "Event (feed): A's — player-feature (late-season)",
+          "Cycle: C103"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "closingNote": "threshold crossed",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo Almanzar throws a No No in his MLB debut Close toward threshold crossed.",
+        "foilNumber": "9IP",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ]
+      },
+      "wakePackage": "HAL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "beatDomain": "COMMUNITY",
+      "persona": "elliot-graye",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "ref": "output/neighborhood_texture_c103.md \"### Fruitvale\"; events: world_summary_c103.md \"## World Events\"",
+        "label": "Fruitvale | 1 world event(s) this cycle",
+        "kind": "hood",
+        "hood": "Fruitvale"
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)"
+      },
+      "recommend": {
+        "bag": "lifestyle",
+        "slug": "sharon-okafor",
+        "name": "Sharon Okafor",
+        "popid": "POP-00159",
+        "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "reason": "top pulse quiet-nightlife → lifestyle",
+        "pulseClass": "quiet-nightlife",
+        "pulseLabel": "Nightline Station (West Oakland) · quiet night"
+      },
+      "bag": "faith",
+      "wakePackage": "GRAYE-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Storefronts quieter in Dimond — foot traffic down",
+        "label": "Dimond cooling",
+        "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "hood": "Dimond",
+        "pulseClass": "hood-cooling",
+        "namedBusinesses": [],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## What Moved · trajectory",
+        "cycle": 103
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "hood-cooling",
+        "score": 24,
+        "label": "Dimond cooling",
+        "hood": "Dimond",
+        "namedBusinesses": [],
+        "retail": 8.24,
+        "retailDelta": null
+      },
+      "prewrite": {
+        "pulseClass": "hood-cooling",
+        "angle": "Storefronts quieter in Dimond — foot traffic down",
+        "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "namedBusinesses": [],
+        "anchorFacts": [
+          "HOOD: Dimond",
+          "TRAJECTORY: cooling",
+          "MAGNITUDE (translate, do not lead): 6",
+          "RETAIL VITALITY (scene color): 8.24",
+          "NAMED BUSINESSES: none on disk for this hood — do not invent"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Angela Reyes",
+        "persona": "angela-reyes",
+        "wakePackage": "ANGELA-LEP2-1"
+      },
+      {
+        "name": "Carmen Delaine",
+        "persona": "carmen-delaine",
+        "wakePackage": "CARMEN-LEP2-1"
+      },
+      {
+        "name": "Anthony Raines",
+        "persona": "anthony-raines",
+        "wakePackage": "ANTHONY-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-1"
+      },
+      {
+        "name": "Elliot Graye",
+        "persona": "elliot-graye",
+        "wakePackage": "GRAYE-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-11",
+    "top": {
+      "score": 40,
+      "className": "crisis-unattended",
+      "label": "crisis-unattended (high) | City illness rate 10.1% with no desk forced onto the health signal"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c103.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=angela-reyes,carmen-delaine,anthony-raines,hal-richmond,elliot-graye,business-desk)"
+  },
+  "anthonyEnrich": {
+    "enriched": true,
+    "reason": "pulse=line-card score=72 foil=9IP"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=threshold score=68 close=threshold crossed"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=hood-cooling score=24 hood=Dimond"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "elliot-graye",
+        "bag": "faith",
+        "pulse": "fame-sighting",
+        "score": 23
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=2",
+    "seats": [
+      {
+        "persona": "angela-reyes",
+        "domain": "education-youth",
+        "label": "Oakland Youth Apprenticeship Pipeline has been announced, and its pilot is active."
+      },
+      {
+        "persona": "carmen-delaine",
+        "domain": "civic-ledger",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active"
+      }
+    ]
+  },
+  "builtAt": "2026-08-14T11:15:07.792Z"
+}

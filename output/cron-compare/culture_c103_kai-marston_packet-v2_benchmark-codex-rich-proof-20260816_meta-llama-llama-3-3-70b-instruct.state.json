@@ -1,0 +1,405 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00158",
+    "name": "Kai Marston",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Nightline Station is open and quiet in West Oakland. What that condition means is not yet established.",
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Kai (arts bag): present-tense scene; art as neighborhood act. Named events/artists from packet only. Modes: First Friday Pulse, Room Rewriting Itself, Stage/Mic/Block, What the Block Is Saying Tonight. Assigned pulse: quiet-nightlife — Nightline Station (West Oakland) · quiet night.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "evening-life",
+      "bag": "arts",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Nightline Station (West Oakland) · quiet night",
+      "namedEvents": [
+        "Jack London Holiday Market",
+        "Fruitvale Emergency Town Briefing",
+        "Lake Merritt Community Joy Parade",
+        "Lake Merritt Festival of Lights",
+        "Classic Christmas",
+        "Winter Wonderland",
+        "Bay Area Alert",
+        "Warm House"
+      ],
+      "namedPlaces": [
+        "Piedmont Heights",
+        "Festive Feast",
+        "Rockridge Cellar",
+        "Nightline Station"
+      ],
+      "famousSightings": [
+        "Claire Ashford",
+        "Mark Aitken",
+        "Tara Ellison",
+        "Vinnie Keane — fame-rise | Vinnie Keane — the city is watching: disagreed with a Tribune column out loud to an empty kitchen",
+        "Marin Tao — fame-rise | Marin Tao — the city is watching: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "Lena Cross — fame-rise | Lena Cross — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Marin Tao — tier-decay | Marin Tao — the spotlight moved on: Tier 3 -> 4",
+        "Lena Cross — tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4"
+      ],
+      "streamingTrend": "holiday classics marathon",
+      "sceneRule": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+      "sourcePointers": [
+        "docs/media/KAI_ARTS_BAG.md",
+        "output/world_summary_c103.md ## Evening Texture",
+        "output/desk_signal_c103.json lanes.culture",
+        "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "West Oakland",
+    "src": "world_summary ## Evening Texture · Nightlife",
+    "plan": {
+      "focus": "Nightline Station",
+      "closeQuestion": "What does a quiet night at Nightline Station reveal about the community?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "profile": "Daniel Cloak — Bakery Worker — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "profile": "Irene Fay — Barista — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "profile": "Darius Clark — Bakery Worker — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00722-1a1a822403",
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "quote": "I think what feels off about Nightline Station is that it's usually quiet, but I'm not sure if that's a good thing or not. The Tribune should ask if this quietness is a sign of something going on that we don't know about.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-cb764aa0daad"
+        ],
+        "src": "packet.W2[POP-00722]"
+      },
+      {
+        "id": "Q-POP-00794-317f115603",
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "quote": "I'm not sure what to make of the Nightline Station trend, it just feels kinda off to me, like something's missing from the story, and I think the Tribune should ask what's really going on behind the scenes.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-cb764aa0daad"
+        ],
+        "src": "packet.W2[POP-00794]"
+      },
+      {
+        "id": "Q-POP-00961-ce683d583d",
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "quote": "I'm not sure what to make of the Nightline Station trend, it just feels like something's missing, like it's not really capturing the vibe of our neighborhood. I think the Tribune should ask what's behind the quiet nights, is it really as calm as it seems?",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-cb764aa0daad"
+        ],
+        "src": "packet.W2[POP-00961]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "potential story about the atmosphere at Nightline Station",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Nightline Station (West Oakland) · quiet night",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-e9aa40059164"
+    },
+    {
+      "t": "FACT",
+      "text": "Nightline Station is open and quiet in West Oakland.",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-cb764aa0daad"
+    },
+    {
+      "t": "FACT",
+      "text": "NAMED: Nightline Station",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-853409f6f59f"
+    },
+    {
+      "t": "FACT",
+      "text": "HOOD: West Oakland",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-36a5efc57a78"
+    },
+    {
+      "t": "FACT",
+      "text": "VENUE: Nightline Station",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-690388ff68fb"
+    },
+    {
+      "t": "FACT",
+      "text": "EVENING RECORD: open and quiet",
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "id": "F-8b4bdb19a250"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a sourced evening pulse into present-tense arts and entertainment reporting where art, media, and a named place become a neighborhood act. A vivid room grounded in the Packet is success; generic culture roundup and invented nightlife are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
+      "closing": "an image or open question about what the room, screen, or block is becoming"
+    },
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "canonBlockers": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  },
+  "manifest": {
+    "id": "AM-663a8b41e4da",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-e9aa40059164",
+        "t": "FACT",
+        "text": "Nightline Station (West Oakland) · quiet night",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-cb764aa0daad",
+        "t": "FACT",
+        "text": "Nightline Station is open and quiet in West Oakland.",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-853409f6f59f",
+        "t": "FACT",
+        "text": "NAMED: Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-36a5efc57a78",
+        "t": "FACT",
+        "text": "HOOD: West Oakland",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-690388ff68fb",
+        "t": "FACT",
+        "text": "VENUE: Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      {
+        "id": "F-8b4bdb19a250",
+        "t": "FACT",
+        "text": "EVENING RECORD: open and quiet",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00722-1a1a822403",
+        "speakerId": "POP-00722",
+        "speakerName": "Daniel Cloak",
+        "text": "I think what feels off about Nightline Station is that it's usually quiet, but I'm not sure if that's a good thing or not. The Tribune should ask if this quietness is a sign of something going on that we don't know about.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-cb764aa0daad"
+        ],
+        "src": "packet.W2[POP-00722]"
+      },
+      {
+        "id": "Q-POP-00794-317f115603",
+        "speakerId": "POP-00794",
+        "speakerName": "Irene Fay",
+        "text": "I'm not sure what to make of the Nightline Station trend, it just feels kinda off to me, like something's missing from the story, and I think the Tribune should ask what's really going on behind the scenes.",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-cb764aa0daad"
+        ],
+        "src": "packet.W2[POP-00794]"
+      },
+      {
+        "id": "Q-POP-00961-ce683d583d",
+        "speakerId": "POP-00961",
+        "speakerName": "Darius Clark",
+        "text": "I'm not sure what to make of the Nightline Station trend, it just feels like something's missing, like it's not really capturing the vibe of our neighborhood. I think the Tribune should ask what's behind the quiet nights, is it really as calm as it seems?",
+        "factIds": [
+          "F-e9aa40059164",
+          "F-cb764aa0daad"
+        ],
+        "src": "packet.W2[POP-00961]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00722",
+        "name": "Daniel Cloak",
+        "profile": "Daniel Cloak — Bakery Worker — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00794",
+        "name": "Irene Fay",
+        "profile": "Irene Fay — Barista — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00961",
+        "name": "Darius Clark",
+        "profile": "Darius Clark — Bakery Worker — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "potential story about the atmosphere at Nightline Station",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "forbiddenClaimClasses": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  }
+}

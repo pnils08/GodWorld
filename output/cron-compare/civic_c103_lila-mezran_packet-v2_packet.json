@@ -1,0 +1,26 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "lila-mezran",
+  "packetContract": "LEP/2",
+  "reporter": null,
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+      "label": "Temescal Community Health Center is approved, and construction is active.",
+      "kind": "initiative",
+      "angle": "Temescal Community Health Center is approved, and construction is active.",
+      "hookLine": "The supplied civic record identifies a health-service question that needs careful accounting.",
+      "hood": "Temescal",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c103_lila-mezran_packet-v2_angle.json",
+  "quotesRequested": 0,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [],
+  "ranAt": "2026-08-13T07:13:06.733Z"
+}

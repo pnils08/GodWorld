@@ -1,0 +1,26 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "103",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "sharon-okafor",
+  "byline": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 23,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c103_sharon-okafor_packet-v2_benchmark-benchmark-llama-3-3_deepseek-deepseek-chat.staged.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-13T16:29:47.288Z",
+  "dispositionReconciledAt": "2026-08-13T16:31:29.426Z"
+}

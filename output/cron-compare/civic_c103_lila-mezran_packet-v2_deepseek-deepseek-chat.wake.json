@@ -1,0 +1,26 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "103",
+  "provider": "local",
+  "model": "code-rendered-source-brief",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "lila-mezran",
+  "byline": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154",
+    "beatDomain": "HEALTH"
+  },
+  "laneEntries": 32,
+  "quotesLanded": 0,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-13T07:13:06.871Z",
+  "dispositionReconciledAt": "2026-08-13T07:44:52.135Z"
+}

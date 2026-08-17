@@ -19,7 +19,7 @@
     "hasStats": true,
     "record": "124-34",
     "streak": "W15",
-    "foilNumber": "2-3",
+    "foilNumber": "9IP",
     "feedCycle": 103
   },
   "charge": null,
@@ -34,8 +34,8 @@
         "name": "Repertoire vs Results"
       }
     ],
-    "claim": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
-    "foilNumber": "2-3"
+    "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+    "foilNumber": "9IP"
   },
   "friction": {
     "a": "Feed present fact: Pablo Almanzar throws a No No in his MLB debut",
@@ -55,8 +55,8 @@
       }
     ],
     "lineFacts": [
-      "Pablo Almanza line (feed): 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3",
-      "Feed line: HR, 3 RBI",
+      "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+      "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
       "Team record (feed): 124-34 · W15",
       "Event kind (feed): A's — player-feature (late-season)",
       "NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)",
@@ -70,31 +70,37 @@
       "Notes: Pablo Alamazar (SP) made his major league debut in NY vs the Yankees, Pablo Almanzar just called up for the callup throws a no hitter while striking out 10. Making a major splash in his MLB debut in o",
       "Record/Streak: 124-34 / W15"
     ],
-    "claim": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+    "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
     "missing": [
       "x-stats / barrel% / launch angle / OAA not on feed",
       "contracts or salaries not printed on this feed row",
       "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
-      "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies"
+      "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies",
+      "Pablo Almanzar has no Simulation_Ledger POPID in the local snapshot — do not invent or interview"
     ],
-    "foilNumber": "2-3",
+    "foilNumber": "9IP",
     "anchorFacts": [
-      "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
-      "Team record (feed): 124-34 · streak W15",
-      "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
-      "Event: A's — player-feature (late-season)"
+      "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+      "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+      "Team record (feed): 124-34 · W15",
+      "Event kind (feed): A's — player-feature (late-season)"
     ]
   },
   "story": {
-    "angle": "One line anchors the board read — 2-3 — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+    "kind": "sports-analytics",
+    "angle": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
     "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
     "hookLine": "Pablo Almanzar throws a No No in his MLB debut",
     "hood": "Downtown",
     "pulseClass": "line-card",
     "team": "A's",
     "eventKind": "player-feature",
-    "citizens": [],
-    "popids": [],
+    "citizens": [
+      "Vinnie Keane (POP-00001)"
+    ],
+    "popids": [
+      "POP-00001"
+    ],
     "ref": "world_summary_c103.md ## Sports",
     "cycle": 103
   },
@@ -109,23 +115,9 @@
     },
     {
       "name": "Vinnie Keane",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
-      "why": "feed-names"
-    },
-    {
-      "name": "No No",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
-      "why": "feed-names"
-    },
-    {
-      "name": "Pablo Alamazar",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Rockridge",
       "why": "feed-names"
     }
   ],

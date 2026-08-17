@@ -1,34 +1,27 @@
 # STORY — sports c103 — P Slayer
 
 ## §1 ASSIGNMENT
-- ANGLE (assigned by the editor — fixed): Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?
-- HOOK: The stands feel sold out or sold short — write into that gap, not the press release.
-- AFFECTED CITIZENS: Isley Kelley; Isley Kelley; Mike Paulson; Isley Kelley
-- WHERE: Baylight District
-- SOURCE: Oakland_Sports_Feed cycle 102; world_summary_c103.md "## Sports" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ
+- ANGLE (assigned by the editor — fixed): Pablo Almanzar throws a No No in his MLB debut
+- HOOK: Handoff feeling vs funeral feeling — pick a side.
+- AFFECTED CITIZENS: Pablo Almanzar; Vinnie Keane — Designated Hitter, Oakland A's Legend, Rockridge; Pablo Alamazar
+- WHERE: Downtown
+- SOURCE: Oakland_Sports_Feed cycle 103; world_summary_c103.md "## Sports" · Pablo Almanzar throws a No No in his MLB debut
 - DESK APPROACH: Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down ("I was wrong" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
-  "focus": "Isley Kelley's resignation",
-  "why": "the stands feel sold out or sold short",
+  "focus": "Pablo Almanzar's no-hitter",
+  "why": "It's a historic moment for the A's",
   "checks": [
-    "friction pivot required"
+    "Handoff feeling vs funeral feeling"
   ],
   "targets": [],
-  "interpretation": "a move that sparks debate among fans",
+  "interpretation": "The city should feel dared to show up louder tomorrow",
   "unverifiedLead": [
-    "the right move for an aging star"
+    "I think this win could be a turning point for the team"
   ],
-  "closeQuestion": "is this the end of an era for the A's?"
+  "closeQuestion": "Will the A's keep their momentum going?"
 }
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
 (no quotes landed this wake — write from the record; do not invent residents)
-
-## §4 THE ARTICLE (wake 3)
-- draft: output/cron-compare/flagged/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.md
-- disposition: flagged
-- rhea: flagged (2)
-- self-score footer: present
-- tool use: none
 

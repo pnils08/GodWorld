@@ -1,0 +1,277 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00012",
+    "name": "Elliot Graye",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
+    "assignment": "Claire Ashford spotted at B'nai Tikvah Synagogue in Piedmont Ave — ground truth only, no invented companions",
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Graye (faith bag): quiet institutional care, not doctrine wars. Packet institutions only. Modes: Pantry Line, Grief Room, Mutual Aid Through Congregation, Sacred Space Ordinary Time. Assigned pulse: fame-sighting — Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave).",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "evening-life",
+      "bag": "faith",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)",
+      "namedEvents": [
+        "Jack London Holiday Market",
+        "Fruitvale Emergency Town Briefing",
+        "Lake Merritt Community Joy Parade",
+        "Lake Merritt Festival of Lights",
+        "Classic Christmas",
+        "Winter Wonderland",
+        "Bay Area Alert",
+        "Warm House"
+      ],
+      "namedPlaces": [
+        "Piedmont Heights",
+        "Festive Feast",
+        "Rockridge Cellar",
+        "Nightline Station"
+      ],
+      "famousSightings": [
+        "Claire Ashford",
+        "Mark Aitken",
+        "Tara Ellison",
+        "Vinnie Keane — fame-rise | Vinnie Keane — the city is watching: disagreed with a Tribune column out loud to an empty kitchen",
+        "Marin Tao — fame-rise | Marin Tao — the city is watching: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+        "Lena Cross — fame-rise | Lena Cross — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+        "Marin Tao — tier-decay | Marin Tao — the spotlight moved on: Tier 3 -> 4",
+        "Lena Cross — tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4"
+      ],
+      "streamingTrend": "holiday classics marathon",
+      "sceneRule": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+      "sourcePointers": [
+        "docs/media/GRAYE_FAITH_BAG.md",
+        "output/world_summary_c103.md ## Evening Texture",
+        "output/desk_signal_c103.json lanes.culture",
+        "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Piedmont Ave",
+    "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+    "plan": {
+      "focus": "Claire Ashford sighting at B'nai Tikvah Synagogue",
+      "closeQuestion": "What was the purpose of Claire Ashford's visit to B'nai Tikvah Synagogue?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Elliot Graye",
+        "text": "Possible involvement in a community event or charity function",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C103",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-4ac610ea40fe"
+    },
+    {
+      "t": "FACT",
+      "text": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)",
+      "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-c359c2ff0eca"
+    },
+    {
+      "t": "FACT",
+      "text": "sighting | Claire Ashford spotted at B'nai Tikvah Synagogue",
+      "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-f802144d1bd9"
+    },
+    {
+      "t": "FACT",
+      "text": "NAMED: Nightline Station",
+      "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-eea51a3d1328"
+    },
+    {
+      "t": "FACT",
+      "text": "HOOD: West Oakland",
+      "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-70d322c27685"
+    },
+    {
+      "t": "FACT",
+      "text": "VENUE: Nightline Station",
+      "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-81cec27fdeb6"
+    },
+    {
+      "t": "FACT",
+      "text": "EVENING RECORD: open and quiet",
+      "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-f74180bcc781"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Describe one Packet-supplied faith-community or quiet-care signal through observable function without inventing belief, doctrine, attendance, clergy, service, aid, or institutional action.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
+      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
+      "opening": "one Packet-named institution, person, or condition",
+      "closing": "the function or human account still unestablished"
+    },
+    "authorizedTexture": [
+      "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
+      "dignity-first language carrying no invented person, service, gathering, doctrine, or factual premise"
+    ],
+    "textureConditions": [
+      "a sighting proves only the supplied person-place relation, not worship, membership, motive, companionship, or participation",
+      "every clergy member, congregant, worker, gathering, service, aid act, quote, belief, institutional role, and civic effect requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect",
+      "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote",
+      "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-62a7abb0ebee",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-4ac610ea40fe",
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c359c2ff0eca",
+        "t": "FACT",
+        "text": "Claire Ashford at B'nai Tikvah Synagogue (Piedmont Ave)",
+        "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-f802144d1bd9",
+        "t": "FACT",
+        "text": "sighting | Claire Ashford spotted at B'nai Tikvah Synagogue",
+        "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-eea51a3d1328",
+        "t": "FACT",
+        "text": "NAMED: Nightline Station",
+        "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-70d322c27685",
+        "t": "FACT",
+        "text": "HOOD: West Oakland",
+        "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-81cec27fdeb6",
+        "t": "FACT",
+        "text": "VENUE: Nightline Station",
+        "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-f74180bcc781",
+        "t": "FACT",
+        "text": "EVENING RECORD: open and quiet",
+        "src": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\""
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Elliot Graye",
+        "text": "Possible involvement in a community event or charity function",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
+      "dignity-first language carrying no invented person, service, gathering, doctrine, or factual premise"
+    ],
+    "textureConditions": [
+      "a sighting proves only the supplied person-place relation, not worship, membership, motive, companionship, or participation",
+      "every clergy member, congregant, worker, gathering, service, aid act, quote, belief, institutional role, and civic effect requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented faith practice, belief, worship, membership, motive, companion, clergy, congregant, worker, pantry, grief room, gathering, service, aid act, quote, or civic effect",
+      "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote",
+      "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"
+    ]
+  }
+}

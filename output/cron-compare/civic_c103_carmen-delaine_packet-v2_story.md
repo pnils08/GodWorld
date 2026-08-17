@@ -9,31 +9,32 @@
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
-  "focus": "West Oakland Stabilization Fund disbursement progress",
-  "why": "Public funds in active disbursement phase require transparency—especially when other initiatives stall or show incoherence in neighboring areas.",
+  "focus": "West Oakland Stabilization Fund disbursement process",
+  "why": "Public funds in active disbursement phase require transparent accounting to ensure proper allocation and community benefit",
   "checks": [
-    "Verify ledger entries against disbursement timelines",
-    "Cross-reference with any audit flags from engine_audit_c103.json",
-    "Compare with patterns of stuck initiatives (Fruitvale Transit Hub) or economic imbalances in migration-reporting neighborhoods"
+    "Verify which organizations or entities have received funds so far",
+    "Confirm oversight mechanisms for fund distribution",
+    "Check if disbursement timeline matches original proposal"
   ],
-  "targets": [],
-  "interpretation": "This feels like a rare case where city machinery is actually moving—but after seeing Marcus' photo-op cleanups and the A's roster churn, I’m skeptical about whether the money’s landing where it should. Oakland’s got a habit of celebrating announcements while the follow-through fizzles.",
+  "targets": [
+    {
+      "pop": "POP-00201",
+      "question": "Have you or your workplace seen any impact from the Stabilization Fund disbursements?",
+      "basis": "Same neighborhood, potential beneficiary perspective"
+    },
+    {
+      "pop": "POP-00288",
+      "question": "What changes, if any, have you noticed in West Oakland that might be tied to the Stabilization Fund?",
+      "basis": "Same neighborhood, ground-level observer"
+    }
+  ],
+  "interpretation": "Active disbursement suggests movement, but without public records of allocations, there's risk of funds not reaching intended recipients",
   "unverifiedLead": [
-    "Are disbursements prioritizing areas with visible economic strain, or just those with political optics?",
-    "Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?"
+    "Possible discrepancy between allocated funds and visible community improvements",
+    "Potential lag between disbursement and measurable impact"
   ],
-  "closeQuestion": "What’s the gap between the ledger’s ‘disbursement-active’ status and tangible changes in West Oakland’s economic stability?"
+  "closeQuestion": "Is the disbursement process meeting its stated goals of stabilizing West Oakland communities?"
 }
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
-- Calvin Turner (POP-00231): "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer."
-- Vladimir Gonzalez (POP-00598): "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer."
-- Tomas Renteria (POP-00744): "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
-- Dana Reeve (POP-00010): "What the record shows does not line up with what I expected. What explains the gap in the record? The Tribune should keep pressing for an answer."
-
-## §4 THE ARTICLE (wake 3)
-- draft: output/cron-compare/flagged/civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat.md
-- disposition: flagged
-- rhea: flagged (4)
-- self-score footer: present
-- tool use: none
+- Marcus Wright (POP-00288): "I been hearing folks talk about this fund for months, but ain't nobody on my block seen a dime yet. The Tribune oughta ask why the money's moving so slow when people out here need roofs fixed now."
 

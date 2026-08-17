@@ -1,0 +1,58 @@
+{
+  "draft": "output/cron-compare/sports_c103_tanya-cruz_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "febf7f04812f4db9e63d7c56fed3088922ad15768a08e425f7f6c3faa253b300",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "The supplied record establishes... The supplied source material provides these exact statements... The record leaves one question open...",
+      "issue": "System template scaffolding and meta-instructions leaked directly into the draft text.",
+      "severity": "high"
+    },
+    {
+      "claim": "streak L1 · mood hungry",
+      "issue": "Raw database enums ('L1', 'hungry') leaked into the text without being translated into natural journalistic prose.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 1,
+  "summary": "Draft contains raw system scaffolding, meta-questions, and database enums that must be cleaned up before publication.",
+  "review": {
+    "profileId": "tanya-sideline-v1",
+    "canonIntegrity": "revise",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": null,
+    "manifestId": "AM-e29461373c9b",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Adash Stanley"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0514,
+  "durationMs": 14949,
+  "parseError": false,
+  "ranAt": "2026-08-13T15:32:37.424Z"
+}

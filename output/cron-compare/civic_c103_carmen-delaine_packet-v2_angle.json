@@ -51,7 +51,40 @@
         "editor-assignment",
         "desk-signal"
       ],
-      "candidates": []
+      "candidates": [
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Server",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00288",
+          "name": "Marcus Wright",
+          "profile": "Marcus Wright — Server — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Server",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00794",
+          "name": "Irene Fay",
+          "profile": "Irene Fay — Barista — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Barista",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00722",
+          "name": "Daniel Cloak",
+          "profile": "Daniel Cloak — Bakery Worker — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Bakery Worker",
+          "hood": "West Oakland"
+        }
+      ]
     },
     "known": [
       {
@@ -99,14 +132,20 @@
         "checks": [
           "string"
         ],
-        "targets": [],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
         "interpretation": "string",
         "unverifiedLead": [
           "string"
         ],
         "closeQuestion": "string"
       },
-      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
     }
   },
   "reporter": {
@@ -131,6 +170,7 @@
   "eveningSlice": null,
   "anthonySlice": null,
   "halSlice": null,
+  "simonSlice": null,
   "economicSlice": null,
   "safetySlice": null,
   "civicDomainSlice": {
@@ -250,22 +290,33 @@
   "angleRead": {
     "name": "Carmen Delaine",
     "popid": "POP-00011",
-    "text": "{\n  \"focus\": \"West Oakland Stabilization Fund disbursement progress\",\n  \"why\": \"Public funds in active disbursement phase require transparency—especially when other initiatives stall or show incoherence in neighboring areas.\",\n  \"checks\": [\n    \"Verify ledger entries against disbursement timelines\",\n    \"Cross-reference with any audit flags from engine_audit_c103.json\",\n    \"Compare with patterns of stuck initiatives (Fruitvale Transit Hub) or economic imbalances in migration-reporting neighborhoods\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"This feels like a rare case where city machinery is actually moving—but after seeing Marcus' photo-op cleanups and the A's roster churn, I’m skeptical about whether the money’s landing where it should. Oakland’s got a habit of celebrating announcements while the follow-through fizzles.\",\n  \"unverifiedLead\": [\n    \"Are disbursements prioritizing areas with visible economic strain, or just those with political optics?\",\n    \"Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?\"\n  ],\n  \"closeQuestion\": \"What’s the gap between the ledger’s ‘disbursement-active’ status and tangible changes in West Oakland’s economic stability?\"\n}",
+    "text": "{\n  \"focus\": \"West Oakland Stabilization Fund disbursement process\",\n  \"why\": \"Public funds in active disbursement phase require transparent accounting to ensure proper allocation and community benefit\",\n  \"checks\": [\n    \"Verify which organizations or entities have received funds so far\",\n    \"Confirm oversight mechanisms for fund distribution\",\n    \"Check if disbursement timeline matches original proposal\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00201\",\n      \"question\": \"Have you or your workplace seen any impact from the Stabilization Fund disbursements?\",\n      \"basis\": \"Same neighborhood, potential beneficiary perspective\"\n    },\n    {\n      \"pop\": \"POP-00288\",\n      \"question\": \"What changes, if any, have you noticed in West Oakland that might be tied to the Stabilization Fund?\",\n      \"basis\": \"Same neighborhood, ground-level observer\"\n    }\n  ],\n  \"interpretation\": \"Active disbursement suggests movement, but without public records of allocations, there's risk of funds not reaching intended recipients\",\n  \"unverifiedLead\": [\n    \"Possible discrepancy between allocated funds and visible community improvements\",\n    \"Potential lag between disbursement and measurable impact\"\n  ],\n  \"closeQuestion\": \"Is the disbursement process meeting its stated goals of stabilizing West Oakland communities?\"\n}",
     "plan": {
-      "focus": "West Oakland Stabilization Fund disbursement progress",
-      "why": "Public funds in active disbursement phase require transparency—especially when other initiatives stall or show incoherence in neighboring areas.",
+      "focus": "West Oakland Stabilization Fund disbursement process",
+      "why": "Public funds in active disbursement phase require transparent accounting to ensure proper allocation and community benefit",
       "checks": [
-        "Verify ledger entries against disbursement timelines",
-        "Cross-reference with any audit flags from engine_audit_c103.json",
-        "Compare with patterns of stuck initiatives (Fruitvale Transit Hub) or economic imbalances in migration-reporting neighborhoods"
+        "Verify which organizations or entities have received funds so far",
+        "Confirm oversight mechanisms for fund distribution",
+        "Check if disbursement timeline matches original proposal"
       ],
-      "targets": [],
-      "interpretation": "This feels like a rare case where city machinery is actually moving—but after seeing Marcus' photo-op cleanups and the A's roster churn, I’m skeptical about whether the money’s landing where it should. Oakland’s got a habit of celebrating announcements while the follow-through fizzles.",
+      "targets": [
+        {
+          "pop": "POP-00201",
+          "question": "Have you or your workplace seen any impact from the Stabilization Fund disbursements?",
+          "basis": "Same neighborhood, potential beneficiary perspective"
+        },
+        {
+          "pop": "POP-00288",
+          "question": "What changes, if any, have you noticed in West Oakland that might be tied to the Stabilization Fund?",
+          "basis": "Same neighborhood, ground-level observer"
+        }
+      ],
+      "interpretation": "Active disbursement suggests movement, but without public records of allocations, there's risk of funds not reaching intended recipients",
       "unverifiedLead": [
-        "Are disbursements prioritizing areas with visible economic strain, or just those with political optics?",
-        "Is there a disconnect between the fund’s paper trail and on-ground impact in West Oakland?"
+        "Possible discrepancy between allocated funds and visible community improvements",
+        "Potential lag between disbursement and measurable impact"
       ],
-      "closeQuestion": "What’s the gap between the ledger’s ‘disbursement-active’ status and tangible changes in West Oakland’s economic stability?"
+      "closeQuestion": "Is the disbursement process meeting its stated goals of stabilizing West Oakland communities?"
     }
   },
   "lanePicks": [
@@ -316,5 +367,5 @@
     }
   ],
   "laneEntries": 32,
-  "ranAt": "2026-08-11T11:15:42.430Z"
+  "ranAt": "2026-08-14T11:15:41.914Z"
 }

@@ -1,0 +1,538 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "A quiet night at Nightline Station — what the supplied evening record can and cannot explain",
+      "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Maria (ground bag): hyper-local witness, one block one truth. Packet-named people/places only. Modes: One Block One Truth, Proud AND Wary, Neighbor Quote Spine, Quiet Joy. Assigned pulse: quiet-nightlife — Nightline Station (West Oakland) · quiet night.",
+      "creativeBrief": {
+        "kind": "evening-life",
+        "bag": "ground",
+        "pulseClass": "quiet-nightlife",
+        "pulseLabel": "Nightline Station (West Oakland) · quiet night",
+        "namedEvents": [
+          "Jack London Holiday Market",
+          "Fruitvale Emergency Town Briefing",
+          "Lake Merritt Community Joy Parade",
+          "Lake Merritt Festival of Lights",
+          "Classic Christmas",
+          "Winter Wonderland",
+          "Bay Area Alert",
+          "Warm House"
+        ],
+        "namedPlaces": [
+          "Piedmont Heights",
+          "Festive Feast",
+          "Rockridge Cellar",
+          "Nightline Station"
+        ],
+        "famousSightings": [
+          "Claire Ashford",
+          "Mark Aitken",
+          "Tara Ellison",
+          "Vinnie Keane — fame-rise | Vinnie Keane — the city is watching: disagreed with a Tribune column out loud to an empty kitchen",
+          "Marin Tao — fame-rise | Marin Tao — the city is watching: stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+          "Lena Cross — fame-rise | Lena Cross — the city is watching: read the flyer for the Oakland Youth Apprenticeship Pipeline and wondered who was actually going to get those spots",
+          "Marin Tao — tier-decay | Marin Tao — the spotlight moved on: Tier 3 -> 4",
+          "Lena Cross — tier-decay | Lena Cross — the spotlight moved on: Tier 3 -> 4"
+        ],
+        "streamingTrend": "holiday classics marathon",
+        "sceneRule": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+        "sourcePointers": [
+          "docs/media/MARIA_GROUND_BAG.md",
+          "output/world_summary_c103.md ## Evening Texture",
+          "output/desk_signal_c103.json lanes.culture",
+          "docs/media/SHARON_LIFESTYLE_BAG.md",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "world_summary ## Evening Texture · Nightlife",
+      "nearby": [
+        {
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c103.md \"### Adams Point\"; events: world_summary_c103.md \"## World Events\""
+        },
+        {
+          "text": "Chinatown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c103.md \"### Chinatown\"; events: world_summary_c103.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c103.md \"### East Oakland\"; events: world_summary_c103.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c103.md \"### Fruitvale\"; events: world_summary_c103.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c103.md \"### Lake Merritt\"; events: world_summary_c103.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": []
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "Nightline Station (West Oakland) · quiet night",
+        "src": "world_summary ## Evening Texture · Nightlife",
+        "id": "F-e9aa40059164"
+      },
+      {
+        "t": "FACT",
+        "text": "The supplied evening record describes Nightline Station as open and quiet.",
+        "src": "world_summary ## Evening Texture · Nightlife",
+        "id": "F-1590cfdf8f8c"
+      },
+      {
+        "t": "FACT",
+        "text": "NAMED: Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife",
+        "id": "F-853409f6f59f"
+      },
+      {
+        "t": "FACT",
+        "text": "HOOD: West Oakland",
+        "src": "world_summary ## Evening Texture · Nightlife",
+        "id": "F-36a5efc57a78"
+      },
+      {
+        "t": "FACT",
+        "text": "VENUE: Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife",
+        "id": "F-690388ff68fb"
+      },
+      {
+        "t": "FACT",
+        "text": "EVENING RECORD: open and quiet",
+        "src": "world_summary ## Evening Texture · Nightlife",
+        "id": "F-8b4bdb19a250"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+    }
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "angle": "A quiet night at Nightline Station — what the supplied evening record can and cannot explain",
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "hookLine": "The supplied evening record describes Nightline Station as open and quiet.",
+      "hood": "West Oakland",
+      "pulseClass": "quiet-nightlife",
+      "citizens": [],
+      "popids": [],
+      "named": "Nightline Station",
+      "venue": "Nightline Station",
+      "ref": "world_summary ## Evening Texture · Nightlife",
+      "cycle": 103
+    },
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Maria (ground bag): hyper-local witness, one block one truth. Packet-named people/places only. Modes: One Block One Truth, Proud AND Wary, Neighbor Quote Spine, Quiet Joy. Assigned pulse: quiet-nightlife — Nightline Station (West Oakland) · quiet night."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "quiet-nightlife",
+      "score": 24,
+      "label": "Nightline Station (West Oakland) · quiet night",
+      "named": "Nightline Station",
+      "hood": "West Oakland",
+      "person": null,
+      "venue": null
+    },
+    "recommend": {
+      "bag": "lifestyle",
+      "slug": "sharon-okafor",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+      "reason": "top pulse quiet-nightlife → lifestyle",
+      "pulseClass": "quiet-nightlife",
+      "pulseLabel": "Nightline Station (West Oakland) · quiet night"
+    },
+    "prewrite": {
+      "pulseClass": "quiet-nightlife",
+      "angle": "A quiet night at Nightline Station — what the supplied evening record can and cannot explain",
+      "hookLine": "The supplied evening record describes Nightline Station as open and quiet.",
+      "anchorFacts": [
+        "NAMED: Nightline Station",
+        "HOOD: West Oakland",
+        "VENUE: Nightline Station",
+        "HOOD: West Oakland",
+        "EVENING RECORD: open and quiet"
+      ],
+      "bagRecommend": "lifestyle",
+      "bagSlug": "sharon-okafor"
+    },
+    "texture": {
+      "famous": [
+        "Claire Ashford",
+        "Mark Aitken",
+        "Tara Ellison"
+      ],
+      "restaurants": [
+        {
+          "name": "Piedmont Heights",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "name": "Festive Feast",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Rockridge Cellar",
+          "hood": "Rockridge"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "SoupStop",
+          "hood": "Temescal"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Nightline Station",
+          "hood": "West Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1.05
+      },
+      "cityEvents": [
+        "Jack London Holiday Market",
+        "Fruitvale Emergency Town Briefing",
+        "Lake Merritt Community Joy Parade",
+        "Lake Merritt Festival of Lights"
+      ],
+      "tv": [
+        "Classic Christmas",
+        "Winter Wonderland",
+        "Bay Area Alert",
+        "Warm House",
+        "Oakland Baseball Tonight",
+        "Isley Kelley (SS) — Player Profile"
+      ],
+      "movies": [
+        "Miracle Season",
+        "Holiday Magic",
+        "New Beginnings",
+        "Ninth Inning"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "holiday classics marathon",
+      "foodTrend": "Holiday celebration dining - festive atmosphere"
+    },
+    "signals": {
+      "fameCount": 5,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Claire Ashford spotted at Beth Jacob Congregation",
+          "name": "Claire Ashford",
+          "venue": "Beth Jacob Congregation",
+          "ref": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Piedmont Ave",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Mark Aitken spotted at Ridgeline Ventures",
+          "name": "Mark Aitken",
+          "venue": "Ridgeline Ventures",
+          "ref": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Lake Merritt",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Tara Ellison spotted at City of Oakland",
+          "name": "Tara Ellison",
+          "venue": "City of Oakland",
+          "ref": "Ripple_Ledger cycle 103 (CauseType lifestyle-sighting); rendered: world_summary_c103.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Downtown",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Piedmont Heights",
+          "hood": "Piedmont Ave"
+        },
+        {
+          "name": "Festive Feast",
+          "hood": "Downtown"
+        },
+        {
+          "name": "Rockridge Cellar",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "SoupStop",
+          "hood": "Temescal"
+        },
+        {
+          "name": "Nightline Station",
+          "hood": "West Oakland"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 3,
+        "vibe": "quiet",
+        "movement": "restricted",
+        "weatherImpact": 1.05
+      },
+      "cityEvents": [
+        "Jack London Holiday Market",
+        "Fruitvale Emergency Town Briefing",
+        "Lake Merritt Community Joy Parade",
+        "Lake Merritt Festival of Lights"
+      ],
+      "tv": [
+        "Classic Christmas",
+        "Winter Wonderland",
+        "Bay Area Alert",
+        "Warm House",
+        "Oakland Baseball Tonight",
+        "Isley Kelley (SS) — Player Profile"
+      ],
+      "movies": [
+        "Miracle Season",
+        "Holiday Magic",
+        "New Beginnings",
+        "Ninth Inning"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal. The supplied evening record describes nightlife as quiet; raw scoring fields stay internal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Nightline Station (West Oakland) · quiet night",
+        "named": "Nightline Station",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Claire Ashford at Beth Jacob Congregation (Piedmont Ave)",
+        "named": "Beth Jacob Congregation",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Mark Aitken at Ridgeline Ventures (Lake Merritt)",
+        "named": "Ridgeline Ventures",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Tara Ellison at City of Oakland (Downtown)",
+        "named": "City of Oakland",
+        "hood": "Downtown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Piedmont Heights (Piedmont Ave)",
+        "named": "Piedmont Heights",
+        "hood": "Piedmont Ave"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Festive Feast (Downtown)",
+        "named": "Festive Feast",
+        "hood": "Downtown"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Rockridge Cellar (Rockridge)",
+        "named": "Rockridge Cellar",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "city-event",
+        "score": 17,
+        "label": "Lake Merritt Festival of Lights",
+        "named": "Lake Merritt Festival of Lights",
+        "hood": null
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Piedmont Heights (Piedmont Ave)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Nightline Station (West Oakland) · quiet night",
+        "score": 32,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Nightline Station (West Oakland) · quiet night",
+        "score": 32,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "quiet-nightlife",
+        "label": "Nightline Station (West Oakland) · quiet night",
+        "score": 32,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Claire Ashford at Beth Jacob Congregation (Piedmont Ave)",
+        "score": 43,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "{\n  \"focus\": \"The quiet resilience of Nightline Station on an ordinary West Oakland evening\",\n  \"why\": \"Because in the lulls between headlines, the city's pulse still beats in places that stay open when no one's watching\",\n  \"checks\": [\n    \"F-e9aa40059164\",\n    \"F-1590cfdf8f8c\",\n    \"F-853409f6f59f\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"This isn't about absence—it's about what persists. The chairs still turned right-side-down on tables, the hum of refrigeration, the way the light spills differently when there's no crowd to diffuse it. Nightline Station holds space like someone keeping vigil.\",\n  \"unverifiedLead\": [\n    \"Who wipes down the counters when the last straggler leaves?\",\n    \"The particular quality of silence when a place built for noise gets to rest\"\n  ],\n  \"closeQuestion\": \"What does a bar learn about its neighborhood when no one's performing?\"\n}",
+    "plan": {
+      "focus": "The quiet resilience of Nightline Station on an ordinary West Oakland evening",
+      "why": "Because in the lulls between headlines, the city's pulse still beats in places that stay open when no one's watching",
+      "checks": [
+        "F-e9aa40059164",
+        "F-1590cfdf8f8c",
+        "F-853409f6f59f"
+      ],
+      "targets": [],
+      "interpretation": "This isn't about absence—it's about what persists. The chairs still turned right-side-down on tables, the hum of refrigeration, the way the light spills differently when there's no crowd to diffuse it. Nightline Station holds space like someone keeping vigil.",
+      "unverifiedLead": [
+        "Who wipes down the counters when the last straggler leaves?",
+        "The particular quality of silence when a place built for noise gets to rest"
+      ],
+      "closeQuestion": "What does a bar learn about its neighborhood when no one's performing?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Adams Point | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Adams Point",
+      "ref": "output/neighborhood_texture_c103.md \"### Adams Point\"; events: world_summary_c103.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Chinatown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Chinatown",
+      "ref": "output/neighborhood_texture_c103.md \"### Chinatown\"; events: world_summary_c103.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c103.md \"### East Oakland\"; events: world_summary_c103.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c103.md \"### Fruitvale\"; events: world_summary_c103.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c103.md \"### Lake Merritt\"; events: world_summary_c103.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 23,
+  "ranAt": "2026-08-13T15:53:22.056Z"
+}

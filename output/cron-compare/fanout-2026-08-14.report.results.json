@@ -1,0 +1,41 @@
+{
+  "date": "2026-08-14",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": false,
+      "error": "W2 refused: citizenVoice returned 0 quotes — no summary article"
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": false,
+      "error": "W2 refused: citizenVoice returned 0 quotes — no summary article"
+    },
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/culture_c103_elliot-graye_packet-v2_angle.json — run --stage=angle first"
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": false,
+      "error": "W2 refused: citizenVoice returned 0 quotes — no summary article"
+    }
+  ],
+  "ranAt": "2026-08-14T18:17:35.612Z"
+}

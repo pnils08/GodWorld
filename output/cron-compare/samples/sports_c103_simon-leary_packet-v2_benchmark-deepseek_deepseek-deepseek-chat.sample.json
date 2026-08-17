@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/samples/sports_c103_simon-leary_packet-v2_benchmark-deepseek_deepseek-deepseek-chat.sample.md",
+  "quotesLanded": 1,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-08-13T15:47:03.550Z"
+}

@@ -3,86 +3,42 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
-  "pass": false,
-  "flags": [
-    {
-      "claim": "Calvin Turner, who has owned a hardware store in the neighborhood for twelve years.",
-      "issue": "Calvin Turner is canonically a Mechanic residing in Fruitvale, not a hardware store owner in Dimond. This is a high-severity misrepresentation of a ledger citizen.",
-      "severity": "high"
-    },
-    {
-      "claim": "Vladimir Gonzalez, who manages a café near Dimond Park...",
-      "issue": "Vladimir Gonzalez is canonically an entry-level Right Fielder for the Oakland A's residing in Fruitvale, not a café manager in Dimond. This is a high-severity misrepresentation of a ledger citizen.",
-      "severity": "high"
-    },
-    {
-      "claim": "\"It's quieter than usual,\" said Calvin Turner... \"What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.\"",
-      "issue": "Fabricated interview and quotes containing unapproved lexical cues ('UNAPPROVED_QUOTE'), violating the jordan-economic-labor-v1 profile's explicit canon blockers against fabricated quotes.",
-      "severity": "high"
-    },
-    {
-      "claim": "Vladimir Gonzalez... \"What the record shows does not line up with what I expected,\" he said. \"What explains the gap in the record? I am going to keep watching this.\"",
-      "issue": "Fabricated interview and quotes containing unapproved lexical cues ('UNAPPROVED_QUOTE'), violating the jordan-economic-labor-v1 profile's explicit canon blockers against fabricated quotes.",
-      "severity": "high"
-    },
-    {
-      "claim": "...particularly along Telegraph Avenue and International Boulevard...",
-      "issue": "These corridors do not appear in the Cycle 103 World Summary or packet, violating the jordan-economic-labor-v1 condition that all named corridors must come from the Packet.",
-      "severity": "high"
-    }
-  ],
-  "flagCount": 5,
-  "highSeverityCount": 5,
-  "summary": "Critical sourcing failures: fabricated quotes with unapproved lexical cues, misrepresentation of ledger citizens' roles/neighborhoods, and unsourced corridors.",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft accurately reflects the Dimond neighborhood cooling trajectory with no sourcing or canon violations.",
   "review": {
     "profileId": "jordan-economic-labor-v1",
-    "canonIntegrity": "fail",
-    "texture": "overreach"
+    "canonIntegrity": "pass",
+    "texture": "authorized"
   },
   "reviewProfile": {
     "id": "jordan-economic-labor-v1",
-    "packageVersion": "JORDAN-LEP2-1",
-    "manifestId": "AM-1f076183a97d",
-    "lexicalObservations": [
-      {
-        "code": "UNAPPROVED_QUOTE",
-        "values": [
-          "It's quieter than usual,",
-          "What the record shows does not line up with what I expected,",
-          "What explains the gap in the record? I am going to keep watching this."
-        ]
-      }
-    ]
+    "packageVersion": null,
+    "manifestId": "AM-b7d92ca9379b",
+    "lexicalObservations": []
   },
   "nameCheck": {
-    "verified": [
-      "Calvin Turner",
-      "Dana Reeve",
-      "Tomas Renteria",
-      "Vladimir Gonzalez"
-    ],
-    "unverified": [
-      "For Dimond",
-      "International Boulevard",
-      "Telegraph Avenue"
-    ]
+    "verified": [],
+    "unverified": []
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 4,
+      "names": 0,
       "businesses": 0,
-      "storylines": 1,
+      "storylines": 0,
       "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": true
+    "packetChecked": false
   },
-  "apiCostUsd": 0.0618,
-  "durationMs": 16400,
+  "apiCostUsd": 0.0403,
+  "durationMs": 6864,
   "parseError": false,
-  "ranAt": "2026-08-11T23:18:47.607Z"
+  "ranAt": "2026-08-13T07:03:15.532Z"
 }

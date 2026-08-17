@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/samples/civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat.sample.md",
+  "quotesLanded": 0,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-08-13T07:13:06.871Z"
+}

@@ -1,0 +1,521 @@
+[
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"P Slayer\",\"question\":\"What does the supplied trend \\\"Pablo Almanzar's no-hitter\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"prospect-callup\",\"hood\":\"Downtown\",\"focus\":\"Pablo Almanzar's no-hitter\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Pablo Almanzar throws a No No in his MLB debut\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-a63e7221f454\"},{\"t\":\"FACT\",\"text\":\"Handoff feeling vs funeral feeling — pick a side.\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-bb6374332061\"},{\"t\":\"FACT\",\"text\":\"StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-e6a443c511ac\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 124-34 · streak W15\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-087ac6940a86\"},{\"t\":\"FACT\",\"text\":\"Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-33b60ab127dd\"},{\"t\":\"FACT\",\"text\":\"Event: A's — player-feature (late-season)\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-dc813995cd64\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-07329a4afe85\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "P Slayer",
+        "question": "What does the supplied trend \"Pablo Almanzar's no-hitter\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "prospect-callup",
+        "hood": "Downtown",
+        "focus": "Pablo Almanzar's no-hitter",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar throws a No No in his MLB debut",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-a63e7221f454"
+        },
+        {
+          "t": "FACT",
+          "text": "Handoff feeling vs funeral feeling — pick a side.",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-bb6374332061"
+        },
+        {
+          "t": "FACT",
+          "text": "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-e6a443c511ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 124-34 · streak W15",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-087ac6940a86"
+        },
+        {
+          "t": "FACT",
+          "text": "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-33b60ab127dd"
+        },
+        {
+          "t": "FACT",
+          "text": "Event: A's — player-feature (late-season)",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-dc813995cd64"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-07329a4afe85"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00224",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00224\",\"name\":\"Dillon Trevor\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"P Slayer\",\"question\":\"As a resident of Downtown, what about the supplied trend \\\"Pablo Almanzar's no-hitter\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"prospect-callup\",\"hood\":\"Downtown\",\"focus\":\"Pablo Almanzar's no-hitter\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Dillon Trevor — Server — Downtown\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Pablo Almanzar throws a No No in his MLB debut\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-a63e7221f454\"},{\"t\":\"FACT\",\"text\":\"Handoff feeling vs funeral feeling — pick a side.\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-bb6374332061\"},{\"t\":\"FACT\",\"text\":\"StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-e6a443c511ac\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 124-34 · streak W15\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-087ac6940a86\"},{\"t\":\"FACT\",\"text\":\"Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-33b60ab127dd\"},{\"t\":\"FACT\",\"text\":\"Event: A's — player-feature (late-season)\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-dc813995cd64\"},{\"t\":\"FACT\",\"text\":\"Dillon Trevor — Server — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00224\",\"id\":\"F-80fac7a0ad63\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00224",
+        "name": "Dillon Trevor",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "P Slayer",
+        "question": "As a resident of Downtown, what about the supplied trend \"Pablo Almanzar's no-hitter\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "prospect-callup",
+        "hood": "Downtown",
+        "focus": "Pablo Almanzar's no-hitter",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Dillon Trevor — Server — Downtown",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar throws a No No in his MLB debut",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-a63e7221f454"
+        },
+        {
+          "t": "FACT",
+          "text": "Handoff feeling vs funeral feeling — pick a side.",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-bb6374332061"
+        },
+        {
+          "t": "FACT",
+          "text": "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-e6a443c511ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 124-34 · streak W15",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-087ac6940a86"
+        },
+        {
+          "t": "FACT",
+          "text": "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-33b60ab127dd"
+        },
+        {
+          "t": "FACT",
+          "text": "Event: A's — player-feature (late-season)",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-dc813995cd64"
+        },
+        {
+          "t": "FACT",
+          "text": "Dillon Trevor — Server — Downtown",
+          "src": "Simulation_Ledger profile for POP-00224",
+          "id": "F-80fac7a0ad63"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00225",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00225\",\"name\":\"Andre Turner\",\"role\":\"Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"P Slayer\",\"question\":\"As a resident of Downtown, what about the supplied trend \\\"Pablo Almanzar's no-hitter\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"prospect-callup\",\"hood\":\"Downtown\",\"focus\":\"Pablo Almanzar's no-hitter\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Andre Turner — Line cook — Downtown\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Pablo Almanzar throws a No No in his MLB debut\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-a63e7221f454\"},{\"t\":\"FACT\",\"text\":\"Handoff feeling vs funeral feeling — pick a side.\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-bb6374332061\"},{\"t\":\"FACT\",\"text\":\"StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-e6a443c511ac\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 124-34 · streak W15\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-087ac6940a86\"},{\"t\":\"FACT\",\"text\":\"Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-33b60ab127dd\"},{\"t\":\"FACT\",\"text\":\"Event: A's — player-feature (late-season)\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-dc813995cd64\"},{\"t\":\"FACT\",\"text\":\"Andre Turner — Line cook — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00225\",\"id\":\"F-f8810d7815e2\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00225",
+        "name": "Andre Turner",
+        "role": "Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "P Slayer",
+        "question": "As a resident of Downtown, what about the supplied trend \"Pablo Almanzar's no-hitter\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "prospect-callup",
+        "hood": "Downtown",
+        "focus": "Pablo Almanzar's no-hitter",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Andre Turner — Line cook — Downtown",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar throws a No No in his MLB debut",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-a63e7221f454"
+        },
+        {
+          "t": "FACT",
+          "text": "Handoff feeling vs funeral feeling — pick a side.",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-bb6374332061"
+        },
+        {
+          "t": "FACT",
+          "text": "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-e6a443c511ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 124-34 · streak W15",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-087ac6940a86"
+        },
+        {
+          "t": "FACT",
+          "text": "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-33b60ab127dd"
+        },
+        {
+          "t": "FACT",
+          "text": "Event: A's — player-feature (late-season)",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-dc813995cd64"
+        },
+        {
+          "t": "FACT",
+          "text": "Andre Turner — Line cook — Downtown",
+          "src": "Simulation_Ledger profile for POP-00225",
+          "id": "F-f8810d7815e2"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00212",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00212\",\"name\":\"Jessie Hess\",\"role\":\"Barista\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"P Slayer\",\"question\":\"As a resident of Downtown, what about the supplied trend \\\"Pablo Almanzar's no-hitter\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"prospect-callup\",\"hood\":\"Downtown\",\"focus\":\"Pablo Almanzar's no-hitter\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Jessie Hess — Barista — Downtown\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Pablo Almanzar throws a No No in his MLB debut\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-a63e7221f454\"},{\"t\":\"FACT\",\"text\":\"Handoff feeling vs funeral feeling — pick a side.\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-bb6374332061\"},{\"t\":\"FACT\",\"text\":\"StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-e6a443c511ac\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 124-34 · streak W15\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-087ac6940a86\"},{\"t\":\"FACT\",\"text\":\"Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-33b60ab127dd\"},{\"t\":\"FACT\",\"text\":\"Event: A's — player-feature (late-season)\",\"src\":\"Oakland_Sports_Feed cycle 103; world_summary_c103.md \\\"## Sports\\\" · Pablo Almanzar throws a No No in his MLB debut\",\"id\":\"F-dc813995cd64\"},{\"t\":\"FACT\",\"text\":\"Jessie Hess — Barista — Downtown\",\"src\":\"Simulation_Ledger profile for POP-00212\",\"id\":\"F-48795c7c7253\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "role": "Barista",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "P Slayer",
+        "question": "As a resident of Downtown, what about the supplied trend \"Pablo Almanzar's no-hitter\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "prospect-callup",
+        "hood": "Downtown",
+        "focus": "Pablo Almanzar's no-hitter",
+        "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Jessie Hess — Barista — Downtown",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Pablo Almanzar throws a No No in his MLB debut",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-a63e7221f454"
+        },
+        {
+          "t": "FACT",
+          "text": "Handoff feeling vs funeral feeling — pick a side.",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-bb6374332061"
+        },
+        {
+          "t": "FACT",
+          "text": "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-e6a443c511ac"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 124-34 · streak W15",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-087ac6940a86"
+        },
+        {
+          "t": "FACT",
+          "text": "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-33b60ab127dd"
+        },
+        {
+          "t": "FACT",
+          "text": "Event: A's — player-feature (late-season)",
+          "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+          "id": "F-dc813995cd64"
+        },
+        {
+          "t": "FACT",
+          "text": "Jessie Hess — Barista — Downtown",
+          "src": "Simulation_Ledger profile for POP-00212",
+          "id": "F-48795c7c7253"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

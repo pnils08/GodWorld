@@ -1,0 +1,38 @@
+{
+  "date": "2026-08-14",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": false,
+      "error": "invalid W1 output: target must use a supplied pop with question+basis"
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-08-14T11:16:32.929Z"
+}

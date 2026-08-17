@@ -2,39 +2,39 @@
 JOURNALIST: P Slayer (POP-00008) · persona p-slayer · Grok heat seat
 
 ## PULSE (not civic stink — sports feed heat)
-CLASS: roster-move · SCORE: 79 · FEED_CYCLE: C102
-TEAM: A's · EVENT: re-signing (late-season)
-LABEL: Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?
-RECORD: 107-31 · STREAK: W3 · MOOD: electric · FAN: high
-STATS: Isley Kelly, .339avg, 28hr, 92rbi, 7.1war
-NOTES: In a somewhat shocking turn of events Mike Paulson and The Oakland As have decided to resign Isely Kelly to a 2-year $50M contract. Word was that Kelley was seeking 4-years but likely go the boost in per year he was looking for. Kelley who turns 34 next season has shown resurgence this season as he in a battle for the 
+CLASS: prospect-callup · SCORE: 58 · FEED_CYCLE: C103
+TEAM: A's · EVENT: player-feature (late-season)
+LABEL: Pablo Almanzar throws a No No in his MLB debut
+RECORD: 124-34 · STREAK: W15 · MOOD: electric · FAN: high
+STATS: Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
+NOTES: Pablo Alamazar (SP) made his major league debut in NY vs the Yankees, Pablo Almanzar just called up for the callup throws a no hitter while striking out 10. Making a major splash in his MLB debut in one the most historic stadiums on the planet. To make the evening is more festive as As fan Vinnie Keane hits 3 run home 
 
 ## CHARGE BAG
-MODES: 1 Hate the Move · 3 Friction Pivot
-FAN CHARGE: fury
-FOIL NUMBER: 7.1war
-CENTRAL FEELING: Oakland should feel the FO heard the bleachers.
+MODES: 3 Friction Pivot · 9 Breakout Feeling
+FAN CHARGE: dare
+FOIL NUMBER: 9IP
+CENTRAL FEELING: Oakland should feel dared to show up louder tomorrow.
 
 ## PREWRITE (required before draft)
 ```
 PREWRITE:
 - Reporter: P.Slayer
-- BagModes: [1 Hate the Move; 3 Friction Pivot]
-- FanCharge: fury
+- BagModes: [3 Friction Pivot; 9 Breakout Feeling]
+- FanCharge: dare
 - PriorTake: NONE — write cold or invent no prior; wall may still inject at wake
 - AnchorFacts:
-  - StoryAngle (feed): Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?
-  - Team record (feed): 107-31 · streak W3
-  - Stats (feed): Isley Kelly, .339avg, 28hr, 92rbi, 7.1war
-  - Event: A's — re-signing (late-season)
-- FoilNumber: 7.1war
-- CentralFeeling: Oakland should feel the FO heard the bleachers.
+  - StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut
+  - Team record (feed): 124-34 · streak W15
+  - Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
+  - Event: A's — player-feature (late-season)
+- FoilNumber: 9IP
+- CentralFeeling: Oakland should feel dared to show up louder tomorrow.
 ```
 
 ## FRICTION (bleacher vs tidy read)
-A: Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?
-B: FO language (transition / flexibility / prepared) or the tidy "genius in hindsight" read
-FRAME: The stands feel sold out or sold short — write into that gap, not the press release.
+A: Kids producing / call-ups on the feed
+B: Farewell-season eulogy habit
+FRAME: Handoff feeling vs funeral feeling — pick a side.
 
 ## APPROACH
 Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down ("I was wrong" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.
@@ -43,18 +43,17 @@ Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the
 _No on-disk prior column matched this pulse — wall may still inject at wake._
 
 ## PLAYERS (feed names — do not invent; RoleType when ledger-known)
-- Isley Kelley (no POPID on snapshot)
-- Isley Kelley (no POPID on snapshot)
-- Mike Paulson (no POPID on snapshot)
-- Isley Kelley (no POPID on snapshot)
+- Pablo Almanzar (no POPID on snapshot)
+- Vinnie Keane (POP-00001) — Designated Hitter, Oakland A's Legend, Rockridge
+- Pablo Alamazar (no POPID on snapshot)
 
 ## SCENE COLOR
-HOOD: Baylight District
-RECORD/STREAK: 107-31 / W3
+HOOD: Downtown
+RECORD/STREAK: 124-34 / W15
 COLOR ROOM: You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils.
 
 ## OTHER CANDIDATES (scored)
-- [79] C102 A's · roster-move — Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?
+- [79] C102 A's · roster-move — Isley Kelley re-signs, don't close the door just yet on the era, is this the right move for an aging star?
 - [66] C101 A's · roster-move — Martin Richards traded at the deadline, trading a franchise pillar in a title run
 - [58] C103 A's · prospect-callup — Pablo Almanzar throws a No No in his MLB debut
 - [56] C103 A's · prospect-callup — Benji Dillon moves to the bullpen, In an effort to give some young arms so run and rest a vet arm Dillon will be moving 
@@ -69,6 +68,6 @@ COLOR ROOM: You may invent unnamed bar / lot / BART / bleacher texture that cont
 - docs/media/P_SLAYER_CHARGE_BAG.md
 - docs/media/voices/p_slayer.md
 - docs/media/P_SLAYER_JOURNEY_INDEX.md
-- Oakland_Sports_Feed cycle 102; world_summary_c103.md "## Sports" · Isley Kelley resigns, don't close the door just yet on the era, is this the righ
+- Oakland_Sports_Feed cycle 103; world_summary_c103.md "## Sports" · Pablo Almanzar throws a No No in his MLB debut
 
 _Generated by scripts/buildPSlayerSlice.js — no LLM. Not a Mags desk-slice. Not Jax stink._

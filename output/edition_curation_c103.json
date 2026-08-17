@@ -1,0 +1,154 @@
+{
+  "cycle": "103",
+  "top": 9,
+  "selected": [
+    "sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat",
+    "business_c103_business-desk_packet-v2_deepseek-deepseek-chat",
+    "civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat",
+    "culture_c103_maria-keen_packet-v2_benchmark-natural-llama_deepseek-deepseek-chat",
+    "culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_deepseek-deepseek-chat",
+    "sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+    "civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+    "civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+    "civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat"
+  ],
+  "ranked": [
+    {
+      "stem": "sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "score": 2.5,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "business_c103_business-desk_packet-v2_deepseek-deepseek-chat",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c103_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c103_maria-keen_packet-v2_benchmark-natural-llama_deepseek-deepseek-chat",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c103_mason-ortega_packet-v2_benchmark-seat-deepseek_deepseek-deepseek-chat",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "score": 1,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "score": 0.5,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c103_angela-reyes_packet-v2_deepseek-deepseek-chat",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c103_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c103_rachel-torres_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "culture_c103_sharon-okafor_packet-v2_benchmark-benchmark-llama-3-3_deepseek-deepseek-chat",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "sports_c103_hal-richmond_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "score": 0,
+      "slug": null,
+      "verdict": "corrections-needed"
+    }
+  ],
+  "excludedCanonViolations": 1
+}

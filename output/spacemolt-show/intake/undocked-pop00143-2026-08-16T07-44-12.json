@@ -1,0 +1,22 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-08-16T17:52:44.836Z",
+  "POPID": "POP-00143",
+  "Cycle": 103,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00143-2026-08-16T07-44-12",
+  "Applied": "no",
+  "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-08-16T07-44-12.json",
+  "Holder": "Clarissa Dane",
+  "CreditsDelta": null,
+  "Magnitude": 3,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Clarissa Dane credits=null systems=Sol",
+  "DecidedAt": null,
+  "DecidedBy": null,
+  "Note": "",
+  "FeedEvent": null
+}

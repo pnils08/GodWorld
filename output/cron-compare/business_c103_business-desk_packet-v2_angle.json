@@ -67,70 +67,36 @@
       ],
       "candidates": [
         {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
+          "pop": "POP-00730",
+          "name": "Clarence Moody",
+          "profile": "Clarence Moody — Retired Machinist — Dimond",
+          "why": "same-hood-ledger",
+          "role": "Retired Machinist",
+          "hood": "Dimond"
         },
         {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "why": "ledger-resident",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
         },
         {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — Line cook — Fruitvale",
+          "why": "ledger-resident",
+          "role": "Line cook",
+          "hood": "Fruitvale"
         },
         {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
-        },
-        {
-          "pop": null,
-          "name": null,
-          "profile": "",
-          "why": "assignment"
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server — West Oakland",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "West Oakland"
         }
       ]
     },
@@ -198,14 +164,20 @@
         "checks": [
           "string"
         ],
-        "targets": [],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
         "interpretation": "string",
         "unverifiedLead": [
           "string"
         ],
         "closeQuestion": "string"
       },
-      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
     }
   },
   "reporter": {
@@ -232,6 +204,7 @@
   "eveningSlice": null,
   "anthonySlice": null,
   "halSlice": null,
+  "simonSlice": null,
   "economicSlice": {
     "pulse": {
       "className": "hood-cooling",
@@ -379,22 +352,29 @@
   "angleRead": {
     "name": "Jordan Velez",
     "popid": "POP-00153",
-    "text": "{\n  \"focus\": \"Dimond's cooling retail scene compared to the rest of the city\",\n  \"why\": \"Foot traffic is visibly down, storefronts feel quieter than usual\",\n  \"checks\": [\n    \"F-2c3c1b14061a\",\n    \"F-5967d0383c65\",\n    \"F-5f30e356b99b\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"This feels like more than just seasonal fluctuation—Dimond's usual bustle has dulled noticeably, especially against the city's overall retail uptick.\",\n  \"unverifiedLead\": [\n    \"Could this be early ripple effects from transit changes elsewhere in the city?\",\n    \"Is there a shift in where people are spending their disposable income?\"\n  ],\n  \"closeQuestion\": \"What's drawing people—or keeping them—away from Dimond's storefronts?\"\n}",
+    "text": "{\n  \"focus\": \"Dimond's cooling retail scene and its impact on local storefronts\",\n  \"why\": \"Foot traffic is down and storefronts are quieter compared to other parts of the city, signaling a shift in economic activity.\",\n  \"checks\": [\n    \"F-2c3c1b14061a\",\n    \"F-5967d0383c65\",\n    \"F-5f30e356b99b\",\n    \"F-68dbfc1e6fba\",\n    \"F-c40d99359f50\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00730\",\n      \"question\": \"Have you noticed a change in foot traffic around Dimond's storefronts recently?\",\n      \"basis\": \"same-hood-ledger\"\n    }\n  ],\n  \"interpretation\": \"The dip in retail vitality suggests a broader cooling trend in Dimond, possibly tied to shifting consumer habits or economic pressures.\",\n  \"unverifiedLead\": [\n    \"Are there specific businesses in Dimond that are bucking the trend or adapting in unique ways?\"\n  ],\n  \"closeQuestion\": \"What does this cooling trend mean for Dimond's identity as a neighborhood?\"\n}",
     "plan": {
-      "focus": "Dimond's cooling retail scene compared to the rest of the city",
-      "why": "Foot traffic is visibly down, storefronts feel quieter than usual",
+      "focus": "Dimond's cooling retail scene and its impact on local storefronts",
+      "why": "Foot traffic is down and storefronts are quieter compared to other parts of the city, signaling a shift in economic activity.",
       "checks": [
         "F-2c3c1b14061a",
         "F-5967d0383c65",
-        "F-5f30e356b99b"
+        "F-5f30e356b99b",
+        "F-68dbfc1e6fba",
+        "F-c40d99359f50"
       ],
-      "targets": [],
-      "interpretation": "This feels like more than just seasonal fluctuation—Dimond's usual bustle has dulled noticeably, especially against the city's overall retail uptick.",
+      "targets": [
+        {
+          "pop": "POP-00730",
+          "question": "Have you noticed a change in foot traffic around Dimond's storefronts recently?",
+          "basis": "same-hood-ledger"
+        }
+      ],
+      "interpretation": "The dip in retail vitality suggests a broader cooling trend in Dimond, possibly tied to shifting consumer habits or economic pressures.",
       "unverifiedLead": [
-        "Could this be early ripple effects from transit changes elsewhere in the city?",
-        "Is there a shift in where people are spending their disposable income?"
+        "Are there specific businesses in Dimond that are bucking the trend or adapting in unique ways?"
       ],
-      "closeQuestion": "What's drawing people—or keeping them—away from Dimond's storefronts?"
+      "closeQuestion": "What does this cooling trend mean for Dimond's identity as a neighborhood?"
     }
   },
   "lanePicks": [
@@ -440,5 +420,5 @@
     }
   ],
   "laneEntries": 18,
-  "ranAt": "2026-08-11T11:16:09.325Z"
+  "ranAt": "2026-08-14T11:16:32.928Z"
 }

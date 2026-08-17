@@ -1,0 +1,43 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c103_tanya-cruz_packet-v2_benchmark-benchmark-deepseek-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Adash Stanley",
+        "role": "quoted-source",
+        "popid": "POP-01023"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Jack London"
+    ],
+    "claims": [
+      {
+        "claim": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+        "sourceRef": "world_summary_c103.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-1d16ecda9085",
+    "draftSha256": "8b04b1ef23ba4134310401a7b9f88753424c120ac72fd70f73cf8825f1e2ec46",
+    "verdict": "output/cron-compare/sports_c103_tanya-cruz_packet-v2_benchmark-benchmark-deepseek-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-13T15:36:55.641Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-08-13T15:37:12.656Z"
+}

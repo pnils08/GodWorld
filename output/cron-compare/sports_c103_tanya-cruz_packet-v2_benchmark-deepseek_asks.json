@@ -1,0 +1,191 @@
+[
+  {
+    "pop": "POP-01023",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01023\",\"name\":\"Adash Stanley\",\"role\":\"PG / The Oaks \",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question from bounded lived experience\",\"reporter\":\"Tanya Cruz\",\"question\":\"What does the supplied trend \\\"Oakland Oaks preseason performance\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Jack London\",\"focus\":\"Oakland Oaks preseason performance\",\"src\":\"world_summary_c103.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Adash Stanley — PG / The Oaks — Lake Merritt\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Oaks — team-update — Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-a1e759f8afb9\"},{\"t\":\"FACT\",\"text\":\"Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-55de45fc585b\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley line (feed): 23pt/7asst\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-58acc05668ce\"},{\"t\":\"FACT\",\"text\":\"Team record (feed): 0-1 · streak L1\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-01319835bac0\"},{\"t\":\"FACT\",\"text\":\"Event (feed): Oaks — team-update (preseason)\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-2bf824b204ae\"},{\"t\":\"FACT\",\"text\":\"Fan sentiment (feed): medium · mood hungry\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-20d0bb8b9b08\"},{\"t\":\"FACT\",\"text\":\"Cycle: C103\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-d8611cde1e4d\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley — PG / The Oaks — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-01023\",\"id\":\"F-bfb2771fe5b8\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3.\"},\"output\":{\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"fact_ids\":[\"one or more ids from packet.known\"],\"stance_id\":\"one id from packet.lattice.stances; null on abstain\",\"question_id\":\"one id from packet.lattice.questions; null on abstain\",\"intention_id\":\"one id from packet.lattice.intentions; I_NONE allowed\",\"unverifiedLead\":[\"free lead text; never publishable\"],\"abstain_reason\":\"institutional_path_required|insufficient_evidence|contract_conflict|other|null\"},\"rule\":\"The backend renders the quote from selected lattice ids. Do not write quote prose.\"},\"lattice\":{\"stances\":[{\"id\":\"S_CONCERN\",\"text\":\"What this record shows concerns me.\"},{\"id\":\"S_MISMATCH\",\"text\":\"What the record shows does not line up with what I expected.\"},{\"id\":\"S_ATTENTION\",\"text\":\"This deserves a closer look.\"},{\"id\":\"S_ACCOUNTABILITY\",\"text\":\"Someone should answer for what the record shows.\"}],\"questions\":[{\"id\":\"Q_ATTENTION\",\"text\":\"Why is this not getting more attention?\"},{\"id\":\"Q_OWNER\",\"text\":\"Who is responsible for answering this?\"},{\"id\":\"Q_NEXT\",\"text\":\"What happens next?\"},{\"id\":\"Q_GAP\",\"text\":\"What explains the gap in the record?\"}],\"intentions\":[{\"id\":\"I_NONE\",\"text\":\"\"},{\"id\":\"I_WATCH\",\"text\":\"I am going to keep watching this.\"},{\"id\":\"I_ANSWER\",\"text\":\"I want a clear answer.\"},{\"id\":\"I_PRESS\",\"text\":\"The Tribune should keep pressing for an answer.\"}]}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01023",
+        "name": "Adash Stanley",
+        "role": "PG / The Oaks ",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question from bounded lived experience",
+        "reporter": "Tanya Cruz",
+        "question": "What does the supplied trend \"Oakland Oaks preseason performance\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Jack London",
+        "focus": "Oakland Oaks preseason performance",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Adash Stanley — PG / The Oaks — Lake Merritt",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks — team-update — Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-a1e759f8afb9"
+        },
+        {
+          "t": "FACT",
+          "text": "Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-55de45fc585b"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley line (feed): 23pt/7asst",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-58acc05668ce"
+        },
+        {
+          "t": "FACT",
+          "text": "Team record (feed): 0-1 · streak L1",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-01319835bac0"
+        },
+        {
+          "t": "FACT",
+          "text": "Event (feed): Oaks — team-update (preseason)",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-2bf824b204ae"
+        },
+        {
+          "t": "FACT",
+          "text": "Fan sentiment (feed): medium · mood hungry",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-20d0bb8b9b08"
+        },
+        {
+          "t": "FACT",
+          "text": "Cycle: C103",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-d8611cde1e4d"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley — PG / The Oaks — Lake Merritt",
+          "src": "Simulation_Ledger profile for POP-01023",
+          "id": "F-bfb2771fe5b8"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+      },
+      "output": {
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "fact_ids": [
+            "one or more ids from packet.known"
+          ],
+          "stance_id": "one id from packet.lattice.stances; null on abstain",
+          "question_id": "one id from packet.lattice.questions; null on abstain",
+          "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+          "unverifiedLead": [
+            "free lead text; never publishable"
+          ],
+          "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+        },
+        "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+      },
+      "lattice": {
+        "stances": [
+          {
+            "id": "S_CONCERN",
+            "text": "What this record shows concerns me."
+          },
+          {
+            "id": "S_MISMATCH",
+            "text": "What the record shows does not line up with what I expected."
+          },
+          {
+            "id": "S_ATTENTION",
+            "text": "This deserves a closer look."
+          },
+          {
+            "id": "S_ACCOUNTABILITY",
+            "text": "Someone should answer for what the record shows."
+          }
+        ],
+        "questions": [
+          {
+            "id": "Q_ATTENTION",
+            "text": "Why is this not getting more attention?"
+          },
+          {
+            "id": "Q_OWNER",
+            "text": "Who is responsible for answering this?"
+          },
+          {
+            "id": "Q_NEXT",
+            "text": "What happens next?"
+          },
+          {
+            "id": "Q_GAP",
+            "text": "What explains the gap in the record?"
+          }
+        ],
+        "intentions": [
+          {
+            "id": "I_NONE",
+            "text": ""
+          },
+          {
+            "id": "I_WATCH",
+            "text": "I am going to keep watching this."
+          },
+          {
+            "id": "I_ANSWER",
+            "text": "I want a clear answer."
+          },
+          {
+            "id": "I_PRESS",
+            "text": "The Tribune should keep pressing for an answer."
+          }
+        ]
+      }
+    },
+    "evidenceBound": true,
+    "model": "deepseek/deepseek-chat",
+    "record": false,
+    "maxTokens": 420
+  }
+]

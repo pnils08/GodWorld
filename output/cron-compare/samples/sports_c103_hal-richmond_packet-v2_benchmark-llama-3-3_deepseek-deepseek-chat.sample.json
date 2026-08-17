@@ -1,0 +1,12 @@
+{
+  "status": "ungated-sample",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/cron-compare/samples/sports_c103_hal-richmond_packet-v2_benchmark-llama-3-3_deepseek-deepseek-chat.sample.md",
+  "quotesLanded": 0,
+  "note": "UNGATED sample (--no-gate, S332): writer+quotes ran on raw API; the Rhea gate was skipped (needs subscription). NOT canon, review-only.",
+  "builtAt": "2026-08-13T15:24:14.558Z"
+}

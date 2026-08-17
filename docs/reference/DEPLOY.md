@@ -52,8 +52,9 @@ clear whenever Mike fires them; they confirm, they don't gate.
 **CURRENT: `SANDBOX 0814` (stood up S370, 2026-08-14).** Copy of live at post-C103 state (Mike-made copy per §Standing up a NEW sandbox). This is the bench for engine-wave vetting under the Groundhog model.
 - Spreadsheet ID `1j1Xj6dcpxMImqz079w7bEf4N58R-ct_lOmVO2imEmsQ`
 - Bound Apps Script ID: `1WlAG5UUK5SOwlie7PnQHGXkidm-4Yhm_yKS_E5b_HYp3N9vngoaybiBM`
-- Code current at exact main `1348e685` (2026-08-14 sports debut EventTrigger). Pushed via temp-dir route, pull-back matched 172/172 files byte-for-byte.
-- Web-app deployment `AKfycbwMojhZb2Y1hopBVqii2FDBB-C7JAqauKc_PXxaX9IHcOUdmSXKZE5juiwx0NRBhBfw` @1. **WARNING: any valid-token GET fires a FULL cycle — no ping mode.**
+- Code current at exact main `f350f97c` (S378 deploy wave — infrastructure.6 ghost-tabs + civic.22 `createInitiative_` + research.27 2.3/2.4). Pushed via temp-dir route, pull-back matched 171/171 byte-for-byte, 0 test files. *(Prior: `1348e685`, 172 files, before `continuityNotesParser.js` was deleted.)*
+- Web-app deployment `AKfycbwMojhZb2Y1hopBVqii2FDBB-C7JAqauKc_PXxaX9IHcOUdmSXKZE5juiwx0NRBhBfw` @6. **WARNING: any valid-token GET fires a FULL cycle — no ping mode.**
+- **Bench sheet state: synced from live at S378 (cycleCount reset 111 → 103), then fired C104.** Carries one bench-only test row on `Undocked_Feed` (`TargetCycle=104`, POP-00962, EpisodeId `undocked-bench-s378-c104`) seeded to exercise the feed path — test data, NOT a live replay candidate. Live's own `Undocked_Feed` row targets C103.
 - Service-account read verified from Node (941 ledger rows, `GODWORLD_SHEET_ID` override — env default points at PROD).
 - Script Properties (`SIM_SSID` = sandbox sheet ID, `CYCLE_TRIGGER_TOKEN` = shared env-file value): Mike sets per protocol step 3 — first fire proves them.
 - First fire is a COLD START (PropertiesService doesn't copy) — carry-dependent channels prove from the second fire on.

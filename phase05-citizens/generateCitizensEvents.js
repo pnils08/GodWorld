@@ -2632,12 +2632,16 @@ function generateCitizensEvents_(ctx) {
         momentum: (hoodStateForCond && hoodStateForCond.trajectory) ? hoodStateForCond.trajectoryMomentum : null,
         // research.27 Phase 2.3 (S376): UNDOCKED color scopes.
         // `undocked` gates on an APPROVED feed being loaded for this cycle.
-        // NOTHING WRITES S.undockedFeedEntries YET — the Phase-2 loader is
-        // unbuilt (research.27 2.3 item 4), so this is false every cycle and
-        // every UNDOCKED row is unreachable until it lands. An earlier version
-        // of this comment credited a `stepApprove` function; no such function
-        // exists anywhere in the repo — the gate's verb is decide() in
-        // scripts/undockedShowGate.js, which writes disk, not summary state.
+        // The Phase-2 loader LANDED (research.27 2.3 item 4): loadUndockedFeed_
+        // is wired as `Phase2-UndockedFeed` at both entry points and fills
+        // S.undockedFeedEntries from the Undocked_Feed tab, matching TargetCycle
+        // against the running cycle. Proven end-to-end on SANDBOX 0814 at bench
+        // C104 (S378): a seeded TargetCycle=104 row put POP-00962 on the pilot
+        // index and that citizen drew a source:undocked line, while the
+        // TargetCycle=103 row was correctly filtered out. (Do not re-credit a
+        // `stepApprove` function — no such function exists; the gate's verb is
+        // decide() in scripts/undockedShowGate.js, which writes disk, not
+        // summary state.)
         // An unapproved or absent feed must leave the array empty. That
         // is deliberate: the show's color must never appear in a cycle the show
         // did not actually air.
@@ -2728,12 +2732,17 @@ function generateCitizensEvents_(ctx) {
     // nothing.
     //
     // FAIL-SAFE, deliberately: if the citizen is flying but no show-tagged
-    // content survives, the pool is left ALONE rather than emptied. No UNDOCKED
-    // ECL rows are authored yet (that pool is grok's 2.3 work), so an
-    // unconditional filter would make pilots silently vanish from LifeHistory
-    // the moment this deployed — a citizen with no week at all, which reads as
-    // a bug and erases the very person the show is about. The gate self-activates
-    // the instant show content exists, and is inert until then.
+    // content survives, the pool is left ALONE rather than emptied — otherwise
+    // an unconditional filter would make pilots silently vanish from
+    // LifeHistory, a citizen with no week at all, which reads as a bug and
+    // erases the very person the show is about.
+    //
+    // The gate is now LIVE, not inert: 30 source:undocked ECL rows are authored
+    // (8 conditioned `undockedpilot` = pilot-POV, 22 general audience color).
+    // Bench C104 (S378) confirmed both halves — the pilot drew show content,
+    // and ZERO non-pilots drew a pilot-POV row, so the undockedpilot flag
+    // gates as designed. Non-pilots drawing audience lines is correct: the
+    // broadcast is citywide, only the cockpit is not.
     if (S.undockedPilots && S.undockedPilots[String(popId).trim().toUpperCase()]) {
       var showPool = [];
       for (var upi = 0; upi < pool.length; upi++) {

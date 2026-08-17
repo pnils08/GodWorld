@@ -1,11 +1,12 @@
 ---
 title: Cross-lane messaging — reaching another lane mid-session
 created: 2026-08-15
-updated: 2026-08-15
+updated: 2026-08-17
 type: reference
 tags: [infrastructure, architecture, active]
 sources:
   - Proven 2026-08-15 (S372) — redirected antigravity's autonomousNewsroom plan mid-session; it acknowledged and stood down
+  - Mike-direct 2026-08-17 (S377) — kimi/codex/antigravity restriction facts, added after rb's new boot-time roster check misread two bare-bash panes as "not booted"
 pointers:
   - "[[../plans/2026-08-15-cross-lane-message-bus]] — governance.47, the script that will replace this manual procedure"
   - "[[../index]] — registered same commit"
@@ -16,6 +17,16 @@ pointers:
 **Manual procedure. Replaced by `scripts/laneMessage.js` when governance.47 ships — until then, this is the mechanism.**
 
 `SendMessage` / `ListAgents` see **Claude sessions only** (research-build, engine-sheet, observers). The non-Claude lanes — antigravity (`agy`), grok, kimi (`kimi-code`), codex — are separate CLIs in tmux panes and are invisible to it. They are still reachable.
+
+## Known lane restrictions (dated — check before assuming a bare-bash pane means "not booted")
+
+A bare-bash pane can mean the CLI crashed, or it can mean this. Check here before treating one as broken.
+
+- **kimi** — account locked out until **2026-08-21**. Pane sits at bare `bash` until then; that is the lockout, not a crash. Nothing to fix, nothing to dispatch — wait it out. Mike-direct 2026-08-17.
+- **codex** — account-restricted until **2026-08-20**. Its pane stays live (`node`), and rb can still send it messages, but codex cannot reply back during the restriction — treat any dispatch to it as fire-and-forget until the date passes, not a wait-for-ack exchange. Mike-direct 2026-08-17.
+- **antigravity** — runs on Mike's own Gemini Pro account. No expiry, different kind of gap: it currently has **no defined role** — a capability without an assigned scope of work. Not broken, just unassigned; don't route work to it assuming a lane responsibility that hasn't been decided yet. Mike-direct 2026-08-17.
+
+Past these dates, re-verify with `tmux capture-pane` rather than trusting this table — it's a snapshot, not a live status feed. Strike an entry once its restriction has actually lifted and been confirmed live, don't just let the date silently pass.
 
 ## 1. Find the pane
 

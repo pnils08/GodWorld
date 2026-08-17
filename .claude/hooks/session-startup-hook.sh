@@ -86,8 +86,10 @@ fi
 PIN_LINE=$(grep -m1 '^\*\*PIN:\*\*' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
 ALL_NEXT=$(grep '^\*\*NEXT\[' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")
 
-# This terminal's own line, still resolved separately — it keys the sl-<terminal>
-# Supermemory recall below and is what the boot text means by "your handoff."
+# This terminal's own line, still resolved separately — it is what the boot
+# text means by "your handoff." (Used to also key an sl-<terminal> Supermemory
+# auto-recall; that recall was cut at S341/S372 — sl-godworld is hand-write,
+# on-demand only now, see below. NEXT_LINE has no Supermemory role anymore.)
 NEXT_LINE=""
 if [ "$MAGS_ONLY" != "yes" ]; then
   NEXT_LINE=$(grep -m1 "^\*\*NEXT\[$TERMINAL_NAME\]:\*\*" "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "")

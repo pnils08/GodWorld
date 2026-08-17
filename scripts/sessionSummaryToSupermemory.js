@@ -29,6 +29,22 @@
 // A Supermemory outage or a missing summary must not block a session close,
 // so every failure path exits 0 with a ⚠ line. Direct use:
 //   node scripts/sessionSummaryToSupermemory.js --terminal=research-build [--dry-run]
+//
+// FIXED S376/S377 (Mike found it live): this used to pick "whichever
+// memory_session_id has the newest row in session_summaries WHERE project =
+// 'GodWorld'" — i.e. the globally latest write across EVERY concurrently-open
+// lane, not this session's own. Multiple Claude terminals + house-guest CLIs
+// write to the same claude-mem DB, so whichever lane's close (or even a live
+// mid-session summary write) landed most recently won the mirror, tagged
+// under THIS terminal's --terminal= metadata. Proven live 2026-08-17: at the
+// moment this session closed, session_summaries held 6+ distinct
+// memory_session_id values from the last 30 minutes across other lanes.
+// Fix: resolve THIS process's own memory_session_id via
+// sdk_sessions.content_session_id = $CLAUDE_CODE_SESSION_ID (verified 1:1 —
+// content_session_id IS the Claude Code session id), then filter
+// session_summaries by that exact id. No env var / no match → skip the
+// mirror rather than guess (a skipped mirror is free; a mis-attributed one
+// pollutes another lane's record).
 
 'use strict';
 
@@ -91,30 +107,40 @@ function clip(s) {
   return s.length > MAX_FIELD ? s.slice(0, MAX_FIELD) + ' […]' : s;
 }
 
+function currentMemorySessionId() {
+  const csid = process.env.CLAUDE_CODE_SESSION_ID;
+  if (!csid) return null;
+  try {
+    const rows = sql(`SELECT memory_session_id FROM sdk_sessions
+      WHERE content_session_id = ${JSON.stringify(csid)} LIMIT 1`);
+    return rows.length ? rows[0].memory_session_id : null;
+  } catch {
+    return null;
+  }
+}
+
 async function main() {
   const args = parseArgs();
   if (!fs.existsSync(DB)) warnExit(`claude-mem DB not found at ${DB}`);
 
+  const sid = currentMemorySessionId();
+  if (!sid) warnExit('could not resolve this session\'s own memory_session_id (CLAUDE_CODE_SESSION_ID unset or no matching sdk_sessions row) — refusing to guess, S376 bug was exactly this');
+
   let rows;
   try {
-    // newest session that has summaries, then ALL its rows chronologically
+    // ALL rows for THIS session's own memory_session_id, chronologically
     // (claude-mem writes incremental summary rows as the session progresses)
     rows = sql(`
       SELECT request, investigated, learned, completed, next_steps, files_edited, created_at
       FROM session_summaries
-      WHERE memory_session_id = (
-        SELECT memory_session_id FROM session_summaries
-        WHERE project = 'GodWorld'
-        ORDER BY created_at_epoch DESC LIMIT 1)
+      WHERE memory_session_id = ${JSON.stringify(sid)}
       ORDER BY created_at_epoch ASC`);
   } catch (err) {
     warnExit(`DB read failed: ${err.message}`);
   }
-  if (!rows.length) warnExit('no session summary rows found (claude-mem may not have captured this session)');
+  if (!rows.length) warnExit('no session summary rows found for this session (claude-mem may not have captured it yet)');
 
   const latest = rows[rows.length - 1];
-  const ageHours = (Date.now() - new Date(latest.created_at).getTime()) / 3600000;
-  if (ageHours > 24) warnExit(`latest summary is ${ageHours.toFixed(0)}h old — not this session; nothing fresh to mirror`);
 
   const sess = pinSession();
   const date = latest.created_at.slice(0, 10);
@@ -134,11 +160,8 @@ async function main() {
     `**Files edited:** ${clip(joinField('files_edited'))}`,
   ].join('\n');
 
-  // one doc per claude-mem session — need its id for the idempotency key
-  const sid = sql(`
-    SELECT memory_session_id FROM session_summaries
-    WHERE project = 'GodWorld' ORDER BY created_at_epoch DESC LIMIT 1`)[0].memory_session_id;
-
+  // sid resolved above (this session's own memory_session_id) — reused as
+  // the idempotency key so a re-run of close doesn't duplicate the doc.
   const body = {
     content,
     customId: `session-log-${sid}`,

@@ -93,6 +93,44 @@ pointers:
 - [ ] Themed special weeks (Mike-direction 2026-08-16): full special-event weeks around holidays and city moments once the base loop is locked in — a cadence variant, not a new mechanism. Revisit after the first cycles prove ingestion → coverage → feedback. The casino era spawning from the show remains Phase 4b: its own design doc + Mike sign-off, unchanged.
 - [ ] Does the audience wake-day participation need any mechanic beyond perception + ECL (e.g., a "watched the episode" LifeHistory event), or is texture enough for v1?
 
+
+## §2.4 — In-space weeks and the mobility engine (builder-direct, 2026-08-17)
+
+**Ruling 1: a pilot is genuinely in space for that cycle.** Not "in Oakland with
+show-flavoured color" — off the board. Their week's events ARE the flight. No
+ordinary Oakland daily pool for a citizen in the cycle's feed. Builder's framing,
+recorded because it is the reason and not just the rule: there is nothing to
+pretend. Real-world Oakland is numbers to the model exactly as GodWorld Oakland
+is; neither the crons nor the model have ever seen either. The only question is
+whether the numbers are presented as cohesive logic. So a pilot is not
+"simulated as if" in space — the citizen is in space that cycle, and would not
+be home.
+
+**Ruling 2: this is the sim's #1 source of entertainment, and it is meant to
+flood the world.** The show is not a side attraction. A successful run plus
+sitting atop the leaderboard for multiple weeks is a mobility engine: Tier 4 to
+Tier 1 in 5–6 cycles, permanently altering every event that citizen draws — and
+their children's, via the heritage layer. Roughly five cycles for a Tier 1 to
+become famous. That is why everyone is eligible (the city is fair game,
+officeholders included — the sitting DA was drawn and stays) and why everyone
+watches. It is a different mechanism for altering the sim and then watching the
+sim react to itself.
+
+**Rate check (engine-sheet, before building):** the saturation worry does not
+hold. Cadence is one episode per cycle across a persistent 2–4 cast (§1.1), so
+the promotion path is narrow by construction — only seated cast climb, and
+succession controls who joins. Living tiers today: 957 citizens, Tier 1 24
+(2.5%), Tier 2 73, Tier 3 231, Tier 4 628 (65.6%). At ~1 promotion per 5–6
+cycles that is ~17–20 new Tier 1s per 100 cycles — Tier 1 roughly doubles over
+that span. Meaningful, not runaway. No cap needed; recheck if cadence or cast
+size ever increases, because both multiply this directly.
+
+**Build split.** In-space weeks (Ruling 1) are a bounded extension of the feed
+already landed and are being built now. The mobility engine (Ruling 2) is a NEW
+mechanism touching Tier — which governs protection, which generators run, and
+lineage — and nothing today promotes on fame or standings. It gets designed in
+daylight rather than started at the end of a long session.
+
 ## Changelog
 
 - 2026-08-07 — Initial draft (S360, research-build). Ignited by Mike-direct game-show direction; research basis + upstream org audit same day. Moltbook restart-storm fix shipped same session (crontab lesson baked into principle 5).

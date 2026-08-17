@@ -122,6 +122,12 @@ Read/written by Node.js scripts during edition production.
 
 ## Active Tabs — Sports Feeds
 
+**`Undocked_Feed`** (S376) — approved UNDOCKED episodes. Engine cannot read repo
+disk, so this is the transport for the show feed. Pushed post-approval by
+`undockedShowGate.js --push`, read Phase-2 by `loadUndockedFeed_`. Sits with the
+sports feeds because it is the same shape: `Oakland_Sports_Feed` is feed instance
+1, this is instance 2.
+
 Game data from Mike's MLB The Show / NBA 2K sessions.
 
 | Tab | Rows | Read By | Write By | Purpose |

@@ -75,6 +75,14 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 - **`Cycle_Packet`**: The comprehensive cycle JSON digest.
 
 ## 8. Sports & Satellites
+- **`Undocked_Feed`**: approved UNDOCKED show episodes, one row per pilot per
+  episode (research.27 2.3, S376). Written by `scripts/undockedShowGate.js --push`
+  AFTER editorial approval; read by `loadUndockedFeed_`
+  (`phase02-world-state/loadEventContentLedger.js`) at Phase-2 on
+  `TargetCycle == current`. TargetCycle is when an episode AIRS, Cycle is when it
+  was flown — they differ when approval lands after a cycle closes. Transport
+  window, not an archive: the git-tracked feed packs under
+  `output/spacemolt-show/feed/` are the track record.
 - **`Oakland_Sports_Feed`**: Interactive sports event intake. **This is the live
   feed-tab precedent** — a Phase-2 read (`applySportsSeason.js` L302,
   `applySportsFeedTriggers_`) sets summary state before Phase 5 events. Copy this

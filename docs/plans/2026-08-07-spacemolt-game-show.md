@@ -184,3 +184,4 @@ daylight rather than started at the end of a long session.
 - 2026-08-16 (research-build) — Phase 3.1 designed (Mike-direct: assign a real reporter). Dedicated beat, not folded into culture-desk; voice/data-contract/cadence spec'd. Assigned to grok to draft.
 - 2026-08-16 (research-build) — F4 resolved: "evening-events engine" (L101) has zero hits anywhere in repo/docs beyond that phrase — no competing mechanism was ever built. Built 2.1-2.3 realizes that note, doesn't contradict it. ef3e3d71 stands.
 - 2026-08-16 (Mike-direct) — F7 ruled: sitting officeholders are eligible for the lottery. DA Clarissa Dane (POP-00143, drawn) stays in the cast. Eligibility filter updated.
+- 2026-08-17 (research-build) — Regression found reviewing 6259e3b3: d01e0486's --push added lib/sheets directly into undockedShowGate.js, breaking its own no-sheet-client test. Move the sheet write into a separate drop-in, same pattern as everywhere else.

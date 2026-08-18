@@ -131,6 +131,26 @@ mechanism touching Tier — which governs protection, which generators run, and
 lineage — and nothing today promotes on fame or standings. It gets designed in
 daylight rather than started at the end of a long session.
 
+**§2.4 addendum (builder-direct 2026-08-18, verified against code same session):**
+Ruling 2's "nothing today promotes on fame or standings" was true of STANDINGS
+but not of coverage — the mobility engine already exists and the show feeds it.
+Verified chain: emergence-type `Citizen_Media_Usage` rows (quoted / profile /
+interviewed / featured) bump ledger `UsageCount` at the Saturday canon door and
+promote immediately at 3→Tier 3, 6→Tier 2, 9→Tier 1
+(`processAdvancementIntake.js`; its own draw-intake comment reads "lottery
+entry is Tier 4 — climbs via UsageCount like everyone"). The consequence side
+is engine.69: 10 un-named cycles decay the count and earned rungs give way,
+Tier 1 exempt, authored tiers held. Only 228 of ~960 living citizens have ever
+been named in coverage — a cast seat is access to the sole fast currency out of
+Tier 4, and Marcus Walker (Dishwasher, T4, wealth 1/10, UsageCount 0) is the
+opening case. Precision: ECL audience/wake lines are fame texture and do NOT
+feed UsageCount; only article citations do. The leaderboard's mobility power is
+therefore indirect and editorial — being on top earns more bylined coverage.
+Remaining design scope, replacing the old "mobility engine" item: (a) whether
+standings mechanically pull extra coverage (a leader-feature slot beyond the
+recap), (b) the casino (4b, unchanged gate) — the first mechanism where the
+AUDIENCE takes downside, not just the cast.
+
 ## §2.5 — Daily-cadence build (Mike-direct session, 2026-08-18)
 
 Four decisions, all Mike sign-off, taken after an engine-sheet wiring audit of the whole show:

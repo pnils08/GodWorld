@@ -5,6 +5,7 @@ type: reference
 tags: [engine, tiers, fame, media, active]
 sources:
   - builder-direct 2026-08-18 (S379) — articulation of the three mechanisms; fame-permanence design intent
+  - builder-direct 2026-08-18 (S380) — daily pipeline → Saturday print named as the climb ladder's delivery route
   - phase05-citizens/processAdvancementIntake.js — climb + decay implementation
   - phase07-evening-media/culturalLedger.js — fame implementation
 pointers:
@@ -30,6 +31,16 @@ Two are wired. One is design intent with the door unbuilt.
 | Who | ENGINE-clock ledger citizens; unmatched names route to Generic_Citizens `EmergenceCount` (the GC→ledger lottery, engine.58) | same file |
 | Feed source | Saturday canon door only — article citations. Wake/ECL/exchange mentions do NOT feed UsageCount | `mediaRoomIntake.js` writes the usage tab |
 | Reach | 228 of ~960 living citizens have ever been named in coverage (live count, S379) | `Citizen_Media_Usage` 573 rows |
+
+**The delivery route (builder-direct, S380):** the daily desk pipeline is the
+tier-jump opportunity. The M–F three-wake fanout interviews real citizens
+(wake 2) and stages their articles behind the probation wall; a staged article
+that **makes Saturday print** passes the canon door and its quoted citizens
+earn the emergence citation that climbs this ladder. Daily coverage is how a
+citizen gets *into* an article; Saturday print is when the ladder *counts* it.
+Corollary: a broken write wake stages nothing, so a daily-pipeline outage
+freezes the ladder for everyone it would have named (the 08-13→08-17
+UNAPPROVED_QUOTE outage, fixed `1d67333a`, was three write days of lost climb).
 
 ## 2. DECAY — attention fades (WIRED, engine.69)
 

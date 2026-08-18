@@ -16,6 +16,28 @@ const FEED_HEADERS = Object.freeze([
 ]);
 
 const FOURTH_WALL = /videogame|video game|commander|get_action_log|mcp__|openrouter|tool_error|spacemolt-lib/i;
+const REAL_WORLD_DATE = /\d{4}-\d{2}-\d{2}/;
+
+// Y<n>C<m> conversion, matching docs/EDITION_PIPELINE.md: n = floor((cycle-1)/52)+1,
+// m = ((cycle-1)%52)+1 -- e.g. cycle 92 = Y2C40, cycle 104 = Y2C52.
+function yearCycle_(cycle) {
+  const c = Number(cycle);
+  const n = Math.floor((c - 1) / 52) + 1;
+  const m = ((c - 1) % 52) + 1;
+  return 'Y' + n + 'C' + m;
+}
+
+// The episode's on-disk id is minted from a real-world ISO timestamp
+// (undockedEpisode.js) -- fine for a build-artifact filename, but the feed
+// row this produces is world-facing (Undocked_Feed tab, citizen LifeHistory).
+// Same FOURTH_WALL boundary as StagedPath below: reforge the id from
+// POPID + the sim calendar right here, at the one place apparatus becomes
+// canon. Every internal file-path lookup (intake/staged/archive) keeps using
+// staged.episode_id untouched -- only the projected feed row gets this one.
+function worldFacingEpisodeId_(staged, cycle) {
+  const pop = String(staged.popid || '').toLowerCase().replace(/-/g, '');
+  return 'undocked-' + pop + '-' + yearCycle_(cycle);
+}
 
 function factValue(block, fallback) {
   if (block && Object.prototype.hasOwnProperty.call(block, 'value')) return block.value;
@@ -61,7 +83,7 @@ function projectFeed(staged, cycle, stagedPath) {
     EventType: EVENT_TYPE,
     POPID: staged.popid,
     Holder: staged.holder || '',
-    EpisodeId: staged.episode_id,
+    EpisodeId: worldFacingEpisodeId_(staged, cycle),
     CreditsDelta: factValue(staged.facts.credits_delta, null),
     Systems: systems.slice(),
     CombatEvents: Number(combat.events) || 0,
@@ -78,6 +100,7 @@ function validateFeed(row) {
   if (row.EventType !== EVENT_TYPE) errors.push('EventType must be ' + EVENT_TYPE);
   if (!/^POP-\d{5}$/.test(row.POPID || '')) errors.push('POPID required');
   if (!row.EpisodeId) errors.push('EpisodeId required');
+  if (REAL_WORLD_DATE.test(row.EpisodeId || '')) errors.push('EpisodeId carries a real-world date — sim canon must use Y<n>C<m>');
   if (!Number.isFinite(Number(row.Cycle)) || Number(row.Cycle) < 1) errors.push('Cycle required');
   if (row.VideoGameDate || row.VideoGame) errors.push('VideoGameDate and VideoGame must be blank');
   const blob = JSON.stringify(row);

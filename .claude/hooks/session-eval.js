@@ -214,6 +214,14 @@ async function main() {
 
   const status = warnings.length === 0 ? 'CLEAN' : `${warnings.length} WARNING(S)`;
 
+  // Blocking scope: only the CURRENT turn's indicators, not the whole session's.
+  // guessIndicators accumulates across the full transcript (correct for the report's
+  // trend view), but totalPrompts holds its final value here — the turn that just
+  // produced this Stop event — so filtering on it isolates just-now assertions.
+  // Without this, one match anywhere in a long session re-blocks every Stop for the
+  // rest of it, including a message that only quotes the original match to retract it.
+  const currentTurnGuessIndicators = guessIndicators.filter(g => g.prompt === totalPrompts);
+
   // Tool timing — read tool-timings.jsonl, filter by current session_id, aggregate per tool.
   const sessionId = hookData.session_id || null;
   const timingsPath = path.join(process.env.CLAUDE_PROJECT_ROOT || '/root/GodWorld',
@@ -291,12 +299,12 @@ ${warnings.map(w => '- ' + w).join('\n') || '- None'}
 
   // Blocking gate — guess indicators stop the turn instead of being logged after the fact.
   // Guarded by stop_hook_active: fires at most once per turn, so it can never trap a session.
-  if (guessIndicators.length > 0 && hookData.stop_hook_active !== true) {
-    const cited = guessIndicators.slice(0, 5)
+  if (currentTurnGuessIndicators.length > 0 && hookData.stop_hook_active !== true) {
+    const cited = currentTurnGuessIndicators.slice(0, 5)
       .map(g => `  - "${g.snippet}"`).join('\n');
     console.log(JSON.stringify({
       decision: 'block',
-      reason: `ANTI-GUESS GATE — ${guessIndicators.length} unverified assertion(s) about this codebase:\n${cited}\n\n` +
+      reason: `ANTI-GUESS GATE — ${currentTurnGuessIndicators.length} unverified assertion(s) about this codebase:\n${cited}\n\n` +
         `Rewrite the response. Every claim about a file, function, config value, or count must ` +
         `carry the command that produced it in the same message. If you cannot run it, say you do not know.`
     }));

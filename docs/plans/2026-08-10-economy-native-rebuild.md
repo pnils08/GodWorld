@@ -120,7 +120,35 @@ the move-in repopulation. D1–D5 are valid either way: restored citizens
 correct via D3 events; new arrivals are born right via D1/D2. The plan does
 not touch this decision.
 
+## Codex vet result (2026-08-18, S380 — verdict: NOT ready for in-progress)
+
+Codex (gpt-5.6-sol, high) ran the S362 vet. Verdict: the plan *expresses* all
+five doctrines but does not yet *operationally satisfy* them — engine.104
+stays `ready` until this plan is revised. No files changed by the vet.
+
+Per-doctrine results:
+
+- **D1 no-state-change-without-event — FAILS as written.** `generationalWealthEngine.js:420` zeroes minors' income / fills unseeded adults without a life event; `scripts/linkCitizensToEmployers.js:385` bulk-writes employer state eventlessly. D3 never explicitly retires these paths.
+- **D2 no-code-fixes-citizens — FAILS as written.** The employer linker is a citizen-fixing tool; `processAdvancementIntake.js:631` can rewrite an existing citizen's tier/role/income. No exhaustive rule governs existing mutation paths.
+- **D3 nothing-regenerates — PARTIAL.** Linker deletes+rebuilds Employment_Roster every applied run (`linkCitizensToEmployers.js:441`); salary calc has no durable event/idempotency key, so retries can reroll outcomes.
+- **D4 no-runtime-sheet-creation — FAILS as written.** Wealth engine adds LineageId + creates Heritage_Ledger mid-cycle (`generationalWealthEngine.js:1276`); error logger lazy-creates Engine_Errors (`godWorldEngine2.js:98`); linker creates/deletes sheets.
+- **D5 proven-ships / loud-failure — NOT enforceable yet.** Execution order activates D1 before D2 is proven (plan L105); no bench matrix, pass thresholds, proof artifact, rollback criterion, or fatal-cycle assertion. `godWorldEngine2.js:158` catches-logs-continues, so "fail the cycle" has no fatal propagation mechanism.
+
+Additional blocking findings:
+
+- `economic_parameters.json` embeds real-world institutions (ILWU/Port L3, fictional CA act L36, BART L223, Highland/Kaiser/CNA L333) — D2 must replace provenance, not just dollar figures.
+- NetWorth-as-native-anchor launders imported thresholds (`economicLookup.js:99`, wealth-engine hardcoded bands L58).
+- `role_mapping.json` has lossy mappings (Mayor→City Council Aide, Orthodontist→Dental Hygienist, Pharmacist→Pharmacy Technician, L160); no event-driven route defined for its retirement condition.
+- Creation paths are not inventoried behind one gate: advancement intake mints independently (`processAdvancementIntake.js:660`); adulthood settlement assigns role/income/profile separately (`educationCareerEngine.js:784`).
+- S364 audit figures stale: C103 snapshot is 961 citizens (861 active / 49 traded / 46 retired / 4 deceased / 1 injured); 489 unmapped rows across 235 distinct titles (not 461/212). The "940 Deceased" open decision no longer describes current state.
+
+Revision requirements before in-progress: explicit disposition of the two
+mutating legacy paths; complete creation/mutation-path inventory; event
+idempotency; setup manifest for every sheet/header; fatal error propagation;
+D2 proof before D1 activation; refreshed audit figures.
+
 ## Changelog
 
 - 2026-08-10 — Written S364 from the live-session audit; awaiting S362 vet.
 - 2026-08-10 — Restored after repo deletion (original uncommitted copy lost).
+- 2026-08-18 — S380: codex vet verdict transcribed from terminal scrollback (engine-sheet); plan needs revision before engine.104 moves.

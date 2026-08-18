@@ -110,4 +110,5 @@ decision, which is a design call, not a mechanism call.
 ## Changelog
 
 - 2026-08-17 (S378) — plan created from the live audit; scope cut to the classes no open row covers.
+- 2026-08-18 (S380) — Tasks 2, 3, 4 SHIPPED live with read-back: worldYearBase=2039 config row (worldYear = base + SimYear, =2041 today); 37 MigrationIntent-on-inactive cells cleared (writer-side clear-on-transition still open, rides engine.119 wave); POP-00173 BirthYear 1889→1989. Task 1 (SchoolQuality causal-or-retire) still awaiting Mike's call. STANDING CONSTRAINT (Mike-direct S380): no sweep/constant fixes anywhere in this plan's execution — every repaired value must derive from that citizen's own particulars; uniform backfills are the defect class, not the repair.
 - 2026-08-17 (S378) — batch shape measured: defects are uniform across ClockMode, so repair batches by issue not by group. Citizen Archive design recorded with a sequencing correction (archive after true-up; traded+deceased is 5.5% of rows).

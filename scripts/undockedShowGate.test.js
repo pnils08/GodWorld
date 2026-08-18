@@ -124,5 +124,51 @@ check('approve staged lives under archive', fs.existsSync(path.join(
 check('decided episode gone from sweep set', G.listSweepEligible(tmp).indexOf('undocked-pop00962-test.json') < 0);
 check('enqueueStagedDir skips archived', G.enqueueStagedDir(104, tmp).length === 0);
 
+// §2.5 daily cadence: same pilot, same cycle, two flights -> distinct EpisodeIds
+// (bare id for flight 1, -e2 for flight 2), and autoDecide approves valid rows
+// unattended while parking anything decide() throws on.
+const stagedDir = path.join(tmp, 'output', 'spacemolt-show', 'staged');
+function cloneStaged(id) {
+  const s = JSON.parse(JSON.stringify(staged));
+  s.episode_id = id;
+  const p = path.join(stagedDir, id + '.json');
+  fs.writeFileSync(p, JSON.stringify(s, null, 2));
+  return p;
+}
+cloneStaged('undocked-pop00962-flight-a');
+cloneStaged('undocked-pop00962-flight-b');
+const enqA = G.enqueue(path.join(stagedDir, 'undocked-pop00962-flight-a.json'), 104, tmp);
+const enqB = G.enqueue(path.join(stagedDir, 'undocked-pop00962-flight-b.json'), 104, tmp);
+check('first flight of cycle is Seq 1', enqA.row.Seq === 1);
+check('second flight same pilot+cycle is Seq 2', enqB.row.Seq === 2);
+const reEnqA = G.enqueue(path.join(stagedDir, 'undocked-pop00962-flight-a.json'), 104, tmp);
+check('re-enqueue keeps its Seq', reEnqA.row.Seq === 1);
+
+// parked path: flight-b's staged file vanishes before decide -> autoDecide
+// must park it (Applied stays no) and still approve flight-a.
+fs.renameSync(path.join(stagedDir, 'undocked-pop00962-flight-b.json'),
+  path.join(stagedDir, 'undocked-pop00962-flight-b.json.hidden'));
+const auto1 = G.autoDecide(104, tmp);
+check('autoDecide approves the valid flight',
+  auto1.approved.length === 1 && auto1.approved[0] === 'undocked-pop00962-flight-a');
+check('autoDecide parks the broken flight',
+  auto1.parked.length === 1 && auto1.parked[0].episodeId === 'undocked-pop00962-flight-b');
+const parkedRow = JSON.parse(fs.readFileSync(G.intakePath('undocked-pop00962-flight-b', tmp), 'utf8'));
+check('parked row stays Applied=no', parkedRow.Applied === 'no');
+
+// restore the hidden staged file: autoDecide now approves the parked row too
+fs.renameSync(path.join(stagedDir, 'undocked-pop00962-flight-b.json.hidden'),
+  path.join(stagedDir, 'undocked-pop00962-flight-b.json'));
+const auto2 = G.autoDecide(104, tmp);
+check('autoDecide picks up the recovered row', auto2.approved.length === 1 && auto2.parked.length === 0);
+const pack104 = JSON.parse(fs.readFileSync(G.feedPath(104, tmp), 'utf8'));
+const ids104 = pack104.events.map(function (e) { return e.EpisodeId; }).sort();
+check('two same-pilot episodes carry distinct world ids',
+  ids104.length === 2 && ids104[0] === 'undocked-pop00962-Y2C52' && ids104[1] === 'undocked-pop00962-Y2C52-e2');
+check('auto-gate stamped as decider',
+  JSON.parse(fs.readFileSync(G.intakePath('undocked-pop00962-flight-a', tmp), 'utf8')).DecidedBy === 'auto-gate');
+check('sequenced id passes real-world-date wall',
+  !/\d{4}-\d{2}-\d{2}/.test(ids104[1]));
+
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('undockedShowGate: ok');

@@ -66,6 +66,25 @@ function loadIntake(episodeId, root) {
   return loadJson(p);
 }
 
+// §2.5 daily cadence: a pilot can fly the same cycle more than once, so each
+// intake row carries a per-pilot-per-cycle flight sequence. max+1 (not count)
+// so a re-enqueued or rejected earlier flight can never hand out a duplicate.
+// Rows without Seq (pre-§2.5) count as 1, which is exactly the id they minted.
+function nextSeq_(popid, cycle, base) {
+  const dir = paths(base).intake;
+  if (!fs.existsSync(dir)) return 1;
+  let maxSeq = 0;
+  for (const f of fs.readdirSync(dir)) {
+    if (!f.endsWith('.json')) continue;
+    let r;
+    try { r = loadJson(path.join(dir, f)); } catch (_) { continue; }
+    if (String(r.POPID) === String(popid) && Number(r.Cycle) === Number(cycle)) {
+      maxSeq = Math.max(maxSeq, Number(r.Seq) || 1);
+    }
+  }
+  return maxSeq + 1;
+}
+
 function enqueue(stagedPath, cycle, root) {
   const base = root || ROOT;
   const abs = path.isAbsolute(stagedPath) ? stagedPath : path.join(base, stagedPath);
@@ -84,6 +103,7 @@ function enqueue(stagedPath, cycle, root) {
   // one. Returns a skip marker instead of throwing so a batch sweep reports the
   // skip and continues rather than halting on the first already-approved file.
   const existingPath = intakePath(staged.episode_id, base);
+  let seq = null;
   if (fs.existsSync(existingPath)) {
     const prior = loadJson(existingPath);
     if (prior && prior.Applied && prior.Applied !== 'no') {
@@ -96,9 +116,13 @@ function enqueue(stagedPath, cycle, root) {
           ', cycle ' + prior.Cycle + ')',
       };
     }
+    // Undecided re-enqueue keeps its seat in the flight order — a fresh
+    // nextSeq_ here would hand the same flight a second id.
+    if (prior && prior.Seq) seq = Number(prior.Seq) || null;
   }
+  if (!seq) seq = nextSeq_(staged.popid, cycle, base);
   const rel = path.relative(base, abs);
-  const feed = C.projectFeed(staged, cycle, rel);
+  const feed = C.projectFeed(staged, cycle, rel, seq);
   const check = C.validateFeed(feed);
   if (!check.valid) throw new Error('feed invalid: ' + check.errors.join('; '));
 
@@ -107,6 +131,7 @@ function enqueue(stagedPath, cycle, root) {
     Timestamp: new Date().toISOString(),
     POPID: staged.popid,
     Cycle: Number(cycle),
+    Seq: seq,
     Daypart: 'SHOW',
     Tag: C.EVENT_TYPE,
     EpisodeId: staged.episode_id,
@@ -144,7 +169,7 @@ function decide(episodeId, applied, by, note, root) {
   if (applied === 'yes') {
     const staged = loadJson(path.join(base, row.StagedPath));
     assertSplit(staged);
-    const feed = C.projectFeed(staged, row.Cycle, row.StagedPath);
+    const feed = C.projectFeed(staged, row.Cycle, row.StagedPath, row.Seq);
     const check = C.validateFeed(feed);
     if (!check.valid) throw new Error('feed invalid: ' + check.errors.join('; '));
     row.FeedEvent = feed;
@@ -260,9 +285,35 @@ function enqueueStagedDir(cycle, root) {
   });
 }
 
+// §2.5 decision 2 (Mike sign-off 2026-08-18): unattended runs auto-approve on
+// contract validation. decide() itself re-projects and re-validates the feed
+// row (fourth-wall, schema) and throws WITHOUT saving on any failure — so a
+// failing episode stays parked Applied=no for human review, which is the whole
+// design: the validator is the wall, humans handle the rejects.
+function autoDecide(cycle, root) {
+  const base = root || ROOT;
+  const dir = paths(base).intake;
+  const results = { approved: [], parked: [] };
+  if (!fs.existsSync(dir)) return results;
+  for (const f of fs.readdirSync(dir).sort()) {
+    if (!f.endsWith('.json')) continue;
+    let r;
+    try { r = loadJson(path.join(dir, f)); } catch (_) { continue; }
+    if (r.Applied !== 'no' || Number(r.Cycle) !== Number(cycle)) continue;
+    try {
+      const row = decide(r.EpisodeId, 'yes', 'auto-gate',
+        'auto-approved on contract validation (§2.5)', base);
+      results.approved.push(row.EpisodeId);
+    } catch (e) {
+      results.parked.push({ episodeId: r.EpisodeId, reason: e.message || String(e) });
+    }
+  }
+  return results;
+}
+
 module.exports = {
   INTAKE_V, intakePath, feedPath, enqueue, decide, appendFeed, enqueueStagedDir,
-  archiveStaged, listSweepEligible, pushFeed, FEED_TAB, TAB_HEADERS,
+  archiveStaged, listSweepEligible, pushFeed, autoDecide, FEED_TAB, TAB_HEADERS,
 };
 
 if (require.main === module) {
@@ -307,6 +358,16 @@ if (require.main === module) {
           r.pushed + ' row(s) appended as TargetCycle=' + r.targetCycle +
           (r.skipped ? ', ' + r.skipped + ' already present' : ''))));
       }).catch(function (e) { console.error('push failed: ' + e.message); process.exit(1); });
+    } else if (argv.includes('--auto-decide')) {
+      if (!cycle) throw new Error('--auto-decide needs --cycle');
+      const res = autoDecide(cycle);
+      res.approved.forEach(function (id) { console.log('AUTO-APPROVED ' + id); });
+      res.parked.forEach(function (p) {
+        console.log('PARKED ' + p.episodeId + ' — ' + p.reason + ' (needs human review)');
+      });
+      if (!res.approved.length && !res.parked.length) {
+        console.log('nothing undecided for c' + cycle);
+      }
     } else if (argv.includes('--approve')) {
       const id = arg('--approve');
       const row = decide(id, 'yes', arg('--by'), arg('--note'));
@@ -316,7 +377,7 @@ if (require.main === module) {
       const row = decide(id, 'rejected', arg('--by'), arg('--note'));
       console.log('APPLIED rejected ' + row.EpisodeId);
     } else {
-      console.error('usage: --enqueue --staged FILE --cycle N | --enqueue-staged-dir --cycle N | --approve ID --by WHO | --reject ID --by WHO | --push --cycle N [--target M]');
+      console.error('usage: --enqueue --staged FILE --cycle N | --enqueue-staged-dir --cycle N | --auto-decide --cycle N | --approve ID --by WHO | --reject ID --by WHO | --push --cycle N [--target M]');
       process.exit(2);
     }
   } catch (err) {

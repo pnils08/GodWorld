@@ -6,11 +6,11 @@
  * The excitement is the randomness: any eligible citizen can be drawn.
  * Code draws; the newsroom narrates. Nobody approves individual names.
  *
- * Eligibility (v1 parameters — Mike signs off before the first real draw):
+ * Eligibility (v2 parameters — F7 ruling 2026-08-16: sitting officeholders are
+ * ELIGIBLE, the city is fair game; the v1 council exclusion is removed):
  *   - Status === 'Active'            (excludes Traded / Retired / deceased / injured)
  *   - adult: BirthYear <= currentYear - minAge   (default minAge 18)
  *   - resides in Oakland: MigrationDestination empty, or ReturnedCycle >= MigratedCycle
- *   - not a sitting elected official (Civic_Office_Ledger roster via queryLedger.js council)
  *   - has a POPID and a Neighborhood
  *
  * Draw: seed string -> sha256 -> mulberry32; sample cast + ranked alternates
@@ -78,25 +78,12 @@ function loadRows(refresh) {
     .filter(Boolean);
 }
 
-function sittingOfficials() {
-  try {
-    const out = execFileSync('node', [path.join(ROOT, 'scripts', 'queryLedger.js'), 'council'],
-      { cwd: ROOT, timeout: 60000 }).toString();
-    const start = out.search(/^\{/m); // JSON payload starts at a line-initial brace; the dotenv banner can contain braces in tips
-    const data = JSON.parse(out.slice(start));
-    return new Set((data.data.council || [])
-      .filter(o => o.status === 'active' && o.popId)
-      .map(o => String(o.popId).toUpperCase()));
-  } catch (e) {
-    // Fail loud: an eligibility filter that silently skips an exclusion class is
-    // not the filter Mike signed off.
-    console.error('[draw] FATAL: council roster unreadable — cannot exclude sitting officials: '
-      + (e && e.message || e));
-    process.exit(1);
-  }
-}
-
-function eligible(rows, params, officials) {
+// F7 ruling (2026-08-16, recorded in the plan changelog): sitting officeholders
+// are ELIGIBLE — the DA was drawn and stays. The v1 sittingOfficials() exclusion
+// (Civic_Office_Ledger council roster) is removed; old draw manifests carry
+// their own eligibility text, so --verify against them reports the filter drift
+// as a snapshot mismatch rather than silently reproducing under new rules.
+function eligible(rows, params) {
   const out = [];
   for (const r of rows) {
     const pop = String(r.POPID || '').trim().toUpperCase();
@@ -112,7 +99,6 @@ function eligible(rows, params, officials) {
       const ret = parseInt(r.ReturnedCycle, 10);
       if (!(Number.isFinite(ret) && Number.isFinite(mig) && ret >= mig)) continue;
     }
-    if (officials.has(pop)) continue;
     out.push({
       popid: pop,
       name: String(r.Name || (r.First + ' ' + r.Last)).replace(/\s+/g, ' ').trim(),
@@ -143,8 +129,7 @@ function main() {
   if (params.verify) {
     const m = JSON.parse(fs.readFileSync(params.verify, 'utf8'));
     const rows = loadRows(false);
-    const officials = sittingOfficials();
-    const list = eligible(rows, m.params, officials);
+    const list = eligible(rows, m.params);
     const hash = crypto.createHash('sha256')
       .update(list.map(c => c.popid).join(',')).digest('hex');
     if (hash !== m.eligibleSnapshotHash) {
@@ -164,8 +149,7 @@ function main() {
   }
 
   const rows = loadRows(params.refresh);
-  const officials = sittingOfficials();
-  const list = eligible(rows, params, officials);
+  const list = eligible(rows, params);
   const seedString = `${params.seed}:draw${params.draw}:cycle${params.cycle}`;
   const hash = crypto.createHash('sha256')
     .update(list.map(c => c.popid).join(',')).digest('hex');
@@ -182,12 +166,11 @@ function main() {
       "Status === 'Active'",
       `adult: BirthYear <= ${params.currentYear - params.minAge}`,
       'resides in Oakland (MigrationDestination empty or ReturnedCycle >= MigratedCycle)',
-      'not a sitting elected official (Civic_Office_Ledger active roster)',
+      'sitting officeholders ELIGIBLE (F7 ruling 2026-08-16)',
       'POPID and Neighborhood present',
     ],
     eligibleCount: list.length,
     eligibleSnapshotHash: hash,
-    officialsExcluded: officials.size,
     ledgerRows: rows.length,
     cast: res.cast,
     alternates: res.alternates,
@@ -201,7 +184,7 @@ function main() {
 
   console.log(`[draw] UNDOCKED draw #${params.draw} (cycle ${params.cycle})`);
   console.log(`[draw] eligible: ${list.length} of ${rows.length} ledger citizens ` +
-    `(${officials.size} sitting officials excluded)`);
+    '(officeholders eligible per F7)');
   console.log(`[draw] seed: ${seedString}`);
   console.log('[draw] CAST:');
   res.cast.forEach((c, i) =>

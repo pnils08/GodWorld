@@ -52,7 +52,7 @@ pointers:
 
 ## Phase 1 — Pilot infrastructure (research-build)
 
-- **1.1 Bounded episode runner.** Wrapper around commander: crontab-scheduled, one mission per episode, turn + cost caps, recovery-aware (the old miner stranded full-cargo/no-fuel; missions must include refuel/repair authority), durable per-episode JSON in `logs/spacemolt-show/`. Cadence DECIDED (2026-08-16, Mike sign-off): one episode per cycle, rotating across the live cast. Real pilot cost (~$0.13, 78 turns, exit 0, under the 10-min cap) makes cost a non-issue — the constraint is narrative pacing per "tie to cycle rhythm," and per-cycle lines up with the existing Saturday coverage-ingest window rather than adding a second clock.
+- **1.1 Bounded episode runner.** Wrapper around commander: crontab-scheduled, one mission per episode, turn + cost caps, recovery-aware (the old miner stranded full-cargo/no-fuel; missions must include refuel/repair authority), durable per-episode JSON in `logs/spacemolt-show/`. Cadence RE-DECIDED (2026-08-18, Mike sign-off, supersedes the 2026-08-16 per-cycle decision): **one episode per DAY, rotating across the live cast** — each pilot flies ~2–3×/week. Flights accumulate through the week and air together at the next cycle fire (`TargetCycle = next unfired cycle`), so the airing clock stays cycle-rhythm while the flight clock is daily. ~$0.13/flight → ~$0.90/week. Requires the EpisodeId per-cycle sequence component (a pilot now flies the same cycle more than once — the bare `undocked-{pop}-Y{n}C{m}` id would collide).
 - **1.2 Pilot voice binding.** Mission briefs written in-world (the cast citizen's goals, in their register); `captains_log` entries as the pilot's own narrative record (cheap model). This is the show's raw character material — the adapter carries it as *quoted subjective color*, provenance-marked, never as fact.
 
 ## Phase 2 — Adapter + staged events (research-build adapter; engine-sheet sim wiring)
@@ -89,7 +89,7 @@ pointers:
 ## Open questions
 
 - [ ] In-world broadcaster: who *airs* the show in Oakland — an existing business entity (Civis Systems? a media house?) or a new minted business? (Shapes coverage voice + a possible sponsor thread; decide with Mike at Phase 0.3.)
-- [x] Episode cadence — **DECIDED per cycle, rotating cast** (2026-08-16, Mike sign-off on rb's recommendation; see 1.1).
+- [x] Episode cadence — **RE-DECIDED daily, rotating cast** (2026-08-18, Mike sign-off; supersedes the 2026-08-16 per-cycle decision; see 1.1).
 - [ ] Themed special weeks (Mike-direction 2026-08-16): full special-event weeks around holidays and city moments once the base loop is locked in — a cadence variant, not a new mechanism. Revisit after the first cycles prove ingestion → coverage → feedback. The casino era spawning from the show remains Phase 4b: its own design doc + Mike sign-off, unchanged.
 - [ ] Does the audience wake-day participation need any mechanic beyond perception + ECL (e.g., a "watched the episode" LifeHistory event), or is texture enough for v1?
 
@@ -130,6 +130,22 @@ already landed and are being built now. The mobility engine (Ruling 2) is a NEW
 mechanism touching Tier — which governs protection, which generators run, and
 lineage — and nothing today promotes on fame or standings. It gets designed in
 daylight rather than started at the end of a long session.
+
+## §2.5 — Daily-cadence build (Mike-direct session, 2026-08-18)
+
+Four decisions, all Mike sign-off, taken after an engine-sheet wiring audit of the whole show:
+
+1. **Cadence — daily rotating** (see 1.1). Flights daily, airing stays cycle-clocked: every flight pushes `TargetCycle = next unfired cycle`, the week's slate airs together at fire.
+2. **Gate runs auto-approve-on-valid unattended.** Contract validation (fourth-wall, schema) is the wall: a passing episode auto-decides `DecidedBy=auto-gate` and pushes; a failing one parks `Applied=no` for human review. Editorial judgment moves from per-episode approval to the validator + spot review.
+3. **Standings layer greenlit — design + build.** Deterministic aggregation over `Undocked_Feed` rows (per-pilot cumulative credits, streaks, cycles-on-top) into an `Undocked_Standings` tab. This is the casino-4b substrate and the future mobility-engine input — but NOT the mobility engine itself; §2.4's build split stands, nothing promotes on standings yet.
+4. **Nia cycle-fire sit-down.** One pilot interview per cycle on fire day, rotating. `UsageType=interviewed` is the deliberate standing-ladder mechanism; recap citations stay `coverage` (non-laddering). Open design item before first run (media lane): the interview's source-of-speech — what the pilot "says" — without a fourth-wall leak.
+
+**Wiring-audit findings driving this session's fixes:**
+- F7 contradiction: `undockedDraw.js` still hard-excludes the 10 sitting council officials; the ruled filter says officeholders are eligible (Dane only slipped through because DA isn't on the council roster).
+- Nia absent from `newsroom-wake-packages.json` — the newsroom cron never dispatches her, so recaps never queue → never reach Saturday edition → never ingest to `Citizen_Media_Usage`. The coverage→standing feedback loop was severed at its first joint.
+- No crontab entries exist for any show stage — every episode/approve/push to date was hand-run.
+- Dane + Jumper C103 flights sit undecided (`Applied=no`) in intake.
+- EpisodeId `undocked-{pop}-Y{n}C{m}` is one-per-pilot-per-cycle — daily cadence requires a sequence component or same-cycle repeat flights silently collide.
 
 ## Changelog
 
@@ -186,3 +202,4 @@ daylight rather than started at the end of a long session.
 - 2026-08-16 (research-build) — F4 resolved: "evening-events engine" (L101) has zero hits anywhere in repo/docs beyond that phrase — no competing mechanism was ever built. Built 2.1-2.3 realizes that note, doesn't contradict it. ef3e3d71 stands.
 - 2026-08-16 (Mike-direct) — F7 ruled: sitting officeholders are eligible for the lottery. DA Clarissa Dane (POP-00143, drawn) stays in the cast. Eligibility filter updated.
 - 2026-08-17 (research-build) — Regression found reviewing 6259e3b3: d01e0486's --push added lib/sheets directly into undockedShowGate.js, breaking its own no-sheet-client test. Move the sheet write into a separate drop-in, same pattern as everywhere else.
+- 2026-08-18 (engine-sheet) — §2.5 added: daily cadence, auto-approve gate, standings greenlight, Nia sit-downs (four Mike sign-offs) + wiring-audit findings (F7 draw contradiction, Nia uncronned, no show crontab, EpisodeId collision constraint).

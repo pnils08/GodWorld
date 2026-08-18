@@ -34,9 +34,14 @@ function yearCycle_(cycle) {
 // POPID + the sim calendar right here, at the one place apparatus becomes
 // canon. Every internal file-path lookup (intake/staged/archive) keeps using
 // staged.episode_id untouched -- only the projected feed row gets this one.
-function worldFacingEpisodeId_(staged, cycle) {
+// seq: per-pilot-per-cycle flight number (daily cadence, §2.5 — a pilot can
+// fly the same cycle more than once). 1 or absent keeps the bare id so every
+// already-pushed row and LifeHistory line stays stable; 2+ appends -e{k}.
+function worldFacingEpisodeId_(staged, cycle, seq) {
   const pop = String(staged.popid || '').toLowerCase().replace(/-/g, '');
-  return 'undocked-' + pop + '-' + yearCycle_(cycle);
+  const base = 'undocked-' + pop + '-' + yearCycle_(cycle);
+  const k = Number(seq) || 1;
+  return k > 1 ? base + '-e' + k : base;
 }
 
 function factValue(block, fallback) {
@@ -70,7 +75,7 @@ function magnitude(staged) {
   return Math.min(5, m);
 }
 
-function projectFeed(staged, cycle, stagedPath) {
+function projectFeed(staged, cycle, stagedPath, seq) {
   const flags = [];
   if (openEscrow(staged)) flags.push('open_escrow');
   flags.push('credits_delta_windowed');
@@ -83,7 +88,7 @@ function projectFeed(staged, cycle, stagedPath) {
     EventType: EVENT_TYPE,
     POPID: staged.popid,
     Holder: staged.holder || '',
-    EpisodeId: worldFacingEpisodeId_(staged, cycle),
+    EpisodeId: worldFacingEpisodeId_(staged, cycle, seq),
     CreditsDelta: factValue(staged.facts.credits_delta, null),
     Systems: systems.slice(),
     CombatEvents: Number(combat.events) || 0,

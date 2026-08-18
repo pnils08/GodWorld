@@ -14,7 +14,22 @@ function check(name, cond, detail) {
 
 const srcG = fs.readFileSync(path.join(__dirname, 'undockedShowGate.js'), 'utf8');
 const srcC = fs.readFileSync(path.join(__dirname, 'undockedShowContract.js'), 'utf8');
-check('no sheet client in gate', !/lib\/sheets|googleapis|batchUpdate/.test(srcG));
+
+// The gate is disk-only EXCEPT the documented --push transport (pushFeed),
+// which legitimately lazy-requires lib/sheets to reach Undocked_Feed
+// (research.27 2.3 item 4, d01e0486). The real invariant is "no sheet touch
+// outside push", not "the string never appears anywhere" -- a whole-file scan
+// also caught its own explaining comment. Strip comments and exclude the
+// pushFeed function body before checking the rest stays sheet-pure.
+function stripComments(src) {
+  return src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
+}
+const pushFeedStart = srcG.indexOf('async function pushFeed(');
+const pushFeedEnd = srcG.indexOf('function enqueueStagedDir(');
+const srcGDiskOnly = stripComments(srcG.slice(0, pushFeedStart) + srcG.slice(pushFeedEnd));
+check('no sheet client outside push transport',
+  pushFeedStart > -1 && pushFeedEnd > pushFeedStart &&
+  !/lib\/sheets|googleapis|batchUpdate/.test(srcGDiskOnly));
 check('no LLM client', !/openai|anthropic|chat\.completions/.test(srcG + srcC));
 check('Applied default no', /Applied: 'no'/.test(srcG));
 check('one event type', C.EVENT_TYPE === 'undocked-episode');

@@ -388,6 +388,14 @@ function quotedSpans(text) {
   return spans;
 }
 
+// Punctuation-insensitive form for quote matching. Writers split one approved
+// quote across attribution ("Rain's coming," she said. "And every winter…") and
+// the seam punctuation/capitalization drifts (em dash → comma-capital). The
+// words are still verbatim canon; only the glyphs at the cut moved.
+function normalizedSpeech(text) {
+  return clean(text).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
 function publicEngineText(value) {
   return clean(value, 500)
     .replace(/\bstuck-initiative\b/gi, 'Initiative stall')
@@ -540,7 +548,20 @@ function auditArticle(draftText, packet) {
   const newNumbers = [...new Set(numericTokens(bodyText)
     .map(v => v.toLowerCase()).filter(v => !allowedNumbers.has(v)))];
   const approvedQuotes = new Set(packet.manifest.approvedQuotes.map(row => clean(row.text)));
-  const unknownQuotes = quotedSpans(bodyText).filter(quote => !approvedQuotes.has(quote));
+  // A span passes when it is (a) an exact approved quote, (b) a word-for-word
+  // contiguous fragment of one (split attribution — no new words enter canon),
+  // or (c) a scare-quoted term lifted from the approved record itself
+  // ("strain"). Everything else — paraphrase, invention — stays fatal.
+  const approvedQuoteNorms = packet.manifest.approvedQuotes.map(row => normalizedSpeech(row.text));
+  const approvedRecordNorm = normalizedSpeech(approvedText);
+  const unknownQuotes = quotedSpans(bodyText).filter(quote => {
+    if (approvedQuotes.has(quote)) return false;
+    const norm = normalizedSpeech(quote);
+    if (!norm) return true;
+    if (approvedQuoteNorms.some(approved => approved.includes(norm))) return false;
+    if (approvedRecordNorm.includes(norm)) return false;
+    return true;
+  });
   const errors = [];
   if (newNumbers.length) errors.push({ code: 'UNAPPROVED_NUMBER', values: newNumbers });
   if (unknownQuotes.length) errors.push({ code: 'UNAPPROVED_QUOTE', values: unknownQuotes });

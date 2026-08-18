@@ -90,6 +90,19 @@ assert.doesNotThrow(() => p.assertBase(w3, 'W3'));
 const good = '## TEST-ONLY\n\nTEST-ONLY value rose by 4. Test Resident said, “' +
   claims.publishableQuote + '”\n';
 assert.deepStrictEqual(p.auditArticle(good, w3).errors, []);
+
+// Split attribution: word-for-word fragments of one approved quote pass even
+// though seam punctuation/capitalization moved (S380 UNAPPROVED_QUOTE fix).
+const splitDraft = '## TEST-ONLY\n\nTEST-ONLY value rose by 4. “What the record shows does not line ' +
+  'up with what I expected,” Test Resident said. “I am going to keep watching this.”\n';
+assert.deepStrictEqual(p.auditArticle(splitDraft, w3).errors, []);
+// Scare-quoted term lifted verbatim from the approved record passes.
+const factFragment = w3.manifest.approvedFacts[0].text.split(/\s+/).slice(0, 3).join(' ');
+const scareDraft = '## TEST-ONLY\n\nTEST-ONLY value rose by 4. The record calls it “' + factFragment + '” again.\n';
+assert.ok(!p.auditArticle(scareDraft, w3).errors.some(e => e.code === 'UNAPPROVED_QUOTE'));
+// Paraphrase — same idea, different words — still fails closed.
+const paraDraft = '## TEST-ONLY\n\nTest Resident said, “The record really does not line up with anything I expected to see.”\n';
+assert.ok(p.auditArticle(paraDraft, w3).errors.some(e => e.code === 'UNAPPROVED_QUOTE'));
 const bad = good + '\nI stood on 8th Street. A source said, “Invented words.”\n';
 const audit = p.auditArticle(bad, w3);
 assert.equal(audit.ok, false);

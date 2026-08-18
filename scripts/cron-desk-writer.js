@@ -1104,7 +1104,7 @@ async function main() {
     let packet;
     try { packet = JSON.parse(worldState); }
     catch (e) { throw new Error('typed Packet state is not JSON: ' + e.message); }
-    const normalized = renderPacketIntake(fs.readFileSync(savedFiles[0], 'utf8'), packet);
+    let normalized = renderPacketIntake(fs.readFileSync(savedFiles[0], 'utf8'), packet);
     fs.writeFileSync(savedFiles[0], normalized);
     const parsed = require('../lib/articleIntake').parse(normalized);
     if (!parsed.found || parsed.errors.length) {
@@ -1112,7 +1112,60 @@ async function main() {
         (parsed.errors.length ? parsed.errors.map(e => e.code + ': ' + e.message).join('; ') : 'missing INTAKE'));
     }
     if (packet.v === 'LEP/2') {
-      const audit = require('./livedExperiencePacketV2').auditArticle(normalized, packet);
+      const lep = require('./livedExperiencePacketV2');
+      let audit = lep.auditArticle(normalized, packet);
+      if (!audit.ok) {
+        // One corrective pass before failing the desk for the day. The model
+        // gets the exact violations plus the approved record and rewrites its
+        // own draft; the re-audit below stays fail-closed. Sunk 3 straight
+        // fan-out days (08-13..08-17) before this existed.
+        const errText = audit.errors.map(e => e.code + ': ' + e.values.map(v => '"' + v + '"').join(' | ')).join('\n');
+        const approvedList = packet.manifest.approvedQuotes.length
+          ? packet.manifest.approvedQuotes.map(q => '- ' + q.speakerName + ': ' + q.text).join('\n')
+          : '(none — this article must contain NO quoted speech at all)';
+        log.warn('LEP/2 audit failed (' + audit.manifestId + ') — one repair pass: ' + errText.replace(/\n/g, '; '));
+        const repairUser = 'Your article draft below failed the canon audit. Violations:\n\n' + errText +
+          '\n\nApproved quotes (the ONLY quotable speech, word-for-word — you may split one quote across ' +
+          'attribution, but never change, trim, or add a word inside quote marks):\n' + approvedList +
+          '\n\nApproved numbers are only those already present in the approved facts/quotes. ' +
+          'Rewrite the article minimally: keep the scene, voice, and structure; replace every violating quoted ' +
+          'span with an approved quote verbatim or remove the quote marks/speech entirely; drop unapproved ' +
+          'numbers. Keep the ## INTAKE block and SELF-SCORE comment. Output ONLY the corrected article.\n\n' +
+          '=== YOUR DRAFT ===\n\n' + normalized;
+        let repairText;
+        if (PROVIDER === 'openrouter') {
+          const rr = await callOpenRouter(system, repairUser);
+          usageIn += rr.usageIn; usageOut += rr.usageOut;
+          repairText = rr.text;
+        } else {
+          const rClient = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+          const rr = await rClient.messages.create({
+            model: MODEL, max_tokens: MAX_TOKENS, system,
+            messages: [{ role: 'user', content: repairUser }]
+          }, { timeout: CALL_TIMEOUT_MS, maxRetries: 2 });
+          if (rr.usage) { usageIn += rr.usage.input_tokens || 0; usageOut += rr.usage.output_tokens || 0; }
+          repairText = (rr.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
+        }
+        const unfenced = (() => {
+          const m = String(repairText || '').trim().match(/^```[a-z]*\s*\n([\s\S]*?)\n```\s*$/i);
+          return m ? m[1] : repairText;
+        })();
+        if (String(unfenced || '').trim()) {
+          const renormalized = renderPacketIntake(unfenced, packet);
+          const reparsed = require('../lib/articleIntake').parse(renormalized);
+          if (reparsed.found && !reparsed.errors.length) {
+            const reaudit = lep.auditArticle(renormalized, packet);
+            if (reaudit.ok) {
+              normalized = renormalized;
+              fs.writeFileSync(savedFiles[0], normalized);
+              audit = reaudit;
+              log.info('LEP/2 repair pass clean (' + audit.manifestId + ') — repaired draft kept.');
+            } else audit = reaudit;
+          } else {
+            log.warn('repair pass broke the intake contract — keeping original audit failure.');
+          }
+        } else log.warn('repair pass returned empty — keeping original audit failure.');
+      }
       if (!audit.ok) {
         throw new Error('LEP/2 Article manifest audit failed (' + audit.manifestId + '): ' +
           audit.errors.map(e => e.code + '=' + e.values.join(',')).join('; '));

@@ -142,7 +142,7 @@ Four decisions, all Mike sign-off, taken after an engine-sheet wiring audit of t
 
 **Wiring-audit findings driving this session's fixes:**
 - F7 contradiction: `undockedDraw.js` still hard-excludes the 10 sitting council officials; the ruled filter says officeholders are eligible (Dane only slipped through because DA isn't on the council roster).
-- Nia absent from `newsroom-wake-packages.json` — the newsroom cron never dispatches her, so recaps never queue → never reach Saturday edition → never ingest to `Citizen_Media_Usage`. The coverage→standing feedback loop was severed at its first joint.
+- Nia absent from `newsroom-wake-packages.json` — the newsroom cron never dispatches her, so recaps never queue → never reach Saturday edition → never ingest to `Citizen_Media_Usage`. The coverage→standing feedback loop was severed at its first joint. Dispatch needs TWO builds the wake machinery lacks, not a config append: a conditional fanout hook (fire iff `feed/c{N}.json` holds an episode with no write-up) and a feed-sourced packet path (her facts come from the feed pack, not the standard Packet) — filed as **pipeline.60** (research-build). Her RULES/persona-map/agent are landed; grok's PREWRITE Entities line synced into RULES 2026-08-18.
 - No crontab entries exist for any show stage — every episode/approve/push to date was hand-run.
 - Dane + Jumper C103 flights sit undecided (`Applied=no`) in intake.
 - EpisodeId `undocked-{pop}-Y{n}C{m}` is one-per-pilot-per-cycle — daily cadence requires a sequence component or same-cycle repeat flights silently collide.

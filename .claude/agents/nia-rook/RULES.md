@@ -29,6 +29,7 @@ PREWRITE:
 - AnchorFacts: [min 2 packet-true from the feed row]
 - Claim: [one sentence]
 - MissingData: [will not invent]
+- Entities: [{ name, popid if known, usageType }]
 ```
 
 ## Hard rules

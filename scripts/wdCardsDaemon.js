@@ -255,7 +255,8 @@ async function logFailure(proj, ids, detail) {
     new Date().toISOString(),
     '',
     'wd-cards-daemon',
-    proj.projection + ' rebuild failed for: ' + ids.join(','),
+    proj.projection + ' rebuild failed for ' + ids.length + ' id(s): ' +
+      ids.slice(0, 5).join(',') + (ids.length > 5 ? ',…' : ''),
     excerpt,
     'CardRebuildFailure',
     'daemon-rowhash',

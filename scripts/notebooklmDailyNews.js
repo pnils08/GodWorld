@@ -595,10 +595,17 @@ async function run(argv) {
   if (fs.existsSync(archiveQueryPath)) {
     archiveQuery = readJson(archiveQueryPath);
   } else {
-    const queried = nlm([
+    let queried = nlm([
       'notebook', 'query', config.notebookId, continuityPrompt,
       '--json', '--timeout', '180',
     ], { timeoutMs: 200 * 1000 });
+    if (!queried.ok) {
+      await sleep(30 * 1000);
+      queried = nlm([
+        'notebook', 'query', config.notebookId, continuityPrompt,
+        '--json', '--timeout', '180',
+      ], { timeoutMs: 200 * 1000 });
+    }
     if (!queried.ok) throw new Error('published-archive query failed: ' + queried.out.slice(0, 400));
     archiveQuery = parseJsonOutput(queried.out, 'published-archive query');
     fs.writeFileSync(archiveQueryPath, JSON.stringify(archiveQuery, null, 2) + '\n');

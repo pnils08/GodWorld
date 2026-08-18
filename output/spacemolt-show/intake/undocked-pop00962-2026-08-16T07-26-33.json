@@ -7,7 +7,7 @@
   "Tag": "undocked-episode",
   "EpisodeId": "undocked-pop00962-2026-08-16T07-26-33",
   "Applied": "yes",
-  "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-08-16T07-26-33.json",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00962-2026-08-16T07-26-33.json",
   "Holder": "Marcus Walker",
   "CreditsDelta": -68,
   "Magnitude": 4,
@@ -25,7 +25,7 @@
     "EventType": "undocked-episode",
     "POPID": "POP-00962",
     "Holder": "Marcus Walker",
-    "EpisodeId": "undocked-pop00962-2026-08-16T07-26-33",
+    "EpisodeId": "undocked-pop00962-Y2C51",
     "CreditsDelta": -68,
     "Systems": [
       "Sol"

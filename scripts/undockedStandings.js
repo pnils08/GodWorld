@@ -134,7 +134,7 @@ async function main() {
   const values = [HEADERS].concat(rows);
   const oldLen = existing ? existing.length : 0;
   while (values.length < oldLen) values.push(HEADERS.map(() => ''));
-  await sheets.updateRangeByPosition(TAB, 1, 1, values);
+  await sheets.updateRangeByPosition(TAB, 1, 0, values); // startCol is 0-indexed: col A
 
   // Verify-after-write (engine rule): read back and confirm shape.
   const back = await sheets.getSheetData(TAB);

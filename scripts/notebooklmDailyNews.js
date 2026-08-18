@@ -453,6 +453,14 @@ async function downloadAudio(notebookId, artifactId, audioPath) {
   return false;
 }
 
+// Drive + the NotebookLM notebook are the durable copies of daily audio;
+// once a Drive link confirms the upload landed, the local .m4a is scratch.
+function deleteLocalAudioIfDelivered(audioPath, driveLink) {
+  if (!driveLink || !fs.existsSync(audioPath)) return;
+  fs.unlinkSync(audioPath);
+  console.log('Local audio deleted (Drive-delivered): ' + path.relative(ROOT, audioPath));
+}
+
 async function run(argv) {
   const args = parseArgs(argv);
   if (!fs.existsSync(CONFIG_PATH)) throw new Error('config/notebooklm.json missing');
@@ -583,6 +591,7 @@ async function run(argv) {
       });
       manifest.driveLink = delivery && delivery.driveLink ? delivery.driveLink : null;
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+      deleteLocalAudioIfDelivered(audioPath, manifest.driveLink);
     }
     console.log('NotebookLM daily news audio recovery complete for C' + cycle);
     return { cycle, runDir, packHash: pack.hash, audioPath, resumedLatestAudio: true };
@@ -723,6 +732,7 @@ async function run(argv) {
       });
       manifest.driveLink = delivery && delivery.driveLink ? delivery.driveLink : null;
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+      deleteLocalAudioIfDelivered(audioPath, manifest.driveLink);
     } else {
       await sendDiscordText(
         '🗞️ **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**\nWritten brief generated; audio disabled.\n`' +

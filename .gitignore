@@ -78,3 +78,8 @@ __pycache__/
 !.grok/skills/**
 output/kimi/spacemolt-phase0/commander/
 output/kimi/spacemolt-phase0/spacemolt-lib/
+
+# NotebookLM daily/edition audio overviews — Drive + the NotebookLM notebook
+# are the durable copies; local .m4a is deleted after confirmed Drive upload
+# (notebooklmDailyNews.js), so it never belongs in git history. (2026-08-18)
+output/notebooklm/**/*.m4a

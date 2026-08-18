@@ -1,0 +1,171 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 103,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 103,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00962",
+      "Holder": "Marcus Walker",
+      "EpisodeId": "undocked-pop00962-Y2C51",
+      "CreditsDelta": -68,
+      "Systems": [
+        "Sol"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 4,
+      "Flags": [
+        "open_escrow",
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-08-16T07-26-33.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 103,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00143",
+      "Holder": "Clarissa Dane",
+      "EpisodeId": "undocked-pop00143-Y2C51",
+      "CreditsDelta": null,
+      "Systems": [
+        "Sol"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-08-16T07-44-12.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 103,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00688",
+      "Holder": "Merkin Jumper",
+      "EpisodeId": "undocked-pop00688-Y2C51",
+      "CreditsDelta": 42,
+      "Systems": [
+        "Sol"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-08-16T07-54-19.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop00962-Y2C51",
+      "label": "UNDOCKED: Marcus Walker — down 68 on the night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00962"
+      ],
+      "handle": {
+        "angle": "Recap Marcus Walker's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits -68, systems Sol, combat 0, mishaps 0, magnitude 4/5, open escrow position.",
+        "citizens": [
+          "Marcus Walker — UNDOCKED cast pilot"
+        ]
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 103,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00962",
+        "Holder": "Marcus Walker",
+        "EpisodeId": "undocked-pop00962-Y2C51",
+        "CreditsDelta": -68,
+        "Systems": [
+          "Sol"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 4,
+        "Flags": [
+          "open_escrow",
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-08-16T07-26-33.json"
+      },
+      "hood": "Jack London"
+    },
+    {
+      "ref": "undocked:undocked-pop00143-Y2C51",
+      "label": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+      "kind": "undocked",
+      "popids": [
+        "POP-00143"
+      ],
+      "handle": {
+        "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 3/5.",
+        "citizens": [
+          "Clarissa Dane — UNDOCKED cast pilot"
+        ]
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 103,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00143",
+        "Holder": "Clarissa Dane",
+        "EpisodeId": "undocked-pop00143-Y2C51",
+        "CreditsDelta": null,
+        "Systems": [
+          "Sol"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 3,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-08-16T07-44-12.json"
+      },
+      "hood": "Fruitvale"
+    },
+    {
+      "ref": "undocked:undocked-pop00688-Y2C51",
+      "label": "UNDOCKED: Merkin Jumper — up 42 on the night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00688"
+      ],
+      "handle": {
+        "angle": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 42, systems Sol, combat 0, mishaps 0, magnitude 3/5.",
+        "citizens": [
+          "Merkin Jumper — UNDOCKED cast pilot"
+        ]
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 103,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00688",
+        "Holder": "Merkin Jumper",
+        "EpisodeId": "undocked-pop00688-Y2C51",
+        "CreditsDelta": 42,
+        "Systems": [
+          "Sol"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 3,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-08-16T07-54-19.json"
+      },
+      "hood": "Downtown"
+    }
+  ],
+  "generatedAt": "2026-08-18T06:26:00.774Z"
+}

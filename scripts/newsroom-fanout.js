@@ -30,7 +30,12 @@ const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 
 // Daily desk quotas (sum = 6). Package expansion grows the eligible pool, never
 // the number of scheduled seats.
-const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1 };
+// undocked (pipeline.60): Nia Rook's solo show seat — its own key so the show
+// never competes with the culture generalist. The seat only survives fanout
+// when the feed pack holds an un-recapped episode (see the story-less drop in
+// buildFanout); quota 1 keeps boundDailyAssignments from treating it as an
+// unknown desk and silently dropping it.
+const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1, undocked: 1 };
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -383,6 +388,24 @@ async function buildFanout(date) {
       + 'APPROACH-ONLY (no assigned angle, no seed citizens). Upstream: run /engine-review + /build-world-summary for c' + cycle + '.');
   }
   const lanes = (signal && signal.lanes) || {};
+  // pipeline.60: the UNDOCKED lane is feed-built, not desk_signal-built —
+  // Nia's facts come only from the gate-approved feed pack. Empty slice (no
+  // episode, or all recapped) leaves lanes.undocked unset, her seat draws no
+  // seed, and the story-less drop below removes it for the day.
+  if (cycle != null) {
+    try {
+      const { buildNiaSlice, writeNiaSlice } = require(path.join(__dirname, 'buildNiaSlice'));
+      const niaSlice = buildNiaSlice(cycle);
+      if (!niaSlice.empty) {
+        writeNiaSlice(cycle, niaSlice);
+        lanes.undocked = niaSlice.laneEntries;
+        console.error('[fanout] UNDOCKED lane — ' + niaSlice.events.length +
+          ' un-recapped episode(s) for c' + cycle);
+      }
+    } catch (e) {
+      console.error('[fanout] nia slice skipped (non-fatal): ' + e.message);
+    }
+  }
   const takenRefs = cycle === null ? new Set() : assignedStoryRefs(cycle);
   const approachMap = loadApproachMap();
   const assignments = [];
@@ -411,6 +434,16 @@ async function buildFanout(date) {
       taken++;
     }
     if (taken < quota) shortfalls.push({ desk, wanted: quota, got: taken });
+  }
+
+  // pipeline.60: an undocked seat with no seed means no un-recapped episode
+  // today — drop the seat entirely rather than sending an approach-only
+  // no-facts recap out. This drop IS the show lane's conditional dispatch.
+  for (let i = assignments.length - 1; i >= 0; i--) {
+    if (assignments[i].desk === 'undocked' && !assignments[i].story) {
+      console.error('[fanout] UNDOCKED seat dropped — no un-recapped episode today');
+      assignments.splice(i, 1);
+    }
   }
 
   // grok: after LRU rota is built, optionally force one firebrand stink slot.

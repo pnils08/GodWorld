@@ -80,6 +80,10 @@ const BEAT_RULES = [
   { match: /transit|infrastructure|infastructure/i, domain: 'INFRASTRUCTURE', themes: ['transit', 'infrastructure', 'construction', 'transportation'] },
   { match: /education/i,                       domain: 'EDUCATION',      themes: ['education', 'schools', 'students', 'youth'] },
   { match: /weather|environment/i,            domain: 'ENVIRONMENT',    themes: ['weather', 'environment', 'climate', 'green space'] },
+  // UNDOCKED show beat (pipeline.60) — Nia Rook's solo recap seat. Matched
+  // before the generic arts/entertainment rule so the show routes to its own
+  // themes; her fanout desk is 'undocked' (own quota), not the culture rota.
+  { match: /undocked/i,                       domain: 'CULTURE',        themes: ['undocked', 'show', 'pilots', 'episode', 'watch party', 'fandom'] },
   { match: /arts|entertainment|cultural lia/i, domain: 'CULTURE',       themes: ['arts', 'culture', 'entertainment', 'community'] },
   { match: /lifestyle|food|hospitality|social trends/i, domain: 'CULTURE', themes: ['lifestyle', 'food', 'community', 'trends', 'neighborhood'] },
   { match: /ethics|faith/i,                   domain: 'COMMUNITY',      themes: ['faith', 'ethics', 'community', 'values'] },

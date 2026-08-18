@@ -6,7 +6,19 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook']);
+
+// pipeline.60 — Nia Rook's UNDOCKED show seat (own desk key, feed-built lane)
+const nia = packages['nia-rook'];
+assert.equal(nia.version, 'NIAROOK-UNDOCKED-1');
+assert.equal(nia.active, true);
+assert.equal(nia.requiredDaily, true);
+assert.equal(nia.assignment.desk, 'undocked');
+assert.equal(nia.assignment.popid, 'POP-01076');
+assert.equal(nia.packetContract, 'v2');
+assert.equal(packagesApi.routeFor(nia, 'write').model, 'meta-llama/llama-3.3-70b-instruct');
+assert.equal(nia.reviewProfile.canonPolicy, 'load-bearing');
+assert.ok(nia.reviewProfile.canonBlockers.some(b => /video game/.test(b)));
 
 const jax = packages['freelance-firebrand'];
 assert.equal(jax.version, 'JAX-LEP2-1');
@@ -377,11 +389,11 @@ const approaches = {
 };
 
 const rotaPool = activeRotaCandidates(packages);
-assert.equal(rotaPool.length, 19);
+assert.equal(rotaPool.length, 20);
 assert.deepStrictEqual(
   Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
     rotaPool.filter(row => row.desk === desk).length])),
-  { civic: 8, sports: 5, culture: 5, business: 1 });
+  { civic: 8, sports: 5, culture: 5, business: 1, undocked: 1 });
 
 // The daily selector supplies at most the declared 2/2/1/1 seats. The package
 // gate normalizes those selected identities but cannot insert the other active
@@ -393,9 +405,10 @@ const selected = [
   Object.assign({ story: { ref: 'TEST-SPORTS-TWO' } }, anthony.assignment, { persona: 'anthony-raines' }),
   Object.assign({ story: { ref: 'TEST-CULTURE' } }, kai.assignment, { persona: 'kai-marston' }),
   Object.assign({ story: { ref: 'TEST-BUSINESS' } }, jordan.assignment, { persona: 'business-desk' }),
+  Object.assign({ story: { ref: 'TEST-UNDOCKED' } }, nia.assignment, { persona: 'nia-rook' }),
 ];
 const bounded = applyWakePackageGate(selected, approaches, packages);
-assert.equal(bounded.assignments.length, 6);
+assert.equal(bounded.assignments.length, 7);
 assert.deepStrictEqual(bounded.pinned, []);
 assert.deepStrictEqual(bounded.skipped, []);
 assert.deepStrictEqual(
@@ -409,7 +422,7 @@ assert.equal(bounded.assignments[5].wakePackage, 'JORDAN-LEP2-1');
 const staleSeat = applyWakePackageGate(selected.concat({
   desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only', popid: 'POP-99999'
 }), approaches, packages);
-assert.equal(staleSeat.assignments.length, 6);
+assert.equal(staleSeat.assignments.length, 7);
 assert.deepStrictEqual(staleSeat.skipped.map(row => row.name),
   ['TEST-ONLY Unpackaged Reporter']);
 

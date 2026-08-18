@@ -1065,6 +1065,16 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
 // ---------------------------------------------------------------------------
 
 function loadLane(cycle, desk) {
+  // pipeline.60: the undocked lane is feed-built (Nia's data contract — facts
+  // only from the gate-approved feed pack), independent of desk_signal. The
+  // fanout angle wake wrote the day's slice; report/write reuse it (W1 owns
+  // the assignment). null => every stage skips cleanly => conditional dispatch.
+  if ((desk || DESK) === 'undocked') {
+    const { loadNiaSlice } = require(path.join(__dirname, 'buildNiaSlice'));
+    const niaSlice = loadNiaSlice(cycle);
+    return (niaSlice && !niaSlice.empty && (niaSlice.laneEntries || []).length)
+      ? niaSlice.laneEntries : null;
+  }
   const signalPath = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
   const signal = readJson(signalPath);
   if (!signal || !signal.lanes) throw new Error('no desk_signal at ' + path.relative(ROOT, signalPath) + ' — run buildWorldSummary first');
@@ -2472,6 +2482,22 @@ async function runWrite(assign) {
         contamination: contamination.findings,
         summary: contamination.fail ? 'deterministic world-contamination blocker failed' :
           (rhea && rhea.summary) || 'no rhea verdict' }, null, 2));
+  }
+
+  // pipeline.60: Nia filed on this cycle's un-recapped episodes — mark them in
+  // the recap ledger so tomorrow's slice doesn't re-litigate them. Staged AND
+  // flagged both count as filed (a flagged draft is a human recovery step, not
+  // an automatic re-run). EpisodeIds ride the lane refs ('undocked:<id>').
+  if (personaSlug === 'nia-rook' && !NO_GATE) {
+    try {
+      const { markRecapped } = require(path.join(__dirname, 'buildNiaSlice'));
+      const ids = lane.map(e => e && e.ref).filter(r => /^undocked:/.test(r || ''))
+        .map(r => r.slice('undocked:'.length));
+      markRecapped(ids, { cycle, stem: base, disposition: pass ? 'staged' : 'flagged' });
+      log('recap ledger: marked ' + ids.length + ' episode(s) filed');
+    } catch (e) {
+      log('recap ledger mark failed (non-fatal): ' + e.message);
+    }
   }
 
   // reporter self-record (author-side; persona POPID when set)

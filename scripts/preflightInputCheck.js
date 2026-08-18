@@ -198,6 +198,20 @@ async function main() {
       lines.push(`[x] Initiative Tracker: ${counts.real} real / ${counts.placeholder} placeholder / ${counts.bloat} bloat`);
     }
     for (const id of placeholders) lines.push(`      INFO placeholder ${id} — reserved slot, no validation required`);
+    // Currency check (S380 — the C104 miss): a shape-valid tracker can still be
+    // STALE — NextActionCycle rows scheduled for a past cycle mean the civic
+    // pipeline (city hall) never processed them. Not blocking: the engine loses
+    // nothing (no vote trigger reads past-due NextActionCycle; city hall
+    // processes late and applyTrackerUpdates G-PREP2 re-forwards the schedule)
+    // — but an unattended run must SEE it, not sail through on READY.
+    const stale = inits
+      .map(row => ({ id: row.InitiativeID, next: parseInt(String(row.NextActionCycle || ''), 10) }))
+      .filter(r => r.id && Number.isFinite(r.next) && r.next < target);
+    if (stale.length > 0) {
+      lines.push(`      STALE: ${stale.length} row(s) with past-due NextActionCycle (city hall behind): ` +
+        stale.map(r => `${r.id}=C${r.next}`).join(', '));
+      warnings.push(`initiative tracker stale — ${stale.length} past-due NextActionCycle row(s)`);
+    }
   }
 
   // ── Step 6: Edition Coverage Ratings (previous cycle) ──

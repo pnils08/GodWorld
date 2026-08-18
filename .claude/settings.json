@@ -34,14 +34,9 @@
       "mcp__claude_ai_Google_Drive__copy_file",
       "Read(/root/GodWorld/**)",
       "Edit(/root/GodWorld/**)",
-      "Write(/root/GodWorld/**)",
-      "Write(/root/GodWorld/output/reporters/**)",
       "Edit(/root/GodWorld/output/reporters/**)",
-      "Write(/root/GodWorld/output/quick-takes/**)",
       "Edit(/root/GodWorld/output/quick-takes/**)",
-      "Write(/root/GodWorld/output/letters/**)",
       "Edit(/root/GodWorld/output/letters/**)",
-      "Write(/root/GodWorld/output/desks/**)",
       "Edit(/root/GodWorld/output/desks/**)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
@@ -96,11 +91,8 @@
       "Bash(tmux new-window:*)",
       "Bash(crontab -l)",
       "Edit(.claude/terminals/**)",
-      "Write(.claude/terminals/**)",
       "Edit(.claude/rules/**)",
-      "Write(.claude/rules/**)",
-      "Edit(SESSION_CONTEXT.md)",
-      "Write(SESSION_CONTEXT.md)"
+      "Edit(SESSION_CONTEXT.md)"
     ],
     "deny": [
       "Bash(git push --force *)",
@@ -124,9 +116,7 @@
       "Read(~/.gnupg/*)",
       "Read(~/.kube/*)",
       "Edit(.env*)",
-      "Edit(**/.env*)",
-      "Write(.env*)",
-      "Write(**/.env*)"
+      "Edit(**/.env*)"
     ],
     "ask": [
       "Bash(git merge *)",
@@ -142,11 +132,8 @@
       "Bash(npx supermemory ingest*)",
       "Bash(curl *api.supermemory.ai*)",
       "Edit(CLAUDE.md)",
-      "Write(CLAUDE.md)",
       "Edit(.claude/hooks/**)",
-      "Write(.claude/hooks/**)",
-      "Edit(.claude/agents/**)",
-      "Write(.claude/agents/**)"
+      "Edit(.claude/agents/**)"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -174,31 +161,13 @@
           {
             "type": "command",
             "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
-            "if": "Write(docs/engine/ROLLOUT_PLAN.md)",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
             "if": "Edit(docs/plans/**)",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
-            "if": "Write(docs/plans/**)",
             "timeout": 10
           },
           {
             "type": "command",
             "command": "bash /root/GodWorld/.claude/hooks/session-context-ownership-guard.sh",
             "if": "Edit(SESSION_CONTEXT.md)",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "bash /root/GodWorld/.claude/hooks/session-context-ownership-guard.sh",
-            "if": "Write(SESSION_CONTEXT.md)",
             "timeout": 10
           },
           {

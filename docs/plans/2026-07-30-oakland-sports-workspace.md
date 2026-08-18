@@ -689,15 +689,17 @@ real proving event remain builder gates even after source approval.
      source and Dashboard server as separate deployments.
 - **Verify:** documentation/link checks and rollout lint pass; deployment and
   live-write gates remain explicit.
-- **Status:** [ ] in progress — Waves A–C are source-built and the approved
-  engine.40/engine.77 follow-on remediation landed through `5d82fc71` and
-  `ef69f4c8`. Private hostname/TLS transport and direct-port restriction are
-  deployed. The dashboard was restarted after reconciling the live 22-column
-  A's roster, and authenticated overview plus both team workspaces pass with
-  sports writes disabled. The original Opus review is complete; remediation
-  re-review, loopback/Secure-cookie write configuration, authenticated preview
-  proof, separately approved live append/proving writes, and archive gates
-  remain. Engine.77 proving must be attended and must not overlap a Cycle.
+- **Status:** [x] runtime + write proof complete, corrected 2026-08-17 (S378)
+  — this entry sat stale for 3 days claiming loopback/Secure-cookie config and
+  live proving writes as remaining after both were already done. Per
+  `docs/plans/2026-08-02-sports-stat-event-intake.md` line 906 (2026-08-14,
+  engine-sheet, S369): "ROSTER-EVENT PROOF LANDED — attended C103 injury,
+  POP-01028, all five write targets read-back verified. engine.77 →
+  done-pending-archive." Loopback bind and Secure-cookie config are live
+  (`dashboard/server.js` `DASHBOARD_BIND_HOST`/`DASHBOARD_COOKIE_SECURE`, code
+  present since `55fef7c2e` 2026-07-31). `SPORTS_WRITE_ENABLED=true`,
+  deliberate, tested. Archive-gate cleanup (this doc's own doc/link pass) is
+  the only piece not yet separately confirmed done.
 
 ## Validation matrix
 
@@ -752,10 +754,13 @@ The private-project transport is Tailscale Serve at
 proxy is required. This resolves the hostname/TLS/direct-port question but does
 not authorize the sports-write runtime restart or a live write.
 
-Roster current-stat writes, team/roster state mutation, LifeHistory
-emission, structured NotebookLM extraction, Chicago redesign, historical row
-editing, and autonomous submission are scope amendments that require their
-own plan change and builder approval.
+Roster current-stat writes and team/roster state mutation are no longer
+out of scope — delivered and proven via the companion plan
+`docs/plans/2026-08-02-sports-stat-event-intake.md` (engine.77, S369,
+2026-08-14; corrected here 2026-08-17). LifeHistory emission, structured
+NotebookLM extraction, Chicago redesign, historical row editing, and
+autonomous submission remain scope amendments requiring their own plan
+change and builder approval.
 
 ## Status log
 
@@ -937,3 +942,11 @@ own plan change and builder approval.
   the dashboard, and completed authenticated overview/A's/Oaks plus
   disabled-write proof; retained re-review, secure write configuration,
   authenticated preview, proving-write, and archive gates.
+- 2026-08-17 (research-build, S378) — Corrected 3 days of drift: this plan
+  kept claiming loopback/Secure-cookie config and the proving write as
+  remaining after both landed 2026-08-14 (engine-sheet, S369, recorded in
+  `docs/plans/2026-08-02-sports-stat-event-intake.md`). Caught because
+  research-build dispatched engine-sheet to redo the "remaining" runtime
+  items against this stale doc instead of checking live state first — the
+  exact failure this doc's own doctrine warns against. `SPORTS_WRITE_ENABLED`
+  is live, tested, and intentional; roster-event mutation works.

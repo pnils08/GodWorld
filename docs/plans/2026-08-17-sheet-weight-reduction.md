@@ -44,6 +44,18 @@ stack traces, one cell 9,071 chars), `LifeHistory_Log` 2.18 MB, `Simulation_Ledg
 Tab-reference audit result: **no tab is unreferenced.** All 76 appear in code or docs. Deletion is
 not the available lever; relocation and grid reclamation are.
 
+**Bar replaced (builder-direct 2026-08-18, S380):** "referenced somewhere" is no longer keep-proof.
+A tab referenced only by dead, disabled, or superseded code is dead weight wearing a seatbelt — the
+directive is to prune the code AND the tab together. Backups cover the removal risk (nightly Drive
+tarballs, sheet version history, pre-delete local export per tab). See Task 5.
+
+**Independent confirmation (browser-Claude live-doc audit, 2026-08-18):** 78 tabs (62 visible / 16
+hidden), ~2M populated cells, ~17 MB text. `Engine_Errors` measured 4.34 MB — 93% in one column,
+442 identical 9,071-char wd-cards failure rows. `onOpen` verified menu-only; the ~9 s open tail is
+Apps Script cold-booting the 171-file container, so doc slimming is also the open-time lever.
+Superseded-pair candidates named: `WorldEvents_Ledger` vs `WorldEvents_V3_Ledger`,
+`Storyline_Ledger` vs `Storyline_Tracker`.
+
 ## Task 1 — reclaim trailing empty rows — SHIPPED S378
 
 Rows only; column counts untouched (schema-growth headroom). Target `rowCount = usedRows +
@@ -95,6 +107,21 @@ sports feed), `scripts/buildDeskPackets.js`, `utilities/rosterLookup.js`, `utili
 `phase10-persistence/cycleExportAutomation.js`. After Task 1, `Chicago_Citizens` + `Chicago_Sports_Feed`
 are ~9k cells combined, so there is no weight urgency. Retire the consumers first, archive second.
 
+## Task 5 — dead-tab + dead-code pruning (builder-direct 2026-08-18)
+
+The project carries no dead ledgers and no disconnected code. Method, per candidate tab:
+
+1. Caller-graph every reference (SHEETS_MANIFEST + repo grep) and classify each referencing code
+   path live / disabled / superseded.
+2. Tab whose only references are dead code → export tab values to a git-tracked local file, delete
+   the referencing dead code and the tab in ONE commit (revert = one revert).
+3. Tab with any live reader stays (or graduates to Task 3 relocation).
+
+Candidate pool: the 16 hidden tabs + the superseded pairs (`WorldEvents_Ledger` vs
+`WorldEvents_V3_Ledger`, `Storyline_Ledger` vs `Storyline_Tracker`) + whatever the per-tab pass
+surfaces. `LifeHistory_Log` is explicitly NOT a candidate (live, load-bearing); `LifeHistory_Archive`
+moves under Task 3, never deletes.
+
 ## Acceptance
 
 - Allocated cells under 700k with all data intact (used-cell count unchanged at each step).
@@ -104,8 +131,15 @@ are ~9k cells combined, so there is no weight urgency. Retire the consumers firs
 
 ## State
 
-Task 1 SHIPPED + verified S378. Tasks 2–4 ready; Task 2's engine half gated on a clean deploy window.
+Task 1 SHIPPED + verified S378. **Task 2 data half SHIPPED S380** — 568 rows / 4.14 MB archived to
+`output/engine_errors_archive_2026-08-18.json` (git-tracked) and cleared, header kept; wdCardsDaemon
+logger capped (count + first 5 ids, `c27277ed`). Task 2 code half (separate error book + repoint)
+now unblocked — the S378 wave is deployed and bench-proven. Tasks 3–5 ready.
 
 ## Changelog
 
 - 2026-08-17 (S378) — plan created; Task 1 shipped and verified; Chicago canon retirement recorded.
+- 2026-08-18 (S380) — Task 2 data half shipped (4.14 MB archived + cleared, logger capped). Task 5
+  added: dead-tab + dead-code pruning, builder-direct — "referenced by dead code" no longer keeps a
+  tab. Browser-Claude live-doc audit folded into Measured state (onOpen ruled out, superseded pairs
+  named).

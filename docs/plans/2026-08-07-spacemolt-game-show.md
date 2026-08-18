@@ -149,7 +149,17 @@ therefore indirect and editorial — being on top earns more bylined coverage.
 Remaining design scope, replacing the old "mobility engine" item: (a) whether
 standings mechanically pull extra coverage (a leader-feature slot beyond the
 recap), (b) the casino (4b, unchanged gate) — the first mechanism where the
-AUDIENCE takes downside, not just the cast.
+AUDIENCE takes downside, not just the cast. (c) trending as a scored
+mechanic — today the show's heat is emergent co-presence (the first content
+class ever live in all four social surfaces the same week: wake ECL lines,
+exchange perception + the fresh-edition interview trigger, daily recaps,
+citizen pages), but nothing measures it or feeds it back; Storyline_Tracker's
+trend-trajectory machinery + Undocked_Standings are the natural inputs if the
+builder wants heat the engine reacts to. Verified same session: exchange
+participants carry their LifeHistory tail (a pilot's in-space week rides into
+1-on-1s), own exchange lines accrete on the citizen's cp-POP page and return
+in later wakes, and the exchange interview format triggers on being named in
+the freshest edition — coverage begets coverage mechanically.
 
 ## §2.5 — Daily-cadence build (Mike-direct session, 2026-08-18)
 

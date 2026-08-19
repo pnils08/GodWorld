@@ -185,11 +185,11 @@ Every column is a data point in someone's life. This maps who writes each column
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
-| F | 6 | UNI (y/n) | Yes/yes/No/no/n | Integration scripts | **BUG:** Engine checks `=== "y"`, never matches actual values. See Flag State section. | **CAUSAL** — `generateGameModeMicroEvents.js:368` + `runEducationEngine.js:128` + `generationalEventsEngine.js:196` gate event pools |
+| F | 6 | UNI (y/n) | Yes/yes/No/no/n | Integration scripts | **BUG:** Engine checks `=== "y"`, never matches actual values. See Flag State section. | **CAUSAL** — `generateGameModeMicroEvents.js:368` + `runEducationEngine.js:343` + `generationalEventsEngine.js:196` gate event pools |
 | G | 7 | MED (y/n) | Yes/yes/No/no/n | Integration scripts | Same bug. | **CAUSAL** — routes media archetype, skips education |
 | H | 8 | CIV (y/n) | Yes/yes/No/no/n | Integration scripts | Same bug. | **CAUSAL** — routes civic pools |
-| I | 9 | ClockMode | ENGINE / GAME / CIVIC / MEDIA | Integration scripts, cleanup | Event generators (mode gates), lifecycle engines, buildDeskPackets | **CAUSAL** — `generateGameModeMicroEvents.js:480` mode routing, central lifecycle router |
-| J | 10 | Tier | 1-4 (integer) | processIntakeV3, integration scripts | Event generators (T1 +10% chance), buildDeskPackets, prioritizeEvents | **CAUSAL** — `runEducationEngine.js:130` T3/T4-only education; event-frequency bias T1+10%/T2+5% |
+| I | 9 | ClockMode | ENGINE / GAME / CIVIC / MEDIA | Integration scripts, cleanup | Event generators (mode gates), lifecycle engines, buildDeskPackets | **CAUSAL** — `generateGameModeMicroEvents.js:482` mode routing, central lifecycle router |
+| J | 10 | Tier | 1-4 (integer) | processIntakeV3, integration scripts | Event generators (T1 +10% chance), buildDeskPackets, prioritizeEvents | **CAUSAL** — `runEducationEngine.js:338` T3/T4-only education; event-frequency bias T1+10%/T2+5% |
 
 ### Core State (K–N)
 
@@ -197,7 +197,7 @@ Every column is a data point in someone's life. This maps who writes each column
 |-----|---|--------|-------------|---------|---------|--------------|
 | K | 11 | RoleType | Text. ENGINE: "Carpenter". GAME: "Shortstop, Oakland A's" | runCareerEngine (transitions), integration scripts | buildDeskPackets, civic engines, economicLookup, linkCitizensToEmployers | **CAUSAL** — `generateGameModeMicroEvents.js:364` pitcher-role event routing; media-role routing |
 | L | 12 | Status | Active / Retired / Recovering | runCareerEngine, civic engines, integration scripts | All event generators (skip non-Active), buildDeskPackets | **CAUSAL** — universal skip gate (inactive/deceased/retired); `generationalWealthEngine.js:286` |
-| M | 13 | BirthYear | 4-digit year. Age = 2041 - BirthYear. | Integration scripts, cleanup | educationCareerEngine, householdFormation, youthEngine (age gates), buildDeskPackets | **CAUSAL** — age linchpin: `runEducationEngine.js:139`, household adult gate, youth engine, money-loop minor gate |
+| M | 13 | BirthYear | 4-digit year. Age = 2041 - BirthYear. | Integration scripts, cleanup | educationCareerEngine, householdFormation, youthEngine (age gates), buildDeskPackets | **CAUSAL** — age linchpin: `educationCareerEngine.js:229` (settlement), `runYouthEngine.js:372` (youth gate), `generationalWealthEngine.js:318` (money-loop minor gate) |
 | N | 14 | OrginCity | Text (legacy misspelled column name) | — | — | RECORD-by-design |
 
 ### Life Data (O–S)
@@ -207,8 +207,8 @@ Every column is a data point in someone's life. This maps who writes each column
 | O | 15 | LifeHistory | Long text — accumulated life events | All event generators (append each cycle), compressLifeHistory | buildDeskPackets, queryLedger, citizenContextBuilder, enrichCitizenProfiles | **CAUSAL** (S321 corrects the raw A–O auditor's RECORD call — see §Column Wiring) — `educationCareerEngine.js` `settleAdulthood_` gates the fire-once 18th-birthday settlement on `indexOf('[Adulthood]')`; `generationalWealthEngine.js` `processMoneyLoop_` checks `'crossed six figures'` once-only milestone; `deriveEducationLevels_` checks `indexOf('Graduation')`; `calculateCitizenIncomes_` extracts income band via `extractIncomeBand_` |
 | P | 16 | SpouseId | 'POP-NNNNN First Last' (ID + name) | bondEngine `marryCitizens_` (both spouses) | spouse-drip tooling | **RECORD** (S321 regen caught live rename CreatedAt→SpouseId — the `marryCitizens_` 'prod no-ops until rollout rename' guard is now live-active; full verdict next audit) |
 | Q | 17 | Last Updated | ISO timestamp | Engine orchestrator | — | RECORD-by-design (timestamp) |
-| R | 18 | TraitProfile | `Archetype:X\|Mods:a,b\|social:0.7\|...\|V:1.5\|Updated:cNN` | compressLifeHistory v1.5 (Phase 9), integrateAthletes | generateCitizensEvents v2.8 (archetype weights, tone, motifs), buildDeskPackets (voice cards) | **CAUSAL** — `generateCitizensEvents.js:371-407` archetype weights event pools 1.3-1.4x; `storyHook.js:1214` persona match; derived from DialState by `compressLifeHistory.js:426` |
-| S | 19 | UsageCount | Integer | processIntakeV3, processAdvancementIntake | — | **CAUSAL** — `generateCitizensEvents.js:130` + `:2083` — UsageCount >= 8 gates PUBLIC_FIGURE_CAP + fame-recognition events. engine.88 (S339): journalists now accrue it from their OWN landed work — `cron-desk-run.js` appends a `byline-landed` Citizen_Media_Usage row at gate-pass, `ingestPublishedEntities.js` appends `byline-published` at edition publish; `processMediaUsage_` counts both into the author's row (tier bars 3/6/9, engine.69 decay) |
+| R | 18 | TraitProfile | `Archetype:X\|Mods:a,b\|social:0.7\|...\|V:1.5\|Updated:cNN` | compressLifeHistory v1.5 (Phase 9), integrateAthletes | generateCitizensEvents v2.8 (archetype weights, tone, motifs), buildDeskPackets (voice cards) | **CAUSAL** — `generateCitizensEvents.js:509` (archetype weight definitions), `:2775` (applied to event pools 1.3-1.4x); `storyHook.js:1214` persona match; derived from DialState by `compressLifeHistory.js:426` |
+| S | 19 | UsageCount | Integer | processIntakeV3, processAdvancementIntake | — | **CAUSAL** — `generateCitizensEvents.js:233` (public figure pool), `:2113` + `:2369` (UsageCount >= 8 gates). engine.88 (S339): journalists now accrue it from their OWN landed work — `cron-desk-run.js` appends a `byline-landed` Citizen_Media_Usage row at gate-pass, `ingestPublishedEntities.js` appends `byline-published` at edition publish; `processMediaUsage_` counts both into the author's row (tier bars 3/6/9, engine.69 decay) |
 
 ### Location & Household (T–Y)
 
@@ -225,7 +225,7 @@ Every column is a data point in someone's life. This maps who writes each column
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
-| Z | 26 | WealthLevel | 0-10 integer | generationalWealthEngine, integrateAthletes, applyEconomicProfiles | seedHouseholds | **CAUSAL** — writer `generationalWealthEngine.js:567`; `generateCitizensEvents.js:2158` gates micro-event pool by bracket; `:975` mobility diff (engine.61 T5) |
+| Z | 26 | WealthLevel | 0-10 integer | generationalWealthEngine, integrateAthletes, applyEconomicProfiles | seedHouseholds | **CAUSAL** — writer `generationalWealthEngine.js:567` (deriveWealthLevel_); `generateCitizensEvents.js:2447` + `:2057` gate micro-event pool by wealth bracket |
 | AA | 27 | Income | Dollar amount (integer) | runCareerEngine (+6-12% promotion, -12-20% layoff), applyEconomicProfiles, integrateAthletes | aggregateNeighborhoodEconomics, buildDeskPackets, householdFormation, gentrification, migrationTracking | **CAUSAL** — scales accrual (income/52×rate×eduF×superF×yieldF); `migrationTrackingEngine.js:244` rent-burden gate |
 | AB | 28 | InheritanceReceived | Boolean flag | generationalWealthEngine | — | **CAUSAL** — `deriveWealthLevel_` inheritance boost gate (`:605-606`) |
 | AC | 29 | NetWorth | Dollar amount | generationalWealthEngine | — | **CAUSAL** — accrual state + effective income (income + NetWorth×0.05) feeds WealthLevel |
@@ -252,8 +252,8 @@ Neighborhood only ever changes to another canonical Neighborhood_Map node.
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
-| AL | 38 | DisplacementRisk | 0–10 risk score | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets, generateCitizensEvents | **CAUSAL** — `migrationTrackingEngine.js:381` >=8 planning-to-leave, >=5 considering |
-| AM | 39 | MigrationIntent | staying / considering / planning-to-leave | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets | **CAUSAL** — `:537` relocation lane eligibility |
+| AL | 38 | DisplacementRisk | 0–10 risk score | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets, generateCitizensEvents | **CAUSAL** — `migrationTrackingEngine.js:395` >=8 planning-to-leave, `:397` >=5 considering |
+| AM | 39 | MigrationIntent | staying / considering / planning-to-leave | migrationTrackingEngine | buildCivicVoicePackets, buildInitiativePackets | **CAUSAL** — `:609` relocation lane eligibility (planning-to-leave → pressure lane) |
 | AN | 40 | MigrationReason | job / family / cost / crime / opportunity / displaced | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — picks the settled-in verdict physics (cost→pressure test, opportunity→trajectory test) |
 | AO | 41 | MigrationDestination | Canonical neighborhood name | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — verdict skipped if the citizen drifted off the recorded destination |
 | AP | 42 | MigratedCycle | Cycle number of last intra-city move | migrationTrackingEngine (relocation, engine.55) | `processSettledInCheck_` (S321 wire) | **CAUSAL** — fires the once-only verdict at +10 cycles |
@@ -263,8 +263,8 @@ Neighborhood only ever changes to another canonical Neighborhood_Map node.
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
-| AR | 44 | EconomicProfileKey | Role key → Economic_Parameters tab | applyEconomicProfiles, runCareerEngine (on transitions) | generationalWealthEngine, aggregateNeighborhoodEconomics, linkCitizensToEmployers | **CAUSAL** — seeded-vs-unseeded income model selection (`generationalWealthEngine.js:425`); career income scaling (`runCareerEngine.js:69,537`); settlement + money-loop skip guard |
-| AS | 45 | EmployerBizId | `BIZ-00001` format → Business_Ledger | runCareerEngine (clear on layoff, set on transition), linkCitizensToEmployers | buildDeskPackets | **CAUSAL** — `runCareerEngine.js:841` self-employment branch; career transitions write `:862-913` |
+| AR | 44 | EconomicProfileKey | Role key → Economic_Parameters tab | applyEconomicProfiles, runCareerEngine (on transitions) | generationalWealthEngine, aggregateNeighborhoodEconomics, linkCitizensToEmployers | **CAUSAL** — seeded-vs-unseeded income model selection (`generationalWealthEngine.js:468`); career income scaling (`runCareerEngine.js:749`, `:895`); settlement + money-loop skip guard |
+| AS | 45 | EmployerBizId | `BIZ-00001` format → Business_Ledger | runCareerEngine (clear on layoff, set on transition), linkCitizensToEmployers | buildDeskPackets | **CAUSAL** — `runCareerEngine.js:923` (clear on layoff), `:951` (sector shift), `:974` (lateral transition); self-employment check `:899` |
 | AT | 46 | CitizenBio | 1-2 sentence stable narrative identity. Survives LifeHistory compaction. | applyCitizenBios (one-time, 17 T2 citizens so far) | — | RECORD-by-design (display in buildCitizenCards) |
 
 ### Wake & Health (AU–AZ)
@@ -273,11 +273,11 @@ Added S321 to §Column Reference — previously described only in the header pro
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
-| AU | 47 | Gender | Text (confirmed S146) | Integration scripts | generationalEventsEngine, bondEngine | **CAUSAL** — `generationalEventsEngine.js:372` single-motherhood birth path; bondEngine opposite-sex marriage gate |
-| AV | 48 | DialState | JSON 8-dial machine state (engine.31, S256) | Phase-5 dial engines | 9 Phase-5 engines via `getCitizenDialBands_` | **CAUSAL** — every phase-5 engine reads `getCitizenDialBands_` for frequency multipliers 0.5-1.5x: education `:401`, neighborhood `:437`, relationship `:467`, career `:792`, household `:498`, conduct `:176`, youth `:364`, generational `:327`, gameMode `:514` |
+| AU | 47 | Gender | Text (confirmed S146) | Integration scripts | generationalEventsEngine, bondEngine | **CAUSAL** — `generationalEventsEngine.js:513` single-motherhood birth path; bondEngine opposite-sex marriage gate |
+| AV | 48 | DialState | JSON 8-dial machine state (engine.31, S256) | Phase-5 dial engines | 9 Phase-5 engines via `getCitizenDialBands_` | **CAUSAL** — every phase-5 engine reads `getCitizenDialBands_` for frequency multipliers 0.5-1.5x: `runEducationEngine.js:409`, `runNeighborhoodEngine.js:438`, `runRelationshipEngine.js:477`, `runCareerEngine.js:838`, `runHouseholdEngine.js:505`, `runConductEngine.js:176`, `runYouthEngine.js:195`, `generationalEventsEngine.js:442`, `generateGameModeMicroEvents.js:515` |
 | AW | 49 | SMPageId | Supermemory page pointer (S262) | Citizen-loop Phase 2 (lazy-filled) | Citizen-loop wake side only | RECORD-by-design — Supermemory page pointer, wake-side; explicit no-cycle-read contract `lib/citizenPage.js:19-20` |
-| AX | 50 | MemoryRegisters | JSON `{"biases":[...],"unlived":[...]}` (S282) | Phase-9 compressor fold only (`foldBiasIntents_`, `foldAgedOutEntries_`) | compressLifeHistory, resonanceRecall | **CAUSAL** — `compressLifeHistory.js:382-383` folds biases into DialState base dials; `resonanceRecall.js:115-116` recall candidates |
-| AY | 51 | StatusStartCycle | Cycle number (engine.52, S312) | processHealthLifecycle_ | processHealthLifecycle_ | **CAUSAL** — `generationalEventsEngine.js:261-277` health status duration → transition odds |
+| AX | 50 | MemoryRegisters | JSON `{"biases":[...],"unlived":[...]}` (S282) | Phase-9 compressor fold only (`foldBiasIntents_`, `foldAgedOutEntries_`) | compressLifeHistory, resonanceRecall | **CAUSAL** — `compressLifeHistory.js:583` (fold biases), `:1316` (foldBiasIntents_), `:1372` (foldAgedOutEntries_); `resonanceRecall.js:128` (unlived), `:161` (biases) |
+| AY | 51 | StatusStartCycle | Cycle number (engine.52, S312) | processHealthLifecycle_ | processHealthLifecycle_ | **CAUSAL** — `generationalEventsEngine.js:362` (duration calc), `:663` (duration bracket) → transition odds |
 | AZ | 52 | HealthCause | Text (Health_Cause_Queue operator loop, S312) | Health_Cause_Queue operator loop | processHealthLifecycle_ | **CAUSAL** — `processHealthLifecycle_` transition probabilities by cause |
 
 ---

@@ -45,8 +45,24 @@ const RULES = [
   { name: 'metric-phrase', re: /\btension score\b|\bcivic load\b|\bseverity (?:level|score)\b/gi, why: 'raw engine metric phrase' },
   // Decimal adjacent (±24 chars) to a metric word — "approval at 0.62",
   // "sentiment 3.3". Money/vote-counts excluded (no metric word adjacent).
+  // Document/sheet/permit IDs excluded post-match below (e.g. "Sheet S-7.3") —
+  // that form is a filing reference, not a raw metric reading.
   { name: 'metric-decimal', re: /(?:sentiment|approval|severity|tension|civic load|momentum)[^.\n]{0,24}?\d+\.\d+|\d+\.\d+[^.\n]{0,24}?(?:sentiment|approval|severity|tension|civic load|momentum)/gi, why: 'raw decimal next to a metric word' },
 ];
+
+// A decimal immediately preceded by a letter-hyphen (permit/sheet/section ID
+// convention, e.g. "Sheet S-7.3", "Permit R-2.1") is a filing reference, not
+// a metric reading — even when a metric word sits nearby in the sentence.
+// Two shapes, because the rule's two alternations put the decimal at opposite
+// ends of the match: the id can CLOSE the match ("approval ... Sheet S-7.3") or
+// OPEN it ("Sheet S-7.3 approval pending"). In the opening form the letter-hyphen
+// sits just before m.index, outside m[0], so it must be read off the body.
+const DOC_REF_DECIMAL = /[A-Za-z]-\d+\.\d+\s*$/;
+const DOC_REF_PREFIX = /[A-Za-z]-$/;
+
+function isDocRef(body, m) {
+  return DOC_REF_DECIMAL.test(m[0]) || DOC_REF_PREFIX.test(body.slice(0, m.index));
+}
 
 function lintText(text) {
   const issues = [];
@@ -55,6 +71,10 @@ function lintText(text) {
     rule.re.lastIndex = 0;
     let m;
     while ((m = rule.re.exec(body)) !== null) {
+      if (rule.name === 'metric-decimal' && isDocRef(body, m)) {
+        if (m.index === rule.re.lastIndex) rule.re.lastIndex++;
+        continue;
+      }
       const ctx = body.slice(Math.max(0, m.index - 30), m.index + m[0].length + 30).replace(/\s+/g, ' ').trim();
       issues.push({ rule: rule.name, match: m[0], why: rule.why, context: ctx });
       if (m.index === rule.re.lastIndex) rule.re.lastIndex++;  // avoid zero-width loop

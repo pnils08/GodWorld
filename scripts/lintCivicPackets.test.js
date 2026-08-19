@@ -48,6 +48,8 @@ var CLEAN = [
   'OARI will reach all districts; the $12.5M program hires 45 crisis responders.',
   'The fund disbursed $5.6 million to 31 households across District 9.',
   'Council President Vega (D4) and Tran (D2) hold the independent center.',
+  'Phase 1 closed with HCAI seismic approval — HCAI stamped Sheet S-7.3 at 4:37 PM yesterday.',
+  'Sheet S-7.3 approval is pending the seismic reviewer signature.',
 ];
 CLEAN.forEach(function (txt) {
   total++; passed += passing('CLEAN: "' + txt.slice(0, 44) + '..."', function () {

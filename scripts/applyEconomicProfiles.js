@@ -3,8 +3,13 @@
  * Apply Economic Profiles to Simulation_Ledger
  *
  * Reads each citizen's RoleType, maps it to an economic parameter profile,
- * calculates role-specific income, and writes Income, WealthLevel, SavingsRate,
- * and EconomicProfileKey back to the ledger.
+ * calculates role-specific income, and writes Income, SavingsRate, and
+ * EconomicProfileKey back to the ledger.
+ *
+ * engine.120 (S381): this script no longer writes WealthLevel. That column's
+ * sole writer is generationalWealthEngine.js deriveWealthLevel_ (v15, pure
+ * NetWorth bands, Phase5-GenerationalWealth, unconditional every cycle). This
+ * script used the retired v14.2 income proxy and overwrote the engine's value.
  *
  * Usage:
  *   node scripts/applyEconomicProfiles.js --dry-run    # Preview changes
@@ -76,7 +81,6 @@ async function main() {
   const iStatus = col('Status');
   const iNeighborhood = col('Neighborhood');
   const iIncome = col('Income');
-  const iWealthLevel = col('WealthLevel');
   const iSavingsRate = col('SavingsRate');
   const iNetWorth = col('NetWorth');
   const iBirthYear = col('BirthYear');
@@ -154,7 +158,6 @@ async function main() {
         roleType: roleType,
         econKey: 'SPORTS_OVERRIDE',
         income: null,
-        wealthLevel: null,
         savingsRate: null,
         isSports: true
       });
@@ -170,7 +173,6 @@ async function main() {
     // Calculate income
     const isRetired = econ.isRetiredRole(roleType);
     const income = econ.calculateIncome(profile, tier, rng, { isRetired: isRetired });
-    const wealthLevel = econ.deriveWealthLevel(income, netWorth);
     const savingsRate = econ.deriveSavingsRate(profile.consumerProfile, income, rng);
     const econKey = roleMapping[roleType];
 
@@ -181,7 +183,6 @@ async function main() {
       roleType: roleType,
       econKey: econKey,
       income: income,
-      wealthLevel: wealthLevel,
       savingsRate: Math.round(savingsRate * 1000) / 1000,
       oldIncome: currentIncome,
       profile: profile.role,
@@ -296,7 +297,7 @@ async function main() {
     var retired = c.isRetired ? ' [RETIRED]' : '';
     console.log('  ' + c.popId + ' ' + c.name + retired);
     console.log('    ' + c.roleType + ' -> ' + c.econKey);
-    console.log('    Income: ' + old + ' -> $' + c.income.toLocaleString() + ' | Wealth: ' + c.wealthLevel + ' | Savings: ' + (c.savingsRate * 100).toFixed(1) + '%');
+    console.log('    Income: ' + old + ' -> $' + c.income.toLocaleString() + ' | Savings: ' + (c.savingsRate * 100).toFixed(1) + '%');
   });
   console.log('');
 
@@ -326,8 +327,8 @@ async function main() {
   }
 
   // Group updates by column for efficiency
-  // We need to update: Income (col iIncome), WealthLevel (col iWealthLevel),
-  // SavingsRate (col iSavingsRate), EconomicProfileKey (col iEconKey)
+  // We need to update: Income (col iIncome), SavingsRate (col iSavingsRate),
+  // EconomicProfileKey (col iEconKey). WealthLevel is engine-owned (engine.120).
   function colLetter(idx) {
     if (idx < 26) return String.fromCharCode(65 + idx);
     return String.fromCharCode(64 + Math.floor(idx / 26)) + String.fromCharCode(65 + (idx % 26));
@@ -345,14 +346,10 @@ async function main() {
         values: [['SPORTS_OVERRIDE']]
       });
     } else {
-      // Set Income, WealthLevel, SavingsRate, EconomicProfileKey
+      // Set Income, SavingsRate, EconomicProfileKey (NOT WealthLevel — engine.120)
       batchUpdates.push({
         range: sheetName + '!' + colLetter(iIncome) + rowNum,
         values: [[change.income]]
-      });
-      batchUpdates.push({
-        range: sheetName + '!' + colLetter(iWealthLevel) + rowNum,
-        values: [[change.wealthLevel]]
       });
       if (iSavingsRate >= 0) {
         batchUpdates.push({

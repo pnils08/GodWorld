@@ -213,23 +213,6 @@
             "async": true
           }
         ]
-      },
-      {
-        "matcher": "*",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "node /root/GodWorld/.claude/hooks/first-person-guard.js"
-          },
-          {
-            "type": "command",
-            "command": "node /root/GodWorld/.claude/hooks/search-before-answer-guard.js"
-          },
-          {
-            "type": "command",
-            "command": "node /root/GodWorld/.claude/hooks/substance-guard.js"
-          }
-        ]
       }
     ]
   },

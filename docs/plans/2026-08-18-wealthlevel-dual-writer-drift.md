@@ -49,7 +49,9 @@ pointers:
 
 ### Task 2: SUPERSEDED — do not hand-backfill
 
-- **Status:** SUPERSEDED (engine-sheet, 2026-08-18, commit `ee92e5bf`). Original scope (17 rows) was wrong on two counts: (1) full-ledger check found 551/940 WealthLevel rows match the stale v14.2 formula, not 17 — the 23-at-WL=10 sample was a slice, not the scope; (2) root cause isn't `applyEconomicProfiles.js` re-corrupting rows, it's deploy lag — v15 shipped in git `eda94abd` (2026-08-09) but didn't reach the live Apps Script deployment until S378's `2ee0f19b` (2026-08-17 17:56). C103's own cycle ran 2026-08-11/12, before that deploy, on the old formula. The only engine fires since the live deploy are the two C104 crash attempts, both 0/28 intents persisted. **v15 has never once run against the live ledger.** A hand backfill of any row count would be re-run wholesale (and differently) by the first cycle that actually completes — do not manually edit WealthLevel. The real fix is Task 1 (already shipped) plus a cycle successfully completing; nothing else is needed.
+- **Status:** SUPERSEDED (engine-sheet, 2026-08-18, commit `ee92e5bf`). Original scope (17 rows) was wrong: full-ledger check found 551/940 WealthLevel rows match the stale v14.2 formula, only 243/940 match v15, 146 match neither — the 23-at-WL=10 sample was a slice, not the scope.
+  Root cause is OPEN, not settled. First theory (deploy lag — v15 never reached the live Apps Script until 2026-08-17) was checked and retracted by engine-sheet same day: the actual live-deploy commit for `generationalWealthEngine.js` is `f87a001c` (2026-08-10 22:41), BEFORE C103 ran (Aug 11/12) — so v15 WAS live during C103, and "never persisted" is false. Back to the original hypothesis: something re-wrote WealthLevel with the old formula after v15 ran, possibly a salary-audit script (artifacts in `output/` dated Aug 11 13:30-13:31, inside the C103 window) — engine-sheet is investigating, not yet confirmed.
+  **Do not hand-edit WealthLevel.** Not because a cycle is guaranteed to fix it (that justification no longer holds) — because the actual overwriting mechanism is still unknown, and a hand-edit would just get overwritten by whatever is doing this, unverified either way. Task 1 (already shipped) removes one known contributor regardless of what the investigation finds.
 
 ---
 
@@ -61,5 +63,6 @@ pointers:
 
 ## Changelog
 
-- 2026-08-18 — Task 1 shipped (engine-sheet, `ee92e5bf`, local/unpushed). Task 2 superseded — real scope 551/940 rows, root cause is deploy lag not re-corruption; no manual backfill, fix rides the next completed cycle. Mike-direct: don't hand-edit WealthLevel.
+- 2026-08-18 — engine-sheet retracted the deploy-lag root cause same day (v15 was live before C103 ran); real cause open, investigation ongoing. Corrected here — do not cite deploy-lag as settled.
+- 2026-08-18 — Task 1 shipped (engine-sheet, `ee92e5bf`, local/unpushed). Task 2 superseded — real scope 551/940 rows; no manual backfill. Mike-direct: don't hand-edit WealthLevel.
 - 2026-08-18 — Initial draft (research-build session). Filed off a live-ledger check triggered by Mike asking whether the WealthLevel top band is appropriate.

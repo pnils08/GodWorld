@@ -58,3 +58,52 @@ function doGet(e) {
   return ContentService.createTextOutput(JSON.stringify(out))
     .setMimeType(ContentService.MimeType.JSON);
 }
+
+/**
+ * Carry-forward prop restore (2026-08-19 recovery). Token-gated POST that
+ * reads/writes ONLY the three cross-cycle carry-forward properties — the
+ * blobs the S380 crash recovery deleted. Whitelist is the blast-radius
+ * guard: no other property can be touched through this door, and there is
+ * deliberately no delete action.
+ *
+ * FIRE:  curl -L -d "token=<t>&action=setprop&key=PREV_EVENING_JSON&value=<json>" <url>
+ *        curl -L -d "token=<t>&action=getprop&key=PREV_EVENING_JSON" <url>
+ * Response echoes the stored value read back after write (verify-after-write).
+ */
+var CARRY_FORWARD_PROP_WHITELIST = {
+  'PREV_EVENING_JSON': true,
+  'PREV_CYCLE_STATE_JSON': true,
+  'CHAOS_NBHD_FOLD_JSON': true
+};
+
+function doPost(e) {
+  var out = { ok: false };
+  try {
+    var token = PropertiesService.getScriptProperties().getProperty('CYCLE_TRIGGER_TOKEN');
+    var p = (e && e.parameter) || {};
+    if (!token) {
+      out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
+    } else if (String(p.token || '') !== token) {
+      out.error = 'bad token';
+    } else if (!CARRY_FORWARD_PROP_WHITELIST[String(p.key || '')]) {
+      out.error = 'key not in carry-forward whitelist';
+    } else if (p.action === 'setprop') {
+      var value = String(p.value || '');
+      JSON.parse(value);  // must be valid JSON — the engine loads it with JSON.parse
+      PropertiesService.getScriptProperties().setProperty(p.key, value);
+      out.ok = true;
+      out.key = p.key;
+      out.stored = PropertiesService.getScriptProperties().getProperty(p.key);
+    } else if (p.action === 'getprop') {
+      out.ok = true;
+      out.key = p.key;
+      out.stored = PropertiesService.getScriptProperties().getProperty(p.key);
+    } else {
+      out.error = 'unknown action';
+    }
+  } catch (err) {
+    out.error = String((err && err.message) || err);
+  }
+  return ContentService.createTextOutput(JSON.stringify(out))
+    .setMimeType(ContentService.MimeType.JSON);
+}

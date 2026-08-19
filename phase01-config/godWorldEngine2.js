@@ -241,9 +241,10 @@ function runWorldCycle() {
     }
   };
 
-  // v2.12: Initialize mode flags and seeded RNG for replay/dry-run support
+  // v2.12: Initialize mode flags for replay/dry-run support.
+  // Seeded RNG moved to Phase1-SeedRng (after AdvanceTime) — initializing here
+  // ran before cycleId/cycleCount existed, so every cycle seeded as 1.
   initializeModeFlags_(ctx);
-  initializeSeededRng_(ctx);
 
   // Phase 42 §5.6: shared in-memory Simulation_Ledger. All cycle-path
   // SL writers/readers route through ctx.ledger.rows. Phase 10 commits
@@ -258,6 +259,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase1-LoadConfig', function() { loadConfig_(ctx); });
   safePhaseCall_(ctx, 'Phase1-CanonHoods', function() { loadCanonNeighborhoods_(ctx); });  // engine.99 — ADR-0016 canonical hood set from Neighborhood_Map
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-SeedRng', function() { initializeSeededRng_(ctx); });  // after AdvanceTime so seed = real cycleId (fixes dry-run seed-1 too; replay keeps its stored seed)
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
   safePhaseCall_(ctx, 'Phase1-PrevEvening', function() { loadPreviousEvening_(ctx); });
@@ -1852,6 +1854,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase1-LoadConfig', function() { loadConfig_(ctx); });
   safePhaseCall_(ctx, 'Phase1-CanonHoods', function() { loadCanonNeighborhoods_(ctx); });  // engine.99 — ADR-0016 canonical hood set from Neighborhood_Map
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-SeedRng', function() { initializeSeededRng_(ctx); });  // after AdvanceTime so seed = real cycleId, not the pre-config fallback 1
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
   safePhaseCall_(ctx, 'Phase1-PrevEvening', function() { loadPreviousEvening_(ctx); });

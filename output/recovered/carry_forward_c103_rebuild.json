@@ -1,0 +1,111 @@
+{
+  "PREV_EVENING_JSON": {
+    "cycle": 103,
+    "crowdHotspots": [],
+    "nightlifeVolume": 3,
+    "nightlifeVibe": "quiet",
+    "eveningSafety": "normal",
+    "eveningTraffic": "restricted",
+    "foodTrend": "Holiday celebration dining - festive atmosphere",
+    "streamingTrend": "holiday movie marathon",
+    "eveningSports": "Oakland Sports Tonight",
+    "famousNames": [
+      "Claire Ashford in Piedmont Ave",
+      "Mark Aitken in Lake Merritt",
+      "Tara Ellison in Downtown"
+    ],
+    "cityEvents": [
+      {
+        "name": "Jack London Holiday Market",
+        "neighborhood": "Jack London",
+        "tags": []
+      },
+      {
+        "name": "Fruitvale Emergency Town Briefing",
+        "neighborhood": "Fruitvale",
+        "tags": []
+      },
+      {
+        "name": "Lake Merritt Community Joy Parade",
+        "neighborhood": "Lake Merritt",
+        "tags": []
+      }
+    ],
+    "topCrowds": {}
+  },
+  "PREV_CYCLE_STATE_JSON": {
+    "cycle": 103,
+    "events": 2025,
+    "chaosCount": 11,
+    "sentiment": 0.44,
+    "econMood": 50,
+    "pattern": "strain-trend",
+    "shockFlag": "shock-flag",
+    "shockStartCycle": 69,
+    "civicLoad": "minor-variance",
+    "civicLoadScore": 0,
+    "weatherType": "overcast",
+    "weatherImpact": 1.05,
+    "cycleWeight": "high-signal",
+    "cycleWeightScore": 0,
+    "recoveryLevel": "none",
+    "overloadScore": 0,
+    "activeCooldowns": "none",
+    "holiday": "Holiday",
+    "holidayPriority": "major",
+    "isFirstFriday": false,
+    "isCreationDay": false,
+    "sportsSeason": "off-season",
+    "season": "Winter",
+    "mediaEffects": null,
+    "neighborhoodDynamics": null,
+    "domainPresence": null,
+    "dominantDomain": "FAITH",
+    "economicRipples": [],
+    "initiativeRipples": [],
+    "migrationDrift": -8,
+    "migrationDriftFactors": [],
+    "bankRate": null,
+    "crimeSpikes": []
+  },
+  "CHAOS_NBHD_FOLD_JSON": {
+    "KONO": {
+      "Sentiment": -0.15
+    },
+    "Uptown": {
+      "CrimeIndex": -0.01
+    },
+    "Glenview": {
+      "Sentiment": 0.01
+    },
+    "Downtown": {
+      "CrimeIndex": -0.15
+    },
+    "Ivy Hill": {
+      "CrimeIndex": -0.02
+    },
+    "San Antonio": {
+      "Sentiment": -0.09,
+      "CrimeIndex": -0.1
+    },
+    "Rockridge": {
+      "CrimeIndex": -0.03,
+      "Sentiment": 0.04
+    },
+    "Piedmont Ave": {
+      "Sentiment": -0.08
+    },
+    "Laurel": {
+      "Sentiment": 0.02
+    },
+    "Fruitvale": {
+      "RetailVitality": 1.26
+    },
+    "Baylight District": {
+      "CrimeIndex": -0.09
+    },
+    "Dimond": {
+      "Sentiment": 0.09
+    }
+  }
+}

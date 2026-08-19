@@ -415,6 +415,87 @@ function ensureSource(notebookId, file, title, existingSources) {
   return { id: parseAddedSourceId(add.out), reused: false };
 }
 
+// --- local published-archive continuity (no API, no notebook) --------------
+// The published corpus already lives on disk in editions/ — the same 60 files
+// that feed the archive notebook. Reading them directly answers "what has been
+// published that bears on today's leads" in milliseconds, with no service in
+// the path. Three consecutive daily runs died waiting on a notebook to answer
+// a question the repo could answer locally.
+const EDITIONS_DIR = path.join(ROOT, 'editions');
+
+// Common capitalised openers that would otherwise read as entity names.
+const NOT_AN_ENTITY = new Set([
+  'The Bay', 'Bay Tribune', 'The Cycle', 'Cycle Pulse', 'City Hall', 'This Cycle',
+  'Last Cycle', 'The City', 'The Council', 'City Council', 'The Mayor', 'New York',
+  'What Moved', 'What Changed', 'What Happened', 'The Ledger', 'The Engine',
+  'Key Quote', 'Media Handoff', 'Voice Decisions', 'Tracker Updates',
+]);
+
+function editionCycleOf(name) {
+  const m = name.match(/_c(\d+)\b/) || name.match(/_(\d{2,3})(?=[_.])/);
+  return m ? Number(m[1]) : 0;
+}
+
+// Entities worth tracing backwards: initiative ids plus multi-word proper nouns
+// (people, institutions, districts) lifted from the current newsroom leads.
+function leadEntities(reports) {
+  // Strip markdown headings and table header rows first — "## What Moved" and
+  // "| BUSINESS |" otherwise read as proper nouns and trace back as fake threads.
+  const text = reports.map((r) => r.body || '').join('\n')
+    .split('\n')
+    .filter((line) => !/^\s*#{1,6}\s/.test(line) && !/^\s*\|[\s-:|]*$/.test(line))
+    .join('\n');
+  const out = new Set();
+  for (const m of text.matchAll(/\bINIT-\d{3}\b/g)) out.add(m[0]);
+  for (const m of text.matchAll(/\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+){1,2}\b/g)) {
+    if (!NOT_AN_ENTITY.has(m[0])) out.add(m[0]);
+  }
+  return [...out].slice(0, 40);
+}
+
+// Deterministic continuity: for each entity in today's leads, the most recent
+// published lines that mention it, newest edition first. Facts with a filename
+// attached — no synthesis, so nothing here can invent history.
+function buildLocalContinuity(cycle, reports, opts) {
+  const limit = (opts && opts.maxEditions) || 20;
+  const entities = leadEntities(reports);
+  if (!fs.existsSync(EDITIONS_DIR) || !entities.length) return null;
+
+  const files = fs.readdirSync(EDITIONS_DIR)
+    .filter((f) => f.endsWith('.txt') || f.endsWith('.md'))
+    .map((f) => ({ file: f, cycle: editionCycleOf(f) }))
+    .filter((f) => f.cycle && f.cycle < cycle)
+    .sort((a, b) => b.cycle - a.cycle)
+    .slice(0, limit);
+
+  const hits = new Map();
+  for (const { file, cycle: fileCycle } of files) {
+    let body;
+    try { body = fs.readFileSync(path.join(EDITIONS_DIR, file), 'utf8'); } catch { continue; }
+    const lines = body.split('\n').map((l) => l.trim()).filter((l) => l.length > 40);
+    for (const entity of entities) {
+      if (hits.has(entity) && hits.get(entity).length >= 2) continue;
+      const line = lines.find((l) => l.includes(entity));
+      if (!line) continue;
+      if (!hits.has(entity)) hits.set(entity, []);
+      hits.get(entity).push({ cycle: fileCycle, file, line: line.slice(0, 320) });
+    }
+  }
+  if (!hits.size) return null;
+
+  const traced = [...hits.entries()].sort((a, b) => b[1][0].cycle - a[1][0].cycle);
+  return {
+    answer: traced.map(([entity, rows]) => [
+      '**' + entity + '**',
+      ...rows.map((r) => '- C' + r.cycle + ' (' + r.file + '): ' + r.line),
+    ].join('\n')).join('\n\n'),
+    local: true,
+    editionsScanned: files.length,
+    entitiesTraced: traced.length,
+    sources_used: files.map((f) => ({ id: f.file, title: 'editions/' + f.file })),
+  };
+}
+
 function archivePrompt(cycle, reports) {
   const reportHeads = reports.map((report) => {
     const heading = report.body.match(/^#\s+(.+)$/m);
@@ -604,10 +685,20 @@ async function run(argv) {
   if (fs.existsSync(archiveQueryPath)) {
     archiveQuery = readJson(archiveQueryPath);
   } else {
-    // The archive notebook carries 64 sources; a one-line prompt against it
-    // measured 69s live on 2026-08-19, so the continuity prompt (which carries
-    // the whole newsroom report set) walks straight past a 180s cap. Both the
-    // internal and wall budgets are sized off that measurement, not a guess.
+    // Local disk first. The published editions ARE the archive; asking a
+    // notebook to recall them was borrowing the weekly notebook as daily's
+    // memory, at 69s+ per call for a one-line prompt (measured live
+    // 2026-08-19) and three consecutive dead runs when it hung.
+    const localContinuity = buildLocalContinuity(cycle, newsroom.reports, { maxEditions: 20 });
+    if (localContinuity) {
+      console.log('continuity: local — ' + localContinuity.entitiesTraced + ' thread(s) traced across '
+        + localContinuity.editionsScanned + ' published edition(s), no notebook call');
+      archiveQuery = localContinuity;
+      fs.writeFileSync(archiveQueryPath, JSON.stringify(archiveQuery, null, 2) + '\n');
+    } else {
+    // Fallback only when disk yields nothing (no editions, or no named threads
+    // in today's leads). The notebook budgets are sized off that same 69s
+    // measurement rather than guessed.
     let queried = nlm([
       'notebook', 'query', config.notebookId, continuityPrompt,
       '--json', '--timeout', '420',
@@ -642,6 +733,7 @@ async function run(argv) {
     } else {
       archiveQuery = parseJsonOutput(queried.out, 'published-archive query');
       fs.writeFileSync(archiveQueryPath, JSON.stringify(archiveQuery, null, 2) + '\n');
+    }
     }
   }
   const archiveBrief = renderResearchBrief(cycle, archiveQuery, {
@@ -789,6 +881,8 @@ if (require.main === module) {
 }
 
 module.exports = {
+  buildLocalContinuity,
+  leadEntities,
   parseArgs,
   cycleFromName,
   artifactStem,

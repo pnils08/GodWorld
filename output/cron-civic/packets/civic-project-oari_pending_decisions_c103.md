@@ -56,3 +56,15 @@ Your call — make your own move, in your own voice, with real consequences. No 
 - Celebrating Progress in Dimond and KONO: credit_attributed — "Dimond and KONO are proof that when we invest in neighborhoods, they thrive."
 
 The Mayor has spoken. React in your own voice — support, oppose, or go your own way.
+
+## MAYOR'S AGENDA THIS CYCLE
+
+- Oakland Youth Apprenticeship Pipeline — Recruitment and Intake Adjustments: Directing OEWD to implement immediate intake adjustments for the Youth Apprenticeship Pipeline — "We can’t let bureaucracy stand in the way of opportunity for Oakland’s young people."
+- West Oakland Stabilization Fund — Month-Five Disbursement Batch: Approving month-five disbursement batch for 8 households — "The families who qualified for this support shouldn’t have to wait another day."
+- Oakland Alternative Response Initiative — D7 Community Satisfaction Survey: Directing OARI to expand community engagement in West Oakland, Fruitvale, and East Oakland — "Trust isn’t built in a day—it’s built through action, listening, and accountability."
+- Fruitvale Transit Hub Phase II — Visioning Compliance Review: Directing Bureau of Planning to advance compliance review and schedule next visioning session — "Fruitvale deserves a transit hub that works for the people who use it every day—we’re not letting this stall."
+- Temescal Community Health Center — HCAI First-Comments Resolution: Resolving HCAI first-comments window and closing Phase 1 — "Temescal needs this health center now—not next year, not when the paperwork is perfect."
+- Baylight District — Phase II Shortlist Publication: Celebrating the publication of the Phase II shortlist — "Baylight isn’t just a stadium—it’s the future of Oakland, and we’re building it right."
+- Neighborhood Coherence — KONO and Dimond: Acknowledging success in Dimond and committing to support KONO — "When neighborhoods thrive, Oakland thrives—and we’re investing in both."
+
+The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

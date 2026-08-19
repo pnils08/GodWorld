@@ -1,0 +1,33 @@
+{
+  "stage": "mayor-open",
+  "cycle": 103,
+  "model": "mistralai/mistral-large",
+  "output": "output/civic-voice/mayor_open_c103.json",
+  "statements": 7,
+  "cascadeInjected": 10,
+  "attempts": 2,
+  "usage": {
+    "prompt_tokens": 8781,
+    "completion_tokens": 2087,
+    "total_tokens": 10868,
+    "cost": 0.030084,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.030084,
+      "upstream_inference_prompt_cost": 0.017562,
+      "upstream_inference_completions_cost": 0.012522
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "ranAt": "2026-08-19T07:31:35.879Z"
+}

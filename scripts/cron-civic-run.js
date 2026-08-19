@@ -1081,20 +1081,41 @@ function prepTargetDirForHood(hood, officeMap) {
   return (row && row.agentDir) || civicSeat.councilDir(d);
 }
 
+// Reads BOTH shapes validateVoiceJson tolerates — the flat contract shape and
+// the keyed-by-name shape drifted models emit — so a phase can't route past the
+// agenda/hearing wall by arriving in the keyed form.
 function hearingHasPhase(json) {
   for (const st of (json && json.statements) || []) {
-    if (st.trackerUpdates && st.trackerUpdates.ImplementationPhase) return true;
+    const tu = (st && st.trackerUpdates) || {};
+    if (tu.ImplementationPhase) return true;
+    for (const u of Object.values(tu)) {
+      if (u && typeof u === 'object' && u.ImplementationPhase) return true;
+    }
   }
   return false;
 }
 
-async function callVoice(dir, model, userPrompt, maxTokens, officeMap) {
+// Agenda + hearing turns may not stamp a phase; only the gavel does. Passed to
+// callVoice as an extra check so the constraint is enforced INSIDE the retry
+// loop and the model is told what it broke (house precedent: the daily-news
+// quote wall, 1d67333a — keep the wall, give the writer one repair pass).
+function noPhaseCheck(json) {
+  if (!hearingHasPhase(json)) return null;
+  return 'this turn must NOT set trackerUpdates.ImplementationPhase — the Mayor\'s gavel stamps phases after the hearing. '
+    + 'Keep trackerUpdates as {} or omit ImplementationPhase, and re-send the whole JSON object.';
+}
+
+async function callVoice(dir, model, userPrompt, maxTokens, officeMap, extraCheck) {
   const row = officeMap ? civicSeat.resolveOfficeRow(officeMap, dir) : null;
   const persona = readPersonaDir((row && civicSeat.personaDirFor(row, ROOT)) || dir);
   for (let attempt = 1; attempt <= 2; attempt++) {
     try {
       const r = await callOpenRouter(model, persona, userPrompt, maxTokens || 4000);
       const v = validateVoiceJson(r.text);
+      if (v.ok && extraCheck) {
+        const why = extraCheck(v.json);
+        if (why) { v.ok = false; v.why = why; }
+      }
       if (v.ok) return { json: v.json, usage: r.usage, attempts: attempt };
       log(dir + ' attempt ' + attempt + ' invalid: ' + v.why);
       if (attempt === 2) return { error: v.why, raw: r.text };
@@ -1195,7 +1216,7 @@ async function runMayorOpen() {
     'This is the AGENDA turn. Name what is on the floor. Do NOT emit trackerUpdates.ImplementationPhase or MayoralAction. The gavel comes after the hearing.',
     outputContract('mayor_open', cycle, initiatives),
   ].join('\n');
-  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap);
+  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap, noPhaseCheck);
   if (!r || r.error) {
     console.error('HALT: Mayor open failed — ' + (r ? r.error : 'no result') + '. Hearing must not start.');
     if (r && r.raw) { fs.mkdirSync(CIVIC, { recursive: true }); fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.raw.txt'), r.raw); }
@@ -1256,7 +1277,7 @@ async function runHearing() {
         'Do NOT emit trackerUpdates.ImplementationPhase. That is the Mayor\'s gavel after you speak.',
         outputContract(slug, cycle, initiatives),
       ].join('\n');
-      const r = await callVoice(dir, model, user, 4000, officeMap);
+      const r = await callVoice(dir, model, user, 4000, officeMap, noPhaseCheck);
       if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
       if (hearingHasPhase(r.json)) {
         results.push({ dir, slug, model, ok: false, error: 'hearing emitted ImplementationPhase' });
@@ -1861,4 +1882,4 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, prepTargetDirForHood };
+module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood };

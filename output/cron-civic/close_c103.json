@@ -15,9 +15,11 @@
     "baylight_authority"
   ],
   "clerk": "pass",
-  "gatePass": false,
-  "applied": false,
+  "gatePass": true,
+  "applied": true,
   "clerkModel": "deepseek/deepseek-chat",
   "laneEntries": 32,
-  "ranAt": "2026-08-15T01:38:22.010Z"
+  "ranAt": "2026-08-15T01:38:22.010Z",
+  "appliedAt": "2026-08-19T19:45:00.000Z",
+  "appliedNote": "applied out-of-band via applyTrackerUpdates.js 103 --apply after civic.26 gate fix went green; close stage completeness check expected mayor_gavel which this pre-restructure cycle never produced"
 }

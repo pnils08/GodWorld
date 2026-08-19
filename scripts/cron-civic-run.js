@@ -1851,9 +1851,21 @@ async function runChain() {
   const cycle = arg('--cycle', null) || detectCycle();
   console.log('Civic SUNDAY CHAIN — c' + cycle + (process.argv.includes('--apply') ? ' (APPLY)' : ' (dry)'));
   console.log('===================================');
-  if (readJson(path.join(CIVIC, 'close_c' + cycle + '.json'))) {
-    console.log('[chain] close_c' + cycle + '.json already exists — chain already ran this cycle. Exiting clean.');
+  // Idempotence guard: skip only when a PRIOR close actually WROTE the tracker.
+  // A close that ran and staged (gate blocked / clerk fail / dry) leaves
+  // close_c{XX}.json with applied:false — treating that as "already ran" strands
+  // the cycle permanently, since the Sunday cron is the only apply path. C103 sat
+  // unwritten from 2026-08-15 to 2026-08-19 exactly this way: the gate was fixed
+  // (civic.26) and went green, but every scheduled retry short-circuited here and
+  // no sheet write ever happened. Re-entering a staged cycle is safe — the stages
+  // are file-idempotent and applyTrackerUpdates re-derives from staged decisions.
+  const priorClose = readJson(path.join(CIVIC, 'close_c' + cycle + '.json'));
+  if (priorClose && priorClose.applied === true) {
+    console.log('[chain] close_c' + cycle + '.json shows applied:true — chain already wrote this cycle. Exiting clean.');
     return;
+  }
+  if (priorClose) {
+    console.log('[chain] close_c' + cycle + '.json exists but applied:' + priorClose.applied + ' — prior run staged without writing. Re-running chain.');
   }
   const need = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json'];
   const missing = need.filter(f => !fs.existsSync(path.join(ROOT, 'output', f)));

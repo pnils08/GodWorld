@@ -612,7 +612,12 @@ async function run(argv) {
       'notebook', 'query', config.notebookId, continuityPrompt,
       '--json', '--timeout', '420',
     ], { timeoutMs: 480 * 1000 });
-    if (!queried.ok) {
+    // Retry only what a retry can fix. NotebookLM is a reader over published
+    // sources — the same prompt against the same notebook returns the same
+    // answer, so re-running a query that TIMED OUT just buys another 8 minutes
+    // of hanging on an already-slow notebook. Transient failures (auth blip,
+    // dropped connection) are the only ones worth a second attempt.
+    if (!queried.ok && !/ETIMEDOUT|timed? ?out/i.test(queried.out)) {
       await sleep(30 * 1000);
       queried = nlm([
         'notebook', 'query', config.notebookId, continuityPrompt,

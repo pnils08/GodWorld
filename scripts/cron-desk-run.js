@@ -2522,8 +2522,8 @@ async function runWrite(assign) {
   const traceArt = readJson(path.join(COMPARE, (artifactTag ? desk + '_c' + cycle + '_' + artifactTag : desk + '_c' + cycle) + '.tooltrace.json'));
   const record = {
     mode: 'wake-write', desk, cycle,
-    provider: codeRenderedMode ? 'local' : route.provider,
-    model: codeRenderedMode ? 'code-rendered-' + codeRenderedMode.toLowerCase().replace('_', '-') : route.model,
+    provider: route.provider,
+    model: route.model,
     configuredWriterModel: route.model,
     gateModel: GATE_BACKEND === 'api' ? GATE_API_MODEL : GATE_MODEL,
     persona: personaSlug,

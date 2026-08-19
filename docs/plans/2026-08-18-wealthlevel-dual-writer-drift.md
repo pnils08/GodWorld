@@ -47,13 +47,9 @@ pointers:
 - **Verify:** re-run `applyEconomicProfiles.js` in dry-run/bench mode against a test citizen — confirm it no longer writes a WealthLevel value that disagrees with `deriveWealthLevel_`'s NetWorth-band output for that citizen.
 - **Status:** [ ] not started
 
-### Task 2: Backfill the 17 stale rows
+### Task 2: SUPERSEDED — do not hand-backfill
 
-- **Files:** none (data-only)
-- **Steps:**
-  1. Once Task 1 lands, run `processGenerationalWealth_`'s wealth step (bench or live, whichever the terminal handling this normally uses for a targeted recompute) so the 17 listed citizens get re-banded.
-- **Verify:** re-query NetWorth/WealthLevel for the 17 named citizens above — each should land on the band their NetWorth formula gives (6-9, not 10).
-- **Status:** [ ] not started
+- **Status:** SUPERSEDED (engine-sheet, 2026-08-18, commit `ee92e5bf`). Original scope (17 rows) was wrong on two counts: (1) full-ledger check found 551/940 WealthLevel rows match the stale v14.2 formula, not 17 — the 23-at-WL=10 sample was a slice, not the scope; (2) root cause isn't `applyEconomicProfiles.js` re-corrupting rows, it's deploy lag — v15 shipped in git `eda94abd` (2026-08-09) but didn't reach the live Apps Script deployment until S378's `2ee0f19b` (2026-08-17 17:56). C103's own cycle ran 2026-08-11/12, before that deploy, on the old formula. The only engine fires since the live deploy are the two C104 crash attempts, both 0/28 intents persisted. **v15 has never once run against the live ledger.** A hand backfill of any row count would be re-run wholesale (and differently) by the first cycle that actually completes — do not manually edit WealthLevel. The real fix is Task 1 (already shipped) plus a cycle successfully completing; nothing else is needed.
 
 ---
 
@@ -65,4 +61,5 @@ pointers:
 
 ## Changelog
 
+- 2026-08-18 — Task 1 shipped (engine-sheet, `ee92e5bf`, local/unpushed). Task 2 superseded — real scope 551/940 rows, root cause is deploy lag not re-corruption; no manual backfill, fix rides the next completed cycle. Mike-direct: don't hand-edit WealthLevel.
 - 2026-08-18 — Initial draft (research-build session). Filed off a live-ledger check triggered by Mike asking whether the WealthLevel top band is appropriate.

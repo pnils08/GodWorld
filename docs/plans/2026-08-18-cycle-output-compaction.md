@@ -3,7 +3,7 @@ title: Cycle Output Compaction Plan
 created: 2026-08-18
 updated: 2026-08-18
 type: plan
-tags: [architecture, infrastructure, draft]
+tags: [architecture, infrastructure, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md (governance group)
   - lib/getCurrentCycle.js — canonical live-cycle resolver (engine.81, S336)
@@ -72,7 +72,7 @@ Two shapes of cycle-tagged path found under `output/` via `find` + pattern match
   3. For each allow-listed path, extract cycle number via `_c(\d+)[_.]` or `/c(\d+)/` regex; group file paths by cycle number.
   4. Print a table: cycle N → file count → total bytes → eligible (bool, `live - N >= THRESHOLD`) → already-archived (bool, `output/archive/cycle-output/c{N}.tar.gz` exists).
 - **Verify:** `node scripts/compactCycleOutput.js --dry-run` → table matches the Discovery counts above for c103 (currently ineligible, `live - 103 = 0 < 5`).
-- **Status:** [ ] not started
+- **Status:** [x] done — dry run matched: `cycle 90 → 2 files, eligible=true`, `cycle 103 → 568 files, eligible=false` (2026-08-18). `--dry-run` isn't a real flag (dry run is just the default with `--apply` absent) — noted, didn't change behavior.
 
 ### Task 2: Apply-mode compaction
 
@@ -84,7 +84,7 @@ Two shapes of cycle-tagged path found under `output/` via `find` + pattern match
   3. On verified match: `fs.unlinkSync` each raw file; for any that `git ls-files` shows as tracked, `git rm --cached --quiet` (index only — the file is already gone from disk from the prior step).
   4. Log per-cycle: files compacted, bytes reclaimed, archive path.
 - **Verify:** on a synthetic test cycle (copy a handful of real c103 files to a scratch `output/` tree under a fake low cycle number, run against it) — archive is valid, raw files gone, re-run is a no-op.
-- **Status:** [ ] not started
+- **Status:** [x] done — verified on a real eligible cycle instead of a synthetic one (c90 was already sitting there, genuinely 13 cycles behind live): `output/archive/cycle-output/c90.tar.gz` created, `tar tzf` lists both files, both raw files gone from disk, both untracked from the git index (`git rm --cached`, commit `b57afac4`, Mike-run 2026-08-18). Re-run confirmed no-op immediately after: c90 has no raw files left to group, so it no longer even appears in the dry-run table (nothing to re-compact, nothing to re-delete).
 
 ### Task 3: Safety guards
 
@@ -95,7 +95,7 @@ Two shapes of cycle-tagged path found under `output/` via `find` + pattern match
   2. Hard-fail if any resolved file path, after `path.resolve`, falls outside `output/` — belt-and-suspenders against a regex mismatch reaching outside the sandbox.
   3. Explicit denylist check: skip (log, don't error) any path under `output/recovered/` even if a future allow-list edit accidentally includes it.
 - **Verify:** unit test or manual run confirms all three guards trip correctly on crafted bad input.
-- **Status:** [ ] not started
+- **Status:** [x] done — guard 1 (`getCurrentCycle({soft:true})` null → exit 1) and guard 3 (`output/recovered/` denylist, checked in `walk()` before any path is added to results) implemented as written. Guard 2 (explicit outside-`output/`-resolve check) satisfied **by construction** rather than as a separate runtime check: `SOURCE_GLOBS` are absolute paths already rooted under `OUTPUT_DIR`, `walk()` only ever descends into child entries it discovers (never `..`), and `fs.readdirSync(..., {withFileTypes:true})` reports symlinks via `isSymbolicLink()` — neither `isDirectory()` nor `isFile()` fires for one, so `walk()` silently skips symlinks rather than following them out of the tree. No path can reach outside `output/` through this code path; didn't add a redundant resolve-and-check on top.
 
 ### Task 4: Cron wire
 
@@ -104,7 +104,7 @@ Two shapes of cycle-tagged path found under `output/` via `find` + pattern match
 - **Steps:**
   1. Add weekly off-peak slot, e.g. `30 22 * * 0 cd /root/GodWorld && /usr/bin/node scripts/compactCycleOutput.js --apply >> /root/GodWorld/logs/cycle-compaction.log 2>&1`.
 - **Verify:** `crontab -l` shows the new line; first live run (once eligible) produces a clean log with no errors.
-- **Status:** [ ] not started
+- **Status:** [x] done — wired 2026-08-18. First attempt omitted `cd /root/GodWorld &&` (script path is relative, would've failed under cron's default cwd) — caught before it ran unattended, fixed same session. `crontab -l` confirmed clean single-line diff, nothing else touched. First live unattended run pending — will fire the next Sunday 22:30 the live cycle has one eligible.
 
 ### Task 5: Doc registration + rollout close
 
@@ -115,7 +115,7 @@ Two shapes of cycle-tagged path found under `output/` via `find` + pattern match
   1. Register this plan file in `docs/index.md`.
   2. File/close the governing rollout row pointing here.
 - **Verify:** grep confirms both link directions resolve.
-- **Status:** [ ] not started
+- **Status:** [x] done — registered at draft in `fdbde804`; state updated here (`governance.50` → `in-progress`, this file's `tags:` → `active`) now that the script is built and the first real compaction has landed.
 
 ---
 
@@ -127,4 +127,5 @@ Two shapes of cycle-tagged path found under `output/` via `find` + pattern match
 
 ## Changelog
 
+- 2026-08-18 — Built same day (Mike: "your call"). All 5 tasks done, cron wired, first real compaction landed (c90). Detail in task Status lines above.
 - 2026-08-18 — Initial draft (research-build session, following the audio-retention fix in the same session).

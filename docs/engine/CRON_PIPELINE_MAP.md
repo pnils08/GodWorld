@@ -18,7 +18,7 @@ All server times are in UTC. Central Daylight Time (CDT) is UTC-5.
 - **Weekly Maintenance**: Wednesdays at 11 PM CDT (`0 4 * * 3`)
 - *(Disabled)* Morning Heartbeat Reflection: Was at 8 AM CST.
 - **Civic Datawakes (civic.15)**: Mon–Thu 5:45 AM server time (`45 5 * * 1-4`) — `cron-civic-run.js --stage=datawake`, 3 offices/day voice their domain data into `output/cron-civic/datawake/`
-- **Civic Sunday Chain (civic.15)**: Sundays 14:30 + 21:00 retry (`30 14 * * 0`, `0 21 * * 0`) — `cron-civic-run.js --stage=chain`, guarded (exits clean if engine not fired / already ran). DRY era: no `--apply` until two clean dry Sundays are reviewed.
+- **Civic Sunday Chain (civic.15)**: Sundays 14:30 + 21:00 retry (`30 14 * * 0`, `0 21 * * 0`) — `cron-civic-run.js --stage=chain --apply`, guarded (exits clean if engine not fired / already ran). **`--apply` live as of 2026-08-19 (Mike-direct, S381)** — supersedes the DRY-era "two clean dry Sundays" hold, which was written when the chain could not complete at all (civic.27: mayor-open hard-exited on a rule the model was never told it broke). Writes stay fail-closed on three independent conditions inside `runClose`: `cron-civic-gate.js` exit 0 AND `--apply` AND clerk verdict `pass`; the 21:00 retry no-ops once `close_c{XX}.json` exists, so a completed chain cannot double-write.
 
 ### Anthropic Cloud Scheduled Agents
 - **Daily Mara Canon Sync**: 6 AM CDT daily

@@ -102,22 +102,31 @@ function cycleFromName(file) {
 }
 
 function artifactStem(file) {
+  // The optional -HHMM is uniqueDest's collision suffix; it must be stripped
+  // here too, or a re-run article never matches its own .flags.json and the
+  // flagged-exclusion check silently stops covering it.
   return path.basename(file)
-    .replace(/\.(?:staged|sample)\.md$/, '')
+    .replace(/\.(?:staged|sample)(?:-\d{3,4})?\.md$/, '')
     .replace(/\.flags\.json$/, '');
 }
 
 function collectNewsroomArtifacts(cycle, hours, nowMs) {
   const cutoff = nowMs - hours * 3600e3;
   const records = [];
+  // cron-desk-run routes a passing article through uniqueDest(), which appends
+  // an HHMM suffix when the destination name is already taken — so a re-run of
+  // the same desk lands as `.staged-2324.md`, not `.staged.md`. An endsWith()
+  // match dropped every one of those: the 2026-08-18 write wake staged four
+  // real articles and the daily news collected two, losing P Slayer and Jordan
+  // Velez purely on filename. Match the suffixed form too.
   const specs = [
-    { dir: path.join(COMPARE_DIR, 'staged'), suffix: '.staged.md', classification: 'STAGED' },
-    { dir: path.join(COMPARE_DIR, 'samples'), suffix: '.sample.md', classification: 'UNGATED_SAMPLE' },
+    { dir: path.join(COMPARE_DIR, 'staged'), re: /\.staged(?:-\d{3,4})?\.md$/, classification: 'STAGED' },
+    { dir: path.join(COMPARE_DIR, 'samples'), re: /\.sample(?:-\d{3,4})?\.md$/, classification: 'UNGATED_SAMPLE' },
   ];
 
   for (const spec of specs) {
     for (const file of walkFiles(spec.dir)) {
-      if (!file.endsWith(spec.suffix)) continue;
+      if (!spec.re.test(file)) continue;
       const stat = fs.statSync(file);
       const fileCycle = cycleFromName(file);
       if (stat.mtimeMs < cutoff || fileCycle !== cycle) continue;

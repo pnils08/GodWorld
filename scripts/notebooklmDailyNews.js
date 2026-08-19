@@ -604,20 +604,40 @@ async function run(argv) {
   if (fs.existsSync(archiveQueryPath)) {
     archiveQuery = readJson(archiveQueryPath);
   } else {
+    // The archive notebook carries 64 sources; a one-line prompt against it
+    // measured 69s live on 2026-08-19, so the continuity prompt (which carries
+    // the whole newsroom report set) walks straight past a 180s cap. Both the
+    // internal and wall budgets are sized off that measurement, not a guess.
     let queried = nlm([
       'notebook', 'query', config.notebookId, continuityPrompt,
-      '--json', '--timeout', '180',
-    ], { timeoutMs: 200 * 1000 });
+      '--json', '--timeout', '420',
+    ], { timeoutMs: 480 * 1000 });
     if (!queried.ok) {
       await sleep(30 * 1000);
       queried = nlm([
         'notebook', 'query', config.notebookId, continuityPrompt,
-        '--json', '--timeout', '180',
-      ], { timeoutMs: 200 * 1000 });
+        '--json', '--timeout', '420',
+      ], { timeoutMs: 480 * 1000 });
     }
-    if (!queried.ok) throw new Error('published-archive query failed: ' + queried.out.slice(0, 400));
-    archiveQuery = parseJsonOutput(queried.out, 'published-archive query');
-    fs.writeFileSync(archiveQueryPath, JSON.stringify(archiveQuery, null, 2) + '\n');
+    if (!queried.ok) {
+      // Continuity is enrichment, not the story. Three consecutive days of
+      // daily news died right here on ETIMEDOUT — the edition was fully built
+      // and got thrown away because a background lookup was slow. Degrade to an
+      // explicit no-continuity brief and publish. Deliberately NOT written to
+      // archive-query.json, so the next run retries the archive instead of
+      // inheriting a degraded answer.
+      console.log('WARN: published-archive query unavailable — publishing without continuity. '
+        + queried.out.slice(0, 200));
+      archiveQuery = {
+        answer: 'Published-archive continuity was unavailable for this run (archive query timed out). '
+          + 'This edition was written from the current cycle pack alone.',
+        unavailable: true,
+        sources_used: [],
+      };
+    } else {
+      archiveQuery = parseJsonOutput(queried.out, 'published-archive query');
+      fs.writeFileSync(archiveQueryPath, JSON.stringify(archiveQuery, null, 2) + '\n');
+    }
   }
   const archiveBrief = renderResearchBrief(cycle, archiveQuery, {
     archiveNotebookId: config.notebookId,

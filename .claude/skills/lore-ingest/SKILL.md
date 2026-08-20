@@ -50,8 +50,12 @@ The validator is fail-closed: a lore source id must be in the regenerated invent
 
 | Verdict | NotebookLM (canon authority) | bay-tribune (Supermemory) | Local |
 |---|---|---|---|
-| pass | `Lore: <slug> (Y<n>C<m>)` in the GodWorld notebook (`config/notebooklm.json` → `notebookId`, NOT `newsroomNotebookId`) | `type=lore`, `cycle=<m>`, container `bay-tribune` | source id → `allowedLoreSourceIds` |
+| pass | `Lore: <slug> (Y<n>C<m>)` in the GodWorld notebook (`config/notebooklm.json` → `notebookId`, NOT `newsroomNotebookId`) | `type=lore`, `cycle=<engine cycle>`, container `bay-tribune` | source id → `allowedLoreSourceIds`, and a leak-stripped copy staged to `output/cron-compare/staged/lore_c<cycle>_<slug>.staged.md` |
 | fail | never | never | `output/lore-quarantine/_rejected.log` |
+
+The staged copy is what puts a passed piece in front of the desk staging lane and inside `notebooklmDailyNews.js`'s collector — that script walks `output/cron-compare/staged/` for `*.staged.md`, keys on a `_c<cycle>_` in the filename, and only takes files newer than its lookback window (36h). Same door the desk articles come through, so no separate wiring.
+
+**Cycle math, both directions.** The tag's C number is the cycle-within-year, not the engine cycle: `Y<n>C<m>` → engine cycle `(n-1)*52 + m`. Y2C51 is cycle **103**, not 51. `loreIngest.js` converts before it hands `--cycle` to `ingestEdition.js`; getting this wrong files the piece under a cycle fifty-two behind where it belongs.
 
 Audio overviews are always off for lore (quota is for editions). The notebook summary is opt-in and writes to a slug-named path, so a lore push can never overwrite an edition's `output/nlm_summary_c<N>.md`.
 

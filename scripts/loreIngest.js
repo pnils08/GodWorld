@@ -36,6 +36,11 @@ const path = require('path');
 const ROOT = '/root/GodWorld';
 const POLICY_PATH = path.join(ROOT, 'scripts/notebooklmCanonSources.json');
 const REJECTED_LOG = path.join(ROOT, 'output/lore-quarantine/_rejected.log');
+// notebooklmDailyNews.js collects <COMPARE_DIR>/staged/*.staged.md, keyed on a
+// _c<cycle>_ in the filename and an mtime inside its lookback window. Dropping a
+// passed lore piece here is what puts it in front of the Rhea/desk staging lane
+// AND the daily listening brief — same door the desk articles come through.
+const STAGED_DIR = path.join(ROOT, 'output/cron-compare/staged');
 
 function fail(msg) {
   console.error('[ERROR] ' + msg);
@@ -104,6 +109,23 @@ function recordRejection(args) {
 // decisions entry with title/reason/evidence, and the id must also appear in a
 // regenerated inventory before the validator can run clean.
 // ---------------------------------------------------------------------------
+function stageForNewsroom(args, cycle) {
+  // Stage the ingested (leak-stripped) body, not the raw file — the staged copy
+  // and the canon copy should be the same text, and the trailing Names Index /
+  // Citizen Usage Log blocks are research metadata, not the piece.
+  const raw = fs.readFileSync(args.file, 'utf-8');
+  const body = require('./ingestEdition.js').stripMetadataLeaks(raw).content.trim();
+  const slug = path.basename(args.file, path.extname(args.file)).toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const dest = path.join(STAGED_DIR, 'lore_c' + cycle + '_' + slug + '.staged.md');
+  if (args.dryRun) {
+    console.log('[DRY] Would stage ' + path.relative(ROOT, dest));
+    return;
+  }
+  fs.mkdirSync(STAGED_DIR, { recursive: true });
+  fs.writeFileSync(dest, body + '\n');
+  console.log('[STAGED] ' + path.relative(ROOT, dest) + ' — visible to the desk staging lane and the daily news collector');
+}
+
 function recordSource(sourceId, title, args) {
   const policy = JSON.parse(fs.readFileSync(POLICY_PATH, 'utf-8'));
   if (!Array.isArray(policy.allowedLoreSourceIds)) {
@@ -137,7 +159,11 @@ function main() {
     return;
   }
 
-  const cycle = String(args.tag.match(/C(\d+)$/)[1]);
+  // Y<n>C<m> -> engine cycle: cycle = (n-1)*52 + m. The bare C number is the
+  // cycle-within-year, NOT the engine cycle — Y2C51 is cycle 103, not 51.
+  // Inverse of docs/EDITION_PIPELINE.md's n=floor((cycle-1)/52)+1, m=((cycle-1)%52)+1.
+  const tm = args.tag.match(/^Y(\d+)C(\d+)$/);
+  const cycle = String((Number(tm[1]) - 1) * 52 + Number(tm[2]));
   const baseName = path.basename(args.file, path.extname(args.file));
   const expectedTitle = 'Lore: ' + baseName + ' (' + args.tag + ')';
 
@@ -169,6 +195,9 @@ function main() {
     recordSource(idMatch[1], expectedTitle, args);
   }
 
+  console.log('=== newsroom staging ===');
+  stageForNewsroom(args, cycle);
+
   console.log('\n[DONE] notebooklm=' + (args.dryRun ? 'dry' : (degraded ? 'degraded' : 'ok')) +
     ' bay-tribune=' + (ingest.ok ? 'ok' : 'FAILED'));
   if (!ingest.ok) process.exit(1);
@@ -176,4 +205,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { parseArgs, recordSource, recordRejection };
+module.exports = { parseArgs, recordSource, recordRejection, stageForNewsroom };

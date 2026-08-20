@@ -139,18 +139,31 @@ async function callGemini(messages) {
     tools: [{ functionDeclarations: TOOLS }]
   };
 
-  const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + GEMINI_MODEL + ":generateContent?key=" + apiKey, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload)
-  });
-
-  if (!response.ok) {
+  // Transient-capacity retry. The tool loop runs many turns and every turn
+  // carries the whole grounded conversation, so a single 429/503 used to throw
+  // away an entire run's ledger reads. 503 UNAVAILABLE is routine on the Flash
+  // models at peak.
+  const RETRYABLE = [429, 500, 502, 503, 504];
+  let lastErr = null;
+  for (let attempt = 0; attempt < 8; attempt++) {
+    if (attempt > 0) {
+      const waitMs = Math.min(4000 * Math.pow(2, attempt - 1), 30000); // 4s..30s cap
+      console.log("[retry] " + lastErr + " — waiting " + (waitMs / 1000) + "s (attempt " + (attempt + 1) + "/8)");
+      await new Promise((r) => setTimeout(r, waitMs));
+    }
+    const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + GEMINI_MODEL + ":generateContent?key=" + apiKey, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (response.ok) return response.json();
     const errorText = await response.text();
-    throw new Error("Gemini API Error: " + response.status + " " + errorText);
+    lastErr = "Gemini API Error: " + response.status;
+    if (!RETRYABLE.includes(response.status)) {
+      throw new Error(lastErr + " " + errorText);
+    }
   }
-
-  return response.json();
+  throw new Error(lastErr + " — still failing after 8 attempts");
 }
 
 // -----------------------------------------------------------------------------

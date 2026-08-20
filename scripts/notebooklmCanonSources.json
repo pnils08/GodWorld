@@ -62,313 +62,445 @@
     "799c044c-696b-4163-9877-78b4ca9e41fa",
     "78327e9c-62fe-4405-9a5c-b5543fd534de"
   ],
-  "allowedLoreSourceIds": [],
+  "allowedLoreSourceIds": [
+    "a1722406-93b3-4ba5-afa9-61e4b82344d5"
+  ],
   "decisions": {
     "9624f0ea-d6a3-40f1-8a7c-d56023b4cc8e": {
       "title": "A’s and Oaks",
       "classification": "excluded",
       "reason": "Saved User/Gemini chat mixes builder additions with generated summaries; it is neither a publication nor a primary canon reference.",
-      "evidence": ["NotebookLM raw source content contains alternating User and Gemini turns."]
+      "evidence": [
+        "NotebookLM raw source content contains alternating User and Gemini turns."
+      ]
     },
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
       "title": "bay_tribune_dispatch_c92_kono_second_song.pdf",
       "classification": "published",
       "reason": "Published Dispatch with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_dispatch_92_kono_second_song.txt"]
+      "evidence": [
+        "editions/cycle_pulse_dispatch_92_kono_second_song.txt"
+      ]
     },
     "d1d80081-8cb6-4f9d-a0ef-c2d5f49e63c1": {
       "title": "bay_tribune_e100.pdf",
       "classification": "published",
       "reason": "Published Edition 100 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_100.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_100.txt"
+      ]
     },
     "76818efd-5148-4151-9519-d8071179706c": {
       "title": "bay_tribune_e101.pdf",
       "classification": "published",
       "reason": "Published Edition 101; retained as the single allowed E101 representation.",
-      "evidence": ["editions/cycle_pulse_edition_101.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_101.txt"
+      ]
     },
     "3271f3d6-377e-4cb9-a2a7-03ca596e1a83": {
       "title": "bay_tribune_e83.pdf",
       "classification": "excluded",
       "reason": "Mislabeled duplicate: raw content begins with Edition 88, not Edition 83.",
-      "evidence": ["NotebookLM raw source content", "editions/cycle_pulse_edition_83.txt", "editions/cycle_pulse_edition_88.txt"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "editions/cycle_pulse_edition_83.txt",
+        "editions/cycle_pulse_edition_88.txt"
+      ]
     },
     "c564717a-d594-4578-acb5-a6beb8ec5cc3": {
       "title": "bay_tribune_e84.pdf",
       "classification": "published",
       "reason": "Published Edition 84 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_84.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_84.txt"
+      ]
     },
     "810c73ce-129a-4ba6-9a9a-b98464dbb7dd": {
       "title": "bay_tribune_e85.pdf",
       "classification": "published",
       "reason": "Published Edition 85; raw content matches the paper-of-record article despite a damaged PDF edition-number glyph.",
-      "evidence": ["editions/cycle_pulse_edition_85.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_85.txt"
+      ]
     },
     "69152332-d248-477e-b1c9-539ae5fc9889": {
       "title": "bay_tribune_e86.pdf",
       "classification": "published",
       "reason": "Published Edition 86 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_86.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_86.txt"
+      ]
     },
     "a15092b6-df99-4ee7-b1bd-e73788254bf7": {
       "title": "bay_tribune_e87.pdf",
       "classification": "published",
       "reason": "Published Edition 87 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_87.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_87.txt"
+      ]
     },
     "50a1c013-433b-4a49-aa6e-146ead0d220b": {
       "title": "bay_tribune_e90.pdf",
       "classification": "published",
       "reason": "Published Edition 90 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_90.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_90.txt"
+      ]
     },
     "9e20a1fa-33ef-4fe5-8bfb-eebd88b30dd9": {
       "title": "bay_tribune_e91.pdf",
       "classification": "published",
       "reason": "Published Edition 91 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_91.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_91.txt"
+      ]
     },
     "261458b2-d8de-4d31-95f0-41c95da0ba40": {
       "title": "bay_tribune_e92.pdf",
       "classification": "published",
       "reason": "Published Edition 92 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_92.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_92.txt"
+      ]
     },
     "81979f91-18f2-46fb-bdb7-6d526ea15d0d": {
       "title": "bay_tribune_e93.pdf",
       "classification": "published",
       "reason": "Published Edition 93 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_93.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_93.txt"
+      ]
     },
     "be994e35-1987-4095-a232-168a49d02927": {
       "title": "bay_tribune_e94.pdf",
       "classification": "published",
       "reason": "Published Edition 94 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_94.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_94.txt"
+      ]
     },
     "9c0e03ef-3ba1-4cff-9418-c368339ab584": {
       "title": "bay_tribune_e95.pdf",
       "classification": "published",
       "reason": "Published Edition 95 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_95.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_95.txt"
+      ]
     },
     "57c67f9d-5e82-43ab-8ba1-c6ca636d4b68": {
       "title": "bay_tribune_e97.pdf",
       "classification": "published",
       "reason": "Published Edition 97 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_97.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_97.txt"
+      ]
     },
     "0e7451f3-4842-4ddb-9fa3-fb6f47d9d314": {
       "title": "bay_tribune_e98.pdf",
       "classification": "published",
       "reason": "Published Edition 98 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_98.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_98.txt"
+      ]
     },
     "af86de86-54d1-4767-8a13-a577de875998": {
       "title": "bay_tribune_e99.pdf",
       "classification": "published",
       "reason": "Published Edition 99 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_99.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_99.txt"
+      ]
     },
     "68d0ce88-c554-40ba-9b55-1256633afb58": {
       "title": "bay_tribune_supplemental_c94_let_walks_reset.pdf",
       "classification": "published",
       "reason": "Published Cycle 94 Supplemental with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_supplemental_94_let_walks_reset.txt"]
+      "evidence": [
+        "editions/cycle_pulse_supplemental_94_let_walks_reset.txt"
+      ]
     },
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6": {
       "title": "Benji Dillon: The Complete Origins (Parts I-IV) By Hal Richmond",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract makes Richmond Archive material authoritative for narrative birth/history canon.",
-      "evidence": ["docs/archive/benji-dillon-origins.txt", "docs/media/CITIZEN_NARRATIVE_MEMORY.md"]
+      "evidence": [
+        "docs/archive/benji-dillon-origins.txt",
+        "docs/media/CITIZEN_NARRATIVE_MEMORY.md"
+      ]
     },
     "368ac8c1-a52b-4bd7-8e2b-14774ef2aae9": {
       "title": "Building Deep Storyline Materials",
       "classification": "excluded",
       "reason": "Saved User/Gemini research-planning chat, not source material.",
-      "evidence": ["NotebookLM raw source content contains alternating User and Gemini turns."]
+      "evidence": [
+        "NotebookLM raw source content contains alternating User and Gemini turns."
+      ]
     },
     "6da1bab2-d015-41d1-a895-e7e5ab01c71e": {
       "title": "C101 — cycle_pulse_edition_101",
       "classification": "excluded",
       "reason": "Duplicate generated-text representation of Edition 101; excluded to prevent duplicate retrieval weighting.",
-      "evidence": ["editions/cycle_pulse_edition_101.txt", "allowed source 76818efd-5148-4151-9519-d8071179706c"]
+      "evidence": [
+        "editions/cycle_pulse_edition_101.txt",
+        "allowed source 76818efd-5148-4151-9519-d8071179706c"
+      ]
     },
     "0ed229df-1dc3-4a87-ac83-6ccfb5f4696e": {
       "title": "c92_mayor_interview.pdf",
       "classification": "published",
       "reason": "Published Cycle 92 On the Record interview.",
-      "evidence": ["docs/mags-corliss/SESSION_HISTORY.md Session 178", "output/production_log_edition_c92.md"]
+      "evidence": [
+        "docs/mags-corliss/SESSION_HISTORY.md Session 178",
+        "output/production_log_edition_c92.md"
+      ]
     },
     "886eacc8-20f6-431e-9eac-8dc2c4cd942d": {
       "title": "cycle_pulse_edition_88.txt",
       "classification": "published",
       "reason": "Published Edition 88 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_88.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_88.txt"
+      ]
     },
     "df033121-5f1a-4576-b3b0-afeaf26df68f": {
       "title": "cycle_pulse_edition_96.txt",
       "classification": "published",
       "reason": "Published Edition 96 with a matching paper-of-record source.",
-      "evidence": ["editions/cycle_pulse_edition_96.txt"]
+      "evidence": [
+        "editions/cycle_pulse_edition_96.txt"
+      ]
     },
     "4f18e520-741a-472e-94c0-d8a99ebde658": {
       "title": "Darrin Davis: The Ohio Outlaw of Oakland By Hal Richmond - The Richmond Archive Collection, Origins of the Dynasty Series",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract identifies the Dynasty Origins checksums as canon.",
-      "evidence": ["docs/archive/davis-origins.txt", "docs/media/CITIZEN_NARRATIVE_MEMORY.md"]
+      "evidence": [
+        "docs/archive/davis-origins.txt",
+        "docs/media/CITIZEN_NARRATIVE_MEMORY.md"
+      ]
     },
     "d0186fb6-4d99-4f9d-9baa-ca4bd8e1afb4": {
       "title": "Isley Kelley: The Complete Origins (Parts I-IV) By Hal Richmond",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract makes Richmond Archive material authoritative for narrative birth/history canon.",
-      "evidence": ["docs/archive/kelley-origins.txt", "docs/media/CITIZEN_NARRATIVE_MEMORY.md"]
+      "evidence": [
+        "docs/archive/kelley-origins.txt",
+        "docs/media/CITIZEN_NARRATIVE_MEMORY.md"
+      ]
     },
     "c9b1ca9a-bb3d-48c6-b322-c530ad667f47": {
       "title": "Mark Aitken: The Complete Origins (Parts I-IV) By Hal Richmond",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract makes Richmond Archive material authoritative for narrative birth/history canon.",
-      "evidence": ["docs/archive/drive-file-new.txt", "docs/media/CITIZEN_NARRATIVE_MEMORY.md"]
+      "evidence": [
+        "docs/archive/drive-file-new.txt",
+        "docs/media/CITIZEN_NARRATIVE_MEMORY.md"
+      ]
     },
     "e96f7462-8916-4eee-95b5-455a8929346e": {
       "title": "Mike Paulson",
       "classification": "excluded",
       "reason": "Saved builder/Gemini interview and generated synthesis, not a published interview artifact or primary canon record.",
-      "evidence": ["NotebookLM raw source content contains alternating User and Gemini turns."]
+      "evidence": [
+        "NotebookLM raw source content contains alternating User and Gemini turns."
+      ]
     },
     "385edefc-c728-4984-a144-6c6cd11adf64": {
       "title": "Oakland Civic",
       "classification": "excluded",
       "reason": "Saved User/Gemini notebook-curation chat derived from other sources.",
-      "evidence": ["NotebookLM raw source content contains alternating User and Gemini turns."]
+      "evidence": [
+        "NotebookLM raw source content contains alternating User and Gemini turns."
+      ]
     },
     "8462cb24-5e9b-4c98-94e8-4fe6231a1c0f": {
       "title": "Oakland Neighborhoods_World Summary",
       "classification": "excluded",
       "reason": "Generated chat summary, not the engine world summary or a publication.",
-      "evidence": ["NotebookLM raw source content contains alternating User and Gemini turns."]
+      "evidence": [
+        "NotebookLM raw source content contains alternating User and Gemini turns."
+      ]
     },
     "874d2f64-0fb3-48e2-98d5-95b40ada1894": {
       "title": "Oakland Oaks: Franchise Blueprint & Strategy",
       "classification": "excluded",
       "reason": "Generated notebook-curation chat and synthesis, not a primary source.",
-      "evidence": ["NotebookLM raw source content contains alternating User and Gemini turns."]
+      "evidence": [
+        "NotebookLM raw source content contains alternating User and Gemini turns."
+      ]
     },
     "af829925-5cd7-41f1-b5a0-828b5de835b7": {
       "title": "Oakland's Cycle 100: A City's Evolution",
       "classification": "excluded",
       "reason": "Generated notebook summary of other sources, not a publication or primary canon record.",
-      "evidence": ["NotebookLM raw source content contains alternating User and Gemini turns."]
+      "evidence": [
+        "NotebookLM raw source content contains alternating User and Gemini turns."
+      ]
     },
     "9197fb2f-8fe2-4206-9965-72692a2771da": {
       "title": "Richmond Archive Canon Record – Origins of the Dynasty Series v1.0 Checksum Root: RCH-DYNASTY-2040A.txt",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive checksum root for the five Dynasty Origins records.",
-      "evidence": ["docs/media/CITIZEN_NARRATIVE_MEMORY.md", "docs/media/CITIZENS_BY_ARTICLE.md"]
+      "evidence": [
+        "docs/media/CITIZEN_NARRATIVE_MEMORY.md",
+        "docs/media/CITIZENS_BY_ARTICLE.md"
+      ]
     },
     "3016e5a1-da7d-4152-9fff-505ab5ec5bce": {
       "title": "supplemental_oaks_expansion_draft.md",
       "classification": "excluded",
       "reason": "Title and content identify an unpublished draft; drafts cannot enter canon retrieval.",
-      "evidence": ["NotebookLM raw source content"]
+      "evidence": [
+        "NotebookLM raw source content"
+      ]
     },
     "88c2c054-5481-4de9-9f17-f44ea483de58": {
       "title": "The Anchor of Oakland: The Vinnie Keane Story",
       "classification": "excluded",
       "reason": "Generated derivative summary with bracket citations; the primary Vinnie Richmond Archive origin is admitted instead.",
-      "evidence": ["NotebookLM raw source content", "allowed source 19d25578-1ec3-4fb0-969a-8ee77ec6aa2b"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "allowed source 19d25578-1ec3-4fb0-969a-8ee77ec6aa2b"
+      ]
     },
     "a70f6800-ce9a-4ac9-a38e-e84c3e1e2c0b": {
       "title": "The Calm and the Storm: The Vinnie Keane Story",
       "classification": "excluded",
       "reason": "Near-duplicate generated derivative summary; the primary Vinnie Richmond Archive origin is admitted instead.",
-      "evidence": ["NotebookLM raw source content", "allowed source 19d25578-1ec3-4fb0-969a-8ee77ec6aa2b"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "allowed source 19d25578-1ec3-4fb0-969a-8ee77ec6aa2b"
+      ]
     },
     "298d8805-ddd2-400a-9151-422baceed65d": {
       "title": "The Cycle Pulse",
       "classification": "excluded",
       "reason": "Saved User/Gemini Edition 100 breakdown, not the Edition itself.",
-      "evidence": ["NotebookLM raw source content", "allowed source d1d80081-8cb6-4f9d-a0ef-c2d5f49e63c1"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "allowed source d1d80081-8cb6-4f9d-a0ef-c2d5f49e63c1"
+      ]
     },
     "3f444dc6-b8f8-466b-b403-c3ec9c8040d8": {
       "title": "THE CYCLE PULSE — SUPPLEMENTAL 89 — SPORTS.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Sports Supplemental with a matching paper-of-record source.",
-      "evidence": ["editions/supplemental_sports_quintero_c89.txt"]
+      "evidence": [
+        "editions/supplemental_sports_quintero_c89.txt"
+      ]
     },
     "bc51c26b-e383-4b97-a4c9-2e4d6e0bf753": {
       "title": "THE CYCLE PULSE 89 - SUPPLEMENTAL — CULTURE.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Culture Supplemental with a matching paper-of-record source.",
-      "evidence": ["editions/supplemental_culture_keane_academy_c89.txt"]
+      "evidence": [
+        "editions/supplemental_culture_keane_academy_c89.txt"
+      ]
     },
     "3f3658ed-baf3-4fdb-a496-ee9f4acee563": {
       "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL —  CULTURE & COMMUNITY.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Aitken Supplemental with a matching paper-of-record source.",
-      "evidence": ["editions/supplemental_culture_aitken_profile_c89.txt"]
+      "evidence": [
+        "editions/supplemental_culture_aitken_profile_c89.txt"
+      ]
     },
     "f3eeafd8-aead-4d4f-ad4a-9cfab04665f5": {
       "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — BUSINESS.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Business Supplemental with a matching paper-of-record source.",
-      "evidence": ["editions/supplemental_business_baylight_workforce_c89.txt"]
+      "evidence": [
+        "editions/supplemental_business_baylight_workforce_c89.txt"
+      ]
     },
     "3a187773-296d-44e1-a99a-a4d14119c78d": {
       "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CIVIC AFFAIRS.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Civic Supplemental with a matching paper-of-record source.",
-      "evidence": ["editions/supplemental_civic_oari_c89.txt"]
+      "evidence": [
+        "editions/supplemental_civic_oari_c89.txt"
+      ]
     },
     "cf1f5cdb-ec1c-4797-9148-1d5f870ca15d": {
       "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CULTURE & COMMUNITY_Benji Dillon.txt",
       "classification": "excluded",
       "reason": "Publication-shaped text has no matching paper-of-record artifact in editions/; held out pending publisher evidence.",
-      "evidence": ["NotebookLM raw source content", "repository editions/ inventory"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "repository editions/ inventory"
+      ]
     },
     "bb2cb3a8-0f3b-4c0f-9364-6a5a31977803": {
       "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CULTURE & COMMUNITY_Isley Kelley.txt",
       "classification": "excluded",
       "reason": "Publication-shaped text has no matching paper-of-record artifact in editions/; held out pending publisher evidence.",
-      "evidence": ["NotebookLM raw source content", "repository editions/ inventory"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "repository editions/ inventory"
+      ]
     },
     "7a25fbe2-557c-4b21-8a11-b86b272dd4b8": {
       "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CULTURE & COMMUNITY_Mayor Avery Santana.txt",
       "classification": "excluded",
       "reason": "Publication-shaped text has no matching paper-of-record artifact in editions/; held out pending publisher evidence.",
-      "evidence": ["NotebookLM raw source content", "repository editions/ inventory"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "repository editions/ inventory"
+      ]
     },
     "b1fa1364-d5ad-4665-b4cb-662b66836681": {
       "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CULTURE & COMMUNITY_Paulson.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Paulson Supplemental with a matching paper-of-record source.",
-      "evidence": ["editions/supplemental_culture_paulson_profile_c89.txt"]
+      "evidence": [
+        "editions/supplemental_culture_paulson_profile_c89.txt"
+      ]
     },
     "e9fd71f0-67b4-4913-9bc8-7518bc99cc91": {
       "title": "THE CYCLE PULSE 89— CULTURE & COMMUNITY_Darrin Davis.txt",
       "classification": "excluded",
       "reason": "Publication-shaped text has no matching paper-of-record artifact in editions/; held out pending publisher evidence.",
-      "evidence": ["NotebookLM raw source content", "repository editions/ inventory"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "repository editions/ inventory"
+      ]
     },
     "799c044c-696b-4163-9877-78b4ca9e41fa": {
       "title": "The Town: A Tale of Two Dynasties",
       "classification": "excluded",
       "reason": "Generated derivative overview with bracket citations, not a publication or primary canon reference.",
-      "evidence": ["NotebookLM raw source content"]
+      "evidence": [
+        "NotebookLM raw source content"
+      ]
     },
     "19d25578-1ec3-4fb0-969a-8ee77ec6aa2b": {
       "title": "Vinnie Keane - The Complete Origins (Parts I through IV) Written by Hal Richmond",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract makes Richmond Archive material authoritative for narrative birth/history canon.",
-      "evidence": ["docs/archive/drive-file6.txt", "docs/media/CITIZEN_NARRATIVE_MEMORY.md"]
+      "evidence": [
+        "docs/archive/drive-file6.txt",
+        "docs/media/CITIZEN_NARRATIVE_MEMORY.md"
+      ]
     },
     "78327e9c-62fe-4405-9a5c-b5543fd534de": {
       "title": "world_summary_c100.txt",
       "classification": "excluded",
       "reason": "Engine-derived Cycle 100 snapshot is outside the prior-published-arc lane and can become stale against current Sheet state.",
-      "evidence": ["NotebookLM raw source content", "docs/reference/notebookLM-CLI.md authority boundary"]
+      "evidence": [
+        "NotebookLM raw source content",
+        "docs/reference/notebookLM-CLI.md authority boundary"
+      ]
+    },
+    "a1722406-93b3-4ba5-afa9-61e4b82344d5": {
+      "title": "Lore: POP-00131-lorenzo-jordan (Y2C51)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/POP-00131-lorenzo-jordan.md",
+        "Cycle placement: Y2C51",
+        "Verdict: pass (rhea)"
+      ]
     }
   }
 }

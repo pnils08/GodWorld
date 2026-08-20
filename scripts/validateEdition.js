@@ -938,7 +938,7 @@ function checkFaithOrgNames(editionText) {
 function checkMetadataLeak(editionText) {
   const issues = [];
   const lines = editionText.split('\n');
-  const blockStart = /^(##\s+(EVIDENCE|Names\s+Index)\s*$|ARTICLE TABLE ENTRIES:\s*$|CITIZEN USAGE LOG:\s*$|CONTINUITY NOTES:\s*$|FACTUAL ASSERTIONS:\s*$|\*\*\s*(ARTICLE TABLE ENTRIES|CITIZEN USAGE LOG|CONTINUITY NOTES|FACTUAL ASSERTIONS|NAMES INDEX|Names Index)\s*:?\s*\*\*\s*$)/;
+  const blockStart = /^(#{1,3}\s+(EVIDENCE|Names\s+Index|Citizen\s+Usage\s+Log|Continuity\s+Notes|Factual\s+Assertions|Article\s+Table\s+Entries)\s*:?\s*$|ARTICLE TABLE ENTRIES:\s*$|CITIZEN USAGE LOG:\s*$|CONTINUITY NOTES:\s*$|FACTUAL ASSERTIONS:\s*$|\*\*\s*(ARTICLE TABLE ENTRIES|CITIZEN USAGE LOG|CONTINUITY NOTES|FACTUAL ASSERTIONS|NAMES INDEX|Names Index)\s*:?\s*\*\*\s*$)/i;
   const inlineNamesIndex = /^Names Index:\s*\S/;
 
   for (let i = 0; i < lines.length; i++) {

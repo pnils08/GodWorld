@@ -145,6 +145,16 @@
             "timeout": 15
           },
           {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/first-person-guard.js\"",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/no-self-narration-guard.js\"",
+            "timeout": 10
+          },
+          {
             "type": "http",
             "url": "http://localhost:3001/api/session-events",
             "timeout": 5

@@ -452,24 +452,34 @@ function accumulateNeighborhoodFold_(ctx, hood, impacts, magnitudesByColumn) {
 
 var CHAOS_NBHD_STORE_KEY = 'CHAOS_NBHD_FOLD_JSON';
 
-function readChaosNeighborhoodStore_() {
+function readChaosNeighborhoodStore_(ctx) {
   try {
     if (typeof PropertiesService === 'undefined') return {};
     var json = PropertiesService.getScriptProperties().getProperty(CHAOS_NBHD_STORE_KEY);
+    // engine.122 layer-2 fallback: prop missing → Carry_Forward_Store tab (re-seeds the prop)
+    if (!json && typeof loadCarryForwardBlob_ === 'function' && ctx && ctx.ss) {
+      json = loadCarryForwardBlob_(ctx, CHAOS_NBHD_STORE_KEY);
+    }
     return json ? JSON.parse(json) : {};
   } catch (e) { return {}; }
 }
 
-function writeChaosNeighborhoodStore_(fold) {
+function writeChaosNeighborhoodStore_(fold, ctx) {
   try {
     if (typeof PropertiesService === 'undefined') return;
-    PropertiesService.getScriptProperties().setProperty(CHAOS_NBHD_STORE_KEY, JSON.stringify(fold || {}));
+    var json = JSON.stringify(fold || {});
+    PropertiesService.getScriptProperties().setProperty(CHAOS_NBHD_STORE_KEY, json);
+    // engine.122 layer 2 (Phase-10 location — ChaosNbhdResolve): mirror to the sheet store
+    if (typeof mirrorCarryForwardToSheet_ === 'function' && ctx && ctx.ss) {
+      var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || '';
+      mirrorCarryForwardToSheet_(ctx, CHAOS_NBHD_STORE_KEY, json, cycle);
+    }
   } catch (e) { /* best-effort persistence; a write failure just resets the residual */ }
 }
 
 function resolveChaosNeighborhoodFold_(ctx) {
   function r2(n) { return Math.round(n * 100) / 100; }
-  var prior = readChaosNeighborhoodStore_();
+  var prior = readChaosNeighborhoodStore_(ctx);
   var fresh = (ctx.summary && ctx.summary.chaosNeighborhoodFold) || {};
   var merged = {};
 
@@ -502,7 +512,7 @@ function resolveChaosNeighborhoodFold_(ctx) {
   }
 
   ctx.summary.chaosNeighborhoodFold = merged; // total residual the Phase-10 writer folds
-  writeChaosNeighborhoodStore_(merged);       // persist for next cycle
+  writeChaosNeighborhoodStore_(merged, ctx);  // persist for next cycle (prop + sheet mirror)
   return merged;
 }
 

@@ -61,8 +61,15 @@ pointers:
 
 ---
 
+## Proof (S381 discriminating test — drained from the rollout row 2026-08-19)
+
+On rows where the two formulas disagree, script-written rows (EconomicProfileKey set) split 508 v14.2 / 11 v15, while SPORTS_OVERRIDE rows (the branch that never writes WealthLevel) split 29 v15 / 10 v14.2 — the script was the last writer and overwrote the engine. Real scope 551/940 rows on v14.2 (not 17). With the writer deleted (`ee92e5bf`), the engine's unconditional per-cycle write repairs all rows on the first clean cycle; no hand-backfill.
+
+---
+
 ## Changelog
 
+- 2026-08-19 — Rollout-row detail drained to §Proof above; row trimmed to pointer budget.
 - 2026-08-18 — engine-sheet retracted the deploy-lag root cause same day (v15 was live before C103 ran); real cause open, investigation ongoing. Corrected here — do not cite deploy-lag as settled.
 - 2026-08-18 — Task 1 shipped (engine-sheet, `ee92e5bf`, local/unpushed). Task 2 superseded — real scope 551/940 rows; no manual backfill. Mike-direct: don't hand-edit WealthLevel.
 - 2026-08-18 — Initial draft (research-build session). Filed off a live-ledger check triggered by Mike asking whether the WealthLevel top band is appropriate.

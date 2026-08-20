@@ -821,7 +821,13 @@ function distributeInheritance_(ctx, heirs, amountPerHeir, deceasedId, cycle) {
 
 function recordInheritanceInFamily_(ctx, heirs, amount, deceasedId, cycle) {
   // Family_Relationships is an own-tracking sheet (engine.md exempt) — direct
-  // read+write stays the same; only signature aligned to ctx for consistency.
+  // read+write. engine.121 (2026-08-19): rewritten against the sheet's REAL
+  // schema (HouseholdId | Husband | Wife | RelationshipType | SinceCycle |
+  // Status | Child1-5, cells "POP-00001 Vinnie Keane") — the old Citizen1/
+  // Citizen2 pairwise matcher targeted a schema that never existed on live
+  // (S328 G-EC14-17) and skipped every inheritance. Stamps the inheritance
+  // event onto every family row containing the deceased; writes only the
+  // stamped rows, never the whole registry.
   var ss = ctx.ss;
   var sheet = ss.getSheetByName('Family_Relationships');
   if (!sheet) return;
@@ -830,44 +836,40 @@ function recordInheritanceInFamily_(ctx, heirs, amount, deceasedId, cycle) {
   if (values.length < 2) return;
 
   var header = values[0];
-  var rows = values.slice(1);
   var idx = function(n) { return header.indexOf(n); };
 
-  var iCitizen1 = idx('Citizen1');
-  var iCitizen2 = idx('Citizen2');
-  var iType = idx('RelationshipType');
-  var iInheritance = idx('InheritanceAmount');
   var iCycle = idx('InheritanceCycle');
-
-  // S328 header-drift triage (G-EC14-17): these columns come from a
-  // Family_Relationships schema that never existed on the live sheet (real
-  // format: Husband/Wife/Child1-5, Mike's). The parent-child match below can
-  // never fire — but the unconditional setValues at the bottom rewrote the
-  // whole registry as a no-op on every inheritance. Return early instead of
-  // pretending. If registry-side inheritance recording is ever wanted, the
-  // schema needs Mike-format columns first.
-  if (iCitizen1 < 0 || iCitizen2 < 0 || iInheritance < 0) {
-    Logger.log('recordInheritanceInFamily_: registry lacks inheritance columns (expected legacy schema) — skipping');
+  var iFrom = idx('InheritanceFrom');
+  var iNote = idx('InheritanceNote');
+  if (iCycle < 0 || iFrom < 0 || iNote < 0) {
+    Logger.log('recordInheritanceInFamily_: registry lacks InheritanceCycle/From/Note columns — skipping (engine.121 schema not applied)');
     return;
   }
 
-  for (var r = 0; r < rows.length; r++) {
-    var row = rows[r];
-    var c1 = row[iCitizen1];
-    var c2 = row[iCitizen2];
-    var type = (row[iType] || '').toString().toLowerCase();
+  var memberCols = ['Husband', 'Wife', 'Child1', 'Child2', 'Child3', 'Child4', 'Child5']
+    .map(idx).filter(function(i) { return i >= 0; });
+  var note = heirs.length + ' heir(s) [' + heirs.join(', ') + '] inherited $' + Math.round(amount) + ' each';
+  var stamped = 0;
 
-    // Check if this is a parent-child relationship involving the deceased
-    if (type === 'parent-child') {
-      if ((c1 === deceasedId && heirs.indexOf(c2) >= 0) ||
-          (c2 === deceasedId && heirs.indexOf(c1) >= 0)) {
-        if (iInheritance >= 0) row[iInheritance] = amount;
-        if (iCycle >= 0) row[iCycle] = cycle;
-      }
-    }
+  for (var r = 1; r < values.length; r++) {
+    var hasDeceased = memberCols.some(function(c) {
+      return String(values[r][c] || '').indexOf(deceasedId) === 0;
+    });
+    if (!hasDeceased) continue;
+    values[r][iCycle] = cycle;
+    values[r][iFrom] = deceasedId;
+    values[r][iNote] = note;
+    sheet.getRange(r + 1, iCycle + 1).setValue(cycle);
+    sheet.getRange(r + 1, iFrom + 1).setValue(deceasedId);
+    sheet.getRange(r + 1, iNote + 1).setValue(note);
+    stamped++;
   }
 
-  sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  if (stamped) {
+    Logger.log('recordInheritanceInFamily_: stamped ' + stamped + ' family row(s) — ' + deceasedId + ' → ' + note);
+  } else {
+    Logger.log('recordInheritanceInFamily_: no family row contains ' + deceasedId + ' — inheritance recorded in ledger only');
+  }
 }
 
 

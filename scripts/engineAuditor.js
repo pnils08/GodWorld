@@ -329,6 +329,26 @@ async function main() {
   const briefsPath = path.join(outputDir, `baseline_briefs_c${cycle}.json`);
   fs.writeFileSync(briefsPath, JSON.stringify(briefsOutput, null, 2));
 
+  // engine.122 layer 3: export the cross-cycle carry-forward store to git-tracked
+  // disk so the memory survives even a spreadsheet-level loss. Best-effort — the
+  // tab is empty until the first post-engine.122 cycle fires.
+  try {
+    const store = await sheets.getRawSheetData('Carry_Forward_Store');
+    if (store && store.length > 1) {
+      const carry = {};
+      for (const row of store.slice(1)) {
+        if (row[0]) carry[row[0]] = { cycle: row[1], updatedAt: row[2], json: row[3] };
+      }
+      const carryPath = path.join(outputDir, `carry_forward_c${cycle}.json`);
+      fs.writeFileSync(carryPath, JSON.stringify(carry, null, 2));
+      console.log(`Wrote ${carryPath}`);
+    } else {
+      console.log('carry-forward export skipped: Carry_Forward_Store empty (populates on first post-engine.122 cycle)');
+    }
+  } catch (e) {
+    console.log(`carry-forward export skipped: ${e.message}`);
+  }
+
   const elapsed = ((Date.now() - t0) / 1000).toFixed(1);
   console.log(`\nWrote ${auditPath}`);
   console.log(`Wrote ${anomaliesPath}`);

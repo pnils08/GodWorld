@@ -371,6 +371,7 @@ function saveEveningSnapshot_(ctx) {
   try {
     var json = JSON.stringify(snapshot);
     PropertiesService.getScriptProperties().setProperty('PREV_EVENING_JSON', json);
+    mirrorCarryForwardToSheet_(ctx, 'PREV_EVENING_JSON', json, snapshot.cycle);  // engine.122 layer 2
     Logger.log('saveEveningSnapshot_: Saved ' + json.length + ' bytes for cycle ' + snapshot.cycle);
   } catch (e) {
     Logger.log('saveEveningSnapshot_: Failed - ' + e.message);
@@ -413,6 +414,7 @@ function savePreviousCycleState_(ctx) {
   try {
     var json = JSON.stringify(snapshot);
     PropertiesService.getScriptProperties().setProperty('PREV_CYCLE_STATE_JSON', json);
+    mirrorCarryForwardToSheet_(ctx, 'PREV_CYCLE_STATE_JSON', json, snapshot.cycle);  // engine.122 layer 2
     Logger.log('savePreviousCycleState_: Saved ' + json.length + ' bytes for cycle ' + snapshot.cycle);
   } catch (e) {
     Logger.log('savePreviousCycleState_: Failed - ' + e.message);

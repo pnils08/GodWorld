@@ -19,9 +19,9 @@ pointers:
 
 # Lore Canon-Ingest Pipeline Plan
 
-**Goal:** After a lore-writer piece is generated and graded pass/fail, ingest it (and its grounding source article) into the correct store with clean naming, tagging, and no duplicates — pass results become canon in NotebookLM, fail results stay in an audit trail and never touch canon.
+**Goal:** After a lore-writer piece is generated and graded pass/fail, ingest it into both canon stores with clean naming, tagging, and no duplicates, mirroring exactly how a published edition already gets ingested — pass results become canon in NotebookLM AND searchable in bay-tribune; fail results stay in a local audit trail and never touch either store.
 
-**Architecture:** Extends pipeline.56 (`docs/plans/2026-08-15-lore-writer.md`) past generation into verification and ingest. Reuses two pieces of existing infrastructure instead of building new ones: `scripts/notebooklmPush.js` (already a general-purpose "push a file into the GodWorld NotebookLM notebook" bridge, used today for editions) becomes the ingest mechanism for passed lore; `scripts/notebooklmCanonSourcesValidate.js` + `scripts/notebooklmCanonSources.json` (already an allowlist-based source-inventory validator) gets a new bucket for lore sources so dedup/format hygiene is enforced the same way it already is for published editions. The pass/fail judgment itself stays on the Claude/Rhea side per the existing lore-writer spec ("Nothing moves out of quarantine without Rhea passing and me reading it") — never handed to agy, per the goal-substitution finding in `MODEL_HIERARCHY.md`.
+**Architecture:** Extends pipeline.56 (`docs/plans/2026-08-15-lore-writer.md`) past generation into verification and ingest. Reuses infrastructure that already does this for editions instead of building new pipes: `/post-publish` already runs `ingestEdition.js` (→ bay-tribune, Step 1b) and `notebooklmPush.js` (→ NotebookLM, Step 1c) in parallel for every published edition (`.claude/skills/post-publish/SKILL.md`) — a passed lore piece gets the same dual treatment, just triggered from the lore gate instead of the edition cycle. `scripts/notebooklmCanonSourcesValidate.js` + `scripts/notebooklmCanonSources.json` (already an allowlist-based source-inventory validator) gets a new bucket for lore sources so dedup/format hygiene is enforced the same way it already is for published editions. The pass/fail judgment itself stays on the Claude/Rhea side per the existing lore-writer spec ("Nothing moves out of quarantine without Rhea passing and me reading it") — never handed to agy, per the goal-substitution finding in `MODEL_HIERARCHY.md`.
 
 **Terminal:** research-build (design + wiring) / engine-sheet (if any schema/cron change is needed)
 
@@ -31,8 +31,8 @@ pointers:
 - Research basis: session transcript S377 (Mike-direct pipeline description + Q&A on RAG target)
 
 **Acceptance criteria:**
-1. A passed lore piece lands as a NotebookLM source in the GodWorld notebook (`config/notebooklm.json` → `notebookId`), titled and tagged so it's identifiable as lore, not an edition.
-2. A failed lore piece never reaches NotebookLM — it's recorded in a local rejection log instead, with the reason it failed.
+1. A passed lore piece lands as a NotebookLM source in the GodWorld notebook (`config/notebooklm.json` → `notebookId`) AND as a bay-tribune Supermemory record, both titled/tagged so they're identifiable as lore, not an edition — matching the dual-ingest editions already get.
+2. A failed lore piece never reaches NotebookLM or bay-tribune — it's recorded in a local rejection log instead, with the reason it failed.
 3. `notebooklmCanonSourcesValidate.js` recognizes lore-sourced entries as their own bucket and can report duplicates or policy violations among them, same as it already does for published sources.
 4. The pass/fail judgment call is never delegated to agy at any point in the pipeline — verified by reading the actual wiring, not assumed.
 
@@ -51,14 +51,18 @@ pointers:
 - **Verify:** `node scripts/notebooklmCanonSourcesValidate.js` → runs clean, new bucket shows 0 entries, no errors.
 - **Status:** [ ] not started
 
-### Task 2: Make `notebooklmPush.js` usable for a non-edition source
+### Task 2: Make the push/ingest scripts usable for a non-edition (lore) source
+
+Editions already go to BOTH stores in parallel today (`/post-publish` Step 1b `ingestEdition.js` → bay-tribune, Step 1c `notebooklmPush.js` → NotebookLM — confirmed in `.claude/skills/post-publish/SKILL.md`). A passed lore piece should mirror that same dual-ingest, not just the NotebookLM half — otherwise lore is invisible to bay-tribune search (sift, future desk lookups) even though it's real canon.
 
 - **Files:**
   - `scripts/notebooklmPush.js` — modify
+  - `scripts/ingestEdition.js` — modify
 - **Steps:**
-  1. Confirm `--cycle <N>` is actually required for a non-audio push (read the `degrade()` calls and `parseArgs` around line 43-52) — if it's only used for audio-overview + Drive-dest naming, add a `--kind lore` flag that skips the cycle requirement and titles the source `Lore: <slug> (Y<n>C<m>)` instead of the edition title format.
-  2. Confirm `--no-audio` (or equivalent) suppresses the audio-overview branch entirely for lore pushes — lore pieces don't need an audio deep-dive by default.
-- **Verify:** `node scripts/notebooklmPush.js --file output/lore-quarantine/POP-00131-lorenzo-jordan.md --kind lore --no-audio` (dry-run flag if the script supports one, otherwise confirm against a disposable test notebook first — do NOT test against the live GodWorld notebook without a dry-run path) → source added, no audio job kicked off.
+  1. `notebooklmPush.js`: confirm `--cycle <N>` is actually required for a non-audio push (read the `degrade()` calls and `parseArgs` around line 43-52) — if it's only used for audio-overview + Drive-dest naming, add a `--kind lore` flag that skips the cycle requirement and titles the source `Lore: <slug> (Y<n>C<m>)` instead of the edition title format.
+  2. `notebooklmPush.js`: confirm `--no-audio` (or equivalent) suppresses the audio-overview branch entirely — lore pieces don't need an audio deep-dive by default.
+  3. `ingestEdition.js`: add `lore` to `ALLOWED_TYPES` (currently `edition|interview|supplemental|dispatch|interview-transcript`, line ~17) so a lore file can be ingested into bay-tribune the same way non-edition types already are, `--cycle` supplied from the piece's own `Y<n>C<m>` tag.
+- **Verify:** `node scripts/notebooklmPush.js --file output/lore-quarantine/POP-00131-lorenzo-jordan.md --kind lore --no-audio` and `node scripts/ingestEdition.js output/lore-quarantine/POP-00131-lorenzo-jordan.md --type lore --cycle 103 --dry-run` → both accept the file without erroring on type/flag validation. Confirm against a disposable test notebook/container first, not the live GodWorld notebook or live bay-tribune container, until the dry-run path is proven.
 - **Status:** [ ] not started
 
 ### Task 3: Wire the pass/fail branch
@@ -66,9 +70,9 @@ pointers:
 - **Files:**
   - New: a thin orchestration script or a `/lore-ingest` skill step (name TBD at implementation time) that: reads a quarantine file, runs it through the existing Rhea review pattern, and branches.
 - **Steps:**
-  1. On PASS: call `notebooklmPush.js --file <path> --kind lore --no-audio`; record the resulting source id back into `notebooklmCanonSources.json`'s new `allowedLoreSourceIds` bucket (Task 1).
-  2. On FAIL: append to `output/lore-quarantine/_rejected.log` (new file, plain text or JSON lines) with the file path, timestamp, and the specific failure reason from Rhea — never call the NotebookLM push path.
-- **Verify:** run once against `output/lore-quarantine/vinnie_keane_farewell_long.md` (already passed the Vinnie test manually) and confirm the PASS branch fires; run once against a deliberately broken fixture (invented spouse) and confirm it lands in `_rejected.log`, not NotebookLM.
+  1. On PASS: call `notebooklmPush.js --file <path> --kind lore --no-audio` AND `ingestEdition.js <path> --type lore --cycle <N>` — both stores, matching the edition pattern exactly. Record the resulting source id back into `notebooklmCanonSources.json`'s new `allowedLoreSourceIds` bucket (Task 1).
+  2. On FAIL: append to `output/lore-quarantine/_rejected.log` (new file, plain text or JSON lines) with the file path, timestamp, and the specific failure reason from Rhea — never call either ingest path.
+- **Verify:** run once against `output/lore-quarantine/vinnie_keane_farewell_long.md` (already passed the Vinnie test manually) and confirm BOTH the NotebookLM and bay-tribune branches fire; run once against a deliberately broken fixture (invented spouse) and confirm it lands only in `_rejected.log`, never in either store.
 - **Status:** [ ] not started
 
 ### Task 4: Enforce the model-tiering rule at the dispatch level
@@ -82,14 +86,18 @@ pointers:
 
 ---
 
-## Open questions
+## Open questions — RESOLVED (S382, research-build)
 
-- [ ] **Cadence** — Mike described "run the tests again now and then," which is deliberately not a fixed schedule. Blocks: whether Task 3's orchestration is cron-fired or stays a manual/dispatched trigger. Recommend starting manual (dispatched by research-build when there's something worth testing) and only cron it later if the manual cadence proves too infrequent — matches the "don't build ahead of demonstrated need" default.
-- [ ] **Failed-lore retention** — this plan defaults fail results to a local log file, never NotebookLM. Reason is mechanism, not just missing policy: NotebookLM structurally cannot invent canon (per `project_canon-authority-model` — it has no generative freedom outside its ingested sources), which is exactly why it also cannot catch a *bad* source once ingested — it treats everything in its corpus as ground truth, permanently, by design. There is no review step after ingestion and nothing downstream that would ever flag a failed piece once it's in. The entire safety burden sits on the pre-ingestion gate; a failed piece must never cross it. Confirm this default before Task 3 ships — if Mike wants failed lore visible somewhere richer than a log (a review queue, a Drive folder), that changes Task 3's shape, but it must still stay outside NotebookLM.
-- [ ] **`--kind lore` vs. a genuinely separate script** — Task 2 assumes extending `notebooklmPush.js` is cleaner than forking a parallel script. If the `--cycle`-required logic turns out to be load-bearing in more places than expected (Task 2 step 1's read), a small dedicated `pushLoreToNotebook.js` wrapping the same `nlm` calls might be safer than branching the edition-critical path. Decide after Task 2's read, not before.
+- [x] **Cadence** — manual/dispatched, per the plan's own recommendation (matches "don't build ahead of demonstrated need"). Cron later only if manual cadence proves too infrequent.
+- [x] **Failed-lore retention** — local log only, never NotebookLM. Default confirmed as stated: NotebookLM has no post-ingestion review step, so the entire safety burden sits on the pre-ingestion gate.
+- [x] **`--kind lore` vs. a separate script** — read `scripts/notebooklmPush.js`: `--cycle` is used only for the required-arg check (line 51-52), the title string (line 123), and the audio-branch focus/path naming (lines 143/150/238) — no structural logic depends on it. Extending with `--kind lore` (skip cycle requirement, alternate title format) is safe; no separate script needed.
+
+Plan is unblocked. Dispatching Tasks 1-4 to engine-sheet for execution.
 
 ---
 
 ## Changelog
 
 - 2026-08-17 — Initial draft (S377, research-build). Not yet executed — plan only, pending Mike's confirmation on the two open questions above.
+- 2026-08-17 — Added the bay-tribune leg (Mike caught it): editions already dual-ingest to NotebookLM + bay-tribune via `/post-publish`; lore now mirrors that instead of NotebookLM-only.
+- 2026-08-20 — All 3 open questions resolved by research-build (code read + plan's own stated defaults, no live Mike decision needed). Dispatched to engine-sheet.

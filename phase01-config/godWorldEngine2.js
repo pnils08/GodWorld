@@ -257,14 +257,15 @@ function runWorldCycle() {
   // PHASE 1: CORE TIME + CONFIG
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase1-LoadConfig', function() { loadConfig_(ctx); });
+  // engine.122: UNWRAPPED — missing carry-forward past cycle 1 aborts the run
+  // BEFORE AdvanceTime queues the counter bump (abort = zero writes; skips
+  // dry-run/replay internally; see loadPreviousEvening.js).
+  assertCarryForwardPresent_(ctx);
   safePhaseCall_(ctx, 'Phase1-CanonHoods', function() { loadCanonNeighborhoods_(ctx); });  // engine.99 — ADR-0016 canonical hood set from Neighborhood_Map
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
   safePhaseCall_(ctx, 'Phase1-SeedRng', function() { initializeSeededRng_(ctx); });  // after AdvanceTime so seed = real cycleId (fixes dry-run seed-1 too; replay keeps its stored seed)
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
-  // engine.122: UNWRAPPED — missing carry-forward past cycle 1 aborts the run
-  // (skips dry-run/replay internally; see loadPreviousEvening.js).
-  assertCarryForwardPresent_(ctx);
   safePhaseCall_(ctx, 'Phase1-PrevEvening', function() { loadPreviousEvening_(ctx); });
   safePhaseCall_(ctx, 'Phase1-PrevCycleState', function() { loadPreviousCycleState_(ctx); });
 
@@ -1855,15 +1856,18 @@ function runCyclePhases_(ctx) {
   // PHASE 1: CORE TIME + CONFIG
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase1-LoadConfig', function() { loadConfig_(ctx); });
+  // engine.122: UNWRAPPED on purpose — a cycle past 1 with no carry-forward in
+  // any layer must ABORT (throw reaches the fatal handler; safePhaseCall_
+  // would swallow it into a log line). MUST run before Phase1-AdvanceTime:
+  // AdvanceTime queues the cycleCount/lastRun bump into the cache, and the
+  // finally-block flush would commit it even on an aborted run. Here the
+  // queue is empty, so an abort leaves the world byte-identical.
+  assertCarryForwardPresent_(ctx);
   safePhaseCall_(ctx, 'Phase1-CanonHoods', function() { loadCanonNeighborhoods_(ctx); });  // engine.99 — ADR-0016 canonical hood set from Neighborhood_Map
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
   safePhaseCall_(ctx, 'Phase1-SeedRng', function() { initializeSeededRng_(ctx); });  // after AdvanceTime so seed = real cycleId, not the pre-config fallback 1
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
-  // engine.122: UNWRAPPED on purpose — a cycle past 1 with no carry-forward in
-  // any layer must ABORT (throw reaches the fatal handler), never run without
-  // yesterday. safePhaseCall_ would swallow the throw into a log line.
-  assertCarryForwardPresent_(ctx);
   safePhaseCall_(ctx, 'Phase1-PrevEvening', function() { loadPreviousEvening_(ctx); });
   safePhaseCall_(ctx, 'Phase1-PrevCycleState', function() { loadPreviousCycleState_(ctx); });
 

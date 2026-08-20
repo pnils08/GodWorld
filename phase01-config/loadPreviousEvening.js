@@ -99,16 +99,22 @@ function loadCarryForwardBlob_(ctx, key) {
 
 /**
  * Hard gate: past cycle 1, a cycle MUST see the previous cycle's memory in at
- * least one layer, or the run aborts before any world mutation. Called
- * UNWRAPPED (not via safePhaseCall_) so the throw reaches the fatal handler.
- * Skips: dry-run, replay, cycle <= 1. One-shot operator override for a
+ * least one layer, or the run aborts. Called UNWRAPPED (not via
+ * safePhaseCall_) so the throw reaches the fatal handler, and placed
+ * IMMEDIATELY after Phase1-LoadConfig — before AdvanceTime queues the
+ * cycleCount/lastRun bump — so an abort leaves ZERO writes queued (the
+ * finally-block cache flush would otherwise commit the counter bump of a
+ * run that never happened). Reads ctx.config.cycleCount (last completed
+ * cycle), which LoadConfig has just populated.
+ * Skips: dry-run, replay, cycleCount < 1. One-shot operator override for a
  * legitimate cold start (fresh bench, S328): set script property
  * CARRY_FORWARD_COLD_START_OK=1 — consumed on use.
  */
 function assertCarryForwardPresent_(ctx) {
   if (ctx.mode && (ctx.mode.dryRun || ctx.mode.replay)) return;
-  var cycleId = (ctx.summary && ctx.summary.cycleId) || 0;
-  if (cycleId <= 1) return;
+  var lastCycle = Number(ctx.config && ctx.config.cycleCount) || 0;
+  if (lastCycle < 1) return;
+  var cycleId = lastCycle + 1;  // the cycle this run is about to produce
   var props = PropertiesService.getScriptProperties();
   var override = props.getProperty('CARRY_FORWARD_COLD_START_OK');
   if (override) {

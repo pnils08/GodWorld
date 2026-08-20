@@ -49,7 +49,7 @@ pointers:
   1. Add the new key to the JSON policy file, empty array (nothing ingested yet).
   2. Add the matching entry to `BUCKETS` in the validator so it classifies and reports on that bucket the same way it does `published`/`canon-reference`/`excluded`.
 - **Verify:** `node scripts/notebooklmCanonSourcesValidate.js` → runs clean, new bucket shows 0 entries, no errors.
-- **Status:** [ ] not started
+- **Status:** [x] done 2026-08-20 (engine-sheet). `allowedLoreSourceIds: []` in the policy JSON, `allowedLoreSourceIds: 'lore'` in `BUCKETS`. Verified via `node scripts/notebooklmCanonSourcesValidate.test.js` → PASS with `counts.lore === 0`; the fixture in that test also needed the new key, since the bucket is required (fail-closed) and a missing key throws. The plan's live-inventory verify could not run as written — `output/codex/notebooklm-source-inventory.json` does not exist, so the validator's default path fails on a baseline checkout too. Regen + live validate is Task 3's post-pass step.
 
 ### Task 2: Make the push/ingest scripts usable for a non-edition (lore) source
 
@@ -73,7 +73,7 @@ Editions already go to BOTH stores in parallel today (`/post-publish` Step 1b `i
   1. On PASS: call `notebooklmPush.js --file <path> --kind lore --no-audio` AND `ingestEdition.js <path> --type lore --cycle <N>` — both stores, matching the edition pattern exactly. Record the resulting source id back into `notebooklmCanonSources.json`'s new `allowedLoreSourceIds` bucket (Task 1).
   2. On FAIL: append to `output/lore-quarantine/_rejected.log` (new file, plain text or JSON lines) with the file path, timestamp, and the specific failure reason from Rhea — never call either ingest path.
 - **Verify:** run once against `output/lore-quarantine/vinnie_keane_farewell_long.md` (already passed the Vinnie test manually) and confirm BOTH the NotebookLM and bay-tribune branches fire; run once against a deliberately broken fixture (invented spouse) and confirm it lands only in `_rejected.log`, never in either store.
-- **Status:** [ ] not started
+- **Status:** [x] done 2026-08-20 (engine-sheet). Split in two so grading can never fall to a script: `scripts/loreIngest.js` executes the mechanical branch from a verdict it is GIVEN, and `.claude/skills/lore-ingest/SKILL.md` is the Rhea/Claude front-end that produces the verdict. Fail branch verified with a deliberately-broken fixture (invented spouse + two children for POP-00132, who is `SpouseId: null, ChildrenIds: []`) → landed in `_rejected.log` only, neither store called. Fixture was kept OUT of `output/lore-quarantine/` so fabricated canon never sits in the real quarantine dir. Policy recording writes BOTH the bucket id and a `decisions` entry — bucket-only would break the fail-closed validator, which the plan's step 1 did not account for. `notebooklmPush.js` is non-blocking by contract (exits 0 on failure), so the pass branch reads the degrade line rather than the exit code before recording anything.
 
 ### Task 4: Enforce the model-tiering rule at the dispatch level
 
@@ -82,7 +82,7 @@ Editions already go to BOTH stores in parallel today (`/post-publish` Step 1b `i
 - **Steps:**
   1. Document in the Task 3 script/skill header, explicitly: "grading is never delegated to agy — Rhea/Claude only." One-line comment, not a new doc.
 - **Verify:** grep the Task 3 implementation for any agy/tmux dispatch inside the grading branch — should return nothing.
-- **Status:** [ ] not started
+- **Status:** [x] done 2026-08-20 (engine-sheet). Comment at `scripts/loreIngest.js` header. `grep -n "agy\|tmux\|antigravity\|send-keys" scripts/loreIngest.js` returns the documenting comment and nothing else — no dispatch mechanism exists in the file. The structural guarantee is stronger than the comment: the script has no grading code path at all, so there is nothing to delegate.
 
 ---
 
@@ -101,3 +101,4 @@ Plan is unblocked. Dispatching Tasks 1-4 to engine-sheet for execution.
 - 2026-08-17 — Initial draft (S377, research-build). Not yet executed — plan only, pending Mike's confirmation on the two open questions above.
 - 2026-08-17 — Added the bay-tribune leg (Mike caught it): editions already dual-ingest to NotebookLM + bay-tribune via `/post-publish`; lore now mirrors that instead of NotebookLM-only.
 - 2026-08-20 — All 3 open questions resolved by research-build (code read + plan's own stated defaults, no live Mike decision needed). Dispatched to engine-sheet.
+- 2026-08-20 — Tasks 1–4 built and verified by engine-sheet. See each task's Status line for what the plan did not anticipate. Live promotion of the three quarantine fixtures runs through `/lore-ingest` per verdict.

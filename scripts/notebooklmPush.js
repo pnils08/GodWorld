@@ -16,6 +16,14 @@
  *
  * Usage:
  *   node scripts/notebooklmPush.js --file editions/foo_c101.txt --cycle 101 [--audio] [--no-summary]
+ *   node scripts/notebooklmPush.js --file output/lore-quarantine/foo.md --kind lore --tag Y2C103 --no-audio
+ *
+ * --kind lore (pipeline.59): a graded lore piece is not cycle-scoped the way an
+ * edition is, so --cycle is not required — the piece's own Y<n>C<m> tag carries
+ * the placement and titles the source `Lore: <slug> (Y<n>C<m>)`. Audio is always
+ * off for lore (the overview focus/path are cycle-named) and the notebook summary
+ * is opt-in rather than default-on, writing to a slug-named path so a lore push
+ * can never overwrite an edition's output/nlm_summary_c<N>.md.
  *
  * Config: config/notebooklm.json { profile, notebookId, driveDest, audioFormat }
  * Plan: docs/plans/2026-07-10-notebooklm-bridge-deploy.md
@@ -40,19 +48,67 @@ function degrade(reason) {
   process.exit(0);
 }
 
+const KINDS = ['edition', 'lore'];
+
 function parseArgs(argv) {
-  const args = { audio: false, summary: true };
+  const args = { kind: 'edition', audio: false, dryRun: false };
+  let summary = null; // resolved per-kind below when neither flag is passed
   for (let i = 2; i < argv.length; i++) {
     if (argv[i] === '--file') args.file = argv[++i];
     else if (argv[i] === '--cycle') args.cycle = argv[++i];
+    else if (argv[i] === '--kind') args.kind = argv[++i];
+    else if (argv[i] === '--tag') args.tag = argv[++i];
     else if (argv[i] === '--audio') args.audio = true;
-    else if (argv[i] === '--no-summary') args.summary = false;
+    else if (argv[i] === '--no-audio') args.audio = false;
+    else if (argv[i] === '--summary') summary = true;
+    else if (argv[i] === '--no-summary') summary = false;
+    else if (argv[i] === '--dry-run') args.dryRun = true;
   }
-  if (!args.file || !args.cycle) {
-    console.error('Usage: node scripts/notebooklmPush.js --file <path> --cycle <N> [--audio] [--no-summary]');
+  const usage = 'Usage: node scripts/notebooklmPush.js --file <path> {--cycle <N> | --kind lore --tag Y<n>C<m>} [--audio|--no-audio] [--summary|--no-summary] [--dry-run]';
+  if (KINDS.indexOf(args.kind) === -1) {
+    console.error('--kind must be one of: ' + KINDS.join(', '));
+    process.exit(1);
+  }
+  if (!args.file) {
+    console.error(usage);
     process.exit(1); // usage errors DO exit non-zero — only runtime bridge failures degrade
   }
+  if (args.kind === 'lore') {
+    // A lore piece names its own cycle placement; --cycle carries no meaning here.
+    // --tag is authoritative and comes from the grading step — a lore piece
+    // legitimately mentions several cycles in its body, so a content scan is a
+    // warned last resort, never the primary source.
+    if (!args.tag) args.tag = scanTag(args.file);
+    if (!args.tag) {
+      console.error('--kind lore requires --tag Y<n>C<m> (no Y<n>C<m> found in the file either)');
+      process.exit(1);
+    }
+    if (!/^Y\d+C\d+$/.test(args.tag)) {
+      console.error('--tag must be Y<n>C<m> form, got: ' + args.tag);
+      process.exit(1);
+    }
+    args.audio = false; // audio focus + download path are cycle-named; lore has no cycle
+    args.summary = summary === true;
+  } else {
+    if (!args.cycle) {
+      console.error(usage);
+      process.exit(1);
+    }
+    args.summary = summary !== false;
+  }
   return args;
+}
+
+// Warned fallback only — see parseArgs. Returns the first Y<n>C<m> in the file.
+function scanTag(file) {
+  try {
+    const m = fs.readFileSync(file, 'utf-8').match(/Y\d+C\d+/);
+    if (!m) return null;
+    console.log('WARNING: --tag not supplied; using first Y<n>C<m> found in the file: ' + m[0]);
+    return m[0];
+  } catch (_) {
+    return null;
+  }
 }
 
 function nlm(cliArgs, opts) {
@@ -120,7 +176,18 @@ async function main() {
   if (!config.notebookId) degrade('config has no notebookId');
 
   const baseName = path.basename(args.file, path.extname(args.file));
-  const title = 'C' + args.cycle + ' — ' + baseName;
+  const title = args.kind === 'lore'
+    ? 'Lore: ' + baseName + ' (' + args.tag + ')'
+    : 'C' + args.cycle + ' — ' + baseName;
+
+  if (args.dryRun) {
+    console.log('[DRY] Would add source to notebook ' + config.notebookId);
+    console.log('[DRY]   title: ' + title);
+    console.log('[DRY]   file:  ' + args.file);
+    console.log('[DRY]   audio: ' + args.audio + ', summary: ' + args.summary);
+    console.log('NotebookLM push DRY RUN complete (' + args.kind + ')');
+    return;
+  }
 
   // 1. Source add
   const add = nlm(['source', 'add', config.notebookId, '--file', args.file, '--title', title, '--wait']);
@@ -177,13 +244,16 @@ async function main() {
     if (!q.ok) {
       console.log('NOTEBOOKLM SUMMARY SKIPPED (non-blocking): ' + q.out.slice(0, 300));
     } else {
-      const summaryPath = path.join(ROOT, 'output', 'nlm_summary_c' + args.cycle + '.md');
-      fs.writeFileSync(summaryPath, '# NotebookLM summary — C' + args.cycle + '\n\n' + q.out + '\n');
+      const summaryLabel = args.kind === 'lore' ? args.tag + ' lore — ' + baseName : 'C' + args.cycle;
+      const summaryPath = args.kind === 'lore'
+        ? path.join(ROOT, 'output', 'nlm_summary_lore_' + baseName + '.md')
+        : path.join(ROOT, 'output', 'nlm_summary_c' + args.cycle + '.md');
+      fs.writeFileSync(summaryPath, '# NotebookLM summary — ' + summaryLabel + '\n\n' + q.out + '\n');
       console.log('Summary saved: ' + summaryPath);
     }
   }
 
-  console.log('NotebookLM push complete for C' + args.cycle);
+  console.log('NotebookLM push complete for ' + (args.kind === 'lore' ? 'lore ' + args.tag + ' — ' + baseName : 'C' + args.cycle));
 }
 
 async function sendDiscordText(content) {

@@ -14,7 +14,7 @@
  *   node scripts/ingestEdition.js editions/cycle_pulse_interview-transcript_92_santana.txt --type interview-transcript --cycle 92
  *
  * Flags:
- *   --type {edition|interview|supplemental|dispatch|interview-transcript}
+ *   --type {edition|interview|supplemental|dispatch|interview-transcript|lore}
  *           Default: edition. Plumbed into bay-tribune metadata for retrieval filtering.
  *   --cycle N
  *           Overrides cycle extraction from filename/content. Required when --type ≠ edition
@@ -39,7 +39,9 @@ var CONTAINER_TAG = 'bay-tribune';
 var API_HOST = 'api.supermemory.ai';
 var MAX_CHUNK_SIZE = 40000; // Supermemory doc limit safety margin
 
-var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
+// 'lore' (pipeline.59) — a graded deep-background piece; --cycle comes from the
+// piece's own Y<n>C<m> tag, same as every other non-edition type.
+var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript', 'lore'];
 
 var DRY_RUN = process.argv.includes('--dry-run');
 var NO_STRIP = process.argv.includes('--no-strip');

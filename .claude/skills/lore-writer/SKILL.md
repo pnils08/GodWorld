@@ -42,7 +42,7 @@ Default to **Gemini 3.7 Flash (high)** — verified 2026-08-17 to score higher t
 
 ## Gate before anything leaves quarantine
 
-Nothing promotes without: (1) the Vinnie regression test — a deep-dive on POP-00001 must render him as the DH / Oakland A's legend in Rockridge, married to Amara Keane, the exact fact the ungrounded baseline got wrong; (2) a Rhea pass; (3) research-build reading it. Promotion beyond quarantine (`docs/entities/`, NotebookLM) is manual, gated, never automatic — full ingest design (draft, unbuilt) is `docs/plans/2026-08-17-lore-canon-ingest-pipeline.md` (pipeline.59).
+Nothing promotes without: (1) the Vinnie regression test — a deep-dive on POP-00001 must render him as the DH / Oakland A's legend in Rockridge, married to Amara Keane, the exact fact the ungrounded baseline got wrong; (2) a Rhea pass; (3) research-build reading it. Promotion beyond quarantine is manual, gated, never automatic — it runs through `/lore-ingest` (`.claude/skills/lore-ingest/SKILL.md`, pipeline.59, built 2026-08-20): a Rhea pass sends the piece to BOTH NotebookLM and bay-tribune, a fail sends it to `output/lore-quarantine/_rejected.log` and nowhere else. Design doc: `docs/plans/2026-08-17-lore-canon-ingest-pipeline.md`.
 
 ## Full spec
 

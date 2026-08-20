@@ -19,6 +19,7 @@ function fixture() {
     allowedPublishedSourceIds: ['NONCANON_TEST_PUBLISHED'],
     allowedCanonReferenceSourceIds: ['NONCANON_TEST_REFERENCE'],
     excludedSourceIds: ['NONCANON_TEST_EXCLUDED'],
+    allowedLoreSourceIds: [],
     decisions: {
       NONCANON_TEST_PUBLISHED: {
         title: 'NONCANON_TEST Edition',
@@ -52,6 +53,7 @@ function testValidPolicy() {
     published: 1,
     'canon-reference': 1,
     excluded: 1,
+    lore: 0,
   });
 }
 

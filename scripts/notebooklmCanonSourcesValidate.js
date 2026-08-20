@@ -12,6 +12,9 @@ const BUCKETS = {
   allowedPublishedSourceIds: 'published',
   allowedCanonReferenceSourceIds: 'canon-reference',
   excludedSourceIds: 'excluded',
+  // pipeline.59 — graded lore pieces get their own bucket so dedup/format
+  // hygiene is enforced on them exactly as it is on published editions.
+  allowedLoreSourceIds: 'lore',
 };
 
 function parseArgs(argv) {

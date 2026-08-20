@@ -154,7 +154,11 @@ function main() {
   // notebooklmPush is non-blocking by contract — it exits 0 even when the push
   // failed. Read the degrade line, not the exit code, before recording a source.
   const degraded = /NOTEBOOKLM PUSH FAILED \(non-blocking\)/.test(push.out);
-  const idMatch = push.out.match(/Source added: .*?\(([^)]+)\)/);
+  // Greedy, anchored to end-of-line: the push line is
+  //   Source added: Lore: <slug> (Y<n>C<m>) (<source id>)
+  // so a lazy match would capture the cycle tag as the source id and write it
+  // into the fail-closed policy. Caught by the disposable-notebook smoke.
+  const idMatch = push.out.match(/Source added: .*\(([^)]+)\)\s*$/m);
 
   if (args.dryRun) {
     console.log('\n[DRY] Would record source id for "' + expectedTitle + '" in allowedLoreSourceIds');

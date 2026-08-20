@@ -58,6 +58,7 @@ function parseArgs(argv) {
     else if (argv[i] === '--cycle') args.cycle = argv[++i];
     else if (argv[i] === '--kind') args.kind = argv[++i];
     else if (argv[i] === '--tag') args.tag = argv[++i];
+    else if (argv[i] === '--notebook') args.notebook = argv[++i]; // disposable-notebook smoke target
     else if (argv[i] === '--audio') args.audio = true;
     else if (argv[i] === '--no-audio') args.audio = false;
     else if (argv[i] === '--summary') summary = true;
@@ -173,6 +174,7 @@ async function main() {
   } catch (e) {
     degrade('config parse error: ' + e.message);
   }
+  if (args.notebook) config.notebookId = args.notebook;
   if (!config.notebookId) degrade('config has no notebookId');
 
   const baseName = path.basename(args.file, path.extname(args.file));

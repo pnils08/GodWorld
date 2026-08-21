@@ -203,6 +203,27 @@ Rhea still grades against `reviewProfile.canonBlockers` injected in `scripts/cro
 - **Verify:** Jax Article with an in-world named bar + INTAKE BIZ does not fail Rhea for "fabricated named business." Carmen/Luis Article that infers an office relationship without inventing a vote still passes. Same Article inventing a 5–3 tally not in the Packet still fails. Real-world BART/Ogawa still fail.
 - **Status:** [ ] not started — Claude / research-build after Task 10 (or in parallel if 18:15 is already flagging picture desks on SET).
 
+#### The gate axis — governing rule (builder-direct, 2026-08-21)
+
+Task 11 is the first case of a general law. State the law, not the case:
+
+> **The gate is "is this a real-world Oakland entity," not "is this entity on the ledger."**
+>
+> A named entity that is not on the ledger and is not real-world Oakland is **not a violation — it is intake.** The reporter naming it is the sim working. A reporter who names their favourite bar has told us that bar exists; a reporter who cites the man he always sees there has told us that man exists. The bar is minted to the business ledger and can hire. The man is an untracked Tier-5 who can be promoted. Ledger membership is the *outcome* of the citation, never its precondition.
+>
+> What still fails: a real-world Oakland establishment, person, or landmark. Invented words in the mouth of a **tracked** citizen. Invented Packet numbers, votes, money, or phases.
+>
+> The boundary that keeps this safe: a **novel or unnamed** speaker is legal texture and generates intake; a **named tracked** citizen stays Packet-bound. Otherwise "a longtime council staffer told me" becomes a laundering route for invented quotes attributed to real citizens. Rhea's retuned job is to check that a novel entity is not a disguised real citizen or a real-world import — not to ask whether it is already on a sheet.
+
+**Where this actually bites — verified 2026-08-21, do not re-derive:**
+
+- **The deterministic S344 walls are already on this axis.** They enforce a real-world denylist (BART, Frank Ogawa, blight imports, repair chrome) plus unsupplied *access*, not ledger membership. Task 6's "derive the named-entity allowlist from the Packet" was specified but did not land as an allowlist, which is fortunate — an allowlist would have been the wrong axis. Proven by direct run: a civic Article naming "Tina's Bar" with an unnamed speaker at the bar and a real Packet quote returns `fail=false, findings: (none)`. **The deterministic layer does not block the mint. Do not "fix" it toward Packet membership.**
+- **Rhea is where the colour dies.** Per-seat `reviewProfile.canonBlockers` in `scripts/newsroom-wake-packages.json` still forbid a fabricated named business on the Jax seat, whose `authorizedTexture` simultaneously names BART — inverted on both halves. That is the Task 11 fix.
+- **The mint machinery is built and live, not missing.** Unknown intake names route to `Generic_Citizens` (`phase01-config/godWorldEngine2.js:1262-1285`, engine.58/S320) and promote to full ledger rows at `EmergenceCount` ≥ threshold via `checkEmergencePromotions_` (`phase05-citizens/processAdvancementIntake.js:147-152`) — the lottery. New businesses append to `Business_Ledger` seeded economically alive so a mint can hire from birth (`scripts/ingestPublishedEntities.js`, S336). Collision is handled: businesses dedup by ID-else-name, ambiguous citizens log rather than write.
+- **Two wiring breaks stop the loop, both outside the wake pipeline.** (1) `cron-saturday-run.js` `stepPublish` no longer emits `NAMES INDEX`, `BUSINESSES NAMED`, or `ARTICLE TABLE` — the exact sections `ingestPublishedEntities.js` parses. Verified: c103 carries 0 of each where e99 and e102 carry all three, and a dry run against c103 returns 0 mints and "no ARTICLE TABLE found". (2) `ingestPublishedEntities.js` is never called by the Saturday cron — line 837 prints a reminder to run it by hand. Fixing (1) means regenerating those sections in `stepPublish` from the `byStem` staged sidecars already in scope, which preserves the intake script's verified parse contract.
+
+Sequencing: (1) and (2) are Saturday-run scope, orthogonal to the wake pipeline, and can land before the next Saturday 16:00 compile without disturbing Task 10. The Rhea retune waits for Task 10 to close. The observation still pays under this direction — it tests real-world imports, invented Packet quotes, and template shape, all of which the law above keeps.
+
 #### Pre-fire review record (engine-sheet, 2026-08-21)
 
 Tasks 1–9 reviewed at the console before the first live fire. Findings are recorded here so tomorrow's observation is scored against a stated baseline rather than re-derived.
@@ -275,3 +296,4 @@ frozen** — the parked further-loosening stays parked until Task 10 closes.
 - 2026-08-21 (grok) — Allotted hallucination lock: Packet is data, not the picture. In-world named spots (Tina's bar) mint via INTAKE BIZ. Wall is real Oakland, fake numbers, fake Packet quotes. Tanya files from the clubhouse; Jax opens in an in-world place not BART. Writer hygiene + Tanya slice/package updated. No crontab.
 - 2026-08-21 (grok) — Task 11 filed for Claude: Rhea not yet fixed except Tanya blockers. Jax reviewProfile still forbids fabricated named business and still authorizes BART. Civic Rhea stays fact-desk; allotted civic texture is office relationships (who gets along), not invented bars or votes. IND not a bloc.
 - 2026-08-21 (engine-sheet) — Reconciled the matcher-version contradiction between `22a06b65` (park) and `adaa6237` (land): no wake fired between the runtime land and the change, so the observation window had not opened. Baseline re-verified unchanged. Matcher frozen from 06:15.
+- 2026-08-21 (engine-sheet) — Filed the governing gate-axis law over Task 11 (builder-direct): real-world = fail, novel in-world = intake, tracked citizens stay Packet-bound. Verified the deterministic walls already hold that axis; Rhea's per-seat profiles do not. Named the two Saturday-run wiring breaks that stop the mint loop.

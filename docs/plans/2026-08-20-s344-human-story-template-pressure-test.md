@@ -21,7 +21,7 @@ pointers:
 
 **Goal:** Restore one uniform human Article shape across every scheduled desk while retaining LEP/2 as the typed sidecar and Rhea as the independent contradiction gate.
 
-**Architecture:** Mags' assignment remains immutable in §1. W1 returns a dual artifact—a human chase in the reporter's register plus a validated machine plan—and only the chase enters §2; W2 returns a citizen answer rather than assignment language in §3, and a wake with zero publishable answers fails before W3 opens; W3 fills a fixed four-part Article in §4. The Packet is the data, not the picture. Allotted hallucination is the job: Jax's bar, Tanya's clubhouse, a named in-world spot that fits the numbers. The Packet will never contain a clubhouse event — that already-canon data is what they paint from. A new in-world place ("Tina's bar is my game-day spot") is not a leak; it is INTAKE `BIZ` and mints into GodWorld. The wall is real-world Oakland (BART, Frank Ogawa, Heinold's), invented engine numbers, invented Packet quotes, and Tribune-as-actor — not "does this room already exist on a sheet." Deterministic checks enforce shape, real-world exclusion, repair-chrome exclusion, and assignment/INTAKE coherence before Rhea. The W1 three-cited-facts machine check stays in the sidecar.
+**Architecture:** Mags' assignment remains immutable in §1. W1 returns a dual artifact—a human chase in the reporter's register plus a validated machine plan—and only the chase enters §2; W2 returns a citizen answer rather than assignment language in §3, and a wake with zero publishable answers fails before W3 opens; W3 fills a fixed four-part Article in §4. The Packet is the data, not the picture. Allotted hallucination is the job: Jax's bar, Tanya's clubhouse, a named in-world spot that fits the numbers. The Packet will never contain a clubhouse event — that already-canon data is what they paint from. A new in-world place ("Tina's bar is my game-day spot") is not a leak; it is INTAKE `BIZ` and mints into GodWorld. The wall is real-world Oakland (BART, Frank Ogawa, Heinold's), invented engine numbers, invented Packet quotes, and Tribune-as-actor — not "does this room already exist on a sheet." **Desk split:** sports/culture/firebrand *paint* (Jax bar, Tanya clubhouse, named in-world `BIZ` that mints). Civic desks *report* — votes, money, phases, storylines, and the relationships between offices (who gets along, who doesn't). That interpersonal texture serves the world; invented bars and invented vote facts do not. Deterministic checks enforce shape, real-world exclusion, repair-chrome exclusion, and assignment/INTAKE coherence before Rhea. Rhea reviewProfiles are still the old Packet-exhaustive wall for most seats (Tanya's blockers were retuned; Jax/Carmen/Luis were not). The W1 three-cited-facts machine check stays in the sidecar.
 
 **Terminal:** engine-sheet
 
@@ -187,6 +187,22 @@ pointers:
 - **Verify:** two dated changelog entries name the Article paths and independent template/Rhea outcomes; no scheduler diff exists.
 - **Status:** [ ] in-progress — waiting on the next naturally scheduled write wake after `34cace97`/`cb5c20c6` (2026-08-21 18:15 CDT). Crontab was read, not rewritten.
 
+### Task 11: Retune Rhea so allotted picture is not a contradiction (hand to Claude)
+
+Rhea still grades against `reviewProfile.canonBlockers` injected in `scripts/cron-rhea-gate.js`. Writer/Tanya slice already allow the picture. Rhea will still FLAG it unless the profiles move.
+
+- **Files:**
+  - `scripts/newsroom-wake-packages.json` — modify (per-seat `reviewProfile`)
+  - `scripts/cron-rhea-gate.js` — read; change only if profile injection is not enough
+  - `scripts/newsroomWakePackages.test.js` — modify
+- **Steps:**
+  1. **Sports / culture / firebrand (picture desks).** Pass in-world SET and a newly named in-world business that is not real Oakland; require it on INTAKE `BIZ`. Still fail real-world Oakland, invented Packet people, invented quotes, invented numbers. **Jax is currently inverted:** `authorizedTexture` still names BART; `textureConditions` and `canonBlockers` still forbid a fabricated named business. That blocks "Tina's bar" — the allotted mint — and should be reversed.
+  2. **Civic desks (Carmen, Luis, civic fact-reporters).** Not much to invent. They report Packet facts (votes, money, phases) and track civic storylines. Allotted civic texture is **office relationships** — who gets along, who doesn't — as world-serving observation, not as a vote, bloc, dollar, or phase. IND remains individuals, not a bloc. Invented bars/BART/Ogawa still fail. Invented vote math still fails.
+  3. Tanya's `canonBlockers` were already retuned in `9a15ea30`. Do not revert. Do not treat her clubhouse SET as a Rhea fail.
+  4. A Rhea PASS still cannot override a deterministic template/real-world fail. After Task 10 observation, land this before the next write wake if 18:15 still flags picture desks.
+- **Verify:** Jax Article with an in-world named bar + INTAKE BIZ does not fail Rhea for "fabricated named business." Carmen/Luis Article that infers an office relationship without inventing a vote still passes. Same Article inventing a 5–3 tally not in the Packet still fails. Real-world BART/Ogawa still fail.
+- **Status:** [ ] not started — Claude / research-build after Task 10 (or in parallel if 18:15 is already flagging picture desks on SET).
+
 #### Pre-fire review record (engine-sheet, 2026-08-21)
 
 Tasks 1–9 reviewed at the console before the first live fire. Findings are recorded here so tomorrow's observation is scored against a stated baseline rather than re-derived.
@@ -239,6 +255,7 @@ frozen** — the parked further-loosening stays parked until Task 10 closes.
 - [x] Positive fixture source if Dirt Carnival cannot be recovered — **C103 Luis Navarro** is the on-disk near-pass; Task 9 starts there. Dirt Carnival is optional.
 - [ ] Whether the builder accepts a tightened Luis Article as the permanent positive fixture, or wants a separately written completion. Does not block Tasks 2–8.
 - [x] After Task 10: loosen `missing-packet-quote` from exact contiguous string to Packet-backed span + mid-quote attribution. Landed before the 18:15 write (`packetQuoteLanded`). WHO/invented-words/Tribune-as-actor/empty-W2 stay fail-loud.
+- [ ] Task 11: Rhea reviewProfiles — picture desks may mint in-world `BIZ`; civic desks report facts + office relationships, not bars. Jax profile still forbids fabricated named business and still names BART. Hand to Claude.
 
 ---
 
@@ -256,4 +273,5 @@ frozen** — the parked further-loosening stays parked until Task 10 closes.
 - 2026-08-21 (grok) — Landed `packetQuoteLanded` before the 18:15 write: Packet-backed sentence span + mid-quote attribution pass; invented quote still fails. W1/W2 and crontab untouched.
 - 2026-08-21 (grok) — Sports SET is not a leak: drop mere-word clubhouse/press-box/locker fail. Tanya/Anthony/Hal bags place them in those rooms. Still fail invented speech sourced from the room. Crontab untouched.
 - 2026-08-21 (grok) — Allotted hallucination lock: Packet is data, not the picture. In-world named spots (Tina's bar) mint via INTAKE BIZ. Wall is real Oakland, fake numbers, fake Packet quotes. Tanya files from the clubhouse; Jax opens in an in-world place not BART. Writer hygiene + Tanya slice/package updated. No crontab.
+- 2026-08-21 (grok) — Task 11 filed for Claude: Rhea not yet fixed except Tanya blockers. Jax reviewProfile still forbids fabricated named business and still authorizes BART. Civic Rhea stays fact-desk; allotted civic texture is office relationships (who gets along), not invented bars or votes. IND not a bloc.
 - 2026-08-21 (engine-sheet) — Reconciled the matcher-version contradiction between `22a06b65` (park) and `adaa6237` (land): no wake fired between the runtime land and the change, so the observation window had not opened. Baseline re-verified unchanged. Matcher frozen from 06:15.

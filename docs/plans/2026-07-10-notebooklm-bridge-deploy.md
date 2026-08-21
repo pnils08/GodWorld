@@ -231,6 +231,34 @@ Research basis: [[../research/2026-08-20-notebooklm-daily-branching]]. The
 2026-08-02 autonomous-deep-research plan is closed and non-authoritative; do not
 use it as an implementation source.
 
+**Upstream dependency — read before Task 18 (engine-sheet, 2026-08-21).** The
+S344 human-story gates ([[2026-08-20-s344-human-story-template-pressure-test]]
+Tasks 5–8, `cb5c20c6`, landed 22:55 the night before this phase was filed)
+change the router's input distribution. Three consequences bind Tasks 18–21:
+
+1. **Rhea disposition is three-valued, not binary.** A draft failing the
+   deterministic s344 gate skips Rhea entirely (`scripts/cron-desk-run.js` —
+   `skipRhea`), so it lands in `flagged/` with `rhea = null`. `flagged` now
+   means either *Rhea flagged it* or *it never reached Rhea*. Task 18's typed
+   inventory and Task 19's dispositions must carry `passed` / `rhea-flagged` /
+   `never-gated` as distinct states; collapsing the last two loses the signal
+   that distinguishes a contradicted Article from a malformed one.
+2. **`REPORTED_DAY`'s threshold is calibrated on a staging rate that changed
+   last night.** The predicate requires two same-Cycle Rhea-passed staged
+   Articles. The s344 gates push more drafts to `flagged/`, so `REPORTED_DAY`
+   will fire less and `CYCLE_OPEN`/`QUIET_DESK` more, on unchanged newsroom
+   effort. Do not tune the threshold on data collected while pipeline.54 Task 10
+   is still observing — that window is a transient, not the new baseline. Build
+   the predicate parameterised and set the number after Task 10 closes.
+3. **Task 19's "current W1 chase" is a field that exists only as of `34cace97`.**
+   Read it from the `angle.json` sidecar (`plan.chase`) or story doc §2 — not
+   from the §2 body as it existed before that commit, which held a serialized
+   plan object rather than reporter prose.
+
+None of this blocks Tasks 18–20; it changes what they must model. Task 21's five
+shadow runs should record the three-valued disposition from the first run so the
+`REPORTED_DAY` threshold can be set from evidence rather than assumption.
+
 ### Task 18: Pure branch router
 
 - **Files:**
@@ -413,3 +441,4 @@ failure recovery: [[../reference/notebookLM-CLI]].
   five-run shadow proof, and separate approval for NotebookLM comparison/live
   activation. The 2026-08-02 autonomous-deep-research plan is explicitly
   superseded and is not an implementation truth source.
+- 2026-08-21 (engine-sheet) — Phase 6 reviewed and cleared for codex. All factual claims verified against HEAD. Added an upstream-dependency block: S344 makes Rhea disposition three-valued, shifts REPORTED_DAY's threshold, and pins the W1 chase source.

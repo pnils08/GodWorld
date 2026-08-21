@@ -5,6 +5,13 @@ const fs = require('fs');
 const path = require('path');
 const p = require('./livedExperiencePacket');
 
+function withChase(packet, fields) {
+  return Object.assign({
+    chase: 'On this block, chase this assigned fact until it has an owner: ' +
+      String(packet.task && packet.task.assignment || 'TEST-ONLY'),
+  }, fields);
+}
+
 const exemplar = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'docs', 'media', 'examples',
   'lived_experience_packet_v1.json'), 'utf8'));
 assert.doesNotThrow(() => p.assertBase(exemplar, 'W2'));
@@ -99,13 +106,46 @@ assert.deepStrictEqual(trevorW1.task.creativeBrief, {
 assert.equal(trevorW1.known.filter(row => row.text === 'TEST-ONLY transit condition remains open').length, 1,
   'compact Packet deduplicates the assigned system fact');
 
-const plan = p.validateAngleOutput({
+const plan = p.validateAngleOutput(withChase(w1, {
   focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
   targets: [{ pop: 'TEST-POP-01', question: 'What do you own?', basis: 'assigned-official' }],
   interpretation: 'Accountability may lag', unverifiedLead: [], closeQuestion: 'Who owns the response?'
-}, w1);
+}), w1);
 assert.equal(plan.targets[0].pop, 'TEST-POP-01');
+assert.ok(plan.chase.indexOf('TEST-ONLY') >= 0);
 assert.throws(() => p.validateAngleOutput({ ...plan, targets: [{ pop: 'MADE-UP', question: 'x', basis: 'x' }] }, w1), /supplied pop/);
+assert.throws(() => p.validateAngleOutput(withChase(w1, {
+  chase: '',
+  focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
+  targets: [], interpretation: 'Accountability may lag', unverifiedLead: [],
+  closeQuestion: 'Who owns the response?'
+}), w1), /missing chase/);
+assert.throws(() => p.validateAngleOutput(withChase(w1, {
+  chase: '{"focus":"TEST-ONLY mismatch"}',
+  focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
+  targets: [], interpretation: 'Accountability may lag', unverifiedLead: [],
+  closeQuestion: 'Who owns the response?'
+}), w1), /JSON-shaped/);
+assert.throws(() => p.validateAngleOutput(withChase(w1, {
+  chase: 'I will verify the assigned fact and talk to POP-00231.',
+  focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
+  targets: [], interpretation: 'Accountability may lag', unverifiedLead: [],
+  closeQuestion: 'Who owns the response?'
+}), w1), /JSON-shaped/);
+assert.throws(() => p.validateAngleOutput(withChase(w1, {
+  chase: 'The no-hitter downtown is the only story worth chasing tonight.',
+  focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
+  targets: [], interpretation: 'Accountability may lag', unverifiedLead: [],
+  closeQuestion: 'Who owns the response?'
+}), w1), /replaces the assignment/);
+const thirdPerson = p.validateAngleOutput(withChase(w1, {
+  chase: 'The board still shows the TEST-ONLY signal on TEST-HOOD. Chase who has not answered the mismatch.',
+  focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],
+  targets: [{ pop: 'TEST-POP-01', question: 'What do you own?', basis: 'assigned-official' }],
+  interpretation: 'Accountability may lag', unverifiedLead: [], closeQuestion: 'Who owns the response?'
+}), w1);
+assert.equal(p.reporterChaseText(thirdPerson), thirdPerson.chase);
+assert.ok(!/\bI\b/.test(thirdPerson.chase), 'third-person chase is legal');
 
 const chargePulse = {
   charge: { fanCharge: 'dare' },
@@ -129,7 +169,9 @@ const resident = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { na
   angleInput: w1, anglePlan: plan, story, candidate: candidates[1] });
 assert.notEqual(official.task.question, resident.task.question);
 assert.match(official.task.question, /creates accountability/);
-assert.match(resident.task.question, /supplied trend/);
+assert.match(resident.task.question, /seen, felt, or understood/);
+assert.doesNotMatch(official.task.question, /Tribune/);
+assert.doesNotMatch(resident.task.question, /Tribune/);
 assert.equal(official.limits.quoteEligible, false);
 assert.equal(p.quoteIneligibility({ pop: 'POP-00599', role: 'Catcher, Oakland A\'s' }, 'civic', { kind: 'anomaly' }),
   'PRO_ATHLETE_CIVIC_INELIGIBLE');

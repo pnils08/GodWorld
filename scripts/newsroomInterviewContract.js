@@ -135,6 +135,9 @@ function validateInterviewOutput(value, input) {
     if (LEGACY_LATTICE.some(line => lower.includes(line.toLowerCase()))) {
       errors.push('legacy backend lattice text is not citizen speech');
     }
+    if (/the Tribune should ask|what should the Tribune ask|Tribune should demand|the paper should ask/i.test(quote)) {
+      errors.push('newspaper-as-actor language is not a citizen answer');
+    }
     if ((input.known || []).some(row => clean(row && row.text).toLowerCase() === lower)) {
       errors.push('quote cannot be a copied Packet fact');
     }

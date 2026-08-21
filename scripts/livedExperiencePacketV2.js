@@ -630,6 +630,8 @@ module.exports = {
   candidateRows: v1.candidateRows,
   neighborsFromLedger: v1.neighborsFromLedger,
   validateAngleOutput: v1.validateAngleOutput,
+  reporterChaseText: v1.reporterChaseText,
+  chaseIsJsonShaped: v1.chaseIsJsonShaped,
   parseJsonObject: v1.parseJsonObject,
   buildAnglePacket,
   buildReportPacket,

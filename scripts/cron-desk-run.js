@@ -514,6 +514,17 @@ function runCitizenQuotePass(asks, cycle, stem) {
   return { quotes, interviews };
 }
 
+function assertPublishableQuotesStrict(quotes, stage) {
+  if (!Array.isArray(quotes) || !quotes.length) {
+    throw new Error(stage + ': zero publishable answers — fail closed, do not open W3');
+  }
+}
+
+function assertPublishableQuotes(quotes, stage) {
+  if (!PACKET_ACTIVE) return;
+  assertPublishableQuotesStrict(quotes, stage);
+}
+
 function citizenArcSlug(story, quote) {
   const hood = String((story && story.hood) || 'city').toLowerCase();
   const name = String((quote && quote.name) || 'citizen').toLowerCase();
@@ -1728,8 +1739,11 @@ async function runAngle(assign) {
     const r = JSON.parse(outTrim.slice(jsonStart));
     const plan = PACKET_ACTIVE ? livedPacket.validateAngleOutput(r.text, inputPacket) : null;
     angleRead = { name: r.name, popid: r.popId,
-      text: PACKET_ACTIVE ? JSON.stringify(plan, null, 2) : r.text,
+      text: PACKET_ACTIVE ? livedPacket.reporterChaseText(plan) : r.text,
       ...(plan ? { plan } : {}) };
+    if (PACKET_ACTIVE && livedPacket.chaseIsJsonShaped(angleRead.text)) {
+      throw new Error('W1 chase is JSON-shaped — refusing to write story §2');
+    }
     log('angle read: "' + String(r.text).replace(/\s+/g, ' ').slice(0, 140) + '..."');
   }
   // Task 2.5.3 §2 — canon research through the 2.5.5 tool loop, validated
@@ -2158,6 +2172,15 @@ function readWire(cycle, max) {
 // ---------------------------------------------------------------------------
 function storyDocPath(stem) { return path.join(COMPARE, stem + 'story.md'); }
 
+function humanChaseOrThrow(text) {
+  const chaseText = text ? String(text).trim() : '';
+  if (!chaseText) throw new Error('W1 chase missing — refusing to write story §2');
+  if (livedPacket.chaseIsJsonShaped(chaseText)) {
+    throw new Error('W1 chase is JSON-shaped — refusing to write story §2');
+  }
+  return chaseText;
+}
+
 function storyDocOpen(stem, s) {
   const L = [];
   L.push('# STORY — ' + s.desk + ' c' + s.cycle + (s.reporter ? ' — ' + s.reporter.name : ''));
@@ -2175,9 +2198,10 @@ function storyDocOpen(stem, s) {
   if (s.approach) L.push('- DESK APPROACH: ' + s.approach);
   L.push('');
   L.push('## §2 THE REPORTER\'S PLAN (wake 1, their own voice)');
-  L.push(s.angleRead && s.angleRead.text ? String(s.angleRead.text).trim() : '(no angle read this wake)');
+  const raw = s.angleRead && s.angleRead.text ? String(s.angleRead.text).trim() : '';
+  L.push(PACKET_ACTIVE ? humanChaseOrThrow(raw) : (raw || '(no angle read this wake)'));
   L.push('');
-  try { fs.writeFileSync(storyDocPath(stem), L.join('\n')); } catch (e) { log('story doc open failed (non-fatal): ' + e.message); }
+  fs.writeFileSync(storyDocPath(stem), L.join('\n'));
 }
 
 function storyDocAppend(stem, header, body) {
@@ -2233,6 +2257,7 @@ async function runReport(assign) {
   // Task 2.5.3 — §3: the interviews land in the growing story doc.
   storyDocAppend(stem, '§3 INTERVIEWS (wake 2 — real citizens, real quotes)',
     quotes.map(q => '- ' + q.name + ' (' + q.pop + '): "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"').join('\n'));
+  assertPublishableQuotes(quotes, 'W2');
 }
 
 // pipeline.45 Phase 1 — enrich the parsed INTAKE with ids for the sidecar.
@@ -2313,7 +2338,9 @@ async function runWrite(assign) {
   log('byline: ' + (byline ? byline.name + ' (' + byline.popid + (persona ? ', persona' : (assign ? ', fanout ' + byline.beatDomain : ', ' + byline.beatDomain + ', used ' + byline.usageCount)) + ')' : 'NONE — fallback, no self-record'));
 
   let quotes = (packet && packet.quotes) || [];
-  if (!quotes.length) {
+  if (PACKET_ACTIVE) {
+    assertPublishableQuotes(quotes, 'W3');
+  } else if (!quotes.length) {
     const story = (packet && packet.assignment && packet.assignment.story)
       || (angle && angle.assignment && angle.assignment.story) || null;
     const askVoice = personaInfo(personaSlug) || (assign ? { name: assign.name } : null);
@@ -2898,4 +2925,9 @@ module.exports = {
   validateWakeHandoff,
   exactRheaProof,
   stagedRheaProof,
+  storyDocOpen,
+  storyDocPath,
+  humanChaseOrThrow,
+  assertPublishableQuotes,
+  assertPublishableQuotesStrict,
 };

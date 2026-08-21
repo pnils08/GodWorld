@@ -382,14 +382,17 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane 
     },
     output: {
       format: 'json-only',
-      schema: { focus: 'string', why: 'string', checks: ['string'],
+      schema: {
+        chase: 'string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.',
+        focus: 'string', why: 'string', checks: ['string'],
         targets: hasTargetCandidates
           ? [{ pop: 'supplied non-empty candidate pop', question: 'string', basis: 'string' }]
           : [],
         interpretation: 'string', unverifiedLead: ['string'], closeQuestion: 'string' },
-      rule: hasTargetCandidates
-        ? 'Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers.'
-        : 'No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier.',
+      rule: (hasTargetCandidates
+        ? 'Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. '
+        : 'No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. ') +
+        'chase is the human story-doc slot. Do not serialize this plan object into chase.',
     },
   };
   if (Array.isArray(lane) && lane.length) {
@@ -409,10 +412,48 @@ function parseJsonObject(text) {
   return JSON.parse(raw.slice(start, end + 1));
 }
 
+function chaseIsJsonShaped(text) {
+  const t = String(text || '').trim();
+  if (!t) return true;
+  if (t.charAt(0) === '{') {
+    try { JSON.parse(t); return true; } catch (_) { /* fall through */ }
+    const start = t.indexOf('{');
+    const end = t.lastIndexOf('}');
+    if (start >= 0 && end > start) {
+      try { JSON.parse(t.slice(start, end + 1)); return true; } catch (_) { /* not json */ }
+    }
+  }
+  if (/I will verify the assigned fact/i.test(t) && /\bPOP-\d+/i.test(t)) return true;
+  return false;
+}
+
+function chaseReplacesAssignment(chase, input) {
+  const assignment = clean((input && input.task && input.task.assignment) || '');
+  const hood = clean((input && input.signal && input.signal.hood) || '');
+  const blob = (assignment + ' ' + hood).toLowerCase();
+  const tokens = blob.split(/[^a-z0-9-]+/).filter(function (w) {
+    return w.replace(/-/g, '').length >= 5;
+  });
+  if (!tokens.length) return false;
+  const c = clean(chase).toLowerCase();
+  return !tokens.some(function (t) { return c.indexOf(t) >= 0; });
+}
+
+function reporterChaseText(plan) {
+  const chase = plan && plan.chase;
+  if (!clean(chase)) throw new Error('W1 chase missing');
+  if (chaseIsJsonShaped(chase)) throw new Error('W1 chase is JSON-shaped');
+  return clean(chase, 700);
+}
+
 function validateAngleOutput(value, input) {
   const out = typeof value === 'string' ? parseJsonObject(value) : value;
   const errs = [];
   for (const k of ['focus', 'why', 'interpretation', 'closeQuestion']) if (!clean(out && out[k])) errs.push('missing ' + k);
+  if (!clean(out && out.chase)) errs.push('missing chase');
+  else if (chaseIsJsonShaped(out.chase)) errs.push('chase is JSON-shaped');
+  else if (String(out.chase).trim().length < 40) errs.push('chase too short');
+  else if (chaseReplacesAssignment(out.chase, input)) errs.push('chase replaces the assignment');
   if (!Array.isArray(out && out.checks)) errs.push('checks must be an array');
   if (!Array.isArray(out && out.targets)) errs.push('targets must be an array');
   const allowed = new Set(((input && input.exposure && input.exposure.candidates) || []).map(c => c.pop).filter(Boolean));
@@ -424,6 +465,7 @@ function validateAngleOutput(value, input) {
   if (!Array.isArray(out && out.unverifiedLead)) errs.push('unverifiedLead must be an array');
   if (errs.length) throw new Error('invalid W1 output: ' + errs.join('; '));
   return {
+    chase: clean(out.chase, 700),
     focus: clean(out.focus, 500), why: clean(out.why, 500),
     checks: uniq(out.checks).slice(0, 8),
     targets: allowed.size
@@ -527,12 +569,12 @@ function questionFor(candidate, anglePlan, story) {
   const role = clean(candidate && candidate.role).toLowerCase();
   const focus = clean(anglePlan && anglePlan.focus, 260) || clean(story.angle || story.label, 260);
   if (/council|mayor|official|director|chief/.test(role)) {
-    return 'Using only the supplied facts, what about "' + focus + '" creates accountability, and what answer should the Tribune demand? Do not claim any past or future official action that is not in the Packet.';
+    return 'Using only the supplied facts, what about "' + focus + '" creates accountability for you, and what answer do you want? Do not claim any past or future official action that is not in the Packet.';
   }
   if (candidate && candidate.hood && story.hood && candidate.hood === story.hood) {
-    return 'As a resident of ' + story.hood + ', what about the supplied trend "' + focus + '" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.';
+    return 'As a resident of ' + story.hood + ', what have you seen, felt, or understood about "' + focus + '"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.';
   }
-  return 'What does the supplied trend "' + focus + '" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.';
+  return 'What have you seen, felt, or understood about "' + focus + '"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.';
 }
 
 function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story, candidate }) {
@@ -710,7 +752,8 @@ function prompt(packet) {
 
 module.exports = {
   VERSION, CLAIM_TYPES, WAKES, refClaim, assertBase, buildAnglePacket,
-  validateAngleOutput, candidateRows, buildReportPacket, validateReportOutput,
+  validateAngleOutput, reporterChaseText, chaseIsJsonShaped, candidateRows,
+  buildReportPacket, validateReportOutput,
   quoteIneligibility, isAthleteRow, ledgerRowForPop, neighborsFromLedger,
   buildWritePacket, parseJsonObject, prompt,
 };

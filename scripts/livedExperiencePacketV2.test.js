@@ -5,6 +5,17 @@ const fs = require('fs');
 const path = require('path');
 const p = require('./livedExperiencePacketV2');
 
+const _validateAngleOutput = p.validateAngleOutput.bind(p);
+p.validateAngleOutput = function (value, input) {
+  if (value && typeof value === 'object' && value.chase === undefined) {
+    value = Object.assign({
+      chase: 'On this block, chase this assigned fact until it has an owner: ' +
+        String(input && input.task && input.task.assignment || 'TEST-ONLY'),
+    }, value);
+  }
+  return _validateAngleOutput(value, input);
+};
+
 const exemplar = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'docs', 'media', 'examples',
   'lived_experience_packet_v2.json'), 'utf8'));
 assert.doesNotThrow(() => p.assertBase(exemplar, 'W3'));

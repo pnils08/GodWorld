@@ -63,6 +63,12 @@ assert.throws(() => interview.validateInterviewOutput({
   basis: 'direct-reaction', unverifiedLead: [], abstain_reason: null,
 }, packet), /copied Packet fact/);
 
+assert.throws(() => interview.validateInterviewOutput({
+  answer: 'quote',
+  quote: 'I think the Tribune should ask what is really going on with the funding.',
+  fact_ids: ['F-TEST'], basis: 'direct-reaction', unverifiedLead: [], abstain_reason: null,
+}, packet), /newspaper-as-actor/);
+
 const ineligible = interview.prepareInterviewPacket(Object.assign({}, base, {
   limits: { quoteEligible: false, rule: 'old' },
 }));

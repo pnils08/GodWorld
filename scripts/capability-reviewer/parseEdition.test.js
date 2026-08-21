@@ -187,5 +187,54 @@ if (!fs.existsSync(c94Path)) {
     /POP-\d{5}/.test(namesIdx?.body || ''));
 }
 
+// ---------------------------------------------------------------------------
+// Consolidated edition format (c103 forward) — engine-sheet, S385.
+//
+// `cron-saturday-run.js` stepPublish emits: masthead, ====, narration, ====,
+// THE WEEK'S REPORTING, then ====-joined articles, each `By <Name> | Bay
+// Tribune <Desk>` ABOVE its `# Headline`. Every assertion below covers a way
+// this format silently produced empty or wrong results before the fix:
+//   - the masthead loop broke only on `----`, so a `====`-opening edition was
+//     swallowed whole and parsed to zero sections
+//   - THE WEEK'S REPORTING was not a known section header
+//   - byline-above-headline attributed each byline to the PREVIOUS article
+// All three failed silently — no throw, just empty or plausible-but-wrong data.
+// ---------------------------------------------------------------------------
+const c103Path = path.join(__dirname, '..', '..', 'editions', 'cycle_pulse_c103.txt');
+if (!fs.existsSync(c103Path)) {
+  console.log('\n(skipping consolidated-format group — c103 edition not on disk)');
+} else {
+  console.log('\n=== Consolidated format (c103 forward) ===');
+  const parsed = helper.parse(c103Path);
+  const titles = parsed.sections.map(s => s.title);
+
+  assert('c103 opens sections despite a ==== masthead boundary',
+    parsed.sections.length > 0, `sections=${parsed.sections.length}`);
+  assert("c103 has THE WEEK'S REPORTING section",
+    titles.includes("THE WEEK'S REPORTING"));
+  assert("c103 narration reattached as EDITOR'S DESK",
+    titles.includes("EDITOR'S DESK"));
+
+  const reporting = parsed.sections.find(s => s.title === "THE WEEK'S REPORTING");
+  assert('c103 reporting section carries every article',
+    (reporting?.articles.length || 0) === 9,
+    `actual ${reporting?.articles.length}`);
+  assert('c103 every article resolves a byline',
+    (reporting?.articles || []).every(a => a.byline),
+    (reporting?.articles || []).filter(a => !a.byline).map(a => a.headline).join('; '));
+
+  // Attribution, not just presence: the off-by-one this guards against would
+  // still leave every article holding *a* byline — just the wrong one.
+  const lead = reporting?.articles[0];
+  assertEqual('c103 first article byline is its own, not the preceding slice',
+    lead?.byline, 'Simon Leary');
+  assert('c103 first article headline matches that byline',
+    /Benji Dillon/.test(lead?.headline || ''), lead?.headline);
+
+  const desk = parsed.sections.find(s => s.title === "EDITOR'S DESK");
+  assert("c103 EDITOR'S DESK carries the narration text",
+    /Fruitvale Transit Hub/.test(desk?.body || ''));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed > 0 ? 1 : 0);

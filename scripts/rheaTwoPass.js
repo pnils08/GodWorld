@@ -67,11 +67,21 @@ function resolveArgs() {
     else if (/^\d+$/.test(args[i]) && cycle === null) cycle = parseInt(args[i], 10);
   }
   if (cycle === null && editionPath) {
-    const m = editionPath.match(/_(\d+)\.txt$/);
+    // Both naming eras live in editions/: `cycle_pulse_edition_102.txt` (through
+    // e102) and `cycle_pulse_c103.txt` (cron-saturday-run.js, c103 forward).
+    const m = editionPath.match(/_c?(\d+)\.txt$/);
     if (m) cycle = parseInt(m[1], 10);
   }
   if (cycle === null) throw new Error('Cycle required — pass as argv[2] or via --cycle');
-  if (!editionPath) editionPath = path.join(EDITIONS_DIR, `cycle_pulse_edition_${cycle}.txt`);
+  if (!editionPath) {
+    // Prefer the current emitter's name; fall back to the pre-c103 name so this
+    // still runs against the archive.
+    const candidates = [
+      path.join(EDITIONS_DIR, `cycle_pulse_c${cycle}.txt`),
+      path.join(EDITIONS_DIR, `cycle_pulse_edition_${cycle}.txt`),
+    ];
+    editionPath = candidates.find(p => fs.existsSync(p)) || candidates[0];
+  }
   return { cycle, editionPath: path.resolve(editionPath), dry };
 }
 

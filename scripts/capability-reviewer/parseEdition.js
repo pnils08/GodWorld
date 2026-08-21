@@ -29,6 +29,14 @@ const MAJOR_BOUNDARY_RE = /^={10,}$/;
 const EDITORIAL_SECTION_HEADERS = new Set([
   'FRONT PAGE',
   "EDITOR'S DESK",
+  // Consolidated edition format emitted by cron-saturday-run.js stepPublish
+  // (first shipped c103): masthead, ====, narration, ====, THE WEEK'S
+  // REPORTING, then ====-joined articles. Before this entry the header was
+  // unrecognized, so no section ever opened and the whole edition parsed to
+  // zero sections / zero articles — silently blinding every consumer of this
+  // parser (validateEdition, capabilityReviewer, gradeEdition, tierClassifier,
+  // rewardHackingScanner, buildArticleIndex, rheaTwoPass, the PDF generator).
+  "THE WEEK'S REPORTING",
   'SPORTS',
   'CIVIC',
   'BUSINESS',
@@ -70,6 +78,65 @@ const SECTION_HEADERS = new Set([
   ...FOOTER_SECTION_HEADERS,
 ]);
 
+// Section headers are matched on a normalized form so a typographic apostrophe
+// in a hand-touched edition still resolves ("EDITOR’S DESK" -> "EDITOR'S DESK").
+// The emitter writes straight apostrophes; this only guards manual edits.
+function normalizeHeader(s) {
+  return (s || '').toUpperCase().replace(/[‘’`]/g, "'").trim();
+}
+
+/**
+ * The consolidated format puts the byline ABOVE its headline:
+ *
+ *     ============================================================
+ *
+ *     By Simon Leary | Bay Tribune Sports
+ *
+ *     # The A's record is 124-34
+ *
+ * `finalizeSection` slices on `# Headline`, so without this the byline line
+ * closes the PREVIOUS slice and every article is attributed to the article
+ * before it — an off-by-one that reads as plausible data rather than an error.
+ * Moves a trailing byline (plus the blank lines under it) into the new slice
+ * and drops the boundary rule left behind. The older format carries its byline
+ * BELOW the headline, so there is nothing to pull and this is a no-op there.
+ */
+function pullTrailingByline(prevLines) {
+  let k = prevLines.length - 1;
+  while (k >= 0 && prevLines[k].trim() === '') k--;
+  if (k < 0) return [];
+  if (!/^\s*[*_]{0,2}By\s+/i.test(prevLines[k])) return [];
+  const moved = prevLines.splice(k);
+  while (prevLines.length &&
+    (prevLines[prevLines.length - 1].trim() === '' ||
+     MAJOR_BOUNDARY_RE.test(prevLines[prevLines.length - 1].trim()))) {
+    prevLines.pop();
+  }
+  return moved;
+}
+
+/**
+ * In the consolidated format the narration between the masthead and
+ * `THE WEEK'S REPORTING` is Mags' editor's desk. It opens no section of its
+ * own, so it would be dropped — but it is dense with citizen names and quotes,
+ * which is exactly the text the review lane exists to check. Reattach it as a
+ * leading EDITOR'S DESK section. No-op on the older format.
+ */
+function attachEditorsDesk(lines, sections) {
+  const hdrIdx = lines.findIndex(l => normalizeHeader(l.trim()) === "THE WEEK'S REPORTING");
+  if (hdrIdx < 0) return;
+  if (sections.some(s => s.title === "EDITOR'S DESK")) return;
+  const first = lines.findIndex(l => MAJOR_BOUNDARY_RE.test(l.trim()));
+  if (first < 0 || first >= hdrIdx) return;
+  let last = hdrIdx;
+  while (last > first && !MAJOR_BOUNDARY_RE.test((lines[last] || '').trim())) last--;
+  const body = lines.slice(first + 1, last).join('\n').trim();
+  if (!body) return;
+  const section = { title: "EDITOR'S DESK", body: body + '\n', articles: [], isFooter: false };
+  finalizeSection(section);
+  sections.unshift(section);
+}
+
 function parse(filePath) {
   let raw = fs.readFileSync(filePath, 'utf8');
   // Strip the END EDITION trailer block — it isn't editorial content
@@ -81,9 +148,15 @@ function parse(filePath) {
   let i = 0;
 
   // Header block (everything before the first section divider)
+  // The masthead ends at the first structural boundary of EITHER kind. The
+  // consolidated format opens with `====`, never `----`, so breaking only on
+  // DIVIDER_RE swallowed the entire file into the header block and left the
+  // section walk with nothing to do — the root cause of the zero-section parse.
+  // Old editions open with `----`, which still wins here, so they are unmoved.
   const headerLines = [];
   while (i < lines.length) {
-    if (DIVIDER_RE.test(lines[i].trim())) break;
+    const t = lines[i].trim();
+    if (DIVIDER_RE.test(t) || MAJOR_BOUNDARY_RE.test(t)) break;
     headerLines.push(lines[i]);
     i++;
   }
@@ -113,13 +186,13 @@ function parse(filePath) {
         break;
       }
       const next = (lines[lookI] || '').trim();
-      if (SECTION_HEADERS.has(next.toUpperCase())) {
+      if (SECTION_HEADERS.has(normalizeHeader(next))) {
         // Close the previous section
         if (currentSection) {
           finalizeSection(currentSection);
           sections.push(currentSection);
         }
-        const titleUpper = next.toUpperCase();
+        const titleUpper = normalizeHeader(next);
         currentSection = {
           title: titleUpper,
           body: '',
@@ -144,6 +217,8 @@ function parse(filePath) {
     finalizeSection(currentSection);
     sections.push(currentSection);
   }
+
+  attachEditorsDesk(lines, sections);
 
   return { header, sections, raw };
 }
@@ -213,11 +288,12 @@ function finalizeSection(section) {
     // splitting on those would break mid-article. h4+ same reasoning.
     const m = line.match(/^#\s+(.+?)\s*$/);
     if (m) {
+      const carried = pullTrailingByline(currentLines);
       if (currentLines.length > 0 || currentHeadline) {
         slices.push({ headline: currentHeadline, lines: currentLines });
       }
       currentHeadline = m[1].trim();
-      currentLines = [];
+      currentLines = carried;
     } else {
       currentLines.push(line);
     }

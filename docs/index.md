@@ -71,7 +71,6 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[GEMINI_OFFLOAD]]** — S241 governance.21. Three permissible offload paths (Apps Script side panel, Sheets formula sidebar, Drive Docs for tier-4 content), no-go zone (canon-bearing work + reviewer lanes + EIC seat), Moltbook voice-hardening caveat. Companion to S241 boot-burn gap log (internal lever). Different in kind from MIGRATION_OFF_CLAUDE (model substitution INSIDE pipeline) — this is task-class offload OUTSIDE pipeline. *(reference, governance, infrastructure, token-budget, active)*
 - **[[ACTION_MANAGED_AGENTS]]** — research on Claude Managed Agents. Ready to evaluate. *(reference, research, active)*
 - **[[CANCELLATION]]** — monthly costs and cancellation paths for every paid service. *(reference, infrastructure, active)*
-- **[[CLAUDE_INFRA_NUKE]]** — filesystem-level runbook to delete local Claude Code scaffolding (agents, skills, hooks, .mcp.json) and memory stores (memory dir, claude-mem db) on this box, tiered by recoverability. Prepared, not run — companion to CANCELLATION's account-level steps. *(reference, infrastructure, wind-down)*
 
 ### Pipeline & memory
 - **[[EDITION_PIPELINE]]** — Pipeline v2 skills map (S134 + S165). 5 terminals, 9 reporters, alternate-start publication formats (dispatch, interview, supplemental) all converging on shared publish handoff. **FROZEN S313 (pipeline.44)** — kept runnable, no new investment; the fork is the flagship. *(reference, media, frozen)*

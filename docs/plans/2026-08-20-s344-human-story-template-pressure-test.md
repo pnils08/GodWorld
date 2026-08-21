@@ -185,7 +185,7 @@ pointers:
   2. After code review, local tests, and the separately controlled runtime land, inspect the next two naturally scheduled Articles against all acceptance criteria.
   3. Record deterministic verdict and Rhea verdict separately; a Rhea PASS cannot override a template failure.
 - **Verify:** two dated changelog entries name the Article paths and independent template/Rhea outcomes; no scheduler diff exists.
-- **Status:** [ ] not started
+- **Status:** [ ] in-progress — waiting on the next naturally scheduled write wake after `34cace97`/`cb5c20c6` (2026-08-21 18:15 CDT). Crontab was read, not rewritten.
 
 ---
 
@@ -204,3 +204,4 @@ pointers:
 - 2026-08-20 (grok) — Tasks 2–4: W1 `chase` field + reporterChaseText; §2 writes chase only (JSON §2 throws); W2 questions ask what the citizen saw/felt; Tribune-as-actor quotes fail interview validation; zero publishable answers fail W2 and W3 does not last-chance. Tests: livedExperiencePacket, livedExperiencePacketV2, newsroomInterviewContract, cronDeskStoryTemplate PASS.
 - 2026-08-20 (grok) — Tasks 5–8: four-part Article slots; BART/Ogawa + clubhouse + repair-chrome walls; assignment/INTAKE bind (Jax faith/transit); Packet-active W3 skips Rhea when those gates fail; writer strips repair-chrome prefix. `s344ArticleGate.evaluate` is the seam. W1 three-cited-facts sidecar still wired.
 - 2026-08-20 (grok) — Task 9: synthetic NOT_CANON positive pair `scripts/__fixtures__/newsroom/s344/s344-positive-{article.md,packet.json}`. Luis C103 remains the near-pass (split Packet quote, INTAKE on the quote not the hub). Title-only first line is not the lede. No crontab, ingest, or Sheets.
+- 2026-08-20 (grok) — Task 10 opened, not closed. Crontab read-only (M–F 06:15 angle / 13:15 report / 18:15 write unchanged; no install). Runtime land is `34cace97` + `cb5c20c6` (22:24–22:55 CDT). The 2026-08-20 18:15 write fanout ran before that land and is not the observation window. Retrospective gate on two of those Articles (Rhea PASS does not override): `output/cron-compare/staged/sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md` — s344 FAIL (JSON §2, empty W2, missing Packet quote, missing question, clubhouse); Rhea pass=true. `output/cron-compare/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.md` — s344 FAIL (JSON §2, missing Packet quote, missing question); Rhea pass=true. Next natural write 2026-08-21 18:15 CDT supplies the two post-land Articles.

@@ -304,6 +304,21 @@ function stampPromotion_(ctx, row, iLife, iLastU, iPop, iFirst, iLast, iNb, iOcc
 // CAREER PROGRESSION
 // ════════════════════════════════════════════════════════════════════════════
 
+// engine: the sports layer owns its citizens' careers and pay, so civilian
+// career logic must not touch them. The pre-existing guards in this family key
+// on EconomicProfileKey === 'SPORTS_OVERRIDE' (or merely non-empty), but athlete
+// rows are not reliably minted carrying that field — so the guard silently did
+// not fire and three GAME rows were overwritten on the C104 fire (2026-08-21):
+// AJ Dybantsa POP-01024 "SF / The Oaks" $17,000,000 -> "Nurse Aide" $44,600,
+// and Dame Sarr POP-01025 / Coen Carr POP-01026 salaries zeroed at $7.5M and $3M.
+// ClockMode is the STRUCTURAL marker and is always present, so test it first and
+// treat EconomicProfileKey as the secondary signal.
+function isSportsLayerRow_(row, iClock, iEcon) {
+  if (iClock >= 0 && String(row[iClock] || '').trim().toUpperCase() === 'GAME') return true;
+  if (iEcon >= 0 && String(row[iEcon] || '').trim() === 'SPORTS_OVERRIDE') return true;
+  return false;
+}
+
 function updateCareerProgression_(ctx, cycle, rng) {
   // Phase 42 §5.6: read/mutate ctx.ledger.rows; Phase 10 commits.
   var header = ctx.ledger.headers;
@@ -318,6 +333,8 @@ function updateCareerProgression_(ctx, cycle, rng) {
   var iStatus = idx('Status');
   var iLastPromotion = idx('LastPromotionCycle');
   var iLife = idx('LifeHistory');
+  var iClockCP = idx('ClockMode');
+  var iEconCP = idx('EconomicProfileKey');
   // Row 24 (b): the OWNING engine stamps the promotion narrative
   var iPop24 = idx('POPID');
   var iFirst24 = idx('First');
@@ -357,8 +374,14 @@ function updateCareerProgression_(ctx, cycle, rng) {
       row[iYearsInCareer] = Math.round(yearsInCareer * 10) / 10;
     }
 
-    // Check for career stage advancement
-    if (age < 22) {
+    // Check for career stage advancement.
+    // A sports-layer citizen is never regressed to student on age alone: a
+    // 16-year-old under contract is a professional, and demoting him to student
+    // is what zeroed Sarr's and Carr's salaries (students/minors earn nothing,
+    // S320 convention) and what fed Dybantsa into settleAdulthood_ at 18.
+    if (isSportsLayerRow_(row, iClockCP, iEconCP)) {
+      // leave CareerStage, Income and RoleType exactly as the sports layer set them
+    } else if (age < 22) {
       row[iCareerStage] = CAREER_STAGES.STUDENT;
     } else if (age >= 65) {
       row[iCareerStage] = CAREER_STAGES.RETIRED;
@@ -749,6 +772,11 @@ function settleAdulthood_(ctx, cycle, rng) {
     if (life.indexOf('[Adulthood]') >= 0) continue; // fires exactly once
     // Seeded/sports rows are managed externally — the settlement is for
     // kids the sim raised, not citizens the seeder or sports layer owns.
+    // The EconomicProfileKey test alone was insufficient: athlete rows are not
+    // reliably minted with that field, so AJ Dybantsa (POP-01024) fell through
+    // and this function wrote "Nurse Aide" / $44,600 over "SF / The Oaks" /
+    // $17,000,000. ClockMode is checked first because it is always present.
+    if (isSportsLayerRow_(row, idx('ClockMode'), iEcon)) continue;
     if (iEcon >= 0 && String(row[iEcon] || '').trim() !== '') continue;
 
     // The draw: household income band + school quality + best parent edu,

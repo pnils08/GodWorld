@@ -1,0 +1,43 @@
+{
+  "draft": "../../tmp/claude-0/-root-GodWorld/903b8b60-a362-4e46-ad57-31a40b5c539c/scratchpad/almanzar_debut.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "51ea179c3861c848a897d344416a8a6f2ff7a2bc798d7becf0684a4a1f6ef917",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All sports statistics, player roles, game logs, and team records verified cleanly against Cycle 103 canon.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": null,
+  "nameCheck": {
+    "verified": [
+      "Pablo Almanzar",
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": false
+  },
+  "apiCostUsd": 0.0086,
+  "durationMs": 5871,
+  "parseError": false,
+  "ranAt": "2026-08-21T06:52:44.293Z"
+}

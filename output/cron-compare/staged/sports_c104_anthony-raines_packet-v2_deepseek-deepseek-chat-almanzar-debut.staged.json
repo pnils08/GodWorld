@@ -1,0 +1,44 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "104",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat-almanzar-debut.staged.md",
+  "bylineUsage": {
+    "recorded": false
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Pablo Almanzar",
+        "role": "subject",
+        "popid": "POP-01078"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      }
+    ],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A’s · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "sourceRef": "world_summary_c103.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "51ea179c3861c848a897d344416a8a6f2ff7a2bc798d7becf0684a4a1f6ef917",
+    "verdict": "output/cron-compare/sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat-almanzar-debut.rhea.json",
+    "ranAt": "2026-08-21T06:52:44.293Z"
+  },
+  "note": "M-F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Held over from C103 and filed under C104 so the cycle-filtered compile can reach it. Originally flagged only because Pablo Almanzar had no citizen row; he is POP-01078 as of 2026-08-21 and the article re-gated clean at 0 flags.",
+  "stagedAt": "2026-08-21T06:54:46.862Z"
+}

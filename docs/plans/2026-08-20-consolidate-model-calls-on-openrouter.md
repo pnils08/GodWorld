@@ -161,11 +161,11 @@ Each keeps a documented revert: `RHEA_PROVIDER` / `MAGS_BOT_PROVIDER` / `REFLECT
 
 ### Task 5: Retire the key, or don't — ✅ DECIDED: keep it
 
-`ANTHROPIC_API_KEY` stays. It is the documented revert path for four scripts, and the photo path still uses it live. Remaining callers, all deliberate:
+`ANTHROPIC_API_KEY` stays as a revert path only. **Nothing live calls it any more** — the photo QA pass, the last live caller, moved to Gemini 3.7 Flash on 2026-08-20 because Mike is leaving that account unfunded. Any script still naming the key either guards a documented `*_PROVIDER=anthropic` revert or is dormant. Remaining callers, all deliberate:
 
 | Script | Status |
 |---|---|
-| `generate-edition-photos.js` → `photoQA.js` | **Live**, in the print pipeline. Parked — vision/image through OpenRouter is unproven and was not in scope. |
+| `generate-edition-photos.js` → `photoQA.js` | **MIGRATED 2026-08-20 (`c57b1352`)** to `google/gemini-3.7-flash` on OpenRouter, Mike-direct — the Anthropic account is being left unfunded. FLUX image generation was never on Anthropic and is untouched. |
 | `rheaTwoPass`, `mags-discord-bot`, `discord-reflection`, `cron-saturday-run`, `cron-desk-writer`, `moltbook-heartbeat` | Revert branches only |
 | `daily-reflection.js` | Disabled S187, crontab line commented out |
 | `citizenLifePoC.js`, `crawlSheetsArchive.js` | No cron, no callers — dormant |
@@ -184,4 +184,5 @@ Each keeps a documented revert: `RHEA_PROVIDER` / `MAGS_BOT_PROVIDER` / `REFLECT
 - 2026-08-20 — Task 1 DONE: OpenRouter is exact pass-through on all three models; cost is a 5.5% card fee on credit top-ups. Awaiting Mike on Task 2.
 - 2026-08-20 — Task 1b added: batch verified as a separate submit-and-poll beta API with a 24h window and no multimodal; only terminal cron jobs batch as-is. Day-behind cadence flagged as the bigger option, Mike's call.
 - 2026-08-20 — Tasks 2-5 DONE (`664de075`). OpenRouter serves an Anthropic-compatible /v1/messages endpoint, so migration was a rail change, not a rewrite. Key kept.
+- 2026-08-20 — Mike-direct: photo QA off Anthropic onto google/gemini-3.7-flash (`c57b1352`); Anthropic account left unfunded, nothing live calls it now.
 - 2026-08-20 — Mike-direct: day-behind batch cadence PARKED as the agreed next move, after the pipelines finish being tuned. Not scoped here.

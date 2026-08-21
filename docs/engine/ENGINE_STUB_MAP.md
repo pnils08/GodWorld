@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-08-20 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-08-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -131,9 +131,10 @@
 - **readCarryForwardFromSheet_(ctx, key)**
 
 - **loadCarryForwardBlob_(ctx, key)**
+  Config: ctx.config.cycleCount
 
 - **assertCarryForwardPresent_(ctx)**
-  Reads: S.cycleId
+  Config: ctx.config.cycleCount
 
 - **loadPreviousEvening_(ctx)**
   Reads: S.previousCycleState, S.previousEvening
@@ -1115,6 +1116,8 @@
 
 - **stampPromotion_(ctx, row, iLife, iLastU, iPop, iFirst, iLast, iNb, iOcc, verb, years, cycle)**
   Sheets: LifeHistory_Log
+
+- **isSportsLayerRow_(row, iClock, iEcon)**
 
 - **updateCareerProgression_(ctx, cycle, rng)**
 
@@ -3468,4 +3471,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1157
+**Functions mapped:** 1158

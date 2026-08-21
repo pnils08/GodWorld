@@ -1,8 +1,8 @@
 {
-  "generated": "2026-08-20",
+  "generated": "2026-08-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1157,
+  "functionsMapped": 1158,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -684,7 +684,6 @@
         "phase01-config/godWorldEngine2.js::processIntake_",
         "phase01-config/godWorldEngine2.js::runDryRunCycle",
         "phase01-config/godWorldEngine2.js::writeDigest_",
-        "phase01-config/loadPreviousEvening.js::assertCarryForwardPresent_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::loadCivicVoiceSentiment_",

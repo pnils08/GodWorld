@@ -27,7 +27,7 @@ The SL holds ALL simulated people, not just city citizens. ClockMode determines 
 | **CIVIC** | 46 | Government officials, council | Civic-mode events. Council votes, initiative processing. | — |
 | **MEDIA** | 29 | Bay Tribune journalists | Media-mode events. 7 role-specific pools (editor, columnist, reporter, etc.) | `Bay_Tribune_Oakland` |
 
-**Simulation_Ledger total: ~837 rows** (S185 post-trim count; max POPID POP-00951 after S184 female-balance +150). ClockMode breakdown above is from S105 audit and confirmed drifted — re-run `scripts/auditSimulationLedger.js` for current sub-counts. **Full world population: 1,200+** across Simulation_Ledger + Generic_Citizens (286) + Cultural_Ledger (39) + Business_Ledger (53) + Faith_Organizations (17) + Chicago_Citizens (125). No LIFE-mode citizens remain on the live sheet.
+**Simulation_Ledger total: 964 rows** (live, read-back verified 2026-08-21 S386 — max POPID POP-01079 after minting Pablo Almanzar POP-01078 + Dillon Brooks POP-01079, the two unresolved C104 sports-feed names). *Prior headline: ~837 rows (S185 post-trim; max POP-00951 after the S184 female-balance +150) — that figure sat unrevised across ~200 sessions, which is the exact drift `.claude/rules/engine.md` warns about: a truth doc reconciled later is a lying memory now.* ClockMode breakdown above is from S105 audit and confirmed drifted — re-run `scripts/auditSimulationLedger.js` for current sub-counts. **Full world population: 1,200+** across Simulation_Ledger + Generic_Citizens (286) + Cultural_Ledger (39) + Business_Ledger (53) + Faith_Organizations (17) + Chicago_Citizens (125). No LIFE-mode citizens remain on the live sheet.
 
 ### GAME Mode Breakdown
 

@@ -16,7 +16,7 @@
  *   node scripts/cron-civic-eval.js --office mayor --cycle 101
  *   node scripts/cron-civic-eval.js --office opp-faction --cycle 101 --dry
  *   --models a,b,c   override writer candidates
- *   --judge <slug>   override judge (default google/gemini-3.5-flash; must not
+ *   --judge <slug>   override judge (default google/gemini-3.7-flash; must not
  *                    share a family with any writer — fail-loud if it does)
  *
  * Output: output/cron-civic/eval/<office>_c<cycle>_scorecard.json
@@ -49,7 +49,7 @@ const DEFAULT_MODELS = [
   'mistralai/mistral-large',
   'z-ai/glm-4.7'
 ];
-const DEFAULT_JUDGE = 'google/gemini-3.5-flash';
+const DEFAULT_JUDGE = 'google/gemini-3.7-flash';
 
 function arg(flag, dflt) {
   const i = process.argv.indexOf(flag);

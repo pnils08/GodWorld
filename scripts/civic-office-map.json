@@ -6,7 +6,7 @@
     "frictionRule": "mayor, opp, crc, ind must land on different model families at Task 1.2",
     "modelAssignment": {
       "when": "S343 Task 1.2",
-      "basis": "output/cron-civic/eval/*_c101_scorecard.json (4 friction seats x 5 models, gemini-3.5-flash judge)",
+      "basis": "output/cron-civic/eval/*_c101_scorecard.json (4 friction seats x 5 models, gemini-3.5-flash judge)", "judgeNote": "The c101 scorecards above were produced by a gemini-3.5-flash judge. The default judge moved to gemini-3.7-flash on 2026-08-20 (infrastructure.7, cost). Scores produced under the new judge are NOT directly comparable to these — re-baseline the friction seats before reading a new scorecard against this assignment.",
       "frictionSeats": {
         "MAYOR-01": "mistralai/mistral-large (voice 10)",
         "OPP": "qwen/qwen3-235b-a22b (voice 10)",

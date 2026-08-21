@@ -49,7 +49,7 @@ function parseArgs(argv) {
     timeoutSeconds: 120,
     writerProvider: 'openrouter',
     writerModel: 'deepseek/deepseek-chat',
-    gateModel: 'google/gemini-3.5-flash',
+    gateModel: 'google/gemini-3.7-flash',
     retrievalMode: 'direct-excerpts',
     reuseEvaluation: '',
     bindClaimIndex: 0,

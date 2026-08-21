@@ -135,6 +135,41 @@ If everything lands, decide whether `ANTHROPIC_API_KEY` stays in the env as a fa
 
 ---
 
+---
+
+## Tasks 2–4 — ✅ DONE 2026-08-20 (`664de075`)
+
+**The finding that made this cheap:** OpenRouter serves a fully **Anthropic-compatible `/v1/messages` endpoint**. Migration is a client-construction change, not a rewrite — same SDK, same request shapes, same models. Point the client at `https://openrouter.ai/api` (the SDK appends `/v1/messages` itself; `/api/v1` double-prefixes and 404s) with `OPENROUTER_API_KEY`.
+
+All three call shapes proved live before any edit:
+
+| Shape | Result |
+|---|---|
+| Plain messages | ok |
+| `tool_use` round-trip | ok — correctly shaped `tool_use` block returned |
+| Cached system block | ok — 27,008 tokens written, then fully read back; cost $0.033803 → $0.0027438 on call two |
+
+**Migrated:** `rheaTwoPass.js` (haiku-4.5, plus `usage.cost` accumulation → `costUsd` in the output JSON, closing the Task 1 instrumentation gap), `mags-discord-bot.js` (haiku-4.5, tool call site + the startup key guard), `discord-reflection.js` (sonnet-4.6, both call sites in the two-phase loop), `cron-saturday-run.js` (narrator keeps the **same** model — the routing comment records a deliberate voice decision — only the rail changed).
+
+Each keeps a documented revert: `RHEA_PROVIDER` / `MAGS_BOT_PROVIDER` / `REFLECTION_PROVIDER` / `NARRATOR_PROVIDER` = `anthropic`.
+
+**Needed nothing (measured, not assumed):** `moltbook-heartbeat.js` already defaults to OpenRouter. `cron-desk-writer.js` routes from `desk-model-map.json` + `newsroom-wake-packages.json` and every seat in both is already an OpenRouter slug — only its last-resort fallback was hardened (`anthropic` → `openrouter`) so a failed map load can't drop silently onto the Anthropic key.
+
+**Verified:** four Rhea suites pass; `node --check` clean on all five edited files. Acceptance test is the next unattended cron — `discord-reflection` at 07:00, then Saturday's 16:00 run.
+
+**Pre-existing defect found, deliberately not fixed** (unrelated to this work, dead before it): `rheaTwoPass` resolves its default edition path to `editions/cycle_pulse_edition_{N}.txt` but the files are `cycle_pulse_c{N}.txt`; and even with an explicit `--edition`, the parser extracts **0 articles** from both a main edition and a supplemental. Rhea's two-pass lane has not been able to run for some time. Needs its own row.
+
+### Task 5: Retire the key, or don't — ✅ DECIDED: keep it
+
+`ANTHROPIC_API_KEY` stays. It is the documented revert path for four scripts, and the photo path still uses it live. Remaining callers, all deliberate:
+
+| Script | Status |
+|---|---|
+| `generate-edition-photos.js` → `photoQA.js` | **Live**, in the print pipeline. Parked — vision/image through OpenRouter is unproven and was not in scope. |
+| `rheaTwoPass`, `mags-discord-bot`, `discord-reflection`, `cron-saturday-run`, `cron-desk-writer`, `moltbook-heartbeat` | Revert branches only |
+| `daily-reflection.js` | Disabled S187, crontab line commented out |
+| `citizenLifePoC.js`, `crawlSheetsArchive.js` | No cron, no callers — dormant |
+
 ## Open questions
 
 - [ ] Does OpenRouter's Anthropic route support vision input identically (`photoQA.js`)?
@@ -148,3 +183,5 @@ If everything lands, decide whether `ANTHROPIC_API_KEY` stays in the env as a fa
 - 2026-08-20 — Drafted from Mike-direct at S385, with a verified script inventory rather than an assumed one. Not started.
 - 2026-08-20 — Task 1 DONE: OpenRouter is exact pass-through on all three models; cost is a 5.5% card fee on credit top-ups. Awaiting Mike on Task 2.
 - 2026-08-20 — Task 1b added: batch verified as a separate submit-and-poll beta API with a 24h window and no multimodal; only terminal cron jobs batch as-is. Day-behind cadence flagged as the bigger option, Mike's call.
+- 2026-08-20 — Tasks 2-5 DONE (`664de075`). OpenRouter serves an Anthropic-compatible /v1/messages endpoint, so migration was a rail change, not a rewrite. Key kept.
+- 2026-08-20 — Mike-direct: day-behind batch cadence PARKED as the agreed next move, after the pipelines finish being tuned. Not scoped here.

@@ -216,9 +216,11 @@ No wake was hand-driven for this review; Task 10 remains the acceptance test.
 **Matcher version at first live fire.** `adaa6237` (23:58) loosened
 `missing-packet-quote` from an exact contiguous string to a Packet-backed span,
 after `22a06b65` had parked that same loosening with "do not change the matcher
-during the observation window." Those two read as contradictory, so the record
-should be explicit: **no wake has fired since the `34cace97`/`cb5c20c6` land, so
-the observation window had not opened when the matcher changed.** The 18:15
+during the observation window." **The loosening was builder-directed** — the
+park was grok's own caution, and the call to override it was made deliberately,
+not worked around. The record should also be explicit that **no wake has fired
+since the `34cace97`/`cb5c20c6` land, so the observation window had not opened
+when the matcher changed.** The 18:15
 write on 2026-08-20 ran pre-land; the first post-land wake is 06:15 on
 2026-08-21. Attribution is therefore intact, and the change is the right one on
 the merits — exact contiguous matching false-failed the Luis split-attribution

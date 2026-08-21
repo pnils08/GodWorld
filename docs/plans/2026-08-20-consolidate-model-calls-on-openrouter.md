@@ -79,6 +79,44 @@ Pulled live from `https://openrouter.ai/api/v1/models`; Anthropic-direct rates f
 
 **Verdict for Mike:** identical token pricing, so this is a convenience purchase costing ~5.5% at top-up — bought for one key, one bill, and a wider model menu. Not a saving, and not a penalty on the calls themselves.
 
+### Task 1b: Batch — verified mechanics, and what can actually use it
+
+Mike's read on 2026-08-20: the project is a hobby with no deadline, cron wakes have hours of gaps, and nothing but interactive queries needs an instant answer — so batch should be close to free money. **Directionally right, with two constraints that change how it gets built.**
+
+**Verified against `openrouter.ai/docs/batch-quickstart`:**
+
+| Fact | Detail |
+|---|---|
+| Discount | 50% of standard per-token pricing |
+| Endpoint | `POST /api/beta/batches`, `GET /api/beta/batches/:id` — **a separate beta API**, not the `/chat/completions` call with a `:batch` model id |
+| Flow | Submit-and-poll. `202 Accepted` → `validating → in_progress → finalizing → completed` |
+| **Turnaround** | **24-hour completion window.** No faster SLA is promised. |
+| Input | Inline JSON: `{endpoint, model, requests:[{custom_id, body}]}`. No JSONL upload. |
+| Retention | Results held 30 days |
+| **Rejected** | **Image, audio, video, and file content.** Multimodal must stay on the sync API. |
+
+**Constraint 1 — the 24-hour window, not the discount, is the design driver.** Batch is not "a few hours"; it is "any time within 24h." Every job whose output feeds another job *the same day* breaks under it. From the live crontab:
+
+| Chain | Gap | Batchable as-is? |
+|---|---|---|
+| `cron-civic-run --stage=datawake` 05:45 → `cron-desk-run --stage=angle` 06:15 | 30 min | **No** |
+| desk `angle` 06:15 → `report` 13:15 → `write` 18:15 | 7h, then 5h | **No** |
+| `newsroom-digest` 06:00 → `notebooklmDailyNews` 08:00 | 2h | **No** |
+| `citizen-wake` morning/midday/night 07:30 / 12:30 / 21:30 | 5h, 9h | **No** — a wake returning late lands in the wrong slot |
+| `citizen-exchange` 17:00 | terminal output | **Yes** |
+| `cron-undocked-run` 20:30 | terminal output | **Yes** |
+| `moltbook-heartbeat` 14:00 | terminal output | **Yes** |
+| `buildCitizenBondGraph` Sun 23:07 | weekly, terminal | **Yes** |
+| `photoQA.js`, `generate-edition-photos.js` | vision/image | **Never** — multimodal is rejected outright |
+
+So the drop-in wins are the *terminal* jobs — the ones nothing downstream waits on. That is a real but modest slice.
+
+**The bigger option, which is Mike's call and not a mechanism decision:** run the pipeline **one day behind**. Submit each stage's batch when the current stage finishes and consume it on tomorrow's run. Given "no deadline," the sim genuinely does not care whether an edition is composed from today's or yesterday's wake — the cycle is the clock, not the wall. That converts nearly the whole fleet to 50% and costs one day of latency that nobody in the world experiences. It is a pipeline-cadence redesign, not a migration, and should be decided separately from this plan.
+
+**Constraint 2 — Rhea is the hard case.** She is a gate: she grades an article and the verdict decides publish/no-publish inline, at the 18:15 write stage (`--gate-backend api`). Batching her means the write stage itself becomes async. Rhea should migrate to OpenRouter *sync* first (Task 3 as written), and only move to batch if the day-behind cadence is adopted.
+
+**Pricing note that matters for the next 11 days:** Sonnet 5's `$2/$10` is an *introductory* rate against a `$3/$15` standard — a 33% discount that **ends 2026-08-31**, not a new one arriving. Batch is a separate, standing 50%. They stack: `anthropic/claude-sonnet-5:batch` is **$1.00/$5.00 today** — one third of standard sync — and becomes $1.50/$7.50 on 2026-09-01.
+
 ### Task 2: Repoint the dual-callers
 `cron-desk-writer.js` first — it already runs the same model both ways, so switching the Anthropic branch off is a one-line change with an existing OpenRouter path to fall into. Then `cron-saturday-run.js`, then `moltbook-heartbeat.js`.
 - **Verify:** each script's existing test passes; one live run per script matches prior output shape.
@@ -109,3 +147,4 @@ If everything lands, decide whether `ANTHROPIC_API_KEY` stays in the env as a fa
 
 - 2026-08-20 — Drafted from Mike-direct at S385, with a verified script inventory rather than an assumed one. Not started.
 - 2026-08-20 — Task 1 DONE: OpenRouter is exact pass-through on all three models; cost is a 5.5% card fee on credit top-ups. Awaiting Mike on Task 2.
+- 2026-08-20 — Task 1b added: batch verified as a separate submit-and-poll beta API with a 24h window and no multimodal; only terminal cron jobs batch as-is. Day-behind cadence flagged as the bigger option, Mike's call.

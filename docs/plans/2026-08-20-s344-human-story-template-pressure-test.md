@@ -21,7 +21,7 @@ pointers:
 
 **Goal:** Restore one uniform human Article shape across every scheduled desk while retaining LEP/2 as the typed sidecar and Rhea as the independent contradiction gate.
 
-**Architecture:** Mags' assignment remains immutable in §1. W1 returns a dual artifact—a human chase in the reporter's register plus a validated machine plan—and only the chase enters §2; W2 returns a citizen answer rather than assignment language in §3, and a wake with zero publishable answers fails before W3 opens; W3 fills a fixed four-part Article in §4. Deterministic checks enforce shape, Packet-backed names and supplied claims (no unsupplied access, dialogue, count, or room), real-world exclusion, repair-chrome exclusion, and assignment/INTAKE coherence before Rhea reviews contradictions. The W1 three-cited-facts machine check stays in the sidecar; it is not a human slot and is not retired.
+**Architecture:** Mags' assignment remains immutable in §1. W1 returns a dual artifact—a human chase in the reporter's register plus a validated machine plan—and only the chase enters §2; W2 returns a citizen answer rather than assignment language in §3, and a wake with zero publishable answers fails before W3 opens; W3 fills a fixed four-part Article in §4. The Packet is the data, not the picture. Allotted hallucination is the job: Jax's bar, Tanya's clubhouse, a named in-world spot that fits the numbers. The Packet will never contain a clubhouse event — that already-canon data is what they paint from. A new in-world place ("Tina's bar is my game-day spot") is not a leak; it is INTAKE `BIZ` and mints into GodWorld. The wall is real-world Oakland (BART, Frank Ogawa, Heinold's), invented engine numbers, invented Packet quotes, and Tribune-as-actor — not "does this room already exist on a sheet." Deterministic checks enforce shape, real-world exclusion, repair-chrome exclusion, and assignment/INTAKE coherence before Rhea. The W1 three-cited-facts machine check stays in the sidecar.
 
 **Terminal:** engine-sheet
 
@@ -111,7 +111,7 @@ pointers:
   - `scripts/livedArticleShape.test.js` — modify
 - **Steps:**
   1. Encode the ordered Article slots: assigned-fact lede, one scene, one exact Packet quote, unanswered question.
-  2. State once that named entities require Packet membership and unnamed non-contradictory texture is allowed. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from the Packet.
+  2. Scene is allotted hallucination: an in-world room or named spot that fits the assigned data. Real-world Oakland places fail. Engine numbers and Packet quotes stay Packet-backed. A new in-world `BIZ` must land on INTAKE so it can mint.
   3. Keep persona/desk instructions as voice overlays inside the fixed structure.
   4. Do not retire the W1 three-cited-facts machine check. It stays in the sidecar; the human slots remain chase / answer / Article.
 - **Verify:** `node scripts/livedArticleShape.test.js` → complete Articles pass; missing, duplicated, or reordered slots fail with named reasons; a Tanya-class clubhouse-access scene fails; the three-cited-facts sidecar check remains wired.
@@ -128,7 +128,7 @@ pointers:
   1. Derive the named-entity allowlist from the W3 Packet rather than relying only on a growing phrase denylist.
   2. Retain explicit real-world import checks for known constructed-world collisions, including BART and Frank Ogawa.
   3. Reject model-repair chrome such as “corrected article,” repair explanations, Packet/schema narration, and instruction echoes.
-  4. Preserve unnamed scene texture unless it makes a new concrete claim that contradicts the Packet. Fail unsupplied access, dialogue, count, or room (C104 Tanya “clubhouse” is the fixture). Named-entity allowlist alone will not catch that class.
+  4. Preserve allotted scene texture (in-world bar, clubhouse SET, named spot that is not real Oakland). Fail invented speech sourced from the room, real-world imports, and Packet-quote/number invention. C104 Tanya “clubhouse” as SET is not the fail.
 - **Verify:** `node scripts/articleContamination.test.js && node scripts/livedExperiencePacketV2.test.js` → Jax real-place imports, Tanya clubhouse access, and repair chrome fail; anonymous non-contradictory texture passes.
 - **Status:** [x] complete
 
@@ -255,4 +255,5 @@ frozen** — the parked further-loosening stays parked until Task 10 closes.
 - 2026-08-21 (grok) — Parked after Task 10: exact contiguous Packet-quote match is too strict (Luis split-attribution false fail). Matcher unchanged for the observation window. WHO, invented words, Tribune-as-actor, empty W2 stay.
 - 2026-08-21 (grok) — Landed `packetQuoteLanded` before the 18:15 write: Packet-backed sentence span + mid-quote attribution pass; invented quote still fails. W1/W2 and crontab untouched.
 - 2026-08-21 (grok) — Sports SET is not a leak: drop mere-word clubhouse/press-box/locker fail. Tanya/Anthony/Hal bags place them in those rooms. Still fail invented speech sourced from the room. Crontab untouched.
+- 2026-08-21 (grok) — Allotted hallucination lock: Packet is data, not the picture. In-world named spots (Tina's bar) mint via INTAKE BIZ. Wall is real Oakland, fake numbers, fake Packet quotes. Tanya files from the clubhouse; Jax opens in an in-world place not BART. Writer hygiene + Tanya slice/package updated. No crontab.
 - 2026-08-21 (engine-sheet) — Reconciled the matcher-version contradiction between `22a06b65` (park) and `adaa6237` (land): no wake fired between the runtime land and the change, so the observation window had not opened. Baseline re-verified unchanged. Matcher frozen from 06:15.

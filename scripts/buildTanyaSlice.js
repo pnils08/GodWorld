@@ -7,9 +7,9 @@ const sports = require('./sportsSubstrate');
 const ROOT = path.join(__dirname, '..');
 
 const TANYA_APPROACH =
-  'Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. ' +
-  'Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. ' +
-  'Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.';
+  'Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. ' +
+  'Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. ' +
+  'No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.';
 
 function score(row, cycle) {
   const blob = [row.eventKind, row.storyAngle, row.notes].join(' ').toLowerCase();
@@ -76,15 +76,14 @@ function buildTanyaSlice(cycle, opts) {
     prewrite: {
       bagModes: [{ id: 10, name: 'Inference Close' }],
       anchorFacts,
-      claim: 'The supplied sports record establishes the event; it does not establish what happened in the room.',
-      accessEvidence: { state: 'NOT_SUPPLIED', facts: [] },
+      claim: 'The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.',
+      accessEvidence: { state: 'ALLOTTED', facts: ['clubhouse/sideline SET is the reporter\'s room'] },
       quoteEvidence: { state: 'NOT_SUPPLIED', quotes: [] },
-      observationEvidence: { state: 'NOT_SUPPLIED', facts: [] },
-      missing: ['reporter attendance or access', 'room mood or witnessed action', 'quotes or dialogue',
-        'injury detail or team response beyond the supplied record']
+      observationEvidence: { state: 'ALLOTTED', facts: [] },
+      missing: ['Packet player quotes', 'injury or team-response facts beyond the supplied record']
     },
     story, approach: TANYA_APPROACH, players,
-    scene: { colorRoom: 'No scene is authorized unless the Packet supplies an observed place and action.' },
+    scene: { colorRoom: 'Clubhouse SET is authorized. Invented player quotes and real-world venues are not.' },
     candidates: ranked.slice(0, 8).map(item => ({ score: item.score,
       label: item.row.storyAngle || item.row.rawHeader, cycle: item.row.cycle })),
     pointers: ['output/world_summary_c' + cycle + '.md ## Sports', 'scripts/sportsSubstrate.js',

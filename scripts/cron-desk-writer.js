@@ -349,8 +349,8 @@ function formatStrictSourceHygiene(nameCheck, packet) {
     'Do not use an unverified candidate as a person or official. It may appear ' +
       'only as a place/organization when the lane explicitly identifies it as one.',
     loadBearing
-      ? 'You may use ONLY the texture listed in packet.manifest.authorizedTexture and only under packet.manifest.textureConditions. Anonymous role-only color is not an official source or canon proof.'
-      : 'Do not invent anonymous people, quotes, observations, counts, ages, jobs, relationships, biographies, or scene events.',
+      ? 'Packet people, quotes, and numbers stay Packet-backed. In-world rooms and named spots that are not real Oakland are allotted hallucination; new businesses go on INTAKE BIZ. AuthorizedTexture in the Packet is additional SET, not a cap. Anonymous role-only color is not an official source or canon proof.'
+      : 'Do not invent anonymous people, Packet quotes, fake counts, or real-world Oakland places. In-world named spots that fit the data are allotted hallucination and go on INTAKE BIZ.',
     loadBearing
       ? 'Do not put Anonymous/Unnamed descriptors in INTAKE. A role-only texture quote must remain anonymous color and must not be attributed to a named citizen, official, institution, or canon source.'
       : 'Do not put Anonymous/Unnamed descriptors in the Names Index. If no supplied canon quote fits, use no quote rather than fabricating one.',
@@ -800,8 +800,10 @@ async function main() {
     ? strictSourceBlock + '\n\n'
     : '';
   const strictSourceFinal = strictSourceBlock
-    ? ' Enforce strict source hygiene: use only supplied canon people and quotes; ' +
-      'invent no anonymous source, profile, count, or scene event.'
+    ? ' Enforce strict source hygiene: Packet people, quotes, and numbers stay Packet-backed. ' +
+      'Invent no real-world Oakland place (BART, Frank Ogawa, real bars). ' +
+      'In-world rooms and named spots that fit the data are allotted hallucination — paint them, put new businesses on INTAKE BIZ so they mint. ' +
+      'Invent no anonymous source, fake count, or fake Packet quote.'
     : '';
 
   // Phase 2: when a lane state-file is injected, the reporter works from its OWN
@@ -817,7 +819,7 @@ async function main() {
 
   const firebrandHeat = PERSONA === 'freelance-firebrand'
     ? '\n\nFIREBRAND HEAT (hard): You are Jax Caldera — accountability of bullshit, not a tidy desk. ' +
-      'Write SHORT and HOT (target 400–650 words). First-person. Bar/laundromat/BART open with a SPECIFIC place and time. ' +
+      'Write SHORT and HOT (target 400–650 words). First-person. Open in a SPECIFIC in-world place and time (your bar, a laundromat, a stop) — not real-world BART or Frank Ogawa. If you name a new spot, it is now in this city: put it on INTAKE BIZ. ' +
       'Lead with the contradiction or the unowned crisis — not the official timeline. Do the raw count in prose (not a bullet inventory). ' +
       'Translate officialese into what it actually means. Name who owes an answer. End on ONE unanswered question, then ' +
       '`-- Jax Caldera | tipline: JAX-TIPS`. ' +
@@ -908,8 +910,8 @@ async function main() {
       loadNoahEnvironmentBag()
     : PERSONA === 'tanya-cruz'
     ? '\n\nTANYA STANCE (hard): You are Tanya Cruz — sideline dispatch, not multi-voice sports-desk. ' +
-      'First-person interpretation is allowed; clubhouse access, room mood, witnessed action, and dialogue require Packet evidence. Short. Packet quotes only. ' +
-      'FORBIDDEN: invented access, observation, dialogue, injury, team action, P Slayer heat essay, or multi-reporter section.\n' +
+      'You file from the clubhouse — that SET is yours; the Packet will never list a clubhouse event. Paint what the supplied line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. Short. ' +
+      'FORBIDDEN: real-world stadiums/BART/Ogawa, invented player quotes, invented stats, injury invention, P Slayer heat essay, or multi-reporter section.\n' +
       loadTanyaSidelineBag()
     : PERSONA === 'simon-leary'
     ? '\n\nSIMON STANCE (hard): You are Simon Leary — long view, not multi-voice sports-desk. ' +

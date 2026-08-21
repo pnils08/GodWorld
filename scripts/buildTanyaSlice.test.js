@@ -7,15 +7,15 @@ const path = require('path');
 const { buildTanyaSlice, TANYA_APPROACH } = require('./buildTanyaSlice');
 const packet = require('./livedExperiencePacketV2');
 
-assert.match(TANYA_APPROACH, /Do not claim clubhouse access/);
+assert.match(TANYA_APPROACH, /file from the clubhouse/);
 const summary = path.join(__dirname, '..', 'output', 'world_summary_c103.md');
 if (fs.existsSync(summary)) {
   const slice = buildTanyaSlice(103);
   assert.equal(slice.kind, 'tanya-sideline');
   assert.equal(slice.journalist.popid, 'POP-00014');
-  assert.equal(slice.prewrite.accessEvidence.state, 'NOT_SUPPLIED');
+  assert.equal(slice.prewrite.accessEvidence.state, 'ALLOTTED');
   assert.equal(slice.prewrite.quoteEvidence.state, 'NOT_SUPPLIED');
-  assert.match(slice.scene.colorRoom, /No scene is authorized/);
+  assert.match(slice.scene.colorRoom, /Clubhouse SET is authorized/);
   const w1 = packet.buildAnglePacket({ cycle: 103, desk: 'sports',
     reporter: slice.journalist, story: slice.story, approach: slice.approach, slice, lane: [] });
   assert.equal(w1.task.creativeBrief.kind, 'sideline-dispatch');

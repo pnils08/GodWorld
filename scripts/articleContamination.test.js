@@ -60,6 +60,16 @@ assert(roomTalk.findings.some(f => f.check === 'unsupplied-access' && f.issue ==
 const chrome = scan('Here\'s the corrected article with all unapproved quotes removed:\n\nNightline was open.', { desk: 'culture' });
 assert(chrome.findings.some(f => f.check === 'repair-chrome'));
 
+const tinas = scan([
+  '# Game day',
+  '',
+  'Tina\'s bar is my favorite game-day spot. The board said Keane went 2-for-3.',
+  '',
+  '## INTAKE',
+  'BIZ: Tina\'s bar | mentioned',
+].join('\n'), { desk: 'sports' });
+assert.equal(tinas.fail, false, 'in-world named bar is allotted hallucination: ' + JSON.stringify(tinas.findings));
+
 const texture = scan([
   '# Nightline still had the lights',
   '',

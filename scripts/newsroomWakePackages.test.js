@@ -139,7 +139,8 @@ assert.equal(tanya.assignment.popid, 'POP-00014');
 assert.equal(tanya.assignment.beatDomain, 'SPORTS_SIDELINE');
 assert.equal(packagesApi.routeFor(tanya, 'angle').model, 'deepseek/deepseek-chat');
 assert.equal(tanya.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.ok(tanya.reviewProfile.canonBlockers.some(v => v.includes('clubhouse or sideline access')));
+assert.ok(tanya.reviewProfile.canonBlockers.some(v => v.includes('real-world Oakland venues')));
+assert.ok(tanya.reviewProfile.authorizedTexture.some(v => /clubhouse/i.test(v)));
 
 const simon = packages['simon-leary'];
 assert.equal(simon.version, 'SIMON-LEP2-1');

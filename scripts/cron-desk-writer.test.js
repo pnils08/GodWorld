@@ -38,7 +38,7 @@ const hygiene = formatStrictSourceHygiene({
 assert.ok(hygiene.includes('STRICT SOURCE HYGIENE'));
 assert.ok(hygiene.includes('NONCANON_TEST Citizen'));
 assert.ok(hygiene.includes('NONCANON_TEST Invented'));
-assert.ok(hygiene.includes('invent no anonymous') || hygiene.includes('Do not invent anonymous'));
+assert.ok(hygiene.includes('allotted hallucination') || hygiene.includes('INTAKE BIZ'));
 
 const jaxHygiene = formatStrictSourceHygiene({ verified: [], unverified: [] }, {
   manifest: {

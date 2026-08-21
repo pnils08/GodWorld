@@ -442,7 +442,7 @@
   "reviewProfile": {
    "id": "tanya-sideline-v1",
    "canonPolicy": "load-bearing",
-   "purpose": "File a short Packet-backed sports dispatch while treating access, observation, mood, dialogue, injuries, and team response as absent unless supplied.",
+   "purpose": "File a short sideline dispatch from the clubhouse SET. Packet owns player quotes and numbers. The room itself is allotted hallucination.",
    "articleContract": {
     "renderMode": "SOURCE_BRIEF",
     "voice": "short first-person sideline interpretation",
@@ -451,16 +451,17 @@
     "closing": "the access or observation still needed"
    },
    "authorizedTexture": [
-    "first-person interpretation without a claim of attendance or access",
-    "a concise transition carrying no observed place, action, mood, person, or event"
+    "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+    "room mood and presence as allotted hallucination fitted to the supplied sports line"
    ],
    "textureConditions": [
-    "every access claim, observation, quote, injury detail, team response, person, place, event, and statistic requires Packet support",
+    "player quotes, statistics, injuries, and results require Packet support",
+    "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
     "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
    ],
    "canonBlockers": [
-    "invented clubhouse or sideline access, attendance, room mood, witnessed action, dialogue, injury detail, or team response",
-    "an invented or altered person, quote, statistic, result, roster move, venue, event, or relationship",
+    "invented player quotes, invented statistics, invented injuries, or real-world Oakland venues",
+    "an invented or altered Packet person, quote, statistic, result, or roster move",
     "an unresolved feed spelling silently assigned an identity or role"
    ]
   }

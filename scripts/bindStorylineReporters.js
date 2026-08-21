@@ -53,15 +53,22 @@ function parseArgs() {
   return out;
 }
 
+// Both naming eras live in editions/: `cycle_pulse_edition_102.txt` through
+// e102, and `cycle_pulse_c103.txt` from c103 forward (cron-saturday-run.js
+// stepPublish). Checking only the old name silently returned null for every
+// current edition.
 function findEditionFile(cycle) {
-  const candidate = path.join(EDITIONS_DIR, `cycle_pulse_edition_${cycle}.txt`);
-  return fs.existsSync(candidate) ? candidate : null;
+  const candidates = [
+    path.join(EDITIONS_DIR, `cycle_pulse_c${cycle}.txt`),
+    path.join(EDITIONS_DIR, `cycle_pulse_edition_${cycle}.txt`),
+  ];
+  return candidates.find(p => fs.existsSync(p)) || null;
 }
 
 function findLatestEditionCycle() {
   if (!fs.existsSync(EDITIONS_DIR)) return null;
   const cycles = fs.readdirSync(EDITIONS_DIR)
-    .map((f) => f.match(/^cycle_pulse_edition_(\d+)\.txt$/))
+    .map((f) => f.match(/^cycle_pulse_(?:edition_|c)(\d+)\.txt$/))
     .filter(Boolean)
     .map((m) => parseInt(m[1], 10))
     .sort((a, b) => b - a);

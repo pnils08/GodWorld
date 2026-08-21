@@ -502,7 +502,15 @@ function deriveOutDir(type, cycle, slug) {
 }
 
 function deriveSourcePath(type, cycle, slug) {
-  if (type === 'edition') return path.join('editions', 'cycle_pulse_edition_' + pad(cycle) + '.txt');
+  if (type === 'edition') {
+    // c103 forward: `cycle_pulse_c{N}.txt` (cron-saturday-run.js stepPublish).
+    // Pre-c103 archive: `cycle_pulse_edition_{N}.txt`. Prefer whichever exists.
+    var current = path.join('editions', 'cycle_pulse_c' + pad(cycle) + '.txt');
+    // Resolve off __dirname, not cwd — callers invoke this by absolute script
+    // path from cron and the return value stays repo-relative.
+    if (fs.existsSync(path.join(__dirname, '..', current))) return current;
+    return path.join('editions', 'cycle_pulse_edition_' + pad(cycle) + '.txt');
+  }
   return path.join('editions', 'cycle_pulse_' + type + '_' + pad(cycle) + '_' + slug + '.txt');
 }
 

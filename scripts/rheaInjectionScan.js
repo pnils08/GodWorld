@@ -64,7 +64,13 @@ function collectCycleFiles(cycle) {
     }
   }
 
-  const editionFile = path.join(PROJECT_ROOT, 'editions', `cycle_pulse_edition_${cycle}.txt`);
+  // c103 forward the emitter writes `cycle_pulse_c{N}.txt`; the pre-c103
+  // archive keeps `cycle_pulse_edition_{N}.txt`. Try current first.
+  const editionCandidates = [
+    path.join(PROJECT_ROOT, 'editions', `cycle_pulse_c${cycle}.txt`),
+    path.join(PROJECT_ROOT, 'editions', `cycle_pulse_edition_${cycle}.txt`),
+  ];
+  const editionFile = editionCandidates.find(p => fs.existsSync(p)) || editionCandidates[1];
   if (fs.existsSync(editionFile)) files.push(editionFile);
 
   const editionsDir = path.join(PROJECT_ROOT, 'editions');

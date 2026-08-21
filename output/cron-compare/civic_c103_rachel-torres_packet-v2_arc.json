@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "civic",
+  "persona": "rachel-torres",
+  "storyline": {
+    "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+    "verb": "opened"
+  },
+  "hood": "West Oakland, Fruitvale, East Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard about the Alternative Response Initiative starting up in West Oakland, and I think it’s worth asking how they’re measuring success—are people feeling safer, or is it just moving problems around?"
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I heard they're trying something new with how they handle calls downtown, sending different folks than just cops sometimes. Should ask if regular people like us can call them direct or if it's only through 911."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard about the Oakland Alternative Response Initiative, and it seems like a step toward addressing public safety differently in those neighborhoods. The Tribune should ask how it’s being measured—what success looks like and who’s tracking it."
+    }
+  ],
+  "claim": "I’ve heard about the Alternative Response Initiative starting up in West Oakland, and I think it’s worth asking how they’re measuring success—are people feeling safer, or is it just moving problems around?",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-19T18:17:07.530Z"
+}

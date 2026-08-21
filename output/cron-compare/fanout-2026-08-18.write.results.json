@@ -1,0 +1,49 @@
+{
+  "date": "2026-08-18",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": false,
+      "error": "codeRenderedMode is not defined"
+    },
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk civic --state-file output/cron-compare/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.state.json --persona luis-navarro --artifact-tag packet-v2 --provider openrouter --model anthropic/claude-sonnet-5 --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": false,
+      "error": "codeRenderedMode is not defined"
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": false,
+      "error": "codeRenderedMode is not defined"
+    },
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": false,
+      "error": "codeRenderedMode is not defined"
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": false,
+      "error": "codeRenderedMode is not defined"
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/undocked_c103_nia-rook_packet-v2_angle.json — run --stage=angle first"
+    }
+  ],
+  "ranAt": "2026-08-18T23:25:10.259Z"
+}

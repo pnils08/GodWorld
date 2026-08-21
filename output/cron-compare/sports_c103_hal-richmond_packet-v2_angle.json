@@ -364,7 +364,7 @@
   "angleRead": {
     "name": "Hal Richmond",
     "popid": "POP-00007",
-    "text": "{\n  \"focus\": \"A's player-feature\",\n  \"why\": \"late-season player feature\",\n  \"checks\": [\n    \"Vinnie Keane's performance\",\n    \"Team's current streak\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00001\",\n      \"question\": \"What does Vinnie Keane's recent performance indicate about the team's momentum?\",\n      \"basis\": \"feed-names\"\n    }\n  ],\n  \"interpretation\": \"The team's success may be attributed to the players' individual performances\",\n  \"unverifiedLead\": [\n    \"The impact of Benji Dillon's move to the bullpen on the team's overall performance\"\n  ],\n  \"closeQuestion\": \"How will the team's current streak be affected by the changes in the roster?\"\n}",
+    "text": "{\n  \"focus\": \"A's player-feature\",\n  \"why\": \"late-season player feature\",\n  \"checks\": [\n    \"Vinnie Keane's performance\",\n    \"Team's current streak\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00001\",\n      \"question\": \"What does Vinnie Keane's recent performance indicate about the team's momentum?\",\n      \"basis\": \"feed-names\"\n    }\n  ],\n  \"interpretation\": \"The team's success can be attributed to the strong performances of its players\",\n  \"unverifiedLead\": [\n    \"The current streak may be a turning point in the season\"\n  ],\n  \"closeQuestion\": \"Will the team be able to maintain its momentum going into the next game?\"\n}",
     "plan": {
       "focus": "A's player-feature",
       "why": "late-season player feature",
@@ -379,11 +379,11 @@
           "basis": "feed-names"
         }
       ],
-      "interpretation": "The team's success may be attributed to the players' individual performances",
+      "interpretation": "The team's success can be attributed to the strong performances of its players",
       "unverifiedLead": [
-        "The impact of Benji Dillon's move to the bullpen on the team's overall performance"
+        "The current streak may be a turning point in the season"
       ],
-      "closeQuestion": "How will the team's current streak be affected by the changes in the roster?"
+      "closeQuestion": "Will the team be able to maintain its momentum going into the next game?"
     }
   },
   "lanePicks": [
@@ -419,5 +419,5 @@
     }
   ],
   "laneEntries": 8,
-  "ranAt": "2026-08-14T11:16:09.982Z"
+  "ranAt": "2026-08-19T11:15:50.108Z"
 }

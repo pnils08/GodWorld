@@ -1,0 +1,47 @@
+{
+  "draft": "output/cron-compare/sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "76303cdb5f90624153ba1e96784a35c9507dcc0abf1a5592378aeb93df782e7b",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All claims regarding Vinnie Keane's performance (2-3, HR, 3 RBI) and the A's 126 wins are fully verified against the Cycle 104 sports feed.",
+  "review": {
+    "profileId": "tanya-sideline-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-3c413852fd13",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0411,
+  "durationMs": 7491,
+  "parseError": false,
+  "ranAt": "2026-08-20T23:17:37.106Z"
+}

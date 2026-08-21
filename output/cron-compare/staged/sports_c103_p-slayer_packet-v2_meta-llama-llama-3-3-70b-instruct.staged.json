@@ -5,38 +5,43 @@
   "persona": "p-slayer",
   "byline": "P Slayer",
   "bylinePopid": "POP-00008",
-  "article": "output/cron-compare/staged/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "article": "output/cron-compare/staged/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2320.md",
   "bylineUsage": {
-    "recorded": false,
-    "reason": "local Rhea reconciliation; no external byline write performed"
+    "recorded": true
   },
   "intake": {
-    "names": [],
+    "names": [
+      {
+        "name": "Andre Turner",
+        "role": "quoted-source",
+        "popid": "POP-00225"
+      }
+    ],
     "businesses": [],
-    "storylines": [],
+    "storylines": [
+      {
+        "slug": "downtown-andre-turner-prospect-callup",
+        "verb": "opened"
+      }
+    ],
     "hoods": [
       "Downtown"
     ],
     "claims": [
       {
-        "claim": "Pablo Almanzar throws a No No in his MLB debut",
-        "sourceRef": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut"
+        "claim": "I'm not sure what to make of this Pablo Almanzar guy throwing a no-hitter, it feels like something's off, like it's too good to be true. I think the Tribune should ask if he's really as good as everyone's making him out to be.",
+        "sourceRef": "citizenVoice PRESS Andre Turner"
       }
     ]
-  },
-  "approval": {
-    "status": "canon-approved",
-    "approvedBy": "builder",
-    "approvedAt": "2026-08-13"
   },
   "rhea": {
     "pass": true,
     "model": "google/gemini-3.5-flash",
-    "manifestId": "AM-3725377deebc",
-    "draftSha256": "6e3e82bb1f993e76ce296fc9cd9d71bf5fae0a2dbfc1ffe15dabd690cf3ae17c",
+    "manifestId": "AM-7f984b7616e9",
+    "draftSha256": "eb6e743d8a7d8cd8abdaad154ea9fd02a095625f343a4244d27998f8df9b0eee",
     "verdict": "output/cron-compare/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
-    "ranAt": "2026-08-13T07:04:04.401Z"
+    "ranAt": "2026-08-18T23:20:52.602Z"
   },
-  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
-  "stagedAt": "2026-08-13T07:44:52.146Z"
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-18T23:20:53.118Z"
 }

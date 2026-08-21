@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "culture",
+  "persona": "maria-keen",
+  "storyline": {
+    "slug": "west-oakland-daniel-cloak-quiet-nightlife",
+    "verb": "opened"
+  },
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I think what feels off about Nightline Station is that it's usually quiet, and I'm not sure why that is. The Tribune should ask why it's so quiet at Nightline Station, seems like something's missing."
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I think what feels off about Nightline Station is that it's usually not this quiet, and I'm wondering if the Tribune should ask why it's been so still lately."
+    }
+  ],
+  "claim": "I think what feels off about Nightline Station is that it's usually quiet, and I'm not sure why that is. The Tribune should ask why it's so quiet at Nightline Station, seems like something's missing.",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-17T18:19:05.439Z"
+}

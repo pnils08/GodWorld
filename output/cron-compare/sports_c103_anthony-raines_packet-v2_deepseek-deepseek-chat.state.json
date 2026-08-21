@@ -8,7 +8,7 @@
     "desk": "sports"
   },
   "task": {
-    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
     "assignment": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
     "approach": "Analytic approach (Anthony Raines): third-person only — never fan \"we.\" One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.",
     "voice": null,
@@ -51,7 +51,7 @@
     "src": "world_summary_c103.md ## Sports",
     "plan": {
       "focus": "Pablo Almanzar's no-hitter in his MLB debut",
-      "closeQuestion": "Can Pablo Almanzar build on this debut to become a cornerstone of the A's rotation?"
+      "closeQuestion": "Can Almanzar replicate this level of performance, or was it a one-time variance?"
     }
   },
   "exposure": {
@@ -60,12 +60,12 @@
     "excludedLeads": [
       {
         "from": "Anthony Raines",
-        "text": "Is Almanzar's pitch mix and command indicative of future elite performance?",
+        "text": "Potential insights from Almanzar's pitching repertoire versus results",
         "usable": false
       },
       {
         "from": "Anthony Raines",
-        "text": "How does the A's bullpen strategy factor into Almanzar's potential role moving forward?",
+        "text": "Historical context of MLB debuts with similar stats",
         "usable": false
       }
     ]
@@ -131,7 +131,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -166,8 +166,8 @@
     "purpose": "Evaluate one Packet-backed sports line, roster fit, or feed delta with correctly attributed numbers and explicit sample limits. One sourced analytic claim is success; fan heat, elegy, and invented advanced metrics are not.",
     "articleContract": {
       "renderMode": "SOURCE_BRIEF",
-      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
-      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
+      "voice": "precise third-person sports analysis",
+      "targetWords": "evidence-bounded",
       "opening": "the strongest Packet-backed player line or roster fact",
       "closing": "the sample, roster, or dossier evidence still needed to test the claim"
     },
@@ -256,12 +256,12 @@
     "unverifiedLeads": [
       {
         "from": "Anthony Raines",
-        "text": "Is Almanzar's pitch mix and command indicative of future elite performance?",
+        "text": "Potential insights from Almanzar's pitching repertoire versus results",
         "publishable": false
       },
       {
         "from": "Anthony Raines",
-        "text": "How does the A's bullpen strategy factor into Almanzar's potential role moving forward?",
+        "text": "Historical context of MLB debuts with similar stats",
         "publishable": false
       }
     ],

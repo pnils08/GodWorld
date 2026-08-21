@@ -9,7 +9,7 @@
     "officeId": "COUNCIL-D5",
     "district": "D5",
     "faction": "OPP",
-    "agentDir": "civic-office-opp-faction",
+    "agentDir": "civic-office-council-d5",
     "initiative": null,
     "dials": {
       "approval": 90
@@ -53,8 +53,6 @@
     "kind": "district-heat",
     "hoods": [
       "East Oakland",
-      "Coliseum",
-      "Elmhurst",
       "Baylight District"
     ],
     "src": "lib/districtMap.js + civic-office-map.json"
@@ -62,19 +60,19 @@
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-01047",
-        "name": "Maria Conteras",
-        "neighborhood": "East Oakland",
-        "role": "High School Teacher",
-        "tier": 3,
-        "src": "output/simulation_ledger_snapshot.jsonl",
-        "why": "lives in East Oakland — Oakland Alternative Response Initiative — D7 next-cycle report and community satisfaction survey"
-      },
-      {
         "pop": "POP-01055",
         "name": "Jerome Pittman",
         "neighborhood": "East Oakland",
         "role": "Transit Hub D5 Intake Liaison",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Alternative Response Initiative — D7 next-cycle report and community satisfaction survey"
+      },
+      {
+        "pop": "POP-01047",
+        "name": "Maria Conteras",
+        "neighborhood": "East Oakland",
+        "role": "High School Teacher",
         "tier": 3,
         "src": "output/simulation_ledger_snapshot.jsonl",
         "why": "lives in East Oakland — Oakland Alternative Response Initiative — D7 next-cycle report and community satisfaction survey"

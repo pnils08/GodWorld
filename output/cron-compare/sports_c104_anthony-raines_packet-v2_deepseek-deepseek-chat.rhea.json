@@ -1,0 +1,78 @@
+{
+  "draft": "output/cron-compare/sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "05b1164df3686523ad88215cfd70a7e538326e3403b9580bc6fe1b6f6a6ba3cd",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Pablo Almanzar",
+      "issue": "Used as a person in the draft, but is not in the ledger (violates Pre-check 1).",
+      "severity": "high"
+    },
+    {
+      "claim": "21-year-old arm / mid-2027 debut",
+      "issue": "Uses unapproved numbers '21' and '2027' flagged by lexical review cues.",
+      "severity": "high"
+    },
+    {
+      "claim": "his twelfth of the season punctuating a 2-for-3 night that brought his RBI total to forty-two",
+      "issue": "Invented season statistics for Vinnie Keane (12 HRs, 42 RBIs) not supported by the ground truth.",
+      "severity": "high"
+    },
+    {
+      "claim": "eighteen innings, zero hits allowed, fifteen strikeouts, two walks",
+      "issue": "Incorrect season strikeout total. Almanzar has 20 strikeouts across his two starts (10 Ks in C103, 10 Ks in C104), not 15.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 4,
+  "highSeverityCount": 4,
+  "summary": "The draft contains multiple high-severity sourcing violations, including the use of a non-ledger citizen as a person, unapproved numbers, and fabricated player statistics.",
+  "review": {
+    "profileId": "anthony-sports-analytics-v1",
+    "canonIntegrity": "fail",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-1",
+    "manifestId": "AM-6e0dbb5cce23",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "21",
+          "-2027"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Pablo Almanzar"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0717,
+  "durationMs": 23724,
+  "parseError": false,
+  "ranAt": "2026-08-20T23:19:20.286Z"
+}

@@ -1,13 +1,14 @@
 {
   "cycle": 103,
-  "builtAt": "2026-08-12T12:34:32.255Z",
+  "builtAt": "2026-08-19T11:15:09.085Z",
   "empty": false,
+  "kind": "jax-accountability",
   "journalist": {
     "name": "Jax Caldera",
     "popid": "POP-00799",
     "persona": "freelance-firebrand"
   },
-  "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar) so long as it contradicts nothing on this slice. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+  "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
   "stink": {
     "className": "implementation-gap",
     "score": 50,
@@ -19,39 +20,72 @@
   "contradiction": {
     "a": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
     "b": "The Initiative remains listed in the supplied tracker.",
-    "frame": "The record shows an Initiative that remains listed but has not advanced; what explains the stall?"
+    "frame": "The record shows an Initiative that remains listed but has not advanced; what explains the stall?",
+    "aSrc": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+    "bSrc": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
   },
   "story": {
     "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
     "label": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
     "kind": "anomaly",
-    "angle": "The transit initiative carrying Fruitvale has not advanced in 9 cycles. What record explains the stall?",
-    "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+    "angle": "The record shows an Initiative that remains listed but has not advanced; what explains the stall?",
+    "hookLine": null,
     "hood": "Fruitvale",
     "popids": [
       "POP-00231",
-      "POP-00598",
       "POP-00744",
-      "POP-00010",
-      "POP-00039",
       "POP-00635",
       "POP-00758",
       "POP-00771",
-      "POP-00773"
+      "POP-01037",
+      "POP-00339",
+      "POP-00361",
+      "POP-00722",
+      "POP-00766",
+      "POP-00644"
     ],
     "citizens": [
       "Calvin Turner — Mechanic, Fruitvale",
-      "Vladimir Gonzalez — Right Fielder, Oakland A's, Fruitvale",
       "Tomas Renteria — Podcast Host / Line Cook, Fruitvale",
-      "Dana Reeve — Lead Journalist, Chinatown",
-      "Simone Ellis — Chief Legal Counsel, Chinatown",
       "Mei Chen — Gallery Owner/Curator, Chinatown",
       "Robert Jaston — Senior Pastor / Faith Leader, West Oakland",
       "Sage Vienta — Actor, West Oakland",
-      "Jada Rayes — Editor-in-Chief, OakTown Echo, West Oakland"
+      "Ivy Tran — Driver, Fruitvale",
+      "Kaila Nguyen — Pupuseria Owner, Fruitvale",
+      "Jason Flower — Immigrant Legal Aid Worker, Fruitvale",
+      "Daniel Cloak — Bakery Worker, West Oakland",
+      "Manjit Singh — Senior Pastor / Faith Leader, Fruitvale",
+      "Rafael Pilgrim — Server, Fruitvale"
     ],
     "stinkClass": "implementation-gap",
     "stinkScore": 50
+  },
+  "prewrite": {
+    "method": "TWO_SIDED_DATA_AUDIT",
+    "anchorFacts": [
+      "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "The Initiative remains listed in the supplied tracker."
+    ],
+    "evidence": [
+      {
+        "side": "A",
+        "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "side": "B",
+        "text": "The Initiative remains listed in the supplied tracker.",
+        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      }
+    ],
+    "scopeHoods": [
+      "Fruitvale"
+    ],
+    "missing": [
+      "the prior comparison needed to validate the flagged direction",
+      "an office response to the data mismatch"
+    ],
+    "closeQuestion": "The record shows an Initiative that remains listed but has not advanced; what explains the stall?"
   },
   "citizens": [
     {
@@ -65,16 +99,6 @@
       "why": "stink-handle"
     },
     {
-      "popid": "POP-00598",
-      "name": "Vladimir Gonzalez",
-      "role": "Right Fielder, Oakland A's",
-      "neighborhood": "Fruitvale",
-      "careerStage": "entry-level",
-      "employerBizId": "BIZ-00005",
-      "profile": "Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
-      "why": "stink-handle"
-    },
-    {
       "popid": "POP-00744",
       "name": "Tomas Renteria",
       "role": "Podcast Host / Line Cook",
@@ -83,26 +107,6 @@
       "employerBizId": "BIZ-00044",
       "profile": "Tomas Renteria (POP-00744) — role: Podcast Host / Line Cook; neighborhood: Fruitvale; born: 2007; careerStage: mid; wealth: 4; employerBiz: BIZ-00044; tier: 2",
       "why": "stink-handle"
-    },
-    {
-      "popid": "POP-00010",
-      "name": "Dana Reeve",
-      "role": "Lead Journalist",
-      "neighborhood": "Chinatown",
-      "careerStage": "senior",
-      "employerBizId": "BIZ-00018",
-      "profile": "Dana Reeve (POP-00010) — role: Lead Journalist; neighborhood: Chinatown; born: 2001; careerStage: senior; wealth: 6; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 3",
-      "why": "same-hood-signal"
-    },
-    {
-      "popid": "POP-00039",
-      "name": "Simone Ellis",
-      "role": "Chief Legal Counsel",
-      "neighborhood": "Chinatown",
-      "careerStage": "retired",
-      "employerBizId": "BIZ-00017",
-      "profile": "Simone Ellis (POP-00039) — role: Chief Legal Counsel; neighborhood: Chinatown; born: 1985; careerStage: retired; wealth: 9; employerBiz: BIZ-00017; skills: Professional; tier: 3",
-      "why": "same-hood-signal"
     },
     {
       "popid": "POP-00635",
@@ -135,24 +139,147 @@
       "why": "same-hood-signal"
     },
     {
-      "popid": "POP-00773",
-      "name": "Jada Rayes",
-      "role": "Editor-in-Chief, OakTown Echo",
-      "neighborhood": "West Oakland",
+      "popid": "POP-01037",
+      "name": "Ivy Tran",
+      "role": "Driver",
+      "neighborhood": "Fruitvale",
       "careerStage": "entry-level",
-      "employerBizId": "BIZ-00018",
-      "profile": "Jada Rayes (POP-00773) — role: Editor-in-Chief, OakTown Echo; neighborhood: West Oakland; born: 1989; careerStage: entry-level; wealth: 5; employerBiz: BIZ-00018; skills: Creative & Arts; tier: 2",
-      "why": "same-hood-signal"
+      "employerBizId": "BIZ-00013",
+      "profile": "Ivy Tran (POP-01037) — role: Driver; neighborhood: Fruitvale; born: 1991; careerStage: entry-level; wealth: 4; employerBiz: BIZ-00013; skills: Transit & Infrastructure; tier: 4",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00339",
+      "name": "Kaila Nguyen",
+      "role": "Pupuseria Owner",
+      "neighborhood": "Fruitvale",
+      "careerStage": "senior",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "Kaila Nguyen (POP-00339) — role: Pupuseria Owner; neighborhood: Fruitvale; born: 1974; careerStage: senior; wealth: 7; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 4",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00361",
+      "name": "Jason Flower",
+      "role": "Immigrant Legal Aid Worker",
+      "neighborhood": "Fruitvale",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00022",
+      "profile": "Jason Flower (POP-00361) — role: Immigrant Legal Aid Worker; neighborhood: Fruitvale; born: 1996; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00022; skills: Faith & Community; tier: 4",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00722",
+      "name": "Daniel Cloak",
+      "role": "Bakery Worker",
+      "neighborhood": "West Oakland",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00028",
+      "profile": "Daniel Cloak (POP-00722) — role: Bakery Worker; neighborhood: West Oakland; born: 1986; careerStage: mid-career; wealth: 5; employerBiz: BIZ-00028; skills: Faith & Community; tier: 4",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00766",
+      "name": "Manjit Singh",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "careerStage": "entry-level",
+      "employerBizId": "BIZ-00028",
+      "profile": "Manjit Singh (POP-00766) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1993; careerStage: entry-level; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "role": "Server",
+      "neighborhood": "Fruitvale",
+      "careerStage": "mid-career",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "Rafael Pilgrim (POP-00644) — role: Server; neighborhood: Fruitvale; born: 2007; careerStage: mid-career; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Food & Culture; tier: 3",
+      "why": "bond-hop from interview pool"
     }
   ],
-  "bonds": [],
+  "bonds": [
+    {
+      "bondId": "BOND-A7591D5D",
+      "a": "POP-00231",
+      "b": "POP-01037",
+      "type": "family",
+      "intensity": "8",
+      "origin": "household",
+      "neighborhood": "Fruitvale",
+      "aName": "Calvin Turner",
+      "bName": "Ivy Tran",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-6CBC03B7",
+      "a": "POP-00231",
+      "b": "POP-00339",
+      "type": "friendship",
+      "intensity": "6.84",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Calvin Turner",
+      "bName": "Kaila Nguyen",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-25FD2697",
+      "a": "POP-00231",
+      "b": "POP-00361",
+      "type": "professional",
+      "intensity": "6",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Calvin Turner",
+      "bName": "Jason Flower",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-D06561BB",
+      "a": "POP-00758",
+      "b": "POP-00722",
+      "type": "professional",
+      "intensity": "4",
+      "origin": "neighbor",
+      "neighborhood": "West Oakland",
+      "aName": "Robert Jaston",
+      "bName": "Daniel Cloak",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-CFE6964A",
+      "a": "POP-00766",
+      "b": "POP-00744",
+      "type": "professional",
+      "intensity": "6",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Manjit Singh",
+      "bName": "Tomas Renteria",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-329909E6",
+      "a": "POP-00644",
+      "b": "POP-00771",
+      "type": "friendship",
+      "intensity": "5.4",
+      "origin": "random",
+      "neighborhood": "cross-neighborhood",
+      "aName": "Rafael Pilgrim",
+      "bName": "Sage Vienta",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    }
+  ],
   "scene": {
     "weather": "Season: Winter | Weather: 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",
     "hood": "Fruitvale",
     "neighborhoodTexture": null,
     "whoLivedIt": [],
     "chaos": [],
-    "colorRoom": "You may invent bar/street/sensory color that contradicts nothing above. Named people must stay on the CITIZENS list or be unnamed (\"a bartender who asked not to be named\"). RoleType is immutable — do not reassign careers. Soft side-work color only if it does not replace RoleType."
+    "colorRoom": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers."
   },
   "gaps": {
     "note": "Ledgers/surfaces that would deepen Jax further if wired or fixed",
@@ -212,6 +339,8 @@
     "output/world_summary_c103.md",
     "output/neighborhood_texture_c103.md",
     "output/engine_audit_c103.json",
+    "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+    "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
     "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
   ],
   "reportMeta": {

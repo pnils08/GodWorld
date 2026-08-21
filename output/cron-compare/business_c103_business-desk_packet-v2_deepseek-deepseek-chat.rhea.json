@@ -3,11 +3,12 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
+  "draftSha256": "5430cb92991e76c62d7d34758c83f82591d4e5faf1c8af88ed04036605e3be41",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "The draft accurately reflects the Dimond neighborhood cooling trajectory with no sourcing or canon violations.",
+  "summary": "All citizen profiles, exact quotes, and neighborhood trajectory trends verified perfectly against cycle 103 ground truth.",
   "review": {
     "profileId": "jordan-economic-labor-v1",
     "canonIntegrity": "pass",
@@ -15,30 +16,35 @@
   },
   "reviewProfile": {
     "id": "jordan-economic-labor-v1",
-    "packageVersion": null,
-    "manifestId": "AM-b7d92ca9379b",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-4462568b0d28",
     "lexicalObservations": []
   },
   "nameCheck": {
-    "verified": [],
-    "unverified": []
+    "verified": [
+      "Melton Neilon",
+      "Rick Walker"
+    ],
+    "unverified": [
+      "Dimond's Fruitvale Avenue"
+    ]
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 0,
+      "names": 2,
       "businesses": 0,
-      "storylines": 0,
+      "storylines": 1,
       "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": false
+    "packetChecked": true
   },
-  "apiCostUsd": 0.0403,
-  "durationMs": 6864,
+  "apiCostUsd": 0.0495,
+  "durationMs": 11009,
   "parseError": false,
-  "ranAt": "2026-08-13T07:03:15.532Z"
+  "ranAt": "2026-08-18T23:24:53.825Z"
 }

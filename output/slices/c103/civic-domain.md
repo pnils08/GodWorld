@@ -1,6 +1,6 @@
 # Civic Domain Slice — C103
 
-- Shared source entries: 48
+- Shared source entries: 89
 - Empty: no
 
 ## Carmen Delaine (`carmen-delaine`)
@@ -48,8 +48,8 @@
   - [45] Temescal Community Health Center | HCAI first-comments window resolution and Phase 1 close C103 — Initiative_Tracker (InitiativeID INIT-005)
   - [45] sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal — Ripple_Ledger cycle 103 (CauseType initiative-implementation); rendered: world_summary_c103.md "## What Moved" > "### initiative-implementation"
   - [45] approval/district-sentiment | Temescal Community Health Center performing despite opposition (-2); decay toward 50 (-1) — Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md "## What Moved" > "### approval-shift"
-  - [45] Ricky Wilton — dealt with a seasonal health concern — output/world_summary_c103.md ## Who Lived It
-  - [45] Cathy Skeet — dealt with a seasonal health concern — output/world_summary_c103.md ## Who Lived It
+  - [45] Avery Santana (mayor): phase_one_close_approved — "Temescal needs this health center now—not next year, not when the paperwork is perfect." — output/civic-voice/mayor_c103.json
+  - [45] Rafael Montez (police chief): Continue current OARI co-deployment protocols in pilot districts — "Behavioral health crisis response requires careful operational integration — we're methodically refining the co-deployment — output/civic-voice/police_chief_c103.json
 
 ## Noah Tan (`noah-tan`)
 - Domain: environment

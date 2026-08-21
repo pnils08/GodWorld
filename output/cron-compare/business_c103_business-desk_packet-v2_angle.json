@@ -67,14 +67,6 @@
       ],
       "candidates": [
         {
-          "pop": "POP-00730",
-          "name": "Clarence Moody",
-          "profile": "Clarence Moody — Retired Machinist — Dimond",
-          "why": "same-hood-ledger",
-          "role": "Retired Machinist",
-          "hood": "Dimond"
-        },
-        {
           "pop": "POP-00170",
           "name": "Melton Neilon",
           "profile": "Melton Neilon — Sourdough Baker — Temescal",
@@ -97,6 +89,14 @@
           "why": "ledger-resident",
           "role": "Server",
           "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00210",
+          "name": "Depak Ying",
+          "profile": "Depak Ying — Server — Rockridge",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "Rockridge"
         }
       ]
     },
@@ -352,10 +352,10 @@
   "angleRead": {
     "name": "Jordan Velez",
     "popid": "POP-00153",
-    "text": "{\n  \"focus\": \"Dimond's cooling retail scene and its impact on local storefronts\",\n  \"why\": \"Foot traffic is down and storefronts are quieter compared to other parts of the city, signaling a shift in economic activity.\",\n  \"checks\": [\n    \"F-2c3c1b14061a\",\n    \"F-5967d0383c65\",\n    \"F-5f30e356b99b\",\n    \"F-68dbfc1e6fba\",\n    \"F-c40d99359f50\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00730\",\n      \"question\": \"Have you noticed a change in foot traffic around Dimond's storefronts recently?\",\n      \"basis\": \"same-hood-ledger\"\n    }\n  ],\n  \"interpretation\": \"The dip in retail vitality suggests a broader cooling trend in Dimond, possibly tied to shifting consumer habits or economic pressures.\",\n  \"unverifiedLead\": [\n    \"Are there specific businesses in Dimond that are bucking the trend or adapting in unique ways?\"\n  ],\n  \"closeQuestion\": \"What does this cooling trend mean for Dimond's identity as a neighborhood?\"\n}",
+    "text": "{\n  \"focus\": \"Dimond's cooling storefronts and reduced foot traffic\",\n  \"why\": \"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\n  \"checks\": [\n    \"F-2c3c1b14061a\",\n    \"F-5967d0383c65\",\n    \"F-5f30e356b99b\",\n    \"F-68dbfc1e6fba\",\n    \"F-c40d99359f50\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"The Dimond neighborhood is experiencing a noticeable decline in retail vitality, with quieter storefronts and less foot traffic compared to other areas in the city.\",\n  \"unverifiedLead\": [\n    \"Potential causes for the cooling trend in Dimond\"\n  ],\n  \"closeQuestion\": \"What factors are contributing to Dimond's cooling retail scene?\"\n}",
     "plan": {
-      "focus": "Dimond's cooling retail scene and its impact on local storefronts",
-      "why": "Foot traffic is down and storefronts are quieter compared to other parts of the city, signaling a shift in economic activity.",
+      "focus": "Dimond's cooling storefronts and reduced foot traffic",
+      "why": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
       "checks": [
         "F-2c3c1b14061a",
         "F-5967d0383c65",
@@ -363,18 +363,12 @@
         "F-68dbfc1e6fba",
         "F-c40d99359f50"
       ],
-      "targets": [
-        {
-          "pop": "POP-00730",
-          "question": "Have you noticed a change in foot traffic around Dimond's storefronts recently?",
-          "basis": "same-hood-ledger"
-        }
-      ],
-      "interpretation": "The dip in retail vitality suggests a broader cooling trend in Dimond, possibly tied to shifting consumer habits or economic pressures.",
+      "targets": [],
+      "interpretation": "The Dimond neighborhood is experiencing a noticeable decline in retail vitality, with quieter storefronts and less foot traffic compared to other areas in the city.",
       "unverifiedLead": [
-        "Are there specific businesses in Dimond that are bucking the trend or adapting in unique ways?"
+        "Potential causes for the cooling trend in Dimond"
       ],
-      "closeQuestion": "What does this cooling trend mean for Dimond's identity as a neighborhood?"
+      "closeQuestion": "What factors are contributing to Dimond's cooling retail scene?"
     }
   },
   "lanePicks": [
@@ -420,5 +414,5 @@
     }
   ],
   "laneEntries": 18,
-  "ranAt": "2026-08-14T11:16:32.928Z"
+  "ranAt": "2026-08-19T11:16:35.702Z"
 }

@@ -1,0 +1,14 @@
+{
+  "office": "council_d7",
+  "agentDir": "civic-office-council-d7",
+  "holder": "Warren Ashford",
+  "popid": "POP-00504",
+  "title": "City Council District 7",
+  "date": "2026-08-20",
+  "cycle": 104,
+  "model": "deepseek/deepseek-chat",
+  "statement": "KONO's numbers tell a clear story—lower sentiment but also lower crime than city averages. Before we commit resources, let's see the retention reports and service gap analysis from Economic Development. Stabilization starts with data, not declarations.",
+  "action": "Audit request for Economic Development service gap analysis in KONO",
+  "numberMoved": null,
+  "ranAt": "2026-08-20T10:46:44.418Z"
+}

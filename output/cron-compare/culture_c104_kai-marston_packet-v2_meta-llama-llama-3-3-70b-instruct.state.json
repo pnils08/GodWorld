@@ -1,0 +1,279 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00158",
+    "name": "Kai Marston",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Evening TV slate — Countdown Live, New Year's Eve Special, Late Weather Watch; sports desk: Oakland Sports Tonight",
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Kai (arts bag): present-tense scene; art as neighborhood act. Named events/artists from packet only. Modes: First Friday Pulse, Room Rewriting Itself, Stage/Mic/Block, What the Block Is Saying Tonight. Assigned pulse: tv-slate — TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "evening-life",
+      "bag": "arts",
+      "pulseClass": "tv-slate",
+      "pulseLabel": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+      "namedEvents": [
+        "The Kelley Line Founding Celebration",
+        "The Keane Line Founding Celebration",
+        "The Corliss Line Founding Celebration",
+        "The Dillon Line Founding Celebration",
+        "Countdown Live",
+        "New Year's Eve Special",
+        "Late Weather Watch",
+        "Breaking Bulletin"
+      ],
+      "namedPlaces": [
+        "Seasonal Spirits",
+        "Merritt AfterDark",
+        "The 44th Table",
+        "Vibe Terrace",
+        "Rhythm Deck",
+        "Neon Harbor Club",
+        "Skybar"
+      ],
+      "famousSightings": [
+        "Mark Aitken",
+        "John Ellis",
+        "Marin Tao"
+      ],
+      "streamingTrend": "party playlist",
+      "sceneRule": "Named places only from Evening Texture / desk_signal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+      "sourcePointers": [
+        "docs/media/KAI_ARTS_BAG.md",
+        "output/world_summary_c104.md ## Evening Texture",
+        "output/desk_signal_c104.json lanes.culture",
+        "docs/media/MARIA_GROUND_BAG.md",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": null,
+    "src": "world_summary ## Evening Texture · Evening media TV",
+    "plan": {
+      "focus": "TV slate",
+      "closeQuestion": "Will the TV slate meet expectations?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "I'm watching Countdown Live and New Year's Eve Special",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+      "src": "world_summary ## Evening Texture · Evening media TV",
+      "id": "F-d449233aa492"
+    },
+    {
+      "t": "FACT",
+      "text": "On the box tonight: Countdown Live, New Year's Eve Special.",
+      "src": "world_summary ## Evening Texture · Evening media TV",
+      "id": "F-296611fac168"
+    },
+    {
+      "t": "FACT",
+      "text": "NAMED: Countdown Live",
+      "src": "world_summary ## Evening Texture · Evening media TV",
+      "id": "F-ffc612bc2577"
+    },
+    {
+      "t": "FACT",
+      "text": "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+      "src": "world_summary ## Evening Texture · Evening media TV",
+      "id": "F-a6797916f37c"
+    },
+    {
+      "t": "FACT",
+      "text": "SPORTS BROADCAST: Oakland Sports Tonight",
+      "src": "world_summary ## Evening Texture · Evening media TV",
+      "id": "F-322324057650"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a sourced evening pulse into present-tense arts and entertainment reporting where art, media, and a named place become a neighborhood act. A vivid room grounded in the Packet is success; generic culture roundup and invented nightlife are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
+      "closing": "an image or open question about what the room, screen, or block is becoming"
+    },
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "canonBlockers": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  },
+  "manifest": {
+    "id": "AM-26e668d14559",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-d449233aa492",
+        "t": "FACT",
+        "text": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+        "src": "world_summary ## Evening Texture · Evening media TV"
+      },
+      {
+        "id": "F-296611fac168",
+        "t": "FACT",
+        "text": "On the box tonight: Countdown Live, New Year's Eve Special.",
+        "src": "world_summary ## Evening Texture · Evening media TV"
+      },
+      {
+        "id": "F-ffc612bc2577",
+        "t": "FACT",
+        "text": "NAMED: Countdown Live",
+        "src": "world_summary ## Evening Texture · Evening media TV"
+      },
+      {
+        "id": "F-a6797916f37c",
+        "t": "FACT",
+        "text": "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+        "src": "world_summary ## Evening Texture · Evening media TV"
+      },
+      {
+        "id": "F-322324057650",
+        "t": "FACT",
+        "text": "SPORTS BROADCAST: Oakland Sports Tonight",
+        "src": "world_summary ## Evening Texture · Evening media TV"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Kai Marston",
+        "text": "I'm watching Countdown Live and New Year's Eve Special",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
+      "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
+      "metaphor, contrast, and scene transition grounded in the supplied pulse",
+      "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+    ],
+    "textureConditions": [
+      "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
+      "TV, movie, streaming, fame-sighting, event, and venue details must remain tied to the supplied evening source or pulse",
+      "unnamed sensory color may not create a new event, attendance count, quote, review, business action, or public reaction",
+      "the reporter may not claim an interview, attendance, observation, trend, or social-media response that the Packet does not supply",
+      "do not turn a shared evening substrate into a multi-voice culture average; one pulse, one room, one truth"
+    ],
+    "forbiddenClaimClasses": [
+      "a named artist, celebrity, show, movie, event, venue, business, institution, neighborhood, or organization not found in the supplied record",
+      "an invented opening, screening, performance, appearance, sighting, crowd, attendance figure, review, or social-media reaction",
+      "an unsupported quote, interview, direct observation, career claim, release date, rating, or cultural trend",
+      "raw engine scores, labels, or decimals printed as public-facing cultural evidence",
+      "a causal claim about what a neighborhood or audience feels presented as measured fact",
+      "a generic culture-desk roundup that abandons the assigned evening pulse"
+    ]
+  }
+}

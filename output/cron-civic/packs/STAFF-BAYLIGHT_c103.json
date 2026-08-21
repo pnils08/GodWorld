@@ -66,6 +66,15 @@
         "tier": 3,
         "src": "output/simulation_ledger_snapshot.jsonl",
         "why": "lives in Baylight District — Baylight District — Final Council Vote — Phase II shortlist published — 4 qualified bidders reduced to 3"
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "neighborhood": "Baylight District",
+        "role": "3B/1B , Oakland A's",
+        "tier": 1,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Baylight District — Baylight District — Final Council Vote — Phase II shortlist published — 4 qualified bidders reduced to 3"
       }
     ],
     "businesses": [],

@@ -1,0 +1,348 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+    "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "pulseClass": "retail-decay",
+      "economicFrame": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+      "hook": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+      "namedBusinesses": [],
+      "forbidden": [
+        "Do not invent Employee_Count",
+        "Do not invent Key_Personnel",
+        "Do not invent storefronts not on ledger or evening texture",
+        "Do not lead with raw RetailVitality decimals — translate to scene"
+      ],
+      "sceneRule": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts."
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Grand Lake",
+    "src": "world_summary ## Engine Review · math-imbalance",
+    "plan": {
+      "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+      "closeQuestion": "Is Grand Lake’s retail slide a symptom of broader economic shifts, or is there a unique local dynamic at play?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00002",
+        "name": "Amara Keane",
+        "profile": "Amara Keane — Pianist, Philanthropist — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00002-8b034937ee",
+        "pop": "POP-00002",
+        "name": "Amara Keane",
+        "quote": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.",
+        "factIds": [
+          "F-b0e302e4edcf",
+          "F-3a7d7a01e54c"
+        ],
+        "src": "packet.W2[POP-00002]"
+      },
+      {
+        "id": "Q-POP-00170-f7836520c8",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark.",
+        "factIds": [
+          "F-b0e302e4edcf",
+          "F-3a7d7a01e54c"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Amara Keane",
+        "text": "Are there any existing but underpublicized initiatives to revitalize Grand Lake retail that residents simply aren't aware of?",
+        "usable": false
+      },
+      {
+        "from": "Melton Neilon",
+        "text": "Are commercial landlords in Grand Lake rejecting city small business retention grants?",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Potential mismatch between rising housing pressure and stagnant commercial investment",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Local sentiment dip may reflect unmet expectations for neighborhood upkeep or business diversity",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Lake retail decay",
+      "src": "world_summary ## Engine Review · math-imbalance",
+      "id": "F-b0e302e4edcf"
+    },
+    {
+      "t": "FACT",
+      "text": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+      "src": "world_summary ## Engine Review · math-imbalance",
+      "id": "F-3a7d7a01e54c"
+    },
+    {
+      "t": "FACT",
+      "text": "HOOD: Grand Lake",
+      "src": "world_summary ## Engine Review · math-imbalance",
+      "id": "F-474495c0e07f"
+    },
+    {
+      "t": "FACT",
+      "text": "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500",
+      "src": "world_summary ## Engine Review · math-imbalance",
+      "id": "F-24adc4583803"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-ff17ef57000b",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-b0e302e4edcf",
+        "t": "FACT",
+        "text": "Grand Lake retail decay",
+        "src": "world_summary ## Engine Review · math-imbalance"
+      },
+      {
+        "id": "F-3a7d7a01e54c",
+        "t": "FACT",
+        "text": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "src": "world_summary ## Engine Review · math-imbalance"
+      },
+      {
+        "id": "F-474495c0e07f",
+        "t": "FACT",
+        "text": "HOOD: Grand Lake",
+        "src": "world_summary ## Engine Review · math-imbalance"
+      },
+      {
+        "id": "F-24adc4583803",
+        "t": "FACT",
+        "text": "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500",
+        "src": "world_summary ## Engine Review · math-imbalance"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00002-8b034937ee",
+        "speakerId": "POP-00002",
+        "speakerName": "Amara Keane",
+        "text": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.",
+        "factIds": [
+          "F-b0e302e4edcf",
+          "F-3a7d7a01e54c"
+        ],
+        "src": "packet.W2[POP-00002]"
+      },
+      {
+        "id": "Q-POP-00170-f7836520c8",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark.",
+        "factIds": [
+          "F-b0e302e4edcf",
+          "F-3a7d7a01e54c"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00002",
+        "name": "Amara Keane",
+        "profile": "Amara Keane — Pianist, Philanthropist — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Amara Keane",
+        "text": "Are there any existing but underpublicized initiatives to revitalize Grand Lake retail that residents simply aren't aware of?",
+        "publishable": false
+      },
+      {
+        "from": "Melton Neilon",
+        "text": "Are commercial landlords in Grand Lake rejecting city small business retention grants?",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Potential mismatch between rising housing pressure and stagnant commercial investment",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Local sentiment dip may reflect unmet expectations for neighborhood upkeep or business diversity",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  }
+}

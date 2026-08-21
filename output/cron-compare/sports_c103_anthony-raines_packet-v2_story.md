@@ -11,23 +11,25 @@
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
   "focus": "Pablo Almanzar's no-hitter in his MLB debut",
-  "why": "The line anchors the board with 9IP, 0H, 1BB, 10Ks—a historic debut performance that demands evaluation of whether it's sustainable or a flash of brilliance.",
+  "why": "The evaluative question is whether this performance is architecture or variance, given the A's dominant season.",
   "checks": [
-    "Verify Almanzar's minor league stats for consistency in control and strikeout rates",
-    "Check scouting reports on his pitch repertoire and command progression",
-    "Review any previous MLB call-up rumors or expectations"
+    "Is Almanzar's no-hitter a product of skill or luck?",
+    "How does this debut compare to historical MLB debuts?"
   ],
   "targets": [
     {
       "pop": "POP-00001",
-      "question": "What did you see from Almanzar's stuff tonight that made him unhittable?",
-      "basis": "Vinnie Keane faced Almanzar in live BP sessions and has veteran hitter's perspective on stuff"
+      "question": "How did Vinnie Keane's performance contribute to the team's momentum during Almanzar's debut?",
+      "basis": "Vinnie Keane line (feed): 2-3, HR, 3 RBI"
     }
   ],
-  "interpretation": "The BB/K ratio suggests command over pure stuff dominance, but debut adrenaline and unfamiliarity could inflate results",
+  "interpretation": "Almanzar's debut suggests a blend of skill and favorable conditions, but further analysis is needed to determine its sustainability.",
   "unverifiedLead": [
-    "Whether Almanzar's changeup development explains the swing-and-miss numbers",
-    "If the organization views this as accelerated development or needs more Triple-A refinement"
+    "Potential insights from Almanzar's pitching repertoire versus results",
+    "Historical context of MLB debuts with similar stats"
   ],
-  "closeQuestion": "Is this the emergence of a new rotation anchor or a perfect storm of debut magic?"
+  "closeQuestion": "Can Almanzar replicate this level of performance, or was it a one-time variance?"
 }
+## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
+
+

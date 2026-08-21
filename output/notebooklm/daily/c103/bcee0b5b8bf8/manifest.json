@@ -1,0 +1,37 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.6",
+  "canonStatus": "NOT_CANON",
+  "cycle": 103,
+  "generatedAt": "2026-08-19T13:00:07.455Z",
+  "lastAttemptAt": "2026-08-19T14:25:24.700Z",
+  "hours": 36,
+  "packHash": "bcee0b5b8bf85b244243eb9461c7ea4015571c0b839c16b1855b217d36b08086",
+  "worldSummary": "output/world_summary_c103.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c103_mason-ortega_packet-v2_deepseek-deepseek-chat.staged.md"
+    }
+  ],
+  "flaggedExclusions": [
+    "output/cron-compare/flagged/sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.flags.json"
+  ],
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "boundedSourceHash": "f46ae6bdf22e1863f2b747ba98a1b0600b663bca6a65eb21d54755a928ba14f4",
+  "boundedSource": "output/notebooklm/daily/c103/bcee0b5b8bf8/bounded-newsroom-source.md",
+  "sourceIds": [
+    "aa74ae7a-8b39-4be5-9178-d31295f551da"
+  ],
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioArtifactId": "555655e3-aa97-4dc5-bf3f-6e2003745464",
+  "audioPath": "output/notebooklm/daily/c103/bcee0b5b8bf8/godworld_daily_c103.m4a",
+  "driveLink": "https://drive.google.com/file/d/1MtfFg0z_wlkfDTobjKtBQfylnpxJhYzo/view?usp=drivesdk"
+}

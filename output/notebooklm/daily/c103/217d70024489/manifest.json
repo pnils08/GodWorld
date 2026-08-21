@@ -1,0 +1,17 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.6",
+  "canonStatus": "NOT_CANON",
+  "cycle": 103,
+  "generatedAt": "2026-08-18T13:00:08.472Z",
+  "lastAttemptAt": "2026-08-18T13:00:08.472Z",
+  "hours": 36,
+  "packHash": "217d700244893b1166fef7b288165409b96a9a8ce217fac68cd220e99009eae8",
+  "worldSummary": "output/world_summary_c103.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [],
+  "flaggedExclusions": [],
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false
+}

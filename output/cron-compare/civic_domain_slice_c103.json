@@ -412,6 +412,662 @@
       "sourceIndex": 29
     },
     {
+      "kind": "civic-decision",
+      "label": "Avery Santana (mayor): approved — \"Eighty-six applicants shouldn’t be stuck in paperwork. We’re cutting the red tape and getting these young people to work.\"",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 32
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Avery Santana (mayor): approved — \"Forty-five families have their money. The next seven get theirs this week—no delays, no excuses.\"",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 33
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Avery Santana (mayor): task_force_created — \"Public safety isn’t just about response times—it’s about trust. We’re listening, and we’re acting.\"",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 34
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Avery Santana (mayor): bureau_review_approved — \"Fruitvale deserves a transit hub that works for the people who use it every day. We’re moving this forward.\"",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 35
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Avery Santana (mayor): phase_one_close_approved — \"Temescal needs this health center now—not next year, not when the paperwork is perfect.\"",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 36
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Avery Santana (mayor): shortlist_published — \"Baylight isn’t just a stadium—it’s the future of Oakland. We’re building it right.\"",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 37
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Avery Santana (mayor): task_force_announced — \"When neighborhoods are hurting, we don’t look away—we build a plan.\"",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 38
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Avery Santana (mayor): credit_attributed — \"Dimond and KONO are proof that when we invest in neighborhoods, they thrive.\"",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 39
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Rafael Montez (police chief): Redeploy 4 additional marked units to East Oakland and 3 to West Oakland based on CrimeIndex data — \"Public safety resources must follow the data — that's why we're adjusting patrol deployme",
+      "ref": "output/civic-voice/police_chief_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00136"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 40
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Rafael Montez (police chief): Continue current OARI co-deployment protocols in pilot districts — \"Behavioral health crisis response requires careful operational integration — we're methodically refining the co-deployment",
+      "ref": "output/civic-voice/police_chief_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00136"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 41
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Brenda Okoro (okoro): Process month-five disbursements (7 households) and reset outreach targeting based on neighborhood need patterns — \"Seven more households stabilized this cycle brings us to fifty-two of two hundred",
+      "ref": "output/civic-voice/okoro_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00037"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 42
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Brenda Okoro (okoro): Realign community development staff to address neighborhood coherence concerns in West Oakland, Fruitvale, East Oakland — \"Neighborhoods don't become incoherent overnight. The signals we're seeing i",
+      "ref": "output/civic-voice/okoro_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00037"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 43
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Warren Ashford (crc faction): Request Construction Compliance Audit — \"Double shifts mean double the risk—we need to see the change orders before celebrating an accelerated timeline.\"",
+      "ref": "output/civic-voice/crc_faction_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00044"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 44
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Warren Ashford (crc faction): Demand Performance Metrics — \"Cutting red tape shouldn't mean cutting corners—show us the data that justifies scaling this pilot.\"",
+      "ref": "output/civic-voice/crc_faction_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00044"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 45
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Warren Ashford (crc faction): Request Vendor Selection Documentation — \"A $2.1B project deserves more transparency than a press release—publish the scoring criteria that produced this shortlist.\"",
+      "ref": "output/civic-voice/crc_faction_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00044"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 46
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Warren Ashford (crc faction): Acknowledge Success With Oversight — \"The Stabilization Fund works when the numbers work—that's why Crane crossed over to support it.\"",
+      "ref": "output/civic-voice/crc_faction_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00044"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 47
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Ramon Vega (ind swing): support_shortlist_publication — \"Four qualified bidders, three finalists, one clean site—this is the process I demanded when I voted yes on Baylight.\"",
+      "ref": "output/civic-voice/ind_swing_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00502"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 48
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Ramon Vega (ind swing): demand_infrastructure_response_credit_stabilization_fund — \"Dimond's upbeat mood isn't magic—it's the Stabilization Fund working. Chinatown's infrastructure incident needs answers, not silence.\"",
+      "ref": "output/civic-voice/ind_swing_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00502"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 49
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Ramon Vega (ind swing): refer_to_finance_committee — \"Eighty-six applicants stuck in paperwork isn't a bottleneck—it's a system failure. Finance Committee meets next week.\"",
+      "ref": "output/civic-voice/ind_swing_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00502"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 50
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Janae Rivers (opp faction): Support Mayor’s approval but demand accelerated disbursement timelines — \"Forty-five families helped isn’t a victory—it’s a down payment on what Oakland owes West Oakland. We’ll keep pushing u",
+      "ref": "output/civic-voice/opp_faction_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00501"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 51
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Janae Rivers (opp faction): Conditional support for compliance approval with construction timeline demands — \"Phase II has been ‘visioning’ while Fruitvale’s small businesses bleed. We don’t need more studies—we need con",
+      "ref": "output/civic-voice/opp_faction_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00501"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 52
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Janae Rivers (opp faction): Demand structural equity analysis in task force charter — \"Incoherence in our neighborhoods isn’t a mystery—it’s the legacy of policies that prioritized developers over residents. This task fo",
+      "ref": "output/civic-voice/opp_faction_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00501"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 53
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Janae Rivers (opp faction): Reject Mayor’s celebration as disconnected from neighborhood realities — \"Slow street trade in Baylight isn’t a ‘quiet victory’—it’s a symptom of a city that still prioritizes stadiums over st",
+      "ref": "output/civic-voice/opp_faction_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00501"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 54
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Marcus Delano Webb (stabilization fund): Approved 7 additional households for disbursement with full compliance documentation — \"Fifty-two families now stabilized with relocation assistance—that's eighteen point five per",
+      "ref": "output/civic-voice/stabilization_fund_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00790"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 55
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Marcus Delano Webb (stabilization fund): Maintained Saturday outreach at Adeline Street office — \"Every applicant who walks through our door gets two things: the truth about the timeline, and the certainty that their cas",
+      "ref": "output/civic-voice/stabilization_fund_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00790"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 56
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Dr. Vanessa Tran-Muñoz (oari): Survey publication with operational adjustments — \"87% of District 7 residents report feeling safer knowing non-police crisis teams are responding to behavioral health calls — that's the tr",
+      "ref": "output/civic-voice/oari_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-01021"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 57
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Dr. Vanessa Tran-Muñoz (oari): Enhanced coverage for holiday season — \"Our West Oakland team is adding evening coverage through the holidays because crisis doesn't follow a 9-to-5 schedule.\"",
+      "ref": "output/civic-voice/oari_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-01021"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 58
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Bobby Chen-Ramirez (health center): Phase 1 closed with HCAI seismic approval — \"HCAI stamped Sheet S-7.3 at 4:37 PM yesterday—that's the last structural note resolved. Caisson drilling finishes Thursday, three days ahea",
+      "ref": "output/civic-voice/health_center_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00792"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 59
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Bobby Chen-Ramirez (health center): Added neighborhood liaison for construction updates — \"The pharmacist at 47th & Telegraph gets more questions about our crane schedule than I do. Starting next week, his bulletin board",
+      "ref": "output/civic-voice/health_center_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00792"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 60
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Elena Soria Dominguez (transit hub): Approved pipeline submissions and pedestrian-path redesign, advancing project to construction-active phase — \"This isn't just paperwork—it's protection for abuelas crossing to the pan",
+      "ref": "output/civic-voice/transit_hub_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00791"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 61
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Keisha Ramos (baylight authority): shortlist_published — \"Three qualified consortiums advance to the final proposal phase—we're building Baylight with the teams that can deliver.\"",
+      "ref": "output/civic-voice/baylight_authority_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00041"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 62
+    },
+    {
+      "kind": "civic-decision",
+      "label": "Keisha Ramos (baylight authority): transparency_response — \"Every dollar of the $2.1B budget will be accounted for—starting with these scoring sheets.\"",
+      "ref": "output/civic-voice/baylight_authority_c103.json",
+      "hood": null,
+      "popids": [
+        "POP-00041"
+      ],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-decision",
+      "sourceIndex": 63
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Keisha Ramos: Phase II shortlist reduced from 4 to 3 qualified consortiums",
+      "ref": "output/cron-civic/datawake/civic-office-baylight-authority_2026-08-18.json",
+      "hood": null,
+      "popids": [
+        "POP-00041"
+      ],
+      "handle": {
+        "angle": "The Baylight Authority has completed the Phase II shortlist evaluation, reducing four qualified consortiums to three finalists. Each team submitted a detailed proposal demonstrating their capability to deliver the project on time and within",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 64
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Denise Carter: 45 households assisted to date (batch specifics pending review)",
+      "ref": "output/cron-civic/datawake/civic-office-council-d1_2026-08-17.json",
+      "hood": null,
+      "popids": [
+        "POP-00501"
+      ],
+      "handle": {
+        "angle": "The West Oakland Stabilization Fund remains a lifeline for families navigating displacement pressures. With 45 households supported so far, we’re making progress—but our work isn’t done. This month’s disbursement batch must prioritize those",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 65
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Leonard Tran: 0",
+      "ref": "output/cron-civic/datawake/civic-office-council-d2_2026-08-17.json",
+      "hood": null,
+      "popids": [
+        "POP-00502"
+      ],
+      "handle": {
+        "angle": "Phase II shortlist is down to three. That's the right call—four bidders meant someone was getting cut regardless, and the selection committee did the work to narrow it based on capacity and track record, not politics. I'm watching how the r",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 66
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Ramon Vega: 0",
+      "ref": "output/cron-civic/datawake/civic-office-council-d4_2026-08-18.json",
+      "hood": null,
+      "popids": [
+        "POP-00042"
+      ],
+      "handle": {
+        "angle": "Glenview's numbers speak for themselves: sentiment at fifty-seven percent against a city average below forty-nine, crime index half the city rate, property incidents down to four when the city sits at six-point-three. This isn't luck—it's t",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 67
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Elliott Crane: 5",
+      "ref": "output/cron-civic/datawake/civic-office-council-d6_2026-08-19.json",
+      "hood": null,
+      "popids": [
+        "POP-00044"
+      ],
+      "handle": {
+        "angle": "Piedmont Avenue's crime numbers remain well below city averages, but the sentiment gap concerns me. With property crimes at 23 versus city's 43.4 and violent crimes at half the city rate, the data shows real progress. However, we can't igno",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 68
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Warren Ashford: KONO needs investment, not abandonment—but we need to see the receipts before we sign the check. Pull the monthly small-business retention reports since Measure Z passed and show u",
+      "ref": "output/cron-civic/datawake/civic-office-crc-faction_2026-08-10.json",
+      "hood": null,
+      "popids": [
+        "POP-00504"
+      ],
+      "handle": {
+        "angle": "KONO needs investment, not abandonment—but we need to see the receipts before we sign the check. Pull the monthly small-business retention reports since Measure Z passed and show us where the gaps are. The health of a neighborhood lasts lon",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 69
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Warren Ashford: [object Object]",
+      "ref": "output/cron-civic/datawake/civic-office-crc-faction_2026-08-11.json",
+      "hood": null,
+      "popids": [
+        "POP-00504"
+      ],
+      "handle": {
+        "angle": "[object Object]",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 70
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Warren Ashford: When stable storefronts become the exception rather than the expectation, that's when audits prove their worth. Pulling the last six quarters' small-business retention reports from",
+      "ref": "output/cron-civic/datawake/civic-office-crc-faction_2026-08-12.json",
+      "hood": null,
+      "popids": [
+        "POP-00504"
+      ],
+      "handle": {
+        "angle": "When stable storefronts become the exception rather than the expectation, that's when audits prove their worth. Pulling the last six quarters' small-business retention reports from Economic Development to map service gaps.",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 71
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Warren Ashford: KONO's street trade holding steady while Rockridge booms—that's the gap policy should bridge",
+      "ref": "output/cron-civic/datawake/civic-office-crc-faction_2026-08-13.json",
+      "hood": null,
+      "popids": [
+        "POP-00504"
+      ],
+      "handle": {
+        "angle": "Rockridge's numbers tell a story Temescal and KONO deserve to share—but thriving businesses don't happen by accident. When stable storefronts become the exception rather than the expectation, that's when audits prove their worth.",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 72
+    },
+    {
       "kind": "weather",
       "label": "Cycle 103 weather | Season Winter | 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",
       "ref": "output/world_summary_c103.md:3",
@@ -423,7 +1079,7 @@
         "citizens": []
       },
       "source": "world-summary",
-      "sourceIndex": 32
+      "sourceIndex": 73
     },
     {
       "kind": "season-feel",
@@ -441,7 +1097,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 33
+      "sourceIndex": 74
     },
     {
       "kind": "season-feel",
@@ -459,7 +1115,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 34
+      "sourceIndex": 75
     },
     {
       "kind": "season-feel",
@@ -477,7 +1133,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 35
+      "sourceIndex": 76
     },
     {
       "kind": "season-feel",
@@ -495,7 +1151,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 36
+      "sourceIndex": 77
     },
     {
       "kind": "season-feel",
@@ -513,7 +1169,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 37
+      "sourceIndex": 78
     },
     {
       "kind": "season-feel",
@@ -531,7 +1187,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 38
+      "sourceIndex": 79
     },
     {
       "kind": "season-feel",
@@ -549,7 +1205,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 39
+      "sourceIndex": 80
     },
     {
       "kind": "season-feel",
@@ -567,7 +1223,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 40
+      "sourceIndex": 81
     },
     {
       "kind": "season-feel",
@@ -581,7 +1237,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 41
+      "sourceIndex": 82
     },
     {
       "kind": "season-feel",
@@ -595,7 +1251,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 42
+      "sourceIndex": 83
     },
     {
       "kind": "season-feel",
@@ -609,7 +1265,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 43
+      "sourceIndex": 84
     },
     {
       "kind": "season-feel",
@@ -623,7 +1279,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 44
+      "sourceIndex": 85
     },
     {
       "kind": "season-feel",
@@ -637,7 +1293,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 45
+      "sourceIndex": 86
     },
     {
       "kind": "season-feel",
@@ -651,7 +1307,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 46
+      "sourceIndex": 87
     },
     {
       "kind": "season-feel",
@@ -665,7 +1321,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 47
+      "sourceIndex": 88
     },
     {
       "kind": "season-feel",
@@ -679,7 +1335,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 48
+      "sourceIndex": 89
     },
     {
       "kind": "season-feel",
@@ -693,7 +1349,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 49
+      "sourceIndex": 90
     },
     {
       "kind": "season-feel",
@@ -707,7 +1363,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 50
+      "sourceIndex": 91
     },
     {
       "kind": "season-feel",
@@ -721,7 +1377,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 51
+      "sourceIndex": 92
     },
     {
       "kind": "season-feel",
@@ -735,7 +1391,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 52
+      "sourceIndex": 93
     }
   ],
   "packets": {
@@ -1325,37 +1981,33 @@
         },
         {
           "score": 45,
-          "kind": "season-feel",
-          "label": "Ricky Wilton — dealt with a seasonal health concern",
-          "ref": "output/world_summary_c103.md ## Who Lived It",
-          "hood": "Downtown",
+          "kind": "civic-decision",
+          "label": "Avery Santana (mayor): phase_one_close_approved — \"Temescal needs this health center now—not next year, not when the paperwork is perfect.\"",
+          "ref": "output/civic-voice/mayor_c103.json",
+          "hood": null,
           "popids": [
-            "POP-00215"
+            "POP-00034"
           ],
-          "angle": "Ricky Wilton — dealt with a seasonal health concern",
-          "hookLine": "Ricky Wilton — dealt with a seasonal health concern",
-          "citizens": [
-            "Ricky Wilton (POP-00215)"
-          ],
-          "source": "season-feel",
-          "sourceIndex": 33
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "civic-decision",
+          "sourceIndex": 36
         },
         {
           "score": 45,
-          "kind": "season-feel",
-          "label": "Cathy Skeet — dealt with a seasonal health concern",
-          "ref": "output/world_summary_c103.md ## Who Lived It",
-          "hood": "Chinatown",
+          "kind": "civic-decision",
+          "label": "Rafael Montez (police chief): Continue current OARI co-deployment protocols in pilot districts — \"Behavioral health crisis response requires careful operational integration — we're methodically refining the co-deployment",
+          "ref": "output/civic-voice/police_chief_c103.json",
+          "hood": null,
           "popids": [
-            "POP-00308"
+            "POP-00136"
           ],
-          "angle": "Cathy Skeet — dealt with a seasonal health concern",
-          "hookLine": "Cathy Skeet — dealt with a seasonal health concern",
-          "citizens": [
-            "Cathy Skeet (POP-00308)"
-          ],
-          "source": "season-feel",
-          "sourceIndex": 35
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "civic-decision",
+          "sourceIndex": 41
         }
       ],
       "pointers": [
@@ -1363,7 +2015,8 @@
         "Initiative_Tracker (InitiativeID INIT-005)",
         "Ripple_Ledger cycle 103 (CauseType initiative-implementation); rendered: world_summary_c103.md \"## What Moved\" > \"### initiative-implementation\"",
         "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\"",
-        "output/world_summary_c103.md ## Who Lived It"
+        "output/civic-voice/mayor_c103.json",
+        "output/civic-voice/police_chief_c103.json"
       ]
     },
     "noah-tan": {
@@ -1438,7 +2091,7 @@
             "Ricky Wilton (POP-00215)"
           ],
           "source": "season-feel",
-          "sourceIndex": 33
+          "sourceIndex": 74
         },
         {
           "score": 80,
@@ -1455,7 +2108,7 @@
             "Clearence Leighton (POP-00238)"
           ],
           "source": "season-feel",
-          "sourceIndex": 34
+          "sourceIndex": 75
         },
         {
           "score": 80,
@@ -1472,7 +2125,7 @@
             "Cathy Skeet (POP-00308)"
           ],
           "source": "season-feel",
-          "sourceIndex": 35
+          "sourceIndex": 76
         },
         {
           "score": 80,
@@ -1489,7 +2142,7 @@
             "Jude Hess (POP-00521)"
           ],
           "source": "season-feel",
-          "sourceIndex": 36
+          "sourceIndex": 77
         },
         {
           "score": 80,
@@ -1506,7 +2159,7 @@
             "Alma Zhang (POP-00834)"
           ],
           "source": "season-feel",
-          "sourceIndex": 37
+          "sourceIndex": 78
         },
         {
           "score": 80,
@@ -1523,7 +2176,7 @@
             "Ray Samson (POP-00186)"
           ],
           "source": "season-feel",
-          "sourceIndex": 38
+          "sourceIndex": 79
         }
       ],
       "pointers": [
@@ -1646,7 +2299,7 @@
             "Rick Walker (POP-00198)"
           ],
           "source": "season-feel",
-          "sourceIndex": 40
+          "sourceIndex": 81
         }
       ],
       "pointers": [

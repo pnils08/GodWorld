@@ -4,68 +4,71 @@
   "cycle": "103",
   "persona": "freelance-firebrand",
   "packetContract": "LEP/2",
-  "reporter": null,
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
   "assignment": {
     "story": {
       "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
       "label": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
       "kind": "anomaly",
-      "angle": "The transit initiative carrying Fruitvale has not advanced in 9 cycles. What record explains the stall?",
-      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "angle": "The record shows an Initiative that remains listed but has not advanced; what explains the stall?",
+      "hookLine": null,
       "hood": "Fruitvale",
       "popids": [
         "POP-00231",
-        "POP-00598",
         "POP-00744",
-        "POP-00010",
-        "POP-00039",
         "POP-00635",
         "POP-00758",
         "POP-00771",
-        "POP-00773"
+        "POP-01037",
+        "POP-00339",
+        "POP-00361",
+        "POP-00722",
+        "POP-00766",
+        "POP-00644"
       ],
       "citizens": [
         "Calvin Turner — Mechanic, Fruitvale",
-        "Vladimir Gonzalez — Right Fielder, Oakland A's, Fruitvale",
         "Tomas Renteria — Podcast Host / Line Cook, Fruitvale",
-        "Dana Reeve — Lead Journalist, Chinatown",
-        "Simone Ellis — Chief Legal Counsel, Chinatown",
         "Mei Chen — Gallery Owner/Curator, Chinatown",
         "Robert Jaston — Senior Pastor / Faith Leader, West Oakland",
         "Sage Vienta — Actor, West Oakland",
-        "Jada Rayes — Editor-in-Chief, OakTown Echo, West Oakland"
+        "Ivy Tran — Driver, Fruitvale",
+        "Kaila Nguyen — Pupuseria Owner, Fruitvale",
+        "Jason Flower — Immigrant Legal Aid Worker, Fruitvale",
+        "Daniel Cloak — Bakery Worker, West Oakland",
+        "Manjit Singh — Senior Pastor / Faith Leader, Fruitvale",
+        "Rafael Pilgrim — Server, Fruitvale"
       ],
       "stinkClass": "implementation-gap",
       "stinkScore": 50
     }
   },
   "angle": "output/cron-compare/civic_c103_freelance-firebrand_packet-v2_angle.json",
-  "quotesRequested": 2,
+  "quotesRequested": 4,
   "quotesLanded": 2,
   "quotes": [
     {
       "pop": "POP-00231",
       "name": "Calvin Turner",
-      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "quote": "I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune should ask what's really going on with the funding",
       "disp": "driven, hard to sit still; magnetic, center of every room; devoted, family is everything",
-      "recorded": false,
+      "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-c4b3917a7eab\", \"F-f9925b4f532c\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": \"Something doesn't feel right about the way things are moving forward, or not moving forward, in our neighborhood.\"\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune should ask what's really going on with the funding\",\n  \"fact_ids\": [\"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-c4b3917a7eab",
-          "F-f9925b4f532c"
+          "F-c4b3917a7eab"
         ],
-        "stanceId": "S_MISMATCH",
-        "questionId": "Q_GAP",
-        "intentionId": "I_WATCH",
-        "unverifiedLead": [
-          "Something doesn't feel right about the way things are moving forward, or not moving forward, in our neighborhood."
-        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00231-95e98ad3fe",
-        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+        "quoteId": "Q-POP-00231-0cc01ede5e",
+        "authoredQuote": true,
+        "publishableQuote": "I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune should ask what's really going on with the funding"
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -77,14 +80,14 @@
           "desk": null
         },
         "task": {
-          "goal": "Answer one reporter question from bounded lived experience",
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jax Caldera",
-          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II initiative stall\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+          "question": "As a resident of Fruitvale, what about the supplied trend \"transit initiative stall\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
         },
         "signal": {
           "kind": "anomaly",
           "hood": "Fruitvale",
-          "focus": "Fruitvale Transit Hub Phase II initiative stall",
+          "focus": "transit initiative stall",
           "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
         },
         "exposure": {
@@ -148,125 +151,65 @@
             "invent a count",
             "turn suspicion into observation"
           ],
-          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
         },
         "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
           "format": "json-only",
           "schema": {
             "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
             "fact_ids": [
-              "one or more ids from packet.known"
+              "one or more supplied fact ids that prompted the response"
             ],
-            "stance_id": "one id from packet.lattice.stances; null on abstain",
-            "question_id": "one id from packet.lattice.questions; null on abstain",
-            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "basis": "direct-reaction|null",
             "unverifiedLead": [
-              "free lead text; never publishable"
+              "concrete follow-up lead that must not be printed as fact"
             ],
-            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
           },
-          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
-        },
-        "lattice": {
-          "stances": [
-            {
-              "id": "S_CONCERN",
-              "text": "What this record shows concerns me."
-            },
-            {
-              "id": "S_MISMATCH",
-              "text": "What the record shows does not line up with what I expected."
-            },
-            {
-              "id": "S_ATTENTION",
-              "text": "This deserves a closer look."
-            },
-            {
-              "id": "S_ACCOUNTABILITY",
-              "text": "Someone should answer for what the record shows."
-            }
-          ],
-          "questions": [
-            {
-              "id": "Q_ATTENTION",
-              "text": "Why is this not getting more attention?"
-            },
-            {
-              "id": "Q_OWNER",
-              "text": "Who is responsible for answering this?"
-            },
-            {
-              "id": "Q_NEXT",
-              "text": "What happens next?"
-            },
-            {
-              "id": "Q_GAP",
-              "text": "What explains the gap in the record?"
-            }
-          ],
-          "intentions": [
-            {
-              "id": "I_NONE",
-              "text": ""
-            },
-            {
-              "id": "I_WATCH",
-              "text": "I am going to keep watching this."
-            },
-            {
-              "id": "I_ANSWER",
-              "text": "I want a clear answer."
-            },
-            {
-              "id": "I_PRESS",
-              "text": "The Tribune should keep pressing for an answer."
-            }
-          ]
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
         }
       }
     },
     {
-      "pop": "POP-00598",
-      "name": "Vladimir Gonzalez",
-      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-      "disp": "even-keeled, unremarkable",
-      "recorded": false,
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I feel like something's off with this transit initiative stall, it's like we're not being told the whole story, and I think the Tribune should ask what's really going on behind the scenes",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-c4b3917a7eab\", \"F-f9925b4f532c\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": \"Something feels off about the lack of progress\"\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like something's off with this transit initiative stall, it's like we're not being told the whole story, and I think the Tribune should ask what's really going on behind the scenes\",\n  \"fact_ids\": [\"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-c4b3917a7eab",
-          "F-f9925b4f532c"
+          "F-c4b3917a7eab"
         ],
-        "stanceId": "S_MISMATCH",
-        "questionId": "Q_GAP",
-        "intentionId": "I_WATCH",
-        "unverifiedLead": [
-          "Something feels off about the lack of progress"
-        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00598-95e98ad3fe",
-        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+        "quoteId": "Q-POP-00744-e23df6a83e",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like something's off with this transit initiative stall, it's like we're not being told the whole story, and I think the Tribune should ask what's really going on behind the scenes"
       },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
         "actor": {
-          "id": "POP-00598",
-          "name": "Vladimir Gonzalez",
-          "role": "Right Fielder, Oakland A's",
+          "id": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook",
           "desk": null
         },
         "task": {
-          "goal": "Answer one reporter question from bounded lived experience",
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jax Caldera",
-          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II initiative stall\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+          "question": "As a resident of Fruitvale, what about the supplied trend \"transit initiative stall\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
         },
         "signal": {
           "kind": "anomaly",
           "hood": "Fruitvale",
-          "focus": "Fruitvale Transit Hub Phase II initiative stall",
+          "focus": "transit initiative stall",
           "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
         },
         "exposure": {
@@ -274,7 +217,7 @@
             "stink-handle",
             "same-neighborhood"
           ],
-          "self": "Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
+          "self": "Tomas Renteria (POP-00744) — role: Podcast Host / Line Cook; neighborhood: Fruitvale; born: 2007; careerStage: mid; wealth: 4; employerBiz: BIZ-00044; tier: 2",
           "editorialTarget": true
         },
         "known": [
@@ -304,9 +247,9 @@
           },
           {
             "t": "FACT",
-            "text": "Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
-            "src": "Simulation_Ledger profile for POP-00598",
-            "id": "F-70d491d46450"
+            "text": "Tomas Renteria (POP-00744) — role: Podcast Host / Line Cook; neighborhood: Fruitvale; born: 2007; careerStage: mid; wealth: 4; employerBiz: BIZ-00044; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00744",
+            "id": "F-267c5ec4d4be"
           }
         ],
         "limits": {
@@ -330,80 +273,24 @@
             "invent a count",
             "turn suspicion into observation"
           ],
-          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
         },
         "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
           "format": "json-only",
           "schema": {
             "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
             "fact_ids": [
-              "one or more ids from packet.known"
+              "one or more supplied fact ids that prompted the response"
             ],
-            "stance_id": "one id from packet.lattice.stances; null on abstain",
-            "question_id": "one id from packet.lattice.questions; null on abstain",
-            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "basis": "direct-reaction|null",
             "unverifiedLead": [
-              "free lead text; never publishable"
+              "concrete follow-up lead that must not be printed as fact"
             ],
-            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
           },
-          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
-        },
-        "lattice": {
-          "stances": [
-            {
-              "id": "S_CONCERN",
-              "text": "What this record shows concerns me."
-            },
-            {
-              "id": "S_MISMATCH",
-              "text": "What the record shows does not line up with what I expected."
-            },
-            {
-              "id": "S_ATTENTION",
-              "text": "This deserves a closer look."
-            },
-            {
-              "id": "S_ACCOUNTABILITY",
-              "text": "Someone should answer for what the record shows."
-            }
-          ],
-          "questions": [
-            {
-              "id": "Q_ATTENTION",
-              "text": "Why is this not getting more attention?"
-            },
-            {
-              "id": "Q_OWNER",
-              "text": "Who is responsible for answering this?"
-            },
-            {
-              "id": "Q_NEXT",
-              "text": "What happens next?"
-            },
-            {
-              "id": "Q_GAP",
-              "text": "What explains the gap in the record?"
-            }
-          ],
-          "intentions": [
-            {
-              "id": "I_NONE",
-              "text": ""
-            },
-            {
-              "id": "I_WATCH",
-              "text": "I am going to keep watching this."
-            },
-            {
-              "id": "I_ANSWER",
-              "text": "I want a clear answer."
-            },
-            {
-              "id": "I_PRESS",
-              "text": "The Tribune should keep pressing for an answer."
-            }
-          ]
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
         }
       }
     }
@@ -412,26 +299,22 @@
     {
       "pop": "POP-00231",
       "name": "Calvin Turner",
-      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
+      "quote": "I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune should ask what's really going on with the funding",
       "disp": "driven, hard to sit still; magnetic, center of every room; devoted, family is everything",
-      "recorded": false,
+      "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-c4b3917a7eab\", \"F-f9925b4f532c\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": \"Something doesn't feel right about the way things are moving forward, or not moving forward, in our neighborhood.\"\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune should ask what's really going on with the funding\",\n  \"fact_ids\": [\"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-c4b3917a7eab",
-          "F-f9925b4f532c"
+          "F-c4b3917a7eab"
         ],
-        "stanceId": "S_MISMATCH",
-        "questionId": "Q_GAP",
-        "intentionId": "I_WATCH",
-        "unverifiedLead": [
-          "Something doesn't feel right about the way things are moving forward, or not moving forward, in our neighborhood."
-        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00231-95e98ad3fe",
-        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+        "quoteId": "Q-POP-00231-0cc01ede5e",
+        "authoredQuote": true,
+        "publishableQuote": "I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune should ask what's really going on with the funding"
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -443,14 +326,14 @@
           "desk": null
         },
         "task": {
-          "goal": "Answer one reporter question from bounded lived experience",
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jax Caldera",
-          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II initiative stall\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+          "question": "As a resident of Fruitvale, what about the supplied trend \"transit initiative stall\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
         },
         "signal": {
           "kind": "anomaly",
           "hood": "Fruitvale",
-          "focus": "Fruitvale Transit Hub Phase II initiative stall",
+          "focus": "transit initiative stall",
           "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
         },
         "exposure": {
@@ -514,125 +397,65 @@
             "invent a count",
             "turn suspicion into observation"
           ],
-          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
         },
         "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
           "format": "json-only",
           "schema": {
             "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
             "fact_ids": [
-              "one or more ids from packet.known"
+              "one or more supplied fact ids that prompted the response"
             ],
-            "stance_id": "one id from packet.lattice.stances; null on abstain",
-            "question_id": "one id from packet.lattice.questions; null on abstain",
-            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "basis": "direct-reaction|null",
             "unverifiedLead": [
-              "free lead text; never publishable"
+              "concrete follow-up lead that must not be printed as fact"
             ],
-            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
           },
-          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
-        },
-        "lattice": {
-          "stances": [
-            {
-              "id": "S_CONCERN",
-              "text": "What this record shows concerns me."
-            },
-            {
-              "id": "S_MISMATCH",
-              "text": "What the record shows does not line up with what I expected."
-            },
-            {
-              "id": "S_ATTENTION",
-              "text": "This deserves a closer look."
-            },
-            {
-              "id": "S_ACCOUNTABILITY",
-              "text": "Someone should answer for what the record shows."
-            }
-          ],
-          "questions": [
-            {
-              "id": "Q_ATTENTION",
-              "text": "Why is this not getting more attention?"
-            },
-            {
-              "id": "Q_OWNER",
-              "text": "Who is responsible for answering this?"
-            },
-            {
-              "id": "Q_NEXT",
-              "text": "What happens next?"
-            },
-            {
-              "id": "Q_GAP",
-              "text": "What explains the gap in the record?"
-            }
-          ],
-          "intentions": [
-            {
-              "id": "I_NONE",
-              "text": ""
-            },
-            {
-              "id": "I_WATCH",
-              "text": "I am going to keep watching this."
-            },
-            {
-              "id": "I_ANSWER",
-              "text": "I want a clear answer."
-            },
-            {
-              "id": "I_PRESS",
-              "text": "The Tribune should keep pressing for an answer."
-            }
-          ]
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
         }
       }
     },
     {
-      "pop": "POP-00598",
-      "name": "Vladimir Gonzalez",
-      "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-      "disp": "even-keeled, unremarkable",
-      "recorded": false,
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I feel like something's off with this transit initiative stall, it's like we're not being told the whole story, and I think the Tribune should ask what's really going on behind the scenes",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"fact_ids\": [\"F-c4b3917a7eab\", \"F-f9925b4f532c\"],\n  \"stance_id\": \"S_MISMATCH\",\n  \"question_id\": \"Q_GAP\",\n  \"intention_id\": \"I_WATCH\",\n  \"unverifiedLead\": \"Something feels off about the lack of progress\"\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like something's off with this transit initiative stall, it's like we're not being told the whole story, and I think the Tribune should ask what's really going on behind the scenes\",\n  \"fact_ids\": [\"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-c4b3917a7eab",
-          "F-f9925b4f532c"
+          "F-c4b3917a7eab"
         ],
-        "stanceId": "S_MISMATCH",
-        "questionId": "Q_GAP",
-        "intentionId": "I_WATCH",
-        "unverifiedLead": [
-          "Something feels off about the lack of progress"
-        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00598-95e98ad3fe",
-        "publishableQuote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this."
+        "quoteId": "Q-POP-00744-e23df6a83e",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like something's off with this transit initiative stall, it's like we're not being told the whole story, and I think the Tribune should ask what's really going on behind the scenes"
       },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
         "actor": {
-          "id": "POP-00598",
-          "name": "Vladimir Gonzalez",
-          "role": "Right Fielder, Oakland A's",
+          "id": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook",
           "desk": null
         },
         "task": {
-          "goal": "Answer one reporter question from bounded lived experience",
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jax Caldera",
-          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II initiative stall\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+          "question": "As a resident of Fruitvale, what about the supplied trend \"transit initiative stall\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
         },
         "signal": {
           "kind": "anomaly",
           "hood": "Fruitvale",
-          "focus": "Fruitvale Transit Hub Phase II initiative stall",
+          "focus": "transit initiative stall",
           "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
         },
         "exposure": {
@@ -640,7 +463,7 @@
             "stink-handle",
             "same-neighborhood"
           ],
-          "self": "Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
+          "self": "Tomas Renteria (POP-00744) — role: Podcast Host / Line Cook; neighborhood: Fruitvale; born: 2007; careerStage: mid; wealth: 4; employerBiz: BIZ-00044; tier: 2",
           "editorialTarget": true
         },
         "known": [
@@ -670,9 +493,9 @@
           },
           {
             "t": "FACT",
-            "text": "Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
-            "src": "Simulation_Ledger profile for POP-00598",
-            "id": "F-70d491d46450"
+            "text": "Tomas Renteria (POP-00744) — role: Podcast Host / Line Cook; neighborhood: Fruitvale; born: 2007; careerStage: mid; wealth: 4; employerBiz: BIZ-00044; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00744",
+            "id": "F-267c5ec4d4be"
           }
         ],
         "limits": {
@@ -696,83 +519,246 @@
             "invent a count",
             "turn suspicion into observation"
           ],
-          "rule": "Select supplied FACT ids and code-owned lattice ids only. Free text is allowed solely in unverifiedLead and never reaches Wake 3."
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
         },
         "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
           "format": "json-only",
           "schema": {
             "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
             "fact_ids": [
-              "one or more ids from packet.known"
+              "one or more supplied fact ids that prompted the response"
             ],
-            "stance_id": "one id from packet.lattice.stances; null on abstain",
-            "question_id": "one id from packet.lattice.questions; null on abstain",
-            "intention_id": "one id from packet.lattice.intentions; I_NONE allowed",
+            "basis": "direct-reaction|null",
             "unverifiedLead": [
-              "free lead text; never publishable"
+              "concrete follow-up lead that must not be printed as fact"
             ],
-            "abstain_reason": "institutional_path_required|insufficient_evidence|contract_conflict|other|null"
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
           },
-          "rule": "The backend renders the quote from selected lattice ids. Do not write quote prose."
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00635",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: appendReflection_: [err] [object Object],[object Object],[object Object],[object Object],[object Object]",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00635",
+          "name": "Mei Chen",
+          "role": "Gallery Owner/Curator",
+          "desk": null
         },
-        "lattice": {
-          "stances": [
-            {
-              "id": "S_CONCERN",
-              "text": "What this record shows concerns me."
-            },
-            {
-              "id": "S_MISMATCH",
-              "text": "What the record shows does not line up with what I expected."
-            },
-            {
-              "id": "S_ATTENTION",
-              "text": "This deserves a closer look."
-            },
-            {
-              "id": "S_ACCOUNTABILITY",
-              "text": "Someone should answer for what the record shows."
-            }
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What does the supplied trend \"transit initiative stall\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "transit initiative stall",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-signal"
           ],
-          "questions": [
-            {
-              "id": "Q_ATTENTION",
-              "text": "Why is this not getting more attention?"
-            },
-            {
-              "id": "Q_OWNER",
-              "text": "Who is responsible for answering this?"
-            },
-            {
-              "id": "Q_NEXT",
-              "text": "What happens next?"
-            },
-            {
-              "id": "Q_GAP",
-              "text": "What explains the gap in the record?"
-            }
+          "self": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 6; employerBiz: BIZ-00017; skills: Government & Civic; tier: 3",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c4b3917a7eab"
+          },
+          {
+            "t": "FACT",
+            "text": "The Initiative remains listed in the supplied tracker.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-f9925b4f532c"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",
+            "src": "World_Config/weather snapshot for C103",
+            "id": "F-e7aca0ecc02c"
+          },
+          {
+            "t": "FACT",
+            "text": "Mei Chen (POP-00635) — role: Gallery Owner/Curator; neighborhood: Chinatown; born: 1994; careerStage: senior; wealth: 6; employerBiz: BIZ-00017; skills: Government & Civic; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00635",
+            "id": "F-24de1aef6ede"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
           ],
-          "intentions": [
-            {
-              "id": "I_NONE",
-              "text": ""
-            },
-            {
-              "id": "I_WATCH",
-              "text": "I am going to keep watching this."
-            },
-            {
-              "id": "I_ANSWER",
-              "text": "I want a clear answer."
-            },
-            {
-              "id": "I_PRESS",
-              "text": "The Tribune should keep pressing for an answer."
-            }
-          ]
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00758",
+      "name": "Robert Jaston",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, the transit initiative stall means that our community's needs are not being met, and I think the Tribune should ask next what the city plans to do to get the initiative back on track.\",\n  \"fact_ids\": [\"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"What are the city's plans to address the stalled transit initiative?\"\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00758",
+          "name": "Robert Jaston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What does the supplied trend \"transit initiative stall\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "transit initiative stall",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-signal"
+          ],
+          "self": "Robert Jaston (POP-00758) — role: Senior Pastor / Faith Leader; neighborhood: West Oakland; born: 1979; careerStage: entry-level; wealth: 9; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c4b3917a7eab"
+          },
+          {
+            "t": "FACT",
+            "text": "The Initiative remains listed in the supplied tracker.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-f9925b4f532c"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 49°F overcast, NW 11 mph, overcast (frontState OVERCAST), humidity 67, visibility 10",
+            "src": "World_Config/weather snapshot for C103",
+            "id": "F-e7aca0ecc02c"
+          },
+          {
+            "t": "FACT",
+            "text": "Robert Jaston (POP-00758) — role: Senior Pastor / Faith Leader; neighborhood: West Oakland; born: 1979; careerStage: entry-level; wealth: 9; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00758",
+            "id": "F-c3b4c76a0a94"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
         }
       }
     }
   ],
-  "ranAt": "2026-08-13T07:01:42.878Z"
+  "ranAt": "2026-08-19T18:16:05.622Z"
 }

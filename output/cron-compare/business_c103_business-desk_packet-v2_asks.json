@@ -1,35 +1,34 @@
 [
   {
-    "pop": "POP-00730",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00730\",\"name\":\"Clarence Moody\",\"role\":\"Retired Machinist\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"As a resident of Dimond, what about the supplied trend \\\"Dimond's cooling retail scene and its impact on local storefronts\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling retail scene and its impact on local storefronts\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Clarence Moody — Retired Machinist — Dimond\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"},{\"t\":\"FACT\",\"text\":\"Clarence Moody — Retired Machinist — Dimond\",\"src\":\"Simulation_Ledger profile for POP-00730\",\"id\":\"F-dc6432ed9935\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "pop": "POP-00170",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00170\",\"name\":\"Melton Neilon\",\"role\":\"Sourdough Baker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What does the supplied trend \\\"Dimond's cooling storefronts and reduced foot traffic\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling storefronts and reduced foot traffic\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"ledger-resident\"],\"self\":\"Melton Neilon — Sourdough Baker — Temescal\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"},{\"t\":\"FACT\",\"text\":\"Melton Neilon — Sourdough Baker — Temescal\",\"src\":\"Simulation_Ledger profile for POP-00170\",\"id\":\"F-996744cc8aab\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
       "wake": "W2",
       "actor": {
-        "id": "POP-00730",
-        "name": "Clarence Moody",
-        "role": "Retired Machinist",
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
         "desk": null
       },
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Jordan Velez",
-        "question": "As a resident of Dimond, what about the supplied trend \"Dimond's cooling retail scene and its impact on local storefronts\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
       },
       "signal": {
         "kind": "story-signal",
         "hood": "Dimond",
-        "focus": "Dimond's cooling retail scene and its impact on local storefronts",
+        "focus": "Dimond's cooling storefronts and reduced foot traffic",
         "src": "world_summary ## What Moved · trajectory"
       },
       "exposure": {
         "basis": [
-          "same-hood-ledger",
-          "same-neighborhood"
+          "ledger-resident"
         ],
-        "self": "Clarence Moody — Retired Machinist — Dimond",
-        "editorialTarget": true
+        "self": "Melton Neilon — Sourdough Baker — Temescal",
+        "editorialTarget": false
       },
       "known": [
         {
@@ -70,9 +69,378 @@
         },
         {
           "t": "FACT",
-          "text": "Clarence Moody — Retired Machinist — Dimond",
-          "src": "Simulation_Ledger profile for POP-00730",
-          "id": "F-dc6432ed9935"
+          "text": "Melton Neilon — Sourdough Baker — Temescal",
+          "src": "Simulation_Ledger profile for POP-00170",
+          "id": "F-996744cc8aab"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00198",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00198\",\"name\":\"Rick Walker\",\"role\":\"Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What does the supplied trend \\\"Dimond's cooling storefronts and reduced foot traffic\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling storefronts and reduced foot traffic\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"ledger-resident\"],\"self\":\"Rick Walker — Line cook — Fruitvale\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"},{\"t\":\"FACT\",\"text\":\"Rick Walker — Line cook — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00198\",\"id\":\"F-69bcadf46b69\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "role": "Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Dimond",
+        "focus": "Dimond's cooling storefronts and reduced foot traffic",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      "exposure": {
+        "basis": [
+          "ledger-resident"
+        ],
+        "self": "Rick Walker — Line cook — Fruitvale",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-2c3c1b14061a"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5967d0383c65"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5f30e356b99b"
+        },
+        {
+          "t": "FACT",
+          "text": "TRAJECTORY: cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-68dbfc1e6fba"
+        },
+        {
+          "t": "FACT",
+          "text": "RETAIL VITALITY (scene color): 8.24",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-c40d99359f50"
+        },
+        {
+          "t": "FACT",
+          "text": "Rick Walker — Line cook — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00198",
+          "id": "F-69bcadf46b69"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00201",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00201\",\"name\":\"Elio Perez\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What does the supplied trend \\\"Dimond's cooling storefronts and reduced foot traffic\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling storefronts and reduced foot traffic\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"ledger-resident\"],\"self\":\"Elio Perez — Server — West Oakland\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"},{\"t\":\"FACT\",\"text\":\"Elio Perez — Server — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00201\",\"id\":\"F-5d500295f99a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Dimond",
+        "focus": "Dimond's cooling storefronts and reduced foot traffic",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      "exposure": {
+        "basis": [
+          "ledger-resident"
+        ],
+        "self": "Elio Perez — Server — West Oakland",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-2c3c1b14061a"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5967d0383c65"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5f30e356b99b"
+        },
+        {
+          "t": "FACT",
+          "text": "TRAJECTORY: cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-68dbfc1e6fba"
+        },
+        {
+          "t": "FACT",
+          "text": "RETAIL VITALITY (scene color): 8.24",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-c40d99359f50"
+        },
+        {
+          "t": "FACT",
+          "text": "Elio Perez — Server — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00201",
+          "id": "F-5d500295f99a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00210",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00210\",\"name\":\"Depak Ying\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What does the supplied trend \\\"Dimond's cooling storefronts and reduced foot traffic\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Dimond\",\"focus\":\"Dimond's cooling storefronts and reduced foot traffic\",\"src\":\"world_summary ## What Moved · trajectory\"},\"exposure\":{\"basis\":[\"ledger-resident\"],\"self\":\"Depak Ying — Server — Rockridge\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-2c3c1b14061a\"},{\"t\":\"FACT\",\"text\":\"Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5967d0383c65\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-5f30e356b99b\"},{\"t\":\"FACT\",\"text\":\"TRAJECTORY: cooling\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-68dbfc1e6fba\"},{\"t\":\"FACT\",\"text\":\"RETAIL VITALITY (scene color): 8.24\",\"src\":\"world_summary ## What Moved · trajectory\",\"id\":\"F-c40d99359f50\"},{\"t\":\"FACT\",\"text\":\"Depak Ying — Server — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00210\",\"id\":\"F-d4c31165a2d5\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00210",
+        "name": "Depak Ying",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Dimond",
+        "focus": "Dimond's cooling storefronts and reduced foot traffic",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      "exposure": {
+        "basis": [
+          "ledger-resident"
+        ],
+        "self": "Depak Ying — Server — Rockridge",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-2c3c1b14061a"
+        },
+        {
+          "t": "FACT",
+          "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5967d0383c65"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-5f30e356b99b"
+        },
+        {
+          "t": "FACT",
+          "text": "TRAJECTORY: cooling",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-68dbfc1e6fba"
+        },
+        {
+          "t": "FACT",
+          "text": "RETAIL VITALITY (scene color): 8.24",
+          "src": "world_summary ## What Moved · trajectory",
+          "id": "F-c40d99359f50"
+        },
+        {
+          "t": "FACT",
+          "text": "Depak Ying — Server — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00210",
+          "id": "F-d4c31165a2d5"
         }
       ],
       "limits": {

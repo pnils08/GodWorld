@@ -1,0 +1,35 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "103",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "coverage-gap (medium) — Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "sourceRef": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-b0b6363f2f85",
+    "draftSha256": "c9f5cafb2486f36ce03aa6f5dd9c21edf724794f7d483326c9e0dd17d7223663",
+    "verdict": "output/cron-compare/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-08-18T23:17:32.433Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-18T23:17:34.649Z"
+}

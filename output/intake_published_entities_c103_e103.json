@@ -1,35 +1,26 @@
 {
-  "timestamp": "2026-08-12T05:51:58.111Z",
-  "source": "c103_the_west_oakland_vacuum.txt",
+  "timestamp": "2026-08-21T05:49:50.233Z",
+  "source": "cycle_pulse_c103.txt",
   "type": "edition",
   "cycle": 103,
   "slug": "e103",
-  "mode": "apply",
+  "mode": "dry-run",
   "citizens": {
-    "parsed": 3,
-    "matched": [
-      {
-        "popId": "POP-00023",
-        "fullName": "Gregory Mims",
-        "driftWarning": null
-      },
-      {
-        "popId": "POP-00789",
-        "fullName": "Elias Varek",
-        "driftWarning": null
-      },
-      {
-        "popId": "POP-00034",
-        "fullName": "Avery Santana",
-        "driftWarning": null
-      }
-    ],
+    "parsed": 1,
+    "matched": [],
     "candidates": [],
     "canonDrift": [],
     "malformed": [],
     "ambiguous": [],
     "phantom": [],
-    "culturalOnly": [],
+    "culturalOnly": [
+      {
+        "id": "quoted-source",
+        "prefix": "quoted",
+        "fullName": "Benji Dillon",
+        "description": ""
+      }
+    ],
     "appended": [],
     "intakeRows": [],
     "intakeVerified": [],

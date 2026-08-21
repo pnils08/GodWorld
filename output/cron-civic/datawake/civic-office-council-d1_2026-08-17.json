@@ -1,0 +1,14 @@
+{
+  "office": "council_d1",
+  "agentDir": "civic-office-council-d1",
+  "holder": "Denise Carter",
+  "popid": "POP-00501",
+  "title": "City Council District 1",
+  "date": "2026-08-17",
+  "cycle": 103,
+  "model": "qwen/qwen3-235b-a22b",
+  "statement": "The West Oakland Stabilization Fund remains a lifeline for families navigating displacement pressures. With 45 households supported so far, we’re making progress—but our work isn’t done. This month’s disbursement batch must prioritize those most vulnerable, particularly in light of persistent property and violent crime rates that exceed city averages. I’ll approve the batch today, but urge the Mayor’s office to integrate trauma-informed support networks into the fund’s rollout. Housing stability isn’t just bricks and mortar; it’s safety, dignity, and community resilience.",
+  "action": "approved_month_five_disbursement",
+  "numberMoved": "45 households assisted to date (batch specifics pending review)",
+  "ranAt": "2026-08-17T10:45:47.687Z"
+}

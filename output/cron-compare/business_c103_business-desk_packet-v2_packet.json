@@ -24,16 +24,16 @@
   },
   "angle": "output/cron-compare/business_c103_business-desk_packet-v2_angle.json",
   "quotesRequested": 4,
-  "quotesLanded": 3,
+  "quotesLanded": 4,
   "quotes": [
     {
-      "pop": "POP-00730",
-      "name": "Clarence Moody",
-      "quote": "I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed.",
-      "disp": "even-keeled, unremarkable",
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake; devoted, family is everything",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed.\",\"fact_ids\":[\"F-2c3c1b14061a\",\"F-5967d0383c65\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[\"Are smaller, family-run businesses being overlooked in the retail vitality metrics?\"],\"abstain_reason\":null}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan.\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Track where displaced Dimond foot traffic is redirecting\"],\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
@@ -42,147 +42,12 @@
         ],
         "basis": "direct-reaction",
         "unverifiedLead": [
-          "Are smaller, family-run businesses being overlooked in the retail vitality metrics?"
+          "Track where displaced Dimond foot traffic is redirecting"
         ],
         "abstainReason": null,
-        "quoteId": "Q-POP-00730-ae15425af9",
+        "quoteId": "Q-POP-00170-54a8559db9",
         "authoredQuote": true,
-        "publishableQuote": "I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed."
-      },
-      "inputPacket": {
-        "v": "LEP/2",
-        "wake": "W2",
-        "actor": {
-          "id": "POP-00730",
-          "name": "Clarence Moody",
-          "role": "Retired Machinist",
-          "desk": null
-        },
-        "task": {
-          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-          "reporter": "Jordan Velez",
-          "question": "As a resident of Dimond, what about the supplied trend \"Dimond's cooling retail scene compared to citywide trends\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
-        },
-        "signal": {
-          "kind": "story-signal",
-          "hood": "Dimond",
-          "focus": "Dimond's cooling retail scene compared to citywide trends",
-          "src": "world_summary ## What Moved · trajectory"
-        },
-        "exposure": {
-          "basis": [
-            "same-hood-ledger",
-            "same-neighborhood"
-          ],
-          "self": "Clarence Moody — Retired Machinist — Dimond",
-          "editorialTarget": false
-        },
-        "known": [
-          {
-            "t": "FACT",
-            "text": "Current cycle: C103",
-            "src": "cron-desk-run explicit cycle argument",
-            "id": "F-4ac610ea40fe"
-          },
-          {
-            "t": "FACT",
-            "text": "Dimond cooling",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-2c3c1b14061a"
-          },
-          {
-            "t": "FACT",
-            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-5967d0383c65"
-          },
-          {
-            "t": "FACT",
-            "text": "HOOD: Dimond",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-5f30e356b99b"
-          },
-          {
-            "t": "FACT",
-            "text": "TRAJECTORY: cooling",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-68dbfc1e6fba"
-          },
-          {
-            "t": "FACT",
-            "text": "RETAIL VITALITY (scene color): 8.24",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-c40d99359f50"
-          },
-          {
-            "t": "FACT",
-            "text": "Clarence Moody — Retired Machinist — Dimond",
-            "src": "Simulation_Ledger profile for POP-00730",
-            "id": "F-dc6432ed9935"
-          }
-        ],
-        "limits": {
-          "quoteEligible": true,
-          "assert": [
-            "FACT already supplied",
-            "your own feeling",
-            "your own intention"
-          ],
-          "classify": [
-            "FACT",
-            "OBSERVATION",
-            "INTERPRETATION",
-            "INTENTION",
-            "LEAD"
-          ],
-          "never": [
-            "invent a named person",
-            "invent a public event",
-            "invent a date",
-            "invent a count",
-            "turn suspicion into observation"
-          ],
-          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
-        },
-        "output": {
-          "contract": "CITIZEN_INTERVIEW/1",
-          "format": "json-only",
-          "schema": {
-            "answer": "quote|abstain",
-            "quote": "your exact first-person response; null on abstain",
-            "fact_ids": [
-              "one or more supplied fact ids that prompted the response"
-            ],
-            "basis": "direct-reaction|null",
-            "unverifiedLead": [
-              "concrete follow-up lead that must not be printed as fact"
-            ],
-            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-          },
-          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-        }
-      }
-    },
-    {
-      "pop": "POP-00170",
-      "name": "Melton Neilon",
-      "quote": "I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?",
-      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake; devoted, family is everything",
-      "recorded": true,
-      "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
-      "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-2c3c1b14061a",
-          "F-5967d0383c65"
-        ],
-        "basis": "direct-reaction",
-        "unverifiedLead": [],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00170-258371abc3",
-        "authoredQuote": true,
-        "publishableQuote": "I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?"
+        "publishableQuote": "I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -196,421 +61,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "What does the supplied trend \"Dimond's cooling retail scene compared to citywide trends\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Dimond",
-          "focus": "Dimond's cooling retail scene compared to citywide trends",
-          "src": "world_summary ## What Moved · trajectory"
-        },
-        "exposure": {
-          "basis": [
-            "ledger-resident"
-          ],
-          "self": "Melton Neilon — Sourdough Baker — Temescal",
-          "editorialTarget": false
-        },
-        "known": [
-          {
-            "t": "FACT",
-            "text": "Current cycle: C103",
-            "src": "cron-desk-run explicit cycle argument",
-            "id": "F-4ac610ea40fe"
-          },
-          {
-            "t": "FACT",
-            "text": "Dimond cooling",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-2c3c1b14061a"
-          },
-          {
-            "t": "FACT",
-            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-5967d0383c65"
-          },
-          {
-            "t": "FACT",
-            "text": "HOOD: Dimond",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-5f30e356b99b"
-          },
-          {
-            "t": "FACT",
-            "text": "TRAJECTORY: cooling",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-68dbfc1e6fba"
-          },
-          {
-            "t": "FACT",
-            "text": "RETAIL VITALITY (scene color): 8.24",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-c40d99359f50"
-          },
-          {
-            "t": "FACT",
-            "text": "Melton Neilon — Sourdough Baker — Temescal",
-            "src": "Simulation_Ledger profile for POP-00170",
-            "id": "F-996744cc8aab"
-          }
-        ],
-        "limits": {
-          "quoteEligible": true,
-          "assert": [
-            "FACT already supplied",
-            "your own feeling",
-            "your own intention"
-          ],
-          "classify": [
-            "FACT",
-            "OBSERVATION",
-            "INTERPRETATION",
-            "INTENTION",
-            "LEAD"
-          ],
-          "never": [
-            "invent a named person",
-            "invent a public event",
-            "invent a date",
-            "invent a count",
-            "turn suspicion into observation"
-          ],
-          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
-        },
-        "output": {
-          "contract": "CITIZEN_INTERVIEW/1",
-          "format": "json-only",
-          "schema": {
-            "answer": "quote|abstain",
-            "quote": "your exact first-person response; null on abstain",
-            "fact_ids": [
-              "one or more supplied fact ids that prompted the response"
-            ],
-            "basis": "direct-reaction|null",
-            "unverifiedLead": [
-              "concrete follow-up lead that must not be printed as fact"
-            ],
-            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-          },
-          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-        }
-      }
-    },
-    {
-      "pop": "POP-00201",
-      "name": "Elio Perez",
-      "quote": "I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?",
-      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
-      "recorded": true,
-      "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Why are people avoiding Dimond's stores compared to other neighborhoods?\"]\n}\n```",
-      "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-2c3c1b14061a",
-          "F-5967d0383c65"
-        ],
-        "basis": "direct-reaction",
-        "unverifiedLead": [
-          "Why are people avoiding Dimond's stores compared to other neighborhoods?"
-        ],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00201-babd4660dd",
-        "authoredQuote": true,
-        "publishableQuote": "I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?"
-      },
-      "inputPacket": {
-        "v": "LEP/2",
-        "wake": "W2",
-        "actor": {
-          "id": "POP-00201",
-          "name": "Elio Perez",
-          "role": "Server",
-          "desk": null
-        },
-        "task": {
-          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-          "reporter": "Jordan Velez",
-          "question": "What does the supplied trend \"Dimond's cooling retail scene compared to citywide trends\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
-        },
-        "signal": {
-          "kind": "story-signal",
-          "hood": "Dimond",
-          "focus": "Dimond's cooling retail scene compared to citywide trends",
-          "src": "world_summary ## What Moved · trajectory"
-        },
-        "exposure": {
-          "basis": [
-            "ledger-resident"
-          ],
-          "self": "Elio Perez — Server — West Oakland",
-          "editorialTarget": false
-        },
-        "known": [
-          {
-            "t": "FACT",
-            "text": "Current cycle: C103",
-            "src": "cron-desk-run explicit cycle argument",
-            "id": "F-4ac610ea40fe"
-          },
-          {
-            "t": "FACT",
-            "text": "Dimond cooling",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-2c3c1b14061a"
-          },
-          {
-            "t": "FACT",
-            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-5967d0383c65"
-          },
-          {
-            "t": "FACT",
-            "text": "HOOD: Dimond",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-5f30e356b99b"
-          },
-          {
-            "t": "FACT",
-            "text": "TRAJECTORY: cooling",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-68dbfc1e6fba"
-          },
-          {
-            "t": "FACT",
-            "text": "RETAIL VITALITY (scene color): 8.24",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-c40d99359f50"
-          },
-          {
-            "t": "FACT",
-            "text": "Elio Perez — Server — West Oakland",
-            "src": "Simulation_Ledger profile for POP-00201",
-            "id": "F-5d500295f99a"
-          }
-        ],
-        "limits": {
-          "quoteEligible": true,
-          "assert": [
-            "FACT already supplied",
-            "your own feeling",
-            "your own intention"
-          ],
-          "classify": [
-            "FACT",
-            "OBSERVATION",
-            "INTERPRETATION",
-            "INTENTION",
-            "LEAD"
-          ],
-          "never": [
-            "invent a named person",
-            "invent a public event",
-            "invent a date",
-            "invent a count",
-            "turn suspicion into observation"
-          ],
-          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
-        },
-        "output": {
-          "contract": "CITIZEN_INTERVIEW/1",
-          "format": "json-only",
-          "schema": {
-            "answer": "quote|abstain",
-            "quote": "your exact first-person response; null on abstain",
-            "fact_ids": [
-              "one or more supplied fact ids that prompted the response"
-            ],
-            "basis": "direct-reaction|null",
-            "unverifiedLead": [
-              "concrete follow-up lead that must not be printed as fact"
-            ],
-            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-          },
-          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-        }
-      }
-    }
-  ],
-  "interviews": [
-    {
-      "pop": "POP-00730",
-      "name": "Clarence Moody",
-      "quote": "I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed.",
-      "disp": "even-keeled, unremarkable",
-      "recorded": true,
-      "fallback": null,
-      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed.\",\"fact_ids\":[\"F-2c3c1b14061a\",\"F-5967d0383c65\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[\"Are smaller, family-run businesses being overlooked in the retail vitality metrics?\"],\"abstain_reason\":null}\n```",
-      "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-2c3c1b14061a",
-          "F-5967d0383c65"
-        ],
-        "basis": "direct-reaction",
-        "unverifiedLead": [
-          "Are smaller, family-run businesses being overlooked in the retail vitality metrics?"
-        ],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00730-ae15425af9",
-        "authoredQuote": true,
-        "publishableQuote": "I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed."
-      },
-      "inputPacket": {
-        "v": "LEP/2",
-        "wake": "W2",
-        "actor": {
-          "id": "POP-00730",
-          "name": "Clarence Moody",
-          "role": "Retired Machinist",
-          "desk": null
-        },
-        "task": {
-          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-          "reporter": "Jordan Velez",
-          "question": "As a resident of Dimond, what about the supplied trend \"Dimond's cooling retail scene compared to citywide trends\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
-        },
-        "signal": {
-          "kind": "story-signal",
-          "hood": "Dimond",
-          "focus": "Dimond's cooling retail scene compared to citywide trends",
-          "src": "world_summary ## What Moved · trajectory"
-        },
-        "exposure": {
-          "basis": [
-            "same-hood-ledger",
-            "same-neighborhood"
-          ],
-          "self": "Clarence Moody — Retired Machinist — Dimond",
-          "editorialTarget": false
-        },
-        "known": [
-          {
-            "t": "FACT",
-            "text": "Current cycle: C103",
-            "src": "cron-desk-run explicit cycle argument",
-            "id": "F-4ac610ea40fe"
-          },
-          {
-            "t": "FACT",
-            "text": "Dimond cooling",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-2c3c1b14061a"
-          },
-          {
-            "t": "FACT",
-            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-5967d0383c65"
-          },
-          {
-            "t": "FACT",
-            "text": "HOOD: Dimond",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-5f30e356b99b"
-          },
-          {
-            "t": "FACT",
-            "text": "TRAJECTORY: cooling",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-68dbfc1e6fba"
-          },
-          {
-            "t": "FACT",
-            "text": "RETAIL VITALITY (scene color): 8.24",
-            "src": "world_summary ## What Moved · trajectory",
-            "id": "F-c40d99359f50"
-          },
-          {
-            "t": "FACT",
-            "text": "Clarence Moody — Retired Machinist — Dimond",
-            "src": "Simulation_Ledger profile for POP-00730",
-            "id": "F-dc6432ed9935"
-          }
-        ],
-        "limits": {
-          "quoteEligible": true,
-          "assert": [
-            "FACT already supplied",
-            "your own feeling",
-            "your own intention"
-          ],
-          "classify": [
-            "FACT",
-            "OBSERVATION",
-            "INTERPRETATION",
-            "INTENTION",
-            "LEAD"
-          ],
-          "never": [
-            "invent a named person",
-            "invent a public event",
-            "invent a date",
-            "invent a count",
-            "turn suspicion into observation"
-          ],
-          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
-        },
-        "output": {
-          "contract": "CITIZEN_INTERVIEW/1",
-          "format": "json-only",
-          "schema": {
-            "answer": "quote|abstain",
-            "quote": "your exact first-person response; null on abstain",
-            "fact_ids": [
-              "one or more supplied fact ids that prompted the response"
-            ],
-            "basis": "direct-reaction|null",
-            "unverifiedLead": [
-              "concrete follow-up lead that must not be printed as fact"
-            ],
-            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-          },
-          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-        }
-      }
-    },
-    {
-      "pop": "POP-00170",
-      "name": "Melton Neilon",
-      "quote": "I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?",
-      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake; devoted, family is everything",
-      "recorded": true,
-      "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
-      "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-2c3c1b14061a",
-          "F-5967d0383c65"
-        ],
-        "basis": "direct-reaction",
-        "unverifiedLead": [],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00170-258371abc3",
-        "authoredQuote": true,
-        "publishableQuote": "I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?"
-      },
-      "inputPacket": {
-        "v": "LEP/2",
-        "wake": "W2",
-        "actor": {
-          "id": "POP-00170",
-          "name": "Melton Neilon",
-          "role": "Sourdough Baker",
-          "desk": null
-        },
-        "task": {
-          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-          "reporter": "Jordan Velez",
-          "question": "What does the supplied trend \"Dimond's cooling retail scene compared to citywide trends\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
-        },
-        "signal": {
-          "kind": "story-signal",
-          "hood": "Dimond",
-          "focus": "Dimond's cooling retail scene compared to citywide trends",
+          "focus": "Dimond's cooling storefronts and reduced foot traffic",
           "src": "world_summary ## What Moved · trajectory"
         },
         "exposure": {
@@ -709,12 +165,26 @@
     {
       "pop": "POP-00198",
       "name": "Rick Walker",
-      "quote": null,
+      "quote": "I don't get over to Dimond much these days, but hearing shops are slowing down there makes me worry about the whole area. The Tribune should ask if this is just a summer slump or something deeper, like rents pushing folks out.",
       "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
       "recorded": true,
-      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be one to three sentences; direct reaction must be first person",
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I don't get over to Dimond much these days—too busy hustling at the diner and keeping up with my own block. But if shops are quieter there while the rest of the city's buzzing, maybe ask what's drawing folks away. Rent hikes? Or just not enough to keep people coming back?\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are rising rents pushing out businesses in Dimond?\"]\n}\n```",
-      "claims": null,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I don't get over to Dimond much these days, but hearing shops are slowing down there makes me worry about the whole area. The Tribune should ask if this is just a summer slump or something deeper, like rents pushing folks out.\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are rising commercial rents in Dimond driving the slowdown?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2c3c1b14061a",
+          "F-5967d0383c65"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "Are rising commercial rents in Dimond driving the slowdown?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-5502d00734",
+        "authoredQuote": true,
+        "publishableQuote": "I don't get over to Dimond much these days, but hearing shops are slowing down there makes me worry about the whole area. The Tribune should ask if this is just a summer slump or something deeper, like rents pushing folks out."
+      },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
@@ -727,12 +197,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "What does the supplied trend \"Dimond's cooling retail scene compared to citywide trends\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Dimond",
-          "focus": "Dimond's cooling retail scene compared to citywide trends",
+          "focus": "Dimond's cooling storefronts and reduced foot traffic",
           "src": "world_summary ## What Moved · trajectory"
         },
         "exposure": {
@@ -831,11 +301,11 @@
     {
       "pop": "POP-00201",
       "name": "Elio Perez",
-      "quote": "I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?",
+      "quote": "I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should ask what’s driving people away and what can be done to bring them back.",
       "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Why are people avoiding Dimond's stores compared to other neighborhoods?\"]\n}\n```",
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should ask what’s driving people away and what can be done to bring them back.\",\"fact_ids\":[\"F-2c3c1b14061a\",\"F-5967d0383c65\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[\"What’s driving people away from Dimond?\"],\"abstain_reason\":null}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
@@ -844,12 +314,12 @@
         ],
         "basis": "direct-reaction",
         "unverifiedLead": [
-          "Why are people avoiding Dimond's stores compared to other neighborhoods?"
+          "What’s driving people away from Dimond?"
         ],
         "abstainReason": null,
-        "quoteId": "Q-POP-00201-babd4660dd",
+        "quoteId": "Q-POP-00201-f1eecc8c4c",
         "authoredQuote": true,
-        "publishableQuote": "I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?"
+        "publishableQuote": "I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should ask what’s driving people away and what can be done to bring them back."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -863,12 +333,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "What does the supplied trend \"Dimond's cooling retail scene compared to citywide trends\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Dimond",
-          "focus": "Dimond's cooling retail scene compared to citywide trends",
+          "focus": "Dimond's cooling storefronts and reduced foot traffic",
           "src": "world_summary ## What Moved · trajectory"
         },
         "exposure": {
@@ -963,7 +433,689 @@
           "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
         }
       }
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I've heard folks talking about how Dimond's not as lively as it used to be—fewer people out shopping, more empty storefronts. Makes me wonder if rents are pushing out the small businesses that gave the neighborhood its charm.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard folks talking about how Dimond's not as lively as it used to be—fewer people out shopping, more empty storefronts. Makes me wonder if rents are pushing out the small businesses that gave the neighborhood its charm.\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are rising commercial rents the main driver behind Dimond's cooling retail scene?\"]\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2c3c1b14061a",
+          "F-5967d0383c65"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "Are rising commercial rents the main driver behind Dimond's cooling retail scene?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00210-7ba052abfd",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard folks talking about how Dimond's not as lively as it used to be—fewer people out shopping, more empty storefronts. Makes me wonder if rents are pushing out the small businesses that gave the neighborhood its charm."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Dimond's cooling storefronts and reduced foot traffic",
+          "src": "world_summary ## What Moved · trajectory"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-2c3c1b14061a"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5967d0383c65"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5f30e356b99b"
+          },
+          {
+            "t": "FACT",
+            "text": "TRAJECTORY: cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-68dbfc1e6fba"
+          },
+          {
+            "t": "FACT",
+            "text": "RETAIL VITALITY (scene color): 8.24",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-c40d99359f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
     }
   ],
-  "ranAt": "2026-08-13T18:15:22.112Z"
+  "interviews": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan.\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Track where displaced Dimond foot traffic is redirecting\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2c3c1b14061a",
+          "F-5967d0383c65"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "Track where displaced Dimond foot traffic is redirecting"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-54a8559db9",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Dimond's cooling storefronts and reduced foot traffic",
+          "src": "world_summary ## What Moved · trajectory"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-2c3c1b14061a"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5967d0383c65"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5f30e356b99b"
+          },
+          {
+            "t": "FACT",
+            "text": "TRAJECTORY: cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-68dbfc1e6fba"
+          },
+          {
+            "t": "FACT",
+            "text": "RETAIL VITALITY (scene color): 8.24",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-c40d99359f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I don't get over to Dimond much these days, but hearing shops are slowing down there makes me worry about the whole area. The Tribune should ask if this is just a summer slump or something deeper, like rents pushing folks out.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I don't get over to Dimond much these days, but hearing shops are slowing down there makes me worry about the whole area. The Tribune should ask if this is just a summer slump or something deeper, like rents pushing folks out.\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are rising commercial rents in Dimond driving the slowdown?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2c3c1b14061a",
+          "F-5967d0383c65"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "Are rising commercial rents in Dimond driving the slowdown?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-5502d00734",
+        "authoredQuote": true,
+        "publishableQuote": "I don't get over to Dimond much these days, but hearing shops are slowing down there makes me worry about the whole area. The Tribune should ask if this is just a summer slump or something deeper, like rents pushing folks out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Dimond's cooling storefronts and reduced foot traffic",
+          "src": "world_summary ## What Moved · trajectory"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-2c3c1b14061a"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5967d0383c65"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5f30e356b99b"
+          },
+          {
+            "t": "FACT",
+            "text": "TRAJECTORY: cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-68dbfc1e6fba"
+          },
+          {
+            "t": "FACT",
+            "text": "RETAIL VITALITY (scene color): 8.24",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-c40d99359f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should ask what’s driving people away and what can be done to bring them back.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should ask what’s driving people away and what can be done to bring them back.\",\"fact_ids\":[\"F-2c3c1b14061a\",\"F-5967d0383c65\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[\"What’s driving people away from Dimond?\"],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2c3c1b14061a",
+          "F-5967d0383c65"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "What’s driving people away from Dimond?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-f1eecc8c4c",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should ask what’s driving people away and what can be done to bring them back."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Dimond's cooling storefronts and reduced foot traffic",
+          "src": "world_summary ## What Moved · trajectory"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Elio Perez — Server — West Oakland",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-2c3c1b14061a"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5967d0383c65"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5f30e356b99b"
+          },
+          {
+            "t": "FACT",
+            "text": "TRAJECTORY: cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-68dbfc1e6fba"
+          },
+          {
+            "t": "FACT",
+            "text": "RETAIL VITALITY (scene color): 8.24",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-c40d99359f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-5d500295f99a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I've heard folks talking about how Dimond's not as lively as it used to be—fewer people out shopping, more empty storefronts. Makes me wonder if rents are pushing out the small businesses that gave the neighborhood its charm.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard folks talking about how Dimond's not as lively as it used to be—fewer people out shopping, more empty storefronts. Makes me wonder if rents are pushing out the small businesses that gave the neighborhood its charm.\",\n  \"fact_ids\": [\"F-2c3c1b14061a\", \"F-5967d0383c65\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are rising commercial rents the main driver behind Dimond's cooling retail scene?\"]\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2c3c1b14061a",
+          "F-5967d0383c65"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "Are rising commercial rents the main driver behind Dimond's cooling retail scene?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00210-7ba052abfd",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard folks talking about how Dimond's not as lively as it used to be—fewer people out shopping, more empty storefronts. Makes me wonder if rents are pushing out the small businesses that gave the neighborhood its charm."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "What does the supplied trend \"Dimond's cooling storefronts and reduced foot traffic\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Dimond's cooling storefronts and reduced foot traffic",
+          "src": "world_summary ## What Moved · trajectory"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-2c3c1b14061a"
+          },
+          {
+            "t": "FACT",
+            "text": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5967d0383c65"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-5f30e356b99b"
+          },
+          {
+            "t": "FACT",
+            "text": "TRAJECTORY: cooling",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-68dbfc1e6fba"
+          },
+          {
+            "t": "FACT",
+            "text": "RETAIL VITALITY (scene color): 8.24",
+            "src": "world_summary ## What Moved · trajectory",
+            "id": "F-c40d99359f50"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-19T18:21:23.427Z"
 }

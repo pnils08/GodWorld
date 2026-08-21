@@ -1,0 +1,12 @@
+{
+  "cycle": 103,
+  "generatedAt": "2026-08-21T03:27:17.158Z",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-4.5",
+  "edition": "cycle_pulse_c103.txt",
+  "articlesChecked": 0,
+  "hallucinationFlags": [],
+  "perArticle": [],
+  "elapsedSeconds": 0,
+  "costUsd": null
+}

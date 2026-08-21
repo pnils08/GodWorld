@@ -3,15 +3,21 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
-  "draftSha256": "3ee9711169a93d4cdd36bbe1a277028cdded376eb05d06450685874957ea151e",
-  "pass": true,
-  "flags": [],
-  "flagCount": 0,
-  "highSeverityCount": 0,
-  "summary": "The draft perfectly aligns with the cycle 103 sports feed, correctly referencing the unresolved feed subject Pablo Almanzar within authorized profile limits.",
+  "draftSha256": "51ea179c3861c848a897d344416a8a6f2ff7a2bc798d7becf0684a4a1f6ef917",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "twenty-three-year-old rookie",
+      "issue": "Pablo Almanzar is an unresolved sports feed subject and his age (23) is not documented in the sports feed or any canon source, violating the biography restriction.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 1,
+  "summary": "The draft is well-sourced except for an invented age (23) for unresolved sports feed subject Pablo Almanzar.",
   "review": {
     "profileId": "anthony-sports-analytics-v1",
-    "canonIntegrity": "pass",
+    "canonIntegrity": "revise",
     "texture": "authorized"
   },
   "reviewProfile": {
@@ -34,7 +40,7 @@
       "names": 0,
       "businesses": 0,
       "storylines": 0,
-      "hoods": 1,
+      "hoods": 0,
       "claims": 1
     },
     "grammarErrors": 0,
@@ -42,8 +48,8 @@
     "unbackedQuoted": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0541,
-  "durationMs": 15345,
+  "apiCostUsd": 0.0684,
+  "durationMs": 23276,
   "parseError": false,
-  "ranAt": "2026-08-13T17:55:12.341Z"
+  "ranAt": "2026-08-18T23:22:34.701Z"
 }

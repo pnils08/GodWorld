@@ -1,0 +1,14 @@
+{
+  "office": "baylight_authority",
+  "agentDir": "civic-office-baylight-authority",
+  "holder": "Keisha Ramos",
+  "popid": "POP-00041",
+  "title": "Baylight Authority Director",
+  "date": "2026-08-18",
+  "cycle": 103,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The Baylight Authority has completed the Phase II shortlist evaluation, reducing four qualified consortiums to three finalists. Each team submitted a detailed proposal demonstrating their capability to deliver the project on time and within budget. The final selection will be made within the next two cycles after thorough review of the final proposals. The winning team will be tasked with executing the largest civic development Oakland has ever seen.",
+  "action": "Conduct final bid evaluation and selection within two cycles",
+  "numberMoved": "Phase II shortlist reduced from 4 to 3 qualified consortiums",
+  "ranAt": "2026-08-18T10:45:18.981Z"
+}

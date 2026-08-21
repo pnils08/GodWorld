@@ -1,17 +1,17 @@
 {
   "desk": "culture",
   "cycle": "103",
-  "model": "meta-llama/llama-3.3-70b-instruct",
+  "model": "deepseek/deepseek-chat",
   "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 5430,
-  "usageOutputTokens": 382,
+  "usageInputTokens": 6871,
+  "usageOutputTokens": 657,
   "savedFiles": [
-    "output/cron-compare/culture_c103_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md"
+    "output/cron-compare/culture_c103_mason-ortega_packet-v2_deepseek-deepseek-chat.md"
   ],
   "compareAgainst": "output/desk-output/culture_c103.md",
-  "durationMs": 6679,
+  "durationMs": 18735,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-08-12T08:26:06.592Z"
+  "ranAt": "2026-08-18T23:24:14.957Z"
 }

@@ -9,7 +9,7 @@
     "officeId": "COUNCIL-D1",
     "district": "D1",
     "faction": "OPP",
-    "agentDir": "civic-office-opp-faction",
+    "agentDir": "civic-office-council-d1",
     "initiative": null,
     "dials": {
       "approval": 95

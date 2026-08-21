@@ -1,0 +1,402 @@
+[
+  {
+    "pop": "POP-00830",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00830\",\"name\":\"Sandra Velazquez (POP-00830)\",\"role\":\"citizen\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"As a resident of Piedmont Ave, what about the supplied trend \\\"Sandra Velazquez's seasonal health concern\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"season-feel\",\"hood\":\"Piedmont Ave\",\"focus\":\"Sandra Velazquez's seasonal health concern\",\"src\":\"output/world_summary_c104.md ## Who Lived It\"},\"exposure\":{\"basis\":[\"assignment\",\"same-neighborhood\"],\"self\":\"Sandra Velazquez (POP-00830)\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Sandra Velazquez — dealt with a seasonal health concern\",\"src\":\"output/world_summary_c104.md ## Who Lived It\",\"id\":\"F-aebfdcfebfec\"},{\"t\":\"FACT\",\"text\":\"Sandra Velazquez (POP-00830)\",\"src\":\"Simulation_Ledger profile for POP-00830\",\"id\":\"F-27d6556f589a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00830",
+        "name": "Sandra Velazquez (POP-00830)",
+        "role": "citizen",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "As a resident of Piedmont Ave, what about the supplied trend \"Sandra Velazquez's seasonal health concern\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "season-feel",
+        "hood": "Piedmont Ave",
+        "focus": "Sandra Velazquez's seasonal health concern",
+        "src": "output/world_summary_c104.md ## Who Lived It"
+      },
+      "exposure": {
+        "basis": [
+          "assignment",
+          "same-neighborhood"
+        ],
+        "self": "Sandra Velazquez (POP-00830)",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Sandra Velazquez — dealt with a seasonal health concern",
+          "src": "output/world_summary_c104.md ## Who Lived It",
+          "id": "F-aebfdcfebfec"
+        },
+        {
+          "t": "FACT",
+          "text": "Sandra Velazquez (POP-00830)",
+          "src": "Simulation_Ledger profile for POP-00830",
+          "id": "F-27d6556f589a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00226",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00226\",\"name\":\"Jemeal Brim\",\"role\":\"Bakery worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"As a resident of Piedmont Ave, what about the supplied trend \\\"Sandra Velazquez's seasonal health concern\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"season-feel\",\"hood\":\"Piedmont Ave\",\"focus\":\"Sandra Velazquez's seasonal health concern\",\"src\":\"output/world_summary_c104.md ## Who Lived It\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Jemeal Brim — Bakery worker — Piedmont Ave\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Sandra Velazquez — dealt with a seasonal health concern\",\"src\":\"output/world_summary_c104.md ## Who Lived It\",\"id\":\"F-aebfdcfebfec\"},{\"t\":\"FACT\",\"text\":\"Jemeal Brim — Bakery worker — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00226\",\"id\":\"F-1eafa29e0c3c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00226",
+        "name": "Jemeal Brim",
+        "role": "Bakery worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "As a resident of Piedmont Ave, what about the supplied trend \"Sandra Velazquez's seasonal health concern\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "season-feel",
+        "hood": "Piedmont Ave",
+        "focus": "Sandra Velazquez's seasonal health concern",
+        "src": "output/world_summary_c104.md ## Who Lived It"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Jemeal Brim — Bakery worker — Piedmont Ave",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Sandra Velazquez — dealt with a seasonal health concern",
+          "src": "output/world_summary_c104.md ## Who Lived It",
+          "id": "F-aebfdcfebfec"
+        },
+        {
+          "t": "FACT",
+          "text": "Jemeal Brim — Bakery worker — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00226",
+          "id": "F-1eafa29e0c3c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00168",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00168\",\"name\":\"Ariana Lee\",\"role\":\"Midwife\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"As a resident of Piedmont Ave, what about the supplied trend \\\"Sandra Velazquez's seasonal health concern\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"season-feel\",\"hood\":\"Piedmont Ave\",\"focus\":\"Sandra Velazquez's seasonal health concern\",\"src\":\"output/world_summary_c104.md ## Who Lived It\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Ariana Lee — Midwife — Piedmont Ave\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Sandra Velazquez — dealt with a seasonal health concern\",\"src\":\"output/world_summary_c104.md ## Who Lived It\",\"id\":\"F-aebfdcfebfec\"},{\"t\":\"FACT\",\"text\":\"Ariana Lee — Midwife — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00168\",\"id\":\"F-7a8b4a96b03a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00168",
+        "name": "Ariana Lee",
+        "role": "Midwife",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "As a resident of Piedmont Ave, what about the supplied trend \"Sandra Velazquez's seasonal health concern\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "season-feel",
+        "hood": "Piedmont Ave",
+        "focus": "Sandra Velazquez's seasonal health concern",
+        "src": "output/world_summary_c104.md ## Who Lived It"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Ariana Lee — Midwife — Piedmont Ave",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Sandra Velazquez — dealt with a seasonal health concern",
+          "src": "output/world_summary_c104.md ## Who Lived It",
+          "id": "F-aebfdcfebfec"
+        },
+        {
+          "t": "FACT",
+          "text": "Ariana Lee — Midwife — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00168",
+          "id": "F-7a8b4a96b03a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00216",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00216\",\"name\":\"Victor Alize\",\"role\":\"Warehouse worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Noah Tan\",\"question\":\"As a resident of Piedmont Ave, what about the supplied trend \\\"Sandra Velazquez's seasonal health concern\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"season-feel\",\"hood\":\"Piedmont Ave\",\"focus\":\"Sandra Velazquez's seasonal health concern\",\"src\":\"output/world_summary_c104.md ## Who Lived It\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Victor Alize — Warehouse worker — Piedmont Ave\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Sandra Velazquez — dealt with a seasonal health concern\",\"src\":\"output/world_summary_c104.md ## Who Lived It\",\"id\":\"F-aebfdcfebfec\"},{\"t\":\"FACT\",\"text\":\"Victor Alize — Warehouse worker — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00216\",\"id\":\"F-511f46ea6816\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00216",
+        "name": "Victor Alize",
+        "role": "Warehouse worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Noah Tan",
+        "question": "As a resident of Piedmont Ave, what about the supplied trend \"Sandra Velazquez's seasonal health concern\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "season-feel",
+        "hood": "Piedmont Ave",
+        "focus": "Sandra Velazquez's seasonal health concern",
+        "src": "output/world_summary_c104.md ## Who Lived It"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Victor Alize — Warehouse worker — Piedmont Ave",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Sandra Velazquez — dealt with a seasonal health concern",
+          "src": "output/world_summary_c104.md ## Who Lived It",
+          "id": "F-aebfdcfebfec"
+        },
+        {
+          "t": "FACT",
+          "text": "Victor Alize — Warehouse worker — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00216",
+          "id": "F-511f46ea6816"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

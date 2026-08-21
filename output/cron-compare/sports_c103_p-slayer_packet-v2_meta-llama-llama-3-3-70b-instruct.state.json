@@ -8,7 +8,7 @@
     "desk": "sports"
   },
   "task": {
-    "goal": "Write one Article from inside this city, in this reporter's voice, using only Packet-approved facts and exact quotes",
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
     "assignment": "Pablo Almanzar throws a No No in his MLB debut",
     "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
     "voice": null,
@@ -32,16 +32,35 @@
     "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
     "plan": {
       "focus": "Pablo Almanzar's no-hitter",
-      "closeQuestion": "Will the A's keep their momentum going?"
+      "closeQuestion": "Will the A's be able to maintain their winning streak with Pablo Almanzar on the mound?"
     }
   },
   "exposure": {
-    "subjects": [],
-    "sources": [],
+    "subjects": [
+      {
+        "pop": "POP-00225",
+        "name": "Andre Turner",
+        "profile": "Andre Turner",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00225-5da4fe1dd3",
+        "pop": "POP-00225",
+        "name": "Andre Turner",
+        "quote": "I'm not sure what to make of this Pablo Almanzar guy throwing a no-hitter, it feels like something's off, like it's too good to be true. I think the Tribune should ask if he's really as good as everyone's making him out to be.",
+        "factIds": [
+          "F-a63e7221f454"
+        ],
+        "src": "packet.W2[POP-00225]"
+      }
+    ],
     "excludedLeads": [
       {
         "from": "P Slayer",
-        "text": "I think this win could be a turning point for the team",
+        "text": "the crowd's reaction to Pablo Almanzar's second start will be a key indicator of the team's momentum",
         "usable": false
       }
     ]
@@ -107,7 +126,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields and source-path metadata from public copy. Do not write as an auditor of a supplied record."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -171,7 +190,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-3725377deebc",
+    "id": "AM-7f984b7616e9",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -217,8 +236,27 @@
         "src": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut"
       }
     ],
-    "approvedQuotes": [],
-    "approvedSubjects": [],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00225-5da4fe1dd3",
+        "speakerId": "POP-00225",
+        "speakerName": "Andre Turner",
+        "text": "I'm not sure what to make of this Pablo Almanzar guy throwing a no-hitter, it feels like something's off, like it's too good to be true. I think the Tribune should ask if he's really as good as everyone's making him out to be.",
+        "factIds": [
+          "F-a63e7221f454"
+        ],
+        "src": "packet.W2[POP-00225]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00225",
+        "name": "Andre Turner",
+        "profile": "Andre Turner",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -236,7 +274,7 @@
     "unverifiedLeads": [
       {
         "from": "P Slayer",
-        "text": "I think this win could be a turning point for the team",
+        "text": "the crowd's reaction to Pablo Almanzar's second start will be a key indicator of the team's momentum",
         "publishable": false
       }
     ],

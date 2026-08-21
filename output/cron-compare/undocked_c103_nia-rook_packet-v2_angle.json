@@ -1,0 +1,203 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "103",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 3/5.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "undocked:undocked-pop00143-Y2C51",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Marcus Walker — down 68 on the night",
+          "src": "undocked:undocked-pop00962-Y2C51"
+        },
+        {
+          "text": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+          "src": "undocked:undocked-pop00143-Y2C51"
+        },
+        {
+          "text": "UNDOCKED: Merkin Jumper — up 42 on the night",
+          "src": "undocked:undocked-pop00688-Y2C51"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00143",
+          "name": "Clarissa Dane",
+          "profile": "Clarissa Dane — UNDOCKED cast pilot",
+          "why": "assignment",
+          "role": "UNDOCKED cast pilot",
+          "hood": "Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C103",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-4ac610ea40fe"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+        "src": "undocked:undocked-pop00143-Y2C51",
+        "id": "F-5f98dab18cca"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00143-Y2C51",
+      "label": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+      "kind": "undocked",
+      "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 3/5.",
+      "citizens": [
+        "Clarissa Dane — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00143"
+      ],
+      "hood": "Fruitvale"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "{\n  \"focus\": \"Clarissa Dane's UNDOCKED episode\",\n  \"why\": \"To understand the impact on the city\",\n  \"checks\": [\n    \"credits unsettled\",\n    \"systems Sol\",\n    \"combat 0\",\n    \"mishaps 0\",\n    \"magnitude 3/5\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00143\",\n      \"question\": \"What does the unsettled credits mean for Clarissa Dane's standing\",\n      \"basis\": \"assignment\"\n    }\n  ],\n  \"interpretation\": \"The city is waiting to see how the credits will be settled\",\n  \"unverifiedLead\": [\n    \"The city's argument tomorrow will be about what the unsettled credits mean for Clarissa Dane's future\"\n  ],\n  \"closeQuestion\": \"Will the unsettled credits affect Clarissa Dane's position in the city?\"\n}",
+    "plan": {
+      "focus": "Clarissa Dane's UNDOCKED episode",
+      "why": "To understand the impact on the city",
+      "checks": [
+        "credits unsettled",
+        "systems Sol",
+        "combat 0",
+        "mishaps 0",
+        "magnitude 3/5"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00143",
+          "question": "What does the unsettled credits mean for Clarissa Dane's standing",
+          "basis": "assignment"
+        }
+      ],
+      "interpretation": "The city is waiting to see how the credits will be settled",
+      "unverifiedLead": [
+        "The city's argument tomorrow will be about what the unsettled credits mean for Clarissa Dane's future"
+      ],
+      "closeQuestion": "Will the unsettled credits affect Clarissa Dane's position in the city?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Marcus Walker — down 68 on the night",
+      "kind": "undocked",
+      "hood": "Jack London",
+      "ref": "undocked:undocked-pop00962-Y2C51",
+      "popids": [
+        "POP-00962"
+      ]
+    },
+    {
+      "label": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "ref": "undocked:undocked-pop00143-Y2C51",
+      "popids": [
+        "POP-00143"
+      ]
+    },
+    {
+      "label": "UNDOCKED: Merkin Jumper — up 42 on the night",
+      "kind": "undocked",
+      "hood": "Downtown",
+      "ref": "undocked:undocked-pop00688-Y2C51",
+      "popids": [
+        "POP-00688"
+      ]
+    }
+  ],
+  "laneEntries": 3,
+  "ranAt": "2026-08-19T11:17:11.174Z"
+}

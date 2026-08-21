@@ -1,0 +1,522 @@
+[
+  {
+    "pop": "POP-00201",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00201\",\"name\":\"Elio Perez\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"As a resident of West Oakland, what about the supplied trend \\\"Nightline Station\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"West Oakland\",\"focus\":\"Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Elio Perez — Server — West Oakland\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Nightline Station (West Oakland) · quiet night\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-e9aa40059164\"},{\"t\":\"FACT\",\"text\":\"Nightline Station is open and quiet in West Oakland.\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-cb764aa0daad\"},{\"t\":\"FACT\",\"text\":\"NAMED: Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-853409f6f59f\"},{\"t\":\"FACT\",\"text\":\"HOOD: West Oakland\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-36a5efc57a78\"},{\"t\":\"FACT\",\"text\":\"VENUE: Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-690388ff68fb\"},{\"t\":\"FACT\",\"text\":\"EVENING RECORD: open and quiet\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-8b4bdb19a250\"},{\"t\":\"FACT\",\"text\":\"Elio Perez — Server — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00201\",\"id\":\"F-5d500295f99a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "As a resident of West Oakland, what about the supplied trend \"Nightline Station\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "West Oakland",
+        "focus": "Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Elio Perez — Server — West Oakland",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Nightline Station (West Oakland) · quiet night",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-e9aa40059164"
+        },
+        {
+          "t": "FACT",
+          "text": "Nightline Station is open and quiet in West Oakland.",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-cb764aa0daad"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Nightline Station",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-853409f6f59f"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: West Oakland",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-36a5efc57a78"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Nightline Station",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-690388ff68fb"
+        },
+        {
+          "t": "FACT",
+          "text": "EVENING RECORD: open and quiet",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-8b4bdb19a250"
+        },
+        {
+          "t": "FACT",
+          "text": "Elio Perez — Server — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00201",
+          "id": "F-5d500295f99a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00722",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00722\",\"name\":\"Daniel Cloak\",\"role\":\"Bakery Worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"As a resident of West Oakland, what about the supplied trend \\\"Nightline Station\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"West Oakland\",\"focus\":\"Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Daniel Cloak — Bakery Worker — West Oakland\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Nightline Station (West Oakland) · quiet night\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-e9aa40059164\"},{\"t\":\"FACT\",\"text\":\"Nightline Station is open and quiet in West Oakland.\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-cb764aa0daad\"},{\"t\":\"FACT\",\"text\":\"NAMED: Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-853409f6f59f\"},{\"t\":\"FACT\",\"text\":\"HOOD: West Oakland\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-36a5efc57a78\"},{\"t\":\"FACT\",\"text\":\"VENUE: Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-690388ff68fb\"},{\"t\":\"FACT\",\"text\":\"EVENING RECORD: open and quiet\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-8b4bdb19a250\"},{\"t\":\"FACT\",\"text\":\"Daniel Cloak — Bakery Worker — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00722\",\"id\":\"F-ae0902a45abd\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00722",
+        "name": "Daniel Cloak",
+        "role": "Bakery Worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "As a resident of West Oakland, what about the supplied trend \"Nightline Station\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "West Oakland",
+        "focus": "Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Daniel Cloak — Bakery Worker — West Oakland",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Nightline Station (West Oakland) · quiet night",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-e9aa40059164"
+        },
+        {
+          "t": "FACT",
+          "text": "Nightline Station is open and quiet in West Oakland.",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-cb764aa0daad"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Nightline Station",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-853409f6f59f"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: West Oakland",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-36a5efc57a78"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Nightline Station",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-690388ff68fb"
+        },
+        {
+          "t": "FACT",
+          "text": "EVENING RECORD: open and quiet",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-8b4bdb19a250"
+        },
+        {
+          "t": "FACT",
+          "text": "Daniel Cloak — Bakery Worker — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00722",
+          "id": "F-ae0902a45abd"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00794",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00794\",\"name\":\"Irene Fay\",\"role\":\"Barista\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"As a resident of West Oakland, what about the supplied trend \\\"Nightline Station\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"West Oakland\",\"focus\":\"Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Irene Fay — Barista — West Oakland\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Nightline Station (West Oakland) · quiet night\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-e9aa40059164\"},{\"t\":\"FACT\",\"text\":\"Nightline Station is open and quiet in West Oakland.\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-cb764aa0daad\"},{\"t\":\"FACT\",\"text\":\"NAMED: Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-853409f6f59f\"},{\"t\":\"FACT\",\"text\":\"HOOD: West Oakland\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-36a5efc57a78\"},{\"t\":\"FACT\",\"text\":\"VENUE: Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-690388ff68fb\"},{\"t\":\"FACT\",\"text\":\"EVENING RECORD: open and quiet\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-8b4bdb19a250\"},{\"t\":\"FACT\",\"text\":\"Irene Fay — Barista — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00794\",\"id\":\"F-870db1e88fd1\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00794",
+        "name": "Irene Fay",
+        "role": "Barista",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "As a resident of West Oakland, what about the supplied trend \"Nightline Station\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "West Oakland",
+        "focus": "Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Irene Fay — Barista — West Oakland",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Nightline Station (West Oakland) · quiet night",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-e9aa40059164"
+        },
+        {
+          "t": "FACT",
+          "text": "Nightline Station is open and quiet in West Oakland.",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-cb764aa0daad"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Nightline Station",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-853409f6f59f"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: West Oakland",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-36a5efc57a78"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Nightline Station",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-690388ff68fb"
+        },
+        {
+          "t": "FACT",
+          "text": "EVENING RECORD: open and quiet",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-8b4bdb19a250"
+        },
+        {
+          "t": "FACT",
+          "text": "Irene Fay — Barista — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00794",
+          "id": "F-870db1e88fd1"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00961",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00961\",\"name\":\"Darius Clark\",\"role\":\"Bakery Worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Maria Keen\",\"question\":\"As a resident of West Oakland, what about the supplied trend \\\"Nightline Station\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"West Oakland\",\"focus\":\"Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Darius Clark — Bakery Worker — West Oakland\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Nightline Station (West Oakland) · quiet night\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-e9aa40059164\"},{\"t\":\"FACT\",\"text\":\"Nightline Station is open and quiet in West Oakland.\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-cb764aa0daad\"},{\"t\":\"FACT\",\"text\":\"NAMED: Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-853409f6f59f\"},{\"t\":\"FACT\",\"text\":\"HOOD: West Oakland\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-36a5efc57a78\"},{\"t\":\"FACT\",\"text\":\"VENUE: Nightline Station\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-690388ff68fb\"},{\"t\":\"FACT\",\"text\":\"EVENING RECORD: open and quiet\",\"src\":\"world_summary ## Evening Texture · Nightlife\",\"id\":\"F-8b4bdb19a250\"},{\"t\":\"FACT\",\"text\":\"Darius Clark — Bakery Worker — West Oakland\",\"src\":\"Simulation_Ledger profile for POP-00961\",\"id\":\"F-732040af9124\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00961",
+        "name": "Darius Clark",
+        "role": "Bakery Worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Maria Keen",
+        "question": "As a resident of West Oakland, what about the supplied trend \"Nightline Station\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "West Oakland",
+        "focus": "Nightline Station",
+        "src": "world_summary ## Evening Texture · Nightlife"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Darius Clark — Bakery Worker — West Oakland",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Nightline Station (West Oakland) · quiet night",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-e9aa40059164"
+        },
+        {
+          "t": "FACT",
+          "text": "Nightline Station is open and quiet in West Oakland.",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-cb764aa0daad"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Nightline Station",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-853409f6f59f"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: West Oakland",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-36a5efc57a78"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Nightline Station",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-690388ff68fb"
+        },
+        {
+          "t": "FACT",
+          "text": "EVENING RECORD: open and quiet",
+          "src": "world_summary ## Evening Texture · Nightlife",
+          "id": "F-8b4bdb19a250"
+        },
+        {
+          "t": "FACT",
+          "text": "Darius Clark — Bakery Worker — West Oakland",
+          "src": "Simulation_Ledger profile for POP-00961",
+          "id": "F-732040af9124"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

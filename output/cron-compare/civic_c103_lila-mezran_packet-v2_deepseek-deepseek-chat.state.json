@@ -8,7 +8,7 @@
     "desk": "civic"
   },
   "task": {
-    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
     "assignment": "Temescal Community Health Center is approved, and construction is active.",
     "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.",
     "voice": null,
@@ -37,22 +37,87 @@
     "hood": "Temescal",
     "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
     "plan": {
-      "focus": "Temescal Community Health Center construction status and its implications for community health access",
-      "closeQuestion": "What unmet health needs persist in Temescal during this construction period, and how will the center's eventual opening address them without disrupting existing care networks?"
+      "focus": "Temescal Community Health Center construction progress and its implications for neighborhood access",
+      "closeQuestion": "Does 'active construction' indicate accelerated progress, or reveal unstated delays in making care accessible?"
     }
   },
   "exposure": {
-    "subjects": [],
-    "sources": [],
+    "subjects": [
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00269",
+        "name": "Kevin Nelson",
+        "profile": "Kevin Nelson — Line cook — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00666",
+        "name": "Kaila Raimon",
+        "profile": "Kaila Raimon — Sourdough Baker — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00170-0ef76d492e",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I keep hearing about this health center coming in, but nobody's talking about parking—where are all those extra cars gonna go when my customers are already circling the block for a spot? Ask them how they're gonna keep Temescal from turning into a traffic nightmare.",
+        "factIds": [
+          "F-a7fc85db0437"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00269-f80225296c",
+        "pop": "POP-00269",
+        "name": "Kevin Nelson",
+        "quote": "I keep hearing about this health center coming in, but nobody's talking about how working folks like me are supposed to get there during lunch rush or after a double shift. Ask who it's really built for—people with flexible hours or the ones burning the candle at both ends?",
+        "factIds": [
+          "F-a7fc85db0437",
+          "F-18baedc32ece"
+        ],
+        "src": "packet.W2[POP-00269]"
+      },
+      {
+        "id": "Q-POP-00666-54faf9da9f",
+        "pop": "POP-00666",
+        "name": "Kaila Raimon",
+        "quote": "I keep hearing about the health center construction, but nobody's talking about whether it'll actually have enough doctors who speak Spanish and Vietnamese—half my customers at the bakery are immigrants who need that.",
+        "factIds": [
+          "F-a7fc85db0437",
+          "F-18baedc32ece"
+        ],
+        "src": "packet.W2[POP-00666]"
+      }
+    ],
     "excludedLeads": [
       {
-        "from": "Dr. Lila Mezran",
-        "text": "Potential service gap between current needs and center opening",
+        "from": "Melton Neilon",
+        "text": "How will the health center address increased parking demand in Temescal?",
+        "usable": false
+      },
+      {
+        "from": "Kaila Raimon",
+        "text": "Ask how many bilingual providers are budgeted for staffing",
         "usable": false
       },
       {
         "from": "Dr. Lila Mezran",
-        "text": "Unclear if existing clinics are preparing for patient transition or referral coordination",
+        "text": "Possible service gaps during transition from approval to operational status",
+        "usable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Undocumented shifts in where residents seek care during construction",
         "usable": false
       }
     ]
@@ -94,7 +159,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -129,8 +194,8 @@
     "purpose": "Translate one Packet-backed health-service Initiative or access condition into a careful public record without diagnosing residents or inventing clinical outcomes.",
     "articleContract": {
       "renderMode": "SOURCE_BRIEF",
-      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
-      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
+      "voice": "clinical calm in precise third-person public-service reporting",
+      "targetWords": "evidence-bounded",
       "opening": "one Packet-backed health-service, access, place, or implementation fact",
       "closing": "the next resident-impact, access, capacity, or timeline record still needed"
     },
@@ -153,7 +218,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-b605b901d8cb",
+    "id": "AM-66b441c26baf",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -175,8 +240,63 @@
         "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
       }
     ],
-    "approvedQuotes": [],
-    "approvedSubjects": [],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00170-0ef76d492e",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I keep hearing about this health center coming in, but nobody's talking about parking—where are all those extra cars gonna go when my customers are already circling the block for a spot? Ask them how they're gonna keep Temescal from turning into a traffic nightmare.",
+        "factIds": [
+          "F-a7fc85db0437"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00269-f80225296c",
+        "speakerId": "POP-00269",
+        "speakerName": "Kevin Nelson",
+        "text": "I keep hearing about this health center coming in, but nobody's talking about how working folks like me are supposed to get there during lunch rush or after a double shift. Ask who it's really built for—people with flexible hours or the ones burning the candle at both ends?",
+        "factIds": [
+          "F-a7fc85db0437",
+          "F-18baedc32ece"
+        ],
+        "src": "packet.W2[POP-00269]"
+      },
+      {
+        "id": "Q-POP-00666-54faf9da9f",
+        "speakerId": "POP-00666",
+        "speakerName": "Kaila Raimon",
+        "text": "I keep hearing about the health center construction, but nobody's talking about whether it'll actually have enough doctors who speak Spanish and Vietnamese—half my customers at the bakery are immigrants who need that.",
+        "factIds": [
+          "F-a7fc85db0437",
+          "F-18baedc32ece"
+        ],
+        "src": "packet.W2[POP-00666]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00269",
+        "name": "Kevin Nelson",
+        "profile": "Kevin Nelson — Line cook — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00666",
+        "name": "Kaila Raimon",
+        "profile": "Kaila Raimon — Sourdough Baker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -193,13 +313,23 @@
     ],
     "unverifiedLeads": [
       {
-        "from": "Dr. Lila Mezran",
-        "text": "Potential service gap between current needs and center opening",
+        "from": "Melton Neilon",
+        "text": "How will the health center address increased parking demand in Temescal?",
+        "publishable": false
+      },
+      {
+        "from": "Kaila Raimon",
+        "text": "Ask how many bilingual providers are budgeted for staffing",
         "publishable": false
       },
       {
         "from": "Dr. Lila Mezran",
-        "text": "Unclear if existing clinics are preparing for patient transition or referral coordination",
+        "text": "Possible service gaps during transition from approval to operational status",
+        "publishable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Undocumented shifts in where residents seek care during construction",
         "publishable": false
       }
     ],

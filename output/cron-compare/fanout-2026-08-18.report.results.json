@@ -1,0 +1,43 @@
+{
+  "date": "2026-08-18",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/undocked_c103_nia-rook_packet-v2_angle.json — run --stage=angle first"
+    }
+  ],
+  "ranAt": "2026-08-18T18:20:50.261Z"
+}

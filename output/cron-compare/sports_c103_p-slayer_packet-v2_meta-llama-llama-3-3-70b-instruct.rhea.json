@@ -3,11 +3,12 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
+  "draftSha256": "eb6e743d8a7d8cd8abdaad154ea9fd02a095625f343a4244d27998f8df9b0eee",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "The draft accurately lists the sports feed facts regarding Pablo Almanzar's debut no-hitter without any sourcing violations.",
+  "summary": "All claims, player stats, and citizen quotes perfectly align with the cycle 103 ground truth and sports feed.",
   "review": {
     "profileId": "p-slayer-fan-heat-v1",
     "canonIntegrity": "pass",
@@ -15,35 +16,35 @@
   },
   "reviewProfile": {
     "id": "p-slayer-fan-heat-v1",
-    "packageVersion": null,
-    "manifestId": "AM-3725377deebc",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-7f984b7616e9",
     "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [
+      "Andre Turner",
       "Vinnie Keane"
     ],
     "unverified": [
-      "Pablo Almanza",
       "Pablo Almanzar"
     ]
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 0,
+      "names": 1,
       "businesses": 0,
-      "storylines": 0,
+      "storylines": 1,
       "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": false
+    "packetChecked": true
   },
-  "apiCostUsd": 0.0552,
-  "durationMs": 16944,
+  "apiCostUsd": 0.0609,
+  "durationMs": 18788,
   "parseError": false,
-  "ranAt": "2026-08-13T07:04:04.401Z"
+  "ranAt": "2026-08-18T23:20:52.602Z"
 }

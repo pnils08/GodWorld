@@ -1,0 +1,279 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "104",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record establishes the event; it does not establish what happened in the room.",
+        "anchorFacts": [
+          "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+          "The A's late-season record is 126-35."
+        ],
+        "accessEvidence": {
+          "state": "NOT_SUPPLIED",
+          "facts": []
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "NOT_SUPPLIED",
+          "facts": []
+        },
+        "missing": [
+          "reporter attendance or access",
+          "room mood or witnessed action",
+          "quotes or dialogue",
+          "injury detail or team response beyond the supplied record"
+        ],
+        "sceneRule": "No scene is authorized unless the Packet supplies an observed place and action.",
+        "sourcePointers": [
+          "output/world_summary_c104.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Baylight District",
+      "score": null,
+      "src": "world_summary_c104.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek",
+          "src": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "Oaks | team-update | (preseason) | Aj Dybantsa (SF), Dillon Brooks (SF), Adash Stanley (PG)",
+          "src": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Benji Dillon (SP)",
+          "src": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+          "src": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | team-update | (late-season) | Danny Horn (CF), Isley Kelley (SS), Eric Taveras (2B), Ernesto Quintero (3B), Travis Coles (SP), Arturo Ramos (SP)",
+          "src": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "why": "feed-names",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+        "src": "world_summary_c104.md ## Sports",
+        "id": "F-51a804fa9d18"
+      },
+      {
+        "t": "FACT",
+        "text": "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+        "src": "world_summary_c104.md ## Sports",
+        "id": "F-f606725c2db0"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's late-season record is 126-35.",
+        "src": "world_summary_c104.md ## Sports",
+        "id": "F-ac374730b867"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "label": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "hookLine": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "kind": "sideline-signal",
+      "hood": "Baylight District",
+      "popids": [
+        "POP-00001"
+      ],
+      "citizens": [
+        "Vinnie Keane (POP-00001)"
+      ],
+      "ref": "world_summary_c104.md ## Sports",
+      "cycle": 104
+    },
+    "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "{\n  \"focus\": \"Vinnie Keane's performance in the A's late-season game\",\n  \"why\": \"Vinnie Keane's 2-3 with a HR and 3 RBI stands out in the A's dominant 126-35 season\",\n  \"checks\": [\n    \"Vinnie Keane's recent performance trends\",\n    \"A's team momentum heading into playoffs\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00001\",\n      \"question\": \"How does Vinnie Keane maintain consistency at this stage of his career?\",\n      \"basis\": \"feed-names\"\n    }\n  ],\n  \"interpretation\": \"Keane's production continues to be a cornerstone of the A's historic season, showing no signs of slowing down\",\n  \"unverifiedLead\": [\n    \"Whether Keane's approach changes in high-leverage playoff situations\",\n    \"How the team manages veteran workloads down the stretch\"\n  ],\n  \"closeQuestion\": \"Can Keane's veteran presence help guide the A's through the postseason?\"\n}",
+    "plan": {
+      "focus": "Vinnie Keane's performance in the A's late-season game",
+      "why": "Vinnie Keane's 2-3 with a HR and 3 RBI stands out in the A's dominant 126-35 season",
+      "checks": [
+        "Vinnie Keane's recent performance trends",
+        "A's team momentum heading into playoffs"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00001",
+          "question": "How does Vinnie Keane maintain consistency at this stage of his career?",
+          "basis": "feed-names"
+        }
+      ],
+      "interpretation": "Keane's production continues to be a cornerstone of the A's historic season, showing no signs of slowing down",
+      "unverifiedLead": [
+        "Whether Keane's approach changes in high-leverage playoff situations",
+        "How the team manages veteran workloads down the stretch"
+      ],
+      "closeQuestion": "Can Keane's veteran presence help guide the A's through the postseason?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00527",
+        "POP-00789"
+      ]
+    },
+    {
+      "label": "Oaks | team-update | (preseason) | Aj Dybantsa (SF), Dillon Brooks (SF), Adash Stanley (PG)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01024",
+        "POP-01023"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Benji Dillon (SP)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00001"
+      ]
+    },
+    {
+      "label": "A's | team-update | (late-season) | Danny Horn (CF), Isley Kelley (SS), Eric Taveras (2B), Ernesto Quintero (3B), Travis Coles (SP), Arturo Ramos (SP)",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00022",
+        "POP-00019",
+        "POP-00597",
+        "POP-00050",
+        "POP-00533",
+        "POP-00025"
+      ]
+    }
+  ],
+  "laneEntries": 9,
+  "ranAt": "2026-08-20T11:15:50.085Z"
+}

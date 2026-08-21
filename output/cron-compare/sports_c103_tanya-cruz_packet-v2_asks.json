@@ -1,7 +1,7 @@
 [
   {
     "pop": "POP-01023",
-    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01023\",\"name\":\"Adash Stanley\",\"role\":\"PG / The Oaks \",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What does the supplied trend \\\"Adash Stanley's performance in the Oaks' preseason game\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Jack London\",\"focus\":\"Adash Stanley's performance in the Oaks' preseason game\",\"src\":\"world_summary_c103.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Adash Stanley — PG / The Oaks — Lake Merritt\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-b612e3776eb6\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-809f4c3d6112\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-1.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-df8c4e55c3c4\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley — PG / The Oaks — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-01023\",\"id\":\"F-bfb2771fe5b8\"}],\"limits\":{\"quoteEligible\":false,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Return abstain. This citizen is not eligible for this interview path.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01023\",\"name\":\"Adash Stanley\",\"role\":\"PG / The Oaks \",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What does the supplied trend \\\"Adash Stanley's performance in the Oaks' preseason opener\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Jack London\",\"focus\":\"Adash Stanley's performance in the Oaks' preseason opener\",\"src\":\"world_summary_c103.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Adash Stanley — PG / The Oaks — Lake Merritt\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-b612e3776eb6\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-809f4c3d6112\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-1.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-df8c4e55c3c4\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley — PG / The Oaks — Lake Merritt\",\"src\":\"Simulation_Ledger profile for POP-01023\",\"id\":\"F-bfb2771fe5b8\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
     "packetContract": "LEP/2",
     "inputPacket": {
       "v": "LEP/2",
@@ -15,12 +15,12 @@
       "task": {
         "goal": "Answer one reporter question in your own first-person voice from your simulated life",
         "reporter": "Tanya Cruz",
-        "question": "What does the supplied trend \"Adash Stanley's performance in the Oaks' preseason game\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        "question": "What does the supplied trend \"Adash Stanley's performance in the Oaks' preseason opener\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
       },
       "signal": {
         "kind": "sideline-signal",
         "hood": "Jack London",
-        "focus": "Adash Stanley's performance in the Oaks' preseason game",
+        "focus": "Adash Stanley's performance in the Oaks' preseason opener",
         "src": "world_summary_c103.md ## Sports"
       },
       "exposure": {
@@ -63,7 +63,7 @@
         }
       ],
       "limits": {
-        "quoteEligible": false,
+        "quoteEligible": true,
         "assert": [
           "FACT already supplied",
           "your own feeling",
@@ -83,7 +83,7 @@
           "invent a count",
           "turn suspicion into observation"
         ],
-        "rule": "Return abstain. This citizen is not eligible for this interview path."
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
       },
       "output": {
         "contract": "CITIZEN_INTERVIEW/1",
@@ -107,7 +107,343 @@
     "interviewMode": true,
     "livedContextAllowed": false,
     "model": "deepseek/deepseek-chat",
-    "record": false,
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00273",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00273\",\"name\":\"Trenton Nawan\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"As a resident of Jack London, what about the supplied trend \\\"Adash Stanley's performance in the Oaks' preseason opener\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Jack London\",\"focus\":\"Adash Stanley's performance in the Oaks' preseason opener\",\"src\":\"world_summary_c103.md ## Sports\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Trenton Nawan — Server — Jack London\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-b612e3776eb6\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-809f4c3d6112\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-1.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-df8c4e55c3c4\"},{\"t\":\"FACT\",\"text\":\"Trenton Nawan — Server — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00273\",\"id\":\"F-3886fd06b84e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00273",
+        "name": "Trenton Nawan",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "As a resident of Jack London, what about the supplied trend \"Adash Stanley's performance in the Oaks' preseason opener\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Jack London",
+        "focus": "Adash Stanley's performance in the Oaks' preseason opener",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Trenton Nawan — Server — Jack London",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-b612e3776eb6"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley recorded 23 points and 7 assists.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-809f4c3d6112"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks preseason record is 0-1.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-df8c4e55c3c4"
+        },
+        {
+          "t": "FACT",
+          "text": "Trenton Nawan — Server — Jack London",
+          "src": "Simulation_Ledger profile for POP-00273",
+          "id": "F-3886fd06b84e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00642",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00642\",\"name\":\"Ollie Campbell\",\"role\":\"Bakery Worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"As a resident of Jack London, what about the supplied trend \\\"Adash Stanley's performance in the Oaks' preseason opener\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Jack London\",\"focus\":\"Adash Stanley's performance in the Oaks' preseason opener\",\"src\":\"world_summary_c103.md ## Sports\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Ollie Campbell — Bakery Worker — Jack London\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-b612e3776eb6\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-809f4c3d6112\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-1.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-df8c4e55c3c4\"},{\"t\":\"FACT\",\"text\":\"Ollie Campbell — Bakery Worker — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00642\",\"id\":\"F-8b74565a9102\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00642",
+        "name": "Ollie Campbell",
+        "role": "Bakery Worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "As a resident of Jack London, what about the supplied trend \"Adash Stanley's performance in the Oaks' preseason opener\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Jack London",
+        "focus": "Adash Stanley's performance in the Oaks' preseason opener",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Ollie Campbell — Bakery Worker — Jack London",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-b612e3776eb6"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley recorded 23 points and 7 assists.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-809f4c3d6112"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks preseason record is 0-1.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-df8c4e55c3c4"
+        },
+        {
+          "t": "FACT",
+          "text": "Ollie Campbell — Bakery Worker — Jack London",
+          "src": "Simulation_Ledger profile for POP-00642",
+          "id": "F-8b74565a9102"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00643",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00643\",\"name\":\"Guadalupe Lupe\",\"role\":\"Bartender\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"As a resident of Jack London, what about the supplied trend \\\"Adash Stanley's performance in the Oaks' preseason opener\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Jack London\",\"focus\":\"Adash Stanley's performance in the Oaks' preseason opener\",\"src\":\"world_summary_c103.md ## Sports\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Guadalupe Lupe — Bartender — Jack London\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-b612e3776eb6\"},{\"t\":\"FACT\",\"text\":\"Adash Stanley recorded 23 points and 7 assists.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-809f4c3d6112\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-1.\",\"src\":\"world_summary_c103.md ## Sports\",\"id\":\"F-df8c4e55c3c4\"},{\"t\":\"FACT\",\"text\":\"Guadalupe Lupe — Bartender — Jack London\",\"src\":\"Simulation_Ledger profile for POP-00643\",\"id\":\"F-6769aa54ed95\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "role": "Bartender",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "As a resident of Jack London, what about the supplied trend \"Adash Stanley's performance in the Oaks' preseason opener\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Jack London",
+        "focus": "Adash Stanley's performance in the Oaks' preseason opener",
+        "src": "world_summary_c103.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Guadalupe Lupe — Bartender — Jack London",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-b612e3776eb6"
+        },
+        {
+          "t": "FACT",
+          "text": "Adash Stanley recorded 23 points and 7 assists.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-809f4c3d6112"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks preseason record is 0-1.",
+          "src": "world_summary_c103.md ## Sports",
+          "id": "F-df8c4e55c3c4"
+        },
+        {
+          "t": "FACT",
+          "text": "Guadalupe Lupe — Bartender — Jack London",
+          "src": "Simulation_Ledger profile for POP-00643",
+          "id": "F-6769aa54ed95"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
     "maxTokens": 420
   }
 ]

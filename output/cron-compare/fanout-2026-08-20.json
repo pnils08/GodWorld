@@ -1,0 +1,444 @@
+{
+  "date": "2026-08-20",
+  "cycle": 104,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "beatDomain": "ENVIRONMENT",
+      "persona": "noah-tan",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/world_summary_c104.md ## Who Lived It",
+        "label": "Sandra Velazquez — dealt with a seasonal health concern",
+        "kind": "season-feel",
+        "angle": "Sandra Velazquez — dealt with a seasonal health concern",
+        "hookLine": "Sandra Velazquez — dealt with a seasonal health concern",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00830"
+        ],
+        "citizens": [
+          "Sandra Velazquez (POP-00830)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "noah-tan",
+      "pulse": {
+        "className": "environment",
+        "score": 80,
+        "label": "Sandra Velazquez — dealt with a seasonal health concern",
+        "hood": "Piedmont Ave",
+        "source": "output/world_summary_c104.md ## Who Lived It"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Sandra Velazquez — dealt with a seasonal health concern"
+        ],
+        "forbidden": [
+          "Do not announce the season or temperature as the story.",
+          "Do not import real-world Oakland winter tropes absent from the Packet.",
+          "Do not add forecasts, agencies, or unsupplied measurements."
+        ],
+        "schema": "SEASON-FEEL-1",
+        "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+        "missing": [
+          "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+        ],
+        "impactEvidence": {
+          "state": "SUPPLIED",
+          "subjects": [
+            "POP-00830"
+          ],
+          "facts": [
+            "Sandra Velazquez — dealt with a seasonal health concern"
+          ],
+          "src": "output/world_summary_c104.md ## Who Lived It"
+        }
+      },
+      "wakePackage": "NOAH-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "beatDomain": "INFRASTRUCTURE",
+      "persona": "trevor-shimizu",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+        "label": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "kind": "anomaly",
+        "angle": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "hookLine": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00745",
+          "POP-00761",
+          "POP-00775"
+        ],
+        "citizens": [
+          "Sonia Parikh (POP-00745)",
+          "Idris Karim (POP-00761)",
+          "Sam Alvarez (POP-00775)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "trevor-shimizu",
+      "pulse": {
+        "className": "infrastructure-transit",
+        "score": 45,
+        "label": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "hood": "Temescal",
+        "source": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "The civic initiative carrying Temescal has not advanced in 1 cycles."
+        ],
+        "forbidden": [
+          "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
+        ],
+        "schema": "SYSTEMS-BRIEF-1",
+        "method": "INCIDENT_LINK_WARNING",
+        "missing": [
+          "timestamp and duration unless supplied by the source",
+          "second system fact and evidence linking it to the assigned condition",
+          "responsible agency, maintenance action, capacity, load, or service effect unless named by the source"
+        ],
+        "cascade": {
+          "state": "UNESTABLISHED",
+          "facts": [],
+          "link": null,
+          "src": null
+        }
+      },
+      "wakePackage": "TREVOR-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Tanya Cruz",
+      "popid": "POP-00014",
+      "beatDomain": "SPORTS_SIDELINE",
+      "persona": "tanya-cruz",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)",
+        "label": "Oaks | front-office | (preseason) | Mike Paulson, Elias Varek",
+        "kind": "feed",
+        "popids": [
+          "POP-00527",
+          "POP-00789"
+        ]
+      },
+      "wakePackage": "TANYA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "beatDomain": "SPORTS_ANALYTICS",
+      "persona": "anthony-raines",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "kind": "sports-analytics",
+        "angle": "The season line (9IP) has to carry the claim before the narrative does: Pablo the Picasso shines again.",
+        "label": "A's · player-feature — Pablo the Picasso shines again.",
+        "hookLine": "Pablo the Picasso shines again.",
+        "hood": "Baylight District",
+        "pulseClass": "award-board",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "citizens": [
+          "Vinnie Keane (POP-00001)"
+        ],
+        "popids": [
+          "POP-00001"
+        ],
+        "ref": "world_summary_c104.md ## Sports",
+        "cycle": 104
+      },
+      "anthonySlice": true,
+      "analytic": true,
+      "pulse": {
+        "className": "award-board",
+        "score": 77,
+        "label": "A's · player-feature — Pablo the Picasso shines again.",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "storyAngle": "Pablo the Picasso shines again.",
+        "hasStats": true,
+        "record": "126-35",
+        "streak": "W2",
+        "foilNumber": "9IP",
+        "feedCycle": 104
+      },
+      "bag": {
+        "tools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 7,
+            "name": "Is-It-Real (ledger PANDAS)"
+          }
+        ],
+        "claim": "The season line (9IP) has to carry the claim before the narrative does: Pablo the Picasso shines again.",
+        "foilNumber": "9IP"
+      },
+      "prewrite": {
+        "reporter": "Anthony Raines",
+        "bagTools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 7,
+            "name": "Is-It-Real (ledger PANDAS)"
+          }
+        ],
+        "lineFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 126-35 · W2",
+          "Event kind (feed): A's — player-feature (late-season)",
+          "NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)",
+          "StoryAngle (feed): Pablo the Picasso shines again."
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "feedFacts": [
+          "StoryAngle: Pablo the Picasso shines again.",
+          "Notes: Pablo Alamanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provid",
+          "Record/Streak: 126-35 / W2"
+        ],
+        "claim": "The season line (9IP) has to carry the claim before the narrative does: Pablo the Picasso shines again.",
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+          "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies",
+          "Pablo Almanzar has no Simulation_Ledger POPID in the local snapshot — do not invent or interview"
+        ],
+        "foilNumber": "9IP",
+        "anchorFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 126-35 · W2",
+          "Event kind (feed): A's — player-feature (late-season)"
+        ]
+      },
+      "wakePackage": "ANTHONY-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "beatDomain": "CULTURE",
+      "persona": "kai-marston",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Evening TV slate — Countdown Live, New Year's Eve Special, Late Weather Watch; sports desk: Oakland Sports Tonight",
+        "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+        "hookLine": "On the box tonight: Countdown Live, New Year's Eve Special.",
+        "hood": null,
+        "pulseClass": "tv-slate",
+        "citizens": [],
+        "popids": [],
+        "named": "Countdown Live",
+        "venue": "Countdown Live",
+        "ref": "world_summary ## Evening Texture · Evening media TV",
+        "cycle": 104
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "tv-slate",
+        "score": 16,
+        "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch"
+      },
+      "recommend": {
+        "bag": "ground",
+        "slug": "maria-keen",
+        "name": "Maria Keen",
+        "popid": "POP-00013",
+        "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+        "reason": "top pulse fame-sighting → ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Mark Aitken at Adams Point United Methodist Church (Adams Point)"
+      },
+      "bag": "arts",
+      "wakePackage": "KAI-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "label": "Grand Lake retail decay",
+        "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "hood": "Grand Lake",
+        "pulseClass": "retail-decay",
+        "namedBusinesses": [],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## Engine Review · math-imbalance",
+        "cycle": 104
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "retail-decay",
+        "score": 28,
+        "label": "Grand Lake retail decay",
+        "hood": "Grand Lake",
+        "namedBusinesses": [],
+        "retail": null,
+        "retailDelta": -5.03
+      },
+      "prewrite": {
+        "pulseClass": "retail-decay",
+        "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "namedBusinesses": [],
+        "anchorFacts": [
+          "HOOD: Grand Lake",
+          "RETAIL DELTA (do not lead with decimal): -5.03",
+          "NAMED: none — do not invent storefronts",
+          "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [
+    {
+      "desk": "undocked",
+      "wanted": 1,
+      "got": 0
+    }
+  ],
+  "rotationShortfalls": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Noah Tan",
+        "persona": "noah-tan",
+        "wakePackage": "NOAH-LEP2-1"
+      },
+      {
+        "name": "Trevor Shimizu",
+        "persona": "trevor-shimizu",
+        "wakePackage": "TREVOR-LEP2-1"
+      },
+      {
+        "name": "Tanya Cruz",
+        "persona": "tanya-cruz",
+        "wakePackage": "TANYA-LEP2-1"
+      },
+      {
+        "name": "Anthony Raines",
+        "persona": "anthony-raines",
+        "wakePackage": "ANTHONY-LEP2-1"
+      },
+      {
+        "name": "Kai Marston",
+        "persona": "kai-marston",
+        "wakePackage": "KAI-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-19",
+    "top": {
+      "score": 61,
+      "className": "metric-contradiction",
+      "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500] with no matching active initiative"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c104.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=noah-tan,trevor-shimizu,tanya-cruz,anthony-raines,kai-marston,business-desk)"
+  },
+  "anthonyEnrich": {
+    "enriched": true,
+    "reason": "pulse=award-board score=77 foil=9IP"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=retail-decay score=28 hood=Grand Lake"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "kai-marston",
+        "bag": "arts",
+        "pulse": "tv-slate",
+        "score": 16
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=2",
+    "seats": [
+      {
+        "persona": "noah-tan",
+        "domain": "environment",
+        "label": "Sandra Velazquez — dealt with a seasonal health concern"
+      },
+      {
+        "persona": "trevor-shimizu",
+        "domain": "infrastructure-transit",
+        "label": "The civic initiative carrying Temescal has not advanced in 1 cycles."
+      }
+    ]
+  },
+  "builtAt": "2026-08-20T11:15:08.099Z"
+}

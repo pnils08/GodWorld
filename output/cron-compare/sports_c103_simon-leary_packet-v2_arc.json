@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "sports",
+  "persona": "simon-leary",
+  "storyline": {
+    "slug": "lake-merritt-vanessa-ramas-long-view-signal",
+    "verb": "advanced"
+  },
+  "hood": "Lake Merritt",
+  "quotes": [
+    {
+      "pop": "POP-01045",
+      "name": "Vanessa Ramas",
+      "quote": "I don't follow baseball too closely, but moving a pitcher to the bullpen when the team's winning so much seems odd. Shouldn't they keep doing what's working?"
+    }
+  ],
+  "claim": "I don't follow baseball too closely, but moving a pitcher to the bullpen when the team's winning so much seems odd. Shouldn't they keep doing what's working?",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-19T18:19:03.967Z"
+}

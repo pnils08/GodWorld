@@ -1,6 +1,10 @@
 # Production log — C103
 
 ## Newsroom wire (AUTO — cron-desk-run.js)
+- c103 business | Jordan Velez: "Dimond's Cooling Corridor: Where Did the Foot Traffic Go?" (staged)
+- c103 culture | Mason Ortega: "Here's the corrected article with all unapproved quotes removed and no fabricated speech:" (staged)
+- c103 sports | P Slayer: "A's Fans Left Scratching Heads After Pablo Almanzar's No-Hitter" (staged)
+- c103 civic | Jax Caldera: "The 9:14 Eastbound Never Comes On Time Either" (staged)
 - c103 sports | Tanya Cruz: "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists" (staged)
 - c103 sports | Simon Leary: "The A's record is 124-34. Benji Dillon is moving to the bullpen for the remainder of the s" (staged)
 - c103 sports | Anthony Raines: "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut" (staged)

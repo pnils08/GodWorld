@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-19",
+  "cycle": 103,
+  "results": [
+    {
+      "office": "civic-office-council-d3",
+      "ok": false,
+      "error": "no usable JSON statement after retry (model returned empty/invalid content)"
+    },
+    {
+      "office": "civic-office-council-d5",
+      "ok": false,
+      "error": "fabricated statistic(s) after retry: 1200"
+    },
+    {
+      "office": "civic-office-council-d6",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d6_2026-08-19.json"
+    }
+  ],
+  "ranAt": "2026-08-19T10:46:40.624Z"
+}

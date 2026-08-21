@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "sports",
+  "persona": "tanya-cruz",
+  "storyline": {
+    "slug": "jack-london-ollie-campbell-sideline-signal",
+    "verb": "opened"
+  },
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00642",
+      "name": "Ollie Campbell",
+      "quote": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job. Maybe ask why the rest of the team couldn't back him up—seems like a one-man show out there."
+    },
+    {
+      "pop": "POP-00643",
+      "name": "Guadalupe Lupe",
+      "quote": "I heard about Adash's stats, but something feels off when a player puts up numbers like that and the team still loses. Maybe the Tribune should ask if he's really fitting into the team's system or just playing for himself."
+    }
+  ],
+  "claim": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job. Maybe ask why the rest of the team couldn't back him up—seems like a one-man show out there.",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-17T18:18:18.253Z"
+}

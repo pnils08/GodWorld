@@ -1,0 +1,179 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00043",
+    "name": "Janae Rivers",
+    "role": "City Council District 5",
+    "officeId": "COUNCIL-D5",
+    "district": "D5",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d5",
+    "initiative": null,
+    "dials": {
+      "approval": 85
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "Review findings and corrective actions report"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 80,
+    "label": "Oakland Youth Apprenticeship Pipeline — Review findings and corrective actions report",
+    "lever": "Review findings and corrective actions report",
+    "hood": "East Oakland",
+    "initiative": "INIT-007",
+    "vsCity": {
+      "sentiment": 0.48,
+      "citySentiment": 0.5099999999999999,
+      "crime": 1.18,
+      "cityCrime": 0.7086363636363636,
+      "heat": 12.427272727272717,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "Review findings and corrective actions report",
+    "lineFacts": [
+      "approval 85",
+      "Oakland Youth Apprenticeship Pipeline is in pilot-active — C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
+      "due: Review findings and corrective actions report",
+      "East Oakland crime: property 51, violent 67, incidents 11 (cycle 104) — city property 40.6, violent 33.5, incidents 6.4",
+      "East Oakland: sentiment 0.48 vs city 0.510; crime index 1.18 vs city 0.709; retail 5.63; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "East Oakland",
+      "Baylight District"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "neighborhood": "East Oakland",
+        "role": "Transit Hub D5 Intake Liaison",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Youth Apprenticeship Pipeline — Review findings and corrective actions report"
+      },
+      {
+        "pop": "POP-01047",
+        "name": "Maria Conteras",
+        "neighborhood": "East Oakland",
+        "role": "High School Teacher",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Youth Apprenticeship Pipeline — Review findings and corrective actions report"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "Foothill Baptist Tabernacle",
+        "neighborhood": "East Oakland",
+        "text": "traditional Christmas rituals observed",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D5",
+      "t": "FACT",
+      "text": "Janae Rivers holds COUNCIL-D5 at approval 85",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-007",
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline is in pilot-active — C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland crime: property 51, violent 67, incidents 11 (cycle 104) — city property 40.6, violent 33.5, incidents 6.4",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland: sentiment 0.48 vs city 0.510; crime index 1.18 vs city 0.709; retail 5.63; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Approval": "85"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

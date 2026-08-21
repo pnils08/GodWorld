@@ -1,0 +1,450 @@
+{
+  "stage": "angle",
+  "desk": "business",
+  "cycle": "104",
+  "persona": "business-desk",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00153",
+      "name": "Jordan Velez",
+      "role": "desk reporter",
+      "desk": "business"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+      "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.",
+      "creativeBrief": {
+        "kind": "economic-storefront",
+        "pulseClass": "retail-decay",
+        "economicFrame": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "hook": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "namedBusinesses": [],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ],
+        "sceneRule": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts."
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Grand Lake",
+      "score": null,
+      "src": "world_summary ## Engine Review · math-imbalance",
+      "nearby": [
+        {
+          "text": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+          "src": "output/engine_audit_c104.json patterns[13]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+          "src": "output/engine_audit_c104.json patterns[14]; evidence: Initiative_Tracker row(s) 3"
+        },
+        {
+          "text": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale | Business momentum in Fruitvale tracks the transit gain.",
+          "src": "output/engine_audit_c104.json patterns[15]; evidence: Initiative_Tracker row(s) 4"
+        },
+        {
+          "text": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+          "src": "output/engine_audit_c104.json patterns[16]; evidence: Initiative_Tracker row(s) 7"
+        },
+        {
+          "text": "civic — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the civic gain.",
+          "src": "output/engine_audit_c104.json patterns[17]; evidence: Neighborhood_Map row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "why": "same-hood-ledger",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake"
+        },
+        {
+          "pop": "POP-00002",
+          "name": "Amara Keane",
+          "profile": "Amara Keane — Pianist, Philanthropist — Grand Lake",
+          "why": "same-hood-ledger",
+          "role": "Pianist, Philanthropist",
+          "hood": "Grand Lake"
+        },
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "why": "ledger-resident",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — Line cook — Fruitvale",
+          "why": "ledger-resident",
+          "role": "Line cook",
+          "hood": "Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake retail decay",
+        "src": "world_summary ## Engine Review · math-imbalance",
+        "id": "F-b0e302e4edcf"
+      },
+      {
+        "t": "FACT",
+        "text": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "src": "world_summary ## Engine Review · math-imbalance",
+        "id": "F-3a7d7a01e54c"
+      },
+      {
+        "t": "FACT",
+        "text": "HOOD: Grand Lake",
+        "src": "world_summary ## Engine Review · math-imbalance",
+        "id": "F-474495c0e07f"
+      },
+      {
+        "t": "FACT",
+        "text": "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500",
+        "src": "world_summary ## Engine Review · math-imbalance",
+        "id": "F-24adc4583803"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+      "label": "Grand Lake retail decay",
+      "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+      "hood": "Grand Lake",
+      "pulseClass": "retail-decay",
+      "namedBusinesses": [],
+      "citizens": [],
+      "popids": [],
+      "ref": "world_summary ## Engine Review · math-imbalance",
+      "cycle": 104
+    },
+    "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": {
+    "pulse": {
+      "className": "retail-decay",
+      "score": 28,
+      "label": "Grand Lake retail decay",
+      "hood": "Grand Lake",
+      "namedBusinesses": [],
+      "retail": null,
+      "retailDelta": -5.03
+    },
+    "prewrite": {
+      "pulseClass": "retail-decay",
+      "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+      "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+      "namedBusinesses": [],
+      "anchorFacts": [
+        "HOOD: Grand Lake",
+        "RETAIL DELTA (do not lead with decimal): -5.03",
+        "NAMED: none — do not invent storefronts",
+        "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500"
+      ],
+      "forbidden": [
+        "Do not invent Employee_Count",
+        "Do not invent Key_Personnel",
+        "Do not invent storefronts not on ledger or evening texture",
+        "Do not lead with raw RetailVitality decimals — translate to scene"
+      ]
+    },
+    "texture": {
+      "rising": [
+        "Grand Lake"
+      ],
+      "cooling": [
+        "Piedmont Ave"
+      ],
+      "ledgerCount": 0,
+      "ledgerSource": null,
+      "venues": [
+        {
+          "name": "Seasonal Spirits",
+          "hood": "Rockridge",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Merritt AfterDark",
+          "hood": "Lake Merritt",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        },
+        {
+          "name": "The 44th Table",
+          "hood": "Downtown",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        },
+        {
+          "name": "AfterHours Fry",
+          "hood": "Jack London",
+          "kind": "fast-food",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Vibe Terrace",
+          "hood": "Lake Merritt",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Rhythm Deck",
+          "hood": "West Oakland",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Neon Harbor Club",
+          "hood": "Jack London",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Skybar",
+          "hood": "Downtown",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ]
+    },
+    "scene": {
+      "colorRoom": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts.",
+      "namedOnTop": []
+    },
+    "candidates": [
+      {
+        "className": "retail-decay",
+        "score": 28,
+        "label": "Grand Lake retail decay",
+        "hood": "Grand Lake",
+        "namedBusinesses": []
+      },
+      {
+        "className": "hood-cooling",
+        "score": 24,
+        "label": "Piedmont Ave cooling",
+        "hood": "Piedmont Ave",
+        "namedBusinesses": []
+      },
+      {
+        "className": "hood-rising",
+        "score": 21,
+        "label": "Grand Lake rising",
+        "hood": "Grand Lake",
+        "namedBusinesses": []
+      },
+      {
+        "className": "workforce-pressure",
+        "score": 19,
+        "label": "Downtown · economic ailment — economic footprint, affected businesses, workforce impact in ",
+        "hood": "Downtown",
+        "namedBusinesses": []
+      },
+      {
+        "className": "named-storefront",
+        "score": 17,
+        "label": "Rhythm Deck (West Oakland)",
+        "hood": "West Oakland",
+        "namedBusinesses": [
+          "Rhythm Deck"
+        ]
+      },
+      {
+        "className": "economic-ailment",
+        "score": 15,
+        "label": "West Oakland · Oakland Alternative Response Initiative — economic upside, jobs and footprint in",
+        "hood": "West Oakland",
+        "namedBusinesses": []
+      },
+      {
+        "className": "economic-ailment",
+        "score": 15,
+        "label": "Fruitvale · Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint",
+        "hood": "Fruitvale",
+        "namedBusinesses": []
+      },
+      {
+        "className": "economic-ailment",
+        "score": 15,
+        "label": "Downtown · civic — economic upside, jobs and footprint in Downtown",
+        "hood": "Downtown",
+        "namedBusinesses": []
+      }
+    ]
+  },
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "text": "{\n  \"focus\": \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\",\n  \"why\": \"Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).\",\n  \"checks\": [\n    \"Sentiment -0.070\",\n    \"RetailVitality -5.03\",\n    \"HousingPressure +0.500\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00001\",\n      \"question\": \"As a long-time resident and business owner in Grand Lake, have you noticed a shift in foot traffic or customer engagement recently?\",\n      \"basis\": \"same-hood-ledger\"\n    },\n    {\n      \"pop\": \"POP-00002\",\n      \"question\": \"From your perspective as a community pillar, what’s missing in Grand Lake’s retail scene that might explain the cooling interest?\",\n      \"basis\": \"same-hood-ledger\"\n    }\n  ],\n  \"interpretation\": \"The numbers suggest a quiet erosion of retail energy in Grand Lake, disconnected from any visible civic effort to counteract it. This isn’t just about empty storefronts—it’s about the lived rhythm of the neighborhood slowing down.\",\n  \"unverifiedLead\": [\n    \"Potential mismatch between rising housing pressure and stagnant commercial investment\",\n    \"Local sentiment dip may reflect unmet expectations for neighborhood upkeep or business diversity\"\n  ],\n  \"closeQuestion\": \"Is Grand Lake’s retail slide a symptom of broader economic shifts, or is there a unique local dynamic at play?\"\n}",
+    "plan": {
+      "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+      "why": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+      "checks": [
+        "Sentiment -0.070",
+        "RetailVitality -5.03",
+        "HousingPressure +0.500"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00001",
+          "question": "As a long-time resident and business owner in Grand Lake, have you noticed a shift in foot traffic or customer engagement recently?",
+          "basis": "same-hood-ledger"
+        },
+        {
+          "pop": "POP-00002",
+          "question": "From your perspective as a community pillar, what’s missing in Grand Lake’s retail scene that might explain the cooling interest?",
+          "basis": "same-hood-ledger"
+        }
+      ],
+      "interpretation": "The numbers suggest a quiet erosion of retail energy in Grand Lake, disconnected from any visible civic effort to counteract it. This isn’t just about empty storefronts—it’s about the lived rhythm of the neighborhood slowing down.",
+      "unverifiedLead": [
+        "Potential mismatch between rising housing pressure and stagnant commercial investment",
+        "Local sentiment dip may reflect unmet expectations for neighborhood upkeep or business diversity"
+      ],
+      "closeQuestion": "Is Grand Lake’s retail slide a symptom of broader economic shifts, or is there a unique local dynamic at play?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c104.json patterns[13]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00802",
+        "POP-00808",
+        "POP-01061"
+      ]
+    },
+    {
+      "label": "Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+      "kind": "anomaly",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "output/engine_audit_c104.json patterns[14]; evidence: Initiative_Tracker row(s) 3",
+      "popids": [
+        "POP-00744",
+        "POP-00754",
+        "POP-00756"
+      ]
+    },
+    {
+      "label": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale | Business momentum in Fruitvale tracks the transit gain.",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c104.json patterns[15]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00762",
+        "POP-00766",
+        "POP-00774"
+      ]
+    },
+    {
+      "label": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+      "kind": "anomaly",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "ref": "output/engine_audit_c104.json patterns[16]; evidence: Initiative_Tracker row(s) 7",
+      "popids": [
+        "POP-00008",
+        "POP-00780",
+        "POP-01057"
+      ]
+    },
+    {
+      "label": "civic — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the civic gain.",
+      "kind": "anomaly",
+      "hood": "Downtown",
+      "ref": "output/engine_audit_c104.json patterns[17]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00533",
+        "POP-00597",
+        "POP-01048"
+      ]
+    }
+  ],
+  "laneEntries": 19,
+  "ranAt": "2026-08-20T11:16:29.329Z"
+}

@@ -1,0 +1,26 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.6",
+  "canonStatus": "NOT_CANON",
+  "cycle": 104,
+  "generatedAt": "2026-08-20T13:00:08.678Z",
+  "lastAttemptAt": "2026-08-20T13:00:08.678Z",
+  "hours": 36,
+  "packHash": "c06e12c534ac579bec3055a910fab737167d69350b7ba895c377fdf9b3e740d0",
+  "worldSummary": "output/world_summary_c104.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [],
+  "flaggedExclusions": [],
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "boundedSourceHash": "946aa1f35ab6d9cb10ebe8515aae29daaae25990d40b79ad7a9559999a68535d",
+  "boundedSource": "output/notebooklm/daily/c104/c06e12c534ac/bounded-newsroom-source.md",
+  "sourceIds": [
+    "49f404d6-224d-4b6d-ade0-65b2bf6af310"
+  ],
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioArtifactId": "94169d6f-4490-4ae0-aeb0-8f5390888c18",
+  "audioPath": "output/notebooklm/daily/c104/c06e12c534ac/godworld_daily_c104.m4a",
+  "driveLink": "https://drive.google.com/file/d/1s_F-IQEWGllSwBvCiy4DURquM6YXw4xG/view?usp=drivesdk"
+}

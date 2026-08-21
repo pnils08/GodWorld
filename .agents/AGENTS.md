@@ -79,3 +79,9 @@ CITIZEN USAGE LOG
 
 - **POP-00001 (Vinnie Keane)**: Put out a tailgate grill fire at his baseball academy cook-off.
 - **POP-00002 (Amara Keane)**: Prevented stray dogs from eating turkey bones at the cook-off.
+
+### 11. Strict Fail-Closed Execution (No Simulated Runs or Hand-Written Bypasses)
+- **Mandatory Tool Execution**: When requested to run a skill, script, writer, or pipeline, you must execute the actual tool or script. You are strictly forbidden from hand-writing, mocking, or synthesizing the output in conversation or scratch files to mimic execution.
+- **Fail Loud & Stop**: If a script fails, crashes, exits non-zero, or cannot run due to missing prerequisites (such as missing API keys like `GEMINI_API_KEY`, missing files, or unresolved dependencies), you must **stop immediately** and report the exact failure, error message, and missing prerequisite.
+- **Failure is Success**: Exposing broken mechanics is the objective. Never work around a broken script by fabricating canon or generating surrogate articles.
+

@@ -9,7 +9,7 @@
     "officeId": "COUNCIL-D4",
     "district": "D4",
     "faction": "IND",
-    "agentDir": "civic-office-ind-swing",
+    "agentDir": "civic-office-council-d4",
     "initiative": null,
     "dials": {
       "approval": 54

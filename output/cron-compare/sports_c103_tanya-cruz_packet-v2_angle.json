@@ -202,26 +202,27 @@
   "angleRead": {
     "name": "Tanya Cruz",
     "popid": "POP-00014",
-    "text": "{\n  \"focus\": \"Adash Stanley's performance in the Oaks' preseason game\",\n  \"why\": \"Adash Stanley recorded 23 points and 7 assists, highlighting his impact despite the team's loss.\",\n  \"checks\": [\n    \"Does Adash Stanley's performance indicate a strong start to the preseason?\",\n    \"How does this game reflect on the Oaks' preseason preparation?\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-01023\",\n      \"question\": \"How does Adash Stanley feel about his individual performance in the context of the team's loss?\",\n      \"basis\": \"Adash Stanley recorded 23 points and 7 assists.\"\n    }\n  ],\n  \"interpretation\": \"Adash Stanley's standout performance suggests he is a key player for the Oaks, even as the team works through preseason challenges.\",\n  \"unverifiedLead\": [\n    \"Is Adash Stanley expected to maintain this level of performance throughout the preseason?\"\n  ],\n  \"closeQuestion\": \"What adjustments will the Oaks make to turn their preseason record around?\"\n}",
+    "text": "{\n  \"focus\": \"Adash Stanley's performance in the Oaks' preseason opener\",\n  \"why\": \"Stanley's 23 points and 7 assists stand out even in a loss, suggesting he's picking up where he left off last season\",\n  \"checks\": [\n    \"Does Stanley's preseason performance indicate he's taking on more playmaking responsibility?\",\n    \"How does this loss compare to other Oaks preseason openers?\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-01023\",\n      \"question\": \"What adjustments did you make to your game during the offseason to prepare for this expanded role?\",\n      \"basis\": \"7 assists suggest increased playmaking responsibility\"\n    }\n  ],\n  \"interpretation\": \"Even in a loss, Stanley's numbers jump off the page - the kind of stat line that makes you wonder if the Oaks might be building around his two-way potential\",\n  \"unverifiedLead\": [\n    \"Could Stanley's playmaking be part of a larger strategy to take pressure off Dybantsa?\",\n    \"Did the coaching staff emphasize ball movement in preseason preparations?\"\n  ],\n  \"closeQuestion\": \"Is this the beginning of Adash Stanley's leap to stardom, or just another night for Oakland's steady floor general?\"\n}",
     "plan": {
-      "focus": "Adash Stanley's performance in the Oaks' preseason game",
-      "why": "Adash Stanley recorded 23 points and 7 assists, highlighting his impact despite the team's loss.",
+      "focus": "Adash Stanley's performance in the Oaks' preseason opener",
+      "why": "Stanley's 23 points and 7 assists stand out even in a loss, suggesting he's picking up where he left off last season",
       "checks": [
-        "Does Adash Stanley's performance indicate a strong start to the preseason?",
-        "How does this game reflect on the Oaks' preseason preparation?"
+        "Does Stanley's preseason performance indicate he's taking on more playmaking responsibility?",
+        "How does this loss compare to other Oaks preseason openers?"
       ],
       "targets": [
         {
           "pop": "POP-01023",
-          "question": "How does Adash Stanley feel about his individual performance in the context of the team's loss?",
-          "basis": "Adash Stanley recorded 23 points and 7 assists."
+          "question": "What adjustments did you make to your game during the offseason to prepare for this expanded role?",
+          "basis": "7 assists suggest increased playmaking responsibility"
         }
       ],
-      "interpretation": "Adash Stanley's standout performance suggests he is a key player for the Oaks, even as the team works through preseason challenges.",
+      "interpretation": "Even in a loss, Stanley's numbers jump off the page - the kind of stat line that makes you wonder if the Oaks might be building around his two-way potential",
       "unverifiedLead": [
-        "Is Adash Stanley expected to maintain this level of performance throughout the preseason?"
+        "Could Stanley's playmaking be part of a larger strategy to take pressure off Dybantsa?",
+        "Did the coaching staff emphasize ball movement in preseason preparations?"
       ],
-      "closeQuestion": "What adjustments will the Oaks make to turn their preseason record around?"
+      "closeQuestion": "Is this the beginning of Adash Stanley's leap to stardom, or just another night for Oakland's steady floor general?"
     }
   },
   "lanePicks": [
@@ -257,5 +258,5 @@
     }
   ],
   "laneEntries": 8,
-  "ranAt": "2026-08-13T17:58:28.669Z"
+  "ranAt": "2026-08-17T11:16:08.242Z"
 }

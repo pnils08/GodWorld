@@ -1,0 +1,288 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00155",
+    "name": "Trevor Shimizu",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+    "approach": "Systems approach: trace the supplied infrastructure or transit fact through timeline, place, and implementation state. Dry, technical, and record-backed.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "infrastructure-systems",
+      "method": "INCIDENT_LINK_WARNING",
+      "missing": [
+        "timestamp and duration unless supplied by the source",
+        "second system fact and evidence linking it to the assigned condition",
+        "responsible agency, maintenance action, capacity, load, or service effect unless named by the source"
+      ],
+      "cascade": {
+        "state": "UNESTABLISHED",
+        "facts": [],
+        "link": null,
+        "src": null
+      },
+      "forbidden": [
+        "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "Temescal",
+    "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+    "plan": {
+      "focus": "The stalled civic initiative in Temescal",
+      "closeQuestion": "Is this delay symptomatic or isolated?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00745",
+        "name": "Sonia Parikh (POP-00745)",
+        "profile": "Sonia Parikh (POP-00745)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00761",
+        "name": "Idris Karim (POP-00761)",
+        "profile": "Idris Karim (POP-00761)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00745-3dfca13607",
+        "pop": "POP-00745",
+        "name": "Sonia Parikh",
+        "quote": "I heard about the stalled initiative, but honestly, it doesn't feel like much has changed day-to-day around here. Maybe the Tribune should ask why there's no visible progress—like, are people just busy, or is there some bigger hold-up?",
+        "factIds": [
+          "F-5327cda5209b"
+        ],
+        "src": "packet.W2[POP-00745]"
+      },
+      {
+        "id": "Q-POP-00761-82385e5530",
+        "pop": "POP-00761",
+        "name": "Idris Karim",
+        "quote": "I’ve noticed the civic initiative hasn’t moved forward, and it feels like there’s a disconnect between the urgency of the issues and the pace of action. The Tribune should ask what’s holding up the progress and who’s responsible for moving it forward.",
+        "factIds": [
+          "F-5327cda5209b"
+        ],
+        "src": "packet.W2[POP-00761]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Possible linkage to District 3 council member's recent community commitment focus",
+        "usable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Potential resource allocation shift toward higher-profile districts",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "id": "F-5327cda5209b"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed transit or infrastructure condition into a clear systems consequence, while keeping timestamps, failures, causal links, and cascade warnings bounded by the supplied record.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "dry third-person infrastructure and transit systems analysis",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed time, place, system condition, or implementation state",
+      "closing": "a bounded forward warning or maintenance question grounded in what remains unknown"
+    },
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "canonBlockers": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  },
+  "manifest": {
+    "id": "AM-3c62f9d30597",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-5327cda5209b",
+        "t": "FACT",
+        "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00745-3dfca13607",
+        "speakerId": "POP-00745",
+        "speakerName": "Sonia Parikh",
+        "text": "I heard about the stalled initiative, but honestly, it doesn't feel like much has changed day-to-day around here. Maybe the Tribune should ask why there's no visible progress—like, are people just busy, or is there some bigger hold-up?",
+        "factIds": [
+          "F-5327cda5209b"
+        ],
+        "src": "packet.W2[POP-00745]"
+      },
+      {
+        "id": "Q-POP-00761-82385e5530",
+        "speakerId": "POP-00761",
+        "speakerName": "Idris Karim",
+        "text": "I’ve noticed the civic initiative hasn’t moved forward, and it feels like there’s a disconnect between the urgency of the issues and the pace of action. The Tribune should ask what’s holding up the progress and who’s responsible for moving it forward.",
+        "factIds": [
+          "F-5327cda5209b"
+        ],
+        "src": "packet.W2[POP-00761]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00745",
+        "name": "Sonia Parikh (POP-00745)",
+        "profile": "Sonia Parikh",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00761",
+        "name": "Idris Karim (POP-00761)",
+        "profile": "Idris Karim",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Trevor Shimizu",
+        "text": "Possible linkage to District 3 council member's recent community commitment focus",
+        "publishable": false
+      },
+      {
+        "from": "Trevor Shimizu",
+        "text": "Potential resource allocation shift toward higher-profile districts",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language explanation of a Packet-backed infrastructure or transit condition",
+      "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
+      "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
+      "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
+    ],
+    "textureConditions": [
+      "every named person, place, route, station, system, agency, office, Project, Initiative, business, and organization must come from the Packet",
+      "a timestamp, duration, distance, load, capacity, delay, outage, closure, breakdown, maintenance event, or service change requires a supplied source",
+      "a cascade or shared-cause claim requires at least two supplied facts plus a Packet-backed link; otherwise it remains an open hypothesis",
+      "technical interpretation must use citizen-facing language and must not print raw engine labels, scores, fields, or decimals as public evidence"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented outage, closure, breakdown, delay, route, station, repair, inspection, maintenance event, service change, or infrastructure damage",
+      "an unsupported timestamp, duration, distance, capacity, load, count, budget, deadline, completion state, or performance metric",
+      "an unsupported causal link, cascade, responsible agency, duty, official act, official inaction, promise, or decision",
+      "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
+      "raw engine terminology or simulation values presented as an in-world technical measurement"
+    ]
+  }
+}

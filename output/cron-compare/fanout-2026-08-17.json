@@ -1,0 +1,294 @@
+{
+  "date": "2026-08-17",
+  "cycle": 103,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Dr. Lila Mezran",
+      "popid": "POP-00154",
+      "beatDomain": "HEALTH",
+      "persona": "lila-mezran",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+        "label": "Temescal Community Health Center is approved, and construction is active.",
+        "kind": "initiative",
+        "angle": "Temescal Community Health Center is approved, and construction is active.",
+        "hookLine": "The supplied civic record identifies a health-service question that needs careful accounting.",
+        "hood": "Temescal",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "lila-mezran",
+      "pulse": {
+        "className": "health",
+        "score": 45,
+        "label": "Temescal Community Health Center is approved, and construction is active.",
+        "hood": "Temescal",
+        "source": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Temescal Community Health Center is approved, and construction is active."
+        ],
+        "forbidden": [
+          "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+        ],
+        "schema": "HEALTH-SERVICE-BRIEF-1",
+        "method": "ACCESS_TIMELINE_HUMAN_COST",
+        "missing": [
+          "a named affected resident, patient, clinician, or service user",
+          "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+          "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+        ],
+        "humanConsequence": {
+          "state": "UNESTABLISHED",
+          "subjects": [],
+          "facts": [],
+          "src": null
+        }
+      },
+      "wakePackage": "LILA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "ref": "Ripple_Ledger cycle 103 (CauseType sports); rendered: world_summary_c103.md \"## What Moved\" > \"### sports\"",
+        "label": "sentiment | A's W15 [player-energy]; A's W15 [debut]; Oaks L1 [player-frustration]; Oaks L1 [pre-season]",
+        "kind": "ripple"
+      },
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Tanya Cruz",
+      "popid": "POP-00014",
+      "beatDomain": "SPORTS_SIDELINE",
+      "persona": "tanya-cruz",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "ref": "Ripple_Ledger cycle 103 (CauseType sports); rendered: world_summary_c103.md \"## What Moved\" > \"### sports\"",
+        "label": "traffic/retail/nightlife/communityEngagement | {\"traffic\":0.264126582278481,\"retail\":0.31241772151898733,\"nightlife\":0.13630126582278482,\"communityEngagement\":0.15}",
+        "kind": "ripple",
+        "hood": "Downtown"
+      },
+      "wakePackage": "TANYA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "beatDomain": "CULTURE_GROUND",
+      "persona": "maria-keen",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Nightline Station is open and quiet in West Oakland. What that condition means is not yet established.",
+        "label": "Nightline Station (West Oakland) · quiet night",
+        "hookLine": "Nightline Station is open and quiet in West Oakland.",
+        "hood": "West Oakland",
+        "pulseClass": "quiet-nightlife",
+        "citizens": [],
+        "popids": [],
+        "named": "Nightline Station",
+        "venue": "Nightline Station",
+        "ref": "world_summary ## Evening Texture · Nightlife",
+        "cycle": 103
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "quiet-nightlife",
+        "score": 24,
+        "label": "Nightline Station (West Oakland) · quiet night"
+      },
+      "recommend": {
+        "bag": "lifestyle",
+        "slug": "sharon-okafor",
+        "name": "Sharon Okafor",
+        "popid": "POP-00159",
+        "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "reason": "top pulse quiet-nightlife → lifestyle",
+        "pulseClass": "quiet-nightlife",
+        "pulseLabel": "Nightline Station (West Oakland) · quiet night"
+      },
+      "bag": "ground",
+      "wakePackage": "MARIA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Storefronts quieter in Dimond — foot traffic down",
+        "label": "Dimond cooling",
+        "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "hood": "Dimond",
+        "pulseClass": "hood-cooling",
+        "namedBusinesses": [],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## What Moved · trajectory",
+        "cycle": 103
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "hood-cooling",
+        "score": 24,
+        "label": "Dimond cooling",
+        "hood": "Dimond",
+        "namedBusinesses": [],
+        "retail": 8.24,
+        "retailDelta": null
+      },
+      "prewrite": {
+        "pulseClass": "hood-cooling",
+        "angle": "Storefronts quieter in Dimond — foot traffic down",
+        "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "namedBusinesses": [],
+        "anchorFacts": [
+          "HOOD: Dimond",
+          "TRAJECTORY: cooling",
+          "MAGNITUDE (translate, do not lead): 6",
+          "RETAIL VITALITY (scene color): 8.24",
+          "NAMED BUSINESSES: none on disk for this hood — do not invent"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Dr. Lila Mezran",
+        "persona": "lila-mezran",
+        "wakePackage": "LILA-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Tanya Cruz",
+        "persona": "tanya-cruz",
+        "wakePackage": "TANYA-LEP2-1"
+      },
+      {
+        "name": "Maria Keen",
+        "persona": "maria-keen",
+        "wakePackage": "MARIA-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-11",
+    "top": {
+      "score": 50,
+      "className": "implementation-gap",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c103.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=freelance-firebrand,lila-mezran,simon-leary,tanya-cruz,maria-keen,business-desk)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=hood-cooling score=24 hood=Dimond"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "maria-keen",
+        "bag": "ground",
+        "pulse": "quiet-nightlife",
+        "score": 24
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "lila-mezran",
+        "domain": "health",
+        "label": "Temescal Community Health Center is approved, and construction is active."
+      }
+    ]
+  },
+  "builtAt": "2026-08-17T11:15:08.041Z"
+}

@@ -1,0 +1,14 @@
+{
+  "office": "council_d6",
+  "agentDir": "civic-office-council-d6",
+  "holder": "Elliott Crane",
+  "popid": "POP-00044",
+  "title": "City Council District 6",
+  "date": "2026-08-19",
+  "cycle": 103,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Piedmont Avenue's crime numbers remain well below city averages, but the sentiment gap concerns me. With property crimes at 23 versus city's 43.4 and violent crimes at half the city rate, the data shows real progress. However, we can't ignore that disconnect between statistics and lived experience. I'll be convening a community safety walk next week to hear directly from residents and business owners like Beth Jacob Congregation about their specific concerns.",
+  "action": "community safety walk",
+  "numberMoved": "5",
+  "ranAt": "2026-08-19T10:46:38.876Z"
+}

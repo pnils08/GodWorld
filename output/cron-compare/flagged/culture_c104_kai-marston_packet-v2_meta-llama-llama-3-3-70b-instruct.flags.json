@@ -1,0 +1,12 @@
+{
+  "draft": "culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "flags": [
+    {
+      "claim": "At the Neon Harbor Club, a group of friends have gathered... Mark Aitken, a regular at the club, is looking forward to the evening's entertainment.",
+      "issue": "Mark Aitken's canonical sighting for Cycle 104 was at Adams Point United Methodist Church in Adams Point, not at the Neon Harbor Club in Jack London. Moving his sighting/appearance violates the persona's constraint against inventing appearances and misrepresents the cycle's sighting data.",
+      "severity": "high"
+    }
+  ],
+  "contamination": [],
+  "summary": "Draft misrepresents Mark Aitken's sighting location, placing him at Neon Harbor Club instead of Adams Point United Methodist Church."
+}

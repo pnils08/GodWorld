@@ -9,7 +9,7 @@
     "officeId": "COUNCIL-D3",
     "district": "D3",
     "faction": "OPP",
-    "agentDir": "civic-office-opp-faction",
+    "agentDir": "civic-office-council-d3",
     "initiative": null,
     "dials": {
       "approval": 90
@@ -67,19 +67,19 @@
         "why": "lives in San Antonio — San Antonio — sentiment 0.39 vs city 0.489"
       },
       {
-        "pop": "POP-00778",
-        "name": "Jamal Thompson",
-        "neighborhood": "San Antonio",
-        "role": "Fan & Culture Columnist, OakTown Echo",
-        "tier": 3,
-        "src": "output/simulation_ledger_snapshot.jsonl",
-        "why": "lives in San Antonio — San Antonio — sentiment 0.39 vs city 0.489"
-      },
-      {
         "pop": "POP-01054",
         "name": "Delia Vargas-Ruiz",
         "neighborhood": "San Antonio",
         "role": "Transit Hub D3 Intake Liaison",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment 0.39 vs city 0.489"
+      },
+      {
+        "pop": "POP-00778",
+        "name": "Jamal Thompson",
+        "neighborhood": "San Antonio",
+        "role": "Fan & Culture Columnist, OakTown Echo",
         "tier": 3,
         "src": "output/simulation_ledger_snapshot.jsonl",
         "why": "lives in San Antonio — San Antonio — sentiment 0.39 vs city 0.489"

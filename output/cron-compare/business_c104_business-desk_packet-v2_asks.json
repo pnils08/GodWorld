@@ -1,0 +1,472 @@
+[
+  {
+    "pop": "POP-00001",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00001\",\"name\":\"Vinnie Keane\",\"role\":\"Designated Hitter, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"As a resident of Grand Lake, what about the supplied trend \\\"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Grand Lake\",\"focus\":\"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\",\"src\":\"world_summary ## Engine Review · math-imbalance\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Grand Lake retail decay\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-b0e302e4edcf\"},{\"t\":\"FACT\",\"text\":\"Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-3a7d7a01e54c\"},{\"t\":\"FACT\",\"text\":\"HOOD: Grand Lake\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-474495c0e07f\"},{\"t\":\"FACT\",\"text\":\"EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-24adc4583803\"},{\"t\":\"FACT\",\"text\":\"Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake\",\"src\":\"Simulation_Ledger profile for POP-00001\",\"id\":\"F-2b3e2e3d075f\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "As a resident of Grand Lake, what about the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Grand Lake",
+        "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "src": "world_summary ## Engine Review · math-imbalance"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake retail decay",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-b0e302e4edcf"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-3a7d7a01e54c"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Grand Lake",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-474495c0e07f"
+        },
+        {
+          "t": "FACT",
+          "text": "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-24adc4583803"
+        },
+        {
+          "t": "FACT",
+          "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "src": "Simulation_Ledger profile for POP-00001",
+          "id": "F-2b3e2e3d075f"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00002",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00002\",\"name\":\"Amara Keane\",\"role\":\"Pianist, Philanthropist\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"As a resident of Grand Lake, what about the supplied trend \\\"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Grand Lake\",\"focus\":\"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\",\"src\":\"world_summary ## Engine Review · math-imbalance\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Amara Keane — Pianist, Philanthropist — Grand Lake\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Grand Lake retail decay\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-b0e302e4edcf\"},{\"t\":\"FACT\",\"text\":\"Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-3a7d7a01e54c\"},{\"t\":\"FACT\",\"text\":\"HOOD: Grand Lake\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-474495c0e07f\"},{\"t\":\"FACT\",\"text\":\"EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-24adc4583803\"},{\"t\":\"FACT\",\"text\":\"Amara Keane — Pianist, Philanthropist — Grand Lake\",\"src\":\"Simulation_Ledger profile for POP-00002\",\"id\":\"F-b40a8aa5e4cf\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00002",
+        "name": "Amara Keane",
+        "role": "Pianist, Philanthropist",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "As a resident of Grand Lake, what about the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Grand Lake",
+        "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "src": "world_summary ## Engine Review · math-imbalance"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Amara Keane — Pianist, Philanthropist — Grand Lake",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake retail decay",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-b0e302e4edcf"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-3a7d7a01e54c"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Grand Lake",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-474495c0e07f"
+        },
+        {
+          "t": "FACT",
+          "text": "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-24adc4583803"
+        },
+        {
+          "t": "FACT",
+          "text": "Amara Keane — Pianist, Philanthropist — Grand Lake",
+          "src": "Simulation_Ledger profile for POP-00002",
+          "id": "F-b40a8aa5e4cf"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00170",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00170\",\"name\":\"Melton Neilon\",\"role\":\"Sourdough Baker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What does the supplied trend \\\"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Grand Lake\",\"focus\":\"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\",\"src\":\"world_summary ## Engine Review · math-imbalance\"},\"exposure\":{\"basis\":[\"ledger-resident\"],\"self\":\"Melton Neilon — Sourdough Baker — Temescal\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Grand Lake retail decay\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-b0e302e4edcf\"},{\"t\":\"FACT\",\"text\":\"Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-3a7d7a01e54c\"},{\"t\":\"FACT\",\"text\":\"HOOD: Grand Lake\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-474495c0e07f\"},{\"t\":\"FACT\",\"text\":\"EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-24adc4583803\"},{\"t\":\"FACT\",\"text\":\"Melton Neilon — Sourdough Baker — Temescal\",\"src\":\"Simulation_Ledger profile for POP-00170\",\"id\":\"F-996744cc8aab\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "role": "Sourdough Baker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What does the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Grand Lake",
+        "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "src": "world_summary ## Engine Review · math-imbalance"
+      },
+      "exposure": {
+        "basis": [
+          "ledger-resident"
+        ],
+        "self": "Melton Neilon — Sourdough Baker — Temescal",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake retail decay",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-b0e302e4edcf"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-3a7d7a01e54c"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Grand Lake",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-474495c0e07f"
+        },
+        {
+          "t": "FACT",
+          "text": "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-24adc4583803"
+        },
+        {
+          "t": "FACT",
+          "text": "Melton Neilon — Sourdough Baker — Temescal",
+          "src": "Simulation_Ledger profile for POP-00170",
+          "id": "F-996744cc8aab"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00198",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00198\",\"name\":\"Rick Walker\",\"role\":\"Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Jordan Velez\",\"question\":\"What does the supplied trend \\\"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\\\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Grand Lake\",\"focus\":\"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\",\"src\":\"world_summary ## Engine Review · math-imbalance\"},\"exposure\":{\"basis\":[\"ledger-resident\"],\"self\":\"Rick Walker — Line cook — Fruitvale\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Grand Lake retail decay\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-b0e302e4edcf\"},{\"t\":\"FACT\",\"text\":\"Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-3a7d7a01e54c\"},{\"t\":\"FACT\",\"text\":\"HOOD: Grand Lake\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-474495c0e07f\"},{\"t\":\"FACT\",\"text\":\"EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500\",\"src\":\"world_summary ## Engine Review · math-imbalance\",\"id\":\"F-24adc4583803\"},{\"t\":\"FACT\",\"text\":\"Rick Walker — Line cook — Fruitvale\",\"src\":\"Simulation_Ledger profile for POP-00198\",\"id\":\"F-69bcadf46b69\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "role": "Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Jordan Velez",
+        "question": "What does the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Grand Lake",
+        "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "src": "world_summary ## Engine Review · math-imbalance"
+      },
+      "exposure": {
+        "basis": [
+          "ledger-resident"
+        ],
+        "self": "Rick Walker — Line cook — Fruitvale",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake retail decay",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-b0e302e4edcf"
+        },
+        {
+          "t": "FACT",
+          "text": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-3a7d7a01e54c"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Grand Lake",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-474495c0e07f"
+        },
+        {
+          "t": "FACT",
+          "text": "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500",
+          "src": "world_summary ## Engine Review · math-imbalance",
+          "id": "F-24adc4583803"
+        },
+        {
+          "t": "FACT",
+          "text": "Rick Walker — Line cook — Fruitvale",
+          "src": "Simulation_Ledger profile for POP-00198",
+          "id": "F-69bcadf46b69"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

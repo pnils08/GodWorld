@@ -1,0 +1,29 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "configuredWriterModel": "meta-llama/llama-3.3-70b-instruct",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 17,
+  "quotesLanded": 0,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-20T23:20:55.009Z"
+}

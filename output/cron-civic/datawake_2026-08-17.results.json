@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-17",
+  "cycle": 103,
+  "results": [
+    {
+      "office": "civic-office-baylight-authority",
+      "ok": false,
+      "error": "fabricated statistic(s) after retry: 2.1"
+    },
+    {
+      "office": "civic-office-council-d1",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d1_2026-08-17.json"
+    },
+    {
+      "office": "civic-office-council-d2",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d2_2026-08-17.json"
+    }
+  ],
+  "ranAt": "2026-08-17T10:46:37.915Z"
+}

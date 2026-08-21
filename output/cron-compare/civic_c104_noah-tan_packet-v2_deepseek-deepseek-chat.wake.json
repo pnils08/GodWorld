@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "noah-tan",
+  "byline": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "beatDomain": "ENVIRONMENT"
+  },
+  "laneEntries": 51,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tauth.com]\n{\n  \"popId\": \"POP-00157\",\n  \"name\": \"Noah Tan\",\n  \"recorded\": true,\n  \"text\": \"filed: Sandra Velazquez stood at the corner of Piedmont Ave, her hands buried deep in her pockets against t\"\n}"
+  },
+  "ranAt": "2026-08-20T23:15:40.513Z"
+}

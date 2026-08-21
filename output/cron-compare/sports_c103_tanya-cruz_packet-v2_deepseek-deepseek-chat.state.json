@@ -8,7 +8,7 @@
     "desk": "sports"
   },
   "task": {
-    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
     "assignment": "Oaks preseason update: 0-1 — Adash Stanley recorded 23 points and 7 assists.",
     "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
     "voice": null,
@@ -55,17 +55,70 @@
     "hood": "Jack London",
     "src": "world_summary_c103.md ## Sports",
     "plan": {
-      "focus": "Adash Stanley's performance in the Oaks' preseason game",
-      "closeQuestion": "What adjustments will the Oaks make to turn their preseason record around?"
+      "focus": "Adash Stanley's performance in the Oaks' preseason opener",
+      "closeQuestion": "Is this the beginning of Adash Stanley's leap to stardom, or just another night for Oakland's steady floor general?"
     }
   },
   "exposure": {
-    "subjects": [],
-    "sources": [],
+    "subjects": [
+      {
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "profile": "Ollie Campbell",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "profile": "Guadalupe Lupe",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00642-6165994962",
+        "pop": "POP-00642",
+        "name": "Ollie Campbell",
+        "quote": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job. Maybe ask why the rest of the team couldn't back him up—seems like a one-man show out there.",
+        "factIds": [
+          "F-b612e3776eb6",
+          "F-df8c4e55c3c4"
+        ],
+        "src": "packet.W2[POP-00642]"
+      },
+      {
+        "id": "Q-POP-00643-17f5832726",
+        "pop": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "quote": "I heard about Adash's stats, but something feels off when a player puts up numbers like that and the team still loses. Maybe the Tribune should ask if he's really fitting into the team's system or just playing for himself.",
+        "factIds": [
+          "F-b612e3776eb6",
+          "F-df8c4e55c3c4"
+        ],
+        "src": "packet.W2[POP-00643]"
+      }
+    ],
     "excludedLeads": [
       {
+        "from": "Ollie Campbell",
+        "text": "What was the team's overall shooting percentage compared to Stanley's?",
+        "usable": false
+      },
+      {
+        "from": "Guadalupe Lupe",
+        "text": "Is Adash Stanley's playing style meshing with the team's strategy?",
+        "usable": false
+      },
+      {
         "from": "Tanya Cruz",
-        "text": "Is Adash Stanley expected to maintain this level of performance throughout the preseason?",
+        "text": "Could Stanley's playmaking be part of a larger strategy to take pressure off Dybantsa?",
+        "usable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "Did the coaching staff emphasize ball movement in preseason preparations?",
         "usable": false
       }
     ]
@@ -113,7 +166,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -148,8 +201,8 @@
     "purpose": "File a short Packet-backed sports dispatch while treating access, observation, mood, dialogue, injuries, and team response as absent unless supplied.",
     "articleContract": {
       "renderMode": "SOURCE_BRIEF",
-      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
-      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
+      "voice": "short first-person sideline interpretation",
+      "targetWords": "evidence-bounded",
       "opening": "one supplied sports fact",
       "closing": "the access or observation still needed"
     },
@@ -168,7 +221,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-b17a99e6b54e",
+    "id": "AM-18394e6334ab",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -196,8 +249,46 @@
         "src": "world_summary_c103.md ## Sports"
       }
     ],
-    "approvedQuotes": [],
-    "approvedSubjects": [],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00642-6165994962",
+        "speakerId": "POP-00642",
+        "speakerName": "Ollie Campbell",
+        "text": "I don't follow the Oaks too close, but 23 points sounds like Adash did his job. Maybe ask why the rest of the team couldn't back him up—seems like a one-man show out there.",
+        "factIds": [
+          "F-b612e3776eb6",
+          "F-df8c4e55c3c4"
+        ],
+        "src": "packet.W2[POP-00642]"
+      },
+      {
+        "id": "Q-POP-00643-17f5832726",
+        "speakerId": "POP-00643",
+        "speakerName": "Guadalupe Lupe",
+        "text": "I heard about Adash's stats, but something feels off when a player puts up numbers like that and the team still loses. Maybe the Tribune should ask if he's really fitting into the team's system or just playing for himself.",
+        "factIds": [
+          "F-b612e3776eb6",
+          "F-df8c4e55c3c4"
+        ],
+        "src": "packet.W2[POP-00643]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00642",
+        "name": "Ollie Campbell",
+        "profile": "Ollie Campbell",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00643",
+        "name": "Guadalupe Lupe",
+        "profile": "Guadalupe Lupe",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -214,8 +305,23 @@
     ],
     "unverifiedLeads": [
       {
+        "from": "Ollie Campbell",
+        "text": "What was the team's overall shooting percentage compared to Stanley's?",
+        "publishable": false
+      },
+      {
+        "from": "Guadalupe Lupe",
+        "text": "Is Adash Stanley's playing style meshing with the team's strategy?",
+        "publishable": false
+      },
+      {
         "from": "Tanya Cruz",
-        "text": "Is Adash Stanley expected to maintain this level of performance throughout the preseason?",
+        "text": "Could Stanley's playmaking be part of a larger strategy to take pressure off Dybantsa?",
+        "publishable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "Did the coaching staff emphasize ball movement in preseason preparations?",
         "publishable": false
       }
     ],

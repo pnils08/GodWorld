@@ -1,0 +1,27 @@
+{
+  "draft": "sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "Pablo Almanzar",
+      "issue": "Used as a person in the draft, but is not in the ledger (violates Pre-check 1).",
+      "severity": "high"
+    },
+    {
+      "claim": "21-year-old arm / mid-2027 debut",
+      "issue": "Uses unapproved numbers '21' and '2027' flagged by lexical review cues.",
+      "severity": "high"
+    },
+    {
+      "claim": "his twelfth of the season punctuating a 2-for-3 night that brought his RBI total to forty-two",
+      "issue": "Invented season statistics for Vinnie Keane (12 HRs, 42 RBIs) not supported by the ground truth.",
+      "severity": "high"
+    },
+    {
+      "claim": "eighteen innings, zero hits allowed, fifteen strikeouts, two walks",
+      "issue": "Incorrect season strikeout total. Almanzar has 20 strikeouts across his two starts (10 Ks in C103, 10 Ks in C104), not 15.",
+      "severity": "high"
+    }
+  ],
+  "contamination": [],
+  "summary": "The draft contains multiple high-severity sourcing violations, including the use of a non-ledger citizen as a person, unapproved numbers, and fabricated player statistics."
+}

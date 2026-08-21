@@ -1,0 +1,58 @@
+{
+  "draft": "output/cron-compare/culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "9b9c5aa0b2aab2c7f335f0e80a8c420355d3874454e3b26d95cf39cdc73bf4f4",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "At the Neon Harbor Club, a group of friends have gathered... Mark Aitken, a regular at the club, is looking forward to the evening's entertainment.",
+      "issue": "Mark Aitken's canonical sighting for Cycle 104 was at Adams Point United Methodist Church in Adams Point, not at the Neon Harbor Club in Jack London. Moving his sighting/appearance violates the persona's constraint against inventing appearances and misrepresents the cycle's sighting data.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 1,
+  "summary": "Draft misrepresents Mark Aitken's sighting location, placing him at Neon Harbor Club instead of Adams Point United Methodist Church.",
+  "review": {
+    "profileId": "kai-arts-entertainment-v1",
+    "canonIntegrity": "revise",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-26e668d14559",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Mark Aitken"
+    ],
+    "unverified": [
+      "Countdown Live",
+      "Evening Texture",
+      "Late Weather Watch",
+      "Neon Harbor Club"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0527,
+  "durationMs": 14966,
+  "parseError": false,
+  "ranAt": "2026-08-20T23:20:54.998Z"
+}

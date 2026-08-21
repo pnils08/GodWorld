@@ -9,18 +9,33 @@
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
-  "focus": "Temescal Community Health Center construction and its potential impact on community health access",
-  "why": "Construction is active but there's no information on how this will change health service access or who will be affected",
+  "focus": "Temescal Community Health Center construction progress and its implications for neighborhood access",
+  "why": "The mayor's approval signals urgency ('now—not next year'), but the human consequence of delayed access remains unestablished",
   "checks": [
-    "Verify if the construction timeline aligns with any known community health needs",
-    "Check for any existing gaps in health services that the center might address",
-    "Look for patterns in nearby initiatives that might indicate systemic access issues"
+    "Verify if construction pace matches mayoral urgency claims",
+    "Confirm whether any pre-existing health services were displaced or altered by this project"
   ],
-  "targets": [],
-  "interpretation": "This feels like one of those moments where infrastructure moves forward while the human consequences remain invisible until the doors open. I've seen too many projects where the ribbon-cutting comes before anyone's asked who'll walk through those doors.",
+  "targets": [
+    {
+      "pop": "POP-00170",
+      "question": "Have you noticed changes in neighborhood health service availability during construction?",
+      "basis": "same-hood-ledger as longtime Temescal resident"
+    },
+    {
+      "pop": "POP-00269",
+      "question": "What practical health access challenges do service workers face in this area?",
+      "basis": "same-hood-ledger as frontline worker"
+    }
+  ],
+  "interpretation": "Approval rhetoric emphasizes speed, but without timeline or capacity details, the gap between political urgency and lived experience remains unmeasured",
   "unverifiedLead": [
-    "Are there existing health service users in Temescal who currently travel elsewhere for care?",
-    "What health services will be prioritized when the center opens?"
+    "Possible service gaps during transition from approval to operational status",
+    "Undocumented shifts in where residents seek care during construction"
   ],
-  "closeQuestion": "Without knowing who this center will serve or what services it will provide, how can we measure its true community impact?"
+  "closeQuestion": "Does 'active construction' indicate accelerated progress, or reveal unstated delays in making care accessible?"
 }
+## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
+- Melton Neilon (POP-00170): "I keep hearing about this health center coming in, but nobody's talking about parking—where are all those extra cars gonna go when my customers are already circling the block for a spot? Ask them how they're gonna keep Temescal from turning into a traffic nightmare."
+- Kevin Nelson (POP-00269): "I keep hearing about this health center coming in, but nobody's talking about how working folks like me are supposed to get there during lunch rush or after a double shift. Ask who it's really built for—people with flexible hours or the ones burning the candle at both ends?"
+- Kaila Raimon (POP-00666): "I keep hearing about the health center construction, but nobody's talking about whether it'll actually have enough doctors who speak Spanish and Vietnamese—half my customers at the bakery are immigrants who need that."
+

@@ -10,32 +10,27 @@
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
-  "focus": "Adash Stanley's performance in the Oaks' preseason game",
-  "why": "Adash Stanley recorded 23 points and 7 assists, highlighting his impact despite the team's loss.",
+  "focus": "Adash Stanley's performance in the Oaks' preseason opener",
+  "why": "Stanley's 23 points and 7 assists stand out even in a loss, suggesting he's picking up where he left off last season",
   "checks": [
-    "Does Adash Stanley's performance indicate a strong start to the preseason?",
-    "How does this game reflect on the Oaks' preseason preparation?"
+    "Does Stanley's preseason performance indicate he's taking on more playmaking responsibility?",
+    "How does this loss compare to other Oaks preseason openers?"
   ],
   "targets": [
     {
       "pop": "POP-01023",
-      "question": "How does Adash Stanley feel about his individual performance in the context of the team's loss?",
-      "basis": "Adash Stanley recorded 23 points and 7 assists."
+      "question": "What adjustments did you make to your game during the offseason to prepare for this expanded role?",
+      "basis": "7 assists suggest increased playmaking responsibility"
     }
   ],
-  "interpretation": "Adash Stanley's standout performance suggests he is a key player for the Oaks, even as the team works through preseason challenges.",
+  "interpretation": "Even in a loss, Stanley's numbers jump off the page - the kind of stat line that makes you wonder if the Oaks might be building around his two-way potential",
   "unverifiedLead": [
-    "Is Adash Stanley expected to maintain this level of performance throughout the preseason?"
+    "Could Stanley's playmaking be part of a larger strategy to take pressure off Dybantsa?",
+    "Did the coaching staff emphasize ball movement in preseason preparations?"
   ],
-  "closeQuestion": "What adjustments will the Oaks make to turn their preseason record around?"
+  "closeQuestion": "Is this the beginning of Adash Stanley's leap to stardom, or just another night for Oakland's steady floor general?"
 }
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
-(no quotes landed this wake — write from the record; do not invent residents)
-
-## §4 THE ARTICLE (wake 3)
-- draft: output/cron-compare/staged/sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md
-- disposition: staged
-- rhea: PASS
-- self-score footer: present
-- tool use: none
+- Ollie Campbell (POP-00642): "I don't follow the Oaks too close, but 23 points sounds like Adash did his job. Maybe ask why the rest of the team couldn't back him up—seems like a one-man show out there."
+- Guadalupe Lupe (POP-00643): "I heard about Adash's stats, but something feels off when a player puts up numbers like that and the team still loses. Maybe the Tribune should ask if he's really fitting into the team's system or just playing for himself."
 

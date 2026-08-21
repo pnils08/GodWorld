@@ -61,24 +61,24 @@
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-00744",
-        "name": "Tomas Renteria",
-        "profile": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale resident",
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "profile": "Rafael Pilgrim",
         "quotationEligible": true,
-        "src": "packet.W1.exposure"
+        "src": "packet.W2.interview"
       }
     ],
     "sources": [
       {
-        "id": "Q-POP-00744-e70b66e567",
-        "pop": "POP-00744",
-        "name": "Tomas Renteria",
-        "quote": "I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am?",
+        "id": "Q-POP-00644-1f168b72d9",
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "quote": "I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?",
         "factIds": [
           "F-c66f9422d22f",
           "F-c4b3917a7eab"
         ],
-        "src": "packet.W2[POP-00744]"
+        "src": "packet.W2[POP-00644]"
       }
     ],
     "excludedLeads": []
@@ -179,7 +179,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-b89e167aed9c",
+    "id": "AM-25742bd22a45",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -203,23 +203,23 @@
     ],
     "approvedQuotes": [
       {
-        "id": "Q-POP-00744-e70b66e567",
-        "speakerId": "POP-00744",
-        "speakerName": "Tomas Renteria",
-        "text": "I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am?",
+        "id": "Q-POP-00644-1f168b72d9",
+        "speakerId": "POP-00644",
+        "speakerName": "Rafael Pilgrim",
+        "text": "I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?",
         "factIds": [
           "F-c66f9422d22f",
           "F-c4b3917a7eab"
         ],
-        "src": "packet.W2[POP-00744]"
+        "src": "packet.W2[POP-00644]"
       }
     ],
     "approvedSubjects": [
       {
-        "id": "POP-00744",
-        "name": "Tomas Renteria",
-        "profile": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale resident",
-        "src": "packet.W1.exposure",
+        "id": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "profile": "Rafael Pilgrim",
+        "src": "packet.W2.interview",
         "quotationEligible": true
       }
     ],

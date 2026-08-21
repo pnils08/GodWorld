@@ -1,0 +1,52 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "104",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Ariana Lee",
+        "role": "mentioned",
+        "popid": "POP-00168"
+      },
+      {
+        "name": "Sandra Velazquez",
+        "role": "mentioned",
+        "popid": "POP-00830"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "piedmont-ave-sandra-velazquez-season-feel",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "I don't usually have seasonal health concerns—I'm pretty careful about staying active and eating right year-round. Maybe the Tribune should ask if this is based on actual doctor visits or just general neighborhood chatter.",
+        "sourceRef": "citizenVoice PRESS Sandra Velazquez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-2653684acee9",
+    "draftSha256": "9e2207cf98e50164e2adb334a763b9832aacefe009ce0f3d56efef1466a1037c",
+    "verdict": "output/cron-compare/civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-20T23:15:26.942Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-20T23:15:31.984Z"
+}

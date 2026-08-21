@@ -23,9 +23,12 @@
       "basis": "feed-names"
     }
   ],
-  "interpretation": "The team's success may be attributed to the players' individual performances",
+  "interpretation": "The team's success can be attributed to the strong performances of its players",
   "unverifiedLead": [
-    "The impact of Benji Dillon's move to the bullpen on the team's overall performance"
+    "The current streak may be a turning point in the season"
   ],
-  "closeQuestion": "How will the team's current streak be affected by the changes in the roster?"
+  "closeQuestion": "Will the team be able to maintain its momentum going into the next game?"
 }
+## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
+
+

@@ -11,17 +11,23 @@
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
   "focus": "Pablo Almanzar's no-hitter",
-  "why": "It's a historic moment for the A's",
+  "why": "electric atmosphere in Oakland",
   "checks": [
-    "Handoff feeling vs funeral feeling"
+    "handoff feeling vs funeral feeling"
   ],
-  "targets": [],
-  "interpretation": "The city should feel dared to show up louder tomorrow",
+  "targets": [
+    {
+      "pop": "POP-00001",
+      "question": "Can Vinnie Keane's veteran presence help Pablo Almanzar build on his debut success?",
+      "basis": "team chemistry"
+    }
+  ],
+  "interpretation": "Oakland's energy is palpable after Pablo Almanzar's historic debut",
   "unverifiedLead": [
-    "I think this win could be a turning point for the team"
+    "the crowd's reaction to Pablo Almanzar's second start will be a key indicator of the team's momentum"
   ],
-  "closeQuestion": "Will the A's keep their momentum going?"
+  "closeQuestion": "Will the A's be able to maintain their winning streak with Pablo Almanzar on the mound?"
 }
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
-(no quotes landed this wake — write from the record; do not invent residents)
+
 

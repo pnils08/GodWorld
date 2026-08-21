@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "civic",
+  "persona": "noah-tan",
+  "storyline": {
+    "slug": "piedmont-ave-sandra-velazquez-season-feel",
+    "verb": "opened"
+  },
+  "hood": "Piedmont Ave",
+  "quotes": [
+    {
+      "pop": "POP-00830",
+      "name": "Sandra Velazquez",
+      "quote": "I don't usually have seasonal health concerns—I'm pretty careful about staying active and eating right year-round. Maybe the Tribune should ask if this is based on actual doctor visits or just general neighborhood chatter."
+    },
+    {
+      "pop": "POP-00168",
+      "name": "Ariana Lee",
+      "quote": "I've lived here long enough to know Sandra Velazquez doesn't just get seasonal sniffles—she's the type to power through a flu without missing a beat. The Tribune should ask what changed this year that made it noticeable enough to mention."
+    }
+  ],
+  "claim": "I don't usually have seasonal health concerns—I'm pretty careful about staying active and eating right year-round. Maybe the Tribune should ask if this is based on actual doctor visits or just general neighborhood chatter.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-20T18:16:00.355Z"
+}

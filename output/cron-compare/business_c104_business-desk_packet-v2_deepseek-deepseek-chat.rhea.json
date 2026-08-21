@@ -1,0 +1,47 @@
+{
+  "draft": "output/cron-compare/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b6799971fc308b2906411e6bbf2230f841d21de187f8ca156b9951f063baef70",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft accurately reflects Grand Lake's retail decay and housing pressure dynamics with canonical citizens correctly attributed.",
+  "review": {
+    "profileId": "default",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": null,
+  "nameCheck": {
+    "verified": [
+      "Amara Keane",
+      "Melton Neilon"
+    ],
+    "unverified": [
+      "Grand Avenue",
+      "Grand Lake's Quiet Retail",
+      "Slide Leaves Questions Unanswered"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": false
+  },
+  "apiCostUsd": 0.008,
+  "durationMs": 4599,
+  "parseError": false,
+  "ranAt": "2026-08-21T04:02:00.447Z"
+}

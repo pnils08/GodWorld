@@ -1,0 +1,299 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00157",
+    "name": "Noah Tan",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Sandra Velazquez — dealt with a seasonal health concern",
+    "approach": "Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "weather-ground",
+      "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+      "missing": [
+        "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+      ],
+      "impactEvidence": null,
+      "forbidden": [
+        "Do not announce the season or temperature as the story.",
+        "Do not import real-world Oakland winter tropes absent from the Packet.",
+        "Do not add forecasts, agencies, or unsupplied measurements."
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "season-feel",
+    "hood": "Piedmont Ave",
+    "src": "output/world_summary_c104.md ## Who Lived It",
+    "plan": {
+      "focus": "Sandra Velazquez's seasonal health concern",
+      "closeQuestion": "What did this season carry away from Sandra's hands, and who noticed?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00830",
+        "name": "Sandra Velazquez (POP-00830)",
+        "profile": "Sandra Velazquez (POP-00830)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00168",
+        "name": "Ariana Lee",
+        "profile": "Ariana Lee",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00830-b1820f457f",
+        "pop": "POP-00830",
+        "name": "Sandra Velazquez",
+        "quote": "I don't usually have seasonal health concerns—I'm pretty careful about staying active and eating right year-round. Maybe the Tribune should ask if this is based on actual doctor visits or just general neighborhood chatter.",
+        "factIds": [
+          "F-aebfdcfebfec"
+        ],
+        "src": "packet.W2[POP-00830]"
+      },
+      {
+        "id": "Q-POP-00168-7e1d0956a4",
+        "pop": "POP-00168",
+        "name": "Ariana Lee",
+        "quote": "I've lived here long enough to know Sandra Velazquez doesn't just get seasonal sniffles—she's the type to power through a flu without missing a beat. The Tribune should ask what changed this year that made it noticeable enough to mention.",
+        "factIds": [
+          "F-aebfdcfebfec"
+        ],
+        "src": "packet.W2[POP-00168]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Sandra Velazquez",
+        "text": "Are there specific health incidents or doctor visits tied to this trend?",
+        "usable": false
+      },
+      {
+        "from": "Ariana Lee",
+        "text": "Has Sandra's work schedule or home situation changed recently?",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Did neighbors step in to help with tasks Sandra usually handles?",
+        "usable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Was there a specific household chore or routine that fell apart during this time?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "Sandra Velazquez — dealt with a seasonal health concern",
+      "src": "output/world_summary_c104.md ## Who Lived It",
+      "id": "F-aebfdcfebfec"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Show what this season moved in GodWorld. The weather snapshot is context, never the Article. Live a Packet-backed person or place on a day like this.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person civic environment reporting from the street",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living this cycle's season",
+      "closing": "what is still unfinished for them"
+    },
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-2653684acee9",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-aebfdcfebfec",
+        "t": "FACT",
+        "text": "Sandra Velazquez — dealt with a seasonal health concern",
+        "src": "output/world_summary_c104.md ## Who Lived It"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00830-b1820f457f",
+        "speakerId": "POP-00830",
+        "speakerName": "Sandra Velazquez",
+        "text": "I don't usually have seasonal health concerns—I'm pretty careful about staying active and eating right year-round. Maybe the Tribune should ask if this is based on actual doctor visits or just general neighborhood chatter.",
+        "factIds": [
+          "F-aebfdcfebfec"
+        ],
+        "src": "packet.W2[POP-00830]"
+      },
+      {
+        "id": "Q-POP-00168-7e1d0956a4",
+        "speakerId": "POP-00168",
+        "speakerName": "Ariana Lee",
+        "text": "I've lived here long enough to know Sandra Velazquez doesn't just get seasonal sniffles—she's the type to power through a flu without missing a beat. The Tribune should ask what changed this year that made it noticeable enough to mention.",
+        "factIds": [
+          "F-aebfdcfebfec"
+        ],
+        "src": "packet.W2[POP-00168]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00830",
+        "name": "Sandra Velazquez (POP-00830)",
+        "profile": "Sandra Velazquez",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00168",
+        "name": "Ariana Lee",
+        "profile": "Ariana Lee",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sandra Velazquez",
+        "text": "Are there specific health incidents or doctor visits tied to this trend?",
+        "publishable": false
+      },
+      {
+        "from": "Ariana Lee",
+        "text": "Has Sandra's work schedule or home situation changed recently?",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Did neighbors step in to help with tasks Sandra usually handles?",
+        "publishable": false
+      },
+      {
+        "from": "Noah Tan",
+        "text": "Was there a specific household chore or routine that fell apart during this time?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  }
+}

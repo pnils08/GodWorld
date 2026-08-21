@@ -1,0 +1,12 @@
+{
+  "cycle": 98,
+  "generatedAt": "2026-08-21T03:27:27.437Z",
+  "provider": "openrouter",
+  "model": "anthropic/claude-haiku-4.5",
+  "edition": "supplemental_west_oakland_strain_c98.txt",
+  "articlesChecked": 0,
+  "hallucinationFlags": [],
+  "perArticle": [],
+  "elapsedSeconds": 0,
+  "costUsd": null
+}

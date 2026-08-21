@@ -1,0 +1,783 @@
+{
+  "empty": false,
+  "cycle": 104,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Mark Aitken",
+      "John Ellis",
+      "Marin Tao"
+    ],
+    "restaurants": [
+      {
+        "name": "Seasonal Spirits",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "Merritt AfterDark",
+        "hood": "Lake Merritt"
+      },
+      {
+        "name": "The 44th Table",
+        "hood": "Downtown"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "AfterHours Fry",
+        "hood": "Jack London"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Vibe Terrace",
+        "hood": "Lake Merritt"
+      },
+      {
+        "name": "Rhythm Deck",
+        "hood": "West Oakland"
+      },
+      {
+        "name": "Neon Harbor Club",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Skybar",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 7,
+      "vibe": "Terrace** (Lake Merritt)",
+      "movement": "high-energy",
+      "weatherImpact": 1.33
+    },
+    "cityEvents": [
+      "The Kelley Line Founding Celebration",
+      "The Keane Line Founding Celebration",
+      "The Corliss Line Founding Celebration",
+      "The Dillon Line Founding Celebration"
+    ],
+    "tv": [
+      "Countdown Live",
+      "New Year's Eve Special",
+      "Late Weather Watch",
+      "Breaking Bulletin",
+      "Weekend Kids",
+      "Oakland Baseball Tonight",
+      "One-on-One with Danny Horn (CF)"
+    ],
+    "movies": [
+      "When the Ball Drops",
+      "Last Night",
+      "Fog Harbor",
+      "New Beginnings",
+      "Ninth Inning"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight",
+    "streamingTrend": "party playlist",
+    "foodTrend": "Holiday celebration dining - festive atmosphere"
+  },
+  "signals": {
+    "fameCount": 0,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c104.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+        "name": "Mark Aitken",
+        "venue": "Adams Point United Methodist Church",
+        "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Adams Point",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | John Ellis spotted around Laurel",
+        "name": null,
+        "venue": null,
+        "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Laurel",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Marin Tao spotted around San Antonio",
+        "name": null,
+        "venue": null,
+        "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "San Antonio",
+        "popids": []
+      }
+    ],
+    "fame": []
+  },
+  "pulse": {
+    "className": "fame-sighting",
+    "score": 23,
+    "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+    "named": "Adams Point United Methodist Church",
+    "hood": "Adams Point",
+    "person": "Mark Aitken",
+    "venue": "Adams Point United Methodist Church"
+  },
+  "candidates": [
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "named": "Adams Point United Methodist Church",
+      "hood": "Adams Point"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Seasonal Spirits (Rockridge)",
+      "named": "Seasonal Spirits",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Merritt AfterDark (Lake Merritt)",
+      "named": "Merritt AfterDark",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "The 44th Table (Downtown)",
+      "named": "The 44th Table",
+      "hood": "Downtown"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Vibe Terrace (Lake Merritt)",
+      "named": "Vibe Terrace",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Rhythm Deck (West Oakland)",
+      "named": "Rhythm Deck",
+      "hood": "West Oakland"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Neon Harbor Club (Jack London)",
+      "named": "Neon Harbor Club",
+      "hood": "Jack London"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Skybar (Downtown)",
+      "named": "Skybar",
+      "hood": "Downtown"
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+      "named": "Countdown Live",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "The Kelley Line Founding Celebration",
+      "named": "The Kelley Line Founding Celebration",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "The Keane Line Founding Celebration",
+      "named": "The Keane Line Founding Celebration",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "The Corliss Line Founding Celebration",
+      "named": "The Corliss Line Founding Celebration",
+      "hood": null
+    }
+  ],
+  "pulses": [
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "named": "Adams Point United Methodist Church",
+      "hood": "Adams Point",
+      "names": [
+        "Mark Aitken",
+        "Adams Point United Methodist Church"
+      ],
+      "person": "Mark Aitken",
+      "venue": "Adams Point United Methodist Church",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Mark Aitken spotted at Adams Point United Methodist Church in Adams Point — ground truth only, no invented companions",
+      "hookLine": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+      "sceneBits": [
+        "PERSON: Mark Aitken",
+        "VENUE: Adams Point United Methodist Church",
+        "HOOD: Adams Point"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Seasonal Spirits (Rockridge)",
+      "named": "Seasonal Spirits",
+      "hood": "Rockridge",
+      "names": [
+        "Seasonal Spirits"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Seasonal Spirits appears on the evening restaurant list in Rockridge. What was happening there is not established.",
+      "hookLine": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+      "sceneBits": [
+        "VENUE: Seasonal Spirits",
+        "HOOD: Rockridge"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Merritt AfterDark (Lake Merritt)",
+      "named": "Merritt AfterDark",
+      "hood": "Lake Merritt",
+      "names": [
+        "Merritt AfterDark"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Merritt AfterDark appears on the evening restaurant list in Lake Merritt. What was happening there is not established.",
+      "hookLine": "Merritt AfterDark appears on the evening restaurant list in Lake Merritt.",
+      "sceneBits": [
+        "VENUE: Merritt AfterDark",
+        "HOOD: Lake Merritt"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "The 44th Table (Downtown)",
+      "named": "The 44th Table",
+      "hood": "Downtown",
+      "names": [
+        "The 44th Table"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "The 44th Table appears on the evening restaurant list in Downtown. What was happening there is not established.",
+      "hookLine": "The 44th Table appears on the evening restaurant list in Downtown.",
+      "sceneBits": [
+        "VENUE: The 44th Table",
+        "HOOD: Downtown"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Vibe Terrace (Lake Merritt)",
+      "named": "Vibe Terrace",
+      "hood": "Lake Merritt",
+      "names": [
+        "Vibe Terrace"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Vibe Terrace — who is out and what the block is saying",
+      "hookLine": "Vibe Terrace holds the evening out in Lake Merritt.",
+      "sceneBits": [
+        "VENUE: Vibe Terrace",
+        "HOOD: Lake Merritt",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 7,
+        "vibe": "Terrace** (Lake Merritt)",
+        "movement": "high-energy",
+        "weatherImpact": 1.33
+      },
+      "cycle": 104
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Rhythm Deck (West Oakland)",
+      "named": "Rhythm Deck",
+      "hood": "West Oakland",
+      "names": [
+        "Rhythm Deck"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Rhythm Deck — who is out and what the block is saying",
+      "hookLine": "Rhythm Deck holds the evening out in West Oakland.",
+      "sceneBits": [
+        "VENUE: Rhythm Deck",
+        "HOOD: West Oakland",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 7,
+        "vibe": "Terrace** (Lake Merritt)",
+        "movement": "high-energy",
+        "weatherImpact": 1.33
+      },
+      "cycle": 104
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Neon Harbor Club (Jack London)",
+      "named": "Neon Harbor Club",
+      "hood": "Jack London",
+      "names": [
+        "Neon Harbor Club"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Neon Harbor Club — who is out and what the block is saying",
+      "hookLine": "Neon Harbor Club holds the evening out in Jack London.",
+      "sceneBits": [
+        "VENUE: Neon Harbor Club",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 7,
+        "vibe": "Terrace** (Lake Merritt)",
+        "movement": "high-energy",
+        "weatherImpact": 1.33
+      },
+      "cycle": 104
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Skybar (Downtown)",
+      "named": "Skybar",
+      "hood": "Downtown",
+      "names": [
+        "Skybar"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Skybar — who is out and what the block is saying",
+      "hookLine": "Skybar holds the evening out in Downtown.",
+      "sceneBits": [
+        "VENUE: Skybar",
+        "HOOD: Downtown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 7,
+        "vibe": "Terrace** (Lake Merritt)",
+        "movement": "high-energy",
+        "weatherImpact": 1.33
+      },
+      "cycle": 104
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+      "named": "Countdown Live",
+      "hood": null,
+      "names": [
+        "Countdown Live",
+        "New Year's Eve Special",
+        "Late Weather Watch",
+        "Breaking Bulletin",
+        "Weekend Kids",
+        "Oakland Baseball Tonight",
+        "One-on-One with Danny Horn (CF)"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Countdown Live, New Year's Eve Special, Late Weather Watch; sports desk: Oakland Sports Tonight",
+      "hookLine": "On the box tonight: Countdown Live, New Year's Eve Special.",
+      "sceneBits": [
+        "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+        "SPORTS BROADCAST: Oakland Sports Tonight"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "The Kelley Line Founding Celebration",
+      "named": "The Kelley Line Founding Celebration",
+      "hood": null,
+      "names": [
+        "The Kelley Line Founding Celebration"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: The Kelley Line Founding Celebration — present-tense room, not calendar filler",
+      "hookLine": "The Kelley Line Founding Celebration is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Kelley Line Founding Celebration"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "The Keane Line Founding Celebration",
+      "named": "The Keane Line Founding Celebration",
+      "hood": null,
+      "names": [
+        "The Keane Line Founding Celebration"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: The Keane Line Founding Celebration — present-tense room, not calendar filler",
+      "hookLine": "The Keane Line Founding Celebration is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Keane Line Founding Celebration"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "The Corliss Line Founding Celebration",
+      "named": "The Corliss Line Founding Celebration",
+      "hood": null,
+      "names": [
+        "The Corliss Line Founding Celebration"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: The Corliss Line Founding Celebration — present-tense room, not calendar filler",
+      "hookLine": "The Corliss Line Founding Celebration is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Corliss Line Founding Celebration"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "The Dillon Line Founding Celebration",
+      "named": "The Dillon Line Founding Celebration",
+      "hood": null,
+      "names": [
+        "The Dillon Line Founding Celebration"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: The Dillon Line Founding Celebration — present-tense room, not calendar filler",
+      "hookLine": "The Dillon Line Founding Celebration is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Dillon Line Founding Celebration"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "AfterHours Fry (Jack London)",
+      "named": "AfterHours Fry",
+      "hood": "Jack London",
+      "names": [
+        "AfterHours Fry"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "AfterHours Fry appears on the evening fast-food list in Jack London. What was happening there is not established.",
+      "hookLine": "AfterHours Fry appears on the evening fast-food list in Jack London.",
+      "sceneBits": [
+        "VENUE: AfterHours Fry",
+        "HOOD: Jack London"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: When the Ball Drops; Last Night; Fog Harbor; New Beginnings; Ninth Inning",
+      "named": "When the Ball Drops",
+      "hood": null,
+      "names": [
+        "When the Ball Drops",
+        "Last Night",
+        "Fog Harbor",
+        "New Beginnings",
+        "Ninth Inning"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — When the Ball Drops, Last Night, Fog Harbor, New Beginnings, Ninth Inning",
+      "hookLine": "Screens tonight: When the Ball Drops, Last Night, Fog Harbor, New Beginnings, Ninth Inning.",
+      "sceneBits": [
+        "MOVIES: When the Ball Drops; Last Night; Fog Harbor; New Beginnings; Ninth Inning"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Mark Aitken spotted (Riley famous list)",
+      "named": "Mark Aitken",
+      "hood": null,
+      "names": [
+        "Mark Aitken"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Mark Aitken is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Mark Aitken is being seen around town.",
+      "sceneBits": [
+        "NAME: Mark Aitken"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "John Ellis spotted (Riley famous list)",
+      "named": "John Ellis",
+      "hood": null,
+      "names": [
+        "John Ellis"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "John Ellis is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "John Ellis is being seen around town.",
+      "sceneBits": [
+        "NAME: John Ellis"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Marin Tao spotted (Riley famous list)",
+      "named": "Marin Tao",
+      "hood": null,
+      "names": [
+        "Marin Tao"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Marin Tao is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Marin Tao is being seen around town.",
+      "sceneBits": [
+        "NAME: Marin Tao"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "faith-overlap",
+      "score": 11,
+      "label": "Faith / quiet work overlap with evening city",
+      "named": null,
+      "hood": null,
+      "names": [],
+      "requiresName": false,
+      "source": "Faith_Organizations tab (LeaderPOPID-linked)",
+      "angle": "Quiet institutional care against the evening board — congregations, not doctrine wars",
+      "hookLine": "Faith work continues while the city evenings out.",
+      "sceneBits": [
+        "FAITH REGISTRY: present"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "food-trend",
+      "score": 9,
+      "label": "Holiday celebration dining - festive atmosphere",
+      "named": "Holiday celebration dining - festive atmosphere",
+      "hood": null,
+      "names": [
+        "Holiday celebration dining - festive atmosphere"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Food trend",
+      "angle": "Food trend under stress: Holiday celebration dining - festive atmosphere",
+      "hookLine": "Food trend line: Holiday celebration dining - festive atmosphere.",
+      "sceneBits": [
+        "FOOD TREND: Holiday celebration dining - festive atmosphere"
+      ],
+      "cycle": 104
+    }
+  ],
+  "recommend": {
+    "bag": "ground",
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+    "reason": "top pulse fame-sighting → ground",
+    "pulseClass": "fame-sighting",
+    "pulseLabel": "Mark Aitken at Adams Point United Methodist Church (Adams Point)"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Seasonal Spirits (Rockridge)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "tv-slate",
+      "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+      "score": 30,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "fame-sighting",
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "score": 31,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "fame-sighting",
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "score": 31,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "score": 43,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Mark Aitken spotted at Adams Point United Methodist Church in Adams Point — ground truth only, no invented companions",
+    "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+    "hookLine": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+    "hood": "Adams Point",
+    "pulseClass": "fame-sighting",
+    "citizens": [
+      "Mark Aitken"
+    ],
+    "popids": [],
+    "named": "Adams Point United Methodist Church",
+    "venue": "Adams Point United Methodist Church",
+    "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+    "cycle": 104
+  },
+  "prewrite": {
+    "pulseClass": "fame-sighting",
+    "angle": "Mark Aitken spotted at Adams Point United Methodist Church in Adams Point — ground truth only, no invented companions",
+    "hookLine": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+    "anchorFacts": [
+      "NAMED: Adams Point United Methodist Church",
+      "PERSON: Mark Aitken",
+      "VENUE: Adams Point United Methodist Church",
+      "HOOD: Adams Point",
+      "PERSON: Mark Aitken",
+      "VENUE: Adams Point United Methodist Church",
+      "HOOD: Adams Point"
+    ],
+    "bagRecommend": "ground",
+    "bagSlug": "maria-keen"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Seasonal Spirits",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "Merritt AfterDark",
+        "hood": "Lake Merritt"
+      },
+      {
+        "name": "The 44th Table",
+        "hood": "Downtown"
+      },
+      {
+        "name": "AfterHours Fry",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Vibe Terrace",
+        "hood": "Lake Merritt"
+      },
+      {
+        "name": "Rhythm Deck",
+        "hood": "West Oakland"
+      },
+      {
+        "name": "Neon Harbor Club",
+        "hood": "Jack London"
+      },
+      {
+        "name": "Skybar",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 7,
+      "vibe": "Terrace** (Lake Merritt)",
+      "movement": "high-energy",
+      "weatherImpact": 1.33
+    },
+    "cityEvents": [
+      "The Kelley Line Founding Celebration",
+      "The Keane Line Founding Celebration",
+      "The Corliss Line Founding Celebration",
+      "The Dillon Line Founding Celebration"
+    ],
+    "tv": [
+      "Countdown Live",
+      "New Year's Eve Special",
+      "Late Weather Watch",
+      "Breaking Bulletin",
+      "Weekend Kids",
+      "Oakland Baseball Tonight",
+      "One-on-One with Danny Horn (CF)"
+    ],
+    "movies": [
+      "When the Ball Drops",
+      "Last Night",
+      "Fog Harbor",
+      "New Beginnings",
+      "Ninth Inning"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c104.md ## Evening Texture",
+    "output/desk_signal_c104.json lanes.culture",
+    "docs/media/MARIA_GROUND_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

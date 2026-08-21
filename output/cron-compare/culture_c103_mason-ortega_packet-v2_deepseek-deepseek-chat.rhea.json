@@ -1,0 +1,48 @@
+{
+  "draft": "output/cron-compare/culture_c103_mason-ortega_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "103",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "4e583f9415ee06a4e6cc11ccf4871312a10d350777029236dd5f8e4b180637a3",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "The draft perfectly adheres to the mason-kitchen-ground-v1 profile, verifying Piedmont Heights without inventing any unbacked kitchen details.",
+  "review": {
+    "profileId": "mason-kitchen-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "packageVersion": "MASON-LEP2-1",
+    "manifestId": "AM-d7a5d2ba00b7",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [],
+    "unverified": [
+      "Evening Texture",
+      "Piedmont Heights"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 0,
+      "businesses": 0,
+      "storylines": 0,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0429,
+  "durationMs": 9305,
+  "parseError": false,
+  "ranAt": "2026-08-18T23:24:24.454Z"
+}

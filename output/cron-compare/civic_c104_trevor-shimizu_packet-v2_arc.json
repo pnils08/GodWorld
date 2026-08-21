@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "storyline": {
+    "slug": "temescal-sonia-parikh-anomaly",
+    "verb": "opened"
+  },
+  "hood": "Temescal",
+  "quotes": [
+    {
+      "pop": "POP-00745",
+      "name": "Sonia Parikh",
+      "quote": "I heard about the stalled initiative, but honestly, it doesn't feel like much has changed day-to-day around here. Maybe the Tribune should ask why there's no visible progress—like, are people just busy, or is there some bigger hold-up?"
+    },
+    {
+      "pop": "POP-00761",
+      "name": "Idris Karim",
+      "quote": "I’ve noticed the civic initiative hasn’t moved forward, and it feels like there’s a disconnect between the urgency of the issues and the pace of action. The Tribune should ask what’s holding up the progress and who’s responsible for moving it forward."
+    }
+  ],
+  "claim": "I heard about the stalled initiative, but honestly, it doesn't feel like much has changed day-to-day around here. Maybe the Tribune should ask why there's no visible progress—like, are people just busy, or is there some bigger hold-up?",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-20T18:17:09.116Z"
+}

@@ -1,0 +1,43 @@
+{
+  "date": "2026-08-17",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk civic --state-file output/cron-compare/civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.state.json --persona freelance-firebrand --artifact-tag packet-v2 --provider openrouter --model anthropic/claude-sonnet-5 --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk civic --state-file output/cron-compare/civic_c103_lila-mezran_packet-v2_deepseek-deepseek-chat.state.json --persona lila-mezran --artifact-tag packet-v2 --provider openrouter --model deepseek/deepseek-chat --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk sports --state-file output/cron-compare/sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat.state.json --persona simon-leary --artifact-tag packet-v2 --provider openrouter --model deepseek/deepseek-chat --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk sports --state-file output/cron-compare/sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat.state.json --persona tanya-cruz --artifact-tag packet-v2 --provider openrouter --model deepseek/deepseek-chat --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk culture --state-file output/cron-compare/culture_c103_maria-keen_packet-v2_deepseek-deepseek-chat.state.json --persona maria-keen --artifact-tag packet-v2 --provider openrouter --model deepseek/deepseek-chat --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk business --state-file output/cron-compare/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.state.json --persona business-desk --artifact-tag packet-v2 --provider openrouter --model deepseek/deepseek-chat --strict-source-hygiene --packet-only"
+    }
+  ],
+  "ranAt": "2026-08-17T23:19:37.025Z"
+}

@@ -5,38 +5,48 @@
   "persona": "business-desk",
   "byline": "Jordan Velez",
   "bylinePopid": "POP-00153",
-  "article": "output/cron-compare/staged/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.staged.md",
+  "article": "output/cron-compare/staged/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.staged-2324.md",
   "bylineUsage": {
-    "recorded": false,
-    "reason": "local Rhea reconciliation; no external byline write performed"
+    "recorded": true
   },
   "intake": {
-    "names": [],
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "mentioned",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      }
+    ],
     "businesses": [],
-    "storylines": [],
+    "storylines": [
+      {
+        "slug": "dimond-melton-neilon-story-signal",
+        "verb": "opened"
+      }
+    ],
     "hoods": [
       "Dimond"
     ],
     "claims": [
       {
-        "claim": "Dimond cooling",
-        "sourceRef": "world_summary ## What Moved · trajectory"
+        "claim": "I hate to hear that about Dimond - it's always had such a good energy. The Tribune should ask what's drawing people away, whether it's rents or just shifting tastes.",
+        "sourceRef": "citizenVoice PRESS Melton Neilon"
       }
     ]
-  },
-  "approval": {
-    "status": "canon-approved",
-    "approvedBy": "builder",
-    "approvedAt": "2026-08-13"
   },
   "rhea": {
     "pass": true,
     "model": "google/gemini-3.5-flash",
-    "manifestId": "AM-b7d92ca9379b",
-    "draftSha256": "75fdcd4fce2a55a14ffd85b040d38c3f28ac6793f29a2507059ed711d8e6b88a",
+    "manifestId": "AM-4462568b0d28",
+    "draftSha256": "5430cb92991e76c62d7d34758c83f82591d4e5faf1c8af88ed04036605e3be41",
     "verdict": "output/cron-compare/business_c103_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
-    "ranAt": "2026-08-13T07:03:15.532Z"
+    "ranAt": "2026-08-18T23:24:53.825Z"
   },
-  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
-  "stagedAt": "2026-08-13T07:44:52.030Z"
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-18T23:24:54.501Z"
 }

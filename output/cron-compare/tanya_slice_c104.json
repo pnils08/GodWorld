@@ -1,0 +1,129 @@
+{
+  "empty": false,
+  "cycle": 104,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "The A's late-season record is 126-35."
+    ],
+    "claim": "The supplied sports record establishes the event; it does not establish what happened in the room.",
+    "accessEvidence": {
+      "state": "NOT_SUPPLIED",
+      "facts": []
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "NOT_SUPPLIED",
+      "facts": []
+    },
+    "missing": [
+      "reporter attendance or access",
+      "room mood or witnessed action",
+      "quotes or dialogue",
+      "injury detail or team response beyond the supplied record"
+    ]
+  },
+  "story": {
+    "angle": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+    "label": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+    "hookLine": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+    "kind": "sideline-signal",
+    "hood": "Baylight District",
+    "popids": [
+      "POP-00001"
+    ],
+    "citizens": [
+      "Vinnie Keane (POP-00001)"
+    ],
+    "ref": "world_summary_c104.md ## Sports",
+    "cycle": 104
+  },
+  "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+  "players": [
+    {
+      "name": "Pablo Almanzar",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No scene is authorized unless the Packet supplies an observed place and action."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "Pablo the Picasso shines again.",
+      "cycle": 104
+    },
+    {
+      "score": 50,
+      "label": "The Oaks fall to 0-2, AJ shines while Stanley on precaution.",
+      "cycle": 104
+    },
+    {
+      "score": 50,
+      "label": "What a Relief, Benji Dillon",
+      "cycle": 104
+    },
+    {
+      "score": 40,
+      "label": "Oakland Oaks preseason starts with an L but the Oaks looking like a W in their first appearance",
+      "cycle": 103
+    },
+    {
+      "score": 40,
+      "label": "Pablo Almanzar throws a No No in his MLB debut",
+      "cycle": 103
+    },
+    {
+      "score": 38,
+      "label": "Paulson keeps in light admist a chaotic time in Oakland Sports",
+      "cycle": 104
+    },
+    {
+      "score": 38,
+      "label": "As dominate the award race boards. Next cycle to reveal award winners and final season stats.",
+      "cycle": 104
+    },
+    {
+      "score": 38,
+      "label": "Happy NYE",
+      "cycle": 104
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c104.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

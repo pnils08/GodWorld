@@ -1,0 +1,246 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00014",
+    "name": "Tanya Cruz",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+    "approach": "Sideline approach (Tanya Cruz): short first-person interpretation from supplied sports facts. Do not claim clubhouse access, attendance, room mood, witnessed action, dialogue, injury detail, or a team response unless the Packet supplies it. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sideline-dispatch",
+      "pulseClass": "record-only-sideline",
+      "bagModes": [
+        "10 Inference Close"
+      ],
+      "claim": "The supplied sports record establishes the event; it does not establish what happened in the room.",
+      "anchorFacts": [
+        "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+        "The A's late-season record is 126-35."
+      ],
+      "accessEvidence": {
+        "state": "NOT_SUPPLIED",
+        "facts": []
+      },
+      "quoteEvidence": {
+        "state": "NOT_SUPPLIED",
+        "quotes": []
+      },
+      "observationEvidence": {
+        "state": "NOT_SUPPLIED",
+        "facts": []
+      },
+      "missing": [
+        "reporter attendance or access",
+        "room mood or witnessed action",
+        "quotes or dialogue",
+        "injury detail or team response beyond the supplied record"
+      ],
+      "sceneRule": "No scene is authorized unless the Packet supplies an observed place and action.",
+      "sourcePointers": [
+        "output/world_summary_c104.md ## Sports",
+        "scripts/sportsSubstrate.js",
+        "docs/media/TANYA_SIDELINE_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sideline-signal",
+    "hood": "Baylight District",
+    "src": "world_summary_c104.md ## Sports",
+    "plan": {
+      "focus": "Vinnie Keane's performance in the A's late-season game",
+      "closeQuestion": "Can Keane's veteran presence help guide the A's through the postseason?"
+    }
+  },
+  "exposure": {
+    "subjects": [],
+    "sources": [],
+    "excludedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "Whether Keane's approach changes in high-leverage playoff situations",
+        "usable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "How the team manages veteran workloads down the stretch",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "src": "world_summary_c104.md ## Sports",
+      "id": "F-51a804fa9d18"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "src": "world_summary_c104.md ## Sports",
+      "id": "F-f606725c2db0"
+    },
+    {
+      "t": "FACT",
+      "text": "The A's late-season record is 126-35.",
+      "src": "world_summary_c104.md ## Sports",
+      "id": "F-ac374730b867"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "File a short Packet-backed sports dispatch while treating access, observation, mood, dialogue, injuries, and team response as absent unless supplied.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "short first-person sideline interpretation",
+      "targetWords": "evidence-bounded",
+      "opening": "one supplied sports fact",
+      "closing": "the access or observation still needed"
+    },
+    "authorizedTexture": [
+      "first-person interpretation without a claim of attendance or access",
+      "a concise transition carrying no observed place, action, mood, person, or event"
+    ],
+    "textureConditions": [
+      "every access claim, observation, quote, injury detail, team response, person, place, event, and statistic requires Packet support",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "canonBlockers": [
+      "invented clubhouse or sideline access, attendance, room mood, witnessed action, dialogue, injury detail, or team response",
+      "an invented or altered person, quote, statistic, result, roster move, venue, event, or relationship",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  },
+  "manifest": {
+    "id": "AM-3c413852fd13",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-51a804fa9d18",
+        "t": "FACT",
+        "text": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+        "src": "world_summary_c104.md ## Sports"
+      },
+      {
+        "id": "F-f606725c2db0",
+        "t": "FACT",
+        "text": "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+        "src": "world_summary_c104.md ## Sports"
+      },
+      {
+        "id": "F-ac374730b867",
+        "t": "FACT",
+        "text": "The A's late-season record is 126-35.",
+        "src": "world_summary_c104.md ## Sports"
+      }
+    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "Whether Keane's approach changes in high-leverage playoff situations",
+        "publishable": false
+      },
+      {
+        "from": "Tanya Cruz",
+        "text": "How the team manages veteran workloads down the stretch",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "first-person interpretation without a claim of attendance or access",
+      "a concise transition carrying no observed place, action, mood, person, or event"
+    ],
+    "textureConditions": [
+      "every access claim, observation, quote, injury detail, team response, person, place, event, and statistic requires Packet support",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "forbiddenClaimClasses": [
+      "invented clubhouse or sideline access, attendance, room mood, witnessed action, dialogue, injury detail, or team response",
+      "an invented or altered person, quote, statistic, result, roster move, venue, event, or relationship",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  }
+}

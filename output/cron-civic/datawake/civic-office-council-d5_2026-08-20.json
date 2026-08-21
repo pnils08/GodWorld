@@ -1,0 +1,14 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-08-20",
+  "cycle": 104,
+  "model": "qwen/qwen3-235b-a22b",
+  "statement": "The Oakland Youth Apprenticeship Pipeline’s stalled recruitment isn’t a bureaucratic hiccup—it’s a betrayal of East Oakland’s youth. With our district’s sentiment at rock bottom and crime rates soaring, we can’t afford half-measures. The corrective actions must prioritize community-led intake processes and tie funding to quarterly hiring benchmarks. If we’re serious about equity, we’ll reroute resources from vanity projects to this pipeline—starting with the Fruitvale Transit Hub’s underused apprenticeship slots. I’m directing my office to audit all D5 workforce programs by next cycle; if they’re not hitting street-level impact, we’ll overhaul them.",
+  "action": "directed office to audit D5 workforce programs, demanded revised intake protocols tied to Fruitvale Transit Hub",
+  "numberMoved": "12",
+  "ranAt": "2026-08-20T10:46:27.229Z"
+}

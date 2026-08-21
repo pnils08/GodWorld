@@ -1,0 +1,498 @@
+[
+  {
+    "pop": "POP-00226",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00226\",\"name\":\"Jemeal Brim\",\"role\":\"Bakery worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Piedmont Ave, what about the supplied trend \\\"Piedmont Heights restaurant on Piedmont Ave\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Piedmont Ave\",\"focus\":\"Piedmont Heights restaurant on Piedmont Ave\",\"src\":\"world_summary ## Evening Texture · Restaurants\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Jemeal Brim — Bakery worker — Piedmont Ave\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Piedmont Heights (Piedmont Ave)\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-43f39505103f\"},{\"t\":\"FACT\",\"text\":\"Piedmont Heights appears on the evening restaurant list in Piedmont Ave.\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-c307da39b46b\"},{\"t\":\"FACT\",\"text\":\"NAMED: Piedmont Heights\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-c8d6ad3b56d9\"},{\"t\":\"FACT\",\"text\":\"HOOD: Piedmont Ave\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-2b647d85e987\"},{\"t\":\"FACT\",\"text\":\"VENUE: Piedmont Heights\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-7575692684a3\"},{\"t\":\"FACT\",\"text\":\"Jemeal Brim — Bakery worker — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00226\",\"id\":\"F-1eafa29e0c3c\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00226",
+        "name": "Jemeal Brim",
+        "role": "Bakery worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Piedmont Ave, what about the supplied trend \"Piedmont Heights restaurant on Piedmont Ave\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Piedmont Ave",
+        "focus": "Piedmont Heights restaurant on Piedmont Ave",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Jemeal Brim — Bakery worker — Piedmont Ave",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Piedmont Heights (Piedmont Ave)",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-43f39505103f"
+        },
+        {
+          "t": "FACT",
+          "text": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave.",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-c307da39b46b"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Piedmont Heights",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-c8d6ad3b56d9"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Piedmont Ave",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-2b647d85e987"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Piedmont Heights",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-7575692684a3"
+        },
+        {
+          "t": "FACT",
+          "text": "Jemeal Brim — Bakery worker — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00226",
+          "id": "F-1eafa29e0c3c"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00168",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00168\",\"name\":\"Ariana Lee\",\"role\":\"Midwife\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Piedmont Ave, what about the supplied trend \\\"Piedmont Heights restaurant on Piedmont Ave\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Piedmont Ave\",\"focus\":\"Piedmont Heights restaurant on Piedmont Ave\",\"src\":\"world_summary ## Evening Texture · Restaurants\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Ariana Lee — Midwife — Piedmont Ave\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Piedmont Heights (Piedmont Ave)\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-43f39505103f\"},{\"t\":\"FACT\",\"text\":\"Piedmont Heights appears on the evening restaurant list in Piedmont Ave.\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-c307da39b46b\"},{\"t\":\"FACT\",\"text\":\"NAMED: Piedmont Heights\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-c8d6ad3b56d9\"},{\"t\":\"FACT\",\"text\":\"HOOD: Piedmont Ave\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-2b647d85e987\"},{\"t\":\"FACT\",\"text\":\"VENUE: Piedmont Heights\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-7575692684a3\"},{\"t\":\"FACT\",\"text\":\"Ariana Lee — Midwife — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00168\",\"id\":\"F-7a8b4a96b03a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00168",
+        "name": "Ariana Lee",
+        "role": "Midwife",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Piedmont Ave, what about the supplied trend \"Piedmont Heights restaurant on Piedmont Ave\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Piedmont Ave",
+        "focus": "Piedmont Heights restaurant on Piedmont Ave",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Ariana Lee — Midwife — Piedmont Ave",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Piedmont Heights (Piedmont Ave)",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-43f39505103f"
+        },
+        {
+          "t": "FACT",
+          "text": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave.",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-c307da39b46b"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Piedmont Heights",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-c8d6ad3b56d9"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Piedmont Ave",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-2b647d85e987"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Piedmont Heights",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-7575692684a3"
+        },
+        {
+          "t": "FACT",
+          "text": "Ariana Lee — Midwife — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00168",
+          "id": "F-7a8b4a96b03a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00216",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00216\",\"name\":\"Victor Alize\",\"role\":\"Warehouse worker\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Piedmont Ave, what about the supplied trend \\\"Piedmont Heights restaurant on Piedmont Ave\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Piedmont Ave\",\"focus\":\"Piedmont Heights restaurant on Piedmont Ave\",\"src\":\"world_summary ## Evening Texture · Restaurants\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Victor Alize — Warehouse worker — Piedmont Ave\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Piedmont Heights (Piedmont Ave)\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-43f39505103f\"},{\"t\":\"FACT\",\"text\":\"Piedmont Heights appears on the evening restaurant list in Piedmont Ave.\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-c307da39b46b\"},{\"t\":\"FACT\",\"text\":\"NAMED: Piedmont Heights\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-c8d6ad3b56d9\"},{\"t\":\"FACT\",\"text\":\"HOOD: Piedmont Ave\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-2b647d85e987\"},{\"t\":\"FACT\",\"text\":\"VENUE: Piedmont Heights\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-7575692684a3\"},{\"t\":\"FACT\",\"text\":\"Victor Alize — Warehouse worker — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00216\",\"id\":\"F-511f46ea6816\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00216",
+        "name": "Victor Alize",
+        "role": "Warehouse worker",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Piedmont Ave, what about the supplied trend \"Piedmont Heights restaurant on Piedmont Ave\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Piedmont Ave",
+        "focus": "Piedmont Heights restaurant on Piedmont Ave",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Victor Alize — Warehouse worker — Piedmont Ave",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Piedmont Heights (Piedmont Ave)",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-43f39505103f"
+        },
+        {
+          "t": "FACT",
+          "text": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave.",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-c307da39b46b"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Piedmont Heights",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-c8d6ad3b56d9"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Piedmont Ave",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-2b647d85e987"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Piedmont Heights",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-7575692684a3"
+        },
+        {
+          "t": "FACT",
+          "text": "Victor Alize — Warehouse worker — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00216",
+          "id": "F-511f46ea6816"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00217",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00217\",\"name\":\"Kenton Pearl\",\"role\":\"Plumber\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Piedmont Ave, what about the supplied trend \\\"Piedmont Heights restaurant on Piedmont Ave\\\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Piedmont Ave\",\"focus\":\"Piedmont Heights restaurant on Piedmont Ave\",\"src\":\"world_summary ## Evening Texture · Restaurants\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Kenton Pearl — Plumber — Piedmont Ave\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C103\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-4ac610ea40fe\"},{\"t\":\"FACT\",\"text\":\"Piedmont Heights (Piedmont Ave)\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-43f39505103f\"},{\"t\":\"FACT\",\"text\":\"Piedmont Heights appears on the evening restaurant list in Piedmont Ave.\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-c307da39b46b\"},{\"t\":\"FACT\",\"text\":\"NAMED: Piedmont Heights\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-c8d6ad3b56d9\"},{\"t\":\"FACT\",\"text\":\"HOOD: Piedmont Ave\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-2b647d85e987\"},{\"t\":\"FACT\",\"text\":\"VENUE: Piedmont Heights\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-7575692684a3\"},{\"t\":\"FACT\",\"text\":\"Kenton Pearl — Plumber — Piedmont Ave\",\"src\":\"Simulation_Ledger profile for POP-00217\",\"id\":\"F-a62f8745f0d2\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00217",
+        "name": "Kenton Pearl",
+        "role": "Plumber",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Piedmont Ave, what about the supplied trend \"Piedmont Heights restaurant on Piedmont Ave\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Piedmont Ave",
+        "focus": "Piedmont Heights restaurant on Piedmont Ave",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Kenton Pearl — Plumber — Piedmont Ave",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C103",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-4ac610ea40fe"
+        },
+        {
+          "t": "FACT",
+          "text": "Piedmont Heights (Piedmont Ave)",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-43f39505103f"
+        },
+        {
+          "t": "FACT",
+          "text": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave.",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-c307da39b46b"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Piedmont Heights",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-c8d6ad3b56d9"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Piedmont Ave",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-2b647d85e987"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Piedmont Heights",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-7575692684a3"
+        },
+        {
+          "t": "FACT",
+          "text": "Kenton Pearl — Plumber — Piedmont Ave",
+          "src": "Simulation_Ledger profile for POP-00217",
+          "id": "F-a62f8745f0d2"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

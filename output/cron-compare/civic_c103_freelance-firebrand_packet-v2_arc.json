@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "storyline": {
+    "slug": "fruitvale-calvin-turner-anomaly",
+    "verb": "opened"
+  },
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00231",
+      "name": "Calvin Turner",
+      "quote": "I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune should ask what's really going on with the funding"
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I feel like something's off with this transit initiative stall, it's like we're not being told the whole story, and I think the Tribune should ask what's really going on behind the scenes"
+    }
+  ],
+  "claim": "I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune should ask what's really going on with the funding",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-19T18:16:05.624Z"
+}

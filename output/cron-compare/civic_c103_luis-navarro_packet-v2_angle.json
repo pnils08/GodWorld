@@ -60,24 +60,24 @@
       "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
       "nearby": [
         {
-          "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
-          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+          "text": "Avery Santana (mayor): approved — \"Eighty-six applicants shouldn’t be stuck in paperwork. We’re cutting the red tape and getting these young people to work.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         },
         {
-          "text": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
-          "src": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)"
+          "text": "Avery Santana (mayor): approved — \"Forty-five families have their money. The next seven get theirs this week—no delays, no excuses.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         },
         {
-          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
-          "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+          "text": "Avery Santana (mayor): task_force_created — \"Public safety isn’t just about response times—it’s about trust. We’re listening, and we’re acting.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         },
         {
-          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
-          "src": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)"
+          "text": "Avery Santana (mayor): bureau_review_approved — \"Fruitvale deserves a transit hub that works for the people who use it every day. We’re moving this forward.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         },
         {
-          "text": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
-          "src": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3"
+          "text": "Avery Santana (mayor): phase_one_close_approved — \"Temescal needs this health center now—not next year, not when the paperwork is perfect.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         }
       ]
     },
@@ -195,6 +195,7 @@
   "eveningSlice": null,
   "anthonySlice": null,
   "halSlice": null,
+  "simonSlice": null,
   "economicSlice": null,
   "safetySlice": null,
   "civicDomainSlice": {
@@ -373,7 +374,7 @@
   "angleRead": {
     "name": "Luis Navarro",
     "popid": "POP-00636",
-    "text": "{\n  \"focus\": \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\",\n  \"why\": \"The transit initiative carrying Fruitvale has not advanced in 9 cycles.\",\n  \"checks\": [\n    \"F-c66f9422d22f\",\n    \"F-c4b3917a7eab\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00231\",\n      \"question\": \"What has been your experience with the transit hub's progress?\",\n      \"basis\": \"assignment\"\n    },\n    {\n      \"pop\": \"POP-00744\",\n      \"question\": \"How has the stalled transit hub affected daily life in Fruitvale?\",\n      \"basis\": \"assignment\"\n    }\n  ],\n  \"interpretation\": \"The prolonged stagnation suggests a disconnect between planning and execution, raising questions about oversight and community impact.\",\n  \"unverifiedLead\": [\n    \"Potential reasons for the delay in construction-planning\",\n    \"Community sentiment towards the stalled initiative\"\n  ],\n  \"closeQuestion\": \"What steps are needed to move the Fruitvale Transit Hub Phase II forward?\"\n}",
+    "text": "{\n  \"focus\": \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\",\n  \"why\": \"The transit initiative carrying Fruitvale has not advanced in 9 cycles.\",\n  \"checks\": [\n    \"F-c66f9422d22f\",\n    \"F-c4b3917a7eab\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00231\",\n      \"question\": \"What has been your experience with the transit hub planning process?\",\n      \"basis\": \"assignment\"\n    },\n    {\n      \"pop\": \"POP-00744\",\n      \"question\": \"How has the stalled transit hub planning impacted your daily life?\",\n      \"basis\": \"assignment\"\n    }\n  ],\n  \"interpretation\": \"The prolonged delay suggests a gap in communication or action, but the record does not establish why or who is responsible.\",\n  \"unverifiedLead\": [\n    \"Is there a documented response or non-response to the stalled planning?\"\n  ],\n  \"closeQuestion\": \"What steps are needed to move the transit hub planning forward?\"\n}",
     "plan": {
       "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
       "why": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
@@ -384,70 +385,54 @@
       "targets": [
         {
           "pop": "POP-00231",
-          "question": "What has been your experience with the transit hub's progress?",
+          "question": "What has been your experience with the transit hub planning process?",
           "basis": "assignment"
         },
         {
           "pop": "POP-00744",
-          "question": "How has the stalled transit hub affected daily life in Fruitvale?",
+          "question": "How has the stalled transit hub planning impacted your daily life?",
           "basis": "assignment"
         }
       ],
-      "interpretation": "The prolonged stagnation suggests a disconnect between planning and execution, raising questions about oversight and community impact.",
+      "interpretation": "The prolonged delay suggests a gap in communication or action, but the record does not establish why or who is responsible.",
       "unverifiedLead": [
-        "Potential reasons for the delay in construction-planning",
-        "Community sentiment towards the stalled initiative"
+        "Is there a documented response or non-response to the stalled planning?"
       ],
-      "closeQuestion": "What steps are needed to move the Fruitvale Transit Hub Phase II forward?"
+      "closeQuestion": "What steps are needed to move the transit hub planning forward?"
     }
   },
   "lanePicks": [
     {
-      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
-      "kind": "anomaly",
-      "hood": "Fruitvale",
-      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-      "popids": [
-        "POP-00231",
-        "POP-00598",
-        "POP-00744"
-      ]
-    },
-    {
-      "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
-      "kind": "anomaly",
-      "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "label": "Avery Santana (mayor): approved — \"Eighty-six applicants shouldn’t be stuck in paperwork. We’re cutting the red tape and getting these young people to work.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
       "popids": []
     },
     {
-      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
-      "kind": "anomaly",
-      "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "label": "Avery Santana (mayor): approved — \"Forty-five families have their money. The next seven get theirs this week—no delays, no excuses.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
       "popids": []
     },
     {
-      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
-      "kind": "anomaly",
-      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
-      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
-      "popids": [
-        "POP-00010",
-        "POP-00039",
-        "POP-00635"
-      ]
+      "label": "Avery Santana (mayor): task_force_created — \"Public safety isn’t just about response times—it’s about trust. We’re listening, and we’re acting.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "popids": []
     },
     {
-      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
-      "kind": "anomaly",
-      "hood": "West Oakland, Fruitvale, East Oakland",
-      "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
-      "popids": [
-        "POP-00758",
-        "POP-00771",
-        "POP-00773"
-      ]
+      "label": "Avery Santana (mayor): bureau_review_approved — \"Fruitvale deserves a transit hub that works for the people who use it every day. We’re moving this forward.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor): phase_one_close_approved — \"Temescal needs this health center now—not next year, not when the paperwork is perfect.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "popids": []
     }
   ],
-  "laneEntries": 32,
-  "ranAt": "2026-08-13T11:16:54.979Z"
+  "laneEntries": 66,
+  "ranAt": "2026-08-18T11:15:38.582Z"
 }

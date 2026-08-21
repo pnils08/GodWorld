@@ -1,5 +1,5 @@
 {
-  "model": "deepseek/deepseek-chat",
+  "model": "anthropic/claude-sonnet-5",
   "calls": [],
-  "ranAt": "2026-08-14T23:15:24.044Z"
+  "ranAt": "2026-08-18T23:19:07.384Z"
 }

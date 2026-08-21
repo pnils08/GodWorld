@@ -1,0 +1,167 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00503",
+    "name": "Rose Delgado",
+    "role": "City Council District 3",
+    "officeId": "COUNCIL-D3",
+    "district": "D3",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d3",
+    "initiative": null,
+    "dials": {
+      "approval": 83
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "stand with San Antonio or leave it"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 228.62727272727273,
+    "label": "San Antonio — sentiment 0.42 vs city 0.510",
+    "lever": "stand with San Antonio or leave it",
+    "hood": "San Antonio",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.42,
+      "citySentiment": 0.5099999999999999,
+      "crime": 0.79,
+      "cityCrime": 0.7086363636363636,
+      "heat": 28.627272727272718,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "stand with San Antonio or leave it",
+    "lineFacts": [
+      "approval 83",
+      "San Antonio: sentiment 0.42 vs city 0.510; crime index 0.79 vs city 0.709; decay momentum 3; decay momentum 3",
+      "San Antonio: sentiment 0.42 vs city 0.510; crime index 0.79 vs city 0.709; decay momentum 3; retail 5.31; housing pressure 0; decay; momentum 3"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Fruitvale",
+      "San Antonio"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00796",
+        "name": "Dank Abara",
+        "neighborhood": "San Antonio",
+        "role": "Waiter",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment 0.42 vs city 0.510"
+      },
+      {
+        "pop": "POP-01054",
+        "name": "Delia Vargas-Ruiz",
+        "neighborhood": "San Antonio",
+        "role": "Transit Hub D3 Intake Liaison",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment 0.42 vs city 0.510"
+      },
+      {
+        "pop": "POP-00778",
+        "name": "Jamal Thompson",
+        "neighborhood": "San Antonio",
+        "role": "Fan & Culture Columnist, OakTown Echo",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in San Antonio — San Antonio — sentiment 0.42 vs city 0.510"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D3",
+      "t": "FACT",
+      "text": "Rose Delgado holds COUNCIL-D3 at approval 83",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-SanAntonio",
+      "t": "FACT",
+      "text": "San Antonio: sentiment 0.42 vs city 0.510; crime index 0.79 vs city 0.709; decay momentum 3; decay momentum 3",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-hood-SanAntonio",
+      "t": "FACT",
+      "text": "San Antonio: sentiment 0.42 vs city 0.510; crime index 0.79 vs city 0.709; decay momentum 3; retail 5.31; housing pressure 0; decay; momentum 3",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Approval": "83"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

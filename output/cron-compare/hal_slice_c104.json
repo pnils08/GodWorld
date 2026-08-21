@@ -1,0 +1,221 @@
+{
+  "empty": false,
+  "cycle": 104,
+  "kind": "hal-archive",
+  "desk": "sports",
+  "journalist": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007",
+    "persona": "hal-richmond",
+    "bagDoc": "docs/media/HAL_ARCHIVE_BAG.md"
+  },
+  "pulse": {
+    "className": "era-door",
+    "score": 81,
+    "label": "A's — player-feature — supplied C104 line card",
+    "team": "A's",
+    "eventKind": "player-feature",
+    "seasonType": "late-season",
+    "storyAngle": "Pablo the Picasso shines again.",
+    "hasStats": true,
+    "record": "126-35",
+    "streak": "W2",
+    "foilNumber": "9IP",
+    "closingNote": "break of continuity",
+    "feedCycle": 104
+  },
+  "bag": {
+    "modes": [
+      {
+        "id": 1,
+        "name": "Era Comparison"
+      },
+      {
+        "id": 8,
+        "name": "Legacy Guarantee Piece"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "closingNote": "break of continuity",
+    "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity."
+  },
+  "friction": {
+    "a": "Present feed fact: Pablo the Picasso shines again.",
+    "b": "Wire copy / FO strategy / bleacher heat that skips time",
+    "frame": "Present first, then echo — end on break of continuity."
+  },
+  "prewrite": {
+    "reporter": "Hal Richmond",
+    "bagModes": [
+      {
+        "id": 1,
+        "name": "Era Comparison"
+      },
+      {
+        "id": 8,
+        "name": "Legacy Guarantee Piece"
+      }
+    ],
+    "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+    "presentFacts": [
+      "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+      "Team record (feed): 126-35 · streak W2",
+      "Event (feed): A's — player-feature (late-season)",
+      "Cycle: C104"
+    ],
+    "dossierFacts": [
+      "NONE — offline slice; use packet TrueSource only if wake supplies"
+    ],
+    "closingNote": "break of continuity",
+    "priorFiling": "NONE — wall may still inject at wake",
+    "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity.",
+    "foilNumber": "9IP",
+    "missing": [
+      "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+      "No invented seasons or franchise history beyond packet + feed",
+      "No x-stats / barrel% / invented OPS+",
+      "Not a business-desk storefront assignment",
+      "Not P Slayer charge; not Anthony board architecture as spine"
+    ]
+  },
+  "priorTakes": [],
+  "story": {
+    "angle": "What the supplied C104 line card establishes, and what history remains unsupplied.",
+    "label": "A's — player-feature — supplied C104 line card",
+    "hookLine": "A's — player-feature — supplied C104 line card",
+    "hood": "Baylight District",
+    "pulseClass": "era-door",
+    "team": "A's",
+    "eventKind": "player-feature",
+    "closingNote": "break of continuity",
+    "citizens": [
+      "Vinnie Keane (POP-00001)"
+    ],
+    "popids": [
+      "POP-00001"
+    ],
+    "ref": "world_summary_c104.md ## Sports",
+    "cycle": 104
+  },
+  "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+  "players": [
+    {
+      "name": "Pablo Almanzar",
+      "popid": null,
+      "role": null,
+      "neighborhood": null,
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "neighborhood": "Baylight District",
+    "record": "126-35",
+    "streak": "W2",
+    "colorRoom": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat."
+  },
+  "candidates": [
+    {
+      "score": 81,
+      "cycle": 104,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Pablo the Picasso shines again.",
+      "priorHits": 0
+    },
+    {
+      "score": 73,
+      "cycle": 102,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging ",
+      "priorHits": 0
+    },
+    {
+      "score": 69,
+      "cycle": 104,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": false,
+      "angle": "As dominate the award race boards. Next cycle to reveal award winners and final season stats.",
+      "priorHits": 0
+    },
+    {
+      "score": 69,
+      "cycle": 102,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": true,
+      "angle": "As players amongst the elite this award season, Danny Horn, Eric Taveras, Isley Kelley, Ernesto Quin",
+      "priorHits": 0
+    },
+    {
+      "score": 65,
+      "cycle": 102,
+      "team": "A's",
+      "primary": "threshold",
+      "hasStats": true,
+      "angle": "The Kids are Alright. Kevin Clark and Sidney Tumolo more than fill the gap production wise but will ",
+      "priorHits": 0
+    },
+    {
+      "score": 63,
+      "cycle": 104,
+      "team": "A's",
+      "primary": "era-door",
+      "hasStats": false,
+      "angle": "Happy NYE",
+      "priorHits": 0
+    },
+    {
+      "score": 60,
+      "cycle": 103,
+      "team": "A's",
+      "primary": "threshold",
+      "hasStats": true,
+      "angle": "Pablo Almanzar throws a No No in his MLB debut",
+      "priorHits": 0
+    },
+    {
+      "score": 55,
+      "cycle": 104,
+      "team": "Oaks",
+      "primary": "quiet-road",
+      "hasStats": true,
+      "angle": "The Oaks fall to 0-2, AJ shines while Stanley on precaution.",
+      "priorHits": 0
+    },
+    {
+      "score": 54,
+      "cycle": 102,
+      "team": "A's",
+      "primary": "threshold",
+      "hasStats": true,
+      "angle": "Frank Reyna (RF), Pabla Almanzar (SP) are the late season call ups for the As",
+      "priorHits": 0
+    },
+    {
+      "score": 53,
+      "cycle": 104,
+      "team": "A's",
+      "primary": "season-tide",
+      "hasStats": true,
+      "angle": "What a Relief, Benji Dillon",
+      "priorHits": 0
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c104.md ## Sports",
+    "docs/media/HAL_ARCHIVE_BAG.md",
+    "scripts/sportsSubstrate.js",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5"
+  ]
+}

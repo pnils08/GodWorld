@@ -1,0 +1,29 @@
+{
+  "mode": "wake-write",
+  "desk": "business",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.5-flash",
+  "persona": "business-desk",
+  "byline": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "beatDomain": "ECONOMIC"
+  },
+  "laneEntries": 19,
+  "quotesLanded": 2,
+  "disposition": "flagged",
+  "rheaPass": false,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-20T23:21:43.559Z"
+}

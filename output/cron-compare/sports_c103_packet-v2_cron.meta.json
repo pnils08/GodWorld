@@ -1,17 +1,17 @@
 {
   "desk": "sports",
   "cycle": "103",
-  "model": "meta-llama/llama-3.3-70b-instruct",
+  "model": "deepseek/deepseek-chat",
   "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 7723,
-  "usageOutputTokens": 607,
+  "usageInputTokens": 8679,
+  "usageOutputTokens": 532,
   "savedFiles": [
-    "output/cron-compare/sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.md"
+    "output/cron-compare/sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat.md"
   ],
   "compareAgainst": "output/desk-output/sports_c103.md",
-  "durationMs": 8552,
+  "durationMs": 13570,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-08-11T23:17:27.935Z"
+  "ranAt": "2026-08-18T23:22:11.234Z"
 }

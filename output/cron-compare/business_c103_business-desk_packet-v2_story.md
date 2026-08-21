@@ -9,8 +9,8 @@
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
-  "focus": "Dimond's cooling retail scene and its impact on local storefronts",
-  "why": "Foot traffic is down and storefronts are quieter compared to other parts of the city, signaling a shift in economic activity.",
+  "focus": "Dimond's cooling storefronts and reduced foot traffic",
+  "why": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
   "checks": [
     "F-2c3c1b14061a",
     "F-5967d0383c65",
@@ -18,16 +18,16 @@
     "F-68dbfc1e6fba",
     "F-c40d99359f50"
   ],
-  "targets": [
-    {
-      "pop": "POP-00730",
-      "question": "Have you noticed a change in foot traffic around Dimond's storefronts recently?",
-      "basis": "same-hood-ledger"
-    }
-  ],
-  "interpretation": "The dip in retail vitality suggests a broader cooling trend in Dimond, possibly tied to shifting consumer habits or economic pressures.",
+  "targets": [],
+  "interpretation": "The Dimond neighborhood is experiencing a noticeable decline in retail vitality, with quieter storefronts and less foot traffic compared to other areas in the city.",
   "unverifiedLead": [
-    "Are there specific businesses in Dimond that are bucking the trend or adapting in unique ways?"
+    "Potential causes for the cooling trend in Dimond"
   ],
-  "closeQuestion": "What does this cooling trend mean for Dimond's identity as a neighborhood?"
+  "closeQuestion": "What factors are contributing to Dimond's cooling retail scene?"
 }
+## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
+- Melton Neilon (POP-00170): "I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan."
+- Rick Walker (POP-00198): "I don't get over to Dimond much these days, but hearing shops are slowing down there makes me worry about the whole area. The Tribune should ask if this is just a summer slump or something deeper, like rents pushing folks out."
+- Elio Perez (POP-00201): "I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should ask what’s driving people away and what can be done to bring them back."
+- Depak Ying (POP-00210): "I've heard folks talking about how Dimond's not as lively as it used to be—fewer people out shopping, more empty storefronts. Makes me wonder if rents are pushing out the small businesses that gave the neighborhood its charm."
+

@@ -1,0 +1,402 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "104",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00155",
+      "name": "Trevor Shimizu",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "approach": "Systems approach: trace the supplied infrastructure or transit fact through timeline, place, and implementation state. Dry, technical, and record-backed.",
+      "creativeBrief": {
+        "kind": "infrastructure-systems",
+        "method": "INCIDENT_LINK_WARNING",
+        "missing": [
+          "timestamp and duration unless supplied by the source",
+          "second system fact and evidence linking it to the assigned condition",
+          "responsible agency, maintenance action, capacity, load, or service effect unless named by the source"
+        ],
+        "cascade": {
+          "state": "UNESTABLISHED",
+          "facts": [],
+          "link": null,
+          "src": null
+        },
+        "forbidden": [
+          "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Temescal",
+      "score": null,
+      "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "nearby": [
+        {
+          "text": "Rose Delgado (City Council District 3): Community commitment reinforced",
+          "src": "output/cron-civic/datawake/civic-office-council-d3_2026-08-20.json"
+        },
+        {
+          "text": "Janae Rivers (City Council District 5): 12",
+          "src": "output/cron-civic/datawake/civic-office-council-d5_2026-08-20.json"
+        },
+        {
+          "text": "Warren Ashford (City Council District 7): KONO's numbers tell a clear story—lower sentiment but also lower crime than city averages. Before we",
+          "src": "output/cron-civic/datawake/civic-office-council-d7_2026-08-20.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+          "src": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+          "src": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00745",
+          "name": "Sonia Parikh (POP-00745)",
+          "profile": "Sonia Parikh (POP-00745)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00761",
+          "name": "Idris Karim (POP-00761)",
+          "profile": "Idris Karim (POP-00761)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00775",
+          "name": "Sam Alvarez (POP-00775)",
+          "profile": "Sam Alvarez (POP-00775)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Temescal"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+        "id": "F-5327cda5209b"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "label": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "kind": "anomaly",
+      "angle": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "hookLine": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "hood": "Temescal",
+      "popids": [
+        "POP-00745",
+        "POP-00761",
+        "POP-00775"
+      ],
+      "citizens": [
+        "Sonia Parikh (POP-00745)",
+        "Idris Karim (POP-00761)",
+        "Sam Alvarez (POP-00775)"
+      ]
+    },
+    "approach": "Systems approach: trace the supplied infrastructure or transit fact through timeline, place, and implementation state. Dry, technical, and record-backed."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "trevor-shimizu",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "domain": "infrastructure-transit"
+    },
+    "pulse": {
+      "className": "infrastructure-transit",
+      "score": 45,
+      "label": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "hood": "Temescal",
+      "source": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "The civic initiative carrying Temescal has not advanced in 1 cycles."
+      ],
+      "forbidden": [
+        "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
+      ],
+      "schema": "SYSTEMS-BRIEF-1",
+      "method": "INCIDENT_LINK_WARNING",
+      "missing": [
+        "timestamp and duration unless supplied by the source",
+        "second system fact and evidence linking it to the assigned condition",
+        "responsible agency, maintenance action, capacity, load, or service effect unless named by the source"
+      ],
+      "cascade": {
+        "state": "UNESTABLISHED",
+        "facts": [],
+        "link": null,
+        "src": null
+      }
+    },
+    "candidates": [
+      {
+        "score": 45,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+        "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00745",
+          "POP-00761",
+          "POP-00775"
+        ],
+        "angle": "Temescal Community Health Center stalled in construction-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "citizens": [
+          "Sonia Parikh (POP-00745)",
+          "Idris Karim (POP-00761)",
+          "Sam Alvarez (POP-00775)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 2
+      },
+      {
+        "score": 45,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: construction-planning → visioning-complete",
+        "ref": "output/engine_audit_c104.json patterns[15]; evidence: Initiative_Tracker row(s) 4",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00762",
+          "POP-00766",
+          "POP-00774"
+        ],
+        "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from construction-planning to visioning-complete — what the milestone delivers and who carried it",
+        "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from construction-planning to visioning-complete; a milestone worth covering, not burying.",
+        "citizens": [
+          "Aziz Rahimi (POP-00762)",
+          "Manjit Singh (POP-00766)",
+          "Malik Hayes (POP-00774)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 15
+      },
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Status visioning-complete | phase visioning-complete",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "hood": "Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 23
+      },
+      {
+        "score": 45,
+        "kind": "vote",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Design phase kickoff C105",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 24
+      },
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Temescal Community Health Center | Status passed | phase construction-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "hood": "Temescal",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 25
+      },
+      {
+        "score": 45,
+        "kind": "vote",
+        "label": "Temescal Community Health Center | Phase 2 construction progress review C104",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 26
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "output/engine_audit_c104.json patterns[15]; evidence: Initiative_Tracker row(s) 4",
+      "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-003)",
+      "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-005)"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "text": "{\n  \"focus\": \"The stalled civic initiative in Temescal\",\n  \"why\": \"Needs to trace why this specific infrastructure project hasn't moved forward when others have\",\n  \"checks\": [\n    \"Verify last recorded action on Temescal initiative\",\n    \"Cross-reference with district council member statements\",\n    \"Check for any maintenance logs or service bulletins mentioning Temescal\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00745\",\n      \"question\": \"What's the most recent movement you've observed on the Temescal initiative?\",\n      \"basis\": \"assignment\"\n    },\n    {\n      \"pop\": \"POP-00761\",\n      \"question\": \"Have you noticed any patterns in how these initiatives get stalled?\",\n      \"basis\": \"assignment\"\n    }\n  ],\n  \"interpretation\": \"Single-cycle stagnation suggests procedural delay rather than systemic failure, but needs verification\",\n  \"unverifiedLead\": [\n    \"Possible linkage to District 3 council member's recent community commitment focus\",\n    \"Potential resource allocation shift toward higher-profile districts\"\n  ],\n  \"closeQuestion\": \"Is this delay symptomatic or isolated?\"\n}",
+    "plan": {
+      "focus": "The stalled civic initiative in Temescal",
+      "why": "Needs to trace why this specific infrastructure project hasn't moved forward when others have",
+      "checks": [
+        "Verify last recorded action on Temescal initiative",
+        "Cross-reference with district council member statements",
+        "Check for any maintenance logs or service bulletins mentioning Temescal"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00745",
+          "question": "What's the most recent movement you've observed on the Temescal initiative?",
+          "basis": "assignment"
+        },
+        {
+          "pop": "POP-00761",
+          "question": "Have you noticed any patterns in how these initiatives get stalled?",
+          "basis": "assignment"
+        }
+      ],
+      "interpretation": "Single-cycle stagnation suggests procedural delay rather than systemic failure, but needs verification",
+      "unverifiedLead": [
+        "Possible linkage to District 3 council member's recent community commitment focus",
+        "Potential resource allocation shift toward higher-profile districts"
+      ],
+      "closeQuestion": "Is this delay symptomatic or isolated?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Rose Delgado (City Council District 3): Community commitment reinforced",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d3_2026-08-20.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Janae Rivers (City Council District 5): 12",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d5_2026-08-20.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Warren Ashford (City Council District 7): KONO's numbers tell a clear story—lower sentiment but also lower crime than city averages. Before we",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d7_2026-08-20.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    }
+  ],
+  "laneEntries": 51,
+  "ranAt": "2026-08-20T11:15:37.891Z"
+}

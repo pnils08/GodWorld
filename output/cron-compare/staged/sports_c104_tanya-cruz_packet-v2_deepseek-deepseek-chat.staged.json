@@ -1,0 +1,34 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "104",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+        "sourceRef": "world_summary_c104.md ## Sports"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-3c413852fd13",
+    "draftSha256": "76303cdb5f90624153ba1e96784a35c9507dcc0abf1a5592378aeb93df782e7b",
+    "verdict": "output/cron-compare/sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-20T23:17:37.106Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-20T23:17:37.614Z"
+}

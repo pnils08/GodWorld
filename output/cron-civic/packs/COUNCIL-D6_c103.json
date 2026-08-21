@@ -9,7 +9,7 @@
     "officeId": "COUNCIL-D6",
     "district": "D6",
     "faction": "CRC",
-    "agentDir": "civic-office-crc-faction",
+    "agentDir": "civic-office-council-d6",
     "initiative": null,
     "dials": {
       "approval": 54
@@ -58,15 +58,6 @@
   "exposure": {
     "subjects": [
       {
-        "pop": "POP-00132",
-        "name": "Tobias Jurko",
-        "neighborhood": "Piedmont Ave",
-        "role": "Landscape Architect",
-        "tier": 4,
-        "src": "output/simulation_ledger_snapshot.jsonl",
-        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.38 vs city 0.489"
-      },
-      {
         "pop": "POP-00168",
         "name": "Ariana Lee",
         "neighborhood": "Piedmont Ave",
@@ -89,6 +80,15 @@
         "name": "Kenton Pearl",
         "neighborhood": "Piedmont Ave",
         "role": "Plumber",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.38 vs city 0.489"
+      },
+      {
+        "pop": "POP-00226",
+        "name": "Jemeal Brim",
+        "neighborhood": "Piedmont Ave",
+        "role": "Bakery worker",
         "tier": 4,
         "src": "output/simulation_ledger_snapshot.jsonl",
         "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.38 vs city 0.489"

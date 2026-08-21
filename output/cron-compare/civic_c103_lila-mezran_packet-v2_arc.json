@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "storyline": {
+    "slug": "temescal-melton-neilon-initiative",
+    "verb": "opened"
+  },
+  "hood": "Temescal",
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I keep hearing about this health center coming in, but nobody's talking about parking—where are all those extra cars gonna go when my customers are already circling the block for a spot? Ask them how they're gonna keep Temescal from turning into a traffic nightmare."
+    },
+    {
+      "pop": "POP-00269",
+      "name": "Kevin Nelson",
+      "quote": "I keep hearing about this health center coming in, but nobody's talking about how working folks like me are supposed to get there during lunch rush or after a double shift. Ask who it's really built for—people with flexible hours or the ones burning the candle at both ends?"
+    },
+    {
+      "pop": "POP-00666",
+      "name": "Kaila Raimon",
+      "quote": "I keep hearing about the health center construction, but nobody's talking about whether it'll actually have enough doctors who speak Spanish and Vietnamese—half my customers at the bakery are immigrants who need that."
+    }
+  ],
+  "claim": "I keep hearing about this health center coming in, but nobody's talking about parking—where are all those extra cars gonna go when my customers are already circling the block for a spot? Ask them how they're gonna keep Temescal from turning into a traffic nightmare.",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-17T18:16:40.122Z"
+}

@@ -15,8 +15,11 @@ disable-model-invocation: true
 ## Run (canonical — automates scans 0/1/2/5)
 
 ```bash
-node scripts/preMortemScan.js                  # since = SESSION_CONTEXT "Last Updated"
-node scripts/preMortemScan.js --since=2026-05-09   # explicit window (last cycle's ship date)
+# CHAT-COST RULE (Mike-direct 2026-08-19, S383): NEVER let the scan print into the
+# transcript — redirect to a file. Chat gets ONE line: verdict + file path. Nothing else.
+node scripts/preMortemScan.js > output/pre_mortem_scan.txt 2>&1; echo "exit=$? -> output/pre_mortem_scan.txt"
+node scripts/preMortemScan.js --since=2026-05-09 > output/pre_mortem_scan.txt 2>&1; echo "exit=$? -> output/pre_mortem_scan.txt"   # explicit window (last cycle's ship date)
+# Then Read/grep the file for CRITICAL/RECOMMENDATION lines only — never cat it whole.
 ```
 
 The script (ES-7 / G-PM7) runs scans **0, 1, 2, 5** deterministically, driven by the data file `.claude/skills/pre-mortem/known_gaps.json` (function-name-keyed acknowledged sites — update the JSON with code changes, never skill prose). **Exit codes:** `0` SAFE TO RUN (no CRITICAL) · `1` FIX BEFORE RUNNING (≥1 CRITICAL) · `2` scan error. Stop the cycle on exit 1.

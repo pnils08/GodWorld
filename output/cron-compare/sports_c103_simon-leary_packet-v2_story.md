@@ -10,34 +10,26 @@
 
 ## §2 THE REPORTER'S PLAN (wake 1, their own voice)
 {
-  "focus": "Benji Dillon's move to the bullpen amidst the A's historic 124-34 season",
-  "why": "A role change within a sustained team record offers a lens into structural continuity rather than organizational intent or franchise history",
+  "focus": "Benji Dillon's role change to the bullpen",
+  "why": "The A's record is 124-34, and Dillon's move raises questions about continuity and load management within a sustained team performance.",
   "checks": [
-    "Does this interpretation rely solely on supplied facts?",
-    "Does it avoid inventing new people, events, or institutions?",
-    "Does it maintain the long-view approach without recapping games or speculating on intentions?"
+    "Does the role change reflect a strategic adjustment or a necessity?",
+    "How does this shift align with the team's current momentum?"
   ],
   "targets": [
     {
       "pop": "POP-00018",
-      "question": "How does Benji Dillon perceive this role shift within the context of the team's current dominance?",
-      "basis": "As a key player undergoing a visible change during a historic run, his personal perspective could reveal how individuals adapt within structural continuity"
+      "question": "What does Benji Dillon's move to the bullpen signify about his role in the team's structure?",
+      "basis": "Benji Dillon is moving to the bullpen for the remainder of the season."
     }
   ],
-  "interpretation": "The bullpen move isn't a fracture but a redistribution of load—like a beam shifted in a sound structure to bear weight differently without compromising the whole",
+  "interpretation": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
   "unverifiedLead": [
-    "Whether this move reflects a planned preservation of Dillon's arm for postseason",
-    "If the clubhouse sees this as a temporary adjustment or a longer-term evolution of his role"
+    "Is this move a response to specific performance metrics or a broader strategic shift?",
+    "How does Dillon's transition impact the team's pitching dynamics?"
   ],
-  "closeQuestion": "What does sustained excellence demand of its individual parts when the machine hums this smoothly?"
+  "closeQuestion": "What does this adjustment reveal about the A's approach to maintaining their current momentum?"
 }
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
-- Benji Dillon (POP-00018): "To me, moving to the bullpen is about doing whatever it takes to help this team finish strong and make history together."
-
-## §4 THE ARTICLE (wake 3)
-- draft: output/cron-compare/staged/sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat.staged.md
-- disposition: staged
-- rhea: PASS
-- self-score footer: present
-- tool use: none
+- Vanessa Ramas (POP-01045): "I don't follow baseball too closely, but moving a pitcher to the bullpen when the team's winning so much seems odd. Shouldn't they keep doing what's working?"
 

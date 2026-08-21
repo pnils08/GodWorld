@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "storyline": {
+    "slug": "fruitvale-clarissa-dane-undocked",
+    "verb": "opened"
+  },
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00143",
+      "name": "Clarissa Dane",
+      "quote": "I feel like there's something missing in the way my episode is being reported, it doesn't quite capture the complexity of what's going on in Fruitvale. I think the Tribune should ask more questions about how the community is really being affected."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I feel like something's off about this whole Clarissa Dane thing, it's just a vibe I get when I'm out and about in Fruitvale, and I think the Tribune should ask what's really going on behind the scenes."
+    },
+    {
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I'm not sure what to make of this Clarissa Dane's UNDOCKED episode, it just feels off, like something isn't being said, and I think the Tribune should ask what's really going on behind the scenes."
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I feel like something's off about Clarissa Dane's UNDOCKED episode because it doesn't seem to be settling in with people around here, and I think the Tribune should ask what's really going on beneath the surface."
+    }
+  ],
+  "claim": "I feel like there's something missing in the way my episode is being reported, it doesn't quite capture the complexity of what's going on in Fruitvale. I think the Tribune should ask more questions about how the community is really being affected.",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-19T18:22:21.991Z"
+}

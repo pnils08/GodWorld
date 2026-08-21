@@ -1,0 +1,188 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00504",
+    "name": "Warren Ashford",
+    "role": "City Council District 7",
+    "officeId": "COUNCIL-D7",
+    "district": "D7",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d7",
+    "initiative": null,
+    "dials": {
+      "approval": 47
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "stand with KONO or leave it"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 218,
+    "label": "KONO — sentiment 0.33 vs city 0.510",
+    "lever": "stand with KONO or leave it",
+    "hood": "KONO",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.33,
+      "citySentiment": 0.5099999999999999,
+      "crime": 0.57,
+      "cityCrime": 0.7086363636363636,
+      "heat": 17.99999999999999,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "stand with KONO or leave it",
+    "lineFacts": [
+      "approval 47",
+      "KONO: sentiment 0.33 vs city 0.510; crime index 0.57 vs city 0.709; steady momentum 6",
+      "KONO crime: property 38, violent 28, incidents 6 (cycle 104) — city property 40.6, violent 33.5, incidents 6.4",
+      "KONO: sentiment 0.33 vs city 0.510; crime index 0.57 vs city 0.709; retail 7.3; housing pressure 1; steady; momentum 6"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Temescal",
+      "Rockridge",
+      "KONO"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00802",
+        "name": "Funmi Shah",
+        "neighborhood": "KONO",
+        "role": "Glazier",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in KONO — KONO — sentiment 0.33 vs city 0.510"
+      },
+      {
+        "pop": "POP-00808",
+        "name": "Sahana Joshi",
+        "neighborhood": "KONO",
+        "role": "Elevator Mechanic",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in KONO — KONO — sentiment 0.33 vs city 0.510"
+      },
+      {
+        "pop": "POP-00815",
+        "name": "Amal Nair",
+        "neighborhood": "KONO",
+        "role": "Physical Therapist",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in KONO — KONO — sentiment 0.33 vs city 0.510"
+      },
+      {
+        "pop": "POP-00845",
+        "name": "Crystal Oh",
+        "neighborhood": "KONO",
+        "role": "Theater Director",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in KONO — KONO — sentiment 0.33 vs city 0.510"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D7",
+      "t": "FACT",
+      "text": "Warren Ashford holds COUNCIL-D7 at approval 47",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-KONO",
+      "t": "FACT",
+      "text": "KONO: sentiment 0.33 vs city 0.510; crime index 0.57 vs city 0.709; steady momentum 6",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-KONO",
+      "t": "FACT",
+      "text": "KONO crime: property 38, violent 28, incidents 6 (cycle 104) — city property 40.6, violent 33.5, incidents 6.4",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-KONO",
+      "t": "FACT",
+      "text": "KONO: sentiment 0.33 vs city 0.510; crime index 0.57 vs city 0.709; retail 7.3; housing pressure 1; steady; momentum 6",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-chaos-cop_car-neighborhood KONO",
+      "t": "FACT",
+      "text": "cop_car pulled_over_warning → neighborhood KONO CrimeIndex -0.09",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-we-1",
+      "t": "FACT",
+      "text": "INFRASTRUCTURE — crisis-spike — KONO: INFRASTRUCTURE event (impactScore 36)",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Approval": "47"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Faction": "CRC",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

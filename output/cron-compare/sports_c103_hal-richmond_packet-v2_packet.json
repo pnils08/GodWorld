@@ -1,0 +1,529 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "103",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C103 line card establishes, and what history remains unsupplied.",
+      "label": "A's — player-feature — supplied C103 line card",
+      "hookLine": "A's — player-feature — supplied C103 line card",
+      "hood": "Downtown",
+      "pulseClass": "threshold",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "closingNote": "threshold crossed",
+      "citizens": [
+        "Vinnie Keane (POP-00001)"
+      ],
+      "popids": [
+        "POP-00001"
+      ],
+      "ref": "world_summary_c103.md ## Sports",
+      "cycle": 103
+    }
+  },
+  "angle": "output/cron-compare/sports_c103_hal-richmond_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": null,
+      "disp": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, the A's player-feature trend means the team is getting attention for our individual players' skills and contributions, and I think the Tribune should ask next about how we balance individual recognition with our team's overall goals and strategy.\",\n  \"fact_ids\": [\"F-a93b6b4ddbd5\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"How does the team's focus on player development impact our chances in the postseason?\"\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "What does the supplied trend \"A's player-feature\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Downtown",
+          "focus": "A's player-feature",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C103 line card",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a93b6b4ddbd5"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-f9190a7c60c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 124-34 · streak W15",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a2d2b18f12fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-5f3ac04095b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C103",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-d8611cde1e4d"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-07329a4afe85"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the A's player-feature trend is off because it seems too focused on individual players, what I'd like to know is how the team's overall strategy is going to change with this new focus\",\n  \"fact_ids\": [\"F-a93b6b4ddbd5\", \"F-f9190a7c60c2\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"How will the A's player-feature impact the team's performance in the long run?\"\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "As a resident of Downtown, what about the supplied trend \"A's player-feature\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Downtown",
+          "focus": "A's player-feature",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C103 line card",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a93b6b4ddbd5"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-f9190a7c60c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 124-34 · streak W15",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a2d2b18f12fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-5f3ac04095b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C103",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-d8611cde1e4d"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00224",
+      "name": "Dillon Trevor",
+      "quote": null,
+      "disp": "magnetic, center of every room; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the A's player-feature trend is getting a bit too much attention, it's like everyone's forgetting about the team as a whole. I think the Tribune should ask what's behind this focus on individual players, is it just a way to fill columns or is there something more to it?\",\n  \"fact_ids\": [\"F-a93b6b4ddbd5\", \"F-5f3ac04095b3\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"Maybe the Tribune could look into how this trend is affecting the team's overall performance\"\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00224",
+          "name": "Dillon Trevor",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "As a resident of Downtown, what about the supplied trend \"A's player-feature\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Downtown",
+          "focus": "A's player-feature",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dillon Trevor — Server — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C103 line card",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a93b6b4ddbd5"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-f9190a7c60c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 124-34 · streak W15",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a2d2b18f12fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-5f3ac04095b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C103",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-d8611cde1e4d"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Trevor — Server — Downtown",
+            "src": "Simulation_Ledger profile for POP-00224",
+            "id": "F-80fac7a0ad63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00225",
+      "name": "Andre Turner",
+      "quote": null,
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
+      "raw": "``!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! \n{\"answer\": \"quote\", \n\"quote\": \"I feel!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! like something's missing when I hear about the A's player-feature, it's all good news but it doesn't feel like the whole story, I think the Tribune should ask what's behind the numbers, what's driving their success\", \n\"fact_ids\": [\"F-a93b6b4ddbd5\", \"F-f9190a7c60c2\", \"F-a2d2b18f12fe\"], \n\"basis\": \"direct-reaction\", \n\"unverifiedLead\": \"Maybe there's more to the team's streak than just the players, maybe it's the coaches or the training staff, I don't know but it feels like there's something more to it\"}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00225",
+          "name": "Andre Turner",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "As a resident of Downtown, what about the supplied trend \"A's player-feature\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Downtown",
+          "focus": "A's player-feature",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Andre Turner — Line cook — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C103 line card",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a93b6b4ddbd5"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-f9190a7c60c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 124-34 · streak W15",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-a2d2b18f12fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-5f3ac04095b3"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C103",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-d8611cde1e4d"
+          },
+          {
+            "t": "FACT",
+            "text": "Andre Turner — Line cook — Downtown",
+            "src": "Simulation_Ledger profile for POP-00225",
+            "id": "F-f8810d7815e2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-19T18:18:21.194Z"
+}

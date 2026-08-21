@@ -1,0 +1,860 @@
+{
+  "empty": false,
+  "cycle": 104,
+  "kind": "economic-storefront",
+  "pulse": {
+    "className": "retail-decay",
+    "score": 28,
+    "label": "Grand Lake retail decay",
+    "hood": "Grand Lake",
+    "namedBusinesses": [],
+    "retail": null,
+    "retailDelta": -5.03
+  },
+  "story": {
+    "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+    "label": "Grand Lake retail decay",
+    "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+    "hood": "Grand Lake",
+    "pulseClass": "retail-decay",
+    "namedBusinesses": [],
+    "citizens": [],
+    "popids": [],
+    "ref": "world_summary ## Engine Review · math-imbalance",
+    "cycle": 104
+  },
+  "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.",
+  "prewrite": {
+    "pulseClass": "retail-decay",
+    "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+    "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+    "namedBusinesses": [],
+    "anchorFacts": [
+      "HOOD: Grand Lake",
+      "RETAIL DELTA (do not lead with decimal): -5.03",
+      "NAMED: none — do not invent storefronts",
+      "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500"
+    ],
+    "forbidden": [
+      "Do not invent Employee_Count",
+      "Do not invent Key_Personnel",
+      "Do not invent storefronts not on ledger or evening texture",
+      "Do not lead with raw RetailVitality decimals — translate to scene"
+    ]
+  },
+  "texture": {
+    "hoodCount": 22,
+    "rising": [
+      "Grand Lake"
+    ],
+    "cooling": [
+      "Piedmont Ave"
+    ],
+    "venues": [
+      {
+        "name": "Seasonal Spirits",
+        "hood": "Rockridge",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Merritt AfterDark",
+        "hood": "Lake Merritt",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "The 44th Table",
+        "hood": "Downtown",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "AfterHours Fry",
+        "hood": "Jack London",
+        "kind": "fast-food",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Vibe Terrace",
+        "hood": "Lake Merritt",
+        "kind": "nightlife",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Rhythm Deck",
+        "hood": "West Oakland",
+        "kind": "nightlife",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Neon Harbor Club",
+        "hood": "Jack London",
+        "kind": "nightlife",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Skybar",
+        "hood": "Downtown",
+        "kind": "nightlife",
+        "source": "evening-texture"
+      }
+    ],
+    "ledgerCount": 0,
+    "ledgerSource": null,
+    "topRetail": [
+      {
+        "name": "Downtown",
+        "sentiment": 0.59,
+        "retail": 10.05,
+        "eventAttractiveness": 36.08,
+        "crime": 1.07
+      },
+      {
+        "name": "Jack London",
+        "sentiment": 0.52,
+        "retail": 8.54,
+        "eventAttractiveness": 35.18,
+        "crime": 0.91
+      },
+      {
+        "name": "Rockridge",
+        "sentiment": 0.53,
+        "retail": 8.22,
+        "eventAttractiveness": 14.42,
+        "crime": 0.53
+      },
+      {
+        "name": "Grand Lake",
+        "sentiment": 0.48,
+        "retail": 8.21,
+        "eventAttractiveness": 20,
+        "crime": 0.59
+      },
+      {
+        "name": "Uptown",
+        "sentiment": 0.5,
+        "retail": 8.04,
+        "eventAttractiveness": 19.36,
+        "crime": 0.76
+      }
+    ],
+    "bottomRetail": [
+      {
+        "name": "Ivy Hill",
+        "sentiment": 0.55,
+        "retail": 3.25,
+        "eventAttractiveness": 6,
+        "crime": 0.22
+      },
+      {
+        "name": "Baylight District",
+        "sentiment": 0.54,
+        "retail": 3.43,
+        "eventAttractiveness": 9,
+        "crime": 0.64
+      },
+      {
+        "name": "West Oakland",
+        "sentiment": 0.48,
+        "retail": 3.52,
+        "eventAttractiveness": 11.09,
+        "crime": 1.18
+      },
+      {
+        "name": "Glenview",
+        "sentiment": 0.51,
+        "retail": 4.64,
+        "eventAttractiveness": 8,
+        "crime": 0.49
+      },
+      {
+        "name": "Brooklyn",
+        "sentiment": 0.52,
+        "retail": 4.74,
+        "eventAttractiveness": 9.25,
+        "crime": 0.68
+      }
+    ]
+  },
+  "signals": {
+    "businessLaneCount": 19,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+        "angle": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hookLine": "Business conditions in Downtown track the economic picture.",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "popids": [
+          "POP-00802",
+          "POP-00808",
+          "POP-01061"
+        ],
+        "citizens": [
+          "Celeste Moon (POP-01061)",
+          "Funmi Shah (POP-00802)",
+          "Sahana Joshi (POP-00808)"
+        ],
+        "ref": "output/engine_audit_c104.json patterns[13]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+        "angle": "Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland",
+        "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [
+          "POP-00744",
+          "POP-00754",
+          "POP-00756"
+        ],
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Ophelia Brenner (POP-00754)",
+          "Ramon Solano (POP-00756)"
+        ],
+        "ref": "output/engine_audit_c104.json patterns[14]; evidence: Initiative_Tracker row(s) 3"
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale | Business momentum in Fruitvale tracks the transit gain.",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale",
+        "hookLine": "Business momentum in Fruitvale tracks the transit gain.",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00762",
+          "POP-00766",
+          "POP-00774"
+        ],
+        "citizens": [
+          "Aziz Rahimi (POP-00762)",
+          "Manjit Singh (POP-00766)",
+          "Malik Hayes (POP-00774)"
+        ],
+        "ref": "output/engine_audit_c104.json patterns[15]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+        "angle": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland",
+        "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00008",
+          "POP-00780",
+          "POP-01057"
+        ],
+        "citizens": [
+          "Delin Morales (POP-00780)",
+          "Nina Reyes (POP-01057)",
+          "P Slayer (POP-00008)"
+        ],
+        "ref": "output/engine_audit_c104.json patterns[16]; evidence: Initiative_Tracker row(s) 7"
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "civic — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the civic gain.",
+        "angle": "civic — economic upside, jobs and footprint in Downtown",
+        "hookLine": "Business momentum in Downtown tracks the civic gain.",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00533",
+          "POP-00597",
+          "POP-01048"
+        ],
+        "citizens": [
+          "Maya Cordova (POP-01048)",
+          "Travis Coles (POP-00533)",
+          "Eric Taveras (POP-00597)"
+        ],
+        "ref": "output/engine_audit_c104.json patterns[17]; evidence: Neighborhood_Map row(s) "
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "className": "retail-decay",
+      "score": 28,
+      "label": "Grand Lake retail decay",
+      "hood": "Grand Lake",
+      "namedBusinesses": []
+    },
+    {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "Piedmont Ave cooling",
+      "hood": "Piedmont Ave",
+      "namedBusinesses": []
+    },
+    {
+      "className": "hood-rising",
+      "score": 21,
+      "label": "Grand Lake rising",
+      "hood": "Grand Lake",
+      "namedBusinesses": []
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 19,
+      "label": "Downtown · economic ailment — economic footprint, affected businesses, workforce impact in ",
+      "hood": "Downtown",
+      "namedBusinesses": []
+    },
+    {
+      "className": "named-storefront",
+      "score": 17,
+      "label": "Rhythm Deck (West Oakland)",
+      "hood": "West Oakland",
+      "namedBusinesses": [
+        "Rhythm Deck"
+      ]
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "West Oakland · Oakland Alternative Response Initiative — economic upside, jobs and footprint in",
+      "hood": "West Oakland",
+      "namedBusinesses": []
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Fruitvale · Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint",
+      "hood": "Fruitvale",
+      "namedBusinesses": []
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Downtown · civic — economic upside, jobs and footprint in Downtown",
+      "hood": "Downtown",
+      "namedBusinesses": []
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Lake Merritt · civic — economic upside, jobs and footprint in Lake Merritt",
+      "hood": "Lake Merritt",
+      "namedBusinesses": []
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 15,
+      "label": "West Oakland · Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in W",
+      "hood": "West Oakland",
+      "namedBusinesses": []
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Seasonal Spirits (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Seasonal Spirits"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Merritt AfterDark (Lake Merritt)",
+      "hood": "Lake Merritt",
+      "namedBusinesses": [
+        "Merritt AfterDark"
+      ]
+    }
+  ],
+  "pulses": [
+    {
+      "className": "retail-decay",
+      "score": 28,
+      "label": "Grand Lake retail decay",
+      "hood": "Grand Lake",
+      "retailDelta": -5.03,
+      "sentimentDelta": -0.07,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "source": "world_summary ## Engine Review · math-imbalance",
+      "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+      "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+      "sceneBits": [
+        "HOOD: Grand Lake",
+        "RETAIL DELTA (do not lead with decimal): -5.03",
+        "NAMED: none — do not invent storefronts",
+        "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "hood-cooling",
+      "score": 24,
+      "label": "Piedmont Ave cooling",
+      "hood": "Piedmont Ave",
+      "mag": 6,
+      "retail": 7.05,
+      "sentiment": 0.43,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Storefronts quieter in Piedmont Ave — foot traffic down",
+      "hookLine": "Piedmont Ave cooling off: foot traffic down, storefronts quieter than the rest of the city",
+      "sceneBits": [
+        "HOOD: Piedmont Ave",
+        "TRAJECTORY: cooling",
+        "MAGNITUDE (translate, do not lead): 6",
+        "RETAIL VITALITY (scene color): 7.05",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "hood-rising",
+      "score": 21,
+      "label": "Grand Lake rising",
+      "hood": "Grand Lake",
+      "mag": 5,
+      "retail": 8.21,
+      "sentiment": 0.48,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Retail turning upward in Grand Lake — busy counters, people moving in",
+      "hookLine": "Grand Lake turning upward: retail busy, events drawing crowds, people moving in",
+      "sceneBits": [
+        "HOOD: Grand Lake",
+        "TRAJECTORY: rising",
+        "MAGNITUDE (translate, do not lead): 5",
+        "RETAIL VITALITY (scene color): 8.21",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 19,
+      "label": "Downtown · economic ailment — economic footprint, affected businesses, workforce impact in ",
+      "hood": "Downtown",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00802",
+        "POP-00808",
+        "POP-01061"
+      ],
+      "citizens": [
+        "Celeste Moon (POP-01061)",
+        "Funmi Shah (POP-00802)",
+        "Sahana Joshi (POP-00808)"
+      ],
+      "source": "output/engine_audit_c104.json patterns[13]; evidence: Neighborhood_Map row(s) ",
+      "angle": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+      "hookLine": "Business conditions in Downtown track the economic picture.",
+      "sceneBits": [
+        "HOOD: Downtown",
+        "SIGNAL: economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Celeste Moon (POP-01061); Funmi Shah (POP-00802); Sahana Joshi (POP-00808)"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-storefront",
+      "score": 17,
+      "label": "Rhythm Deck (West Oakland)",
+      "hood": "West Oakland",
+      "namedBusinesses": [
+        "Rhythm Deck"
+      ],
+      "venues": [
+        {
+          "name": "Rhythm Deck",
+          "hood": "West Oakland",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Rhythm Deck",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named nightlife Rhythm Deck in West Oakland",
+      "hookLine": "Rhythm Deck is on the evening board in West Oakland.",
+      "sceneBits": [
+        "VENUE: Rhythm Deck",
+        "HOOD: West Oakland",
+        "KIND: nightlife",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "West Oakland · Oakland Alternative Response Initiative — economic upside, jobs and footprint in",
+      "hood": "West Oakland",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00744",
+        "POP-00754",
+        "POP-00756"
+      ],
+      "citizens": [
+        "Tomas Renteria (POP-00744)",
+        "Ophelia Brenner (POP-00754)",
+        "Ramon Solano (POP-00756)"
+      ],
+      "source": "output/engine_audit_c104.json patterns[14]; evidence: Initiative_Tracker row(s) 3",
+      "angle": "Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland",
+      "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: West Oakland",
+        "SIGNAL: Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Tomas Renteria (POP-00744); Ophelia Brenner (POP-00754); Ramon Solano (POP-00756)"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Fruitvale · Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint",
+      "hood": "Fruitvale",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00762",
+        "POP-00766",
+        "POP-00774"
+      ],
+      "citizens": [
+        "Aziz Rahimi (POP-00762)",
+        "Manjit Singh (POP-00766)",
+        "Malik Hayes (POP-00774)"
+      ],
+      "source": "output/engine_audit_c104.json patterns[15]; evidence: Initiative_Tracker row(s) 4",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale",
+      "hookLine": "Business momentum in Fruitvale tracks the transit gain.",
+      "sceneBits": [
+        "HOOD: Fruitvale",
+        "SIGNAL: Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Aziz Rahimi (POP-00762); Manjit Singh (POP-00766); Malik Hayes (POP-00774)"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Downtown · civic — economic upside, jobs and footprint in Downtown",
+      "hood": "Downtown",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00533",
+        "POP-00597",
+        "POP-01048"
+      ],
+      "citizens": [
+        "Maya Cordova (POP-01048)",
+        "Travis Coles (POP-00533)",
+        "Eric Taveras (POP-00597)"
+      ],
+      "source": "output/engine_audit_c104.json patterns[17]; evidence: Neighborhood_Map row(s) ",
+      "angle": "civic — economic upside, jobs and footprint in Downtown",
+      "hookLine": "Business momentum in Downtown tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: Downtown",
+        "SIGNAL: civic — economic upside, jobs and footprint in Downtown",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Maya Cordova (POP-01048); Travis Coles (POP-00533); Eric Taveras (POP-00597)"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Lake Merritt · civic — economic upside, jobs and footprint in Lake Merritt",
+      "hood": "Lake Merritt",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00029",
+        "POP-00042",
+        "POP-00755"
+      ],
+      "citizens": [
+        "Alisha Peña (POP-00029)",
+        "Ramon Vega (POP-00042)",
+        "Antoine Vermeer (POP-00755)"
+      ],
+      "source": "output/engine_audit_c104.json patterns[18]; evidence: Neighborhood_Map row(s) ",
+      "angle": "civic — economic upside, jobs and footprint in Lake Merritt",
+      "hookLine": "Business momentum in Lake Merritt tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: Lake Merritt",
+        "SIGNAL: civic — economic upside, jobs and footprint in Lake Merritt",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Alisha Peña (POP-00029); Ramon Vega (POP-00042); Antoine Vermeer (POP-00755)"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 15,
+      "label": "West Oakland · Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in W",
+      "hood": "West Oakland",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00008",
+        "POP-00780",
+        "POP-01057"
+      ],
+      "citizens": [
+        "Delin Morales (POP-00780)",
+        "Nina Reyes (POP-01057)",
+        "P Slayer (POP-00008)"
+      ],
+      "source": "output/engine_audit_c104.json patterns[16]; evidence: Initiative_Tracker row(s) 7",
+      "angle": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland",
+      "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: West Oakland",
+        "SIGNAL: Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Delin Morales (POP-00780); Nina Reyes (POP-01057); P Slayer (POP-00008)"
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Seasonal Spirits (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Seasonal Spirits"
+      ],
+      "venues": [
+        {
+          "name": "Seasonal Spirits",
+          "hood": "Rockridge",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Seasonal Spirits",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named restaurant Seasonal Spirits in Rockridge",
+      "hookLine": "Seasonal Spirits is on the evening board in Rockridge.",
+      "sceneBits": [
+        "VENUE: Seasonal Spirits",
+        "HOOD: Rockridge",
+        "KIND: restaurant",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Merritt AfterDark (Lake Merritt)",
+      "hood": "Lake Merritt",
+      "namedBusinesses": [
+        "Merritt AfterDark"
+      ],
+      "venues": [
+        {
+          "name": "Merritt AfterDark",
+          "hood": "Lake Merritt",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Merritt AfterDark",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named restaurant Merritt AfterDark in Lake Merritt",
+      "hookLine": "Merritt AfterDark is on the evening board in Lake Merritt.",
+      "sceneBits": [
+        "VENUE: Merritt AfterDark",
+        "HOOD: Lake Merritt",
+        "KIND: restaurant",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "The 44th Table (Downtown)",
+      "hood": "Downtown",
+      "namedBusinesses": [
+        "The 44th Table"
+      ],
+      "venues": [
+        {
+          "name": "The 44th Table",
+          "hood": "Downtown",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "The 44th Table",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named restaurant The 44th Table in Downtown",
+      "hookLine": "The 44th Table is on the evening board in Downtown.",
+      "sceneBits": [
+        "VENUE: The 44th Table",
+        "HOOD: Downtown",
+        "KIND: restaurant",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "AfterHours Fry (Jack London)",
+      "hood": "Jack London",
+      "namedBusinesses": [
+        "AfterHours Fry"
+      ],
+      "venues": [
+        {
+          "name": "AfterHours Fry",
+          "hood": "Jack London",
+          "kind": "fast-food",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "AfterHours Fry",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named fast-food AfterHours Fry in Jack London",
+      "hookLine": "AfterHours Fry is on the evening board in Jack London.",
+      "sceneBits": [
+        "VENUE: AfterHours Fry",
+        "HOOD: Jack London",
+        "KIND: fast-food",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Vibe Terrace (Lake Merritt)",
+      "hood": "Lake Merritt",
+      "namedBusinesses": [
+        "Vibe Terrace"
+      ],
+      "venues": [
+        {
+          "name": "Vibe Terrace",
+          "hood": "Lake Merritt",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Vibe Terrace",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named nightlife Vibe Terrace in Lake Merritt",
+      "hookLine": "Vibe Terrace is on the evening board in Lake Merritt.",
+      "sceneBits": [
+        "VENUE: Vibe Terrace",
+        "HOOD: Lake Merritt",
+        "KIND: nightlife",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Neon Harbor Club (Jack London)",
+      "hood": "Jack London",
+      "namedBusinesses": [
+        "Neon Harbor Club"
+      ],
+      "venues": [
+        {
+          "name": "Neon Harbor Club",
+          "hood": "Jack London",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Neon Harbor Club",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named nightlife Neon Harbor Club in Jack London",
+      "hookLine": "Neon Harbor Club is on the evening board in Jack London.",
+      "sceneBits": [
+        "VENUE: Neon Harbor Club",
+        "HOOD: Jack London",
+        "KIND: nightlife",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 104
+    },
+    {
+      "className": "named-storefront",
+      "score": 14,
+      "label": "Skybar (Downtown)",
+      "hood": "Downtown",
+      "namedBusinesses": [
+        "Skybar"
+      ],
+      "venues": [
+        {
+          "name": "Skybar",
+          "hood": "Downtown",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Skybar",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named nightlife Skybar in Downtown",
+      "hookLine": "Skybar is on the evening board in Downtown.",
+      "sceneBits": [
+        "VENUE: Skybar",
+        "HOOD: Downtown",
+        "KIND: nightlife",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 104
+    }
+  ],
+  "scene": {
+    "colorRoom": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts.",
+    "namedOnTop": []
+  },
+  "pointers": [
+    "output/world_summary_c104.md ## What Moved / Neighborhood snapshot",
+    "output/desk_signal_c104.json lanes.business",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 2"
+  ]
+}

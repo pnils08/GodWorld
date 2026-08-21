@@ -1,33 +1,30 @@
-# Bay Tribune — Civic Investigations
-## Cycle 103
+# Bus Comes When It Comes
 
-Tomas Renteria works the line before sunrise most days, then talks into a microphone about the neighborhood he just walked through to get there. He caught the 1 bus this morning the same way he's caught it for cycles now — the same stop, the same wait, the same stretch of Fruitvale that was supposed to have a transit hub moving through visioning by now.
+Rafael Pilgrim has a spot at the Fruitvale stop, same slab of concrete, same lean against the pole. He's been standing there long enough to know which panel of the shelter has the crack in it, the one that lets rain through no matter where you stand.
 
-It hasn't moved.
+"I take the bus every day and they've had those 'coming soon' signs up for years now," he said, water beading on his jacket. "Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?"
 
-That's not my framing. It's the tracker's. Fruitvale Transit Hub Phase II — the visioning stage — is stalled in construction-planning. The initiative carrying it hasn't advanced in nine cycles. Nine. That's not a pause, that's a shape. Something that long stops looking like a delay and starts looking like a default state.
+The sign he's talking about belongs to the Fruitvale Transit Hub Phase II. It has been in visioning — the stage before design, before permits, before shovels — for nine cycles running. Not stalled once. Stalled for nine straight cycles, the same phase, the same line on the tracker, cycle after cycle.
 
-"I feel like the visioning stall means someone's not listening to what actually moves here," Renteria told me. "Who's deciding without riding the 1 bus at 6am?"
+Here's what that number does and doesn't tell you.
 
-I don't have an answer to that question. Nobody in the record I've been given does either.
+It tells you the hub has not moved forward. Visioning nine cycles deep means nine cycles without a public design, without a construction timeline, without anything Pilgrim could point to and say *that's when it changes*. It does not tell you why. It does not tell you who is holding the file, or whether anyone is. It does not tell you if there was ever a target date that slipped, because no date has been supplied — only the count of cycles the project has sat in the same place.
 
-Here's what I can tell you and what I can't.
+That's the honest gap. I can tell you the number. I can't tell you the reason behind it, and neither, on the record, can anyone else right now — because there's no record here of anyone being asked.
 
-I can tell you the initiative exists, that it's named, that it's tracked, and that the tracker has it parked at nine cycles without movement. I can tell you Renteria rides the route this project is supposedly about, and that from where he stands — six a.m., bus doors, cold hands — the stall reads as a decision made somewhere else, by someone who isn't on that bus.
+Pilgrim isn't accusing an office. He's asking a question, standing in weather the shelter doesn't fully block, and the question is a fair one: nine cycles is long enough that "coming soon" stops meaning anything. It's long enough that a rider starts keeping his own count, independent of whatever tracker the city keeps.
 
-What I can't tell you is who owns that decision. No office is named in what I've got. No planner, no commissioner, no agency signed to Phase II visioning has been placed on the record I'm working from. I'm not going to invent one. I'm not going to tell you a request went unanswered when I have no request to point to, and I'm not going to tell you silence is the story when I don't have a clock running on anybody.
+What would move this needle isn't a mystery in the abstract — new phase, a name attached to the file, a date that holds. What's missing isn't a villain. It's a next step, and nothing in what's been recorded says whose desk that step sits on.
 
-That's the honest gap. Renteria's question — who's deciding — is a real question asked by a real Fruitvale rider, and right now it's aimed at nobody in particular, because the record doesn't hand me a body to aim it at. That's not proof no one is responsible. It's proof I don't have the name yet.
+So the honest version of this story is short. A transit project meant to serve Fruitvale has spent nine cycles in the stage before anything gets built. A rider who uses that stop every day is still waiting under a sign that has said the same thing for longer than he can point to a fix for. Nobody named here has said what happens next, and nobody named here has said why nothing has.
 
-Nine cycles is long enough that "yet" starts to feel generous. Somewhere there's a person or an office whose job touches this initiative. I don't know who. What I know is the number: nine. What I know is a man who works a kitchen line and hosts a podcast and rides a bus that the plan was supposedly drawn around, still riding it, still waiting, still asking the same question he was asking cycles ago.
+The rain doesn't wait for phase two. Neither does Rafael Pilgrim, standing at the same crack in the shelter, still watching for a bus that runs on a schedule and a hub that, nine cycles in, still doesn't.
 
-The hub hasn't broken ground because it hasn't finished being imagined. Renteria's not asking for concrete. He's asking who's in the room deciding what Fruitvale needs — and whether that room has anyone in it who's stood at his stop at six in the morning.
-
-I don't have that answer. I'm going to keep looking for who does.
+What's still unfinished isn't just the concrete. It's the answer to the question Pilgrim is already asking out loud: at what cycle count does "coming soon" become something you stop believing?
 
 ## INTAKE
-NAMES: Tomas Renteria | mentioned
-STORYLINE: fruitvale-tomas-renteria-anomaly | opened
+NAMES: Rafael Pilgrim | quoted-source
+STORYLINE: fruitvale-rafael-pilgrim-anomaly | opened
 HOOD: Fruitvale
-CLAIM: I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am? | citizenVoice PRESS Tomas Renteria
+CLAIM: I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come? | citizenVoice PRESS Rafael Pilgrim
 <!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->

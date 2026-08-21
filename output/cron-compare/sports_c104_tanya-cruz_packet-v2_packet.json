@@ -1,0 +1,476 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "104",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "label": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "hookLine": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+      "kind": "sideline-signal",
+      "hood": "Baylight District",
+      "popids": [
+        "POP-00001"
+      ],
+      "citizens": [
+        "Vinnie Keane (POP-00001)"
+      ],
+      "ref": "world_summary_c104.md ## Sports",
+      "cycle": 104
+    }
+  },
+  "angle": "output/cron-compare/sports_c104_tanya-cruz_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": null,
+      "disp": "relentless, can't stop working; draws people in, deep with them; openly affectionate, big-hearted; curious, open to new things; steady, hard to shake; principled, plays it straight; close to family; often out in the neighborhood",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Late in the season, every at-bat feels like it matters more—not just for the stats, but for the guys in the clubhouse. When you can contribute like that, it’s about keeping the energy up and pushing toward what’s next.\",\n  \"fact_ids\": [\"F-51a804fa9d18\", \"F-f606725c2db0\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"How the team’s chemistry is holding up through the final stretch\"]\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "What does the supplied trend \"Vinnie Keane's performance in the A's late-season game\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Baylight District",
+          "focus": "Vinnie Keane's performance in the A's late-season game",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-51a804fa9d18"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f606725c2db0"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's late-season record is 126-35.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-ac374730b867"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-2b3e2e3d075f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00050",
+      "name": "Ernesto Quintero",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Vinnie's been solid all season, but that late-game surge felt a little off—like he was pressing too hard. Maybe the Tribune should ask if he was dealing with something personal that night.\",\n  \"fact_ids\": [\"F-51a804fa9d18\", \"F-f606725c2db0\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Was Vinnie Keane dealing with personal issues during the late-season game?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00050",
+          "name": "Ernesto Quintero",
+          "role": "3B/1B , Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "As a resident of Baylight District, what about the supplied trend \"Vinnie Keane's performance in the A's late-season game\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Baylight District",
+          "focus": "Vinnie Keane's performance in the A's late-season game",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-51a804fa9d18"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f606725c2db0"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's late-season record is 126-35.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-ac374730b867"
+          },
+          {
+            "t": "FACT",
+            "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+            "src": "Simulation_Ledger profile for POP-00050",
+            "id": "F-d66efbf64730"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": null,
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I don't follow baseball too closely—too busy with the bakery—but hearing about Vinnie Keane's performance makes me think the A's are in good hands. Maybe ask how he keeps his focus during such a long season?\",\n  \"fact_ids\": [\"F-51a804fa9d18\", \"F-f606725c2db0\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"How does Vinnie Keane maintain focus during a long season?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "What does the supplied trend \"Vinnie Keane's performance in the A's late-season game\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Baylight District",
+          "focus": "Vinnie Keane's performance in the A's late-season game",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-51a804fa9d18"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f606725c2db0"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's late-season record is 126-35.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-ac374730b867"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, Vinnie Keane's been carrying that team all season - when he's hot, the whole neighborhood feels it. Tribune should ask how he keeps that focus when the games don't even matter anymore.\",\n  \"fact_ids\": [\"F-51a804fa9d18\", \"F-f606725c2db0\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Tanya Cruz",
+          "question": "What does the supplied trend \"Vinnie Keane's performance in the A's late-season game\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "sideline-signal",
+          "hood": "Baylight District",
+          "focus": "Vinnie Keane's performance in the A's late-season game",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-51a804fa9d18"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane recorded 2-3, HR, 3 RBI.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f606725c2db0"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's late-season record is 126-35.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-ac374730b867"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-20T18:18:04.138Z"
+}

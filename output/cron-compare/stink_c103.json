@@ -1,40 +1,97 @@
 {
   "cycle": 103,
-  "scannedAt": "2026-08-14T11:15:07.345Z",
+  "scannedAt": "2026-08-19T11:15:09.114Z",
   "signalPath": "/root/GodWorld/output/desk_signal_c103.json",
   "signalMissing": false,
   "illnessRate": 10.1,
   "forceThreshold": 35,
   "shouldForce": true,
-  "maxScore": 40,
+  "maxScore": 50,
   "top": {
-    "className": "crisis-unattended",
-    "score": 40,
+    "className": "implementation-gap",
+    "score": 50,
     "desk": "civic",
-    "kind": "health-crisis",
-    "label": "crisis-unattended (high) | City illness rate 10.1% with no desk forced onto the health signal",
-    "ref": "output/world_summary_c103.md#illness-rate",
-    "hood": null,
-    "popids": [],
+    "kind": "anomaly",
+    "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+    "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+    "hood": "Fruitvale",
+    "popids": [
+      "POP-00231",
+      "POP-00598",
+      "POP-00744"
+    ],
     "handle": {
-      "angle": "City illness rate 10.1% — who owns the health signal and why is it not the lead?",
-      "hookLine": "Illness is 10.1 percent and the page is still process timelines.",
-      "citizens": []
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "citizens": [
+        "Calvin Turner (POP-00231)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Tomas Renteria (POP-00744)"
+      ]
     },
     "story": {
-      "ref": "output/world_summary_c103.md#illness-rate",
-      "label": "crisis-unattended (high) | City illness rate 10.1% with no desk forced onto the health signal",
-      "kind": "health-crisis",
-      "angle": "City illness rate 10.1% — who owns the health signal and why is it not the lead?",
-      "hookLine": "Illness is 10.1 percent and the page is still process timelines.",
-      "citizens": null,
-      "popids": [],
-      "hood": null,
-      "stinkClass": "crisis-unattended",
-      "illnessRate": 10.1
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+      "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+      "citizens": [
+        "Calvin Turner (POP-00231)",
+        "Vladimir Gonzalez (POP-00598)",
+        "Tomas Renteria (POP-00744)"
+      ],
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ],
+      "hood": "Fruitvale",
+      "stinkClass": "implementation-gap"
     }
   },
   "candidates": [
+    {
+      "className": "implementation-gap",
+      "score": 50,
+      "desk": "civic",
+      "kind": "anomaly",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00231",
+        "POP-00598",
+        "POP-00744"
+      ],
+      "handle": {
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "citizens": [
+          "Calvin Turner (POP-00231)",
+          "Vladimir Gonzalez (POP-00598)",
+          "Tomas Renteria (POP-00744)"
+        ]
+      },
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "citizens": [
+          "Calvin Turner (POP-00231)",
+          "Vladimir Gonzalez (POP-00598)",
+          "Tomas Renteria (POP-00744)"
+        ],
+        "popids": [
+          "POP-00231",
+          "POP-00598",
+          "POP-00744"
+        ],
+        "hood": "Fruitvale",
+        "stinkClass": "implementation-gap"
+      }
+    },
     {
       "className": "crisis-unattended",
       "score": 40,
@@ -197,5 +254,5 @@
       }
     }
   ],
-  "candidateCount": 5
+  "candidateCount": 6
 }

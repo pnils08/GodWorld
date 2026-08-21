@@ -19,9 +19,907 @@
     }
   },
   "angle": "output/cron-compare/civic_c103_rachel-torres_packet-v2_angle.json",
-  "quotesRequested": 0,
-  "quotesLanded": 0,
-  "quotes": [],
-  "interviews": [],
-  "ranAt": "2026-08-12T18:15:01.596Z"
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard about the Alternative Response Initiative starting up in West Oakland, and I think it’s worth asking how they’re measuring success—are people feeling safer, or is it just moving problems around?",
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I’ve heard about the Alternative Response Initiative starting up in West Oakland, and I think it’s worth asking how they’re measuring success—are people feeling safer, or is it just moving problems around?\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-253e91a50bf4\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"How is the initiative tracking community impact and resident feedback?\"]\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-253e91a50bf4"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "How is the initiative tracking community impact and resident feedback?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-ac6579b5f7",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard about the Alternative Response Initiative starting up in West Oakland, and I think it’s worth asking how they’re measuring success—are people feeling safer, or is it just moving problems around?"
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What does the supplied trend \"Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Elio Perez — Server — West Oakland",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-5d500295f99a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I heard they're trying something new with how they handle calls downtown, sending different folks than just cops sometimes. Should ask if regular people like us can call them direct or if it's only through 911.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I heard they're trying something new with how they handle calls downtown, sending different folks than just cops sometimes. Should ask if regular people like us can call them direct or if it's only through 911.\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-253e91a50bf4\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Can residents contact the alternative response teams directly or only through emergency services?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-253e91a50bf4"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "Can residents contact the alternative response teams directly or only through emergency services?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-f2b58b362b",
+        "authoredQuote": true,
+        "publishableQuote": "I heard they're trying something new with how they handle calls downtown, sending different folks than just cops sometimes. Should ask if regular people like us can call them direct or if it's only through 911."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What does the supplied trend \"Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard about the Oakland Alternative Response Initiative, and it seems like a step toward addressing public safety differently in those neighborhoods. The Tribune should ask how it’s being measured—what success looks like and who’s tracking it.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard about the Oakland Alternative Response Initiative, and it seems like a step toward addressing public safety differently in those neighborhoods. The Tribune should ask how it’s being measured—what success looks like and who’s tracking it.\",\"fact_ids\":[\"F-5df54683a1df\",\"F-253e91a50bf4\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[\"How is success being measured for the Oakland Alternative Response Initiative?\"]}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-253e91a50bf4"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "How is success being measured for the Oakland Alternative Response Initiative?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00210-663e205763",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard about the Oakland Alternative Response Initiative, and it seems like a step toward addressing public safety differently in those neighborhoods. The Tribune should ask how it’s being measured—what success looks like and who’s tracking it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What does the supplied trend \"Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard about the Alternative Response Initiative starting up in West Oakland, and I think it’s worth asking how they’re measuring success—are people feeling safer, or is it just moving problems around?",
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I’ve heard about the Alternative Response Initiative starting up in West Oakland, and I think it’s worth asking how they’re measuring success—are people feeling safer, or is it just moving problems around?\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-253e91a50bf4\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"How is the initiative tracking community impact and resident feedback?\"]\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-253e91a50bf4"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "How is the initiative tracking community impact and resident feedback?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-ac6579b5f7",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard about the Alternative Response Initiative starting up in West Oakland, and I think it’s worth asking how they’re measuring success—are people feeling safer, or is it just moving problems around?"
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What does the supplied trend \"Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Elio Perez — Server — West Oakland",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-5d500295f99a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I heard they're trying something new with how they handle calls downtown, sending different folks than just cops sometimes. Should ask if regular people like us can call them direct or if it's only through 911.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I heard they're trying something new with how they handle calls downtown, sending different folks than just cops sometimes. Should ask if regular people like us can call them direct or if it's only through 911.\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-253e91a50bf4\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Can residents contact the alternative response teams directly or only through emergency services?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-253e91a50bf4"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "Can residents contact the alternative response teams directly or only through emergency services?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-f2b58b362b",
+        "authoredQuote": true,
+        "publishableQuote": "I heard they're trying something new with how they handle calls downtown, sending different folks than just cops sometimes. Should ask if regular people like us can call them direct or if it's only through 911."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What does the supplied trend \"Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Honestly, I don't know much about the specifics, but anything that keeps folks safe without unnecessary tension is worth looking into. The Tribune should ask how this affects small businesses—we're the ones who feel every shift in the neighborhood.\",\n  \"fact_ids\": [\"F-5df54683a1df\", \"F-253e91a50bf4\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"How does the initiative impact foot traffic and safety for small businesses in the rollout areas?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What does the supplied trend \"Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard about the Oakland Alternative Response Initiative, and it seems like a step toward addressing public safety differently in those neighborhoods. The Tribune should ask how it’s being measured—what success looks like and who’s tracking it.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard about the Oakland Alternative Response Initiative, and it seems like a step toward addressing public safety differently in those neighborhoods. The Tribune should ask how it’s being measured—what success looks like and who’s tracking it.\",\"fact_ids\":[\"F-5df54683a1df\",\"F-253e91a50bf4\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[\"How is success being measured for the Oakland Alternative Response Initiative?\"]}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-5df54683a1df",
+          "F-253e91a50bf4"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "How is success being measured for the Oakland Alternative Response Initiative?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00210-663e205763",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard about the Oakland Alternative Response Initiative, and it seems like a step toward addressing public safety differently in those neighborhoods. The Tribune should ask how it’s being measured—what success looks like and who’s tracking it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sgt. Rachel Torres",
+          "question": "What does the supplied trend \"Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "public-safety",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "focus": "Oakland Alternative Response Initiative's operational phase in West Oakland, Fruitvale, and East Oakland",
+          "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative | Status passed | phase operational",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-5df54683a1df"
+          },
+          {
+            "t": "FACT",
+            "text": "The record leaves a public-safety response or classification question open.",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-d43a7e2d2c43"
+          },
+          {
+            "t": "FACT",
+            "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-0fc9dd7a717d"
+          },
+          {
+            "t": "FACT",
+            "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+            "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
+            "id": "F-253e91a50bf4"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-19T18:17:07.527Z"
 }

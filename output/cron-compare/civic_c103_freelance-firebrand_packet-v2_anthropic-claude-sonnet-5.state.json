@@ -8,76 +8,28 @@
     "desk": "civic"
   },
   "task": {
-    "goal": "Assemble one source brief and machine-parseable INTAKE from the supplied evidence",
-    "assignment": "The transit initiative carrying Fruitvale has not advanced in 9 cycles. What record explains the stall?",
-    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question.  Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "civic gap in city — who is accountable, what council has or hasn't done",
+    "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
     "voice": "Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea.",
     "writingMode": "SOURCE_BRIEF"
   },
   "signal": {
     "kind": "anomaly",
-    "hood": "Fruitvale",
-    "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+    "hood": null,
+    "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
     "plan": {
-      "focus": "Fruitvale Transit Hub Phase II initiative stall",
-      "closeQuestion": "Who is responsible for the initiative's stall and what is being done to address it?"
+      "focus": "civic gap in city",
+      "closeQuestion": "Who is responsible for the delay in the transit initiative in Fruitvale?"
     }
   },
   "exposure": {
-    "subjects": [
-      {
-        "pop": "POP-00231",
-        "name": "Calvin Turner",
-        "profile": "Calvin Turner (POP-00231) — role: Mechanic; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Port & Labor; tier: 2",
-        "quotationEligible": true,
-        "src": "packet.W1.exposure"
-      },
-      {
-        "pop": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "profile": "Vladimir Gonzalez (POP-00598) — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
-        "quotationEligible": true,
-        "src": "packet.W1.exposure"
-      }
-    ],
-    "sources": [
-      {
-        "id": "Q-POP-00231-95e98ad3fe",
-        "pop": "POP-00231",
-        "name": "Calvin Turner",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-c4b3917a7eab",
-          "F-f9925b4f532c"
-        ],
-        "src": "packet.W2[POP-00231]"
-      },
-      {
-        "id": "Q-POP-00598-95e98ad3fe",
-        "pop": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "quote": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-c4b3917a7eab",
-          "F-f9925b4f532c"
-        ],
-        "src": "packet.W2[POP-00598]"
-      }
-    ],
+    "subjects": [],
+    "sources": [],
     "excludedLeads": [
       {
-        "from": "Calvin Turner",
-        "text": "Something doesn't feel right about the way things are moving forward, or not moving forward, in our neighborhood.",
-        "usable": false
-      },
-      {
-        "from": "Vladimir Gonzalez",
-        "text": "Something feels off about the lack of progress",
-        "usable": false
-      },
-      {
         "from": "Jax Caldera",
-        "text": "possible lack of funding or resources",
+        "text": "possible discrepancy between mayor's statements and actual progress",
         "usable": false
       }
     ]
@@ -91,15 +43,27 @@
     },
     {
       "t": "FACT",
+      "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)",
+      "id": "F-284050258b91"
+    },
+    {
+      "t": "FACT",
+      "text": "No civic initiative addresses the city signal surfaced this cycle.",
+      "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)",
+      "id": "F-3ec7cb707e78"
+    },
+    {
+      "t": "FACT",
       "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
-      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-      "id": "F-c4b3917a7eab"
+      "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)",
+      "id": "F-98912ac352de"
     },
     {
       "t": "FACT",
       "text": "The Initiative remains listed in the supplied tracker.",
-      "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-      "id": "F-f9925b4f532c"
+      "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)",
+      "id": "F-d120972c798f"
     },
     {
       "t": "FACT",
@@ -125,7 +89,7 @@
       "invent a date or number",
       "import a real-world Oakland entity"
     ],
-    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. This package uses a code-rendered SOURCE_BRIEF: preserve approved quote text exactly, omit raw engine fields and source-path metadata from public copy, and add no biographical or collective-sentiment prose."
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
   },
   "output": {
     "format": "markdown-article",
@@ -157,30 +121,35 @@
   "reviewProfile": {
     "id": "jax-accountability-v1",
     "canonPolicy": "load-bearing",
-    "purpose": "Apply public accountability pressure when the record and the official story do not line up. Starting friction is success; resolving the civic problem is not the columnist's job.",
+    "purpose": "ACTIVE probationary package. Apply public accountability pressure when the simulated record and the public story do not line up; starting friction is success, while resolving the civic problem is not the columnist's job.",
     "articleContract": {
       "renderMode": "SOURCE_BRIEF",
-      "voice": "concise evidence-first source brief with code-rendered exact quote blocks",
-      "targetWords": "evidence-bounded; length follows supplied public facts and exact quotes",
-      "opening": "street-level scene in a bar, laundromat, BART setting, corner, or similarly generic public room",
+      "voice": "adversarial first-person accountability column",
+      "targetWords": "400-650",
+      "opening": "street-level scene in one or many bars, a laundromat, BART setting, corner, or similarly generic public room",
       "closing": "an unanswered accountability question"
     },
     "authorizedTexture": [
       "a named street or street-level time cue used only as scene location",
-      "a generic bar, laundromat, BART car or platform, corner, booth, counter, or sidewalk setting",
-      "the reporter's own physical presence, drink, or observation in that generic setting",
+      "one or many generic bars, a laundromat, BART car or platform, corner, booth, counter, or sidewalk setting",
+      "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
       "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
       "adversarial inference and unanswered questions drawn from supplied facts"
     ],
     "textureConditions": [
       "texture must not invent a named citizen, business, institution, Project, Initiative, or organization",
+      "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
       "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
-      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, count, or other load-bearing factual claim",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
+      "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+      "real-world city assumptions and generic urban-problem framing are forbidden",
       "a rhetorical question or inference must remain framed as a question or inference rather than settled fact"
     ],
     "canonBlockers": [
+      "a real-world person, place, business, institution, team, event, condition, or city assumption not established by the simulated-world record",
       "a named person not found in the ledger or published record",
       "a fabricated named business, institution, Project, Initiative, or organization",
+      "a backend-composed or model-reconstructed statement presented as a citizen quotation",
       "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
       "a false criminal accusation or attributed admission",
       "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
@@ -188,7 +157,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-087ec8cff573",
+    "id": "AM-b0b6363f2f85",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -198,16 +167,28 @@
         "src": "cron-desk-run explicit cycle argument"
       },
       {
-        "id": "F-c4b3917a7eab",
+        "id": "F-284050258b91",
         "t": "FACT",
-        "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
-        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
       },
       {
-        "id": "F-f9925b4f532c",
+        "id": "F-3ec7cb707e78",
+        "t": "FACT",
+        "text": "No civic initiative addresses the city signal surfaced this cycle.",
+        "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+      },
+      {
+        "id": "F-98912ac352de",
+        "t": "FACT",
+        "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+      },
+      {
+        "id": "F-d120972c798f",
         "t": "FACT",
         "text": "The Initiative remains listed in the supplied tracker.",
-        "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
       },
       {
         "id": "F-e7aca0ecc02c",
@@ -216,46 +197,8 @@
         "src": "World_Config/weather snapshot for C103"
       }
     ],
-    "approvedQuotes": [
-      {
-        "id": "Q-POP-00231-95e98ad3fe",
-        "speakerId": "POP-00231",
-        "speakerName": "Calvin Turner",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-c4b3917a7eab",
-          "F-f9925b4f532c"
-        ],
-        "src": "packet.W2[POP-00231]"
-      },
-      {
-        "id": "Q-POP-00598-95e98ad3fe",
-        "speakerId": "POP-00598",
-        "speakerName": "Vladimir Gonzalez",
-        "text": "What the record shows does not line up with what I expected. What explains the gap in the record? I am going to keep watching this.",
-        "factIds": [
-          "F-c4b3917a7eab",
-          "F-f9925b4f532c"
-        ],
-        "src": "packet.W2[POP-00598]"
-      }
-    ],
-    "approvedSubjects": [
-      {
-        "id": "POP-00231",
-        "name": "Calvin Turner",
-        "profile": "Calvin Turner — role: Mechanic; neighborhood: Fruitvale; born: 1983; careerStage: senior; wealth: 6; employerBiz: SELF_EMPLOYED; skills: Port & Labor; tier: 2",
-        "src": "packet.W1.exposure",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00598",
-        "name": "Vladimir Gonzalez",
-        "profile": "Vladimir Gonzalez — role: Right Fielder, Oakland A's; neighborhood: Fruitvale; born: 2016; careerStage: entry-level; wealth: 10; employerBiz: BIZ-00005; tier: 2",
-        "src": "packet.W1.exposure",
-        "quotationEligible": true
-      }
-    ],
+    "approvedQuotes": [],
+    "approvedSubjects": [],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -272,37 +215,32 @@
     ],
     "unverifiedLeads": [
       {
-        "from": "Calvin Turner",
-        "text": "Something doesn't feel right about the way things are moving forward, or not moving forward, in our neighborhood.",
-        "publishable": false
-      },
-      {
-        "from": "Vladimir Gonzalez",
-        "text": "Something feels off about the lack of progress",
-        "publishable": false
-      },
-      {
         "from": "Jax Caldera",
-        "text": "possible lack of funding or resources",
+        "text": "possible discrepancy between mayor's statements and actual progress",
         "publishable": false
       }
     ],
     "authorizedTexture": [
       "a named street or street-level time cue used only as scene location",
-      "a generic bar, laundromat, BART car or platform, corner, booth, counter, or sidewalk setting",
-      "the reporter's own physical presence, drink, or observation in that generic setting",
+      "one or many generic bars, a laundromat, BART car or platform, corner, booth, counter, or sidewalk setting",
+      "the reporter's own physical presence, drink, route, observation, and count of generic bar visits",
       "an unnamed or role-only local voice such as a bartender, patron, neighbor, rider, or shop worker",
       "adversarial inference and unanswered questions drawn from supplied facts"
     ],
     "textureConditions": [
       "texture must not invent a named citizen, business, institution, Project, Initiative, or organization",
+      "a count of the reporter's generic bar visits is persona texture, not a city metric or proof that a named business exists",
       "an anonymous voice is color, not a sourced official statement, and must not be indexed as a quoted-source",
-      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, count, or other load-bearing factual claim",
+      "texture must not carry a vote, official act or inaction, criminal accusation, budget, date, duration, public count, or other load-bearing factual claim",
+      "attributed quotation requires citizen-authored text preserved verbatim with addressable provenance; backend-composed lattice text is not a quotation",
+      "real-world city assumptions and generic urban-problem framing are forbidden",
       "a rhetorical question or inference must remain framed as a question or inference rather than settled fact"
     ],
     "forbiddenClaimClasses": [
+      "a real-world person, place, business, institution, team, event, condition, or city assumption not established by the simulated-world record",
       "a named person not found in the ledger or published record",
       "a fabricated named business, institution, Project, Initiative, or organization",
+      "a backend-composed or model-reconstructed statement presented as a citizen quotation",
       "a false or unsupported vote, official act, official inaction, promise, decision, or duty presented as fact",
       "a false criminal accusation or attributed admission",
       "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",

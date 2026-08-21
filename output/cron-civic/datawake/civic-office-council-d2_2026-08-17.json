@@ -1,0 +1,14 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-08-17",
+  "cycle": 103,
+  "model": "moonshotai/kimi-k2",
+  "statement": "Phase II shortlist is down to three. That's the right call—four bidders meant someone was getting cut regardless, and the selection committee did the work to narrow it based on capacity and track record, not politics. I'm watching how the remaining three handle community engagement in Jack London specifically. The Holiday Market showed this neighborhood can draw people, but it also showed the infrastructure strain when we don't plan for foot traffic and freight moving on the same streets. My district needs the jobs Baylight promises, especially for the construction laborers and port workers who live here, but I need to see the traffic management plan before I'm a yes on the final award. The crime numbers in Jack London are running hot—property incidents at 53, violent at 43—and any major development that doesn't account for that reality is going to face resistance from the residents who've seen too many projects come through with big promises and thin follow-through. Three bidders keeps competition alive without diluting oversight. Next step is the community sessions. I'll be there.",
+  "action": "request community engagement sessions in Jack London with traffic and public safety components included in bidder presentations",
+  "numberMoved": "0",
+  "ranAt": "2026-08-17T10:46:35.890Z"
+}

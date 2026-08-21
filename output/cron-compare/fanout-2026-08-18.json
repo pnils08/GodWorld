@@ -1,0 +1,504 @@
+{
+  "date": "2026-08-18",
+  "cycle": 103,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "beatDomain": "CIVIC",
+      "persona": "luis-navarro",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office",
+        "hookLine": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00231",
+          "POP-00744"
+        ],
+        "citizens": [
+          "Calvin Turner (POP-00231)",
+          "Tomas Renteria (POP-00744)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "luis-navarro",
+      "pulse": {
+        "className": "accountability-anomaly",
+        "score": 80,
+        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
+        "hood": "Fruitvale",
+        "source": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ],
+        "schema": "INVESTIGATION-BRIEF-1",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "excludedCandidates": [
+          {
+            "popid": "POP-00598",
+            "reason": "PRO_ATHLETE_CIVIC_INELIGIBLE"
+          }
+        ]
+      },
+      "wakePackage": "LUIS-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "P Slayer",
+      "popid": "POP-00008",
+      "beatDomain": "SPORTS",
+      "persona": "p-slayer",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 103; world_summary_c103.md \"## Sports\" · Pablo Almanzar throws a No No in his MLB debut",
+        "label": "Pablo Almanzar throws a No No in his MLB debut",
+        "kind": "prospect-callup",
+        "angle": "Pablo Almanzar throws a No No in his MLB debut",
+        "hookLine": "Handoff feeling vs funeral feeling — pick a side.",
+        "hood": "Downtown",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "popids": [
+          "POP-00001"
+        ],
+        "citizens": [
+          "Pablo Almanzar",
+          "Vinnie Keane — Designated Hitter, Oakland A's Legend, Rockridge",
+          "Pablo Alamazar"
+        ],
+        "pulseClass": "prospect-callup",
+        "pulseScore": 58,
+        "fanCharge": "dare",
+        "bagModeIds": [
+          3,
+          9
+        ]
+      },
+      "pslayerSlice": true,
+      "fanHeat": true,
+      "pulse": {
+        "className": "prospect-callup",
+        "classes": [
+          "prospect-callup",
+          "win-streak"
+        ],
+        "score": 58,
+        "label": "Pablo Almanzar throws a No No in his MLB debut",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "feedCycle": 103,
+        "record": "124-34",
+        "streak": "W15",
+        "mood": "electric",
+        "fanSentiment": "high",
+        "neighborhood": "Downtown",
+        "notes": "Pablo Alamazar (SP) made his major league debut in NY vs the Yankees, Pablo Almanzar just called up for the callup throws a no hitter while striking out 10. Making a major splash in his MLB debut in one the most historic stadiums on the planet. To make the evening is more festive as As fan Vinnie Keane hits 3 run home run in his final visit to NY.",
+        "stats": "Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI"
+      },
+      "charge": {
+        "bagModes": [
+          {
+            "id": 3,
+            "name": "Friction Pivot"
+          },
+          {
+            "id": 9,
+            "name": "Breakout Feeling"
+          }
+        ],
+        "fanCharge": "dare",
+        "foilNumber": "9IP",
+        "centralFeeling": "Oakland should feel dared to show up louder tomorrow.",
+        "palette": [
+          "fury",
+          "euphoria",
+          "dread",
+          "defiance",
+          "confession",
+          "grief",
+          "dare"
+        ]
+      },
+      "wakePackage": "PSLAYER-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "beatDomain": "SPORTS_ANALYTICS",
+      "persona": "anthony-raines",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "kind": "sports-analytics",
+        "angle": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "hookLine": "Pablo Almanzar throws a No No in his MLB debut",
+        "hood": "Downtown",
+        "pulseClass": "line-card",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "citizens": [
+          "Vinnie Keane (POP-00001)"
+        ],
+        "popids": [
+          "POP-00001"
+        ],
+        "ref": "world_summary_c103.md ## Sports",
+        "cycle": 103
+      },
+      "anthonySlice": true,
+      "analytic": true,
+      "pulse": {
+        "className": "line-card",
+        "score": 72,
+        "label": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "storyAngle": "Pablo Almanzar throws a No No in his MLB debut",
+        "hasStats": true,
+        "record": "124-34",
+        "streak": "W15",
+        "foilNumber": "9IP",
+        "feedCycle": 103
+      },
+      "bag": {
+        "tools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 5,
+            "name": "Repertoire vs Results"
+          }
+        ],
+        "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "foilNumber": "9IP"
+      },
+      "prewrite": {
+        "reporter": "Anthony Raines",
+        "bagTools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 5,
+            "name": "Repertoire vs Results"
+          }
+        ],
+        "lineFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 124-34 · W15",
+          "Event kind (feed): A's — player-feature (late-season)",
+          "NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)",
+          "StoryAngle (feed): Pablo Almanzar throws a No No in his MLB debut"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "feedFacts": [
+          "StoryAngle: Pablo Almanzar throws a No No in his MLB debut",
+          "Notes: Pablo Alamazar (SP) made his major league debut in NY vs the Yankees, Pablo Almanzar just called up for the callup throws a no hitter while striking out 10. Making a major splash in his MLB debut in o",
+          "Record/Streak: 124-34 / W15"
+        ],
+        "claim": "One line anchors the board read — 9IP — and the evaluative question is whether that production is architecture or variance: Pablo Almanzar throws a No No in his MLB debut",
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+          "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies",
+          "Pablo Almanzar has no Simulation_Ledger POPID in the local snapshot — do not invent or interview"
+        ],
+        "foilNumber": "9IP",
+        "anchorFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 124-34 · W15",
+          "Event kind (feed): A's — player-feature (late-season)"
+        ]
+      },
+      "wakePackage": "ANTHONY-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Mason Ortega",
+      "popid": "POP-00160",
+      "beatDomain": "CULTURE",
+      "persona": "mason-ortega",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave. What was happening there is not established.",
+        "label": "Piedmont Heights (Piedmont Ave)",
+        "hookLine": "Piedmont Heights appears on the evening restaurant list in Piedmont Ave.",
+        "hood": "Piedmont Ave",
+        "pulseClass": "named-restaurant",
+        "citizens": [],
+        "popids": [],
+        "named": "Piedmont Heights",
+        "venue": "Piedmont Heights",
+        "ref": "world_summary ## Evening Texture · Restaurants",
+        "cycle": 103
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Piedmont Heights (Piedmont Ave)"
+      },
+      "recommend": {
+        "bag": "lifestyle",
+        "slug": "sharon-okafor",
+        "name": "Sharon Okafor",
+        "popid": "POP-00159",
+        "bagDoc": "docs/media/SHARON_LIFESTYLE_BAG.md",
+        "reason": "top pulse quiet-nightlife → lifestyle",
+        "pulseClass": "quiet-nightlife",
+        "pulseLabel": "Nightline Station (West Oakland) · quiet night"
+      },
+      "bag": "kitchen",
+      "wakePackage": "MASON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Storefronts quieter in Dimond — foot traffic down",
+        "label": "Dimond cooling",
+        "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "hood": "Dimond",
+        "pulseClass": "hood-cooling",
+        "namedBusinesses": [],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## What Moved · trajectory",
+        "cycle": 103
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "hood-cooling",
+        "score": 24,
+        "label": "Dimond cooling",
+        "hood": "Dimond",
+        "namedBusinesses": [],
+        "retail": 8.24,
+        "retailDelta": null
+      },
+      "prewrite": {
+        "pulseClass": "hood-cooling",
+        "angle": "Storefronts quieter in Dimond — foot traffic down",
+        "hookLine": "Dimond cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "namedBusinesses": [],
+        "anchorFacts": [
+          "HOOD: Dimond",
+          "TRAJECTORY: cooling",
+          "MAGNITUDE (translate, do not lead): 6",
+          "RETAIL VITALITY (scene color): 8.24",
+          "NAMED BUSINESSES: none on disk for this hood — do not invent"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "story": {
+        "ref": "undocked:undocked-pop00962-Y2C51",
+        "label": "UNDOCKED: Marcus Walker — down 68 on the night",
+        "kind": "undocked",
+        "angle": "Recap Marcus Walker's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits -68, systems Sol, combat 0, mishaps 0, magnitude 4/5, open escrow position.",
+        "citizens": [
+          "Marcus Walker — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00962"
+        ],
+        "hood": "Jack London"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Luis Navarro",
+        "persona": "luis-navarro",
+        "wakePackage": "LUIS-LEP2-1"
+      },
+      {
+        "name": "P Slayer",
+        "persona": "p-slayer",
+        "wakePackage": "PSLAYER-LEP2-1"
+      },
+      {
+        "name": "Anthony Raines",
+        "persona": "anthony-raines",
+        "wakePackage": "ANTHONY-LEP2-1"
+      },
+      {
+        "name": "Mason Ortega",
+        "persona": "mason-ortega",
+        "wakePackage": "MASON-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-11",
+    "top": {
+      "score": 50,
+      "className": "implementation-gap",
+      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c103.json"
+  },
+  "pslayerEnrich": {
+    "enriched": true,
+    "reason": "pulse=prospect-callup score=58 charge=dare"
+  },
+  "anthonyEnrich": {
+    "enriched": true,
+    "reason": "pulse=line-card score=72 foil=9IP"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=hood-cooling score=24 hood=Dimond"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "mason-ortega",
+        "bag": "kitchen",
+        "pulse": "named-restaurant",
+        "score": 20
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "luis-navarro",
+        "domain": "accountability-anomaly",
+        "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles"
+      }
+    ]
+  },
+  "builtAt": "2026-08-18T11:15:08.166Z"
+}

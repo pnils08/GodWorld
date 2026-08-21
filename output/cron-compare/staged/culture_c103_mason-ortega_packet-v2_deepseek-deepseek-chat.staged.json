@@ -1,0 +1,36 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "103",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c103_mason-ortega_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [],
+    "businesses": [],
+    "storylines": [],
+    "hoods": [
+      "Piedmont Ave"
+    ],
+    "claims": [
+      {
+        "claim": "Piedmont Heights (Piedmont Ave)",
+        "sourceRef": "world_summary ## Evening Texture · Restaurants"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.5-flash",
+    "manifestId": "AM-d7a5d2ba00b7",
+    "draftSha256": "4e583f9415ee06a4e6cc11ccf4871312a10d350777029236dd5f8e4b180637a3",
+    "verdict": "output/cron-compare/culture_c103_mason-ortega_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-18T23:24:24.454Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-18T23:24:24.893Z"
+}

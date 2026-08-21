@@ -43,24 +43,24 @@
       "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
       "nearby": [
         {
-          "text": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
-          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+          "text": "Avery Santana (mayor): approved — \"Eighty-six applicants shouldn’t be stuck in paperwork. We’re cutting the red tape and getting these young people to work.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         },
         {
-          "text": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
-          "src": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s)"
+          "text": "Avery Santana (mayor): approved — \"Forty-five families have their money. The next seven get theirs this week—no delays, no excuses.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         },
         {
-          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
-          "src": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s)"
+          "text": "Avery Santana (mayor): task_force_created — \"Public safety isn’t just about response times—it’s about trust. We’re listening, and we’re acting.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         },
         {
-          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
-          "src": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s)"
+          "text": "Avery Santana (mayor): bureau_review_approved — \"Fruitvale deserves a transit hub that works for the people who use it every day. We’re moving this forward.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         },
         {
-          "text": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
-          "src": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3"
+          "text": "Avery Santana (mayor): phase_one_close_approved — \"Temescal needs this health center now—not next year, not when the paperwork is perfect.\"",
+          "src": "output/civic-voice/mayor_c103.json"
         }
       ]
     },
@@ -69,7 +69,40 @@
         "editor-assignment",
         "desk-signal"
       ],
-      "candidates": []
+      "candidates": [
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "why": "same-hood-ledger",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00269",
+          "name": "Kevin Nelson",
+          "profile": "Kevin Nelson — Line cook — Temescal",
+          "why": "same-hood-ledger",
+          "role": "Line cook",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00666",
+          "name": "Kaila Raimon",
+          "profile": "Kaila Raimon — Sourdough Baker — Temescal",
+          "why": "same-hood-ledger",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00290",
+          "name": "Omar Cleo",
+          "profile": "Omar Cleo — Line Cook — Temescal",
+          "why": "same-hood-ledger",
+          "role": "Line Cook",
+          "hood": "Temescal"
+        }
+      ]
     },
     "known": [
       {
@@ -117,14 +150,20 @@
         "checks": [
           "string"
         ],
-        "targets": [],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
         "interpretation": "string",
         "unverifiedLead": [
           "string"
         ],
         "closeQuestion": "string"
       },
-      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
     }
   },
   "reporter": {
@@ -149,6 +188,7 @@
   "eveningSlice": null,
   "anthonySlice": null,
   "halSlice": null,
+  "simonSlice": null,
   "economicSlice": null,
   "safetySlice": null,
   "civicDomainSlice": {
@@ -238,13 +278,45 @@
         "citizens": [],
         "source": "desk-signal",
         "sourceIndex": 29
+      },
+      {
+        "score": 45,
+        "kind": "civic-decision",
+        "label": "Avery Santana (mayor): phase_one_close_approved — \"Temescal needs this health center now—not next year, not when the paperwork is perfect.\"",
+        "ref": "output/civic-voice/mayor_c103.json",
+        "hood": null,
+        "popids": [
+          "POP-00034"
+        ],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "civic-decision",
+        "sourceIndex": 36
+      },
+      {
+        "score": 45,
+        "kind": "civic-decision",
+        "label": "Rafael Montez (police chief): Continue current OARI co-deployment protocols in pilot districts — \"Behavioral health crisis response requires careful operational integration — we're methodically refining the co-deployment",
+        "ref": "output/civic-voice/police_chief_c103.json",
+        "hood": null,
+        "popids": [
+          "POP-00136"
+        ],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "civic-decision",
+        "sourceIndex": 41
       }
     ],
     "pointers": [
       "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c103.json snapshots.Initiative_Tracker",
       "Initiative_Tracker (InitiativeID INIT-005)",
       "Ripple_Ledger cycle 103 (CauseType initiative-implementation); rendered: world_summary_c103.md \"## What Moved\" > \"### initiative-implementation\"",
-      "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\""
+      "Ripple_Ledger cycle 103 (CauseType approval-shift); rendered: world_summary_c103.md \"## What Moved\" > \"### approval-shift\"",
+      "output/civic-voice/mayor_c103.json",
+      "output/civic-voice/police_chief_c103.json"
     ]
   },
   "reporterWall": null,
@@ -252,71 +324,66 @@
   "angleRead": {
     "name": "Lila Mezran",
     "popid": "POP-00154",
-    "text": "{\n  \"focus\": \"Temescal Community Health Center construction and its potential impact on community health access\",\n  \"why\": \"Construction is active but there's no information on how this will change health service access or who will be affected\",\n  \"checks\": [\n    \"Verify if the construction timeline aligns with any known community health needs\",\n    \"Check for any existing gaps in health services that the center might address\",\n    \"Look for patterns in nearby initiatives that might indicate systemic access issues\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"This feels like one of those moments where infrastructure moves forward while the human consequences remain invisible until the doors open. I've seen too many projects where the ribbon-cutting comes before anyone's asked who'll walk through those doors.\",\n  \"unverifiedLead\": [\n    \"Are there existing health service users in Temescal who currently travel elsewhere for care?\",\n    \"What health services will be prioritized when the center opens?\"\n  ],\n  \"closeQuestion\": \"Without knowing who this center will serve or what services it will provide, how can we measure its true community impact?\"\n}",
+    "text": "{\n  \"focus\": \"Temescal Community Health Center construction progress and its implications for neighborhood access\",\n  \"why\": \"The mayor's approval signals urgency ('now—not next year'), but the human consequence of delayed access remains unestablished\",\n  \"checks\": [\n    \"Verify if construction pace matches mayoral urgency claims\",\n    \"Confirm whether any pre-existing health services were displaced or altered by this project\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00170\",\n      \"question\": \"Have you noticed changes in neighborhood health service availability during construction?\",\n      \"basis\": \"same-hood-ledger as longtime Temescal resident\"\n    },\n    {\n      \"pop\": \"POP-00269\",\n      \"question\": \"What practical health access challenges do service workers face in this area?\",\n      \"basis\": \"same-hood-ledger as frontline worker\"\n    }\n  ],\n  \"interpretation\": \"Approval rhetoric emphasizes speed, but without timeline or capacity details, the gap between political urgency and lived experience remains unmeasured\",\n  \"unverifiedLead\": [\n    \"Possible service gaps during transition from approval to operational status\",\n    \"Undocumented shifts in where residents seek care during construction\"\n  ],\n  \"closeQuestion\": \"Does 'active construction' indicate accelerated progress, or reveal unstated delays in making care accessible?\"\n}",
     "plan": {
-      "focus": "Temescal Community Health Center construction and its potential impact on community health access",
-      "why": "Construction is active but there's no information on how this will change health service access or who will be affected",
+      "focus": "Temescal Community Health Center construction progress and its implications for neighborhood access",
+      "why": "The mayor's approval signals urgency ('now—not next year'), but the human consequence of delayed access remains unestablished",
       "checks": [
-        "Verify if the construction timeline aligns with any known community health needs",
-        "Check for any existing gaps in health services that the center might address",
-        "Look for patterns in nearby initiatives that might indicate systemic access issues"
+        "Verify if construction pace matches mayoral urgency claims",
+        "Confirm whether any pre-existing health services were displaced or altered by this project"
       ],
-      "targets": [],
-      "interpretation": "This feels like one of those moments where infrastructure moves forward while the human consequences remain invisible until the doors open. I've seen too many projects where the ribbon-cutting comes before anyone's asked who'll walk through those doors.",
+      "targets": [
+        {
+          "pop": "POP-00170",
+          "question": "Have you noticed changes in neighborhood health service availability during construction?",
+          "basis": "same-hood-ledger as longtime Temescal resident"
+        },
+        {
+          "pop": "POP-00269",
+          "question": "What practical health access challenges do service workers face in this area?",
+          "basis": "same-hood-ledger as frontline worker"
+        }
+      ],
+      "interpretation": "Approval rhetoric emphasizes speed, but without timeline or capacity details, the gap between political urgency and lived experience remains unmeasured",
       "unverifiedLead": [
-        "Are there existing health service users in Temescal who currently travel elsewhere for care?",
-        "What health services will be prioritized when the center opens?"
+        "Possible service gaps during transition from approval to operational status",
+        "Undocumented shifts in where residents seek care during construction"
       ],
-      "closeQuestion": "Without knowing who this center will serve or what services it will provide, how can we measure its true community impact?"
+      "closeQuestion": "Does 'active construction' indicate accelerated progress, or reveal unstated delays in making care accessible?"
     }
   },
   "lanePicks": [
     {
-      "label": "stuck-initiative (high) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" in phase \"construction-planning\" for 9 cycles",
-      "kind": "anomaly",
-      "hood": "Fruitvale",
-      "ref": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
-      "popids": [
-        "POP-00231",
-        "POP-00598",
-        "POP-00744"
-      ]
-    },
-    {
-      "label": "repeating-event (medium) | Issue \"strain\" recurred 3 cycles",
-      "kind": "anomaly",
-      "ref": "output/engine_audit_c103.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "label": "Avery Santana (mayor): approved — \"Eighty-six applicants shouldn’t be stuck in paperwork. We’re cutting the red tape and getting these young people to work.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
       "popids": []
     },
     {
-      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
-      "kind": "anomaly",
-      "ref": "output/engine_audit_c103.json patterns[2]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "label": "Avery Santana (mayor): approved — \"Forty-five families have their money. The next seven get theirs this week—no delays, no excuses.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
       "popids": []
     },
     {
-      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
-      "kind": "anomaly",
-      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
-      "ref": "output/engine_audit_c103.json patterns[3]; evidence: Neighborhood_Map row(s) ",
-      "popids": [
-        "POP-00010",
-        "POP-00039",
-        "POP-00635"
-      ]
+      "label": "Avery Santana (mayor): task_force_created — \"Public safety isn’t just about response times—it’s about trust. We’re listening, and we’re acting.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "popids": []
     },
     {
-      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (operational, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
-      "kind": "anomaly",
-      "hood": "West Oakland, Fruitvale, East Oakland",
-      "ref": "output/engine_audit_c103.json patterns[4]; evidence: Initiative_Tracker row(s) 3",
-      "popids": [
-        "POP-00758",
-        "POP-00771",
-        "POP-00773"
-      ]
+      "label": "Avery Santana (mayor): bureau_review_approved — \"Fruitvale deserves a transit hub that works for the people who use it every day. We’re moving this forward.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "popids": []
+    },
+    {
+      "label": "Avery Santana (mayor): phase_one_close_approved — \"Temescal needs this health center now—not next year, not when the paperwork is perfect.\"",
+      "kind": "civic-decision",
+      "ref": "output/civic-voice/mayor_c103.json",
+      "popids": []
     }
   ],
-  "laneEntries": 32,
-  "ranAt": "2026-08-13T11:15:44.342Z"
+  "laneEntries": 66,
+  "ranAt": "2026-08-17T11:15:41.647Z"
 }

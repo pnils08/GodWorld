@@ -3,11 +3,12 @@
   "cycle": "103",
   "backend": "api",
   "model": "google/gemini-3.5-flash",
+  "draftSha256": "c9f5cafb2486f36ce03aa6f5dd9c21edf724794f7d483326c9e0dd17d7223663",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "All claims, names, and roles verified against the cycle 103 world summary and ledger.",
+  "summary": "The draft perfectly aligns with the stuck-initiative ground truth for Fruitvale and uses authorized persona texture.",
   "review": {
     "profileId": "jax-accountability-v1",
     "canonIntegrity": "pass",
@@ -16,34 +17,41 @@
   "reviewProfile": {
     "id": "jax-accountability-v1",
     "packageVersion": "JAX-LEP2-1",
-    "manifestId": "AM-087ec8cff573",
-    "lexicalObservations": []
+    "manifestId": "AM-b0b6363f2f85",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "14",
+          "1"
+        ]
+      }
+    ]
   },
   "nameCheck": {
     "verified": [
-      "Calvin Turner",
-      "Vladimir Gonzalez"
+      "Jax Caldera"
     ],
     "unverified": [
-      "Right Fielder"
+      "Frank Ogawa Plaza"
     ]
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 2,
+      "names": 0,
       "businesses": 0,
       "storylines": 0,
-      "hoods": 1,
+      "hoods": 0,
       "claims": 1
     },
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": false
+    "packetChecked": true
   },
-  "apiCostUsd": 0.0452,
-  "durationMs": 10053,
+  "apiCostUsd": 0.048,
+  "durationMs": 11493,
   "parseError": false,
-  "ranAt": "2026-08-13T07:03:08.481Z"
+  "ranAt": "2026-08-18T23:17:32.433Z"
 }

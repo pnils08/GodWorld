@@ -4,28 +4,33 @@
   "desk": "business",
   "persona": "business-desk",
   "storyline": {
-    "slug": "dimond-clarence-moody-hood-cooling",
-    "verb": "opened"
+    "slug": "dimond-melton-neilon-hood-cooling",
+    "verb": "advanced"
   },
   "hood": "Dimond",
   "quotes": [
     {
-      "pop": "POP-00730",
-      "name": "Clarence Moody",
-      "quote": "I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed."
-    },
-    {
       "pop": "POP-00170",
       "name": "Melton Neilon",
-      "quote": "I’ve noticed Dimond feels quieter lately, and it’s worrying. The Tribune should ask what’s driving people away—is it rents, safety, or something else?"
+      "quote": "I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I don't get over to Dimond much these days, but hearing shops are slowing down there makes me worry about the whole area. The Tribune should ask if this is just a summer slump or something deeper, like rents pushing folks out."
     },
     {
       "pop": "POP-00201",
       "name": "Elio Perez",
-      "quote": "I hear things are slowing down over in Dimond, but I don't get out that way much—too busy working doubles at the diner to notice what's open or closed. Maybe ask why people aren't shopping there like they used to?"
+      "quote": "I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should ask what’s driving people away and what can be done to bring them back."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I've heard folks talking about how Dimond's not as lively as it used to be—fewer people out shopping, more empty storefronts. Makes me wonder if rents are pushing out the small businesses that gave the neighborhood its charm."
     }
   ],
-  "claim": "I’ve been here for years, and Dimond’s always been steady—quiet but reliable. If it’s cooling off compared to the rest of the city, I’d ask if they’re counting the smaller, family-run spots that don’t always get noticed.",
+  "claim": "I've heard Dimond's slowing down, but I'm up at 3AM most days kneading dough in Temescal—can't say I've seen it firsthand. Tribune should ask where the energy's going instead, because Oakland's always shifting like sourdough bubbles in the pan.",
   "src": "citizenVoice PRESS c103",
-  "ranAt": "2026-08-13T23:19:30.685Z"
+  "ranAt": "2026-08-19T18:21:23.432Z"
 }

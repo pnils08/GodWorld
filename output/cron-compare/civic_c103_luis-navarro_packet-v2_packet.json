@@ -27,17 +27,17 @@
     }
   },
   "angle": "output/cron-compare/civic_c103_luis-navarro_packet-v2_angle.json",
-  "quotesRequested": 2,
+  "quotesRequested": 4,
   "quotesLanded": 1,
   "quotes": [
     {
-      "pop": "POP-00744",
-      "name": "Tomas Renteria",
-      "quote": "I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am?",
-      "disp": "draws people in, deep with them",
-      "recorded": false,
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am?\",\n  \"fact_ids\": [\"F-c66f9422d22f\", \"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?\",\n  \"fact_ids\": [\"F-c66f9422d22f\", \"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Has the city reallocated the Fruitvale Transit Hub Phase II funds to other projects?\"],\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
@@ -45,19 +45,21 @@
           "F-c4b3917a7eab"
         ],
         "basis": "direct-reaction",
-        "unverifiedLead": [],
+        "unverifiedLead": [
+          "Has the city reallocated the Fruitvale Transit Hub Phase II funds to other projects?"
+        ],
         "abstainReason": null,
-        "quoteId": "Q-POP-00744-e70b66e567",
+        "quoteId": "Q-POP-00644-1f168b72d9",
         "authoredQuote": true,
-        "publishableQuote": "I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am?"
+        "publishableQuote": "I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?"
       },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
         "actor": {
-          "id": "POP-00744",
-          "name": "Tomas Renteria",
-          "role": "Podcast Host / Line Cook",
+          "id": "POP-00644",
+          "name": "Rafael Pilgrim",
+          "role": "Server",
           "desk": null
         },
         "task": {
@@ -73,11 +75,11 @@
         },
         "exposure": {
           "basis": [
-            "assignment",
+            "same-hood-ledger",
             "same-neighborhood"
           ],
-          "self": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale resident",
-          "editorialTarget": true
+          "self": "Rafael Pilgrim — Server — Fruitvale",
+          "editorialTarget": false
         },
         "known": [
           {
@@ -100,9 +102,9 @@
           },
           {
             "t": "FACT",
-            "text": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale resident",
-            "src": "Simulation_Ledger profile for POP-00744",
-            "id": "F-4709c3b579a8"
+            "text": "Rafael Pilgrim — Server — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00644",
+            "id": "F-56d37e2ec062"
           }
         ],
         "limits": {
@@ -126,7 +128,7 @@
             "invent a count",
             "turn suspicion into observation"
           ],
-          "rule": "No story-linked lived exposure is supplied. Give exactly one sentence of no more than 28 words beginning I think, I feel, I want, My, To me, or For me. Evaluate only the supplied fact. Use basis direct-reaction and unverifiedLead []. Do not use we, they, everyone, people, keep, still, again, ever, same, promises, updates, meetings, documents, shovels, scenes, effects, history, or community sentiment. Otherwise abstain."
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
         },
         "output": {
           "contract": "CITIZEN_INTERVIEW/1",
@@ -154,9 +156,9 @@
       "name": "Calvin Turner",
       "quote": null,
       "disp": "driven, hard to sit still; magnetic, center of every room; devoted, family is everything",
-      "recorded": false,
-      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction claims unsupplied history or experience",
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I think they're moving too slow on this—we need that hub finished yesterday.\",\n  \"fact_ids\": [\"F-c66f9422d22f\", \"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person; direct reaction claims unsupplied history or experience",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, they been talking about that transit hub for years now, but all I see is empty promises and dust. If they really want to know what's up, ask why the planning money keeps moving but the shovels never hit the ground.\",\n  \"fact_ids\": [\"F-c66f9422d22f\", \"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Check where the planning funds were allocated last fiscal year\"]\n}\n```",
       "claims": null,
       "inputPacket": {
         "v": "LEP/2",
@@ -233,7 +235,7 @@
             "invent a count",
             "turn suspicion into observation"
           ],
-          "rule": "No story-linked lived exposure is supplied. Give exactly one sentence of no more than 28 words beginning I think, I feel, I want, My, To me, or For me. Evaluate only the supplied fact. Use basis direct-reaction and unverifiedLead []. Do not use we, they, everyone, people, keep, still, again, ever, same, promises, updates, meetings, documents, shovels, scenes, effects, history, or community sentiment. Otherwise abstain."
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
         },
         "output": {
           "contract": "CITIZEN_INTERVIEW/1",
@@ -257,24 +259,12 @@
     {
       "pop": "POP-00744",
       "name": "Tomas Renteria",
-      "quote": "I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am?",
+      "quote": null,
       "disp": "draws people in, deep with them",
-      "recorded": false,
-      "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am?\",\n  \"fact_ids\": [\"F-c66f9422d22f\", \"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
-      "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-c66f9422d22f",
-          "F-c4b3917a7eab"
-        ],
-        "basis": "direct-reaction",
-        "unverifiedLead": [],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00744-e70b66e567",
-        "authoredQuote": true,
-        "publishableQuote": "I feel like the visioning stall means someone’s not listening to what actually moves here—who’s deciding without riding the 1 bus at 6am?"
-      },
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"What feels off is how quiet it's been—like, nobody's even pretending to ask us what we need anymore. The Tribune should ask why the planning meetings vanished when they promised this was about community input.\",\n  \"fact_ids\": [\"F-c66f9422d22f\", \"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Check if any community outreach funds were reallocated during the stall\"]\n}\n```",
+      "claims": null,
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
@@ -350,7 +340,231 @@
             "invent a count",
             "turn suspicion into observation"
           ],
-          "rule": "No story-linked lived exposure is supplied. Give exactly one sentence of no more than 28 words beginning I think, I feel, I want, My, To me, or For me. Evaluate only the supplied fact. Use basis direct-reaction and unverifiedLead []. Do not use we, they, everyone, people, keep, still, again, ever, same, promises, updates, meetings, documents, shovels, scenes, effects, history, or community sentiment. Otherwise abstain."
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, they been talking about that transit hub for years now—everybody at the diner asks when it's actually gonna happen. The Tribune should ask why they keep calling it 'visioning' when all we see is empty lots and delays.\",\n  \"fact_ids\": [\"F-c66f9422d22f\", \"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c66f9422d22f"
+          },
+          {
+            "t": "FACT",
+            "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c4b3917a7eab"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?\",\n  \"fact_ids\": [\"F-c66f9422d22f\", \"F-c4b3917a7eab\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Has the city reallocated the Fruitvale Transit Hub Phase II funds to other projects?\"],\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-c66f9422d22f",
+          "F-c4b3917a7eab"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [
+          "Has the city reallocated the Fruitvale Transit Hub Phase II funds to other projects?"
+        ],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00644-1f168b72d9",
+        "authoredQuote": true,
+        "publishableQuote": "I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?"
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00644",
+          "name": "Rafael Pilgrim",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Luis Navarro",
+          "question": "As a resident of Fruitvale, what about the supplied trend \"Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+          "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rafael Pilgrim — Server — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c66f9422d22f"
+          },
+          {
+            "t": "FACT",
+            "text": "The transit initiative carrying Fruitvale has not advanced in 9 cycles.",
+            "src": "output/engine_audit_c103.json patterns[0]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-c4b3917a7eab"
+          },
+          {
+            "t": "FACT",
+            "text": "Rafael Pilgrim — Server — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00644",
+            "id": "F-56d37e2ec062"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
         },
         "output": {
           "contract": "CITIZEN_INTERVIEW/1",
@@ -372,5 +586,5 @@
       }
     }
   ],
-  "ranAt": "2026-08-13T18:15:22.059Z"
+  "ranAt": "2026-08-18T18:17:09.215Z"
 }

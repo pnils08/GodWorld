@@ -1,0 +1,364 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "104",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Sandra Velazquez — dealt with a seasonal health concern",
+      "approach": "Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede.",
+      "creativeBrief": {
+        "kind": "weather-ground",
+        "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+        "missing": [
+          "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+        ],
+        "impactEvidence": null,
+        "forbidden": [
+          "Do not announce the season or temperature as the story.",
+          "Do not import real-world Oakland winter tropes absent from the Packet.",
+          "Do not add forecasts, agencies, or unsupplied measurements."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "season-feel",
+      "hood": "Piedmont Ave",
+      "score": null,
+      "src": "output/world_summary_c104.md ## Who Lived It",
+      "nearby": [
+        {
+          "text": "Rose Delgado (City Council District 3): Community commitment reinforced",
+          "src": "output/cron-civic/datawake/civic-office-council-d3_2026-08-20.json"
+        },
+        {
+          "text": "Janae Rivers (City Council District 5): 12",
+          "src": "output/cron-civic/datawake/civic-office-council-d5_2026-08-20.json"
+        },
+        {
+          "text": "Warren Ashford (City Council District 7): KONO's numbers tell a clear story—lower sentiment but also lower crime than city averages. Before we",
+          "src": "output/cron-civic/datawake/civic-office-council-d7_2026-08-20.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+          "src": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+          "src": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00830",
+          "name": "Sandra Velazquez (POP-00830)",
+          "profile": "Sandra Velazquez (POP-00830)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Piedmont Ave"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "Sandra Velazquez — dealt with a seasonal health concern",
+        "src": "output/world_summary_c104.md ## Who Lived It",
+        "id": "F-aebfdcfebfec"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/world_summary_c104.md ## Who Lived It",
+      "label": "Sandra Velazquez — dealt with a seasonal health concern",
+      "kind": "season-feel",
+      "angle": "Sandra Velazquez — dealt with a seasonal health concern",
+      "hookLine": "Sandra Velazquez — dealt with a seasonal health concern",
+      "hood": "Piedmont Ave",
+      "popids": [
+        "POP-00830"
+      ],
+      "citizens": [
+        "Sandra Velazquez (POP-00830)"
+      ]
+    },
+    "approach": "Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "domain": "environment"
+    },
+    "pulse": {
+      "className": "environment",
+      "score": 80,
+      "label": "Sandra Velazquez — dealt with a seasonal health concern",
+      "hood": "Piedmont Ave",
+      "source": "output/world_summary_c104.md ## Who Lived It"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "Sandra Velazquez — dealt with a seasonal health concern"
+      ],
+      "forbidden": [
+        "Do not announce the season or temperature as the story.",
+        "Do not import real-world Oakland winter tropes absent from the Packet.",
+        "Do not add forecasts, agencies, or unsupplied measurements."
+      ],
+      "schema": "SEASON-FEEL-1",
+      "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+      "missing": [
+        "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+      ],
+      "impactEvidence": {
+        "state": "SUPPLIED",
+        "subjects": [
+          "POP-00830"
+        ],
+        "facts": [
+          "Sandra Velazquez — dealt with a seasonal health concern"
+        ],
+        "src": "output/world_summary_c104.md ## Who Lived It"
+      }
+    },
+    "candidates": [
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "Sandra Velazquez — dealt with a seasonal health concern",
+        "ref": "output/world_summary_c104.md ## Who Lived It",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00830"
+        ],
+        "angle": "Sandra Velazquez — dealt with a seasonal health concern",
+        "hookLine": "Sandra Velazquez — dealt with a seasonal health concern",
+        "citizens": [
+          "Sandra Velazquez (POP-00830)"
+        ],
+        "source": "season-feel",
+        "sourceIndex": 52
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "Maria Conteras — dealt with a seasonal health concern",
+        "ref": "output/world_summary_c104.md ## Who Lived It",
+        "hood": "East Oakland",
+        "popids": [
+          "POP-01047"
+        ],
+        "angle": "Maria Conteras — dealt with a seasonal health concern",
+        "hookLine": "Maria Conteras — dealt with a seasonal health concern",
+        "citizens": [
+          "Maria Conteras (POP-01047)"
+        ],
+        "source": "season-feel",
+        "sourceIndex": 53
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "FAITH — crisis_response — Rockridge: Temple Beth Or: congregation opens doors for community support",
+        "ref": "output/world_summary_c104.md ## World Events",
+        "hood": "Rockridge",
+        "popids": [],
+        "angle": "FAITH — crisis_response — Rockridge: Temple Beth Or: congregation opens doors for community support",
+        "hookLine": "FAITH — crisis_response — Rockridge: Temple Beth Or: congregation opens doors for community support",
+        "citizens": [],
+        "source": "season-feel",
+        "sourceIndex": 54
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "FAITH — crisis_response — Lake Merritt: Lakeshore Unitarian Universalist Fellowship: emergency assistance fund activated",
+        "ref": "output/world_summary_c104.md ## World Events",
+        "hood": "Lake Merritt",
+        "popids": [],
+        "angle": "FAITH — crisis_response — Lake Merritt: Lakeshore Unitarian Universalist Fellowship: emergency assistance fund activated",
+        "hookLine": "FAITH — crisis_response — Lake Merritt: Lakeshore Unitarian Universalist Fellowship: emergency assistance fund activated",
+        "citizens": [],
+        "source": "season-feel",
+        "sourceIndex": 55
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Advent and Christmas",
+        "ref": "output/world_summary_c104.md ## World Events",
+        "hood": "Downtown",
+        "popids": [],
+        "angle": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Advent and Christmas",
+        "hookLine": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Advent and Christmas",
+        "citizens": [],
+        "source": "season-feel",
+        "sourceIndex": 56
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+        "ref": "output/world_summary_c104.md ## World Events",
+        "hood": "East Oakland",
+        "popids": [],
+        "angle": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+        "hookLine": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
+        "citizens": [],
+        "source": "season-feel",
+        "sourceIndex": 57
+      }
+    ],
+    "pointers": [
+      "output/world_summary_c104.md ## Who Lived It",
+      "output/world_summary_c104.md ## World Events"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "{\n  \"focus\": \"Sandra Velazquez's seasonal health concern\",\n  \"why\": \"Assignment from desk, supported by 'Who Lived It' signal in Piedmont Ave\",\n  \"checks\": [\n    \"Do not announce the season or temperature as the story\",\n    \"Do not import real-world Oakland winter tropes absent from the Packet\",\n    \"Do not add forecasts, agencies, or unsupplied measurements\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00830\",\n      \"question\": \"What changed in Sandra's daily rhythm or responsibilities because of this health concern?\",\n      \"basis\": \"F-aebfdcfebfec ('Sandra Velazquez — dealt with a seasonal health concern')\"\n    }\n  ],\n  \"interpretation\": \"A seasonal pattern disrupted something tangible in Sandra's life—not the weather itself, but what it moved or unmoved around her\",\n  \"unverifiedLead\": [\n    \"Did neighbors step in to help with tasks Sandra usually handles?\",\n    \"Was there a specific household chore or routine that fell apart during this time?\"\n  ],\n  \"closeQuestion\": \"What did this season carry away from Sandra's hands, and who noticed?\"\n}",
+    "plan": {
+      "focus": "Sandra Velazquez's seasonal health concern",
+      "why": "Assignment from desk, supported by 'Who Lived It' signal in Piedmont Ave",
+      "checks": [
+        "Do not announce the season or temperature as the story",
+        "Do not import real-world Oakland winter tropes absent from the Packet",
+        "Do not add forecasts, agencies, or unsupplied measurements"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00830",
+          "question": "What changed in Sandra's daily rhythm or responsibilities because of this health concern?",
+          "basis": "F-aebfdcfebfec ('Sandra Velazquez — dealt with a seasonal health concern')"
+        }
+      ],
+      "interpretation": "A seasonal pattern disrupted something tangible in Sandra's life—not the weather itself, but what it moved or unmoved around her",
+      "unverifiedLead": [
+        "Did neighbors step in to help with tasks Sandra usually handles?",
+        "Was there a specific household chore or routine that fell apart during this time?"
+      ],
+      "closeQuestion": "What did this season carry away from Sandra's hands, and who noticed?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Rose Delgado (City Council District 3): Community commitment reinforced",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d3_2026-08-20.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Janae Rivers (City Council District 5): 12",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d5_2026-08-20.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Warren Ashford (City Council District 7): KONO's numbers tell a clear story—lower sentiment but also lower crime than city averages. Before we",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d7_2026-08-20.json",
+      "popids": [
+        "POP-00504"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    }
+  ],
+  "laneEntries": 51,
+  "ranAt": "2026-08-20T11:15:24.277Z"
+}

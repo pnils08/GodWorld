@@ -1,0 +1,14 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-08-18",
+  "cycle": 103,
+  "model": "moonshotai/kimi-k2",
+  "statement": "Glenview's numbers speak for themselves: sentiment at fifty-seven percent against a city average below forty-nine, crime index half the city rate, property incidents down to four when the city sits at six-point-three. This isn't luck—it's the Stabilization Fund working, it's deliberate investment in neighborhood infrastructure, it's proof that fiscal discipline and community outcomes aren't opposed. I've defended this district's interests at every turn: the Dimond improvements I demanded, the Chinatown accountability I pressed, the Baylight process I insisted on. My approval sits at fifty-four because D4 residents see results, not promises. The lever this week is simple—let the record stand, or let someone twist it. I'm not quiet when my district's performance is being used as a talking point. Glenview, Dimond, Ivy Hill: stable, improving, and not interested in being anyone's example of what isn't working.",
+  "action": "issued district performance defense citing specific metrics; reinforced prior accountability demands on Chinatown and Baylight; declined to escalate or introduce new initiatives",
+  "numberMoved": "0",
+  "ranAt": "2026-08-18T10:45:56.874Z"
+}

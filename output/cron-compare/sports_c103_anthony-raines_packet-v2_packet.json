@@ -4,7 +4,10 @@
   "cycle": "103",
   "persona": "anthony-raines",
   "packetContract": "LEP/2",
-  "reporter": null,
+  "reporter": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017"
+  },
   "assignment": {
     "story": {
       "kind": "sports-analytics",
@@ -26,7 +29,7 @@
     }
   },
   "angle": "output/cron-compare/sports_c103_anthony-raines_packet-v2_angle.json",
-  "quotesRequested": 1,
+  "quotesRequested": 4,
   "quotesLanded": 0,
   "quotes": [],
   "interviews": [
@@ -35,9 +38,9 @@
       "name": "Vinnie Keane",
       "quote": null,
       "disp": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight; close to family",
-      "recorded": false,
-      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction claims unsupplied history or experience",
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, Pablo's debut is pure magic—reminds me why I love this game, and the Tribune should ask how he kept his nerves in check through nine.\",\n  \"fact_ids\": [\"F-c3d068124c64\", \"F-9442247b316d\", \"F-94954ea5ef3e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, a no-hitter in your debut? That's the kind of lightning in a bottle that makes you believe in baseball magic. The Tribune should ask how he kept his nerves in check—because that's the real story, how a kid steps onto that mound and just owns it.\",\n  \"fact_ids\": [\"F-c3d068124c64\", \"F-9442247b316d\", \"F-94954ea5ef3e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"How Pablo Almanzar prepared mentally for his MLB debut\"]\n}\n```",
       "claims": null,
       "inputPacket": {
         "v": "LEP/2",
@@ -137,7 +140,394 @@
             "invent a count",
             "turn suspicion into observation"
           ],
-          "rule": "No story-linked lived exposure is supplied. Give exactly one sentence of no more than 28 words beginning I think, I feel, I want, My, To me, or For me. Evaluate only the supplied fact. Use basis direct-reaction and unverifiedLead []. Do not use we, they, everyone, people, keep, still, again, ever, same, promises, updates, meetings, documents, shovels, scenes, effects, history, or community sentiment. Otherwise abstain."
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"A no-hitter in a debut? That's wild—I've been serving coffee to A's fans for years and never heard of that happening before. The Tribune should ask how many pitches he threw—something feels too perfect about this.\",\n  \"fact_ids\": [\"F-c3d068124c64\", \"F-9442247b316d\", \"F-94954ea5ef3e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Ask about pitch count and bullpen usage during the game\"]\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "As a resident of Downtown, what about the supplied trend \"Pablo Almanzar's no-hitter in his MLB debut\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Downtown",
+          "focus": "Pablo Almanzar's no-hitter in his MLB debut",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-c3d068124c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar throws a No No in his MLB debut",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-9442247b316d"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-94954ea5ef3e"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-f9190a7c60c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 124-34 · W15",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-567f64fcf11e"
+          },
+          {
+            "t": "FACT",
+            "text": "Event kind (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-3cd772dd1442"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00224",
+      "name": "Dillon Trevor",
+      "quote": null,
+      "disp": "magnetic, center of every room; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, a no-hitter in a debut? That's wild—but the A's being 124-34 feels even wilder. Tribune should ask how a team that dominant even has room for debut pitchers.\",\n  \"fact_ids\": [\"F-c3d068124c64\", \"F-567f64fcf11e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": []\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00224",
+          "name": "Dillon Trevor",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "As a resident of Downtown, what about the supplied trend \"Pablo Almanzar's no-hitter in his MLB debut\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Downtown",
+          "focus": "Pablo Almanzar's no-hitter in his MLB debut",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dillon Trevor — Server — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-c3d068124c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar throws a No No in his MLB debut",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-9442247b316d"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-94954ea5ef3e"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-f9190a7c60c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 124-34 · W15",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-567f64fcf11e"
+          },
+          {
+            "t": "FACT",
+            "text": "Event kind (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-3cd772dd1442"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Trevor — Server — Downtown",
+            "src": "Simulation_Ledger profile for POP-00224",
+            "id": "F-80fac7a0ad63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00225",
+      "name": "Andre Turner",
+      "quote": null,
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"A no-hitter in a debut? That’s wild, but something feels off—like, how’d he handle the pressure? The Tribune should ask how he stayed so calm out there.\",\n  \"fact_ids\": [\"F-c3d068124c64\", \"F-9442247b316d\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"How did Pablo Almanzar manage the pressure of his MLB debut?\"]\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00225",
+          "name": "Andre Turner",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Anthony Raines",
+          "question": "As a resident of Downtown, what about the supplied trend \"Pablo Almanzar's no-hitter in his MLB debut\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+        },
+        "signal": {
+          "kind": "sports-analytics",
+          "hood": "Downtown",
+          "focus": "Pablo Almanzar's no-hitter in his MLB debut",
+          "src": "world_summary_c103.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Andre Turner — Line cook — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C103",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-4ac610ea40fe"
+          },
+          {
+            "t": "FACT",
+            "text": "A's · player-feature — Pablo Almanzar throws a No No in his MLB debut",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-c3d068124c64"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar throws a No No in his MLB debut",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-9442247b316d"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-94954ea5ef3e"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-f9190a7c60c2"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 124-34 · W15",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-567f64fcf11e"
+          },
+          {
+            "t": "FACT",
+            "text": "Event kind (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c103.md ## Sports",
+            "id": "F-3cd772dd1442"
+          },
+          {
+            "t": "FACT",
+            "text": "Andre Turner — Line cook — Downtown",
+            "src": "Simulation_Ledger profile for POP-00225",
+            "id": "F-f8810d7815e2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
         },
         "output": {
           "contract": "CITIZEN_INTERVIEW/1",
@@ -159,5 +549,5 @@
       }
     }
   ],
-  "ranAt": "2026-08-13T17:54:32.193Z"
+  "ranAt": "2026-08-18T18:19:06.673Z"
 }

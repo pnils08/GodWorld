@@ -1,0 +1,600 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "104",
+  "persona": "kai-marston",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00158",
+      "name": "Kai Marston",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Evening TV slate — Countdown Live, New Year's Eve Special, Late Weather Watch; sports desk: Oakland Sports Tonight",
+      "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Kai (arts bag): present-tense scene; art as neighborhood act. Named events/artists from packet only. Modes: First Friday Pulse, Room Rewriting Itself, Stage/Mic/Block, What the Block Is Saying Tonight. Assigned pulse: tv-slate — TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch.",
+      "creativeBrief": {
+        "kind": "evening-life",
+        "bag": "arts",
+        "pulseClass": "tv-slate",
+        "pulseLabel": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+        "namedEvents": [
+          "The Kelley Line Founding Celebration",
+          "The Keane Line Founding Celebration",
+          "The Corliss Line Founding Celebration",
+          "The Dillon Line Founding Celebration",
+          "Countdown Live",
+          "New Year's Eve Special",
+          "Late Weather Watch",
+          "Breaking Bulletin"
+        ],
+        "namedPlaces": [
+          "Seasonal Spirits",
+          "Merritt AfterDark",
+          "The 44th Table",
+          "Vibe Terrace",
+          "Rhythm Deck",
+          "Neon Harbor Club",
+          "Skybar"
+        ],
+        "famousSightings": [
+          "Mark Aitken",
+          "John Ellis",
+          "Marin Tao"
+        ],
+        "streamingTrend": "party playlist",
+        "sceneRule": "Named places only from Evening Texture / desk_signal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+        "sourcePointers": [
+          "docs/media/KAI_ARTS_BAG.md",
+          "output/world_summary_c104.md ## Evening Texture",
+          "output/desk_signal_c104.json lanes.culture",
+          "docs/media/MARIA_GROUND_BAG.md",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": null,
+      "score": null,
+      "src": "world_summary ## Evening Texture · Evening media TV",
+      "nearby": [
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### Downtown\"; events: world_summary_c104.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### East Oakland\"; events: world_summary_c104.md \"## World Events\""
+        },
+        {
+          "text": "KONO | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### KONO\"; events: world_summary_c104.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### Lake Merritt\"; events: world_summary_c104.md \"## World Events\""
+        },
+        {
+          "text": "Rockridge | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### Rockridge\"; events: world_summary_c104.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "why": "ledger-resident",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — Line cook — Fruitvale",
+          "why": "ledger-resident",
+          "role": "Line cook",
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server — West Oakland",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00210",
+          "name": "Depak Ying",
+          "profile": "Depak Ying — Server — Rockridge",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+        "src": "world_summary ## Evening Texture · Evening media TV",
+        "id": "F-d449233aa492"
+      },
+      {
+        "t": "FACT",
+        "text": "On the box tonight: Countdown Live, New Year's Eve Special.",
+        "src": "world_summary ## Evening Texture · Evening media TV",
+        "id": "F-296611fac168"
+      },
+      {
+        "t": "FACT",
+        "text": "NAMED: Countdown Live",
+        "src": "world_summary ## Evening Texture · Evening media TV",
+        "id": "F-ffc612bc2577"
+      },
+      {
+        "t": "FACT",
+        "text": "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+        "src": "world_summary ## Evening Texture · Evening media TV",
+        "id": "F-a6797916f37c"
+      },
+      {
+        "t": "FACT",
+        "text": "SPORTS BROADCAST: Oakland Sports Tonight",
+        "src": "world_summary ## Evening Texture · Evening media TV",
+        "id": "F-322324057650"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+    }
+  },
+  "reporter": {
+    "name": "Kai Marston",
+    "popid": "POP-00158"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Evening TV slate — Countdown Live, New Year's Eve Special, Late Weather Watch; sports desk: Oakland Sports Tonight",
+      "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+      "hookLine": "On the box tonight: Countdown Live, New Year's Eve Special.",
+      "hood": null,
+      "pulseClass": "tv-slate",
+      "citizens": [],
+      "popids": [],
+      "named": "Countdown Live",
+      "venue": "Countdown Live",
+      "ref": "world_summary ## Evening Texture · Evening media TV",
+      "cycle": 104
+    },
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Kai (arts bag): present-tense scene; art as neighborhood act. Named events/artists from packet only. Modes: First Friday Pulse, Room Rewriting Itself, Stage/Mic/Block, What the Block Is Saying Tonight. Assigned pulse: tv-slate — TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "named": "Adams Point United Methodist Church",
+      "hood": "Adams Point",
+      "person": "Mark Aitken",
+      "venue": "Adams Point United Methodist Church"
+    },
+    "recommend": {
+      "bag": "ground",
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+      "reason": "top pulse fame-sighting → ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Mark Aitken at Adams Point United Methodist Church (Adams Point)"
+    },
+    "prewrite": {
+      "pulseClass": "tv-slate",
+      "angle": "Evening TV slate — Countdown Live, New Year's Eve Special, Late Weather Watch; sports desk: Oakland Sports Tonight",
+      "hookLine": "On the box tonight: Countdown Live, New Year's Eve Special.",
+      "anchorFacts": [
+        "NAMED: Countdown Live",
+        "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+        "SPORTS BROADCAST: Oakland Sports Tonight"
+      ],
+      "bagRecommend": "ground",
+      "bagSlug": "maria-keen"
+    },
+    "texture": {
+      "famous": [
+        "Mark Aitken",
+        "John Ellis",
+        "Marin Tao"
+      ],
+      "restaurants": [
+        {
+          "name": "Seasonal Spirits",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Merritt AfterDark",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "The 44th Table",
+          "hood": "Downtown"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "AfterHours Fry",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Vibe Terrace",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Rhythm Deck",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "Neon Harbor Club",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Skybar",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 7,
+        "vibe": "Terrace** (Lake Merritt)",
+        "movement": "high-energy",
+        "weatherImpact": 1.33
+      },
+      "cityEvents": [
+        "The Kelley Line Founding Celebration",
+        "The Keane Line Founding Celebration",
+        "The Corliss Line Founding Celebration",
+        "The Dillon Line Founding Celebration"
+      ],
+      "tv": [
+        "Countdown Live",
+        "New Year's Eve Special",
+        "Late Weather Watch",
+        "Breaking Bulletin",
+        "Weekend Kids",
+        "Oakland Baseball Tonight",
+        "One-on-One with Danny Horn (CF)"
+      ],
+      "movies": [
+        "When the Ball Drops",
+        "Last Night",
+        "Fog Harbor",
+        "New Beginnings",
+        "Ninth Inning"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "party playlist",
+      "foodTrend": "Holiday celebration dining - festive atmosphere"
+    },
+    "signals": {
+      "fameCount": 0,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+          "name": "Mark Aitken",
+          "venue": "Adams Point United Methodist Church",
+          "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Adams Point",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | John Ellis spotted around Laurel",
+          "name": null,
+          "venue": null,
+          "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Laurel",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Marin Tao spotted around San Antonio",
+          "name": null,
+          "venue": null,
+          "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "San Antonio",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Seasonal Spirits",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Merritt AfterDark",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "The 44th Table",
+          "hood": "Downtown"
+        },
+        {
+          "name": "AfterHours Fry",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Vibe Terrace",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Rhythm Deck",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "Neon Harbor Club",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Skybar",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 7,
+        "vibe": "Terrace** (Lake Merritt)",
+        "movement": "high-energy",
+        "weatherImpact": 1.33
+      },
+      "cityEvents": [
+        "The Kelley Line Founding Celebration",
+        "The Keane Line Founding Celebration",
+        "The Corliss Line Founding Celebration",
+        "The Dillon Line Founding Celebration"
+      ],
+      "tv": [
+        "Countdown Live",
+        "New Year's Eve Special",
+        "Late Weather Watch",
+        "Breaking Bulletin",
+        "Weekend Kids",
+        "Oakland Baseball Tonight",
+        "One-on-One with Danny Horn (CF)"
+      ],
+      "movies": [
+        "When the Ball Drops",
+        "Last Night",
+        "Fog Harbor",
+        "New Beginnings",
+        "Ninth Inning"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "named": "Adams Point United Methodist Church",
+        "hood": "Adams Point"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Seasonal Spirits (Rockridge)",
+        "named": "Seasonal Spirits",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Merritt AfterDark (Lake Merritt)",
+        "named": "Merritt AfterDark",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "The 44th Table (Downtown)",
+        "named": "The 44th Table",
+        "hood": "Downtown"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Vibe Terrace (Lake Merritt)",
+        "named": "Vibe Terrace",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Rhythm Deck (West Oakland)",
+        "named": "Rhythm Deck",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Neon Harbor Club (Jack London)",
+        "named": "Neon Harbor Club",
+        "hood": "Jack London"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Skybar (Downtown)",
+        "named": "Skybar",
+        "hood": "Downtown"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Seasonal Spirits (Rockridge)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "tv-slate",
+        "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+        "score": 30,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "fame-sighting",
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "score": 31,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "fame-sighting",
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "score": 31,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "score": 43,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "text": "{\n  \"focus\": \"TV slate\",\n  \"why\": \"assigned pulse\",\n  \"checks\": [\n    \"Countdown Live\",\n    \"New Year's Eve Special\",\n    \"Late Weather Watch\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00210\",\n      \"question\": \"What do you think about the TV slate tonight?\",\n      \"basis\": \"neighborhood conversation\"\n    }\n  ],\n  \"interpretation\": \"evening-life approach\",\n  \"unverifiedLead\": [\n    \"I'm watching Countdown Live and New Year's Eve Special\"\n  ],\n  \"closeQuestion\": \"Will the TV slate meet expectations?\"\n}",
+    "plan": {
+      "focus": "TV slate",
+      "why": "assigned pulse",
+      "checks": [
+        "Countdown Live",
+        "New Year's Eve Special",
+        "Late Weather Watch"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00210",
+          "question": "What do you think about the TV slate tonight?",
+          "basis": "neighborhood conversation"
+        }
+      ],
+      "interpretation": "evening-life approach",
+      "unverifiedLead": [
+        "I'm watching Countdown Live and New Year's Eve Special"
+      ],
+      "closeQuestion": "Will the TV slate meet expectations?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c104.md \"### Downtown\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c104.md \"### East Oakland\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "KONO | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "KONO",
+      "ref": "output/neighborhood_texture_c104.md \"### KONO\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c104.md \"### Lake Merritt\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Rockridge | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Rockridge",
+      "ref": "output/neighborhood_texture_c104.md \"### Rockridge\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 17,
+  "ranAt": "2026-08-20T11:16:14.151Z"
+}

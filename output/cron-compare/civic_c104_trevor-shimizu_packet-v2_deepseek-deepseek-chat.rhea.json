@@ -1,0 +1,74 @@
+{
+  "draft": "output/cron-compare/civic_c104_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "3789b2da09317ebe5146dc208d85a5ba6b31a36db4ffb63fb57bf265326d8774",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "though the packet provides no specific hold-up",
+      "issue": "Leaked system/engine terminology ('the packet') in the article text.",
+      "severity": "high"
+    },
+    {
+      "claim": "The initiative, designed to upgrade neighborhood utilities and transit access",
+      "issue": "Misrepresents the Temescal initiative, which is canonically the 'Temescal Community Health Center' (health-focused), not a utility/transit upgrade.",
+      "severity": "high"
+    },
+    {
+      "claim": "By rule, concrete work cannot begin after March 15 without special approval due to drying conditions.",
+      "issue": "Violates the trevor-infrastructure-systems-v1 profile by inventing an unsupported deadline ('March 15') and an unsupported technical rule.",
+      "severity": "high"
+    }
+  ],
+  "flagCount": 3,
+  "highSeverityCount": 3,
+  "summary": "The draft contains engine verbiage ('the packet'), misrepresents the Temescal initiative's purpose, and invents an unsupported concrete-drying deadline.",
+  "review": {
+    "profileId": "trevor-infrastructure-systems-v1",
+    "canonIntegrity": "fail",
+    "texture": "overreach"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-1",
+    "manifestId": "AM-3c62f9d30597",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "51st",
+          "15"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Idris Karim",
+      "Sonia Parikh"
+    ],
+    "unverified": [
+      "Telegraph Avenue"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0612,
+  "durationMs": 18982,
+  "parseError": false,
+  "ranAt": "2026-08-20T23:16:26.978Z"
+}

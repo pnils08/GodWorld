@@ -1,0 +1,54 @@
+{
+  "draft": "output/cron-compare/civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.5-flash",
+  "draftSha256": "9e2207cf98e50164e2adb334a763b9832aacefe009ce0f3d56efef1466a1037c",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "Ariana Lee, passing by with a bag of groceries, noticed Sandra’s usual brisk stride had slowed.",
+      "issue": "The ledger states that Ariana Lee stayed indoors and messaged friends remotely during this cycle, which contradicts the narrative assertion that she was outdoors passing by with groceries.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "The draft correctly utilizes the authorized quotes and matches the neighborhood cooling trend, but contains a minor contradiction regarding Ariana Lee's physical location versus her ledger event.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-2653684acee9",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Ariana Lee",
+      "Sandra Velazquez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0622,
+  "durationMs": 19152,
+  "parseError": false,
+  "ranAt": "2026-08-20T23:15:26.942Z"
+}

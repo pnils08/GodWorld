@@ -1,0 +1,12 @@
+{
+  "draft": "business_c104_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "Lakeshore Books",
+      "issue": "The named business 'Lakeshore Books' is not found in the supplied record, violating the profile's explicit canon blocker against unsourced named businesses.",
+      "severity": "high"
+    }
+  ],
+  "contamination": [],
+  "summary": "The draft is highly faithful to the economic data and quotes, but includes an unauthorized named business 'Lakeshore Books' not found in the packet."
+}

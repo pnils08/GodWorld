@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "103",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "storyline": {
+    "slug": "downtown-andre-turner-prospect-callup",
+    "verb": "opened"
+  },
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00225",
+      "name": "Andre Turner",
+      "quote": "I'm not sure what to make of this Pablo Almanzar guy throwing a no-hitter, it feels like something's off, like it's too good to be true. I think the Tribune should ask if he's really as good as everyone's making him out to be."
+    }
+  ],
+  "claim": "I'm not sure what to make of this Pablo Almanzar guy throwing a no-hitter, it feels like something's off, like it's too good to be true. I think the Tribune should ask if he's really as good as everyone's making him out to be.",
+  "src": "citizenVoice PRESS c103",
+  "ranAt": "2026-08-18T23:20:26.610Z"
+}

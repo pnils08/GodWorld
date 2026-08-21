@@ -63,7 +63,16 @@
         "editor-assignment",
         "desk-signal"
       ],
-      "candidates": []
+      "candidates": [
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Rockridge",
+          "why": "feed-names",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Rockridge"
+        }
+      ]
     },
     "known": [
       {
@@ -135,14 +144,20 @@
         "checks": [
           "string"
         ],
-        "targets": [],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
         "interpretation": "string",
         "unverifiedLead": [
           "string"
         ],
         "closeQuestion": "string"
       },
-      "rule": "No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier."
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
     }
   },
   "reporter": {
@@ -337,6 +352,7 @@
   "eveningSlice": null,
   "anthonySlice": null,
   "halSlice": null,
+  "simonSlice": null,
   "economicSlice": null,
   "safetySlice": null,
   "civicDomainSlice": null,
@@ -345,19 +361,25 @@
   "angleRead": {
     "name": "P Slayer",
     "popid": "POP-00008",
-    "text": "{\n  \"focus\": \"Pablo Almanzar's no-hitter\",\n  \"why\": \"It's a historic moment for the A's\",\n  \"checks\": [\n    \"Handoff feeling vs funeral feeling\"\n  ],\n  \"targets\": [],\n  \"interpretation\": \"The city should feel dared to show up louder tomorrow\",\n  \"unverifiedLead\": [\n    \"I think this win could be a turning point for the team\"\n  ],\n  \"closeQuestion\": \"Will the A's keep their momentum going?\"\n}",
+    "text": "{\n  \"focus\": \"Pablo Almanzar's no-hitter\",\n  \"why\": \"electric atmosphere in Oakland\",\n  \"checks\": [\n    \"handoff feeling vs funeral feeling\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00001\",\n      \"question\": \"Can Vinnie Keane's veteran presence help Pablo Almanzar build on his debut success?\",\n      \"basis\": \"team chemistry\"\n    }\n  ],\n  \"interpretation\": \"Oakland's energy is palpable after Pablo Almanzar's historic debut\",\n  \"unverifiedLead\": [\n    \"the crowd's reaction to Pablo Almanzar's second start will be a key indicator of the team's momentum\"\n  ],\n  \"closeQuestion\": \"Will the A's be able to maintain their winning streak with Pablo Almanzar on the mound?\"\n}",
     "plan": {
       "focus": "Pablo Almanzar's no-hitter",
-      "why": "It's a historic moment for the A's",
+      "why": "electric atmosphere in Oakland",
       "checks": [
-        "Handoff feeling vs funeral feeling"
+        "handoff feeling vs funeral feeling"
       ],
-      "targets": [],
-      "interpretation": "The city should feel dared to show up louder tomorrow",
+      "targets": [
+        {
+          "pop": "POP-00001",
+          "question": "Can Vinnie Keane's veteran presence help Pablo Almanzar build on his debut success?",
+          "basis": "team chemistry"
+        }
+      ],
+      "interpretation": "Oakland's energy is palpable after Pablo Almanzar's historic debut",
       "unverifiedLead": [
-        "I think this win could be a turning point for the team"
+        "the crowd's reaction to Pablo Almanzar's second start will be a key indicator of the team's momentum"
       ],
-      "closeQuestion": "Will the A's keep their momentum going?"
+      "closeQuestion": "Will the A's be able to maintain their winning streak with Pablo Almanzar on the mound?"
     }
   },
   "lanePicks": [
@@ -393,5 +415,5 @@
     }
   ],
   "laneEntries": 8,
-  "ranAt": "2026-08-13T11:17:04.694Z"
+  "ranAt": "2026-08-18T11:15:49.856Z"
 }

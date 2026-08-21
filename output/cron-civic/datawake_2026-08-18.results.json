@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-18",
+  "cycle": 103,
+  "results": [
+    {
+      "office": "civic-office-baylight-authority",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-baylight-authority_2026-08-18.json"
+    },
+    {
+      "office": "civic-office-council-d3",
+      "ok": false,
+      "error": "no usable JSON statement after retry (model returned empty/invalid content)"
+    },
+    {
+      "office": "civic-office-council-d4",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d4_2026-08-18.json"
+    }
+  ],
+  "ranAt": "2026-08-18T10:45:58.398Z"
+}

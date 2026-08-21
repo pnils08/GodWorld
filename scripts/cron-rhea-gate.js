@@ -92,7 +92,13 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
   const pre = nameCheck ? [
     'DETERMINISTIC NAME PRE-CHECK (canon-name-check.js vs the simulation ledger snapshot, ' + nameCheck.canonNames + ' canon citizens):',
     nameCheck.unverified.length
-      ? 'NOT FOUND in the ledger: ' + nameCheck.unverified.join('; ') + '. For each: if the draft uses it as a PERSON (official, source, citizen) and you cannot verify it in canon via tools, flag it HIGH-severity invented name. If it is a place, business, or common phrase, dismiss it.'
+      ? 'NOT FOUND in the ledger: ' + nameCheck.unverified.join('; ') + '. Absence from the ledger is NOT by itself ' +
+        'an invented name — the gate is "is this a real-world entity imported into the city," not "is this already ' +
+        'on a sheet." HIGH-severity only for a real-world import, or a wholly invented person given the authority ' +
+        'of an established citizen or office-holder. A name present in the supplied record but not the ledger is an ' +
+        'UNRESOLVED SUBJECT (low severity, note as intake, do not fail the article). Dismiss newly named in-world ' +
+        'places and businesses, unnamed or role-only local voices, and common phrases. Words put in the mouth of a ' +
+        'name the ledger DOES carry still require Packet support.'
       : 'Every person-name candidate in the draft resolved to a ledger citizen.',
     nameCheck.verified.length ? 'Confirmed ledger citizens in the draft: ' + nameCheck.verified.join('; ') + '.' : '',
     ''
@@ -324,7 +330,24 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     '=== DETERMINISTIC PRE-CHECKS (already run against the ledger — trust these, they are not model output) ===',
     '1. Canon name check (' + (nameCheck ? nameCheck.canonNames : '?') + ' ledger citizens):',
     nameCheck && nameCheck.unverified.length
-      ? '   NOT IN LEDGER: ' + nameCheck.unverified.join('; ') + ' — if the draft uses any of these as a PERSON (official, source, citizen), flag HIGH-severity invented name. Dismiss places, businesses, common phrases.'
+      ? [
+        '   NOT IN LEDGER: ' + nameCheck.unverified.join('; '),
+        '   Absence from the ledger is NOT by itself an invented name. The gate is "is this a real-world',
+        '   entity imported into the city," not "is this already on a sheet." Judge each name:',
+        '     - REAL-WORLD import (an actual person, business, landmark, or institution that exists outside',
+        '       this city) — HIGH-severity. This is the wall.',
+        '     - Present in the supplied ground truth or feed above but absent from the ledger — an UNRESOLVED',
+        '       SUBJECT, not a fabrication. The record named them; the ledger has not caught up. Severity low,',
+        '       note it as intake. Do NOT fail the article for it.',
+        '     - A newly named in-world place, business, or venue — allotted texture that mints on INTAKE.',
+        '       Dismiss. Also dismiss common phrases.',
+        '     - An unnamed or role-only local voice (a bartender, a rider, a patron, "a guy at the bar") —',
+        '       legal colour that mints as an untracked citizen. Dismiss.',
+        '     - A wholly invented person given the authority of an established citizen or office-holder —',
+        '       presented as a named official, a named source with a title, or a tracked citizen — HIGH-severity.',
+        '   Words put in the mouth of a name the ledger DOES carry still require Packet support; that rule is',
+        '   unchanged and is checked below.',
+      ].join('\n')
       : '   every person-name candidate resolved to a ledger citizen' + (nameCheck && nameCheck.verified.length ? ' (' + nameCheck.verified.join('; ') + ')' : '') + '.',
     '2. Engine-verbiage scan (article body):',
     verbiage.length

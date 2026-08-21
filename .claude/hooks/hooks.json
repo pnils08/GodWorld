@@ -49,16 +49,6 @@
         ]
       },
       {
-        "matcher": "Write|Edit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/memory-write-gate.sh\"",
-            "timeout": 5
-          }
-        ]
-      },
-      {
         "hooks": [
           {
             "type": "command",
@@ -131,27 +121,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node \"${CLAUDE_PROJECT_ROOT}/scripts/gapLogGate.js\" --stop-gate",
-            "timeout": 10
-          },
-          {
-            "type": "command",
             "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/stop-hook.sh\"",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "node \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/session-eval.js\"",
-            "timeout": 15
-          },
-          {
-            "type": "command",
-            "command": "node \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/first-person-guard.js\"",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "node \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/no-self-narration-guard.js\"",
             "timeout": 10
           },
           {

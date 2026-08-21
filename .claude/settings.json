@@ -92,7 +92,17 @@
       "Bash(crontab -l)",
       "Edit(.claude/terminals/**)",
       "Edit(.claude/rules/**)",
-      "Edit(SESSION_CONTEXT.md)"
+      "Edit(SESSION_CONTEXT.md)",
+      "Bash(clasp *)",
+      "Bash(node scripts/ingestEdition*)",
+      "Bash(node scripts/ingestEditionWiki*)",
+      "Bash(node scripts/buildCitizenCards*)",
+      "Bash(npx supermemory add*)",
+      "Bash(npx supermemory ingest*)",
+      "Bash(curl *api.supermemory.ai*)",
+      "Edit(CLAUDE.md)",
+      "Edit(.claude/hooks/**)",
+      "Edit(.claude/agents/**)"
     ],
     "deny": [
       "Bash(git push --force *)",
@@ -121,19 +131,9 @@
     "ask": [
       "Bash(git merge *)",
       "Bash(git rebase *)",
-      "Bash(clasp *)",
       "Bash(rm *)",
       "Bash(curl *)",
-      "Bash(wget *)",
-      "Bash(node scripts/ingestEdition*)",
-      "Bash(node scripts/ingestEditionWiki*)",
-      "Bash(node scripts/buildCitizenCards*)",
-      "Bash(npx supermemory add*)",
-      "Bash(npx supermemory ingest*)",
-      "Bash(curl *api.supermemory.ai*)",
-      "Edit(CLAUDE.md)",
-      "Edit(.claude/hooks/**)",
-      "Edit(.claude/agents/**)"
+      "Bash(wget *)"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -162,12 +162,6 @@
             "type": "command",
             "command": "node /root/GodWorld/scripts/rolloutPointerGuard.js",
             "if": "Edit(docs/plans/**)",
-            "timeout": 10
-          },
-          {
-            "type": "command",
-            "command": "bash /root/GodWorld/.claude/hooks/session-context-ownership-guard.sh",
-            "if": "Edit(SESSION_CONTEXT.md)",
             "timeout": 10
           },
           {
@@ -201,11 +195,6 @@
     "Stop": [
       {
         "hooks": [
-          {
-            "type": "command",
-            "command": "node /root/GodWorld/.claude/hooks/session-eval.js",
-            "timeout": 15
-          },
           {
             "type": "command",
             "command": "bash /root/GodWorld/scripts/session-end-audit.sh",

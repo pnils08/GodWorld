@@ -29,7 +29,7 @@ const tanya = slots.scanControl({
 });
 assert.equal(tanya.jsonChase, true, 'Tanya §2 is the serialized plan');
 assert.equal(tanya.emptyInterviews, true, 'Tanya W2 landed no answers — W3 should not have opened');
-assert.ok(tanya.unsuppliedAccess.indexOf('clubhouse') >= 0, 'Tanya invents clubhouse access');
+assert.equal(tanya.unsuppliedAccess.length, 0, 'Tanya SET (clubhouse) is persona texture');
 assert.ok(/Vinnie Keane|126-35/.test(slots.articleBody(load('tanya_c104_article.md'))),
   'Tanya lede still carries the assigned fact');
 assert.equal(tanya.assignmentIntakeMismatch, false);
@@ -58,5 +58,5 @@ assert.equal(slots.isJsonShaped(
 
 console.log('s344HumanSlots.test.js: PASS');
 console.log('  jax: fail (json chase, tribune-as-actor, BART, Ogawa, faith/transit mismatch)');
-console.log('  tanya: boundary (json chase, empty W2, clubhouse)');
+console.log('  tanya: boundary (json chase, empty W2)');
 console.log('  luis: near-pass Article on assignment; story doc still json/empty-W2');

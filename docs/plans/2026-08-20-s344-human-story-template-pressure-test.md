@@ -205,7 +205,7 @@ Tasks 1–9 reviewed at the console before the first live fire. Findings are rec
 
 1. `chase too short` — hard-fails W1 under 40 characters.
 2. `chaseReplacesAssignment` — fails unless the chase carries a ≥5-char assignment-or-hood token verbatim; a chase written in synonyms throws.
-3. `clubhouse` / `press box` / `locker room` — flags any sports Article not carrying the word in its Packet. Tanya Cruz's beat is clubhouse access, so sports false positives are expected.
+3. ~~`clubhouse` / `press box` / `locker room` mere-word fail~~ — closed: those rooms are persona SET (Tanya clubhouse dispatch, Anthony press-box/clubhouse transition, Hal press-box beat). Gate now fails invented speech sourced from the room, not the word.
 
 **One contained regression, deliberately unfixed.** `storyDocOpen` lost its `try/catch` around `fs.writeFileSync`, so a disk-write failure now fails the wake instead of logging non-fatal. Left in place because changing this code inside the observation window would make tomorrow's results unattributable (S250 deploy-attribution). Fix after Task 10 closes.
 
@@ -254,4 +254,5 @@ frozen** — the parked further-loosening stays parked until Task 10 closes.
 - 2026-08-20 (grok) — Task 10 opened, not closed. Crontab read-only (M–F 06:15 angle / 13:15 report / 18:15 write unchanged; no install). Runtime land is `34cace97` + `cb5c20c6` (22:24–22:55 CDT). The 2026-08-20 18:15 write fanout ran before that land and is not the observation window. Retrospective gate on two of those Articles (Rhea PASS does not override): `output/cron-compare/staged/sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md` — s344 FAIL (JSON §2, empty W2, missing Packet quote, missing question, clubhouse); Rhea pass=true. `output/cron-compare/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.md` — s344 FAIL (JSON §2, missing Packet quote, missing question); Rhea pass=true. Next natural write 2026-08-21 18:15 CDT supplies the two post-land Articles.
 - 2026-08-21 (grok) — Parked after Task 10: exact contiguous Packet-quote match is too strict (Luis split-attribution false fail). Matcher unchanged for the observation window. WHO, invented words, Tribune-as-actor, empty W2 stay.
 - 2026-08-21 (grok) — Landed `packetQuoteLanded` before the 18:15 write: Packet-backed sentence span + mid-quote attribution pass; invented quote still fails. W1/W2 and crontab untouched.
+- 2026-08-21 (grok) — Sports SET is not a leak: drop mere-word clubhouse/press-box/locker fail. Tanya/Anthony/Hal bags place them in those rooms. Still fail invented speech sourced from the room. Crontab untouched.
 - 2026-08-21 (engine-sheet) — Reconciled the matcher-version contradiction between `22a06b65` (park) and `adaa6237` (land): no wake fired between the runtime land and the change, so the observation window had not opened. Baseline re-verified unchanged. Matcher frozen from 06:15.

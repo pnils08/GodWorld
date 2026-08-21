@@ -39,10 +39,11 @@ const REPAIR_CHROME = [
   { id: 'packet-narration', re: /\bthe Packet does not\b/i },
 ];
 
-const UNSUPPLIED_ACCESS = [
-  { id: 'clubhouse', re: /\bclubhouse\b/i },
-  { id: 'press-box', re: /\bpress box\b/i },
-  { id: 'locker-room', re: /\blocker room\b/i },
+// Persona bags place sports reporters in a room (Tanya: clubhouse dispatch;
+// Anthony: unnamed press-box/clubhouse transition; Hal: press-box beat).
+// The word is the SET. Fail invented speech sourced from the room, not the set.
+const ROOM_SOURCED_SPEECH = [
+  { id: 'room-sourced-speech', re: /\b(?:in|from|inside) the (?:clubhouse|dugout|locker room|press[ -]?box)\b[^.]{0,80}\b(?:said|told|whispered)\b/i },
 ];
 
 const BLIGHT = [
@@ -159,7 +160,7 @@ function packetBlob(packet) {
 function scanUnsuppliedAccess(prose, packet) {
   const blob = packetBlob(packet);
   const hits = [];
-  for (const p of UNSUPPLIED_ACCESS) {
+  for (const p of ROOM_SOURCED_SPEECH) {
     if (p.re.test(prose) && !p.re.test(blob)) {
       hits.push({ check: 'unsupplied-access', issue: p.id });
     }

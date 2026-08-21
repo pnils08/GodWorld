@@ -42,8 +42,20 @@ assert(jaxScan.findings.some(f => f.issue === 'frank-ogawa'), 'Jax Ogawa');
 
 const tanya = fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/tanya_c104_article.md'), 'utf8');
 const tanyaScan = scan(tanya, { desk: 'sports', packet: { known: [{ text: 'Vinnie Keane 2-3 HR 3 RBI' }] } });
-assert(tanyaScan.findings.some(f => f.check === 'unsupplied-access' && f.issue === 'clubhouse'),
-  'Tanya clubhouse: ' + JSON.stringify(tanyaScan.findings));
+assert.equal(tanyaScan.findings.filter(f => f.check === 'unsupplied-access').length, 0,
+  'Tanya SET (clubhouse) is persona texture, not a leak: ' + JSON.stringify(tanyaScan.findings));
+
+const setOk = scan('BREAKING from the clubhouse: Vinnie Keane went 2-for-3.\n', {
+  desk: 'sports', packet: { known: [{ text: 'Vinnie Keane 2-3' }] },
+});
+assert.equal(setOk.findings.filter(f => f.check === 'unsupplied-access').length, 0,
+  'sideline SET must pass: ' + JSON.stringify(setOk.findings));
+
+const roomTalk = scan('In the locker room, an unnamed starter said the room was broken.\n', {
+  desk: 'sports', packet: {},
+});
+assert(roomTalk.findings.some(f => f.check === 'unsupplied-access' && f.issue === 'room-sourced-speech'),
+  'invented speech from the room still fails: ' + JSON.stringify(roomTalk.findings));
 
 const chrome = scan('Here\'s the corrected article with all unapproved quotes removed:\n\nNightline was open.', { desk: 'culture' });
 assert(chrome.findings.some(f => f.check === 'repair-chrome'));

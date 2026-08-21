@@ -14,7 +14,7 @@ const REAL_WORLD = [
 const TRIBUNE_AS_ACTOR = /the Tribune should ask|what should the Tribune ask|Tribune should demand|the paper should ask/i;
 
 const UNSUPPLIED_ACCESS = [
-  { id: 'clubhouse', re: /\bclubhouse\b/i },
+  { id: 'room-sourced-speech', re: /\b(?:in|from|inside) the (?:clubhouse|dugout|locker room|press[ -]?box)\b[^.]{0,80}\b(?:said|told|whispered)\b/i },
 ];
 
 function articleBody(text) {

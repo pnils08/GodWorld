@@ -213,6 +213,23 @@ Tasks 1–9 reviewed at the console before the first live fire. Findings are rec
 
 No wake was hand-driven for this review; Task 10 remains the acceptance test.
 
+**Matcher version at first live fire.** `adaa6237` (23:58) loosened
+`missing-packet-quote` from an exact contiguous string to a Packet-backed span,
+after `22a06b65` had parked that same loosening with "do not change the matcher
+during the observation window." Those two read as contradictory, so the record
+should be explicit: **no wake has fired since the `34cace97`/`cb5c20c6` land, so
+the observation window had not opened when the matcher changed.** The 18:15
+write on 2026-08-20 ran pre-land; the first post-land wake is 06:15 on
+2026-08-21. Attribution is therefore intact, and the change is the right one on
+the merits — exact contiguous matching false-failed the Luis split-attribution
+case, and shipping it into the first live day risked a broad false
+`missing-packet-quote` sweep pushing every Article to `flagged/`. The baseline
+above was re-verified against `adaa6237` and is unchanged: the cited business
+c104 artifact still returns `missing-packet-quote; missing-unanswered-question`,
+and `livedArticleShape`, `cronDeskStoryTemplate`, `s344HumanSlots` and
+`articleContamination` all still pass. **From 06:15 forward the matcher is
+frozen** — the parked further-loosening stays parked until Task 10 closes.
+
 ---
 
 ## Open questions
@@ -235,3 +252,4 @@ No wake was hand-driven for this review; Task 10 remains the acceptance test.
 - 2026-08-20 (grok) — Task 10 opened, not closed. Crontab read-only (M–F 06:15 angle / 13:15 report / 18:15 write unchanged; no install). Runtime land is `34cace97` + `cb5c20c6` (22:24–22:55 CDT). The 2026-08-20 18:15 write fanout ran before that land and is not the observation window. Retrospective gate on two of those Articles (Rhea PASS does not override): `output/cron-compare/staged/sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md` — s344 FAIL (JSON §2, empty W2, missing Packet quote, missing question, clubhouse); Rhea pass=true. `output/cron-compare/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.md` — s344 FAIL (JSON §2, missing Packet quote, missing question); Rhea pass=true. Next natural write 2026-08-21 18:15 CDT supplies the two post-land Articles.
 - 2026-08-21 (grok) — Parked after Task 10: exact contiguous Packet-quote match is too strict (Luis split-attribution false fail). Matcher unchanged for the observation window. WHO, invented words, Tribune-as-actor, empty W2 stay.
 - 2026-08-21 (grok) — Landed `packetQuoteLanded` before the 18:15 write: Packet-backed sentence span + mid-quote attribution pass; invented quote still fails. W1/W2 and crontab untouched.
+- 2026-08-21 (engine-sheet) — Reconciled the matcher-version contradiction between `22a06b65` (park) and `adaa6237` (land): no wake fired between the runtime land and the change, so the observation window had not opened. Baseline re-verified unchanged. Matcher frozen from 06:15.

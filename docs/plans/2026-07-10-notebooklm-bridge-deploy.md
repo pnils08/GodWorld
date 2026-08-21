@@ -1,11 +1,12 @@
 ---
 title: NotebookLM Bridge Deploy Plan
 created: 2026-07-10
-updated: 2026-07-27
+updated: 2026-08-20
 type: plan
 tags: [media, infrastructure, active]
 sources:
   - docs/research/2026-07-10-notebooklm-mcp.md — research basis (3-repo landscape, verdict adopt)
+  - docs/research/2026-08-20-notebooklm-daily-branching.md — verified daily branching and wake-state research
   - https://github.com/jacob-bd/notebooklm-mcp-cli — adopted client (v0.8.5, MIT)
   - https://github.com/jacob-bd/notebooklm-mcp-cli/blob/main/docs/API_REFERENCE.md — command reference
 pointers:
@@ -19,10 +20,12 @@ pointers:
 
 **Architecture:** Adopt `jacob-bd/notebooklm-mcp-cli` (Python CLI `nlm` + MCP server; cookie-extract → internal-API mechanism — no DOM automation). A thin Node wrapper (`scripts/notebooklmPush.js`) shells out to `nlm` from `/post-publish` as a new step, with graceful-degrade on auth failure (warn + continue, never block the pipeline). The edition archive backfills into sharded notebooks (~50-source free-tier limit per notebook). Q&A (`nlm ask`) is a **reader-side reference over published canon** — sheets remain canon authority per ADR-0007; NotebookLM answers cite editions, they don't define world state.
 
-**Terminal:** research-build (build) → media (runs the new /post-publish step per cycle)
+**Terminal:** codex (Phase 6 local scripts/tests) → engine-sheet (configuration,
+live activation, and scheduled proof)
 
 **Pointers:**
 - Research basis: [[research/2026-07-10-notebooklm-mcp]]
+- Daily branching research: [[research/2026-08-20-notebooklm-daily-branching]]
 - Prior state: `docs/engine/ROLLOUT_ARCHIVE.md` §Phase 12.6 (S67 NotebookLM findings; Podcastfy is a complement, not replaced)
 - Integration point: `.claude/skills/post-publish/SKILL.md` (edition text ingest lives at its Step 1b; the NotebookLM push slots beside it)
 - Published corpus: `editions/` — 53 artifacts (23 full editions + supplementals/interviews/dispatches)
@@ -31,6 +34,9 @@ pointers:
 1. From this box, `nlm ask` against a Bay Tribune notebook returns a citation-backed answer to an edition-content question.
 2. On the next edition publish, /post-publish pushes the `.txt` to the current notebook, generates the audio overview, and delivers it to the agreed drop point with zero manual steps. With auth deliberately broken, the step emits a warning and every other /post-publish step still completes.
 3. All 53 published artifacts are loaded into notebooks; a question spanning multiple past editions answers with citations.
+4. Daily News records a deterministic profile and reason codes from local
+   Cycle/wake/article evidence; five shadow runs preserve the existing audio
+   configuration before any separately approved live format activation.
 
 ---
 
@@ -212,6 +218,128 @@ pointers:
   is explicitly source-ID scoped. v1.4 forces a clean new bounded source on the
   next distinct run; the next 08:00 audio is the listening proof.
 
+### Phase 6 — deterministic Daily News branching
+
+This phase extends the proven daily bridge; it does not replace it. Local typed
+artifacts choose a program profile, and Gemini Notebook renders the selected
+bounded source. No model chooses editorial state. The existing 08:00 schedule,
+exact source-ID scoping, `NOT_CANON` classification, and default-length Deep
+Dive remain unchanged until shadow evidence and a separately approved live
+comparison clear the activation gate.
+
+Research basis: [[../research/2026-08-20-notebooklm-daily-branching]]. The
+2026-08-02 autonomous-deep-research plan is closed and non-authoritative; do not
+use it as an implementation source.
+
+### Task 18: Pure branch router
+
+- **Files:**
+  - `scripts/notebooklmDailyRouter.js` — create
+  - `scripts/notebooklmDailyRouter.test.js` — create
+- **Steps:**
+  1. Accept a typed local inventory: current Cycle, prior completed Cycle,
+     same-Cycle staged count, Rhea dispositions, flagged count, W1/W2/W3 state,
+     material engine/civic signals, and proven opposing positions.
+  2. Emit `{ profile, format, length, sourceClasses, reasonCodes, fingerprint }`
+     using only deterministic predicates.
+  3. Implement `CYCLE_OPEN`, `REPORTED_DAY`, `VERIFIED_OPPOSITION`, and
+     `QUIET_DESK`; keep `EDITOR_QA` outside the public delivery route.
+- **Verify:** `node scripts/notebooklmDailyRouter.test.js` → C104 rollover,
+  C103 Article-rich, flagged-only, quiet, and synthetic-opposition fixtures pass
+  without network access.
+- **Status:** [ ] not started
+
+### Task 19: Read-only newsroom pulse
+
+- **Files:**
+  - `scripts/notebooklmDailyRouter.js` — modify
+  - `scripts/notebooklmDailyRouter.test.js` — modify
+- **Steps:**
+  1. Read existing fanout results, angle/ask/wake state, staged sidecars, flag
+     records, and Rhea sidecars for W1/W2/W3 status.
+  2. Return only paths, counts, typed dispositions, and Packet-backed quotes;
+     never admit raw drafts or flagged bodies.
+  3. Label prior-Cycle material as `PREVIOUS_FILING`, never current reporting.
+- **Verify:** the targeted test proves W1-only, W2-ready, W3-staged, flagged,
+  and Cycle-rollover inventories against copied fixture data.
+- **Status:** [ ] not started
+
+### Task 20: Route-aware bounded source and manifest
+
+- **Files:**
+  - `scripts/notebooklmDailyNews.js` — modify
+  - `scripts/notebooklmDailyNews.test.js` — modify
+  - `docs/reference/notebookLM-CLI.md` — modify
+- **Steps:**
+  1. Add the router profile, reason codes, and typed source classes to the pack
+     hash and run manifest.
+  2. Render current world state, citizen digest, current W1 chase, completed W2
+     quote coverage, Rhea-passed W3 copy, and explicitly labeled prior filing in
+     authority order.
+  3. Keep every uploaded line safe to quote on air; exclude raw drafts,
+     flagged bodies, system instructions, repair chrome, and assignment JSON.
+  4. Preserve exact source-ID scoping and same-hash no-op behavior.
+- **Verify:** `node scripts/notebooklmDailyNews.test.js` and router tests pass;
+  generated local packs contain no disallowed source class.
+- **Status:** [ ] not started
+
+### Task 21: Five-run shadow observation
+
+- **Files:**
+  - `scripts/notebooklmDailyNews.js` — modify
+  - `output/notebooklm/daily/` manifests — observe only
+  - this plan's listening-trial log — update after evidence
+- **Steps:**
+  1. Record the proposed profile and reason codes during five natural scheduled
+     runs while continuing to generate the existing `deep_dive/default` audio.
+  2. Check that profile changes follow artifact changes, not wall-clock novelty
+     or model judgment.
+  3. Record source-count growth in the working notebook; do not delete sources.
+- **Verify:** five manifests carry reproducible profile decisions and the live
+  audio configuration remains unchanged.
+- **Status:** [ ] not started
+
+### Task 22: Gated branch comparison
+
+- **Files:** no repository change required for the first comparison
+- **Steps:**
+  1. Obtain explicit approval for NotebookLM writes and paid generation.
+  2. In a disposable or sandbox notebook, render one CYCLE_OPEN Brief and one
+     REPORTED_DAY Deep Dive from exact bounded source IDs.
+  3. Change only the format axis and record the listening verdict below.
+- **Verify:** both artifacts cite only their selected sources; no source or
+  artifact touches the permanent published notebook.
+- **Status:** [ ] blocked on explicit live NotebookLM approval after Task 21
+
+### Task 23: Existing-schedule activation
+
+- **Files:**
+  - `scripts/notebooklmDailyNews.js` — modify if shadow mode is not already
+    switchable
+  - `config/notebooklm.json` — modify through engine-sheet
+  - `docs/reference/notebookLM-CLI.md` — modify
+- **Steps:**
+  1. Obtain explicit approval for the live behavior change.
+  2. Enable the proven router in the existing 08:00 job; do not add per-wake
+     audio crons.
+  3. Keep `REPORTED_DAY` on the current default-length Deep Dive baseline.
+- **Verify:** the next natural run selects the expected profile, delivers once,
+  and writes no Sheet, Edition, or canon state.
+- **Status:** [ ] blocked on Tasks 21–22 and explicit live approval
+
+### Task 24: Builder-only coverage table
+
+- **Files:**
+  - `scripts/notebooklmDailyCoverage.js` — create
+  - `scripts/notebooklmDailyCoverage.test.js` — create
+- **Steps:**
+  1. Emit assignment → reporter → W1 → W2 → W3 → Rhea → staged/flagged rows
+     from the same typed pulse.
+  2. Mark the artifact `NOT_CANON` and keep it out of public audio sources.
+- **Verify:** the targeted test proves one row per assignment and no article
+  body or external write.
+- **Status:** [ ] sequence after Task 23; does not block audio branching
+
 ### Daily News listening trial log
 
 This is the authoritative record of Daily News listening experiments. Update
@@ -234,8 +362,9 @@ time and judge it from a completed listen.
 | v1.4 | `default`; “The Bay Tribune daily news for Oakland”; generator footer removed from the uploaded copy | Pending the next 08:00 scheduled listen. Goal: preserve v1.3 content/depth while beginning directly inside the city. | Current candidate. Judge opening immersion first, then depth and length; change one axis at a time. |
 
 Research basis and adoption history:
-[[../research/2026-07-10-notebooklm-mcp]]. Operational commands and failure
-recovery: [[../reference/notebookLM-CLI]].
+[[../research/2026-07-10-notebooklm-mcp]] and
+[[../research/2026-08-20-notebooklm-daily-branching]]. Operational commands and
+failure recovery: [[../reference/notebookLM-CLI]].
 
 ---
 
@@ -278,3 +407,9 @@ recovery: [[../reference/notebookLM-CLI]].
   while future changes stay narrow presentation fine-tuning. Kept v1.4's live
   listening proof pending because the local artifact record still ends at
   v1.3.
+- 2026-08-20 (codex) — Added Phase 6 after current-code, artifact, schedule,
+  installed-CLI, official-Google, and Antigravity-proposal review. Locked local
+  deterministic routing, wake-state source classes, Cycle-rollover labeling,
+  five-run shadow proof, and separate approval for NotebookLM comparison/live
+  activation. The 2026-08-02 autonomous-deep-research plan is explicitly
+  superseded and is not an implementation truth source.

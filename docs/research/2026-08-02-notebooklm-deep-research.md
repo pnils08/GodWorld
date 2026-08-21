@@ -1,7 +1,7 @@
 ---
 title: Gemini Notebook Untapped Potential — research
 created: 2026-08-02
-updated: 2026-08-02
+updated: 2026-08-20
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -13,6 +13,13 @@ pointers:
 ---
 
 # Gemini Notebook Untapped Potential — research
+
+> **SUPERSEDED FINDING — NOT A CURRENT TRUTH SOURCE (2026-08-20,
+> Mike-direct).** The original extraction below was Antigravity's unverified
+> proposal. Do not implement from its CLI/version claims, invented integration
+> points, or recommendation to feed autonomous web/Drive research into the
+> in-world Daily News notebook. Current verified record:
+> [[2026-08-20-notebooklm-daily-branching]].
 
 **Source:** `notebooklm-py` updates and S349 builder conversation.
 
@@ -28,19 +35,28 @@ pointers:
 
 **Not applicable / hazard:** Upgrading the CLI requires reapplying the root-Chrome `--no-sandbox` patch inside the virtual environment and verifying authentication state. We must strictly bound the autonomous research scope so it does not pull in out-of-canon real-world events that break simulation fidelity.
 
-**Verdict:** `adopt`
-Adopt the Deep Research addition to Google Drive to improve the daily newsroom brief, and evaluate structured artifact ingestion for the simulation ledger. (Ignites [[../plans/2026-08-02-notebooklm-deep-research-integration]]).
+**Verdict:** `take-nothing` (supersedes the original `adopt` verdict)
+Do not add autonomous web/Drive research to the Daily News path. The current
+installed CLI already exposes the relevant presentation formats, while web/tool
+discovery is a canon-contamination route. Use the deterministic local branch
+router in [[2026-08-20-notebooklm-daily-branching]] instead.
 
-**Ignited plans:** [[../plans/2026-08-02-notebooklm-deep-research-integration]]
+**Ignited plans:** none. The former
+[[../plans/2026-08-02-notebooklm-deep-research-integration]] is closed and
+historical only.
 
 ---
 
 ## Applications (living)
 
 - 2026-08-02 — Recorded the untouched features of Gemini Notebook to evaluate for simulation ingestion and daily news improvements.
+- 2026-08-20 — Re-audited against current code, installed CLI help, live
+  artifacts, and official Google documentation; original adoption rejected.
 
 ---
 
 ## Changelog
 
 - 2026-08-02 — Initial extraction (Antigravity).
+- 2026-08-20 (codex, Mike-direct) — Converted to a `take-nothing` tombstone and
+  pointed all implementation authority to the verified branching research.

@@ -152,7 +152,7 @@ function stageDecisions(cycle) {
   // beyond the known world, not busy-but-real cycles).
   const trackerSnap = readJson(path.join(ROOT, 'output', 'initiative_tracker.json'));
   const MAX_ROWS = parseInt(arg('--max-rows', String((trackerSnap && trackerSnap.initiatives || []).length || 6)), 10);
-  const MODEL = arg('--model', 'google/gemini-3.5-flash');
+  const MODEL = arg('--model', 'google/gemini-3.7-flash');
   console.log('Civic Apply Gate — c' + cycle);
   console.log('===================================');
 

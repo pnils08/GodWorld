@@ -466,14 +466,14 @@ async function stepSignals(cycle) {
 // Steps 1–4 — the editorial seats (built 2026-08-05, narrator design adopted;
 // docs/research/2026-08-04-mags-as-narrator.md verdict `adopt`).
 //
-// Model routing: audit rides google/gemini-3.5-flash (the gate's proven
+// Model routing: audit rides google/gemini-3.7-flash (the gate's proven
 // independent-family reviewer, ~$0.06); narration is the ONE voice-critical
 // surface → Anthropic claude-sonnet-4-6 (the desk-map "Sonnet bought no
 // quality" finding was about desk articles behind an agent stance; the Pulse
 // IS the voice product). Audit + narrate write local artifacts only, so they
 // run without --apply; publish is the canon door and is --apply-gated.
 // ---------------------------------------------------------------------------
-const AUDIT_MODEL = arg('--audit-model', 'google/gemini-3.5-flash');
+const AUDIT_MODEL = arg('--audit-model', 'google/gemini-3.7-flash');
 const NARRATOR_MODEL = arg('--narrator-model', 'claude-sonnet-4-6');
 
 function readJsonSafe(p) {

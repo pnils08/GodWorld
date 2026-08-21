@@ -73,7 +73,7 @@ const GATE_MODEL = arg('--gate-model', 'sonnet');   // authoritative gate; 'haik
 // OpenRouter, deterministic pre-checks + injected context). API gate model must
 // be a different family than the writer — enforced fail-loud inside the gate.
 const GATE_BACKEND = arg('--gate-backend', 'claude');
-const GATE_API_MODEL = arg('--gate-api-model', 'google/gemini-3.5-flash');
+const GATE_API_MODEL = arg('--gate-api-model', 'google/gemini-3.7-flash');
 // --no-gate (S332): skip the Rhea gate for SAMPLE generation only. The gate runs
 // on `claude -p` (Claude Code / subscription), so it cannot run while Mike's
 // subscription usage is depleted; the writer + quotes run on raw API keys. Ungated

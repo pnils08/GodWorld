@@ -53,7 +53,7 @@ const TIMEOUT_MS = parseInt(arg('--timeout', '420000'), 10);
 // truth. S325 INDEPENDENCE RULE still applies: the gate model's family must
 // differ from the WRITER's (DeepSeek) — default gemini, NEVER deepseek.
 const BACKEND = arg('--backend', 'claude');      // 'claude' | 'api'
-const API_MODEL = arg('--api-model', 'google/gemini-3.5-flash');
+const API_MODEL = arg('--api-model', 'google/gemini-3.7-flash');
 // Evaluation-only verified historical evidence. Default gate behavior is
 // unchanged when absent.
 const EVIDENCE_FILE = arg('--evidence-file', null);
@@ -229,7 +229,7 @@ function scanEngineVerbiage(draftText) {
   return hits;
 }
 
-const API_RATES = { 'google/gemini-3.5-flash': [1.5, 9], 'google/gemini-3.5-flash-lite': [0.3, 2.5], _default: [1.5, 9] };
+const API_RATES = { 'google/gemini-3.7-flash': [0.375, 1.875], 'google/gemini-3.5-flash': [1.5, 9], 'google/gemini-3.5-flash-lite': [0.3, 2.5], _default: [0.375, 1.875] };
 
 function callOpenRouter(model, system, user) {
   return new Promise((resolve, reject) => {

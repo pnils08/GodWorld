@@ -824,7 +824,7 @@ async function runDirective() {
   // Friction rule (plan Task 2.2): the directive's model family must differ
   // from the Mayor's writer family.
   const mayorModel = (officeMap.offices.find(o => o.officeId === 'MAYOR-01') || {}).model || '';
-  const MODEL = arg('--model', 'google/gemini-3.5-flash');
+  const MODEL = arg('--model', 'google/gemini-3.7-flash');
   if (modelFamily(MODEL) === modelFamily(mayorModel)) {
     console.error('FRICTION VIOLATION: directive model family "' + modelFamily(MODEL) + '" matches the Mayor\'s writer family. Pick a different --model.');
     process.exit(2);

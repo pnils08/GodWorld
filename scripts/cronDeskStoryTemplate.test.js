@@ -72,4 +72,34 @@ const passGate = gate.evaluate(complete, {
 });
 assert.equal(passGate.fail, false, JSON.stringify(passGate.findings));
 
+const FIX = path.join(__dirname, '__fixtures__', 'newsroom', 's344');
+const luisArt = fs.readFileSync(path.join(FIX, 'luis_c103_article.md'), 'utf8');
+const luisAssign = 'Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning — remedy path + responsible office';
+const luisQuote = "I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?";
+const luisNear = gate.evaluate(luisArt, {
+  desk: 'civic',
+  assignment: luisAssign,
+  quotes: [luisQuote],
+  requireQuote: true,
+});
+assert.equal(luisNear.fail, true, 'Luis C103 is the near-pass, not the positive fixture');
+assert(luisNear.findings.some(f => f.issue === 'missing-packet-quote'),
+  'Luis quote is split across attribution, not an exact Packet string: ' + JSON.stringify(luisNear.findings));
+assert(luisNear.findings.some(f => f.issue === 'intake-misses-assignment'),
+  'Luis INTAKE claim is the quote, not the hub assignment');
+
+const posArt = fs.readFileSync(path.join(FIX, 's344-positive-article.md'), 'utf8');
+const posPkt = JSON.parse(fs.readFileSync(path.join(FIX, 's344-positive-packet.json'), 'utf8'));
+assert.ok(/NOT_CANON/.test(posPkt.note));
+const posGate = gate.evaluate(posArt, {
+  desk: 'civic',
+  assignment: posPkt.task.assignment,
+  quotes: posPkt.exposure.sources.map(s => s.quote),
+  requireQuote: true,
+  packet: posPkt,
+});
+assert.equal(posGate.fail, false, 'Task 9 positive pair must pass every deterministic check: ' + JSON.stringify(posGate.findings));
+
 console.log('cronDeskStoryTemplate.test.js: PASS');
+console.log('  luis near-pass still fails (split quote, INTAKE not on hub)');
+console.log('  s344-positive-article.md PASS (synthetic NOT_CANON)');

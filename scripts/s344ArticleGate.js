@@ -15,7 +15,7 @@ function assignmentBind(text, opts) {
   const body = shape.articleBody(text);
   const intake = slots.intakeBlock(text);
   const tokens = shape.assignmentTokens(assignment);
-  const lede = (shape.paragraphs(body)[0] || '').toLowerCase();
+  const lede = shape.ledeParagraph(shape.paragraphs(body)).toLowerCase();
   if (tokens.length && lede && !tokens.some(t => lede.indexOf(t) >= 0)) {
     findings.push({ check: 'assignment-bind', issue: 'lede-misses-assignment' });
   }

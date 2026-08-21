@@ -1,0 +1,28 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "note": "SYNTHETIC NOT_CANON — pipeline.54 Task 9 positive fixture. Do not ingest, publish, or write to Sheets.",
+  "actor": { "id": "TEST-LUIS", "name": "Luis Navarro", "role": "desk reporter", "desk": "civic" },
+  "task": {
+    "assignment": "Fruitvale Transit Hub Phase II — Visioning stalled in construction-planning"
+  },
+  "signal": { "hood": "Fruitvale", "src": "TEST-ONLY-AUDIT patterns[0]" },
+  "known": [
+    {
+      "id": "F-TESTHUB01",
+      "t": "FACT",
+      "text": "Fruitvale Transit Hub Phase II has remained in visioning for nine cycles",
+      "src": "TEST-ONLY-AUDIT patterns[0]"
+    }
+  ],
+  "exposure": {
+    "sources": [
+      {
+        "id": "Q-TEST-PILGRIM",
+        "pop": "TEST-POP-PILGRIM",
+        "name": "Rafael Pilgrim",
+        "quote": "I take the bus every day and they've had those coming soon signs up for years now."
+      }
+    ]
+  }
+}

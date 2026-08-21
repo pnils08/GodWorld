@@ -162,9 +162,9 @@ pointers:
 ### Task 9: Establish one complete positive fixture
 
 - **Files:**
-  - `output/cron-compare/civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5.md` — read (on-disk near-pass)
-  - `scripts/fixtures/newsroom/s344-positive-article.md` — create after the near-pass is accepted or a builder-approved completion of it
-  - `scripts/fixtures/newsroom/s344-positive-packet.json` — create from the matching non-canon test Packet
+  - `scripts/__fixtures__/newsroom/s344/luis_c103_article.md` — read (frozen near-pass)
+  - `scripts/__fixtures__/newsroom/s344/s344-positive-article.md` — create (synthetic completion, NOT CANON)
+  - `scripts/__fixtures__/newsroom/s344/s344-positive-packet.json` — create
   - `scripts/cronDeskStoryTemplate.test.js` — modify
 - **Steps:**
   1. Start from the C103 Luis Navarro Fruitvale Hub Article: assigned fact, named rider, Packet quote, unanswered question. Record the four-part misses (process recap, thin scene).
@@ -172,7 +172,7 @@ pointers:
   3. Dirt Carnival recovery remains optional if an approved source path appears; it does not block this task.
   4. Prove the complete fixed template without flattening its voice.
 - **Verify:** `node scripts/cronDeskStoryTemplate.test.js` → the approved positive pair passes every deterministic check; Luis near-pass is named in the test commentary for what still failed before completion.
-- **Status:** [ ] not started
+- **Status:** [x] complete
 
 ### Task 10: Observe two scheduled wakes after an approved runtime land
 
@@ -203,3 +203,4 @@ pointers:
 - 2026-08-20 (grok) — Task 1 built: frozen fixtures under `scripts/__fixtures__/newsroom/s344/` + `s344HumanSlots.js` detectors. `node scripts/s344HumanSlots.test.js` PASS — theory holds: the claimed Jax/Tanya/Luis failures are locally detectable without Rhea. No live wake wiring.
 - 2026-08-20 (grok) — Tasks 2–4: W1 `chase` field + reporterChaseText; §2 writes chase only (JSON §2 throws); W2 questions ask what the citizen saw/felt; Tribune-as-actor quotes fail interview validation; zero publishable answers fail W2 and W3 does not last-chance. Tests: livedExperiencePacket, livedExperiencePacketV2, newsroomInterviewContract, cronDeskStoryTemplate PASS.
 - 2026-08-20 (grok) — Tasks 5–8: four-part Article slots; BART/Ogawa + clubhouse + repair-chrome walls; assignment/INTAKE bind (Jax faith/transit); Packet-active W3 skips Rhea when those gates fail; writer strips repair-chrome prefix. `s344ArticleGate.evaluate` is the seam. W1 three-cited-facts sidecar still wired.
+- 2026-08-20 (grok) — Task 9: synthetic NOT_CANON positive pair `scripts/__fixtures__/newsroom/s344/s344-positive-{article.md,packet.json}`. Luis C103 remains the near-pass (split Packet quote, INTAKE on the quote not the hub). Title-only first line is not the lede. No crontab, ingest, or Sheets.

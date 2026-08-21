@@ -16,6 +16,11 @@ function paragraphs(body) {
     .filter(Boolean);
 }
 
+function ledeParagraph(paras) {
+  if (paras.length >= 2 && paras[0].length < 80 && !/[.?!]/.test(paras[0])) return paras[1];
+  return paras[0] || '';
+}
+
 function assignmentTokens(assignment) {
   return String(assignment || '').toLowerCase().split(/[^a-z0-9-]+/)
     .filter(w => w.replace(/-/g, '').length >= 5);
@@ -34,7 +39,7 @@ function s344Slots(text, opts) {
   if (!paras.length) reasons.push('missing-lede');
   else {
     const tokens = assignmentTokens(assignment);
-    const lede = paras[0].toLowerCase();
+    const lede = ledeParagraph(paras).toLowerCase();
     if (tokens.length && !tokens.some(t => lede.indexOf(t) >= 0)) reasons.push('lede-misses-assignment');
   }
   const quoteTexts = quotes.map(q => normalizeQuote(typeof q === 'string' ? q : (q && q.quote)))
@@ -76,4 +81,4 @@ function isSummaryArticle(text) {
   return { fail: reasons.length > 0, reasons };
 }
 
-module.exports = { isSummaryArticle, articleBody, s344Slots, assignmentTokens, paragraphs };
+module.exports = { isSummaryArticle, articleBody, s344Slots, assignmentTokens, paragraphs, ledeParagraph };

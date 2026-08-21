@@ -58,6 +58,13 @@ assert.ok(missingQuote.reasons.includes('missing-packet-quote'));
 
 const fs = require('fs');
 const path = require('path');
+const splitOk = s344Slots(fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/luis_c103_article.md'), 'utf8'), {
+  assignment: 'Fruitvale Transit Hub Phase II — Visioning stalled',
+  quotes: ["I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?"],
+  requireQuote: true,
+});
+assert.ok(!splitOk.reasons.includes('missing-packet-quote'),
+  'mid-quote attribution is a Packet span: ' + JSON.stringify(splitOk.reasons));
 const tanya = fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/tanya_c104_article.md'), 'utf8');
 const tanyaSlots = s344Slots(tanya, {
   assignment: 'A\'s late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI',

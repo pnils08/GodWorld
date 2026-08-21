@@ -209,7 +209,7 @@ Tasks 1–9 reviewed at the console before the first live fire. Findings are rec
 
 **One contained regression, deliberately unfixed.** `storyDocOpen` lost its `try/catch` around `fs.writeFileSync`, so a disk-write failure now fails the wake instead of logging non-fatal. Left in place because changing this code inside the observation window would make tomorrow's results unattributable (S250 deploy-attribution). Fix after Task 10 closes.
 
-**Parked after Task 10 — exact Packet-quote match is too strict.** Keep WHO may speak and Packet-backed words inside quote marks. Do not require the whole approved quote as one unbroken substring. Luis C103 printed Pilgrim’s speech and still failed `missing-packet-quote` because attribution sat between two true sentences. Allow mid-quote attribution and a single-sentence span of a longer Packet quote. Still fail invented speakers, invented words inside quotes, Tribune-as-actor, and empty W2. No matcher change until Task 10 observation closes.
+**Quote span (landed during the observation window).** `missing-packet-quote` now accepts a Packet-backed sentence span and mid-quote attribution. Invented speakers, invented words, Tribune-as-actor, and empty W2 stay fail-loud. Landed because it is a one-function change and it is the 18:15 write that would have false-flagged Luis-class Articles. W1/W2 contracts and crontab were not touched.
 
 No wake was hand-driven for this review; Task 10 remains the acceptance test.
 
@@ -219,7 +219,7 @@ No wake was hand-driven for this review; Task 10 remains the acceptance test.
 
 - [x] Positive fixture source if Dirt Carnival cannot be recovered — **C103 Luis Navarro** is the on-disk near-pass; Task 9 starts there. Dirt Carnival is optional.
 - [ ] Whether the builder accepts a tightened Luis Article as the permanent positive fixture, or wants a separately written completion. Does not block Tasks 2–8.
-- [ ] After Task 10: loosen `missing-packet-quote` from exact contiguous string to Packet-backed span + mid-quote attribution. WHO/invented-words/Tribune-as-actor/empty-W2 stay fail-loud. Do not change the matcher during the observation window.
+- [x] After Task 10: loosen `missing-packet-quote` from exact contiguous string to Packet-backed span + mid-quote attribution. Landed before the 18:15 write (`packetQuoteLanded`). WHO/invented-words/Tribune-as-actor/empty-W2 stay fail-loud.
 
 ---
 
@@ -234,3 +234,4 @@ No wake was hand-driven for this review; Task 10 remains the acceptance test.
 - 2026-08-21 (engine-sheet) — Pre-fire review of Tasks 1–9: fit confirmed, 8 suites PASS, gate verified failing a Rhea-passed live Article, scope clean. First live fire is 06:15 not 18:15. Baseline + 3 false-positive edges recorded under Task 10.
 - 2026-08-20 (grok) — Task 10 opened, not closed. Crontab read-only (M–F 06:15 angle / 13:15 report / 18:15 write unchanged; no install). Runtime land is `34cace97` + `cb5c20c6` (22:24–22:55 CDT). The 2026-08-20 18:15 write fanout ran before that land and is not the observation window. Retrospective gate on two of those Articles (Rhea PASS does not override): `output/cron-compare/staged/sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md` — s344 FAIL (JSON §2, empty W2, missing Packet quote, missing question, clubhouse); Rhea pass=true. `output/cron-compare/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.md` — s344 FAIL (JSON §2, missing Packet quote, missing question); Rhea pass=true. Next natural write 2026-08-21 18:15 CDT supplies the two post-land Articles.
 - 2026-08-21 (grok) — Parked after Task 10: exact contiguous Packet-quote match is too strict (Luis split-attribution false fail). Matcher unchanged for the observation window. WHO, invented words, Tribune-as-actor, empty W2 stay.
+- 2026-08-21 (grok) — Landed `packetQuoteLanded` before the 18:15 write: Packet-backed sentence span + mid-quote attribution pass; invented quote still fails. W1/W2 and crontab untouched.

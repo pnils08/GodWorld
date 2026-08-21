@@ -83,8 +83,8 @@ const luisNear = gate.evaluate(luisArt, {
   requireQuote: true,
 });
 assert.equal(luisNear.fail, true, 'Luis C103 is the near-pass, not the positive fixture');
-assert(luisNear.findings.some(f => f.issue === 'missing-packet-quote'),
-  'Luis quote is split across attribution, not an exact Packet string: ' + JSON.stringify(luisNear.findings));
+assert(!luisNear.findings.some(f => f.issue === 'missing-packet-quote'),
+  'split attribution is a Packet-backed span, not a quote fail: ' + JSON.stringify(luisNear.findings));
 assert(luisNear.findings.some(f => f.issue === 'intake-misses-assignment'),
   'Luis INTAKE claim is the quote, not the hub assignment');
 
@@ -101,5 +101,5 @@ const posGate = gate.evaluate(posArt, {
 assert.equal(posGate.fail, false, 'Task 9 positive pair must pass every deterministic check: ' + JSON.stringify(posGate.findings));
 
 console.log('cronDeskStoryTemplate.test.js: PASS');
-console.log('  luis near-pass still fails (split quote, INTAKE not on hub)');
+console.log('  luis near-pass still fails (INTAKE not on hub; quote span now lands)');
 console.log('  s344-positive-article.md PASS (synthetic NOT_CANON)');

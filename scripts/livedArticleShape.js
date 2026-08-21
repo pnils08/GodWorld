@@ -30,6 +30,25 @@ function normalizeQuote(text) {
   return String(text || '').toLowerCase().replace(/[“”"']/g, '').replace(/\s+/g, ' ').trim();
 }
 
+function quoteSpans(text) {
+  const n = normalizeQuote(text);
+  if (n.length < 12) return [];
+  const spans = [n];
+  n.split(/[.?!]+/).map(s => s.trim()).filter(s => s.length >= 12).forEach(s => spans.push(s));
+  return spans;
+}
+
+function packetQuoteLanded(body, quotes) {
+  const bodyNorm = normalizeQuote(body);
+  for (const q of quotes || []) {
+    const raw = typeof q === 'string' ? q : (q && q.quote);
+    for (const span of quoteSpans(raw)) {
+      if (bodyNorm.indexOf(span) >= 0) return true;
+    }
+  }
+  return false;
+}
+
 function s344Slots(text, opts) {
   const reasons = [];
   const body = articleBody(text);
@@ -42,11 +61,9 @@ function s344Slots(text, opts) {
     const lede = ledeParagraph(paras).toLowerCase();
     if (tokens.length && !tokens.some(t => lede.indexOf(t) >= 0)) reasons.push('lede-misses-assignment');
   }
-  const quoteTexts = quotes.map(q => normalizeQuote(typeof q === 'string' ? q : (q && q.quote)))
-    .filter(q => q.length >= 12);
+  const quoteTexts = quotes.map(q => typeof q === 'string' ? q : (q && q.quote)).filter(Boolean);
   if (quoteTexts.length) {
-    const bodyNorm = normalizeQuote(body);
-    if (!quoteTexts.some(q => bodyNorm.indexOf(q) >= 0)) reasons.push('missing-packet-quote');
+    if (!packetQuoteLanded(body, quoteTexts)) reasons.push('missing-packet-quote');
   } else if (opts && opts.requireQuote) {
     reasons.push('missing-packet-quote');
   }
@@ -81,4 +98,7 @@ function isSummaryArticle(text) {
   return { fail: reasons.length > 0, reasons };
 }
 
-module.exports = { isSummaryArticle, articleBody, s344Slots, assignmentTokens, paragraphs, ledeParagraph };
+module.exports = {
+  isSummaryArticle, articleBody, s344Slots, assignmentTokens, paragraphs, ledeParagraph,
+  normalizeQuote, packetQuoteLanded,
+};

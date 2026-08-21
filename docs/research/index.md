@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-08-16
+updated: 2026-08-20
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -73,6 +73,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-14-civic-process-install]]** | Umbrella for the civic week: Sunday city-hall writes Initiative_Tracker; Mon–Thu living reaction + district constituent heat; decide/don't/whisper feeds back and is not always a win. Three later plans, one parent. | `adopt` — no new plan ignited; civic.15 remains the Sunday/datawake plan |
 | **[[2026-08-14-civic-seat-change-election]]** | Rare replacement valve if a civic worker stays broken. Codebase pass on Election_Log / seeds / LifeHistory / voice. | `adopt` — **parked** under [[2026-08-14-civic-process-install]]; no plan |
 | **[[2026-08-16-sunday-city-hall-invite]]** | What Sunday actually hands offices, who may sit, Mayor-first lock, why it is not a round table; week-gated vs person-gated invite forks after civic.17 | `watch` — rb/Mike pick shape A–D before a plan |
+| **[[2026-08-20-s344-human-story-template]]** | S344 newsroom recovery — Mags owns the angle, reporters fill three human slots, Packet stays sidecar, deterministic shape/provenance walls precede Rhea; C103 Jax and C104 Tanya pressure-tested | `adopt` (ignites [[../plans/2026-08-20-s344-human-story-template-pressure-test]], pipeline.54) |
 
 ---
 
@@ -116,3 +117,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - 2026-08-10 (kimi) — research.26 close-out recorded on the [[2026-07-26-supermemory-retrieval-economics]] verdict cell: seat shipped S334 as `source-search` attributed to Marbury (`794861f5` + `4138acd1`); Rhea attribution superseded by the separation-of-duties hazard. Plan [[../plans/2026-08-10-data-analyst-retrieval-seat]].
 - 2026-08-11 (S366, research-build) — Registered [[2026-08-11-minmax-citizen-goals]] (Mike-direct concept seeds): adopt, parked on usage; no ROLLOUT row by Mike's direction — future build extends engine.94 Track B.
 - 2026-08-12 (S367, research-build) — Registered [[2026-08-12-notebooklm-structured-source-generation]] (Gemini-notebook proposal, Mike-shared): found unregistered/uncommitted; registered with S367 feedback recorded in the verdict cell. Plan + any new script remain Mike-gated.
+- 2026-08-20 (codex) — Registered [[2026-08-20-s344-human-story-template]]; adopt verdict from the C103 Jax and C104 Tanya pressure test.

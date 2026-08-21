@@ -358,6 +358,13 @@ function formatStrictSourceHygiene(nameCheck, packet) {
   ].join('\n');
 }
 
+function stripRepairChrome(text) {
+  return String(text || '')
+    .replace(/^\s*here['’]?s the corrected article[^\n]*\n+/i, '')
+    .replace(/^\s*here is the corrected article[^\n]*\n+/i, '')
+    .replace(/^\s*corrected article with all unapproved quotes removed[^\n]*\n+/i, '');
+}
+
 function stripModelMetadataTail(text) {
   const markers = [
     /^##\s+INTAKE\s*$/im,
@@ -1151,10 +1158,10 @@ async function main() {
           if (rr.usage) { usageIn += rr.usage.input_tokens || 0; usageOut += rr.usage.output_tokens || 0; }
           repairText = (rr.content || []).filter(b => b.type === 'text').map(b => b.text).join('\n');
         }
-        const unfenced = (() => {
+        const unfenced = stripRepairChrome((() => {
           const m = String(repairText || '').trim().match(/^```[a-z]*\s*\n([\s\S]*?)\n```\s*$/i);
           return m ? m[1] : repairText;
-        })();
+        })());
         if (String(unfenced || '').trim()) {
           const renormalized = renderPacketIntake(unfenced, packet);
           const reparsed = require('../lib/articleIntake').parse(renormalized);
@@ -1253,6 +1260,7 @@ module.exports = {
   buildOutputSlug,
   formatStrictSourceHygiene,
   stripModelMetadataTail,
+  stripRepairChrome,
   renderPacketIntake,
   resolveMaxToolCalls,
   openRouterToolLoop,      // Task 2.5.5 — shared by the wake-1 fact selection (cron-desk-run.js)

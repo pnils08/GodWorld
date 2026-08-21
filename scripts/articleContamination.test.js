@@ -34,6 +34,27 @@ const clean = scan([
 ].join('\n'), { desk: 'sports' });
 assert.equal(clean.fail, false, 'sheet-backed sports recap must pass: ' + JSON.stringify(clean.findings));
 
+const jax = fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/jax_c103_article.md'), 'utf8');
+const jaxScan = scan(jax, { desk: 'civic' });
+assert.equal(jaxScan.fail, true);
+assert(jaxScan.findings.some(f => f.issue === 'bart'), 'Jax BART: ' + JSON.stringify(jaxScan.findings));
+assert(jaxScan.findings.some(f => f.issue === 'frank-ogawa'), 'Jax Ogawa');
+
+const tanya = fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/tanya_c104_article.md'), 'utf8');
+const tanyaScan = scan(tanya, { desk: 'sports', packet: { known: [{ text: 'Vinnie Keane 2-3 HR 3 RBI' }] } });
+assert(tanyaScan.findings.some(f => f.check === 'unsupplied-access' && f.issue === 'clubhouse'),
+  'Tanya clubhouse: ' + JSON.stringify(tanyaScan.findings));
+
+const chrome = scan('Here\'s the corrected article with all unapproved quotes removed:\n\nNightline was open.', { desk: 'culture' });
+assert(chrome.findings.some(f => f.check === 'repair-chrome'));
+
+const texture = scan([
+  '# Nightline still had the lights',
+  '',
+  'An unnamed regular leaned on the rail while the door stayed open. No new business, no invented count.',
+].join('\n'), { desk: 'culture' });
+assert.equal(texture.fail, false, 'anonymous texture must pass: ' + JSON.stringify(texture.findings));
+
 console.log('articleContamination.test.js PASS');
 console.log('  vacuum findings:', v.findings.length);
 console.log('  caldera findings:', c.findings.length);

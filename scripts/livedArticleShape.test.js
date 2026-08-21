@@ -31,4 +31,44 @@ real. The story is the people standing in it, waiting to see whether tomorrow
 sounds any different from the last quiet one.
 `;
 assert.equal(isSummaryArticle(lived).fail, false, JSON.stringify(isSummaryArticle(lived)));
+
+const { s344Slots } = require('./livedArticleShape');
+const complete = `# Fruitvale Transit Hub still sits in visioning
+
+The Fruitvale Transit Hub has not left visioning in nine cycles. Rafael Pilgrim
+leans on the same cracked shelter panel every morning and watches the same sign.
+
+"I take the bus every day and they have had those coming soon signs up for years now," he said.
+
+At what cycle count does coming soon become something you stop believing?
+`;
+const completeSlots = s344Slots(complete, {
+  assignment: 'Fruitvale Transit Hub Phase II — Visioning stalled',
+  quotes: ['I take the bus every day and they have had those coming soon signs up for years now'],
+  requireQuote: true,
+});
+assert.equal(completeSlots.fail, false, JSON.stringify(completeSlots));
+
+const missingQuote = s344Slots(complete, {
+  assignment: 'Fruitvale Transit Hub Phase II',
+  quotes: ['This quote was never spoken by anyone in the Packet at all'],
+  requireQuote: true,
+});
+assert.ok(missingQuote.reasons.includes('missing-packet-quote'));
+
+const fs = require('fs');
+const path = require('path');
+const tanya = fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/tanya_c104_article.md'), 'utf8');
+const tanyaSlots = s344Slots(tanya, {
+  assignment: 'A\'s late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI',
+  quotes: [],
+  requireQuote: true,
+});
+assert.ok(tanyaSlots.reasons.includes('missing-packet-quote'));
+assert.ok(tanyaSlots.reasons.includes('missing-scene') || tanyaSlots.fail);
+
+const cronSrc = fs.readFileSync(path.join(__dirname, 'cron-desk-run.js'), 'utf8');
+assert.ok(/async function runCanonResearch/.test(cronSrc), 'W1 three-cited-facts sidecar remains wired');
+assert.ok(/§2b CANON RESEARCH/.test(cronSrc), 'canon-research section still appends to the story doc');
+
 console.log('livedArticleShape.test.js ok');

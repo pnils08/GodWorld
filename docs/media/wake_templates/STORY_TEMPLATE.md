@@ -10,9 +10,9 @@ Saturday compile reads.
 | Section | Wake | Written by | Content |
 |---|---|---|---|
 | §1 ASSIGNMENT | 1 | script (deterministic, from the fanout entry) | Assigned angle + hook + affected citizens + source ref + desk approach (`scripts/desk-approach-map.json`). Open-beat marker when the seed pool was exhausted. |
-| §2 THE REPORTER'S PLAN | 1 | reporter (citizenVoice, their own words) | How they chase the assigned angle today — what to verify, who to talk to. Personas keep their authored smells-off stance instead. |
-| §3 INTERVIEWS | 2 | script (real citizenVoice quotes) | The assignment's affected citizens first (Task 2.5.4), lane popids as fallback. No quotes landed → an explicit do-not-invent marker. |
-| §4 THE ARTICLE | 3 | script | Draft path + disposition + Rhea verdict. The article itself is the draft file; the Packet keeps load-bearing canon facts immutable and declares any persona-authorized texture. |
+| §2 THE REPORTER'S PLAN | 1 | reporter chase (Packet sidecar stays in angle.json) | Beat plan in the reporter's register — where they stand, who they chase, what does not line up. JSON or the plan object restated in English fails W1. Third-person seats are legal. |
+| §3 INTERVIEWS | 2 | script (real citizenVoice quotes) | Answers to what the citizen saw, felt, or understood. “The Tribune should ask” fails. Zero publishable answers fail W2; W3 does not open. |
+| §4 THE ARTICLE | 3 | reporter, then deterministic gates, then Rhea | Ordered shape: assigned-fact lede → one scene → one Packet quote → unanswered question. Named entities and access/rooms require Packet membership; unnamed non-contradictory texture is allowed. Rhea is contradiction-only. |
 | §5 INTAKE (in the draft) | 3 | backend in Packet mode; reporter otherwise; gate resolves IDs | `## INTAKE` block ending every draft, beside the self-score footer: `NAMES:`/`BIZ:`/`STORYLINE:`/`HOOD:`/`CLAIM:` lines per pipeline.45 Phase 1 ([[../../plans/2026-08-04-newsroom-canon-flow]]). |
 
 **The lived-experience doctrine carried by every wake** ([[../../adr/0017-typed-lived-experience-packets]],

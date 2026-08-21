@@ -115,7 +115,7 @@ pointers:
   3. Keep persona/desk instructions as voice overlays inside the fixed structure.
   4. Do not retire the W1 three-cited-facts machine check. It stays in the sidecar; the human slots remain chase / answer / Article.
 - **Verify:** `node scripts/livedArticleShape.test.js` → complete Articles pass; missing, duplicated, or reordered slots fail with named reasons; a Tanya-class clubhouse-access scene fails; the three-cited-facts sidecar check remains wired.
-- **Status:** [ ] not started
+- **Status:** [x] complete
 
 ### Task 6: Enforce the Packet named-entity wall and repair-chrome wall
 
@@ -130,7 +130,7 @@ pointers:
   3. Reject model-repair chrome such as “corrected article,” repair explanations, Packet/schema narration, and instruction echoes.
   4. Preserve unnamed scene texture unless it makes a new concrete claim that contradicts the Packet. Fail unsupplied access, dialogue, count, or room (C104 Tanya “clubhouse” is the fixture). Named-entity allowlist alone will not catch that class.
 - **Verify:** `node scripts/articleContamination.test.js && node scripts/livedExperiencePacketV2.test.js` → Jax real-place imports, Tanya clubhouse access, and repair chrome fail; anonymous non-contradictory texture passes.
-- **Status:** [ ] not started
+- **Status:** [x] complete
 
 ### Task 7: Bind W3 Article and INTAKE to the assignment
 
@@ -144,7 +144,7 @@ pointers:
   2. Reject an Article whose central subject, place, or storyline belongs to another assignment.
   3. Add the C103 Jax transit-Article/faith-INTAKE mismatch as the regression fixture.
 - **Verify:** `node scripts/livedExperiencePacketV2.test.js && node scripts/cronDeskStoryTemplate.test.js` → matching assignment passes; preserved mismatch fails before Rhea.
-- **Status:** [ ] not started
+- **Status:** [x] complete
 
 ### Task 8: Order the gates without making Rhea the writer
 
@@ -157,7 +157,7 @@ pointers:
   2. Send only a structurally valid Article plus Packet to Rhea for contradiction review.
   3. Do not ask Rhea to compose, repair, or normalize the Article.
 - **Verify:** `node scripts/cron-desk-writer.test.js && node scripts/cronDeskStoryTemplate.test.js` → deterministic failures never reach the Rhea-call seam; valid fixtures do.
-- **Status:** [ ] not started
+- **Status:** [x] complete
 
 ### Task 9: Establish one complete positive fixture
 
@@ -202,3 +202,4 @@ pointers:
 - 2026-08-20 (grok) — Review cuts before Tasks 2–4: chase is reporter-register beat plan, not first-person-required; third-person seats stay legal; plan-in-English chase fails as JSON-shaped. Zero publishable W2 answers fail W2 and do not open W3. Scene cannot mint unsupplied room/access/dialogue/count (Tanya clubhouse). Luis Navarro C103 is the on-disk near-pass for Task 9; Dirt Carnival no longer gates it. W1 three-cited-facts machine check stays in the sidecar.
 - 2026-08-20 (grok) — Task 1 built: frozen fixtures under `scripts/__fixtures__/newsroom/s344/` + `s344HumanSlots.js` detectors. `node scripts/s344HumanSlots.test.js` PASS — theory holds: the claimed Jax/Tanya/Luis failures are locally detectable without Rhea. No live wake wiring.
 - 2026-08-20 (grok) — Tasks 2–4: W1 `chase` field + reporterChaseText; §2 writes chase only (JSON §2 throws); W2 questions ask what the citizen saw/felt; Tribune-as-actor quotes fail interview validation; zero publishable answers fail W2 and W3 does not last-chance. Tests: livedExperiencePacket, livedExperiencePacketV2, newsroomInterviewContract, cronDeskStoryTemplate PASS.
+- 2026-08-20 (grok) — Tasks 5–8: four-part Article slots; BART/Ogawa + clubhouse + repair-chrome walls; assignment/INTAKE bind (Jax faith/transit); Packet-active W3 skips Rhea when those gates fail; writer strips repair-chrome prefix. `s344ArticleGate.evaluate` is the seam. W1 three-cited-facts sidecar still wired.

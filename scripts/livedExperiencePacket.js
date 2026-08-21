@@ -737,7 +737,7 @@ function buildWritePacket({ cycle, desk, reporter, story, approach, angleInput, 
         never: ['comma-combine records', 'BIZ: None', 'invent a role enum'],
       },
       footer: '<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->',
-      rule: 'Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.',
+      rule: 'Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.',
     },
   };
   // Adjacent lane events are useful during W1 planning, but are deliberately

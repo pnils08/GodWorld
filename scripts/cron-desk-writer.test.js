@@ -8,6 +8,7 @@ const {
   formatStrictSourceHygiene,
   renderPacketIntake,
   resolveMaxToolCalls,
+  stripRepairChrome,
 } = require('./cron-desk-writer');
 
 assert.strictEqual(resolveMaxToolCalls(0), 0);
@@ -48,6 +49,11 @@ const jaxHygiene = formatStrictSourceHygiene({ verified: [], unverified: [] }, {
 });
 assert.ok(jaxHygiene.includes('persona profile still authorizes bounded narrative texture'));
 assert.ok(jaxHygiene.includes('Anonymous role-only color is not an official source'));
+
+assert.equal(
+  stripRepairChrome('Here\'s the corrected article with all unapproved quotes removed:\n\n# Nightline\n\nThe door stayed open.\n'),
+  '# Nightline\n\nThe door stayed open.\n'
+);
 assert.ok(jaxHygiene.includes('role-only anonymous voice may appear solely as authorized texture'));
 assert.ok(jaxHygiene.includes('must not be attributed to a named citizen, official, institution, or canon source'));
 assert.ok(!jaxHygiene.includes('overrides persona text that permits invented or anonymous sources'));

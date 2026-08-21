@@ -28,6 +28,21 @@ const REAL_OAKLAND = [
   { id: 'allen-temple-bus', re: /Allen Temple bus stop/i },
   { id: 'reagan-era', re: /since the Reagan administration/i },
   { id: 'ebmud', re: /\bEBMUD\b|\bEast Bay Municipal Utility\b/i },
+  { id: 'bart', re: /\bBART\b/ },
+  { id: 'frank-ogawa', re: /Frank Ogawa Plaza/i },
+];
+
+const REPAIR_CHROME = [
+  { id: 'corrected-article', re: /here['’]?s the corrected article/i },
+  { id: 'unapproved-quotes-removed', re: /unapproved quotes removed/i },
+  { id: 'no-fabricated-speech', re: /no fabricated speech/i },
+  { id: 'packet-narration', re: /\bthe Packet does not\b/i },
+];
+
+const UNSUPPLIED_ACCESS = [
+  { id: 'clubhouse', re: /\bclubhouse\b/i },
+  { id: 'press-box', re: /\bpress box\b/i },
+  { id: 'locker-room', re: /\blocker room\b/i },
 ];
 
 const BLIGHT = [
@@ -137,13 +152,31 @@ function inferDesk(prose) {
   return null;
 }
 
+function packetBlob(packet) {
+  try { return JSON.stringify(packet || {}).toLowerCase(); } catch (_) { return ''; }
+}
+
+function scanUnsuppliedAccess(prose, packet) {
+  const blob = packetBlob(packet);
+  const hits = [];
+  for (const p of UNSUPPLIED_ACCESS) {
+    if (p.re.test(prose) && !p.re.test(blob)) {
+      hits.push({ check: 'unsupplied-access', issue: p.id });
+    }
+  }
+  return hits;
+}
+
 function scan(text, opts) {
   const prose = proseOnly(text);
   const desk = opts && opts.desk;
+  const packet = opts && opts.packet;
   const findings = [];
   findings.push(...scanLattice(prose));
   findings.push(...scanPatterns(prose, REAL_OAKLAND, 'real-oakland-leak'));
   findings.push(...scanPatterns(prose, BLIGHT, 'blight-import'));
+  findings.push(...scanPatterns(prose, REPAIR_CHROME, 'repair-chrome'));
+  findings.push(...scanUnsuppliedAccess(prose, packet));
   findings.push(...scanVoices(prose, desk));
   const seen = new Set();
   const uniq = [];

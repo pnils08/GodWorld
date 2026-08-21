@@ -2434,22 +2434,34 @@ async function runWrite(assign) {
   execFileSync('node', writerArgs, { cwd: ROOT, stdio: 'inherit', timeout: 600000 });
   if (!fs.existsSync(draftPath)) throw new Error('writer produced no draft at ' + path.relative(ROOT, draftPath));
 
-  const shape = require('./livedArticleShape').isSummaryArticle(fs.readFileSync(draftPath, 'utf8'));
-  if (shape.fail) {
+  const draftText = fs.readFileSync(draftPath, 'utf8');
+  const shape = require('./livedArticleShape').isSummaryArticle(draftText);
+  const s344Gate = PACKET_ACTIVE ? require('./s344ArticleGate').evaluate(draftText, {
+    desk,
+    assignment: assignment && assignment.story && (assignment.story.angle || assignment.story.label) || '',
+    quotes,
+    packet: writePacket,
+    requireQuote: true,
+  }) : { fail: false, findings: [] };
+  if (!PACKET_ACTIVE && shape.fail) {
     throw new Error('W3 refused summary article: ' + shape.reasons.join(','));
   }
 
-  const contamination = articleContamination.scanFile(draftPath, { desk });
+  const contamination = articleContamination.scanFile(draftPath, { desk, packet: writePacket });
   if (contamination.fail) {
     log('deterministic contamination blocker: ' + contamination.findings
       .map(row => row.check + '=' + row.issue).join('; '));
   }
+  if (s344Gate.fail) {
+    log('s344 article gate: ' + s344Gate.findings.map(row => row.check + '=' + row.issue).join('; '));
+  }
 
   // gate (skipped for --no-gate samples)
   let rhea = null, pass = false, rheaProof = null;
+  const skipRhea = contamination.fail || (PACKET_ACTIVE && (shape.fail || s344Gate.fail));
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
-  } else if (!contamination.fail) {
+  } else if (!skipRhea) {
     log('gating...');
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'cron-rhea-gate.js'), '--draft', path.relative(ROOT, draftPath),

@@ -29,6 +29,9 @@ const {
   deliver,
   sendDiscordText,
 } = require('./notebooklmPush');
+const dailyRouter = require('./notebooklmDailyRouter');
+const articleContamination = require('./articleContamination');
+const s344Slots = require('./s344HumanSlots');
 
 const CONFIG_PATH = path.join(ROOT, 'config', 'notebooklm.json');
 const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
@@ -46,6 +49,7 @@ function parseArgs(argv) {
     audio: true,
     deliver: true,
     dryRun: false,
+    routingShadow: false,
   };
   for (let i = 2; i < argv.length; i++) {
     const token = argv[i];
@@ -56,6 +60,7 @@ function parseArgs(argv) {
     else if (token === '--no-audio') args.audio = false;
     else if (token === '--no-deliver') args.deliver = false;
     else if (token === '--dry-run') args.dryRun = true;
+    else if (token === '--routing-shadow') args.routingShadow = true;
     else if (token === '--resume-latest-audio') args.resumeLatestAudio = true;
     else if (token === '--force') args.force = true;
     else throw new Error('unknown argument: ' + token);
@@ -65,6 +70,9 @@ function parseArgs(argv) {
   }
   if (args.hours != null && (!Number.isFinite(args.hours) || args.hours <= 0)) {
     throw new Error('--hours must be a positive number');
+  }
+  if (args.routingShadow && !args.dryRun) {
+    throw new Error('--routing-shadow is local-only and requires --dry-run');
   }
   return args;
 }
@@ -173,6 +181,73 @@ function collectNewsroomArtifacts(cycle, hours, nowMs) {
   return { reports: eligible, flagged };
 }
 
+function reportsFromPulse(pulse, root = ROOT) {
+  const groups = [
+    { rows: pulse && pulse.filings && pulse.filings.current || [], classification: 'STAGED' },
+    { rows: pulse && pulse.filings && pulse.filings.previous || [], classification: 'PREVIOUS_FILING' },
+  ];
+  const reports = [];
+  for (const group of groups) {
+    for (const filing of group.rows) {
+      const file = path.resolve(root, String(filing.articlePath || ''));
+      const rel = path.relative(root, file);
+      if (!rel || rel === '..' || rel.startsWith('..' + path.sep) || path.isAbsolute(rel) ||
+          !fs.existsSync(file) || path.extname(file) !== '.md') continue;
+      const body = fs.readFileSync(file, 'utf8');
+      if (sha256Text(body) !== filing.draftSha256) continue;
+      const assignment = (pulse.assignments || []).find((row) => row.articlePath === filing.articlePath) || null;
+      if (!safeToQuoteArticle(body, assignment)) continue;
+      reports.push({
+        classification: group.classification,
+        cycle: filing.cycle,
+        file,
+        relativePath: rel,
+        body,
+      });
+    }
+  }
+  return reports.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
+}
+
+function safeToQuoteArticle(body, assignment) {
+  const prose = articleContamination.proseOnly(body);
+  if (!prose.trim()) return false;
+  if (s344Slots.tribuneAsActorHits(prose).length) return false;
+  if (/\b(?:BEGIN_PACKET|END_PACKET|SYSTEM_PROMPT)\b|Return only the output format|```(?:json)?/i.test(prose)) {
+    return false;
+  }
+  if (/\bcorrected article\b|\bunapproved quotes removed\b|\bno fabricated speech\b/i.test(prose)) return false;
+  if (/^\s*[\[{]|"(?:packetContract|schema|goal|known|limits)"\s*:/i.test(prose)) return false;
+  try {
+    const scan = articleContamination.scan(body, {
+      desk: assignment && assignment.desk,
+      packet: assignment ? { quotes: assignment.quotes } : null,
+    });
+    return !scan.fail;
+  } catch (_) {
+    return false;
+  }
+}
+
+function flaggedFromPulse(pulse) {
+  return (pulse && pulse.dispositions || []).filter((row) =>
+    row.flagPath && (row.disposition === dailyRouter.RHEA_DISPOSITIONS.RHEA_FLAGGED ||
+      row.disposition === dailyRouter.RHEA_DISPOSITIONS.NEVER_GATED)
+  ).map((row) => ({
+    classification: row.disposition === dailyRouter.RHEA_DISPOSITIONS.RHEA_FLAGGED
+      ? 'RHEA_FLAGGED_EXCLUSION'
+      : 'NEVER_GATED_EXCLUSION',
+    disposition: row.disposition,
+    cycle: pulse.cycle,
+    relativePath: row.flagPath,
+    reasonCount: Math.max(1, Number(row.rheaFlagCount || 0), Number(row.flagFindingCount || 0)),
+  })).sort((a, b) => a.relativePath.localeCompare(b.relativePath));
+}
+
+function sha256Text(value) {
+  return crypto.createHash('sha256').update(String(value)).digest('hex');
+}
+
 function stableHash(value) {
   return crypto.createHash('sha256').update(JSON.stringify(value)).digest('hex');
 }
@@ -205,9 +280,24 @@ function buildSourcePack(input) {
     })),
     flagged: input.flagged.map((r) => ({
       classification: r.classification,
+      disposition: r.disposition || null,
       relativePath: r.relativePath,
       reasonCount: r.reasonCount,
     })),
+    routing: input.routing || null,
+    pulse: input.pulse ? {
+      fingerprint: input.pulse.fingerprint,
+      counts: input.pulse.counts,
+      assignments: input.pulse.assignments.map((assignment) => ({
+        key: assignment.key,
+        headline: assignment.headline,
+        chase: assignment.chase,
+        disposition: assignment.disposition,
+        quoteCount: assignment.quotes.length,
+      })),
+      filings: input.pulse.filings,
+      materialSignals: input.pulse.materialSignals || [],
+    } : null,
   };
   const hash = stableHash(hashInput);
   const lines = [
@@ -241,6 +331,36 @@ function buildSourcePack(input) {
     );
   }
 
+  if (input.pulse && input.routing) {
+    lines.push(
+      '## Daily routing shadow — local audit only',
+      '',
+      '- proposed profile: ' + input.routing.profile,
+      '- proposed presentation: ' + input.routing.format + '/' + input.routing.length,
+      '- activation eligible: ' + input.routing.activationEligible,
+      '- reason codes: ' + input.routing.reasonCodes.join(', '),
+      '- Rhea dispositions: passed=' + input.routing.dispositionCounts.passed +
+        ', rhea-flagged=' + input.routing.dispositionCounts.rheaFlagged +
+        ', never-gated=' + input.routing.dispositionCounts.neverGated,
+      ''
+    );
+    const chases = input.pulse.assignments.filter((assignment) => assignment.chase);
+    lines.push('### W1 reporter chases', '');
+    if (!chases.length) lines.push('_No `plan.chase` fields were available._', '');
+    for (const assignment of chases) {
+      lines.push('- ' + (assignment.reporter && assignment.reporter.name || assignment.desk || 'Reporter') +
+        ' — ' + (assignment.headline || 'assigned filing') + ': ' + assignment.chase);
+    }
+    if (chases.length) lines.push('');
+    lines.push('### W2 Packet-backed quote coverage', '');
+    const quoteAssignments = input.pulse.assignments.filter((assignment) => assignment.quotes.length);
+    if (!quoteAssignments.length) lines.push('_No Packet-backed quotes were available._', '');
+    for (const assignment of quoteAssignments) {
+      lines.push('- ' + (assignment.headline || assignment.key) + ': ' + assignment.quotes.length + ' quote(s).');
+    }
+    if (quoteAssignments.length) lines.push('');
+  }
+
   lines.push(
     '## Recent newsroom reports — not established fact',
     '',
@@ -255,7 +375,9 @@ function buildSourcePack(input) {
       '',
       'This report is ' + (report.classification === 'STAGED'
         ? 'behind the publication gate and is not yet canon.'
-        : 'an ungated sample and must not be presented as verified or published fact.'),
+        : report.classification === 'PREVIOUS_FILING'
+          ? 'an exact Rhea-passed filing from the previous completed Cycle and is labeled as continuity, not current reporting.'
+          : 'an ungated sample and must not be presented as verified or published fact.'),
       '',
       report.body.trim(),
       ''
@@ -269,7 +391,7 @@ function buildSourcePack(input) {
     for (const item of input.flagged) {
       lines.push(
         '- `' + item.relativePath + '` — excluded from the source pack body; ' +
-          item.reasonCount + ' gate finding(s).'
+          item.reasonCount + ' gate finding(s); disposition=' + (item.disposition || 'legacy-flagged') + '.'
       );
     }
     lines.push('');
@@ -310,6 +432,32 @@ function buildBoundedNewsSource(input) {
     );
   }
 
+  if (input.pulse) {
+    const chases = input.pulse.assignments.filter((assignment) => assignment.chase);
+    if (chases.length) {
+      lines.push('## What Tribune reporters are pursuing', '');
+      for (const assignment of chases) {
+        lines.push(
+          '### ' + (assignment.headline || 'Current assignment'),
+          '',
+          (assignment.reporter && assignment.reporter.name
+            ? assignment.reporter.name + ': ' : '') + assignment.chase,
+          ''
+        );
+      }
+    }
+    const quoteAssignments = input.pulse.assignments.filter((assignment) => assignment.quotes.length);
+    if (quoteAssignments.length) {
+      lines.push('## Interviews gathered by the Tribune', '');
+      for (const assignment of quoteAssignments) {
+        for (const quote of assignment.quotes) {
+          lines.push('- ' + quote.name + ': “' + quote.quote + '”');
+        }
+      }
+      lines.push('');
+    }
+  }
+
   lines.push(
     '## Bay Tribune newsroom reports',
     '',
@@ -321,7 +469,9 @@ function buildBoundedNewsSource(input) {
   for (const report of input.reports) {
     const status = report.classification === 'STAGED'
       ? 'Developing report — edited but not yet published.'
-      : 'Developing report — early newsroom sample.';
+      : report.classification === 'PREVIOUS_FILING'
+        ? 'Previous Cycle filing — continuity only, not current-Cycle reporting.'
+        : 'Developing report — early newsroom sample.';
     lines.push(
       '### ' + reportHeading(report),
       '',
@@ -483,31 +633,77 @@ async function run(argv) {
 
   const dailyConfig = config.dailyNews || {};
   const hours = args.hours || dailyConfig.hours || 36;
-  const newsroom = collectNewsroomArtifacts(cycle, hours, Date.now());
+  const worldSummary = fs.readFileSync(worldPath, 'utf8');
+  let newsroom = args.routingShadow ? null : collectNewsroomArtifacts(cycle, hours, Date.now());
 
   // pipeline.53: the daily citizen digest is the people-spine of the drop.
   // Build failure must never block the run (same contract as the audio
   // direction guide below) — log and continue without it.
   let citizenDigest = null;
+  if (args.routingShadow) {
+    const digestPath = path.join(ROOT, 'output', 'citizen-day-digest.md');
+    if (fs.existsSync(digestPath)) {
+      citizenDigest = { path: path.relative(ROOT, digestPath), text: fs.readFileSync(digestPath, 'utf8') };
+      console.log('Citizen day digest: ' + citizenDigest.path + ' (existing local artifact)');
+    }
+  } else {
+    try {
+      const { buildDigest } = require('./buildCitizenWeekDigest.js');
+      const digest = await buildDigest({ daily: true });
+      citizenDigest = { path: path.relative(ROOT, digest.out), text: digest.text };
+      console.log(
+        'Citizen day digest: ' + citizenDigest.path +
+        ' (' + digest.vignettes + ' vignettes, ' + digest.reflections + ' reflections in 24h)'
+      );
+    } catch (e) {
+      console.log('CITIZEN DAY DIGEST SKIPPED (non-blocking): ' + e.message);
+    }
+  }
+
+  let pulse;
+  let routing;
   try {
-    const { buildDigest } = require('./buildCitizenWeekDigest.js');
-    const digest = await buildDigest({ daily: true });
-    citizenDigest = { path: path.relative(ROOT, digest.out), text: digest.text };
-    console.log(
-      'Citizen day digest: ' + citizenDigest.path +
-      ' (' + digest.vignettes + ' vignettes, ' + digest.reflections + ' reflections in 24h)'
-    );
+    pulse = dailyRouter.collectNewsroomPulse({ root: ROOT, cycle, hours, nowMs: Date.now() });
+    pulse.materialSignals = dailyRouter.detectMaterialSignals(worldSummary);
+    pulse.hasCitizenDigest = Boolean(citizenDigest);
+    routing = dailyRouter.routeDailyNews(pulse, {
+      reportedDayThreshold: dailyConfig.reportedDayThreshold,
+    });
+    console.log('Daily routing shadow: ' + routing.profile + ' (' + routing.reasonCodes.join(', ') + ')');
   } catch (e) {
-    console.log('CITIZEN DAY DIGEST SKIPPED (non-blocking): ' + e.message);
+    if (args.routingShadow) throw e;
+    console.log('DAILY ROUTING SHADOW SKIPPED (non-blocking): ' + e.message);
+    pulse = { fingerprint: null, counts: {}, priorCompletedCycle: null };
+    routing = {
+      version: dailyRouter.ROUTER_VERSION,
+      mode: 'shadow',
+      profile: null,
+      format: null,
+      length: null,
+      activationEligible: false,
+      reportedDayThreshold: null,
+      sourceClasses: [],
+      reasonCodes: ['PULSE_COLLECTION_FAILED'],
+      dispositionCounts: { passed: 0, rheaFlagged: 0, neverGated: 0 },
+    };
+  }
+
+  if (args.routingShadow) {
+    newsroom = {
+      reports: reportsFromPulse(pulse),
+      flagged: flaggedFromPulse(pulse),
+    };
   }
 
   const pack = buildSourcePack({
     cycle,
     worldSummaryPath: path.relative(ROOT, worldPath),
-    worldSummary: fs.readFileSync(worldPath, 'utf8'),
+    worldSummary,
     citizenDigest,
     reports: newsroom.reports,
     flagged: newsroom.flagged,
+    pulse: args.routingShadow ? pulse : null,
+    routing: args.routingShadow ? routing : null,
   });
   const runDir = path.join(OUTPUT_DIR, 'c' + cycle, pack.hash.slice(0, 12));
   const manifestPath = path.join(runDir, 'manifest.json');
@@ -562,6 +758,12 @@ async function run(argv) {
       path: r.relativePath,
     })),
     flaggedExclusions: newsroom.flagged.map((r) => r.relativePath),
+    routingShadow: routing,
+    newsroomPulse: {
+      fingerprint: pulse.fingerprint,
+      counts: pulse.counts,
+      priorCompletedCycle: pulse.priorCompletedCycle,
+    },
     archiveNotebookId: config.notebookId || null,
     newsroomNotebookId: config.newsroomNotebookId || null,
     dryRun: args.dryRun,
@@ -571,7 +773,7 @@ async function run(argv) {
 
   if (args.dryRun) {
     console.log('NotebookLM daily news dry run complete for C' + cycle);
-    return { cycle, runDir, packHash: pack.hash, dryRun: true };
+    return { cycle, runDir, packHash: pack.hash, dryRun: true, routingShadow: routing };
   }
   if (!config.notebookId) throw new Error('config has no permanent archive notebookId');
   if (!config.newsroomNotebookId) {
@@ -667,10 +869,11 @@ async function run(argv) {
   const boundedSourcePath = path.join(runDir, 'bounded-newsroom-source.md');
   fs.writeFileSync(boundedSourcePath, buildBoundedNewsSource({
     cycle,
-    worldSummary: fs.readFileSync(worldPath, 'utf8'),
+    worldSummary,
     citizenDigest,
     reports: newsroom.reports,
     archiveAnswer: queryAnswer(archiveQuery),
+    pulse: args.routingShadow ? pulse : null,
   }));
 
   const list = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
@@ -802,6 +1005,9 @@ module.exports = {
   cycleFromName,
   artifactStem,
   collectNewsroomArtifacts,
+  reportsFromPulse,
+  flaggedFromPulse,
+  safeToQuoteArticle,
   stableHash,
   mergeManifest,
   isCompletedManifest,

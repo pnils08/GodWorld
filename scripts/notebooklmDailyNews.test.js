@@ -1,10 +1,17 @@
 #!/usr/bin/env node
 
 const assert = require('assert');
+const crypto = require('crypto');
+const fs = require('fs');
+const os = require('os');
+const path = require('path');
 const {
   parseArgs,
   cycleFromName,
   artifactStem,
+  reportsFromPulse,
+  flaggedFromPulse,
+  safeToQuoteArticle,
   stableHash,
   mergeManifest,
   isCompletedManifest,
@@ -59,7 +66,18 @@ const syntheticInput = {
     audio: false,
     deliver: false,
     dryRun: true,
+    routingShadow: false,
   });
+}
+
+{
+  const args = parseArgs(['node', 'script', '--dry-run', '--routing-shadow']);
+  assert.strictEqual(args.dryRun, true);
+  assert.strictEqual(args.routingShadow, true);
+  assert.throws(
+    () => parseArgs(['node', 'script', '--routing-shadow']),
+    /local-only and requires --dry-run/
+  );
 }
 
 {
@@ -78,6 +96,11 @@ assert.strictEqual(cycleFromName('civic_c999_writer.sample.md'), 999);
 assert.strictEqual(cycleFromName('no-cycle.md'), null);
 assert.strictEqual(artifactStem('civic_c999_writer.sample.md'), 'civic_c999_writer');
 assert.strictEqual(artifactStem('civic_c999_writer.flags.json'), 'civic_c999_writer');
+assert.strictEqual(safeToQuoteArticle('A clean synthetic scene. What remains unknown?'), true);
+assert.strictEqual(safeToQuoteArticle('The Tribune should ask the next question.'), false);
+assert.strictEqual(safeToQuoteArticle('Here is the corrected article. What remains unknown?'), false);
+assert.strictEqual(safeToQuoteArticle('{"packetContract":"LEP/2"}'), false);
+assert.strictEqual(safeToQuoteArticle('A synthetic rider boarded BART. What remains unknown?'), false);
 assert.strictEqual(stableHash({ b: 2 }), stableHash({ b: 2 }));
 assert.deepStrictEqual(
   mergeManifest({ sourceIds: ['kept'], generatedAt: 'old' }, { generatedAt: 'new' }),
@@ -133,6 +156,153 @@ assert.strictEqual(isCompletedManifest({
   assert(!source.includes('Canon status:'));
   assert(!source.includes('Pack SHA-256:'));
   assert(!source.includes('FLAGGED_EXCLUSION'));
+}
+
+const syntheticPulse = {
+  cycle: 999,
+  fingerprint: 'synthetic-pulse-fingerprint',
+  priorCompletedCycle: 998,
+  counts: { angles: 1, w2Ready: 1, quotes: 1, passed: 1, rheaFlagged: 1, neverGated: 1, pending: 0 },
+  assignments: [{
+    key: 'civic_c999_synthetic_packet-v2',
+    desk: 'civic',
+    reporter: { name: 'Synthetic Reporter', popid: 'POP-99999' },
+    headline: 'SYNTHETIC NON-CANON ASSIGNMENT',
+    chase: 'Follow the supplied synthetic fact to its named test source.',
+    quotes: [{
+      name: 'Synthetic Citizen',
+      popid: 'POP-99998',
+      quote: 'I saw the synthetic test signal.',
+      factIds: ['F-SYNTHETIC'],
+      basis: 'direct-reaction',
+    }],
+    disposition: 'passed',
+    flagPath: null,
+  }, {
+    key: 'business_c999_rhea_packet-v2',
+    desk: 'business',
+    reporter: null,
+    headline: 'SYNTHETIC RHEA REJECTION',
+    chase: null,
+    quotes: [],
+    disposition: 'rhea-flagged',
+    flagPath: 'output/cron-compare/flagged/synthetic-rhea.flags.json',
+    rheaFlagCount: 2,
+  }, {
+    key: 'sports_c999_shape_packet-v2',
+    desk: 'sports',
+    reporter: null,
+    headline: 'SYNTHETIC NEVER GATED',
+    chase: null,
+    quotes: [],
+    disposition: 'never-gated',
+    flagPath: 'output/cron-compare/flagged/synthetic-shape.flags.json',
+    rheaFlagCount: 0,
+  }],
+  dispositions: [{
+    disposition: 'passed',
+    wakePath: 'output/cron-compare/synthetic-pass.wake.json',
+    flagPath: null,
+    rheaFlagCount: 0,
+    flagFindingCount: 0,
+  }, {
+    disposition: 'rhea-flagged',
+    wakePath: 'output/cron-compare/synthetic-rhea.wake.json',
+    flagPath: 'output/cron-compare/flagged/synthetic-rhea.flags.json',
+    rheaFlagCount: 2,
+    flagFindingCount: 1,
+  }, {
+    disposition: 'never-gated',
+    wakePath: 'output/cron-compare/synthetic-shape.wake.json',
+    flagPath: 'output/cron-compare/flagged/synthetic-shape.flags.json',
+    rheaFlagCount: 0,
+    flagFindingCount: 1,
+  }],
+  filings: { current: [], previous: [] },
+  materialSignals: ['WORLD_HIGH_SIGNAL'],
+};
+const syntheticRouting = {
+  profile: 'REPORTED_DAY',
+  format: 'deep_dive',
+  length: 'default',
+  activationEligible: false,
+  reasonCodes: ['RHEA_PASSED_1', 'REPORTED_THRESHOLD_UNSET_OBSERVE_ONLY'],
+  sourceClasses: ['WORLD_STATE', 'W1_CHASE', 'W2_QUOTES', 'W3_PASSED'],
+  dispositionCounts: { passed: 1, rheaFlagged: 1, neverGated: 1 },
+};
+
+{
+  const shadowInput = Object.assign({}, syntheticInput, {
+    pulse: syntheticPulse,
+    routing: syntheticRouting,
+    flagged: flaggedFromPulse(syntheticPulse),
+  });
+  const pack = buildSourcePack(shadowInput);
+  assert(pack.text.includes('proposed profile: REPORTED_DAY'));
+  assert(pack.text.includes('passed=1, rhea-flagged=1, never-gated=1'));
+  assert(pack.text.includes('Follow the supplied synthetic fact'));
+  assert(pack.text.includes('W2 Packet-backed quote coverage'));
+  assert(pack.text.includes('disposition=rhea-flagged'));
+  assert.notStrictEqual(
+    pack.hash,
+    buildSourcePack(Object.assign({}, shadowInput, {
+      routing: Object.assign({}, syntheticRouting, { profile: 'CYCLE_OPEN' }),
+    })).hash,
+    'route changes must perturb the bounded-pack hash'
+  );
+}
+
+{
+  const source = buildBoundedNewsSource({
+    cycle: syntheticInput.cycle,
+    worldSummary: syntheticInput.worldSummary,
+    pulse: syntheticPulse,
+    reports: [{
+      classification: 'PREVIOUS_FILING',
+      relativePath: 'output/cron-compare/staged/synthetic_c998.staged.md',
+      body: '# Synthetic prior filing\n\nA labeled prior-Cycle filing.',
+    }],
+    archiveAnswer: 'Synthetic published background.',
+  });
+  assert(source.includes('## What Tribune reporters are pursuing'));
+  assert(source.includes('Follow the supplied synthetic fact'));
+  assert(source.includes('## Interviews gathered by the Tribune'));
+  assert(source.includes('Synthetic Citizen: “I saw the synthetic test signal.”'));
+  assert(source.includes('Previous Cycle filing — continuity only'));
+  assert(!source.includes('synthetic-rhea.flags.json'));
+  assert(!source.includes('SYNTHETIC RHEA REJECTION'));
+  assert(!source.includes('assignment JSON'));
+}
+
+{
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'nlm-daily-news-'));
+  try {
+    const relative = 'output/cron-compare/staged/synthetic_c999.staged.md';
+    const file = path.join(root, relative);
+    const body = '# SYNTHETIC VERIFIED\n\nExact hash required.';
+    fs.mkdirSync(path.dirname(file), { recursive: true });
+    fs.writeFileSync(file, body);
+    const pulse = {
+      filings: {
+        current: [{
+          cycle: 999,
+          articlePath: relative,
+          draftSha256: crypto.createHash('sha256').update(body).digest('hex'),
+        }],
+        previous: [],
+      },
+    };
+    assert.strictEqual(reportsFromPulse(pulse, root).length, 1);
+    pulse.filings.current[0].draftSha256 = 'stale-hash';
+    assert.strictEqual(reportsFromPulse(pulse, root).length, 0);
+    const unsafeBody = 'The Tribune should ask the next synthetic question.';
+    fs.writeFileSync(file, unsafeBody);
+    pulse.filings.current[0].draftSha256 = crypto.createHash('sha256').update(unsafeBody).digest('hex');
+    assert.strictEqual(reportsFromPulse(pulse, root).length, 0,
+      'an exact Rhea-sidecar hash must not bypass the current safe-to-quote gate');
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
 }
 
 const syntheticDigest = {

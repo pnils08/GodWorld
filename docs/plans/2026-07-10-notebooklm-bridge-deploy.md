@@ -275,7 +275,7 @@ shadow runs should record the three-valued disposition from the first run so the
 - **Verify:** `node scripts/notebooklmDailyRouter.test.js` → C104 rollover,
   C103 Article-rich, flagged-only, quiet, and synthetic-opposition fixtures pass
   without network access.
-- **Status:** [ ] not started
+- **Status:** [x] built and locally validated 2026-08-20 (codex)
 
 ### Task 19: Read-only newsroom pulse
 
@@ -290,7 +290,7 @@ shadow runs should record the three-valued disposition from the first run so the
   3. Label prior-Cycle material as `PREVIOUS_FILING`, never current reporting.
 - **Verify:** the targeted test proves W1-only, W2-ready, W3-staged, flagged,
   and Cycle-rollover inventories against copied fixture data.
-- **Status:** [ ] not started
+- **Status:** [x] built and locally validated 2026-08-20 (codex)
 
 ### Task 20: Route-aware bounded source and manifest
 
@@ -309,7 +309,8 @@ shadow runs should record the three-valued disposition from the first run so the
   4. Preserve exact source-ID scoping and same-hash no-op behavior.
 - **Verify:** `node scripts/notebooklmDailyNews.test.js` and router tests pass;
   generated local packs contain no disallowed source class.
-- **Status:** [ ] not started
+- **Status:** [x] built and locally validated 2026-08-20 (codex); live
+  presentation remains unchanged
 
 ### Task 21: Five-run shadow observation
 
@@ -325,7 +326,8 @@ shadow runs should record the three-valued disposition from the first run so the
   3. Record source-count growth in the working notebook; do not delete sources.
 - **Verify:** five manifests carry reproducible profile decisions and the live
   audio configuration remains unchanged.
-- **Status:** [ ] not started
+- **Status:** [~] observer built and locally validated 2026-08-20 (codex);
+  natural scheduled evidence 0/5
 
 ### Task 22: Gated branch comparison
 
@@ -389,6 +391,21 @@ time and judge it from a completed listen.
 | v1.3 | `default`; GodWorld Oakland 2042 frame | 19m16s / 37.2 MB. Overall report content was very good and should deepen as cron Articles accumulate; the defect was the opening spending several minutes explaining GodWorld as a future civic simulation. | Keep the content pipeline and `default` length. Reject only the explanatory GodWorld/2042 setup frame. |
 | v1.4 | `default`; “The Bay Tribune daily news for Oakland”; generator footer removed from the uploaded copy | Pending the next 08:00 scheduled listen. Goal: preserve v1.3 content/depth while beginning directly inside the city. | Current candidate. Judge opening immersion first, then depth and length; change one axis at a time. |
 
+#### Phase 6 shadow observation
+
+The local preflight is not one of the five natural 08:00 samples. Each sample
+must come from a distinct scheduled manifest while live audio remains
+`deep_dive/default`; record all three disposition counts from run one.
+
+| Sample | Manifest | Proposed profile / reasons | passed / Rhea-flagged / never-gated | Existing audio unchanged | Result |
+|---|---|---|---|---|---|
+| Preflight | read-only C104 fixture/current-artifact probe; no NotebookLM run | `CYCLE_OPEN`; threshold unset plus current wake and world-signal reasons | 2 / 4 / 0 | yes; no audio invoked | All 6 old Packet quotes and both pre-S344 Rhea-passed bodies fail the current safe-to-quote filters; 0 W2 quotes and 0 W3 bodies would enter a route-aware source. Does not count toward 5. |
+| 1 | pending natural 08:00 manifest | pending | pending | pending | pending |
+| 2 | pending natural 08:00 manifest | pending | pending | pending | pending |
+| 3 | pending natural 08:00 manifest | pending | pending | pending | pending |
+| 4 | pending natural 08:00 manifest | pending | pending | pending | pending |
+| 5 | pending natural 08:00 manifest | pending | pending | pending | pending |
+
 Research basis and adoption history:
 [[../research/2026-07-10-notebooklm-mcp]] and
 [[../research/2026-08-20-notebooklm-daily-branching]]. Operational commands and
@@ -442,3 +459,8 @@ failure recovery: [[../reference/notebookLM-CLI]].
   activation. The 2026-08-02 autonomous-deep-research plan is explicitly
   superseded and is not an implementation truth source.
 - 2026-08-21 (engine-sheet) — Phase 6 reviewed and cleared for codex. All factual claims verified against HEAD. Added an upstream-dependency block: S344 makes Rhea disposition three-valued, shifts REPORTED_DAY's threshold, and pins the W1 chase source.
+- 2026-08-20 (codex) — Tasks 18–20 shipped locally: deterministic router,
+  read-only fanout/W1/W2/W3 pulse, three-valued disposition, exact staged-hash
+  admission, Packet-backed quotes, prior-filing labeling, route-aware local
+  bounded source, and manifest observer. Task 21 observer is ready; natural
+  scheduled evidence remains 0/5, and Tasks 22–23 remain live-gated.

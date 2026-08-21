@@ -1,7 +1,7 @@
 ---
 title: Gemini Notebook / NotebookLM CLI Operations
 created: 2026-07-25
-updated: 2026-07-27
+updated: 2026-08-20
 type: reference
 tags: [infrastructure, media, active]
 sources:
@@ -421,6 +421,49 @@ exclusions all participate in the pack hash. If none changes, the completed job
 no-ops instead of inventing novelty. Do not add random prompts or wall-clock
 news merely to force a different program.
 
+### Phase 6 routing shadow
+
+The Daily News bridge now computes a deterministic shadow proposal on every
+run and records it in the manifest as `routingShadow` plus `newsroomPulse`.
+This observer does not change the live `deep_dive/default` presentation or its
+legacy bounded source. Production branching remains blocked on the five-run
+observation, the separately approved NotebookLM comparison, and Task 23.
+
+The pulse reads paths and typed state from the current fanout, `angle.json`,
+`asks.json`, Packet, wake, Rhea, staged-sidecar, and flag artifacts. It never
+admits a raw or flagged Article body. The three Rhea dispositions are distinct:
+`passed`, `rhea-flagged`, and `never-gated`. A `passed` filing requires a staged
+sidecar with `rhea.pass: true` whose `draftSha256` exactly matches the staged
+Markdown. The W1 chase comes only from `angleRead.plan.chase`; the old
+serialized `angleRead.text` is never used as prose. W2 quotations are admitted
+only from Packet quotes that carry fact IDs; the S344 Tribune-as-actor detector
+rejects assignment-note answers before they can enter the safe-to-quote set.
+
+`REPORTED_DAY` has no configured threshold during the pipeline.54 Task 10
+observation window. The predicate is parameterized; until a positive threshold
+is set from post-observation evidence, Rhea-passed copy remains visible in the
+pulse but the shadow proposal stays out of `REPORTED_DAY` and records
+`REPORTED_THRESHOLD_UNSET_OBSERVE_ONLY`.
+
+For a fully local route-aware source preflight, use:
+
+```bash
+node scripts/notebooklmDailyNews.js --dry-run --routing-shadow
+```
+
+`--routing-shadow` is rejected without `--dry-run`. It reads the existing local
+citizen-day digest rather than rebuilding it from Sheets, writes only the local
+pack/manifest, and makes no NotebookLM, Drive, Discord, Sheets, or model call.
+Its route profile, reason codes, typed source classes, three disposition counts,
+W1 chases, W2 Packet coverage, exact Rhea-passed W3 copy, and labeled
+`PREVIOUS_FILING` inputs participate in the shadow pack hash. Flagged bodies,
+assignment JSON, Tribune-as-actor answers, system instructions, repair chrome,
+and deterministic canon-contamination hits remain excluded. This final source
+admission check also protects the shadow from pre-S344 staged artifacts that
+carry an exact Rhea pass but never crossed the newer human-story gates. The
+eventual live path continues to scope every query and Audio Overview to the
+exact source IDs created or reused for that run.
+
 The live crontab entry is:
 
 ```cron
@@ -613,3 +656,7 @@ delete the CLI-managed profile as part of a normal rollback.
 - 2026-07-27 — Recorded the fan-out filename repair. Roster reporter and persona
   output contracts pass offline; the next scheduled write wake is the live
   staging proof.
+- 2026-08-20 (codex) — Documented the Phase 6 local router, typed newsroom
+  pulse, three-valued Rhea disposition, unset-threshold guard, manifest-only
+  live observer, and `--dry-run --routing-shadow` bounded-source preflight.
+  Production format/length routing remains gated.

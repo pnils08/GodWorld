@@ -12,7 +12,6 @@ paths:
   - "output/city-civic-database/**"
   - "docs/media/**"
   - "docs/mags-corliss/**"
-  - ".claude/terminals/media/TERMINAL.md"
   - ".claude/agents/business-desk/**"
   - ".claude/agents/chicago-desk/**"
   - ".claude/agents/civic-desk/**"

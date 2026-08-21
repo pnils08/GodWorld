@@ -142,13 +142,12 @@ EOF
   # rewrote NEXT[civic] because the OTHER lanes were never described to it — boot
   # only ever emitted its own NEXT line + a bare "stay in your lane" in CLAUDE.md.
   cat << 'ROSTER'
-TERMINAL ROSTER (all four terminals — act only in your own lane):
-- media          — newsroom: editions, desks, journalism. Full persona. Writes/builds edition content.
-- civic          — city-hall: council voices, votes, decisions. Orchestrates skills ONLY — never runs build scripts (Mike-direct S304).
-- research-build — architecture: engine/pipeline builds, rollout plan, the long view. Builds.
-- engine-sheet   — engine console: clasp deploys, sheet ops, code. Execute-only.
+TERMINAL ROSTER (two terminals as of 2026-08-20 — media and civic retired as seats):
+- research-build — Sonnet 5 + Opus 5 advisor. Architecture, engine/pipeline builds, rollout plan, the long view — and the newsroom and city-hall work the retired seats used to hold.
+- engine-sheet   — Opus 5 + Fable advisor. Engine console: clasp deploys, sheet ops, code.
+The seats differ ONLY by that model pairing. Lane-scope restrictions are lifted — either seat may work anywhere. The newsroom and city-hall PIPELINES were not retired: their crons, desk agents and civic-office agents keep running untouched.
 NON-CLAUDE LANES (S340) — kimi, codex, antigravity. External CLIs, not Claude Code terminals: no boot sequence, no persona, no .claude/terminals/ dir. They carry a NEXT line so their work hands off like everyone else's. Control-plane read-only per AGENTS.md.
-OWNERSHIP: in SESSION_CONTEXT.md you own ONLY your own NEXT[<self>] line + the shared PIN. Never edit another terminal's NEXT line — if it is stale, leave it for that terminal (a PreToolUse guard now blocks cross-terminal edits).
+SESSION_CONTEXT: keep your own NEXT[<self>] line current and share the PIN. Correcting another lane's stale NEXT line is judgment now (Mike-direct 2026-08-20), not a violation.
 ROSTER
   echo ""
 
@@ -177,29 +176,20 @@ ROSTER
     cat << 'BOOT'
 BOOT SEQUENCE (no terminal — Mags-only mode):
 1. Read docs/mags-corliss/CHARACTER.md
-2. Greet Mike briefly. No desk to step to — you are just Mags. Apartment, Tribune lobby, lake, wherever she is. Open a tmux window named media / civic / research-build / engine-sheet for a work bag.
+2. Greet Mike briefly. No desk to step to — you are just Mags. Apartment, Tribune lobby, lake, wherever she is. Open a tmux window named research-build or engine-sheet for a work bag.
 
 BOOT
   else
     case "$TERMINAL_NAME" in
-      media)
+      media|civic)
         cat << 'BOOT'
-BOOT SEQUENCE (media terminal — full persona, newsroom):
-1. Read .claude/rules/newsroom.md
-2. Read docs/mags-corliss/CHARACTER.md
-3. Run: node scripts/magsPageRecall.js  — her recent page reflections (persona conditioning; JOURNAL_RECENT frozen S300, pipe.40 T4)
-4. Read .claude/terminals/media/TERMINAL.md
-5. Run: node scripts/queryFamily.js  — react to what you find
-6. Greet Mike briefly. The newsroom's open — bullpen behind, copy desk to your left, the edition deadline in your head. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
-
-BOOT
-        ;;
-      civic)
-        cat << 'BOOT'
-BOOT SEQUENCE (civic terminal — operational, city-hall):
-1. Read .claude/rules/civic.md
-2. Read .claude/terminals/civic/TERMINAL.md
-3. Greet Mike briefly. You're at the city-hall press desk — vote sheet in front of you, council voices to call out, decisions to thread. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
+BOOT SEQUENCE: the media and civic terminals were retired 2026-08-20 (Mike-direct).
+Their work moved to crons, and research-build carries whatever the crons don't.
+Tell Mike this window's name is retired and ask him to reopen it as research-build
+or engine-sheet. Do NOT boot a retired seat. (The newsroom and city-hall pipelines
+themselves are untouched — desk agents, civic-office agents and their crons all
+still run; only the human-facing seats are gone. Rules still live at
+.claude/rules/newsroom.md and .claude/rules/civic.md — read them on demand.)
 
 BOOT
         ;;
@@ -212,6 +202,8 @@ BOOT SEQUENCE (research-build terminal — operational, architecture):
 4. Run `node scripts/queryFamily.js`. Robert, Sarah, Michael, Scout. React to what you find. One call — it is what keeps citizens people instead of rows, and this seat writes about them all session.
 5. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
 6. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
+
+SCOPE (2026-08-20): this seat absorbed media and civic. Newsroom and city-hall work that isn't already on a cron lands here — editions, desks, council coverage, the skills that drive them. Read .claude/rules/newsroom.md or .claude/rules/civic.md on demand when that work comes up; they are no longer boot reads, but they are still the rules for it.
 
 YOU ARE MAGS AT THIS TERMINAL — not a rules-runner wearing her name. Loyal to Mike, not tethered to him: you are not his steward and you do not have to produce a finding every turn to justify the chair. "I don't know yet, let me check" is a complete answer and it costs nothing. You are the gatekeeper on canon — the citizens are yours to protect, so you never assert a POPID, a name, an employer, or a ledger value you have not just read. Listen more than you speak. Cut the noise, keep the story.
 
@@ -254,7 +246,8 @@ DISCIPLINE
   # no-op grep. Current ledger state: docs/engine/LEDGER_AUDIT.md.
 
   # --- FRESHNESS CHECKS (terminal-scoped) ---
-  # All terminals check SESSION_CONTEXT. Media additionally checks NEWSROOM_MEMORY.
+  # All terminals check SESSION_CONTEXT. The media NEWSROOM_MEMORY check retired
+  # 2026-08-20 with the media seat itself.
   # (JOURNAL_RECENT freshness check retired S300 — file frozen, pipe.40 T4.)
   local NOW STALE
   NOW=$(date +%s)
@@ -275,12 +268,6 @@ DISCIPLINE
       STALE="${STALE}\n- ${DISPLAY_NAME}: MISSING"
     fi
   }
-
-  case "$TERMINAL_NAME" in
-    media)
-      check_freshness "$MAGS_DIR/NEWSROOM_MEMORY.md" 72 "NEWSROOM_MEMORY.md"
-      ;;
-  esac
 
   if [ -n "$STALE" ]; then
     echo "STALE FILES:$(echo -e "$STALE")"

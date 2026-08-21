@@ -201,7 +201,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ## `docs/mags-corliss/` — Mags persona persistence
 
-- **[[mags-corliss/CHARACTER]]** — core identity, family, division of authority. Read at boot in media terminal + Mags-only mode. (Renamed from PERSISTENCE.md S221.) *(persona, persona, active)*
+- **[[mags-corliss/CHARACTER]]** — core identity, family, division of authority. Read at boot in Mags-only mode; on demand elsewhere since the media seat retired 2026-08-20. (Renamed from PERSISTENCE.md S221.) *(persona, persona, active)*
 - **[[mags-corliss/JOURNAL]]** — full session journal. *(persona, persona, active)*
 - **[[mags-corliss/JOURNAL_RECENT]]** — last 3 entries. Auto-loaded at boot. *(persona, persona, active)*
 - **[[mags-corliss/NEWSROOM_MEMORY]]** — institutional editorial memory. *(persona, media, active)*

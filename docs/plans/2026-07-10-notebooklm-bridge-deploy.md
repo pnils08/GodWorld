@@ -459,7 +459,7 @@ failure recovery: [[../reference/notebookLM-CLI]].
   activation. The 2026-08-02 autonomous-deep-research plan is explicitly
   superseded and is not an implementation truth source.
 - 2026-08-21 (engine-sheet) — Phase 6 reviewed and cleared for codex. All factual claims verified against HEAD. Added an upstream-dependency block: S344 makes Rhea disposition three-valued, shifts REPORTED_DAY's threshold, and pins the W1 chase source.
-- 2026-08-20 (codex) — Tasks 18–20 shipped locally: deterministic router,
+- 2026-08-20 (codex) — Tasks 18–20 shipped locally in `d6a0e2f8`: deterministic router,
   read-only fanout/W1/W2/W3 pulse, three-valued disposition, exact staged-hash
   admission, Packet-backed quotes, prior-filing labeling, route-aware local
   bounded source, and manifest observer. Task 21 observer is ready; natural

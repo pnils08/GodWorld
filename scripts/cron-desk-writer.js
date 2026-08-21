@@ -186,7 +186,12 @@ function loadDeskRoute(desk, persona) {
 const PROVIDER_FLAG = arg('--provider', null);
 const MODEL_FLAG = arg('--model', null);
 const DESK_ROUTE = (!PROVIDER_FLAG || !MODEL_FLAG) ? loadDeskRoute(DESK, PERSONA) : null;
-const PROVIDER = PROVIDER_FLAG || (DESK_ROUTE && DESK_ROUTE.provider) || 'anthropic';   // 'anthropic' | 'openrouter'
+// infrastructure.7 (2026-08-20): last-resort fallback flipped anthropic -> openrouter.
+// Every seat in desk-model-map.json and newsroom-wake-packages.json already routes
+// through OpenRouter, so this branch only fires if the map fails to load at all —
+// and in that case the safe landing is the rail everything else is on, not a
+// silent drop onto the Anthropic key. The --provider flag still overrides.
+const PROVIDER = PROVIDER_FLAG || (DESK_ROUTE && DESK_ROUTE.provider) || 'openrouter';   // 'anthropic' | 'openrouter'
 const MODEL = MODEL_FLAG || (DESK_ROUTE && DESK_ROUTE.model) || (PROVIDER === 'openrouter' ? 'deepseek/deepseek-chat' : 'claude-sonnet-5');
 const MODEL_SLUG = MODEL.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 const MAX_TURNS = parseInt(arg('--max-turns', '15'), 10);

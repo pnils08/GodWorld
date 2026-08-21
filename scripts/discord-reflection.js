@@ -228,11 +228,23 @@ var SEARCH_TOOL = {
   }
 };
 
-async function callClaude(systemPrompt, userPrompt) {
-  var apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set');
+// infrastructure.7 (2026-08-20): OpenRouter's Anthropic-compatible /v1/messages
+// endpoint. Same Sonnet, same tool loop — the SDK appends /v1/messages to
+// baseURL, so it points at /api. REFLECTION_PROVIDER=anthropic reverts.
+var REFLECTION_PROVIDER = process.env.REFLECTION_PROVIDER || 'openrouter';
+var REFLECTION_MODEL = REFLECTION_PROVIDER === 'anthropic'
+  ? 'claude-sonnet-4-6'
+  : 'anthropic/claude-sonnet-4.6';
 
-  var claude = new Anthropic({ apiKey: apiKey });
+async function callClaude(systemPrompt, userPrompt) {
+  var claude;
+  if (REFLECTION_PROVIDER === 'anthropic') {
+    if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY not set');
+    claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  } else {
+    if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY not set');
+    claude = new Anthropic({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api' });
+  }
 
   // Two-phase (S252 flaw fix). The single agentic loop returned EMPTY: she
   // searched to the cap and never composed a reflection from a tool_result turn.
@@ -246,7 +258,7 @@ async function callClaude(systemPrompt, userPrompt) {
   log.info('Reflection phase 1 (explore)...');
   for (var r = 0; r < MAX_ROUNDS; r++) {
     var resp = await claude.messages.create({
-      model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt,
+      model: REFLECTION_MODEL, max_tokens: 1000, system: systemPrompt,
       messages: messages, tools: [SEARCH_TOOL]
     });
     var toolUses = (resp.content || []).filter(function (b) { return b.type === 'tool_use'; });
@@ -281,7 +293,7 @@ async function callClaude(systemPrompt, userPrompt) {
     'move it forward (did you do it? what came of it?), do not restate the intention. ' +
     'Write about what is NEW or what CHANGED since last night. A life moves; so should this.';
   var fin = await claude.messages.create({
-    model: 'claude-sonnet-4-6', max_tokens: 1000, system: systemPrompt,
+    model: REFLECTION_MODEL, max_tokens: 1000, system: systemPrompt,
     messages: [{ role: 'user', content: composeUser }]
   });
   var text = (fin.content || []).filter(function (b) { return b.type === 'text'; })

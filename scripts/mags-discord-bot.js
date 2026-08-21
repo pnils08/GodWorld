@@ -100,7 +100,18 @@ const COOLDOWN_CLEANUP_MS = 60 * 60 * 1000; // clean stale cooldowns hourly
 const SUPERMEMORY_KEY = process.env.SUPERMEMORY_CC_API_KEY || '';
 const USE_SUPERMEMORY = !!SUPERMEMORY_KEY;
 
-const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+// infrastructure.7 (2026-08-20): OpenRouter's Anthropic-compatible /v1/messages
+// endpoint. Same model, same request shape — tool_use and cached system blocks
+// both round-trip unchanged, verified before the switch. The SDK appends
+// /v1/messages to baseURL, so it points at /api, not /api/v1.
+// MAGS_BOT_PROVIDER=anthropic reverts to the direct key.
+const BOT_PROVIDER = process.env.MAGS_BOT_PROVIDER || 'openrouter';
+const BOT_MODEL = BOT_PROVIDER === 'anthropic'
+  ? 'claude-haiku-4-5-20251001'
+  : 'anthropic/claude-haiku-4.5';
+const claude = BOT_PROVIDER === 'anthropic'
+  ? new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+  : new Anthropic({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api' });
 
 // ---------------------------------------------------------------------------
 // State — per-channel sessions. Each persona keeps its OWN conversation history,
@@ -475,7 +486,7 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     // Last round: NO tools, so it must answer and can never reply empty
     // (S252 flaw fix — a still-searching turn returned 0 chars).
     var isFinal = (round === MAX_TOOL_ROUNDS - 1);
-    var opts = { model: 'claude-haiku-4-5-20251001', max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL] };
+    var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL] };
     if (isFinal) opts.tool_choice = { type: 'none' };  // force a reply, never empty
     response = await claude.messages.create(opts);
 
@@ -684,8 +695,9 @@ async function main() {
     console.error('DISCORD_BOT_TOKEN not set in .env');
     process.exit(1);
   }
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('ANTHROPIC_API_KEY not set in .env');
+  var botKeyVar = BOT_PROVIDER === 'anthropic' ? 'ANTHROPIC_API_KEY' : 'OPENROUTER_API_KEY';
+  if (!process.env[botKeyVar]) {
+    console.error(botKeyVar + ' not set (MAGS_BOT_PROVIDER=' + BOT_PROVIDER + ')');
     process.exit(1);
   }
 

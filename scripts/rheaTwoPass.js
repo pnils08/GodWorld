@@ -37,7 +37,17 @@ const { parse, extractNameCandidates } = require('./capability-reviewer/parseEdi
 
 const OUTPUT_DIR = path.join(__dirname, '..', 'output');
 const EDITIONS_DIR = path.join(__dirname, '..', 'editions');
-const MODEL = 'claude-haiku-4-5-20251001';
+// infrastructure.7 (2026-08-20): routed through OpenRouter's Anthropic-compatible
+// /v1/messages endpoint instead of Anthropic direct. Same model, same request
+// shape (system blocks, cache_control and tool_use all round-trip unchanged) —
+// only the rail and the model slug differ. Rates are exact pass-through, verified
+// against the live models endpoint; OpenRouter's margin is a fee on credit
+// top-ups, not on tokens. Set RHEA_PROVIDER=anthropic to fall back to the direct
+// key if OpenRouter is ever down.
+const PROVIDER = process.env.RHEA_PROVIDER || 'openrouter';
+const MODEL = PROVIDER === 'anthropic'
+  ? 'claude-haiku-4-5-20251001'
+  : 'anthropic/claude-haiku-4.5';
 const MAX_TOKENS = 1024;
 
 // Age-reference convention: the A's roster is set in 2041, so every citizen age
@@ -264,6 +274,27 @@ function buildArticlePrompt(article) {
   return `Headline: ${headline}\nBy: ${byline}\n\n${(article.body || '').slice(0, 4000)}`;
 }
 
+// Both rails speak the Anthropic Messages API, so the only difference is where
+// the client points and which key it carries. OpenRouter's compat endpoint lives
+// at /api (the SDK appends /v1/messages itself) — pointing at /api/v1 double-
+// prefixes the path and 404s.
+function makeClient() {
+  if (PROVIDER === 'anthropic') {
+    if (!process.env.ANTHROPIC_API_KEY) throw new Error('RHEA_PROVIDER=anthropic but ANTHROPIC_API_KEY not set in env');
+    return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  }
+  if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY not set in env');
+  return new Anthropic({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api' });
+}
+
+// OpenRouter returns the real dollar cost of every call in usage.cost. Rhea had
+// no spend instrumentation at all before this, so accumulate it and report the
+// run total — the plan flagged the missing number as an open gap.
+let runCostUsd = 0;
+function recordCost(usage) {
+  if (usage && typeof usage.cost === 'number') runCostUsd += usage.cost;
+}
+
 async function callHaiku(client, system, messages, useCache) {
   const params = {
     model: MODEL,
@@ -274,6 +305,7 @@ async function callHaiku(client, system, messages, useCache) {
     messages,
   };
   const resp = await client.messages.create(params);
+  recordCost(resp.usage);
   const text = resp.content.map((b) => (b.type === 'text' ? b.text : '')).join('');
   return { text, usage: resp.usage };
 }
@@ -358,8 +390,7 @@ async function main() {
     return;
   }
 
-  if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY not set in env');
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  const client = makeClient();
   const canonContext = await loadCanonContext(cycle, edition);
   console.log(`  canon context: ${Math.round(canonContext.length / 1024)} KB (Tier 1 authoritative + Tier 2 derived, cached after first article)`);
 
@@ -388,12 +419,14 @@ async function main() {
   const output = {
     cycle,
     generatedAt: new Date().toISOString(),
+    provider: PROVIDER,
     model: MODEL,
     edition: path.basename(editionPath),
     articlesChecked: articles.length,
     hallucinationFlags: allFlags,
     perArticle,
     elapsedSeconds: parseFloat(elapsed),
+    costUsd: runCostUsd ? Number(runCostUsd.toFixed(6)) : null,
   };
 
   const outputPath = path.join(OUTPUT_DIR, `rhea_hallucinations_c${cycle}.json`);
@@ -401,6 +434,7 @@ async function main() {
 
   console.log(`\nDone in ${elapsed}s.`);
   console.log(`  total hallucination flags: ${allFlags.length}`);
+  console.log(`  provider: ${PROVIDER} (${MODEL})${runCostUsd ? ` — $${runCostUsd.toFixed(6)}` : ''}`);
   console.log(`  output: ${outputPath}`);
 }
 

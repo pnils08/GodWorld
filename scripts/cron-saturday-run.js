@@ -501,11 +501,28 @@ async function orChat(model, system, user, maxTokens) {
   return String((j.choices && j.choices[0] && j.choices[0].message && j.choices[0].message.content) || '').trim();
 }
 
+// infrastructure.7 (2026-08-20): the narrator keeps the SAME model — the routing
+// note above is a deliberate voice decision, not a cost one — and only changes
+// rail, onto OpenRouter's Anthropic-compatible /v1/messages endpoint. Rates are
+// exact pass-through. NARRATOR_PROVIDER=anthropic reverts to the direct key.
+// A bare slug passed via --narrator-model is normalised to the OpenRouter form
+// so the old flag value keeps working.
+const NARRATOR_PROVIDER = process.env.NARRATOR_PROVIDER || 'openrouter';
+function anthropicSlug(model) {
+  if (NARRATOR_PROVIDER === 'anthropic') return String(model).replace(/^anthropic\//, '').replace(/4\.(\d)/, '4-$1');
+  return String(model).includes('/') ? model : 'anthropic/' + String(model).replace(/-4-(\d)$/, '-4.$1');
+}
 async function anthropicChat(model, system, user, maxTokens) {
-  if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY missing');
   const Anthropic = require('@anthropic-ai/sdk');
-  const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const msg = await client.messages.create({ model, max_tokens: maxTokens, system,
+  let client;
+  if (NARRATOR_PROVIDER === 'anthropic') {
+    if (!process.env.ANTHROPIC_API_KEY) throw new Error('ANTHROPIC_API_KEY missing');
+    client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  } else {
+    if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY missing');
+    client = new Anthropic({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api' });
+  }
+  const msg = await client.messages.create({ model: anthropicSlug(model), max_tokens: maxTokens, system,
     messages: [{ role: 'user', content: user }] });
   return msg.content.filter(b => b.type === 'text').map(b => b.text).join('\n').trim();
 }

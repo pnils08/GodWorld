@@ -7,7 +7,8 @@
  * Stage 3 of the rebuilt photo pipeline (Phase 21.3, S188 — T7).
  *
  * Reads each generated image plus its DJ spec sidecar ({slug}.meta.json) and
- * asks Claude Haiku to verify the image against the spec's negative-frame
+ * asks the QA vision model (Gemini 3.7 Flash via OpenRouter) to verify the
+ * image against the spec's negative-frame
  * constraints, positive-frame elements, and tier-fidelity rules.
  *
  * Two bug fixes from Task 2 audit:
@@ -28,7 +29,8 @@
  *   node scripts/photoQA.js output/photos/e92
  *   node scripts/photoQA.js output/photos/e92 --dry-run
  *
- * Requires: ANTHROPIC_API_KEY in environment or .env
+ * Requires: OPENROUTER_API_KEY in environment (see /root/.config/godworld/.env).
+ * PHOTOQA_PROVIDER=anthropic reverts to ANTHROPIC_API_KEY.
  *
  * Cost: ~5,000 tokens per photo (~$0.012 each, ~$0.08 per 7-photo edition)
  *
@@ -40,6 +42,35 @@ const path = require('path');
 require('/root/GodWorld/lib/env');
 
 const Anthropic = require('@anthropic-ai/sdk');
+
+// ---------------------------------------------------------------------------
+// QA model routing (infrastructure.7, 2026-08-20 — Mike-direct)
+//
+// The photo path was the last live Anthropic-direct caller, and the Anthropic
+// account is being left unfunded, so it had to come off. Gemini 3.7 Flash on
+// OpenRouter is the replacement: vision verified against a real render through
+// OpenRouter's Anthropic-compatible /v1/messages endpoint, and cheaper per
+// evaluation than the Haiku it replaces — $0.000695 vs $0.001646 measured on
+// the same image.
+//
+// FLUX image *generation* is untouched — it was never on Anthropic.
+//
+// PHOTOQA_MODEL overrides the model; PHOTOQA_PROVIDER=anthropic reverts to the
+// direct key, which only works while that account has funds.
+// ---------------------------------------------------------------------------
+const QA_PROVIDER = process.env.PHOTOQA_PROVIDER || 'openrouter';
+const QA_MODEL = process.env.PHOTOQA_MODEL
+  || (QA_PROVIDER === 'anthropic' ? 'claude-haiku-4-5-20251001' : 'google/gemini-3.7-flash');
+const QA_MAX_TOKENS = parseInt(process.env.PHOTOQA_MAX_TOKENS || '1500', 10);
+
+function makeQaClient() {
+  if (QA_PROVIDER === 'anthropic') {
+    if (!process.env.ANTHROPIC_API_KEY) throw new Error('PHOTOQA_PROVIDER=anthropic but ANTHROPIC_API_KEY not set');
+    return new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+  }
+  if (!process.env.OPENROUTER_API_KEY) throw new Error('OPENROUTER_API_KEY not set');
+  return new Anthropic({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api' });
+}
 
 // ---------------------------------------------------------------------------
 // Prompt construction
@@ -268,8 +299,12 @@ async function evaluatePhoto(client, photoPath, spec) {
   var promptText = QA_INSTRUCTIONS + '\n\n' + buildSpecBlock(spec);
 
   var response = await client.messages.create({
-    model: 'claude-haiku-4-5-20251001',
-    max_tokens: 500,
+    model: QA_MODEL,
+    // Gemini's reasoning cannot be turned off on this endpoint ("Reasoning is
+    // mandatory for this endpoint"), and thinking tokens count against
+    // max_tokens — 500 truncated mid-thought and returned no text at all.
+    // 1500 completes naturally (~153 output tokens observed on a real render).
+    max_tokens: QA_MAX_TOKENS,
     messages: [{
       role: 'user',
       content: [
@@ -285,7 +320,13 @@ async function evaluatePhoto(client, photoPath, spec) {
     }]
   });
 
-  var text = response.content[0].text;
+  // Reasoning models put a `thinking` block FIRST, so content[0] is not the
+  // answer — take every text block instead of assuming position 0.
+  var text = (response.content || [])
+    .filter(function (b) { return b.type === 'text'; })
+    .map(function (b) { return b.text; })
+    .join('');
+  if (!text) throw new Error('QA model returned no text block (stop_reason=' + response.stop_reason + ') — raise QA_MAX_TOKENS if this is a truncation');
   var parsed = parseResponse(text);
 
   return {
@@ -389,7 +430,7 @@ async function main() {
     process.exit(1);
   }
 
-  var client = new Anthropic();
+  var client = makeQaClient();
   var results = [];
   var totalInput = 0;
   var totalOutput = 0;
@@ -532,6 +573,9 @@ async function main() {
 
 module.exports = {
   evaluatePhoto: evaluatePhoto,
+  makeQaClient: makeQaClient,
+  QA_MODEL: QA_MODEL,
+  QA_PROVIDER: QA_PROVIDER,
   detectMediaType: detectMediaType,
   parseResponse: parseResponse,
   buildSpecBlock: buildSpecBlock,

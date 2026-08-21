@@ -43,7 +43,6 @@ var fs = require('fs');
 require('/root/GodWorld/lib/env');
 var photoGen = require('../lib/photoGenerator');
 var photoQA = require('./photoQA');
-var Anthropic = require('@anthropic-ai/sdk');
 
 var DEFAULT_MODEL = 'black-forest-labs/FLUX.1.1-pro';
 var DEFAULT_WIDTH = 1344;
@@ -500,17 +499,20 @@ async function runQaAndRegenLoop(opts) {
   var manifestPath = opts.manifestPath;
   var model = opts.model;
 
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('Error: --with-qa requires ANTHROPIC_API_KEY in environment');
+  // infrastructure.7 (2026-08-20): the QA rail and its key guard both live in
+  // photoQA.js now, so there is one place that decides which vision model runs.
+  var qaClient;
+  try {
+    qaClient = photoQA.makeQaClient();
+  } catch (err) {
+    console.error('Error: --with-qa could not build a QA client — ' + err.message);
     process.exit(1);
   }
 
   console.log('='.repeat(72));
-  console.log('Photo QA (Haiku) + regen-on-fail loop');
+  console.log('Photo QA (' + photoQA.QA_MODEL + ') + regen-on-fail loop');
   console.log('='.repeat(72));
   console.log('');
-
-  var qaClient = new Anthropic();
   var specBySlug = {};
   specs.forEach(function (s) { specBySlug[s.slug] = s; });
 
@@ -545,12 +547,13 @@ async function runQaAndRegenLoop(opts) {
   }
 
   // G-PR-C97-1 (S257): all-QA-errored HALT. When EVERY photo's QA errored
-  // (e.g. Anthropic '400 credit balance is too low'), there are no FAIL
-  // verdicts to arm regen-on-fail, so the run would otherwise "complete" with
-  // zero quality verdict — reading like "no FAILs → proceed" and shipping
-  // unverified photos. Surface a distinct loud failure and HALT for the operator
-  // (exit 3). Together/FLUX generation and Anthropic/Haiku QA bill separately —
-  // images can generate fine while the QA lane is down.
+  // (e.g. a '400 credit balance is too low'), there are no FAIL verdicts to arm
+  // regen-on-fail, so the run would otherwise "complete" with zero quality
+  // verdict — reading like "no FAILs → proceed" and shipping unverified photos.
+  // Surface a distinct loud failure and HALT for the operator (exit 3).
+  // Together/FLUX generation and the QA vision lane bill separately (FLUX on
+  // Together, QA on OpenRouter since infrastructure.7) — images can generate
+  // fine while the QA lane is down.
   var initialQaErrors = qaResults.filter(function (r) { return !r.qa; });
   if (results.length > 0 && initialQaErrors.length === results.length) {
     var creditHit = initialQaErrors.some(function (r) {
@@ -560,11 +563,12 @@ async function runQaAndRegenLoop(opts) {
     console.error('!'.repeat(72));
     console.error('HALT — PHOTO QA UNAVAILABLE: all ' + results.length + ' QA evaluations errored.');
     if (creditHit) {
-      console.error('  Signature: Anthropic credit/quota exhaustion (QA bills separately from');
-      console.error('  Together/FLUX generation — images generated fine; the QA lane is down).');
+      console.error('  Signature: QA credit/quota exhaustion on ' + photoQA.QA_PROVIDER + ' (QA bills');
+      console.error('  separately from Together/FLUX generation — images generated fine;');
+      console.error('  the QA lane is down).');
     }
     console.error('  No quality verdict produced. NOT shipping unverified photos.');
-    console.error('  Operator: restore Anthropic credit, then rerun with --qa-only');
+    console.error('  Operator: top up ' + photoQA.QA_PROVIDER + ' credit, then rerun with --qa-only');
     console.error('  (images already exist; --qa-only skips regeneration).');
     console.error('!'.repeat(72));
     console.error('');
@@ -693,7 +697,7 @@ async function runQaAndRegenLoop(opts) {
     type: opts.manifest && opts.manifest.type ? opts.manifest.type : 'edition',
     photoDir: path.basename(outDir),
     evaluatedAt: new Date().toISOString(),
-    model: 'claude-haiku-4-5-20251001',
+    model: photoQA.QA_MODEL,
     summary: { pass: passes, flag: flags, fail: fails, errorOrSkip: qaErrors },
     regenAttempts: failures.length,
     regenPromoted: failures.length - fails - failures.filter(function (x) {
@@ -789,7 +793,7 @@ function writeQaSidecar(outDir, slug, file, cycle, qa) {
     rawResponse: qa.rawResponse,
     tokens: qa.tokens,
     evaluatedAt: new Date().toISOString(),
-    model: 'claude-haiku-4-5-20251001'
+    model: photoQA.QA_MODEL
   };
   var perImagePath = path.join(outDir, slug + '.qa.json');
   fs.writeFileSync(perImagePath, JSON.stringify(perImageReport, null, 2));

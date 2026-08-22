@@ -146,9 +146,10 @@ assert.equal(packagesApi.routeFor(hal, 'angle').model, 'meta-llama/llama-3.3-70b
 assert.equal(packagesApi.routeFor(hal, 'report').model, 'meta-llama/llama-3.3-70b-instruct');
 assert.equal(packagesApi.routeFor(hal, 'write').model, 'deepseek/deepseek-chat');
 assert.equal(hal.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-assert.match(hal.reviewProfile.purpose, /unsupplied one remains explicitly missing/);
-assert.ok(hal.reviewProfile.textureConditions.some(v => v.includes('historical echo')));
-assert.ok(hal.reviewProfile.canonBlockers.some(v => v.includes('historical person')));
+assert.match(hal.reviewProfile.purpose, /Packet will not contain 1973/);
+assert.ok(hal.reviewProfile.authorizedTexture.some(v => /predecessor ghost|era comparison/i.test(v)));
+assert.ok(hal.reviewProfile.canonBlockers.some(v => v.includes('real-world Oakland')));
+assert.ok(!hal.reviewProfile.canonBlockers.some(v => v.includes('historical person')));
 
 const tanya = packages['tanya-cruz'];
 assert.equal(tanya.version, 'TANYA-LEP2-1');

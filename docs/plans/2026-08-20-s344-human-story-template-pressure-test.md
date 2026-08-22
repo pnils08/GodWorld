@@ -224,7 +224,7 @@ Rhea still grades against `reviewProfile.canonBlockers` injected in `scripts/cro
   3. Tanya's `canonBlockers` were already retuned in `9a15ea30`. Do not revert. Do not treat her clubhouse SET as a Rhea fail.
   4. A Rhea PASS still cannot override a deterministic template/real-world fail. After Task 10 observation, land this before the next write wake if 18:15 still flags picture desks.
 - **Verify:** Jax Article with an in-world named bar + INTAKE BIZ does not fail Rhea for "fabricated named business." Carmen/Luis Article that infers an office relationship without inventing a vote still passes. Same Article inventing a 5–3 tally not in the Packet still fails. Real-world BART/Ogawa still fail.
-- **Status:** [ ] not started — Claude / research-build after Task 10 (or in parallel if 18:15 is already flagging picture desks on SET).
+- **Status:** [x] complete — `fbec2694` (engine-sheet): Rhea name-axis is real-world import vs intake, not ledger membership. Jax/P Slayer un-inverted (no BART; named in-world bar is INTAKE BIZ). Plan status was stale after that land; flipped here.
 
 #### The gate axis — governing rule (builder-direct, 2026-08-21)
 
@@ -299,7 +299,8 @@ frozen** — the parked further-loosening stays parked until Task 10 closes.
 - [x] Positive fixture source if Dirt Carnival cannot be recovered — **C103 Luis Navarro** is the on-disk near-pass; Task 9 starts there. Dirt Carnival is optional.
 - [ ] Whether the builder accepts a tightened Luis Article as the permanent positive fixture, or wants a separately written completion. Does not block Tasks 2–8.
 - [x] After Task 10: loosen `missing-packet-quote` from exact contiguous string to Packet-backed span + mid-quote attribution. Landed before the 18:15 write (`packetQuoteLanded`). WHO/invented-words/Tribune-as-actor/empty-W2 stay fail-loud.
-- [ ] Task 11: Rhea reviewProfiles — picture desks may mint in-world `BIZ`; civic desks report facts + office relationships, not bars. Jax profile still forbids fabricated named business and still names BART. Hand to Claude.
+- [x] Task 11: Rhea reviewProfiles — picture desks may mint in-world `BIZ`; civic desks report facts + office relationships, not bars. Landed `fbec2694`. Jax no longer forbids a named in-world bar; BART removed from opening.
+- [x] Hal historian room: Packet will never contain 1973. Era comps (Reggie Jackson vs a living line) are allotted archive echo, not an Oakland import. Chase token pool now includes known facts/story labels so a historian register does not fail W1 for omitting a proper noun. Rhea API path: pre-sim baseball figures are not Oakland imports on the Hal seat. Writer FORBIDDEN no longer bans historical persons absent from the Packet.
 
 ---
 
@@ -323,3 +324,4 @@ frozen** — the parked further-loosening stays parked until Task 10 closes.
 - 2026-08-21 (engine-sheet) — Reconciled the matcher-version contradiction between `22a06b65` (park) and `adaa6237` (land): no wake fired between the runtime land and the change, so the observation window had not opened. Baseline re-verified unchanged. Matcher frozen from 06:15.
 - 2026-08-21 (engine-sheet) — Filed the governing gate-axis law over Task 11 (builder-direct): real-world = fail, novel in-world = intake, tracked citizens stay Packet-bound. Verified the deterministic walls already hold that axis; Rhea's per-seat profiles do not. Named the two Saturday-run wiring breaks that stop the mint loop.
 - 2026-08-21 (engine-sheet) — Task 10 FIRST LIVE DAY observed. 5/6 on angle, report and write — the pipeline held, no broad sweep to flagged. One structural failure, and it is predicted edge #2 from the pre-fire record: **Hal Richmond failed W1 on `chase replaces the assignment`**, then report and write cascaded ("no angle artifact"). `chaseReplacesAssignment` demands a ≥5-char assignment-or-hood token verbatim, and Hal's historian register writes around proper nouns by design — the heuristic penalises voice, not accuracy. Loosen it (accept a hood/desk/subject synonym, or drop it to a warning) before it costs another wake. **P Slayer staged**, which is the un-inverted profile working. Flagged today: business-desk, angela-reyes, carmen-delaine, elliot-graye — triage those against the gate axis before assuming they are real failures.
+- 2026-08-21 (grok) — Task 11 marked complete (`fbec2694`); plan status had been left `[ ] not started`. Hal historian room landed: era echo is the job; Packet will not contain 1973; W1 chase tokens include known/story so a historian register does not fail for omitting a proper noun; civic TEST-ONLY vs no-hitter swap still fails. Rhea+writer no longer treat a legend-as-echo as an Oakland import.

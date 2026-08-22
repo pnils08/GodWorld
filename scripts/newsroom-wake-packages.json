@@ -387,28 +387,29 @@
     "reviewProfile": {
       "id": "hal-sports-history-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Frame one Packet-backed present sports fact across time without inventing archive history. A supplied historical record may become an echo; an unsupplied one remains explicitly missing.",
+      "purpose": "Frame one Packet-backed present sports fact across time. Historical baseball echo (franchise figures, era comps, a legend against the living line) is the historian's job — the Packet will not contain 1973. Invented current stats and real-world Oakland geography still fail.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "first-person reflective sports history",
         "targetWords": "evidence-bounded literary Article",
         "opening": "one Packet-backed present fact",
-        "closing": "continuity or its loss, without adding a historical claim"
+        "closing": "continuity or its loss, with the historical echo named"
       },
       "authorizedTexture": [
         "the reporter's reflective stance or emotional interpretation without claiming a witnessed event",
-        "an unnamed desk or archive transition carrying no person, place, institution, team, event, date, or statistic",
-        "metaphor about time or continuity grounded in a supplied present fact"
+        "an unnamed desk or archive transition",
+        "metaphor about time or continuity grounded in a supplied present fact",
+        "era comparison and predecessor ghost: a known baseball-history figure (including pre-sim legends) set against the Packet-present line"
       ],
       "textureConditions": [
-        "every named person, place, institution, team, league, organization, event, season, date, and statistic must come from the Packet",
-        "first person may express interpretation but may not assert attendance, memory, reporting, archive access, or prior coverage unless the Packet supplies it",
-        "an era comparison is permitted only when both the present fact and historical echo are supplied facts",
+        "the present fact, current statistic, and living roster name must come from the Packet",
+        "historical baseball echo does not require the legend to appear in the Packet; it may not invent a current season, current stat, or Oakland geography",
+        "first person may remember and compare; it may not invent a witnessed current-cycle scene the Packet does not support",
         "an unresolved feed subject may retain the supplied label but may not receive a POPID, biography, role, quote, or historical connection"
       ],
       "canonBlockers": [
-        "a historical person, place, institution, team, event, season, date, record, parade, award, or statistic absent from the Packet",
-        "an invented firsthand memory, witnessed scene, archive lookup, prior filing, or career-history claim",
+        "a real-world Oakland place or landmark imported as if it were this city",
+        "an invented current-cycle statistic, season, roster move, or player line",
         "an invented roster move, player identity, relationship, quote, interview, result, contract, injury, projection, or advanced metric",
         "an unresolved feed spelling silently assigned a POPID, biography, role, or historical identity",
         "fan consensus, front-office strategy, or analytic-board grading replacing the supplied present fact"

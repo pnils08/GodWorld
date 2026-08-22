@@ -138,6 +138,16 @@ assert.throws(() => p.validateAngleOutput(withChase(w1, {
   targets: [], interpretation: 'Accountability may lag', unverifiedLead: [],
   closeQuestion: 'Who owns the response?'
 }), w1), /replaces the assignment/);
+const histInput = JSON.parse(JSON.stringify(w1));
+histInput.task.assignment = 'Pablo Almanzar MLB debut — 9 innings, no-hitter';
+histInput.known = [{ text: 'Almanzar threw a no-hitter in his MLB debut' }];
+const histChase = p.validateAngleOutput(withChase(histInput, {
+  chase: 'The debut already feels like it belongs to the franchise river. Stand in that continuity.',
+  focus: 'debut continuity', why: 'historian register', checks: ['the present line'],
+  targets: [], interpretation: 'echo', unverifiedLead: [],
+  closeQuestion: 'What does the river remember?'
+}), histInput);
+assert.ok(histChase.chase.indexOf('franchise river') >= 0);
 const thirdPerson = p.validateAngleOutput(withChase(w1, {
   chase: 'The board still shows the TEST-ONLY signal on TEST-HOOD. Chase who has not answered the mismatch.',
   focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'],

@@ -113,6 +113,9 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
         '. Current Cycle world state wins every conflict.']
       : []),
     'The draft to verify is: ' + draftRel + '.',
+    ...(PERSONA === 'hal-richmond' ? [
+      'HISTORIAN SEAT: Hal Richmond may name pre-sim baseball history (franchise figures, era comps, a legend against a Packet-present line). That is archive echo, not a real-world Oakland import. Invented current stats, invented seasons, and Oakland geography leaks still fail. Words in the mouth of a tracked living citizen still require Packet support.'
+    ] : []),
     ...(reviewContext ? [
       '',
       'WRITER AUTHORITY PROFILE (apply while sourcing; do not turn this into a voice score):',
@@ -335,7 +338,9 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
         '   Absence from the ledger is NOT by itself an invented name. The gate is "is this a real-world',
         '   entity imported into the city," not "is this already on a sheet." Judge each name:',
         '     - REAL-WORLD import (an actual person, business, landmark, or institution that exists outside',
-        '       this city) — HIGH-severity. This is the wall.',
+        '       this city) — HIGH-severity. This is the wall. Exception on the Hal Richmond seat: a pre-sim',
+        '       baseball-history figure used as era echo against a Packet-present line is archive texture,',
+        '       not an Oakland import.',
         '     - Present in the supplied ground truth or feed above but absent from the ledger — an UNRESOLVED',
         '       SUBJECT, not a fabrication. The record named them; the ledger has not caught up. Severity low,',
         '       note it as intake. Do NOT fail the article for it.',

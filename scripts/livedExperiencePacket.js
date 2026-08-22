@@ -430,7 +430,13 @@ function chaseIsJsonShaped(text) {
 function chaseReplacesAssignment(chase, input) {
   const assignment = clean((input && input.task && input.task.assignment) || '');
   const hood = clean((input && input.signal && input.signal.hood) || '');
-  const blob = (assignment + ' ' + hood).toLowerCase();
+  const story = (input && input.story) || {};
+  const known = Array.isArray(input && input.known) ? input.known : [];
+  const blob = [
+    assignment, hood,
+    story.angle || '', story.label || '', story.hookLine || '',
+    known.map(function (k) { return k && (k.text || k.t) || ''; }).join(' ')
+  ].join(' ').toLowerCase();
   const tokens = blob.split(/[^a-z0-9-]+/).filter(function (w) {
     return w.replace(/-/g, '').length >= 5;
   });

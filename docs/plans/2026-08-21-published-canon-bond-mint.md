@@ -140,3 +140,83 @@ before the backfill pass.
 Verified POPIDs from the Supermemory cut: POP-00265 Matty Lipo, POP-00871
 Latasha Owusu, POP-00961 Darius Clark, POP-00005 Mags Corliss — all present in
 the ledger.
+
+---
+
+## 7. Full Supermemory pass — what the complete report adds
+
+The truncated section landed. Three things in it change the build.
+
+### 7.1 Canon states a bond-health test, and it is implementable
+
+> "Citizen **bonds** are healthiest where people can **name each other** and a
+> **ritual or obligation**; they're worst where **institutions move bodies**
+> (bullpen, stalls, disbursement) **without a face or reason**."
+
+That is not colour — it is a scoring rule, and the report supplies the markers:
+
+| healthy | brittle |
+|---|---|
+| named reciprocity | unexplained roster moves |
+| rituals (dock bench, market bumps) | stat–win dissonance |
+| letters of civic hope | quiet blocks, after-hours lockout |
+| marriage with intact self | initiative stall without a face |
+| | fund "activity" with no recipient story |
+
+Detector-framer split applies: the markers are deterministic enough to score in
+code; the framing stays in the desk skills.
+
+Note what this implies for Gap A (§2). The *worst* bonds in canon are precisely
+the citizen↔institution ones — a bullpen move, a stalled hub, a disbursement
+with no recipient. Those are exactly the rows the current two-POPID schema
+cannot hold. **The schema is blind to the bond class canon says matters most.**
+
+### 7.2 The intake source is named
+
+> "`cp-POP-*` spaces: per-person PRESS / CONVO / NIGHT / tension sheets — **the
+> raw 'bonds' instrument**."
+
+That is the live feed for the intake, stated by the corpus itself. Hundreds of
+per-citizen containers, already structured as party / tension / affect / ask.
+
+### 7.3 New named tensions with verified POPIDs
+
+| citizen | bond under stress |
+|---|---|
+| Adash Stanley (POP-01023) | self ↔ team usage — content personally, wants playmaking used |
+| Darius Clark (POP-00961) | Nightline Station "too quiet" — safety/service shift |
+| Omar Cleo (POP-00290) | late-shift worker ↔ city amenities, thin after 5pm |
+| Melton Neilon (POP-00170) | baker ↔ Grand Lake commerce, empty storefronts, landlords vs retention grants |
+| Vladimir Gonzalez (POP-00598) | player-as-citizen ↔ city; defines the "civic gap", Fruitvale first |
+
+C103 heat rank: sports-governance opacity > Adash box-score-vs-results >
+Nightline quiet > late-shift access.
+
+### 7.4 POPID integrity — a hard gate, not a review step
+
+The report labels Benji Dillon **POP-00783**. That is **Yuki Ji** — a name
+listed one row above in the report's own §2B table. Benji Dillon is
+**POP-00018**.
+
+kimi made the identical error with POP-00705 (Jessie Berry, lifted from the
+adjacent Aitken row). Two independent canon-synthesis agents, same mechanism:
+**the POPID is grabbed from spatially-adjacent context instead of resolved from
+the name**, and both reports claimed their IDs were verified.
+
+A wrong POPID in a bond mint does not fail loudly — it writes a real edge
+between two real citizens who have no relationship, and the next cron speaks
+from it as canon. **The intake must resolve name→POPID in code and fail closed
+on mismatch.** Never accept a supplied ID. See
+[[../../../.claude/rules/identity]] accuracy discipline and auto-memory
+`feedback_never-trust-agent-supplied-popids`.
+
+Verified from this pass: POP-01023 Adash Stanley, POP-00290 Omar Cleo,
+POP-00170 Melton Neilon, POP-00598 Vladimir Gonzalez, POP-00961 Darius Clark,
+POP-00265 Matty Lipo, POP-00527 Mike Paulson, POP-00789 Elias Varek,
+POP-00018 Benji Dillon. Rejected: POP-00783 as Benji Dillon.
+
+### 7.5 Stale figure, noted
+
+The report cites "~675 citizens" in the ledger. Live is **964**. The report
+flags its own staleness risk ("live sheet/engine may have moved"). Treat its
+counts as indicative, its *names* as the payload.

@@ -1,7 +1,7 @@
 ---
 title: Citizen Archive — research
 created: 2026-07-29
-updated: 2026-08-01
+updated: 2026-08-22
 type: reference
 tags: [research, citizens, engine, active]
 sources:
@@ -15,7 +15,8 @@ sources:
 pointers:
   - "[[2026-07-27-oakland-sports-feed-entry-dashboard]] — preceding sports-intake work; trade-away events eventually hand off to this separate lifecycle project"
   - "[[../engine/archive/ENGINE_REPAIR]] §engine.77 — sports event/state intake sibling"
-  - "[[../engine/ROLLOUT_PLAN]] — engine.90 discovery pointer for the separately sequenced project"
+  - "[[../engine/ROLLOUT_PLAN]] — engine.90"
+  - "[[../plans/2026-08-21-citizen-archive]] — implementation plan"
   - "[[index]] — research registration"
 ---
 
@@ -319,9 +320,9 @@ POPID identity, a shared active-plus-archive resolver, centralized allocation,
 copy/read-back/remove safety, and explicit handoff from terminal lifecycle
 events. Preserve the existing health and hospital path unchanged.
 
-**Ignited plans:** none yet. Rollout discovery is `engine.90`. Mike sequenced
-this separate project after sports intake; its self-contained implementation
-plan requires a later, separate approval.
+**Ignited plans:** [[../plans/2026-08-21-citizen-archive]] (engine.90). Mike
+sequenced this separate project after sports intake; the implementation plan
+was filed 2026-08-22 (v1 = deceased + Traded only).
 
 ---
 
@@ -339,6 +340,8 @@ plan requires a later, separate approval.
   `Citizen_Archive` pattern resolved here ([[../plans/2026-08-01-business-lifecycle-generator]]
   Task 7). The POPID max-id hazard documented above applies identically to
   BIZ-IDs.
+- 2026-08-22 — Plan [[../plans/2026-08-21-citizen-archive]] filed. Live dump
+  C104: 49 Traded + 5 deceased / 964; no `Status=Migrated`.
 
 ---
 
@@ -355,3 +358,5 @@ plan requires a later, separate approval.
   [[../plans/2026-08-01-business-lifecycle-generator]] Task 7 step 1. The
   engine.90 POPID allocator should adopt the same pattern; the resolver
   question (identity lookup across active+archive) remains open.
+- 2026-08-22 — Implementation plan filed: [[../plans/2026-08-21-citizen-archive]].
+  v1 = deceased + Traded only. engine.90 pointer flipped research → plan.

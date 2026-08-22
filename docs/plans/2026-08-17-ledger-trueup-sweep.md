@@ -1,13 +1,14 @@
 ---
 title: Ledger true-up sweep — the defect classes no open row covers
 created: 2026-08-17
-updated: 2026-08-17
+updated: 2026-08-22
 type: plan
 tags: [engine, ledger, active]
 sources:
   - output/ledger_trueup_audit_2026-08-17.md — measured counts, all 10 classes
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — engine.117 parent row"
+  - "[[2026-08-21-citizen-archive]] — engine.90 Citizen Archive (sibling; not this sweep)"
   - "[[2026-08-11-careerstage-salary-coherence]] — covers classes 1–3 (reverted, unrepaired)"
   - "[[2026-08-09-wealthlevel-networth-bands]] — covers classes 4–5"
   - "[[2026-08-17-sheet-weight-reduction]] — the workbook weight that made hand-editing unusable"
@@ -75,7 +76,7 @@ ENGINE-local, and the two that dominate are everywhere. One pass per issue acros
 Status enum carries its own drift: `Active` 861, `Traded` 49, `Retired` 46, `deceased` 4,
 `injured` 1 — mixed capitalisation, and `injured` is a health state sitting in a lifecycle column.
 
-## Citizen Archive (design, Mike-direct 2026-08-17 — needs its own row before build)
+## Citizen Archive (design, Mike-direct 2026-08-17)
 
 Bidirectional archive tab. Traded players and deceased citizens leave `Simulation_Ledger` so the
 engine stops spending writes on rows whose lives no longer advance; a traded player who returns
@@ -83,11 +84,16 @@ flips back to active and re-enters the ledger **carrying the same POP-ID**. POP-
 keeps `Heritage_Ledger` inheritance intact — that tab keys on `FounderPopId` + `MembersList`, so the
 design holds as specified.
 
-**Sequencing correction (measured):** archive *after* true-up, not before. `Status=Traded` is 49 rows
-and `deceased` is 4 — 53 of 961, **5.5%**. The archive is worth building for write-economy and for a
-clean active roster, but it does not meaningfully shrink the true-up surface, and every one of those
-53 rows currently carries at least one defect. Archiving first buries those defects in a tab nobody
-reads, and because the flow is bidirectional, a returning player would carry them straight back in.
+**Plan:** [[2026-08-21-citizen-archive]] (engine.90). Live dump 2026-08-22 still 49 Traded + 5 deceased
+/ 964. Citywide engine.117 is not a gate on allocator/schema/sandbox; inventory still runs before
+those 54 move.
+
+**Sequencing correction (measured 2026-08-17):** archive *after* true-up, not before. `Status=Traded`
+was 49 rows and `deceased` 4 — 53 of 961, **5.5%**. The archive is worth building for write-economy
+and for a clean active roster, but it does not meaningfully shrink the true-up surface. Archiving
+first would bury defects; because the flow is bidirectional, a returning player would carry them
+back. Engine.90 inventories the eligible set rather than waiting on this plan's remaining
+SchoolQuality Task 1.
 
 ## Sequencing
 
@@ -112,3 +118,4 @@ decision, which is a design call, not a mechanism call.
 - 2026-08-17 (S378) — plan created from the live audit; scope cut to the classes no open row covers.
 - 2026-08-18 (S380) — Tasks 2, 3, 4 SHIPPED live with read-back: worldYearBase=2039 config row (worldYear = base + SimYear, =2041 today); 37 MigrationIntent-on-inactive cells cleared (writer-side clear-on-transition still open, rides engine.119 wave); POP-00173 BirthYear 1889→1989. Task 1 (SchoolQuality causal-or-retire) still awaiting Mike's call. STANDING CONSTRAINT (Mike-direct S380): no sweep/constant fixes anywhere in this plan's execution — every repaired value must derive from that citizen's own particulars; uniform backfills are the defect class, not the repair.
 - 2026-08-17 (S378) — batch shape measured: defects are uniform across ClockMode, so repair batches by issue not by group. Citizen Archive design recorded with a sequencing correction (archive after true-up; traded+deceased is 5.5% of rows).
+- 2026-08-22 (grok) — Citizen Archive plan filed as [[2026-08-21-citizen-archive]] (engine.90). Live dump still 49 Traded + 5 deceased; citywide Task 1 is not that plan's gate.

@@ -42,7 +42,6 @@
 require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
-const { execFileSync } = require('child_process');
 
 const ROOT = '/root/GodWorld';
 const arg = (k, d) => {
@@ -83,43 +82,117 @@ const TOOLS = [
     input_schema: { type: 'object', properties: { pattern: { type: 'string' }, path: { type: 'string' } }, required: ['pattern'] } },
 ];
 
+// Coverage is counted by the HARNESS, never by the agent. Run 3 of engine-validator
+// reported "Files scanned: 124" when 136 exist — an agent must not be trusted to
+// state its own denominator.
+const COVERAGE = { read: new Set(), grepped: new Set() };
+
 function safe(rel) {
   const abs = path.resolve(ROOT, String(rel || ''));
   if (!abs.startsWith(ROOT + path.sep) && abs !== ROOT) throw new Error('path escapes repo root: ' + rel);
   return abs;
 }
-function sh(cmd, args) {
-  try { return execFileSync(cmd, args, { cwd: ROOT, encoding: 'utf8', maxBuffer: 8 * 1024 * 1024, timeout: 60000 }); }
-  catch (e) { return String((e.stdout || '') + (e.stderr || '')) || '(no matches)'; }
+
+// NO SHELL. The first version of these tools interpolated model-supplied strings
+// into `bash -lc` — `ls -1 ${pattern}` and `grep ... ${target}` were unquoted, so
+// an agent could return pattern:"x; <anything>" and get arbitrary shell out of a
+// harness advertised as read-only. That is exactly the harness-escape class this
+// fleet is supposed to be safe against, and it shipped in the first engine agent.
+// Globs are now expanded in Node and every exec goes through argv, never a shell.
+
+const SKIP_DIRS = new Set(['node_modules', '.git', '.venv', 'backups', 'graphify-out']);
+
+function walk(dir, out, depth) {
+  if (depth > 12) return out;
+  let entries = [];
+  try { entries = fs.readdirSync(dir, { withFileTypes: true }); } catch (_) { return out; }
+  for (const e of entries) {
+    if (e.name.startsWith('.') && e.name !== '.claude') continue;
+    const abs = path.join(dir, e.name);
+    if (e.isDirectory()) { if (!SKIP_DIRS.has(e.name)) walk(abs, out, depth + 1); }
+    else out.push(path.relative(ROOT, abs));
+  }
+  return out;
 }
+
+let _tree = null;
+function repoFiles() { if (!_tree) _tree = walk(ROOT, [], 0); return _tree; }
+
+// glob -> RegExp. ** spans separators, * does not, ? is one non-separator char.
+function globToRe(glob) {
+  let re = '';
+  const g = String(glob || '');
+  for (let i = 0; i < g.length; i++) {
+    const c = g[i];
+    if (c === '*') {
+      if (g[i + 1] === '*') { re += '.*'; i++; if (g[i + 1] === '/') i++; }
+      else re += '[^/]*';
+    } else if (c === '?') re += '[^/]';
+    else re += c.replace(/[.+^${}()|[\]\\]/g, '\\$&');
+  }
+  return new RegExp('^' + re + '$');
+}
+
+function matchGlob(pattern) {
+  const p = String(pattern || '').replace(/^\.\//, '');
+  const re = globToRe(p);
+  return repoFiles().filter((f) => re.test(f));
+}
+
+// Resolve a tool `path` argument that may be a plain dir, a file, or a glob.
+function resolveTargets(target) {
+  const t = String(target || '.').replace(/^\.\//, '');
+  if (t === '.' || t === '') return repoFiles().filter((f) => f.endsWith('.js'));
+  if (/[*?]/.test(t)) return matchGlob(t);
+  const abs = safe(t);
+  if (!fs.existsSync(abs)) return [];
+  if (fs.statSync(abs).isDirectory()) {
+    const prefix = t.endsWith('/') ? t : t + '/';
+    return repoFiles().filter((f) => f.startsWith(prefix) && f.endsWith('.js'));
+  }
+  return [t];
+}
+
 function runTool(name, input) {
   try {
     if (name === 'read_file') {
       const t = fs.readFileSync(safe(input.path), 'utf8');
+      COVERAGE.read.add(String(input.path));
       return t.length > 120000 ? t.slice(0, 120000) + '\n…[truncated]' : t;
     }
     if (name === 'glob') {
-      const g = sh('bash', ['-lc', `cd ${ROOT} && ls -1 ${input.pattern} 2>/dev/null | head -400`]);
-      return g.trim() || 'TOOL_FAILED: no file matched ' + input.pattern + '. Nothing was listed; do not assume the set is empty — try another pattern.';
+      const hits = matchGlob(input.pattern).slice(0, 400);
+      return hits.length ? hits.join('\n')
+        : 'TOOL_FAILED: no file matched ' + input.pattern + '. Nothing was listed; do not assume the set is empty — try another pattern.';
     }
     if (name === 'grep') {
-      // The path may be a GLOB ("phase*/*.js"), not a directory. The first version
-      // passed it straight to grep, which answered "No such file or directory" — and
-      // the agent turned that failure into a clean passing report rather than saying
-      // its tool broke. Expand through the shell so a glob works, and make a genuine
-      // failure loud (see TOOL_FAILED below).
-      const target = input.path ? String(input.path) : '.';
-      safe(target.split('*')[0] || '.');
-      const q = (x) => "'" + String(x).replace(/'/g, "'\\''") + "'";
-      const out = sh('bash', ['-lc',
-        `cd ${ROOT} && grep -rnE --include=*.js ${q(input.pattern)} ${target} 2>&1 || true`]);
-      if (/No such file or directory/.test(out)) {
-        return 'TOOL_FAILED: no file matched path ' + target +
+      const files = resolveTargets(input.path).filter((f) => f.endsWith('.js'));
+      if (!files.length) {
+        return 'TOOL_FAILED: no file matched path ' + (input.path || '.') +
           '. Nothing was scanned. Do NOT report results for this path — fix the path and retry, ' +
           'or state in your report that this path could not be scanned.';
       }
-      const lines = out.split('\n').filter(Boolean).slice(0, 400).map((l) => l.replace(ROOT + '/', ''));
-      return lines.length ? lines.join('\n') : '(no matches)';
+      let re;
+      try { re = new RegExp(String(input.pattern), 'i'); }
+      catch (e) { return 'TOOL_FAILED: bad regex ' + JSON.stringify(input.pattern) + ' — ' + e.message; }
+      const lines = [];
+      let scanned = 0;
+      for (const f of files) {
+        if (lines.length >= 400) break;
+        let text;
+        try { text = fs.readFileSync(path.join(ROOT, f), 'utf8'); } catch (_) { continue; }
+        scanned++;
+        const rows = text.split('\n');
+        for (let i = 0; i < rows.length; i++) {
+          if (re.test(rows[i])) {
+            lines.push(f + ':' + (i + 1) + ':' + rows[i].trim().slice(0, 300));
+            if (lines.length >= 400) break;
+          }
+        }
+      }
+      COVERAGE.grepped = new Set([...COVERAGE.grepped, ...files.slice(0, scanned)]);
+      const head = `[scanned ${scanned} file(s) for this call]`;
+      return lines.length ? head + '\n' + lines.join('\n') : head + '\n(no matches)';
     }
     return 'unknown tool: ' + name;
   } catch (e) { return 'TOOL_FAILED: ' + e.message + ' — nothing was scanned; do not report results for this call.'; }
@@ -179,9 +252,28 @@ const client = PROVIDER === 'anthropic'
     messages.push({ role: 'user', content: results });
   }
 
+  // COVERAGE FOOTER — appended by the harness, not written by the agent. The agent
+  // states findings; the harness states what was actually opened. These are allowed
+  // to disagree, and when they do, the footer is the true one.
+  const universe = repoFiles().filter((f) => /^phase\d/.test(f) && f.endsWith('.js'));
+  const touched = new Set([...COVERAGE.read, ...COVERAGE.grepped]
+    .map((f) => String(f).replace(/^\.\//, '')).filter((f) => universe.includes(f)));
+  const missed = universe.filter((f) => !touched.has(f));
+  const footer = [
+    '', '---', '', '## Coverage (measured by the harness, not claimed by the agent)', '',
+    `- engine phase files in repo: **${universe.length}**`,
+    `- opened by this run: **${touched.size}** (${universe.length ? Math.round(100 * touched.size / universe.length) : 0}%)`,
+    `- never opened: **${missed.length}**`,
+    missed.length ? '\n<details><summary>files this report did NOT look at</summary>\n\n' +
+      missed.map((f) => '- ' + f).join('\n') + '\n\n</details>' : '',
+    '', `_agent=${AGENT} model=${MODEL} provider=${PROVIDER} turns=${turns} toolCalls=${toolCalls} in=${inTok} out=${outTok}_`,
+    '_Any count in the report above that disagrees with this footer is the agent\'s claim, not a measurement._',
+  ].join('\n');
+
   const stamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   const out = arg('--out', path.join(ROOT, 'output', `agent_${AGENT}_${stamp}.md`));
-  fs.writeFileSync(out, final || '(agent produced no final text)');
+  fs.writeFileSync(out, (final || '(agent produced no final text)') + '\n' + footer);
+  console.error(`coverage: ${touched.size}/${universe.length} engine phase files opened`);
   console.error(`\nturns=${turns} toolCalls=${toolCalls} in=${inTok} out=${outTok} model=${MODEL}`);
   console.error(`report -> ${out}`);
   console.log(final || '(agent produced no final text)');

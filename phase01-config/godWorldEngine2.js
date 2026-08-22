@@ -599,7 +599,12 @@ function runWorldCycle() {
     var engineErrors = (ctx && ctx.summary && ctx.summary.engineErrorCount) || 0;
     var auditIssueCount = (ctx && ctx.summary && ctx.summary.auditIssues) ? ctx.summary.auditIssues.length : 0;
     emitPhaseTimings_(ctx);  // engine.95 Task 2 — PHASE_TIMING markers (clasp logs pattern)
-    Logger.log('Cycle completed. Engine errors logged: ' + engineErrors + '; audit issues tracked: ' + auditIssueCount);
+    // engine.128 — report how many times the cycle drew from ctx.rng. The old
+    // PRNG fell into a shared 10,466-value ring somewhere around draw 5,700-8,800,
+    // so this number is what sizes how much of a cycle was inside it. The RNG is
+    // fixed; this stays as the standing entropy-exposure gauge.
+    var rngDraws = (ctx && ctx.rng && typeof ctx.rng.draws === 'number') ? ctx.rng.draws : 'n/a';
+    Logger.log('Cycle completed. Engine errors logged: ' + engineErrors + '; audit issues tracked: ' + auditIssueCount + '; rng draws: ' + rngDraws);
   }
 }
 

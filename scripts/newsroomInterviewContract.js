@@ -44,15 +44,31 @@ function parseJsonObject(value) {
 // ─────────────────────────────────────────────────────────────────────────────
 // extractSpoken — what the citizen actually SAID, out of what the model returned.
 //
+// HISTORY, so nobody re-derives it. Evidence mode landed 2026-08-10 (codex,
+// 47139923) WITH a guard that made it read-only:
+//     if (record && evidenceBound) throw 'evidence-bound pilot is read-only'
+// so a JSON interview could never reach the record path. On 2026-08-13 (grok,
+// 26661fea) that guard was removed on purpose and for a good reason — 940
+// citizens were sealed out of interviews, and "recording an evidence-bound
+// interview is the citizen cron hearing them." Both rulings are right. What was
+// missing is this function: opening the record path to evidence mode requires
+// extracting the sentence before storing it. This is the other half of 26661fea.
+//
 // In evidence mode a citizen is told to "Return ONLY the JSON requested by
 // packet.output", so the generation is a CITIZEN_INTERVIEW envelope:
 //   {"answer":"quote","quote":"...","fact_ids":[...],"basis":"..."}
 // The article path already unwraps that (livedExperiencePacket). The RECORD path in
-// citizenVoice.js did not — so the envelope itself landed in the citizen's page doc,
-// in the affect classifier, and in Reflection_Intake.ReflectionExcerpt. Measured
-// 2026-08-22: 177 of 401 PRESS rows across C103–C104 hold a fenced JSON blob instead
-// of a thought. Page docs are what a citizen reads back at their next wake, so they
-// were recalling JSON as their own memories.
+// citizenVoice.js did not. Measured 2026-08-22: 177 of 401 PRESS rows across
+// C103–C104 hold a fenced JSON blob in Reflection_Intake.ReflectionExcerpt instead
+// of a thought, first appearing in C103 — which is the cycle 2026-08-13 falls in.
+//
+// SCOPE, checked rather than assumed: the damage is that ONE sheet column. The page
+// docs are fine — Supermemory stores an extracted `memory`, and reading the affected
+// citizens' pages back returns clean prose ("Speaker wants the Tribune to ask how the
+// city is preparing for icy roads..."), zero envelope text in any doc checked. The
+// published articles are fine too, verified against the C104 writer state. An earlier
+// note here claimed citizens were recalling JSON as their own memories; that was
+// inferred from the code path and the pages contradict it.
 //
 // Gated on SHAPE, not on the evidenceBound flag. The flag is an intention; the shape
 // is what arrived, and the corpus shows envelopes appearing without the flag being a

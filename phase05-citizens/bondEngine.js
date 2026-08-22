@@ -1578,11 +1578,29 @@ function makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood
 function generateBondId_(ctx) {
   var rng = safeRand_(ctx);
   var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-  var id = '';
-  for (var i = 0; i < 8; i++) {
-    id += chars.charAt(Math.floor(rng() * chars.length));
+
+  // engine.128 — prime the seen-set from bonds already loaded this cycle, once.
+  // The 53 observed duplicates were CROSS-cycle (c102 vs c103), so guarding only
+  // within a single run would not have caught them. Lazy so it works no matter
+  // which load path populated ctx.summary.relationshipBonds.
+  if (ctx && !ctx._bondIdSetPrimed) {
+    ctx._bondIdSetPrimed = true;
+    var loaded = (ctx.summary && ctx.summary.relationshipBonds) || [];
+    seedGeneratedIds_(ctx, 'bond', loaded.map(function (b) {
+      return String((b && (b.bondId || b.BondId)) || '').replace(/^BOND-/, '');
+    }));
   }
-  return id;
+
+  // Was a bare 8-char draw returned with no uniqueness check. BondId is read as
+  // a lookup key at bondEngine.js:1670 — a duplicate silently resolves to the
+  // wrong bond, which is how 53 collisions survived unnoticed for 100+ cycles.
+  return uniqueGeneratedId_(ctx, 'bond', function () {
+    var id = '';
+    for (var i = 0; i < 8; i++) {
+      id += chars.charAt(Math.floor(rng() * chars.length));
+    }
+    return id;
+  });
 }
 
 function bondExists_(ctx, citizenA, citizenB) {

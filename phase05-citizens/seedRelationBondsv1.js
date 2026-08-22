@@ -157,6 +157,12 @@ function seedRelationshipBonds_(ctx) {
     var exB = String(ex.citizenB || '').trim().toUpperCase();
     if (exA && exB) bondSet[makeBondKey_(exA, exB)] = true;
   }
+  // engine.128 — prime the ID seen-set from PERSISTED bonds too. The observed
+  // 53 duplicates were cross-cycle (c102 vs c103), so a within-cycle-only
+  // guard would not have caught them.
+  seedGeneratedIds_(ctx, 'bond', existingBonds.map(function (b) {
+    return String((b && (b.bondId || b.BondId)) || '').replace(/^BOND-/, '');
+  }));
   Logger.log('seedRelationshipBonds_: Preserving ' + existingBonds.length + ' existing bonds (durable graph)');
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -176,7 +182,8 @@ function seedRelationshipBonds_(ctx) {
           Math.floor(rng() * 3) + 8,  // 8-10 intensity
           'household',
           cycle,
-          rng
+          rng,
+          ctx
         );
         
         var key = makeBondKey_(members[m1].citizenId, members[m2].citizenId);
@@ -228,7 +235,8 @@ function seedRelationshipBonds_(ctx) {
         Math.floor(rng() * 4) + 3,  // 3-6 intensity
         'neighbor',
         cycle,
-        rng
+        rng,
+        ctx
       );
       
       bondSet[key] = true;
@@ -278,7 +286,8 @@ function seedRelationshipBonds_(ctx) {
         Math.floor(rng() * 4) + 4,  // 4-7 intensity
         'work',
         cycle,
-        rng
+        rng,
+        ctx
       );
       
       bondSet[key] = true;
@@ -321,7 +330,8 @@ function seedRelationshipBonds_(ctx) {
       Math.floor(rng() * 4) + 2,  // 2-5 intensity
       'random',
       cycle,
-      rng
+      rng,
+      ctx
     );
     
     bondSet[key] = true;
@@ -416,9 +426,15 @@ function createRelationshipBondsSheet_(ss) {
 /**
  * Create a bond object
  */
-function createSeedBond_(citizenA, citizenB, type, intensity, origin, cycle, rng) {
+function createSeedBond_(citizenA, citizenB, type, intensity, origin, cycle, rng, ctx) {
   return {
-    bondId: 'BOND-' + generateSeedBondId_(rng),
+    // engine.128 — guarded mint. Was a bare generateSeedBondId_(rng) with no
+    // uniqueness check, which produced 53 duplicate BondIds across c102/c103
+    // once ctx.rng degenerated. BondId is read as a lookup key at
+    // bondEngine.js:1670, so a duplicate silently resolves to the wrong bond.
+    bondId: 'BOND-' + uniqueGeneratedId_(ctx, 'bond', function () {
+      return generateSeedBondId_(rng);
+    }),
     citizenA: citizenA.citizenId,
     nameA: citizenA.name,
     citizenB: citizenB.citizenId,

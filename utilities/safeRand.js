@@ -34,3 +34,73 @@ function safeRand_(ctx) {
   }
   throw new Error('safeRand_: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1 — Math.random fallback removed)');
 }
+
+
+/**
+ * uniqueGeneratedId_(ctx, bucket, genFn) — collision-guarded ID minting.
+ *
+ * engine.128. Two ID generators (seedRelationBondsv1.generateSeedBondId_ and
+ * bondEngine.generateBondId_) each drew N characters from the RNG and returned
+ * the result with NO uniqueness check. When ctx.rng was degenerate — every seed
+ * collapsing into one shared 10,466-value ring — that produced 53 duplicate
+ * BondIds across c102/c103, on a column that bondEngine.js:1670 reads as a
+ * LOOKUP KEY. A duplicate key silently resolves to the wrong bond.
+ *
+ * The RNG is fixed, which makes collisions astronomically unlikely. It does not
+ * make them impossible, and "unlikely" is not a guarantee to hang a primary key
+ * on — the whole reason the original defect ran for 100+ cycles is that nothing
+ * ever checked. So: check.
+ *
+ * Deterministic and replay-safe — the retry consumes the same ctx.rng stream,
+ * so a given seed still reproduces a given sequence of IDs.
+ *
+ * @param {Object} ctx       engine context (carries the per-cycle seen-set)
+ * @param {string} bucket    namespace, e.g. 'bond' — separate id spaces
+ * @param {Function} genFn   zero-arg generator returning a candidate id string
+ * @return {string} an id not previously returned for this bucket this cycle
+ */
+function uniqueGeneratedId_(ctx, bucket, genFn) {
+  if (typeof genFn !== 'function') {
+    throw new Error('uniqueGeneratedId_: genFn required');
+  }
+  var key = '_generatedIds_' + bucket;
+  var scope = ctx || {};
+  if (!scope[key]) scope[key] = {};
+  var seen = scope[key];
+
+  var MAX_TRIES = 12;
+  for (var i = 0; i < MAX_TRIES; i++) {
+    var candidate = genFn();
+    if (candidate && !seen[candidate]) {
+      seen[candidate] = true;
+      return candidate;
+    }
+  }
+
+  // 12 straight collisions is not bad luck — it means the RNG has degenerated
+  // again. Fail loud rather than mint a known-duplicate key: a silent duplicate
+  // is exactly the failure mode that cost 53 rows and went unnoticed for over a
+  // hundred cycles.
+  throw new Error('uniqueGeneratedId_: ' + MAX_TRIES + ' consecutive collisions minting a "' +
+    bucket + '" id — ctx.rng has degenerated (see engine.128, ' +
+    'docs/plans/2026-08-21-ctx-rng-attractor-collapse.md). Refusing to mint a duplicate key.');
+}
+
+
+/**
+ * seedGeneratedIds_(ctx, bucket, ids) — prime the seen-set with IDs already on
+ * the sheet, so a newly minted id cannot collide with a PERSISTED one. Without
+ * this the guard only protects against collisions within a single cycle, and
+ * the observed 53 duplicates were cross-cycle (c102 vs c103).
+ */
+function seedGeneratedIds_(ctx, bucket, ids) {
+  var key = '_generatedIds_' + bucket;
+  var scope = ctx || {};
+  if (!scope[key]) scope[key] = {};
+  if (!ids || !ids.length) return scope[key];
+  for (var i = 0; i < ids.length; i++) {
+    var id = ids[i];
+    if (id) scope[key][id] = true;
+  }
+  return scope[key];
+}

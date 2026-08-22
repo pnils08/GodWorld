@@ -1,6 +1,6 @@
 # ctx.rng attractor collapse — the simulation's PRNG has ~10k distinct values
 
-**Filed:** 2026-08-21 (engine-sheet) · **ROLLOUT:** `engine.128` · **Status:** RNG fix LANDED `33cf8636` (see §9); BondId restore + mint still open
+**Filed:** 2026-08-21 (engine-sheet) · **ROLLOUT:** `engine.128` · **Status:** COMPLETE. RNG fix `33cf8636`, collision guard `a739582b`, 53-row restore applied 2026-08-21 (586 rows / 586 distinct ids / 0 collisions, read-back verified).
 **Found by:** chasing 53 duplicate BondIds in `output/bond-ledger-live.tsv` during the published-canon bond mint review.
 
 ---
@@ -117,3 +117,30 @@ sat past the old 5,700–8,800-draw entry point.
 Not yet done: the targeted restore of the 53 colliding BondIds, and the
 uniqueness guard on `generateSeedBondId_` (§7 items 2–3). The mint stays gated
 on those.
+
+---
+
+## 10. Restore applied 2026-08-21 (engine-sheet)
+
+Fresh live read (586 rows) reconfirmed 53 duplicate-BondId groups across 106
+rows, all splitting c102 vs c103. Reassigned the 53 later-cycle rows.
+
+- **Keeper rule:** the row an external artifact cites keeps the ID; otherwise
+  the earliest cycle keeps it. One citation override fired — `BOND-CFE6964A`
+  stayed on row 398 (`POP-00766↔POP-00744`) because Jax's c103 slice cites that
+  pair, so the c102 row was reassigned instead. The only external reference in
+  the system survives intact.
+- **New IDs** minted from a fixed seed through the repaired mulberry32 and
+  checked against all live IDs — deterministic, so the plan regenerates
+  identically.
+- **Reversible:** the full pre-write BondId column is at
+  `output/backups_bondid_column_pre-restore_2026-08-21.tsv` (587 lines,
+  git-tracked).
+- **Pre-write guard:** aborted unless all 53 target rows still held their
+  planned old ID at write time. All 53 matched.
+- **Read-back verified:** 586 rows, **586 distinct IDs, 0 duplicate groups**,
+  0 rows failing to carry their new ID. `buildCitizenBondGraph --live`
+  re-exported so downstream reads the fixed keys.
+
+`engine.128` is closed end to end: the RNG that caused it, the guard that stops
+it recurring, and the 53 rows it damaged.

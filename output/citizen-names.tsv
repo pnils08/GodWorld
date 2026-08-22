@@ -1,8 +1,9 @@
 POPID	Name	Neighborhood
-POP-00001	Vinnie Keane	Rockridge
-POP-00002	Amara Keane	Rockridge
+POP-00001	Vinnie Keane	Grand Lake
+POP-00002	Amara Keane	Grand Lake
 POP-00003	Mark Aitken	Jack London
-POP-00005	Mags Corliss	Fruitvale
+POP-00004	Lucia Polito	Fruitvale
+POP-00005	Mags Corliss	Lake Merritt
 POP-00007	Hal Richmond	Chinatown
 POP-00008	P Slayer	West Oakland
 POP-00009	Lena Carrow	Downtown
@@ -286,7 +287,7 @@ POP-00287	Simone Adesanya	Rockridge
 POP-00288	Marcus Wright	West Oakland
 POP-00289	Joesph Allen	Laurel
 POP-00290	Omar Cleo	Temescal
-POP-00291	Enzo Walker	West Oakland
+POP-00291	Enzo Walker	Lake Merritt
 POP-00292	Jack Phillips	Temescal
 POP-00293	Malot Bielo	Lake Merritt
 POP-00294	Miguel Joson	Chinatown
@@ -657,7 +658,7 @@ POP-00771	Sage Vienta	West Oakland
 POP-00772	Beverly Hayes	West Oakland
 POP-00773	Jada Rayes	West Oakland
 POP-00774	Malik Hayes	Fruitvale
-POP-00775	Sam Alvarez	Temescal
+POP-00775	Sammie Alvarez	Temescal
 POP-00776	Kwame Ellis	Downtown
 POP-00777	Rico Valdez	Baylight District
 POP-00778	Jamal Thompson	San Antonio
@@ -673,7 +674,7 @@ POP-00787	Robert Hayes	West Oakland
 POP-00788	Terrence Wussin	Jack London
 POP-00789	Elias  Varek	West Oakland
 POP-00790	Marcus Webb	Downtown
-POP-00791	Elena Soria-Dominguez	Fruitvale
+POP-00791	Eloise Soria-Dominguez	Fruitvale
 POP-00792	Bobby Chen-Ramirez	Temescal
 POP-00793	Gil Saucedo	Lake Merritt
 POP-00794	Irene Fay	West Oakland
@@ -959,3 +960,6 @@ POP-01073	Li Wei	Fruitvale
 POP-01074	Denise Simmons	Rockridge
 POP-01075	Marcus Duval	Laurel
 POP-01076	Nia Rook	West Oakland
+POP-01077	Rafael Phillips	Rockridge
+POP-01078	Pablo Almanzar	Jack London
+POP-01079	Dillon Brooks	Uptown

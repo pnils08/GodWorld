@@ -2,16 +2,16 @@
   "directed": false,
   "multigraph": false,
   "graph": {
-    "generatedAt": "2026-08-17T04:07:05.504Z",
+    "generatedAt": "2026-08-22T05:00:31.330Z",
     "source": "/root/GodWorld/output/bond-ledger-live.tsv",
     "stats": {
-      "rowsRead": 582,
+      "rowsRead": 586,
       "skippedBlank": 0,
       "skippedInactive": 2,
-      "keptUnrecognized": 0,
+      "keptUnrecognized": 2,
       "minIntensity": 0,
-      "nodes": 624,
-      "links": 580
+      "nodes": 627,
+      "links": 584
     }
   },
   "nodes": [
@@ -38,7 +38,7 @@
     },
     {
       "id": "pop-00004",
-      "label": "POP-00004",
+      "label": "Lucia Polito",
       "group": "Fruitvale",
       "neighborhood": "Fruitvale",
       "degree": 1
@@ -55,7 +55,7 @@
       "label": "Hal Richmond",
       "group": "Chinatown",
       "neighborhood": "Chinatown",
-      "degree": 1
+      "degree": 5
     },
     {
       "id": "pop-00008",
@@ -489,6 +489,13 @@
       "label": "Priya Narang",
       "group": "Uptown",
       "neighborhood": "Uptown",
+      "degree": 1
+    },
+    {
+      "id": "pop-00142",
+      "label": "Jonas Patel",
+      "group": "Chinatown",
+      "neighborhood": "Chinatown",
       "degree": 1
     },
     {
@@ -2508,6 +2515,13 @@
       "degree": 1
     },
     {
+      "id": "pop-00677",
+      "label": "Tio Rio",
+      "group": "Chinatown",
+      "neighborhood": "Chinatown",
+      "degree": 1
+    },
+    {
       "id": "pop-00678",
       "label": "Celo Patel",
       "group": "Jack London",
@@ -3055,9 +3069,16 @@
     },
     {
       "id": "pop-00775",
-      "label": "Sam Alvarez",
+      "label": "Sammie Alvarez",
       "group": "Temescal",
       "neighborhood": "Temescal",
+      "degree": 1
+    },
+    {
+      "id": "pop-00776",
+      "label": "Kwame Ellis",
+      "group": "Downtown",
+      "neighborhood": "Downtown",
       "degree": 1
     },
     {
@@ -3097,7 +3118,7 @@
     },
     {
       "id": "pop-00791",
-      "label": "Elena Soria-Dominguez",
+      "label": "Eloise Soria-Dominguez",
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
       "degree": 1
@@ -3905,7 +3926,7 @@
       "label": "Mai Tse",
       "group": "Chinatown",
       "neighborhood": "Chinatown",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "pop-00978",
@@ -4410,7 +4431,7 @@
       "source": "pop-00003",
       "target": "pop-00705",
       "relation": "friendship",
-      "weight": 5.82,
+      "weight": 6.25,
       "status": "active"
     },
     {
@@ -4428,10 +4449,38 @@
       "status": "active"
     },
     {
+      "source": "pop-00007",
+      "target": "pop-00142",
+      "relation": "neighbor",
+      "weight": 3,
+      "status": "active"
+    },
+    {
+      "source": "pop-00007",
+      "target": "pop-00677",
+      "relation": "neighbor",
+      "weight": 3,
+      "status": "active"
+    },
+    {
+      "source": "pop-00007",
+      "target": "pop-00776",
+      "relation": "professional",
+      "weight": 3,
+      "status": "active"
+    },
+    {
+      "source": "pop-00007",
+      "target": "pop-00977",
+      "relation": "neighbor",
+      "weight": 3,
+      "status": "active"
+    },
+    {
       "source": "pop-00008",
       "target": "pop-00684",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.21,
       "status": "active"
     },
     {
@@ -4445,14 +4494,14 @@
       "source": "pop-00010",
       "target": "pop-00519",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
       "source": "pop-00010",
       "target": "pop-00933",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
@@ -4480,7 +4529,7 @@
       "source": "pop-00014",
       "target": "pop-00010",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.8,
       "status": "active"
     },
     {
@@ -4494,28 +4543,28 @@
       "source": "pop-00016",
       "target": "pop-00885",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 3.6,
       "status": "active"
     },
     {
       "source": "pop-00016",
       "target": "pop-01001",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 5.6,
       "status": "active"
     },
     {
       "source": "pop-00017",
       "target": "pop-00019",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 4.24,
       "status": "active"
     },
     {
       "source": "pop-00018",
       "target": "pop-00742",
       "relation": "family",
-      "weight": 9,
+      "weight": 8.8,
       "status": "active"
     },
     {
@@ -4529,7 +4578,7 @@
       "source": "pop-00020",
       "target": "pop-00678",
       "relation": "friendship",
-      "weight": 6.41,
+      "weight": 6.82,
       "status": "active"
     },
     {
@@ -4543,7 +4592,7 @@
       "source": "pop-00021",
       "target": "pop-01032",
       "relation": "friendship",
-      "weight": 4.84,
+      "weight": 5.27,
       "status": "active"
     },
     {
@@ -4599,7 +4648,7 @@
       "source": "pop-00033",
       "target": "pop-00928",
       "relation": "rivalry",
-      "weight": 4.5,
+      "weight": 4.3,
       "status": "active"
     },
     {
@@ -4662,7 +4711,7 @@
       "source": "pop-00042",
       "target": "pop-00211",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.8,
       "status": "active"
     },
     {
@@ -4711,14 +4760,14 @@
       "source": "pop-00053",
       "target": "pop-00250",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.23,
       "status": "active"
     },
     {
       "source": "pop-00054",
       "target": "pop-00255",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.8,
       "status": "active"
     },
     {
@@ -4732,35 +4781,35 @@
       "source": "pop-00077",
       "target": "pop-00868",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 5.2,
       "status": "active"
     },
     {
       "source": "pop-00078",
       "target": "pop-00250",
       "relation": "friendship",
-      "weight": 3,
+      "weight": 3.41,
       "status": "active"
     },
     {
       "source": "pop-00078",
       "target": "pop-00889",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.8,
       "status": "active"
     },
     {
       "source": "pop-00079",
       "target": "pop-00363",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.82,
       "status": "active"
     },
     {
       "source": "pop-00080",
       "target": "pop-00897",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.2,
       "status": "active"
     },
     {
@@ -4802,7 +4851,7 @@
       "source": "pop-00115",
       "target": "pop-00235",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.82,
       "status": "active"
     },
     {
@@ -4816,14 +4865,14 @@
       "source": "pop-00116",
       "target": "pop-00354",
       "relation": "professional",
-      "weight": 3,
+      "weight": 2.8,
       "status": "active"
     },
     {
       "source": "pop-00117",
       "target": "pop-00676",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.21,
       "status": "active"
     },
     {
@@ -4837,7 +4886,7 @@
       "source": "pop-00121",
       "target": "pop-00556",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 5.2,
       "status": "active"
     },
     {
@@ -4858,7 +4907,7 @@
       "source": "pop-00131",
       "target": "pop-00846",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 5.8,
       "status": "active"
     },
     {
@@ -4872,14 +4921,14 @@
       "source": "pop-00140",
       "target": "pop-01041",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.8,
       "status": "active"
     },
     {
       "source": "pop-00141",
       "target": "pop-00465",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 5.6,
       "status": "active"
     },
     {
@@ -4914,7 +4963,7 @@
       "source": "pop-00150",
       "target": "pop-00263",
       "relation": "alliance",
-      "weight": 2.7,
+      "weight": 3.4,
       "status": "active"
     },
     {
@@ -4970,7 +5019,7 @@
       "source": "pop-00164",
       "target": "pop-00190",
       "relation": "friendship",
-      "weight": 6.42,
+      "weight": 6.84,
       "status": "active"
     },
     {
@@ -5019,21 +5068,21 @@
       "source": "pop-00169",
       "target": "pop-00863",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 4.6,
       "status": "active"
     },
     {
       "source": "pop-00171",
       "target": "pop-01004",
       "relation": "friendship",
-      "weight": 6.41,
+      "weight": 6.82,
       "status": "active"
     },
     {
       "source": "pop-00172",
       "target": "pop-00903",
       "relation": "friendship",
-      "weight": 5.42,
+      "weight": 5.84,
       "status": "active"
     },
     {
@@ -5061,7 +5110,7 @@
       "source": "pop-00182",
       "target": "pop-00449",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.21,
       "status": "active"
     },
     {
@@ -5075,14 +5124,14 @@
       "source": "pop-00188",
       "target": "pop-00850",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.82,
       "status": "active"
     },
     {
       "source": "pop-00189",
       "target": "pop-00788",
       "relation": "friendship",
-      "weight": 3.84,
+      "weight": 4.26,
       "status": "active"
     },
     {
@@ -5096,14 +5145,14 @@
       "source": "pop-00190",
       "target": "pop-00037",
       "relation": "friendship",
-      "weight": 3.86,
+      "weight": 4.29,
       "status": "active"
     },
     {
       "source": "pop-00190",
       "target": "pop-00201",
       "relation": "friendship",
-      "weight": 4.86,
+      "weight": 5.29,
       "status": "active"
     },
     {
@@ -5131,7 +5180,7 @@
       "source": "pop-00201",
       "target": "pop-00188",
       "relation": "friendship",
-      "weight": 6.84,
+      "weight": 7.26,
       "status": "active"
     },
     {
@@ -5159,7 +5208,7 @@
       "source": "pop-00205",
       "target": "pop-00078",
       "relation": "friendship",
-      "weight": 4,
+      "weight": 4.41,
       "status": "active"
     },
     {
@@ -5173,7 +5222,7 @@
       "source": "pop-00207",
       "target": "pop-00941",
       "relation": "alliance",
-      "weight": 6.2,
+      "weight": 6.4,
       "status": "active"
     },
     {
@@ -5208,28 +5257,28 @@
       "source": "pop-00210",
       "target": "pop-00124",
       "relation": "friendship",
-      "weight": 5.43,
+      "weight": 5.68,
       "status": "active"
     },
     {
       "source": "pop-00211",
       "target": "pop-00715",
       "relation": "rivalry",
-      "weight": 5.5,
+      "weight": 7,
       "status": "active"
     },
     {
       "source": "pop-00212",
       "target": "pop-00362",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.23,
       "status": "active"
     },
     {
       "source": "pop-00212",
       "target": "pop-00439",
       "relation": "rivalry",
-      "weight": 6.5,
+      "weight": 6,
       "status": "active"
     },
     {
@@ -5243,28 +5292,28 @@
       "source": "pop-00214",
       "target": "pop-00329",
       "relation": "friendship",
-      "weight": 5.42,
+      "weight": 5.84,
       "status": "active"
     },
     {
       "source": "pop-00215",
       "target": "pop-00498",
       "relation": "alliance",
-      "weight": 3.2,
+      "weight": 3.4,
       "status": "active"
     },
     {
       "source": "pop-00220",
       "target": "pop-01033",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.23,
       "status": "active"
     },
     {
       "source": "pop-00221",
       "target": "pop-00292",
       "relation": "friendship",
-      "weight": 4.84,
+      "weight": 5.26,
       "status": "active"
     },
     {
@@ -5320,14 +5369,14 @@
       "source": "pop-00230",
       "target": "pop-00476",
       "relation": "professional",
-      "weight": 5,
+      "weight": 4.8,
       "status": "active"
     },
     {
       "source": "pop-00230",
       "target": "pop-00504",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.21,
       "status": "active"
     },
     {
@@ -5341,14 +5390,14 @@
       "source": "pop-00231",
       "target": "pop-00361",
       "relation": "professional",
-      "weight": 6,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-00231",
       "target": "pop-01037",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
@@ -5383,14 +5432,14 @@
       "source": "pop-00240",
       "target": "pop-00052",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6.2,
       "status": "active"
     },
     {
       "source": "pop-00246",
       "target": "pop-00933",
       "relation": "friendship",
-      "weight": 6.82,
+      "weight": 7.23,
       "status": "active"
     },
     {
@@ -5418,7 +5467,7 @@
       "source": "pop-00255",
       "target": "pop-00352",
       "relation": "friendship",
-      "weight": 6.82,
+      "weight": 7.23,
       "status": "active"
     },
     {
@@ -5432,35 +5481,35 @@
       "source": "pop-00258",
       "target": "pop-00274",
       "relation": "alliance",
-      "weight": 4.2,
+      "weight": 4.9,
       "status": "active"
     },
     {
       "source": "pop-00260",
       "target": "pop-00839",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.2,
       "status": "active"
     },
     {
       "source": "pop-00261",
       "target": "pop-00812",
       "relation": "friendship",
-      "weight": 2.82,
+      "weight": 3.23,
       "status": "active"
     },
     {
       "source": "pop-00262",
       "target": "pop-00267",
       "relation": "family",
-      "weight": 10,
+      "weight": 9.8,
       "status": "active"
     },
     {
       "source": "pop-00264",
       "target": "pop-00317",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.82,
       "status": "active"
     },
     {
@@ -5481,21 +5530,21 @@
       "source": "pop-00266",
       "target": "pop-00311",
       "relation": "friendship",
-      "weight": 4.42,
+      "weight": 4.84,
       "status": "active"
     },
     {
       "source": "pop-00266",
       "target": "pop-00315",
       "relation": "friendship",
-      "weight": 4.84,
+      "weight": 5.26,
       "status": "active"
     },
     {
       "source": "pop-00267",
       "target": "pop-00035",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.2,
       "status": "active"
     },
     {
@@ -5509,7 +5558,7 @@
       "source": "pop-00270",
       "target": "pop-00795",
       "relation": "friendship",
-      "weight": 2.41,
+      "weight": 2.82,
       "status": "active"
     },
     {
@@ -5530,7 +5579,7 @@
       "source": "pop-00275",
       "target": "pop-00984",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6.2,
       "status": "active"
     },
     {
@@ -5558,7 +5607,7 @@
       "source": "pop-00278",
       "target": "pop-00984",
       "relation": "friendship",
-      "weight": 5.42,
+      "weight": 5.84,
       "status": "active"
     },
     {
@@ -5572,7 +5621,7 @@
       "source": "pop-00284",
       "target": "pop-00462",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.8,
       "status": "active"
     },
     {
@@ -5586,21 +5635,21 @@
       "source": "pop-00286",
       "target": "pop-00593",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.82,
       "status": "active"
     },
     {
       "source": "pop-00290",
       "target": "pop-00236",
       "relation": "friendship",
-      "weight": 6.41,
+      "weight": 6.82,
       "status": "active"
     },
     {
       "source": "pop-00292",
       "target": "pop-00666",
       "relation": "friendship",
-      "weight": 6.41,
+      "weight": 6.82,
       "status": "active"
     },
     {
@@ -5614,14 +5663,14 @@
       "source": "pop-00293",
       "target": "pop-00445",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.82,
       "status": "active"
     },
     {
       "source": "pop-00294",
       "target": "pop-00816",
       "relation": "friendship",
-      "weight": 6.84,
+      "weight": 7.26,
       "status": "active"
     },
     {
@@ -5635,7 +5684,7 @@
       "source": "pop-00298",
       "target": "pop-01043",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.2,
       "status": "active"
     },
     {
@@ -5649,7 +5698,7 @@
       "source": "pop-00301",
       "target": "pop-00291",
       "relation": "friendship",
-      "weight": 6.42,
+      "weight": 6.84,
       "status": "active"
     },
     {
@@ -5663,14 +5712,14 @@
       "source": "pop-00304",
       "target": "pop-00504",
       "relation": "professional",
-      "weight": 5,
+      "weight": 4.8,
       "status": "active"
     },
     {
       "source": "pop-00311",
       "target": "pop-00889",
       "relation": "rivalry",
-      "weight": 6,
+      "weight": 7.5,
       "status": "active"
     },
     {
@@ -5684,7 +5733,7 @@
       "source": "pop-00316",
       "target": "pop-00348",
       "relation": "family",
-      "weight": 9,
+      "weight": 8.8,
       "status": "active"
     },
     {
@@ -5705,14 +5754,14 @@
       "source": "pop-00325",
       "target": "pop-00746",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.82,
       "status": "active"
     },
     {
       "source": "pop-00330",
       "target": "pop-00168",
       "relation": "friendship",
-      "weight": 6,
+      "weight": 6.42,
       "status": "active"
     },
     {
@@ -5740,14 +5789,14 @@
       "source": "pop-00337",
       "target": "pop-00215",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.82,
       "status": "active"
     },
     {
       "source": "pop-00341",
       "target": "pop-00007",
       "relation": "professional",
-      "weight": 3,
+      "weight": 3.5,
       "status": "active"
     },
     {
@@ -5761,7 +5810,7 @@
       "source": "pop-00341",
       "target": "pop-00698",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.82,
       "status": "active"
     },
     {
@@ -5782,7 +5831,7 @@
       "source": "pop-00347",
       "target": "pop-00055",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.82,
       "status": "active"
     },
     {
@@ -5803,7 +5852,7 @@
       "source": "pop-00350",
       "target": "pop-00214",
       "relation": "friendship",
-      "weight": 4.84,
+      "weight": 5.26,
       "status": "active"
     },
     {
@@ -5838,7 +5887,7 @@
       "source": "pop-00352",
       "target": "pop-00826",
       "relation": "friendship",
-      "weight": 6.82,
+      "weight": 7.23,
       "status": "active"
     },
     {
@@ -5852,7 +5901,7 @@
       "source": "pop-00359",
       "target": "pop-01006",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.23,
       "status": "active"
     },
     {
@@ -5880,14 +5929,14 @@
       "source": "pop-00363",
       "target": "pop-00755",
       "relation": "friendship",
-      "weight": 4.42,
+      "weight": 4.84,
       "status": "active"
     },
     {
       "source": "pop-00364",
       "target": "pop-00017",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.8,
       "status": "active"
     },
     {
@@ -5915,7 +5964,7 @@
       "source": "pop-00434",
       "target": "pop-00506",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.8,
       "status": "active"
     },
     {
@@ -5929,7 +5978,7 @@
       "source": "pop-00436",
       "target": "pop-00523",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.2,
       "status": "active"
     },
     {
@@ -5943,7 +5992,7 @@
       "source": "pop-00438",
       "target": "pop-00338",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.23,
       "status": "active"
     },
     {
@@ -5964,7 +6013,7 @@
       "source": "pop-00440",
       "target": "pop-01007",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
@@ -5992,7 +6041,7 @@
       "source": "pop-00447",
       "target": "pop-00906",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 4.6,
       "status": "active"
     },
     {
@@ -6007,13 +6056,13 @@
       "target": "pop-00492",
       "relation": "family",
       "weight": 8,
-      "status": "active"
+      "status": "severed"
     },
     {
       "source": "pop-00452",
       "target": "pop-00711",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.23,
       "status": "active"
     },
     {
@@ -6041,14 +6090,14 @@
       "source": "pop-00458",
       "target": "pop-00910",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.8,
       "status": "active"
     },
     {
       "source": "pop-00459",
       "target": "pop-00633",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
@@ -6062,7 +6111,7 @@
       "source": "pop-00471",
       "target": "pop-00650",
       "relation": "professional",
-      "weight": 5,
+      "weight": 4.8,
       "status": "active"
     },
     {
@@ -6090,14 +6139,14 @@
       "source": "pop-00477",
       "target": "pop-00529",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.8,
       "status": "active"
     },
     {
       "source": "pop-00478",
       "target": "pop-00078",
       "relation": "alliance",
-      "weight": 3.2,
+      "weight": 3.9,
       "status": "active"
     },
     {
@@ -6132,14 +6181,14 @@
       "source": "pop-00486",
       "target": "pop-00703",
       "relation": "professional",
-      "weight": 3,
+      "weight": 2.8,
       "status": "active"
     },
     {
       "source": "pop-00493",
       "target": "pop-00649",
       "relation": "friendship",
-      "weight": 3,
+      "weight": 3.4,
       "status": "active"
     },
     {
@@ -6195,14 +6244,14 @@
       "source": "pop-00501",
       "target": "pop-00979",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.2,
       "status": "active"
     },
     {
       "source": "pop-00503",
       "target": "pop-00653",
       "relation": "alliance",
-      "weight": 4.7,
+      "weight": 4.9,
       "status": "active"
     },
     {
@@ -6216,7 +6265,7 @@
       "source": "pop-00503",
       "target": "pop-00929",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 3.6,
       "status": "active"
     },
     {
@@ -6237,7 +6286,7 @@
       "source": "pop-00507",
       "target": "pop-00364",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 5.2,
       "status": "active"
     },
     {
@@ -6251,7 +6300,7 @@
       "source": "pop-00509",
       "target": "pop-00723",
       "relation": "professional",
-      "weight": 3,
+      "weight": 2.8,
       "status": "active"
     },
     {
@@ -6279,7 +6328,7 @@
       "source": "pop-00514",
       "target": "pop-00943",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
@@ -6321,14 +6370,14 @@
       "source": "pop-00527",
       "target": "pop-00120",
       "relation": "professional",
-      "weight": 5,
+      "weight": 4.8,
       "status": "active"
     },
     {
       "source": "pop-00528",
       "target": "pop-01039",
       "relation": "family",
-      "weight": 8,
+      "weight": 8.5,
       "status": "active"
     },
     {
@@ -6342,7 +6391,7 @@
       "source": "pop-00537",
       "target": "pop-00313",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.21,
       "status": "active"
     },
     {
@@ -6356,7 +6405,7 @@
       "source": "pop-00539",
       "target": "pop-00217",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.23,
       "status": "active"
     },
     {
@@ -6370,7 +6419,7 @@
       "source": "pop-00540",
       "target": "pop-00664",
       "relation": "friendship",
-      "weight": 6.82,
+      "weight": 7.23,
       "status": "active"
     },
     {
@@ -6384,14 +6433,14 @@
       "source": "pop-00540",
       "target": "pop-01039",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-00542",
       "target": "pop-00843",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.8,
       "status": "active"
     },
     {
@@ -6412,14 +6461,14 @@
       "source": "pop-00576",
       "target": "pop-00850",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.8,
       "status": "active"
     },
     {
       "source": "pop-00591",
       "target": "pop-00812",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6.2,
       "status": "active"
     },
     {
@@ -6433,7 +6482,7 @@
       "source": "pop-00617",
       "target": "pop-00164",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.8,
       "status": "active"
     },
     {
@@ -6447,7 +6496,7 @@
       "source": "pop-00618",
       "target": "pop-00590",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
@@ -6461,14 +6510,14 @@
       "source": "pop-00622",
       "target": "pop-00598",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.8,
       "status": "active"
     },
     {
       "source": "pop-00622",
       "target": "pop-00800",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 4.2,
       "status": "active"
     },
     {
@@ -6496,35 +6545,35 @@
       "source": "pop-00631",
       "target": "pop-00245",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.82,
       "status": "active"
     },
     {
       "source": "pop-00634",
       "target": "pop-00493",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 4.2,
       "status": "active"
     },
     {
       "source": "pop-00634",
       "target": "pop-00642",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
       "source": "pop-00636",
       "target": "pop-00325",
       "relation": "friendship",
-      "weight": 6.82,
+      "weight": 7.23,
       "status": "active"
     },
     {
       "source": "pop-00641",
       "target": "pop-01018",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
@@ -6545,14 +6594,14 @@
       "source": "pop-00644",
       "target": "pop-01016",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
       "source": "pop-00645",
       "target": "pop-00798",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.8,
       "status": "active"
     },
     {
@@ -6587,7 +6636,7 @@
       "source": "pop-00651",
       "target": "pop-01018",
       "relation": "friendship",
-      "weight": 4.4,
+      "weight": 4.2,
       "status": "active"
     },
     {
@@ -6622,14 +6671,14 @@
       "source": "pop-00655",
       "target": "pop-00051",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.23,
       "status": "active"
     },
     {
       "source": "pop-00655",
       "target": "pop-00705",
       "relation": "friendship",
-      "weight": 5.84,
+      "weight": 6.26,
       "status": "active"
     },
     {
@@ -6678,7 +6727,7 @@
       "source": "pop-00666",
       "target": "pop-00975",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.82,
       "status": "active"
     },
     {
@@ -6699,14 +6748,14 @@
       "source": "pop-00667",
       "target": "pop-00038",
       "relation": "friendship",
-      "weight": 3,
+      "weight": 3.41,
       "status": "active"
     },
     {
       "source": "pop-00667",
       "target": "pop-00975",
       "relation": "friendship",
-      "weight": 5.82,
+      "weight": 6.23,
       "status": "active"
     },
     {
@@ -6755,7 +6804,7 @@
       "source": "pop-00682",
       "target": "pop-00143",
       "relation": "friendship",
-      "weight": 4,
+      "weight": 3.8,
       "status": "active"
     },
     {
@@ -6804,28 +6853,28 @@
       "source": "pop-00688",
       "target": "pop-01002",
       "relation": "family",
-      "weight": 10,
+      "weight": 9.8,
       "status": "active"
     },
     {
       "source": "pop-00690",
       "target": "pop-00273",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.23,
       "status": "active"
     },
     {
       "source": "pop-00691",
       "target": "pop-01001",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
       "source": "pop-00692",
       "target": "pop-00976",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.82,
       "status": "active"
     },
     {
@@ -6853,7 +6902,7 @@
       "source": "pop-00697",
       "target": "pop-00875",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.82,
       "status": "active"
     },
     {
@@ -6895,7 +6944,7 @@
       "source": "pop-00703",
       "target": "pop-00994",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
@@ -6909,7 +6958,7 @@
       "source": "pop-00706",
       "target": "pop-00358",
       "relation": "friendship",
-      "weight": 5.82,
+      "weight": 6.23,
       "status": "active"
     },
     {
@@ -6923,7 +6972,7 @@
       "source": "pop-00707",
       "target": "pop-00740",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.2,
       "status": "active"
     },
     {
@@ -6944,7 +6993,7 @@
       "source": "pop-00708",
       "target": "pop-01040",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 5.2,
       "status": "active"
     },
     {
@@ -6972,7 +7021,7 @@
       "source": "pop-00710",
       "target": "pop-00989",
       "relation": "family",
-      "weight": 9,
+      "weight": 8.8,
       "status": "active"
     },
     {
@@ -6986,7 +7035,7 @@
       "source": "pop-00712",
       "target": "pop-01034",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.82,
       "status": "active"
     },
     {
@@ -7007,7 +7056,7 @@
       "source": "pop-00716",
       "target": "pop-00454",
       "relation": "alliance",
-      "weight": 5.2,
+      "weight": 5.4,
       "status": "active"
     },
     {
@@ -7028,7 +7077,7 @@
       "source": "pop-00717",
       "target": "pop-00624",
       "relation": "rivalry",
-      "weight": 5,
+      "weight": 6.5,
       "status": "active"
     },
     {
@@ -7049,7 +7098,7 @@
       "source": "pop-00723",
       "target": "pop-00983",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
@@ -7057,7 +7106,7 @@
       "target": "pop-00492",
       "relation": "professional",
       "weight": 4,
-      "status": "active"
+      "status": "severed"
     },
     {
       "source": "pop-00724",
@@ -7070,7 +7119,7 @@
       "source": "pop-00724",
       "target": "pop-00888",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 4.2,
       "status": "active"
     },
     {
@@ -7091,7 +7140,7 @@
       "source": "pop-00727",
       "target": "pop-00202",
       "relation": "friendship",
-      "weight": 6.84,
+      "weight": 6.64,
       "status": "active"
     },
     {
@@ -7154,7 +7203,7 @@
       "source": "pop-00740",
       "target": "pop-00669",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.21,
       "status": "active"
     },
     {
@@ -7196,7 +7245,7 @@
       "source": "pop-00743",
       "target": "pop-00842",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.8,
       "status": "active"
     },
     {
@@ -7224,7 +7273,7 @@
       "source": "pop-00747",
       "target": "pop-00638",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.2,
       "status": "active"
     },
     {
@@ -7238,14 +7287,14 @@
       "source": "pop-00747",
       "target": "pop-00974",
       "relation": "family",
-      "weight": 9,
+      "weight": 8.8,
       "status": "active"
     },
     {
       "source": "pop-00748",
       "target": "pop-00167",
       "relation": "friendship",
-      "weight": 6.82,
+      "weight": 7.23,
       "status": "active"
     },
     {
@@ -7308,7 +7357,7 @@
       "source": "pop-00761",
       "target": "pop-00347",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.82,
       "status": "active"
     },
     {
@@ -7322,7 +7371,7 @@
       "source": "pop-00764",
       "target": "pop-00720",
       "relation": "rivalry",
-      "weight": 4.5,
+      "weight": 6,
       "status": "active"
     },
     {
@@ -7357,14 +7406,14 @@
       "source": "pop-00769",
       "target": "pop-00194",
       "relation": "friendship",
-      "weight": 6.84,
+      "weight": 7.26,
       "status": "active"
     },
     {
       "source": "pop-00772",
       "target": "pop-00764",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.22,
       "status": "active"
     },
     {
@@ -7378,7 +7427,7 @@
       "source": "pop-00779",
       "target": "pop-00040",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 4.2,
       "status": "active"
     },
     {
@@ -7399,7 +7448,7 @@
       "source": "pop-00780",
       "target": "pop-00298",
       "relation": "professional",
-      "weight": 3,
+      "weight": 2.8,
       "status": "active"
     },
     {
@@ -7427,21 +7476,21 @@
       "source": "pop-00788",
       "target": "pop-00655",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.23,
       "status": "active"
     },
     {
       "source": "pop-00791",
       "target": "pop-00276",
       "relation": "alliance",
-      "weight": 3.2,
+      "weight": 3.9,
       "status": "active"
     },
     {
       "source": "pop-00795",
       "target": "pop-00887",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.8,
       "status": "active"
     },
     {
@@ -7462,7 +7511,7 @@
       "source": "pop-00799",
       "target": "pop-00333",
       "relation": "professional",
-      "weight": 4,
+      "weight": 3.8,
       "status": "active"
     },
     {
@@ -7476,7 +7525,7 @@
       "source": "pop-00799",
       "target": "pop-00874",
       "relation": "friendship",
-      "weight": 5,
+      "weight": 4.8,
       "status": "active"
     },
     {
@@ -7490,14 +7539,14 @@
       "source": "pop-00806",
       "target": "pop-00666",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.23,
       "status": "active"
     },
     {
       "source": "pop-00808",
       "target": "pop-00909",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.2,
       "status": "active"
     },
     {
@@ -7518,7 +7567,7 @@
       "source": "pop-00815",
       "target": "pop-00802",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.8,
       "status": "active"
     },
     {
@@ -7539,7 +7588,7 @@
       "source": "pop-00819",
       "target": "pop-00333",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.21,
       "status": "active"
     },
     {
@@ -7637,14 +7686,14 @@
       "source": "pop-00837",
       "target": "pop-00092",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 5.6,
       "status": "active"
     },
     {
       "source": "pop-00838",
       "target": "pop-01029",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.8,
       "status": "active"
     },
     {
@@ -7679,7 +7728,7 @@
       "source": "pop-00848",
       "target": "pop-00332",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.82,
       "status": "active"
     },
     {
@@ -7700,14 +7749,14 @@
       "source": "pop-00856",
       "target": "pop-00845",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.8,
       "status": "active"
     },
     {
       "source": "pop-00858",
       "target": "pop-00346",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.82,
       "status": "active"
     },
     {
@@ -7742,14 +7791,14 @@
       "source": "pop-00870",
       "target": "pop-01036",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 4.2,
       "status": "active"
     },
     {
       "source": "pop-00872",
       "target": "pop-01027",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 5.6,
       "status": "active"
     },
     {
@@ -7763,7 +7812,7 @@
       "source": "pop-00876",
       "target": "pop-00208",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.8,
       "status": "active"
     },
     {
@@ -7777,14 +7826,14 @@
       "source": "pop-00879",
       "target": "pop-01048",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-00880",
       "target": "pop-00217",
       "relation": "friendship",
-      "weight": 4.82,
+      "weight": 5.23,
       "status": "active"
     },
     {
@@ -7812,7 +7861,7 @@
       "source": "pop-00886",
       "target": "pop-00283",
       "relation": "rivalry",
-      "weight": 6.5,
+      "weight": 6.3,
       "status": "active"
     },
     {
@@ -7833,14 +7882,14 @@
       "source": "pop-00896",
       "target": "pop-00775",
       "relation": "friendship",
-      "weight": 3.4,
+      "weight": 3.2,
       "status": "active"
     },
     {
       "source": "pop-00896",
       "target": "pop-00819",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 6.6,
       "status": "active"
     },
     {
@@ -7854,28 +7903,28 @@
       "source": "pop-00901",
       "target": "pop-00690",
       "relation": "alliance",
-      "weight": 5.2,
+      "weight": 5.4,
       "status": "active"
     },
     {
       "source": "pop-00902",
       "target": "pop-00459",
       "relation": "friendship",
-      "weight": 2.4,
+      "weight": 2.8,
       "status": "active"
     },
     {
       "source": "pop-00905",
       "target": "pop-00430",
       "relation": "friendship",
-      "weight": 2.8,
+      "weight": 3.2,
       "status": "active"
     },
     {
       "source": "pop-00905",
       "target": "pop-00761",
       "relation": "friendship",
-      "weight": 3,
+      "weight": 3.41,
       "status": "active"
     },
     {
@@ -7889,7 +7938,7 @@
       "source": "pop-00908",
       "target": "pop-01014",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
@@ -7903,7 +7952,7 @@
       "source": "pop-00918",
       "target": "pop-00039",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 4.2,
       "status": "active"
     },
     {
@@ -7938,7 +7987,7 @@
       "source": "pop-00932",
       "target": "pop-00675",
       "relation": "friendship",
-      "weight": 3,
+      "weight": 3.41,
       "status": "active"
     },
     {
@@ -7966,7 +8015,7 @@
       "source": "pop-00937",
       "target": "pop-00327",
       "relation": "tension",
-      "weight": 4,
+      "weight": 5.5,
       "status": "active"
     },
     {
@@ -7987,14 +8036,14 @@
       "source": "pop-00939",
       "target": "pop-00005",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
       "source": "pop-00942",
       "target": "pop-00464",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.2,
       "status": "active"
     },
     {
@@ -8022,7 +8071,7 @@
       "source": "pop-00944",
       "target": "pop-00995",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.8,
       "status": "active"
     },
     {
@@ -8050,7 +8099,7 @@
       "source": "pop-00950",
       "target": "pop-00895",
       "relation": "rivalry",
-      "weight": 4.5,
+      "weight": 6,
       "status": "active"
     },
     {
@@ -8064,7 +8113,7 @@
       "source": "pop-00981",
       "target": "pop-00294",
       "relation": "friendship",
-      "weight": 5.84,
+      "weight": 6.26,
       "status": "active"
     },
     {
@@ -8078,7 +8127,7 @@
       "source": "pop-00983",
       "target": "pop-00474",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 4.6,
       "status": "active"
     },
     {
@@ -8092,28 +8141,28 @@
       "source": "pop-00988",
       "target": "pop-00039",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-00989",
       "target": "pop-00662",
       "relation": "professional",
-      "weight": 4,
+      "weight": 3.8,
       "status": "active"
     },
     {
       "source": "pop-00991",
       "target": "pop-00281",
       "relation": "friendship",
-      "weight": 3.82,
+      "weight": 4.23,
       "status": "active"
     },
     {
       "source": "pop-00993",
       "target": "pop-00134",
       "relation": "friendship",
-      "weight": 5.41,
+      "weight": 5.82,
       "status": "active"
     },
     {
@@ -8134,7 +8183,7 @@
       "source": "pop-00999",
       "target": "pop-00222",
       "relation": "friendship",
-      "weight": 3.41,
+      "weight": 3.82,
       "status": "active"
     },
     {
@@ -8190,7 +8239,7 @@
       "source": "pop-01006",
       "target": "pop-00244",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6.2,
       "status": "active"
     },
     {
@@ -8204,7 +8253,7 @@
       "source": "pop-01009",
       "target": "pop-00999",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.8,
       "status": "active"
     },
     {
@@ -8225,14 +8274,14 @@
       "source": "pop-01014",
       "target": "pop-00803",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
       "source": "pop-01016",
       "target": "pop-01043",
       "relation": "professional",
-      "weight": 3,
+      "weight": 2.8,
       "status": "active"
     },
     {
@@ -8260,7 +8309,7 @@
       "source": "pop-01024",
       "target": "pop-00899",
       "relation": "friendship",
-      "weight": 5.8,
+      "weight": 6.2,
       "status": "active"
     },
     {
@@ -8274,7 +8323,7 @@
       "source": "pop-01026",
       "target": "pop-00466",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 6.6,
       "status": "active"
     },
     {
@@ -8288,7 +8337,7 @@
       "source": "pop-01028",
       "target": "pop-00227",
       "relation": "professional",
-      "weight": 4,
+      "weight": 3.8,
       "status": "active"
     },
     {
@@ -8302,7 +8351,7 @@
       "source": "pop-01029",
       "target": "pop-00876",
       "relation": "friendship",
-      "weight": 4.8,
+      "weight": 5.2,
       "status": "active"
     },
     {
@@ -8330,28 +8379,28 @@
       "source": "pop-01031",
       "target": "pop-01033",
       "relation": "friendship",
-      "weight": 6.8,
+      "weight": 7.2,
       "status": "active"
     },
     {
       "source": "pop-01032",
       "target": "pop-00829",
       "relation": "friendship",
-      "weight": 3.8,
+      "weight": 4.2,
       "status": "active"
     },
     {
       "source": "pop-01033",
       "target": "pop-00307",
       "relation": "friendship",
-      "weight": 4.41,
+      "weight": 4.82,
       "status": "active"
     },
     {
       "source": "pop-01034",
       "target": "pop-00021",
       "relation": "rivalry",
-      "weight": 4.5,
+      "weight": 6,
       "status": "active"
     },
     {
@@ -8365,7 +8414,7 @@
       "source": "pop-01037",
       "target": "pop-00675",
       "relation": "alliance",
-      "weight": 2.7,
+      "weight": 2.9,
       "status": "active"
     },
     {
@@ -8379,7 +8428,7 @@
       "source": "pop-01042",
       "target": "pop-01043",
       "relation": "family",
-      "weight": 8,
+      "weight": 7.8,
       "status": "active"
     },
     {
@@ -8414,14 +8463,14 @@
       "source": "pop-01048",
       "target": "pop-00597",
       "relation": "friendship",
-      "weight": 6.4,
+      "weight": 6.8,
       "status": "active"
     },
     {
       "source": "pop-01050",
       "target": "pop-00929",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.2,
       "status": "active"
     },
     {
@@ -8435,14 +8484,14 @@
       "source": "pop-01053",
       "target": "pop-00598",
       "relation": "friendship",
-      "weight": 5.4,
+      "weight": 5.8,
       "status": "active"
     },
     {
       "source": "pop-01053",
       "target": "pop-00774",
       "relation": "friendship",
-      "weight": 4,
+      "weight": 4.4,
       "status": "active"
     }
   ]

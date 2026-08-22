@@ -12,7 +12,7 @@ pointers:
 
 # Published-canon bond mint
 
-**Status:** design, blocked on the `engine.128` 53-row BondId restore.
+**Status:** UNBLOCKED — the `engine.128` 53-row BondId restore landed 2026-08-21 (586 rows, 586 distinct ids, 0 collisions). Next gate is the intake build itself.
 **Sources:** NotebookLM canon cut (builder-supplied 2026-08-21, source-grounded with
 citation indices) + Supermemory cross-cut (`bay-tribune`, `wd-citizens`,
 `cp-POP-#####`, `mags`) + codex/kimi preliminary passes.
@@ -145,21 +145,28 @@ established citizen data and force a `NumChildren` write — and `NumChildren` i
 engine-facing, so under [[../ENGINE_CRON_LOOP]] §4.5 that is exactly the kind of
 column change that needs a real reason, not a story convenience.
 
-**Recommended: uncle / niece.** It fits the 42-year gap, contradicts nothing,
+**RULED (builder, 2026-08-21): uncle / niece.** It fits the 42-year gap, contradicts nothing,
 requires no engine write, and is the sharper story — a childless councilman
 whose niece runs the grief circles and food pantry his votes defund. Cousin or
 great-niece also work; father/daughter does not.
 
-**Still needs the builder:** the degree, and **Claire's `Gender` field is
-empty**. Canon prose uses "her," but that is not being inferred here — inferring
-gender from a given name is the exact trap the AJ Dybantsa question existed to
-avoid. One word closes it.
+**CLOSED (builder, 2026-08-21):** Claire is **female** and holds a **masters**.
+Both written to `Simulation_Ledger` row 957 (POP-01071) and read-back verified;
+`dumpLedger.js` refreshed so `canon-name-check` sees them. Values taken from the
+controlled vocabulary already in use (`female` ×410, `masters` ×78) rather than
+introducing new tokens.
+
+A masters sharpens the contrast the tie exists for: Warren's public line on
+these programmes is fiscal discipline; his niece is a credentialed professional
+choosing unpaid grief-circle and food-pantry work. Not a hobbyist — someone who
+could be doing anything else.
 
 ## 5. Sequence
 
-1. **Blocked on:** `engine.128` 53-row BondId restore. Canon bonds must not land
-   in a table whose primary key still collides.
-2. Builder rules on Gaps A/B/C — schema shape before any mint.
+1. ~~`engine.128` 53-row BondId restore~~ — **DONE 2026-08-21.** BondId is unique
+   across all 586 rows for the first time.
+2. ~~Builder rules on Gaps A/B/C~~ — **DONE.** No schema growth; the world runs
+   off the engine, not in it ([[../ENGINE_CRON_LOOP]] §4.5).
 3. Build the intake against the **live** cron feed first (ongoing, closes the
    loop), backfill the 104-cycle canon corpus second.
 4. Codex's four pairs are the **acceptance test**, not the deliverable. If the

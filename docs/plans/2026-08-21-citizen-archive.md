@@ -39,6 +39,7 @@ pointers:
 ## Builder decisions (2026-08-22)
 
 - **v1 ArchiveReason set = `deceased` + `traded-away` only.** Permanent-migration reserved until an out-of-Oakland writer exists. Intra-city `migrationTrackingEngine.js` stays on Simulation_Ledger. Herbert Jones / Los Angeles is already `Traded`.
+- **Return trigger (Mike 2026-08-22):** changing a traded player to `Status=Active` moves them back to Oakland under the same POPID. That flip is the intent; restore is the mechanism once the row lives on `Citizen_Archive`. Deceased is not ReturnEligible.
 - **File this plan** as the engine.90 pointer. Scratch `/tmp` is not the spec.
 - **True-up sequencing:** do not use the 2026-08-17 “53 all defective” claim as current. Live dump first (done below). Inventory script still runs before repair/`ArchiveNote`. Citywide engine.117 (SchoolQuality Task 1, 348-row sweep) is **not** a gate on allocator/schema/sandbox. Live backfill still waits on measured defects on the eligible set, not on the whole ledger.
 
@@ -161,7 +162,7 @@ Archive-eligible today: **49 + 5 = 54 / 964 = 5.6%**. The 2026-08-17 figure was 
 10. Fail-loud on duplicates, missing copy, dangling identity, high-water regression.
 11. NBA POPID-reuse debt as audit only — no invented replacement canon.
 12. Tests: synthetic fixtures; Node VM harness (`griefPeriod.test.js` pattern); sandbox-bench for movement including restore-action round trip; no live `--apply` on first land.
-13. Restore (own function / trade-return) before any live Traded row leaves Simulation_Ledger. Sports `call-up` stays Active→Active and does not restore.
+13. Restore before any live Traded row leaves Simulation_Ledger. **Trigger = Status becomes Active** (same POPID, back in Oakland). Sports `call-up` stays Active→Active and does not restore. Sports `return` stays injury-only (`injured`/`serious-condition`/`recovering` → Active) and does not restore.
 
 ### Non-goals
 
@@ -202,7 +203,7 @@ Archive-eligible today: **49 + 5 = 54 / 964 = 5.6%**. The 2026-08-17 figure was 
 
 9. **Do not bury defects; inventory first.** Repair vs `ArchiveNote` on the archive-eligible set, and whether subset-true-up satisfies the 2026-08-17 “archive after true-up” letter, are builder questions (Open Questions 5 and 8). Do not pre-stamp the fifth deceased. Do not pair defect repair and `deleteRows` in one commit.
 
-10. **First land is allocator + schema + resolver + sandbox movement. No live sheet writes in those commits.** Live World_Config seed, live empty-tab ensure, live repair, and live backfill are each separately approved. **Restore (own function) lands and sandbox-proves before any live Traded row leaves Simulation_Ledger.** Sports `call-up` is not that restore (Open Question 4 is answered by this order + the action split).
+10. **First land is allocator + schema + resolver + sandbox movement. No live sheet writes in those commits.** Live World_Config seed, live empty-tab ensure, live repair, and live backfill are each separately approved. **Restore (Status→Active on a ReturnEligible POPID) lands and sandbox-proves before any live Traded row leaves Simulation_Ledger.** Sports `call-up` is not that restore. Sports `return` is injury recovery, not trade-return.
 
 ---
 
@@ -296,21 +297,35 @@ Per eligible POPID, fail-loud, one citizen at a time (or a small verified batch 
 
 ### 3. Return protocol (traded-away / permanent-migration only)
 
+**Trigger:** `Status` becomes `Active` for a POPID whose latest terminal exit is ReturnEligible (`traded-away`, later `permanent-migration`). That is the Oakland-return. Not a new identity. Not sports `call-up`. Not sports `return` (that action is injury recovery: `injured`/`serious-condition`/`recovering` → Active on an existing SL row — `sportsFeedContract.js` L447–460).
+
+**Two surfaces, one intent:**
+
+| Where the row is | What “set Active” does |
+|---|---|
+| Still on Simulation_Ledger (`Status=Traded`, pre-archive or flag off) | Write `Status=Active` on that row. They never left the active cohort; event gates open again. Stamp `ReturnedCycle`. |
+| On Citizen_Archive (post copy-verify-remove) | There is no SL row to edit. Restore copies the latest archive snapshot onto Simulation_Ledger with `Status=Active`, then the engines see an Oaklander again. |
+
+Do not flip Status on the archive row and leave them there — archive is history. Active belongs on Simulation_Ledger.
+
 ```text
-1. Resolve POPID in Citizen_Archive (latest exit snapshot)
-2. Fail-loud if Simulation_Ledger already has that POPID
-3. Fail-loud if latest ArchiveReason is deceased (not ReturnEligible)
-4. Restore a current-state Simulation_Ledger row from the latest snapshot:
-   Status=Active; ReturnedCycle=this cycle (column AQ — first cycle-path writer;
-   COL_MAP today lists no engine touch); LastUpdated stamped;
-   HealthCause/StatusStartCycle cleared;
-   MigrationDestination cleared if they are back in a canon Neighborhood_Map hood
-   (so `undockedDraw.js` `ReturnedCycle >= MigratedCycle` / empty-dest “resides in Oakland” holds)
-5. Append Return/Arrival LifeHistory line + LifeHistory_Log row + Ripple
-6. Keep every prior archive row (do not delete, do not flip to a tombstone)
+1. Resolve POPID: Simulation_Ledger first, else Citizen_Archive (latest exit snapshot)
+2. If already Active on SL → no-op (idempotent)
+3. If Traded (or ReturnEligible) on SL → Status=Active + ReturnedCycle; do not touch archive
+4. If only in archive:
+   a. Fail-loud if Simulation_Ledger already has that POPID
+   b. Fail-loud if latest ArchiveReason is deceased (not ReturnEligible)
+   c. Restore a current-state Simulation_Ledger row from the latest snapshot:
+      Status=Active; ReturnedCycle=this cycle (column AQ — first cycle-path writer;
+      COL_MAP today lists no engine touch); LastUpdated stamped;
+      HealthCause/StatusStartCycle cleared;
+      MigrationDestination cleared if they are back in a canon Neighborhood_Map hood
+      (so `undockedDraw.js` `ReturnedCycle >= MigratedCycle` / empty-dest “resides in Oakland” holds)
+   d. Append Return/Arrival LifeHistory line + LifeHistory_Log row + Ripple
+   e. Keep every prior archive row (do not delete, do not flip to a tombstone)
 ```
 
-**Callers of restore:** operator/engine restore function first; a sports `trade-return` (or equivalent **new** action) only if sports later needs a writer. **`call-up` is not a caller.** Today `call-up` is Active affiliate → Active major-leaguer on an existing Simulation_Ledger row (`sportsFeedContract.js` L474–477: before must be Active). `assertStatCitizenEligible` (`sportsFeedWriter.js` L434–444) is **stat-capture** only (Active/recovering), not the call-up gate. After archive, `call-up` of a missing POPID fail-louds (“archived — use restore”) and does not restore. Restore ships **before** any live Traded backfill. It is not optional and not deferred past the live `--apply`.
+**Callers:** any writer that sets a traded POPID to Active — sheet edit, operator restore helper, or a later sports action that means “back on an Oakland roster.” **`call-up` is not a caller** (Active affiliate → Active major-leaguer; before must already be Active). **Sports `return` is not a caller** (injury). After archive, `call-up` of a missing POPID fail-louds; a dedicated trade-return / “set Active” path is what restores. Restore ships **before** any live Traded backfill.
 
 ### 4. Eligibility matrix (unchanged from research, confirmed against code)
 
@@ -868,3 +883,4 @@ This plan is the engine.90 pointer. The commits below are implementation, not th
 
 - 2026-08-21 (grok) — Design rev 1–4 (scratch). Review loop closed at 0 open issues.
 - 2026-08-22 (grok) — Filed as engine.90 plan. Mike: v1 = deceased + Traded only; live Status dump rerun (`dumpLedger.js` C104, 964 rows, 49 Traded + 5 deceased, no Migrated/pending/inactive); citywide engine.117 is not a gate. `Wendell Carter Jr.` POP-01028 remains lowercase `active` (not archive-eligible).
+- 2026-08-22 (grok) — Return trigger locked: Status→Active on a traded POPID moves them back to Oakland (same POPID). Pre-archive = in-place flip; post-archive = restore copy onto SL. Sports `return` stays injury-only.

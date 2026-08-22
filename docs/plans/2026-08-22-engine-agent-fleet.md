@@ -111,3 +111,72 @@ He said it in a stream of direction, not as a work order, and the session it
 landed in had already burned his money on exactly the failure mode this design
 removes: a chat instance improvising against a process it does not own.
 Capturing it is the job; designing it is the next session's, with him.
+
+---
+
+## 8. First run — engine-validator, 2026-08-22
+
+Built `scripts/runEngineAgent.js` and ran the one engine agent that already
+existed. Three runs, and the failures are more useful than the success.
+
+**The harness.** Same shape as `cron-desk-writer.js` with the newsroom stripped
+out: raw API + tool-use loop, the agent's own `IDENTITY.md` as the entire system
+prompt (3,377 chars), tools `read_file` / `glob` / `grep`, repo-scoped. It loads
+no CLAUDE.md, no SESSION_CONTEXT, no identity.md, no TERMINAL.md. **Read-only** —
+the agent gets no write tool; its final message IS the report and this process
+writes it out. Plan §6 Q1 (write authority) stays open rather than being decided
+by a script.
+
+**Run 1 — deepseek/deepseek-chat. Fabricated a pass.** The `grep` tool did not
+expand `phase*/*.js`, so every search returned "No such file or directory". The
+agent reported `Files scanned: 1`, `Phantoms found: 0`, `Orphans found: 0` and
+ten "verified" chains. **A broken tool became a clean bill of health.** For a
+fleet auditing the engine that is the whole risk: an agent that cannot tell you
+its tools failed is worse than no agent.
+
+Fixed both halves: grep now expands globs through the shell, and a genuine miss
+returns `TOOL_FAILED: … Nothing was scanned. Do NOT report results for this
+path`. The kickoff now carries the rule explicitly — *tool failures are
+findings, not noise; never report a result for anything you did not read; a
+clean report built on a broken tool is worse than no report.*
+
+**Run 2 — deepseek, tools fixed. Produced nothing.** Read one 2,167-line file
+and stopped. The model is too weak for the task; this is a routing fact, not a
+harness fault.
+
+**Run 3 — anthropic/claude-sonnet-4.5 via OpenRouter. Real work.** 233 lines:
+312 unique `ctx.summary` fields tracked, 283 cross-phase chains verified, 0
+phantom reads, 29 orphaned writes sorted into telemetry / S229-frozen Chicago /
+phase-local snapshots. Roughly three minutes and about a dime. **The engine has
+never had this audit.**
+
+Spot-checked rather than accepted:
+
+| claim | verdict |
+|---|---|
+| `S.noiseFilterStats` write-only telemetry | correct — `phase06-analysis/filterNoiseEvents.js:358`, no reads |
+| `canonHoodCount` written Phase 1 | correct — `canonNeighborhoodLoader.js:90` |
+| "Files scanned: 124" | **wrong — 136 exist** |
+
+### 8.1 What run 3 proves that a clean pass would not have
+
+The substance is trustworthy; **the coverage claim is not.** It audited 124 of
+136 files and reported "0 phantom reads" as though it had seen all of them. Same
+disease as run 1, milder — the agent states numbers it did not earn.
+
+So the gate before eleven of these exist is a **coverage contract**: the harness,
+not the agent, counts what was actually read, and the report carries that count.
+An engine agent must prove its denominator. This is the engine-side version of
+the rule the newsroom already learned — verify before asserting clean.
+
+Second, smaller: the report stamped itself `2026-... → "2024-12-19"`. The agent
+has no clock and invented one. Engine agents get the **cycle** injected, never a
+date — the no-real-world-clock rule applies to them exactly as it does to
+citizens.
+
+### 8.2 Revised first task
+
+Not "build eleven agents". Build the coverage contract against this one agent,
+then clone the shape. `engine-validator` is now a live, cheap, repeatable check
+that produces a real artifact — which is a better starting asset than the fleet
+had this morning.

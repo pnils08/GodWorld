@@ -19,6 +19,20 @@ changes the architecture. Supersedes the roster shape in
 
 ---
 
+## 0. Scale, before any number in this plan is read
+
+**The world is ~388,000 people.** `World_Population.totalPopulation = 387,975` at
+C104. `Simulation_Ledger` holds **964** of them — 0.25% — because tracking is
+earned, not universal. `Business_Ledger` tracks **103** businesses against
+roughly 100,000 that exist.
+
+So every count in an execution log is a count *within a tracked pool*, and none
+of them is a statement about Oakland. "908 commuters" is 908 tracked commuters.
+A detector that divides by a tracked count and reports a percentage of the city
+is reporting a phantom. **The diff across cycles is the signal; the absolute
+number rarely is.** Builder-direct 2026-08-22, and he has had to say it more
+than once.
+
 ## 1. The thing that changes the design
 
 The Apps Script execution log already emits a **machine-readable per-cycle
@@ -102,9 +116,12 @@ test that was red goes green.
 
 ### 3.3 Agents get a safe pair of hands: they may write tests, never engine code
 
-Builder-stated: *"you'll still be the only agent touching code until the agents
-prove to be safe."* Correct, and there is a middle position that is genuinely
-safe — **an agent may write a failing test.** A bad test fails loudly in the
+Builder-stated, and sharper than the earlier paraphrase: **he will never touch
+code and has never read a line of it.** `engine-sheet` (Opus 5) is the only
+thing that edits engine code, and agents get that authority only when *this
+seat* is satisfied they are safe — that is an engineering judgement delegated to
+me, not a decision waiting on him. There is a middle position that is genuinely
+safe in the meantime — **an agent may write a failing test.** A bad test fails loudly in the
 suite; a bad engine edit fails silently in the sim. That gives the fleet real
 hands without the knife, and it is what upgrades the loop from *monitoring* to
 *self-healing*: the check that proves the remedy landed was authored by the agent
@@ -169,7 +186,7 @@ plan:
 | `recordInheritanceInFamily_: registry lacks inheritance columns (expected legacy schema) — skipping` — a write that silently does nothing | plain line |
 | 4× `Warning priorityEngine clamp: raw=11.70 final=7.80` — a value exceeding its ceiling by 50%, four times | plain line |
 | `Phase 6.5: Validation complete - CAUTION` — a validator raising caution that nothing consumes | plain line |
-| `buildCommuteFlows_: 219 unresolved` of 908 — 24% of commuters unplaced | plain line |
+| `buildCommuteFlows_: 689/908 commuters resolved, 219 unresolved` — 908 is the TRACKED pool, not the population (see §0). Whether 219 unresolved is a defect or the expected tail is unknown and is exactly the kind of question a record-diff answers: watch the ratio across c93→c104, not the raw number | plain line |
 | `checkFamilyMatchPromotions_: reels did not align` ×2 | plain line |
 | No `rng draws` field — confirms engine.128's counter lands first at **C105** | absence |
 
@@ -196,9 +213,10 @@ the project stops after step 3 it is still ahead of where it is now.
 
 ## 8. Open questions
 
-1. **Log delivery.** Today the logs are hand-saved to Drive. Can the Apps Script
-   run write its own log to the repo or a sheet at cycle close, removing the
-   manual step? Until then the parser reads Drive.
+1. **Log delivery — resolved.** The builder supplies the execution log on every
+   run; the Drive folder is the standing drop. The parser reads from there and
+   needs no scraping, no new Apps Script write path, and no permission. Automating
+   it later is an optimisation, not a prerequisite.
 2. **`Sandbox_Logs`.** A subfolder was created 2026-08-22 and is unexamined. If
    sandbox runs are labelled, they are a second fixture source.
 3. **The `_reverted` pairs** (100, 104b, 104c) are labelled before/after runs.

@@ -42,13 +42,34 @@
  * @returns {function} Function that returns 0-1 random values
  */
 function seededRng_(seed) {
-  var state = hashInt32_(seed);
+  // mulberry32. Every product goes through Math.imul, which is true 32-bit
+  // integer multiplication and never leaves float-safe range.
+  //
+  // engine.128 — the previous implementation was a glibc LCG:
+  //     state = ((state * 1103515245) + 12345) & 0x7fffffff
+  // state reaches 2^31, so that product reaches 1.36e18 against a float64
+  // safe-integer ceiling of 9.0e15 (~150x over). JS has no integer type here:
+  // the low-order bits were rounded away BEFORE the mask ran. Measured result
+  // was a generator that produced ~17,000 distinct values per 100,000 draws and
+  // collapsed EVERY seed into one shared 10,466-value attractor cycle — seeds
+  // 102, 103 and 1 all walked the identical ring, entered at draw 6522 / 8813 /
+  // 5688. Determinism was intact; variety was not. Surfaced as 53 duplicate and
+  // 39 one-character-rotated BondIds, all splitting c102 vs c103.
+  // Full diagnosis: docs/plans/2026-08-21-ctx-rng-attractor-collapse.md
+  var a = hashInt32_(seed) >>> 0;
 
-  return function() {
-    // LCG parameters (same as glibc)
-    state = ((state * 1103515245) + 12345) & 0x7fffffff;
-    return state / 0x7fffffff;
+  var fn = function() {
+    a = (a + 0x6D2B79F5) >>> 0;
+    var t = a;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    fn.draws++;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
+  // Draw counter — sizes how much of a cycle sits past the old ~6-9k entry
+  // point. Read it as ctx.rng.draws; costs one increment per draw.
+  fn.draws = 0;
+  return fn;
 }
 
 
@@ -69,9 +90,14 @@ function seededRngFor_(seed, salt) {
  * Hash a 32-bit integer.
  */
 function hashInt32_(x) {
-  x = ((x >> 16) ^ x) * 0x45d9f3b;
-  x = ((x >> 16) ^ x) * 0x45d9f3b;
-  x = (x >> 16) ^ x;
+  // engine.128 — same float-precision defect as seededRng_ had: `x * 0x45d9f3b`
+  // reaches ~3.1e17 for a 32-bit x, well past the 9.0e15 safe-integer ceiling,
+  // so the seed hash was silently losing low bits too. Math.imul fixes it in
+  // place; the avalanche constants are unchanged.
+  x = x >>> 0;
+  x = Math.imul((x >>> 16) ^ x, 0x45d9f3b);
+  x = Math.imul((x >>> 16) ^ x, 0x45d9f3b);
+  x = (x >>> 16) ^ x;
   return x >>> 0;  // Convert to unsigned
 }
 

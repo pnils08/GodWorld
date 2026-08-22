@@ -83,3 +83,36 @@ Point `seededRng_` at that arithmetic. One function body, no new file, no new de
 - Bond mint plan (blocked on this): `docs/plans/2026-08-21-published-canon-bond-mint.md`
 - Engine rules on `ctx.rng` / no-`Math.random`: `.claude/rules/engine.md` §Engine rules
 - `[[../engine/ROLLOUT_PLAN]]` row `engine.128`
+
+---
+
+## 9. Landed 2026-08-21 (engine-sheet)
+
+`seededRng_` is now mulberry32 over `Math.imul`; `hashInt32_` carried the same
+defect (`x * 0x45d9f3b` ≈ 3.1e17) and was fixed in place. `hashString_` was
+checked and is sound — it uses bit shifts, which coerce to int32.
+
+Measured before → after, same assertions:
+
+| assertion | old | new |
+|---|---|---|
+| distinct values per 100,000 draws (seed 102) | 17,313 | >99,000 |
+| values seed-103 shares with seed-102 (40k draws) | **36,144 / 40,000 (90%)** | <5% |
+| same seed reproduces its stream | yes | yes (preserved) |
+
+That 90% overlap is the finding in one number: nine of every ten "random" values
+in a cycle were values the previous cycle had already drawn.
+
+Guard: `utilities/cycleModes.rng.test.js`, 8 assertions, extracted from the real
+source via `vm` rather than copied, so a future rot fails the test instead of
+passing a stale duplicate. Verified to have teeth — the old implementation fails
+assertions 1 and 2 outright. This class never throws and never fails a cycle, so
+a statistical assertion is the only thing that can catch it.
+
+`ctx.rng.draws` counts draws per cycle. Still needs one wire-up line wherever the
+cycle summary is written to surface it — that number sizes how much of a cycle
+sat past the old 5,700–8,800-draw entry point.
+
+Not yet done: the targeted restore of the 53 colliding BondIds, and the
+uniqueness guard on `generateSeedBondId_` (§7 items 2–3). The mint stays gated
+on those.

@@ -1,6 +1,6 @@
 # ctx.rng attractor collapse — the simulation's PRNG has ~10k distinct values
 
-**Filed:** 2026-08-21 (engine-sheet) · **ROLLOUT:** `engine.128` · **Status:** diagnosed, fix not yet landed
+**Filed:** 2026-08-21 (engine-sheet) · **ROLLOUT:** `engine.128` · **Status:** RNG fix LANDED `33cf8636` (see §9); BondId restore + mint still open
 **Found by:** chasing 53 duplicate BondIds in `output/bond-ledger-live.tsv` during the published-canon bond mint review.
 
 ---

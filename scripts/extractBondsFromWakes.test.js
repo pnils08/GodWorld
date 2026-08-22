@@ -9,7 +9,7 @@
  */
 
 const assert = require('assert');
-const { buildMatcher, buildPairSet, detect } = require('./extractBondsFromWakes');
+const { buildMatcher, buildPairSet, detect, loadOffered, provenanceOf } = require('./extractBondsFromWakes');
 
 const LEDGER = [
   ['POPID', 'First', 'Last', 'Status'],
@@ -116,6 +116,90 @@ assert.deepStrictEqual(anchorsFor('POP-00789'), ['forename', 'full', 'surname'].
   ], m, existing, { min: 1 });
   const lucia = out.filter((c) => [c.speaker, c.named].includes('POP-00004'));
   assert.ok(lucia.length >= 1);
+}
+
+// --- provenance: the echo trap ---------------------------------------------
+
+{
+  // Warren Ashford is Rockridge, Vinnie Keane is Grand Lake — not co-residents. But
+  // the sports slice names A's players, and Vinnie is the A's DH. Without the offered
+  // log this looks like a discovery; with it, it is the engine hearing itself.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00504', cycle: 101, daypart: 'night', offeredPops: [], prose: "The A's are 126-35. Vinnie Keane walks out to a standing ovation." }),
+  ]);
+  const ref = { pop: 'POP-00504', cycle: 101, daypart: 'night' };
+  assert.strictEqual(provenanceOf(ref, 'POP-00001', 'Vinnie Keane', offered), 'echo',
+    'a name carried by the sports slice is an echo, not a discovery');
+}
+{
+  // Structural injection: a co-resident handed over by POPID.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00004'], prose: '' }),
+  ]);
+  assert.strictEqual(provenanceOf({ pop: 'POP-00231', cycle: 100, daypart: 'evening' }, 'POP-00004', 'Lucia Polito', offered), 'echo');
+}
+{
+  // The real thing: the wake offered nothing about this person and the citizen said it anyway.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00999'], prose: 'The weather turned cold.' }),
+  ]);
+  assert.strictEqual(provenanceOf({ pop: 'POP-00231', cycle: 100, daypart: 'evening' }, 'POP-00004', 'Lucia Polito', offered), 'unprompted');
+}
+{
+  // No record for that wake — must NOT be guessed either way.
+  assert.strictEqual(provenanceOf({ pop: 'POP-00231', cycle: 77, daypart: 'evening' }, 'POP-00004', 'Lucia Polito', new Map()), 'unknown');
+}
+{
+  // A surname alone inside an injected block still counts as offered.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00528', cycle: 101, daypart: 'evening', offeredPops: [], prose: 'The Richards trade cleared waivers.' }),
+  ]);
+  assert.strictEqual(provenanceOf({ pop: 'POP-00528', cycle: 101, daypart: 'evening' }, 'POP-00031', 'Martin Richards', offered), 'echo');
+}
+{
+  // Short tokens must not match loosely — "Fay" (3 chars) may not echo off stray prose.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00789', cycle: 101, daypart: 'afternoon', offeredPops: [], prose: 'A fine day.' }),
+  ]);
+  assert.strictEqual(provenanceOf({ pop: 'POP-00789', cycle: 101, daypart: 'afternoon' }, 'POP-00794', 'Irene Fay', offered), 'unprompted');
+}
+
+// --- detect() surfaces the verdict -----------------------------------------
+
+{
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00004'], prose: '' }),
+    JSON.stringify({ pop: 'POP-00231', cycle: 101, daypart: 'night', offeredPops: [], prose: 'Quiet block tonight.' }),
+  ]);
+  const out = detect([
+    { pop: 'POP-00231', cycle: 100, daypart: 'evening', text: 'Lucia again.' },
+    { pop: 'POP-00231', cycle: 101, daypart: 'night', text: 'Lucia... I do not know.' },
+  ], m, existing, { min: 2, offered });
+  assert.strictEqual(out.length, 1);
+  assert.strictEqual(out[0].prov.echo, 1);
+  assert.strictEqual(out[0].prov.unprompted, 1);
+  assert.strictEqual(out[0].verdict, 'candidate', 'one unprompted mention is enough to make it a candidate');
+}
+{
+  // Every mention an echo -> not a candidate.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00004'], prose: '' }),
+    JSON.stringify({ pop: 'POP-00231', cycle: 101, daypart: 'night', offeredPops: ['POP-00004'], prose: '' }),
+  ]);
+  const out = detect([
+    { pop: 'POP-00231', cycle: 100, daypart: 'evening', text: 'Lucia again.' },
+    { pop: 'POP-00231', cycle: 101, daypart: 'night', text: 'Lucia once more.' },
+  ], m, existing, { min: 2, offered });
+  assert.strictEqual(out[0].verdict, 'echo');
+}
+{
+  // No offered log at all -> everything is unknown, nothing is a candidate.
+  const out = detect([
+    { pop: 'POP-00231', cycle: 100, daypart: 'evening', text: 'Lucia again.' },
+    { pop: 'POP-00231', cycle: 101, daypart: 'night', text: 'Lucia once more.' },
+  ], m, existing, { min: 2 });
+  assert.strictEqual(out[0].verdict, 'unknown');
+  assert.strictEqual(out[0].prov.unknown, 2);
 }
 
 console.log('extractBondsFromWakes.test.js — all assertions passed');

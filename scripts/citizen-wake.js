@@ -49,6 +49,15 @@ const STATE_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-state.json')
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake.log');
 const TENSION_FILE = path.join(__dirname, '..', 'logs', 'citizen-tension-state.json'); // B2 index — page is the durable surface, this skips a page search
 const RIPPLE_FILE = path.join(__dirname, '..', 'logs', 'citizen-ripple-state.json'); // engine.48 T4 — cross-citizen ripple register, keyed "from->to"
+// A citizen only knows a name the wake handed them — coResidents, the sports slice,
+// the edition slice, family, bonds, the ripple line, the card block, page memory.
+// So a name in a reflection is normally an ECHO of an injection, not a discovered
+// relationship, and there is no way to tell the two apart after the fact because the
+// injected set is not stored anywhere. This file stores it: one line per wake, the
+// POPIDs whose names were placed in front of that citizen. A name in the reflection
+// that is NOT in that line is the only thing that counts as an unprompted mention.
+// Consumer: scripts/extractBondsFromWakes.js. Append-only, one JSON object per line.
+const OFFERED_FILE = path.join(__dirname, '..', 'logs', 'citizen-wake-offered.jsonl');
 const RIPPLE_EXPIRY_CYCLES = 12; // mirrors TENSION_EXPIRY_CYCLES; read by citizen-exchange.js too
 const TENSION_CAP = 3;            // open questions carried at once (oldest evicted)
 const TENSION_EXPIRY_CYCLES = 12; // unresolved tension fades — silent, no page line (matches archiver retain window)
@@ -297,6 +306,26 @@ async function generateVoice(system, user) {
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
   const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine);
+
+  // Record what this wake put in front of the citizen, BEFORE they answer. Names come
+  // from two shapes: POPIDs we know structurally (neighbours, bonds), and names that
+  // only appear as prose inside the injected blocks (the sports slice, the edition
+  // slice, family, the ripple line, the card, page memory). Both are stored — the
+  // structural ids exactly, the prose blocks verbatim so a consumer can match any name
+  // against them without having to re-derive which citizen a surname belonged to.
+  try {
+    const offeredPops = [
+      ...neighbors.map((n) => String(n.popId || '').toUpperCase()),
+      ...bondPairs.map((b) => String(b.pop || '').toUpperCase()),
+    ].filter(Boolean);
+    fs.appendFileSync(OFFERED_FILE, JSON.stringify({
+      pop: c.popId, cycle, daypart: WAKE,
+      offeredPops: [...new Set(offeredPops)],
+      // prose blocks that can carry a name we did not resolve to a POPID
+      prose: [sportsLine, editionLine, familyLine, bondsLine, rippleLine, cardBlock, pageMemory, textureLine]
+        .filter(Boolean).join(' \n').slice(0, 8000),
+    }) + '\n');
+  } catch (e) { logLine('offered-names log failed (non-fatal): ' + e.message); }
 
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');

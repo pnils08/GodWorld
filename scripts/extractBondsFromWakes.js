@@ -3,10 +3,23 @@
  * extractBondsFromWakes.js — who are citizens actually talking about?
  *
  * The wakes are the bond instrument. Three times a day a citizen says what is on
- * their mind, and sometimes they name somebody. If they name a person the engine
- * has no bond row for, that is a relationship the world has and the engine does
- * not. This finds those, deterministically, and emits candidates in the claim
- * shape scripts/mintCanonBonds.js already validates.
+ * their mind, and sometimes they name somebody.
+ *
+ * THE TRAP, and the whole reason this file is careful: a citizen only knows a name
+ * the wake handed them. The prompt injects coResidents (cap 3, same hood), the
+ * sports slice, the edition slice, family, existing bonds, the ripple line, the
+ * card block and page memory — all by name. So a name in a reflection is normally
+ * an ECHO of an injection, not a discovered relationship. Measured on the C97-C104
+ * corpus: 10 candidate pairs, 7 of them same-neighbourhood (three separate citizens
+ * "circling" Lucia Polito turned out to be coResidents rotating her name through
+ * Fruitvale), and the 3 cross-hood survivors all named A's figures the sports slice
+ * carries. Real yield: zero.
+ *
+ * The honest test is subtraction against what the wake actually offered — and that
+ * set is not recoverable after the fact, because nothing used to store it. So
+ * citizen-wake.js now appends it to logs/citizen-wake-offered.jsonl at wake time,
+ * and this script scores against that. Rows older than that log can only be marked
+ * `unknown`; they are reported separately and are NOT candidates.
  *
  * Deterministic only. No model call, no inference about what the relationship IS
  * — that framing is the cron/agent layer's job (detector-framer split). This
@@ -110,6 +123,41 @@ function buildMatcher(ledgerRows) {
   return { anchors, people };
 }
 
+/**
+ * logs/citizen-wake-offered.jsonl -> Map<"pop|cycle|daypart", {pops:Set, prose:string}>
+ * Written by citizen-wake.js at wake time. Absent for anything before that landed.
+ */
+function loadOffered(lines) {
+  const map = new Map();
+  for (const line of lines) {
+    const t = String(line || '').trim();
+    if (!t) continue;
+    let o; try { o = JSON.parse(t); } catch (e) { continue; }
+    if (!o || !o.pop) continue;
+    map.set(`${String(o.pop).toUpperCase()}|${o.cycle}|${o.daypart}`,
+      { pops: new Set((o.offeredPops || []).map((x) => String(x).toUpperCase())), prose: String(o.prose || '') });
+  }
+  return map;
+}
+
+/**
+ * Was this name put in front of the speaker by the wake itself?
+ * 'echo'      — yes, the engine handed it over; not evidence of a relationship
+ * 'unprompted'— no; the citizen produced the name on their own
+ * 'unknown'   — no offered record for that wake (predates the log); NOT a candidate
+ */
+function provenanceOf(ref, namedPop, namedName, offered) {
+  const rec = offered.get(`${String(ref.pop).toUpperCase()}|${ref.cycle}|${ref.daypart}`);
+  if (!rec) return 'unknown';
+  if (rec.pops.has(String(namedPop).toUpperCase())) return 'echo';
+  const full = String(namedName || '');
+  const parts = full.split(/\s+/).filter((x) => x.length > 3);
+  for (const part of [full, ...parts]) {
+    if (part && new RegExp(`\\b${escapeRe(part)}\\b`, 'i').test(rec.prose)) return 'echo';
+  }
+  return 'unprompted';
+}
+
 /** Existing bond pairs, unordered. */
 function buildPairSet(bondRows) {
   const h = (bondRows[0] || []).map(String);
@@ -127,6 +175,7 @@ function buildPairSet(bondRows) {
  */
 function detect(reflections, matcher, existingPairs, opts) {
   const min = (opts && opts.min) || 2;
+  const offered = (opts && opts.offered) || new Map();
   const cand = new Map();
 
   for (const ref of reflections) {
@@ -142,10 +191,11 @@ function detect(reflections, matcher, existingPairs, opts) {
       const key = [speaker, a.pop].sort().join('|');
       if (existingPairs.has(key)) continue;   // engine already knows
       if (!cand.has(key)) {
-        cand.set(key, { key, speaker, named: a.pop, namedName: a.name, mentions: 0, kinds: {}, cycles: new Set(), lines: [] });
+        cand.set(key, { key, speaker, named: a.pop, namedName: a.name, mentions: 0, kinds: {}, cycles: new Set(), lines: [], prov: { unprompted: 0, echo: 0, unknown: 0 } });
       }
       const c = cand.get(key);
       c.mentions++;
+      c.prov[provenanceOf(ref, a.pop, a.name, offered)]++;
       c.kinds[a.kind] = (c.kinds[a.kind] || 0) + 1;
       c.cycles.add(String(ref.cycle));
       if (c.lines.length < 3) c.lines.push({ cycle: ref.cycle, daypart: ref.daypart, by: speaker, text: text.slice(0, 160) });
@@ -154,11 +204,17 @@ function detect(reflections, matcher, existingPairs, opts) {
 
   return [...cand.values()]
     .filter((c) => c.mentions >= min)
-    .map((c) => ({ ...c, cycles: [...c.cycles].sort() }))
-    .sort((a, b) => b.mentions - a.mentions || b.cycles.length - a.cycles.length);
+    .map((c) => ({
+      ...c,
+      cycles: [...c.cycles].sort(),
+      // A pair is only a candidate on the strength of its UNPROMPTED mentions. Echoes
+      // are the engine hearing itself; unknowns predate the offered-names log.
+      verdict: c.prov.unprompted > 0 ? 'candidate' : (c.prov.echo > 0 ? 'echo' : 'unknown'),
+    }))
+    .sort((a, b) => b.prov.unprompted - a.prov.unprompted || b.mentions - a.mentions);
 }
 
-module.exports = { buildMatcher, buildPairSet, detect, COMMON_WORDS, escapeRe, normWord, WAKE_DAYPARTS };
+module.exports = { buildMatcher, buildPairSet, detect, loadOffered, provenanceOf, COMMON_WORDS, escapeRe, normWord, WAKE_DAYPARTS };
 
 // ---------------------------------------------------------------------------
 
@@ -195,7 +251,10 @@ async function main() {
 
   const matcher = buildMatcher(led);
   const existing = buildPairSet(bonds);
-  const found = detect(reflections, matcher, existing, { min });
+  const offeredPath = '/root/GodWorld/logs/citizen-wake-offered.jsonl';
+  let offered = new Map();
+  try { offered = loadOffered(fs.readFileSync(offeredPath, 'utf8').split('\n')); } catch (e) { /* not written yet */ }
+  const found = detect(reflections, matcher, existing, { min, offered });
 
   const nameOf = {};
   for (const p of matcher.people) nameOf[p.pop] = p.full;
@@ -203,21 +262,38 @@ async function main() {
   console.log(`\nreflections scanned: ${reflections.length}${allDayparts ? ' (all dayparts)' : ' (wake dayparts only)'}`);
   console.log(`name anchors: ${matcher.anchors.length} across ${matcher.people.length} citizens`);
   console.log(`existing bond pairs excluded: ${existing.size}`);
-  console.log(`\ncandidate bonds (>= ${min} mentions), strongest first:\n`);
-  for (const c of found) {
-    console.log(`  x${c.mentions}  ${c.speaker} ${nameOf[c.speaker] || ''} -> ${c.named} ${c.namedName}`);
-    console.log(`        cycles ${c.cycles.join(',')} | match ${Object.entries(c.kinds).map(([k, v]) => k + ':' + v).join(' ')}`);
-    for (const l of c.lines) console.log(`        c${l.cycle} ${l.daypart}: "${l.text}"`);
-    console.log('');
+  console.log(`wakes with a recorded offered-name set: ${offered.size}`);
+  if (!offered.size) {
+    console.log('\n!! logs/citizen-wake-offered.jsonl is empty or missing.');
+    console.log('!! Without it there is no way to tell a discovered name from a name the wake');
+    console.log('!! handed the citizen, so nothing below can be treated as a real candidate.');
   }
-  console.log(`${found.length} candidate pair(s).`);
+
+  const byVerdict = { candidate: [], echo: [], unknown: [] };
+  for (const c of found) byVerdict[c.verdict].push(c);
+
+  const show = (label, list, note) => {
+    console.log(`\n=== ${label}: ${list.length} ===`);
+    if (note) console.log(`    ${note}`);
+    for (const c of list) {
+      console.log(`  x${c.mentions} (unprompted ${c.prov.unprompted} / echo ${c.prov.echo} / unknown ${c.prov.unknown})`);
+      console.log(`        ${c.speaker} ${nameOf[c.speaker] || ''} -> ${c.named} ${c.namedName}`);
+      console.log(`        cycles ${c.cycles.join(',')} | match ${Object.entries(c.kinds).map(([k, v]) => k + ':' + v).join(' ')}`);
+      for (const l of c.lines) console.log(`        c${l.cycle} ${l.daypart}: "${l.text}"`);
+    }
+  };
+  show('CANDIDATES — the citizen produced the name unprompted', byVerdict.candidate);
+  show('ECHO — the wake handed them the name; not evidence of a bond', byVerdict.echo);
+  show('UNKNOWN — wake predates the offered-name log; cannot be scored', byVerdict.unknown,
+    'These are NOT candidates. They become scorable once these citizens wake again.');
+  console.log(`\n${byVerdict.candidate.length} real candidate(s) of ${found.length} name-pairs seen.`);
 
   if (outPath) {
-    const claims = found.map((c) => ({
+    const claims = byVerdict.candidate.map((c) => ({
       a: nameOf[c.speaker], b: c.namedName,
       bondType: null, intensity: null, domainTag: null,
       nature: null,
-      evidence: `wake mentions x${c.mentions} across cycles ${c.cycles.join(',')} — ${c.lines.map((l) => `c${l.cycle} ${l.daypart}`).join('; ')}`,
+      evidence: `unprompted wake mentions x${c.prov.unprompted} of ${c.mentions} across cycles ${c.cycles.join(',')} — ${c.lines.map((l) => `c${l.cycle} ${l.daypart}`).join('; ')}`,
       _detector: { mentions: c.mentions, kinds: c.kinds, cycles: c.cycles, lines: c.lines },
     }));
     fs.writeFileSync(outPath, JSON.stringify({

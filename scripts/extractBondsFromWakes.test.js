@@ -125,23 +125,49 @@ assert.deepStrictEqual(anchorsFor('POP-00789'), ['forename', 'full', 'surname'].
   // the sports slice names A's players, and Vinnie is the A's DH. Without the offered
   // log this looks like a discovery; with it, it is the engine hearing itself.
   const offered = loadOffered([
-    JSON.stringify({ pop: 'POP-00504', cycle: 101, daypart: 'night', offeredPops: [], prose: "The A's are 126-35. Vinnie Keane walks out to a standing ovation." }),
+    JSON.stringify({ pop: 'POP-00504', cycle: 101, daypart: 'night', offeredPops: [], feed: "The A's are 126-35. Vinnie Keane walks out to a standing ovation.", own: '' }),
   ]);
   const ref = { pop: 'POP-00504', cycle: 101, daypart: 'night' };
   assert.strictEqual(provenanceOf(ref, 'POP-00001', 'Vinnie Keane', offered), 'echo',
     'a name carried by the sports slice is an echo, not a discovery');
 }
 {
-  // Structural injection: a co-resident handed over by POPID.
+  // Their OWN page returning a name is the signal, not contamination. A citizen whose
+  // wiki keeps circling someone is what a bond looks like from the inside.
   const offered = loadOffered([
-    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00004'], prose: '' }),
+    JSON.stringify({ pop: 'POP-00183', cycle: 102, daypart: 'evening', offeredPops: [],
+      feed: 'The A\'s are 126-35.', own: 'You have been circling something with Lucia Polito for weeks.' }),
   ]);
-  assert.strictEqual(provenanceOf({ pop: 'POP-00231', cycle: 100, daypart: 'evening' }, 'POP-00004', 'Lucia Polito', offered), 'echo');
+  assert.strictEqual(provenanceOf({ pop: 'POP-00183', cycle: 102, daypart: 'evening' }, 'POP-00004', 'Lucia Polito', offered),
+    'continuity', 'their own page remembering someone is evidence, not an echo');
+}
+{
+  // A ripple — somebody crossed their path — is a real interaction, not noise.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: [], feed: '',
+      own: 'You crossed paths with Lucia Polito recently; they seemed preoccupied.' }),
+  ]);
+  assert.strictEqual(provenanceOf({ pop: 'POP-00231', cycle: 100, daypart: 'evening' }, 'POP-00004', 'Lucia Polito', offered), 'continuity');
+}
+{
+  // Structural co-resident/bond POPIDs are continuity too — known people, not strangers.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00004'], feed: '', own: '' }),
+  ]);
+  assert.strictEqual(provenanceOf({ pop: 'POP-00231', cycle: 100, daypart: 'evening' }, 'POP-00004', 'Lucia Polito', offered), 'continuity');
+}
+{
+  // The city feed still wins when a name is in both — the weaker read.
+  const offered = loadOffered([
+    JSON.stringify({ pop: 'POP-00504', cycle: 101, daypart: 'night', offeredPops: ['POP-00001'],
+      feed: 'Vinnie Keane walks out to a standing ovation.', own: 'You know Vinnie Keane.' }),
+  ]);
+  assert.strictEqual(provenanceOf({ pop: 'POP-00504', cycle: 101, daypart: 'night' }, 'POP-00001', 'Vinnie Keane', offered), 'echo');
 }
 {
   // The real thing: the wake offered nothing about this person and the citizen said it anyway.
   const offered = loadOffered([
-    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00999'], prose: 'The weather turned cold.' }),
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00999'], feed: 'The weather turned cold.', own: '' }),
   ]);
   assert.strictEqual(provenanceOf({ pop: 'POP-00231', cycle: 100, daypart: 'evening' }, 'POP-00004', 'Lucia Polito', offered), 'unprompted');
 }
@@ -152,14 +178,14 @@ assert.deepStrictEqual(anchorsFor('POP-00789'), ['forename', 'full', 'surname'].
 {
   // A surname alone inside an injected block still counts as offered.
   const offered = loadOffered([
-    JSON.stringify({ pop: 'POP-00528', cycle: 101, daypart: 'evening', offeredPops: [], prose: 'The Richards trade cleared waivers.' }),
+    JSON.stringify({ pop: 'POP-00528', cycle: 101, daypart: 'evening', offeredPops: [], feed: 'The Richards trade cleared waivers.', own: '' }),
   ]);
   assert.strictEqual(provenanceOf({ pop: 'POP-00528', cycle: 101, daypart: 'evening' }, 'POP-00031', 'Martin Richards', offered), 'echo');
 }
 {
   // Short tokens must not match loosely — "Fay" (3 chars) may not echo off stray prose.
   const offered = loadOffered([
-    JSON.stringify({ pop: 'POP-00789', cycle: 101, daypart: 'afternoon', offeredPops: [], prose: 'A fine day.' }),
+    JSON.stringify({ pop: 'POP-00789', cycle: 101, daypart: 'afternoon', offeredPops: [], feed: 'A fine day.', own: '' }),
   ]);
   assert.strictEqual(provenanceOf({ pop: 'POP-00789', cycle: 101, daypart: 'afternoon' }, 'POP-00794', 'Irene Fay', offered), 'unprompted');
 }
@@ -168,29 +194,29 @@ assert.deepStrictEqual(anchorsFor('POP-00789'), ['forename', 'full', 'surname'].
 
 {
   const offered = loadOffered([
-    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00004'], prose: '' }),
-    JSON.stringify({ pop: 'POP-00231', cycle: 101, daypart: 'night', offeredPops: [], prose: 'Quiet block tonight.' }),
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00004'], feed: '', own: '' }),
+    JSON.stringify({ pop: 'POP-00231', cycle: 101, daypart: 'night', offeredPops: [], feed: 'Quiet block tonight.', own: '' }),
   ]);
   const out = detect([
     { pop: 'POP-00231', cycle: 100, daypart: 'evening', text: 'Lucia again.' },
     { pop: 'POP-00231', cycle: 101, daypart: 'night', text: 'Lucia... I do not know.' },
   ], m, existing, { min: 2, offered });
   assert.strictEqual(out.length, 1);
-  assert.strictEqual(out[0].prov.echo, 1);
+  assert.strictEqual(out[0].prov.continuity, 1);
   assert.strictEqual(out[0].prov.unprompted, 1);
-  assert.strictEqual(out[0].verdict, 'candidate', 'one unprompted mention is enough to make it a candidate');
+  assert.strictEqual(out[0].verdict, 'candidate');
 }
 {
-  // Every mention an echo -> not a candidate.
+  // Every mention off the city feed -> not a candidate.
   const offered = loadOffered([
-    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: ['POP-00004'], prose: '' }),
-    JSON.stringify({ pop: 'POP-00231', cycle: 101, daypart: 'night', offeredPops: ['POP-00004'], prose: '' }),
+    JSON.stringify({ pop: 'POP-00231', cycle: 100, daypart: 'evening', offeredPops: [], feed: 'Lucia Polito opened the new market stall, the paper says.', own: '' }),
+    JSON.stringify({ pop: 'POP-00231', cycle: 101, daypart: 'night', offeredPops: [], feed: 'Lucia Polito again in the paper.', own: '' }),
   ]);
   const out = detect([
     { pop: 'POP-00231', cycle: 100, daypart: 'evening', text: 'Lucia again.' },
     { pop: 'POP-00231', cycle: 101, daypart: 'night', text: 'Lucia once more.' },
   ], m, existing, { min: 2, offered });
-  assert.strictEqual(out[0].verdict, 'echo');
+  assert.strictEqual(out[0].verdict, 'echo', 'city-feed-only mentions are not a bond');
 }
 {
   // No offered log at all -> everything is unknown, nothing is a candidate.

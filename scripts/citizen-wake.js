@@ -321,9 +321,16 @@ async function generateVoice(system, user) {
     fs.appendFileSync(OFFERED_FILE, JSON.stringify({
       pop: c.popId, cycle, daypart: WAKE,
       offeredPops: [...new Set(offeredPops)],
-      // prose blocks that can carry a name we did not resolve to a POPID
-      prose: [sportsLine, editionLine, familyLine, bondsLine, rippleLine, cardBlock, pageMemory, textureLine]
-        .filter(Boolean).join(' \n').slice(0, 8000),
+      // TWO buckets, because they mean opposite things.
+      // `feed` is city news the citizen happened to read — the sports slice, the
+      // edition slice, hood texture, the card. A name that appears ONLY here is an
+      // echo: the engine handed them a stranger and they repeated it.
+      feed: [sportsLine, editionLine, textureLine, cardBlock].filter(Boolean).join(' \n').slice(0, 6000),
+      // `own` is the citizen's own life read back to them — their wiki page, their
+      // family, their bonds, and a ripple from someone who crossed their path. A name
+      // here is NOT an echo. Their page remembering a person is what a bond IS; that
+      // is the signal, not the contamination.
+      own: [pageMemory, familyLine, bondsLine, rippleLine].filter(Boolean).join(' \n').slice(0, 6000),
     }) + '\n');
   } catch (e) { logLine('offered-names log failed (non-fatal): ' + e.message); }
 

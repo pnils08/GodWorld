@@ -134,27 +134,44 @@ function loadOffered(lines) {
     if (!t) continue;
     let o; try { o = JSON.parse(t); } catch (e) { continue; }
     if (!o || !o.pop) continue;
-    map.set(`${String(o.pop).toUpperCase()}|${o.cycle}|${o.daypart}`,
-      { pops: new Set((o.offeredPops || []).map((x) => String(x).toUpperCase())), prose: String(o.prose || '') });
+    map.set(`${String(o.pop).toUpperCase()}|${o.cycle}|${o.daypart}`, {
+      pops: new Set((o.offeredPops || []).map((x) => String(x).toUpperCase())),
+      feed: String(o.feed || o.prose || ''),   // city news — a name here is an echo
+      own: String(o.own || ''),                // their own page/family/bonds/ripple — a name here is the SIGNAL
+    });
   }
   return map;
 }
 
 /**
- * Was this name put in front of the speaker by the wake itself?
- * 'echo'      — yes, the engine handed it over; not evidence of a relationship
- * 'unprompted'— no; the citizen produced the name on their own
- * 'unknown'   — no offered record for that wake (predates the log); NOT a candidate
+ * Where did this name come from?
+ *
+ * 'echo'       — the CITY FEED handed it over: the sports slice, the edition slice,
+ *                hood texture, the card. A stranger's name the citizen read. Noise.
+ * 'continuity' — it was in the citizen's OWN life read back to them: their wiki page,
+ *                family, bonds, or a ripple from someone who crossed their path. This
+ *                is NOT contamination. A page that keeps returning a person is what a
+ *                bond looks like from the inside — it is the strongest signal here.
+ * 'unprompted' — nothing offered it and they said it anyway.
+ * 'unknown'    — no record for that wake (predates the log). Not scorable.
+ *
+ * Order matters: the feed is checked first, so a name that is BOTH city news and in
+ * their page (a famous neighbour) is treated as the weaker read.
  */
 function provenanceOf(ref, namedPop, namedName, offered) {
   const rec = offered.get(`${String(ref.pop).toUpperCase()}|${ref.cycle}|${ref.daypart}`);
   if (!rec) return 'unknown';
-  if (rec.pops.has(String(namedPop).toUpperCase())) return 'echo';
   const full = String(namedName || '');
   const parts = full.split(/\s+/).filter((x) => x.length > 3);
-  for (const part of [full, ...parts]) {
-    if (part && new RegExp(`\\b${escapeRe(part)}\\b`, 'i').test(rec.prose)) return 'echo';
-  }
+  const inText = (hay) => {
+    if (!hay) return false;
+    for (const part of [full, ...parts]) {
+      if (part && new RegExp(`\\b${escapeRe(part)}\\b`, 'i').test(hay)) return true;
+    }
+    return false;
+  };
+  if (inText(rec.feed)) return 'echo';
+  if (rec.pops.has(String(namedPop).toUpperCase()) || inText(rec.own)) return 'continuity';
   return 'unprompted';
 }
 
@@ -191,7 +208,7 @@ function detect(reflections, matcher, existingPairs, opts) {
       const key = [speaker, a.pop].sort().join('|');
       if (existingPairs.has(key)) continue;   // engine already knows
       if (!cand.has(key)) {
-        cand.set(key, { key, speaker, named: a.pop, namedName: a.name, mentions: 0, kinds: {}, cycles: new Set(), lines: [], prov: { unprompted: 0, echo: 0, unknown: 0 } });
+        cand.set(key, { key, speaker, named: a.pop, namedName: a.name, mentions: 0, kinds: {}, cycles: new Set(), lines: [], prov: { unprompted: 0, continuity: 0, echo: 0, unknown: 0 } });
       }
       const c = cand.get(key);
       c.mentions++;
@@ -209,9 +226,13 @@ function detect(reflections, matcher, existingPairs, opts) {
       cycles: [...c.cycles].sort(),
       // A pair is only a candidate on the strength of its UNPROMPTED mentions. Echoes
       // are the engine hearing itself; unknowns predate the offered-names log.
-      verdict: c.prov.unprompted > 0 ? 'candidate' : (c.prov.echo > 0 ? 'echo' : 'unknown'),
+      // Continuity counts. A citizen whose own page keeps returning someone is the
+      // clearest bond evidence the wakes produce; requiring an unprompted mention
+      // would throw exactly that away.
+      verdict: (c.prov.unprompted + c.prov.continuity) > 0 ? 'candidate'
+        : (c.prov.echo > 0 ? 'echo' : 'unknown'),
     }))
-    .sort((a, b) => b.prov.unprompted - a.prov.unprompted || b.mentions - a.mentions);
+    .sort((a, b) => (b.prov.unprompted + b.prov.continuity) - (a.prov.unprompted + a.prov.continuity) || b.mentions - a.mentions);
 }
 
 module.exports = { buildMatcher, buildPairSet, detect, loadOffered, provenanceOf, COMMON_WORDS, escapeRe, normWord, WAKE_DAYPARTS };
@@ -276,14 +297,14 @@ async function main() {
     console.log(`\n=== ${label}: ${list.length} ===`);
     if (note) console.log(`    ${note}`);
     for (const c of list) {
-      console.log(`  x${c.mentions} (unprompted ${c.prov.unprompted} / echo ${c.prov.echo} / unknown ${c.prov.unknown})`);
+      console.log(`  x${c.mentions} (unprompted ${c.prov.unprompted} / continuity ${c.prov.continuity} / echo ${c.prov.echo} / unknown ${c.prov.unknown})`);
       console.log(`        ${c.speaker} ${nameOf[c.speaker] || ''} -> ${c.named} ${c.namedName}`);
       console.log(`        cycles ${c.cycles.join(',')} | match ${Object.entries(c.kinds).map(([k, v]) => k + ':' + v).join(' ')}`);
       for (const l of c.lines) console.log(`        c${l.cycle} ${l.daypart}: "${l.text}"`);
     }
   };
-  show('CANDIDATES — the citizen produced the name unprompted', byVerdict.candidate);
-  show('ECHO — the wake handed them the name; not evidence of a bond', byVerdict.echo);
+  show('CANDIDATES — unprompted, or carried in the citizen\'s own page/family/ripple', byVerdict.candidate);
+  show('ECHO — the name came off the city feed (sports/edition/texture); noise', byVerdict.echo);
   show('UNKNOWN — wake predates the offered-name log; cannot be scored', byVerdict.unknown,
     'These are NOT candidates. They become scorable once these citizens wake again.');
   console.log(`\n${byVerdict.candidate.length} real candidate(s) of ${found.length} name-pairs seen.`);
@@ -293,7 +314,7 @@ async function main() {
       a: nameOf[c.speaker], b: c.namedName,
       bondType: null, intensity: null, domainTag: null,
       nature: null,
-      evidence: `unprompted wake mentions x${c.prov.unprompted} of ${c.mentions} across cycles ${c.cycles.join(',')} — ${c.lines.map((l) => `c${l.cycle} ${l.daypart}`).join('; ')}`,
+      evidence: `wake mentions x${c.mentions} — unprompted ${c.prov.unprompted}, own-page continuity ${c.prov.continuity} across cycles ${c.cycles.join(',')} — ${c.lines.map((l) => `c${l.cycle} ${l.daypart}`).join('; ')}`,
       _detector: { mentions: c.mentions, kinds: c.kinds, cycles: c.cycles, lines: c.lines },
     }));
     fs.writeFileSync(outPath, JSON.stringify({

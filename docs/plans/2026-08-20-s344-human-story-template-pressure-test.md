@@ -185,7 +185,30 @@ pointers:
   2. After code review, local tests, and the separately controlled runtime land, inspect the next two naturally scheduled Articles against all acceptance criteria.
   3. Record deterministic verdict and Rhea verdict separately; a Rhea PASS cannot override a template failure.
 - **Verify:** two dated changelog entries name the Article paths and independent template/Rhea outcomes; no scheduler diff exists.
-- **Status:** [ ] in-progress — waiting on the next naturally scheduled write wake after `34cace97`/`cb5c20c6` (2026-08-21 18:15 CDT). Crontab was read, not rewritten.
+- **Status:** [x] complete — 2026-08-21 18:15 write fanout (`fanout-2026-08-21.write.results.json`). Crontab unchanged (M–F 06:15/13:15/18:15). JSON §2 is gone on every seat that wrote.
+
+#### Task 10 observation (2026-08-21 18:15 CDT write)
+
+Fanout 5/6 ok. Hal Richmond: no angle artifact (not scored). Chase is human prose on all five writers. W2 landed quotes on all five (empty-W2 fail-closed did not fire).
+
+**Article 1 — picture desk, both gates invoked**
+- Path: `output/cron-compare/staged/sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md`
+- Story: `output/cron-compare/sports_c104_p-slayer_packet-v2_story.md`
+- Rhea: `output/cron-compare/sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json`
+- s344: PASS
+- Rhea: `pass=true` (gemini-3.7-flash, `p-slayer-fan-heat-v1`)
+- Disposition: staged
+- Note for Task 11: bar SET in Baylight is allotted; the copy also seats Vinnie Keane at the bar answering questions. Packet quotes landed; invented presence of a dynasty pillar in the room is the Rhea/profile cut, not this observation's s344 fail.
+
+**Article 2 — civic desk, Rhea skipped**
+- Path: `output/cron-compare/flagged/civic_c104_carmen-delaine_packet-v2_deepseek-deepseek-chat.md`
+- Story: `output/cron-compare/civic_c104_carmen-delaine_packet-v2_story.md`
+- Rhea: not invoked (`flags.json` summary `no rhea verdict`)
+- s344: FAIL — `missing-unanswered-question`, `intake-misses-assignment`
+- Disposition: flagged
+- Thesis holds: deterministic fail skipped Rhea. A Rhea PASS cannot override a template fail because Rhea never ran.
+
+Other seats same wake (not the two required changelog Articles): Angela Reyes s344 FAIL lede/quote, flagged, no Rhea. Elliot Graye s344 FAIL missing question, flagged, no Rhea. Jordan Velez s344 FAIL lede/quote, flagged, no Rhea (stale 08-20 rhea file still on disk).
 
 ### Task 11: Retune Rhea so allotted picture is not a contradiction (hand to Claude)
 
@@ -295,6 +318,8 @@ frozen** — the parked further-loosening stays parked until Task 10 closes.
 - 2026-08-21 (grok) — Sports SET is not a leak: drop mere-word clubhouse/press-box/locker fail. Tanya/Anthony/Hal bags place them in those rooms. Still fail invented speech sourced from the room. Crontab untouched.
 - 2026-08-21 (grok) — Allotted hallucination lock: Packet is data, not the picture. In-world named spots (Tina's bar) mint via INTAKE BIZ. Wall is real Oakland, fake numbers, fake Packet quotes. Tanya files from the clubhouse; Jax opens in an in-world place not BART. Writer hygiene + Tanya slice/package updated. No crontab.
 - 2026-08-21 (grok) — Task 11 filed for Claude: Rhea not yet fixed except Tanya blockers. Jax reviewProfile still forbids fabricated named business and still authorizes BART. Civic Rhea stays fact-desk; allotted civic texture is office relationships (who gets along), not invented bars or votes. IND not a bloc.
+- 2026-08-21 (grok) — Task 10 Article 1: `output/cron-compare/staged/sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md` — s344 PASS; Rhea pass=true (`p-slayer-fan-heat-v1`); staged. Chase is prose. Crontab unchanged.
+- 2026-08-21 (grok) — Task 10 Article 2: `output/cron-compare/flagged/civic_c104_carmen-delaine_packet-v2_deepseek-deepseek-chat.md` — s344 FAIL (missing-unanswered-question, intake-misses-assignment); Rhea not invoked; flagged. Deterministic fail skipped Rhea. Crontab unchanged.
 - 2026-08-21 (engine-sheet) — Reconciled the matcher-version contradiction between `22a06b65` (park) and `adaa6237` (land): no wake fired between the runtime land and the change, so the observation window had not opened. Baseline re-verified unchanged. Matcher frozen from 06:15.
 - 2026-08-21 (engine-sheet) — Filed the governing gate-axis law over Task 11 (builder-direct): real-world = fail, novel in-world = intake, tracked citizens stay Packet-bound. Verified the deterministic walls already hold that axis; Rhea's per-seat profiles do not. Named the two Saturday-run wiring breaks that stop the mint loop.
 - 2026-08-21 (engine-sheet) — Task 10 FIRST LIVE DAY observed. 5/6 on angle, report and write — the pipeline held, no broad sweep to flagged. One structural failure, and it is predicted edge #2 from the pre-fire record: **Hal Richmond failed W1 on `chase replaces the assignment`**, then report and write cascaded ("no angle artifact"). `chaseReplacesAssignment` demands a ≥5-char assignment-or-hood token verbatim, and Hal's historian register writes around proper nouns by design — the heuristic penalises voice, not accuracy. Loosen it (accept a hood/desk/subject synonym, or drop it to a warning) before it costs another wake. **P Slayer staged**, which is the un-inverted profile working. Flagged today: business-desk, angela-reyes, carmen-delaine, elliot-graye — triage those against the gate axis before assuming they are real failures.

@@ -1,0 +1,93 @@
+{
+  "claimSet": "canon-cut-c104",
+  "claimsPath": "intake/bond-claims/canon-cut-c104.json",
+  "cycle": 104,
+  "generatedAt": "2026-08-22T07:36:49.509Z",
+  "applied": false,
+  "sources": [
+    "NotebookLM canon cut (source-grounded, citation-indexed)",
+    "Supermemory cross-cut: bay-tribune / wd-citizens / cp-POP-##### / mags",
+    "codex + kimi preliminary bond passes",
+    "Bay Tribune Edition 79 (Paulson/Seymour only — cron-sourced, not canon-cut-sourced)"
+  ],
+  "accepted": [],
+  "rejected": [
+    {
+      "a": "Benji Dillon",
+      "b": "Vinnie Keane",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 588 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Mike Paulson",
+      "b": "Elliot Abraham",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 589 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Keisha Ramos",
+      "b": "Elias Varek",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 590 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Mike Paulson",
+      "b": "Deacon Seymour",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 591 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Elias Varek",
+      "b": "Mike Paulson",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 592 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Warren Ashford",
+      "b": "Claire Ashford",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 593 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Janae Rivers",
+      "b": "Elliott Crane",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 594 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Leonard Tran",
+      "b": "Janae Rivers",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 595 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Warren Ashford",
+      "b": "Brenda Okoro",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 596 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Warren Ashford",
+      "b": "Bobby Chen-Ramirez",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 597 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    },
+    {
+      "a": "Darrin Davis",
+      "b": "Rafael Montez",
+      "errors": [
+        "pair already has 1 bond row(s) at sheet row 598 — refusing to silently update; resolve by hand or amend the claim"
+      ]
+    }
+  ]
+}

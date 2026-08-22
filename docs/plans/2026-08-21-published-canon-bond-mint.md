@@ -363,7 +363,17 @@ matching normalizes; it only ever surfaced in published canon. Three cells
 trimmed, read-back clean, and `auditSimulationLedger.js` gained an
 **Untrimmed name field** drift sentinel so the class cannot return silently.
 
-### 8.2 Still open
+### 8.2 Deploy status
+
+The `BOND_ORIGINS.CANON` edit in `bondEngine.js` is committed but **deliberately
+not `clasp push`ed yet.** `engine.128` is still the unverified change in flight
+until C105 smoke-tests it, and landing a second change on top of an unverified
+one makes failure impossible to attribute (S250). The drift is safe in the
+meantime: nothing compares against the enum yet, and `Origin = 'canon'`
+round-trips through load/save as a plain string regardless. Push in the first
+clean window after C105.
+
+### 8.3 Still open
 
 - **Live cron-feed extractor.** The claim producer, per §7.2 the `cp-POP-*`
   PRESS / CONVO / NIGHT / tension sheets. This is the judgment half and belongs

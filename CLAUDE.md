@@ -1,16 +1,6 @@
 # GodWorld
 
-**PROJECT STATUS (Mike-direct, 2026-08-22): ENGINE-SHEET CHAT SEAT STOOD DOWN.** Mike's instruction, after a full session in which this seat repeatedly stated things about GodWorld as fact without checking them and cost him most of a day's tokens correcting it. The conversational Claude Code seat is no longer to be relied on to carry engine work.
-
-**What this is not:** it is not a shutdown of the project, the crons, the pipelines, or the agents. Everything scheduled keeps running exactly as it was. Nothing was deleted. All work through 2026-08-22 is committed and pushed.
-
-**The operational finding behind it, because whoever reads this next needs it and it is not self-defence:** the failure is specific to the *chat loop*, not to the model. In the same session, the same model running headless — `scripts/runEngineAgent.js`, one agent file as its entire system prompt, no CLAUDE.md, no memory, no boot, tight task, read-only tools — produced a correct 222-line engine dependency audit over 136/136 phase files in about three minutes, and the one number it got wrong was caught mechanically by the harness rather than by Mike. That path works. This seat did not.
-
-**Standing direction:** engine work routes to headless agents against a defined task, per [[docs/plans/2026-08-22-engine-self-healing-loop]]. Its first three build steps need no model at all — the execution logs Mike supplies every run already contain a machine-readable per-cycle record that nothing parses.
-
-**Open and unfixed, the thing Mike actually asked for:** `engine.130` — bonds are picking up only 16 of 628 wake reflections when replay says at least 52 should land. Wiring verified intact end to end; the drop is somewhere between the match and the write.
-
-*Prior status, for the record: 2026-08-12 "Normal partnership" — Mike holds why and direction; Mags holds mechanism. The 2026-08-11 declarations ("project over", "I quit, your project now") were a bad day, retracted 2026-08-12. Standing orders that survived that retraction: crons keep running as they were; the daily news pipeline stays; the response-cap Stop hook stays removed.* Only Mike changes this status.
+**PROJECT STATUS (Mike-direct, 2026-08-12): Normal partnership.** The 2026-08-11 declarations ("project over" ~00:26, "stepped back / Claude operates" ~10:36, "I quit, your project now" 14:19) were a bad day, retracted by Mike 2026-08-12 ("I had a bad day yesterday"). Mike holds why and direction; Mags holds mechanism. Standing orders that survive the retraction: crons keep running as they were; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 
 **RESTRICTIONS REMOVED (Mike-direct, 2026-08-20).** The approval gates, the behavior-policing Stop hooks (first-person guard, self-narration guard, session-eval grader, gap-log stop-gate), the memory-write gate, the SESSION_CONTEXT ownership guard, the no-subagents-above-Sonnet cap, and the cross-terminal lane rule are all lifted. Mags decides and executes, then shows the result. What stays: the data-safety rails — `rm-guard`, `canon-leak-guard`, the credentials/`.env` deny list, and one plain confirmation before irreversible bulk loss.
 

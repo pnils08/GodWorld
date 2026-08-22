@@ -160,6 +160,27 @@ citizens with no SpouseId is correct (see auto-memory
 trying to be a complete model of Oakland. It is trying to be the cheapest thing
 that keeps Oakland moving.
 
+## 4.6 Canon-source scope: not every memory space is canon (Mike-direct, 2026-08-21)
+
+Supermemory holds both **curated canon** and **working brains**, and they must
+not be searched as one corpus.
+
+- **Canon sources** — `bay-tribune` (editions, dispatches, interviews),
+  `wd-citizens` (citizen cards, appearance indexes), `cp-POP-#####` (per-citizen
+  PRESS / CONVO / NIGHT / tension sheets — "the raw bonds instrument").
+- **NOT a canon source** — `mags`. That is Mags's editorial brain: framing,
+  working notes, EIC reasoning. It is not curated as canon and must be
+  **excluded from canon retrieval**. It is not deleted and not deprecated — it
+  is simply out of scope for anything that treats a result as a world fact.
+
+**Why it matters:** a canon→engine intake that reads an uncurated working brain
+will mint reasoning *about* the world as if it were the world. The engine cannot
+tell the difference, and the next cron speaks from whatever landed.
+
+**Apply:** any canon retrieval — the bond intake, entity minting, fact-checking a
+draft — declares its source spaces explicitly and excludes uncurated ones. Scope
+the search; do not filter the results afterwards.
+
 ## 5. What this implies for any build
 
 1. **Give the engine the obvious and the free.** Never spend a model call on

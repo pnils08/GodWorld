@@ -120,18 +120,40 @@ The Varek↔Paulson negative bond is the strongest argument for doing this
 properly: it is a central antagonistic relationship in the city's power
 structure, fully documented in canon, and neither hand-pass found it.
 
-## 4. Open canon question for the builder
+## 4. Ashford family tie — RULED, degree still open
 
-**Claire Ashford ↔ Warren Ashford.** The canon cut flags a *plausible* family
-relation on surname alone and never confirms it. If real, her hands-on
-synagogue labour is a deliberate counterweight to his adversarial fiscal
-votes — a genuine family-across-the-aisle storyline. If coincidence, minting it
-writes a false family edge into the ledger. **Do not infer.** Awaiting an explicit builder ruling — enthusiasm for the
-storyline is not the same as a canon fact, and a false family edge is worse
-than a missing one.
+**RULED 2026-08-21 (builder): Claire Ashford and Warren Ashford ARE related.**
+NotebookLM floated it on surname; the builder confirmed it as canon. Warren is
+becoming the civic villain, and a family member doing hands-on community work he
+votes against is the counterweight.
 
-*(The companion AJ Dybantsa question is CLOSED, builder-direct 2026-08-21: male.
-POP-01024 already carries `Gender='male'` — confirmed, no write required.)*
+**Ledger constraints, read before proposing a degree:**
+
+| | POPID | age | gender | hood | marital | children |
+|---|---|---|---|---|---|---|
+| Warren Ashford | POP-00504 | 70 (BY 1971) | male | Rockridge | married, no SpouseId | **0** |
+| Claire Ashford | POP-01071 | 28 (BY 2013) | *(empty)* | Piedmont Ave | single | 0 |
+
+42-year gap. Claire's Piedmont Ave residence matches canon exactly — B'nai
+Tikvah's **Piedmont Avenue** campus.
+
+**Father/daughter is ruled out by the ledger, not by taste.** Warren's
+`NumChildren = 0`, and that field is meaningfully populated rather than
+defaulted: only **7 of 80** married citizens aged 60+ carry 0 (8%). Warren is
+genuinely in the childless minority. Minting a daughter would contradict
+established citizen data and force a `NumChildren` write — and `NumChildren` is
+engine-facing, so under [[../ENGINE_CRON_LOOP]] §4.5 that is exactly the kind of
+column change that needs a real reason, not a story convenience.
+
+**Recommended: uncle / niece.** It fits the 42-year gap, contradicts nothing,
+requires no engine write, and is the sharper story — a childless councilman
+whose niece runs the grief circles and food pantry his votes defund. Cousin or
+great-niece also work; father/daughter does not.
+
+**Still needs the builder:** the degree, and **Claire's `Gender` field is
+empty**. Canon prose uses "her," but that is not being inferred here — inferring
+gender from a given name is the exact trap the AJ Dybantsa question existed to
+avoid. One word closes it.
 
 ## 5. Sequence
 

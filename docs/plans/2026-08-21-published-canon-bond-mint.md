@@ -1,7 +1,7 @@
 ---
 title: Published-canon bond mint — canon says "bond" means two different things and the schema holds neither
 created: 2026-08-21
-updated: 2026-08-21
+updated: 2026-08-22
 type: plan
 tags: [plan, engine, bonds, canon, crons, active]
 pointers:
@@ -12,7 +12,7 @@ pointers:
 
 # Published-canon bond mint
 
-**Status:** UNBLOCKED — the `engine.128` 53-row BondId restore landed 2026-08-21 (586 rows, 586 distinct ids, 0 collisions). Next gate is the intake build itself.
+**Status:** INTAKE BUILT AND FIRED — see §8. `scripts/mintCanonBonds.js` shipped 2026-08-22; the 11 claims of §3 and §4 minted at C104 (586 → 597 rows, 597 distinct BondIds, 0 collisions). Remaining: the live cron-feed extractor, and the corpus backfill still gated on the §6 re-export.
 **Sources:** NotebookLM canon cut (builder-supplied 2026-08-21, source-grounded with
 citation indices) + Supermemory cross-cut (`bay-tribune`, `wd-citizens`,
 `cp-POP-#####`, `mags`) + codex/kimi preliminary passes.
@@ -262,3 +262,112 @@ POP-00018 Benji Dillon. Rejected: POP-00783 as Benji Dillon.
 The report cites "~675 citizens" in the ledger. Live is **964**. The report
 flags its own staleness risk ("live sheet/engine may have moved"). Treat its
 counts as indicative, its *names* as the payload.
+
+---
+
+## 8. What shipped (2026-08-22)
+
+`scripts/mintCanonBonds.js` — the deterministic half of the return edge. It does
+not read prose. It takes a structured claim file, resolves every name against
+the live `Simulation_Ledger` in code, and either mints or refuses. Judgment
+stays where ENGINE_CRON_LOOP puts it: in the cron/agent layer that produces the
+claims. Tests: `scripts/mintCanonBonds.test.js`.
+
+**The POPID gate, as built.** `expectedPopA` / `expectedPopB` in a claim file are
+advisory and are never adopted. Names resolve by exact normalized match; a name
+that hits two live citizens is rejected rather than guessed, an unknown name is
+rejected, and a supplied id that disagrees with the resolution rejects the whole
+claim with the mismatch printed. The regression test replays the exact live
+failure of §7.4 — Benji Dillon labelled POP-00783, which is Yuki Ji — and
+asserts the claim dies and the resolution still returns POP-00018.
+
+**Other guards, each with a scar behind it.** Pair conflict in either A/B order
+(refuses to silently update an existing bond). Duplicate pair inside one claim
+file. Self-bond. A citizen whose Status forms no bonds (`bondEngine.js:468`).
+`bondType` outside `BOND_TYPES` — the engine.59 scar, where `friendship` and
+`family` sat in the sheet for 100+ cycles with no enum key and a comparison
+could never fire. `domainTag` outside the canonical domain list, which is what
+catches `SPORT` for `SPORTS`. Header-shape check on `Relationship_Bonds` before
+any append. BondId collision-guarded against every existing id in both the bare
+8-char and `BOND-` formats — engine.128 was yesterday; a third unguarded
+generator would have recreated it.
+
+**Type choice is a physics decision, not a labelling one**, because the engine
+acts on these rows. `bondEngine` maintenance escalates `tension` to `rivalry`
+at intensity ≥ 6 and settles it to `professional` at ≤ 2 after 3 cycles, so a
+canon bond typed `tension` can drift into a statement canon never made. Hence
+Varek↔Paulson is `rivalry`, not `tension`; Ramos↔Varek is `professional`, since
+a recusal firewall must not escalate. The one deliberate `tension`
+(Ashford↔Chen-Ramirez, an audit) is warned about at mint time.
+
+**Decay was checked, not assumed.** Base decay is −0.2 when both parties are
+inactive and −0.5 when a bond older than 15 cycles goes 5 without an update.
+Canon bonds at 4–9 between citizens who are drawn into the world regularly hold
+comfortably. No protection column — that would be exactly the schema growth §2
+ruled out, and the engine acting on a canon bond is the loop working.
+
+**Provenance round-trips.** `Origin = canon` survives a cycle:
+`loadRelationshipBonds_` reads `Origin` into `bond.origin` and
+`saveRelationshipBonds_` writes it back. Notes are sim-facing and cycle-stamped
+(`[canon mint C104]`) — never a Gregorian date; the wall-clock provenance lives
+in `output/canon_bond_mint_c104.json`.
+
+**Sequencing.** `Relationship_Bonds` is a full **replace** each cycle from state
+loaded at Phase 1 (`bondPersistence.js` `queueReplaceIntent_`). Appending
+between cycles is safe; appending mid-cycle would be silently overwritten. Mint
+between cycles.
+
+**Minted at C104** — all 11 claims accepted, zero rejected, read-back verified:
+
+| pair | POPIDs | type | intensity |
+|---|---|---|---|
+| Benji Dillon ↔ Vinnie Keane | POP-00018 ↔ POP-00001 | friendship | 9 |
+| Mike Paulson ↔ Elliot Abraham | POP-00527 ↔ POP-01046 | mentorship | 8 |
+| Keisha Ramos ↔ Elias Varek | POP-00041 ↔ POP-00789 | professional | 5 |
+| Mike Paulson ↔ Deacon Seymour | POP-00527 ↔ POP-00528 | professional | 6 |
+| Elias Varek ↔ Mike Paulson | POP-00789 ↔ POP-00527 | rivalry | 6 |
+| Warren Ashford ↔ Claire Ashford | POP-00504 ↔ POP-01071 | family | 7 |
+| Janae Rivers ↔ Elliott Crane | POP-00043 ↔ POP-00044 | professional | 5 |
+| Leonard Tran ↔ Janae Rivers | POP-00502 ↔ POP-00043 | alliance | 6 |
+| Warren Ashford ↔ Brenda Okoro | POP-00504 ↔ POP-00037 | rivalry | 6 |
+| Warren Ashford ↔ Bobby Chen-Ramirez | POP-00504 ↔ POP-00792 | tension | 4 |
+| Darrin Davis ↔ Rafael Montez | POP-00021 ↔ POP-00136 | alliance | 6 |
+
+Before the mint, **not one of these 17 citizens shared a bond row with any
+other** — checked in both A/B orders. Varek, Claire Ashford, Leonard Tran,
+Bobby Chen-Ramirez and Rafael Montez held **zero bond rows at all**. That is the
+measurement behind §1: the city's most central relationships were invisible to
+the engine after 104 cycles.
+
+Re-running the intake now rejects all 11 as existing pairs, which is the
+idempotence proof.
+
+**Reversal**, if ever needed: the 11 BondIds are listed in
+`output/canon_bond_mint_c104.json`; delete those rows. The pre-mint tab export
+sits at `output/backups/relationship_bonds_pre_canon_mint_c104.tsv` (gitignored
+directory, so it is local-only — the tracked report is the durable record).
+
+**Landmine, same class as the citizen-mint one.** `output/bond-ledger-live.tsv`
+is a file snapshot read by `buildCitizenBondGraph.js` and `buildJaxSlice.js`; it
+does not update itself. Run `node scripts/buildCitizenBondGraph.js --live` after
+any mint. (`lib/wakePerception.loadBonds` reads the live sheet, so wakes were
+never stale.) Done for this mint — 597 bonds exported, graph rebuilt.
+
+### 8.1 Adjacent defect closed
+
+Three ledger rows carried a trailing space in `First` — POP-00789 Varek,
+POP-00799 Caldera, POP-01028 Carter Jr. Every consumer composes a display name
+as First + ' ' + Last, so it reached print as a double space: the C101 exchange
+transcripts say "Elias  Varek" throughout. Nothing errored, because all name
+matching normalizes; it only ever surfaced in published canon. Three cells
+trimmed, read-back clean, and `auditSimulationLedger.js` gained an
+**Untrimmed name field** drift sentinel so the class cannot return silently.
+
+### 8.2 Still open
+
+- **Live cron-feed extractor.** The claim producer, per §7.2 the `cp-POP-*`
+  PRESS / CONVO / NIGHT / tension sheets. This is the judgment half and belongs
+  in the cron layer; the intake it writes to now exists and is tested.
+- **Corpus backfill.** Still gated on the §6 Supermemory re-export.
+- **Bond-health scoring** (§7.1). Canon states an implementable test; the
+  markers are deterministic enough to score in code. Not built.

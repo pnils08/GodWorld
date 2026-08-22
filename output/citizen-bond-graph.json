@@ -2,16 +2,16 @@
   "directed": false,
   "multigraph": false,
   "graph": {
-    "generatedAt": "2026-08-22T05:00:31.330Z",
+    "generatedAt": "2026-08-22T06:38:09.945Z",
     "source": "/root/GodWorld/output/bond-ledger-live.tsv",
     "stats": {
-      "rowsRead": 586,
+      "rowsRead": 597,
       "skippedBlank": 0,
       "skippedInactive": 2,
       "keptUnrecognized": 2,
       "minIntensity": 0,
-      "nodes": 627,
-      "links": 584
+      "nodes": 633,
+      "links": 595
     }
   },
   "nodes": [
@@ -20,7 +20,7 @@
       "label": "Vinnie Keane",
       "group": "Rockridge",
       "neighborhood": "Rockridge",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "pop-00002",
@@ -118,7 +118,7 @@
       "label": "Benji Dillon",
       "group": "Rockridge",
       "neighborhood": "Rockridge",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "pop-00019",
@@ -139,7 +139,7 @@
       "label": "Darrin Davis",
       "group": "Laurel",
       "neighborhood": "Laurel",
-      "degree": 3
+      "degree": 4
     },
     {
       "id": "pop-00022",
@@ -216,7 +216,7 @@
       "label": "Brenda Okoro",
       "group": "West Oakland",
       "neighborhood": "West Oakland",
-      "degree": 6
+      "degree": 7
     },
     {
       "id": "pop-00038",
@@ -244,7 +244,7 @@
       "label": "Keisha Ramos",
       "group": "Lake Merritt",
       "neighborhood": "Lake Merritt",
-      "degree": 2
+      "degree": 3
     },
     {
       "id": "pop-00042",
@@ -258,14 +258,14 @@
       "label": "Janae Rivers",
       "group": "Piedmont Ave",
       "neighborhood": "Piedmont Ave",
-      "degree": 1
+      "degree": 3
     },
     {
       "id": "pop-00044",
       "label": "Elliott Crane",
       "group": "Uptown",
       "neighborhood": "Uptown",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "pop-00045",
@@ -468,6 +468,13 @@
       "label": "Brianna Lee",
       "group": "Laurel",
       "neighborhood": "Laurel",
+      "degree": 1
+    },
+    {
+      "id": "pop-00136",
+      "label": "Rafael Montez",
+      "group": "Piedmont Ave",
+      "neighborhood": "Piedmont Ave",
       "degree": 1
     },
     {
@@ -1878,6 +1885,13 @@
       "degree": 1
     },
     {
+      "id": "pop-00502",
+      "label": "Leonard Tran",
+      "group": "Downtown",
+      "neighborhood": "Downtown",
+      "degree": 1
+    },
+    {
       "id": "pop-00503",
       "label": "Rose Delgado",
       "group": "Fruitvale",
@@ -1889,7 +1903,7 @@
       "label": "Warren Ashford",
       "group": "Rockridge",
       "neighborhood": "Rockridge",
-      "degree": 3
+      "degree": 6
     },
     {
       "id": "pop-00506",
@@ -1987,14 +2001,14 @@
       "label": "Mike Paulson",
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
-      "degree": 1
+      "degree": 4
     },
     {
       "id": "pop-00528",
       "label": "Deacon Seymour",
       "group": "Lake Merritt",
       "neighborhood": "Lake Merritt",
-      "degree": 1
+      "degree": 2
     },
     {
       "id": "pop-00529",
@@ -3117,10 +3131,24 @@
       "degree": 2
     },
     {
+      "id": "pop-00789",
+      "label": "Elias  Varek",
+      "group": "West Oakland",
+      "neighborhood": "West Oakland",
+      "degree": 2
+    },
+    {
       "id": "pop-00791",
       "label": "Eloise Soria-Dominguez",
       "group": "cross-neighborhood",
       "neighborhood": "cross-neighborhood",
+      "degree": 1
+    },
+    {
+      "id": "pop-00792",
+      "label": "Bobby Chen-Ramirez",
+      "group": "Temescal",
+      "neighborhood": "Temescal",
       "degree": 1
     },
     {
@@ -4384,6 +4412,13 @@
       "degree": 5
     },
     {
+      "id": "pop-01046",
+      "label": "Elliot Abraham",
+      "group": "Jack London",
+      "neighborhood": "Jack London",
+      "degree": 1
+    },
+    {
       "id": "pop-01048",
       "label": "Maya Cordova",
       "group": "Downtown",
@@ -4403,6 +4438,13 @@
       "group": "Fruitvale",
       "neighborhood": "Fruitvale",
       "degree": 3
+    },
+    {
+      "id": "pop-01071",
+      "label": "Claire Ashford",
+      "group": "Piedmont Ave",
+      "neighborhood": "Piedmont Ave",
+      "degree": 1
     }
   ],
   "links": [
@@ -4562,6 +4604,13 @@
     },
     {
       "source": "pop-00018",
+      "target": "pop-00001",
+      "relation": "friendship",
+      "weight": 9,
+      "status": "active"
+    },
+    {
+      "source": "pop-00018",
       "target": "pop-00742",
       "relation": "family",
       "weight": 8.8,
@@ -4579,6 +4628,13 @@
       "target": "pop-00678",
       "relation": "friendship",
       "weight": 6.82,
+      "status": "active"
+    },
+    {
+      "source": "pop-00021",
+      "target": "pop-00136",
+      "relation": "alliance",
+      "weight": 6,
       "status": "active"
     },
     {
@@ -4708,10 +4764,24 @@
       "status": "active"
     },
     {
+      "source": "pop-00041",
+      "target": "pop-00789",
+      "relation": "professional",
+      "weight": 5,
+      "status": "active"
+    },
+    {
       "source": "pop-00042",
       "target": "pop-00211",
       "relation": "friendship",
       "weight": 6.8,
+      "status": "active"
+    },
+    {
+      "source": "pop-00043",
+      "target": "pop-00044",
+      "relation": "professional",
+      "weight": 5,
       "status": "active"
     },
     {
@@ -6248,6 +6318,13 @@
       "status": "active"
     },
     {
+      "source": "pop-00502",
+      "target": "pop-00043",
+      "relation": "alliance",
+      "weight": 6,
+      "status": "active"
+    },
+    {
       "source": "pop-00503",
       "target": "pop-00653",
       "relation": "alliance",
@@ -6280,6 +6357,27 @@
       "target": "pop-00034",
       "relation": "friendship",
       "weight": 4.4,
+      "status": "active"
+    },
+    {
+      "source": "pop-00504",
+      "target": "pop-00037",
+      "relation": "rivalry",
+      "weight": 6,
+      "status": "active"
+    },
+    {
+      "source": "pop-00504",
+      "target": "pop-00792",
+      "relation": "tension",
+      "weight": 4,
+      "status": "active"
+    },
+    {
+      "source": "pop-00504",
+      "target": "pop-01071",
+      "relation": "family",
+      "weight": 7,
       "status": "active"
     },
     {
@@ -6371,6 +6469,20 @@
       "target": "pop-00120",
       "relation": "professional",
       "weight": 4.8,
+      "status": "active"
+    },
+    {
+      "source": "pop-00527",
+      "target": "pop-00528",
+      "relation": "professional",
+      "weight": 6,
+      "status": "active"
+    },
+    {
+      "source": "pop-00527",
+      "target": "pop-01046",
+      "relation": "mentorship",
+      "weight": 8,
       "status": "active"
     },
     {
@@ -7477,6 +7589,13 @@
       "target": "pop-00655",
       "relation": "friendship",
       "weight": 4.23,
+      "status": "active"
+    },
+    {
+      "source": "pop-00789",
+      "target": "pop-00527",
+      "relation": "rivalry",
+      "weight": 6,
       "status": "active"
     },
     {

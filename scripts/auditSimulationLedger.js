@@ -63,6 +63,7 @@ async function main() {
   const roleTypeCitizen = [];
   const birthYearOOB = [];          // out-of-bounds age (negative or > 110)
   const nonCanonNeighborhood = {};
+  const untrimmedName = [];         // leading/trailing whitespace in First/Last/MaidenName
   const narrative = { LifeHistory: 0, TraitProfile: 0, CitizenBio: 0 };
   const postSinceRows = [];         // rows with POPID >= sinceN
 
@@ -120,6 +121,23 @@ async function main() {
       nonCanonNeighborhood[nbhd] = (nonCanonNeighborhood[nbhd] || 0) + 1;
     }
 
+    // Untrimmed name fields. Every consumer composes a display name as
+    // First + ' ' + Last, so a trailing space in First reaches print as a
+    // double space — "Elias  Varek" appeared that way in C101 exchange
+    // transcripts. Name matching all normalizes, so nothing errors and the
+    // defect only ever surfaces in published canon. Found 2026-08-22 on 3 rows
+    // (Varek, Caldera, Carter Jr.) while verifying the canon bond mint.
+    for (const f of ['First', 'Last', 'MaidenName']) {
+      const idx = c(f);
+      if (idx < 0) continue;
+      const raw = row[idx];
+      if (raw == null) continue;
+      const s = String(raw);
+      if (s !== '' && s !== s.trim()) {
+        untrimmedName.push({ popid: popidRaw, field: f, value: s, name: `${first} ${last}`.trim() });
+      }
+    }
+
     if (String(row[c('LifeHistory')] || '').trim()) narrative.LifeHistory++;
     if (String(row[c('TraitProfile')] || '').trim()) narrative.TraitProfile++;
     if (String(row[c('CitizenBio')] || '').trim()) narrative.CitizenBio++;
@@ -161,6 +179,8 @@ async function main() {
     statusEnum,
     roleTypeCitizenCount: roleTypeCitizen.length,
     roleTypeCitizens: roleTypeCitizen,
+    untrimmedNameCount: untrimmedName.length,
+    untrimmedNames: untrimmedName,
     birthYearOOB,
     nonCanonNeighborhoodCounts: nonCanonNeighborhood,
     narrative,
@@ -189,6 +209,7 @@ async function main() {
   console.log('Drift sentinels:');
   console.log(`  RoleType="Citizen":     ${roleTypeCitizen.length}` + (roleTypeCitizen.length ? ' — ' + roleTypeCitizen.slice(0,5).map(x => `${x.popid} ${x.name}`).join('; ') : ''));
   console.log(`  BirthYear age OOB:      ${birthYearOOB.length}` + (birthYearOOB.length ? ' — ' + birthYearOOB.slice(0,5).map(x => `${x.popid} age=${x.age}`).join('; ') : ''));
+  console.log(`  Untrimmed name field:   ${untrimmedName.length}` + (untrimmedName.length ? ' — ' + untrimmedName.slice(0,5).map(x => `${x.popid} ${x.field}=${JSON.stringify(x.value)}`).join('; ') : ''));
   const nonCanonTotal = Object.values(nonCanonNeighborhood).reduce((a,b)=>a+b,0);
   console.log(`  Non-canon neighborhood: ${nonCanonTotal} citizens across ${Object.keys(nonCanonNeighborhood).length} variants`);
   if (nonCanonTotal) {

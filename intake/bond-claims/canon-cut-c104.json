@@ -1,0 +1,124 @@
+{
+  "claimSet": "canon-cut-c104",
+  "cycle": 104,
+  "producedBy": "engine-sheet, transcribed from docs/plans/2026-08-21-published-canon-bond-mint.md §3 and §4",
+  "sources": [
+    "NotebookLM canon cut (source-grounded, citation-indexed)",
+    "Supermemory cross-cut: bay-tribune / wd-citizens / cp-POP-##### / mags",
+    "codex + kimi preliminary bond passes",
+    "Bay Tribune Edition 79 (Paulson/Seymour only — cron-sourced, not canon-cut-sourced)"
+  ],
+  "note": "expectedPopA/expectedPopB are ADVISORY ONLY. The intake resolves POPIDs by name against the live Simulation_Ledger and flags any mismatch loudly; it never uses a supplied id. See plan §7.4.",
+  "claims": [
+    {
+      "a": "Benji Dillon",
+      "b": "Vinnie Keane",
+      "expectedPopA": "POP-00018",
+      "expectedPopB": "POP-00001",
+      "bondType": "friendship",
+      "intensity": 9,
+      "domainTag": "SPORTS",
+      "nature": "One Last Run: Dillon signed a one-year deal so his final season would run alongside Keane's. A covenant, not a co-location.",
+      "evidence": "NotebookLM canon cut, tier II locker-room bonds; plan §3 Confirmed"
+    },
+    {
+      "a": "Mike Paulson",
+      "b": "Elliot Abraham",
+      "expectedPopA": "POP-00527",
+      "bondType": "mentorship",
+      "intensity": 8,
+      "domainTag": "SPORTS",
+      "nature": "Master and apprentice. Paulson recruited his former Chicago lieutenant and runs the Oaks front office through him; calls him his young Jedi in public.",
+      "evidence": "NotebookLM canon cut, tier II front-office bonds; plan §3 Confirmed"
+    },
+    {
+      "a": "Keisha Ramos",
+      "b": "Elias Varek",
+      "expectedPopB": "POP-00789",
+      "bondType": "professional",
+      "intensity": 5,
+      "domainTag": "INFRASTRUCTURE",
+      "nature": "A four-part recusal protocol bars Varek's firms from the Phase II build. Forced legal separation, not a rivalry: the bond exists so the two cannot transact.",
+      "evidence": "NotebookLM canon cut, tier III; plan §3 Corrected — codex had this as rivalry"
+    },
+    {
+      "a": "Mike Paulson",
+      "b": "Deacon Seymour",
+      "expectedPopA": "POP-00527",
+      "expectedPopB": "POP-00528",
+      "bondType": "professional",
+      "intensity": 6,
+      "domainTag": "SPORTS",
+      "nature": "A first-year manager carrying the strain of never having had a sustained in-person stretch with the general manager who hired him.",
+      "evidence": "Edition 79 plus the live cron layer. Cron-sourced, not canon-cut-sourced; plan §3 Not in the canon cut"
+    },
+    {
+      "a": "Elias Varek",
+      "b": "Mike Paulson",
+      "expectedPopA": "POP-00789",
+      "expectedPopB": "POP-00527",
+      "bondType": "rivalry",
+      "intensity": 6,
+      "domainTag": "BUSINESS",
+      "nature": "Calculated and one-sided. Varek uses Paulson's loud public sports profile as a heat shield to absorb civic fury while he takes municipal zoning and data contracts quietly.",
+      "evidence": "NotebookLM canon cut; exposed in print by Jax Caldera; plan §3 New — missed by both preliminary passes"
+    },
+    {
+      "a": "Warren Ashford",
+      "b": "Claire Ashford",
+      "expectedPopA": "POP-00504",
+      "expectedPopB": "POP-01071",
+      "bondType": "family",
+      "intensity": 7,
+      "domainTag": "COMMUNITY",
+      "nature": "Uncle and niece. He runs on fiscal discipline and votes down the programmes she staffs unpaid: the grief circles and the food pantry at the Piedmont Avenue congregation.",
+      "evidence": "Ruled canon; degree ruled uncle/niece against the ledger (NumChildren 0, 42-year gap); plan §4"
+    },
+    {
+      "a": "Janae Rivers",
+      "b": "Elliott Crane",
+      "bondType": "professional",
+      "intensity": 5,
+      "domainTag": "CIVIC",
+      "nature": "A forced bipartisan working group under a hard deadline to define what strain means citywide. Neither chose the other.",
+      "evidence": "NotebookLM canon cut, tier III; plan §3 New"
+    },
+    {
+      "a": "Leonard Tran",
+      "b": "Janae Rivers",
+      "bondType": "alliance",
+      "intensity": 6,
+      "domainTag": "CIVIC",
+      "nature": "Tactical. They combined renewal and expansion into a single OARI vote rather than let either fall on its own.",
+      "evidence": "NotebookLM canon cut, tier III; plan §3 New"
+    },
+    {
+      "a": "Warren Ashford",
+      "b": "Brenda Okoro",
+      "bondType": "rivalry",
+      "intensity": 6,
+      "domainTag": "CIVIC",
+      "nature": "Hostile oversight. His adversarial audit of the 83 backlogged households is aimed at her office, and both of them know it.",
+      "evidence": "NotebookLM canon cut, tier III; plan §3 New"
+    },
+    {
+      "a": "Warren Ashford",
+      "b": "Bobby Chen-Ramirez",
+      "bondType": "tension",
+      "intensity": 4,
+      "domainTag": "HEALTH",
+      "nature": "A structural audit of the Temescal double-shift excavation, with the project director on the receiving end of it.",
+      "evidence": "NotebookLM canon cut, tier III; plan §3 New"
+    },
+    {
+      "a": "Darrin Davis",
+      "b": "Rafael Montez",
+      "expectedPopA": "POP-00021",
+      "bondType": "alliance",
+      "intensity": 6,
+      "domainTag": "SAFETY",
+      "nature": "Ride-alongs and youth clinics, and quiet joint advocacy for an alternative response to mental-health calls.",
+      "evidence": "NotebookLM canon cut, tier IV; plan §3 New"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-RELATIONSHIP_BONDS live export 2026-08-22T05:00:31.328Z
+RELATIONSHIP_BONDS live export 2026-08-22T06:38:09.942Z
 BondId	CitizenA	CitizenB	BondType	Intensity	Status	Origin	DomainTag	Neighborhood	CycleCreated	LastUpdate	Notes	Holiday	HolidayPriority	FirstFriday	CreationDay	SportsSeason
 BOND-9CF02D7E	POP-00001	POP-00002	family	8	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
 BOND-39BB228F	POP-00004	POP-01029	family	10	active	household		Fruitvale	102	104	seeded	none	none	FALSE	FALSE	off-season
@@ -586,3 +586,14 @@ ihcgmvrd	POP-00007	POP-00977	neighbor	3	active	neighborhood		Chinatown	104	104	N
 ub4u2kif	POP-00007	POP-00142	neighbor	3	active	neighborhood		Chinatown	104	104	Neighbors in Chinatown.	NewYearsEve	major	FALSE	FALSE	off-season
 86ej5o5l	POP-00007	POP-00776	professional	3	active	career_overlap	MED		104	104	Colleagues in MED sphere.	NewYearsEve	major	FALSE	FALSE	off-season
 y48g5cn7	POP-00007	POP-00677	neighbor	3	active	neighborhood		Chinatown	104	104	Neighbors in Chinatown.	NewYearsEve	major	FALSE	FALSE	off-season
+5eui9fl9	POP-00018	POP-00001	friendship	9	active	canon	SPORTS		104	104	One Last Run: Dillon signed a one-year deal so his final season would run alongside Keane's. A covenant, not a co-location. [canon mint C104]	none	none	FALSE	FALSE	off-season
+mmnm8hlr	POP-00527	POP-01046	mentorship	8	active	canon	SPORTS		104	104	Master and apprentice. Paulson recruited his former Chicago lieutenant and runs the Oaks front office through him; calls him his young Jedi in public. [canon mint C104]	none	none	FALSE	FALSE	off-season
+uooytqbq	POP-00041	POP-00789	professional	5	active	canon	INFRASTRUCTURE		104	104	A four-part recusal protocol bars Varek's firms from the Phase II build. Forced legal separation, not a rivalry: the bond exists so the two cannot transact. [canon mint C104]	none	none	FALSE	FALSE	off-season
+i2ghph9p	POP-00527	POP-00528	professional	6	active	canon	SPORTS		104	104	A first-year manager carrying the strain of never having had a sustained in-person stretch with the general manager who hired him. [canon mint C104]	none	none	FALSE	FALSE	off-season
+bo34qczy	POP-00789	POP-00527	rivalry	6	active	canon	BUSINESS		104	104	Calculated and one-sided. Varek uses Paulson's loud public sports profile as a heat shield to absorb civic fury while he takes municipal zoning and data contracts quietly. [canon mint C104]	none	none	FALSE	FALSE	off-season
+y3dhgt4j	POP-00504	POP-01071	family	7	active	canon	COMMUNITY		104	104	Uncle and niece. He runs on fiscal discipline and votes down the programmes she staffs unpaid: the grief circles and the food pantry at the Piedmont Avenue congregation. [canon mint C104]	none	none	FALSE	FALSE	off-season
+d68a0oi8	POP-00043	POP-00044	professional	5	active	canon	CIVIC		104	104	A forced bipartisan working group under a hard deadline to define what strain means citywide. Neither chose the other. [canon mint C104]	none	none	FALSE	FALSE	off-season
+oij8ctk6	POP-00502	POP-00043	alliance	6	active	canon	CIVIC		104	104	Tactical. They combined renewal and expansion into a single OARI vote rather than let either fall on its own. [canon mint C104]	none	none	FALSE	FALSE	off-season
+h9l44k4t	POP-00504	POP-00037	rivalry	6	active	canon	CIVIC		104	104	Hostile oversight. His adversarial audit of the 83 backlogged households is aimed at her office, and both of them know it. [canon mint C104]	none	none	FALSE	FALSE	off-season
+1dplo50v	POP-00504	POP-00792	tension	4	active	canon	HEALTH		104	104	A structural audit of the Temescal double-shift excavation, with the project director on the receiving end of it. [canon mint C104]	none	none	FALSE	FALSE	off-season
+7beb9lcg	POP-00021	POP-00136	alliance	6	active	canon	SAFETY		104	104	Ride-alongs and youth clinics, and quiet joint advocacy for an alternative response to mental-health calls. [canon mint C104]	none	none	FALSE	FALSE	off-season

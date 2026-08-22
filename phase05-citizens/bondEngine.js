@@ -108,7 +108,13 @@ var BOND_ORIGINS = {
   SPORTS_SEASON: 'sports_season',
   FIRST_FRIDAY: 'first_friday',
   CREATION_DAY: 'creation_day',
-  PARADE_PROXIMITY: 'parade_proximity'
+  PARADE_PROXIMITY: 'parade_proximity',
+  // Bonds minted from published canon by scripts/mintCanonBonds.js — the return
+  // edge in ENGINE_CRON_LOOP. Registered here in the same commit as the first
+  // mint because engine.59 is the scar for sheet literals with no enum key:
+  // friendship/family sat in the sheet for 100+ cycles without one, so the
+  // romance flip compared bondType === undefined and could never fire.
+  CANON: 'canon'
 };
 
 var BOND_STATUS = {

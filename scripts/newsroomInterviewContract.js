@@ -41,6 +41,40 @@ function parseJsonObject(value) {
   return JSON.parse(text.slice(start, end + 1));
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// extractSpoken — what the citizen actually SAID, out of what the model returned.
+//
+// In evidence mode a citizen is told to "Return ONLY the JSON requested by
+// packet.output", so the generation is a CITIZEN_INTERVIEW envelope:
+//   {"answer":"quote","quote":"...","fact_ids":[...],"basis":"..."}
+// The article path already unwraps that (livedExperiencePacket). The RECORD path in
+// citizenVoice.js did not — so the envelope itself landed in the citizen's page doc,
+// in the affect classifier, and in Reflection_Intake.ReflectionExcerpt. Measured
+// 2026-08-22: 177 of 401 PRESS rows across C103–C104 hold a fenced JSON blob instead
+// of a thought. Page docs are what a citizen reads back at their next wake, so they
+// were recalling JSON as their own memories.
+//
+// Gated on SHAPE, not on the evidenceBound flag. The flag is an intention; the shape
+// is what arrived, and the corpus shows envelopes appearing without the flag being a
+// reliable discriminator. Anything that does not parse to an object carrying `answer`
+// passes through verbatim — the plain-prose wake path must not regress.
+//
+// Returns { spoken, abstain, reason? }. On abstain the caller records NOTHING: an
+// abstention is not an inner-life moment, and an empty page doc is new noise.
+function extractSpoken(value) {
+  const raw = String(value == null ? '' : value);
+  let obj = null;
+  try { obj = parseJsonObject(raw); } catch (e) { obj = null; }
+  if (!obj || typeof obj.answer === 'undefined') return { spoken: raw, abstain: false };
+  if (String(obj.answer).toLowerCase() === 'abstain') {
+    return { spoken: '', abstain: true, reason: String(obj.abstain_reason || 'unspecified') };
+  }
+  const quote = typeof obj.quote === 'string' ? obj.quote.trim() : '';
+  // An envelope claiming a quote but carrying none is an abstention in practice.
+  if (!quote) return { spoken: '', abstain: true, reason: 'empty_quote' };
+  return { spoken: quote, abstain: false };
+}
+
 function prepareInterviewPacket(packet) {
   if (!packet || packet.v !== 'LEP/2' || packet.wake !== 'W2') {
     throw new Error('CITIZEN_INTERVIEW/1 requires an LEP/2 W2 Packet');
@@ -171,6 +205,12 @@ function citizenEvidenceGuard(livedContextAllowed) {
 module.exports = {
   CONTRACT,
   LEGACY_LATTICE,
+  // Exported S389: citizenVoice needs the same fence-strip + object-extract when it
+  // records an evidence-mode answer as a citizen's own reflection. Six ad-hoc fence
+  // strippers already exist in scripts/; the unwrap belongs in the file that DEFINES
+  // the schema being unwrapped, not a seventh copy.
+  parseJsonObject,
+  extractSpoken,
   prepareInterviewPacket,
   isInterviewPacket,
   hasLivedEvidence,

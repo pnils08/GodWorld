@@ -165,8 +165,15 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     await generate(system, user, maxTokens, evidenceBound ? 0.25 : 0.85, model);
   if (!text) { const e = new Error('empty generation'); e.code = 3; throw e; }
 
+  // S389 — unwrap the evidence-mode envelope BEFORE anything records it. `text` stays
+  // the return value: parseBatchQuotes/the desk contract consume it and that seam is
+  // unchanged. Only the citizen's own record uses `spoken`.
+  const said = interviewContract.extractSpoken(text);
+
   let recorded = false;
-  if (record) {
+  if (record && said.abstain) {
+    console.error(`[record] abstain (${said.reason}) — no page doc, no classify, no intake row`);
+  } else if (record) {
     // Wake write block (citizen-wake.js steps 1–4 pattern), daypart='PRESS'. Page + gated
     // intake ONLY — no dials, no LifeHistory, no markRecalled, no rotation state.
     const tensionState = loadTensionState();
@@ -175,12 +182,12 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     // 1) classify first so affect rides the page doc metadata (guarded — a classifier
     //    failure must never block the page append).
     let cls = {};
-    try { cls = await classifier.classifyTripleReflection_(text, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
+    try { cls = await classifier.classifyTripleReflection_(said.spoken, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
 
     // 2) narrative store: page pointer + reflection doc.
     const ptr = await page.ensurePagePointer_(c.popId);
     if (ptr.error) throw new Error('ensurePagePointer_: ' + ptr.error);
-    const appended = await page.appendReflection_(c.popId, text, {
+    const appended = await page.appendReflection_(c.popId, said.spoken, {
       cycle, daypart: 'PRESS',
       extra: { affect: cls.affect || null, event: cls.event || null, ask: String(ask).slice(0, 120) },
     });
@@ -210,7 +217,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     // 4) gated intake row — the cycle drain reads this; dials move there, not here.
     if (cls.event || cls.affect) {
       await sheets.appendRows('Reflection_Intake', [[
-        new Date().toISOString(), c.popId, cycle, 'PRESS', cls.event || '', text.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
+        new Date().toISOString(), c.popId, cycle, 'PRESS', cls.event || '', said.spoken.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
       ]]);
       console.error(`[record] Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}] (applied=no, gated)`);
     } else {

@@ -1,7 +1,7 @@
 ---
 title: NotebookLM Bridge Deploy Plan
 created: 2026-07-10
-updated: 2026-08-20
+updated: 2026-08-22
 type: plan
 tags: [media, infrastructure, active]
 sources:
@@ -327,7 +327,7 @@ shadow runs should record the three-valued disposition from the first run so the
 - **Verify:** five manifests carry reproducible profile decisions and the live
   audio configuration remains unchanged.
 - **Status:** [~] observer built and locally validated 2026-08-20 (codex);
-  natural scheduled evidence 0/5
+  natural scheduled evidence 1/5
 
 ### Task 22: Gated branch comparison
 
@@ -400,7 +400,7 @@ must come from a distinct scheduled manifest while live audio remains
 | Sample | Manifest | Proposed profile / reasons | passed / Rhea-flagged / never-gated | Existing audio unchanged | Result |
 |---|---|---|---|---|---|
 | Preflight | read-only C104 fixture/current-artifact probe; no NotebookLM run | `CYCLE_OPEN`; threshold unset plus current wake and world-signal reasons | 2 / 4 / 0 | yes; no audio invoked | All 6 old Packet quotes and both pre-S344 Rhea-passed bodies fail the current safe-to-quote filters; 0 W2 quotes and 0 W3 bodies would enter a route-aware source. Does not count toward 5. |
-| 1 | pending natural 08:00 manifest | pending | pending | pending | pending |
+| 1 | `output/notebooklm/daily/c104/24289b46c4c0/manifest.json` — 2026-08-21 08:00 CDT | `CYCLE_OPEN`; threshold unset, W1 active 10, Rhea flagged 4, plus civic/high-severity/high-signal/shock | 2 / 4 / 0 | yes — configured and invoked as `deep_dive/default`; written brief, audio, Drive, and Discord completed | PASS as a shadow sample. Pulse: 10 angles, 6 asks, 0 safe Packet quotes, 4 pending. The bounded source ID changed while the direction-guide ID was reused, proving at least one-source growth without deletion. Audit seam: unchanged legacy collection supplied 3 staged bodies against 2 current passed dispositions and included Tribune-as-actor text; production route/content activation remains blocked. |
 | 2 | pending natural 08:00 manifest | pending | pending | pending | pending |
 | 3 | pending natural 08:00 manifest | pending | pending | pending | pending |
 | 4 | pending natural 08:00 manifest | pending | pending | pending | pending |
@@ -464,3 +464,7 @@ failure recovery: [[../reference/notebookLM-CLI]].
   admission, Packet-backed quotes, prior-filing labeling, route-aware local
   bounded source, and manifest observer. Task 21 observer is ready; natural
   scheduled evidence remains 0/5, and Tasks 22–23 remain live-gated.
+- 2026-08-22 (codex) — Recorded Task 21 natural sample 1/5 from the 2026-08-21
+  manifest: reproducible `CYCLE_OPEN` at 2/4/0 dispositions, unchanged
+  `deep_dive/default` delivery, bounded-source growth, and the legacy-source
+  admission seam that remains outside shadow activation.

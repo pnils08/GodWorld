@@ -1724,27 +1724,55 @@ async function runAngle(assign) {
       (PACKET_ACTIVE ? 'for a typed reporter plan...' : 'what smells off...'));
     const angleModel = ANGLE_MODEL_OVERRIDE ||
       (ACTIVE_WAKE_PACKAGE ? wakePackages.routeFor(ACTIVE_WAKE_PACKAGE, 'angle').model : null);
-    const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-      '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json',
-      ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
-      ...(angleModel ? ['--model=' + angleModel] : []),
-      '--max-tokens=' + (PACKET_ACTIVE ? '700' : '320')],
-      { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
-    const outTrim = out.trim();
-    // tolerate dotenv banner lines before the JSON — line-anchored: the rotating
-    // dotenv tip sometimes contains "{ debug: true }" mid-line, so first-'{' slicing
-    // randomly broke here ("Expected property name or '}' at position 2").
-    const jsonStart = outTrim.search(/^\{/m);
-    if (jsonStart === -1) throw new Error('citizenVoice --json returned no JSON envelope: ' + outTrim.slice(0, 200));
-    const r = JSON.parse(outTrim.slice(jsonStart));
-    const plan = PACKET_ACTIVE ? livedPacket.validateAngleOutput(r.text, inputPacket) : null;
-    angleRead = { name: r.name, popid: r.popId,
-      text: PACKET_ACTIVE ? livedPacket.reporterChaseText(plan) : r.text,
-      ...(plan ? { plan } : {}) };
-    if (PACKET_ACTIVE && livedPacket.chaseIsJsonShaped(angleRead.text)) {
-      throw new Error('W1 chase is JSON-shaped — refusing to write story §2');
+    // One resample on a bad sample (S388). Before this the block was straight-line:
+    // a single unlucky generation threw here and killed the whole wake, because
+    // report and write both hard-depend on the angle artifact. 2026-08-21 is the
+    // proof — Hal Richmond failed W1 once and the day recorded three red rows off
+    // one bad draw. Deliberately a PLAIN resample on the same prompt: feeding the
+    // validation error back to the model would teach it to keyword-stuff whatever
+    // the checker greps for, which is precisely the drift the checker exists to
+    // catch. A resample fixes an unlucky draw; it cannot fix a reporter genuinely
+    // off-assignment, and that one still fails closed on the second attempt.
+    const ANGLE_ATTEMPTS = 2;
+    let angleErr = null;
+    for (let attempt = 1; attempt <= ANGLE_ATTEMPTS; attempt++) {
+      try {
+        const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
+          '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json',
+          ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
+          ...(angleModel ? ['--model=' + angleModel] : []),
+          '--max-tokens=' + (PACKET_ACTIVE ? '700' : '320')],
+          { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
+        const outTrim = out.trim();
+        // tolerate dotenv banner lines before the JSON — line-anchored: the rotating
+        // dotenv tip sometimes contains "{ debug: true }" mid-line, so first-'{' slicing
+        // randomly broke here ("Expected property name or '}' at position 2").
+        const jsonStart = outTrim.search(/^\{/m);
+        if (jsonStart === -1) throw new Error('citizenVoice --json returned no JSON envelope: ' + outTrim.slice(0, 200));
+        const r = JSON.parse(outTrim.slice(jsonStart));
+        const plan = PACKET_ACTIVE ? livedPacket.validateAngleOutput(r.text, inputPacket) : null;
+        angleRead = { name: r.name, popid: r.popId,
+          text: PACKET_ACTIVE ? livedPacket.reporterChaseText(plan) : r.text,
+          ...(plan ? { plan } : {}) };
+        if (PACKET_ACTIVE && livedPacket.chaseIsJsonShaped(angleRead.text)) {
+          throw new Error('W1 chase is JSON-shaped — refusing to write story §2');
+        }
+        log('angle read: "' + String(r.text).replace(/\s+/g, ' ').slice(0, 140) + '..."' +
+          (attempt > 1 ? ' [resample ' + attempt + '/' + ANGLE_ATTEMPTS + ']' : ''));
+        angleErr = null;
+        break;
+      } catch (e) {
+        angleErr = e;
+        angleRead = null;
+        if (attempt < ANGLE_ATTEMPTS) {
+          log('angle attempt ' + attempt + '/' + ANGLE_ATTEMPTS + ' failed: ' +
+            String(e && e.message || e).replace(/\s+/g, ' ').slice(0, 160) + ' — resampling');
+        }
+      }
     }
-    log('angle read: "' + String(r.text).replace(/\s+/g, ' ').slice(0, 140) + '..."');
+    // Still fails closed: the last error propagates unchanged, so a real
+    // off-assignment plan lands in flagged/ exactly as it did before.
+    if (angleErr) throw angleErr;
   }
   // Task 2.5.3 §2 — canon research through the 2.5.5 tool loop, validated
   // deterministically. Non-fatal: a research failure never kills the wake.

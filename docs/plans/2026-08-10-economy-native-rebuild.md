@@ -152,3 +152,4 @@ D2 proof before D1 activation; refreshed audit figures.
 - 2026-08-10 — Written S364 from the live-session audit; awaiting S362 vet.
 - 2026-08-10 — Restored after repo deletion (original uncommitted copy lost).
 - 2026-08-18 — S380: codex vet verdict transcribed from terminal scrollback (engine-sheet); plan needs revision before engine.104 moves.
+- 2026-08-22 — codex re-ran the S362 vet: still NOT safe for in-progress, same blocker classes (eventless citizen mutations, runtime sheet create/delete, safePhaseCall_ swallows fatal errors, D1 before D2, no event idempotency, stale C103 audit). engine.104 stays `ready`.

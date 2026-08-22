@@ -127,6 +127,39 @@ day. There is simply nowhere to write them.
 
 ---
 
+## 4.5 The world runs OFF the engine, not IN it (Mike-direct, 2026-08-21)
+
+Stated as the ruling on the bond-schema gaps, and it generalises past them.
+
+The engine is the **substrate the world runs on**. It is not the container the
+world lives in. Those are different jobs, and conflating them is what produces
+the reflex to grow a column every time canon records something the ledger cannot
+hold.
+
+Applied to the three gaps in the canon→bond mint
+([[plans/2026-08-21-published-canon-bond-mint]] §2):
+
+- **Citizen ↔ institution** bonds, **3+ party** bonds, and the **nature** of a
+  bond (a legally-forced recusal, a bipartisan marriage under deadline) are the
+  world. They do **not** need to become engine columns to be real.
+- The engine carries what it needs to **drive citizen life** cycle by cycle —
+  the cheap, obvious, causal layer. Everything richer is legitimately held by
+  canon and the crons, which is where it already lives and already works.
+- So the default answer to "should the schema grow to hold this?" is **no**.
+  Grow the engine only when the engine itself must *act* on the thing. If the
+  crons are the only consumer, the crons are the right home.
+
+**Test to apply:** does the engine need this to compute the next cycle? If yes,
+it belongs in a ledger. If it only needs to be *known* — by a cron, a desk, a
+reader — it belongs in the world, and the engine only needs a pointer to it, if
+that.
+
+This is why the proximity lattice is not embarrassing and why 379 married
+citizens with no SpouseId is correct (see auto-memory
+`feedback_empty-relational-field-is-design-not-defect`). The engine is not
+trying to be a complete model of Oakland. It is trying to be the cheapest thing
+that keeps Oakland moving.
+
 ## 5. What this implies for any build
 
 1. **Give the engine the obvious and the free.** Never spend a model call on

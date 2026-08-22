@@ -66,9 +66,18 @@ because the two must *not* interact. Rivers↔Crane is a **forced bipartisan
 marriage** under a Cycle-102 deadline. Collapsing either into `rivalry` throws
 away the thing that makes it a story.
 
-**These are design calls, not mechanism.** Whether the schema grows a party-type
-column, whether institutional sentiment lives in a different tab, and whether
-`BondType` gains a nature/modality field are the builder's to rule on.
+**RULED 2026-08-21 (builder): the world runs OFF the engine, not IN it.**
+Gaps A, B and C are **not** schema growth. Citizen↔institution bonds, 3+ party
+bonds and bond *nature* are the world; they do not need engine columns to be
+real. The engine carries only what it must to drive the next cycle — the
+cheap causal layer. Everything richer stays with canon and the crons, where it
+already lives and already works.
+
+So the mint does **not** widen `Relationship_Bonds`. It writes only the rows
+the engine needs to *act* on, and leaves institutional and multi-party bonds
+in the canon/cron layer that already holds them. See
+[[../ENGINE_CRON_LOOP]] §4.5 for the test: *does the engine need this to
+compute the next cycle?* If it only needs to be known, it is not a column.
 
 ## 3. What canon confirms, corrects, and adds
 
@@ -117,8 +126,12 @@ structure, fully documented in canon, and neither hand-pass found it.
 relation on surname alone and never confirms it. If real, her hands-on
 synagogue labour is a deliberate counterweight to his adversarial fiscal
 votes — a genuine family-across-the-aisle storyline. If coincidence, minting it
-writes a false family edge into the ledger. **Do not infer.** Same class as the
-open AJ Dybantsa gender question.
+writes a false family edge into the ledger. **Do not infer.** Awaiting an explicit builder ruling — enthusiasm for the
+storyline is not the same as a canon fact, and a false family edge is worse
+than a missing one.
+
+*(The companion AJ Dybantsa question is CLOSED, builder-direct 2026-08-21: male.
+POP-01024 already carries `Gender='male'` — confirmed, no write required.)*
 
 ## 5. Sequence
 

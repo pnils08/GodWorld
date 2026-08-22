@@ -81,6 +81,7 @@ Point `seededRng_` at that arithmetic. One function body, no new file, no new de
 ## 8. Related
 
 - Bond mint plan (blocked on this): `docs/plans/2026-08-21-published-canon-bond-mint.md`
+- **Architecture this exposed: [[../ENGINE_CRON_LOOP]]** — the engine/cron loop and the missing canon→engine return edge. The BondId collisions were the symptom that led there.
 - Engine rules on `ctx.rng` / no-`Math.random`: `.claude/rules/engine.md` §Engine rules
 - `[[../engine/ROLLOUT_PLAN]]` row `engine.128`
 

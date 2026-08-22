@@ -6,6 +6,7 @@ type: doctrine
 tags: [doctrine, engine, canon, always-consult]
 pointers:
   - "[[plans/2026-07-13-family-household-loop-build]] — the build where these rules were forged"
+  - "[[ENGINE_CRON_LOOP]] — the engine/cron division of labor + the return edge; consult alongside this"
   - "[[index]] — registered"
 ---
 

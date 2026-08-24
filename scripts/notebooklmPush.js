@@ -279,6 +279,30 @@ async function sendDiscordText(content) {
   }
 }
 
+// Post a file to the configured Discord webhook (multipart). Same
+// non-blocking contract as sendDiscordText.
+async function sendDiscordFile(filePath, content) {
+  const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+  if (!webhookUrl) {
+    console.log('NOTEBOOKLM DISCORD DROP SKIPPED (non-blocking): DISCORD_WEBHOOK_URL not set');
+    return false;
+  }
+  try {
+    const fd = new FormData();
+    fd.append('payload_json', JSON.stringify({ content }));
+    fd.append('files[0]',
+      new Blob([fs.readFileSync(filePath)], { type: 'text/markdown' }),
+      path.basename(filePath));
+    const res = await fetch(webhookUrl, { method: 'POST', body: fd });
+    if (!res.ok) throw new Error('webhook HTTP ' + res.status);
+    console.log('Discord file drop done: ' + path.basename(filePath));
+    return true;
+  } catch (e) {
+    console.log('NOTEBOOKLM DISCORD DROP SKIPPED (non-blocking): ' + e.message);
+    return false;
+  }
+}
+
 async function deliver(audioPath, cycle, config, opts) {
   const options = opts || {};
   // Drive drop
@@ -342,4 +366,5 @@ module.exports = {
   sleep,
   deliver,
   sendDiscordText,
+  sendDiscordFile,
 };

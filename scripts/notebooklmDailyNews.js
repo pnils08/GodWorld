@@ -619,7 +619,11 @@ function archivePrompt(cycle, reports) {
 
 function dailyPrompt(cycle) {
   return 'Prepare The Bay Tribune daily news for Oakland for Cycle ' + cycle +
-    ', including the connections that matter and what the newsroom should watch next.';
+    ', including the connections that matter and what the newsroom should watch next.' +
+    ' Then add a section titled "The gate desk": for every FLAGGED draft in the sources,' +
+    ' say what the draft reported, what the gate found, and whether the finding holds up' +
+    ' against the other sources — the editor reviews these decisions and needs to hear' +
+    ' every one, so cover them all; never skip a flagged draft.';
 }
 
 function dailyAudioFocus(hasDirectionGuide) {

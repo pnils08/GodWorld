@@ -28,6 +28,7 @@ const {
   sleep,
   deliver,
   sendDiscordText,
+  sendDiscordFile,
 } = require('./notebooklmPush');
 const dailyRouter = require('./notebooklmDailyRouter');
 const articleContamination = require('./articleContamination');
@@ -626,6 +627,47 @@ function dailyPrompt(cycle) {
     ' every one, so cover them all; never skip a flagged draft.';
 }
 
+// The editor's daily "report on the data" (Mike-direct 2026-08-23): a
+// NotebookLM report artifact over the same bounded source, covering what
+// filed, what published, and every newsroom gate decision with a
+// holds-up-or-not verdict against the other sources. NOT CANON, same as
+// the brief.
+function opsReportPrompt(cycle) {
+  return 'Bay Tribune ops report for the editor, Cycle ' + cycle + ': what the newsroom filed,' +
+    ' what published, and every gate decision. For each FLAGGED draft in the sources, say what' +
+    ' it reported, what the gate found, and whether the finding holds up against the other' +
+    ' sources. Cover every flagged draft — never skip one. Structured sections, plain prose.';
+}
+
+async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manifestPath) {
+  const create = nlm([
+    'report', 'create', config.newsroomNotebookId,
+    '-f', 'Create Your Own',
+    '--prompt', opsReportPrompt(cycle),
+    '--source-ids', sourceIds.join(','),
+    '--confirm',
+  ], { timeoutMs: 240 * 1000 });
+  if (!create.ok) throw new Error('ops report create failed: ' + create.out.slice(0, 300));
+  const artifactId = parseCreatedArtifactId(create.out);
+  manifest.opsReportArtifactId = artifactId;
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+  const reportPath = path.join(runDir, 'ops-report-c' + cycle + '.md');
+  for (let i = 0; i < AUDIO_RETRY_MAX; i++) {
+    await sleep(AUDIO_RETRY_INTERVAL_MS);
+    const downloaded = nlm(
+      ['download', 'report', config.newsroomNotebookId, '--id', artifactId, '--output', reportPath, '--no-progress'],
+      { timeoutMs: 120 * 1000 }
+    );
+    if (downloaded.ok && fs.existsSync(reportPath) && fs.statSync(reportPath).size > 0) {
+      manifest.opsReportPath = path.relative(ROOT, reportPath);
+      fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+      return reportPath;
+    }
+  }
+  throw new Error('ops report did not render within ' +
+    (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' minutes');
+}
+
 function dailyAudioFocus(hasDirectionGuide) {
   if (!hasDirectionGuide) return DAILY_NEWS_IDENTITY;
   return DAILY_NEWS_IDENTITY +
@@ -946,6 +988,16 @@ async function run(argv) {
   ].join('\n'));
   console.log('Daily written brief: ' + path.relative(ROOT, briefPath));
 
+  // Ops report — non-blocking: a quota or render failure must not cost the
+  // audio brief.
+  let opsReportPath = null;
+  try {
+    opsReportPath = await createOpsReport(config, cycle, sourceIds, runDir, manifest, manifestPath);
+    console.log('Daily ops report: ' + path.relative(ROOT, opsReportPath));
+  } catch (e) {
+    console.log('DAILY OPS REPORT SKIPPED (non-blocking): ' + e.message);
+  }
+
   let audioPath = null;
   if (args.audio) {
     // Audio-direction guide rides ONLY the audio create — the written brief
@@ -1009,6 +1061,10 @@ async function run(argv) {
         '🗞️ **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**\nWritten brief generated; audio disabled.\n`' +
         path.relative(ROOT, briefPath) + '`'
       );
+    }
+    if (opsReportPath) {
+      await sendDiscordFile(opsReportPath,
+        '📋 **Bay Tribune ops report — Cycle ' + cycle + '** (gate desk: every filing and every gate decision)');
     }
   }
 

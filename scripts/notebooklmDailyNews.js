@@ -130,6 +130,11 @@ function collectNewsroomArtifacts(cycle, hours, nowMs) {
   const specs = [
     { dir: path.join(COMPARE_DIR, 'staged'), re: /\.staged(?:-\d{3,4})?\.md$/, classification: 'STAGED' },
     { dir: path.join(COMPARE_DIR, 'samples'), re: /\.sample(?:-\d{3,4})?\.md$/, classification: 'UNGATED_SAMPLE' },
+    // Flagged drafts ride along in full (Mike-direct 2026-08-23: "let it
+    // report on it all — I'll never know the issues if you keep hiding
+    // them"). The brief is a listening surface, never a canon write, so a
+    // gated draft is safe to report on as long as it is labeled as gated.
+    { dir: path.join(COMPARE_DIR, 'flagged'), re: /(?:^|\/)(?!.*\.flags\.json$).*\.md$/, classification: 'FLAGGED' },
   ];
 
   for (const spec of specs) {
@@ -174,10 +179,21 @@ function collectNewsroomArtifacts(cycle, hours, nowMs) {
   }
 
   flagged.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
-  const flaggedStems = new Set(flagged.map((item) => artifactStem(item.relativePath)));
-  const eligible = records
-    .filter((record) => !flaggedStems.has(artifactStem(record.relativePath)))
-    .sort((a, b) => a.relativePath.localeCompare(b.relativePath));
+  // Attach each flagged draft's gate findings so the brief can report the
+  // decision, not just the absence (2026-08-23: flagged used to be a silent
+  // exclusion list — a heavy gate week just read as a slow news day).
+  for (const record of records) {
+    if (record.classification !== 'FLAGGED') continue;
+    const stem = path.basename(record.file).replace(/(?:-\d{3,4})?\.md$/, '');
+    const flagFile = path.join(path.dirname(record.file), stem + '.flags.json');
+    if (!fs.existsSync(flagFile)) continue;
+    try {
+      const data = readJson(flagFile);
+      record.flags = Array.isArray(data.flags) ? data.flags : [];
+      record.flagSummary = data.summary || null;
+    } catch (_) { /* unreadable sidecar; report the draft without findings */ }
+  }
+  const eligible = records.sort((a, b) => a.relativePath.localeCompare(b.relativePath));
   return { reports: eligible, flagged };
 }
 
@@ -377,21 +393,33 @@ function buildSourcePack(input) {
         ? 'behind the publication gate and is not yet canon.'
         : report.classification === 'PREVIOUS_FILING'
           ? 'an exact Rhea-passed filing from the previous completed Cycle and is labeled as continuity, not current reporting.'
-          : 'an ungated sample and must not be presented as verified or published fact.'),
-      '',
+          : report.classification === 'FLAGGED'
+            ? 'a gate-flagged draft that did NOT publish. Report on it and on the gate decision; never present it as published fact.'
+            : 'an ungated sample and must not be presented as verified or published fact.'),
+      ''
+    );
+    if (report.classification === 'FLAGGED') {
+      if (report.flagSummary) lines.push('Gate summary: ' + report.flagSummary, '');
+      for (const f of (report.flags || [])) {
+        lines.push('- gate finding [' + (f.severity || 'unrated') + ']: ' + (f.issue || f.claim || JSON.stringify(f)));
+      }
+      if ((report.flags || []).length || report.flagSummary) lines.push('');
+    }
+    lines.push(
       report.body.trim(),
       ''
     );
   }
 
-  lines.push('## Flagged exclusions', '');
+  lines.push('## Gate decisions this window', '');
   if (!input.flagged.length) {
-    lines.push('_No flagged exclusions in the time window._', '');
+    lines.push('_No gate-flagged drafts in the time window._', '');
   } else {
     for (const item of input.flagged) {
       lines.push(
-        '- `' + item.relativePath + '` — excluded from the source pack body; ' +
-          item.reasonCount + ' gate finding(s); disposition=' + (item.disposition || 'legacy-flagged') + '.'
+        '- `' + item.relativePath + '` — ' +
+          item.reasonCount + ' gate finding(s); disposition=' + (item.disposition || 'legacy-flagged') +
+          '. Draft included above under FLAGGED.'
       );
     }
     lines.push('');
@@ -471,7 +499,9 @@ function buildBoundedNewsSource(input) {
       ? 'Developing report — edited but not yet published.'
       : report.classification === 'PREVIOUS_FILING'
         ? 'Previous Cycle filing — continuity only, not current-Cycle reporting.'
-        : 'Developing report — early newsroom sample.';
+        : report.classification === 'FLAGGED'
+          ? 'Gate-flagged draft — held back by the editorial gate, not published. Cover what it reported AND why it was held.'
+          : 'Developing report — early newsroom sample.';
     lines.push(
       '### ' + reportHeading(report),
       '',
@@ -757,7 +787,7 @@ async function run(argv) {
       classification: r.classification,
       path: r.relativePath,
     })),
-    flaggedExclusions: newsroom.flagged.map((r) => r.relativePath),
+    flaggedReports: newsroom.flagged.map((r) => r.relativePath),
     routingShadow: routing,
     newsroomPulse: {
       fingerprint: pulse.fingerprint,

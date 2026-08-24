@@ -183,43 +183,68 @@ the search; do not filter the results afterwards.
 
 ## 4.7 Media reports the loop — it does not author it (Mike-direct, 2026-08-23)
 
-Stated while reviewing the C104 edition, where a column seated Vinnie Keane at
-a Baylight bar answering the reporter. The quote was a real interview wake; the
-presence was invented by the writer.
+Stated across the C104 week review, refined twice in the same session as the
+first classification proved too strict against live cases. This is the final
+form; the earlier "three provenance classes" draft of this section is
+superseded.
 
 **Articles are secondary to cron wakes and interviews.** Media is not the sim —
 it is the mechanism reporting on it. The crons literally tell us what's wrong
 with the logic in their world; *that* is the storyline. An article is a separate
-layer: street-level delivery of what already happened. So storylines are born
-from wakes and interviews, not from articles — an interview that happened opens
-a thread even if no article publishes (this is why Saturday's Storyline_Ledger
-reads arc seeds, and it must stay that way).
+layer: street-level delivery of what already happened. Storylines are born from
+wakes and interviews, not from articles — an interview that happened opens a
+thread even if no article publishes (Saturday's Storyline_Ledger reads arc
+seeds, and it must stay that way).
 
-**The worst contamination in the system is manufactured citizen reaction** — a
-citizen made to speak or appear in a way their own wake never produced. That is
-the media inverting the job: creating a narrative that does not exist in the
-sim. The angle of an article may be real while the citizen reaction to it is
-manufactured; the manufactured reaction is the violation. "Putting words in
-Vinnie's mouth like he doesn't exist is the worst contamination there is."
+**The worst contamination is manufactured citizen reaction:** a citizen made to
+*speak* words no interview wake produced. "Putting words in Vinnie's mouth like
+he doesn't exist is the worst contamination there is."
 
-Three provenance classes for a tracked citizen appearing in an article:
+**What a gate may fail an article for — this list is exhaustive:**
 
-1. **Speech with no interview behind it** — worst class, hard fail, always.
-2. **Real interview quote, invented staging** — the C104 Keane case: the words
-   are the citizen's, the scene ("sitting next to me at the bar") is the
-   writer's. A violation — the reaction is real but the presence is
-   manufactured.
-3. **Quote AND presence traceable to the citizen's own wake** — if Vinnie's
-   cron had actually put him in that bar and the interview happened there, the
-   scene is legitimate and *desirable*. The tracked 940 living small-townish —
-   a reporter genuinely running into a Tier-1 at the bar — is a feature of the
-   game layer, not a bug. Build toward making class 3 possible; never gate it
-   away while killing class 2.
+1. **Fabricated speech** — a quote no interview record produced.
+2. **Direct contradiction of recorded state** — the Temescal health center
+   called a transit project; a stat that conflicts with the `As_Roster` line;
+   a citizen placed in two places at the same recorded moment.
+3. **Fourth-wall leakage** — "simulation" and its kin. The rejected word class
+   is the frame-break, not the trade vocabulary.
 
-**On gates:** the only true gate is Mike. Rhea is generated from his preference,
-not her own judgment — she is an instrument of the preference, and where she or
-the shape gates zero real reporting on trivia (a missing terminal question
-mark), the instrument is over-tuned. Repair the draft; don't kill the wake.
+**What a gate may never fail an article for:**
+
+- **Presence and scenes.** "I don't care if they interview Keane on the moon —
+  the crons run their world, not me." Keane can go to a bar. Aitken's one
+  logged sighting this cycle does not exhaust his week — the tracked data is
+  the 0.25% subset, and absence in a slice is NEVER evidence of falsity
+  (auto-memory `feedback_empty-relational-field-is-design-not-defect`, applied
+  to the media layer). Killing the club scene killed exactly the creativity a
+  nightlife beat exists for.
+- **Data citation and trade vocabulary.** All cities track data; in-world the
+  "engine" reads as civic data systems (Civis Systems is canonically exactly
+  this). "Packet" and "cycle" are journalist trade words. Civic, business,
+  transit and crime reporters *need* to quote the tracked data — that is the
+  beat. Banning data language kills half the journalism.
+
+**Quality note, not a gate:** reciting the engine slice back is *lazy*, not
+contamination — the slice is already canon in the world summary, so a color
+journalist echoing it adds nothing (see auto-memory
+`feedback_canon-is-color-not-data-echo`). Fact desks quote the data; color
+desks earn their keep with what the slice does not contain. Handle echo as an
+editorial quality signal, never a rejection.
+
+**Rhea's verdicts are slice-scoped.** She checks a draft against the slice she
+is handed, and she does that job correctly — she has no idea what the gates
+built around her are. Her "invented" means "not in my slice." Enforcing that as
+world-truth is the builder's error, in two directions: (a) never fail on
+absence; (b) widen her slice where the truth exists but she cannot see it —
+`As_Roster` carries current season stat lines (Mike-direct 2026-07-28) and
+belongs in the sports ground truth, so a flipped digit surfaces as a
+correction instead of the whole stat line being unjudgeable.
+
+**On gates generally:** the only true gate is Mike. Rhea and the shape gates
+are his preference instrumented, not a second editor. Where they zero real
+reporting on trivia (a missing terminal question mark), the instrument is
+over-tuned. Repair the draft; don't kill the wake. The C104 lesson: the best
+articles of the week were the gated ones.
 
 ---
 

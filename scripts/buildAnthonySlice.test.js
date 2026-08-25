@@ -133,9 +133,9 @@ if (fs.existsSync(summary103)) {
   ok('c103 stat typo aligns to explicit feed subject',
     current.prewrite.lineFacts.includes('Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks') &&
     !current.prewrite.lineFacts.some(f => /Pablo Almanza line/.test(f)));
-  ok('c103 unresolved subject fails closed',
-    current.players.some(p => p.name === 'Pablo Almanzar' && p.popid === null) &&
-    current.prewrite.missing.some(m => /Pablo Almanzar has no Simulation_Ledger POPID/.test(m)));
+  ok('c103 minted Almanzar resolves from ledger (POP-01078, minted 2026-08-21)',
+    current.players.some(p => p.name === 'Pablo Almanzar' && p.popid === 'POP-01078') &&
+    !current.prewrite.missing.some(m => /Pablo Almanzar has no Simulation_Ledger POPID/.test(m)));
   const packet = require('./livedExperiencePacketV2').buildAnglePacket({
     cycle: 103,
     desk: 'sports',
@@ -148,10 +148,10 @@ if (fs.existsSync(summary103)) {
   ok('c103 W1 carries typed sports analytics brief',
     packet.task.creativeBrief && packet.task.creativeBrief.kind === 'sports-analytics' &&
     packet.task.creativeBrief.lineFacts.includes('Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks'));
-  ok('c103 W1 exposes only ledger-resolved Vinnie for W2',
-    packet.exposure.candidates.length === 1 &&
-    packet.exposure.candidates[0].pop === 'POP-00001' &&
-    packet.exposure.candidates[0].name === 'Vinnie Keane');
+  ok('c103 W1 exposes both ledger-resolved subjects for W2 (Almanzar minted 2026-08-21)',
+    packet.exposure.candidates.length === 2 &&
+    packet.exposure.candidates.some(c => c.pop === 'POP-01078' && c.name === 'Pablo Almanzar') &&
+    packet.exposure.candidates.some(c => c.pop === 'POP-00001' && c.name === 'Vinnie Keane'));
 }
 
 console.log('buildAnthonySlice c102:');

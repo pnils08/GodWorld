@@ -19,7 +19,8 @@ if (fs.existsSync(summary)) {
   assert.match(slice.story.label, /Benji Dillon is moving to the bullpen/);
   assert.ok(slice.prewrite.anchorFacts.some(fact => /won 15 straight/.test(fact)));
   assert.ok(slice.prewrite.anchorFacts.every(fact => !/Pablo|W15|StoryAngle|feed|mood/i.test(fact)));
-  assert.deepStrictEqual(slice.players.map(player => player.name), ['Benji Dillon']);
+  // Almanzar resolves from the ledger since his 2026-08-21 mint (POP-01078)
+  assert.deepStrictEqual(slice.players.map(player => player.name), ['Benji Dillon', 'Pablo Almanzar']);
   const w1 = packet.buildAnglePacket({
     cycle: 103, desk: 'sports', reporter: slice.journalist,
     story: slice.story, approach: slice.approach, slice, lane: [],

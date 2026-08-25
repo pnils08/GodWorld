@@ -36,6 +36,7 @@ const page = require('/root/GodWorld/lib/citizenPage');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { _hash53 } = require('/root/GodWorld/lib/provocationBank');
+const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.130 — name-match fallback when the format has no structural counterpart
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice
 const { matchCitizenToJournalist_ } = require('/root/GodWorld/utilities/rosterLookup');
@@ -148,6 +149,16 @@ async function runExchange(speakers, totalTurns, maxTokens) {
  * bondTarget (engine.101): POPID of the bond counterpart this exchange was with,
  * '' when the format has no bond counterpart (interview/debate) — rides intake col I. */
 async function recordParticipant(c, ownText, daypart, cycle, tensionState, bondTarget) {
+  // engine.130 — CONVO keeps its structural counterpart (the person the exchange was WITH);
+  // INTERVIEW/DEBATE had none and always wrote '', dropping any bonded citizen named in the
+  // citizen's own lines. Fall back to the engine.101 name-match (first hit, wake semantics).
+  if (!bondTarget) {
+    try {
+      const bondsRes = await loadBonds(c.popId, { pairs: true });
+      const hits = matchBondTargets_(ownText, bondsRes.pairs);
+      bondTarget = hits.length ? hits[0].pop : '';
+    } catch (e) { /* enrichment only — never blocks the record */ }
+  }
   const openTensions = openTensionsFor(tensionState, c.popId, cycle);
   let cls = {};
   try { cls = await classifier.classifyTripleReflection_(ownText, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }

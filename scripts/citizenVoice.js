@@ -45,6 +45,7 @@ const memoryFence = require('/root/GodWorld/lib/memoryFence');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const interviewContract = require('./newsroomInterviewContract');
+const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.130 — PRESS rows carry BondTarget (col I) like the wake
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice
 
@@ -114,10 +115,12 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   // Recording an evidence-bound interview is the citizen cron hearing them.
   // A read-only interview never lands on the page and does not move the sim.
 
-  const [neighbors, sportsLine, lifeArc, bondsLine, familyLine, healthLine] = await Promise.all([
-    coResidents(c.nh, c.popId), loadSportsSlice(), loadLifeArc(c.popId), loadBonds(c.popId), loadFamily(c.popId),
+  const [neighbors, sportsLine, lifeArc, bondsRes, familyLine, healthLine] = await Promise.all([
+    coResidents(c.nh, c.popId), loadSportsSlice(), loadLifeArc(c.popId), loadBonds(c.popId, { pairs: true }), loadFamily(c.popId),
     loadHealthState(c.popId),
   ]);
+  const bondsLine = bondsRes.line;   // prompt text, unchanged
+  const bondPairs = bondsRes.pairs;  // engine.130 — {pop,name} for the intake BondTarget match
   const textureLine = loadNeighborhoodTexture(c.nh, cycle);
   const pageRead = await loadOwnPageReadback(c.popId, {
     cycle, wake: 'VOICE',
@@ -196,9 +199,11 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
 
     // 3) tension register — resolution first, then new capture (wake semantics, shared file).
     const tlist = tensionState[c.popId] = tensionState[c.popId] || [];
+    let resolvedText = ''; // engine.101 — rides intake col K when a resolution fired
     if (cls.resolves != null && openTensions[cls.resolves]) {
       const t = openTensions[cls.resolves];
       t.status = 'resolved'; t.resolvedCy = cycle;
+      resolvedText = t.q;
       await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: 'PRESS', key: 'tension-resolved', extra: { type: 'tension' } });
       console.error(`[record] tension RESOLVED <- "${t.q.slice(0, 80)}"`);
     }
@@ -215,11 +220,16 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     saveTensionState(tensionState);
 
     // 4) gated intake row — the cycle drain reads this; dials move there, not here.
+    //    engine.130: A-K shape (was A-H — PRESS rows dropped BondTarget/Tension/Resolves,
+    //    so the drain's bond-intensity nudge never saw a PRESS mention of a bonded citizen).
+    const bondHits = matchBondTargets_(said.spoken, bondPairs);
+    const bondTarget = bondHits.length ? bondHits[0].pop : '';
     if (cls.event || cls.affect) {
       await sheets.appendRows('Reflection_Intake', [[
         new Date().toISOString(), c.popId, cycle, 'PRESS', cls.event || '', said.spoken.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
+        bondTarget, cls.tension || '', resolvedText,
       ]]);
-      console.error(`[record] Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}] (applied=no, gated)`);
+      console.error(`[record] Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${bondTarget ? ' bondTarget=' + bondTarget : ''} (applied=no, gated)`);
     } else {
       console.error(`[record] classifier off-vocab/err, intake skipped: ${cls.raw}`);
     }

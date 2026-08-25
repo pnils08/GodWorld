@@ -51,6 +51,111 @@ const { buildBylineRoster } = require('./bayTribuneRoster.js');
 const OUTPUT_DIR = path.join(__dirname, '../../output');
 const DECK_SHEET = 'Story_Seed_Deck';
 const PATTERN_SEED_TYPE = 'pattern-emergent';
+const RIPPLE_SEED_TYPE = 'cause-emergent';
+const RIPPLE_SHEET = 'Ripple_Ledger';
+
+// ── causes ───────────────────────────────────────────────────────────────────
+// Ripple_Ledger is where the engine writes WHY, in words, every cycle: "The Keane
+// household moved from Rockridge to Grand Lake — moving up from Rockridge".
+// Until now only the world-summary doc read it, and the deck was seeded purely
+// from the anomaly detector's deltas. That is how C104 published "Grand Lake
+// retail decay" in the same cycle the ledger recorded Grand Lake RISING and
+// Vinnie Keane (POP-00001) moving his family there. A delta is not a story; the
+// cause is. Causes seed first and outrank patterns at equal priority.
+
+// CauseTypes that describe something that HAPPENED to someone or somewhere.
+// Rank is the base deck priority (3 = HIGH). Everything absent from this map is
+// engine bookkeeping — approval arithmetic, fold accounting — and never seeds.
+const CAUSE_RANK = {
+  migration: 3,          // a household moved
+  trajectory: 3,         // a neighborhood turned
+  'chaos-event': 3,      // something happened to a citizen
+  'city-event': 2,
+  'faith-event': 2,
+  sports: 3,
+  'initiative-implementation': 2,
+  'lifestyle-sighting': 1,
+};
+
+const CAUSE_DOMAIN = {
+  migration: 'community',
+  trajectory: 'business',
+  'chaos-event': 'safety',
+  'city-event': 'culture',
+  'faith-event': 'faith',
+  sports: 'sports',
+  'initiative-implementation': 'civic',
+  'lifestyle-sighting': 'culture',
+};
+
+/** A cause with no words is a number wearing a label — it cannot brief a writer. */
+function causeIsReportable(r) {
+  const detail = String(r.CauseDetail || '').trim();
+  if (!detail) return false;
+  // JSON blobs are machine payloads (the sports per-hood effect rows), not prose.
+  if (detail.charAt(0) === '{' || detail.charAt(0) === '[') return false;
+  if (!CAUSE_RANK[r.CauseType]) return false;
+  return true;
+}
+
+function rippleAnchor(r) {
+  const ids = String(r.TargetIds || '').split('|').map((s) => s.trim()).filter(Boolean);
+  return {
+    citizens: ids.filter((s) => /^POP-\d{4,}/.test(s)),
+    neighborhoods: String(r.Neighborhood || '').trim() ? [String(r.Neighborhood).trim()] : [],
+    targets: ids,
+  };
+}
+
+async function loadRipples(cycle) {
+  let data;
+  try {
+    data = await getRawSheetData(RIPPLE_SHEET);
+  } catch (err) {
+    console.warn(`[causes] ${RIPPLE_SHEET} unreadable (${err.message}) — pattern seeds only`);
+    return [];
+  }
+  if (!data || data.length < 2) return [];
+  const header = data[0].map((h) => String(h).trim());
+  return data.slice(1)
+    .map((row) => {
+      const o = {};
+      header.forEach((h, i) => { o[h] = row[i]; });
+      return o;
+    })
+    .filter((r) => parseInt(r.Cycle, 10) === cycle);
+}
+
+/**
+ * A cause row becomes a seed-intent shaped exactly like a pattern intent, so
+ * collapse, byline assignment and priority scoring downstream need no changes.
+ */
+function rippleToIntent(r, cycle, idx) {
+  const anchor = rippleAnchor(r);
+  const rank = CAUSE_RANK[r.CauseType] || 1;
+  const text = String(r.CauseDetail).trim();
+  return {
+    seedId: 'cause-c' + cycle + '-' + idx,
+    idx: 10000 + idx,                 // keep cause ids clear of pattern ids
+    patternType: RIPPLE_SEED_TYPE,
+    causeType: r.CauseType,
+    severity: rank >= 3 ? 'high' : (rank === 2 ? 'medium' : 'low'),
+    domain: CAUSE_DOMAIN[r.CauseType] || 'community',
+    neighborhood: anchor.neighborhoods[0] || '',
+    priority: rank,
+    text,
+    angle: text,
+    coveringCitizens: anchor.citizens,
+    packet: { rippleTargets: anchor.targets, effectType: r.EffectType || '', sourceEngine: r.SourceEngine || '' },
+    metric: null,
+    delta: null,
+    pole: null,
+    // The cause IS the why — no driver inference needed, the engine said it in
+    // words. Same {kind, driver, confidence} shape the pattern path emits, so
+    // the WHY column and every downstream reader stay uniform.
+    causalAnchor: { kind: r.CauseType, driver: text, confidence: 'high' },
+  };
+}
 
 // Deck columns A-T (18 canonical from saveV3Seeds + 2 new). Index = column position.
 const DECK_HEADERS = [
@@ -493,9 +598,19 @@ async function routePatternSeeds(cycle, opts) {
     };
   });
 
+  // ── Phase A2: cause seeds. Read WHY out of Ripple_Ledger and put it in front
+  //    of the deltas. These bypass collapse — a household moving and a
+  //    neighborhood turning are not fragments of one citywide metric swing, and
+  //    folding them would reproduce the bug this fixes. ──
+  const ripples = await loadRipples(cycle);
+  const reportable = ripples.filter(causeIsReportable);
+  const causeIntents = reportable.map((r, i) => rippleToIntent(r, cycle, i));
+  console.log(`[causes] ${ripples.length} ripples for c${cycle}; ${causeIntents.length} reportable`);
+
   // ── Phase B: collapse same-metric improvements (band) + same-metric decay (whole
   //    group) into citywide synths ──
   const { collapsed, collapseLog } = collapseSeeds(intents, cycle, cycleCtx);
+  collapsed.unshift(...causeIntents);
 
   // ── Phase C: byline + priority over the collapsed set (highest-severity picks first) ──
   const sevRank = { HIGH: 3, MED: 2, LOW: 1 };
@@ -507,7 +622,8 @@ async function routePatternSeeds(cycle, opts) {
   seeds.sort((a, b) => (b.priorityScore || 0) - (a.priorityScore || 0));
 
   return { cycle, seeds, included: included.length, excluded, collapseLog,
-    totalPatterns: patterns.length, briefCount: briefs.length };
+    totalPatterns: patterns.length, briefCount: briefs.length,
+    totalRipples: ripples.length, causeSeeds: causeIntents.length };
 }
 
 function seedToRow(s, cycle, now) {
@@ -515,7 +631,7 @@ function seedToRow(s, cycle, now) {
     now,                                                   // A Timestamp
     cycle,                                                 // B Cycle
     s.seedId,                                              // C SeedID
-    PATTERN_SEED_TYPE,                                     // D SeedType
+    s.patternType || PATTERN_SEED_TYPE,                    // D SeedType
     s.domain,                                              // E Domain
     s.neighborhood,                                        // F Neighborhood
     s.priority,                                            // G Priority
@@ -544,10 +660,13 @@ async function applyToDeck(result, opts) {
   const iType = header.indexOf('SeedType');
   if (iCycle < 0 || iType < 0) throw new Error('deck missing Cycle/SeedType columns: ' + header.join(','));
 
-  // existing pattern-emergent rows for this cycle (idempotency)
+  // existing emergent rows for this cycle (idempotency). Must cover BOTH seed
+  // types — scanning only pattern-emergent would let a re-run duplicate every
+  // cause row instead of tripping the guard.
   const existing = [];
   for (let r = 1; r < data.length; r++) {
-    if (String(data[r][iCycle]) === String(cycle) && String(data[r][iType]) === PATTERN_SEED_TYPE) {
+    const t = String(data[r][iType]);
+    if (String(data[r][iCycle]) === String(cycle) && (t === PATTERN_SEED_TYPE || t === RIPPLE_SEED_TYPE)) {
       existing.push(r + 1); // 1-based sheet row
     }
   }
@@ -643,11 +762,14 @@ async function main() {
     const header = data[0];
     const iCycle = header.indexOf('Cycle');
     const iType = header.indexOf('SeedType');
+    // The deck now carries two seed types — counting only pattern-emergent here
+    // would fail every run the moment causes started seeding.
     let n = 0;
     for (let r = 1; r < data.length; r++) {
-      if (String(data[r][iCycle]) === String(cycle) && String(data[r][iType]) === PATTERN_SEED_TYPE) n++;
+      const t = String(data[r][iType]);
+      if (String(data[r][iCycle]) === String(cycle) && (t === PATTERN_SEED_TYPE || t === RIPPLE_SEED_TYPE)) n++;
     }
-    console.log('VERIFY: ' + n + ' pattern-emergent rows now live for c' + cycle + ' (expected ' + result.seeds.length + ')');
+    console.log('VERIFY: ' + n + ' emergent rows now live for c' + cycle + ' (expected ' + result.seeds.length + ')');
     if (n !== result.seeds.length) { console.error('MISMATCH — investigate'); process.exit(1); }
   } else {
     console.log('(dry run — pass --apply to write to live deck. Live run gated to C98.)');

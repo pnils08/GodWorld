@@ -3,7 +3,7 @@
 **Season:** Winter | **Weather:** 48°F rain, SW 18 mph, rain (frontState RAIN), humidity 86, visibility 6
 **Cycle Weight:** high-signal | **Pattern:** strain-trend | **Shock:** shock-flag | **Civic Load:** load-strain
 **Cycle Weight Reason:** High event volume (12); Notable weather impact; Civic load strain; Shock event detected; Strain trend detected.
-**Calendar context:** SimYear 2, Month 12, Day 4, Winter, holiday=NewYearsEve | Sports season: off-season | First Friday: false
+**Calendar context:** SimYear 2, Month 12, Day 4, Winter, holiday=NewYearsEve | Sports season: Oaks preseason, A's late-season | First Friday: false
 
 ---
 
@@ -181,9 +181,9 @@ Snapshot: Cycle 104 | Pop 387,975 | Illness 10.2% | Employment 90.1% | Sentiment
 
 ## Civic Decisions
 
-**No city-hall section for this cycle yet.** The `## /city-hall` section of `output/production_log_c104.md` is not present (city-hall runs after this skill in the chain).
+Civic decisions for this cycle are in the **`## /city-hall`** section of **`output/production_log_c104.md`** (produced by `/city-hall` at the civic terminal).
 
-When city-hall runs, this section will point at its civic section. Sift should not attempt to derive civic decisions in its absence — fail loud upstream instead.
+This section deliberately does not extract or summarize that log — sift consumes the civic section directly. Renaming/summarizing here risks the G-S6/G-S7-class fabrication that motivated the deterministic builder (pipeline.25).
 
 ## Sports (literal `Oakland_Sports_Feed.StoryAngle` column per row — current cycle + 2 prior)
 
@@ -204,10 +204,10 @@ When city-hall runs, this section will point at its civic section. Sift should n
   - Notes: Benji Dillon made his first ever appearance as a relief pitcher this cycle and in staying true to Benjis approach to anything he did it ever so calmly. On a weeday evening that would otherwise be unsuspecting Benji provided that rare spark that only he can. This wouldnt be a 17k no hitter like the 3 no nos Dillon has recorded in his career. No this would be a quite night , 1 IP, 1K , 0 hits. Not a highlight reel moment by any means but just another thing Dillon can do. WIth the emergence of Pablo Alamazar, and Carmen Mesa and the big reliever arm of Clark Saryan in minors the playoff roster shape is going to be interesting.
   - Stats: Benji Dillon, 1.0 IP, 1 K, 0 H
   - Record 125-35, Streak W1, Mood reflective, FanSentiment high, Neighborhood Rockridge
-- **A's — player-feature (late-season):** Pablo Almanzar (SP), Vinne Keane (DH)
+- **A's — player-feature (late-season):** Pablo Almanzar (SP), Vinnie Keane (DH)
   - StoryAngle: Pablo the Picasso shines again.
-  - Notes: Pablo Alamanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provided the drama as he hitless streak went to 14 innings as the Astros had not recorded a hit through 5 innings, but in the 6th with one out walked a batter. He would take 2nd on a steal, and the next pitch was a double to the left/center gap scoring 1 run. The Oakland faithful again rose to their feat in standing ovation in a night full of them. Danny Horn, Eric Taveras, Isley Kelley and Ernesto Quintero all receiving MVP chants on their at bats. Vinne Keane getting a standing ovation at his first at bat. With the seaon  rounding to a close the sentiment is palpable. 
-  - Stats: Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
+  - Notes: Pablo Almanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provided the drama as he hitless streak went to 14 innings as the Astros had not recorded a hit through 5 innings, but in the 6th with one out walked a batter. He would take 2nd on a steal, and the next pitch was a double to the left/center gap scoring 1 run. The Oakland faithful again rose to their feat in standing ovation in a night full of them. Danny Horn, Eric Taveras, Isley Kelley and Ernesto Quintero all receiving MVP chants on their at bats. Vinne Keane getting a standing ovation at his first at bat. With the seaon  rounding to a close the sentiment is palpable. 
+  - Stats: Pablo Almanzar 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
   - Record 126-35, Streak W2, Mood electric, FanSentiment high, Neighborhood Baylight District
 - **A's — team-update (late-season):** Danny Horn (CF), Isley Kelley (SS), Eric Taveras (2B), Ernesto Quintero (3B), Travis Coles (SP), Arturo Ramos (SP)
   - StoryAngle: As dominate the award race boards. Next cycle to reveal award winners and final season stats. 

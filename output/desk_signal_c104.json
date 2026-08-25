@@ -2,7 +2,7 @@
   "meta": {
     "cycle": 104,
     "script": "buildWorldSummary.js v2.2.0 (deskSignal v1.1)",
-    "builtAt": "2026-08-20T07:46:29.678Z",
+    "builtAt": "2026-08-25T15:11:22.074Z",
     "laneRule": "civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap)",
     "rippleLaneMap": {
       "initiative-implementation": "civic",
@@ -24,9 +24,6 @@
     "contract": "POINTERS ONLY — labels are verbatim source strings (they may embed source-native deltas); no derived stats, no career numbers, no angles. The desk reaches the raw material itself.",
     "bylineContract": "bylineCandidates is a WHO-assist HINT — one name + POPID per lane, usage-rotated off the Bay_Tribune_Oakland roster. The desk still assigns; no angle, no story, no subject rides here (engine.76 W5h2 locked rule).",
     "notes": [
-      "sports feed name \"Dillon Brooks\" does NOT resolve — desk cannot interview them [Oaks C104]",
-      "sports feed name \"Pablo Almanzar\" does NOT resolve — desk cannot interview them [A's C104]",
-      "sports feed name \"Vinne Keane\" MISSPELLED — rescued to \"Vinnie Keane\" (POP-00001); fix the feed row [A's C104]",
       "output/neighborhood_texture_c104.md not present at build time (produced at Step 5.5) — hood refs are forward pointers"
     ]
   },
@@ -538,6 +535,7 @@
         "label": "Oaks | team-update | (preseason) | Aj Dybantsa (SF), Dillon Brooks (SF), Adash Stanley (PG)",
         "popids": [
           "POP-01024",
+          "POP-01079",
           "POP-01023"
         ]
       },
@@ -552,8 +550,9 @@
       {
         "kind": "feed",
         "ref": "Oakland_Sports_Feed cycle 104; rendered: world_summary_c104.md \"## Sports\" C104 (StoryAngle at the pointer)",
-        "label": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinne Keane (DH)",
+        "label": "A's | player-feature | (late-season) | Pablo Almanzar (SP), Vinnie Keane (DH)",
         "popids": [
+          "POP-01078",
           "POP-00001"
         ]
       },

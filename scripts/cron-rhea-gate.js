@@ -129,13 +129,18 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
     'world state and canon. Use Read/Grep, the dashboard API at http://localhost:3001, or the godworld MCP if available. ' +
     'Do NOT trust the draft\'s own EVIDENCE/sourcing blocks — verify independently.',
     '',
-    'Flag load-bearing canon claims that are not grounded in the world state or canon; flag invented named people, organizations, official acts, votes, criminal claims, and contradictory figures. ' +
-    '(c) ENGINE-metric leaks per newsroom.md — "tension score", "severity level", "civic load", ' +
-    'engine phase/system language, raw table/column names. DO NOT flag city-level metric FIGURES: Civis Systems ' +
-    'is the in-world publisher of Oakland city data, so a cited index value or rate is legitimate journalism — ' +
-    'only the raw system VOCABULARY is a leak. DO NOT flag legitimate sports-game stats — OVR/overall ratings, potential ' +
-    'grades, avg/HR/RBI/ERA, records, standings are canon (GodWorld sports is a game). (d) canon contradictions ' +
-    '(wrong GM/manager/roster).',
+    'Failure classes per ENGINE_CRON_LOOP.md §4.7 — this list is EXHAUSTIVE: ' +
+    '(a) FABRICATED SPEECH — a quote in the mouth of a tracked citizen with no interview/Packet support. ' +
+    '(b) DIRECT CONTRADICTION OF RECORDED STATE — contradictory figures, wrong GM/manager/roster, invented ' +
+    'official acts/votes/criminal claims, a citizen in two places at one recorded moment; plus the real-world-import ' +
+    'wall from the pre-check. ' +
+    '(c) FOURTH-WALL LEAKAGE — "simulation" and its kin: the citizen\'s reality framed as constructed. Raw ' +
+    'table/column/system names in prose are repair cues, severity med at MOST — never fail an article on them alone. ' +
+    'DO NOT flag: trade vocabulary ("packet", "cycle"); city-level metric FIGURES (Civis Systems is the in-world ' +
+    'publisher of Oakland city data — a cited index value or rate is legitimate journalism); sports-game stats ' +
+    '(OVR/overall ratings, potential grades, avg/HR/RBI/ERA, records, standings — GodWorld sports is a game); ' +
+    'presence and scenes (absence from the tracked 0.25% slice is NEVER evidence of falsity). ' +
+    'Echoing the world-state slice back is lazy, not contamination — quality note, severity low at most.',
     '',
     'Be EFFICIENT: verify the named people, records, trades, and votes against the world state and canon in a ' +
     'handful of tool calls — do not exhaustively read the whole archive. When you have checked the load-bearing ' +
@@ -178,12 +183,23 @@ function loadEvaluationPriorArcEvidence(filePath) {
 
 // Phase 2.1 flag class (a), deterministic half: engine/system language that must
 // never reach prose. Scans the BODY only — PREWRITE/EVIDENCE are fenced metadata.
-const ENGINE_TOKENS = [
+// §4.7 re-scope (ENGINE_CRON_LOOP.md, Mike-direct 2026-08-23): two classes, not one.
+// FOURTH_WALL_TOKENS is the frame-break class — "simulation and its kin" — the only
+// verbiage that may fail an article (subject to model judgment: "traffic simulation"
+// is trade vocabulary, a citizen's reality framed as constructed is the break).
+const FOURTH_WALL_TOKENS = [
+  'simulation', 'simulated', 'NPC', 'LLM', 'language model', 'AI-generated',
+  'system prompt', 'Supermemory', 'claude-mem',
+];
+// SYSTEM_TOKENS are raw table/column/enum names leaking into prose — repair cues,
+// severity med at most, never a fail on their own (§4.7: trade vocabulary and data
+// language are protected; over-tuned instruments zero real reporting).
+const SYSTEM_TOKENS = [
   'construction-planning', 'active internal state', 'Ripple Ledger', 'impactScore',
   'tension score', 'severity level', 'civic load', 'DialState', 'MemoryRegisters',
   'DisplacementRisk', 'MigrationIntent', 'WealthLevel', 'CareerStage', 'EconomicProfileKey',
   'EmployerBizId', 'SMPageId', 'desk_signal', 'world_summary', 'Initiative_Tracker',
-  'Neighborhood_Map', 'Reflection_Intake', 'Supermemory', 'claude-mem'
+  'Neighborhood_Map', 'Reflection_Intake',
 ];
 // Unwrap a whole-document code fence before any scan. S344: a DeepSeek business
 // draft wrapped its ENTIRE article in ```markdown …```; scanEngineVerbiage strips
@@ -224,13 +240,18 @@ function scanEngineVerbiage(draftText) {
   const prose = articleProseForReview(draftText);
   const body = prose.replace(/```[\s\S]*?```/g, '');
   const hits = [];
-  for (const t of ENGINE_TOKENS) {
+  for (const t of FOURTH_WALL_TOKENS) {
+    const re = new RegExp('\\b' + t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+    const m = body.match(re);
+    if (m) hits.push({ token: t, count: m.length, cls: 'fourth-wall' });
+  }
+  for (const t of SYSTEM_TOKENS) {
     const re = new RegExp(t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
     const m = body.match(re);
-    if (m) hits.push({ token: t, count: m.length });
+    if (m) hits.push({ token: t, count: m.length, cls: 'system-vocab' });
   }
   const pops = body.match(/\bPOP-\d{5}\b/g);
-  if (pops) hits.push({ token: 'POPID literal (POP-XXXXX)', count: pops.length });
+  if (pops) hits.push({ token: 'POPID literal (POP-XXXXX)', count: pops.length, cls: 'fourth-wall' });
   // Mike-direct 2026-08-07: engine NUMBERS are not contamination — Civis Systems is the
   // in-world publisher of city-level metrics, so a cited figure is ordinary journalism.
   // The raw-decimal scan is retired; system LANGUAGE (metric names, status enums, table
@@ -354,9 +375,17 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
         '   unchanged and is checked below.',
       ].join('\n')
       : '   every person-name candidate resolved to a ledger citizen' + (nameCheck && nameCheck.verified.length ? ' (' + nameCheck.verified.join('; ') + ')' : '') + '.',
-    '2. Engine-verbiage scan (article body):',
+    '2. Verbiage scan (article body — §4.7 two-class split):',
     verbiage.length
-      ? '   HITS: ' + verbiage.map(v => v.token + ' ×' + v.count).join('; ') + ' — engine/system language in prose is a flag (rewrite to citizen-facing language). Legitimate sports-game stats (OVR, avg/HR/RBI/ERA, records, standings) are canon — dismiss those.'
+      ? [
+        '   HITS: ' + verbiage.map(v => v.token + ' ×' + v.count + ' [' + v.cls + ']').join('; '),
+        '   [fourth-wall] = frame-break candidates ("simulation" and kin — the citizen\'s reality framed as',
+        '   constructed). Judge in context: "traffic simulation" in a civic story is trade vocabulary — dismiss;',
+        '   a break in the frame is HIGH-severity.',
+        '   [system-vocab] = raw table/column/metric names in prose. Repair cue, severity med at MOST — never',
+        '   fail an article on system-vocab alone. Trade words ("packet", "cycle"), cited data figures, and',
+        '   legitimate sports-game stats (OVR, avg/HR/RBI/ERA, records, standings) are canon — dismiss those.',
+      ].join('\n')
       : '   clean.',
     '3. Ledger profiles of verified citizens named in the draft (bio ground truth — any age, occupation,' +
     '   tenure, wealth, or neighborhood claim contradicting these is HIGH-severity misrepresentation):',
@@ -390,14 +419,19 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     '=== DRAFT TO VERIFY ===',
     articleProse,
     '',
-    'Your job is TWO flag classes — you police the canon boundary, not the editorial voice:',
-    '(a) ENGINE VERBIAGE — system language, status enums, raw table/column names leaking into prose. NOT numbers: ' +
-    '    city metric figures are published by Civis Systems in-world and are legitimate to cite.',
-    '(b) MISREPRESENTATION OF DATA OUTPUT — a claim that distorts or contradicts the ground truth above',
-    '    (a metric stated as falling when it rose; a count off from canon; a prior-cycle stat presented as current).',
-    'Plus the pre-check classes above (invented names used as people).',
-    'WHAT PASSES: anything the ground truth genuinely supports — allegations, cross-signal connections, a',
-    'reporter\'s inference from real data, and texture authorized by the active writer profile.',
+    'Your job is the §4.7 failure classes — this list is EXHAUSTIVE (you police the canon boundary, not the editorial voice):',
+    '(1) FABRICATED SPEECH — a quote in the mouth of a tracked citizen that no interview record or Packet',
+    '    evidence produced. The worst contamination there is.',
+    '(2) DIRECT CONTRADICTION OF RECORDED STATE — a claim that contradicts the ground truth above (a metric',
+    '    stated as falling when it rose; a count off from canon; a prior-cycle stat presented as current;',
+    '    a citizen in two places at the same recorded moment).',
+    '(3) FOURTH-WALL LEAKAGE — the frame-break word class per the verbiage scan above. System-vocab hits are',
+    '    repair cues (med at most), never a fail alone.',
+    'Plus the pre-check classes above (real-world imports; wholly invented people given authority).',
+    'WHAT MAY NEVER FAIL AN ARTICLE (§4.7): presence and scenes — the tracked data is a 0.25% subset and',
+    'absence in a slice is NEVER evidence of falsity; data citation and trade vocabulary ("packet", "cycle",',
+    'quoted figures); a reporter\'s inference from real data; texture authorized by the active writer profile.',
+    'Echoing the ground-truth slice back is LAZY, not contamination — quality note, severity low at most.',
     reviewContext
       ? 'For this profile, a street reference, generic room, or role-only anonymous voice is not a fabricated canon entity. Flag it only when it violates a listed texture condition or carries a listed canon blocker.'
       : 'Anonymous scene texture may pass when it carries no load-bearing factual claim.',

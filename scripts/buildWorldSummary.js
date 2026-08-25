@@ -142,7 +142,40 @@ function classifyDelta(curr, prev) {
 // SECTION EMITTERS
 // ============================================================================
 
-function emitHeader(cycle, rileyCurr, calendar) {
+// The engine's S.sportsSeason is NOT a season — it is an atmosphere off-switch
+// that happens to be spelled "off-season" (applySportsSeason.js:77 forces it
+// whenever the feed HAS entries, so ~40 downstream files stop synthesizing
+// playoff texture; the companion boolean sportsAtmosphereEnabled carries the
+// same signal honestly). Printing that sentinel here told every reader of this
+// document — including every citizen-voice prompt via lib/mags.loadWorldState —
+// that there is no baseball, while the Sports section of the SAME file showed
+// the A's two games from the end of the year. Read the real label off the feed
+// rows this script already loads.
+// PER TEAM, never one global string. Oakland runs two franchises on separate
+// calendars — at C104 the A's are late-season while the Oaks are in preseason.
+// A single world-wide "sports season" value is wrong for at least one of them
+// by construction, which is how a sim built on sports ended up announcing that
+// sports were not happening.
+function realSeasonLabel_(sportsRows, cycle) {
+  const byTeam = new Map();
+  for (const r of sportsRows || []) {
+    if (parseInt(r.Cycle, 10) !== cycle) continue;
+    const team = String(r.TeamsUsed || '').trim();
+    const type = String(r.SeasonType || '').trim();
+    if (!team || !type) continue;
+    // TeamsUsed can carry several teams on one row; the SeasonType applies to each.
+    for (const t of team.split(/[,/]| and /).map(s => s.trim()).filter(Boolean)) {
+      if (!byTeam.has(t)) byTeam.set(t, []);
+      if (byTeam.get(t).indexOf(type) === -1) byTeam.get(t).push(type);
+    }
+  }
+  if (byTeam.size === 0) return '';
+  return [...byTeam.entries()]
+    .map(([team, types]) => `${team} ${types.join('/')}`)
+    .join(', '); // not ' | ' — the calendar line already uses | as its field divider
+}
+
+function emitHeader(cycle, rileyCurr, calendar, sportsRows) {
   const weather = parseJsonField(rileyCurr.Weather, {});
   const calRow = calendar.find(r => r && r.length >= 4 && r[0] && r[1]);
   const simYear = calRow ? calRow[0] : '—';
@@ -152,7 +185,8 @@ function emitHeader(cycle, rileyCurr, calendar) {
   const holiday = calRow ? calRow[4] : 'none';
 
   const nightlife = parseJsonField(rileyCurr.NightLife, {});
-  const sportsSeason = nightlife.calendarContext?.sportsSeason || '—';
+  const sportsSeason = realSeasonLabel_(sportsRows, cycle)
+    || nightlife.calendarContext?.sportsSeason || '—';
   const firstFriday = nightlife.calendarContext?.isFirstFriday ? 'true' : 'false';
 
   const lines = [
@@ -1186,7 +1220,7 @@ async function buildWorldSummary(cycle, preloaded) {
 
   // Build sections
   const out = [];
-  out.push(...emitHeader(cycle, rileyCurr, calendarAll.slice(1)));
+  out.push(...emitHeader(cycle, rileyCurr, calendarAll.slice(1), sportsAll));
   // engine.52 D2 — hospital census from open Hospital_Ledger rows (capacity 40,
   // matches persistHospitalLedger_); null when the tab is absent or empty.
   const hospitalOpen = hospitalAll.filter(r => r.POPID && String(r.DischargeCycle ?? '').trim() === '');

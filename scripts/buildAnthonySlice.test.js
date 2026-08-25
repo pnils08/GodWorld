@@ -133,9 +133,16 @@ if (fs.existsSync(summary103)) {
   ok('c103 stat typo aligns to explicit feed subject',
     current.prewrite.lineFacts.includes('Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks') &&
     !current.prewrite.lineFacts.some(f => /Pablo Almanza line/.test(f)));
-  ok('c103 minted Almanzar resolves from ledger (POP-01078, minted 2026-08-21)',
-    current.players.some(p => p.name === 'Pablo Almanzar' && p.popid === 'POP-01078') &&
-    !current.prewrite.missing.some(m => /Pablo Almanzar has no Simulation_Ledger POPID/.test(m)));
+  // Mint-agnostic: never pin whether a real name is in the ledger — citizens
+  // mint continuously by design. Assert the fail-closed SHAPE only: every
+  // player is either resolved (valid POPID) or explicitly null, and every
+  // null player carries a missing-POPID note.
+  ok('c103 every player resolves to valid POPID or fails closed with a note',
+    current.players.length >= 1 &&
+    current.players.every(p =>
+      (p.popid === null &&
+        current.prewrite.missing.some(m => m.includes(p.name + ' has no Simulation_Ledger POPID'))) ||
+      /^POP-\d{5}$/.test(p.popid)));
   const packet = require('./livedExperiencePacketV2').buildAnglePacket({
     cycle: 103,
     desk: 'sports',
@@ -148,10 +155,10 @@ if (fs.existsSync(summary103)) {
   ok('c103 W1 carries typed sports analytics brief',
     packet.task.creativeBrief && packet.task.creativeBrief.kind === 'sports-analytics' &&
     packet.task.creativeBrief.lineFacts.includes('Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks'));
-  ok('c103 W1 exposes both ledger-resolved subjects for W2 (Almanzar minted 2026-08-21)',
-    packet.exposure.candidates.length === 2 &&
-    packet.exposure.candidates.some(c => c.pop === 'POP-01078' && c.name === 'Pablo Almanzar') &&
-    packet.exposure.candidates.some(c => c.pop === 'POP-00001' && c.name === 'Vinnie Keane'));
+  ok('c103 W1 exposes only ledger-resolved players for W2 (mint-agnostic)',
+    packet.exposure.candidates.length >= 1 &&
+    packet.exposure.candidates.every(c => /^POP-\d{5}$/.test(c.pop)) &&
+    packet.exposure.candidates.every(c => current.players.some(p => p.name === c.name && p.popid === c.pop)));
 }
 
 console.log('buildAnthonySlice c102:');

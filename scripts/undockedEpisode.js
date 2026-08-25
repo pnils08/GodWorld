@@ -131,7 +131,7 @@ async function main() {
   const mission = a.mission || fs.readFileSync(a.missionFile, 'utf8');
 
   const startedAt = new Date();
-  const child = spawn('bun', ['run', 'src/commander.ts',
+  const child = spawn('/root/.bun/bin/bun', ['run', 'src/commander.ts',
     '--model', a.model, '--session', a.session, '--benchmark', mission],
     { cwd: COMMANDER, env: { ...process.env, OPENROUTER_API_KEY: loadKey() } });
 

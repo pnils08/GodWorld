@@ -132,9 +132,9 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
     'Failure classes per ENGINE_CRON_LOOP.md §4.7 — this list is EXHAUSTIVE: ' +
     '(a) FABRICATED SPEECH — a quote in the mouth of a tracked citizen with no interview/Packet support. ' +
     '(b) DIRECT CONTRADICTION OF RECORDED STATE — contradictory figures, wrong GM/manager/roster, invented ' +
-    'official acts/votes/criminal claims, a citizen in two places at one recorded moment; plus the real-world-import ' +
-    'wall from the pre-check. ' +
-    '(c) FOURTH-WALL LEAKAGE — "simulation" and its kin: the citizen\'s reality framed as constructed. Raw ' +
+    'official acts/votes/criminal claims, a citizen in two places at one recorded moment. ' +
+    '(c) FOURTH-WALL LEAKAGE — exactly two things: real-world Oakland imported into the city (the pre-check\'s ' +
+    'real-world-import wall IS this class) and the word "simulation" applied to the city or its people. Raw ' +
     'table/column/system names in prose are repair cues, severity med at MOST — never fail an article on them alone. ' +
     'DO NOT flag: trade vocabulary ("packet", "cycle"); city-level metric FIGURES (Civis Systems is the in-world ' +
     'publisher of Oakland city data — a cited index value or rate is legitimate journalism); sports-game stats ' +
@@ -183,23 +183,26 @@ function loadEvaluationPriorArcEvidence(filePath) {
 
 // Phase 2.1 flag class (a), deterministic half: engine/system language that must
 // never reach prose. Scans the BODY only — PREWRITE/EVIDENCE are fenced metadata.
-// §4.7 re-scope (ENGINE_CRON_LOOP.md, Mike-direct 2026-08-23): two classes, not one.
-// FOURTH_WALL_TOKENS is the frame-break class — "simulation and its kin" — the only
-// verbiage that may fail an article (subject to model judgment: "traffic simulation"
-// is trade vocabulary, a citizen's reality framed as constructed is the break).
+// §4.7 re-scope (ENGINE_CRON_LOOP.md, Mike-direct 2026-08-23; class definition
+// Mike-direct 2026-08-24): the fourth wall is exactly two things — REAL-WORLD
+// OAKLAND leaking into the city (the actual city's people, businesses, geography;
+// policed by the real-world-import name pre-check — same axis as this class) and
+// the word SIMULATION. Not machine vocabulary: the real tech stack exists in-world
+// by design (canon.4 — DigitalOcean/Discord/Anthropic stay as themselves), so
+// AI/tech words can be legitimate in-world journalism.
 const FOURTH_WALL_TOKENS = [
-  'simulation', 'simulated', 'NPC', 'LLM', 'language model', 'AI-generated',
-  'system prompt', 'Supermemory', 'claude-mem',
+  'simulation', 'simulated',
 ];
-// SYSTEM_TOKENS are raw table/column/enum names leaking into prose — repair cues,
-// severity med at most, never a fail on their own (§4.7: trade vocabulary and data
-// language are protected; over-tuned instruments zero real reporting).
+// SYSTEM_TOKENS are raw table/column/enum and infrastructure names leaking into
+// prose — repair cues, severity med at most, never a fail on their own (§4.7:
+// trade vocabulary and data language are protected; over-tuned instruments zero
+// real reporting).
 const SYSTEM_TOKENS = [
   'construction-planning', 'active internal state', 'Ripple Ledger', 'impactScore',
   'tension score', 'severity level', 'civic load', 'DialState', 'MemoryRegisters',
   'DisplacementRisk', 'MigrationIntent', 'WealthLevel', 'CareerStage', 'EconomicProfileKey',
   'EmployerBizId', 'SMPageId', 'desk_signal', 'world_summary', 'Initiative_Tracker',
-  'Neighborhood_Map', 'Reflection_Intake',
+  'Neighborhood_Map', 'Reflection_Intake', 'Supermemory', 'claude-mem',
 ];
 // Unwrap a whole-document code fence before any scan. S344: a DeepSeek business
 // draft wrapped its ENTIRE article in ```markdown …```; scanEngineVerbiage strips
@@ -251,7 +254,7 @@ function scanEngineVerbiage(draftText) {
     if (m) hits.push({ token: t, count: m.length, cls: 'system-vocab' });
   }
   const pops = body.match(/\bPOP-\d{5}\b/g);
-  if (pops) hits.push({ token: 'POPID literal (POP-XXXXX)', count: pops.length, cls: 'fourth-wall' });
+  if (pops) hits.push({ token: 'POPID literal (POP-XXXXX)', count: pops.length, cls: 'system-vocab' });
   // Mike-direct 2026-08-07: engine NUMBERS are not contamination — Civis Systems is the
   // in-world publisher of city-level metrics, so a cited figure is ordinary journalism.
   // The raw-decimal scan is retired; system LANGUAGE (metric names, status enums, table
@@ -379,9 +382,10 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     verbiage.length
       ? [
         '   HITS: ' + verbiage.map(v => v.token + ' ×' + v.count + ' [' + v.cls + ']').join('; '),
-        '   [fourth-wall] = frame-break candidates ("simulation" and kin — the citizen\'s reality framed as',
-        '   constructed). Judge in context: "traffic simulation" in a civic story is trade vocabulary — dismiss;',
-        '   a break in the frame is HIGH-severity.',
+        '   [fourth-wall] = the frame-break class, which is exactly two things: real-world Oakland leaking',
+        '   into the city (that axis is the real-world-import pre-check above) and the word "simulation".',
+        '   Judge the word in context: "traffic simulation" in a civic story is an engineer\'s ordinary word —',
+        '   dismiss; the city or its people framed as a simulation is HIGH-severity.',
         '   [system-vocab] = raw table/column/metric names in prose. Repair cue, severity med at MOST — never',
         '   fail an article on system-vocab alone. Trade words ("packet", "cycle"), cited data figures, and',
         '   legitimate sports-game stats (OVR, avg/HR/RBI/ERA, records, standings) are canon — dismiss those.',
@@ -425,9 +429,10 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     '(2) DIRECT CONTRADICTION OF RECORDED STATE — a claim that contradicts the ground truth above (a metric',
     '    stated as falling when it rose; a count off from canon; a prior-cycle stat presented as current;',
     '    a citizen in two places at the same recorded moment).',
-    '(3) FOURTH-WALL LEAKAGE — the frame-break word class per the verbiage scan above. System-vocab hits are',
-    '    repair cues (med at most), never a fail alone.',
-    'Plus the pre-check classes above (real-world imports; wholly invented people given authority).',
+    '(3) FOURTH-WALL LEAKAGE — exactly two things: real-world Oakland imported into the city (the pre-check\'s',
+    '    real-world-import wall IS this class) and the word "simulation" applied to the city or its people.',
+    '    System-vocab hits are repair cues (med at most), never a fail alone.',
+    'Plus the pre-check class above (wholly invented people given authority).',
     'WHAT MAY NEVER FAIL AN ARTICLE (§4.7): presence and scenes — the tracked data is a 0.25% subset and',
     'absence in a slice is NEVER evidence of falsity; data citation and trade vocabulary ("packet", "cycle",',
     'quoted figures); a reporter\'s inference from real data; texture authorized by the active writer profile.',

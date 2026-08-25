@@ -32,9 +32,21 @@
  *          them to Mayor + Okoro Economic Development portfolio, which needs
  *          structured data, not free-form text. Field is purely additive —
  *          does not change severity classification or pattern type.
+ *   1.3.0  S391 — the standing value now travels with the change. The decay
+ *          subcheck emitted deltas only, so downstream read a fall as a level:
+ *          the C104 business lead was "Grand Lake retail decay" off
+ *          `RetailVitality -5.03`, while Grand Lake actually sat at 8.21 —
+ *          4th of 19 neighborhoods — with sentiment +0.48. A drop from a high
+ *          perch was published as collapse, and the empty packet let the
+ *          writer fill the gap with outside-world decline imagery.
+ *          Adds `standing` (current value + citywide rank + city median per
+ *          decayed metric) to evidence.fields, and states the level in the
+ *          description so it reaches the writer. `decaySignals` keeps its
+ *          existing delta-only string format — parsers downstream are
+ *          unchanged. Severity and pattern type are untouched.
  */
 
-const VERSION = '1.2.0';
+const VERSION = '1.3.0';
 
 // Decay-direction thresholds. Calibrated from observed C92→C93 deltas:
 // typical Sentiment movement ±0.01-0.02, CrimeIndex ±0/+1, RetailVitality
@@ -48,6 +60,54 @@ function num(v) {
   if (v == null || v === '') return null;
   const n = parseFloat(v);
   return Number.isNaN(n) ? null : n;
+}
+
+// Metrics the decay subcheck can flag, and which direction is healthy.
+// Rank 1 always means healthiest in the city, so a rank reads the same way
+// for every metric regardless of sign.
+const METRIC_DIRECTION = {
+  Sentiment: 'higher-is-better',
+  RetailVitality: 'higher-is-better',
+  CrimeIndex: 'lower-is-better',
+  HousingPressure: 'lower-is-better',
+};
+
+function median(values) {
+  if (values.length === 0) return null;
+  const s = [...values].sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+}
+
+/**
+ * Citywide standing per metric: every neighborhood's current value, its rank
+ * among neighborhoods carrying that metric (1 = healthiest), and the city
+ * median. This is the context a delta alone cannot supply — a -5.03 fall from
+ * 13.24 to 8.21 still leaves a neighborhood 4th of 19, which is a different
+ * story from a collapse.
+ */
+function buildStandings(nbhd) {
+  const standings = {};
+
+  for (const [metric, direction] of Object.entries(METRIC_DIRECTION)) {
+    const rows = nbhd
+      .map(n => ({ name: n.Neighborhood, value: num(n[metric]) }))
+      .filter(r => r.name && r.value !== null);
+    if (rows.length === 0) continue;
+
+    rows.sort((a, b) => (direction === 'higher-is-better' ? b.value - a.value : a.value - b.value));
+
+    const byName = new Map();
+    rows.forEach((r, idx) => byName.set(r.name, { value: r.value, rank: idx + 1 }));
+
+    standings[metric] = {
+      byName,
+      total: rows.length,
+      median: median(rows.map(r => r.value)),
+    };
+  }
+
+  return standings;
 }
 
 function detect(ctx) {
@@ -83,6 +143,8 @@ function detect(ctx) {
       ACTIVE_PATTERN.test(i.ImplementationPhase || '') || ACTIVE_PATTERN.test(i.Status || '')
     );
 
+    const standings = buildStandings(nbhd);
+
     for (let i = 0; i < nbhd.length; i++) {
       const n = nbhd[i];
       const prev = priorByName.get(n.Neighborhood);
@@ -94,12 +156,58 @@ function detect(ctx) {
       const dDisp = (num(n.HousingPressure) ?? 0) - (num(prev.HousingPressure) ?? 0);
 
       const decaySignals = [];
-      if (dSent <= SENTIMENT_DECAY) decaySignals.push(`Sentiment ${dSent.toFixed(3)}`);
-      if (dRetail <= RETAIL_DECAY) decaySignals.push(`RetailVitality ${dRetail.toFixed(2)}`);
-      if (dCrime >= CRIME_RISE) decaySignals.push(`CrimeIndex +${dCrime}`);
-      if (dDisp >= HOUSING_PRESSURE_RISE) decaySignals.push(`HousingPressure +${dDisp.toFixed(3)}`);
+      const decayedMetrics = [];
+      if (dSent <= SENTIMENT_DECAY) {
+        decaySignals.push(`Sentiment ${dSent.toFixed(3)}`);
+        decayedMetrics.push('Sentiment');
+      }
+      if (dRetail <= RETAIL_DECAY) {
+        decaySignals.push(`RetailVitality ${dRetail.toFixed(2)}`);
+        decayedMetrics.push('RetailVitality');
+      }
+      if (dCrime >= CRIME_RISE) {
+        decaySignals.push(`CrimeIndex +${dCrime}`);
+        decayedMetrics.push('CrimeIndex');
+      }
+      if (dDisp >= HOUSING_PRESSURE_RISE) {
+        decaySignals.push(`HousingPressure +${dDisp.toFixed(3)}`);
+        decayedMetrics.push('HousingPressure');
+      }
 
       if (decaySignals.length < 2) continue;
+
+      // v1.3.0: the level the fall landed on, per decayed metric, plus the
+      // neighborhood's overall sentiment standing. Without this the delta is
+      // the only number downstream sees and a dip reads as a floor.
+      const standing = {};
+      for (const metric of decayedMetrics) {
+        const s = standings[metric];
+        const entry = s && s.byName.get(n.Neighborhood);
+        if (!entry) continue;
+        standing[metric] = {
+          current: entry.value,
+          rank: entry.rank,
+          of: s.total,
+          cityMedian: s.median,
+        };
+      }
+      const sentimentStanding = standings.Sentiment
+        && standings.Sentiment.byName.get(n.Neighborhood);
+      if (sentimentStanding && !standing.Sentiment) {
+        standing.Sentiment = {
+          current: sentimentStanding.value,
+          rank: sentimentStanding.rank,
+          of: standings.Sentiment.total,
+          cityMedian: standings.Sentiment.median,
+        };
+      }
+
+      const standingPhrases = Object.entries(standing).map(
+        ([metric, v]) => `${metric} now ${v.current} (${v.rank} of ${v.of}, city median ${v.cityMedian})`
+      );
+      // A neighborhood absent from Neighborhood_Map for every decayed metric
+      // yields no phrases; the description must not grow empty separators.
+      const standingText = standingPhrases.length ? ` — ${standingPhrases.join('; ')} — ` : ' ';
 
       // Per-neighborhood initiative match (what the 1.0.0 rider claimed but
       // never actually computed). Initiative offsets if AffectedNeighborhoods
@@ -148,14 +256,15 @@ function detect(ctx) {
           fields: {
             Neighborhood: n.Neighborhood,
             decaySignals,
+            standing,
             matchingActiveInitiatives: matchingInits,
             mitigatorState,
             priorCycle: priorAudit.cycle,
           },
         },
         description: matchingInits.length === 0
-          ? `${n.Neighborhood}: decay [${decaySignals.join(', ')}] with no matching active initiative`
-          : `${n.Neighborhood}: decay [${decaySignals.join(', ')}] despite ${matchingInits.length} active mitigator(s) [${matchingInits.join(', ')}]`,
+          ? `${n.Neighborhood}: decay [${decaySignals.join(', ')}]${standingText}with no matching active initiative`
+          : `${n.Neighborhood}: decay [${decaySignals.join(', ')}]${standingText}despite ${matchingInits.length} active mitigator(s) [${matchingInits.join(', ')}]`,
         detectorVersion: VERSION,
       });
     }

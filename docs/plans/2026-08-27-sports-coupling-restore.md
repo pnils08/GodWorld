@@ -164,6 +164,50 @@ promises "profile rises as the build completes" with no code that raises it.
 That is a build-completion hook, not a present defect, and it is not this
 plan's. Filed as an open question below rather than built.
 
+**T7 — the sports zone follows the stadium. Specced, not built.**
+
+Mike-direct 2026-08-27, ratifying the T5 reversal and dating what T5 assumed
+had already happened:
+
+> **The Oaks' stadium opens in their mid-season. The A's opens next
+> early-season. Both are in the Baylight District.**
+
+So the move is **two dated events, per team**, not one repoint — which is why
+T5's single hardcode swap was wrong in shape as well as in timing. Against the
+C104 board (Oaks preseason, A's late-season) both are near: the Oaks climb
+preseason → early → mid, and the A's next early-season lands after the year
+rolls to Y3.
+
+`S.sportsSeasonByTeam` (shipped in T2) is the substrate this needs — the
+opening condition is a per-team phase test, and there is now a per-team phase.
+
+Design constraints, decided:
+
+- **Latched, never un-opened.** A team that has moved in stays moved in even
+  when its phase cycles back to preseason. Latch state belongs in
+  `Carry_Forward_Store` via the existing `mirrorCarryForwardToSheet_` /
+  `loadCarryForwardBlob_` pair (prop-first, sheet-fallback, self-healing) —
+  not recomputed from phase each cycle, which would move the franchise back
+  out of its own stadium every off-season.
+- **Neighborhood, not venue name.** The engine needs the sports *zone* for
+  `isSportsZone` and crowd weighting. New venue names are canon Paulson owns;
+  the engine must not mint them.
+- **Union, not swap.** Once one team has moved and the other has not, the city
+  has sports activity in two districts at once. The hardcoded single-string
+  sites (`economicRippleEngine.js:813`, `generateCrisisSpikes.js:273`) have to
+  become a set membership test, which is the actual code change T7 carries.
+
+Open for Mike before build: **what happens to Jack London after both teams
+leave?** It carries RetailVitality 8.54 today with sports as part of that mix.
+Cold, or does it keep a spillover share? That is a world-shape call, not an
+engine one.
+
+Also unwired and adjacent: `v3NeighborhoodWriter.js:289` promises "profile
+rises as the build completes" and no code raises it, so Baylight would host a
+stadium while still dialled as a construction site (`retailMod 0.5`,
+`eventMod 0.6`). T7 has to lift that profile at the first opening or the new
+district opens dead.
+
 **T6 — measure the delta.** Dry-run a cycle before and after and diff the
 dials. The acceptance question is not "does it run" but "did Baylight wake up."
 
@@ -230,11 +274,8 @@ deep the real phase runs — while the ~92 unguarded dial sites now see the trut
    goes dark for a cycle in the middle of a pennant race. Changing this has its
    own blast radius across the same ~92 sites and was deliberately not ridden in
    on this change.
-2. **The Baylight completion hook.** When the build finishes, the sports zone
-   should move from Jack London to Baylight, and Baylight's neighborhood profile
-   should rise off its construction-site values. Neither is wired. Related:
-   INIT-006 has sat at `construction-planning` since C83 — whether that is a
-   civic-lane stall or intended pacing is Mike's call, not the engine's.
+2. **The Baylight completion hook — ANSWERED, see T7.** Mike-direct
+   2026-08-27, confirming the T5 reversal and dating the openings.
 3. **Oaks second.** Everything here is team-agnostic and the Oaks already flow
    through `sportsSeasonByTeam`. What is *not* built is anything that treats a
    7-player expansion roster differently from a 90-player dynasty.

@@ -197,10 +197,23 @@ Design constraints, decided:
   sites (`economicRippleEngine.js:813`, `generateCrisisSpikes.js:273`) have to
   become a set membership test, which is the actual code change T7 carries.
 
-Open for Mike before build: **what happens to Jack London after both teams
-leave?** It carries RetailVitality 8.54 today with sports as part of that mix.
-Cold, or does it keep a spillover share? That is a world-shape call, not an
-engine one.
+**Jack London after the teams leave — ANSWERED (Mike-direct 2026-08-27).** It
+does not just go quiet. The drop-off is **meant to be felt**, and being felt is
+the point: an empty stadium site plus a measurable decline is what gives the
+city grounds to build something else there, so Jack London becomes **the site of
+the next civic initiative**, and the decline is what prompts the civic reaction.
+
+That closes the loop this whole plan is chasing. Sports stops being a section
+and becomes a *cause*: Mike plays out two seasons → both franchises move to
+Baylight → Jack London's dials fall → the fall is legible enough that city hall
+has to answer it → a new initiative is sited on the old stadium grounds. Engine
+→ civic → newsroom, with no invented input anywhere in the chain.
+
+Build consequence: the decline must be **real and gradual on the dials**, not a
+cosmetic flag. A civic reaction triggered by a number nobody can see in the
+sheet is the paperwork failure mode PRODUCT_VISION rejects. The existing
+`Ripple_Ledger` cause→effect row is the right carrier for "sports left, retail
+fell" so the initiative that follows can point at its own cause.
 
 Also unwired and adjacent: `v3NeighborhoodWriter.js:289` promises "profile
 rises as the build completes" and no code raises it, so Baylight would host a

@@ -49,7 +49,16 @@ sandbox is the intended target for anything unverified.
 bench is the same state as live, so the bench fire + sheet verify is the smoke. Live runs
 clear whenever Mike fires them; they confirm, they don't gate.
 
-**CURRENT: `SANDBOX 0814` (stood up S370, 2026-08-14).** Copy of live at post-C103 state (Mike-made copy per §Standing up a NEW sandbox). This is the bench for engine-wave vetting under the Groundhog model.
+**CURRENT: `SANDBOX 0827` (stood up 2026-08-27, Mike-made copy).** Clean copy of live at C104 — the proving bench for the engine.131 wave and the engine.126/128/129 backlog that shipped live with it.
+- Spreadsheet ID `14-dUy_Uz_B90bKidZeBL-WHzhJ828kTpf24Lebu9GXA`
+- Bound Apps Script ID `1BPdOpFkGSzNpRL-m5BANCdKOegMobp2g00Owf3qJbIPDuZJfaQCNEQyW`
+- Web-app deployment `AKfycbzdYHHwdrFBtrW0l38np_EGg6C1feMWCs1vXAE0O8xVdNbAvh54v4G7VYMgmKWSpkBQ` @1 (created 2026-08-27 via temp-dir route). **WARNING: any valid-token GET fires a FULL cycle — no ping mode.**
+- Code current at exact main `799fd841`. Pushed via temp-dir route with the S316 ID grep-guard; pull-back matched all 7 payload files byte-for-byte, 0 test files, 172 files pulled.
+- Bench baseline verified by service account at standup: `cycleCount` 104, `Neighborhood_Map` latest C104 / 22 rows / `SportsSeason` = `off-season` ×22, `Oakland_Sports_Feed` 206 rows through C104. Mirrors live — this is the pre-engine.131 "before" state the wave proves against.
+- **BLOCKED at first fire 2026-08-27: HTTP 403 "You need access."** The manifest is `executeAs: USER_DEPLOYING` and a brand-new script copy has never had its OAuth scopes granted; `clasp deploy` creates the deployment but cannot grant consent. Unblocking is a Mike action — open the bound script once, run any function, accept the authorization prompt. **Add this as step 3b to the standup protocol below** — it is not currently in it, and it is the second protocol gap found at a first fire (cf. the S319 `SIM_SSID` omission).
+- Script Properties `SIM_SSID` + `CYCLE_TRIGGER_TOKEN`: **unconfirmed at time of writing.** Without `SIM_SSID` the AIM-GUARD blocks every run (safe failure, nothing written anywhere).
+
+**RETIRED: `SANDBOX 0814` (stood up S370, 2026-08-14 → superseded 2026-08-27).** Drifted a cycle past live (`cycleCount` 105 vs live 104) and carries bench-only state (`Hospital_Ledger`, an `Undocked_Feed` test row). Still reachable by service account if history is needed. Copy of live at post-C103 state (Mike-made copy per §Standing up a NEW sandbox). This is the bench for engine-wave vetting under the Groundhog model.
 - Spreadsheet ID `1j1Xj6dcpxMImqz079w7bEf4N58R-ct_lOmVO2imEmsQ`
 - Bound Apps Script ID: `1WlAG5UUK5SOwlie7PnQHGXkidm-4Yhm_yKS_E5b_HYp3N9vngoaybiBM`
 - Code current at exact main `f350f97c` (S378 deploy wave — infrastructure.6 ghost-tabs + civic.22 `createInitiative_` + research.27 2.3/2.4). Pushed via temp-dir route, pull-back matched 171/171 byte-for-byte, 0 test files. *(Prior: `1348e685`, 172 files, before `continuityNotesParser.js` was deleted.)*
@@ -181,6 +190,15 @@ demographics prediction failed while the others held.
    `utilities/utilityFunctions.js:182`) and the AIM-GUARD blocks every run.
    (S319 incident: SANDBOX 0714's first C102 fire died on exactly this — step was
    missing from the S318 protocol.)
+3b. **Mike (REQUIRED — every new copy, added 2026-08-27):** open the bound script
+   in the Apps Script editor, run any function once, and accept the
+   authorization prompt. The manifest is `executeAs: USER_DEPLOYING` with zero
+   declared `oauthScopes`, so a fresh copy has never granted consent and every
+   web-app GET returns **HTTP 403 "You need access"** — which reads like a
+   permissions/sharing problem and is not one. `clasp deploy` creates the
+   deployment but cannot grant consent. (SANDBOX 0827's first fire died on
+   exactly this — the same shape as the S319 `SIM_SSID` omission: a manual step
+   the protocol did not name, found only at a first fire.)
 4. **Isolation is by construction** — verified S318: the engine contains zero
    `openById` calls; the bound script only ever touches its own container. No
    wrapper needed. (Node scripts are the only cross-container access and take

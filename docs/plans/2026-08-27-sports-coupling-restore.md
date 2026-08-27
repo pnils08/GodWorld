@@ -164,7 +164,7 @@ promises "profile rises as the build completes" with no code that raises it.
 That is a build-completion hook, not a present defect, and it is not this
 plan's. Filed as an open question below rather than built.
 
-**T7 — the sports zone follows the stadium. Specced, not built.**
+**T7 — the sports zone follows the stadium. BUILT 2026-08-27, ships dark.**
 
 Mike-direct 2026-08-27, ratifying the T5 reversal and dating what T5 assumed
 had already happened:

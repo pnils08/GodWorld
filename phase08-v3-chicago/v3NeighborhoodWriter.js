@@ -315,6 +315,25 @@ function saveV3NeighborhoodMap_(ctx) {
   for (var i = 0; i < NMAP_NEIGHBORHOODS.length; i++) {
     var name = NMAP_NEIGHBORHOODS[i];
     var profile = neighborhoods[name];
+
+    // engine.131 T7 — the stadium district stops being a construction site the
+    // cycle a franchise opens in it. The frozen profile below is deliberately
+    // damped ("under-construction remediation zone", S256) and its own comment
+    // promises it "rises as the build completes" — but nothing ever raised it.
+    // Left alone, Baylight would host a 35,000-seat stadium while still dialled
+    // retailMod 0.5 / eventMod 0.6, and the district would open dead.
+    if (profile && name === 'Baylight District' &&
+        (S.sportsZones || []).indexOf('Baylight District') >= 0) {
+      profile = {
+        nightlifeMod: 1.20,   // was 0.50 — a stadium crowd has somewhere to go after
+        noiseMod: 1.25,       // was 1.30 — construction noise gives way to event noise
+        crimeMod: 0.95,       // was 0.90 — more people, still a new and policed build
+        retailMod: 1.15,      // was 0.50 — ground-floor retail has its anchor tenant
+        eventMod: 1.35,       // was 0.60 — this is now the city's event address
+        sentimentMod: 0.06    // was 0.04 — the thing the city was promised arrived
+      };
+    }
+
     if (!profile) {
       Logger.log('saveV3NeighborhoodMap_: No profile for "' + name + '", skipping');
       continue;

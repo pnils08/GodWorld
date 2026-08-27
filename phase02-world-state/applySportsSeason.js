@@ -47,6 +47,11 @@ function applySportsSeason_(ctx) {
     // read — both franchises answer to it (engine.131).
     S.sportsSeasonByTeam = {};
 
+    // T7: an override declares the SEASON, never the geography. Where the
+    // stadiums are is a fact of the built world, so it still comes from the feed.
+    S.baylightOpenings = deriveBaylightOpenings_(ctx, S.cycleId || S.cycle || 0);
+    S.sportsZones = deriveSportsZones_(S.baylightOpenings);
+
     S.activeSports = buildActiveSportsFromOverride_(oaklandOverride);
 
     Logger.log("applySportsSeason_ v3.0: Using World_Config override");
@@ -97,6 +102,10 @@ function applySportsSeason_(ctx) {
     S.sportsFeedSeasonType = lastEntry.seasonType || "unknown";
     S.activeSports = deriveActiveSportsFromFeed_(entries);
     S.sportsSource = "oakland-feed";
+
+    // engine.131 T7 — where the sport physically IS this cycle.
+    S.baylightOpenings = deriveBaylightOpenings_(ctx, currentCycle);
+    S.sportsZones = deriveSportsZones_(S.baylightOpenings);
     // Unchanged and deliberate: the feed never licenses invented atmosphere.
     S.sportsAtmosphereEnabled = false;
 
@@ -120,6 +129,11 @@ function applySportsSeason_(ctx) {
     S.activeSports = [];
     S.sportsSource = "oakland-feed-empty";
     S.sportsAtmosphereEnabled = false;
+
+    // T7: venue state is HISTORY, not this cycle's events. A quiet cycle with
+    // no game does not move a franchise back out of its own stadium.
+    S.baylightOpenings = deriveBaylightOpenings_(ctx, currentCycle);
+    S.sportsZones = deriveSportsZones_(S.baylightOpenings);
 
     Logger.log("applySportsSeason_ v3.1: No feed entries for cycle " + currentCycle);
   }
@@ -361,6 +375,112 @@ function describeSeasonByTeam_(byTeam) {
     parts.push(team + ' ' + byTeam[team]);
   }
   return parts.length ? parts.join(', ') : 'no team rows';
+}
+
+
+/**
+ * ============================================================================
+ * engine.131 T7 — the sports zone follows the stadium
+ * ============================================================================
+ *
+ * Canon (Mike-direct 2026-08-27): both stadiums are in the Baylight District.
+ * The Oaks' opens in THEIR mid-season; the A's opens the NEXT early-season.
+ * Two dated events on separate calendars, not one move — so for a stretch the
+ * city has live sport in two districts at once, and the zone must be a SET.
+ *
+ * Derived from the feed, not latched in state. The feed is already the
+ * permanent record of every phase each team has been in, so "has this team
+ * opened yet" is a question its history answers: the first qualifying row at or
+ * before the current cycle. That makes this deterministic, self-healing after
+ * any state loss, and — the load-bearing reason — free of a Phase-2 sheet
+ * write, which engine.md forbids outside Phase 10.
+ *
+ * The anchor cycle is what makes "NEXT early-season" mean anything: the A's
+ * have 38 early-season rows behind them, so without a floor the derivation
+ * would report them moved since the beginning of time.
+ */
+var BAYLIGHT_OPEN_AFTER_CYCLE_ = 104;   // canon declared at C104; openings are the first qualifying phase AFTER it
+var BAYLIGHT_ZONE_ = 'Baylight District';
+var LEGACY_SPORTS_ZONES_ = ['Jack London', 'Downtown'];
+var BAYLIGHT_OPENINGS_ = {
+  'Oaks': 'mid-season',
+  "A's": 'early-season'
+};
+
+
+/**
+ * Scan the whole feed for the first cycle at which each team hit its opening
+ * phase after the anchor. Returns {team: openingCycle} for teams that have moved.
+ */
+function deriveBaylightOpenings_(ctx, currentCycle) {
+  var opened = {};
+  var ss = ctx.ss;
+  if (!ss) return opened;
+
+  var sheet = ss.getSheetByName('Oakland_Sports_Feed');
+  if (!sheet) return opened;
+
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return opened;
+
+  var headers = data[0];
+  var cycleCol = findColumnIndex_(headers, ['Cycle', 'cycle']);
+  var seasonTypeCol = findColumnIndex_(headers, ['SeasonType', 'seasontype']);
+  var teamsCol = findColumnIndex_(headers, ['TeamsUsed', 'teamsused', 'Team', 'team']);
+  if (cycleCol === -1 || seasonTypeCol === -1 || teamsCol === -1) return opened;
+
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var rowCycle = Number(row[cycleCol]);
+    if (!rowCycle) continue;
+    if (rowCycle <= BAYLIGHT_OPEN_AFTER_CYCLE_) continue;  // pre-anchor history cannot open a stadium
+    if (rowCycle > currentCycle) continue;                 // the future has not happened yet
+
+    var team = normalizeOaklandFeedTeam_(row[teamsCol]);
+    if (!team || !BAYLIGHT_OPENINGS_[team]) continue;
+
+    var phase = canonicalSportsPhase_(row[seasonTypeCol]);
+    if (phase !== BAYLIGHT_OPENINGS_[team]) continue;
+
+    // Earliest qualifying cycle wins — a team does not un-open when its phase
+    // rolls back to preseason next year.
+    if (opened[team] === undefined || rowCycle < opened[team]) {
+      opened[team] = rowCycle;
+    }
+  }
+
+  return opened;
+}
+
+
+/**
+ * Resolve the neighborhoods currently hosting Oakland sport.
+ *
+ * Until a team opens, behaviour is exactly what it was — Jack London and
+ * Downtown, the districts the engine and the Initiative_Tracker both already
+ * name. Each team that has opened adds Baylight. Once BOTH have gone, the
+ * legacy zones drop out, and that drop is the point: Mike-direct, the fall in
+ * Jack London is meant to be FELT, because an empty stadium site plus a visible
+ * decline is what gives the city grounds to site its next civic initiative there.
+ */
+function deriveSportsZones_(opened) {
+  var teams = [];
+  for (var t in BAYLIGHT_OPENINGS_) {
+    if (Object.prototype.hasOwnProperty.call(BAYLIGHT_OPENINGS_, t)) teams.push(t);
+  }
+
+  var movedCount = 0;
+  for (var i = 0; i < teams.length; i++) {
+    if (opened[teams[i]] !== undefined) movedCount++;
+  }
+
+  var zones = [];
+  if (movedCount < teams.length) {
+    for (var j = 0; j < LEGACY_SPORTS_ZONES_.length; j++) zones.push(LEGACY_SPORTS_ZONES_[j]);
+  }
+  if (movedCount > 0) zones.push(BAYLIGHT_ZONE_);
+
+  return zones;
 }
 
 

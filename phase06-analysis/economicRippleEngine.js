@@ -78,9 +78,38 @@ var ECONOMIC_TRIGGERS = {
   BUSINESS_EXPANSION: { impact: 5, duration: 3, sectors: ['services', 'business'], neighborhoods: [] }
 };
 
+// engine.131 T7 — ripple types whose geography follows the stadium.
+var SPORTS_TRIGGER_TYPES_ = {
+  SPORTS_CHAMPIONSHIP: true,
+  PLAYOFF_SPENDING: true,
+  CHAMPIONSHIP_BOOM: true
+};
+
+
+/**
+ * engine.131 T7 — the district a sports ripple lands in.
+ *
+ * Prefers Baylight once a franchise has opened there, because that is where the
+ * crowd physically is. Falls back to Jack London so behaviour is unchanged for
+ * every cycle before the first stadium opens.
+ */
+function primarySportsZone_(cal) {
+  var zones = (cal && cal.sportsZones) || [];
+  for (var i = 0; i < zones.length; i++) {
+    if (zones[i] === 'Baylight District') return zones[i];
+  }
+  return zones.length ? zones[0] : 'Jack London';
+}
+
+
 var NEIGHBORHOOD_ECONOMIES = {
   'Downtown': { primary: ['business', 'civic', 'retail'], sensitivity: 1.2 },
   'Jack London': { primary: ['entertainment', 'food', 'nightlife'], sensitivity: 1.1 },
+  // engine.131 T7 — the stadium district needs its own economy or it cannot
+  // receive the sport that moves into it. Entertainment-led like Jack London
+  // (it inherits the crowd) and slightly more sensitive, being new-build with
+  // its trade still forming.
+  'Baylight District': { primary: ['entertainment', 'food', 'retail'], sensitivity: 1.15 },
   'Rockridge': { primary: ['retail', 'services', 'food'], sensitivity: 0.9 },
   'Temescal': { primary: ['healthcare', 'education', 'retail', 'arts'], sensitivity: 0.8 },
   'Fruitvale': { primary: ['retail', 'food', 'community'], sensitivity: 1.0 },
@@ -144,6 +173,7 @@ function runEconomicRippleEngine_(ctx) {
     isFirstFriday: S.isFirstFriday || false,
     isCreationDay: S.isCreationDay || false,
     sportsSeason: S.sportsSeason || 'off-season',
+    sportsZones: S.sportsZones || [],   // engine.131 T7 — where the sport physically is
     season: S.season || 'unknown',
     month: S.month || 0
   };
@@ -345,7 +375,12 @@ function mapToCanonicalNeighborhood_(blNeighborhood) {
     if (n === canonical[i] || n.indexOf(canonical[i]) >= 0) return canonical[i];
   }
   if (n === 'Old Oakland' || n === 'Uptown' || n === 'KONO') return 'Downtown';
-  if (n === 'Brooklyn Basin' || n === 'Baylight District' || n === 'Coliseum') return 'Jack London';
+  // T7: 'Baylight District' removed from this alias — it now carries its own
+  // NEIGHBORHOOD_ECONOMIES profile. Left aliased, every economic effect aimed at
+  // the new stadium district would have been redirected into the district the
+  // teams just LEFT, propping up Jack London on sport it no longer hosts and
+  // erasing the decline that is supposed to be felt.
+  if (n === 'Brooklyn Basin' || n === 'Coliseum') return 'Jack London';
   if (n === 'Piedmont Avenue') return 'Rockridge';
   if (n === 'City-wide') return 'Downtown';
   return null;
@@ -408,15 +443,15 @@ function detectCalendarRipples_(ctx, currentCycle) {
   // Sports
   if (cal.sportsSeason === 'championship') {
     createRipple_(S, 'CHAMPIONSHIP_BOOM', currentCycle, 
-      { description: 'Championship economic surge' }, 'Jack London', cal);
+      { description: 'Championship economic surge' }, primarySportsZone_(cal), cal);
   } else if (cal.sportsSeason === 'playoffs') {
     createRipple_(S, 'PLAYOFF_SPENDING', currentCycle, 
-      { description: 'Playoff game spending' }, 'Jack London', cal);
+      { description: 'Playoff game spending' }, primarySportsZone_(cal), cal);
   }
   
   if (cal.holiday === 'OpeningDay') {
     createRipple_(S, 'SPORTS_CHAMPIONSHIP', currentCycle, 
-      { description: 'Opening Day economic boost' }, 'Jack London', cal);
+      { description: 'Opening Day economic boost' }, primarySportsZone_(cal), cal);
   }
   
   // First Friday
@@ -565,7 +600,14 @@ function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, ca
     type: triggerType,
     impact: Math.round(impact * 100) / 100,
     sectors: trigger.sectors,
-    neighborhoods: trigger.neighborhoods,
+    // engine.131 T7 — a sports ripple spreads to wherever the sport actually is.
+    // The three sports templates still declare ['Jack London','Downtown'] as their
+    // spread, which is right until a franchise opens in Baylight and wrong the
+    // moment one does. Substituting here keeps every non-sports template untouched
+    // and means the two-district changeover window works without editing templates.
+    neighborhoods: SPORTS_TRIGGER_TYPES_[triggerType] && cal && cal.sportsZones && cal.sportsZones.length
+      ? cal.sportsZones.slice()
+      : trigger.neighborhoods,
     primaryNeighborhood: neighborhood,
     startCycle: cycle,
     endCycle: cycle + trigger.duration,
@@ -810,7 +852,9 @@ function calculateNeighborhoodEconomies_(ctx) {
       activeRipples: localRipples,
       sectors: profile.primary,
       isHolidayZone: holidayZones.indexOf(nh) >= 0,
-      isSportsZone: nh === 'Jack London' && cal.sportsSeason !== 'off-season'
+      // T7: a set, not a string — during the changeover the city has live sport
+      // in two districts at once.
+      isSportsZone: (cal.sportsZones || []).indexOf(nh) >= 0 && cal.sportsSeason !== 'off-season'
     };
   }
   

@@ -269,9 +269,13 @@ function generateCrisisSpikes_(ctx) {
       n.weight += 0.2;
     }
 
-    // Opening Day / Sports → Jack London, Downtown
+    // Opening Day / Sports → wherever the sport actually is (engine.131 T7).
+    // Was hardcoded to Jack London + Downtown. Those are correct only until a
+    // franchise opens in Baylight; after that this would keep sending crowd
+    // risk to a district with no game in it.
+    var sportsZones_ = S.sportsZones || ['Jack London', 'Downtown'];
     if ((holiday === 'OpeningDay' || sportsSeason === 'championship') &&
-        (n.name === 'Jack London' || n.name === 'Downtown')) {
+        sportsZones_.indexOf(n.name) >= 0) {
       n.weight += 0.3;
     }
 

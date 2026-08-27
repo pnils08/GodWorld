@@ -47,6 +47,7 @@ const applySportsSeason = sandbox.applySportsSeason_;
 // deepStrictEqual rejects them against host-realm literals even when every key
 // and value matches. Re-home them before comparing.
 const plain = (o) => Object.assign({}, o);
+const arr = (a) => Array.prototype.slice.call(a);
 const byTeam = (entries) => plain(sandbox.deriveSeasonByTeamFromFeed_(entries));
 
 assert.strictEqual(typeof canonical, 'function');
@@ -232,3 +233,93 @@ assert.strictEqual(overridden.sportsAtmosphereEnabled, true);
 assert.deepStrictEqual(plain(overridden.sportsSeasonByTeam), {});
 
 console.log('sportsSeasonPhase.test.js: all assertions passed');
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.131 T7 — the sports zone follows the stadium
+// ═══════════════════════════════════════════════════════════════════════════
+const openings = sandbox.deriveBaylightOpenings_;
+const zones = sandbox.deepestSportsPhase_ && sandbox.deriveSportsZones_;
+assert.strictEqual(typeof openings, 'function');
+assert.strictEqual(typeof zones, 'function');
+
+function feedCtx(rows) {
+  return {
+    summary: { cycleId: 200 },
+    config: {},
+    ss: {
+      getSheetByName: (n) => n !== 'Oakland_Sports_Feed' ? null : {
+        getDataRange: () => ({
+          getValues: () => [['Cycle', 'SeasonType', 'EventType', 'TeamsUsed'], ...rows],
+        }),
+      },
+    },
+  };
+}
+
+// Nothing has opened: behaviour is exactly what it was before T7.
+assert.deepStrictEqual(plain(openings(feedCtx([[104, 'mid-season', 'game-result', 'Oaks']]), 200)), {},
+  'a row AT the anchor cycle must not open a stadium — the anchor is exclusive');
+assert.deepStrictEqual(arr(zones({})), ['Jack London', 'Downtown'],
+  'pre-move geography is unchanged, which is what makes this safe to ship dark');
+
+// The A's have 38 early-season rows in their history. Without the anchor floor
+// the derivation would report them moved since the beginning of time.
+assert.deepStrictEqual(
+  plain(openings(feedCtx([[30, 'early-season', 'game-result', "A's"], [88, 'early-season', 'game-result', "A's"]]), 200)),
+  {},
+  'pre-anchor history must never open a stadium'
+);
+
+// Oaks open at their mid-season, per canon.
+assert.deepStrictEqual(
+  plain(openings(feedCtx([[110, 'preseason', 'game-result', 'Oaks'], [118, 'mid-season', 'game-result', 'Oaks']]), 200)),
+  { Oaks: 118 }
+);
+// ...and the A's at an early-season, not a mid-season.
+assert.deepStrictEqual(
+  plain(openings(feedCtx([[120, 'mid-season', 'game-result', "A's"]]), 200)), {},
+  "a mid-season row is the OAKS trigger, never the A's"
+);
+assert.deepStrictEqual(
+  plain(openings(feedCtx([[130, 'early-season', 'game-result', "A's"]]), 200)), { "A's": 130 }
+);
+
+// Earliest qualifying cycle wins — a franchise does not un-open when its phase
+// rolls back around to preseason next year.
+assert.deepStrictEqual(
+  plain(openings(feedCtx([
+    [118, 'mid-season', 'game-result', 'Oaks'],
+    [140, 'preseason', 'game-result', 'Oaks'],
+    [150, 'mid-season', 'game-result', 'Oaks'],
+  ]), 200)),
+  { Oaks: 118 }
+);
+
+// The future has not happened yet.
+assert.deepStrictEqual(
+  plain(openings(feedCtx([[150, 'mid-season', 'game-result', 'Oaks']]), 120)), {},
+  'a feed row beyond the current cycle must not open a stadium early'
+);
+
+// THE CHANGEOVER WINDOW: one team moved, one has not — sport in two districts.
+assert.deepStrictEqual(arr(zones({ Oaks: 118 })), ['Jack London', 'Downtown', 'Baylight District'],
+  'while one franchise remains, the old districts still host sport');
+
+// Both gone: the legacy districts drop out. Mike-direct — the fall in Jack
+// London is meant to be FELT, because that is what gives the city grounds to
+// site its next civic initiative on the old stadium ground.
+assert.deepStrictEqual(arr(zones({ Oaks: 118, "A's": 130 })), ['Baylight District'],
+  'once both franchises have gone, Jack London and Downtown lose the sport');
+
+// End-to-end: S.sportsZones is populated on every exit path, including a quiet
+// cycle — venue state is history, and a cycle with no game does not move a
+// franchise back out of its own stadium.
+const t7live = runWithFeed([[104, 'late-season', 'player-feature', "A's"]]);
+assert.deepStrictEqual(plain(t7live.baylightOpenings), {});
+assert.deepStrictEqual(arr(t7live.sportsZones), ['Jack London', 'Downtown']);
+
+const t7quiet = runWithFeed([[103, 'championship', 'game-result', "A's"]]);
+assert.deepStrictEqual(arr(t7quiet.sportsZones), ['Jack London', 'Downtown'],
+  'a quiet cycle still reports where the stadiums are');
+
+console.log('sportsSeasonPhase.test.js T7: all assertions passed');

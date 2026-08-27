@@ -161,16 +161,60 @@ async function prefetchAuthoritativeCanon(edition) {
     leadNeighborhood: r.LeadNeighborhood,
   })).filter((r) => r.id || r.name);
 
-  // Roster — include all players with age computed from BirthYear.
-  const rosterRows = roster.map((r) => ({
-    name: `${r.First || ''} ${r.Last || ''}`.trim(),
-    popid: r.POPID,
-    team: r.Team,
-    position: r.Position,
-    age: computeAge(r.BirthYear),
-    birthYear: r.BirthYear,
-    overall: r.Overall,
-  })).filter((r) => r.name);
+  // Roster — the sports half of the verification gate.
+  //
+  // This block used to read r.BirthYear and r.Overall. As_Roster carries
+  // NEITHER column (verified live: 0/90 rows have either), so every player
+  // printed as "age ? | overall ?" — and, worse, the whole stat line the sheet
+  // does carry was dropped. Rhea had no statistics to verify a sports claim
+  // against, which means a writer could invent any batting line and the gate
+  // could not contradict it. On a project whose whole subject is a baseball
+  // dynasty, that is the verification hole that matters most.
+  //
+  // Age comes from Simulation_Ledger instead, joined on POPID — all 90 roster
+  // POPIDs resolve there. Stats come from the sheet's own columns, hitter or
+  // pitcher, whichever the row actually populates.
+  const slById = new Map();
+  for (const row of sl) if (row.POPID) slById.set(String(row.POPID).trim(), row);
+
+  const statLine = (r) => {
+    const bits = [];
+    const add = (label, v, fmt) => {
+      const raw = (v == null ? '' : String(v)).trim();
+      if (raw === '') return;
+      bits.push(`${label} ${fmt ? fmt(raw) : raw}`);
+    };
+    // Hitting
+    add('AVG', r.AVG);
+    add('HR', r.HR);
+    add('RBI', r.RBI);
+    add('H', r.H);
+    add('AB', r.AB);
+    add('SB', r.SB);
+    // Pitching
+    add('ERA', r.ERA);
+    add('W-L', r['W-L']);
+    add('SV', r.SV);
+    add('IP', r.IP);
+    // Both
+    add('WAR', r.WAR);
+    return bits.join(' · ');
+  };
+
+  const rosterRows = roster.map((r) => {
+    const popid = r.POPID ? String(r.POPID).trim() : '';
+    const slRow = popid ? slById.get(popid) : null;
+    return {
+      name: `${r.First || ''} ${r.Last || ''}`.trim(),
+      popid,
+      team: r.Team,
+      position: r.Position,
+      age: computeAge(slRow ? slRow.BirthYear : undefined),
+      birthYear: slRow ? slRow.BirthYear : undefined,
+      salary: r.Salary,
+      stats: statLine(r),
+    };
+  }).filter((r) => r.name);
 
   return { citizens, council: councilRows, initiatives: initiativeRows, roster: rosterRows };
 }
@@ -200,7 +244,15 @@ function formatAuthoritativeBlock(canon, cycle) {
   lines.push('');
   lines.push(`## A's Roster (from As_Roster)`);
   for (const p of canon.roster) {
-    lines.push(`- ${p.name} | ${p.position || '?'} | age ${p.age ?? '?'} | overall ${p.overall || '?'}${p.popid ? ` | ${p.popid}` : ''}`);
+    const head = [
+      p.name,
+      p.position || '?',
+      p.age != null ? `age ${p.age}` : 'age ?',
+      p.popid || null,
+    ].filter(Boolean).join(' | ');
+    // Stats last and clearly labelled: this is the line a sports claim gets
+    // checked against, so it has to be unmissable in the block.
+    lines.push(`- ${head}${p.stats ? ` | ${p.stats}` : ' | (no stat line on As_Roster)'}`);
   }
   lines.push('');
   return lines.join('\n');

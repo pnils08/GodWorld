@@ -185,6 +185,31 @@ Cross-check: this derivation lands on "Oaks preseason, A's late-season" for
 C104, which is what `buildWorldSummary`'s independent builder-side derivation
 already reported (`671c5424`). Two separate code paths, same answer.
 
+## Guard coverage — verified, not assumed (2026-08-27)
+
+Restoring the true phase is only safe if the nine atmosphere guards *dominate*
+every sports branch in their files. Guard **presence** was the first check
+(`grep -c` ≥ 1 in 9 of 10 files); presence is not coverage — a guard wrapping
+one branch while three others read the raw value would have re-opened C122 the
+moment the sentinel lifted, and `applyDemographicDrift` alone has 4 branch sites
+against 1 guard occurrence.
+
+Checked per site. The pattern is uniform and is the strongest available form:
+each file binds the value **once, at the top**, already neutered —
+
+```js
+var sportsSeason = (S.sportsAtmosphereEnabled === true) ? (S.sportsSeason || "off-season") : "";
+```
+
+— and every branch below reads that local, never `S.sportsSeason`. One choke
+point per file, so coverage is total by construction rather than by
+enumeration. A sweep for direct `S.sportsSeason` reads that bypass the local
+returns one hit across all nine files, and it is a comment.
+
+Consequence: on a feed-sourced cycle the flag is `false`, every guarded local
+collapses to `""`/`"off-season"`, and the lore writers stay mute no matter how
+deep the real phase runs — while the ~92 unguarded dial sites now see the truth.
+
 ## Guardrails
 
 - The nine `sportsAtmosphereEnabled` guards are not relaxed in this pass. Some

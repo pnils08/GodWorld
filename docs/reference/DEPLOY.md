@@ -93,6 +93,16 @@ The trigger token exists so the TERMINAL runs the proving loop itself, no Mike i
 1. **Build** on main, commit as-you-go.
 2. **Push to bench** via the temp-dir route (sandbox `.clasp.json` written LAST, ID grep-verified — S316 gotcha).
 3. **Bump the deployment** — `CLAUDE_CTL=1 npx clasp deploy --deploymentId AKfycbztm3… --description "<change>"`. **⚠️ `clasp push` alone does NOT change what the web-app fires (S325 incident)** — the deployment serves a PINNED version.
+
+   **RELEARNED 2026-08-27, in a shape the S325 note did not cover — a deployment created BEFORE the script was authorized stays pinned to an unauthorized version, and bumping is what releases it.** The tell is that the failure *moves* instead of clearing, and neither code looks like an auth problem:
+
+   | Response | Means | Fix |
+   |---|---|---|
+   | `403` + Drive "You need access" HTML | fresh script never granted OAuth consent | Mike opens the script, runs any function, accepts (standup step 3b) |
+   | `404` + "Sorry, unable to open the file at this time" | deployment pinned to a pre-authorize version | **bump the deployment** — authorizing does NOT retroactively fix an existing one |
+   | `200` + JSON | engine code reached | read `ok` / `error` |
+
+   Both non-200s return **Drive-branded HTML, not JSON**, so they read as sharing or URL mistakes rather than deployment-version state — which is why S325's lesson did not transfer on sight. A 404 here does not mean the URL is wrong. The rule generalizes: **any time the served version could predate the current script state — new deployment, fresh authorize, new copy — bump before concluding anything from the response.** Curl with `-w "HTTP %{http_code}"` and read the code first; the HTML body is noise.
 4. **Fire:** GET `https://script.google.com/macros/s/<deploymentId>/exec?token=<CYCLE_TRIGGER_TOKEN>`. Returns `{ok, ranMs, diag…}` JSON. **WARNING: any valid-token GET fires a FULL cycle — no ping mode.** Ask Mike for the Apps Script execution log when the JSON isn't enough.
 5. **Verify** against the sandbox sheet via service account (explicit sheet ID — env default points at PROD). Run as many groundhog cycles as the change needs; repeat 2–5 until clean.
 6. **Deploy proven code to live** (repo-root `CLAUDE_CTL=1 npx clasp push`, /deploy pre-flight).
@@ -202,6 +212,14 @@ demographics prediction failed while the others held.
    deployment but cannot grant consent. (SANDBOX 0827's first fire died on
    exactly this — the same shape as the S319 `SIM_SSID` omission: a manual step
    the protocol did not name, found only at a first fire.)
+3c. **Mike (REQUIRED on a fresh bench, added 2026-08-27):** Script Properties →
+   `CARRY_FORWARD_COLD_START_OK` = `1`. A new copy has no `PREV_EVENING_JSON` /
+   `PREV_CYCLE_STATE_JSON` (PropertiesService does not copy) and the
+   carry-forward gate correctly aborts the first fire — *"The world must not
+   run without yesterday."* This is the third manual property a fresh bench
+   needs, alongside `SIM_SSID` and `CYCLE_TRIGGER_TOKEN`.
+   **Order matters: authorize (3b) BEFORE bumping the deployment**, or the
+   deployment pins an unauthorized version and every GET 404s.
 4. **Isolation is by construction** — verified S318: the engine contains zero
    `openById` calls; the bound script only ever touches its own container. No
    wrapper needed. (Node scripts are the only cross-container access and take

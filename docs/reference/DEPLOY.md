@@ -223,6 +223,42 @@ demographics prediction failed while the others held.
    needs, alongside `SIM_SSID` and `CYCLE_TRIGGER_TOKEN`.
    **Order matters: authorize (3b) BEFORE bumping the deployment**, or the
    deployment pins an unauthorized version and every GET 404s.
+### Does a bench cycle contaminate the crons? No — verified empirically 2026-08-27
+
+A bench fire runs the FULL engine, including packet builders, so the question
+"is the sandbox updating cron packets?" is the right one to ask. It is not, and
+here is the evidence rather than the reasoning:
+
+**Live sheet after two bench cycles (C105, C106) — every value unchanged:**
+
+| | before bench | after |
+|---|---|---|
+| `cycleCount` / `lastRun` | 104 / 8/19/2026 | 104 / 8/19/2026 |
+| `Neighborhood_Map` max cycle | C104, `SportsSeason` off-season x22 | identical |
+| `Cycle_Packet` | 63 rows, max C104 | identical |
+| `Carry_Forward_Store` | 0 rows | 0 rows |
+
+**Cron output after an overnight run:** 81 files touched in `output/`, and every
+cycle-tagged cron artifact is `c104` — 56 of 56. The bench sheet id appears in
+**zero** files under `output/`. No crontab entry sets a sheet id, so all 28 jobs
+resolve `GODWORLD_SHEET_ID` to live from the env file.
+
+**Why it holds structurally:**
+- The cycle-path packet builders write only through `ctx.ss` — `buildCyclePacket_`
+  uses `ensureSheet_(ctx.ss, 'Cycle_Packet', …)`, `buildMediaPacket_` likewise. On
+  a bench fire `ctx.ss` IS the bench, so packets land on the bench sheet.
+- The Drive exporters that *would* be shared — `cycleExportAutomation.js`,
+  `exportCycleArtifacts.js`, `exportCitizensSnapshot.js`, `textCrawler.js` — are
+  **not on the cycle path**; zero `safePhaseCall_` sites in `godWorldEngine2.js`.
+  They are operator/trigger-fired. This matters because they resolve folders by
+  NAME (`DriveApp.getFoldersByName('exports')`), and bench and live run as the
+  same Google account, so they would collide. **Any future work that puts one of
+  these on the cycle path breaks bench isolation** — that is the thing to guard.
+- No outbound calls on the cycle path. The lone `UrlFetchApp` mention in
+  `applyInitiativeImplementationEffects.js` is a comment; the code uses
+  `require('fs')`, undefined in Apps Script, inside a try/catch.
+- Crons are Node scripts reading live by env default; they never learn a bench id.
+
 4. **Isolation is by construction** — verified S318: the engine contains zero
    `openById` calls; the bound script only ever touches its own container. No
    wrapper needed. (Node scripts are the only cross-container access and take

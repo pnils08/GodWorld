@@ -64,15 +64,24 @@ preseason `+0.1` sentiment climbing to finals `×1.5` traffic, `×1.5` nightlife
 cluster ripple to WATERFRONT_WEST / EAST_OAKLAND / DOWNTOWN_CORE. It has never
 run. `economicRippleEngine` carries eight more branches in the same condition.
 
-The symptom on the sheet — Baylight District, the district that exists *because*
-Oakland has a baseball dynasty, is the deadest of the three stadium-adjacent
-neighborhoods:
+### Retracted: the Baylight retail claim
 
-| Neighborhood (C104) | RetailVitality | EventAttractiveness |
-|---|---|---|
-| Downtown | 10.05 | 36.08 |
-| Jack London | 8.54 | 35.18 |
-| **Baylight District** | **3.43** | **9** |
+This plan opened citing Baylight District's C104 dials — RetailVitality 3.43 and
+EventAttractiveness 9, against Jack London 8.54/35.18 and Downtown 10.05/36.08 —
+as the symptom of the muzzle. **That was wrong, and the correction is kept here
+rather than deleted because it is the more useful fact.**
+
+Baylight is low *by design*. `v3NeighborhoodWriter.js:289` sets it
+`retailMod: 0.5, eventMod: 0.6, nightlifeMod: 0.5` with the note
+"under-construction remediation zone: quiet retail/nightlife now" — a
+Mike-approved S256 profile. `economicRippleEngine.js:348` additionally aliases
+Baylight to Jack London for economic-ripple purposes, which is coherent while
+the site is a construction zone. Nothing about those numbers is sports-muzzle
+damage.
+
+The muzzle's cost stands on the measurements above it — 92 inert sites, five
+straight cycles of a false `off-season`, and the sentinel persisted into
+`Neighborhood_Map`. It never needed the Baylight number.
 
 ## The seam
 
@@ -129,12 +138,31 @@ fix list and never received the flag. Its four sites are dial-class
 phase — but the miss is recorded here because the sentinel is what has been
 covering for it, and the sentinel is going away.
 
-**T5 — stale sports geography.** `economicRippleEngine.js:813` hardcodes
-`isSportsZone: nh === 'Jack London'`; `generateCrisisSpikes.js:273` weights
-sports crowds to Jack London and Downtown. Canon ([[../canon/INSTITUTIONS]]) puts
-the 35,000-seat stadium on the 65-acre former-Coliseum site in the **Baylight
-District**, A's as anchor tenant, and Mike confirms both stadiums sit there.
-Jack London stays a real spillover district — it does not stay *the* sports zone.
+**T5 — stale sports geography. REVERSED, not built.** The plan called
+`economicRippleEngine.js:813` (`isSportsZone: nh === 'Jack London'`) and
+`generateCrisisSpikes.js:273` (sports crowds weighted to Jack London and
+Downtown) stale, on the strength of canon putting the 35,000-seat stadium on the
+former-Coliseum site in the Baylight District with the A's as anchor tenant.
+
+Checking the live sheet before cutting reversed it. `Initiative_Tracker`
+INIT-006 at C104: `ImplementationPhase = construction-planning`,
+`AffectedNeighborhoods = Jack London, Downtown`. The vote passed at C83 and the
+build has not left planning 21 cycles later — while INIT-005 reached
+`construction-active` and INIT-001 `disbursement-active`, so the mechanism does
+advance; Baylight simply hasn't.
+
+**The stadium is not built at C104.** Jack London and Downtown are where the
+sports economy actually is, the engine agrees with the tracker, and the
+hardcodes are correct for the current world. Repointing them at Baylight would
+have broken a working model to match a state the world has not reached — the
+canon destination read as if it were the present.
+
+What survives as a real forward item: **when Baylight completes, the sports zone
+has to move with the stadium**, and today nothing would move it — those two
+sites are hardcoded strings, and the `v3NeighborhoodWriter` profile comment
+promises "profile rises as the build completes" with no code that raises it.
+That is a build-completion hook, not a present defect, and it is not this
+plan's. Filed as an open question below rather than built.
 
 **T6 — measure the delta.** Dry-run a cycle before and after and diff the
 dials. The acceptance question is not "does it run" but "did Baylight wake up."
@@ -167,6 +195,24 @@ already reported (`671c5424`). Two separate code paths, same answer.
   cycle forward. Historical `off-season` rows are the record of what the engine
   believed at the time and are **not** backfilled — engine output is canon, and a
   wrong value that fired is an event the citizens lived.
+
+## Open questions — for Mike, not decided here
+
+1. **Does a team's phase carry forward across a quiet cycle?** Today it does
+   not: no feed row for cycle N means `off-season`, per established feed law
+   ("old team state does not speak by itself"). But a club can be mid-postseason
+   in the fiction while Mike simply hasn't entered a row that cycle, and the city
+   goes dark for a cycle in the middle of a pennant race. Changing this has its
+   own blast radius across the same ~92 sites and was deliberately not ridden in
+   on this change.
+2. **The Baylight completion hook.** When the build finishes, the sports zone
+   should move from Jack London to Baylight, and Baylight's neighborhood profile
+   should rise off its construction-site values. Neither is wired. Related:
+   INIT-006 has sat at `construction-planning` since C83 — whether that is a
+   civic-lane stall or intended pacing is Mike's call, not the engine's.
+3. **Oaks second.** Everything here is team-agnostic and the Oaks already flow
+   through `sportsSeasonByTeam`. What is *not* built is anything that treats a
+   7-player expansion roster differently from a 90-player dynasty.
 
 ## Acceptance
 

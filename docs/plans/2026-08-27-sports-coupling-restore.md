@@ -278,6 +278,51 @@ deep the real phase runs — while the ~92 unguarded dial sites now see the trut
   believed at the time and are **not** backfilled — engine output is canon, and a
   wrong value that fired is an event the citizens lived.
 
+## T7 bench proof + the truth-source split it exposed (2026-08-27)
+
+Bench 0827 C107, seeded with an Oaks `mid-season` row (the canon opening
+trigger). `ok:true`, 155s, clean.
+
+| Neighborhood | retail C106 → C107 | event | nightlife |
+|---|---|---|---|
+| **Baylight District** | **2.49 → 8.20** | **3.00 → 14.00** | **0.42 → 0.82** |
+| Jack London | 9.11 → 8.30 | — | — |
+
+Baylight came off its construction-site profile the cycle the franchise opened,
+and a sports neighborhood-effect ripple now names it as a target. Jack London
+eases slightly rather than collapsing — correct, because the A's have not moved
+yet and it is still a live sports zone. The full drop waits on the second
+opening, which is the design.
+
+### FINDING — two sources of truth for "is the stadium built"
+
+The same C107 `Ripple_Ledger` carries this row:
+
+> `initiative-implementation | Baylight District — Final Council Vote is
+> construction-planning — ongoing sports effects in Jack London, Downtown`
+
+So in one cycle the world says both *the Oaks are playing in Baylight* (engine,
+feed-derived) and *Baylight is still in construction-planning with its sports
+effects landing in Jack London and Downtown* (civic, from INIT-006's
+`ImplementationPhase` + `AffectedNeighborhoods` on `Initiative_Tracker`).
+
+Both are internally correct and nothing reconciles them. T7 deliberately derives
+the opening from the feed — that was the right call for determinism and for
+staying out of Phase-10 write territory — but it means the engine can open a
+stadium the civic layer does not know exists. INIT-006 has sat at
+`construction-planning` since C83.
+
+This is the same failure class as the C104 Grand Lake contradiction that started
+this whole line of work: the engine recorded one thing and the published layer
+said another. Worth closing before the second opening makes it louder.
+
+Options, none chosen — this crosses into civic and is Mike's call:
+1. The opening trigger *requires* INIT-006 to have reached a completion phase —
+   civic becomes the gate, feed becomes the timing.
+2. The opening *advances* INIT-006 — engine drives civic (matches
+   PRODUCT_VISION's "vote passes → deploy cycle → engine feels it").
+3. Leave them independent and add a detector that flags the disagreement.
+
 ## Open questions — for Mike, not decided here
 
 1. **Does a team's phase carry forward across a quiet cycle?** Today it does

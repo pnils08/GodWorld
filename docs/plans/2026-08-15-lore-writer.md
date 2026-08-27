@@ -104,3 +104,4 @@ Nothing moves out of quarantine without Rhea passing and me reading it. v1 does 
 ## Changelog
 
 - 2026-08-15 — Initial spec (research-build). Supersedes antigravity's `autonomous_newsroom_plan.md`: routing corrected to research-build, framing corrected from pipeline-replacement to lore layer, invention seam added as the core contract.
+- 2026-08-27 — Weekly cron added (pipeline.61, research-build): `scripts/cron-lore-run.js` runs Fridays 15:00, generation only — the plan's §4 pipeline and §7 pre-mortem ("v1 does not automate the promotion step") are unchanged, grading still requires a Rhea/Claude read per `.claude/skills/lore-ingest/SKILL.md`. `scripts/loreTargetSelect.js` fills the target-selection gap the original spec left implicit (every run through 2026-08-20 was hand-picked): round-robins Tier-1/2 citizens with no passed lore entry, cursor-persisted in `output/lore-target-cursor.json`.

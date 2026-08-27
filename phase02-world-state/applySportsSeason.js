@@ -43,6 +43,9 @@ function applySportsSeason_(ctx) {
     S.sportsAtmosphereEnabled = true;
     S.sportsFeedSeasonType = "";
     S.sportsFeedEntries = [];
+    // Maker override is a single city-wide declaration, not a per-team feed
+    // read — both franchises answer to it (engine.131).
+    S.sportsSeasonByTeam = {};
 
     S.activeSports = buildActiveSportsFromOverride_(oaklandOverride);
 
@@ -62,37 +65,63 @@ function applySportsSeason_(ctx) {
   S.sportsFeedEntries = entries;
 
   if (entries.length > 0) {
-    // S302 SOURCE GATE: feed SeasonType is Mike's game-log metadata, NOT a
-    // license for the engine to synthesize sports atmosphere. ~40 downstream
-    // files branch on S.sportsSeason (playoffs/championship texture, weights,
-    // drift nudges) — exposing the raw feed value here is what produced the
-    // C122 "playoffs" contamination. Sentinel "off-season" makes every such
-    // branch inert; "unknown" would NOT (a dozen `!== "off-season"` sites
-    // treat unknown as in-season). Raw value preserved on sportsFeedSeasonType
-    // for consumers that want the feed's own label (briefings, metadata).
-    // Real sports content still flows: S.sportsFeedEntries (StoryAngle etc.)
-    // + applySportsFeedTriggers_ (reads the feed sheet directly).
+    // engine.131 — the S302 gate, corrected.
+    //
+    // S302 was right that feed SeasonType is Mike's game-log metadata and NOT a
+    // license for the engine to synthesize sports atmosphere; that was the C122
+    // "playoffs" contamination. Its prescribed fix was `sportsAtmosphereEnabled`
+    // plus guards at nine named generators, and those guards are installed and
+    // stay armed — see docs/research/2026-07-07-simulation-narrative-open-items §2.
+    //
+    // What ALSO shipped, unprescribed, was a blanket sentinel pinning this field
+    // to "off-season" on every feed-sourced cycle. Belt and suspenders. The
+    // suspenders took out the city: ~92 dial-class branch sites across 44 files
+    // went permanently inert, and the sentinel was PERSISTED to
+    // Neighborhood_Map.SportsSeason for all 22 neighborhoods — the world record
+    // saying there is no baseball while the A's sit 126-35.
+    //
+    // The seam S302 missed is invent-prose vs. move-dial. Writing "championship
+    // fever" into World_Population lore that no feed row recorded is
+    // contamination, and stays gated on sportsAtmosphereEnabled. A nightlife
+    // multiplier rising because Mike actually recorded a postseason game is the
+    // city responding to a real fact. That must read the truth.
+    //
+    // Published in Mike's own feed vocabulary, not an internal tier name —
+    // downstream branches test 'championship'/'playoffs'/'late-season' directly,
+    // so canonicalization is alias-only and every existing site keeps working.
+    S.sportsSeasonByTeam = deriveSeasonByTeamFromFeed_(entries);
+    S.sportsSeason = deepestSportsPhase_(S.sportsSeasonByTeam);
+    S.sportsSeasonOakland = S.sportsSeason;
+
     var lastEntry = entries[entries.length - 1];
     S.sportsFeedSeasonType = lastEntry.seasonType || "unknown";
-    S.sportsSeason = "off-season";
-    S.sportsSeasonOakland = S.sportsSeason;
     S.activeSports = deriveActiveSportsFromFeed_(entries);
     S.sportsSource = "oakland-feed";
+    // Unchanged and deliberate: the feed never licenses invented atmosphere.
     S.sportsAtmosphereEnabled = false;
 
-    Logger.log("applySportsSeason_ v3.0: " + entries.length + " feed entries for cycle " + currentCycle);
-    Logger.log("  Season: " + S.sportsSeason + ", Active: " + S.activeSports.join(", "));
+    Logger.log("applySportsSeason_ v3.1: " + entries.length + " feed entries for cycle " + currentCycle);
+    Logger.log("  Season: " + S.sportsSeason + " (deepest of " +
+      describeSeasonByTeam_(S.sportsSeasonByTeam) + "), Active: " + S.activeSports.join(", "));
   } else {
-    // S302: sentinel "off-season" here too — the old "unknown" value tripped
-    // every `!== "off-season"` branch downstream (latent leak on empty feeds).
+    // No feed row for this cycle means no game was played, and the quiet case
+    // is the normal case (applyGameNightMoments makes the same structural bet).
+    // "off-season" stays correct here — and unlike the S302 sentinel it is not
+    // masking a recorded fact, because there is no recorded fact.
+    //
+    // engine.131 note: this deliberately does NOT carry a team's phase forward
+    // from an earlier cycle. Established feed law — "old team state does not
+    // speak by itself" (docs/OAKLAND_SPORTS_FEED §Current flow). Changing that
+    // is a separate decision with its own blast radius, not a rider on this one.
     S.sportsSeason = "off-season";
     S.sportsSeasonOakland = "off-season";
+    S.sportsSeasonByTeam = {};
     S.sportsFeedSeasonType = "unknown";
     S.activeSports = [];
     S.sportsSource = "oakland-feed-empty";
     S.sportsAtmosphereEnabled = false;
 
-    Logger.log("applySportsSeason_ v3.0: No feed entries for cycle " + currentCycle);
+    Logger.log("applySportsSeason_ v3.1: No feed entries for cycle " + currentCycle);
   }
 
   S.sportsSeasonChicago = "";
@@ -205,6 +234,133 @@ function normalizeOaklandFeedTeam_(value) {
     '"; skipping'
   );
   return '';
+}
+
+
+/**
+ * engine.131 — canonicalize a feed SeasonType onto the vocabulary the engine
+ * already branches on.
+ *
+ * This is alias resolution, NOT tier normalization. ~92 downstream sites test
+ * Mike's own words ('championship', 'playoffs', 'late-season'), so almost every
+ * label passes through untouched and every existing branch keeps working with
+ * no downstream edit. Only two feed labels have no downstream reader and need
+ * mapping — measured across the live 206-row feed at C104:
+ *
+ *   world-series  -> championship  (the World Series IS the championship; 43
+ *                                   sites test 'championship', 1 tests this)
+ *   summer league -> preseason     (developmental/exhibition ball, Oaks-side)
+ *
+ * Anything unrecognized falls to "off-season" rather than passing through: an
+ * unknown string reaching the ~13 `!== "off-season"` sites would read as
+ * in-season and quietly turn the city on. Fail closed, and say so in the log.
+ */
+var SPORTS_PHASE_ALIASES_ = {
+  'world-series': 'championship',
+  'worldseries': 'championship',
+  'world series': 'championship',
+  'finals': 'championship',
+  'postseason': 'post-season',
+  'summer league': 'preseason',
+  'summer-league': 'preseason',
+  'regular': 'regular-season'
+};
+
+var SPORTS_PHASE_DEPTH_ = {
+  'off-season': 0,
+  'spring-training': 1,
+  'preseason': 1,
+  'early-season': 2,
+  'regular-season': 2,
+  'mid-season': 3,
+  'late-season': 4,
+  'post-season': 5,
+  'playoffs': 5,
+  'championship': 6
+};
+
+function canonicalSportsPhase_(rawSeasonType) {
+  var s = String(rawSeasonType || '').trim().toLowerCase();
+  if (!s) return 'off-season';
+  if (SPORTS_PHASE_ALIASES_[s]) s = SPORTS_PHASE_ALIASES_[s];
+  if (SPORTS_PHASE_DEPTH_[s] === undefined) {
+    Logger.log('canonicalSportsPhase_: unrecognized SeasonType "' + rawSeasonType +
+      '"; treating as off-season');
+    return 'off-season';
+  }
+  return s;
+}
+
+
+/**
+ * engine.131 — per-team season phase for the current cycle.
+ *
+ * Oakland runs two franchises on separate calendars; one global string is wrong
+ * for at least one of them by construction (that defect is why the C104 world
+ * summary announced "off-season" over its own Sports section showing the A's two
+ * games from the end of the year). TeamsUsed can carry several teams on one row
+ * and the SeasonType applies to each — same split the builder-side
+ * realSeasonLabel_ uses in scripts/buildWorldSummary.js.
+ *
+ * Within a team, later rows win: established Phase 2 law is that within one
+ * Cycle, later rows override earlier values.
+ */
+function deriveSeasonByTeamFromFeed_(entries) {
+  var byTeam = {};
+
+  for (var i = 0; i < entries.length; i++) {
+    var rawType = entries[i].seasonType;
+    if (!String(rawType || '').trim()) continue;
+
+    var phase = canonicalSportsPhase_(rawType);
+    var team = normalizeOaklandFeedTeam_(entries[i].teamsUsed);
+    if (!team) continue;
+
+    byTeam[team] = phase;
+  }
+
+  return byTeam;
+}
+
+
+/**
+ * engine.131 — resolve the city-wide phase from the per-team map.
+ *
+ * Mike-direct 2026-08-27: the A's and the Oaks never run a season at the same
+ * time, and whichever is deeper in its postseason takes the city's attention.
+ * So the city-wide value is the DEEPEST phase across teams, not the last row
+ * read or an average. A club in the championship sets the city's temperature
+ * even if the other franchise is in spring training.
+ */
+function deepestSportsPhase_(byTeam) {
+  var deepest = 'off-season';
+  var deepestRank = 0;
+
+  for (var team in byTeam) {
+    if (!Object.prototype.hasOwnProperty.call(byTeam, team)) continue;
+    var phase = byTeam[team];
+    var rank = SPORTS_PHASE_DEPTH_[phase];
+    if (rank === undefined) continue;
+    if (rank > deepestRank) {
+      deepestRank = rank;
+      deepest = phase;
+    }
+  }
+
+  return deepest;
+}
+
+
+/**
+ * Human-readable per-team phase for logs. "A's late-season, Oaks preseason".
+ */
+function describeSeasonByTeam_(byTeam) {
+  var parts = [];
+  for (var team in byTeam) {
+    if (!Object.prototype.hasOwnProperty.call(byTeam, team)) continue;
+    parts.push(team + ' ' + byTeam[team]);
+  }
+  return parts.length ? parts.join(', ') : 'no team rows';
 }
 
 

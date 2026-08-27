@@ -83,6 +83,32 @@ function loadCivicVoiceSentiment_(ctx) {
 }
 
 
+/**
+ * engine.131 T7 — is this the Baylight/stadium initiative?
+ * Matched by name rather than a hardcoded INIT id so a renamed or re-filed
+ * row still reconciles.
+ */
+function isBaylightInitiative_(name) {
+  return /baylight/i.test(String(name || ''));
+}
+
+
+/**
+ * engine.131 T7 — has a franchise actually opened in Baylight this cycle?
+ * Reads the zone set applySportsSeason_ published at Phase2-SportsSeason, which
+ * runs BEFORE this function at both entry points (godWorldEngine2.js:276 vs
+ * :280). Absent or empty is a safe no — nothing reconciles and behaviour is
+ * exactly what it was.
+ */
+function sportsHasOpenedBaylight_(S) {
+  var zones = (S && S.sportsZones) || [];
+  for (var i = 0; i < zones.length; i++) {
+    if (zones[i] === 'Baylight District') return true;
+  }
+  return false;
+}
+
+
 function applyInitiativeImplementationEffects_(ctx) {
   var S = ctx.summary;
   if (!S) S = ctx.summary = {};
@@ -197,6 +223,41 @@ function applyInitiativeImplementationEffects_(ctx) {
 
     // Skip if no implementation phase set or no name
     if (!phase || !name) continue;
+
+    // ─────────────────────────────────────────────────────────────────────
+    // engine.131 T7 reconciliation — sports is the source of truth
+    // ─────────────────────────────────────────────────────────────────────
+    // Bench C107 produced a world that contradicted itself in a single cycle:
+    // the engine had the Oaks playing in Baylight (feed-derived, T7) while this
+    // function announced "Baylight District ... is construction-planning —
+    // ongoing sports effects in Jack London, Downtown". Both were internally
+    // correct; nothing reconciled them. Same failure class as the C104 Grand
+    // Lake contradiction that started this work.
+    //
+    // Reconciled in the direction the project actually runs: a franchise
+    // playing in a stadium IS the stadium being finished. The engine does not
+    // wait for a civic phase to be hand-advanced, and no construction schedule
+    // is modelled — this is a game, not a civic simulation. The tracker gets
+    // corrected to match the world, once, when the world changes.
+    if (isBaylightInitiative_(name) && sportsHasOpenedBaylight_(S)) {
+      if (phase !== 'operational' && phase !== 'complete') {
+        // Write it back so the tracker stops asserting a building site, and so
+        // the silence/nag machinery stops charging officials for not narrating
+        // a project the city can already see finished. Cell intent — Phase 2 is
+        // upstream of the Phase 10 executor, so this commits normally.
+        if (iPhase !== -1 && typeof queueCellIntent_ === 'function') {
+          queueCellIntent_(ctx, 'Initiative_Tracker', i + 1, iPhase + 1, 'operational',
+            'engine.131 T7 — a franchise is playing in Baylight, so the stadium is built',
+            'civic', 5);
+        }
+        Logger.log('applyInitiativeImplementationEffects_: T7 — "' + name +
+          '" advanced ' + phase + ' -> operational (sport is live in Baylight)');
+      }
+      phase = 'operational';
+      // ...and its effects land where the sport actually is, not where the
+      // tracker's stale AffectedNeighborhoods still point.
+      if (S.sportsZones && S.sportsZones.length) hoodsStr = S.sportsZones.join(', ');
+    }
 
     // Get intensity from phase
     var intensity = PHASE_INTENSITY[phase];

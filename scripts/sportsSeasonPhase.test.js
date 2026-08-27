@@ -323,3 +323,43 @@ assert.deepStrictEqual(arr(t7quiet.sportsZones), ['Jack London', 'Downtown'],
   'a quiet cycle still reports where the stadiums are');
 
 console.log('sportsSeasonPhase.test.js T7: all assertions passed');
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.131 T7 reconciliation — sports is the source of truth for the stadium
+// ═══════════════════════════════════════════════════════════════════════════
+// Bench C107 asserted BOTH "the Oaks play in Baylight" (engine) and "Baylight is
+// construction-planning, sports effects in Jack London, Downtown" (civic) in one
+// cycle. This guards the correction, and guards that it stays inert until a
+// franchise has actually opened.
+const civicSrc = fs.readFileSync(
+  path.join(__dirname, '..', 'phase02-world-state', 'applyInitiativeImplementationEffects.js'),
+  'utf8'
+);
+const civicSandbox = { Logger: { log() {} } };
+vm.createContext(civicSandbox);
+vm.runInContext(civicSrc, civicSandbox, { filename: 'applyInitiativeImplementationEffects.js' });
+
+const isBaylight = civicSandbox.isBaylightInitiative_;
+const opened = civicSandbox.sportsHasOpenedBaylight_;
+assert.strictEqual(typeof isBaylight, 'function');
+assert.strictEqual(typeof opened, 'function');
+
+// Matched by name, not a hardcoded INIT id — a re-filed row still reconciles.
+assert.strictEqual(isBaylight('Baylight District — Final Council Vote'), true);
+assert.strictEqual(isBaylight('baylight district phase II'), true);
+assert.strictEqual(isBaylight('Temescal Community Health Center'), false);
+assert.strictEqual(isBaylight(''), false);
+assert.strictEqual(isBaylight(null), false);
+
+// Inert until a franchise actually opens — this is what keeps the change dark.
+assert.strictEqual(opened({ sportsZones: ['Jack London', 'Downtown'] }), false,
+  'the pre-move zone set must NOT reconcile anything');
+assert.strictEqual(opened({}), false, 'absent zone set is a safe no');
+assert.strictEqual(opened(null), false);
+assert.strictEqual(opened({ sportsZones: [] }), false);
+
+// The changeover window and the finished state both count as open.
+assert.strictEqual(opened({ sportsZones: ['Jack London', 'Downtown', 'Baylight District'] }), true);
+assert.strictEqual(opened({ sportsZones: ['Baylight District'] }), true);
+
+console.log('sportsSeasonPhase.test.js T7-reconciliation: all assertions passed');

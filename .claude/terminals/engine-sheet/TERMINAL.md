@@ -40,6 +40,7 @@ These files define the project, your rules, and current state. Read at every boo
 | `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248)** — NOT auto-read at boot. The hook emits the PIN + your `NEXT[engine-sheet]` line in `<godworld-state>`; pull the file only when continuing prior work. |
 | `docs/engine/ROLLOUT_PLAN.md` — `engine.*` rows only | Open-work queue — engine defects and builds file here since ENGINE_REPAIR retired S371 (grep `engine.` rows, don't load the whole plan) |
 | `.claude/terminals/engine-sheet/TERMINAL.md` | This file — your scope, your docs, your rules |
+| `docs/reference/DEPLOY.md` | **On-demand, but read it BEFORE asserting anything about deploy targets or benches.** It carries the CURRENT sandbox (ids, deployment, script properties) and the standup protocol. 2026-08-27: a session told Mike "there is no sandbox" off `.clasp.json` + the deploy skill alone, while SANDBOX 0814 was standing and documented here. `.clasp.json` shows PROD only — it is not the bench answer. |
 
 **Why ROLLOUT `engine.*` rows over README at boot (S201 self-audit, retargeted S371):** README is project-scoped generic; the open `engine.*` rows enumerate the exact defects this terminal closes. Boot reading them primes the open-work mental model immediately. `docs/engine/archive/ENGINE_REPAIR.md` is RETIRED S371 — history only, 30 closed rows kept as the repair record; never add rows there.
 

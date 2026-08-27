@@ -1,8 +1,8 @@
 {
-  "generated": "2026-08-21",
+  "generated": "2026-08-27",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 181,
-  "functionsMapped": 1158,
+  "filesScanned": 183,
+  "functionsMapped": 1171,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1896,6 +1896,18 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::loadCivicVoiceSentiment_"
       ]
     },
+    "sportsZones": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ],
+      "readers": [
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_",
+        "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
+        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
+      ]
+    },
     "initiativeImplementationTriggers": {
       "writers": [],
       "readers": [
@@ -2043,12 +2055,19 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ]
     },
+    "baylightOpenings": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ],
+      "readers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ]
+    },
     "sportsFeedEntries": {
       "writers": [
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": [
-        "phase02-world-state/applySportsSeason.js::applySportsSeason_",
         "phase02-world-state/applySportsSeason.js::findColumnIndex_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
@@ -2062,6 +2081,14 @@
       ],
       "readers": [
         "phase02-world-state/applySportsSeason.js::findColumnIndex_"
+      ]
+    },
+    "sportsSeasonByTeam": {
+      "writers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
+      ],
+      "readers": [
+        "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ]
     },
     "sportsSeasonChicago": {
@@ -2740,6 +2767,7 @@
         "phase05-citizens/bondEngine.js::checkConfrontationTriggers_",
         "phase05-citizens/bondEngine.js::createBond_",
         "phase05-citizens/bondEngine.js::detectTriangleRivalries_",
+        "phase05-citizens/bondEngine.js::generateBondId_",
         "phase05-citizens/bondEngine.js::generateBondSummary_",
         "phase05-citizens/bondEngine.js::getRivalryIntensity_",
         "phase05-citizens/bondEngine.js::processGCCourtship_",
@@ -4328,6 +4356,7 @@
     },
     "Initiative_Tracker": {
       "writers": [
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase05-citizens/civicInitiativeEngine.js::createInitiative_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
       ],
@@ -4353,6 +4382,7 @@
       "writers": [],
       "readers": [
         "phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_",
+        "phase02-world-state/applySportsSeason.js::deriveBaylightOpenings_",
         "phase02-world-state/applySportsSeason.js::readOaklandFeedEntries_",
         "utilities/diagnoseDashboardData.js::diagnoseDashboardData",
         "utilities/setupSportsFeedValidation.js::setupOaklandFeedOnly",

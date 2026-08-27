@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-08-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-08-27 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -70,6 +70,7 @@
 - **runWorldCycle()**
   Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.engineErrorCount, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.undockedFeedEntries
   Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **loadConfig_(ctx)**
 
@@ -175,8 +176,13 @@
   Reads: S.civicVoiceSentiment, S.cycle, S.cycleId
   Writes: S.civicVoiceSentiment
 
+- **isBaylightInitiative_(name)**
+
+- **sportsHasOpenedBaylight_(S)**
+  Reads: S.sportsZones
+
 - **applyInitiativeImplementationEffects_(ctx)**
-  Reads: S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.sentiment
+  Reads: S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.sentiment, S.sportsZones
   Writes: S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
   Sheets: Initiative_Tracker
 
@@ -189,8 +195,8 @@
 
 ### applySportsSeason.js
 - **applySportsSeason_(ctx)**
-  Reads: S.activeSports, S.cycle, S.cycleId, S.sportsFeedEntries, S.sportsSeason
-  Writes: S.activeSports, S.sportsAtmosphereEnabled, S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason, S.sportsSeasonChicago, S.sportsSeasonOakland, S.sportsSource
+  Reads: S.activeSports, S.baylightOpenings, S.cycle, S.cycleId, S.sportsSeason, S.sportsSeasonByTeam
+  Writes: S.activeSports, S.baylightOpenings, S.sportsAtmosphereEnabled, S.sportsFeedEntries, S.sportsFeedSeasonType, S.sportsSeason, S.sportsSeasonByTeam, S.sportsSeasonChicago, S.sportsSeasonOakland, S.sportsSource, S.sportsZones
   Config: ctx.config.sportsStateOakland, ctx.config.sportsState_Oakland
 
 - **readOaklandFeedEntries_(ctx, currentCycle)**
@@ -199,6 +205,19 @@
 - **getColVal_(row, colIdx)**
 
 - **normalizeOaklandFeedTeam_(value)**
+
+- **canonicalSportsPhase_(rawSeasonType)**
+
+- **deriveSeasonByTeamFromFeed_(entries)**
+
+- **deepestSportsPhase_(byTeam)**
+
+- **describeSeasonByTeam_(byTeam)**
+
+- **deriveBaylightOpenings_(ctx, currentCycle)**
+  Sheets: Oakland_Sports_Feed
+
+- **deriveSportsZones_(opened)**
 
 - **deriveActiveSportsFromFeed_(entries)**
 
@@ -421,7 +440,7 @@
 
 ### generateCrisisSpikes.js
 - **generateCrisisSpikes_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.worldEvents
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
@@ -805,6 +824,7 @@
 - **makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood, intensity, cycle, notes, ctx)**
 
 - **generateBondId_(ctx)**
+  Reads: S.relationshipBonds
   RNG: ctx.rng / safeRand_(ctx)
 
 - **bondExists_(ctx, citizenA, citizenB)**
@@ -1614,7 +1634,8 @@
 - **createRelationshipBondsSheet_(ss)**
   Sheets: Relationship_Bonds
 
-- **createSeedBond_(citizenA, citizenB, type, intensity, origin, cycle, rng)**
+- **createSeedBond_(citizenA, citizenB, type, intensity, origin, cycle, rng, ctx)**
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **makeBondKey_(idA, idB)**
 
@@ -1738,8 +1759,10 @@
   Writes: S.recurringCitizens
 
 ### economicRippleEngine.js
+- **primarySportsZone_(cal)**
+
 - **runEconomicRippleEngine_(ctx)**
-  Reads: S.careerSignals, S.cycleId, S.economicMood, S.economicRipples, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.neighborhoodEconomies, S.previousCycleState, S.season, S.sportsSeason
+  Reads: S.careerSignals, S.cycleId, S.economicMood, S.economicRipples, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.neighborhoodEconomies, S.previousCycleState, S.season, S.sportsSeason, S.sportsZones
   Writes: S._bizLookup, S._rng, S.economicMood, S.economicRipples, S.neighborhoodEconomies
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
@@ -2391,7 +2414,7 @@
 - **pulseFoldDelta_(pulse, key)**
 
 - **saveV3NeighborhoodMap_(ctx)**
-  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.crimeMetrics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodPulse, S.sportsSeason, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
+  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.crimeMetrics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodPulse, S.sportsSeason, S.sportsZones, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Neighborhood_Map
   RNG: ctx.rng / safeRand_(ctx)
@@ -2751,6 +2774,9 @@
 
 - **logCycleSummary_(rows, iCycle, label)**
 
+### bondIdGuard.test.js
+- **check(name, fn)**
+
 ### bylineEngine.js
 - **categorizeConfidence_(topScore, secondScore)**
 
@@ -2988,6 +3014,7 @@
 
 ### cycleModes.js
 - **seededRng_(seed)**
+  RNG: ctx.rng / safeRand_(ctx)
 
 - **seededRngFor_(seed, salt)**
 
@@ -3022,6 +3049,10 @@
   Reads: S.holiday, S.weather, S.worldEvents
 
 - **initializeProfileMode_(ctx)**
+  RNG: ctx.rng / safeRand_(ctx)
+
+### cycleModes.rng.test.js
+- **check(name, fn)**
   RNG: ctx.rng / safeRand_(ctx)
 
 ### cycleRollback.js
@@ -3347,6 +3378,11 @@
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   RNG: ctx.rng / safeRand_(ctx)
 
+- **uniqueGeneratedId_(ctx, bucket, genFn)**
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **seedGeneratedIds_(ctx, bucket, ids)**
+
 ### setupCivicLedgerColumns.js
 - **setupCivicLedgerColumns()**
   Sheets: Civic_Office_Ledger
@@ -3470,5 +3506,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 181
-**Functions mapped:** 1158
+**Files scanned:** 183
+**Functions mapped:** 1171

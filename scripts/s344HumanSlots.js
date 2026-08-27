@@ -7,7 +7,6 @@
  */
 
 const REAL_WORLD = [
-  { id: 'bart', re: /\bBART\b/ },
   { id: 'frank-ogawa', re: /1\s+Frank Ogawa Plaza|Frank Ogawa Plaza/i },
 ];
 

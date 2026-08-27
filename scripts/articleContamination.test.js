@@ -37,7 +37,7 @@ assert.equal(clean.fail, false, 'sheet-backed sports recap must pass: ' + JSON.s
 const jax = fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/jax_c103_article.md'), 'utf8');
 const jaxScan = scan(jax, { desk: 'civic' });
 assert.equal(jaxScan.fail, true);
-assert(jaxScan.findings.some(f => f.issue === 'bart'), 'Jax BART: ' + JSON.stringify(jaxScan.findings));
+assert(!jaxScan.findings.some(f => f.issue === 'bart'), 'BART is a train, not a leak: ' + JSON.stringify(jaxScan.findings));
 assert(jaxScan.findings.some(f => f.issue === 'frank-ogawa'), 'Jax Ogawa');
 
 const tanya = fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/tanya_c104_article.md'), 'utf8');

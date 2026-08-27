@@ -18,7 +18,7 @@ const jax = slots.scanControl({
 assert.equal(jax.jsonChase, true, 'Jax §2 is the serialized plan');
 assert.ok(jax.tribuneAsActor.length >= 2, 'Jax §3 reprints Tribune-should-ask');
 assert.ok(jax.tribuneAsActor.every(l => /Tribune should ask/i.test(l)));
-assert.ok(jax.realWorld.indexOf('bart') >= 0, 'Jax names BART');
+assert.ok(jax.realWorld.indexOf('bart') < 0, 'BART is a train, not a leak');
 assert.ok(jax.realWorld.indexOf('frank-ogawa') >= 0, 'Jax names Frank Ogawa Plaza');
 assert.equal(jax.assignmentIntakeMismatch, true, 'Jax Article is transit; INTAKE is faith coverage-gap');
 assert.equal(jax.emptyInterviews, false, 'Jax landed quotes — they are the fail, not an empty W2');
@@ -47,7 +47,7 @@ assert.ok(/at what cycle count/i.test(luisBody), 'Luis ends on an unanswered que
 assert.equal(luis.jsonChase, true, 'Luis story §2 is still JSON — not a full pass');
 assert.equal(luis.emptyInterviews, true, 'Luis §3 empty — Article quote did not land on the story doc');
 assert.equal(luis.assignmentIntakeMismatch, false);
-assert.equal(luis.realWorld.length, 0, 'Luis has no BART/Ogawa import');
+assert.equal(luis.realWorld.length, 0, 'Luis has no Ogawa import');
 assert.equal(luis.unsuppliedAccess.length, 0);
 
 assert.equal(slots.isJsonShaped('{"focus":"x"}'), true);
@@ -57,6 +57,6 @@ assert.equal(slots.isJsonShaped(
 ), false, 'third-person beat plan is not JSON-shaped');
 
 console.log('s344HumanSlots.test.js: PASS');
-console.log('  jax: fail (json chase, tribune-as-actor, BART, Ogawa, faith/transit mismatch)');
+console.log('  jax: fail (json chase, tribune-as-actor, Ogawa, faith/transit mismatch)');
 console.log('  tanya: boundary (json chase, empty W2)');
 console.log('  luis: near-pass Article on assignment; story doc still json/empty-W2');

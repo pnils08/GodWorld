@@ -100,7 +100,8 @@ assert.strictEqual(safeToQuoteArticle('A clean synthetic scene. What remains unk
 assert.strictEqual(safeToQuoteArticle('The Tribune should ask the next question.'), false);
 assert.strictEqual(safeToQuoteArticle('Here is the corrected article. What remains unknown?'), false);
 assert.strictEqual(safeToQuoteArticle('{"packetContract":"LEP/2"}'), false);
-assert.strictEqual(safeToQuoteArticle('A synthetic rider boarded BART. What remains unknown?'), false);
+assert.strictEqual(safeToQuoteArticle('A synthetic rider boarded BART. What remains unknown?'), true);
+assert.strictEqual(safeToQuoteArticle('A hearing at Frank Ogawa Plaza. What remains unknown?'), false);
 assert.strictEqual(stableHash({ b: 2 }), stableHash({ b: 2 }));
 assert.deepStrictEqual(
   mergeManifest({ sourceIds: ['kept'], generatedAt: 'old' }, { generatedAt: 'new' }),

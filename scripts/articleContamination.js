@@ -28,7 +28,6 @@ const REAL_OAKLAND = [
   { id: 'allen-temple-bus', re: /Allen Temple bus stop/i },
   { id: 'reagan-era', re: /since the Reagan administration/i },
   { id: 'ebmud', re: /\bEBMUD\b|\bEast Bay Municipal Utility\b/i },
-  { id: 'bart', re: /\bBART\b/ },
   { id: 'frank-ogawa', re: /Frank Ogawa Plaza/i },
 ];
 

@@ -801,7 +801,7 @@ async function main() {
     : '';
   const strictSourceFinal = strictSourceBlock
     ? ' Enforce strict source hygiene: Packet people, quotes, and numbers stay Packet-backed. ' +
-      'Invent no real-world Oakland place (BART, Frank Ogawa, real bars). ' +
+      'Invent no real-world Oakland place (Frank Ogawa, real landmark bars). BART is a train in this city. ' +
       'In-world rooms and named spots that fit the data are allotted hallucination — paint them, put new businesses on INTAKE BIZ so they mint. ' +
       'Invent no anonymous source, fake count, or fake Packet quote.'
     : '';
@@ -819,7 +819,7 @@ async function main() {
 
   const firebrandHeat = PERSONA === 'freelance-firebrand'
     ? '\n\nFIREBRAND HEAT (hard): You are Jax Caldera — accountability of bullshit, not a tidy desk. ' +
-      'Write SHORT and HOT (target 400–650 words). First-person. Open in a SPECIFIC in-world place and time (your bar, a laundromat, a stop) — not real-world BART or Frank Ogawa. If you name a new spot, it is now in this city: put it on INTAKE BIZ. ' +
+      'Write SHORT and HOT (target 400–650 words). First-person. Open in a SPECIFIC in-world place and time (your bar, a laundromat, a BART stop) — not Frank Ogawa. If you name a new spot, it is now in this city: put it on INTAKE BIZ. ' +
       'Lead with the contradiction or the unowned crisis — not the official timeline. Do the raw count in prose (not a bullet inventory). ' +
       'Translate officialese into what it actually means. Name who owes an answer. End on ONE unanswered question, then ' +
       '`-- Jax Caldera | tipline: JAX-TIPS`. ' +
@@ -911,7 +911,7 @@ async function main() {
     : PERSONA === 'tanya-cruz'
     ? '\n\nTANYA STANCE (hard): You are Tanya Cruz — sideline dispatch, not multi-voice sports-desk. ' +
       'You file from the clubhouse — that SET is yours; the Packet will never list a clubhouse event. Paint what the supplied line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. Short. ' +
-      'FORBIDDEN: real-world stadiums/BART/Ogawa, invented player quotes, invented stats, injury invention, P Slayer heat essay, or multi-reporter section.\n' +
+      'FORBIDDEN: real-world stadiums/Ogawa, invented player quotes, invented stats, injury invention, P Slayer heat essay, or multi-reporter section.\n' +
       loadTanyaSidelineBag()
     : PERSONA === 'simon-leary'
     ? '\n\nSIMON STANCE (hard): You are Simon Leary — long view, not multi-voice sports-desk. ' +

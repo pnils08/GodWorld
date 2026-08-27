@@ -50,7 +50,7 @@ const jaxGate = gate.evaluate(jaxArt, {
 });
 assert.equal(jaxGate.fail, true);
 assert(jaxGate.findings.some(f => f.issue === 'assignment-intake-mismatch'), JSON.stringify(jaxGate.findings));
-assert(jaxGate.findings.some(f => f.issue === 'bart' || f.issue === 'frank-ogawa'));
+assert(jaxGate.findings.some(f => f.issue === 'frank-ogawa'));
 
 const complete = `# Fruitvale Transit Hub still sits in visioning
 

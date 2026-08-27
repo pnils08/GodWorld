@@ -32,24 +32,16 @@ assert.equal(packagesApi.routeFor(jax, 'report').model, 'meta-llama/llama-3.3-70
 assert.equal(packagesApi.routeFor(jax, 'write').model, 'anthropic/claude-sonnet-5');
 assert.equal(jax.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(jax.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
-// Gate axis (builder-direct 2026-08-21): the wall is "is this real-world Oakland",
-// not "is this already on a sheet". Jax's seat was inverted on BOTH halves — it
-// authorized BART (a real-world import) while forbidding him to name a bar, which
-// is the one thing his identity is built on. These pin the corrected axis; the
-// prior assertion pinned the inverted string ('many generic bars') and so guarded
-// the defect.
+// Gate axis: real-world Oakland landmarks (Frank Ogawa), not "already on a sheet",
+// and not BART — BART is a train in this city. Jax may name an in-world bar.
 assert.ok(jax.reviewProfile.authorizedTexture.some(v => /named in-world spots welcome/.test(v)),
   'Jax may name an in-world spot');
 assert.ok(jax.reviewProfile.authorizedTexture.some(v => v.includes('count of generic bar visits')));
-assert.ok(!/\bBART\b/.test(JSON.stringify(jax.reviewProfile)),
-  'no real-world transit system in Jax authorized texture');
 assert.ok(!/not found in the ledger/i.test(JSON.stringify(jax.reviewProfile)),
   'ledger membership is not the gate axis');
 assert.ok(jax.reviewProfile.textureConditions.some(v => /INTAKE BIZ/.test(v)),
   'a newly named in-world spot mints rather than failing');
 const slayer = packages['p-slayer'];
-assert.ok(!/\bBART\b/.test(JSON.stringify(slayer.reviewProfile)),
-  'no real-world transit system in P Slayer authorized texture');
 assert.ok(!/not found in the supplied record/i.test(JSON.stringify(slayer.reviewProfile)),
   'P Slayer is not gated on ledger membership');
 assert.ok(jax.reviewProfile.textureConditions.some(v => v.includes('backend-composed')));

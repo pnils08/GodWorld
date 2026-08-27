@@ -4,8 +4,8 @@ Artifact class: CODEX_DIAGNOSTIC
 Canon status: NOT CANON. Review buckets are title-based suggestions only.
 Notebook: GodWorld
 Notebook ID: 417e2d29-4167-420f-a9cc-76fb6b2b7de2
-Generated: 2026-08-20T06:40:26.619Z
-Total sources: 64
+Generated: 2026-08-27T06:01:05.958Z
+Total sources: 70
 
 ## Review counts
 
@@ -14,7 +14,7 @@ Total sources: 64
 | `publication_candidate` | 37 |
 | `nonpublication_candidate` | 1 |
 | `exclude_candidate` | 1 |
-| `needs_review` | 25 |
+| `needs_review` | 31 |
 
 ## Sources
 
@@ -23,10 +23,6 @@ Total sources: 64
 | 1. As_Sunset of a Dynasty: The Athletics' Final Stand | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `8e773c1f-8fde-4212-b138-af97df7370dd` |
 | 1. As_supplemental_c94_let_walks_reset.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `68d0ce88-c554-40ba-9b55-1256633afb58` |
 | 1. As_The Town: A Tale of Two Dynasties | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `799c044c-696b-4163-9877-78b4ca9e41fa` |
-| 103Simulation_Narrative - Business_Ledger | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `282b91a9-df8b-4148-a238-e0e4f994c3ee` |
-| 103Simulation_Narrative - Initiative_Tracker | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `8320b169-5cf1-49f0-a7af-b0faf04c30d9` |
-| 103Simulation_Narrative - Neighborhood_Map | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `9539d877-0db1-4f62-aa90-0188ef211841` |
-| 103Simulation_Narrative - Riley_Digest | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `68f7d35f-d7b6-4e64-88b0-2157571cf9c5` |
 | 2. Oaks_supplemental_oaks_expansion_draft.md | `word_doc` | `exclude_candidate` | title signals draft/sample/unpublished material | `3016e5a1-da7d-4152-9fff-505ab5ec5bce` |
 | bay_tribune_e100.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `d1d80081-8cb6-4f9d-a0ef-c2d5f49e63c1` |
 | bay_tribune_e101.pdf | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `76818efd-5148-4151-9519-d8071179706c` |
@@ -52,9 +48,12 @@ Total sources: 64
 | cycle_pulse_dispatch_102_oaks_credibility.txt | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `a0d88e0f-bef6-4f53-80b1-418d65a382ad` |
 | cycle_pulse_edition_102.txt | `generated_text` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `b0cf1c08-258d-41ab-9604-0d7a13b127f4` |
 | dispatch_c92_kono_second_song.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `5a519026-77a2-46c6-87ea-e9dcb5c229d1` |
+| Lore: POP-00131-lorenzo-jordan (Y2C51) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `a1722406-93b3-4ba5-afa9-61e4b82344d5` |
 | Mike Paulson-chat | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `e96f7462-8916-4eee-95b5-455a8929346e` |
 | Notebook Formatting Assistant Initialization | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `7c65472d-24a7-4ad3-8eaf-59a9db1a0aac` |
+| Oakland Bonds: Civic Infrastructure and Social Compacts | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `a51f9726-252b-449d-9101-9170bcb12efa` |
 | Oakland Civic | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `385edefc-c728-4984-a144-6c6cd11adf64` |
+| Oakland Development and Athletics Postseason Continuity Brief 104 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `4d61e8ac-da0e-4181-9988-18a88ec2340a` |
 | Oakland Oaks | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `874d2f64-0fb3-48e2-98d5-95b40ada1894` |
 | Oakland's Cycle 100: A City's Evolution | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `af829925-5cd7-41f1-b5a0-828b5de835b7` |
 | POP-00001_The Anchor of Oakland: The Vinnie Keane Story | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `88c2c054-5481-4de9-9f17-f44ea483de58` |
@@ -73,6 +72,12 @@ Total sources: 64
 | POP-00527_supplemental_c89— CULTURE & COMMUNITY_Paulson.txt | `generated_text` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `b1fa1364-d5ad-4665-b4cb-662b66836681` |
 | POP-00789_Architect of the Integrated City: The Elias Varek Profile | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `45ef514c-3ac2-4134-8b6c-c8a3ba5ac40b` |
 | POP-01046_profile_elliot_abraham_origins.md | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `d31ecbea-6a82-4cbc-b422-f3eb399cd031` |
+| Simulation_Narrative - Business_Ledger | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `2226ad6f-dc7c-47d9-b003-dcc1149e7b7b` |
+| Simulation_Narrative - Initiative_Tracker | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `643194dc-7727-4494-a96c-79aee836e127` |
+| Simulation_Narrative - Neighborhood_Demographics | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `3cc32530-82fe-4d93-b5d5-cf41c4323e44` |
+| Simulation_Narrative - Neighborhood_Map | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `be06b3b9-df30-4389-8907-bf82202736bf` |
+| Simulation_Narrative - Oakland_Sports_Feed | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `bc65ed60-397d-4de4-b1fe-f853428fabee` |
+| Simulation_Narrative - Riley_Digest | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `d62a5043-a859-4bcb-bb25-081a63acea25` |
 | supplemental_c102_baylight_toxic_soil.md | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `b2f8b11f-5799-4408-9903-b6971920ae05` |
 | supplemental_c89 —  CULTURE & COMMUNITY.txt | `generated_text` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `3f3658ed-baf3-4fdb-a496-ee9f4acee563` |
 | supplemental_c89 — BUSINESS.txt | `generated_text` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `f3eeafd8-aead-4d4f-ad4a-9cfab04665f5` |
@@ -83,6 +88,7 @@ Total sources: 64
 | supplemental_oakland_tech_landscape_c84.txt | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `833558a2-2829-4d84-8677-7d9a2b510a58` |
 | The Cycle Pulse | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `298d8805-ddd2-400a-9151-422baceed65d` |
 | The Cycle Pulse — Y2C103 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `45906537-074f-4107-b971-862627341bc4` |
+| The Cycle Pulse — Y2C104 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `defd4884-1954-4657-84af-a19e69435ba3` |
 | world_summary_c100.txt | `generated_text` | `nonpublication_candidate` | title signals derived world-state or process/reference material | `78327e9c-62fe-4405-9a5c-b5543fd534de` |
 
 No row in this report is admitted to a runtime canon-search allowlist. Every source requires explicit Task 2 review.

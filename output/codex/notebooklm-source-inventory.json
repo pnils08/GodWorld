@@ -1,15 +1,15 @@
 {
   "artifactClass": "CODEX_NOTEBOOKLM_SOURCE_INVENTORY",
   "canonStatus": "NOT_CANON",
-  "generatedAt": "2026-08-20T06:40:26.619Z",
+  "generatedAt": "2026-08-27T06:01:05.958Z",
   "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
   "notebookName": "GodWorld",
-  "total": 64,
+  "total": 70,
   "counts": {
     "publication_candidate": 37,
     "nonpublication_candidate": 1,
     "exclude_candidate": 1,
-    "needs_review": 25
+    "needs_review": 31
   },
   "sources": [
     {
@@ -30,34 +30,6 @@
       "id": "799c044c-696b-4163-9877-78b4ca9e41fa",
       "title": "1. As_The Town: A Tale of Two Dynasties",
       "type": "generated_text",
-      "reviewBucket": "needs_review",
-      "reviewReason": "title alone does not establish publication or exclusion status"
-    },
-    {
-      "id": "282b91a9-df8b-4148-a238-e0e4f994c3ee",
-      "title": "103Simulation_Narrative - Business_Ledger",
-      "type": "word_doc",
-      "reviewBucket": "needs_review",
-      "reviewReason": "title alone does not establish publication or exclusion status"
-    },
-    {
-      "id": "8320b169-5cf1-49f0-a7af-b0faf04c30d9",
-      "title": "103Simulation_Narrative - Initiative_Tracker",
-      "type": "word_doc",
-      "reviewBucket": "needs_review",
-      "reviewReason": "title alone does not establish publication or exclusion status"
-    },
-    {
-      "id": "9539d877-0db1-4f62-aa90-0188ef211841",
-      "title": "103Simulation_Narrative - Neighborhood_Map",
-      "type": "word_doc",
-      "reviewBucket": "needs_review",
-      "reviewReason": "title alone does not establish publication or exclusion status"
-    },
-    {
-      "id": "68f7d35f-d7b6-4e64-88b0-2157571cf9c5",
-      "title": "103Simulation_Narrative - Riley_Digest",
-      "type": "word_doc",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
@@ -237,6 +209,13 @@
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
     {
+      "id": "a1722406-93b3-4ba5-afa9-61e4b82344d5",
+      "title": "Lore: POP-00131-lorenzo-jordan (Y2C51)",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "e96f7462-8916-4eee-95b5-455a8929346e",
       "title": "Mike Paulson-chat",
       "type": "unknown",
@@ -251,9 +230,23 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "a51f9726-252b-449d-9101-9170bcb12efa",
+      "title": "Oakland Bonds: Civic Infrastructure and Social Compacts",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "385edefc-c728-4984-a144-6c6cd11adf64",
       "title": "Oakland Civic",
       "type": "unknown",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "4d61e8ac-da0e-4181-9988-18a88ec2340a",
+      "title": "Oakland Development and Athletics Postseason Continuity Brief 104",
+      "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
@@ -384,6 +377,48 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "2226ad6f-dc7c-47d9-b003-dcc1149e7b7b",
+      "title": "Simulation_Narrative - Business_Ledger",
+      "type": "word_doc",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "643194dc-7727-4494-a96c-79aee836e127",
+      "title": "Simulation_Narrative - Initiative_Tracker",
+      "type": "word_doc",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "3cc32530-82fe-4d93-b5d5-cf41c4323e44",
+      "title": "Simulation_Narrative - Neighborhood_Demographics",
+      "type": "word_doc",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "be06b3b9-df30-4389-8907-bf82202736bf",
+      "title": "Simulation_Narrative - Neighborhood_Map",
+      "type": "word_doc",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "bc65ed60-397d-4de4-b1fe-f853428fabee",
+      "title": "Simulation_Narrative - Oakland_Sports_Feed",
+      "type": "word_doc",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "d62a5043-a859-4bcb-bb25-081a63acea25",
+      "title": "Simulation_Narrative - Riley_Digest",
+      "type": "word_doc",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "b2f8b11f-5799-4408-9903-b6971920ae05",
       "title": "supplemental_c102_baylight_toxic_soil.md",
       "type": "word_doc",
@@ -449,6 +484,13 @@
     {
       "id": "45906537-074f-4107-b971-862627341bc4",
       "title": "The Cycle Pulse — Y2C103",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "defd4884-1954-4657-84af-a19e69435ba3",
+      "title": "The Cycle Pulse — Y2C104",
       "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"

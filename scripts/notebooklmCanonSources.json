@@ -2,9 +2,9 @@
   "schemaVersion": 1,
   "policyMode": "fail_closed",
   "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
-  "reviewedAt": "2026-07-25",
-  "reviewedBy": "Codex under builder instruction: proceed",
-  "inventoryGeneratedAt": "2026-07-26T04:29:01.978Z",
+  "reviewedAt": "2026-08-27",
+  "reviewedBy": "research-build (Mags) — canon-source policy refresh, pipeline.59 spinoff",
+  "inventoryGeneratedAt": "2026-08-27T06:01:05.958Z",
   "allowedPublishedSourceIds": [
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1",
     "d1d80081-8cb6-4f9d-a0ef-c2d5f49e63c1",
@@ -31,24 +31,25 @@
     "3f3658ed-baf3-4fdb-a496-ee9f4acee563",
     "f3eeafd8-aead-4d4f-ad4a-9cfab04665f5",
     "3a187773-296d-44e1-a99a-a4d14119c78d",
-    "b1fa1364-d5ad-4665-b4cb-662b66836681"
+    "b1fa1364-d5ad-4665-b4cb-662b66836681",
+    "44145b44-2bdf-4bda-af83-78abb892fbeb",
+    "a0d88e0f-bef6-4f53-80b1-418d65a382ad",
+    "b0cf1c08-258d-41ab-9604-0d7a13b127f4",
+    "45906537-074f-4107-b971-862627341bc4",
+    "defd4884-1954-4657-84af-a19e69435ba3",
+    "833558a2-2829-4d84-8677-7d9a2b510a58"
   ],
   "allowedCanonReferenceSourceIds": [
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6",
     "4f18e520-741a-472e-94c0-d8a99ebde658",
     "d0186fb6-4d99-4f9d-9baa-ca4bd8e1afb4",
     "c9b1ca9a-bb3d-48c6-b322-c530ad667f47",
-    "9197fb2f-8fe2-4206-9965-72692a2771da",
     "19d25578-1ec3-4fb0-969a-8ee77ec6aa2b"
   ],
   "excludedSourceIds": [
-    "9624f0ea-d6a3-40f1-8a7c-d56023b4cc8e",
     "3271f3d6-377e-4cb9-a2a7-03ca596e1a83",
-    "368ac8c1-a52b-4bd7-8e2b-14774ef2aae9",
-    "6da1bab2-d015-41d1-a895-e7e5ab01c71e",
     "e96f7462-8916-4eee-95b5-455a8929346e",
     "385edefc-c728-4984-a144-6c6cd11adf64",
-    "8462cb24-5e9b-4c98-94e8-4fe6231a1c0f",
     "874d2f64-0fb3-48e2-98d5-95b40ada1894",
     "af829925-5cd7-41f1-b5a0-828b5de835b7",
     "3016e5a1-da7d-4152-9fff-505ab5ec5bce",
@@ -60,22 +61,31 @@
     "7a25fbe2-557c-4b21-8a11-b86b272dd4b8",
     "e9fd71f0-67b4-4913-9bc8-7518bc99cc91",
     "799c044c-696b-4163-9877-78b4ca9e41fa",
-    "78327e9c-62fe-4405-9a5c-b5543fd534de"
+    "78327e9c-62fe-4405-9a5c-b5543fd534de",
+    "8e773c1f-8fde-4212-b138-af97df7370dd",
+    "057778f5-b71b-43ae-bd92-723e34e43dbb",
+    "a51f9726-252b-449d-9101-9170bcb12efa",
+    "4d61e8ac-da0e-4181-9988-18a88ec2340a",
+    "7c65472d-24a7-4ad3-8eaf-59a9db1a0aac",
+    "92577b7f-67e9-424a-b7c7-a210247f6616",
+    "45ef514c-3ac2-4134-8b6c-c8a3ba5ac40b",
+    "d31ecbea-6a82-4cbc-b422-f3eb399cd031",
+    "2226ad6f-dc7c-47d9-b003-dcc1149e7b7b",
+    "643194dc-7727-4494-a96c-79aee836e127",
+    "3cc32530-82fe-4d93-b5d5-cf41c4323e44",
+    "be06b3b9-df30-4389-8907-bf82202736bf",
+    "bc65ed60-397d-4de4-b1fe-f853428fabee",
+    "d62a5043-a859-4bcb-bb25-081a63acea25",
+    "fc84bf14-d03d-41c8-9e8a-e83abed56cfd",
+    "b2f8b11f-5799-4408-9903-b6971920ae05",
+    "56f79960-1550-4769-9591-b1b4add11f82"
   ],
   "allowedLoreSourceIds": [
     "a1722406-93b3-4ba5-afa9-61e4b82344d5"
   ],
   "decisions": {
-    "9624f0ea-d6a3-40f1-8a7c-d56023b4cc8e": {
-      "title": "A’s and Oaks",
-      "classification": "excluded",
-      "reason": "Saved User/Gemini chat mixes builder additions with generated summaries; it is neither a publication nor a primary canon reference.",
-      "evidence": [
-        "NotebookLM raw source content contains alternating User and Gemini turns."
-      ]
-    },
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
-      "title": "bay_tribune_dispatch_c92_kono_second_song.pdf",
+      "title": "dispatch_c92_kono_second_song.pdf",
       "classification": "published",
       "reason": "Published Dispatch with a matching paper-of-record source.",
       "evidence": [
@@ -213,7 +223,7 @@
       ]
     },
     "68d0ce88-c554-40ba-9b55-1256633afb58": {
-      "title": "bay_tribune_supplemental_c94_let_walks_reset.pdf",
+      "title": "1. As_supplemental_c94_let_walks_reset.pdf",
       "classification": "published",
       "reason": "Published Cycle 94 Supplemental with a matching paper-of-record source.",
       "evidence": [
@@ -221,7 +231,7 @@
       ]
     },
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6": {
-      "title": "Benji Dillon: The Complete Origins (Parts I-IV) By Hal Richmond",
+      "title": "POP-00019_Benji Dillon: The Complete Origins (Parts I-IV) By Hal Richmond",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract makes Richmond Archive material authoritative for narrative birth/history canon.",
       "evidence": [
@@ -229,25 +239,8 @@
         "docs/media/CITIZEN_NARRATIVE_MEMORY.md"
       ]
     },
-    "368ac8c1-a52b-4bd7-8e2b-14774ef2aae9": {
-      "title": "Building Deep Storyline Materials",
-      "classification": "excluded",
-      "reason": "Saved User/Gemini research-planning chat, not source material.",
-      "evidence": [
-        "NotebookLM raw source content contains alternating User and Gemini turns."
-      ]
-    },
-    "6da1bab2-d015-41d1-a895-e7e5ab01c71e": {
-      "title": "C101 — cycle_pulse_edition_101",
-      "classification": "excluded",
-      "reason": "Duplicate generated-text representation of Edition 101; excluded to prevent duplicate retrieval weighting.",
-      "evidence": [
-        "editions/cycle_pulse_edition_101.txt",
-        "allowed source 76818efd-5148-4151-9519-d8071179706c"
-      ]
-    },
     "0ed229df-1dc3-4a87-ac83-6ccfb5f4696e": {
-      "title": "c92_mayor_interview.pdf",
+      "title": "POP-00034_tribune_interview_c92_mayor_interview.pdf",
       "classification": "published",
       "reason": "Published Cycle 92 On the Record interview.",
       "evidence": [
@@ -256,7 +249,7 @@
       ]
     },
     "886eacc8-20f6-431e-9eac-8dc2c4cd942d": {
-      "title": "cycle_pulse_edition_88.txt",
+      "title": "bay_tribune_e88.txt",
       "classification": "published",
       "reason": "Published Edition 88 with a matching paper-of-record source.",
       "evidence": [
@@ -264,7 +257,7 @@
       ]
     },
     "df033121-5f1a-4576-b3b0-afeaf26df68f": {
-      "title": "cycle_pulse_edition_96.txt",
+      "title": "bay_tribune_e96.txt",
       "classification": "published",
       "reason": "Published Edition 96 with a matching paper-of-record source.",
       "evidence": [
@@ -272,7 +265,7 @@
       ]
     },
     "4f18e520-741a-472e-94c0-d8a99ebde658": {
-      "title": "Darrin Davis: The Ohio Outlaw of Oakland By Hal Richmond - The Richmond Archive Collection, Origins of the Dynasty Series",
+      "title": "POP-00021_Darrin Davis: The Ohio Outlaw of Oakland By Hal Richmond - The Richmond Archive Collection, Origins of the Dynasty Series",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract identifies the Dynasty Origins checksums as canon.",
       "evidence": [
@@ -281,7 +274,7 @@
       ]
     },
     "d0186fb6-4d99-4f9d-9baa-ca4bd8e1afb4": {
-      "title": "Isley Kelley: The Complete Origins (Parts I-IV) By Hal Richmond",
+      "title": "POP-00019_Isley Kelley: The Complete Origins (Parts I-IV) By Hal Richmond",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract makes Richmond Archive material authoritative for narrative birth/history canon.",
       "evidence": [
@@ -290,7 +283,7 @@
       ]
     },
     "c9b1ca9a-bb3d-48c6-b322-c530ad667f47": {
-      "title": "Mark Aitken: The Complete Origins (Parts I-IV) By Hal Richmond",
+      "title": "POP-00013_Mark Aitken: The Complete Origins (Parts I-IV) By Hal Richmond",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract makes Richmond Archive material authoritative for narrative birth/history canon.",
       "evidence": [
@@ -299,7 +292,7 @@
       ]
     },
     "e96f7462-8916-4eee-95b5-455a8929346e": {
-      "title": "Mike Paulson",
+      "title": "Mike Paulson-chat",
       "classification": "excluded",
       "reason": "Saved builder/Gemini interview and generated synthesis, not a published interview artifact or primary canon record.",
       "evidence": [
@@ -314,16 +307,8 @@
         "NotebookLM raw source content contains alternating User and Gemini turns."
       ]
     },
-    "8462cb24-5e9b-4c98-94e8-4fe6231a1c0f": {
-      "title": "Oakland Neighborhoods_World Summary",
-      "classification": "excluded",
-      "reason": "Generated chat summary, not the engine world summary or a publication.",
-      "evidence": [
-        "NotebookLM raw source content contains alternating User and Gemini turns."
-      ]
-    },
     "874d2f64-0fb3-48e2-98d5-95b40ada1894": {
-      "title": "Oakland Oaks: Franchise Blueprint & Strategy",
+      "title": "Oakland Oaks",
       "classification": "excluded",
       "reason": "Generated notebook-curation chat and synthesis, not a primary source.",
       "evidence": [
@@ -338,17 +323,8 @@
         "NotebookLM raw source content contains alternating User and Gemini turns."
       ]
     },
-    "9197fb2f-8fe2-4206-9965-72692a2771da": {
-      "title": "Richmond Archive Canon Record – Origins of the Dynasty Series v1.0 Checksum Root: RCH-DYNASTY-2040A.txt",
-      "classification": "canon-reference",
-      "reason": "Verified Richmond Archive checksum root for the five Dynasty Origins records.",
-      "evidence": [
-        "docs/media/CITIZEN_NARRATIVE_MEMORY.md",
-        "docs/media/CITIZENS_BY_ARTICLE.md"
-      ]
-    },
     "3016e5a1-da7d-4152-9fff-505ab5ec5bce": {
-      "title": "supplemental_oaks_expansion_draft.md",
+      "title": "2. Oaks_supplemental_oaks_expansion_draft.md",
       "classification": "excluded",
       "reason": "Title and content identify an unpublished draft; drafts cannot enter canon retrieval.",
       "evidence": [
@@ -356,7 +332,7 @@
       ]
     },
     "88c2c054-5481-4de9-9f17-f44ea483de58": {
-      "title": "The Anchor of Oakland: The Vinnie Keane Story",
+      "title": "POP-00001_The Anchor of Oakland: The Vinnie Keane Story",
       "classification": "excluded",
       "reason": "Generated derivative summary with bracket citations; the primary Vinnie Richmond Archive origin is admitted instead.",
       "evidence": [
@@ -365,7 +341,7 @@
       ]
     },
     "a70f6800-ce9a-4ac9-a38e-e84c3e1e2c0b": {
-      "title": "The Calm and the Storm: The Vinnie Keane Story",
+      "title": "POP-00001_The Calm and the Storm: The Vinnie Keane Story",
       "classification": "excluded",
       "reason": "Near-duplicate generated derivative summary; the primary Vinnie Richmond Archive origin is admitted instead.",
       "evidence": [
@@ -383,7 +359,7 @@
       ]
     },
     "3f444dc6-b8f8-466b-b403-c3ec9c8040d8": {
-      "title": "THE CYCLE PULSE — SUPPLEMENTAL 89 — SPORTS.txt",
+      "title": "supplemental_c89 — SPORTS.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Sports Supplemental with a matching paper-of-record source.",
       "evidence": [
@@ -391,7 +367,7 @@
       ]
     },
     "bc51c26b-e383-4b97-a4c9-2e4d6e0bf753": {
-      "title": "THE CYCLE PULSE 89 - SUPPLEMENTAL — CULTURE.txt",
+      "title": "supplemental_c89 — CULTURE.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Culture Supplemental with a matching paper-of-record source.",
       "evidence": [
@@ -399,7 +375,7 @@
       ]
     },
     "3f3658ed-baf3-4fdb-a496-ee9f4acee563": {
-      "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL —  CULTURE & COMMUNITY.txt",
+      "title": "supplemental_c89 —  CULTURE & COMMUNITY.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Aitken Supplemental with a matching paper-of-record source.",
       "evidence": [
@@ -407,7 +383,7 @@
       ]
     },
     "f3eeafd8-aead-4d4f-ad4a-9cfab04665f5": {
-      "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — BUSINESS.txt",
+      "title": "supplemental_c89 — BUSINESS.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Business Supplemental with a matching paper-of-record source.",
       "evidence": [
@@ -415,7 +391,7 @@
       ]
     },
     "3a187773-296d-44e1-a99a-a4d14119c78d": {
-      "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CIVIC AFFAIRS.txt",
+      "title": "supplemental_c89 — CIVIC AFFAIRS.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Civic Supplemental with a matching paper-of-record source.",
       "evidence": [
@@ -423,7 +399,7 @@
       ]
     },
     "cf1f5cdb-ec1c-4797-9148-1d5f870ca15d": {
-      "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CULTURE & COMMUNITY_Benji Dillon.txt",
+      "title": "POP-00019_supplemental_c89— CULTURE & COMMUNITY_Benji Dillon.txt",
       "classification": "excluded",
       "reason": "Publication-shaped text has no matching paper-of-record artifact in editions/; held out pending publisher evidence.",
       "evidence": [
@@ -432,7 +408,7 @@
       ]
     },
     "bb2cb3a8-0f3b-4c0f-9364-6a5a31977803": {
-      "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CULTURE & COMMUNITY_Isley Kelley.txt",
+      "title": "POP-00019_supplemental_c89 — CULTURE & COMMUNITY_Isley Kelley.txt",
       "classification": "excluded",
       "reason": "Publication-shaped text has no matching paper-of-record artifact in editions/; held out pending publisher evidence.",
       "evidence": [
@@ -441,7 +417,7 @@
       ]
     },
     "7a25fbe2-557c-4b21-8a11-b86b272dd4b8": {
-      "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CULTURE & COMMUNITY_Mayor Avery Santana.txt",
+      "title": "POP-00034_supplemental_c89 — CULTURE & COMMUNITY_Mayor Avery Santana.txt",
       "classification": "excluded",
       "reason": "Publication-shaped text has no matching paper-of-record artifact in editions/; held out pending publisher evidence.",
       "evidence": [
@@ -450,7 +426,7 @@
       ]
     },
     "b1fa1364-d5ad-4665-b4cb-662b66836681": {
-      "title": "THE CYCLE PULSE 89 — SUPPLEMENTAL — CULTURE & COMMUNITY_Paulson.txt",
+      "title": "POP-00527_supplemental_c89— CULTURE & COMMUNITY_Paulson.txt",
       "classification": "published",
       "reason": "Published Cycle 89 Paulson Supplemental with a matching paper-of-record source.",
       "evidence": [
@@ -458,7 +434,7 @@
       ]
     },
     "e9fd71f0-67b4-4913-9bc8-7518bc99cc91": {
-      "title": "THE CYCLE PULSE 89— CULTURE & COMMUNITY_Darrin Davis.txt",
+      "title": "POP-00021_supplemental_c89 — CULTURE & COMMUNITY_Darrin Davis.txt",
       "classification": "excluded",
       "reason": "Publication-shaped text has no matching paper-of-record artifact in editions/; held out pending publisher evidence.",
       "evidence": [
@@ -467,7 +443,7 @@
       ]
     },
     "799c044c-696b-4163-9877-78b4ca9e41fa": {
-      "title": "The Town: A Tale of Two Dynasties",
+      "title": "1. As_The Town: A Tale of Two Dynasties",
       "classification": "excluded",
       "reason": "Generated derivative overview with bracket citations, not a publication or primary canon reference.",
       "evidence": [
@@ -475,7 +451,7 @@
       ]
     },
     "19d25578-1ec3-4fb0-969a-8ee77ec6aa2b": {
-      "title": "Vinnie Keane - The Complete Origins (Parts I through IV) Written by Hal Richmond",
+      "title": "POP-00001_Vinnie Keane - The Complete Origins (Parts I through IV) Written by Hal Richmond",
       "classification": "canon-reference",
       "reason": "Verified Richmond Archive origin; the active narrative-memory contract makes Richmond Archive material authoritative for narrative birth/history canon.",
       "evidence": [
@@ -500,6 +476,203 @@
         "Source file: output/lore-quarantine/POP-00131-lorenzo-jordan.md",
         "Cycle placement: Y2C51",
         "Verdict: pass (rhea)"
+      ]
+    },
+    "44145b44-2bdf-4bda-af83-78abb892fbeb": {
+      "title": "cycle_pulse_dispatch_102_drop_nobody_claimed.txt",
+      "classification": "published",
+      "reason": "Published Cycle 102 dispatch with a matching paper-of-record source.",
+      "evidence": [
+        "editions/cycle_pulse_dispatch_102_drop_nobody_claimed.txt"
+      ]
+    },
+    "a0d88e0f-bef6-4f53-80b1-418d65a382ad": {
+      "title": "cycle_pulse_dispatch_102_oaks_credibility.txt",
+      "classification": "published",
+      "reason": "Published Cycle 102 dispatch with a matching paper-of-record source.",
+      "evidence": [
+        "editions/cycle_pulse_dispatch_102_oaks_credibility.txt"
+      ]
+    },
+    "b0cf1c08-258d-41ab-9604-0d7a13b127f4": {
+      "title": "cycle_pulse_edition_102.txt",
+      "classification": "published",
+      "reason": "Published Edition 102 with a matching paper-of-record source.",
+      "evidence": [
+        "editions/cycle_pulse_edition_102.txt"
+      ]
+    },
+    "45906537-074f-4107-b971-862627341bc4": {
+      "title": "The Cycle Pulse — Y2C103",
+      "classification": "published",
+      "reason": "Published Cycle 103 edition; masthead carries the known Y2C103 malformed-tag defect (media spinoff, tracked separately) but content matches the paper-of-record edition, same as the e85 damaged-glyph precedent.",
+      "evidence": [
+        "editions/cycle_pulse_c103.txt"
+      ]
+    },
+    "defd4884-1954-4657-84af-a19e69435ba3": {
+      "title": "The Cycle Pulse — Y2C104",
+      "classification": "published",
+      "reason": "Published Edition 104 with a matching paper-of-record source.",
+      "evidence": [
+        "editions/cycle_pulse_c104.txt"
+      ]
+    },
+    "833558a2-2829-4d84-8677-7d9a2b510a58": {
+      "title": "supplemental_oakland_tech_landscape_c84.txt",
+      "classification": "published",
+      "reason": "Published Cycle 84 tech-landscape supplemental; notebook title adds an \"oakland_\" prefix over the local filename but content matches.",
+      "evidence": [
+        "editions/supplemental_tech_landscape_c84.txt"
+      ]
+    },
+    "8e773c1f-8fde-4212-b138-af97df7370dd": {
+      "title": "1. As_Sunset of a Dynasty: The Athletics' Final Stand",
+      "classification": "excluded",
+      "reason": "Generated derivative overview of the Athletics dynasty transition, sharing the \"1. As_\" NotebookLM auto-numbering prefix with the already-excluded \"The Town: A Tale of Two Dynasties\" sibling; not a publication or primary canon reference.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "excluded sibling 799c044c-696b-4163-9877-78b4ca9e41fa"
+      ]
+    },
+    "057778f5-b71b-43ae-bd92-723e34e43dbb": {
+      "title": "C83-c102 Master Timeline",
+      "classification": "excluded",
+      "reason": "Generated cross-cycle chronicle synthesizing other sources (C83-C102), same class as the already-excluded \"Oakland’s Cycle 100: A City’s Evolution\" notebook summary.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "excluded precedent af829925-5cd7-41f1-b5a0-828b5de835b7"
+      ]
+    },
+    "a51f9726-252b-449d-9101-9170bcb12efa": {
+      "title": "Oakland Bonds: Civic Infrastructure and Social Compacts",
+      "classification": "excluded",
+      "reason": "Generated thematic essay synthesizing financial/athletic/political/communal \"bonds\" across other sources, same class as the already-excluded \"Oakland Neighborhoods_World Summary\" / \"Oakland Civic\" notebook-curation summaries.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "excluded precedent 8462cb24-5e9b-4c98-94e8-4fe6231a1c0f"
+      ]
+    },
+    "4d61e8ac-da0e-4181-9988-18a88ec2340a": {
+      "title": "Oakland Development and Athletics Postseason Continuity Brief 104",
+      "classification": "excluded",
+      "reason": "Engine-state briefing snapshot (civic + sports status as of C104) — same class as the already-excluded world_summary_c100.txt: derived world-state material outside the prior-published-arc lane, stale-prone against live Sheet state.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "excluded precedent 78327e9c-62fe-4405-9a5c-b5543fd534de"
+      ]
+    },
+    "7c65472d-24a7-4ad3-8eaf-59a9db1a0aac": {
+      "title": "Notebook Formatting Assistant Initialization",
+      "classification": "excluded",
+      "reason": "Non-content notebook initialization artifact, not source material — same class as the already-excluded \"Mike Paulson\" / \"Oakland Civic\" saved-chat entries.",
+      "evidence": [
+        "NotebookLM raw source content"
+      ]
+    },
+    "92577b7f-67e9-424a-b7c7-a210247f6616": {
+      "title": "POP-00034_Reframing Success: The OARI Metric Evolution",
+      "classification": "excluded",
+      "reason": "POP-00034-tagged narrative piece on OARI metric reframing with no matching civic-project output, published edition, or graded lore-quarantine artifact found in the repo; held out pending publisher/authorship verification, same as the other \"held out pending publisher evidence\" entries already in this policy.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "repository output/ and editions/ inventory — no match found"
+      ]
+    },
+    "45ef514c-3ac2-4134-8b6c-c8a3ba5ac40b": {
+      "title": "POP-00789_Architect of the Integrated City: The Elias Varek Profile",
+      "classification": "excluded",
+      "reason": "POP-00789-tagged Elias Varek profile with no matching docs/archive/ backing file, published edition, or graded lore-quarantine artifact found in the repo; held out pending publisher/authorship verification.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "repository docs/archive/ and output/lore-quarantine/ inventory — no match found"
+      ]
+    },
+    "d31ecbea-6a82-4cbc-b422-f3eb399cd031": {
+      "title": "POP-01046_profile_elliot_abraham_origins.md",
+      "classification": "excluded",
+      "reason": "POP-01046-tagged Elliot Abraham origin piece attributed to Hal Richmond by the notebook summary, but unlike the five admitted Richmond Archive canon-reference entries it has no matching docs/archive/*.txt backing file or docs/media/CITIZEN_NARRATIVE_MEMORY.md entry; cannot be verified against the narrative-memory contract, held out pending verification.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "docs/archive/ inventory — no matching *-origins.txt for Elliot Abraham",
+        "docs/media/CITIZEN_NARRATIVE_MEMORY.md — no entry for POP-01046"
+      ]
+    },
+    "2226ad6f-dc7c-47d9-b003-dcc1149e7b7b": {
+      "title": "Simulation_Narrative - Business_Ledger",
+      "classification": "excluded",
+      "reason": "Simulation_Narrative tab-dump (Business_Ledger) — engine-derived tabular data narrated into prose, same class as the already-excluded world_summary_c100.txt: not a publication, stale-prone against live Sheet state.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "docs/research/2026-07-07-simulation-narrative-open-items.md"
+      ]
+    },
+    "643194dc-7727-4494-a96c-79aee836e127": {
+      "title": "Simulation_Narrative - Initiative_Tracker",
+      "classification": "excluded",
+      "reason": "Simulation_Narrative tab-dump (Initiative_Tracker) — same class as the Business_Ledger sibling above.",
+      "evidence": [
+        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
+      ]
+    },
+    "3cc32530-82fe-4d93-b5d5-cf41c4323e44": {
+      "title": "Simulation_Narrative - Neighborhood_Demographics",
+      "classification": "excluded",
+      "reason": "Simulation_Narrative tab-dump (Neighborhood_Demographics) — same class as the Business_Ledger sibling above.",
+      "evidence": [
+        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
+      ]
+    },
+    "be06b3b9-df30-4389-8907-bf82202736bf": {
+      "title": "Simulation_Narrative - Neighborhood_Map",
+      "classification": "excluded",
+      "reason": "Simulation_Narrative tab-dump (Neighborhood_Map) — same class as the Business_Ledger sibling above.",
+      "evidence": [
+        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
+      ]
+    },
+    "bc65ed60-397d-4de4-b1fe-f853428fabee": {
+      "title": "Simulation_Narrative - Oakland_Sports_Feed",
+      "classification": "excluded",
+      "reason": "Simulation_Narrative tab-dump (Oakland_Sports_Feed) — same class as the Business_Ledger sibling above.",
+      "evidence": [
+        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
+      ]
+    },
+    "d62a5043-a859-4bcb-bb25-081a63acea25": {
+      "title": "Simulation_Narrative - Riley_Digest",
+      "classification": "excluded",
+      "reason": "Simulation_Narrative tab-dump (Riley_Digest) — same class as the Business_Ledger sibling above.",
+      "evidence": [
+        "sibling entry 2226ad6f-dc7c-47d9-b003-dcc1149e7b7b"
+      ]
+    },
+    "fc84bf14-d03d-41c8-9e8a-e83abed56cfd": {
+      "title": "c102_health_center_acceleration_v4.md",
+      "classification": "excluded",
+      "reason": "Versioned draft (\"_v4\") health-center construction report; no matching published artifact in editions/ or civic-project output found under this name — same \"draft, not yet publication\" class as the already-excluded supplemental_oaks_expansion_draft.md.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "excluded precedent 3016e5a1-da7d-4152-9fff-505ab5ec5bce",
+        "output/civic-voice/health_center_c103.json inventory — no matching v4 report found"
+      ]
+    },
+    "b2f8b11f-5799-4408-9903-b6971920ae05": {
+      "title": "supplemental_c102_baylight_toxic_soil.md",
+      "classification": "excluded",
+      "reason": "Jax Caldera investigative piece on Baylight toxic-soil remediation bonding; no matching paper-of-record artifact found in editions/ or output/recovered/ — held out pending publisher evidence, same class as the other Jax/supplemental entries already excluded on that basis in this policy.",
+      "evidence": [
+        "NotebookLM AI-generated source summary",
+        "repository editions/ and output/recovered/ inventory — no match found"
+      ]
+    },
+    "56f79960-1550-4769-9591-b1b4add11f82": {
+      "title": "supplemental_jax_varek_column.md",
+      "classification": "excluded",
+      "reason": "Jax Caldera \"Heat Shield\" column (jax_varek_column.md) — per docs/mags-corliss/JOURNAL_RECENT.md a WNBA→NBA correction was owed before this piece’s Gemini-lane ingest and is not confirmed resolved in this push; held out pending verification that the correction landed.",
+      "evidence": [
+        "docs/mags-corliss/JOURNAL_RECENT.md:884",
+        "docs/mags-corliss/SESSION_HISTORY.md:15"
       ]
     }
   }

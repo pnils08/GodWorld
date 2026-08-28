@@ -140,6 +140,16 @@
   "hooks": {
     "PreToolUse": [
       {
+        "matcher": "Write|Edit|NotebookEdit|Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash /root/GodWorld/.claude/hooks/boot-doc-guard.sh",
+            "timeout": 10
+          }
+        ]
+      },
+      {
         "matcher": "Bash",
         "hooks": [
           {

@@ -315,7 +315,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   1. engine-sheet adds `City_Hall_Ledger` from the disk contract.
   2. Replay rule: clasp is code-only; sheet create is dry-run → apply → read-back.
 - **Verify:** sandbox row count matches the dry JSON; live not touched until named.
-- **Status:** [ ] blocked on Task 9
+- **Status:** [ ] ready — Task 9 dry C104 is on disk (`b75bb28c`)
 - **Lane:** engine-sheet
 
 ---
@@ -332,7 +332,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
 
 ## Changelog
 
-- 2026-08-29 (grok) — Task 9 dry Sunday on C104. Prep now always writes all 9 district packets (C104 unattended prep had skipped D4/D6/D9). Agenda/hearing `outputContract` no longer offers ImplementationPhase. `pilot_active` underscore aliases rewrite to `pilot-active`. Attended mayor-open/gavel used `--mayor-model mistralai/mistral-medium-3.1` because `mistralai/mistral-large` returned provider errors. Map model unchanged. No `--apply`. Log: `logs/civic-t9-c104.log`.
+- 2026-08-29 (grok) — Task 9 shipped `b75bb28c`. Dry Sunday C104: nine hearings + gavel, applied=false. engine.125 closed in the same commit. Task 10 (sheet tab) is engine-sheet's.
 - 2026-08-16 (research-build) — Tasks 2/3 landed `7cecaa94` (CLAUDE_CTL). Reviewed D1/D6/D7 in full before landing — fact/voice split clean, no caucus-microphone leakage, Crane's status handled without overasserting. Tasks 1-8 now all done; only Task 9 (dry Sunday, needs a new cycle) remains.
 - 2026-08-16 (grok) — Tasks 2/3 drafted on disk under `.claude/agents/civic-office-council-seat/` and `civic-office-council-d{1-9}/`. Not committed. `readPersonaDir` now loads shared LENS+RULES then seat IDENTITY.
 - 2026-08-16 (grok) — Tasks 1, 4, 5, 6, 7, 8 landed. Tasks 2/3 still Claude. Task 9 waits on a new cycle + IDENTITY files. No `--apply`.

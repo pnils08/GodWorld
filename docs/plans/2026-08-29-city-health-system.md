@@ -72,6 +72,8 @@ Each enters as a bounded multiplicative factor around 1.0. **Not** `HousingPress
 
 *Convergence stays* at engine.132's 25%/cycle, floor 3.
 
+*Calibration on the live C104 fixture (Task 3):* age linear, density and income at 0.35 gain, sub-factors clamped [0.6, 1.6] → max/min 2.08 at convergence. Chinatown 1.48 (dense, older, modest income) … Rockridge 1.16 (oldest, rich) … Temescal 0.77 … Jack London 0.72, Baylight 0.71 (young, rich). Gains are code constants; the product clamp is config.
+
 **D4 — The threshold wire: absolute thresholds, faces in the seed.**
 Every consumer's threshold is absolute (`illnessSupportThreshold` 0.08 in `checkHealthEvent_`; seeds 0.06/0.08; stink-scanner ≥8%) and every one of them is **saturated today** at a 10.2% city rate — the seed fires every cycle, the scanner always has a candidate. A ~3.5% baseline restores signal to all of them without touching them, and structurally vulnerable hoods cross an absolute bar more easily — uneven hurt, doctrine rule 3. `checkHealthEvent_` already keys the dose off the hood rate with the W3 support floor above threshold; it is left alone.
 
@@ -99,13 +101,14 @@ Defaults are tuning, not truth — retune from bench evidence; cheap to retune i
 **Files that change**
 | file | change |
 |---|---|
-| `phase03-population/applyDemographicDrift.js` | D2 attractor + D1 salient-event strain; existing nudges and talk-back unchanged |
-| `phase03-population/updateNeighborhoodDemographics.js` | D3 envelope allocation replaces `totalPop × illnessRate × hoodIllnessMod`; storm joins the salient table; relief post-normalization; clamp re-derived |
-| `phase07-evening-media/applyStorySeeds.js` | D4 health seed — crossing hoods + faces, `'Temescal'` hardcode removed |
-| `phase01-config/engine94SheetContract.js` (or sibling) | self-arm the D6 keys |
-| `scripts/cascadeAudit.js` | ±2pp flat-convergence assertion (`:369,:378`) → envelope + spread assertion; ≥8% support rule unchanged |
-| `docs/engine/ENGINE_STUB_MAP.md` | regen (`/stub-engine`) same commit |
-| tests | `scripts/illnessEnvelope.test.js` — attractor inequality, normalization sums to envelope, spread bounds, relief ≤ envelope |
+| `phase03-population/applyDemographicDrift.js` | D2 attractor + D1 salient-event strain; existing nudges and talk-back unchanged — **done `01a1549e`** |
+| `phase02-world-state/loadNeighborhoodState.js` | +`noiseIndex`, +`medianIncome` on `S.neighborhoodState` (the D3 structural layers; found missing at Task 3) — **done** |
+| `phase03-population/updateNeighborhoodDemographics.js` | D3 `buildHoodIllnessWeights_` + envelope allocation; storm joins the salient table; relief post-normalization; clamp re-derived; publishes `S.neighborhoodIllnessWeights` — **done** |
+| `phase07-evening-media/applyStorySeeds.js` | D4 health seed — crossing hoods + faces, `'Temescal'` hardcode removed — **done** |
+| `phase01-config/engine94SheetContract.js` + `godWorldEngine2.js:220` | `ENGINE133_CONFIG_SEEDS` + `ensureEngine133Config_` (sibling list, engine.94's fourteen stay exact) wired after the engine.94 contract — **done** |
+| `scripts/cascadeAudit.js` | `sick-rate-band` → envelope (−3pp relief … +2pp lag); new `sick-rate-spread` (max/min ≥ 1.3); ≥8% support rule unchanged — **done** |
+| `docs/engine/ENGINE_STUB_MAP.md` | regen same commit — **done** (183 files / 1173 fns) |
+| tests | `scripts/illnessEnvelope.test.js` 23/23; `hospitalTalkback.test.js` attractor zeroed to isolate W4 (24/24); `engine94SheetContract.test.js` 24/24 — **done** |
 
 **Readers that do NOT change (verified live-wired, thresholds stay absolute)**
 - `generationalEventsEngine.js:1270 checkHealthEvent_` — hood-rate dose + W3 floor; gets real signal back
@@ -129,16 +132,17 @@ Defaults are tuning, not truth — retune from bench evidence; cheap to retune i
 
 ## Tasks
 
-1. **Unit test first** — `scripts/illnessEnvelope.test.js`: (a) attractor inequality at 0.5pp gap vs max ordinary pressure; (b) envelope sum; (c) spread ≥1.4 on the live C104 hood data as fixture; (d) relief post-normalization never lifts the aggregate above the envelope.
-2. `applyDemographicDrift.js` — D2 attractor + D1 salient-event strain.
-3. `updateNeighborhoodDemographics.js` — D3.
-4. Self-arm D6 keys.
-5. `applyStorySeeds.js` — D4 (verify `applyMilestone_` output carries `popId` + `neighborhood` before wiring; if not, that is the one-line fix that goes first).
-6. `cascadeAudit.js` — envelope/spread assertions.
-7. `/stub-engine` regen; commit with the caller-graph findings in the message.
+1. ✅ `799b09d8` **Unit test first** — `scripts/illnessEnvelope.test.js`: (a) attractor inequality at 0.5pp gap vs max ordinary pressure; (b) envelope sum; (c) spread ≥1.4 on the live C104 hood data as fixture; (d) relief post-normalization never lifts the aggregate above the envelope.
+2. ✅ `01a1549e` `applyDemographicDrift.js` — D2 attractor + D1 salient-event strain.
+3. ✅ `updateNeighborhoodDemographics.js` — D3 (+ `loadNeighborhoodState.js` layers).
+4. ✅ Self-arm D6 keys.
+5. ✅ `applyStorySeeds.js` — D4 (verify `applyMilestone_` output carries `popId` + `neighborhood` before wiring; if not, that is the one-line fix that goes first).
+6. ✅ `cascadeAudit.js` — envelope/spread assertions.
+7. ✅ `/stub-engine` regen; commit with the caller-graph findings in the message.
 8. Bench: 0827, deployment @5 = `799fd841` + engine.132 diff + this diff. Groundhog fires until criteria 1–6 hold (expect 8–15 fires for the descent; any bench-only nudge logged in DEPLOY.md).
 9. Live: one smoke behind the standing wave; engine.132 + this as one diff. NEXT line + DEPLOY.md updated.
 
 ## Changelog
 - 2026-08-29 — Plan written (S396 engine-sheet) from the builder direction of 2026-08-29 + two wiring cards + live C104 read.
+- 2026-08-29 — Tasks 1–7 built and committed (`799b09d8`, `01a1549e`); suite 183/184 (djDirect = pre-existing fixture gap). Bench (Task 8) is the next gate.
 - 2026-08-29 — D1 revised on builder direction (same session): no outbreak roll; illness reacts to the weather engine's seasonal events. D5 wave-state carry dropped; D6 shrinks to four keys. Hood-identity finding filed as engine.134.

@@ -132,6 +132,22 @@ EOF
     echo "^ No terminal detected, so no lane is yours. The handoff above is still current — read it, but do not edit any NEXT line, and ask Mike which window this is before doing lane work."
   fi
 
+  # --- REVIEW INBOX (builder-direct 2026-08-29) ---
+  # docs/for-claude-review/ is the house-guest inbox: a finished research/plan MD
+  # saved there is a message to Claude. Boot reports clean/dirty ONLY — count +
+  # names, never contents. README.md is the folder's own contract, not a message.
+  INBOX_DIR="$GODWORLD_ROOT/docs/for-claude-review"
+  if [ -d "$INBOX_DIR" ]; then
+    INBOX_FILES=$(find "$INBOX_DIR" -maxdepth 1 -type f ! -name 'README.md' ! -name '.gitkeep' -printf '%f\n' 2>/dev/null | sort)
+    INBOX_COUNT=$(printf '%s' "$INBOX_FILES" | grep -c . || true)
+    echo ""
+    if [ "$INBOX_COUNT" -eq 0 ]; then
+      echo "REVIEW INBOX: clean (docs/for-claude-review/ — no guest work waiting on Claude)"
+    else
+      echo "REVIEW INBOX: $INBOX_COUNT waiting in docs/for-claude-review/ — $(printf '%s' "$INBOX_FILES" | paste -sd ', ' -). Read on demand; not a boot read."
+    fi
+  fi
+
   # (G-SS3 "Last journal" line retired S300 — journal froze to Mags' page; the
   # media boot sequence reads her recent reflections via magsPageRecall.js. T4.)
   echo ""

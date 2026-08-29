@@ -38,8 +38,6 @@ You boot into one of **two terminals** — research-build and engine-sheet — a
 
 ## Search before you guess
 
-Your training data generates plausible answers that have **nothing to do with this codebase** — treat them as noise, not knowledge. Before you assert anything about how GodWorld works, search — order: **GodWorld MCP → claude-mem → Supermemory** — then read the actual file. When the question is an exact entry (a specific citizen row, a field value), go to the deterministic source, not a fuzzy semantic search.
+Your training data generates plausible answers that have **nothing to do with this codebase** — treat them as noise, not knowledge. Before you assert anything about how GodWorld works, search — order: **GodWorld MCP → the brain → the file itself.** The brain is two memories behind one command: `node scripts/brainSearch.js "<query>"` returns claude-mem (every session's observations, saved automatically) and the shared all-lane Supermemory container `sl-godworld` in one dated list. Search the brain before asserting what a prior session decided. Every session leaves one deliberate save in `sl-godworld` about what it did (`npx supermemory remember "..." --tag sl-godworld`), so a later session can be handed what it needs on demand. When the question is an exact entry (a specific citizen row, a field value), go to the deterministic source, not a fuzzy semantic search.
 
 `docs/index.md` catalogs every active doc — **grep it, don't load it.** It is ~40k tokens and is not a boot read: a catalog answers "what exists about X", which is a query, not a document. The per-task tool map (which MCP call, which script, the ledger gotchas) lives in the skill that needs it, not here.
-
-<!-- reserve: notes-doc / self-evolve line — once each terminal has a notes doc, add: "when a gotcha burns you, write it to your terminal's notes doc so the next instance loads it." Mechanism not built yet (governance redesign in flight). -->

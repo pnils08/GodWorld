@@ -144,7 +144,7 @@ EOF
     if [ "$INBOX_COUNT" -eq 0 ]; then
       echo "REVIEW INBOX: clean (docs/for-claude-review/ — no guest work waiting on Claude)"
     else
-      echo "REVIEW INBOX: $INBOX_COUNT waiting in docs/for-claude-review/ — $(printf '%s' "$INBOX_FILES" | paste -sd ', ' -). Read on demand; not a boot read."
+      echo "REVIEW INBOX: $INBOX_COUNT waiting in docs/for-claude-review/ — $(printf '%s' "$INBOX_FILES" | paste -sd ',' - | sed 's/,/, /g'). Read on demand; not a boot read."
     fi
   fi
 

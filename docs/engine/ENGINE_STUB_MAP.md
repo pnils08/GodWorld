@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-08-27 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-08-29 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -183,7 +183,7 @@
 
 - **applyInitiativeImplementationEffects_(ctx)**
   Reads: S.initiativeImplementationTriggers, S.initiativeNeighborhoodEffects, S.sentiment, S.sportsZones
-  Writes: S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
+  Writes: S.initiativeHealthRelief, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.sentiment
   Sheets: Initiative_Tracker
 
 - **findImplCol_(headers, possibleNames)**
@@ -494,7 +494,7 @@
 
 ### updateNeighborhoodDemographics.js
 - **updateNeighborhoodDemographics_(ctx)**
-  Reads: S.crimeMetrics, S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.isCreationDay, S.isFirstFriday, S.sportsAtmosphereEnabled, S.sportsSeason, S.weatherEvents
+  Reads: S.crimeMetrics, S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.sportsAtmosphereEnabled, S.sportsSeason, S.weatherEvents
   Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate, ctx.config.illnessFallbackRate
   RNG: ctx.rng / safeRand_(ctx)

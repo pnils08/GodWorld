@@ -1,5 +1,5 @@
 {
-  "generated": "2026-08-27",
+  "generated": "2026-08-29",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
   "functionsMapped": 1171,
@@ -1906,6 +1906,14 @@
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
+      ]
+    },
+    "initiativeHealthRelief": {
+      "writers": [
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
+      ],
+      "readers": [
+        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
       ]
     },
     "initiativeImplementationTriggers": {

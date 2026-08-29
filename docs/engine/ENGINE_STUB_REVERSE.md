@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-08-27 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-08-29 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 183 · **Functions mapped:** 1171 · **S.* fields:** 338 · **Sheets:** 59
+**Files scanned:** 183 · **Functions mapped:** 1171 · **S.* fields:** 339 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -201,6 +201,7 @@
 | `S.householdMoments` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | _(none)_ | 1 | 0 |
 | `S.illnessRate` | _(none)_ | `phase07-evening-media/mediaRoomBriefingGenerator.js::generateMediaBriefing_` | 0 | 1 |
 | `S.initiativeEvents` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `utilities/exportCycleArtifacts.js::buildCycleContextPack_` | 1 | 5 |
+| `S.initiativeHealthRelief` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | 1 | 1 |
 | `S.initiativeImplementationEffects` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | 1 | 1 |
 | `S.initiativeImplementationTriggers` | _(none)_ | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | 0 | 1 |
 | `S.initiativeNeighborhoodEffects` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_` | 2 | 2 |

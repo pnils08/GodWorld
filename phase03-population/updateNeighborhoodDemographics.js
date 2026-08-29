@@ -185,14 +185,48 @@ function updateNeighborhoodDemographics_(ctx) {
       if (qol71 <= 0.35) hoodIllnessMod += 0.10;
       else if (qol71 >= 0.65) hoodIllnessMod -= 0.10;
     }
+    // engine.132 — a delivering health initiative is a real same-cycle cause,
+    // and belongs here with the heat wave and the flood.
+    //
+    // This is the wire the initiative ledger was built for and never had. The
+    // ledger exists so a broken number can be answered by an IN-WORLD event
+    // rather than a commit (Mike-direct 2026-08-27): the sim is living, so
+    // sickness cannot be a crisis one cycle and fine the next because someone
+    // edited a constant. The Temescal Community Health Center IS the answer to
+    // the Temescal health crisis — and for ~70 cycles it could not touch
+    // sickness, because nothing connected it to this number.
+    //
+    // Relief is negative modulation, scaled by how fully the initiative is
+    // delivering (Phase 2 publishes intensity only for phases that actually
+    // treat people). It sits inside the same [0.75, 1.5] physics bound as every
+    // other cause — a clinic bends the curve, it does not repeal illness.
+    var healthRelief71 = S.initiativeHealthRelief && S.initiativeHealthRelief[neighborhood];
+    if (healthRelief71) {
+      hoodIllnessMod -= cfgNum_(ctx, ctx.config, 'illnessInitiativeRelief', 0.25) * healthRelief71;
+    }
+
     hoodIllnessMod = Math.max(0.75, Math.min(1.5, hoodIllnessMod));
 
     var expectedSick = Math.round(totalPop * illnessRate * hoodIllnessMod);
     var sickDelta = expectedSick - demo.sick;
 
-    // Gradual adjustment (don't swing wildly)
-    if (Math.abs(sickDelta) > 3) {
-      sickDelta = sickDelta > 0 ? 3 : -3;
+    // engine.132 — converge on a STORY timescale, not a geological one.
+    //
+    // This was a flat +/-3 per cycle. Correct as a no-wild-swings guard, fatal as
+    // a rate: Temescal sits 137 sick below its own population-scaled target, so
+    // at 3/cycle the number needed ~46 cycles to arrive. Nothing in this project
+    // survives 46 cycles — the crons read the last couple of cycles at each wake,
+    // so a change that slow is invisible to every consumer and produces no story
+    // at any point along the way. It is also why the largest hoods all sat at an
+    // identical ~104: the residue of the pre-CR-1 flat writer, still crawling.
+    //
+    // Now a fraction of the remaining gap per cycle, so a real event resolves in
+    // about 4-5 cycles and a citizen can live it. The old 3 becomes the FLOOR so
+    // small gaps still close and the anti-swing intent survives.
+    var convergeRate = cfgNum_(ctx, ctx.config, 'illnessConvergenceRate', 0.25);
+    var maxStep = Math.max(3, Math.ceil(Math.abs(sickDelta) * convergeRate));
+    if (Math.abs(sickDelta) > maxStep) {
+      sickDelta = sickDelta > 0 ? maxStep : -maxStep;
     }
     demo.sick = Math.max(0, demo.sick + sickDelta);
 

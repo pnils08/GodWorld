@@ -141,6 +141,21 @@ function applyInitiativeImplementationEffects_(ctx) {
   // IMPLEMENTATION PHASE → INTENSITY MAPPING
   // ═══════════════════════════════════════════════════════════════════════════
 
+  // engine.132 — phases where a health initiative is actually TREATING people.
+  // A construction site cures nobody, so planning/design/construction are absent
+  // by intent: relief begins when care begins. Keys mirror PHASE_INTENSITY.
+  var HEALTH_DELIVERING_PHASES = {
+    'implementation-active': true,
+    'disbursement-active': true,
+    'dispatch-live': true,
+    'pilot-active': true,
+    'pilot_evaluation': true,
+    'operational': true,
+    'complete': true
+  };
+
+  var pendingHealthRelief = [];
+
   var PHASE_INTENSITY = {
     'announced': 0,
     'legislation-filed': 0.05,
@@ -275,6 +290,14 @@ function applyInitiativeImplementationEffects_(ctx) {
     // Skip zero-intensity phases
     if (intensity === 0) continue;
 
+    // engine.132 — remember which hoods have care actually being DELIVERED this
+    // cycle, and how strongly. Collected after the T7 phase correction above so a
+    // reconciled phase counts, and before the domain-effect fan-out so it is not
+    // entangled with the sentiment path.
+    if (domain === 'health' && HEALTH_DELIVERING_PHASES[phase] === true) {
+      pendingHealthRelief.push({ hoodsStr: hoodsStr, intensity: intensity, name: name });
+    }
+
     // Get domain effects
     var effects = DOMAIN_EFFECTS[domain] || DEFAULT_EFFECTS;
 
@@ -372,6 +395,45 @@ function applyInitiativeImplementationEffects_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WRITE OUTPUTS
   // ═══════════════════════════════════════════════════════════════════════════
+
+  // engine.132 — resolve the collected health initiatives to a per-hood relief
+  // map. Hoods are parsed the same way the effect fan-out parses them, so an
+  // initiative relieves exactly the neighborhoods it claims and no others.
+  var healthRelief = {};
+  for (var hr = 0; hr < pendingHealthRelief.length; hr++) {
+    var item = pendingHealthRelief[hr];
+    var parts = String(item.hoodsStr || '').split(/[,;]+/);
+    for (var hp = 0; hp < parts.length; hp++) {
+      var hood = parts[hp].replace(/^\s+|\s+$/g, '');
+      if (!hood) continue;
+      // Strongest delivering initiative wins per hood — two clinics in one
+      // neighborhood is not double the medicine.
+      if (!healthRelief[hood] || item.intensity > healthRelief[hood]) {
+        healthRelief[hood] = item.intensity;
+      }
+    }
+    Logger.log('applyInitiativeImplementationEffects_: engine.132 health relief from "' +
+      item.name + '" intensity ' + item.intensity + ' -> ' + item.hoodsStr);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // engine.132 — the repair-mechanism wire
+  // ═══════════════════════════════════════════════════════════════════════════
+  // The initiative ledger exists so a broken engine number can be answered by an
+  // IN-WORLD event instead of a commit (Mike-direct 2026-08-27: the sim is
+  // living, so a number cannot be bad one cycle and fine the next). The Temescal
+  // Community Health Center IS the response to the Temescal health crisis.
+  //
+  // It has never been able to work. DOMAIN_EFFECTS.health moves sentiment,
+  // communityEngagement and publicSpaces; the string "illness" appears nowhere in
+  // this file. So a $45M health centre could run forever and sickness would not
+  // move. Publishing the health slice here is what lets Phase 3 treat a
+  // delivering health initiative as a real same-cycle cause, exactly like a heat
+  // wave — see updateNeighborhoodDemographics_ hoodIllnessMod.
+  //
+  // DELIVERING phases only. A building site treats nobody, so construction and
+  // planning publish nothing; relief starts when care starts.
+  S.initiativeHealthRelief = healthRelief;
 
   S.initiativeImplementationEffects = {
     processed: processed,

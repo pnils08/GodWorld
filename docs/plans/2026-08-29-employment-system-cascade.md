@@ -69,7 +69,11 @@ pointers:
 - Existing rows: **see Open question 1** — scale change (bands + future draws + outlier diff-restore) vs a row sweep.
 
 ### Phase E — Quiet the rewriters (career engine soft push)
-- From the wiring cards: list every per-cycle writer of Income / EmployerBizId / CareerStage / Occupation and its rate. Cut per-cycle salary adjustment and career-change rolls to event-driven, low-rate paths; the dial-vs-attractor gap steers `runCareerEngine_` hiring/layoff pressure (cascade doc: steering, never dosing). Old forcing systems named and disabled by row.
+- **Measured (LifeHistory_Log, live 2026-08-29):** career-tagged events/cycle C94–C102 = 12–16 (mostly `Career` flavour text, no ledger change; 2 `Promotion`/cycle); **C103 = 35, C104 = 51** — `Promotion` 13 → 29, `Career-Hired` 8 → 5, `Career-FieldChange` 3 → 5.
+- **The rewriter:** `updateCareerProgression_` (`phase05-citizens/educationCareerEngine.js:~395-420`) — every non-sports adult 22–64 in class MID with `YearsInCareer ≥ 10` and ≥ 20 cycles since `LastPromotionCycle` rolls 5/10/15% (by education) **every cycle** → `senior` + LifeHistory line + `Promotion` log row. Ledger today: 347 mid-class, 652 citizens with ≥ 10 years, 354 blank `LastPromotionCycle` → ~24 promotions/cycle, the whole mid class senior in ~15 cycles. Stage-only (Income untouched) but it is the roster rewrite the builder sees. Entry→Mid twin at 15%/cycle after 10 cycles. `YearsInCareer` accrual is already gated (+0.5 per 26 cycles, engine.62b).
+- **`runCareerEngine_` `maybeTransition_` (`runCareerEngine.js:367-400`):** per-citizen per-cycle promo ≤ 8% (+6–12% Income), layoff ≤ 7% (−12–20%), sector shift ≤ 5% (−10–+5%), lateral ≤ 5% (±3%), 6-cycle gap between transitions, LIMIT 10 events/cycle; `matchUnemployedToOpenings_` (`:1160-1199`, Career-Hired, +5–10% / ±5%) and the headcount-reconciliation layoff (`:1326`, −12–20%). These are the Income movers.
+- **Not employment:** `checkForPromotions_` is Generic_Citizens → ledger emergence (tier), leave alone. `generationalWealthEngine.js:456,490` Income writes — classify at task time (retirement/inheritance context).
+- **Cut (pending Q2):** (a) `updateCareerProgression_` stage rolls → event-driven only (a promotion is a `runCareerEngine_` transition with an Income consequence, not a calendar roll); (b) `maybeTransition_` odds re-based so expected churn ≈ 1–2 Income-moving transitions per cycle across the ledger, pressure-steered by the dial-vs-attractor gap; (c) reconciliation layoff kept (ground truth), rate-limited.
 
 ### Phase F — Placement by net worth
 - `migrationTrackingEngine` / `householdFormationEngine` / intake placement read the B1 income tier so moves land where a citizen's net worth belongs. Fold, not add.
@@ -88,9 +92,10 @@ pointers:
 ## Open questions
 
 - [ ] **Q1 (blocks Phase D):** existing 967 rows — redefine the scale (bands + future draws) and correct only provable outliers by diff-restore, or rewrite Income/NetWorth for every row? Recommendation: scale change, not sweep (`project_simulation-ledger-no-column-is-true` — repair is guard + targeted restore, never a sweep).
-- [ ] **Q2 (blocks Phase E scope):** which of the per-cycle employment writers named by the cards die outright vs get throttled to event-driven? Answer after the cards list them.
+- [ ] **Q2 (blocks Phase E scope):** `updateCareerProgression_` calendar promotion rolls — remove outright (promotions become career-engine transitions with pay consequences) or throttle to ~1/cycle? Recommendation: remove; one promotion path, event-driven.
 
 ---
 
 ## Changelog
+- 2026-08-29 (16:20) — Wiring cards returned (`runCareerEngine_`, `checkForPromotions_`); churn measured from LifeHistory_Log; the C103–C104 promotion spike traced to `updateCareerProgression_`; Phase E filled, Q2 sharpened.
 - 2026-08-29 — Direction captured (S397 engine-sheet); phases sketched; wiring cards dispatched for `runCareerEngine_` and `checkForPromotions_`; live C104 numbers recorded in sources.

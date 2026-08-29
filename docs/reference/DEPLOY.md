@@ -92,6 +92,18 @@ clear whenever Mike fires them; they confirm, they don't gate.
 - 2026-08-09 (codex) engine.94 approval-ceiling read-back after the shared fires — C115 retained config 8/8 and contiguous state columns 3/3; all four elected offices at approval ≥80 persisted streak 2, all six below threshold remained at 0, no auto/manual scandal fired before the third qualifying Cycle, and `Engine_Errors` was zero for both C114 and C115.
 - 2026-08-09 (codex) engine.94 code-only safety correction — exact main `d3b70f3c` deployed @41 and token-fired C116. The self-arm was idempotent on the prepared bench; all four qualifying offices reached streak 3, the seeded 5% rolls missed, no premature scandal appeared, one naturally active grief register carried one machine source, and C116 logged zero engine errors. Fresh-Sheet creation/conflict behavior is covered by the 24/24 offline first-live-Cycle harness; production remained untouched.
 
+### LIVE checklist — engine.132 + engine.133 as one wave (written 2026-08-29, execute in this order)
+
+The one thing that can go wrong here is ORDER. If a new-code cycle fires before the data cell is written, live runs the manufactured wave Mike rejected (hoods chasing ~9.4% × weight for 1–2 cycles). Live cycles are manual today, so the window is controllable — keep it closed.
+
+1. **Standing-wave smoke first, under OLD illness code** (engine.131 T1-T4 + backlog already live). One live fire. Expect: WP `illnessRate` 0.1023 → ~0.103 (one more ratchet step), every hood Sick +3 (flat convergence toward the 10.2% target), hood aggregate ~5.3%. Read `Engine_Errors`.
+2. **`clasp push` from repo root** (prod `.clasp.json`, `CLAUDE_CTL=1`), the 132+133 diff — plus whatever else is on main and cleared; the HELD engine.131 T7 files ship only if Mike has released them. Bump the PROD deployment. No fire yet.
+3. **The one data cell — computed at write time, not replayed.** Run the live variant of the bench reset with `--wp-only` (never the ND Sick reset; live's hood layer IS the lived record): read live `Neighborhood_Demographics` fresh, aggregate Σ Sick / Σ pop (~0.053 after step 1), write `World_Population!illnessRate` ← that value, read back. Dry-run first, read the printed target ID. Mike's go is on this cell.
+4. **First new-code fire.** Predict before firing: WP ← aggregate × 0.88 + 0.035 × 0.12 (≈0.0509 from 0.053) plus the day's pushes; `ensureEngine133Config_` appends the 5 keys (verify in `World_Config`); hoods begin redistributing — Chinatown up toward ~1.5 × city, Baylight/Jack London down, aggregate stays inside the envelope; `cascadeAudit` `sick-rate-band` may read up to −3pp on this one cycle only (named in its note). 0 new `Engine_Errors`.
+5. **Second fire, same discipline** — descent step ≈ 0.88 × gap; spread growing; no hood near 8%. Then hand the loop back to the schedule.
+
+Rollback: revert the two commits' engine files and `clasp push`; the data cell needs no rollback (the old code ratchets from wherever it stands).
+
 ### Groundhog proving loop (Mike-direct S328 — how engine waves ship)
 
 The trigger token exists so the TERMINAL runs the proving loop itself, no Mike in the loop until the live fire:

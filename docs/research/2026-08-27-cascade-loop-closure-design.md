@@ -78,6 +78,9 @@ Current direction is locked top-down per engine.102: dials are autonomous (World
 - 2026-08-29 (later, builder direction on the engine.133 plan) — **Health is a reactor, not a driver.** Don't let the health path grow into its own beast; the wave "actor" idea shifts off being the driver and onto the seasons: freeze-over, floods, heat index — the seasonal events that already drive strain into neighborhoods that otherwise trend positive by design. The weather engine owns what fires and where; illness (and, parked for later, chaos cars) react to it. Mechanism in [[../plans/2026-08-29-city-health-system]] D1.
 - 2026-08-29 — **Standing question: what does this arm of the codebase think the neighborhoods are?** Hardcoded hood lists keep accreting as the code grows. Measured same day: 25 files declare their own hood list/table, 70 name a hood literally, and the Apps Script engine has no single loader off `Neighborhood_Map` (Node has `lib/districtMap.js`). Filed engine.134.
 
+- 2026-08-29 (15:07, builder direction) — **The employment lane is next, same shape.** Illness got its envelope (engine.133, bench-proven); the city-level employment number still lands on the hoods flat. Next session: employment city → neighborhoods, plus Business_Ledger depth (grok's six-per-hood fill) so the hood layer has real employers to weight from — and this lines up with the kimi casino-ledger record being worked through, whose stake caps need honest hood economics underneath. Mechanism: [[../plans/2026-08-29-city-health-system]] §Next, engine.135.
+- 2026-08-29 (15:07) — Live cycle runs 2026-08-30; whoever deploys engine.133 does the one sheet write with it so the cycle runs clean ([[../reference/DEPLOY]] §LIVE checklist).
+
 ---
 
 ## Changelog

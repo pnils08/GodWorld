@@ -849,7 +849,7 @@ This plan is the engine.90 pointer. The commits below are implementation, not th
 
 ### Commit 9 — Restore function (before live Traded move)
 
-- **Title:** `engine.90: restore archived POPID (not sports call-up)`
+- **Title:** `engine.90: Status=Active restores a traded POPID to Oakland`
 - **Files:** `utilities/archiveCitizenExits.js` restore; `scripts/sportsFeedWriter.js` **call-up fail-loud** if `citizenSnapshot`/SL POPID missing (“archived — use restore”) — **no restore from call-up**; optional stub or later `trade-return` action only if sports needs a writer; `docs/engine/SIMULATION_LEDGER_COL_MAP.md` (`ReturnedCycle` writer); `scripts/archiveCitizenRestore.test.js`
 - **Depends on:** Commits 5–6
 - **Changes:** Same-POPID restore as its **own** function; archive history retained; fail-loud on deceased and on duplicate active row. Writes `ReturnedCycle`; clears `MigrationDestination` if back in a canon hood. Call-up remains Active→Active. **This commit is the return-path gate.** No live Traded `deleteRows` yet.

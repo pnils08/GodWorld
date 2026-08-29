@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-08-22
+updated: 2026-08-27
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -75,6 +75,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-16-sunday-city-hall-invite]]** | What Sunday actually hands offices, who may sit, Mayor-first lock, why it is not a round table; week-gated vs person-gated invite forks after civic.17 | `watch` — rb/Mike pick shape A–D before a plan |
 | **[[2026-08-20-s344-human-story-template]]** | S344 newsroom recovery — Mags owns the angle, reporters fill three human slots, Packet stays sidecar, deterministic shape/provenance walls precede Rhea; C103 Jax and C104 Tanya pressure-tested | `adopt` (ignites [[../plans/2026-08-20-s344-human-story-template-pressure-test]], pipeline.54) |
 | **[[2026-08-20-notebooklm-daily-branching]]** | Verified current Daily News path plus deterministic Cycle/wake/article-state routing across Brief, Deep Dive, and evidence-gated Debate; NotebookLM renders but never chooses editorial state. | `adopt` (extends [[../plans/2026-07-10-notebooklm-bridge-deploy]] §Phase 6, pipeline.51) |
+| **[[2026-08-27-cascade-loop-closure-design]]** | Three-lane trace (employment / illness / sentiment) of the full city→hood→citizen cascade: illness is the one closed loop, employment fully open (attractor dial → uniform hood smear → no citizen dose → no talk-back), sentiment top-down with one thin pulse return; 7 chain breaks incl. stale packet illness read, inert QoL fold, dead desk-packet column. Design: dials set climate, hoods localize, citizens sample, threshold-gated ground truth corrects; retune attractor ~0.945 / illnessBaseline ~0.025; employment closes by steering the career engine, not dosing | `adopt` (revision input to engine.104 [[../plans/2026-08-10-economy-native-rebuild]]; Claude review before code, builder-direct) |
 
 ---
 
@@ -120,3 +121,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - 2026-08-12 (S367, research-build) — Registered [[2026-08-12-notebooklm-structured-source-generation]] (Gemini-notebook proposal, Mike-shared): found unregistered/uncommitted; registered with S367 feedback recorded in the verdict cell. Plan + any new script remain Mike-gated.
 - 2026-08-20 (codex) — Registered [[2026-08-20-s344-human-story-template]]; adopt verdict from the C103 Jax and C104 Tanya pressure test.
 - 2026-08-20 (codex) — Registered [[2026-08-20-notebooklm-daily-branching]] and reclassified the 2026-08-02 Antigravity proposal as a `take-nothing` historical record.
+- 2026-08-27 (kimi) — Registered [[2026-08-27-cascade-loop-closure-design]] (S391, builder-approved capture): full cascade trace + loop-closure design; adopt as engine.104 revision input, Claude review gated before code.

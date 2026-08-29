@@ -1,7 +1,7 @@
 ---
 title: Engine agent fleet — the engine gets what the newsroom already has
 created: 2026-08-22
-updated: 2026-08-22
+updated: 2026-08-29
 type: plan
 tags: [plan, engine, agents, architecture, direction, active]
 pointers:
@@ -180,3 +180,37 @@ Not "build eleven agents". Build the coverage contract against this one agent,
 then clone the shape. `engine-validator` is now a live, cheap, repeatable check
 that produces a real artifact — which is a better starting asset than the fleet
 had this morning.
+
+## 9. First in-session agent — `engine-wiring`, 2026-08-29 (engine.133)
+
+Built from the §8 lesson: the agent does not *reason over* the engine, it
+*queries the maps*. Given one target (function / `S.` field / tab) it returns a
+fixed wiring card — callers by phase from `godWorldEngine2.js` line order, every
+`S.` field with writers+readers from `ENGINE_STUB_REVERSE.json` + `ctxMap.js`,
+write path (intent vs direct, before/after the Phase-10 executor), tabs, open
+ROLLOUT rows, `git log`. Haiku, `tools: Read, Glob, Grep, Bash`, never edits.
+The lead opens every pointer before cutting — the card narrows, it never rules.
+
+Measured on the probe that preceded it: a Claude Code subagent gets **no**
+conversation, **no** SessionStart boot (`<godworld-state>` absent), **no**
+path-scoped engine rules; it does get the project's root instruction file, the
+identity rules and the memory index (~20k tokens before the first read).
+`model:` accepts Claude aliases only and `ANTHROPIC_BASE_URL` is session-wide,
+so OpenRouter is not a per-agent option — the headless path for that is
+`runEngineAgent.js`, which also loads `SKILL.md`, so this agent is dual-use (no
+Bash there; the `node -e` map lookups would need a tool).
+
+Acceptance, `applySportsSeason_`: definition, both callers, executor lines,
+three orphans (`sportsSeasonOakland`, `sportsSeasonChicago`,
+`sportsFeedSeasonType` — the last is the standing "zero readers" fact, found
+cold), zero sheet writes — all verified true by the lead against source. Miss:
+skipped the version string, which hid a real header-lags-commit drift (file
+`v3.0`, commit `2935a4a7` "v3.1"); procedure tightened same day.
+
+**Cost, measured (two cards, 2026-08-29).** Generic Haiku with the procedure
+inlined: 98k tokens / 38 calls. The registered agent with `tools: Read, Glob,
+Grep, Bash`: 95k / 41 calls (hit the 20-turn cap once, resumed). Restricting
+tools did not shrink the bill; each turn resends the ~20k inherited context, so
+the lever is fewer turns — one Bash call per step, ~10 calls per card. The
+`Initiative_Tracker` card also fired `MAP STALE` correctly: engine.132 landed
+after the 08-27 map, so the map was regenerated before that work continues.

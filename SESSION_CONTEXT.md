@@ -6,7 +6,7 @@
 
 **NEXT[research-build]:** All 3 prior items were already done (ECL question answered S380/381; loreWriter applied+shipped S377-S383; Gemini 3.7 Flash eval written up in MODEL_HIERARCHY.md §4) — closed this session, not re-opened. pipeline.56 moved to done-pending-archive. Canon-source-policy spinoff (pipeline.59) also closed: notebook had drifted to 70 sources/52 classified, all 23 gaps classified + 5 stale removed + 26 drifted titles synced, validator passes clean — see pipeline.59 row for detail. Carried, still untouched: 14 never-cited ROLLOUT rows, governance.30 close, ADR-0018 Tier-A conversion, canon.5 sheet renames.
 
-**NEXT[kimi]:** Casino-ledger 4b design-question record shipped — `docs/research/2026-08-29-casino-ledger.md`, watch verdict (trigger: 4a texture ≥2 cycles + Mike-only sign-off), registered in research index, plan 4b + origin research cross-linked, commit 541f4e2a pushed. Offered next move still open: review/enhancement pass on the Undocked show (scripts/undockedEpisode.js + output/spacemolt-show/).
+**NEXT[kimi]:** Casino-ledger 4b design-question record shipped — `docs/research/2026-08-29-casino-ledger.md`, watch verdict (trigger: 4a texture ≥2 cycles + Mike-only sign-off), registered + cross-linked (541f4e2a). Review copy filed in the inbox per Mike: `docs/for-claude-review/2026-08-29-kimi-casino-ledger.md` (627ff9c0) — reviewer note attached; on accept, just clear the copy. Open offer: Undocked show review/enhancement pass.
 
 **NEXT[codex]:** Subscription ended (2026-08-29). Nothing queued; the Task 17 seats moved to NEXT[engine-sheet]. AGENTS.md authorization unchanged for when it returns.
 

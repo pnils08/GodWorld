@@ -74,7 +74,8 @@ function buildPassSection(rows, session, date, label) {
   const countStr = Object.entries(counts).map(([g, n]) => `${n} ${g}.*`).join(' + ');
   const idStr = rows.map(r => r.id).join(' + ');
   const lines = [];
-  lines.push(`## S${session} Archive Pass (${date}, research-build) — ${label}`);
+  const terminalArg = ((process.argv.find(a => a.startsWith('--terminal=')) || '--terminal=research-build').split('=')[1]) || 'research-build';
+  lines.push(`## S${session} Archive Pass (${date}, ${terminalArg}) — ${label}`);
   lines.push('');
   lines.push(`${rows.length} \`done-pending-archive\` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: ${countStr}.`);
   lines.push('');

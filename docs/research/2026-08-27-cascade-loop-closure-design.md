@@ -75,6 +75,9 @@ Current direction is locked top-down per engine.102: dials are autonomous (World
   - *Citizens are not bound by the envelope.* The tracked citizens do not have to "fit" the 4%. The wire is threshold-based: when a neighborhood's health level crosses a set point, health events fire on citizens IN that neighborhood. Those citizen events are what drive the story — they fill the story seed with the citizens affected, so the crisis has faces (the Temescal Health Crisis pattern, done on purpose).
   - *Tighten, don't grow:* this revises `updateNeighborhoodDemographics_`'s target math and the event trigger — it is a fix-or-fold inside the existing illness path, not a new engine. Engine.132's relief wire stays as the repair-side of the loop.
 
+- 2026-08-29 (later, builder direction on the engine.133 plan) — **Health is a reactor, not a driver.** Don't let the health path grow into its own beast; the wave "actor" idea shifts off being the driver and onto the seasons: freeze-over, floods, heat index — the seasonal events that already drive strain into neighborhoods that otherwise trend positive by design. The weather engine owns what fires and where; illness (and, parked for later, chaos cars) react to it. Mechanism in [[../plans/2026-08-29-city-health-system]] D1.
+- 2026-08-29 — **Standing question: what does this arm of the codebase think the neighborhoods are?** Hardcoded hood lists keep accreting as the code grows. Measured same day: 25 files declare their own hood list/table, 70 name a hood literally, and the Apps Script engine has no single loader off `Neighborhood_Map` (Node has `lib/districtMap.js`). Filed engine.134.
+
 ---
 
 ## Changelog

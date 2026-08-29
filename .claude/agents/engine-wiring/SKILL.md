@@ -15,6 +15,13 @@ You map one engine target and return its wiring. You do not judge, fix, propose,
 
 Repo root: `/root/GodWorld`. Run every command from there.
 
+## Two harnesses, same card
+
+- **Claude Code subagent** (the lead spawns you): you have Read/Glob/Grep/Bash. Run the commands below as written.
+- **Headless via `scripts/runEngineAgent.js --agent engine-wiring`** (house-guest lanes, cron): there is no Bash. You have `read_file`, `glob`, `grep`, and `map_lookup`. Substitute: the `node -e … sFields/sheets` commands → `map_lookup{kind:sfield|sheet, names:[…]}`; `node scripts/ctxMap.js <field>` → `map_lookup{kind:ctxmap, field}`; `git log … -- <path>` → `map_lookup{kind:gitlog, path:<the target's file>}`; the map-freshness check → `map_lookup{kind:mapmeta, path:<the target's file>}` (STALE only if that commit date is newer than `generated`). The harness `grep` takes ONE `path` — a directory, a file, or a glob like `phase*/*.js` — never a space-separated list. Call shapes that work:
+  `grep{pattern:"function applySportsSeason_", path:"phase*/*.js"}` · `grep{pattern:"applySportsSeason_\\(", path:"phase*/*.js"}` · `grep{pattern:"applySportsSeason_|Phase10-ExecuteIntents", path:"phase01-config/godWorldEngine2.js"}` · `grep{pattern:"applySportsSeason", path:"docs/engine/ROLLOUT_PLAN.md"}` (non-.js paths: use `read_file` instead — `grep` scans .js only).
+  **A `TOOL_FAILED` result is not `NOT FOUND`.** Fix the call and retry. `NOT FOUND` goes on the card only after a call that succeeded returned no match. Do not ask for a shell; do not claim a lookup you could not run.
+
 ## Target kinds
 
 The dispatch names exactly one target. Infer the kind from its shape:

@@ -74,13 +74,49 @@ const system = parts.join('\n\n---\n\n');
 // somewhere else.
 // ---------------------------------------------------------------------------
 const TOOLS = [
-  { name: 'read_file', description: 'Read a repo file (path relative to repo root). Returns its text.',
-    input_schema: { type: 'object', properties: { path: { type: 'string' } }, required: ['path'] } },
+  { name: 'read_file', description: 'Read a repo file (path relative to repo root). Returns numbered lines (N<TAB>text). offset = first line (1-based), limit = max lines (default 400). Read large files in slices.',
+    input_schema: { type: 'object', properties: { path: { type: 'string' }, offset: { type: 'integer' }, limit: { type: 'integer' } }, required: ['path'] } },
   { name: 'glob', description: 'List files matching a shell glob relative to repo root, e.g. "phase*/*.js".',
     input_schema: { type: 'object', properties: { pattern: { type: 'string' } }, required: ['pattern'] } },
   { name: 'grep', description: 'Regex search file contents under a repo path. Returns file:line matches.',
     input_schema: { type: 'object', properties: { pattern: { type: 'string' }, path: { type: 'string' } }, required: ['pattern'] } },
+  // engine-wiring needs the deterministic maps, not a shell. Four fixed lookups,
+  // no free-form command: the harness stays read-only and network-free.
+  { name: 'map_lookup', description: 'Deterministic engine-map lookups. kind=sfield|sheet: names[] → ENGINE_STUB_REVERSE.json writers/readers. kind=ctxmap: field → scripts/ctxMap.js line-level writers/readers. kind=gitlog: path → last 6 commits. kind=mapmeta: map generated date + files/functions + newest commit date of path.',
+    input_schema: { type: 'object', properties: { kind: { type: 'string', enum: ['sfield', 'sheet', 'ctxmap', 'gitlog', 'mapmeta'] }, names: { type: 'array', items: { type: 'string' } }, field: { type: 'string' }, path: { type: 'string' } }, required: ['kind'] } },
 ];
+
+function mapLookup(input) {
+  const { execFileSync } = require('child_process');
+  const kind = String(input.kind || '');
+  if (kind === 'sfield' || kind === 'sheet') {
+    const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/engine/ENGINE_STUB_REVERSE.json'), 'utf8'));
+    const table = kind === 'sfield' ? d.sFields : d.sheets;
+    const names = Array.isArray(input.names) ? input.names : [];
+    if (!names.length) return 'TOOL_FAILED: names[] required for kind=' + kind;
+    return names.map((n) => n + ' ' + (table[n] ? JSON.stringify(table[n]) : 'NOT IN MAP')).join('\n');
+  }
+  const ident = (v) => /^[A-Za-z0-9_./-]+$/.test(String(v || ''));
+  if (kind === 'ctxmap') {
+    if (!ident(input.field)) return 'TOOL_FAILED: field required (identifier only)';
+    return execFileSync('node', ['scripts/ctxMap.js', input.field], { cwd: ROOT, encoding: 'utf8', timeout: 60000 });
+  }
+  if (kind === 'gitlog') {
+    if (!ident(input.path)) return 'TOOL_FAILED: path required (repo-relative, no spaces)';
+    safe(input.path);
+    return execFileSync('git', ['log', '--oneline', '-6', '--', input.path], { cwd: ROOT, encoding: 'utf8', timeout: 30000 }) || '(no commits)';
+  }
+  if (kind === 'mapmeta') {
+    const d = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/engine/ENGINE_STUB_REVERSE.json'), 'utf8'));
+    let newest = '';
+    if (ident(input.path)) {
+      safe(input.path);
+      newest = execFileSync('git', ['log', '-1', '--format=%cs', '--', input.path], { cwd: ROOT, encoding: 'utf8', timeout: 30000 }).trim();
+    }
+    return `map generated ${d.generated} | files ${d.filesScanned} | functions ${d.functionsMapped}` + (newest ? ` | newest commit on ${input.path}: ${newest}` : '');
+  }
+  return 'TOOL_FAILED: unknown kind ' + kind;
+}
 
 // Coverage is counted by the HARNESS, never by the agent. Run 3 of engine-validator
 // reported "Files scanned: 124" when 136 exist — an agent must not be trusted to
@@ -148,7 +184,7 @@ function resolveTargets(target) {
   if (!fs.existsSync(abs)) return [];
   if (fs.statSync(abs).isDirectory()) {
     const prefix = t.endsWith('/') ? t : t + '/';
-    return repoFiles().filter((f) => f.startsWith(prefix) && f.endsWith('.js'));
+    return repoFiles().filter((f) => f.startsWith(prefix) && /\.(js|md|json)$/.test(f));
   }
   return [t];
 }
@@ -156,9 +192,17 @@ function resolveTargets(target) {
 function runTool(name, input) {
   try {
     if (name === 'read_file') {
-      const t = fs.readFileSync(safe(input.path), 'utf8');
+      // Numbered lines + offset/limit honored. Without numbers the model invents
+      // file:line (headless Haiku run 2026-08-29 cited :45/:50/:97 for writes that
+      // sit at :35/:98/:125); without offset/limit it re-reads 2k-line files whole.
+      const rows = fs.readFileSync(safe(input.path), 'utf8').split('\n');
       COVERAGE.read.add(String(input.path));
-      return t.length > 120000 ? t.slice(0, 120000) + '\n…[truncated]' : t;
+      const start = Math.max(1, Number(input.offset) || 1);
+      const limit = Math.max(1, Number(input.limit) || 400);
+      const slice = rows.slice(start - 1, start - 1 + limit);
+      const body = slice.map((l, i) => (start + i) + '\t' + l).join('\n');
+      const more = start - 1 + limit < rows.length ? `\n…[${rows.length - (start - 1 + limit)} more lines; total ${rows.length} — read again with offset]` : '';
+      return body + more;
     }
     if (name === 'glob') {
       const hits = matchGlob(input.pattern).slice(0, 400);
@@ -166,7 +210,9 @@ function runTool(name, input) {
         : 'TOOL_FAILED: no file matched ' + input.pattern + '. Nothing was listed; do not assume the set is empty — try another pattern.';
     }
     if (name === 'grep') {
-      const files = resolveTargets(input.path).filter((f) => f.endsWith('.js'));
+      // .js/.md/.json — ROLLOUT_PLAN.md and SHEETS_MANIFEST.md are legitimate grep
+      // targets; the old .js-only filter made the agent report them as nonexistent.
+      const files = resolveTargets(input.path).filter((f) => /\.(js|md|json)$/.test(f));
       if (!files.length) {
         return 'TOOL_FAILED: no file matched path ' + (input.path || '.') +
           '. Nothing was scanned. Do NOT report results for this path — fix the path and retry, ' +
@@ -194,6 +240,7 @@ function runTool(name, input) {
       const head = `[scanned ${scanned} file(s) for this call]`;
       return lines.length ? head + '\n' + lines.join('\n') : head + '\n(no matches)';
     }
+    if (name === 'map_lookup') return mapLookup(input);
     return 'unknown tool: ' + name;
   } catch (e) { return 'TOOL_FAILED: ' + e.message + ' — nothing was scanned; do not report results for this call.'; }
 }
@@ -202,7 +249,7 @@ function runTool(name, input) {
 
 const kickoff =
   'Do your job now, on this repository, following your own instructions above. ' +
-  'You have read_file, glob and grep — use them; do not answer from assumption. ' +
+  'You have read_file, glob, grep and map_lookup — use them; do not answer from assumption. ' +
   'You cannot write files: your FINAL message must be the complete report in the ' +
   'exact Output Format your instructions specify. Do not stop early, and do not ' +
   'ask questions — there is nobody to answer them.\n\n' +

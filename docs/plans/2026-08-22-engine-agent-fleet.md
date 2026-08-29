@@ -214,3 +214,16 @@ tools did not shrink the bill; each turn resends the ~20k inherited context, so
 the lever is fewer turns — one Bash call per step, ~10 calls per card. The
 `Initiative_Tracker` card also fired `MAP STALE` correctly: engine.132 landed
 after the 08-27 map, so the map was regenerated before that work continues.
+
+**Headless path proven (2026-08-29).** `runEngineAgent.js` gained `map_lookup`
+(sfield / sheet / ctxmap / gitlog / mapmeta — fixed lookups, no shell), numbered
+`read_file` with offset/limit, and `.md/.json` grep targets. Three runs on
+`applySportsSeason_`: DeepSeek-chat — 2 turns, filled the card with NOT FOUND
+after tool failures (goal substitution; not a wiring model). Haiku 4.5 before
+the harness fixes — right substance, invented line numbers (`:45/:50/:97` for
+writes at `:35/:98/:125`) and two false "does not exist" from the .js-only
+grep. Haiku 4.5 after — matches the verified in-session card line for line;
+21 turns / 44 calls / 532k input tokens (~$0.55) because the raw harness
+resends the whole transcript with no prompt caching. Next lever if guests use
+it often: `cache_control` on system + tools. House-guest rule lands in the
+guest instruction file §Change protocol step 2 — no engine plan without the card.

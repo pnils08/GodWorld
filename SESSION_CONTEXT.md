@@ -1,6 +1,6 @@
 # SESSION_CONTEXT — NEXT WORK ONLY. One PIN + one NEXT line per lane. What already happened lives in git, claude-mem, ROLLOUT_PLAN and the gap/production logs — never here. If a line describes a session instead of an assignment, it is written wrong.
 
-**PIN:** S392 | Day 184 | canonical C104 (live cycleCount=104, lastRun 8/19 — no live cycle since) | bench SANDBOX 0827 at C107 | prod carries engine.131 T1-T4 + the engine.126/128/129 backlog, smoke pending | Partnership NORMAL | Ledger 964 rows | output/ git-tracked
+**PIN:** S393 | Day 185 | canonical C104 (live cycleCount=104, lastRun 8/19 — no live cycle since) | bench SANDBOX 0827 at C107 | prod carries engine.131 T1-T4 + the engine.126/128/129 backlog, smoke pending | Partnership NORMAL | Ledger 964 rows | output/ git-tracked
 
 **NEXT[engine-sheet]:** (1) governance.51 boot-doc consolidation — T1 confirm the size ceiling, then T2 rewrite boot docs rule-only (one file per commit, builder unlocks each), T3 memory dedup via /batch. Plan doc has the builder's list. (2) engine.131 T7 + civic override + rheaTwoPass fix stay HELD until a live cycle smokes T1-T4 (Mike-direct 2026-08-29). (3) engine.132 (initiative→illness wire) is committed, NOT deployed — bench-prove on SANDBOX 0827 before live. (4) Codex's Task 17 queue pulled here (subscription ended): three pending seats in `docs/plans/2026-08-09-three-wake-lived-packet-pilot.md` (Ariana Reyes, Elliot Marbury, DeShawn Hartley) — review with Mike before any build. Do not grow civic surface.
 

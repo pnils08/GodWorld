@@ -1,7 +1,7 @@
 ---
 title: SpaceMolt Game Show — Oakland's Serialized Obsession
 created: 2026-08-07
-updated: 2026-08-16
+updated: 2026-08-29
 type: plan
 tags: [research, citizens, media, engine, active]
 sources:
@@ -74,7 +74,7 @@ pointers:
 ## Phase 4 — Wager lane (gated, sequential)
 
 - **4a Narrative-only (first).** Wager texture in the ECL pool + letters — citizens talk stakes, no balances move. Runs ≥2 cycles before 4b is even designed.
-- **4b Casino ledger (NOT authorized by this plan).** Requires its own design doc + Mike sign-off: event IDs from adapter outcomes, published odds, eligible citizens, stake caps, funding source, settlement at cycle fire, household economic effects, audit trail, loss safeguards. Feeds grudge/ambition typing downstream. In-world money only — no real-money anything, ever.
+- **4b Casino ledger (NOT authorized by this plan).** Requires its own design doc + Mike sign-off: event IDs from adapter outcomes, published odds, eligible citizens, stake caps, funding source, settlement at cycle fire, household economic effects, audit trail, loss safeguards. Feeds grudge/ambition typing downstream. In-world money only — no real-money anything, ever. Design questions consolidated in [[../research/2026-08-29-casino-ledger]] (watch; serves this gate, authorizes nothing).
 
 ---
 
@@ -235,3 +235,4 @@ Four decisions, all Mike sign-off, taken after an engine-sheet wiring audit of t
 - 2026-08-18 (engine-sheet) — §2.5 added: daily cadence, auto-approve gate, standings greenlight, Nia sit-downs (four Mike sign-offs) + wiring-audit findings (F7 draw contradiction, Nia uncronned, no show crontab, EpisodeId collision constraint).
 - 2026-08-18 (engine-sheet) — pipeline.60 BUILT: Nia dispatch live (undocked desk quota, feed-built lane, recap ledger, wake package, roster row); wake-2 packet interview = pilot source-of-speech. Acceptance: next 06:15 wake chain.
 - 2026-08-18 (engine-sheet) — tier system extracted to its own doc: [[../engine/TIER_MOBILITY]] (climb/decay/fame, code-verified). Fame-permanence door confirmed UNWIRED → engine.118 filed.
+- 2026-08-29 (kimi) — 4b bullet now points at [[../research/2026-08-29-casino-ledger]], the consolidated design-question record serving this gate (watch; authorizes nothing). No gate change.

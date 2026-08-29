@@ -1,7 +1,7 @@
 ---
 title: SpaceMolt Citizen Agency and Oakland Cultural Phenomenon — research
 created: 2026-07-27
-updated: 2026-08-07
+updated: 2026-08-29
 type: reference
 tags: [research, citizens, media, active]
 sources:
@@ -79,6 +79,7 @@ pointers:
 - 2026-08-07 — **Mike ignited the build (S360, research-build session).** His picks: sim-wide game-show/reality-show; waking citizens participate in the show on their wake day; tracked so citizens follow and news covers; a wager system "translates in." Mags counter on cast model (delivered in-session): a small persistent pilot cast (2–4 named citizens) with selection/succession as covered events, not a daily rotating pilot — reality shows run on personalities and arcs; the daily waking citizens are the *audience* (watch, argue, wager, aspire). Carried into the ignited plan.
 - 2026-08-07 — **Upstream org audited (Mike-shared link, github.com/SpaceMolt).** The game's own org ships MIT-licensed infrastructure we should adopt rather than rebuild: `commander` (autonomous mission-driven pilot agent — OpenRouter/Ollama/Anthropic support, tool-calling loop, context compaction at 55%, per-session credentials + state dirs, action logging); `spacemolt-lib` (typed TS SDK, WebSocket v2, multi-account via one Clerk API key, live event streams + local state cache — the deterministic-adapter substrate, no LLM needed to read outcomes); `client-v2` (typed CLI from the live OpenAPI spec); `smbench` (gameplay benchmark, not needed now). The dead-miner replacement is an adoption+bounding problem, not a from-scratch build.
 - 2026-08-07 — **Open question 1 (tool inventory) answered from the live MCP session.** The SpaceMolt MCP server exposes ~200 tools, far beyond the repo-proven mine/dock/sell loop: missions (accept/complete/abandon), combat (attack/battle + `get_battle_log`/`get_battle_status`/`get_battle_summary`), factions (full suite incl. wars, allies, intel, faction missions), forum + chat, market orders, crafting/recycling, insurance (quote/buy/claim), drones, passengers, shipping, wrecks (loot/scrap/tow), bases/outposts, ship commissioning/refit. Show-critical telemetry exists server-side: **`get_action_log`** (the adapter's primary source), `captains_log_*` (pilot's own narrative record), `get_status`, `get_notifications`, `get_trades`. **No wager or leaderboard tools exist server-side** — wagering is entirely an in-world Oakland construct settled against verified outcomes, which keeps the casino lane fully ours to gate.
+- 2026-08-29 — The wagering/casino design questions carried here (open questions + the 4b gate) were consolidated into a dedicated standing record: [[2026-08-29-casino-ledger]] (watch; serves the plan's Phase 4b gate, authorizes nothing).
 
 ---
 

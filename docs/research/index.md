@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-08-27
+updated: 2026-08-29
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -76,6 +76,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-20-s344-human-story-template]]** | S344 newsroom recovery — Mags owns the angle, reporters fill three human slots, Packet stays sidecar, deterministic shape/provenance walls precede Rhea; C103 Jax and C104 Tanya pressure-tested | `adopt` (ignites [[../plans/2026-08-20-s344-human-story-template-pressure-test]], pipeline.54) |
 | **[[2026-08-20-notebooklm-daily-branching]]** | Verified current Daily News path plus deterministic Cycle/wake/article-state routing across Brief, Deep Dive, and evidence-gated Debate; NotebookLM renders but never chooses editorial state. | `adopt` (extends [[../plans/2026-07-10-notebooklm-bridge-deploy]] §Phase 6, pipeline.51) |
 | **[[2026-08-27-cascade-loop-closure-design]]** | Three-lane trace (employment / illness / sentiment) of the full city→hood→citizen cascade: illness is the one closed loop, employment fully open (attractor dial → uniform hood smear → no citizen dose → no talk-back), sentiment top-down with one thin pulse return; 7 chain breaks incl. stale packet illness read, inert QoL fold, dead desk-packet column. Design: dials set climate, hoods localize, citizens sample, threshold-gated ground truth corrects; retune attractor ~0.945 / illnessBaseline ~0.025; employment closes by steering the career engine, not dosing | `adopt` (revision input to engine.104 [[../plans/2026-08-10-economy-native-rebuild]]; Claude review before code, builder-direct) |
+| **[[2026-08-29-casino-ledger]]** | Undocked Phase 4b design-question record — consolidates every repo constraint on the gated casino ledger (settlement vs adapter outcomes, stake caps + the wealth-scale contamination hazard, losses as life events, household/bond downstreams, operator canon gate, 12-question design checklist, failure modes) into the standing substrate for the future Mike-signed design doc | `watch` (adopt-trigger: 4a narrative texture ≥2 cycles AND Mike-only 4b sign-off; no own ROLLOUT row — pending-state stays on research.27's plan) |
 
 ---
 
@@ -122,3 +123,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - 2026-08-20 (codex) — Registered [[2026-08-20-s344-human-story-template]]; adopt verdict from the C103 Jax and C104 Tanya pressure test.
 - 2026-08-20 (codex) — Registered [[2026-08-20-notebooklm-daily-branching]] and reclassified the 2026-08-02 Antigravity proposal as a `take-nothing` historical record.
 - 2026-08-27 (kimi) — Registered [[2026-08-27-cascade-loop-closure-design]] (S391, builder-approved capture): full cascade trace + loop-closure design; adopt as engine.104 revision input, Claude review gated before code.
+- 2026-08-29 (kimi) — Registered [[2026-08-29-casino-ledger]] (S393, builder-directed): Undocked Phase 4b design-question consolidation; watch verdict — adopt-trigger is 4a texture ≥2 cycles + Mike-only sign-off. No new ROLLOUT row; research.27's plan carries the gate.

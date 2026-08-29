@@ -1,0 +1,48 @@
+{
+  "office": "council_d1",
+  "cycle": 104,
+  "speaker": "Denise Carter",
+  "cascadeSummary": "Approved West Oakland Stabilization Fund disbursements, endorsed Oakland Alternative Response Initiative expansion, and demanded actionable reforms for the Youth Apprenticeship Pipeline. Prioritized district communication to address constituent concerns.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d1-001",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund — Month-Five Disbursement Batch",
+      "initiative": "INIT-001",
+      "decision": "Approved 12 new disbursements",
+      "quote": "Forty-five families have found stability—but West Oakland’s storefronts are still struggling. We’re not done.",
+      "fullStatement": "I approve the month-five disbursement batch for the West Oakland Stabilization Fund. While 45 households have received support, persistent displacement pressures and declining street trade demand sustained investment. This week’s action prioritizes families most vulnerable to property crime, ensuring our neighborhoods remain livable and safe.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d1-002",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — Citywide Expansion Plan",
+      "initiative": "INIT-002",
+      "decision": "Endorsed D7-led model for citywide adoption",
+      "quote": "Safety isn’t a pilot—it’s a promise. Bring OARI to West Oakland now.",
+      "fullStatement": "I endorse the Oakland Alternative Response Initiative’s citywide expansion, anchored by D7’s proven model. West Oakland’s residents deserve immediate access to this program, with measurable impact on community safety and service delivery from day one. Let’s stop piloting and start delivering.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d1-003",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline — Corrective Action Plan",
+      "initiative": "INIT-007",
+      "decision": "Approved corrective actions with oversight",
+      "quote": "Fix the pipeline—connect East and West Oakland youth to real jobs, not paperwork.",
+      "fullStatement": "I approve the Youth Apprenticeship Pipeline’s corrective actions, but we must eliminate bureaucratic bottlenecks. This program’s success hinges on placing Oakland youth into skilled trades, not trapping them in intake limbo. Executive sponsor Laila Cortez must ensure 60-day recovery delivers tangible opportunities.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d1-004",
+      "type": "policy_statement",
+      "topic": "Constituent Policy Briefing",
+      "initiative": null,
+      "decision": "Released district communication addressing approval drop",
+      "quote": "When approval drops, we listen. This briefing isn’t a press release—it’s a contract with D1 residents.",
+      "fullStatement": "To address District 1’s 7-point approval decline, I’ve published a constituent policy briefing. It outlines legislative actions to stabilize West Oakland’s housing, boost street trade, and expand youth programs. The Mayor’s Baylight District win shows progress is possible—let’s replicate that urgency here.",
+      "trackerUpdates": {}
+    }
+  ]
+}

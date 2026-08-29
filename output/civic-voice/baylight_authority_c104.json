@@ -1,0 +1,23 @@
+{
+  "office": "baylight_authority",
+  "cycle": 104,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "Baylight Authority has transmitted the Phase II shortlist evaluation rubric and selection memo to the City Council, detailing the process to narrow four qualified bidders to three finalists. This maintains transparency requirements ahead of the final council authorization vote.",
+  "statements": [
+    {
+      "statementId": "STMT-104-baylight_authority-001",
+      "type": "project_response",
+      "topic": "Baylight District Phase II Shortlist",
+      "initiative": "INIT-006",
+      "decision": "Transmitted Phase II shortlist evaluation rubric and selection memo to City Council",
+      "quote": "Every dollar of the $2.1B budget will be accounted for—starting with these scoring sheets.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirmed that the Phase II shortlist evaluation rubric and selection memo have been transmitted to the City Council. The memo details the scoring process that narrowed four qualified bidders to three finalists ahead of the final council authorization vote. 'Every dollar of the $2.1B budget will be accounted for—starting with these scoring sheets,' Ramos stated. The shortlist announcement maintains momentum on the project while meeting transparency requirements.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "MilestoneNotes": "C104: Transmitted Phase II shortlist evaluation rubric and selection memo to City Council",
+        "NextScheduledAction": "Final council authorization vote",
+        "NextActionCycle": 105
+      }
+    }
+  ]
+}

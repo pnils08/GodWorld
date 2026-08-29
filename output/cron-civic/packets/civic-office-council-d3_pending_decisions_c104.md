@@ -20,10 +20,10 @@ Your approval stands at 83 — down 7 since last cycle.
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Rose Delgado — City Council District 3
 
-- **Address:** Introduce a District 3 commercial revitalization and safety initiative addressing West Oakland's low RetailVitality (3.52) and elevated CrimeIndex (1.18).
-- **Why:** D3 approval declined 7 points to 83 in C104 while West Oakland continues to register acute economic strain despite Stabilization Fund disbursements.
-- **Acceptance:** A filed council resolution or budget request targeting West Oakland business corridor activation and infrastructure support.
-- **Silence consequence:** Prolonged commercial stagnation in West Oakland and escalating district constituent dissatisfaction.
+- **Address:** Present a district recovery strategy addressing West Oakland's low RetailVitality (3.52), elevated CrimeIndex (1.18), and the 7-point drop in D3 approval.
+- **Why:** D3 approval dropped from 90 to 83 (-7 points) in C104, while West Oakland's commercial indicators lag significantly behind the rest of the city despite active stabilization disbursements.
+- **Acceptance:** A public legislative and constituent action plan focused on West Oakland commercial corridor activation and safety coordination.
+- **Silence consequence:** Deepening economic detachment in West Oakland and continued loss of constituent confidence in D3 leadership.
 
 ## This week on the wall
 
@@ -68,3 +68,15 @@ Success: **Fruitvale** — mood clearly upbeat, street trade steady. Somebody's 
 You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of your neighborhoods this cycle: who answers for San Antonio, and who gets the credit in Fruitvale?
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
+
+## MAYOR'S AGENDA THIS CYCLE
+
+- West Oakland Stabilization Fund — Month-Five Disbursement Batch: approved — "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out."
+- Oakland Alternative Response Initiative — Citywide Expansion Plan: directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline — "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program."
+- Oakland Youth Apprenticeship Pipeline — Corrective Action Plan: publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery — "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround."
+- Baylight District — Final Council Vote: public endorsement of the Phase II shortlist and call for unanimous council approval — "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work."
+- Fruitvale Transit Hub Phase II — Compliance Review Approval: directing the Bureau to greenlight submissions and begin community visioning sessions by January 15 — "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it."
+- Temescal Community Health Center — Phase 1 Closeout and Acceleration: approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion — "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5."
+- KONO Infrastructure Crisis and Adams Point Success: directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress — "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second."
+
+The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

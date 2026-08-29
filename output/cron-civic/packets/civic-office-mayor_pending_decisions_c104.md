@@ -43,9 +43,10 @@ This cycle, I directed immediate executive action to unblock the Oakland Youth A
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Avery Santana — Mayor
 
-- **Address:** Deliver the Oakland Youth Apprenticeship Pipeline (INIT-007) review findings and corrective actions report scheduled for C104, and issue a policy directive addressing the Grand Lake math-imbalance pattern.
-- **Acceptance:** Publication of the INIT-007 corrective action plan and an executive strategy outlining commercial relief for Grand Lake.
-- **Silence consequence:** The youth apprenticeship pipeline stalls out in its pilot phase, and unaddressed Grand Lake retail decay accelerates across District 2.
+- **Address:** Publish the formal Review Findings and Corrective Actions report for the Oakland Youth Apprenticeship Pipeline (INIT-007) and establish an executive plan addressing the 13-point drop in mayoral approval.
+- **Why:** INIT-007 is scheduled for its C104 corrective actions deliverable following intake bottlenecks flagged in C102, while citywide mayoral approval fell from 95 to 82 (-13 points) in C104.
+- **Acceptance:** Public transmission of the INIT-007 corrective action plan detailing intake adjustments and an executive memorandum responding to citywide governance strain.
+- **Silence consequence:** The youth apprenticeship pilot defaults at its scheduled milestone, and executive coordination authority degrades under severe approval loss.
 
 ## This week on the wall
 
@@ -58,7 +59,8 @@ Your own lines this week (continuity only, not tracker canon):
 5. stated: [Oakland Alternative Response Initiative — D7 Community Satisfaction Survey] Avery Santana — Trust isn’t built in a day—it’s built through action, listening, and accountability.
 6. stated: [West Oakland Stabilization Fund — Month-Five Disbursement Batch] Avery Santana — The families who qualified for this support shouldn’t have to wait another day.
 
-No district pack on disk for this office this cycle.
+Latest district pack on disk: output/cron-civic/packs/MAYOR-01_c104.json
+This week's lever from that pack: Review findings and corrective actions report
 
 ## DECISION 1 — West Oakland Stabilization Fund — action due this cycle
 

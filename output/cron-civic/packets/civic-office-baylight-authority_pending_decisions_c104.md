@@ -10,10 +10,10 @@ Published the Phase II shortlist per C103 deliverable schedule, reducing qualifi
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Keisha Ramos — Baylight Authority Director
 
-- **Address:** Release the RFP evaluation rubric and public comment timeline for the three shortlisted bidding consortiums on Baylight District Phase II (INIT-006).
-- **Why:** C103 reduced the qualified builder pool from four to three; clear selection criteria must be published to satisfy CRC transparency demands ahead of the final Council authorization vote.
-- **Acceptance:** Publication of the formal scoring matrix and procurement schedule for the three remaining Baylight bidders.
-- **Silence consequence:** Procurement opacity disputes that threaten to stall the final council authorization pathway.
+- **Address:** Transmit the formal evaluation rubric and shortlist selection memo detailing how qualified bidders were narrowed from four to three for the Baylight District (INIT-006).
+- **Why:** Following the C103 shortlist announcement, transparency concerns were raised regarding the selection process ahead of final council authorizations.
+- **Acceptance:** Transmission of the developer evaluation scores, disqualification rationale, and final RFP issuance timeline to the City Council.
+- **Silence consequence:** Skepticism over bidding integrity will stall council approval for the final development agreement.
 
 ## This week on the wall
 
@@ -40,3 +40,15 @@ Crisis: **Baylight District** — mood clearly upbeat, street trade struggling, 
 You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of your neighborhoods this cycle: who answers for Baylight District?
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
+
+## MAYOR'S AGENDA THIS CYCLE
+
+- West Oakland Stabilization Fund — Month-Five Disbursement Batch: approved — "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out."
+- Oakland Alternative Response Initiative — Citywide Expansion Plan: directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline — "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program."
+- Oakland Youth Apprenticeship Pipeline — Corrective Action Plan: publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery — "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround."
+- Baylight District — Final Council Vote: public endorsement of the Phase II shortlist and call for unanimous council approval — "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work."
+- Fruitvale Transit Hub Phase II — Compliance Review Approval: directing the Bureau to greenlight submissions and begin community visioning sessions by January 15 — "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it."
+- Temescal Community Health Center — Phase 1 Closeout and Acceleration: approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion — "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5."
+- KONO Infrastructure Crisis and Adams Point Success: directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress — "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second."
+
+The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

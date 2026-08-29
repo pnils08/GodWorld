@@ -1,0 +1,28 @@
+{
+  "stage": "close",
+  "cycle": 104,
+  "expected": [
+    "mayor_gavel",
+    "council_d6",
+    "council_d7",
+    "council_d5",
+    "council_d8",
+    "council_d1",
+    "okoro",
+    "council_d9",
+    "council_d3",
+    "council_d2",
+    "council_d4",
+    "stabilization_fund",
+    "oari",
+    "health_center",
+    "transit_hub",
+    "baylight_authority"
+  ],
+  "clerk": "pass",
+  "gatePass": false,
+  "applied": false,
+  "clerkModel": "deepseek/deepseek-chat",
+  "laneEntries": 41,
+  "ranAt": "2026-08-29T08:24:35.101Z"
+}

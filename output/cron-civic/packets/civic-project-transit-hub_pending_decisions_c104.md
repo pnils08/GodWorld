@@ -10,10 +10,10 @@ Published the Bureau's compliance review findings for the Fruitvale Transit Hub 
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Elena Soria Dominguez — Transit Hub Planning Lead
 
-- **Address:** Issue the construction staging plan and ground-breaking schedule for Fruitvale Transit Hub Phase II (INIT-003) following bureau compliance approval.
-- **Why:** In C103, compliance review findings cleared pipeline exhaustion and pedestrian-path redesign requirements, advancing the project to construction-active; field mobilization milestones must now be locked into the record.
-- **Acceptance:** A published Year 3 Phase II construction timeline including vendor protection and pedestrian access staging in Fruitvale.
-- **Silence consequence:** Mobilization delays after regulatory clearance, risking project momentum and community confidence in Fruitvale.
+- **Address:** Issue the Phase II construction ground-breaking schedule and small-business protection protocols for the Fruitvale Transit Hub (INIT-003).
+- **Why:** Following Bureau compliance review sign-off in C103, INIT-003 has advanced to construction-active status and requires clear physical staging boundaries to protect street vendors and retailers.
+- **Acceptance:** Publication of the construction staging timeline alongside stamped small-business and vendor protection corridor maps in Fruitvale.
+- **Silence consequence:** Heavy construction commences without enforceable vendor safeguards, inviting neighborhood disruption and project delays.
 
 ## This week on the wall
 
@@ -40,3 +40,15 @@ Crisis: **Fruitvale** — mood clearly upbeat, street trade steady, crime low. T
 You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of your neighborhoods this cycle: who answers for Fruitvale?
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
+
+## MAYOR'S AGENDA THIS CYCLE
+
+- West Oakland Stabilization Fund — Month-Five Disbursement Batch: approved — "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out."
+- Oakland Alternative Response Initiative — Citywide Expansion Plan: directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline — "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program."
+- Oakland Youth Apprenticeship Pipeline — Corrective Action Plan: publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery — "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround."
+- Baylight District — Final Council Vote: public endorsement of the Phase II shortlist and call for unanimous council approval — "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work."
+- Fruitvale Transit Hub Phase II — Compliance Review Approval: directing the Bureau to greenlight submissions and begin community visioning sessions by January 15 — "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it."
+- Temescal Community Health Center — Phase 1 Closeout and Acceleration: approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion — "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5."
+- KONO Infrastructure Crisis and Adams Point Success: directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress — "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second."
+
+The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

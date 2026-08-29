@@ -1,0 +1,28 @@
+{
+  "office": "council_d8",
+  "cycle": 104,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "I focused on protecting Grand Lake's livelihood by proposing a temporary moratorium on new liquor licenses until a safety impact study is completed. Additionally, I credited Adams Point's success to dedicated local partnerships, emphasizing the importance of community-driven progress.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d8-001",
+      "type": "vote_statement",
+      "topic": "Grand Lake Liquor Licenses",
+      "initiative": null,
+      "decision": "Propose a temporary moratorium on new liquor licenses",
+      "quote": "We cannot let unchecked growth undermine the very qualities that make Grand Lake thrive.",
+      "fullStatement": "Grand Lake’s momentum demands protection. We cannot let unchecked growth undermine the very qualities that make this district thrive. I’m calling for a temporary moratorium on new liquor licenses along Lakeshore until we complete the overdue safety impact study that was promised last cycle. This is about preserving the character and safety of our community.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d8-002",
+      "type": "statement",
+      "topic": "Adams Point Success",
+      "initiative": null,
+      "decision": "Credit local partnerships for Adams Point's progress",
+      "quote": "Adams Point's success didn't happen by accident—it was built on diligent local partnerships.",
+      "fullStatement": "Adams Point’s success didn’t happen by accident—it was built on diligent local partnerships. The progress we’re seeing there is a testament to what can be achieved when the community comes together with a shared vision. Let’s continue to support and replicate these efforts across District 8.",
+      "trackerUpdates": {}
+    }
+  ]
+}

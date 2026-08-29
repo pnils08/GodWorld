@@ -1,0 +1,48 @@
+{
+  "office": "council_d4",
+  "cycle": 104,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I voted YES on Baylight District Phase II, YES on West Oakland Stabilization Fund disbursement, and ABSTAINED on OARI citywide expansion pending D4 data. I demanded Glenview get its own infrastructure audit—KONO isn't the only neighborhood with hidden failures—and claimed Dimond's success as proof that targeted, monitored investment works.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Baylight District — Final Council Vote",
+      "initiative": "INIT-006",
+      "decision": "YES on Baylight District Phase II final approval",
+      "quote": "Four qualified bidders, three finalists, one clean site—this is the process I demanded, and this is the vote I promised.",
+      "fullStatement": "I voted yes on Baylight Phase I because the process was rigorous, the displacement protections were real, and the economic return was documented. Phase II meets that same standard. Four qualified bidders, three finalists, one clean site—this is the process I demanded when I cast that first yes, and this is the vote I promised. Development in Oakland doesn't have to be a gamble. It has to be a contract—with the community, with the numbers, with the follow-through. Baylight delivers.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d4-002",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund — Month-Five Disbursement",
+      "initiative": "INIT-001",
+      "decision": "YES on Month-Five disbursement batch",
+      "quote": "Dimond's upbeat mood isn't rhetoric—it's receipts. The Stabilization Fund works when it's targeted, monitored, and held accountable.",
+      "fullStatement": "I represent Dimond. I walk those streets. The mood there is upbeat because people see results—property incidents down, investment visible, the fund actually reaching families it was designed for. That's not campaign literature. That's my datawake from this week. I voted yes on this disbursement because the West Oakland families waiting on this support deserve the same accountability my constituents got. The Fund works when we don't treat it like a faucet—when we treat it like a contract.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d4-003",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative — Citywide Expansion Plan",
+      "initiative": "INIT-002",
+      "decision": "ABSTAIN on citywide expansion; demand D4 pilot inclusion",
+      "quote": "D7 proved it works—for D7. When D4 has comparable data, I'll do my own analysis.",
+      "fullStatement": "I voted no on OARI in C82 because my district was excluded from the pilot. The Mayor's expansion plan still doesn't include Glenview, Dimond, or Ivy Hill in the initial rollout. D7's performance review is useful—for D7. I abstain on citywide expansion until the Bureau commits to a D4 pilot with metrics I can verify myself. I'm not opposed to alternative response. I'm opposed to voting blind on programs my constituents pay for but don't access.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d4-004",
+      "type": "statement",
+      "topic": "Glenview infrastructure and constituent accountability",
+      "initiative": null,
+      "decision": "Demand Public Works audit Glenview infrastructure within 48 hours; establish D4 as separate priority from KONO",
+      "quote": "KONO gets a 48-hour audit. Glenview gets what—another cycle of 'we'll get to it'? My constituents deserve their own answer.",
+      "fullStatement": "The Mayor directed a 48-hour infrastructure audit for KONO. Glenview is right here—upbeat mood, low crime, struggling street trade, and nobody checking if the pipes and roads match the sentiment. I want Public Works to deliver the same 48-hour audit commitment to Glenview. Not because KONO doesn't deserve attention—because my district does. If we're learning from Adams Point's success, we're also learning which neighborhoods get heard first. I'm making sure D4 is in that conversation.",
+      "trackerUpdates": {}
+    }
+  ]
+}

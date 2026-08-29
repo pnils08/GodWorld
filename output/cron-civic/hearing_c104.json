@@ -1,0 +1,650 @@
+{
+  "stage": "hearing",
+  "cycle": 104,
+  "results": [
+    {
+      "dir": "civic-office-council-d6",
+      "slug": "council_d6",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/council_d6_c104.json",
+      "statements": 2,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D6",
+        "title": "City Council District 6",
+        "holder": "Elliott Crane",
+        "popid": "POP-00044",
+        "district": "D6",
+        "faction": "CRC",
+        "approval": 55,
+        "agentDir": "civic-office-council-d6",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D6)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "council_d6",
+        "cycle": 104,
+        "speaker": "Elliott Crane",
+        "cascadeSummary": "I decided to advocate for increased community engagement in Piedmont Ave to bridge the disconnect between crime statistics and resident sentiment. I also emphasized the importance of accountability in Baylight District's development, ensuring transparency and oversight.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d6-001",
+            "type": "vote_statement",
+            "topic": "Community Safety",
+            "initiative": null,
+            "decision": "Convene a community safety walk in Piedmont Ave",
+            "quote": "Numbers don’t tell the whole story—community trust does.",
+            "fullStatement": "While Piedmont Avenue's crime numbers remain well below city averages, the sentiment gap concerns me. With property crimes at 23 versus city's 43.4 and violent crimes at half the city rate, the data shows real progress. However, we can't ignore that disconnect between statistics and lived experience. I'll be convening a community safety walk next week to hear directly from residents and business owners like B.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d6-002",
+            "type": "vote_statement",
+            "topic": "Development Accountability",
+            "initiative": "INIT-006",
+            "decision": "Demand formal audit parameters for Baylight District",
+            "quote": "Baylight District’s potential is immense, but only if we hold every step accountable.",
+            "fullStatement": "Baylight District represents a significant opportunity for Oakland, but its success hinges on transparency and oversight. We must ensure that every phase of development is held to the highest standards of accountability. I am advocating for formal audit parameters and reporting scope to protect the integrity of this project and the interests of our community.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d7",
+      "slug": "council_d7",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/council_d7_c104.json",
+      "statements": 2,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D7",
+        "title": "City Council District 7",
+        "holder": "Warren Ashford",
+        "popid": "POP-00504",
+        "district": "D7",
+        "faction": "CRC",
+        "approval": 51,
+        "agentDir": "civic-office-council-d7",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D7)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "council_d7",
+        "cycle": 104,
+        "speaker": "Warren Ashford",
+        "cascadeSummary": "This cycle, I focused on ensuring accountability in KONO's infrastructure crisis and defending fiscal responsibility in Temescal's health center project. KONO needs transparent investment, not empty promises, and I pushed for detailed audits before committing city resources. On Temescal, I supported accelerating the health center construction but demanded oversight to ensure costs remain controlled.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d7-001",
+            "type": "vote_statement",
+            "topic": "KONO Infrastructure Crisis",
+            "initiative": null,
+            "decision": "Audit KONO's infrastructure and small-business retention reports",
+            "quote": "KONO needs investment, not abandonment—but we need to see the receipts before we sign the check.",
+            "fullStatement": "This cycle, I called for Public Works to audit KONO’s infrastructure within 48 hours. Additionally, I requested Economic Development to provide detailed small-business retention reports since Measure Z passed. Stabilization starts with data, not declarations. We owe it to KONO to ensure every dollar spent is accounted for and effective.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d7-002",
+            "type": "vote_statement",
+            "topic": "Temescal Community Health Center",
+            "initiative": "INIT-005",
+            "decision": "Approve Phase 1 closeout and acceleration with oversight",
+            "quote": "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5.",
+            "fullStatement": "I supported accelerating the Temescal Community Health Center construction timeline to meet Q1 completion. However, I demanded additional oversight to ensure overtime costs are controlled and project milestones remain on track. We cannot afford delays, but we also cannot afford unchecked spending.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": "stand with KONO or leave it"
+    },
+    {
+      "dir": "civic-office-council-d5",
+      "slug": "council_d5",
+      "model": "qwen/qwen3-235b-a22b",
+      "ok": true,
+      "output": "output/civic-voice/council_d5_c104.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D5",
+        "title": "City Council District 5",
+        "holder": "Janae Rivers",
+        "popid": "POP-00043",
+        "district": "D5",
+        "faction": "OPP",
+        "approval": 85,
+        "agentDir": "civic-office-council-d5",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D5)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "qwen/qwen3-235b-a22b"
+      },
+      "voiceJson": {
+        "office": "council_d5",
+        "cycle": 104,
+        "speaker": "Janae Rivers",
+        "cascadeSummary": "Endorsed OARI expansion with community-led safety frameworks, demanded youth pipeline reforms tied to East Oakland's needs, and credited Baylight residents while pushing for economic investment.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d5-001",
+            "type": "vote_statement",
+            "topic": "Citywide Safety Model",
+            "initiative": "Oakland Alternative Response Initiative",
+            "decision": "Support expansion with community-led adaptations",
+            "quote": "Safety isn't a one-size-fits-all—every neighborhood writes its own story.",
+            "fullStatement": "D7 proved community-based safety works, but we won't copy-paste their model onto East Oakland's streets. This expansion must empower local voices to shape their own safety networks. I'll back the 90-day plan only if each district co-designs its implementation. Safety is a promise, not a template.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d5-002",
+            "type": "vote_statement",
+            "topic": "Youth Employment Crisis",
+            "initiative": "Oakland Youth Apprenticeship Pipeline",
+            "decision": "Approve corrective actions with quarterly benchmarks",
+            "quote": "This pipeline isn't about forms—it's about futures. East Oakland's youth will lead the rebuild.",
+            "fullStatement": "The Mayor's plan fixes intake bottlenecks, but we're still measuring success in quarterly hires—not just compliance. I'm rerouting $250k from unused stadium funds to create East Oakland youth hiring benchmarks. If we're serious about equity, we'll put young people in charge of this pipeline by cycle 106.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d5-003",
+            "type": "constituent_statement",
+            "topic": "District 5 Economic Justice",
+            "initiative": "Baylight District — Final Council Vote",
+            "decision": "Vote yes on Phase II shortlist with economic accountability",
+            "quote": "Baylight's success isn't city planning—it's survival. We'll vote yes, but real investment starts now.",
+            "fullStatement": "Residents kept Baylight's lights on while the city debated. We'll endorse this shortlist, but my vote comes with a demand: 40% of Phase II contracts must go to East Oakland and Baylight small businesses. The Mayor talks about 'building with the people'—let's make it paychecks, not just press releases.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": "Review findings and corrective actions report"
+    },
+    {
+      "dir": "civic-office-council-d8",
+      "slug": "council_d8",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/council_d8_c104.json",
+      "statements": 2,
+      "attempts": 2,
+      "seat": {
+        "officeId": "COUNCIL-D8",
+        "title": "City Council District 8",
+        "holder": "Nina Chen",
+        "popid": "POP-00505",
+        "district": "D8",
+        "faction": "CRC",
+        "approval": 55,
+        "agentDir": "civic-office-council-d8",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D8)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "council_d8",
+        "cycle": 104,
+        "speaker": "Nina Chen",
+        "cascadeSummary": "I focused on protecting Grand Lake's livelihood by proposing a temporary moratorium on new liquor licenses until a safety impact study is completed. Additionally, I credited Adams Point's success to dedicated local partnerships, emphasizing the importance of community-driven progress.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d8-001",
+            "type": "vote_statement",
+            "topic": "Grand Lake Liquor Licenses",
+            "initiative": null,
+            "decision": "Propose a temporary moratorium on new liquor licenses",
+            "quote": "We cannot let unchecked growth undermine the very qualities that make Grand Lake thrive.",
+            "fullStatement": "Grand Lake’s momentum demands protection. We cannot let unchecked growth undermine the very qualities that make this district thrive. I’m calling for a temporary moratorium on new liquor licenses along Lakeshore until we complete the overdue safety impact study that was promised last cycle. This is about preserving the character and safety of our community.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d8-002",
+            "type": "statement",
+            "topic": "Adams Point Success",
+            "initiative": null,
+            "decision": "Credit local partnerships for Adams Point's progress",
+            "quote": "Adams Point's success didn't happen by accident—it was built on diligent local partnerships.",
+            "fullStatement": "Adams Point’s success didn’t happen by accident—it was built on diligent local partnerships. The progress we’re seeing there is a testament to what can be achieved when the community comes together with a shared vision. Let’s continue to support and replicate these efforts across District 8.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": "defend the district or go quiet"
+    },
+    {
+      "dir": "civic-office-council-d1",
+      "slug": "council_d1",
+      "model": "qwen/qwen3-235b-a22b",
+      "ok": true,
+      "output": "output/civic-voice/council_d1_c104.json",
+      "statements": 4,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D1",
+        "title": "City Council District 1",
+        "holder": "Denise Carter",
+        "popid": "POP-00501",
+        "district": "D1",
+        "faction": "OPP",
+        "approval": 95,
+        "agentDir": "civic-office-council-d1",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D1)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "qwen/qwen3-235b-a22b"
+      },
+      "voiceJson": {
+        "office": "council_d1",
+        "cycle": 104,
+        "speaker": "Denise Carter",
+        "cascadeSummary": "Approved West Oakland Stabilization Fund disbursements, endorsed Oakland Alternative Response Initiative expansion, and demanded actionable reforms for the Youth Apprenticeship Pipeline. Prioritized district communication to address constituent concerns.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d1-001",
+            "type": "vote_statement",
+            "topic": "West Oakland Stabilization Fund — Month-Five Disbursement Batch",
+            "initiative": "INIT-001",
+            "decision": "Approved 12 new disbursements",
+            "quote": "Forty-five families have found stability—but West Oakland’s storefronts are still struggling. We’re not done.",
+            "fullStatement": "I approve the month-five disbursement batch for the West Oakland Stabilization Fund. While 45 households have received support, persistent displacement pressures and declining street trade demand sustained investment. This week’s action prioritizes families most vulnerable to property crime, ensuring our neighborhoods remain livable and safe.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d1-002",
+            "type": "vote_statement",
+            "topic": "Oakland Alternative Response Initiative — Citywide Expansion Plan",
+            "initiative": "INIT-002",
+            "decision": "Endorsed D7-led model for citywide adoption",
+            "quote": "Safety isn’t a pilot—it’s a promise. Bring OARI to West Oakland now.",
+            "fullStatement": "I endorse the Oakland Alternative Response Initiative’s citywide expansion, anchored by D7’s proven model. West Oakland’s residents deserve immediate access to this program, with measurable impact on community safety and service delivery from day one. Let’s stop piloting and start delivering.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d1-003",
+            "type": "vote_statement",
+            "topic": "Oakland Youth Apprenticeship Pipeline — Corrective Action Plan",
+            "initiative": "INIT-007",
+            "decision": "Approved corrective actions with oversight",
+            "quote": "Fix the pipeline—connect East and West Oakland youth to real jobs, not paperwork.",
+            "fullStatement": "I approve the Youth Apprenticeship Pipeline’s corrective actions, but we must eliminate bureaucratic bottlenecks. This program’s success hinges on placing Oakland youth into skilled trades, not trapping them in intake limbo. Executive sponsor Laila Cortez must ensure 60-day recovery delivers tangible opportunities.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d1-004",
+            "type": "policy_statement",
+            "topic": "Constituent Policy Briefing",
+            "initiative": null,
+            "decision": "Released district communication addressing approval drop",
+            "quote": "When approval drops, we listen. This briefing isn’t a press release—it’s a contract with D1 residents.",
+            "fullStatement": "To address District 1’s 7-point approval decline, I’ve published a constituent policy briefing. It outlines legislative actions to stabilize West Oakland’s housing, boost street trade, and expand youth programs. The Mayor’s Baylight District win shows progress is possible—let’s replicate that urgency here.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-okoro",
+      "slug": "okoro",
+      "model": "deepseek/deepseek-chat",
+      "ok": true,
+      "output": "output/civic-voice/okoro_c104.json",
+      "statements": 2,
+      "attempts": 1,
+      "seat": {
+        "officeId": "STAFF-DM-COMM",
+        "title": "Deputy Mayor (Community)",
+        "holder": "Brenda Okoro",
+        "popid": "POP-00037",
+        "district": "citywide",
+        "faction": "STAFF",
+        "approval": 65,
+        "agentDir": "civic-office-okoro",
+        "dataDomain": "community-development",
+        "dataSources": [
+          "Initiative_Tracker (stabilization-fund)",
+          "output/world_summary_c{XX}.md §neighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "deepseek/deepseek-chat"
+      },
+      "voiceJson": {
+        "office": "okoro",
+        "cycle": 104,
+        "speaker": "Brenda Okoro",
+        "cascadeSummary": "Cleared month-five disbursement batch (12 households) while realigning outreach to address West Oakland's declining conditions. Credited Carter's constituent services for Adams Point's success, flagged Webb's operational shifts for KONO's infrastructure response.",
+        "statements": [
+          {
+            "statementId": "STMT-104-OKORO-001",
+            "type": "operational_status",
+            "topic": "West Oakland Stabilization Fund processing",
+            "initiative": "INIT-001",
+            "decision": "Month-five batch disbursed (12 households), bringing total to 57 stabilized of ~280. Outreach reset targets West Oakland's slipping conditions via door-to-door canvass expansion starting C105.",
+            "quote": "Twelve more households stabilized this week means fifty-seven total with keys in hand—but West Oakland's storefronts tell me we're resetting outreach two cycles late.",
+            "fullStatement": "The month-five disbursement batch is clear—twelve more households stabilized, fifty-seven total. The queue behind them shows where we're coming up short: West Oakland's daily decline wasn't on our projections, but it's in our streets now. Starting next cycle, we reset outreach with two new canvass teams in District 1 and eligibility pre-screening at the West Oakland Library. We'll match relief to the geography where need is growing fastest.",
+            "trackerUpdates": {
+              "initiative": "INIT-001",
+              "MilestoneNotes": "C104: Month-five disbursement (12 households, 57 total). Outreach reset approved for West Oakland door-to-door expansion (C105 start).",
+              "NextScheduledAction": "C105 door-to-door outreach launch in West Oakland",
+              "NextActionCycle": 105
+            }
+          },
+          {
+            "statementId": "STMT-104-OKORO-002",
+            "type": "oversight_briefing",
+            "topic": "District conditions response",
+            "initiative": null,
+            "decision": "Documented Carter's constituent services as driver of Adams Point success. Routed KONO infrastructure alerts to Webb for Stab Fund operational coordination.",
+            "quote": "Councilmember Carter's office knocked on every Adams Point door this past year—that's why their numbers hold. KONO's infrastructure failure is our reminder that outreach can't stop when applications slow.",
+            "fullStatement": "Credit where it's measured: Adams Point's stability comes from Councilmember Carter's constituent team hitting every block monthly, not city programs alone. KONO's infrastructure gap shows the inverse—when applications dip, we assumed need did too. Wrong. Marcus Webb's team will align Stab Fund outreach with Public Works' KONO audit results by C106. Neighborhoods don't thrive by accident or fail without warning; our metrics just missed the signals.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": "no move this cycle"
+    },
+    {
+      "dir": "civic-office-council-d9",
+      "slug": "council_d9",
+      "model": "qwen/qwen3-235b-a22b",
+      "ok": true,
+      "output": "output/civic-voice/council_d9_c104.json",
+      "statements": 1,
+      "attempts": 2,
+      "seat": {
+        "officeId": "COUNCIL-D9",
+        "title": "City Council District 9",
+        "holder": "Terrence Mobley",
+        "popid": "POP-00506",
+        "district": "D9",
+        "faction": "OPP",
+        "approval": 55,
+        "agentDir": "civic-office-council-d9",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D9)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "qwen/qwen3-235b-a22b"
+      },
+      "voiceJson": {
+        "office": "council_d9",
+        "cycle": 104,
+        "speaker": "Terrence Mobley",
+        "cascadeSummary": "Affirming Baylight District endorsement while spotlighting Laurel's overlooked progress. Uptown's momentum must not eclipse smaller neighborhood gains.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d9-001",
+            "type": "vote_statement",
+            "topic": "Baylight District Final Council Vote",
+            "initiative": "Baylight District — Final Council Vote",
+            "decision": "YES",
+            "quote": "Uptown's success isn't just numbers—it's proof that when we invest in our people, Oakland thrives. Let's keep building, not just here, but across the district.",
+            "fullStatement": "While the Mayor highlights Uptown's momentum, we must remember Laurel's 14% housing stability gains this cycle—achieved without fanfare. I'll support the Baylight District's Phase II shortlist with conditions: 30% of new units must prioritize districts like Laurel through our Affordable Housing Trust Fund. Development without displacement isn't just possible—it's mandatory. Yes to Baylight, but only if the approval includes binding commitments for cross-district equity.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": "defend the district or go quiet"
+    },
+    {
+      "dir": "civic-office-council-d3",
+      "slug": "council_d3",
+      "model": "qwen/qwen3-235b-a22b",
+      "ok": true,
+      "output": "output/civic-voice/council_d3_c104.json",
+      "statements": 4,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D3",
+        "title": "City Council District 3",
+        "holder": "Rose Delgado",
+        "popid": "POP-00503",
+        "district": "D3",
+        "faction": "OPP",
+        "approval": 85,
+        "agentDir": "civic-office-council-d3",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D3)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "qwen/qwen3-235b-a22b"
+      },
+      "voiceJson": {
+        "office": "council_d3",
+        "cycle": 104,
+        "speaker": "Rose Delgado",
+        "cascadeSummary": "Prioritizing San Antonio's revival through targeted investment, endorsing adaptive safety models, accelerating transit hub visioning, and tying youth apprenticeships to local recovery projects.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d3-001",
+            "type": "vote_statement",
+            "topic": "Oakland Alternative Response Initiative Expansion",
+            "initiative": "INIT-002",
+            "decision": "Endorse expansion with San Antonio-specific adaptations",
+            "quote": "Safety isn't a one-size-fits-all. We'll adapt D7's success to meet San Antonio's unique needs, not just replicate it.",
+            "fullStatement": "While D7's model proves community-based safety works, San Antonio requires tailored solutions. I'll direct Public Works to collaborate with local merchants and transit workers to design interventions addressing this corridor's specific challenges, including late-night security for shuttered storefronts.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d3-002",
+            "type": "vote_statement",
+            "topic": "Fruitvale Transit Hub Phase II Compliance",
+            "initiative": "INIT-003",
+            "decision": "Approve compliance review with San Antonio linkage",
+            "quote": "Fruitvale's hub connects to San Antonio's future—we're building transit infrastructure today that apprentices will maintain tomorrow.",
+            "fullStatement": "I'll approve the Bureau's compliance review while mandating that community visioning sessions include San Antonio stakeholders. This hub must serve as a literal and economic bridge, not an island.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d3-003",
+            "type": "vote_statement",
+            "topic": "Youth Apprenticeship Pipeline Corrective Action",
+            "initiative": "INIT-007",
+            "decision": "Support simplified intake with local project staffing mandates",
+            "quote": "Let's stop shuffling paperwork and put apprentices to work revitalizing San Antonio's storefronts starting this quarter.",
+            "fullStatement": "The intake overhaul is necessary but insufficient. I'll amend the corrective action plan to require that 40% of new apprentices be assigned to District 3 commercial corridor projects within six months, with Fruitvale diner owners and transit agencies as priority partners.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d3-004",
+            "type": "district_strategy",
+            "topic": "San Antonio Recovery and Fruitvale Credit",
+            "initiative": null,
+            "decision": "Launch San Antonio Commercial Activation Fund",
+            "quote": "Fruitvale's comeback was built by its people. Now we fight for San Antonio with the same grit—and real money.",
+            "fullStatement": "To address the 0.42 sentiment score, I'll propose redirecting 15% of D3's stabilization allocation to create a San Antonio storefront activation fund. This includes rent subsidies for small businesses, apprentice-led beautification projects, and extending Fruitvale's late-night transit hours to boost foot traffic.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": "stand with San Antonio or leave it"
+    },
+    {
+      "dir": "civic-office-council-d2",
+      "slug": "council_d2",
+      "model": "moonshotai/kimi-k2",
+      "ok": true,
+      "output": "output/civic-voice/council_d2_c104.json",
+      "statements": 3,
+      "attempts": 1,
+      "seat": {
+        "officeId": "COUNCIL-D2",
+        "title": "City Council District 2",
+        "holder": "Leonard Tran",
+        "popid": "POP-00502",
+        "district": "D2",
+        "faction": "IND",
+        "approval": 59,
+        "agentDir": "civic-office-council-d2",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D2)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "moonshotai/kimi-k2"
+      },
+      "voiceJson": {
+        "office": "council_d2",
+        "cycle": 104,
+        "speaker": "Leonard Tran",
+        "cascadeSummary": "I am voting yes on the Baylight Phase II shortlist because three qualified bidders is the right foundation, but I am conditioning my support on hard infrastructure commitments for Jack London. I am declining Director Vance's request to introduce a Grand Lake stabilization package until I see economic decay data—D2's success came from evidence, not blanket programs, and I won't export unproven models to other districts. I claim credit for Downtown and Chinatown's upbeat economic mood, which reflects this office's focus on basic infrastructure, safety, and pragmatic business support rather than pilot projects.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d2-001",
+            "type": "vote_statement",
+            "topic": "Baylight District Development",
+            "initiative": "INIT-006",
+            "decision": "Vote YES on Phase II shortlist approval with infrastructure conditions for Jack London",
+            "quote": "Three bidders with proven capacity is exactly where we need to be—now let's make sure Jack London gets the infrastructure upgrade it earned, not just the development.",
+            "fullStatement": "I am voting yes on the Baylight Phase II shortlist. The selection committee did the rigorous work of narrowing four bidders down to three based on capacity and track record, not politics, and that process deserves our respect. However, I want the record clear: the Holiday Market proved Jack London can draw significant foot traffic, and it also proved the infrastructure cannot handle the load. Before this council moves to Phase III, I am demanding that any development agreement include binding commitments for sewer capacity upgrades, street lighting, and pedestrian safety improvements in Jack London. We are not merely approving a list of bidders; we are approving a contract that must deliver tangible infrastructure for the neighborhood hosting it.",
+            "disposition": "YES",
+            "actionAsked": "Include binding infrastructure commitments for Jack London in Phase III development agreements",
+            "tone": "quiet-substantive",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d2-002",
+            "type": "directive_response",
+            "topic": "Grand Lake Commercial Stabilization",
+            "initiative": null,
+            "decision": "Decline to introduce commercial stabilization package pending economic data review",
+            "quote": "I don't write checks for other districts without seeing the ledger first—show me the economic impact data on Grand Lake, then we'll talk about stabilization.",
+            "fullStatement": "Director Vance has asked me to introduce a commercial stabilization and tenant protection package for Grand Lake. I represent Downtown, Chinatown, and Jack London—neighborhoods that are currently thriving because we focused on data-driven infrastructure investment and pragmatic business support. Before I introduce any new social program or stabilization measure for another district, I need to see the underlying economic data: vacancy rates, revenue loss metrics, and verified displacement figures. I am not opposed to intervention where it is warranted, but I am opposed to policy without evidence. D2's success came from fixing streets, maintaining safety, and streamlining permits—not from untested stabilization schemes. When the data demonstrates Grand Lake requires the specific interventions that worked here, I will support them. Until then, my legislative priority remains securing the infrastructure wins that Jack London demonstrated it urgently needs.",
+            "disposition": "no-action",
+            "actionAsked": "Provide economic decay data before expecting legislative action",
+            "tone": "respectfully-dissenting",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d2-003",
+            "type": "constituent_statement",
+            "topic": "Downtown and Chinatown Economic Performance",
+            "initiative": null,
+            "decision": "Claim credit for D2 economic stability through pragmatic infrastructure and safety policy",
+            "quote": "Downtown isn't buzzing by accident—it's because we focused on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.",
+            "fullStatement": "My constituents in Downtown and Chinatown are living and working in upbeat, thriving commercial corridors. That outcome did not occur by chance. It is the direct result of this office prioritizing basic infrastructure maintenance, supporting the Holiday Market which brought thousands of visitors to Jack London, and maintaining the public safety environment that allows small businesses to stay open and operate without fear. When you see busy streets in Chinatown and packed shops Downtown, you are witnessing what happens when City Hall focuses on practical, evidence-based support rather than ideological pilot programs. I am claiming that credit for District 2, and I am demanding that any future citywide economic policy replicate this pragmatic approach—fixed streets, reliable safety, and streamlined permitting—before expanding into new districts with experimental measures.",
+            "disposition": "statement",
+            "actionAsked": "Continue pragmatic infrastructure and safety support for D2",
+            "tone": "district-focused",
+            "targets": [
+              "civic"
+            ],
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    },
+    {
+      "dir": "civic-office-council-d4",
+      "slug": "council_d4",
+      "model": "moonshotai/kimi-k2",
+      "ok": true,
+      "output": "output/civic-voice/council_d4_c104.json",
+      "statements": 4,
+      "attempts": 2,
+      "seat": {
+        "officeId": "COUNCIL-D4",
+        "title": "City Council District 4",
+        "holder": "Ramon Vega",
+        "popid": "POP-00042",
+        "district": "D4",
+        "faction": "IND",
+        "approval": 55,
+        "agentDir": "civic-office-council-d4",
+        "dataDomain": "district-representation",
+        "dataSources": [
+          "output/world_summary_c{XX}.md §neighborhoods (D4)",
+          "Initiative_Tracker AffectedNeighborhoods"
+        ],
+        "dutyDays": "sun-thu",
+        "model": "moonshotai/kimi-k2"
+      },
+      "voiceJson": {
+        "office": "council_d4",
+        "cycle": 104,
+        "speaker": "Ramon Vega",
+        "cascadeSummary": "I voted YES on Baylight District Phase II, YES on West Oakland Stabilization Fund disbursement, and ABSTAINED on OARI citywide expansion pending D4 data. I demanded Glenview get its own infrastructure audit—KONO isn't the only neighborhood with hidden failures—and claimed Dimond's success as proof that targeted, monitored investment works.",
+        "statements": [
+          {
+            "statementId": "STMT-104-council_d4-001",
+            "type": "vote_statement",
+            "topic": "Baylight District — Final Council Vote",
+            "initiative": "INIT-006",
+            "decision": "YES on Baylight District Phase II final approval",
+            "quote": "Four qualified bidders, three finalists, one clean site—this is the process I demanded, and this is the vote I promised.",
+            "fullStatement": "I voted yes on Baylight Phase I because the process was rigorous, the displacement protections were real, and the economic return was documented. Phase II meets that same standard. Four qualified bidders, three finalists, one clean site—this is the process I demanded when I cast that first yes, and this is the vote I promised. Development in Oakland doesn't have to be a gamble. It has to be a contract—with the community, with the numbers, with the follow-through. Baylight delivers.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d4-002",
+            "type": "vote_statement",
+            "topic": "West Oakland Stabilization Fund — Month-Five Disbursement",
+            "initiative": "INIT-001",
+            "decision": "YES on Month-Five disbursement batch",
+            "quote": "Dimond's upbeat mood isn't rhetoric—it's receipts. The Stabilization Fund works when it's targeted, monitored, and held accountable.",
+            "fullStatement": "I represent Dimond. I walk those streets. The mood there is upbeat because people see results—property incidents down, investment visible, the fund actually reaching families it was designed for. That's not campaign literature. That's my datawake from this week. I voted yes on this disbursement because the West Oakland families waiting on this support deserve the same accountability my constituents got. The Fund works when we don't treat it like a faucet—when we treat it like a contract.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d4-003",
+            "type": "vote_statement",
+            "topic": "Oakland Alternative Response Initiative — Citywide Expansion Plan",
+            "initiative": "INIT-002",
+            "decision": "ABSTAIN on citywide expansion; demand D4 pilot inclusion",
+            "quote": "D7 proved it works—for D7. When D4 has comparable data, I'll do my own analysis.",
+            "fullStatement": "I voted no on OARI in C82 because my district was excluded from the pilot. The Mayor's expansion plan still doesn't include Glenview, Dimond, or Ivy Hill in the initial rollout. D7's performance review is useful—for D7. I abstain on citywide expansion until the Bureau commits to a D4 pilot with metrics I can verify myself. I'm not opposed to alternative response. I'm opposed to voting blind on programs my constituents pay for but don't access.",
+            "trackerUpdates": {}
+          },
+          {
+            "statementId": "STMT-104-council_d4-004",
+            "type": "statement",
+            "topic": "Glenview infrastructure and constituent accountability",
+            "initiative": null,
+            "decision": "Demand Public Works audit Glenview infrastructure within 48 hours; establish D4 as separate priority from KONO",
+            "quote": "KONO gets a 48-hour audit. Glenview gets what—another cycle of 'we'll get to it'? My constituents deserve their own answer.",
+            "fullStatement": "The Mayor directed a 48-hour infrastructure audit for KONO. Glenview is right here—upbeat mood, low crime, struggling street trade, and nobody checking if the pipes and roads match the sentiment. I want Public Works to deliver the same 48-hour audit commitment to Glenview. Not because KONO doesn't deserve attention—because my district does. If we're learning from Adams Point's success, we're also learning which neighborhoods get heard first. I'm making sure D4 is in that conversation.",
+            "trackerUpdates": {}
+          }
+        ]
+      },
+      "lever": ""
+    }
+  ],
+  "ranAt": "2026-08-29T08:18:11.883Z"
+}

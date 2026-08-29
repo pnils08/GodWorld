@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 104,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-104-health_center-001 (Chen-Ramirez — Temescal Community Health Center)",
+    "STMT-104-mayor_gavel-005 (Mayor gavel — Temescal Community Health Center — Phase 1 Closeout)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
+    "NextScheduledAction": "Structural frame groundbreaking",
+    "NextActionCycle": 106
+  }
+}

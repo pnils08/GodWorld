@@ -1,0 +1,33 @@
+{
+  "office": "okoro",
+  "cycle": 104,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "Cleared month-five disbursement batch (12 households) while realigning outreach to address West Oakland's declining conditions. Credited Carter's constituent services for Adams Point's success, flagged Webb's operational shifts for KONO's infrastructure response.",
+  "statements": [
+    {
+      "statementId": "STMT-104-OKORO-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund processing",
+      "initiative": "INIT-001",
+      "decision": "Month-five batch disbursed (12 households), bringing total to 57 stabilized of ~280. Outreach reset targets West Oakland's slipping conditions via door-to-door canvass expansion starting C105.",
+      "quote": "Twelve more households stabilized this week means fifty-seven total with keys in hand—but West Oakland's storefronts tell me we're resetting outreach two cycles late.",
+      "fullStatement": "The month-five disbursement batch is clear—twelve more households stabilized, fifty-seven total. The queue behind them shows where we're coming up short: West Oakland's daily decline wasn't on our projections, but it's in our streets now. Starting next cycle, we reset outreach with two new canvass teams in District 1 and eligibility pre-screening at the West Oakland Library. We'll match relief to the geography where need is growing fastest.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "MilestoneNotes": "C104: Month-five disbursement (12 households, 57 total). Outreach reset approved for West Oakland door-to-door expansion (C105 start).",
+        "NextScheduledAction": "C105 door-to-door outreach launch in West Oakland",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-104-OKORO-002",
+      "type": "oversight_briefing",
+      "topic": "District conditions response",
+      "initiative": null,
+      "decision": "Documented Carter's constituent services as driver of Adams Point success. Routed KONO infrastructure alerts to Webb for Stab Fund operational coordination.",
+      "quote": "Councilmember Carter's office knocked on every Adams Point door this past year—that's why their numbers hold. KONO's infrastructure failure is our reminder that outreach can't stop when applications slow.",
+      "fullStatement": "Credit where it's measured: Adams Point's stability comes from Councilmember Carter's constituent team hitting every block monthly, not city programs alone. KONO's infrastructure gap shows the inverse—when applications dip, we assumed need did too. Wrong. Marcus Webb's team will align Stab Fund outreach with Public Works' KONO audit results by C106. Neighborhoods don't thrive by accident or fail without warning; our metrics just missed the signals.",
+      "trackerUpdates": {}
+    }
+  ]
+}

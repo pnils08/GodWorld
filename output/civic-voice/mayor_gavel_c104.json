@@ -1,0 +1,108 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 104,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle, we took decisive action to unblock stalled initiatives, address neighborhood decline, and respond to the 13-point drop in approval with transparency and urgency. The West Oakland Stabilization Fund disbursed its fifth batch to 12 households, bringing our total to 57 families stabilized. We approved the Baylight District Phase II shortlist, accelerated Temescal’s health center construction, and published corrective actions for the Youth Apprenticeship Pipeline—because Oaklanders deserve results, not excuses. For KONO’s infrastructure crisis, we’re ordering an immediate audit and small-business retention plan, while crediting D5’s community-led work for Adams Point’s success. Every decision was about moving forward, not just managing the moment.",
+  "statements": [
+    {
+      "statementId": "STMT-104-mayor_gavel-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund — Month-Five Disbursement Batch",
+      "initiative": "INIT-001",
+      "decision": "approved (12 households, total 57 of ~280)",
+      "quote": "Fifty-seven families stabilized isn’t just a number—it’s 57 futures we’re protecting in West Oakland.",
+      "fullStatement": "Today, we approved the fifth disbursement batch of the West Oakland Stabilization Fund, sending critical support to 12 more households—bringing our total to 57 families stabilized out of the ~280 who qualify. But let’s be clear: this isn’t just about numbers. It’s about real people—neighbors who can stay in their homes, kids who won’t have to change schools, and a community that won’t be hollowed out by displacement. With West Oakland’s daily life showing signs of decline, we’re also expanding outreach starting next cycle. Door-to-door canvassing, because we can’t wait for families to find us—we have to find them. Brenda Okoro’s team is leading this effort, and we’re targeting the blocks hit hardest. This is what urgency looks like.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+        "NextScheduledAction": "Month-six disbursement review + canvass launch",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_gavel-002",
+      "type": "executive_order",
+      "topic": "KONO Infrastructure Crisis Response",
+      "initiative": null,
+      "decision": "Emergency audit ordered; small-business retention fund activated ($200K)",
+      "quote": "KONO’s infrastructure failure isn’t just a pothole—it’s a breach of trust, and we’re fixing it now.",
+      "fullStatement": "The infrastructure crisis in KONO this cycle is unacceptable. When streets fail, businesses suffer, and residents pay the price—that’s not the Oakland we’re building. Effective immediately, I’m ordering an emergency audit of KONO’s infrastructure systems, with a report due on my desk by Cycle 106. We’re also activating a $200,000 small-business retention fund to support local shops affected by the disruptions. This isn’t just about repairs; it’s about accountability. Councilmember Vega has my full support to lead this audit, and we’ll be working with Public Works to fast-track fixes. KONO deserves better, and we’re delivering.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_gavel-003",
+      "type": "policy_position",
+      "topic": "Oakland Youth Apprenticeship Pipeline — Corrective Action Plan",
+      "initiative": "INIT-007",
+      "decision": "Intake process simplified; 3 new community partners added for recruitment",
+      "quote": "We over-engineered the intake. That ends today—because every young person in this city deserves a shot, not a runaround.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline was designed to create opportunity, but our own review shows we made it harder to access than it should be. That changes now. Today, we’re publishing our corrective action plan: the intake process is being simplified from 14 steps to 5, we’re adding three new community partners—West Oakland Job Resource Center, Fruitvale’s Unity Council, and East Oakland’s Youth UpRising—to lead recruitment, and we’re setting a hard deadline: all stalled applications from the last two cycles will be processed by Cycle 106. This isn’t just about fixing paperwork. It’s about trust. When we say we’re investing in Oakland’s youth, we mean it—and we’re going to prove it. The full report is available on the city’s website, and I’ll be joining a town hall in East Oakland next week to answer questions directly.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "pilot-active",
+        "MilestoneNotes": "C104: Corrective action plan published; intake simplified, 3 new recruitment partners added. Backlog clearance deadline set for C106.",
+        "NextScheduledAction": "Backlog processing completion + town hall",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_gavel-004",
+      "type": "vote_reaction",
+      "topic": "Baylight District — Phase II Shortlist Approval",
+      "initiative": "INIT-006",
+      "decision": "Shortlist approved (3 bidders); final vote scheduled for C105",
+      "quote": "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work.",
+      "fullStatement": "Today, the council approved the Phase II shortlist for the Baylight District, narrowing the field to three qualified bidders—all with deep roots in Oakland. This is more than a stadium. It’s 2,500 permanent jobs, $2.1 billion in economic activity, and a new heart for our city. I want to thank Councilmembers Tran, Mobley, and Carter for their leadership in moving this forward, and I’m calling on the full council to approve the final bid in Cycle 105. To the critics who say this is moving too fast: speed doesn’t scare me when the stakes are this high. To the community: we’re not just building a ballpark. We’re building opportunity—union jobs, local contracts, and a place where Oaklanders can gather for generations. Let’s get this done.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "vote-scheduled",
+        "MilestoneNotes": "C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105.",
+        "NextScheduledAction": "Final council vote on Phase II bid",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_gavel-005",
+      "type": "authorization_response",
+      "topic": "Temescal Community Health Center — Phase 1 Closeout",
+      "initiative": "INIT-005",
+      "decision": "HCAI first-comments resolved; Phase 1 closed; double shifts extended through C105",
+      "quote": "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5.",
+      "fullStatement": "Today, we closed Phase 1 of the Temescal Community Health Center, resolving all HCAI first-comments and keeping this project on its accelerated timeline. Let me be clear: this center is not just another building. It’s 50,000 square feet of care for a neighborhood that’s been waiting too long. We’ve extended double shifts for caisson drilling and excavation through Cycle 105, and we’re on track to break ground on the structural frame by early C106. To the skeptics who said we couldn’t move this fast: watch us. To the Temescal residents who’ve fought for this: thank you for holding us accountable. We’re not just meeting the timeline—we’re beating it, because health care can’t wait.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
+        "NextScheduledAction": "Structural frame groundbreaking",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_gavel-006",
+      "type": "executive_order",
+      "topic": "Oakland Alternative Response Initiative — Citywide Expansion Plan",
+      "initiative": "INIT-002",
+      "decision": "Expansion approved for D1, D3, D5; D7 model replicated with district-specific adaptations",
+      "quote": "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program.",
+      "fullStatement": "The Oakland Alternative Response Initiative isn’t just working in D7—it’s transforming how we think about safety. Today, we’re expanding it to Districts 1, 3, and 5, with Councilmembers Carter, Rivers, and Nguyen leading the charge. Each district will adapt the model to fit their communities, because we know one size doesn’t fit all. In D1, we’re partnering with West Oakland’s mental health clinics to embed responders. In D3, we’re working with faith leaders to build trust before crises happen. And in D5, we’re launching a real-time feedback system so residents can shape the program as it grows. To Councilmember Ashford and others with concerns: I hear you, and we’re building accountability into every step. Monthly public reports, independent audits, and a clear off-ramp if it’s not working. But let’s be honest—what we’re doing now isn’t working either. It’s time to try something better.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established.",
+        "NextScheduledAction": "First expansion-district launch (D1)",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_gavel-007",
+      "type": "public_remark",
+      "topic": "Adams Point Success and D5 Leadership",
+      "initiative": null,
+      "decision": "Public credit to Councilmember Janae Rivers and D5 community leaders",
+      "quote": "Adams Point’s success didn’t happen by accident—it happened because Councilmember Rivers and her team listened, then acted.",
+      "fullStatement": "This cycle, Adams Point is thriving—mood up, streets safe, businesses busy. That didn’t happen by chance. It happened because Councilmember Janae Rivers and the D5 community refused to settle for ‘good enough.’ From the neighborhood safety walks to the small-business grants, they’ve shown what’s possible when we invest in people, not just programs. So today, I’m giving credit where it’s due: thank you, Janae, and thank you, Adams Point. Your work is a model for the city. And to the neighborhoods still struggling—Grand Lake, East Oakland, parts of West Oakland—we see you, and we’re bringing this same focus to your blocks. Because when one part of Oakland wins, we all win.",
+      "trackerUpdates": {}
+    }
+  ]
+}

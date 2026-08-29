@@ -1,0 +1,186 @@
+{
+  "cycle": 104,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Numbers don’t tell the whole story—community trust does.",
+      "actionAsked": "Convene a community safety walk in Piedmont Ave",
+      "voiceFile": "output/civic-voice/council_d6_c104.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "stand with KONO or leave it",
+      "quote": "KONO needs investment, not abandonment—but we need to see the receipts before we sign the check.",
+      "actionAsked": "Audit KONO's infrastructure and small-business retention reports",
+      "voiceFile": "output/civic-voice/council_d7_c104.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "Review findings and corrective actions report",
+      "quote": "Safety isn't a one-size-fits-all—every neighborhood writes its own story.",
+      "actionAsked": "Support expansion with community-led adaptations",
+      "voiceFile": "output/civic-voice/council_d5_c104.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "defend the district or go quiet",
+      "quote": "We cannot let unchecked growth undermine the very qualities that make Grand Lake thrive.",
+      "actionAsked": "Propose a temporary moratorium on new liquor licenses",
+      "voiceFile": "output/civic-voice/council_d8_c104.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Forty-five families have found stability—but West Oakland’s storefronts are still struggling. We’re not done.",
+      "actionAsked": "Approved 12 new disbursements",
+      "voiceFile": "output/civic-voice/council_d1_c104.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "no move this cycle",
+      "quote": "Twelve more households stabilized this week means fifty-seven total with keys in hand—but West Oakland's storefronts tell me we're resetting outreach two cycles late.",
+      "actionAsked": "Month-five batch disbursed (12 households), bringing total to 57 stabilized of ~280. Outreach reset targets West Oakland's slipping conditions via door-to-door canvass expansion starting C105.",
+      "voiceFile": "output/civic-voice/okoro_c104.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "defend the district or go quiet",
+      "quote": "Uptown's success isn't just numbers—it's proof that when we invest in our people, Oakland thrives. Let's keep building, not just here, but across the district.",
+      "actionAsked": "YES",
+      "voiceFile": "output/civic-voice/council_d9_c104.json"
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "stand with San Antonio or leave it",
+      "quote": "Safety isn't a one-size-fits-all. We'll adapt D7's success to meet San Antonio's unique needs, not just replicate it.",
+      "actionAsked": "Endorse expansion with San Antonio-specific adaptations",
+      "voiceFile": "output/civic-voice/council_d3_c104.json"
+    },
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Three bidders with proven capacity is exactly where we need to be—now let's make sure Jack London gets the infrastructure upgrade it earned, not just the development.",
+      "actionAsked": "Include binding infrastructure commitments for Jack London in Phase III development agreements",
+      "voiceFile": "output/civic-voice/council_d2_c104.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Four qualified bidders, three finalists, one clean site—this is the process I demanded, and this is the vote I promised.",
+      "actionAsked": "YES on Baylight District Phase II final approval",
+      "voiceFile": "output/civic-voice/council_d4_c104.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105."
+      },
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": "pilot-active",
+        "note": "C104: Corrective action plan published; intake simplified, 3 new recruitment partners added. Backlog clearance deadline set for C106."
+      },
+      {
+        "initiativeId": "INIT-006",
+        "mayoralAction": "none",
+        "implementationPhase": "vote-scheduled",
+        "note": "C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105."
+      },
+      {
+        "initiativeId": "INIT-005",
+        "mayoralAction": "none",
+        "implementationPhase": "construction-active",
+        "note": "C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106."
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "implementation-active",
+        "note": "C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established."
+      }
+    ],
+    "quote": "Fifty-seven families stabilized isn’t just a number—it’s 57 futures we’re protecting in West Oakland.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c104.json"
+  }
+}

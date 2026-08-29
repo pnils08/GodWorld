@@ -1,0 +1,22 @@
+{
+  "cycle": 104,
+  "pass": false,
+  "failures": [
+    {
+      "check": "engine-verbiage",
+      "detail": "council_d3: [metric-decimal] \"0.42 sentiment\""
+    }
+  ],
+  "touchedInitiatives": [
+    "INIT-006",
+    "INIT-005",
+    "INIT-001",
+    "INIT-007",
+    "INIT-002",
+    "INIT-003"
+  ],
+  "maxRows": 6,
+  "sanity": null,
+  "model": "google/gemini-3.7-flash",
+  "ranAt": "2026-08-29T08:24:34.587Z"
+}

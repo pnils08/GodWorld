@@ -75,6 +75,21 @@
       "dir": "civic-office-council-d8",
       "path": "output/cron-civic/packets/civic-office-council-d8_pending_decisions_c104.md",
       "topics": 2
+    },
+    {
+      "dir": "civic-office-council-d4",
+      "path": "output/cron-civic/packets/civic-office-council-d4_pending_decisions_c104.md",
+      "topics": 1
+    },
+    {
+      "dir": "civic-office-council-d6",
+      "path": "output/cron-civic/packets/civic-office-council-d6_pending_decisions_c104.md",
+      "topics": 1
+    },
+    {
+      "dir": "civic-office-council-d9",
+      "path": "output/cron-civic/packets/civic-office-council-d9_pending_decisions_c104.md",
+      "topics": 1
     }
   ],
   "hotInitiatives": [
@@ -87,5 +102,5 @@
   ],
   "highPatterns": 1,
   "lintLeaks": 0,
-  "ranAt": "2026-08-24T02:01:02.793Z"
+  "ranAt": "2026-08-29T08:09:04.391Z"
 }

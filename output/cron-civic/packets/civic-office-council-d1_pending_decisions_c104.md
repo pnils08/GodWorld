@@ -20,10 +20,10 @@ Your approval stands at 88 — down 7 since last cycle.
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Denise Carter — City Council District 1
 
-- **Address:** Present D1 community mitigation standards and constituent oversight protocols for ongoing Phase 2 excavation at the Temescal Health Center.
-- **Why:** D1 approval dropped 7 points to 88 in C104 amid continued double-shift construction activity and noise concerns in the Temescal neighborhood.
-- **Acceptance:** A published constituent impact plan addressing double-shift mitigation and traffic coordination in Temescal.
-- **Silence consequence:** Increased local friction over health center construction impacts and unaddressed neighborhood complaints.
+- **Address:** Release a constituent policy briefing addressing North Oakland infrastructure priorities and the 7-point drop in D1 council approval.
+- **Why:** D1 approval fell from 95 to 88 (-7 points) in C104, reflecting growing constituent scrutiny over municipal project delivery and caucus performance.
+- **Acceptance:** A published district communication detailing upcoming legislative actions and capital oversight commitments for District 1.
+- **Silence consequence:** Unaddressed constituent dissatisfaction further erodes the council majority's stability and public trust.
 
 ## This week on the wall
 
@@ -67,3 +67,15 @@ Success: **Brooklyn** — mood clearly upbeat, street trade struggling. Somebody
 You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of your neighborhoods this cycle: who answers for West Oakland, and who gets the credit in Brooklyn?
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
+
+## MAYOR'S AGENDA THIS CYCLE
+
+- West Oakland Stabilization Fund — Month-Five Disbursement Batch: approved — "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out."
+- Oakland Alternative Response Initiative — Citywide Expansion Plan: directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline — "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program."
+- Oakland Youth Apprenticeship Pipeline — Corrective Action Plan: publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery — "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround."
+- Baylight District — Final Council Vote: public endorsement of the Phase II shortlist and call for unanimous council approval — "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work."
+- Fruitvale Transit Hub Phase II — Compliance Review Approval: directing the Bureau to greenlight submissions and begin community visioning sessions by January 15 — "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it."
+- Temescal Community Health Center — Phase 1 Closeout and Acceleration: approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion — "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5."
+- KONO Infrastructure Crisis and Adams Point Success: directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress — "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second."
+
+The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

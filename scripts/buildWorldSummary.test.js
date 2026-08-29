@@ -342,6 +342,27 @@ console.log('\nTest 11b: signalLabel + extractPopids');
 }
 
 // ────────────────────────────────────────────────────────────────────────────
+// Test 11b2: engine.125 — sports labels from resolved names only
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11b2: resolveFeedNames (engine.125)');
+{
+  assert('export resolveFeedNames is function', typeof helper.resolveFeedNames === 'function');
+  const empty = helper.resolveFeedNames('', [], 'test');
+  assertEqual('empty NamesUsed → empty popids', empty.popids, []);
+  assertEqual('empty NamesUsed → empty names', empty.names, []);
+
+  const notes = [];
+  const mixed = helper.resolveFeedNames('Vinnie Keane, Zzzzz Qqqqq', notes, 'A\'s C104');
+  assert('resolved Vinnie has POP-00001', mixed.popids.indexOf('POP-00001') !== -1);
+  assert('resolved names include Vinnie Keane', mixed.names.indexOf('Vinnie Keane') !== -1);
+  assert('unresolved Zzzzz Qqqqq is not in names', mixed.names.indexOf('Zzzzz Qqqqq') === -1);
+  assert('unresolved name is noted, not labeled', notes.some(n => /Zzzzz Qqqqq/.test(n) && /does NOT resolve/.test(n)));
+  const label = helper.signalLabel('A\'s', 'game', mixed.names.length ? mixed.names.join(', ') : null);
+  assert('label carries resolved name', /Vinnie Keane/.test(label));
+  assert('label omits unresolved name', !/Zzzzz Qqqqq/.test(label));
+}
+
+// ────────────────────────────────────────────────────────────────────────────
 // Test 11c: rippleEntry + RIPPLE_LANE_MAP routing table
 // ────────────────────────────────────────────────────────────────────────────
 console.log('\nTest 11c: rippleEntry + RIPPLE_LANE_MAP');

@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 104,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-104-council_d1-003 (Carter D1 — Oakland Youth Apprenticeship Pipeline — Corrective Action Plan)",
+    "STMT-104-council_d3-003 (Delgado D3 — Youth Apprenticeship Pipeline Corrective Action)",
+    "STMT-104-mayor_gavel-003 (Mayor gavel — Oakland Youth Apprenticeship Pipeline — Corrective Action Plan)",
+    "STMT-104-mayor_open-003 (Mayor agenda — Oakland Youth Apprenticeship Pipeline — Corrective Action Plan)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "pilot-active",
+    "MilestoneNotes": "C104: Corrective action plan published; intake simplified, 3 new recruitment partners added. Backlog clearance deadline set for C106.",
+    "NextScheduledAction": "Backlog processing completion + town hall",
+    "NextActionCycle": 106
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 104,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-104-mayor_gavel-001 (Mayor gavel — West Oakland Stabilization Fund — Month-Five Disbursement Batch)",
+    "STMT-104-OKORO-001 (okoro — West Oakland Stabilization Fund processing)",
+    "STMT-104-stabilization_fund-001 (Webb — West Oakland Stabilization Fund)",
+    "STMT-104-stabilization_fund-002 (Webb — West Oakland Stabilization Fund)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+    "NextScheduledAction": "Month-six disbursement review + canvass launch",
+    "NextActionCycle": 105
+  }
+}

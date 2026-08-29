@@ -1,0 +1,21 @@
+{
+  "initiative": "INIT-006",
+  "initiativeId": "INIT-006",
+  "cycle": 104,
+  "primaryVoice": "Mayor gavel (mayor_gavel-004)",
+  "consolidatedFrom": [
+    "STMT-104-baylight_authority-001 (Ramos — Baylight District Phase II Shortlist)",
+    "STMT-104-council_d2-001 (Tran D2 — Baylight District Development)",
+    "STMT-104-council_d4-001 (Vega D4 — Baylight District — Final Council Vote)",
+    "STMT-104-council_d9-001 (Mobley D9 — Baylight District Final Council Vote)",
+    "STMT-104-mayor_gavel-004 (Mayor gavel — Baylight District — Phase II Shortlist Approval)",
+    "STMT-104-mayor_open-004 (Mayor agenda — Baylight District — Final Council Vote)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-006",
+    "ImplementationPhase": "vote-scheduled",
+    "MilestoneNotes": "C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105.",
+    "NextScheduledAction": "Final council vote on Phase II bid",
+    "NextActionCycle": 105
+  }
+}

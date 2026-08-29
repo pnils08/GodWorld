@@ -1,0 +1,56 @@
+{
+  "office": "council_d2",
+  "cycle": 104,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I am voting yes on the Baylight Phase II shortlist because three qualified bidders is the right foundation, but I am conditioning my support on hard infrastructure commitments for Jack London. I am declining Director Vance's request to introduce a Grand Lake stabilization package until I see economic decay data—D2's success came from evidence, not blanket programs, and I won't export unproven models to other districts. I claim credit for Downtown and Chinatown's upbeat economic mood, which reflects this office's focus on basic infrastructure, safety, and pragmatic business support rather than pilot projects.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Development",
+      "initiative": "INIT-006",
+      "decision": "Vote YES on Phase II shortlist approval with infrastructure conditions for Jack London",
+      "quote": "Three bidders with proven capacity is exactly where we need to be—now let's make sure Jack London gets the infrastructure upgrade it earned, not just the development.",
+      "fullStatement": "I am voting yes on the Baylight Phase II shortlist. The selection committee did the rigorous work of narrowing four bidders down to three based on capacity and track record, not politics, and that process deserves our respect. However, I want the record clear: the Holiday Market proved Jack London can draw significant foot traffic, and it also proved the infrastructure cannot handle the load. Before this council moves to Phase III, I am demanding that any development agreement include binding commitments for sewer capacity upgrades, street lighting, and pedestrian safety improvements in Jack London. We are not merely approving a list of bidders; we are approving a contract that must deliver tangible infrastructure for the neighborhood hosting it.",
+      "disposition": "YES",
+      "actionAsked": "Include binding infrastructure commitments for Jack London in Phase III development agreements",
+      "tone": "quiet-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d2-002",
+      "type": "directive_response",
+      "topic": "Grand Lake Commercial Stabilization",
+      "initiative": null,
+      "decision": "Decline to introduce commercial stabilization package pending economic data review",
+      "quote": "I don't write checks for other districts without seeing the ledger first—show me the economic impact data on Grand Lake, then we'll talk about stabilization.",
+      "fullStatement": "Director Vance has asked me to introduce a commercial stabilization and tenant protection package for Grand Lake. I represent Downtown, Chinatown, and Jack London—neighborhoods that are currently thriving because we focused on data-driven infrastructure investment and pragmatic business support. Before I introduce any new social program or stabilization measure for another district, I need to see the underlying economic data: vacancy rates, revenue loss metrics, and verified displacement figures. I am not opposed to intervention where it is warranted, but I am opposed to policy without evidence. D2's success came from fixing streets, maintaining safety, and streamlining permits—not from untested stabilization schemes. When the data demonstrates Grand Lake requires the specific interventions that worked here, I will support them. Until then, my legislative priority remains securing the infrastructure wins that Jack London demonstrated it urgently needs.",
+      "disposition": "no-action",
+      "actionAsked": "Provide economic decay data before expecting legislative action",
+      "tone": "respectfully-dissenting",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d2-003",
+      "type": "constituent_statement",
+      "topic": "Downtown and Chinatown Economic Performance",
+      "initiative": null,
+      "decision": "Claim credit for D2 economic stability through pragmatic infrastructure and safety policy",
+      "quote": "Downtown isn't buzzing by accident—it's because we focused on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.",
+      "fullStatement": "My constituents in Downtown and Chinatown are living and working in upbeat, thriving commercial corridors. That outcome did not occur by chance. It is the direct result of this office prioritizing basic infrastructure maintenance, supporting the Holiday Market which brought thousands of visitors to Jack London, and maintaining the public safety environment that allows small businesses to stay open and operate without fear. When you see busy streets in Chinatown and packed shops Downtown, you are witnessing what happens when City Hall focuses on practical, evidence-based support rather than ideological pilot programs. I am claiming that credit for District 2, and I am demanding that any future citywide economic policy replicate this pragmatic approach—fixed streets, reliable safety, and streamlined permitting—before expanding into new districts with experimental measures.",
+      "disposition": "statement",
+      "actionAsked": "Continue pragmatic infrastructure and safety support for D2",
+      "tone": "district-focused",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

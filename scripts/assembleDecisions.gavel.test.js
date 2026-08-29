@@ -1,9 +1,9 @@
 'use strict';
 
-const { pickPrimary, buildDecisions, hearingHasPhase } = (function () {
+const { pickPrimary, buildDecisions, hearingHasPhase, outputContract, validateVoiceJson } = (function () {
   const a = require('./assembleDecisions');
   const c = require('./cron-civic-run');
-  return { pickPrimary: a.pickPrimary, buildDecisions: a.buildDecisions, hearingHasPhase: c.hearingHasPhase };
+  return { pickPrimary: a.pickPrimary, buildDecisions: a.buildDecisions, hearingHasPhase: c.hearingHasPhase, outputContract: c.outputContract, validateVoiceJson: c.validateVoiceJson };
 })();
 
 let failed = 0;
@@ -55,6 +55,21 @@ check('gavel JSON with phase is allowed by the helper (caller-side)', hearingHas
 check('hearing JSON without phase passes', hearingHasPhase({
   statements: [{ decision: 'stand with KONO', trackerUpdates: {} }],
 }) === false);
+
+const agenda = outputContract('mayor_open', 104, [{ id: 'INIT-005', name: 'Temescal Community Health Center' }], { forbidPhase: true });
+check('agenda contract forbids ImplementationPhase', /trackerUpdates MUST be \{\}/.test(agenda) && !/fill trackerUpdates as a FLAT/.test(agenda));
+const gavel = outputContract('mayor_gavel', 104, [{ id: 'INIT-005', name: 'Temescal Community Health Center' }]);
+check('gavel contract still offers ImplementationPhase', /fill trackerUpdates as a FLAT/.test(gavel));
+const hyphenated = validateVoiceJson(JSON.stringify({
+  office: 'mayor_gavel', cycle: 104, speaker: 'Avery Santana',
+  statements: [{ decision: 'advance', quote: 'q', fullStatement: 'full', trackerUpdates: { ImplementationPhase: 'pilot_active' } }],
+}));
+check('underscore phase rewrites to hyphen', hyphenated.ok && hyphenated.json.statements[0].trackerUpdates.ImplementationPhase === 'pilot-active');
+const stillDark = validateVoiceJson(JSON.stringify({
+  office: 'mayor_gavel', cycle: 104, speaker: 'Avery Santana',
+  statements: [{ decision: 'advance', quote: 'q', fullStatement: 'full', trackerUpdates: { ImplementationPhase: 'not-a-phase' } }],
+}));
+check('unknown phase still rejected', !stillDark.ok);
 
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('assembleDecisions.gavel: ok');

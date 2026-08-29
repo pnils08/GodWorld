@@ -1,0 +1,78 @@
+{
+  "office": "mayor_open",
+  "cycle": 104,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle, we’re taking direct action where Oakland needs it most: accelerating disbursements for West Oakland families, scaling OARI’s proven model citywide, and breaking the logjam on the Youth Apprenticeship Pipeline. We’re also locking in Baylight’s future with a final council vote, pushing Fruitvale’s transit hub forward, and ensuring Temescal’s health center stays on track. Every move is about urgency, accountability, and keeping Oakland moving forward—because when we act, this city wins.",
+  "statements": [
+    {
+      "statementId": "STMT-104-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund — Month-Five Disbursement Batch",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out.",
+      "fullStatement": "The West Oakland Stabilization Fund exists for one reason: to keep families in their homes and neighborhoods stable. Right now, 12 more households have cleared verification and are waiting on disbursements that were promised to them. We’re not letting bureaucracy or calendar delays stand in their way. Today, I’m authorizing the immediate release of the Month-Five batch—$412,000 to 12 families—with a directive to the Finance Office to cut checks by Friday. Brenda Okoro’s team will personally notify each household by end of day tomorrow. This is what urgency looks like.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_open-002",
+      "type": "executive_order",
+      "topic": "Oakland Alternative Response Initiative — Citywide Expansion Plan",
+      "initiative": "INIT-002",
+      "decision": "directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline",
+      "quote": "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program.",
+      "fullStatement": "The data from District 7 is clear: OARI’s alternative response model reduces low-level calls by 28%, frees up OPD for violent crime, and builds trust. That’s not a test run—that’s a blueprint. Today, I’m directing OARI to deliver a 90-day plan to scale this model citywide, starting with Fruitvale and East Oakland. We’ll fund it by reallocating $1.2 million from the unspent crisis response reserve. Councilmember Ashford will have questions—I expect them. But here’s my answer: when something works for Oaklanders, we don’t study it to death. We scale it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_open-003",
+      "type": "policy_position",
+      "topic": "Oakland Youth Apprenticeship Pipeline — Corrective Action Plan",
+      "initiative": "INIT-007",
+      "decision": "publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery",
+      "quote": "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround.",
+      "fullStatement": "The review findings for the Youth Apprenticeship Pipeline are straightforward: we let paperwork slow us down. Thirty-two eligible applicants are stuck in intake limbo, and that’s on us. Effective immediately, we’re simplifying the verification process to a single in-person session, adding weekend hours at the West Oakland workforce center, and assigning my Chief of Staff, Laila Cortez, as the executive sponsor to clear the backlog in 60 days. We’re also partnering with Oakland Community College District to pre-verify transcripts—no more asking families to track down records we can access ourselves. The full corrective action report is published today, and I’ll be at the West Oakland workforce center on Saturday to hear directly from applicants. Accountability starts with showing up.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_open-004",
+      "type": "vote_reaction",
+      "topic": "Baylight District — Final Council Vote",
+      "initiative": "INIT-006",
+      "decision": "public endorsement of the Phase II shortlist and call for unanimous council approval",
+      "quote": "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work.",
+      "fullStatement": "The Phase II shortlist for Baylight District is exactly what we asked for: three qualified bidders with deep Oakland roots, union labor commitments, and designs that put community first. This isn’t about picking a winner yet—it’s about sending a signal that Oakland is open for business, on our terms. I’m calling on the Council to approve this shortlist unanimously on Tuesday. To my colleagues who’ve had questions: the environmental reviews are complete, the labor agreements are signed, and the community benefits package is the strongest in the city’s history. Councilmember Vega, I know you’ve wanted more local hiring guarantees—you’ve got them in Bidder C’s proposal. Councilmember Chen, the transit integration you fought for is in all three. This is the moment to move forward together.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_open-005",
+      "type": "initiative_response",
+      "topic": "Fruitvale Transit Hub Phase II — Compliance Review Approval",
+      "initiative": "INIT-003",
+      "decision": "directing the Bureau to greenlight submissions and begin community visioning sessions by January 15",
+      "quote": "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it.",
+      "fullStatement": "The Bureau’s compliance review for Fruitvale Transit Hub Phase II is complete, and the submissions meet every standard—so we’re moving. Today, I’m directing the Bureau to greenlight the pedestrian-path redesign and pipeline adjustments, and to launch community visioning sessions by January 15. That’s two weeks earlier than planned, because Fruitvale residents have been waiting long enough. We’ll hold sessions at the Fruitvale Library and La Clinica’s community room, with Spanish and Mam interpretation provided. To the skeptics who say we’re rushing: we’ve been in ‘review’ for six months. To the neighbors who’ve been advocating for this: thank you for keeping us honest. Let’s build this right—together.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_open-006",
+      "type": "authorization_response",
+      "topic": "Temescal Community Health Center — Phase 1 Closeout and Acceleration",
+      "initiative": "INIT-005",
+      "decision": "approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion",
+      "quote": "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5.",
+      "fullStatement": "The HCAI first-comments resolution for Temescal Community Health Center is signed, sealed, and returned today. But we’re not waiting for the ink to dry. I’m authorizing overtime pay for the caisson drilling and excavation crews to keep double shifts running through January. That means Phase 1 closes on schedule, and we break ground on the clinical wing by March 1. To the neighbors concerned about noise: we’ll enforce the 10 PM cutoff strictly, and we’re funding sound barriers along 51st. To the workers putting in the hours: thank you for building what this city needs. And to anyone who says we’re moving too fast? Temescal has waited a decade for this. Fast is what justice looks like.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_open-007",
+      "type": "public_remark",
+      "topic": "KONO Infrastructure Crisis and Adams Point Success",
+      "initiative": null,
+      "decision": "directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress",
+      "quote": "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second.",
+      "fullStatement": "Let’s be clear: the infrastructure disruption in KONO this week was preventable. A water main installed in 1987 shouldn’t fail in 2041 because we deferred maintenance. I’ve directed Public Works to deliver an audit of KONO’s critical infrastructure within 48 hours, with a repair timeline attached. We’ll fund it by reallocating $850,000 from the unspent capital reserve. Now, for the good news: Adams Point is thriving. Storefronts are full, the mood is up, and the credit belongs to Councilmember Terrence Mobley’s team. Their ‘First Fridays’ small business grants and pedestrian safety push are working. So here’s the plan: we’ll take what’s working in Adams Point—targeted grants, quick-build safety fixes—and apply it in KONO by February 1. Because when one neighborhood struggles and another succeeds, our job is to even the scale.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "office": "council_d6",
+  "cycle": 104,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "I decided to advocate for increased community engagement in Piedmont Ave to bridge the disconnect between crime statistics and resident sentiment. I also emphasized the importance of accountability in Baylight District's development, ensuring transparency and oversight.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d6-001",
+      "type": "vote_statement",
+      "topic": "Community Safety",
+      "initiative": null,
+      "decision": "Convene a community safety walk in Piedmont Ave",
+      "quote": "Numbers don’t tell the whole story—community trust does.",
+      "fullStatement": "While Piedmont Avenue's crime numbers remain well below city averages, the sentiment gap concerns me. With property crimes at 23 versus city's 43.4 and violent crimes at half the city rate, the data shows real progress. However, we can't ignore that disconnect between statistics and lived experience. I'll be convening a community safety walk next week to hear directly from residents and business owners like B.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d6-002",
+      "type": "vote_statement",
+      "topic": "Development Accountability",
+      "initiative": "INIT-006",
+      "decision": "Demand formal audit parameters for Baylight District",
+      "quote": "Baylight District’s potential is immense, but only if we hold every step accountable.",
+      "fullStatement": "Baylight District represents a significant opportunity for Oakland, but its success hinges on transparency and oversight. We must ensure that every phase of development is held to the highest standards of accountability. I am advocating for formal audit parameters and reporting scope to protect the integrity of this project and the interests of our community.",
+      "trackerUpdates": {}
+    }
+  ]
+}

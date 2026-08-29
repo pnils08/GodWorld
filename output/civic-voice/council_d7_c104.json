@@ -1,0 +1,28 @@
+{
+  "office": "council_d7",
+  "cycle": 104,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "This cycle, I focused on ensuring accountability in KONO's infrastructure crisis and defending fiscal responsibility in Temescal's health center project. KONO needs transparent investment, not empty promises, and I pushed for detailed audits before committing city resources. On Temescal, I supported accelerating the health center construction but demanded oversight to ensure costs remain controlled.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d7-001",
+      "type": "vote_statement",
+      "topic": "KONO Infrastructure Crisis",
+      "initiative": null,
+      "decision": "Audit KONO's infrastructure and small-business retention reports",
+      "quote": "KONO needs investment, not abandonment—but we need to see the receipts before we sign the check.",
+      "fullStatement": "This cycle, I called for Public Works to audit KONO’s infrastructure within 48 hours. Additionally, I requested Economic Development to provide detailed small-business retention reports since Measure Z passed. Stabilization starts with data, not declarations. We owe it to KONO to ensure every dollar spent is accounted for and effective.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d7-002",
+      "type": "vote_statement",
+      "topic": "Temescal Community Health Center",
+      "initiative": "INIT-005",
+      "decision": "Approve Phase 1 closeout and acceleration with oversight",
+      "quote": "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5.",
+      "fullStatement": "I supported accelerating the Temescal Community Health Center construction timeline to meet Q1 completion. However, I demanded additional oversight to ensure overtime costs are controlled and project milestones remain on track. We cannot afford delays, but we also cannot afford unchecked spending.",
+      "trackerUpdates": {}
+    }
+  ]
+}

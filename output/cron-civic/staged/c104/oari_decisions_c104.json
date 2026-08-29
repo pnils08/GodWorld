@@ -1,0 +1,18 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 104,
+  "primaryVoice": "Mayor gavel (mayor_gavel-006)",
+  "consolidatedFrom": [
+    "STMT-104-mayor_gavel-006 (Mayor gavel — Oakland Alternative Response Initiative — Citywide Expansion Plan)",
+    "STMT-104-oari-001 (Tran-Muñoz — OARI expansion)",
+    "STMT-104-oari-002 (Tran-Muñoz — West Oakland coverage)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established.",
+    "NextScheduledAction": "First expansion-district launch (D1)",
+    "NextActionCycle": 105
+  }
+}

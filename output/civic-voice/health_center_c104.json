@@ -1,0 +1,24 @@
+{
+  "office": "health_center",
+  "cycle": 104,
+  "speaker": "Bobby Chen-Ramirez",
+  "cascadeSummary": "Closed Phase 1 with HCAI sign-off on seismic submittals and excavation completion. Approved double shifts continue under reinforced compliance protocols per CRC audit request. Temescal demands speed without sacrificing safety—we're delivering both.",
+  "statements": [
+    {
+      "statementId": "STMT-104-health_center-001",
+      "type": "operational_status",
+      "topic": "Temescal Community Health Center",
+      "initiative": "INIT-005",
+      "decision": "Verified double-shift safety and fiscal compliance log submitted",
+      "quote": "We're not just building a health center—we're building trust. Every caisson, every shift, every dollar accounted for.",
+      "fullStatement": "Following C103 HCAI approval and excavation completion, active caisson drilling under double shifts requires documented fiscal and structural monitoring to satisfy council oversight. Today, we're submitting the monthly expenditure drawdown, shift logs, and certified site safety records for the Phase 2 caisson drilling phase. Temescal deserves speed AND safety—we're delivering both.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C104: Phase 1 closed with HCAI sign-off; double shifts continue under reinforced compliance",
+        "NextScheduledAction": "Caisson drilling completion",
+        "NextActionCycle": 105
+      }
+    }
+  ]
+}

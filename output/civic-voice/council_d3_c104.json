@@ -1,0 +1,48 @@
+{
+  "office": "council_d3",
+  "cycle": 104,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "Prioritizing San Antonio's revival through targeted investment, endorsing adaptive safety models, accelerating transit hub visioning, and tying youth apprenticeships to local recovery projects.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative Expansion",
+      "initiative": "INIT-002",
+      "decision": "Endorse expansion with San Antonio-specific adaptations",
+      "quote": "Safety isn't a one-size-fits-all. We'll adapt D7's success to meet San Antonio's unique needs, not just replicate it.",
+      "fullStatement": "While D7's model proves community-based safety works, San Antonio requires tailored solutions. I'll direct Public Works to collaborate with local merchants and transit workers to design interventions addressing this corridor's specific challenges, including late-night security for shuttered storefronts.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II Compliance",
+      "initiative": "INIT-003",
+      "decision": "Approve compliance review with San Antonio linkage",
+      "quote": "Fruitvale's hub connects to San Antonio's future—we're building transit infrastructure today that apprentices will maintain tomorrow.",
+      "fullStatement": "I'll approve the Bureau's compliance review while mandating that community visioning sessions include San Antonio stakeholders. This hub must serve as a literal and economic bridge, not an island.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d3-003",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship Pipeline Corrective Action",
+      "initiative": "INIT-007",
+      "decision": "Support simplified intake with local project staffing mandates",
+      "quote": "Let's stop shuffling paperwork and put apprentices to work revitalizing San Antonio's storefronts starting this quarter.",
+      "fullStatement": "The intake overhaul is necessary but insufficient. I'll amend the corrective action plan to require that 40% of new apprentices be assigned to District 3 commercial corridor projects within six months, with Fruitvale diner owners and transit agencies as priority partners.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d3-004",
+      "type": "district_strategy",
+      "topic": "San Antonio Recovery and Fruitvale Credit",
+      "initiative": null,
+      "decision": "Launch San Antonio Commercial Activation Fund",
+      "quote": "Fruitvale's comeback was built by its people. Now we fight for San Antonio with the same grit—and real money.",
+      "fullStatement": "To address the 0.42 sentiment score, I'll propose redirecting 15% of D3's stabilization allocation to create a San Antonio storefront activation fund. This includes rent subsidies for small businesses, apprentice-led beautification projects, and extending Fruitvale's late-night transit hours to boost foot traffic.",
+      "trackerUpdates": {}
+    }
+  ]
+}

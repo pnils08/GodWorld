@@ -1,0 +1,34 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 104,
+  "speaker": "Marcus Delano Webb",
+  "cascadeSummary": "Approved and processed the Month-five disbursement batch for 12 households, bringing total disbursements to 57 of ~280 target households. Published Month-six intake targets and updated outreach criteria to accelerate progress, addressing West Oakland's depressed RetailVitality and elevated CrimeIndex.",
+  "statements": [
+    {
+      "statementId": "STMT-104-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund",
+      "initiative": "INIT-001",
+      "decision": "Approved Month-five disbursement batch and published Month-six intake targets",
+      "quote": "Fifty-seven families stabilized isn’t just a number—it’s 57 futures we’re protecting in West Oakland.",
+      "fullStatement": "This week, we approved and processed the Month-five disbursement batch for 12 households, bringing total disbursements to 57 of ~280 target households. Every application was audit-ready before authorization, and every disbursement was handled with full compliance documentation. Looking ahead to Month-six, I've published updated intake targets and outreach criteria to accelerate progress toward our goal. West Oakland's depressed RetailVitality and elevated CrimeIndex demand faster capital deployment, and we're committed to meeting that need with urgency and integrity.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C104: Approved Month-five disbursement batch (12 households), published Month-six intake targets and updated outreach criteria",
+        "NextScheduledAction": "Month-six disbursement batch review",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-104-stabilization_fund-002",
+      "type": "operational_update",
+      "topic": "West Oakland Stabilization Fund",
+      "initiative": "INIT-001",
+      "decision": "Published Month-six intake targets and updated outreach criteria",
+      "quote": "Every applicant who walks through our door gets two things: the truth about the timeline, and the certainty that their case won’t get lost.",
+      "fullStatement": "Building on the success of Month-five, we've published clear intake targets and updated outreach criteria for Month-six. Our priority is accelerating progress toward the ~280 household goal while maintaining the integrity of the compliance chain. West Oakland's needs are urgent, and we're committed to meeting them with the urgency they deserve. Every applicant who walks through our door gets two things: the truth about the timeline, and the certainty that their case won’t get lost.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -21,9 +21,9 @@ Your approval stands at 56 — down 2 since last cycle.
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Leonard Tran — City Council District 2
 
-- **Why:** Grand Lake has no active municipal initiatives to mitigate the severe retail vitality drop and rising housing pressure identified in C104 engine review.
-- **Acceptance:** A council inquiry, hearing request, or small business stabilization proposal focused on the Grand Lake commercial district.
-- **Silence consequence:** Continued unmitigated neighborhood decay in Grand Lake without district representation or corrective intervention.
+- **Address:** Introduce a commercial stabilization and tenant protection package to counteract the high-severity economic decay flagged in Grand Lake.
+- **Acceptance:** A filed council resolution or formal budget appropriation targeting small business support and anti-displacement measures in Grand Lake.
+- **Silence consequence:** Continued unmitigated commercial collapse and resident displacement across the Grand Lake commercial district.
 
 ## This week on the wall
 
@@ -48,3 +48,15 @@ Success: **Downtown** — mood clearly upbeat, street trade busy. Somebody's wor
 You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of your neighborhoods this cycle: who answers for Chinatown, and who gets the credit in Downtown?
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
+
+## MAYOR'S AGENDA THIS CYCLE
+
+- West Oakland Stabilization Fund — Month-Five Disbursement Batch: approved — "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out."
+- Oakland Alternative Response Initiative — Citywide Expansion Plan: directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline — "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program."
+- Oakland Youth Apprenticeship Pipeline — Corrective Action Plan: publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery — "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround."
+- Baylight District — Final Council Vote: public endorsement of the Phase II shortlist and call for unanimous council approval — "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work."
+- Fruitvale Transit Hub Phase II — Compliance Review Approval: directing the Bureau to greenlight submissions and begin community visioning sessions by January 15 — "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it."
+- Temescal Community Health Center — Phase 1 Closeout and Acceleration: approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion — "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5."
+- KONO Infrastructure Crisis and Adams Point Success: directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress — "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second."
+
+The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

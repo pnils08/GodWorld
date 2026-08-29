@@ -787,19 +787,28 @@ function editDistance1_(a, b) {
 }
 
 function resolveFeedNames_(namesUsed, notes, ctxLabel) {
+  const empty = { popids: [], names: [] };
   const raw = String(namesUsed || '')
     .split(/[,;]/)
     .map(s => s.replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim())
     .filter(n => /^[A-Z]/.test(n) && n.split(' ').length >= 2);
-  if (!raw.length) return [];
+  if (!raw.length) return empty;
   let resolver;
-  try { resolver = require('./canon-name-check'); } catch (e) { return []; }
+  try { resolver = require('./canon-name-check'); } catch (e) { return empty; }
   const where = ctxLabel ? ' [' + ctxLabel + ']' : '';
   const popids = [];
+  const names = [];
+  const seen = new Set();
+  const add = (name, popid) => {
+    if (!popid || seen.has(popid)) return;
+    seen.add(popid);
+    popids.push(popid);
+    if (name) names.push(name);
+  };
   const exact = resolver.resolveCitizens(raw);
   let index = null;
   for (let i = 0; i < exact.length; i++) {
-    if (exact[i].popid) { popids.push(exact[i].popid); continue; }
+    if (exact[i].popid) { add(exact[i].name, exact[i].popid); continue; }
     if (exact[i].ambiguous) {
       notes.push(`sports feed name "${raw[i]}" is AMBIGUOUS against the ledger — not resolved${where}`);
       continue;
@@ -816,14 +825,14 @@ function resolveFeedNames_(namesUsed, notes, ctxLabel) {
     if (hits.length === 1) {
       const back = resolver.resolveCitizens([hits[0]])[0];
       if (back && back.popid) {
-        popids.push(back.popid);
+        add(hits[0], back.popid);
         notes.push(`sports feed name "${raw[i]}" MISSPELLED — rescued to "${hits[0]}" (${back.popid}); fix the feed row${where}`);
         continue;
       }
     }
     notes.push(`sports feed name "${raw[i]}" does NOT resolve${hits.length > 1 ? ` (${hits.length} near-misses, ambiguous)` : ''} — desk cannot interview them${where}`);
   }
-  return [...new Set(popids)];
+  return { popids, names };
 }
 
 function extractPopids(...sources) {
@@ -1020,15 +1029,16 @@ function emitDeskSignal(cycle, data) {
   // ── sports: feed rows, current cycle. NO StoryAngle — WHAT stays desk-side. ──
   for (const r of sportsAll) {
     if (String(r.Cycle) !== String(cycle)) continue;
+    // engine.125: label names from the resolved set only. Raw NamesUsed
+    // shipped unresolved strings onto the sports desk with no POPID — writers
+    // copied them and Rhea killed the draft as invented people.
+    const resolved = resolveFeedNames_(r.NamesUsed, notes, `${r.TeamsUsed || 'sports'} C${cycle}`);
     const feedEntry = {
       kind: 'feed',
       ref: `Oakland_Sports_Feed cycle ${cycle}; rendered: world_summary_c${cycle}.md "## Sports" C${cycle} (StoryAngle at the pointer)`,
-      label: signalLabel(r.TeamsUsed, r.EventType, r.SeasonType ? `(${r.SeasonType})` : null, r.NamesUsed)
+      label: signalLabel(r.TeamsUsed, r.EventType, r.SeasonType ? `(${r.SeasonType})` : null, resolved.names.length ? resolved.names.join(', ') : null)
     };
-    // S361: players ARE citizens — carry their POPIDs so the desk can interview
-    // them instead of writing about names it cannot look up.
-    const feedPops = resolveFeedNames_(r.NamesUsed, notes, `${r.TeamsUsed || 'sports'} C${cycle}`);
-    if (feedPops.length) feedEntry.popids = feedPops;
+    if (resolved.popids.length) feedEntry.popids = resolved.popids;
     lanes.sports.push(feedEntry);
   }
 
@@ -1299,6 +1309,7 @@ module.exports = {
   rippleEntry,
   signalLabel,
   extractPopids,
+  resolveFeedNames: resolveFeedNames_,
   RIPPLE_LANE_MAP,
   DESK_SIGNAL_VERSION,
   // W5h2 byline WHO-assist (pure selection + fs-only usage tally)

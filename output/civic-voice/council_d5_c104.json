@@ -1,0 +1,38 @@
+{
+  "office": "council_d5",
+  "cycle": 104,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "Endorsed OARI expansion with community-led safety frameworks, demanded youth pipeline reforms tied to East Oakland's needs, and credited Baylight residents while pushing for economic investment.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Citywide Safety Model",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Support expansion with community-led adaptations",
+      "quote": "Safety isn't a one-size-fits-all—every neighborhood writes its own story.",
+      "fullStatement": "D7 proved community-based safety works, but we won't copy-paste their model onto East Oakland's streets. This expansion must empower local voices to shape their own safety networks. I'll back the 90-day plan only if each district co-designs its implementation. Safety is a promise, not a template.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Youth Employment Crisis",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Approve corrective actions with quarterly benchmarks",
+      "quote": "This pipeline isn't about forms—it's about futures. East Oakland's youth will lead the rebuild.",
+      "fullStatement": "The Mayor's plan fixes intake bottlenecks, but we're still measuring success in quarterly hires—not just compliance. I'm rerouting $250k from unused stadium funds to create East Oakland youth hiring benchmarks. If we're serious about equity, we'll put young people in charge of this pipeline by cycle 106.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-council_d5-003",
+      "type": "constituent_statement",
+      "topic": "District 5 Economic Justice",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "Vote yes on Phase II shortlist with economic accountability",
+      "quote": "Baylight's success isn't city planning—it's survival. We'll vote yes, but real investment starts now.",
+      "fullStatement": "Residents kept Baylight's lights on while the city debated. We'll endorse this shortlist, but my vote comes with a demand: 40% of Phase II contracts must go to East Oakland and Baylight small businesses. The Mayor talks about 'building with the people'—let's make it paychecks, not just press releases.",
+      "trackerUpdates": {}
+    }
+  ]
+}

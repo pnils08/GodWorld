@@ -1,0 +1,18 @@
+{
+  "office": "council_d9",
+  "cycle": 104,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "Affirming Baylight District endorsement while spotlighting Laurel's overlooked progress. Uptown's momentum must not eclipse smaller neighborhood gains.",
+  "statements": [
+    {
+      "statementId": "STMT-104-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Final Council Vote",
+      "initiative": "Baylight District — Final Council Vote",
+      "decision": "YES",
+      "quote": "Uptown's success isn't just numbers—it's proof that when we invest in our people, Oakland thrives. Let's keep building, not just here, but across the district.",
+      "fullStatement": "While the Mayor highlights Uptown's momentum, we must remember Laurel's 14% housing stability gains this cycle—achieved without fanfare. I'll support the Baylight District's Phase II shortlist with conditions: 30% of new units must prioritize districts like Laurel through our Affordable Housing Trust Fund. Development without displacement isn't just possible—it's mandatory. Yes to Baylight, but only if the approval includes binding commitments for cross-district equity.",
+      "trackerUpdates": {}
+    }
+  ]
+}

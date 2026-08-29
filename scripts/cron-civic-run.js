@@ -614,6 +614,14 @@ async function runPrep() {
   }
   // Mayor always gets a packet (she opens the cascade) even with zero hot topics.
   if (!assignments['civic-office-mayor']) assignments['civic-office-mayor'] = [];
+  // civic.24: every seated district speaks Sunday even with an empty week.
+  // Omission is a record; a missing packet is an absence of data. C104's
+  // unattended prep wrote 13 packets and skipped D4/D6/D9 because no INIT
+  // or HIGH hood intersected them — Task 9 cannot meet "nine hearing files"
+  // unless those seats still get a packet.
+  for (const d of civicSeat.councilAgentDirs(officeMap)) {
+    if (!assignments[d]) assignments[d] = [];
+  }
 
   fs.mkdirSync(PACKETS, { recursive: true });
   const written = [];
@@ -720,6 +728,12 @@ async function runPrep() {
     for (const it of issues) console.error('      ✗ [' + it.rule + '] "' + it.match + '" «' + it.context + '»');
     leaks += issues.length;
   }
+  const missingSeats = civicSeat.councilAgentDirs(officeMap).filter(d => !written.some(w => w.dir === d));
+  if (missingSeats.length) {
+    console.error('HALT: civic.24 Sunday needs all 9 district packets; missing: ' + missingSeats.join(', '));
+    process.exit(2);
+  }
+
   // Vote-ready routing check (G-R11)
   const voteInits = hotInits.filter(i => /vote-ready/i.test((i.implementation || {}).phase || '') || /vote-ready/i.test(i.status || ''));
   for (const vi of voteInits) {
@@ -1028,12 +1042,13 @@ function stripFences(t) {
   const a = s.indexOf('{'), b = s.lastIndexOf('}');
   return (a !== -1 && b > a) ? s.slice(a, b + 1) : s;
 }
-function outputContract(officeSlug, cycle, initiatives) {
+function outputContract(officeSlug, cycle, initiatives, opts) {
   // FLAT trackerUpdates + InitiativeID — the shape validateTrackerUpdates and
   // applyTrackerUpdates actually write. (First C102 chain run used the eval
   // harness's keyed-by-name shape; every write validated as unresolvable/dark.)
+  const forbidPhase = !!(opts && opts.forbidPhase);
   const initList = (initiatives || []).map(i => '  - ' + i.id + ' = ' + i.name).join('\n');
-  return '\nRespond with ONLY a JSON object (no markdown fences, no prose before or after):\n' +
+  const schema = '\nRespond with ONLY a JSON object (no markdown fences, no prose before or after):\n' +
     JSON.stringify({
       office: officeSlug, cycle: Number(cycle), speaker: '<the office-holder\'s full name>',
       cascadeSummary: '<2-4 sentences: what you decided and why>',
@@ -1043,13 +1058,20 @@ function outputContract(officeSlug, cycle, initiatives) {
         decision: '<the concrete decision>', quote: '<one strong pull-quote in your voice>',
         fullStatement: '<the full public statement in your voice>', trackerUpdates: {}
       }]
-    }, null, 2) +
+    }, null, 2);
+  const known = 'Known initiatives:\n' + initList + '\n' +
+    'Never invent citizens, businesses, statistics, or votes not present in your packet.';
+  if (forbidPhase) {
+    return schema +
+      '\ntrackerUpdates MUST be {}. Do not set ImplementationPhase or MayoralAction this turn — the Mayor\'s gavel stamps phases after the hearing.\n' +
+      known;
+  }
+  return schema +
     '\nIf a statement changes an initiative\'s state, fill trackerUpdates as a FLAT object whose "initiative" field is the INIT id (this exact key/format — the pipeline attributes the write by it):\n' +
     '{"initiative": "INIT-XXX", "ImplementationPhase": "<value or omit if unchanged>", "MilestoneNotes": "C' + cycle + ': <one sentence, max 200 chars>", "NextScheduledAction": "<optional>", "NextActionCycle": <optional number>}\n' +
-    'Known initiatives:\n' + initList + '\n' +
     'A statement with no state change keeps trackerUpdates as {} (empty).\n' +
     'ImplementationPhase MUST be one of: ' + [...PHASES].join(', ') + '.\n' +
-    'Never invent citizens, businesses, statistics, or votes not present in your packet.';
+    known;
 }
 function validateVoiceJson(raw) {
   const v = { ok: false, why: null, json: null };
@@ -1062,7 +1084,18 @@ function validateVoiceJson(raw) {
   }
   for (const st of j.statements) {
     const tu = st.trackerUpdates || {};
-    // flat shape (the contract) — plus keyed-by-name tolerance for drifted models
+    const rewrite = (obj) => {
+      if (!obj || typeof obj !== 'object') return;
+      const p = obj.ImplementationPhase;
+      if (!p) return;
+      if (PHASES.has(p)) return;
+      const hyphen = String(p).replace(/_/g, '-');
+      if (PHASES.has(hyphen)) { obj.ImplementationPhase = hyphen; return; }
+    };
+    rewrite(tu);
+    for (const u of Object.values(tu)) {
+      if (u && typeof u === 'object') rewrite(u);
+    }
     const phases = [tu.ImplementationPhase, ...Object.values(tu).map(u => u && typeof u === 'object' ? u.ImplementationPhase : null)];
     for (const p of phases) {
       if (p && !PHASES.has(p)) { v.why = 'ImplementationPhase outside contract vocabulary: "' + p + '"'; return v; }
@@ -1142,6 +1175,9 @@ function officeModel(officeMap, dir) {
   if (!row || !row.model) throw new Error('no model in civic-office-map.json for ' + dir);
   return row.model;
 }
+function mayorModel(officeMap) {
+  return arg('--mayor-model', null) || officeModel(officeMap, 'civic-office-mayor');
+}
 // Baylight is a project seat behind an office-dir name (S229 G-R3); her
 // initiative lives here because the offices[] mirror carries no initiative field.
 const BAYLIGHT = { agentDir: 'civic-office-baylight-authority', initiative: 'INIT-006' };
@@ -1207,14 +1243,14 @@ async function runMayorOpen() {
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
   const initiatives = (trackerSnapshot.loadOrRebuild(cycle).initiatives) || [];
   const packet = mustRead(packetPathFor('civic-office-mayor', cycle), 'run --stage=prep first');
-  const model = officeModel(officeMap, 'civic-office-mayor');
+  const model = mayorModel(officeMap);
   log('mayor model=' + model);
   const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
   const user = [
     'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):',
     '', packet, wallInj || '',
     'This is the AGENDA turn. Name what is on the floor. Do NOT emit trackerUpdates.ImplementationPhase or MayoralAction. The gavel comes after the hearing.',
-    outputContract('mayor_open', cycle, initiatives),
+    outputContract('mayor_open', cycle, initiatives, { forbidPhase: true }),
   ].join('\n');
   const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap, noPhaseCheck);
   if (!r || r.error) {
@@ -1275,7 +1311,7 @@ async function runHearing() {
         'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s AGENDA is in the packet; react as yourself.',
         '', packet, wallInj || '',
         'Do NOT emit trackerUpdates.ImplementationPhase. That is the Mayor\'s gavel after you speak.',
-        outputContract(slug, cycle, initiatives),
+        outputContract(slug, cycle, initiatives, { forbidPhase: true }),
       ].join('\n');
       const r = await callVoice(dir, model, user, 4000, officeMap, noPhaseCheck);
       if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
@@ -1336,7 +1372,7 @@ async function runMayorGavel() {
     if (line) transcript.push('- ' + line);
   }
   const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
-  const model = officeModel(officeMap, 'civic-office-mayor');
+  const model = mayorModel(officeMap);
   const user = [
     'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):',
     '', packet, wallInj || '',
@@ -1894,4 +1930,4 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood };
+module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson };

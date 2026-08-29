@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 104,
+  "primaryVoice": "Soria Dominguez (transit_hub-001)",
+  "consolidatedFrom": [
+    "STMT-104-transit_hub-001 (Soria Dominguez — Phase II Visioning Launch)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "visioning",
+    "MilestoneNotes": "C104: Launched community visioning sessions focused on small business and vendor protections",
+    "NextScheduledAction": "Conduct first visioning session by January 15",
+    "NextActionCycle": 105
+  }
+}

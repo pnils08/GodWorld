@@ -1,0 +1,34 @@
+{
+  "office": "oari",
+  "cycle": 104,
+  "speaker": "Dr. Vanessa Tran-Muñoz",
+  "cascadeSummary": "Following the Mayor's directive, we're accelerating OARI expansion to East and West Oakland by finalizing deployment protocols that adapt D7's successful model to each district's needs. Our immediate focus is matching responder shifts to CrimeIndex peaks while maintaining 7-8 minute response times.",
+  "statements": [
+    {
+      "statementId": "STMT-104-oari-001",
+      "type": "operational_status",
+      "topic": "OARI expansion",
+      "initiative": "INIT-002",
+      "decision": "Submitted 90-day citywide scale-up proposal with district-specific deployment plans",
+      "quote": "Seven minutes and fifty-two seconds isn't just a response time—it's proof that when we meet crisis with care instead of cuffs, our communities get safer faster.",
+      "fullStatement": "With the Mayor's expansion directive and D7's 87% community satisfaction results as our foundation, OARI is submitting a 90-day citywide scale-up proposal that adapts our successful model to each district's needs. In West Oakland and East Oakland—where CrimeIndex signals show elevated need—we're deploying evening crisis teams starting next week, with responder shifts aligned to peak incident hours. Fruitvale will see expanded bilingual response capacity by mid-cycle. This isn't one-size-fits-all expansion—it's Oakland meeting Oakland where our needs are greatest.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C104: Submitted 90-day scale-up proposal; initiating evening deployment in West/East Oakland aligned to CrimeIndex peaks",
+        "NextScheduledAction": "Mid-cycle responder deployment check-in",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-104-oari-002",
+      "type": "neighborhood_response",
+      "topic": "West Oakland coverage",
+      "initiative": null,
+      "decision": "Added evening crisis teams in West Oakland",
+      "quote": "Nighttime crisis calls need the same compassionate response as daytime ones—that's why our West Oakland team now runs until midnight.",
+      "fullStatement": "Starting tonight, West Oakland's OARI teams will extend coverage until midnight, matching our deployment to the CrimeIndex patterns showing increased behavioral health calls after 8 PM. These evening teams—staffed by responders with specialized night scenario training—give us the capacity to de-escalate crises when traditional services are closed. It's the first step in bringing D7's proven model to neighborhoods that have waited too long for alternatives to police response.",
+      "trackerUpdates": {}
+    }
+  ]
+}

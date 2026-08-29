@@ -1,0 +1,24 @@
+{
+  "office": "transit_hub",
+  "cycle": 104,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "Following compliance approval, we are launching community visioning sessions for the Fruitvale Transit Hub Phase II. First sessions will focus on small business and vendor protections during construction, with a strong emphasis on maintaining pedestrian access to local staples like the panadería on E. 12th Street. The community comes first.",
+  "statements": [
+    {
+      "statementId": "STMT-104-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Phase II Visioning Launch",
+      "initiative": "INIT-003",
+      "decision": "Launch visioning sessions focusing on small business and vendor protections, with emphasis on pedestrian access",
+      "quote": "This isn't just about compliance—it's about protection for abuelas crossing to the panadería and proof we're putting Fruitvale residents to work first.",
+      "fullStatement": "Following the Bureau's compliance review sign-off, we're moving forward with community visioning for the Fruitvale Transit Hub Phase II. The first sessions will focus on small business and vendor protections during construction, with a strong emphasis on maintaining pedestrian access to local staples like the panadería on E. 12th Street. We’ll ensure our pipeline submissions meet local-hire targets and that the pedestrian-path redesign protects the vendors and small businesses that make Fruitvale thrive. The community comes first—this project will be built with and for them.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "visioning",
+        "MilestoneNotes": "C104: Launched community visioning sessions focused on small business and vendor protections",
+        "NextScheduledAction": "Conduct first visioning session by January 15",
+        "NextActionCycle": 105
+      }
+    }
+  ]
+}

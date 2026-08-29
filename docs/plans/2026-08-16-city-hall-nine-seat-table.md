@@ -1,7 +1,7 @@
 ---
 title: City-hall nine-seat table Plan
 created: 2026-08-16
-updated: 2026-08-16
+updated: 2026-08-29
 type: plan
 tags: [civic, architecture, active]
 sources:
@@ -305,7 +305,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
   1. After a new cycle fire (not C103 un-close): `--stage=chain` **without** `--apply`.
   2. Show rb/Mike: 9 hearing files, gavel file, ledger JSON, assemble dry-run.
 - **Verify:** acceptance criteria 1–4. No sheet write.
-- **Status:** [ ] blocked on Tasks 1–8 + a new engine cycle
+- **Status:** [x] 2026-08-29 (grok) — attended dry C104. Nine district JSONs + mayor_open + mayor_gavel on disk; no faction-agent JSON; Vega/Tran separate speakers; tracker dry-run WOULD WRITE 6 rows, applied=false. Clerk pass. Gate BLOCKED on council_d3 `0.42 sentiment` (metric-decimal). Votes array empty (no completed tally this cycle; INIT-006 gavelled vote-scheduled). Crontab still carries `--apply` (civic.15 flip) — Sunday 14:30 will re-enter because close.applied is false.
 - **Lane:** attended (grok or es)
 
 ### Task 10: Sheet tab (gated)
@@ -332,6 +332,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
 
 ## Changelog
 
+- 2026-08-29 (grok) — Task 9 dry Sunday on C104. Prep now always writes all 9 district packets (C104 unattended prep had skipped D4/D6/D9). Agenda/hearing `outputContract` no longer offers ImplementationPhase. `pilot_active` underscore aliases rewrite to `pilot-active`. Attended mayor-open/gavel used `--mayor-model mistralai/mistral-medium-3.1` because `mistralai/mistral-large` returned provider errors. Map model unchanged. No `--apply`. Log: `logs/civic-t9-c104.log`.
 - 2026-08-16 (research-build) — Tasks 2/3 landed `7cecaa94` (CLAUDE_CTL). Reviewed D1/D6/D7 in full before landing — fact/voice split clean, no caucus-microphone leakage, Crane's status handled without overasserting. Tasks 1-8 now all done; only Task 9 (dry Sunday, needs a new cycle) remains.
 - 2026-08-16 (grok) — Tasks 2/3 drafted on disk under `.claude/agents/civic-office-council-seat/` and `civic-office-council-d{1-9}/`. Not committed. `readPersonaDir` now loads shared LENS+RULES then seat IDENTITY.
 - 2026-08-16 (grok) — Tasks 1, 4, 5, 6, 7, 8 landed. Tasks 2/3 still Claude. Task 9 waits on a new cycle + IDENTITY files. No `--apply`.

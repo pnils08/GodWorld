@@ -59,10 +59,15 @@ async function submit() {
   const label = arg('--label', path.basename(packet, path.extname(packet)));
   const text = fs.readFileSync(packet, 'utf8');
   // Key order matters: endpoint, model, then requests.
+  // Reasoning is on by default for Claude on OpenRouter and shares max_tokens with the
+  // answer: the first T3 run spent 31,999 of 32,000 tokens thinking and returned
+  // content:null. Default it off for these one-shot document jobs; --reasoning re-enables.
+  const reqBody = { messages: [{ role: 'user', content: text }], max_tokens: maxTokens };
+  if (!process.argv.includes('--reasoning')) reqBody.reasoning = { enabled: false };
   const body = {
     endpoint: '/v1/chat/completions',
     model,
-    requests: [{ custom_id: label, body: { messages: [{ role: 'user', content: text }], max_tokens: maxTokens } }],
+    requests: [{ custom_id: label, body: reqBody }],
   };
   const res = await request('POST', '/api/beta/batches', body);
   const rec = { id: res.id, label, model, packet: path.relative(ROOT, packet), bytes: text.length, created: new Date().toISOString(), status: res.status };
@@ -86,10 +91,16 @@ async function fetchResult() {
   const r = (res.results || [])[0];
   if (!r) { console.error('no results'); process.exit(1); }
   if (r.error) { console.error('result error: ' + JSON.stringify(r.error)); process.exit(1); }
-  const text = r.response?.choices?.[0]?.message?.content ?? JSON.stringify(r.response);
+  const msg = r.response?.body?.choices?.[0]?.message ?? r.response?.choices?.[0]?.message;
+  const usage = r.response?.body?.usage ?? r.response?.usage;
+  if (msg && msg.content == null) {
+    console.error(`content is null — finish_reason=${r.response?.body?.choices?.[0]?.finish_reason} usage=${JSON.stringify(usage)}. ` +
+      `Reasoning likely consumed max_tokens; resubmit without --reasoning or with a larger --max-tokens.`);
+    process.exit(1);
+  }
+  const text = msg?.content ?? JSON.stringify(r.response);
   const out = arg('--out', path.join(ROOT, 'output', `or-batch_${id}.md`));
   fs.writeFileSync(out, text);
-  const usage = r.response?.usage;
   console.log(`wrote ${out} (${text.length} chars)` + (usage ? ` usage=${JSON.stringify(usage)}` : ''));
 }
 

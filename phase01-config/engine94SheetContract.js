@@ -29,13 +29,25 @@ var ENGINE94_CONFIG_SEEDS = [
   ['approvalCeilingElectionPenalty', 25, 'engine.94 incumbent-score penalty while Status is scandal', 0, 100, false]
 ];
 
+// engine.133 — city health system physics (docs/plans/2026-08-29-city-health-system.md D6).
+// Same self-arm contract as engine.94 (seeded when missing, validated when
+// present), carried as its own list so the engine.94 fourteen stay exact.
+var ENGINE133_CONFIG_SEEDS = [
+  ['illnessBaseline', 0.035, 'engine.133 city illness rate resting level; the attractor pulls the rate here', 0, 0.15, false],
+  ['illnessAttractorPull', 0.12, 'engine.133 fraction of the (baseline - rate) gap closed per Cycle', 0, 1, false],
+  ['illnessEventStrain', 0.015, 'engine.133 city-rate bump per salient weather event that Cycle (frost/snow at half)', 0, 0.1, false],
+  ['illnessHoodWeightMin', 0.5, 'engine.133 lower clamp on a hood structural illness weight before envelope normalization', 0.1, 1, false],
+  ['illnessHoodWeightMax', 2.0, 'engine.133 upper clamp on a hood structural illness weight before envelope normalization', 1, 5, false]
+];
+
 var ENGINE94_CIVIC_STATE_COLUMNS = [
   'HighApprovalStreak',
   'AutoScandalUntilCycle',
   'AutoScandalSource'
 ];
 
-function inspectEngine94Config_(values) {
+function inspectEngine94Config_(values, seedList) {
+  var seeds = seedList || ENGINE94_CONFIG_SEEDS;
   var header = values[0] || [];
   if (header[0] !== 'Key' || header[1] !== 'Value' || header[2] !== 'Description') {
     throw new Error('engine.94 Sheet contract: World_Config A:C header must be Key, Value, Description');
@@ -54,8 +66,8 @@ function inspectEngine94Config_(values) {
   var additions = [];
   var existing = [];
   var normalized = {};
-  for (var i = 0; i < ENGINE94_CONFIG_SEEDS.length; i++) {
-    var spec = ENGINE94_CONFIG_SEEDS[i];
+  for (var i = 0; i < seeds.length; i++) {
+    var spec = seeds[i];
     var current = byKey[spec[0]];
     if (!current) {
       additions.push([spec[0], spec[1], spec[2]]);
@@ -184,4 +196,20 @@ function ensureEngine94SheetContract_(ss) {
     configSeeded: configPlan.additions.length,
     civicHeadersAdded: headerPlan.additions.length
   };
+}
+
+// engine.133 — self-arm the city-health physics keys. Runs right after the
+// engine.94 contract at the same call site; same inspect → append → verify shape.
+function ensureEngine133Config_(ss) {
+  if (!ss) throw new Error('engine.133 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.133 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE133_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE133_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.133 config: post-write verification failed');
+  }
+  Logger.log('engine.133 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
 }

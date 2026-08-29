@@ -1,9 +1,15 @@
 /**
  * ============================================================================
- * applyDemographicDrift_ v2.4-W2b
+ * applyDemographicDrift_ v2.5-e133
  * ============================================================================
  *
  * Long-term background demographic drift with GodWorld Calendar integration.
+ *
+ * v2.5-e133 (engine.133): illness baseline attractor (illnessBaseline /
+ * illnessAttractorPull) applied before the day's pushes, and salient weather
+ * events (storm/flood/heat; frost/snow at half) add illnessEventStrain — the
+ * waves are the weather engine's, illness reacts. Plan:
+ * docs/plans/2026-08-29-city-health-system.md D1/D2.
  *
  * v2.4-W2b (engine.102): illness/employment physics literals read from
  * World_Config via ctx.config (keys per output/kimi/engine102/world-config-keys.md,
@@ -125,8 +131,43 @@ function applyDemographicDrift_(ctx) {
 
   var prevIll = ill;
 
+  // engine.133 D2 — the baseline attractor. Employment has had one since
+  // v2.x (employmentAttractor below); illness never did, so the base term's
+  // mean pull (-0.00004/cycle) lost to every +0.0002 nudge and the rate only
+  // ever climbed: 0.05 default -> 0.1023 live at C104 -> 0.15 cap on a long
+  // enough bench. Now the rate is pulled home FIRST, then today's weather and
+  // calendar push on top — the nudges below are bumps that decay, not a
+  // ratchet, and the equilibrium sits at baseline + (average push / pull):
+  // winter a little higher, honestly. The descent from 10% is story, on
+  // purpose: pull 0.12 takes ~15 cycles to reach 4.5%.
+  var illnessBaseline = cfgNum_(ctx, cfg, 'illnessBaseline', 0.035);
+  var illnessAttractorPull = cfgNum_(ctx, cfg, 'illnessAttractorPull', 0.12);
+  ill += (illnessBaseline - ill) * illnessAttractorPull;
+
   // Base downward drift
   ill += (rng() - 0.6) * illnessCalmStep;
+
+  // engine.133 D1 — the waves are the seasonal events the weather engine
+  // already fires (applyWeatherModel_: storm / flood_conditions / heat_wave
+  // carry salient:true + hoods; first_frost / first_snow are city-wide
+  // season firsts). Illness REACTS to them: a salient event is a real bump
+  // (illnessEventStrain, order of a percentage point) that the attractor
+  // above pulls back over the following cycles — the decay tail is the wave.
+  // No roll of its own, no wave state: the weather engine owns what fires
+  // and where (builder direction 2026-08-29, engine.133 plan D1).
+  var illnessEventStrain = cfgNum_(ctx, cfg, 'illnessEventStrain', 0.015);
+  var wxEvts133 = S.weatherEvents || [];
+  var eventStrainApplied = 0;
+  for (var we133 = 0; we133 < wxEvts133.length; we133++) {
+    var ev133 = wxEvts133[we133];
+    if (!ev133) continue;
+    if (ev133.salient) eventStrainApplied += illnessEventStrain;
+    else if (ev133.type === 'first_frost' || ev133.type === 'first_snow') eventStrainApplied += illnessEventStrain * 0.5;
+  }
+  if (eventStrainApplied > 0) {
+    ill += eventStrainApplied;
+    changes.push('weather-strain');
+  }
 
   // Winter → slightly more upward pressure
   if (season === "Winter") ill += illnessStepUp * 1.5;
@@ -364,6 +405,8 @@ function applyDemographicDrift_(ctx) {
     // W2b: surface tunables so downstream phases can use them without re-reading.
     illnessSupportThreshold: illnessSupportThreshold,
     illnessSupportCycles: illnessSupportCycles,
+    illnessBaseline: illnessBaseline,
+    illnessEventStrain: round4(eventStrainApplied),
     hospitalConfig: {
       baseCapacity: hospitalBaseCapacity,
       loadPerSick: hospitalLoadPerSick,

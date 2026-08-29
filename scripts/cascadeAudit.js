@@ -371,17 +371,45 @@ async function computeCascadeAudit() {
       note: 'Missing data'
     });
   } else {
-    const diff = Math.abs(hoodSickRate - wpIllRate);
-    const pass = diff <= 0.02;
+    // engine.133: the city rate is an ENVELOPE — the hood aggregate sits on it
+    // (or under it, when a health initiative is delivering), never above it
+    // once converged. Convergence is 25%/cycle of the gap (engine.132), so a
+    // ~5-cycle lag after a city-rate move is expected, hence the 2pp band.
+    const diff = hoodSickRate - wpIllRate;
+    const pass = diff <= 0.02 && diff >= -0.03;
     report.invariants.push({
       id: 'sick-rate-band',
-      label: 'Hood Sick/pop within ±2pp of WP illnessRate (≥25-cycle convergence)',
+      label: 'Hood Σ Sick / Σ pop inside the WP illnessRate envelope (−3pp relief … +2pp lag)',
       result: pass ? 'PASS' : 'FAIL',
       wpRate: wpIllRate,
       hoodRate: hoodSickRate,
       diffPp: diff,
-      note: pass ? 'within ±2pp (≥25-cycle convergence window applies)' : `gap ${(diff * 100).toFixed(2)}pp`
+      note: pass ? 'inside the envelope (≤5-cycle convergence lag applies)' : `aggregate ${diff > 0 ? 'above' : 'below'} envelope by ${(Math.abs(diff) * 100).toFixed(2)}pp`
     });
+  }
+
+  // 2b. Sick-rate spread (engine.133) — the envelope is filled UNEVENLY from
+  // each hood's own canon (age mix × density × income); a flat copy is the
+  // pre-engine.133 shape and fails here. Max/min hood rate ≥ 1.3 on the live
+  // C104 fixture the weights were calibrated on (2.08 at convergence).
+  {
+    const hoodRates = nd.hoods
+      .filter(h => h.totalPeople > 0 && Number.isFinite(h.Sick))
+      .map(h => h.Sick / h.totalPeople)
+      .filter(v => v > 0);
+    if (hoodRates.length < 5) {
+      report.invariants.push({ id: 'sick-rate-spread', label: 'Hood Sick rates uneven (max/min ≥ 1.3)', result: 'SKIP', note: 'fewer than 5 hoods with Sick > 0' });
+    } else {
+      const ratio = Math.max(...hoodRates) / Math.min(...hoodRates);
+      const pass = ratio >= 1.3;
+      report.invariants.push({
+        id: 'sick-rate-spread',
+        label: 'Hood Sick rates uneven (max/min ≥ 1.3) — envelope filled from hood canon, not copied',
+        result: pass ? 'PASS' : 'FAIL',
+        ratio,
+        note: pass ? `max/min ${ratio.toFixed(2)}` : `flat: max/min ${ratio.toFixed(2)} — pre-engine.133 residue or <5 cycles since deploy`
+      });
+    }
   }
 
   // 3. Unemployment band

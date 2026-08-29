@@ -259,6 +259,7 @@ function makeSS(sheets) {
         hospitalBaseCapacity: 100,
         hospitalLoadPerSick: 1,
         hospitalTalkbackGain: 0.001,
+        illnessAttractorPull: 0, // engine.133: zero the baseline attractor so W4 talk-back is measured alone
       },
       rng: function() { return 0.6; }, // neutralizes base illness drift
     };

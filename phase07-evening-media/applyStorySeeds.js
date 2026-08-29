@@ -1388,16 +1388,62 @@ function applyStorySeeds_(ctx) {
   // HEALTH SIGNALS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (population.illnessRate > 0.08) {
-    seeds.push(makeSeed(
-      "Elevated illness indicators raising health concerns. Clinics watching closely.",
-      'HEALTH', 'Temescal', 3, 'health'
-    ));
-  } else if (population.illnessRate > 0.06) {
-    seeds.push(makeSeed(
-      "Illness rate ticking up. Early monitoring underway.",
-      'HEALTH', 'Temescal', 2, 'health'
-    ));
+  // engine.133 D4 — the seed keys off the HOODS that crossed, and carries the
+  // citizens who lived it. The prior form read the city-wide rate and named
+  // 'Temescal' for any value over 8% — invented specificity, the class
+  // engine.71 killed in crisis buckets, and with the city rate stuck above
+  // 10% for ~70 cycles it fired every cycle. Thresholds stay absolute (the
+  // same 0.06 watch bar as before; the crossing bar is illnessSupportThreshold,
+  // the bar checkHealthEvent_ uses to floor the citizen dose). Faces come from
+  // this cycle's [Health] milestones in those hoods (Phase5-Generational runs
+  // before Phase7 at both entry points). No hood over the watch bar → no seed.
+  var ndHealth133 = S.neighborhoodDemographics || {};
+  var crossBar133 = Number(S.demographicDrift && S.demographicDrift.illnessSupportThreshold);
+  if (isNaN(crossBar133) || crossBar133 <= 0) crossBar133 = 0.08;
+  var watchBar133 = 0.06;
+  var hotHoods133 = [];
+  for (var hh133 in ndHealth133) {
+    if (!ndHealth133.hasOwnProperty(hh133)) continue;
+    var dh133 = ndHealth133[hh133];
+    var ph133 = (Number(dh133.students) || 0) + (Number(dh133.adults) || 0) + (Number(dh133.seniors) || 0);
+    if (ph133 <= 0) continue;
+    var rh133 = (Number(dh133.sick) || 0) / ph133;
+    if (rh133 >= watchBar133) hotHoods133.push({ hood: hh133, rate: rh133, crossed: rh133 >= crossBar133 });
+  }
+  if (hotHoods133.length > 0) {
+    hotHoods133.sort(function(a, b) { return b.rate - a.rate; });
+    var crossed133 = hotHoods133.filter(function(h) { return h.crossed; });
+    var seedHoods133 = crossed133.length ? crossed133 : hotHoods133;
+    var hoodSet133 = {};
+    for (var sh133 = 0; sh133 < seedHoods133.length; sh133++) hoodSet133[seedHoods133[sh133].hood] = true;
+    var faces133 = [];
+    var gEvts133 = S.generationalEvents || [];
+    for (var ge133 = 0; ge133 < gEvts133.length && faces133.length < 4; ge133++) {
+      var gev = gEvts133[ge133];
+      if (!gev || gev.tag !== 'Health' || !gev.neighborhood || !hoodSet133[gev.neighborhood]) continue;
+      faces133.push({
+        popId: gev.popId,
+        name: gev.citizen || gev.popId,
+        archetype: 'Patient',
+        neighborhood: gev.neighborhood,
+        occupation: '',
+        tone: 'plain',
+        score: 3
+      });
+    }
+    var lead133 = seedHoods133[0];
+    var hoodList133 = seedHoods133.slice(0, 3).map(function(h) { return h.hood; }).join(', ');
+    var pct133 = (lead133.rate * 100).toFixed(1) + '%';
+    var faceNames133 = faces133.map(function(f) { return f.name; }).join(', ');
+    var text133;
+    if (crossed133.length) {
+      text133 = hoodList133 + ' past the illness threshold (' + pct133 + ' sick in ' + lead133.hood + ').' +
+        (faceNames133 ? ' Among those sick this cycle: ' + faceNames133 + '.' : ' Clinics watching closely.');
+    } else {
+      text133 = 'Illness ticking up in ' + hoodList133 + ' (' + pct133 + ' in ' + lead133.hood + '). Early monitoring underway.' +
+        (faceNames133 ? ' ' + faceNames133 + ' among the cases.' : '');
+    }
+    seeds.push(makeSeed(text133, 'HEALTH', lead133.hood, crossed133.length ? 3 : 2, 'health', faces133));
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

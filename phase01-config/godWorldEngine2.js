@@ -217,6 +217,7 @@ function runWorldCycle() {
     // Sheet mutations. Seed/verify the required rows and headers before cache
     // creation, time advance, ledger initialization, or any other Cycle write.
     ensureEngine94SheetContract_(ss);
+    ensureEngine133Config_(ss);  // engine.133 city-health physics keys, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet

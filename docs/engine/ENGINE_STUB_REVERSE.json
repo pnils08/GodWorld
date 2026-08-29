@@ -2,7 +2,7 @@
   "generated": "2026-08-29",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1171,
+  "functionsMapped": 1173,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1683,6 +1683,7 @@
         "phase03-population/updateNeighborhoodDemographics.js::buildNeighborhoodDemographicModifiers_",
         "phase04-events/generationalEventsEngine.js::checkHealthEvent_",
         "phase06-analysis/prioritizeEvents.js::prioritizeEvents_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/storyHook.js::storyHookEngine_"
       ]
     },
@@ -2163,8 +2164,9 @@
       "readers": [
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/applyWeatherModel.js::hasWeatherCondition_",
+        "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
-        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase04-events/chaosCarsEngine.js::runChaosCarsEngine_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase07-evening-media/storyHook.js::storyHookEngine_"
@@ -2265,6 +2267,8 @@
       "readers": [
         "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
+        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
@@ -2310,6 +2314,7 @@
         "phase04-events/generationalEventsEngine.js::checkHealthEvent_",
         "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_"
       ]
@@ -2513,7 +2518,7 @@
         "phase07-evening-media/applyStorySeeds.js::generateAngle_"
       ],
       "readers": [
-        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
@@ -2564,6 +2569,14 @@
       ]
     },
     "demographicShiftsCount": {
+      "writers": [
+        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
+      ],
+      "readers": [
+        "phase03-population/updateNeighborhoodDemographics.js::buildNeighborhoodDemographicModifiers_"
+      ]
+    },
+    "neighborhoodIllnessWeights": {
       "writers": [
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
       ],
@@ -2714,6 +2727,7 @@
         "phase04-events/generationalEventsEngine.js::generateGenerationalSummary_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/generationalWealthEngine.js::processInheritance_",
+        "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
@@ -4174,6 +4188,7 @@
     "World_Config": {
       "writers": [],
       "readers": [
+        "phase01-config/engine94SheetContract.js::ensureEngine133Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase05-citizens/civicInitiativeEngine.js::manualRunVote",
         "phase05-citizens/processAdvancementIntake.js::getCurrentCycleFromConfig_",

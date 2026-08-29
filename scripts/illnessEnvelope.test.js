@@ -143,7 +143,7 @@ const WINTER = Object.assign({}, QUIET, { season: 'Winter', weather: { type: 'fo
     ill = next; trace.push(ill);
   }
   assert('A1 descent is monotone under a quiet sky', monotone, trace.map(r4).join(','));
-  assert('A1 no single step exceeds pull x gap (no snap)', maxStep <= (0.1023 - CONFIG.illnessBaseline) * CONFIG.illnessAttractorPull + 1e-6, 'maxStep=' + r4(maxStep));
+  assert('A1 no single step exceeds pull x gap (no snap)', maxStep <= (0.1023 - CONFIG.illnessBaseline) * CONFIG.illnessAttractorPull + 0.0001 /* round4 */, 'maxStep=' + r4(maxStep));
   assert('A1 not a snap: still above 6% after 5 cycles', trace[5] > 0.06, 'c5=' + r4(trace[5]));
   assert('A1 arrives: within 1pp of baseline by cycle 25', Math.abs(trace[25] - CONFIG.illnessBaseline) <= 0.01, 'c25=' + r4(trace[25]));
 }

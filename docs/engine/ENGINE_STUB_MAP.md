@@ -40,7 +40,7 @@
   Reads: S.canonHoods
 
 ### engine94SheetContract.js
-- **inspectEngine94Config_(values)**
+- **inspectEngine94Config_(values, seedList)**
 
 - **inspectEngine94CivicHeader_(header)**
 
@@ -48,6 +48,9 @@
 
 - **ensureEngine94SheetContract_(ss)**
   Sheets: Civic_Office_Ledger, World_Config
+
+- **ensureEngine133Config_(ss)**
+  Sheets: World_Config
 
 ### godWorldEngine2.js
 - **logEngineError_(ctx, phase, error)**
@@ -407,7 +410,7 @@
 
 ### applyDemographicDrift.js
 - **applyDemographicDrift_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherEvents, S.weatherMood, S.worldEvents
   Writes: S.demographicDrift, S.hospitalTalkback, S.migrationClamps, S.sportsAtmosphereEnabled
   Sheets: Hospital_Ledger, World_Population
   RNG: ctx.rng / safeRand_(ctx)
@@ -494,13 +497,16 @@
 
 ### updateNeighborhoodDemographics.js
 - **updateNeighborhoodDemographics_(ctx)**
-  Reads: S.crimeMetrics, S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.sportsAtmosphereEnabled, S.sportsSeason, S.weatherEvents
-  Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.sportsAtmosphereEnabled
+  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.sportsAtmosphereEnabled, S.sportsSeason
+  Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodIllnessWeights, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate, ctx.config.illnessFallbackRate
   RNG: ctx.rng / safeRand_(ctx)
 
+- **buildHoodIllnessWeights_(ctx, S, demographics)**
+  Reads: S.crimeMetrics, S.neighborhoodState, S.weatherEvents
+
 - **buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreationDay, sportsSeason)**
-  Reads: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics
+  Reads: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodIllnessWeights
 
 ## Phase 4: Events (`phase04-events/`)
 
@@ -1900,7 +1906,7 @@
 
 ### applyStorySeeds.js
 - **applyStorySeeds_(ctx)**
-  Reads: S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.storySeeds, S.storySeedsUI, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
+  Reads: S.chaosCarsEvents, S.cityDynamics, S.cityEvents, S.civicLoad, S.crimeMetrics, S.cycleId, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.domainPresence, S.editionCoverageTriggers, S.eveningMedia, S.eventArcs, S.famousPeople, S.generationalEvents, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.manualStoryInputs, S.migrationDrift, S.namedSpotlights, S.neighborhoodDemographics, S.patternFlag, S.season, S.seasonalStorySeeds, S.shockFlag, S.sportsSeason, S.storySeeds, S.storySeedsUI, S.textureTriggers, S.tier1ChaosEvents, S.weather, S.worldEvents, S.worldPopulation
   Writes: S.activeStorylineCount, S.storySeeds
   Config: ctx.config.cycleCount, ctx.config.manualStoryInputs
   Sheets: Edition_Coverage_Ratings, Storyline_Tracker
@@ -3507,4 +3513,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1171
+**Functions mapped:** 1173

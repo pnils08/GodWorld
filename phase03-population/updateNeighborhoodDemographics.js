@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * updateNeighborhoodDemographics_ v1.2-W2a
+ * updateNeighborhoodDemographics_ v1.3-e133
  * ============================================================================
  *
  * Tier 3.2 Implementation: Phase 3 (Population) demographics integration.
+ *
+ * v1.3-e133 (engine.133): hood Sick is a population-normalized ENVELOPE of the
+ * city rate — structural weight (age mix × NoiseIndex × MedianIncome, the hood's
+ * own canon) × same-cycle causes, Σ hood sick = cityRate × Σ pop; relief after
+ * normalization; storm joins heat/flood. Plan docs/plans/2026-08-29-city-health-system.md D3.
  *
  * v1.2-W2a (engine.102): migration divisor is the live ND hood count with
  * Σ inflowMod normalization — Σ hood migration deltas ≈ city migration.
@@ -118,6 +123,13 @@ function updateNeighborhoodDemographics_(ctx) {
   Logger.log('updateNeighborhoodDemographics_: liveHoodCount=' + liveHoodCount +
              ' inflowModSum=' + inflowModSum + ' | Cycle ' + cycle);
 
+  // engine.133 D3 — the city rate is an ENVELOPE the hoods fill unevenly, not
+  // a constant copied 22 times. Pre-pass: every hood's illness weight (its own
+  // canon data × this cycle's real causes), then the population-weighted mean
+  // so Σ hood expectedSick = cityRate × Σ pop exactly (modulo rounding) — the
+  // same normalization W2a gave migration above. Plan D3.
+  var illnessWeights = buildHoodIllnessWeights_(ctx, S, demographics);
+
   // Apply changes to each neighborhood
   for (var neighborhood in demographics) {
     if (!demographics.hasOwnProperty(neighborhood)) continue;
@@ -159,55 +171,25 @@ function updateNeighborhoodDemographics_(ctx) {
     // ─────────────────────────────────────────────────────────────────────────
     // ILLNESS EFFECTS
     // ─────────────────────────────────────────────────────────────────────────
-    // engine.71 CR-1 (S327): the citywide rate is the honest BACKGROUND (a
-    // downscaled world stat), but pre-CR-1 it was smeared uniformly — Sick sat
-    // at 94-96 in every hood, so the sheet could never say WHICH hood was
-    // sick (the Row 28 flat-writer defect). Per-hood modulation now comes
-    // from REAL same-cycle causes only (doctrine rule 2 — causes, then
-    // numbers; no invented variance): engine.70 salient weather events (a
-    // heat wave or flood makes its hoods sicker that cycle) + chronic QoL
-    // (Phase3-Crime runs before this at both entry points). Clamped [0.75,
-    // 1.5] — a physics bound on modulation, not a cap on events.
-    var hoodIllnessMod = 1.0;
-    var wEvts71 = S.weatherEvents || [];
-    for (var we71 = 0; we71 < wEvts71.length; we71++) {
-      var ev71 = wEvts71[we71];
-      if (!ev71.salient || !ev71.hoods) continue;
-      if (ev71.hoods.indexOf(neighborhood) < 0) continue;
-      if (ev71.type === 'heat_wave') hoodIllnessMod += 0.25;
-      else if (ev71.type === 'flood_conditions') hoodIllnessMod += 0.15;
-    }
-    var nbQoL71 = S.crimeMetrics && S.crimeMetrics.neighborhoodBreakdown &&
-      S.crimeMetrics.neighborhoodBreakdown[neighborhood];
-    if (nbQoL71 && nbQoL71.qualityOfLifeIndex !== undefined) {
-      var qol71 = Number(nbQoL71.qualityOfLifeIndex);
-      if (qol71 > 1) qol71 = qol71 / 100; // metrics layer is 5-95 scale
-      if (qol71 <= 0.35) hoodIllnessMod += 0.10;
-      else if (qol71 >= 0.65) hoodIllnessMod -= 0.10;
-    }
-    // engine.132 — a delivering health initiative is a real same-cycle cause,
-    // and belongs here with the heat wave and the flood.
-    //
-    // This is the wire the initiative ledger was built for and never had. The
-    // ledger exists so a broken number can be answered by an IN-WORLD event
-    // rather than a commit (Mike-direct 2026-08-27): the sim is living, so
-    // sickness cannot be a crisis one cycle and fine the next because someone
-    // edited a constant. The Temescal Community Health Center IS the answer to
-    // the Temescal health crisis — and for ~70 cycles it could not touch
-    // sickness, because nothing connected it to this number.
-    //
-    // Relief is negative modulation, scaled by how fully the initiative is
-    // delivering (Phase 2 publishes intensity only for phases that actually
-    // treat people). It sits inside the same [0.75, 1.5] physics bound as every
-    // other cause — a clinic bends the curve, it does not repeal illness.
+    // engine.71 CR-1 (S327) made the per-hood number come from REAL same-cycle
+    // causes (heat wave, flood, chronic QoL) instead of a flat smear. engine.132
+    // wired a delivering health initiative in as relief. engine.133 D3 finishes
+    // the shape: the hood's share of the city rate is its structural weight
+    // (age mix, density, income — its own canon data) × those same-cycle
+    // causes, normalized across the loaded hood set so the hoods SUM to the
+    // city envelope and never copy it. Relief applies AFTER normalization — a
+    // clinic pulls its hood under its share and the aggregate sits under the
+    // envelope; it does not push its patients onto the next hood over.
+    var wRec = illnessWeights.byHood[neighborhood] || { weight: 1, structural: 1, event: 1 };
+    var envelopeShare = wRec.weight / illnessWeights.mean;
+    var expectedSick = totalPop * illnessRate * envelopeShare;
+
     var healthRelief71 = S.initiativeHealthRelief && S.initiativeHealthRelief[neighborhood];
     if (healthRelief71) {
-      hoodIllnessMod -= cfgNum_(ctx, ctx.config, 'illnessInitiativeRelief', 0.25) * healthRelief71;
+      var reliefCoef133 = cfgNum_(ctx, ctx.config, 'illnessInitiativeRelief', 0.25) * healthRelief71;
+      expectedSick = expectedSick * Math.max(0, 1 - reliefCoef133);
     }
-
-    hoodIllnessMod = Math.max(0.75, Math.min(1.5, hoodIllnessMod));
-
-    var expectedSick = Math.round(totalPop * illnessRate * hoodIllnessMod);
+    expectedSick = Math.round(expectedSick);
     var sickDelta = expectedSick - demo.sick;
 
     // engine.132 — converge on a STORY timescale, not a geological one.
@@ -290,6 +272,7 @@ function updateNeighborhoodDemographics_(ctx) {
   // SUMMARY OUTPUT
   // ═══════════════════════════════════════════════════════════════════════════
   S.neighborhoodDemographics = demographics;
+  S.neighborhoodIllnessWeights = illnessWeights.byHood;   // engine.133 — audit + story consumers
   S.demographicShifts = demographicShifts;
   S.demographicShiftsCount = demographicShifts.length;
 
@@ -306,7 +289,95 @@ function updateNeighborhoodDemographics_(ctx) {
   }
 
   ctx.summary = S;
-  Logger.log('updateNeighborhoodDemographics_ v1.2-W2a: Updated ' + Object.keys(demographics).length + ' neighborhoods | Cycle ' + cycle);
+  Logger.log('updateNeighborhoodDemographics_ v1.3-e133: Updated ' + Object.keys(demographics).length + ' neighborhoods | Cycle ' + cycle);
+}
+
+
+/**
+ * engine.133 D3 — per-hood illness weights for the city envelope.
+ *
+ * structural (the hood's own canon, full-coverage layers only — verified 22/22
+ * populated on live C104; HousingPressure is 8/22 and Business_Ledger is the
+ * tracked subset, both excluded on purpose):
+ *   age      seniors share vs the city's seniors share   (Neighborhood_Demographics)
+ *   density  NoiseIndex vs the pop-weighted city mean     (Neighborhood_Map via S.neighborhoodState)
+ *   income   pop-weighted city mean / MedianIncome        (Neighborhood_Map via S.neighborhoodState)
+ * each a bounded factor around 1.0; product clamped [illnessHoodWeightMin, Max].
+ *
+ * event (this cycle's real causes, engine.71 CR-1 lineage): engine.70 salient
+ * weather touching the hood — heat wave +0.25, storm/flood +0.15 — and chronic
+ * QoL ±0.10 (Phase3-Crime runs before this at both entry points).
+ *
+ * Returns { byHood: { hood: { weight, structural, event } }, mean } where mean is
+ * Σ(weight × pop) / Σ pop over the LOADED hood set (W2a rule — the loaded
+ * demographics object is the canonical hood set, never a hand list).
+ */
+function buildHoodIllnessWeights_(ctx, S, demographics) {
+  var wMin = cfgNum_(ctx, ctx.config, 'illnessHoodWeightMin', 0.5);
+  var wMax = cfgNum_(ctx, ctx.config, 'illnessHoodWeightMax', 2.0);
+  var nState = S.neighborhoodState || {};
+  var clamp = function(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+
+  // City means, population-weighted, over the loaded set.
+  var totalPop = 0, totalSeniors = 0, noiseWeighted = 0, incomeWeighted = 0, noisePop = 0, incomePop = 0;
+  var hood;
+  for (hood in demographics) {
+    if (!demographics.hasOwnProperty(hood)) continue;
+    var d = demographics[hood];
+    var pop = (Number(d.students) || 0) + (Number(d.adults) || 0) + (Number(d.seniors) || 0);
+    if (pop <= 0) continue;
+    totalPop += pop;
+    totalSeniors += Number(d.seniors) || 0;
+    var ns = nState[hood] || {};
+    if (ns.noiseIndex !== null && ns.noiseIndex !== undefined && isFinite(Number(ns.noiseIndex))) { noiseWeighted += Number(ns.noiseIndex) * pop; noisePop += pop; }
+    if (ns.medianIncome && isFinite(Number(ns.medianIncome)) && Number(ns.medianIncome) > 0) { incomeWeighted += Number(ns.medianIncome) * pop; incomePop += pop; }
+  }
+  var citySeniorShare = totalPop > 0 ? totalSeniors / totalPop : 0;
+  var cityNoise = noisePop > 0 ? noiseWeighted / noisePop : null;
+  var cityIncome = incomePop > 0 ? incomeWeighted / incomePop : null;
+
+  var byHood = {};
+  var weightedSum = 0, popSum = 0;
+  var wEvts = S.weatherEvents || [];
+  var qolMap = S.crimeMetrics && S.crimeMetrics.neighborhoodBreakdown;
+  for (hood in demographics) {
+    if (!demographics.hasOwnProperty(hood)) continue;
+    var dd = demographics[hood];
+    var hoodPop = (Number(dd.students) || 0) + (Number(dd.adults) || 0) + (Number(dd.seniors) || 0);
+    var st = nState[hood] || {};
+
+    // structural — a missing layer is neutral (1.0), never a guess
+    var ageF = 1, densF = 1, incF = 1;
+    if (hoodPop > 0 && citySeniorShare > 0) ageF = clamp(((Number(dd.seniors) || 0) / hoodPop) / citySeniorShare, 0.6, 1.6);
+    if (cityNoise && st.noiseIndex !== null && st.noiseIndex !== undefined && isFinite(Number(st.noiseIndex))) densF = clamp(1 + 0.35 * (Number(st.noiseIndex) / cityNoise - 1), 0.6, 1.6);
+    if (cityIncome && st.medianIncome && Number(st.medianIncome) > 0) incF = clamp(1 + 0.35 * (cityIncome / Number(st.medianIncome) - 1), 0.6, 1.6);
+    var structural = clamp(ageF * densF * incF, wMin, wMax);
+
+    // event — the engine.71 causes, storm joining heat/flood (engine.133 D1)
+    var event = 1.0;
+    for (var w = 0; w < wEvts.length; w++) {
+      var ev = wEvts[w];
+      if (!ev || !ev.salient || !ev.hoods) continue;
+      if (ev.hoods.indexOf(hood) < 0) continue;
+      if (ev.type === 'heat_wave') event += 0.25;
+      else if (ev.type === 'flood_conditions' || ev.type === 'storm') event += 0.15;
+    }
+    var nbQoL = qolMap && qolMap[hood];
+    if (nbQoL && nbQoL.qualityOfLifeIndex !== undefined) {
+      var qol = Number(nbQoL.qualityOfLifeIndex);
+      if (qol > 1) qol = qol / 100; // metrics layer is 5-95 scale
+      if (qol <= 0.35) event += 0.10;
+      else if (qol >= 0.65) event -= 0.10;
+    }
+    event = clamp(event, 0.75, 1.5);
+
+    var weight = structural * event;
+    byHood[hood] = { weight: weight, structural: structural, event: event };
+    if (hoodPop > 0) { weightedSum += weight * hoodPop; popSum += hoodPop; }
+  }
+  var mean = popSum > 0 ? weightedSum / popSum : 1;
+  if (!(mean > 0)) mean = 1;
+  return { byHood: byHood, mean: mean, citySeniorShare: citySeniorShare, cityNoise: cityNoise, cityIncome: cityIncome };
 }
 
 
@@ -442,6 +513,7 @@ function buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreati
  *
  * OUTPUT:
  * - ctx.summary.neighborhoodDemographics: Current demographics map
+ * - ctx.summary.neighborhoodIllnessWeights: { hood: { weight, structural, event } } (engine.133)
  * - ctx.summary.demographicShifts: Array of significant shifts
  * - ctx.summary.demographicShiftsCount: Number of shifts detected
  *

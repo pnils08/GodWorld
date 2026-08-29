@@ -12,7 +12,8 @@
  * S.neighborhoodState[hood] = {
  *   sentiment, crimeIndex, retailVitality, eventAttractiveness,   // fast cols (citizen-movable)
  *   trajectory, trajectoryMomentum, housingPressure, medianRent,  // slow cols (engine-owned, S315 trajectory block)
- *   migrationFlow
+ *   migrationFlow,
+ *   noiseIndex, medianIncome                                      // engine.133 structural layers
  * }
  *
  * Read-only — no sheet writes, no intents. ES5-safe.
@@ -44,6 +45,10 @@ function loadNeighborhoodState_(ctx) {
   var iPress = idx('HousingPressure');
   var iRent = idx('MedianRent');
   var iFlow = idx('MigrationFlow');
+  // engine.133 D3 — the two full-coverage structural layers the hood illness
+  // envelope weights from (22/22 populated live at C104): density proxy + income.
+  var iNoise = idx('NoiseIndex');
+  var iIncome = idx('MedianIncome');
 
   if (iHood < 0) return;
 
@@ -80,7 +85,9 @@ function loadNeighborhoodState_(ctx) {
       trajectoryMomentum: num(row, iMom),
       housingPressure: num(row, iPress),
       medianRent: num(row, iRent),
-      migrationFlow: num(row, iFlow)
+      migrationFlow: num(row, iFlow),
+      noiseIndex: num(row, iNoise),      // engine.133
+      medianIncome: num(row, iIncome)    // engine.133
     };
     loaded++;
   }

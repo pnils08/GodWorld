@@ -67,6 +67,13 @@ Current direction is locked top-down per engine.102: dials are autonomous (World
 ## Applications (living)
 
 - 2026-08-27 — Filed as engine.104 revision input; Claude review pending (builder-direct).
+- 2026-08-29 — **engine.132 bench-proven** (0827 C108–C110): a delivering health initiative now relieves hood illness, and Sick converges 25%/cycle toward the engine's target instead of ±3. Bench finding to carry into the next pass: the target is `totalPop × illnessRate × hoodMod`, and `illnessRate` is one city-wide number — every hood converged to the same ~8% of its population (Temescal 7.0% only because the health center was delivering). That is exactly the flat-rate shape the direction below rejects. Numbers: [[../reference/DEPLOY]] §SANDBOX 0827.
+- 2026-08-29 — **City health system — builder direction, next session's work (the why, protected).**
+  - *What determines a health wave* is an open design choice to settle first: a coded roll of chance; a weighted dice plus chance; or a new chaos-car-class actor (a "storm chaser" equivalent for illness) that spins events off weighted data.
+  - *The ticker sits low and real.* The city-level health rate is set to a normal real-world-equivalent baseline (order of a few percent), and weighted data spins the events above it — not a constant grind toward a high target.
+  - *City rate is an envelope, not a per-hood constant.* If the city says 4%, the neighborhoods must fall within that 4% in aggregate — and NOT evenly. The distribution across hoods comes from each neighborhood's canon factors and data (density, age mix, housing, transit, the businesses and institutions it actually holds), never a flat rate copied 22 times.
+  - *Citizens are not bound by the envelope.* The tracked citizens do not have to "fit" the 4%. The wire is threshold-based: when a neighborhood's health level crosses a set point, health events fire on citizens IN that neighborhood. Those citizen events are what drive the story — they fill the story seed with the citizens affected, so the crisis has faces (the Temescal Health Crisis pattern, done on purpose).
+  - *Tighten, don't grow:* this revises `updateNeighborhoodDemographics_`'s target math and the event trigger — it is a fix-or-fold inside the existing illness path, not a new engine. Engine.132's relief wire stays as the repair-side of the loop.
 
 ---
 

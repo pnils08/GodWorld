@@ -384,7 +384,7 @@ async function computeCascadeAudit() {
       wpRate: wpIllRate,
       hoodRate: hoodSickRate,
       diffPp: diff,
-      note: pass ? 'inside the envelope (≤5-cycle convergence lag applies)' : `aggregate ${diff > 0 ? 'above' : 'below'} envelope by ${(Math.abs(diff) * 100).toFixed(2)}pp`
+      note: pass ? 'inside the envelope (≤5-cycle convergence lag applies)' : `aggregate ${diff > 0 ? 'above' : 'below'} envelope by ${(Math.abs(diff) * 100).toFixed(2)}pp` + (diff < 0 ? ' — expected for ONE cycle after a city-rate step (engine.133 deploy sim: −3.2pp at C105, inside band from C106)' : '')
     });
   }
 

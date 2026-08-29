@@ -117,6 +117,7 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase01-config/godWorldEngine2.js` | Intake | operator-clear | clearContent paired with `processIntake_` stage-then-clear |
 | `phase01-config/initSimulationLedger.js` | Simulation_Ledger | (read) | single-cycle read into shared `ctx.ledger`; all SL touchers push to `ctx.ledger.rows`, never the sheet |
 | `phase01-config/loadPreviousEvening.js` `mirrorCarryForwardToSheet_` | Carry_Forward_Store | phase10-loc | upserts from `saveEveningSnapshot_` / `savePreviousCycleState_` / `writeChaosNeighborhoodStore_`; lazy-create fallback is schema-setup (tab pre-created on live); Phase-1 loaders read it as fallback |
+| `phase01-config/engine94SheetContract.js` `ensureEngine94SheetContract_` / `ensureEngine133Config_` | World_Config, Civic_Office_Ledger (header) | schema-setup | code-carried self-arm before any Cycle write: appends missing config rows (engine.94 fourteen; engine.133 five) + missing civic header columns, ≤1× per spreadsheet lifetime, verified by re-inspect; validates when present. Row was missing here since engine.94 landed — added engine.133 (2026-08-29) |
 | `phase03-population/applyDemographicDrift.js` | World_Population | own-tab | |
 | `phase03-population/updateNeighborhoodDemographics.js` | Neighborhood_Demographics | own-tab | |
 | `phase03-population/updateCrimeMetrics.js` | Crime_Metrics | own-tab | |

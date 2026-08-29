@@ -128,7 +128,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[engine/archive/CYCLE_SEPARATION]]** — S113 architecture notes on growth ceiling. *(concept, engine, active)*
 - **[[engine/archive/INSTITUTIONAL_VOICE_AGENTS]]** — voice agent architecture: 7 voices, IDENTITY+RULES+SKILL pattern. *(reference, engine, active)*
 - **[[engine/archive/phase19_agent_personas]]** — three administrative agent personas (City Clerk and others). *(reference, engine, active)*
-- **[[engine/SHEETS_MANIFEST]]** — generated manifest of sheet IDs and tabs. *(reference, infrastructure, active)*
+- **[[engine/SHEETS_MANIFEST]]** — manifest of sheet IDs and tabs; §9 is the per-file table of direct-write carve-outs (class + tab for every sheet write outside Phase 10 — relocated here from the engine rules 2026-08-29; a direct write not on it is a bug). *(reference, infrastructure, engine, active)*
 - **[[engine/LEDGER_AUDIT]]** — Simulation_Ledger integrity audit. CLEAN since S68. *(reference, citizens, active)*
 - **[[engine/LEDGER_HEAT_MAP]]** — sheet health, bloat risk, cleanup priorities. *(reference, infrastructure, active)*
 - **[[engine/LEDGER_REPAIR]]** — S94 ledger recovery record. RECOVERY COMPLETE. *(reference, citizens, archived)*

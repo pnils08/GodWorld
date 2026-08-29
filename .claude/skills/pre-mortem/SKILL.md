@@ -86,7 +86,7 @@ Scan `phase01-config/` through `phase09-digest/` for **write-only** calls: `.set
 grep -rnE '\.setValue\(|\.setValues\(|\.appendRow\(' phase0[1-9]*/ --include="*.js"
 ```
 
-**Exception list lives in `.claude/rules/engine.md`.** That file enumerates every file authorized to write directly to sheets (Phase 1 engine core, Phase 2 world state, Phase 3 population, Phase 4 event generators/helpers, Phase 5 Tier-5 engines / SL writers / civic / citizen life / citizen generators, Phase 6 tracking, Phase 7 media intake / tracking / helpers, Phase 8 tracking writers, Phase 9 cycle weight, Phase 11 media intake). Phase 40.3 Path 1 audit (S156, commit `76a408c`) verified every one — zero undocumented writers.
+**Exception list lives in `docs/engine/SHEETS_MANIFEST.md` §9 Direct-write carve-outs.** That table enumerates every file authorized to write directly to sheets, with its class (Phase 1 engine core, Phase 2 world state, Phase 3 population, Phase 4 event generators/helpers, Phase 5 Tier-5 engines / SL writers / civic / citizen life / citizen generators, Phase 6 tracking, Phase 7 media intake / tracking / helpers, Phase 8 tracking writers, Phase 9 cycle weight, Phase 11 media intake). Phase 40.3 Path 1 audit (S156, commit `76a408c`) verified every one — zero undocumented writers.
 
 Diff the grep result against engine.md's exception list. Any file on the grep that isn't on engine.md is WARNING — either a new undocumented writer (bug) or a file that needs to be added to engine.md (doc drift). Run `/tech-debt-audit` if in doubt.
 

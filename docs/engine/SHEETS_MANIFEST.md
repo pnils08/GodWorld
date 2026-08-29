@@ -1,6 +1,6 @@
 # GodWorld Sheets Manifest
 
-**Last Updated:** 2026-07-20
+**Last Updated:** 2026-08-29
 
 This manifest is the registry of all active Google Sheets tabs hooked into the Phase 1–11 engine loop, verified against `ENGINE_COUPLING_MAP.md` and `schemas/SCHEMA_HEADERS.md`.
 
@@ -102,3 +102,72 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 ## Open security action (carried from S156 — do not drop in condensations)
 
 **⚠️ S156 SECURITY FINDING, still owed:** a live `ANTHROPIC_API_KEY` sits in header cells of Mike's personal Drive reference sheets (`GitHub_token`, `z_Copy of GitHub_token`, `z_anthropotic jsn`). Repo copies were redacted and `crawlSheetsArchive.js` scrubs secrets on emission (`redactSecrets_()`), but **the key is LIVE in Drive** — move it to `/root/.config/godworld/.env` and delete the Drive copies, or rotate the key. (Re-added S329: the S328 manifest condensation silently dropped this open action.)
+
+---
+
+## 9. Direct-write carve-outs by file
+
+Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-persistence/` executes them. Every direct write outside Phase 10 must be on this table under a named class. A direct write not listed here is a bug. Line numbers are deliberately omitted — get them from the `engine-wiring` card.
+
+**Classes.** `schema-setup` = insertSheet / header row / setFrozenRows, fires ≤1× per spreadsheet lifetime. `error-path` = must persist even when Phase 10 fails. `operator-clear` = stage-then-clear of an operator intake tab, transactional with its processor. `own-tab` = engine writes its own tracking tab; no later phase reads it via getDataRange before end-of-cycle. `caller-sheet` = column-update helper writing a sheet the caller passes. `phase10-loc` = runs inside Phase 10 alongside the executor. `phase11` = runs after `Phase10-ExecuteIntents`, so a queued intent would drop silently; direct by structural necessity, never a migration target. `operator` = manual UI/API entry, no ctx, zero cycle-path callers; an intent would queue with nothing to commit it. `rmd` = transactional read-modify-delete (deleteRows / full rewrite), which intents cannot express.
+
+| File | Tab(s) | Class | Note |
+|---|---|---|---|
+| `phase01-config/godWorldEngine2.js` | Engine_Errors | schema-setup + error-path | insertSheet + header once; error-row appendRow must survive a Phase-10 failure |
+| `phase01-config/godWorldEngine2.js` | Intake | operator-clear | clearContent paired with `processIntake_` stage-then-clear |
+| `phase01-config/initSimulationLedger.js` | Simulation_Ledger | (read) | single-cycle read into shared `ctx.ledger`; all SL touchers push to `ctx.ledger.rows`, never the sheet |
+| `phase01-config/loadPreviousEvening.js` `mirrorCarryForwardToSheet_` | Carry_Forward_Store | phase10-loc | upserts from `saveEveningSnapshot_` / `savePreviousCycleState_` / `writeChaosNeighborhoodStore_`; lazy-create fallback is schema-setup (tab pre-created on live); Phase-1 loaders read it as fallback |
+| `phase03-population/applyDemographicDrift.js` | World_Population | own-tab | |
+| `phase03-population/updateNeighborhoodDemographics.js` | Neighborhood_Demographics | own-tab | |
+| `phase03-population/updateCrimeMetrics.js` | Crime_Metrics | own-tab | |
+| `phase03-population/generateMonthlyDriftReport.js` | World_Drift_Report | operator | UNWIRED — zero cycle-path callers; Apps Script editor diagnostic only |
+| `phase03-population/updateCityTier.js` | (caller-passed) | caller-sheet | |
+| `phase04-events/generateGenericCitizenMicroEvent.js` | LifeHistory_Log, Simulation_Ledger | own-tab | citizen event rows |
+| `phase04-events/generateGameModeMicroEvents.js` | LifeHistory_Log, Simulation_Ledger | own-tab | citizen event rows |
+| `phase04-events/generationalEventsEngine.js` | LifeHistory_Log, Simulation_Ledger | own-tab | citizen event rows |
+| `phase05-citizens/householdFormationEngine.js` | own tracking tab | own-tab | Tier-5 engine |
+| `phase05-citizens/generationalWealthEngine.js` | own tracking tab | own-tab | Tier-5 engine |
+| `phase05-citizens/educationCareerEngine.js` | own tracking tab | own-tab | Tier-5 engine |
+| `phase05-citizens/generateCitizensEvents.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |
+| `phase05-citizens/checkForPromotions.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |
+| `phase05-citizens/runEducationEngine.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |
+| `phase05-citizens/runAsUniversePipeline.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |
+| `phase05-citizens/applyGameNightMoments.js` | LifeHistory_Log | own-tab | batch append |
+| `phase05-citizens/civicInitiativeEngine.js` | Initiative_Tracker | own-tab | |
+| `phase05-citizens/updateCivicLedgerFactions.js` | Civic_Ledger | own-tab | |
+| `phase05-citizens/generateMonthlyCivicSweep.js` | Civic_Sweep | own-tab | |
+| `phase05-citizens/updateCivicApprovalRatings.js` | Civic_Office_Ledger, Initiative_Tracker | own-tab | approval recomputation |
+| `phase05-citizens/generateCivicModeEvents.js` | Civic_Office_Ledger, LifeHistory_Log, Simulation_Ledger | own-tab | civic-mode citizen events |
+| `phase05-citizens/runCivicRoleEngine.js` | civic tabs | own-tab | |
+| `phase05-citizens/runCivicElectionsv1.js` | Election_Log | schema-setup | insertSheet + headers + setFrozenRows only; cycle-path writes are intents (`queueAppendIntent_` Election_Log, `queueRangeIntent_` Civic_Office_Ledger) |
+| `phase05-citizens/runHouseholdEngine.js` | household tabs | own-tab | citizen life engine |
+| `phase05-citizens/runRelationshipEngine.js` | relationship tabs | own-tab | citizen life engine |
+| `phase05-citizens/runNeighborhoodEngine.js` | Neighborhood_Map | own-tab | citizen life engine |
+| `phase05-citizens/runCareerEngine.js` | career tabs | own-tab | citizen life engine |
+| `phase05-citizens/bondEngine.js` | Relationship_Bond_Ledger | phase10-loc | missing `ensureSheet_` throws (no silent fallback) |
+| `phase05-citizens/bondEngine.js` | Faith_Organizations.MembersList | own-tab | heritage MembersList pattern; no later-phase read of the tab before end-of-cycle |
+| `phase05-citizens/seedRelationBondsv1.js` | Relationship_Bonds, Citizen_Directory, Neighborhood_Map | own-tab | |
+| `phase05-citizens/bondPersistence.js` | Relationship_Bonds, Citizen_Directory, Neighborhood_Map | own-tab | |
+| `phase05-citizens/migrationTrackingEngine.js` | Household_Ledger, Neighborhood_Map, Simulation_Ledger | own-tab | |
+| `phase05-citizens/generateChicagoCitizensv1.js` | Chicago_Citizens | DISABLED | both `safePhaseCall_` sites commented out at both entry points; pool frozen ~124 rows; `createChicagoCitizensSheet_` is schema-setup, unreachable while disabled; retained for reversibility |
+| `phase05-citizens/generateGenericCitizens.js` | Generic_Citizens | own-tab | ACTIVE v2.8 — Tier-5 feeder pool, sex-tagged, pool-floor gate F60/M40, max 8/cycle |
+| `phase05-citizens/processAdvancementIntake.js` | Advancement_Intake*, Generic_Citizens, Simulation_Ledger, LifeHistory_Log | own-tab | ACTIVE at `Phase5-Advancement`, both entry points; `checkEmergencePromotions_` promotes GC rows at EmergenceCount ≥ 3; `processIntake_` routes unknown intake names to Generic_Citizens, never mints SL rows |
+| `phase05-citizens/generateMediaModeEvents.js` | LifeHistory_Log, Simulation_Ledger | own-tab | |
+| `phase06-analysis/processArcLifeCyclev1.js` | Story_Arcs | own-tab | |
+| `phase06-analysis/storylineHealthEngine.js` | Storylines | own-tab | |
+| `phase06-analysis/updateStorylineStatusv1.2.js` | Storylines | own-tab | |
+| `phase06-analysis/applyMigrationDrift.js` | Neighborhood_Map | own-tab | |
+| `phase06-analysis/economicRippleEngine.js` | World_Population | own-tab | writes World_Population, not Population_Stats (that tab does not exist) |
+| `phase07-evening-media/mediaRoomIntake.js` | Media_Ledger, Storyline_Tracker, Cultural_Ledger, MediaRoom_Paste, Media_Intake, Media_Briefing, citizen/advancement/continuity intake tabs | phase11 + operator | cycle entry `processMediaIntake_(ctx)` runs at Phase 11; `processMediaIntakeV2()` is operator null-ctx; ~49 writes, NOT a migration target |
+| `phase07-evening-media/mediaRoomBriefingGenerator.js` | Media_Briefing family | phase11 + operator | same class as mediaRoomIntake |
+| `phase07-evening-media/parseMediaRoomMarkdown.js` | MediaRoom_Paste family | operator | self-opens the spreadsheet, `getUi().alert`, no ctx; `parseContinuityNotes_` here is live and unrelated to the deleted `continuityNotesParser.js` |
+| `phase07-evening-media/storylineWeavingEngine.js` | Storyline_Tracker | own-tab | |
+| `phase07-evening-media/updateTrendTrajectory.js` | (caller-passed) | caller-sheet | |
+| `phase07-evening-media/updateMediaSpread.js` | (caller-passed) | caller-sheet | |
+| `phase08-v3-chicago/v3NeighborhoodWriter.js`, `v3DomainWriter.js`, `v3ChicagoWriter.js` | tracking tabs | own-tab | |
+| `phase08-v3-chicago/v3LedgerWriter.js` | Event_Arc_Ledger | schema-setup | lazy `InvolvedCitizens` header-cell add; near-dormant since arc retirement |
+| `phase09-digest/applyCycleWeight.js` | Cycle_Weight | own-tab | signal-only on the cycle path; the digest row is written by `writeDigest_` at Phase 10 via intent |
+| `phase11-media-intake/healthCauseIntake.js` | Health_Cause_Intake, Health_Cause_Queue, Simulation_Ledger | operator | `runProcessHealthCauseIntake` manual trigger with stub ctx |
+| `utilities/archiveLifeHistory.js` `maintainLifeHistoryLog_` | LifeHistory_Log, LifeHistory_Archive | phase11 + rmd | final Phase-11 call, row-count gated; appends old rows to the archive then rewrites the active tab |
+
+**Not carve-outs (migrated to intents or deleted; do not re-list):** `advanceSimulationCalendar.js`, `applyEditionCoverageEffects.js`, `finalizeWorldPopulation.js`, `culturalLedger.js` (per-cycle `ctx.summary.culturalRegistry` dedups same-cycle registers), `writeDigest_` — all intents now. Deleted: `appendPopulationHistory_`, `applyCycleWeightForLatestCycle.js`, `arcLifecycleEngine.js`, `hookLifecycleEngine.js`, `generateCitizenEvents.js`, `continuityNotesParser.js`, `worldEventsLedger.js`, `generateNamedCitizensEvents.js`, `gentrificationEngine.js` (replaced by the neighborhood trajectory system), `citizenFameTracker.js`. History: git log and `docs/engine/archive/PHASE_42_PATTERNS.md`.

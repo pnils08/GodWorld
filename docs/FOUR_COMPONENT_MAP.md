@@ -98,7 +98,7 @@ Agents are harness + tool bindings packaged together: each of the 27 `.claude/ag
 | **Claude Code built-ins** | Read, Edit, Write, Bash, Grep, Glob, TaskCreate, Agent | Every session | High — sandboxed by Claude Code |
 | **Engine scripts** | `scripts/*.js`, `scripts/engine-auditor/*.js`, phase code under `phase*/` | Node CLI, deterministic, sheet-reading | High — code review + tech-debt audit |
 | **MCP servers** (auto-loaded via `.mcp.json`) | `godworld` (10 city-data tools), `plugin_claude-mem_mcp-search`, `plugin_discord_discord`, `plugin_playwright_playwright`, `claude_ai_Slack`, `claude_ai_Gmail`, `claude_ai_Figma`, `context7`, `claude-batch`, `claude-in-chrome`, `claude_ai_Mara`, `godworld` | Model-callable via MCP protocol | Varies — MCP server auth gates writes |
-| **Sheet writes** | `lib/sheets.js` (service-account) | Engine-only during run-cycle; outside engine = exception list in `.claude/rules/engine.md` | Medium — write operations require approval gate |
+| **Sheet writes** | `lib/sheets.js` (service-account) | Engine-only during run-cycle; outside engine = exception list in `docs/engine/SHEETS_MANIFEST.md` §9 | Medium — write operations require approval gate |
 | **Supermemory writes** | `npx supermemory`, HTTP API via `$SUPERMEMORY_CC_API_KEY` | Containers: `mags`, `bay-tribune`, `world-data`, `super-memory`, `mara` | Medium — `mags`/`bay-tribune` writes gated by user approval |
 | **PM2 daemons** | dashboard (:3001), `mags-bot` discord | Long-running processes | Medium — restart via session-end only |
 | **Cron jobs** | Discord reflection, backup, server health (see `crontab -l`) | Host-level scheduled | Medium — audit on change |

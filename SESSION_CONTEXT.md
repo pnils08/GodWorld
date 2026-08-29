@@ -2,13 +2,13 @@
 
 **PIN:** S392 | Day 184 | canonical C104 (live cycleCount=104, lastRun 8/19 — no live cycle since) | bench SANDBOX 0827 at C107 | prod carries engine.131 T1-T4 + the engine.126/128/129 backlog, smoke pending | Partnership NORMAL | Ledger 964 rows | output/ git-tracked
 
-**NEXT[engine-sheet]:** engine.131 — live carries the sentinel fix only; T7 + civic override + the rheaTwoPass roster fix are built and unshipped. Mike's call: deploy T7 or hold. Then the atmosphere guards. Detail + the two open items in the plan doc. Live smoke needs a cycle WITH a feed row — no row = off-season is correct. Do not grow civic surface (a duration model was killed mid-session, out of doctrine).
+**NEXT[engine-sheet]:** (1) governance.51 boot-doc consolidation — T1 confirm the size ceiling, then T2 rewrite boot docs rule-only (one file per commit, builder unlocks each), T3 memory dedup via /batch. Plan doc has the builder's list. (2) engine.131 T7 + civic override + rheaTwoPass fix stay HELD until a live cycle smokes T1-T4 (Mike-direct 2026-08-29). (3) engine.132 (initiative→illness wire) is committed, NOT deployed — bench-prove on SANDBOX 0827 before live. (4) Codex's Task 17 queue pulled here (subscription ended): three pending seats in `docs/plans/2026-08-09-three-wake-lived-packet-pilot.md` (Ariana Reyes, Elliot Marbury, DeShawn Hartley) — review with Mike before any build. Do not grow civic surface.
 
 **NEXT[research-build]:** All 3 prior items were already done (ECL question answered S380/381; loreWriter applied+shipped S377-S383; Gemini 3.7 Flash eval written up in MODEL_HIERARCHY.md §4) — closed this session, not re-opened. pipeline.56 moved to done-pending-archive. Canon-source-policy spinoff (pipeline.59) also closed: notebook had drifted to 70 sources/52 classified, all 23 gaps classified + 5 stale removed + 26 drifted titles synced, validator passes clean — see pipeline.59 row for detail. Carried, still untouched: 14 never-cited ROLLOUT rows, governance.30 close, ADR-0018 Tier-A conversion, canon.5 sheet renames.
 
 **NEXT[kimi]:** Nothing queued.
 
-**NEXT[codex]:** Next unchecked Task 17 seat in `docs/plans/2026-08-09-three-wake-lived-packet-pilot.md` — Luis Navarro accountability/anomaly package; validate package/Packet/Rhea before moving to the next row. Leave completed packages untouched.
+**NEXT[codex]:** Subscription ended (2026-08-29). Nothing queued; the Task 17 seats moved to NEXT[engine-sheet]. AGENTS.md authorization unchanged for when it returns.
 
 **NEXT[antigravity]:** loreWriter.js handoff long since applied by research-build (S377-S383, superseding the CLI-scratch draft) — line stale, cleared. Nothing queued.
 

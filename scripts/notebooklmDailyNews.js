@@ -618,13 +618,18 @@ function archivePrompt(cycle, reports) {
   ].join('\n');
 }
 
-function dailyPrompt(cycle) {
+function dailyPrompt(cycle, hasFlagged) {
+  // The gate-desk section is only demanded when the pack actually carries
+  // FLAGGED drafts — demanding a section with no material to build it from
+  // is suspected in the 2026-08-24 ETIMEDOUT on an empty-window Monday.
   return 'Prepare The Bay Tribune daily news for Oakland for Cycle ' + cycle +
     ', including the connections that matter and what the newsroom should watch next.' +
-    ' Then add a section titled "The gate desk": for every FLAGGED draft in the sources,' +
-    ' say what the draft reported, what the gate found, and whether the finding holds up' +
-    ' against the other sources — the editor reviews these decisions and needs to hear' +
-    ' every one, so cover them all; never skip a flagged draft.';
+    (hasFlagged
+      ? ' Then add a section titled "The gate desk": for every FLAGGED draft in the sources,' +
+        ' say what the draft reported, what the gate found, and whether the finding holds up' +
+        ' against the other sources — the editor reviews these decisions and needs to hear' +
+        ' every one, so cover them all; never skip a flagged draft.'
+      : '');
 }
 
 // The editor's daily "report on the data" (Mike-direct 2026-08-23): a
@@ -967,11 +972,12 @@ async function run(argv) {
   manifest.sourceIds = sourceIds;
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
 
-  const prompt = dailyPrompt(cycle);
+  const hasFlagged = newsroom.reports.some((r) => r.classification === 'FLAGGED');
+  const prompt = dailyPrompt(cycle, hasFlagged);
   const briefQuery = nlm([
     'notebook', 'query', config.newsroomNotebookId, prompt,
-    '--json', '--source-ids', sourceIds.join(','), '--timeout', '180',
-  ], { timeoutMs: 200 * 1000 });
+    '--json', '--source-ids', sourceIds.join(','), '--timeout', '280',
+  ], { timeoutMs: 300 * 1000 });
   if (!briefQuery.ok) throw new Error('daily brief query failed: ' + briefQuery.out.slice(0, 400));
   const briefJson = parseJsonOutput(briefQuery.out, 'daily brief query');
   fs.writeFileSync(path.join(runDir, 'daily-brief.json'), JSON.stringify(briefJson, null, 2) + '\n');

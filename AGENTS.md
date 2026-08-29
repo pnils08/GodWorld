@@ -229,6 +229,13 @@ For an agent with implementation authorization:
 
 1. Inspect `git status --short --branch`.
 2. Read the relevant active plan, contract, ADR, implementation, and tests.
+   **If the change touches an engine function, `S.` field, or sheet tab, attach
+   its wiring card** — `node scripts/runEngineAgent.js --agent engine-wiring
+   --model anthropic/claude-haiku-4.5 --task "Target: <name>"` (read-only,
+   local files + one model call; pre-approved for this purpose). Every line of
+   the card is a file:line pointer; verify the ones your change depends on. A
+   plan or diff for engine work presented without the card is incomplete and
+   will be sent back for it.
 3. Identify the smallest authorized change surface.
 4. Show the builder a proposed diff or precise patch description before applying
    any non-trivial change.
@@ -271,7 +278,9 @@ npm run lint
   model APIs, or other network services unless explicitly approved.
 - A `--dry-run` flag is not sufficient proof of safety — inspect its
   implementation before running it.
-- Do not run API-backed validation that spends money without approval.
+- Do not run API-backed validation that spends money without approval. Standing
+  exception: the `engine-wiring` card run named in §Change protocol step 2 —
+  required for engine changes, pre-approved, Haiku only (DeepSeek fails it).
 - Never expose credentials or environment-variable values in output.
 
 ## Git and commit rules

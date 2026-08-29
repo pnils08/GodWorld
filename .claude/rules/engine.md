@@ -23,6 +23,7 @@ These are your **memory** of the engine and the ledger. Reach for them reflexive
 | Known defects / open repair rows | `docs/engine/ROLLOUT_PLAN.md` `engine.*` rows *(ENGINE_REPAIR retired S371 — history only)* |
 | Designing ANY engine mechanic — what makes it a sim, not a data system | `docs/SIM_DOCTRINE.md` *(Mike-direct S318 — no output caps, physics only, world allowed to hurt; consult BEFORE design)* |
 | What connects to what (dependency trace) | `graphify query "..."` (persistent graph) |
+| What wires to ONE function / `S.` field / tab before you touch it — callers at both entry points, before/after the Phase-10 executor, writers+readers per field, intent-vs-direct write path, open rows | spawn the `engine-wiring` subagent (Haiku, read-only, `.claude/agents/engine-wiring/SKILL.md`) → open every pointer on the card before cutting. A change without the card is how things ship half-wired. |
 
 **Load on demand, not at boot** — `ENGINE_STUB_MAP` is ~86KB; auto-loading it every session is pure boot-burn (the dominant token lever — auto-memory `feedback_token-burn-hierarchy`). The point is reflexive *use*, not always-resident.
 

@@ -246,5 +246,42 @@ assert('B2 the richest hood (Rockridge/Jack London) runs below the poorest (KONO
   assert('B5 per-cycle hood step stays on the engine.132 convergence timescale', ok, worst);
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// C. applyStorySeeds_ — D4: the HEALTH seed names the hoods that crossed and
+//    the citizens in them; no hot hood, no seed. applyStorySeeds_ leans on a
+//    dozen optional engine globals (byline, priority, storyline state) that are
+//    all typeof-guarded or degrade to null, so a permissive sandbox stubs them.
+// ═══════════════════════════════════════════════════════════════════════════
+{
+  let uu = 0;
+  const real = { Utilities: { getUuid: () => 'uuid-' + (++uu) }, Logger: { log: () => {} }, safeRand_: ctx => ctx.rng,
+    Math, JSON, Object, Array, String, Number, Date, RegExp, Error, isNaN, isFinite, parseInt, parseFloat };
+  const sb = new Proxy(real, { has: () => true, get: (t, k) => (k in t) ? t[k] : (typeof k === 'symbol' ? undefined : function () { return undefined; }) });
+  vm.createContext(sb);
+  const p = path.join(__dirname, '..', 'phase07-evening-media', 'applyStorySeeds.js');
+  vm.runInContext(fs.readFileSync(p, 'utf8'), sb, { filename: p });
+  const hood = (pop, sick) => ({ students: Math.round(pop * 0.15), adults: Math.round(pop * 0.7), seniors: pop - Math.round(pop * 0.15) - Math.round(pop * 0.7), sick, unemployed: 50 });
+  function runSeeds(nd, events) {
+    const S = { cycleId: 114, neighborhoodDemographics: nd, demographicDrift: { illnessRate: 0.045, illnessSupportThreshold: 0.08 },
+      generationalEvents: events, worldEvents: [], weather: {}, cityDynamics: {}, worldPopulation: { illnessRate: 0.045 }, domainPresence: {}, eventArcs: [], crimeMetrics: {} };
+    const ctx = { ss: null, config: {}, summary: S, rng: () => 0.6, ledger: null };
+    real.applyStorySeeds_(ctx);
+    return (ctx.summary.storySeeds || []).filter(x => String(x.domain).toUpperCase() === 'HEALTH');
+  }
+  const ev = (name, popId, hoodName) => ({ type: 'health_event', tag: 'Health', citizen: name, popId, neighborhood: hoodName, description: 'x' });
+  // C1 — watch bar: one hood at 6.1%, faces from that hood only
+  const c1 = runSeeds({ Chinatown: hood(2288, 140), Rockridge: hood(2280, 100), Baylight: hood(627, 10) }, [ev('Mei Tan', 'POP-00999', 'Chinatown'), ev('Lou Reed', 'POP-00998', 'Rockridge')]);
+  assert('C1 one HEALTH seed when one hood passes the 6% watch bar', c1.length === 1, 'got ' + c1.length);
+  assert('C1 seed names the crossing hood, not Temescal', c1[0] && c1[0].neighborhood === 'Chinatown' && /Chinatown/.test(c1[0].text) && !/Temescal/.test(c1[0].text), c1[0] && c1[0].text);
+  assert('C1 priority 2 below the 8% threshold', c1[0] && c1[0].priority === 2, c1[0] && String(c1[0].priority));
+  assert('C1 faces are the hood\'s own Health cases (Mei Tan in, Lou Reed out)', c1[0] && c1[0].suggestedCitizens.length === 1 && c1[0].suggestedCitizens[0].name === 'Mei Tan', c1[0] && JSON.stringify(c1[0].suggestedCitizens));
+  // C2 — crossed: 8.5% → priority 3, "past the illness threshold", face named in text
+  const c2 = runSeeds({ Chinatown: hood(2288, 195), Rockridge: hood(2280, 100) }, [ev('Mei Tan', 'POP-00999', 'Chinatown')]);
+  assert('C2 crossing the threshold is priority 3 and says so', c2.length === 1 && c2[0].priority === 3 && /past the illness threshold/.test(c2[0].text) && /Mei Tan/.test(c2[0].text), c2[0] && c2[0].text);
+  // C3 — quiet city: no hood over 6% → no HEALTH seed, whatever the city rate says
+  const c3 = runSeeds({ Chinatown: hood(2288, 100), Rockridge: hood(2280, 90) }, [ev('Mei Tan', 'POP-00999', 'Chinatown')]);
+  assert('C3 no hot hood → no HEALTH seed', c3.length === 0, 'got ' + c3.length);
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

@@ -1435,12 +1435,13 @@ function applyStorySeeds_(ctx) {
     var hoodList133 = seedHoods133.slice(0, 3).map(function(h) { return h.hood; }).join(', ');
     var pct133 = (lead133.rate * 100).toFixed(1) + '%';
     var faceNames133 = faces133.map(function(f) { return f.name; }).join(', ');
+    var where133 = seedHoods133.length > 1 ? pct133 + ' sick in ' + lead133.hood : pct133 + ' sick';
     var text133;
     if (crossed133.length) {
-      text133 = hoodList133 + ' past the illness threshold (' + pct133 + ' sick in ' + lead133.hood + ').' +
+      text133 = hoodList133 + ' past the illness threshold (' + where133 + ').' +
         (faceNames133 ? ' Among those sick this cycle: ' + faceNames133 + '.' : ' Clinics watching closely.');
     } else {
-      text133 = 'Illness ticking up in ' + hoodList133 + ' (' + pct133 + ' in ' + lead133.hood + '). Early monitoring underway.' +
+      text133 = 'Illness ticking up in ' + hoodList133 + ' (' + where133 + '). Early monitoring underway.' +
         (faceNames133 ? ' ' + faceNames133 + ' among the cases.' : '');
     }
     seeds.push(makeSeed(text133, 'HEALTH', lead133.hood, crossed133.length ? 3 : 2, 'health', faces133));

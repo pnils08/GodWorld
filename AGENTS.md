@@ -201,6 +201,14 @@ Boot-visible rules:
 - Creating a plan or research MD is a builder-approved act: propose file and
   rollout row together, wait for approval. Search for an existing artifact
   first; update the owning one rather than starting a parallel record.
+- **When the research or plan MD is finished, save it to
+  `docs/for-claude-review/`** — file name `YYYY-MM-DD-<lane>-<topic>.md`. That
+  folder is the only channel that reaches a Claude seat: its boot greeting
+  reports the inbox as clean or `N waiting`, so a finished file there is a
+  message and a finished file anywhere else is not. Contract (done-means-done,
+  never edit after saving, never touch another lane's file, Claude alone moves
+  files out) is in `docs/for-claude-review/README.md`. Engine plans carry their
+  wiring card (§Change protocol step 2).
 - A malformed rollout row is **silently skipped** by `scripts/rolloutSweep.js`
   and its work stops being tracked. Before calling a row filed, run
   `node scripts/docLoopStatus.js --lint`.

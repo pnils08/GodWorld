@@ -2,47 +2,43 @@
   "draft": "output/cron-compare/culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
   "cycle": "104",
   "backend": "api",
-  "model": "google/gemini-3.5-flash",
-  "draftSha256": "9b9c5aa0b2aab2c7f335f0e80a8c420355d3874454e3b26d95cf39cdc73bf4f4",
-  "pass": false,
-  "flags": [
-    {
-      "claim": "At the Neon Harbor Club, a group of friends have gathered... Mark Aitken, a regular at the club, is looking forward to the evening's entertainment.",
-      "issue": "Mark Aitken's canonical sighting for Cycle 104 was at Adams Point United Methodist Church in Adams Point, not at the Neon Harbor Club in Jack London. Moving his sighting/appearance violates the persona's constraint against inventing appearances and misrepresents the cycle's sighting data.",
-      "severity": "high"
-    }
-  ],
-  "flagCount": 1,
-  "highSeverityCount": 1,
-  "summary": "Draft misrepresents Mark Aitken's sighting location, placing him at Neon Harbor Club instead of Adams Point United Methodist Church.",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "01b03f4c3876a209c07e4b8d974ac1656e1ffefbe59e4dfc954c37daa17b375c",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, citizen bios, TV show titles, and nightlife venue details strictly verified against ground truth.",
   "review": {
     "profileId": "kai-arts-entertainment-v1",
-    "canonIntegrity": "revise",
-    "texture": "overreach"
+    "canonIntegrity": "pass",
+    "texture": "authorized"
   },
   "reviewProfile": {
     "id": "kai-arts-entertainment-v1",
     "packageVersion": "KAI-LEP2-1",
-    "manifestId": "AM-26e668d14559",
+    "manifestId": "AM-bbc5df11d5f0",
     "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [
-      "Mark Aitken"
+      "Depak Ying",
+      "Elio Perez",
+      "Melton Neilon",
+      "Rick Walker"
     ],
     "unverified": [
-      "Countdown Live",
-      "Evening Texture",
-      "Late Weather Watch",
-      "Neon Harbor Club"
+      "Eve Special",
+      "Neon Harbor Club",
+      "Year's Eve Special"
     ]
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 0,
+      "names": 4,
       "businesses": 0,
-      "storylines": 0,
+      "storylines": 1,
       "hoods": 0,
       "claims": 1
     },
@@ -51,8 +47,8 @@
     "unbackedQuoted": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0527,
-  "durationMs": 14966,
+  "apiCostUsd": 0.0094,
+  "durationMs": 6128,
   "parseError": false,
-  "ranAt": "2026-08-20T23:20:54.998Z"
+  "ranAt": "2026-08-27T23:16:26.870Z"
 }

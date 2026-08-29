@@ -1,0 +1,20 @@
+{
+  "undocked-pop00143-Y2C52": {
+    "at": "2026-08-26T23:18:25.789Z",
+    "cycle": "104",
+    "stem": "undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00962-Y2C52": {
+    "at": "2026-08-27T23:17:48.747Z",
+    "cycle": "104",
+    "stem": "undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  },
+  "undocked-pop00688-Y2C52": {
+    "at": "2026-08-28T23:22:30.712Z",
+    "cycle": "104",
+    "stem": "undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
+  }
+}

@@ -1,8 +1,8 @@
 {
   "source": "Simulation_Ledger",
-  "cycle": null,
+  "cycle": 104,
   "rowCount": 964,
-  "generatedAt": "2026-08-22T07:32:01.950Z",
+  "generatedAt": "2026-08-23T19:30:36.959Z",
   "generatedBy": "scripts/dumpLedger.js",
   "note": "Local-disk snapshot for search_everything disk shelf. Stable filename, overwritten each cycle."
 }

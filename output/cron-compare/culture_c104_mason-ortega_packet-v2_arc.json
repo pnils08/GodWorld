@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "culture",
+  "persona": "mason-ortega",
+  "storyline": {
+    "slug": "rockridge-howard-yell-named-restaurant",
+    "verb": "opened"
+  },
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00651",
+      "name": "Howard Yell",
+      "quote": "I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression."
+    }
+  ],
+  "claim": "I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-25T18:19:45.115Z"
+}

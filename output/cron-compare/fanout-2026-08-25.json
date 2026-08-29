@@ -1,0 +1,336 @@
+{
+  "date": "2026-08-25",
+  "cycle": 104,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
+      "story": {
+        "ref": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "beatDomain": "SAFETY",
+      "persona": "rachel-torres",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s) ",
+        "label": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "wakePackage": "RACHEL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "angle": "What the supplied C104 line card establishes, and what history remains unsupplied.",
+        "label": "A's — player-feature — supplied C104 line card",
+        "hookLine": "A's — player-feature — supplied C104 line card",
+        "hood": "Baylight District",
+        "pulseClass": "era-door",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "closingNote": "break of continuity",
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Vinnie Keane (POP-00001)"
+        ],
+        "popids": [
+          "POP-01078",
+          "POP-00001"
+        ],
+        "ref": "world_summary_c104.md ## Sports",
+        "cycle": 104
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "era-door",
+        "score": 81,
+        "label": "A's — player-feature — supplied C104 line card",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "storyAngle": "Pablo the Picasso shines again.",
+        "hasStats": true,
+        "record": "126-35",
+        "streak": "W2",
+        "foilNumber": "9IP",
+        "closingNote": "break of continuity",
+        "feedCycle": 104
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "closingNote": "break of continuity",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 126-35 · streak W2",
+          "Event (feed): A's — player-feature (late-season)",
+          "Cycle: C104"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "closingNote": "break of continuity",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity.",
+        "foilNumber": "9IP",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ]
+      },
+      "wakePackage": "HAL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Mason Ortega",
+      "popid": "POP-00160",
+      "beatDomain": "CULTURE",
+      "persona": "mason-ortega",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Seasonal Spirits appears on the evening restaurant list in Rockridge. What was happening there is not established.",
+        "label": "Seasonal Spirits (Rockridge)",
+        "hookLine": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+        "hood": "Rockridge",
+        "pulseClass": "named-restaurant",
+        "citizens": [],
+        "popids": [],
+        "named": "Seasonal Spirits",
+        "venue": "Seasonal Spirits",
+        "ref": "world_summary ## Evening Texture · Restaurants",
+        "cycle": 104
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Seasonal Spirits (Rockridge)"
+      },
+      "recommend": {
+        "bag": "ground",
+        "slug": "maria-keen",
+        "name": "Maria Keen",
+        "popid": "POP-00013",
+        "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+        "reason": "top pulse fame-sighting → ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Mark Aitken at Adams Point United Methodist Church (Adams Point)"
+      },
+      "bag": "kitchen",
+      "wakePackage": "MASON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "label": "Grand Lake retail decay",
+        "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "hood": "Grand Lake",
+        "pulseClass": "retail-decay",
+        "namedBusinesses": [],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## Engine Review · math-imbalance",
+        "cycle": 104
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "retail-decay",
+        "score": 28,
+        "label": "Grand Lake retail decay",
+        "hood": "Grand Lake",
+        "namedBusinesses": [],
+        "retail": null,
+        "retailDelta": -5.03
+      },
+      "prewrite": {
+        "pulseClass": "retail-decay",
+        "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "namedBusinesses": [],
+        "anchorFacts": [
+          "HOOD: Grand Lake",
+          "RETAIL DELTA (do not lead with decimal): -5.03",
+          "NAMED: none — do not invent storefronts",
+          "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [
+    {
+      "desk": "undocked",
+      "wanted": 1,
+      "got": 0
+    }
+  ],
+  "rotationShortfalls": [],
+  "seedless": 1,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Sgt. Rachel Torres",
+        "persona": "rachel-torres",
+        "wakePackage": "RACHEL-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Mason Ortega",
+        "persona": "mason-ortega",
+        "wakePackage": "MASON-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-19",
+    "top": {
+      "score": 61,
+      "className": "metric-contradiction",
+      "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500] with no matching active initiative"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c104.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=freelance-firebrand,rachel-torres,hal-richmond,simon-leary,mason-ortega,business-desk)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=era-door score=81 close=break of continuity"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=retail-decay score=28 hood=Grand Lake"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "mason-ortega",
+        "bag": "kitchen",
+        "pulse": "named-restaurant",
+        "score": 20
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": false,
+    "reason": "no civic-domain persona assignment in rota",
+    "seats": []
+  },
+  "builtAt": "2026-08-25T11:15:06.540Z"
+}

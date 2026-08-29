@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "civic",
+  "persona": "rachel-torres",
+  "storyline": {
+    "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+    "verb": "opened"
+  },
+  "hood": "West Oakland, Fruitvale, East Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I've heard folks at the diner talking about how it's good to have someone other than cops showing up for certain calls—makes people feel safer opening their doors, you know? But honestly, I'm still waiting to see if it really changes anything long-term."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I’ve heard folks around here talking about the Alternative Response Initiative, and it seems like people are hopeful but still waiting to see how it really plays out in the neighborhood."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks around the neighborhood talking about it—some feel hopeful, others aren’t sure yet. It’s still early, but I think it’s worth giving it a chance."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I've heard some folks talking about the Alternative Response teams in the neighborhood, but honestly, I'm too busy working double shifts to notice much change. If it keeps people safe without cops always showing up, that sounds good to me."
+    }
+  ],
+  "claim": "I've heard folks at the diner talking about how it's good to have someone other than cops showing up for certain calls—makes people feel safer opening their doors, you know? But honestly, I'm still waiting to see if it really changes anything long-term.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-25T18:16:22.924Z"
+}

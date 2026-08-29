@@ -58,6 +58,7 @@
     ],
     "historicalAnchor": "era door — living chapter vs the age it closes or extends",
     "presentFacts": [
+      "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
       "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
       "Team record (feed): 126-35 · streak W2",
       "Event (feed): A's — player-feature (late-season)",
@@ -89,9 +90,11 @@
     "eventKind": "player-feature",
     "closingNote": "break of continuity",
     "citizens": [
+      "Pablo Almanzar (POP-01078)",
       "Vinnie Keane (POP-00001)"
     ],
     "popids": [
+      "POP-01078",
       "POP-00001"
     ],
     "ref": "world_summary_c104.md ## Sports",
@@ -101,16 +104,16 @@
   "players": [
     {
       "name": "Pablo Almanzar",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
+      "popid": "POP-01078",
+      "role": "SP / Oakland Athletics",
+      "neighborhood": "Jack London",
       "why": "feed-names"
     },
     {
       "name": "Vinnie Keane",
       "popid": "POP-00001",
       "role": "Designated Hitter, Oakland A's Legend",
-      "neighborhood": "Rockridge",
+      "neighborhood": "Grand Lake",
       "why": "feed-names"
     }
   ],

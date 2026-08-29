@@ -1,0 +1,37 @@
+{
+  "date": "2026-08-24",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-08-24T11:19:21.350Z"
+}

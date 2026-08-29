@@ -24,16 +24,16 @@
   },
   "angle": "output/cron-compare/business_c104_business-desk_packet-v2_angle.json",
   "quotesRequested": 4,
-  "quotesLanded": 2,
+  "quotesLanded": 3,
   "quotes": [
     {
       "pop": "POP-00002",
       "name": "Amara Keane",
-      "quote": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.",
+      "quote": "I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant.",
       "disp": "even-keeled, unremarkable",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are there any existing but underpublicized initiatives to revitalize Grand Lake retail that residents simply aren't aware of?\"],\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
@@ -41,13 +41,11 @@
           "F-3a7d7a01e54c"
         ],
         "basis": "direct-reaction",
-        "unverifiedLead": [
-          "Are there any existing but underpublicized initiatives to revitalize Grand Lake retail that residents simply aren't aware of?"
-        ],
+        "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00002-8b034937ee",
+        "quoteId": "Q-POP-00002-112d3c590a",
         "authoredQuote": true,
-        "publishableQuote": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand."
+        "publishableQuote": "I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -61,12 +59,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "As a resident of Grand Lake, what about the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+          "question": "As a resident of Grand Lake, what have you seen, felt, or understood about \"Economic / storefront approach to retail decay in Grand Lake.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Grand Lake",
-          "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+          "focus": "Economic / storefront approach to retail decay in Grand Lake.",
           "src": "world_summary ## Engine Review · math-imbalance"
         },
         "exposure": {
@@ -160,11 +158,11 @@
     {
       "pop": "POP-00170",
       "name": "Melton Neilon",
-      "quote": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark.",
+      "quote": "I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone.",
       "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are commercial landlords in Grand Lake rejecting city small business retention grants?\"]\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
@@ -172,13 +170,11 @@
           "F-3a7d7a01e54c"
         ],
         "basis": "direct-reaction",
-        "unverifiedLead": [
-          "Are commercial landlords in Grand Lake rejecting city small business retention grants?"
-        ],
+        "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00170-f7836520c8",
+        "quoteId": "Q-POP-00170-2fa8297a45",
         "authoredQuote": true,
-        "publishableQuote": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark."
+        "publishableQuote": "I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -192,12 +188,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "What does the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What have you seen, felt, or understood about \"Economic / storefront approach to retail decay in Grand Lake.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Grand Lake",
-          "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+          "focus": "Economic / storefront approach to retail decay in Grand Lake.",
           "src": "world_summary ## Engine Review · math-imbalance"
         },
         "exposure": {
@@ -286,6 +282,134 @@
           "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
         }
       }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b0e302e4edcf",
+          "F-3a7d7a01e54c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-69e79aadc0",
+        "authoredQuote": true,
+        "publishableQuote": "I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jordan Velez",
+          "question": "What have you seen, felt, or understood about \"Economic / storefront approach to retail decay in Grand Lake.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Grand Lake",
+          "focus": "Economic / storefront approach to retail decay in Grand Lake.",
+          "src": "world_summary ## Engine Review · math-imbalance"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Grand Lake retail decay",
+            "src": "world_summary ## Engine Review · math-imbalance",
+            "id": "F-b0e302e4edcf"
+          },
+          {
+            "t": "FACT",
+            "text": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+            "src": "world_summary ## Engine Review · math-imbalance",
+            "id": "F-3a7d7a01e54c"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Grand Lake",
+            "src": "world_summary ## Engine Review · math-imbalance",
+            "id": "F-474495c0e07f"
+          },
+          {
+            "t": "FACT",
+            "text": "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500",
+            "src": "world_summary ## Engine Review · math-imbalance",
+            "id": "F-24adc4583803"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
     }
   ],
   "interviews": [
@@ -296,7 +420,7 @@
       "disp": "relentless, can't stop working; draws people in, deep with them; openly affectionate, big-hearted; curious, open to new things; steady, hard to shake; principled, plays it straight; close to family; often out in the neighborhood",
       "recorded": true,
       "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, I walk these streets every day, and it's not just about empty storefronts—it's about the energy fading. The Tribune should be asking why we're not seeing the same push here like in other neighborhoods when we've got the foot traffic and the love for this place.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"What specific initiatives have been proposed for Grand Lake retail, and why haven't they gained traction?\"]\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, walking around Grand Lake these days, I can feel it—there's just less energy on the streets. Places that used to be packed are quieter, and some spots have been empty longer than usual. It hits different when you've been part of a neighborhood for years.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
       "claims": null,
       "inputPacket": {
         "v": "LEP/2",
@@ -310,12 +434,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "As a resident of Grand Lake, what about the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+          "question": "As a resident of Grand Lake, what have you seen, felt, or understood about \"Economic / storefront approach to retail decay in Grand Lake.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Grand Lake",
-          "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+          "focus": "Economic / storefront approach to retail decay in Grand Lake.",
           "src": "world_summary ## Engine Review · math-imbalance"
         },
         "exposure": {
@@ -409,11 +533,11 @@
     {
       "pop": "POP-00002",
       "name": "Amara Keane",
-      "quote": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.",
+      "quote": "I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant.",
       "disp": "even-keeled, unremarkable",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are there any existing but underpublicized initiatives to revitalize Grand Lake retail that residents simply aren't aware of?\"],\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
@@ -421,13 +545,11 @@
           "F-3a7d7a01e54c"
         ],
         "basis": "direct-reaction",
-        "unverifiedLead": [
-          "Are there any existing but underpublicized initiatives to revitalize Grand Lake retail that residents simply aren't aware of?"
-        ],
+        "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00002-8b034937ee",
+        "quoteId": "Q-POP-00002-112d3c590a",
         "authoredQuote": true,
-        "publishableQuote": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand."
+        "publishableQuote": "I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -441,12 +563,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "As a resident of Grand Lake, what about the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" feels off, and what question should the Tribune ask? React to the data; do not add a concrete example, object, event, or rumor."
+          "question": "As a resident of Grand Lake, what have you seen, felt, or understood about \"Economic / storefront approach to retail decay in Grand Lake.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Grand Lake",
-          "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+          "focus": "Economic / storefront approach to retail decay in Grand Lake.",
           "src": "world_summary ## Engine Review · math-imbalance"
         },
         "exposure": {
@@ -540,11 +662,11 @@
     {
       "pop": "POP-00170",
       "name": "Melton Neilon",
-      "quote": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark.",
+      "quote": "I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone.",
       "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
       "recorded": true,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Are commercial landlords in Grand Lake rejecting city small business retention grants?\"]\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
@@ -552,13 +674,11 @@
           "F-3a7d7a01e54c"
         ],
         "basis": "direct-reaction",
-        "unverifiedLead": [
-          "Are commercial landlords in Grand Lake rejecting city small business retention grants?"
-        ],
+        "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00170-f7836520c8",
+        "quoteId": "Q-POP-00170-2fa8297a45",
         "authoredQuote": true,
-        "publishableQuote": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark."
+        "publishableQuote": "I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -572,12 +692,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "What does the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What have you seen, felt, or understood about \"Economic / storefront approach to retail decay in Grand Lake.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Grand Lake",
-          "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+          "focus": "Economic / storefront approach to retail decay in Grand Lake.",
           "src": "world_summary ## Engine Review · math-imbalance"
         },
         "exposure": {
@@ -670,12 +790,24 @@
     {
       "pop": "POP-00198",
       "name": "Rick Walker",
-      "quote": null,
+      "quote": "I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character.",
       "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
       "recorded": true,
-      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, I hear folks talking about Grand Lake storefronts going quiet like it's some mystery—but you don't need a study to see it. When the foot traffic dips, the energy goes with it. Tribune oughta ask who's got skin in the game to turn it around, 'cause empty windows don't fill themselves.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [\"Identify local business coalitions or property owners with redevelopment plans\"]\n}\n```",
-      "claims": null,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character.\",\n  \"fact_ids\": [\"F-b0e302e4edcf\", \"F-3a7d7a01e54c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b0e302e4edcf",
+          "F-3a7d7a01e54c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-69e79aadc0",
+        "authoredQuote": true,
+        "publishableQuote": "I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character."
+      },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
@@ -688,12 +820,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Jordan Velez",
-          "question": "What does the supplied trend \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What have you seen, felt, or understood about \"Economic / storefront approach to retail decay in Grand Lake.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Grand Lake",
-          "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+          "focus": "Economic / storefront approach to retail decay in Grand Lake.",
           "src": "world_summary ## Engine Review · math-imbalance"
         },
         "exposure": {
@@ -784,5 +916,5 @@
       }
     }
   ],
-  "ranAt": "2026-08-20T18:21:20.590Z"
+  "ranAt": "2026-08-28T18:21:02.065Z"
 }

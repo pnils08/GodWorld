@@ -1,0 +1,57 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "104",
+  "persona": "sharon-okafor",
+  "byline": "Sharon Okafor",
+  "bylinePopid": "POP-00159",
+  "article": "output/cron-compare/staged/culture_c104_sharon-okafor_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Devon Willis",
+        "role": "quoted-source",
+        "popid": "POP-00782"
+      },
+      {
+        "name": "Ezekiel Campbell",
+        "role": "quoted-source",
+        "popid": "POP-00645"
+      },
+      {
+        "name": "Mart Johns",
+        "role": "quoted-source",
+        "popid": "POP-00648"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "adams-point-devon-willis-story-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Adams Point"
+    ],
+    "claims": [
+      {
+        "claim": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it.",
+        "sourceRef": "citizenVoice PRESS Devon Willis"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-6b391f7ffaef",
+    "draftSha256": "b5aebf43d4447e1a5964d6d9701cc0844ce696cc09cafd46a8b0721e338e09bc",
+    "verdict": "output/cron-compare/culture_c104_sharon-okafor_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-26T23:16:40.505Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-26T23:16:45.641Z"
+}

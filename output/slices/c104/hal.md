@@ -17,6 +17,7 @@ Cycle **C104** · kind `hal-archive` · POP-00007 · desk **sports** (never busi
 - **PriorFiling:** NONE — wall may still inject at wake
 - **Claim:** Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity.
 **PresentFacts** (min 2, feed only):
+  - Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks
   - Vinnie Keane line (feed): 2-3, HR, 3 RBI
   - Team record (feed): 126-35 · streak W2
   - Event (feed): A's — player-feature (late-season)
@@ -42,7 +43,7 @@ B: Wire copy / FO strategy / bleacher heat that skips time
 _No on-disk prior matched — wall may still inject at wake._
 
 ## PLAYERS (feed names — do not invent)
-- Pablo Almanzar (no POPID on snapshot)
+- Pablo Almanzar (POP-01078) — SP / Oakland Athletics
 - Vinnie Keane (POP-00001) — Designated Hitter, Oakland A's Legend
 
 ## SCENE

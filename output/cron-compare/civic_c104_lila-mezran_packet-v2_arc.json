@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "storyline": {
+    "slug": "temescal-sonia-parikh-anomaly",
+    "verb": "advanced"
+  },
+  "hood": "Temescal",
+  "quotes": [
+    {
+      "pop": "POP-00745",
+      "name": "Sonia Parikh",
+      "quote": "I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here."
+    },
+    {
+      "pop": "POP-00761",
+      "name": "Idris Karim",
+      "quote": "I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here."
+    },
+    {
+      "pop": "POP-00775",
+      "name": "Sammie Alvarez",
+      "quote": "I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides."
+    }
+  ],
+  "claim": "I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-27T18:16:34.203Z"
+}

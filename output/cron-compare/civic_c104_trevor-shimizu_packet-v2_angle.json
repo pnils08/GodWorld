@@ -43,24 +43,24 @@
       "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
       "nearby": [
         {
-          "text": "Rose Delgado (City Council District 3): Community commitment reinforced",
-          "src": "output/cron-civic/datawake/civic-office-council-d3_2026-08-20.json"
-        },
-        {
-          "text": "Janae Rivers (City Council District 5): 12",
-          "src": "output/cron-civic/datawake/civic-office-council-d5_2026-08-20.json"
-        },
-        {
-          "text": "Warren Ashford (City Council District 7): KONO's numbers tell a clear story—lower sentiment but also lower crime than city averages. Before we",
-          "src": "output/cron-civic/datawake/civic-office-council-d7_2026-08-20.json"
-        },
-        {
           "text": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
           "src": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s)"
         },
         {
           "text": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
           "src": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        {
+          "text": "math-imbalance (low) | West Oakland: decay [Sentiment -0.020, RetailVitality -4.39] despite 2 active mitigator(s) [INIT-001, INIT-007]",
+          "src": "output/engine_audit_c104.json patterns[3]; evidence: Neighborhood_Map row(s) 5"
+        },
+        {
+          "text": "math-imbalance (medium) | Adams Point: decay [Sentiment -0.020, RetailVitality -2.92] with no matching active initiative",
+          "src": "output/engine_audit_c104.json patterns[4]; evidence: Neighborhood_Map row(s) 9"
         }
       ]
     },
@@ -131,6 +131,7 @@
     "output": {
       "format": "json-only",
       "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
         "focus": "string",
         "why": "string",
         "checks": [
@@ -149,7 +150,7 @@
         ],
         "closeQuestion": "string"
       },
-      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
     }
   },
   "reporter": {
@@ -330,60 +331,42 @@
   "angleRead": {
     "name": "Trevor Shimizu",
     "popid": "POP-00155",
-    "text": "{\n  \"focus\": \"The stalled civic initiative in Temescal\",\n  \"why\": \"Needs to trace why this specific infrastructure project hasn't moved forward when others have\",\n  \"checks\": [\n    \"Verify last recorded action on Temescal initiative\",\n    \"Cross-reference with district council member statements\",\n    \"Check for any maintenance logs or service bulletins mentioning Temescal\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00745\",\n      \"question\": \"What's the most recent movement you've observed on the Temescal initiative?\",\n      \"basis\": \"assignment\"\n    },\n    {\n      \"pop\": \"POP-00761\",\n      \"question\": \"Have you noticed any patterns in how these initiatives get stalled?\",\n      \"basis\": \"assignment\"\n    }\n  ],\n  \"interpretation\": \"Single-cycle stagnation suggests procedural delay rather than systemic failure, but needs verification\",\n  \"unverifiedLead\": [\n    \"Possible linkage to District 3 council member's recent community commitment focus\",\n    \"Potential resource allocation shift toward higher-profile districts\"\n  ],\n  \"closeQuestion\": \"Is this delay symptomatic or isolated?\"\n}",
+    "text": "I've been watching the Temescal civic initiative stall out, same as Fruitvale's did before it. Makes me wonder if there's a pattern in how these neighborhood projects lose steam. I'll start by checking in with the usual community contacts - Sonia, Idris, Sam - see if they've noticed anything specific holding things up this cycle. Maybe compare notes with what happened in Fruitvale.",
     "plan": {
-      "focus": "The stalled civic initiative in Temescal",
-      "why": "Needs to trace why this specific infrastructure project hasn't moved forward when others have",
+      "chase": "I've been watching the Temescal civic initiative stall out, same as Fruitvale's did before it. Makes me wonder if there's a pattern in how these neighborhood projects lose steam. I'll start by checking in with the usual community contacts - Sonia, Idris, Sam - see if they've noticed anything specific holding things up this cycle. Maybe compare notes with what happened in Fruitvale.",
+      "focus": "Identifying common factors in stalled civic initiatives across Oakland neighborhoods.",
+      "why": "Noticing parallel stagnation in Temescal and Fruitvale initiatives suggests systemic rather than localized issues.",
       "checks": [
-        "Verify last recorded action on Temescal initiative",
-        "Cross-reference with district council member statements",
-        "Check for any maintenance logs or service bulletins mentioning Temescal"
+        "Verify if same agencies/processes are involved in both initiatives",
+        "Compare timeline patterns between the two stalled projects",
+        "Check for overlapping community concerns or opposition"
       ],
       "targets": [
         {
           "pop": "POP-00745",
-          "question": "What's the most recent movement you've observed on the Temescal initiative?",
-          "basis": "assignment"
+          "question": "Have you observed any specific roadblocks to the Temescal initiative this cycle?",
+          "basis": "Community engagement patterns"
         },
         {
           "pop": "POP-00761",
-          "question": "Have you noticed any patterns in how these initiatives get stalled?",
-          "basis": "assignment"
+          "question": "Are there procedural similarities between the current Temescal stall and what happened in Fruitvale?",
+          "basis": "Cross-neighborhood comparison"
+        },
+        {
+          "pop": "POP-00775",
+          "question": "What's the community sentiment about the initiative's lack of progress?",
+          "basis": "Grassroots perspective"
         }
       ],
-      "interpretation": "Single-cycle stagnation suggests procedural delay rather than systemic failure, but needs verification",
+      "interpretation": "Recurring initiative stagnation may indicate systemic bottlenecks in Oakland's civic approval processes.",
       "unverifiedLead": [
-        "Possible linkage to District 3 council member's recent community commitment focus",
-        "Potential resource allocation shift toward higher-profile districts"
+        "Potential resource allocation disparities between neighborhoods",
+        "Possible changes in municipal review timelines"
       ],
-      "closeQuestion": "Is this delay symptomatic or isolated?"
+      "closeQuestion": "Are we seeing a citywide pattern of neighborhood initiatives getting stuck at the same stage?"
     }
   },
   "lanePicks": [
-    {
-      "label": "Rose Delgado (City Council District 3): Community commitment reinforced",
-      "kind": "civic-datawake",
-      "ref": "output/cron-civic/datawake/civic-office-council-d3_2026-08-20.json",
-      "popids": [
-        "POP-00503"
-      ]
-    },
-    {
-      "label": "Janae Rivers (City Council District 5): 12",
-      "kind": "civic-datawake",
-      "ref": "output/cron-civic/datawake/civic-office-council-d5_2026-08-20.json",
-      "popids": [
-        "POP-00043"
-      ]
-    },
-    {
-      "label": "Warren Ashford (City Council District 7): KONO's numbers tell a clear story—lower sentiment but also lower crime than city averages. Before we",
-      "kind": "civic-datawake",
-      "ref": "output/cron-civic/datawake/civic-office-council-d7_2026-08-20.json",
-      "popids": [
-        "POP-00504"
-      ]
-    },
     {
       "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
       "kind": "anomaly",
@@ -395,8 +378,41 @@
       "kind": "anomaly",
       "ref": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s) ",
       "popids": []
+    },
+    {
+      "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "kind": "anomaly",
+      "hood": "Temescal",
+      "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "popids": [
+        "POP-00745",
+        "POP-00761",
+        "POP-00775"
+      ]
+    },
+    {
+      "label": "math-imbalance (low) | West Oakland: decay [Sentiment -0.020, RetailVitality -4.39] despite 2 active mitigator(s) [INIT-001, INIT-007]",
+      "kind": "anomaly",
+      "hood": "West Oakland",
+      "ref": "output/engine_audit_c104.json patterns[3]; evidence: Neighborhood_Map row(s) 5",
+      "popids": [
+        "POP-00771",
+        "POP-00773",
+        "POP-01076"
+      ]
+    },
+    {
+      "label": "math-imbalance (medium) | Adams Point: decay [Sentiment -0.020, RetailVitality -2.92] with no matching active initiative",
+      "kind": "anomaly",
+      "hood": "Adams Point",
+      "ref": "output/engine_audit_c104.json patterns[4]; evidence: Neighborhood_Map row(s) 9",
+      "popids": [
+        "POP-00648",
+        "POP-00966",
+        "POP-00969"
+      ]
     }
   ],
-  "laneEntries": 51,
-  "ranAt": "2026-08-20T11:15:37.891Z"
+  "laneEntries": 48,
+  "ranAt": "2026-08-26T11:15:26.879Z"
 }

@@ -1,0 +1,45 @@
+{
+  "cycle": "104",
+  "top": 9,
+  "selected": [
+    "sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
+    "sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat-almanzar-debut",
+    "sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat"
+  ],
+  "ranked": [
+    {
+      "stem": "sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "score": 6.5,
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "score": 4,
+      "slug": "piedmont-ave-sandra-velazquez-season-feel",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat-almanzar-debut",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "score": 3,
+      "slug": null,
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "score": 2,
+      "slug": null,
+      "verdict": "accurate"
+    }
+  ],
+  "excludedCanonViolations": 0
+}

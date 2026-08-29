@@ -1,0 +1,29 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "simon-leary",
+  "byline": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 1,
+  "disposition": "flagged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/sports_c104_simon-leary_packet-v2_deepseek-deepseek-chat-2315.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-27T23:15:50.386Z"
+}

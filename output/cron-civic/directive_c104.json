@@ -1,0 +1,46 @@
+{
+  "stage": "directive",
+  "cycle": 104,
+  "model": "google/gemini-3.7-flash",
+  "mayorModel": "mistralai/mistral-large",
+  "blocks": [
+    "Avery Santana — Mayor",
+    "Elena Soria Dominguez — Transit Hub Planning Lead",
+    "Bobby Chen-Ramirez — Health Center Project Director",
+    "Keisha Ramos — Baylight Authority Director",
+    "Marcus Webb — OEWD Program Director (Stabilization Fund)",
+    "Vanessa Tran-Muñoz — OARI Program Director",
+    "Rafael Montez — Police Chief",
+    "Leonard Tran — City Council District 2",
+    "Brenda Okoro — Deputy Mayor (Community))",
+    "Elliott Crane — City Council District 6",
+    "Rose Delgado — City Council District 3",
+    "Denise Carter — City Council District 1"
+  ],
+  "rejectedBlocks": [],
+  "usage": {
+    "prompt_tokens": 5788,
+    "completion_tokens": 5331,
+    "total_tokens": 11119,
+    "cost": 0.012166125,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.012166125,
+      "upstream_inference_prompt_cost": 0.0021705,
+      "upstream_inference_completions_cost": 0.009995625
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 3350,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "directive": "output/mara-directives/mara_directive_c104_AUTO.txt",
+  "ranAt": "2026-08-24T02:00:33.339Z"
+}

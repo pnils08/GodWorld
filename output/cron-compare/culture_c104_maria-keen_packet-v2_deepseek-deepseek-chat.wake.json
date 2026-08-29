@@ -1,0 +1,29 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "maria-keen",
+  "byline": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 17,
+  "quotesLanded": 4,
+  "disposition": "flagged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/culture_c104_maria-keen_packet-v2_deepseek-deepseek-chat.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-24T23:16:46.291Z"
+}

@@ -18,20 +18,19 @@ Cycle **C104** · kind `anthony-analytic` · POP-00017
   - Vinnie Keane line (feed): 2-3, HR, 3 RBI
   - Team record (feed): 126-35 · W2
   - Event kind (feed): A's — player-feature (late-season)
-  - NamesUsed (feed): Pablo Almanzar (SP), Vinne Keane (DH)
+  - NamesUsed (feed): Pablo Almanzar (SP), Vinnie Keane (DH)
   - StoryAngle (feed): Pablo the Picasso shines again.
 **DossierFacts:**
   - NONE — offline slice; use packet TrueSource only if wake supplies
 **FeedFacts:**
   - StoryAngle: Pablo the Picasso shines again.
-  - Notes: Pablo Alamanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provid
+  - Notes: Pablo Almanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provide
   - Record/Streak: 126-35 / W2
 **Missing** (do not invent):
   - x-stats / barrel% / launch angle / OAA not on feed
   - contracts or salaries not printed on this feed row
   - As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)
   - TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies
-  - Pablo Almanzar has no Simulation_Ledger POPID in the local snapshot — do not invent or interview
 
 ## APPROACH
 Analytic approach (Anthony Raines): third-person only — never fan "we." One evaluative claim built on verifiable feed line numbers (Stats / record / StoryAngle). Open from the board (roster fact, contract on the feed, season line) — not the bleachers. Pick 1–2 tools from the analysis bag in this slice. Spell weighty numbers in prose. FORBIDDEN: inventing x-stats, barrel%, launch angle, contracts, or salaries not on the feed; P Slayer charge; Hal elegy as spine; multi-voice sports-desk average.
@@ -42,7 +41,7 @@ B: Soft FO language or bleacher heat that skips the line
 → Evaluate fit and process with numbers — one claim, third person.
 
 ## PLAYERS (feed names — do not invent)
-- Pablo Almanzar (no POPID on snapshot)
+- Pablo Almanzar (POP-01078) — SP / Oakland Athletics
 - Vinnie Keane (POP-00001) — Designated Hitter, Oakland A's Legend
 
 ## SCENE

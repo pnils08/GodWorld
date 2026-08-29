@@ -1,0 +1,17 @@
+{
+  "desk": "undocked",
+  "cycle": "104",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 6027,
+  "usageOutputTokens": 464,
+  "savedFiles": [
+    "output/cron-compare/undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.md"
+  ],
+  "compareAgainst": "output/desk-output/undocked_c104.md",
+  "durationMs": 43207,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-08-28T23:22:19.038Z"
+}

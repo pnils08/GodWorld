@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "sports",
+  "persona": "simon-leary",
+  "storyline": {
+    "slug": "old-oakland-melton-neilon-long-view-signal",
+    "verb": "advanced"
+  },
+  "hood": "Old Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks around the neighborhood talking about Benji Dillon’s shift, and it feels like the A’s just keep finding ways to adapt and thrive—it’s inspiring, honestly."
+    }
+  ],
+  "claim": "I’ve heard folks around the neighborhood talking about Benji Dillon’s shift, and it feels like the A’s just keep finding ways to adapt and thrive—it’s inspiring, honestly.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-27T18:18:26.921Z"
+}

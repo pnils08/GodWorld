@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "civic",
+  "persona": "angela-reyes",
+  "storyline": {
+    "slug": "east-oakland-jerome-pittman-anomaly",
+    "verb": "opened"
+  },
+  "hood": "East Oakland",
+  "quotes": [
+    {
+      "pop": "POP-01055",
+      "name": "Jerome Pittman",
+      "quote": "I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids."
+    }
+  ],
+  "claim": "I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-26T18:17:09.542Z"
+}

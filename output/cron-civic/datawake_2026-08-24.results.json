@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-24",
+  "cycle": 104,
+  "results": [
+    {
+      "office": "civic-office-council-d8",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d8_2026-08-24.json"
+    },
+    {
+      "office": "civic-office-council-d9",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-council-d9_2026-08-24.json"
+    },
+    {
+      "office": "civic-office-district-attorney",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-district-attorney_2026-08-24.json"
+    }
+  ],
+  "ranAt": "2026-08-24T10:45:40.920Z"
+}

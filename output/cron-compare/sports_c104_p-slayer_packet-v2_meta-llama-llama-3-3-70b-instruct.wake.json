@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "configuredWriterModel": "meta-llama/llama-3.3-70b-instruct",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "p-slayer",
+  "byline": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 9,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tauth.com]\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: I'm sitting at the bar in the Baylight District, watching the highlights of last night's game, and I\"\n}"
+  },
+  "ranAt": "2026-08-21T23:16:56.936Z"
+}

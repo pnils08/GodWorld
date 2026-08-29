@@ -1,0 +1,72 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": true,
+  "actor": {
+    "id": "POP-00136",
+    "name": "Rafael Montez",
+    "role": "Police Chief",
+    "officeId": "CHIEF-POLICE",
+    "district": "citywide",
+    "faction": "STAFF",
+    "agentDir": "civic-office-police-chief",
+    "initiative": null,
+    "dials": {
+      "approval": 65
+    }
+  },
+  "task": {
+    "a": "role-week",
+    "goal": "no move this cycle"
+  },
+  "pulse": null,
+  "prewrite": {
+    "claim": null,
+    "lineFacts": [],
+    "missing": [
+      "no due action on this seat this cycle"
+    ]
+  },
+  "signal": {
+    "kind": "role-heat",
+    "hoods": [],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "CHIEF-POLICE",
+        "PopId": "POP-00136",
+        "Holder": "Rafael Montez",
+        "District": "citywide",
+        "Approval": "65"
+      }
+    ],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

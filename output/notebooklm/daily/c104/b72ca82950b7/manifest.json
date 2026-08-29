@@ -1,0 +1,71 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.6",
+  "canonStatus": "NOT_CANON",
+  "cycle": 104,
+  "generatedAt": "2026-08-24T13:00:10.697Z",
+  "lastAttemptAt": "2026-08-24T14:40:11.243Z",
+  "hours": 36,
+  "packHash": "b72ca82950b70e2e9e80abfae0ec1fe8a3248346982c2dc79ae5fd245f098c44",
+  "worldSummary": "output/world_summary_c104.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [],
+  "flaggedReports": [],
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "CYCLE_OPEN",
+    "format": "brief",
+    "length": "short",
+    "activationEligible": true,
+    "reportedDayThreshold": null,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "W1_ACTIVE_6",
+      "CIVIC_DECISIONS",
+      "ENGINE_HIGH_SEVERITY",
+      "WORLD_HIGH_SIGNAL",
+      "WORLD_SHOCK"
+    ],
+    "dispositionCounts": {
+      "passed": 0,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "199c12ad9f03ef0bf9317776a3bb2129604e62d387afb5ed83af2cf4e7ef3b41"
+  },
+  "newsroomPulse": {
+    "fingerprint": "253145e3840382e56853ed96b8391bc4cb96f54b054762346600002ae821f6aa",
+    "counts": {
+      "angles": 6,
+      "asks": 0,
+      "fanoutAssignments": 6,
+      "w2Ready": 0,
+      "quotes": 0,
+      "passed": 0,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 6
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "boundedSourceHash": "fbc420bea2fde2e333d813d6713b96061910c6565eb98154a259f9211abdffb5",
+  "boundedSource": "output/notebooklm/daily/c104/b72ca82950b7/bounded-newsroom-source.md",
+  "sourceIds": [
+    "ba06a698-c815-420c-a56b-4eaf7d351e69"
+  ],
+  "opsReportArtifactId": "3f8a394b-287c-4e87-b7fa-c384adcb7cd7",
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioArtifactId": "74e18f4d-3de9-4835-860f-64497b2a6fe3",
+  "audioPath": "output/notebooklm/daily/c104/b72ca82950b7/godworld_daily_c104.m4a",
+  "driveLink": "https://drive.google.com/file/d/1o5mIPRwBX4h2ghnIO02OVGxC0ntFIWoB/view?usp=drivesdk"
+}

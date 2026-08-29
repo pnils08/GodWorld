@@ -1,0 +1,29 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "rachel-torres",
+  "byline": {
+    "name": "Sgt. Rachel Torres",
+    "popid": "POP-00057",
+    "beatDomain": "SAFETY"
+  },
+  "laneEntries": 49,
+  "quotesLanded": 4,
+  "disposition": "flagged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/civic_c104_rachel-torres_packet-v2_deepseek-deepseek-chat.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-25T23:15:29.259Z"
+}

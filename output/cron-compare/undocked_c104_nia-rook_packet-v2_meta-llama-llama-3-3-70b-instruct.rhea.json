@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "09cf0aa2898de7eecb100beb6671fea1942c999609bc040e57e8e2dc8d550d77",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance and citizen roles align with ledger records.",
+  "review": {
+    "profileId": "nia-rook-undocked-recap-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-1",
+    "manifestId": "AM-78c7dd236a00",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Andre Turner",
+      "Dillon Trevor",
+      "Jessie Hess",
+      "Merkin Jumper"
+    ],
+    "unverified": [
+      "Social Services Caseworker"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0092,
+  "durationMs": 7284,
+  "parseError": false,
+  "ranAt": "2026-08-28T23:22:26.524Z"
+}

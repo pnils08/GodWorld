@@ -1,0 +1,967 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "104",
+  "persona": "lila-mezran",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "kind": "anomaly",
+      "angle": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "hookLine": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "hood": "Temescal",
+      "popids": [
+        "POP-00745",
+        "POP-00761",
+        "POP-00775"
+      ],
+      "citizens": [
+        "Sonia Parikh (POP-00745)",
+        "Idris Karim (POP-00761)",
+        "Sam Alvarez (POP-00775)"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c104_lila-mezran_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00745",
+      "name": "Sonia Parikh",
+      "quote": "I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here.\",\n  \"fact_ids\": [\"F-ae3bddfa414f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00745-46c9afcab1",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00745",
+          "name": "Sonia Parikh (POP-00745)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Temescal",
+          "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Sonia Parikh (POP-00745)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-ae3bddfa414f"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-5327cda5209b"
+          },
+          {
+            "t": "FACT",
+            "text": "Sonia Parikh (POP-00745)",
+            "src": "Simulation_Ledger profile for POP-00745",
+            "id": "F-3563d750ef00"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00761",
+      "name": "Idris Karim",
+      "quote": "I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here.\",\"fact_ids\":[\"F-ae3bddfa414f\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00761-620177fb9d",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00761",
+          "name": "Idris Karim (POP-00761)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Temescal",
+          "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Idris Karim (POP-00761)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-ae3bddfa414f"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-5327cda5209b"
+          },
+          {
+            "t": "FACT",
+            "text": "Idris Karim (POP-00761)",
+            "src": "Simulation_Ledger profile for POP-00761",
+            "id": "F-e0bb49f447ed"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00775",
+      "name": "Sammie Alvarez",
+      "quote": "I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides.\",\n  \"fact_ids\": [\"F-ae3bddfa414f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00775-e55e3412ff",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00775",
+          "name": "Sam Alvarez (POP-00775)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Temescal",
+          "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Sam Alvarez (POP-00775)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-ae3bddfa414f"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-5327cda5209b"
+          },
+          {
+            "t": "FACT",
+            "text": "Sam Alvarez (POP-00775)",
+            "src": "Simulation_Ledger profile for POP-00775",
+            "id": "F-e4d42803c30f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides.\",\n  \"fact_ids\": [\"F-ae3bddfa414f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-bbb25d8eec",
+        "authoredQuote": true,
+        "publishableQuote": "I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Temescal",
+          "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-ae3bddfa414f"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-5327cda5209b"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00745",
+      "name": "Sonia Parikh",
+      "quote": "I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here.\",\n  \"fact_ids\": [\"F-ae3bddfa414f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00745-46c9afcab1",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00745",
+          "name": "Sonia Parikh (POP-00745)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Temescal",
+          "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Sonia Parikh (POP-00745)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-ae3bddfa414f"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-5327cda5209b"
+          },
+          {
+            "t": "FACT",
+            "text": "Sonia Parikh (POP-00745)",
+            "src": "Simulation_Ledger profile for POP-00745",
+            "id": "F-3563d750ef00"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00761",
+      "name": "Idris Karim",
+      "quote": "I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here.\",\"fact_ids\":[\"F-ae3bddfa414f\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00761-620177fb9d",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00761",
+          "name": "Idris Karim (POP-00761)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Temescal",
+          "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Idris Karim (POP-00761)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-ae3bddfa414f"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-5327cda5209b"
+          },
+          {
+            "t": "FACT",
+            "text": "Idris Karim (POP-00761)",
+            "src": "Simulation_Ledger profile for POP-00761",
+            "id": "F-e0bb49f447ed"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00775",
+      "name": "Sammie Alvarez",
+      "quote": "I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides.\",\n  \"fact_ids\": [\"F-ae3bddfa414f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00775-e55e3412ff",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00775",
+          "name": "Sam Alvarez (POP-00775)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Temescal",
+          "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Sam Alvarez (POP-00775)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-ae3bddfa414f"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-5327cda5209b"
+          },
+          {
+            "t": "FACT",
+            "text": "Sam Alvarez (POP-00775)",
+            "src": "Simulation_Ledger profile for POP-00775",
+            "id": "F-e4d42803c30f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides.\",\n  \"fact_ids\": [\"F-ae3bddfa414f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-bbb25d8eec",
+        "authoredQuote": true,
+        "publishableQuote": "I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Temescal",
+          "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-ae3bddfa414f"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+            "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+            "id": "F-5327cda5209b"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-27T18:16:34.201Z"
+}

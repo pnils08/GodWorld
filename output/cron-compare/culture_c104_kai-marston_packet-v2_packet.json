@@ -25,18 +25,29 @@
   },
   "angle": "output/cron-compare/culture_c104_kai-marston_packet-v2_angle.json",
   "quotesRequested": 4,
-  "quotesLanded": 0,
-  "quotes": [],
-  "interviews": [
+  "quotesLanded": 4,
+  "quotes": [
     {
       "pop": "POP-00210",
       "name": "Depak Ying",
-      "quote": null,
+      "quote": "I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight",
       "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; devoted, family is everything",
       "recorded": true,
-      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, the TV slate means a lineup of shows that I can watch after a long day of serving customers in Rockridge, and I think the Tribune should ask next what kind of impact these shows have on our community.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-a6797916f37c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"How do local residents like me feel about the current TV slate?\"\n}\n```",
-      "claims": null,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00210-da5e11c095",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight"
+      },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
@@ -49,12 +60,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Kai Marston",
-          "question": "What does the supplied trend \"TV slate\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What have you seen, felt, or understood about \"The TV slate and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": null,
-          "focus": "TV slate",
+          "focus": "The TV slate and its impact on the community",
           "src": "world_summary ## Evening Texture · Evening media TV"
         },
         "exposure": {
@@ -153,12 +164,24 @@
     {
       "pop": "POP-00170",
       "name": "Melton Neilon",
-      "quote": null,
+      "quote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news.",
       "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
       "recorded": true,
-      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, the TV slate is just something I catch glimpses of when I'm taking a break from the bakery, it's always got some countdown or special going on, I think the Tribune should ask what people around here are really watching and why.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"what locals think about the TV specials\"\n}\n```",
-      "claims": null,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-afa26d76c8",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news."
+      },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
@@ -171,12 +194,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Kai Marston",
-          "question": "What does the supplied trend \"TV slate\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What have you seen, felt, or understood about \"The TV slate and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": null,
-          "focus": "TV slate",
+          "focus": "The TV slate and its impact on the community",
           "src": "world_summary ## Evening Texture · Evening media TV"
         },
         "exposure": {
@@ -275,12 +298,24 @@
     {
       "pop": "POP-00198",
       "name": "Rick Walker",
-      "quote": null,
+      "quote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows.",
       "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
       "recorded": true,
-      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, the TV slate is just what's on TV tonight, I guess it's like a lineup of shows, and I think the Tribune should ask what people around here think about the New Year's Eve Special, since it's a big deal for our neighborhood.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"what locals expect from the New Year's Eve Special\"\n}\n```",
-      "claims": null,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-34d3330ecf",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows."
+      },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
@@ -293,12 +328,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Kai Marston",
-          "question": "What does the supplied trend \"TV slate\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What have you seen, felt, or understood about \"The TV slate and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": null,
-          "focus": "TV slate",
+          "focus": "The TV slate and its impact on the community",
           "src": "world_summary ## Evening Texture · Evening media TV"
         },
         "exposure": {
@@ -397,12 +432,24 @@
     {
       "pop": "POP-00201",
       "name": "Elio Perez",
-      "quote": null,
+      "quote": "I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve.",
       "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
       "recorded": true,
-      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: unverifiedLead must be an array or null",
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To me, the TV slate is about what's on tonight for people to watch, and I think the Tribune should ask next what people are really looking for in their evening TV lineup.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-a6797916f37c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": \"what makes a TV show appealing to the local community\"\n}\n```",
-      "claims": null,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-a69e46c599",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve."
+      },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
@@ -415,12 +462,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Kai Marston",
-          "question": "What does the supplied trend \"TV slate\" mean to you, and what should the Tribune ask next? Do not add a concrete example, object, event, or rumor."
+          "question": "What have you seen, felt, or understood about \"The TV slate and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": null,
-          "focus": "TV slate",
+          "focus": "The TV slate and its impact on the community",
           "src": "world_summary ## Evening Texture · Evening media TV"
         },
         "exposure": {
@@ -517,5 +564,543 @@
       }
     }
   ],
-  "ranAt": "2026-08-20T18:19:57.427Z"
+  "interviews": [
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight",
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00210-da5e11c095",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight"
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Kai Marston",
+          "question": "What have you seen, felt, or understood about \"The TV slate and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": null,
+          "focus": "The TV slate and its impact on the community",
+          "src": "world_summary ## Evening Texture · Evening media TV"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-d449233aa492"
+          },
+          {
+            "t": "FACT",
+            "text": "On the box tonight: Countdown Live, New Year's Eve Special.",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-296611fac168"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Countdown Live",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-ffc612bc2577"
+          },
+          {
+            "t": "FACT",
+            "text": "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-a6797916f37c"
+          },
+          {
+            "t": "FACT",
+            "text": "SPORTS BROADCAST: Oakland Sports Tonight",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-322324057650"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-afa26d76c8",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Kai Marston",
+          "question": "What have you seen, felt, or understood about \"The TV slate and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": null,
+          "focus": "The TV slate and its impact on the community",
+          "src": "world_summary ## Evening Texture · Evening media TV"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-d449233aa492"
+          },
+          {
+            "t": "FACT",
+            "text": "On the box tonight: Countdown Live, New Year's Eve Special.",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-296611fac168"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Countdown Live",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-ffc612bc2577"
+          },
+          {
+            "t": "FACT",
+            "text": "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-a6797916f37c"
+          },
+          {
+            "t": "FACT",
+            "text": "SPORTS BROADCAST: Oakland Sports Tonight",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-322324057650"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-34d3330ecf",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Kai Marston",
+          "question": "What have you seen, felt, or understood about \"The TV slate and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": null,
+          "focus": "The TV slate and its impact on the community",
+          "src": "world_summary ## Evening Texture · Evening media TV"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-d449233aa492"
+          },
+          {
+            "t": "FACT",
+            "text": "On the box tonight: Countdown Live, New Year's Eve Special.",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-296611fac168"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Countdown Live",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-ffc612bc2577"
+          },
+          {
+            "t": "FACT",
+            "text": "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-a6797916f37c"
+          },
+          {
+            "t": "FACT",
+            "text": "SPORTS BROADCAST: Oakland Sports Tonight",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-322324057650"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve.\",\n  \"fact_ids\": [\"F-d449233aa492\", \"F-296611fac168\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-a69e46c599",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Kai Marston",
+          "question": "What have you seen, felt, or understood about \"The TV slate and its impact on the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": null,
+          "focus": "The TV slate and its impact on the community",
+          "src": "world_summary ## Evening Texture · Evening media TV"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Elio Perez — Server — West Oakland",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-d449233aa492"
+          },
+          {
+            "t": "FACT",
+            "text": "On the box tonight: Countdown Live, New Year's Eve Special.",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-296611fac168"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Countdown Live",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-ffc612bc2577"
+          },
+          {
+            "t": "FACT",
+            "text": "TV: Countdown Live; New Year's Eve Special; Late Weather Watch; Breaking Bulletin; Weekend Kids; Oakland Baseball Tonight; One-on-One with Danny Horn (CF)",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-a6797916f37c"
+          },
+          {
+            "t": "FACT",
+            "text": "SPORTS BROADCAST: Oakland Sports Tonight",
+            "src": "world_summary ## Evening Texture · Evening media TV",
+            "id": "F-322324057650"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-5d500295f99a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-27T18:19:21.827Z"
 }

@@ -1,0 +1,675 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "104",
+  "persona": "mason-ortega",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Seasonal Spirits appears on the evening restaurant list in Rockridge. What was happening there is not established.",
+      "label": "Seasonal Spirits (Rockridge)",
+      "hookLine": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+      "hood": "Rockridge",
+      "pulseClass": "named-restaurant",
+      "citizens": [],
+      "popids": [],
+      "named": "Seasonal Spirits",
+      "venue": "Seasonal Spirits",
+      "ref": "world_summary ## Evening Texture · Restaurants",
+      "cycle": 104
+    }
+  },
+  "angle": "output/cron-compare/culture_c104_mason-ortega_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00651",
+      "name": "Howard Yell",
+      "quote": "I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression.\",\n  \"fact_ids\": [\"F-364f0aa8eb7c\", \"F-09855133984f\", \"F-8e6c0256f65e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-364f0aa8eb7c",
+          "F-09855133984f",
+          "F-8e6c0256f65e"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00651-1041b81611",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00651",
+          "name": "Howard Yell",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Rockridge",
+          "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Howard Yell — Barista — Rockridge",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits (Rockridge)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-364f0aa8eb7c"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-09855133984f"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-8e6c0256f65e"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Rockridge",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-73db550c5b37"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-b5167d1e50f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Howard Yell — Barista — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00651",
+            "id": "F-164713f8ccc6"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": null,
+      "disp": "relentless, can't stop working; magnetic, center of every room; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Working in restaurants, you feel the seasons change in the kitchen bags—summer's lighter produce, winter's root vegetables piling up. Seasonal Spirits? I hear they're doing interesting things with that rhythm, but I haven't had a night off to see for myself.\",\n  \"fact_ids\": [\"F-364f0aa8eb7c\", \"F-09855133984f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Rockridge",
+          "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits (Rockridge)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-364f0aa8eb7c"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-09855133984f"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-8e6c0256f65e"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Rockridge",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-73db550c5b37"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-b5167d1e50f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00267",
+      "name": "Jacob King",
+      "quote": null,
+      "disp": "driven, hard to sit still; draws people in, deep with them; curious, open to new things; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Working in kitchens around Rockridge, you pick up on the rhythm of the seasons—what's fresh, what people crave when the weather turns. Seasonal Spirits seems to have tapped into that, though I haven't had the chance to check it out myself yet.\",\n  \"fact_ids\": [\"F-364f0aa8eb7c\", \"F-09855133984f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00267",
+          "name": "Jacob King",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Rockridge",
+          "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jacob King — Line cook — Rockridge",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits (Rockridge)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-364f0aa8eb7c"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-09855133984f"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-8e6c0256f65e"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Rockridge",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-73db550c5b37"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-b5167d1e50f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Jacob King — Line cook — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00267",
+            "id": "F-169a3a9822bc"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00651",
+      "name": "Howard Yell",
+      "quote": "I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression.\",\n  \"fact_ids\": [\"F-364f0aa8eb7c\", \"F-09855133984f\", \"F-8e6c0256f65e\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-364f0aa8eb7c",
+          "F-09855133984f",
+          "F-8e6c0256f65e"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00651-1041b81611",
+        "authoredQuote": true,
+        "publishableQuote": "I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00651",
+          "name": "Howard Yell",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Rockridge",
+          "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Howard Yell — Barista — Rockridge",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits (Rockridge)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-364f0aa8eb7c"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-09855133984f"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-8e6c0256f65e"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Rockridge",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-73db550c5b37"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-b5167d1e50f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Howard Yell — Barista — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00651",
+            "id": "F-164713f8ccc6"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": null,
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, I haven't actually been to Seasonal Spirits yet, but I've heard folks around the neighborhood say it's got this warm, rotating menu that really captures the seasons—kinda like how pitching changes with the weather, you adjust to what's fresh and what works.\",\n  \"fact_ids\": [\"F-364f0aa8eb7c\", \"F-09855133984f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Rockridge",
+          "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits (Rockridge)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-364f0aa8eb7c"
+          },
+          {
+            "t": "FACT",
+            "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-09855133984f"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-8e6c0256f65e"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Rockridge",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-73db550c5b37"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Seasonal Spirits",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-b5167d1e50f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-2620383281c8"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-25T18:19:45.114Z"
+}

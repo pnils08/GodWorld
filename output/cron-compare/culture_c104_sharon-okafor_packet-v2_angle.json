@@ -1,0 +1,618 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "104",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00159",
+      "name": "Sharon Okafor",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Mark Aitken spotted at Adams Point United Methodist Church in Adams Point — ground truth only, no invented companions",
+      "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Sharon (lifestyle bag): behavior patterns, warm analytical — not arts (Kai) or kitchen labor (Mason). Modes: Venue Shift, Coffee/Night Out Barometer, Habit Under Stress, Pattern Without Diagnosis. No raw nightlife decimals as lead. Assigned pulse: fame-sighting — Mark Aitken at Adams Point United Methodist Church (Adams Point).",
+      "creativeBrief": {
+        "kind": "evening-life",
+        "bag": "lifestyle",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "namedEvents": [
+          "The Kelley Line Founding Celebration",
+          "The Keane Line Founding Celebration",
+          "The Corliss Line Founding Celebration",
+          "The Dillon Line Founding Celebration",
+          "Countdown Live",
+          "New Year's Eve Special",
+          "Late Weather Watch",
+          "Breaking Bulletin"
+        ],
+        "namedPlaces": [
+          "Seasonal Spirits",
+          "Merritt AfterDark",
+          "The 44th Table",
+          "Vibe Terrace",
+          "Rhythm Deck",
+          "Neon Harbor Club",
+          "Skybar"
+        ],
+        "famousSightings": [
+          "Mark Aitken",
+          "John Ellis",
+          "Marin Tao"
+        ],
+        "streamingTrend": "party playlist",
+        "sceneRule": "Named places only from Evening Texture / desk_signal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+        "sourcePointers": [
+          "docs/media/SHARON_LIFESTYLE_BAG.md",
+          "output/world_summary_c104.md ## Evening Texture",
+          "output/desk_signal_c104.json lanes.culture",
+          "docs/media/MARIA_GROUND_BAG.md",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Adams Point",
+      "score": null,
+      "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "nearby": [
+        {
+          "text": "Downtown | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### Downtown\"; events: world_summary_c104.md \"## World Events\""
+        },
+        {
+          "text": "East Oakland | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### East Oakland\"; events: world_summary_c104.md \"## World Events\""
+        },
+        {
+          "text": "KONO | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### KONO\"; events: world_summary_c104.md \"## World Events\""
+        },
+        {
+          "text": "Lake Merritt | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### Lake Merritt\"; events: world_summary_c104.md \"## World Events\""
+        },
+        {
+          "text": "Rockridge | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c104.md \"### Rockridge\"; events: world_summary_c104.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00782",
+          "name": "Devon Willis",
+          "profile": "Devon Willis — Server — Adams Point",
+          "why": "same-hood-ledger",
+          "role": "Server",
+          "hood": "Adams Point"
+        },
+        {
+          "pop": "POP-00645",
+          "name": "Ezekiel Campbell",
+          "profile": "Ezekiel Campbell — Taxi driver — Adams Point",
+          "why": "same-hood-ledger",
+          "role": "Taxi driver",
+          "hood": "Adams Point"
+        },
+        {
+          "pop": "POP-00648",
+          "name": "Mart Johns",
+          "profile": "Mart Johns — Nurse Aide — Adams Point",
+          "why": "same-hood-ledger",
+          "role": "Nurse Aide",
+          "hood": "Adams Point"
+        },
+        {
+          "pop": "POP-00798",
+          "name": "Grace Yamamoto",
+          "profile": "Grace Yamamoto — Independent Bookstore Owner — Adams Point",
+          "why": "same-hood-ledger",
+          "role": "Independent Bookstore Owner",
+          "hood": "Adams Point"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-ee594f6f1844"
+      },
+      {
+        "t": "FACT",
+        "text": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+        "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-cddb6ae89499"
+      },
+      {
+        "t": "FACT",
+        "text": "NAMED: Adams Point United Methodist Church",
+        "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-e587cb5d5eb9"
+      },
+      {
+        "t": "FACT",
+        "text": "PERSON: Mark Aitken",
+        "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-9ef277c7d148"
+      },
+      {
+        "t": "FACT",
+        "text": "VENUE: Adams Point United Methodist Church",
+        "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-ccbf1d1ea12b"
+      },
+      {
+        "t": "FACT",
+        "text": "HOOD: Adams Point",
+        "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-50f45c6601f5"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Mark Aitken spotted at Adams Point United Methodist Church in Adams Point — ground truth only, no invented companions",
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "hookLine": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+      "hood": "Adams Point",
+      "pulseClass": "fame-sighting",
+      "citizens": [
+        "Mark Aitken"
+      ],
+      "popids": [],
+      "named": "Adams Point United Methodist Church",
+      "venue": "Adams Point United Methodist Church",
+      "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "cycle": 104
+    },
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Sharon (lifestyle bag): behavior patterns, warm analytical — not arts (Kai) or kitchen labor (Mason). Modes: Venue Shift, Coffee/Night Out Barometer, Habit Under Stress, Pattern Without Diagnosis. No raw nightlife decimals as lead. Assigned pulse: fame-sighting — Mark Aitken at Adams Point United Methodist Church (Adams Point)."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "named": "Adams Point United Methodist Church",
+      "hood": "Adams Point",
+      "person": "Mark Aitken",
+      "venue": "Adams Point United Methodist Church"
+    },
+    "recommend": {
+      "bag": "ground",
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+      "reason": "top pulse fame-sighting → ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Mark Aitken at Adams Point United Methodist Church (Adams Point)"
+    },
+    "prewrite": {
+      "pulseClass": "fame-sighting",
+      "angle": "Mark Aitken spotted at Adams Point United Methodist Church in Adams Point — ground truth only, no invented companions",
+      "hookLine": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+      "anchorFacts": [
+        "NAMED: Adams Point United Methodist Church",
+        "PERSON: Mark Aitken",
+        "VENUE: Adams Point United Methodist Church",
+        "HOOD: Adams Point",
+        "PERSON: Mark Aitken",
+        "VENUE: Adams Point United Methodist Church",
+        "HOOD: Adams Point"
+      ],
+      "bagRecommend": "ground",
+      "bagSlug": "maria-keen"
+    },
+    "texture": {
+      "famous": [
+        "Mark Aitken",
+        "John Ellis",
+        "Marin Tao"
+      ],
+      "restaurants": [
+        {
+          "name": "Seasonal Spirits",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Merritt AfterDark",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "The 44th Table",
+          "hood": "Downtown"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "AfterHours Fry",
+          "hood": "Jack London"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Vibe Terrace",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Rhythm Deck",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "Neon Harbor Club",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Skybar",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 7,
+        "vibe": "Terrace** (Lake Merritt)",
+        "movement": "high-energy",
+        "weatherImpact": 1.33
+      },
+      "cityEvents": [
+        "The Kelley Line Founding Celebration",
+        "The Keane Line Founding Celebration",
+        "The Corliss Line Founding Celebration",
+        "The Dillon Line Founding Celebration"
+      ],
+      "tv": [
+        "Countdown Live",
+        "New Year's Eve Special",
+        "Late Weather Watch",
+        "Breaking Bulletin",
+        "Weekend Kids",
+        "Oakland Baseball Tonight",
+        "One-on-One with Danny Horn (CF)"
+      ],
+      "movies": [
+        "When the Ball Drops",
+        "Last Night",
+        "Fog Harbor",
+        "New Beginnings",
+        "Ninth Inning"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight",
+      "streamingTrend": "party playlist",
+      "foodTrend": "Holiday celebration dining - festive atmosphere"
+    },
+    "signals": {
+      "fameCount": 0,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+          "name": "Mark Aitken",
+          "venue": "Adams Point United Methodist Church",
+          "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Adams Point",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | John Ellis spotted around Laurel",
+          "name": null,
+          "venue": null,
+          "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Laurel",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Marin Tao spotted around San Antonio",
+          "name": null,
+          "venue": null,
+          "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "San Antonio",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Seasonal Spirits",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Merritt AfterDark",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "The 44th Table",
+          "hood": "Downtown"
+        },
+        {
+          "name": "AfterHours Fry",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Vibe Terrace",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Rhythm Deck",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "Neon Harbor Club",
+          "hood": "Jack London"
+        },
+        {
+          "name": "Skybar",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 7,
+        "vibe": "Terrace** (Lake Merritt)",
+        "movement": "high-energy",
+        "weatherImpact": 1.33
+      },
+      "cityEvents": [
+        "The Kelley Line Founding Celebration",
+        "The Keane Line Founding Celebration",
+        "The Corliss Line Founding Celebration",
+        "The Dillon Line Founding Celebration"
+      ],
+      "tv": [
+        "Countdown Live",
+        "New Year's Eve Special",
+        "Late Weather Watch",
+        "Breaking Bulletin",
+        "Weekend Kids",
+        "Oakland Baseball Tonight",
+        "One-on-One with Danny Horn (CF)"
+      ],
+      "movies": [
+        "When the Ball Drops",
+        "Last Night",
+        "Fog Harbor",
+        "New Beginnings",
+        "Ninth Inning"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "named": "Adams Point United Methodist Church",
+        "hood": "Adams Point"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Seasonal Spirits (Rockridge)",
+        "named": "Seasonal Spirits",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Merritt AfterDark (Lake Merritt)",
+        "named": "Merritt AfterDark",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "The 44th Table (Downtown)",
+        "named": "The 44th Table",
+        "hood": "Downtown"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Vibe Terrace (Lake Merritt)",
+        "named": "Vibe Terrace",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Rhythm Deck (West Oakland)",
+        "named": "Rhythm Deck",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Neon Harbor Club (Jack London)",
+        "named": "Neon Harbor Club",
+        "hood": "Jack London"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Skybar (Downtown)",
+        "named": "Skybar",
+        "hood": "Downtown"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Seasonal Spirits (Rockridge)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "tv-slate",
+        "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+        "score": 30,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "fame-sighting",
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "score": 31,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "fame-sighting",
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "score": 31,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "score": 43,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "text": "I'm investigating a sighting of Mark Aitken at Adams Point United Methodist Church in Adams Point",
+    "plan": {
+      "chase": "I'm investigating a sighting of Mark Aitken at Adams Point United Methodist Church in Adams Point",
+      "focus": "Mark Aitken's appearance at the church",
+      "why": "To understand the context and significance of this sighting",
+      "checks": [
+        "Verify the sighting with eyewitnesses",
+        "Research Mark Aitken's public schedule"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00782",
+          "question": "Did you see Mark Aitken at the church?",
+          "basis": "Eyewitness account"
+        },
+        {
+          "pop": "POP-00645",
+          "question": "Did you drive Mark Aitken to the church?",
+          "basis": "Taxi driver's log"
+        }
+      ],
+      "interpretation": "This sighting may indicate a new development in Mark Aitken's personal or professional life",
+      "unverifiedLead": [
+        "Possible connection to a local community event or charity"
+      ],
+      "closeQuestion": "What was Mark Aitken doing at Adams Point United Methodist Church?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Downtown | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c104.md \"### Downtown\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "East Oakland | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "East Oakland",
+      "ref": "output/neighborhood_texture_c104.md \"### East Oakland\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "KONO | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "KONO",
+      "ref": "output/neighborhood_texture_c104.md \"### KONO\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Lake Merritt | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Lake Merritt",
+      "ref": "output/neighborhood_texture_c104.md \"### Lake Merritt\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Rockridge | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Rockridge",
+      "ref": "output/neighborhood_texture_c104.md \"### Rockridge\"; events: world_summary_c104.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 17,
+  "ranAt": "2026-08-26T11:16:24.496Z"
+}

@@ -1,0 +1,334 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00156",
+    "name": "Angela Reyes",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+    "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "education-stability",
+      "method": "PROGRAM_CONTINUITY_ACCESS",
+      "missing": [
+        "a named student, teacher, family member, participant, or program staff member",
+        "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+        "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+      ],
+      "stabilityEvidence": {
+        "state": "UNESTABLISHED",
+        "participants": [],
+        "facts": [],
+        "src": null
+      },
+      "forbidden": [
+        "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "East Oakland",
+    "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+    "plan": {
+      "focus": "Education stability and program continuity in East Oakland",
+      "closeQuestion": "How can educational programs be better aligned to mitigate the decay in East Oakland?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01055",
+        "name": "Maria Conteras (POP-01047)",
+        "profile": "Maria Conteras (POP-01047)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01055-e75df8bd05",
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "quote": "I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education.",
+        "factIds": [
+          "F-3636de4563b5"
+        ],
+        "src": "packet.W2[POP-01055]"
+      },
+      {
+        "id": "Q-POP-00170-0a1be1ce01",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there.",
+        "factIds": [
+          "F-9a03f74b0a30",
+          "F-3636de4563b5"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00198-9d1ccf2d40",
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "quote": "I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids.",
+        "factIds": [
+          "F-9a03f74b0a30",
+          "F-3636de4563b5"
+        ],
+        "src": "packet.W2[POP-00198]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "Potential underutilization of educational resources",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Possible disconnect between educational programs and community needs",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+      "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+      "id": "F-9a03f74b0a30"
+    },
+    {
+      "t": "FACT",
+      "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+      "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+      "id": "F-3636de4563b5"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed school, youth, or apprenticeship Initiative into a warm account of program stability without inventing participants, institutions, access, or outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm, brief third-person education reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
+      "closing": "the next participant, access, continuity, or outcome record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-74575b2e1ba9",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-9a03f74b0a30",
+        "t": "FACT",
+        "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+        "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+      },
+      {
+        "id": "F-3636de4563b5",
+        "t": "FACT",
+        "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+        "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01055-e75df8bd05",
+        "speakerId": "POP-01055",
+        "speakerName": "Jerome Pittman",
+        "text": "I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education.",
+        "factIds": [
+          "F-3636de4563b5"
+        ],
+        "src": "packet.W2[POP-01055]"
+      },
+      {
+        "id": "Q-POP-00170-0a1be1ce01",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there.",
+        "factIds": [
+          "F-9a03f74b0a30",
+          "F-3636de4563b5"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00198-9d1ccf2d40",
+        "speakerId": "POP-00198",
+        "speakerName": "Rick Walker",
+        "text": "I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids.",
+        "factIds": [
+          "F-9a03f74b0a30",
+          "F-3636de4563b5"
+        ],
+        "src": "packet.W2[POP-00198]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01055",
+        "name": "Maria Conteras (POP-01047)",
+        "profile": "Maria Conteras",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "Potential underutilization of educational resources",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "Possible disconnect between educational programs and community needs",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  }
+}

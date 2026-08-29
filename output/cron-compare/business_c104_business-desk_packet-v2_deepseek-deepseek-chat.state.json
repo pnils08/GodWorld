@@ -33,8 +33,8 @@
     "hood": "Grand Lake",
     "src": "world_summary ## Engine Review · math-imbalance",
     "plan": {
-      "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
-      "closeQuestion": "Is Grand Lake’s retail slide a symptom of broader economic shifts, or is there a unique local dynamic at play?"
+      "focus": "Economic / storefront approach to retail decay in Grand Lake.",
+      "closeQuestion": "What steps can be taken to revitalize Grand Lake's retail scene and restore its economic vitality?"
     }
   },
   "exposure": {
@@ -52,14 +52,21 @@
         "profile": "Melton Neilon — Sourdough Baker — Temescal",
         "quotationEligible": true,
         "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — Line cook — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
       }
     ],
     "sources": [
       {
-        "id": "Q-POP-00002-8b034937ee",
+        "id": "Q-POP-00002-112d3c590a",
         "pop": "POP-00002",
         "name": "Amara Keane",
-        "quote": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.",
+        "quote": "I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant.",
         "factIds": [
           "F-b0e302e4edcf",
           "F-3a7d7a01e54c"
@@ -67,36 +74,37 @@
         "src": "packet.W2[POP-00002]"
       },
       {
-        "id": "Q-POP-00170-f7836520c8",
+        "id": "Q-POP-00170-2fa8297a45",
         "pop": "POP-00170",
         "name": "Melton Neilon",
-        "quote": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark.",
+        "quote": "I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone.",
         "factIds": [
           "F-b0e302e4edcf",
           "F-3a7d7a01e54c"
         ],
         "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00198-69e79aadc0",
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "quote": "I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character.",
+        "factIds": [
+          "F-b0e302e4edcf",
+          "F-3a7d7a01e54c"
+        ],
+        "src": "packet.W2[POP-00198]"
       }
     ],
     "excludedLeads": [
       {
-        "from": "Amara Keane",
-        "text": "Are there any existing but underpublicized initiatives to revitalize Grand Lake retail that residents simply aren't aware of?",
-        "usable": false
-      },
-      {
-        "from": "Melton Neilon",
-        "text": "Are commercial landlords in Grand Lake rejecting city small business retention grants?",
+        "from": "Jordan Velez",
+        "text": "Is there a specific event or policy change that triggered the retail decay in Grand Lake?",
         "usable": false
       },
       {
         "from": "Jordan Velez",
-        "text": "Potential mismatch between rising housing pressure and stagnant commercial investment",
-        "usable": false
-      },
-      {
-        "from": "Jordan Velez",
-        "text": "Local sentiment dip may reflect unmet expectations for neighborhood upkeep or business diversity",
+        "text": "Are there any local businesses that have managed to thrive despite the overall decline?",
         "usable": false
       }
     ]
@@ -172,7 +180,7 @@
       ]
     },
     "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
-    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
     "preflight": {
       "facts": "select manifest.approvedFacts ids",
       "quotes": "select manifest.approvedQuotes ids",
@@ -213,7 +221,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-ff17ef57000b",
+    "id": "AM-5ee61e0d2438",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -249,10 +257,10 @@
     ],
     "approvedQuotes": [
       {
-        "id": "Q-POP-00002-8b034937ee",
+        "id": "Q-POP-00002-112d3c590a",
         "speakerId": "POP-00002",
         "speakerName": "Amara Keane",
-        "text": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.",
+        "text": "I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant.",
         "factIds": [
           "F-b0e302e4edcf",
           "F-3a7d7a01e54c"
@@ -260,15 +268,26 @@
         "src": "packet.W2[POP-00002]"
       },
       {
-        "id": "Q-POP-00170-f7836520c8",
+        "id": "Q-POP-00170-2fa8297a45",
         "speakerId": "POP-00170",
         "speakerName": "Melton Neilon",
-        "text": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark.",
+        "text": "I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone.",
         "factIds": [
           "F-b0e302e4edcf",
           "F-3a7d7a01e54c"
         ],
         "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00198-69e79aadc0",
+        "speakerId": "POP-00198",
+        "speakerName": "Rick Walker",
+        "text": "I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character.",
+        "factIds": [
+          "F-b0e302e4edcf",
+          "F-3a7d7a01e54c"
+        ],
+        "src": "packet.W2[POP-00198]"
       }
     ],
     "approvedSubjects": [
@@ -283,6 +302,13 @@
         "id": "POP-00170",
         "name": "Melton Neilon",
         "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — Line cook — Fruitvale",
         "src": "packet.W1.exposure",
         "quotationEligible": true
       }
@@ -303,23 +329,13 @@
     ],
     "unverifiedLeads": [
       {
-        "from": "Amara Keane",
-        "text": "Are there any existing but underpublicized initiatives to revitalize Grand Lake retail that residents simply aren't aware of?",
-        "publishable": false
-      },
-      {
-        "from": "Melton Neilon",
-        "text": "Are commercial landlords in Grand Lake rejecting city small business retention grants?",
+        "from": "Jordan Velez",
+        "text": "Is there a specific event or policy change that triggered the retail decay in Grand Lake?",
         "publishable": false
       },
       {
         "from": "Jordan Velez",
-        "text": "Potential mismatch between rising housing pressure and stagnant commercial investment",
-        "publishable": false
-      },
-      {
-        "from": "Jordan Velez",
-        "text": "Local sentiment dip may reflect unmet expectations for neighborhood upkeep or business diversity",
+        "text": "Are there any local businesses that have managed to thrive despite the overall decline?",
         "publishable": false
       }
     ],

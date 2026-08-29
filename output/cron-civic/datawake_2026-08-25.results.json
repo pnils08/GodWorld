@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-25",
+  "cycle": 104,
+  "results": [
+    {
+      "office": "civic-office-mayor",
+      "ok": false,
+      "error": "fabricated statistic(s) after retry: 30, 250000, 60"
+    },
+    {
+      "office": "civic-office-okoro",
+      "ok": false,
+      "error": "no usable JSON statement after retry (model returned empty/invalid content)"
+    },
+    {
+      "office": "civic-office-police-chief",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-office-police-chief_2026-08-25.json"
+    }
+  ],
+  "ranAt": "2026-08-25T10:46:04.099Z"
+}

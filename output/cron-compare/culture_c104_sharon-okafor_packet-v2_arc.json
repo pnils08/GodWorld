@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "culture",
+  "persona": "sharon-okafor",
+  "storyline": {
+    "slug": "adams-point-devon-willis-fame-sighting",
+    "verb": "opened"
+  },
+  "hood": "Adams Point",
+  "quotes": [
+    {
+      "pop": "POP-00782",
+      "name": "Devon Willis",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it."
+    },
+    {
+      "pop": "POP-00645",
+      "name": "Ezekiel Campbell",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't know much about it. I've been driving my taxi around this neighborhood for a while, and I haven't noticed anything out of the ordinary. I'm just trying to do my job and get people where they need to go."
+    },
+    {
+      "pop": "POP-00648",
+      "name": "Mart Johns",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it. As a Nurse Aide, I'm used to focusing on my patients, not local news. It's just something I've heard around the neighborhood, that's all."
+    }
+  ],
+  "claim": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-26T18:19:59.292Z"
+}

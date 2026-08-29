@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "sharon-okafor",
+  "byline": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 17,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c104_sharon-okafor_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "odworld/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00159\",\n  \"name\": \"Sharon Okafor\",\n  \"recorded\": true,\n  \"text\": \"filed: The Quiet Sighting at Adams Point United Methodist\"\n}"
+  },
+  "ranAt": "2026-08-26T23:16:51.994Z"
+}

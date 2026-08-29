@@ -1,0 +1,437 @@
+{
+  "date": "2026-08-27",
+  "cycle": 104,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
+      "story": {
+        "ref": "output/engine_audit_c104.json patterns[5]; evidence: Neighborhood_Map row(s) 10",
+        "label": "Grand Lake: decay [Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500] with no matching active initiative",
+        "kind": "anomaly",
+        "angle": "The map says decay; the program roster does not answer it.",
+        "hookLine": null,
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00002",
+          "POP-00802",
+          "POP-00808",
+          "POP-01061",
+          "POP-00909",
+          "POP-00641",
+          "POP-00815"
+        ],
+        "citizens": [
+          "Amara Keane — Pianist, Philanthropist, Grand Lake",
+          "Funmi Shah — Glazier, KONO",
+          "Sahana Joshi — Elevator Mechanic, KONO",
+          "Celeste Moon — singer, KONO",
+          "Nguyet Mukherjee — Plumber, KONO",
+          "Hector Campbell — Taxi Driver, Rockridge",
+          "Amal Nair — Physical Therapist, KONO"
+        ],
+        "stinkClass": "metric-contradiction",
+        "stinkScore": 61
+      },
+      "stinkForce": true,
+      "stink": {
+        "className": "metric-contradiction",
+        "score": 61,
+        "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500] with no matching active initiative",
+        "ref": "output/engine_audit_c104.json patterns[5]; evidence: Neighborhood_Map row(s) 10",
+        "kind": "anomaly",
+        "desk": "civic"
+      },
+      "jaxSlice": true,
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Dr. Lila Mezran",
+      "popid": "POP-00154",
+      "beatDomain": "HEALTH",
+      "persona": "lila-mezran",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+        "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+        "kind": "anomaly",
+        "angle": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+        "hookLine": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00745",
+          "POP-00761",
+          "POP-00775"
+        ],
+        "citizens": [
+          "Sonia Parikh (POP-00745)",
+          "Idris Karim (POP-00761)",
+          "Sam Alvarez (POP-00775)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "lila-mezran",
+      "pulse": {
+        "className": "health",
+        "score": 45,
+        "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+        "hood": "Temescal",
+        "source": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]"
+        ],
+        "forbidden": [
+          "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+        ],
+        "schema": "HEALTH-SERVICE-BRIEF-1",
+        "method": "ACCESS_TIMELINE_HUMAN_COST",
+        "missing": [
+          "a named affected resident, patient, clinician, or service user",
+          "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+          "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+        ],
+        "humanConsequence": {
+          "state": "UNESTABLISHED",
+          "subjects": [],
+          "facts": [],
+          "src": null
+        }
+      },
+      "wakePackage": "LILA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "angle": "What the supplied C104 line card establishes, and what history remains unsupplied.",
+        "label": "A's — player-feature — supplied C104 line card",
+        "hookLine": "A's — player-feature — supplied C104 line card",
+        "hood": "Baylight District",
+        "pulseClass": "era-door",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "closingNote": "break of continuity",
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Vinnie Keane (POP-00001)"
+        ],
+        "popids": [
+          "POP-01078",
+          "POP-00001"
+        ],
+        "ref": "world_summary_c104.md ## Sports",
+        "cycle": 104
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "era-door",
+        "score": 81,
+        "label": "A's — player-feature — supplied C104 line card",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "storyAngle": "Pablo the Picasso shines again.",
+        "hasStats": true,
+        "record": "126-35",
+        "streak": "W2",
+        "foilNumber": "9IP",
+        "closingNote": "break of continuity",
+        "feedCycle": 104
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "closingNote": "break of continuity",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 126-35 · streak W2",
+          "Event (feed): A's — player-feature (late-season)",
+          "Cycle: C104"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "closingNote": "break of continuity",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity.",
+        "foilNumber": "9IP",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ]
+      },
+      "wakePackage": "HAL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "beatDomain": "CULTURE",
+      "persona": "kai-marston",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Evening TV slate — Countdown Live, New Year's Eve Special, Late Weather Watch; sports desk: Oakland Sports Tonight",
+        "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch",
+        "hookLine": "On the box tonight: Countdown Live, New Year's Eve Special.",
+        "hood": null,
+        "pulseClass": "tv-slate",
+        "citizens": [],
+        "popids": [],
+        "named": "Countdown Live",
+        "venue": "Countdown Live",
+        "ref": "world_summary ## Evening Texture · Evening media TV",
+        "cycle": 104
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "tv-slate",
+        "score": 16,
+        "label": "TV slate: Countdown Live; New Year's Eve Special; Late Weather Watch"
+      },
+      "recommend": {
+        "bag": "ground",
+        "slug": "maria-keen",
+        "name": "Maria Keen",
+        "popid": "POP-00013",
+        "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+        "reason": "top pulse fame-sighting → ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Mark Aitken at Adams Point United Methodist Church (Adams Point)"
+      },
+      "bag": "arts",
+      "wakePackage": "KAI-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "label": "Grand Lake retail decay",
+        "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "hood": "Grand Lake",
+        "pulseClass": "retail-decay",
+        "namedBusinesses": [],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## Engine Review · math-imbalance",
+        "cycle": 104
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "retail-decay",
+        "score": 28,
+        "label": "Grand Lake retail decay",
+        "hood": "Grand Lake",
+        "namedBusinesses": [],
+        "retail": null,
+        "retailDelta": -5.03
+      },
+      "prewrite": {
+        "pulseClass": "retail-decay",
+        "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "namedBusinesses": [],
+        "anchorFacts": [
+          "HOOD: Grand Lake",
+          "RETAIL DELTA (do not lead with decimal): -5.03",
+          "NAMED: none — do not invent storefronts",
+          "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "story": {
+        "ref": "undocked:undocked-pop00962-Y2C52",
+        "label": "UNDOCKED: Marcus Walker — up 24 on the night",
+        "kind": "undocked",
+        "angle": "Recap Marcus Walker's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 24, systems Sol, combat 0, mishaps 0, magnitude 2/5.",
+        "citizens": [
+          "Marcus Walker — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00962"
+        ],
+        "hood": "Jack London"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "seedless": 1,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Dr. Lila Mezran",
+        "persona": "lila-mezran",
+        "wakePackage": "LILA-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Kai Marston",
+        "persona": "kai-marston",
+        "wakePackage": "KAI-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": true,
+    "reason": "forced score=61 class=metric-contradiction",
+    "top": {
+      "score": 61,
+      "className": "metric-contradiction",
+      "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500] with no matching active initiative"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c104.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=freelance-firebrand,lila-mezran,hal-richmond,simon-leary,kai-marston,business-desk,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=era-door score=81 close=break of continuity"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=retail-decay score=28 hood=Grand Lake"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "kai-marston",
+        "bag": "arts",
+        "pulse": "tv-slate",
+        "score": 16
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "lila-mezran",
+        "domain": "health",
+        "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]"
+      }
+    ]
+  },
+  "builtAt": "2026-08-27T11:15:10.665Z"
+}

@@ -1,0 +1,914 @@
+{
+  "stage": "report",
+  "desk": "undocked",
+  "cycle": "104",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00688-Y2C52",
+      "label": "UNDOCKED: Merkin Jumper — up 40 on the night",
+      "kind": "undocked",
+      "angle": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 40, systems alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
+      "citizens": [
+        "Merkin Jumper — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00688"
+      ],
+      "hood": "Downtown"
+    }
+  },
+  "angle": "output/cron-compare/undocked_c104_nia-rook_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00688",
+      "name": "Merkin Jumper",
+      "quote": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need.\",\n  \"fact_ids\": [\"F-dfb5ce06700c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00688-bc499fb787",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00688",
+          "name": "Merkin Jumper",
+          "role": "UNDOCKED cast pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Merkin Jumper's performance and its impact on the city\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Merkin Jumper's performance and its impact on the city",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Merkin Jumper — UNDOCKED cast pilot",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+            "src": "undocked:undocked-pop00688-Y2C52",
+            "id": "F-dfb5ce06700c"
+          },
+          {
+            "t": "FACT",
+            "text": "Merkin Jumper — UNDOCKED cast pilot",
+            "src": "Simulation_Ledger profile for POP-00688",
+            "id": "F-d7bd9393808d"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out.\",\n  \"fact_ids\": [\"F-dfb5ce06700c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00212-43bcc00d01",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Merkin Jumper's performance and its impact on the city\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Merkin Jumper's performance and its impact on the city",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+            "src": "undocked:undocked-pop00688-Y2C52",
+            "id": "F-dfb5ce06700c"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00224",
+      "name": "Dillon Trevor",
+      "quote": "I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves.",
+      "disp": "magnetic, center of every room; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves.\",\n  \"fact_ids\": [\"F-dfb5ce06700c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00224-a01f3d105b",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00224",
+          "name": "Dillon Trevor",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Merkin Jumper's performance and its impact on the city\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Merkin Jumper's performance and its impact on the city",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dillon Trevor — Server — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+            "src": "undocked:undocked-pop00688-Y2C52",
+            "id": "F-dfb5ce06700c"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Trevor — Server — Downtown",
+            "src": "Simulation_Ledger profile for POP-00224",
+            "id": "F-80fac7a0ad63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00225",
+      "name": "Andre Turner",
+      "quote": "I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves.\",\n  \"fact_ids\": [\"F-dfb5ce06700c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00225-25e0c7da00",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00225",
+          "name": "Andre Turner",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Merkin Jumper's performance and its impact on the city\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Merkin Jumper's performance and its impact on the city",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Andre Turner — Line cook — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+            "src": "undocked:undocked-pop00688-Y2C52",
+            "id": "F-dfb5ce06700c"
+          },
+          {
+            "t": "FACT",
+            "text": "Andre Turner — Line cook — Downtown",
+            "src": "Simulation_Ledger profile for POP-00225",
+            "id": "F-f8810d7815e2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00688",
+      "name": "Merkin Jumper",
+      "quote": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need.",
+      "disp": "close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need.\",\n  \"fact_ids\": [\"F-dfb5ce06700c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00688-bc499fb787",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00688",
+          "name": "Merkin Jumper",
+          "role": "UNDOCKED cast pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Merkin Jumper's performance and its impact on the city\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Merkin Jumper's performance and its impact on the city",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Merkin Jumper — UNDOCKED cast pilot",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+            "src": "undocked:undocked-pop00688-Y2C52",
+            "id": "F-dfb5ce06700c"
+          },
+          {
+            "t": "FACT",
+            "text": "Merkin Jumper — UNDOCKED cast pilot",
+            "src": "Simulation_Ledger profile for POP-00688",
+            "id": "F-d7bd9393808d"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out.\",\n  \"fact_ids\": [\"F-dfb5ce06700c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00212-43bcc00d01",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Merkin Jumper's performance and its impact on the city\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Merkin Jumper's performance and its impact on the city",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+            "src": "undocked:undocked-pop00688-Y2C52",
+            "id": "F-dfb5ce06700c"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00224",
+      "name": "Dillon Trevor",
+      "quote": "I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves.",
+      "disp": "magnetic, center of every room; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves.\",\n  \"fact_ids\": [\"F-dfb5ce06700c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00224-a01f3d105b",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00224",
+          "name": "Dillon Trevor",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Merkin Jumper's performance and its impact on the city\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Merkin Jumper's performance and its impact on the city",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dillon Trevor — Server — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+            "src": "undocked:undocked-pop00688-Y2C52",
+            "id": "F-dfb5ce06700c"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Trevor — Server — Downtown",
+            "src": "Simulation_Ledger profile for POP-00224",
+            "id": "F-80fac7a0ad63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00225",
+      "name": "Andre Turner",
+      "quote": "I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves.\",\n  \"fact_ids\": [\"F-dfb5ce06700c\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00225-25e0c7da00",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00225",
+          "name": "Andre Turner",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"Merkin Jumper's performance and its impact on the city\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Downtown",
+          "focus": "Merkin Jumper's performance and its impact on the city",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Andre Turner — Line cook — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+            "src": "undocked:undocked-pop00688-Y2C52",
+            "id": "F-dfb5ce06700c"
+          },
+          {
+            "t": "FACT",
+            "text": "Andre Turner — Line cook — Downtown",
+            "src": "Simulation_Ledger profile for POP-00225",
+            "id": "F-f8810d7815e2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-28T18:21:49.914Z"
+}

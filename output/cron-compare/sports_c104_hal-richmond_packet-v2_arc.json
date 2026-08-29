@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "sports",
+  "persona": "hal-richmond",
+  "storyline": {
+    "slug": "baylight-district-vinnie-keane-era-door",
+    "verb": "advanced"
+  },
+  "hood": "Baylight District",
+  "quotes": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I've seen Pablo Almanzar bring a lot of energy to the team, and I feel like his journey has been really inspiring to watch. He's got a lot of heart and it shows in the way he plays."
+    },
+    {
+      "pop": "POP-00050",
+      "name": "Ernesto Quintero",
+      "quote": "I've seen Pablo Almanzar's journey have a positive impact on the team, it's been a good vibe around the neighborhood and the stadium."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I've seen how the team's energy shifts when someone's on a hot streak, and from what I've heard, Pablo Almanzar's journey has been a big part of that lately. As a baker, I know how one person's effort can affect the whole batch, and it sounds like he's been making a real impact."
+    }
+  ],
+  "claim": "I've seen Pablo Almanzar bring a lot of energy to the team, and I feel like his journey has been really inspiring to watch. He's got a lot of heart and it shows in the way he plays.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-28T18:17:44.889Z"
+}

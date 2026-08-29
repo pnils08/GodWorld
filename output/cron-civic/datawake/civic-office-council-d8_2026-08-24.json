@@ -1,0 +1,14 @@
+{
+  "office": "council_d8",
+  "agentDir": "civic-office-council-d8",
+  "holder": "Nina Chen",
+  "popid": "POP-00505",
+  "title": "City Council District 8",
+  "date": "2026-08-24",
+  "cycle": 104,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Lake Merritt's momentum demands protection - we can't let unchecked growth undermine the very qualities that make this district thrive. I'm calling for a temporary moratorium on new liquor licenses along Lakeshore until we complete the overdue safety impact study that was promised last cycle.",
+  "action": "propose liquor license moratorium",
+  "numberMoved": "7",
+  "ranAt": "2026-08-24T10:45:13.311Z"
+}

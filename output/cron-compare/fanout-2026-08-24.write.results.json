@@ -1,0 +1,39 @@
+{
+  "date": "2026-08-24",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": false,
+      "error": "W3: zero publishable answers — fail closed, do not open W3"
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": false,
+      "error": "Command failed: node /root/GodWorld/scripts/cron-desk-writer.js --desk sports --state-file output/cron-compare/sports_c104_hal-richmond_packet-v2_deepseek-deepseek-chat.state.json --persona hal-richmond --artifact-tag packet-v2 --provider openrouter --model deepseek/deepseek-chat --strict-source-hygiene --packet-only"
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-08-24T23:17:23.015Z"
+}

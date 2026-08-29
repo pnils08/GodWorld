@@ -1,0 +1,38 @@
+{
+  "date": "2026-08-25",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/civic_c104_freelance-firebrand_packet-v2_angle.json — run --stage=angle first"
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-08-25T18:20:59.096Z"
+}

@@ -1,0 +1,14 @@
+{
+  "office": "council_d9",
+  "agentDir": "civic-office-council-d9",
+  "holder": "Terrence Mobley",
+  "popid": "POP-00506",
+  "title": "City Council District 9",
+  "date": "2026-08-24",
+  "cycle": 104,
+  "model": "qwen/qwen3-235b-a22b",
+  "statement": "\"Laurel’s crime rates remain below city averages, with property crimes at 27 and violent crimes at 24 this cycle—well under the city’s 40.6 and 33.5. Sentiment stands steady at 0.49, and our housing pressure is flat zero. This isn’t a district in crisis—it’s one worth protecting. I’ll defend our momentum.\" By leveraging D9’s lower crime index (0.45 vs city 0.709) and stable metrics, Mobley opts to defend the district’s safety narrative, citing known Laurel residents’ lived context without introducing new stakeholders or fabricated stats.",
+  "action": "defend the district",
+  "numberMoved": "crime index (0.45), sentiment (0.49), housing pressure (0)",
+  "ranAt": "2026-08-24T10:45:30.847Z"
+}

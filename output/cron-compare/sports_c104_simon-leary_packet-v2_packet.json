@@ -1,0 +1,455 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "104",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 126-35.",
+      "label": "The A's record is 126-35.",
+      "hookLine": "The A's record is 126-35.",
+      "kind": "long-view-signal",
+      "hood": "Old Oakland",
+      "popids": [
+        "POP-00001",
+        "POP-00018",
+        "POP-00527"
+      ],
+      "citizens": [
+        "Vinnie Keane (POP-00001)",
+        "Benji Dillon (POP-00018)",
+        "Mike Paulson (POP-00527)"
+      ],
+      "ref": "world_summary_c104.md ## Sports",
+      "cycle": 104
+    }
+  },
+  "angle": "output/cron-compare/sports_c104_simon-leary_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 0,
+  "quotes": [],
+  "interviews": [
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": null,
+      "disp": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Moving to the bullpen taught me that adaptability is just as crucial as consistency—it’s not about the role, it’s about how you embrace it to keep the team moving forward.\",\n  \"fact_ids\": [\"F-488aaf7fc84e\", \"F-7a2f0057c2f6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00018",
+          "name": "Benji Dillon",
+          "role": "Pitcher, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What have you seen, felt, or understood about \"Role changes within a sustained team performance, using Benji Dillon's move to the bullpen as a lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Old Oakland",
+          "focus": "Role changes within a sustained team performance, using Benji Dillon's move to the bullpen as a lens.",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 126-35.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-488aaf7fc84e"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 2 straight.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-7a2f0057c2f6"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00018",
+            "id": "F-2620383281c8"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": null,
+      "disp": "relentless, can't stop working; draws people in, deep with them; openly affectionate, big-hearted; curious, open to new things; steady, hard to shake; principled, plays it straight; close to family; often out in the neighborhood",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, moving Benji to the bullpen—that's the kind of shift that tests a team's fabric. I've seen guys thrive in new roles when they embrace it fully, and I've seen others fight it tooth and nail. What matters is whether the trust stays solid—between the player, the staff, the whole damn clubhouse.\",\n  \"fact_ids\": [\"F-488aaf7fc84e\", \"F-7a2f0057c2f6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What have you seen, felt, or understood about \"Role changes within a sustained team performance, using Benji Dillon's move to the bullpen as a lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Old Oakland",
+          "focus": "Role changes within a sustained team performance, using Benji Dillon's move to the bullpen as a lens.",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 126-35.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-488aaf7fc84e"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 2 straight.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-7a2f0057c2f6"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-2b3e2e3d075f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00527",
+      "name": "Mike Paulson",
+      "quote": null,
+      "disp": "driven, hard to sit still; draws people in, deep with them; steady, hard to shake",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Benji's move to the bullpen isn't just about pitching—it's about adapting to keep the team's rhythm intact. I've seen how shifting roles can either disrupt or elevate performance, and with Benji, it’s been about finding where he can thrive while keeping the A's momentum alive.\",\n  \"fact_ids\": [\"F-488aaf7fc84e\", \"F-7a2f0057c2f6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00527",
+          "name": "Mike Paulson",
+          "role": "General Manager, Oakland A's & The Oaks",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What have you seen, felt, or understood about \"Role changes within a sustained team performance, using Benji Dillon's move to the bullpen as a lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Old Oakland",
+          "focus": "Role changes within a sustained team performance, using Benji Dillon's move to the bullpen as a lens.",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 126-35.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-488aaf7fc84e"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 2 straight.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-7a2f0057c2f6"
+          },
+          {
+            "t": "FACT",
+            "text": "Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London",
+            "src": "Simulation_Ledger profile for POP-00527",
+            "id": "F-6befd7997ea5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": null,
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, watching Benji Dillon shift to the bullpen reminds me of how I adjust my sourdough starters—sometimes what worked yesterday needs a change today to keep everything rising right. It's all about knowing when to step back and let someone else take the heat, or in my case, when to let the dough rest.\",\n  \"fact_ids\": [\"F-488aaf7fc84e\", \"F-7a2f0057c2f6\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Simon Leary",
+          "question": "What have you seen, felt, or understood about \"Role changes within a sustained team performance, using Benji Dillon's move to the bullpen as a lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "long-view-signal",
+          "hood": "Old Oakland",
+          "focus": "Role changes within a sustained team performance, using Benji Dillon's move to the bullpen as a lens.",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's record is 126-35.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-488aaf7fc84e"
+          },
+          {
+            "t": "FACT",
+            "text": "The A's have won 2 straight.",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-7a2f0057c2f6"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-28T18:19:01.675Z"
+}

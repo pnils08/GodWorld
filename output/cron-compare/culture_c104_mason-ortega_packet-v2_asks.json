@@ -1,0 +1,498 @@
+[
+  {
+    "pop": "POP-00210",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00210\",\"name\":\"Depak Ying\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Rockridge, what have you seen, felt, or understood about \\\"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Rockridge\",\"focus\":\"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\",\"src\":\"world_summary ## Evening Texture · Restaurants\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Depak Ying — Server — Rockridge\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Seasonal Spirits (Rockridge)\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-364f0aa8eb7c\"},{\"t\":\"FACT\",\"text\":\"Seasonal Spirits appears on the evening restaurant list in Rockridge.\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-09855133984f\"},{\"t\":\"FACT\",\"text\":\"NAMED: Seasonal Spirits\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-8e6c0256f65e\"},{\"t\":\"FACT\",\"text\":\"HOOD: Rockridge\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-73db550c5b37\"},{\"t\":\"FACT\",\"text\":\"VENUE: Seasonal Spirits\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-b5167d1e50f5\"},{\"t\":\"FACT\",\"text\":\"Depak Ying — Server — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00210\",\"id\":\"F-d4c31165a2d5\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00210",
+        "name": "Depak Ying",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Rockridge",
+        "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Depak Ying — Server — Rockridge",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Seasonal Spirits (Rockridge)",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-364f0aa8eb7c"
+        },
+        {
+          "t": "FACT",
+          "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-09855133984f"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Seasonal Spirits",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-8e6c0256f65e"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Rockridge",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-73db550c5b37"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Seasonal Spirits",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-b5167d1e50f5"
+        },
+        {
+          "t": "FACT",
+          "text": "Depak Ying — Server — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00210",
+          "id": "F-d4c31165a2d5"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00267",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00267\",\"name\":\"Jacob King\",\"role\":\"Line cook\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Rockridge, what have you seen, felt, or understood about \\\"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Rockridge\",\"focus\":\"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\",\"src\":\"world_summary ## Evening Texture · Restaurants\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Jacob King — Line cook — Rockridge\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Seasonal Spirits (Rockridge)\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-364f0aa8eb7c\"},{\"t\":\"FACT\",\"text\":\"Seasonal Spirits appears on the evening restaurant list in Rockridge.\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-09855133984f\"},{\"t\":\"FACT\",\"text\":\"NAMED: Seasonal Spirits\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-8e6c0256f65e\"},{\"t\":\"FACT\",\"text\":\"HOOD: Rockridge\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-73db550c5b37\"},{\"t\":\"FACT\",\"text\":\"VENUE: Seasonal Spirits\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-b5167d1e50f5\"},{\"t\":\"FACT\",\"text\":\"Jacob King — Line cook — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00267\",\"id\":\"F-169a3a9822bc\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00267",
+        "name": "Jacob King",
+        "role": "Line cook",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Rockridge",
+        "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Jacob King — Line cook — Rockridge",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Seasonal Spirits (Rockridge)",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-364f0aa8eb7c"
+        },
+        {
+          "t": "FACT",
+          "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-09855133984f"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Seasonal Spirits",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-8e6c0256f65e"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Rockridge",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-73db550c5b37"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Seasonal Spirits",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-b5167d1e50f5"
+        },
+        {
+          "t": "FACT",
+          "text": "Jacob King — Line cook — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00267",
+          "id": "F-169a3a9822bc"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00651",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00651\",\"name\":\"Howard Yell\",\"role\":\"Barista\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Rockridge, what have you seen, felt, or understood about \\\"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Rockridge\",\"focus\":\"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\",\"src\":\"world_summary ## Evening Texture · Restaurants\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Howard Yell — Barista — Rockridge\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Seasonal Spirits (Rockridge)\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-364f0aa8eb7c\"},{\"t\":\"FACT\",\"text\":\"Seasonal Spirits appears on the evening restaurant list in Rockridge.\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-09855133984f\"},{\"t\":\"FACT\",\"text\":\"NAMED: Seasonal Spirits\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-8e6c0256f65e\"},{\"t\":\"FACT\",\"text\":\"HOOD: Rockridge\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-73db550c5b37\"},{\"t\":\"FACT\",\"text\":\"VENUE: Seasonal Spirits\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-b5167d1e50f5\"},{\"t\":\"FACT\",\"text\":\"Howard Yell — Barista — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00651\",\"id\":\"F-164713f8ccc6\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00651",
+        "name": "Howard Yell",
+        "role": "Barista",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Rockridge",
+        "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Howard Yell — Barista — Rockridge",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Seasonal Spirits (Rockridge)",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-364f0aa8eb7c"
+        },
+        {
+          "t": "FACT",
+          "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-09855133984f"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Seasonal Spirits",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-8e6c0256f65e"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Rockridge",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-73db550c5b37"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Seasonal Spirits",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-b5167d1e50f5"
+        },
+        {
+          "t": "FACT",
+          "text": "Howard Yell — Barista — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00651",
+          "id": "F-164713f8ccc6"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00018",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00018\",\"name\":\"Benji Dillon\",\"role\":\"Pitcher, Oakland A's Legend\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Mason Ortega\",\"question\":\"As a resident of Rockridge, what have you seen, felt, or understood about \\\"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"story-signal\",\"hood\":\"Rockridge\",\"focus\":\"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\",\"src\":\"world_summary ## Evening Texture · Restaurants\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Benji Dillon — Pitcher, Oakland A's Legend — Rockridge\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C104\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-c612b6082c46\"},{\"t\":\"FACT\",\"text\":\"Seasonal Spirits (Rockridge)\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-364f0aa8eb7c\"},{\"t\":\"FACT\",\"text\":\"Seasonal Spirits appears on the evening restaurant list in Rockridge.\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-09855133984f\"},{\"t\":\"FACT\",\"text\":\"NAMED: Seasonal Spirits\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-8e6c0256f65e\"},{\"t\":\"FACT\",\"text\":\"HOOD: Rockridge\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-73db550c5b37\"},{\"t\":\"FACT\",\"text\":\"VENUE: Seasonal Spirits\",\"src\":\"world_summary ## Evening Texture · Restaurants\",\"id\":\"F-b5167d1e50f5\"},{\"t\":\"FACT\",\"text\":\"Benji Dillon — Pitcher, Oakland A's Legend — Rockridge\",\"src\":\"Simulation_Ledger profile for POP-00018\",\"id\":\"F-2620383281c8\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "role": "Pitcher, Oakland A's Legend",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Mason Ortega",
+        "question": "As a resident of Rockridge, what have you seen, felt, or understood about \"Seasonal Spirits in Rockridge, from a kitchen bag perspective.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "story-signal",
+        "hood": "Rockridge",
+        "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C104",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-c612b6082c46"
+        },
+        {
+          "t": "FACT",
+          "text": "Seasonal Spirits (Rockridge)",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-364f0aa8eb7c"
+        },
+        {
+          "t": "FACT",
+          "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-09855133984f"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Seasonal Spirits",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-8e6c0256f65e"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Rockridge",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-73db550c5b37"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Seasonal Spirits",
+          "src": "world_summary ## Evening Texture · Restaurants",
+          "id": "F-b5167d1e50f5"
+        },
+        {
+          "t": "FACT",
+          "text": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "src": "Simulation_Ledger profile for POP-00018",
+          "id": "F-2620383281c8"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

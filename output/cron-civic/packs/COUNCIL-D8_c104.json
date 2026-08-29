@@ -1,0 +1,212 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00505",
+    "name": "Nina Chen",
+    "role": "City Council District 8",
+    "officeId": "COUNCIL-D8",
+    "district": "D8",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d8",
+    "initiative": null,
+    "dials": {
+      "approval": 53
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "defend the district or go quiet"
+  },
+  "pulse": {
+    "className": "approval-pressure",
+    "score": 52,
+    "label": "Nina Chen at approval 53",
+    "lever": "defend the district or go quiet",
+    "hood": "Lake Merritt",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.59,
+      "citySentiment": 0.5099999999999999,
+      "crime": 0.76,
+      "cityCrime": 0.7086363636363636,
+      "heat": -6.97272727272728,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "defend the district or go quiet",
+    "lineFacts": [
+      "approval 53",
+      "Lake Merritt crime: property 47, violent 35, incidents 7 (cycle 104) — city property 40.6, violent 33.5, incidents 6.4",
+      "Lake Merritt: sentiment 0.59 vs city 0.510; crime index 0.76 vs city 0.709; retail 6.68; housing pressure 2.5; growth; momentum 8"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Lake Merritt",
+      "Adams Point",
+      "Grand Lake",
+      "Eastlake"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00013",
+        "name": "Maria Keen",
+        "neighborhood": "Lake Merritt",
+        "role": "Journalist, Cultural Liason",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Lake Merritt — Nina Chen at approval 53"
+      },
+      {
+        "pop": "POP-00029",
+        "name": "Alisha Peña",
+        "neighborhood": "Lake Merritt",
+        "role": "Female Model",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Lake Merritt — Nina Chen at approval 53"
+      },
+      {
+        "pop": "POP-00046",
+        "name": "Manny Ellen",
+        "neighborhood": "Lake Merritt",
+        "role": "Elections Office",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Lake Merritt — Nina Chen at approval 53"
+      },
+      {
+        "pop": "POP-00047",
+        "name": "Babe Bono",
+        "neighborhood": "Lake Merritt",
+        "role": "Redevelopment Board",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Lake Merritt — Nina Chen at approval 53"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "Lakeshore Unitarian Universalist Fellowship",
+        "neighborhood": "Lake Merritt",
+        "text": "emergency assistance fund activated",
+        "src": "world_summary faith-event"
+      },
+      {
+        "name": "Cathedral of the Living Word",
+        "neighborhood": "Lake Merritt",
+        "text": "congregation celebrates Advent and Christmas",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D8",
+      "t": "FACT",
+      "text": "Nina Chen holds COUNCIL-D8 at approval 53",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-crime-LakeMerritt",
+      "t": "FACT",
+      "text": "Lake Merritt crime: property 47, violent 35, incidents 7 (cycle 104) — city property 40.6, violent 33.5, incidents 6.4",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-LakeMerritt",
+      "t": "FACT",
+      "text": "Lake Merritt: sentiment 0.59 vs city 0.510; crime index 0.76 vs city 0.709; retail 6.68; housing pressure 2.5; growth; momentum 8",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-event-1",
+      "t": "FACT",
+      "text": "The Corliss Line Founding Celebration (Lake Merritt) — Lake Merritt",
+      "src": "world_summary city-event"
+    },
+    {
+      "id": "F-traj-3",
+      "t": "FACT",
+      "text": "Lake Merritt boom sustained — momentum 8/10, the block everyone wants onto",
+      "src": "world_summary trajectory"
+    },
+    {
+      "id": "F-chaos-oari_van-neighborhood Lake Merrit",
+      "t": "FACT",
+      "text": "oari_van welfare_check → neighborhood Lake Merritt Sentiment 0.08",
+      "src": "world_summary Chaos_Cars"
+    },
+    {
+      "id": "F-we-3",
+      "t": "FACT",
+      "text": "FAITH — crisis_response — Lake Merritt: Lakeshore Unitarian Universalist Fellowship: emergency assistance fund activated",
+      "src": "world_summary World Events"
+    },
+    {
+      "id": "F-we-4",
+      "t": "FACT",
+      "text": "FAITH — holy_day — Lake Merritt: Cathedral of the Living Word observes Advent and Christmas",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Approval": "53"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Faction": "CRC",
+        "Approval": 55
+      },
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

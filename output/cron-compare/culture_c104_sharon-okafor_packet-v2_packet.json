@@ -1,0 +1,1010 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "104",
+  "persona": "sharon-okafor",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Mark Aitken spotted at Adams Point United Methodist Church in Adams Point — ground truth only, no invented companions",
+      "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+      "hookLine": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+      "hood": "Adams Point",
+      "pulseClass": "fame-sighting",
+      "citizens": [
+        "Mark Aitken"
+      ],
+      "popids": [],
+      "named": "Adams Point United Methodist Church",
+      "venue": "Adams Point United Methodist Church",
+      "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "cycle": 104
+    }
+  },
+  "angle": "output/cron-compare/culture_c104_sharon-okafor_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00782",
+      "name": "Devon Willis",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it.\",\n  \"fact_ids\": [\"F-ee594f6f1844\", \"F-cddb6ae89499\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ee594f6f1844",
+          "F-cddb6ae89499"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00782-f60c2c4e7b",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00782",
+          "name": "Devon Willis",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"Mark Aitken's appearance at the church\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Adams Point",
+          "focus": "Mark Aitken's appearance at the church",
+          "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Devon Willis — Server — Adams Point",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ee594f6f1844"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-cddb6ae89499"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-e587cb5d5eb9"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Mark Aitken",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9ef277c7d148"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ccbf1d1ea12b"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Adams Point",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-50f45c6601f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Devon Willis — Server — Adams Point",
+            "src": "Simulation_Ledger profile for POP-00782",
+            "id": "F-b0c5df57b70e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00645",
+      "name": "Ezekiel Campbell",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't know much about it. I've been driving my taxi around this neighborhood for a while, and I haven't noticed anything out of the ordinary. I'm just trying to do my job and get people where they need to go.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't know much about it. I've been driving my taxi around this neighborhood for a while, and I haven't noticed anything out of the ordinary. I'm just trying to do my job and get people where they need to go.\",\n  \"fact_ids\": [\"F-ee594f6f1844\", \"F-cddb6ae89499\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ee594f6f1844",
+          "F-cddb6ae89499"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00645-e9a489e517",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't know much about it. I've been driving my taxi around this neighborhood for a while, and I haven't noticed anything out of the ordinary. I'm just trying to do my job and get people where they need to go."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00645",
+          "name": "Ezekiel Campbell",
+          "role": "Taxi driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"Mark Aitken's appearance at the church\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Adams Point",
+          "focus": "Mark Aitken's appearance at the church",
+          "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ezekiel Campbell — Taxi driver — Adams Point",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ee594f6f1844"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-cddb6ae89499"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-e587cb5d5eb9"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Mark Aitken",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9ef277c7d148"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ccbf1d1ea12b"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Adams Point",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-50f45c6601f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Ezekiel Campbell — Taxi driver — Adams Point",
+            "src": "Simulation_Ledger profile for POP-00645",
+            "id": "F-ff810adb4710"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00648",
+      "name": "Mart Johns",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it. As a Nurse Aide, I'm used to focusing on my patients, not local news. It's just something I've heard around the neighborhood, that's all.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it. As a Nurse Aide, I'm used to focusing on my patients, not local news. It's just something I've heard around the neighborhood, that's all.\",\n  \"fact_ids\": [\"F-ee594f6f1844\", \"F-cddb6ae89499\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ee594f6f1844",
+          "F-cddb6ae89499"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00648-005bd6279b",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it. As a Nurse Aide, I'm used to focusing on my patients, not local news. It's just something I've heard around the neighborhood, that's all."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00648",
+          "name": "Mart Johns",
+          "role": "Nurse Aide",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"Mark Aitken's appearance at the church\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Adams Point",
+          "focus": "Mark Aitken's appearance at the church",
+          "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Mart Johns — Nurse Aide — Adams Point",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ee594f6f1844"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-cddb6ae89499"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-e587cb5d5eb9"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Mark Aitken",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9ef277c7d148"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ccbf1d1ea12b"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Adams Point",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-50f45c6601f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Mart Johns — Nurse Aide — Adams Point",
+            "src": "Simulation_Ledger profile for POP-00648",
+            "id": "F-212a52ca3cb2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00782",
+      "name": "Devon Willis",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it.\",\n  \"fact_ids\": [\"F-ee594f6f1844\", \"F-cddb6ae89499\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ee594f6f1844",
+          "F-cddb6ae89499"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00782-f60c2c4e7b",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00782",
+          "name": "Devon Willis",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"Mark Aitken's appearance at the church\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Adams Point",
+          "focus": "Mark Aitken's appearance at the church",
+          "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Devon Willis — Server — Adams Point",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ee594f6f1844"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-cddb6ae89499"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-e587cb5d5eb9"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Mark Aitken",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9ef277c7d148"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ccbf1d1ea12b"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Adams Point",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-50f45c6601f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Devon Willis — Server — Adams Point",
+            "src": "Simulation_Ledger profile for POP-00782",
+            "id": "F-b0c5df57b70e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00645",
+      "name": "Ezekiel Campbell",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't know much about it. I've been driving my taxi around this neighborhood for a while, and I haven't noticed anything out of the ordinary. I'm just trying to do my job and get people where they need to go.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't know much about it. I've been driving my taxi around this neighborhood for a while, and I haven't noticed anything out of the ordinary. I'm just trying to do my job and get people where they need to go.\",\n  \"fact_ids\": [\"F-ee594f6f1844\", \"F-cddb6ae89499\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ee594f6f1844",
+          "F-cddb6ae89499"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00645-e9a489e517",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't know much about it. I've been driving my taxi around this neighborhood for a while, and I haven't noticed anything out of the ordinary. I'm just trying to do my job and get people where they need to go."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00645",
+          "name": "Ezekiel Campbell",
+          "role": "Taxi driver",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"Mark Aitken's appearance at the church\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Adams Point",
+          "focus": "Mark Aitken's appearance at the church",
+          "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ezekiel Campbell — Taxi driver — Adams Point",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ee594f6f1844"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-cddb6ae89499"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-e587cb5d5eb9"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Mark Aitken",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9ef277c7d148"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ccbf1d1ea12b"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Adams Point",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-50f45c6601f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Ezekiel Campbell — Taxi driver — Adams Point",
+            "src": "Simulation_Ledger profile for POP-00645",
+            "id": "F-ff810adb4710"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00648",
+      "name": "Mart Johns",
+      "quote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it. As a Nurse Aide, I'm used to focusing on my patients, not local news. It's just something I've heard around the neighborhood, that's all.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it. As a Nurse Aide, I'm used to focusing on my patients, not local news. It's just something I've heard around the neighborhood, that's all.\",\n  \"fact_ids\": [\"F-ee594f6f1844\", \"F-cddb6ae89499\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-ee594f6f1844",
+          "F-cddb6ae89499"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00648-005bd6279b",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Mark Aitken was spotted at the Adams Point United Methodist Church, but I don't really know what to make of it. As a Nurse Aide, I'm used to focusing on my patients, not local news. It's just something I've heard around the neighborhood, that's all."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00648",
+          "name": "Mart Johns",
+          "role": "Nurse Aide",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"Mark Aitken's appearance at the church\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Adams Point",
+          "focus": "Mark Aitken's appearance at the church",
+          "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Mart Johns — Nurse Aide — Adams Point",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ee594f6f1844"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-cddb6ae89499"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-e587cb5d5eb9"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Mark Aitken",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9ef277c7d148"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ccbf1d1ea12b"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Adams Point",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-50f45c6601f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Mart Johns — Nurse Aide — Adams Point",
+            "src": "Simulation_Ledger profile for POP-00648",
+            "id": "F-212a52ca3cb2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00798",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: appendReflection_: [err] [object Object],[object Object],[object Object],[object Object],[object Object]",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00798",
+          "name": "Grace Yamamoto",
+          "role": "Independent Bookstore Owner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Sharon Okafor",
+          "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"Mark Aitken's appearance at the church\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Adams Point",
+          "focus": "Mark Aitken's appearance at the church",
+          "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Grace Yamamoto — Independent Bookstore Owner — Adams Point",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ee594f6f1844"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-cddb6ae89499"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-e587cb5d5eb9"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Mark Aitken",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9ef277c7d148"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Adams Point United Methodist Church",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-ccbf1d1ea12b"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Adams Point",
+            "src": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-50f45c6601f5"
+          },
+          {
+            "t": "FACT",
+            "text": "Grace Yamamoto — Independent Bookstore Owner — Adams Point",
+            "src": "Simulation_Ledger profile for POP-00798",
+            "id": "F-5ac9e73a32a8"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-26T18:19:59.291Z"
+}

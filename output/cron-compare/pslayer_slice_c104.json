@@ -1,6 +1,6 @@
 {
   "cycle": 104,
-  "builtAt": "2026-08-20T11:15:07.510Z",
+  "builtAt": "2026-08-28T11:15:07.900Z",
   "empty": false,
   "journalist": {
     "name": "P Slayer",
@@ -26,8 +26,8 @@
     "mood": "electric",
     "fanSentiment": "high",
     "neighborhood": "Baylight District",
-    "notes": "Pablo Alamanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provided the drama as he hitless streak went to 14 innings as the Astros had not recorded a hit through 5 innings, but in the 6th with one out walked a batter. He would take 2nd on a steal, and the next pit",
-    "stats": "Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI"
+    "notes": "Pablo Almanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provided the drama as he hitless streak went to 14 innings as the Astros had not recorded a hit through 5 innings, but in the 6th with one out walked a batter. He would take 2nd on a steal, and the next pitc",
+    "stats": "Pablo Almanzar 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI"
   },
   "charge": {
     "bagModes": [
@@ -78,7 +78,7 @@
     "anchorFacts": [
       "StoryAngle (feed): Pablo the Picasso shines again.",
       "Team record (feed): 126-35 · streak W2",
-      "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+      "Stats (feed): Pablo Almanzar 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
       "Event: A's — player-feature (late-season)"
     ],
     "foilNumber": "9IP",
@@ -100,12 +100,12 @@
     "team": "A's",
     "eventKind": "player-feature",
     "popids": [
+      "POP-01078",
       "POP-00001"
     ],
     "citizens": [
-      "Pablo Almanzar",
-      "Vinnie Keane — Designated Hitter, Oakland A's Legend, Rockridge",
-      "Pablo Alamanzar"
+      "Pablo Almanzar — SP / Oakland Athletics, Jack London",
+      "Vinnie Keane — Designated Hitter, Oakland A's Legend, Grand Lake"
     ],
     "pulseClass": "prospect-callup",
     "pulseScore": 56,
@@ -119,23 +119,16 @@
   "players": [
     {
       "name": "Pablo Almanzar",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
+      "popid": "POP-01078",
+      "role": "SP / Oakland Athletics",
+      "neighborhood": "Jack London",
       "why": "feed-names"
     },
     {
       "name": "Vinnie Keane",
       "popid": "POP-00001",
       "role": "Designated Hitter, Oakland A's Legend",
-      "neighborhood": "Rockridge",
-      "why": "feed-names"
-    },
-    {
-      "name": "Pablo Alamanzar",
-      "popid": null,
-      "role": null,
-      "neighborhood": null,
+      "neighborhood": "Grand Lake",
       "why": "feed-names"
     }
   ],

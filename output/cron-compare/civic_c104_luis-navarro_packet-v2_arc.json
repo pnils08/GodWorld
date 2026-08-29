@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "civic",
+  "persona": "luis-navarro",
+  "storyline": {
+    "slug": "city-elio-perez-anomaly",
+    "verb": "advanced"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard people talking about the Fruitvale Transit Hub Phase II being stalled, and honestly, it feels like no one’s stepping up to take responsibility. It’s frustrating because this project could really help our community, but it’s just sitting there, waiting for someone to move it forward."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I hear people at the diner grumbling about the Fruitvale project all the time—everyone wants to know who dropped the ball, but nobody steps up to take responsibility. Feels like the city keeps spinning its wheels while we wait."
+    }
+  ],
+  "claim": "I’ve heard people talking about the Fruitvale Transit Hub Phase II being stalled, and honestly, it feels like no one’s stepping up to take responsibility. It’s frustrating because this project could really help our community, but it’s just sitting there, waiting for someone to move it forward.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-28T18:17:07.196Z"
+}

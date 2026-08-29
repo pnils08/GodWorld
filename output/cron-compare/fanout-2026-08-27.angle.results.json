@@ -1,0 +1,43 @@
+{
+  "date": "2026-08-27",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": false,
+      "error": "invalid W1 output: target must use a supplied pop with question+basis"
+    },
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-08-27T11:18:34.446Z"
+}

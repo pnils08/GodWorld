@@ -1,0 +1,57 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "104",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vinnie Keane",
+        "role": "quoted-source",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Ernesto Quintero",
+        "role": "quoted-source",
+        "popid": "POP-00050"
+      },
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Baylight District"
+    ],
+    "claims": [
+      {
+        "claim": "I've seen Pablo Almanzar's performance get the crowd really pumped up, it's like they're feeding off his energy and it's amazing to be a part of it.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-6fd233b7afe7",
+    "draftSha256": "d6a5d8120c7e6725b99b4435132f8eeab183c86b1a056471a1a52a372dc2e7f5",
+    "verdict": "output/cron-compare/sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-08-21T23:16:41.692Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-21T23:16:48.762Z"
+}

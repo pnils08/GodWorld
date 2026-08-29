@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "104",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2322.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Merkin Jumper",
+        "role": "quoted-source",
+        "popid": "POP-00688"
+      },
+      {
+        "name": "Jessie Hess",
+        "role": "quoted-source",
+        "popid": "POP-00212"
+      },
+      {
+        "name": "Dillon Trevor",
+        "role": "quoted-source",
+        "popid": "POP-00224"
+      },
+      {
+        "name": "Andre Turner",
+        "role": "quoted-source",
+        "popid": "POP-00225"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "downtown-merkin-jumper-undocked",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Downtown"
+    ],
+    "claims": [
+      {
+        "claim": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need.",
+        "sourceRef": "citizenVoice PRESS Merkin Jumper"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-78c7dd236a00",
+    "draftSha256": "09cf0aa2898de7eecb100beb6671fea1942c999609bc040e57e8e2dc8d550d77",
+    "verdict": "output/cron-compare/undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-08-28T23:22:26.524Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-28T23:22:30.708Z"
+}

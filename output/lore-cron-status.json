@@ -1,0 +1,12 @@
+{
+  "ranAt": "2026-08-28T20:03:12.685Z",
+  "target": {
+    "popid": "POP-00001",
+    "name": "Vinnie Keane",
+    "tier": "1"
+  },
+  "ok": true,
+  "errorMessage": null,
+  "newQuarantineFiles": [],
+  "nextStep": "loreWriter.js exited clean but produced no new quarantine file -- read the log before assuming nothing happened."
+}

@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "undocked",
+  "persona": "nia-rook",
+  "storyline": {
+    "slug": "downtown-merkin-jumper-undocked",
+    "verb": "opened"
+  },
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00688",
+      "name": "Merkin Jumper",
+      "quote": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need."
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out."
+    },
+    {
+      "pop": "POP-00224",
+      "name": "Dillon Trevor",
+      "quote": "I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves."
+    },
+    {
+      "pop": "POP-00225",
+      "name": "Andre Turner",
+      "quote": "I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves."
+    }
+  ],
+  "claim": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-28T18:21:49.920Z"
+}

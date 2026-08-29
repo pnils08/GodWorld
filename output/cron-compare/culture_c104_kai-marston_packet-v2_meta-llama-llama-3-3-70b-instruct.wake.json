@@ -5,7 +5,7 @@
   "provider": "openrouter",
   "model": "meta-llama/llama-3.3-70b-instruct",
   "configuredWriterModel": "meta-llama/llama-3.3-70b-instruct",
-  "gateModel": "google/gemini-3.5-flash",
+  "gateModel": "google/gemini-3.7-flash",
   "persona": "kai-marston",
   "byline": {
     "name": "Kai Marston",
@@ -13,17 +13,20 @@
     "beatDomain": "CULTURE"
   },
   "laneEntries": 17,
-  "quotesLanded": 0,
-  "disposition": "flagged",
-  "rheaPass": false,
-  "rheaFlagCount": 1,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
   "contamination": {
     "fail": false,
     "findings": []
   },
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
-  "selfRecord": null,
-  "ranAt": "2026-08-20T23:20:55.009Z"
+  "article": "output/cron-compare/staged/culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "fig/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-00158\",\n  \"name\": \"Kai Marston\",\n  \"recorded\": true,\n  \"text\": \"filed: Countdown Live and the Pulse of the Community\"\n}"
+  },
+  "ranAt": "2026-08-27T23:16:38.090Z"
 }

@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "culture",
+  "persona": "maria-keen",
+  "storyline": {
+    "slug": "adams-point-devon-willis-fame-sighting",
+    "verb": "opened"
+  },
+  "hood": "Adams Point",
+  "quotes": [
+    {
+      "pop": "POP-00782",
+      "name": "Devon Willis",
+      "quote": "I've heard that Mark Aitken was spotted at Adams Point United Methodist Church, but I don't really know much about it."
+    },
+    {
+      "pop": "POP-00645",
+      "name": "Ezekiel Campbell",
+      "quote": "I haven't really thought much about Mark Aitken's appearance at Adams Point United Methodist Church, it's just something I've heard about around the neighborhood."
+    },
+    {
+      "pop": "POP-00648",
+      "name": "Mart Johns",
+      "quote": "I've heard that Mark Aitken was at Adams Point United Methodist Church, but I don't really know what to make of it. I've lived in Adams Point for a while and I've never seen him around before. It's just something I've heard, that's all."
+    },
+    {
+      "pop": "POP-00798",
+      "name": "Grace Yamamoto",
+      "quote": "I've heard that Mark Aitken appeared at Adams Point United Methodist Church, but I don't know much about it. It's not something I've really thought about or discussed with anyone. I'm just focused on running my bookstore and serving the community here in Adams Point."
+    }
+  ],
+  "claim": "I've heard that Mark Aitken was spotted at Adams Point United Methodist Church, but I don't really know much about it.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-24T18:19:47.779Z"
+}

@@ -1,0 +1,29 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "angela-reyes",
+  "byline": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "beatDomain": "EDUCATION"
+  },
+  "laneEntries": 48,
+  "quotesLanded": 3,
+  "disposition": "flagged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/civic_c104_angela-reyes_packet-v2_deepseek-deepseek-chat-2315.md",
+  "selfRecord": null,
+  "ranAt": "2026-08-26T23:15:33.052Z"
+}

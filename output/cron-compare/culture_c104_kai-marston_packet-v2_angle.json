@@ -184,6 +184,7 @@
     "output": {
       "format": "json-only",
       "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
         "focus": "string",
         "why": "string",
         "checks": [
@@ -202,7 +203,7 @@
         ],
         "closeQuestion": "string"
       },
-      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
     }
   },
   "reporter": {
@@ -535,27 +536,28 @@
   "angleRead": {
     "name": "Kai Marston",
     "popid": "POP-00158",
-    "text": "{\n  \"focus\": \"TV slate\",\n  \"why\": \"assigned pulse\",\n  \"checks\": [\n    \"Countdown Live\",\n    \"New Year's Eve Special\",\n    \"Late Weather Watch\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00210\",\n      \"question\": \"What do you think about the TV slate tonight?\",\n      \"basis\": \"neighborhood conversation\"\n    }\n  ],\n  \"interpretation\": \"evening-life approach\",\n  \"unverifiedLead\": [\n    \"I'm watching Countdown Live and New Year's Eve Special\"\n  ],\n  \"closeQuestion\": \"Will the TV slate meet expectations?\"\n}",
+    "text": "I'm planning to write about the TV slate for tonight, focusing on Countdown Live and New Year's Eve Special.",
     "plan": {
-      "focus": "TV slate",
-      "why": "assigned pulse",
+      "chase": "I'm planning to write about the TV slate for tonight, focusing on Countdown Live and New Year's Eve Special.",
+      "focus": "The TV slate and its impact on the community",
+      "why": "I want to explore how the TV slate reflects and shapes the cultural landscape of our city",
       "checks": [
+        "TV slate",
         "Countdown Live",
-        "New Year's Eve Special",
-        "Late Weather Watch"
+        "New Year's Eve Special"
       ],
       "targets": [
         {
           "pop": "POP-00210",
           "question": "What do you think about the TV slate tonight?",
-          "basis": "neighborhood conversation"
+          "basis": "As a server in Rockridge, Depak Ying might have insights into how the TV slate affects local businesses and residents"
         }
       ],
-      "interpretation": "evening-life approach",
+      "interpretation": "The TV slate has the power to bring people together and create a shared experience",
       "unverifiedLead": [
-        "I'm watching Countdown Live and New Year's Eve Special"
+        "The TV slate might be a reflection of the city's values and priorities"
       ],
-      "closeQuestion": "Will the TV slate meet expectations?"
+      "closeQuestion": "How does the TV slate influence the way we think about and engage with our community?"
     }
   },
   "lanePicks": [
@@ -596,5 +598,5 @@
     }
   ],
   "laneEntries": 17,
-  "ranAt": "2026-08-20T11:16:14.151Z"
+  "ranAt": "2026-08-27T11:17:59.525Z"
 }

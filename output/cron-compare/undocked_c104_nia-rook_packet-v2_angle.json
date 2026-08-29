@@ -1,0 +1,176 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "104",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 40, systems alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Downtown",
+      "score": null,
+      "src": "undocked:undocked-pop00688-Y2C52",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+          "src": "undocked:undocked-pop00688-Y2C52"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00688",
+          "name": "Merkin Jumper",
+          "profile": "Merkin Jumper — UNDOCKED cast pilot",
+          "why": "assignment",
+          "role": "UNDOCKED cast pilot",
+          "hood": "Downtown"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+        "src": "undocked:undocked-pop00688-Y2C52",
+        "id": "F-dfb5ce06700c"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00688-Y2C52",
+      "label": "UNDOCKED: Merkin Jumper — up 40 on the night",
+      "kind": "undocked",
+      "angle": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 40, systems alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
+      "citizens": [
+        "Merkin Jumper — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00688"
+      ],
+      "hood": "Downtown"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'll be recapping Merkin Jumper's UNDOCKED episode, focusing on the city's reaction and what it means for the contestants",
+    "plan": {
+      "chase": "I'll be recapping Merkin Jumper's UNDOCKED episode, focusing on the city's reaction and what it means for the contestants",
+      "focus": "Merkin Jumper's performance and its impact on the city",
+      "why": "To provide an entertaining and informative recap of the episode",
+      "checks": [
+        "city's reaction",
+        "contestant standings"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00688",
+          "question": "How did Merkin Jumper's performance affect their standing in the competition?",
+          "basis": "UNDOCKED episode recap"
+        }
+      ],
+      "interpretation": "The episode's outcome has significant implications for the contestants and the city",
+      "unverifiedLead": [
+        "The city is buzzing with excitement and debate after Merkin Jumper's performance"
+      ],
+      "closeQuestion": "What will be the lasting impact of Merkin Jumper's episode on the competition and the city?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Merkin Jumper — up 40 on the night",
+      "kind": "undocked",
+      "hood": "Downtown",
+      "ref": "undocked:undocked-pop00688-Y2C52",
+      "popids": [
+        "POP-00688"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "ranAt": "2026-08-28T11:18:10.340Z"
+}

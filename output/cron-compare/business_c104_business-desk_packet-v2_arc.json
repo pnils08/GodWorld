@@ -12,15 +12,20 @@
     {
       "pop": "POP-00002",
       "name": "Amara Keane",
-      "quote": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand."
+      "quote": "I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant."
     },
     {
       "pop": "POP-00170",
       "name": "Melton Neilon",
-      "quote": "I hear about Grand Lake's shops struggling when I'm buying flour—vendors say foot traffic's down but rents aren't. The Tribune should ask why no one's stitching together the landlords and small biz grants before more windows go dark."
+      "quote": "I've noticed more empty storefronts around Grand Lake lately—it's tough to see. As a baker, I know how much foot traffic matters, and when shops sit vacant, it hurts everyone."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I don't spend much time over in Grand Lake, but I've heard folks at work talking about how stores are struggling to stay open. Makes me worry about the neighborhood losing its character."
     }
   ],
-  "claim": "I've noticed more empty storefronts lately, but what strikes me is how quiet the conversations about it have been—like it's just expected now. The Tribune should ask why there's no visible push to fill these spaces when the neighborhood clearly still has demand.",
+  "claim": "I've noticed more empty storefronts along Lakeshore lately, and it does make the neighborhood feel a bit quieter than it used to. I hope we can find ways to support local businesses and keep the area vibrant.",
   "src": "citizenVoice PRESS c104",
-  "ranAt": "2026-08-20T18:21:20.593Z"
+  "ranAt": "2026-08-28T18:21:02.077Z"
 }

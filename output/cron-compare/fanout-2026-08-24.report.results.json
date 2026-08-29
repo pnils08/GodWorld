@@ -1,0 +1,38 @@
+{
+  "date": "2026-08-24",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Dr. Lila Mezran",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Simon Leary",
+      "desk": "sports",
+      "ok": false,
+      "error": "W2: zero publishable answers — fail closed, do not open W3"
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-08-24T18:20:39.891Z"
+}

@@ -1,0 +1,154 @@
+{
+  "cycle": "104",
+  "signals": [
+    {
+      "slug": "piedmont-ave-sandra-velazquez-season-feel",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
+        "civic_c104_noah-tan_packet-v2_arc"
+      ],
+      "hoods": [
+        "Piedmont Ave"
+      ],
+      "citizens": [
+        "POP-00168",
+        "POP-00830"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+        "sports_c104_p-slayer_packet-v2_arc"
+      ],
+      "hoods": [
+        "Baylight District"
+      ],
+      "citizens": [
+        "POP-00001",
+        "POP-00050",
+        "POP-00170"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "grand-lake-vinnie-keane-retail-decay",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "business_c104_business-desk_packet-v2_arc"
+      ],
+      "hoods": [
+        "Grand Lake"
+      ],
+      "citizens": [
+        "POP-00001",
+        "POP-00002",
+        "POP-00170"
+      ],
+      "desks": [
+        "business"
+      ]
+    },
+    {
+      "slug": "east-oakland-maria-conteras-anomaly",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c104_angela-reyes_packet-v2_arc"
+      ],
+      "hoods": [
+        "East Oakland"
+      ],
+      "citizens": [
+        "POP-01047",
+        "POP-01055",
+        "POP-00170",
+        "POP-00198"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "west-oakland-elio-perez-initiative",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c104_carmen-delaine_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00201",
+        "POP-00722",
+        "POP-00794"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "temescal-sonia-parikh-anomaly",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c104_trevor-shimizu_packet-v2_arc"
+      ],
+      "hoods": [
+        "Temescal"
+      ],
+      "citizens": [
+        "POP-00745",
+        "POP-00761"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "adams-point-devon-willis-fame-sighting",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c104_elliot-graye_packet-v2_arc"
+      ],
+      "hoods": [
+        "Adams Point"
+      ],
+      "citizens": [
+        "POP-00782",
+        "POP-00645",
+        "POP-00648",
+        "POP-00798"
+      ],
+      "desks": [
+        "culture"
+      ]
+    }
+  ]
+}

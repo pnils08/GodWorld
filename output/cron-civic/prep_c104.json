@@ -1,0 +1,91 @@
+{
+  "stage": "prep",
+  "cycle": 104,
+  "directive": "output/mara-directives/mara_directive_c104_AUTO.txt",
+  "ledgerSnapshot": {
+    "source": "Simulation_Ledger",
+    "cycle": 104,
+    "rowCount": 964,
+    "generatedAt": "2026-08-23T19:30:36.959Z",
+    "generatedBy": "scripts/dumpLedger.js",
+    "note": "Local-disk snapshot for search_everything disk shelf. Stable filename, overwritten each cycle."
+  },
+  "offices": [
+    {
+      "dir": "civic-office-mayor",
+      "path": "output/cron-civic/packets/civic-office-mayor_pending_decisions_c104.md",
+      "topics": 7
+    },
+    {
+      "dir": "civic-project-stabilization-fund",
+      "path": "output/cron-civic/packets/civic-project-stabilization-fund_pending_decisions_c104.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-okoro",
+      "path": "output/cron-civic/packets/civic-office-okoro_pending_decisions_c104.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-council-d1",
+      "path": "output/cron-civic/packets/civic-office-council-d1_pending_decisions_c104.md",
+      "topics": 4
+    },
+    {
+      "dir": "civic-project-oari",
+      "path": "output/cron-civic/packets/civic-project-oari_pending_decisions_c104.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-council-d3",
+      "path": "output/cron-civic/packets/civic-office-council-d3_pending_decisions_c104.md",
+      "topics": 4
+    },
+    {
+      "dir": "civic-office-council-d5",
+      "path": "output/cron-civic/packets/civic-office-council-d5_pending_decisions_c104.md",
+      "topics": 3
+    },
+    {
+      "dir": "civic-project-transit-hub",
+      "path": "output/cron-civic/packets/civic-project-transit-hub_pending_decisions_c104.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-project-health-center",
+      "path": "output/cron-civic/packets/civic-project-health-center_pending_decisions_c104.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-council-d7",
+      "path": "output/cron-civic/packets/civic-office-council-d7_pending_decisions_c104.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-baylight-authority",
+      "path": "output/cron-civic/packets/civic-office-baylight-authority_pending_decisions_c104.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-council-d2",
+      "path": "output/cron-civic/packets/civic-office-council-d2_pending_decisions_c104.md",
+      "topics": 2
+    },
+    {
+      "dir": "civic-office-council-d8",
+      "path": "output/cron-civic/packets/civic-office-council-d8_pending_decisions_c104.md",
+      "topics": 2
+    }
+  ],
+  "hotInitiatives": [
+    "INIT-001",
+    "INIT-002",
+    "INIT-003",
+    "INIT-005",
+    "INIT-006",
+    "INIT-007"
+  ],
+  "highPatterns": 1,
+  "lintLeaks": 0,
+  "ranAt": "2026-08-24T02:01:02.793Z"
+}

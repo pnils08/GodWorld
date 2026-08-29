@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "culture",
+  "persona": "elliot-graye",
+  "storyline": {
+    "slug": "adams-point-devon-willis-fame-sighting",
+    "verb": "advanced"
+  },
+  "hood": "Adams Point",
+  "quotes": [
+    {
+      "pop": "POP-00782",
+      "name": "Devon Willis",
+      "quote": "I've heard that Mark Aitken visited Adams Point United Methodist Church, but I don't know much about it. It's not something I've really thought about or discussed with anyone."
+    },
+    {
+      "pop": "POP-00645",
+      "name": "Ezekiel Campbell",
+      "quote": "I've heard that Mark Aitken visited Adams Point United Methodist Church, but I don't know much about it. I've been driving my taxi around Adams Point for a while now, and I haven't really noticed anything out of the ordinary related to his visit."
+    },
+    {
+      "pop": "POP-00648",
+      "name": "Mart Johns",
+      "quote": "I've heard that Mark Aitken visited Adams Point United Methodist Church, it's been talked about around the neighborhood, but I don't know much about it personally."
+    },
+    {
+      "pop": "POP-00798",
+      "name": "Grace Yamamoto",
+      "quote": "I've heard that Mark Aitken visited Adams Point United Methodist Church, but I don't know much about it. As someone who lives and works in Adams Point, I'm interested in what brings people to our neighborhood."
+    }
+  ],
+  "claim": "I've heard that Mark Aitken visited Adams Point United Methodist Church, but I don't know much about it. It's not something I've really thought about or discussed with anyone.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-28T18:19:58.362Z"
+}

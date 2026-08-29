@@ -1,0 +1,140 @@
+{
+  "empty": false,
+  "cycle": 104,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 84,
+    "label": "The A's record is 126-35."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The A's record is 126-35.",
+      "The A's have won 2 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ]
+  },
+  "story": {
+    "angle": "The A's record is 126-35.",
+    "label": "The A's record is 126-35.",
+    "hookLine": "The A's record is 126-35.",
+    "kind": "long-view-signal",
+    "hood": "Old Oakland",
+    "popids": [
+      "POP-00001",
+      "POP-00018",
+      "POP-00527"
+    ],
+    "citizens": [
+      "Vinnie Keane (POP-00001)",
+      "Benji Dillon (POP-00018)",
+      "Mike Paulson (POP-00527)"
+    ],
+    "ref": "world_summary_c104.md ## Sports",
+    "cycle": 104
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    },
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mike Paulson",
+      "popid": "POP-00527",
+      "role": "General Manager, Oakland A's & The Oaks",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 84,
+      "cycle": 104,
+      "team": "A's",
+      "label": "Happy NYE"
+    },
+    {
+      "score": 54,
+      "cycle": 102,
+      "team": "A's",
+      "label": "Isley Kelley resigns, don't close the door just yet on the era, is this the right move for an aging star?"
+    },
+    {
+      "score": 44,
+      "cycle": 104,
+      "team": "Oaks",
+      "label": "The Oaks fall to 0-2, AJ shines while Stanley on precaution."
+    },
+    {
+      "score": 38,
+      "cycle": 104,
+      "team": "A's",
+      "label": "What a Relief, Benji Dillon"
+    },
+    {
+      "score": 38,
+      "cycle": 104,
+      "team": "A's",
+      "label": "Pablo the Picasso shines again."
+    },
+    {
+      "score": 38,
+      "cycle": 104,
+      "team": "A's",
+      "label": "As dominate the award race boards. Next cycle to reveal award winners and final season stats."
+    },
+    {
+      "score": 36,
+      "cycle": 103,
+      "team": "A's",
+      "label": "Benji Dillon moves to the bullpen, In an effort to give some young arms so run and rest a vet arm Dillon will be moving to the bullpen."
+    },
+    {
+      "score": 30,
+      "cycle": 104,
+      "team": "Oaks",
+      "label": "Paulson keeps in light admist a chaotic time in Oakland Sports"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c104.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

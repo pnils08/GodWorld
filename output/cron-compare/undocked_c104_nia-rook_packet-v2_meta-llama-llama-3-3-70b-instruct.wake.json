@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "undocked",
+  "cycle": "104",
+  "provider": "openrouter",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "configuredWriterModel": "meta-llama/llama-3.3-70b-instruct",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "nia-rook",
+  "byline": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 1,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2322.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "tauth.com]\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: In the heart of Downtown Oakland, Merkin Jumper's recent performance on UNDOCKED has sent ripples of\"\n}"
+  },
+  "ranAt": "2026-08-28T23:22:41.419Z"
+}

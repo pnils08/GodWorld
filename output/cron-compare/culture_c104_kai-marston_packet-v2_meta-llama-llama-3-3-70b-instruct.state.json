@@ -58,17 +58,91 @@
     "hood": null,
     "src": "world_summary ## Evening Texture · Evening media TV",
     "plan": {
-      "focus": "TV slate",
-      "closeQuestion": "Will the TV slate meet expectations?"
+      "focus": "The TV slate and its impact on the community",
+      "closeQuestion": "How does the TV slate influence the way we think about and engage with our community?"
     }
   },
   "exposure": {
-    "subjects": [],
-    "sources": [],
+    "subjects": [
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — Line cook — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "profile": "Depak Ying — Server — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00210-da5e11c095",
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "quote": "I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "src": "packet.W2[POP-00210]"
+      },
+      {
+        "id": "Q-POP-00170-afa26d76c8",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news.",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00198-34d3330ecf",
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "quote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows.",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00201-a69e46c599",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "quote": "I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve.",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "src": "packet.W2[POP-00201]"
+      }
+    ],
     "excludedLeads": [
       {
         "from": "Kai Marston",
-        "text": "I'm watching Countdown Live and New Year's Eve Special",
+        "text": "The TV slate might be a reflection of the city's values and priorities",
         "usable": false
       }
     ]
@@ -150,7 +224,7 @@
       ]
     },
     "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
-    "rule": "Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
     "preflight": {
       "facts": "select manifest.approvedFacts ids",
       "quotes": "select manifest.approvedQuotes ids",
@@ -191,7 +265,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-26e668d14559",
+    "id": "AM-bbc5df11d5f0",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -231,8 +305,82 @@
         "src": "world_summary ## Evening Texture · Evening media TV"
       }
     ],
-    "approvedQuotes": [],
-    "approvedSubjects": [],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00210-da5e11c095",
+        "speakerId": "POP-00210",
+        "speakerName": "Depak Ying",
+        "text": "I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "src": "packet.W2[POP-00210]"
+      },
+      {
+        "id": "Q-POP-00170-afa26d76c8",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news.",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00198-34d3330ecf",
+        "speakerId": "POP-00198",
+        "speakerName": "Rick Walker",
+        "text": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows.",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00201-a69e46c599",
+        "speakerId": "POP-00201",
+        "speakerName": "Elio Perez",
+        "text": "I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve.",
+        "factIds": [
+          "F-d449233aa492",
+          "F-296611fac168"
+        ],
+        "src": "packet.W2[POP-00201]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — Line cook — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00210",
+        "name": "Depak Ying",
+        "profile": "Depak Ying — Server — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
     "permittedInterpretationSlots": [
       {
         "id": "P_EMPHASIS",
@@ -250,7 +398,7 @@
     "unverifiedLeads": [
       {
         "from": "Kai Marston",
-        "text": "I'm watching Countdown Live and New Year's Eve Special",
+        "text": "The TV slate might be a reflection of the city's values and priorities",
         "publishable": false
       }
     ],

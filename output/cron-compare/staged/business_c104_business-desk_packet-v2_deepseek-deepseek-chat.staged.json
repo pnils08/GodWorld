@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "104",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.staged-2317.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "grand-lake-melton-neilon-story-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Grand Lake"
+    ],
+    "claims": [
+      {
+        "claim": "I walk through Grand Lake sometimes to clear my head between bakes, and it's hard not to notice how many storefronts just stay empty now—not even 'for lease' signs, just dark windows. Feels like the whole block's holding its breath waiting for something to change, but nobody's stepping up to make it happen.",
+        "sourceRef": "citizenVoice PRESS Melton Neilon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f3b41a42aac3",
+    "draftSha256": "76897465d9d807523d8fa46615c9ed4b66b26a05e41fd7ea54773182d59d80b6",
+    "verdict": "output/cron-compare/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-27T23:17:12.130Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-27T23:17:12.381Z"
+}

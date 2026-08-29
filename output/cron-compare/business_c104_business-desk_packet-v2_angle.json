@@ -153,6 +153,7 @@
     "output": {
       "format": "json-only",
       "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
         "focus": "string",
         "why": "string",
         "checks": [
@@ -171,7 +172,7 @@
         ],
         "closeQuestion": "string"
       },
-      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers."
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
     }
   },
   "reporter": {
@@ -359,33 +360,35 @@
   "angleRead": {
     "name": "Jordan Velez",
     "popid": "POP-00153",
-    "text": "{\n  \"focus\": \"Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like\",\n  \"why\": \"Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).\",\n  \"checks\": [\n    \"Sentiment -0.070\",\n    \"RetailVitality -5.03\",\n    \"HousingPressure +0.500\"\n  ],\n  \"targets\": [\n    {\n      \"pop\": \"POP-00001\",\n      \"question\": \"As a long-time resident and business owner in Grand Lake, have you noticed a shift in foot traffic or customer engagement recently?\",\n      \"basis\": \"same-hood-ledger\"\n    },\n    {\n      \"pop\": \"POP-00002\",\n      \"question\": \"From your perspective as a community pillar, what’s missing in Grand Lake’s retail scene that might explain the cooling interest?\",\n      \"basis\": \"same-hood-ledger\"\n    }\n  ],\n  \"interpretation\": \"The numbers suggest a quiet erosion of retail energy in Grand Lake, disconnected from any visible civic effort to counteract it. This isn’t just about empty storefronts—it’s about the lived rhythm of the neighborhood slowing down.\",\n  \"unverifiedLead\": [\n    \"Potential mismatch between rising housing pressure and stagnant commercial investment\",\n    \"Local sentiment dip may reflect unmet expectations for neighborhood upkeep or business diversity\"\n  ],\n  \"closeQuestion\": \"Is Grand Lake’s retail slide a symptom of broader economic shifts, or is there a unique local dynamic at play?\"\n}",
+    "text": "Jordan Velez plans to explore the retail decay in Grand Lake, focusing on the storefront line and its impact on the neighborhood's economic vitality. He aims to capture the human side of this decline, translating the RetailVitality score into a tangible scene of empty windows and quiet streets. The article will not delve into civic processes or multi-voice averages but will instead highlight the movement of the block and its businesses.",
     "plan": {
-      "focus": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+      "chase": "Jordan Velez plans to explore the retail decay in Grand Lake, focusing on the storefront line and its impact on the neighborhood's economic vitality. He aims to capture the human side of this decline, translating the RetailVitality score into a tangible scene of empty windows and quiet streets. The article will not delve into civic processes or multi-voice averages but will instead highlight the movement of the block and its businesses.",
+      "focus": "Economic / storefront approach to retail decay in Grand Lake.",
       "why": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
       "checks": [
-        "Sentiment -0.070",
-        "RetailVitality -5.03",
-        "HousingPressure +0.500"
+        "Ensure no invented Employee_Count, Key_Personnel, or storefronts not listed.",
+        "Translate RetailVitality / magnitude into human language (busy counters, empty windows).",
+        "Do not lead with raw engine decimals.",
+        "Make one claim about how the block or the board is moving."
       ],
       "targets": [
         {
           "pop": "POP-00001",
-          "question": "As a long-time resident and business owner in Grand Lake, have you noticed a shift in foot traffic or customer engagement recently?",
+          "question": "How has the retail decay in Grand Lake affected your perception of the neighborhood?",
           "basis": "same-hood-ledger"
         },
         {
           "pop": "POP-00002",
-          "question": "From your perspective as a community pillar, what’s missing in Grand Lake’s retail scene that might explain the cooling interest?",
+          "question": "What changes have you noticed in the storefronts and foot traffic in Grand Lake?",
           "basis": "same-hood-ledger"
         }
       ],
-      "interpretation": "The numbers suggest a quiet erosion of retail energy in Grand Lake, disconnected from any visible civic effort to counteract it. This isn’t just about empty storefronts—it’s about the lived rhythm of the neighborhood slowing down.",
+      "interpretation": "The retail decay in Grand Lake suggests a cooling economic trajectory, with storefronts losing vitality and foot traffic diminishing. This decline raises questions about the neighborhood's future economic footprint and the absence of matching initiatives to counteract this trend.",
       "unverifiedLead": [
-        "Potential mismatch between rising housing pressure and stagnant commercial investment",
-        "Local sentiment dip may reflect unmet expectations for neighborhood upkeep or business diversity"
+        "Is there a specific event or policy change that triggered the retail decay in Grand Lake?",
+        "Are there any local businesses that have managed to thrive despite the overall decline?"
       ],
-      "closeQuestion": "Is Grand Lake’s retail slide a symptom of broader economic shifts, or is there a unique local dynamic at play?"
+      "closeQuestion": "What steps can be taken to revitalize Grand Lake's retail scene and restore its economic vitality?"
     }
   },
   "lanePicks": [
@@ -446,5 +449,5 @@
     }
   ],
   "laneEntries": 19,
-  "ranAt": "2026-08-20T11:16:29.329Z"
+  "ranAt": "2026-08-28T11:17:59.261Z"
 }

@@ -1,0 +1,305 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00160",
+    "name": "Mason Ortega",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Seasonal Spirits appears on the evening restaurant list in Rockridge. What was happening there is not established.",
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Mason (kitchen bag): restaurants are workplaces first. Named workers only from packet. Modes: Line Cook Spine, Service Rush, Menu vs Shift, Owner Math, Hospitality Under Stress. Assigned pulse: named-restaurant — Seasonal Spirits (Rockridge).",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "evening-life",
+      "bag": "kitchen",
+      "pulseClass": "named-restaurant",
+      "pulseLabel": "Seasonal Spirits (Rockridge)",
+      "namedEvents": [
+        "The Kelley Line Founding Celebration",
+        "The Keane Line Founding Celebration",
+        "The Corliss Line Founding Celebration",
+        "The Dillon Line Founding Celebration",
+        "Countdown Live",
+        "New Year's Eve Special",
+        "Late Weather Watch",
+        "Breaking Bulletin"
+      ],
+      "namedPlaces": [
+        "Seasonal Spirits",
+        "Merritt AfterDark",
+        "The 44th Table",
+        "Vibe Terrace",
+        "Rhythm Deck",
+        "Neon Harbor Club",
+        "Skybar"
+      ],
+      "famousSightings": [
+        "Mark Aitken",
+        "John Ellis",
+        "Marin Tao"
+      ],
+      "streamingTrend": "party playlist",
+      "sceneRule": "Named places only from Evening Texture / desk_signal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+      "sourcePointers": [
+        "docs/media/MASON_KITCHEN_BAG.md",
+        "output/world_summary_c104.md ## Evening Texture",
+        "output/desk_signal_c104.json lanes.culture",
+        "docs/media/MARIA_GROUND_BAG.md",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Rockridge",
+    "src": "world_summary ## Evening Texture · Restaurants",
+    "plan": {
+      "focus": "Seasonal Spirits in Rockridge, from a kitchen bag perspective.",
+      "closeQuestion": "What is the most challenging aspect of working at Seasonal Spirits during the evening shift?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00651",
+        "name": "Howard Yell",
+        "profile": "Howard Yell — Barista — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00651-1041b81611",
+        "pop": "POP-00651",
+        "name": "Howard Yell",
+        "quote": "I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression.",
+        "factIds": [
+          "F-364f0aa8eb7c",
+          "F-09855133984f",
+          "F-8e6c0256f65e"
+        ],
+        "src": "packet.W2[POP-00651]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "The kitchen at Seasonal Spirits might have a unique rhythm that sets it apart from other restaurants in Rockridge.",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "Seasonal Spirits (Rockridge)",
+      "src": "world_summary ## Evening Texture · Restaurants",
+      "id": "F-364f0aa8eb7c"
+    },
+    {
+      "t": "FACT",
+      "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+      "src": "world_summary ## Evening Texture · Restaurants",
+      "id": "F-09855133984f"
+    },
+    {
+      "t": "FACT",
+      "text": "NAMED: Seasonal Spirits",
+      "src": "world_summary ## Evening Texture · Restaurants",
+      "id": "F-8e6c0256f65e"
+    },
+    {
+      "t": "FACT",
+      "text": "HOOD: Rockridge",
+      "src": "world_summary ## Evening Texture · Restaurants",
+      "id": "F-73db550c5b37"
+    },
+    {
+      "t": "FACT",
+      "text": "VENUE: Seasonal Spirits",
+      "src": "world_summary ## Evening Texture · Restaurants",
+      "id": "F-b5167d1e50f5"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "evidence-bounded kitchen-work brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named restaurant and location",
+      "closing": "the worker or operating account still needed"
+    },
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-8d49c34e28c2",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-364f0aa8eb7c",
+        "t": "FACT",
+        "text": "Seasonal Spirits (Rockridge)",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      {
+        "id": "F-09855133984f",
+        "t": "FACT",
+        "text": "Seasonal Spirits appears on the evening restaurant list in Rockridge.",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      {
+        "id": "F-8e6c0256f65e",
+        "t": "FACT",
+        "text": "NAMED: Seasonal Spirits",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      {
+        "id": "F-73db550c5b37",
+        "t": "FACT",
+        "text": "HOOD: Rockridge",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      },
+      {
+        "id": "F-b5167d1e50f5",
+        "t": "FACT",
+        "text": "VENUE: Seasonal Spirits",
+        "src": "world_summary ## Evening Texture · Restaurants"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00651-1041b81611",
+        "speakerId": "POP-00651",
+        "speakerName": "Howard Yell",
+        "text": "I've noticed Seasonal Spirits seems to attract a different crowd depending on the time of year - more wine people in the fall, cocktail folks in summer. From what I overhear at the coffee shop, their menu changes really make an impression.",
+        "factIds": [
+          "F-364f0aa8eb7c",
+          "F-09855133984f",
+          "F-8e6c0256f65e"
+        ],
+        "src": "packet.W2[POP-00651]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00651",
+        "name": "Howard Yell",
+        "profile": "Howard Yell — Barista — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Mason Ortega",
+        "text": "The kitchen at Seasonal Spirits might have a unique rhythm that sets it apart from other restaurants in Rockridge.",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "workplace-oriented questions about a supplied restaurant without claiming an answer",
+      "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
+    ],
+    "textureConditions": [
+      "a restaurant appearing on an evening list proves only the supplied venue-location relation, not that it was open, busy, staffed, serving, struggling, or observed",
+      "first-person embedding, every worker, owner, patron, shift, quote, action, count, wage, cost, supply issue, health score, and business outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, kitchen access, worker, owner, patron, service, rush, shift, dialogue, quote, wage, cost, ticket count, equipment state, supply problem, health score, business condition, or labor consequence",
+      "an invented or altered venue, person, neighborhood, event, relationship, date, number, or quote",
+      "review language, raw engine labels, citywide food trend assigned to one venue, or collective worker sentiment presented as fact"
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "cycle": "104",
+  "total": 4,
+  "counts": {
+    "accurate": 3,
+    "corrections-needed": 1,
+    "canon-violation": 0
+  },
+  "accuracyPct": 75,
+  "auditModel": "google/gemini-3.7-flash",
+  "trend": [
+    {
+      "cycle": 103,
+      "pct": 75
+    }
+  ],
+  "articles": [
+    {
+      "stem": "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "felt quieter this cycle",
+          "class": "engine-verbiage",
+          "why": "Use of 'cycle' is simulation/engine terminology leaking into in-world prose instead of natural temporal phrasing like 'this week' or 'this winter'."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat-almanzar-debut",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    }
+  ]
+}

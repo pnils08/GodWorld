@@ -1,0 +1,350 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00011",
+    "name": "Carmen Delaine",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+    "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup.",
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "initiative",
+    "hood": "West Oakland",
+    "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+    "plan": {
+      "focus": "Tracking the disbursement and impact of the West Oakland Stabilization Fund against ongoing decay signals in retail vitality and sentiment.",
+      "closeQuestion": "Is this stabilization fund hitting the right pressure points, or is it just keeping seats warm while West Oakland bleeds?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "profile": "Daniel Cloak — Bakery Worker — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "profile": "Irene Fay — Barista — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "profile": "Darius Clark — Bakery Worker — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00201-f8316a4497",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "quote": "I’ve heard about the Stabilization Fund, and I hope it helps, but I still see empty storefronts and people struggling to keep their businesses open. It feels like we need more than just money—we need real support and community action.",
+        "factIds": [
+          "F-23653f4390d6"
+        ],
+        "src": "packet.W2[POP-00201]"
+      },
+      {
+        "id": "Q-POP-00722-e230c5ae83",
+        "pop": "POP-00722",
+        "name": "Daniel Cloak",
+        "quote": "I've heard about the Stabilization Fund at the bakery - some folks say it's helping, but I still see empty storefronts on my way to work every morning.",
+        "factIds": [
+          "F-23653f4390d6"
+        ],
+        "src": "packet.W2[POP-00722]"
+      },
+      {
+        "id": "Q-POP-00794-7b9f262173",
+        "pop": "POP-00794",
+        "name": "Irene Fay",
+        "quote": "I heard about the Stabilization Fund at work—some regulars were talking about how it's supposed to help small businesses, but honestly, I haven't noticed much change around here yet.",
+        "factIds": [
+          "F-23653f4390d6"
+        ],
+        "src": "packet.W2[POP-00794]"
+      },
+      {
+        "id": "Q-POP-00961-61eb268b4e",
+        "pop": "POP-00961",
+        "name": "Darius Clark",
+        "quote": "I heard about that fund at the bakery - some folks say it's helping, but I still see empty storefronts on my block. Hard to tell if it's making a real difference yet.",
+        "factIds": [
+          "F-23653f4390d6"
+        ],
+        "src": "packet.W2[POP-00961]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Carmen Delaine",
+        "text": "Possible lag between fund disbursement and measurable impact",
+        "usable": false
+      },
+      {
+        "from": "Carmen Delaine",
+        "text": "Chance that funds aren't reaching the most affected businesses",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "id": "F-23653f4390d6"
+    },
+    {
+      "t": "FACT",
+      "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "id": "F-a9554fe6e042"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace Packet-backed city action across votes, Initiatives, money, and implementation clocks, then show the consequence carried by a named resident. Public clarity and a durable accountability trail are success; a process recap without lived consequence is not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "precise third-person civic ledger",
+      "targetWords": "500-900",
+      "opening": "a Packet-backed chamber, place, person, or resident consequence",
+      "closing": "a forward-open or extraction question the supplied record cannot yet answer"
+    },
+    "authorizedTexture": [
+      "unnamed street-level color that adds no person, business, institution, event, count, or attributed statement",
+      "transitions connecting a Packet-backed official action to a Packet-backed named resident consequence",
+      "analysis of Packet-backed vote, Initiative, money, timeline, or implementation state framed as analysis",
+      "an unanswered forward-looking question grounded in a limit or missing field declared by the Packet"
+    ],
+    "textureConditions": [
+      "every named person, place, business, institution, Project, Initiative, office, and organization must come from the Packet",
+      "vote coverage must use all nine seats supplied by the Packet and must not infer a position, bloc, absence, or tally",
+      "money, dates, durations, deadlines, and implementation clocks must come from the Packet or its tracker-backed claims",
+      "unnamed street color is not a sourced quote and must carry no official act, public reaction, or other canon claim"
+    ],
+    "canonBlockers": [
+      "a named person, place, business, institution, Project, Initiative, office, or organization not found in the supplied record",
+      "a false or unsupported vote, tally, bloc, office, official position, official act, official inaction, promise, decision, duty, or absence presented as fact",
+      "a budget, payment, date, duration, deadline, count, or implementation clock that contradicts or lacks the supplied record",
+      "an Initiative phase, Project status, milestone, or current-state claim that contradicts the tracker or verified prior coverage",
+      "a resident consequence, attributed statement, or collective public sentiment not supported by a Packet subject or quote"
+    ]
+  },
+  "manifest": {
+    "id": "AM-ab41551c936e",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-23653f4390d6",
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-a9554fe6e042",
+        "t": "FACT",
+        "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00201-f8316a4497",
+        "speakerId": "POP-00201",
+        "speakerName": "Elio Perez",
+        "text": "I’ve heard about the Stabilization Fund, and I hope it helps, but I still see empty storefronts and people struggling to keep their businesses open. It feels like we need more than just money—we need real support and community action.",
+        "factIds": [
+          "F-23653f4390d6"
+        ],
+        "src": "packet.W2[POP-00201]"
+      },
+      {
+        "id": "Q-POP-00722-e230c5ae83",
+        "speakerId": "POP-00722",
+        "speakerName": "Daniel Cloak",
+        "text": "I've heard about the Stabilization Fund at the bakery - some folks say it's helping, but I still see empty storefronts on my way to work every morning.",
+        "factIds": [
+          "F-23653f4390d6"
+        ],
+        "src": "packet.W2[POP-00722]"
+      },
+      {
+        "id": "Q-POP-00794-7b9f262173",
+        "speakerId": "POP-00794",
+        "speakerName": "Irene Fay",
+        "text": "I heard about the Stabilization Fund at work—some regulars were talking about how it's supposed to help small businesses, but honestly, I haven't noticed much change around here yet.",
+        "factIds": [
+          "F-23653f4390d6"
+        ],
+        "src": "packet.W2[POP-00794]"
+      },
+      {
+        "id": "Q-POP-00961-61eb268b4e",
+        "speakerId": "POP-00961",
+        "speakerName": "Darius Clark",
+        "text": "I heard about that fund at the bakery - some folks say it's helping, but I still see empty storefronts on my block. Hard to tell if it's making a real difference yet.",
+        "factIds": [
+          "F-23653f4390d6"
+        ],
+        "src": "packet.W2[POP-00961]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00722",
+        "name": "Daniel Cloak",
+        "profile": "Daniel Cloak — Bakery Worker — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00794",
+        "name": "Irene Fay",
+        "profile": "Irene Fay — Barista — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00961",
+        "name": "Darius Clark",
+        "profile": "Darius Clark — Bakery Worker — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Carmen Delaine",
+        "text": "Possible lag between fund disbursement and measurable impact",
+        "publishable": false
+      },
+      {
+        "from": "Carmen Delaine",
+        "text": "Chance that funds aren't reaching the most affected businesses",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed street-level color that adds no person, business, institution, event, count, or attributed statement",
+      "transitions connecting a Packet-backed official action to a Packet-backed named resident consequence",
+      "analysis of Packet-backed vote, Initiative, money, timeline, or implementation state framed as analysis",
+      "an unanswered forward-looking question grounded in a limit or missing field declared by the Packet"
+    ],
+    "textureConditions": [
+      "every named person, place, business, institution, Project, Initiative, office, and organization must come from the Packet",
+      "vote coverage must use all nine seats supplied by the Packet and must not infer a position, bloc, absence, or tally",
+      "money, dates, durations, deadlines, and implementation clocks must come from the Packet or its tracker-backed claims",
+      "unnamed street color is not a sourced quote and must carry no official act, public reaction, or other canon claim"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, place, business, institution, Project, Initiative, office, or organization not found in the supplied record",
+      "a false or unsupported vote, tally, bloc, office, official position, official act, official inaction, promise, decision, duty, or absence presented as fact",
+      "a budget, payment, date, duration, deadline, count, or implementation clock that contradicts or lacks the supplied record",
+      "an Initiative phase, Project status, milestone, or current-state claim that contradicts the tracker or verified prior coverage",
+      "a resident consequence, attributed statement, or collective public sentiment not supported by a Packet subject or quote"
+    ]
+  }
+}

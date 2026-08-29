@@ -1,0 +1,1004 @@
+{
+  "stage": "report",
+  "desk": "sports",
+  "cycle": "104",
+  "persona": "hal-richmond",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Hal Richmond",
+    "popid": "POP-00007"
+  },
+  "assignment": {
+    "story": {
+      "angle": "What the supplied C104 line card establishes, and what history remains unsupplied.",
+      "label": "A's — player-feature — supplied C104 line card",
+      "hookLine": "A's — player-feature — supplied C104 line card",
+      "hood": "Baylight District",
+      "pulseClass": "era-door",
+      "team": "A's",
+      "eventKind": "player-feature",
+      "closingNote": "break of continuity",
+      "citizens": [
+        "Pablo Almanzar (POP-01078)",
+        "Vinnie Keane (POP-00001)"
+      ],
+      "popids": [
+        "POP-01078",
+        "POP-00001"
+      ],
+      "ref": "world_summary_c104.md ## Sports",
+      "cycle": 104
+    }
+  },
+  "angle": "output/cron-compare/sports_c104_hal-richmond_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I've seen Pablo Almanzar bring a lot of energy to the team, and I feel like his journey has been really inspiring to watch. He's got a lot of heart and it shows in the way he plays.",
+      "disp": "relentless, can't stop working; draws people in, deep with them; openly affectionate, big-hearted; curious, open to new things; steady, hard to shake; principled, plays it straight; close to family; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Pablo Almanzar bring a lot of energy to the team, and I feel like his journey has been really inspiring to watch. He's got a lot of heart and it shows in the way he plays.\",\n  \"fact_ids\": [\"F-f5da9d395dc9\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f5da9d395dc9"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-866df1ceca",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Pablo Almanzar bring a lot of energy to the team, and I feel like his journey has been really inspiring to watch. He's got a lot of heart and it shows in the way he plays."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "What have you seen, felt, or understood about \"Pablo Almanzar's journey and impact on the team\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Baylight District",
+          "focus": "Pablo Almanzar's journey and impact on the team",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C104 line card",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-af90dbe3e4f0"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f5da9d395dc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-719b88ec8522"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 126-35 · streak W2",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-84a6593cac25"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-caf9129f9785"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C104",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-5ba6a046ec01"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-2b3e2e3d075f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00050",
+      "name": "Ernesto Quintero",
+      "quote": "I've seen Pablo Almanzar's journey have a positive impact on the team, it's been a good vibe around the neighborhood and the stadium.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Pablo Almanzar's journey have a positive impact on the team, it's been a good vibe around the neighborhood and the stadium.\",\n  \"fact_ids\": [\"F-caf9129f9785\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-caf9129f9785"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00050-1f1b727ab5",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Pablo Almanzar's journey have a positive impact on the team, it's been a good vibe around the neighborhood and the stadium."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00050",
+          "name": "Ernesto Quintero",
+          "role": "3B/1B , Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "As a resident of Baylight District, what have you seen, felt, or understood about \"Pablo Almanzar's journey and impact on the team\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Baylight District",
+          "focus": "Pablo Almanzar's journey and impact on the team",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C104 line card",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-af90dbe3e4f0"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f5da9d395dc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-719b88ec8522"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 126-35 · streak W2",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-84a6593cac25"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-caf9129f9785"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C104",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-5ba6a046ec01"
+          },
+          {
+            "t": "FACT",
+            "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+            "src": "Simulation_Ledger profile for POP-00050",
+            "id": "F-d66efbf64730"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I've seen how the team's energy shifts when someone's on a hot streak, and from what I've heard, Pablo Almanzar's journey has been a big part of that lately. As a baker, I know how one person's effort can affect the whole batch, and it sounds like he's been making a real impact.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen how the team's energy shifts when someone's on a hot streak, and from what I've heard, Pablo Almanzar's journey has been a big part of that lately. As a baker, I know how one person's effort can affect the whole batch, and it sounds like he's been making a real impact.\",\n  \"fact_ids\": [\"F-f5da9d395dc9\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f5da9d395dc9"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-c0d2ce62b4",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen how the team's energy shifts when someone's on a hot streak, and from what I've heard, Pablo Almanzar's journey has been a big part of that lately. As a baker, I know how one person's effort can affect the whole batch, and it sounds like he's been making a real impact."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "What have you seen, felt, or understood about \"Pablo Almanzar's journey and impact on the team\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Baylight District",
+          "focus": "Pablo Almanzar's journey and impact on the team",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C104 line card",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-af90dbe3e4f0"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f5da9d395dc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-719b88ec8522"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 126-35 · streak W2",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-84a6593cac25"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-caf9129f9785"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C104",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-5ba6a046ec01"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01078",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "no-dials",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01078",
+          "name": "Pablo Almanzar",
+          "role": "SP / Oakland Athletics",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "What have you seen, felt, or understood about \"Pablo Almanzar's journey and impact on the team\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Baylight District",
+          "focus": "Pablo Almanzar's journey and impact on the team",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Pablo Almanzar — SP / Oakland Athletics — Jack London",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C104 line card",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-af90dbe3e4f0"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f5da9d395dc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-719b88ec8522"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 126-35 · streak W2",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-84a6593cac25"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-caf9129f9785"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C104",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-5ba6a046ec01"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar — SP / Oakland Athletics — Jack London",
+            "src": "Simulation_Ledger profile for POP-01078",
+            "id": "F-78e036104279"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I've seen Pablo Almanzar bring a lot of energy to the team, and I feel like his journey has been really inspiring to watch. He's got a lot of heart and it shows in the way he plays.",
+      "disp": "relentless, can't stop working; draws people in, deep with them; openly affectionate, big-hearted; curious, open to new things; steady, hard to shake; principled, plays it straight; close to family; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Pablo Almanzar bring a lot of energy to the team, and I feel like his journey has been really inspiring to watch. He's got a lot of heart and it shows in the way he plays.\",\n  \"fact_ids\": [\"F-f5da9d395dc9\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f5da9d395dc9"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00001-866df1ceca",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Pablo Almanzar bring a lot of energy to the team, and I feel like his journey has been really inspiring to watch. He's got a lot of heart and it shows in the way he plays."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00001",
+          "name": "Vinnie Keane",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "What have you seen, felt, or understood about \"Pablo Almanzar's journey and impact on the team\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Baylight District",
+          "focus": "Pablo Almanzar's journey and impact on the team",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names"
+          ],
+          "self": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C104 line card",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-af90dbe3e4f0"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f5da9d395dc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-719b88ec8522"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 126-35 · streak W2",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-84a6593cac25"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-caf9129f9785"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C104",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-5ba6a046ec01"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+            "src": "Simulation_Ledger profile for POP-00001",
+            "id": "F-2b3e2e3d075f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00050",
+      "name": "Ernesto Quintero",
+      "quote": "I've seen Pablo Almanzar's journey have a positive impact on the team, it's been a good vibe around the neighborhood and the stadium.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Pablo Almanzar's journey have a positive impact on the team, it's been a good vibe around the neighborhood and the stadium.\",\n  \"fact_ids\": [\"F-caf9129f9785\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-caf9129f9785"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00050-1f1b727ab5",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen Pablo Almanzar's journey have a positive impact on the team, it's been a good vibe around the neighborhood and the stadium."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00050",
+          "name": "Ernesto Quintero",
+          "role": "3B/1B , Oakland A's",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "As a resident of Baylight District, what have you seen, felt, or understood about \"Pablo Almanzar's journey and impact on the team\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Baylight District",
+          "focus": "Pablo Almanzar's journey and impact on the team",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C104 line card",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-af90dbe3e4f0"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f5da9d395dc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-719b88ec8522"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 126-35 · streak W2",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-84a6593cac25"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-caf9129f9785"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C104",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-5ba6a046ec01"
+          },
+          {
+            "t": "FACT",
+            "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+            "src": "Simulation_Ledger profile for POP-00050",
+            "id": "F-d66efbf64730"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I've seen how the team's energy shifts when someone's on a hot streak, and from what I've heard, Pablo Almanzar's journey has been a big part of that lately. As a baker, I know how one person's effort can affect the whole batch, and it sounds like he's been making a real impact.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen how the team's energy shifts when someone's on a hot streak, and from what I've heard, Pablo Almanzar's journey has been a big part of that lately. As a baker, I know how one person's effort can affect the whole batch, and it sounds like he's been making a real impact.\",\n  \"fact_ids\": [\"F-f5da9d395dc9\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-f5da9d395dc9"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-c0d2ce62b4",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen how the team's energy shifts when someone's on a hot streak, and from what I've heard, Pablo Almanzar's journey has been a big part of that lately. As a baker, I know how one person's effort can affect the whole batch, and it sounds like he's been making a real impact."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "What have you seen, felt, or understood about \"Pablo Almanzar's journey and impact on the team\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Baylight District",
+          "focus": "Pablo Almanzar's journey and impact on the team",
+          "src": "world_summary_c104.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — player-feature — supplied C104 line card",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-af90dbe3e4f0"
+          },
+          {
+            "t": "FACT",
+            "text": "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-f5da9d395dc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-719b88ec8522"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 126-35 · streak W2",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-84a6593cac25"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — player-feature (late-season)",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-caf9129f9785"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C104",
+            "src": "world_summary_c104.md ## Sports",
+            "id": "F-5ba6a046ec01"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-28T18:17:44.886Z"
+}

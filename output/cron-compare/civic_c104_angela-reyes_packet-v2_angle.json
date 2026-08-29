@@ -1,0 +1,406 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "104",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00156",
+      "name": "Angela Reyes",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+      "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.",
+      "creativeBrief": {
+        "kind": "education-stability",
+        "method": "PROGRAM_CONTINUITY_ACCESS",
+        "missing": [
+          "a named student, teacher, family member, participant, or program staff member",
+          "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+          "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+        ],
+        "stabilityEvidence": {
+          "state": "UNESTABLISHED",
+          "participants": [],
+          "facts": [],
+          "src": null
+        },
+        "forbidden": [
+          "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "East Oakland",
+      "score": null,
+      "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+      "nearby": [
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+          "src": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+          "src": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        {
+          "text": "math-imbalance (low) | West Oakland: decay [Sentiment -0.020, RetailVitality -4.39] despite 2 active mitigator(s) [INIT-001, INIT-007]",
+          "src": "output/engine_audit_c104.json patterns[3]; evidence: Neighborhood_Map row(s) 5"
+        },
+        {
+          "text": "math-imbalance (medium) | Adams Point: decay [Sentiment -0.020, RetailVitality -2.92] with no matching active initiative",
+          "src": "output/engine_audit_c104.json patterns[4]; evidence: Neighborhood_Map row(s) 9"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01047",
+          "name": "Jerome Pittman (POP-01055)",
+          "profile": "Jerome Pittman (POP-01055)",
+          "why": "assignment",
+          "role": null,
+          "hood": "East Oakland"
+        },
+        {
+          "pop": "POP-01055",
+          "name": "Maria Conteras (POP-01047)",
+          "profile": "Maria Conteras (POP-01047)",
+          "why": "assignment",
+          "role": null,
+          "hood": "East Oakland"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+        "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+        "id": "F-9a03f74b0a30"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+        "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+        "id": "F-3636de4563b5"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+      "label": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+      "kind": "anomaly",
+      "angle": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+      "hookLine": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+      "hood": "East Oakland",
+      "popids": [
+        "POP-01047",
+        "POP-01055"
+      ],
+      "citizens": [
+        "Jerome Pittman (POP-01055)",
+        "Maria Conteras (POP-01047)"
+      ]
+    },
+    "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "angela-reyes",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "domain": "education-youth"
+    },
+    "pulse": {
+      "className": "education-youth",
+      "score": 45,
+      "label": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+      "hood": "East Oakland",
+      "source": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]"
+      ],
+      "forbidden": [
+        "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+      ],
+      "schema": "EDUCATION-STABILITY-BRIEF-1",
+      "method": "PROGRAM_CONTINUITY_ACCESS",
+      "missing": [
+        "a named student, teacher, family member, participant, or program staff member",
+        "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+        "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+      ],
+      "stabilityEvidence": {
+        "state": "UNESTABLISHED",
+        "participants": [],
+        "facts": [],
+        "src": null
+      }
+    },
+    "candidates": [
+      {
+        "score": 45,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+        "ref": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+        "hood": "East Oakland",
+        "popids": [
+          "POP-01047",
+          "POP-01055"
+        ],
+        "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+        "citizens": [
+          "Jerome Pittman (POP-01055)",
+          "Maria Conteras (POP-01047)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 11
+      },
+      {
+        "score": 45,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: pilot-active → implementation-active",
+        "ref": "output/engine_audit_c104.json patterns[16]; evidence: Initiative_Tracker row(s) 7",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00008",
+          "POP-00780",
+          "POP-01057"
+        ],
+        "angle": "Oakland Youth Apprenticeship Pipeline advanced from pilot-active to implementation-active — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from pilot-active to implementation-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Delin Morales (POP-00780)",
+          "Nina Reyes (POP-01057)",
+          "P Slayer (POP-00008)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 16
+      },
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Oakland Youth Apprenticeship Pipeline | Status announced | phase implementation-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 29
+      },
+      {
+        "score": 45,
+        "kind": "vote",
+        "label": "Oakland Youth Apprenticeship Pipeline | C104 findings report and intake evaluation C104",
+        "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 30
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "sentiment/communityEngagement/retail | Oakland Youth Apprenticeship Pipeline is implementation-active — ongoing workforce effects in West Oakland, East Oakland, Fruitvale",
+        "ref": "Ripple_Ledger cycle 104 (CauseType initiative-implementation); rendered: world_summary_c104.md \"## What Moved\" > \"### initiative-implementation\"",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 37
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Oakland Youth Apprenticeship Pipeline sitting, nothing free (-2); decay toward 50 (-1)",
+        "ref": "Ripple_Ledger cycle 104 (CauseType approval-shift); rendered: world_summary_c104.md \"## What Moved\" > \"### approval-shift\"",
+        "hood": "D1",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 39
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+      "output/engine_audit_c104.json patterns[16]; evidence: Initiative_Tracker row(s) 7",
+      "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-007)",
+      "Ripple_Ledger cycle 104 (CauseType initiative-implementation); rendered: world_summary_c104.md \"## What Moved\" > \"### initiative-implementation\"",
+      "Ripple_Ledger cycle 104 (CauseType approval-shift); rendered: world_summary_c104.md \"## What Moved\" > \"### approval-shift\""
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "text": "Angela Reyes plans to explore the education angle in East Oakland, focusing on the continuity and access of programs amidst the neighborhood's decay. She aims to understand how educational initiatives are sustaining or failing to address the community's needs.",
+    "plan": {
+      "chase": "Angela Reyes plans to explore the education angle in East Oakland, focusing on the continuity and access of programs amidst the neighborhood's decay. She aims to understand how educational initiatives are sustaining or failing to address the community's needs.",
+      "focus": "Education stability and program continuity in East Oakland",
+      "why": "To investigate the impact of educational programs on community sentiment and retail vitality amidst decay",
+      "checks": [
+        "Verify the status of the civic initiative in East Oakland",
+        "Assess the involvement of local educational institutions in community programs"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01047",
+          "question": "What role does Jerome Pittman play in the educational programs in East Oakland?",
+          "basis": "assignment"
+        },
+        {
+          "pop": "POP-01055",
+          "question": "How does Maria Conteras contribute to the educational stability in East Oakland?",
+          "basis": "assignment"
+        }
+      ],
+      "interpretation": "The lack of advancement in civic initiatives suggests potential gaps in educational program effectiveness or community engagement.",
+      "unverifiedLead": [
+        "Potential underutilization of educational resources",
+        "Possible disconnect between educational programs and community needs"
+      ],
+      "closeQuestion": "How can educational programs be better aligned to mitigate the decay in East Oakland?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "kind": "anomaly",
+      "hood": "Temescal",
+      "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "popids": [
+        "POP-00745",
+        "POP-00761",
+        "POP-00775"
+      ]
+    },
+    {
+      "label": "math-imbalance (low) | West Oakland: decay [Sentiment -0.020, RetailVitality -4.39] despite 2 active mitigator(s) [INIT-001, INIT-007]",
+      "kind": "anomaly",
+      "hood": "West Oakland",
+      "ref": "output/engine_audit_c104.json patterns[3]; evidence: Neighborhood_Map row(s) 5",
+      "popids": [
+        "POP-00771",
+        "POP-00773",
+        "POP-01076"
+      ]
+    },
+    {
+      "label": "math-imbalance (medium) | Adams Point: decay [Sentiment -0.020, RetailVitality -2.92] with no matching active initiative",
+      "kind": "anomaly",
+      "hood": "Adams Point",
+      "ref": "output/engine_audit_c104.json patterns[4]; evidence: Neighborhood_Map row(s) 9",
+      "popids": [
+        "POP-00648",
+        "POP-00966",
+        "POP-00969"
+      ]
+    }
+  ],
+  "laneEntries": 48,
+  "ranAt": "2026-08-26T11:15:50.856Z"
+}

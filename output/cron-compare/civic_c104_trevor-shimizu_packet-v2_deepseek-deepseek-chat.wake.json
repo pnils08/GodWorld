@@ -5,25 +5,25 @@
   "provider": "openrouter",
   "model": "deepseek/deepseek-chat",
   "configuredWriterModel": "deepseek/deepseek-chat",
-  "gateModel": "google/gemini-3.5-flash",
+  "gateModel": "google/gemini-3.7-flash",
   "persona": "trevor-shimizu",
   "byline": {
     "name": "Trevor Shimizu",
     "popid": "POP-00155",
     "beatDomain": "INFRASTRUCTURE"
   },
-  "laneEntries": 51,
-  "quotesLanded": 2,
+  "laneEntries": 48,
+  "quotesLanded": 1,
   "disposition": "flagged",
-  "rheaPass": false,
-  "rheaFlagCount": 3,
+  "rheaPass": null,
+  "rheaFlagCount": null,
   "contamination": {
     "fail": false,
     "findings": []
   },
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/civic_c104_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "article": "output/cron-compare/flagged/civic_c104_trevor-shimizu_packet-v2_deepseek-deepseek-chat-2315.md",
   "selfRecord": null,
-  "ranAt": "2026-08-20T23:16:26.987Z"
+  "ranAt": "2026-08-26T23:15:13.713Z"
 }

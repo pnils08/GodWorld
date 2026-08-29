@@ -1,0 +1,14 @@
+{
+  "office": "district_attorney",
+  "agentDir": "civic-office-district-attorney",
+  "holder": "Clarissa Dane",
+  "popid": "POP-00143",
+  "title": "District Attorney",
+  "date": "2026-08-24",
+  "cycle": 104,
+  "model": "moonshotai/kimi-k2",
+  "statement": "The DA's office has reviewed the D7 next-cycle report and community satisfaction survey. The OARI deployment in West Oakland continues to generate case files requiring prosecutorial review. Our office maintains coordination protocols with alternative response teams to ensure evidentiary continuity when incidents escalate to criminal jurisdiction. The community satisfaction metrics are noted for institutional context; they do not affect charging standards.",
+  "action": "Maintaining case-file coordination protocols with OARI D7 deployment; no change to prosecutorial priorities based on satisfaction survey data.",
+  "numberMoved": "0",
+  "ranAt": "2026-08-24T10:45:39.373Z"
+}

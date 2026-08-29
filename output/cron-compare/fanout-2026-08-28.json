@@ -1,0 +1,444 @@
+{
+  "date": "2026-08-28",
+  "cycle": 104,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "beatDomain": "CIVIC",
+      "persona": "carmen-delaine",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "kind": "initiative",
+        "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "hood": "West Oakland",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "carmen-delaine",
+      "pulse": {
+        "className": "civic-ledger",
+        "score": 55,
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hood": "West Oakland",
+        "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+          "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+        ]
+      },
+      "wakePackage": "CARMEN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "beatDomain": "CIVIC",
+      "persona": "luis-navarro",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s)",
+        "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "hood": null,
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "luis-navarro",
+      "pulse": {
+        "className": "accountability-anomaly",
+        "score": 80,
+        "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+        "hood": null,
+        "source": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s)"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "repeating-event (medium) | Issue \"strain\" recurred 4 cycles"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ],
+        "schema": "INVESTIGATION-BRIEF-1",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "excludedCandidates": []
+      },
+      "wakePackage": "LUIS-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "angle": "What the supplied C104 line card establishes, and what history remains unsupplied.",
+        "label": "A's — player-feature — supplied C104 line card",
+        "hookLine": "A's — player-feature — supplied C104 line card",
+        "hood": "Baylight District",
+        "pulseClass": "era-door",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "closingNote": "break of continuity",
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Vinnie Keane (POP-00001)"
+        ],
+        "popids": [
+          "POP-01078",
+          "POP-00001"
+        ],
+        "ref": "world_summary_c104.md ## Sports",
+        "cycle": 104
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "era-door",
+        "score": 81,
+        "label": "A's — player-feature — supplied C104 line card",
+        "team": "A's",
+        "eventKind": "player-feature",
+        "seasonType": "late-season",
+        "storyAngle": "Pablo the Picasso shines again.",
+        "hasStats": true,
+        "record": "126-35",
+        "streak": "W2",
+        "foilNumber": "9IP",
+        "closingNote": "break of continuity",
+        "feedCycle": 104
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "closingNote": "break of continuity",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Pablo Almanzar line (feed): 9IP, 0H, 1BB, 10Ks",
+          "Vinnie Keane line (feed): 2-3, HR, 3 RBI",
+          "Team record (feed): 126-35 · streak W2",
+          "Event (feed): A's — player-feature (late-season)",
+          "Cycle: C104"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "closingNote": "break of continuity",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: 9IP on the feed. Archive claim: place this against time — Pablo the Picasso shines again. Close toward break of continuity.",
+        "foilNumber": "9IP",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ]
+      },
+      "wakePackage": "HAL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Elliot Graye",
+      "popid": "POP-00012",
+      "beatDomain": "COMMUNITY",
+      "persona": "elliot-graye",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Mark Aitken spotted at Adams Point United Methodist Church in Adams Point — ground truth only, no invented companions",
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)",
+        "hookLine": "sighting | Mark Aitken spotted at Adams Point United Methodist Church",
+        "hood": "Adams Point",
+        "pulseClass": "fame-sighting",
+        "citizens": [
+          "Mark Aitken"
+        ],
+        "popids": [],
+        "named": "Adams Point United Methodist Church",
+        "venue": "Adams Point United Methodist Church",
+        "ref": "Ripple_Ledger cycle 104 (CauseType lifestyle-sighting); rendered: world_summary_c104.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "cycle": 104
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Mark Aitken at Adams Point United Methodist Church (Adams Point)"
+      },
+      "recommend": {
+        "bag": "ground",
+        "slug": "maria-keen",
+        "name": "Maria Keen",
+        "popid": "POP-00013",
+        "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+        "reason": "top pulse fame-sighting → ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Mark Aitken at Adams Point United Methodist Church (Adams Point)"
+      },
+      "bag": "faith",
+      "wakePackage": "GRAYE-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "label": "Grand Lake retail decay",
+        "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "hood": "Grand Lake",
+        "pulseClass": "retail-decay",
+        "namedBusinesses": [],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## Engine Review · math-imbalance",
+        "cycle": 104
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "retail-decay",
+        "score": 28,
+        "label": "Grand Lake retail decay",
+        "hood": "Grand Lake",
+        "namedBusinesses": [],
+        "retail": null,
+        "retailDelta": -5.03
+      },
+      "prewrite": {
+        "pulseClass": "retail-decay",
+        "angle": "Retail vitality decay in Grand Lake without a matching initiative — what the storefront line feels like",
+        "hookLine": "Grand Lake is losing retail heat on the map (RetailVitality -5.03 — translate only).",
+        "namedBusinesses": [],
+        "anchorFacts": [
+          "HOOD: Grand Lake",
+          "RETAIL DELTA (do not lead with decimal): -5.03",
+          "NAMED: none — do not invent storefronts",
+          "EVIDENCE: Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "story": {
+        "ref": "undocked:undocked-pop00688-Y2C52",
+        "label": "UNDOCKED: Merkin Jumper — up 40 on the night",
+        "kind": "undocked",
+        "angle": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 40, systems alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
+        "citizens": [
+          "Merkin Jumper — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00688"
+        ],
+        "hood": "Downtown"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "seedless": 1,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Carmen Delaine",
+        "persona": "carmen-delaine",
+        "wakePackage": "CARMEN-LEP2-1"
+      },
+      {
+        "name": "Luis Navarro",
+        "persona": "luis-navarro",
+        "wakePackage": "LUIS-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Elliot Graye",
+        "persona": "elliot-graye",
+        "wakePackage": "GRAYE-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-27",
+    "top": {
+      "score": 61,
+      "className": "metric-contradiction",
+      "label": "math-imbalance (high) | Grand Lake: decay [Sentiment -0.070, RetailVitality -5.03, HousingPressure +0.500] with no matching active initiative"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c104.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=carmen-delaine,luis-navarro,hal-richmond,simon-leary,elliot-graye,business-desk,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=era-door score=81 close=break of continuity"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=retail-decay score=28 hood=Grand Lake"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "elliot-graye",
+        "bag": "faith",
+        "pulse": "fame-sighting",
+        "score": 23
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=2",
+    "seats": [
+      {
+        "persona": "carmen-delaine",
+        "domain": "civic-ledger",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active"
+      },
+      {
+        "persona": "luis-navarro",
+        "domain": "accountability-anomaly",
+        "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles"
+      }
+    ]
+  },
+  "builtAt": "2026-08-28T11:15:08.264Z"
+}

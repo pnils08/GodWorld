@@ -1,0 +1,364 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00154",
+    "name": "Dr. Lila Mezran",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+    "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "health-service",
+      "method": "ACCESS_TIMELINE_HUMAN_COST",
+      "missing": [
+        "a named affected resident, patient, clinician, or service user",
+        "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+        "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+      ],
+      "humanConsequence": {
+        "state": "UNESTABLISHED",
+        "subjects": [],
+        "facts": [],
+        "src": null
+      },
+      "forbidden": [
+        "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "Temescal",
+    "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+    "plan": {
+      "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+      "closeQuestion": "What steps could be taken to realign the civic initiative with the community’s needs?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00745",
+        "name": "Sonia Parikh (POP-00745)",
+        "profile": "Sonia Parikh (POP-00745)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00761",
+        "name": "Idris Karim (POP-00761)",
+        "profile": "Idris Karim (POP-00761)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00775",
+        "name": "Sam Alvarez (POP-00775)",
+        "profile": "Sam Alvarez (POP-00775)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00745-46c9afcab1",
+        "pop": "POP-00745",
+        "name": "Sonia Parikh",
+        "quote": "I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here.",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "src": "packet.W2[POP-00745]"
+      },
+      {
+        "id": "Q-POP-00761-620177fb9d",
+        "pop": "POP-00761",
+        "name": "Idris Karim",
+        "quote": "I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here.",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "src": "packet.W2[POP-00761]"
+      },
+      {
+        "id": "Q-POP-00775-e55e3412ff",
+        "pop": "POP-00775",
+        "name": "Sammie Alvarez",
+        "quote": "I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides.",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "src": "packet.W2[POP-00775]"
+      },
+      {
+        "id": "Q-POP-00170-bbb25d8eec",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides.",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Is there a lack of communication between the civic initiative and Temescal residents?",
+        "usable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Are there unaddressed barriers preventing the mitigator from being effective?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "id": "F-ae3bddfa414f"
+    },
+    {
+      "t": "FACT",
+      "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "id": "F-5327cda5209b"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed health-service Initiative or access condition into a careful public record without diagnosing residents or inventing clinical outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "clinical calm in precise third-person public-service reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed health-service, access, place, or implementation fact",
+      "closing": "the next resident-impact, access, capacity, or timeline record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied health-service implementation fact",
+      "a careful access or human-cost question that remains explicitly unanswered",
+      "transitions between supplied health-service facts that add no patient, diagnosis, outcome, count, or causal claim"
+    ],
+    "textureConditions": [
+      "every named person, clinic, hospital, service, Initiative, Project, office, institution, neighborhood, and organization must come from the Packet",
+      "diagnoses, symptoms, prevalence, treatment results, access changes, capacity, staffing, budgets, dates, durations, counts, measurements, and causal health outcomes require Packet support",
+      "an unestablished human consequence must remain unestablished; do not manufacture a patient, resident, clinician, quote, or collective experience",
+      "raw tracker status, phase labels, source paths, and engine fields may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented diagnosis, symptom, condition, patient, resident, clinician, quote, treatment, outcome, access effect, wait time, capacity, staffing level, budget, measurement, or health cluster",
+      "a named health service, institution, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported opening, closure, delay, service change, official act, duty, response, promise, timeline, or causal health claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-1c8a86a26bfe",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-ae3bddfa414f",
+        "t": "FACT",
+        "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+        "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+      },
+      {
+        "id": "F-5327cda5209b",
+        "t": "FACT",
+        "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00745-46c9afcab1",
+        "speakerId": "POP-00745",
+        "speakerName": "Sonia Parikh",
+        "text": "I've noticed more empty storefronts on Telegraph lately, and my landlord just raised my rent again—it's getting harder to feel at home here.",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "src": "packet.W2[POP-00745]"
+      },
+      {
+        "id": "Q-POP-00761-620177fb9d",
+        "speakerId": "POP-00761",
+        "speakerName": "Idris Karim",
+        "text": "I’ve noticed more empty storefronts lately, and it feels like the neighborhood is losing its charm. People are also talking about how hard it is to find affordable housing here.",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "src": "packet.W2[POP-00761]"
+      },
+      {
+        "id": "Q-POP-00775-e55e3412ff",
+        "speakerId": "POP-00775",
+        "speakerName": "Sammie Alvarez",
+        "text": "I've noticed more 'For Lease' signs popping up on Telegraph while my neighbors talk about rent hikes over coffee—it feels like the neighborhood's getting squeezed from both sides.",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "src": "packet.W2[POP-00775]"
+      },
+      {
+        "id": "Q-POP-00170-bbb25d8eec",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I see the strain every morning when my regulars come in—folks who've been here for years now talking about moving because their rent's gone up again, and half the shops they used to stop at on their way to work are shuttered. It's like the neighborhood's getting squeezed from both sides.",
+        "factIds": [
+          "F-ae3bddfa414f"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00745",
+        "name": "Sonia Parikh (POP-00745)",
+        "profile": "Sonia Parikh",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00761",
+        "name": "Idris Karim (POP-00761)",
+        "profile": "Idris Karim",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00775",
+        "name": "Sam Alvarez (POP-00775)",
+        "profile": "Sam Alvarez",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Is there a lack of communication between the civic initiative and Temescal residents?",
+        "publishable": false
+      },
+      {
+        "from": "Dr. Lila Mezran",
+        "text": "Are there unaddressed barriers preventing the mitigator from being effective?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied health-service implementation fact",
+      "a careful access or human-cost question that remains explicitly unanswered",
+      "transitions between supplied health-service facts that add no patient, diagnosis, outcome, count, or causal claim"
+    ],
+    "textureConditions": [
+      "every named person, clinic, hospital, service, Initiative, Project, office, institution, neighborhood, and organization must come from the Packet",
+      "diagnoses, symptoms, prevalence, treatment results, access changes, capacity, staffing, budgets, dates, durations, counts, measurements, and causal health outcomes require Packet support",
+      "an unestablished human consequence must remain unestablished; do not manufacture a patient, resident, clinician, quote, or collective experience",
+      "raw tracker status, phase labels, source paths, and engine fields may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented diagnosis, symptom, condition, patient, resident, clinician, quote, treatment, outcome, access effect, wait time, capacity, staffing level, budget, measurement, or health cluster",
+      "a named health service, institution, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported opening, closure, delay, service change, official act, duty, response, promise, timeline, or causal health claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, or row metadata printed as public-facing evidence"
+    ]
+  }
+}

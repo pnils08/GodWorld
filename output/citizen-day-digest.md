@@ -2,45 +2,29 @@
 
 A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 104). Everything below is sourced from the world ledger — nothing is invented.
 
-## The big moments
-
-- **Jorge Wusther** (Uptown) — read or studied indoors during winter pace
-- **Mason Ortega** (Uptown) — retold an old family story and caught a detail they'd never noticed
-- **Mason Ortega** (Uptown) — set up automatic transfers to the savings account and felt briefly like an adult
-- **Mason Ortega** (Uptown) — overheard a goodbye at the corner that sounded permanent, and carried it a block near a gallery opening
-- **Rafael Phillips** (Rockridge) — Emerged into Tier-4 in Rockridge
-
 ## The people, in their own words
 
 ### Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake
 
-> ``` { "answer": "quote", "quote": "To me, the A's player-feature trend means the team is getting attention for our individual players' skills and contributions, and I think the
+> You can feel it in the air—the empty storefronts, the fading signs. It’s like the neighborhood’s heartbeat is slowing down, and no one’s stepping up to revive it.
 
-> I wander over to Market Hall. Just me, no entourage, no fanfare. The smell of fresh bread from the bakery hits me first, then the hum of people talking, living their lives. I grab
+> Benji's shift from pure power hitter to situational RBI guy shows why we keep winning—it's about adapting, not just talent. I've seen him put in the work to reinvent himself, and t
+
+### Ernesto Quintero — 3B/1B , Oakland A's — Baylight District
+
+> I've been hearing a lot about Pablo Almanzar's second MLB start around Baylight District, it's got people talking, I'm just trying to focus on my own game with the A's.
 
 ### Benji Dillon — Pitcher, Oakland A's Legend — Rockridge
 
-> The truth is we’ve let the days between us grow longer without meaning to. Vinnie was always the one who could pull a laugh out of me when the game got too heavy, but now it’s like
+> You know, it's never been about roles for me—it's about winning. The A's success comes from everyone buying into that, doing whatever's needed. If my changing role helps keep us on
 
-> ```json { "answer": "quote", "quote": "Moving to the bullpen is about what the team needs right now—I’ve always said I’ll do whatever puts us in the best position to win, and i
+### Mike Paulson — General Manager, Oakland A's & The Oaks — Jack London
 
-### Tomas Renteria — Podcast Host / Line Cook — Fruitvale
+> Benji's shift from power hitter to situational leader—that's the kind of adaptation that keeps a team winning. He's not just playing his role, he's redefining it to fit what we nee
 
-> ``` { "answer": "quote", "quote": "I feel like something's off about Clarissa Dane's UNDOCKED episode because it doesn't seem to be settling in with people around here, and I t
+### Kenton Pearl — Plumber — Piedmont Ave
 
-> ``` { "answer": "quote", "quote": "I feel like something's off with this transit initiative stall, it's like we're not being told the whole story, and I think the Tribune shoul
-
-### Elio Perez — Server — West Oakland
-
-> ```json {"answer":"quote","quote":"I’ve heard Dimond’s been quieter lately, and it’s worrying—less foot traffic means fewer people supporting local businesses. The Tribune should a
-
-> ``` { "answer": "quote", "quote": "I feel like something's off about Nightline Station being so quiet, it's just not what I'm used to seeing around here, and I think the Tribun
-
-*Around the neighborhood: slipped into the back pew at Allen Temple just to sit somewhere air-conditioned and quiet*
-
-### Calvin Turner — Mechanic — Fruitvale
-
-> ``` { "answer": "quote", "quote": "I think it's weird that the transit initiative has stalled, it feels like nobody's really pushing for it to happen, and I think the Tribune s
+> *holding coffee, walking down Piedmont Ave when Chandni comes into view* "Hey Chandni—damn, it's been too long. How's that boy of yours doing? Still tearing up the baseball diamo *(talking with Chandni Aguilar)*
 
 ---
-*Assembled 2026-08-20 from Reflection_Intake (30 reflections, 21 citizens) and LifeHistory_Log (5 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+*Assembled 2026-08-28 from Reflection_Intake (31 reflections, 24 citizens) and LifeHistory_Log (0 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*

@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "d6a5d8120c7e6725b99b4435132f8eeab183c86b1a056471a1a52a372dc2e7f5",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified clean draft with exact packet quote provenance, accurate sports stat citations, and authorized fan-heat texture.",
+  "review": {
+    "profileId": "p-slayer-fan-heat-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-6fd233b7afe7",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Ernesto Quintero",
+      "Melton Neilon",
+      "Pablo Almanzar",
+      "Vinnie Keane"
+    ],
+    "unverified": [
+      "Designated Hitter"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 6018,
+  "parseError": false,
+  "ranAt": "2026-08-21T23:16:41.692Z"
+}

@@ -1,0 +1,348 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 40, systems alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "undocked",
+    "hood": "Downtown",
+    "src": "undocked:undocked-pop00688-Y2C52",
+    "plan": {
+      "focus": "Merkin Jumper's performance and its impact on the city",
+      "closeQuestion": "What will be the lasting impact of Merkin Jumper's episode on the competition and the city?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00688",
+        "name": "Merkin Jumper",
+        "profile": "Merkin Jumper — UNDOCKED cast pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "profile": "Jessie Hess",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "profile": "Dillon Trevor",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00225",
+        "name": "Andre Turner",
+        "profile": "Andre Turner",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00688-bc499fb787",
+        "pop": "POP-00688",
+        "name": "Merkin Jumper",
+        "quote": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need.",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "src": "packet.W2[POP-00688]"
+      },
+      {
+        "id": "Q-POP-00212-43bcc00d01",
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "quote": "I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out.",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "src": "packet.W2[POP-00212]"
+      },
+      {
+        "id": "Q-POP-00224-a01f3d105b",
+        "pop": "POP-00224",
+        "name": "Dillon Trevor",
+        "quote": "I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves.",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "src": "packet.W2[POP-00224]"
+      },
+      {
+        "id": "Q-POP-00225-25e0c7da00",
+        "pop": "POP-00225",
+        "name": "Andre Turner",
+        "quote": "I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves.",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "src": "packet.W2[POP-00225]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The city is buzzing with excitement and debate after Merkin Jumper's performance",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+      "src": "undocked:undocked-pop00688-Y2C52",
+      "id": "F-dfb5ce06700c"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a gate-approved UNDOCKED episode into the city's entertainment conversation — who's up, who's down, what Oakland argues about tomorrow. Arc-tracking recap energy; personality-forward. NOT hard news, NOT sports analytics, NOT civic process.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person recap with first-person flashes — entertainment beat, having fun on purpose",
+      "targetWords": "350-600",
+      "opening": "a watch-party, bar, break-room, or street moment of the city reacting to the episode",
+      "closing": "the one sentence the hallway will argue about tomorrow"
+    },
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona, arc memory of prior episodes she herself filed, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "no standings, records, or streaks beyond what the supplied facts state",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math not present in the supplied facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-78c7dd236a00",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-dfb5ce06700c",
+        "t": "FACT",
+        "text": "UNDOCKED: Merkin Jumper — up 40 on the night",
+        "src": "undocked:undocked-pop00688-Y2C52"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00688-bc499fb787",
+        "speakerId": "POP-00688",
+        "speakerName": "Merkin Jumper",
+        "text": "I've seen that my work as a Social Services Caseworker has a positive impact on the people in my community, and I feel like I'm making a difference in Downtown Oakland. I'm proud to be a part of this community and to be able to help those in need.",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "src": "packet.W2[POP-00688]"
+      },
+      {
+        "id": "Q-POP-00212-43bcc00d01",
+        "speakerId": "POP-00212",
+        "speakerName": "Jessie Hess",
+        "text": "I've seen a lot of excitement around Merkin Jumper's performance and I feel like it's bringing a new energy to our city, I'm curious to see how it will all play out.",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "src": "packet.W2[POP-00212]"
+      },
+      {
+        "id": "Q-POP-00224-a01f3d105b",
+        "speakerId": "POP-00224",
+        "speakerName": "Dillon Trevor",
+        "text": "I've seen the city come alive when Merkin Jumper performs, it's like the whole neighborhood is buzzing with energy. As a server, I feel the impact on our local businesses, and it's great to see people out and about, enjoying themselves.",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "src": "packet.W2[POP-00224]"
+      },
+      {
+        "id": "Q-POP-00225-25e0c7da00",
+        "speakerId": "POP-00225",
+        "speakerName": "Andre Turner",
+        "text": "I've seen the energy around Merkin Jumper's performance bring a lot of excitement to Downtown, and as a Line cook, I feel like it's been good for business, people are coming out and enjoying themselves.",
+        "factIds": [
+          "F-dfb5ce06700c"
+        ],
+        "src": "packet.W2[POP-00225]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00688",
+        "name": "Merkin Jumper",
+        "profile": "Merkin Jumper — UNDOCKED cast pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "profile": "Jessie Hess",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00224",
+        "name": "Dillon Trevor",
+        "profile": "Dillon Trevor",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00225",
+        "name": "Andre Turner",
+        "profile": "Andre Turner",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "The city is buzzing with excitement and debate after Merkin Jumper's performance",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona, arc memory of prior episodes she herself filed, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "no standings, records, or streaks beyond what the supplied facts state",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "forbiddenClaimClasses": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math not present in the supplied facts"
+    ]
+  }
+}

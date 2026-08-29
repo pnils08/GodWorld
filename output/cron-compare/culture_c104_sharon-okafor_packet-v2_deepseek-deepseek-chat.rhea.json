@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/culture_c104_sharon-okafor_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "104",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b5aebf43d4447e1a5964d6d9701cc0844ce696cc09cafd46a8b0721e338e09bc",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, citizen roles, and sighting claims precisely match ground truth and packet provenance.",
+  "review": {
+    "profileId": "sharon-behavior-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "packageVersion": "SHARON-LEP2-1",
+    "manifestId": "AM-6b391f7ffaef",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Devon Willis",
+      "Ezekiel Campbell",
+      "Mark Aitken",
+      "Mart Johns"
+    ],
+    "unverified": [
+      "Adams Point United Methodist"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.009,
+  "durationMs": 5783,
+  "parseError": false,
+  "ranAt": "2026-08-26T23:16:40.505Z"
+}

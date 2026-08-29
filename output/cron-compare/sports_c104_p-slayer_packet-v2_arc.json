@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "storyline": {
+    "slug": "baylight-district-vinnie-keane-prospect-callup",
+    "verb": "opened"
+  },
+  "hood": "Baylight District",
+  "quotes": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I've seen Pablo Almanzar's performance get the crowd really pumped up, it's like they're feeding off his energy and it's amazing to be a part of it."
+    },
+    {
+      "pop": "POP-00050",
+      "name": "Ernesto Quintero",
+      "quote": "I've seen the crowd go wild when Pablo Almanzar's on the mound, it's like they're all energized by his performance. As a player myself, I can feel the excitement and the pressure to perform, and I think the crowd's reaction says a lot about how much they believe in him."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I feel like Pablo Almanzar's performance is electric, it's like the whole city comes alive when he's on, and the crowd's reaction is just infectious - you can't help but get caught up in the excitement."
+    }
+  ],
+  "claim": "I've seen Pablo Almanzar's performance get the crowd really pumped up, it's like they're feeding off his energy and it's amazing to be a part of it.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-21T18:17:42.605Z"
+}

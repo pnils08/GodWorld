@@ -1,0 +1,106 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00034",
+    "name": "Avery Santana",
+    "role": "Mayor",
+    "officeId": "MAYOR-01",
+    "district": "citywide",
+    "faction": "OPP",
+    "agentDir": "civic-office-mayor",
+    "initiative": null,
+    "dials": {
+      "approval": 82
+    }
+  },
+  "task": {
+    "a": "role-week",
+    "goal": "Review findings and corrective actions report"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 80,
+    "label": "Oakland Youth Apprenticeship Pipeline — Review findings and corrective actions report",
+    "lever": "Review findings and corrective actions report",
+    "hood": "West Oakland",
+    "initiative": "INIT-007",
+    "vsCity": {
+      "sentiment": 0.48,
+      "citySentiment": 0.5099999999999999,
+      "crime": 1.18,
+      "cityCrime": 0.7086363636363636,
+      "heat": 29.427272727272715,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "Review findings and corrective actions report",
+    "lineFacts": [
+      "approval 82",
+      "Oakland Youth Apprenticeship Pipeline is in pilot-active — C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
+      "due: Review findings and corrective actions report"
+    ],
+    "missing": [
+      "no active ledger people in West Oakland — do not borrow other hoods",
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "role-heat",
+    "hoods": [],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-MAYOR-01",
+      "t": "FACT",
+      "text": "Avery Santana holds MAYOR-01 at approval 82",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-007",
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline is in pilot-active — C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
+      "src": "output/initiative_tracker.json"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "MAYOR-01",
+        "PopId": "POP-00034",
+        "Holder": "Avery Santana",
+        "District": "citywide",
+        "Approval": "82"
+      }
+    ],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

@@ -6,8 +6,8 @@ CLASS: prospect-callup · SCORE: 56 · FEED_CYCLE: C104
 TEAM: A's · EVENT: player-feature (late-season)
 LABEL: Pablo the Picasso shines again.
 RECORD: 126-35 · STREAK: W2 · MOOD: electric · FAN: high
-STATS: Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
-NOTES: Pablo Alamanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provided the drama as he hitless streak went to 14 innings as the Astros had not recorded a hit through 5 innings, but in the 
+STATS: Pablo Almanzar 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
+NOTES: Pablo Almanzar makes his 2nd MLB start after throwing a no hitter in NY is his debut. Walking out to a standing ovation to his home crowd in Oakland as the take on a rival in the Astros. Pablo provided the drama as he hitless streak went to 14 innings as the Astros had not recorded a hit through 5 innings, but in the 6
 
 ## CHARGE BAG
 MODES: 1 Hate the Move · 3 Friction Pivot · 9 Breakout Feeling
@@ -25,7 +25,7 @@ PREWRITE:
 - AnchorFacts:
   - StoryAngle (feed): Pablo the Picasso shines again.
   - Team record (feed): 126-35 · streak W2
-  - Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
+  - Stats (feed): Pablo Almanzar 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI
   - Event: A's — player-feature (late-season)
 - FoilNumber: 9IP
 - CentralFeeling: Oakland should feel dared to show up louder tomorrow.
@@ -43,9 +43,8 @@ Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the
 _No on-disk prior column matched this pulse — wall may still inject at wake._
 
 ## PLAYERS (feed names — do not invent; RoleType when ledger-known)
-- Pablo Almanzar (no POPID on snapshot)
-- Vinnie Keane (POP-00001) — Designated Hitter, Oakland A's Legend, Rockridge
-- Pablo Alamanzar (no POPID on snapshot)
+- Pablo Almanzar (POP-01078) — SP / Oakland Athletics, Jack London
+- Vinnie Keane (POP-00001) — Designated Hitter, Oakland A's Legend, Grand Lake
 
 ## SCENE COLOR
 HOOD: Baylight District

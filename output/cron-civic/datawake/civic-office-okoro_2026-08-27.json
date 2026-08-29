@@ -1,0 +1,14 @@
+{
+  "office": "okoro",
+  "agentDir": "civic-office-okoro",
+  "holder": "Brenda Okoro",
+  "popid": "POP-00037",
+  "title": "Deputy Mayor (Community)",
+  "date": "2026-08-27",
+  "cycle": 104,
+  "model": "deepseek/deepseek-chat",
+  "statement": "No operational anomalies requiring public statement this cycle. Stab Fund processing remains within normal parameters; portfolio consolidation continues as assigned.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-08-27T10:45:57.294Z"
+}

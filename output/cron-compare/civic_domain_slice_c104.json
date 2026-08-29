@@ -784,6 +784,86 @@
       "sourceIndex": 50
     },
     {
+      "kind": "civic-datawake",
+      "label": "Nina Chen: 7",
+      "ref": "output/cron-civic/datawake/civic-office-council-d8_2026-08-24.json",
+      "hood": null,
+      "popids": [
+        "POP-00505"
+      ],
+      "handle": {
+        "angle": "Lake Merritt's momentum demands protection - we can't let unchecked growth undermine the very qualities that make this district thrive. I'm calling for a temporary moratorium on new liquor licenses along Lakeshore until we complete the over",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 51
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Terrence Mobley: crime index (0.45), sentiment (0.49), housing pressure (0)",
+      "ref": "output/cron-civic/datawake/civic-office-council-d9_2026-08-24.json",
+      "hood": null,
+      "popids": [
+        "POP-00506"
+      ],
+      "handle": {
+        "angle": "\"Laurel’s crime rates remain below city averages, with property crimes at 27 and violent crimes at 24 this cycle—well under the city’s 40.6 and 33.5. Sentiment stands steady at 0.49, and our housing pressure is flat zero. This isn’t a distr",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 52
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Clarissa Dane: 0",
+      "ref": "output/cron-civic/datawake/civic-office-district-attorney_2026-08-24.json",
+      "hood": null,
+      "popids": [
+        "POP-00143"
+      ],
+      "handle": {
+        "angle": "The DA's office has reviewed the D7 next-cycle report and community satisfaction survey. The OARI deployment in West Oakland continues to generate case files requiring prosecutorial review. Our office maintains coordination protocols with a",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 53
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Brenda Okoro: No operational anomalies requiring public statement this cycle. Stab Fund processing remains within normal parameters; portfolio consolidation continues as assigned.",
+      "ref": "output/cron-civic/datawake/civic-office-okoro_2026-08-27.json",
+      "hood": null,
+      "popids": [
+        "POP-00037"
+      ],
+      "handle": {
+        "angle": "No operational anomalies requiring public statement this cycle. Stab Fund processing remains within normal parameters; portfolio consolidation continues as assigned.",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 54
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Rafael Montez: No public safety events requiring an official statement from this office occurred this cycle. OPD operations continue uninterrupted with standard deployments and response protocols",
+      "ref": "output/cron-civic/datawake/civic-office-police-chief_2026-08-25.json",
+      "hood": null,
+      "popids": [
+        "POP-00136"
+      ],
+      "handle": {
+        "angle": "No public safety events requiring an official statement from this office occurred this cycle. OPD operations continue uninterrupted with standard deployments and response protocols.",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 55
+    },
+    {
       "kind": "weather",
       "label": "Cycle 104 weather | Season Winter | 48°F rain, SW 18 mph, rain (frontState RAIN), humidity 86, visibility 6",
       "ref": "output/world_summary_c104.md:3",
@@ -795,7 +875,7 @@
         "citizens": []
       },
       "source": "world-summary",
-      "sourceIndex": 51
+      "sourceIndex": 56
     },
     {
       "kind": "season-feel",
@@ -813,7 +893,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 52
+      "sourceIndex": 57
     },
     {
       "kind": "season-feel",
@@ -831,7 +911,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 53
+      "sourceIndex": 58
     },
     {
       "kind": "season-feel",
@@ -845,7 +925,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 54
+      "sourceIndex": 59
     },
     {
       "kind": "season-feel",
@@ -859,7 +939,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 55
+      "sourceIndex": 60
     },
     {
       "kind": "season-feel",
@@ -873,7 +953,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 56
+      "sourceIndex": 61
     },
     {
       "kind": "season-feel",
@@ -887,7 +967,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 57
+      "sourceIndex": 62
     },
     {
       "kind": "season-feel",
@@ -901,7 +981,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 58
+      "sourceIndex": 63
     },
     {
       "kind": "season-feel",
@@ -915,7 +995,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 59
+      "sourceIndex": 64
     },
     {
       "kind": "season-feel",
@@ -929,7 +1009,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 60
+      "sourceIndex": 65
     },
     {
       "kind": "season-feel",
@@ -943,7 +1023,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 61
+      "sourceIndex": 66
     },
     {
       "kind": "season-feel",
@@ -957,7 +1037,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 62
+      "sourceIndex": 67
     }
   ],
   "packets": {
@@ -1656,7 +1736,7 @@
             "Sandra Velazquez (POP-00830)"
           ],
           "source": "season-feel",
-          "sourceIndex": 52
+          "sourceIndex": 57
         },
         {
           "score": 80,
@@ -1673,7 +1753,7 @@
             "Maria Conteras (POP-01047)"
           ],
           "source": "season-feel",
-          "sourceIndex": 53
+          "sourceIndex": 58
         },
         {
           "score": 80,
@@ -1686,7 +1766,7 @@
           "hookLine": "FAITH — crisis_response — Rockridge: Temple Beth Or: congregation opens doors for community support",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 54
+          "sourceIndex": 59
         },
         {
           "score": 80,
@@ -1699,7 +1779,7 @@
           "hookLine": "FAITH — crisis_response — Lake Merritt: Lakeshore Unitarian Universalist Fellowship: emergency assistance fund activated",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 55
+          "sourceIndex": 60
         },
         {
           "score": 80,
@@ -1712,7 +1792,7 @@
           "hookLine": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Advent and Christmas",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 56
+          "sourceIndex": 61
         },
         {
           "score": 80,
@@ -1725,7 +1805,7 @@
           "hookLine": "FAITH — holy_day — East Oakland: Foothill Baptist Tabernacle observes Christmas",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 57
+          "sourceIndex": 62
         }
       ],
       "pointers": [

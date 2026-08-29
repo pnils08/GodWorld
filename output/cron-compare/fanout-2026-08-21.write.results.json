@@ -1,0 +1,38 @@
+{
+  "date": "2026-08-21",
+  "stage": "write",
+  "results": [
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": false,
+      "error": "no angle artifact at output/cron-compare/sports_c104_hal-richmond_packet-v2_angle.json — run --stage=angle first"
+    },
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-08-21T23:17:34.279Z"
+}

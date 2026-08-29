@@ -1,0 +1,379 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00008",
+    "name": "P Slayer",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Pablo the Picasso shines again.",
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "fan-heat",
+      "fanCharge": "dare",
+      "bagModes": [
+        "1 Hate the Move",
+        "3 Friction Pivot",
+        "9 Breakout Feeling"
+      ],
+      "friction": "Handoff feeling vs funeral feeling — pick a side.",
+      "centralFeeling": "Oakland should feel dared to show up louder tomorrow.",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "prospect-callup",
+    "hood": "Baylight District",
+    "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again.",
+    "plan": {
+      "focus": "Pablo Almanzar's performance and the crowd's reaction",
+      "closeQuestion": "Will the team be able to sustain this momentum?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "profile": "Ernesto Quintero",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00001-b642f8207f",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "I've seen Pablo Almanzar's performance get the crowd really pumped up, it's like they're feeding off his energy and it's amazing to be a part of it.",
+        "factIds": [
+          "F-f8caabe9b320"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00050-1ff2d3a603",
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "quote": "I've seen the crowd go wild when Pablo Almanzar's on the mound, it's like they're all energized by his performance. As a player myself, I can feel the excitement and the pressure to perform, and I think the crowd's reaction says a lot about how much they believe in him.",
+        "factIds": [
+          "F-f8caabe9b320",
+          "F-e3a034e5ee50"
+        ],
+        "src": "packet.W2[POP-00050]"
+      },
+      {
+        "id": "Q-POP-00170-cfd5b67a98",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I feel like Pablo Almanzar's performance is electric, it's like the whole city comes alive when he's on, and the crowd's reaction is just infectious - you can't help but get caught up in the excitement.",
+        "factIds": [
+          "F-f8caabe9b320",
+          "F-e3a034e5ee50"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "the feeling that this team is on the verge of something big",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C104",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-c612b6082c46"
+    },
+    {
+      "t": "FACT",
+      "text": "Pablo the Picasso shines again.",
+      "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again.",
+      "id": "F-f8caabe9b320"
+    },
+    {
+      "t": "FACT",
+      "text": "Handoff feeling vs funeral feeling — pick a side.",
+      "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again.",
+      "id": "F-3a85549a5cb4"
+    },
+    {
+      "t": "FACT",
+      "text": "StoryAngle (feed): Pablo the Picasso shines again.",
+      "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again.",
+      "id": "F-e3a034e5ee50"
+    },
+    {
+      "t": "FACT",
+      "text": "Team record (feed): 126-35 · streak W2",
+      "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again.",
+      "id": "F-f76ad9589906"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+      "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again.",
+      "id": "F-65993988c904"
+    },
+    {
+      "t": "FACT",
+      "text": "Event: A's — player-feature (late-season)",
+      "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again.",
+      "id": "F-37aed3ad5742"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person I/we fan-heat column",
+      "targetWords": "400-700",
+      "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment",
+      "closing": "a dare, confession, or update with the central friction still live"
+    },
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-6fd233b7afe7",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-c612b6082c46",
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f8caabe9b320",
+        "t": "FACT",
+        "text": "Pablo the Picasso shines again.",
+        "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again."
+      },
+      {
+        "id": "F-3a85549a5cb4",
+        "t": "FACT",
+        "text": "Handoff feeling vs funeral feeling — pick a side.",
+        "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again."
+      },
+      {
+        "id": "F-e3a034e5ee50",
+        "t": "FACT",
+        "text": "StoryAngle (feed): Pablo the Picasso shines again.",
+        "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again."
+      },
+      {
+        "id": "F-f76ad9589906",
+        "t": "FACT",
+        "text": "Team record (feed): 126-35 · streak W2",
+        "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again."
+      },
+      {
+        "id": "F-65993988c904",
+        "t": "FACT",
+        "text": "Stats (feed): Pablo Almanza 9IP, 0H, 1BB, 10Ks Vinnie Keane 2-3 , HR, 3 RBI",
+        "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again."
+      },
+      {
+        "id": "F-37aed3ad5742",
+        "t": "FACT",
+        "text": "Event: A's — player-feature (late-season)",
+        "src": "Oakland_Sports_Feed cycle 104; world_summary_c104.md \"## Sports\" · Pablo the Picasso shines again."
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00001-b642f8207f",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "I've seen Pablo Almanzar's performance get the crowd really pumped up, it's like they're feeding off his energy and it's amazing to be a part of it.",
+        "factIds": [
+          "F-f8caabe9b320"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00050-1ff2d3a603",
+        "speakerId": "POP-00050",
+        "speakerName": "Ernesto Quintero",
+        "text": "I've seen the crowd go wild when Pablo Almanzar's on the mound, it's like they're all energized by his performance. As a player myself, I can feel the excitement and the pressure to perform, and I think the crowd's reaction says a lot about how much they believe in him.",
+        "factIds": [
+          "F-f8caabe9b320",
+          "F-e3a034e5ee50"
+        ],
+        "src": "packet.W2[POP-00050]"
+      },
+      {
+        "id": "Q-POP-00170-cfd5b67a98",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I feel like Pablo Almanzar's performance is electric, it's like the whole city comes alive when he's on, and the crowd's reaction is just infectious - you can't help but get caught up in the excitement.",
+        "factIds": [
+          "F-f8caabe9b320",
+          "F-e3a034e5ee50"
+        ],
+        "src": "packet.W2[POP-00170]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00050",
+        "name": "Ernesto Quintero",
+        "profile": "Ernesto Quintero",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "the feeling that this team is on the verge of something big",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  }
+}

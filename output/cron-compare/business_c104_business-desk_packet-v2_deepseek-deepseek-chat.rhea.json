@@ -3,27 +3,33 @@
   "cycle": "104",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "b6799971fc308b2906411e6bbf2230f841d21de187f8ca156b9951f063baef70",
+  "draftSha256": "76897465d9d807523d8fa46615c9ed4b66b26a05e41fd7ea54773182d59d80b6",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "Draft accurately reflects Grand Lake's retail decay and housing pressure dynamics with canonical citizens correctly attributed.",
+  "summary": "Grand Lake storefront decline accurately reflects engine decay pattern; citizen bios and quotes match ledger and packet provenance.",
   "review": {
-    "profileId": "default",
+    "profileId": "jordan-economic-labor-v1",
     "canonIntegrity": "pass",
     "texture": "authorized"
   },
-  "reviewProfile": null,
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-f3b41a42aac3",
+    "lexicalObservations": []
+  },
   "nameCheck": {
     "verified": [
-      "Amara Keane",
-      "Melton Neilon"
+      "Melton Neilon",
+      "Rick Walker"
     ],
     "unverified": [
+      "Empty Windows",
+      "For Lease",
       "Grand Avenue",
-      "Grand Lake's Quiet Retail",
-      "Slide Leaves Questions Unanswered"
+      "Lake Park"
     ]
   },
   "intake": {
@@ -38,10 +44,10 @@
     "grammarErrors": 0,
     "unresolvable": [],
     "unbackedQuoted": [],
-    "packetChecked": false
+    "packetChecked": true
   },
-  "apiCostUsd": 0.008,
-  "durationMs": 4599,
+  "apiCostUsd": 0.0091,
+  "durationMs": 5845,
   "parseError": false,
-  "ranAt": "2026-08-21T04:02:00.447Z"
+  "ranAt": "2026-08-27T23:17:12.130Z"
 }

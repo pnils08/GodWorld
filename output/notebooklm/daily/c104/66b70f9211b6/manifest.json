@@ -1,0 +1,107 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.6",
+  "canonStatus": "NOT_CANON",
+  "cycle": 104,
+  "generatedAt": "2026-08-28T13:00:10.075Z",
+  "lastAttemptAt": "2026-08-28T13:00:10.075Z",
+  "hours": 36,
+  "packHash": "66b70f9211b603b1a19c6db6ece583f687b9623f507d012d667ac82a63c17390",
+  "worldSummary": "output/world_summary_c104.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/civic_c104_lila-mezran_packet-v2_deepseek-deepseek-chat-2315.md"
+    },
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/sports_c104_hal-richmond_packet-v2_deepseek-deepseek-chat-2315.md"
+    },
+    {
+      "classification": "FLAGGED",
+      "path": "output/cron-compare/flagged/sports_c104_simon-leary_packet-v2_deepseek-deepseek-chat-2315.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.staged-2317.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2317.md"
+    }
+  ],
+  "flaggedReports": [
+    "output/cron-compare/flagged/business_c104_business-desk_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/civic_c104_lila-mezran_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/civic_c104_trevor-shimizu_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/sports_c104_hal-richmond_packet-v2_deepseek-deepseek-chat.flags.json",
+    "output/cron-compare/flagged/sports_c104_simon-leary_packet-v2_deepseek-deepseek-chat.flags.json"
+  ],
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "CYCLE_OPEN",
+    "format": "brief",
+    "length": "short",
+    "activationEligible": true,
+    "reportedDayThreshold": null,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "FLAGGED_DISPOSITION",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "REPORTED_THRESHOLD_UNSET_OBSERVE_ONLY",
+      "W1_ACTIVE_10",
+      "NEVER_GATED_4",
+      "CIVIC_DECISIONS",
+      "ENGINE_HIGH_SEVERITY",
+      "WORLD_HIGH_SIGNAL",
+      "WORLD_SHOCK"
+    ],
+    "dispositionCounts": {
+      "passed": 3,
+      "rheaFlagged": 0,
+      "neverGated": 4
+    },
+    "fingerprint": "fbc0517e7ac229f8af8c267f40042ceedb9611cee9333249507262fce2782164"
+  },
+  "newsroomPulse": {
+    "fingerprint": "989e488dd52357e54b6c5f26c37565fd4a431d813738f4c62afe1895df615155",
+    "counts": {
+      "angles": 10,
+      "asks": 7,
+      "fanoutAssignments": 7,
+      "w2Ready": 7,
+      "quotes": 19,
+      "passed": 3,
+      "rheaFlagged": 0,
+      "neverGated": 4,
+      "flagged": 4,
+      "pending": 3
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": false,
+  "boundedSourceHash": "ab50fce455d951b892008886a35d901bc8d09a74d680d7ae708944ae91409683",
+  "boundedSource": "output/notebooklm/daily/c104/66b70f9211b6/bounded-newsroom-source.md",
+  "sourceIds": [
+    "cf77d4f5-4c3b-4bbf-9a84-0ea9df36a7ea"
+  ],
+  "opsReportArtifactId": "002464e9-9e6e-4439-8888-b05139f9a7fc",
+  "audioDirectionSourceId": "860658e9-121d-47b3-8c8f-bdeca140e5d4",
+  "audioArtifactId": "058b2413-ddec-4759-bf9f-e9f063c37807",
+  "audioPath": "output/notebooklm/daily/c104/66b70f9211b6/godworld_daily_c104.m4a",
+  "driveLink": "https://drive.google.com/file/d/1fJZ6P6XAn3gWplaOTCYw1b9bHqr_gNIx/view?usp=drivesdk"
+}

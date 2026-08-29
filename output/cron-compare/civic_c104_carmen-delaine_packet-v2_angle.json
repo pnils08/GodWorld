@@ -1,0 +1,373 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "104",
+  "persona": "carmen-delaine",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00011",
+      "name": "Carmen Delaine",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+    },
+    "signal": {
+      "kind": "initiative",
+      "hood": "West Oakland",
+      "score": null,
+      "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "nearby": [
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+          "src": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+          "src": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        {
+          "text": "math-imbalance (low) | West Oakland: decay [Sentiment -0.020, RetailVitality -4.39] despite 2 active mitigator(s) [INIT-001, INIT-007]",
+          "src": "output/engine_audit_c104.json patterns[3]; evidence: Neighborhood_Map row(s) 5"
+        },
+        {
+          "text": "math-imbalance (medium) | Adams Point: decay [Sentiment -0.020, RetailVitality -2.92] with no matching active initiative",
+          "src": "output/engine_audit_c104.json patterns[4]; evidence: Neighborhood_Map row(s) 9"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Server",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00722",
+          "name": "Daniel Cloak",
+          "profile": "Daniel Cloak — Bakery Worker — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Bakery Worker",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00794",
+          "name": "Irene Fay",
+          "profile": "Irene Fay — Barista — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Barista",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00961",
+          "name": "Darius Clark",
+          "profile": "Darius Clark — Bakery Worker — West Oakland",
+          "why": "same-hood-ledger",
+          "role": "Bakery Worker",
+          "hood": "West Oakland"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "id": "F-23653f4390d6"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "src": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "id": "F-a9554fe6e042"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "kind": "initiative",
+      "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+      "hood": "West Oakland",
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "carmen-delaine",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "domain": "civic-ledger"
+    },
+    "pulse": {
+      "className": "civic-ledger",
+      "score": 55,
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "hood": "West Oakland",
+      "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+      ]
+    },
+    "candidates": [
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 19
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "West Oakland Stabilization Fund | Month-six disbursement batch review C104",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 20
+      },
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "Oakland Alternative Response Initiative | Status passed | phase pilot_evaluation",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 21
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "Oakland Alternative Response Initiative | Task force recommendations due C105",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 22
+      },
+      {
+        "score": 55,
+        "kind": "initiative",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Status visioning-complete | phase visioning-complete",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "hood": "Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 23
+      },
+      {
+        "score": 55,
+        "kind": "vote",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Design phase kickoff C105",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 24
+      }
+    ],
+    "pointers": [
+      "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-001)",
+      "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-002)",
+      "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-003)"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "text": "Carmen's chasing the money trail on the West Oakland Stabilization Fund—where's it flowing, who's feeling it, and why do the neighborhood metrics still show decay despite two active mitigators? She's got that civic ledger itch, the kind that comes from watching too many initiatives turn into press releases without real impact. She'll start by hitting up service workers—they're the first to notice shifts in neighborhood vitality, and they don't sugarcoat.",
+    "plan": {
+      "chase": "Carmen's chasing the money trail on the West Oakland Stabilization Fund—where's it flowing, who's feeling it, and why do the neighborhood metrics still show decay despite two active mitigators? She's got that civic ledger itch, the kind that comes from watching too many initiatives turn into press releases without real impact. She'll start by hitting up service workers—they're the first to notice shifts in neighborhood vitality, and they don't sugarcoat.",
+      "focus": "Tracking the disbursement and impact of the West Oakland Stabilization Fund against ongoing decay signals in retail vitality and sentiment.",
+      "why": "The fund is active, but neighborhood metrics show continued strain—that disconnect needs explaining.",
+      "checks": [
+        "Verify if disbursement timelines match promised schedules",
+        "Cross-check fund recipients against areas showing decay",
+        "Assess whether decay patterns align with fund deployment zones"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00201",
+          "question": "Have you noticed any changes in customer traffic or business support since the stabilization fund launched?",
+          "basis": "Same-hood ledger, service worker perspective on ground-level changes"
+        },
+        {
+          "pop": "POP-00722",
+          "question": "What's the word among other bakery workers about neighborhood improvements or lingering struggles?",
+          "basis": "Same-hood ledger, food service as economic indicator"
+        }
+      ],
+      "interpretation": "Active funds should show mitigation—their absence suggests either misallocation or insufficient scale against deeper systemic issues.",
+      "unverifiedLead": [
+        "Possible lag between fund disbursement and measurable impact",
+        "Chance that funds aren't reaching the most affected businesses"
+      ],
+      "closeQuestion": "Is this stabilization fund hitting the right pressure points, or is it just keeping seats warm while West Oakland bleeds?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "kind": "anomaly",
+      "hood": "Temescal",
+      "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "popids": [
+        "POP-00745",
+        "POP-00761",
+        "POP-00775"
+      ]
+    },
+    {
+      "label": "math-imbalance (low) | West Oakland: decay [Sentiment -0.020, RetailVitality -4.39] despite 2 active mitigator(s) [INIT-001, INIT-007]",
+      "kind": "anomaly",
+      "hood": "West Oakland",
+      "ref": "output/engine_audit_c104.json patterns[3]; evidence: Neighborhood_Map row(s) 5",
+      "popids": [
+        "POP-00771",
+        "POP-00773",
+        "POP-01076"
+      ]
+    },
+    {
+      "label": "math-imbalance (medium) | Adams Point: decay [Sentiment -0.020, RetailVitality -2.92] with no matching active initiative",
+      "kind": "anomaly",
+      "hood": "Adams Point",
+      "ref": "output/engine_audit_c104.json patterns[4]; evidence: Neighborhood_Map row(s) 9",
+      "popids": [
+        "POP-00648",
+        "POP-00966",
+        "POP-00969"
+      ]
+    }
+  ],
+  "laneEntries": 48,
+  "ranAt": "2026-08-28T11:15:27.885Z"
+}

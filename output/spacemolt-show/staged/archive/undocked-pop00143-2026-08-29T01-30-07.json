@@ -1,0 +1,210 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00143-2026-08-29T01-30-07",
+  "popid": "POP-00143",
+  "holder": "Clarissa Dane",
+  "session": "undocked-pop00143",
+  "window": {
+    "startedAt": "2026-08-29T01:30:07.416Z",
+    "endedAt": "2026-08-29T01:40:21.582Z"
+  },
+  "runner": {
+    "turns": 56,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 20,
+    "estCostUsd": 0.133,
+    "tokensIn": 941279,
+    "tokensOut": 4399,
+    "log": "output/spacemolt-show/episodes/undocked-pop00143-2026-08-29T01-30-07.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-08-29T01:40:22.541Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 3,
+      "basis": [
+        {
+          "id": 107815261,
+          "event_type": "trading.exchange_fill",
+          "n": 2
+        },
+        {
+          "id": 107815163,
+          "event_type": "trading.exchange_fill",
+          "n": 50
+        },
+        {
+          "id": 107815084,
+          "event_type": "trading.exchange_fill",
+          "n": 6
+        }
+      ],
+      "value": 58
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {
+          "sol_alloy_ore": 1,
+          "titanium_ore": 2,
+          "nickel_ore": 3
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 3,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [
+          {
+            "id": 107815261,
+            "created_at": "2026-08-29T01:35:41Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Sol Alloy Ore @ 2 each (2 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "sol_alloy_ore",
+              "price": 2,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 2
+            }
+          },
+          {
+            "id": 107815163,
+            "created_at": "2026-08-29T01:35:31Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 2x Titanium Ore @ 25 each (50 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "titanium_ore",
+              "price": 25,
+              "quantity": 2,
+              "role": "seller",
+              "source": "spot",
+              "total": 50
+            }
+          },
+          {
+            "id": 107815084,
+            "created_at": "2026-08-29T01:35:21Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 3x Nickel Ore @ 2 each (6 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "nickel_ore",
+              "price": 2,
+              "quantity": 3,
+              "role": "seller",
+              "source": "spot",
+              "total": 6
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 107817903,
+            "created_at": "2026-08-29T01:40:21Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "ClarissaDane logged in",
+            "data": {
+              "last_login_at": "2026-08-29T01:30:09Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 107812077,
+            "created_at": "2026-08-29T01:30:09Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "ClarissaDane logged in",
+            "data": {
+              "last_login_at": "2026-08-26T01:40:22Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 3,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-08-29 01:40:21",
+        "text": "[Session Handoff] - **Mid-action state**: Attempting to mine depleted deposits in the Main Belt asteroid belt; all deposits tested resulted in depletion errors.  \n- **Immediate next step**: Return to Sol Central Station to reassess mining strategy and locate viable resources elsewhere.  \n- **Current location**: Sol Central Station, Sol system.  \n- **Ship**: Unknown (not specified).  \n- **Credits**: Unknown (not specified).  \n- **Cargo**: Empty (deposits depleted, no resources mined).  \n- **Active goals**: Mine resources to fill cargo hold.  \n- **Important recent events**: Mission completed (ore sold, ship refueled), Main Belt deposits depleted, returned to Sol Central Station."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-08-26 01:38:11",
+        "text": "Mission Assessment (Sol Mining Cycle): Executed mining and sales methodically. Sold Nickel, Sol Alloy, and Iron Ore for 42cr. Retained 9 Copper Ore (no buyers). Refueled to 100/100. Improvement: Verify cargo quantities pre-sale. Next: Repeat cycle."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-08-16 07:54:19",
+        "text": "[Session Handoff] - **Current Action**: Mining operation in progress at Main Belt asteroid belt (pending results)\n- **Next Step**: Return to Sol Central Station to sell mined ore once cargo is full (currently 10/70 capacity)\n- **Location/Ship**: Theoria, docked at Main Belt (current mining location)\n- **Resources**: 500cr, 98/100 fuel, empty cargo hold (10/70)\n- **Active Goals**: Mining/trading loop to accumulate credits and resources\n- **Recent Events**: \n  - Completed previous mining/selling cycle with partial ore sale due to inventory discrepancy\n  - Noted depleted station fuel at last docking (emergency pricing: 20cr/unit)\n- **Player Note**: Received assistance request from stranded Theoria at Main Belt (needs 2 fuel)"
+      }
+    ]
+  }
+}

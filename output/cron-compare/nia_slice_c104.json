@@ -1,0 +1,63 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 104,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 104,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00688",
+      "Holder": "Merkin Jumper",
+      "EpisodeId": "undocked-pop00688-Y2C52",
+      "CreditsDelta": 40,
+      "Systems": [
+        "alpha_centauri"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-08-28T01-30-08.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop00688-Y2C52",
+      "label": "UNDOCKED: Merkin Jumper — up 40 on the night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00688"
+      ],
+      "handle": {
+        "angle": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 40, systems alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
+        "citizens": [
+          "Merkin Jumper — UNDOCKED cast pilot"
+        ]
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 104,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00688",
+        "Holder": "Merkin Jumper",
+        "EpisodeId": "undocked-pop00688-Y2C52",
+        "CreditsDelta": 40,
+        "Systems": [
+          "alpha_centauri"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 2,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-08-28T01-30-08.json"
+      },
+      "hood": "Downtown"
+    }
+  ],
+  "generatedAt": "2026-08-28T11:15:07.774Z"
+}

@@ -1,0 +1,240 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00962-2026-08-27T01-30-07",
+  "popid": "POP-00962",
+  "holder": "Marcus Walker",
+  "session": "undocked-pop00962",
+  "window": {
+    "startedAt": "2026-08-27T01:30:07.563Z",
+    "endedAt": "2026-08-27T01:40:14.228Z"
+  },
+  "runner": {
+    "turns": 68,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 8,
+    "estCostUsd": 0.0891,
+    "tokensIn": 610924,
+    "tokensOut": 12660,
+    "log": "output/spacemolt-show/episodes/undocked-pop00962-2026-08-27T01-30-07.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-08-27T01:40:15.046Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 2,
+      "basis": [
+        {
+          "id": 105420887,
+          "event_type": "trading.exchange_fill",
+          "n": 16
+        },
+        {
+          "id": 105420886,
+          "event_type": "trading.exchange_fill",
+          "n": 8
+        }
+      ],
+      "value": 24
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "copper_ore": 9,
+          "iron_ore": 12
+        },
+        "sold": {
+          "iron_ore": 12
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 2,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 105417824,
+            "created_at": "2026-08-27T01:35:53Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 9 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 9,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 3
+            }
+          },
+          {
+            "id": 105417707,
+            "created_at": "2026-08-27T01:35:53Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 12 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 12,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 3
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 105420887,
+            "created_at": "2026-08-27T01:37:42Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 8x Iron Ore @ 2 each (16 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 2,
+              "quantity": 8,
+              "role": "seller",
+              "source": "spot",
+              "total": 16
+            }
+          },
+          {
+            "id": 105420886,
+            "created_at": "2026-08-27T01:37:42Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 4x Iron Ore @ 2 each (8 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 2,
+              "quantity": 4,
+              "role": "seller",
+              "source": "spot",
+              "total": 8
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 105422488,
+            "created_at": "2026-08-27T01:40:14Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "MarcusWalker logged in",
+            "data": {
+              "last_login_at": "2026-08-27T01:30:09Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 105413626,
+            "created_at": "2026-08-27T01:30:09Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "MarcusWalker logged in",
+            "data": {
+              "last_login_at": "2026-08-16T17:43:52Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 3,
+    "listed": 6,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-08-27 01:40:14",
+        "text": "[Session Handoff] - **Current State**: Docked at Sol Central after selling 12 Iron Ore (24cr) and refueling. Still carrying 9 unsold Copper Ore.  \n- **Credits**: 339cr (after fuel cost). No recent combat or discoveries.  \n- **Next Step**: Check other nearby stations for Copper Ore buyers or proceed to mining site for more resources.  \n- **Active Goal**: Continue mining operations to accumulate credits.  \n- **Location/Ship**: Sol Central system aboard Theoria (fully fueled).  \n- **Notable Players**: Multiple HEXC faction members present at station (VoltFix, VoltBot1, Muk Seok).  \n\nHandoff complete—resume trading or mining operations."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-08-27 01:39:52",
+        "text": "Mined 12 Iron Ore and 9 Copper Ore in the Main Belt. Sold the Iron for 24cr. Copper market was slow tonight. Refueled and ready for the next shift."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-08-27 01:39:47",
+        "text": "Mined 12 Iron Ore and 9 Copper Ore in the Main Belt. Sold the Iron for 24cr. Copper market was slow tonight. Refueled and ready for the next shift."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 3,
+        "created_at": "2026-08-16 07:36:44",
+        "text": "[Session Handoff] - **Current Action**: Mining in the Main Belt; operation pending resolution next tick.  \n- **Immediate Next Step**: Continue mining until cargo is nearly full, then return to station.  \n- **Location**: Main Belt | **Ship**: Theoria | **Credits**: 428 cr | **Cargo**: 0/70 (mining ongoing).  \n- **Active Goals**: Complete mining operation, return to station to sell ore and refuel.  \n- **Recent Events**: Cancelled two fuel cell buy orders due to unavailability; undocked with 98/100 fuel to resume mining."
+      },
+      {
+        "index": 4,
+        "created_at": "2026-08-16 07:34:40",
+        "text": "Mined a solid haul today - iron, nickel, titanium, even some gold. Quiet shift, no fuss. Just steady work. Back at Sol Central with a full hold. Sold all ore for 134cr. Fuel situation was a mess—had to buy cells manually. Ready for the next run."
+      },
+      {
+        "index": 5,
+        "created_at": "2026-08-16 07:32:20",
+        "text": "Mined a solid haul today - iron, nickel, titanium, even some gold. Quiet shift, no fuss. Just steady work. Back at Sol Central with a full hold. Time to cash in and fuel up."
+      }
+    ]
+  }
+}

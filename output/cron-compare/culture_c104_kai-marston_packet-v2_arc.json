@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "culture",
+  "persona": "kai-marston",
+  "storyline": {
+    "slug": "city-depak-ying-tv-slate",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight"
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and I think that helps bring people together, I've noticed it when I'm working at the bakery and people are talking about the same shows and news."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I feel like the TV slate has a big impact on our community, it's always talking about what's going on in the city and it brings us together, I mean I've seen people gathered around the TV at home or at the local spots watching the same shows."
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I feel like the TV slate has a big impact on our community, it's something people talk about and look forward to, especially when there's a special event like New Year's Eve."
+    }
+  ],
+  "claim": "I feel like the TV slate has a big impact on our community, it's always something we talk about at work and I think it brings us together, I'm curious to see what's on tonight",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-27T18:19:21.828Z"
+}

@@ -2,7 +2,7 @@
   "directed": false,
   "multigraph": false,
   "graph": {
-    "generatedAt": "2026-08-22T06:38:09.945Z",
+    "generatedAt": "2026-08-24T04:07:06.699Z",
     "source": "/root/GodWorld/output/bond-ledger-live.tsv",
     "stats": {
       "rowsRead": 597,
@@ -3132,7 +3132,7 @@
     },
     {
       "id": "pop-00789",
-      "label": "Elias  Varek",
+      "label": "Elias Varek",
       "group": "West Oakland",
       "neighborhood": "West Oakland",
       "degree": 2
@@ -3181,7 +3181,7 @@
     },
     {
       "id": "pop-00799",
-      "label": "Jax  Caldera",
+      "label": "Jax Caldera",
       "group": "Temescal",
       "neighborhood": "Temescal",
       "degree": 5
@@ -4287,7 +4287,7 @@
     },
     {
       "id": "pop-01028",
-      "label": "Wendell  Carter Jr.",
+      "label": "Wendell Carter Jr.",
       "group": "Piedmont Ave",
       "neighborhood": "Piedmont Ave",
       "degree": 4

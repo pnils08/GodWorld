@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "104",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "storyline": {
+    "slug": "west-oakland-elio-perez-initiative",
+    "verb": "advanced"
+  },
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard about the Stabilization Fund, and I hope it helps, but I still see empty storefronts and people struggling to keep their businesses open. It feels like we need more than just money—we need real support and community action."
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I've heard about the Stabilization Fund at the bakery - some folks say it's helping, but I still see empty storefronts on my way to work every morning."
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I heard about the Stabilization Fund at work—some regulars were talking about how it's supposed to help small businesses, but honestly, I haven't noticed much change around here yet."
+    },
+    {
+      "pop": "POP-00961",
+      "name": "Darius Clark",
+      "quote": "I heard about that fund at the bakery - some folks say it's helping, but I still see empty storefronts on my block. Hard to tell if it's making a real difference yet."
+    }
+  ],
+  "claim": "I’ve heard about the Stabilization Fund, and I hope it helps, but I still see empty storefronts and people struggling to keep their businesses open. It feels like we need more than just money—we need real support and community action.",
+  "src": "citizenVoice PRESS c104",
+  "ranAt": "2026-08-28T18:16:02.467Z"
+}

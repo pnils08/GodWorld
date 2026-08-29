@@ -4,14 +4,14 @@
   "model": "deepseek/deepseek-chat",
   "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 13949,
-  "usageOutputTokens": 967,
+  "usageInputTokens": 13738,
+  "usageOutputTokens": 1425,
   "savedFiles": [
-    "output/cron-compare/sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat.md"
+    "output/cron-compare/sports_c104_hal-richmond_packet-v2_deepseek-deepseek-chat.md"
   ],
   "compareAgainst": "output/desk-output/sports_c104.md",
-  "durationMs": 23350,
+  "durationMs": 157231,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-08-20T23:18:56.363Z"
+  "ranAt": "2026-08-28T23:19:24.325Z"
 }

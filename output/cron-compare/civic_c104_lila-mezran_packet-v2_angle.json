@@ -1,0 +1,411 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "104",
+  "persona": "lila-mezran",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00154",
+      "name": "Dr. Lila Mezran",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.",
+      "creativeBrief": {
+        "kind": "health-service",
+        "method": "ACCESS_TIMELINE_HUMAN_COST",
+        "missing": [
+          "a named affected resident, patient, clinician, or service user",
+          "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+          "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+        ],
+        "humanConsequence": {
+          "state": "UNESTABLISHED",
+          "subjects": [],
+          "facts": [],
+          "src": null
+        },
+        "forbidden": [
+          "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Temescal",
+      "score": null,
+      "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "nearby": [
+        {
+          "text": "Brenda Okoro (Deputy Mayor (Community)): No operational anomalies requiring public statement this cycle. Stab Fund processing remains within",
+          "src": "output/cron-civic/datawake/civic-office-okoro_2026-08-27.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+          "src": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+          "src": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+          "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+        },
+        {
+          "text": "math-imbalance (low) | West Oakland: decay [Sentiment -0.020, RetailVitality -4.39] despite 2 active mitigator(s) [INIT-001, INIT-007]",
+          "src": "output/engine_audit_c104.json patterns[3]; evidence: Neighborhood_Map row(s) 5"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00745",
+          "name": "Sonia Parikh (POP-00745)",
+          "profile": "Sonia Parikh (POP-00745)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00761",
+          "name": "Idris Karim (POP-00761)",
+          "profile": "Idris Karim (POP-00761)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00775",
+          "name": "Sam Alvarez (POP-00775)",
+          "profile": "Sam Alvarez (POP-00775)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Temescal"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C104",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-c612b6082c46"
+      },
+      {
+        "t": "FACT",
+        "text": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+        "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+        "id": "F-ae3bddfa414f"
+      },
+      {
+        "t": "FACT",
+        "text": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "src": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+        "id": "F-5327cda5209b"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "kind": "anomaly",
+      "angle": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "hookLine": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+      "hood": "Temescal",
+      "popids": [
+        "POP-00745",
+        "POP-00761",
+        "POP-00775"
+      ],
+      "citizens": [
+        "Sonia Parikh (POP-00745)",
+        "Idris Karim (POP-00761)",
+        "Sam Alvarez (POP-00775)"
+      ]
+    },
+    "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "lila-mezran",
+      "name": "Dr. Lila Mezran",
+      "popid": "POP-00154",
+      "domain": "health"
+    },
+    "pulse": {
+      "className": "health",
+      "score": 45,
+      "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "hood": "Temescal",
+      "source": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]"
+      ],
+      "forbidden": [
+        "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+      ],
+      "schema": "HEALTH-SERVICE-BRIEF-1",
+      "method": "ACCESS_TIMELINE_HUMAN_COST",
+      "missing": [
+        "a named affected resident, patient, clinician, or service user",
+        "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+        "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+      ],
+      "humanConsequence": {
+        "state": "UNESTABLISHED",
+        "subjects": [],
+        "facts": [],
+        "src": null
+      }
+    },
+    "candidates": [
+      {
+        "score": 45,
+        "kind": "anomaly",
+        "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+        "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00745",
+          "POP-00761",
+          "POP-00775"
+        ],
+        "angle": "Temescal Community Health Center stalled in construction-active — remedy path + responsible office",
+        "hookLine": "The civic initiative carrying Temescal has not advanced in 1 cycles.",
+        "citizens": [
+          "Sonia Parikh (POP-00745)",
+          "Idris Karim (POP-00761)",
+          "Sam Alvarez (POP-00775)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 2
+      },
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Temescal Community Health Center | Status passed | phase construction-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+        "hood": "Temescal",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 25
+      },
+      {
+        "score": 45,
+        "kind": "vote",
+        "label": "Temescal Community Health Center | Phase 2 construction progress review C104",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 26
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal",
+        "ref": "Ripple_Ledger cycle 104 (CauseType initiative-implementation); rendered: world_summary_c104.md \"## What Moved\" > \"### initiative-implementation\"",
+        "hood": "Temescal",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 35
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Temescal Community Health Center sitting, nothing free (-2); Baylight District — Final Council Vote …",
+        "ref": "Ripple_Ledger cycle 104 (CauseType approval-shift); rendered: world_summary_c104.md \"## What Moved\" > \"### approval-shift\"",
+        "hood": "CITYWIDE",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 38
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "approval/district-sentiment | Temescal Community Health Center sitting, nothing free (-1)",
+        "ref": "Ripple_Ledger cycle 104 (CauseType approval-shift); rendered: world_summary_c104.md \"## What Moved\" > \"### approval-shift\"",
+        "hood": "D7",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 45
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c104.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-005)",
+      "Ripple_Ledger cycle 104 (CauseType initiative-implementation); rendered: world_summary_c104.md \"## What Moved\" > \"### initiative-implementation\"",
+      "Ripple_Ledger cycle 104 (CauseType approval-shift); rendered: world_summary_c104.md \"## What Moved\" > \"### approval-shift\""
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Lila Mezran",
+    "popid": "POP-00154",
+    "text": "I’m looking into Temescal’s retail vitality decline and housing pressure increase, despite an active mitigator. The civic initiative here hasn’t moved in a cycle, and I want to understand why. I’ll start by reaching out to Sonia Parikh, Idris Karim, and Sam Alvarez—all Temescal residents—to hear their perspectives on how this imbalance feels in their daily lives. I’m curious if they’ve noticed any shifts in access to services or changes in the neighborhood’s energy.",
+    "plan": {
+      "chase": "I’m looking into Temescal’s retail vitality decline and housing pressure increase, despite an active mitigator. The civic initiative here hasn’t moved in a cycle, and I want to understand why. I’ll start by reaching out to Sonia Parikh, Idris Karim, and Sam Alvarez—all Temescal residents—to hear their perspectives on how this imbalance feels in their daily lives. I’m curious if they’ve noticed any shifts in access to services or changes in the neighborhood’s energy.",
+      "focus": "Understanding the human impact of Temescal’s retail vitality decay and housing pressure increase.",
+      "why": "The civic initiative hasn’t advanced, and the imbalance persists despite mitigators. I want to explore the lived experience behind the numbers.",
+      "checks": [
+        "Is the decline in retail vitality affecting access to essential services?",
+        "How is the housing pressure impacting residents’ quality of life?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00745",
+          "question": "Have you noticed changes in Temescal’s retail landscape recently? How has it affected your daily routine?",
+          "basis": "Assignment"
+        },
+        {
+          "pop": "POP-00761",
+          "question": "How has the housing pressure in Temescal impacted your living situation or your neighbors’?",
+          "basis": "Assignment"
+        },
+        {
+          "pop": "POP-00775",
+          "question": "Do you feel the civic initiative in Temescal has stalled? What’s your sense of why that might be?",
+          "basis": "Assignment"
+        }
+      ],
+      "interpretation": "The imbalance suggests a disconnect between the mitigator and the community’s needs. I suspect the stagnation of the civic initiative is exacerbating the issue.",
+      "unverifiedLead": [
+        "Is there a lack of communication between the civic initiative and Temescal residents?",
+        "Are there unaddressed barriers preventing the mitigator from being effective?"
+      ],
+      "closeQuestion": "What steps could be taken to realign the civic initiative with the community’s needs?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Brenda Okoro (Deputy Mayor (Community)): No operational anomalies requiring public statement this cycle. Stab Fund processing remains within ",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-okoro_2026-08-27.json",
+      "popids": [
+        "POP-00037"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"trend\" recurred 3 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c104.json patterns[1]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "math-imbalance (low) | Temescal: decay [RetailVitality -5.53, HousingPressure +1.000] despite 1 active mitigator(s) [INIT-005]",
+      "kind": "anomaly",
+      "hood": "Temescal",
+      "ref": "output/engine_audit_c104.json patterns[2]; evidence: Neighborhood_Map row(s) 3",
+      "popids": [
+        "POP-00745",
+        "POP-00761",
+        "POP-00775"
+      ]
+    },
+    {
+      "label": "math-imbalance (low) | West Oakland: decay [Sentiment -0.020, RetailVitality -4.39] despite 2 active mitigator(s) [INIT-001, INIT-007]",
+      "kind": "anomaly",
+      "hood": "West Oakland",
+      "ref": "output/engine_audit_c104.json patterns[3]; evidence: Neighborhood_Map row(s) 5",
+      "popids": [
+        "POP-00771",
+        "POP-00773",
+        "POP-01076"
+      ]
+    }
+  ],
+  "laneEntries": 49,
+  "ranAt": "2026-08-27T11:16:45.784Z"
+}

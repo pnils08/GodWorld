@@ -1,0 +1,838 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "104",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+      "label": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+      "kind": "anomaly",
+      "angle": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+      "hookLine": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+      "hood": "East Oakland",
+      "popids": [
+        "POP-01047",
+        "POP-01055"
+      ],
+      "citizens": [
+        "Jerome Pittman (POP-01055)",
+        "Maria Conteras (POP-01047)"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c104_angela-reyes_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-01055",
+      "name": "Jerome Pittman",
+      "quote": "I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education.\",\"fact_ids\":[\"F-3636de4563b5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-3636de4563b5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01055-e75df8bd05",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01055",
+          "name": "Maria Conteras (POP-01047)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "As a resident of East Oakland, what have you seen, felt, or understood about \"Education stability and program continuity in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "East Oakland",
+          "focus": "Education stability and program continuity in East Oakland",
+          "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Maria Conteras (POP-01047)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-9a03f74b0a30"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-3636de4563b5"
+          },
+          {
+            "t": "FACT",
+            "text": "Maria Conteras (POP-01047)",
+            "src": "Simulation_Ledger profile for POP-01055",
+            "id": "F-9452a84f0a0e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there.\",\"fact_ids\":[\"F-9a03f74b0a30\",\"F-3636de4563b5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9a03f74b0a30",
+          "F-3636de4563b5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-0a1be1ce01",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "What have you seen, felt, or understood about \"Education stability and program continuity in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "East Oakland",
+          "focus": "Education stability and program continuity in East Oakland",
+          "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-9a03f74b0a30"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-3636de4563b5"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids.\",\"fact_ids\":[\"F-9a03f74b0a30\",\"F-3636de4563b5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9a03f74b0a30",
+          "F-3636de4563b5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-9d1ccf2d40",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "What have you seen, felt, or understood about \"Education stability and program continuity in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "East Oakland",
+          "focus": "Education stability and program continuity in East Oakland",
+          "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-9a03f74b0a30"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-3636de4563b5"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01047",
+      "name": "Maria Conteras",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"As a high school teacher in East Oakland, I’ve noticed that while there’s a lot of talk about improving education stability, it feels like progress is slow and programs often get disrupted before they can really take root.\",\"fact_ids\":[\"F-3636de4563b5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01047",
+          "name": "Jerome Pittman (POP-01055)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "As a resident of East Oakland, what have you seen, felt, or understood about \"Education stability and program continuity in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "East Oakland",
+          "focus": "Education stability and program continuity in East Oakland",
+          "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Jerome Pittman (POP-01055)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-9a03f74b0a30"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-3636de4563b5"
+          },
+          {
+            "t": "FACT",
+            "text": "Jerome Pittman (POP-01055)",
+            "src": "Simulation_Ledger profile for POP-01047",
+            "id": "F-0a4b1257ffec"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01055",
+      "name": "Jerome Pittman",
+      "quote": "I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education.\",\"fact_ids\":[\"F-3636de4563b5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-3636de4563b5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01055-e75df8bd05",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard the civic initiative for East Oakland hasn’t moved forward in a while, and it’s frustrating because we really need stable programs here, especially for education."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01055",
+          "name": "Maria Conteras (POP-01047)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "As a resident of East Oakland, what have you seen, felt, or understood about \"Education stability and program continuity in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "East Oakland",
+          "focus": "Education stability and program continuity in East Oakland",
+          "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Maria Conteras (POP-01047)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-9a03f74b0a30"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-3636de4563b5"
+          },
+          {
+            "t": "FACT",
+            "text": "Maria Conteras (POP-01047)",
+            "src": "Simulation_Ledger profile for POP-01055",
+            "id": "F-9452a84f0a0e"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there.\",\"fact_ids\":[\"F-9a03f74b0a30\",\"F-3636de4563b5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9a03f74b0a30",
+          "F-3636de4563b5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-0a1be1ce01",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard East Oakland’s been struggling to keep programs steady, and it’s hard not to feel for the families trying to build something stable there."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "What have you seen, felt, or understood about \"Education stability and program continuity in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "East Oakland",
+          "focus": "Education stability and program continuity in East Oakland",
+          "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-9a03f74b0a30"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-3636de4563b5"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids.\",\"fact_ids\":[\"F-9a03f74b0a30\",\"F-3636de4563b5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9a03f74b0a30",
+          "F-3636de4563b5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-9d1ccf2d40",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about how East Oakland’s schools and programs keep getting shuffled around, and it’s hard for families to feel settled. It’s like they’re always starting over, and that’s tough on the kids."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Angela Reyes",
+          "question": "What have you seen, felt, or understood about \"Education stability and program continuity in East Oakland\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "East Oakland",
+          "focus": "Education stability and program continuity in East Oakland",
+          "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23"
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C104",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-c612b6082c46"
+          },
+          {
+            "t": "FACT",
+            "text": "math-imbalance (low) | East Oakland: decay [Sentiment -0.030, RetailVitality -2.76] despite 1 active mitigator(s) [INIT-007]",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-9a03f74b0a30"
+          },
+          {
+            "t": "FACT",
+            "text": "The civic initiative carrying East Oakland has not advanced in several cycles.",
+            "src": "output/engine_audit_c104.json patterns[11]; evidence: Neighborhood_Map row(s) 23",
+            "id": "F-3636de4563b5"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-26T18:17:09.536Z"
+}

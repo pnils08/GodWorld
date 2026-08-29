@@ -1,0 +1,143 @@
+---
+title: City Health System Plan
+created: 2026-08-29
+updated: 2026-08-29
+type: plan
+tags: [plan, engine, illness, cascade, active]
+sources:
+  - docs/engine/ROLLOUT_PLAN.md engine.133
+  - docs/research/2026-08-27-cascade-loop-closure-design.md §Applications 2026-08-29 (builder direction)
+  - docs/reference/DEPLOY.md §SANDBOX 0827 (engine.132 bench numbers)
+  - docs/SIM_DOCTRINE.md rules 1, 2, 3
+  - supermemory sl-godworld MyjiSRqBV5v9C7qmkzHRxB (engine.132 bench-proven)
+pointers:
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
+  - "[[research/2026-08-27-cascade-loop-closure-design]] — the why, protected; this plan is the mechanism"
+  - "[[reference/DEPLOY]] — bench + Groundhog loop"
+  - "[[SIM_DOCTRINE]] — read before touching"
+  - "[[index]] — registered"
+---
+
+# City Health System Plan
+
+**Goal:** The city illness rate sits at a low real baseline and rises only when a weighted roll fires a wave; the neighborhoods split that rate unevenly from their own canon data; a hood crossing the threshold puts named citizens in the story.
+
+**Architecture:** Fix-or-fold inside the existing illness path — three functions, no new engine. `applyDemographicDrift_` gets a baseline attractor and a weighted wave roll (the current additive nudges become the roll's weights instead of a ratchet). `updateNeighborhoodDemographics_` allocates the city rate across hoods by structural weight, normalized so the hood aggregate lands inside the city envelope. `applyStorySeeds_` health seed keys off the hoods that crossed, carrying the citizens who lived it. Engine.132's relief wire and convergence stay as the repair side.
+
+**Terminal:** engine/sheet
+
+**Pointers:**
+- Prior work: engine.71 CR-1 (`b21f01f0`, per-hood causes), engine.102 W2b/W3/W4 (config keys, hood-dose, hospital talk-back), engine.132 (`95a7359a`, relief + convergence, bench-proven 0827 C108–C110)
+- Related rows: engine.106 (do NOT restore the city-wide illnessRate read into crisis arcs — this plan doesn't), engine.132 (this plan supersedes its target math; ships as one wave with it)
+- Wiring cards pulled 2026-08-29 for `updateNeighborhoodDemographics_` and `S.demographicDrift.illnessRate` — findings folded into §Blast radius
+
+**Acceptance criteria:**
+1. On the bench, `World_Population.illnessRate` descends from 0.1023 toward `illnessBaseline` over ≥8 cycles with no wave active — a story-scale recovery, not a snap (no single cycle moves more than `illnessAttractorPull` × gap).
+2. With no wave active, the rate holds within ±0.5pp of baseline across 5 consecutive cycles under ordinary season/holiday pressure — the ratchet is gone (attractor pull at 0.5pp gap > expected per-cycle upward drift; proven in a unit test, then on the bench).
+3. Hood Sick rates are **uneven**: max/min hood rate ≥ 1.4 at convergence, AND Σ hood Sick ≤ cityRate × Σ hood pop + 2pp (inside the envelope, never a flat copy).
+4. A wave fires on the bench (config chance raised bench-only if the dice don't land in the proving window), the rate rises by the sampled magnitude, decays back on `illnessWaveDecay`, and the wave's origin hoods run hotter than their structural share while it lasts.
+5. A hood crossing `illnessSupportThreshold` produces ≥1 `[Health]` LifeHistory event on a citizen IN that hood within `illnessSupportCycles`, and that cycle's HEALTH story seed names the crossing hood(s) — never a hardcoded `'Temescal'` — and carries those citizens' names.
+6. `scripts/cascadeAudit.js` passes with the envelope assertion replacing the ±2pp flat-convergence assertion; 0 new `Engine_Errors` across the proving fires.
+
+---
+
+## Decisions (mechanism — stated, not forked)
+
+**D1 — What determines a wave: weighted dice plus chance, inside `applyDemographicDrift_`.**
+The builder direction's own closing line settles it: *"Tighten, don't grow … a fix-or-fold inside the existing illness path, not a new engine."* A storm-chaser-class actor is a new engine (chaosCarsEngine is 729 lines with its own ledger row, decay module, and config) — ruled out by that line. A bare chance roll ignores doctrine rule 2 (causes, then dice). So: the pressures the drift already knows (winter, fog, low comfort, gathering holidays, First Friday, low econ mood, world events) stop being additive drift and become the **weights on one per-cycle outbreak roll**. Zero waves is the normal cycle. When one fires it has a magnitude, a decay, and origin hoods — it is an event, not a nudge.
+
+**D2 — The ticker: a baseline attractor, employment's own pattern.**
+`applyDemographicDrift_` already does this for employment (`employmentAttractor` 0.90, `applyDemographicDrift.js:83`). Illness never had one — its base term is `(rng() − 0.6) × 0.0004` (mean −0.00004/cycle) against nudges of +0.0002 each, so any single pressure overwhelms the pull and the number only goes up: 0.05 default → 0.1023 live at C104 → 0.111 on the 0814 bench at C115. New: `ill += (illnessBaseline − ill) × illnessAttractorPull` each cycle, plus the active wave's residual. The nudges are removed from the drift (folded into D1's weights) so the attractor has nothing to fight but a wave. Hospital talk-back (W4) stays — a census over capacity is ground talking back, a real cause, and it is bounded by the same attractor.
+
+The descent from 10.2% is **story** (initiatives-are-the-repair doctrine): at pull 0.12/cycle the city takes ~15 cycles to reach 4.5% — long enough to be covered, short enough that crons see it.
+
+**D3 — The envelope: population-weighted normalization in `updateNeighborhoodDemographics_`.**
+Same shape W2a used for migration (`inflowModSum` normalization). Per hood: `w_h = structural_h × event_h`, `w̄ = Σ(w_h × pop_h) / Σ pop_h`, `expectedSick_h = pop_h × cityRate × (w_h / w̄)`. Σ expectedSick = cityRate × Σ pop exactly (modulo rounding) — the city number is an envelope the hoods fill unevenly, never 22 copies of one rate.
+
+*Structural weights come from full-coverage layers only* (verified 22/22 populated on live C104):
+- age mix — seniors share vs city seniors share (ND `Seniors / pop`)
+- density proxy — `Neighborhood_Map.NoiseIndex` (2.28–13.31, 22/22)
+- income — `Neighborhood_Map.MedianIncome` inverse (32,770–114,491, 22/22)
+Each enters as a bounded multiplicative factor around 1.0. **Not** `HousingPressure` (8/22 nonzero — a half-populated weight silently flattens the spread). **Not** `Business_Ledger` healthcare presence — the ledger is the tracked ~0.25% subset and its gaps are design; "no tracked clinic row" would be read as "no healthcare", the denominator error the standing memory forbids. Canon health institutions already reach illness through `S.initiativeHealthRelief` (engine.132).
+
+*Event weights* are the existing same-cycle causes, unchanged in kind: heat wave / flood (engine.70), QoL (Phase3-Crime), and now the wave's origin-hood multiplier.
+
+*Relief applies after normalization*, not inside the weights. The direction says hoods fall "**within**" the city rate — a ceiling, not an identity. Inside the weights, Temescal's clinic would push its patients' share onto Downtown; that is a bookkeeping artifact, not a cause. After normalization, a delivering clinic pulls its hood under its share and the aggregate sits under the envelope — engine.132's relief arithmetic survives in shape, and city-level recovery flows through D2's attractor.
+
+*Clamp re-derived, not inherited.* The `[0.75, 1.5]` bound is a flat-era artifact (engine.71 sized it for weather + QoL nudges). Structural spread is bounded on `w_h` at `[0.5, 2.0]` before normalization; the post-normalization ratio is whatever the data says.
+
+*Convergence stays* at engine.132's 25%/cycle, floor 3.
+
+**D4 — The threshold wire: absolute thresholds, faces in the seed.**
+Every consumer's threshold is absolute (`illnessSupportThreshold` 0.08 in `checkHealthEvent_`; seeds 0.06/0.08; stink-scanner ≥8%) and every one of them is **saturated today** at a 10.2% city rate — the seed fires every cycle, the scanner always has a candidate. A ~3.5% baseline restores signal to all of them without touching them, and structurally vulnerable hoods cross an absolute bar more easily — uneven hurt, doctrine rule 3. `checkHealthEvent_` already keys the dose off the hood rate with the W3 support floor above threshold; it is left alone.
+
+What changes is the story side. `applyStorySeeds.js:1391-1399` hardcodes `'Temescal'` for any city rate > 0.08 — invented specificity, the class engine.71 killed in crisis buckets. New: the seed reads `S.neighborhoodDemographics` for the hoods at/over threshold this cycle and `S.generationalEvents` (tag `Health`, `applyMilestone_` carries `popId` + `neighborhood`) for the citizens in those hoods, and names both. No hoods over threshold → no health seed. Crisis buckets get **no new illness channel** — its hospital channel picks up a wave's admissions by construction; if the bench proves it misses, that becomes a question, not a build.
+
+**D5 — Wave state rides carry-forward, no new column.**
+`S.illnessWave = { magnitude, remaining, originHoods, startedCycle }` persists on `PREV_CYCLE_STATE_JSON` the way `weatherFrontTracking` does (`applyWeatherModel.js:239-262` reads `S.previousCycleState`). Zero schema change. Known open gate: engine.122's sheet mirror of carry-forward is proven on the bench, unproven on live — same gate every carried field already sits behind.
+
+**D6 — Config keys, self-armed.** All new physics literals go to `World_Config` via `cfgNum_` (loud on missing, engine.102 W2b pattern), self-armed by code the engine.94 way (`engine94SheetContract.js`) so a fresh bench arms itself:
+
+| key | default | role |
+|---|---|---|
+| `illnessBaseline` | 0.035 | the ticker's resting level |
+| `illnessAttractorPull` | 0.12 | fraction of the gap closed per cycle |
+| `illnessWaveBaseChance` | 0.04 | per-cycle outbreak chance at neutral pressure |
+| `illnessWaveMagnitudeMin` / `Max` | 0.01 / 0.04 | sampled rise in the city rate |
+| `illnessWaveDecay` | 0.70 | residual carried per cycle |
+| `illnessWaveOriginHoods` | 3 | hoods that carry the wave's multiplier |
+| `illnessHoodWeightMin` / `Max` | 0.5 / 2.0 | structural clamp before normalization |
+
+Defaults are tuning, not truth — retune from bench evidence, and they are cheap to retune in-world later without a commit.
+
+**D7 — Ships as one wave with engine.132.** Engine.132 alone, pushed live now, would drag every hood toward the 10.2% target over ~5 cycles — that is the grind the direction rejects, made visible. Both changes touch the same function; both prove on the same bench; they go live as one diff behind one smoke. Engine.132's live push is therefore **held for this plan**, not for the standing wave's smoke alone.
+
+---
+
+## Blast radius (from the wiring cards, 2026-08-29)
+
+**Files that change**
+| file | change |
+|---|---|
+| `phase03-population/applyDemographicDrift.js` | D1 wave roll + D2 attractor; nudges → weights; `S.illnessWave` write; talk-back unchanged |
+| `phase03-population/updateNeighborhoodDemographics.js` | D3 envelope allocation replaces `totalPop × illnessRate × hoodIllnessMod`; relief post-normalization; clamp re-derived |
+| `phase07-evening-media/applyStorySeeds.js` | D4 health seed — crossing hoods + faces, `'Temescal'` hardcode removed |
+| `phase10-persistence/finalizeCycleState.js` | carry `S.illnessWave` on `PREV_CYCLE_STATE_JSON` |
+| `phase01-config/engine94SheetContract.js` (or sibling) | self-arm the D6 keys |
+| `scripts/cascadeAudit.js` | ±2pp flat-convergence assertion (`:369,:378`) → envelope + spread assertion; ≥8% support rule unchanged |
+| `docs/engine/ENGINE_STUB_MAP.md` | regen (`/stub-engine`) same commit |
+| tests | `scripts/illnessEnvelope.test.js` — attractor inequality, normalization sums to envelope, spread bounds, relief ≤ envelope |
+
+**Readers that do NOT change (verified live-wired, thresholds stay absolute)**
+- `generationalEventsEngine.js:1270 checkHealthEvent_` — hood-rate dose + W3 floor; gets real signal back
+- `buildMediaPacket.js:64` — display
+- `utilities/cycleModes.js:328` — hash input
+- `scripts/buildWorldSummary.js`, `stink-scanner.js`, `buildCivicVoicePackets.js`, `buildJaxSlice.js`, `buildInitiativePackets.js`, `buildNeighborhoodCards.js` — read the sheet columns, no threshold change
+
+**Dead readers (not touched, noted so nobody "fixes" them into life)**
+- `eventArcEngine.js:176` (no callers), `mediaRoomBriefingGenerator.js:222` (phantom `S.illnessRate`, caller commented out), `processArcLifeCyclev1.js:213-270` (caller commented out)
+
+**Map gaps surfaced by the cards, logged not fixed here**
+- `ENGINE_STUB_REVERSE.json` lists `Neighborhood_Demographics` writers as `[]` — misses `batchUpdateNeighborhoodDemographics_` (SHEETS_MANIFEST `:121` has it)
+- `S.demographicDriftFactors` is read at Phase3 (`updateNeighborhoodDemographics.js:68`) but written at Phase8 — a same-cycle order gap; the read only ever sees last cycle (currently unused by the illness math — irrelevant to this plan; recorded here, no separate gap log exists for engine)
+- `S.demographicShiftsCount` — orphaned write
+
+**Phase order (both entry points):** Phase2-InitiativeEffects → Phase2-Weather → Phase3-Population → Phase3-Demographics (D1/D2) → Phase3-Crime → Phase3-NeighborhoodDemo (D3) → … Phase5-Generational (`checkHealthEvent_`) → Phase7-StorySeeds (D4) → Phase10. Every read this plan adds is upstream-written in the same cycle.
+
+---
+
+## Tasks
+
+1. **Unit test first** — `scripts/illnessEnvelope.test.js`: (a) attractor inequality at 0.5pp gap vs max ordinary pressure; (b) envelope sum; (c) spread ≥1.4 on the live C104 hood data as fixture; (d) relief post-normalization never lifts the aggregate above the envelope.
+2. `applyDemographicDrift.js` — D1 + D2 + `S.illnessWave` (+ carry read from `S.previousCycleState.illnessWave`).
+3. `updateNeighborhoodDemographics.js` — D3.
+4. `finalizeCycleState.js` — carry `illnessWave`.
+5. Self-arm D6 keys.
+6. `applyStorySeeds.js` — D4 (verify `applyMilestone_` output carries `popId` + `neighborhood` before wiring; if not, that is the one-line fix that goes first).
+7. `cascadeAudit.js` — envelope/spread assertions.
+8. `/stub-engine` regen; commit with the caller-graph findings in the message.
+9. Bench: 0827, deployment @5 = `799fd841` + engine.132 diff + this diff. Groundhog fires until criteria 1–6 hold (expect 8–15 fires for the descent; wave chance raised bench-only if needed, config write logged in DEPLOY.md as bench-only).
+10. Live: one smoke behind the standing wave; engine.132 + this as one diff. NEXT line + DEPLOY.md updated.
+
+## Changelog
+- 2026-08-29 — Plan written (S396 engine-sheet) from the builder direction of 2026-08-29 + two wiring cards + live C104 read.

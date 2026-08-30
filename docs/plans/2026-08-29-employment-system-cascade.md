@@ -95,7 +95,7 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 
 **Existing-business revision scope (engine-sheet rule, pending builder confirmation):** fields re-base (Avg_Salary, Employee_Count, Growth_Rate, Sector where wrong); names and Neighborhood stay — the four child-fold rows are still not remapped; real-world names already on the ledger stay per the S361 mutation line unless the builder says otherwise.
 
-**CareerStage from age (point 14):** student <22 · early 22–29 · mid 30–44 · senior 45–64 · retired ≥65; `YearsInCareer` breaks ties at the edges (a 46-year-old with 3 years is mid). This is a derivation, so it re-stamps CareerStage on every civilian row once — engine.82 tried a role-beats-age derivation S366 and was **reverted** (`f05a59e4`); the revert reason is read before this task is written.
+**CareerStage from age (point 14):** student <22 · early 22–29 · mid 30–44 · senior 45–64 · retired ≥65; `YearsInCareer` breaks ties at the edges (a 46-year-old with 3 years is mid). This is a derivation, so it re-stamps CareerStage on every civilian row once — engine.82 (`docs/plans/2026-08-11-careerstage-salary-coherence.md`) designed the canonical enum + derivation + per-role salary bands S366 and was **reverted in full** (`f05a59e4`) because the column-repair script's 0-indexed `startCol` clobbered YearsInCareer (940 cells; restored, verified) — an incident, not a design rejection. Its Tasks 1–3 fold into this plan; the lesson binds: **stage/pay derivations run inside the engine on `ctx.ledger` rows (Phase-10 persist), never as a column-position script**; the 216 false-retired + 10 spelling variants it measured at C103 are this plan's CareerStage baseline. engine.82 row → superseded by engine.135 on accept.
 
 ---
 

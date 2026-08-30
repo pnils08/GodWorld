@@ -142,6 +142,12 @@ function processGenerationalWealth_(ctx) {
   var incomeResults = calculateCitizenIncomes_(ctx);
   results.incomeUpdated = incomeResults.updated;
 
+  // Step 1.5 (engine.135 D3, S398): the tracked-employer floor — a citizen
+  // working a Business_Ledger employer earns at least that employer's
+  // stage-scaled minimum. Raise-only, Tier 3–4 only, sports layer exempt.
+  var floorResults = applyTrackedEmployerFloor_(ctx);
+  results.employerFloorRaised = floorResults.raised;
+
   // engine.61 T5 (S321): capture WealthLevel before Step 2 recomputes it —
   // the diff is what mobility tracking reads at Step 5.
   var prevWealthLevels = captureWealthLevels_(ctx);
@@ -516,6 +522,73 @@ function calculateCitizenIncomes_(ctx) {
   }
 
   return { updated: updated };
+}
+
+/**
+ * engine.135 D3 (S398, builder direction point 12): the tracked-employer
+ * Income floor. A citizen whose EmployerBizId is a Business_Ledger row has
+ * Income raised to that business's minimum if below — never reduced if above.
+ * Floor = Avg_Salary × 0.75 (entry) · 1.0 (mid) · 1.3 (senior), the same
+ * stage scale the plan's §Pay scale sets for the businesses themselves.
+ * Exempt: sports-layer rows (game engine owns their pay), Tier-1 (never
+ * auto-re-paid) and Tier-2 (story events only), students/retired/deceased,
+ * untracked employers (SELF_EMPLOYED / UNTRACKED / blank), employers with no
+ * usable Avg_Salary. Silent: a floor correction is a description catching up,
+ * not an event — raises with a narrative are Phase E2's employer-success path.
+ * Reads Business_Ledger once (read-only; the Phase-10 ledger persist commits
+ * the Income change like every other ctx.ledger mutation).
+ */
+function applyTrackedEmployerFloor_(ctx) {
+  var out = { checked: 0, raised: 0 };
+  var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
+  if (!header || !rows || !rows.length) return out;
+  var idx = function(n) { return header.indexOf(n); };
+  var iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStage = idx('CareerStage'),
+      iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey');
+  if (iIncome < 0 || iEmp < 0 || iStage < 0) return out;
+
+  var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+  if (!bizSheet) return out;
+  var bizData = bizSheet.getDataRange().getValues();
+  if (!bizData || bizData.length < 2) return out;
+  var bh = bizData[0], bId = -1, bSal = -1;
+  for (var c = 0; c < bh.length; c++) {
+    var hn = String(bh[c]).trim();
+    if (hn === 'BIZ_ID') bId = c; else if (hn === 'Avg_Salary') bSal = c;
+  }
+  if (bId < 0 || bSal < 0) return out;
+  var salaryById = {};
+  for (var b = 1; b < bizData.length; b++) {
+    var id = String(bizData[b][bId] || '').trim();
+    var sal = Number(bizData[b][bSal]) || 0;
+    if (id && sal > 0) salaryById[id] = sal;
+  }
+
+  var STAGE_FACTOR = { ENTRY: 0.75, MID: 1.0, SENIOR: 1.3 };
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || !Array.isArray(row)) continue;
+    if (isSportsLayerRow_(row, iClock, iEcon)) continue;
+    var status = String(row[iStatus] || 'active').toLowerCase();
+    if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
+    var tier = iTier >= 0 ? Number(row[iTier]) : 4;
+    if (tier === 1 || tier === 2) continue;
+    var employer = String(row[iEmp] || '').trim();
+    if (!/^BIZ-\d+$/.test(employer)) continue;
+    var avg = salaryById[employer];
+    if (!avg) continue;
+    var factor = STAGE_FACTOR[careerStageClass_(row[iStage])];
+    if (!factor) continue; // student / retired / unknown stage: no floor
+    out.checked++;
+    var floor = Math.round(avg * factor);
+    var income = Number(row[iIncome]) || 0;
+    if (income < floor) {
+      row[iIncome] = floor;
+      out.raised++;
+    }
+  }
+  if (out.raised > 0) ctx.ledger.dirty = true;
+  return out;
 }
 
 function extractIncomeBand_(lifeHistory) {

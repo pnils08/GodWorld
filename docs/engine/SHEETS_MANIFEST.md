@@ -127,7 +127,7 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase04-events/generateGameModeMicroEvents.js` | LifeHistory_Log, Simulation_Ledger | own-tab | citizen event rows |
 | `phase04-events/generationalEventsEngine.js` | LifeHistory_Log, Simulation_Ledger | own-tab | citizen event rows |
 | `phase05-citizens/householdFormationEngine.js` | own tracking tab | own-tab | Tier-5 engine |
-| `phase05-citizens/generationalWealthEngine.js` | own tracking tab | own-tab | Tier-5 engine |
+| `phase05-citizens/generationalWealthEngine.js` | own tracking tab; READS `Business_Ledger` (engine.135 D3 `applyTrackedEmployerFloor_`, Avg_Salary by BIZ_ID) | own-tab | Tier-5 engine; Income floor writes go through `ctx.ledger` → Phase-10 persist |
 | `phase05-citizens/educationCareerEngine.js` | own tracking tab | own-tab | Tier-5 engine |
 | `phase05-citizens/generateCitizensEvents.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |
 | `phase05-citizens/checkForPromotions.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |

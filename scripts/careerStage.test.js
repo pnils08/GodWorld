@@ -150,5 +150,55 @@ function ctxWith(rows, cycle) {
   assert('D5 updated count covers the three zeroed + minor + fill', res.updated === 5, JSON.stringify(res));
 }
 
+// ── D3. tracked-employer Income floor ───────────────────────────────────────
+{
+  const applyTrackedEmployerFloor_ = sandbox.applyTrackedEmployerFloor_;
+  assert('applyTrackedEmployerFloor_ loaded', typeof applyTrackedEmployerFloor_ === 'function');
+  const H2 = H.concat(['EmployerBizId']);
+  const I2 = n => H2.indexOf(n);
+  function row2(o) { const r = row(o).concat(['']); r[I2('EmployerBizId')] = o.EmployerBizId || ''; return r; }
+  const BL = [['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'],
+    ['BIZ-00170', 'MacArthur Kitchen', 'Restaurant & Dining', 'Laurel', 11, 45000, 990000, 3, ''],
+    ['BIZ-00177', 'College Avenue Dental', 'Healthcare', 'Rockridge', 8, 154000, 2464000, 2, ''],
+    ['BIZ-00098', 'Apprenticeship Pipeline', 'Workforce Development', 'Downtown', 11, 0, 12500000, 0, ''],
+    ['BIZ-00005', 'Oakland Athletics', 'Sports Franchise', 'Baylight District', 520, 3342924, 53357135, 8, '']];
+  const rows = [
+    row2({ POPID: 'F1', age: 25, CareerStage: 'entry-level', Income: 20000, EmployerBizId: 'BIZ-00170' }),   // floor 0.75×45k = 33750
+    row2({ POPID: 'F2', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170' }),    // floor 45000
+    row2({ POPID: 'F3', age: 50, CareerStage: 'senior', Income: 30000, EmployerBizId: 'BIZ-00170' }),        // floor 58500
+    row2({ POPID: 'F4', age: 35, CareerStage: 'mid-career', Income: 90000, EmployerBizId: 'BIZ-00170' }),    // above: untouched
+    row2({ POPID: 'F5', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00177', Tier: 1 }),  // Tier-1 never re-paid
+    row2({ POPID: 'F6', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00177', Tier: 2 }),  // Tier-2 only by story event
+    row2({ POPID: 'F7', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'SELF_EMPLOYED' }),  // not tracked
+    row2({ POPID: 'F8', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00098' }),     // Avg_Salary 0 → no floor
+    row2({ POPID: 'F9', age: 28, CareerStage: 'entry-level', Income: 30000, EmployerBizId: 'BIZ-00005', ClockMode: 'GAME' }), // sports layer
+    row2({ POPID: 'F10', age: 70, CareerStage: 'retired', Income: 0, EmployerBizId: 'BIZ-00170' }),           // retired: no floor
+    row2({ POPID: 'F11', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', Status: 'deceased' }),
+    row2({ POPID: 'F12', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-99999' }),    // employer not on ledger
+  ];
+  const ctx = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {},
+    ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL.map(r => r.slice()) }) } : null } };
+  const res = applyTrackedEmployerFloor_(ctx);
+  const inc = p => Number(ctx.ledger.rows.find(x => x[I2('POPID')] === p)[I2('Income')]);
+  assert('D3 entry floor = 0.75 × Avg_Salary', inc('F1') === 33750, inc('F1'));
+  assert('D3 mid floor = 1.0 × Avg_Salary', inc('F2') === 45000, inc('F2'));
+  assert('D3 senior floor = 1.3 × Avg_Salary', inc('F3') === 58500, inc('F3'));
+  assert('D3 raise-only: above the floor untouched', inc('F4') === 90000, inc('F4'));
+  assert('D3 Tier-1 never re-paid', inc('F5') === 30000, inc('F5'));
+  assert('D3 Tier-2 untouched (story events only)', inc('F6') === 30000, inc('F6'));
+  assert('D3 SELF_EMPLOYED not a tracked employer', inc('F7') === 30000, inc('F7'));
+  assert('D3 employer with Avg_Salary 0 sets no floor', inc('F8') === 30000, inc('F8'));
+  assert('D3 sports layer exempt', inc('F9') === 30000, inc('F9'));
+  assert('D3 retired: no floor', inc('F10') === 0, inc('F10'));
+  assert('D3 deceased: no floor', inc('F11') === 30000, inc('F11'));
+  assert('D3 unknown employer id: no floor', inc('F12') === 30000, inc('F12'));
+  assert('D3 result counts', res.raised === 3 && res.checked >= 3, JSON.stringify(res));
+  assert('D3 no LifeHistory line (a floor correction is not an event)', ctx.ledger.rows.every(r => String(r[I2('LifeHistory')]) === 'Y1C1 — born'));
+  assert('D3 ledger dirty', ctx.ledger.dirty === true);
+  const ctxNoBL = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {}, ss: { getSheetByName: () => null } };
+  const res2 = applyTrackedEmployerFloor_(ctxNoBL);
+  assert('D3 no Business_Ledger → no-op', res2.raised === 0 && ctxNoBL.ledger.dirty === false, JSON.stringify(res2));
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

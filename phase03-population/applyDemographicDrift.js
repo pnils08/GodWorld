@@ -85,8 +85,8 @@ function applyDemographicDrift_(ctx) {
   var illnessSupportCycles = cfgNum_(ctx, cfg, 'illnessSupportCycles', 3);
 
   // Employment physics
-  var employmentFloor = cfgNum_(ctx, cfg, 'employmentFloor', 0.88);   // engine.135 A
-  var employmentAttractor = cfgNum_(ctx, cfg, 'employmentAttractor', 0.96);  // engine.135 A
+  var employmentFloor = cfgNum_(ctx, cfg, 'employmentFloor', 0.72);   // engine.135 A
+  var employmentAttractor = cfgNum_(ctx, cfg, 'employmentAttractor', 0.83);  // engine.135 A
   var employmentStep = cfgNum_(ctx, cfg, 'employmentStep', 0.0003);
   var prosperityEarnedOnly = String(cfg.prosperityEarnedOnly || '').toUpperCase() === 'TRUE';
 
@@ -267,9 +267,14 @@ function applyDemographicDrift_(ctx) {
   // D2): a fraction of the gap per cycle from either side, so a realigned cell
   // (the hood-lived rate at deploy) reaches the boom-city number in ~10-20
   // cycles instead of the 0.0003 step's ~200, and an over-boom reading comes
-  // back the same way. The attractor itself is the realistic-with-boom-kick
-  // number (World_Config employmentAttractor 0.96 = 4% unemployment; floor
-  // 0.88 = a real recession), builder direction 2026-08-29.
+  // back the same way. The attractor is the realistic-with-boom-kick number
+  // for what this dial MEANS — the share of working-age adults who are
+  // working (the hood column is "Unemployed = currently not working", which
+  // includes everyone outside the labor force, not a jobless rate): a real
+  // city runs ~78-80% of its 23-64s working; boom kick → World_Config
+  // employmentAttractor 0.83; floor 0.72 = a deep recession. Builder
+  // direction 2026-08-29 (the first cut set 0.96 by misreading the dial as
+  // 1 − unemployment; corrected same night).
   if (!prosperityEarnedOnly) {
     var employmentAttractorPull = cfgNum_(ctx, cfg, 'employmentAttractorPull', 0.12);
     emp += (employmentAttractor - emp) * employmentAttractorPull;
@@ -490,7 +495,7 @@ function pushMissingConfigWarning_(ctx, key, defaultValue) {
  * - Cap: illnessCap (default 0.15)
  *
  * EMPLOYMENT RATE:
- * - prosperityEarnedOnly=FALSE: pulled toward employmentAttractor (0.96) by
+ * - prosperityEarnedOnly=FALSE: pulled toward employmentAttractor (0.83) by
  *   employmentAttractorPull (0.12) of the gap per Cycle (engine.135 A)
  *   (defaults 0.90-0.93, step 0.0003)
  * - Negative sentiment: -illnessStepUp / Positive sentiment: +illnessStepUp
@@ -504,7 +509,7 @@ function pushMissingConfigWarning_(ctx, key, defaultValue) {
  * - Playoffs: +illnessStepUp x3 (default 0.0006)
  * - First Friday / High cultural activity: +illnessStepUp x2 (default 0.0004)
  * - January slump: -illnessStepUp x3 (default 0.0006)
- * - Floor: employmentFloor (default 0.88) / Cap: 0.98
+ * - Floor: employmentFloor (default 0.72) / Cap: 0.98
  *
  * MIGRATION:
  * - Owned by updateWorldPopulation_; this phase reads only.

@@ -179,6 +179,7 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 ---
 
 ## Changelog
+- 2026-08-29 (23:30, session close) — **Dial number UNRESOLVED and the session went off-track on it.** Set 0.96 (misread as 1−unemployment), then 0.83 (misread as adults-working share) — both guesses; builder rejected both. Honest model proposed, not built: participation share (~0.78 of adults) × unemployment rate (~0.04) → hood Unemployed = jobless-looking, ~6–7k citywide. Bench World_Config currently 0.83/0.72/0.83 — treat as placeholder. Next session: build the two-number model on the bench, show the builder the resulting citywide count, get the number signed off, THEN move to Phases D/E/C/F — the tracked citizens are the point.
 - 2026-08-29 (23:30) — Phases A + B2 built: dial pull + envelope + depth + self-arm; test written first (RED 7 → GREEN 18/18); bench World_Config retune + WP cell written; STUB_MAP regenerated. Bench proving next.
 - 2026-08-29 (23:00) — B1 written to SANDBOX 0827 (six columns + MedianIncome, 22/22 exact); loader reads them; live replay deferred to the wave deploy (builder rule: sandbox proves, live runs proven code + replayed writes).
 - 2026-08-29 (22:21) — **Approved.** WealthLevel scale extended 10→12 on builder pushback (≥$50M / ≥$250M / ≥$1B); elite hood bands open-ended; Q3/Q4 closed; plan ACTIVE.

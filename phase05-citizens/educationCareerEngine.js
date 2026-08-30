@@ -320,12 +320,33 @@ function isSportsLayerRow_(row, iClock, iEcon) {
 }
 
 /**
+ * engine.135 (builder 2026-08-30): "game, civic and media are outside these."
+ * The employment cascade's stage derivation (E1), tracked-employer floor
+ * (D3) and retired/deceased zeroing (D5) apply to ClockMode=ENGINE rows
+ * only. GAME rows are Paulson's, CIVIC and MEDIA rows are authored offices
+ * and newsroom staff. A blank ClockMode reads as ENGINE.
+ */
+function isEngineClockRow_(row, iClock) {
+  if (iClock < 0) return true;
+  var m = String(row[iClock] || '').trim().toUpperCase();
+  return m === '' || m === 'ENGINE';
+}
+
+/**
  * engine.135 E1 — CareerStage from age, YearsInCareer breaking ties downward.
  * Pure: (age, yearsInCareer) → canonical CAREER_STAGES string.
  */
-function deriveCareerStageFromAge_(age, yearsInCareer) {
+function deriveCareerStageFromAge_(age, yearsInCareer, currentStage) {
   var y = Number(yearsInCareer) || 0;
-  if (age < 22) return CAREER_STAGES.STUDENT;
+  if (age < 18) return CAREER_STAGES.STUDENT;
+  if (age < 22) {
+    // 18–21 (builder 2026-08-30: "so no 22 year old has a career?"): a
+    // working kid keeps working, a student stays a student — the stored
+    // stage decides, no birthday edit either way. Blank/unknown → student.
+    var cls = careerStageClass_(currentStage);
+    if (String(currentStage || '').trim() === '') return CAREER_STAGES.STUDENT;
+    return (cls === 'STUDENT') ? CAREER_STAGES.STUDENT : CAREER_STAGES.ENTRY;
+  }
   // No age retires anyone (builder, 2026-08-30: "just cause a citizen is 65
   // doesn't automatically retire them" — 98 citizens are 65+ by the engine
   // clock, 63 of them working; a mayor or an editor does not stop on a
@@ -416,8 +437,8 @@ function updateCareerProgression_(ctx, cycle, rng) {
     // 16-year-old under contract is a professional, and demoting him to student
     // is what zeroed Sarr's and Carr's salaries (students/minors earn nothing,
     // S320 convention) and what fed Dybantsa into settleAdulthood_ at 18.
-    if (isSportsLayerRow_(row, iClockCP, iEconCP)) {
-      // leave CareerStage, Income and RoleType exactly as the sports layer set them
+    if (isSportsLayerRow_(row, iClockCP, iEconCP) || !isEngineClockRow_(row, iClockCP)) {
+      // GAME / CIVIC / MEDIA: leave CareerStage, Income and RoleType exactly as their layer set them
     } else if (status === 'retired' || careerStageClass_(row[iCareerStage]) === 'RETIRED') {
       // A deliberate Status=Retired (a 37-year-old ex-A's star, Paulson's
       // roster decisions) is not re-derived from age — the stage stays retired.
@@ -425,7 +446,7 @@ function updateCareerProgression_(ctx, cycle, rng) {
       // rows the old age rule stamped would be the same mass edit in reverse.
       // Retirement changes by event (Status), never by this derivation.
     } else {
-      var derived = deriveCareerStageFromAge_(age, yearsInCareer);
+      var derived = deriveCareerStageFromAge_(age, yearsInCareer, row[iCareerStage]);
       if (String(row[iCareerStage] || '') !== derived) {
         row[iCareerStage] = derived;
         restamped++;

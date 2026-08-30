@@ -2,7 +2,7 @@
   "generated": "2026-08-30",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1176,
+  "functionsMapped": 1178,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4444,6 +4444,7 @@
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/applyChaosDecay.test.js::ctxWith",
         "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",
+        "phase05-citizens/generationalWealthEngine.js::applyTrackedEmployerFloor_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",

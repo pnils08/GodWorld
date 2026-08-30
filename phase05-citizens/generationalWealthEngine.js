@@ -461,7 +461,7 @@ function calculateCitizenIncomes_(ctx) {
     // educationCareerEngine.js. Status 'retired' or CareerStage 'retired'
     // both count; 'inactive' keeps its old skip.
     var sportsRow = isSportsLayerRow_(row, iClockMode, iEconKey);
-    if (sportsRow) continue;
+    if (sportsRow || !isEngineClockRow_(row, iClockMode)) continue; // GAME / CIVIC / MEDIA are outside this (builder 2026-08-30)
     // Retirement is an EVENT — Status=Retired — never an age and never the
     // stored CareerStage (builder, 2026-08-30: a birthday retires nobody; 63
     // Active citizens are 65+). Deceased → 0 always. Tier 1–2 exempt like the
@@ -578,7 +578,7 @@ function applyTrackedEmployerFloor_(ctx) {
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     if (!row || !Array.isArray(row)) continue;
-    if (isSportsLayerRow_(row, iClock, iEcon)) continue;
+    if (isSportsLayerRow_(row, iClock, iEcon) || !isEngineClockRow_(row, iClock)) continue; // GAME / CIVIC / MEDIA are outside this
     var status = String(row[iStatus] || 'active').toLowerCase();
     if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
     var tier = iTier >= 0 ? Number(row[iTier]) : 4;

@@ -69,6 +69,11 @@ function ctxWith(rows, cycle) {
     row({ POPID: 'P6', age: 33, CareerStage: 'senior', YearsInCareer: 1 }),      // tie-break: mid band, too few years → entry
     row({ POPID: 'P7', age: 70, CareerStage: 'senior', YearsInCareer: 40 }),
     row({ POPID: 'P14', age: 70, CareerStage: 'retired', Status: 'Active', YearsInCareer: 40 }), // old age-rule stamp: left alone, not flipped back
+    row({ POPID: 'P15', age: 19, CareerStage: 'early-career', YearsInCareer: 1 }),  // working 19-year-old stays working (entry)
+    row({ POPID: 'P16', age: 20, CareerStage: 'student', YearsInCareer: 0 }),        // 20-year-old student stays a student
+    row({ POPID: 'P17', age: 16, CareerStage: 'entry-level', YearsInCareer: 0 }),    // <18 → student
+    row({ POPID: 'P18', age: 25, CareerStage: 'senior', ClockMode: 'CIVIC', Income: 180000 }),  // CIVIC: outside
+    row({ POPID: 'P19', age: 70, CareerStage: 'senior', ClockMode: 'MEDIA', Income: 220000 }),  // MEDIA: outside
     row({ POPID: 'P8', age: 19, CareerStage: 'senior', ClockMode: 'GAME', Income: 900000 }),
     row({ POPID: 'P9', age: 40, CareerStage: 'entry-level', EconomicProfileKey: 'SPORTS_OVERRIDE' }),
     row({ POPID: 'P10', age: 40, CareerStage: 'entry-level', Status: 'deceased' }),
@@ -81,7 +86,7 @@ function ctxWith(rows, cycle) {
   try { res = updateCareerProgression_(ctx, CYCLE, ctx.rng); } catch (e) { threw = e.message; }
   assert('E1 no calendar roll: rng never consulted', threw === null, threw);
   const st = p => { const r = ctx.ledger.rows.find(x => x[I('POPID')] === p); return String(r[I('CareerStage')]); };
-  assert('E1 <22 → student', st('P1') === 'student', st('P1'));
+  assert('E1 19-year-old stamped senior with 0 years → entry-level (working stamp kept as a career, not student)', st('P1') === 'entry-level', st('P1'));
   assert('E1 22–29 → entry-level', st('P2') === 'entry-level', st('P2'));
   assert('E1 30–44 → mid-career', st('P3') === 'mid-career', st('P3'));
   assert('E1 45–64 → senior', st('P4') === 'senior', st('P4'));
@@ -89,6 +94,11 @@ function ctxWith(rows, cycle) {
   assert('E1 tie-break: 33 with 1 year → entry-level', st('P6') === 'entry-level', st('P6'));
   assert('E1 70 and Active stays senior — no age retires anyone', st('P7') === 'senior', st('P7'));
   assert('E1 existing retired stamp on an Active 70-year-old is left alone', st('P14') === 'retired', st('P14'));
+  assert('E1 working 19-year-old keeps a career (entry-level)', st('P15') === 'entry-level', st('P15'));
+  assert('E1 20-year-old student stays a student', st('P16') === 'student', st('P16'));
+  assert('E1 16-year-old → student', st('P17') === 'student', st('P17'));
+  assert('E1 CIVIC row untouched', st('P18') === 'senior', st('P18'));
+  assert('E1 MEDIA row untouched', st('P19') === 'senior', st('P19'));
   assert('E1 GAME row untouched', st('P8') === 'senior', st('P8'));
   assert('E1 SPORTS_OVERRIDE row untouched', st('P9') === 'entry-level', st('P9'));
   assert('E1 deceased untouched', st('P10') === 'entry-level', st('P10'));
@@ -142,6 +152,8 @@ function ctxWith(rows, cycle) {
     row({ POPID: 'R6', age: 40, CareerStage: 'mid-career', Income: 61000 }),
     row({ POPID: 'R7', age: 12, CareerStage: 'student', Income: 9000 }),
     row({ POPID: 'R8', age: 40, CareerStage: 'mid-career', EconomicProfileKey: '', Income: 0, LifeHistory: '[CareerState] income=mid' }),
+    row({ POPID: 'R12', age: 60, Status: 'Retired', CareerStage: 'retired', ClockMode: 'CIVIC', Income: 120000 }), // CIVIC retired: outside
+    row({ POPID: 'R13', age: 45, Status: 'deceased', ClockMode: 'MEDIA', Income: 90000 }),                        // MEDIA deceased: outside
   ];
   const ctx = ctxWith(rows); ctx.rng = () => 0.5;
   const res = calculateCitizenIncomes_(ctx);
@@ -157,6 +169,8 @@ function ctxWith(rows, cycle) {
   assert('D5 Active 64-year-old stamped retired keeps her salary', inc('R9') === 83497, inc('R9'));
   assert('D5 Tier-1 retired star untouched', inc('R10') === 223635, inc('R10'));
   assert('D5 68-year-old Active senior keeps salary — no age retires anyone', inc('R11') === 90000, inc('R11'));
+  assert('D5 CIVIC retired row untouched', inc('R12') === 120000, inc('R12'));
+  assert('D5 MEDIA deceased row untouched', inc('R13') === 90000, inc('R13'));
   assert('D5 updated count: R2 (deceased) + R3 (Status Retired) zeroed + minor + fill', res.updated === 4, JSON.stringify(res));
 }
 
@@ -186,6 +200,7 @@ function ctxWith(rows, cycle) {
     row2({ POPID: 'F11', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', Status: 'deceased' }),
     row2({ POPID: 'F12', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-99999' }),    // employer not on ledger
     row2({ POPID: 'F13', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00005' }),    // ENGINE row at a sports franchise: athlete avg must not floor it
+    row2({ POPID: 'F14', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', ClockMode: 'CIVIC' }), // CIVIC: no floor
   ];
   const ctx = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {},
     ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL.map(r => r.slice()) }) } : null } };
@@ -204,6 +219,7 @@ function ctxWith(rows, cycle) {
   assert('D3 deceased: no floor', inc('F11') === 30000, inc('F11'));
   assert('D3 unknown employer id: no floor', inc('F12') === 30000, inc('F12'));
   assert('D3 sports-franchise employer sets no floor for an ENGINE row', inc('F13') === 30000, inc('F13'));
+  assert('D3 CIVIC row gets no floor', inc('F14') === 30000, inc('F14'));
   assert('D3 result counts', res.raised === 3 && res.checked >= 3, JSON.stringify(res));
   assert('D3 no LifeHistory line (a floor correction is not an event)', ctx.ledger.rows.every(r => String(r[I2('LifeHistory')]) === 'Y1C1 — born'));
   assert('D3 ledger dirty', ctx.ledger.dirty === true);

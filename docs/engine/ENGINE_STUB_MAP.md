@@ -1151,7 +1151,9 @@
 
 - **isSportsLayerRow_(row, iClock, iEcon)**
 
-- **deriveCareerStageFromAge_(age, yearsInCareer)**
+- **isEngineClockRow_(row, iClock)**
+
+- **deriveCareerStageFromAge_(age, yearsInCareer, currentStage)**
 
 - **updateCareerProgression_(ctx, cycle, rng)**
 
@@ -1277,6 +1279,9 @@
   Reads: S.cycleId
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
+
+- **applyTrackedEmployerFloor_(ctx)**
+  Sheets: Business_Ledger
 
 - **extractIncomeBand_(lifeHistory)**
 
@@ -3521,4 +3526,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1176
+**Functions mapped:** 1178

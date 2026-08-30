@@ -3,7 +3,7 @@ title: Business_Ledger six-per-hood fill — research
 created: 2026-08-29
 updated: 2026-08-29
 type: reference
-tags: [research, engine, neighborhoods, economy, active]
+tags: [research, engine, neighborhoods, economy, accepted]
 sources:
   - live Business_Ledger + Neighborhood_Map read 2026-08-29 (lib/sheets.js; 103 BIZ rows, 22 hoods)
   - docs/canon/INSTITUTIONS.md §Neighborhoods (S374 essence for all 22)
@@ -211,3 +211,14 @@ These are why a seed can name a shop and the rest of the cycle still reads 2026 
 ## Changelog
 
 - 2026-08-29 (grok) — Initial research (S394, builder-directed). Live sheet read; 72-row fill; code-trace notes; inbox copy for Claude.
+
+## Review — 2026-08-30 (engine-sheet, S398) — ACCEPTED, landed on bench
+
+Accepted as the Phase C input to the employment cascade (engine.135, `docs/plans/2026-08-29-employment-system-cascade.md` §Phase C). What changed between this proposal and what was written:
+
+- **Names:** 46 of 72 renamed. Every spec-adjective / essence-phrase name (Spillover, Continuity, Reachable, Frontier, Crossing, Thin Line, Pressure, Working Core, Between Hub, Ordinary Street, Lake Ring, Belt, Rim, Pocket, Settled, Flatlands, Corridor, Slope …) became a street, geographic or plain name. Full map in the reviewed payload.
+- **Numbers:** `Avg_Salary` and `Annual_Revenue` re-based to the plan's §Pay scale — `MedianIncome(hood) × sector factor`, revenue = payroll × 2 — so a Rockridge shop pays 84–89k and a San Antonio one 35–39k, instead of 35–52k flat across the city. `Employee_Count` and `Growth_Rate` kept as proposed.
+- **IDs:** assigned from the target's high-water at write time (bench: BIZ-00115–00186); the proposal's BIZ-00108+ were never binding.
+- **Landed:** SANDBOX 0827 at C131 state, 72/72 read-back exact. Live replay at the engine.135 wave deploy, after the Neighborhood_Map B1 profile (DEPLOY.md bench-write log #4 carries the order).
+- **Reviewed payload:** `output/grok/business-ledger-hood-fill-c104.reviewed.json` (supersedes the scratch JSON as the replay artifact).
+- The mislabeled child-fold rows and the city-wide rows were left exactly as this file recommends.

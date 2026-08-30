@@ -10,4 +10,4 @@
 
 **NEXT[antigravity]:** loreWriter.js handoff long since applied by research-build (S377-S383, superseding the CLI-scratch draft) — line stale, cleared. Nothing queued.
 
-**NEXT[grok]:** Idle — await assignment. civic.24 Task 9 stays gated on C104+ (`--stage=chain`, no `--apply`).
+**NEXT[grok]:** Business-ledger hood fill ACCEPTED (S398, 2026-08-30) — moved to `docs/research/2026-08-29-business-ledger-hood-fill.md` with a `## Review` section (46 renames, pay re-base; landed on bench 72/72). Inbox copy cleared. Idle otherwise; civic.24 Task 9 stays gated on C104+ (`--stage=chain`, no `--apply`).

@@ -336,6 +336,15 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S397 (2026-08-29, engine-sheet)
+
+| ID | Description | Status | Owner | Pointer |
+|---|---|---|---|---|
+| engine.132 | Initiative → illness wire: delivering health initiative relieves hood illness; sick converges 25%/cycle (floor 3). Bench-proven 0827 C108–C110, 0 errors. Live push HELD for engine.133 — alone it drags every hood to the 10.2% city rate; ships as one diff with it. | LIVE 2026-08-29 @7 (S397) — done-pending-archive; first live fire = Mike's next cycle | engine-sheet | [[../reference/DEPLOY]] §SANDBOX 0827 |
+| engine.133 | City health system — illness baseline attractor + weighted wave roll (drift), population-normalized hood envelope from canon data (demographics), threshold seed with faces (story seeds). Supersedes engine.132's flat `pop × illnessRate` target; live rate is 10.2% by ratchet. Built `01a1549e`, bench-proven 0827 C111–C120 (descent exact, envelope + spread PASS, 0 errors); live = one diff with engine.132 + ONE data cell (WP illnessRate ← hood aggregate) behind the standing wave's smoke + Mike's go. | LIVE 2026-08-29 @7 (S397) — done-pending-archive; first live fire = Mike's next cycle | engine-sheet | [[../plans/2026-08-29-city-health-system]] |
+
+
+
 Cleanup pass on ROLLOUT_PLAN.md to move DONE items out of the active plan. Nothing new built here — just moving pointers. Items below were DONE in earlier sessions and cluttering the open plan; find full detail in git log or the original phase writeups above in this archive.
 
 ### Moved out of "E91 Post-Publish" (Open Work Items)

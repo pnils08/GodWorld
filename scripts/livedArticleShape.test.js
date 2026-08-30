@@ -54,7 +54,11 @@ const missingQuote = s344Slots(complete, {
   quotes: ['This quote was never spoken by anyone in the Packet at all'],
   requireQuote: true,
 });
-assert.ok(missingQuote.reasons.includes('missing-packet-quote'));
+// pipeline.62 — a Packet quote the reporter did not use verbatim is a craft
+// note, not a refusal. Zero quotes at all is still a fail (tanya, below).
+assert.ok(missingQuote.observations.includes('missing-packet-quote'),
+  JSON.stringify(missingQuote));
+assert.equal(missingQuote.fail, false, JSON.stringify(missingQuote));
 
 const fs = require('fs');
 const path = require('path');
@@ -63,8 +67,9 @@ const splitOk = s344Slots(fs.readFileSync(path.join(__dirname, '__fixtures__/new
   quotes: ["I take the bus every day and they've had those 'coming soon' signs up for years now. Shouldn't someone be asking why the planning keeps stalling when we're the ones waiting in the rain for buses that don't come?"],
   requireQuote: true,
 });
-assert.ok(!splitOk.reasons.includes('missing-packet-quote'),
-  'mid-quote attribution is a Packet span: ' + JSON.stringify(splitOk.reasons));
+assert.ok(!splitOk.reasons.includes('missing-packet-quote') &&
+  !splitOk.observations.includes('missing-packet-quote'),
+  'mid-quote attribution is a Packet span: ' + JSON.stringify(splitOk));
 const tanya = fs.readFileSync(path.join(__dirname, '__fixtures__/newsroom/s344/tanya_c104_article.md'), 'utf8');
 const tanyaSlots = s344Slots(tanya, {
   assignment: 'A\'s late-season update: 126-35 — Vinnie Keane recorded 2-3, HR, 3 RBI',

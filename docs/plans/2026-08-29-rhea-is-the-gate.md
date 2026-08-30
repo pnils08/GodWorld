@@ -94,7 +94,7 @@ Never fail: presence/scenes, “I've heard,” missing `?`, assignment-token ove
   2. `skipRhea` only if contamination (or a new helper) reports §4.7 class: `popid-leak`, `simulation`/fourth-wall, leftover repair chrome, fabricated-speech already caught as contamination. Slot findings (`lede-misses-assignment`, `missing-unanswered-question`, `intake-misses-assignment`, `missing-packet-quote`) `log()` only.
   3. Packet-active W3 always calls `cron-rhea-gate.js` unless that doctrine helper fails.
 - **Verify:** fixture draft with no `?` still execs `cron-rhea-gate.js` in a unit test (mock or spy). Friday Jordan-class draft does not produce `disposition: flagged` from s344 alone.
-- **Status:** [ ] not started
+- **Status:** [x] done
 
 ### Task 2: Demote s344 slot checks to observations
 
@@ -108,7 +108,7 @@ Never fail: presence/scenes, “I've heard,” missing `?`, assignment-token ove
   3. `missing-unanswered-question`: do not set `fail`. Optional log if last two grafs have neither `?` nor a question clause.
   4. `missing-packet-quote`: do not set `fail` when W2 quotes exist. Italics and INTAKE count as landed.
 - **Verify:** `node scripts/cronDeskStoryTemplate.test.js` — Luis near-pass is not `fail` for INTAKE token miss; Jax faith/transit swap still detectable.
-- **Status:** [ ] not started
+- **Status:** [x] done
 
 ### Task 3: Writer must not throw on `isSummaryArticle`
 
@@ -121,7 +121,7 @@ Never fail: presence/scenes, “I've heard,” missing `?`, assignment-token ove
   2. `phase-lede` matching `disbursement-active|construction-planning|pilot-active|…` is tracker vocabulary, not a summary. Delete that branch or demote to log. Civic desks must be able to name a phase.
   3. Auditor-lede / packet-voice / feed-dump may stay as **logs** for Rhea context, not writer fatals.
 - **Verify:** a fixture lede containing `construction-planning` exits 0 and writes a draft. Carmen Friday class no longer `Command failed`.
-- **Status:** [ ] not started
+- **Status:** [x] done
 
 ### Task 4: LEP hard-fatal must not include hedges or signage
 
@@ -135,7 +135,7 @@ Never fail: presence/scenes, “I've heard,” missing `?`, assignment-token ove
   3. Keep `UNAPPROVED_QUOTE` fatal for a long attributed sentence with no W2/Packet quote record (fabricated speech).
   4. `INVESTIGATION_EPISTEMIC_OVERREACH` must not be in the `hard` array at L611–612 for load-bearing packets, **or** drop `heard` so Luis Friday does not throw. Route remainder to Rhea observations (comment at L605–609 already says that for lexical color).
 - **Verify:** `node scripts/livedExperiencePacketV2.test.js` — `I've heard` is not a hard fail; a fake long quote with no Packet support still is.
-- **Status:** [ ] not started
+- **Status:** [x] done
 
 ### Task 5: Keep empty W2 fail-closed
 
@@ -144,7 +144,7 @@ Never fail: presence/scenes, “I've heard,” missing `?`, assignment-token ove
 - **Steps:**
   1. Do not change `assertPublishableQuotes`. Zero publishable answers → no W3. That is not a word list.
 - **Verify:** existing `cronDeskStoryTemplate.test.js` L19–21 still throws on `[]`.
-- **Status:** [ ] not started (no-op; pin in review)
+- **Status:** [x] done — no-op confirmed; `assertPublishableQuotesStrict([])` still throws (`cronDeskStoryTemplate.test.js` L19–21, green).
 
 ### Task 6: Tests against Friday fixtures
 
@@ -155,7 +155,7 @@ Never fail: presence/scenes, “I've heard,” missing `?`, assignment-token ove
   1. Hal/Elliot/Jordan Friday drafts: `s344ArticleGate.evaluate` may log; `skipRhea` helper is false.
   2. A synthetic second-no-hitter that contradicts `Oakland_Sports_Feed` still fails Rhea (or a packet contradiction fixture).
 - **Verify:** `node scripts/cronDeskStoryTemplate.test.js && node scripts/livedExperiencePacketV2.test.js && node scripts/livedArticleShape.test.js`
-- **Status:** [ ] not started
+- **Status:** [x] done
 
 ---
 
@@ -170,11 +170,12 @@ Never fail: presence/scenes, “I've heard,” missing `?`, assignment-token ove
 
 ## Open questions
 
-- [ ] Whether `isSummaryArticle` auditor-lede strings stay as Rhea observations or die entirely. Recommend log-only.
-- [ ] Faith/transit assignment swap: keep as the one s344 fail (contradiction of assigned story) or also log-only.
+- [x] `isSummaryArticle` auditor-lede strings — **log-only, kept**. They still populate `reasons`, but nothing fatal reads them on the Packet-active path: the writer throw is gone and `skipRhea` no longer consults shape. They survive as Rhea context, which is what they were for.
+- [x] Faith/transit assignment swap — **kept as the one `assignment-bind` fail**. It is a contradiction of the assigned story (a faith coverage-gap INTAKE stapled to a transit article), not a wording miss. Both token-overlap checks around it are deleted. Pinned by the Jax C103 fixture.
 
 ---
 
 ## Changelog
 
+- 2026-08-30 (research-build) — Reviewed against live code and executed, Tasks 1–6. Every claim in the diagnosis verified at file:line first. `skipRhea` is now `contamination.fail` alone; slot findings and `phase-lede` are `observations`; the writer's `summary article refused` throw is a log; `heard` is out of the overreach wall and short Title-Case signage is exempt from `UNAPPROVED_QUOTE`. Empty W2 untouched. `cron-rhea-gate.js` untouched. Five suites green.
 - 2026-08-29 (grok) — Plan filed for Claude review. Friday write: 3 writer/W2 deaths + 3 s344 skips, Rhea never ran on the skips. `skipRhea` at `cron-desk-run.js` L2489 is the fake test. Doctrine is §4.7. Empty W2 stays.

@@ -2481,12 +2481,23 @@ async function runWrite(assign) {
       .map(row => row.check + '=' + row.issue).join('; '));
   }
   if (s344Gate.fail) {
-    log('s344 article gate: ' + s344Gate.findings.map(row => row.check + '=' + row.issue).join('; '));
+    log('s344 slot observations (non-blocking): ' + s344Gate.findings
+      .map(row => row.check + '=' + row.issue).join('; '));
+  }
+  if (PACKET_ACTIVE && shape.fail) {
+    log('article shape observations (non-blocking): ' + shape.reasons.join(','));
   }
 
   // gate (skipped for --no-gate samples)
+  //
+  // pipeline.62 — Rhea is the gate. Only the contamination wall (a second
+  // Oakland printed over the sheet: real-world entities, imported blight,
+  // lattice speech, invented voices, repair chrome) skips her, because that
+  // scan is doctrine and explicitly overrides a Rhea pass. Slot findings
+  // (missing '?', assignment-token overlap, phase words in a lede) are
+  // observations for the log, never a reason a draft goes unseen by Rhea.
   let rhea = null, pass = false, rheaProof = null;
-  const skipRhea = contamination.fail || (PACKET_ACTIVE && (shape.fail || s344Gate.fail));
+  const skipRhea = contamination.fail;
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
   } else if (!skipRhea) {

@@ -388,6 +388,26 @@ function quotedSpans(text) {
   return spans;
 }
 
+// pipeline.62 — a quoted span can be a thing the reporter read, not a thing a
+// person said. "For Lease" in a window is signage; treating it as fabricated
+// speech killed a Carmen draft. Signage is short, sign-shaped (Title Case or
+// ALL CAPS), and carries no attribution verb beside it. Anything with a
+// speaker attached, or any span long enough to be a sentence, stays speech.
+const SIGNAGE_ATTRIBUTION = /["”]\s*,?\s*(?:he|she|they|[A-Z][a-z]+)?\s*(?:said|told|asked|added|replied|explained)\b/i;
+
+function isSignage(quote, bodyText) {
+  const words = String(quote || '').trim().split(/\s+/).filter(Boolean);
+  if (words.length > 3 || quote.length > 24) return false;
+  if (!/^[A-Z0-9]/.test(quote)) return false;
+  if (!words.every(w => /^[A-Z0-9][A-Za-z0-9.'’-]*$/.test(w))) return false;
+  const idx = String(bodyText || '').indexOf(quote);
+  if (idx >= 0) {
+    const after = String(bodyText).slice(idx + quote.length, idx + quote.length + 40);
+    if (SIGNAGE_ATTRIBUTION.test('"' + after)) return false;
+  }
+  return true;
+}
+
 // Punctuation-insensitive form for quote matching. Writers split one approved
 // quote across attribution ("Rain's coming," she said. "And every winter…") and
 // the seam punctuation/capitalization drifts (em dash → comma-capital). The
@@ -560,6 +580,7 @@ function auditArticle(draftText, packet) {
     if (!norm) return true;
     if (approvedQuoteNorms.some(approved => approved.includes(norm))) return false;
     if (approvedRecordNorm.includes(norm)) return false;
+    if (isSignage(quote, bodyText)) return false;
     return true;
   });
   const errors = [];
@@ -586,7 +607,10 @@ function auditArticle(draftText, packet) {
     packet.task.creativeBrief.kind === 'civic-investigation';
   if (investigation) {
     const overreach = [
-      /\bI(?:'ve| have)?\s+(?:looked|asked|requested|heard|found|checked|reviewed|tracked)\b/i,
+      // pipeline.62 — "heard" is out. Journalists hedge and so do citizens;
+      // "I've heard" is the most ordinary sentence in an investigation, not a
+      // claim of unrecorded legwork.
+      /\bI(?:'ve| have)?\s+(?:looked|asked|requested|found|checked|reviewed|tracked)\b/i,
       /\b(?:flagged|told|said)\s+(?:it\s+)?to\s+me\b/i,
       /\b(?:independently|before I did)\b/i,
       /\bno (?:one|office|agency|person)\s+(?:has|had|was|is)\b/i,

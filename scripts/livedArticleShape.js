@@ -49,33 +49,35 @@ function packetQuoteLanded(body, quotes) {
   return false;
 }
 
+// pipeline.62 — `reasons` are structural fails (the article has no lede, no
+// scene, no Packet quote at all). `observations` are craft notes for the log
+// and for Rhea's context: a reporter who used a Packet quote in her own split
+// attribution, or closed on a statement instead of a question, has written a
+// newspaper story, not a violation. Assignment-token overlap in the lede is
+// gone entirely — a headline is not a keyword match.
 function s344Slots(text, opts) {
   const reasons = [];
+  const observations = [];
   const body = articleBody(text);
   const paras = paragraphs(body);
-  const assignment = (opts && opts.assignment) || '';
   const quotes = (opts && opts.quotes) || [];
   if (!paras.length) reasons.push('missing-lede');
-  else {
-    const tokens = assignmentTokens(assignment);
-    const lede = ledeParagraph(paras).toLowerCase();
-    if (tokens.length && !tokens.some(t => lede.indexOf(t) >= 0)) reasons.push('lede-misses-assignment');
-  }
   const quoteTexts = quotes.map(q => typeof q === 'string' ? q : (q && q.quote)).filter(Boolean);
   if (quoteTexts.length) {
-    if (!packetQuoteLanded(body, quoteTexts)) reasons.push('missing-packet-quote');
+    if (!packetQuoteLanded(body, quoteTexts)) observations.push('missing-packet-quote');
   } else if (opts && opts.requireQuote) {
     reasons.push('missing-packet-quote');
   }
   const tail = paras.slice(-2).join(' ');
-  if (!/\?/.test(tail)) reasons.push('missing-unanswered-question');
+  if (!/\?/.test(tail)) observations.push('missing-unanswered-question');
   if (paras.length < 3) reasons.push('missing-scene');
-  return { fail: reasons.length > 0, reasons };
+  return { fail: reasons.length > 0, reasons, observations };
 }
 
 function isSummaryArticle(text) {
   const body = articleBody(text);
   const reasons = [];
+  const observations = [];
   if (/the supplied record establishes/i.test(body)) reasons.push('auditor-lede');
   if (/those supplied claims define the current record/i.test(body)) reasons.push('auditor-frame');
   if (/what remains to be learned here/i.test(body)) reasons.push('auditor-close');
@@ -88,14 +90,17 @@ function isSummaryArticle(text) {
   if (bullets.length >= 3 && bullets.length >= Math.max(3, lines.length * 0.35)) {
     reasons.push('fact-list');
   }
+  // pipeline.62 — a phase name in the lede is tracker vocabulary, not a
+  // summary article. A civic desk has to be able to say a project is in
+  // construction planning. Observation only.
   const lede = lines.filter(l => !/^#/.test(l)).slice(0, 6).join(' ');
   if (/\b(?:disbursement-active|construction-planning|implementation-active|pilot-active|dispatch-live)\b/i.test(lede)) {
-    reasons.push('phase-lede');
+    observations.push('phase-lede');
   }
   if (/\bStoryAngle\s*\(feed\)|\bStats\s*\(feed\)|\bTeam record\s*\(feed\)/i.test(body)) {
     reasons.push('feed-dump');
   }
-  return { fail: reasons.length > 0, reasons };
+  return { fail: reasons.length > 0, reasons, observations };
 }
 
 module.exports = {

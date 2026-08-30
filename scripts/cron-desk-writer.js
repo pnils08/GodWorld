@@ -1189,9 +1189,15 @@ async function main() {
           audit.observations.map(e => e.code + '=' + e.values.join(',')).join('; '));
       }
     }
+    // pipeline.62 — the writer does not kill its own draft on shape. These are
+    // craft notes; Rhea is the gate that decides whether the piece runs. A
+    // draft that dies here never gets a verdict at all.
     const shape = require('./livedArticleShape').isSummaryArticle(normalized);
     if (shape.fail) {
-      throw new Error('summary article refused: ' + shape.reasons.join(','));
+      log.info('summary-article shape notes (non-blocking, deferred to Rhea): ' + shape.reasons.join(','));
+    }
+    if (shape.observations && shape.observations.length) {
+      log.info('summary-article shape observations: ' + shape.observations.join(','));
     }
   }
 

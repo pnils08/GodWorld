@@ -383,6 +383,26 @@ const luisOverreach = p.auditArticle(
   'I went looking. Two residents flagged it to me independently. Somebody owns the file.', luisW3);
 assert.equal(luisOverreach.ok, false);
 assert.ok(luisOverreach.errors.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'));
+// pipeline.62 — "I've heard" is a hedge, not a claim of unrecorded legwork.
+// Acceptance 2: it must not be a hard fail. The rest of the overreach wall
+// (legwork the Packet never recorded) is untouched, asserted above.
+const luisHedge = p.auditArticle(
+  "I've heard the money was supposed to land two cycles ago.", luisW3);
+assert.ok(!luisHedge.errors.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'),
+  'a hedge is not overreach: ' + JSON.stringify(luisHedge.errors));
+
+// Acceptance 4: signage is a thing the reporter read, not a thing a person
+// said. A long attributed sentence with no Packet record is still fabrication.
+const luisSignage = p.auditArticle(
+  'The window still carries a "For Lease" card, curling at the corner.', luisW3);
+assert.ok(!luisSignage.errors.some(row => row.code === 'UNAPPROVED_QUOTE'),
+  'signage is not a citizen quote: ' + JSON.stringify(luisSignage.errors));
+const luisFabricated = p.auditArticle(
+  'Standing by the fence, she said, "Nobody from that office has ever once called me back about any of it."',
+  luisW3);
+assert.ok(luisFabricated.errors.some(row => row.code === 'UNAPPROVED_QUOTE'),
+  'fabricated speech is still fatal: ' + JSON.stringify(luisFabricated.errors));
+
 const luisEngineLeak = p.auditArticle('The stuck-initiative is marked high in row 4.', luisW3);
 assert.equal(luisEngineLeak.ok, false);
 assert.ok(luisEngineLeak.errors.some(row => row.code === 'ENGINE_METADATA_LEAK'));

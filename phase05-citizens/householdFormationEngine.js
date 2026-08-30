@@ -406,12 +406,16 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
     var members = [pop];
     var income = ownInc;
     var type = 'couple';
-    if (married) income += GENERIC_OFFCAM_INCOME;           // off-camera spouse
+    // engine.135 D2 (S399): an off-camera member earns what this neighborhood
+    // pays ordinary mid-career work, not a flat $48k; generic only as fallback.
+    var offcamInc = (typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx, cz.neighborhood, '', '', 'mid', pop + '|offcam') : null;
+    if (offcamInc === null) offcamInc = GENERIC_OFFCAM_INCOME;
+    if (married) income += offcamInc;                       // off-camera spouse
     if (age >= 18 && onKids.length) {
       type = 'family';
       for (var k2 = 0; k2 < onKids.length; k2++) members.push(onKids[k2]);
     }
-    if (orphanMinor) { type = 'family'; income = ownInc + GENERIC_OFFCAM_INCOME * 2; } // both parents off-camera
+    if (orphanMinor) { type = 'family'; income = ownInc + offcamInc * 2; } // both parents off-camera
 
     var hhId = 'HH-' + String(cycle).padStart(4, '0') + '-F' + String(++seq).padStart(3, '0');
     var vals = {

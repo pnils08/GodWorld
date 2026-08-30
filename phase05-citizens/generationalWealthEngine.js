@@ -148,6 +148,11 @@ function processGenerationalWealth_(ctx) {
   var floorResults = applyTrackedEmployerFloor_(ctx);
   results.employerFloorRaised = floorResults.raised;
 
+  // Step 1.6 (engine.135 D4, S399): untracked / self-employed residents earn
+  // at least what their neighborhood pays their kind of work. Raise-only.
+  var hoodRefResults = applyUntrackedHoodReference_(ctx);
+  results.hoodReferenceRaised = hoodRefResults.raised;
+
   // engine.61 T5 (S321): capture WealthLevel before Step 2 recomputes it —
   // the diff is what mobility tracking reads at Step 5.
   var prevWealthLevels = captureWealthLevels_(ctx);
@@ -440,6 +445,7 @@ function calculateCitizenIncomes_(ctx) {
   var iBirthYear = idx('BirthYear');
   var iClockMode = idx('ClockMode');      // engine.135 D5
   var iCareerStage = idx('CareerStage');  // engine.135 D5
+  var iNbhd = idx('Neighborhood'), iRoleType = idx('RoleType'), iSkillTags = idx('SkillTags'), iPopId = idx('POPID'); // engine.135 D2
 
   if (iIncome < 0 || iLife < 0) return { updated: 0 };
 
@@ -515,8 +521,12 @@ function calculateCitizenIncomes_(ctx) {
     // Extract incomeBand from most recent CareerState
     var incomeBand = extractIncomeBand_(lifeHistory);
 
-    // Convert to dollar amount (with deterministic RNG)
-    var income = calculateIncomeFromBand_(incomeBand, tier, rng);
+    // engine.135 D2 (S399): an unpriced citizen is priced by their own
+    // neighborhood's businesses first; the legacy band is the fallback only
+    // where the neighborhood has no reference.
+    var income = (iNbhd >= 0) ? hoodReferencePay_(ctx, row[iNbhd], iRoleType >= 0 ? row[iRoleType] : '',
+      iSkillTags >= 0 ? row[iSkillTags] : '', iCareerStage >= 0 ? row[iCareerStage] : '', iPopId >= 0 ? row[iPopId] : r) : null;
+    if (income === null) income = calculateIncomeFromBand_(incomeBand, tier, rng); // legacy band, deterministic RNG
 
     row[iIncome] = income;
     updated++;
@@ -616,6 +626,135 @@ function extractIncomeBand_(lifeHistory) {
   }
 
   return 'low'; // Default
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.135 D2/D4 (S399, builder 2026-08-30) — what a life pays in boom-city
+// Oakland. A citizen's money references THEIR OWN NEIGHBORHOOD'S BUSINESSES:
+// the canon-re-based Business_Ledger (Phase C fill + D6), never
+// Economic_Parameters (real-world Oakland leaking through the ledger).
+// Neighborhoods accurate → businesses accurate → citizens accurate.
+// ════════════════════════════════════════════════════════════════════════════
+
+// Role text → the hiring category its work belongs to, for citizens whose
+// SkillTags are blank. Word list only; the business-side map stays
+// sectorCategory_'s. Unmatched → null → the whole neighborhood is the reference.
+var ROLE_SECTOR_HINTS_ = [
+  [/attorney|lawyer|paralegal|notary|accountant|\bcpa\b|consultant|planner|analyst|insurance|loan officer/i, 'Professional'],
+  [/nurse|physician|doctor|dentist|therapist|veterinar|pharmac|paramedic|counselor|midwife|caregiver|health aide/i, 'Healthcare'],
+  [/cook|chef|barista|waiter|server|bartender|baker|pitmaster|caterer|food truck|taqueria|restaurant/i, 'Food & Culture'],
+  [/plumb|electric|carpent|hvac|roof|weld|mechanic|contractor|foreman|ironwork|glazier|concrete|painter/i, 'Construction & Baylight'],
+  [/artist|musician|muralist|writer|author|photograph|dancer|actor|choreograph|ceramic|designer|director|sculpt|filmmaker|\bdj\b/i, 'Creative & Arts'],
+  [/teacher|professor|tutor|instructor|educator|librarian/i, 'Education'],
+  [/driver|taxi|courier|dispatcher|mover|transit|delivery/i, 'Transit & Infrastructure'],
+  [/developer|programmer|engineer|technician|scientist|biolog|robotic|data/i, 'Tech & Innovation'],
+  [/longshore|dock|crane|\bport\b|freight|warehouse/i, 'Port & Labor'],
+  [/pastor|imam|rabbi|minister|chaplain|organizer|advocate|community/i, 'Faith & Community'],
+];
+function roleSectorCategory_(roleText) {
+  var t = String(roleText || '');
+  if (!t) return null;
+  for (var i = 0; i < ROLE_SECTOR_HINTS_.length; i++) if (ROLE_SECTOR_HINTS_[i][0].test(t)) return ROLE_SECTOR_HINTS_[i][1];
+  return (typeof sectorCategory_ === 'function') ? sectorCategory_(t, true) : null;
+}
+
+// Business_Ledger → { hood: { all: [Avg_Salary…], byCat: { category: [Avg_Salary…] } } }.
+// Read once per cycle, cached on ctx (not S — it is a lookup, not a signal).
+function loadHoodBusinessPay_(ctx) {
+  if (ctx && ctx._engine135HoodPay) return ctx._engine135HoodPay;
+  var out = {};
+  if (!ctx) return out;
+  ctx._engine135HoodPay = out;
+  var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+  if (!sheet) return out;
+  var data = sheet.getDataRange().getValues();
+  if (!data || data.length < 2) return out;
+  var h = data[0], iHood = -1, iSec = -1, iSal = -1;
+  for (var c = 0; c < h.length; c++) {
+    var n = String(h[c]).trim();
+    if (n === 'Neighborhood') iHood = c; else if (n === 'Sector') iSec = c; else if (n === 'Avg_Salary') iSal = c;
+  }
+  if (iHood < 0 || iSal < 0) return out;
+  for (var r = 1; r < data.length; r++) {
+    var hood = String(data[r][iHood] || '').trim(), sal = Number(data[r][iSal]) || 0;
+    if (!hood || sal <= 0 || sal > 400000) continue; // athlete-scale rows are not a wage reference
+    var cat = (typeof sectorCategory_ === 'function') ? sectorCategory_(iSec >= 0 ? data[r][iSec] : '') : 'Small Business';
+    if (!cat) continue; // sports orgs — Paulson's domain
+    var e = out[hood] || (out[hood] = { all: [], byCat: {} });
+    e.all.push(sal);
+    (e.byCat[cat] = e.byCat[cat] || []).push(sal);
+  }
+  return out;
+}
+function median_(a) { if (!a || !a.length) return 0; var b = a.slice().sort(function(x, y) { return x - y; }); return b[Math.floor(b.length / 2)]; }
+function seedUnit_(s) { var h = 2166136261; s = String(s || ''); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return (h % 10000) / 10000; }
+
+/**
+ * What this citizen's life pays: the median Avg_Salary of their
+ * neighborhood's businesses in their sector (SkillTags first, then the role
+ * text, then the whole neighborhood) × career stage (0.75 / 1.0 / 1.3 — the
+ * D3 scale) × a per-citizen seeded ±8% so no two neighbours make the same
+ * thing. Rounded to $100. null when the neighborhood has no business
+ * reference (caller keeps its old draw) or the stage earns nothing
+ * (student / retired / unknown).
+ */
+function hoodReferencePay_(ctx, hood, roleText, skillTags, careerStage, seed) {
+  var pay = loadHoodBusinessPay_(ctx);
+  var e = pay[String(hood || '').trim()];
+  if (!e || !e.all.length) return null;
+  var STAGE_FACTOR = { ENTRY: 0.75, MID: 1.0, SENIOR: 1.3 };
+  var factor = STAGE_FACTOR[careerStageClass_(careerStage)];
+  if (!factor) return null;
+  var set = null;
+  var tags = String(skillTags || '').split('|');
+  for (var t = 0; t < tags.length && !set; t++) {
+    var tg = tags[t].trim();
+    if (tg && e.byCat[tg] && e.byCat[tg].length) set = e.byCat[tg];
+  }
+  if (!set) { var rc = roleSectorCategory_(roleText); if (rc && e.byCat[rc] && e.byCat[rc].length) set = e.byCat[rc]; }
+  if (!set) set = e.all;
+  var jitter = 0.92 + 0.16 * seedUnit_(seed);
+  return Math.round(median_(set) * factor * jitter / 100) * 100;
+}
+
+/**
+ * engine.135 D4 (S399, builder 2026-08-30): SELF_EMPLOYED / UNTRACKED
+ * residents earn at least what their neighborhood pays their kind of work —
+ * hoodReferencePay_ above. RAISE-ONLY (nobody is lowered — the builder's
+ * rule, same as the D3 floor). Blank employer = unemployed, not in scope (a
+ * layoff's cut stays a cut). Tracked BIZ rows are D3's. GAME/CIVIC/MEDIA,
+ * sports layer, Tier 1–2, students, retired, deceased untouched. Idempotent:
+ * once at or above the reference a row never moves again here — money moves
+ * by events after this. Silent, like D3: a description catching up.
+ */
+function applyUntrackedHoodReference_(ctx) {
+  var out = { checked: 0, raised: 0 };
+  var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
+  if (!header || !rows || !rows.length) return out;
+  var idx = function(n) { return header.indexOf(n); };
+  var iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStage = idx('CareerStage'), iStatus = idx('Status'),
+      iTier = idx('Tier'), iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey'), iHood = idx('Neighborhood'),
+      iRole = idx('RoleType'), iTags = idx('SkillTags'), iPop = idx('POPID');
+  if (iIncome < 0 || iEmp < 0 || iStage < 0 || iHood < 0) return out;
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || !Array.isArray(row)) continue;
+    if (isSportsLayerRow_(row, iClock, iEcon) || !isEngineClockRow_(row, iClock)) continue;
+    var status = String(row[iStatus] || 'active').toLowerCase();
+    if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
+    var tier = iTier >= 0 ? Number(row[iTier]) : 4;
+    if (tier === 1 || tier === 2) continue;
+    var employer = String(row[iEmp] || '').trim();
+    if (employer !== 'SELF_EMPLOYED' && employer !== 'UNTRACKED') continue;
+    var roleText = (iRole >= 0 && row[iRole]) ? row[iRole] : (iEcon >= 0 ? row[iEcon] : '');
+    var ref = hoodReferencePay_(ctx, row[iHood], roleText, iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r);
+    if (ref === null) continue;
+    out.checked++;
+    var income = Number(row[iIncome]) || 0;
+    if (income < ref) { row[iIncome] = ref; out.raised++; }
+  }
+  if (out.raised > 0) ctx.ledger.dirty = true;
+  return out;
 }
 
 function calculateIncomeFromBand_(incomeBand, tier, rng) {

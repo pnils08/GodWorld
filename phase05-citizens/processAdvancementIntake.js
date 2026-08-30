@@ -648,7 +648,13 @@ function processAdvancementRows_(ctx, now, cycle) {
       var advIsMinor = advBY > 0 && ((2040 + Math.floor(cycle / 52)) - advBY) < 18;
       if (roleChanged && !advIsMinor && lIncome >= 0 && advSalaryPools && typeof ctx.rng === 'function') {
         var newIncome = rederiveIncomeForRole_(advSalaryPools, roleType, ctx.rng);
-        if (newIncome !== null) ledgerRows[existingRow][lIncome] = newIncome;
+        // engine.135 D2 (S399): the neighborhood prices the new role when it can.
+        var lStageA = findColByName_(ledgerHeaders, 'CareerStage'), lTagsA = findColByName_(ledgerHeaders, 'SkillTags');
+        var hoodIncome = (lNeighborhood >= 0 && typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx,
+          ledgerRows[existingRow][lNeighborhood], roleType, lTagsA >= 0 ? ledgerRows[existingRow][lTagsA] : '',
+          lStageA >= 0 ? ledgerRows[existingRow][lStageA] : '', ledgerRows[existingRow][lPopId]) : null;
+        if (hoodIncome !== null) ledgerRows[existingRow][lIncome] = hoodIncome;
+        else if (newIncome !== null) ledgerRows[existingRow][lIncome] = newIncome;
       }
       if (lLastUpdated >= 0) ledgerRows[existingRow][lLastUpdated] = now;
       ctx.ledger.dirty = true;
@@ -701,6 +707,18 @@ function processAdvancementRows_(ctx, now, cycle) {
       if (lYearsInCareer >= 0) newRow[lYearsInCareer] = profile.YearsInCareer;
       if (lDebtLevel >= 0) newRow[lDebtLevel] = profile.DebtLevel;
       if (lNetWorth >= 0) newRow[lNetWorth] = profile.NetWorth;
+      // engine.135 D2 (S399): a promoted citizen arrives priced by their own
+      // neighborhood (Income was blank until the next cycle's fallback filled
+      // it from the real-world table); Debt/NetWorth re-derive from that number.
+      var lIncomeN = findColByName_(ledgerHeaders, 'Income');
+      if (lIncomeN >= 0 && typeof hoodReferencePay_ === 'function') {
+        var hoodPay = hoodReferencePay_(ctx, profile._neighborhood, newRoleType, '', profile._careerStage, seed);
+        if (hoodPay !== null) {
+          newRow[lIncomeN] = hoodPay;
+          if (lDebtLevel >= 0) newRow[lDebtLevel] = deriveDebtLevel_(seed, age, hoodPay);
+          if (lNetWorth >= 0) newRow[lNetWorth] = deriveNetWorth_(seed, age, hoodPay, profile._careerStage);
+        }
+      }
       if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;
       if (lNumChildren >= 0) newRow[lNumChildren] = profile.NumChildren;
       // engine.62b (S322): CareerStage — the derivation lib predates the SL

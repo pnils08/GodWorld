@@ -1285,6 +1285,19 @@
 
 - **extractIncomeBand_(lifeHistory)**
 
+- **roleSectorCategory_(roleText)**
+
+- **loadHoodBusinessPay_(ctx)**
+  Sheets: Business_Ledger
+
+- **median_(a)**
+
+- **seedUnit_(s)**
+
+- **hoodReferencePay_(ctx, hood, roleText, skillTags, careerStage, seed)**
+
+- **applyUntrackedHoodReference_(ctx)**
+
 - **calculateIncomeFromBand_(incomeBand, tier, rng)**
 
 - **calculateCitizenWealth_(ctx)**
@@ -1536,6 +1549,8 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runCareerEngine.js
+- **sectorCategory_(sector, strict)**
+
 - **runCareerEngine_(ctx)**
   Reads: S.absoluteCycle, S.careerSignals, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
@@ -3526,4 +3541,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1178
+**Functions mapped:** 1185

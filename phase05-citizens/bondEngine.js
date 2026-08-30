@@ -2159,17 +2159,22 @@ function processGCCourtship_(ctx) {
     setC('ClockMode', 'ENGINE'); setC('Status', 'Active');
     setC('BirthYear', simYear - gAgeM); setC('OrginCity', 'Oakland');
     setC('Neighborhood', P.hood); setC('MaritalStatus', 'single'); // marryCitizens_ flips it
-    setC('Income', GC_SPOUSE_INCOME); setC('Gender', String(gRowM[gSex]).toLowerCase());
+    setC('Gender', String(gRowM[gSex]).toLowerCase());
     setC('UsageCount', 0);
     var dSeed = spFirst + '|' + last + '|' + spId;
     var dRetired = gAgeM >= 65;
     var dYears = deriveYearsInCareer_(dSeed, gAgeM, dRetired ? 'retired' : '');
     if (dYears > Math.max(0, gAgeM - 18)) dYears = Math.max(0, gAgeM - 18);
     setC('YearsInCareer', dYears);
-    setC('CareerStage', dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
+    var dStage = dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level');
+    setC('CareerStage', dStage);
+    // engine.135 D2 (S399): the spouse is priced by the household's neighborhood, not a flat $48k.
+    var spInc = (typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx, P.hood, (gOcc >= 0 && gRowM[gOcc]) || '', '', dStage, spId) : null;
+    if (spInc === null) spInc = GC_SPOUSE_INCOME;
+    setC('Income', spInc);
     setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, gAgeM, null));
-    setC('DebtLevel', deriveDebtLevel_(dSeed, gAgeM, GC_SPOUSE_INCOME));
-    setC('NetWorth', deriveNetWorth_(dSeed, gAgeM, GC_SPOUSE_INCOME, dRetired ? 'retired' : ''));
+    setC('DebtLevel', deriveDebtLevel_(dSeed, gAgeM, spInc));
+    setC('NetWorth', deriveNetWorth_(dSeed, gAgeM, spInc, dRetired ? 'retired' : ''));
     setC('LifeHistory', bondInWorldStamp_(cycle) + ' — [Family] Years in the making — the record finally sees them, beside ' + P.name);
     ctx.ledger.rows.push(newRow);
     ctx.ledger.dirty = true;
@@ -2178,7 +2183,7 @@ function processGCCourtship_(ctx) {
     var B = {
       idx: ctx.ledger.rows.length - 1, name: spName, marital: 'single',
       gender: String(gRowM[gSex]).toLowerCase(), birthYear: simYear - gAgeM, householdId: '',
-      income: GC_SPOUSE_INCOME, hood: P.hood, tier: 4, edu: '', debt: 0, savings: 0
+      income: spInc, hood: P.hood, tier: 4, edu: '', debt: 0, savings: 0
     };
     bd.citizenB = spId; // the bond now holds a real citizen
     bd.notes = String(bd.notes || '') + ' [record caught up C' + cycle + ']';
@@ -2346,7 +2351,7 @@ function processGCMarriageLottery_(ctx) {
     setC('ClockMode', 'ENGINE'); setC('Status', 'Active');
     setC('BirthYear', simYear - pick.age); setC('OrginCity', 'Oakland');
     setC('Neighborhood', P.hood); setC('MaritalStatus', 'single'); // marryCitizens_ flips it
-    setC('Income', GC_SPOUSE_INCOME); setC('Gender', wantSex);
+    setC('Gender', wantSex);
     setC('UsageCount', 0);
     // engine.62b (S322): mint with a derived economic profile, not blanks —
     // C104 exposed lottery mints landing with no Debt/Stage/Years/Edu/NetWorth
@@ -2357,10 +2362,15 @@ function processGCMarriageLottery_(ctx) {
     var dYears = deriveYearsInCareer_(dSeed, pick.age, dRetired ? 'retired' : '');
     if (dYears > Math.max(0, pick.age - 18)) dYears = Math.max(0, pick.age - 18);
     setC('YearsInCareer', dYears);
-    setC('CareerStage', dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level'));
+    var dStage = dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level');
+    setC('CareerStage', dStage);
+    // engine.135 D2 (S399): priced by the household's neighborhood, not a flat $48k.
+    var spInc = (typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx, P.hood, pick.occ || '', '', dStage, spId) : null;
+    if (spInc === null) spInc = GC_SPOUSE_INCOME;
+    setC('Income', spInc);
     setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, pick.age, null));
-    setC('DebtLevel', deriveDebtLevel_(dSeed, pick.age, GC_SPOUSE_INCOME));
-    setC('NetWorth', deriveNetWorth_(dSeed, pick.age, GC_SPOUSE_INCOME, dRetired ? 'retired' : ''));
+    setC('DebtLevel', deriveDebtLevel_(dSeed, pick.age, spInc));
+    setC('NetWorth', deriveNetWorth_(dSeed, pick.age, spInc, dRetired ? 'retired' : ''));
     setC('LifeHistory', bondInWorldStamp_(cycle) + ' — [Family] The record catches up: met ' + P.name + ' in ' + P.hood + ', and stayed.');
     ctx.ledger.rows.push(newRow);
     ctx.ledger.dirty = true;
@@ -2371,7 +2381,7 @@ function processGCMarriageLottery_(ctx) {
     var B = {
       idx: ctx.ledger.rows.length - 1, name: spName, marital: 'single',
       gender: wantSex, birthYear: simYear - pick.age, householdId: '',
-      income: GC_SPOUSE_INCOME, hood: P.hood, tier: 4, edu: '', debt: 0, savings: 0
+      income: spInc, hood: P.hood, tier: 4, edu: '', debt: 0, savings: 0
     };
     var lotteryBond = makeBond_(pid, spId, BOND_TYPES.ROMANTIC, 'gc-lottery', 'COMMUNITY',
       P.hood, MARRIAGE_THRESHOLD, cycle, 'Met outside the record (engine.59 lottery C' + cycle + ')', ctx);

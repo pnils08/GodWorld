@@ -3,7 +3,7 @@ title: Employment System Cascade Plan
 created: 2026-08-29
 updated: 2026-08-29
 type: plan
-tags: [engine, employment, economy, neighborhoods, cascade, draft]
+tags: [engine, employment, economy, neighborhoods, cascade, active]
 sources:
   - Builder direction 2026-08-29 (S397 engine-sheet) — the six-point brief captured verbatim in §Direction below
   - docs/canon/INSTITUTIONS.md §Neighborhoods (lines 324–420) — the penned hood canon; THE base every layer here derives from
@@ -30,7 +30,7 @@ pointers:
 
 **Terminal:** engine-sheet (owns every task). research-build: none. Guest lanes: grok's fill is input, not authority.
 
-**Status:** DRAFT — direction captured 2026-08-29; tasks fill in after the wiring cards (`runCareerEngine_`, `checkForPromotions_`) return and the builder answers §Open questions. **Sequencing lock:** nothing here touches the 2026-08-30 live window (deploy engine.132+133 → one illnessRate cell → builder fires). This plan benches after that cycle lands.
+**Status:** ACTIVE — approved 2026-08-29 22:21 (Q1–Q4 answered); tasks expand per phase as each is picked up. **Sequencing lock:** nothing here touches the 2026-08-30 live window (deploy engine.132+133 → one illnessRate cell → builder fires). This plan benches after that cycle lands.
 
 ---
 
@@ -60,17 +60,17 @@ pointers:
 
 ## WealthLevel bands (proposal — engine-sheet, pending builder sign-off on the hood column)
 
-NetWorth → WealthLevel thresholds stay at S363 (`deriveWealthLevel_`, `generationalWealthEngine.js:594`): 0 <1k · 1 ≥1k · 2 ≥10k · 3 ≥25k · 4 ≥50k · 5 ≥100k · 6 ≥250k · 7 ≥500k · 8 ≥1M · 9 ≥5M · 10 ≥50M. Recomputed every cycle by `captureWealthLevels_` (`:560-590`, already live). Live distribution (snapshot 2026-08-29): WL0 105 · 1–4 54 · 5 111 · 6 247 · 7 219 · 8 200 · 9 27 · 10 1 — the ledger skews rich; the hood bands below are what make that skew land somewhere specific.
+NetWorth → WealthLevel: S363 thresholds 0–9 stay (`deriveWealthLevel_`, `generationalWealthEngine.js:594`): 0 <1k · 1 ≥1k · 2 ≥10k · 3 ≥25k · 4 ≥50k · 5 ≥100k · 6 ≥250k · 7 ≥500k · 8 ≥1M · 9 ≥5M. **Top extended 10 → 12 (builder pushback 2026-08-29: Varek at $10B and a $50M citizen are not the same level):** 10 ≥$50M · 11 ≥$250M · 12 ≥$1B. Live fit (snapshot 2026-08-29): ≥$50M = 18 rows (athletes $90M–$225M → 10), ≥$250M = 4 (Keane 450, Dillon 400, Kelley 375 → 11), ≥$1B = 1 (Varek → 12). Nobody below 10 moves. Readers to extend in the same commit: `SAVINGS_RATE_BY_WEALTH` (`:100`, add 11: 0.22, 12: 0.25), the 3 numeric `wealthLevel >=` comparisons (grep at task time), the hood band column below (elite hoods open-ended: `8+`). Recomputed every cycle by `captureWealthLevels_` (`:560-590`, already live). Live distribution (snapshot 2026-08-29): WL0 105 · 1–4 54 · 5 111 · 6 247 · 7 219 · 8 200 · 9 27 · 10 1 — the ledger skews rich; the hood bands below are what make that skew land somewhere specific.
 
 Hood admission band (WealthLevel min–max for a move-in; residents already inside a hood are not evicted by this table — mismatches heal by moves, Phase F). Each line cites the INSTITUTIONS entry it reads from.
 
 | Hood | WL band | Canon line |
 |---|---|---|
-| Lake Merritt | 8–10 | inherited money, the elite address the boom never touched |
-| Rockridge | 7–9 | earned money — doctors and directors |
-| Piedmont Ave | 7–9 | boutique/medical corridor serving the lake-ring money |
-| West Oakland | 6–9 | boom born here; built-out and expensive; first-wave money (Mims WL9 canon-pinned) |
-| Baylight District | 6–9 | new-build showcase, tech buyers, brand-new units |
+| Lake Merritt | 8+ | inherited money, the elite address the boom never touched |
+| Rockridge | 7–11 | earned money — doctors and directors |
+| Piedmont Ave | 7–11 | boutique/medical corridor serving the lake-ring money |
+| West Oakland | 6+ | boom born here; built-out and expensive; first-wave money (Mims WL9 canon-pinned) |
+| Baylight District | 6+ | new-build showcase, tech buyers, brand-new units |
 | Brooklyn | 6–8 | newest mid-rise after Baylight, quieter |
 | Jack London | 5–8 | waterfront office + nightlife |
 | Downtown | 5–8 | institutional spine, money administered |
@@ -147,12 +147,13 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 
 - [x] **Q1 — answered 2026-08-29:** scale change + pay-scale realignment; no row sweep. The only row-level Income writes are the tracked-employer floor (raise-only), UNTRACKED/self-employed re-base, and retired/deceased → 0.
 - [x] **Q2 — answered 2026-08-29:** remove. No promotion because cycles passed; CareerStage is age-derived; promotions/raises/layoffs/hiring are caused by the employer's success (Phase E redesign).
-- [ ] **Q3 (blocks Phase B1/F):** builder sign-off on the hood WealthLevel band column above (canon content).
-- [ ] **Q4 (blocks Phase C):** existing 103 businesses — confirm fields-only revision (names + hoods stay) or authorize renames/remaps too.
+- [x] **Q3 — approved 2026-08-29** (band table), with the pushback that extended the scale to 12.
+- [x] **Q4 — approved 2026-08-29:** fields-only revision of the 103; names + hoods stay.
 
 ---
 
 ## Changelog
+- 2026-08-29 (22:21) — **Approved.** WealthLevel scale extended 10→12 on builder pushback (≥$50M / ≥$250M / ≥$1B); elite hood bands open-ended; Q3/Q4 closed; plan ACTIVE.
 - 2026-08-29 (22:11) — Builder second pass captured (points 7–16): Q1/Q2 answered, hood admission bands, tracked-employer floor, business-success causation, CareerStage by age, retired/deceased Income 0. WealthLevel band table proposed; Q3/Q4 opened.
 - 2026-08-29 (16:20) — Wiring cards returned (`runCareerEngine_`, `checkForPromotions_`); churn measured from LifeHistory_Log; the C103–C104 promotion spike traced to `updateCareerProgression_`; Phase E filled, Q2 sharpened.
 - 2026-08-29 — Direction captured (S397 engine-sheet); phases sketched; wiring cards dispatched for `runCareerEngine_` and `checkForPromotions_`; live C104 numbers recorded in sources.

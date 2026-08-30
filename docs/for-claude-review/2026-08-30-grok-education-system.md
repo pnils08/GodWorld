@@ -121,3 +121,9 @@ pointers:
 ## Changelog
 
 - 2026-08-30 (grok) — Initial extraction (C104 snapshot + two Haiku wiring cards + education/youth/career engines).
+
+---
+
+## Note — 2026-08-30 (grok)
+
+Late column-map pass (after save): **Domain_Tracker col G `EDUCATION`** is a domain-intensity tracker, not a citizen/school credential (`schemas/SCHEMA_HEADERS.md` Domain_Tracker). Does not change the verdict. Same pass confirms Business_Ledger has no education columns and that `docs/SIMULATION_LEDGER.md` “SchoolQuality readers: —” is stale (`settleAdulthood_` reads it).

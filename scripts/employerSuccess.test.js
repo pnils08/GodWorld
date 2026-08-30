@@ -47,6 +47,9 @@ assert('careerMoveText_ gone', !/function careerMoveText_/.test(src));
 assert('resolveNewBizId_ gone', !/function resolveNewBizId_/.test(src));
 assert('no sector_shift / lateral handlers', !/tEv\.type === "sector_shift"/.test(src) && !/tEv\.type === "lateral"/.test(src));
 assert('hiring window is dial-steered', /\/ 52 \* gapFactor/.test(src));
+// E3 (S401, builder points 5/14): hiring reaches only the jobless, in their own field
+assert('matcher candidates = blank employer only (UNTRACKED keep their job)', /var uEmp = safeStr\(uRow\[iEmployerBizId\]\)\.trim\(\);\n\s*if \(uEmp !== ''\) continue;/.test(src) && !/uEmp !== 'UNTRACKED'/.test(src));
+assert('cross-field fallback deleted', !/anyField/.test(src) && !/one career-changer at most/.test(src));
 assert('reconciliation rate-limited', /Math\.min\(shortfall, 2\)/.test(src));
 
 // ── fixtures ────────────────────────────────────────────────────────────────

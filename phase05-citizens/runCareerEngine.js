@@ -1042,12 +1042,13 @@ function runCareerEngine_(ctx) {
       var uRow = rows[ur];
       if (safeStr(uRow[iStatus]).trim() !== 'Active') continue;
       if (safeStr(uRow[iClock]).trim() === 'GAME') continue;
-      // S357 engine.83: UNTRACKED ("employed at an untracked business") stays
-      // hire-eligible — organic hiring is the ONLY path that moves citizens
-      // into tracked jobs now that bulk category-assignment is retired; the
-      // move lands as a normal hire with its promotion/transition event.
+      // engine.135 E3 (S401, builder direction points 5/14 — every old system
+      // forcing employment ends): only a citizen WITHOUT a job is a candidate.
+      // UNTRACKED means employed at an off-ledger business — the S357 rule that
+      // let the matcher lift them out of that job into a tracked one was a
+      // standing job-hop with no event behind it (≈7 lives/cycle on the bench).
       var uEmp = safeStr(uRow[iEmployerBizId]).trim();
-      if (uEmp !== '' && uEmp !== 'UNTRACKED') continue;
+      if (uEmp !== '') continue;
       if (iEconKey >= 0 && safeStr(uRow[iEconKey]).trim() === 'SPORTS_OVERRIDE') continue;
       var uBy = Number(uRow[iBirthYear]) || 0;
       if (uBy > 0) { var uAge = simYear - uBy; if (uAge < 18 || uAge >= 65) continue; }
@@ -1089,16 +1090,11 @@ function runCareerEngine_(ctx) {
       });
 
       var slots = sameField.slice(0, openings);
-      // cross-field: RARE — zero same-field candidates AND 1-in-4 window
-      if (!slots.length && (Number(cycle) + br3) % 4 === 0) {
-        var anyField = [];
-        for (var pj = 0; pj < pool.length; pj++) if (!taken[pj]) anyField.push(pj);
-        anyField.sort(function (a, b5) {
-          if (pool[a].income !== pool[b5].income) return pool[a].income - pool[b5].income;
-          return pool[a].pop < pool[b5].pop ? -1 : 1;
-        });
-        slots = anyField.slice(0, 1); // one career-changer at most per window
-      }
+      // engine.135 E3 (S401): the cross-field fallback is gone. "Rare" was a
+      // 1-in-4 window PER BUSINESS — across ~180 businesses it fired 5–10
+      // times a cycle, hiring an electrician at a bar and a line cook at a tech
+      // firm. A field change is a story in a life, never a filler for an open
+      // slot. A business with no same-field candidate keeps the slot open.
 
       for (var sv = 0; sv < slots.length; sv++) {
         var hIdx = slots[sv];

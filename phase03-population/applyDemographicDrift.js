@@ -85,8 +85,8 @@ function applyDemographicDrift_(ctx) {
   var illnessSupportCycles = cfgNum_(ctx, cfg, 'illnessSupportCycles', 3);
 
   // Employment physics
-  var employmentFloor = cfgNum_(ctx, cfg, 'employmentFloor', 0.80);
-  var employmentAttractor = cfgNum_(ctx, cfg, 'employmentAttractor', 0.90);
+  var employmentFloor = cfgNum_(ctx, cfg, 'employmentFloor', 0.88);   // engine.135 A
+  var employmentAttractor = cfgNum_(ctx, cfg, 'employmentAttractor', 0.96);  // engine.135 A
   var employmentStep = cfgNum_(ctx, cfg, 'employmentStep', 0.0003);
   var prosperityEarnedOnly = String(cfg.prosperityEarnedOnly || '').toUpperCase() === 'TRUE';
 
@@ -262,11 +262,17 @@ function applyDemographicDrift_(ctx) {
 
   var prevEmp = emp;
 
-  // Tend toward employmentAttractor band (default 0.90–0.93).
   // prosperityEarnedOnly=TRUE disables the free-prosperity attractor.
+  // engine.135 A — the dial is PULLED to the attractor, illness-style (engine.133
+  // D2): a fraction of the gap per cycle from either side, so a realigned cell
+  // (the hood-lived rate at deploy) reaches the boom-city number in ~10-20
+  // cycles instead of the 0.0003 step's ~200, and an over-boom reading comes
+  // back the same way. The attractor itself is the realistic-with-boom-kick
+  // number (World_Config employmentAttractor 0.96 = 4% unemployment; floor
+  // 0.88 = a real recession), builder direction 2026-08-29.
   if (!prosperityEarnedOnly) {
-    if (emp < employmentAttractor) emp += employmentStep;
-    if (emp > employmentAttractor + 0.03) emp -= employmentStep;
+    var employmentAttractorPull = cfgNum_(ctx, cfg, 'employmentAttractorPull', 0.12);
+    emp += (employmentAttractor - emp) * employmentAttractorPull;
   }
 
   // Sentiment influences small shifts
@@ -484,8 +490,8 @@ function pushMissingConfigWarning_(ctx, key, defaultValue) {
  * - Cap: illnessCap (default 0.15)
  *
  * EMPLOYMENT RATE:
- * - prosperityEarnedOnly=FALSE: trends toward employmentAttractor band
- *   [employmentAttractor, employmentAttractor+0.03] with step employmentStep
+ * - prosperityEarnedOnly=FALSE: pulled toward employmentAttractor (0.96) by
+ *   employmentAttractorPull (0.12) of the gap per Cycle (engine.135 A)
  *   (defaults 0.90-0.93, step 0.0003)
  * - Negative sentiment: -illnessStepUp / Positive sentiment: +illnessStepUp
  * - High economic mood: +employmentStep / Low: -employmentStep
@@ -498,7 +504,7 @@ function pushMissingConfigWarning_(ctx, key, defaultValue) {
  * - Playoffs: +illnessStepUp x3 (default 0.0006)
  * - First Friday / High cultural activity: +illnessStepUp x2 (default 0.0004)
  * - January slump: -illnessStepUp x3 (default 0.0006)
- * - Floor: employmentFloor (default 0.80) / Cap: 0.98
+ * - Floor: employmentFloor (default 0.88) / Cap: 0.98
  *
  * MIGRATION:
  * - Owned by updateWorldPopulation_; this phase reads only.

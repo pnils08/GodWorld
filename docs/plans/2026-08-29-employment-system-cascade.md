@@ -101,7 +101,8 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 
 ## Phases (tasks expand under each once cards + answers land)
 
-### Phase A — City dial (World_Config + one WP cell)
+### Phase A — City dial (World_Config + one WP cell) — CODE DONE, BENCH WRITES DONE 2026-08-29; proving next
+- `applyDemographicDrift_`: the 0.0003 step is replaced by a pull — `emp += (attractor − emp) × employmentAttractorPull` (0.12), symmetric, illness-style (engine.133 D2). Defaults 0.96 / floor 0.88. Bench World_Config keys retuned + WP cell written (DEPLOY.md bench-write log #2).
 - `employmentAttractor` 0.90 → **0.96** (4% unemployment: realistic 5%, boom kick −1pp) — engine-sheet's number, builder may override. `employmentFloor` 0.80 → 0.88. `employmentFallbackRate` 0.91 → 0.96.
 - WP `employmentRate` cell written to the hood-lived aggregate at write time (live C104: 0.933) — a cell alone is dead (the band steps it back within cycles), so retune + cell + envelope bench together as one wave. Config retunes get a bench fire (engine.102 proof pattern).
 
@@ -132,7 +133,7 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
   | East Oakland | 2 | crossing | 0.2 | construction | 2–6 | 72000 | :377 |
   | San Antonio | 2 | absorbed | −0.3 | service-labor | 2–5 | 70000 | :363 |
   | Temescal | 1 | behind | −0.7 | clinic | 2–5 | 68000 | :385 |
-- **B2 — `buildHoodEmploymentWeights_`** in `updateNeighborhoodDemographics.js`, mirror of `buildHoodIllnessWeights_` (:315): structural = profile incomeTier × boomExposure × bounded employer depth (Business_Ledger Σ Employee_Count / adults, tracked-subset so presence-only, absent = neutral); event = chaos business cuts in the hood this cycle (+), economic initiatives in the hood (−), Σ ledger growth in the hood (−). Σ hood unemployed = city × Σ adults; clamp + converge as illness; `S.neighborhoodEmploymentWeights` for audit/story.
+- **B2 — `buildHoodEmploymentWeights_` — CODE DONE 2026-08-29, unit-proven (`scripts/employmentEnvelope.test.js` 18/18; illness suite 29/29 untouched).** structural = income (city mean / MedianIncome, ±0.5, clamp 0.5–1.8) × boom (1 − 0.35 × BoomIndex, 0.6–1.4) × depth (log2 of tracked jobs-per-adult vs city mean × −0.15, clamp 0.8–1.2, no rows = neutral); product clamped [employmentHoodWeightMin, Max]. **event = 1.0 this wave** — chaos business cuts + economic initiatives land with Phase E (employer success as cause), not as a bolt-on here. Σ hood unemployed = (1 − city) × Σ adults; converge 25%/cycle floor 3; `S.neighborhoodEmploymentWeights`. Employer depth = `S.hoodEmployerDepth` folded into `buildCommuteFlows_`'s existing Business_Ledger read (Phase 2, exact hood match). Config self-arm `ensureEngine135Config_` (4 keys).
 - **B3 — East Oakland ND row** seeded through `ensureNeighborhoodDemographics` (21 vs 22 today; the loaded-set rule silently skips it).
 - **B4 — `Neighborhood_Map.MedianIncome` canon pass** — 11 placeholder hoods + Piedmont Ave 72k + KONO 32.7k re-based from the B1 profile (engine.133 illness weights already read this column live; contamination is deployed).
 
@@ -178,6 +179,7 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 ---
 
 ## Changelog
+- 2026-08-29 (23:30) — Phases A + B2 built: dial pull + envelope + depth + self-arm; test written first (RED 7 → GREEN 18/18); bench World_Config retune + WP cell written; STUB_MAP regenerated. Bench proving next.
 - 2026-08-29 (23:00) — B1 written to SANDBOX 0827 (six columns + MedianIncome, 22/22 exact); loader reads them; live replay deferred to the wave deploy (builder rule: sandbox proves, live runs proven code + replayed writes).
 - 2026-08-29 (22:21) — **Approved.** WealthLevel scale extended 10→12 on builder pushback (≥$50M / ≥$250M / ≥$1B); elite hood bands open-ended; Q3/Q4 closed; plan ACTIVE.
 - 2026-08-29 (22:11) — Builder second pass captured (points 7–16): Q1/Q2 answered, hood admission bands, tracked-employer floor, business-success causation, CareerStage by age, retired/deceased Income 0. WealthLevel band table proposed; Q3/Q4 opened.

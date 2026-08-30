@@ -1,8 +1,8 @@
 {
-  "generated": "2026-08-29",
+  "generated": "2026-08-30",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1173,
+  "functionsMapped": 1175,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2242,6 +2242,14 @@
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_"
       ]
     },
+    "hoodEmployerDepth": {
+      "writers": [
+        "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_"
+      ],
+      "readers": [
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_"
+      ]
+    },
     "contentLedger": {
       "writers": [
         "phase02-world-state/loadEventContentLedger.js::loadEventContentLedger_"
@@ -2267,6 +2275,7 @@
       "readers": [
         "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
@@ -2575,6 +2584,12 @@
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::buildNeighborhoodDemographicModifiers_"
       ]
+    },
+    "neighborhoodEmploymentWeights": {
+      "writers": [
+        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
+      ],
+      "readers": []
     },
     "neighborhoodIllnessWeights": {
       "writers": [
@@ -4189,6 +4204,7 @@
       "writers": [],
       "readers": [
         "phase01-config/engine94SheetContract.js::ensureEngine133Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine135Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase05-citizens/civicInitiativeEngine.js::manualRunVote",
         "phase05-citizens/processAdvancementIntake.js::getCurrentCycleFromConfig_",

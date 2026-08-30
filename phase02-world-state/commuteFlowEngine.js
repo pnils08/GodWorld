@@ -13,6 +13,7 @@
  * them:
  *
  *   S.commuteFlows = { originHood: { destHood: householdWorkerCount } }
+ *   S.hoodEmployerDepth = { hood: { rows, employees, growthWeighted } }   // engine.135 B2
  *
  * Origin is the citizen's `Neighborhood` (Simulation_Ledger); destination is
  * their employer's neighborhood (`EmployerBizId` → Business_Ledger.Neighborhood).
@@ -103,11 +104,28 @@ function buildCommuteFlows_(ctx) {
     Logger.log('buildCommuteFlows_: Business_Ledger schema unexpected — skipped');
     return S.commuteFlows;
   }
+  // engine.135 B2 — tracked employer depth per hood, folded into this read
+  // (the only Business_Ledger read before Phase 3). Exact Neighborhood match,
+  // same as the commute map; 'City-wide' and child-area labels stay out of
+  // the hood layer. Consumed by buildHoodEmploymentWeights_ as a bounded
+  // presence signal — the ledger is the tracked subset, not a census.
+  var iEmpCount = bizH.indexOf('Employee_Count');
+  var iGrowth = bizH.indexOf('Growth_Rate');
+  var depth = {};
   for (var b = 1; b < bizVals.length; b++) {
     var bid = String(bizVals[b][iBid] || '').trim();
     if (!bid) continue;
-    bizHood[bid] = String(bizVals[b][iBnh] || '').trim();
+    var bh = String(bizVals[b][iBnh] || '').trim();
+    bizHood[bid] = bh;
+    if (!bh) continue;
+    var empN = iEmpCount >= 0 ? (Number(bizVals[b][iEmpCount]) || 0) : 0;
+    var grN = iGrowth >= 0 ? (Number(bizVals[b][iGrowth]) || 0) : 0;
+    if (!depth[bh]) depth[bh] = { rows: 0, employees: 0, growthWeighted: 0 };
+    depth[bh].rows++;
+    depth[bh].employees += empN;
+    depth[bh].growthWeighted += empN * grN / 100;
   }
+  S.hoodEmployerDepth = depth;
 
   // ── Citizens: home hood → work hood ────────────────────────────────────────
   var headers = ctx.ledger.headers;

@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-08-29 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-08-30 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -48,6 +48,9 @@
 
 - **ensureEngine94SheetContract_(ss)**
   Sheets: Civic_Office_Ledger, World_Config
+
+- **ensureEngine135Config_(ss)**
+  Sheets: World_Config
 
 - **ensureEngine133Config_(ss)**
   Sheets: World_Config
@@ -308,7 +311,7 @@
 ### commuteFlowEngine.js
 - **buildCommuteFlows_(ctx)**
   Reads: S.commuteFlows
-  Writes: S.commuteFlowStats, S.commuteFlows, S.commuteInbound
+  Writes: S.commuteFlowStats, S.commuteFlows, S.commuteInbound, S.hoodEmployerDepth
   Sheets: Business_Ledger
 
 - **commuteInboundExternal_(S, hood)**
@@ -498,12 +501,15 @@
 ### updateNeighborhoodDemographics.js
 - **updateNeighborhoodDemographics_(ctx)**
   Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.sportsAtmosphereEnabled, S.sportsSeason
-  Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodIllnessWeights, S.sportsAtmosphereEnabled
+  Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights, S.sportsAtmosphereEnabled
   Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate, ctx.config.illnessFallbackRate
   RNG: ctx.rng / safeRand_(ctx)
 
 - **buildHoodIllnessWeights_(ctx, S, demographics)**
   Reads: S.crimeMetrics, S.neighborhoodState, S.weatherEvents
+
+- **buildHoodEmploymentWeights_(ctx, S, demographics)**
+  Reads: S.hoodEmployerDepth, S.neighborhoodState
 
 - **buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreationDay, sportsSeason)**
   Reads: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodIllnessWeights
@@ -3513,4 +3519,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1173
+**Functions mapped:** 1175

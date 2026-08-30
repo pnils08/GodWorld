@@ -218,6 +218,7 @@ function runWorldCycle() {
     // creation, time advance, ledger initialization, or any other Cycle write.
     ensureEngine94SheetContract_(ss);
     ensureEngine133Config_(ss);  // engine.133 city-health physics keys, same self-arm contract
+    ensureEngine135Config_(ss);  // engine.135 employment envelope keys, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet

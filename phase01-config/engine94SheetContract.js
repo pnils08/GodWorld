@@ -40,6 +40,13 @@ var ENGINE133_CONFIG_SEEDS = [
   ['illnessHoodWeightMax', 2.0, 'engine.133 upper clamp on a hood structural illness weight before envelope normalization', 1, 5, false]
 ];
 
+var ENGINE135_CONFIG_SEEDS = [
+  ['employmentAttractorPull', 0.12, 'engine.135 fraction of the (attractor - rate) gap the city employment dial closes per Cycle', 0, 1, false],
+  ['employmentHoodWeightMin', 0.5, 'engine.135 lower clamp on a hood structural employment weight before envelope normalization', 0.1, 1, false],
+  ['employmentHoodWeightMax', 2.0, 'engine.135 upper clamp on a hood structural employment weight before envelope normalization', 1, 5, false],
+  ['employmentConvergenceRate', 0.25, 'engine.135 fraction of a hood Unemployed gap closed per Cycle (floor 3)', 0.05, 1, false]
+];
+
 var ENGINE94_CIVIC_STATE_COLUMNS = [
   'HighApprovalStreak',
   'AutoScandalUntilCycle',
@@ -200,6 +207,20 @@ function ensureEngine94SheetContract_(ss) {
 
 // engine.133 — self-arm the city-health physics keys. Runs right after the
 // engine.94 contract at the same call site; same inspect → append → verify shape.
+function ensureEngine135Config_(ss) {
+  if (!ss) throw new Error('engine.135 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.135 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE135_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE135_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.135 config: post-write verification failed');
+  }
+  Logger.log('engine.135 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 function ensureEngine133Config_(ss) {
   if (!ss) throw new Error('engine.133 config: spreadsheet required');
   var configSheet = ss.getSheetByName('World_Config');

@@ -5,6 +5,9 @@
  *
  * Tier 3.2 Implementation: Phase 3 (Population) demographics integration.
  *
+ * v1.4-e135 (engine.135): hood Unemployed is an adults-normalized ENVELOPE of the
+ * city rate, pointed by the authored hood profile (Neighborhood_Map IncomeTier /
+ * BoomIndex / MedianIncome) and tracked employer depth (S.hoodEmployerDepth).
  * v1.3-e133 (engine.133): hood Sick is a population-normalized ENVELOPE of the
  * city rate — structural weight (age mix × NoiseIndex × MedianIncome, the hood's
  * own canon) × same-cycle causes, Σ hood sick = cityRate × Σ pop; relief after
@@ -129,6 +132,11 @@ function updateNeighborhoodDemographics_(ctx) {
   // so Σ hood expectedSick = cityRate × Σ pop exactly (modulo rounding) — the
   // same normalization W2a gave migration above. Plan D3.
   var illnessWeights = buildHoodIllnessWeights_(ctx, S, demographics);
+  // engine.135 B2 — same shape for unemployment: the city rate is an envelope
+  // the hoods fill unevenly, pointed by the authored canon profile (income
+  // tier, boom exposure) and the tracked employer depth. Σ hood unemployed =
+  // (1 − cityRate) × Σ adults exactly (modulo rounding).
+  var employmentWeights = buildHoodEmploymentWeights_(ctx, S, demographics);
 
   // Apply changes to each neighborhood
   for (var neighborhood in demographics) {
@@ -216,14 +224,20 @@ function updateNeighborhoodDemographics_(ctx) {
     // UNEMPLOYMENT EFFECTS
     // ─────────────────────────────────────────────────────────────────────────
     // Apply employment rate to working-age population
+    // engine.135 B2 — envelope share, never a flat copy (was adults × rate ± 3,
+    // 21 identical numbers, the pre-engine.133 illness shape).
     var workingPop = demo.adults;
     var unemploymentRate = 1 - employmentRate;
-    var expectedUnemployed = Math.round(workingPop * unemploymentRate);
+    var wEmp = employmentWeights.byHood[neighborhood] || { weight: 1, structural: 1, event: 1 };
+    var expectedUnemployed = Math.round(workingPop * unemploymentRate * (wEmp.weight / employmentWeights.mean));
     var unemployedDelta = expectedUnemployed - demo.unemployed;
 
-    // Gradual adjustment
-    if (Math.abs(unemployedDelta) > 3) {
-      unemployedDelta = unemployedDelta > 0 ? 3 : -3;
+    // Converge on the engine.132/133 timescale: a fraction of the gap per
+    // cycle, floor 3, so a hood 100 off its target moves in ~10 cycles.
+    var convergeRate135 = cfgNum_(ctx, ctx.config, 'employmentConvergenceRate', 0.25);
+    var maxStep135 = Math.max(3, Math.ceil(Math.abs(unemployedDelta) * convergeRate135));
+    if (Math.abs(unemployedDelta) > maxStep135) {
+      unemployedDelta = unemployedDelta > 0 ? maxStep135 : -maxStep135;
     }
     demo.unemployed = Math.max(0, demo.unemployed + unemployedDelta);
 
@@ -273,6 +287,7 @@ function updateNeighborhoodDemographics_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   S.neighborhoodDemographics = demographics;
   S.neighborhoodIllnessWeights = illnessWeights.byHood;   // engine.133 — audit + story consumers
+  S.neighborhoodEmploymentWeights = employmentWeights.byHood;   // engine.135 — audit + story consumers
   S.demographicShifts = demographicShifts;
   S.demographicShiftsCount = demographicShifts.length;
 
@@ -289,7 +304,7 @@ function updateNeighborhoodDemographics_(ctx) {
   }
 
   ctx.summary = S;
-  Logger.log('updateNeighborhoodDemographics_ v1.3-e133: Updated ' + Object.keys(demographics).length + ' neighborhoods | Cycle ' + cycle);
+  Logger.log('updateNeighborhoodDemographics_ v1.4-e135: Updated ' + Object.keys(demographics).length + ' neighborhoods | Cycle ' + cycle);
 }
 
 
@@ -378,6 +393,74 @@ function buildHoodIllnessWeights_(ctx, S, demographics) {
   var mean = popSum > 0 ? weightedSum / popSum : 1;
   if (!(mean > 0)) mean = 1;
   return { byHood: byHood, mean: mean, citySeniorShare: citySeniorShare, cityNoise: cityNoise, cityIncome: cityIncome };
+}
+
+
+/**
+ * engine.135 B2 — per-hood employment weights for the city envelope.
+ *
+ * structural (the authored canon profile, Neighborhood_Map cols via
+ * S.neighborhoodState — a missing layer is neutral 1.0, never a guess):
+ *   income   pop-weighted city mean / MedianIncome  (poorer hood → more unemployment)
+ *   boom     1 − 0.35 × BoomIndex                   (born/anchor → less; behind/skipped → more)
+ *   depth    tracked employer depth vs city mean, log-scaled and tight — the
+ *            Business_Ledger is the TRACKED subset (~0.25%), so this is a
+ *            presence signal, not a census: no rows → neutral, never "no jobs".
+ * each bounded around 1.0; product clamped [employmentHoodWeightMin, Max].
+ *
+ * event: reserved (1.0 this wave) — chaos business cuts and economic
+ * initiatives land with Phase E (employer success as the cause).
+ *
+ * Returns { byHood: { hood: { weight, structural, event } }, mean } where mean
+ * is Σ(weight × adults) / Σ adults over the LOADED hood set.
+ */
+function buildHoodEmploymentWeights_(ctx, S, demographics) {
+  var wMin = cfgNum_(ctx, ctx.config, 'employmentHoodWeightMin', 0.5);
+  var wMax = cfgNum_(ctx, ctx.config, 'employmentHoodWeightMax', 2.0);
+  var nState = S.neighborhoodState || {};
+  var depthMap = S.hoodEmployerDepth || {};
+  var clamp = function(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); };
+  var hood, ns, adults;
+
+  // City means over the loaded set, adults-weighted.
+  var totalAdults = 0, incomeWeighted = 0, incomeAdults = 0, depthWeighted = 0, depthAdults = 0;
+  for (hood in demographics) {
+    if (!demographics.hasOwnProperty(hood)) continue;
+    adults = Number(demographics[hood].adults) || 0;
+    if (adults <= 0) continue;
+    totalAdults += adults;
+    ns = nState[hood] || {};
+    if (ns.medianIncome && isFinite(Number(ns.medianIncome)) && Number(ns.medianIncome) > 0) { incomeWeighted += Number(ns.medianIncome) * adults; incomeAdults += adults; }
+    var dRec = depthMap[hood];
+    if (dRec && Number(dRec.employees) > 0) { depthWeighted += (Number(dRec.employees) / adults) * adults; depthAdults += adults; }
+  }
+  var cityIncome = incomeAdults > 0 ? incomeWeighted / incomeAdults : null;
+  var cityDepth = depthAdults > 0 ? depthWeighted / depthAdults : null;   // jobs per adult, tracked
+
+  var byHood = {};
+  var weightedSum = 0, adultsSum = 0;
+  for (hood in demographics) {
+    if (!demographics.hasOwnProperty(hood)) continue;
+    adults = Number(demographics[hood].adults) || 0;
+    ns = nState[hood] || {};
+
+    var incF = 1, boomF = 1, depthF = 1;
+    if (cityIncome && ns.medianIncome && Number(ns.medianIncome) > 0) incF = clamp(1 + 0.5 * (cityIncome / Number(ns.medianIncome) - 1), 0.5, 1.8);
+    if (ns.boomIndex !== null && ns.boomIndex !== undefined && isFinite(Number(ns.boomIndex))) boomF = clamp(1 - 0.35 * Number(ns.boomIndex), 0.6, 1.4);
+    var d = depthMap[hood];
+    if (cityDepth && d && Number(d.employees) > 0 && adults > 0) {
+      var ratio = (Number(d.employees) / adults) / cityDepth;
+      depthF = clamp(1 - 0.15 * (Math.log(ratio) / Math.LN2), 0.8, 1.2);
+    }
+    var structural = clamp(incF * boomF * depthF, wMin, wMax);
+    var event = 1.0;
+    var weight = structural * event;
+    byHood[hood] = { weight: weight, structural: structural, event: event, incF: incF, boomF: boomF, depthF: depthF };
+    if (adults > 0) { weightedSum += weight * adults; adultsSum += adults; }
+  }
+  var mean = adultsSum > 0 ? weightedSum / adultsSum : 1;
+  if (!(mean > 0)) mean = 1;
+  return { byHood: byHood, mean: mean, cityIncome: cityIncome, cityDepth: cityDepth };
 }
 
 

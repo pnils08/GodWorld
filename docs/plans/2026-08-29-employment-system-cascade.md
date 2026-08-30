@@ -170,6 +170,8 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 ---
 
 ## Acceptance criteria (draft)
+**Status S398 (bench @11, C134):** (1) formally PASS — `cascadeAudit` `unemployment-band` on the bench (hood 3.85% vs target 5.06%, inside ±2pp; WP not stepping back, 0.9377→0.9494 over C131–C134). (2) spread ≥2pp met by hand (Temescal ~10% vs Baylight ~3%) — **`cascadeAudit` has no `unemployment-spread` lane; owed before the live-wave gate**, and its `unemployment-band` divides by pop, not by Adults as Q5 defines — re-base the audit lane to Σ Unemployed / Σ Adults in the same change. (3) met (every ND hood ≥6, no spec-adjective names). (4) partial — WealthLevel 0–12 all populated, no longer capped; hood-banded draws are D2. (5) partial — calendar promotions gone (E1); Income churn now floor-only until E2 lands.
+
 1. World_Config employment dial at the realistic-boom number; WP `employmentRate` inside 1pp of Σ hood-lived after one bench cycle and not stepping back.
 2. Hood unemployment spread ≥ 2pp between the profile's top and bottom tiers within 5 bench cycles; Σ hood unemployed = city × Σ adults every cycle (cascadeAudit invariant).
 3. Every ND hood (22) carries ≥ 6 Business_Ledger rows, none with a spec-adjective name.
@@ -189,6 +191,7 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 ---
 
 ## Changelog
+- 2026-08-30 (S398 close, later) — Acceptance status recorded; cascadeAudit run against the bench (unemployment-band PASS); audit owes an unemployment-spread lane + adults denominator.
 - 2026-08-30 (S398 close) — D3 proven C134 (289 raises, invariant holds). Bench @11 carries A/B1/B2/B3/C/D1/D3/D5/D6/E1 + the youth fix; bench writes #1–#5 logged for the live replay. Remaining: D2/D4, E2, F, then the live wave (gated on Mike's smoke of prod @7).
 - 2026-08-30 (S398, later) — E1 + D1 + D5 code shipped to bench (@9) and proven C133; D6 storefront re-base written to bench (32 rows); D3 floor coded + unit-proven, bench proof next. Plan §Phase D/E rows updated with DONE/NEXT state.
 - 2026-08-30 (S398) — Phase C landed on bench (72 rows, 46 renames, pay re-base; §Pay scale set). Bench C131 (post-B3, post-schools fix): 0 new errors, ND 22 hoods, East Oakland integrated 807/2546/533, WP 0.9377→0.942, hood spread Temescal 10.2% … Baylight 3.0%. Schools fix proven in Node (vm): month 6 → graduation events, month 10 → homecoming, all in canon voice (C131 was sim month 7, so the bench could not exercise it). Grok's inbox file accepted → `docs/research/`.

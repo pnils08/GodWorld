@@ -10,7 +10,7 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 
 ## 1. Core State & Demographics
 - **`Simulation_Ledger`**: The master citizen substrate.
-- **`World_Population`**: Macro-level population and economic metrics.
+- **`World_Population`**: Macro-level population and economic metrics. **`employmentRate` (col D) = employed share of Neighborhood_Demographics `Adults` (age 23–64), city-wide** — NOT whole-population employed share. Enforcing reader: `updateNeighborhoodDemographics_` sets each hood's `Unemployed = Adults × (1 − employmentRate)` inside the engine.135 envelope (original prod design since 2026-01-26). Writer: `applyDemographicDrift_` pulls it toward `World_Config.employmentAttractor` 0.96 (= 4% adult unemployment: realistic 5% with the boom kick), floor 0.88. Definition set S398 (engine-sheet, builder delegated the call 2026-08-29); undefined before that — see the employment cascade plan §Open questions Q5.
 - **`Neighborhood_Map`**: Spatial definitions and mapping coordinates. Cols A–O = per-cycle texture (v3NeighborhoodWriter, replace-pattern); cols past `SportsSeason` persist and belong to other engines. **engine.135 B1 authored profile cols (Y–AD): `IncomeTier` 1–6, `BoomExposure` label, `BoomIndex` −1…+1, `EmployerCharacter` label, `WealthMin`/`WealthMax` WealthLevel admission band** — values from INSTITUTIONS §Neighborhoods, written by hand via lib/sheets (bench 2026-08-29; live replay at the engine.135 deploy), read by `loadNeighborhoodState_` into `S.neighborhoodState`.
 - **`Neighborhood_Demographics`**: Demographic breakdown per neighborhood.
 - **`City_Demographics`**: City-wide demographic metrics.

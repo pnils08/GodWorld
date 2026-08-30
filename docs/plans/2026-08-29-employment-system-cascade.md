@@ -134,7 +134,7 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
   | San Antonio | 2 | absorbed | −0.3 | service-labor | 2–5 | 70000 | :363 |
   | Temescal | 1 | behind | −0.7 | clinic | 2–5 | 68000 | :385 |
 - **B2 — `buildHoodEmploymentWeights_` — CODE DONE 2026-08-29, unit-proven (`scripts/employmentEnvelope.test.js` 18/18; illness suite 29/29 untouched).** structural = income (city mean / MedianIncome, ±0.5, clamp 0.5–1.8) × boom (1 − 0.35 × BoomIndex, 0.6–1.4) × depth (log2 of tracked jobs-per-adult vs city mean × −0.15, clamp 0.8–1.2, no rows = neutral); product clamped [employmentHoodWeightMin, Max]. **event = 1.0 this wave** — chaos business cuts + economic initiatives land with Phase E (employer success as cause), not as a bolt-on here. Σ hood unemployed = (1 − city) × Σ adults; converge 25%/cycle floor 3; `S.neighborhoodEmploymentWeights`. Employer depth = `S.hoodEmployerDepth` folded into `buildCommuteFlows_`'s existing Business_Ledger read (Phase 2, exact hood match). Config self-arm `ensureEngine135Config_` (4 keys).
-- **B3 — East Oakland ND row** seeded through `ensureNeighborhoodDemographics` (21 vs 22 today; the loaded-set rule silently skips it).
+- **B3 — East Oakland ND row — DONE on bench S398 (C130: 795/2500/523/156/136, read-back exact); LIVE REPLAY at the wave deploy** (DEPLOY.md bench-write log #3, formula recomputes from the target sheet's peers — NOT `seedNeighborhoodDemographicsFromLedger_`, which counts ledger rows and would seed ~46 people).
 - **B4 — `Neighborhood_Map.MedianIncome` canon pass** — 11 placeholder hoods + Piedmont Ave 72k + KONO 32.7k re-based from the B1 profile (engine.133 illness weights already read this column live; contamination is deployed).
 
 ### Phase C — Business_Ledger six-per-hood fill (grok's 72, reviewed)
@@ -175,10 +175,12 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 - [x] **Q2 — answered 2026-08-29:** remove. No promotion because cycles passed; CareerStage is age-derived; promotions/raises/layoffs/hiring are caused by the employer's success (Phase E redesign).
 - [x] **Q3 — approved 2026-08-29** (band table), with the pushback that extended the scale to 12.
 - [x] **Q4 — approved 2026-08-29:** fields-only revision of the 103; names + hoods stay.
+- [x] **Q5 — what `World_Population.employmentRate` measures — RESOLVED S398 (2026-08-29, builder delegated: "do whatever" to the direct question).** It is the **employed share of ND Adults 23–64**, the definition the hood code has enforced since 2026-01-26 (`Unemployed = Adults × (1 − rate)`), NOT the whole-population employed share (~50%). Attractor stays at the approved 0.96 = 4% adult unemployment. Zero code churn across the 16 readers; the 0.83 / two-number guesses stay rejected. Written into `SHEETS_MANIFEST.md` §1.
 
 ---
 
 ## Changelog
+- 2026-08-29 (S398) — Q5 dial definition resolved (adults 23–64 employed share, 0.96 kept; builder delegated). B3 East Oakland ND row seeded on bench. Side defect fixed: `runYouthEngine.js` `OAKLAND_SCHOOLS` (deleted S357) rebuilt in canon voice — six "an Oakland City Schools high school in <hood>" entries, no real names (INSTITUTIONS:93), youth phase no longer throws on graduation/homecoming cycles. Next: Phase C (grok's 72).
 - 2026-08-29 (23:30, session close) — Engine-sheet departed from the plan mid-wave (changed the approved 0.96 to 0.83, invented a two-number model); reverted to the plan as approved. Bench config back at 0.96/0.88/0.96. Next session executes Phases B3→F as written.
 - 2026-08-29 (23:30) — Phases A + B2 built: dial pull + envelope + depth + self-arm; test written first (RED 7 → GREEN 18/18); bench World_Config retune + WP cell written; STUB_MAP regenerated. Bench proving next.
 - 2026-08-29 (23:00) — B1 written to SANDBOX 0827 (six columns + MedianIncome, 22/22 exact); loader reads them; live replay deferred to the wave deploy (builder rule: sandbox proves, live runs proven code + replayed writes).

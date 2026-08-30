@@ -73,6 +73,26 @@ var ACADEMIC_CALENDAR = {
   12: { period: 'winter', events: ['winter break', 'winter concerts', 'holiday programs'] }
 };
 
+// School roster for school-wide events — the real-world OAKLAND_SCHOOLS table
+// left with utilities/youthActivities.js at S357 (27776f0a) and this file kept
+// calling it, so Phase5-Youth threw "OAKLAND_SCHOOLS is not defined" on every
+// graduation (month 6) and homecoming (month 10) cycle (bench C127–C130, S398).
+// Rebuilt in canon voice: INSTITUTIONS §Education names ONE district (Oakland
+// City Schools, BIZ-00016) and NO canon campus — "write 'an Oakland City Schools
+// high school in [neighborhood]'". Real school names never return. Only .high
+// is consumed (generateSchoolWideEvents_); hoods are ND hoods with a schools /
+// family character in INSTITUTIONS §Neighborhoods. `id` is the stable youthId slug.
+var OAKLAND_SCHOOLS = {
+  high: [
+    { id: 'SCHOOL-OCS-WEST-OAKLAND', name: 'an Oakland City Schools high school in West Oakland', neighborhood: 'West Oakland' },
+    { id: 'SCHOOL-OCS-TEMESCAL',     name: 'an Oakland City Schools high school in Temescal',     neighborhood: 'Temescal' },
+    { id: 'SCHOOL-OCS-LAUREL',       name: 'an Oakland City Schools high school in Laurel',       neighborhood: 'Laurel' },
+    { id: 'SCHOOL-OCS-FRUITVALE',    name: 'an Oakland City Schools high school in Fruitvale',    neighborhood: 'Fruitvale' },
+    { id: 'SCHOOL-OCS-EAST-OAKLAND', name: 'an Oakland City Schools high school in East Oakland', neighborhood: 'East Oakland' },
+    { id: 'SCHOOL-OCS-LAKE-MERRITT', name: 'an Oakland City Schools high school in Lake Merritt', neighborhood: 'Lake Merritt' }
+  ]
+};
+
 // ============================================================================
 // MAIN ENGINE FUNCTION
 // ============================================================================
@@ -531,12 +551,12 @@ function generateSchoolWideEvents_(ctx, month, rng) {
 
   // Major school events during key periods
   if (period === 'graduation' && rng() < 0.8) {
-    var highSchools = OAKLAND_SCHOOLS ? OAKLAND_SCHOOLS.high : [];
+    var highSchools = OAKLAND_SCHOOLS.high;
     for (var h = 0; h < highSchools.length; h++) {
       if (rng() < 0.5) {
         events.push({
           youthName: 'Class of ' + (ctx.summary.simYear || 'Y?'),
-          youthId: 'SCHOOL-' + highSchools[h].name.replace(/\s/g, '-'),
+          youthId: highSchools[h].id,
           age: 18,
           eventType: 'coming_of_age',
           description: 'graduation ceremony at ' + highSchools[h].name,
@@ -568,8 +588,8 @@ function generateSchoolWideEvents_(ctx, month, rng) {
   if (period === 'fall' && rng() < 0.7) {
     var homecomingSchool = OAKLAND_SCHOOLS.high[Math.floor(rng() * OAKLAND_SCHOOLS.high.length)];
     events.push({
-      youthName: homecomingSchool.name + ' community',
-      youthId: 'SCHOOL-' + homecomingSchool.name.replace(/\s/g, '-'),
+      youthName: homecomingSchool.neighborhood + ' high school community',
+      youthId: homecomingSchool.id,
       age: 0,
       eventType: 'coming_of_age',
       description: 'homecoming celebration at ' + homecomingSchool.name,

@@ -43,6 +43,60 @@ pointers:
 5. **Quiet the rewriters.** Stop the employment roster from rewriting each cycle: too much career change, salary adjustment, and any old system forcing employment stops in favour of what this plan produces.
 6. Use engine subagents as needed; ask before starting where unclear.
 
+### Direction, second pass (builder, 2026-08-29 22:11 — answers Q1 + Q2, adds the placement + business rules)
+
+7. **Q1 = scale change + pay-scale realignment.** No row sweep.
+8. **WealthLevel is NetWorth-derived, by code, every cycle** — agree and set the bands (see §WealthLevel bands below).
+9. **Neighborhoods admit WealthLevel / NetWorth bands.** A citizen moves into a hood only if their WealthLevel fits its band — a WL9 does not live in a WL1–3 hood.
+10. **Every business on the ledger — the 103 existing and the 72 new — is revised to embody the INSTITUTIONS boom history of its hood.** Businesses and canon tell the same story.
+11. **Pay scales realigned to the sim's current state as canon lays it out.** The intent: neighborhoods accurate → businesses in them accurate → citizens moving into them accurately → rows self-heal.
+12. **Tracked-employer floor:** a citizen already working a tracked business has Income raised to that business's minimum if below; never reduced if above. **Sports-layer salaries exempt** (game engine owns them).
+13. **Self-employed and UNTRACKED / off-ledger** salaries are adjusted to the new scale too.
+14. **Employment roster is append-only / individual-change-only. "Nothing free."** No promotion because N cycles passed. **CareerStage is age-related.** A chaos car or a dice-roll lottery may hit someone; there is no standing job-hopping or salary drift for no reason. Every old system that pushes everything up is out.
+15. **Business success is the causation:** a business's success drives its layoffs, hiring, **and** promotions / raises for current staff.
+16. **Retired or deceased → Income 0.**
+
+---
+
+## WealthLevel bands (proposal — engine-sheet, pending builder sign-off on the hood column)
+
+NetWorth → WealthLevel thresholds stay at S363 (`deriveWealthLevel_`, `generationalWealthEngine.js:594`): 0 <1k · 1 ≥1k · 2 ≥10k · 3 ≥25k · 4 ≥50k · 5 ≥100k · 6 ≥250k · 7 ≥500k · 8 ≥1M · 9 ≥5M · 10 ≥50M. Recomputed every cycle by `captureWealthLevels_` (`:560-590`, already live). Live distribution (snapshot 2026-08-29): WL0 105 · 1–4 54 · 5 111 · 6 247 · 7 219 · 8 200 · 9 27 · 10 1 — the ledger skews rich; the hood bands below are what make that skew land somewhere specific.
+
+Hood admission band (WealthLevel min–max for a move-in; residents already inside a hood are not evicted by this table — mismatches heal by moves, Phase F). Each line cites the INSTITUTIONS entry it reads from.
+
+| Hood | WL band | Canon line |
+|---|---|---|
+| Lake Merritt | 8–10 | inherited money, the elite address the boom never touched |
+| Rockridge | 7–9 | earned money — doctors and directors |
+| Piedmont Ave | 7–9 | boutique/medical corridor serving the lake-ring money |
+| West Oakland | 6–9 | boom born here; built-out and expensive; first-wave money (Mims WL9 canon-pinned) |
+| Baylight District | 6–9 | new-build showcase, tech buyers, brand-new units |
+| Brooklyn | 6–8 | newest mid-rise after Baylight, quieter |
+| Jack London | 5–8 | waterfront office + nightlife |
+| Downtown | 5–8 | institutional spine, money administered |
+| Grand Lake | 5–7 | lake ring's public face, family retail |
+| Fruitvale | 4–7 | transit-hub young professional over a multigenerational base |
+| Uptown | 4–7 | young-professional entertainment district |
+| Adams Point | 4–7 | younger and renting, the lake without the lineage |
+| Chinatown | 3–7 | refused; multigenerational family businesses that predate the campuses |
+| KONO | 3–6 | emerging arts corridor |
+| Eastlake | 3–6 | lake money thins into the flatlands |
+| Laurel | 3–6 | family belt that stayed reachable; works in the boom without living in it |
+| Dimond | 3–6 | village living down a name; prosperity arrived late |
+| Glenview | 3–6 | intact, unremarkable, cheap by reputation |
+| Ivy Hill | 3–6 | quiet to invisibility |
+| East Oakland | 2–6 | frontier, the boom arriving fast — widest band in the city |
+| San Antonio | 2–5 | working core, pressured, where the people who service the boom live |
+| Temescal | 2–5 | left behind, health-strained; not squalor |
+
+Pay scale follows the same table: a hood's income tier sets the salary band for its businesses (`Avg_Salary`) and for UNTRACKED / self-employed residents; the tracked-employer floor (point 12) = `Avg_Salary × 0.75` (entry/early) · `1.0` (mid) · `1.3` (senior). Numbers re-based against the S363 thresholds so a mid-career resident of a WL 6–8 hood accrues toward WL6–7 on that hood's pay, not past it.
+
+**Canon-pinned exemptions (engine-sheet rule):** Tier-1 citizens are never auto-moved or re-paid by this plan; Tier-2 only by a story event. Sports-layer rows untouched (point 12). Real-world Stack rows (INSTITUTIONS §The Stack) keep their names.
+
+**Existing-business revision scope (engine-sheet rule, pending builder confirmation):** fields re-base (Avg_Salary, Employee_Count, Growth_Rate, Sector where wrong); names and Neighborhood stay — the four child-fold rows are still not remapped; real-world names already on the ledger stay per the S361 mutation line unless the builder says otherwise.
+
+**CareerStage from age (point 14):** student <22 · early 22–29 · mid 30–44 · senior 45–64 · retired ≥65; `YearsInCareer` breaks ties at the edges (a 46-year-old with 3 years is mid). This is a derivation, so it re-stamps CareerStage on every civilian row once — engine.82 tried a role-beats-age derivation S366 and was **reverted** (`f05a59e4`); the revert reason is read before this task is written.
+
 ---
 
 ## Phases (tasks expand under each once cards + answers land)
@@ -91,11 +145,14 @@ pointers:
 
 ## Open questions
 
-- [ ] **Q1 (blocks Phase D):** existing 967 rows — redefine the scale (bands + future draws) and correct only provable outliers by diff-restore, or rewrite Income/NetWorth for every row? Recommendation: scale change, not sweep (`project_simulation-ledger-no-column-is-true` — repair is guard + targeted restore, never a sweep).
-- [ ] **Q2 (blocks Phase E scope):** `updateCareerProgression_` calendar promotion rolls — remove outright (promotions become career-engine transitions with pay consequences) or throttle to ~1/cycle? Recommendation: remove; one promotion path, event-driven.
+- [x] **Q1 — answered 2026-08-29:** scale change + pay-scale realignment; no row sweep. The only row-level Income writes are the tracked-employer floor (raise-only), UNTRACKED/self-employed re-base, and retired/deceased → 0.
+- [x] **Q2 — answered 2026-08-29:** remove. No promotion because cycles passed; CareerStage is age-derived; promotions/raises/layoffs/hiring are caused by the employer's success (Phase E redesign).
+- [ ] **Q3 (blocks Phase B1/F):** builder sign-off on the hood WealthLevel band column above (canon content).
+- [ ] **Q4 (blocks Phase C):** existing 103 businesses — confirm fields-only revision (names + hoods stay) or authorize renames/remaps too.
 
 ---
 
 ## Changelog
+- 2026-08-29 (22:11) — Builder second pass captured (points 7–16): Q1/Q2 answered, hood admission bands, tracked-employer floor, business-success causation, CareerStage by age, retired/deceased Income 0. WealthLevel band table proposed; Q3/Q4 opened.
 - 2026-08-29 (16:20) — Wiring cards returned (`runCareerEngine_`, `checkForPromotions_`); churn measured from LifeHistory_Log; the C103–C104 promotion spike traced to `updateCareerProgression_`; Phase E filled, Q2 sharpened.
 - 2026-08-29 — Direction captured (S397 engine-sheet); phases sketched; wiring cards dispatched for `runCareerEngine_` and `checkForPromotions_`; live C104 numbers recorded in sources.

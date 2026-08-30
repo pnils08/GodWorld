@@ -551,16 +551,21 @@ function applyTrackedEmployerFloor_(ctx) {
   if (!bizSheet) return out;
   var bizData = bizSheet.getDataRange().getValues();
   if (!bizData || bizData.length < 2) return out;
-  var bh = bizData[0], bId = -1, bSal = -1;
+  var bh = bizData[0], bId = -1, bSal = -1, bSec = -1;
   for (var c = 0; c < bh.length; c++) {
     var hn = String(bh[c]).trim();
-    if (hn === 'BIZ_ID') bId = c; else if (hn === 'Avg_Salary') bSal = c;
+    if (hn === 'BIZ_ID') bId = c; else if (hn === 'Avg_Salary') bSal = c; else if (hn === 'Sector') bSec = c;
   }
   if (bId < 0 || bSal < 0) return out;
   var salaryById = {};
   for (var b = 1; b < bizData.length; b++) {
     var id = String(bizData[b][bId] || '').trim();
     var sal = Number(bizData[b][bSal]) || 0;
+    // Sports-franchise employers set no floor: their Avg_Salary is athlete
+    // pay (Oakland Athletics 3.3M), and a front-office ENGINE row would be
+    // floored at it. Same regex sectorCategory_ uses to keep hires out.
+    var sector = bSec >= 0 ? String(bizData[b][bSec] || '') : '';
+    if (/sports|stadium|franchise|athletic/i.test(sector)) continue;
     if (id && sal > 0) salaryById[id] = sal;
   }
 

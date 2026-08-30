@@ -175,6 +175,7 @@ function ctxWith(rows, cycle) {
     row2({ POPID: 'F10', age: 70, CareerStage: 'retired', Income: 0, EmployerBizId: 'BIZ-00170' }),           // retired: no floor
     row2({ POPID: 'F11', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', Status: 'deceased' }),
     row2({ POPID: 'F12', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-99999' }),    // employer not on ledger
+    row2({ POPID: 'F13', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00005' }),    // ENGINE row at a sports franchise: athlete avg must not floor it
   ];
   const ctx = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {},
     ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL.map(r => r.slice()) }) } : null } };
@@ -192,6 +193,7 @@ function ctxWith(rows, cycle) {
   assert('D3 retired: no floor', inc('F10') === 0, inc('F10'));
   assert('D3 deceased: no floor', inc('F11') === 30000, inc('F11'));
   assert('D3 unknown employer id: no floor', inc('F12') === 30000, inc('F12'));
+  assert('D3 sports-franchise employer sets no floor for an ENGINE row', inc('F13') === 30000, inc('F13'));
   assert('D3 result counts', res.raised === 3 && res.checked >= 3, JSON.stringify(res));
   assert('D3 no LifeHistory line (a floor correction is not an event)', ctx.ledger.rows.every(r => String(r[I2('LifeHistory')]) === 'Y1C1 — born'));
   assert('D3 ledger dirty', ctx.ledger.dirty === true);

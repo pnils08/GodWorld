@@ -462,17 +462,13 @@ function calculateCitizenIncomes_(ctx) {
     // both count; 'inactive' keeps its old skip.
     var sportsRow = isSportsLayerRow_(row, iClockMode, iEconKey);
     if (sportsRow) continue;
-    // Retirement is AGE (≥65, the same line E1 derives CareerStage from) or a
-    // deliberate Status=Retired — never the stored CareerStage, which E1 may be
-    // about to correct later in this same cycle (the 64-year-old stamped
-    // 'retired' while Active would lose her salary first and only get it back
-    // if a tracked employer floors it). Tier 1–2 exempt like the D3 floor:
-    // their money moves by story, not by plan (a retired star's $220k is
-    // Paulson's call).
+    // Retirement is an EVENT — Status=Retired — never an age and never the
+    // stored CareerStage (builder, 2026-08-30: a birthday retires nobody; 63
+    // Active citizens are 65+). Deceased → 0 always. Tier 1–2 exempt like the
+    // D3 floor: their money moves by story, not by plan (a retired star's
+    // $220k is Paulson's call).
     var tierD5 = iTier >= 0 ? Number(row[iTier]) : 4;
-    var birthYearD5 = iBirthYear >= 0 ? (Number(row[iBirthYear]) || 0) : 0;
-    var ageD5 = birthYearD5 > 0 ? (simYear - birthYearD5) : 30;
-    if (status === 'deceased' || ((status === 'retired' || ageD5 >= 65) && tierD5 !== 1 && tierD5 !== 2)) {
+    if (status === 'deceased' || (status === 'retired' && tierD5 !== 1 && tierD5 !== 2)) {
       if ((Number(row[iIncome]) || 0) !== 0) {
         row[iIncome] = 0;
         updated++;

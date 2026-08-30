@@ -326,7 +326,11 @@ function isSportsLayerRow_(row, iClock, iEcon) {
 function deriveCareerStageFromAge_(age, yearsInCareer) {
   var y = Number(yearsInCareer) || 0;
   if (age < 22) return CAREER_STAGES.STUDENT;
-  if (age >= 65) return CAREER_STAGES.RETIRED;
+  // No age retires anyone (builder, 2026-08-30: "just cause a citizen is 65
+  // doesn't automatically retire them" — 98 citizens are 65+ by the engine
+  // clock, 63 of them working; a mayor or an editor does not stop on a
+  // birthday). Retirement is an EVENT: Status=Retired, which the caller
+  // skips before reaching this derivation. 45+ is senior.
   // YearsInCareer 0/blank is UNKNOWN (never accrued), not "just started" —
   // the tie-break only applies when the years are known.
   if (y <= 0) return age >= 45 ? CAREER_STAGES.SENIOR : (age >= 30 ? CAREER_STAGES.MID : CAREER_STAGES.ENTRY);
@@ -396,7 +400,7 @@ function updateCareerProgression_(ctx, cycle, rng) {
     // engine.135 E1 (S398, builder direction points 14: "Nothing free" —
     // no promotion because N cycles passed; CareerStage is age-related).
     // CareerStage is DERIVED, not rolled: student <22 · entry 22–29 · mid
-    // 30–44 · senior 45–64 · retired ≥65, with YearsInCareer breaking ties
+    // 30–44 · senior 45+ (retirement is an event, never an age), YearsInCareer breaking ties
     // DOWNWARD at the band edges (a 46-year-old with 3 career years is mid;
     // a 33-year-old with 1 is entry). The age band is the ceiling — years
     // never lift a citizen above it. The calendar rolls this replaced
@@ -414,9 +418,12 @@ function updateCareerProgression_(ctx, cycle, rng) {
     // S320 convention) and what fed Dybantsa into settleAdulthood_ at 18.
     if (isSportsLayerRow_(row, iClockCP, iEconCP)) {
       // leave CareerStage, Income and RoleType exactly as the sports layer set them
-    } else if (status === 'retired') {
+    } else if (status === 'retired' || careerStageClass_(row[iCareerStage]) === 'RETIRED') {
       // A deliberate Status=Retired (a 37-year-old ex-A's star, Paulson's
       // roster decisions) is not re-derived from age — the stage stays retired.
+      // An existing 'retired' stamp is left alone too: un-retiring the 84
+      // rows the old age rule stamped would be the same mass edit in reverse.
+      // Retirement changes by event (Status), never by this derivation.
     } else {
       var derived = deriveCareerStageFromAge_(age, yearsInCareer);
       if (String(row[iCareerStage] || '') !== derived) {

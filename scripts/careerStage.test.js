@@ -68,6 +68,7 @@ function ctxWith(rows, cycle) {
     row({ POPID: 'P5', age: 46, CareerStage: 'senior', YearsInCareer: 3 }),      // tie-break: senior band, too few years → mid
     row({ POPID: 'P6', age: 33, CareerStage: 'senior', YearsInCareer: 1 }),      // tie-break: mid band, too few years → entry
     row({ POPID: 'P7', age: 70, CareerStage: 'senior', YearsInCareer: 40 }),
+    row({ POPID: 'P14', age: 70, CareerStage: 'retired', Status: 'Active', YearsInCareer: 40 }), // old age-rule stamp: left alone, not flipped back
     row({ POPID: 'P8', age: 19, CareerStage: 'senior', ClockMode: 'GAME', Income: 900000 }),
     row({ POPID: 'P9', age: 40, CareerStage: 'entry-level', EconomicProfileKey: 'SPORTS_OVERRIDE' }),
     row({ POPID: 'P10', age: 40, CareerStage: 'entry-level', Status: 'deceased' }),
@@ -86,7 +87,8 @@ function ctxWith(rows, cycle) {
   assert('E1 45–64 → senior', st('P4') === 'senior', st('P4'));
   assert('E1 tie-break: 46 with 3 years → mid-career', st('P5') === 'mid-career', st('P5'));
   assert('E1 tie-break: 33 with 1 year → entry-level', st('P6') === 'entry-level', st('P6'));
-  assert('E1 ≥65 → retired', st('P7') === 'retired', st('P7'));
+  assert('E1 70 and Active stays senior — no age retires anyone', st('P7') === 'senior', st('P7'));
+  assert('E1 existing retired stamp on an Active 70-year-old is left alone', st('P14') === 'retired', st('P14'));
   assert('E1 GAME row untouched', st('P8') === 'senior', st('P8'));
   assert('E1 SPORTS_OVERRIDE row untouched', st('P9') === 'entry-level', st('P9'));
   assert('E1 deceased untouched', st('P10') === 'entry-level', st('P10'));
@@ -144,7 +146,7 @@ function ctxWith(rows, cycle) {
   const ctx = ctxWith(rows); ctx.rng = () => 0.5;
   const res = calculateCitizenIncomes_(ctx);
   const inc = p => Number(ctx.ledger.rows.find(x => x[I('POPID')] === p)[I('Income')]);
-  assert('D5 retired (ENGINE) → 0', inc('R1') === 0, inc('R1'));
+  assert('D5 stage-retired but Status Active: keeps salary (stage is not the event)', inc('R1') === 82000, inc('R1'));
   assert('D5 deceased → 0', inc('R2') === 0, inc('R2'));
   assert('D5 retired by Status too → 0', inc('R3') === 0, inc('R3'));
   assert('D5 retired athlete (GAME) untouched', inc('R4') === 2000000, inc('R4'));
@@ -152,10 +154,10 @@ function ctxWith(rows, cycle) {
   assert('D5 active seeded adult untouched', inc('R6') === 61000, inc('R6'));
   assert('D5 minor → 0 (existing gate)', inc('R7') === 0, inc('R7'));
   assert('D5 unseeded zero-income adult still gets the fallback fill', inc('R8') > 0, inc('R8'));
-  assert('D5 false-retired Active 64-year-old keeps her salary', inc('R9') === 83497, inc('R9'));
+  assert('D5 Active 64-year-old stamped retired keeps her salary', inc('R9') === 83497, inc('R9'));
   assert('D5 Tier-1 retired star untouched', inc('R10') === 223635, inc('R10'));
-  assert('D5 68-year-old is retired by age regardless of stamped stage', inc('R11') === 0, inc('R11'));
-  assert('D5 updated count: R1 R2 R3 R11 zeroed + minor + fill', res.updated === 6, JSON.stringify(res));
+  assert('D5 68-year-old Active senior keeps salary — no age retires anyone', inc('R11') === 90000, inc('R11'));
+  assert('D5 updated count: R2 (deceased) + R3 (Status Retired) zeroed + minor + fill', res.updated === 4, JSON.stringify(res));
 }
 
 // ── D3. tracked-employer Income floor ───────────────────────────────────────

@@ -50,6 +50,8 @@ assert('hiring window is dial-steered', /\/ 52 \* gapFactor/.test(src));
 // E3 (S401, builder points 5/14): hiring reaches only the jobless, in their own field
 assert('matcher candidates = blank employer only (UNTRACKED keep their job)', /var uEmp = safeStr\(uRow\[iEmployerBizId\]\)\.trim\(\);\n\s*if \(uEmp !== ''\) continue;/.test(src) && !/uEmp !== 'UNTRACKED'/.test(src));
 assert('cross-field fallback deleted', !/anyField/.test(src) && !/one career-changer at most/.test(src));
+// Doctrine point 21: the lottery of chance is rare — ≈1 employer event per ten cycles city-wide
+assert('RARE_EVENT_SCALE = 0.1 applied to both budgets', sandbox.RARE_EVENT_SCALE === 0.1 && /promoP = [^\n]*RARE_EVENT_SCALE\)/.test(src) && /layoffP = [^\n]*RARE_EVENT_SCALE\)/.test(src));
 assert('reconciliation rate-limited', /Math\.min\(shortfall, 2\)/.test(src));
 
 // ── fixtures ────────────────────────────────────────────────────────────────
@@ -87,8 +89,8 @@ const bl = rows => [BLH].concat(rows);
     row({ POPID: 'P3', LastPromotionCycle: 0, Income: 80000 }),   // never promoted, higher income → second
     row({ POPID: 'P4', LastPromotionCycle: 190, Income: 50000 }),
   ];
-  // BIZ-1 growth 10%/yr, 4 staff → promoP = 10/5200 × 4 = 0.00769; draw 0.005 hits; second roll 0.5 → ×1.09
-  const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.005, 0.5]);
+  // BIZ-1 growth 10%/yr, 4 staff → promoP = 10/5200 × 4 × 0.1 (rare) = 0.000769; draw 0.0005 hits; second roll 0.5 → ×1.09
+  const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.0005, 0.5]);
   const S = makeS(); const log = []; intents.length = 0;
   const out = applyEmployerSuccess_(ctx, CYCLE, roll, log, S, 1);
   const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
@@ -109,8 +111,8 @@ const bl = rows => [BLH].concat(rows);
     row({ POPID: 'P2', Income: 45000, LifeHistory: 'Y2C9 — [CareerState] industry=service|employer=small|level=1|tenure=1' }), // lowest level → victim
     row({ POPID: 'P3', Income: 40000, LifeHistory: 'Y2C9 — [CareerState] industry=service|employer=small|level=2|tenure=2' }),
   ];
-  // growth −20%/yr, 3 staff → layoffP = 20/5200 × 3 = 0.0115; draw 0.01 hits; cut roll 0.5 → ×0.84
-  const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, -20]]), [0.01, 0.5]);
+  // growth −20%/yr, 3 staff → layoffP = 20/5200 × 3 × 0.1 (rare) = 0.00115; draw 0.001 hits; cut roll 0.5 → ×0.84
+  const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, -20]]), [0.001, 0.5]);
   const S = makeS(); const log = []; intents.length = 0;
   const out = applyEmployerSuccess_(ctx, CYCLE, roll, log, S, 1);
   const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
@@ -164,18 +166,18 @@ const bl = rows => [BLH].concat(rows);
 
 // ── gapFactor steers: below the attractor promotions are likelier, layoffs rarer ──
 {
-  const mk = gf => { const { ctx, roll } = ctxWith([row({ POPID: 'P1' })], bl([['BIZ-1', 'X', 'Retail', 'Temescal', 6, 40000, 0, 10]]), [0.0025, 0.5]); return applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), gf); };
-  // promoP = 10/5200 × 1 = 0.00192; ×1.5 = 0.00288 (hit at 0.0025); ×1.0 misses
+  const mk = gf => { const { ctx, roll } = ctxWith([row({ POPID: 'P1' })], bl([['BIZ-1', 'X', 'Retail', 'Temescal', 6, 40000, 0, 10]]), [0.00025, 0.5]); return applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), gf); };
+  // promoP = 10/5200 × 1 × 0.1 = 0.000192; ×1.5 = 0.000288 (hit at 0.00025); ×1.0 misses
   assert('gapFactor 1.5 turns a near-miss into a promotion', mk(1.5).promotions === 1 && mk(1.0).promotions === 0);
-  const mkL = gf => { const { ctx, roll } = ctxWith([row({ POPID: 'P1' })], bl([['BIZ-1', 'X', 'Retail', 'Temescal', 6, 40000, 0, -10]]), [0.0015, 0.5]); return applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), gf); };
-  // layoffP = 10/5200 × 1 = 0.00192; ÷1.5 = 0.00128 (miss at 0.0015); ÷1.0 hits
+  const mkL = gf => { const { ctx, roll } = ctxWith([row({ POPID: 'P1' })], bl([['BIZ-1', 'X', 'Retail', 'Temescal', 6, 40000, 0, -10]]), [0.00015, 0.5]); return applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), gf); };
+  // layoffP = 10/5200 × 1 × 0.1 = 0.000192; ÷1.5 = 0.000128 (miss at 0.00015); ÷1.0 hits
   assert('gapFactor 1.5 spares a layoff that 1.0 fires', mkL(1.5).layoffs === 0 && mkL(1.0).layoffs === 1);
 }
 
 // ── determinism: same ledger, same rng → same outcome ──────────────────────
 {
   const rows = [row({ POPID: 'P1', LastPromotionCycle: 0 }), row({ POPID: 'P2', LastPromotionCycle: 0 })];
-  const run = () => { const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'X', 'Retail', 'Temescal', 6, 40000, 0, 30]]), [0.001, 0.25]); applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), 1); return ctx.ledger.rows.map(r => r[I('POPID')] + ':' + r[I('Income')]).join(','); };
+  const run = () => { const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'X', 'Retail', 'Temescal', 6, 40000, 0, 30]]), [0.0001, 0.25]); applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), 1); return ctx.ledger.rows.map(r => r[I('POPID')] + ':' + r[I('Income')]).join(','); };
   assert('deterministic', run() === run());
 }
 

@@ -96,9 +96,10 @@ function sectorCategory_(sector, strict) {
  * Per tracked business per cycle: its Growth_Rate (%/yr — the same signal that
  * already sizes its hiring windows) sets a promotion budget for its staff;
  * contraction sets a layoff budget. At most one of each per business per
- * cycle; expected across the ledger ≈ Σ |g|/5200 × staff ≈ 1–2 Income-moving
- * events per cycle, steered by the city dial (gapFactor: below the attractor
- * → more promotions, fewer layoffs). Beneficiary = longest since
+ * cycle; expected across the ledger ≈ Σ |g|/5200 × staff × RARE_EVENT_SCALE
+ * ≈ one Income-moving event per TEN cycles city-wide (builder doctrine point
+ * 21: chance is a rare anomaly, never a cadence), steered by the city dial
+ * (gapFactor: below the attractor → more promotions, fewer layoffs). Beneficiary = longest since
  * LastPromotionCycle, then lowest Income, then POPID; victim = lowest career
  * level, then lowest Income, then POPID — deterministic, one rng draw per
  * business. Promotion: Income +6–12%, LastPromotionCycle = cycle,
@@ -107,6 +108,8 @@ function sectorCategory_(sector, strict) {
  * employer, no employer event (SELF_EMPLOYED / UNTRACKED / blank are outside).
  * Sports orgs, GAME/CIVIC/MEDIA rows, Tier 1–2 and the sports layer are outside.
  */
+var RARE_EVENT_SCALE = 0.1; // engine.135 doctrine point 21 — see applyEmployerSuccess_
+
 function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
   var out = { promotions: 0, layoffs: 0, businesses: 0 };
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
@@ -161,8 +164,12 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
     if (!b.staff.length) continue;
     out.businesses++;
     var n = b.staff.length;
-    var promoP = Math.min(0.5, Math.max(0, b.growth) / 100 / 52 * n * gf);
-    var layoffP = Math.min(0.5, Math.max(0, -b.growth) / 100 / 52 * n / gf);
+    // Builder doctrine point 21 (2026-08-30): the lottery of chance is RARE — a
+    // true anomaly. RARE_EVENT_SCALE takes the city-wide expectation from ≈1
+    // per cycle to ≈1 per ten cycles; when it fires there is an employer
+    // reason behind it, but it is never a cadence a citizen can count on.
+    var promoP = Math.min(0.5, Math.max(0, b.growth) / 100 / 52 * n * gf * RARE_EVENT_SCALE);
+    var layoffP = Math.min(0.5, Math.max(0, -b.growth) / 100 / 52 * n / gf * RARE_EVENT_SCALE);
     var draw = roll();
     if (promoP > 0 && draw < promoP) {
       var who = b.staff.slice().sort(function(a, c2) {

@@ -13,7 +13,9 @@
  *   sentiment, crimeIndex, retailVitality, eventAttractiveness,   // fast cols (citizen-movable)
  *   trajectory, trajectoryMomentum, housingPressure, medianRent,  // slow cols (engine-owned, S315 trajectory block)
  *   migrationFlow,
- *   noiseIndex, medianIncome                                      // engine.133 structural layers
+ *   noiseIndex, medianIncome,                                     // engine.133 structural layers
+ *   incomeTier, boomExposure, boomIndex, employerCharacter,
+ *   wealthMin, wealthMax                                          // engine.135 B1 authored hood profile
  * }
  *
  * Read-only — no sheet writes, no intents. ES5-safe.
@@ -49,6 +51,16 @@ function loadNeighborhoodState_(ctx) {
   // envelope weights from (22/22 populated live at C104): density proxy + income.
   var iNoise = idx('NoiseIndex');
   var iIncome = idx('MedianIncome');
+  // engine.135 B1 — the authored hood economic profile (INSTITUTIONS
+  // §Neighborhoods rendered as Neighborhood_Map columns, ADR-0016: the sheet is
+  // the truth, code reads it). Employment envelope, pay bands, business fill
+  // and placement all key off these six; a blank reads null, never a default.
+  var iTier = idx('IncomeTier');
+  var iBoom = idx('BoomExposure');
+  var iBoomIdx = idx('BoomIndex');
+  var iEmpChar = idx('EmployerCharacter');
+  var iWMin = idx('WealthMin');
+  var iWMax = idx('WealthMax');
 
   if (iHood < 0) return;
 
@@ -87,7 +99,13 @@ function loadNeighborhoodState_(ctx) {
       medianRent: num(row, iRent),
       migrationFlow: num(row, iFlow),
       noiseIndex: num(row, iNoise),      // engine.133
-      medianIncome: num(row, iIncome)    // engine.133
+      medianIncome: num(row, iIncome),   // engine.133
+      incomeTier: num(row, iTier),                                            // engine.135 B1 (1 pressured … 6 elite)
+      boomExposure: iBoom >= 0 ? (row[iBoom] || '').toString().trim() : '',   // engine.135 B1 (canon label)
+      boomIndex: num(row, iBoomIdx),                                          // engine.135 B1 (−1 … +1)
+      employerCharacter: iEmpChar >= 0 ? (row[iEmpChar] || '').toString().trim() : '', // engine.135 B1
+      wealthMin: num(row, iWMin),                                             // engine.135 B1 (WealthLevel admission band)
+      wealthMax: num(row, iWMax)                                              // engine.135 B1
     };
     loaded++;
   }

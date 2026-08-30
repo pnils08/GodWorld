@@ -106,7 +106,32 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 - WP `employmentRate` cell written to the hood-lived aggregate at write time (live C104: 0.933) — a cell alone is dead (the band steps it back within cycles), so retune + cell + envelope bench together as one wave. Config retunes get a bench fire (engine.102 proof pattern).
 
 ### Phase B — Hood economic profile + envelope
-- **B1 — machine-readable canon.** One table, `lib/hoodEconomicProfile.js` (or a `Neighborhood_Map` column set — decided at task time), one row per INSTITUTIONS hood: `incomeTier` (inherited-elite / earned-affluent / professional / working / pressured / behind), `boomExposure` (born / anchor / transit / crossing / untouched / refused / skipped / behind), `employerCharacter` (institutional / campus / nightlife / retail-village / residential / medical / …). Every value cites its INSTITUTIONS line. This is engine.134's deliverable, folded here — the profile replaces the four training-data tables as the economic authority; the age-mod tables stay age-only.
+- **B1 — machine-readable canon. DONE on bench 2026-08-29 (22/22 read-back exact); LIVE REPLAY PENDING at the wave deploy.** Home = six `Neighborhood_Map` columns (ADR-0016: sheet is truth; the v3 writer owns only A–O so appended columns persist): `IncomeTier` 1–6, `BoomExposure` label, `BoomIndex` −1…+1, `EmployerCharacter` label, `WealthMin`/`WealthMax` (admission band), plus `MedianIncome` re-based (B4 folded in). `loadNeighborhoodState_` reads them into `S.neighborhoodState` (`incomeTier, boomExposure, boomIndex, employerCharacter, wealthMin, wealthMax`). Writer script: scratchpad `hoodProfile.js` (table below is the durable copy; re-run against live with `--apply` at deploy — it resizes the grid, appends headers, writes rows, reads back). The table replaces the four training-data hood tables as the economic authority; the age-mod tables stay age-only.
+
+  | Hood | Tier | Boom | Idx | Employer | WL | MedianIncome | INSTITUTIONS line |
+  |---|---|---|---|---|---|---|---|
+  | Lake Merritt | 6 | untouched | 0.3 | residential | 8–12 | 185000 | :332 |
+  | Rockridge | 5 | earned | 0.7 | professional | 7–11 | 160000 | :387 |
+  | Piedmont Ave | 5 | corridor | 0.4 | medical | 7–11 | 150000 | :381 |
+  | West Oakland | 5 | born | 0.9 | campus | 6–12 | 145000 | :347 |
+  | Baylight District | 5 | anchor | 1.0 | stadium | 6–12 | 140000 | :336 |
+  | Brooklyn | 4 | new-build | 0.8 | residential | 6–8 | 130000 | :349 |
+  | Downtown | 4 | spine | 0.6 | institutional | 5–8 | 120000 | :353 |
+  | Jack London | 4 | evening | 0.6 | nightlife | 5–8 | 118000 | :357 |
+  | Grand Lake | 3 | public-face | 0.4 | retail | 5–7 | 105000 | :393 |
+  | Fruitvale | 3 | transit | 0.7 | transit-retail | 4–7 | 98000 | :361 |
+  | Uptown | 3 | nightlife | 0.6 | nightlife | 4–7 | 96000 | :334 |
+  | Adams Point | 3 | spillover | 0.4 | residential | 4–7 | 95000 | :391 |
+  | Chinatown | 3 | refused | 0.0 | family-retail | 3–7 | 84000 | :355 |
+  | KONO | 3 | emerging | 0.3 | arts | 3–6 | 82000 | :330 |
+  | Eastlake | 3 | mixed | 0.0 | mixed | 3–6 | 84000 | :395 |
+  | Laurel | 3 | reachable | −0.1 | schools-retail | 3–6 | 86000 | :399 |
+  | Dimond | 2 | skipped | −0.4 | village-retail | 3–6 | 80000 | :369 |
+  | Glenview | 2 | skipped | −0.4 | residential | 3–6 | 82000 | :371 |
+  | Ivy Hill | 2 | skipped | −0.4 | residential | 3–6 | 78000 | :373 |
+  | East Oakland | 2 | crossing | 0.2 | construction | 2–6 | 72000 | :377 |
+  | San Antonio | 2 | absorbed | −0.3 | service-labor | 2–5 | 70000 | :363 |
+  | Temescal | 1 | behind | −0.7 | clinic | 2–5 | 68000 | :385 |
 - **B2 — `buildHoodEmploymentWeights_`** in `updateNeighborhoodDemographics.js`, mirror of `buildHoodIllnessWeights_` (:315): structural = profile incomeTier × boomExposure × bounded employer depth (Business_Ledger Σ Employee_Count / adults, tracked-subset so presence-only, absent = neutral); event = chaos business cuts in the hood this cycle (+), economic initiatives in the hood (−), Σ ledger growth in the hood (−). Σ hood unemployed = city × Σ adults; clamp + converge as illness; `S.neighborhoodEmploymentWeights` for audit/story.
 - **B3 — East Oakland ND row** seeded through `ensureNeighborhoodDemographics` (21 vs 22 today; the loaded-set rule silently skips it).
 - **B4 — `Neighborhood_Map.MedianIncome` canon pass** — 11 placeholder hoods + Piedmont Ave 72k + KONO 32.7k re-based from the B1 profile (engine.133 illness weights already read this column live; contamination is deployed).
@@ -153,6 +178,7 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 ---
 
 ## Changelog
+- 2026-08-29 (23:00) — B1 written to SANDBOX 0827 (six columns + MedianIncome, 22/22 exact); loader reads them; live replay deferred to the wave deploy (builder rule: sandbox proves, live runs proven code + replayed writes).
 - 2026-08-29 (22:21) — **Approved.** WealthLevel scale extended 10→12 on builder pushback (≥$50M / ≥$250M / ≥$1B); elite hood bands open-ended; Q3/Q4 closed; plan ACTIVE.
 - 2026-08-29 (22:11) — Builder second pass captured (points 7–16): Q1/Q2 answered, hood admission bands, tracked-employer floor, business-success causation, CareerStage by age, retired/deceased Income 0. WealthLevel band table proposed; Q3/Q4 opened.
 - 2026-08-29 (16:20) — Wiring cards returned (`runCareerEngine_`, `checkForPromotions_`); churn measured from LifeHistory_Log; the C103–C104 promotion spike traced to `updateCareerProgression_`; Phase E filled, Q2 sharpened.

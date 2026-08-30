@@ -96,7 +96,9 @@ clear whenever Mike fires them; they confirm, they don't gate.
 - 2026-08-09 (codex) engine.94 approval-ceiling read-back after the shared fires — C115 retained config 8/8 and contiguous state columns 3/3; all four elected offices at approval ≥80 persisted streak 2, all six below threshold remained at 0, no auto/manual scandal fired before the third qualifying Cycle, and `Engine_Errors` was zero for both C114 and C115.
 - 2026-08-09 (codex) engine.94 code-only safety correction — exact main `d3b70f3c` deployed @41 and token-fired C116. The self-arm was idempotent on the prepared bench; all four qualifying offices reached streak 3, the seeded 5% rolls missed, no premature scandal appeared, one naturally active grief register carried one machine source, and C116 logged zero engine errors. Fresh-Sheet creation/conflict behavior is covered by the 24/24 offline first-live-Cycle harness; production remained untouched.
 
-### LIVE — engine.135 code wave DEPLOYED 2026-08-30 00:45 (S398 engine-sheet) — prod @8
+### LIVE — engine.135 code wave DEPLOYED 2026-08-30 (S398 engine-sheet) — prod @8 00:45, @9 03:55
+
+@9 = bench @14 tree (three builder-direct corrections after the live pre-fire read: retirement is an event never an age; GAME/CIVIC/MEDIA rows outside E1/D3/D5; 18–21-year-olds keep their stage). Bench C135–C137 clean; pull-back 0 differing files.
 
 Staged from a `clasp pull` of SANDBOX 0827 @11 (the bench-proven tree, C131–C134 clean) with the repo `.clasp.json` copied last; prod ID present / sandbox ID absent / 0 tests / 171 files; `clasp push -f` + deployment bump @8; pull-back 0 differing files. Sheet replay 1–5 landed 02:10 (builder-run, engine-sheet verified) — detail in the plan's checklist.
 

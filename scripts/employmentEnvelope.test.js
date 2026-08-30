@@ -74,7 +74,7 @@ const CONFIG = {
   illnessInitiativeRelief: 0.25, illnessConvergenceRate: 0.25,
   migrationClampLow: -5000, migrationClampHigh: 5000, hospitalBaseCapacity: 100, hospitalLoadPerSick: 1, hospitalTalkbackGain: 0.001,
   // engine.135 A — the realistic-with-boom-kick dial (plan §Phase A)
-  employmentFloor: 0.72, employmentAttractor: 0.83, employmentStep: 0.0003, employmentFallbackRate: 0.83, employmentAttractorPull: 0.12,
+  employmentFloor: 0.88, employmentAttractor: 0.96, employmentStep: 0.0003, employmentFallbackRate: 0.96, employmentAttractorPull: 0.12,
   // engine.135 B2
   employmentHoodWeightMin: 0.5, employmentHoodWeightMax: 2.0, employmentConvergenceRate: 0.25,
 };
@@ -93,15 +93,15 @@ function driftCycle(emp, S) {
   return Number(wp.read());
 }
 {
-  let emp = 0.72; const trace = [emp]; let monotone = true;
+  let emp = 0.9015; const trace = [emp]; let monotone = true;
   for (let c = 0; c < 40; c++) { const n = driftCycle(emp, QUIET); if (n < emp) monotone = false; emp = n; trace.push(emp); }
   assert('A1 dial climbs monotonically toward the attractor under a quiet sky', monotone, trace.map(r4).join(','));
-  assert('A1 not a snap: still below 0.82 after 3 cycles', trace[3] < 0.82, 'c3=' + r4(trace[3]));
-  assert('A1 arrives: within 0.5pp of 0.83 by cycle 25 (a 0.0003 step would need ~300)', Math.abs(trace[25] - CONFIG.employmentAttractor) <= 0.005, 'c25=' + r4(trace[25]));
-  let hi = 0.9344; for (let c = 0; c < 25; c++) hi = driftCycle(hi, QUIET);
-  assert('A2 the pull is symmetric: the live 93% (the old ratchet) descends to the attractor', Math.abs(hi - CONFIG.employmentAttractor) <= 0.005, 'c25=' + r4(hi));
-  let fl = 0.65; for (let c = 0; c < 1; c++) fl = driftCycle(fl, QUIET);
-  assert('A3 floor 0.72 binds', fl >= CONFIG.employmentFloor, r4(fl));
+  assert('A1 not a snap: still below 0.95 after 3 cycles', trace[3] < 0.95, 'c3=' + r4(trace[3]));
+  assert('A1 arrives: within 0.5pp of 0.96 by cycle 25 (a 0.0003 step would need ~200)', Math.abs(trace[25] - CONFIG.employmentAttractor) <= 0.005, 'c25=' + r4(trace[25]));
+  let hi = 0.985; for (let c = 0; c < 25; c++) hi = driftCycle(hi, QUIET);
+  assert('A2 the pull is symmetric: an over-boom dial comes back to the attractor', Math.abs(hi - CONFIG.employmentAttractor) <= 0.005, 'c25=' + r4(hi));
+  let fl = 0.80; for (let c = 0; c < 1; c++) fl = driftCycle(fl, QUIET);
+  assert('A3 floor 0.88 binds', fl >= CONFIG.employmentFloor, r4(fl));
 }
 
 // ── B. the envelope ─────────────────────────────────────────────────────────
@@ -129,7 +129,7 @@ function runHoods(cycles, cityEmp, opts) {
 }
 const urate = (demo, h) => demo[h].unemployed / demo[h].adults;
 function agg(demo) { let a = 0, u = 0; for (const h of HOODS) { a += demo[h].adults; u += demo[h].unemployed; } return u / a; }
-const CITY_EMP = 0.83, CITY_U = 1 - CITY_EMP;
+const CITY_EMP = 0.96, CITY_U = 1 - CITY_EMP;
 const conv = runHoods(40, CITY_EMP);
 const rates = {}; HOODS.forEach(h => rates[h] = urate(conv, h));
 const vals = HOODS.map(h => rates[h]);

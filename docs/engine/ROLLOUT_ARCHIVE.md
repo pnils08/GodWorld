@@ -336,6 +336,12 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S401 (2026-08-30, engine-sheet)
+
+| ID | Description | Status | Owner | Pointer |
+|---|---|---|---|---|
+| pipeline.62 | Rhea is the only article gate — strip pre-Rhea word tests (`skipRhea`, `phase-lede`, `"I've heard"`). Empty W2 stays. Tasks 1–6 landed by research-build 2026-08-30 (grok diagnosis verified at file:line, then executed; es was mid-engine.135). `skipRhea` = `contamination.fail` alone; slot/shape findings demoted to `observations`; writer throw → log; signage exempt from `UNAPPROVED_QUOTE`. Acceptance = the next unattended M–F newsroom wake produces a real `rheaPass` on a slot-miss draft. | done-pending-archive | research-build | [[../plans/2026-08-29-rhea-is-the-gate]] |
+
 ### Archive Pass — S397 (2026-08-29, engine-sheet)
 
 | ID | Description | Status | Owner | Pointer |

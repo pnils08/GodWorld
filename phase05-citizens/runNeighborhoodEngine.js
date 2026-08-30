@@ -199,6 +199,20 @@ function runNeighborhoodEngine_(ctx) {
   // DEMOGRAPHIC-AWARE NEIGHBORHOOD PICKER (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
   function pickDemographicNeighborhood_(ss, row, neighborhoods, iBirthYear, idxFn, rng) {
+    // engine.135 F (S399, builder point 9): only neighborhoods whose admission
+    // band fits the citizen's WealthLevel are candidates (B1 hood profile via
+    // S.neighborhoodState). Unpriced (WL 0) citizens see every hood; if no
+    // hood admits, the full pool stands so a citizen is never left unplaced.
+    if (typeof hoodAdmits_ === 'function' && ctx.summary && ctx.summary.neighborhoodState) {
+      var iWLf = idxFn('WealthLevel');
+      var wlF = iWLf >= 0 ? (Number(row[iWLf]) || 0) : 0;
+      var admitted = [];
+      for (var af = 0; af < neighborhoods.length; af++) {
+        if (hoodAdmits_(ctx.summary.neighborhoodState[neighborhoods[af]], wlF)) admitted.push(neighborhoods[af]);
+      }
+      if (admitted.length) neighborhoods = admitted;
+    }
+
     // Determine citizen type based on age
     var simYear = 2041;
     var citizenType = 'young_professional';

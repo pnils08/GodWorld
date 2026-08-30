@@ -370,6 +370,8 @@
   Writes: S.neighborhoodState, S.neighborhoodStateCount
   Sheets: Neighborhood_Map
 
+- **hoodAdmits_(hoodState, wealthLevel)**
+
 ### updateTransitMetrics.js
 - **updateTransitMetrics_Phase2_(ctx)**
   Reads: S.absoluteCycle, S.commuteFlows, S.holiday, S.previousCycleState, S.season, S.transitMetrics, S.transitState, S.weather
@@ -1431,7 +1433,7 @@
 - **scoreHoodFit_(unitIncome, hood)**
 
 - **processRelocations_(ctx, cycle)**
-  Reads: S.storyHooks
+  Reads: S.neighborhoodState, S.storyHooks
   Writes: S.storyHooks
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -1551,8 +1553,13 @@
 ### runCareerEngine.js
 - **sectorCategory_(sector, strict)**
 
+- **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
+  Reads: S.careerSignals, S.eventsGenerated
+  Writes: S.eventsGenerated
+  Sheets: Business_Ledger
+
 - **runCareerEngine_(ctx)**
-  Reads: S.absoluteCycle, S.careerSignals, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.absoluteCycle, S.careerSignals, S.cityDynamics, S.cycleId, S.demographicDrift, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: Business_Ledger, LifeHistory_Log
@@ -1600,7 +1607,7 @@
 
 ### runNeighborhoodEngine.js
 - **runNeighborhoodEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
@@ -3541,4 +3548,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1185
+**Functions mapped:** 1187

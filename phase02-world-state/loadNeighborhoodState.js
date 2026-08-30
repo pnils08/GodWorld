@@ -112,3 +112,22 @@ function loadNeighborhoodState_(ctx) {
 
   S.neighborhoodStateCount = loaded;
 }
+
+/**
+ * engine.135 F (S399, builder point 9): does this neighborhood admit this
+ * money? A citizen moves INTO a hood only if their WealthLevel sits inside
+ * the hood's [WealthMin, WealthMax] admission band (B1 profile, INSTITUTIONS
+ * canon: Lake Merritt 8+, Temescal 2–5 …). No band on the hood → admits
+ * anyone. WealthLevel 0/blank = unpriced (a new arrival, not poverty) → not
+ * gated. Residents already inside a hood are never evicted by this.
+ */
+function hoodAdmits_(hoodState, wealthLevel) {
+  if (!hoodState) return true;
+  var lo = Number(hoodState.wealthMin) || 0, hi = Number(hoodState.wealthMax) || 0;
+  if (lo <= 0 && hi <= 0) return true;
+  var wl = Number(wealthLevel) || 0;
+  if (wl <= 0) return true;
+  if (lo > 0 && wl < lo) return false;
+  if (hi > 0 && wl > hi) return false;
+  return true;
+}

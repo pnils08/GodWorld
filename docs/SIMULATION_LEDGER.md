@@ -241,7 +241,7 @@ Every column is a data point in someone's life. This maps who writes each column
 | AH | 34 | CareerStage | entry / mid / senior / retired | educationCareerEngine | queryFamily | **CAUSAL** — advancement state machine gates |
 | AI | 35 | YearsInCareer | Integer | educationCareerEngine | — | **CAUSAL** — tenure gates (>=5 entry→mid, >=10 mid→senior) |
 | AJ | 36 | CareerMobility | advancing / stagnant / declining | educationCareerEngine | runCareerEngine `maybeTransition_` (S321 wire) | **CAUSAL** — stagnant 1.25× / declining 1.4× on shift/lateral transition rolls |
-| AK | 37 | LastPromotionCycle | Cycle number (integer) | educationCareerEngine | — | **CAUSAL** — cyclesSincePromotion gates all advancement + stagnation (>=40) |
+| AK | 37 | LastPromotionCycle | Cycle number (integer) | runCareerEngine `applyEmployerSuccess_` (engine.135 E2 — written only on a real employer promotion); educationCareerEngine reads it | — | **CAUSAL** — cyclesSincePromotion gates the stagnation hook (>=40, tracked employees only, 0.5%/cycle) |
 
 ### Migration (AL–AQ)
 

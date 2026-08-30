@@ -520,8 +520,13 @@ function detectCareerMobility_(ctx, cycle, rng) {
     } else if (cyclesSincePromotion >= ADVANCEMENT_CYCLES.STAGNATION) {
       mobility = CAREER_MOBILITY.STAGNANT;
 
-      // Generate stagnation story hook
-      if (rng() < 0.05) {
+      // Generate stagnation story hook — engine.135 E2 (S399): LastPromotionCycle
+      // now moves only on a real employer promotion, so most rows read as
+      // "stagnant"; the hook fires only for a tracked employee (an employer that
+      // could have promoted them) and rarely (0.5%/cycle, was 5%).
+      var iEmpStag = ctx.ledger.headers.indexOf('EmployerBizId');
+      var trackedStag = iEmpStag >= 0 && /^BIZ-/.test(String(row[iEmpStag] || '').trim());
+      if (trackedStag && rng() < 0.005) {
         var name = (iName >= 0 ? row[iName] : '') + ' ' + (iLast >= 0 ? row[iLast] : '');
         ctx.summary.storyHooks = ctx.summary.storyHooks || [];
         ctx.summary.storyHooks.push({

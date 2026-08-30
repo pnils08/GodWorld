@@ -593,8 +593,12 @@ function processRelocations_(ctx, cycle) {
       iIncome = idx('Income'), iHouseholdId = idx('HouseholdId'),
       iDisplRisk = idx('DisplacementRisk'), iMigIntent = idx('MigrationIntent'),
       iMigReason = idx('MigrationReason'), iMigDest = idx('MigrationDestination'),
-      iMigCycle = idx('MigratedCycle');
+      iMigCycle = idx('MigratedCycle'),
+      iWealthLevel = idx('WealthLevel'); // engine.135 F — admission band
   if (iNeighborhood < 0 || iIncome < 0 || iMigIntent < 0) return { moved: 0 };
+  // engine.135 F (S399): the B1 hood profile (S.neighborhoodState, Phase 2)
+  // carries each neighborhood's WealthLevel admission band.
+  var admissionState = (ctx.summary && ctx.summary.neighborhoodState) || {};
 
   // ── Build move units: household groups + solo citizens, in row order ──────
   var units = [];       // { key, rowIdxs[], hood, income, planning, maxRisk }
@@ -643,10 +647,22 @@ function processRelocations_(ctx, cycle) {
     // ── Destination: best deterministic fit, must clear current by margin ──
     var currentFit = scoreHoodFit_(unit.income, current);
     if (!currentFit) continue;
+    // engine.135 F (S399, builder point 9): a household moves only into a
+    // neighborhood that admits its money — the unit's WealthLevel (its
+    // best-off member) must sit inside the destination's band. A WL9 does
+    // not land in a WL 2–5 hood however the rent maths score it.
+    var unitWealth = 0;
+    if (iWealthLevel >= 0) {
+      for (var uw = 0; uw < unit.rowIdxs.length; uw++) {
+        var wlU = Number(rows[unit.rowIdxs[uw]][iWealthLevel]) || 0;
+        if (wlU > unitWealth) unitWealth = wlU;
+      }
+    }
     var best = null, bestName = '';
     for (var h = 0; h < hoodNames.length; h++) {
       var name = hoodNames[h];
       if (name === unit.hood) continue;
+      if (typeof hoodAdmits_ === 'function' && !hoodAdmits_(admissionState[name], unitWealth)) continue;
       var fit = scoreHoodFit_(unit.income, hoods[name]);
       if (!fit || fit.burden > RELOCATION.MAX_BURDEN) continue;
       if (!best || fit.score > best.score) { best = fit; bestName = name; }

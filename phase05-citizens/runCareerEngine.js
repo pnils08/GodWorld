@@ -91,6 +91,123 @@ function sectorCategory_(sector, strict) {
   return strict ? null : 'Small Business';
 }
 
+/**
+ * engine.135 E2 (S399, builder point 15): BUSINESS SUCCESS IS THE CAUSATION.
+ * Per tracked business per cycle: its Growth_Rate (%/yr — the same signal that
+ * already sizes its hiring windows) sets a promotion budget for its staff;
+ * contraction sets a layoff budget. At most one of each per business per
+ * cycle; expected across the ledger ≈ Σ |g|/5200 × staff ≈ 1–2 Income-moving
+ * events per cycle, steered by the city dial (gapFactor: below the attractor
+ * → more promotions, fewer layoffs). Beneficiary = longest since
+ * LastPromotionCycle, then lowest Income, then POPID; victim = lowest career
+ * level, then lowest Income, then POPID — deterministic, one rng draw per
+ * business. Promotion: Income +6–12%, LastPromotionCycle = cycle,
+ * stampPromotion_ narrative (its one caller since E1). Layoff: Income −12–20%,
+ * employer cleared, Career-Layoff log, businessDelta lost. Nothing free: no
+ * employer, no employer event (SELF_EMPLOYED / UNTRACKED / blank are outside).
+ * Sports orgs, GAME/CIVIC/MEDIA rows, Tier 1–2 and the sports layer are outside.
+ */
+function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
+  var out = { promotions: 0, layoffs: 0, businesses: 0 };
+  var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
+  if (!header || !rows || !rows.length) return out;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'), iNb = idx('Neighborhood'), iRole = idx('RoleType'),
+      iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'),
+      iEcon = idx('EconomicProfileKey'), iLastPromo = idx('LastPromotionCycle'), iYears = idx('YearsInCareer'),
+      iLife = idx('LifeHistory'), iLastUpd = idx('LastUpdated');
+  if (iIncome < 0 || iEmp < 0) return out;
+  var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+  if (!sheet) return out;
+  var data = sheet.getDataRange().getValues();
+  if (!data || data.length < 2) return out;
+  var bh = data[0], bId = -1, bNm = -1, bGrow = -1, bSec = -1;
+  for (var c = 0; c < bh.length; c++) {
+    var hn = String(bh[c]).trim();
+    if (hn === 'BIZ_ID') bId = c; else if (hn === 'Name') bNm = c; else if (hn === 'Growth_Rate') bGrow = c; else if (hn === 'Sector') bSec = c;
+  }
+  if (bId < 0 || bGrow < 0) return out;
+  var biz = {};
+  for (var r = 1; r < data.length; r++) {
+    var id = String(data[r][bId] || '').trim();
+    if (!id) continue;
+    if (bSec >= 0 && /sports|stadium|franchise|athletic/i.test(String(data[r][bSec] || ''))) continue; // Paulson's domain
+    var rawG = data[r][bGrow];
+    if (rawG === '' || rawG === null || rawG === undefined) continue; // blank growth = no signal, no event
+    var g = Number(rawG);
+    if (isNaN(g)) continue;
+    biz[id] = { name: String(bNm >= 0 ? (data[r][bNm] || id) : id), growth: g, staff: [] };
+  }
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
+    if (!row || !Array.isArray(row)) continue;
+    var emp = String(row[iEmp] || '').trim();
+    if (!biz[emp]) continue;
+    if (String(row[iStatus] || 'active').toLowerCase() !== 'active') continue;
+    var clock = String(iClock >= 0 ? (row[iClock] || '') : '').trim().toUpperCase();
+    if (clock && clock !== 'ENGINE') continue;
+    var tier = iTier >= 0 ? Number(row[iTier]) : 4;
+    if (tier === 1 || tier === 2) continue;
+    if (iEcon >= 0 && String(row[iEcon] || '').trim() === 'SPORTS_OVERRIDE') continue;
+    if ((Number(row[iIncome]) || 0) <= 0) continue;
+    biz[emp].staff.push(i);
+  }
+  var gf = gapFactor || 1;
+  var ids = Object.keys(biz).sort();
+  var levelOf_ = function(row2) { var m = String(row2[iLife] || '').match(/\[CareerState\][^\n]*level=(\d+)/); return m ? Number(m[1]) : 1; };
+  var byPop_ = function(a, b2) { return String(rows[a][iPop]) < String(rows[b2][iPop]) ? -1 : 1; };
+  for (var k = 0; k < ids.length; k++) {
+    var b = biz[ids[k]];
+    if (!b.staff.length) continue;
+    out.businesses++;
+    var n = b.staff.length;
+    var promoP = Math.min(0.5, Math.max(0, b.growth) / 100 / 52 * n * gf);
+    var layoffP = Math.min(0.5, Math.max(0, -b.growth) / 100 / 52 * n / gf);
+    var draw = roll();
+    if (promoP > 0 && draw < promoP) {
+      var who = b.staff.slice().sort(function(a, c2) {
+        var la = Number(rows[a][iLastPromo]) || 0, lb = Number(rows[c2][iLastPromo]) || 0;
+        if (la !== lb) return la - lb;
+        var ia = Number(rows[a][iIncome]) || 0, ib = Number(rows[c2][iIncome]) || 0;
+        if (ia !== ib) return ia - ib;
+        return byPop_(a, c2);
+      })[0];
+      var pRow = rows[who];
+      pRow[iIncome] = Math.round((Number(pRow[iIncome]) || 0) * (1.06 + roll() * 0.06)); // +6–12%
+      if (iLastPromo >= 0) pRow[iLastPromo] = cycle;
+      if (typeof stampPromotion_ === 'function') {
+        stampPromotion_(ctx, pRow, iLife, iLastUpd, iPop, iFirst, iLast, iNb, iRole, 'Promoted at ' + b.name, Number(pRow[iYears]) || 0, cycle);
+      } else if (iLastUpd >= 0) pRow[iLastUpd] = ctx.now;
+      S.careerSignals.promotions += 1;
+      S.careerSignals.transitions += 1;
+      S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+      out.promotions++;
+    } else if (layoffP > 0 && draw < layoffP) {
+      var victim = b.staff.slice().sort(function(a, c3) {
+        var la2 = levelOf_(rows[a]), lb2 = levelOf_(rows[c3]);
+        if (la2 !== lb2) return la2 - lb2;
+        var ia2 = Number(rows[a][iIncome]) || 0, ib2 = Number(rows[c3][iIncome]) || 0;
+        if (ia2 !== ib2) return ia2 - ib2;
+        return byPop_(a, c3);
+      })[0];
+      var vRow = rows[victim];
+      vRow[iIncome] = Math.round((Number(vRow[iIncome]) || 0) * (0.80 + roll() * 0.08)); // −12–20%, the reconciliation's cut
+      vRow[iEmp] = '';
+      if (iLastUpd >= 0) vRow[iLastUpd] = ctx.now;
+      logRows.push([ctx.now, vRow[iPop], '', 'Career-Layoff', 'Let go as ' + b.name + ' pulled back', '', cycle]);
+      if (!S.careerSignals.businessDeltas[ids[k]]) S.careerSignals.businessDeltas[ids[k]] = { gained: 0, lost: 0 };
+      S.careerSignals.businessDeltas[ids[k]].lost += 1;
+      S.careerSignals.layoffs += 1;
+      S.careerSignals.transitions += 1;
+      S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+      out.layoffs++;
+    }
+  }
+  if (out.promotions || out.layoffs) ctx.ledger.dirty = true;
+  S.careerSignals.employerSuccess = out;
+  return out;
+}
+
 function runCareerEngine_(ctx) {
 
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
@@ -127,6 +244,13 @@ function runCareerEngine_(ctx) {
   var iCareerStage = idx('CareerStage'); // engine.67 step 4 — first reader; 'retired' set at 65 by educationCareerEngine was never consumed
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0 || iLastUpd < 0) return;
+
+  // engine.135 E2 (S399): the city dial steers the employer-success odds —
+  // below the attractor, more promotions and hiring windows, fewer layoffs;
+  // above it the reverse. S.demographicDrift is Phase 3's (applyDemographicDrift_).
+  var driftE2 = (ctx.summary && ctx.summary.demographicDrift) || {};
+  var empGapE2 = (Number(driftE2.employmentAttractor) || 0.96) - (Number(driftE2.employmentRate) || 0.96);
+  var gapFactor = Math.max(0.5, Math.min(1.5, 1 + 8 * empGapE2));
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
@@ -187,75 +311,11 @@ function runCareerEngine_(ctx) {
   var INDUSTRIES = ["tech", "service", "public", "creative"];
   var EMPLOYERS = ["small", "large", "public"];
 
-  // S302: BIZ-ID pools now built LIVE from Business_Ledger each cycle —
-  // the old hardcoded pool (~27 IDs) silently excluded every business added
-  // since v2.4 (ledger is at 70; research doc §10). Freeform Sector labels
-  // classify by keyword into the 4 abstract industries. Fallback to the
-  // frozen v2.4 pool only if the ledger read fails outright.
-  var FALLBACK_INDUSTRY_BIZ_POOL = {
-    tech:     ["BIZ-00001", "BIZ-00008", "BIZ-00009", "BIZ-00010", "BIZ-00011", "BIZ-00030"],
-    service:  ["BIZ-00012", "BIZ-00015", "BIZ-00025", "BIZ-00026", "BIZ-00033", "BIZ-00043", "BIZ-00044", "BIZ-00045"],
-    public:   ["BIZ-00013", "BIZ-00014", "BIZ-00016", "BIZ-00017", "BIZ-00019", "BIZ-00023", "BIZ-00024", "BIZ-00032"],
-    creative: ["BIZ-00018", "BIZ-00028", "BIZ-00038", "BIZ-00039", "BIZ-00036"]
-  };
-
-  function classifySectorToIndustry_(sector) {
-    var s = String(sector || '').toLowerCase();
-    if (/tech|software|cloud|\bai\b|analytics|platform|agent|biotech|intelligence|coworking|venture/.test(s)) return 'tech';
-    if (/media|journal|gallery|entertainment|nightlife|music|design|architect|arts/.test(s)) return 'creative';
-    if (/public|municipal|government|transit|utilit|civic|education|healthcare|legal|judicial|safety|\bport\b|logistic|faith|community|housing|social/.test(s)) return 'public';
-    return 'service'; // restaurants, retail, bars, construction, real estate, sports venues
-  }
-
-  var INDUSTRY_BIZ_POOL = (function buildLivePools_() {
-    try {
-      var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
-      if (!bizSheet) throw new Error('Business_Ledger not found');
-      var bizData = bizSheet.getDataRange().getValues();
-      if (bizData.length < 2) throw new Error('Business_Ledger empty');
-      var bh = bizData[0];
-      var bIdCol = -1, bSectorCol = -1;
-      for (var bc = 0; bc < bh.length; bc++) {
-        var h = String(bh[bc]).trim();
-        if (h === 'BIZ_ID') bIdCol = bc;
-        if (h === 'Sector') bSectorCol = bc;
-      }
-      if (bIdCol < 0 || bSectorCol < 0) throw new Error('BIZ_ID/Sector column missing');
-      var pools = { tech: [], service: [], public: [], creative: [] };
-      for (var br = 1; br < bizData.length; br++) {
-        var bizId = String(bizData[br][bIdCol] || '').trim();
-        if (!bizId) continue;
-        pools[classifySectorToIndustry_(bizData[br][bSectorCol])].push(bizId);
-      }
-      // A live pool can legitimately be thin; only an all-empty result is a failure.
-      if (!pools.tech.length && !pools.service.length && !pools.public.length && !pools.creative.length) {
-        throw new Error('all pools empty');
-      }
-      return pools;
-    } catch (e) {
-      Logger.log('runCareerEngine: live Business_Ledger pool build failed (' + e.message + ') — using frozen v2.4 fallback');
-      return FALLBACK_INDUSTRY_BIZ_POOL;
-    }
-  })();
-
-  function resolveNewBizId_(industry) {
-    var pool = INDUSTRY_BIZ_POOL[industry];
-    if (!pool || !pool.length) pool = INDUSTRY_BIZ_POOL["service"];
-    if (!pool || !pool.length) pool = FALLBACK_INDUSTRY_BIZ_POOL["service"];
-    return pool[Math.floor(roll() * pool.length)];
-  }
-
-  function getIndustrySeasonBias_(industry, season, holiday) {
-    var bias = 0;
-    if (season === "Winter" && industry === "service") bias += 0.10;
-    if (season === "Summer") {
-      if (industry === "service") bias += 0.08;
-      if (industry === "public") bias -= 0.04;
-    }
-    if ((holiday === "Holiday" || holiday === "BlackFriday") && industry === "service") bias += 0.15;
-    if (holidayPriority === "major" && industry === "service") bias += 0.06;
-    return bias;
-  }
+  // engine.135 E2 (S399): the S302 live BIZ-ID pools (buildLivePools_ +
+  // resolveNewBizId_), the frozen v2.4 fallback pool and the season/chaos/
+  // weather pressure helpers are gone with the random sector-shift / lateral /
+  // promotion / layoff rolls they fed — one fewer Business_Ledger read per
+  // cycle. A citizen changes employer only by a hire or a layoff now.
 
   function getMacroPressure_(mood) {
     if (mood >= 70) return 0.7;
@@ -263,23 +323,6 @@ function runCareerEngine_(ctx) {
     if (mood >= 45) return 0.05;
     if (mood >= 35) return -0.25;
     return -0.65;
-  }
-
-  function getChaosPressure_(chaosList) {
-    var c = chaosList ? chaosList.length : 0;
-    if (c >= 6) return 0.35;
-    if (c >= 3) return 0.18;
-    if (c >= 1) return 0.10;
-    return 0;
-  }
-
-  function getWeatherPressure_(w) {
-    var t = (w && w.type) ? w.type : "clear";
-    if (t === "snow") return 0.25;
-    if (t === "fog") return 0.12;
-    if (t === "rain") return 0.10;
-    if (t === "hot") return 0.08;
-    return 0;
   }
 
   function parseCareerStateFromLife_(lifeStr) {
@@ -391,64 +434,14 @@ function runCareerEngine_(ctx) {
     if (focus) st.skill[focus] = clamp((st.skill[focus] || 0) + amt, 0, 1);
   }
 
-  function maybeTransition_(st, context) {
-    if (st.lastTransition && (cycle - st.lastTransition) < 6) return null;
-
-    var macro = getMacroPressure_(context.econMood);
-    var chaosP = getChaosPressure_(context.chaos);
-    var wP = getWeatherPressure_(context.weather);
-    var seasonBias = getIndustrySeasonBias_(st.industry, context.season, context.holiday);
-
-    var pressure = macro + seasonBias - (chaosP * 0.35) - (wP * 0.20);
-    pressure = clamp(pressure, -1, 1);
-    S.careerSignals.pressure[st.industry] = Math.round(pressure * 100) / 100;
-
-    var skillCore = (st.skill && st.skill.general) ? st.skill.general : 0.25;
-    var promoChance = 0.01 + (st.tenure * 0.004) + (Math.max(0, pressure) * 0.02) + (skillCore * 0.015);
-    promoChance *= (context.careerFreq || 1); // engine.32 T5 — Drive dial biases promotion odds
-    promoChance = clamp(promoChance, 0, 0.08);
-
-    var layoffChance = 0.004 + (Math.max(0, -pressure) * 0.03) + (chaosP * 0.01);
-    layoffChance = clamp(layoffChance, 0, 0.07);
-
-    // engine.61 (S321): stagnation pushes citizens toward the door — shift and
-    // lateral odds scale with mobilityF (stagnant 1.25x / declining 1.4x),
-    // applied before the clamp so the physics ceilings hold.
-    var mobF = context.mobilityF || 1;
-    var shiftChance = (0.004 + (Math.max(0, -pressure) * 0.018) + (roll() * 0.004)) * mobF;
-    shiftChance = clamp(shiftChance, 0, 0.05);
-
-    var lateralChance = (0.006 + (Math.max(0, pressure) * 0.012)) * mobF;
-    lateralChance = clamp(lateralChance, 0, 0.05);
-
-    if (chanceHit(layoffChance)) return { type: "layoff", text: "faced an unexpected work disruption and started looking for new options" };
-    if (chanceHit(promoChance) && st.level < 5) return { type: "promotion", text: "earned a quiet step up at work—more responsibility, fewer excuses" };
-    if (chanceHit(shiftChance)) return { type: "sector_shift", text: "considered a sector change after noticing the ground shifting under their role" };
-    if (chanceHit(lateralChance)) return { type: "lateral", text: "made a lateral move that looked small on paper but felt strategic" };
-    return null;
-  }
-
-  // Grounded transition text from the citizen's OWN career state (industry,
-  // level, employer) — the engine already computes these and discarded them
-  // for one recycled line. Gate unchanged: only ENGINE Tier-3/4 background
-  // citizens ever reach here. Pure function of state; deterministic.
-  function careerMoveText_(type, st) {
-    // Bare adjectival domain labels so they read cleanly in every template.
-    var IND = { tech: "tech", service: "service", public: "public-sector", creative: "creative" };
-    var ind = IND[st.industry] || "";
-    var field = ind ? (ind + " work") : "their field";
-    var place = { small: "a small shop", large: "a big firm", public: "a public agency" }[st.employer] || "their workplace";
-    var role = ind ? (ind + " role") : "role";
-    if (type === "promotion") {
-      if (st.level >= 5) return "reached the top of their " + (ind || "") + " ladder at " + place;
-      if (st.level >= 4) return "was promoted into a senior " + role + " at " + place;
-      return "earned a step up to level " + st.level + " in " + field + " at " + place;
-    }
-    if (type === "layoff") return "was let go from " + place + " and started looking for new " + field;
-    if (type === "sector_shift") return "made a clean break into " + field + " at " + place;
-    if (type === "lateral") return "took a new " + role + " at " + place + " — a sideways move with a plan";
-    return null;
-  }
+  // maybeTransition_ and careerMoveText_ removed (engine.135 E2, S399, builder
+  // point 14 "nothing free"): the per-citizen per-cycle promotion (≤8%),
+  // layoff (≤7%), sector-shift (≤5%) and lateral (≤5%) rolls — macro/season/
+  // weather-pressured, employer-blind — are gone. Promotions, raises and
+  // layoffs are now caused by the employer's success (applyEmployerSuccess_,
+  // file scope); hires by the matcher; a chaos car by the chaos fold →
+  // Employee_Count → reconciliation. What the loop below still produces is
+  // career TEXTURE — a line in a life, never an Income or employer change.
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BASE MICRO-CAREER POOL
@@ -882,28 +875,10 @@ function runCareerEngine_(ctx) {
     // v2.3: occasional training flavor
     if (chanceHit(0.25)) pool = pool.concat(trainingPool);
 
-    // v2.3: maybe transition
-    // engine.52 C1 — recovering citizens keep career texture but skip job
-    // transitions (no promotion/layoff/shift while easing back in).
-    // engine.61 wire (S321): CareerMobility gets its first reader — a citizen
-    // the education engine marked stagnant looks for a way out (shift/lateral
-    // odds up). One-cycle lag by phase order (education engine runs after this
-    // one). 'declining' branch covers the enum's third state if it ever fires.
-    var mobilityF = 1.0;
-    if (iCareerMobility >= 0) {
-      var mob = String(row[iCareerMobility] || '').toLowerCase();
-      if (mob === 'stagnant') mobilityF = 1.25;
-      else if (mob === 'declining') mobilityF = 1.4;
-    }
-    var tEv = (healthStatus === "recovering") ? null : maybeTransition_(st, {
-      econMood: econMood,
-      season: season,
-      holiday: holiday,
-      chaos: chaos,
-      weather: weather,
-      careerFreq: dialBands ? dialBands.careerFreq : 1, // engine.32 T5
-      mobilityF: mobilityF // engine.61 — stagnation pressure on transition rolls
-    });
+    // engine.135 E2 (S399): no free transitions here — the employer's success
+    // decides promotions and layoffs (applyEmployerSuccess_, run before this
+    // loop); hires are the matcher's. This loop is career texture only.
+    var tEv = null;
 
     // Choose drift output
     var pick = null;
@@ -912,102 +887,7 @@ function runCareerEngine_(ctx) {
     // Determine event tag (v2.2)
     var eventTag = "Career";
 
-    if (tEv) {
-      pick = tEv.text;
-      eventTag = "Career-Transition";
-      st.lastTransition = cycle;
-
-      // v14.2: Adjust income on career transitions for seeded citizens
-      var currentIncome = iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0;
-      var hasEconProfile = iEconKey >= 0 && row[iEconKey] && String(row[iEconKey]).trim() !== '' && String(row[iEconKey]).trim() !== 'SPORTS_OVERRIDE';
-
-      // v2.4: Track current employer for BIZ-ID updates
-      var currentBizId = (iEmployerBizId >= 0) ? safeStr(row[iEmployerBizId]) : '';
-      var isSelfEmployed = currentBizId === 'SELF_EMPLOYED';
-
-      if (tEv.type === "promotion") {
-        st.level = Math.min(5, st.level + 1);
-        st.tenure = Math.max(1, Math.round(st.tenure * 0.55));
-        if (hasEconProfile && currentIncome > 0) {
-          row[iIncome] = Math.round(currentIncome * (1.06 + roll() * 0.06)); // +6-12%
-        }
-        S.careerSignals.promotions += 1;
-        S.careerSignals.transitions += 1;
-      } else if (tEv.type === "layoff") {
-        st.tenure = 0;
-        st.employer = "small";
-        if (hasEconProfile && currentIncome > 0) {
-          row[iIncome] = Math.round(currentIncome * (0.80 + roll() * 0.08)); // -12-20%
-        }
-        // v2.4: Clear employer — citizen is now unemployed/searching
-        // S357: UNTRACKED still clears (they lost that untracked job) but
-        // records no businessDelta — the sentinel has no Business_Ledger row.
-        if (iEmployerBizId >= 0 && currentBizId && !isSelfEmployed) {
-          if (currentBizId !== 'UNTRACKED') {
-            if (!S.careerSignals.businessDeltas[currentBizId]) S.careerSignals.businessDeltas[currentBizId] = { gained: 0, lost: 0 };
-            S.careerSignals.businessDeltas[currentBizId].lost += 1;
-          }
-          row[iEmployerBizId] = '';
-        }
-        S.careerSignals.layoffs += 1;
-        S.careerSignals.transitions += 1;
-      } else if (tEv.type === "sector_shift") {
-        var old = st.industry;
-        var tries = 0;
-        while (tries < 6) {
-          var cand = pickOne(INDUSTRIES);
-          if (cand !== old) { st.industry = cand; break; }
-          tries++;
-        }
-        st.employer = pickEmployerType_(st.industry);
-        st.tenure = 0;
-        if (hasEconProfile && currentIncome > 0) {
-          row[iIncome] = Math.round(currentIncome * (0.90 + roll() * 0.15)); // -10% to +5%
-        }
-        // v2.4: Resolve new employer from new industry
-        if (iEmployerBizId >= 0) {
-          var newBiz = resolveNewBizId_(st.industry);
-          if (currentBizId && !isSelfEmployed && currentBizId !== 'UNMATCHED') {
-            if (!S.careerSignals.businessDeltas[currentBizId]) S.careerSignals.businessDeltas[currentBizId] = { gained: 0, lost: 0 };
-            S.careerSignals.businessDeltas[currentBizId].lost += 1;
-          }
-          if (newBiz) {
-            if (!S.careerSignals.businessDeltas[newBiz]) S.careerSignals.businessDeltas[newBiz] = { gained: 0, lost: 0 };
-            S.careerSignals.businessDeltas[newBiz].gained += 1;
-          }
-          row[iEmployerBizId] = newBiz || '';
-        }
-        S.careerSignals.sectorShifts += 1;
-        S.careerSignals.transitions += 1;
-      } else if (tEv.type === "lateral") {
-        st.employer = pickEmployerType_(st.industry);
-        st.tenure = Math.max(1, Math.round(st.tenure * 0.70));
-        if (hasEconProfile && currentIncome > 0) {
-          row[iIncome] = Math.round(currentIncome * (0.97 + roll() * 0.06)); // -3% to +3%
-        }
-        // v2.4: Change employer within same industry (avoid same company)
-        if (iEmployerBizId >= 0 && !isSelfEmployed) {
-          var newBiz = resolveNewBizId_(st.industry);
-          var retries = 0;
-          while (newBiz === currentBizId && retries < 4) { newBiz = resolveNewBizId_(st.industry); retries++; }
-          if (currentBizId && currentBizId !== 'UNMATCHED') {
-            if (!S.careerSignals.businessDeltas[currentBizId]) S.careerSignals.businessDeltas[currentBizId] = { gained: 0, lost: 0 };
-            S.careerSignals.businessDeltas[currentBizId].lost += 1;
-          }
-          if (newBiz) {
-            if (!S.careerSignals.businessDeltas[newBiz]) S.careerSignals.businessDeltas[newBiz] = { gained: 0, lost: 0 };
-            S.careerSignals.businessDeltas[newBiz].gained += 1;
-          }
-          row[iEmployerBizId] = newBiz || '';
-        }
-        S.careerSignals.transitions += 1;
-      }
-
-      // Override the generic transition line with text grounded in this
-      // citizen's now-final career state (gate untouched above).
-      var groundedMove = careerMoveText_(tEv.type, st);
-      if (groundedMove) pick = groundedMove;
-    } else {
+    {
       pick = pool[Math.floor(roll() * pool.length)];
       if (firstFridayCareer.indexOf(pick) >= 0) eventTag = "Career-FirstFriday";
       else if (creationDayCareer.indexOf(pick) >= 0) eventTag = "Career-CreationDay";
@@ -1095,6 +975,9 @@ function runCareerEngine_(ctx) {
   // business literally grew), and citizens fired by THIS cycle's reconcile
   // only become eligible next cycle: unemployment is a lived state.
   try {
+    // engine.135 E2 (S399): employer success first — promotions/raises where a
+    // business grows, layoffs where it shrinks — then the hiring windows.
+    applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor);
     matchUnemployedToOpenings_();
   } catch (matchErr) {
     Logger.log('runCareerEngine v2.7 rehire matcher failed (career events unaffected): ' + matchErr);
@@ -1186,7 +1069,7 @@ function runCareerEngine_(ctx) {
       var cat = sectorCategory_(bSec >= 0 ? bizData[br3][bSec] : '');
       if (!cat) continue; // sports orgs opted out
 
-      var perCycle = (stated * growth / 100) / 52;
+      var perCycle = (stated * growth / 100) / 52 * gapFactor; // engine.135 E2: dial-steered
       var openings = Math.floor(perCycle);
       if (openings < 1 && perCycle > 0) {
         var cadence = Math.max(1, Math.min(52, Math.round(1 / perCycle)));
@@ -1330,7 +1213,7 @@ function runCareerEngine_(ctx) {
         var ia = Number(rows[a][iIncome]) || 0, ib = Number(rows[b2][iIncome]) || 0;
         if (ia !== ib) return ia - ib;
         return safeStr(rows[a][iPopID]) < safeStr(rows[b2][iPopID]) ? -1 : 1;
-      }).slice(0, shortfall);
+      }).slice(0, Math.min(shortfall, 2)); // engine.135 E2: rate-limited — at most 2 firings per business per cycle; the rest next cycle
       for (var fv = 0; fv < victims.length; fv++) {
         var vRow = rows[victims[fv]];
         var vIncome = (iIncome >= 0) ? (Number(vRow[iIncome]) || 0) : 0;

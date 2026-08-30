@@ -398,6 +398,7 @@ function applyDemographicDrift_(ctx) {
   S.demographicDrift = {
     illnessRate: ill,
     employmentRate: emp,
+    employmentAttractor: employmentAttractor, // engine.135 E2 — Phase 5 steers hiring/promotion vs layoff odds on the gap
     migration: mig,
     economy: econ,
     changes: changes,

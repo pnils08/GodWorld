@@ -2,7 +2,7 @@
   "generated": "2026-08-30",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1185,
+  "functionsMapped": 1187,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1363,6 +1363,7 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
+        "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
@@ -1386,6 +1387,7 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_",
+        "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
@@ -2282,8 +2284,10 @@
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
         "phase05-citizens/migrationTrackingEngine.js::processMigrationEvents_",
+        "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_",
-        "phase05-citizens/runConductEngine.js::runConductEngine_"
+        "phase05-citizens/runConductEngine.js::runConductEngine_",
+        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_"
       ]
     },
     "neighborhoodStateCount": {
@@ -2321,6 +2325,7 @@
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
         "phase04-events/generationalEventsEngine.js::checkHealthEvent_",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
@@ -3087,6 +3092,7 @@
       "readers": [
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
+        "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::detectCareerRipples_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_"
@@ -4448,6 +4454,7 @@
         "phase05-citizens/generationalWealthEngine.js::loadHoodBusinessPay_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
+        "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",

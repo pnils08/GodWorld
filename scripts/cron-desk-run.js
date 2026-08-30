@@ -2481,23 +2481,37 @@ async function runWrite(assign) {
       .map(row => row.check + '=' + row.issue).join('; '));
   }
   if (s344Gate.fail) {
-    log('s344 slot observations (non-blocking): ' + s344Gate.findings
+    log('s344 slot findings (non-blocking): ' + s344Gate.findings
+      .map(row => row.check + '=' + row.issue).join('; '));
+  }
+  if (s344Gate.observations && s344Gate.observations.length) {
+    log('s344 slot observations: ' + s344Gate.observations
       .map(row => row.check + '=' + row.issue).join('; '));
   }
   if (PACKET_ACTIVE && shape.fail) {
-    log('article shape observations (non-blocking): ' + shape.reasons.join(','));
+    log('article shape notes (non-blocking): ' + shape.reasons.join(','));
+  }
+  if (PACKET_ACTIVE && shape.observations && shape.observations.length) {
+    log('article shape observations: ' + shape.observations.join(','));
   }
 
   // gate (skipped for --no-gate samples)
   //
-  // pipeline.62 — Rhea is the gate. Only the contamination wall (a second
-  // Oakland printed over the sheet: real-world entities, imported blight,
-  // lattice speech, invented voices, repair chrome) skips her, because that
-  // scan is doctrine and explicitly overrides a Rhea pass. Slot findings
-  // (missing '?', assignment-token overlap, phase words in a lede) are
-  // observations for the log, never a reason a draft goes unseen by Rhea.
+  // pipeline.62 — Rhea is the gate. Two things skip her, both §4.7 doctrine:
+  //   1. the contamination wall — a second Oakland printed over the sheet
+  //      (real-world entities, imported blight, lattice speech, invented
+  //      voices, repair chrome), which explicitly overrides a Rhea pass;
+  //   2. a genuine assignment swap — a faith coverage-gap INTAKE stapled to a
+  //      transit story. That is a contradiction of the recorded assignment,
+  //      and Rhea reads the draft, not the assignment pairing, so she cannot
+  //      catch it herself.
+  // Slot findings (missing '?', assignment-token overlap, phase words in a
+  // lede) are observations for the log, never a reason a draft goes unseen.
   let rhea = null, pass = false, rheaProof = null;
-  const skipRhea = contamination.fail;
+  const assignmentSwap = PACKET_ACTIVE &&
+    s344Gate.findings.some(row => row.issue === 'assignment-intake-mismatch');
+  if (assignmentSwap) log('assignment swap — INTAKE does not belong to this story; Rhea skipped');
+  const skipRhea = contamination.fail || assignmentSwap;
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
   } else if (!skipRhea) {

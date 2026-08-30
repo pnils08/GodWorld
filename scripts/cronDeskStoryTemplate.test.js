@@ -50,6 +50,13 @@ const jaxGate = gate.evaluate(jaxArt, {
 });
 assert.equal(jaxGate.fail, true);
 assert(jaxGate.findings.some(f => f.issue === 'assignment-intake-mismatch'), JSON.stringify(jaxGate.findings));
+// pipeline.62 — the swap is the one surviving assignment fail, and it has to
+// stay wired: cron-desk-run reads this exact issue id to skip Rhea. A clean
+// swap (no contamination alongside it) must still be caught by this check
+// alone, not by frank-ogawa riding along.
+const cronRunSrc = fs.readFileSync(path.join(__dirname, 'cron-desk-run.js'), 'utf8');
+assert(/assignment-intake-mismatch/.test(cronRunSrc),
+  'the assignment swap must still gate in runWrite, not just report');
 assert(jaxGate.findings.some(f => f.issue === 'frank-ogawa'));
 
 const complete = `# Fruitvale Transit Hub still sits in visioning

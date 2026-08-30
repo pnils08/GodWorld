@@ -397,6 +397,13 @@ const luisSignage = p.auditArticle(
   'The window still carries a "For Lease" card, curling at the corner.', luisW3);
 assert.ok(!luisSignage.errors.some(row => row.code === 'UNAPPROVED_QUOTE'),
   'signage is not a citizen quote: ' + JSON.stringify(luisSignage.errors));
+// Attribution before the span is still speech — `she said, "Not My Problem"` is
+// three Title-Case words and must not ride out as signage.
+const luisPreAttrib = p.auditArticle(
+  'Marla Deene said, "Not My Problem", and closed the door.', luisW3);
+assert.ok(luisPreAttrib.errors.some(row => row.code === 'UNAPPROVED_QUOTE'),
+  'attribution before the span is speech: ' + JSON.stringify(luisPreAttrib.errors));
+
 const luisFabricated = p.auditArticle(
   'Standing by the fence, she said, "Nobody from that office has ever once called me back about any of it."',
   luisW3);

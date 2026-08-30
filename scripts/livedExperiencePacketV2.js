@@ -393,17 +393,20 @@ function quotedSpans(text) {
 // speech killed a Carmen draft. Signage is short, sign-shaped (Title Case or
 // ALL CAPS), and carries no attribution verb beside it. Anything with a
 // speaker attached, or any span long enough to be a sentence, stays speech.
-const SIGNAGE_ATTRIBUTION = /["”]\s*,?\s*(?:he|she|they|[A-Z][a-z]+)?\s*(?:said|told|asked|added|replied|explained)\b/i;
+// Attribution sits on either side of the span — `she said, "…"` is as common as
+// `"…," she said` — so both shoulders are checked.
+const SPEECH_VERB = /\b(?:said|says|told|asked|adds?|added|replied|explained|shouted|called it)\b/i;
 
 function isSignage(quote, bodyText) {
   const words = String(quote || '').trim().split(/\s+/).filter(Boolean);
   if (words.length > 3 || quote.length > 24) return false;
   if (!/^[A-Z0-9]/.test(quote)) return false;
   if (!words.every(w => /^[A-Z0-9][A-Za-z0-9.'’-]*$/.test(w))) return false;
-  const idx = String(bodyText || '').indexOf(quote);
+  const body = String(bodyText || '');
+  const idx = body.indexOf(quote);
   if (idx >= 0) {
-    const after = String(bodyText).slice(idx + quote.length, idx + quote.length + 40);
-    if (SIGNAGE_ATTRIBUTION.test('"' + after)) return false;
+    if (SPEECH_VERB.test(body.slice(Math.max(0, idx - 32), idx))) return false;
+    if (SPEECH_VERB.test(body.slice(idx + quote.length, idx + quote.length + 32))) return false;
   }
   return true;
 }

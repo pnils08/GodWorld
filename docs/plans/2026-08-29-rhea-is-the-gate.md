@@ -171,7 +171,7 @@ Never fail: presence/scenes, “I've heard,” missing `?`, assignment-token ove
 ## Open questions
 
 - [x] `isSummaryArticle` auditor-lede strings — **log-only, kept**. They still populate `reasons`, but nothing fatal reads them on the Packet-active path: the writer throw is gone and `skipRhea` no longer consults shape. They survive as Rhea context, which is what they were for.
-- [x] Faith/transit assignment swap — **kept as the one `assignment-bind` fail**. It is a contradiction of the assigned story (a faith coverage-gap INTAKE stapled to a transit article), not a wording miss. Both token-overlap checks around it are deleted. Pinned by the Jax C103 fixture.
+- [x] Faith/transit assignment swap — **kept as the one `assignment-bind` fail, and re-wired so the fail means something.** It is a contradiction of the assigned story (a faith coverage-gap INTAKE stapled to a transit article), not a wording miss, and Rhea reads the draft rather than the assignment pairing, so she cannot catch it herself. `runWrite` now ORs that single issue id into `skipRhea`. Caught on review: with `s344Gate.fail` cut out of `skipRhea`, nothing downstream read it — the historical Jax fixture only blocked because it also trips `frank-ogawa` contamination, so a clean swap would have ridden through. Pinned both ways (gate fixture + a source pin that `runWrite` still reads the id).
 
 ---
 

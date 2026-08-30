@@ -414,6 +414,9 @@ function updateCareerProgression_(ctx, cycle, rng) {
     // S320 convention) and what fed Dybantsa into settleAdulthood_ at 18.
     if (isSportsLayerRow_(row, iClockCP, iEconCP)) {
       // leave CareerStage, Income and RoleType exactly as the sports layer set them
+    } else if (status === 'retired') {
+      // A deliberate Status=Retired (a 37-year-old ex-A's star, Paulson's
+      // roster decisions) is not re-derived from age — the stage stays retired.
     } else {
       var derived = deriveCareerStageFromAge_(age, yearsInCareer);
       if (String(row[iCareerStage] || '') !== derived) {

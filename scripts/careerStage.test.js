@@ -73,6 +73,7 @@ function ctxWith(rows, cycle) {
     row({ POPID: 'P10', age: 40, CareerStage: 'entry-level', Status: 'deceased' }),
     row({ POPID: 'P11', age: 40, CareerStage: '', YearsInCareer: 0 }),           // blank stage, no years → mid by age
     row({ POPID: 'P12', age: 44, CareerStage: 'senior', YearsInCareer: 22 }),    // age band wins upward: 44 is mid, not senior
+    row({ POPID: 'P13', age: 37, CareerStage: 'retired', Status: 'Retired', Tier: 1 }), // deliberate retirement (ex-athlete, ENGINE clock): stage stays
   ];
   const ctx = ctxWith(rows);
   let res, threw = null;
@@ -91,6 +92,7 @@ function ctxWith(rows, cycle) {
   assert('E1 deceased untouched', st('P10') === 'entry-level', st('P10'));
   assert('E1 blank stage → mid-career by age', st('P11') === 'mid-career', st('P11'));
   assert('E1 44 with 22 years stays mid (age band, not years, sets the ceiling)', st('P12') === 'mid-career', st('P12'));
+  assert('E1 Status=Retired row is not re-derived from age', st('P13') === 'retired', st('P13'));
   const lp = ctx.ledger.rows.every(r => Number(r[I('LastPromotionCycle')]) === 0);
   assert('E1 LastPromotionCycle never written by the derivation', lp);
   const lh = ctx.ledger.rows.every(r => String(r[I('LifeHistory')]) === 'Y1C1 — born');
@@ -130,6 +132,9 @@ function ctxWith(rows, cycle) {
     row({ POPID: 'R1', age: 70, CareerStage: 'retired', Income: 82000 }),
     row({ POPID: 'R2', age: 40, Status: 'deceased', CareerStage: 'mid-career', Income: 60000 }),
     row({ POPID: 'R3', age: 55, CareerStage: 'retired', Status: 'Retired', Income: 45000 }),
+    row({ POPID: 'R9', age: 64, CareerStage: 'retired', Status: 'Active', Income: 83497 }),   // false-retired, Active: NOT zeroed (E1 corrects the stage)
+    row({ POPID: 'R10', age: 37, CareerStage: 'retired', Status: 'Retired', Tier: 1, Income: 223635 }), // Tier-1 retired star: money is story's
+    row({ POPID: 'R11', age: 68, CareerStage: 'senior', Status: 'Active', Income: 90000 }),   // 68 and still stamped senior: retired by age → 0
     row({ POPID: 'R4', age: 38, CareerStage: 'retired', ClockMode: 'GAME', Status: 'Retired', Income: 2000000 }),  // retired athlete: game engine's
     row({ POPID: 'R5', age: 38, CareerStage: 'mid-career', EconomicProfileKey: 'SPORTS_OVERRIDE', Status: 'deceased', Income: 500000 }), // sports layer, even deceased: untouched
     row({ POPID: 'R6', age: 40, CareerStage: 'mid-career', Income: 61000 }),
@@ -147,7 +152,10 @@ function ctxWith(rows, cycle) {
   assert('D5 active seeded adult untouched', inc('R6') === 61000, inc('R6'));
   assert('D5 minor → 0 (existing gate)', inc('R7') === 0, inc('R7'));
   assert('D5 unseeded zero-income adult still gets the fallback fill', inc('R8') > 0, inc('R8'));
-  assert('D5 updated count covers the three zeroed + minor + fill', res.updated === 5, JSON.stringify(res));
+  assert('D5 false-retired Active 64-year-old keeps her salary', inc('R9') === 83497, inc('R9'));
+  assert('D5 Tier-1 retired star untouched', inc('R10') === 223635, inc('R10'));
+  assert('D5 68-year-old is retired by age regardless of stamped stage', inc('R11') === 0, inc('R11'));
+  assert('D5 updated count: R1 R2 R3 R11 zeroed + minor + fill', res.updated === 6, JSON.stringify(res));
 }
 
 // ── D3. tracked-employer Income floor ───────────────────────────────────────

@@ -98,7 +98,7 @@ pointers:
 
 ## Business_Ledger
 
-- **Rows:** 95
+- **Rows:** 176
 - **Columns:** 9
 
 | Col | Header |
@@ -837,7 +837,7 @@ pointers:
 
 ## Neighborhood_Demographics
 
-- **Rows:** 22
+- **Rows:** 23
 - **Columns:** 12
 
 | Col | Header |
@@ -860,7 +860,7 @@ pointers:
 ## Neighborhood_Map
 
 - **Rows:** 23
-- **Columns:** 24
+- **Columns:** 30
 
 | Col | Header |
 |-----|--------|
@@ -888,6 +888,12 @@ pointers:
 | V | TrajectoryMomentum |
 | W | District |
 | X | CoreSimRank |
+| Y | IncomeTier |
+| Z | BoomExposure |
+| AA | BoomIndex |
+| AB | EmployerCharacter |
+| AC | WealthMin |
+| AD | WealthMax |
 
 ---
 

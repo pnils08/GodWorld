@@ -98,7 +98,7 @@ clear whenever Mike fires them; they confirm, they don't gate.
 
 ### LIVE — engine.135 code wave DEPLOYED 2026-08-30 00:45 (S398 engine-sheet) — prod @8
 
-Staged from a `clasp pull` of SANDBOX 0827 @11 (the bench-proven tree, C131–C134 clean) with the repo `.clasp.json` copied last; prod ID present / sandbox ID absent / 0 tests / 171 files; `clasp push -f` + deployment bump @8; pull-back 0 differing files. Sheet replay (plan §Live-wave replay checklist 1→6) pending — the code reads the missing profile columns as neutral until then.
+Staged from a `clasp pull` of SANDBOX 0827 @11 (the bench-proven tree, C131–C134 clean) with the repo `.clasp.json` copied last; prod ID present / sandbox ID absent / 0 tests / 171 files; `clasp push -f` + deployment bump @8; pull-back 0 differing files. Sheet replay 1–5 landed 02:10 (builder-run, engine-sheet verified) — detail in the plan's checklist.
 
 ### LIVE — engine.132 + engine.133 DEPLOYED 2026-08-29 22:45 (S397 engine-sheet)
 

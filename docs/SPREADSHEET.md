@@ -40,9 +40,9 @@ These are read/written during every cycle run.
 | **Family_Relationships** | 2 | ENGINE | ENGINE | Parent-child links (mostly in SL ParentIds/ChildrenIds) |
 | **Relationship_Bonds** | 211 | ENGINE | ENGINE | Active alliance/rivalry/mentorship bonds |
 | **Relationship_Bond_Ledger** | 2,424 | ENGINE | ENGINE | Full bond history |
-| **Neighborhood_Map** | 22 | ENGINE, SCRIPT | ENGINE, SCRIPT | 22 neighborhoods, 24 cols (S315: trajectory block replaced gentrification block; S352 engine.99: East Oakland row added + CoreSimRank col X — ADR-0016 truth source for the hood set AND the core-sim subset/draw order; loader: phase01-config/canonNeighborhoodLoader.js, detector: scripts/auditHoodDrift.js) |
+| **Neighborhood_Map** | 22 | ENGINE, SCRIPT | ENGINE, SCRIPT | 22 neighborhoods, 30 cols (S398 engine.135 B1: cols Y–AD `IncomeTier, BoomExposure, BoomIndex, EmployerCharacter, WealthMin, WealthMax` authored from INSTITUTIONS §Neighborhoods, `MedianIncome` re-based; live 2026-08-30) (S315: trajectory block replaced gentrification block; S352 engine.99: East Oakland row added + CoreSimRank col X — ADR-0016 truth source for the hood set AND the core-sim subset/draw order; loader: phase01-config/canonNeighborhoodLoader.js, detector: scripts/auditHoodDrift.js) |
 | **Event_Content_Ledger** | 253 | ENGINE, SCRIPT | HAND, SCRIPT | Sheet-resident event content (S289 Design A + engine.49 auto-author): `line` pool rows + `fragment` slot fillers, 9 cols A–I (Kind/PoolKey/Slot/Text/Weight/Conditions/Tags/Grain/Active). Read by `loadEventContentLedger_` Phase 2 → `S.contentLedger`; empty/missing tab = no-op fallback to hardcoded pools. Written by hand + post-cycle `scripts/draftContentRows.js` (`auth:auto` provenance; Active kill switch). DSL + source whitelist live in the loader — see `loadEventContentLedger.js` |
-| **Neighborhood_Demographics** | 17 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Per-neighborhood population/income/age |
+| **Neighborhood_Demographics** | 22 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Per-neighborhood population/income/age; 22 hoods = the Neighborhood_Map set (East Oakland row added S398, live 2026-08-30); Unemployed/Sick are envelopes of the World_Population dials (engine.133/135) |
 | **Crime_Metrics** | 17 | ENGINE, SCRIPT, DASHBOARD | ENGINE | QoL index, patrol, hotspots per neighborhood |
 | **Transit_Metrics** | 180 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Ridership, delays, construction |
 | **Domain_Tracker** | 46 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Domain activity and cooldowns |
@@ -147,7 +147,7 @@ Maintained for reference by scripts and Mara audits.
 | **As_Roster** | 89 | SCRIPT | MIKE | A's player roster — POPID, position, team, tier. NEW S105. |
 | **Bay_Tribune_Oakland** | 29 | SCRIPT | MIKE | Tribune journalist roster. NEW S105. |
 | **Chicago_Citizens** | 123 | SCRIPT | ENGINE | Bulls players + Chicago city citizens |
-| **Business_Ledger** | 51 | ENGINE, SCRIPT, DASHBOARD | SCRIPT | 51 businesses with sectors, employees |
+| **Business_Ledger** | 175 | ENGINE, SCRIPT, DASHBOARD | SCRIPT | 175 businesses (BIZ-00001–00179 with gaps); every Neighborhood_Map hood ≥ 6 rows since S398 (engine.135 Phase C, 72-row fill BIZ-00108–00179 + 32 storefront rows re-based to the plan §Pay scale); `Avg_Salary` is the tracked-employer Income floor's input (D3) |
 | **Faith_Organizations** | 16 | SCRIPT, DASHBOARD | SCRIPT | 16 faith orgs with leaders |
 | **Economic_Parameters** | 198 | ENGINE (engine.51 intake salary pools, `godWorldEngine2.js` L1242+, S305) | SCRIPT | 198 role economic profiles (local copy at `data/economic_parameters.json`). Was "no readers" pre-S305; nearly retired S311 on that stale verdict — final pre-delete grep reversed it. |
 | **Event_Wiring_Ledger** | 39 | MIKE (grid-health view) | SCRIPT (regen on matrix change) | Rendered view of the engine.67 generator conditioning matrix — one row per event generator, gate status per citizen dimension (Age/Status/Wealth/Household/Heritage). Source of truth: `docs/plans/2026-07-18-event-pools-design.md`; regenerate tab same-commit when matrix changes. NEW S325. |

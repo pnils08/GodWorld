@@ -171,6 +171,8 @@ Pay scale follows the same table: a hood's income tier sets the salary band for 
 
 ## Live-wave replay checklist (engine-sheet, Tier A — moved here from DEPLOY.md 2026-08-30; DEPLOY.md holds protocol + pointers only)
 
+**STATUS: DONE ON LIVE 2026-08-30 02:10 (S398).** Code prod @8 (00:45); replay steps 1–5 run by the builder via the one-shot runner, each read-back verified independently afterwards: NM 22/22 + 30 cols; ND East Oakland 422/1331/285/131/106; WC 0.96/0.88/0.96 + WP employmentRate 0.9015→0.9315 (Σunemp 1814 / Σadults 26501); BL 72/72 exact (BIZ-00108–00179, `output/grok/business-ledger-hood-fill-c104.live.json`), 32 storefront rows at formula; `cascadeAudit` live: unemployment-band PASS, sick-rate-band PASS. Step 6 docs trued in the same commit. Live is at C104 — the first cycle on the new world is the builder's next fire.
+
 Code: the bench @11 tree (prod @7 + engine.135 A/B1/B2 files + `runYouthEngine.js`, `educationCareerEngine.js`, `generationalWealthEngine.js`) pushed to prod as one wave. Sheet writes replayed on live IN THIS ORDER, each dry-run → apply → read-back:
 
 1. `Neighborhood_Map` B1 profile (six cols + MedianIncome) — §B1 table is the durable copy. Everything below refuses without `IncomeTier`.
@@ -206,6 +208,7 @@ Bench record (verbatim from DEPLOY.md, S397–S398):
 ---
 
 ## Changelog
+- 2026-08-30 (S398, 02:10) — **LIVE.** Code wave prod @8; sheet replay 1–5 landed and verified; SPREADSHEET.md counts trued. Remaining work (D2/D4, E2, F) now builds on the live world, not the bench alone.
 - 2026-08-30 (S398 close, later) — Acceptance status recorded; cascadeAudit run against the bench (unemployment-band PASS); audit owes an unemployment-spread lane + adults denominator.
 - 2026-08-30 (S398 close) — D3 proven C134 (289 raises, invariant holds). Bench @11 carries A/B1/B2/B3/C/D1/D3/D5/D6/E1 + the youth fix; bench writes #1–#5 logged for the live replay. Remaining: D2/D4, E2, F, then the live wave (gated on Mike's smoke of prod @7).
 - 2026-08-30 (S398, later) — E1 + D1 + D5 code shipped to bench (@9) and proven C133; D6 storefront re-base written to bench (32 rows); D3 floor coded + unit-proven, bench proof next. Plan §Phase D/E rows updated with DONE/NEXT state.

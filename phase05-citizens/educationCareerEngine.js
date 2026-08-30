@@ -319,6 +319,22 @@ function isSportsLayerRow_(row, iClock, iEcon) {
   return false;
 }
 
+/**
+ * engine.135 E1 — CareerStage from age, YearsInCareer breaking ties downward.
+ * Pure: (age, yearsInCareer) → canonical CAREER_STAGES string.
+ */
+function deriveCareerStageFromAge_(age, yearsInCareer) {
+  var y = Number(yearsInCareer) || 0;
+  if (age < 22) return CAREER_STAGES.STUDENT;
+  if (age >= 65) return CAREER_STAGES.RETIRED;
+  // YearsInCareer 0/blank is UNKNOWN (never accrued), not "just started" —
+  // the tie-break only applies when the years are known.
+  if (y <= 0) return age >= 45 ? CAREER_STAGES.SENIOR : (age >= 30 ? CAREER_STAGES.MID : CAREER_STAGES.ENTRY);
+  if (age >= 45) return y >= 10 ? CAREER_STAGES.SENIOR : (y >= 3 ? CAREER_STAGES.MID : CAREER_STAGES.ENTRY);
+  if (age >= 30) return y >= 3 ? CAREER_STAGES.MID : CAREER_STAGES.ENTRY;
+  return CAREER_STAGES.ENTRY;
+}
+
 function updateCareerProgression_(ctx, cycle, rng) {
   // Phase 42 §5.6: read/mutate ctx.ledger.rows; Phase 10 commits.
   var header = ctx.ledger.headers;
@@ -345,8 +361,10 @@ function updateCareerProgression_(ctx, cycle, rng) {
 
   if (iCareerStage < 0 || iYearsInCareer < 0) return { advanced: 0, stagnant: 0 };
 
-  var advanced = 0;
+  var advanced = 0;   // always 0 since engine.135 E1 — kept for the results contract
   var stagnant = 0;
+  var restamped = 0;  // engine.135 E1: rows whose derived stage differed from the stored one
+  var yearsAccrued = 0;
   var simYear = 2040 + Math.floor(cycle / 52);
 
   for (var r = 0; r < rows.length; r++) {
@@ -372,64 +390,51 @@ function updateCareerProgression_(ctx, cycle, rng) {
     if (age >= 22 && cycle > 0 && cycle % 26 === 0) {
       yearsInCareer += 0.5;
       row[iYearsInCareer] = Math.round(yearsInCareer * 10) / 10;
+      yearsAccrued++;
     }
 
-    // Check for career stage advancement.
+    // engine.135 E1 (S398, builder direction points 14: "Nothing free" —
+    // no promotion because N cycles passed; CareerStage is age-related).
+    // CareerStage is DERIVED, not rolled: student <22 · entry 22–29 · mid
+    // 30–44 · senior 45–64 · retired ≥65, with YearsInCareer breaking ties
+    // DOWNWARD at the band edges (a 46-year-old with 3 career years is mid;
+    // a 33-year-old with 1 is entry). The age band is the ceiling — years
+    // never lift a citizen above it. The calendar rolls this replaced
+    // (ENTRY→MID 15%/cycle after 10 cycles, MID→SENIOR 5–15%/cycle after
+    // 20) were the C103→C104 promotion spike (13 → 29/cycle) and would have
+    // made the whole mid class senior in ~15 cycles. No rng, no
+    // LastPromotionCycle write, no stampPromotion_: a stage is a description
+    // of where a citizen is in life, not an event. Promotions with a
+    // narrative and an Income consequence are the employer-success path
+    // (plan §Phase E, runCareerEngine_ transitions) — stampPromotion_ stays
+    // defined for that caller.
     // A sports-layer citizen is never regressed to student on age alone: a
     // 16-year-old under contract is a professional, and demoting him to student
     // is what zeroed Sarr's and Carr's salaries (students/minors earn nothing,
     // S320 convention) and what fed Dybantsa into settleAdulthood_ at 18.
     if (isSportsLayerRow_(row, iClockCP, iEconCP)) {
       // leave CareerStage, Income and RoleType exactly as the sports layer set them
-    } else if (age < 22) {
-      row[iCareerStage] = CAREER_STAGES.STUDENT;
-    } else if (age >= 65) {
-      row[iCareerStage] = CAREER_STAGES.RETIRED;
     } else {
-      // Check if eligible for advancement — class-normalized (Row 24 a)
-      var cyclesSincePromotion = cycle - lastPromotion;
-      var stageClass = careerStageClass_(careerStage);
-
-      if (stageClass === 'ENTRY' && cyclesSincePromotion >= ADVANCEMENT_CYCLES.ENTRY_TO_MID) {
-        // Entry → Mid
-        if (yearsInCareer >= 5 && rng() < 0.15) {
-          row[iCareerStage] = CAREER_STAGES.MID;
-          row[iLastPromotion] = cycle;
-          stampPromotion_(ctx, row, iLife, iLastU24, iPop24, iFirst24, iLast24, iNb24, iOcc24,
-            'stepped up into mid-career', yearsInCareer, cycle);
-          advanced++;
-        }
-      } else if (stageClass === 'MID' && cyclesSincePromotion >= ADVANCEMENT_CYCLES.MID_TO_SENIOR) {
-        // Mid → Senior (requires education)
-        // S321 (engine.60 T4 adjacent fix): was exact-match 'bachelor' /
-        // 'graduate' — the live ledger holds 'bachelors'/'masters'/'doctorate',
-        // so the education boost silently never fired. eduRank_ accepts both.
-        var advanceChance = 0.05;
-        var advRank = eduRank_(education);
-        if (advRank === 1) advanceChance = 0.10;
-        if (advRank === 2) advanceChance = 0.15;
-
-        if (yearsInCareer >= 10 && rng() < advanceChance) {
-          row[iCareerStage] = CAREER_STAGES.SENIOR;
-          row[iLastPromotion] = cycle;
-          stampPromotion_(ctx, row, iLife, iLastU24, iPop24, iFirst24, iLast24, iNb24, iOcc24,
-            'was promoted into a senior role', yearsInCareer, cycle);
-          advanced++;
-        }
+      var derived = deriveCareerStageFromAge_(age, yearsInCareer);
+      if (String(row[iCareerStage] || '') !== derived) {
+        row[iCareerStage] = derived;
+        restamped++;
       }
-
-      // Detect stagnation — class-normalized (Row 24 a)
-      if (cyclesSincePromotion >= ADVANCEMENT_CYCLES.STAGNATION && stageClass !== 'SENIOR') {
+      // Stagnation counter (summary-only, feeds results.stagnationDetected):
+      // unchanged meaning — cycles since the last real promotion.
+      var cyclesSincePromotion = cycle - lastPromotion;
+      if (cyclesSincePromotion >= ADVANCEMENT_CYCLES.STAGNATION && careerStageClass_(derived) !== 'SENIOR' &&
+          careerStageClass_(derived) !== 'STUDENT' && careerStageClass_(derived) !== 'RETIRED') {
         stagnant++;
       }
     }
   }
 
-  if (advanced > 0 || stagnant > 0) {
+  if (advanced > 0 || restamped > 0 || yearsAccrued > 0) {
     ctx.ledger.dirty = true;
   }
 
-  return { advanced: advanced, stagnant: stagnant };
+  return { advanced: advanced, stagnant: stagnant, restamped: restamped };
 }
 
 

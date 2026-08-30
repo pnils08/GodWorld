@@ -63,11 +63,11 @@
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
 | 3-Population | `updateWorldPopulation_()` | godWorldEngine2.js | Birth/death/migration numbers for World_Population |
-| 3-Demographics | `applyDemographicDrift_()` | phase03-population/applyDemographicDrift.js | Age/income/education shifts across neighborhoods |
+| 3-Demographics | `applyDemographicDrift_()` | phase03-population/applyDemographicDrift.js | Age/income/education shifts across neighborhoods; owns the two city dials — `illnessRate` (engine.133: attractor + salient-weather strain) and `employmentRate` (engine.135 A: pulled toward `World_Config.employmentAttractor` 0.96 by `employmentAttractorPull`, floor 0.88; = employed share of ND Adults 23–64) |
 | 3-CrisisSpikes | `generateCrisisSpikes_()` | phase03-population/generateCrisisSpikes.js | Acute crisis events (housing, health, etc.) |
 | 3-CrisisBuckets | `generateCrisisBuckets_()` | phase03-population/generateCrisisBuckets.js | Categorize crisis events by domain |
 | 3-Crime | `updateCrimeMetrics_Phase3_()` | phase03-population/updateCrimeMetrics.js | QoL index, patrol strategy, hotspots, enforcement capacity |
-| 3-NeighborhoodDemo | `updateNeighborhoodDemographics_()` | phase03-population/updateNeighborhoodDemographics.js | Per-neighborhood population/income/age stats |
+| 3-NeighborhoodDemo | `updateNeighborhoodDemographics_()` | phase03-population/updateNeighborhoodDemographics.js | Per-neighborhood population/income/age stats. Sick and Unemployed are ENVELOPES of the city dials filled unevenly: `buildHoodEmploymentWeights_` (engine.135 B2 — income × boom × tracked-employer depth from `S.hoodEmployerDepth`, Σ hood unemployed = (1 − rate) × Σ adults, converge `employmentConvergenceRate`) and the illness twin (engine.133). `ensureEngine135Config_` self-arms the 4 physics keys. Reads the B1 hood profile from `S.neighborhoodState` |
 
 **ctx.summary after Phase 3:** adds `populationMetrics`, `demographicDrift`, `crisisSpikes`, `crisisBuckets`, `crimeMetrics`
 
@@ -152,8 +152,8 @@
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
 | 5-HouseholdFormation | `processHouseholdFormation_()` | phase05-citizens/householdFormationEngine.js | Marriage, household creation |
-| 5-GenerationalWealth | `processGenerationalWealth_()` | phase05-citizens/generationalWealthEngine.js | Wealth accumulation, inheritance |
-| 5-EducationCareer | `processEducationCareer_()` | phase05-citizens/educationCareerEngine.js | Education-career link |
+| 5-GenerationalWealth | `processGenerationalWealth_()` | phase05-citizens/generationalWealthEngine.js | Wealth accumulation, inheritance. `calculateCitizenIncomes_` fills unseeded Income only and zeroes retired/deceased (engine.135 D5, sports layer exempt); `deriveWealthLevel_` = pure NetWorth bands 0–12 (engine.135 D1: 10 ≥$50M · 11 ≥$250M · 12 ≥$1B) |
+| 5-EducationCareer | `processEducationCareer_()` | phase05-citizens/educationCareerEngine.js | Education-career link. `updateCareerProgression_` DERIVES CareerStage from age via `deriveCareerStageFromAge_` (engine.135 E1: student <22 · entry 22–29 · mid 30–44 · senior 45–64 · retired ≥65, YearsInCareer tie-breaks downward; no calendar promotion rolls, no rng); sports-layer rows untouched; `stampPromotion_` stays for the employer-success path (Phase E2) |
 | 5-Trajectory | `processNeighborhoodTrajectory_()` | phase05-citizens/neighborhoodTrajectoryEngine.js | Neighborhood trajectory (decay/steady/growth), housing pressure, rent/income drift (S315, was gentrificationEngine) |
 | 5-MigrationTracking | `processMigrationTracking_()` | phase05-citizens/migrationTrackingEngine.js | Migration intent, movement |
 

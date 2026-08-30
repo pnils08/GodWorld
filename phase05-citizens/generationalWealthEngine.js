@@ -108,7 +108,9 @@ var SAVINGS_RATE_BY_WEALTH = {
   7: 0.12,
   8: 0.15,
   9: 0.18,
-  10: 0.20
+  10: 0.20,
+  11: 0.22,   // engine.135 D1
+  12: 0.25    // engine.135 D1
 };
 
 
@@ -430,6 +432,8 @@ function calculateCitizenIncomes_(ctx) {
   var iTier = idx('Tier');
   var iEconKey = idx('EconomicProfileKey');
   var iBirthYear = idx('BirthYear');
+  var iClockMode = idx('ClockMode');      // engine.135 D5
+  var iCareerStage = idx('CareerStage');  // engine.135 D5
 
   if (iIncome < 0 || iLife < 0) return { updated: 0 };
 
@@ -444,7 +448,23 @@ function calculateCitizenIncomes_(ctx) {
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var status = (row[iStatus] || 'active').toString().toLowerCase();
-    if (status === 'deceased' || status === 'inactive') continue;
+
+    // engine.135 D5 (S398, builder direction point 16): retired or deceased →
+    // Income 0. The sports layer is exempt outright (a retired athlete's
+    // number is the game engine's, S319) — isSportsLayerRow_ from
+    // educationCareerEngine.js. Status 'retired' or CareerStage 'retired'
+    // both count; 'inactive' keeps its old skip.
+    var sportsRow = isSportsLayerRow_(row, iClockMode, iEconKey);
+    if (sportsRow) continue;
+    var stageLower = iCareerStage >= 0 ? String(row[iCareerStage] || '').trim().toLowerCase() : '';
+    if (status === 'deceased' || status === 'retired' || stageLower === 'retired') {
+      if ((Number(row[iIncome]) || 0) !== 0) {
+        row[iIncome] = 0;
+        updated++;
+      }
+      continue;
+    }
+    if (status === 'inactive') continue;
 
     // Minors earn nothing (S318 age gate; floor raised 16→18 by S320
     // kid-age ruling). Missing BirthYear is treated as adult — same
@@ -600,7 +620,11 @@ function deriveWealthLevel_(income, inheritance, netWorth, debt) {
   // reflected in NetWorth — no modifiers. Signature kept for callers;
   // income/inheritance/debt intentionally unused.
   // Plan: docs/plans/2026-08-09-wealthlevel-networth-bands.md
+  // engine.135 D1 (S398, builder pushback 2026-08-29): the top extended
+  // 10 → 12 — Varek at $10B and a $50M citizen are not the same level.
   var nw = Number(netWorth) || 0;
+  if (nw >= 1000000000) return 12; // ≥ $1B
+  if (nw >= 250000000) return 11;  // ≥ $250M
   if (nw >= 50000000) return 10;  // ≥ $50M
   if (nw >= 5000000)  return 9;   // ≥ $5M
   if (nw >= 1000000)  return 8;   // ≥ $1M

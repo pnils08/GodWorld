@@ -1151,6 +1151,8 @@
 
 - **isSportsLayerRow_(row, iClock, iEcon)**
 
+- **deriveCareerStageFromAge_(age, yearsInCareer)**
+
 - **updateCareerProgression_(ctx, cycle, rng)**
 
 - **detectCareerMobility_(ctx, cycle, rng)**
@@ -3519,4 +3521,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1175
+**Functions mapped:** 1176

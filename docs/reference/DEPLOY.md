@@ -54,6 +54,7 @@ clear whenever Mike fires them; they confirm, they don't gate.
 **CURRENT: `SANDBOX 0827` (stood up 2026-08-27, Mike-made copy).** Clean copy of live at C104 — the proving bench for the engine.131 wave and the engine.126/128/129 backlog that shipped live with it.
 - Spreadsheet ID `14-dUy_Uz_B90bKidZeBL-WHzhJ828kTpf24Lebu9GXA`
 - **engine.135 bench-side sheet writes + replay order:** the wave plan's §Live-wave replay checklist (`docs/plans/2026-08-29-employment-system-cascade.md`). Log per-wave writes THERE, not here.
+- **Bench state 2026-08-30 04:13 (S399): synced from live C104 (`syncSandboxFromLive.js --apply`), then @15 = @14 tree + the six engine.135 D2/D4 files (`d93a5532`), fired C105–C106 clean. Bench sits at C106, @15. No bench-only sheet writes since the sync.**
 - Bound Apps Script ID `1BPdOpFkGSzNpRL-m5BANCdKOegMobp2g00Owf3qJbIPDuZJfaQCNEQyW`
 - Web-app deployment `AKfycbzdYHHwdrFBtrW0l38np_EGg6C1feMWCs1vXAE0O8xVdNbAvh54v4G7VYMgmKWSpkBQ` @1 (created 2026-08-27 via temp-dir route). **WARNING: any valid-token GET fires a FULL cycle — no ping mode.**
 - Code current at exact main `799fd841`. Pushed via temp-dir route with the S316 ID grep-guard; pull-back matched all 7 payload files byte-for-byte, 0 test files, 172 files pulled.

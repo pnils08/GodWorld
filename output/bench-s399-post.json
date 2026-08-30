@@ -1,0 +1,18 @@
+{
+ "cycleCount": "105",
+ "engineErrors": 0,
+ "match": 121,
+ "total": 131,
+ "mism": [
+  "POP-00114 0 vs null emp=BIZ-00005",
+  "POP-00842 44312 vs 93000 emp=BIZ-00019",
+  "POP-00813 48100 vs 69000 emp=BIZ-00107",
+  "POP-00933 80600 vs 62700 emp=BIZ-00027",
+  "POP-00855 208000 vs 58700 emp=BIZ-00003",
+  "POP-00918 53325 vs 55800 emp=BIZ-00035",
+  "POP-00951 98000 vs 49300 emp=BIZ-00015",
+  "POP-00812 79948 vs 47800 emp=BIZ-00023",
+  "POP-00787 43500 vs 41400 emp=BIZ-00028",
+  "POP-00784 75329 vs 34400 emp=BIZ-00031"
+ ]
+}

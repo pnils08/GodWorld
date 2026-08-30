@@ -10,8 +10,8 @@
  *   node scripts/cascadeAudit.js
  *
  * Output:
- *   output/audit-reports/cascade-audit-2026-08-08.md
- *   output/audit-reports/cascade-audit-2026-08-08.json
+ *   output/audit-reports/cascade-audit-<run date>.md
+ *   output/audit-reports/cascade-audit-<run date>.json
  */
 
 'use strict';
@@ -23,7 +23,7 @@ const fs = require('fs');
 const sheets = require('../lib/sheets.js');
 
 const OUT_DIR = path.join(__dirname, '..', 'output', 'audit-reports');
-const DATE = '2026-08-08';
+const DATE = new Date().toISOString().slice(0, 10);
 const OUT_MD = path.join(OUT_DIR, `cascade-audit-${DATE}.md`);
 const OUT_JSON = path.join(OUT_DIR, `cascade-audit-${DATE}.json`);
 
@@ -147,18 +147,27 @@ async function computeCascadeAudit() {
 
   // ── Neighborhood_Map ──
   let nmHoods = [];
+  const nmIncomeTier = {};
   if (raw.Neighborhood_Map.present) {
     const data = raw.Neighborhood_Map.data;
     const headers = data[0] || [];
     const col = findColumn(headers, ['Neighborhood', 'Neighbourhood', 'Hood', 'Name']);
+    const tierCol = findColumn(headers, ['IncomeTier', 'Income Tier']);
     if (!col.found) {
       report.missingColumns['Neighborhood_Map.Neighborhood'] = 'Neighborhood/Neighbourhood';
     } else {
       for (const row of data.slice(1)) {
         const h = String(row[col.index] || '').trim();
-        if (h) nmHoods.push(h);
+        if (!h) continue;
+        nmHoods.push(h);
+        // engine.135 B1 profile column — the tier the unemployment-spread lane groups by.
+        if (tierCol.found) {
+          const t = num(row, tierCol.index);
+          if (Number.isFinite(t)) nmIncomeTier[h] = t;
+        }
       }
     }
+    if (!tierCol.found) report.missingColumns['Neighborhood_Map.IncomeTier'] = 'IncomeTier';
   }
 
   // ── Neighborhood_Demographics ──
@@ -226,6 +235,11 @@ async function computeCascadeAudit() {
     nd.totalPeople = nd.hoods.reduce((s, h) => s + h.totalPeople, 0);
     nd.totalSick = nd.hoods.reduce((s, h) => s + (Number.isFinite(h.Sick) ? h.Sick : 0), 0);
     nd.totalUnemployed = nd.hoods.reduce((s, h) => s + (Number.isFinite(h.Unemployed) ? h.Unemployed : 0), 0);
+    // Q5 (plan §Open questions, resolved S398): employmentRate is the employed
+    // share of ND *Adults* 23–64, not of the whole hood population. Unemployment
+    // therefore divides by Adults — the hood code has enforced
+    // `Unemployed = Adults × (1 − rate)` since 2026-01-26.
+    nd.totalAdults = nd.hoods.reduce((s, h) => s + (Number.isFinite(h.Adults) ? h.Adults : 0), 0);
     nd.totalMigration = nd.hoods.reduce((s, h) => s + (Number.isFinite(h.migrationSum) ? h.migrationSum : 0), 0);
   }
 
@@ -284,7 +298,8 @@ async function computeCascadeAudit() {
   const ledgerSickRate = ledgerDenom > 0 ? sl.sick / ledgerDenom : NaN;
 
   const wpEmpRate = wp.employmentRate;
-  const hoodUnempRate = hoodDenom > 0 ? nd.totalUnemployed / hoodDenom : NaN;
+  const adultDenom = nd.totalAdults;
+  const hoodUnempRate = adultDenom > 0 ? nd.totalUnemployed / adultDenom : NaN;
   const ledgerUnempRate = ledgerDenom > 0 ? (sl.employment.empty || 0) / ledgerDenom : NaN;
 
   const wpMigration = wp.migration;
@@ -298,7 +313,7 @@ async function computeCascadeAudit() {
     },
     employment: {
       cityDial: { value: wpEmpRate, display: fmtPct(wpEmpRate) },
-      hoodLayer: { value: hoodUnempRate, display: fmtPct(hoodUnempRate), numerator: nd.totalUnemployed, denominator: hoodDenom },
+      hoodLayer: { value: hoodUnempRate, display: fmtPct(hoodUnempRate), numerator: nd.totalUnemployed, denominator: adultDenom },
       ledgerLayer: { value: ledgerUnempRate, display: fmtPct(ledgerUnempRate), numerator: sl.employment.empty || 0, denominator: ledgerDenom }
     },
     migration: {
@@ -412,13 +427,13 @@ async function computeCascadeAudit() {
     }
   }
 
-  // 3. Unemployment band
+  // 3. Unemployment band — Adults denominator per Q5 (see nd.totalAdults above).
   if (!Number.isFinite(wpEmpRate) || !Number.isFinite(hoodUnempRate)) {
     report.invariants.push({
       id: 'unemployment-band',
-      label: 'Hood Unemployed/pop within ±2pp of 1 − employmentRate',
+      label: 'Hood Unemployed/Adults within ±2pp of 1 − employmentRate',
       result: 'SKIP',
-      note: 'Missing data'
+      note: adultDenom > 0 ? 'Missing data' : 'No Adults column / zero adults in Neighborhood_Demographics'
     });
   } else {
     const target = 1 - wpEmpRate;
@@ -426,13 +441,67 @@ async function computeCascadeAudit() {
     const pass = diff <= 0.02;
     report.invariants.push({
       id: 'unemployment-band',
-      label: 'Hood Unemployed/pop within ±2pp of 1 − employmentRate',
+      label: 'Hood Unemployed/Adults within ±2pp of 1 − employmentRate',
       result: pass ? 'PASS' : 'FAIL',
       targetRate: target,
       hoodRate: hoodUnempRate,
       diffPp: diff,
-      note: pass ? undefined : `gap ${(diff * 100).toFixed(2)}pp`
+      note: `hood ${(hoodUnempRate * 100).toFixed(2)}% vs dial ${(target * 100).toFixed(2)}% — gap ${(diff * 100).toFixed(2)}pp`
     });
+  }
+
+  // 3b. Unemployment spread (engine.135 acceptance criterion 2) — the city dial
+  // must land UNEVENLY across the hood layer: the Neighborhood_Map IncomeTier
+  // profile's bottom tier carries measurably more unemployment than its top
+  // tier. A flat envelope is the pre-engine.135 shape and fails here.
+  // Tiers, not max/min hood: the criterion is written against the profile.
+  {
+    const byTier = new Map();
+    let untiered = 0;
+    for (const h of nd.hoods) {
+      const tier = nmIncomeTier[h.hood];
+      if (!Number.isFinite(tier)) { untiered++; continue; }
+      if (!Number.isFinite(h.Adults) || h.Adults <= 0) continue;
+      if (!Number.isFinite(h.Unemployed)) continue;
+      const g = byTier.get(tier) || { unemployed: 0, adults: 0, hoods: [] };
+      g.unemployed += h.Unemployed;
+      g.adults += h.Adults;
+      g.hoods.push(h.hood);
+      byTier.set(tier, g);
+    }
+    if (byTier.size < 2) {
+      report.invariants.push({
+        id: 'unemployment-spread',
+        label: 'Hood unemployment spread ≥ 2pp between top and bottom IncomeTier',
+        result: 'SKIP',
+        note: `fewer than 2 populated IncomeTiers (untiered hoods: ${untiered})`
+      });
+    } else {
+      const tiers = [...byTier.keys()].sort((a, b) => a - b);
+      const bottomTier = tiers[0];
+      const topTier = tiers[tiers.length - 1];
+      const bottomRate = byTier.get(bottomTier).unemployed / byTier.get(bottomTier).adults;
+      const topRate = byTier.get(topTier).unemployed / byTier.get(topTier).adults;
+      const spread = bottomRate - topRate;
+      const pass = spread >= 0.02;
+      report.invariants.push({
+        id: 'unemployment-spread',
+        label: 'Hood unemployment spread ≥ 2pp between top and bottom IncomeTier',
+        result: pass ? 'PASS' : 'FAIL',
+        bottomTier,
+        topTier,
+        bottomRate,
+        topRate,
+        spreadPp: spread,
+        perTier: tiers.map(t => ({
+          tier: t,
+          rate: byTier.get(t).unemployed / byTier.get(t).adults,
+          hoods: byTier.get(t).hoods.length
+        })),
+        note: `tier ${bottomTier} ${(bottomRate * 100).toFixed(2)}% vs tier ${topTier} ${(topRate * 100).toFixed(2)}% — spread ${(spread * 100).toFixed(2)}pp`
+          + (pass ? '' : ' — flat envelope: pre-engine.135 residue, or no cycle has run since the dial/profile write')
+      });
+    }
   }
 
   // 4. Sample-support rule
@@ -489,6 +558,7 @@ function renderMarkdown({ report, raw, nd, sl }) {
   const cityDenom = report.scaleTable.cityModelPop;
   const hoodDenom = report.scaleTable.hoodDemoTotal;
   const ledgerDenom = report.scaleTable.ledgerSampleRows;
+  const adultDenom = report.metrics.employment.hoodLayer.denominator;
   const md = [];
   md.push(`# Cascade Consistency Audit — ${DATE}`);
   md.push('');
@@ -528,7 +598,7 @@ function renderMarkdown({ report, raw, nd, sl }) {
   md.push('| Layer | Value | Numerator | Denominator |');
   md.push('|---|---|---|---|');
   md.push(`| City dial (WP employmentRate) | ${report.metrics.employment.cityDial.display} | — | — |`);
-  md.push(`| Hood layer (Σ Unemployed / Σ people) | ${report.metrics.employment.hoodLayer.display} | ${nd.totalUnemployed} | ${fmtN(hoodDenom, 0)} |`);
+  md.push(`| Hood layer (Σ Unemployed / Σ Adults) | ${report.metrics.employment.hoodLayer.display} | ${nd.totalUnemployed} | ${fmtN(adultDenom, 0)} |`);
   md.push(`| Ledger layer (empty EmployerBizId / sample) | ${report.metrics.employment.ledgerLayer.display} | ${sl.employment.empty || 0} | ${ledgerDenom} |`);
   md.push('');
   md.push(`Ledger employer breakdown: \`${JSON.stringify(sl.employment)}\` (UNTRACKED is intentional feedstock, not WP unemployment).`);
@@ -547,10 +617,23 @@ function renderMarkdown({ report, raw, nd, sl }) {
   md.push('| Invariant | Result | Detail |');
   md.push('|---|---|---|');
   for (const inv of report.invariants) {
-    const detail = inv.note || `citySign=${inv.citySign}, hoodSign=${inv.hoodSign}`;
+    const detail = inv.note
+      || (Number.isFinite(inv.citySign) ? `citySign=${inv.citySign}, hoodSign=${inv.hoodSign}` : '—');
     md.push(`| ${inv.label} | **${inv.result}** | ${detail} |`);
   }
   md.push('');
+
+  const spreadInv = report.invariants.find(i => i.id === 'unemployment-spread');
+  if (spreadInv && Array.isArray(spreadInv.perTier)) {
+    md.push('### Unemployment by IncomeTier');
+    md.push('');
+    md.push('| IncomeTier | Hoods | Unemployed / Adults |');
+    md.push('|---|---|---|');
+    for (const t of spreadInv.perTier) {
+      md.push(`| ${t.tier} | ${t.hoods} | ${fmtPct(t.rate)} |`);
+    }
+    md.push('');
+  }
 
   md.push('## Hood-set diff (Neighborhood_Map vs Neighborhood_Demographics)');
   md.push('');

@@ -14,6 +14,8 @@
  *   3 narrate  — Mags narrates the Pulse from the curated set (Sonnet, the one
  *                voice-critical call) → cycle_pulse_c{N}.md
  *   4 publish  — canon door: assemble editions/cycle_pulse_c{N}.txt; --apply
+ *   4b coverage — rate the published edition into Edition_Coverage_Ratings
+ *                (pipeline.62); non-fatal, pre-flight catches a miss next cycle
  *                runs ingestEdition + permanent-NotebookLM source add
  *   5 sweep    — per-article canon ingest (ALL staged, curated or not)
  *   6 sheets   — Citizen_Media_Usage rows from the INTAKE sidecar
@@ -63,7 +65,14 @@ const CONTAINER_TAG = 'bay-tribune';
 const API_HOST = 'api.supermemory.ai';
 const API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 
+// Accepts BOTH `--flag value` and `--flag=value`. It used to read only the
+// spaced form, and an unrecognised `--step=publish` fell through to the default
+// — which is "run the whole chain". Combined with --apply that silently ran
+// every step, publish included, when one step was asked for (hit live
+// 2026-08-31). A flag this script gets wrong writes canon, so it takes both.
 function arg(flag, def) {
+  const eq = process.argv.find(a => a.indexOf(flag + '=') === 0);
+  if (eq) return eq.slice(flag.length + 1) || def;
   const i = process.argv.indexOf(flag);
   return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : def;
 }
@@ -839,6 +848,44 @@ async function stepPublish(cycle) {
 }
 
 // ---------------------------------------------------------------------------
+// pipeline.62 — rate the edition that was just published.
+//
+// This ran as a manual step and so ran never: Edition_Coverage_Ratings stopped
+// at C102 and C103/C104 published with no media-feedback signal at all, which
+// nothing noticed until pre-flight was chased by hand. Hanging it off the
+// edition artifact rather than a second cron line means it cannot fire before
+// the file exists or drift onto a different cycle's edition.
+//
+// Deliberately NON-FATAL to the chain. Publish has already succeeded by this
+// point — canon is ingested and the notebook is pushed — so throwing here would
+// strand sweep/sheets/signals over a ratings row. The failure is instead made
+// loud in the log AND independently caught next cycle: preflightInputCheck.js
+// reports missing coverage for the previous cycle, so a silent miss is not
+// possible the way it was for C103/C104.
+async function stepCoverage(cycle) {
+  console.log('--- step 4b: edition coverage ratings ---');
+  const editionPath = path.join(ROOT, 'editions', 'cycle_pulse_c' + cycle + '.txt');
+  if (!fs.existsSync(editionPath)) {
+    console.error('[COVERAGE SKIPPED] no edition at ' + path.relative(ROOT, editionPath) + ' — publish must run first.');
+    return { rated: false, reason: 'no-edition' };
+  }
+  const { spawnSync } = require('child_process');
+  const r = spawnSync('node',
+    [path.join(ROOT, 'scripts', 'rateEditionCoverage.js'), editionPath, APPLY ? '--apply' : '--dry-run'],
+    { stdio: 'inherit' });
+  if (r.status !== 0) {
+    // exit 2 = the rater's own gates: no articles, or nothing resolved to a
+    // domain. Both mean the edition format moved and the rater needs a look.
+    console.error('[COVERAGE FAIL] rateEditionCoverage exited ' + r.status + ' for c' + cycle + '.');
+    console.error('  The edition published fine; its media-feedback signal did NOT land.');
+    console.error('  Next pre-flight will report coverage missing for c' + cycle + '.');
+    return { rated: false, reason: 'rater-exit-' + r.status };
+  }
+  console.log('coverage ratings ' + (APPLY ? 'written' : 'dry-run only') + ' for c' + cycle);
+  return { rated: true };
+}
+
+// ---------------------------------------------------------------------------
 async function main() {
   // --cycle overrides; otherwise the single source of truth (engine.81 —
   // freshest world_summary; noArgv because this script parses its own flags
@@ -850,18 +897,22 @@ async function main() {
   const dispatch = {
     audit: () => stepAudit(cycle), curate: () => stepCurate(cycle),
     narrate: () => stepNarrate(cycle), publish: () => stepPublish(cycle),
+    coverage: () => stepCoverage(cycle),
     sweep: () => stepSweep(cycle), sheets: () => stepSheets(cycle),
     signals: () => stepSignals(cycle)
   };
   if (step) {
-    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|sweep|sheets|signals)');
+    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|coverage|sweep|sheets|signals)');
     await dispatch[step]();
   } else {
     // Plan §Phase 3 order: audit → curate → narrate → publish → sweep → sheets → signals.
+    // pipeline.62 inserts coverage straight after publish — it reads the file
+    // publish just wrote, and it must not gate the steps behind it.
     await stepAudit(cycle);
     await stepCurate(cycle);
     await stepNarrate(cycle);
     await stepPublish(cycle);
+    await stepCoverage(cycle);
     await stepSweep(cycle);
     await stepSheets(cycle);
     await stepSignals(cycle);

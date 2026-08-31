@@ -741,6 +741,24 @@ function emit(cycle, findings, auditJson, writeMode) {
         // Strip the default judgment-layer header if it's the only thing after
         const stripped = after.replace(/^\s*## Judgment-layer entries \(engine-sheet appends here\)\s*\n\n\*[^*]+\*\n\n/m, '').trim();
         if (stripped) preserved = '\n' + stripped + '\n';
+      } else {
+        // No footer marker — this cycle's gap log was OPENED BY ANOTHER SKILL.
+        // The one-true-log contract (GAP_LOG_TEMPLATE §Destination) says every
+        // operator-run heavy skill appends its own `## LEG:` to this same file,
+        // and those legs predate any mechanical pass, so they carry no marker.
+        // Before this branch existed the write below simply clobbered them:
+        // C105 lost a 14-entry /pre-flight leg that way (2026-08-31), recovered
+        // only because it happened to be committed. Destroying an operator's
+        // gap log is worse than duplicating a section, so preserve whole.
+        const legs = existing.indexOf('\n## LEG:');
+        const body = legs >= 0 ? existing.slice(legs).trim() : existing.trim();
+        const isPriorMechanical = /^#\s*\/run-cycle Gap Log/.test(existing.trim());
+        if (body && !isPriorMechanical) {
+          preserved = '\n' + body + '\n';
+          process.stderr.write('[gap-log] preserved ' +
+            (legs >= 0 ? 'existing LEG section(s)' : 'existing hand-written content') +
+            ' from a log opened by another skill\n');
+        }
       }
     }
     md = md.replace(MECHANICAL_FOOTER, MECHANICAL_FOOTER + preserved);

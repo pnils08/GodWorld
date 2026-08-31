@@ -1,6 +1,6 @@
 {
-  "lastUpdated": "2026-08-13",
-  "updatedBy": "initiativeTrackerSnapshot.js (engine_audit snapshot)",
+  "lastUpdated": "2026-08-31",
+  "updatedBy": "buildInitiativePackets.js (auto)",
   "initiatives": [
     {
       "id": "INIT-001",
@@ -17,9 +17,9 @@
       "implementation": {
         "status": "disbursement-active",
         "phase": "disbursement-active",
-        "summary": "C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.",
-        "nextScheduledAction": "Month-five disbursement batch review",
-        "nextActionCycle": 103
+        "summary": "C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+        "nextScheduledAction": "Month-six disbursement review + canvass launch",
+        "nextActionCycle": 105
       }
     },
     {
@@ -37,11 +37,11 @@
         "East Oakland"
       ],
       "implementation": {
-        "status": "operational",
-        "phase": "operational",
-        "summary": "C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.",
-        "nextScheduledAction": "D7 next-cycle report and community satisfaction survey",
-        "nextActionCycle": 103
+        "status": "implementation-active",
+        "phase": "implementation-active",
+        "summary": "C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established.",
+        "nextScheduledAction": "First expansion-district launch (D1)",
+        "nextActionCycle": 105
       }
     },
     {
@@ -57,11 +57,11 @@
         "Fruitvale"
       ],
       "implementation": {
-        "status": "construction-planning",
-        "phase": "construction-planning",
-        "summary": "C102: Submitted pipeline exhaustion docs + stamped pedestrian-path redesign",
-        "nextScheduledAction": "Bureau review of compliance submissions",
-        "nextActionCycle": 103
+        "status": "visioning",
+        "phase": "visioning",
+        "summary": "C104: Launched community visioning sessions focused on small business and vendor protections",
+        "nextScheduledAction": "Conduct first visioning session by January 15",
+        "nextActionCycle": 105
       }
     },
     {
@@ -79,9 +79,9 @@
       "implementation": {
         "status": "construction-active",
         "phase": "construction-active",
-        "summary": "C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.",
-        "nextScheduledAction": "HCAI first-comments window resolution and Phase 1 close",
-        "nextActionCycle": 103
+        "summary": "C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
+        "nextScheduledAction": "Structural frame groundbreaking",
+        "nextActionCycle": 106
       }
     },
     {
@@ -98,11 +98,11 @@
         "Downtown"
       ],
       "implementation": {
-        "status": "construction-planning",
-        "phase": "construction-planning",
-        "summary": "C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…",
-        "nextScheduledAction": "Phase II shortlist published — 4 qualified bidders reduced to 3",
-        "nextActionCycle": 103
+        "status": "vote-scheduled",
+        "phase": "vote-scheduled",
+        "summary": "C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105.",
+        "nextScheduledAction": "Final council vote on Phase II bid",
+        "nextActionCycle": 105
       }
     },
     {
@@ -122,9 +122,9 @@
       "implementation": {
         "status": "pilot-active",
         "phase": "pilot-active",
-        "summary": "C102: Executive review ordered to address stalled recruitment and intake bottlenecks.",
-        "nextScheduledAction": "Review findings and corrective actions report",
-        "nextActionCycle": 104
+        "summary": "C104: Corrective action plan published; intake simplified, 3 new recruitment partners added. Backlog clearance deadline set for C106.",
+        "nextScheduledAction": "Backlog processing completion + town hall",
+        "nextActionCycle": 106
       }
     }
   ]

@@ -1,0 +1,124 @@
+{
+  "cycle": 105,
+  "generator": "buildDeskPackets v1.7",
+  "packets": [
+    {
+      "desk": "civic",
+      "file": "civic_c105.json",
+      "sizeKB": 1472.2,
+      "summaryFile": "civic_summary_c105.json",
+      "summarySizeKB": 407.6,
+      "reporters": [
+        "Dr. Lila Mezran",
+        "Luis Navarro",
+        "Carmen Delaine",
+        "Trevor Shimizu",
+        "Sgt. Rachel Torres"
+      ],
+      "events": 7,
+      "seeds": 18,
+      "hooks": 70,
+      "arcs": 0,
+      "storylines": 0,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 759
+    },
+    {
+      "desk": "sports",
+      "file": "sports_c105.json",
+      "sizeKB": 1449.8,
+      "summaryFile": "sports_summary_c105.json",
+      "summarySizeKB": 451.1,
+      "reporters": [
+        "Anthony",
+        "P Slayer",
+        "Hal Richmond",
+        "Tanya Cruz",
+        "DJ Hartley",
+        "Simon Leary",
+        "Elliot Marbury"
+      ],
+      "events": 1,
+      "seeds": 3,
+      "hooks": 3,
+      "arcs": 0,
+      "storylines": 0,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 759
+    },
+    {
+      "desk": "culture",
+      "file": "culture_c105.json",
+      "sizeKB": 1459.6,
+      "summaryFile": "culture_summary_c105.json",
+      "summarySizeKB": 396.6,
+      "reporters": [
+        "Maria Keen",
+        "Sharon Okafor",
+        "Kai Marston",
+        "Mason Ortega",
+        "Angela Reyes",
+        "Noah Tan"
+      ],
+      "events": 8,
+      "seeds": 13,
+      "hooks": 139,
+      "arcs": 0,
+      "storylines": 0,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 759
+    },
+    {
+      "desk": "business",
+      "file": "business_c105.json",
+      "sizeKB": 1280.9,
+      "summaryFile": "business_summary_c105.json",
+      "summarySizeKB": 389.2,
+      "reporters": [
+        "Jordan Velez"
+      ],
+      "events": 0,
+      "seeds": 3,
+      "hooks": 3,
+      "arcs": 0,
+      "storylines": 0,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 759
+    },
+    {
+      "desk": "chicago",
+      "file": "chicago_c105.json",
+      "sizeKB": 1354.8,
+      "summaryFile": "chicago_summary_c105.json",
+      "summarySizeKB": 481.9,
+      "reporters": [
+        "Selena Grant",
+        "Talia Finch"
+      ],
+      "events": 1,
+      "seeds": 0,
+      "hooks": 3,
+      "arcs": 0,
+      "storylines": 0,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 759
+    },
+    {
+      "desk": "letters",
+      "file": "letters_c105.json",
+      "sizeKB": 1832.3,
+      "summaryFile": "letters_summary_c105.json",
+      "summarySizeKB": 565.6,
+      "reporters": [],
+      "events": 13,
+      "seeds": 37,
+      "hooks": 154,
+      "arcs": 0,
+      "storylines": 0,
+      "interviewCandidates": 20,
+      "interviewCandidatesPool": 759
+    }
+  ],
+  "newsroomMemoryPath": "/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md",
+  "deskBriefingsDir": "/root/GodWorld/output/desk-briefings"
+}

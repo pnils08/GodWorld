@@ -1,0 +1,66 @@
+{
+  "cycle": 105,
+  "generatedAt": "2026-08-31T06:18:37.573Z",
+  "packets": {
+    "stabilization_fund": {
+      "file": "stabilization_fund_c105.json",
+      "initiativeId": "INIT-001",
+      "status": "passed",
+      "citizenCount": 164,
+      "linkedCitizens": 1,
+      "neighborhoods": 7,
+      "businesses": 39,
+      "hasPreviousDecisions": true,
+      "hasVoiceDecisions": false,
+      "previousDocCount": 6
+    },
+    "oari": {
+      "file": "oari_c105.json",
+      "initiativeId": "INIT-002",
+      "status": "passed",
+      "citizenCount": 320,
+      "linkedCitizens": 0,
+      "neighborhoods": 7,
+      "businesses": 52,
+      "hasPreviousDecisions": true,
+      "hasVoiceDecisions": false,
+      "previousDocCount": 6
+    },
+    "transit_hub": {
+      "file": "transit_hub_c105.json",
+      "initiativeId": "INIT-003",
+      "status": "visioning-complete",
+      "citizenCount": 91,
+      "linkedCitizens": 0,
+      "neighborhoods": 2,
+      "businesses": 12,
+      "hasPreviousDecisions": true,
+      "hasVoiceDecisions": false,
+      "previousDocCount": 4
+    },
+    "health_center": {
+      "file": "health_center_c105.json",
+      "initiativeId": "INIT-005",
+      "status": "passed",
+      "citizenCount": 156,
+      "linkedCitizens": 0,
+      "neighborhoods": 2,
+      "businesses": 13,
+      "hasPreviousDecisions": true,
+      "hasVoiceDecisions": false,
+      "previousDocCount": 4
+    },
+    "baylight": {
+      "file": "baylight_c105.json",
+      "initiativeId": "INIT-006",
+      "status": "passed",
+      "citizenCount": 157,
+      "linkedCitizens": 0,
+      "neighborhoods": 4,
+      "businesses": 33,
+      "hasPreviousDecisions": true,
+      "hasVoiceDecisions": false,
+      "previousDocCount": 8
+    }
+  }
+}

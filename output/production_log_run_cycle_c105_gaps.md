@@ -1,10 +1,357 @@
-# Cycle 105 gap log
+# /run-cycle Gap Log — Cycle 105
+
+**Generated:** 2026-08-31T06:20:55.054Z
+**Script:** `scripts/engineCycleAudit.js` (mechanical V1)
+**Plan:** `docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md`
+
+**Cycle headline metrics:** 1 HIGH / 3 MED / 26 LOW patterns flagged by engineAuditor; 26 improvements; 1 incoherence findings. Pattern types: repeating-event=1, coverage-gap=1, production-imbalance=1, improvement=26, incoherence=1.
+
+**Mechanical pass:** 52 entries (HIGH 0, MED 41, LOW 11). 4 V2-runtime classes appended below.
+
+**Taxonomy** (9 classes): `phase-skip` `writeback-drift` `cohort-collision` `math-anomaly` `determinism-break` `phase-ordering` `silent-fail` `cross-cycle-debt` `header-drift`.
+
+---
+
+### G-EC1 — Domain "faith" produced 5 events this cycle with zero Tribune coverage last cycle [mechanical] [coverage-gap] [MED]
+
+- **Source:** output/engine_audit_c105.json (pattern type=coverage-gap)
+- **Diagnosis:** Sheet: `WorldEvents_V3_Ledger` • Fields: domain="faith", eventCount=5, priorCycleCoverage=0, subCheck="production-without-consumption" • Mitigator: none (no-mitigator)
+- **Status:** OPEN
+
+### G-EC2 — generationalEventsEngine.js references field-name 'TierRole' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase04-events/generationalEventsEngine.js
+- **Diagnosis:** Type 2. Writer touches Household_Ledger, Family_Relationships, Simulation_Ledger. 'TierRole' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC3 — generateMonthlyCivicSweep.js references field-name 'FullName' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/generateMonthlyCivicSweep.js
+- **Diagnosis:** Type 2. Writer touches Simulation_Ledger, World_Population, Civic_Sweep_Report. 'FullName' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC4 — generationalWealthEngine.js references field-name 'InheritanceCycle' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/generationalWealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Household_Ledger, Business_Ledger, Family_Relationships, Heritage_Ledger, Simulation_Ledger. 'InheritanceCycle' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC5 — generationalWealthEngine.js references field-name 'InheritanceFrom' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/generationalWealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Household_Ledger, Business_Ledger, Family_Relationships, Heritage_Ledger, Simulation_Ledger. 'InheritanceFrom' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC6 — generationalWealthEngine.js references field-name 'InheritanceNote' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/generationalWealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Household_Ledger, Business_Ledger, Family_Relationships, Heritage_Ledger, Simulation_Ledger. 'InheritanceNote' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC7 — runCareerEngine.js references field-name 'TierRole' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/runCareerEngine.js
+- **Diagnosis:** Type 2. Writer touches Business_Ledger, Simulation_Ledger. 'TierRole' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC8 — runCivicRoleEngine.js field 'TierRole' not on 'Simulation_Ledger' or any sheet [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/runCivicRoleEngine.js
+- **Diagnosis:** Type 2 (orphan literal). Writer targets 'Simulation_Ledger'; 'TierRole' is absent from that sheet and from all other sheets in SCHEMA_HEADERS. Defensive-fallback literal, dead code, or typo.
+- **Status:** OPEN
+
+### G-EC9 — runYouthEngine.js case-mismatch (multi-sheet): 'PopID' vs live As_Roster:'POPID', Bay_Tribune_Oakland:'POPID', Civic_Office_Ledger:'PopId' [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/runYouthEngine.js
+- **Diagnosis:** Type 2 (case mismatch, multi-sheet). Writer touches multiple sheets: Community_Programs, Generic_Citizens, Simulation_Ledger. Case-variant of 'PopID' exists on: As_Roster:'POPID', Bay_Tribune_Oakland:'POPID', Civic_Office_Ledger:'PopId'. `headers.indexOf` is case-sensitive — confirm which sheet the literal targets and whether the case is correct.
+- **Status:** OPEN
+
+### G-EC10 — runYouthEngine.js references field-name 'ID' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/runYouthEngine.js
+- **Diagnosis:** Type 2. Writer touches Community_Programs, Generic_Citizens, Simulation_Ledger. 'ID' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC11 — updateCivicApprovalRatings.js references field-name 'FullName' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase05-citizens/updateCivicApprovalRatings.js
+- **Diagnosis:** Type 2. Writer touches Civic_Office_Ledger, Initiative_Tracker, Generic_Citizens, Simulation_Ledger. 'FullName' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC12 — processArcLifeCyclev1.js references field-name 'InvolvedCitizens' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase06-analysis/processArcLifeCyclev1.js
+- **Diagnosis:** Type 2. Writer touches World_Population, Event_Arc_Ledger. 'InvolvedCitizens' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC13 — storylineHealthEngine.js references field-name 'LastCoverageCycle' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase06-analysis/storylineHealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'LastCoverageCycle' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC14 — storylineHealthEngine.js references field-name 'MentionCount' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase06-analysis/storylineHealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'MentionCount' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC15 — storylineHealthEngine.js references field-name 'CoverageGap' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase06-analysis/storylineHealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'CoverageGap' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC16 — storylineHealthEngine.js references field-name 'ResolutionCondition' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase06-analysis/storylineHealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'ResolutionCondition' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC17 — storylineHealthEngine.js references field-name 'StaleAfterCycles' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase06-analysis/storylineHealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'StaleAfterCycles' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC18 — storylineHealthEngine.js references field-name 'IsStale' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase06-analysis/storylineHealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'IsStale' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC19 — storylineHealthEngine.js references field-name 'WrapUpGenerated' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase06-analysis/storylineHealthEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'WrapUpGenerated' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC20 — applyStorySeeds.js references field-name 'CycleAdded' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/applyStorySeeds.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker, Edition_Coverage_Ratings. 'CycleAdded' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC21 — applyStorySeeds.js references field-name 'StorylineType' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/applyStorySeeds.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker, Edition_Coverage_Ratings. 'StorylineType' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC22 — applyStorySeeds.js references field-name 'RelatedCitizens' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/applyStorySeeds.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker, Edition_Coverage_Ratings. 'RelatedCitizens' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC23 — applyStorySeeds.js references field-name 'LastCoverageCycle' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/applyStorySeeds.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker, Edition_Coverage_Ratings. 'LastCoverageCycle' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC24 — applyStorySeeds.js references field-name 'MentionCount' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/applyStorySeeds.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker, Edition_Coverage_Ratings. 'MentionCount' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC25 — culturalLedger.js references field-name 'LastSeenHoliday' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/culturalLedger.js
+- **Diagnosis:** Type 2. Writer touches Cultural_Ledger, Simulation_Ledger. 'LastSeenHoliday' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC26 — culturalLedger.js references field-name 'CalendarContext' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/culturalLedger.js
+- **Diagnosis:** Type 2. Writer touches Cultural_Ledger, Simulation_Ledger. 'CalendarContext' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC27 — mediaRoomBriefingGenerator.js references field-name 'CycleAdded' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/mediaRoomBriefingGenerator.js
+- **Diagnosis:** Type 2. Writer touches Media_Briefing, Storyline_Tracker, Civic_Office_Ledger, Election_Log. 'CycleAdded' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC28 — mediaRoomBriefingGenerator.js references field-name 'StorylineType' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/mediaRoomBriefingGenerator.js
+- **Diagnosis:** Type 2. Writer touches Media_Briefing, Storyline_Tracker, Civic_Office_Ledger, Election_Log. 'StorylineType' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC29 — mediaRoomBriefingGenerator.js references field-name 'RelatedCitizens' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/mediaRoomBriefingGenerator.js
+- **Diagnosis:** Type 2. Writer touches Media_Briefing, Storyline_Tracker, Civic_Office_Ledger, Election_Log. 'RelatedCitizens' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC30 — storyHook.js references field-name 'CycleAdded' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/storyHook.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'CycleAdded' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC31 — storyHook.js references field-name 'StorylineType' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/storyHook.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'StorylineType' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC32 — storyHook.js references field-name 'RelatedCitizens' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/storyHook.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'RelatedCitizens' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC33 — storylineWeavingEngine.js references field-name 'RelatedCitizens' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/storylineWeavingEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'RelatedCitizens' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC34 — storylineWeavingEngine.js references field-name 'CitizenRoles' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/storylineWeavingEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'CitizenRoles' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC35 — storylineWeavingEngine.js references field-name 'ConflictType' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/storylineWeavingEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'ConflictType' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC36 — storylineWeavingEngine.js references field-name 'RelationshipImpact' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/storylineWeavingEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'RelationshipImpact' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC37 — storylineWeavingEngine.js references field-name 'CrossStorylineLinks' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** phase07-evening-media/storylineWeavingEngine.js
+- **Diagnosis:** Type 2. Writer touches Storyline_Tracker. 'CrossStorylineLinks' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC38 — bylineEngine.js references field-name 'BylineCandidate' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** utilities/bylineEngine.js
+- **Diagnosis:** Type 2. Writer touches no detected sheet target. 'BylineCandidate' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC39 — bylineEngine.js references field-name 'AssignedReporter' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** utilities/bylineEngine.js
+- **Diagnosis:** Type 2. Writer touches no detected sheet target. 'AssignedReporter' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC40 — priorityEngine.js references field-name 'CycleAdded' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** utilities/priorityEngine.js
+- **Diagnosis:** Type 2. Writer touches no detected sheet target. 'CycleAdded' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC41 — priorityEngine.js references field-name 'LastCoverageCycle' not in any live header [mechanical] [header-drift] [MED]
+
+- **Source:** utilities/priorityEngine.js
+- **Diagnosis:** Type 2. Writer touches no detected sheet target. 'LastCoverageCycle' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.
+- **Status:** OPEN
+
+### G-EC42 — bondEngine.js defensive-fallback literal 'NH' (sibling 'Neighborhood' matches) [mechanical] [header-drift] [LOW]
+
+- **Source:** phase05-citizens/bondEngine.js
+- **Diagnosis:** Type 2 (defensive-fallback sibling, multi-sheet). Writer references 'NH' which has no exact live-header match, but a nearby sibling literal 'Neighborhood' exact-matches a live header on one of the writer's target sheets. Acceptable noise.
+- **Status:** OPEN
+
+### G-EC43 — citizenContextBuilder.js defensive-fallback literal 'OriginCity' (sibling 'OrginCity' matches) [mechanical] [header-drift] [LOW]
+
+- **Source:** phase05-citizens/citizenContextBuilder.js
+- **Diagnosis:** Type 2 (defensive-fallback sibling, multi-sheet). Writer references 'OriginCity' which has no exact live-header match, but a nearby sibling literal 'OrginCity' exact-matches a live header on one of the writer's target sheets. Acceptable noise.
+- **Status:** OPEN
+
+### G-EC44 — citizenContextBuilder.js defensive-fallback literal 'EngineCycle' (sibling 'Cycle' matches) [mechanical] [header-drift] [LOW]
+
+- **Source:** phase05-citizens/citizenContextBuilder.js
+- **Diagnosis:** Type 2 (defensive-fallback sibling, multi-sheet). Writer references 'EngineCycle' which has no exact live-header match, but a nearby sibling literal 'Cycle' exact-matches a live header on one of the writer's target sheets. Acceptable noise.
+- **Status:** OPEN
+
+### G-EC45 — citizenContextBuilder.js defensive-fallback literal 'UsageType' (sibling 'Name' matches) [mechanical] [header-drift] [LOW]
+
+- **Source:** phase05-citizens/citizenContextBuilder.js
+- **Diagnosis:** Type 2 (defensive-fallback sibling, multi-sheet). Writer references 'UsageType' which has no exact live-header match, but a nearby sibling literal 'Name' exact-matches a live header on one of the writer's target sheets. Acceptable noise.
+- **Status:** OPEN
+
+### G-EC46 — citizenContextBuilder.js defensive-fallback literal 'Context' (sibling 'Name' matches) [mechanical] [header-drift] [LOW]
+
+- **Source:** phase05-citizens/citizenContextBuilder.js
+- **Diagnosis:** Type 2 (defensive-fallback sibling, multi-sheet). Writer references 'Context' which has no exact live-header match, but a nearby sibling literal 'Name' exact-matches a live header on one of the writer's target sheets. Acceptable noise.
+- **Status:** OPEN
+
+### G-EC47 — updateCivicApprovalRatings.js defensive-fallback literal 'TierRole' (sibling 'RoleType' matches) [mechanical] [header-drift] [LOW]
+
+- **Source:** phase05-citizens/updateCivicApprovalRatings.js
+- **Diagnosis:** Type 2 (defensive-fallback sibling, multi-sheet). Writer references 'TierRole' which has no exact live-header match, but a nearby sibling literal 'RoleType' exact-matches a live header on one of the writer's target sheets. Acceptable noise.
+- **Status:** OPEN
+
+### G-EC48 — storylineHealthEngine.js targets sheet 'Storyline_Tracker' not in SCHEMA_HEADERS [mechanical] [header-drift] [LOW]
+
+- **Source:** phase06-analysis/storylineHealthEngine.js
+- **Diagnosis:** Sheet 'Storyline_Tracker' referenced in writer but absent from schemas/SCHEMA_HEADERS.md. Sheet may be hidden (exportSchemaHeaders.js skips hidden tabs per utilities/exportSchemaHeaders.js:150), deleted, or renamed. Manual review.
+- **Status:** OPEN
+
+### G-EC49 — storyHook.js targets sheet 'Storyline_Tracker' not in SCHEMA_HEADERS [mechanical] [header-drift] [LOW]
+
+- **Source:** phase07-evening-media/storyHook.js
+- **Diagnosis:** Sheet 'Storyline_Tracker' referenced in writer but absent from schemas/SCHEMA_HEADERS.md. Sheet may be hidden (exportSchemaHeaders.js skips hidden tabs per utilities/exportSchemaHeaders.js:150), deleted, or renamed. Manual review.
+- **Status:** OPEN
+
+### G-EC50 — storylineWeavingEngine.js targets sheet 'Storyline_Tracker' not in SCHEMA_HEADERS [mechanical] [header-drift] [LOW]
+
+- **Source:** phase07-evening-media/storylineWeavingEngine.js
+- **Diagnosis:** Sheet 'Storyline_Tracker' referenced in writer but absent from schemas/SCHEMA_HEADERS.md. Sheet may be hidden (exportSchemaHeaders.js skips hidden tabs per utilities/exportSchemaHeaders.js:150), deleted, or renamed. Manual review.
+- **Status:** OPEN
+
+### G-EC51 — cycleExportAutomation.js defensive-fallback literal 'Cycle' on 'World_Population' (sibling 'cycle' matches) [mechanical] [header-drift] [LOW]
+
+- **Source:** phase10-persistence/cycleExportAutomation.js
+- **Diagnosis:** Type 2 (defensive-fallback sibling). Writer's literal 'Cycle' has a case-variant 'cycle' on 'World_Population', AND a nearby sibling literal 'cycle' exact-matches the live header. The fallback chain handles both cases — 'Cycle' is defensive, not silent-fail. Acceptable noise; no fix needed.
+- **Status:** OPEN
+
+### G-EC52 — cycleExportAutomation.js defensive-fallback literal 'AbsoluteCycle' on 'World_Population' (sibling 'cycle' matches) [mechanical] [header-drift] [LOW]
+
+- **Source:** phase10-persistence/cycleExportAutomation.js
+- **Diagnosis:** Type 2 (defensive-fallback sibling). Writer targets 'World_Population'; 'AbsoluteCycle' isn't on it, but a nearby sibling literal 'cycle' exact-matches the live header. Acceptable noise.
+- **Status:** OPEN
+
+### G-EC53 — cohort-collision — V2-runtime (engine-run-log ingest path not yet built) [mechanical] [cohort-collision] [INFO]
+
+- **Diagnosis:** Detection requires Apps Script execution-log capture into the local repo. /run-cycle Step 3 currently runs engine in Google's cloud and does not persist execution logs locally. When that ingest path lands, this class becomes mechanically detectable.
+- **Status:** V2-PENDING
+
+### G-EC54 — phase-ordering — V2-runtime (engine-run-log ingest path not yet built) [mechanical] [phase-ordering] [INFO]
+
+- **Diagnosis:** Detection requires Apps Script execution-log capture into the local repo. /run-cycle Step 3 currently runs engine in Google's cloud and does not persist execution logs locally. When that ingest path lands, this class becomes mechanically detectable.
+- **Status:** V2-PENDING
+
+### G-EC55 — phase-skip — V2-runtime (engine-run-log ingest path not yet built) [mechanical] [phase-skip] [INFO]
+
+- **Diagnosis:** Detection requires Apps Script execution-log capture into the local repo. /run-cycle Step 3 currently runs engine in Google's cloud and does not persist execution logs locally. When that ingest path lands, this class becomes mechanically detectable.
+- **Status:** V2-PENDING
+
+### G-EC56 — silent-fail — V2-runtime (engine-run-log ingest path not yet built) [mechanical] [silent-fail] [INFO]
+
+- **Diagnosis:** Detection requires Apps Script execution-log capture into the local repo. /run-cycle Step 3 currently runs engine in Google's cloud and does not persist execution logs locally. When that ingest path lands, this class becomes mechanically detectable.
+- **Status:** V2-PENDING
+
+<!-- end mechanical pass — judgment entries below this line are preserved across re-runs -->
+---
 
 ## LEG: /pre-flight (G-PF)
 
 **Run:** 2026-08-30 (S403, engine-sheet) — `node scripts/preflightInputCheck.js --cycle=105`
 **Verdict:** READY (with warnings), exit 0. C105 unfired at time of writing; live `cycleCount` 104.
-**Total gaps:** 14 (7 HIGH / 6 MED / 1 LOW)
+**Total gaps:** 20 (8 HIGH / 11 MED / 1 LOW)
 
 Pre-flight passed. The gaps below are what it *reported as warnings* or *did not look at* — in both cases the underlying condition is worse than the verdict line suggests.
 
@@ -152,6 +499,60 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - 2026-08-31 (S403) — **G-PF14 opened, left OPEN by choice** (Mike-direct: gap-log it if it needs a fresh look). Intermittent test, not an intermittent product — the rater's behaviour is proven by the C102 byte-identical re-rate and the live C103/C104 backfill.
 - 2026-08-31 (S403) — **G-PF13 opened and CLOSED same session.** Found by making the mistake: `--step=coverage` ran the entire chain because `arg()` only read spaced flags. Harmless here (no `--apply`), one keystroke from publishing canon. `arg()` now takes both forms.
 
+### G-PF21: the mechanical gap-log pass DESTROYED the operator leg it was supposed to join
+
+- **Severity:** HIGH
+- **Category:** silent-fail
+- **What happened:** `scripts/engineCycleAudit.js 105 --write` (run-cycle Step 6) overwrote `output/production_log_run_cycle_c105_gaps.md`, deleting the 14-entry `## LEG: /pre-flight (G-PF)` leg written earlier this session. The script has preservation logic, but it only engages when the file already contains `MECHANICAL_FOOTER`. A log opened by another skill's leg — which `GAP_LOG_TEMPLATE` §Destination explicitly sanctions ("every operator-run heavy skill **appends its own leg** to that same file") — carries no such marker, so `indexOf` returned −1 and the write proceeded clean.
+- **Why it matters:** The one-true-log is the cycle's canonical inventory of sub-issues, and the mechanical pass is documented as the thing that *opens* it for others to append to. Instead it is the thing that erases them. Recovered here only because the leg happened to be committed; an uncommitted leg would have been gone with no trace and no error — the run reported success both times.
+- **Suggested action:** FIXED same session. Added the missing branch: when no footer marker is present, preserve the existing `## LEG:` sections (or the whole body if there are none), and print a stderr notice naming what was kept. Guarded against re-preserving a prior mechanical log. Proven on the exact failing shape — a marker-less hand-written leg with a canary entry survives a mechanical pass, notice fires. Destroying an operator's gap log is worse than duplicating a section, and the fix errs that way deliberately.
+- **Pointer:** engine.138
+
+### G-PF22: `Simulation_Ledger` has no `Name` column — the snapshot synthesizes one
+
+- **Severity:** MED
+- **Category:** process-gap
+- **What happened:** The live sheet's header is `POPID, First, MaidenName, Last, …`. `output/simulation_ledger_snapshot.jsonl` carries a synthesized `Name` field, and `scripts/canon-name-check.js` reads the snapshot. A name query written against the sheet with `headers.indexOf('Name')` gets −1 and reads `undefined` for every row — reporting "citizen not found" for citizens who are present. Hit live this session: I reported Carmen Mesa and Pablo Almanzar "NOT IN LEDGER"; both are Active (POP-00081, POP-01078) and resolve immediately on `First`+`Last`.
+- **Why it matters:** The failure is silent and inverted — it manufactures absence rather than erroring. It is one `indexOf` away from a false "this citizen does not exist" in any script, review, or article that checks a name against the sheet, and it directly contradicts the standing rule to resolve by NAME rather than by supplied POPID: the obvious way to obey that rule is the way that breaks.
+- **Suggested action:** OPEN. Either add a computed `Name` to the sheet contract, or give `lib/sheets.js` a name resolver that owns the First+Last join so no caller writes `indexOf('Name')` again. The second is the smaller surface.
+- **Pointer:** engine.138
+
+### G-PF23: neighborhood texture is written with blocklists but not with the hoods' canon identity
+
+- **Severity:** MED
+- **Category:** canon-risk
+- **What happened:** Mike-direct, 2026-08-31: "we have canon identity in institutions.md on the neighborhoods." `scripts/buildNeighborhoodTexture.js` reads Riley_Digest + Neighborhood_Map + `lib/neighborhoodSlice` + `lib/canonBlocklist` + `docs/media/REAL_NAMES_BLOCKLIST.md`. It does **not** read `docs/canon/INSTITUTIONS.md` (453 lines, 42 sections, tiered: "use real names" vs "canon-substitute required").
+- **Why it matters:** The generator knows what it must not say and not what the places actually are. Its output is injected into every citizen wake as "Around your neighborhood:", so a hood's texture can float free of the named institutions that constitute its canon identity — generic venues where the world has specific ones. C105's own content-drafter output shows the shape: `$VENUE`, "the bookstore", "the health center site".
+- **Suggested action:** OPEN. Feed the per-hood institution set into the texture prompt alongside the blocklists, so the generator is told what exists as well as what is forbidden.
+- **Pointer:** engine.138
+
+### G-PF24: the content drafter threw away 5 of 6 rows on a dead hood gate
+
+- **Severity:** MED
+- **Category:** quiet-pipe
+- **What happened:** Step 5.6 `draftContentRows.js --cycle 105 --apply` rejected five candidates as `INVALID … [dead hood gate: hood=temescal]`, `hood=lake_merritt`, `hood=downtown;nightlife>=0.7`, `hood=rockridge;retired`, `hood=fruitvale`. One ungated citywide row was written. The gate vocabulary is snake_case (`lake_merritt`); canon hood names are `Lake Merritt`.
+- **Why it matters:** Five of six texture rows for the cycle discarded, and the ones lost are exactly the hood-specific ones — the content pools grow only with citywide filler while every neighborhood-anchored line fails validation. Exit code 0, reported as a normal run.
+- **Suggested action:** OPEN. Confirm whether the gate vocabulary is meant to be snake_case and the hood list is stale, or the gates should be written in canon hood names.
+- **Pointer:** engine.138
+
+### G-PF25: the world-state fold runs before the file it depends on is built
+
+- **Severity:** MED
+- **Category:** phase-ordering
+- **What happened:** Chain order puts Step 5.57 (`buildWorldState.js`) before Step 5.8 (`buildDeskPackets.js`), but the fold reads `output/desk-packets/base_context.json`, which 5.8 produces. First run this cycle wrote `world_state.json` at **5,465 bytes** with the note `canon absent: base_context.json unreadable — ENOENT`. Re-run after 5.8: **55,684 bytes**, `canon current`.
+- **Why it matters:** `world_state.json` is the single artifact the 24/7 loops read — Discord bot, citizen wakes, citizen exchange, desk-writer fallback. Following the documented order exactly leaves every one of them reading a world with no canon for the rest of the cycle, and the step exits 0 while doing it. Ten times smaller and nothing said so.
+- **Suggested action:** OPEN. Either move 5.57 after 5.8, or have the fold fail loudly when canon is absent instead of writing a canon-less file. Caught only because the note was read.
+- **Pointer:** engine.138
+
+### G-PF26: nothing validates sports-feed names at write time
+
+- **Severity:** MED
+- **Category:** canon-risk
+- **What happened:** `Oakland_Sports_Feed!E212` (C105) carried two stacked defects in one cell: a missing comma merging two pitchers into one token, and, underneath it, a misspelling — `"… Pablo Almanzar (SP) Carmes Mesa (SP)"`. The engine consumed the row at Phase 2 without complaint; the defect surfaced only downstream at `/build-world-summary`, which reported the merged name as unresolvable and then, after the comma fix, auto-rescued `Carmes` → `Carmen Mesa` (POP-00081) by edit distance. Both repaired at source, read-back verified.
+- **Why it matters:** The row's story angle is "A's pitching rotation is stellar all season" — the sports desk could reach neither pitcher in it. Sports is the world, and its feed has no name validation between authoring and the engine reading it; the only thing that caught this was a downstream summary builder choosing to be loud.
+- **Suggested action:** OPEN. Run the same `canon-name-check` resolver over `NamesUsed` at feed-write time, or add a pre-flight check on the target cycle's feed rows so a name that cannot resolve is caught before the engine consumes it.
+- **Pointer:** engine.138
+
 ## Cross-gap patterns (second pass, 2026-08-31)
 
 - **Every gap in this log is a silence, not a crash.** Coverage stopped writing, the civic chain stopped applying, the rater mis-filed every article, and `--step` ran the wrong thing — all at exit 0. Nothing in this cycle's inventory announced itself; each one had to be walked into. That is the same class engine.136 closed inside the engine on the same day, which suggests the project's dominant failure mode right now is not breakage but unreported success.
@@ -160,3 +561,9 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 ## Changelog
 
 - 2026-08-30 — Initial /pre-flight leg (S403, engine-sheet), C105 pre-fire.
+
+
+## Judgment-layer entries (engine-sheet appends here)
+
+*Coder voice: terse, mechanical, commit-message style. Tag each entry `[judgment]`. Use G-EC{N+} numbering continuing from the mechanical pass.*
+

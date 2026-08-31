@@ -1,0 +1,877 @@
+{
+  "cycle": 105,
+  "mayor": "Avery Santana",
+  "executiveBranch": {
+    "mayor": "Avery Santana",
+    "mayorDetail": {
+      "name": "Avery Santana",
+      "title": "Mayor",
+      "popId": "POP-00034",
+      "status": "active",
+      "approvalRating": "69"
+    },
+    "deputyMayor": "Brenda Okoro",
+    "deputyMayorDetail": {
+      "name": "Brenda Okoro",
+      "title": "Deputy Mayor (Community)",
+      "popId": "POP-00037",
+      "status": "active"
+    }
+  },
+  "council": [
+    {
+      "name": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "status": "active"
+    },
+    {
+      "name": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "status": "active"
+    },
+    {
+      "name": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "status": "active"
+    },
+    {
+      "name": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "status": "active"
+    },
+    {
+      "name": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "status": "active"
+    },
+    {
+      "name": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "status": "active"
+    },
+    {
+      "name": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "status": "active"
+    },
+    {
+      "name": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "status": "active"
+    },
+    {
+      "name": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "status": "active"
+    }
+  ],
+  "asRoster": [
+    {
+      "name": "Vinnie Keane",
+      "position": "Designated Hitter, Oakland A's Legend",
+      "popId": "POP-00001",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Mark Aitken",
+      "position": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+      "popId": "POP-00003",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Benji Dillon",
+      "position": "Pitcher, Oakland A's Legend",
+      "popId": "POP-00018",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Isley Kelley",
+      "position": "Shortstop, Oakland A's Legend",
+      "popId": "POP-00019",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Darrin Davis",
+      "position": "Left Fielder, Oakland A's Legend",
+      "popId": "POP-00021",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Danny Horn",
+      "position": "Center Fielder, Oakland A's - Best player in the MLB",
+      "popId": "POP-00022",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Henry Rivas",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00024",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Arturo Ramos",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00025",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Allen Lopez",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00026",
+      "tier": "2",
+      "status": "Traded"
+    },
+    {
+      "name": "Martin Richards",
+      "position": "Third Baseman, New York Mets",
+      "popId": "POP-00031",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Anthony Casto",
+      "position": "1B, Oakland A's",
+      "popId": "POP-00032",
+      "tier": "3",
+      "status": "Traded"
+    },
+    {
+      "name": "John Ellis",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00033",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Ernesto Quintero",
+      "position": "3B/1B , Oakland A's",
+      "popId": "POP-00050",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Desmond Morton",
+      "position": "Left Fielder, Oakland A's",
+      "popId": "POP-00051",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Clark Saryan",
+      "position": "Closing Pitcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00052",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Kevin Clark",
+      "position": "Third Baseman, Oakland A's",
+      "popId": "POP-00053",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "JR Rosado",
+      "position": "Left Fielder, Oakland A's",
+      "popId": "POP-00054",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Ross Cabral",
+      "position": "Catcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00055",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Sidney Tumolo",
+      "position": "Second Baseman, Oakland A's",
+      "popId": "POP-00058",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Buford Park",
+      "position": "Third Baseman, New York Yankees",
+      "popId": "POP-00059",
+      "tier": "3",
+      "status": "Traded"
+    },
+    {
+      "name": "Marco Fabregas",
+      "position": "Catcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00060",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "JP Bolden",
+      "position": "Second Baseman, Las Vegas Aviators (AAA)",
+      "popId": "POP-00061",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Leo Lamar",
+      "position": "Relief Pitcher, Oakland A's",
+      "popId": "POP-00062",
+      "tier": "3",
+      "status": "Traded"
+    },
+    {
+      "name": "Jose Baez",
+      "position": "Starting Pitcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00063",
+      "tier": "3",
+      "status": "Traded"
+    },
+    {
+      "name": "Jamaal West",
+      "position": "Starting Pitcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00064",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "William Tata",
+      "position": "Closing Pitcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00065",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Johnny Carter",
+      "position": "Relief Pitcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00066",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Patrick Fiore",
+      "position": "Left Fielder, Las Vegas Aviators (AAA)",
+      "popId": "POP-00067",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Bryan Franco",
+      "position": "Shortstop, Oakland A's ",
+      "popId": "POP-00068",
+      "tier": "3",
+      "status": "Traded"
+    },
+    {
+      "name": "Craig Miller",
+      "position": "Right Fielder, Las Vegas Aviators (AAA)",
+      "popId": "POP-00069",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Dustin Mills",
+      "position": "Starting Pitcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00070",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Jeff Cobain",
+      "position": "First Baseman, Las Vegas Aviators (AAA)",
+      "popId": "POP-00071",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Francisco Davila",
+      "position": "Relief Pitcher, Las Vegas Aviators (AAA)",
+      "popId": "POP-00072",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Rich Barnett",
+      "position": "Starting Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00073",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Lenny Ryan",
+      "position": "Relief Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00074",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Julian Porcelli",
+      "position": "Center Fielder, Midland RockHounds (AA)",
+      "popId": "POP-00075",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Edgar Fabregas",
+      "position": "Relief Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00076",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Julio Valencia",
+      "position": "Setup/Closing Pitcher, Oakland A's",
+      "popId": "POP-00077",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Sergio Aybar",
+      "position": "Catcher, Midland RockHounds (AA)",
+      "popId": "POP-00078",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Frank Reyna",
+      "position": "Right Fielder, Oakland A's",
+      "popId": "POP-00079",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Richie Haynes",
+      "position": "Starting Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00080",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Carmen Mesa",
+      "position": "Starting Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00081",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Reese Aulert",
+      "position": "Closing Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00082",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Chad Tipre",
+      "position": "Relief Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00083",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Garry Fraser",
+      "position": "Starting Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00084",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Richie Ramiro",
+      "position": "First Baseman, Midland RockHounds (AA)",
+      "popId": "POP-00085",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Chuck Haskett",
+      "position": "traded",
+      "popId": "POP-00086",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Fred Ciccone",
+      "position": "Right Fielder, Midland RockHounds (AA)",
+      "popId": "POP-00087",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Damien Johnson",
+      "position": "traded",
+      "popId": "POP-00088",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Kelly McCloud",
+      "position": "traded",
+      "popId": "POP-00089",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Sean Prado",
+      "position": "First Baseman, Midland RockHounds (AA)",
+      "popId": "POP-00090",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Delmon Regan",
+      "position": "Relief Pitcher, Midland RockHounds (AA)",
+      "popId": "POP-00091",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Carlos Flores",
+      "position": "Center Fielder, Midland RockHounds (AA)",
+      "popId": "POP-00092",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Esteban Ramos",
+      "position": "traded",
+      "popId": "POP-00093",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Humberto Mejia",
+      "position": "Catcher, Stockton Ports (A)",
+      "popId": "POP-00094",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Andy Seymour",
+      "position": "traded",
+      "popId": "POP-00095",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Matt Thomas",
+      "position": "traded",
+      "popId": "POP-00096",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "David Hand",
+      "position": "traded",
+      "popId": "POP-00097",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Dave Mullins",
+      "position": "traded",
+      "popId": "POP-00098",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Koji Ono",
+      "position": "traded",
+      "popId": "POP-00099",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Reggie McGregor",
+      "position": "First Baseman, Stockton Ports (A)",
+      "popId": "POP-00100",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Jose Fuentes",
+      "position": "Second Baseman, Stockton Ports (A)",
+      "popId": "POP-00101",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Rod Geary",
+      "position": "Third Baseman, Stockton Ports (A)",
+      "popId": "POP-00102",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Kevin Ham",
+      "position": "Second Baseman, Stockton Ports (A)",
+      "popId": "POP-00103",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Willy Rodriguez",
+      "position": "Starting Pitcher, Stockton Ports (A)",
+      "popId": "POP-00104",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Robby Branham",
+      "position": "Relief Pitcher, Stockton Ports (A)",
+      "popId": "POP-00105",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Jeff Mateo",
+      "position": "First Baseman, Stockton Ports (A)",
+      "popId": "POP-00106",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Giuseppe Santiago",
+      "position": "Relief Pitcher, Stockton Ports (A)",
+      "popId": "POP-00107",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Kilian Saunders",
+      "position": "Catcher, Stockton Ports (A)",
+      "popId": "POP-00108",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Troy William",
+      "position": "Second Baseman, Stockton Ports (A)",
+      "popId": "POP-00109",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Estevan Carmona",
+      "position": "Starting Pitcher, Stockton Ports (A)",
+      "popId": "POP-00110",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Roscoe Reese",
+      "position": "Relief Pitcher, Stockton Ports (A)",
+      "popId": "POP-00111",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Armando Marquez",
+      "position": "Third Baseman, Stockton Ports (A)",
+      "popId": "POP-00112",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Ray Clark",
+      "position": "Starting Pitcher, Stockton Ports (A)",
+      "popId": "POP-00113",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Dan Perez",
+      "position": "Hitting Coach, Oakland A's",
+      "popId": "POP-00115",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Fernando Lima",
+      "position": "Pitching Coach, Oakland A's",
+      "popId": "POP-00116",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Babe Bradford",
+      "position": "First Base Coach, Oakland A's",
+      "popId": "POP-00117",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Stephan Kollars",
+      "position": "Third Base Coach, Oakland A's",
+      "popId": "POP-00118",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Beverly Peterson",
+      "position": "Scout, Oakland A's",
+      "popId": "POP-00119",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Lou Hollis",
+      "position": "Scout, Oakland A's",
+      "popId": "POP-00120",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Otis Redd",
+      "position": "Scout, Oakland A's",
+      "popId": "POP-00121",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Miguel Casillas",
+      "position": "Starting Pitcher, SF Giants",
+      "popId": "POP-00122",
+      "tier": "3",
+      "status": "Traded"
+    },
+    {
+      "name": "Carlos Chávez",
+      "position": "Relief Pitcher, Former Oakland A's",
+      "popId": "POP-00130",
+      "tier": "3",
+      "status": "Traded"
+    },
+    {
+      "name": "Mike Paulson",
+      "position": "General Manager, Oakland A's & The Oaks",
+      "popId": "POP-00527",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Deacon Seymour",
+      "position": "Manager, Oakland A's",
+      "popId": "POP-00528",
+      "tier": "2",
+      "status": "recovering"
+    },
+    {
+      "name": "Travis Coles",
+      "position": "Starting Pitcher, Oakland A's",
+      "popId": "POP-00533",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Mariano Rosales",
+      "position": "Closing Pitcher, Oakland As",
+      "popId": "POP-00555",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Eric Taveras",
+      "position": "Second Baseman, Oakland A's",
+      "popId": "POP-00597",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "Vladimir Gonzalez",
+      "position": "Right Fielder, Oakland A's",
+      "popId": "POP-00598",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Jose Colon",
+      "position": "Catcher, Oakland A's",
+      "popId": "POP-00599",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Gil Saucedo",
+      "position": "Former A's Player",
+      "popId": "POP-00793",
+      "tier": "4",
+      "status": "Traded"
+    },
+    {
+      "name": "Wilson Shepard",
+      "position": "Head Coach, Oakland Oaks",
+      "popId": "POP-01022",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Adash Stanley",
+      "position": "PG / The Oaks ",
+      "popId": "POP-01023",
+      "tier": "1",
+      "status": "Active"
+    },
+    {
+      "name": "AJ Dybantsa",
+      "position": "SF / The Oaks",
+      "popId": "POP-01024",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Dame Sarr",
+      "position": "SG / The Oaks",
+      "popId": "POP-01025",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Coen Carr",
+      "position": "SG / The Oaks",
+      "popId": "POP-01026",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Austin Reaves",
+      "position": "SG / The Oaks",
+      "popId": "POP-01027",
+      "tier": "2",
+      "status": "Active"
+    },
+    {
+      "name": "Wendell Carter Jr.",
+      "position": "C / The Oaks",
+      "popId": "POP-01028",
+      "tier": "4",
+      "status": "active"
+    },
+    {
+      "name": "Elliot Abraham",
+      "position": "General Manager, Oakland Oaks",
+      "popId": "POP-01046",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Herbert Jones",
+      "position": "NBA Player, traded by Oakland Oaks",
+      "popId": "POP-01052",
+      "tier": "3",
+      "status": "Traded"
+    },
+    {
+      "name": "Pablo Almanzar",
+      "position": "SP / Oakland A's",
+      "popId": "POP-01078",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Dillon Brooks",
+      "position": "SF / The Oaks",
+      "popId": "POP-01079",
+      "tier": "3",
+      "status": "Active"
+    },
+    {
+      "name": "Louis Cross",
+      "position": "Relief Pitcher / Oakland A's",
+      "popId": "POP-01080",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Hitoki  Ka",
+      "position": "Relief Pitcher / Oakland A's",
+      "popId": "POP-01081",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Ian Devine",
+      "position": "Relief Pitcher / Oakland A's",
+      "popId": "POP-01082",
+      "tier": "4",
+      "status": "Active"
+    },
+    {
+      "name": "Antone Bautista",
+      "position": "Relief Pitcher / Oakland A's",
+      "popId": "POP-01083",
+      "tier": "4",
+      "status": "Active"
+    }
+  ],
+  "initiatives": [
+    {
+      "name": "Fruitvale Transit Hub Phase II — Visioning",
+      "id": "INIT-003",
+      "status": "visioning-complete",
+      "voteBreakdown": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
+      "implementationPhase": null,
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "Oakland Youth Apprenticeship Pipeline",
+      "id": "INIT-007",
+      "status": "announced",
+      "voteBreakdown": "Announced C73 Baylight supplemental. Luis Navarro feature. 3 tracks, 8 trades, 400+ Baylight placements by Year 3. No coverage since C73 — 12-cycle gap. Multiple milestones (OUSD MOU C76, Peralta MOU C78, budget allocation C80, A's commitment C83) unverified.",
+      "implementationPhase": null,
+      "nextScheduledAction": null,
+      "nextActionCycle": null
+    },
+    {
+      "name": "West Oakland Stabilization Fund",
+      "id": "INIT-001",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
+      "implementationPhase": "disbursement-active",
+      "nextScheduledAction": "Month-six disbursement review + canvass launch",
+      "nextActionCycle": 105
+    },
+    {
+      "name": "Oakland Alternative Response Initiative",
+      "id": "INIT-002",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
+      "implementationPhase": "implementation-active",
+      "nextScheduledAction": "First expansion-district launch (D1)",
+      "nextActionCycle": 105
+    },
+    {
+      "name": "Temescal Community Health Center",
+      "id": "INIT-005",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
+      "implementationPhase": "construction-active",
+      "nextScheduledAction": "Structural frame groundbreaking",
+      "nextActionCycle": 106
+    },
+    {
+      "name": "Baylight District — Final Council Vote",
+      "id": "INIT-006",
+      "status": "PASSED",
+      "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
+      "implementationPhase": "vote-scheduled",
+      "nextScheduledAction": "Final council vote on Phase II bid",
+      "nextActionCycle": 105
+    }
+  ]
+}

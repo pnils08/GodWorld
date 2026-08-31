@@ -43,11 +43,23 @@ const RULES = [
   { name: 'code-span', re: /`[^`\n]+`/g, why: 'inline code span (engine/system reference)' },
   // Named engine metrics in prose.
   { name: 'metric-phrase', re: /\btension score\b|\bcivic load\b|\bseverity (?:level|score)\b/gi, why: 'raw engine metric phrase' },
-  // Decimal adjacent (±24 chars) to a metric word — "approval at 0.62",
-  // "sentiment 3.3". Money/vote-counts excluded (no metric word adjacent).
+  // Decimal adjacent (±24 chars) to an ENGINE-INTERNAL metric word.
+  //
+  // civic.26 (2026-08-30, Mike-direct): sentiment / approval / severity /
+  // tension came OUT of this list. Those are things every real city tracks and
+  // publishes — a council member saying approval sits at 0.42 is a public
+  // official quoting a public number, not an engine leak, and the gate must
+  // not fail canon over data a city legitimately holds. The rule had been
+  // blocking the whole C104 apply on council_d3's "0.42 sentiment".
+  //
+  // What stays is the vocabulary no city publishes because it only exists
+  // inside this engine: civic load and momentum as bare scalars. Cycle DELTAS
+  // are still caught by `signed-delta` ("moved +0.11 this cycle") — that shape
+  // is engine output whatever noun it modifies, and is untouched here.
+  //
   // Document/sheet/permit IDs excluded post-match below (e.g. "Sheet S-7.3") —
   // that form is a filing reference, not a raw metric reading.
-  { name: 'metric-decimal', re: /(?:sentiment|approval|severity|tension|civic load|momentum)[^.\n]{0,24}?\d+\.\d+|\d+\.\d+[^.\n]{0,24}?(?:sentiment|approval|severity|tension|civic load|momentum)/gi, why: 'raw decimal next to a metric word' },
+  { name: 'metric-decimal', re: /(?:civic load|momentum)[^.\n]{0,24}?\d+\.\d+|\d+\.\d+[^.\n]{0,24}?(?:civic load|momentum)/gi, why: 'raw decimal next to an engine-internal metric word' },
 ];
 
 // A decimal immediately preceded by a letter-hyphen (permit/sheet/section ID

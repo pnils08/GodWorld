@@ -43,21 +43,21 @@ This cycle, I directed immediate executive action to unblock the Oakland Youth A
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Avery Santana — Mayor
 
-- **Address:** Publish the formal Review Findings and Corrective Actions report for the Oakland Youth Apprenticeship Pipeline (INIT-007) and establish an executive plan addressing the 13-point drop in mayoral approval.
-- **Why:** INIT-007 is scheduled for its C104 corrective actions deliverable following intake bottlenecks flagged in C102, while citywide mayoral approval fell from 95 to 82 (-13 points) in C104.
-- **Acceptance:** Public transmission of the INIT-007 corrective action plan detailing intake adjustments and an executive memorandum responding to citywide governance strain.
-- **Silence consequence:** The youth apprenticeship pilot defaults at its scheduled milestone, and executive coordination authority degrades under severe approval loss.
+- **Address:** Transmit the formal INIT-007 Review Findings and Corrective Actions Report to City Council to resolve apprenticeship intake bottlenecks and stabilize executive policy direction following the 13-point approval drop in C104.
+- **Why:** The Oakland Youth Apprenticeship Pipeline (INIT-007) is scheduled for its C104 review findings deliverable after executive intervention in C103, coinciding with a drop in mayoral approval from 95 to 82 in C104.
+- **Acceptance:** Public transmission of the INIT-007 corrective actions report containing revised intake targets and operational adjustments.
+- **Silence consequence:** INIT-007 stalls in pilot phase without authorized corrective workflows, leaving municipal workforce commitments unmet.
 
 ## This week on the wall
 
 You already lived Mon through Thu. Sunday is decide, not a blank brief.
 Your own lines this week (continuity only, not tracker canon):
-1. stated: [Neighborhood Coherence — KONO and Dimond] Avery Santana — When neighborhoods thrive, Oakland thrives—and we’re investing in both.
-2. stated: [Baylight District — Phase II Shortlist Publication] Avery Santana — Baylight isn’t just a stadium—it’s the future of Oakland, and we’re building it right.
-3. stated: [Temescal Community Health Center — HCAI First-Comments Resolution] Avery Santana — Temescal needs this health center now—not next year, not when the paperwork is perfect.
-4. stated: [Fruitvale Transit Hub Phase II — Visioning Compliance Review] Avery Santana — Fruitvale deserves a transit hub that works for the people who use it every day—we’re not letting this stall.
-5. stated: [Oakland Alternative Response Initiative — D7 Community Satisfaction Survey] Avery Santana — Trust isn’t built in a day—it’s built through action, listening, and accountability.
-6. stated: [West Oakland Stabilization Fund — Month-Five Disbursement Batch] Avery Santana — The families who qualified for this support shouldn’t have to wait another day.
+1. stated: [Adams Point Success and D5 Leadership] Avery Santana — Adams Point’s success didn’t happen by accident—it happened because Councilmember Rivers and her team listened, then acted.
+2. stated: [Oakland Alternative Response Initiative — Citywide Expansion Plan] Avery Santana — D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program.
+3. stated: [Temescal Community Health Center — Phase 1 Closeout] Avery Santana — Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5.
+4. stated: [Baylight District — Phase II Shortlist Approval] Avery Santana — Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work.
+5. stated: [Oakland Youth Apprenticeship Pipeline — Corrective Action Plan] Avery Santana — We over-engineered the intake. That ends today—because every young person in this city deserves a shot, not a runaround.
+6. stated: [KONO Infrastructure Crisis Response] Avery Santana — KONO’s infrastructure failure isn’t just a pothole—it’s a breach of trust, and we’re fixing it now.
 
 Latest district pack on disk: output/cron-civic/packs/MAYOR-01_c104.json
 This week's lever from that pack: Review findings and corrective actions report

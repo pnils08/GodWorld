@@ -59,6 +59,9 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 ## Status updates
 
 - 2026-08-30 (S403) — leg opened. G-PF7 + G-PF9 promoted to pipeline.62; G-PF8 + G-PF10 promoted to civic.26. G-PF11 left in log.
+- 2026-08-30 (S403) — **G-PF8 CLOSED.** `callVoice` gained a cross-family fallback chain + backoff; provider errors now print the HTTP code and the upstream's own text. Probed all four fleet models: the 429 had already cleared, so the halt was transient — the fragility was the retry policy, not the model.
+- 2026-08-30 (S403) — **G-PF10 CLOSED, by ruling not by edit.** Mike-direct: "'.42 sentiment' is not a gated term, nothing should fail on data all cities track." `metric-decimal` narrowed to engine-internal vocabulary (civic load, momentum); sentiment/approval/severity/tension removed and pinned CLEAN in `lintCivicPackets.test.js` so the list cannot be quietly re-tightened. `signed-delta` untouched — a cycle delta is engine output whatever noun it modifies.
+- 2026-08-30 (S403) — **C104 APPLIED.** Re-gated the 2026-08-29 hearing outputs (no re-run of 16 voice calls): clerk pass, validator 0 violations, engine-verbiage clean over 17 voice files, sanity-read pass → GATE PASS. 6 initiatives written to `Initiative_Tracker`, verified by live read-back. INIT-001/005/007 no longer past due; pre-flight's stale warning is gone. Coverage (G-PF7) remains the one open warning.
 
 ## Changelog
 

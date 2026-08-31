@@ -812,7 +812,21 @@ function callOpenRouter(model, system, user, maxTokens) {
       res.on('end', () => {
         try {
           const j = JSON.parse(b);
-          if (j.error) return reject(new Error(model + ': ' + (j.error.message || JSON.stringify(j.error))));
+          // civic.26 — say WHAT went wrong. OpenRouter's j.error.message is the
+          // generic "Provider returned error"; the diagnosis (HTTP code, and
+          // the upstream's own text — e.g. "temporarily rate-limited upstream …
+          // shared pool") lives in j.error.code / j.error.metadata.raw. Logging
+          // only the message turned a transient 429 into two weeks of a string
+          // that reads like a dead model.
+          if (j.error) {
+            const bits = [j.error.message || 'error'];
+            if (j.error.code) bits.push('HTTP ' + j.error.code);
+            const meta = j.error.metadata || {};
+            const raw = typeof meta.raw === 'string' ? meta.raw : (meta.raw ? JSON.stringify(meta.raw) : '');
+            if (raw) bits.push(raw.slice(0, 220));
+            else if (!j.error.message) bits.push(JSON.stringify(j.error).slice(0, 220));
+            return reject(new Error(model + ': ' + bits.join(' — ')));
+          }
           resolve({ text: j.choices[0].message.content, usage: j.usage || {}, provider: j.provider || null });
         } catch (e) { reject(new Error(model + ': bad response — ' + b.slice(0, 200))); }
       });
@@ -1138,26 +1152,73 @@ function noPhaseCheck(json) {
     + 'Keep trackerUpdates as {} or omit ImplementationPhase, and re-send the whole JSON object.';
 }
 
+// civic.26 — seats a voice can fall back to when its own model is unreachable.
+// Ordered by how little the fleet already leans on them (kimi 3 seats, qwen 5,
+// deepseek 30), so a fallback costs as little voice distinctiveness as it can:
+// a seat that borrows deepseek sounds like thirty other seats.
+const FALLBACK_MODELS = ['moonshotai/kimi-k2', 'qwen/qwen3-235b-a22b', 'deepseek/deepseek-chat'];
+
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// civic.26 — the chain for one seat: its own model first, then any fallback
+// from a DIFFERENT provider family. Same-family fallbacks are dropped because
+// the failure this exists for is provider-wide (an upstream 429 on Mistral's
+// shared pool takes every mistralai/* slug with it), not model-specific.
+function modelChainFor(model) {
+  const chain = [model];
+  for (const m of FALLBACK_MODELS) {
+    if (modelFamily(m) !== modelFamily(model) && !chain.includes(m)) chain.push(m);
+  }
+  return chain;
+}
+
+// Two failure classes, two responses (civic.26):
+//   CALL failure (throw from callOpenRouter — 429, timeout, provider error):
+//     the model never spoke. Back off, retry it, then hand the turn to the next
+//     provider. Before this, mayor-open made two calls 0.4s apart against one
+//     model and HALTed the whole Sunday chain on a transient shared-pool 429
+//     (2026-08-30, twice) — a retry policy that fast cannot outlast a throttle.
+//   VALIDITY failure (!v.ok): the model spoke and broke contract. That is its
+//     own mistake to repair, so keep the existing same-model repair pass with
+//     the rejection reason appended. Switching providers there would just lose
+//     the seat's voice over a fixable JSON slip.
+// Returns the model that actually answered so the record shows who spoke.
 async function callVoice(dir, model, userPrompt, maxTokens, officeMap, extraCheck) {
   const row = officeMap ? civicSeat.resolveOfficeRow(officeMap, dir) : null;
   const persona = readPersonaDir((row && civicSeat.personaDirFor(row, ROOT)) || dir);
-  for (let attempt = 1; attempt <= 2; attempt++) {
-    try {
-      const r = await callOpenRouter(model, persona, userPrompt, maxTokens || 4000);
-      const v = validateVoiceJson(r.text);
-      if (v.ok && extraCheck) {
-        const why = extraCheck(v.json);
-        if (why) { v.ok = false; v.why = why; }
+  const chain = modelChainFor(model);
+  let prompt = userPrompt;
+  let lastErr = 'no result';
+
+  for (let mi = 0; mi < chain.length; mi++) {
+    const active = chain[mi];
+    if (mi > 0) log(dir + ' falling back to ' + active + ' (after ' + chain[mi - 1] + ': ' + lastErr + ')');
+
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const r = await callOpenRouter(active, persona, prompt, maxTokens || 4000);
+        const v = validateVoiceJson(r.text);
+        if (v.ok && extraCheck) {
+          const why = extraCheck(v.json);
+          if (why) { v.ok = false; v.why = why; }
+        }
+        if (v.ok) {
+          if (active !== model) log(dir + ' answered by fallback ' + active);
+          return { json: v.json, usage: r.usage, attempts: attempt, model: active, fellBackFrom: active === model ? null : model };
+        }
+        log(dir + ' attempt ' + attempt + ' invalid: ' + v.why);
+        lastErr = v.why;
+        // Contract break — repair with the same model, do not burn the chain.
+        if (attempt === 2) return { error: v.why, raw: r.text, model: active };
+        prompt += '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: ' + v.why + '. Respond with ONLY the corrected JSON object.';
+      } catch (e) {
+        lastErr = e.message;
+        log(dir + ' attempt ' + attempt + ' call failed: ' + e.message);
+        if (attempt < 2) await sleep(2000 * attempt);   // 2s, then move on
       }
-      if (v.ok) return { json: v.json, usage: r.usage, attempts: attempt };
-      log(dir + ' attempt ' + attempt + ' invalid: ' + v.why);
-      if (attempt === 2) return { error: v.why, raw: r.text };
-      userPrompt += '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: ' + v.why + '. Respond with ONLY the corrected JSON object.';
-    } catch (e) {
-      log(dir + ' attempt ' + attempt + ' call failed: ' + e.message);
-      if (attempt === 2) return { error: e.message };
     }
   }
+  return { error: lastErr + ' (all ' + chain.length + ' model(s) tried: ' + chain.join(', ') + ')' };
 }
 
 function packetPathFor(dir, cycle) {
@@ -1273,7 +1334,8 @@ async function runMayorOpen() {
   const injected = injectPacketSection(cycle, AGENDA_MARK, cascade, 'civic-office-mayor');
   fs.mkdirSync(CIVIC, { recursive: true });
   fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.json'), JSON.stringify({
-    stage: 'mayor-open', cycle: Number(cycle), model, output: outPath,
+    stage: 'mayor-open', cycle: Number(cycle), model: r.model || model, configuredModel: model,
+    fellBackFrom: r.fellBackFrom || null, output: outPath,
     statements: r.json.statements.length, cascadeInjected: injected,
     attempts: r.attempts, usage: r.usage, ranAt: new Date().toISOString(),
   }, null, 2));
@@ -1930,4 +1992,4 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson };
+module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson };

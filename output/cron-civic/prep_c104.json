@@ -5,8 +5,8 @@
   "ledgerSnapshot": {
     "source": "Simulation_Ledger",
     "cycle": 104,
-    "rowCount": 964,
-    "generatedAt": "2026-08-23T19:30:36.959Z",
+    "rowCount": 968,
+    "generatedAt": "2026-08-30T19:30:35.851Z",
     "generatedBy": "scripts/dumpLedger.js",
     "note": "Local-disk snapshot for search_everything disk shelf. Stable filename, overwritten each cycle."
   },
@@ -102,5 +102,5 @@
   ],
   "highPatterns": 1,
   "lintLeaks": 0,
-  "ranAt": "2026-08-29T08:09:04.391Z"
+  "ranAt": "2026-08-31T02:01:24.936Z"
 }

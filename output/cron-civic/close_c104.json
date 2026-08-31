@@ -20,9 +20,9 @@
     "baylight_authority"
   ],
   "clerk": "pass",
-  "gatePass": false,
-  "applied": false,
+  "gatePass": true,
+  "applied": true,
   "clerkModel": "deepseek/deepseek-chat",
   "laneEntries": 41,
-  "ranAt": "2026-08-29T08:24:35.101Z"
+  "ranAt": "2026-08-31T04:27:15.666Z"
 }

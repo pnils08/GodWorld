@@ -1,12 +1,7 @@
 {
   "cycle": 104,
-  "pass": false,
-  "failures": [
-    {
-      "check": "engine-verbiage",
-      "detail": "council_d3: [metric-decimal] \"0.42 sentiment\""
-    }
-  ],
+  "pass": true,
+  "failures": [],
   "touchedInitiatives": [
     "INIT-006",
     "INIT-005",
@@ -16,7 +11,10 @@
     "INIT-003"
   ],
   "maxRows": 6,
-  "sanity": null,
+  "sanity": {
+    "pass": true,
+    "issues": []
+  },
   "model": "google/gemini-3.7-flash",
-  "ranAt": "2026-08-29T08:24:34.587Z"
+  "ranAt": "2026-08-31T04:27:09.597Z"
 }

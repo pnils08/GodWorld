@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { lintText } = require('./lintCivicPackets');
-const { districtPackRef, weekCarryBlock, spliceWeekCarry } = require('./cron-civic-run');
+const { districtPackRef, weekCarryBlock, spliceWeekCarry, modelChainFor, FALLBACK_MODELS } = require('./cron-civic-run');
 
 let failed = 0;
 function check(name, cond, detail) {
@@ -25,7 +25,16 @@ check('heading is This week on the wall', block.includes('## This week on the wa
 check('pointer names the pack file', block.includes('Latest district pack on disk: output/cron-civic/packs/COUNCIL-D7_c103.json'));
 check('lever from pack', block.includes('This week\'s lever from that pack: stand with KONO or leave it'));
 check('clean wall line kept', block.includes('KONO needs investment, not abandonment'));
-check('metric-decimal wall line dropped', !block.includes('0.27'));
+// civic.26 (Mike-direct): sentiment is a metric every city tracks, so a seat
+// carrying its own hood-vs-city sentiment reading is NOT an engine leak and is
+// no longer stripped. Previously this asserted the line was dropped.
+check('public-metric wall line kept', block.includes('0.27'));
+// The drop mechanism itself still has to work — proven on vocabulary that only
+// exists inside the engine.
+check('engine-internal metric wall line dropped', !weekCarryBlock({
+  posts: [{ content: 'KONO momentum 0.27 against the citywide dial' }],
+  packPath: 'output/cron-civic/packs/COUNCIL-D7_c103.json',
+}).includes('0.27'));
 check('object-object wall line dropped', !weekCarryBlock({
   posts: [{ content: 'datawake: [object Object] | action: audit' }],
   packPath: 'output/cron-civic/packs/COUNCIL-D7_c103.json',
@@ -77,3 +86,30 @@ if (failed) {
   process.exit(1);
 }
 console.log('cron-civic-week-carry: ok');
+
+// --- civic.26: seat model fallback chain -----------------------------------
+// The Sunday chain HALTed twice on 2026-08-30 because mayor-open made two calls
+// 0.4s apart against one model and hit a shared-pool 429 on Mistral. The chain
+// below is what lets a seat borrow another provider instead of taking the whole
+// hearing down with it.
+console.log('\ncivic.26 — model fallback chain');
+
+var mayorChain = modelChainFor('mistralai/mistral-large');
+check('primary model leads the chain', mayorChain[0] === 'mistralai/mistral-large', JSON.stringify(mayorChain));
+check('chain offers fallbacks', mayorChain.length > 1, JSON.stringify(mayorChain));
+check('no same-family fallback (a provider 429 takes every slug it serves)',
+  mayorChain.slice(1).every(function (m) { return m.split('/')[0] !== 'mistralai'; }), JSON.stringify(mayorChain));
+check('fallbacks ordered least-used-first, so a borrowed voice stays distinct',
+  mayorChain[1] === 'moonshotai/kimi-k2', JSON.stringify(mayorChain));
+
+// A seat already ON a fallback model must not list itself twice.
+var deepseekChain = modelChainFor('deepseek/deepseek-chat');
+check('primary is not duplicated in its own chain',
+  deepseekChain.filter(function (m) { return m === 'deepseek/deepseek-chat'; }).length === 1, JSON.stringify(deepseekChain));
+check('same-family fallback dropped for a fallback-model seat',
+  deepseekChain.every(function (m, i) { return i === 0 || m.split('/')[0] !== 'deepseek'; }), JSON.stringify(deepseekChain));
+
+// Every fallback must be a distinct provider — otherwise the chain has fewer
+// real escape hatches than it appears to.
+var fams = FALLBACK_MODELS.map(function (m) { return m.split('/')[0]; });
+check('every fallback is a distinct provider family', new Set(fams).size === fams.length, JSON.stringify(fams));

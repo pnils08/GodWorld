@@ -1,0 +1,109 @@
+```json
+{
+  "office": "mayor_open",
+  "cycle": 104,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle, we’re taking decisive action to address the 13-point drop in approval by delivering on our promises—unblocking the Youth Apprenticeship Pipeline, accelerating disbursements for West Oakland families, and pushing forward on Baylight and Fruitvale. We’re also celebrating wins where they happen, like Adams Point, while directly addressing KONO’s infrastructure crisis. Every move is about accountability and urgency, because Oaklanders deserve results, not excuses.",
+  "statements": [
+    {
+      "statementId": "STMT-104-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "Oakland Youth Apprenticeship Pipeline Corrective Actions",
+      "initiative": "INIT-007",
+      "decision": "approved",
+      "quote": "We’re clearing the red tape today—because every young Oaklander waiting on this pipeline is a future we can’t afford to stall.",
+      "fullStatement": "The Review Findings and Corrective Actions report for the Oakland Youth Apprenticeship Pipeline is being published today, and I’m directing immediate changes to streamline intake and recruitment. The bottlenecks identified in Cycle 102 are being addressed with three key adjustments: first, expanding community-based outreach in West and East Oakland; second, fast-tracking employer partnerships with Baylight District contractors; and third, implementing a 48-hour response guarantee for applicant inquiries. We’re also assigning a dedicated ombudsperson from my office to track progress weekly. This isn’t just about fixing a program—it’s about restoring trust. The 13-point drop in approval this cycle tells me Oaklanders expect better, and they’re right. We’re delivering better, starting now.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "pilot-active",
+        "MilestoneNotes": "C104: Corrective actions approved; intake bottlenecks addressed via expanded outreach, employer partnerships, and 48-hour response guarantee.",
+        "NextScheduledAction": "Ombudsperson progress report due C105",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_open-002",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund — Month-Five Disbursement Acceleration",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Forty-five households helped is forty-five too few. Today, we’re cutting the wait time in half.",
+      "fullStatement": "The Month-Five disbursement batch for the West Oakland Stabilization Fund is approved—and we’re accelerating it. Given the visible decline in daily life and storefront activity, I’m directing the Office of Economic Workforce Development to process all qualified applications within 10 business days, down from the current 20. Brenda Okoro’s team will also coordinate with Denise Carter’s office to deploy pop-up resource hubs at Mandela Parkway and 7th Street, ensuring families know how to access these funds. We’ve disbursed to 45 households so far; by Cycle 106, that number will double. West Oakland built this city, and we’re not letting it slip backward on our watch.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C104: Disbursement timeline accelerated to 10 days; pop-up hubs deployed at Mandela Parkway/7th St.",
+        "NextScheduledAction": "Cycle 106 disbursement target: 90+ households",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_open-003",
+      "type": "executive_order",
+      "topic": "KONO Infrastructure Crisis Response",
+      "initiative": null,
+      "decision": "emergency task force convened",
+      "quote": "KONO’s infrastructure crisis isn’t waiting for a committee—so neither are we.",
+      "fullStatement": "The infrastructure event in KONO this cycle is unacceptable, and we’re treating it as the emergency it is. I’m convening an emergency task force led by City Administrator Marcus Osei’s office, with representatives from Public Works, OPD, and the Koreatown-Northgate Community Benefit District. Their first directive: a 72-hour assessment of the damage, with a public report and repair timeline due by Cycle 105. We’re also redirecting $150,000 from the contingency fund to immediate fixes—potholes, lighting, and sidewalk repairs—starting tomorrow. KONO’s businesses and residents deserve better, and they’ll have my direct attention until this is resolved.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_open-004",
+      "type": "policy_position",
+      "topic": "Baylight District — Final Council Vote",
+      "initiative": "INIT-006",
+      "decision": "full support; urging swift approval",
+      "quote": "Baylight’s final vote isn’t about a stadium—it’s about 2,100 jobs and a billion-dollar bet on Oakland’s future.",
+      "fullStatement": "With the Phase II shortlist published and the final council vote on the horizon, my position is clear: Baylight District is the single largest economic opportunity for Oakland in a generation. The three remaining bidders represent over 2,100 projected jobs, $1.2 billion in private investment, and a commitment to 35% local hiring. To Councilmembers Ashford and Chen, I say this: the audits you’ve requested are complete, the community benefits are locked in, and the time for delay is over. Oaklanders didn’t elect us to study opportunities—they elected us to seize them. I urge a ‘yes’ vote when this comes to the floor, and I’ll be there to sign the permits the same day it passes.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "vote-ready",
+        "MilestoneNotes": "C104: Mayor urges swift approval ahead of final council vote; emphasizes 2,100 jobs and 35% local hiring.",
+        "NextScheduledAction": "Final council vote"
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_open-005",
+      "type": "press_release",
+      "topic": "Adams Point Success and Citywide Accountability",
+      "initiative": null,
+      "decision": "credit to community and D3 staff; citywide review ordered",
+      "quote": "Adams Point’s success didn’t happen by accident—it happened because people showed up. Now we’re asking why that same energy isn’t everywhere.",
+      "fullStatement": "The upbeat mood and stable street trade in Adams Point this cycle didn’t happen by chance—it happened because D3 Councilmember Janae Rivers and her staff listened to residents, supported small businesses, and kept the pressure on city services. That’s leadership, and it deserves credit. But here’s the hard question: why is Adams Point thriving while Grand Lake, Temescal, and East Oakland are struggling? Today, I’m directing Laila Cortez to conduct a 30-day review of neighborhood equity in city services, with a focus on why some districts get responsiveness and others get excuses. The findings will be public, and so will the fixes. Oaklanders deserve a city that works for every neighborhood—not just the ones that make the news.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-104-mayor_open-006",
+      "type": "executive_order",
+      "topic": "Fruitvale Transit Hub Phase II — Visioning Deadline",
+      "initiative": "INIT-003",
+      "decision": "30-day compliance deadline set",
+      "quote": "Fruitvale’s transit hub is stalled on paperwork while riders wait on platforms. That ends in 30 days.",
+      "fullStatement": "The Fruitvale Transit Hub Phase II visioning process has dragged on long enough. Today, I’m setting a hard deadline: all outstanding compliance submissions must be finalized within 30 days, or this project moves to the City Administrator’s office for direct oversight. The pedestrian-path redesign is stamped and ready—what’s missing is urgency. To the Bureau of Planning: your review of these submissions is now the top priority. To the community: we hear you, and we’re done with delays. Fruitvale deserves a hub that works for the people who rely on it every day, and we’re going to deliver it.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "visioning",
+        "MilestoneNotes": "C104: 30-day compliance deadline set for Phase II visioning; City Administrator oversight threatened if missed.",
+        "NextScheduledAction": "Compliance submissions due C105",
+        "NextActionCycle": 105
+      }
+    },
+    {
+      "statementId": "STMT-104-mayor_open-007",
+      "type": "policy_position",
+      "topic": "Oakland Alternative Response Initiative — D7 Expansion",
+      "initiative": "INIT-002",
+      "decision": "directing resource surge to D7",
+      "quote": "Trust in D7 didn’t drop overnight, and we won’t rebuild it with empty words.",
+      "fullStatement": "The D7 Community Satisfaction Survey results are a wake-up call: while OARI has stabilized post-KONO crisis, trust in District 7 remains fragile. That’s why I’m directing a surge of resources into D7 starting immediately. First, we’re doubling the number of alternative response teams on shift during peak hours. Second, we’re launching a ‘Trust Tour’—my Deputy Mayor Brenda Okoro will personally attend the next five D7 neighborhood association meetings to hear concerns directly. And third, we’re publishing a monthly transparency dashboard on OARI’s D7 response times and outcomes, starting Cycle 105. Councilmember Ashford has raised valid questions about accountability; today, we’re answering them with action.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "operational",
+        "MilestoneNotes": "C104: Resource surge directed to D7; 'Trust Tour' and transparency dashboard launched.",
+        "NextScheduledAction": "Cycle 105 D7 transparency dashboard publication",
+        "NextActionCycle": 105
+      }
+    }
+  ]
+}
+```

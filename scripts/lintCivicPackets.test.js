@@ -30,7 +30,7 @@ var LEAKS = [
   ['engine-tag', 'Engine: stable across the board.'],
   ['code-span', 'The `cityDynamics` signal recovered.'],
   ['metric-phrase', 'The civic load on the district eased.'],
-  ['metric-decimal', 'Approval sits at 0.62 in the district.'],
+  ['metric-decimal', 'Momentum reads 0.62 across the corridor.'],
 ];
 LEAKS.forEach(function (pair) {
   total++; passed += passing('FAIL leak [' + pair[0] + ']: "' + pair[1].slice(0, 38) + '..."', function () {
@@ -41,6 +41,13 @@ LEAKS.forEach(function (pair) {
 
 // --- must stay CLEAN (legit civic prose) ---
 var CLEAN = [
+  // civic.26 (Mike-direct): a city tracks and publishes these. An official
+  // quoting one is not an engine leak, and the gate must not fail canon on it.
+  // "0.42 sentiment" blocked the entire C104 apply before this ruling.
+  'Sentiment in the district sits at 0.42 by our own survey.',
+  'Approval sits at 0.62 in the district.',
+  'The severity of the outage rated 2.5 on the county scale.',
+  'Community tension measured 1.8 in the last listening session.',
   'The Baylight District represents a $2.1B investment over ten years.',
   'The apprenticeship bill passed 5-4 after the D5 council member switched.',
   'The Fruitvale Transit Hub enters Phase II this cycle.',

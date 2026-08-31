@@ -20,16 +20,19 @@ Your approval stands at 83 — down 7 since last cycle.
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Rose Delgado — City Council District 3
 
-- **Address:** Present a district recovery strategy addressing West Oakland's low RetailVitality (3.52), elevated CrimeIndex (1.18), and the 7-point drop in D3 approval.
-- **Why:** D3 approval dropped from 90 to 83 (-7 points) in C104, while West Oakland's commercial indicators lag significantly behind the rest of the city despite active stabilization disbursements.
-- **Acceptance:** A public legislative and constituent action plan focused on West Oakland commercial corridor activation and safety coordination.
-- **Silence consequence:** Deepening economic detachment in West Oakland and continued loss of constituent confidence in D3 leadership.
+- **Address:** Introduce District 3's community benefit stipulations for the Baylight Phase II RFP process to protect surrounding West Oakland and Jack London commercial corridors.
+- **Why:** District 3 experienced a 7-point approval drop (83, -7) in C104 following the C103 shortlist release, while West Oakland retail vitality remains at 3.52.
+- **Acceptance:** Formal submission of District 3 priority terms regarding local business contracting and infrastructure linkages for the Baylight Phase II RFP.
+- **Silence consequence:** Baylight procurement proceeds without enforceable D3 community protections, deepening commercial disparities in neighboring corridors.
 
 ## This week on the wall
 
 You already lived Mon through Thu. Sunday is decide, not a blank brief.
 Your own lines this week (continuity only, not tracker canon):
-_Wall lines this week could not ship as packet prose._
+1. stated: [District Recovery Strategy Response] Rose Delgado — Fruitvale’s diner owners and transit workers built this recovery. Now we fight for San Antonio with the same grit. --- stated: [San Antonio Recovery and Fruitvale Credit] Rose Delgado — Fruitvale's comeback was built by its people. Now we fight for San Antonio with the same grit—and real money.
+2. stated: [Youth Apprenticeship Pipeline Corrective Action] Rose Delgado — Simplifying intake is just the start—we need apprentices staffing the very projects that’ll revive San Antonio’s storefronts. --- stated: [Youth Apprenticeship Pipeline Corrective Action] Rose Delgado — Let's stop shuffling paperwork and put apprentices to work revitalizing San Antonio's storefronts starting this quarter.
+3. stated: [Fruitvale Transit Hub Phase II Visioning] Rose Delgado — We’re not just building infrastructure—we’re building futures. Fruitvale’s hub deserves a vision that connects to San Antonio’s potential. --- stated: [Fruitvale Transit Hub Phase II Compliance] Rose Delgado — Fruitvale's hub connects to San Antonio's future—we're building transit infrastructure today that apprentices will maintain tomorrow.
+4. stated: [Oakland Alternative Response Initiative Expansion] Rose Delgado — D7’s model proves safety works when we meet people where they are—let’s adapt that to San Antonio’s unique needs, not just replicate it. --- stated: [Oakland Alternative Response Initiative Expansion] Rose Delgado — Safety isn't a one-size-fits-all. We'll adapt D7's success to meet San Antonio's unique needs, not just replicate it.
 
 Latest district pack on disk: output/cron-civic/packs/COUNCIL-D3_c104.json
 This week's lever from that pack: stand with San Antonio or leave it
@@ -68,15 +71,3 @@ Success: **Fruitvale** — mood clearly upbeat, street trade steady. Somebody's 
 You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of your neighborhoods this cycle: who answers for San Antonio, and who gets the credit in Fruitvale?
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
-
-## MAYOR'S AGENDA THIS CYCLE
-
-- West Oakland Stabilization Fund — Month-Five Disbursement Batch: approved — "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out."
-- Oakland Alternative Response Initiative — Citywide Expansion Plan: directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline — "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program."
-- Oakland Youth Apprenticeship Pipeline — Corrective Action Plan: publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery — "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround."
-- Baylight District — Final Council Vote: public endorsement of the Phase II shortlist and call for unanimous council approval — "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work."
-- Fruitvale Transit Hub Phase II — Compliance Review Approval: directing the Bureau to greenlight submissions and begin community visioning sessions by January 15 — "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it."
-- Temescal Community Health Center — Phase 1 Closeout and Acceleration: approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion — "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5."
-- KONO Infrastructure Crisis and Adams Point Success: directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress — "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second."
-
-The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

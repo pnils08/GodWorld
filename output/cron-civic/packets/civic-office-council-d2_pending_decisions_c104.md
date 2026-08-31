@@ -21,15 +21,18 @@ Your approval stands at 56 — down 2 since last cycle.
 ## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
 ## Leonard Tran — City Council District 2
 
-- **Address:** Introduce a commercial stabilization and tenant protection package to counteract the high-severity economic decay flagged in Grand Lake.
-- **Acceptance:** A filed council resolution or formal budget appropriation targeting small business support and anti-displacement measures in Grand Lake.
-- **Silence consequence:** Continued unmitigated commercial collapse and resident displacement across the Grand Lake commercial district.
+- **Address:** Introduce a targeted commercial stabilization measure for Grand Lake to counter the neighborhood math-imbalance flag identified in C104.
+- **Acceptance:** A filed council resolution or formal OEWD referral proposing commercial relief and tenant protections for the Grand Lake corridor.
+- **Silence consequence:** Continued commercial erosion and unchecked housing pressure in Grand Lake without an active civic mitigator.
 
 ## This week on the wall
 
 You already lived Mon through Thu. Sunday is decide, not a blank brief.
 Your own lines this week (continuity only, not tracker canon):
-1. datawake: Phase II shortlist is down to three. That's the right call—four bidders meant someone was getting cut regardless, and the selection committee did the work to narrow it based on capacity and track record, not politics. I'm watching how the remaining three handle community engagement in Jack London specifically. The Holiday Market showed this neighborhood can draw people, but it also showed the infrastructure
+1. stated: [Downtown and Chinatown Economic Performance] Leonard Tran — Downtown isn't buzzing by accident—it's because we focused on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.
+2. stated: [Grand Lake Commercial Stabilization] Leonard Tran — I don't write checks for other districts without seeing the ledger first—show me the economic impact data on Grand Lake, then we'll talk about stabilization.
+3. stated: [Baylight District Development] Leonard Tran — Three bidders with proven capacity is exactly where we need to be—now let's make sure Jack London gets the infrastructure upgrade it earned, not just the development.
+4. datawake: Phase II shortlist is down to three. That's the right call—four bidders meant someone was getting cut regardless, and the selection committee did the work to narrow it based on capacity and track record, not politics. I'm watching how the remaining three handle community engagement in Jack London specifically. The Holiday Market showed this neighborhood can draw people, but it also showed the infrastructure
 
 No district pack on disk for this office this cycle.
 
@@ -48,15 +51,3 @@ Success: **Downtown** — mood clearly upbeat, street trade busy. Somebody's wor
 You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of your neighborhoods this cycle: who answers for Chinatown, and who gets the credit in Downtown?
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
-
-## MAYOR'S AGENDA THIS CYCLE
-
-- West Oakland Stabilization Fund — Month-Five Disbursement Batch: approved — "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out."
-- Oakland Alternative Response Initiative — Citywide Expansion Plan: directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline — "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program."
-- Oakland Youth Apprenticeship Pipeline — Corrective Action Plan: publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery — "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround."
-- Baylight District — Final Council Vote: public endorsement of the Phase II shortlist and call for unanimous council approval — "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work."
-- Fruitvale Transit Hub Phase II — Compliance Review Approval: directing the Bureau to greenlight submissions and begin community visioning sessions by January 15 — "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it."
-- Temescal Community Health Center — Phase 1 Closeout and Acceleration: approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion — "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5."
-- KONO Infrastructure Crisis and Adams Point Success: directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress — "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second."
-
-The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

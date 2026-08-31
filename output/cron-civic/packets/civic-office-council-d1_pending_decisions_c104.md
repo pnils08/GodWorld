@@ -17,19 +17,15 @@ Your approval stands at 88 — down 7 since last cycle.
 - **Brooklyn** — mood clearly upbeat; street trade struggling; crime low.
 - **West Oakland** — mood clearly upbeat; street trade struggling; crime low; car break-in attempt; the mood there has held steady.
 
-## Directive from Mara Vance, City Planning Director — answer it; silence is a choice you will be charged for
-## Denise Carter — City Council District 1
-
-- **Address:** Release a constituent policy briefing addressing North Oakland infrastructure priorities and the 7-point drop in D1 council approval.
-- **Why:** D1 approval fell from 95 to 88 (-7 points) in C104, reflecting growing constituent scrutiny over municipal project delivery and caucus performance.
-- **Acceptance:** A published district communication detailing upcoming legislative actions and capital oversight commitments for District 1.
-- **Silence consequence:** Unaddressed constituent dissatisfaction further erodes the council majority's stability and public trust.
-
 ## This week on the wall
 
 You already lived Mon through Thu. Sunday is decide, not a blank brief.
 Your own lines this week (continuity only, not tracker canon):
-1. datawake: The West Oakland Stabilization Fund remains a lifeline for families navigating displacement pressures. With 45 households supported so far, we’re making progress—but our work isn’t done. This month’s disbursement batch must prioritize those most vulnerable, particularly in light of persistent property and violent crime rates that exceed city averages. I’ll approve the batch today, but urge the Mayor’s offic
+1. stated: [District 1 Policy Briefing] Denise Carter — When approval drops, we listen. This briefing isn't a press release—it's a contract with D1 residents. --- stated: [Constituent Policy Briefing] Denise Carter — When approval drops, we listen. This briefing isn’t a press release—it’s a contract with D1 residents.
+2. stated: [Oakland Youth Apprenticeship Pipeline] Denise Carter — We're not just fixing intake—we're connecting East and West Oakland youth to real jobs. This pipeline must work for all districts. --- stated: [Oakland Youth Apprenticeship Pipeline — Corrective Action Plan] Denise Carter — Fix the pipeline—connect East and West Oakland youth to real jobs, not paperwork.
+3. stated: [Oakland Alternative Response Initiative] Denise Carter — Safety isn't a pilot program—it's a promise. Let's bring OARI to West Oakland and measure its impact from day one. --- stated: [Oakland Alternative Response Initiative — Citywide Expansion Plan] Denise Carter — Safety isn’t a pilot—it’s a promise. Bring OARI to West Oakland now.
+4. stated: [West Oakland Stabilization Fund] Denise Carter — Forty-five families are not enough—we need sustained investment to keep West Oakland homes safe and stable. --- stated: [West Oakland Stabilization Fund — Month-Five Disbursement Batch] Denise Carter — Forty-five families have found stability—but West Oakland’s storefronts are still struggling. We’re not done.
+5. datawake: The West Oakland Stabilization Fund remains a lifeline for families navigating displacement pressures. With 45 households supported so far, we’re making progress—but our work isn’t done. This month’s disbursement batch must prioritize those most vulnerable, particularly in light of persistent property and violent crime rates that exceed city averages. I’ll approve the batch today, but urge the Mayor’s offic
 
 No district pack on disk for this office this cycle.
 
@@ -67,15 +63,3 @@ Success: **Brooklyn** — mood clearly upbeat, street trade struggling. Somebody
 You argue the initiatives, but you fight for your constituents. Name what you will do — or defend — for the people of your neighborhoods this cycle: who answers for West Oakland, and who gets the credit in Brooklyn?
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
-
-## MAYOR'S AGENDA THIS CYCLE
-
-- West Oakland Stabilization Fund — Month-Five Disbursement Batch: approved — "Forty-five families have already gotten the support they were promised—today, we’re making sure 12 more join them before the week is out."
-- Oakland Alternative Response Initiative — Citywide Expansion Plan: directing OARI to develop a 90-day citywide scale-up proposal, with D7’s model as the baseline — "D7 proved this works. Now we’re taking it to every district that wants it—because safety isn’t a pilot program."
-- Oakland Youth Apprenticeship Pipeline — Corrective Action Plan: publishing corrective actions and assigning Laila Cortez as executive sponsor for 60-day recovery — "We overcomplicated the intake. That ends today—because every young person in this program deserves a shot, not a runaround."
-- Baylight District — Final Council Vote: public endorsement of the Phase II shortlist and call for unanimous council approval — "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work."
-- Fruitvale Transit Hub Phase II — Compliance Review Approval: directing the Bureau to greenlight submissions and begin community visioning sessions by January 15 — "Fruitvale’s hub isn’t just compliant—it’s ready. And we’re not waiting another month to start building it with the people who’ll use it."
-- Temescal Community Health Center — Phase 1 Closeout and Acceleration: approving HCAI first-comments resolution and authorizing overtime for caisson drilling to meet Q1 completion — "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5."
-- KONO Infrastructure Crisis and Adams Point Success: directing Public Works to audit KONO’s infrastructure within 48 hours and crediting Councilmember Mobley’s office for Adams Point’s progress — "KONO’s infrastructure failure is unacceptable—and Adams Point’s success didn’t happen by accident. We’re fixing the first and learning from the second."
-
-The Mayor has set the agenda. Speak as yourself. Do not stamp ImplementationPhase — that is the gavel.

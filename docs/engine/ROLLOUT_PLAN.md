@@ -17,6 +17,15 @@ own rollout rows.
 
 ---
 
+## Next Session Priorities (S404 → next, engine-sheet)
+
+1. **engine.135 acceptance — the business/employment cascade.** Re-run `cascadeAudit.js` against post-C105 state (spread lane was FAIL 1.72pp on an unstepped profile). Then settle the zero-denominator career pass and the 256-stagnant education pass — both are the cascade's own numbers and neither is explained.
+2. **engine.138 — the chase list.** 20 gap entries, annotated on `output/execution_log_c105.md`. Start G-PF18: civic voice sentiment has never reached the live world. Then G-PF19 (three civic systems disagree on the same six initiatives) and G-PF20 (no 'resolved' state for storylines — sift opens on an empty slate).
+3. **engine.137** — civicLoad/cycleWeight read-before-write; rivalry-arc and bond escalation structurally unreachable. Design call.
+4. **Gap logs** — `output/production_log_run_cycle_c105_gaps.md` carries 20 operator + 56 mechanical entries. Open and unowned: G-PF11 (pre-flight auto-derive), G-PF14 (flaky coverage test), G-PF22 (`Name`-column trap), G-PF23 (hood texture blind to INSTITUTIONS.md), G-PF24 (dead hood gate discarding 5 of 6 rows), G-PF25 (world-state fold ordering), G-PF26 (no sports-feed name validation).
+
+---
+
 ## Rules & conventions → [[rollout-rules]]
 
 **The operating doctrine for this tracker lives in [[rollout-rules]].** State labels, group taxonomy, how to add/close work, filing, archiving, and the sweep code — one doctrine, every terminal follows it. Read it before adding or closing a row.
@@ -63,7 +72,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.131 | Sports coupling — restore the real per-team season, move the sports zone with the stadium. Live: T1-T4. Built+unshipped: T7, civic override, Rhea roster fix. | in-progress | engine-sheet | [[../plans/2026-08-27-sports-coupling-restore]] |
 | governance.51 | Boot-doc consolidation — rule-only boot docs under a confirmed size ceiling, no stacked change-logs; 121 memory files deduped via /batch, builder-reviewed deletes. | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] |
 | engine.134 | Hood identity — the engine has no single source for "what the neighborhoods are": 25 files declare their own hood list/table (~30 constants), 70 name a hood literally, hand-maintained lists bit twice … (folded into engine.135; see plan) | ready | engine-sheet | [[../plans/2026-08-29-city-health-system]] §Blast radius (measure); plan TBD |
-| engine.135 | Employment system cascade — A–F bench-proven S399 (0827 @16, C105–C110); prod script at HEAD, deployment @9 until Mike's bump. NEXT: live C105 on @10, then E3. | in-progress | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] |
+| engine.135 | Employment system cascade — A–F bench-proven, prod live, and C105 was its first live fire. **Acceptance is what remains, and the fire raised three things to settle:** `runCareerEngine` moved 0 businesses across a ZERO denominator; `processEducationCareer` left 256 stagnant with 0 education/career/income and `settleAdulthood` settled 0; hood unemployment swung ±22–33% (Lake Merritt/Uptown/KONO up, Baylight −33%) — first live hood numbers, unverified. Re-run `scripts/cascadeAudit.js` now a cycle has stepped: the spread lane read FAIL 1.72pp pre-fire against a ≥2pp bar, on a profile that had never been stepped. | in-progress | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] |
 | engine.138 | **This week's chase list** — 20 gap entries from the C105 live fire, annotated on the execution log. Head of list: civic voice sentiment has NEVER reached the live world (`applyInitiativeImplementationEffects.js` loader needs `require('fs')`, absent in Apps Script). Detail + priority order live in the pointers, not here. | ready | engine-sheet | [[../../output/execution_log_c105]] §Annotations + [[../../output/production_log_run_cycle_c105_gaps]] §G-PF21-26 |
 | engine.137 | Pre-mortem §3 made deterministic (`ctxMap.js` ordering pass) and what it found: `S.civicLoad` written P06 but gating rivalry-arc escalation at P04, `S.cycleWeight` written P09 but read P04/P05 — escalation branches structurally unreachable. Design call: carry-forward seeds them at Phase 1, or consumers move after their writers. | ready | engine-sheet | [[../../output/production_log_run_cycle_c105_gaps]] §G-PF15, §G-PF16, §G-PF17 |
 | canon.6 | Dillon Brooks + Pablo Almanzar in the C104 sports feed with no citizen row; POP-01023/01024 are the minting precedent. Canon write — needs Mike. | blocked | engine-sheet | [[../../output/world_summary_c104.md]] |

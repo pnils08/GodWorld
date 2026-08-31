@@ -46,6 +46,57 @@ const assemble = require('./assembleDecisions');
 const C = require('../lib/initiativePhaseContract'); // S265 civic.14 Phase 3 — phase canonicalization
 
 const ROOT = path.resolve(__dirname, '..');
+
+/**
+ * engine.138 / G-PF18 — carry civic voice sentiment to the engine.
+ *
+ * Phase2-CivicSentiment reads ctx.config.civicVoiceSentiment, which loadConfig_
+ * populates from World_Config at Phase 1. Two keys, upserted together so the
+ * score and the cycle it belongs to can never drift apart: the engine refuses a
+ * score whose stamp is more than one cycle behind it.
+ */
+async function writeCivicSentimentToConfig(score, cycle) {
+  const TAB = 'World_Config';
+  const KEY_SCORE = 'civicVoiceSentiment';
+  const KEY_CYCLE = 'civicVoiceSentimentCycle';
+  const DESCRIPTIONS = {
+    [KEY_SCORE]: 'Civic voice sentiment, statement-weighted across the cascade (written by applyTrackerUpdates.js --apply; read by Phase2-CivicSentiment)',
+    [KEY_CYCLE]: 'Cycle the civicVoiceSentiment score was computed for — the engine refuses a score more than one cycle stale',
+  };
+  const values = { [KEY_SCORE]: Number(score.toFixed(3)), [KEY_CYCLE]: cycle };
+
+  const rows = await sheets.getRawSheetData(TAB);
+  if (!rows || rows.length < 2) {
+    console.log(`  WARNING: ${TAB} unreadable — civic sentiment NOT carried to the engine.`);
+    return;
+  }
+  const header = rows[0].map(h => String(h).trim());
+  const iKey = header.indexOf('Key');
+  const iVal = header.indexOf('Value');
+  const iDesc = header.indexOf('Description');
+  if (iKey < 0 || iVal < 0) {
+    console.log(`  WARNING: ${TAB} has no Key/Value columns — civic sentiment NOT carried to the engine.`);
+    return;
+  }
+
+  for (const key of [KEY_SCORE, KEY_CYCLE]) {
+    let sheetRow = -1;
+    for (let r = 1; r < rows.length; r++) {
+      if (String(rows[r][iKey] || '').trim() === key) { sheetRow = r + 1; break; }
+    }
+    if (sheetRow > 0) {
+      await sheets.updateCell(TAB, sheetRow, 'Value', values[key]);  // column NAME, not index
+    } else {
+      const row = new Array(header.length).fill('');
+      row[iKey] = key;
+      row[iVal] = values[key];
+      if (iDesc >= 0) row[iDesc] = DESCRIPTIONS[key];
+      await sheets.appendRows(TAB, [row]);
+    }
+  }
+  console.log(`  World_Config: ${KEY_SCORE}=${values[KEY_SCORE]}, ${KEY_CYCLE}=${cycle} — carried to the engine.`);
+}
+
 const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
 const VOICE_DIR = path.join(ROOT, 'output/civic-voice');
 const SHEET_NAME = 'Initiative_Tracker';
@@ -583,8 +634,13 @@ async function main() {
   if (APPLY) {
     fs.writeFileSync(sentimentFile, JSON.stringify(sentimentData, null, 2));
     console.log(`Written to: ${path.basename(sentimentFile)}`);
+    // engine.138 / G-PF18 — the JSON file above is a local artifact the LIVE
+    // engine can never read: Apps Script has no filesystem, so Phase 2's
+    // loadCivicVoiceSentiment_ defaulted to 0 for the entire life of the
+    // feature. The sheet is the carrier that actually reaches the world.
+    await writeCivicSentimentToConfig(civicSentiment, CYCLE);
   } else {
-    console.log(`(dry-run — sentiment file NOT written; use --apply to persist)`);
+    console.log(`(dry-run — sentiment file NOT written, World_Config NOT touched; use --apply to persist)`);
   }
 
   console.log(`\n=== Summary ===`);

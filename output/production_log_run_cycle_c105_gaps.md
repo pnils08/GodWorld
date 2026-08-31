@@ -460,7 +460,12 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **Category:** quiet-pipe
 - **What happened:** C105 logged `loadCivicVoiceSentiment_ v1.0: No civic sentiment file found (defaulting to 0)`. The file exists — `output/civic_sentiment_c104.json`, `civicVoiceSentiment: 0.41`, written by the C104 close. The loader at `phase02-world-state/applyInitiativeImplementationEffects.js:55-64` reads it via `if (typeof require !== 'undefined') { var fs = require('fs'); … }`. **Apps Script has neither `require` nor a filesystem**, so on the live engine that branch never runs, `content` stays empty, both candidate cycles miss, and it defaults to 0.
 - **Why it matters:** This is not a stale file or an off-by-one cycle — the channel is structurally incapable of reaching the live engine and only ever worked under a Node harness. Every civic hearing the city has held has been scored, written down, and felt by nobody. On C105 every other sentiment channel landed (sports +0.029, edition coverage +0.048, initiatives +0.083) and civic voice contributed exactly 0, on a cycle whose hearing scored 0.410 across 20 statements and 6 initiatives.
-- **Suggested action:** OPEN, engine.138 (head of the chase list). Carry it the way every other channel is carried — a sheet the civic close writes and Phase 2 reads (`World_Config` key or a civic tab). Design call on the carrier; the diagnosis is settled.
+- **Suggested action:** **FIXED 2026-08-31 (S405, engine-sheet).** Carrier is a `World_Config` key pair, chosen over a civic tab because `loadConfig_` already folds every World_Config row into `ctx.config` at `Phase1-LoadConfig` — the value is in memory one slot before `Phase2-CivicSentiment` needs it, with no extra sheet read and nothing Apps Script cannot do.
+  - **Writer:** `scripts/applyTrackerUpdates.js` — `writeCivicSentimentToConfig()`, called under the existing `--apply` gate beside the JSON write (the JSON stays; it is a useful local artifact, it is just not a carrier). Upserts `civicVoiceSentiment` and `civicVoiceSentimentCycle` together, appending both with descriptions if absent. Dry-run touches nothing.
+  - **Reader:** `loadCivicVoiceSentiment_` v2.0 — reads `ctx.config`, no `require`, no filesystem.
+  - **Staleness gate:** the score is accepted only when its stamped cycle is the engine's cycle or the one before (the civic close runs a cycle behind the fire). Beyond that it is refused and the refusal is logged **with both numbers**. That is the point of the pair: the old failure mode was a silent 0 that looked identical to "the city felt nothing," and a stalled civic chain now reads as a named stale value instead. Non-numeric and never-written both log distinctly too.
+  - **Live state:** neither key exists on `World_Config` yet (verified) — the next civic close with `--apply` appends them. Acceptance is that scheduled run, not a hand-fired one.
+  - Tests: 189/190 files pass; the single failure (`djDirect.schema-and-slot`) fails identically on a clean tree.
 - **Pointer:** engine.138
 
 ### G-PF19: the approval engine and the audit disagree about the same six initiatives
@@ -612,6 +617,7 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 ## Changelog
 
 - 2026-08-30 — Initial /pre-flight leg (S403, engine-sheet), C105 pre-fire.
+- 2026-08-31 — G-PF18 fixed (S405, engine-sheet): civic voice sentiment now rides a World_Config key pair with a staleness gate; acceptance rides the next scheduled civic close.
 - 2026-08-31 — engine.137 closed (S405, engine-sheet). G-PF16 annotated as incorrect on mechanism and incomplete on scope; G-PF27 (instrument defect) fixed; six read-before-write sites wired to the existing carry-forward snapshot; G-PF28/29/30/31 opened.
 
 

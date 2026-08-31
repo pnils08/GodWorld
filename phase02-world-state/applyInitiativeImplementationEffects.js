@@ -24,14 +24,34 @@
 
 /**
  * ============================================================================
- * loadCivicVoiceSentiment_ v1.0 (ES5)
+ * loadCivicVoiceSentiment_ v2.0 (ES5) — engine.138 / G-PF18
  * ============================================================================
  *
- * Reads civic_sentiment_c{XX}.json (written by applyTrackerUpdates.js)
- * and sets S.civicVoiceSentiment for compound effects in
- * applyEditionCoverageEffects_.
+ * Sets S.civicVoiceSentiment for compound effects in
+ * applyEditionCoverageEffects_. Run BEFORE applyEditionCoverageEffects_.
  *
- * Run BEFORE applyEditionCoverageEffects_.
+ * v2.0 CARRIER CHANGE. v1.0 read output/civic_sentiment_c{XX}.json through
+ * `require('fs')`. Apps Script has no `require` and no filesystem, so that
+ * branch never executed on the live engine: `content` stayed empty, both
+ * candidate cycles missed, and the function logged "No civic sentiment file
+ * found" and left the value at 0. **Civic voice sentiment therefore
+ * contributed exactly 0 to the live world for the entire life of the
+ * feature** — every hearing the city ever held was scored, written down, and
+ * never felt. The loader only ever worked under a Node test harness.
+ *
+ * The value now rides the same carrier every other Phase-2 channel uses: a
+ * World_Config key, written by the civic close (scripts/applyTrackerUpdates.js
+ * --apply) and already in ctx.config by Phase1-LoadConfig. No filesystem, no
+ * fetch, nothing Apps Script cannot do.
+ *
+ *   civicVoiceSentiment       — the statement-weighted score
+ *   civicVoiceSentimentCycle  — the cycle it was computed for
+ *
+ * The cycle key is the staleness gate: a score is accepted for the current
+ * cycle or the one before it (the civic close runs a cycle behind the fire),
+ * and refused beyond that rather than letting an old hearing keep pushing the
+ * world. Refusal is logged with the numbers so a stalled civic chain shows up
+ * as a stale reading instead of a silent 0 — the failure mode this replaces.
  *
  * ============================================================================
  */
@@ -41,43 +61,43 @@ function loadCivicVoiceSentiment_(ctx) {
 
   S.civicVoiceSentiment = 0;
 
-  var currentCycle = S.cycleId || S.cycle || 0;
-  if (!currentCycle) return;
-
-  // Try current cycle first, then previous
-  var cycles = [currentCycle, currentCycle - 1];
-  for (var ci = 0; ci < cycles.length; ci++) {
-    var filePath = 'output/civic_sentiment_c' + cycles[ci] + '.json';
-
-    // In Google Apps Script, use DriveApp or UrlFetchApp
-    // In Node.js test, use fs
-    // For now, use the ctx.fileReader if available, else try global require
-    try {
-      var content = '';
-      if (typeof require !== 'undefined') {
-        var fs = require('fs');
-        var path = require('path');
-        var fullPath = path.resolve(filePath);
-        if (fs.existsSync(fullPath)) {
-          content = fs.readFileSync(fullPath, 'utf8');
-        }
-      }
-
-      if (content) {
-        var data = JSON.parse(content);
-        S.civicVoiceSentiment = data.civicVoiceSentiment || 0;
-        Logger.log('loadCivicVoiceSentiment_ v1.0: Loaded sentiment ' +
-          S.civicVoiceSentiment + ' from cycle ' + cycles[ci]);
-        break;
-      }
-    } catch (e) {
-      // File not found or parse error — try next cycle
-    }
+  var currentCycle = Number(S.cycleId || S.cycle || 0);
+  if (!currentCycle) {
+    Logger.log('loadCivicVoiceSentiment_ v2.0: no cycleId on the summary — sentiment stays 0');
+    ctx.summary = S;
+    return;
   }
 
-  if (S.civicVoiceSentiment === 0) {
-    Logger.log('loadCivicVoiceSentiment_ v1.0: No civic sentiment file found (defaulting to 0)');
+  var cfg = ctx.config || {};
+  var raw = cfg.civicVoiceSentiment;
+  if (raw === undefined || raw === null || raw === '') {
+    Logger.log('loadCivicVoiceSentiment_ v2.0: World_Config key civicVoiceSentiment not set — ' +
+      'the civic close has never written it (defaulting to 0)');
+    ctx.summary = S;
+    return;
   }
+
+  var score = Number(raw);
+  if (isNaN(score)) {
+    Logger.log('loadCivicVoiceSentiment_ v2.0: World_Config civicVoiceSentiment is not numeric ("' +
+      raw + '") — defaulting to 0');
+    ctx.summary = S;
+    return;
+  }
+
+  var stamped = Number(cfg.civicVoiceSentimentCycle || 0);
+  var age = currentCycle - stamped;
+  if (!stamped || age < 0 || age > 1) {
+    Logger.log('loadCivicVoiceSentiment_ v2.0: STALE — World_Config carries ' + score +
+      ' stamped for cycle ' + (stamped || '(none)') + ', engine is at cycle ' + currentCycle +
+      '. Refusing it; sentiment stays 0. The civic close has not run for this cycle.');
+    ctx.summary = S;
+    return;
+  }
+
+  S.civicVoiceSentiment = score;
+  Logger.log('loadCivicVoiceSentiment_ v2.0: Loaded sentiment ' + score +
+    ' from World_Config (stamped cycle ' + stamped + ', engine cycle ' + currentCycle + ')');
 
   ctx.summary = S;
 }

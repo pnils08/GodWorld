@@ -1,4 +1,4 @@
-RELATIONSHIP_BONDS live export 2026-08-24T04:07:06.698Z
+RELATIONSHIP_BONDS live export 2026-08-31T04:07:05.485Z
 BondId	CitizenA	CitizenB	BondType	Intensity	Status	Origin	DomainTag	Neighborhood	CycleCreated	LastUpdate	Notes	Holiday	HolidayPriority	FirstFriday	CreationDay	SportsSeason
 BOND-9CF02D7E	POP-00001	POP-00002	family	8	active	household		Rockridge	102	102	seeded	none	none	FALSE	FALSE	off-season
 BOND-39BB228F	POP-00004	POP-01029	family	10	active	household		Fruitvale	102	104	seeded	none	none	FALSE	FALSE	off-season

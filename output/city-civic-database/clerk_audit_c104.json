@@ -4,22 +4,22 @@
     {
       "check": "every expected office produced statements",
       "pass": true,
-      "evidence": "All expected offices (mayor, council D1-D9, OKORO, stabilization_fund, oari, health_center, transit_hub, baylight_authority) submitted statements"
+      "evidence": "All 12 offices (mayor_gavel, council_d1-d9, okoro, stabilization_fund, oari, health_center, transit_hub, baylight_authority) filed statements"
     },
     {
-      "check": "no single office contradicts itself within its own statements",
+      "check": "no office contradicts itself",
       "pass": true,
-      "evidence": "No internal contradictions found in any office's statements"
+      "evidence": "No internal contradictions found within any office's statements"
     },
     {
       "check": "tracker updates use only contract phases",
       "pass": true,
-      "evidence": "All trackerUpdates use correct contract phases (e.g. disbursement-active, pilot-active, construction-active)"
+      "evidence": "All trackerUpdates fields contain valid ImplementationPhase values (disbursement-active, pilot-active, etc.)"
     },
     {
       "check": "statements read as in-world civic voice",
       "pass": true,
-      "evidence": "All statements use appropriate civic/programmatic language with no system/engine terminology"
+      "evidence": "No engine/system language detected in any statement"
     }
   ],
   "overall": "pass",

@@ -2,6 +2,30 @@
   "cycle": "104",
   "signals": [
     {
+      "slug": "adams-point-devon-willis-fame-sighting",
+      "advanced": 1,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c104_elliot-graye_packet-v2_arc",
+        "culture_c104_maria-keen_packet-v2_arc",
+        "culture_c104_sharon-okafor_packet-v2_arc"
+      ],
+      "hoods": [
+        "Adams Point"
+      ],
+      "citizens": [
+        "POP-00782",
+        "POP-00645",
+        "POP-00648",
+        "POP-00798"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
       "slug": "piedmont-ave-sandra-velazquez-season-feel",
       "advanced": 0,
       "opened": 2,
@@ -45,7 +69,71 @@
       ]
     },
     {
-      "slug": "grand-lake-vinnie-keane-retail-decay",
+      "slug": "downtown-merkin-jumper-undocked",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+        "undocked_c104_nia-rook_packet-v2_arc"
+      ],
+      "hoods": [
+        "Downtown"
+      ],
+      "citizens": [
+        "POP-00688",
+        "POP-00212",
+        "POP-00224",
+        "POP-00225"
+      ],
+      "desks": [
+        "undocked"
+      ]
+    },
+    {
+      "slug": "city-depak-ying-story-signal",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00170",
+        "POP-00198",
+        "POP-00201",
+        "POP-00210"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "adams-point-devon-willis-story-signal",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c104_sharon-okafor_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "Adams Point"
+      ],
+      "citizens": [
+        "POP-00782",
+        "POP-00645",
+        "POP-00648"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "grand-lake-amara-keane-retail-decay",
       "advanced": 0,
       "opened": 1,
       "closed": 0,
@@ -57,16 +145,16 @@
         "Grand Lake"
       ],
       "citizens": [
-        "POP-00001",
         "POP-00002",
-        "POP-00170"
+        "POP-00170",
+        "POP-00198"
       ],
       "desks": [
         "business"
       ]
     },
     {
-      "slug": "east-oakland-maria-conteras-anomaly",
+      "slug": "east-oakland-jerome-pittman-anomaly",
       "advanced": 0,
       "opened": 1,
       "closed": 0,
@@ -78,7 +166,6 @@
         "East Oakland"
       ],
       "citizens": [
-        "POP-01047",
         "POP-01055",
         "POP-00170",
         "POP-00198"
@@ -89,8 +176,8 @@
     },
     {
       "slug": "west-oakland-elio-perez-initiative",
-      "advanced": 0,
-      "opened": 1,
+      "advanced": 1,
+      "opened": 0,
       "closed": 0,
       "referenced": 0,
       "articles": [
@@ -102,7 +189,8 @@
       "citizens": [
         "POP-00201",
         "POP-00722",
-        "POP-00794"
+        "POP-00794",
+        "POP-00961"
       ],
       "desks": [
         "civic"
@@ -110,6 +198,68 @@
     },
     {
       "slug": "temescal-sonia-parikh-anomaly",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c104_lila-mezran_packet-v2_arc"
+      ],
+      "hoods": [
+        "Temescal"
+      ],
+      "citizens": [
+        "POP-00745",
+        "POP-00761",
+        "POP-00775",
+        "POP-00170"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "city-elio-perez-anomaly",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c104_luis-navarro_packet-v2_arc"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00201",
+        "POP-00210"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c104_rachel-torres_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland, Fruitvale, East Oakland"
+      ],
+      "citizens": [
+        "POP-00201",
+        "POP-00198",
+        "POP-00170",
+        "POP-00210"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "temescal-melton-neilon-anomaly",
       "advanced": 0,
       "opened": 1,
       "closed": 0,
@@ -121,33 +271,89 @@
         "Temescal"
       ],
       "citizens": [
-        "POP-00745",
-        "POP-00761"
+        "POP-00170"
       ],
       "desks": [
         "civic"
       ]
     },
     {
-      "slug": "adams-point-devon-willis-fame-sighting",
+      "slug": "city-depak-ying-tv-slate",
       "advanced": 0,
       "opened": 1,
       "closed": 0,
       "referenced": 0,
       "articles": [
-        "culture_c104_elliot-graye_packet-v2_arc"
+        "culture_c104_kai-marston_packet-v2_arc"
       ],
-      "hoods": [
-        "Adams Point"
-      ],
+      "hoods": [],
       "citizens": [
-        "POP-00782",
-        "POP-00645",
-        "POP-00648",
-        "POP-00798"
+        "POP-00210",
+        "POP-00170",
+        "POP-00198",
+        "POP-00201"
       ],
       "desks": [
         "culture"
+      ]
+    },
+    {
+      "slug": "rockridge-howard-yell-named-restaurant",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c104_mason-ortega_packet-v2_arc"
+      ],
+      "hoods": [
+        "Rockridge"
+      ],
+      "citizens": [
+        "POP-00651"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "baylight-district-vinnie-keane-era-door",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c104_hal-richmond_packet-v2_arc"
+      ],
+      "hoods": [
+        "Baylight District"
+      ],
+      "citizens": [
+        "POP-00001",
+        "POP-00050",
+        "POP-00170"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "old-oakland-melton-neilon-long-view-signal",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c104_simon-leary_packet-v2_arc"
+      ],
+      "hoods": [
+        "Old Oakland"
+      ],
+      "citizens": [
+        "POP-00170"
+      ],
+      "desks": [
+        "sports"
       ]
     }
   ]

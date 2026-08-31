@@ -14,13 +14,13 @@
 
 ## /city-hall-prep (AUTO — cron-civic-run.js)
 - Pressure (AUTO path, S215 G-5): 1 HIGH engine patterns + Mara directive mara_directive_c104_AUTO.txt
-- Ledger snapshot: cycle=104 rowCount=964
+- Ledger snapshot: cycle=104 rowCount=968
 - Packets: civic-office-mayor(7), civic-project-stabilization-fund(2), civic-office-okoro(2), civic-office-council-d1(4), civic-project-oari(2), civic-office-council-d3(4), civic-office-council-d5(3), civic-project-transit-hub(2), civic-project-health-center(2), civic-office-council-d7(2), civic-office-baylight-authority(2), civic-office-council-d2(2), civic-office-council-d8(2), civic-office-council-d4(1), civic-office-council-d6(1), civic-office-council-d9(1)
 - Lint: clean
 
 ## /city-hall (AUTO — cron-civic-run.js)
 **Cycle:** 104
-**Mode:** DRY — decisions staged, tracker untouched
+**Mode:** APPLIED to tracker
 **Clerk:** pass
 
 ### Voice Decisions
@@ -43,7 +43,7 @@
 | Elena Soria Dominguez | Launch visioning sessions focusing on small business and vendor protections, with emphasis on pedestrian access | "This isn't just about compliance—it's about protection for abuelas crossing to the panadería and proof we're putting Fruitvale residents to work first." |
 | Keisha Ramos | Transmitted Phase II shortlist evaluation rubric and selection memo to City Council | "Every dollar of the $2.1B budget will be accounted for—starting with these scoring sheets." |
 
-### Tracker Updates (staged)
+### Tracker Updates (applied)
 | Initiative | Phase | Milestone |
 |---|---|---|
 | — | — | no phase moves this cycle |

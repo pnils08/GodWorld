@@ -2,12 +2,23 @@
   "cycle": "104",
   "top": 9,
   "selected": [
+    "culture_c104_sharon-okafor_packet-v2_deepseek-deepseek-chat",
     "sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
     "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
+    "culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
     "sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat-almanzar-debut",
     "sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat"
   ],
   "ranked": [
+    {
+      "stem": "culture_c104_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "score": 6.5,
+      "slug": "adams-point-devon-willis-story-signal",
+      "verdict": "accurate"
+    },
     {
       "stem": "sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
       "byline": "P Slayer",
@@ -20,8 +31,24 @@
       "stem": "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
       "byline": "Noah Tan",
       "desk": "civic",
-      "score": 4,
+      "score": 6,
       "slug": "piedmont-ave-sandra-velazquez-season-feel",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "score": 5,
+      "slug": "city-depak-ying-story-signal",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "score": 5,
+      "slug": "downtown-merkin-jumper-undocked",
       "verdict": "corrections-needed"
     },
     {
@@ -41,5 +68,5 @@
       "verdict": "accurate"
     }
   ],
-  "excludedCanonViolations": 0
+  "excludedCanonViolations": 1
 }

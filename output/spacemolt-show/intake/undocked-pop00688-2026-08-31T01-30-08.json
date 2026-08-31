@@ -1,0 +1,41 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-08-31T01:40:16.393Z",
+  "POPID": "POP-00688",
+  "Cycle": 104,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00688-2026-08-31T01-30-08",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00688-2026-08-31T01-30-08.json",
+  "Holder": "Merkin Jumper",
+  "CreditsDelta": null,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Merkin Jumper credits=null systems=sol",
+  "DecidedAt": "2026-08-31T01:40:16.395Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 104,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00688",
+    "Holder": "Merkin Jumper",
+    "EpisodeId": "undocked-pop00688-Y2C52-e2",
+    "CreditsDelta": null,
+    "Systems": [
+      "sol"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-08-31T01-30-08.json"
+  }
+}

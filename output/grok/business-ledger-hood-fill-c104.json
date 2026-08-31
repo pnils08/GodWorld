@@ -1,0 +1,156 @@
+{
+  "cycle": 104,
+  "source": "live Business_Ledger + Neighborhood_Map read 2026-08-29",
+  "floor": 6,
+  "rule": "sim-native small businesses only; no real-world Oakland entities; Key_Personnel blank (no invented citizens); not written to sheets",
+  "ledger_rows_live": 103,
+  "tracked_hoods": 22,
+  "gap_total": 72,
+  "next_id": "BIZ-00108",
+  "remap_candidates_not_applied": [
+    { "id": "BIZ-00010", "name": "Portside Bio", "from": "Brooklyn Basin", "to": "Brooklyn", "effect": "Brooklyn 0→1, fill 6→5" },
+    { "id": "BIZ-00011", "name": "Tenth Street Digital", "from": "Old Oakland", "to": "Downtown", "effect": "Downtown already ≥6" },
+    { "id": "BIZ-00029", "name": "Coliseum District Development", "from": "Coliseum", "to": "Baylight District", "effect": "Baylight already ≥6; Coliseum retired to Baylight successor" },
+    { "id": "BIZ-00062", "name": "Dario's Bar", "from": "Telegraph corridor", "to": "KONO", "effect": "KONO 2→3, fill 4→3" }
+  ],
+  "citywide_not_counted_as_hood_texture": [
+    "BIZ-00015 Oakland Hospital",
+    "BIZ-00016 Oakland Unified School District",
+    "BIZ-00021 Oakland Public Library System",
+    "BIZ-00023 Oakland Fire Department",
+    "BIZ-00024 Oakland Police Department",
+    "BIZ-00027 Oakland Parks & Recreation",
+    "BIZ-00031 East Bay Regional Parks",
+    "BIZ-00032 PG&E Oakland Service Area",
+    "BIZ-00034 Oakland Housing Authority",
+    "BIZ-00035 Peralta Community College District"
+  ],
+  "proposed": [
+    {"BIZ_ID":"BIZ-00108","Name":"Spillover Cafe","Sector":"Cafe / dining","Neighborhood":"Adams Point","Employee_Count":8,"Avg_Salary":42000,"Annual_Revenue":620000,"Growth_Rate":4,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00109","Name":"Ringlet Market","Sector":"Retail","Neighborhood":"Adams Point","Employee_Count":11,"Avg_Salary":39000,"Annual_Revenue":980000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00110","Name":"Northshore Dental","Sector":"Healthcare","Neighborhood":"Adams Point","Employee_Count":7,"Avg_Salary":78000,"Annual_Revenue":910000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00111","Name":"Lakeside Cycles","Sector":"Retail","Neighborhood":"Adams Point","Employee_Count":5,"Avg_Salary":41000,"Annual_Revenue":420000,"Growth_Rate":5,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00112","Name":"Point Press Laundry","Sector":"Services","Neighborhood":"Adams Point","Employee_Count":6,"Avg_Salary":38000,"Annual_Revenue":310000,"Growth_Rate":2,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00113","Name":"Quay Coffee","Sector":"Cafe / dining","Neighborhood":"Brooklyn","Employee_Count":9,"Avg_Salary":43000,"Annual_Revenue":710000,"Growth_Rate":6,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00114","Name":"Basin Grocer","Sector":"Retail","Neighborhood":"Brooklyn","Employee_Count":14,"Avg_Salary":40000,"Annual_Revenue":1600000,"Growth_Rate":5,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00115","Name":"Midrise Athletic","Sector":"Services","Neighborhood":"Brooklyn","Employee_Count":12,"Avg_Salary":44000,"Annual_Revenue":890000,"Growth_Rate":6,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00116","Name":"Slip Street Kitchen","Sector":"Restaurant & Dining","Neighborhood":"Brooklyn","Employee_Count":16,"Avg_Salary":45000,"Annual_Revenue":1400000,"Growth_Rate":5,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00117","Name":"New Stock Pharmacy","Sector":"Retail","Neighborhood":"Brooklyn","Employee_Count":8,"Avg_Salary":52000,"Annual_Revenue":1100000,"Growth_Rate":4,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00118","Name":"Estuary Cleaners","Sector":"Services","Neighborhood":"Brooklyn","Employee_Count":5,"Avg_Salary":37000,"Annual_Revenue":280000,"Growth_Rate":3,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00119","Name":"Third Street Kitchen","Sector":"Restaurant & Dining","Neighborhood":"Chinatown","Employee_Count":14,"Avg_Salary":41000,"Annual_Revenue":1200000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00120","Name":"Continuity Market","Sector":"Retail","Neighborhood":"Chinatown","Employee_Count":12,"Avg_Salary":39000,"Annual_Revenue":1500000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00121","Name":"Jade Thread Tailors","Sector":"Services","Neighborhood":"Chinatown","Employee_Count":6,"Avg_Salary":44000,"Annual_Revenue":390000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00122","Name":"Lantern Pharmacy","Sector":"Retail","Neighborhood":"Chinatown","Employee_Count":7,"Avg_Salary":51000,"Annual_Revenue":860000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00123","Name":"Heritage Bakehouse","Sector":"Food & Beverage","Neighborhood":"Chinatown","Employee_Count":9,"Avg_Salary":40000,"Annual_Revenue":720000,"Growth_Rate":3,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00124","Name":"Hill Approach Cafe","Sector":"Cafe / dining","Neighborhood":"Dimond","Employee_Count":7,"Avg_Salary":40000,"Annual_Revenue":480000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00125","Name":"Village Lock and Hardware","Sector":"Retail","Neighborhood":"Dimond","Employee_Count":8,"Avg_Salary":43000,"Annual_Revenue":920000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00126","Name":"Strip Pharmacy","Sector":"Retail","Neighborhood":"Dimond","Employee_Count":6,"Avg_Salary":50000,"Annual_Revenue":740000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00127","Name":"Two Tables Kitchen","Sector":"Restaurant & Dining","Neighborhood":"Dimond","Employee_Count":11,"Avg_Salary":41000,"Annual_Revenue":830000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00128","Name":"Slope Cleaners","Sector":"Services","Neighborhood":"Dimond","Employee_Count":4,"Avg_Salary":36000,"Annual_Revenue":210000,"Growth_Rate":1,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00129","Name":"Frontier Market","Sector":"Retail","Neighborhood":"East Oakland","Employee_Count":13,"Avg_Salary":38000,"Annual_Revenue":1400000,"Growth_Rate":6,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00130","Name":"Crossing Cafe","Sector":"Cafe / dining","Neighborhood":"East Oakland","Employee_Count":8,"Avg_Salary":39000,"Annual_Revenue":540000,"Growth_Rate":5,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00131","Name":"Flatlands Auto","Sector":"Services","Neighborhood":"East Oakland","Employee_Count":9,"Avg_Salary":46000,"Annual_Revenue":780000,"Growth_Rate":4,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00132","Name":"Next Block Kitchen","Sector":"Restaurant & Dining","Neighborhood":"East Oakland","Employee_Count":12,"Avg_Salary":40000,"Annual_Revenue":960000,"Growth_Rate":5,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00133","Name":"Thin Line Market","Sector":"Retail","Neighborhood":"Eastlake","Employee_Count":10,"Avg_Salary":39000,"Annual_Revenue":1100000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00134","Name":"East Rim Kitchen","Sector":"Restaurant & Dining","Neighborhood":"Eastlake","Employee_Count":12,"Avg_Salary":41000,"Annual_Revenue":890000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00135","Name":"Mixblock Barbers","Sector":"Services","Neighborhood":"Eastlake","Employee_Count":5,"Avg_Salary":37000,"Annual_Revenue":260000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00136","Name":"Parkedge Diner","Sector":"Restaurant & Dining","Neighborhood":"Eastlake","Employee_Count":9,"Avg_Salary":40000,"Annual_Revenue":670000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00137","Name":"Rim Pharmacy","Sector":"Retail","Neighborhood":"Eastlake","Employee_Count":6,"Avg_Salary":50000,"Annual_Revenue":690000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00138","Name":"East Rim Laundry","Sector":"Services","Neighborhood":"Eastlake","Employee_Count":5,"Avg_Salary":36000,"Annual_Revenue":240000,"Growth_Rate":2,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00139","Name":"Hillside Family Market","Sector":"Retail","Neighborhood":"Glenview","Employee_Count":9,"Avg_Salary":38000,"Annual_Revenue":860000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00140","Name":"Glen Slope Cafe","Sector":"Cafe / dining","Neighborhood":"Glenview","Employee_Count":6,"Avg_Salary":40000,"Annual_Revenue":390000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00141","Name":"Hillside Family Dental","Sector":"Healthcare","Neighborhood":"Glenview","Employee_Count":6,"Avg_Salary":76000,"Annual_Revenue":820000,"Growth_Rate":1,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00142","Name":"Parkridge Cleaners","Sector":"Services","Neighborhood":"Glenview","Employee_Count":4,"Avg_Salary":36000,"Annual_Revenue":190000,"Growth_Rate":1,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00143","Name":"Slopeview Hardware","Sector":"Retail","Neighborhood":"Glenview","Employee_Count":7,"Avg_Salary":42000,"Annual_Revenue":710000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00144","Name":"Upper Village Kitchen","Sector":"Restaurant & Dining","Neighborhood":"Glenview","Employee_Count":10,"Avg_Salary":40000,"Annual_Revenue":740000,"Growth_Rate":2,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00145","Name":"Marquee Grocer","Sector":"Retail","Neighborhood":"Grand Lake","Employee_Count":12,"Avg_Salary":40000,"Annual_Revenue":1300000,"Growth_Rate":4,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00146","Name":"Intermission Cafe","Sector":"Cafe / dining","Neighborhood":"Grand Lake","Employee_Count":8,"Avg_Salary":41000,"Annual_Revenue":560000,"Growth_Rate":4,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00147","Name":"Lake Ring Books","Sector":"Retail","Neighborhood":"Grand Lake","Employee_Count":6,"Avg_Salary":39000,"Annual_Revenue":410000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00148","Name":"Saturday Stall Kitchen","Sector":"Restaurant & Dining","Neighborhood":"Grand Lake","Employee_Count":14,"Avg_Salary":42000,"Annual_Revenue":1100000,"Growth_Rate":5,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00149","Name":"Ring Outfitters","Sector":"Retail","Neighborhood":"Grand Lake","Employee_Count":7,"Avg_Salary":43000,"Annual_Revenue":640000,"Growth_Rate":3,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00150","Name":"Slope House Market","Sector":"Retail","Neighborhood":"Ivy Hill","Employee_Count":6,"Avg_Salary":37000,"Annual_Revenue":480000,"Growth_Rate":1,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00151","Name":"One Block Cafe","Sector":"Cafe / dining","Neighborhood":"Ivy Hill","Employee_Count":4,"Avg_Salary":39000,"Annual_Revenue":220000,"Growth_Rate":1,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00152","Name":"Ivy Cleaners","Sector":"Services","Neighborhood":"Ivy Hill","Employee_Count":3,"Avg_Salary":35000,"Annual_Revenue":140000,"Growth_Rate":1,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00153","Name":"Hill Pocket Dental","Sector":"Healthcare","Neighborhood":"Ivy Hill","Employee_Count":4,"Avg_Salary":74000,"Annual_Revenue":510000,"Growth_Rate":1,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00154","Name":"Hill Pocket Kitchen","Sector":"Restaurant & Dining","Neighborhood":"Ivy Hill","Employee_Count":7,"Avg_Salary":39000,"Annual_Revenue":430000,"Growth_Rate":1,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00155","Name":"Fold Laundry","Sector":"Services","Neighborhood":"Ivy Hill","Employee_Count":3,"Avg_Salary":35000,"Annual_Revenue":130000,"Growth_Rate":1,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00156","Name":"Gate Thirty Kitchen","Sector":"Restaurant & Dining","Neighborhood":"KONO","Employee_Count":13,"Avg_Salary":43000,"Annual_Revenue":1100000,"Growth_Rate":5,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00157","Name":"Corridor Press","Sector":"Services","Neighborhood":"KONO","Employee_Count":6,"Avg_Salary":48000,"Annual_Revenue":390000,"Growth_Rate":4,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00158","Name":"Thirty-Mac Bar","Sector":"Nightlife & Entertainment","Neighborhood":"KONO","Employee_Count":11,"Avg_Salary":40000,"Annual_Revenue":980000,"Growth_Rate":5,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00159","Name":"North of Twentieth Gallery","Sector":"Retail","Neighborhood":"KONO","Employee_Count":5,"Avg_Salary":41000,"Annual_Revenue":310000,"Growth_Rate":4,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00160","Name":"Reachable Market","Sector":"Retail","Neighborhood":"Laurel","Employee_Count":12,"Avg_Salary":38000,"Annual_Revenue":1200000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00161","Name":"Schoolgate Cafe","Sector":"Cafe / dining","Neighborhood":"Laurel","Employee_Count":8,"Avg_Salary":39000,"Annual_Revenue":510000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00162","Name":"Laurel Belt Pharmacy","Sector":"Retail","Neighborhood":"Laurel","Employee_Count":7,"Avg_Salary":50000,"Annual_Revenue":780000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00163","Name":"Ordinary Street Kitchen","Sector":"Restaurant & Dining","Neighborhood":"Laurel","Employee_Count":11,"Avg_Salary":40000,"Annual_Revenue":820000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00164","Name":"Belt Cleaners","Sector":"Services","Neighborhood":"Laurel","Employee_Count":5,"Avg_Salary":36000,"Annual_Revenue":230000,"Growth_Rate":2,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00165","Name":"Avenue Specialists","Sector":"Healthcare","Neighborhood":"Piedmont Ave","Employee_Count":14,"Avg_Salary":82000,"Annual_Revenue":2100000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00166","Name":"Lake Ring Clothiers","Sector":"Retail","Neighborhood":"Piedmont Ave","Employee_Count":6,"Avg_Salary":46000,"Annual_Revenue":540000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00167","Name":"Steady Street Pharmacy","Sector":"Retail","Neighborhood":"Piedmont Ave","Employee_Count":8,"Avg_Salary":52000,"Annual_Revenue":960000,"Growth_Rate":2,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00168","Name":"Canopy Market","Sector":"Retail","Neighborhood":"Rockridge","Employee_Count":11,"Avg_Salary":44000,"Annual_Revenue":1400000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00169","Name":"Settled Table","Sector":"Restaurant & Dining","Neighborhood":"Rockridge","Employee_Count":15,"Avg_Salary":48000,"Annual_Revenue":1600000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00170","Name":"Tree Line Dental","Sector":"Healthcare","Neighborhood":"Rockridge","Employee_Count":8,"Avg_Salary":88000,"Annual_Revenue":1300000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00171","Name":"North Line Pharmacy","Sector":"Retail","Neighborhood":"Rockridge","Employee_Count":7,"Avg_Salary":53000,"Annual_Revenue":890000,"Growth_Rate":2,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00172","Name":"Shift Change Kitchen","Sector":"Restaurant & Dining","Neighborhood":"San Antonio","Employee_Count":12,"Avg_Salary":39000,"Annual_Revenue":870000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00173","Name":"Between Hub Market","Sector":"Retail","Neighborhood":"San Antonio","Employee_Count":11,"Avg_Salary":37000,"Annual_Revenue":1100000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00174","Name":"Pressure Laundry","Sector":"Services","Neighborhood":"San Antonio","Employee_Count":6,"Avg_Salary":35000,"Annual_Revenue":250000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00175","Name":"Working Core Pharmacy","Sector":"Retail","Neighborhood":"San Antonio","Employee_Count":7,"Avg_Salary":49000,"Annual_Revenue":710000,"Growth_Rate":2,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00176","Name":"Park to Lake Cafe","Sector":"Cafe / dining","Neighborhood":"San Antonio","Employee_Count":8,"Avg_Salary":39000,"Annual_Revenue":490000,"Growth_Rate":3,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00177","Name":"Crew Cut Barbers","Sector":"Services","Neighborhood":"San Antonio","Employee_Count":5,"Avg_Salary":36000,"Annual_Revenue":240000,"Growth_Rate":2,"Key_Personnel":""},
+
+    {"BIZ_ID":"BIZ-00178","Name":"First Lamp Club","Sector":"Nightlife & Entertainment","Neighborhood":"Uptown","Employee_Count":16,"Avg_Salary":41000,"Annual_Revenue":1500000,"Growth_Rate":5,"Key_Personnel":""},
+    {"BIZ_ID":"BIZ-00179","Name":"Night Walk Records","Sector":"Retail","Neighborhood":"Uptown","Employee_Count":6,"Avg_Salary":39000,"Annual_Revenue":430000,"Growth_Rate":4,"Key_Personnel":""}
+  ],
+
+  "code_trace_notes": {
+    "wiring_card": {
+      "target": "Business_Ledger (tab)",
+      "map": "ENGINE_STUB_REVERSE.json generated 2026-08-29 / 183 files / 1171 fns",
+      "harness": "runEngineAgent.js --agent engine-wiring --provider anthropic --model claude-haiku-4.5 FAILED: Anthropic credit balance too low. Card assembled from the same maps the agent uses.",
+      "writers": [
+        "phase04-events/chaosCarsEngine.js::flushBusinessFold_ — INTENT Annual_Revenue/Employee_Count",
+        "phase05-citizens/applyChaosDecay.js::applyChaosDecay_ — INTENT Annual_Revenue decay",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_ — INTENT Employee_Count",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_ — INTENT append new row"
+      ],
+      "readers": [
+        "phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_",
+        "phase04-events/chaosCarsEngine.js::loadBusinessRows_ / pickBusinessTarget_",
+        "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",
+        "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
+        "phase05-citizens/runCareerEngine.js (live industry pool + rehire matcher)",
+        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",
+        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_"
+      ],
+      "manifest": "docs/engine/SHEETS_MANIFEST.md:22 — tracking businesses, employee counts, revenue. Writes are Phase-10 intents; no direct-write carve-out."
+    },
+    "notes": [
+      "HOW THE FILL IS READ. The sheet is the world. Seeds (buildContractSeeds.js) index BIZ_ID/Name/Neighborhood and attach up to 2 local businesses to a neighborhood seed (CONTRACT_SEED_FILL_BIZ). Empty hood pool = no named shop in the packet — that is the cron 'this town has nothing' path. Matching is normalized lowercase/strip-non-alpha, so Neighborhood must equal the Neighborhood_Map string (Adams Point, Piedmont Ave, Baylight District). City-wide rows never enter a hood pool.",
+      "FAMOUS SIGHTINGS. buildEveningFamous_ builds venuesByHood the same way and names a real ledger venue in the sighting's neighborhood. Filling empty hoods is what lets a Glenview or Brooklyn sighting name a shop instead of going venue-less.",
+      "COMMUTE. buildCommuteFlows_ maps EmployerBizId → Business_Ledger.Neighborhood → destination hood. Citizen home Neighborhood vs that dest is the daytime-population matrix (transit + applyCityDynamics_). Exact hood names commute. Four CHILD folds still exist and must not be 'fixed' by relabeling without a code change: Old Oakland→Downtown, Telegraph corridor→Temescal (not KONO), Brooklyn Basin→Jack London (not Brooklyn), Coliseum→East Oakland (not Baylight). Those folds contradict S374 district canon for Brooklyn/Baylight. Leave the four mislabeled live rows until that fold is named as the change.",
+      "CAREER / MINT / SETTLE. runCareerEngine, buildMintBizPool_, buildSettleBizPool_ ignore Neighborhood. They bucket Sector into tech/service/public/creative, then hire by Growth_Rate (perCycle = Employee_Count × Growth_Rate/100 ÷ 52) matched to SkillTags via sectorCategory_. Our numbers 1–6 are percent, same as the live diner rows. Sector routing for this fill: Retail/Services → Small Business; Cafe/Restaurant/Food → Food & Culture; Healthcare → Healthcare; Nightlife & Entertainment → Creative & Arts. Midrise Athletic is Sector Services on purpose — Sector 'Sports' is opted out of hiring (Paulson domain). Healthcare dental/clinic also hits the mint 'public' keyword pool (healthcare|medical), so those rows can employ civic-class mints as well as Healthcare-tagged unemployed.",
+      "CHAOS. pickBusinessTarget_ is uniform-random over every ledger row. 72 new storefronts dilute hits on Civis/A's and put mail-truck/revenue events in the empty hoods. Writes Annual_Revenue / Employee_Count via intent. Columns we filled are the ones it reads.",
+      "HERITAGE. updateHeritage_ can APPEND a family storefront (Name + Kitchen/Mercantile/…) into the stake-holder's home hood. That path invents sim-native businesses after this fill lands; it does not read our list. Next BIZ id scans max existing, so BIZ-00108–00179 must land before the next heritage roll or ids collide.",
+      "ECONOMIC RIPPLES DO NOT SEE MOST OF THESE HOODS. mapToCanonicalNeighborhood_ (economicRippleEngine.js:368) maps ledger Neighborhood onto ~11 canonical names. Uptown and KONO fold to Downtown. Brooklyn Basin/Coliseum fold to Jack London. Unlisted names return null and detectCareerRipples_ skips the business (`if (!hood) continue`). Null for this fill: Adams Point, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, Piedmont Ave. NEIGHBORHOOD_ECONOMIES (the blob crons read as neighborhoodEconomies) only keys Downtown, Jack London, Baylight District, Rockridge, Temescal, Fruitvale, Lake Merritt, West Oakland, Laurel, Chinatown, Grand Lake. Adding shops to Glenview does not give Glenview an economy card. East Oakland is in the canonical map but not in NEIGHBORHOOD_ECONOMIES. Filling the ledger is necessary and not sufficient for those hoods to show up in economic coverage.",
+      "EVENING FOOD IS A SECOND LIST. buildEveningFood.js still draws from hardcoded 'Oakland-themed' pools (OakHouse, Fruitvale Diner, Dollar Pho, Value Eats, Budget Bites, Crisis Coffee Co., Golden Dragon, Lucky Dim Sum, …). It does not read Business_Ledger. New names will not appear at dinner unless that pool is pointed at the ledger. Several pool names already overlap live ledger rows; the strife/budget names (Dollar Pho, Value Eats, Budget Bites, Crisis Coffee) are the 2026-hardship register and are not on this fill.",
+      "SPORTS GEOGRAPHY STILL JACK LONDON. buildEveningFamous_ OpeningDay/championship athlete sightings pick Jack London 60% / Downtown 40% ('Athletes near stadium'). Canon stadium is Baylight. engine.131 exists to repoint this; the line is still Jack London as of this read. Baylight's 12 existing businesses will not get those sightings from this path.",
+      "CHARACTER TABLES STILL ENCODE 2026 OAKLAND, NOT S374 ESSENCE. This fill was written against docs/canon/INSTITUTIONS.md (boom born in West Oakland, Baylight as sports mecca, Fruitvale as transit-hub young professional, Temescal as the one the boom left behind, D4 skipped by reputation, East Oakland as arriving frontier). The engine's parallel character layer was not updated: NEIGHBORHOOD_PROFILES still tags Temescal 'young professional', Brooklyn 'working class', West Oakland 'evolving industrial'. NEIGHBORHOOD_CRIME_PROFILES still tags East Oakland 'working class, underserved' (highest violentCrimeMod 1.4 / baseIncidents 11) and West Oakland 'industrial transition, gentrifying'. civic.23 already named this as training-data Oakland filling silence. Ledger shops will attach to seeds; crime/placement/mood can still paint the same block as strife. The entertaining-coverage path is: seed names the shop (ledger) while the crime profile still says underserved. Those tables are not this fill.",
+      "WHAT THIS FILL DOES FOR COVERAGE. Named local businesses in every tracked hood so a seed/sighting/commute in that hood has a sim-native storefront to stand in. Mix is storefront-scale (cafe, market, pharmacy, kitchen, cleaners, dental) matching S374 essence — D4 quiet village, Chinatown family continuity, East Oakland frontier not blight, Piedmont Ave medical boutique, Uptown nightlife. No real Oakland brands. No invented citizens in Key_Personnel.",
+      "WHAT THIS FILL DOES NOT DO. Does not rewrite NEIGHBORHOOD_ECONOMIES / mapToCanonicalNeighborhood_ (11-hood economy). Does not point evening food at the ledger. Does not move sports sightings to Baylight. Does not retune crime or demographic character strings. Does not remap Brooklyn Basin / Old Oakland / Coliseum / Telegraph corridor. Does not scrub existing real-world names already on the ledger (Kaiser, PG&E, real churches, OUSD/Peralta strings).",
+      "GROWTH_RATE. Career hiring treats Growth_Rate as annual percent. Values 1–6 on this fill are hire-alive. 0 would be a dead shop that never opens a window."
+    ]
+  }
+}

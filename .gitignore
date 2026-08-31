@@ -83,3 +83,6 @@ output/kimi/spacemolt-phase0/spacemolt-lib/
 # are the durable copies; local .m4a is deleted after confirmed Drive upload
 # (notebooklmDailyNews.js), so it never belongs in git history. (2026-08-18)
 output/notebooklm/**/*.m4a
+
+# Runtime cache under output/ — regenerated, never canon (S404)
+output/cache/

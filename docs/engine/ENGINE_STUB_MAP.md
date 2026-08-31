@@ -191,7 +191,7 @@
 
 ### applyInitiativeImplementationEffects.js
 - **loadCivicVoiceSentiment_(ctx)**
-  Reads: S.civicVoiceSentiment, S.cycle, S.cycleId
+  Reads: S.cycle, S.cycleId
   Writes: S.civicVoiceSentiment
 
 - **isBaylightInitiative_(name)**
@@ -813,8 +813,7 @@
 - **findColIndex_(headers, possibleNames)**
 
 - **updateExistingBonds_(ctx)**
-  Reads: S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.cycleWeight, S.relationshipBonds, S.shockFlag
-  Writes: S.cycleWeight
+  Reads: S.cityDynamics, S.cycleActiveCitizens, S.cycleId, S.previousCycleState, S.relationshipBonds
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2372,8 +2371,8 @@
 
 ### applyCycleRecovery.js
 - **applyCycleRecovery_(ctx)**
-  Reads: S.absoluteCycle, S.civicLoad, S.civicLoadScore, S.cycleId, S.economicMood, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.recoveryDuration, S.recoveryLevel, S.recoveryStartCycle, S.recoveryState, S.recoveryWindow, S.shockFlag, S.sportsSeason, S.storyHooks, S.textureTriggers, S.weatherMood, S.worldEvents
-  Writes: S.civicLoad, S.eventSuppression, S.hookSuppression, S.overloadScore, S.recoveryCalendarContext, S.recoveryDuration, S.recoveryLevel, S.recoveryMode, S.recoveryStartCycle, S.recoveryState, S.recoveryThresholds, S.recoveryWindow, S.shockFlag, S.suppressEvents, S.suppressHooks, S.suppressTextures, S.textureSuppression
+  Reads: S.absoluteCycle, S.cycleId, S.economicMood, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.previousCycleState, S.recoveryDuration, S.recoveryLevel, S.recoveryStartCycle, S.recoveryState, S.recoveryWindow, S.shockFlag, S.sportsSeason, S.storyHooks, S.textureTriggers, S.weatherMood, S.worldEvents
+  Writes: S.eventSuppression, S.hookSuppression, S.overloadScore, S.recoveryCalendarContext, S.recoveryDuration, S.recoveryLevel, S.recoveryMode, S.recoveryStartCycle, S.recoveryState, S.recoveryThresholds, S.recoveryWindow, S.suppressEvents, S.suppressHooks, S.suppressTextures, S.textureSuppression
   Config: ctx.config.cycleCount
 
 ### applyDomainCooldowns.js

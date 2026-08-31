@@ -614,9 +614,22 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **Suggested action:** OPEN, unowned.
 - **Pointer:** engine.138
 
+### G-PF32: 35 engine files are unreachable from the cycle, and some of them are content producers
+
+- **Severity:** MED
+- **Category:** quiet-pipe
+- **What happened:** Surfaced by the repointed ordering pass (G-PF27), which now reports a file as DEAD only when **every** top-level function in it is unreachable from `runWorldCycle()` — a claim that can be checked, unlike a partial-reachability guess. 35 files qualify. Most are benign: menu/setup utilities (`godWorldMenu.js`, `setupSportsFeedValidation.js`, `exportSchemaHeaders.js`) and the entry points that *call* the cycle rather than being called by it (`webTrigger.js`). **The rest are not benign** — they are wired-looking engines that never run, carrying live `ctx.summary` reads that never execute:
+  - `phase07-evening-media/storyHook.js` — 32 reads. `storyHookEngine_` has **zero call sites** anywhere (verified by grep).
+  - `phase07-evening-media/mediaRoomBriefingGenerator.js` — 49 reads. Its `safePhaseCall_` is commented out at `godWorldEngine2.js:544`.
+  - `phase06-analysis/processArcLifeCyclev1.js` (12), `phase07-evening-media/domainTracker.js` (10), `phase06-analysis/prePublicationValidation.js` (9), `phase07-evening-media/parseMediaIntake.js` (7), `phase04-events/eventArcEngine.js` (29 — retired S313, see G-PF16 correction), the three `phase08-v3-chicago` writers (31 between them), `utilities/exportCycleArtifacts.js` (15), `phase11-media-intake/healthCauseIntake.js` (3).
+- **Why it matters:** This is the same class the whole C105 chase is about — code that reads as wired, logs nothing, and does nothing. `prePublicationValidation` in particular sounds like a gate. Nobody has an inventory of which of these were retired on purpose and which fell out of the call graph by accident, and the difference matters: one is history, the other is a missing feature nobody has noticed.
+- **Suggested action:** OPEN, unowned. **Surfaced, not chased** — deliberately not triaged this session (engine.137 scope guard). The work is one pass classifying each of the 35 as *retired-on-purpose* (delete or annotate) vs *fell-out-of-the-graph* (rewire or file a row). Regenerate the list any time with `node scripts/ctxMap.js | sed -n '/^DEAD FILES/,$p'`.
+- **Pointer:** engine.138
+
 ## Changelog
 
 - 2026-08-30 — Initial /pre-flight leg (S403, engine-sheet), C105 pre-fire.
+- 2026-08-31 — G-PF32 opened (S405, engine-sheet): 35 files unreachable from the cycle, surfaced by the repointed ordering pass; not triaged.
 - 2026-08-31 — G-PF18 fixed (S405, engine-sheet): civic voice sentiment now rides a World_Config key pair with a staleness gate; acceptance rides the next scheduled civic close.
 - 2026-08-31 — engine.137 closed (S405, engine-sheet). G-PF16 annotated as incorrect on mechanism and incomplete on scope; G-PF27 (instrument defect) fixed; six read-before-write sites wired to the existing carry-forward snapshot; G-PF28/29/30/31 opened.
 

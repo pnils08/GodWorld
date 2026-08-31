@@ -34,13 +34,13 @@ ENGINE CHANGES SINCE LAST CYCLE: <path-filtered commits, or "none">
 CRITICAL: none
 WARNINGS (acknowledged off-path or doc drift): <numbered, from known_gaps.json>
 CLEAN: Math.random cycle-path 0 unacknowledged; sheet-writes 0 off-list; neighborhoods 0 new stray
-NOT AUTO-SCANNED (run from SKILL): §3 ctx-deps, §4 header alignment, §6 write-intent targets
+NOT AUTO-SCANNED (run from SKILL): §3 ctx-deps (deterministic via `ctxMap.js` — run it, don't eyeball), §4 header alignment, §6 write-intent targets
 RECOMMENDATION: SAFE TO RUN | FIX BEFORE RUNNING
 ```
 
 ### ⚠ The script does NOT check everything — scans 3, 4, 6 stay manual
 
-`preMortemScan.js` covers the deterministic, local, recurrent-friction scans (0/1/2/5). It does **not** check ctx-field dependencies (§3), sheet-header alignment (§4), or write-intent targets (§6). A `SAFE TO RUN` from the script means *those four scans are clean* — it is **not** a full pre-mortem. After the script exits 0, run §3/§4/§6 by hand per the procedures below. A gate that silently under-checks is worse than no gate.
+`preMortemScan.js` covers the deterministic, local, recurrent-friction scans (0/1/2/5). It does **not** run the §3 ctx-dependency ordering pass (that is `ctxMap.js`, invoked from §3), sheet-header alignment (§4), or write-intent targets (§6). A `SAFE TO RUN` from the script means *those four scans are clean* — it is **not** a full pre-mortem. After the script exits 0, run §3/§4/§6 by hand per the procedures below. A gate that silently under-checks is worse than no gate.
 
 ## What the scans check
 
@@ -90,20 +90,35 @@ grep -rnE '\.setValue\(|\.setValues\(|\.appendRow\(' phase0[1-9]*/ --include="*.
 
 Diff the grep result against engine.md's exception list. Any file on the grep that isn't on engine.md is WARNING — either a new undocumented writer (bug) or a file that needs to be added to engine.md (doc drift). Run `/tech-debt-audit` if in doubt.
 
-### 3. ctx Field Dependency Check (MANUAL — script does NOT check this)
-This is the most important check. Phase 5 has 14+ sub-engines that read and write ctx fields. If Engine A reads `ctx.summary.careerSignals` but Engine B (which writes it) hasn't run yet, the field is undefined.
+### 3. ctx Field Dependency Check (DETERMINISTIC — `ctxMap.js`, engine.137 S405)
 
-**How to check:**
-1. Read `phase01-config/godWorldEngine2.js` — find the execution order of all phases and sub-engines
-2. For each Phase 5 sub-engine, scan for `ctx.summary.*` and `ctx.config.*` reads
-3. Verify the field was written by a previously-executed engine or phase
-4. Flag any read-before-write as CRITICAL — this is a silent failure (the engine runs but uses undefined data)
+This is the most important check: if Engine A reads `ctx.summary.careerSignals` but Engine B (which writes it) has not run yet, the field is undefined and the branch silently never takes. **It is no longer a by-eye scan** — G-PF17 folded an ordering pass into `ctxMap.js` and engine.137 repointed it at the orchestrator. Run it:
 
-**Known dependency chain (verify these are still correct):**
+```bash
+node scripts/ctxMap.js | sed -n '/^ORDERING/,$p'
+```
+
+**How to read the output — three buckets, and they mean different things:**
+
+| Bucket | Meaning | Action |
+|---|---|---|
+| `ORDERING — READ BEFORE WRITE` | the read **always** precedes the write (readMax < writeMin) | `** N UNDEFAULTED **` / `<-- no fallback` is **CRITICAL**. `[all defaulted]` is a silent degradation — the branch never takes, but nothing crashes. Log it, don't block on it |
+| `AMBIGUOUS` | the reader runs at several slots that straddle the writer | needs a human look; may or may not be real |
+| `DEAD FILES` | **every** top-level function in the file is unreachable from `runWorldCycle()` | its ctx reads never execute at all. Not a cycle blocker — a standing inventory finding |
+
+**Three things the script will not do for you:**
+
+1. **Confirm each hit by eye before acting.** Guards are detected per-line, so a guard on the *following* line reads as "no fallback." The script prints this caveat itself.
+2. **See non-literal dispatch.** A partially-unreachable helper inside a LIVE file is deliberately not reported — that bucket would over-report, which is what discredited scan 2 (G-PF15).
+3. **Fail loudly if it cannot parse.** It exits 3 with `ordering pass ABORTED (not an all-clear)` if `runWorldCycle()`'s `safePhaseCall_` sequence does not parse. **Exit 3 is not a pass** — a phase-list refactor is the likely cause.
+
+**Why the orchestrator and not the directory (engine.137, do not regress this):** execution order comes from the `safePhaseCall_` sequence in `runWorldCycle()`, resolved **per top-level function**, never from the `phase<NN>` directory name. The directory records where a file was filed, not when it runs — `finalizeWorldPopulation.js` lives in `phase03-population/` and runs at the Phase9 slot. Keying off the directory is what invented G-PF16 and hid six real sites. `runCyclePhases_` is the dry-run/replay path and diverges from production (G-PF30); it is not the ordering source.
+
+**Known dependency chains (verify these are still correct):**
 - Career Engine → Economic Ripple Engine (via `ctx.summary.careerSignals`)
 - Demographics → Civic Voting, Story Hooks, City Dynamics
-- World Events → Arc Engine, Media Briefings
 - HouseholdFormation → GenerationalWealth → EducationCareer (Phase 5 chain)
+- ~~World Events → Arc Engine~~ — the arc engine (`eventArcEngine_`) was retired S313 (engine.72 G-EC55) and has no caller. Do not chase its reads.
 
 ### 4. Sheet Header Alignment (MANUAL — script does NOT check this)
 Check that columns referenced in engine code actually exist in the sheets. Use the service account to read sheet headers:

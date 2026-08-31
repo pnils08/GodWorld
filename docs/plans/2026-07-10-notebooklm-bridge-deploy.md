@@ -355,7 +355,7 @@ shadow runs should record the three-valued disposition from the first run so the
   3. Keep `REPORTED_DAY` on the current default-length Deep Dive baseline.
 - **Verify:** the next natural run selects the expected profile, delivers once,
   and writes no Sheet, Edition, or canon state.
-- **Status:** [ ] blocked on Tasks 21–22 and explicit live approval
+- **Status:** [x] live 2026-08-31 (grok) — `honorRouter: true` in `config/notebooklm.json`; `resolveAudioPresentation` feeds `--format/--length` on the existing 08:00 job. Discord prints Program + reasons. Saturday `stepPublish` now generates deep_dive/long audio via `generateAndDeliverEditionAudio` (same push path, not a new cron). Ops report moved after the listening drop; 15 min skip is Studio `report create` + 30×30s download poll.
 
 ### Task 24: Builder-only coverage table
 

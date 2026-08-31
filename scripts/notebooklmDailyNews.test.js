@@ -29,6 +29,8 @@ const {
   SOURCE_VERSION,
   DEFAULT_AUDIO_LENGTH,
   DAILY_NEWS_IDENTITY,
+  resolveAudioPresentation,
+  routingDiscordLine,
 } = require('./notebooklmDailyNews');
 const notebookConfig = require('../config/notebooklm.json');
 
@@ -239,6 +241,7 @@ const syntheticRouting = {
     flagged: flaggedFromPulse(syntheticPulse),
   });
   const pack = buildSourcePack(shadowInput);
+  assert(pack.text.includes('## Daily program'));
   assert(pack.text.includes('proposed profile: REPORTED_DAY'));
   assert(pack.text.includes('passed=1, rhea-flagged=1, never-gated=1'));
   assert(pack.text.includes('Follow the supplied synthetic fact'));
@@ -363,7 +366,7 @@ const syntheticDigest = {
   const title = sourceTitle('current source pack', 999, 'abcdef1234567890');
   assert.strictEqual(title, 'The Bay Tribune Daily C999 — current source pack — abcdef123456');
   const prompt = dailyPrompt(999);
-  assert.strictEqual(SOURCE_VERSION, '1.6');
+  assert.strictEqual(SOURCE_VERSION, '1.7');
   assert.strictEqual(DEFAULT_AUDIO_LENGTH, 'default');
   assert.strictEqual(notebookConfig.dailyNews.audioLength, 'default');
   assert(prompt.includes('The Bay Tribune daily news for Oakland for Cycle 999'));
@@ -386,6 +389,48 @@ const syntheticDigest = {
   assert(brief.includes('Canon status: NOT CANON'));
   assert(brief.includes('Synthetic continuity.'));
   assert(brief.includes('"id": "s1"'));
+}
+
+{
+  const open = resolveAudioPresentation(
+    { profile: 'CYCLE_OPEN', format: 'brief', length: 'short' },
+    { audioFormat: 'deep_dive' },
+    { honorRouter: true, audioFormat: 'deep_dive', audioLength: 'default' }
+  );
+  assert.strictEqual(open.format, 'brief');
+  assert.strictEqual(open.length, 'short');
+  assert.strictEqual(open.source, 'router');
+
+  const reported = resolveAudioPresentation(
+    { profile: 'REPORTED_DAY', format: 'deep_dive', length: 'default' },
+    { audioFormat: 'deep_dive' },
+    { honorRouter: true }
+  );
+  assert.strictEqual(reported.format, 'deep_dive');
+  assert.strictEqual(reported.length, 'default');
+
+  const debate = resolveAudioPresentation(
+    { profile: 'VERIFIED_OPPOSITION', format: 'debate', length: 'default' },
+    { audioFormat: 'deep_dive' },
+    { honorRouter: true }
+  );
+  assert.strictEqual(debate.format, 'debate');
+
+  const pinned = resolveAudioPresentation(
+    { profile: 'CYCLE_OPEN', format: 'brief', length: 'short' },
+    { audioFormat: 'deep_dive' },
+    { honorRouter: false, audioFormat: 'deep_dive', audioLength: 'default' }
+  );
+  assert.strictEqual(pinned.format, 'deep_dive');
+  assert.strictEqual(pinned.source, 'config');
+
+  const line = routingDiscordLine(
+    { profile: 'CYCLE_OPEN', format: 'brief', length: 'short', reasonCodes: ['W1_ACTIVE_6'] },
+    { format: 'brief', length: 'short' }
+  );
+  assert(line.includes('CYCLE_OPEN'));
+  assert(line.includes('brief/short'));
+  assert(line.includes('W1_ACTIVE_6'));
 }
 
 console.log('notebooklmDailyNews tests: PASS');

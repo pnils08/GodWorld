@@ -843,6 +843,30 @@ async function stepPublish(cycle) {
   // real publish threw despite the source landing in the notebook correctly.
   if (!add.ok) throw new Error('NotebookLM source add failed: ' + String(add.out || '').slice(0, 200));
   console.log('published: canon ingest + permanent notebook (' + config.notebookName + ')');
+  const sourceIdMatch = String(add.out || '').match(/Source ID:\s*(\S+)/);
+  const sourceId = sourceIdMatch ? sourceIdMatch[1] : null;
+  if (config.saturdayAudio !== false) {
+    try {
+      const { generateAndDeliverEditionAudio } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
+      const audio = await generateAndDeliverEditionAudio({
+        notebookId: config.notebookId,
+        sourceId: sourceId,
+        cycle: cycle,
+        config: config,
+        format: config.audioFormat || 'deep_dive',
+        length: 'long',
+        label: 'The Cycle Pulse — Y2C' + cycle,
+        focus: 'The Cycle Pulse edition C' + cycle,
+        content: '🎧 **The Cycle Pulse — Y2C' + cycle + '**\nSaturday edition audio · deep_dive/long',
+        driveDest: config.driveDest || 'edition',
+      });
+      if (audio && audio.audioPath) {
+        console.log('saturday audio → ' + path.relative(ROOT, audio.audioPath));
+      }
+    } catch (e) {
+      console.log('SATURDAY AUDIO SKIPPED (non-blocking): ' + e.message);
+    }
+  }
   console.log('[follow-up] ingestPublishedEntities (byline-published fame rows) parses NAMES INDEX — run manually until its INTAKE adaptation lands.');
   return { published: true, path: outPath };
 }

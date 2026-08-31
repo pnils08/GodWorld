@@ -200,40 +200,16 @@ async function main() {
 
   // 2. Audio overview (editions only — quota is scarce, /post-publish passes --audio for --type edition)
   if (args.audio) {
-    // Scope to the just-added source — the notebook holds the whole archive; an
-    // unscoped overview would podcast ALL editions, not this cycle's. The
-    // direction guide rides alongside as a second source (pipeline.51).
-    // Guide only rides when the edition source resolved — a guide-only scope
-    // would podcast the direction doc itself.
-    const directionId = sourceId ? ensureDirectionSource(config.notebookId) : null;
-    const audioArgs = ['audio', 'create', config.notebookId, '--format', config.audioFormat || 'deep_dive', '--confirm'];
-    const audioSourceIds = [sourceId, directionId].filter(Boolean);
-    if (audioSourceIds.length) audioArgs.push('--source-ids', audioSourceIds.join(','));
-    audioArgs.push('--focus', 'Edition C' + args.cycle + (directionId
-      ? '. Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.'
-      : ''));
-    const create = nlm(audioArgs);
-    if (!create.ok) {
-      console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): create failed: ' + create.out.slice(0, 300));
-    } else {
-      const audioPath = path.join(ROOT, 'output/audio', 'nlm_overview_c' + args.cycle + '.m4a');
-      fs.mkdirSync(path.dirname(audioPath), { recursive: true });
-      let downloaded = false;
-      for (let i = 0; i < AUDIO_RETRY_MAX; i++) {
-        await sleep(AUDIO_RETRY_INTERVAL_MS);
-        const dl = nlm(['download', 'audio', config.notebookId, '--output', audioPath, '--no-progress'], { timeoutMs: 300 * 1000 });
-        if (dl.ok && fs.existsSync(audioPath) && fs.statSync(audioPath).size > 0) {
-          downloaded = true;
-          break;
-        }
-      }
-      if (!downloaded) {
-        console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): render did not finish within ' + (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' min');
-      } else {
-        console.log('Audio downloaded: ' + audioPath);
-        await deliver(audioPath, args.cycle, config);
-      }
-    }
+    await generateAndDeliverEditionAudio({
+      notebookId: config.notebookId,
+      sourceId: sourceId,
+      cycle: args.cycle,
+      config: config,
+      format: config.audioFormat || 'deep_dive',
+      length: 'default',
+      label: 'Audio overview — Edition C' + args.cycle,
+      focus: 'Edition C' + args.cycle,
+    });
   }
 
   // 3. Summary capture (Mike-direct S310: the notebook writes the best edition summaries — keep them)
@@ -256,6 +232,59 @@ async function main() {
   }
 
   console.log('NotebookLM push complete for ' + (args.kind === 'lore' ? 'lore ' + args.tag + ' — ' + baseName : 'C' + args.cycle));
+}
+
+async function generateAndDeliverEditionAudio(opts) {
+  const notebookId = opts.notebookId;
+  const sourceId = opts.sourceId;
+  const cycle = opts.cycle;
+  const config = opts.config;
+  const format = opts.format || (config && config.audioFormat) || 'deep_dive';
+  const length = opts.length || 'default';
+  if (!sourceId) {
+    console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): no source id');
+    return null;
+  }
+  const directionId = ensureDirectionSource(notebookId);
+  const audioArgs = [
+    'audio', 'create', notebookId,
+    '--format', format,
+    '--length', length,
+    '--confirm',
+  ];
+  const ids = [sourceId, directionId].filter(Boolean);
+  audioArgs.push('--source-ids', ids.join(','));
+  audioArgs.push('--focus', (opts.focus || ('Edition C' + cycle)) + (directionId
+    ? '. Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.'
+    : ''));
+  const create = nlm(audioArgs);
+  if (!create.ok) {
+    console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): create failed: ' + String(create.out || '').slice(0, 300));
+    return null;
+  }
+  const audioPath = opts.outputPath || path.join(ROOT, 'output/audio', 'nlm_overview_c' + cycle + '.m4a');
+  fs.mkdirSync(path.dirname(audioPath), { recursive: true });
+  let downloaded = false;
+  for (let i = 0; i < AUDIO_RETRY_MAX; i++) {
+    await sleep(AUDIO_RETRY_INTERVAL_MS);
+    const dl = nlm(['download', 'audio', notebookId, '--output', audioPath, '--no-progress'], { timeoutMs: 300 * 1000 });
+    if (dl.ok && fs.existsSync(audioPath) && fs.statSync(audioPath).size > 0) {
+      downloaded = true;
+      break;
+    }
+  }
+  if (!downloaded) {
+    console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): render did not finish within ' +
+      (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' min');
+    return null;
+  }
+  console.log('Audio downloaded: ' + audioPath);
+  const delivery = await deliver(audioPath, cycle, config, {
+    label: opts.label || ('Audio overview — Edition C' + cycle),
+    content: opts.content || ('🎧 **The Cycle Pulse — Y2C' + cycle + '**'),
+    driveDest: opts.driveDest,
+  });
+  return { audioPath, driveLink: delivery && delivery.driveLink };
 }
 
 async function sendDiscordText(content) {
@@ -365,6 +394,7 @@ module.exports = {
   nlm,
   sleep,
   deliver,
+  generateAndDeliverEditionAudio,
   sendDiscordText,
   sendDiscordFile,
 };

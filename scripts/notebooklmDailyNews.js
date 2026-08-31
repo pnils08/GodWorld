@@ -39,8 +39,38 @@ const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
 const OUTPUT_DIR = path.join(ROOT, 'output', 'notebooklm', 'daily');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 30;
-const SOURCE_VERSION = '1.6';
+const SOURCE_VERSION = '1.7';
 const DEFAULT_AUDIO_LENGTH = 'default';
+const DEFAULT_AUDIO_FORMAT = 'deep_dive';
+
+function resolveAudioPresentation(routing, config, dailyConfig) {
+  const cfg = dailyConfig || {};
+  const conf = config || {};
+  const fallbackFormat = cfg.audioFormat || conf.audioFormat || DEFAULT_AUDIO_FORMAT;
+  const fallbackLength = cfg.audioLength || DEFAULT_AUDIO_LENGTH;
+  if (cfg.honorRouter === false) {
+    return { format: fallbackFormat, length: fallbackLength, source: 'config' };
+  }
+  if (routing && routing.format && routing.length) {
+    return {
+      format: routing.format,
+      length: routing.length,
+      source: 'router',
+      profile: routing.profile || null,
+    };
+  }
+  return { format: fallbackFormat, length: fallbackLength, source: 'config-fallback' };
+}
+
+function routingDiscordLine(routing, presentation) {
+  if (!routing || !routing.profile) return '';
+  const pres = presentation || {};
+  return 'Program: **' + routing.profile + '** · `' +
+    (pres.format || routing.format) + '/' + (pres.length || routing.length) + '`' +
+    (routing.reasonCodes && routing.reasonCodes.length
+      ? '\nReasons: ' + routing.reasonCodes.join(', ')
+      : '');
+}
 const DAILY_NEWS_IDENTITY = 'The Bay Tribune daily news for Oakland.';
 const DIRECTION_GUIDE_PATH = path.join(ROOT, 'config', 'audio_direction_daily.md');
 
@@ -350,7 +380,7 @@ function buildSourcePack(input) {
 
   if (input.pulse && input.routing) {
     lines.push(
-      '## Daily routing shadow — local audit only',
+      '## Daily program',
       '',
       '- proposed profile: ' + input.routing.profile,
       '- proposed presentation: ' + input.routing.format + '/' + input.routing.length,
@@ -670,7 +700,8 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
     }
   }
   throw new Error('ops report did not render within ' +
-    (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' minutes');
+    (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) +
+    ' minutes (nlm report create then 30×30s download poll)');
 }
 
 function dailyAudioFocus(hasDirectionGuide) {
@@ -783,8 +814,8 @@ async function run(argv) {
     citizenDigest,
     reports: newsroom.reports,
     flagged: newsroom.flagged,
-    pulse: args.routingShadow ? pulse : null,
-    routing: args.routingShadow ? routing : null,
+    pulse: pulse,
+    routing: routing,
   });
   const runDir = path.join(OUTPUT_DIR, 'c' + cycle, pack.hash.slice(0, 12));
   const manifestPath = path.join(runDir, 'manifest.json');
@@ -853,8 +884,15 @@ async function run(argv) {
   console.log('Daily source pack: ' + path.relative(ROOT, packPath));
 
   if (args.dryRun) {
+    const presentation = resolveAudioPresentation(routing, config, dailyConfig);
+    console.log('Daily program (would deliver): ' +
+      ((routing && routing.profile) || 'none') + ' · ' +
+      presentation.format + '/' + presentation.length + ' (' + presentation.source + ')');
+    if (routing && routing.reasonCodes) {
+      console.log('Daily program reasons: ' + routing.reasonCodes.join(', '));
+    }
     console.log('NotebookLM daily news dry run complete for C' + cycle);
-    return { cycle, runDir, packHash: pack.hash, dryRun: true, routingShadow: routing };
+    return { cycle, runDir, packHash: pack.hash, dryRun: true, routingShadow: routing, audioPresentation: presentation };
   }
   if (!config.notebookId) throw new Error('config has no permanent archive notebookId');
   if (!config.newsroomNotebookId) {
@@ -879,7 +917,8 @@ async function run(argv) {
       const delivery = await deliver(audioPath, cycle, config, {
         driveDest: dailyConfig.driveDest || config.driveDest || 'edition',
         label: 'GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle,
-        content: '🎧 **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**',
+        content: '🎧 **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**\n' +
+          routingDiscordLine(routing, manifest.audioPresentation),
       });
       manifest.driveLink = delivery && delivery.driveLink ? delivery.driveLink : null;
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
@@ -954,7 +993,7 @@ async function run(argv) {
     citizenDigest,
     reports: newsroom.reports,
     archiveAnswer: queryAnswer(archiveQuery),
-    pulse: args.routingShadow ? pulse : null,
+    pulse: pulse,
   }));
 
   const list = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
@@ -994,16 +1033,6 @@ async function run(argv) {
   ].join('\n'));
   console.log('Daily written brief: ' + path.relative(ROOT, briefPath));
 
-  // Ops report — non-blocking: a quota or render failure must not cost the
-  // audio brief.
-  let opsReportPath = null;
-  try {
-    opsReportPath = await createOpsReport(config, cycle, sourceIds, runDir, manifest, manifestPath);
-    console.log('Daily ops report: ' + path.relative(ROOT, opsReportPath));
-  } catch (e) {
-    console.log('DAILY OPS REPORT SKIPPED (non-blocking): ' + e.message);
-  }
-
   let audioPath = null;
   if (args.audio) {
     // Audio-direction guide rides ONLY the audio create — the written brief
@@ -1029,11 +1058,15 @@ async function run(argv) {
     const audioSourceIds = directionSourceId
       ? sourceIds.concat(directionSourceId)
       : sourceIds.slice();
-    const audioLength = dailyConfig.audioLength || DEFAULT_AUDIO_LENGTH;
+    const presentation = resolveAudioPresentation(routing, config, dailyConfig);
+    manifest.audioPresentation = presentation;
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    console.log('Daily audio program: ' + (presentation.profile || routing && routing.profile || 'none') +
+      ' · ' + presentation.format + '/' + presentation.length + ' (' + presentation.source + ')');
     const create = nlm([
       'audio', 'create', config.newsroomNotebookId,
-      '--format', dailyConfig.audioFormat || config.audioFormat || 'deep_dive',
-      '--length', audioLength,
+      '--format', presentation.format,
+      '--length', presentation.length,
       '--source-ids', audioSourceIds.join(','),
       '--focus', dailyAudioFocus(Boolean(directionSourceId)),
       '--confirm',
@@ -1057,21 +1090,35 @@ async function run(argv) {
       const delivery = await deliver(audioPath, cycle, config, {
         driveDest: dailyConfig.driveDest || config.driveDest || 'edition',
         label: 'GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle,
-        content: '🎧 **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**',
+        content: '🎧 **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**\n' +
+          routingDiscordLine(routing, manifest.audioPresentation),
       });
       manifest.driveLink = delivery && delivery.driveLink ? delivery.driveLink : null;
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
       deleteLocalAudioIfDelivered(audioPath, manifest.driveLink);
     } else {
       await sendDiscordText(
-        '🗞️ **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**\nWritten brief generated; audio disabled.\n`' +
+        '🗞️ **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**\n' +
+        routingDiscordLine(routing, manifest.audioPresentation) +
+        '\nWritten brief generated; audio disabled.\n`' +
         path.relative(ROOT, briefPath) + '`'
       );
     }
-    if (opsReportPath) {
+  }
+
+  // Ops report after the listening drop. Studio `report create` + 30×30s
+  // download poll is the 15-minute skip — it must not delay audio.
+  let opsReportPath = null;
+  try {
+    opsReportPath = await createOpsReport(config, cycle, sourceIds, runDir, manifest, manifestPath);
+    console.log('Daily ops report: ' + path.relative(ROOT, opsReportPath));
+    if (args.deliver) {
       await sendDiscordFile(opsReportPath,
         '📋 **Bay Tribune ops report — Cycle ' + cycle + '** (gate desk: every filing and every gate decision)');
     }
+  } catch (e) {
+    console.log('DAILY OPS REPORT SKIPPED (non-blocking): ' + e.message +
+      ' — Studio report create/download poll is 30×30s (15 min) after nlm report create');
   }
 
   console.log('NotebookLM daily news complete for C' + cycle);
@@ -1121,6 +1168,9 @@ module.exports = {
   dailyAudioFocus,
   SOURCE_VERSION,
   DEFAULT_AUDIO_LENGTH,
+  DEFAULT_AUDIO_FORMAT,
   DAILY_NEWS_IDENTITY,
+  resolveAudioPresentation,
+  routingDiscordLine,
   run,
 };

@@ -8,11 +8,13 @@
   "audioFormat": "deep_dive",
   "dailyNews": {
     "hours": 36,
+    "honorRouter": true,
     "audioFormat": "deep_dive",
     "audioLength": "default",
     "driveDest": "edition",
     "pingTime": "08:00 America/Chicago"
   },
+  "saturdayAudio": true,
   "shards": [{ "range": [1, 999], "id": "417e2d29-4167-420f-a9cc-76fb6b2b7de2" }],
   "current": "417e2d29-4167-420f-a9cc-76fb6b2b7de2"
 }

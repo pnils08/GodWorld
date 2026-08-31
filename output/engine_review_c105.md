@@ -57,6 +57,8 @@
 
 **161 detected.** Triage: 150 `suppress-until-verified` (all medium confidence), 10 `cover-as-story` (high confidence), 1 `route-to-engine-debug`.
 
+*Deviation from the skill, stated plainly:* §Step 4 asks for one paragraph per entry in `anomalies[]`. At 161 entries that would bury the three that matter, and 150 of them are the same suppressed class. This section is grouped by triage path with counts, and every non-suppressed anomaly (all 11) is named individually below. If per-entry prose is wanted, it belongs in a generated appendix, not here.
+
 **The cover-as-story ten are one story, not ten.** Every one is a citizen income jump between 104% and 218% — POP-00778 (+164%, 37,868 → 100,000), POP-00815 (+191%), POP-00856 (+218%, 29,864 → 95,000), POP-00859 (+164%), POP-00808 (+104%), POP-00913 (+105%) and four more. Each carries a **peer move share of 38–50%**, meaning roughly half their comparison cohort moved with them. That is a cohort event, not ten coincidences: it is engine.135's employment cascade re-basing pay against hood reference businesses, landing on live citizens for the first time. High confidence, and it is genuinely the biggest thing that happened to individual people this cycle. Business desk, one story, several named citizens.
 
 **The one debug route is the interesting exception.** POP-00777, income +156% (34,335 → 88,000), **peer move share 0%** — the only large mover with no cohort behind them. The other ten moved with a third to half their peers; this one moved alone. That difference is the whole reason it triages differently, and it is worth a look before it is covered. Suppressed from the edition until cleared. Follow-up written to `output/engine_anomalies_c105_followup.md`.

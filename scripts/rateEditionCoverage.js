@@ -83,6 +83,93 @@ var sectionToDomains = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
+// REPORTER → DOMAIN (pipeline.62, Mike-direct 2026-08-31)
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// The C104 edition format carries no section headers at all — `====` rules and
+// article titles only — so every article resolved to `(unknown)` and fell to
+// the COMMUNITY default: sports, faith and weather pieces all filed as
+// COMMUNITY, one bogus rating, exit 0. Section headers stay authoritative when
+// an edition HAS them (older editions must re-rate identically); the reporter's
+// beat is the fallback, and it is a reliable one because a byline is exactly a
+// claim about whose beat this is.
+//
+// Source of truth is scripts/persona-map.json — the same file cron-desk-run.js
+// uses to resolve a byline to a ledger identity. Not a list invented here: if a
+// journalist's beat changes, it changes in one place.
+var personaMap = JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'));
+
+// The write-side contract: Edition_Coverage_Ratings.Domain must be a
+// Domain_Tracker column, because that is what the engine reads back.
+// phase02-world-state/applyEditionCoverageEffects.js models twelve of these
+// with bespoke physics and gives the rest DEFAULT_RULE — deliberate, so
+// ENVIRONMENT and GENERAL are legal targets, just shallower ones.
+var DOMAIN_TRACKER_COLUMNS = [
+  'CIVIC', 'CRIME', 'TRANSIT', 'ECONOMIC', 'EDUCATION', 'HEALTH', 'WEATHER',
+  'COMMUNITY', 'NIGHTLIFE', 'HOUSING', 'CULTURE', 'SPORTS', 'BUSINESS',
+  'SAFETY', 'INFRASTRUCTURE', 'GENERAL', 'FESTIVAL', 'HOLIDAY', 'ARTS',
+  'ENVIRONMENT', 'TECHNOLOGY'
+];
+
+// One beatDomain in persona-map is not a Domain_Tracker column: Jax Caldera's
+// ACCOUNTABILITY. His wake package files him under the civic desk, and civic
+// media pressure is what accountability reporting exerts on this world, so it
+// lands on CIVIC rather than falling through to the generic default.
+var BEAT_DOMAIN_ALIAS = { ACCOUNTABILITY: 'CIVIC' };
+
+// Byline "Dr. Lila Mezran" / "Sgt. Rachel Torres" must match the roster name,
+// and a byline may drop the title. Key on the normalised full name AND on the
+// title-stripped form.
+function normaliseName_(n) {
+  return String(n || '').toLowerCase().replace(/[^a-z ]/g, '').replace(/\s+/g, ' ').trim();
+}
+function stripTitle_(n) {
+  return normaliseName_(n).replace(/^(dr|sgt|mr|mrs|ms|capt|rev|prof)\s+/, '');
+}
+
+var reporterToDomain = {};
+var unknownBeats = [];
+Object.keys(personaMap).forEach(function (slug) {
+  if (slug.charAt(0) === '_') return;
+  var row = personaMap[slug] || {};
+  if (!row.name || !row.beatDomain) return;
+  var beat = String(row.beatDomain).toUpperCase();
+  var domain = BEAT_DOMAIN_ALIAS[beat] || beat;
+  if (DOMAIN_TRACKER_COLUMNS.indexOf(domain) === -1) {
+    unknownBeats.push(row.name + ' -> ' + beat);
+    return;
+  }
+  reporterToDomain[normaliseName_(row.name)] = domain;
+  reporterToDomain[stripTitle_(row.name)] = domain;
+});
+
+// A beat that is not a Domain_Tracker column would be written to the sheet and
+// then silently take DEFAULT_RULE in the engine. Refuse rather than write it.
+if (unknownBeats.length) {
+  console.error('FAIL: persona-map.json beatDomain(s) are not Domain_Tracker columns and have no alias:');
+  unknownBeats.forEach(function (u) { console.error('  ' + u); });
+  console.error('  Add a Domain_Tracker column or a BEAT_DOMAIN_ALIAS entry in ' + __filename);
+  process.exit(2);
+}
+
+// Resolve a byline to its beat domain. Tries the full byline, then the
+// title-stripped form, then each roster name as a substring of the byline
+// (bylines carry affiliation tails like "Anthony Raines, Bay Tribune").
+function domainForReporter_(reporter) {
+  var n = normaliseName_(reporter);
+  if (!n) return null;
+  if (reporterToDomain[n]) return reporterToDomain[n];
+  var st = stripTitle_(reporter);
+  if (reporterToDomain[st]) return reporterToDomain[st];
+  var best = null;
+  Object.keys(reporterToDomain).forEach(function (name) {
+    if (!name) return;
+    if (n.indexOf(name) !== -1 && (!best || name.length > best.length)) best = name;
+  });
+  return best ? reporterToDomain[best] : null;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // TONE KEYWORDS
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -305,23 +392,47 @@ function rateArticleTone(articleText) {
 // Per-domain accumulators: { domain: { ratings: [], reporters: [], tones: [] } }
 var domainData = {};
 
+// pipeline.62 — how each article got its domain, so the gate below can tell
+// "resolved" from "everything fell to the default", and the operator can see it.
+var resolutionCounts = {};
+var unresolvedArticles = [];
+
 for (var a = 0; a < articles.length; a++) {
   var art = articles[a];
   var sectionKey = art.section.toLowerCase();
 
-  // Find matching domains
+  // Resolution order (pipeline.62): section header, then reporter beat, then
+  // the COMMUNITY last resort. Section stays first so an edition that HAS
+  // headers re-rates exactly as it always did.
   var domains = null;
-  for (var key in sectionToDomains) {
-    if (sectionKey.includes(key) || key.includes(sectionKey)) {
-      domains = sectionToDomains[key];
-      break;
+  var resolvedBy = null;
+
+  // An empty sectionKey would match the first entry via key.includes('') and
+  // silently file the article as CIVIC, so only consult the map for a real one.
+  if (sectionKey && sectionKey !== '(unknown)') {
+    for (var key in sectionToDomains) {
+      if (sectionKey.includes(key) || key.includes(sectionKey)) {
+        domains = sectionToDomains[key];
+        resolvedBy = 'section';
+        break;
+      }
     }
   }
 
   if (!domains) {
-    // Default to COMMUNITY for unmatched sections
-    domains = ['COMMUNITY'];
+    var beat = domainForReporter_(art.reporter);
+    if (beat) { domains = [beat]; resolvedBy = 'reporter'; }
   }
+
+  if (!domains) {
+    // Neither a known section nor a roster byline. Counted, and the gate below
+    // fails the run if this is the ONLY thing that happened.
+    domains = ['COMMUNITY'];
+    resolvedBy = 'default';
+    unresolvedArticles.push((art.reporter || '(no byline)') + ' — "' + String(art.headline || '').slice(0, 40) + '"');
+  }
+  resolutionCounts[resolvedBy] = (resolutionCounts[resolvedBy] || 0) + 1;
+  art.resolvedBy = resolvedBy;
 
   var result = rateArticleTone(art.text);
 
@@ -421,6 +532,32 @@ if (lettersStart > 0) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 var outputRows = [];
+
+// ── Domain-resolution gate (pipeline.62) ───────────────────────────────────
+// The v2.1 fail-loud gate above guards articles === 0, because the S196 G-P6
+// incident produced zero articles. The SAME root cause — a format change the
+// detector does not follow — later produced 7 articles and 0 resolved domains
+// (C104), which sailed straight past it and emitted one bogus COMMUNITY
+// rating at exit 0. A gate written from one incident's symptom does not cover
+// the next expression of its cause, so this one checks the thing that actually
+// matters: did anything resolve?
+console.log('\n--- DOMAIN RESOLUTION ---');
+console.log('  by section header: ' + (resolutionCounts.section || 0));
+console.log('  by reporter beat:  ' + (resolutionCounts.reporter || 0));
+console.log('  unresolved:        ' + (resolutionCounts.default || 0));
+if (unresolvedArticles.length) {
+  unresolvedArticles.forEach(function (u) { console.log('    ! ' + u); });
+}
+
+if ((resolutionCounts.default || 0) === articles.length) {
+  console.error('\nFAIL: ' + articles.length + ' article(s) found, 0 resolved to a domain.');
+  console.error('  Every article fell to the COMMUNITY default, which would write one');
+  console.error('  meaningless rating and no per-domain signal at all.');
+  console.error('  Either the edition lost its section headers AND no byline matches');
+  console.error('  scripts/persona-map.json, or the byline format changed.');
+  console.error('  Bylines seen: ' + articles.map(function (x) { return x.reporter || '(none)'; }).join(', '));
+  process.exit(2);
+}
 
 console.log('\n--- DOMAIN RATINGS ---');
 

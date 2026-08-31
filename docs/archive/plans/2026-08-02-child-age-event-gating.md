@@ -1,9 +1,9 @@
 ---
 title: Age-Banded Life Content Plan
 created: 2026-08-02
-updated: 2026-08-02
-type: plan
-tags: [engine, citizens, content-ledger, active]
+updated: 2026-08-31
+type: archive
+tags: [engine, citizens, content-ledger, archived]
 sources:
   - Live Simulation_Ledger + Event_Content_Ledger reads, S350 — counts in §Findings
   - phase05-citizens/citizenContextBuilder.js `deriveLifeState_` — band boundaries
@@ -158,3 +158,4 @@ All rows: `Kind=line`, `PoolKey=family.parenting`, `Slot=` (blank), `Weight=1`, 
 - 2026-08-02 — Rewritten (S350, Mike-direct): resolver, ladder, and `childstage` enum dropped for one numeric `age` field in the existing DSL. Rationale in §Design note.
 - 2026-08-05 — Task 3 content AUTHORED (S356, research-build): 16 rows, four bands, §Task 3 authored rows. Append rides engine-sheet's Task 1 (age terms don't parse until the DSL line lands).
 - 2026-08-05 — ALL TASKS SHIPPED (S357, engine-sheet): commit 27776f0a (code) + sheet batch (6 re-gates incl. card-game 60+, 19 appends, ECL 282, read-back verified). youthActivities deleted, engine.4 closed. Clasp pushed; smoke = C103 fire. Detail in commit body.
+- 2026-08-31 (S404, research-build) — Smoke condition cleared: C103 fired clean, C104 and C105 fired clean since with no age-content anomalies reported. Row closed done-pending-archive; archiving to ROLLOUT_ARCHIVE.

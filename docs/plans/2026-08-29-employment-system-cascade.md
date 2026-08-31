@@ -224,6 +224,12 @@ Bench record (verbatim from DEPLOY.md, S397–S398):
 
 ---
 
+## Status log
+
+### engine.135 — status (drained from ROLLOUT, 2026-08-31 / S404)
+
+Employment system cascade — A–F bench-proven, prod live, and C105 was its first live fire. **Acceptance is what remains, and the fire raised three things to settle:** `runCareerEngine` moved 0 businesses across a ZERO denominator; `processEducationCareer` left 256 stagnant with 0 education/career/income and `settleAdulthood` settled 0; hood unemployment swung ±22–33% (Lake Merritt/Uptown/KONO up, Baylight −33%) — first live hood numbers, unverified. Re-run `scripts/cascadeAudit.js` now a cycle has stepped: the spread lane read FAIL 1.72pp pre-fire against a ≥2pp bar, on a profile that had never been stepped.
+
 ## Changelog
 - 2026-08-30 (S402, 14:35) — Acceptance instrument closed: `cascadeAudit` band re-based to the Adults denominator (Q5), `unemployment-spread` lane added. Detail §Acceptance criteria.
 - 2026-08-30 (S401, 13:55) — Builder doctrine third pass captured (§Direction 17–21: tiers/media/heritage are advancement; chance is a rare anomaly). E2 employer draw re-based ×0.1 (`RARE_EVENT_SCALE`) → ≈1 event per ten cycles city-wide; E3 bench-proven C112–C113 (0 FieldChange, 0 errors). 32/32.

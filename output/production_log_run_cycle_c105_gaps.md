@@ -593,8 +593,8 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **Category:** quiet-pipe
 - **What happened:** `applySeasonWeights.js:34` reads `S.sportsAtmosphereEnabled` and `S.sportsSeason` at `Phase2-SeasonalWeights`; `applySportsSeason_` writes both at `Phase2-SportsSeason`, the very next slot. The file already carries a hand-written comment at :32-33 acknowledging this — "has always been undefined here and these multipliers have never fired. Gated for correctness if the ordering ever changes."
 - **Why it matters:** Sports is the world. A seasonal weighting that has never once seen the sports season is a live gap in the layer that matters most, not a curiosity. The fix is plausibly a one-line orchestrator swap (`Phase2-SportsSeason` before `Phase2-SeasonalWeights`), which is cheap — but it turns on multipliers that have never fired, so it is a world-behaviour change, not a mechanical repair.
-- **Suggested action:** OPEN, needs a call on intent before the swap. Deliberately not bundled with engine.137.
-- **Pointer:** engine.137
+- **Suggested action:** **WONTFIX — closed 2026-08-31 (S405), builder-direct.** The premise was wrong, not the measurement. This entry assumed a sports *season* should track the sim calendar and that the multipliers not firing was a loss. It is not: **the seasonal sports calendar is retired and does not suit this sim.** Sports is played as a video game on the builder's own schedule and will not line up with a month or a season — the A's can be in the playoffs on New Year's Day, and that is correct world state, not drift. A seasonal weighting keyed to sim-calendar month has nothing true to say here, so wiring `sportsSeason` into `applySeasonWeights` would inject a false coupling rather than repair a real one. The hand-written comment at `applySeasonWeights.js:32-33` should be read as a note that the coupling is inert **by design**. **Do not perform the slot swap.** If seasonal weighting ever needs sports input it must key off actual game/series state, never a calendar month.
+- **Pointer:** engine.138 (closed, no work)
 
 ### G-PF30: dry-run and replay do not run the same cycle production does
 
@@ -629,6 +629,7 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 ## Changelog
 
 - 2026-08-30 — Initial /pre-flight leg (S403, engine-sheet), C105 pre-fire.
+- 2026-08-31 — G-PF29 closed WONTFIX (S405, builder-direct): the sports calendar is deliberately not sim-calendar-aligned; the inert coupling is by design.
 - 2026-08-31 — G-PF32 opened (S405, engine-sheet): 35 files unreachable from the cycle, surfaced by the repointed ordering pass; not triaged.
 - 2026-08-31 — G-PF18 fixed (S405, engine-sheet): civic voice sentiment now rides a World_Config key pair with a staleness gate; acceptance rides the next scheduled civic close.
 - 2026-08-31 — engine.137 closed (S405, engine-sheet). G-PF16 annotated as incorrect on mechanism and incomplete on scope; G-PF27 (instrument defect) fixed; six read-before-write sites wired to the existing carry-forward snapshot; G-PF28/29/30/31 opened.

@@ -4,7 +4,7 @@
 
 **Run:** 2026-08-30 (S403, engine-sheet) — `node scripts/preflightInputCheck.js --cycle=105`
 **Verdict:** READY (with warnings), exit 0. C105 unfired at time of writing; live `cycleCount` 104.
-**Total gaps:** 11 (5 HIGH / 5 MED / 1 LOW)
+**Total gaps:** 14 (7 HIGH / 6 MED / 1 LOW)
 
 Pre-flight passed. The gaps below are what it *reported as warnings* or *did not look at* — in both cases the underlying condition is worse than the verdict line suggests.
 
@@ -101,6 +101,33 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **Suggested action:** FIXED same session — folded an ordering pass into `ctxMap.js` (existing file, not a new script). Phase-dir number is the execution order, so it is deterministic. Excludes the orchestrator (`godWorldEngine2.js` is not a phase-1 participant; its reads run at cycle close) and same-file read+write (internal bookkeeping, not a cross-phase dependency), and flags whether each early read has a fallback — a defaulted read degrades silently, an undefaulted one is a live defect. Current state: **20 fields read before write, 5 with an undefaulted read.** Note the line attribution needs care: a hit on an `if (idx('x') >= 0)` line can sit one line above the actual defaulted read, so confirm each by eye before acting.
 - **Pointer:** engine.137
 
+### G-PF18: civic voice sentiment has never reached the live world
+
+- **Severity:** HIGH
+- **Category:** quiet-pipe
+- **What happened:** C105 logged `loadCivicVoiceSentiment_ v1.0: No civic sentiment file found (defaulting to 0)`. The file exists — `output/civic_sentiment_c104.json`, `civicVoiceSentiment: 0.41`, written by the C104 close. The loader at `phase02-world-state/applyInitiativeImplementationEffects.js:55-64` reads it via `if (typeof require !== 'undefined') { var fs = require('fs'); … }`. **Apps Script has neither `require` nor a filesystem**, so on the live engine that branch never runs, `content` stays empty, both candidate cycles miss, and it defaults to 0.
+- **Why it matters:** This is not a stale file or an off-by-one cycle — the channel is structurally incapable of reaching the live engine and only ever worked under a Node harness. Every civic hearing the city has held has been scored, written down, and felt by nobody. On C105 every other sentiment channel landed (sports +0.029, edition coverage +0.048, initiatives +0.083) and civic voice contributed exactly 0, on a cycle whose hearing scored 0.410 across 20 statements and 6 initiatives.
+- **Suggested action:** OPEN, engine.138 (head of the chase list). Carry it the way every other channel is carried — a sheet the civic close writes and Phase 2 reads (`World_Config` key or a civic tab). Design call on the carrier; the diagnosis is settled.
+- **Pointer:** engine.138
+
+### G-PF19: the approval engine and the audit disagree about the same six initiatives
+
+- **Severity:** HIGH
+- **Category:** incoherence
+- **What happened:** On C105 the approval engine docked Mayor Avery Santana 2 points on each of six initiatives for "sitting, nothing free" (82 → 69, Δ−13), and docked council seats the same way (Carter −7, Delgado −7, Rivers −5). In the *same cycle*, the engine audit counted four of those six as **improvements** because they advanced phase: OARI → implementation-active, Youth Apprenticeship → pilot-active, Transit Hub → visioning, Baylight → vote-scheduled. Separately `civicInitiativeEngine v1.6` reported `Processed 0 initiatives | Votes: 0 | Grants: 0` against the same six live rows.
+- **Why it matters:** Three civic systems read the same tracker and returned three different answers in one cycle — advanced, sitting, and absent. The city's most visible number moved 13 points on the "sitting" reading. Either "sitting" means something narrower than phase movement (no free action slot) and the label is wrong, or the approval engine is not reading phase at all.
+- **Suggested action:** OPEN, engine.138. Determine which of the three readings is authoritative before any of them is written as canon.
+- **Pointer:** engine.138
+
+### G-PF20: the storyline engine has no "resolved" path — 9 of 9 abandoned
+
+- **Severity:** MED
+- **Category:** pipeline-fragility
+- **What happened:** `updateStorylineStatus_ v1.2: Complete. Dormant: 0, Concluded: 0, Abandoned: 9, Reactivated: 0`. Every open thread dropped in a single pass — Stabilization Fund, OARI, Transit Hub, Baylight, Health Center, Osei, A's, Bulls, Paulette/Raymond. Several described states the world has since moved past (the OARI line reads "whether the program launches is the story" — it launched this cycle), so abandonment is arguably right for those; but zero concluded and zero dormant across nine suggests the only available terminal state is abandonment.
+- **Why it matters:** `/sift` opens C105 with an empty storyline slate. A story that resolves should conclude, not be abandoned — the distinction is what lets the newsroom write an ending rather than drop a thread.
+- **Suggested action:** OPEN, engine.138.
+- **Pointer:** engine.138
+
 ## LOW-severity gaps
 
 - **G-PF11:** `/pre-flight` with no argument always exits 2. `scripts/preflightInputCheck.js` derives the target cycle by grepping SESSION_CONTEXT for a literal `Cycle: N` token; the PIN line has never carried one (verified 0 matches at both `f10d226c` and HEAD), so the documented canonical invocation cannot work and every run needs `--cycle=`. One-line fix — teach the deriver the PIN's actual `canonical C<NN>` format.
@@ -120,6 +147,7 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - 2026-08-31 (S403) — **G-PF7 CLOSED.** Mike-direct: key domain off the reporter. Section headers still win where an edition has them; the reporter's beat is the fallback, sourced from `scripts/persona-map.json` so a beat change lives in one place. C104's 7 articles now resolve to CULTURE 4 / SPORTS 3 / ENVIRONMENT -2 instead of one COMMUNITY bucket. The gate now fails on 0-domains-resolved. C102 re-rates identical to the old code — regression proof, not assertion. C103 + C104 backfilled (10 rows, verified live).
 - 2026-08-31 (S403) — **G-PF9 partially open.** Coverage now populates, so pre-flight reads clean READY with zero warnings, but the civic-chain-health step (reading `close_c<XX>.json` / `gate_c<XX>.json`) was NOT added — the underlying halt was fixed instead, so the check has nothing to report today. Still worth adding before the next silent stall; carried on pipeline.62's residual line.
 - 2026-08-31 (S403) — **G-PF12 CLOSED** (and it retires the residual line above): coverage now runs inside the Saturday chain as `stepCoverage`, right after publish. Non-fatal by design; pre-flight is the independent backstop.
+- 2026-08-31 (S403) — C105 FIRED and reviewed. engine.136 acceptance PASSED on the live fire (flush clean, 0 engine errors, cycleCount 105, no false positive from the read-back guard). pipeline.62 and civic.26 both closed their loops on the same fire — coverage ratings consumed (+0.048 sentiment), the four C104 civic decisions read back as engine-observed improvements. Full anomaly list annotated on the execution log (`output/execution_log_c105.md`) and filed as engine.138, this week's chase list. G-PF18/19/20 opened from it.
 - 2026-08-31 (S403) — /pre-mortem run for C105: **SAFE TO RUN**, 0 CRITICAL across 98 engine-path commits since the last live cycle. Manual scans done: §3 via the new ordering pass (G-PF16/G-PF17), §4 header alignment clean on all 8 Phase-10-written tabs, §6 all 10 write-intent target tabs exist. G-PF15 + G-PF17 fixed; G-PF16 opened for the builder.
 - 2026-08-31 (S403) — **G-PF14 opened, left OPEN by choice** (Mike-direct: gap-log it if it needs a fresh look). Intermittent test, not an intermittent product — the rater's behaviour is proven by the C102 byte-identical re-rate and the live C103/C104 backfill.
 - 2026-08-31 (S403) — **G-PF13 opened and CLOSED same session.** Found by making the mistake: `--step=coverage` ran the entire chain because `arg()` only read spaced flags. Harmless here (no `--apply`), one keystroke from publishing canon. `arg()` now takes both forms.

@@ -1,8 +1,8 @@
 {
-  "generated": "2026-08-30",
+  "generated": "2026-08-31",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 183,
-  "functionsMapped": 1187,
+  "filesScanned": 185,
+  "functionsMapped": 1193,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -683,6 +683,7 @@
         "phase01-config/godWorldEngine2.js::logEngineError_",
         "phase01-config/godWorldEngine2.js::processIntake_",
         "phase01-config/godWorldEngine2.js::runDryRunCycle",
+        "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_",
@@ -4212,6 +4213,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine133Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine135Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
+        "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",
         "phase05-citizens/civicInitiativeEngine.js::manualRunVote",
         "phase05-citizens/processAdvancementIntake.js::getCurrentCycleFromConfig_",
         "phase07-evening-media/parseMediaRoomMarkdown.js::parseContinuityNotes_",
@@ -4223,6 +4225,7 @@
         "phase01-config/godWorldEngine2.js::logEngineError_"
       ],
       "readers": [
+        "phase01-config/godWorldEngine2.cycleCount.test.js::mkCtx",
         "phase01-config/godWorldEngine2.js::logEngineError_"
       ]
     },
@@ -4243,7 +4246,8 @@
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase10-persistence/cycleExportAutomation.js::exportWorldPopulation",
         "phase10-persistence/cycleExportAutomation.js::formatMirrorEntry_",
-        "phase10-persistence/cycleExportAutomation.js::getCurrentCycleFromPopulation_"
+        "phase10-persistence/cycleExportAutomation.js::getCurrentCycleFromPopulation_",
+        "utilities/sheetCache.test.js::mkSS"
       ]
     },
     "Generic_Citizens": {
@@ -4341,7 +4345,8 @@
         "utilities/archiveLifeHistory.js::maintainLifeHistoryLog_",
         "utilities/archiveLifeHistory.js::runArchive_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "utilities/cycleRollback.js::rollbackToCycle78",
+        "utilities/sheetCache.test.js::mkSS"
       ]
     },
     "Economic_Parameters": {

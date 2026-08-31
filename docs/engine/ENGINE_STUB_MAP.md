@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-08-30 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-08-31 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -55,6 +55,12 @@
 - **ensureEngine133Config_(ss)**
   Sheets: World_Config
 
+### godWorldEngine2.cycleCount.test.js
+- **check(name, cond)**
+
+- **mkCtx(sheetValue, opts)**
+  Sheets: Engine_Errors
+
 ### godWorldEngine2.js
 - **logEngineError_(ctx, phase, error)**
   Reads: S.auditIssues, S.cycleId, S.engineErrorCount
@@ -83,6 +89,12 @@
 - **advanceWorldTime_(ctx)**
   Writes: S.cycleId
   Config: ctx.config.cycleCount
+
+- **verifyCycleCountPersisted_(ctx)**
+  Reads: S.cycleId
+  Sheets: World_Config
+
+- **repairCycleCount_(ctx, sheet, rowNum, expected, sawValue)**
 
 - **updateWorldPopulation_(ctx)**
   Reads: S.cityDynamics, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.worldEvents
@@ -3465,6 +3477,12 @@
 
 - **safeColRead_(row, colIndex, defaultValue)**
 
+### sheetCache.test.js
+- **check(name, cond)**
+
+- **mkSS(opts)**
+  Sheets: LifeHistory_Log, World_Population
+
 ### sheetNames.js
 - **getSheet_(ss, sheetNameConstant)**
 
@@ -3547,5 +3565,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 183
-**Functions mapped:** 1187
+**Files scanned:** 185
+**Functions mapped:** 1193

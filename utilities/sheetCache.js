@@ -189,6 +189,23 @@ function createSheetCache_(ss) {
   function flush() {
     var stats = { writes: 0, appends: 0, errors: [] };
 
+    // engine.136 — every write below used to run bare. One Google transient on
+    // one cell threw straight out of flush(), abandoning every remaining write
+    // in the queue, for every remaining sheet, with nothing in stats.errors:
+    // `errors` only ever carried "sheet not found". Bench C110 (2026-08-30)
+    // lost World_Config.cycleCount that way while the rest of the world
+    // advanced. Each write is now isolated — a failure records the cell and the
+    // queue keeps draining, so a single bad cell costs one cell.
+    function attempt_(label, fn) {
+      try {
+        fn();
+        return true;
+      } catch (e) {
+        stats.errors.push(label + ': ' + e.message);
+        return false;
+      }
+    }
+
     // Process cell/row writes
     for (var sheetName in writeQueue) {
       var sheet = getSheet(sheetName);
@@ -218,8 +235,9 @@ function createSheetCache_(ss) {
       // Execute full row writes first
       for (var row in fullRowWrites) {
         var values = fullRowWrites[row];
-        sheet.getRange(Number(row), 1, 1, values.length).setValues([values]);
-        stats.writes++;
+        if (attempt_(sheetName + '!row ' + row + ' (' + values.length + ' cols)', (function(sh, r, v) {
+          return function() { sh.getRange(Number(r), 1, 1, v.length).setValues([v]); };
+        })(sheet, row, values))) stats.writes++;
       }
 
       // Execute single cell writes (grouped by row when possible)
@@ -233,13 +251,17 @@ function createSheetCache_(ss) {
           for (var c = cols[0]; c <= cols[cols.length - 1]; c++) {
             rowData.push(cells[c] !== undefined ? cells[c] : '');
           }
-          sheet.getRange(Number(row), cols[0], 1, rowData.length).setValues([rowData]);
-          stats.writes++;
+          if (attempt_(sheetName + '!R' + row + 'C' + cols[0] + '-C' + cols[cols.length - 1],
+            (function(sh, r, c0, d) {
+              return function() { sh.getRange(Number(r), c0, 1, d.length).setValues([d]); };
+            })(sheet, row, cols[0], rowData))) stats.writes++;
         } else {
           // Write cells individually
           for (var c = 0; c < cols.length; c++) {
-            sheet.getRange(Number(row), cols[c]).setValue(cells[cols[c]]);
-            stats.writes++;
+            if (attempt_(sheetName + '!R' + row + 'C' + cols[c],
+              (function(sh, r, col, val) {
+                return function() { sh.getRange(Number(r), col).setValue(val); };
+              })(sheet, row, cols[c], cells[cols[c]]))) stats.writes++;
           }
         }
       }
@@ -269,10 +291,14 @@ function createSheetCache_(ss) {
         return padded;
       });
 
-      // Batch append
-      var startRow = sheet.getLastRow() + 1;
-      sheet.getRange(startRow, 1, paddedRows.length, maxCols).setValues(paddedRows);
-      stats.appends += rows.length;
+      // Batch append. engine.136 — isolated like the cell writes above: an
+      // append that throws must not abandon the append queues behind it.
+      if (attempt_(sheetName + ' append (' + paddedRows.length + ' rows)',
+        (function(sh, pr, mc) {
+          return function() {
+            sh.getRange(sh.getLastRow() + 1, 1, pr.length, mc).setValues(pr);
+          };
+        })(sheet, paddedRows, maxCols))) stats.appends += rows.length;
     }
 
     // Clear queues

@@ -587,11 +587,19 @@ function runWorldCycle() {
         var flushStats = ctx.cache.flush();
         Logger.log('Cache flush: ' + flushStats.writes + ' writes, ' + flushStats.appends + ' appends');
         if (flushStats.errors && flushStats.errors.length > 0) {
-          Logger.log('Cache flush errors: ' + flushStats.errors.join(', '));
+          // engine.136 — a PARTIAL flush is as silent as a failed one: these
+          // rows were queued all cycle and never landed. Logger-only before.
+          logEngineError_(ctx, 'Phase11-CacheFlushPartial', new Error(
+            flushStats.errors.length + ' queued write(s) did not land: ' + flushStats.errors.join(', ')));
         }
       } catch (flushErr) {
-        Logger.log('Cache flush failed: ' + flushErr.message);
+        // engine.136 — was Logger-only. Every queued write of the cycle is lost
+        // here, cycleCount included; that has to reach Engine_Errors.
+        logEngineError_(ctx, 'FATAL-CacheFlush', flushErr);
       }
+      // engine.136 — runs after either branch: a flush can also report success
+      // and still not have moved the cell (C110's transient took the response too).
+      verifyCycleCountPersisted_(ctx);
     }
 
     // Log cycle completion summary. G-RC6 (engine.19, S226): report
@@ -675,6 +683,104 @@ function advanceWorldTime_(ctx) {
   }
 
   ctx.config.cycleCount = cycle;
+}
+
+
+/**
+ * engine.136 — read-back guard on the one write the whole cycle's identity
+ * rides on.
+ *
+ * advanceWorldTime_ QUEUES World_Config.cycleCount in Phase 1; the value does
+ * not reach the sheet until the end-of-cycle ctx.cache.flush(). A flush that
+ * threw used to be Logger-only, so the cycle reported success while the sheet
+ * still held the previous cycleCount and every other tab held the new one —
+ * bench C110 (2026-08-30): a Google transient ate the flush and the response,
+ * leaving World_Config at 109 against LifeHistory_Log / Carry_Forward_Store /
+ * World_Population at 110. Nothing in Engine_Errors said so.
+ *
+ * Reads the cell back off the spreadsheet, never the cache — the cache is what
+ * just failed, and its queue is cleared by the flush either way.
+ *
+ * Never throws: a failure here must not become the thing that breaks close.
+ */
+function verifyCycleCountPersisted_(ctx) {
+  if (!ctx || !ctx.ss || !ctx.summary) return;
+  if (ctx.mode && (ctx.mode.dryRun || ctx.mode.replay)) return;
+
+  var expected = Number(ctx.summary.cycleId);
+  if (!isFinite(expected) || expected <= 0) return;
+
+  try {
+    var sheet = ctx.ss.getSheetByName('World_Config');
+    if (!sheet) return;
+    var values = sheet.getDataRange().getValues();
+    for (var r = 1; r < values.length; r++) {
+      if ((values[r][0] || '').toString().trim() !== 'cycleCount') continue;
+      var actual = Number(values[r][1]);
+      if (actual === expected) return;
+
+      // The stall signature, and the only shape we repair: the sheet still
+      // holds the cycle we just advanced FROM. Anything else -- a jump, a
+      // manual edit, a value ahead of us -- is someone else's intent and gets
+      // reported, never overwritten.
+      if (actual !== expected - 1) {
+        logEngineError_(ctx, 'FATAL-CycleCountUnexpected', new Error(
+          'World_Config.cycleCount read back as ' + values[r][1] + ' after flush, expected ' +
+          expected + '. Not the stall signature (' + (expected - 1) + '), so it was NOT ' +
+          'repaired automatically. Reconcile the cell by hand before the next fire.'));
+        return;
+      }
+
+      repairCycleCount_(ctx, sheet, r + 1, expected, values[r][1]);
+      return;
+    }
+  } catch (e) {
+    Logger.log('cycleCount read-back failed: ' + e.message);
+  }
+}
+
+
+/**
+ * engine.136 -- writes the cycle counter the flush failed to land, direct.
+ *
+ * Error-path carve-out, same class and same reasoning as logEngineError_'s
+ * Engine_Errors append: the deferred channel is the thing that just failed, so
+ * a queued repair would be swallowed by the same fault. One cell, one shape,
+ * guarded by the caller. Listed in docs/engine/SHEETS_MANIFEST.md section 9.
+ *
+ * Why repair rather than only report: nothing guards a re-run. The next fire
+ * reads cycleCount off this cell, so a stall at N-1 sends the engine through
+ * cycle N a second time over a world whose every other tab already lived it --
+ * doubled life-history rows, doubled ageing, doubled employment transitions.
+ * Detection alone only helps if a human reads Engine_Errors between fires, and
+ * the whole direction of this build is that nobody has to.
+ *
+ * Logs either way. An auto-repair nobody can see is its own silent failure.
+ */
+function repairCycleCount_(ctx, sheet, rowNum, expected, sawValue) {
+  var repaired = false;
+  var readBack = null;
+
+  try {
+    sheet.getRange(rowNum, 2).setValue(expected);
+    readBack = Number(sheet.getRange(rowNum, 2).getValue());
+    repaired = (readBack === expected);
+  } catch (e) {
+    Logger.log('cycleCount repair write failed: ' + e.message);
+  }
+
+  if (repaired) {
+    logEngineError_(ctx, 'Phase11-CycleCountRepaired', new Error(
+      'World_Config.cycleCount read back as ' + sawValue + ' after flush, expected ' +
+      expected + ' -- the flush lost it. Rewritten to ' + expected + ' and verified. ' +
+      'The cycle data itself landed through Phase 10; only the counter stalled.'));
+  } else {
+    logEngineError_(ctx, 'FATAL-CycleCountRepairFailed', new Error(
+      'World_Config.cycleCount is ' + sawValue + ', expected ' + expected +
+      ', and the repair write did not take (read back ' + readBack + '). The next ' +
+      'fire will re-run cycle ' + expected + ' over a world already past it. ' +
+      'Set the cell to ' + expected + ' by hand before firing.'));
+  }
 }
 
 
@@ -2165,9 +2271,18 @@ function runCyclePhases_(ctx) {
   // Flush cache
   if (ctx.cache) {
     try {
-      ctx.cache.flush();
+      // engine.136 — dry-run / replay path (runDryRunCycle, replayCycle). No
+      // cycleCount read-back here: dry-run never queues the bump, and a replay
+      // is not a live advance. Lost writes still have to be raised, and since
+      // flush() now isolates each write they arrive in stats, not as a throw —
+      // checking only the catch would report nothing.
+      var flushStats = ctx.cache.flush();
+      if (flushStats && flushStats.errors && flushStats.errors.length > 0) {
+        logEngineError_(ctx, 'Phase11-CacheFlushPartial', new Error(
+          flushStats.errors.length + ' queued write(s) did not land: ' + flushStats.errors.join(', ')));
+      }
     } catch (e) {
-      Logger.log('Cache flush error: ' + e.message);
+      logEngineError_(ctx, 'Phase11-CacheFlush', e);
     }
   }
 }

@@ -17,7 +17,7 @@
  *      known_gaps.json keyed by enclosing function name.
  *   2  Direct sheet writes outside Phase 10 — WRITE-ONLY patterns
  *      (.setValue(/.setValues(/.appendRow() — G-PM4 fix: getRange().getValues()
- *      reads dropped), diffed against the engine.md exception filename set.
+ *      reads dropped), diffed against the SHEETS_MANIFEST.md §9 carve-out set.
  *   5  Neighborhood literals — known-stray detection vs canon-12 + Map-17 +
  *      child-mapping, with acknowledged legacy literals from known_gaps.json.
  *
@@ -48,7 +48,14 @@ const PHASE_DIRS = [
 ];
 const SCAN_DIRS = [...PHASE_DIRS, 'utilities']; // Math.random + neighborhood scan scope
 const KNOWN_GAPS_PATH = path.join(__dirname, '..', '.claude', 'skills', 'pre-mortem', 'known_gaps.json');
-const ENGINE_RULES_PATH = path.join(__dirname, '..', '.claude', 'rules', 'engine.md');
+// Scan 2's carve-out source. This pointed at the engine rules boot doc, which
+// USED to inline the direct-write exception table; that doc was later trimmed to
+// rules-only and now just points at the manifest. The scraper kept reading it and
+// kept finding zero filenames, so the exception set was EMPTY and every direct
+// writer in phases 1-9 came back as a warning — 41 files of undifferentiated
+// noise that trained the reader to scroll past scan 2 entirely. Exactly the
+// G-PM1 failure the skill warns about, occurring in the gate itself. 2026-08-31.
+const CARVE_OUT_PATH = path.join(__dirname, '..', 'docs', 'engine', 'SHEETS_MANIFEST.md');
 
 // §5 canonical neighborhoods — single source of truth in lib/canonNeighborhoods (S247;
 // was inline here + a divergent stale copy in auditSimulationLedger; centralized to kill
@@ -152,12 +159,17 @@ function scanMathRandom(gaps) {
 function engineMdExceptionFiles() {
   const set = new Set();
   let text = '';
-  try { text = fs.readFileSync(ENGINE_RULES_PATH, 'utf8'); } catch (e) { return set; }
-  // allow dots in the name so version'd filenames (updateStorylineStatusv1.2.js)
-  // extract whole, not as the trailing "2.js" fragment.
-  const re = /[`']([A-Za-z0-9_.]+\.js)[`']/g;
+  try { text = fs.readFileSync(CARVE_OUT_PATH, 'utf8'); } catch (e) { return set; }
+  // Only §9 is the carve-out table; the tab inventory above it names plenty of
+  // scripts that are NOT authorized direct writers.
+  const start = text.indexOf('## 9. Direct-write carve-outs');
+  if (start === -1) return set;   // empty set -> everything flags loudly, never a false all-clear
+  text = text.slice(start);
+  // Allow / and - so repo-relative paths extract whole; compared by basename
+  // because scanSheetWrites keys on basename.
+  const re = /[`']([A-Za-z0-9_./-]+\.js)[`']/g;
   let m;
-  while ((m = re.exec(text)) !== null) set.add(m[1]);
+  while ((m = re.exec(text)) !== null) set.add(path.basename(m[1]));
   return set;
 }
 
@@ -260,7 +272,7 @@ function main() {
   out.push('WARNINGS (acknowledged off-path or doc drift):');
   const warnings = [];
   mr.warning.forEach(w => warnings.push(w));
-  for (const [file, lns] of sw.entries()) warnings.push(`${file}:${lns.join(',')} — write pattern off the engine.md exception list (verify: new undocumented writer OR engine.md doc drift)`);
+  for (const [file, lns] of sw.entries()) warnings.push(`${file}:${lns.join(',')} — direct write NOT in SHEETS_MANIFEST.md §9 (verify: new undocumented writer OR manifest doc drift)`);
   nh.acknowledged.forEach(w => warnings.push(w + ' (acknowledged)'));
   nh.newStray.forEach(w => warnings.push(w + ' (NEW stray — not in known_gaps.json; investigate)'));
   if (warnings.length === 0) out.push('  none');
@@ -269,7 +281,7 @@ function main() {
 
   out.push('CLEAN:');
   out.push(`  - Math.random cycle-path: ${mr.critical.length} unacknowledged hit(s); ${mr.warning.length} acknowledged off-path; ${mr.clean.length} defensive-throw`);
-  out.push(`  - Sheet writes outside Phase 10: ${sw.size} file(s) off the engine.md exception list`);
+  out.push(`  - Sheet writes outside Phase 10: ${sw.size} file(s) with direct writes not carved out in SHEETS_MANIFEST.md §9`);
   out.push(`  - Neighborhoods: ${nh.newStray.length} new stray, ${nh.acknowledged.length} acknowledged legacy`);
   out.push('');
 

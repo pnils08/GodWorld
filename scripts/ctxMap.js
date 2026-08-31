@@ -247,7 +247,68 @@ if (phantom.length > 0) {
   }
 }
 
+// ── ORDERING (pre-mortem §3) ──────────────────────────────────────────────
+// The map above answers "is this field connected at all". It does NOT answer
+// the question the pre-mortem skill calls its most important check: is a field
+// READ in a phase that runs BEFORE the phase that writes it. That was left as
+// judgment-based (G-PM5) and so, in practice, was rarely done. It is
+// deterministic — phase dir number is the execution order — so it belongs here.
+//
+// Two exclusions, both necessary or the output is noise:
+//   * phase01-config/godWorldEngine2.js is the ORCHESTRATOR, not a phase-1
+//     participant. Its reads happen at cycle close, after every phase has run.
+//   * a file reading a field it also writes is doing internal bookkeeping,
+//     not taking a cross-phase dependency.
+//
+// A defaulted read (`S.foo || 'stable'`, `S.foo ? x : y`) still gets reported,
+// but flagged DEFAULTED: it will not crash, it will quietly use the fallback
+// instead of real data. That distinction is the whole point — an undefaulted
+// read-before-write is a live defect, a defaulted one is a silent degradation
+// worth knowing about but not a cycle blocker.
+function phaseNum(f) {
+  const m = f.match(/phase(\d+)/);
+  return m ? parseInt(m[1], 10) : null;
+}
+const ORCHESTRATOR = 'phase01-config/godWorldEngine2.js';
+function isDefaulted(code) {
+  return /\|\||\?|typeof\s|&&/.test(code || '');
+}
+
+const ordering = [];
+for (const field of Object.keys(writes)) {
+  const ws = writes[field].map(w => ({ ...w, ph: phaseNum(w.file) })).filter(w => w.ph !== null);
+  if (!ws.length) continue;
+  const minW = Math.min(...ws.map(w => w.ph));
+  const writerFiles = new Set(ws.map(w => w.file));
+  const early = (reads[field] || [])
+    .map(r => ({ ...r, ph: phaseNum(r.file) }))
+    .filter(r => r.ph !== null && r.ph < minW)
+    .filter(r => !r.file.endsWith(ORCHESTRATOR) && !r.file.includes('godWorldEngine2.js'))
+    .filter(r => !writerFiles.has(r.file));
+  if (early.length) ordering.push({ field, minW, writerFiles: [...writerFiles], early });
+}
+
+const undefaulted = ordering.filter(o => o.early.some(r => !isDefaulted(r.code)));
+
+console.log();
+console.log(`ORDERING — READ BEFORE WRITE (${ordering.length} field(s); ${undefaulted.length} with an UNDEFAULTED read):`);
+console.log('-'.repeat(90));
+if (!ordering.length) {
+  console.log('  none — every field is written no later than the earliest phase that reads it.');
+} else {
+  for (const o of ordering.sort((a, b) => a.field.localeCompare(b.field))) {
+    const bad = o.early.filter(r => !isDefaulted(r.code));
+    console.log(`  ${o.field} — written P${String(o.minW).padStart(2, '0')} (${o.writerFiles.map(shortFile).join(', ')})` +
+      (bad.length ? '   ** ' + bad.length + ' UNDEFAULTED **' : '   [all defaulted]'));
+    for (const r of o.early.slice(0, 3)) {
+      console.log(`      read P${String(r.ph).padStart(2, '0')} ${r.file}:${r.line}${isDefaulted(r.code) ? '' : '   <-- no fallback'}`);
+    }
+    if (o.early.length > 3) console.log(`      ... +${o.early.length - 3} more read site(s)`);
+  }
+}
+
 console.log();
 console.log('='.repeat(90));
 console.log(`Connected: ${connected.length} | Orphaned: ${orphaned.length} | Phantom: ${phantom.length}`);
+console.log(`Read-before-write: ${ordering.length} field(s), ${undefaulted.length} undefaulted`);
 console.log(`Files scanned: ${phaseFiles.length}`);

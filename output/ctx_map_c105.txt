@@ -1,0 +1,427 @@
+CTX.SUMMARY DEPENDENCY MAP — 2026-08-31
+==========================================================================================
+
+CONNECTED (156 fields):
+FIELD                            WRITER                              READERS         STATUS
+------------------------------------------------------------------------------------------
+absoluteCycle                    advanceSimulationCalendar (P01)     [34 files]      CONNECTED
+activeCooldowns                  applyDomainCooldowns (P08)          finalizeCycleState CONNECTED
+allianceBenefits                 bondEngine (P05)                    runRelationshipEngine CONNECTED
+auditIssues                      generateCrisisBuckets (P03)         godWorldEngine2 CONNECTED
+bankRate                         generationalWealthEngine (P05)      finalizeCycleState CONNECTED
+biasIntents                      generateCitizensEvents (P05)        compressLifeHistory CONNECTED
+bondSummary                      seedRelationBondsv1 (P05)           mediaRoomBriefingGenerator, buildCyclePacket CONNECTED
+careerSignals                    runCareerEngine (P05)               [3 files]       CONNECTED
+chaosCarsEvents                  chaosCarsEngine (P04)               applyStorySeeds CONNECTED
+chaosNeighborhoodFold            chaosCarsEngine (P04)               v3NeighborhoodWriter CONNECTED
+chicagoCitizens                  generateChicagoCitizensv1 (P05)     v3ChicagoWriter CONNECTED
+chicagoFeed                      chicagoSatellite (P08)              [3 files]       CONNECTED
+citizenEvents                    generateCitizensEvents (P05)        bondEngine, economicRippleEngine CONNECTED
+cityDynamics                     applyCityDynamics (P02)             [58 files]      CONNECTED
+cityEventDetails                 buildCityEvents (P04)               [3 files]       CONNECTED
+cityEvents                       buildCityEvents (P04)               [3 files]       CONNECTED
+civicLoad                        applyCivicLoadIndicator (P06)       [22 files]      CONNECTED
+civicLoadFactors                 applyCivicLoadIndicator (P06)       buildCyclePacket CONNECTED
+civicLoadScore                   applyCivicLoadIndicator (P06)       [6 files]       CONNECTED
+civicVoiceSentiment              applyInitiativeImplementationEffects (P02) applyEditionCoverageEffects CONNECTED
+clusterDefinitions               applyCityDynamics (P02)             updateCrimeMetrics CONNECTED
+commuteFlows                     commuteFlowEngine (P02)             updateTransitMetrics CONNECTED
+commuteInbound                   commuteFlowEngine (P02)             applyCityDynamics CONNECTED
+compressedLine                   applyCompressionDigestSummary (P09) buildCyclePacket CONNECTED
+contentLedger                    loadEventContentLedger (P02)        generateCitizensEvents CONNECTED
+contractSeeds                    buildContractSeeds (P07)            buildContractSeeds.test, saveV3Seeds CONNECTED
+creationDayAnniversary           advanceSimulationCalendar (P01)     [3 files]       CONNECTED
+crimeMetrics                     updateCrimeMetrics (P03)            [11 files]      CONNECTED
+crisisArcsActive                 generateCrisisBuckets (P03)         finalizeCycleState CONNECTED
+crowdHotspots                    cityEveningSystems (P07)            finalizeCycleState, buildCyclePacket CONNECTED
+crowdMap                         cityEveningSystems (P07)            finalizeCycleState, buildCyclePacket CONNECTED
+culturalEntityCreates            culturalLedger (P07)                mediaRoomBriefingGenerator CONNECTED
+culturalEntityUpdates            culturalLedger (P07)                mediaRoomBriefingGenerator CONNECTED
+cycleActiveCitizens              generateCitizensEvents (P05)        computeRecurringCitizens, exportCycleArtifacts CONNECTED
+cycleId                          godWorldEngine2.cycleCount.test (P01) [76 files]      CONNECTED
+cycleInMonth                     advanceSimulationCalendar (P01)     [3 files]       CONNECTED
+cycleOfYear                      advanceSimulationCalendar (P01)     [9 files]       CONNECTED
+cycleRef                         advanceSimulationCalendar (P01)     [6 files]       CONNECTED
+cycleSummary                     applyCompressionDigestSummary (P09) buildCyclePacket CONNECTED
+cycleWeight                      applyCycleWeight (P09)              [10 files]      CONNECTED
+cycleWeightReason                applyCycleWeight (P09)              [6 files]       CONNECTED
+cycleWeightScore                 applyCycleWeight (P09)              applyCompressionDigestSummary, finalizeCycleState CONNECTED
+demographicDrift                 deriveDemographicDrift (P03)        [8 files]       CONNECTED
+demographicDriftFactors          deriveDemographicDrift (P03)        updateNeighborhoodDemographics CONNECTED
+demographicShifts                updateNeighborhoodDemographics (P03) [3 files]       CONNECTED
+domainCooldowns                  applyEditionCoverageEffects (P02)   applyCompressionDigestSummary CONNECTED
+domainPresence                   domainTracker (P07)                 [12 files]      CONNECTED
+dominantDomain                   domainTracker (P07)                 [3 files]       CONNECTED
+economicMood                     economicRippleEngine (P06)          [41 files]      CONNECTED
+economicNarrative                economicRippleEngine (P06)          mediaRoomBriefingGenerator CONNECTED
+economicRipples                  loadPreviousEvening (P01)           [5 files]       CONNECTED
+economicSummary                  economicRippleEngine (P06)          mediaRoomBriefingGenerator, buildCyclePacket CONNECTED
+editionCoverageTriggers          applyEditionCoverageEffects (P02)   applyStorySeeds CONNECTED
+editionDomainBalance             applyEditionCoverageEffects (P02)   updateCivicApprovalRatings CONNECTED
+editionNeighborhoodEffects       applyEditionCoverageEffects (P02)   applyCityDynamics CONNECTED
+editionSentimentBoost            applyEditionCoverageEffects (P02)   applyCityDynamics CONNECTED
+engineErrorCount                 godWorldEngine2 (P01)               godWorldEngine2.cycleCount.test CONNECTED
+engineEvents                     filterNoiseEvents (P06)             applyNamedCitizenSpotlight, prioritizeEvents CONNECTED
+eveningFood                      buildEveningFood (P07)              [3 files]       CONNECTED
+eveningMedia                     buildEveningMedia (P07)             [3 files]       CONNECTED
+eveningSafety                    cityEveningSystems (P07)            finalizeCycleState, buildCyclePacket CONNECTED
+eveningSports                    sportsStreaming (P07)               [5 files]       CONNECTED
+eveningTraffic                   cityEveningSystems (P07)            finalizeCycleState, buildCyclePacket CONNECTED
+eventArcs                        generateCrisisBuckets (P03)         [26 files]      CONNECTED
+eventSuppression                 applyCycleRecovery (P08)            worldEventsEngine CONNECTED
+eventsGenerated                  generateCrisisSpikes (P03)          [6 files]       CONNECTED
+failedInitiatives                civicInitiativeEngine (P05)         storyHook       CONNECTED
+faithEvents                      faithEventsEngine (P04)             generateCitizensEvents CONNECTED
+faithExposures                   generateCitizensEvents (P05)        bondEngine      CONNECTED
+famousPeople                     buildEveningFamous (P07)            [3 files]       CONNECTED
+famousSightings                  buildEveningFamous (P07)            finalizeCycleState CONNECTED
+generationalEvents               generationalEventsEngine (P04)      [3 files]       CONNECTED
+generationalSummary              generationalEventsEngine (P04)      buildCyclePacket CONNECTED
+godWorldYear                     advanceSimulationCalendar (P01)     [5 files]       CONNECTED
+grantsThisCycle                  civicInitiativeEngine (P05)         [3 files]       CONNECTED
+heritage                         generationalWealthEngine (P05)      educationCareerEngine CONNECTED
+holiday                          advanceSimulationCalendar (P01)     [70 files]      CONNECTED
+holidayNeighborhood              advanceSimulationCalendar (P01)     [8 files]       CONNECTED
+holidayPriority                  advanceSimulationCalendar (P01)     [64 files]      CONNECTED
+hoodEmployerDepth                commuteFlowEngine (P02)             updateNeighborhoodDemographics CONNECTED
+hospitalEvents                   generationalEventsEngine (P04)      finalizeCycleState, buildCyclePacket CONNECTED
+initiativeEvents                 civicInitiativeEngine (P05)         [4 files]       CONNECTED
+initiativeHealthRelief           applyInitiativeImplementationEffects (P02) updateNeighborhoodDemographics CONNECTED
+initiativeImplementationEffects  applyInitiativeImplementationEffects (P02) applyCityDynamics CONNECTED
+initiativeRipples                loadPreviousEvening (P01)           storyHook, finalizeCycleState CONNECTED
+isCreationDay                    advanceSimulationCalendar (P01)     [64 files]      CONNECTED
+isFirstFriday                    advanceSimulationCalendar (P01)     [64 files]      CONNECTED
+isWeekend                        advanceSimulationCalendar (P01)     applySeasonWeights CONNECTED
+mediaEffects                     mediaFeedbackEngine (P07)           [8 files]       CONNECTED
+mediaSummary                     mediaFeedbackEngine (P07)           buildCyclePacket CONNECTED
+migrationBrief                   applyMigrationDrift (P06)           buildCyclePacket CONNECTED
+migrationDrift                   applyMigrationDrift (P06)           [11 files]      CONNECTED
+migrationDriftFactors            applyMigrationDrift (P06)           finalizeCycleState CONNECTED
+namedSpotlights                  applyNamedCitizenSpotlight (P05)    [5 files]       CONNECTED
+neighborhoodDemographics         applyCityDynamics (P02)             [4 files]       CONNECTED
+neighborhoodDynamics             applyCityDynamics (P02)             [4 files]       CONNECTED
+neighborhoodEconomies            economicRippleEngine (P06)          [3 files]       CONNECTED
+neighborhoodMigration            applyMigrationDrift (P06)           buildCyclePacket CONNECTED
+neighborhoodState                loadNeighborhoodState (P02)         [8 files]       CONNECTED
+neighborhoodTrajectory           neighborhoodTrajectoryEngine (P05)  migrationTrackingEngine CONNECTED
+neighborhoodWeather              applyWeatherModel (P02)             [3 files]       CONNECTED
+newBonds                         v3preLoader (P08)                   applyCompressionDigestSummary CONNECTED
+nightlife                        buildNightLife (P07)                [4 files]       CONNECTED
+nightlifeVolume                  cityEveningSystems (P07)            [7 files]       CONNECTED
+overloadScore                    applyCycleRecovery (P08)            applyCompressionDigestSummary, finalizeCycleState CONNECTED
+patternFlag                      applyPatternDetection (P06)         [18 files]      CONNECTED
+pendingCascades                  generationalEventsEngine (P04)      compressLifeHistory CONNECTED
+pendingConfrontations            bondEngine (P05)                    mediaRoomBriefingGenerator CONNECTED
+positiveInitiatives              civicInitiativeEngine (P05)         storyHook       CONNECTED
+previousCycleState               loadPreviousEvening (P01)           [9 files]       CONNECTED
+previousEvening                  loadPreviousEvening (P01)           generateGenericCitizenMicroEvent, generateCitizensEvents CONNECTED
+promotions                       checkForPromotions (P05)            mediaRoomBriefingGenerator CONNECTED
+promotionsCount                  checkForPromotions (P05)            applyCompressionDigestSummary CONNECTED
+recoveryLevel                    applyCycleRecovery (P08)            [5 files]       CONNECTED
+recurringCitizens                computeRecurringCitizens (P06)      exportCycleArtifacts CONNECTED
+relationshipBonds                generationalEventsEngine (P04)      [7 files]       CONNECTED
+rippleEvents                     rippleLedger (U)                    buildContractSeeds CONNECTED
+season                           advanceSimulationCalendar (P01)     [48 files]      CONNECTED
+seasonal                         applySeasonWeights (P02)            worldEventsEngine CONNECTED
+seasonalStorySeeds               calendarStorySeeds (P02)            applyStorySeeds CONNECTED
+shockDuration                    applyShockMonitor (P06)             buildCyclePacket CONNECTED
+shockFlag                        applyShockMonitor (P06)             [22 files]      CONNECTED
+shockReasons                     applyShockMonitor (P06)             buildCyclePacket CONNECTED
+shockScore                       applyShockMonitor (P06)             buildCyclePacket CONNECTED
+shockStartCycle                  applyShockMonitor (P06)             finalizeCycleState CONNECTED
+simMonth                         advanceSimulationCalendar (P01)     [9 files]       CONNECTED
+simYear                          advanceSimulationCalendar (P01)     [9 files]       CONNECTED
+sportsAtmosphereEnabled          applySportsSeason (P02)             [9 files]       CONNECTED
+sportsEventTriggers              applySportsSeason (P02)             mediaRoomBriefingGenerator, storyHook CONNECTED
+sportsFeedEntries                applySportsSeason (P02)             [4 files]       CONNECTED
+sportsNeighborhoodEffects        applySportsSeason (P02)             cityEveningSystems CONNECTED
+sportsSeason                     applySportsSeason (P02)             [59 files]      CONNECTED
+sportsSentimentBoost             applySportsSeason (P02)             applyCityDynamics, generateCitizensEvents CONNECTED
+sportsSource                     applySportsSeason (P02)             worldEventsEngine, applyShockMonitor CONNECTED
+sportsZones                      applySportsSeason (P02)             [4 files]       CONNECTED
+storyHooks                       generationalEventsEngine (P04)      [9 files]       CONNECTED
+storySeeds                       processArcLifeCyclev1 (P06)         [12 files]      CONNECTED
+storylineHealth                  storylineHealthEngine (P06)         mediaRoomBriefingGenerator CONNECTED
+streamingTrend                   sportsStreaming (P07)               godWorldEngine2, finalizeCycleState CONNECTED
+suppressDomains                  applyDomainCooldowns (P08)          utilityFunctions CONNECTED
+textureTriggers                  textureTriggers (P07)               [7 files]       CONNECTED
+tier1ChaosEvents                 chaosCarsEngine (P04)               applyStorySeeds, storylineWeavingEngine CONNECTED
+transitMetrics                   updateTransitMetrics (P02)          buildCyclePacket CONNECTED
+transitState                     updateTransitMetrics (P02)          [3 files]       CONNECTED
+undockedFeedEntries              loadEventContentLedger (P02)        godWorldEngine2, generateCitizensEvents CONNECTED
+undockedPilots                   loadEventContentLedger (P02)        generateCitizensEvents CONNECTED
+votesThisCycle                   civicInitiativeEngine (P05)         [4 files]       CONNECTED
+weather                          advanceSimulationCalendar (P01)     [56 files]      CONNECTED
+weatherEventPools                applyWeatherModel (P02)             runRelationshipEngine CONNECTED
+weatherEvents                    applyWeatherModel (P02)             [6 files]       CONNECTED
+weatherFrontTracking             applyWeatherModel (P02)             finalizeCycleState CONNECTED
+weatherMood                      advanceSimulationCalendar (P01)     [32 files]      CONNECTED
+weatherSummary                   applyWeatherModel (P02)             recordCycleWeather, buildCyclePacket CONNECTED
+weatherTracking                  applyWeatherModel (P02)             finalizeCycleState, recordCycleWeather CONNECTED
+worldEvents                      generateCrisisSpikes (P03)          [56 files]      CONNECTED
+worldPopulation                  godWorldEngine2 (P01)               [4 files]       CONNECTED
+
+ORPHANED WRITES (143 fields — written, no external reader):
+------------------------------------------------------------------------------------------
+  activeBonds                      v3preLoader (P08)
+  activeRippleCount                civicInitiativeEngine (P05)
+  activeRipples                    civicInitiativeEngine (P05)
+  activeSports                     applySportsSeason (P02)
+  activeStorylineCount             applyStorySeeds (P07)
+  activityObservations             applyCityDynamics (P02)
+  approvalCeilingEvents            updateCivicApprovalRatings (P05)
+  approvalChanges                  updateCivicApprovalRatings (P05)
+  approvalNeighborhoodEffects      applyCityDynamics (P02)
+  approvalTriggers                 updateCivicApprovalRatings (P05)
+  bankRateDesc                     generationalWealthEngine (P05)
+  baylightOpenings                 applySportsSeason (P02)
+  canonHoodCount                   canonNeighborhoodLoader (P01)
+  canonHoods                       canonNeighborhoodLoader (P01)
+  canonSportsPhase                 runAsUniversePipeline (P05)
+  careerChurn                      economicRippleEngine (P06)
+  careerEvents                     runCareerEngine (P05)
+  chaosBusinessFold                chaosCarsEngine (P04)
+  chaosCategoryMap                 calendarChaosWeights (P02)
+  chaosCategoryWeights             calendarChaosWeights (P02)
+  chaosFriction                    chaosCarsEngine (P04)
+  chicagoSnapshot                  v3preLoader (P08)
+  citizenEventMemory               generateCitizensEvents (P05)
+  cityDynamicsCapacity             applyCityDynamics (P02)
+  cityDynamicsLag                  applyCityDynamics (P02)
+  cityEventsCalendarContext        buildCityEvents (P04)
+  civicCampaigns                   updateCivicApprovalRatings (P05)
+  civicDemographicContext          civicInitiativeEngine (P05)
+  civicLoadCalendarFactors         applyCivicLoadIndicator (P06)
+  civicModeEventDetails            generateCivicModeEvents (P05)
+  civicModeEvents                  generateCivicModeEvents (P05)
+  civicRoleEvents                  runCivicRoleEngine (P05)
+  clusterDynamics                  applyCityDynamics (P02)
+  commuteFlowStats                 commuteFlowEngine (P02)
+  conductEvents                    runConductEngine (P05)
+  cooldownCalendarContext          applyDomainCooldowns (P08)
+  creationDayActive                applySeasonWeights (P02)
+  crimeLag                         updateCrimeMetrics (P03)
+  culturalRegistry                 culturalLedger (P07)
+  currentCycleState                applyShockMonitor (P06)
+  cycleAuditIssues                 applyCivicLoadIndicator (P06)
+  cycleFinalState                  finalizeCycleState (P09)
+  cycleFinalizedAt                 finalizeCycleState (P09)
+  cyclePacket                      buildCyclePacket (P10)
+  cycleWeightCalendarFactors       applyCycleWeight (P09)
+  demographicDriftSummary          deriveDemographicDrift (P03)
+  demographicShiftsCount           updateNeighborhoodDemographics (P03)
+  derivedEmploymentRate            economicRippleEngine (P06)
+  domainCalendarContext            domainTracker (P07)
+  domains                          v3preLoader (P08)
+  dormantStorylineCount            storyHook (P07)
+  economicMoodDesc                 economicRippleEngine (P06)
+  editionCoverageEffects           applyEditionCoverageEffects (P02)
+  educationEvents                  runEducationEngine (P05)
+  electionResults                  runCivicElectionsv1 (P05)
+  eveningSnapshot                  finalizeCycleState (P09)
+  eveningSportsCalendarContext     sportsStreaming (P07)
+  eveningSportsDetails             sportsStreaming (P07)
+  eveningSystemsCalendarContext    cityEveningSystems (P07)
+  eventPrioritization              prioritizeEvents (P06)
+  faithJoins                       bondEngine (P05)
+  faithStorySignals                godWorldEngine2 (P01)
+  famousSightingsContext           buildEveningFamous (P07)
+  gameModeMicroEventDetails        generateGameModeMicroEvents (P04)
+  gameModeMicroEvents              generateGameModeMicroEvents (P04)
+  genericCitizensDistribution      generateGenericCitizens (P05)
+  genericCitizensGenerated         generateGenericCitizens (P05)
+  holidayDetails                   advanceSimulationCalendar (P01)
+  homesPurchasedByLine             generationalWealthEngine (P05)
+  hookSuppression                  applyCycleRecovery (P08)
+  hospitalCensus                   buildCyclePacket (P10)
+  hospitalTalkback                 applyDemographicDrift (P03)
+  householdEvents                  runHouseholdEngine (P05)
+  householdFormation               householdFormationEngine (P05)
+  householdMoments                 generateCitizensEvents (P05)
+  initiativeNeighborhoodEffects    applyInitiativeImplementationEffects (P02)
+  intakeProcessed                  godWorldEngine2 (P01)
+  lifeHistoryCompression           compressLifeHistory (U)
+  mediaBriefing                    mediaRoomBriefingGenerator (P07)
+  mediaModeEventDetails            generateMediaModeEvents (P05)
+  mediaModeEvents                  generateMediaModeEvents (P05)
+  mediaPacket                      buildMediaPacket (P07)
+  microEvents                      generateGenericCitizenMicroEvent (P04)
+  migrationClamps                  applyDemographicDrift (P03)
+  migrationEconomicLink            applyMigrationDrift (P06)
+  monthName                        advanceSimulationCalendar (P01)
+  neighborhoodAssignments          runNeighborhoodEngine (P05)
+  neighborhoodDriftEvents          runNeighborhoodEngine (P05)
+  neighborhoodEconomyFeedback      applyMigrationDrift (P06)
+  neighborhoodEmploymentWeights    updateNeighborhoodDemographics (P03)
+  neighborhoodIllnessWeights       updateNeighborhoodDemographics (P03)
+  neighborhoodPresence             v3preLoader (P08)
+  neighborhoodStateCount           loadNeighborhoodState (P02)
+  newCitizens                      v3preLoader (P08)
+  newGenericCitizens               generateGenericCitizens (P05)
+  nightShiftLoad                   cityEveningSystems (P07)
+  noiseFilterStats                 filterNoiseEvents (P06)
+  officeDepartures                 updateCivicApprovalRatings (P05)
+  patternCalendarContext           applyPatternDetection (P06)
+  phaseTimings                     godWorldEngine2 (P01)
+  postCareerEvents                 runAsUniversePipeline (P05)
+  previousCityDynamics             applyCityDynamics (P02)
+  previousClusterDynamics          applyCityDynamics (P02)
+  previousCycleAuditIssues         applyCivicLoadIndicator (P06)
+  previousNeighborhoodDynamics     applyCityDynamics (P02)
+  previousSeason                   applyWeatherModel (P02)
+  recoveryCalendarContext          applyCycleRecovery (P08)
+  recoveryDuration                 applyCycleRecovery (P08)
+  recoveryMode                     applyCycleRecovery (P08)
+  recoveryStartCycle               applyCycleRecovery (P08)
+  recoveryState                    applyCycleRecovery (P08)
+  recoveryThresholds               applyCycleRecovery (P08)
+  recoveryWindow                   applyCycleRecovery (P08)
+  relocationPressureDeltas         neighborhoodTrajectoryEngine (P05)
+  resetDynamicsMomentum            applyCityDynamics (P02)
+  rngState                         applyMigrationDrift (P06)
+  shockCalendarContext             applyShockMonitor (P06)
+  simDay                           advanceSimulationCalendar (P01)
+  sportsFeedSeasonType             applySportsSeason (P02)
+  sportsSeasonByTeam               applySportsSeason (P02)
+  sportsSeasonChicago              applySportsSeason (P02)
+  sportsSeasonOakland              applySportsSeason (P02)
+  spotlightStats                   applyNamedCitizenSpotlight (P05)
+  storySeedSignals                 applyCityDynamics (P02)
+  storySeedsUI                     applyStorySeeds (P07)
+  storylineWeaving                 storylineWeavingEngine (P07)
+  suppressEvents                   applyCycleRecovery (P08)
+  suppressHooks                    applyCycleRecovery (P08)
+  suppressTextures                 applyCycleRecovery (P08)
+  templateCooldowns                generateCitizensEvents (P05)
+  textureCalendarContext           textureTriggers (P07)
+  textureSuppression               applyCycleRecovery (P08)
+  textures                         v3preLoader (P08)
+  tierDecay                        processAdvancementIntake (P05)
+  transitStorySignals              godWorldEngine2 (P01)
+  v3CalendarContext                v3Integration (P08)
+  v3IntegrationComplete            v3Integration (P08)
+  v3ModulesRan                     v3Integration (P08)
+  validationReport                 godWorldEngine2 (P01)
+  weatherImpact                    cityEveningSystems (P07)
+  weatherType                      cityEveningSystems (P07)
+  worldEventsCalendarContext       worldEventsEngine (P04)
+  youthEvents                      runYouthEngine (P05)
+
+PHANTOM READS (37 fields — read but never written):
+------------------------------------------------------------------------------------------
+  advancementIntake                mediaRoomBriefingGenerator (P07)
+  arcLifecycleResults              mediaRoomBriefingGenerator (P07)
+  chicago                          v3ChicagoWriter (P08)
+  citizenBonds                     storyHook (P07)
+  citizensGenerated                applyCompressionDigestSummary (P09)
+  citizensUpdated                  godWorldEngine2 (P01)
+  cityCapacity                     applyCityDynamics (P02)
+  clusterDefs                      updateCrimeMetrics (P03)
+  crimeByNeighborhood              applyCityDynamics (P02)
+  crimeEvents                      applyCityDynamics (P02)
+  crimeSpikes                      applyCityDynamics (P02)
+  crisisSpikes                     economicRippleEngine (P06)
+  cycle                            advanceSimulationCalendar (P01)
+  cycleCount                       eventArcEngine (P04)
+  employmentRate                   mediaRoomBriefingGenerator (P07)
+  enforcement                      updateCrimeMetrics (P03)
+  frequentCitizens                 exportCycleArtifacts (U)
+  healthCrisis                     prePublicationValidation (P06)
+  hookLifecycle                    mediaRoomBriefingGenerator (P07)
+  illnessRate                      mediaRoomBriefingGenerator (P07)
+  localEntities                    generateCitizensEvents (P05)
+  manualDynamicsInputs             applyCityDynamics (P02)
+  manualMigrationInputs            applyMigrationDrift (P06)
+  manualStoryInputs                applyStorySeeds (P07)
+  mediaCount                       applyCityDynamics (P02)
+  mediaCoverage                    applyCityDynamics (P02)
+  mediaIntake                      recordMediaLedger (P10)
+  month                            generationalEventsEngine (P04)
+  neighborhoodAdjacency            updateCrimeMetrics (P03)
+  neighborhoodPulse                v3NeighborhoodWriter (P08)
+  patrolStrategy                   updateCrimeMetrics (P03)
+  sentiment                        mediaRoomBriefingGenerator (P07)
+  simulationYear                   generateCitizensEvents (P05)
+  sportsState_Chicago              chicagoSatellite (P08)
+  tierPromotions                   mediaRoomBriefingGenerator (P07)
+  totalPopulation                  mediaRoomBriefingGenerator (P07)
+  v3Arcs                           v3NeighborhoodWriter (P08)
+
+ORDERING — READ BEFORE WRITE (20 field(s); 5 with an UNDEFAULTED read):
+------------------------------------------------------------------------------------------
+  civicLoad — written P06 (applyCivicLoadIndicator)   ** 4 UNDEFAULTED **
+      read P03 phase03-population/finalizeWorldPopulation.js:123
+      read P03 phase03-population/deriveDemographicDrift.js:44
+      read P04 phase04-events/eventArcEngine.js:219   <-- no fallback
+      ... +7 more read site(s)
+  civicLoadScore — written P06 (applyCivicLoadIndicator)   [all defaulted]
+      read P03 phase03-population/deriveDemographicDrift.js:45
+  cycleWeight — written P09 (applyCycleWeight)   ** 3 UNDEFAULTED **
+      read P03 phase03-population/finalizeWorldPopulation.js:111
+      read P04 phase04-events/eventArcEngine.js:143   <-- no fallback
+      read P04 phase04-events/eventArcEngine.js:145   <-- no fallback
+      ... +5 more read site(s)
+  cycleWeightReason — written P09 (applyCycleWeight)   ** 1 UNDEFAULTED **
+      read P03 phase03-population/finalizeWorldPopulation.js:115   <-- no fallback
+      read P07 phase07-evening-media/applyStorySeeds.js:221
+      read P07 phase07-evening-media/mediaRoomBriefingGenerator.js:236
+      ... +1 more read site(s)
+  domainPresence — written P07 (domainTracker, v3preLoader)   [all defaulted]
+      read P04 phase04-events/eventArcEngine.js:197
+      read P04 phase04-events/eventArcEngine.js:204
+      read P04 phase04-events/eventArcEngine.js:232
+      ... +1 more read site(s)
+  economicMood — written P06 (economicRippleEngine, applyMigrationDrift, v3preLoader)   [all defaulted]
+      read P02 phase02-world-state/applySeasonWeights.js:35
+      read P02 phase02-world-state/calendarChaosWeights.js:34
+      read P02 phase02-world-state/calendarStorySeeds.js:42
+      ... +17 more read site(s)
+  engineEvents — written P06 (filterNoiseEvents)   ** 1 UNDEFAULTED **
+      read P05 phase05-citizens/applyNamedCitizenSpotlight.js:48
+      read P05 phase05-citizens/applyNamedCitizenSpotlight.js:51   <-- no fallback
+  eventsGenerated — written P03 (generateCrisisSpikes, generateCrisisBuckets, worldEventsEngine, generateGameModeMicroEvents, generateGenericCitizenMicroEvent, runAsUniversePipeline, runEducationEngine, runConductEngine, generateCitizensEvents, checkForPromotions, generateMediaModeEvents, runNeighborhoodEngine, generateGenericCitizens, runHouseholdEngine, runCivicRoleEngine, generateCivicModeEvents, runCareerEngine)   [all defaulted]
+      read P02 phase02-world-state/applyCityDynamics.js:103
+  eventSuppression — written P08 (applyCycleRecovery)   [all defaulted]
+      read P04 phase04-events/worldEventsEngine.js:80
+  mediaEffects — written P07 (mediaFeedbackEngine, v3preLoader)   ** 1 UNDEFAULTED **
+      read P02 phase02-world-state/applySeasonWeights.js:409
+      read P05 phase05-citizens/runRelationshipEngine.js:558   <-- no fallback
+      read P06 phase06-analysis/applyShockMonitor.js:57
+      ... +1 more read site(s)
+  migrationDrift — written P06 (applyMigrationDrift)   [all defaulted]
+      read P03 phase03-population/finalizeWorldPopulation.js:127
+      read P04 phase04-events/eventArcEngine.js:167
+      read P04 phase04-events/worldEventsEngine.js:72
+  neighborhoodEconomies — written P06 (economicRippleEngine, applyMigrationDrift)   [all defaulted]
+      read P02 phase02-world-state/applyCityDynamics.js:98
+  nightlifeVolume — written P07 (cityEveningSystems, buildNightLife)   [all defaulted]
+      read P03 phase03-population/deriveDemographicDrift.js:33
+      read P04 phase04-events/worldEventsEngine.js:69
+  patternFlag — written P06 (applyPatternDetection)   [all defaulted]
+      read P03 phase03-population/finalizeWorldPopulation.js:131
+      read P04 phase04-events/worldEventsEngine.js:71
+      read P05 phase05-citizens/applyNamedCitizenSpotlight.js:62
+  recoveryLevel — written P08 (applyCycleRecovery)   [all defaulted]
+      read P04 phase04-events/worldEventsEngine.js:82
+      read P07 phase07-evening-media/textureTriggers.js:63
+  shockFlag — written P06 (applyShockMonitor)   [all defaulted]
+      read P02 phase02-world-state/applyCityDynamics.js:150
+      read P03 phase03-population/finalizeWorldPopulation.js:135
+      read P03 phase03-population/deriveDemographicDrift.js:73
+      ... +6 more read site(s)
+  storyHooks — written P04 (generationalEventsEngine, neighborhoodTrajectoryEngine, generationalWealthEngine, generateCitizensEvents, civicInitiativeEngine, householdFormationEngine, processAdvancementIntake, migrationTrackingEngine, educationCareerEngine, bondEngine, updateCivicApprovalRatings, storylineHealthEngine, storylineWeavingEngine, storyHook, v3preLoader)   [all defaulted]
+      read P03 phase03-population/deriveDemographicDrift.js:49
+  storySeeds — written P06 (processArcLifeCyclev1, applyStorySeeds, v3preLoader)   [all defaulted]
+      read P02 phase02-world-state/applyCityDynamics.js:102
+      read P03 phase03-population/updateCrimeMetrics.js:153
+      read P05 phase05-citizens/bondEngine.js:389
+  textureTriggers — written P07 (textureTriggers, v3preLoader)   [all defaulted]
+      read P03 phase03-population/deriveDemographicDrift.js:50
+  worldEvents — written P03 (generateCrisisSpikes, generateCrisisBuckets, worldEventsEngine, faithEventsEngine, v3preLoader)   [all defaulted]
+      read P02 phase02-world-state/applyCityDynamics.js:101
+      read P02 phase02-world-state/calendarStorySeeds.js:38
+
+==========================================================================================
+Connected: 156 | Orphaned: 143 | Phantom: 37
+Read-before-write: 20 field(s), 5 undefaulted
+Files scanned: 185

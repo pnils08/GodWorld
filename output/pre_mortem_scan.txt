@@ -1,0 +1,129 @@
+PRE-MORTEM SCAN — 2026-08-31
+========================================================
+
+ENGINE CHANGES SINCE LAST CYCLE (since 2026-08-19):
+  98 engine-path commit(s):
+    c6da47d9 2026-08-31 S403 [engine-sheet] pipeline.62: coverage wired into the Saturday chain + arg() fix
+    fbc527e6 2026-08-31 S403 [engine-sheet] pipeline.62: coverage domain keys off the reporter — C103+C104 backfilled
+    b89e32fb 2026-08-30 S403 [engine-sheet] civic.26: mayor fallback + metric-decimal ruling — C104 APPLIED
+    ce670201 2026-08-30 S403 [engine-sheet] engine.136: the end-of-cycle flush stops eating writes silently
+    f10d226c 2026-08-30 S402 [engine-sheet] engine.135: cascadeAudit acceptance instrument — Adults denominator + unemployment-spread lane
+    f7811139 2026-08-30 S401 engine.135: builder doctrine third pass (tiers/media/heritage are advancement; chance is a rare anomaly) — E2 employer draw ×0.1 (RARE_EVENT_SCALE, ≈1 event per ten cycles); E3 bench-proven C112–C113
+    99d80025 2026-08-30 S401 engine.135 E3: hiring reaches only the jobless, in their own field — UNTRACKED poaching and the cross-field fallback deleted (builder: every old forcing system ends)
+    77f17734 2026-08-30 S399 engine.135 E2+F: business success is the causation (applyEmployerSuccess_ on Growth_Rate; random promotion/layoff/shift/lateral rolls deleted); hood admission bands gate both movers (hoodAdmits_)
+    d93a5532 2026-08-30 S399 engine.135 D2/D4: a citizen's pay references their own hood's businesses (hoodReferencePay_); untracked re-base raise-only; five draw sites priced by the hood
+    cd8ec73c 2026-08-30 S398 engine.135: GAME/CIVIC/MEDIA rows are outside E1/D3/D5 (ENGINE-only); 18–21-year-olds keep whatever stage they have
+    e92549fe 2026-08-30 pipeline.62 follow-up: re-wire the one surviving fail, log observations, close the signage shoulder
+    aa1dce57 2026-08-30 S398 engine.135 E1/D5: retirement is an EVENT, never an age (builder, 2026-08-30)
+    92bdeb55 2026-08-30 pipeline.62: Rhea is the gate — strip the pre-Rhea word tests
+    bb090fa1 2026-08-30 S398 engine.135 D5/E1 narrowing: retirement = age ≥65 or Status=Retired (not the stale CareerStage), Tier 1–2 exempt; E1 leaves Status=Retired rows alone
+    feefbb48 2026-08-30 S398 engine.135 D3: sports-franchise employers set no Income floor
+    b1644c1b 2026-08-30 S398 engine.135 D3 + D6: tracked-employer Income floor (code, test-first) + 32 existing storefront rows re-based on bench
+    a2b6d2b1 2026-08-30 S398 engine.135 E1/D1/D5: CareerStage derived from age (calendar promotion rolls deleted), WealthLevel 10→12, retired/deceased Income 0
+    543361c4 2026-08-29 S398 engine.135: dial definition resolved (Q5), B3 East Oakland ND row on bench, OAKLAND_SCHOOLS youth throw fixed in canon voice
+    686de8c2 2026-08-29 S397: revert the off-plan dial change — back to the approved plan (attractor 0.96, floor 0.88) in code defaults, test, and bench World_Config; handoff = execute the plan as written, Phases B3→F
+    0458b3c4 2026-08-29 S397 close: employment cascade handoff — dial meaning/number UNRESOLVED (two guesses rejected; two-number participation × unemployment model proposed, not built); bench carries A+B2 code + B1 profile + placeholder config; OAKLAND_SCHOOLS S357 deletion found, restore pending; Phases C–F (the tracked citizens) not started
+    c05a14dd 2026-08-29 engine.135 A+B2: city employment dial pulled to the attractor (0.96, pull 0.12, floor 0.88) instead of stepped; hood Unemployed becomes an adults-normalized envelope pointed by the authored profile (income × boom × tracked employer depth) with 25%/cycle convergence; S.hoodEmployerDepth folded into the commute Business_Ledger read; ensureEngine135Config_ self-arms 4 keys; proof test written first (RED 7 → 18/18 green, illness 29/29 untouched); STUB_MAP regen; bench World_Config retune + WP cell logged for live replay
+    0c575d1f 2026-08-29 engine.135 B1: authored hood economic profile — six Neighborhood_Map cols (IncomeTier, BoomExposure, BoomIndex, EmployerCharacter, WealthMin, WealthMax) + MedianIncome re-based from INSTITUTIONS §Neighborhoods, written to SANDBOX 0827 (22/22 read-back exact), loadNeighborhoodState_ reads them into S.neighborhoodState; live replay logged for the wave deploy; table durable in the plan
+    7ec3fd9f 2026-08-29 engine.133: HEALTH seed proven deterministically (test block C, 29/29) + single-hood phrasing polish
+    3edfdfa8 2026-08-29 engine.133 pre-bench: deploy trajectory simulated from live C104 (wave peaks C108-109, recovers by C119), collisions 0/1152, manifest §9 row for the World_Config self-arm (missing since engine.94), audit band note names the one-cycle transition
+    01a1549e 2026-08-29 engine.133 Tasks 2-7: city health system built — attractor + weather-event strain, hood envelope, threshold seed with faces, config self-arm, audit invariants, STUB_MAP regen
+    799b09d8 2026-08-29 engine.133 Task 1: illnessEnvelope.test.js — proof test written before the code (14 pass / 9 RED)
+    92d51e55 2026-08-29 S395 session-end persistence rotation [engine-sheet]
+    1ef8e265 2026-08-29 orBatch: reasoning off by default (--reasoning to enable), null-content guard on fetch
+    1ef24c2a 2026-08-29 governance.51 T7: scripts/brainSearch.js — one query over claude-mem (FTS5 direct) + sl-godworld, merged newest-first
+    5ca20b6e 2026-08-29 governance.51: T3 rerouted to OpenRouter batch (scripts/orBatch.js), T6 decided
+    b75bb28c 2026-08-29 grok: civic.24 Task 9 dry C104; engine.125 resolved sports labels
+    4926d40c 2026-08-29 engine.133: engine-wiring runs headless — map_lookup tool, numbered read_file, md/json grep [engine-sheet]
+    95a7359a 2026-08-29 engine.132: the initiative ledger can finally touch illness — built, tested, NOT deployed
+    2212a90f 2026-08-29 notebooklmDailyNews: gate-desk section only when a FLAGGED draft exists; query timeout 180→280
+    f5f4a487 2026-08-27 rheaTwoPass: give the verification gate the roster it was supposed to have
+    95da9e52 2026-08-27 engine.131: sports overrides the civic tracker on the stadium, no clock built
+    e9ce67a5 2026-08-27 engine.131 T7: the sports zone follows the stadium (ships dark)
+    0698fb67 2026-08-27 pipeline.61: wire the lore writer to a Friday cron, generation only
+    2935a4a7 2026-08-27 applySportsSeason: the city gets the real season back (engine.131, v3.1)
+    84be69b4 2026-08-27 grok: BART is a train, not a real-world leak
+    f7f33e95 2026-08-25 routePatternSeeds: the deck seeds from causes, not deltas
+    af10a529 2026-08-25 detectMathImbalances: the standing value travels with the delta (v1.3.0)
+    671c5424 2026-08-25 buildWorldSummary: report the real per-team sports season, not the atmosphere sentinel
+    065cab38 2026-08-25 personaProvider: anchor citizen voices in character under pressure
+    64698fd3 2026-08-24 tests: slice tests made mint-agnostic — never pin live ledger membership (Mike-direct)
+    f65b86bd 2026-08-24 tests: update stale expectations — no production code touched
+    dfa2861c 2026-08-24 scripts: delete 6 dead one-off scripts — zero callers, purpose complete
+    59ea498a 2026-08-24 undockedEpisode: absolute bun path — cron PATH lacks /root/.bun/bin, spawn ENOENT killed every run since Aug 16
+    ded33816 2026-08-24 Fourth wall corrected to Mike's definition — real-world Oakland + the word simulation
+    2cc23cee 2026-08-24 Rhea gate re-scoped to ENGINE_CRON_LOOP.md §4.7 — contradiction-only failures
+    02558974 2026-08-24 engine.130: bond pickup drop located + closed — 3 writers get the engine.101 A-K shape
+    522386c0 2026-08-23 restore the ops report + weekday article delivery — paid work is not removed on inference
+    66f5081a 2026-08-23 articles to Discord — the reader gets the paper, not a meta-report
+    ff0f1e29 2026-08-23 daily news: ops report artifact — the editor's daily report on the data
+    40dcc1bf 2026-08-23 daily news: 'The gate desk' — the written report covers every gate decision
+    17ab2853 2026-08-23 daily news: report flagged drafts in full — the gate decision is news, not a hole
+    110295c6 2026-08-22 runEngineAgent: remove the shell, measure coverage in the harness
+    c53127eb 2026-08-22 runEngineAgent.js — first isolated engine agent runs; it audited the engine and inflated its own denominator
+    7485894e 2026-08-22 Their own wiki page is the bond signal, not contamination — split feed from own
+    4c9e5118 2026-08-22 Bond extractor was reading back the engine's own injections — score provenance
+    5e222dad 2026-08-22 Correct the record on the PRESS envelope leak: root cause + real scope
+    e55aeaf3 2026-08-22 extractBondsFromWakes.js — pull bond candidates out of what citizens actually say
+    ee2e24c5 2026-08-22 Fix PRESS envelope leak — citizens were recording JSON as their own memories
+    c104f328 2026-08-22 engine.129: canon→bond intake built and fired — 11 canon bonds minted at C104
+    7a938f4d 2026-08-22 S388 close — engine.128 closed end to end, canon bond intake queued
+    a739582b 2026-08-21 engine.128 tail: collision-guard both BondId generators
+    33cf8636 2026-08-21 engine.128 fix: mulberry32 over Math.imul — ctx.rng gets its entropy back
+    7b957312 2026-08-21 pipeline.54: resample the angle once before failing the wake
+    c3a08738 2026-08-21 grok: Hal is the historian — era echo is not an Oakland import
+    2942b56b 2026-08-21 engine: stop civilian career logic from overwriting sports-layer citizens
+    fbec2694 2026-08-21 pipeline.54 Task 11: put the gate on the real-world axis, not ledger membership
+    9a15ea30 2026-08-21 grok: allotted hallucination — in-world rooms mint, real Oakland fails
+    b5af87d4 2026-08-21 grok: sports SET is persona, not a leak
+    d6a0e2f8 2026-08-21 codex: add deterministic NotebookLM daily shadow router
+    e0154b55 2026-08-20 engine: finish the c103 edition-path sweep (djDirect, bindStorylineReporters, rheaInjectionScan)
+    adaa6237 2026-08-20 grok: Packet quote is a span, not one unbroken string
+    9c98be4e 2026-08-20 engine: restore the edition review lane on the consolidated format
+    3196749b 2026-08-20 infrastructure.7: move the eval judges to 3.7-flash too (Mike-direct)
+    1ebed79f 2026-08-20 grok: pipeline.54 Task 9 — synthetic Luis completion as positive fixture
+    365d83f4 2026-08-20 infrastructure.7: switch the gate/audit family from gemini-3.5-flash to 3.7-flash
+    cb5c20c6 2026-08-20 grok: pipeline.54 Tasks 5–8 — Article shape, Packet walls, Rhea last
+    c57b1352 2026-08-20 infrastructure.7: move photo QA off Anthropic onto Gemini 3.7 Flash (Mike-direct)
+    664de075 2026-08-20 infrastructure.7 Tasks 2-4: move the Anthropic-direct callers onto OpenRouter
+    34cace97 2026-08-20 grok: pipeline.54 Tasks 1–4 — chase in §2, lived W2 answers, empty W2 fails closed
+    be3e579c 2026-08-20 lore-writer: first grounded run lands and passes the gate — ingested to both stores + staged
+    aa00ab5b 2026-08-20 pipeline.59: first live gate run — all 3 fixtures FAIL; smoke caught a source-id regex bug
+    3c5be5d5 2026-08-20 pipeline.59: lore canon-ingest wiring — Tasks 1-4, dual-store gate with grading held out of the script
+    6dc9902c 2026-08-19 engine.122: guard moved before AdvanceTime — abort now leaves zero queued writes
+    d1ce6936 2026-08-19 engine.122+121: carry-forward triple redundancy + real-schema inheritance recording
+    1370b70e 2026-08-19 engine: seed RNG with the real cycle id + rebuild the deleted C103 carry-forward
+    402f9c2b 2026-08-19 civic: apply c103 city-hall to the tracker + stop the chain stranding staged cycles
+    4ff1e104 2026-08-19 notebooklmDailyNews: stop dropping re-run articles on a filename check
+    c906fb84 2026-08-19 Revert "notebooklmDailyNews: read continuity off disk, stop borrowing the weekly notebook"
+    c3392328 2026-08-19 notebooklmDailyNews: read continuity off disk, stop borrowing the weekly notebook
+    580e585e 2026-08-19 notebooklmDailyNews: don't retry an archive query that timed out
+    b2681d8a 2026-08-19 notebooklmDailyNews: stop letting a slow archive lookup kill the edition
+    64fccd5e 2026-08-19 civic.27: make the agenda/hearing no-phase wall repairable, not fatal
+    0a650b76 2026-08-19 civic.26: allow in-world filing ids past the metric-decimal wall
+
+CRITICAL (will cause silent failures in the cycle):
+  none
+
+WARNINGS (acknowledged off-path or doc drift):
+  1. phase05-citizens/citizenContextBuilder.js:1157 — Math.random in getCitizensForQuotes() (acknowledged off-path per known_gaps.json)
+  2. phase05-citizens/civicInitiativeEngine.js:2076 — Math.random in manualRunVote() (acknowledged off-path per known_gaps.json)
+  3. phase05-citizens/generateChicagoCitizensv1.js:442 — Math.random in testChicagoCitizenGeneration_() (acknowledged off-path per known_gaps.json)
+
+CLEAN:
+  - Math.random cycle-path: 0 unacknowledged hit(s); 3 acknowledged off-path; 6 defensive-throw
+  - Sheet writes outside Phase 10: 0 file(s) with direct writes not carved out in SHEETS_MANIFEST.md §9
+  - Neighborhoods: 0 new stray, 0 acknowledged legacy
+
+NOT AUTO-SCANNED (run from SKILL — see notes):
+  - §3 ctx field dependency: judgment-based (G-PM5) — run /ctx-map, diff vs last cycle.
+  - §4 sheet header alignment: needs sheet+SCHEMA_HEADERS read — run manually if columns changed.
+  - §6 write-intent target validation: needs Phase 10 target-sheet existence check — run manually.
+
+========================================================
+RECOMMENDATION: SAFE TO RUN (warnings inherited below)
+
+Open warnings carried to next cycle:
+  - phase05-citizens/citizenContextBuilder.js:1157 — Math.random in getCitizensForQuotes() (acknowledged off-path per known_gaps.json)
+  - phase05-citizens/civicInitiativeEngine.js:2076 — Math.random in manualRunVote() (acknowledged off-path per known_gaps.json)
+  - phase05-citizens/generateChicagoCitizensv1.js:442 — Math.random in testChicagoCitizenGeneration_() (acknowledged off-path per known_gaps.json)

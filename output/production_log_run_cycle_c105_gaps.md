@@ -4,7 +4,7 @@
 
 **Run:** 2026-08-30 (S403, engine-sheet) — `node scripts/preflightInputCheck.js --cycle=105`
 **Verdict:** READY (with warnings), exit 0. C105 unfired at time of writing; live `cycleCount` 104.
-**Total gaps:** 8 (3 HIGH / 4 MED / 1 LOW)
+**Total gaps:** 11 (5 HIGH / 5 MED / 1 LOW)
 
 Pre-flight passed. The gaps below are what it *reported as warnings* or *did not look at* — in both cases the underlying condition is worse than the verdict line suggests.
 
@@ -74,6 +74,33 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **Suggested action:** OPEN. Cheapest next step is to capture the failing run's exit code and stderr explicitly (wrap the runner spawn, or have the test print its own exit path) rather than infer from `stdio: 'inherit'`. If subprocess count is the cause, the fix is to export the rater's resolution functions and unit-test them in-process, keeping only one or two subprocess tests for the CLI gates.
 - **Pointer:** pipeline.62 (residual)
 
+### G-PF15: the pre-mortem's sheet-write gate had an EMPTY exception list
+
+- **Severity:** HIGH
+- **Category:** quiet-pipe
+- **What happened:** `scripts/preMortemScan.js` scraped its scan-2 carve-out list out of the engine rules boot doc, which used to inline the direct-write exception table. That doc was later trimmed to rules-only and now just points at `docs/engine/SHEETS_MANIFEST.md` §9. The scraper kept reading it and kept finding **0** filenames (verified: 0 from the boot doc, 70 from §9), so the exception set was empty and every direct writer in phases 1–9 was reported — 41 files.
+- **Why it matters:** A gate that flags everything discriminates nothing. Scan 2's entire job is to surface a NEW undocumented sheet writer, and a genuinely new one would have been the 42nd line in a wall of 41 false ones. This is the G-PM1 lesson the pre-mortem skill itself teaches — "a stale known gap teaches the operator to disbelieve the scan" — occurring inside the scan. It also means every `SAFE TO RUN` since the boot-doc trim carried a scan-2 result that was never actually checked.
+- **Suggested action:** FIXED same session — repointed at `SHEETS_MANIFEST.md` §9, scoped to that section (the tab inventory above it names scripts that are NOT authorized writers), matching by basename. Result: **41 → 0**. Every direct writer in phases 1–9 is accounted for in the manifest, including the `repairCycleCount_` carve-out added this morning. A missing §9 heading returns an empty set so the scan flags loudly rather than emitting a false all-clear. `preMortemScan.test.js` 10/10.
+- **Pointer:** engine.137
+
+### G-PF16: arc + bond escalation mechanics are structurally unreachable
+
+- **Severity:** HIGH
+- **Category:** quiet-pipe
+- **What happened:** Found by the new ordering scan (G-PF17). `S.civicLoad` has exactly one writer — `phase06-analysis/applyCivicLoadIndicator.js:373`, **Phase 6** — but `phase04-events/eventArcEngine.js:219,220,225,226` gates rivalry-arc escalation on it in **Phase 4**. `S.cycleWeight` is written in **Phase 9** (`applyCycleWeight.js`) and read at `eventArcEngine.js:143,145` (**P04**) and `bondEngine.js:710` (**P05**). The reads are `===` comparisons against undefined, so nothing throws — the branches simply never take.
+- **Why it matters:** These are designed mechanics that cannot fire. Rivalry arcs are written to escalate under civic strain (`t += 1` on `load-strain`, `+= 0.3` on `minor-variance`) and never do; the same for high/medium-signal cycle weighting on arcs and on rivalry bonds. The world has been running without a tension-escalation path that the code says it has, silently, for as long as the phase order has stood. Exactly the silent-failure class pre-mortem §3 exists to catch — and §3 was manual, so it never was.
+- **Suggested action:** OPEN, engine.137. NOT a C105 blocker: none of the read-side files changed in this window (verified via `git log --since=2026-08-19` over all six), so this is long-standing, not a regression. The fix is a design call, not a mechanical move — either these reads want the PREVIOUS cycle's value (in which case carry-forward must seed them at Phase 1, and nothing currently does) or the consumers belong after their writers. Needs the builder's read on which.
+- **Pointer:** engine.137
+
+### G-PF17: pre-mortem §3 had no deterministic support, so it was effectively never run
+
+- **Severity:** MED
+- **Category:** process-gap
+- **What happened:** The skill calls §3 (ctx read-before-write) "the most important check" and then leaves it judgment-based (G-PM5) — read the phase order by eye, scan every sub-engine's `ctx.summary` reads, verify each against execution order. `ctxMap.js` reported connected / orphaned / phantom but never the ORDERING question, which is the one §3 asks.
+- **Why it matters:** The check most likely to find a silent failure was the one with the least tooling, so in practice it got a spot-check of the four chains the skill names and nothing more. G-PF16 sat undetected behind exactly that gap.
+- **Suggested action:** FIXED same session — folded an ordering pass into `ctxMap.js` (existing file, not a new script). Phase-dir number is the execution order, so it is deterministic. Excludes the orchestrator (`godWorldEngine2.js` is not a phase-1 participant; its reads run at cycle close) and same-file read+write (internal bookkeeping, not a cross-phase dependency), and flags whether each early read has a fallback — a defaulted read degrades silently, an undefaulted one is a live defect. Current state: **20 fields read before write, 5 with an undefaulted read.** Note the line attribution needs care: a hit on an `if (idx('x') >= 0)` line can sit one line above the actual defaulted read, so confirm each by eye before acting.
+- **Pointer:** engine.137
+
 ## LOW-severity gaps
 
 - **G-PF11:** `/pre-flight` with no argument always exits 2. `scripts/preflightInputCheck.js` derives the target cycle by grepping SESSION_CONTEXT for a literal `Cycle: N` token; the PIN line has never carried one (verified 0 matches at both `f10d226c` and HEAD), so the documented canonical invocation cannot work and every run needs `--cycle=`. One-line fix — teach the deriver the PIN's actual `canonical C<NN>` format.
@@ -93,6 +120,7 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - 2026-08-31 (S403) — **G-PF7 CLOSED.** Mike-direct: key domain off the reporter. Section headers still win where an edition has them; the reporter's beat is the fallback, sourced from `scripts/persona-map.json` so a beat change lives in one place. C104's 7 articles now resolve to CULTURE 4 / SPORTS 3 / ENVIRONMENT -2 instead of one COMMUNITY bucket. The gate now fails on 0-domains-resolved. C102 re-rates identical to the old code — regression proof, not assertion. C103 + C104 backfilled (10 rows, verified live).
 - 2026-08-31 (S403) — **G-PF9 partially open.** Coverage now populates, so pre-flight reads clean READY with zero warnings, but the civic-chain-health step (reading `close_c<XX>.json` / `gate_c<XX>.json`) was NOT added — the underlying halt was fixed instead, so the check has nothing to report today. Still worth adding before the next silent stall; carried on pipeline.62's residual line.
 - 2026-08-31 (S403) — **G-PF12 CLOSED** (and it retires the residual line above): coverage now runs inside the Saturday chain as `stepCoverage`, right after publish. Non-fatal by design; pre-flight is the independent backstop.
+- 2026-08-31 (S403) — /pre-mortem run for C105: **SAFE TO RUN**, 0 CRITICAL across 98 engine-path commits since the last live cycle. Manual scans done: §3 via the new ordering pass (G-PF16/G-PF17), §4 header alignment clean on all 8 Phase-10-written tabs, §6 all 10 write-intent target tabs exist. G-PF15 + G-PF17 fixed; G-PF16 opened for the builder.
 - 2026-08-31 (S403) — **G-PF14 opened, left OPEN by choice** (Mike-direct: gap-log it if it needs a fresh look). Intermittent test, not an intermittent product — the rater's behaviour is proven by the C102 byte-identical re-rate and the live C103/C104 backfill.
 - 2026-08-31 (S403) — **G-PF13 opened and CLOSED same session.** Found by making the mistake: `--step=coverage` ran the entire chain because `arg()` only read spaced flags. Harmless here (no `--apply`), one keystroke from publishing canon. `arg()` now takes both forms.
 

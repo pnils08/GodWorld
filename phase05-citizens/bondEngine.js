@@ -707,11 +707,19 @@ function updateExistingBonds_(ctx) {
       // else: an ordinary week — nothing moves
     }
 
-    if (S.cycleWeight === 'high-signal' && bond.bondType === BOND_TYPES.RIVALRY) {
+    // engine.137: runBondEngine_ runs at Phase5-Bonds — before Phase6-ShockMonitor
+    // and Phase8-CycleWeightSignal write these. A rivalry escalates on the tension the
+    // city is CARRYING, which is last cycle's reading, so take both from the
+    // carry-forward snapshot. Read live, they compared against undefined every cycle
+    // and rivalry escalation never fired.
+    var prevCycleWeight = (S.previousCycleState && S.previousCycleState.cycleWeight) || 'low-signal';
+    var prevShock = (S.previousCycleState && S.previousCycleState.shockFlag) || 'none';
+
+    if (prevCycleWeight === 'high-signal' && bond.bondType === BOND_TYPES.RIVALRY) {
       intensity += 0.5;
     }
 
-    if (S.shockFlag && S.shockFlag !== 'none') {
+    if (prevShock && prevShock !== 'none') {
       if (bond.bondType === BOND_TYPES.RIVALRY) {
         intensity += 1;
       } else if (bond.bondType === BOND_TYPES.ALLIANCE) {

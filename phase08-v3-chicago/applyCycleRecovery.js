@@ -159,18 +159,26 @@ function applyCycleRecovery_(ctx) {
   else if (hookCount > 5) overloadScore += 2;
   else if (hookCount > 3) overloadScore += 1;
 
-  if (S.shockFlag === 'shock-flag') overloadScore += 3;
-  if (S.shockFlag === 'shock-fading') overloadScore += 1;
+  // engine.137: applyCycleRecovery_ runs at Phase4-CycleRecovery, before
+  // Phase6-ShockMonitor writes S.shockFlag. Recovery scores the strain the city is
+  // recovering FROM, which is last cycle's — so read the carry-forward snapshot
+  // finalizeCycleState_ already persists. Reading S.shockFlag here compared against
+  // undefined every cycle and these branches never took.
+  var prevShockFlag = (S.previousCycleState && S.previousCycleState.shockFlag) || 'none';
+  if (prevShockFlag === 'shock-flag') overloadScore += 3;
+  if (prevShockFlag === 'shock-fading') overloadScore += 1;
 
   var eventCount = S.worldEvents ? S.worldEvents.length : 0;
   if (eventCount > 10) overloadScore += 3;
   else if (eventCount > 6) overloadScore += 2;
   else if (eventCount > 4) overloadScore += 1;
 
-  if (S.civicLoad === 'load-strain') overloadScore += 3;
-  else if (S.civicLoad === 'minor-variance') overloadScore += 1;
+  // engine.137: same ordering — Phase6-CivicLoad writes these two slots later.
+  var prevCivicLoad = (S.previousCycleState && S.previousCycleState.civicLoad) || 'stable';
+  if (prevCivicLoad === 'load-strain') overloadScore += 3;
+  else if (prevCivicLoad === 'minor-variance') overloadScore += 1;
 
-  var civicScore = Number(S.civicLoadScore || 0);
+  var civicScore = Number((S.previousCycleState && S.previousCycleState.civicLoadScore) || 0);
   if (civicScore >= 15) overloadScore += 2;
   else if (civicScore >= 10) overloadScore += 1;
 

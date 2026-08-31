@@ -437,6 +437,12 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **What happened:** Found by the new ordering scan (G-PF17). `S.civicLoad` has exactly one writer — `phase06-analysis/applyCivicLoadIndicator.js:373`, **Phase 6** — but `phase04-events/eventArcEngine.js:219,220,225,226` gates rivalry-arc escalation on it in **Phase 4**. `S.cycleWeight` is written in **Phase 9** (`applyCycleWeight.js`) and read at `eventArcEngine.js:143,145` (**P04**) and `bondEngine.js:710` (**P05**). The reads are `===` comparisons against undefined, so nothing throws — the branches simply never take.
 - **Why it matters:** These are designed mechanics that cannot fire. Rivalry arcs are written to escalate under civic strain (`t += 1` on `load-strain`, `+= 0.3` on `minor-variance`) and never do; the same for high/medium-signal cycle weighting on arcs and on rivalry bonds. The world has been running without a tension-escalation path that the code says it has, silently, for as long as the phase order has stood. Exactly the silent-failure class pre-mortem §3 exists to catch — and §3 was manual, so it never was.
 - **Suggested action:** OPEN, engine.137. NOT a C105 blocker: none of the read-side files changed in this window (verified via `git log --since=2026-08-19` over all six), so this is long-standing, not a regression. The fix is a design call, not a mechanical move — either these reads want the PREVIOUS cycle's value (in which case carry-forward must seed them at Phase 1, and nothing currently does) or the consumers belong after their writers. Needs the builder's read on which.
+- **CORRECTION (2026-08-31, S405, engine.137):** This entry is **wrong on its stated mechanism and incomplete on its scope.** Verified against `runWorldCycle()` (the production entry, reached from `utilities/webTrigger.js:41` and the sheet menu), the live `World_Population` tab, and a zero-caller grep:
+  - `eventArcEngine.js` is **never called from anywhere** — retired S313 (engine.72 G-EC55), confirmed by `grep -rn "eventArcEngine_("` returning only its own definition, and by the standing comment at `godWorldEngine2.js:356`. Its 4 `civicLoad` and 2 `cycleWeight` reads are **dead code, not misordered code.** Rivalry-arc escalation has indeed never fired, but because the engine that would escalate it is retired — a different problem with a different fix.
+  - `finalizeWorldPopulation.js` is **not a Phase-3 reader.** It sits in `phase03-population/` but `runWorldCycle()` calls it at `Phase9-FinalizePopulation`, after both writers. Its reads are correct, and the live sheet proves it: at C105 `World_Population` holds `cycleWeight=high-signal`, `civicLoad=load-strain`, not the empty strings a genuine Phase-3 read would have written.
+  - **Root cause of the false finding:** the ordering pass added in G-PF17 keyed execution order off the phase **directory number**. The directory records where a file was filed, not when it runs. Fixed — see G-PF27.
+  - **What was actually broken, and was missed here:** `applyCycleRecovery.js:162,163,170,171,173` (Phase4-CycleRecovery) read `S.shockFlag`, `S.civicLoad` and `S.civicLoadScore` written five slots later at Phase6; `bondEngine.js:710,714` (Phase5-Bonds) read `S.cycleWeight` and `S.shockFlag` written at Phase8/Phase6. Six live undefaulted sites, none of them named in this entry.
+  - **Resolution:** the carry-forward path already existed end-to-end and was never consumed — `finalizeCycleState.js:62-75` packs `shockFlag`, `civicLoad`, `civicLoadScore` and `cycleWeight` into `S.previousCycleState`, `loadPreviousCycleState_` restores it at Phase1, and its own docstring says it exists "so Phase 6 analyzers (ShockMonitor, PatternDetection, CivicLoad) can compare against last cycle's state." All six sites now read the snapshot. Recovery scores the strain the city is recovering *from*; a rivalry escalates on the tension it is *carrying*. Both are last cycle's reading by definition.
 - **Pointer:** engine.137
 
 ### G-PF17: pre-mortem §3 had no deterministic support, so it was effectively never run
@@ -558,9 +564,55 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **Every gap in this log is a silence, not a crash.** Coverage stopped writing, the civic chain stopped applying, the rater mis-filed every article, and `--step` ran the wrong thing — all at exit 0. Nothing in this cycle's inventory announced itself; each one had to be walked into. That is the same class engine.136 closed inside the engine on the same day, which suggests the project's dominant failure mode right now is not breakage but unreported success.
 - **Two of the seven were only findable by running the thing by hand.** G-PF12 (no cron) and G-PF13 (arg parsing) had no artifact, no log line and no failing test — they were invisible until a human invoked the code. Automation that is never invoked cannot report that it was never invoked.
 
+### G-PF27: the ordering scan keyed execution order off the phase DIRECTORY, and smeared files across slots
+
+- **Severity:** HIGH
+- **Category:** instrument-defect
+- **What happened:** Two defects in the `ctxMap.js` ordering pass built for G-PF17, both of which manufactured findings. (1) It read the `phase<NN>` directory number as execution order. The orchestrator does not honour that: `finalizeWorldPopulation.js` is filed under `phase03-population/` and runs at the Phase9 slot; `eventArcEngine.js` is filed under `phase04-events/` and never runs at all. (2) It resolved a slot to a **file**, so a file with two entry points was smeared across the whole span between them — `applyCivicLoadIndicator.js` defines both `applyCivicLoadIndicator_` (Phase6-CivicLoad) and `resetCycleAuditIssues_` (Phase1-ResetAudit), so the file carried the range Phase1..Phase6 and its own real `civicLoad` finding was silently swallowed. A third, smaller defect: `isDefaulted()` tested for `||`/`?`/`&&` **anywhere on the line**, so `if (S.cycleWeight === 'high-signal' && bond.bondType === RIVALRY)` was classed as safely defaulted purely because of the `&&` — which is precisely the engine.137 headline site.
+- **Why it matters:** This is the check pre-mortem §3 calls its most important, and it was reporting fiction in both directions at once — inventing G-PF16 while hiding the six real sites. A gate that flags the wrong things is worse than one that flags everything, because its output looks credible. Same lesson as G-PF15, one layer up.
+- **Suggested action:** FIXED same session. `scripts/ctxMap.js` now parses the `safePhaseCall_` sequence out of `runWorldCycle()` (126 slots) and resolves ordinals **per top-level function**, walking the call graph from each slot. Reports only when the read ALWAYS precedes the write (readMax < writeMin); overlapping ranges go to AMBIGUOUS, and a file is called DEAD only when *every* top-level function in it is unreachable — a partially-unreachable file is not reported, because a static call graph cannot see non-literal dispatch and that bucket would over-report. `isDefaulted` is now field-aware. Result: 5 undefaulted fields → 6 real ones, all verified by eye; after the engine.137 wiring, 3 remain (see G-PF28, G-PF29). Independent validation: the scan rediscovered `applySeasonWeights.js:34`, which already carried a hand-written comment saying "has always been undefined here and these multipliers have never fired."
+- **Pointer:** engine.137
+
+### G-PF28: media feedback has never reached the citizens who are supposed to feel it
+
+- **Severity:** MED
+- **Category:** quiet-pipe
+- **What happened:** `S.mediaEffects` is written at `Phase7-MediaFeedback` but read at `runRelationshipEngine.js:558` (Phase5-Relationships) and at `mediaFeedbackEngine.js:1231,1331` — `getMediaInfluencedEvent_` and `getMediaEventModifier_`, both reached from Phase5-CitizenEvents. All three are guarded, so nothing throws; the media-influenced event pool and the media event modifier simply resolve to null/1.0 every cycle.
+- **Why it matters:** The whole point of the feedback engine is that what the paper prints changes what happens next. It has never done so for citizen events.
+- **Suggested action:** OPEN. Not fixed with the engine.137 batch: unlike `civicLoad`/`cycleWeight`/`shockFlag`, `mediaEffects` is **not** in the `finalizeCycleState_` carry-forward payload, so there is no snapshot to point at. Fix is either to add it to the payload (then wire as engine.137 did) or to move `mediaFeedbackEngine_` ahead of Phase5. Needs a read on which — the second changes what the feedback engine itself sees.
+- **Pointer:** engine.137
+
+### G-PF29: seasonal weights read the sports state one slot before sports writes it
+
+- **Severity:** MED
+- **Category:** quiet-pipe
+- **What happened:** `applySeasonWeights.js:34` reads `S.sportsAtmosphereEnabled` and `S.sportsSeason` at `Phase2-SeasonalWeights`; `applySportsSeason_` writes both at `Phase2-SportsSeason`, the very next slot. The file already carries a hand-written comment at :32-33 acknowledging this — "has always been undefined here and these multipliers have never fired. Gated for correctness if the ordering ever changes."
+- **Why it matters:** Sports is the world. A seasonal weighting that has never once seen the sports season is a live gap in the layer that matters most, not a curiosity. The fix is plausibly a one-line orchestrator swap (`Phase2-SportsSeason` before `Phase2-SeasonalWeights`), which is cheap — but it turns on multipliers that have never fired, so it is a world-behaviour change, not a mechanical repair.
+- **Suggested action:** OPEN, needs a call on intent before the swap. Deliberately not bundled with engine.137.
+- **Pointer:** engine.137
+
+### G-PF30: dry-run and replay do not run the same cycle production does
+
+- **Severity:** LOW
+- **Category:** process-gap
+- **What happened:** `godWorldEngine2.js` carries two phase sequences. `runWorldCycle()` (production, 126 slots) and `runCyclePhases_` (124 slots, used only by `runDryRunCycle` at :1830 and `replayCycle` at :1940). The replay path omits `Phase7-StorylineWeaving` and `Phase9-DigestSummary`.
+- **Why it matters:** A dry run is supposed to answer "what will the live cycle do." It answers a slightly different question, silently, and the two slots it drops are both content-producing.
+- **Suggested action:** OPEN, unowned. Either reconcile the two sequences or have `runCyclePhases_` derive from one list.
+- **Pointer:** engine.138
+
+### G-PF31: three map/manifest defects surfaced while tracing engine.137
+
+- **Severity:** LOW
+- **Category:** doc-drift
+- **What happened:** Byproducts of the wiring trace, each verified: (1) `ENGINE_STUB_REVERSE.json` counts `===` comparisons as writes — it lists four writers for `S.civicLoad` where only `applyCivicLoadIndicator.js:373` assigns, and the same for `S.cycleWeight`. That is a `/stub-engine` generator defect and it will keep poisoning wiring cards. (2) `writeCycleWeightToDigest_` (`applyCycleWeight.js:476,480,485`) writes `Riley_Digest` directly, has zero callers, and is absent from `SHEETS_MANIFEST.md` §9 — currently harmless because it is unreachable, a manifest violation the moment anyone wires it. (3) `Riley_Digest` does not appear in `SHEETS_MANIFEST.md` at all, though the live `writeDigest_` intent path appends to it every cycle.
+- **Why it matters:** (1) misleads every future `engine-wiring` card. (3) means a tab the engine writes every cycle is not in the tab inventory.
+- **Suggested action:** OPEN, unowned.
+- **Pointer:** engine.138
+
 ## Changelog
 
 - 2026-08-30 — Initial /pre-flight leg (S403, engine-sheet), C105 pre-fire.
+- 2026-08-31 — engine.137 closed (S405, engine-sheet). G-PF16 annotated as incorrect on mechanism and incomplete on scope; G-PF27 (instrument defect) fixed; six read-before-write sites wired to the existing carry-forward snapshot; G-PF28/29/30/31 opened.
 
 
 ## Judgment-layer entries (engine-sheet appends here)

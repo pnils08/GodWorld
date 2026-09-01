@@ -2454,6 +2454,10 @@ async function runWrite(assign) {
       anglePlan: angle && angle.angleRead && angle.angleRead.plan,
       interviews: packet && packet.interviews || [],
       lane,
+      // S408: the S407 open-threads block lived in buildLaneState, the legacy lane
+      // path — the live wake writes a typed Packet and never rendered it (0/7 state
+      // files on 2026-09-01 carried the block). Threads ride the Packet instead.
+      openThreads: loadOpenThreads(cycle, desk),
       reviewProfile: ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.reviewProfile,
     });
     fs.writeFileSync(stateFile, JSON.stringify(writePacket, null, 2));

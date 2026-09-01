@@ -88,3 +88,30 @@ assert.ok(withoutRuntimeClaim.includes('CLAIM: TEST-ONLY sourced fact | output/T
 assert.ok(!withoutRuntimeClaim.includes('CLAIM: Current cycle: C999'));
 
 console.log('cron-desk-writer artifact-tag tests: PASS');
+
+// S408 — open threads: a printed interviewed person advances their thread; the
+// model may close only the thread the evidence matched; no match still mints.
+{
+  const threadPacket = {
+    signal: { hood: 'TEST-HOOD', kind: 'test-signal', nearby: [],
+      openThreads: [
+        { slug: 'test-hood-test-citizen-test-signal', hood: 'TEST-HOOD', popids: ['TEST-POP-01'], lastCycle: 104 },
+        { slug: 'other-hood-someone-else', hood: 'OTHER', popids: ['TEST-POP-09'], lastCycle: 103 },
+      ] },
+    exposure: {
+      subjects: [{ name: 'Test Citizen', pop: 'TEST-POP-01' }],
+      sources: [{ name: 'Test Citizen', pop: 'TEST-POP-01', quote: 'Test concern.' }],
+    },
+    known: [],
+  };
+  const adv = renderPacketIntake('# T\n\nTest Citizen said, "Test concern."\n', threadPacket);
+  assert.ok(adv.includes('STORYLINE: test-hood-test-citizen-test-signal | advanced'), adv);
+  const closed = renderPacketIntake('# T\n\nTest Citizen said, "Test concern."\n\nTHREAD-CLOSED: test-hood-test-citizen-test-signal\n', threadPacket);
+  assert.ok(closed.includes('STORYLINE: test-hood-test-citizen-test-signal | closed'), closed);
+  assert.ok(!closed.includes('THREAD-CLOSED'), 'model marker must not leak into the article');
+  const wrongClose = renderPacketIntake('# T\n\nTest Citizen said, "Test concern."\n\nTHREAD-CLOSED: other-hood-someone-else\n', threadPacket);
+  assert.ok(wrongClose.includes('STORYLINE: test-hood-test-citizen-test-signal | advanced'), 'a close on an unmatched slug is ignored');
+  const noMatch = renderPacketIntake('# T\n\nNobody named here.\n', threadPacket);
+  assert.ok(!noMatch.includes('STORYLINE:'), 'no printed person => no storyline line');
+  assert.equal(require('../lib/articleIntake').parse(closed).errors.length, 0);
+}

@@ -194,6 +194,12 @@ So every writer met the cycle blind. `cron-desk-run.js:1051` has always offered 
 
 ---
 
+#### S-B correction — S408, 2026-09-01 (first unattended render)
+
+**The S407 block never reached a writer.** Tonight's 18:15 wake was the first run with the wiring, and 0 of 7 state files carried "Open threads on your beat" while `desk_signal_c105.json` held 23 threads (civic 11, culture 6, sports 3, business 3). Two reasons: (1) the block was rendered in `buildLaneState`, the legacy lane path — the live wake writes a typed Packet through `livedExperiencePacketV2.buildWritePacket` and never calls it; (2) even had it rendered, `renderPacketIntake` (ADR-0017) discards the model's footer and mints `STORYLINE: <hood-name-kind> | opened` deterministically, so no writer could ever say `advanced` or `closed`. That is why `closed` was never once used: the verb was hard-coded.
+
+**Fix (same session):** the desk's open threads ride the Packet as `signal.openThreads`; the writer matches deterministically — an article **advances** the thread whose interviewed person it actually prints (popid overlap on `exposure.sources`/`subjects` present in the body, hood + recency as tie-breaks) — and the model owns one bit, a final `THREAD-CLOSED: <slug>` line that counts only for the thread the evidence matched (stripped from prose). No match still mints. Tests: writer (advanced / closed / wrong-slug ignored / no-match) + Packet passthrough. `buildLaneState`'s block stays for the legacy path. **First real render is the next 18:15 write wake; `closed` is now reachable.**
+
 ### Session S-C: pipeline chain hygiene (Node-side, offloadable)
 
 **Entry:** §G-PF23, §G-PF24, §G-PF25, §G-PF26. No engine code — nothing here is bench-gated, so this session's output is live the moment it lands.

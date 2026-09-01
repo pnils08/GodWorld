@@ -98,6 +98,20 @@ assert.equal(w3.manifest.unverifiedLeads[0].publishable, false);
 assert.ok(w3.manifest.forbiddenClaimClasses.includes('new place or street'));
 assert.doesNotThrow(() => p.assertBase(w3, 'W3'));
 
+// S408 — open threads ride the typed Packet (the live path), not buildLaneState.
+const w3t = p.buildWritePacket({
+  cycle: 999, desk: 'civic', reporter, story, approach: 'Test the mismatch',
+  angleInput: w1, anglePlan: plan,
+  interviews: [{ pop: 'TEST-POP-02', name: 'Test Resident', claims, inputPacket: resident }], lane: [],
+  openThreads: [{ slug: 'test-hood-thread', label: 'test-hood-thread | C104', hood: 'TEST-HOOD', popids: ['TEST-POP-02'], lastCycle: 104 }, { bad: true }],
+});
+assert.equal(w3t.signal.openThreads.length, 1);
+assert.equal(w3t.signal.openThreads[0].slug, 'test-hood-thread');
+assert.ok(/THREAD-CLOSED/.test(w3t.task.threadRule));
+assert.deepEqual(w3.signal.openThreads, []);
+assert.equal(w3.task.threadRule, undefined);
+assert.doesNotThrow(() => p.assertBase(w3t, 'W3'));
+
 const good = '## TEST-ONLY\n\nTEST-ONLY value rose by 4. Test Resident said, “' +
   claims.publishableQuote + '”\n';
 assert.deepStrictEqual(p.auditArticle(good, w3).errors, []);

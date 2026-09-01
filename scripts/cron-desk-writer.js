@@ -375,6 +375,7 @@ function stripModelMetadataTail(text) {
     /^CONTINUITY NOTES:/im,
     /^FACTUAL ASSERTIONS:/im,
     /^<!--\s*SELF-SCORE:/im,
+    /^THREAD-CLOSED:/im,
   ];
   let cut = String(text).length;
   for (const re of markers) {
@@ -394,6 +395,35 @@ function intakeSlug(packet) {
 // pilot, discard any model footer and render INTAKE from the supplied evidence
 // plus names the Article actually printed. This is deterministic formatting,
 // not editorial rewriting.
+// S408 — a story in this city can finally finish. packet.signal.openThreads are the
+// desk's running Storyline_Ledger threads (slug + popids). Deterministic, per
+// ADR-0017: the article ADVANCES the thread whose interviewed person it actually
+// prints (popid match on exposure.sources/subjects present in the body). The model
+// owns one bit — a final `THREAD-CLOSED: <slug>` line — and it only counts for the
+// thread the evidence already matched. No match => mint a new slug as before.
+function matchOpenThread(body, draftText, packet) {
+  const threads = (packet && packet.signal && packet.signal.openThreads) || [];
+  if (!threads.length) return null;
+  const printed = new Set();
+  const people = ((packet.exposure && packet.exposure.sources) || [])
+    .concat((packet.exposure && packet.exposure.subjects) || []);
+  for (const s of people) {
+    const pop = s && (s.pop || s.popid || s.speakerId);
+    if (pop && s.name && body.includes(s.name)) printed.add(pop);
+  }
+  if (!printed.size) return null;
+  const hood = packet.signal && packet.signal.hood;
+  const hits = threads
+    .map(t => ({ t, n: (t.popids || []).filter(p => printed.has(p)).length }))
+    .filter(h => h.n > 0)
+    .sort((a, b) => b.n - a.n || (b.t.hood === hood) - (a.t.hood === hood) || (b.t.lastCycle || 0) - (a.t.lastCycle || 0));
+  if (!hits.length) return null;
+  const slug = hits[0].t.slug;
+  const closeLine = String(draftText || '').match(/^THREAD-CLOSED:\s*(\S+)\s*$/im);
+  const verb = closeLine && closeLine[1] === slug ? 'closed' : 'advanced';
+  return { slug, verb };
+}
+
 function renderPacketIntake(draftText, packet) {
   const body = stripModelMetadataTail(draftText);
   const lines = [body, '', '## INTAKE'];
@@ -417,7 +447,10 @@ function renderPacketIntake(draftText, packet) {
   const hood = packet && packet.signal && packet.signal.hood;
   const quoted = ((packet && packet.exposure && packet.exposure.sources) || [])
     .find(s => s && s.quote && s.name && body.includes(s.name));
-  if (quoted) {
+  const thread = matchOpenThread(body, draftText, packet);
+  if (thread) {
+    lines.push('STORYLINE: ' + thread.slug + ' | ' + thread.verb);
+  } else if (quoted) {
     const slug = (String(hood || 'city') + '-' + String(quoted.name) + '-' +
       String((packet.signal && packet.signal.kind) || 'arc'))
       .toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 80);
@@ -1270,6 +1303,7 @@ module.exports = {
   stripModelMetadataTail,
   stripRepairChrome,
   renderPacketIntake,
+  matchOpenThread,
   resolveMaxToolCalls,
   openRouterToolLoop,      // Task 2.5.5 — shared by the wake-1 fact selection (cron-desk-run.js)
   callOpenRouterRaw,

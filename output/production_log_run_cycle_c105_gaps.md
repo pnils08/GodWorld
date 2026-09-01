@@ -487,8 +487,8 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **Category:** pipeline-fragility
 - **What happened:** `updateStorylineStatus_ v1.2: Complete. Dormant: 0, Concluded: 0, Abandoned: 9, Reactivated: 0`. Every open thread dropped in a single pass — Stabilization Fund, OARI, Transit Hub, Baylight, Health Center, Osei, A's, Bulls, Paulette/Raymond. Several described states the world has since moved past (the OARI line reads "whether the program launches is the story" — it launched this cycle), so abandonment is arguably right for those; but zero concluded and zero dormant across nine suggests the only available terminal state is abandonment.
 - **Why it matters:** `/sift` opens C105 with an empty storyline slate. A story that resolves should conclude, not be abandoned — the distinction is what lets the newsroom write an ending rather than drop a thread.
-- **Suggested action:** OPEN, engine.138.
-- **Pointer:** engine.138
+- **Suggested action:** **CLOSED S407 — the finding was real and pointed at a corpse.** `updateStorylineStatus_` ages `Storyline_Tracker`, DISCONTINUED 2026-08-05 and superseded by `Storyline_Ledger`. There was no missing `concluded` transition to build. The real defect was one layer out: `Storyline_Ledger` had **zero readers** repo-wide, and `buildDeskPackets` fed reporters from the dead tracker, while the live daily writers read neither — their prompt is `desk_signal`, which carried no threads at all. Every writer met the cycle blind, so `Closed` is 0 across all 23 threads and `FirstCycle == LastCycle` on every row: a story cannot end when nobody is shown one running. Fixed by wiring the return path (deskSignal v1.2 thread lane → reporter prompt block → desk-packet adapter) and taking the Phase-8 ager off-path (engine.140, undeployed). A second defect surfaced in the data: the Saturday cron's cross-week update wrote one column right (0-indexed `startCol` passed `1`), corrupting the only 5 rows that ever recurred — fixed and the rows repaired.
+- **Pointer:** engine.140; [[../docs/plans/2026-08-31-c105-chase-sessions]] §Session S-B DONE
 
 ## LOW-severity gaps
 

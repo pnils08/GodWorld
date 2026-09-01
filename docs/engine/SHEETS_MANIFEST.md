@@ -68,8 +68,8 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 - **`Media_Ledger`**: Tracking media articles published.
 - **`Media_Intake`**: Parsing published articles back into the simulation.
 - **`Media_Briefing`**: Pre-publish directives to the LLMs.
-- **`Storyline_Tracker`**: DISCONTINUED (Mike-direct 2026-08-05) — superseded by `Storyline_Ledger`; legacy engine writers (storylineWeavingEngine et al.) still touch it, retirement is separate work.
-- **`Storyline_Ledger`**: INTAKE-fed storyline threads (pipeline.45). Upserted by `scripts/cron-saturday-run.js` step 6b from reporter-authored INTAKE slugs; 12 slim columns, status flips on verbs only, dormancy derived by readers from `LastCycle` (never stored).
+- **`Storyline_Tracker`**: DISCONTINUED (Mike-direct 2026-08-05) — superseded by `Storyline_Ledger`. **No readers left (S407)**: `buildDeskPackets.js` was the last one and now reads the ledger. Legacy engine writers (`storylineWeavingEngine`, `mediaRoomIntake`) still append to it; `updateStorylineStatus_` no longer ages it (engine.140, disabled at both Phase-8 call sites). `monitorStorylineHealth_` still READS it and publishes `S.storyHooks`/`S.storylineHealth` from it — the one live path still carrying this tab's data into the world. Full retirement is separate work.
+- **`Storyline_Ledger`**: INTAKE-fed storyline threads (pipeline.45). Upserted by `scripts/cron-saturday-run.js` step 6b from reporter-authored INTAKE slugs; 12 slim columns, status flips on verbs only, dormancy derived by readers from `LastCycle` (never stored). **Read back into the newsroom (S407)** by `buildWorldSummary.js` (`openThreadEntries` → `desk_signal` `kind:'thread'` lane, rendered to writers by `cron-desk-run.js`) and by `buildDeskPackets.js` (`normalizeStorylineLedger`). Threads are continuation candidates, never a controlled vocabulary — the anti-pigeonhole contract is unchanged.
 - **`Storyline_Intake`**: Parsing media coverage into storyline progress.
 - **`Story_Seed_Deck`**: Queued ideas for LLM articles.
 - **`Story_Hook_Deck`**: Curated hooks sent to the V3 generator.
@@ -160,8 +160,8 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase05-citizens/processAdvancementIntake.js` | Advancement_Intake*, Generic_Citizens, Simulation_Ledger, LifeHistory_Log | own-tab | ACTIVE at `Phase5-Advancement`, both entry points; `checkEmergencePromotions_` promotes GC rows at EmergenceCount ≥ 3; `processIntake_` routes unknown intake names to Generic_Citizens, never mints SL rows |
 | `phase05-citizens/generateMediaModeEvents.js` | LifeHistory_Log, Simulation_Ledger | own-tab | |
 | `phase06-analysis/processArcLifeCyclev1.js` | Story_Arcs | own-tab | |
-| `phase06-analysis/storylineHealthEngine.js` | Storylines | own-tab | |
-| `phase06-analysis/updateStorylineStatusv1.2.js` | Storylines | own-tab | |
+| `phase06-analysis/storylineHealthEngine.js` | Storyline_Tracker | own-tab | ACTIVE at `Phase8-StorylineHealth`; reads the DISCONTINUED tracker and publishes `S.storyHooks` + `S.storylineHealth` into ctx — needs a caller-graph pass before it can follow engine.140 |
+| `phase06-analysis/updateStorylineStatusv1.2.js` | Storyline_Tracker | own-tab | OFF-PATH S407 (engine.140) — Phase-8 call commented at both entry points; the tab it ages is discontinued and readerless. `generateStorylineBriefingSection_` in the same file has no caller |
 | `phase06-analysis/applyMigrationDrift.js` | Neighborhood_Map | own-tab | |
 | `phase06-analysis/economicRippleEngine.js` | World_Population | own-tab | writes World_Population, not Population_Stats (that tab does not exist) |
 | `phase07-evening-media/mediaRoomIntake.js` | Media_Ledger, Storyline_Tracker, Cultural_Ledger, MediaRoom_Paste, Media_Intake, Media_Briefing, citizen/advancement/continuity intake tabs | phase11 + operator | cycle entry `processMediaIntake_(ctx)` runs at Phase 11; `processMediaIntakeV2()` is operator null-ctx; ~49 writes, NOT a migration target |

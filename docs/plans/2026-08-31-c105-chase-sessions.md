@@ -150,6 +150,46 @@ Carrier is `previousCycleState.initiativePhases`, written Phase 5, serialized Ph
 
 **Exit:** storylines can conclude; G-PF20, B3, C1, G-PF28 closed. Engine code committed undeployed.
 
+#### DONE — S407, 2026-08-31
+
+**Ruling: the finding was real and pointed at a corpse.** `updateStorylineStatus_` was ageing `Storyline_Tracker`, DISCONTINUED 2026-08-05 (Mike-direct) and superseded by `Storyline_Ledger`. There is no missing `concluded` transition to build — step 2 of this session's plan is void. The engine was correct; the tab it was correct about is dead.
+
+**The loop, traced end to end.**
+
+| Piece | State found |
+|---|---|
+| `Storyline_Ledger` (23 rows) | live; Saturday cron step 6b accumulates reporter slugs weekly |
+| readers of that tab | **zero**, repo-wide — `scripts/`, `lib/`, `phase*/`, `.claude/`, `docs/` |
+| `buildDeskPackets.js` | fed reporters from the DISCONTINUED tracker — which Phase 8 had just emptied |
+| the live daily writers | never read desk-packets at all; their prompt is `desk_signal_c{N}.json`, which carried no threads |
+
+So every writer met the cycle blind. `cron-desk-run.js:1051` has always offered the full verb vocabulary — `advanced / opened / closed / referenced` — but you cannot close a story you were never shown. Across 23 threads, `Closed` is 0 and `FirstCycle == LastCycle` on every row. **Not a scoring bug: a missing return path.**
+
+**Second defect, found in the data.** Five ledger rows were 13 columns wide with the slug duplicated into `FirstCycle`. `lib/sheets.updateRangeByPosition` takes a **0-indexed** startCol; step 6b passed `1`, so every cross-week update wrote the row at B..M and left the stale slug in A. Updates only fire when a slug recurs, and one run has ever had recurrences — 2026-08-29, `5 row(s) updated` (`logs/saturday-run.log.1.gz:70`) — exactly the 5 corrupted rows. Same class as the S366 engine82 incident. Fixed, and the 5 rows repaired live and read back clean (24 rows, uniform at 12 columns).
+
+**Built (`b12bb4f1`, `1c772aae`, `0b6f6fed`).**
+
+1. `buildWorldSummary.js` deskSignal **v1.2** — `openThreadEntries`, pure: Storyline_Ledger → a `kind:'thread'` entry per lane, routed by the row's own `Desks` column, unrouted falling to civic rather than being dropped. Freshest first, then most-covered, capped 12/lane.
+2. `cron-desk-run.js` — threads render in their **own block**, not mixed into the pointer list; they are the only entries a writer can continue rather than open. The block asks for the slug back character-for-character on the INTAKE STORYLINE line.
+3. `buildDeskPackets.js` — repointed at the live tab through `normalizeStorylineLedger`, an adapter into the Tracker-shaped fields the three consumption sites already read.
+4. **engine.140** (UNDEPLOYED) — `Phase8-StorylineStatus` commented at both call sites, file convention, retained for reversibility. Writes nothing to ctx, so the removal cascades nowhere.
+
+**The design ruling that matters: showing is not validating.** The 2026-08-05 anti-pigeonhole contract holds unchanged — slugs stay reporter-authored free-form kebab, checked against no list. A thread is a continuation *candidate*; a genuinely new piece still mints its own slug. Dormancy stays derived from `LastCycle` age and is never stored, because stored-derived columns are what rotted the old tracker. Windows carry the tracker's tuning: live under 5 cycles, dormant 5–14, dropped at 15+.
+
+**Exit criteria, one by one.**
+
+- **G-PF20 / B3 — CLOSED by ruling.** Not "no concluded path"; a dead tab plus a missing return path. Both fixed.
+- **C1 — CLOSED, not a defect.** `Articles: 0, Storylines: 0` is a correct report of an empty queue. `Media_Intake` (240 rows) and `Storyline_Intake` (362 rows) read live are **100% `Status=processed`**, last entries from E89 — the feeder is the retired `/write-edition` intake path. The newsroom→engine return path is the Saturday cron now, and that path is what this session wired. A corpse's silence, not a stall.
+- **G-PF28 — DETACHED from S-B.** `S.mediaEffects` read at Phase 5 / written at Phase 7 is an engine phase-ordering seam, unrelated to the tracker/ledger split. It rides the bench wave on its own; it was mis-bundled here.
+- **engine.141 opened** — `monitorStorylineHealth_` still reads the dead tracker and publishes `S.storyHooks` + `S.storylineHealth` into ctx. The one live path still carrying that tab's data into the world; needs its own caller-graph pass.
+
+**Cover:** 22 new cases in `buildWorldSummary.test.js` (routing, multi-desk, unrouted-to-civic, dormancy boundaries at 4/5/14/15, closed omitted, blank slug, lane cap, empty ledger, emitDeskSignal wiring, meta contract) — **218/218**. Full suite 190/192; the two failures (`djDirect`, `rateEditionCoverage`) reproduce on a clean stash and pre-date this work. 1198 GAS globals, 0 collisions.
+
+**Verified against the live ledger, not asserted:** 23 threads route 11 civic / 3 sports / 6 culture / 3 business at C105, all marked dormant at C109, all dropped at C120; POPIDs resolve to real ledger names (`POP-00001` → Vinnie Keane).
+
+**Acceptance is the next unattended run**, not a demo: Step 5 rebuilds `desk_signal` with the thread lane, the next writer wake renders it, and the following Saturday cron writes clean updates. The shape to watch for is the first `closed` verb the ledger has ever recorded.
+
+
 ---
 
 ### Session S-C: pipeline chain hygiene (Node-side, offloadable)

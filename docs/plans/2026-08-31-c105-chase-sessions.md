@@ -207,6 +207,21 @@ So every writer met the cycle blind. `cron-desk-run.js:1051` has always offered 
 
 **Exit:** four entries closed; no bench needed.
 
+#### DONE — S407, 2026-09-01
+
+All four closed, plus G-PF11 free (same file as G-PF26). Nothing here was bench-gated, so it is all live on land.
+
+| Entry | Ruling |
+|---|---|
+| **G-PF25** chain order | **Both remedies, not either.** Step 5.57 → **5.85**, after 5.8. And `buildWorldState.js` now refuses to write on ABSENT canon — the distinction is the fix: STALE degrades-and-flags (the edition pipeline is frozen, lag is expected), ABSENT means the chain ran out of order. Every consumer falls back correctly when the fold is *missing*; none can tell when it is *gutted*. Proven on all three branches: absent → exit 1 nothing written, absent+`--allow-no-canon` → 5,484 B, restored → 55,684 B `canon current`. Checked before moving: no reverse dependency, and the only two readers in the repo (`lib/mags.js`, `lib/wakePerception.js`) are cron-side. |
+| **G-PF26** sports names | **Pre-flight, not write-time — and that choice is the substance.** The dashboard write path already refuses a bad name at entry and E212 landed anyway; it was typed into the sheet, and no code path guards that. The check goes where every row passes regardless of who wrote it, reusing `resolveFeedNames` rather than adding a fourth name resolver to this repo. A missing-comma heuristic rides along because "does NOT resolve" alone would not have pointed at the defect. Reports by sheet row. WARNING, not blocker — a name typo degrades one story, it does not corrupt engine state. Replayed against the real cell: as-was → both defects flagged; comma-fixed → `MISSPELLED — rescued to "Carmen Mesa" (POP-00081)`; as repaired → clean. |
+| **G-PF24** hood gate | **Canon names, and the gate was right.** `hood` is `{ kind: 'str' }` (`loadEventContentLedger.js:71`) matched against the citizen row's Neighborhood, so `hood=lake_merritt` could never have fired. Rejecting was correct; rejecting was the wrong *remedy* — a slug is recoverable and the lines were good. `normalizeHoodGate` repairs and stores the corrected string (passing our own check without fixing the stored value would write a row the engine can never match — the silent version of the same bug). Prompt gained an enumerated verbatim allow-list. All five C105 rejects recover. |
+| **G-PF23** canon identity | **IDENTITY + CANON NAMES, and the split is the safety property.** 22 hood paragraphs from §Neighborhoods, condensed and figure-scrubbed, rendered `IDENTITY (do not print)` as register — not content. Landmarks from `### Tier 1 — Use real names` sections ONLY, so the feed *structurally* cannot surface a Tier-2 name needing a substitute; Tier 2 stays the blocklist's job. Canon sweep over the entire injected feed: **0 hits** against 39 blocklist names. |
+| **G-PF11** (rode free) | `/pre-flight` with no argument had always exited 2 — the deriver grepped for `Cycle: N`, a token the PIN has never carried. Reads `canonical C<N>` now. Live no-arg run: Cycle 105, READY, exit 0. |
+
+**Acceptance is the next unattended run**, not a demo — the next cycle exercises the reordered chain, the repaired hood gates, and the identity-fed texture in one pass. Suite 190/192 throughout; `djDirect` and `rateEditionCoverage` reproduce on a clean stash and pre-date this work.
+
+
 ---
 
 ### Session S-D: dead-file triage

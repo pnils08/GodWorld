@@ -36,14 +36,7 @@ Your own lines this week (continuity only, not tracker canon):
 
 No district pack on disk for this office this cycle.
 
-## DECISION 1 — Baylight District — Final Council Vote — action due this cycle
-
-Where it stands: C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…
-On the calendar: Phase II shortlist published — 4 qualified bidders reduced to 3 — due THIS cycle.
-
-Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
-
-## DECISION 2 — Your constituents this cycle — crisis and credit
+## DECISION 1 — Your constituents this cycle — crisis and credit
 
 Crisis: **Chinatown** — mood clearly upbeat, street trade steady, crime low. The people there are living this cycle whether City Hall speaks or not.
 Success: **Downtown** — mood clearly upbeat, street trade busy. Somebody's work is paying off; say whose, or someone else will claim it.

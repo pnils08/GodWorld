@@ -60,10 +60,11 @@ Your own lines this week (continuity only, not tracker canon):
 Latest district pack on disk: output/cron-civic/packs/STAFF-DM-COMM_c104.json
 This week's lever from that pack: no move this cycle
 
-## DECISION 1 — West Oakland Stabilization Fund — action due this cycle
+## DECISION 1 — West Oakland Stabilization Fund — engine-flagged
 
-Where it stands: C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.
-On the calendar: Month-five disbursement batch review — due THIS cycle.
+Where it stands: C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.
+Budget: $28M.
+On the calendar: Month-six disbursement review + canvass launch.
 The engine's own review flags this: West Oakland: daily life is visibly declining — the mood is slipping, storefronts are quieter — and no city program is currently pointed at it.
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.

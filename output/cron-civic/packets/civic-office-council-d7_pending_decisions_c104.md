@@ -31,10 +31,11 @@ Your own lines this week (continuity only, not tracker canon):
 Latest district pack on disk: output/cron-civic/packs/COUNCIL-D7_c104.json
 This week's lever from that pack: stand with KONO or leave it
 
-## DECISION 1 — Temescal Community Health Center — action due this cycle
+## DECISION 1 — Temescal Community Health Center — engine-flagged
 
-Where it stands: C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.
-On the calendar: HCAI first-comments window resolution and Phase 1 close — due THIS cycle.
+Where it stands: C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.
+Budget: $45M.
+On the calendar: Structural frame groundbreaking.
 The engine's own review flags this: Temescal: daily life is visibly declining — storefronts are quieter, housing pressure is building — and no city program is currently pointed at it.
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.

@@ -192,7 +192,56 @@ const mayor = buildPack({
   root: tmp, cycle: '103', agentDir: 'MAYOR-01', officeMap: map,
 });
 check('mayor picks one initiative', mayor.pulse && mayor.pulse.initiative && mayor.known.filter(k => /^F-INIT-/.test(k.id)).length === 1);
-check('mayor has no neighbor dump', mayor.exposure.subjects.length === 0);
+// This turn's pick (INIT-006, hood Jack London) has no fixture ledger rows —
+// zero subjects here is correct BECAUSE nobody real lives there, not because
+// a citywide role seat is structurally denied real people (civic.29 below
+// proves the opposite: when her turn DOES point at a hood with real rows,
+// she gets them).
+check('mayor sees nobody in a hood with no fixture rows', mayor.exposure.subjects.length === 0);
+
+// civic.29: a citywide role seat (mayor, DA, police chief) has no fixed turf,
+// so it used to get peopleAll=[] unconditionally regardless of what hood its
+// PICKED turn pointed at — the mayor's real pack claimed "no active ledger
+// people in West Oakland" while 71 existed. This isolated fixture proves the
+// fix: a role seat whose turn points at a hood WITH real ledger rows gets them.
+const tmp3 = fs.mkdtempSync(path.join(os.tmpdir(), 'civic-office-pack-role-hood-'));
+fs.mkdirSync(path.join(tmp3, 'output'));
+fs.mkdirSync(path.join(tmp3, 'scripts'));
+fs.writeFileSync(path.join(tmp3, 'scripts', 'civic-office-map.json'), JSON.stringify({
+  offices: [{
+    officeId: 'MAYOR-01', title: 'Mayor', holder: 'Mayor Test', popid: 'POP-TEST34',
+    district: 'citywide', faction: 'OPP', agentDir: 'civic-office-mayor',
+  }],
+  projects: [],
+}));
+fs.writeFileSync(path.join(tmp3, 'output', 'simulation_ledger_snapshot.jsonl'),
+  [
+    JSON.stringify({ POPID: 'POP-00901', Name: 'Alpha Local', Neighborhood: 'Temescal', Status: 'active', RoleType: 'baker', Tier: 4 }),
+    JSON.stringify({ POPID: 'POP-00921', Name: 'Beta Turf', Neighborhood: 'Temescal', Status: 'active', RoleType: 'nurse', Tier: 3 }),
+  ].join('\n') + '\n'
+);
+fs.writeFileSync(path.join(tmp3, 'output', 'initiative_tracker.json'), JSON.stringify({
+  initiatives: [{
+    id: 'INIT-DUE', name: 'Temescal Due Thing', neighborhoods: ['Temescal'],
+    implementation: { phase: 'pilot-active', summary: 'due this cycle', nextActionCycle: 103 },
+  }],
+}));
+const roleHoodAudit = {
+  snapshots: {
+    Neighborhood_Map: [{ Neighborhood: 'Temescal', Sentiment: '0.55', CrimeIndex: '0.76', NeighborhoodTrajectory: 'growth', TrajectoryMomentum: '7' }],
+    Civic_Office_Ledger: [],
+    Crime_Metrics: [],
+  },
+};
+const mayor2 = buildPack({
+  root: tmp3, cycle: '103', agentDir: 'MAYOR-01',
+  officeMap: JSON.parse(fs.readFileSync(path.join(tmp3, 'scripts', 'civic-office-map.json'), 'utf8')),
+  audit: roleHoodAudit,
+});
+check('role seat turn lands on the due Temescal initiative', mayor2.pulse && mayor2.pulse.hood === 'Temescal', mayor2.pulse && mayor2.pulse.hood);
+check('role seat gets real people once its turn names a real hood', mayor2.exposure.subjects.length === 2, JSON.stringify(mayor2.exposure.subjects));
+check('role seat people are named, not borrowed from elsewhere', mayor2.exposure.subjects.some(s => s.name === 'Alpha Local') && mayor2.exposure.subjects.some(s => s.name === 'Beta Turf'));
+check('role seat prewrite no longer falsely claims nobody lives there', !mayor2.prewrite.missing.some(m => /no active ledger people/.test(m)));
 
 console.log((failed ? failed + ' failed' : 'ok') + ' civic office pack');
 process.exit(failed ? 1 : 0);

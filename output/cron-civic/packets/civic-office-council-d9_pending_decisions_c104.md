@@ -22,6 +22,7 @@ Your approval stands at 53 — down 1 since last cycle.
 You already lived Mon through Thu. Sunday is decide, not a blank brief.
 Your own lines this week (continuity only, not tracker canon):
 1. stated: [District Priorities] Terrence Mobley — Laurel’s progress isn’t an accident—it’s the result of focused investment. We’re not slowing down now just because the Mayor’s spotlight moved on. --- stated: [Baylight District Final Council Vote] Terrence Mobley — Uptown's success isn't just numbers—it's proof that when we invest in our people, Oakland thrives. Let's keep building, not just here, but across the distri
+2. datawake: "Laurel’s crime rates remain below city averages, with property crimes at 27 and violent crimes at 24 this cycle—well under the city’s 40.6 and 33.5. Sentiment stands steady at 0.49, and our housing pressure is flat zero. This isn’t a district in crisis—it’s one worth protecting. I’ll defend our momentum." By leveraging D9’s lower crime index (0.45 vs city 0.709) and stable metrics, Mobley opts to defend th
 
 Latest district pack on disk: output/cron-civic/packs/COUNCIL-D9_c104.json
 This week's lever from that pack: defend the district or go quiet

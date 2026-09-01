@@ -731,16 +731,32 @@ function buildPack(opts) {
 
   const kind = seatKind(office);
   const hoods = turfHoods(office);
-  const peopleAll = kind === 'role' ? [] : loadConstituents(root, hoods, opts.cap || 0);
+  let peopleAll = kind === 'role' ? [] : loadConstituents(root, hoods, opts.cap || 0);
   const audit = opts.audit || loadAudit(root, cycle);
   const job = loadOfficeJob(audit, office);
-  const turf = kind === 'role' ? [] : loadTurfMetrics(audit, hoods);
-  const life = kind === 'role' ? { businesses: [], churches: [], events: [] } : loadTurfLife(root, cycle, hoods);
-  const chaos = kind === 'role' ? [] : loadCycleEvents(root, cycle, hoods);
+  let turf = kind === 'role' ? [] : loadTurfMetrics(audit, hoods);
+  let life = kind === 'role' ? { businesses: [], churches: [], events: [] } : loadTurfLife(root, cycle, hoods);
+  let chaos = kind === 'role' ? [] : loadCycleEvents(root, cycle, hoods);
   const inits = loadInitRows(root, cycle, hoods, office, kind);
   const cabinet = kind === 'initiative' ? loadCabinet(root, office, cycle) : [];
   const hoodScores = scoreHoods(audit);
-  const turn = pickTurn({ kind, office, cycle, inits, job, life, hoods, turf, chaos, cabinet, hoodScores });
+  let turn = pickTurn({ kind, office, cycle, inits, job, life, hoods, turf, chaos, cabinet, hoodScores });
+  // civic.29: a citywide role seat (mayor, DA, police chief) has no fixed
+  // turf, so turfHoods() is correctly empty for her — but when her PICKED
+  // turn points at a specific neighborhood this cycle, she was told "no
+  // active ledger people" there even when the ledger has dozens (verified:
+  // 71 active West Oakland citizens the mayor's pack claimed didn't exist).
+  // Scoring never reads people/turf/life/chaos (only inits/hoodScores/job),
+  // so re-running pickTurn with a late, turn-specific load is safe and
+  // deterministic — same pick, now with real texture for that one hood.
+  if (kind === 'role' && !turn.empty && turn.pulse && turn.pulse.hood) {
+    const turnHoods = [turn.pulse.hood];
+    peopleAll = loadConstituents(root, turnHoods, opts.cap || 0);
+    turf = loadTurfMetrics(audit, turnHoods);
+    life = loadTurfLife(root, cycle, turnHoods);
+    chaos = loadCycleEvents(root, cycle, turnHoods);
+    turn = pickTurn({ kind, office, cycle, inits, job, life, hoods: turnHoods, turf, chaos, cabinet, hoodScores });
+  }
   const people = turn.empty ? [] : peopleForPick(peopleAll, {
     init: inits.find(i => turn.pulse && (i.id || i.InitiativeID) === turn.pulse.initiative),
     label: turn.pulse && turn.pulse.label,

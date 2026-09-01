@@ -57,61 +57,58 @@ Your own lines this week (continuity only, not tracker canon):
 3. stated: [Temescal Community Health Center — Phase 1 Closeout] Avery Santana — Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5.
 4. stated: [Baylight District — Phase II Shortlist Approval] Avery Santana — Three bidders, one vision: a Baylight District built by Oakland, for Oakland. Let’s vote yes and get to work.
 5. stated: [Oakland Youth Apprenticeship Pipeline — Corrective Action Plan] Avery Santana — We over-engineered the intake. That ends today—because every young person in this city deserves a shot, not a runaround.
-6. stated: [KONO Infrastructure Crisis Response] Avery Santana — KONO’s infrastructure failure isn’t just a pothole—it’s a breach of trust, and we’re fixing it now.
 
 Latest district pack on disk: output/cron-civic/packs/MAYOR-01_c104.json
 This week's lever from that pack: Review findings and corrective actions report
 
-## DECISION 1 — West Oakland Stabilization Fund — action due this cycle
+## DECISION 1 — West Oakland Stabilization Fund — engine-flagged
 
-Where it stands: C102: Month-four disbursement batch approved (7 households), total disbursed: 45 of ~280.
-On the calendar: Month-five disbursement batch review — due THIS cycle.
+Where it stands: C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.
+Budget: $28M.
+On the calendar: Month-six disbursement review + canvass launch.
 The engine's own review flags this: West Oakland: daily life is visibly declining — the mood is slipping, storefronts are quieter — and no city program is currently pointed at it.
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
 
-## DECISION 2 — Oakland Alternative Response Initiative — action due this cycle
+## DECISION 2 — Oakland Alternative Response Initiative — engine-flagged
 
-Where it stands: C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.
-On the calendar: D7 next-cycle report and community satisfaction survey — due THIS cycle.
+Where it stands: C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established.
+Budget: $12.5M.
+On the calendar: First expansion-district launch (D1).
 The engine's own review flags this: West Oakland, Fruitvale, East Oakland: improvement flagged at low severity.
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
 
-## DECISION 3 — Fruitvale Transit Hub Phase II — Visioning — action due this cycle
+## DECISION 3 — Fruitvale Transit Hub Phase II — Visioning — engine-flagged
 
-Where it stands: C102: Submitted pipeline exhaustion docs + stamped pedestrian-path redesign
-On the calendar: Bureau review of compliance submissions — due THIS cycle.
+Where it stands: C104: Launched community visioning sessions focused on small business and vendor protections
+Budget: $230M.
+On the calendar: Conduct first visioning session by January 15.
 The engine's own review flags this: Fruitvale: improvement flagged at low severity.
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
 
-## DECISION 4 — Temescal Community Health Center — action due this cycle
+## DECISION 4 — Temescal Community Health Center — engine-flagged
 
-Where it stands: C102: Construction timeline accelerated; double shifts ordered for caisson drilling and excavation.
-On the calendar: HCAI first-comments window resolution and Phase 1 close — due THIS cycle.
+Where it stands: C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.
+Budget: $45M.
+On the calendar: Structural frame groundbreaking.
 The engine's own review flags this: Temescal: daily life is visibly declining — storefronts are quieter, housing pressure is building — and no city program is currently pointed at it.
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
 
-## DECISION 5 — Baylight District — Final Council Vote — action due this cycle
+## DECISION 5 — Oakland Youth Apprenticeship Pipeline — engine-flagged
 
-Where it stands: C101: Post-event site inspection for the C100 Celebration closed clean — Delgado full walkdown of event field and construction exclusion perimeter found no surface failure beyond expected…
-On the calendar: Phase II shortlist published — 4 qualified bidders reduced to 3 — due THIS cycle.
-
-Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
-
-## DECISION 6 — Oakland Youth Apprenticeship Pipeline — action due this cycle
-
-Where it stands: C102: Executive review ordered to address stalled recruitment and intake bottlenecks.
-On the calendar: Review findings and corrective actions report — due THIS cycle.
+Where it stands: C104: Corrective action plan published; intake simplified, 3 new recruitment partners added. Backlog clearance deadline set for C106.
+Budget: $12.5M.
+On the calendar: Backlog processing completion + town hall.
 The engine's own review flags this: West Oakland: daily life is visibly declining — the mood is slipping, storefronts are quieter — and no city program is currently pointed at it.
 The engine's own review flags this: East Oakland: daily life is visibly declining — the mood is slipping, storefronts are quieter — and no city program is currently pointed at it.
 The engine's own review flags this: West Oakland, East Oakland, Fruitvale: improvement flagged at low severity.
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
 
-## DECISION 7 — The city's people this cycle — crisis and credit
+## DECISION 6 — The city's people this cycle — crisis and credit
 
 Crisis: **KONO** — mood clearly upbeat, street trade steady, crime low. The people there are living this cycle whether City Hall speaks or not.
 Success: **Adams Point** — mood clearly upbeat, street trade slow. Somebody's work is paying off; say whose, or someone else will claim it.

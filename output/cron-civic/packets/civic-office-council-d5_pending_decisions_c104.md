@@ -31,18 +31,20 @@ Your own lines this week (continuity only, not tracker canon):
 Latest district pack on disk: output/cron-civic/packs/COUNCIL-D5_c104.json
 This week's lever from that pack: Review findings and corrective actions report
 
-## DECISION 1 — Oakland Alternative Response Initiative — action due this cycle
+## DECISION 1 — Oakland Alternative Response Initiative — engine-flagged
 
-Where it stands: C102: D7 performance review confirms stabilization post-KONO crisis; monitoring continues.
-On the calendar: D7 next-cycle report and community satisfaction survey — due THIS cycle.
+Where it stands: C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established.
+Budget: $12.5M.
+On the calendar: First expansion-district launch (D1).
 The engine's own review flags this: West Oakland, Fruitvale, East Oakland: improvement flagged at low severity.
 
 Your call — make your own move, in your own voice, with real consequences. No decision is not an option this cycle.
 
-## DECISION 2 — Oakland Youth Apprenticeship Pipeline — action due this cycle
+## DECISION 2 — Oakland Youth Apprenticeship Pipeline — engine-flagged
 
-Where it stands: C102: Executive review ordered to address stalled recruitment and intake bottlenecks.
-On the calendar: Review findings and corrective actions report — due THIS cycle.
+Where it stands: C104: Corrective action plan published; intake simplified, 3 new recruitment partners added. Backlog clearance deadline set for C106.
+Budget: $12.5M.
+On the calendar: Backlog processing completion + town hall.
 The engine's own review flags this: West Oakland: daily life is visibly declining — the mood is slipping, storefronts are quieter — and no city program is currently pointed at it.
 The engine's own review flags this: East Oakland: daily life is visibly declining — the mood is slipping, storefronts are quieter — and no city program is currently pointed at it.
 The engine's own review flags this: West Oakland, East Oakland, Fruitvale: improvement flagged at low severity.

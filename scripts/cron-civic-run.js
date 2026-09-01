@@ -557,8 +557,13 @@ async function runPrep() {
     const ownerRule = INITIATIVE_AGENT.find(r => r.re.test(init.name));
     const owner = ownerRule ? ownerRule.dir : null;
     const flagNotes = flagged.map(p => 'The engine\'s own review flags this: ' + ailmentPerception(p));
+    // civic.29: the Sunday packet had the same blind spot as the weekday pack
+    // (initFact() fix, same session) — budget was on the tracker but never
+    // handed to the seat, so mayor_open_c104 invented "$412,000" and "$1.2
+    // million" instead of citing the real $28M/$12.5M figures that exist.
     const body = [
       cleanInline(impl.summary) ? 'Where it stands: ' + cleanInline(impl.summary) : 'Where it stands: in ' + phaseProse(impl.phase) + '.',
+      init.budget ? 'Budget: ' + init.budget + '.' : null,
       impl.nextScheduledAction && cleanInline(impl.nextScheduledAction) ? 'On the calendar: ' + cleanInline(impl.nextScheduledAction) + (due ? ' — due THIS cycle.' : '.') : null,
       ...flagNotes,
     ].filter(Boolean).join('\n');
@@ -651,6 +656,17 @@ async function runPrep() {
       L.push('# Pending Decisions — ' + o.title + ' ' + o.holder + ' — Cycle ' + cycle);
       L.push('');
       if (appr) L.push('Your approval stands at ' + appr.approval + (appr.delta ? ' — ' + (appr.delta > 0 ? 'up' : 'down') + ' ' + Math.abs(appr.delta) + ' since last cycle.' : ' — holding.'));
+    }
+
+    // civic.29: an owner only had a legal way to cite their own initiative's
+    // budget when it happened to be hot THIS cycle — Baylight Authority's
+    // packet carried nothing in a quiet week, so her office had no citable
+    // figure for her own $2.1B project and the Sunday grounding gate flagged
+    // her citing it. Standing identity, not a this-week decision — no "your
+    // call" framing, so it doesn't get pulled into the DECISION count.
+    const ownInit = initiatives.find(i => INITIATIVE_AGENT.some(r => r.re.test(i.name) && r.dir === dir));
+    if (ownInit && ownInit.budget) {
+      L.push('', '## What you run', ownInit.name + ' — Budget: ' + ownInit.budget + '.');
     }
 
     L.push('', '## City This Cycle');
@@ -1152,6 +1168,40 @@ function noPhaseCheck(json) {
     + 'Keep trackerUpdates as {} or omit ImplementationPhase, and re-send the whole JSON object.';
 }
 
+// civic.29: the weekday datawake gate (ungroundedNumbers) never covered the
+// Sunday chain — mayor_open_c104's actual published statement invented
+// "Thirty-two eligible applicants... clear the backlog in 60 days" with
+// nothing in her packet naming 32 or 60. Nothing caught it; it sat as citable
+// civic-voice source material for a full week. This is the same check, wired
+// against every statement's narrative text AND its trackerUpdates.MilestoneNotes
+// (the one field that propagates into a future cycle's known[] via initFact()
+// — a number that lands there becomes ground truth for every seat after it).
+function statementNumberCheck(hay, context) {
+  return function (json) {
+    const bad = new Set();
+    for (const st of (json && json.statements) || []) {
+      const tu = st && st.trackerUpdates;
+      const notes = tu && typeof tu === 'object'
+        ? Object.values(tu).map(v => (v && typeof v === 'object' ? v.MilestoneNotes : null)).concat(tu.MilestoneNotes)
+        : [];
+      const texts = [st && st.decision, st && st.quote, st && st.fullStatement, ...notes];
+      for (const n of ungroundedNumbers(hay, texts, context)) bad.add(n);
+    }
+    if (!bad.size) return null;
+    return 'cited number(s) not in your packet: [' + [...bad].join(', ') + ']. Use only quantities present in the material above, or say it in words without inventing figures.';
+  };
+}
+function composeChecks() {
+  const fns = Array.prototype.slice.call(arguments).filter(Boolean);
+  return function (json) {
+    for (const fn of fns) {
+      const why = fn(json);
+      if (why) return why;
+    }
+    return null;
+  };
+}
+
 // civic.26 — seats a voice can fall back to when its own model is unreachable.
 // Ordered by how little the fleet already leans on them (kimi 3 seats, qwen 5,
 // deepseek 30), so a fallback costs as little voice distinctiveness as it can:
@@ -1313,7 +1363,9 @@ async function runMayorOpen() {
     'This is the AGENDA turn. Name what is on the floor. Do NOT emit trackerUpdates.ImplementationPhase or MayoralAction. The gavel comes after the hearing.',
     outputContract('mayor_open', cycle, initiatives, { forbidPhase: true }),
   ].join('\n');
-  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap, noPhaseCheck);
+  const hay = packet + '\n' + (wallInj || '');
+  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap,
+    composeChecks(noPhaseCheck, statementNumberCheck(hay, { cycle })));
   if (!r || r.error) {
     console.error('HALT: Mayor open failed — ' + (r ? r.error : 'no result') + '. Hearing must not start.');
     if (r && r.raw) { fs.mkdirSync(CIVIC, { recursive: true }); fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.raw.txt'), r.raw); }
@@ -1375,7 +1427,10 @@ async function runHearing() {
         'Do NOT emit trackerUpdates.ImplementationPhase. That is the Mayor\'s gavel after you speak.',
         outputContract(slug, cycle, initiatives, { forbidPhase: true }),
       ].join('\n');
-      const r = await callVoice(dir, model, user, 4000, officeMap, noPhaseCheck);
+      const hearingSeat = civicSeat.resolveOfficeRow(officeMap, dir);
+      const hay = packet + '\n' + (wallInj || '');
+      const r = await callVoice(dir, model, user, 4000, officeMap,
+        composeChecks(noPhaseCheck, statementNumberCheck(hay, { district: hearingSeat && hearingSeat.district, cycle })));
       if (!r || r.error) { results.push({ dir, slug, model, ok: false, error: r ? r.error : 'no result' }); return; }
       if (hearingHasPhase(r.json)) {
         results.push({ dir, slug, model, ok: false, error: 'hearing emitted ImplementationPhase' });
@@ -1444,7 +1499,11 @@ async function runMayorGavel() {
     'This is the GAVEL. You may now stamp trackerUpdates (ImplementationPhase / MayoralAction) for initiatives that moved. Hearing voices do not stamp.',
     outputContract('mayor_gavel', cycle, initiatives),
   ].join('\n');
-  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap);
+  // Transcript is included in hay — a hearing figure was already checked when
+  // spoken, so the gavel citing it back is legitimate, not a new fabrication.
+  const gavelHay = packet + '\n' + (wallInj || '') + '\n' + transcript.join('\n');
+  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap,
+    statementNumberCheck(gavelHay, { cycle }));
   if (!r || r.error) {
     console.error('HALT: Mayor gavel failed — ' + (r ? r.error : 'no result'));
     if (r && r.raw) fs.writeFileSync(path.join(CIVIC, 'mayor_gavel_c' + cycle + '.raw.txt'), r.raw);
@@ -1485,10 +1544,19 @@ async function runProjects() {
     if (!touches.length) { log('skip ' + slug + ' — no voice decision touched ' + seat.initiative + ' (Step 5 trigger rule)'); continue; }
     try {
       const model = officeModel(officeMap, seat.agentDir);
+      // civic.29: a Layer-3 seat only gets a packet file when its OWN
+      // initiative is independently hot this cycle — Baylight Authority
+      // speaks here via the Step 5 trigger (the mayor touched her initiative)
+      // even on a quiet week for her own desk, so `packet` is empty and she
+      // had no legal way to cite her own project's own budget (her real
+      // C104 turn cited "$2.1B" with nothing in hay grounding it).
       const packet = fs.existsSync(packetPathFor(seat.agentDir, cycle)) ? fs.readFileSync(packetPathFor(seat.agentDir, cycle), 'utf8') : '';
+      const ownInit = (tracker.initiatives || []).find(i => (i.id || i.InitiativeID) === seat.initiative);
+      const identity = ownInit && ownInit.budget ? 'What you run: ' + ownInit.name + ' — Budget: ' + ownInit.budget + '.' : '';
       const frame = touches.map(t => '- [' + t.slug + '] ' + (t.st.decision || '') + (t.st.quote ? ' — "' + t.st.quote + '"' : '')).join('\n');
       const wallInj = await positionWallInject(officeMap, seat.agentDir);
       const user = [
+        identity,
         'Here is what city hall decided this cycle (the political frame is LOCKED — you do not override it, stall it, or create political conflict):',
         '', frame, '',
         packet ? 'YOUR OWN DESK (from prep):\n\n' + packet + '\n' : '',
@@ -1500,7 +1568,9 @@ async function runProjects() {
         'You may invent operational details — names of facilities, timelines, specifics — but never citizens, statistics, or votes beyond your material.',
         outputContract(slug, cycle, tracker.initiatives || []),
       ].join('\n');
-      const r = await callVoice(seat.agentDir, model, user, 4000, officeMap);
+      const projectHay = identity + '\n' + frame + '\n' + packet + '\n' + (wallInj || '');
+      const r = await callVoice(seat.agentDir, model, user, 4000, officeMap,
+        statementNumberCheck(projectHay, { cycle }));
       if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result' }); continue; }
       const out = writeVoiceJson(slug, cycle, r.json);
       await positionWallRecordCascade(officeMap, seat.agentDir, r.json, cycle);
@@ -1830,6 +1900,29 @@ function datawakeStatementText(cand) {
 // the office's own data slice (commas stripped). Worded quantities ("seven
 // neighborhoods") pass; invented statistics ("renewals up 8%") don't — this
 // output is media-lane source material, so a fabricated number is contamination.
+const NUM_ONES = { zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9 };
+const NUM_TENS = { twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 };
+const NUM_SCALE = { hundred: 100, thousand: 1000, million: 1000000, billion: 1000000000 };
+// civic.29: mayor_open_c104's fabricated "Thirty-two eligible applicants" was
+// spelled out, not digits — the digit-only regex below never saw it. Scoped
+// to unambiguous compound number-words (21-99 compounds, "N hundred/thousand/
+// million/billion") rather than bare "one"/"two"/"twenty", which read as real
+// quantities constantly in ordinary prose ("one of three bidders") and would
+// flood this with false positives.
+function spelledNumberTokens(text) {
+  const out = [];
+  const compound = /\b(twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)[\s-](one|two|three|four|five|six|seven|eight|nine)\b/gi;
+  let m;
+  while ((m = compound.exec(text))) out.push(String(NUM_TENS[m[1].toLowerCase()] + NUM_ONES[m[2].toLowerCase()]));
+  const scaled = /\b(zero|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)\s+(hundred|thousand|million|billion)\b/gi;
+  while ((m = scaled.exec(text))) {
+    const w = m[1].toLowerCase();
+    const base = NUM_ONES[w] !== undefined ? NUM_ONES[w] : NUM_TENS[w];
+    if (base !== undefined) out.push(String(base * NUM_SCALE[m[2].toLowerCase()]));
+  }
+  return out;
+}
+
 function ungroundedNumbers(slice, texts, context) {
   const norm = s => String(s || '').replace(/,/g, '');
   const hay = norm(slice);
@@ -1844,7 +1937,19 @@ function ungroundedNumbers(slice, texts, context) {
   if (ctx.cycle) { allowed.add(String(ctx.cycle)); allowed.add(String(Number(ctx.cycle) - 1)); }
   const bad = new Set();
   for (const t of texts) {
-    for (const tok of norm(t).match(/\d+(?:\.\d+)?%?/g) || []) {
+    const nt = norm(t);
+    // "51st", "3rd" are street/ordinal names, not quantity claims — the Sunday
+    // gate's first live run flagged "51st" from "sound barriers along 51st".
+    // A lookahead embedded in the greedy \d+ backtracks around itself (5|1st
+    // still matches "5"), so filter by index against the source string instead.
+    const digitTokens = [];
+    for (const m of nt.matchAll(/\d+(?:\.\d+)?%?/g)) {
+      const after = nt.slice(m.index + m[0].length, m.index + m[0].length + 2);
+      if (/^(?:st|nd|rd|th)\b/.test(after)) continue;
+      digitTokens.push(m[0]);
+    }
+    const tokens = digitTokens.concat(spelledNumberTokens(String(t || '')));
+    for (const tok of tokens) {
       const bare = tok.replace(/%$/, '');
       if (allowed.has(bare) || hay.includes(bare)) continue;
       bad.add(tok);
@@ -2032,4 +2137,4 @@ if (require.main === module) {
     .catch(err => { console.error('[civic] Fatal:', err.message); process.exit(1); });
 }
 
-module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson };
+module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks };

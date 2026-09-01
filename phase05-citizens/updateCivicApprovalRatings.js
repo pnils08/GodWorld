@@ -741,6 +741,18 @@ function isFailing_(phase) {
  *   failed   — they took a fail phase. Paid, but they decided.
  *   silence  — overdue or never scheduled. Biggest drain.
  *   sitting  — still on the clock, not finished. Nothing is free.
+ *
+ * RULED INTENTIONAL, G-PF19 (engine.138, S406). This function reads the
+ * CURRENT phase string and NextActionCycle. It never compares against the
+ * prior cycle's phase, so **phase advancement is deliberately invisible
+ * here** — an initiative that moved planning → implementation-active scores
+ * the same -2 as one that sat untouched. That is the design: only finishing
+ * pays (see isPerforming_ — C103 sat at 95 on live-sounding phases and never
+ * built anything). The engine audit separately counts phase movement as an
+ * improvement; the two are not in conflict, they answer different questions
+ * ("is it finished?" vs. "did the phase string change?"). Do not add
+ * advancement credit here without a builder ruling — it re-opens the exact
+ * inflation this scoring was written to kill.
  */
 function classifyInitiativeMotion_(phase, nextActionCycle, cycle) {
   if (isPerforming_(phase)) return 'complete';

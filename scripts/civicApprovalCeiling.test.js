@@ -347,5 +347,54 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     defaults.base.composure >= 60 && defaults.base.family < 50);
 }
 
+// ── G-PF19 (engine.138, S406): lock the C105 civic-contradiction ruling ──────
+// Six live Initiative_Tracker rows, read off the sheet at C105. All six scored
+// "sitting" and the Mayor took -13. This block proves that reading is what the
+// code MEANS to do, so the contradiction is not re-chased as a defect.
+{
+  const C105 = [
+    { id: 'INIT-001', phase: 'disbursement-active',   next: 105 },
+    { id: 'INIT-002', phase: 'implementation-active', next: 105 },
+    { id: 'INIT-003', phase: 'visioning',             next: 105 },
+    { id: 'INIT-005', phase: 'construction-active',   next: 106 },
+    { id: 'INIT-006', phase: 'vote-scheduled',        next: 105 },
+    { id: 'INIT-007', phase: 'pilot-active',          next: 106 }
+  ];
+  C105.forEach(function (row) {
+    check('P1 ' + row.id + ' (' + row.phase + ') classifies sitting at C105',
+      A.classifyInitiativeMotion_(row.phase, row.next, 105) === 'sitting',
+      A.classifyInitiativeMotion_(row.phase, row.next, 105));
+  });
+
+  // The ruling itself: phase ADVANCEMENT is invisible to this scorer. An
+  // initiative that moved a phase this cycle and one that did not both score
+  // "sitting" — only finishing pays. Four of these six were counted as
+  // improvements by the engine audit in the same cycle; that is a different
+  // question, not a disagreement.
+  check('P2 advancement is invisible — advanced and un-advanced score alike',
+    A.classifyInitiativeMotion_('implementation-active', 105, 105) ===
+    A.classifyInitiativeMotion_('planning', 105, 105));
+  check('P3 only a complete phase pays',
+    A.isPerforming_('implementation-active') === false &&
+    A.isPerforming_('construction-complete') === true);
+
+  // The C105 arithmetic: 6 owned sitting rows = -12 on the Mayor.
+  check('P4 sitting scores -2 owned / -1 nearby',
+    A.approvalDeltaForInitiative_('sitting', true, false).delta === -2 &&
+    A.approvalDeltaForInitiative_('sitting', false, false).delta === -1);
+  const mayorC105 = C105.reduce(function (sum, row) {
+    return sum + A.approvalDeltaForInitiative_(
+      A.classifyInitiativeMotion_(row.phase, row.next, 105), true, false).delta;
+  }, 0);
+  check('P5 the six C105 rows total -12 for an owning Mayor',
+    mayorC105 === -12, String(mayorC105));
+
+  // Cadence dependency: NextActionCycle is written ONLY by the offline civic
+  // chain (scripts/applyTrackerUpdates.js). A row stamped 105 that the chain
+  // does not re-stamp becomes overdue the next cycle and falls to silence.
+  check('P6 an un-restamped NextActionCycle=105 row is silence at C106',
+    A.classifyInitiativeMotion_('implementation-active', 105, 106) === 'silence');
+}
+
 console.log(`\n${passed}/${passed + failed} passed`);
 process.exit(failed ? 1 : 0);

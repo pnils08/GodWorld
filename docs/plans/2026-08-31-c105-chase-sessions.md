@@ -39,14 +39,14 @@ pointers:
 
 | # | Session | Cluster | Code side | Why here |
 |---|---------|---------|-----------|----------|
-| S-A | Civic contradiction | B1/G-PF19 + B2 | ENGINE (bench) | The city's most visible number is wrong every cycle |
+| ~~S-A~~ | ~~Civic contradiction~~ **DONE S406** | B1/G-PF19 + B2 + B4 closed; G-PF33 opened | ENGINE (bench) | Ruled: no contradiction — three questions, three correct answers; one label fixed |
 | S-B | Storyline resolution | B3/G-PF20 + C1 + G-PF28 | ENGINE (bench) | `/sift` opens on an empty slate; blocks the newsroom |
 | S-C | Pipeline chain hygiene | G-PF24 + G-PF25 + G-PF23 + G-PF26 | NODE (no bench) | Cheap, offloadable, unblocks content quality |
 | S-D | Dead-file triage | G-PF32 | mixed | 35 files; decides what is history vs missing feature |
 | S-E | Instrumentation debt | A5 + A6 + A7 + G-PF22 + G-PF14 + G-PF30 + G-PF31 | mixed | Diagnostic only; batch and close |
 | — | *then* | business cascade finish → education | — | Build resumes once the sim stops generating anomalies |
 
-**B4 needs no session — it is already answered.** The hood swings it flagged wanted `cascadeAudit`'s spread lane run against post-C105 state; S405 did that and it PASSes at 2.74pp with all five invariants green. Close B4 citing `output/audit-reports/cascade-audit-2026-08-31.md` when S-A next touches the log.
+**B4 needs no session — it is already answered.** The hood swings it flagged wanted `cascadeAudit`'s spread lane run against post-C105 state; S405 did that and it PASSes at 2.74pp with all five invariants green. ~~Close B4 citing `output/audit-reports/cascade-audit-2026-08-31.md` when S-A next touches the log.~~ **Closed on the execution log, S406.**
 
 **A2 + A4 do not belong in the chase.** A2 is closed (misread log line). A4 (`updateHeritage_` all counters zero) is a business-formation path reporting nothing — same domain as the unfinished cascade. It rides the business-cascade plan, not a chase session.
 
@@ -69,6 +69,28 @@ pointers:
 **Exit:** one ruling per system, the disagreeing one fixed or documented as intentional, G-PF19 and B1/B2 closed or re-scoped. Engine code committed undeployed.
 
 **Do not:** retro-correct the mayor's stored approval number. Engine output is canon; a wrong number that fired is an event citizens lived. Fix forward.
+
+#### DONE — S406, 2026-08-31
+
+**Ruling: there was no contradiction. Three systems, three questions, three correct answers.** Verified against the six live `Initiative_Tracker` rows read at C105, not against the log's wording — the plan's own step-5 discipline, and it paid again.
+
+| System | Question it answers | C105 answer | Verdict |
+|---|---|---|---|
+| `updateCivicApprovalRatings_` | *Is it finished?* | no × 6 → `sitting`, −2 owned each | correct, **intentional**, documented |
+| engine audit | *Did the phase string change?* | yes × 4 → improvements | correct, **intentional**, unchanged |
+| `civicInitiativeEngine_` | *Did a scheduled decision resolve?* | no × 6 | correct; **the label was wrong** |
+
+**What "sitting" actually measures.** Neither phase advancement nor an action slot. `classifyInitiativeMotion_` (`updateCivicApprovalRatings.js:745`) takes only the *current* phase string and `NextActionCycle` — there is no prior-cycle comparison anywhere in the file, so **advancement is structurally invisible to the scorer by design**. Only `complete` pays; `isPerforming_:721` carries the reason in its own comment ("C103 sat at 95 on those and never built anything"). Six non-complete rows with unexpired clocks × −2 owned = −12, and decay supplies the last point of the observed −13. The scoring is not the defect and was not touched — adding advancement credit re-opens the exact inflation this design was written to kill, and that would be a builder call, not a chase edit. Ruling pinned in the function's doc comment.
+
+**The one fix.** `Processed N` printed `S.initiativeEvents.length` — decisions that *resolved*, not rows looked at (single push site, `civicInitiativeEngine.js:338`, reachable only inside the `voteCycle === cycle` block). At C105 the honest numbers were examined 6, in-scope 4 (INIT-002 and INIT-006 are `passed`+`signed`, skipped at :201), resolved 0. Now logs `civicInitiativeEngine v2.0: Examined N | In-scope M | Resolved K | …`. `Examined 0` is the shape that should alarm; `Resolved 0` against a healthy `Examined` is a quiet cycle.
+
+**Regression cover:** 6 cases appended to `scripts/civicApprovalCeiling.test.js` (P1–P6) driven by the real C105 rows — every row's classification, advancement-invisibility, the −12 total, and the C106 transition. **63/63 pass.**
+
+**Opened, not chased — G-PF33.** `NextActionCycle` and `ImplementationPhase` are the fields the approval engine scores on, and the complete writer set is `scripts/applyTrackerUpdates.js` (offline chain, `--apply`) plus a birth-stamp in `createInitiative_:2757`. Nothing in-cycle advances either for an initiative already in implementation; the in-engine reschedule at `:246` needs `ImplementationPhase='vote-ready'`, itself chain-written, so INIT-003 cannot move under its own power. Four rows carry `NextActionCycle=105` and there is no `close_c105.json`/`gate_c105.json`, so absent a chain apply they fall to `silence` at C106 — bounded by v1.7's diminishing ladder to −12, plus −4 sitting: Mayor 69 → ~53, above the 40 campaign threshold. Real, one-way, and a cadence gap rather than an in-world decision. Three candidate shapes are in the gap entry; the one that changes canon needs a builder ruling.
+
+**Also closed here:** B4 — `cascadeAudit` spread lane **PASSes at 2.74pp**, five invariants green (`output/audit-reports/cascade-audit-2026-08-31.md`), per plan line 49.
+
+**Deploy state:** one engine file changed (`civicInitiativeEngine.js`, log line + two counters), **committed undeployed** per the standing batch constraint. Rides the same bench wave as S-B.
 
 ---
 
@@ -135,7 +157,7 @@ Low world impact, diagnostic. Batch them precisely because none deserves its own
 
 ## Open questions
 
-1. **Does S-A's fix change stored civic numbers?** Standing answer is no — fix forward, never retro-correct canon. Confirm at the session, since the mayor's approval is the most visible number in the world.
+1. ~~**Does S-A's fix change stored civic numbers?**~~ **ANSWERED, S406: no, and the question dissolved.** The scoring was ruled correct, so there was nothing to retro-correct even if the standing answer had allowed it. The Mayor's 69 stands as an event citizens lived.
 2. **Is a fresh sandbox stood up before or after S-A/S-B?** Both produce engine code and both wait on the same bench wave. Building the bench once, after S-B, covers both — but only if nothing between them fires live.
 3. **How much of S-C offloads cleanly?** Offload ROI is volume × context-portability; items 2–4 look portable, item 1 is a judgment call and stays.
 

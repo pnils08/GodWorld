@@ -174,10 +174,20 @@ function runCivicInitiativeEngine_(ctx) {
   }
 
   var updated = false;
-  
+
+  // v2.0 (engine.138 / G-PF19): the old log line said "Processed N initiatives"
+  // where N was S.initiativeEvents.length — decisions that RESOLVED, not rows
+  // looked at. On C105 that printed "Processed 0" against six live rows and
+  // read as "the engine cannot see the tracker," when in fact it saw all six
+  // and correctly resolved none. Count the three distinct quantities so the
+  // line can never be read as scope again.
+  var examined = 0;   // rows entering the loop
+  var inScope = 0;    // rows still in an open lifecycle (past the skip gates)
+
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
-    
+    examined++;
+
     var initId = row[iID] || '';
     var name = row[iName] || '';
     var type = (row[iType] || 'vote').toString().toLowerCase();
@@ -201,6 +211,8 @@ function runCivicInitiativeEngine_(ctx) {
     if (status === 'passed' && row[iMayoralAction] === 'signed') {
       continue;
     }
+
+    inScope++;
 
     // v1.5 FIX: Re-check delayed initiatives each cycle
     // Delayed initiatives should try again - don't stay stuck forever
@@ -496,8 +508,13 @@ function runCivicInitiativeEngine_(ctx) {
     demographicsAvailable: Object.keys(neighborhoodDemographics).length > 0
   };
 
-  Logger.log('civicInitiativeEngine v1.6: Processed ' + S.initiativeEvents.length +
-             ' initiatives | Votes: ' + S.votesThisCycle.length +
+  // v2.0 (G-PF19): Examined / in-scope / resolved are three different numbers.
+  // "Resolved 0" with "Examined 6" is a correct, quiet cycle — no scheduled
+  // council action landed. "Examined 0" is the failure worth alarming on.
+  Logger.log('civicInitiativeEngine v2.0: Examined ' + examined +
+             ' initiatives | In-scope ' + inScope +
+             ' | Resolved ' + S.initiativeEvents.length +
+             ' | Votes: ' + S.votesThisCycle.length +
              ' | Grants: ' + S.grantsThisCycle.length +
              ' | Demographics: ' + (Object.keys(neighborhoodDemographics).length > 0 ? 'active' : 'unavailable'));
 }

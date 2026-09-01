@@ -141,7 +141,32 @@ Low world impact, diagnostic. Batch them precisely because none deserves its own
 
 ---
 
+## Proving record — engine.137 + engine.138 G-PF18 (S405, 2026-08-31)
+
+Kept here rather than in `DEPLOY.md`: that file is protocol + pointers, and per the builder rule the per-wave proving narrative lives in the wave's plan.
+
+**Bench: SANDBOX 0831, deployment @1, code = live base + 3 payload files only** (`applyCycleRecovery.js`, `bondEngine.js`, `applyInitiativeImplementationEffects.js`). The 4 HELD engine.131 T7 files stayed at base — repo HEAD differs from live by 7 files, and staging from HEAD would have shipped 4 unproven ones and made the result unattributable.
+
+| | C106 | C107 |
+|---|---|---|
+| result | ok:true, 172s, 130 phases | ok:true, 153s, 130 phases |
+| Engine_Errors | 0 | 0 |
+| cycleCount | 105 → 106 | 106 → 107 |
+
+**Rivalry escalation (`bondEngine.js:710,714`) — was unreachable, now fires and self-limits.** Intensity sum 145.85 → 170.80 → 183.30; deltas +24.95 then +12.50 (decelerating). RIVALRY count 22 → 24 → 25. Max 7.5 → 8 → 8 against the hard cap of 10 at `bondEngine.js:820`; **zero bonds at the ceiling**. No runaway.
+
+**Cycle recovery (`applyCycleRecovery.js:162-173`) — the sharpest before/after in the wave.** Live C105 under the OLD code scored `overloadScore=1`, `recoveryLevel="none"` **while holding `civicLoad="load-strain"`, `shockFlag="shock-flag"`, `civicLoadScore=28` in carry-forward**. The engine had every signal that the city was under serious strain, compared each against `undefined`, and scored it 1. Bench C106 under the new code: `overloadScore=8`, `recoveryLevel="moderate"` — matching the predicted contribution exactly (3 shockFlag + 3 civicLoad + 2 civicLoadScore≥15), with the early-phase event and hook counts contributing 0 because `Phase4-CycleRecovery` runs *before* `Phase4-WorldEvents`. C107 then eased to `4` / `"light"`. It responds and relaxes rather than pinning.
+
+**G-PF18** — the absent path was proven in situ (no `World_Config` key → 0, no throw, 0 engine errors), which is exactly the state at first live deploy. The loaded / one-cycle-lag / stale / ahead-stamped / non-numeric / no-stamp / genuine-zero paths are covered by test instead (`scripts/applyTrackerUpdates.gate.test.js`, 26/26) because a bench fire cannot cheaply reach them and the staleness gate is the only new arithmetic.
+
+**Live: PROD @12**, bumped from @11 on the repo's own deployment ID and verified with `list-deployments` rather than the command's output (prod `clasp deploy` has flaked under the auto-mode classifier before). Push pull-back byte-verified on all 3 payload files; 4 HELD files confirmed still at base; 0 test files; sandbox script and sheet IDs confirmed absent from the live stage before pushing.
+
+**Open observation, not a blocker:** 14 of 25 bench rivalries settled at exactly 8.00. The only hard cap in code is 10, so 8 is an emergent equilibrium between the escalation and decay branches. Self-limiting, but 14 bonds landing on one identical value flattens rivalry texture — a tuning question (a why-call), deliberately not chased here.
+
+**Bench state after the wave:** SANDBOX 0831 sits at C107, two proving cycles ahead of live, and its `Relationship_Bonds` intensities and recovery state carry the payload's world effects. **Never replay either to live.**
+
 ## Changelog
 
+- 2026-08-31 (S405) — engine.137 + G-PF18 bench-proven on SANDBOX 0831 (C106, C107) and deployed live at PROD @12. Proving record added above. Both previously-unreachable mechanisms fire and self-limit; recovery went from overloadScore 1/"none" on live C105 to 8/"moderate" then 4/"light" on the bench.
 - 2026-08-31 (S405) — Constraint 1 updated: deploy UNBLOCKED, SANDBOX 0831 stood up post-C105 (relayed by research-build, verified independently). `CARRY_FORWARD_COLD_START_OK` confirmed unnecessary by a read-only check of the bench's `Carry_Forward_Store` — both blobs present, C105-stamped, parseable.
 - 2026-08-31 (S405) — Plan created (engine-sheet). Backlog carved into five sessions after the builder ruled that chase work precedes both the unfinished business cascade and the education build, and that sandbox staleness blocks all deploys. B4 marked already-answered by the S405 cascadeAudit re-run; A2/A4 routed to the cascade plan rather than the chase.

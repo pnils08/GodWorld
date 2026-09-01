@@ -629,6 +629,7 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 ## Changelog
 
 - 2026-08-30 — Initial /pre-flight leg (S403, engine-sheet), C105 pre-fire.
+- 2026-08-31 — engine.137 + G-PF18 bench-proven (SANDBOX 0831, C106+C107, 0 engine errors) and DEPLOYED LIVE at PROD @12. Rivalry escalation and cycle recovery both fire for the first time and self-limit; live C105 under the old code scored overloadScore=1/recoveryLevel="none" on identical strain inputs. Proving record: `docs/plans/2026-08-31-c105-chase-sessions.md` §Proving record.
 - 2026-08-31 — G-PF29 closed WONTFIX (S405, builder-direct): the sports calendar is deliberately not sim-calendar-aligned; the inert coupling is by design.
 - 2026-08-31 — G-PF32 opened (S405, engine-sheet): 35 files unreachable from the cycle, surfaced by the repointed ordering pass; not triaged.
 - 2026-08-31 — G-PF18 fixed (S405, engine-sheet): civic voice sentiment now rides a World_Config key pair with a staleness gate; acceptance rides the next scheduled civic close.

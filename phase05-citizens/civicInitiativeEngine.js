@@ -286,6 +286,35 @@ function runCivicInitiativeEngine_(ctx) {
       }
     }
 
+    // v2.0 (G-PF33): hold the clock for a row the engine cannot advance. Runs
+    // AFTER the v1.9 reschedule so `status`/`voteCycle` reflect any bump it
+    // made, and BEFORE the vote trigger so a row the engine is about to resolve
+    // is left alone. Needs both columns present — without Notes there is no
+    // place to bound the grace, and an unbounded hold would erase the silence
+    // signal entirely, which is worse than the false blame it fixes.
+    if (iNextActionCycle >= 0 && iNotes >= 0) {
+      var engineWillAct = (voteCycle === cycle && (status === 'active' || status === 'pending-vote'));
+      var clock = engineClockHold_(row[iNotes], row[iNextActionCycle], cycle, engineWillAct);
+      if (clock.action === 'hold') {
+        row[iNextActionCycle] = clock.nextActionCycle;
+        row[iNotes] = clock.notes;
+        row[iLastUpdated] = ctx.now;
+        rows[r] = row;
+        updated = true;
+        Logger.log('civicInitiativeEngine: ' + initId + ' clock held to C' + clock.nextActionCycle +
+                   ' — no in-engine path to advance, waiting on the civic chain (grace ' +
+                   clock.grace + '/' + ENGINE_CLOCK_GRACE_ + ')');
+      } else if (clock.action === 'clear') {
+        row[iNotes] = clock.notes;
+        rows[r] = row;
+        updated = true;
+        Logger.log('civicInitiativeEngine: ' + initId + ' clock re-armed by the chain — grace cleared');
+      } else if (clock.action === 'expire') {
+        Logger.log('civicInitiativeEngine: ' + initId + ' grace exhausted (' + clock.grace + '/' +
+                   ENGINE_CLOCK_GRACE_ + ') — released to silence, this one is genuinely stalled');
+      }
+    }
+
     // Check if this cycle triggers a vote or decision
     if (voteCycle === cycle && (status === 'active' || status === 'pending-vote')) {
       
@@ -2823,5 +2852,69 @@ if (typeof module !== 'undefined' && module.exports) {
     applyActiveInitiativeRipples_: applyActiveInitiativeRipples_,
     createInitiative_: createInitiative_,
     lookupAuthoringSeat_: lookupAuthoringSeat_
+  };
+}
+
+
+/**
+ * ═══════════════════════════════════════════════════════════════════════════
+ * ENGINE CLOCK HOLD — v2.0 (engine.138 / G-PF33, S406)
+ * ═══════════════════════════════════════════════════════════════════════════
+ *
+ * `ImplementationPhase` and `NextActionCycle` are written by the OFFLINE civic
+ * chain (`scripts/applyTrackerUpdates.js`, cron `30 14 * * 0` — Sundays), and
+ * judged by `updateCivicApprovalRatings_` on every cycle the engine fires.
+ * Nothing inside the cycle can advance an initiative already in implementation,
+ * so a row goes overdue purely because the chain has not run yet — and the
+ * approval engine reads an overdue clock as `silence`, its single biggest drain
+ * (-6 owned). Officials were being docked for a clock nobody could wind.
+ *
+ * This holds the clock forward one cycle for a row the engine has no power to
+ * move — but BOUNDED. After GRACE consecutive uncovered cycles the row is
+ * released to silence, because a row the chain has ignored that long IS
+ * genuinely stalled and that is the true story, not a false one. Any chain
+ * apply re-arms the clock, which clears the marker; the budget therefore only
+ * ever counts consecutive cycles with no civic chain behind them.
+ *
+ * Pure by design so the seam is testable without a sheet. Returns the action
+ * plus the exact field values the caller should write.
+ *
+ *   'hold'   — clock re-stamped to cycle+1, grace consumed
+ *   'clear'  — chain re-armed the clock; retire the marker
+ *   'expire' — grace exhausted; write nothing, let it fall to silence
+ *   'none'   — nothing to do
+ */
+var ENGINE_CLOCK_RE_ = /\[ENGINE-CLOCK n=(\d+) from=C(\d+)\]/;
+var ENGINE_CLOCK_GRACE_ = 3;
+
+function engineClockHold_(notes, nextActionCycle, cycle, engineWillAct) {
+  var notesNow = String(notes == null ? '' : notes);
+  var mark = notesNow.match(ENGINE_CLOCK_RE_);
+  var stripped = notesNow.replace(ENGINE_CLOCK_RE_, '').replace(/\s{2,}/g, ' ').trim();
+  var parsed = parseInt(nextActionCycle, 10);
+  var expired = !isNaN(parsed) && Number(parsed) < Number(cycle);
+
+  // The chain moved the row (or it never was overdue). Retire any marker.
+  if (!expired) {
+    if (!mark) return { action: 'none' };
+    return { action: 'clear', notes: stripped, grace: 0 };
+  }
+
+  // The engine itself is about to act on this row — that is not a cadence gap,
+  // and a resolving vote writes its own schedule. Leave it alone.
+  if (engineWillAct) return { action: 'none' };
+
+  var used = mark ? parseInt(mark[1], 10) : 0;
+  if (!(used < ENGINE_CLOCK_GRACE_)) {
+    return { action: 'expire', grace: used };
+  }
+
+  var since = mark ? mark[2] : String(cycle);
+  var stamp = '[ENGINE-CLOCK n=' + (used + 1) + ' from=C' + since + ']';
+  return {
+    action: 'hold',
+    nextActionCycle: Number(cycle) + 1,
+    notes: stripped ? stamp + ' ' + stripped : stamp,
+    grace: used + 1
   };
 }

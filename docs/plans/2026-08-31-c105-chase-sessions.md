@@ -88,6 +88,24 @@ pointers:
 
 **Expected at the next bench fire:** `civicInitiativeEngine v2.0: Examined 6 | In-scope 4 | Resolved 0`. Anything else on an unchanged tracker is an over-count and the guard needs another look.
 
+#### S-A addendum — G-PF33 fixed the same session (builder rulings, S406)
+
+Three rulings came back on the same turn, and the third was work:
+
+1. **Initiatives stay hand-fed.** `createInitiative_` stays unwired — revisited only when city-hall seats work a full week autonomously and there is something to author *from*. This holds the standing 2026-08-27 line (civic machinery exists to repair broken numbers, never for its own sake).
+2. **Approval scoring is unchanged.** Confirms the S-A ruling above.
+3. **Do the re-stamp** — G-PF33 option (a).
+
+**Built: `engineClockHold_`,** a pure helper in `civicInitiativeEngine.js`, called after the v1.9 reschedule and before the vote trigger. An expired `NextActionCycle` on a row the engine has no in-cycle path to advance is held forward one cycle and marked in `Notes` as `[ENGINE-CLOCK n=<used> from=C<origin>]`.
+
+**The design decision that matters is the bound.** An unbounded hold would delete `silence` from the system — a row the chain abandoned would read healthy forever, which is a worse failure than the false blame it fixes. So the hold is capped at **3 consecutive cycles**, after which the row is released to silence: by then it is genuinely stalled and that is the honest reading. Any chain apply re-arms the clock, clears the marker and resets the budget, so the counter only ever measures consecutive cycles with no civic chain behind them. Without a `Notes` column there is nowhere to bound the grace, so the hold declines to engage rather than run unbounded.
+
+**Cover:** 13 cases (Q0–Q12) — accrual, origin preservation, exhaustion→silence, re-arm reset, engine-will-act and unexpired no-ops, Notes round-trip. **76/76**; 0 collisions across 1198 GAS globals; full suite 190/192.
+
+**What the mayor's number actually has behind it.** Asked during the session and worth pinning, because it reframes the whole civic layer: approval has exactly **four** inputs, and three can only subtract — negative civic media (`≤ -3 → -2`; "positive coverage does not pay"), decay toward 50 (`-1` above 50, with no recovery below it), and the ceiling scandal. The fourth, initiative motion, is the sole positive path and pays only at `complete`, seven phase-steps away on a clock the offline chain winds weekly. **With initiatives stalled there is no restoring force in the system at all** — every seat trends to the floor, and the only story the number can tell is the initiative story. The clock hold buys three cycles of honesty against that; it does not add a second input.
+
+**Blocked, named rather than skipped:** `/stub-engine` regeneration is owed for the new helper but was **not** committed. The regen picks up `phase05-citizens/casinoLedgerEngine.js` — grok's in-flight, untracked, unwired, not-yet-signed-off build — producing 45 lines of another lane's work against 1 line of mine, including a `SHEETS_MANIFEST` §9 entry blessing a tab Mike has not approved. All four generated docs reverted. Re-run the regen once the casino build lands or is dropped.
+
 **Regression cover:** 6 cases appended to `scripts/civicApprovalCeiling.test.js` (P1–P6) driven by the real C105 rows — every row's classification, advancement-invisibility, the −12 total, and the C106 transition. **63/63 pass.**
 
 **Opened, not chased — G-PF33.** `NextActionCycle` and `ImplementationPhase` are the fields the approval engine scores on, and the complete writer set is `scripts/applyTrackerUpdates.js` (offline chain, `--apply`) plus a birth-stamp in `createInitiative_:2757`. Nothing in-cycle advances either for an initiative already in implementation; the in-engine reschedule at `:246` needs `ImplementationPhase='vote-ready'`, itself chain-written, so INIT-003 cannot move under its own power. Four rows carry `NextActionCycle=105` and there is no `close_c105.json`/`gate_c105.json`, so absent a chain apply they fall to `silence` at C106 — bounded by v1.7's diminishing ladder to −12, plus −4 sitting: Mayor 69 → ~53, above the 40 campaign threshold. Real, one-way, and a cadence gap rather than an in-world decision. Three candidate shapes are in the gap entry; the one that changes canon needs a builder ruling.

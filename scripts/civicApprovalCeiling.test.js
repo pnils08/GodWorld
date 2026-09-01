@@ -30,6 +30,16 @@ const A = new Function(approvalSource + '\nreturn {' +
   'scoreLedgerCitizenForOffice_: scoreLedgerCitizenForOffice_,' +
   'challengerDialStateJson_: challengerDialStateJson_' +
   '};')();
+// G-PF33: the clock-hold seam lives in civicInitiativeEngine_, but what it
+// protects is THIS file's silence scoring — the two are one mechanism, so they
+// are proven together.
+const initiativeSource = fs.readFileSync(
+  path.resolve(__dirname, '../phase05-citizens/civicInitiativeEngine.js'), 'utf8'
+);
+const I = new Function(initiativeSource + '\nreturn {' +
+  'engineClockHold_: engineClockHold_,' +
+  'ENGINE_CLOCK_GRACE_: ENGINE_CLOCK_GRACE_' +
+'};')();
 const electionSource = fs.readFileSync(
   path.resolve(__dirname, '../phase05-citizens/runCivicElectionsv1.js'), 'utf8'
 );
@@ -394,6 +404,63 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   // does not re-stamp becomes overdue the next cycle and falls to silence.
   check('P6 an un-restamped NextActionCycle=105 row is silence at C106',
     A.classifyInitiativeMotion_('implementation-active', 105, 106) === 'silence');
+}
+
+// ── G-PF33 (engine.138, S406): the engine clock hold ────────────────────────
+// NextActionCycle is chain-written and engine-judged. These prove the engine
+// covers the cadence gap it cannot close, WITHOUT erasing the silence signal
+// for a row that is genuinely stalled.
+{
+  check('Q0 grace budget is 3', I.ENGINE_CLOCK_GRACE_ === 3, String(I.ENGINE_CLOCK_GRACE_));
+
+  // The C105 board at C106: four rows stamped 105, no chain apply behind them.
+  const first = I.engineClockHold_('', 105, 106, false);
+  check('Q1 an expired clock the engine cannot move is held forward',
+    first.action === 'hold' && first.nextActionCycle === 107 && first.grace === 1,
+    JSON.stringify(first));
+  check('Q2 the hold is recorded in Notes with its origin cycle',
+    /\[ENGINE-CLOCK n=1 from=C106\]/.test(first.notes), first.notes);
+
+  // Grace accrues across consecutive uncovered cycles, keeping the ORIGIN.
+  const second = I.engineClockHold_(first.notes, 106, 107, false);
+  const third  = I.engineClockHold_(second.notes, 107, 108, false);
+  check('Q3 grace accrues and the origin cycle is preserved',
+    second.grace === 2 && third.grace === 3 && /from=C106/.test(third.notes),
+    JSON.stringify([second.grace, third.grace, third.notes]));
+
+  // Budget spent -> released to silence. The drain is delayed, never removed.
+  const fourth = I.engineClockHold_(third.notes, 108, 109, false);
+  check('Q4 grace exhausts and the row is released to silence',
+    fourth.action === 'expire' && fourth.grace === 3, JSON.stringify(fourth));
+  check('Q5 an expired row still classifies silence downstream',
+    A.classifyInitiativeMotion_('implementation-active', 108, 109) === 'silence');
+
+  // A chain apply re-arms the clock, which retires the marker and the budget.
+  const rearmed = I.engineClockHold_(third.notes, 112, 109, false);
+  check('Q6 a chain re-arm clears the marker and resets the budget',
+    rearmed.action === 'clear' && !/ENGINE-CLOCK/.test(rearmed.notes) && rearmed.grace === 0,
+    JSON.stringify(rearmed));
+  const afterRearm = I.engineClockHold_(rearmed.notes, 112, 113, false);
+  check('Q7 the budget is spent from zero again after a re-arm',
+    afterRearm.action === 'hold' && afterRearm.grace === 1 && /from=C113/.test(afterRearm.notes),
+    JSON.stringify(afterRearm));
+
+  // Never mask a row the engine IS acting on, and never touch a live clock.
+  check('Q8 a row the engine will resolve this cycle is left alone',
+    I.engineClockHold_('', 105, 106, true).action === 'none');
+  check('Q9 an unexpired clock with no marker is untouched',
+    I.engineClockHold_('', 106, 106, false).action === 'none');
+  check('Q10 a blank/absent NextActionCycle is not treated as expired',
+    I.engineClockHold_('', '', 106, false).action === 'none');
+
+  // Operator notes on the row must survive the marker round-trip.
+  const withNotes = I.engineClockHold_('Cycle 104: Vote scheduled C105.', 105, 106, false);
+  check('Q11 existing Notes survive the hold',
+    /Cycle 104: Vote scheduled C105\./.test(withNotes.notes), withNotes.notes);
+  const cleared = I.engineClockHold_(withNotes.notes, 120, 106, false);
+  check('Q12 existing Notes survive the clear',
+    cleared.action === 'clear' && cleared.notes === 'Cycle 104: Vote scheduled C105.',
+    JSON.stringify(cleared.notes));
 }
 
 console.log(`\n${passed}/${passed + failed} passed`);

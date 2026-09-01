@@ -336,6 +336,15 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S407 (2026-09-01, engine-sheet)
+
+| ID | Description | Status | Owner | Pointer |
+|---|---|---|---|---|
+| engine.135 | Employment system cascade — ACCEPTED S405 (spread lane 2.74pp PASS; 2 findings were misreads, 1 direction call surfaced) | done | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] §acceptance verdict |
+| pipeline.63 | S-C — pipeline chain hygiene. ALL FOUR DONE (G-PF25 chain order + fail-loud, G-PF26 sports-feed name check + G-PF11 free, G-PF24 hood-gate repair, G-PF23 canon identity into texture). Node-side, live on land | done | engine-sheet | [[../plans/2026-08-31-c105-chase-sessions]] §Session S-C |
+
+**Not swept, deliberately:** `engine.137` sat `done-pending-archive` and is NOT in this pass. It is deployed to PROD @12 but has never smoke-tested on a live cycle — a verification this terminal still owns. The rule applied: a row archives when the work is done AND no verification gate this terminal owns remains. `pipeline.63`'s acceptance is the next unattended cron, which surfaces its own gap entry if it fails; `engine.137`'s is a live fire nobody has run.
+
 ### Archive Pass — S401 (2026-08-30, engine-sheet)
 
 | ID | Description | Status | Owner | Pointer |

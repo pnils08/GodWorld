@@ -104,6 +104,26 @@ Three rulings came back on the same turn, and the third was work:
 
 **What the mayor's number actually has behind it.** Asked during the session and worth pinning, because it reframes the whole civic layer: approval has exactly **four** inputs, and three can only subtract — negative civic media (`≤ -3 → -2`; "positive coverage does not pay"), decay toward 50 (`-1` above 50, with no recovery below it), and the ceiling scandal. The fourth, initiative motion, is the sole positive path and pays only at `complete`, seven phase-steps away on a clock the offline chain winds weekly. **With initiatives stalled there is no restoring force in the system at all** — every seat trends to the floor, and the only story the number can tell is the initiative story. The clock hold buys three cycles of honesty against that; it does not add a second input.
 
+#### SUPERSEDED SAME SESSION — engine.139 / G-PF34 (builder-direct)
+
+The S-A **ruling** above stands. Its **design conclusion** — "scoring untouched, advancement credit needs a builder ruling" — got that ruling within the hour, and it went the other way, for a reason worth recording: *"this just wired correctly, so any decision made before today never saw it work."*
+
+Three findings made the reversal safe rather than reckless:
+
+1. **Three of four approval inputs can only subtract.** Negative media, decay above 50 with no recovery below it, and the ceiling scandal. The fourth paid only at `complete`. With initiatives stalled there is **no restoring force in the system at all**.
+2. **The media arm was OFF, not negative-only.** Live CIVIC ratings over 15 cycles: `1,0,2,1,0,2,3,-2,-2,-1,2,1,2,-2,-2` — range **-2..+3** against a `<= -3` gate. It never fired. 57 of 86 rated rows across all domains sit in the dead band.
+3. **The C103→95 inflation bug was never actually fixed.** The v1.3 clamps treated the symptom. The cause is that a row parked at `complete` pays its owner **+3 every cycle forever** — the approval engine filters its initiative list on `if (!initName) continue;` and nothing else. Still armed, dormant only because nothing has ever finished. **Adding advancement credit without fixing this would have re-armed the pin** — so fixing it is not scope creep, it is the precondition.
+
+**The new rule: positives are EVENTS, negatives are CONDITIONS.** Transitions pay once (`advanced` +2 owned / +1 district, `completed` +3/+1); terminal states pay nothing (`complete-held` 0); not-finished and overdue still drain per cycle. Lifetime yield per initiative is bounded at ~6 transitions + 1 completion, so it cannot pin anyone at ceiling. Media is symmetric and graded inside its real range (`±2 → ±1`, `±4 → ±2`), totalling **+1** across the live record — texture, not an inflator. `sitting` and `advanced` get mirrored width ladders (`[-2,-1,-1]` / `[2,1,1]`, capping at ∓4), closing the gap obs 58092 flagged; `silence` keeps its heavier v1.7 curve.
+
+Carrier is `previousCycleState.initiativePhases`, written Phase 5, serialized Phase 9, **gated on the blob being exactly one cycle old** so a stale carry-forward cannot double-pay an old transition. Absent it, nothing reads as a transition.
+
+**Counterfactual, mayor owning all six:** C104 (four advanced) was -13 → now **0**, holding at 82. C105 (nothing moved) was -13 → now **-5**. Volatile instead of monotonic.
+
+**Cover:** 22 cases (P1–P13, R1–R6, F5/F6 rewritten off the old contract). 91/91. `ctxMap`: `initiativePhases` CONNECTED.
+
+**Proving note for the bench wave:** `advanced` **cannot be proven by a plain bench fire** — no chain runs on a bench, so no phase changes and the transition path never executes. A standard two-cycle wave proves only the degraded path and the sitting ladder. The wave needs a hand-staged phase edit on the bench tracker between fires, with the C104 counterfactual as the expected shape.
+
 **Blocked, named rather than skipped:** `/stub-engine` regeneration is owed for the new helper but was **not** committed. The regen picks up `phase05-citizens/casinoLedgerEngine.js` — grok's in-flight, untracked, unwired, not-yet-signed-off build — producing 45 lines of another lane's work against 1 line of mine, including a `SHEETS_MANIFEST` §9 entry blessing a tab Mike has not approved. All four generated docs reverted. Re-run the regen once the casino build lands or is dropped.
 
 **Regression cover:** 6 cases appended to `scripts/civicApprovalCeiling.test.js` (P1–P6) driven by the real C105 rows — every row's classification, advancement-invisibility, the −12 total, and the C106 transition. **63/63 pass.**

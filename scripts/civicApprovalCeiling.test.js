@@ -28,7 +28,8 @@ const A = new Function(approvalSource + '\nreturn {' +
   'formatCampaignNote_: formatCampaignNote_,' +
   'pickCampaignChallenger_: pickCampaignChallenger_,' +
   'scoreLedgerCitizenForOffice_: scoreLedgerCitizenForOffice_,' +
-  'challengerDialStateJson_: challengerDialStateJson_' +
+  'challengerDialStateJson_: challengerDialStateJson_,' +
+  'MOTION_LADDERS_: MOTION_LADDERS_' +
   '};')();
 // G-PF33: the clock-hold seam lives in civicInitiativeEngine_, but what it
 // protects is THIS file's silence scoring — the two are one mechanism, so they
@@ -240,11 +241,16 @@ console.log('═══ F. v1.3 motion physics — nothing free, silence costs mo
   check('F4 due-this-cycle live phase is sitting, not a win',
     A.classifyInitiativeMotion_('disbursement-active', 103, 103) === 'sitting' &&
     A.classifyInitiativeMotion_('pilot-active', 104, 103) === 'sitting');
+  // engine.139: `complete` split into the EVENT (`completed`) and the STATE
+  // (`complete-held`). Both still classify ahead of the clock.
   check('F5 complete and fail classify first',
-    A.classifyInitiativeMotion_('complete', 90, 104) === 'complete' &&
-    A.classifyInitiativeMotion_('stalled', 90, 104) === 'failed');
-  check('F6 only complete (or opposed-fail) can raise',
-    A.approvalDeltaForInitiative_('complete', true, false).delta === 3 &&
+    A.classifyInitiativeMotion_('complete', 90, 104, 'operational') === 'completed' &&
+    A.classifyInitiativeMotion_('complete', 90, 104, 'complete') === 'complete-held' &&
+    A.classifyInitiativeMotion_('stalled', 90, 104, null) === 'failed');
+  check('F6 finishing, advancing, or being right about a failure can raise',
+    A.approvalDeltaForInitiative_('completed', true, false).delta === 3 &&
+    A.approvalDeltaForInitiative_('complete-held', true, false).delta === 0 &&
+    A.approvalDeltaForInitiative_('advanced', true, false).delta === 2 &&
     A.approvalDeltaForInitiative_('failed', false, true).delta === 1 &&
     A.approvalDeltaForInitiative_('sitting', true, false).delta === -2 &&
     A.approvalDeltaForInitiative_('silence', true, false).delta === -6 &&
@@ -357,10 +363,10 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     defaults.base.composure >= 60 && defaults.base.family < 50);
 }
 
-// ── G-PF19 (engine.138, S406): lock the C105 civic-contradiction ruling ──────
-// Six live Initiative_Tracker rows, read off the sheet at C105. All six scored
-// "sitting" and the Mayor took -13. This block proves that reading is what the
-// code MEANS to do, so the contradiction is not re-chased as a defect.
+// ── G-PF19 + G-PF34: the civic scoring contract ─────────────────────────────
+// G-PF19's RULING stands (three systems, three questions, three correct
+// answers). Its DESIGN was superseded the same session by engine.139/G-PF34,
+// builder-direct: positives are EVENTS, negatives are CONDITIONS.
 {
   const C105 = [
     { id: 'INIT-001', phase: 'disbursement-active',   next: 105 },
@@ -370,40 +376,93 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     { id: 'INIT-006', phase: 'vote-scheduled',        next: 105 },
     { id: 'INIT-007', phase: 'pilot-active',          next: 106 }
   ];
+  // With no prior-phase data (no carry-forward), nothing reads as a transition
+  // and the classifier degrades to exactly the C105 live behaviour.
   C105.forEach(function (row) {
-    check('P1 ' + row.id + ' (' + row.phase + ') classifies sitting at C105',
-      A.classifyInitiativeMotion_(row.phase, row.next, 105) === 'sitting',
-      A.classifyInitiativeMotion_(row.phase, row.next, 105));
+    check('P1 ' + row.id + ' (' + row.phase + ') is sitting with no prior data',
+      A.classifyInitiativeMotion_(row.phase, row.next, 105, null) === 'sitting',
+      A.classifyInitiativeMotion_(row.phase, row.next, 105, null));
   });
 
-  // The ruling itself: phase ADVANCEMENT is invisible to this scorer. An
-  // initiative that moved a phase this cycle and one that did not both score
-  // "sitting" — only finishing pays. Four of these six were counted as
-  // improvements by the engine audit in the same cycle; that is a different
-  // question, not a disagreement.
-  check('P2 advancement is invisible — advanced and un-advanced score alike',
-    A.classifyInitiativeMotion_('implementation-active', 105, 105) ===
-    A.classifyInitiativeMotion_('planning', 105, 105));
-  check('P3 only a complete phase pays',
+  // P2 INVERTED by G-PF34. Advancement used to be invisible; it is now the
+  // whole point. A row that moved scores `advanced`, one that did not scores
+  // `sitting` — on identical clocks.
+  check('P2 a phase transition is now visible and outranks sitting',
+    A.classifyInitiativeMotion_('implementation-active', 105, 105, 'planning') === 'advanced' &&
+    A.classifyInitiativeMotion_('implementation-active', 105, 105, 'implementation-active') === 'sitting');
+  check('P2b advancement outranks an expired clock — somebody acted',
+    A.classifyInitiativeMotion_('implementation-active', 99, 105, 'planning') === 'advanced' &&
+    A.classifyInitiativeMotion_('implementation-active', 99, 105, null) === 'silence');
+
+  check('P3 only a complete phase can finish',
     A.isPerforming_('implementation-active') === false &&
     A.isPerforming_('construction-complete') === true);
 
-  // The C105 arithmetic: 6 owned sitting rows = -12 on the Mayor.
-  check('P4 sitting scores -2 owned / -1 nearby',
+  // THE DEFUSED PIN: `complete` paid +3 to its owner every cycle, forever.
+  check('P4 finishing pays once, then the terminal state pays nothing',
+    A.classifyInitiativeMotion_('complete', 105, 105, 'operational') === 'completed' &&
+    A.classifyInitiativeMotion_('complete', 105, 105, 'complete') === 'complete-held' &&
+    A.approvalDeltaForInitiative_('completed', true, false).delta === 3 &&
+    A.approvalDeltaForInitiative_('complete-held', true, false).delta === 0);
+  check('P4b a parked complete row cannot pay even without prior data',
+    A.classifyInitiativeMotion_('complete', 105, 105, null) === 'complete-held');
+
+  check('P5 sitting still scores -2 owned / -1 nearby at the first rung',
     A.approvalDeltaForInitiative_('sitting', true, false).delta === -2 &&
     A.approvalDeltaForInitiative_('sitting', false, false).delta === -1);
-  const mayorC105 = C105.reduce(function (sum, row) {
-    return sum + A.approvalDeltaForInitiative_(
-      A.classifyInitiativeMotion_(row.phase, row.next, 105), true, false).delta;
-  }, 0);
-  check('P5 the six C105 rows total -12 for an owning Mayor',
-    mayorC105 === -12, String(mayorC105));
-
-  // Cadence dependency: NextActionCycle is written ONLY by the offline civic
-  // chain (scripts/applyTrackerUpdates.js). A row stamped 105 that the chain
-  // does not re-stamp becomes overdue the next cycle and falls to silence.
   check('P6 an un-restamped NextActionCycle=105 row is silence at C106',
-    A.classifyInitiativeMotion_('implementation-active', 105, 106) === 'silence');
+    A.classifyInitiativeMotion_('implementation-active', 105, 106, null) === 'silence');
+
+  // Advancement pays owner AND district (builder named districts explicitly).
+  check('P7 advancement pays the owner +2 and a nearby district seat +1',
+    A.approvalDeltaForInitiative_('advanced', true, false).delta === 2 &&
+    A.approvalDeltaForInitiative_('advanced', false, false).delta === 1);
+  check('P8 an opponent of an advancing initiative gains nothing, loses nothing',
+    A.approvalDeltaForInitiative_('advanced', false, true).delta === 0);
+
+  // Portfolio-width ladders — the pile-on that took Santana 82→69.
+  const L = A.MOTION_LADDERS_;
+  const sum = function (a) { return a.reduce(function (x, y) { return x + y; }, 0); };
+  check('P9 sitting is width-capped at -4 owned / -2 nearby',
+    sum(L.sitting.owned) === -4 && sum(L.sitting.nearby) === -2, JSON.stringify(L.sitting));
+  check('P10 advanced mirrors it at +4 owned / +2 nearby',
+    sum(L.advanced.owned) === 4 && sum(L.advanced.nearby) === 2, JSON.stringify(L.advanced));
+  check('P11 silence keeps its heavier v1.7 curve (-12 owned)',
+    sum(L.silence.owned) === -12 && sum(L.silence.nearby) === -7, JSON.stringify(L.silence));
+  check('P12 no ladder can be farmed past its rungs',
+    L.sitting.owned.length === 3 && L.advanced.owned.length === 3);
+
+  // The C105 counterfactual: six rows, none moving, under the new ladder.
+  const mayorFlat = C105.reduce(function (acc, row) {
+    const m = A.classifyInitiativeMotion_(row.phase, row.next, 105, null);
+    const rung = L[m] ? L[m].owned : null;
+    return { n: acc.n + 1, total: acc.total + (rung ? (acc.n < rung.length ? rung[acc.n] : 0) : 0) };
+  }, { n: 0, total: 0 });
+  check('P13 a fully-stalled C105 now costs -4, not -12',
+    mayorFlat.total === -4, String(mayorFlat.total));
+}
+
+// ── G-PF34: civic media is symmetric and inside the live range ───────────────
+// 15 cycles of live CIVIC ratings: 1,0,2,1,0,2,3,-2,-2,-1,2,1,2,-2,-2 (-2..+3).
+// The old `<= -3` threshold never fired once in that record.
+{
+  const grade = function (r) {
+    if (r >= 4) return 2;
+    if (r >= 2) return 1;
+    if (r <= -4) return -2;
+    if (r <= -2) return -1;
+    return 0;
+  };
+  check('R1 the old -3 threshold never fired on the live record',
+    [1,0,2,1,0,2,3,-2,-2,-1,2,1,2,-2,-2].filter(function (r) { return r <= -3; }).length === 0);
+  check('R2 positive coverage now pays', grade(2) === 1 && grade(3) === 1 && grade(4) === 2);
+  check('R3 negative coverage still costs', grade(-2) === -1 && grade(-4) === -2);
+  check('R4 the grading is symmetric about zero',
+    grade(2) === -grade(-2) && grade(4) === -grade(-4));
+  check('R5 the dead band is only -1..+1', grade(1) === 0 && grade(0) === 0 && grade(-1) === 0);
+  const live = [1,0,2,1,0,2,3,-2,-2,-1,2,1,2,-2,-2].map(grade);
+  check('R6 on the live record the channel is near-neutral, not an inflator',
+    live.reduce(function (a, b) { return a + b; }, 0) === 1, JSON.stringify(live));
 }
 
 // ── G-PF33 (engine.138, S406): the engine clock hold ────────────────────────

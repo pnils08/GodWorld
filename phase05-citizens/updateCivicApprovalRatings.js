@@ -238,6 +238,10 @@ function updateCivicApprovalRatings_(ctx) {
   var trackerSheet = ss.getSheetByName('Initiative_Tracker');
   var initiatives = [];
 
+  // engine.139 (G-PF34): this cycle's phase per initiative, handed to Phase 9
+  // for the carry-forward so NEXT cycle can see what moved.
+  var initiativePhaseMap = {};
+
   if (trackerSheet) {
     var tData = trackerSheet.getDataRange().getValues();
     if (tData.length >= 2) {
@@ -250,6 +254,16 @@ function updateCivicApprovalRatings_(ctx) {
       var tLead = findApprCol_(tHeaders, ['LeadFaction', 'leadfaction']);
       var tOpp = findApprCol_(tHeaders, ['OppositionFaction', 'oppositionfaction']);
       var tNext = findApprCol_(tHeaders, ['NextActionCycle', 'nextactioncycle']);
+      var tId = findApprCol_(tHeaders, ['InitiativeID', 'initiativeid']);
+
+      // engine.139 (G-PF34): last cycle's phase per initiative, for transition
+      // detection. Gated on the carry-forward being EXACTLY one cycle old — a
+      // stale blob (bench replay, skipped restore) would re-detect an old
+      // transition and pay for it twice. No prior data => no transitions found,
+      // which degrades to "nothing new pays".
+      var prevState = S.previousCycleState || {};
+      var prevPhases = (Number(prevState.cycle) === Number(cycle) - 1 && prevState.initiativePhases)
+        ? prevState.initiativePhases : null;
 
       for (var ti = 1; ti < tData.length; ti++) {
         var tr = tData[ti];
@@ -261,6 +275,12 @@ function updateCivicApprovalRatings_(ctx) {
         var nextActionCycle = parseInt(nextRaw, 10);
         if (isNaN(nextActionCycle)) nextActionCycle = null;
 
+        // Key on InitiativeID where the sheet carries one — names get edited,
+        // ids do not. Falls back to the name so an id-less row still tracks.
+        var initKey = (tId !== -1 ? (tr[tId] || '').toString().trim() : '') || initName;
+        initiativePhaseMap[initKey] = phase;
+        var prevPhase = prevPhases ? (prevPhases[initKey] || null) : null;
+
         initiatives.push({
           name: initName,
           status: tStatus !== -1 ? (tr[tStatus] || '').toString().trim().toLowerCase() : '',
@@ -270,7 +290,7 @@ function updateCivicApprovalRatings_(ctx) {
           neighborhoods: tHoods !== -1 ? (tr[tHoods] || '').toString().trim() : '',
           leadFaction: tLead !== -1 ? (tr[tLead] || '').toString().trim().toUpperCase() : '',
           oppFaction: tOpp !== -1 ? (tr[tOpp] || '').toString().trim().toUpperCase() : '',
-          motion: classifyInitiativeMotion_(phase, nextActionCycle, cycle)
+          motion: classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase)
         });
       }
     }
@@ -347,6 +367,9 @@ function updateCivicApprovalRatings_(ctx) {
     var reasons = [];
     var silenceOwned = 0;
     var silenceNearby = 0; // v1.7 — non-owned district silence, own ladder
+    var ladderSeen = { silence: { owned: 0, nearby: 0 },
+                       sitting: { owned: 0, nearby: 0 },
+                       advanced: { owned: 0, nearby: 0 } };
 
     // ─────────────────────────────────────────────────────────────────────
     // INITIATIVE PERFORMANCE IN DISTRICT
@@ -385,13 +408,24 @@ function updateCivicApprovalRatings_(ctx) {
       // from REPEATED silence across cycles (v1.4's own bar), not from
       // portfolio width — a 6-initiative Mayor was losing 37 points in one
       // cycle, a one-cycle near-removal. Non-silence deltas are unchanged.
-      if (init.motion === 'silence') {
-        var ladder = owns ? [-6, -3, -2, -1] : [-4, -2, -1];
-        var seen = owns ? silenceOwned : silenceNearby;
-        var dimDelta = seen < ladder.length ? ladder[seen] : 0;
+      // v1.7 / engine.139: portfolio-width ladders. A wide portfolio must not
+      // decide an official's fate in one cycle — the removal verdict comes from
+      // REPEATED motion across cycles, not from how many rows they hold. v1.7
+      // proved this on silence (a 6-initiative Mayor was losing 37 points in one
+      // cycle); engine.139 extends the same discipline to `sitting` (which had no
+      // width cap at all — the -12 that took Santana 82→69) and to `advanced`, so
+      // the positive side cannot be farmed by portfolio width either.
+      var lad = MOTION_LADDERS_[init.motion];
+      if (lad) {
+        var side = owns ? 'owned' : 'nearby';
+        var rung = lad[side];
+        var seen = ladderSeen[init.motion][side];
+        var dimDelta = seen < rung.length ? rung[seen] : 0;
         delta += dimDelta;
-        reasons.push(init.name + ' silence (' + (dimDelta || '0, capped') + ')');
-        if (owns) silenceOwned++; else silenceNearby++;
+        reasons.push(init.name + ' ' + init.motion + ' (' +
+          (dimDelta === 0 ? '0, capped' : (dimDelta > 0 ? '+' + dimDelta : String(dimDelta))) + ')');
+        ladderSeen[init.motion][side]++;
+        if (init.motion === 'silence') { if (owns) silenceOwned++; else silenceNearby++; }
       } else {
         delta += scored.delta;
         reasons.push(init.name + ' ' + scored.reason);
@@ -403,13 +437,28 @@ function updateCivicApprovalRatings_(ctx) {
     // ─────────────────────────────────────────────────────────────────────
     // If edition coverage of CIVIC domain was negative and this official's
     // faction led the initiative → extra pressure
-    if (domainBalance['CIVIC'] && domainBalance['CIVIC'].rating) {
-      var civicRating = domainBalance['CIVIC'].rating;
-      if (civicRating <= -3) {
-        delta -= 2; // Heavy negative civic coverage hurts all officials
-        reasons.push('negative civic media (-2)');
+    // engine.139 (G-PF34): media is symmetric, and graded inside the range the
+    // ratings actually occupy. The old rule was `<= -3 → -2` with no positive
+    // arm; across 15 cycles of live CIVIC ratings (1,0,2,1,0,2,3,-2,-2,-1,2,1,2,
+    // -2,-2 — range -2..+3) that threshold NEVER FIRED ONCE, so the channel was
+    // not "negative-only", it was switched off. The v1.3 note that positive
+    // coverage must not pay was written to stop approval inflation, but the real
+    // inflation was `complete` paying every cycle (fixed above) — not the
+    // existence of a positive input. Coverage is the medium the whole city moves
+    // on; it now moves officials both ways.
+    if (domainBalance['CIVIC'] && domainBalance['CIVIC'].rating !== undefined &&
+        domainBalance['CIVIC'].rating !== null) {
+      var civicRating = Number(domainBalance['CIVIC'].rating) || 0;
+      var mediaDelta = 0;
+      if (civicRating >= 4) mediaDelta = 2;
+      else if (civicRating >= 2) mediaDelta = 1;
+      else if (civicRating <= -4) mediaDelta = -2;
+      else if (civicRating <= -2) mediaDelta = -1;
+      if (mediaDelta !== 0) {
+        delta += mediaDelta;
+        reasons.push('civic media ' + (mediaDelta > 0 ? '+' : '') + mediaDelta +
+                     ' (rating ' + civicRating + ')');
       }
-      // v1.3: positive coverage does not pay. Non-committal never raises.
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -705,6 +754,7 @@ function updateCivicApprovalRatings_(ctx) {
 
   S.approvalChanges = changes;
   S.approvalTriggers = approvalTriggers;
+  S.initiativePhases = initiativePhaseMap;  // engine.139 — Phase 9 carries it forward
 
   Logger.log('updateCivicApprovalRatings_ v1.0: ' + changes.length + ' officials updated, ' +
     approvalTriggers.length + ' threshold triggers');
@@ -742,21 +792,50 @@ function isFailing_(phase) {
  *   silence  — overdue or never scheduled. Biggest drain.
  *   sitting  — still on the clock, not finished. Nothing is free.
  *
- * RULED INTENTIONAL, G-PF19 (engine.138, S406). This function reads the
- * CURRENT phase string and NextActionCycle. It never compares against the
- * prior cycle's phase, so **phase advancement is deliberately invisible
- * here** — an initiative that moved planning → implementation-active scores
- * the same -2 as one that sat untouched. That is the design: only finishing
- * pays (see isPerforming_ — C103 sat at 95 on live-sounding phases and never
- * built anything). The engine audit separately counts phase movement as an
- * improvement; the two are not in conflict, they answer different questions
- * ("is it finished?" vs. "did the phase string change?"). Do not add
- * advancement credit here without a builder ruling — it re-opens the exact
- * inflation this scoring was written to kill.
+ * ~~RULED INTENTIONAL, G-PF19 (engine.138, S406)~~ — **SUPERSEDED the same
+ * session by engine.139 / G-PF34 (builder-direct).** The G-PF19 *ruling* stands:
+ * the three civic systems were never in conflict, they answer different
+ * questions. What was superseded is the DESIGN it deferred to.
+ *
+ * The v1.3 clamps (only `complete` pays; positive media never pays) were set to
+ * stop the C103→95 approval pin. They treated the wrong cause. The pin was not
+ * "positives exist" — it was `complete` paying its owner +3 EVERY CYCLE for a
+ * row parked in a terminal state, i.e. paying per-cycle for a STATE. That bug
+ * was still armed and merely dormant, because nothing has ever reached
+ * `complete`. Meanwhile the media arm's `<= -3` threshold never fired once in 15
+ * cycles of live CIVIC ratings (range -2..+3), so the channel officials were
+ * meant to rise and fall on was doing nothing at all. Every clamp decision
+ * predates the wiring and none of them ever saw the system work.
+ *
+ * The rule now is **positives are EVENTS, negatives are CONDITIONS**:
+ *   - a phase TRANSITION pays (`advanced`, `completed`) — once, when it happens
+ *   - a terminal state pays nothing (`complete-held`)
+ *   - not-finished and overdue still drain per cycle (`sitting`, `silence`)
+ * Lifetime yield per initiative is therefore bounded (~6 transitions + one
+ * completion) and cannot pin anyone at ceiling, and the approval-ceiling
+ * scandal still backstops sustained highs.
+ *
+ * `prevPhase` comes from `previousCycleState.initiativePhases`, gated on the
+ * blob being exactly one cycle old. Absent it, nothing reads as a transition —
+ * the conservative direction.
  */
-function classifyInitiativeMotion_(phase, nextActionCycle, cycle) {
-  if (isPerforming_(phase)) return 'complete';
+function classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase) {
+  // engine.139: did this row MOVE since last cycle? Requires prior data; without
+  // it nothing counts as a transition, which is the conservative direction.
+  var moved = !!prevPhase && String(prevPhase) !== String(phase);
+
+  if (isPerforming_(phase)) {
+    // Finishing is an EVENT and pays once. Parked at complete is a STATE and
+    // pays nothing — this is the C103→95 pin, defused. A row left at `complete`
+    // used to score +3 to its owner every cycle, forever.
+    return moved ? 'completed' : 'complete-held';
+  }
   if (isFailing_(phase)) return 'failed';
+
+  // A row that moved is not sitting and is not silent, whatever its clock says —
+  // somebody acted on it this cycle.
+  if (moved) return 'advanced';
+
   if (nextActionCycle === null || nextActionCycle === undefined || nextActionCycle === '') {
     return 'silence';
   }
@@ -765,14 +844,36 @@ function classifyInitiativeMotion_(phase, nextActionCycle, cycle) {
 }
 
 /**
- * Per-initiative approval delta. Never positive except complete.
+ * Portfolio-width ladders, applied per motion in office order.
+ * Sitting and advanced are deliberate mirrors: a cycle in which every row moves
+ * is worth +4 to an owner, a cycle in which every row stalls costs -4. Silence
+ * keeps its heavier v1.7 curve because it means overdue, not merely unfinished.
+ */
+var MOTION_LADDERS_ = {
+  silence:  { owned: [-6, -3, -2, -1], nearby: [-4, -2, -1] },
+  sitting:  { owned: [-2, -1, -1],     nearby: [-1, -1] },
+  advanced: { owned: [2, 1, 1],        nearby: [1, 1] }
+};
+
+/**
+ * Per-initiative approval delta. Positives are EVENTS, negatives are CONDITIONS.
  * Opposed-fail +1 is the only other raise: they took a side and were right.
  */
 function approvalDeltaForInitiative_(motion, owns, opposed) {
-  if (motion === 'complete') {
-    if (owns) return { delta: 3, reason: 'complete (+3)' };
-    if (opposed) return { delta: 0, reason: 'complete, opposed (0)' };
-    return { delta: 1, reason: 'complete (+1)' };
+  if (motion === 'completed') {
+    if (owns) return { delta: 3, reason: 'completed (+3)' };
+    if (opposed) return { delta: 0, reason: 'completed, opposed (0)' };
+    return { delta: 1, reason: 'completed (+1)' };
+  }
+  if (motion === 'complete-held') {
+    // Already paid on the transition. A finished initiative neither pays nor
+    // drains — it is done, and done is not an achievement you re-earn.
+    return { delta: 0, reason: 'complete, already paid (0)' };
+  }
+  if (motion === 'advanced') {
+    if (owns) return { delta: 2, reason: 'advanced a phase (+2)' };
+    if (opposed) return { delta: 0, reason: 'advanced, opposed (0)' };
+    return { delta: 1, reason: 'advanced a phase (+1)' };
   }
   if (motion === 'failed') {
     if (owns) return { delta: -3, reason: 'chose fail (-3)' };

@@ -103,6 +103,14 @@ function finalizeCycleState_(ctx) {
     economicRipples: compactEconomicRipples_(S.economicRipples, cycle),
     initiativeRipples: compactInitiativeRipples_(S.initiativeRipples, cycle),
 
+    // v1.9 (engine.139 / G-PF34): last cycle's ImplementationPhase per initiative.
+    // updateCivicApprovalRatings_ needs the PRIOR phase to tell a transition from
+    // a state — advancement pays, standing still does not. Written at Phase 5 from
+    // the tracker read that engine already does; ~6 short keys, same carry class as
+    // migrationDrift. Without it the approval engine degrades to "no transition
+    // detected", which is the conservative direction (nothing new pays).
+    initiativePhases: S.initiativePhases || null,
+
     // v1.5 (engine.45 T2): migration→mood loop — economicRippleEngine reads
     // previousCycleState.migrationDrift, which was never serialized (always 0).
     migrationDrift: (typeof S.migrationDrift === 'number') ? S.migrationDrift : 0,

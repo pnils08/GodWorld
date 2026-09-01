@@ -495,15 +495,30 @@ for (const [file, keys] of Object.entries(spanKeysByFile)) {
   if (isTest(file) || file === ORCHESTRATOR) continue;
   if (keys.length && keys.every(k => !fnOrd[k])) deadFiles.push(file);
 }
+// A file that is off the cycle path ON PURPOSE says so on its first lines:
+//   // @cycle-status: off-cycle — <what invokes it>   |   retired <session> — <why>   |   never wired — <why>
+// (S408, G-PF32: every unreachable file was classified — 21 off-cycle by design, 8 retired
+// with a recorded rationale, 1 never wired, 0 fell out of the graph.) Declared files are
+// listed for the record; UNDECLARED files are the signal — a new one is a real question.
+function cycleStatusTag(file) {
+  const head = fs.readFileSync(path.join(ROOT, file), 'utf8').split('\n').slice(0, 5).join('\n');
+  const m = head.match(/@cycle-status:\s*(.+)/);
+  return m ? m[1].trim() : null;
+}
 if (deadFiles.length) {
   const deadFieldCount = deadReads.filter(d => d.dead.some(r => deadFiles.includes(r.file))).length;
+  const declared = deadFiles.filter(f => cycleStatusTag(f));
+  const undeclared = deadFiles.filter(f => !cycleStatusTag(f));
   console.log();
-  console.log(`DEAD FILES — every top-level function unreachable from runWorldCycle() (${deadFiles.length} file(s), ${deadFieldCount} field(s) read there):`);
+  console.log(`DEAD FILES — every top-level function unreachable from runWorldCycle() (${deadFiles.length} file(s), ${deadFieldCount} field(s) read there; ${undeclared.length} UNDECLARED):`);
   console.log('-'.repeat(90));
-  for (const f of deadFiles.sort()) {
+  for (const f of undeclared.sort()) {
     const n = deadReads.reduce((a, d) => a + d.dead.filter(r => r.file === f).length, 0);
-    console.log(`  ${f}${n ? `   (${n} ctx.summary read(s) that therefore never execute)` : ''}`);
+    console.log(`  UNDECLARED ${f}${n ? `   (${n} ctx.summary read(s) that therefore never execute)` : ''}`);
   }
+  if (!undeclared.length) console.log('  no undeclared dead files — every unreachable file carries a @cycle-status header');
+  console.log(`  declared (${declared.length}) — header @cycle-status:`);
+  for (const f of declared.sort()) console.log(`    ${f} — ${cycleStatusTag(f)}`);
   console.log('  note: partially-unreachable helpers inside LIVE files are not listed — a static');
   console.log('        call graph cannot see non-literal dispatch, so that bucket would over-report.');
 }

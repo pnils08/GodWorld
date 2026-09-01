@@ -141,7 +141,7 @@
 
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
-| 5-Intake | `processIntake_()` | phase05-citizens/processIntakeV3.js | Process new citizen intake rows |
+| 5-Intake | `processIntake_()` | phase01-config/godWorldEngine2.js:1202 | Process new citizen intake rows. `processIntakeV3.js` was the write-intent rewrite that never landed (never wired — S408, G-PF32) |
 | 5-NamedCitizens | `updateNamedCitizens_()` | godWorldEngine2.js | Update named citizen status/fields |
 | 5-CitizenEvents | `generateCitizensEvents_()` | phase05-citizens/generateCitizensEvents.js | ENGINE-only citizen life events (rich pipeline) |
 | 5-Promotions | `checkForPromotions_()` | phase05-citizens/checkForPromotions.js | Career promotions |

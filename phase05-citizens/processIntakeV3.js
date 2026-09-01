@@ -1,3 +1,4 @@
+// @cycle-status: never wired — Phase5-Intake calls processIntake_ in godWorldEngine2.js; the write-intent swap described in this header never landed; delete candidate engine.142
 /**
  * ============================================================================
  * PROCESS INTAKE V3 — Write-Intent Based

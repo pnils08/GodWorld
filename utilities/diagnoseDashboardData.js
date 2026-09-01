@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — ad hoc Logger diagnostic, run from the Apps Script editor
 function diagnoseDashboardData() {
   var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   

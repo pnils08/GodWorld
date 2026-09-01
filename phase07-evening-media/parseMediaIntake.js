@@ -1,3 +1,4 @@
+// @cycle-status: retired S325 (engine.68, a503d6c1) — zero callers, retained for reversibility; delete candidate engine.142
 /**
  * ⚠️ DEAD CODE (S325 engine.68 audit — flagged, retained for reversibility):
  * parseMediaIntake_ has ZERO callers anywhere in the repo — no safePhaseCall_,

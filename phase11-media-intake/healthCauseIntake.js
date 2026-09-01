@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — operator trigger runProcessHealthCauseIntake with stub ctx (SHEETS_MANIFEST §9); Phase11-MediaIntake calls processMediaIntake_, not this file
 /**
  * ============================================================================
  * HEALTH CAUSE INTAKE v1.1

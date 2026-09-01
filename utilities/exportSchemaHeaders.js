@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — operator export; scripts/regenSchemaHeaders.js is the Node mirror, not a caller
 /**
  * ============================================================================
  * EXPORT SCHEMA HEADERS

@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — Drive artifact exporter, no menu/trigger wiring; run from the Apps Script editor
 /**
  * ============================================================================
  * exportCycleArtifacts.js v1.0

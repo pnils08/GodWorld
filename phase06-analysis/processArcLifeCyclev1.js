@@ -1,3 +1,4 @@
+// @cycle-status: retired S313 (b6897a08) — arc loop retired; Phase8-ArcLifecycle slot commented at godWorldEngine2.js; no successor, S.eventArcs seeded []; delete candidate engine.142
 /**
  * ============================================================================
  * ARC RESOLUTION SYSTEM v1.2

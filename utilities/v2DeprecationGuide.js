@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — migration-lint helper + v3Random_ fail-loud stub; no callers since S156 by design
 /**
  * ============================================================================
  * V2 DEPRECATION GUIDE & MIGRATION UTILITIES

@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — one-time setup, menu item (utilities/godWorldMenu.js)
 /**
  * ============================================================================
  * setupSportsFeedValidation.js v2.2

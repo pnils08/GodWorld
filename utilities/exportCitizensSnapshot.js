@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — manual export, run exportCitizensSnapshot_ from the Apps Script editor
 /**
  * ============================================================================
  * exportCitizensSnapshot.js

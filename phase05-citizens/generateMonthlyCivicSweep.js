@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — standalone operator script (ssOverride signature); never called from godWorldEngine2.js
 /**
  * ============================================================================
  * generateMonthlyCivicSweep v2.6

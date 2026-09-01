@@ -236,6 +236,16 @@ All four closed, plus G-PF11 free (same file as G-PF26). Nothing here was bench-
 
 **Exit:** every one of the 35 classified; deletions and rewires filed as their own rows.
 
+#### DONE — S408, 2026-09-01
+
+**The instrument was the first defect.** Seven of the 35 "dead" files run every cycle. `ctxMap.js` missed three call shapes: (1) a phase closure whose callee sits on a later line behind `typeof fn_ === 'function'` — Phase6-InitiativeRipple, Phase6-TransitSignals, Phase6-FaithSignals, **Phase6.5-Validation**, so `prePublicationValidation.js` was listed as a dead gate while live at `godWorldEngine2.js:438/2164`; (2) direct calls in `runWorldCycle()`'s body outside any closure — the whole Phase-0 setup (`ensureEngine94SheetContract_`, `ensureEngine133Config_`, `ensureEngine135Config_`, `initSimulationLedger_` …) and the close — so `engine94SheetContract.js` and `initSimulationLedger.js` read dead while running first thing every cycle; (3) `v3Integration_`'s `V3_FUNCTIONS` registry, which names its modules with a `typeof` guard and dispatches by string at Phase8-V3Integration — `domainTracker_`, `storyHookEngine_`, `chicagoSatelliteEngine_` run every cycle (and `chicagoSatellite.js:55` reaches `v3ChicagoWriter.js`). Two ctxMap commits (`cad4f180`, `75657fe6`): slots 125 → 142, DEAD 36 → 29, ordering/undefaulted counts unchanged, `domainTracker` now credited as the live `domainPresence` writer.
+
+**Classification of the 29** (Sonnet agent with git evidence, verified by an independent reference sweep of engine/lib/scripts/tests/skills/html): **21 off-cycle by design** (menu items, `onOpen`, `doGet`, one-shot setup/recovery, operator exports), **8 retired with a recorded rationale** (S313 arc loop ×3, S229 Chicago Path B, S325 parseMediaIntake, S328 Media_Briefing, S407 storyline ager), **1 never wired** (`processIntakeV3.js` — the write-intent intake rewrite; live Phase5-Intake calls `processIntake_` in the engine file, ENGINE_MAP row corrected), **0 fell out of the call graph.** The gap entry's fear — a missing feature nobody noticed — did not materialise.
+
+**Landed:** every one of the 29 carries a first-line `// @cycle-status:` header naming what invokes it or when and why it was retired; ctxMap reads the tag and now reports **UNDECLARED** dead files as the signal (0 today) with the declared set listed for the record. A new dead file is a real question again. Deletions filed as **engine.142** (six files, zero live references) — the cost is ~15 truth-doc rows, not the rm, so it is its own row. `updateStorylineStatusv1.2.js` stays with engine.141; `generateChicagoCitizensv1.js` stays for the frozen pool.
+
+---
+
 ---
 
 ### Session S-E: instrumentation debt (batch and close)

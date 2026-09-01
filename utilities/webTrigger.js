@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — doGet/doPost are the web-app entry points that CALL runWorldCycle() (upstream of the cycle)
 /**
  * ============================================================================
  * webTrigger — remote cycle fire (engine.59 S320, Mike-approved)

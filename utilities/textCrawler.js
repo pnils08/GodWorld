@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — Drive text-mirror archival tool, run from the Apps Script editor
 /**
  * MASTER TEXT CRAWLER - v1.0
  * Recursively scans a Drive folder and all subfolders,

@@ -1,3 +1,4 @@
+// @cycle-status: retired S328 W2a (a1c3c49b) — Media_Briefing had zero readers; Phase10-MediaBriefing slot commented; delete candidate engine.142
 /**
  * ============================================================================
  * MEDIA ROOM BRIEFING v2.6 — CONSUMER WIRING INTEGRATION

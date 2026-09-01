@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — onOpen is invoked by the Apps Script framework when the spreadsheet opens
 /**
  * ============================================================================
  * GOD WORLD — UNIFIED MENU

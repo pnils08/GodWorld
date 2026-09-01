@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — disaster-recovery one-shot, run from the Apps Script editor
 /**
  * ============================================================================
  * CYCLE ROLLBACK UTILITY v1.0

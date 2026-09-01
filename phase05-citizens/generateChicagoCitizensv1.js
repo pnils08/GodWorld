@@ -1,3 +1,4 @@
+// @cycle-status: retired S229 (engine.2 §3.5, a1eb5690) — Chicago Path B disabled, pool frozen; Phase8-ChicagoCitizens slot commented; kept for the frozen pool
 /**
  * ============================================================================
  * CHICAGO GENERIC CITIZEN GENERATOR v1.1

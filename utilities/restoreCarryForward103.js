@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — one-shot S380 incident recovery, run once from the Apps Script editor
 /**
  * restoreCarryForward103 — one-shot recovery (2026-08-19).
  *

@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — Apps Script editor diagnostic, operator-run (SHEETS_MANIFEST §World_Drift_Report)
 /**
  * ============================================================================
  * generateMonthlyDriftReport v2.5 (FIXED DATA SOURCE)

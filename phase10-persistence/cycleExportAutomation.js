@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — menu items + optional 6-hour Drive-export timer (utilities/godWorldMenu.js)
 /**
  * ============================================================================
  * CYCLE EXPORT AUTOMATION v1.0

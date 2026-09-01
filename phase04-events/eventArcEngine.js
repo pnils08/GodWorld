@@ -1,3 +1,4 @@
+// @cycle-status: retired S313 (engine.72 G-EC55, b6897a08) — arc loop retired, stories are seeded never re-ingested; delete candidate engine.142
 /**
  * ============================================================================
  * V3.7 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION

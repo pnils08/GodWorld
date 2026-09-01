@@ -1,3 +1,4 @@
+// @cycle-status: retired S313 (b6897a08) — Event_Arc_Ledger frozen as historical data; Phase10-Arcs slot commented; delete candidate engine.142
 /**
  * ============================================================================
  * V3 ARC LEDGER WRITER — v3.3 (Write-Intent Based)

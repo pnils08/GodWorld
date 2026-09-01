@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — menu item "Compile Handoff" via compileHandoffFromMenu (utilities/godWorldMenu.js)
 /**
  * ============================================================================
  * COMPILE HANDOFF v1.0 — Automated Media Room Handoff Compiler

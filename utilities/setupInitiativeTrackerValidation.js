@@ -1,3 +1,4 @@
+// @cycle-status: off-cycle — one-time setup, run once from the Apps Script editor
 /**
  * ============================================================================
  * setupInitiativeTrackerValidation.js v1.0

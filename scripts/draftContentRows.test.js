@@ -91,9 +91,25 @@ for (const [c, expected] of FIXTURES) {
 // 5. Dead hood gate rejected, real hood passes
 {
   const hoods = new Set(['West Oakland', 'Fruitvale']);
-  check('dead hood gate (district) rejected', d.hoodGateValid('hood=D7', hoods) === false);
-  check('real hood gate passes', d.hoodGateValid('hood=West Oakland; displacement>=6', hoods) === true);
-  check('no hood gate passes', d.hoodGateValid('wealth<=3', hoods) === true);
+  // G-PF24 (S407): hoodGateValid -> normalizeHoodGate. The gate was right —
+  // `hood` matches the citizen row's canon Neighborhood, so `hood=lake_merritt`
+  // could never fire — but rejecting was the wrong remedy: C105 lost five of six
+  // rows, and the lost ones were exactly the hood-specific content the pools
+  // need. A slug is unambiguously recoverable. Returns the CORRECTED conditions
+  // string (what gets stored), or null when the hood genuinely is not canon.
+  check('dead hood gate (district) rejected', d.normalizeHoodGate('hood=D7', hoods) === null);
+  check('real hood gate passes through unchanged',
+    d.normalizeHoodGate('hood=West Oakland; displacement>=6', hoods) === 'hood=West Oakland; displacement>=6');
+  check('no hood gate passes', d.normalizeHoodGate('wealth<=3', hoods) === 'wealth<=3');
+  check('snake_case repaired to canon', d.normalizeHoodGate('hood=west_oakland', hoods) === 'hood=West Oakland');
+  check('lowercase repaired to canon', d.normalizeHoodGate('hood=west oakland', hoods) === 'hood=West Oakland');
+  check('repair keeps the other terms',
+    d.normalizeHoodGate('hood=west_oakland; retired', hoods) === 'hood=West Oakland; retired');
+  check('negated gate repairs too', d.normalizeHoodGate('hood!=west_oakland', hoods) === 'hood!=West Oakland');
+  check('unknown hood still rejected', d.normalizeHoodGate('hood=Atlantis', hoods) === null);
+  check('two ANDed hood terms rejected (unsatisfiable, not a typo)',
+    d.normalizeHoodGate('hood=West Oakland; hood=Temescal', hoods) === null);
+  check('empty conditions pass', d.normalizeHoodGate('', hoods) === '');
 }
 
 // 6. T4 auto-active: default Active=yes, --active no still overrides

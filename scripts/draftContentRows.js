@@ -319,6 +319,12 @@ async function draftOpenRouter(facts, ledgerProfile) {
     '- text: one concrete action or observation experienced by one citizen; lowercase clause, no terminal punctuation, no citizen names, no numbers from the facts. Show physical detail, choice, inconvenience, labor, overheard speech, or consequence. Do not summarize how a neighborhood or the city feels. Never use booster language such as thriving, vibrant, hopeful, making waves, on the rise, or more connected than ever. Lines may use $VENUE/$MOOD tokens.',
     '- Ledger profile: prefer a thin PoolKey only when the cycle facts support it. Do not add rows to persistentNoDrawPools; those need routing work, not more content. Existing fragment slots may be reused. ' + JSON.stringify(ledgerProfile || {}),
     '- Evening/night-out texture (engine.78b): PoolKey may use the "evening.*" domain — evening.nightlife (bars/DJ/live music), evening.food (late food spots), evening.cityEvent (night markets, gallery walks, festivals). These use tags starting with "source:prevEvening" (the whitelisted evening source — do NOT use "source:evening", it is not whitelisted); optionally add a second tag evening:nightlife / evening:food / evening:cityEvent to match the vocabulary generateCitizensEvents.js already uses. Draft these ONLY for hoods where facts.hoods[].nightlife (0-1 scale) is high (roughly >=0.7) or facts show real evening/nightlife activity — gate with hood=<name>, do not invent a nightlife condition field (none exists).',
+        // G-PF24: the canon names were already inside the facts payload and the model
+    // slugified them anyway. An enumerated allow-list stated as a rule is what it
+    // actually obeys. The normalizer behind it is the belt to this suspenders.
+    '- HOOD VOCABULARY — a hood gate must use one of these names EXACTLY, verbatim, spaces and capitals intact: '
+      + facts.hoods.map(h => '"' + h.name + '"').join(', ')
+      + '. Never slugify, lowercase, or underscore them: "hood=lake_merritt" matches no citizen in the world and the row is discarded.',
     '- Draft 6-10 rows grounded in THESE cycle facts (gate lines to the hoods/conditions the facts justify):',
     JSON.stringify(facts, null, 1),
     'Return ONLY the JSON array.'
@@ -370,12 +376,44 @@ const norm = s => String(s || '').toLowerCase().replace(/[^a-z0-9 ]/g, '').repla
 // residual closed): also reject MULTIPLE ANDed hood= terms — each parses as a
 // valid term but a citizen has exactly one hood, so the conjunction can never
 // be true for anyone (first live OpenRouter run produced exactly this).
-function hoodGateValid(conditions, hoodNames) {
-  const all = String(conditions || '').match(/hood\s*(?:=|!=)\s*[^;]+/g);
-  if (!all) return true;
-  if (all.length > 1) return false;
-  const m = all[0].match(/hood\s*(?:=|!=)\s*([^;]+)/);
-  return hoodNames.has(m[1].trim());
+// G-PF24 (S407): the drafter kept emitting snake_case hood gates —
+// `hood=lake_merritt`, `hood=temescal` — and C105 threw away FIVE of six rows
+// on it, keeping only the ungated citywide filler. The pools were growing with
+// exactly the content the neighborhoods do not need.
+//
+// The gate itself was right, and that is the part worth stating: `hood` is
+// `{ kind: 'str' }` in loadEventContentLedger.js:71, matched against the
+// citizen row's Neighborhood — the canon form, "Lake Merritt". A row gated
+// `hood=lake_merritt` would have been written, looked healthy, and never fired
+// for a single citizen. Rejecting it was correct. Rejecting was just the wrong
+// REMEDY: a slug is unambiguously recoverable, and the line it was attached to
+// was good.
+//
+// So normalize, then gate. Returns the corrected conditions string, or null
+// when the hood genuinely is not canon (that one still gets rejected loudly).
+// The rewritten string is what gets STORED — normalizing only enough to pass
+// our own check would write a row the engine can never match, which is the
+// silent version of the same bug.
+function canonizeHood(token, hoodNames) {
+  const want = token.trim();
+  if (hoodNames.has(want)) return want;
+  const loose = t => String(t).toLowerCase().replace(/[\s_-]+/g, '');
+  const target = loose(want);
+  const hits = [...hoodNames].filter(h => loose(h) === target);
+  return hits.length === 1 ? hits[0] : null;
+}
+
+function normalizeHoodGate(conditions, hoodNames) {
+  const raw = String(conditions || '');
+  const all = raw.match(/hood\s*(?:=|!=)\s*[^;]+/g);
+  if (!all) return raw;
+  // A citizen has exactly one hood, so ANDed hood terms can never both hold.
+  // Not a formatting slip — the row is unsatisfiable. Still rejected.
+  if (all.length > 1) return null;
+  const m = all[0].match(/hood\s*(=|!=)\s*([^;]+)/);
+  const canon = canonizeHood(m[2], hoodNames);
+  if (!canon) return null;
+  return raw.replace(all[0], 'hood' + m[1] + canon);
 }
 
 function ensureAutoTag(tags) {
@@ -411,7 +449,7 @@ async function main() {
   const candidates = args.backend === 'stub' ? draftStub(facts) : await draftOpenRouter(facts, ledgerProfile);
   console.log(`drafted: ${candidates.length} candidates`);
 
-  const report = { written: [], invalid: [], dup: [], capped: [] };
+  const report = { written: [], invalid: [], dup: [], capped: [], repaired: [] };
   const hoodNames = new Set(facts.hoods.map(h => h.name));
   const perPool = {}, perSlot = {};
   for (const c of candidates) {
@@ -422,7 +460,12 @@ async function main() {
     const quality = qualityIssue(c);
     if (quality) { report.invalid.push(c.text + ' [' + quality + ']'); continue; }
     c.tags = ensureAutoTag(c.tags);
-    if (!hoodGateValid(c.conditions, hoodNames)) { report.invalid.push(c.text + ' [dead hood gate: ' + c.conditions + ']'); continue; }
+    const gated = normalizeHoodGate(c.conditions, hoodNames);
+    if (gated === null) { report.invalid.push(c.text + ' [dead hood gate: ' + c.conditions + ']'); continue; }
+    if (gated !== c.conditions) {
+      report.repaired.push(c.conditions + ' -> ' + gated);
+      c.conditions = gated;
+    }
     if (!loaderAccepts(c, args.active)) { report.invalid.push(c.text + ' [' + c.tags + ' | ' + c.conditions + ']'); continue; }
     seenText.add(norm(c.text));
     if (c.kind === 'line') perPool[c.poolKey] = (perPool[c.poolKey] || 0) + 1;
@@ -442,8 +485,11 @@ async function main() {
   }
   report.written = slotSafe;
 
-  console.log(`\nvalid: ${report.written.length} | invalid: ${report.invalid.length} | dup: ${report.dup.length} | capped: ${report.capped.length}`);
+  console.log(`\nvalid: ${report.written.length} | invalid: ${report.invalid.length} | dup: ${report.dup.length} | capped: ${report.capped.length} | hood-gate repaired: ${report.repaired.length}`);
   report.invalid.forEach(t => console.log('  INVALID ' + t));
+  // Loud on purpose: a repair means the prompt is still not landing, and the
+  // day that count stops dropping is the day to go back to the prompt.
+  report.repaired.forEach(t => console.log('  REPAIRED hood gate: ' + t));
   report.dup.forEach(t => console.log('  DUP     ' + t));
   report.capped.forEach(t => console.log('  CAPPED  ' + t));
   report.written.forEach(c => console.log(`  ROW [${c.kind}] ${c.poolKey || c.slot} | ${c.text} | ${c.conditions || '(ungated)'} | ${c.tags}`));
@@ -480,7 +526,8 @@ module.exports = {
   draftStub,
   loaderAccepts,
   ensureAutoTag,
-  hoodGateValid,
+  normalizeHoodGate,
+  canonizeHood,
   parseArgs,
   qualityIssue,
   slotDependencyIssue,

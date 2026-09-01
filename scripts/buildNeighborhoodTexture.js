@@ -122,7 +122,9 @@ function assembleHoodSources(hood, slicer, worldEvents, venues, cityEventsByHood
 
 // ── generation ────────────────────────────────────────────────────────────────
 
-function buildPrompt(bundles) {
+function buildPrompt(bundles, canon) {
+  const ident = (canon && canon.identity) || {};
+  const marks = (canon && canon.landmarks) || {};
   const system = [
     'You write short, grounded notes on what an ordinary resident of an Oakland neighborhood would NOTICE walking around this week — the lived texture of their corner of the city.',
     '',
@@ -132,6 +134,12 @@ function buildPrompt(bundles) {
     '- NEVER state numbers, metrics, percentages, scores, or system words (sentiment, retail, crime index, displacement pressure). Translate every fact into what a person SEES or HEARS.',
     '- NEVER invent drama, hardship, or events. If the sources are thin, write something small and ordinary. The GROUNDING notes only keep you truthful (don\'t describe hardship in a comfortable area, or wealth in a working-class one) — never print them.',
     '- NEVER name real-world people, sports figures, or real churches/clergy. Use only what the source lines name.',
+    // G-PF23: identity is REGISTER, not content. It tells you what kind of place
+    // this is so the observation lands in the right key — a quiet week in
+    // Chinatown does not read like a quiet week in Baylight. It is never itself
+    // a thing that happened.
+    '- IDENTITY is what the neighborhood IS, permanently. Never print it, never restate it, never treat it as news. Use it only to keep your register true: the same small event reads differently in a district that inherited its money than in one that just got built.',
+    '- CANON NAMES are the real, permitted names of places in that neighborhood. If a SOURCE line already puts a resident somewhere those names cover, name it instead of writing "the theater" or "the bookstore". Never introduce one as a new subject — a name is not an event, and a week where nothing happened at it is still a week where nothing happened at it.',
     '',
     'OUTPUT FORMAT: for each neighborhood, exactly one line "### <NeighborhoodName>" then the 2-4 sentences on the next line(s), then a blank line. Use the neighborhood names EXACTLY as given.',
   ].join('\n');
@@ -139,7 +147,9 @@ function buildPrompt(bundles) {
   const user = bundles.map((b) => {
     const src = b.sources.length ? b.sources.map((s) => '  - ' + s).join('\n') : '  - (no notable events this week)';
     const grd = b.grounding.length ? `\n  GROUNDING (do not print): ${b.grounding.join('; ')}` : '';
-    return `### ${b.hood}\nSOURCES:\n${src}${grd}`;
+    const idn = ident[b.hood] ? `\n  IDENTITY (do not print): ${ident[b.hood]}` : '';
+    const lmk = (marks[b.hood] || []).length ? `\n  CANON NAMES: ${marks[b.hood].join('; ')}` : '';
+    return `### ${b.hood}\nSOURCES:\n${src}${idn}${lmk}${grd}`;
   }).join('\n\n');
 
   return { system, user };
@@ -179,6 +189,106 @@ function parseBlocks(raw, hoods) {
     if (canon && body) map[canon] = body;
   }
   return map;
+}
+
+// ── canon identity (G-PF23, S407) ─────────────────────────────────────────────
+// Mike-direct 2026-08-31: "we have canon identity in institutions.md on the
+// neighborhoods." This generator read four blocklists and no roster — it knew
+// what it must not say and not what the places ARE. Its output is injected into
+// every citizen wake as "Around your neighborhood:", so a hood's texture could
+// float free of the institutions that constitute it: generic venues where the
+// world has specific ones ($VENUE, "the bookstore", "the health center site").
+//
+// Two things get fed, and the split is the safety property:
+//
+//   IDENTITY   — the hood's own canon paragraph from §Neighborhoods (22 of them:
+//                4 Tier-1 + 18 in the district-anchor backlog). Register, not
+//                content: it keeps an observation in the right key for the place.
+//   CANON NAMES— landmarks from `### Tier 1 — Use real names` sections ONLY, and
+//                only those whose entry names this hood. Tier 1 is BY DEFINITION
+//                the safe-to-say set, so parsing Tier 1 exclusively means this
+//                feed structurally cannot hand the generator a Tier-2 name that
+//                needs a substitute. Tier 2 tables are never read here — that is
+//                the blocklist's job and it already does it.
+//
+// The deterministic sweep still runs on the OUTPUT, so this is belt-and-braces.
+const INSTITUTIONS_PATH = 'docs/canon/INSTITUTIONS.md';
+
+// Trim the canon paragraph to the part that describes the PLACE. Everything from
+// the council-anchor clause on is provenance bookkeeping — canonization sessions,
+// closed gap rows, legacy map ratifications — which is noise in a texture prompt
+// and burns tokens on all 22 hoods.
+function condenseIdentity(text) {
+  let t = String(text).split(/\*\*Council district anchor/)[0];
+  t = t.replace(/\*\*/g, '').replace(/\*/g, '').replace(/\s+/g, ' ').trim();
+  t = t.replace(/\(see [^)]*\)/gi, '').replace(/\s+/g, ' ').trim();
+  // Scrub FIGURES before this ever reaches the prompt. The generator is forbidden
+  // to print numbers and metricWarnings watches for leaks — handing it "$2.1B"
+  // and "35,000-seat" (Baylight's canon paragraph) is inviting the exact failure
+  // the rule exists to stop. Street numbers survive: "20th Street" is a place,
+  // not a metric.
+  t = t.replace(/\$[\d.,]+\s*[BMK]?/gi, '')
+       .replace(/\bINIT-\d+\b/g, '')
+       .replace(/\b[\d,]{2,}-(?:seat|acre|unit|foot|square)\w*/gi, '')
+       .replace(/\b\d[\d,.]*\s+(?:residential\s+)?units?\b/gi, '')
+       .replace(/\(\s*[,;]?\s*\)/g, '')
+       // Cross-doc pointers are provenance, not place: "— see PRODUCT_VISION".
+       .replace(/[—-]\s*see\s+[A-Z_][A-Za-z_/.]*/g, '')
+       .replace(/\s+([,.;])/g, '$1')
+       .replace(/([,;])[\s,;]*\1*/g, '$1 ')   // scrubbing leaves ",," and ", ;"
+       .replace(/\(\s*([,;.]\s*)*\)/g, '')
+       .replace(/\(\s*,\s*/g, '(')          // "(INIT-005, Foo)" -> "(Foo)"
+       .replace(/\s+\)/g, ')')
+       .replace(/\s+/g, ' ')
+       .trim();
+  const sentences = t.split(/(?<=\.)\s+/).slice(0, 2).join(' ');
+  return sentences.replace(/\s+/g, ' ').trim();
+}
+
+function loadCanonIdentity() {
+  let md;
+  try { md = fs.readFileSync(path.join(REPO_ROOT, INSTITUTIONS_PATH), 'utf8'); }
+  catch (e) { return { identity: {}, landmarks: {}, note: 'INSTITUTIONS.md unreadable: ' + e.message }; }
+  const lines = md.split('\n');
+
+  const identity = {};
+  const landmarks = {};
+  let inNeighborhoods = false;
+  let tier1 = false;
+
+  for (const line of lines) {
+    if (/^##\s+/.test(line)) {
+      inNeighborhoods = /^##\s+Neighborhoods\s*$/.test(line);
+      tier1 = false;
+    }
+    if (/^###\s+/.test(line)) {
+      // Tier 1 headings vary ("Use real names", "Canon institutions
+      // (GodWorld-native)", "Use real names (with canonical district anchor)").
+      // Anything not explicitly Tier 1 turns the flag OFF — fail closed.
+      tier1 = /^###\s+Tier 1\b/.test(line);
+    }
+    const m = line.match(/^-\s+\*\*(.+?)\*\*\s*[—-]\s*(.+)$/);
+    if (!m) continue;
+    const name = m[1].trim(), body = m[2].trim();
+
+    if (inNeighborhoods) {
+      // Hood paragraphs live under Tier 1 AND under the district-anchor backlog
+      // (which sits below a `#### D<n>` heading, not a Tier heading) — take both.
+      // "KONO (Koreatown-Northgate)" keys as "KONO": the sheet's form.
+      identity[name.replace(/\s*\(.*\)\s*$/, '').trim()] = condenseIdentity(body);
+      continue;
+    }
+    if (tier1) landmarks[name] = body;
+  }
+
+  // Landmarks route to a hood by the hood naming ITSELF in the entry text.
+  const byHood = {};
+  for (const [name, body] of Object.entries(landmarks)) {
+    for (const hood of Object.keys(identity)) {
+      if (body.includes(hood)) (byHood[hood] = byHood[hood] || []).push(name);
+    }
+  }
+  return { identity, landmarks: byHood, note: null };
 }
 
 // ── canon sweep (deterministic, fail-loud — wake-input-only) ──────────────────
@@ -268,8 +378,12 @@ async function buildNeighborhoodTexture(cycle) {
   const blocksMap = {};
   for (const b of bundles) if (!b.hasSignal) blocksMap[b.hood] = QUIET_LINE;
 
+  // G-PF23: what the hoods ARE, alongside what must not be said about them.
+  const canon = loadCanonIdentity();
+  if (canon.note) console.warn('[texture] canon identity unavailable — ' + canon.note);
+
   if (withSignal.length) {
-    const { system, user } = buildPrompt(withSignal);
+    const { system, user } = buildPrompt(withSignal, canon);
     const raw = await generateTexture(system, user);
     const gen = parseBlocks(raw, hoods);
     for (const b of withSignal) {
@@ -328,6 +442,8 @@ async function main() {
 }
 
 module.exports = {
+  loadCanonIdentity,
+  condenseIdentity,
   buildNeighborhoodTexture,
   assignCityEvents,
   incomeBand,

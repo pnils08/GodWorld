@@ -186,10 +186,19 @@ function runCivicInitiativeEngine_(ctx) {
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
-    examined++;
 
     var initId = row[iID] || '';
     var name = row[iName] || '';
+
+    // v2.0: getDataRange() returns the USED range, so a formatted-but-empty
+    // trailing row reaches here. Counting one would inflate `Examined` and
+    // mask the single shape this line exists to expose — an emptied tracker
+    // printing `Examined 0`. Behaviour is unchanged for real rows: a blank row
+    // already fell through every gate below ('' is in no skip list, and both
+    // auto-advance branches require voteCycle > 0).
+    if (!initId && !name) continue;
+
+    examined++;
     var type = (row[iType] || 'vote').toString().toLowerCase();
     var status = (row[iStatus] || '').toString().toLowerCase();
     var voteCycle = Number(row[iVoteCycle]) || 0;

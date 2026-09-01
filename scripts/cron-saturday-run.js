@@ -465,7 +465,11 @@ async function stepSignals(cycle) {
   const sheets = require(path.join(ROOT, 'lib', 'sheets'));
   const data = await sheets.getRawSheetData(STORYLINE_LEDGER_TAB);
   const { updates, appends } = mergeStorylineLedger(data, signals, cycle);
-  for (const u of updates) await sheets.updateRangeByPosition(STORYLINE_LEDGER_TAB, u.sheetRow, 1, [u.row]);
+  // startCol is 0-INDEXED (lib/sheets.columnIndexToLetter): 0 = col A. Passing 1
+  // here wrote the 12-value row at B..M and left the stale slug in A, so every
+  // cross-week update shifted the row one column right (5 rows corrupted on the
+  // 2026-08-29 run; same class as the S366 engine82 incident).
+  for (const u of updates) await sheets.updateRangeByPosition(STORYLINE_LEDGER_TAB, u.sheetRow, 0, [u.row]);
   if (appends.length) await sheets.appendRows(STORYLINE_LEDGER_TAB, appends);
   console.log(updates.length + ' row(s) updated, ' + appends.length + ' appended to ' + STORYLINE_LEDGER_TAB);
   return { signals: signals.length, written: updates.length + appends.length };

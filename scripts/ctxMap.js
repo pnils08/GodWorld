@@ -297,7 +297,16 @@ for (let li = 0; li < orchLines.length; li++) {
   // dropped these four slots and everything reachable only through them read as DEAD —
   // prePublicationValidation.js was reported dead while live at both entry points (S408).
   const open = line.match(/safePhaseCall_\(\s*ctx\s*,\s*'([^']+)'\s*,\s*function\s*\(\)\s*\{\s*$/);
-  if (!open) continue;
+  if (!open) {
+    // Direct call in the cycle body, outside any phase closure: the Phase-0 setup
+    // (openSimSpreadsheet_, ensureEngine94SheetContract_, initSimulationLedger_ ...)
+    // and the close (verifyCycleCountPersisted_, emitPhaseTimings_). These were never
+    // seeded, so engine94SheetContract.js and initSimulationLedger.js read as DEAD
+    // while running first thing every cycle (S408). Each becomes an ordered slot.
+    let d; const directRe = /\b([A-Za-z0-9_]+_)\s*\(/g;
+    while ((d = directRe.exec(line)) !== null) if (d[1] !== 'safePhaseCall_') slots.push({ label: 'Direct-' + d[1], fns: [d[1]] });
+    continue;
+  }
   const fns = [];
   for (let lj = li + 1; lj < orchLines.length; lj++) {
     const body = orchLines[lj];
@@ -350,6 +359,12 @@ for (const relFile of phaseFiles) {
     // edges strands their callers as unreachable.
     const re = /\b([A-Za-z_][A-Za-z0-9_]*)\s*\(/g;
     while ((m = re.exec(ls[i])) !== null) spanCalls[key].add(m[1]);
+    // `typeof fn_ === 'function'` is how the engine guards a call it is about to make,
+    // and how v3Integration_'s V3_FUNCTIONS registry names the modules it dispatches by
+    // string (domainTracker_, storyHookEngine_, chicagoSatelliteEngine_). Without this
+    // edge those three read as DEAD while running at Phase8-V3Integration (S408).
+    const tre = /typeof\s+([A-Za-z_][A-Za-z0-9_]*)\s*===\s*['"]function['"]/g;
+    while ((m = tre.exec(ls[i])) !== null) spanCalls[key].add(m[1]);
   }
 }
 // resolve a called name from a calling span: prefer a definition in the same file

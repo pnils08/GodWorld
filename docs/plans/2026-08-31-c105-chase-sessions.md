@@ -169,7 +169,7 @@ So every writer met the cycle blind. `cron-desk-run.js:1051` has always offered 
 
 **Built (`b12bb4f1`, `1c772aae`, `0b6f6fed`).**
 
-1. `buildWorldSummary.js` deskSignal **v1.2** — `openThreadEntries`, pure: Storyline_Ledger → a `kind:'thread'` entry per lane, routed by the row's own `Desks` column, unrouted falling to civic rather than being dropped. Freshest first, then most-covered, capped 12/lane.
+1. `buildWorldSummary.js` deskSignal **v1.2** — `openThreadEntries`, pure: Storyline_Ledger → a `kind:'thread'` entry per desk, routed by the row's own `Desks` column, unrouted falling to civic rather than being dropped. Freshest first, then most-covered, capped 12/desk. Emitted as **`openThreads`, a sibling of `lanes`, never inside one**: six scripts consume the lanes and treat every entry as an assignable cycle signal (`newsroom-fanout` seeds, the safety / civic-domain / Jax slices, `stink-scanner`, `sportsSubstrate`), and a thread is a summary of past coverage, not an event that happened this cycle. Guarded by test, not by care.
 2. `cron-desk-run.js` — threads render in their **own block**, not mixed into the pointer list; they are the only entries a writer can continue rather than open. The block asks for the slug back character-for-character on the INTAKE STORYLINE line.
 3. `buildDeskPackets.js` — repointed at the live tab through `normalizeStorylineLedger`, an adapter into the Tracker-shaped fields the three consumption sites already read.
 4. **engine.140** (UNDEPLOYED) — `Phase8-StorylineStatus` commented at both call sites, file convention, retained for reversibility. Writes nothing to ctx, so the removal cascades nowhere.
@@ -187,7 +187,9 @@ So every writer met the cycle blind. `cron-desk-run.js:1051` has always offered 
 
 **Verified against the live ledger, not asserted:** 23 threads route 11 civic / 3 sports / 6 culture / 3 business at C105, all marked dormant at C109, all dropped at C120; POPIDs resolve to real ledger names (`POP-00001` → Vinnie Keane).
 
-**Acceptance is the next unattended run**, not a demo: Step 5 rebuilds `desk_signal` with the thread lane, the next writer wake renders it, and the following Saturday cron writes clean updates. The shape to watch for is the first `closed` verb the ledger has ever recorded.
+**Live now, not waiting on C106.** `output/desk_signal_c105.json` was regenerated so tomorrow's wakes carry threads rather than the return path sitting dormant until the next manual Step 5. Proven additive: lanes diff +0/−0 across all four against the pre-existing artifact; the only changes are the `openThreads` key and the version string. `world_summary_c105.md` untouched.
+
+**Acceptance is the next unattended run**, not a demo: the next writer wake renders the block, and the Saturday cron (Sep 5, 16:00) exercises the repaired write path. The shape to watch for is the first `closed` verb the ledger has ever recorded.
 
 
 ---

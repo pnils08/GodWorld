@@ -656,6 +656,12 @@ console.log('\nTest 11g: open threads (S407)');
     helper.openThreadEntries(rows, cycle, lanes, notes);
     return { lanes, notes };
   };
+  // Threads must NEVER land in `lanes` — six scripts read those and treat every
+  // entry as an assignable cycle signal. This is the guard on that separation.
+  const signalOf = (rows, cycle) => helper.emitDeskSignal(cycle, {
+    auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {},
+    storylineLedger: rows
+  });
 
   const live = run([row()], 105);
   assert('open thread lands on its Desks lane', live.lanes.civic.length === 1 && live.lanes.sports.length === 0);
@@ -696,14 +702,18 @@ console.log('\nTest 11g: open threads (S407)');
 
   assert('empty ledger is noted, not thrown', run([], 105).notes.some(n => n.includes('no Storyline_Ledger rows')));
 
-  const wired = helper.emitDeskSignal(105, {
-    auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {},
-    storylineLedger: [row()]
-  });
-  assert('emitDeskSignal wires the lane through',
-    wired.lanes.civic.some(x => x.kind === 'thread'));
+  const wired = signalOf([row()], 105);
+  assert('threads ride openThreads, a sibling of lanes',
+    wired.openThreads.civic.length === 1 && wired.openThreads.civic[0].kind === 'thread');
+  assert('NO thread leaks into any lane',
+    !Object.values(wired.lanes).some(l => l.some(x => x.kind === 'thread')));
+  assert('lane counts exclude threads',
+    wired.meta.counts.civic === wired.lanes.civic.length);
+  assert('openThreads present even when empty', Boolean(signalOf([], 105).openThreads.sports));
   assert('meta carries the thread contract',
     String(wired.meta.threadContract).includes('continuation CANDIDATES'));
+  assert('thread contract states the sibling rule',
+    String(wired.meta.threadContract).includes('SIBLING of lanes'));
 }
 
 // ────────────────────────────────────────────────────────────────────────────

@@ -968,7 +968,7 @@ function handleEntry(h) {
 // lane uses above. Closed threads and threads stale past THREAD_STALE_AFTER are
 // omitted — a closed story is finished, and a 15-cycle silence is the honest
 // reading that the retired tracker called `abandoned`.
-function openThreadEntries(ledgerRows, cycle, lanes, notes) {
+function openThreadEntries(ledgerRows, cycle, threads, notes) {
   const rows = Array.isArray(ledgerRows) ? ledgerRows : [];
   if (!rows.length) {
     notes.push('no Storyline_Ledger rows — open-thread entries omitted from every lane');
@@ -985,7 +985,7 @@ function openThreadEntries(ledgerRows, cycle, lanes, notes) {
     const age = cycle - last;
     if (age >= THREAD_STALE_AFTER) continue;
     const desks = String(r.Desks || '').split(',').map(d => d.trim().toLowerCase()).filter(Boolean);
-    let targets = desks.filter(d => Object.prototype.hasOwnProperty.call(lanes, d));
+    let targets = desks.filter(d => Object.prototype.hasOwnProperty.call(threads, d));
     if (!targets.length) { targets = ['civic']; unrouted++; }
     const hood = String(r.Hoods || '').trim();
     const popids = String(r.Citizens || '').split(',').map(x => x.trim()).filter(Boolean);
@@ -1019,7 +1019,7 @@ function openThreadEntries(ledgerRows, cycle, lanes, notes) {
   for (const s of staged) {
     perLane[s.lane] = (perLane[s.lane] || 0) + 1;
     if (perLane[s.lane] > THREAD_LANE_CAP) continue;
-    lanes[s.lane].push(s.entry);
+    threads[s.lane].push(s.entry);
   }
   if (unrouted) notes.push(`${unrouted} Storyline_Ledger thread(s) carried no known desk — routed to civic`);
 }
@@ -1181,7 +1181,14 @@ function emitDeskSignal(cycle, data) {
   if (!cycleRipples.length) notes.push('no Ripple_Ledger rows this cycle — ripple entries empty across lanes');
 
   // ── open threads: what is already running on this desk's beat ──
-  openThreadEntries(storylineLedger, cycle, lanes, notes);
+  // Deliberately NOT in `lanes`. Six scripts consume desk_signal lanes and treat
+  // every entry as an assignable cycle signal (newsroom-fanout seeds, the safety
+  // / civic-domain / Jax slices, stink-scanner, sportsSubstrate) — a thread is a
+  // summary of past coverage, not an event that happened this cycle, and handing
+  // one to a slice as its story ref would invent a beat out of a ledger row.
+  // It rides as its own top-level key so exactly one reader sees it.
+  const threads = { civic: [], sports: [], culture: [], business: [] };
+  openThreadEntries(storylineLedger, cycle, threads, notes);
 
   // Drop undefined optional fields for a clean artifact.
   for (const lane of Object.keys(lanes)) {
@@ -1208,7 +1215,7 @@ function emitDeskSignal(cycle, data) {
       script: `buildWorldSummary.js v${SCRIPT_VERSION} (deskSignal v${DESK_SIGNAL_VERSION})`,
       builtAt: new Date().toISOString(),
       laneRule: 'civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap); threads route by Storyline_Ledger.Desks',
-      threadContract: 'kind:"thread" entries are OPEN STORYLINES from Storyline_Ledger — continuation CANDIDATES, not a controlled vocabulary. Reuse the slug verbatim to advance or close a thread; mint a new one freely when the piece is new. Counts are verbatim ledger columns; dormancy is derived from LastCycle age and never stored.',
+      threadContract: 'openThreads (a SIBLING of lanes, never inside one) are OPEN STORYLINES from Storyline_Ledger — continuation CANDIDATES, not a controlled vocabulary. Reuse the slug verbatim to advance or close a thread; mint a new one freely when the piece is new. Counts are verbatim ledger columns; dormancy is derived from LastCycle age and never stored.',
       rippleLaneMap: RIPPLE_LANE_MAP,
       counts: Object.fromEntries(Object.entries(lanes).map(([k, v]) => [k, v.length])),
       contract: 'POINTERS ONLY — labels are verbatim source strings (they may embed source-native deltas); no derived stats, no career numbers, no angles. The desk reaches the raw material itself.',
@@ -1216,6 +1223,7 @@ function emitDeskSignal(cycle, data) {
       notes
     },
     lanes,
+    openThreads: threads,
     ...(bylineCandidates ? { bylineCandidates } : {})
   };
 }

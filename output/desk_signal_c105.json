@@ -1,9 +1,10 @@
 {
   "meta": {
     "cycle": 105,
-    "script": "buildWorldSummary.js v2.2.0 (deskSignal v1.1)",
-    "builtAt": "2026-08-31T06:13:35.378Z",
-    "laneRule": "civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap)",
+    "script": "buildWorldSummary.js v2.2.0 (deskSignal v1.2)",
+    "builtAt": "2026-09-01T04:15:18.521Z",
+    "laneRule": "civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap); threads route by Storyline_Ledger.Desks",
+    "threadContract": "openThreads (a SIBLING of lanes, never inside one) are OPEN STORYLINES from Storyline_Ledger — continuation CANDIDATES, not a controlled vocabulary. Reuse the slug verbatim to advance or close a thread; mint a new one freely when the piece is new. Counts are verbatim ledger columns; dormancy is derived from LastCycle age and never stored.",
     "rippleLaneMap": {
       "initiative-implementation": "civic",
       "approval-shift": "civic",
@@ -24,7 +25,7 @@
     "contract": "POINTERS ONLY — labels are verbatim source strings (they may embed source-native deltas); no derived stats, no career numbers, no angles. The desk reaches the raw material itself.",
     "bylineContract": "bylineCandidates is a WHO-assist HINT — one name + POPID per lane, usage-rotated off the Bay_Tribune_Oakland roster. The desk still assigns; no angle, no story, no subject rides here (engine.76 W5h2 locked rule).",
     "notes": [
-      "output/neighborhood_texture_c105.md not present at build time (produced at Step 5.5) — hood refs are forward pointers"
+      "1 Storyline_Ledger thread(s) carried no known desk — routed to civic"
     ]
   },
   "lanes": {
@@ -1639,6 +1640,333 @@
         "ref": "Ripple_Ledger cycle 105 (CauseType city-event); rendered: world_summary_c105.md \"## What Moved\" > \"### city-event\"",
         "label": "city-event | Temescal Resolution Run (Temescal)",
         "hood": "Temescal"
+      }
+    ]
+  },
+  "openThreads": {
+    "civic": [
+      {
+        "kind": "thread",
+        "slug": "piedmont-ave-sandra-velazquez-season-feel",
+        "ref": "Storyline_Ledger (StorylineId piedmont-ave-sandra-velazquez-season-feel)",
+        "label": "piedmont-ave-sandra-velazquez-season-feel | C104→C104 | 4 article(s) | opened 4",
+        "lastCycle": 104,
+        "articles": 4,
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00168",
+          "POP-00830"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "west-oakland-elio-perez-initiative",
+        "ref": "Storyline_Ledger (StorylineId west-oakland-elio-perez-initiative)",
+        "label": "west-oakland-elio-perez-initiative | C104→C104 | 2 article(s) | advanced 1, opened 1",
+        "lastCycle": 104,
+        "articles": 2,
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00722",
+          "POP-00794",
+          "POP-00961"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "temescal-sonia-parikh-anomaly",
+        "ref": "Storyline_Ledger (StorylineId temescal-sonia-parikh-anomaly)",
+        "label": "temescal-sonia-parikh-anomaly | C104→C104 | 2 article(s) | advanced 1, opened 1",
+        "lastCycle": 104,
+        "articles": 2,
+        "hood": "Temescal",
+        "popids": [
+          "POP-00745",
+          "POP-00761",
+          "POP-00775",
+          "POP-00170"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "downtown-merkin-jumper-undocked",
+        "ref": "Storyline_Ledger (StorylineId downtown-merkin-jumper-undocked)",
+        "label": "downtown-merkin-jumper-undocked | C104→C104 | 2 article(s) | opened 2",
+        "lastCycle": 104,
+        "articles": 2,
+        "hood": "Downtown",
+        "popids": [
+          "POP-00688",
+          "POP-00212",
+          "POP-00224",
+          "POP-00225"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "east-oakland-maria-conteras-anomaly",
+        "ref": "Storyline_Ledger (StorylineId east-oakland-maria-conteras-anomaly)",
+        "label": "east-oakland-maria-conteras-anomaly | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "East Oakland",
+        "popids": [
+          "POP-01047",
+          "POP-01055",
+          "POP-00170",
+          "POP-00198"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "east-oakland-jerome-pittman-anomaly",
+        "ref": "Storyline_Ledger (StorylineId east-oakland-jerome-pittman-anomaly)",
+        "label": "east-oakland-jerome-pittman-anomaly | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "East Oakland",
+        "popids": [
+          "POP-01055",
+          "POP-00170",
+          "POP-00198"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "city-elio-perez-anomaly",
+        "ref": "Storyline_Ledger (StorylineId city-elio-perez-anomaly)",
+        "label": "city-elio-perez-anomaly | C104→C104 | 1 article(s) | advanced 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "popids": [
+          "POP-00201",
+          "POP-00210"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+        "ref": "Storyline_Ledger (StorylineId west-oakland-fruitvale-east-oakland-elio-perez-public-safety)",
+        "label": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00198",
+          "POP-00170",
+          "POP-00210"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "temescal-melton-neilon-anomaly",
+        "ref": "Storyline_Ledger (StorylineId temescal-melton-neilon-anomaly)",
+        "label": "temescal-melton-neilon-anomaly | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "Temescal",
+        "popids": [
+          "POP-00170"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "west-oakland-east-oakland-fruitvale-melton-neilon-initiative",
+        "ref": "Storyline_Ledger (StorylineId west-oakland-east-oakland-fruitvale-melton-neilon-initiative)",
+        "label": "west-oakland-east-oakland-fruitvale-melton-neilon-initiative | C103→C103 | 1 article(s) | opened 1",
+        "lastCycle": 103,
+        "articles": 1,
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00170",
+          "POP-00201",
+          "POP-00210"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "west-oakland-marcus-wright-initiative",
+        "ref": "Storyline_Ledger (StorylineId west-oakland-marcus-wright-initiative)",
+        "label": "west-oakland-marcus-wright-initiative | C103→C103 | 1 article(s) | opened 1",
+        "lastCycle": 103,
+        "articles": 1,
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00288"
+        ]
+      }
+    ],
+    "sports": [
+      {
+        "kind": "thread",
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "ref": "Storyline_Ledger (StorylineId baylight-district-vinnie-keane-prospect-callup)",
+        "label": "baylight-district-vinnie-keane-prospect-callup | C104→C104 | 4 article(s) | opened 4",
+        "lastCycle": 104,
+        "articles": 4,
+        "hood": "Baylight District",
+        "popids": [
+          "POP-00001",
+          "POP-00050",
+          "POP-00170"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "baylight-district-vinnie-keane-era-door",
+        "ref": "Storyline_Ledger (StorylineId baylight-district-vinnie-keane-era-door)",
+        "label": "baylight-district-vinnie-keane-era-door | C104→C104 | 1 article(s) | advanced 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "Baylight District",
+        "popids": [
+          "POP-00001",
+          "POP-00050",
+          "POP-00170"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "old-oakland-melton-neilon-long-view-signal",
+        "ref": "Storyline_Ledger (StorylineId old-oakland-melton-neilon-long-view-signal)",
+        "label": "old-oakland-melton-neilon-long-view-signal | C104→C104 | 1 article(s) | advanced 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "Old Oakland",
+        "popids": [
+          "POP-00170"
+        ]
+      }
+    ],
+    "culture": [
+      {
+        "kind": "thread",
+        "slug": "adams-point-devon-willis-fame-sighting",
+        "ref": "Storyline_Ledger (StorylineId adams-point-devon-willis-fame-sighting)",
+        "label": "adams-point-devon-willis-fame-sighting | C104→C104 | 4 article(s) | advanced 1, opened 3",
+        "lastCycle": 104,
+        "articles": 4,
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648",
+          "POP-00798"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "city-depak-ying-story-signal",
+        "ref": "Storyline_Ledger (StorylineId city-depak-ying-story-signal)",
+        "label": "city-depak-ying-story-signal | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "adams-point-devon-willis-story-signal",
+        "ref": "Storyline_Ledger (StorylineId adams-point-devon-willis-story-signal)",
+        "label": "adams-point-devon-willis-story-signal | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "city-depak-ying-tv-slate",
+        "ref": "Storyline_Ledger (StorylineId city-depak-ying-tv-slate)",
+        "label": "city-depak-ying-tv-slate | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "popids": [
+          "POP-00210",
+          "POP-00170",
+          "POP-00198",
+          "POP-00201"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "rockridge-howard-yell-named-restaurant",
+        "ref": "Storyline_Ledger (StorylineId rockridge-howard-yell-named-restaurant)",
+        "label": "rockridge-howard-yell-named-restaurant | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00651"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "west-oakland-marcus-wright-quiet-nightlife",
+        "ref": "Storyline_Ledger (StorylineId west-oakland-marcus-wright-quiet-nightlife)",
+        "label": "west-oakland-marcus-wright-quiet-nightlife | C103→C103 | 1 article(s) | opened 1",
+        "lastCycle": 103,
+        "articles": 1,
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00288",
+          "POP-00794",
+          "POP-00722"
+        ]
+      }
+    ],
+    "business": [
+      {
+        "kind": "thread",
+        "slug": "grand-lake-vinnie-keane-retail-decay",
+        "ref": "Storyline_Ledger (StorylineId grand-lake-vinnie-keane-retail-decay)",
+        "label": "grand-lake-vinnie-keane-retail-decay | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00001",
+          "POP-00002",
+          "POP-00170"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "grand-lake-amara-keane-retail-decay",
+        "ref": "Storyline_Ledger (StorylineId grand-lake-amara-keane-retail-decay)",
+        "label": "grand-lake-amara-keane-retail-decay | C104→C104 | 1 article(s) | opened 1",
+        "lastCycle": 104,
+        "articles": 1,
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00002",
+          "POP-00170",
+          "POP-00198"
+        ]
+      },
+      {
+        "kind": "thread",
+        "slug": "dimond-clarence-moody-hood-cooling",
+        "ref": "Storyline_Ledger (StorylineId dimond-clarence-moody-hood-cooling)",
+        "label": "dimond-clarence-moody-hood-cooling | C103→C103 | 1 article(s) | opened 1",
+        "lastCycle": 103,
+        "articles": 1,
+        "hood": "Dimond",
+        "popids": [
+          "POP-00730",
+          "POP-00170",
+          "POP-00201"
+        ]
       }
     ]
   },

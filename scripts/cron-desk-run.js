@@ -952,7 +952,8 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   // in the assignment. Same profilesFor already used for quotes — it simply never
   // reached this block.
   const laneProfiles = new Map();
-  const lanePops = [...new Set(lane.flatMap(e => e.popids || []))];
+  const laneThreads = loadOpenThreads(cycle, desk);
+  const lanePops = [...new Set(lane.concat(laneThreads).flatMap(e => e.popids || []))];
   if (lanePops.length) {
     try {
       for (const line of require('./canon-name-check').profilesForPopids(lanePops)) {
@@ -970,11 +971,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
         + ' — NO LEDGER PROFILE: ' + lanePops.filter(p => !laneProfiles.has(p)).join(', '));
     }
   }
-  // S407 — threads render in their own block below. Mixed into the signal list
-  // they read as one more pointer; the whole point is that they are the only
-  // entries the writer can CONTINUE rather than open.
-  const laneThreads = lane.filter(e => e.kind === 'thread');
-  for (const e of lane.filter(e => e.kind !== 'thread')) {
+  for (const e of lane) {
     const tags = [e.kind, e.hood].filter(Boolean).join(' · ');
     L.push('- ' + (e.label || '(no label)') + (tags ? '  [' + tags + ']' : ''));
     L.push('  ref: ' + e.ref);
@@ -1098,6 +1095,15 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
 // Each stage is a small, separately-inspectable artifact; cron fans them across
 // the day (06:00 / 13:00 / 18:00) and the morning digest reviews the results.
 // ---------------------------------------------------------------------------
+
+// S407 — open threads ride desk_signal as a SIBLING of lanes, never inside one:
+// six scripts consume the lanes and treat every entry as an assignable cycle
+// signal. Absent key (a pre-v1.2 signal, or the undocked feed-built lane) => [].
+function loadOpenThreads(cycle, desk) {
+  const signal = readJson(path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json'));
+  const all = signal && signal.openThreads;
+  return (all && Array.isArray(all[desk || DESK])) ? all[desk || DESK] : [];
+}
 
 function loadLane(cycle, desk) {
   // pipeline.60: the undocked lane is feed-built (Nia's data contract — facts

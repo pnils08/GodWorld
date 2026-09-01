@@ -165,6 +165,14 @@ function processGenerationalWealth_(ctx) {
   // nudged by last cycle's economic mood, carried in the cycle-state snapshot.
   results.bankRate = processBankRate_(ctx, cycle);
 
+  // Step 2.45 (4b casino, grok 2026-08-31): settle then place, BEFORE the
+  // money loop so a lost slip can stack with crisis-debt the same week.
+  // Missing Casino_Ledger tab is a no-op. typeof-guarded so an undeployed
+  // file cannot throw at the wealth pass.
+  if (typeof processCasinoLedger_ === 'function') {
+    results.casino = processCasinoLedger_(ctx, cycle);
+  }
+
   // Step 2.5 (engine.60 S320): the money loop — savings accrue into NetWorth,
   // debt moves both ways, threshold moments reach LifeHistory + hooks.
   // engine.61 (S321): now weathered — rate scales yield/drag, neighborhood

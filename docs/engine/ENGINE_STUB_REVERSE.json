@@ -1,8 +1,8 @@
 {
-  "generated": "2026-08-31",
+  "generated": "2026-09-01",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 185,
-  "functionsMapped": 1193,
+  "filesScanned": 186,
+  "functionsMapped": 1223,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -545,6 +545,7 @@
         "phase04-events/chaosCarsEngine.js::pickCitizenTarget_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::bondCompatibility_",
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/checkForPromotions.js::checkForPromotions_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/runEducationEngine.js::runEducationEngine_",
@@ -998,6 +999,7 @@
         "phase01-config/godWorldEngine2.js::runWorldCycle",
         "phase02-world-state/loadEventContentLedger.js::loadEventContentLedger_",
         "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
@@ -1550,6 +1552,7 @@
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase05-citizens/bondEngine.js::updateExistingBonds_",
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
+        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/domainTracker.js::domainTracker_",
@@ -2077,6 +2080,7 @@
       "readers": [
         "phase02-world-state/applySportsSeason.js::findColumnIndex_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase07-evening-media/buildEveningMedia.js::buildEveningMedia_",
         "phase07-evening-media/sportsStreaming.js::buildEveningSportsAndStreaming_"
@@ -2263,6 +2267,7 @@
       ],
       "readers": [
         "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
     },
@@ -2430,6 +2435,7 @@
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/bondEngine.js::processRomanceAndMarriage_",
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/civicInitiativeEngine.js::generateOverrideStoryHook_",
         "phase05-citizens/civicInitiativeEngine.js::generateVetoStoryHook_",
         "phase05-citizens/educationCareerEngine.js::checkSchoolQuality_",
@@ -2456,6 +2462,7 @@
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/bondEngine.js::processRomanceAndMarriage_",
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/civicInitiativeEngine.js::generateOverrideStoryHook_",
         "phase05-citizens/civicInitiativeEngine.js::generateVetoStoryHook_",
         "phase05-citizens/educationCareerEngine.js::checkSchoolQuality_",
@@ -2980,6 +2987,21 @@
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
+    "casinoSettlements": {
+      "writers": [
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
+      ],
+      "readers": [
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
+      ]
+    },
+    "simulationYear": {
+      "writers": [],
+      "readers": [
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ]
+    },
     "promotions": {
       "writers": [
         "phase05-citizens/checkForPromotions.js::checkForPromotions_",
@@ -3136,12 +3158,6 @@
       "writers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ],
-      "readers": [
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
-      ]
-    },
-    "simulationYear": {
-      "writers": [],
       "readers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]
@@ -3341,6 +3357,14 @@
       ],
       "readers": [
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
+      ]
+    },
+    "initiativePhases": {
+      "writers": [
+        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
+      ],
+      "readers": [
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
     "officeDepartures": {
@@ -4469,7 +4493,8 @@
     "Undocked_Feed": {
       "writers": [],
       "readers": [
-        "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_"
+        "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
+        "phase05-citizens/casinoLedgerEngine.js::casinoUpcoming_"
       ]
     },
     "WorldEvents_Ledger": {
@@ -4523,6 +4548,7 @@
       "writers": [
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/householdFormationEngine.js::dissolveStressedHouseholds_",
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_"
       ],
@@ -4531,6 +4557,7 @@
         "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",

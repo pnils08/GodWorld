@@ -225,12 +225,12 @@ Every column is a data point in someone's life. This maps who writes each column
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
-| Z | 26 | WealthLevel | 0-10 integer | generationalWealthEngine, integrateAthletes, applyEconomicProfiles | seedHouseholds | **CAUSAL** — writer `generationalWealthEngine.js:567` (deriveWealthLevel_); `generateCitizensEvents.js:2447` + `:2057` gate micro-event pool by wealth bracket |
+| Z | 26 | WealthLevel | 0-12 integer | generationalWealthEngine, integrateAthletes, applyEconomicProfiles | seedHouseholds | **CAUSAL** — writer `deriveWealthLevel_` (`generationalWealthEngine.js:836`, S363 + engine.135 D1 bands to 12); `generateCitizensEvents.js:2447` + `:2057` gate micro-event pool by wealth bracket |
 | AA | 27 | Income | Dollar amount (integer) | runCareerEngine (+6-12% promotion, -12-20% layoff), applyEconomicProfiles, integrateAthletes | aggregateNeighborhoodEconomics, buildDeskPackets, householdFormation, gentrification, migrationTracking | **CAUSAL** — scales accrual (income/52×rate×eduF×superF×yieldF); `migrationTrackingEngine.js:244` rent-burden gate |
 | AB | 28 | InheritanceReceived | Boolean flag | generationalWealthEngine | — | **CAUSAL** — `deriveWealthLevel_` inheritance boost gate (`:605-606`) |
-| AC | 29 | NetWorth | Dollar amount | generationalWealthEngine | — | **CAUSAL** — accrual state + effective income (income + NetWorth×0.05) feeds WealthLevel |
+| AC | 29 | NetWorth | Dollar amount | generationalWealthEngine, casinoLedgerEngine | — | **CAUSAL** — accrual state + casino settlement; WealthLevel is pure NetWorth bands |
 | AD | 30 | SavingsRate | Percentage (decimal) | generationalWealthEngine, applyEconomicProfiles | — | **CAUSAL** — accrual multiplier (first reader: engine.60 S320) |
-| AE | 31 | DebtLevel | Dollar amount | generationalWealthEngine | — | **CAUSAL** — drag multiplier; WealthLevel penalty >= 5; moves both ways (crisis accrual / surplus paydown / shocks) |
+| AE | 31 | DebtLevel | 0-6 level (not dollars) | generationalWealthEngine, casinoLedgerEngine | — | **CAUSAL** — integer level; `processMoneyLoop_` increments/decrements with cap 6 (`:350-367`); `processCasinoLedger_` same cap on a loss that zeros NetWorth. `docs/SIMULATION_LEDGER` previously said "Dollar amount" — that was stale (corrected 2026-08-31). |
 
 ### Education & Career (AF–AK)
 

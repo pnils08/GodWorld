@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-08-31 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-01 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -999,6 +999,70 @@
 - **upgradeBondSheetSchema_(ctx)**
   Sheets: Relationship_Bonds
 
+### casinoLedgerEngine.js
+- **casinoClamp_(n, lo, hi)**
+
+- **casinoRoundMoney_(n)**
+
+- **casinoRoundOdds_(n)**
+
+- **casinoJuicePrice_(fair)**
+
+- **casinoSha1Hex_(s)**
+
+- **casinoWagerId_(placeCycle, popId, marketId, eventId)**
+
+- **casinoWeekly_(income)**
+
+- **casinoTeamsMatch_(teamsUsed, franchiseId)**
+
+- **casinoParseStreak_(streak)**
+
+- **casinoParseSports_(feedEntries, franchiseId)**
+
+- **casinoFindEpisode_(feed, episodeId)**
+
+- **casinoNightWinner_(feed)**
+
+- **casinoResolveUndocked_(wager, feed)**
+
+- **casinoResolveSports_(wager, feed)**
+
+- **casinoResolve_(wager, feeds)**
+
+- **casinoApplyMoney_(nw, debt, stake, payout, won)**
+
+- **casinoHouseholdDelta_(weekly, stake, payout, won, savings)**
+
+- **casinoOddsCredits_()**
+
+- **casinoOddsSports_(teamRecord)**
+
+- **casinoPayout_(stake, odds)**
+
+- **casinoStake_(income, netWorth, wealthLevel, rng)**
+
+- **casinoEligible_(status, age, income, netWorth, employerBizId, marketFamily, isPilot)**
+
+- **casinoDrive_(dialState, traitProfile)**
+
+- **casinoStamp_(cycle)**
+
+- **casinoLine_(status)**
+
+- **casinoCol_(header, name)**
+
+- **casinoUpcoming_(ss, cycle)**
+  Sheets: Undocked_Feed
+
+- **casinoCooldown_(history, cycle, weekly)**
+
+- **processCasinoLedger_(ctx, cycle)**
+  Reads: S.casinoSettlements, S.simYear, S.simulationYear, S.sportsFeedEntries, S.storyHooks, S.undockedFeedEntries, S.undockedPilots
+  Writes: S.casinoSettlements, S.storyHooks
+  Sheets: Household_Ledger
+  RNG: ctx.rng / safeRand_(ctx)
+
 ### checkForPromotions.js
 - **checkForPromotions_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.simYear, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
@@ -1147,6 +1211,8 @@
 
 - **lookupAuthoringSeat_(ctx, officeId)**
   Sheets: Civic_Office_Ledger
+
+- **engineClockHold_(notes, nextActionCycle, cycle, engineWillAct)**
 
 ### educationCareerEngine.js
 - **careerStageClass_(v)**
@@ -1706,8 +1772,8 @@
 - **applyApprovalCeilingRisk_(state, config, rng)**
 
 - **updateCivicApprovalRatings_(ctx)**
-  Reads: S.absoluteCycle, S.approvalCeilingEvents, S.approvalNeighborhoodEffects, S.civicCampaigns, S.cycleId, S.editionDomainBalance, S.officeDepartures, S.storyHooks
-  Writes: S.approvalCeilingEvents, S.approvalChanges, S.approvalNeighborhoodEffects, S.approvalTriggers, S.civicCampaigns, S.officeDepartures, S.storyHooks
+  Reads: S.absoluteCycle, S.approvalCeilingEvents, S.approvalNeighborhoodEffects, S.civicCampaigns, S.cycleId, S.editionDomainBalance, S.officeDepartures, S.previousCycleState, S.storyHooks
+  Writes: S.approvalCeilingEvents, S.approvalChanges, S.approvalNeighborhoodEffects, S.approvalTriggers, S.civicCampaigns, S.initiativePhases, S.officeDepartures, S.storyHooks
   Config: ctx.config.cycleCount
   Sheets: Civic_Office_Ledger, Initiative_Tracker
   RNG: ctx.rng / safeRand_(ctx)
@@ -1716,7 +1782,7 @@
 
 - **isFailing_(phase)**
 
-- **classifyInitiativeMotion_(phase, nextActionCycle, cycle)**
+- **classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase)**
 
 - **approvalDeltaForInitiative_(motion, owns, opposed)**
 
@@ -2518,7 +2584,7 @@
 
 ### finalizeCycleState.js
 - **finalizeCycleState_(ctx)**
-  Reads: S.activeCooldowns, S.bankRate, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
+  Reads: S.activeCooldowns, S.bankRate, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
   Writes: S.bankRate, S.cycleFinalState, S.cycleFinalizedAt, S.economicMood, S.eventsGenerated, S.migrationDrift, S.previousCycleState
   Config: ctx.config.cycleCount
 
@@ -3564,5 +3630,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 185
-**Functions mapped:** 1193
+**Files scanned:** 186
+**Functions mapped:** 1223

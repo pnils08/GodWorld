@@ -399,11 +399,73 @@ function parsePopIdIndex(filePath) {
   return archive;
 }
 
+// ── Storyline_Ledger adapter (S407) ─────────────────────────────────────────
+// Storyline_Ledger is the live tab: reporter-authored kebab slugs accumulated
+// weekly by cron-saturday-run step 6b, with verb counts and a Desks column.
+// The three sites downstream (activeStorylines cap, sports relatedStorylines,
+// per-desk keyword filter) were written against the retired Storyline_Tracker
+// and read Description / StorylineType / Neighborhood / RelatedCitizens / Status.
+// This maps one onto the other so those sites need no change.
+//
+// Two deliberate choices:
+//   Description is the de-kebabbed slug. The slug already carries hood, surname
+//   and topic tokens, which is exactly what matchesStorylineKeywords scans; a
+//   prettier synthetic sentence would match worse, not better.
+//   Status is DERIVED from LastCycle age and never stored — the ledger has no
+//   IsStale column on purpose (stored-derived columns are what rotted the old
+//   tracker). Under 5 cycles reads active, 5-14 dormant, 15+ is dropped.
+var LEDGER_DORMANT_AFTER = 5;
+var LEDGER_STALE_AFTER = 15;
+
+function normalizeStorylineLedger(rows, cycle, popidToName) {
+  var cyc = parseInt(cycle, 10);
+  var out = [];
+  (rows || []).forEach(function(r) {
+    var slug = String(r.StorylineId || '').trim();
+    if (!slug) return;
+    if (String(r.Status || '').trim().toLowerCase() === 'closed') return;
+    var last = parseInt(r.LastCycle, 10);
+    if (!isFinite(last)) last = 0;
+    var age = isFinite(cyc) ? cyc - last : 0;
+    if (age >= LEDGER_STALE_AFTER) return;
+    var names = String(r.Citizens || '').split(',').map(function(p) {
+      return (popidToName || {})[p.trim()] || '';
+    }).filter(Boolean);
+    var desks = String(r.Desks || '').split(',').map(function(d) { return d.trim(); }).filter(Boolean);
+    out.push({
+      StorylineId: slug,
+      Description: slug.replace(/-/g, ' '),
+      StorylineType: desks[0] || 'thread',
+      Neighborhood: String(r.Hoods || '').trim(),
+      RelatedCitizens: names.join(', '),
+      Status: age >= LEDGER_DORMANT_AFTER ? 'dormant' : 'active',
+      Priority: 'normal',
+      CycleAdded: String(r.FirstCycle || ''),
+      LastMentionedCycle: String(last),
+      // Ledger-native fields — verbatim columns, no derivation.
+      advanced: parseInt(r.Advanced, 10) || 0,
+      opened: parseInt(r.Opened, 10) || 0,
+      referenced: parseInt(r.Referenced, 10) || 0,
+      articles: parseInt(r.Articles, 10) || 0,
+      desks: desks
+    });
+  });
+  // Freshest first, then most-covered.
+  out.sort(function(a, b) {
+    return (parseInt(b.LastMentionedCycle, 10) || 0) - (parseInt(a.LastMentionedCycle, 10) || 0)
+      || b.articles - a.articles;
+  });
+  return out;
+}
+
 function getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon) {
   var names = {};
   // Extract from storylines (RelatedCitizens field)
+  // S407: this read `s.relatedCitizens` but is handed the SHEET-shaped rows,
+  // whose key is `RelatedCitizens` — so no storyline citizen has ever reached
+  // name extraction. Found while repointing the source tab; accept both spellings.
   (deskStorylines || []).forEach(function(s) {
-    (s.relatedCitizens || '').split(/[,;|]/).forEach(function(n) {
+    (s.RelatedCitizens || s.relatedCitizens || '').split(/[,;|]/).forEach(function(n) {
       var trimmed = n.trim();
       if (trimmed.length > 2 && /[A-Z]/.test(trimmed[0])) names[trimmed] = true;
     });
@@ -2116,7 +2178,7 @@ async function main() {
     safeGet('Cultural_Ledger'),
     safeGet('Oakland_Sports_Feed'),
     safeGet('Chicago_Sports_Feed'),
-    safeGet('Storyline_Tracker'),
+    safeGet('Storyline_Ledger'),
     safeGet('Cycle_Packet'),
     safeGet('LifeHistory_Log'),
     safeGet('Household_Ledger'),
@@ -2195,9 +2257,15 @@ async function main() {
   var simLedger = allToObjects(simRaw);
   // v2.0: Index simLedger by name for fast citizen lookups
   var simLedgerByName = {};
+  // S407: the ledger adapter needs the reverse index — Storyline_Ledger keys
+  // citizens by POPID, and RelatedCitizens downstream is read as printable names
+  // (getCitizenNamesFromDeskData would otherwise harvest "POP-00168" as a person).
+  var simLedgerByPopid = {};
   simLedger.forEach(function(c) {
     var name = ((c.First || '') + ' ' + (c.Last || '')).trim();
     if (name) simLedgerByName[name] = c;
+    var pid = String(c.POPID || '').trim();
+    if (pid && name) simLedgerByPopid[pid] = name;
   });
 
   // S205 Path B: genericCitizens var dropped — was only console.log'd, never used.
@@ -2213,13 +2281,19 @@ async function main() {
   var chiSports = filterByCycle(chiSportsRaw, CYCLE);
   if (chiSports.length === 0) chiSports = allChiSports;
 
-  // Storylines: active/recent
-  var allStorylines = allToObjects(storylineRaw);
-  var storylines = allStorylines.filter(function(s) {
-    var status = (s.Status || '').toLowerCase();
-    return status === 'active' || status === 'new' || status === 'developing' ||
-           status === 'urgent' || status === 'high';
-  });
+  // Storylines: open threads from Storyline_Ledger (S407).
+  //
+  // This read used to point at Storyline_Tracker, DISCONTINUED 2026-08-05 and
+  // superseded by the slim ledger the Saturday cron actually writes. Two things
+  // followed from that: the packets fed reporters from a tab nothing maintains,
+  // and Phase-8's `updateStorylineStatus_` had aged its last 9 open rows to
+  // `abandoned` — so the packets were about to carry no storylines at all.
+  //
+  // The ledger's shape is different by design (slug key, verb counts, derived
+  // dormancy, no Description column), so it is adapted here into the
+  // Tracker-shaped fields the three consumption sites downstream already read.
+  // The adapter is the only place that knows both shapes.
+  var storylines = normalizeStorylineLedger(allToObjects(storylineRaw), CYCLE, simLedgerByPopid);
 
   // Recent quotes from LifeHistory
   var allHistory = allToObjects(historyRaw);
@@ -2717,7 +2791,11 @@ async function main() {
           type: s.StorylineType || '', description: s.Description || '',
           status: s.Status || '', neighborhood: s.Neighborhood || '',
           relatedCitizens: s.RelatedCitizens || '',
-          cycleAdded: s.CycleAdded || '', priority: s.Priority || ''
+          cycleAdded: s.CycleAdded || '', priority: s.Priority || '',
+          // S407 ledger-native: what the thread has actually done, verbatim.
+          slug: s.StorylineId || '', lastMentionedCycle: s.LastMentionedCycle || '',
+          advanced: s.advanced || 0, opened: s.opened || 0,
+          referenced: s.referenced || 0, articles: s.articles || 0
         };
       }),
       culturalEntities: deskCultural.map(function(e) {

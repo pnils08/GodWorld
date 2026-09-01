@@ -970,7 +970,11 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
         + ' — NO LEDGER PROFILE: ' + lanePops.filter(p => !laneProfiles.has(p)).join(', '));
     }
   }
-  for (const e of lane) {
+  // S407 — threads render in their own block below. Mixed into the signal list
+  // they read as one more pointer; the whole point is that they are the only
+  // entries the writer can CONTINUE rather than open.
+  const laneThreads = lane.filter(e => e.kind === 'thread');
+  for (const e of lane.filter(e => e.kind !== 'thread')) {
     const tags = [e.kind, e.hood].filter(Boolean).join(' · ');
     L.push('- ' + (e.label || '(no label)') + (tags ? '  [' + tags + ']' : ''));
     L.push('  ref: ' + e.ref);
@@ -978,6 +982,26 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     for (const p of known) L.push('    who: ' + p.replace(/; popid: POP-\d+/, ''));
   }
   L.push('');
+  // S407 — the return path. Until now the ledger of open storylines was
+  // write-only: every writer met the cycle blind, minted a fresh slug, and
+  // `closed` was never once used across 23 threads. A story could not end
+  // because nobody was ever shown one still running.
+  if (laneThreads.length) {
+    L.push('### Open threads on your beat (Storyline_Ledger)');
+    L.push('Stories your desk already has running. If your piece moves one of these, put ITS SLUG,');
+    L.push('character for character, on your INTAKE STORYLINE line with `advanced` — or with `closed`');
+    L.push('when your piece is the one that ends it. That is how a story in this city finishes.');
+    L.push('These are CANDIDATES, not a list you must pick from: if your piece is genuinely new,');
+    L.push('mint your own slug and open it. Never claim a thread your article does not actually move.');
+    L.push('');
+    for (const e of laneThreads) {
+      const tags = [e.hood].filter(Boolean).join(' · ');
+      L.push('- ' + (e.label || e.slug) + (tags ? '  [' + tags + ']' : ''));
+      const known = (e.popids || []).map(p => laneProfiles.get(p)).filter(Boolean);
+      for (const p of known) L.push('    who: ' + p.replace(/; popid: POP-\d+/, ''));
+    }
+    L.push('');
+  }
   if (laneProfiles.size) {
     L.push('The `who:` lines are the ledger record — immutable. Never give a named person a job,');
     L.push('an age, or a history that contradicts them. Street and scene texture around them is');

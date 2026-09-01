@@ -641,6 +641,72 @@ console.log('\nTest 11f: byline candidates (W5h2)');
 }
 
 // ────────────────────────────────────────────────────────────────────────────
+// Test 11g: S407 open-thread lane — Storyline_Ledger read back into desk_signal
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11g: open threads (S407)');
+{
+  const row = (over) => Object.assign({
+    StorylineId: 'west-oakland-elio-perez-initiative', FirstCycle: '100', LastCycle: '104',
+    Status: 'open', Advanced: '1', Opened: '1', Closed: '0', Referenced: '0',
+    Articles: '2', Citizens: 'POP-00201,POP-00722', Hoods: 'West Oakland', Desks: 'civic'
+  }, over || {});
+  const run = (rows, cycle) => {
+    const lanes = { civic: [], sports: [], culture: [], business: [] };
+    const notes = [];
+    helper.openThreadEntries(rows, cycle, lanes, notes);
+    return { lanes, notes };
+  };
+
+  const live = run([row()], 105);
+  assert('open thread lands on its Desks lane', live.lanes.civic.length === 1 && live.lanes.sports.length === 0);
+  const e = live.lanes.civic[0];
+  assert('entry is kind:thread', e.kind === 'thread');
+  assert('slug carried verbatim for reuse', e.slug === 'west-oakland-elio-perez-initiative');
+  assert('label spans first→last cycle', e.label.includes('C100') && e.label.includes('C104'));
+  assert('label carries verbatim verb counts', e.label.includes('advanced 1') && e.label.includes('opened 1'));
+  assert('ref points at the ledger row', e.ref.includes('Storyline_Ledger'));
+  assert('popids carried for profile resolution', (e.popids || []).length === 2);
+  assert('hood carried', e.hood === 'West Oakland');
+  assert('fresh thread not marked dormant', !e.label.includes('DORMANT'));
+
+  // Dormancy is DERIVED from LastCycle age, never stored (the ledger has no
+  // IsStale column on purpose). 5-14 shows marked; 15+ drops.
+  const dorm = run([row()], 109);
+  assert('age 5 → shown, marked DORMANT', dorm.lanes.civic.length === 1
+    && dorm.lanes.civic[0].label.includes('DORMANT'));
+  assert('age 14 → still shown', run([row()], 118).lanes.civic.length === 1);
+  assert('age 15 → dropped as stale', run([row()], 119).lanes.civic.length === 0);
+
+  assert('closed thread omitted', run([row({ Status: 'closed' })], 105).lanes.civic.length === 0);
+  assert('blank slug skipped', run([row({ StorylineId: '' })], 105).lanes.civic.length === 0);
+
+  const multi = run([row({ Desks: 'civic, sports' })], 105);
+  assert('multi-desk thread reaches both lanes',
+    multi.lanes.civic.length === 1 && multi.lanes.sports.length === 1);
+
+  const orphan = run([row({ Desks: '' })], 105);
+  assert('unrouted thread falls to civic, never dropped', orphan.lanes.civic.length === 1);
+  assert('unrouted thread is noted', orphan.notes.some(n => n.includes('no known desk')));
+
+  const many = [];
+  for (let i = 0; i < 20; i++) many.push(row({ StorylineId: 'thread-' + i, Articles: String(20 - i) }));
+  assert('lane capped at 12', run(many, 105).lanes.civic.length === 12);
+  assert('cap keeps the most-covered threads',
+    run(many, 105).lanes.civic[0].slug === 'thread-0');
+
+  assert('empty ledger is noted, not thrown', run([], 105).notes.some(n => n.includes('no Storyline_Ledger rows')));
+
+  const wired = helper.emitDeskSignal(105, {
+    auditJson: {}, rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {},
+    storylineLedger: [row()]
+  });
+  assert('emitDeskSignal wires the lane through',
+    wired.lanes.civic.some(x => x.kind === 'thread'));
+  assert('meta carries the thread contract',
+    String(wired.meta.threadContract).includes('continuation CANDIDATES'));
+}
+
+// ────────────────────────────────────────────────────────────────────────────
 // Test 12: integration — full build against live sheets (CANON_PRESENT skip)
 // ────────────────────────────────────────────────────────────────────────────
 const auditPath = path.join(__dirname, '..', 'output', 'engine_audit_c94.json');

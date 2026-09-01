@@ -740,7 +740,27 @@ const RIPPLE_LANE_MAP = {
   'edition-coverage': 'business'
 };
 const RIPPLE_DEFAULT_LANE = 'business';
-const DESK_SIGNAL_VERSION = '1.1';
+const DESK_SIGNAL_VERSION = '1.2';
+
+// ── Open-thread lane (S407) ────────────────────────────────────────────────
+// The reporter's INTAKE tail asks for a storyline slug and one of
+// advanced/opened/closed/referenced (cron-desk-run.js), and the Saturday cron
+// accumulates those slugs into Storyline_Ledger. Nothing ever read that tab
+// back, so every writer met the cycle blind: a fresh slug each week, `closed`
+// never used once across 23 threads, and no story with a way to end. This lane
+// is the return path — the desk sees what is already running on its beat.
+//
+// SHOWING IS NOT VALIDATING. The 2026-08-05 anti-pigeonhole contract holds:
+// slugs stay reporter-authored free-form kebab, checked against no list. A
+// thread here is a continuation CANDIDATE, never a required key.
+//
+// Dormancy is derived here, never stored — the ledger tab deliberately carries
+// no IsStale column (that is what rotted the retired Storyline_Tracker). The
+// windows match the tracker's tuning so the semantics carry over: live under 5
+// cycles since coverage, dormant 5–14, dropped at 15+.
+const THREAD_DORMANT_AFTER = 5;
+const THREAD_STALE_AFTER = 15;
+const THREAD_LANE_CAP = 12;
 
 // One-line label hygiene: single line, no table-breaking pipes doubled up.
 function signalLabel(...bits) {
@@ -941,9 +961,73 @@ function handleEntry(h) {
 
 // Pure: builds the desk-signal object from the same loaded cycle data the
 // summary emitters consume. No sheet reads of its own.
+// Pure: Storyline_Ledger rows -> per-lane open-thread entries. Rows carry the
+// desk that filed them (`Desks`, a comma list written from the article sidecar),
+// so routing is a direct lane match; an unrouted thread falls to civic rather
+// than being dropped, on the same bug-is-event reachability rule the anomaly
+// lane uses above. Closed threads and threads stale past THREAD_STALE_AFTER are
+// omitted — a closed story is finished, and a 15-cycle silence is the honest
+// reading that the retired tracker called `abandoned`.
+function openThreadEntries(ledgerRows, cycle, lanes, notes) {
+  const rows = Array.isArray(ledgerRows) ? ledgerRows : [];
+  if (!rows.length) {
+    notes.push('no Storyline_Ledger rows — open-thread entries omitted from every lane');
+    return;
+  }
+  const num = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : 0; };
+  const staged = [];
+  let unrouted = 0;
+  for (const r of rows) {
+    const slug = String(r.StorylineId || '').trim();
+    if (!slug) continue;
+    if (String(r.Status || '').trim().toLowerCase() === 'closed') continue;
+    const last = num(r.LastCycle);
+    const age = cycle - last;
+    if (age >= THREAD_STALE_AFTER) continue;
+    const desks = String(r.Desks || '').split(',').map(d => d.trim().toLowerCase()).filter(Boolean);
+    let targets = desks.filter(d => Object.prototype.hasOwnProperty.call(lanes, d));
+    if (!targets.length) { targets = ['civic']; unrouted++; }
+    const hood = String(r.Hoods || '').trim();
+    const popids = String(r.Citizens || '').split(',').map(x => x.trim()).filter(Boolean);
+    const moves = signalLabel(
+      num(r.Advanced) ? `advanced ${num(r.Advanced)}` : null,
+      num(r.Opened) ? `opened ${num(r.Opened)}` : null,
+      num(r.Referenced) ? `referenced ${num(r.Referenced)}` : null
+    ).replace(/ \| /g, ', ');
+    const entry = {
+      kind: 'thread',
+      slug,
+      ref: `Storyline_Ledger (StorylineId ${slug})`,
+      label: signalLabel(
+        slug,
+        `C${num(r.FirstCycle)}\u2192C${last}`,
+        `${num(r.Articles)} article(s)`,
+        moves || null,
+        age >= THREAD_DORMANT_AFTER ? `DORMANT — ${age} cycle(s) since coverage` : null
+      ),
+      lastCycle: last,
+      articles: num(r.Articles)
+    };
+    if (hood) entry.hood = hood;
+    if (popids.length) entry.popids = popids;
+    for (const t of targets) staged.push({ lane: t, entry, age });
+  }
+  // Freshest first, then most-covered — a thread the desk touched last cycle
+  // outranks one it left three cycles ago.
+  staged.sort((a, b) => a.age - b.age || b.entry.articles - a.entry.articles);
+  const perLane = {};
+  for (const s of staged) {
+    perLane[s.lane] = (perLane[s.lane] || 0) + 1;
+    if (perLane[s.lane] > THREAD_LANE_CAP) continue;
+    lanes[s.lane].push(s.entry);
+  }
+  if (unrouted) notes.push(`${unrouted} Storyline_Ledger thread(s) carried no known desk — routed to civic`);
+}
+
 function emitDeskSignal(cycle, data) {
   // Degraded-input guards: never throw on missing pieces — emit what exists.
-  const { auditJson = {}, rippleAll, sportsAll = [], neighborhoodsC = [], rileyCurr = {} } = data;
+  const { auditJson = {}, rippleAll, sportsAll = [], neighborhoodsC = [], rileyCurr = {},
+    storylineLedger = [] } = data;
   const notes = [];
   const lanes = { civic: [], sports: [], culture: [], business: [] };
 
@@ -1096,6 +1180,9 @@ function emitDeskSignal(cycle, data) {
   }
   if (!cycleRipples.length) notes.push('no Ripple_Ledger rows this cycle — ripple entries empty across lanes');
 
+  // ── open threads: what is already running on this desk's beat ──
+  openThreadEntries(storylineLedger, cycle, lanes, notes);
+
   // Drop undefined optional fields for a clean artifact.
   for (const lane of Object.keys(lanes)) {
     lanes[lane] = lanes[lane].map(e => {
@@ -1120,7 +1207,8 @@ function emitDeskSignal(cycle, data) {
       cycle,
       script: `buildWorldSummary.js v${SCRIPT_VERSION} (deskSignal v${DESK_SIGNAL_VERSION})`,
       builtAt: new Date().toISOString(),
-      laneRule: 'civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap)',
+      laneRule: 'civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap); threads route by Storyline_Ledger.Desks',
+      threadContract: 'kind:"thread" entries are OPEN STORYLINES from Storyline_Ledger — continuation CANDIDATES, not a controlled vocabulary. Reuse the slug verbatim to advance or close a thread; mint a new one freely when the piece is new. Counts are verbatim ledger columns; dormancy is derived from LastCycle age and never stored.',
       rippleLaneMap: RIPPLE_LANE_MAP,
       counts: Object.fromEntries(Object.entries(lanes).map(([k, v]) => [k, v.length])),
       contract: 'POINTERS ONLY — labels are verbatim source strings (they may embed source-native deltas); no derived stats, no career numbers, no angles. The desk reaches the raw material itself.',
@@ -1170,7 +1258,8 @@ async function loadCycleData(cycle) {
     hospitalAll,
     rippleAll,
     lhlAll,
-    householdAll
+    householdAll,
+    storylineLedger
   ] = await Promise.all([
     sheets.getSheetAsObjects('Riley_Digest'),
     sheets.getSheetAsObjects('Oakland_Sports_Feed'),
@@ -1185,7 +1274,10 @@ async function loadCycleData(cycle) {
     // W1 (S328): attribution + milestone sources — tolerant like the others
     sheets.getSheetAsObjects('Ripple_Ledger').catch(() => []),
     sheets.getSheetAsObjects('LifeHistory_Log').catch(() => []),
-    sheets.getSheetAsObjects('Household_Ledger').catch(() => [])
+    sheets.getSheetAsObjects('Household_Ledger').catch(() => []),
+    // S407: the newsroom's own open threads, read back into the desk signal.
+    // Tolerant like the others — a bench without the tab still ships a signal.
+    sheets.getSheetAsObjects('Storyline_Ledger').catch(() => [])
   ]);
 
   const rileyCurr = rileyAll.find(r => String(r.Cycle) === String(cycle));
@@ -1213,7 +1305,7 @@ async function loadCycleData(cycle) {
     auditJson,
     rileyCurr, rileyPrev1, rileyPrev2,
     sportsAll, calendarAll, chaosAll, hospitalAll,
-    rippleAll, lhlAll, householdAll,
+    rippleAll, lhlAll, householdAll, storylineLedger,
     worldPopCurr, neighborhoodsC, approvalRows, priorApprovals,
     bylinePools, bylineUsage
   };
@@ -1306,6 +1398,7 @@ module.exports = {
   loadCycleData,
   // W5 desk-signal partition (pure — testable without sheet access)
   emitDeskSignal,
+  openThreadEntries,
   rippleEntry,
   signalLabel,
   extractPopids,

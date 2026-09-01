@@ -514,12 +514,20 @@ async function runPrep() {
 
   // --- Step 1.5: ledger snapshot freshness (S252/S329 — quote the meta) ---
   const metaPath = path.join(ROOT, 'output', 'simulation_ledger_snapshot.meta.json');
+  // G-PF35 (S407): the test is NOT-OLDER, not equal. A civic leg re-run at an
+  // older cycle than the engine's (chasing C104 while the engine sits at C105)
+  // read a perfectly current snapshot as stale, refreshed it, and stamped it
+  // BACKWARD — and with dumpLedger now refusing that downgrade, an equality
+  // test would have halted the run outright on a snapshot that is fresher than
+  // it asked for. Older is the failure the S252/S329 halt exists for; newer is
+  // the same live sheet and is fine.
+  const staleFor = (m, c) => !m || !Number.isFinite(Number(m.cycle)) || Number(m.cycle) < Number(c);
   let meta = readJson(metaPath);
-  if (!meta || String(meta.cycle) !== String(cycle)) {
-    log('ledger snapshot stale (' + (meta ? 'cycle ' + meta.cycle : 'missing') + ') — refreshing via dumpLedger.js');
+  if (staleFor(meta, cycle)) {
+    log('ledger snapshot stale (' + (meta ? 'cycle ' + meta.cycle : 'missing') + ' vs working cycle ' + cycle + ') — refreshing via dumpLedger.js');
     execFileSync('node', [path.join(ROOT, 'scripts', 'dumpLedger.js'), cycle, '--quiet'], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
     meta = readJson(metaPath);
-    if (!meta || String(meta.cycle) !== String(cycle)) throw new Error('ledger snapshot still stale after refresh: ' + JSON.stringify(meta));
+    if (staleFor(meta, cycle)) throw new Error('ledger snapshot still stale after refresh: ' + JSON.stringify(meta));
   }
   log('ledger snapshot meta (verbatim): cycle=' + meta.cycle + ' rowCount=' + meta.rowCount + ' generatedAt=' + meta.generatedAt);
 

@@ -85,7 +85,13 @@ function ensureLedgerSnapshot(cycle) {
   };
   let meta = readMeta();
   let refreshed = false;
-  if (!meta || String(meta.cycle) !== String(cycle)) {
+  // G-PF35 (S407): NOT-OLDER, not equal. An equality test made a desk run at an
+  // older cycle refresh on every call and never match, burning a full
+  // Simulation_Ledger read each time for a snapshot that was already newer than
+  // it needed. dumpLedger now refuses to stamp backward, so the mismatch would
+  // have been permanent.
+  const stale = !meta || !Number.isFinite(Number(meta.cycle)) || Number(meta.cycle) < Number(cycle);
+  if (stale) {
     process.stderr.write('[profiles] ledger snapshot stale (' + (meta ? 'cycle ' + meta.cycle : 'missing')
       + ' vs working cycle ' + cycle + ') — refreshing via dumpLedger.js\n');
     try {
@@ -99,12 +105,18 @@ function ensureLedgerSnapshot(cycle) {
         + ' — continuing on the stale snapshot (desk doctrine: degrade, do not drop)\n');
     }
     meta = readMeta();
-    if (refreshed && (!meta || String(meta.cycle) !== String(cycle))) {
+    if (refreshed && (!meta || !Number.isFinite(Number(meta.cycle)) || Number(meta.cycle) < Number(cycle))) {
       process.stderr.write('[profiles] snapshot STILL stale after refresh ('
         + (meta ? 'cycle ' + meta.cycle : 'missing') + ' vs ' + cycle + ') — profiles may lag the engine by a cycle\n');
     }
   }
-  return { fresh: !!(meta && String(meta.cycle) === String(cycle)), meta, refreshed };
+  // `fresh` means NOT-OLDER — a snapshot ahead of the cycle being worked is the
+  // same live sheet, and callers stamping provenance off this must not record a
+  // fresher-than-asked snapshot as a lag.
+  return {
+    fresh: !!(meta && Number.isFinite(Number(meta.cycle)) && Number(meta.cycle) >= Number(cycle)),
+    meta, refreshed
+  };
 }
 
 function loadCanonNames() {

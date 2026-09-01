@@ -65,11 +65,37 @@ async function main() {
     return JSON.stringify({ Name: name, ...r });
   });
 
+  // G-PF35 (S407): the STAMP is monotonic even though the ROWS are not.
+  // A shorter-cycle caller re-running an older leg — `cron-civic-run.js` Step
+  // 1.5 with `--cycle 104` while the engine sits at C105 — used to rewrite the
+  // meta backwards. The rows were fine (the sheet is the sheet); the stamp
+  // regressed C105 → C104, and every consumer that gates on
+  // `meta.cycle === current` then reads the freshest possible snapshot as
+  // stale. That is the S329 failure inverted: not a stale file claiming to be
+  // fresh, but a fresh file claiming to be stale.
+  //
+  // Refuse the downgrade, keep the higher stamp, and say so. The rows still get
+  // written — they are current by construction, having just come off the live
+  // sheet — so the caller loses nothing but the wrong number.
+  let priorCycle = null;
+  try { priorCycle = Number(JSON.parse(fs.readFileSync(OUT_META, 'utf8')).cycle); } catch (_) {}
+  const wanted = cycleArg ? Number(cycleArg) : null;
+  let stamp = wanted;
+  if (Number.isFinite(priorCycle) && Number.isFinite(wanted) && wanted < priorCycle) {
+    console.error(`dumpLedger: REFUSING to stamp backward — asked for cycle ${wanted}, snapshot is at ${priorCycle}. `
+      + `Rows refreshed from the live sheet; meta keeps cycle ${priorCycle}. `
+      + `Pass the engine's current cycle (lib/getCurrentCycle) if you meant to advance it.`);
+    stamp = priorCycle;
+  }
+  // A null stamp (no cycle argument — undockedDraw's refresh path) must not
+  // erase a good one either: unknown is not newer than known.
+  if (!Number.isFinite(wanted) && Number.isFinite(priorCycle)) stamp = priorCycle;
+
   fs.writeFileSync(OUT_JSONL, lines.join('\n') + '\n');
 
   const meta = {
     source: 'Simulation_Ledger',
-    cycle: cycleArg ? Number(cycleArg) : null,
+    cycle: Number.isFinite(stamp) ? stamp : null,
     rowCount: rows.length,
     generatedAt: new Date().toISOString(),
     generatedBy: 'scripts/dumpLedger.js',

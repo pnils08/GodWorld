@@ -1,0 +1,818 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "105",
+  "persona": "mason-ortega",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Mason Ortega",
+    "popid": "POP-00160"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Merritt Reserve appears on the evening restaurant list in Lake Merritt. What was happening there is not established.",
+      "label": "Merritt Reserve (Lake Merritt)",
+      "hookLine": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+      "hood": "Lake Merritt",
+      "pulseClass": "named-restaurant",
+      "citizens": [],
+      "popids": [],
+      "named": "Merritt Reserve",
+      "venue": "Merritt Reserve",
+      "ref": "world_summary ## Evening Texture · Restaurants",
+      "cycle": 105
+    }
+  },
+  "angle": "output/cron-compare/culture_c105_mason-ortega_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00781",
+      "name": "Vanessa Treary",
+      "quote": "I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime.\",\n  \"fact_ids\": [\"F-9e4ba8436d67\", \"F-9613a60eac81\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e4ba8436d67",
+          "F-9613a60eac81"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00781-50bf7abb7f",
+        "authoredQuote": true,
+        "publishableQuote": "I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00781",
+          "name": "Vanessa Treary",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Workplace dynamics at Merritt Reserve during evening service\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Lake Merritt",
+          "focus": "Workplace dynamics at Merritt Reserve during evening service",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Treary — Barista — Lake Merritt",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve (Lake Merritt)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9e4ba8436d67"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9613a60eac81"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-009edcf40947"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Lake Merritt",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-cebf9730ecbf"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-64a4056be9ff"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary — Barista — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00781",
+            "id": "F-00d9688a8657"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00783",
+      "name": "Yuki Ji",
+      "quote": "I’ve heard Merritt Reserve gets pretty lively in the evenings, but I haven’t been there myself—I’m usually behind the bar at my own spot by then.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard Merritt Reserve gets pretty lively in the evenings, but I haven’t been there myself—I’m usually behind the bar at my own spot by then.\",\"fact_ids\":[\"F-9e4ba8436d67\",\"F-9613a60eac81\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e4ba8436d67",
+          "F-9613a60eac81"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00783-6c698c17d2",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard Merritt Reserve gets pretty lively in the evenings, but I haven’t been there myself—I’m usually behind the bar at my own spot by then."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00783",
+          "name": "Yuki Ji",
+          "role": "Bartender",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Workplace dynamics at Merritt Reserve during evening service\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Lake Merritt",
+          "focus": "Workplace dynamics at Merritt Reserve during evening service",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Yuki Ji — Bartender — Lake Merritt",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve (Lake Merritt)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9e4ba8436d67"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9613a60eac81"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-009edcf40947"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Lake Merritt",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-cebf9730ecbf"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-64a4056be9ff"
+          },
+          {
+            "t": "FACT",
+            "text": "Yuki Ji — Bartender — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00783",
+            "id": "F-7794313895e1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00781",
+      "name": "Vanessa Treary",
+      "quote": "I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime.\",\n  \"fact_ids\": [\"F-9e4ba8436d67\", \"F-9613a60eac81\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e4ba8436d67",
+          "F-9613a60eac81"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00781-50bf7abb7f",
+        "authoredQuote": true,
+        "publishableQuote": "I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00781",
+          "name": "Vanessa Treary",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Workplace dynamics at Merritt Reserve during evening service\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Lake Merritt",
+          "focus": "Workplace dynamics at Merritt Reserve during evening service",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Treary — Barista — Lake Merritt",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve (Lake Merritt)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9e4ba8436d67"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9613a60eac81"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-009edcf40947"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Lake Merritt",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-cebf9730ecbf"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-64a4056be9ff"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Treary — Barista — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00781",
+            "id": "F-00d9688a8657"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00783",
+      "name": "Yuki Ji",
+      "quote": "I’ve heard Merritt Reserve gets pretty lively in the evenings, but I haven’t been there myself—I’m usually behind the bar at my own spot by then.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard Merritt Reserve gets pretty lively in the evenings, but I haven’t been there myself—I’m usually behind the bar at my own spot by then.\",\"fact_ids\":[\"F-9e4ba8436d67\",\"F-9613a60eac81\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e4ba8436d67",
+          "F-9613a60eac81"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00783-6c698c17d2",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard Merritt Reserve gets pretty lively in the evenings, but I haven’t been there myself—I’m usually behind the bar at my own spot by then."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00783",
+          "name": "Yuki Ji",
+          "role": "Bartender",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Workplace dynamics at Merritt Reserve during evening service\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Lake Merritt",
+          "focus": "Workplace dynamics at Merritt Reserve during evening service",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Yuki Ji — Bartender — Lake Merritt",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve (Lake Merritt)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9e4ba8436d67"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9613a60eac81"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-009edcf40947"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Lake Merritt",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-cebf9730ecbf"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-64a4056be9ff"
+          },
+          {
+            "t": "FACT",
+            "text": "Yuki Ji — Bartender — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00783",
+            "id": "F-7794313895e1"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-01045",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: appendReflection_: [err] [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01045",
+          "name": "Vanessa Ramas",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Workplace dynamics at Merritt Reserve during evening service\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Lake Merritt",
+          "focus": "Workplace dynamics at Merritt Reserve during evening service",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Vanessa Ramas — Barista — Lake Merritt",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve (Lake Merritt)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9e4ba8436d67"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9613a60eac81"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-009edcf40947"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Lake Merritt",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-cebf9730ecbf"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-64a4056be9ff"
+          },
+          {
+            "t": "FACT",
+            "text": "Vanessa Ramas — Barista — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-01045",
+            "id": "F-1c763fdd1091"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00135",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00135",
+          "name": "Mina Linas",
+          "role": "Sea Level Monitoring Technician",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Mason Ortega",
+          "question": "As a resident of Lake Merritt, what have you seen, felt, or understood about \"Workplace dynamics at Merritt Reserve during evening service\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Lake Merritt",
+          "focus": "Workplace dynamics at Merritt Reserve during evening service",
+          "src": "world_summary ## Evening Texture · Restaurants"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Mina Linas — Sea Level Monitoring Technician — Lake Merritt",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve (Lake Merritt)",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9e4ba8436d67"
+          },
+          {
+            "t": "FACT",
+            "text": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-9613a60eac81"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-009edcf40947"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Lake Merritt",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-cebf9730ecbf"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Merritt Reserve",
+            "src": "world_summary ## Evening Texture · Restaurants",
+            "id": "F-64a4056be9ff"
+          },
+          {
+            "t": "FACT",
+            "text": "Mina Linas — Sea Level Monitoring Technician — Lake Merritt",
+            "src": "Simulation_Ledger profile for POP-00135",
+            "id": "F-68f598cd9839"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-01T18:19:44.864Z"
+}

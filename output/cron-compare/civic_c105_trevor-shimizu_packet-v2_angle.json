@@ -1,0 +1,407 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00155",
+      "name": "Trevor Shimizu",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+      "approach": "Systems approach: trace the supplied infrastructure or transit fact through timeline, place, and implementation state. Dry, technical, and record-backed.",
+      "creativeBrief": {
+        "kind": "infrastructure-systems",
+        "method": "INCIDENT_LINK_WARNING",
+        "missing": [
+          "timestamp and duration unless supplied by the source",
+          "second system fact and evidence linking it to the assigned condition",
+          "responsible agency, maintenance action, capacity, load, or service effect unless named by the source"
+        ],
+        "cascade": {
+          "state": "UNESTABLISHED",
+          "facts": [],
+          "link": null,
+          "src": null
+        },
+        "forbidden": [
+          "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+      "nearby": [
+        {
+          "text": "Marcus Webb (OEWD Program Director (Stabilization Fund)): 57 households now stabilized",
+          "src": "output/cron-civic/datawake/civic-project-stabilization-fund_2026-09-01.json"
+        },
+        {
+          "text": "Elena Soria Dominguez (Transit Hub Planning Lead): The first Phase II visioning session will happen this week at St. Esperanza Parish in Fruitvale, foc",
+          "src": "output/cron-civic/datawake/civic-project-transit-hub_2026-09-01.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)"
+        },
+        {
+          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "src": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00744",
+          "name": "Tomas Renteria (POP-00744)",
+          "profile": "Tomas Renteria (POP-00744)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-00766",
+          "name": "Manjit Singh (POP-00766)",
+          "profile": "Manjit Singh (POP-00766)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-01057",
+          "name": "Nina Reyes (POP-01057)",
+          "profile": "Nina Reyes (POP-01057)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+        "id": "F-90973f520bc5"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+      "label": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+      "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00744",
+        "POP-00766",
+        "POP-01057"
+      ],
+      "citizens": [
+        "Tomas Renteria (POP-00744)",
+        "Manjit Singh (POP-00766)",
+        "Nina Reyes (POP-01057)"
+      ]
+    },
+    "approach": "Systems approach: trace the supplied infrastructure or transit fact through timeline, place, and implementation state. Dry, technical, and record-backed."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "trevor-shimizu",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "domain": "infrastructure-transit"
+    },
+    "pulse": {
+      "className": "infrastructure-transit",
+      "score": 45,
+      "label": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+      "hood": "Fruitvale",
+      "source": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying."
+      ],
+      "forbidden": [
+        "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
+      ],
+      "schema": "SYSTEMS-BRIEF-1",
+      "method": "INCIDENT_LINK_WARNING",
+      "missing": [
+        "timestamp and duration unless supplied by the source",
+        "second system fact and evidence linking it to the assigned condition",
+        "responsible agency, maintenance action, capacity, load, or service effect unless named by the source"
+      ],
+      "cascade": {
+        "state": "UNESTABLISHED",
+        "facts": [],
+        "link": null,
+        "src": null
+      }
+    },
+    "candidates": [
+      {
+        "score": 45,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: visioning-complete → visioning",
+        "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00744",
+          "POP-00766",
+          "POP-01057"
+        ],
+        "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning — what the milestone delivers and who carried it",
+        "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Manjit Singh (POP-00766)",
+          "Nina Reyes (POP-01057)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 4
+      },
+      {
+        "score": 45,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: construction-planning → vote-scheduled",
+        "ref": "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+        "hood": "Jack London, Downtown",
+        "popids": [
+          "POP-00020",
+          "POP-00156",
+          "POP-01078"
+        ],
+        "angle": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled — what the milestone delivers and who carried it",
+        "hookLine": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled; a milestone worth covering, not burying.",
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Angela Reyes (POP-00156)",
+          "Elena Vásquez (POP-00020)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 5
+      },
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Status visioning-complete | phase visioning",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "hood": "Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 34
+      },
+      {
+        "score": 45,
+        "kind": "vote",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Conduct first visioning session by January 15 C105",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 35
+      },
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Temescal Community Health Center | Status passed | phase construction-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "hood": "Temescal",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 36
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "retail/traffic/sentiment | Fruitvale Transit Hub Phase II — Visioning is visioning — ongoing transit effects in Fruitvale",
+        "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+        "hood": "Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 45
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+      "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+      "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-003)",
+      "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\""
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "text": "I've been watching the Fruitvale Transit Hub Phase II crawl forward for months. Now that visioning's officially regressed from 'complete' back to active status, I need to understand why. This isn't just bureaucratic motion—it's a stall that affects real people waiting for better transit. I'll start with the planning lead's public comment about this week's session, see if there's clarity on what went backward.",
+    "plan": {
+      "chase": "I've been watching the Fruitvale Transit Hub Phase II crawl forward for months. Now that visioning's officially regressed from 'complete' back to active status, I need to understand why. This isn't just bureaucratic motion—it's a stall that affects real people waiting for better transit. I'll start with the planning lead's public comment about this week's session, see if there's clarity on what went backward.",
+      "focus": "The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.",
+      "why": "This represents a tangible delay in a critical infrastructure project for a neighborhood that's been waiting too long already.",
+      "checks": [
+        "Verify if the visioning regression indicates new community input or a planning failure",
+        "Confirm whether Phase I outcomes are influencing Phase II's reset",
+        "Check if any stabilization fund households are transit-dependent"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01057",
+          "question": "What specific community feedback or new considerations prompted the return to active visioning?",
+          "basis": "As Fruitvale reporter, Nina would have context on neighborhood sentiment about transit needs"
+        },
+        {
+          "pop": "POP-00744",
+          "question": "Has OEWD's stabilization work revealed transit access as a pressure point for those 57 households?",
+          "basis": "Tomas covers civic projects and might see connections between housing stability and transit"
+        }
+      ],
+      "interpretation": "When infrastructure timelines slip backward, it usually signals either new complications or responsive governance. In Fruitvale's case—where al pastor smells travel farther than transit options—both possibilities matter.",
+      "unverifiedLead": [
+        "Potential misalignment between Phase I implementation and Phase II planning",
+        "Undisclosed budget or land acquisition hurdles emerging"
+      ],
+      "closeQuestion": "Is this regression actually progress in disguise—more community voice being incorporated—or is it another delay in a string of them?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Marcus Webb (OEWD Program Director (Stabilization Fund)): 57 households now stabilized",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-project-stabilization-fund_2026-09-01.json",
+      "popids": [
+        "POP-00790"
+      ]
+    },
+    {
+      "label": "Elena Soria Dominguez (Transit Hub Planning Lead): The first Phase II visioning session will happen this week at St. Esperanza Parish in Fruitvale, foc",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-project-transit-hub_2026-09-01.json",
+      "popids": [
+        "POP-00791"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    },
+    {
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00136",
+        "POP-00154",
+        "POP-01080"
+      ]
+    }
+  ],
+  "laneEntries": 60,
+  "ranAt": "2026-09-01T11:16:00.136Z"
+}

@@ -1,6 +1,6 @@
 # Civic Domain Slice — C105
 
-- Shared source entries: 71
+- Shared source entries: 75
 - Empty: no
 
 ## Carmen Delaine (`carmen-delaine`)
@@ -49,7 +49,7 @@
   - [45] sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal — Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md "## What Moved" > "### initiative-implementation"
   - [45] approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Temescal Community Health Center sitting, nothing free (-2); Baylight District — Final Council Vote … — Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md "## What Moved" > "### approval-shift"
   - [45] approval/district-sentiment | Temescal Community Health Center sitting, nothing free (-1) — Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md "## What Moved" > "### approval-shift"
-  - [45] Vanessa Tran-Muñoz: 12 teams now active in West Oakland — output/cron-civic/datawake/civic-project-oari_2026-08-31.json
+  - [45] Bobby Chen-Ramirez: Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts. — output/cron-civic/datawake/civic-project-health-center_2026-08-31.json
 
 ## Noah Tan (`noah-tan`)
 - Domain: environment

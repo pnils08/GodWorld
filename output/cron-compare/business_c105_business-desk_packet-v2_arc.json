@@ -4,23 +4,28 @@
   "desk": "business",
   "persona": "business-desk",
   "storyline": {
-    "slug": "rockridge-jacob-king-hood-rising",
+    "slug": "rockridge-depak-ying-hood-rising",
     "verb": "opened"
   },
   "hood": "Rockridge",
   "quotes": [
     {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I've been serving in Rockridge for years, and lately, I see more faces at Cozy Pot and HotSlice Pizza—regulars and newcomers both. It feels like the neighborhood's settling into something steady, not just a flash in the pan."
+    },
+    {
       "pop": "POP-00267",
       "name": "Jacob King",
-      "quote": "I've been working the line at a restaurant near Cozy Pot for years, and lately there's just more energy—more people out at night, more folks sticking around after dinner to chat. Feels like the whole block's waking up again."
+      "quote": "I've been working the line at a place down the street for years, and lately I've noticed more folks coming in from Cozy Pot and HotSlice Pizza during their breaks—seems like those spots are holding their own. But who knows? This neighborhood always has its ups and downs."
     },
     {
       "pop": "POP-00651",
       "name": "Howard Yell",
-      "quote": "I’ve noticed more people out and about, especially around places like Cozy Pot and HotSlice Pizza—it feels like the neighborhood’s got a bit more energy lately."
+      "quote": "I’ve noticed Cozy Pot and HotSlice Pizza seem busier lately, but it’s hard to tell if it’s just a seasonal thing or if the neighborhood’s really turning a corner."
     }
   ],
-  "claim": "I've been working the line at a restaurant near Cozy Pot for years, and lately there's just more energy—more people out at night, more folks sticking around after dinner to chat. Feels like the whole block's waking up again.",
+  "claim": "I've been serving in Rockridge for years, and lately, I see more faces at Cozy Pot and HotSlice Pizza—regulars and newcomers both. It feels like the neighborhood's settling into something steady, not just a flash in the pan.",
   "src": "citizenVoice PRESS c105",
-  "ranAt": "2026-08-31T18:21:59.771Z"
+  "ranAt": "2026-09-01T18:20:41.432Z"
 }

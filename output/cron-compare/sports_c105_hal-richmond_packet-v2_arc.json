@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "sports",
+  "persona": "hal-richmond",
+  "storyline": {
+    "slug": "jack-london-vinnie-keane-era-door",
+    "verb": "opened"
+  },
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career."
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland"
+    },
+    {
+      "pop": "POP-00019",
+      "name": "Isley Kelley",
+      "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match."
+    }
+  ],
+  "claim": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-01T18:18:56.626Z"
+}

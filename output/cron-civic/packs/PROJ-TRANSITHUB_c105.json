@@ -1,0 +1,182 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00791",
+    "name": "Elena Soria Dominguez",
+    "role": "Transit Hub Planning Lead",
+    "officeId": "PROJ-TRANSITHUB",
+    "district": null,
+    "faction": null,
+    "agentDir": "civic-project-transit-hub",
+    "initiative": "INIT-003",
+    "dials": {
+      "approval": null
+    }
+  },
+  "task": {
+    "a": "initiative-week",
+    "goal": "Conduct first visioning session by January 15"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 98,
+    "label": "Fruitvale Transit Hub Phase II — Visioning — Conduct first visioning session by January 15",
+    "lever": "Conduct first visioning session by January 15",
+    "hood": "Fruitvale",
+    "initiative": "INIT-003",
+    "vsCity": {
+      "sentiment": 0.79,
+      "citySentiment": 0.8854545454545455,
+      "crime": 1,
+      "cityCrime": 0.6990909090909091,
+      "heat": 15.563636363636364,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "Conduct first visioning session by January 15",
+    "lineFacts": [
+      "Fruitvale Transit Hub Phase II — Visioning is in visioning; budget $230M — C104: Launched community visioning sessions focused on small business and vendor protections",
+      "due: Conduct first visioning session by January 15",
+      "INIT-003 — visioning — C104: Launched community visioning sessions focused on small business and vendor protections — Conduct first visioning session by January 15",
+      "Fruitvale crime: property 50, violent 50, incidents 8 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "Fruitvale: sentiment 0.79 vs city 0.885; crime index 1 vs city 0.699; retail 9.72; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "initiative-heat",
+    "hoods": [
+      "Fruitvale"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00083",
+        "name": "Chad Tipre",
+        "neighborhood": "Fruitvale",
+        "role": "Relief Pitcher, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Conduct first visioning session by January 15"
+      },
+      {
+        "pop": "POP-00173",
+        "name": "Kaila Braun",
+        "neighborhood": "Fruitvale",
+        "role": "Immigrant Legal Aid Worker",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Conduct first visioning session by January 15"
+      },
+      {
+        "pop": "POP-00183",
+        "name": "Toby Lamont",
+        "neighborhood": "Fruitvale",
+        "role": "Mutual Aid Network Organizer",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Conduct first visioning session by January 15"
+      },
+      {
+        "pop": "POP-00184",
+        "name": "Brooklyn Nguyen",
+        "neighborhood": "Fruitvale",
+        "role": "Teacher",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Fruitvale — Fruitvale Transit Hub Phase II — Visioning — Conduct first visioning session by January 15"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "St. Esperanza Parish",
+        "neighborhood": "Fruitvale",
+        "text": "special Epiphany service fills the sanctuary",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-project-transit-hub",
+        "initiative": "INIT-003",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-opp-faction",
+        "initiative": "INIT-003",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-ind-swing",
+        "initiative": "INIT-003",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      }
+    ]
+  },
+  "known": [
+    {
+      "id": "F-INIT-003",
+      "t": "FACT",
+      "text": "Fruitvale Transit Hub Phase II — Visioning is in visioning; budget $230M — C104: Launched community visioning sessions focused on small business and vendor protections",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-cabinet-decisions_c104json",
+      "t": "FACT",
+      "text": "INIT-003 — visioning — C104: Launched community visioning sessions focused on small business and vendor protections — Conduct first visioning session by January 15",
+      "src": "output/city-civic-database/initiatives/transit-hub/decisions_c104.json"
+    },
+    {
+      "id": "F-crime-Fruitvale",
+      "t": "FACT",
+      "text": "Fruitvale crime: property 50, violent 50, incidents 8 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Fruitvale",
+      "t": "FACT",
+      "text": "Fruitvale: sentiment 0.79 vs city 0.885; crime index 1 vs city 0.699; retail 9.72; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Epiphany",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

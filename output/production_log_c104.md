@@ -12,12 +12,6 @@
 - c104 sports | Tanya Cruz: "Late-Season Push" (staged)
 - c104 civic | Noah Tan: "Sandra Velazquez stood at the corner of Piedmont Ave, her hands buried deep in her pockets" (staged)
 
-## /city-hall-prep (AUTO — cron-civic-run.js)
-- Pressure (AUTO path, S215 G-5): 1 HIGH engine patterns + Mara directive mara_directive_c104_AUTO.txt
-- Ledger snapshot: cycle=104 rowCount=968
-- Packets: civic-office-mayor(7), civic-project-stabilization-fund(2), civic-office-okoro(2), civic-office-council-d1(4), civic-project-oari(2), civic-office-council-d3(4), civic-office-council-d5(3), civic-project-transit-hub(2), civic-project-health-center(2), civic-office-council-d7(2), civic-office-baylight-authority(2), civic-office-council-d2(2), civic-office-council-d8(2), civic-office-council-d4(1), civic-office-council-d6(1), civic-office-council-d9(1)
-- Lint: clean
-
 ## /city-hall (AUTO — cron-civic-run.js)
 **Cycle:** 104
 **Mode:** APPLIED to tracker
@@ -50,3 +44,9 @@
 
 ### Media Handoff
 City hall ran headless this cycle. The voice decisions above are locked canon; project operational details live in output/civic-voice/*_c104.json. Desks report FROM this section.
+
+## /city-hall-prep (AUTO — cron-civic-run.js)
+- Pressure (AUTO path, S215 G-5): 1 HIGH engine patterns + Mara directive mara_directive_c104_AUTO.txt
+- Ledger snapshot: cycle=104 rowCount=968
+- Packets: civic-office-mayor(6), civic-project-stabilization-fund(2), civic-office-okoro(2), civic-office-council-d1(4), civic-project-oari(2), civic-office-council-d3(4), civic-office-council-d5(3), civic-project-transit-hub(2), civic-project-health-center(2), civic-office-council-d7(2), civic-office-council-d8(2), civic-office-council-d2(1), civic-office-council-d4(1), civic-office-council-d6(1), civic-office-council-d9(1)
+- Lint: clean

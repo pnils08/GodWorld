@@ -1,0 +1,175 @@
+{
+  "stage": "angle",
+  "desk": "undocked",
+  "cycle": "105",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-01076",
+      "name": "Nia Rook",
+      "role": "desk reporter",
+      "desk": "undocked"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+    },
+    "signal": {
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "score": null,
+      "src": "undocked:undocked-pop00143-Y3C1",
+      "nearby": [
+        {
+          "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00143",
+          "name": "Clarissa Dane",
+          "profile": "Clarissa Dane — UNDOCKED cast pilot",
+          "why": "assignment",
+          "role": "UNDOCKED cast pilot",
+          "hood": "Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+        "src": "undocked:undocked-pop00143-Y3C1",
+        "id": "F-e657add0ed97"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00143-Y3C1",
+      "label": "UNDOCKED: Clarissa Dane — up 72 on the night",
+      "kind": "undocked",
+      "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+      "citizens": [
+        "Clarissa Dane — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00143"
+      ],
+      "hood": "Fruitvale"
+    },
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Nia Rook",
+    "popid": "POP-01076",
+    "text": "I'm looking into how the city reacted to Clarissa Dane's performance on UNDOCKED, and what it means for her standing",
+    "plan": {
+      "chase": "I'm looking into how the city reacted to Clarissa Dane's performance on UNDOCKED, and what it means for her standing",
+      "focus": "The impact of Clarissa Dane's episode on her reputation",
+      "why": "To understand the buzz around Clarissa Dane's performance and its implications",
+      "checks": [
+        "How the city's residents are talking about Clarissa Dane's episode"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00143",
+          "question": "What does Clarissa Dane's performance say about her abilities?",
+          "basis": "Her episode on UNDOCKED"
+        }
+      ],
+      "interpretation": "The city's reaction to Clarissa Dane's episode will shape her reputation",
+      "unverifiedLead": [
+        "There's a sense that Clarissa Dane's performance has raised questions about her future"
+      ],
+      "closeQuestion": "What will be the lasting impact of Clarissa Dane's episode on her standing in the city?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "UNDOCKED: Clarissa Dane — up 72 on the night",
+      "kind": "undocked",
+      "hood": "Fruitvale",
+      "ref": "undocked:undocked-pop00143-Y3C1",
+      "popids": [
+        "POP-00143"
+      ]
+    }
+  ],
+  "laneEntries": 1,
+  "ranAt": "2026-09-01T11:17:25.100Z"
+}

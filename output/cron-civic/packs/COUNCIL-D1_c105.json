@@ -1,0 +1,195 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00501",
+    "name": "Denise Carter",
+    "role": "City Council District 1",
+    "officeId": "COUNCIL-D1",
+    "district": "D1",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d1",
+    "initiative": null,
+    "dials": {
+      "approval": 81
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "stand with West Oakland or leave it"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 220.76363636363635,
+    "label": "West Oakland — sentiment 0.77 vs city 0.885",
+    "lever": "stand with West Oakland or leave it",
+    "hood": "West Oakland",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.77,
+      "citySentiment": 0.8854545454545455,
+      "crime": 1.16,
+      "cityCrime": 0.6990909090909091,
+      "heat": 20.763636363636365,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "stand with West Oakland or leave it",
+    "lineFacts": [
+      "approval 81",
+      "West Oakland: sentiment 0.77 vs city 0.885; crime index 1.16 vs city 0.699; steady momentum 3",
+      "West Oakland crime: property 56, violent 60, incidents 12 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "West Oakland: sentiment 0.77 vs city 0.885; crime index 1.16 vs city 0.699; retail 6.17; housing pressure 0; steady; momentum 3"
+    ],
+    "missing": [
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "West Oakland",
+      "Brooklyn"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00119",
+        "name": "Beverly Peterson",
+        "neighborhood": "West Oakland",
+        "role": "Scout, Oakland A's",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland — sentiment 0.77 vs city 0.885"
+      },
+      {
+        "pop": "POP-00146",
+        "name": "Caleb Reyes",
+        "neighborhood": "West Oakland",
+        "role": "PUBLIC DEFENDER",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland — sentiment 0.77 vs city 0.885"
+      },
+      {
+        "pop": "POP-00164",
+        "name": "Celeste Tran",
+        "neighborhood": "West Oakland",
+        "role": "Journalist, Social Trends",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland — sentiment 0.77 vs city 0.885"
+      },
+      {
+        "pop": "POP-00176",
+        "name": "Talmon Lint",
+        "neighborhood": "West Oakland",
+        "role": "Solar Panel Installation Lead",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland — sentiment 0.77 vs city 0.885"
+      }
+    ],
+    "businesses": [
+      {
+        "id": "BIZ-00094",
+        "name": "West Oakland Stabilization Fund",
+        "neighborhood": "West Oakland",
+        "src": "world_summary lifestyle-sighting"
+      }
+    ],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D1",
+      "t": "FACT",
+      "text": "Denise Carter holds COUNCIL-D1 at approval 81",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland: sentiment 0.77 vs city 0.885; crime index 1.16 vs city 0.699; steady momentum 3",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland crime: property 56, violent 60, incidents 12 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland: sentiment 0.77 vs city 0.885; crime index 1.16 vs city 0.699; retail 6.17; housing pressure 0; steady; momentum 3",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-1",
+      "t": "FACT",
+      "text": "SAFETY — neighborhood-crisis — West Oakland: West Oakland under strain: retail vitality 3.5 (city 6.4); crime index 1.18 (city 0.71) (impactScore 15)",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Approval": "81"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

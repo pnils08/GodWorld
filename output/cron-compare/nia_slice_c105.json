@@ -1,0 +1,63 @@
+{
+  "v": "NIA-SLICE/1",
+  "cycle": 105,
+  "empty": false,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 105,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00143",
+      "Holder": "Clarissa Dane",
+      "EpisodeId": "undocked-pop00143-Y3C1",
+      "CreditsDelta": 72,
+      "Systems": [
+        "alpha_centauri"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 3,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-01T01-30-10.json"
+    }
+  ],
+  "laneEntries": [
+    {
+      "ref": "undocked:undocked-pop00143-Y3C1",
+      "label": "UNDOCKED: Clarissa Dane — up 72 on the night",
+      "kind": "undocked",
+      "popids": [
+        "POP-00143"
+      ],
+      "handle": {
+        "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+        "citizens": [
+          "Clarissa Dane — UNDOCKED cast pilot"
+        ]
+      },
+      "undockedEvent": {
+        "v": "UNDOCKED-FEED/1",
+        "Cycle": 105,
+        "EventType": "undocked-episode",
+        "POPID": "POP-00143",
+        "Holder": "Clarissa Dane",
+        "EpisodeId": "undocked-pop00143-Y3C1",
+        "CreditsDelta": 72,
+        "Systems": [
+          "alpha_centauri"
+        ],
+        "CombatEvents": 0,
+        "MishapCount": 0,
+        "Magnitude": 3,
+        "Flags": [
+          "credits_delta_windowed"
+        ],
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-01T01-30-10.json"
+      },
+      "hood": "Fruitvale"
+    }
+  ],
+  "generatedAt": "2026-09-01T11:15:08.000Z"
+}

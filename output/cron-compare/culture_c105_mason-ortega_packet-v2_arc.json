@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "culture",
+  "persona": "mason-ortega",
+  "storyline": {
+    "slug": "lake-merritt-vanessa-treary-named-restaurant",
+    "verb": "opened"
+  },
+  "hood": "Lake Merritt",
+  "quotes": [
+    {
+      "pop": "POP-00781",
+      "name": "Vanessa Treary",
+      "quote": "I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime."
+    },
+    {
+      "pop": "POP-00783",
+      "name": "Yuki Ji",
+      "quote": "I’ve heard Merritt Reserve gets pretty lively in the evenings, but I haven’t been there myself—I’m usually behind the bar at my own spot by then."
+    }
+  ],
+  "claim": "I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-01T18:19:44.866Z"
+}

@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "sports",
+  "persona": "p-slayer",
+  "storyline": {
+    "slug": "jack-london-vinnie-keane-injury-load",
+    "verb": "opened"
+  },
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00001",
+      "name": "Vinnie Keane",
+      "quote": "I feel like the fans have been with me every step of the way, and I'm grateful for their support - it means a lot to me to have them behind me throughout my career."
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "I've seen how much Vinnie Keane's legacy means to the fans, it's like they're still feeling the impact of his presence on the field even after he's gone. As a player, I can understand why they'd feel that way, he was an incredible teammate and an even better person. I think the fans are still trying to process their emotions about his legacy, and I can respect that."
+    },
+    {
+      "pop": "POP-00003",
+      "name": "Mark Aitken",
+      "quote": "I've seen the fans in Jack London really come together to celebrate Vinnie Keane's legacy, it's like the whole neighborhood is still feeling the impact of his time with the A's. As someone who's been part of this community for a while, it's amazing to see how much he meant to the people here."
+    },
+    {
+      "pop": "POP-00019",
+      "name": "Isley Kelley",
+      "quote": "I've seen the fans around Rockridge and they all seem to have a lot of respect for Vinnie Keane's legacy, it's like he's still part of the team even after all these years. I feel like his impact on the game is still felt, and I'm not just saying that because I'm an A's legend myself."
+    }
+  ],
+  "claim": "I feel like the fans have been with me every step of the way, and I'm grateful for their support - it means a lot to me to have them behind me throughout my career.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-01T18:18:10.703Z"
+}

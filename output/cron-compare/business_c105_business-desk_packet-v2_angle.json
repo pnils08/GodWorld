@@ -418,34 +418,33 @@
   "angleRead": {
     "name": "Jordan Velez",
     "popid": "POP-00153",
-    "text": "Jordan's been tracking retail trajectories across Oakland neighborhoods, and Rockridge's upward swing stands out against the cooling corridors he's documented elsewhere. The contrast between Grand Lake's empty windows and Rockridge's busy counters has him curious about what's driving the difference. He wants to understand if this is just seasonal uptick or something more sustained, but he'll keep it grounded in observable storefront activity rather than speculation.",
+    "text": "Jordan wants to understand what's driving Rockridge's retail uptick, especially at Cozy Pot and HotSlice Pizza. He's curious if this is sustained momentum or just a seasonal bump, and whether it's drawing new residents or just circulating existing neighborhood dollars. The contrast with Grand Lake's decline lingers in his mind—he doesn't want to miss early warning signs if this boom is fragile.",
     "plan": {
-      "chase": "Jordan's been tracking retail trajectories across Oakland neighborhoods, and Rockridge's upward swing stands out against the cooling corridors he's documented elsewhere. The contrast between Grand Lake's empty windows and Rockridge's busy counters has him curious about what's driving the difference. He wants to understand if this is just seasonal uptick or something more sustained, but he'll keep it grounded in observable storefront activity rather than speculation.",
-      "focus": "The human pulse behind Rockridge's rising retail vitality, using Cozy Pot, HotSlice Pizza, and Festive Fireside as anchors to explore whether this uptick reflects deeper neighborhood momentum.",
-      "why": "After chronicling retail declines in other districts, the visible energy in Rockridge demands examination—are people just passing through or putting down roots? The named businesses offer tangible starting points without inventing narratives.",
+      "chase": "Jordan wants to understand what's driving Rockridge's retail uptick, especially at Cozy Pot and HotSlice Pizza. He's curious if this is sustained momentum or just a seasonal bump, and whether it's drawing new residents or just circulating existing neighborhood dollars. The contrast with Grand Lake's decline lingers in his mind—he doesn't want to miss early warning signs if this boom is fragile.",
+      "focus": "Economic trajectory of Rockridge retail, specifically Cozy Pot and HotSlice Pizza, to determine if the uptick reflects sustained neighborhood investment or transient activity.",
+      "why": "Recent assignments tracking retail declines in other neighborhoods make me wary of superficial rebounds. Need to see if money's moving differently here or if we're just seeing better marketing.",
       "checks": [
-        "Verify if evening foot traffic at Cozy Pot and HotSlice Pizza aligns with daytime activity",
-        "Confirm whether Festive Fireside's events correlate with increased neighboring business activity",
-        "Compare current shutter patterns to previous cycles' RetailVitality scores"
+        "Are weekend crowds at HotSlice mostly regulars or new faces?",
+        "Does Cozy Pot's dinner rush include takeout orders (suggesting broader reach) or just dine-in?"
       ],
       "targets": [
         {
           "pop": "POP-00210",
-          "question": "What changes have you noticed in customer patterns at Cozy Pot over recent months?",
-          "basis": "Server perspective on sustained vs. seasonal shifts"
+          "question": "What shifts have you noticed in who's coming through Cozy Pot's doors—more unfamiliar faces, or the same regulars spending more?",
+          "basis": "Server sees customer flow daily"
         },
         {
           "pop": "POP-00267",
-          "question": "Does HotSlice Pizza's prep volume now outpace previous cycles?",
-          "basis": "Kitchen workflow as proxy for demand changes"
+          "question": "HotSlice's line out the door—is that lunch regulars or people grabbing slices before heading elsewhere in Rockridge?",
+          "basis": "Line cook sees order patterns"
         }
       ],
-      "interpretation": "This feels like more than just post-pandemic rebound—the concentration of multiple businesses gaining traction suggests Rockridge might be reclaiming its mantle as a destination rather than just a thoroughfare.",
+      "interpretation": "This feels like a neighborhood hitting its stride, but I've covered enough 'revivals' to know buzz doesn't always mean lasting change. The real story might be in whether money's circulating deeper or just faster.",
       "unverifiedLead": [
-        "Possible connection between nearby residential moves and increased midday business traffic",
-        "Whether evening venues are drawing customers who then patronize other storefronts"
+        "Festive Fireside's events might be pulling people deeper into Rockridge rather than just passing through",
+        "New residential moves could be driving sustained traffic rather than one-off visitors"
       ],
-      "closeQuestion": "Is Rockridge's retail rise redistributing Oakland's commercial energy or generating new economic activity altogether?"
+      "closeQuestion": "Is Rockridge's retail rise built on new roots or just better weather?"
     }
   },
   "lanePicks": [
@@ -506,5 +505,5 @@
     }
   ],
   "laneEntries": 50,
-  "ranAt": "2026-08-31T11:17:07.231Z"
+  "ranAt": "2026-09-01T11:17:13.871Z"
 }

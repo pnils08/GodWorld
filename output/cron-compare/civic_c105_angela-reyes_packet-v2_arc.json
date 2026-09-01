@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "civic",
+  "persona": "angela-reyes",
+  "storyline": {
+    "slug": "west-oakland-east-oakland-fruitvale-darren-briggs-anomaly",
+    "verb": "opened"
+  },
+  "hood": "West Oakland, East Oakland, Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-00588",
+      "name": "Darren Briggs",
+      "quote": "I’ve heard about the Oakland Youth Apprenticeship Pipeline starting up, and it feels like a step in the right direction for keeping kids connected to opportunities. Stability in education seems to come from having clear pathways like this."
+    }
+  ],
+  "claim": "I’ve heard about the Oakland Youth Apprenticeship Pipeline starting up, and it feels like a step in the right direction for keeping kids connected to opportunities. Stability in education seems to come from having clear pathways like this.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-01T18:15:56.822Z"
+}

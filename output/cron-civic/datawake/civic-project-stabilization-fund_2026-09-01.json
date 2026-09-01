@@ -1,0 +1,15 @@
+{
+  "office": "stabilization_fund",
+  "agentDir": "civic-project-stabilization-fund",
+  "holder": "Marcus Webb",
+  "popid": "POP-00790",
+  "title": "OEWD Program Director (Stabilization Fund)",
+  "date": "2026-09-01",
+  "cycle": 105,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Twelve more households have final approval for stabilization assistance—bringing us to fifty-seven families protected with zero compliance exceptions. The Month-six batch is audit-ready and walking to the Deputy Mayor's desk today, and we're expanding outreach to slipping blocks identified this past cycle. Every approved application moves with certainty.",
+  "action": "Walking the Month-six disbursement authorization packets to Deputy Mayor Osei's front desk to force the next batch ahead of schedule.",
+  "numberMoved": "57 households now stabilized",
+  "ranAt": "2026-09-01T10:45:36.325Z",
+  "fellBackFrom": null
+}

@@ -1,0 +1,676 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "trevor-shimizu",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+      "label": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+      "kind": "anomaly",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+      "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00744",
+        "POP-00766",
+        "POP-01057"
+      ],
+      "citizens": [
+        "Tomas Renteria (POP-00744)",
+        "Manjit Singh (POP-00766)",
+        "Nina Reyes (POP-01057)"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c105_trevor-shimizu_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-01057",
+      "name": "Nina Reyes",
+      "quote": "I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing.\",\n  \"fact_ids\": [\"F-90973f520bc5\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-90973f520bc5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01057-3a36250084",
+        "authoredQuote": true,
+        "publishableQuote": "I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01057",
+          "name": "Nina Reyes (POP-01057)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.",
+          "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Nina Reyes (POP-01057)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+            "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-90973f520bc5"
+          },
+          {
+            "t": "FACT",
+            "text": "Nina Reyes (POP-01057)",
+            "src": "Simulation_Ledger profile for POP-01057",
+            "id": "F-e164154b1008"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00766",
+      "name": "Manjit Singh",
+      "quote": "I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop. I just hope they figure it out soon—it’s been a long wait for something that could really help our community.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop. I just hope they figure it out soon—it’s been a long wait for something that could really help our community.\",\"fact_ids\":[\"F-90973f520bc5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-90973f520bc5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00766-d198dbbdfe",
+        "authoredQuote": true,
+        "publishableQuote": "I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop. I just hope they figure it out soon—it’s been a long wait for something that could really help our community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00766",
+          "name": "Manjit Singh (POP-00766)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.",
+          "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Manjit Singh (POP-00766)",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+            "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-90973f520bc5"
+          },
+          {
+            "t": "FACT",
+            "text": "Manjit Singh (POP-00766)",
+            "src": "Simulation_Ledger profile for POP-00766",
+            "id": "F-2e4ce2413402"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-01057",
+      "name": "Nina Reyes",
+      "quote": "I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing.\",\n  \"fact_ids\": [\"F-90973f520bc5\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-90973f520bc5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-01057-3a36250084",
+        "authoredQuote": true,
+        "publishableQuote": "I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-01057",
+          "name": "Nina Reyes (POP-01057)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.",
+          "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Nina Reyes (POP-01057)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+            "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-90973f520bc5"
+          },
+          {
+            "t": "FACT",
+            "text": "Nina Reyes (POP-01057)",
+            "src": "Simulation_Ledger profile for POP-01057",
+            "id": "F-e164154b1008"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: voice: Provider returned error",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": "Tomas Renteria (POP-00744)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.",
+          "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Tomas Renteria (POP-00744)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+            "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-90973f520bc5"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Renteria (POP-00744)",
+            "src": "Simulation_Ledger profile for POP-00744",
+            "id": "F-dcc47909182d"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00766",
+      "name": "Manjit Singh",
+      "quote": "I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop. I just hope they figure it out soon—it’s been a long wait for something that could really help our community.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop. I just hope they figure it out soon—it’s been a long wait for something that could really help our community.\",\"fact_ids\":[\"F-90973f520bc5\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-90973f520bc5"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00766-d198dbbdfe",
+        "authoredQuote": true,
+        "publishableQuote": "I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop. I just hope they figure it out soon—it’s been a long wait for something that could really help our community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00766",
+          "name": "Manjit Singh (POP-00766)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.",
+          "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Manjit Singh (POP-00766)",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+            "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-90973f520bc5"
+          },
+          {
+            "t": "FACT",
+            "text": "Manjit Singh (POP-00766)",
+            "src": "Simulation_Ledger profile for POP-00766",
+            "id": "F-2e4ce2413402"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": null,
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"Man, I heard folks talking about that transit hub mess at the diner last week. Seems like every time we think they're moving forward, they hit rewind—just another day in Oakland, I guess.\",\n  \"fact_ids\": [\"F-90973f520bc5\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Trevor Shimizu",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "Fruitvale",
+          "focus": "The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.",
+          "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+            "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+            "id": "F-90973f520bc5"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-01T18:17:05.681Z"
+}

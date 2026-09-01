@@ -1,0 +1,22 @@
+{
+  "date": "2026-09-01",
+  "cycle": 105,
+  "results": [
+    {
+      "office": "civic-project-stabilization-fund",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-project-stabilization-fund_2026-09-01.json"
+    },
+    {
+      "office": "civic-project-transit-hub",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-project-transit-hub_2026-09-01.json"
+    },
+    {
+      "office": "civic-office-council-d1",
+      "ok": false,
+      "error": "fabricated statistic(s) after retry: 100%, 106"
+    }
+  ],
+  "ranAt": "2026-09-01T10:46:37.163Z"
+}

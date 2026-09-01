@@ -2,38 +2,31 @@
 
 A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 105). Everything below is sourced from the world ledger — nothing is invented.
 
-## The big moments
-
-- **Mason Ortega** (Uptown) — caught themselves narrating the day as if telling it to someone gone
-- **Mason Ortega** (Uptown) — saved the Tribune clipping with their neighborhood in it — the good one
-- **Mason Ortega** (Uptown) — stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence
-- **Dak Leo** (Lake Merritt) — navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes
-- **Dak Leo** (Lake Merritt) — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture
-- **Dak Leo** (Lake Merritt) — dodged the running groups circling the lake and found a quiet bench near the pergola
-
 ## The people, in their own words
 
 ### Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake
 
-> *leans back, a quiet smile* Man, Mike. Yeah, we're ready. You can feel it in the clubhouse—there's this weight to it now, the kind that only shows up when everything's been buildi
+> *laughs, genuine this time* There it is. Yeah. *shakes head* You know what? You were right to call me on it. I came in empty, and you had to point me at what was actually in fro
 
-> Mike. Good to see you, man. I'm doing all right. Shoulder's been talking to me a little more than I'd like, but that's the deal at this point in the road. Body's negotiating terms
+> You know, when you're in the middle of a season like this, you don't really think about endings - you're just riding the wave. But seeing guys like Benji and Mark light it up these
 
-### Dillon Trevor — Server — Downtown
+### Benji Dillon — Pitcher, Oakland A's Legend — Rockridge
 
-> "Honestly, it wasn’t something I planned—it just happened over time. I’ve been here serving folks at the diner for decades, and I guess being around, knowing people’s names, their
+> You know, I've been grabbing slices at HotSlice after my workouts, and what strikes me is how many new faces are always in there—not just passing through, but really settling in, l
 
-### Andre Turner — Line cook — Downtown
+> This season, it feels like we're not just playing for wins—we're celebrating the journey, the legacy, and the guys who've given everything to this game. It’s less about endings and
 
-> That damn ticket stub from last night’s game is still sitting on my counter, curled at the edges from the steam when I made coffee this morning. Vinnie’s last home stretch—should’v
+### Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London
 
-### Rafael Brannie — Mover — Laurel
+> This season has definitely turned the vibe around—it’s less about saying goodbye and more about celebrating what these guys have built. You can feel it in the stands and on the fie
 
-> I find myself at that bench by the pergola near the lake. Nobody’s out this late, just me and the hum of the streetlights. The water’s dark, but if you sit long enough, you start c
+### Isley Kelley — Shortstop, Oakland A's Legend — Rockridge
 
-### Colin Soria — Security guard — Temescal
+> This season’s been electric—it’s like the weight of farewells lifted, and now it’s all about celebrating what these guys have built. You can feel it in the air, even in Rockridge.
 
-> This week, the block’s felt... heavier. Like the air’s thicker with something unspoken. I’ve noticed more people walking with their heads down, fewer hellos exchanged. Even the reg
+### Ernesto Quintero — 3B/1B , Oakland A's — Baylight District
+
+> I’ve heard folks around Baylight talking about Dame Sarr’s hustle—7 points, 3 rebounds, and 3 steals—but the Oaks’ 0-3 preseason record has everyone a little on edge.
 
 ---
-*Assembled 2026-08-31 from Reflection_Intake (6 reflections, 5 citizens) and LifeHistory_Log (6 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+*Assembled 2026-09-01 from Reflection_Intake (32 reflections, 25 citizens) and LifeHistory_Log (0 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*

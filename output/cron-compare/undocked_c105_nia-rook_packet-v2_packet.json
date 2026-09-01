@@ -1,0 +1,918 @@
+{
+  "stage": "report",
+  "desk": "undocked",
+  "cycle": "105",
+  "persona": "nia-rook",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Nia Rook",
+    "popid": "POP-01076"
+  },
+  "assignment": {
+    "story": {
+      "ref": "undocked:undocked-pop00143-Y3C1",
+      "label": "UNDOCKED: Clarissa Dane — up 72 on the night",
+      "kind": "undocked",
+      "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+      "citizens": [
+        "Clarissa Dane — UNDOCKED cast pilot"
+      ],
+      "popids": [
+        "POP-00143"
+      ],
+      "hood": "Fruitvale"
+    }
+  },
+  "angle": "output/cron-compare/undocked_c105_nia-rook_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 4,
+  "quotes": [
+    {
+      "pop": "POP-00143",
+      "name": "Clarissa Dane",
+      "quote": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; curious, open to new things; steady, hard to shake; principled, plays it straight",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.\",\n  \"fact_ids\": [\"F-b7a853efba64\", \"F-e657add0ed97\", \"F-5361d31c74cb\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b7a853efba64",
+          "F-e657add0ed97",
+          "F-5361d31c74cb"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00143-ec1278150b",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00143",
+          "name": "Clarissa Dane",
+          "role": "UNDOCKED cast pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The impact of Clarissa Dane's episode on her reputation\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "The impact of Clarissa Dane's episode on her reputation",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Clarissa Dane — UNDOCKED cast pilot",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+            "src": "undocked:undocked-pop00143-Y3C1",
+            "id": "F-e657add0ed97"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane — UNDOCKED cast pilot",
+            "src": "Simulation_Ledger profile for POP-00143",
+            "id": "F-5361d31c74cb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\": \"quote\", \"quote\": \"I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale.\", \"fact_ids\": [\"F-e657add0ed97\"], \"basis\": \"direct-reaction\", \"unverifiedLead\": null, \"abstain_reason\": null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-d9d80ca87f",
+        "authoredQuote": true,
+        "publishableQuote": "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The impact of Clarissa Dane's episode on her reputation\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "The impact of Clarissa Dane's episode on her reputation",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+            "src": "undocked:undocked-pop00143-Y3C1",
+            "id": "F-e657add0ed97"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation.\",\n  \"fact_ids\": [\"F-e657add0ed97\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00644-f74554bd68",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00644",
+          "name": "Rafael Pilgrim",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The impact of Clarissa Dane's episode on her reputation\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "The impact of Clarissa Dane's episode on her reputation",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rafael Pilgrim — Server — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+            "src": "undocked:undocked-pop00143-Y3C1",
+            "id": "F-e657add0ed97"
+          },
+          {
+            "t": "FACT",
+            "text": "Rafael Pilgrim — Server — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00644",
+            "id": "F-56d37e2ec062"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation.",
+      "disp": "driven, hard to sit still; draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation.\",\n  \"fact_ids\": [\"F-e657add0ed97\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00744-3c0862cc84",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The impact of Clarissa Dane's episode on her reputation\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "The impact of Clarissa Dane's episode on her reputation",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+            "src": "undocked:undocked-pop00143-Y3C1",
+            "id": "F-e657add0ed97"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00744",
+            "id": "F-ba942a2b7b0a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00143",
+      "name": "Clarissa Dane",
+      "quote": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; curious, open to new things; steady, hard to shake; principled, plays it straight",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.\",\n  \"fact_ids\": [\"F-b7a853efba64\", \"F-e657add0ed97\", \"F-5361d31c74cb\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-b7a853efba64",
+          "F-e657add0ed97",
+          "F-5361d31c74cb"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00143-ec1278150b",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00143",
+          "name": "Clarissa Dane",
+          "role": "UNDOCKED cast pilot",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The impact of Clarissa Dane's episode on her reputation\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "The impact of Clarissa Dane's episode on her reputation",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Clarissa Dane — UNDOCKED cast pilot",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+            "src": "undocked:undocked-pop00143-Y3C1",
+            "id": "F-e657add0ed97"
+          },
+          {
+            "t": "FACT",
+            "text": "Clarissa Dane — UNDOCKED cast pilot",
+            "src": "Simulation_Ledger profile for POP-00143",
+            "id": "F-5361d31c74cb"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "{\"answer\": \"quote\", \"quote\": \"I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale.\", \"fact_ids\": [\"F-e657add0ed97\"], \"basis\": \"direct-reaction\", \"unverifiedLead\": null, \"abstain_reason\": null}",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-d9d80ca87f",
+        "authoredQuote": true,
+        "publishableQuote": "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The impact of Clarissa Dane's episode on her reputation\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "The impact of Clarissa Dane's episode on her reputation",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+            "src": "undocked:undocked-pop00143-Y3C1",
+            "id": "F-e657add0ed97"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00644",
+      "name": "Rafael Pilgrim",
+      "quote": "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation.",
+      "disp": "draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation.\",\n  \"fact_ids\": [\"F-e657add0ed97\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00644-f74554bd68",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00644",
+          "name": "Rafael Pilgrim",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The impact of Clarissa Dane's episode on her reputation\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "The impact of Clarissa Dane's episode on her reputation",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Rafael Pilgrim — Server — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+            "src": "undocked:undocked-pop00143-Y3C1",
+            "id": "F-e657add0ed97"
+          },
+          {
+            "t": "FACT",
+            "text": "Rafael Pilgrim — Server — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00644",
+            "id": "F-56d37e2ec062"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00744",
+      "name": "Tomas Renteria",
+      "quote": "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation.",
+      "disp": "driven, hard to sit still; draws people in, deep with them",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation.\",\n  \"fact_ids\": [\"F-e657add0ed97\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00744-3c0862cc84",
+        "authoredQuote": true,
+        "publishableQuote": "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00744",
+          "name": "Tomas Renteria",
+          "role": "Podcast Host / Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Nia Rook",
+          "question": "As a resident of Fruitvale, what have you seen, felt, or understood about \"The impact of Clarissa Dane's episode on her reputation\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "undocked",
+          "hood": "Fruitvale",
+          "focus": "The impact of Clarissa Dane's episode on her reputation",
+          "src": "undocked:undocked-pop00143-Y3C1"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+            "src": "undocked:undocked-pop00143-Y3C1",
+            "id": "F-e657add0ed97"
+          },
+          {
+            "t": "FACT",
+            "text": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00744",
+            "id": "F-ba942a2b7b0a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-01T18:21:32.333Z"
+}

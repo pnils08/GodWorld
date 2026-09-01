@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "civic",
+  "persona": "trevor-shimizu",
+  "storyline": {
+    "slug": "fruitvale-nina-reyes-anomaly",
+    "verb": "opened"
+  },
+  "hood": "Fruitvale",
+  "quotes": [
+    {
+      "pop": "POP-01057",
+      "name": "Nina Reyes",
+      "quote": "I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing."
+    },
+    {
+      "pop": "POP-00766",
+      "name": "Manjit Singh",
+      "quote": "I heard about the Fruitvale Transit Hub Phase II moving back to active visioning, and it feels like we’re stuck in a loop. I just hope they figure it out soon—it’s been a long wait for something that could really help our community."
+    }
+  ],
+  "claim": "I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-01T18:17:05.692Z"
+}

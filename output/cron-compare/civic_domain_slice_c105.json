@@ -965,6 +965,38 @@
     },
     {
       "kind": "civic-datawake",
+      "label": "Avery Santana: 57 households stabilized to date",
+      "ref": "output/cron-civic/datawake/civic-office-mayor_2026-08-31.json",
+      "hood": null,
+      "popids": [
+        "POP-00034"
+      ],
+      "handle": {
+        "angle": "Month six of the West Oakland Stabilization Fund, and we’re moving money into people’s hands—57 households now stabilized, with outreach teams hitting the blocks that need it most. This isn’t just disbursement; it’s delivery. And we’re acce",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 58
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Bobby Chen-Ramirez: Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts.",
+      "ref": "output/cron-civic/datawake/civic-project-health-center_2026-08-31.json",
+      "hood": null,
+      "popids": [
+        "POP-00792"
+      ],
+      "handle": {
+        "angle": "Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts.",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 59
+    },
+    {
+      "kind": "civic-datawake",
       "label": "Vanessa Tran-Muñoz: 12 teams now active in West Oakland",
       "ref": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json",
       "hood": null,
@@ -977,7 +1009,39 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 58
+      "sourceIndex": 60
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Marcus Webb: 57 households now stabilized",
+      "ref": "output/cron-civic/datawake/civic-project-stabilization-fund_2026-09-01.json",
+      "hood": null,
+      "popids": [
+        "POP-00790"
+      ],
+      "handle": {
+        "angle": "Twelve more households have final approval for stabilization assistance—bringing us to fifty-seven families protected with zero compliance exceptions. The Month-six batch is audit-ready and walking to the Deputy Mayor's desk today, and we'r",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 61
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Elena Soria Dominguez: The first Phase II visioning session will happen this week at St. Esperanza Parish in Fruitvale, focused on protecting street vendors and ensuring pedestrian access to small busine",
+      "ref": "output/cron-civic/datawake/civic-project-transit-hub_2026-09-01.json",
+      "hood": null,
+      "popids": [
+        "POP-00791"
+      ],
+      "handle": {
+        "angle": "The first Phase II visioning session will happen this week at St. Esperanza Parish in Fruitvale, focused on protecting street vendors and ensuring pedestrian access to small businesses during construction. This isn't compliance paperwork—it",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 62
     },
     {
       "kind": "weather",
@@ -991,7 +1055,7 @@
         "citizens": []
       },
       "source": "world-summary",
-      "sourceIndex": 59
+      "sourceIndex": 63
     },
     {
       "kind": "season-feel",
@@ -1009,7 +1073,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 60
+      "sourceIndex": 64
     },
     {
       "kind": "season-feel",
@@ -1027,7 +1091,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 61
+      "sourceIndex": 65
     },
     {
       "kind": "season-feel",
@@ -1045,7 +1109,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 62
+      "sourceIndex": 66
     },
     {
       "kind": "season-feel",
@@ -1063,7 +1127,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 63
+      "sourceIndex": 67
     },
     {
       "kind": "season-feel",
@@ -1081,7 +1145,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 64
+      "sourceIndex": 68
     },
     {
       "kind": "season-feel",
@@ -1095,7 +1159,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 65
+      "sourceIndex": 69
     },
     {
       "kind": "season-feel",
@@ -1109,7 +1173,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 66
+      "sourceIndex": 70
     },
     {
       "kind": "season-feel",
@@ -1123,7 +1187,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 67
+      "sourceIndex": 71
     },
     {
       "kind": "season-feel",
@@ -1137,7 +1201,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 68
+      "sourceIndex": 72
     },
     {
       "kind": "season-feel",
@@ -1151,7 +1215,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 69
+      "sourceIndex": 73
     },
     {
       "kind": "season-feel",
@@ -1165,7 +1229,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 70
+      "sourceIndex": 74
     },
     {
       "kind": "season-feel",
@@ -1179,7 +1243,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 71
+      "sourceIndex": 75
     },
     {
       "kind": "season-feel",
@@ -1193,7 +1257,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 72
+      "sourceIndex": 76
     },
     {
       "kind": "season-feel",
@@ -1207,7 +1271,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 73
+      "sourceIndex": 77
     }
   ],
   "packets": {
@@ -1801,17 +1865,17 @@
         {
           "score": 45,
           "kind": "civic-datawake",
-          "label": "Vanessa Tran-Muñoz: 12 teams now active in West Oakland",
-          "ref": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json",
+          "label": "Bobby Chen-Ramirez: Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts.",
+          "ref": "output/cron-civic/datawake/civic-project-health-center_2026-08-31.json",
           "hood": null,
           "popids": [
-            "POP-01021"
+            "POP-00792"
           ],
-          "angle": "West Oakland's launch meets crisis with care exactly where it's needed most—our teams are now live in District 1 with bilingual responders covering evening and weekend hours to match when behavioral health calls peak in this community. Frui",
+          "angle": "Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts.",
           "hookLine": null,
           "citizens": [],
           "source": "civic-datawake",
-          "sourceIndex": 58
+          "sourceIndex": 59
         }
       ],
       "pointers": [
@@ -1819,7 +1883,7 @@
         "Initiative_Tracker (InitiativeID INIT-005)",
         "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
         "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
-        "output/cron-civic/datawake/civic-project-oari_2026-08-31.json"
+        "output/cron-civic/datawake/civic-project-health-center_2026-08-31.json"
       ]
     },
     "noah-tan": {
@@ -1894,7 +1958,7 @@
             "Drew Lemon (POP-00670)"
           ],
           "source": "season-feel",
-          "sourceIndex": 60
+          "sourceIndex": 64
         },
         {
           "score": 80,
@@ -1911,7 +1975,7 @@
             "Genevieve Liu (POP-00928)"
           ],
           "source": "season-feel",
-          "sourceIndex": 61
+          "sourceIndex": 65
         },
         {
           "score": 80,
@@ -1928,7 +1992,7 @@
             "Melton Neilon (POP-00170)"
           ],
           "source": "season-feel",
-          "sourceIndex": 62
+          "sourceIndex": 66
         },
         {
           "score": 80,
@@ -1945,7 +2009,7 @@
             "Marky Beal (POP-00202)"
           ],
           "source": "season-feel",
-          "sourceIndex": 63
+          "sourceIndex": 67
         },
         {
           "score": 80,
@@ -1962,7 +2026,7 @@
             "Rigo Ryno (POP-00197)"
           ],
           "source": "season-feel",
-          "sourceIndex": 64
+          "sourceIndex": 68
         },
         {
           "score": 80,
@@ -1975,7 +2039,7 @@
           "hookLine": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 65
+          "sourceIndex": 69
         }
       ],
       "pointers": [

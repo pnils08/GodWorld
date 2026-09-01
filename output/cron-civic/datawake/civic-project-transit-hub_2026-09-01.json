@@ -1,0 +1,15 @@
+{
+  "office": "transit_hub",
+  "agentDir": "civic-project-transit-hub",
+  "holder": "Elena Soria Dominguez",
+  "popid": "POP-00791",
+  "title": "Transit Hub Planning Lead",
+  "date": "2026-09-01",
+  "cycle": 105,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The first Phase II visioning session will happen this week at St. Esperanza Parish in Fruitvale, focused on protecting street vendors and ensuring pedestrian access to small businesses during construction. This isn't compliance paperwork—it's protections for abuelas crossing to the panadería and proof we're putting Fruitvale residents first.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-01T10:45:57.172Z",
+  "fellBackFrom": null
+}

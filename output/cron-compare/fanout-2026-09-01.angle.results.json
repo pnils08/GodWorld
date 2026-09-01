@@ -1,0 +1,42 @@
+{
+  "date": "2026-09-01",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Angela Reyes",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Trevor Shimizu",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Mason Ortega",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-01T11:17:25.101Z"
+}

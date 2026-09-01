@@ -1,0 +1,408 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "angela-reyes",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00156",
+      "name": "Angela Reyes",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+      "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.",
+      "creativeBrief": {
+        "kind": "education-stability",
+        "method": "PROGRAM_CONTINUITY_ACCESS",
+        "missing": [
+          "a named student, teacher, family member, participant, or program staff member",
+          "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+          "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+        ],
+        "stabilityEvidence": {
+          "state": "UNESTABLISHED",
+          "participants": [],
+          "facts": [],
+          "src": null
+        },
+        "forbidden": [
+          "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "score": null,
+      "src": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+      "nearby": [
+        {
+          "text": "Marcus Webb (OEWD Program Director (Stabilization Fund)): 57 households now stabilized",
+          "src": "output/cron-civic/datawake/civic-project-stabilization-fund_2026-09-01.json"
+        },
+        {
+          "text": "Elena Soria Dominguez (Transit Hub Planning Lead): The first Phase II visioning session will happen this week at St. Esperanza Parish in Fruitvale, foc",
+          "src": "output/cron-civic/datawake/civic-project-transit-hub_2026-09-01.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)"
+        },
+        {
+          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "src": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00037",
+          "name": "Darren Briggs (POP-00588)",
+          "profile": "Darren Briggs (POP-00588)",
+          "why": "assignment",
+          "role": null,
+          "hood": "West Oakland, East Oakland, Fruitvale"
+        },
+        {
+          "pop": "POP-00588",
+          "name": "Elias Varek (POP-00789)",
+          "profile": "Elias Varek (POP-00789)",
+          "why": "assignment",
+          "role": null,
+          "hood": "West Oakland, East Oakland, Fruitvale"
+        },
+        {
+          "pop": "POP-00789",
+          "name": "Brenda Okoro (POP-00037)",
+          "profile": "Brenda Okoro (POP-00037)",
+          "why": "assignment",
+          "role": null,
+          "hood": "West Oakland, East Oakland, Fruitvale"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+        "src": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+        "id": "F-c8af5eef9449"
+      },
+      {
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+        "src": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+        "id": "F-bdef102a2290"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+      "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+      "kind": "anomaly",
+      "angle": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+      "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [
+        "POP-00037",
+        "POP-00588",
+        "POP-00789"
+      ],
+      "citizens": [
+        "Darren Briggs (POP-00588)",
+        "Elias Varek (POP-00789)",
+        "Brenda Okoro (POP-00037)"
+      ]
+    },
+    "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "angela-reyes",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "domain": "education-youth"
+    },
+    "pulse": {
+      "className": "education-youth",
+      "score": 45,
+      "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "source": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active"
+      ],
+      "forbidden": [
+        "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+      ],
+      "schema": "EDUCATION-STABILITY-BRIEF-1",
+      "method": "PROGRAM_CONTINUITY_ACCESS",
+      "missing": [
+        "a named student, teacher, family member, participant, or program staff member",
+        "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+        "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+      ],
+      "stabilityEvidence": {
+        "state": "UNESTABLISHED",
+        "participants": [],
+        "facts": [],
+        "src": null
+      }
+    },
+    "candidates": [
+      {
+        "score": 45,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot-active",
+        "ref": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00037",
+          "POP-00588",
+          "POP-00789"
+        ],
+        "angle": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Darren Briggs (POP-00588)",
+          "Elias Varek (POP-00789)",
+          "Brenda Okoro (POP-00037)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 6
+      },
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Oakland Youth Apprenticeship Pipeline | Status announced | phase pilot-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 40
+      },
+      {
+        "score": 45,
+        "kind": "vote",
+        "label": "Oakland Youth Apprenticeship Pipeline | Backlog processing completion + town hall C106",
+        "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 41
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "sentiment/communityEngagement/retail | Oakland Youth Apprenticeship Pipeline is pilot-active — ongoing workforce effects in West Oakland, East Oakland, Fruitvale",
+        "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 47
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Oakland Youth Apprenticeship Pipeline sitting, nothing free (-2); decay toward 50 (-1)",
+        "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+        "hood": "D1",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 49
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Oakland Youth Apprenticeship Pipeline sitting, nothing free (-2); decay toward 50 (-1)",
+        "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+        "hood": "D3",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 51
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+      "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-007)",
+      "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+      "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\""
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "text": "Angela Reyes plans to explore the advancement of the Oakland Youth Apprenticeship Pipeline from implementation-active to pilot-active. She aims to understand the significance of this milestone and its potential impact on the community. Her approach will focus on the education-stability angle, ensuring she uses only the supplied youth, school, education, or apprenticeship record without inventing any details.",
+    "plan": {
+      "chase": "Angela Reyes plans to explore the advancement of the Oakland Youth Apprenticeship Pipeline from implementation-active to pilot-active. She aims to understand the significance of this milestone and its potential impact on the community. Her approach will focus on the education-stability angle, ensuring she uses only the supplied youth, school, education, or apprenticeship record without inventing any details.",
+      "focus": "Education-stability",
+      "why": "The initiative's advancement is a notable milestone that deserves coverage, and understanding its implications can provide valuable insights into community development.",
+      "checks": [
+        "Ensure all information is sourced from the supplied records.",
+        "Avoid adding any details not present in the supplied entries."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00037",
+          "question": "What are the key factors that contributed to the advancement of the Oakland Youth Apprenticeship Pipeline?",
+          "basis": "assignment"
+        },
+        {
+          "pop": "POP-00588",
+          "question": "How does the pilot-active phase differ from the implementation-active phase in terms of community impact?",
+          "basis": "assignment"
+        },
+        {
+          "pop": "POP-00789",
+          "question": "What challenges were faced during the transition from implementation-active to pilot-active, and how were they addressed?",
+          "basis": "assignment"
+        }
+      ],
+      "interpretation": "The advancement of the Oakland Youth Apprenticeship Pipeline signifies a critical step in enhancing youth education and employment opportunities in the community. This milestone could potentially lead to improved stability and access to resources for participants.",
+      "unverifiedLead": [
+        "What specific outcomes are expected from the pilot-active phase?",
+        "How will the community be involved in the pilot program?"
+      ],
+      "closeQuestion": "What long-term benefits does the Oakland Youth Apprenticeship Pipeline aim to achieve for the community?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Marcus Webb (OEWD Program Director (Stabilization Fund)): 57 households now stabilized",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-project-stabilization-fund_2026-09-01.json",
+      "popids": [
+        "POP-00790"
+      ]
+    },
+    {
+      "label": "Elena Soria Dominguez (Transit Hub Planning Lead): The first Phase II visioning session will happen this week at St. Esperanza Parish in Fruitvale, foc",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-project-transit-hub_2026-09-01.json",
+      "popids": [
+        "POP-00791"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    },
+    {
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00136",
+        "POP-00154",
+        "POP-01080"
+      ]
+    }
+  ],
+  "laneEntries": 60,
+  "ranAt": "2026-09-01T11:15:39.045Z"
+}

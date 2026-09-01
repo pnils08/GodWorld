@@ -1,0 +1,558 @@
+{
+  "date": "2026-09-01",
+  "cycle": 105,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "beatDomain": "EDUCATION",
+      "persona": "angela-reyes",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+        "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+        "kind": "anomaly",
+        "angle": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+        "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00037",
+          "POP-00588",
+          "POP-00789"
+        ],
+        "citizens": [
+          "Darren Briggs (POP-00588)",
+          "Elias Varek (POP-00789)",
+          "Brenda Okoro (POP-00037)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "angela-reyes",
+      "pulse": {
+        "className": "education-youth",
+        "score": 45,
+        "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "source": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active"
+        ],
+        "forbidden": [
+          "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+        ],
+        "schema": "EDUCATION-STABILITY-BRIEF-1",
+        "method": "PROGRAM_CONTINUITY_ACCESS",
+        "missing": [
+          "a named student, teacher, family member, participant, or program staff member",
+          "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+          "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+        ],
+        "stabilityEvidence": {
+          "state": "UNESTABLISHED",
+          "participants": [],
+          "facts": [],
+          "src": null
+        }
+      },
+      "wakePackage": "ANGELA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Trevor Shimizu",
+      "popid": "POP-00155",
+      "beatDomain": "INFRASTRUCTURE",
+      "persona": "trevor-shimizu",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+        "label": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00744",
+          "POP-00766",
+          "POP-01057"
+        ],
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Manjit Singh (POP-00766)",
+          "Nina Reyes (POP-01057)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "trevor-shimizu",
+      "pulse": {
+        "className": "infrastructure-transit",
+        "score": 45,
+        "label": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "hood": "Fruitvale",
+        "source": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying."
+        ],
+        "forbidden": [
+          "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
+        ],
+        "schema": "SYSTEMS-BRIEF-1",
+        "method": "INCIDENT_LINK_WARNING",
+        "missing": [
+          "timestamp and duration unless supplied by the source",
+          "second system fact and evidence linking it to the assigned condition",
+          "responsible agency, maintenance action, capacity, load, or service effect unless named by the source"
+        ],
+        "cascade": {
+          "state": "UNESTABLISHED",
+          "facts": [],
+          "link": null,
+          "src": null
+        }
+      },
+      "wakePackage": "TREVOR-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "P Slayer",
+      "popid": "POP-00008",
+      "beatDomain": "SPORTS",
+      "persona": "p-slayer",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "label": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "kind": "injury-load",
+        "angle": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hookLine": "Grief without inventing medical private life — we demanded too much.",
+        "hood": "Jack London",
+        "team": "A's",
+        "eventKind": "game-result",
+        "popids": [
+          "POP-00018",
+          "POP-00001",
+          "POP-00003",
+          "POP-00019",
+          "POP-00528"
+        ],
+        "citizens": [
+          "Benji Dillon — Pitcher, Oakland A's Legend, Rockridge",
+          "Vinnie Keane — Designated Hitter, Oakland A's Legend, Grand Lake",
+          "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison, Jack London",
+          "Isley Kelley — Shortstop, Oakland A's Legend, Rockridge",
+          "Farewell Gone Well",
+          "Vinnie Keane Benji",
+          "Deacon Seymour — Manager, Oakland A's, Lake Merritt"
+        ],
+        "pulseClass": "injury-load",
+        "pulseScore": 67,
+        "fanCharge": "grief",
+        "bagModeIds": [
+          3,
+          6,
+          7
+        ]
+      },
+      "pslayerSlice": true,
+      "fanHeat": true,
+      "pulse": {
+        "className": "injury-load",
+        "classes": [
+          "injury-load",
+          "result-pulse",
+          "win-streak",
+          "award-board"
+        ],
+        "score": 67,
+        "label": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "late-season",
+        "feedCycle": 105,
+        "record": "127-35",
+        "streak": "W2",
+        "mood": "reflective",
+        "fanSentiment": "high",
+        "neighborhood": "Jack London",
+        "notes": "The farewell season reaches its final regular season curtain call as the As play host to the NL's top team in the Rockies. As Vinnie Keane HOF career comes to its close a legacy that reshaped Oakland stands to honor it. Manager Deacon Seymour in his rookie campaign appeared to call all the right shots as the As rewrote the history books with the most single wins in a season finishing 127-35. Seymo",
+        "stats": "Benji Dillon, 5.1 IP/8K/2H, Vinnie Keane 4-5/HR/2B/3RBI, Mark Aitken 2HR/6RBI"
+      },
+      "charge": {
+        "bagModes": [
+          {
+            "id": 3,
+            "name": "Friction Pivot"
+          },
+          {
+            "id": 6,
+            "name": "Superman We Asked Him to Be"
+          },
+          {
+            "id": 7,
+            "name": "We Still Believe / We're Done"
+          }
+        ],
+        "fanCharge": "grief",
+        "foilNumber": "1 IP",
+        "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+        "palette": [
+          "fury",
+          "euphoria",
+          "dread",
+          "defiance",
+          "confession",
+          "grief",
+          "dare"
+        ]
+      },
+      "wakePackage": "PSLAYER-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "angle": "What the supplied C105 line card establishes, and what history remains unsupplied.",
+        "label": "A's — game-result — supplied C105 line card",
+        "hookLine": "A's — game-result — supplied C105 line card",
+        "hood": "Jack London",
+        "pulseClass": "era-door",
+        "team": "A's",
+        "eventKind": "game-result",
+        "closingNote": "elegy",
+        "citizens": [
+          "Benji Dillon (POP-00018)",
+          "Vinnie Keane (POP-00001)",
+          "Mark Aitken (POP-00003)",
+          "Isley Kelley (POP-00019)"
+        ],
+        "popids": [
+          "POP-00018",
+          "POP-00001",
+          "POP-00003",
+          "POP-00019"
+        ],
+        "ref": "world_summary_c105.md ## Sports",
+        "cycle": 105
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "era-door",
+        "score": 88,
+        "label": "A's — game-result — supplied C105 line card",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "late-season",
+        "storyAngle": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hasStats": true,
+        "record": "127-35",
+        "streak": "W2",
+        "foilNumber": "1 IP",
+        "closingNote": "elegy",
+        "feedCycle": 105
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "closingNote": "elegy",
+        "claim": "Present fact: 1 IP on the feed. Archive claim: place this against time — A Farewell Gone Well:Vinnie Keane Benji Dillon Close toward elegy."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Benji Dillon line (feed): 5.1 IP/8K/2H",
+          "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+          "Mark Aitken line (feed): 2HR/6RBI",
+          "Team record (feed): 127-35 · streak W2",
+          "Event (feed): A's — game-result (late-season)",
+          "Cycle: C105"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "closingNote": "elegy",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: 1 IP on the feed. Archive claim: place this against time — A Farewell Gone Well:Vinnie Keane Benji Dillon Close toward elegy.",
+        "foilNumber": "1 IP",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ]
+      },
+      "wakePackage": "HAL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Mason Ortega",
+      "popid": "POP-00160",
+      "beatDomain": "CULTURE",
+      "persona": "mason-ortega",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Merritt Reserve appears on the evening restaurant list in Lake Merritt. What was happening there is not established.",
+        "label": "Merritt Reserve (Lake Merritt)",
+        "hookLine": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+        "hood": "Lake Merritt",
+        "pulseClass": "named-restaurant",
+        "citizens": [],
+        "popids": [],
+        "named": "Merritt Reserve",
+        "venue": "Merritt Reserve",
+        "ref": "world_summary ## Evening Texture · Restaurants",
+        "cycle": 105
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Merritt Reserve (Lake Merritt)"
+      },
+      "recommend": {
+        "bag": "ground",
+        "slug": "maria-keen",
+        "name": "Maria Keen",
+        "popid": "POP-00013",
+        "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+        "reason": "top pulse fame-sighting → ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Benji Dillon at Dimond Pharmacy (Dimond)"
+      },
+      "bag": "kitchen",
+      "wakePackage": "MASON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+        "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "hood": "Rockridge",
+        "pulseClass": "hood-rising",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## What Moved · trajectory",
+        "cycle": 105
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "hood-rising",
+        "score": 33,
+        "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "hood": "Rockridge",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "retail": 10.51,
+        "retailDelta": null
+      },
+      "prewrite": {
+        "pulseClass": "hood-rising",
+        "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+        "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "anchorFacts": [
+          "HOOD: Rockridge",
+          "TRAJECTORY: rising",
+          "MAGNITUDE (translate, do not lead): 5",
+          "RETAIL VITALITY (scene color): 10.51",
+          "NAMED BUSINESSES (sources only): Cozy Pot; HotSlice Pizza; Festive Fireside",
+          "EVENING VENUE: Cozy Pot (restaurant)",
+          "EVENING VENUE: HotSlice Pizza (fast-food)"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "story": {
+        "ref": "undocked:undocked-pop00143-Y3C1",
+        "label": "UNDOCKED: Clarissa Dane — up 72 on the night",
+        "kind": "undocked",
+        "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+        "citizens": [
+          "Clarissa Dane — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00143"
+        ],
+        "hood": "Fruitvale"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Angela Reyes",
+        "persona": "angela-reyes",
+        "wakePackage": "ANGELA-LEP2-1"
+      },
+      {
+        "name": "Trevor Shimizu",
+        "persona": "trevor-shimizu",
+        "wakePackage": "TREVOR-LEP2-1"
+      },
+      {
+        "name": "P Slayer",
+        "persona": "p-slayer",
+        "wakePackage": "PSLAYER-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-1"
+      },
+      {
+        "name": "Mason Ortega",
+        "persona": "mason-ortega",
+        "wakePackage": "MASON-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-27",
+    "top": {
+      "score": 38,
+      "className": "anomaly",
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (implementation-active, safety) but 3 affected neighborhoods show contradicting CrimeIndex"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c105.json"
+  },
+  "pslayerEnrich": {
+    "enriched": true,
+    "reason": "pulse=injury-load score=67 charge=grief"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=era-door score=88 close=elegy"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=hood-rising score=33 hood=Rockridge"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "mason-ortega",
+        "bag": "kitchen",
+        "pulse": "named-restaurant",
+        "score": 20
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=2",
+    "seats": [
+      {
+        "persona": "angela-reyes",
+        "domain": "education-youth",
+        "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active"
+      },
+      {
+        "persona": "trevor-shimizu",
+        "domain": "infrastructure-transit",
+        "label": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying."
+      }
+    ]
+  },
+  "builtAt": "2026-09-01T11:15:08.576Z"
+}

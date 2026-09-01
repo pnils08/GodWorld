@@ -1,0 +1,188 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00790",
+    "name": "Marcus Webb",
+    "role": "OEWD Program Director (Stabilization Fund)",
+    "officeId": "PROJ-STABFUND",
+    "district": null,
+    "faction": null,
+    "agentDir": "civic-project-stabilization-fund",
+    "initiative": "INIT-001",
+    "dials": {
+      "approval": null
+    }
+  },
+  "task": {
+    "a": "initiative-week",
+    "goal": "Month-six disbursement review + canvass launch"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 130,
+    "label": "West Oakland Stabilization Fund — Month-six disbursement review + canvass launch",
+    "lever": "Month-six disbursement review + canvass launch",
+    "hood": "West Oakland",
+    "initiative": "INIT-001",
+    "vsCity": {
+      "sentiment": 0.77,
+      "citySentiment": 0.8854545454545455,
+      "crime": 1.16,
+      "cityCrime": 0.6990909090909091,
+      "heat": 20.763636363636365,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "Month-six disbursement review + canvass launch",
+    "lineFacts": [
+      "West Oakland Stabilization Fund is in disbursement-active; budget $28M — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+      "due: Month-six disbursement review + canvass launch",
+      "INIT-001 — disbursement-active — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105. — Month-six disbursement review + canvass launch",
+      "West Oakland crime: property 56, violent 60, incidents 12 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "West Oakland: sentiment 0.77 vs city 0.885; crime index 1.16 vs city 0.699; retail 6.17; housing pressure 0; steady; momentum 3"
+    ],
+    "missing": [
+      "no named applicant households — do not invent who got the check",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "initiative-heat",
+    "hoods": [
+      "West Oakland"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00164",
+        "name": "Celeste Tran",
+        "neighborhood": "West Oakland",
+        "role": "Journalist, Social Trends",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-six disbursement review + canvass launch"
+      },
+      {
+        "pop": "POP-00187",
+        "name": "Isla Sike",
+        "neighborhood": "West Oakland",
+        "role": "Domestic Violence Shelter Director",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-six disbursement review + canvass launch"
+      },
+      {
+        "pop": "POP-00188",
+        "name": "Simone Cleng",
+        "neighborhood": "West Oakland",
+        "role": "Community Organizer",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-six disbursement review + canvass launch"
+      },
+      {
+        "pop": "POP-00190",
+        "name": "Jackson Sift",
+        "neighborhood": "West Oakland",
+        "role": "Ex-Offender Reentry Counselor",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in West Oakland — West Oakland Stabilization Fund — Month-six disbursement review + canvass launch"
+      }
+    ],
+    "businesses": [
+      {
+        "id": "BIZ-00094",
+        "name": "West Oakland Stabilization Fund",
+        "neighborhood": "West Oakland",
+        "src": "world_summary lifestyle-sighting"
+      }
+    ],
+    "churches": [],
+    "sources": [
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-okoro",
+        "initiative": "INIT-001",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-project-stabilization-fund",
+        "initiative": "INIT-001",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-ind-swing",
+        "initiative": "INIT-001",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-crc-faction",
+        "initiative": "INIT-001",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      }
+    ]
+  },
+  "known": [
+    {
+      "id": "F-INIT-001",
+      "t": "FACT",
+      "text": "West Oakland Stabilization Fund is in disbursement-active; budget $28M — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-cabinet-decisions_c104json",
+      "t": "FACT",
+      "text": "INIT-001 — disbursement-active — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105. — Month-six disbursement review + canvass launch",
+      "src": "output/city-civic-database/initiatives/stabilization-fund/decisions_c104.json"
+    },
+    {
+      "id": "F-crime-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland crime: property 56, violent 60, incidents 12 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-WestOakland",
+      "t": "FACT",
+      "text": "West Oakland: sentiment 0.77 vs city 0.885; crime index 1.16 vs city 0.699; retail 6.17; housing pressure 0; steady; momentum 3",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "SAFETY — neighborhood-crisis — West Oakland: West Oakland under strain: retail vitality 3.5 (city 6.4); crime index 1.18 (city 0.71) (impactScore 15)",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

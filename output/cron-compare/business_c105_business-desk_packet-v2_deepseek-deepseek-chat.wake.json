@@ -13,7 +13,7 @@
     "beatDomain": "ECONOMIC"
   },
   "laneEntries": 50,
-  "quotesLanded": 2,
+  "quotesLanded": 3,
   "disposition": "staged",
   "rheaPass": true,
   "rheaFlagCount": 0,
@@ -23,10 +23,10 @@
   },
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/staged/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.staged.md",
+  "article": "output/cron-compare/staged/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.staged-2320.md",
   "selfRecord": {
     "recorded": true,
-    "out": "g/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: Rockridge's Retail Pulse Quickens\"\n}"
+    "out": "env' }\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: Depak Ying adjusts the window blinds at Cozy Pot to let in the morning light. The Rockridge restaura\"\n}"
   },
-  "ranAt": "2026-08-31T23:18:05.627Z"
+  "ranAt": "2026-09-01T23:20:28.628Z"
 }

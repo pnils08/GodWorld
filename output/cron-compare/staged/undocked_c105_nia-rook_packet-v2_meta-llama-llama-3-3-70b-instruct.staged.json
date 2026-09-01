@@ -1,0 +1,62 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "105",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Clarissa Dane",
+        "role": "quoted-source",
+        "popid": "POP-00143"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Rafael Pilgrim",
+        "role": "quoted-source",
+        "popid": "POP-00644"
+      },
+      {
+        "name": "Tomas Renteria",
+        "role": "quoted-source",
+        "popid": "POP-00744"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "fruitvale-clarissa-dane-undocked",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.",
+        "sourceRef": "citizenVoice PRESS Clarissa Dane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-9fb3c5ec9ae1",
+    "draftSha256": "f233994e40d9c5188fd22d3ea9865771438621fdf1935ba4374d6f8dbbe418e5",
+    "verdict": "output/cron-compare/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-01T23:20:59.442Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-01T23:21:00.003Z"
+}

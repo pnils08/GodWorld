@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "f233994e40d9c5188fd22d3ea9865771438621fdf1935ba4374d6f8dbbe418e5",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, and exact quotes match ledger and packet provenance without canon contradictions.",
+  "review": {
+    "profileId": "nia-rook-undocked-recap-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "packageVersion": "NIAROOK-UNDOCKED-1",
+    "manifestId": "AM-9fb3c5ec9ae1",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Clarissa Dane",
+      "Rafael Pilgrim",
+      "Rick Walker",
+      "Tomas Renteria"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0095,
+  "durationMs": 8050,
+  "parseError": false,
+  "ranAt": "2026-09-01T23:20:59.442Z"
+}

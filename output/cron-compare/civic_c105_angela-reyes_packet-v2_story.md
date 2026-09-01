@@ -13,3 +13,10 @@ Angela Reyes plans to explore the advancement of the Oakland Youth Apprenticeshi
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
 - Darren Briggs (POP-00588): "I’ve heard about the Oakland Youth Apprenticeship Pipeline starting up, and it feels like a step in the right direction for keeping kids connected to opportunities. Stability in education seems to come from having clear pathways like this."
 
+## §4 THE ARTICLE (wake 3)
+- draft: output/cron-compare/staged/civic_c105_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md
+- disposition: staged
+- rhea: PASS
+- self-score footer: present
+- tool use: none
+

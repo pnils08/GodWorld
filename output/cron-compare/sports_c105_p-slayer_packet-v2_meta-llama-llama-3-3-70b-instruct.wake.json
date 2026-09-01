@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "configuredWriterModel": "meta-llama/llama-3.3-70b-instruct",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "p-slayer",
+  "byline": {
+    "name": "P Slayer",
+    "popid": "POP-00008",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "th/.env' }\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: I still remember the night I met Benji Dillon at the bar near Jack London Square. The A's had just w\"\n}"
+  },
+  "ranAt": "2026-09-01T23:17:22.542Z"
+}

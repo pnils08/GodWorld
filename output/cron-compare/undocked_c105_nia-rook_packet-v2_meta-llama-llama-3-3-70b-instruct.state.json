@@ -1,0 +1,364 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-01076",
+    "name": "Nia Rook",
+    "role": "desk reporter",
+    "desk": "undocked"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+    "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+    "voice": null,
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "undocked",
+    "hood": "Fruitvale",
+    "src": "undocked:undocked-pop00143-Y3C1",
+    "plan": {
+      "focus": "The impact of Clarissa Dane's episode on her reputation",
+      "closeQuestion": "What will be the lasting impact of Clarissa Dane's episode on her standing in the city?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00143",
+        "name": "Clarissa Dane",
+        "profile": "Clarissa Dane — UNDOCKED cast pilot",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "profile": "Rafael Pilgrim",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      },
+      {
+        "pop": "POP-00744",
+        "name": "Tomas Renteria",
+        "profile": "Tomas Renteria",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00143-ec1278150b",
+        "pop": "POP-00143",
+        "name": "Clarissa Dane",
+        "quote": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.",
+        "factIds": [
+          "F-b7a853efba64",
+          "F-e657add0ed97",
+          "F-5361d31c74cb"
+        ],
+        "src": "packet.W2[POP-00143]"
+      },
+      {
+        "id": "Q-POP-00198-d9d80ca87f",
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "quote": "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale.",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00644-f74554bd68",
+        "pop": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "quote": "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation.",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "src": "packet.W2[POP-00644]"
+      },
+      {
+        "id": "Q-POP-00744-3c0862cc84",
+        "pop": "POP-00744",
+        "name": "Tomas Renteria",
+        "quote": "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation.",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "src": "packet.W2[POP-00744]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "There's a sense that Clarissa Dane's performance has raised questions about her future",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+      "src": "undocked:undocked-pop00143-Y3C1",
+      "id": "F-e657add0ed97"
+    },
+    {
+      "t": "FACT",
+      "text": "Clarissa Dane — UNDOCKED cast pilot",
+      "src": "Simulation_Ledger profile for POP-00143",
+      "id": "F-5361d31c74cb"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "nia-rook-undocked-recap-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a gate-approved UNDOCKED episode into the city's entertainment conversation — who's up, who's down, what Oakland argues about tomorrow. Arc-tracking recap energy; personality-forward. NOT hard news, NOT sports analytics, NOT civic process.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person recap with first-person flashes — entertainment beat, having fun on purpose",
+      "targetWords": "350-600",
+      "opening": "a watch-party, bar, break-room, or street moment of the city reacting to the episode",
+      "closing": "the one sentence the hallway will argue about tomorrow"
+    },
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona, arc memory of prior episodes she herself filed, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "no standings, records, or streaks beyond what the supplied facts state",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "canonBlockers": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math not present in the supplied facts"
+    ]
+  },
+  "manifest": {
+    "id": "AM-9fb3c5ec9ae1",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-e657add0ed97",
+        "t": "FACT",
+        "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
+        "src": "undocked:undocked-pop00143-Y3C1"
+      },
+      {
+        "id": "F-5361d31c74cb",
+        "t": "FACT",
+        "text": "Clarissa Dane — UNDOCKED cast pilot",
+        "src": "Simulation_Ledger profile for POP-00143"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00143-ec1278150b",
+        "speakerId": "POP-00143",
+        "speakerName": "Clarissa Dane",
+        "text": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.",
+        "factIds": [
+          "F-b7a853efba64",
+          "F-e657add0ed97",
+          "F-5361d31c74cb"
+        ],
+        "src": "packet.W2[POP-00143]"
+      },
+      {
+        "id": "Q-POP-00198-d9d80ca87f",
+        "speakerId": "POP-00198",
+        "speakerName": "Rick Walker",
+        "text": "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale.",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00644-f74554bd68",
+        "speakerId": "POP-00644",
+        "speakerName": "Rafael Pilgrim",
+        "text": "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation.",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "src": "packet.W2[POP-00644]"
+      },
+      {
+        "id": "Q-POP-00744-3c0862cc84",
+        "speakerId": "POP-00744",
+        "speakerName": "Tomas Renteria",
+        "text": "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation.",
+        "factIds": [
+          "F-e657add0ed97"
+        ],
+        "src": "packet.W2[POP-00744]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00143",
+        "name": "Clarissa Dane",
+        "profile": "Clarissa Dane — UNDOCKED cast pilot",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00644",
+        "name": "Rafael Pilgrim",
+        "profile": "Rafael Pilgrim",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00744",
+        "name": "Tomas Renteria",
+        "profile": "Tomas Renteria",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Nia Rook",
+        "text": "There's a sense that Clarissa Dane's performance has raised questions about her future",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "an unnamed bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues — no invented named venue, entity, or event",
+      "the reporter's own recap persona, arc memory of prior episodes she herself filed, and who's-up-who's-down framing",
+      "unnamed audience argument and aspiration lines used as city color, never as attributed quotes or measured sentiment",
+      "metaphor and emotional inference grounded in a supplied typed fact from the episode feed"
+    ],
+    "textureConditions": [
+      "every named person, cast pilot, venue, business, and institution must come from the Packet",
+      "episode facts only from the typed feed fields (CreditsDelta, Systems, CombatEvents, MishapCount, Magnitude, Flags) — a blank CreditsDelta is unsettled, never zero and never invented",
+      "pilot speech only from the wake-2 packet interviews — no other quote source exists for this lane",
+      "no standings, records, or streaks beyond what the supplied facts state",
+      "unnamed audience reaction stays rhetorical — it must not become a count, a poll, or a named person"
+    ],
+    "forbiddenClaimClasses": [
+      "video game",
+      "videogame",
+      "simulation",
+      "engine",
+      "MCP",
+      "server",
+      "commander",
+      "tool",
+      "API",
+      "spacemolt-lib",
+      "openrouter",
+      "real-world calendar dates (YYYY-MM-DD)",
+      "captains_log",
+      "leaderboard math not present in the supplied facts"
+    ]
+  }
+}

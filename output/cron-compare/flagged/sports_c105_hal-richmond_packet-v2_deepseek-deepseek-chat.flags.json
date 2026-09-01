@@ -1,0 +1,22 @@
+{
+  "draft": "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat.md",
+  "flags": [
+    {
+      "claim": "Isley Kelley, who hit two home runs and drove in six runs himself",
+      "issue": "Direct contradiction of sports ground truth: Mark Aitken hit 2 HRs and had 6 RBIs, whereas the feed explicitly states Isley Kelley fell short of hitting a home run and ended the regular season at 499 career home runs.",
+      "severity": "high"
+    },
+    {
+      "claim": "Keane grounded out softly to shortstop. The inning ended.",
+      "issue": "Contradicts game recap note stating Keane went 4-5 and hit a towering 3-run home run in his very last regular season at-bat.",
+      "severity": "med"
+    },
+    {
+      "claim": "Four hundred and twenty-seven home runs.",
+      "issue": "Contradicts canonical career total of 436 home runs for Vinnie Keane.",
+      "severity": "med"
+    }
+  ],
+  "contamination": [],
+  "summary": "Failed sports verification: attributes Mark Aitken's 2 HR / 6 RBI game line to Isley Kelley, directly contradicting Kelley's documented 499-homer pursuit."
+}

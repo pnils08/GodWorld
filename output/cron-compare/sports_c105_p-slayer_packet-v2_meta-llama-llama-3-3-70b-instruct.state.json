@@ -1,0 +1,439 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00008",
+    "name": "P Slayer",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+    "approach": "Fan-heat approach (P Slayer pulse): do NOT open from the FO press release or the award board. Open from gut or Oakland sensory (bar, lot, bleacher row, BART after). First-person I/we only. Pick 1–2 charge-bag modes from this slice. Friction pivot required — name the counter-argument, kill it. ONE real foil number max (from FoilNumber / AnchorFacts); never invent x-stats or roster moves. Hook PriorTake when present — eat it or double down (\"I was wrong\" is craft). End on charge that sticks: dare, confession, or update. Not Anthony. Not Hal. Not multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "fan-heat",
+      "fanCharge": "grief",
+      "bagModes": [
+        "3 Friction Pivot",
+        "6 Superman We Asked Him to Be",
+        "7 We Still Believe / We're Done"
+      ],
+      "friction": "Grief without inventing medical private life — we demanded too much.",
+      "centralFeeling": "Oakland should feel the cost of what we asked a man to carry.",
+      "priorTake": "NONE — write cold or invent no prior; wall may still inject at wake",
+      "sceneRule": "You may invent unnamed bar / lot / BART / bleacher texture that contradicts nothing on this slice. Do not invent star players, contracts, stats, or quotes. Named people stay on PLAYERS list or Tribune colleagues (Anthony, Hal, Mags) as foils."
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "injury-load",
+    "hood": "Jack London",
+    "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon",
+    "plan": {
+      "focus": "The fan's perspective on Vinnie Keane's legacy",
+      "closeQuestion": "How will the city of Oakland remember Vinnie Keane's legacy?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00019",
+        "name": "Isley Kelley",
+        "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00001-bd44630772",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "I feel like the fans have been with me every step of the way, and I'm grateful for their support - it means a lot to me to have them behind me throughout my career.",
+        "factIds": [
+          "F-2b3e2e3d075f"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00018-c900e4eb69",
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "quote": "I've seen how much Vinnie Keane's legacy means to the fans, it's like they're still feeling the impact of his presence on the field even after he's gone. As a player, I can understand why they'd feel that way, he was an incredible teammate and an even better person. I think the fans are still trying to process their emotions about his legacy, and I can respect that.",
+        "factIds": [
+          "F-12cc406fc34f",
+          "F-b9079c1674f6"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00003-5a9978450a",
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "quote": "I've seen the fans in Jack London really come together to celebrate Vinnie Keane's legacy, it's like the whole neighborhood is still feeling the impact of his time with the A's. As someone who's been part of this community for a while, it's amazing to see how much he meant to the people here.",
+        "factIds": [
+          "F-12cc406fc34f",
+          "F-b9079c1674f6"
+        ],
+        "src": "packet.W2[POP-00003]"
+      },
+      {
+        "id": "Q-POP-00019-bd94bf3040",
+        "pop": "POP-00019",
+        "name": "Isley Kelley",
+        "quote": "I've seen the fans around Rockridge and they all seem to have a lot of respect for Vinnie Keane's legacy, it's like he's still part of the team even after all these years. I feel like his impact on the game is still felt, and I'm not just saying that because I'm an A's legend myself.",
+        "factIds": [
+          "F-12cc406fc34f",
+          "F-c5b1f326d0eb"
+        ],
+        "src": "packet.W2[POP-00019]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The emotional toll of Vinnie Keane's farewell season on the fans",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "id": "F-12cc406fc34f"
+    },
+    {
+      "t": "FACT",
+      "text": "Grief without inventing medical private life — we demanded too much.",
+      "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "id": "F-b9079c1674f6"
+    },
+    {
+      "t": "FACT",
+      "text": "StoryAngle (feed): A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "id": "F-34748fec6389"
+    },
+    {
+      "t": "FACT",
+      "text": "Team record (feed): 127-35 · streak W2",
+      "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "id": "F-e33b74bc75fb"
+    },
+    {
+      "t": "FACT",
+      "text": "Stats (feed): Benji Dillon, 5.1 IP/8K/2H, Vinnie Keane 4-5/HR/2B/3RBI, Mark Aitken 2HR/6RBI",
+      "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "id": "F-6cde78608dbe"
+    },
+    {
+      "t": "FACT",
+      "text": "Event: A's — game-result (late-season)",
+      "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "id": "F-f10c657a287e"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+      "src": "Simulation_Ledger profile for POP-00001",
+      "id": "F-2b3e2e3d075f"
+    },
+    {
+      "t": "FACT",
+      "text": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+      "src": "Simulation_Ledger profile for POP-00019",
+      "id": "F-c5b1f326d0eb"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Turn a Packet-backed sports result or roster move into fan consequence. Owning or doubling down on a prior take and applying fan or front-office pressure are success; press-box analysis and tidy resolution are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person I/we fan-heat column",
+      "targetWords": "400-700",
+      "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment",
+      "closing": "a dare, confession, or update with the central friction still live"
+    },
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "canonBlockers": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-82d1ff54cbe8",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-12cc406fc34f",
+        "t": "FACT",
+        "text": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon"
+      },
+      {
+        "id": "F-b9079c1674f6",
+        "t": "FACT",
+        "text": "Grief without inventing medical private life — we demanded too much.",
+        "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon"
+      },
+      {
+        "id": "F-34748fec6389",
+        "t": "FACT",
+        "text": "StoryAngle (feed): A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon"
+      },
+      {
+        "id": "F-e33b74bc75fb",
+        "t": "FACT",
+        "text": "Team record (feed): 127-35 · streak W2",
+        "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon"
+      },
+      {
+        "id": "F-6cde78608dbe",
+        "t": "FACT",
+        "text": "Stats (feed): Benji Dillon, 5.1 IP/8K/2H, Vinnie Keane 4-5/HR/2B/3RBI, Mark Aitken 2HR/6RBI",
+        "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon"
+      },
+      {
+        "id": "F-f10c657a287e",
+        "t": "FACT",
+        "text": "Event: A's — game-result (late-season)",
+        "src": "Oakland_Sports_Feed cycle 105; world_summary_c105.md \"## Sports\" · A Farewell Gone Well:Vinnie Keane Benji Dillon"
+      },
+      {
+        "id": "F-2b3e2e3d075f",
+        "t": "FACT",
+        "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "Simulation_Ledger profile for POP-00001"
+      },
+      {
+        "id": "F-c5b1f326d0eb",
+        "t": "FACT",
+        "text": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+        "src": "Simulation_Ledger profile for POP-00019"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00001-bd44630772",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "I feel like the fans have been with me every step of the way, and I'm grateful for their support - it means a lot to me to have them behind me throughout my career.",
+        "factIds": [
+          "F-2b3e2e3d075f"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00018-c900e4eb69",
+        "speakerId": "POP-00018",
+        "speakerName": "Benji Dillon",
+        "text": "I've seen how much Vinnie Keane's legacy means to the fans, it's like they're still feeling the impact of his presence on the field even after he's gone. As a player, I can understand why they'd feel that way, he was an incredible teammate and an even better person. I think the fans are still trying to process their emotions about his legacy, and I can respect that.",
+        "factIds": [
+          "F-12cc406fc34f",
+          "F-b9079c1674f6"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00003-5a9978450a",
+        "speakerId": "POP-00003",
+        "speakerName": "Mark Aitken",
+        "text": "I've seen the fans in Jack London really come together to celebrate Vinnie Keane's legacy, it's like the whole neighborhood is still feeling the impact of his time with the A's. As someone who's been part of this community for a while, it's amazing to see how much he meant to the people here.",
+        "factIds": [
+          "F-12cc406fc34f",
+          "F-b9079c1674f6"
+        ],
+        "src": "packet.W2[POP-00003]"
+      },
+      {
+        "id": "Q-POP-00019-bd94bf3040",
+        "speakerId": "POP-00019",
+        "speakerName": "Isley Kelley",
+        "text": "I've seen the fans around Rockridge and they all seem to have a lot of respect for Vinnie Keane's legacy, it's like he's still part of the team even after all these years. I feel like his impact on the game is still felt, and I'm not just saying that because I'm an A's legend myself.",
+        "factIds": [
+          "F-12cc406fc34f",
+          "F-c5b1f326d0eb"
+        ],
+        "src": "packet.W2[POP-00019]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00003",
+        "name": "Mark Aitken",
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00019",
+        "name": "Isley Kelley",
+        "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "P Slayer",
+        "text": "The emotional toll of Vinnie Keane's farewell season on the fans",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
+      "the reporter's own presence, gut reaction, or sensory observation",
+      "collective I or we used as columnist rhetoric and emotional stance, not as measured public sentiment or a poll",
+      "a rhetorical counterargument from unnamed fans used as an argument foil, not as an attributed quote",
+      "metaphor and emotional inference grounded in a supplied fact"
+    ],
+    "textureConditions": [
+      "I or we must not claim a verified collective sentiment, count, gathering, or event",
+      "an unnamed counterargument must remain rhetorical rather than becoming a quote or sourced statement",
+      "scene texture must carry no roster move, result, stat, contract, injury, player act, or front-office act",
+      "a prior-take confession or paraphrase requires a Packet-backed prior article or wall entry, and an exact quote requires supplied text",
+      "in-world named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "player, team, roster, statistic, result, and front-office facts still require Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world player, team, venue, business, institution, or organization imported into the city; or an invented person given the authority of an established citizen",
+      "an unsupported roster move, signing, trade, non-move, result, record, streak, award, contract, or front-office act",
+      "an unsupported stat, metric, number, date, duration, or salary",
+      "an unsupported injury, medical, private-life, or mindset claim",
+      "a fabricated player, coach, or front-office quote or interview",
+      "collective fan sentiment presented as measured fact"
+    ]
+  }
+}

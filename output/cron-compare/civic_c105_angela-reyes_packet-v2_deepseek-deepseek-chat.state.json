@@ -1,0 +1,262 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00156",
+    "name": "Angela Reyes",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+    "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "education-stability",
+      "method": "PROGRAM_CONTINUITY_ACCESS",
+      "missing": [
+        "a named student, teacher, family member, participant, or program staff member",
+        "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+        "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+      ],
+      "stabilityEvidence": {
+        "state": "UNESTABLISHED",
+        "participants": [],
+        "facts": [],
+        "src": null
+      },
+      "forbidden": [
+        "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "anomaly",
+    "hood": "West Oakland, East Oakland, Fruitvale",
+    "src": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+    "plan": {
+      "focus": "Education-stability",
+      "closeQuestion": "What long-term benefits does the Oakland Youth Apprenticeship Pipeline aim to achieve for the community?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00588",
+        "name": "Elias Varek (POP-00789)",
+        "profile": "Elias Varek (POP-00789)",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00588-48ac5e32be",
+        "pop": "POP-00588",
+        "name": "Darren Briggs",
+        "quote": "I’ve heard about the Oakland Youth Apprenticeship Pipeline starting up, and it feels like a step in the right direction for keeping kids connected to opportunities. Stability in education seems to come from having clear pathways like this.",
+        "factIds": [
+          "F-c8af5eef9449"
+        ],
+        "src": "packet.W2[POP-00588]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "What specific outcomes are expected from the pilot-active phase?",
+        "usable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "How will the community be involved in the pilot program?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+      "src": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+      "id": "F-c8af5eef9449"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+      "src": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+      "id": "F-bdef102a2290"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-backed school, youth, or apprenticeship Initiative into a warm account of program stability without inventing participants, institutions, access, or outcomes.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "warm, brief third-person education reporting",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
+      "closing": "the next participant, access, continuity, or outcome record still needed"
+    },
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-62620368ea94",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-c8af5eef9449",
+        "t": "FACT",
+        "text": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+        "src": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7"
+      },
+      {
+        "id": "F-bdef102a2290",
+        "t": "FACT",
+        "text": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+        "src": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00588-48ac5e32be",
+        "speakerId": "POP-00588",
+        "speakerName": "Darren Briggs",
+        "text": "I’ve heard about the Oakland Youth Apprenticeship Pipeline starting up, and it feels like a step in the right direction for keeping kids connected to opportunities. Stability in education seems to come from having clear pathways like this.",
+        "factIds": [
+          "F-c8af5eef9449"
+        ],
+        "src": "packet.W2[POP-00588]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00588",
+        "name": "Elias Varek (POP-00789)",
+        "profile": "Elias Varek",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Angela Reyes",
+        "text": "What specific outcomes are expected from the pilot-active phase?",
+        "publishable": false
+      },
+      {
+        "from": "Angela Reyes",
+        "text": "How will the community be involved in the pilot program?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "plain-language translation of a supplied education or youth-program implementation fact",
+      "a careful stability or access question that remains explicitly unanswered",
+      "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
+    ],
+    "textureConditions": [
+      "every named student, teacher, family member, school, program, employer, partner, site, Initiative, Project, office, neighborhood, and organization must come from the Packet",
+      "eligibility, applications, enrollment, attendance, participation, placements, schedules, staffing, funding, support services, retention, completion, learning, credentials, employment, dates, durations, counts, measurements, and outcomes require Packet support",
+      "unestablished stability evidence must remain unestablished; do not manufacture a participant, educator, family, quote, classroom scene, school, employer, or collective experience",
+      "raw tracker status, phase labels, source paths, engine fields, and real-world institutions absent from canon may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented student, teacher, family, participant, staff member, school, employer, partner, site, quote, classroom scene, eligibility rule, application, enrollment, attendance, placement, schedule, staffing level, budget, measurement, credential, completion, learning, employment, or youth outcome",
+      "a named education institution, school, program, employer, partner, office, Project, Initiative, person, neighborhood, or organization not found in the supplied record",
+      "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
+      "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
+    ]
+  }
+}

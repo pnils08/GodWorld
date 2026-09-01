@@ -4,14 +4,14 @@
   "model": "deepseek/deepseek-chat",
   "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 6056,
-  "usageOutputTokens": 362,
+  "usageInputTokens": 13991,
+  "usageOutputTokens": 1234,
   "savedFiles": [
-    "output/cron-compare/sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat.md"
+    "output/cron-compare/sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat.md"
   ],
   "compareAgainst": "output/desk-output/sports_c105.md",
-  "durationMs": 10238,
+  "durationMs": 75217,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-08-31T23:16:44.171Z"
+  "ranAt": "2026-09-01T23:18:37.924Z"
 }

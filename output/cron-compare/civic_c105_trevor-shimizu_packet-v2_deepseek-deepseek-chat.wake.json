@@ -1,0 +1,34 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "trevor-shimizu",
+  "byline": {
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "beatDomain": "INFRASTRUCTURE"
+  },
+  "laneEntries": 60,
+  "quotesLanded": 2,
+  "disposition": "flagged",
+  "rheaPass": null,
+  "rheaFlagCount": null,
+  "contamination": {
+    "fail": true,
+    "findings": [
+      {
+        "check": "real-oakland-leak",
+        "issue": "international-blvd"
+      }
+    ]
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/flagged/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "selfRecord": null,
+  "ranAt": "2026-09-01T23:16:13.798Z"
+}

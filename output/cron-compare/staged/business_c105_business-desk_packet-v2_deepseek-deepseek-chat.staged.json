@@ -5,12 +5,18 @@
   "persona": "business-desk",
   "byline": "Jordan Velez",
   "bylinePopid": "POP-00153",
-  "article": "output/cron-compare/staged/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.staged.md",
+  "article": "output/cron-compare/staged/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.staged-2320.md",
   "bylineUsage": {
-    "recorded": true
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
   },
   "intake": {
     "names": [
+      {
+        "name": "Depak Ying",
+        "role": "quoted-source",
+        "popid": "POP-00210"
+      },
       {
         "name": "Jacob King",
         "role": "quoted-source",
@@ -25,7 +31,7 @@
     "businesses": [],
     "storylines": [
       {
-        "slug": "rockridge-jacob-king-story-signal",
+        "slug": "rockridge-depak-ying-story-signal",
         "verb": "opened"
       }
     ],
@@ -34,19 +40,19 @@
     ],
     "claims": [
       {
-        "claim": "I've been working the line at a restaurant near Cozy Pot for years, and lately there's just more energy—more people out at night, more folks sticking around after dinner to chat. Feels like the whole block's waking up again.",
-        "sourceRef": "citizenVoice PRESS Jacob King"
+        "claim": "I've been serving in Rockridge for years, and lately, I see more faces at Cozy Pot and HotSlice Pizza—regulars and newcomers both. It feels like the neighborhood's settling into something steady, not just a flash in the pan.",
+        "sourceRef": "citizenVoice PRESS Depak Ying"
       }
     ]
   },
   "rhea": {
     "pass": true,
     "model": "google/gemini-3.7-flash",
-    "manifestId": "AM-595ae80d34e6",
-    "draftSha256": "cbd31dbc176d7674460befb43c5d2a4a0afb99f8acc0ccdf4bd1a33a2f2260a1",
+    "manifestId": "AM-981cf43633ab",
+    "draftSha256": "61130b7aeb2a2e5ce97434589f0dbfa6712dc750fe18ab237c22e4d1d5a18f85",
     "verdict": "output/cron-compare/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
-    "ranAt": "2026-08-31T23:17:50.756Z"
+    "ranAt": "2026-09-01T23:20:18.336Z"
   },
   "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
-  "stagedAt": "2026-08-31T23:17:51.173Z"
+  "stagedAt": "2026-09-01T23:20:18.849Z"
 }

@@ -3,12 +3,12 @@
   "cycle": "105",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "cbd31dbc176d7674460befb43c5d2a4a0afb99f8acc0ccdf4bd1a33a2f2260a1",
+  "draftSha256": "61130b7aeb2a2e5ce97434589f0dbfa6712dc750fe18ab237c22e4d1d5a18f85",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "All quotes match exact Wake-3 packet provenance; citizen profiles, venues, and Rockridge economic trajectory align with Cycle 105 ground truth.",
+  "summary": "Draft fully verified against ledger bios, exact quote provenance, and C105 Rockridge rising trajectory.",
   "review": {
     "profileId": "jordan-economic-labor-v1",
     "canonIntegrity": "pass",
@@ -17,25 +17,23 @@
   "reviewProfile": {
     "id": "jordan-economic-labor-v1",
     "packageVersion": "JORDAN-LEP2-1",
-    "manifestId": "AM-595ae80d34e6",
+    "manifestId": "AM-981cf43633ab",
     "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [
+      "Depak Ying",
       "Howard Yell",
       "Jacob King"
     ],
     "unverified": [
-      "College Avenue",
-      "Cozy Pot",
-      "Festive Fireside",
-      "Rockridge's Retail Pulse Quickens"
+      "Cozy Pot"
     ]
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 2,
+      "names": 3,
       "businesses": 0,
       "storylines": 1,
       "hoods": 1,
@@ -46,8 +44,8 @@
     "unbackedQuoted": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0102,
-  "durationMs": 9620,
+  "apiCostUsd": 0.0092,
+  "durationMs": 6514,
   "parseError": false,
-  "ranAt": "2026-08-31T23:17:50.756Z"
+  "ranAt": "2026-09-01T23:20:18.336Z"
 }

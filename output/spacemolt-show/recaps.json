@@ -16,5 +16,11 @@
     "cycle": "104",
     "stem": "undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
     "disposition": "staged"
+  },
+  "undocked-pop00143-Y3C1": {
+    "at": "2026-09-01T23:21:00.005Z",
+    "cycle": "105",
+    "stem": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "disposition": "staged"
   }
 }

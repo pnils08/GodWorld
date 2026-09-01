@@ -1,0 +1,414 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00007",
+    "name": "Hal Richmond",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "What the supplied C105 line card establishes, and what history remains unsupplied.",
+    "approach": "Historian approach (Hal Richmond): first-person reflective — literary, not wire, not bleacher rage. Present fact first (feed-true: StoryAngle, Stats, record), then era echo. An era echo may name a person, place, team, event, season, or statistic only when the Packet supplies it; otherwise mark the echo missing. Pick 1–2 archive-bag modes. Spell weighty numbers as poetry of time, not scouting grades. End on the closing palette note in this slice (continuity, break, quiet pride, unease, elegy, threshold, city remembers). FORBIDDEN: fan \"we\" charge, Anthony salary–value architecture as spine, inventing seasons/x-stats, FO bullet strategy, business-desk storefront assignment, multi-voice sports-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sports-history",
+      "pulseClass": "era-door",
+      "bagModes": [
+        "1 Era Comparison",
+        "8 Legacy Guarantee Piece"
+      ],
+      "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+      "presentFacts": [
+        "Benji Dillon line (feed): 5.1 IP/8K/2H",
+        "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+        "Mark Aitken line (feed): 2HR/6RBI",
+        "Team record (feed): 127-35 · streak W2",
+        "Event (feed): A's — game-result (late-season)",
+        "Cycle: C105"
+      ],
+      "dossierFacts": [
+        "NONE — offline slice; use packet TrueSource only if wake supplies"
+      ],
+      "missing": [
+        "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+        "No invented seasons or franchise history beyond packet + feed",
+        "No x-stats / barrel% / invented OPS+",
+        "Not a business-desk storefront assignment",
+        "Not P Slayer charge; not Anthony board architecture as spine"
+      ],
+      "closingNote": "elegy",
+      "priorFiling": "NONE — wall may still inject at wake",
+      "sceneRule": "An unnamed desk or quiet archive transition; literary texture may carry no witnessed event. People, places, teams, seasons, events, and statistics only from the packet. Not a business storefront beat.",
+      "sourcePointers": [
+        "output/world_summary_c105.md ## Sports",
+        "docs/media/HAL_ARCHIVE_BAG.md",
+        "scripts/sportsSubstrate.js",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Jack London",
+    "src": "world_summary_c105.md ## Sports",
+    "plan": {
+      "focus": "The impact of Vinnie Keane's career on the A's and the community",
+      "closeQuestion": "How will Vinnie Keane's legacy be remembered and honored by the A's and the city of Oakland?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00019",
+        "name": "Isley Kelley",
+        "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00001-637a984a29",
+        "pop": "POP-00001",
+        "name": "Vinnie Keane",
+        "quote": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.",
+        "factIds": [
+          "F-2b3e2e3d075f"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00018-60732d5c01",
+        "pop": "POP-00018",
+        "name": "Benji Dillon",
+        "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland",
+        "factIds": [
+          "F-9af30bf34151"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00019-b2f3848fc5",
+        "pop": "POP-00019",
+        "name": "Isley Kelley",
+        "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match.",
+        "factIds": [
+          "F-9af30bf34151"
+        ],
+        "src": "packet.W2[POP-00019]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Hal Richmond",
+        "text": "The potential for Vinnie Keane's legacy to inspire future generations of players and fans",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "A's — game-result — supplied C105 line card",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-436805d090da"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon line (feed): 5.1 IP/8K/2H",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-5dd72cfc3cc9"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-9af30bf34151"
+    },
+    {
+      "t": "FACT",
+      "text": "Mark Aitken line (feed): 2HR/6RBI",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-7253339cd4be"
+    },
+    {
+      "t": "FACT",
+      "text": "Team record (feed): 127-35 · streak W2",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-db6f160d52da"
+    },
+    {
+      "t": "FACT",
+      "text": "Event (feed): A's — game-result (late-season)",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-4330bada6d88"
+    },
+    {
+      "t": "FACT",
+      "text": "Cycle: C105",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-b46c89741eef"
+    },
+    {
+      "t": "FACT",
+      "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+      "src": "Simulation_Ledger profile for POP-00001",
+      "id": "F-2b3e2e3d075f"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "hal-sports-history-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Frame one Packet-backed present sports fact across time. Historical baseball echo (franchise figures, era comps, a legend against the living line) is the historian's job — the Packet will not contain 1973. Invented current stats and real-world Oakland geography still fail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "first-person reflective sports history",
+      "targetWords": "evidence-bounded literary Article",
+      "opening": "one Packet-backed present fact",
+      "closing": "continuity or its loss, with the historical echo named"
+    },
+    "authorizedTexture": [
+      "the reporter's reflective stance or emotional interpretation without claiming a witnessed event",
+      "an unnamed desk or archive transition",
+      "metaphor about time or continuity grounded in a supplied present fact",
+      "era comparison and predecessor ghost: a known baseball-history figure (including pre-sim legends) set against the Packet-present line"
+    ],
+    "textureConditions": [
+      "the present fact, current statistic, and living roster name must come from the Packet",
+      "historical baseball echo does not require the legend to appear in the Packet; it may not invent a current season, current stat, or Oakland geography",
+      "first person may remember and compare; it may not invent a witnessed current-cycle scene the Packet does not support",
+      "an unresolved feed subject may retain the supplied label but may not receive a POPID, biography, role, quote, or historical connection"
+    ],
+    "canonBlockers": [
+      "a real-world Oakland place or landmark imported as if it were this city",
+      "an invented current-cycle statistic, season, roster move, or player line",
+      "an invented roster move, player identity, relationship, quote, interview, result, contract, injury, projection, or advanced metric",
+      "an unresolved feed spelling silently assigned a POPID, biography, role, or historical identity",
+      "fan consensus, front-office strategy, or analytic-board grading replacing the supplied present fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-2b7ad0829f82",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-436805d090da",
+        "t": "FACT",
+        "text": "A's — game-result — supplied C105 line card",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-5dd72cfc3cc9",
+        "t": "FACT",
+        "text": "Benji Dillon line (feed): 5.1 IP/8K/2H",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-9af30bf34151",
+        "t": "FACT",
+        "text": "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-7253339cd4be",
+        "t": "FACT",
+        "text": "Mark Aitken line (feed): 2HR/6RBI",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-db6f160d52da",
+        "t": "FACT",
+        "text": "Team record (feed): 127-35 · streak W2",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-4330bada6d88",
+        "t": "FACT",
+        "text": "Event (feed): A's — game-result (late-season)",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-b46c89741eef",
+        "t": "FACT",
+        "text": "Cycle: C105",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-2b3e2e3d075f",
+        "t": "FACT",
+        "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "Simulation_Ledger profile for POP-00001"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00001-637a984a29",
+        "speakerId": "POP-00001",
+        "speakerName": "Vinnie Keane",
+        "text": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.",
+        "factIds": [
+          "F-2b3e2e3d075f"
+        ],
+        "src": "packet.W2[POP-00001]"
+      },
+      {
+        "id": "Q-POP-00018-60732d5c01",
+        "speakerId": "POP-00018",
+        "speakerName": "Benji Dillon",
+        "text": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland",
+        "factIds": [
+          "F-9af30bf34151"
+        ],
+        "src": "packet.W2[POP-00018]"
+      },
+      {
+        "id": "Q-POP-00019-b2f3848fc5",
+        "speakerId": "POP-00019",
+        "speakerName": "Isley Kelley",
+        "text": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match.",
+        "factIds": [
+          "F-9af30bf34151"
+        ],
+        "src": "packet.W2[POP-00019]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00018",
+        "name": "Benji Dillon",
+        "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00001",
+        "name": "Vinnie Keane",
+        "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00019",
+        "name": "Isley Kelley",
+        "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Hal Richmond",
+        "text": "The potential for Vinnie Keane's legacy to inspire future generations of players and fans",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "the reporter's reflective stance or emotional interpretation without claiming a witnessed event",
+      "an unnamed desk or archive transition",
+      "metaphor about time or continuity grounded in a supplied present fact",
+      "era comparison and predecessor ghost: a known baseball-history figure (including pre-sim legends) set against the Packet-present line"
+    ],
+    "textureConditions": [
+      "the present fact, current statistic, and living roster name must come from the Packet",
+      "historical baseball echo does not require the legend to appear in the Packet; it may not invent a current season, current stat, or Oakland geography",
+      "first person may remember and compare; it may not invent a witnessed current-cycle scene the Packet does not support",
+      "an unresolved feed subject may retain the supplied label but may not receive a POPID, biography, role, quote, or historical connection"
+    ],
+    "forbiddenClaimClasses": [
+      "a real-world Oakland place or landmark imported as if it were this city",
+      "an invented current-cycle statistic, season, roster move, or player line",
+      "an invented roster move, player identity, relationship, quote, interview, result, contract, injury, projection, or advanced metric",
+      "an unresolved feed spelling silently assigned a POPID, biography, role, or historical identity",
+      "fan consensus, front-office strategy, or analytic-board grading replacing the supplied present fact"
+    ]
+  }
+}

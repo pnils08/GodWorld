@@ -4,14 +4,14 @@
   "model": "deepseek/deepseek-chat",
   "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 7093,
-  "usageOutputTokens": 659,
+  "usageInputTokens": 5980,
+  "usageOutputTokens": 564,
   "savedFiles": [
-    "output/cron-compare/civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat.md"
+    "output/cron-compare/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md"
   ],
   "compareAgainst": "output/desk-output/civic_c105.md",
-  "durationMs": 15807,
+  "durationMs": 38262,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-08-31T23:16:13.415Z"
+  "ranAt": "2026-09-01T23:16:13.766Z"
 }

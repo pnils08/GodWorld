@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e6dad4020a74cefec5b92708d8dc661be6cc3132efe39b087833a6faab799ef0",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance, citizen identities and roles are canonical, and sports-columnist scene texture is fully authorized.",
+  "review": {
+    "profileId": "p-slayer-fan-heat-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "p-slayer-fan-heat-v1",
+    "packageVersion": "PSLAYER-LEP2-1",
+    "manifestId": "AM-82d1ff54cbe8",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Isley Kelley",
+      "Mark Aitken",
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0097,
+  "durationMs": 6336,
+  "parseError": false,
+  "ranAt": "2026-09-01T23:17:13.329Z"
+}

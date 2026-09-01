@@ -1,0 +1,45 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "angela-reyes",
+  "byline": "Angela Reyes",
+  "bylinePopid": "POP-00156",
+  "article": "output/cron-compare/staged/civic_c105_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Darren Briggs",
+        "role": "quoted-source",
+        "popid": "POP-00588"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "west-oakland-east-oakland-fruitvale-darren-briggs-anomaly",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I’ve heard about the Oakland Youth Apprenticeship Pipeline starting up, and it feels like a step in the right direction for keeping kids connected to opportunities. Stability in education seems to come from having clear pathways like this.",
+        "sourceRef": "citizenVoice PRESS Darren Briggs"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-62620368ea94",
+    "draftSha256": "76638ebac1084a6c4d0a3cb14fd7400cce4735ff07118102c94322e6191fa50a",
+    "verdict": "output/cron-compare/civic_c105_angela-reyes_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-01T23:15:21.002Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-01T23:15:26.457Z"
+}

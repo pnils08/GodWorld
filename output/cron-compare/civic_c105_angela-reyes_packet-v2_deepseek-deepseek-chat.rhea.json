@@ -1,0 +1,56 @@
+{
+  "draft": "output/cron-compare/civic_c105_angela-reyes_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "76638ebac1084a6c4d0a3cb14fd7400cce4735ff07118102c94322e6191fa50a",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Draft strictly adheres to ground truth and authorized quote provenance with no canon violations.",
+  "review": {
+    "profileId": "angela-education-stability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "angela-education-stability-v1",
+    "packageVersion": "ANGELA-LEP2-1",
+    "manifestId": "AM-62620368ea94",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "12th"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Darren Briggs"
+    ],
+    "unverified": [
+      "Mess Hall Coffee"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.009,
+  "durationMs": 5698,
+  "parseError": false,
+  "ranAt": "2026-09-01T23:15:21.002Z"
+}

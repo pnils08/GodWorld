@@ -1,0 +1,65 @@
+{
+  "draft": "output/cron-compare/sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c603e66a5f41b71d8aad01e64432c75ea8f3084fa6d5300b832dbd77e2c58c75",
+  "pass": false,
+  "flags": [
+    {
+      "claim": "Isley Kelley, who hit two home runs and drove in six runs himself",
+      "issue": "Direct contradiction of sports ground truth: Mark Aitken hit 2 HRs and had 6 RBIs, whereas the feed explicitly states Isley Kelley fell short of hitting a home run and ended the regular season at 499 career home runs.",
+      "severity": "high"
+    },
+    {
+      "claim": "Keane grounded out softly to shortstop. The inning ended.",
+      "issue": "Contradicts game recap note stating Keane went 4-5 and hit a towering 3-run home run in his very last regular season at-bat.",
+      "severity": "med"
+    },
+    {
+      "claim": "Four hundred and twenty-seven home runs.",
+      "issue": "Contradicts canonical career total of 436 home runs for Vinnie Keane.",
+      "severity": "med"
+    }
+  ],
+  "flagCount": 3,
+  "highSeverityCount": 1,
+  "summary": "Failed sports verification: attributes Mark Aitken's 2 HR / 6 RBI game line to Isley Kelley, directly contradicting Kelley's documented 499-homer pursuit.",
+  "review": {
+    "profileId": "hal-sports-history-v1",
+    "canonIntegrity": "revise",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "hal-sports-history-v1",
+    "packageVersion": "HAL-LEP2-1",
+    "manifestId": "AM-2b7ad0829f82",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Isley Kelley",
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0112,
+  "durationMs": 15311,
+  "parseError": false,
+  "ranAt": "2026-09-01T23:18:53.468Z"
+}

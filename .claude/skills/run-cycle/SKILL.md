@@ -76,16 +76,6 @@ node scripts/dumpLedger.js {XX} --quiet
 
 **Gate:** `output/simulation_ledger_snapshot.meta.json` read back shows `"cycle": {XX}` and current `generatedAt`. Never report this step done from the command exit alone.
 
-### Step 5.57: World-state fold (engine.76 W3)
-
-Fold the cycle's cron-consumer inputs into the single artifact the 24/7 loops read — `output/world_state.json`. Deterministic assembler, no LLM: live Riley_Digest orientation + base_context canon (staleness-flagged) + Step 5.5 hood blocks + Step 5.55 dispositions + pointers to the deep artifacts. Consumers: mags-discord-bot / discord-reflection (`lib/mags.loadWorldState`), citizen-wake + citizen-exchange (`lib/wakePerception.loadNeighborhoodTexture`), cron-desk-writer fallback path. All consumers fail back to the pre-W3 per-file reads if the fold is absent or cycle-mismatched.
-
-```bash
-node scripts/buildWorldState.js {XX}
-```
-
-**Gate:** Script prints `wrote .../world_state.json` with cycle {XX} + hood/disposition counts.
-
 ### Step 5.6: Content-ledger drafter (engine.49 T4)
 
 Draft condition-gated Event_Content_Ledger rows from what this cycle actually produced (Story_Seed_Deck seeds, Neighborhood_Map pressures, Cycle_Seeds weather/holiday). Cheap-helper LLM (OpenRouter deepseek default), never premium tokens.
@@ -119,6 +109,18 @@ node scripts/buildDeskPackets.js {XX}
 ```
 
 **Gate:** `jq '.baseContext.cycle' output/desk-packets/base_context.json` matches `{XX}` — the field is **nested**; top-level `.cycle` returns `null` and false-alarms (G-P-C99-1). Post-publish Step 5b stays — it re-refreshes after publication so edition-coverage data lands; the script is idempotent.
+
+### Step 5.85: World-state fold (engine.76 W3)
+
+Fold the cycle's cron-consumer inputs into the single artifact the 24/7 loops read — `output/world_state.json`. Deterministic assembler, no LLM: live Riley_Digest orientation + base_context canon (staleness-flagged) + Step 5.5 hood blocks + Step 5.55 dispositions + pointers to the deep artifacts. Consumers: mags-discord-bot / discord-reflection (`lib/mags.loadWorldState`), citizen-wake + citizen-exchange (`lib/wakePerception.loadNeighborhoodTexture`), cron-desk-writer fallback path. All consumers fail back to the pre-W3 per-file reads if the fold is absent or cycle-mismatched.
+
+```bash
+node scripts/buildWorldState.js {XX}
+```
+
+**Gate:** Script prints `wrote .../world_state.json` with cycle {XX} + hood/disposition counts, and `canon current` — not `canon STALE`, not `canon absent`. Size is the tell: the correct fold is ~55KB; ~5KB means canon-less.
+
+**Ordering, G-PF25 (S407) — this step was 5.57 and ran BEFORE Step 5.8.** It folds the `base_context.json` that 5.8 produces, so following the documented order exactly wrote a 5,465-byte `world_state.json` (correct: 55,684) carrying the note `canon absent: base_context.json unreadable — ENOENT`, and exited 0 while doing it. `world_state.json` is the one artifact every 24/7 loop reads, so all of them ran on a canon-less world for the rest of the cycle. Moved here, after 5.8. The script now also refuses to write on absent canon rather than exiting 0 — a missing fold makes consumers fall back correctly, a gutted one does not. Verified no reverse dependency: `buildDeskPackets` does not read `world_state.json`, and nothing between the old and new positions does either (only `lib/mags.js` and `lib/wakePerception.js` read it, both cron-side).
 
 ### Step 6: Gap Log Close (engine-sheet)
 

@@ -20,13 +20,19 @@
  * No LLM in the loop — all content verbatim from named sources. Missing
  * optional sources degrade to empty sections + a meta.notes entry, never throw;
  * a missing Riley_Digest row for the cycle DOES throw (the artifact would be
- * orientation-less junk, same fail-loud contract as buildWorldSummary).
+ * orientation-less junk, same fail-loud contract as buildWorldSummary). An
+ * ABSENT base_context throws for the same reason — canon-less is the same class
+ * of junk, and every consumer falls back correctly when the file is missing but
+ * not when it is gutted. STALE canon still degrades-and-flags: the edition
+ * pipeline is frozen, so lag is the expected state, not a fault.
  *
- * Pipeline position: run-cycle, AFTER buildWorldSummary + buildNeighborhoodTexture
- * + refreshVoiceDispositionCache (it folds their outputs).
+ * Pipeline position: run-cycle Step 5.85 — AFTER buildWorldSummary +
+ * buildNeighborhoodTexture + refreshVoiceDispositionCache AND after Step 5.8
+ * buildDeskPackets, which produces the base_context.json this folds. It sat at
+ * 5.57, ahead of 5.8, and wrote a canon-less file at exit 0 (G-PF25, S407).
  *
  * Usage:
- *   node scripts/buildWorldState.js <cycle> [--dry-run]
+ *   node scripts/buildWorldState.js <cycle> [--dry-run] [--allow-no-canon]
  *   node scripts/buildWorldState.js            # cycle = latest world_summary_c{N}.md
  */
 
@@ -71,6 +77,7 @@ function parseHoodBlocks(md) {
 
 async function main() {
   const dryRun = process.argv.includes('--dry-run');
+  const allowNoCanon = process.argv.includes('--allow-no-canon');
   const cycle = detectCycle();
   const notes = [];
 
@@ -118,7 +125,28 @@ async function main() {
     };
     if (canon.stale) notes.push(`canon folded from base_context c${bcCycle} (edition pipeline frozen S313) — engine is at c${cycle}`);
   } catch (err) {
-    notes.push('canon absent: base_context.json unreadable — ' + err.message);
+    // G-PF25 (S407): canon ABSENT is not the same failure as canon STALE, and
+    // treating them alike is what let this ride out silently. Stale is expected
+    // — the edition pipeline that refreshes base_context is frozen, so the fold
+    // flags the lag and carries on. Absent means the chain ran out of order:
+    // Step 5.57 fired before Step 5.8 built base_context, and the fold wrote a
+    // 5,465-byte world_state where the correct one is 55,684 — at exit 0.
+    //
+    // world_state.json is the ONE artifact every 24/7 loop reads (Discord bot,
+    // citizen wakes, citizen exchange, desk-writer fallback), so a canon-less
+    // file poisons all of them for the rest of the cycle. Every consumer falls
+    // back to the pre-W3 per-file reads when the fold is ABSENT — so refusing
+    // to write is strictly safer than writing a gutted one. Fail loud, write
+    // nothing, name the step that has to run first.
+    if (!allowNoCanon) {
+      throw new Error(
+        'buildWorldState: canon absent — ' + BASE_CONTEXT_PATH + ' unreadable (' + err.message + ').\n' +
+        '  world_state.json is what every 24/7 loop reads; a canon-less one is ~10x smaller and silently wrong.\n' +
+        '  Run run-cycle Step 5.8 (node scripts/buildDeskPackets.js <cycle>) first, then re-run this step.\n' +
+        '  Nothing was written — consumers fall back to per-file reads, which is the safe state.\n' +
+        '  Pass --allow-no-canon to write a canon-less fold deliberately (bench / fresh clone).');
+    }
+    notes.push('canon absent: base_context.json unreadable — ' + err.message + ' (--allow-no-canon)');
   }
 
   // --- hoods (texture fold) ---

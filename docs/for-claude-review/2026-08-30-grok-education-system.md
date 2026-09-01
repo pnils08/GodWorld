@@ -106,9 +106,9 @@ pointers:
 - **Do not treat this file as authorization to build a school system.** It is a map of the lack. A K–12 / college / adult-ed design is a new plan + Mike sign-off.
 - **Snapshot is local dump, not a live Sheets read.** Counts (51 minors, 968 rows, UNI 121) are `output/simulation_ledger_snapshot.jsonl` at session start. ND index values are inferred from minor stamps (the writer restamps every cycle), not a Neighborhood_Demographics API pull.
 
-**Verdict:** `watch` — the gap is measured; there is no education *system*, only a credential stamp, a seeded hood rating, an 18th-birthday inheritance draw, and flavor text. Adopt-trigger: Mike asks for an education-system plan (what school is, who enrolls, whether degrees can be earned after 18, whether they may ever gate a role). Until then no ROLLOUT row — pending-state must not appear as a picker item.
+**Verdict:** `adopt` — S405 named education as the next system; builder asked for the plan 2026-08-31. Isolation loop only (companion plan). Adopt-trigger that fired: Mike asked to plan the fix + cascade ruling “do NOT widen E3. Build education next.” Connection-to-career is a later plan, not this one.
 
-**Ignited plans:** none.
+**Ignited plans:** [[2026-08-31-grok-education-loop-plan]] (inbox sibling; isolation loop only).
 
 ---
 
@@ -121,6 +121,7 @@ pointers:
 ## Changelog
 
 - 2026-08-30 (grok) — Initial extraction (C104 snapshot + two Haiku wiring cards + education/youth/career engines).
+- 2026-08-31 (grok) — Verdict watch→adopt; ignited isolation-loop plan. Connection to hiring still out of scope.
 
 ---
 

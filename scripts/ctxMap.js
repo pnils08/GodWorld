@@ -283,13 +283,30 @@ const orchLines = fs.readFileSync(path.join(ROOT, ORCHESTRATOR), 'utf8').split('
 // --- 1. the production phase sequence, in order -----------------------------
 let inRun = false;
 const slots = [];
-for (const line of orchLines) {
+for (let li = 0; li < orchLines.length; li++) {
+  const line = orchLines[li];
   if (/^function runWorldCycle\s*\(/.test(line)) { inRun = true; continue; }
   if (inRun && /^function /.test(line)) break;
   if (!inRun) continue;
   if (line.trim().startsWith('//')) continue;          // commented-out slot = not wired
   const m = line.match(/safePhaseCall_\(\s*ctx\s*,\s*'([^']+)'\s*,\s*function\s*\(\)\s*\{\s*([A-Za-z0-9_]+_)\s*\(/);
-  if (m) slots.push({ label: m[1], fn: m[2] });
+  if (m) { slots.push({ label: m[1], fns: [m[2]] }); continue; }
+  // Multi-line closure: `safePhaseCall_(ctx, 'Label', function() {` with the callee on a
+  // later line, usually behind a `typeof fn_ === 'function'` guard (Phase6-InitiativeRipple,
+  // Phase6-TransitSignals, Phase6-FaithSignals, Phase6.5-Validation). The one-line regex
+  // dropped these four slots and everything reachable only through them read as DEAD —
+  // prePublicationValidation.js was reported dead while live at both entry points (S408).
+  const open = line.match(/safePhaseCall_\(\s*ctx\s*,\s*'([^']+)'\s*,\s*function\s*\(\)\s*\{\s*$/);
+  if (!open) continue;
+  const fns = [];
+  for (let lj = li + 1; lj < orchLines.length; lj++) {
+    const body = orchLines[lj];
+    if (/^\s*\}\);\s*$/.test(body)) { li = lj; break; }
+    if (body.trim().startsWith('//')) continue;
+    let c; const callRe = /\b([A-Za-z0-9_]+_)\s*\(/g;
+    while ((c = callRe.exec(body)) !== null) if (c[1] !== 'safePhaseCall_' && !fns.includes(c[1])) fns.push(c[1]);
+  }
+  if (fns.length) slots.push({ label: open[1], fns });
 }
 if (!slots.length) {
   console.error('ctxMap: could not parse the runWorldCycle phase sequence — ordering pass ABORTED (not an all-clear).');
@@ -352,7 +369,7 @@ function noteOrd(key, ord) {
 }
 slots.forEach((slot, ord) => {
   const seen = new Set();
-  const queue = (defsByName[slot.fn] || []).slice();
+  const queue = slot.fns.flatMap(fn => defsByName[fn] || []);
   while (queue.length) {
     const key = queue.shift();
     if (seen.has(key) || !spans[key]) continue;

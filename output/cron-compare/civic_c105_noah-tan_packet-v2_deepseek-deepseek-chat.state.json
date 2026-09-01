@@ -1,0 +1,235 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00157",
+    "name": "Noah Tan",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Drew Lemon — dealt with a seasonal health concern",
+    "approach": "Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "weather-ground",
+      "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+      "missing": [
+        "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+      ],
+      "impactEvidence": null,
+      "forbidden": [
+        "Do not announce the season or temperature as the story.",
+        "Do not import real-world Oakland winter tropes absent from the Packet.",
+        "Do not add forecasts, agencies, or unsupplied measurements."
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "season-feel",
+    "hood": "Downtown",
+    "src": "output/world_summary_c105.md ## Who Lived It",
+    "plan": {
+      "focus": "The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.",
+      "closeQuestion": "How do these small seasonal adaptations become part of the fabric of a community over time?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "profile": "Jessie Hess",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00212-489878e027",
+        "pop": "POP-00212",
+        "name": "Jessie Hess",
+        "quote": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other.",
+        "factIds": [
+          "F-1a376888eebe"
+        ],
+        "src": "packet.W2[POP-00212]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "Whether others in the neighborhood made similar adjustments without realizing it",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "Drew Lemon — dealt with a seasonal health concern",
+      "src": "output/world_summary_c105.md ## Who Lived It",
+      "id": "F-1a376888eebe"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Show what this season moved in GodWorld. The weather snapshot is context, never the Article. Live a Packet-backed person or place on a day like this.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "third-person civic environment reporting from the street",
+      "targetWords": "400-700",
+      "opening": "a named person or Packet-named place living this cycle's season",
+      "closing": "what is still unfinished for them"
+    },
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "canonBlockers": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  },
+  "manifest": {
+    "id": "AM-f20045bea4c0",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-1a376888eebe",
+        "t": "FACT",
+        "text": "Drew Lemon — dealt with a seasonal health concern",
+        "src": "output/world_summary_c105.md ## Who Lived It"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00212-489878e027",
+        "speakerId": "POP-00212",
+        "speakerName": "Jessie Hess",
+        "text": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other.",
+        "factIds": [
+          "F-1a376888eebe"
+        ],
+        "src": "packet.W2[POP-00212]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00212",
+        "name": "Jessie Hess",
+        "profile": "Jessie Hess",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Noah Tan",
+        "text": "Whether others in the neighborhood made similar adjustments without realizing it",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "sensory dress of a Packet-named place already in the season-feel facts",
+      "the reporter's presence at that place",
+      "transitions that add no forecast or unsupplied measurement"
+    ],
+    "textureConditions": [
+      "every named person, place, illness, holiday, venue, and movement change must come from the Packet",
+      "do not announce season or temperature as the lede",
+      "do not import real-world Oakland winter tropes absent from the Packet",
+      "raw engine fields and source paths may not appear as public prose"
+    ],
+    "forbiddenClaimClasses": [
+      "an invented forecast, record, alert, hazard, cause, authority, meteorologist, resident, quote, impact, comparison, or measurement",
+      "a named institution, agency, person, neighborhood, or organization not found in the supplied record",
+      "unsupported danger, rarity, trend, health, travel, infrastructure, or causal language",
+      "raw engine fields, scores, source paths, or row metadata printed as public-facing evidence"
+    ]
+  }
+}

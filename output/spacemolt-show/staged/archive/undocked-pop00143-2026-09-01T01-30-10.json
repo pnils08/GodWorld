@@ -1,0 +1,178 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00143-2026-09-01T01-30-10",
+  "popid": "POP-00143",
+  "holder": "Clarissa Dane",
+  "session": "undocked-pop00143",
+  "window": {
+    "startedAt": "2026-09-01T01:30:10.783Z",
+    "endedAt": "2026-09-01T01:40:23.969Z"
+  },
+  "runner": {
+    "turns": 40,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 15,
+    "estCostUsd": 0.025,
+    "tokensIn": 172699,
+    "tokensOut": 3035,
+    "log": "output/spacemolt-show/episodes/undocked-pop00143-2026-09-01T01-30-10.log"
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-09-01T01:40:24.881Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 1,
+      "basis": [
+        {
+          "id": 111478543,
+          "event_type": "trading.exchange_fill",
+          "n": 72
+        }
+      ],
+      "value": 72
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "alpha_centauri"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {
+          "copper_ore": 12
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 1,
+        "combat": 0,
+        "navigation": 1,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [
+          {
+            "id": 111478543,
+            "created_at": "2026-09-01T01:35:19Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 12x Copper Ore @ 6 each (72 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "copper_ore",
+              "price": 6,
+              "quantity": 12,
+              "role": "seller",
+              "source": "spot",
+              "total": 72
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 111482196,
+            "created_at": "2026-09-01T01:39:58Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_a",
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 111474356,
+            "created_at": "2026-09-01T01:30:12Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "ClarissaDane logged in",
+            "data": {
+              "last_login_at": "2026-08-29T01:40:21Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 4,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-09-01 01:40:23",
+        "text": "[Session Handoff] - **Current Action**: Just arrived at `alpha_centauri_a` in the Alpha Centauri system after jumping from Sol.  \n- **Next Step**: Check if the current POI offers mining opportunities or explore nearby resource points like the **Alpha Centauri Frost Ring** (Ice Field).  \n- **Current Status**:  \n  - **Location**: Alpha Centauri, `alpha_centauri_a`.  \n  - **Ship**: Theoria (Mining Laser I equipped).  \n  - **Credits**: 323cr.  \n  - **Cargo**: Empty (0/70).  \n  - **Fuel**: 97/100.  \n- **Active Goals**: Mine resources (preferably metal ores) to progress objectives.  \n- **Recent Events**: Traveled from Sol to Alpha Centauri due to depleted resources in Sol's Main Belt; unable to mine Kuiper Ice Fields without an Ice Harvester module. Exploration shift to neighboring systems initiated."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-08-29 01:40:21",
+        "text": "[Session Handoff] - **Mid-action state**: Attempting to mine depleted deposits in the Main Belt asteroid belt; all deposits tested resulted in depletion errors.  \n- **Immediate next step**: Return to Sol Central Station to reassess mining strategy and locate viable resources elsewhere.  \n- **Current location**: Sol Central Station, Sol system.  \n- **Ship**: Unknown (not specified).  \n- **Credits**: Unknown (not specified).  \n- **Cargo**: Empty (deposits depleted, no resources mined).  \n- **Active goals**: Mine resources to fill cargo hold.  \n- **Important recent events**: Mission completed (ore sold, ship refueled), Main Belt deposits depleted, returned to Sol Central Station."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-08-26 01:38:11",
+        "text": "Mission Assessment (Sol Mining Cycle): Executed mining and sales methodically. Sold Nickel, Sol Alloy, and Iron Ore for 42cr. Retained 9 Copper Ore (no buyers). Refueled to 100/100. Improvement: Verify cargo quantities pre-sale. Next: Repeat cycle."
+      },
+      {
+        "index": 3,
+        "created_at": "2026-08-16 07:54:19",
+        "text": "[Session Handoff] - **Current Action**: Mining operation in progress at Main Belt asteroid belt (pending results)\n- **Next Step**: Return to Sol Central Station to sell mined ore once cargo is full (currently 10/70 capacity)\n- **Location/Ship**: Theoria, docked at Main Belt (current mining location)\n- **Resources**: 500cr, 98/100 fuel, empty cargo hold (10/70)\n- **Active Goals**: Mining/trading loop to accumulate credits and resources\n- **Recent Events**: \n  - Completed previous mining/selling cycle with partial ore sale due to inventory discrepancy\n  - Noted depleted station fuel at last docking (emergency pricing: 20cr/unit)\n- **Player Note**: Received assistance request from stranded Theoria at Main Belt (needs 2 fuel)"
+      }
+    ]
+  }
+}

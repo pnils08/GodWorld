@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "105",
+  "model": "deepseek/deepseek-chat",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 7093,
+  "usageOutputTokens": 659,
+  "savedFiles": [
+    "output/cron-compare/civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c105.md",
+  "durationMs": 15807,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-08-31T23:16:13.415Z"
+}

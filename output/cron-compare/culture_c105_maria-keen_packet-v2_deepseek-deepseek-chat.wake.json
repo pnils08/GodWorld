@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "maria-keen",
+  "byline": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 19,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "om ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00013\",\n  \"name\": \"Maria Keen\",\n  \"recorded\": true,\n  \"text\": \"filed: Dimond Pharmacy Draws Dimmed Spotlight\"\n}"
+  },
+  "ranAt": "2026-08-31T23:17:31.107Z"
+}

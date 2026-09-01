@@ -1,0 +1,194 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00792",
+    "name": "Bobby Chen-Ramirez",
+    "role": "Health Center Project Director",
+    "officeId": "PROJ-HEALTHCTR",
+    "district": null,
+    "faction": null,
+    "agentDir": "civic-project-health-center",
+    "initiative": "INIT-005",
+    "dials": {
+      "approval": null
+    }
+  },
+  "task": {
+    "a": "initiative-week",
+    "goal": "Structural frame groundbreaking"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 90,
+    "label": "Temescal Community Health Center — Structural frame groundbreaking",
+    "lever": "Structural frame groundbreaking",
+    "hood": "Temescal",
+    "initiative": "INIT-005",
+    "vsCity": {
+      "sentiment": 0.88,
+      "citySentiment": 0.8854545454545455,
+      "crime": 0.73,
+      "cityCrime": 0.6990909090909091,
+      "heat": 1.1636363636363667,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "Structural frame groundbreaking",
+    "lineFacts": [
+      "Temescal Community Health Center is in construction-active — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
+      "due: Structural frame groundbreaking",
+      "INIT-005 — construction-active — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106. — Structural frame groundbreaking",
+      "Temescal crime: property 42, violent 31, incidents 6 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "Temescal: sentiment 0.88 vs city 0.885; crime index 0.73 vs city 0.699; retail 11.22; housing pressure 3.5; growth; momentum 9"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "initiative-heat",
+    "hoods": [
+      "Temescal"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00219",
+        "name": "Tyrone Bennington",
+        "neighborhood": "Temescal",
+        "role": "Nurse aide",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — Structural frame groundbreaking"
+      },
+      {
+        "pop": "POP-00792",
+        "name": "Bobby Chen-Ramirez",
+        "neighborhood": "Temescal",
+        "role": "Health Center Project Director",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — Structural frame groundbreaking"
+      },
+      {
+        "pop": "POP-00038",
+        "name": "Theo Park",
+        "neighborhood": "Temescal",
+        "role": "Communications Director",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — Structural frame groundbreaking"
+      },
+      {
+        "pop": "POP-00055",
+        "name": "Ross Cabral",
+        "neighborhood": "Temescal",
+        "role": "Catcher, Las Vegas Aviators (AAA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Temescal — Temescal Community Health Center — Structural frame groundbreaking"
+      }
+    ],
+    "businesses": [],
+    "churches": [
+      {
+        "name": "Temescal Islamic Center",
+        "neighborhood": "Temescal",
+        "text": "seniors lunch program marks milestone",
+        "src": "world_summary faith-event"
+      }
+    ],
+    "sources": [
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-project-health-center",
+        "initiative": "INIT-005",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-okoro",
+        "initiative": "INIT-005",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-opp-faction",
+        "initiative": "INIT-005",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      }
+    ]
+  },
+  "known": [
+    {
+      "id": "F-INIT-005",
+      "t": "FACT",
+      "text": "Temescal Community Health Center is in construction-active — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-cabinet-decisions_c104json",
+      "t": "FACT",
+      "text": "INIT-005 — construction-active — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106. — Structural frame groundbreaking",
+      "src": "output/city-civic-database/initiatives/health-center/decisions_c104.json"
+    },
+    {
+      "id": "F-crime-Temescal",
+      "t": "FACT",
+      "text": "Temescal crime: property 42, violent 31, incidents 6 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Temescal",
+      "t": "FACT",
+      "text": "Temescal: sentiment 0.88 vs city 0.885; crime index 0.73 vs city 0.699; retail 11.22; housing pressure 3.5; growth; momentum 9",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-event-0",
+      "t": "FACT",
+      "text": "Temescal Resolution Run (Temescal) — Temescal",
+      "src": "world_summary city-event"
+    },
+    {
+      "id": "F-traj-1",
+      "t": "FACT",
+      "text": "Temescal boom sustained — momentum 9/10, the block everyone wants onto",
+      "src": "world_summary trajectory"
+    },
+    {
+      "id": "F-we-0",
+      "t": "FACT",
+      "text": "FAITH — community_program — Temescal: Temescal Islamic Center: seniors lunch program marks milestone",
+      "src": "world_summary World Events"
+    }
+  ],
+  "role": {
+    "officeRows": [],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "desk": "business",
+  "cycle": "105",
+  "model": "deepseek/deepseek-chat",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 10134,
+  "usageOutputTokens": 367,
+  "savedFiles": [
+    "output/cron-compare/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.md"
+  ],
+  "compareAgainst": "output/desk-output/business_c105.md",
+  "durationMs": 9620,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-08-31T23:17:40.913Z"
+}

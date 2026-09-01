@@ -1,0 +1,52 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "105",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jacob King",
+        "role": "quoted-source",
+        "popid": "POP-00267"
+      },
+      {
+        "name": "Howard Yell",
+        "role": "quoted-source",
+        "popid": "POP-00651"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "rockridge-jacob-king-story-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "I've been working the line at a restaurant near Cozy Pot for years, and lately there's just more energy—more people out at night, more folks sticking around after dinner to chat. Feels like the whole block's waking up again.",
+        "sourceRef": "citizenVoice PRESS Jacob King"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-595ae80d34e6",
+    "draftSha256": "cbd31dbc176d7674460befb43c5d2a4a0afb99f8acc0ccdf4bd1a33a2f2260a1",
+    "verdict": "output/cron-compare/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-31T23:17:50.756Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-31T23:17:51.173Z"
+}

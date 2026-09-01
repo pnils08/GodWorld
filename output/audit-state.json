@@ -1,7 +1,7 @@
 {
   "doc:boot": {
-    "lastTouched": "2026-08-18T05:23:26.518Z",
-    "reportPath": "output/audit-reports/session-audit_2026-08-18_002326.md"
+    "lastTouched": "2026-09-01T00:49:08.963Z",
+    "reportPath": "output/audit-reports/session-audit_2026-08-31_194908.md"
   },
   "doc:engine": {
     "lastTouched": "2026-08-29T08:26:59.770Z",
@@ -14,5 +14,9 @@
   "skill:identity-session": {
     "lastTouched": "2026-08-29T06:32:07.066Z",
     "reportPath": "output/audit-reports/session-audit_2026-08-29_013206.md"
+  },
+  "doc:data": {
+    "lastTouched": "2026-09-01T02:43:25.504Z",
+    "reportPath": "output/audit-reports/session-audit_2026-08-31_214325.md"
   }
 }

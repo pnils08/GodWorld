@@ -1,0 +1,382 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00157",
+      "name": "Noah Tan",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Drew Lemon — dealt with a seasonal health concern",
+      "approach": "Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede.",
+      "creativeBrief": {
+        "kind": "weather-ground",
+        "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+        "missing": [
+          "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+        ],
+        "impactEvidence": null,
+        "forbidden": [
+          "Do not announce the season or temperature as the story.",
+          "Do not import real-world Oakland winter tropes absent from the Packet.",
+          "Do not add forecasts, agencies, or unsupplied measurements."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "season-feel",
+      "hood": "Downtown",
+      "score": null,
+      "src": "output/world_summary_c105.md ## Who Lived It",
+      "nearby": [
+        {
+          "text": "Vanessa Tran-Muñoz (OARI Program Director): 12 teams now active in West Oakland",
+          "src": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)"
+        },
+        {
+          "text": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "src": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s)"
+        },
+        {
+          "text": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: pilot_evaluation → implementation-active",
+          "src": "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00670",
+          "name": "Drew Lemon (POP-00670)",
+          "profile": "Drew Lemon (POP-00670)",
+          "why": "assignment",
+          "role": null,
+          "hood": "Downtown"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "Drew Lemon — dealt with a seasonal health concern",
+        "src": "output/world_summary_c105.md ## Who Lived It",
+        "id": "F-1a376888eebe"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/world_summary_c105.md ## Who Lived It",
+      "label": "Drew Lemon — dealt with a seasonal health concern",
+      "kind": "season-feel",
+      "angle": "Drew Lemon — dealt with a seasonal health concern",
+      "hookLine": "Drew Lemon — dealt with a seasonal health concern",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00670"
+      ],
+      "citizens": [
+        "Drew Lemon (POP-00670)"
+      ]
+    },
+    "approach": "Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "noah-tan",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "domain": "environment"
+    },
+    "pulse": {
+      "className": "environment",
+      "score": 80,
+      "label": "Drew Lemon — dealt with a seasonal health concern",
+      "hood": "Downtown",
+      "source": "output/world_summary_c105.md ## Who Lived It"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "Drew Lemon — dealt with a seasonal health concern"
+      ],
+      "forbidden": [
+        "Do not announce the season or temperature as the story.",
+        "Do not import real-world Oakland winter tropes absent from the Packet.",
+        "Do not add forecasts, agencies, or unsupplied measurements."
+      ],
+      "schema": "SEASON-FEEL-1",
+      "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+      "missing": [
+        "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+      ],
+      "impactEvidence": {
+        "state": "SUPPLIED",
+        "subjects": [
+          "POP-00670"
+        ],
+        "facts": [
+          "Drew Lemon — dealt with a seasonal health concern"
+        ],
+        "src": "output/world_summary_c105.md ## Who Lived It"
+      }
+    },
+    "candidates": [
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "Drew Lemon — dealt with a seasonal health concern",
+        "ref": "output/world_summary_c105.md ## Who Lived It",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00670"
+        ],
+        "angle": "Drew Lemon — dealt with a seasonal health concern",
+        "hookLine": "Drew Lemon — dealt with a seasonal health concern",
+        "citizens": [
+          "Drew Lemon (POP-00670)"
+        ],
+        "source": "season-feel",
+        "sourceIndex": 60
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "Genevieve Liu — dealt with a seasonal health concern",
+        "ref": "output/world_summary_c105.md ## Who Lived It",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00928"
+        ],
+        "angle": "Genevieve Liu — dealt with a seasonal health concern",
+        "hookLine": "Genevieve Liu — dealt with a seasonal health concern",
+        "citizens": [
+          "Genevieve Liu (POP-00928)"
+        ],
+        "source": "season-feel",
+        "sourceIndex": 61
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "Melton Neilon — relied on familiar social circles during cold period",
+        "ref": "output/world_summary_c105.md ## Who Lived It",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00170"
+        ],
+        "angle": "Melton Neilon — relied on familiar social circles during cold period",
+        "hookLine": "Melton Neilon — relied on familiar social circles during cold period",
+        "citizens": [
+          "Melton Neilon (POP-00170)"
+        ],
+        "source": "season-feel",
+        "sourceIndex": 62
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "Marky Beal — limited social activity due to winter mood",
+        "ref": "output/world_summary_c105.md ## Who Lived It",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00202"
+        ],
+        "angle": "Marky Beal — limited social activity due to winter mood",
+        "hookLine": "Marky Beal — limited social activity due to winter mood",
+        "citizens": [
+          "Marky Beal (POP-00202)"
+        ],
+        "source": "season-feel",
+        "sourceIndex": 63
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "Rigo Ryno — helped the kids with homework at the kitchen table",
+        "ref": "output/world_summary_c105.md ## Who Lived It",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00197"
+        ],
+        "angle": "Rigo Ryno — helped the kids with homework at the kitchen table",
+        "hookLine": "Rigo Ryno — helped the kids with homework at the kitchen table",
+        "citizens": [
+          "Rigo Ryno (POP-00197)"
+        ],
+        "source": "season-feel",
+        "sourceIndex": 64
+      },
+      {
+        "score": 80,
+        "kind": "season-feel",
+        "label": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+        "ref": "output/world_summary_c105.md ## World Events",
+        "hood": "Downtown",
+        "popids": [],
+        "angle": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+        "hookLine": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+        "citizens": [],
+        "source": "season-feel",
+        "sourceIndex": 65
+      }
+    ],
+    "pointers": [
+      "output/world_summary_c105.md ## Who Lived It",
+      "output/world_summary_c105.md ## World Events"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "text": "Noah's been noticing how the seasonal shifts ripple through people's lives in subtle ways. He wants to explore how Drew Lemon's seasonal health concern reflects the quiet, personal adaptations Oaklanders make when the weather turns. Not the big dramatic changes, but the small shifts in routine, the slight rearrangements of daily life that add up to something meaningful.",
+    "plan": {
+      "chase": "Noah's been noticing how the seasonal shifts ripple through people's lives in subtle ways. He wants to explore how Drew Lemon's seasonal health concern reflects the quiet, personal adaptations Oaklanders make when the weather turns. Not the big dramatic changes, but the small shifts in routine, the slight rearrangements of daily life that add up to something meaningful.",
+      "focus": "The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.",
+      "why": "Because these small, personal stories reveal how we all navigate the larger forces that shape our lives, without ever making headlines.",
+      "checks": [
+        "Does Drew's experience reflect a broader pattern in the neighborhood?",
+        "What specific adaptations did Drew make that others might recognize?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00670",
+          "question": "What small, everyday changes did you make to deal with your seasonal health concern?",
+          "basis": "F-1a376888eebe"
+        }
+      ],
+      "interpretation": "Seasonal health concerns aren't just about symptoms—they're about the quiet ways we rearrange our lives to accommodate them.",
+      "unverifiedLead": [
+        "Whether others in the neighborhood made similar adjustments without realizing it"
+      ],
+      "closeQuestion": "How do these small seasonal adaptations become part of the fabric of a community over time?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Vanessa Tran-Muñoz (OARI Program Director): 12 teams now active in West Oakland",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json",
+      "popids": [
+        "POP-01021"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    },
+    {
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "kind": "anomaly",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "ref": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s) ",
+      "popids": [
+        "POP-00136",
+        "POP-00154",
+        "POP-01080"
+      ]
+    },
+    {
+      "label": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: pilot_evaluation → implementation-active",
+      "kind": "anomaly",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "ref": "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3",
+      "popids": [
+        "POP-00754",
+        "POP-00756",
+        "POP-00762"
+      ]
+    }
+  ],
+  "laneEntries": 59,
+  "ranAt": "2026-08-31T11:15:24.953Z"
+}

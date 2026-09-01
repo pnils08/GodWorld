@@ -1,0 +1,45 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "noah-tan",
+  "byline": "Noah Tan",
+  "bylinePopid": "POP-00157",
+  "article": "output/cron-compare/staged/civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Jessie Hess",
+        "role": "quoted-source",
+        "popid": "POP-00212"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "downtown-jessie-hess-season-feel",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other.",
+        "sourceRef": "citizenVoice PRESS Jessie Hess"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-f20045bea4c0",
+    "draftSha256": "e76a43cee83fc323fe29f7da973d0193d65826908bc5f47e35deb911675a12a6",
+    "verdict": "output/cron-compare/civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-31T23:15:43.167Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-31T23:15:48.411Z"
+}

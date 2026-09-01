@@ -1,0 +1,14 @@
+{
+  "office": "oari",
+  "agentDir": "civic-project-oari",
+  "holder": "Vanessa Tran-Muñoz",
+  "popid": "POP-01021",
+  "title": "OARI Program Director",
+  "date": "2026-08-31",
+  "cycle": 105,
+  "model": "deepseek/deepseek-chat",
+  "statement": "West Oakland's launch meets crisis with care exactly where it's needed most—our teams are now live in District 1 with bilingual responders covering evening and weekend hours to match when behavioral health calls peak in this community. Fruitvale and D5 implementations will follow this evidence-based deployment model.",
+  "action": "Finalizing D3 and D5 launch timelines based on D1's operational data",
+  "numberMoved": "12 teams now active in West Oakland",
+  "ranAt": "2026-08-31T10:46:04.691Z"
+}

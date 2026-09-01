@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "culture",
+  "persona": "maria-keen",
+  "storyline": {
+    "slug": "dimond-melton-neilon-fame-sighting",
+    "verb": "opened"
+  },
+  "hood": "Dimond",
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook."
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland."
+    }
+  ],
+  "claim": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-08-31T18:21:11.279Z"
+}

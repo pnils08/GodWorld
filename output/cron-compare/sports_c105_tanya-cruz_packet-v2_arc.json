@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "sports",
+  "persona": "tanya-cruz",
+  "storyline": {
+    "slug": "baylight-district-dame-sarr-sideline-signal",
+    "verb": "opened"
+  },
+  "hood": "Baylight District",
+  "quotes": [
+    {
+      "pop": "POP-01025",
+      "name": "Dame Sarr",
+      "quote": "I heard the Oaks are 0-3 in preseason, but I don't really follow basketball that closely—just know Dame Sarr plays for them."
+    },
+    {
+      "pop": "POP-01026",
+      "name": "Coen Carr",
+      "quote": "I’ve heard Dame Sarr’s been putting in work, but the Oaks’ preseason record isn’t where we want it to be. We’ve got to step it up."
+    },
+    {
+      "pop": "POP-00050",
+      "name": "Ernesto Quintero",
+      "quote": "I’ve heard folks around Baylight talking about Dame Sarr’s hustle—7 points, 3 rebounds, and 3 steals—but the Oaks’ 0-3 preseason record has everyone a little on edge."
+    }
+  ],
+  "claim": "I heard the Oaks are 0-3 in preseason, but I don't really follow basketball that closely—just know Dame Sarr plays for them.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-08-31T18:19:58.667Z"
+}

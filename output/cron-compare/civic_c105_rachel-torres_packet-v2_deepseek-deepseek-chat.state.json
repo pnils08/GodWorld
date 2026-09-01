@@ -1,0 +1,391 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00057",
+    "name": "Sgt. Rachel Torres",
+    "role": "desk reporter",
+    "desk": "civic"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oakland Alternative Response Initiative | Status passed | phase implementation-active",
+    "approach": "Measured public-safety approach: choose one packet-backed incident, classification gap, or OARI response question. Third-person only. Use supplied names, places, dates, and numbers; do not invent officers, cases, quotes, crime waves, or public fear.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "public-safety",
+      "pulseClass": "initiative",
+      "safetyFrame": "Oakland Alternative Response Initiative | Status passed | phase implementation-active",
+      "classificationNote": null,
+      "anchorFacts": [
+        "Oakland Alternative Response Initiative | Status passed | phase implementation-active",
+        "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "Supplied area: West Oakland, Fruitvale, East Oakland"
+      ],
+      "missing": [
+        "officer names, case details, quotes, and response metrics unless supplied"
+      ],
+      "practicalClose": "State what the supplied record does and does not establish.",
+      "sceneRule": "Use only restrained, unnamed scene texture; it carries no incident fact, quote, or public sentiment.",
+      "sourcePointers": [
+        "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "public-safety",
+    "hood": "West Oakland, Fruitvale, East Oakland",
+    "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+    "plan": {
+      "focus": "Implementation and community impact of the Oakland Alternative Response Initiative in West Oakland, Fruitvale, and East Oakland.",
+      "closeQuestion": "What does the current record establish about the effectiveness of OARI in West Oakland, Fruitvale, and East Oakland, and what gaps remain?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — Line cook — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "profile": "Depak Ying — Server — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00201-1316b0410e",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "quote": "I’ve heard folks talking about the Alternative Response Initiative, and it feels like there’s hope it could ease some of the tension we’ve been seeing, especially in West Oakland. People are curious to see how it plays out.",
+        "factIds": [
+          "F-3c98c19278c3",
+          "F-1df8ac8d2bb7"
+        ],
+        "src": "packet.W2[POP-00201]"
+      },
+      {
+        "id": "Q-POP-00198-9ba67c9c16",
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "quote": "I've heard folks at the diner talking about how it's good to see someone other than cops showing up for certain calls—makes people feel safer to know there's another option.",
+        "factIds": [
+          "F-3c98c19278c3"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00170-0b404fcde5",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland.",
+        "factIds": [
+          "F-3c98c19278c3",
+          "F-1df8ac8d2bb7"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00210-9ddfd7f19d",
+        "pop": "POP-00210",
+        "name": "Depak Ying",
+        "quote": "I’ve heard folks talking about the Alternative Response Initiative, and it seems like it’s starting to make a difference in how people feel about safety in those neighborhoods.",
+        "factIds": [
+          "F-3c98c19278c3"
+        ],
+        "src": "packet.W2[POP-00210]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Are OARI teams effectively addressing the 'strain' issue in West Oakland?",
+        "usable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Why has there been zero Tribune coverage of 'faith' domain events despite five occurrences this cycle?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "Oakland Alternative Response Initiative | Status passed | phase implementation-active",
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "id": "F-3c98c19278c3"
+    },
+    {
+      "t": "FACT",
+      "text": "The record leaves a public-safety response or classification question open.",
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "id": "F-bff44fc502c2"
+    },
+    {
+      "t": "FACT",
+      "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "id": "F-eb5e3e0a3a60"
+    },
+    {
+      "t": "FACT",
+      "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+      "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "id": "F-1df8ac8d2bb7"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "measured third-person public-safety reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed safety signal, place, or resident consequence",
+      "closing": "an unresolved accountability or practical-safety question grounded in the record"
+    },
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "canonBlockers": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  },
+  "manifest": {
+    "id": "AM-05ec049e77ac",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-3c98c19278c3",
+        "t": "FACT",
+        "text": "Oakland Alternative Response Initiative | Status passed | phase implementation-active",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-bff44fc502c2",
+        "t": "FACT",
+        "text": "The record leaves a public-safety response or classification question open.",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-eb5e3e0a3a60",
+        "t": "FACT",
+        "text": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      },
+      {
+        "id": "F-1df8ac8d2bb7",
+        "t": "FACT",
+        "text": "Supplied area: West Oakland, Fruitvale, East Oakland",
+        "src": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00201-1316b0410e",
+        "speakerId": "POP-00201",
+        "speakerName": "Elio Perez",
+        "text": "I’ve heard folks talking about the Alternative Response Initiative, and it feels like there’s hope it could ease some of the tension we’ve been seeing, especially in West Oakland. People are curious to see how it plays out.",
+        "factIds": [
+          "F-3c98c19278c3",
+          "F-1df8ac8d2bb7"
+        ],
+        "src": "packet.W2[POP-00201]"
+      },
+      {
+        "id": "Q-POP-00198-9ba67c9c16",
+        "speakerId": "POP-00198",
+        "speakerName": "Rick Walker",
+        "text": "I've heard folks at the diner talking about how it's good to see someone other than cops showing up for certain calls—makes people feel safer to know there's another option.",
+        "factIds": [
+          "F-3c98c19278c3"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00170-0b404fcde5",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland.",
+        "factIds": [
+          "F-3c98c19278c3",
+          "F-1df8ac8d2bb7"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00210-9ddfd7f19d",
+        "speakerId": "POP-00210",
+        "speakerName": "Depak Ying",
+        "text": "I’ve heard folks talking about the Alternative Response Initiative, and it seems like it’s starting to make a difference in how people feel about safety in those neighborhoods.",
+        "factIds": [
+          "F-3c98c19278c3"
+        ],
+        "src": "packet.W2[POP-00210]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — Line cook — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00210",
+        "name": "Depak Ying",
+        "profile": "Depak Ying — Server — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Are OARI teams effectively addressing the 'strain' issue in West Oakland?",
+        "publishable": false
+      },
+      {
+        "from": "Sgt. Rachel Torres",
+        "text": "Why has there been zero Tribune coverage of 'faith' domain events despite five occurrences this cycle?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed restrained scene texture with no incident facts",
+      "analysis of a supplied classification or response gap",
+      "a practical close limited to the supplied record"
+    ],
+    "textureConditions": [
+      "every named person, institution, incident, agency, number, and date must come from the Packet",
+      "do not claim an interview, observation, quote, fear, trend, or response metric absent from the Packet",
+      "crime or safety interpretation must remain framed as analysis when not a supplied fact"
+    ],
+    "forbiddenClaimClasses": [
+      "invented incident, arrest, officer, case, quote, clearance, response time, or agency action",
+      "unsupported crime classification or collective fear claim",
+      "raw engine labels or decimals as public-facing evidence",
+      "a named person or institution not supplied by the Packet"
+    ]
+  }
+}

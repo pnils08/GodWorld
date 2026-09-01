@@ -1,0 +1,107 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00034",
+    "name": "Avery Santana",
+    "role": "Mayor",
+    "officeId": "MAYOR-01",
+    "district": "citywide",
+    "faction": "OPP",
+    "agentDir": "civic-office-mayor",
+    "initiative": null,
+    "dials": {
+      "approval": 69
+    }
+  },
+  "task": {
+    "a": "role-week",
+    "goal": "Month-six disbursement review + canvass launch"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 80,
+    "label": "West Oakland Stabilization Fund — Month-six disbursement review + canvass launch",
+    "lever": "Month-six disbursement review + canvass launch",
+    "hood": "West Oakland",
+    "initiative": "INIT-001",
+    "vsCity": {
+      "sentiment": 0.77,
+      "citySentiment": 0.8854545454545455,
+      "crime": 1.16,
+      "cityCrime": 0.6990909090909091,
+      "heat": 20.763636363636365,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "Month-six disbursement review + canvass launch",
+    "lineFacts": [
+      "approval 69",
+      "West Oakland Stabilization Fund is in disbursement-active — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+      "due: Month-six disbursement review + canvass launch"
+    ],
+    "missing": [
+      "no active ledger people in West Oakland — do not borrow other hoods",
+      "no shop names on disk for this turf",
+      "no named applicant households — do not invent who got the check",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "role-heat",
+    "hoods": [],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-MAYOR-01",
+      "t": "FACT",
+      "text": "Avery Santana holds MAYOR-01 at approval 69",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-001",
+      "t": "FACT",
+      "text": "West Oakland Stabilization Fund is in disbursement-active — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+      "src": "output/initiative_tracker.json"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "MAYOR-01",
+        "PopId": "POP-00034",
+        "Holder": "Avery Santana",
+        "District": "citywide",
+        "Approval": "69"
+      }
+    ],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

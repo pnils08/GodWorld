@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "noah-tan",
+  "byline": {
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "beatDomain": "ENVIRONMENT"
+  },
+  "laneEntries": 59,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "njected env (31) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00157\",\n  \"name\": \"Noah Tan\",\n  \"recorded\": true,\n  \"text\": \"filed: The Small Adjustments\"\n}"
+  },
+  "ranAt": "2026-08-31T23:15:57.421Z"
+}

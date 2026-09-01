@@ -1,0 +1,22 @@
+{
+  "date": "2026-08-31",
+  "cycle": 105,
+  "results": [
+    {
+      "office": "civic-office-mayor",
+      "ok": false,
+      "error": "mistralai/mistral-large: Provider returned error — HTTP 429 — mistralai/mistral-large is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations"
+    },
+    {
+      "office": "civic-project-health-center",
+      "ok": false,
+      "error": "fabricated statistic(s) after retry: 107"
+    },
+    {
+      "office": "civic-project-oari",
+      "ok": true,
+      "out": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json"
+    }
+  ],
+  "ranAt": "2026-08-31T10:46:06.081Z"
+}

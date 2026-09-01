@@ -1,0 +1,48 @@
+{
+  "draft": "output/cron-compare/sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2cb6cc88508551273bf1e132d22aa887b3f6779dea863e8e20857c77f09ea071",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Sideline dispatch verified against C105 sports feed and exact packet quotes with authorized locker room texture.",
+  "review": {
+    "profileId": "tanya-sideline-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "packageVersion": "TANYA-LEP2-1",
+    "manifestId": "AM-bb03d67f97f7",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Coen Carr",
+      "Dame Sarr"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0087,
+  "durationMs": 6483,
+  "parseError": false,
+  "ranAt": "2026-08-31T23:16:50.861Z"
+}

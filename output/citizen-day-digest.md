@@ -1,28 +1,39 @@
 # Today in Oakland — told by its people
 
-A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 104). Everything below is sourced from the world ledger — nothing is invented.
+A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 105). Everything below is sourced from the world ledger — nothing is invented.
+
+## The big moments
+
+- **Mason Ortega** (Uptown) — caught themselves narrating the day as if telling it to someone gone
+- **Mason Ortega** (Uptown) — saved the Tribune clipping with their neighborhood in it — the good one
+- **Mason Ortega** (Uptown) — stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence
+- **Dak Leo** (Lake Merritt) — navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes
+- **Dak Leo** (Lake Merritt) — stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture
+- **Dak Leo** (Lake Merritt) — dodged the running groups circling the lake and found a quiet bench near the pergola
 
 ## The people, in their own words
 
-### Bambi Wart — Ex-Offender Reentry Counselor — West Oakland
+### Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake
 
-> *adjusting my glasses, the streetlight catching the lenses* Manju—ain't seen you since you told me to fix my attitude faster than that leaky faucet. *small chuckle* Turns out you w *(talking with Manju Crenshaw)*
+> *leans back, a quiet smile* Man, Mike. Yeah, we're ready. You can feel it in the clubhouse—there's this weight to it now, the kind that only shows up when everything's been buildi
 
-### Manju Crenshaw — Midwife — Piedmont Ave
+> Mike. Good to see you, man. I'm doing all right. Shoulder's been talking to me a little more than I'd like, but that's the deal at this point in the road. Body's negotiating terms
 
-> *smiles warmly* Bambi, it's good to see you. Glad to hear you got that faucet—and your attitude—sorted out. Life's smoother when both are running right, isn't it? *laughs softly* S *(talking with Bambi Wart)*
+### Dillon Trevor — Server — Downtown
 
-### Carmen Delaine — Journalist, Civic Affairs Reporter — Chinatown
+> "Honestly, it wasn’t something I planned—it just happened over time. I’ve been here serving folks at the diner for decades, and I guess being around, knowing people’s names, their
 
-> Honestly? I don’t know whether to be thrilled or suspicious. Paulson’s moves felt like gut punches at first—trading Richards right as he hit his stride? But damn, 126 wins don’t li
+### Andre Turner — Line cook — Downtown
 
-### Ripley Court — STEM Program Coordinator — Rockridge
+> That damn ticket stub from last night’s game is still sitting on my counter, curled at the edges from the steam when I made coffee this morning. Vinnie’s last home stretch—should’v
 
-> I can't stop thinking about that STEM grant deadline coming up. It shouldn't be this stressful—it's just paperwork—but it feels like the whole program hinges on it. Maybe I'm just
+### Rafael Brannie — Mover — Laurel
 
-### Mac Hillie — Bakery worker — Uptown
+> I find myself at that bench by the pergola near the lake. Nobody’s out this late, just me and the hum of the streetlights. The water’s dark, but if you sit long enough, you start c
 
-> Man, 127 wins—that's unreal. Been watching Vinnie pitch since my oldest was in diapers, and now he's bowing out like this? Makes me proud, yeah, but also... shit, what's Oakland wi
+### Colin Soria — Security guard — Temescal
+
+> This week, the block’s felt... heavier. Like the air’s thicker with something unspoken. I’ve noticed more people walking with their heads down, fewer hellos exchanged. Even the reg
 
 ---
-*Assembled 2026-08-30 from Reflection_Intake (5 reflections, 5 citizens) and LifeHistory_Log (0 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+*Assembled 2026-08-31 from Reflection_Intake (6 reflections, 5 citizens) and LifeHistory_Log (6 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*

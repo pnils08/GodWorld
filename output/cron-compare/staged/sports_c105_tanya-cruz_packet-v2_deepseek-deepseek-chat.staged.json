@@ -1,0 +1,50 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "105",
+  "persona": "tanya-cruz",
+  "byline": "Tanya Cruz",
+  "bylinePopid": "POP-00014",
+  "article": "output/cron-compare/staged/sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Dame Sarr",
+        "role": "mentioned",
+        "popid": "POP-01025"
+      },
+      {
+        "name": "Coen Carr",
+        "role": "mentioned",
+        "popid": "POP-01026"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "baylight-district-dame-sarr-sideline-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I heard the Oaks are 0-3 in preseason, but I don't really follow basketball that closely—just know Dame Sarr plays for them.",
+        "sourceRef": "citizenVoice PRESS Dame Sarr"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-bb03d67f97f7",
+    "draftSha256": "2cb6cc88508551273bf1e132d22aa887b3f6779dea863e8e20857c77f09ea071",
+    "verdict": "output/cron-compare/sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-31T23:16:50.861Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-31T23:16:51.283Z"
+}

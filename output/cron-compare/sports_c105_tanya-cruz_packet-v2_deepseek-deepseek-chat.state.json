@@ -1,0 +1,375 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00014",
+    "name": "Tanya Cruz",
+    "role": "desk reporter",
+    "desk": "sports"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "sideline-dispatch",
+      "pulseClass": "record-only-sideline",
+      "bagModes": [
+        "10 Inference Close"
+      ],
+      "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+      "anchorFacts": [
+        "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+        "Coen Carr recorded 14pts and 3-4 3 points.",
+        "The Oaks preseason record is 0-3."
+      ],
+      "accessEvidence": {
+        "state": "ALLOTTED",
+        "facts": [
+          "clubhouse/sideline SET is the reporter's room"
+        ]
+      },
+      "quoteEvidence": {
+        "state": "NOT_SUPPLIED",
+        "quotes": []
+      },
+      "observationEvidence": {
+        "state": "ALLOTTED",
+        "facts": []
+      },
+      "missing": [
+        "Packet player quotes",
+        "injury or team-response facts beyond the supplied record"
+      ],
+      "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+      "sourcePointers": [
+        "output/world_summary_c105.md ## Sports",
+        "scripts/sportsSubstrate.js",
+        "docs/media/TANYA_SIDELINE_BAG.md"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "sideline-signal",
+    "hood": "Baylight District",
+    "src": "world_summary_c105.md ## Sports",
+    "plan": {
+      "focus": "Dame Sarr's performance and the Oaks' preseason record.",
+      "closeQuestion": "What’s the team’s outlook for the next game?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01025",
+        "name": "Dame Sarr",
+        "profile": "Dame Sarr — SG / The Oaks — Downtown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-01026",
+        "name": "Coen Carr",
+        "profile": "Coen Carr — SG / The Oaks — Uptown",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "profile": "Ernesto Quintero",
+        "quotationEligible": true,
+        "src": "packet.W2.interview"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-01025-ab36775362",
+        "pop": "POP-01025",
+        "name": "Dame Sarr",
+        "quote": "I heard the Oaks are 0-3 in preseason, but I don't really follow basketball that closely—just know Dame Sarr plays for them.",
+        "factIds": [
+          "F-583d654bb28f",
+          "F-439b9ab23f10"
+        ],
+        "src": "packet.W2[POP-01025]"
+      },
+      {
+        "id": "Q-POP-01026-18a34d4cbd",
+        "pop": "POP-01026",
+        "name": "Coen Carr",
+        "quote": "I’ve heard Dame Sarr’s been putting in work, but the Oaks’ preseason record isn’t where we want it to be. We’ve got to step it up.",
+        "factIds": [
+          "F-f72af38d7088",
+          "F-583d654bb28f"
+        ],
+        "src": "packet.W2[POP-01026]"
+      },
+      {
+        "id": "Q-POP-00050-5e48fcb715",
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "quote": "I’ve heard folks around Baylight talking about Dame Sarr’s hustle—7 points, 3 rebounds, and 3 steals—but the Oaks’ 0-3 preseason record has everyone a little on edge.",
+        "factIds": [
+          "F-f72af38d7088",
+          "F-583d654bb28f"
+        ],
+        "src": "packet.W2[POP-00050]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "Is there a shift in team dynamics affecting performance?",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-f72af38d7088"
+    },
+    {
+      "t": "FACT",
+      "text": "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-20c7958bb5e6"
+    },
+    {
+      "t": "FACT",
+      "text": "Coen Carr recorded 14pts and 3-4 3 points.",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-de8caff73497"
+    },
+    {
+      "t": "FACT",
+      "text": "The Oaks preseason record is 0-3.",
+      "src": "world_summary_c105.md ## Sports",
+      "id": "F-583d654bb28f"
+    },
+    {
+      "t": "FACT",
+      "text": "Dame Sarr — SG / The Oaks — Downtown",
+      "src": "Simulation_Ledger profile for POP-01025",
+      "id": "F-439b9ab23f10"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "tanya-sideline-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "File a short sideline dispatch from the clubhouse SET. Packet owns player quotes and numbers. The room itself is allotted hallucination.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "short first-person sideline interpretation",
+      "targetWords": "evidence-bounded",
+      "opening": "one supplied sports fact",
+      "closing": "the access or observation still needed"
+    },
+    "authorizedTexture": [
+      "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+      "room mood and presence as allotted hallucination fitted to the supplied sports line"
+    ],
+    "textureConditions": [
+      "player quotes, statistics, injuries, and results require Packet support",
+      "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "canonBlockers": [
+      "invented player quotes, invented statistics, invented injuries, or real-world Oakland venues",
+      "an invented or altered Packet person, quote, statistic, result, or roster move",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  },
+  "manifest": {
+    "id": "AM-bb03d67f97f7",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-f72af38d7088",
+        "t": "FACT",
+        "text": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-20c7958bb5e6",
+        "t": "FACT",
+        "text": "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-de8caff73497",
+        "t": "FACT",
+        "text": "Coen Carr recorded 14pts and 3-4 3 points.",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-583d654bb28f",
+        "t": "FACT",
+        "text": "The Oaks preseason record is 0-3.",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      {
+        "id": "F-439b9ab23f10",
+        "t": "FACT",
+        "text": "Dame Sarr — SG / The Oaks — Downtown",
+        "src": "Simulation_Ledger profile for POP-01025"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-01025-ab36775362",
+        "speakerId": "POP-01025",
+        "speakerName": "Dame Sarr",
+        "text": "I heard the Oaks are 0-3 in preseason, but I don't really follow basketball that closely—just know Dame Sarr plays for them.",
+        "factIds": [
+          "F-583d654bb28f",
+          "F-439b9ab23f10"
+        ],
+        "src": "packet.W2[POP-01025]"
+      },
+      {
+        "id": "Q-POP-01026-18a34d4cbd",
+        "speakerId": "POP-01026",
+        "speakerName": "Coen Carr",
+        "text": "I’ve heard Dame Sarr’s been putting in work, but the Oaks’ preseason record isn’t where we want it to be. We’ve got to step it up.",
+        "factIds": [
+          "F-f72af38d7088",
+          "F-583d654bb28f"
+        ],
+        "src": "packet.W2[POP-01026]"
+      },
+      {
+        "id": "Q-POP-00050-5e48fcb715",
+        "speakerId": "POP-00050",
+        "speakerName": "Ernesto Quintero",
+        "text": "I’ve heard folks around Baylight talking about Dame Sarr’s hustle—7 points, 3 rebounds, and 3 steals—but the Oaks’ 0-3 preseason record has everyone a little on edge.",
+        "factIds": [
+          "F-f72af38d7088",
+          "F-583d654bb28f"
+        ],
+        "src": "packet.W2[POP-00050]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-01025",
+        "name": "Dame Sarr",
+        "profile": "Dame Sarr — SG / The Oaks — Downtown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-01026",
+        "name": "Coen Carr",
+        "profile": "Coen Carr — SG / The Oaks — Uptown",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00050",
+        "name": "Ernesto Quintero",
+        "profile": "Ernesto Quintero",
+        "src": "packet.W2.interview",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Tanya Cruz",
+        "text": "Is there a shift in team dynamics affecting performance?",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
+      "room mood and presence as allotted hallucination fitted to the supplied sports line"
+    ],
+    "textureConditions": [
+      "player quotes, statistics, injuries, and results require Packet support",
+      "in-world clubhouse SET and named spots that are not real Oakland are allotted hallucination and belong on INTAKE BIZ if newly named",
+      "an unresolved feed subject may not receive a POPID, role, biography, quote, or interview"
+    ],
+    "forbiddenClaimClasses": [
+      "invented player quotes, invented statistics, invented injuries, or real-world Oakland venues",
+      "an invented or altered Packet person, quote, statistic, result, or roster move",
+      "an unresolved feed spelling silently assigned an identity or role"
+    ]
+  }
+}

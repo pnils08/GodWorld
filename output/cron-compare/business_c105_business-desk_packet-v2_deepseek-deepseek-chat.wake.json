@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "business",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "business-desk",
+  "byline": {
+    "name": "Jordan Velez",
+    "popid": "POP-00153",
+    "beatDomain": "ECONOMIC"
+  },
+  "laneEntries": 50,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "g/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: Rockridge's Retail Pulse Quickens\"\n}"
+  },
+  "ranAt": "2026-08-31T23:18:05.627Z"
+}

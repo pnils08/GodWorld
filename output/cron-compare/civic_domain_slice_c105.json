@@ -1,0 +1,2139 @@
+{
+  "version": "CIVIC-DOMAIN-SLICE-4",
+  "cycle": 105,
+  "kind": "civic-domain",
+  "empty": false,
+  "source": {
+    "deskSignal": "output/desk_signal_c105.json",
+    "decisions": "output/cron-civic/decisions_lane_c105.json",
+    "datawakes": "output/cron-civic/datawake/* (cycle-matched only)"
+  },
+  "entries": [
+    {
+      "kind": "anomaly",
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 0
+    },
+    {
+      "kind": "anomaly",
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 1
+    },
+    {
+      "kind": "anomaly",
+      "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+      "ref": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s)",
+      "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+      "popids": [
+        "POP-00136",
+        "POP-00154",
+        "POP-01080"
+      ],
+      "handle": {
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 2 cycles.",
+        "citizens": [
+          "Louis Cross (POP-01080)",
+          "Lila Mezran (POP-00154)",
+          "Rafael Montez (POP-00136)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 2
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: pilot_evaluation → implementation-active",
+      "ref": "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "popids": [
+        "POP-00754",
+        "POP-00756",
+        "POP-00762"
+      ],
+      "handle": {
+        "angle": "Oakland Alternative Response Initiative advanced from pilot_evaluation to implementation-active — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Alternative Response Initiative advanced from pilot_evaluation to implementation-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Ophelia Brenner (POP-00754)",
+          "Ramon Solano (POP-00756)",
+          "Aziz Rahimi (POP-00762)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 3
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: visioning-complete → visioning",
+      "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00744",
+        "POP-00766",
+        "POP-01057"
+      ],
+      "handle": {
+        "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning — what the milestone delivers and who carried it",
+        "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Manjit Singh (POP-00766)",
+          "Nina Reyes (POP-01057)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 4
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: construction-planning → vote-scheduled",
+      "ref": "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+      "hood": "Jack London, Downtown",
+      "popids": [
+        "POP-00020",
+        "POP-00156",
+        "POP-01078"
+      ],
+      "handle": {
+        "angle": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled — what the milestone delivers and who carried it",
+        "hookLine": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled; a milestone worth covering, not burying.",
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Angela Reyes (POP-00156)",
+          "Elena Vásquez (POP-00020)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 5
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot-active",
+      "ref": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [
+        "POP-00037",
+        "POP-00588",
+        "POP-00789"
+      ],
+      "handle": {
+        "angle": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Darren Briggs (POP-00588)",
+          "Elias Varek (POP-00789)",
+          "Brenda Okoro (POP-00037)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 6
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Downtown sentiment rose 0.22 (0.59 → 0.81)",
+      "ref": "output/engine_audit_c105.json patterns[7]; evidence: Neighborhood_Map row(s)",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00127",
+        "POP-00533",
+        "POP-00597"
+      ],
+      "handle": {
+        "angle": "civic gain in Downtown — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Downtown this cycle.",
+        "citizens": [
+          "Mason Miller (POP-00127)",
+          "Eric Taveras (POP-00597)",
+          "Travis Coles (POP-00533)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 7
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Temescal sentiment rose 0.30 (0.58 → 0.88)",
+      "ref": "output/engine_audit_c105.json patterns[8]; evidence: Neighborhood_Map row(s)",
+      "hood": "Temescal",
+      "popids": [
+        "POP-00027",
+        "POP-00745",
+        "POP-00792"
+      ],
+      "handle": {
+        "angle": "civic gain in Temescal — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Temescal this cycle.",
+        "citizens": [
+          "Philly Rodriguez (POP-00027)",
+          "Sonia Parikh (POP-00745)",
+          "Bobby Chen-Ramirez (POP-00792)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 8
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Laurel sentiment rose 0.24 (0.49 → 0.73)",
+      "ref": "output/engine_audit_c105.json patterns[9]; evidence: Neighborhood_Map row(s)",
+      "hood": "Laurel",
+      "popids": [
+        "POP-00367",
+        "POP-00478",
+        "POP-00495"
+      ],
+      "handle": {
+        "angle": "civic gain in Laurel — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Laurel this cycle.",
+        "citizens": [
+          "Ron Arenson (POP-00367)",
+          "Maya Brooks (POP-00478)",
+          "Rosalind Young (POP-00495)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 9
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | West Oakland sentiment rose 0.29 (0.48 → 0.77)",
+      "ref": "output/engine_audit_c105.json patterns[10]; evidence: Neighborhood_Map row(s)",
+      "hood": "West Oakland",
+      "popids": [
+        "POP-00368",
+        "POP-00441",
+        "POP-00617"
+      ],
+      "handle": {
+        "angle": "civic gain in West Oakland — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in West Oakland this cycle.",
+        "citizens": [
+          "Eleanor Rivera (POP-00617)",
+          "Dom Will (POP-00368)",
+          "Soriya Rodriguez (POP-00441)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 10
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Fruitvale sentiment rose 0.25 (0.54 → 0.79)",
+      "ref": "output/engine_audit_c105.json patterns[11]; evidence: Neighborhood_Map row(s)",
+      "hood": "Fruitvale",
+      "popids": [
+        "POP-00031",
+        "POP-00143",
+        "POP-00231"
+      ],
+      "handle": {
+        "angle": "civic gain in Fruitvale — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Fruitvale this cycle.",
+        "citizens": [
+          "Martin Richards (POP-00031)",
+          "Clarissa Dane (POP-00143)",
+          "Calvin Turner (POP-00231)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 11
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Jack London sentiment rose 0.25 (0.52 → 0.77)",
+      "ref": "output/engine_audit_c105.json patterns[12]; evidence: Neighborhood_Map row(s)",
+      "hood": "Jack London",
+      "popids": [
+        "POP-00015",
+        "POP-00053",
+        "POP-01046"
+      ],
+      "handle": {
+        "angle": "civic gain in Jack London — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Jack London this cycle.",
+        "citizens": [
+          "DeShawn Hartley (POP-00015)",
+          "Kevin Clark (POP-00053)",
+          "Elliot Abraham (POP-01046)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 12
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Rockridge sentiment rose 0.31 (0.53 → 0.84)",
+      "ref": "output/engine_audit_c105.json patterns[13]; evidence: Neighborhood_Map row(s)",
+      "hood": "Rockridge",
+      "popids": [
+        "POP-00742",
+        "POP-00759",
+        "POP-00765"
+      ],
+      "handle": {
+        "angle": "civic gain in Rockridge — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Rockridge this cycle.",
+        "citizens": [
+          "Maya Torres-Dillon (POP-00742)",
+          "Naomi Sterling (POP-00759)",
+          "Anand Krishnamurthy (POP-00765)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 13
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Adams Point sentiment rose 0.43 (0.6 → 1.03)",
+      "ref": "output/engine_audit_c105.json patterns[14]; evidence: Neighborhood_Map row(s)",
+      "hood": "Adams Point",
+      "popids": [
+        "POP-00645",
+        "POP-00648",
+        "POP-00782"
+      ],
+      "handle": {
+        "angle": "civic gain in Adams Point — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Adams Point this cycle.",
+        "citizens": [
+          "Mart Johns (POP-00648)",
+          "Ezekiel Campbell (POP-00645)",
+          "Devon Willis (POP-00782)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 14
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Grand Lake sentiment rose 0.51 (0.48 → 0.99)",
+      "ref": "output/engine_audit_c105.json patterns[15]; evidence: Neighborhood_Map row(s)",
+      "hood": "Grand Lake",
+      "popids": [
+        "POP-00001",
+        "POP-00002",
+        "POP-01080"
+      ],
+      "handle": {
+        "angle": "civic gain in Grand Lake — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Grand Lake this cycle.",
+        "citizens": [
+          "Vinnie Keane (POP-00001)",
+          "Amara Keane (POP-00002)",
+          "Louis Cross (POP-01080)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 15
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Piedmont Ave sentiment rose 0.32 (0.43 → 0.75)",
+      "ref": "output/engine_audit_c105.json patterns[16]; evidence: Neighborhood_Map row(s)",
+      "hood": "Piedmont Ave",
+      "popids": [
+        "POP-00043",
+        "POP-00054",
+        "POP-00238"
+      ],
+      "handle": {
+        "angle": "civic gain in Piedmont Ave — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Piedmont Ave this cycle.",
+        "citizens": [
+          "JR Rosado (POP-00054)",
+          "Janae Rivers (POP-00043)",
+          "Clearence Leighton (POP-00238)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 16
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Chinatown sentiment rose 0.33 (0.46 → 0.79)",
+      "ref": "output/engine_audit_c105.json patterns[17]; evidence: Neighborhood_Map row(s)",
+      "hood": "Chinatown",
+      "popids": [
+        "POP-00439",
+        "POP-00487",
+        "POP-00635"
+      ],
+      "handle": {
+        "angle": "civic gain in Chinatown — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Chinatown this cycle.",
+        "citizens": [
+          "Mei Chen (POP-00635)",
+          "Timmie Hall (POP-00439)",
+          "Jimar Garcia (POP-00487)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 17
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Brooklyn sentiment rose 0.45 (0.52 → 0.97)",
+      "ref": "output/engine_audit_c105.json patterns[18]; evidence: Neighborhood_Map row(s)",
+      "hood": "Brooklyn",
+      "popids": [],
+      "handle": {
+        "angle": "civic gain in Brooklyn — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Brooklyn this cycle.",
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 18
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Eastlake sentiment rose 0.49 (0.49 → 0.98)",
+      "ref": "output/engine_audit_c105.json patterns[19]; evidence: Neighborhood_Map row(s)",
+      "hood": "Eastlake",
+      "popids": [],
+      "handle": {
+        "angle": "civic gain in Eastlake — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Eastlake this cycle.",
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 19
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Glenview sentiment rose 0.47 (0.51 → 0.98)",
+      "ref": "output/engine_audit_c105.json patterns[20]; evidence: Neighborhood_Map row(s)",
+      "hood": "Glenview",
+      "popids": [],
+      "handle": {
+        "angle": "civic gain in Glenview — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Glenview this cycle.",
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 20
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Dimond sentiment rose 0.42 (0.59 → 1.01)",
+      "ref": "output/engine_audit_c105.json patterns[21]; evidence: Neighborhood_Map row(s)",
+      "hood": "Dimond",
+      "popids": [],
+      "handle": {
+        "angle": "civic gain in Dimond — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Dimond this cycle.",
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 21
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Ivy Hill sentiment rose 0.54 (0.55 → 1.09)",
+      "ref": "output/engine_audit_c105.json patterns[22]; evidence: Neighborhood_Map row(s)",
+      "hood": "Ivy Hill",
+      "popids": [
+        "POP-00784"
+      ],
+      "handle": {
+        "angle": "civic gain in Ivy Hill — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Ivy Hill this cycle.",
+        "citizens": [
+          "Isaac Martinez (POP-00784)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 22
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | San Antonio sentiment rose 0.48 (0.42 → 0.9)",
+      "ref": "output/engine_audit_c105.json patterns[23]; evidence: Neighborhood_Map row(s)",
+      "hood": "San Antonio",
+      "popids": [
+        "POP-00778",
+        "POP-00796",
+        "POP-01054"
+      ],
+      "handle": {
+        "angle": "civic gain in San Antonio — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in San Antonio this cycle.",
+        "citizens": [
+          "Delia Vargas-Ruiz (POP-01054)",
+          "Jamal Thompson (POP-00778)",
+          "Dank Abara (POP-00796)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 23
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | KONO sentiment rose 0.38 (0.33 → 0.71)",
+      "ref": "output/engine_audit_c105.json patterns[24]; evidence: Neighborhood_Map row(s)",
+      "hood": "KONO",
+      "popids": [
+        "POP-00802",
+        "POP-00808",
+        "POP-01081"
+      ],
+      "handle": {
+        "angle": "civic gain in KONO — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in KONO this cycle.",
+        "citizens": [
+          "Hitoki Ka (POP-01081)",
+          "Funmi Shah (POP-00802)",
+          "Sahana Joshi (POP-00808)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 24
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Lake Merritt sentiment rose 0.21 (0.59 → 0.8)",
+      "ref": "output/engine_audit_c105.json patterns[25]; evidence: Neighborhood_Map row(s)",
+      "hood": "Lake Merritt",
+      "popids": [
+        "POP-00755",
+        "POP-00757",
+        "POP-00767"
+      ],
+      "handle": {
+        "angle": "civic gain in Lake Merritt — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Lake Merritt this cycle.",
+        "citizens": [
+          "Antoine Vermeer (POP-00755)",
+          "Daniel Han (POP-00757)",
+          "Miriam Goldstein (POP-00767)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 25
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Uptown sentiment rose 0.38 (0.5 → 0.88)",
+      "ref": "output/engine_audit_c105.json patterns[26]; evidence: Neighborhood_Map row(s)",
+      "hood": "Uptown",
+      "popids": [
+        "POP-00035",
+        "POP-00435",
+        "POP-00437"
+      ],
+      "handle": {
+        "angle": "civic gain in Uptown — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in Uptown this cycle.",
+        "citizens": [
+          "Laila Cortez (POP-00035)",
+          "Driscoll Fester (POP-00435)",
+          "Amelia Kim (POP-00437)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 26
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | Baylight District sentiment rose 0.51 (0.54 → 1.05)",
+      "ref": "output/engine_audit_c105.json patterns[27]; evidence: Neighborhood_Map row(s)",
+      "hood": "Baylight District",
+      "popids": [
+        "POP-00050",
+        "POP-00777"
+      ],
+      "handle": {
+        "angle": "economic gain in Baylight District — the positive outcome and its driver",
+        "hookLine": "A economic metric improved in Baylight District this cycle.",
+        "citizens": [
+          "Ernesto Quintero (POP-00050)",
+          "Rico Valdez (POP-00777)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 27
+    },
+    {
+      "kind": "anomaly",
+      "label": "improvement (low) | East Oakland sentiment rose 0.48 (0.48 → 0.96)",
+      "ref": "output/engine_audit_c105.json patterns[28]; evidence: Neighborhood_Map row(s)",
+      "hood": "East Oakland",
+      "popids": [
+        "POP-01047",
+        "POP-01055"
+      ],
+      "handle": {
+        "angle": "civic gain in East Oakland — the positive outcome and its driver",
+        "hookLine": "A civic metric improved in East Oakland this cycle.",
+        "citizens": [
+          "Jerome Pittman (POP-01055)",
+          "Maria Conteras (POP-01047)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 28
+    },
+    {
+      "kind": "anomaly",
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (implementation-active, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+      "ref": "output/engine_audit_c105.json patterns[29]; evidence: Initiative_Tracker row(s) 3",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "popids": [
+        "POP-00004",
+        "POP-00598",
+        "POP-00758"
+      ],
+      "handle": {
+        "angle": "Oakland Alternative Response Initiative stalled in implementation-active — remedy path + responsible office",
+        "hookLine": "The safety initiative carrying West Oakland has not advanced in several cycles.",
+        "citizens": [
+          "Lucia Polito (POP-00004)",
+          "Vladimir Gonzalez (POP-00598)",
+          "Robert Jaston (POP-00758)"
+        ]
+      },
+      "source": "desk-signal",
+      "sourceIndex": 29
+    },
+    {
+      "kind": "initiative",
+      "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+      "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "hood": "West Oakland",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 30
+    },
+    {
+      "kind": "vote",
+      "label": "West Oakland Stabilization Fund | Month-six disbursement review + canvass launch C105",
+      "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 31
+    },
+    {
+      "kind": "initiative",
+      "label": "Oakland Alternative Response Initiative | Status passed | phase implementation-active",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "hood": "West Oakland, Fruitvale, East Oakland",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 32
+    },
+    {
+      "kind": "vote",
+      "label": "Oakland Alternative Response Initiative | First expansion-district launch (D1) C105",
+      "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 33
+    },
+    {
+      "kind": "initiative",
+      "label": "Fruitvale Transit Hub Phase II — Visioning | Status visioning-complete | phase visioning",
+      "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "hood": "Fruitvale",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 34
+    },
+    {
+      "kind": "vote",
+      "label": "Fruitvale Transit Hub Phase II — Visioning | Conduct first visioning session by January 15 C105",
+      "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 35
+    },
+    {
+      "kind": "initiative",
+      "label": "Temescal Community Health Center | Status passed | phase construction-active",
+      "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "hood": "Temescal",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 36
+    },
+    {
+      "kind": "vote",
+      "label": "Temescal Community Health Center | Structural frame groundbreaking C106",
+      "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 37
+    },
+    {
+      "kind": "initiative",
+      "label": "Baylight District — Final Council Vote | Status passed | phase vote-scheduled",
+      "ref": "Initiative_Tracker (InitiativeID INIT-006); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "hood": "Jack London, Downtown",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 38
+    },
+    {
+      "kind": "vote",
+      "label": "Baylight District — Final Council Vote | Final council vote on Phase II bid C105",
+      "ref": "Initiative_Tracker (InitiativeID INIT-006)",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 39
+    },
+    {
+      "kind": "initiative",
+      "label": "Oakland Youth Apprenticeship Pipeline | Status announced | phase pilot-active",
+      "ref": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "hood": "West Oakland, East Oakland, Fruitvale",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 40
+    },
+    {
+      "kind": "vote",
+      "label": "Oakland Youth Apprenticeship Pipeline | Backlog processing completion + town hall C106",
+      "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 41
+    },
+    {
+      "kind": "civic-log",
+      "label": "Council decisions, votes, voices — written by /city-hall after this build; read at consume time",
+      "ref": "output/production_log_c105.md \"## /city-hall\"",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 42
+    },
+    {
+      "kind": "ripple",
+      "label": "retail/sentiment/nightlife | West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland",
+      "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+      "hood": "West Oakland",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 43
+    },
+    {
+      "kind": "ripple",
+      "label": "sentiment/communityEngagement/nightlife | Oakland Alternative Response Initiative is implementation-active — ongoing safety effects in West Oakland, Fruitvale, East Oakland",
+      "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 44
+    },
+    {
+      "kind": "ripple",
+      "label": "retail/traffic/sentiment | Fruitvale Transit Hub Phase II — Visioning is visioning — ongoing transit effects in Fruitvale",
+      "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+      "hood": "Fruitvale",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 45
+    },
+    {
+      "kind": "ripple",
+      "label": "sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal",
+      "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+      "hood": "Temescal",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 46
+    },
+    {
+      "kind": "ripple",
+      "label": "sentiment/communityEngagement/retail | Oakland Youth Apprenticeship Pipeline is pilot-active — ongoing workforce effects in West Oakland, East Oakland, Fruitvale",
+      "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 47
+    },
+    {
+      "kind": "ripple",
+      "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Temescal Community Health Center sitting, nothing free (-2); Baylight District — Final Council Vote …",
+      "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "CITYWIDE",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 48
+    },
+    {
+      "kind": "ripple",
+      "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Oakland Youth Apprenticeship Pipeline sitting, nothing free (-2); decay toward 50 (-1)",
+      "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "D1",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 49
+    },
+    {
+      "kind": "ripple",
+      "label": "approval/district-sentiment | Baylight District — Final Council Vote sitting, nothing free (-1); decay toward 50 (-1)",
+      "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "D2",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 50
+    },
+    {
+      "kind": "ripple",
+      "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Oakland Youth Apprenticeship Pipeline sitting, nothing free (-2); decay toward 50 (-1)",
+      "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "D3",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 51
+    },
+    {
+      "kind": "ripple",
+      "label": "approval/district-sentiment | decay toward 50 (-1)",
+      "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "D4",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 52
+    },
+    {
+      "kind": "ripple",
+      "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting, nothing free (-2); Oakland Youth Apprenticeship Pipeline sitting, nothing free (-2); decay toward 50 (-1)",
+      "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "D5",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 53
+    },
+    {
+      "kind": "ripple",
+      "label": "approval/district-sentiment | Temescal Community Health Center sitting, nothing free (-1)",
+      "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+      "hood": "D7",
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "desk-signal",
+      "sourceIndex": 55
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Vanessa Tran-Muñoz: 12 teams now active in West Oakland",
+      "ref": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json",
+      "hood": null,
+      "popids": [
+        "POP-01021"
+      ],
+      "handle": {
+        "angle": "West Oakland's launch meets crisis with care exactly where it's needed most—our teams are now live in District 1 with bilingual responders covering evening and weekend hours to match when behavioral health calls peak in this community. Frui",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 58
+    },
+    {
+      "kind": "weather",
+      "label": "Cycle 105 weather | Season Winter | 49°F rain, S 18 mph, rain (frontState RAIN), humidity 90, visibility 6",
+      "ref": "output/world_summary_c105.md:3",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": null,
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "world-summary",
+      "sourceIndex": 59
+    },
+    {
+      "kind": "season-feel",
+      "label": "Drew Lemon — dealt with a seasonal health concern",
+      "ref": "output/world_summary_c105.md ## Who Lived It",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00670"
+      ],
+      "handle": {
+        "angle": "Drew Lemon — dealt with a seasonal health concern",
+        "hookLine": "Drew Lemon — dealt with a seasonal health concern",
+        "citizens": [
+          "Drew Lemon (POP-00670)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 60
+    },
+    {
+      "kind": "season-feel",
+      "label": "Genevieve Liu — dealt with a seasonal health concern",
+      "ref": "output/world_summary_c105.md ## Who Lived It",
+      "hood": "Lake Merritt",
+      "popids": [
+        "POP-00928"
+      ],
+      "handle": {
+        "angle": "Genevieve Liu — dealt with a seasonal health concern",
+        "hookLine": "Genevieve Liu — dealt with a seasonal health concern",
+        "citizens": [
+          "Genevieve Liu (POP-00928)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 61
+    },
+    {
+      "kind": "season-feel",
+      "label": "Melton Neilon — relied on familiar social circles during cold period",
+      "ref": "output/world_summary_c105.md ## Who Lived It",
+      "hood": "Temescal",
+      "popids": [
+        "POP-00170"
+      ],
+      "handle": {
+        "angle": "Melton Neilon — relied on familiar social circles during cold period",
+        "hookLine": "Melton Neilon — relied on familiar social circles during cold period",
+        "citizens": [
+          "Melton Neilon (POP-00170)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 62
+    },
+    {
+      "kind": "season-feel",
+      "label": "Marky Beal — limited social activity due to winter mood",
+      "ref": "output/world_summary_c105.md ## Who Lived It",
+      "hood": "West Oakland",
+      "popids": [
+        "POP-00202"
+      ],
+      "handle": {
+        "angle": "Marky Beal — limited social activity due to winter mood",
+        "hookLine": "Marky Beal — limited social activity due to winter mood",
+        "citizens": [
+          "Marky Beal (POP-00202)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 63
+    },
+    {
+      "kind": "season-feel",
+      "label": "Rigo Ryno — helped the kids with homework at the kitchen table",
+      "ref": "output/world_summary_c105.md ## Who Lived It",
+      "hood": "Temescal",
+      "popids": [
+        "POP-00197"
+      ],
+      "handle": {
+        "angle": "Rigo Ryno — helped the kids with homework at the kitchen table",
+        "hookLine": "Rigo Ryno — helped the kids with homework at the kitchen table",
+        "citizens": [
+          "Rigo Ryno (POP-00197)"
+        ]
+      },
+      "source": "season-feel",
+      "sourceIndex": 64
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+      "ref": "output/world_summary_c105.md ## World Events",
+      "hood": "Downtown",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+        "hookLine": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 65
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Epiphany",
+      "ref": "output/world_summary_c105.md ## World Events",
+      "hood": "Fruitvale",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Epiphany",
+        "hookLine": "FAITH — holy_day — Fruitvale: St. Esperanza Parish observes Epiphany",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 66
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — community_program — Temescal: Temescal Islamic Center: seniors lunch program marks milestone",
+      "ref": "output/world_summary_c105.md ## World Events",
+      "hood": "Temescal",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — community_program — Temescal: Temescal Islamic Center: seniors lunch program marks milestone",
+        "hookLine": "FAITH — community_program — Temescal: Temescal Islamic Center: seniors lunch program marks milestone",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 67
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — community_program — Downtown: Lake Merritt Mindfulness Sangha: seniors lunch program marks milestone",
+      "ref": "output/world_summary_c105.md ## World Events",
+      "hood": "Downtown",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — community_program — Downtown: Lake Merritt Mindfulness Sangha: seniors lunch program marks milestone",
+        "hookLine": "FAITH — community_program — Downtown: Lake Merritt Mindfulness Sangha: seniors lunch program marks milestone",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 68
+    },
+    {
+      "kind": "season-feel",
+      "label": "FAITH — community_program — Montclair: Bharat Mandir of the East Bay: seniors lunch program marks milestone",
+      "ref": "output/world_summary_c105.md ## World Events",
+      "hood": "Montclair",
+      "popids": [],
+      "handle": {
+        "angle": "FAITH — community_program — Montclair: Bharat Mandir of the East Bay: seniors lunch program marks milestone",
+        "hookLine": "FAITH — community_program — Montclair: Bharat Mandir of the East Bay: seniors lunch program marks milestone",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 69
+    },
+    {
+      "kind": "season-feel",
+      "label": "Restaurants: Merritt Reserve (Lake Merritt), Broadline Grab-N-Go (Fruitvale), Cozy Pot (Rockridge)",
+      "ref": "output/world_summary_c105.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "Restaurants: Merritt Reserve (Lake Merritt), Broadline Grab-N-Go (Fruitvale), Cozy Pot (Rockridge)",
+        "hookLine": "Restaurants: Merritt Reserve (Lake Merritt), Broadline Grab-N-Go (Fruitvale), Cozy Pot (Rockridge)",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 70
+    },
+    {
+      "kind": "season-feel",
+      "label": "Fast food: TacoRail (West Oakland), HotSlice Pizza (Rockridge)",
+      "ref": "output/world_summary_c105.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "Fast food: TacoRail (West Oakland), HotSlice Pizza (Rockridge)",
+        "hookLine": "Fast food: TacoRail (West Oakland), HotSlice Pizza (Rockridge)",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 71
+    },
+    {
+      "kind": "season-feel",
+      "label": "Nightlife: Festive Fireside (Rockridge), Underglow Lounge (Jack London), After Hours Oakland (Downtown). Volume 8, vibe art-scene, movement art-walk. Weather impact 1.33.",
+      "ref": "output/world_summary_c105.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "Nightlife: Festive Fireside (Rockridge), Underglow Lounge (Jack London), After Hours Oakland (Downtown). Volume 8, vibe art-scene, movement art-walk. Weather impact 1.33.",
+        "hookLine": "Nightlife: Festive Fireside (Rockridge), Underglow Lounge (Jack London), After Hours Oakland (Downtown). Volume 8, vibe art-scene, movement art-walk. Weather impact 1.33.",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 72
+    },
+    {
+      "kind": "season-feel",
+      "label": "City events: The Corliss Family Block Party, Jack London First Friday Waterfront, Lake Merritt Community Joy Parade, Temescal Resolution Run",
+      "ref": "output/world_summary_c105.md ## Evening Texture",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "City events: The Corliss Family Block Party, Jack London First Friday Waterfront, Lake Merritt Community Joy Parade, Temescal Resolution Run",
+        "hookLine": "City events: The Corliss Family Block Party, Jack London First Friday Waterfront, Lake Merritt Community Joy Parade, Temescal Resolution Run",
+        "citizens": []
+      },
+      "source": "season-feel",
+      "sourceIndex": 73
+    }
+  ],
+  "packets": {
+    "carmen-delaine": {
+      "seat": {
+        "slug": "carmen-delaine",
+        "name": "Carmen Delaine",
+        "popid": "POP-00011",
+        "domain": "civic-ledger"
+      },
+      "empty": false,
+      "approach": "Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "kind": "initiative",
+        "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "hood": "West Oakland",
+        "popids": [],
+        "citizens": []
+      },
+      "pulse": {
+        "className": "civic-ledger",
+        "score": 55,
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hood": "West Oakland",
+        "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+          "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+        ]
+      },
+      "citizens": [],
+      "candidates": [
+        {
+          "score": 55,
+          "kind": "initiative",
+          "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+          "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+          "hood": "West Oakland",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 30
+        },
+        {
+          "score": 55,
+          "kind": "vote",
+          "label": "West Oakland Stabilization Fund | Month-six disbursement review + canvass launch C105",
+          "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+          "hood": null,
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 31
+        },
+        {
+          "score": 55,
+          "kind": "initiative",
+          "label": "Oakland Alternative Response Initiative | Status passed | phase implementation-active",
+          "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 32
+        },
+        {
+          "score": 55,
+          "kind": "vote",
+          "label": "Oakland Alternative Response Initiative | First expansion-district launch (D1) C105",
+          "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+          "hood": null,
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 33
+        },
+        {
+          "score": 55,
+          "kind": "initiative",
+          "label": "Fruitvale Transit Hub Phase II — Visioning | Status visioning-complete | phase visioning",
+          "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+          "hood": "Fruitvale",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 34
+        },
+        {
+          "score": 55,
+          "kind": "vote",
+          "label": "Fruitvale Transit Hub Phase II — Visioning | Conduct first visioning session by January 15 C105",
+          "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+          "hood": null,
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 35
+        }
+      ],
+      "pointers": [
+        "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "Initiative_Tracker (InitiativeID INIT-001)",
+        "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "Initiative_Tracker (InitiativeID INIT-002)",
+        "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "Initiative_Tracker (InitiativeID INIT-003)"
+      ]
+    },
+    "luis-navarro": {
+      "seat": {
+        "slug": "luis-navarro",
+        "name": "Luis Navarro",
+        "popid": "POP-00636",
+        "domain": "accountability-anomaly"
+      },
+      "empty": false,
+      "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+      "story": {
+        "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "hood": null,
+        "popids": [],
+        "citizens": []
+      },
+      "pulse": {
+        "className": "accountability-anomaly",
+        "score": 80,
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+        "hood": null,
+        "source": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ],
+        "schema": "INVESTIGATION-BRIEF-1",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "excludedCandidates": []
+      },
+      "citizens": [],
+      "candidates": [
+        {
+          "score": 80,
+          "kind": "anomaly",
+          "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+          "hood": null,
+          "popids": [],
+          "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+          "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 0
+        },
+        {
+          "score": 80,
+          "kind": "anomaly",
+          "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)",
+          "hood": null,
+          "popids": [],
+          "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+          "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 1
+        },
+        {
+          "score": 80,
+          "kind": "anomaly",
+          "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+          "ref": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s)",
+          "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+          "popids": [
+            "POP-00136",
+            "POP-00154",
+            "POP-01080"
+          ],
+          "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+          "hookLine": "The economic initiative carrying Downtown has not advanced in 2 cycles.",
+          "citizens": [
+            "Louis Cross (POP-01080)",
+            "Lila Mezran (POP-00154)",
+            "Rafael Montez (POP-00136)"
+          ],
+          "source": "desk-signal",
+          "sourceIndex": 2
+        },
+        {
+          "score": 80,
+          "kind": "anomaly",
+          "label": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: pilot_evaluation → implementation-active",
+          "ref": "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3",
+          "hood": "West Oakland, Fruitvale, East Oakland",
+          "popids": [
+            "POP-00754",
+            "POP-00756",
+            "POP-00762"
+          ],
+          "angle": "Oakland Alternative Response Initiative advanced from pilot_evaluation to implementation-active — what the milestone delivers and who carried it",
+          "hookLine": "Oakland Alternative Response Initiative advanced from pilot_evaluation to implementation-active; a milestone worth covering, not burying.",
+          "citizens": [
+            "Ophelia Brenner (POP-00754)",
+            "Ramon Solano (POP-00756)",
+            "Aziz Rahimi (POP-00762)"
+          ],
+          "source": "desk-signal",
+          "sourceIndex": 3
+        },
+        {
+          "score": 80,
+          "kind": "anomaly",
+          "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: visioning-complete → visioning",
+          "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+          "hood": "Fruitvale",
+          "popids": [
+            "POP-00744",
+            "POP-00766",
+            "POP-01057"
+          ],
+          "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning — what the milestone delivers and who carried it",
+          "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+          "citizens": [
+            "Tomas Renteria (POP-00744)",
+            "Manjit Singh (POP-00766)",
+            "Nina Reyes (POP-01057)"
+          ],
+          "source": "desk-signal",
+          "sourceIndex": 4
+        },
+        {
+          "score": 80,
+          "kind": "anomaly",
+          "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: construction-planning → vote-scheduled",
+          "ref": "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+          "hood": "Jack London, Downtown",
+          "popids": [
+            "POP-00020",
+            "POP-00156",
+            "POP-01078"
+          ],
+          "angle": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled — what the milestone delivers and who carried it",
+          "hookLine": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled; a milestone worth covering, not burying.",
+          "citizens": [
+            "Pablo Almanzar (POP-01078)",
+            "Angela Reyes (POP-00156)",
+            "Elena Vásquez (POP-00020)"
+          ],
+          "source": "desk-signal",
+          "sourceIndex": 5
+        }
+      ],
+      "pointers": [
+        "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+        "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)",
+        "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s)",
+        "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3",
+        "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+        "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6"
+      ]
+    },
+    "trevor-shimizu": {
+      "seat": {
+        "slug": "trevor-shimizu",
+        "name": "Trevor Shimizu",
+        "popid": "POP-00155",
+        "domain": "infrastructure-transit"
+      },
+      "empty": false,
+      "approach": "Systems approach: trace the supplied infrastructure or transit fact through timeline, place, and implementation state. Dry, technical, and record-backed.",
+      "story": {
+        "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+        "label": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "kind": "anomaly",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00744",
+          "POP-00766",
+          "POP-01057"
+        ],
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Manjit Singh (POP-00766)",
+          "Nina Reyes (POP-01057)"
+        ]
+      },
+      "pulse": {
+        "className": "infrastructure-transit",
+        "score": 45,
+        "label": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "hood": "Fruitvale",
+        "source": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying."
+        ],
+        "forbidden": [
+          "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
+        ],
+        "schema": "SYSTEMS-BRIEF-1",
+        "method": "INCIDENT_LINK_WARNING",
+        "missing": [
+          "timestamp and duration unless supplied by the source",
+          "second system fact and evidence linking it to the assigned condition",
+          "responsible agency, maintenance action, capacity, load, or service effect unless named by the source"
+        ],
+        "cascade": {
+          "state": "UNESTABLISHED",
+          "facts": [],
+          "link": null,
+          "src": null
+        }
+      },
+      "citizens": [],
+      "candidates": [
+        {
+          "score": 45,
+          "kind": "anomaly",
+          "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: visioning-complete → visioning",
+          "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+          "hood": "Fruitvale",
+          "popids": [
+            "POP-00744",
+            "POP-00766",
+            "POP-01057"
+          ],
+          "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning — what the milestone delivers and who carried it",
+          "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+          "citizens": [
+            "Tomas Renteria (POP-00744)",
+            "Manjit Singh (POP-00766)",
+            "Nina Reyes (POP-01057)"
+          ],
+          "source": "desk-signal",
+          "sourceIndex": 4
+        },
+        {
+          "score": 45,
+          "kind": "anomaly",
+          "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: construction-planning → vote-scheduled",
+          "ref": "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+          "hood": "Jack London, Downtown",
+          "popids": [
+            "POP-00020",
+            "POP-00156",
+            "POP-01078"
+          ],
+          "angle": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled — what the milestone delivers and who carried it",
+          "hookLine": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled; a milestone worth covering, not burying.",
+          "citizens": [
+            "Pablo Almanzar (POP-01078)",
+            "Angela Reyes (POP-00156)",
+            "Elena Vásquez (POP-00020)"
+          ],
+          "source": "desk-signal",
+          "sourceIndex": 5
+        },
+        {
+          "score": 45,
+          "kind": "initiative",
+          "label": "Fruitvale Transit Hub Phase II — Visioning | Status visioning-complete | phase visioning",
+          "ref": "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+          "hood": "Fruitvale",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 34
+        },
+        {
+          "score": 45,
+          "kind": "vote",
+          "label": "Fruitvale Transit Hub Phase II — Visioning | Conduct first visioning session by January 15 C105",
+          "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+          "hood": null,
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 35
+        },
+        {
+          "score": 45,
+          "kind": "initiative",
+          "label": "Temescal Community Health Center | Status passed | phase construction-active",
+          "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+          "hood": "Temescal",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 36
+        },
+        {
+          "score": 45,
+          "kind": "ripple",
+          "label": "retail/traffic/sentiment | Fruitvale Transit Hub Phase II — Visioning is visioning — ongoing transit effects in Fruitvale",
+          "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+          "hood": "Fruitvale",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 45
+        }
+      ],
+      "pointers": [
+        "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+        "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+        "Initiative_Tracker (InitiativeID INIT-003); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "Initiative_Tracker (InitiativeID INIT-003)",
+        "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\""
+      ]
+    },
+    "lila-mezran": {
+      "seat": {
+        "slug": "lila-mezran",
+        "name": "Dr. Lila Mezran",
+        "popid": "POP-00154",
+        "domain": "health"
+      },
+      "empty": false,
+      "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "label": "Temescal Community Health Center is approved, and construction is active.",
+        "kind": "initiative",
+        "angle": "Temescal Community Health Center is approved, and construction is active.",
+        "hookLine": "The supplied civic record identifies a health-service question that needs careful accounting.",
+        "hood": "Temescal",
+        "popids": [],
+        "citizens": []
+      },
+      "pulse": {
+        "className": "health",
+        "score": 45,
+        "label": "Temescal Community Health Center is approved, and construction is active.",
+        "hood": "Temescal",
+        "source": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Temescal Community Health Center is approved, and construction is active."
+        ],
+        "forbidden": [
+          "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+        ],
+        "schema": "HEALTH-SERVICE-BRIEF-1",
+        "method": "ACCESS_TIMELINE_HUMAN_COST",
+        "missing": [
+          "a named affected resident, patient, clinician, or service user",
+          "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+          "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+        ],
+        "humanConsequence": {
+          "state": "UNESTABLISHED",
+          "subjects": [],
+          "facts": [],
+          "src": null
+        }
+      },
+      "citizens": [],
+      "candidates": [
+        {
+          "score": 45,
+          "kind": "initiative",
+          "label": "Temescal Community Health Center | Status passed | phase construction-active",
+          "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+          "hood": "Temescal",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 36
+        },
+        {
+          "score": 45,
+          "kind": "vote",
+          "label": "Temescal Community Health Center | Structural frame groundbreaking C106",
+          "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+          "hood": null,
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 37
+        },
+        {
+          "score": 45,
+          "kind": "ripple",
+          "label": "sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal",
+          "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+          "hood": "Temescal",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 46
+        },
+        {
+          "score": 45,
+          "kind": "ripple",
+          "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Temescal Community Health Center sitting, nothing free (-2); Baylight District — Final Council Vote …",
+          "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+          "hood": "CITYWIDE",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 48
+        },
+        {
+          "score": 45,
+          "kind": "ripple",
+          "label": "approval/district-sentiment | Temescal Community Health Center sitting, nothing free (-1)",
+          "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+          "hood": "D7",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 55
+        },
+        {
+          "score": 45,
+          "kind": "civic-datawake",
+          "label": "Vanessa Tran-Muñoz: 12 teams now active in West Oakland",
+          "ref": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json",
+          "hood": null,
+          "popids": [
+            "POP-01021"
+          ],
+          "angle": "West Oakland's launch meets crisis with care exactly where it's needed most—our teams are now live in District 1 with bilingual responders covering evening and weekend hours to match when behavioral health calls peak in this community. Frui",
+          "hookLine": null,
+          "citizens": [],
+          "source": "civic-datawake",
+          "sourceIndex": 58
+        }
+      ],
+      "pointers": [
+        "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "Initiative_Tracker (InitiativeID INIT-005)",
+        "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+        "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+        "output/cron-civic/datawake/civic-project-oari_2026-08-31.json"
+      ]
+    },
+    "noah-tan": {
+      "seat": {
+        "slug": "noah-tan",
+        "name": "Noah Tan",
+        "popid": "POP-00157",
+        "domain": "environment"
+      },
+      "empty": false,
+      "approach": "Do not announce the season. Show what this cold or holiday cycle moved in GodWorld — a named person or Packet-named place living it. Temperature is context, never the lede.",
+      "story": {
+        "ref": "output/world_summary_c105.md ## Who Lived It",
+        "label": "Drew Lemon — dealt with a seasonal health concern",
+        "kind": "season-feel",
+        "angle": "Drew Lemon — dealt with a seasonal health concern",
+        "hookLine": "Drew Lemon — dealt with a seasonal health concern",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00670"
+        ],
+        "citizens": [
+          "Drew Lemon (POP-00670)"
+        ]
+      },
+      "pulse": {
+        "className": "environment",
+        "score": 80,
+        "label": "Drew Lemon — dealt with a seasonal health concern",
+        "hood": "Downtown",
+        "source": "output/world_summary_c105.md ## Who Lived It"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Drew Lemon — dealt with a seasonal health concern"
+        ],
+        "forbidden": [
+          "Do not announce the season or temperature as the story.",
+          "Do not import real-world Oakland winter tropes absent from the Packet.",
+          "Do not add forecasts, agencies, or unsupplied measurements."
+        ],
+        "schema": "SEASON-FEEL-1",
+        "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+        "missing": [
+          "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+        ],
+        "impactEvidence": {
+          "state": "SUPPLIED",
+          "subjects": [
+            "POP-00670"
+          ],
+          "facts": [
+            "Drew Lemon — dealt with a seasonal health concern"
+          ],
+          "src": "output/world_summary_c105.md ## Who Lived It"
+        }
+      },
+      "citizens": [],
+      "candidates": [
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Drew Lemon — dealt with a seasonal health concern",
+          "ref": "output/world_summary_c105.md ## Who Lived It",
+          "hood": "Downtown",
+          "popids": [
+            "POP-00670"
+          ],
+          "angle": "Drew Lemon — dealt with a seasonal health concern",
+          "hookLine": "Drew Lemon — dealt with a seasonal health concern",
+          "citizens": [
+            "Drew Lemon (POP-00670)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 60
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Genevieve Liu — dealt with a seasonal health concern",
+          "ref": "output/world_summary_c105.md ## Who Lived It",
+          "hood": "Lake Merritt",
+          "popids": [
+            "POP-00928"
+          ],
+          "angle": "Genevieve Liu — dealt with a seasonal health concern",
+          "hookLine": "Genevieve Liu — dealt with a seasonal health concern",
+          "citizens": [
+            "Genevieve Liu (POP-00928)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 61
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Melton Neilon — relied on familiar social circles during cold period",
+          "ref": "output/world_summary_c105.md ## Who Lived It",
+          "hood": "Temescal",
+          "popids": [
+            "POP-00170"
+          ],
+          "angle": "Melton Neilon — relied on familiar social circles during cold period",
+          "hookLine": "Melton Neilon — relied on familiar social circles during cold period",
+          "citizens": [
+            "Melton Neilon (POP-00170)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 62
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Marky Beal — limited social activity due to winter mood",
+          "ref": "output/world_summary_c105.md ## Who Lived It",
+          "hood": "West Oakland",
+          "popids": [
+            "POP-00202"
+          ],
+          "angle": "Marky Beal — limited social activity due to winter mood",
+          "hookLine": "Marky Beal — limited social activity due to winter mood",
+          "citizens": [
+            "Marky Beal (POP-00202)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 63
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "Rigo Ryno — helped the kids with homework at the kitchen table",
+          "ref": "output/world_summary_c105.md ## Who Lived It",
+          "hood": "Temescal",
+          "popids": [
+            "POP-00197"
+          ],
+          "angle": "Rigo Ryno — helped the kids with homework at the kitchen table",
+          "hookLine": "Rigo Ryno — helped the kids with homework at the kitchen table",
+          "citizens": [
+            "Rigo Ryno (POP-00197)"
+          ],
+          "source": "season-feel",
+          "sourceIndex": 64
+        },
+        {
+          "score": 80,
+          "kind": "season-feel",
+          "label": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+          "ref": "output/world_summary_c105.md ## World Events",
+          "hood": "Downtown",
+          "popids": [],
+          "angle": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+          "hookLine": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
+          "citizens": [],
+          "source": "season-feel",
+          "sourceIndex": 65
+        }
+      ],
+      "pointers": [
+        "output/world_summary_c105.md ## Who Lived It",
+        "output/world_summary_c105.md ## World Events"
+      ]
+    },
+    "angela-reyes": {
+      "seat": {
+        "slug": "angela-reyes",
+        "name": "Angela Reyes",
+        "popid": "POP-00156",
+        "domain": "education-youth"
+      },
+      "empty": false,
+      "approach": "Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.",
+      "story": {
+        "ref": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+        "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+        "kind": "anomaly",
+        "angle": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+        "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00037",
+          "POP-00588",
+          "POP-00789"
+        ],
+        "citizens": [
+          "Darren Briggs (POP-00588)",
+          "Elias Varek (POP-00789)",
+          "Brenda Okoro (POP-00037)"
+        ]
+      },
+      "pulse": {
+        "className": "education-youth",
+        "score": 45,
+        "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "source": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot is active"
+        ],
+        "forbidden": [
+          "Do not add students, teachers, families, schools, employers, partners, program sites, quotes, eligibility rules, enrollment, placements, schedules, staffing, budgets, measurements, or outcomes absent from the supplied entries."
+        ],
+        "schema": "EDUCATION-STABILITY-BRIEF-1",
+        "method": "PROGRAM_CONTINUITY_ACCESS",
+        "missing": [
+          "a named student, teacher, family member, participant, or program staff member",
+          "eligibility, application, enrollment, participation, placement, schedule, school, employer, partner, or program-site details",
+          "staffing, funding, support-service, retention, completion, learning, credential, or employment outcomes"
+        ],
+        "stabilityEvidence": {
+          "state": "UNESTABLISHED",
+          "participants": [],
+          "facts": [],
+          "src": null
+        }
+      },
+      "citizens": [],
+      "candidates": [
+        {
+          "score": 45,
+          "kind": "anomaly",
+          "label": "improvement (low) | Initiative \"Oakland Youth Apprenticeship Pipeline\" advanced: implementation-active → pilot-active",
+          "ref": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+          "hood": "West Oakland, East Oakland, Fruitvale",
+          "popids": [
+            "POP-00037",
+            "POP-00588",
+            "POP-00789"
+          ],
+          "angle": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active — what the milestone delivers and who carried it",
+          "hookLine": "Oakland Youth Apprenticeship Pipeline advanced from implementation-active to pilot-active; a milestone worth covering, not burying.",
+          "citizens": [
+            "Darren Briggs (POP-00588)",
+            "Elias Varek (POP-00789)",
+            "Brenda Okoro (POP-00037)"
+          ],
+          "source": "desk-signal",
+          "sourceIndex": 6
+        },
+        {
+          "score": 45,
+          "kind": "initiative",
+          "label": "Oakland Youth Apprenticeship Pipeline | Status announced | phase pilot-active",
+          "ref": "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+          "hood": "West Oakland, East Oakland, Fruitvale",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 40
+        },
+        {
+          "score": 45,
+          "kind": "vote",
+          "label": "Oakland Youth Apprenticeship Pipeline | Backlog processing completion + town hall C106",
+          "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+          "hood": null,
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 41
+        },
+        {
+          "score": 45,
+          "kind": "ripple",
+          "label": "sentiment/communityEngagement/retail | Oakland Youth Apprenticeship Pipeline is pilot-active — ongoing workforce effects in West Oakland, East Oakland, Fruitvale",
+          "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+          "hood": null,
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 47
+        },
+        {
+          "score": 45,
+          "kind": "ripple",
+          "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Oakland Youth Apprenticeship Pipeline sitting, nothing free (-2); decay toward 50 (-1)",
+          "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+          "hood": "D1",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 49
+        },
+        {
+          "score": 45,
+          "kind": "ripple",
+          "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Oakland Youth Apprenticeship Pipeline sitting, nothing free (-2); decay toward 50 (-1)",
+          "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+          "hood": "D3",
+          "popids": [],
+          "angle": null,
+          "hookLine": null,
+          "citizens": [],
+          "source": "desk-signal",
+          "sourceIndex": 51
+        }
+      ],
+      "pointers": [
+        "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7",
+        "Initiative_Tracker (InitiativeID INIT-007); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "Initiative_Tracker (InitiativeID INIT-007)",
+        "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+        "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\""
+      ]
+    }
+  }
+}

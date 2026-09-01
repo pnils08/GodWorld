@@ -1,0 +1,49 @@
+{
+  "draft": "output/cron-compare/culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "9b24908e95db214f20ad1c3c71309361a4148258abdef5e43f7c486e2b2d93e5",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All named citizens, locations, and quotes precisely match canon ground truth and packet interview provenance.",
+  "review": {
+    "profileId": "maria-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "packageVersion": "MARIA-LEP2-1",
+    "manifestId": "AM-d70e191ea6b7",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Melton Neilon",
+      "Rick Walker"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0093,
+  "durationMs": 7992,
+  "parseError": false,
+  "ranAt": "2026-08-31T23:17:20.808Z"
+}

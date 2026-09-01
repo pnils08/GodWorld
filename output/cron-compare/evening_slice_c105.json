@@ -1,0 +1,818 @@
+{
+  "empty": false,
+  "cycle": 105,
+  "kind": "evening-life",
+  "journalist": {
+    "shared": true,
+    "consumers": [
+      "mason-ortega",
+      "kai-marston",
+      "sharon-okafor",
+      "maria-keen",
+      "elliot-graye"
+    ]
+  },
+  "texture": {
+    "famous": [
+      "Benji Dillon",
+      "Derek Obi",
+      "Former A's Star Rodriguez"
+    ],
+    "restaurants": [
+      {
+        "name": "Merritt Reserve",
+        "hood": "Lake Merritt"
+      },
+      {
+        "name": "Broadline Grab-N-Go",
+        "hood": "Fruitvale"
+      },
+      {
+        "name": "Cozy Pot",
+        "hood": "Rockridge"
+      }
+    ],
+    "fastFood": [
+      {
+        "name": "TacoRail",
+        "hood": "West Oakland"
+      },
+      {
+        "name": "HotSlice Pizza",
+        "hood": "Rockridge"
+      }
+    ],
+    "nightlife": [
+      {
+        "name": "Festive Fireside",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "Underglow Lounge",
+        "hood": "Jack London"
+      },
+      {
+        "name": "After Hours Oakland",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 8,
+      "vibe": "art-scene",
+      "movement": "art-walk",
+      "weatherImpact": 1.33
+    },
+    "cityEvents": [
+      "The Corliss Family Block Party",
+      "Jack London First Friday Waterfront",
+      "Lake Merritt Community Joy Parade",
+      "Temescal Resolution Run"
+    ],
+    "tv": [
+      "Fresh Start Special",
+      "Year in Review",
+      "Art Walk Live",
+      "Cultural Spotlight",
+      "Late Weather Watch",
+      "Late Shift Live",
+      "The Neighbors",
+      "A's Sports Central",
+      "The Benji Dillon (SP) Interview"
+    ],
+    "movies": [
+      "Resolution Road",
+      "New Beginnings",
+      "Creative Pulse",
+      "Art House Pick",
+      "Fog Harbor",
+      "Franchise"
+    ],
+    "sportsBroadcast": "Oakland Sports Tonight - Playoff Special",
+    "streamingTrend": "feel-good new starts",
+    "foodTrend": "First Friday arts district dining - gallery crowd"
+  },
+  "signals": {
+    "fameCount": 1,
+    "sightingCount": 3,
+    "faithCount": 6,
+    "eveningPointer": {
+      "ref": "output/world_summary_c105.md \"## Evening Texture\"",
+      "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+    },
+    "sightings": [
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+        "name": "Benji Dillon",
+        "venue": "Dimond Pharmacy",
+        "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Dimond",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Derek Obi spotted at West Oakland Stabilization Fund",
+        "name": "Derek Obi",
+        "venue": "West Oakland Stabilization Fund",
+        "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "West Oakland",
+        "popids": []
+      },
+      {
+        "kind": "lifestyle-sighting",
+        "label": "sighting | Former A's Star Rodriguez spotted at Rockridge Pharmacy",
+        "name": "Former A's Star Rodriguez",
+        "venue": "Rockridge Pharmacy",
+        "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "hood": "Rockridge",
+        "popids": []
+      }
+    ],
+    "fame": [
+      {
+        "kind": "fame-event",
+        "label": "fame-rise | Marisol Rivera — the city is watching: followed postseason updates closely",
+        "name": "Marisol Rivera",
+        "ref": "Ripple_Ledger cycle 105 (CauseType fame-event); rendered: world_summary_c105.md \"## What Moved\" > \"### fame-event\"",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-01062"
+        ]
+      }
+    ]
+  },
+  "pulse": {
+    "className": "fame-sighting",
+    "score": 23,
+    "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+    "named": "Dimond Pharmacy",
+    "hood": "Dimond",
+    "person": "Benji Dillon",
+    "venue": "Dimond Pharmacy"
+  },
+  "candidates": [
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "named": "Dimond Pharmacy",
+      "hood": "Dimond"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Derek Obi at West Oakland Stabilization Fund (West Oakland)",
+      "named": "West Oakland Stabilization Fund",
+      "hood": "West Oakland"
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Former A's Star Rodriguez at Rockridge Pharmacy (Rockridge)",
+      "named": "Rockridge Pharmacy",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Merritt Reserve (Lake Merritt)",
+      "named": "Merritt Reserve",
+      "hood": "Lake Merritt"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Broadline Grab-N-Go (Fruitvale)",
+      "named": "Broadline Grab-N-Go",
+      "hood": "Fruitvale"
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Cozy Pot (Rockridge)",
+      "named": "Cozy Pot",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Festive Fireside (Rockridge)",
+      "named": "Festive Fireside",
+      "hood": "Rockridge"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Underglow Lounge (Jack London)",
+      "named": "Underglow Lounge",
+      "hood": "Jack London"
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "After Hours Oakland (Downtown)",
+      "named": "After Hours Oakland",
+      "hood": "Downtown"
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Corliss Family Block Party",
+      "named": "The Corliss Family Block Party",
+      "hood": null
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Jack London First Friday Waterfront",
+      "named": "Jack London First Friday Waterfront",
+      "hood": null
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Marisol Rivera — fame rise",
+      "named": "Marisol Rivera",
+      "hood": "Rockridge"
+    }
+  ],
+  "pulses": [
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "named": "Dimond Pharmacy",
+      "hood": "Dimond",
+      "names": [
+        "Benji Dillon",
+        "Dimond Pharmacy"
+      ],
+      "person": "Benji Dillon",
+      "venue": "Dimond Pharmacy",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+      "hookLine": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+      "sceneBits": [
+        "PERSON: Benji Dillon",
+        "VENUE: Dimond Pharmacy",
+        "HOOD: Dimond"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Derek Obi at West Oakland Stabilization Fund (West Oakland)",
+      "named": "West Oakland Stabilization Fund",
+      "hood": "West Oakland",
+      "names": [
+        "Derek Obi",
+        "West Oakland Stabilization Fund"
+      ],
+      "person": "Derek Obi",
+      "venue": "West Oakland Stabilization Fund",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Derek Obi spotted at West Oakland Stabilization Fund in West Oakland — ground truth only, no invented companions",
+      "hookLine": "sighting | Derek Obi spotted at West Oakland Stabilization Fund",
+      "sceneBits": [
+        "PERSON: Derek Obi",
+        "VENUE: West Oakland Stabilization Fund",
+        "HOOD: West Oakland"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Former A's Star Rodriguez at Rockridge Pharmacy (Rockridge)",
+      "named": "Rockridge Pharmacy",
+      "hood": "Rockridge",
+      "names": [
+        "Former A's Star Rodriguez",
+        "Rockridge Pharmacy"
+      ],
+      "person": "Former A's Star Rodriguez",
+      "venue": "Rockridge Pharmacy",
+      "popids": [],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "angle": "Former A's Star Rodriguez spotted at Rockridge Pharmacy in Rockridge — ground truth only, no invented companions",
+      "hookLine": "sighting | Former A's Star Rodriguez spotted at Rockridge Pharmacy",
+      "sceneBits": [
+        "PERSON: Former A's Star Rodriguez",
+        "VENUE: Rockridge Pharmacy",
+        "HOOD: Rockridge"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Merritt Reserve (Lake Merritt)",
+      "named": "Merritt Reserve",
+      "hood": "Lake Merritt",
+      "names": [
+        "Merritt Reserve"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Merritt Reserve appears on the evening restaurant list in Lake Merritt. What was happening there is not established.",
+      "hookLine": "Merritt Reserve appears on the evening restaurant list in Lake Merritt.",
+      "sceneBits": [
+        "VENUE: Merritt Reserve",
+        "HOOD: Lake Merritt"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Broadline Grab-N-Go (Fruitvale)",
+      "named": "Broadline Grab-N-Go",
+      "hood": "Fruitvale",
+      "names": [
+        "Broadline Grab-N-Go"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Broadline Grab-N-Go appears on the evening restaurant list in Fruitvale. What was happening there is not established.",
+      "hookLine": "Broadline Grab-N-Go appears on the evening restaurant list in Fruitvale.",
+      "sceneBits": [
+        "VENUE: Broadline Grab-N-Go",
+        "HOOD: Fruitvale"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "named-restaurant",
+      "score": 20,
+      "label": "Cozy Pot (Rockridge)",
+      "named": "Cozy Pot",
+      "hood": "Rockridge",
+      "names": [
+        "Cozy Pot"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Restaurants",
+      "angle": "Cozy Pot appears on the evening restaurant list in Rockridge. What was happening there is not established.",
+      "hookLine": "Cozy Pot appears on the evening restaurant list in Rockridge.",
+      "sceneBits": [
+        "VENUE: Cozy Pot",
+        "HOOD: Rockridge"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Festive Fireside (Rockridge)",
+      "named": "Festive Fireside",
+      "hood": "Rockridge",
+      "names": [
+        "Festive Fireside"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Festive Fireside — who is out and what the block is saying",
+      "hookLine": "Festive Fireside holds the evening out in Rockridge.",
+      "sceneBits": [
+        "VENUE: Festive Fireside",
+        "HOOD: Rockridge",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 8,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1.33
+      },
+      "cycle": 105
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "Underglow Lounge (Jack London)",
+      "named": "Underglow Lounge",
+      "hood": "Jack London",
+      "names": [
+        "Underglow Lounge"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at Underglow Lounge — who is out and what the block is saying",
+      "hookLine": "Underglow Lounge holds the evening out in Jack London.",
+      "sceneBits": [
+        "VENUE: Underglow Lounge",
+        "HOOD: Jack London",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 8,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1.33
+      },
+      "cycle": 105
+    },
+    {
+      "className": "nightlife-spot",
+      "score": 18,
+      "label": "After Hours Oakland (Downtown)",
+      "named": "After Hours Oakland",
+      "hood": "Downtown",
+      "names": [
+        "After Hours Oakland"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Nightlife",
+      "angle": "Nightlife at After Hours Oakland — who is out and what the block is saying",
+      "hookLine": "After Hours Oakland holds the evening out in Downtown.",
+      "sceneBits": [
+        "VENUE: After Hours Oakland",
+        "HOOD: Downtown",
+        "EVENING RECORD: open and quiet"
+      ],
+      "nightlifeMeta": {
+        "volume": 8,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1.33
+      },
+      "cycle": 105
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "The Corliss Family Block Party",
+      "named": "The Corliss Family Block Party",
+      "hood": null,
+      "names": [
+        "The Corliss Family Block Party"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: The Corliss Family Block Party — present-tense room, not calendar filler",
+      "hookLine": "The Corliss Family Block Party is on the evening board.",
+      "sceneBits": [
+        "EVENT: The Corliss Family Block Party",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "city-event",
+      "score": 17,
+      "label": "Jack London First Friday Waterfront",
+      "named": "Jack London First Friday Waterfront",
+      "hood": null,
+      "names": [
+        "Jack London First Friday Waterfront"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "Arts/cultural event: Jack London First Friday Waterfront — present-tense room, not calendar filler",
+      "hookLine": "Jack London First Friday Waterfront is on the evening board.",
+      "sceneBits": [
+        "EVENT: Jack London First Friday Waterfront",
+        "ARTS SIGNAL: yes"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "fame-sighting",
+      "score": 16,
+      "label": "Marisol Rivera — fame rise",
+      "named": "Marisol Rivera",
+      "hood": "Rockridge",
+      "names": [
+        "Marisol Rivera"
+      ],
+      "person": "Marisol Rivera",
+      "popids": [
+        "POP-01062"
+      ],
+      "requiresName": true,
+      "source": "Ripple_Ledger cycle 105 (CauseType fame-event); rendered: world_summary_c105.md \"## What Moved\" > \"### fame-event\"",
+      "angle": "Marisol Rivera — city watching; do not invent the private life",
+      "hookLine": "fame-rise | Marisol Rivera — the city is watching: followed postseason updates closely",
+      "sceneBits": [
+        "PERSON: Marisol Rivera",
+        "HOOD: Rockridge",
+        "LABEL: fame-rise | Marisol Rivera — the city is watching: followed postseason updates closely"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "tv-slate",
+      "score": 16,
+      "label": "TV slate: Fresh Start Special; Year in Review; Art Walk Live",
+      "named": "Fresh Start Special",
+      "hood": null,
+      "names": [
+        "Fresh Start Special",
+        "Year in Review",
+        "Art Walk Live",
+        "Cultural Spotlight",
+        "Late Weather Watch",
+        "Late Shift Live",
+        "The Neighbors",
+        "A's Sports Central",
+        "The Benji Dillon (SP) Interview"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media TV",
+      "angle": "Evening TV slate — Fresh Start Special, Year in Review, Art Walk Live; sports desk: Oakland Sports Tonight - Playoff Special",
+      "hookLine": "On the box tonight: Fresh Start Special, Year in Review.",
+      "sceneBits": [
+        "TV: Fresh Start Special; Year in Review; Art Walk Live; Cultural Spotlight; Late Weather Watch; Late Shift Live; The Neighbors; A's Sports Central; The Benji Dillon (SP) Interview",
+        "SPORTS BROADCAST: Oakland Sports Tonight - Playoff Special"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Lake Merritt Community Joy Parade",
+      "named": "Lake Merritt Community Joy Parade",
+      "hood": null,
+      "names": [
+        "Lake Merritt Community Joy Parade"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Lake Merritt Community Joy Parade — present-tense room, not calendar filler",
+      "hookLine": "Lake Merritt Community Joy Parade is on the evening board.",
+      "sceneBits": [
+        "EVENT: Lake Merritt Community Joy Parade"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "city-event",
+      "score": 14,
+      "label": "Temescal Resolution Run",
+      "named": "Temescal Resolution Run",
+      "hood": null,
+      "names": [
+        "Temescal Resolution Run"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · City events",
+      "angle": "City event: Temescal Resolution Run — present-tense room, not calendar filler",
+      "hookLine": "Temescal Resolution Run is on the evening board.",
+      "sceneBits": [
+        "EVENT: Temescal Resolution Run"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "TacoRail (West Oakland)",
+      "named": "TacoRail",
+      "hood": "West Oakland",
+      "names": [
+        "TacoRail"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "TacoRail appears on the evening fast-food list in West Oakland. What was happening there is not established.",
+      "hookLine": "TacoRail appears on the evening fast-food list in West Oakland.",
+      "sceneBits": [
+        "VENUE: TacoRail",
+        "HOOD: West Oakland"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "fast-food",
+      "score": 13,
+      "label": "HotSlice Pizza (Rockridge)",
+      "named": "HotSlice Pizza",
+      "hood": "Rockridge",
+      "names": [
+        "HotSlice Pizza"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Fast food",
+      "angle": "HotSlice Pizza appears on the evening fast-food list in Rockridge. What was happening there is not established.",
+      "hookLine": "HotSlice Pizza appears on the evening fast-food list in Rockridge.",
+      "sceneBits": [
+        "VENUE: HotSlice Pizza",
+        "HOOD: Rockridge"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "movie-slate",
+      "score": 13,
+      "label": "Movies: Resolution Road; New Beginnings; Creative Pulse; Art House Pick; Fog Harbor; Franchise",
+      "named": "Resolution Road",
+      "hood": null,
+      "names": [
+        "Resolution Road",
+        "New Beginnings",
+        "Creative Pulse",
+        "Art House Pick",
+        "Fog Harbor",
+        "Franchise"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Evening media movies",
+      "angle": "Evening movie slate — Resolution Road, New Beginnings, Creative Pulse, Art House Pick, Fog Harbor, Franchise",
+      "hookLine": "Screens tonight: Resolution Road, New Beginnings, Creative Pulse, Art House Pick, Fog Harbor, Franchise.",
+      "sceneBits": [
+        "MOVIES: Resolution Road; New Beginnings; Creative Pulse; Art House Pick; Fog Harbor; Franchise"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Benji Dillon spotted (Riley famous list)",
+      "named": "Benji Dillon",
+      "hood": null,
+      "names": [
+        "Benji Dillon"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Benji Dillon is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Benji Dillon is being seen around town.",
+      "sceneBits": [
+        "NAME: Benji Dillon"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "fame-sighting",
+      "score": 12,
+      "label": "Derek Obi spotted (Riley famous list)",
+      "named": "Derek Obi",
+      "hood": null,
+      "names": [
+        "Derek Obi"
+      ],
+      "requiresName": true,
+      "source": "world_summary ## Evening Texture · Famous people spotted",
+      "angle": "Derek Obi is on the evening famous list — sighting without inventing a stop",
+      "hookLine": "Derek Obi is being seen around town.",
+      "sceneBits": [
+        "NAME: Derek Obi"
+      ],
+      "cycle": 105
+    }
+  ],
+  "recommend": {
+    "bag": "ground",
+    "slug": "maria-keen",
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+    "reason": "top pulse fame-sighting → ground",
+    "pulseClass": "fame-sighting",
+    "pulseLabel": "Benji Dillon at Dimond Pharmacy (Dimond)"
+  },
+  "perSeat": {
+    "mason-ortega": {
+      "pulseClass": "named-restaurant",
+      "label": "Merritt Reserve (Lake Merritt)",
+      "score": 34,
+      "bag": "kitchen"
+    },
+    "kai-marston": {
+      "pulseClass": "city-event",
+      "label": "The Corliss Family Block Party",
+      "score": 31,
+      "bag": "arts"
+    },
+    "sharon-okafor": {
+      "pulseClass": "fame-sighting",
+      "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "score": 31,
+      "bag": "lifestyle"
+    },
+    "maria-keen": {
+      "pulseClass": "fame-sighting",
+      "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "score": 31,
+      "bag": "ground"
+    },
+    "elliot-graye": {
+      "pulseClass": "fame-sighting",
+      "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "score": 31,
+      "bag": "faith"
+    }
+  },
+  "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth.",
+  "story": {
+    "angle": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+    "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+    "hookLine": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+    "hood": "Dimond",
+    "pulseClass": "fame-sighting",
+    "citizens": [
+      "Benji Dillon"
+    ],
+    "popids": [],
+    "named": "Dimond Pharmacy",
+    "venue": "Dimond Pharmacy",
+    "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+    "cycle": 105
+  },
+  "prewrite": {
+    "pulseClass": "fame-sighting",
+    "angle": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+    "hookLine": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+    "anchorFacts": [
+      "NAMED: Dimond Pharmacy",
+      "PERSON: Benji Dillon",
+      "VENUE: Dimond Pharmacy",
+      "HOOD: Dimond",
+      "PERSON: Benji Dillon",
+      "VENUE: Dimond Pharmacy",
+      "HOOD: Dimond"
+    ],
+    "bagRecommend": "ground",
+    "bagSlug": "maria-keen"
+  },
+  "scene": {
+    "venues": [
+      {
+        "name": "Merritt Reserve",
+        "hood": "Lake Merritt"
+      },
+      {
+        "name": "Broadline Grab-N-Go",
+        "hood": "Fruitvale"
+      },
+      {
+        "name": "Cozy Pot",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "TacoRail",
+        "hood": "West Oakland"
+      },
+      {
+        "name": "HotSlice Pizza",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "Festive Fireside",
+        "hood": "Rockridge"
+      },
+      {
+        "name": "Underglow Lounge",
+        "hood": "Jack London"
+      },
+      {
+        "name": "After Hours Oakland",
+        "hood": "Downtown"
+      }
+    ],
+    "nightlifeMeta": {
+      "volume": 8,
+      "vibe": "art-scene",
+      "movement": "art-walk",
+      "weatherImpact": 1.33
+    },
+    "cityEvents": [
+      "The Corliss Family Block Party",
+      "Jack London First Friday Waterfront",
+      "Lake Merritt Community Joy Parade",
+      "Temescal Resolution Run"
+    ],
+    "tv": [
+      "Fresh Start Special",
+      "Year in Review",
+      "Art Walk Live",
+      "Cultural Spotlight",
+      "Late Weather Watch",
+      "Late Shift Live",
+      "The Neighbors",
+      "A's Sports Central",
+      "The Benji Dillon (SP) Interview"
+    ],
+    "movies": [
+      "Resolution Road",
+      "New Beginnings",
+      "Creative Pulse",
+      "Art House Pick",
+      "Fog Harbor",
+      "Franchise"
+    ],
+    "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+  },
+  "pointers": [
+    "output/world_summary_c105.md ## Evening Texture",
+    "output/desk_signal_c105.json lanes.culture",
+    "docs/media/MARIA_GROUND_BAG.md",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+  ]
+}

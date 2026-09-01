@@ -1,0 +1,141 @@
+{
+  "empty": false,
+  "cycle": 105,
+  "kind": "tanya-sideline",
+  "desk": "sports",
+  "journalist": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "persona": "tanya-cruz"
+  },
+  "pulse": {
+    "className": "record-only-sideline",
+    "score": 70,
+    "label": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 10,
+        "name": "Inference Close"
+      }
+    ],
+    "anchorFacts": [
+      "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+      "Coen Carr recorded 14pts and 3-4 3 points.",
+      "The Oaks preseason record is 0-3."
+    ],
+    "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+    "accessEvidence": {
+      "state": "ALLOTTED",
+      "facts": [
+        "clubhouse/sideline SET is the reporter's room"
+      ]
+    },
+    "quoteEvidence": {
+      "state": "NOT_SUPPLIED",
+      "quotes": []
+    },
+    "observationEvidence": {
+      "state": "ALLOTTED",
+      "facts": []
+    },
+    "missing": [
+      "Packet player quotes",
+      "injury or team-response facts beyond the supplied record"
+    ]
+  },
+  "story": {
+    "angle": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+    "label": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+    "hookLine": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+    "kind": "sideline-signal",
+    "hood": "Baylight District",
+    "popids": [
+      "POP-01025",
+      "POP-01026",
+      "POP-01022"
+    ],
+    "citizens": [
+      "Dame Sarr (POP-01025)",
+      "Coen Carr (POP-01026)",
+      "Wilson Shepard (POP-01022)"
+    ],
+    "ref": "world_summary_c105.md ## Sports",
+    "cycle": 105
+  },
+  "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+  "players": [
+    {
+      "name": "Dame Sarr",
+      "popid": "POP-01025",
+      "role": "SG / The Oaks",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Coen Carr",
+      "popid": "POP-01026",
+      "role": "SG / The Oaks",
+      "neighborhood": "Uptown",
+      "why": "feed-names"
+    },
+    {
+      "name": "Wilson Shepard",
+      "popid": "POP-01022",
+      "role": "Head Coach, Oakland Oaks",
+      "neighborhood": "Downtown",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not."
+  },
+  "candidates": [
+    {
+      "score": 70,
+      "label": "The Oaks drop to 0-3 in preason while Stanley and Dybantsa sit for precautionary measures.",
+      "cycle": 105
+    },
+    {
+      "score": 70,
+      "label": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+      "cycle": 105
+    },
+    {
+      "score": 58,
+      "label": "As Pitching rotation is stellar all season",
+      "cycle": 105
+    },
+    {
+      "score": 50,
+      "label": "Travis Coles secures his place in A's lore , while fans look to his arm to carry the torch from a era ending in Benji Dillon",
+      "cycle": 105
+    },
+    {
+      "score": 50,
+      "label": "Danny Horn is the greatest MLB player on the planet",
+      "cycle": 105
+    },
+    {
+      "score": 50,
+      "label": "Vinnie Keane : How Do You Like Them Apples..",
+      "cycle": 105
+    },
+    {
+      "score": 50,
+      "label": "Benji Dillon : The Golden Arm era come to a close",
+      "cycle": 105
+    },
+    {
+      "score": 40,
+      "label": "Pablo the Picasso shines again.",
+      "cycle": 104
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c105.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/TANYA_SIDELINE_BAG.md"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "draft": "output/cron-compare/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "cbd31dbc176d7674460befb43c5d2a4a0afb99f8acc0ccdf4bd1a33a2f2260a1",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact Wake-3 packet provenance; citizen profiles, venues, and Rockridge economic trajectory align with Cycle 105 ground truth.",
+  "review": {
+    "profileId": "jordan-economic-labor-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "packageVersion": "JORDAN-LEP2-1",
+    "manifestId": "AM-595ae80d34e6",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Howard Yell",
+      "Jacob King"
+    ],
+    "unverified": [
+      "College Avenue",
+      "Cozy Pot",
+      "Festive Fireside",
+      "Rockridge's Retail Pulse Quickens"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0102,
+  "durationMs": 9620,
+  "parseError": false,
+  "ranAt": "2026-08-31T23:17:50.756Z"
+}

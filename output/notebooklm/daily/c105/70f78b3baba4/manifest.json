@@ -1,0 +1,61 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.7",
+  "canonStatus": "NOT_CANON",
+  "cycle": 105,
+  "generatedAt": "2026-08-31T16:04:02.580Z",
+  "lastAttemptAt": "2026-08-31T16:04:02.580Z",
+  "hours": 36,
+  "packHash": "70f78b3baba447bff5781361e52c362949e40e7c1703a57815734f148a2c697c",
+  "worldSummary": "output/world_summary_c105.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [],
+  "flaggedReports": [],
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "CYCLE_OPEN",
+    "format": "brief",
+    "length": "short",
+    "activationEligible": true,
+    "reportedDayThreshold": null,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "W1_ACTIVE_6",
+      "CIVIC_DECISIONS",
+      "ENGINE_HIGH_SEVERITY",
+      "WORLD_HIGH_SIGNAL",
+      "WORLD_SHOCK"
+    ],
+    "dispositionCounts": {
+      "passed": 0,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "199c12ad9f03ef0bf9317776a3bb2129604e62d387afb5ed83af2cf4e7ef3b41"
+  },
+  "newsroomPulse": {
+    "fingerprint": "c27b757329bbea33916fa38ed0cd5bf31c1c6787716727a69ff82da2e4947ff4",
+    "counts": {
+      "angles": 6,
+      "asks": 0,
+      "fanoutAssignments": 6,
+      "w2Ready": 0,
+      "quotes": 0,
+      "passed": 0,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 6
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": true
+}

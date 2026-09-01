@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "civic",
+  "persona": "noah-tan",
+  "storyline": {
+    "slug": "downtown-jessie-hess-season-feel",
+    "verb": "opened"
+  },
+  "hood": "Downtown",
+  "quotes": [
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other."
+    }
+  ],
+  "claim": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-08-31T18:16:21.355Z"
+}

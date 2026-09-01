@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "civic",
+  "persona": "rachel-torres",
+  "storyline": {
+    "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+    "verb": "opened"
+  },
+  "hood": "West Oakland, Fruitvale, East Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard folks talking about the Alternative Response Initiative, and it feels like there’s hope it could ease some of the tension we’ve been seeing, especially in West Oakland. People are curious to see how it plays out."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I've heard folks at the diner talking about how it's good to see someone other than cops showing up for certain calls—makes people feel safer to know there's another option."
+    },
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks talking about the Alternative Response Initiative in the neighborhood, and it seems like people are hopeful it’ll bring more tailored support to West Oakland, Fruitvale, and East Oakland."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard folks talking about the Alternative Response Initiative, and it seems like it’s starting to make a difference in how people feel about safety in those neighborhoods."
+    }
+  ],
+  "claim": "I’ve heard folks talking about the Alternative Response Initiative, and it feels like there’s hope it could ease some of the tension we’ve been seeing, especially in West Oakland. People are curious to see how it plays out.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-08-31T18:17:47.960Z"
+}

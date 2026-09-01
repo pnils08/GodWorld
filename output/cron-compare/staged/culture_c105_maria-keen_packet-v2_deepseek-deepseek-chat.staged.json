@@ -1,0 +1,52 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "105",
+  "persona": "maria-keen",
+  "byline": "Maria Keen",
+  "bylinePopid": "POP-00013",
+  "article": "output/cron-compare/staged/culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "dimond-melton-neilon-story-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Dimond"
+    ],
+    "claims": [
+      {
+        "claim": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+        "sourceRef": "citizenVoice PRESS Melton Neilon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-d70e191ea6b7",
+    "draftSha256": "9b24908e95db214f20ad1c3c71309361a4148258abdef5e43f7c486e2b2d93e5",
+    "verdict": "output/cron-compare/culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-31T23:17:20.808Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-31T23:17:21.217Z"
+}

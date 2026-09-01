@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "business",
+  "persona": "business-desk",
+  "storyline": {
+    "slug": "rockridge-jacob-king-hood-rising",
+    "verb": "opened"
+  },
+  "hood": "Rockridge",
+  "quotes": [
+    {
+      "pop": "POP-00267",
+      "name": "Jacob King",
+      "quote": "I've been working the line at a restaurant near Cozy Pot for years, and lately there's just more energy—more people out at night, more folks sticking around after dinner to chat. Feels like the whole block's waking up again."
+    },
+    {
+      "pop": "POP-00651",
+      "name": "Howard Yell",
+      "quote": "I’ve noticed more people out and about, especially around places like Cozy Pot and HotSlice Pizza—it feels like the neighborhood’s got a bit more energy lately."
+    }
+  ],
+  "claim": "I've been working the line at a restaurant near Cozy Pot for years, and lately there's just more energy—more people out at night, more folks sticking around after dinner to chat. Feels like the whole block's waking up again.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-08-31T18:21:59.771Z"
+}

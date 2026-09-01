@@ -1,0 +1,314 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "105",
+  "persona": "tanya-cruz",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00014",
+      "name": "Tanya Cruz",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+      "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview.",
+      "creativeBrief": {
+        "kind": "sideline-dispatch",
+        "pulseClass": "record-only-sideline",
+        "bagModes": [
+          "10 Inference Close"
+        ],
+        "claim": "The supplied sports record is the weather. The clubhouse SET is allotted hallucination fitted to that line.",
+        "anchorFacts": [
+          "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "Coen Carr recorded 14pts and 3-4 3 points.",
+          "The Oaks preseason record is 0-3."
+        ],
+        "accessEvidence": {
+          "state": "ALLOTTED",
+          "facts": [
+            "clubhouse/sideline SET is the reporter's room"
+          ]
+        },
+        "quoteEvidence": {
+          "state": "NOT_SUPPLIED",
+          "quotes": []
+        },
+        "observationEvidence": {
+          "state": "ALLOTTED",
+          "facts": []
+        },
+        "missing": [
+          "Packet player quotes",
+          "injury or team-response facts beyond the supplied record"
+        ],
+        "sceneRule": "Clubhouse SET is authorized. Invented player quotes and real-world venues are not.",
+        "sourcePointers": [
+          "output/world_summary_c105.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/TANYA_SIDELINE_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "sideline-signal",
+      "hood": "Baylight District",
+      "score": null,
+      "src": "world_summary_c105.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | game-result | (preseason) | Dame Sarr, Coen Carr, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (late-season) | Benji Dillon, Vinnie Keane, Mark Aitken, Isley Kelley",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Travis Coles",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Arturo Ramos, Henry Rivas, John Ellis, Pablo Almanzar, Carmen Mesa",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-01025",
+          "name": "Dame Sarr",
+          "profile": "Dame Sarr — SG / The Oaks — Downtown",
+          "why": "feed-names",
+          "role": "SG / The Oaks",
+          "hood": "Downtown"
+        },
+        {
+          "pop": "POP-01026",
+          "name": "Coen Carr",
+          "profile": "Coen Carr — SG / The Oaks — Uptown",
+          "why": "feed-names",
+          "role": "SG / The Oaks",
+          "hood": "Uptown"
+        },
+        {
+          "pop": "POP-01022",
+          "name": "Wilson Shepard",
+          "profile": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "why": "feed-names",
+          "role": "Head Coach, Oakland Oaks",
+          "hood": "Downtown"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+        "src": "world_summary_c105.md ## Sports",
+        "id": "F-f72af38d7088"
+      },
+      {
+        "t": "FACT",
+        "text": "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+        "src": "world_summary_c105.md ## Sports",
+        "id": "F-20c7958bb5e6"
+      },
+      {
+        "t": "FACT",
+        "text": "Coen Carr recorded 14pts and 3-4 3 points.",
+        "src": "world_summary_c105.md ## Sports",
+        "id": "F-de8caff73497"
+      },
+      {
+        "t": "FACT",
+        "text": "The Oaks preseason record is 0-3.",
+        "src": "world_summary_c105.md ## Sports",
+        "id": "F-583d654bb28f"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+      "label": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+      "hookLine": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+      "kind": "sideline-signal",
+      "hood": "Baylight District",
+      "popids": [
+        "POP-01025",
+        "POP-01026",
+        "POP-01022"
+      ],
+      "citizens": [
+        "Dame Sarr (POP-01025)",
+        "Coen Carr (POP-01026)",
+        "Wilson Shepard (POP-01022)"
+      ],
+      "ref": "world_summary_c105.md ## Sports",
+      "cycle": 105
+    },
+    "approach": "Sideline approach (Tanya Cruz): you file from the clubhouse. That SET is yours — the Packet will never list a clubhouse event. Paint what the supplied sports line predicts. Packet player quotes and numbers only. New in-world spots go on INTAKE BIZ. No real-world Oakland venues. Unresolved feed names keep their supplied label and receive no identity, role, quote, or interview."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "text": "I'm planning to focus on the Oaks' preseason struggles, particularly Dame Sarr's performance. The clubhouse vibe after an 0-3 start will be key. I want to capture the team's mindset and any adjustments they're making.",
+    "plan": {
+      "chase": "I'm planning to focus on the Oaks' preseason struggles, particularly Dame Sarr's performance. The clubhouse vibe after an 0-3 start will be key. I want to capture the team's mindset and any adjustments they're making.",
+      "focus": "Dame Sarr's performance and the Oaks' preseason record.",
+      "why": "The Oaks are 0-3 in the preseason, and Dame Sarr's stats suggest he's a key player to watch.",
+      "checks": [
+        "Is Dame Sarr taking on more responsibility?",
+        "How is the team responding to the slow start?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-01025",
+          "question": "How are you adjusting to the preseason challenges?",
+          "basis": "Dame Sarr recorded 7pts and 3 rebounds and 3stls."
+        },
+        {
+          "pop": "POP-01022",
+          "question": "What changes are you considering to turn the season around?",
+          "basis": "The Oaks preseason record is 0-3."
+        }
+      ],
+      "interpretation": "The Oaks' preseason struggles might be a sign of growing pains or a need for strategic adjustments.",
+      "unverifiedLead": [
+        "Is there a shift in team dynamics affecting performance?"
+      ],
+      "closeQuestion": "What’s the team’s outlook for the next game?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | game-result | (preseason) | Dame Sarr, Coen Carr, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01025",
+        "POP-01026",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "A's | game-result | (late-season) | Benji Dillon, Vinnie Keane, Mark Aitken, Isley Kelley",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00001",
+        "POP-00003",
+        "POP-00019"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Travis Coles",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Arturo Ramos, Henry Rivas, John Ellis, Pablo Almanzar, Carmen Mesa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00025",
+        "POP-00024",
+        "POP-00033",
+        "POP-01078",
+        "POP-00081"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "ranAt": "2026-08-31T11:16:20.089Z"
+}

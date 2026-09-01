@@ -1,0 +1,552 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "noah-tan",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Noah Tan",
+    "popid": "POP-00157"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/world_summary_c105.md ## Who Lived It",
+      "label": "Drew Lemon — dealt with a seasonal health concern",
+      "kind": "season-feel",
+      "angle": "Drew Lemon — dealt with a seasonal health concern",
+      "hookLine": "Drew Lemon — dealt with a seasonal health concern",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00670"
+      ],
+      "citizens": [
+        "Drew Lemon (POP-00670)"
+      ]
+    }
+  },
+  "angle": "output/cron-compare/civic_c105_noah-tan_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 1,
+  "quotes": [
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other.\",\"fact_ids\":[\"F-1a376888eebe\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-1a376888eebe"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00212-489878e027",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "season-feel",
+          "hood": "Downtown",
+          "focus": "The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.",
+          "src": "output/world_summary_c105.md ## Who Lived It"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Drew Lemon — dealt with a seasonal health concern",
+            "src": "output/world_summary_c105.md ## Who Lived It",
+            "id": "F-1a376888eebe"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00670",
+      "name": "Drew Lemon",
+      "quote": null,
+      "disp": "driven, hard to sit still; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"When the seasons shift, I notice it in my joints first—makes climbing those apartment staircases tougher. But you learn to pace yourself, layer up before inspections, keep the thermos full.\",\n  \"fact_ids\": [\"F-1a376888eebe\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00670",
+          "name": "Drew Lemon (POP-00670)",
+          "role": "citizen",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "season-feel",
+          "hood": "Downtown",
+          "focus": "The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.",
+          "src": "output/world_summary_c105.md ## Who Lived It"
+        },
+        "exposure": {
+          "basis": [
+            "assignment",
+            "same-neighborhood"
+          ],
+          "self": "Drew Lemon (POP-00670)",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Drew Lemon — dealt with a seasonal health concern",
+            "src": "output/world_summary_c105.md ## Who Lived It",
+            "id": "F-1a376888eebe"
+          },
+          {
+            "t": "FACT",
+            "text": "Drew Lemon (POP-00670)",
+            "src": "Simulation_Ledger profile for POP-00670",
+            "id": "F-f810fbabad62"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00212",
+      "name": "Jessie Hess",
+      "quote": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other.\",\"fact_ids\":[\"F-1a376888eebe\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-1a376888eebe"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00212-489878e027",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve noticed how people like Drew Lemon adapt to seasonal health concerns—it’s all about small, practical changes, like staying hydrated and keeping an eye on each other."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00212",
+          "name": "Jessie Hess",
+          "role": "Barista",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "season-feel",
+          "hood": "Downtown",
+          "focus": "The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.",
+          "src": "output/world_summary_c105.md ## Who Lived It"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Jessie Hess — Barista — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Drew Lemon — dealt with a seasonal health concern",
+            "src": "output/world_summary_c105.md ## Who Lived It",
+            "id": "F-1a376888eebe"
+          },
+          {
+            "t": "FACT",
+            "text": "Jessie Hess — Barista — Downtown",
+            "src": "Simulation_Ledger profile for POP-00212",
+            "id": "F-48795c7c7253"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00224",
+      "name": "Dillon Trevor",
+      "quote": null,
+      "disp": "magnetic, center of every room; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, working downtown, you hear things—folks talking about Drew Lemon's situation made me realize how we all adjust quietly when seasons change, keeping an eye out for each other without making a fuss.\",\n  \"fact_ids\": [\"F-1a376888eebe\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00224",
+          "name": "Dillon Trevor",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "season-feel",
+          "hood": "Downtown",
+          "focus": "The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.",
+          "src": "output/world_summary_c105.md ## Who Lived It"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Dillon Trevor — Server — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Drew Lemon — dealt with a seasonal health concern",
+            "src": "output/world_summary_c105.md ## Who Lived It",
+            "id": "F-1a376888eebe"
+          },
+          {
+            "t": "FACT",
+            "text": "Dillon Trevor — Server — Downtown",
+            "src": "Simulation_Ledger profile for POP-00224",
+            "id": "F-80fac7a0ad63"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00225",
+      "name": "Andre Turner",
+      "quote": null,
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction must be one to three sentences; direct reaction must be first person",
+      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"You know, working in a kitchen, we're always mindful of health stuff—germs spread fast when you're shoulder to shoulder all day. Heard about Drew Lemon dealing with something seasonal, makes you think. We all adjust, wear masks when needed, keep things clean. It's just part of life downtown.\",\n  \"fact_ids\": [\"F-1a376888eebe\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": [],\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00225",
+          "name": "Andre Turner",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Noah Tan",
+          "question": "As a resident of Downtown, what have you seen, felt, or understood about \"The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "season-feel",
+          "hood": "Downtown",
+          "focus": "The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.",
+          "src": "output/world_summary_c105.md ## Who Lived It"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Andre Turner — Line cook — Downtown",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Drew Lemon — dealt with a seasonal health concern",
+            "src": "output/world_summary_c105.md ## Who Lived It",
+            "id": "F-1a376888eebe"
+          },
+          {
+            "t": "FACT",
+            "text": "Andre Turner — Line cook — Downtown",
+            "src": "Simulation_Ledger profile for POP-00225",
+            "id": "F-f8810d7815e2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-31T18:16:21.353Z"
+}

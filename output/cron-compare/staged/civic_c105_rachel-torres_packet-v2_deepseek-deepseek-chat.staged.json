@@ -1,0 +1,60 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "rachel-torres",
+  "byline": "Sgt. Rachel Torres",
+  "bylinePopid": "POP-00057",
+  "article": "output/cron-compare/staged/civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "mentioned",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Elio Perez",
+        "role": "mentioned",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Depak Ying",
+        "role": "mentioned",
+        "popid": "POP-00210"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I’ve heard folks talking about the Alternative Response Initiative, and it feels like there’s hope it could ease some of the tension we’ve been seeing, especially in West Oakland. People are curious to see how it plays out.",
+        "sourceRef": "citizenVoice PRESS Elio Perez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-05ec049e77ac",
+    "draftSha256": "b0ad98dcc560620a03e8f2ea982f1d694ee3c9803ea47665d3a20f61b095dd0d",
+    "verdict": "output/cron-compare/civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-08-31T23:16:26.375Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-08-31T23:16:26.816Z"
+}

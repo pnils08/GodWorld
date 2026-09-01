@@ -1,0 +1,1003 @@
+{
+  "stage": "report",
+  "desk": "culture",
+  "cycle": "105",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+      "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "hookLine": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+      "hood": "Dimond",
+      "pulseClass": "fame-sighting",
+      "citizens": [
+        "Benji Dillon"
+      ],
+      "popids": [],
+      "named": "Dimond Pharmacy",
+      "venue": "Dimond Pharmacy",
+      "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "cycle": 105
+    }
+  },
+  "angle": "output/cron-compare/culture_c105_maria-keen_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.\",\n  \"fact_ids\": [\"F-9e94d8dc5f1f\", \"F-2bad2deee024\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-5d3837b09a",
+        "authoredQuote": true,
+        "publishableQuote": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What have you seen, felt, or understood about \"Benji Dillon's visit to Dimond Pharmacy\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Benji Dillon's visit to Dimond Pharmacy",
+          "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9e94d8dc5f1f"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-2bad2deee024"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-03983d9d2fb1"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Benji Dillon",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-81e10e37f707"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-61cec5437bc8"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-638940b5f199"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.\",\n  \"fact_ids\": [\"F-9e94d8dc5f1f\", \"F-2bad2deee024\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-0474550b3f",
+        "authoredQuote": true,
+        "publishableQuote": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What have you seen, felt, or understood about \"Benji Dillon's visit to Dimond Pharmacy\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Benji Dillon's visit to Dimond Pharmacy",
+          "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9e94d8dc5f1f"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-2bad2deee024"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-03983d9d2fb1"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Benji Dillon",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-81e10e37f707"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-61cec5437bc8"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-638940b5f199"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.\",\n  \"fact_ids\": [\"F-9e94d8dc5f1f\", \"F-2bad2deee024\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-dc68c32814",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What have you seen, felt, or understood about \"Benji Dillon's visit to Dimond Pharmacy\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Benji Dillon's visit to Dimond Pharmacy",
+          "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Elio Perez — Server — West Oakland",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9e94d8dc5f1f"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-2bad2deee024"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-03983d9d2fb1"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Benji Dillon",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-81e10e37f707"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-61cec5437bc8"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-638940b5f199"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-5d500295f99a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.\",\n  \"fact_ids\": [\"F-9e94d8dc5f1f\", \"F-2bad2deee024\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-5d3837b09a",
+        "authoredQuote": true,
+        "publishableQuote": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What have you seen, felt, or understood about \"Benji Dillon's visit to Dimond Pharmacy\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Benji Dillon's visit to Dimond Pharmacy",
+          "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9e94d8dc5f1f"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-2bad2deee024"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-03983d9d2fb1"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Benji Dillon",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-81e10e37f707"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-61cec5437bc8"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-638940b5f199"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; curious, open to new things; steady, hard to shake; devoted, family is everything; often out in the neighborhood",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.\",\n  \"fact_ids\": [\"F-9e94d8dc5f1f\", \"F-2bad2deee024\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00198-0474550b3f",
+        "authoredQuote": true,
+        "publishableQuote": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00198",
+          "name": "Rick Walker",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What have you seen, felt, or understood about \"Benji Dillon's visit to Dimond Pharmacy\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Benji Dillon's visit to Dimond Pharmacy",
+          "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Rick Walker — Line cook — Fruitvale",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9e94d8dc5f1f"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-2bad2deee024"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-03983d9d2fb1"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Benji Dillon",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-81e10e37f707"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-61cec5437bc8"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-638940b5f199"
+          },
+          {
+            "t": "FACT",
+            "text": "Rick Walker — Line cook — Fruitvale",
+            "src": "Simulation_Ledger profile for POP-00198",
+            "id": "F-69bcadf46b69"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.\",\n  \"fact_ids\": [\"F-9e94d8dc5f1f\", \"F-2bad2deee024\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00201-dc68c32814",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00201",
+          "name": "Elio Perez",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What have you seen, felt, or understood about \"Benji Dillon's visit to Dimond Pharmacy\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Benji Dillon's visit to Dimond Pharmacy",
+          "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Elio Perez — Server — West Oakland",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9e94d8dc5f1f"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-2bad2deee024"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-03983d9d2fb1"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Benji Dillon",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-81e10e37f707"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-61cec5437bc8"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-638940b5f199"
+          },
+          {
+            "t": "FACT",
+            "text": "Elio Perez — Server — West Oakland",
+            "src": "Simulation_Ledger profile for POP-00201",
+            "id": "F-5d500295f99a"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00210",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: appendReflection_: [err] [object Object],[object Object],[object Object],[object Object],[object Object]",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00210",
+          "name": "Depak Ying",
+          "role": "Server",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Maria Keen",
+          "question": "What have you seen, felt, or understood about \"Benji Dillon's visit to Dimond Pharmacy\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Dimond",
+          "focus": "Benji Dillon's visit to Dimond Pharmacy",
+          "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+        },
+        "exposure": {
+          "basis": [
+            "ledger-resident"
+          ],
+          "self": "Depak Ying — Server — Rockridge",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-9e94d8dc5f1f"
+          },
+          {
+            "t": "FACT",
+            "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-2bad2deee024"
+          },
+          {
+            "t": "FACT",
+            "text": "NAMED: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-03983d9d2fb1"
+          },
+          {
+            "t": "FACT",
+            "text": "PERSON: Benji Dillon",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-81e10e37f707"
+          },
+          {
+            "t": "FACT",
+            "text": "VENUE: Dimond Pharmacy",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-61cec5437bc8"
+          },
+          {
+            "t": "FACT",
+            "text": "HOOD: Dimond",
+            "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+            "id": "F-638940b5f199"
+          },
+          {
+            "t": "FACT",
+            "text": "Depak Ying — Server — Rockridge",
+            "src": "Simulation_Ledger profile for POP-00210",
+            "id": "F-d4c31165a2d5"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-08-31T18:21:11.276Z"
+}

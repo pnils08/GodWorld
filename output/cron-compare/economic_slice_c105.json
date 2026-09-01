@@ -1,0 +1,1013 @@
+{
+  "empty": false,
+  "cycle": 105,
+  "kind": "economic-storefront",
+  "pulse": {
+    "className": "hood-rising",
+    "score": 33,
+    "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+    "hood": "Rockridge",
+    "namedBusinesses": [
+      "Cozy Pot",
+      "HotSlice Pizza",
+      "Festive Fireside"
+    ],
+    "retail": 10.51,
+    "retailDelta": null
+  },
+  "story": {
+    "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+    "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+    "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+    "hood": "Rockridge",
+    "pulseClass": "hood-rising",
+    "namedBusinesses": [
+      "Cozy Pot",
+      "HotSlice Pizza",
+      "Festive Fireside"
+    ],
+    "citizens": [],
+    "popids": [],
+    "ref": "world_summary ## What Moved · trajectory",
+    "cycle": 105
+  },
+  "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.",
+  "prewrite": {
+    "pulseClass": "hood-rising",
+    "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+    "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+    "namedBusinesses": [
+      "Cozy Pot",
+      "HotSlice Pizza",
+      "Festive Fireside"
+    ],
+    "anchorFacts": [
+      "HOOD: Rockridge",
+      "TRAJECTORY: rising",
+      "MAGNITUDE (translate, do not lead): 5",
+      "RETAIL VITALITY (scene color): 10.51",
+      "NAMED BUSINESSES (sources only): Cozy Pot; HotSlice Pizza; Festive Fireside",
+      "EVENING VENUE: Cozy Pot (restaurant)",
+      "EVENING VENUE: HotSlice Pizza (fast-food)"
+    ],
+    "forbidden": [
+      "Do not invent Employee_Count",
+      "Do not invent Key_Personnel",
+      "Do not invent storefronts not on ledger or evening texture",
+      "Do not lead with raw RetailVitality decimals — translate to scene"
+    ]
+  },
+  "texture": {
+    "hoodCount": 22,
+    "rising": [
+      "Downtown",
+      "Jack London",
+      "Rockridge",
+      "Adams Point",
+      "Chinatown",
+      "Uptown"
+    ],
+    "cooling": [],
+    "venues": [
+      {
+        "name": "Merritt Reserve",
+        "hood": "Lake Merritt",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Broadline Grab-N-Go",
+        "hood": "Fruitvale",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Cozy Pot",
+        "hood": "Rockridge",
+        "kind": "restaurant",
+        "source": "evening-texture"
+      },
+      {
+        "name": "TacoRail",
+        "hood": "West Oakland",
+        "kind": "fast-food",
+        "source": "evening-texture"
+      },
+      {
+        "name": "HotSlice Pizza",
+        "hood": "Rockridge",
+        "kind": "fast-food",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Festive Fireside",
+        "hood": "Rockridge",
+        "kind": "nightlife",
+        "source": "evening-texture"
+      },
+      {
+        "name": "Underglow Lounge",
+        "hood": "Jack London",
+        "kind": "nightlife",
+        "source": "evening-texture"
+      },
+      {
+        "name": "After Hours Oakland",
+        "hood": "Downtown",
+        "kind": "nightlife",
+        "source": "evening-texture"
+      }
+    ],
+    "ledgerCount": 0,
+    "ledgerSource": null,
+    "topRetail": [
+      {
+        "name": "Downtown",
+        "sentiment": 0.81,
+        "retail": 12.31,
+        "eventAttractiveness": 50.23,
+        "crime": 1.07
+      },
+      {
+        "name": "Temescal",
+        "sentiment": 0.88,
+        "retail": 11.22,
+        "eventAttractiveness": 54.11,
+        "crime": 0.73
+      },
+      {
+        "name": "Grand Lake",
+        "sentiment": 0.99,
+        "retail": 10.63,
+        "eventAttractiveness": 27.5,
+        "crime": 0.53
+      },
+      {
+        "name": "KONO",
+        "sentiment": 0.71,
+        "retail": 10.53,
+        "eventAttractiveness": 31,
+        "crime": 0.57
+      },
+      {
+        "name": "Rockridge",
+        "sentiment": 0.84,
+        "retail": 10.51,
+        "eventAttractiveness": 25.03,
+        "crime": 0.54
+      }
+    ],
+    "bottomRetail": [
+      {
+        "name": "Ivy Hill",
+        "sentiment": 1.09,
+        "retail": 4.38,
+        "eventAttractiveness": 11,
+        "crime": 0.18
+      },
+      {
+        "name": "Baylight District",
+        "sentiment": 1.05,
+        "retail": 5.02,
+        "eventAttractiveness": 16,
+        "crime": 0.65
+      },
+      {
+        "name": "West Oakland",
+        "sentiment": 0.77,
+        "retail": 6.17,
+        "eventAttractiveness": 19.57,
+        "crime": 1.16
+      },
+      {
+        "name": "Brooklyn",
+        "sentiment": 0.97,
+        "retail": 6.38,
+        "eventAttractiveness": 14.63,
+        "crime": 0.6
+      },
+      {
+        "name": "Adams Point",
+        "sentiment": 1.03,
+        "retail": 6.49,
+        "eventAttractiveness": 20.91,
+        "crime": 0.62
+      }
+    ]
+  },
+  "signals": {
+    "businessLaneCount": 50,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+        "angle": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hookLine": "Business conditions in Downtown track the economic picture.",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "popids": [
+          "POP-00136",
+          "POP-00154",
+          "POP-01080"
+        ],
+        "citizens": [
+          "Louis Cross (POP-01080)",
+          "Lila Mezran (POP-00154)",
+          "Rafael Montez (POP-00136)"
+        ],
+        "ref": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+        "angle": "Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland",
+        "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [
+          "POP-00754",
+          "POP-00756",
+          "POP-00762"
+        ],
+        "citizens": [
+          "Ophelia Brenner (POP-00754)",
+          "Ramon Solano (POP-00756)",
+          "Aziz Rahimi (POP-00762)"
+        ],
+        "ref": "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3"
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale | Business momentum in Fruitvale tracks the transit gain.",
+        "angle": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale",
+        "hookLine": "Business momentum in Fruitvale tracks the transit gain.",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00744",
+          "POP-00766",
+          "POP-01057"
+        ],
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Manjit Singh (POP-00766)",
+          "Nina Reyes (POP-01057)"
+        ],
+        "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "Baylight District — Final Council Vote — economic upside, jobs and footprint in Jack London | Business momentum in Jack London tracks the economic gain.",
+        "angle": "Baylight District — Final Council Vote — economic upside, jobs and footprint in Jack London",
+        "hookLine": "Business momentum in Jack London tracks the economic gain.",
+        "hood": "Jack London, Downtown",
+        "popids": [
+          "POP-00020",
+          "POP-00156",
+          "POP-01078"
+        ],
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Angela Reyes (POP-00156)",
+          "Elena Vásquez (POP-00020)"
+        ],
+        "ref": "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "causeType": null,
+        "label": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+        "angle": "Oakland Youth Apprenticeship Pipeline — economic upside, jobs and footprint in West Oakland",
+        "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00037",
+          "POP-00588",
+          "POP-00789"
+        ],
+        "citizens": [
+          "Darren Briggs (POP-00588)",
+          "Elias Varek (POP-00789)",
+          "Brenda Okoro (POP-00037)"
+        ],
+        "ref": "output/engine_audit_c105.json patterns[6]; evidence: Initiative_Tracker row(s) 7"
+      }
+    ]
+  },
+  "candidates": [
+    {
+      "className": "hood-rising",
+      "score": 33,
+      "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Cozy Pot",
+        "HotSlice Pizza",
+        "Festive Fireside"
+      ]
+    },
+    {
+      "className": "hood-rising",
+      "score": 31,
+      "label": "Downtown rising · After Hours Oakland",
+      "hood": "Downtown",
+      "namedBusinesses": [
+        "After Hours Oakland"
+      ]
+    },
+    {
+      "className": "hood-rising",
+      "score": 28,
+      "label": "Jack London rising · Underglow Lounge",
+      "hood": "Jack London",
+      "namedBusinesses": [
+        "Underglow Lounge"
+      ]
+    },
+    {
+      "className": "hood-rising",
+      "score": 21,
+      "label": "Adams Point rising",
+      "hood": "Adams Point",
+      "namedBusinesses": []
+    },
+    {
+      "className": "hood-rising",
+      "score": 21,
+      "label": "Chinatown rising",
+      "hood": "Chinatown",
+      "namedBusinesses": []
+    },
+    {
+      "className": "hood-rising",
+      "score": 21,
+      "label": "Uptown rising",
+      "hood": "Uptown",
+      "namedBusinesses": []
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 19,
+      "label": "Downtown · economic ailment — economic footprint, affected businesses, workforce impact in ",
+      "hood": "Downtown",
+      "namedBusinesses": []
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "Cozy Pot (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Cozy Pot"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "HotSlice Pizza (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "HotSlice Pizza"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "Festive Fireside (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Festive Fireside"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "Underglow Lounge (Jack London)",
+      "hood": "Jack London",
+      "namedBusinesses": [
+        "Underglow Lounge"
+      ]
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "After Hours Oakland (Downtown)",
+      "hood": "Downtown",
+      "namedBusinesses": [
+        "After Hours Oakland"
+      ]
+    }
+  ],
+  "pulses": [
+    {
+      "className": "hood-rising",
+      "score": 33,
+      "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+      "hood": "Rockridge",
+      "mag": 5,
+      "retail": 10.51,
+      "sentiment": 0.84,
+      "namedBusinesses": [
+        "Cozy Pot",
+        "HotSlice Pizza",
+        "Festive Fireside"
+      ],
+      "businesses": [],
+      "venues": [
+        {
+          "name": "Cozy Pot",
+          "hood": "Rockridge",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        },
+        {
+          "name": "HotSlice Pizza",
+          "hood": "Rockridge",
+          "kind": "fast-food",
+          "source": "evening-texture"
+        },
+        {
+          "name": "Festive Fireside",
+          "hood": "Rockridge",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+      "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+      "sceneBits": [
+        "HOOD: Rockridge",
+        "TRAJECTORY: rising",
+        "MAGNITUDE (translate, do not lead): 5",
+        "RETAIL VITALITY (scene color): 10.51",
+        "NAMED BUSINESSES (sources only): Cozy Pot; HotSlice Pizza; Festive Fireside",
+        "EVENING VENUE: Cozy Pot (restaurant)",
+        "EVENING VENUE: HotSlice Pizza (fast-food)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "hood-rising",
+      "score": 31,
+      "label": "Downtown rising · After Hours Oakland",
+      "hood": "Downtown",
+      "mag": 5,
+      "retail": 12.31,
+      "sentiment": 0.81,
+      "namedBusinesses": [
+        "After Hours Oakland"
+      ],
+      "businesses": [],
+      "venues": [
+        {
+          "name": "After Hours Oakland",
+          "hood": "Downtown",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Retail turning upward in Downtown — busy counters, people moving in; named on pack: After Hours Oakland",
+      "hookLine": "Downtown turning upward: retail busy, events drawing crowds, people moving in",
+      "sceneBits": [
+        "HOOD: Downtown",
+        "TRAJECTORY: rising",
+        "MAGNITUDE (translate, do not lead): 5",
+        "RETAIL VITALITY (scene color): 12.31",
+        "NAMED BUSINESSES (sources only): After Hours Oakland",
+        "EVENING VENUE: After Hours Oakland (nightlife)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "hood-rising",
+      "score": 28,
+      "label": "Jack London rising · Underglow Lounge",
+      "hood": "Jack London",
+      "mag": 5,
+      "retail": 9.4,
+      "sentiment": 0.77,
+      "namedBusinesses": [
+        "Underglow Lounge"
+      ],
+      "businesses": [],
+      "venues": [
+        {
+          "name": "Underglow Lounge",
+          "hood": "Jack London",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Retail turning upward in Jack London — busy counters, people moving in; named on pack: Underglow Lounge",
+      "hookLine": "Jack London turning upward: retail busy, events drawing crowds, people moving in",
+      "sceneBits": [
+        "HOOD: Jack London",
+        "TRAJECTORY: rising",
+        "MAGNITUDE (translate, do not lead): 5",
+        "RETAIL VITALITY (scene color): 9.4",
+        "NAMED BUSINESSES (sources only): Underglow Lounge",
+        "EVENING VENUE: Underglow Lounge (nightlife)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "hood-rising",
+      "score": 21,
+      "label": "Adams Point rising",
+      "hood": "Adams Point",
+      "mag": 5,
+      "retail": 6.49,
+      "sentiment": 1.03,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Retail turning upward in Adams Point — busy counters, people moving in",
+      "hookLine": "Adams Point turning upward: retail busy, events drawing crowds, people moving in",
+      "sceneBits": [
+        "HOOD: Adams Point",
+        "TRAJECTORY: rising",
+        "MAGNITUDE (translate, do not lead): 5",
+        "RETAIL VITALITY (scene color): 6.49",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "hood-rising",
+      "score": 21,
+      "label": "Chinatown rising",
+      "hood": "Chinatown",
+      "mag": 5,
+      "retail": 9.82,
+      "sentiment": 0.79,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Retail turning upward in Chinatown — busy counters, people moving in",
+      "hookLine": "Chinatown turning upward: retail busy, events drawing crowds, people moving in",
+      "sceneBits": [
+        "HOOD: Chinatown",
+        "TRAJECTORY: rising",
+        "MAGNITUDE (translate, do not lead): 5",
+        "RETAIL VITALITY (scene color): 9.82",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "hood-rising",
+      "score": 21,
+      "label": "Uptown rising",
+      "hood": "Uptown",
+      "mag": 5,
+      "retail": 9.97,
+      "sentiment": 0.88,
+      "namedBusinesses": [],
+      "businesses": [],
+      "venues": [],
+      "requiresName": false,
+      "source": "world_summary ## What Moved · trajectory",
+      "angle": "Retail turning upward in Uptown — busy counters, people moving in",
+      "hookLine": "Uptown turning upward: retail busy, events drawing crowds, people moving in",
+      "sceneBits": [
+        "HOOD: Uptown",
+        "TRAJECTORY: rising",
+        "MAGNITUDE (translate, do not lead): 5",
+        "RETAIL VITALITY (scene color): 9.97",
+        "NAMED BUSINESSES: none on disk for this hood — do not invent"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "workforce-pressure",
+      "score": 19,
+      "label": "Downtown · economic ailment — economic footprint, affected businesses, workforce impact in ",
+      "hood": "Downtown",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00136",
+        "POP-00154",
+        "POP-01080"
+      ],
+      "citizens": [
+        "Louis Cross (POP-01080)",
+        "Lila Mezran (POP-00154)",
+        "Rafael Montez (POP-00136)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s) ",
+      "angle": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+      "hookLine": "Business conditions in Downtown track the economic picture.",
+      "sceneBits": [
+        "HOOD: Downtown",
+        "SIGNAL: economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Louis Cross (POP-01080); Lila Mezran (POP-00154); Rafael Montez (POP-00136)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "Cozy Pot (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Cozy Pot"
+      ],
+      "venues": [
+        {
+          "name": "Cozy Pot",
+          "hood": "Rockridge",
+          "kind": "restaurant",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Cozy Pot",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named restaurant Cozy Pot in Rockridge on a rising retail block",
+      "hookLine": "Cozy Pot is on the evening board in Rockridge.",
+      "sceneBits": [
+        "VENUE: Cozy Pot",
+        "HOOD: Rockridge",
+        "KIND: restaurant",
+        "TRAJECTORY: rising",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "HotSlice Pizza (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "HotSlice Pizza"
+      ],
+      "venues": [
+        {
+          "name": "HotSlice Pizza",
+          "hood": "Rockridge",
+          "kind": "fast-food",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "HotSlice Pizza",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named fast-food HotSlice Pizza in Rockridge on a rising retail block",
+      "hookLine": "HotSlice Pizza is on the evening board in Rockridge.",
+      "sceneBits": [
+        "VENUE: HotSlice Pizza",
+        "HOOD: Rockridge",
+        "KIND: fast-food",
+        "TRAJECTORY: rising",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "Festive Fireside (Rockridge)",
+      "hood": "Rockridge",
+      "namedBusinesses": [
+        "Festive Fireside"
+      ],
+      "venues": [
+        {
+          "name": "Festive Fireside",
+          "hood": "Rockridge",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Festive Fireside",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named nightlife Festive Fireside in Rockridge on a rising retail block",
+      "hookLine": "Festive Fireside is on the evening board in Rockridge.",
+      "sceneBits": [
+        "VENUE: Festive Fireside",
+        "HOOD: Rockridge",
+        "KIND: nightlife",
+        "TRAJECTORY: rising",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "Underglow Lounge (Jack London)",
+      "hood": "Jack London",
+      "namedBusinesses": [
+        "Underglow Lounge"
+      ],
+      "venues": [
+        {
+          "name": "Underglow Lounge",
+          "hood": "Jack London",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "Underglow Lounge",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named nightlife Underglow Lounge in Jack London on a rising retail block",
+      "hookLine": "Underglow Lounge is on the evening board in Jack London.",
+      "sceneBits": [
+        "VENUE: Underglow Lounge",
+        "HOOD: Jack London",
+        "KIND: nightlife",
+        "TRAJECTORY: rising",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "named-storefront",
+      "score": 18,
+      "label": "After Hours Oakland (Downtown)",
+      "hood": "Downtown",
+      "namedBusinesses": [
+        "After Hours Oakland"
+      ],
+      "venues": [
+        {
+          "name": "After Hours Oakland",
+          "hood": "Downtown",
+          "kind": "nightlife",
+          "source": "evening-texture"
+        }
+      ],
+      "businesses": [],
+      "requiresName": true,
+      "named": "After Hours Oakland",
+      "source": "world_summary ## Evening Texture + trajectory context",
+      "angle": "Named nightlife After Hours Oakland in Downtown on a rising retail block",
+      "hookLine": "After Hours Oakland is on the evening board in Downtown.",
+      "sceneBits": [
+        "VENUE: After Hours Oakland",
+        "HOOD: Downtown",
+        "KIND: nightlife",
+        "TRAJECTORY: rising",
+        "Never invent Employee_Count or Key_Personnel for this room."
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "West Oakland · Oakland Alternative Response Initiative — economic upside, jobs and footprint in",
+      "hood": "West Oakland",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00754",
+        "POP-00756",
+        "POP-00762"
+      ],
+      "citizens": [
+        "Ophelia Brenner (POP-00754)",
+        "Ramon Solano (POP-00756)",
+        "Aziz Rahimi (POP-00762)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3",
+      "angle": "Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland",
+      "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: West Oakland",
+        "SIGNAL: Oakland Alternative Response Initiative — economic upside, jobs and footprint in West Oakland",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Ophelia Brenner (POP-00754); Ramon Solano (POP-00756); Aziz Rahimi (POP-00762)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Fruitvale · Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint",
+      "hood": "Fruitvale",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00744",
+        "POP-00766",
+        "POP-01057"
+      ],
+      "citizens": [
+        "Tomas Renteria (POP-00744)",
+        "Manjit Singh (POP-00766)",
+        "Nina Reyes (POP-01057)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+      "angle": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale",
+      "hookLine": "Business momentum in Fruitvale tracks the transit gain.",
+      "sceneBits": [
+        "HOOD: Fruitvale",
+        "SIGNAL: Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Tomas Renteria (POP-00744); Manjit Singh (POP-00766); Nina Reyes (POP-01057)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Jack London · Baylight District — Final Council Vote — economic upside, jobs and footprint in ",
+      "hood": "Jack London",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00020",
+        "POP-00156",
+        "POP-01078"
+      ],
+      "citizens": [
+        "Pablo Almanzar (POP-01078)",
+        "Angela Reyes (POP-00156)",
+        "Elena Vásquez (POP-00020)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+      "angle": "Baylight District — Final Council Vote — economic upside, jobs and footprint in Jack London",
+      "hookLine": "Business momentum in Jack London tracks the economic gain.",
+      "sceneBits": [
+        "HOOD: Jack London",
+        "SIGNAL: Baylight District — Final Council Vote — economic upside, jobs and footprint in Jack London",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Pablo Almanzar (POP-01078); Angela Reyes (POP-00156); Elena Vásquez (POP-00020)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Downtown · civic — economic upside, jobs and footprint in Downtown",
+      "hood": "Downtown",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00127",
+        "POP-00533",
+        "POP-00597"
+      ],
+      "citizens": [
+        "Mason Miller (POP-00127)",
+        "Eric Taveras (POP-00597)",
+        "Travis Coles (POP-00533)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[7]; evidence: Neighborhood_Map row(s) ",
+      "angle": "civic — economic upside, jobs and footprint in Downtown",
+      "hookLine": "Business momentum in Downtown tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: Downtown",
+        "SIGNAL: civic — economic upside, jobs and footprint in Downtown",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Mason Miller (POP-00127); Eric Taveras (POP-00597); Travis Coles (POP-00533)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Temescal · civic — economic upside, jobs and footprint in Temescal",
+      "hood": "Temescal",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00027",
+        "POP-00745",
+        "POP-00792"
+      ],
+      "citizens": [
+        "Philly Rodriguez (POP-00027)",
+        "Sonia Parikh (POP-00745)",
+        "Bobby Chen-Ramirez (POP-00792)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[8]; evidence: Neighborhood_Map row(s) ",
+      "angle": "civic — economic upside, jobs and footprint in Temescal",
+      "hookLine": "Business momentum in Temescal tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: Temescal",
+        "SIGNAL: civic — economic upside, jobs and footprint in Temescal",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Philly Rodriguez (POP-00027); Sonia Parikh (POP-00745); Bobby Chen-Ramirez (POP-00792)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Laurel · civic — economic upside, jobs and footprint in Laurel",
+      "hood": "Laurel",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00367",
+        "POP-00478",
+        "POP-00495"
+      ],
+      "citizens": [
+        "Ron Arenson (POP-00367)",
+        "Maya Brooks (POP-00478)",
+        "Rosalind Young (POP-00495)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[9]; evidence: Neighborhood_Map row(s) ",
+      "angle": "civic — economic upside, jobs and footprint in Laurel",
+      "hookLine": "Business momentum in Laurel tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: Laurel",
+        "SIGNAL: civic — economic upside, jobs and footprint in Laurel",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Ron Arenson (POP-00367); Maya Brooks (POP-00478); Rosalind Young (POP-00495)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "West Oakland · civic — economic upside, jobs and footprint in West Oakland",
+      "hood": "West Oakland",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00368",
+        "POP-00441",
+        "POP-00617"
+      ],
+      "citizens": [
+        "Eleanor Rivera (POP-00617)",
+        "Dom Will (POP-00368)",
+        "Soriya Rodriguez (POP-00441)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[10]; evidence: Neighborhood_Map row(s) ",
+      "angle": "civic — economic upside, jobs and footprint in West Oakland",
+      "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: West Oakland",
+        "SIGNAL: civic — economic upside, jobs and footprint in West Oakland",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Eleanor Rivera (POP-00617); Dom Will (POP-00368); Soriya Rodriguez (POP-00441)"
+      ],
+      "cycle": 105
+    },
+    {
+      "className": "economic-ailment",
+      "score": 15,
+      "label": "Fruitvale · civic — economic upside, jobs and footprint in Fruitvale",
+      "hood": "Fruitvale",
+      "namedBusinesses": [],
+      "businesses": [],
+      "popids": [
+        "POP-00031",
+        "POP-00143",
+        "POP-00231"
+      ],
+      "citizens": [
+        "Martin Richards (POP-00031)",
+        "Clarissa Dane (POP-00143)",
+        "Calvin Turner (POP-00231)"
+      ],
+      "source": "output/engine_audit_c105.json patterns[11]; evidence: Neighborhood_Map row(s) ",
+      "angle": "civic — economic upside, jobs and footprint in Fruitvale",
+      "hookLine": "Business momentum in Fruitvale tracks the civic gain.",
+      "sceneBits": [
+        "HOOD: Fruitvale",
+        "SIGNAL: civic — economic upside, jobs and footprint in Fruitvale",
+        "NAMED: none — do not invent businesses",
+        "CITIZENS (packet only): Martin Richards (POP-00031); Clarissa Dane (POP-00143); Calvin Turner (POP-00231)"
+      ],
+      "cycle": 105
+    }
+  ],
+  "scene": {
+    "colorRoom": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts.",
+    "namedOnTop": [
+      "Cozy Pot",
+      "HotSlice Pizza",
+      "Festive Fireside"
+    ]
+  },
+  "pointers": [
+    "output/world_summary_c105.md ## What Moved / Neighborhood snapshot",
+    "output/desk_signal_c105.json lanes.business",
+    "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 2"
+  ]
+}

@@ -1,0 +1,422 @@
+{
+  "date": "2026-08-31",
+  "cycle": 105,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Noah Tan",
+      "popid": "POP-00157",
+      "beatDomain": "ENVIRONMENT",
+      "persona": "noah-tan",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/world_summary_c105.md ## Who Lived It",
+        "label": "Drew Lemon — dealt with a seasonal health concern",
+        "kind": "season-feel",
+        "angle": "Drew Lemon — dealt with a seasonal health concern",
+        "hookLine": "Drew Lemon — dealt with a seasonal health concern",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00670"
+        ],
+        "citizens": [
+          "Drew Lemon (POP-00670)"
+        ]
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "noah-tan",
+      "pulse": {
+        "className": "environment",
+        "score": 80,
+        "label": "Drew Lemon — dealt with a seasonal health concern",
+        "hood": "Downtown",
+        "source": "output/world_summary_c105.md ## Who Lived It"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Drew Lemon — dealt with a seasonal health concern"
+        ],
+        "forbidden": [
+          "Do not announce the season or temperature as the story.",
+          "Do not import real-world Oakland winter tropes absent from the Packet.",
+          "Do not add forecasts, agencies, or unsupplied measurements."
+        ],
+        "schema": "SEASON-FEEL-1",
+        "method": "WHAT_MOVED_ON_DAYS_LIKE_THIS",
+        "missing": [
+          "do not invent a feeling the Who Lived It / Evening Texture lines do not support"
+        ],
+        "impactEvidence": {
+          "state": "SUPPLIED",
+          "subjects": [
+            "POP-00670"
+          ],
+          "facts": [
+            "Drew Lemon — dealt with a seasonal health concern"
+          ],
+          "src": "output/world_summary_c105.md ## Who Lived It"
+        }
+      },
+      "wakePackage": "NOAH-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Sgt. Rachel Torres",
+      "popid": "POP-00057",
+      "beatDomain": "SAFETY",
+      "persona": "rachel-torres",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s) ",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+      },
+      "wakePackage": "RACHEL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "beatDomain": "SPORTS_ANALYTICS",
+      "persona": "anthony-raines",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "kind": "sports-analytics",
+        "angle": "The season line (1 IP) has to carry the claim before the narrative does: A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "label": "A's · game-result — A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hookLine": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hood": "Jack London",
+        "pulseClass": "award-board",
+        "team": "A's",
+        "eventKind": "game-result",
+        "citizens": [
+          "Benji Dillon (POP-00018)",
+          "Vinnie Keane (POP-00001)",
+          "Mark Aitken (POP-00003)",
+          "Isley Kelley (POP-00019)"
+        ],
+        "popids": [
+          "POP-00018",
+          "POP-00001",
+          "POP-00003",
+          "POP-00019"
+        ],
+        "ref": "world_summary_c105.md ## Sports",
+        "cycle": 105
+      },
+      "anthonySlice": true,
+      "analytic": true,
+      "pulse": {
+        "className": "award-board",
+        "score": 79,
+        "label": "A's · game-result — A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "late-season",
+        "storyAngle": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hasStats": true,
+        "record": "127-35",
+        "streak": "W2",
+        "foilNumber": "1 IP",
+        "feedCycle": 105
+      },
+      "bag": {
+        "tools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 7,
+            "name": "Is-It-Real (ledger PANDAS)"
+          }
+        ],
+        "claim": "The season line (1 IP) has to carry the claim before the narrative does: A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "foilNumber": "1 IP"
+      },
+      "prewrite": {
+        "reporter": "Anthony Raines",
+        "bagTools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 7,
+            "name": "Is-It-Real (ledger PANDAS)"
+          }
+        ],
+        "lineFacts": [
+          "Benji Dillon line (feed): 5.1 IP/8K/2H",
+          "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+          "Mark Aitken line (feed): 2HR/6RBI",
+          "Team record (feed): 127-35 · W2",
+          "Event kind (feed): A's — game-result (late-season)",
+          "NamesUsed (feed): Benji Dillon (SP), Vinnie Keane (2B), Mark Aitken (1B), Isley Kelley (SS)"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "feedFacts": [
+          "StoryAngle: A Farewell Gone Well:Vinnie Keane Benji Dillon",
+          "Notes: The farewell season reaches its final regular season curtain call as the As play host to the NL's top team in the Rockies. As Vinnie Keane HOF career comes to its close a legacy that reshaped Oakland ",
+          "Record/Streak: 127-35 / W2"
+        ],
+        "claim": "The season line (1 IP) has to carry the claim before the narrative does: A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+          "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies"
+        ],
+        "foilNumber": "1 IP",
+        "anchorFacts": [
+          "Benji Dillon line (feed): 5.1 IP/8K/2H",
+          "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+          "Mark Aitken line (feed): 2HR/6RBI",
+          "Team record (feed): 127-35 · W2"
+        ]
+      },
+      "wakePackage": "ANTHONY-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Tanya Cruz",
+      "popid": "POP-00014",
+      "beatDomain": "SPORTS_SIDELINE",
+      "persona": "tanya-cruz",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+        "label": "A's | game-result | (late-season) | Benji Dillon, Vinnie Keane, Mark Aitken, Isley Kelley",
+        "kind": "feed",
+        "popids": [
+          "POP-00018",
+          "POP-00001",
+          "POP-00003",
+          "POP-00019"
+        ]
+      },
+      "wakePackage": "TANYA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "beatDomain": "CULTURE_GROUND",
+      "persona": "maria-keen",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+        "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "hookLine": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+        "hood": "Dimond",
+        "pulseClass": "fame-sighting",
+        "citizens": [
+          "Benji Dillon"
+        ],
+        "popids": [],
+        "named": "Dimond Pharmacy",
+        "venue": "Dimond Pharmacy",
+        "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "cycle": 105
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Benji Dillon at Dimond Pharmacy (Dimond)"
+      },
+      "recommend": {
+        "bag": "ground",
+        "slug": "maria-keen",
+        "name": "Maria Keen",
+        "popid": "POP-00013",
+        "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+        "reason": "top pulse fame-sighting → ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Benji Dillon at Dimond Pharmacy (Dimond)"
+      },
+      "bag": "ground",
+      "wakePackage": "MARIA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+        "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "hood": "Rockridge",
+        "pulseClass": "hood-rising",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## What Moved · trajectory",
+        "cycle": 105
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "hood-rising",
+        "score": 33,
+        "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "hood": "Rockridge",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "retail": 10.51,
+        "retailDelta": null
+      },
+      "prewrite": {
+        "pulseClass": "hood-rising",
+        "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+        "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "anchorFacts": [
+          "HOOD: Rockridge",
+          "TRAJECTORY: rising",
+          "MAGNITUDE (translate, do not lead): 5",
+          "RETAIL VITALITY (scene color): 10.51",
+          "NAMED BUSINESSES (sources only): Cozy Pot; HotSlice Pizza; Festive Fireside",
+          "EVENING VENUE: Cozy Pot (restaurant)",
+          "EVENING VENUE: HotSlice Pizza (fast-food)"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [
+    {
+      "desk": "undocked",
+      "wanted": 1,
+      "got": 0
+    }
+  ],
+  "rotationShortfalls": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Noah Tan",
+        "persona": "noah-tan",
+        "wakePackage": "NOAH-LEP2-1"
+      },
+      {
+        "name": "Sgt. Rachel Torres",
+        "persona": "rachel-torres",
+        "wakePackage": "RACHEL-LEP2-1"
+      },
+      {
+        "name": "Anthony Raines",
+        "persona": "anthony-raines",
+        "wakePackage": "ANTHONY-LEP2-1"
+      },
+      {
+        "name": "Tanya Cruz",
+        "persona": "tanya-cruz",
+        "wakePackage": "TANYA-LEP2-1"
+      },
+      {
+        "name": "Maria Keen",
+        "persona": "maria-keen",
+        "wakePackage": "MARIA-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-27",
+    "top": {
+      "score": 38,
+      "className": "anomaly",
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (implementation-active, safety) but 3 affected neighborhoods show contradicting CrimeIndex"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c105.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=noah-tan,rachel-torres,anthony-raines,tanya-cruz,maria-keen,business-desk)"
+  },
+  "anthonyEnrich": {
+    "enriched": true,
+    "reason": "pulse=award-board score=79 foil=1 IP"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=hood-rising score=33 hood=Rockridge"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "maria-keen",
+        "bag": "ground",
+        "pulse": "fame-sighting",
+        "score": 23
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "noah-tan",
+        "domain": "environment",
+        "label": "Drew Lemon — dealt with a seasonal health concern"
+      }
+    ]
+  },
+  "builtAt": "2026-08-31T11:15:07.499Z"
+}

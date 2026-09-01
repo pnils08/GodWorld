@@ -1,0 +1,471 @@
+[
+  {
+    "pop": "POP-01025",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01025\",\"name\":\"Dame Sarr\",\"role\":\"SG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What have you seen, felt, or understood about \\\"Dame Sarr's performance and the Oaks' preseason record.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Baylight District\",\"focus\":\"Dame Sarr's performance and the Oaks' preseason record.\",\"src\":\"world_summary_c105.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Dame Sarr — SG / The Oaks — Downtown\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C105\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-b7a853efba64\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-f72af38d7088\"},{\"t\":\"FACT\",\"text\":\"Dame Sarr recorded 7pts and 3 rebounds and 3stls.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-20c7958bb5e6\"},{\"t\":\"FACT\",\"text\":\"Coen Carr recorded 14pts and 3-4 3 points.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-de8caff73497\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-3.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-583d654bb28f\"},{\"t\":\"FACT\",\"text\":\"Dame Sarr — SG / The Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01025\",\"id\":\"F-439b9ab23f10\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01025",
+        "name": "Dame Sarr",
+        "role": "SG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "What have you seen, felt, or understood about \"Dame Sarr's performance and the Oaks' preseason record.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Baylight District",
+        "focus": "Dame Sarr's performance and the Oaks' preseason record.",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Dame Sarr — SG / The Oaks — Downtown",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C105",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-b7a853efba64"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-f72af38d7088"
+        },
+        {
+          "t": "FACT",
+          "text": "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-20c7958bb5e6"
+        },
+        {
+          "t": "FACT",
+          "text": "Coen Carr recorded 14pts and 3-4 3 points.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-de8caff73497"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks preseason record is 0-3.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-583d654bb28f"
+        },
+        {
+          "t": "FACT",
+          "text": "Dame Sarr — SG / The Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01025",
+          "id": "F-439b9ab23f10"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01022",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01022\",\"name\":\"Wilson Shepard\",\"role\":\"Head Coach, Oakland Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What have you seen, felt, or understood about \\\"Dame Sarr's performance and the Oaks' preseason record.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Baylight District\",\"focus\":\"Dame Sarr's performance and the Oaks' preseason record.\",\"src\":\"world_summary_c105.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Wilson Shepard — Head Coach, Oakland Oaks — Downtown\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C105\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-b7a853efba64\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-f72af38d7088\"},{\"t\":\"FACT\",\"text\":\"Dame Sarr recorded 7pts and 3 rebounds and 3stls.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-20c7958bb5e6\"},{\"t\":\"FACT\",\"text\":\"Coen Carr recorded 14pts and 3-4 3 points.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-de8caff73497\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-3.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-583d654bb28f\"},{\"t\":\"FACT\",\"text\":\"Wilson Shepard — Head Coach, Oakland Oaks — Downtown\",\"src\":\"Simulation_Ledger profile for POP-01022\",\"id\":\"F-5b5a560909b4\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01022",
+        "name": "Wilson Shepard",
+        "role": "Head Coach, Oakland Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "What have you seen, felt, or understood about \"Dame Sarr's performance and the Oaks' preseason record.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Baylight District",
+        "focus": "Dame Sarr's performance and the Oaks' preseason record.",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C105",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-b7a853efba64"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-f72af38d7088"
+        },
+        {
+          "t": "FACT",
+          "text": "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-20c7958bb5e6"
+        },
+        {
+          "t": "FACT",
+          "text": "Coen Carr recorded 14pts and 3-4 3 points.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-de8caff73497"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks preseason record is 0-3.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-583d654bb28f"
+        },
+        {
+          "t": "FACT",
+          "text": "Wilson Shepard — Head Coach, Oakland Oaks — Downtown",
+          "src": "Simulation_Ledger profile for POP-01022",
+          "id": "F-5b5a560909b4"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-01026",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-01026\",\"name\":\"Coen Carr\",\"role\":\"SG / The Oaks\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"What have you seen, felt, or understood about \\\"Dame Sarr's performance and the Oaks' preseason record.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Baylight District\",\"focus\":\"Dame Sarr's performance and the Oaks' preseason record.\",\"src\":\"world_summary_c105.md ## Sports\"},\"exposure\":{\"basis\":[\"feed-names\"],\"self\":\"Coen Carr — SG / The Oaks — Uptown\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C105\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-b7a853efba64\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-f72af38d7088\"},{\"t\":\"FACT\",\"text\":\"Dame Sarr recorded 7pts and 3 rebounds and 3stls.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-20c7958bb5e6\"},{\"t\":\"FACT\",\"text\":\"Coen Carr recorded 14pts and 3-4 3 points.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-de8caff73497\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-3.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-583d654bb28f\"},{\"t\":\"FACT\",\"text\":\"Coen Carr — SG / The Oaks — Uptown\",\"src\":\"Simulation_Ledger profile for POP-01026\",\"id\":\"F-ef0ed77b5e2a\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-01026",
+        "name": "Coen Carr",
+        "role": "SG / The Oaks",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "What have you seen, felt, or understood about \"Dame Sarr's performance and the Oaks' preseason record.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Baylight District",
+        "focus": "Dame Sarr's performance and the Oaks' preseason record.",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "feed-names"
+        ],
+        "self": "Coen Carr — SG / The Oaks — Uptown",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C105",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-b7a853efba64"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-f72af38d7088"
+        },
+        {
+          "t": "FACT",
+          "text": "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-20c7958bb5e6"
+        },
+        {
+          "t": "FACT",
+          "text": "Coen Carr recorded 14pts and 3-4 3 points.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-de8caff73497"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks preseason record is 0-3.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-583d654bb28f"
+        },
+        {
+          "t": "FACT",
+          "text": "Coen Carr — SG / The Oaks — Uptown",
+          "src": "Simulation_Ledger profile for POP-01026",
+          "id": "F-ef0ed77b5e2a"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00050",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00050\",\"name\":\"Ernesto Quintero\",\"role\":\"3B/1B , Oakland A's\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Tanya Cruz\",\"question\":\"As a resident of Baylight District, what have you seen, felt, or understood about \\\"Dame Sarr's performance and the Oaks' preseason record.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"sideline-signal\",\"hood\":\"Baylight District\",\"focus\":\"Dame Sarr's performance and the Oaks' preseason record.\",\"src\":\"world_summary_c105.md ## Sports\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Ernesto Quintero — 3B/1B , Oakland A's — Baylight District\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C105\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-b7a853efba64\"},{\"t\":\"FACT\",\"text\":\"Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-f72af38d7088\"},{\"t\":\"FACT\",\"text\":\"Dame Sarr recorded 7pts and 3 rebounds and 3stls.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-20c7958bb5e6\"},{\"t\":\"FACT\",\"text\":\"Coen Carr recorded 14pts and 3-4 3 points.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-de8caff73497\"},{\"t\":\"FACT\",\"text\":\"The Oaks preseason record is 0-3.\",\"src\":\"world_summary_c105.md ## Sports\",\"id\":\"F-583d654bb28f\"},{\"t\":\"FACT\",\"text\":\"Ernesto Quintero — 3B/1B , Oakland A's — Baylight District\",\"src\":\"Simulation_Ledger profile for POP-00050\",\"id\":\"F-d66efbf64730\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00050",
+        "name": "Ernesto Quintero",
+        "role": "3B/1B , Oakland A's",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Tanya Cruz",
+        "question": "As a resident of Baylight District, what have you seen, felt, or understood about \"Dame Sarr's performance and the Oaks' preseason record.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "sideline-signal",
+        "hood": "Baylight District",
+        "focus": "Dame Sarr's performance and the Oaks' preseason record.",
+        "src": "world_summary_c105.md ## Sports"
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C105",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-b7a853efba64"
+        },
+        {
+          "t": "FACT",
+          "text": "Oaks preseason update: 0-3 — Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-f72af38d7088"
+        },
+        {
+          "t": "FACT",
+          "text": "Dame Sarr recorded 7pts and 3 rebounds and 3stls.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-20c7958bb5e6"
+        },
+        {
+          "t": "FACT",
+          "text": "Coen Carr recorded 14pts and 3-4 3 points.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-de8caff73497"
+        },
+        {
+          "t": "FACT",
+          "text": "The Oaks preseason record is 0-3.",
+          "src": "world_summary_c105.md ## Sports",
+          "id": "F-583d654bb28f"
+        },
+        {
+          "t": "FACT",
+          "text": "Ernesto Quintero — 3B/1B , Oakland A's — Baylight District",
+          "src": "Simulation_Ledger profile for POP-00050",
+          "id": "F-d66efbf64730"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "deepseek/deepseek-chat",
+    "record": true,
+    "maxTokens": 420
+  }
+]

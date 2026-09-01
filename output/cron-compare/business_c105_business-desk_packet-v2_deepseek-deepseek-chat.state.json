@@ -1,0 +1,382 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00153",
+    "name": "Jordan Velez",
+    "role": "desk reporter",
+    "desk": "business"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+    "approach": "Economic / storefront approach (business desk pack): open from a named hood trajectory or named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. Never invent Employee_Count, Key_Personnel, or storefronts not listed. Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "economic-storefront",
+      "pulseClass": "hood-rising",
+      "economicFrame": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+      "hook": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+      "namedBusinesses": [
+        "Cozy Pot",
+        "HotSlice Pizza",
+        "Festive Fireside"
+      ],
+      "forbidden": [
+        "Do not invent Employee_Count",
+        "Do not invent Key_Personnel",
+        "Do not invent storefronts not on ledger or evening texture",
+        "Do not lead with raw RetailVitality decimals — translate to scene"
+      ],
+      "sceneRule": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts."
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Rockridge",
+    "src": "world_summary ## What Moved · trajectory",
+    "plan": {
+      "focus": "The human pulse behind Rockridge's rising retail vitality, using Cozy Pot, HotSlice Pizza, and Festive Fireside as anchors to explore whether this uptick reflects deeper neighborhood momentum.",
+      "closeQuestion": "Is Rockridge's retail rise redistributing Oakland's commercial energy or generating new economic activity altogether?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00267",
+        "name": "Jacob King",
+        "profile": "Jacob King — Line cook — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00651",
+        "name": "Howard Yell",
+        "profile": "Howard Yell — Barista — Rockridge",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00267-67f83cd680",
+        "pop": "POP-00267",
+        "name": "Jacob King",
+        "quote": "I've been working the line at a restaurant near Cozy Pot for years, and lately there's just more energy—more people out at night, more folks sticking around after dinner to chat. Feels like the whole block's waking up again.",
+        "factIds": [
+          "F-2ba26a162863",
+          "F-f95a888b8d34",
+          "F-78eda230e959"
+        ],
+        "src": "packet.W2[POP-00267]"
+      },
+      {
+        "id": "Q-POP-00651-1907fd7397",
+        "pop": "POP-00651",
+        "name": "Howard Yell",
+        "quote": "I’ve noticed more people out and about, especially around places like Cozy Pot and HotSlice Pizza—it feels like the neighborhood’s got a bit more energy lately.",
+        "factIds": [
+          "F-2ba26a162863",
+          "F-f95a888b8d34"
+        ],
+        "src": "packet.W2[POP-00651]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Possible connection between nearby residential moves and increased midday business traffic",
+        "usable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whether evening venues are drawing customers who then patronize other storefronts",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+      "src": "world_summary ## What Moved · trajectory",
+      "id": "F-2ba26a162863"
+    },
+    {
+      "t": "FACT",
+      "text": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+      "src": "world_summary ## What Moved · trajectory",
+      "id": "F-f95a888b8d34"
+    },
+    {
+      "t": "FACT",
+      "text": "HOOD: Rockridge",
+      "src": "world_summary ## What Moved · trajectory",
+      "id": "F-9b95987f7f55"
+    },
+    {
+      "t": "FACT",
+      "text": "TRAJECTORY: rising",
+      "src": "world_summary ## What Moved · trajectory",
+      "id": "F-11ce50551e7e"
+    },
+    {
+      "t": "FACT",
+      "text": "RETAIL VITALITY (scene color): 10.51",
+      "src": "world_summary ## What Moved · trajectory",
+      "id": "F-8ececcd753f2"
+    },
+    {
+      "t": "FACT",
+      "text": "NAMED BUSINESSES (sources only): Cozy Pot; HotSlice Pizza; Festive Fireside",
+      "src": "world_summary ## What Moved · trajectory",
+      "id": "F-e2d7ea45a25f"
+    },
+    {
+      "t": "FACT",
+      "text": "EVENING VENUE: Cozy Pot (restaurant)",
+      "src": "world_summary ## What Moved · trajectory",
+      "id": "F-78eda230e959"
+    },
+    {
+      "t": "FACT",
+      "text": "EVENING VENUE: HotSlice Pizza (fast-food)",
+      "src": "world_summary ## What Moved · trajectory",
+      "id": "F-d4af419d2c04"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "jordan-economic-labor-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "grounded third-person economics and labor reporting",
+      "targetWords": "500-800",
+      "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+      "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+    },
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "canonBlockers": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-595ae80d34e6",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-2ba26a162863",
+        "t": "FACT",
+        "text": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      {
+        "id": "F-f95a888b8d34",
+        "t": "FACT",
+        "text": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      {
+        "id": "F-9b95987f7f55",
+        "t": "FACT",
+        "text": "HOOD: Rockridge",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      {
+        "id": "F-11ce50551e7e",
+        "t": "FACT",
+        "text": "TRAJECTORY: rising",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      {
+        "id": "F-8ececcd753f2",
+        "t": "FACT",
+        "text": "RETAIL VITALITY (scene color): 10.51",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      {
+        "id": "F-e2d7ea45a25f",
+        "t": "FACT",
+        "text": "NAMED BUSINESSES (sources only): Cozy Pot; HotSlice Pizza; Festive Fireside",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      {
+        "id": "F-78eda230e959",
+        "t": "FACT",
+        "text": "EVENING VENUE: Cozy Pot (restaurant)",
+        "src": "world_summary ## What Moved · trajectory"
+      },
+      {
+        "id": "F-d4af419d2c04",
+        "t": "FACT",
+        "text": "EVENING VENUE: HotSlice Pizza (fast-food)",
+        "src": "world_summary ## What Moved · trajectory"
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00267-67f83cd680",
+        "speakerId": "POP-00267",
+        "speakerName": "Jacob King",
+        "text": "I've been working the line at a restaurant near Cozy Pot for years, and lately there's just more energy—more people out at night, more folks sticking around after dinner to chat. Feels like the whole block's waking up again.",
+        "factIds": [
+          "F-2ba26a162863",
+          "F-f95a888b8d34",
+          "F-78eda230e959"
+        ],
+        "src": "packet.W2[POP-00267]"
+      },
+      {
+        "id": "Q-POP-00651-1907fd7397",
+        "speakerId": "POP-00651",
+        "speakerName": "Howard Yell",
+        "text": "I’ve noticed more people out and about, especially around places like Cozy Pot and HotSlice Pizza—it feels like the neighborhood’s got a bit more energy lately.",
+        "factIds": [
+          "F-2ba26a162863",
+          "F-f95a888b8d34"
+        ],
+        "src": "packet.W2[POP-00651]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00267",
+        "name": "Jacob King",
+        "profile": "Jacob King — Line cook — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00651",
+        "name": "Howard Yell",
+        "profile": "Howard Yell — Barista — Rockridge",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Jordan Velez",
+        "text": "Possible connection between nearby residential moves and increased midday business traffic",
+        "publishable": false
+      },
+      {
+        "from": "Jordan Velez",
+        "text": "Whether evening venues are drawing customers who then patronize other storefronts",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
+      "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
+      "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
+      "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
+    ],
+    "textureConditions": [
+      "every named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, and organization must come from the Packet",
+      "money, wages, rent, lease terms, employee or job counts, dates, durations, contracts, disbursements, and measured trends must come from the Packet",
+      "raw engine labels and decimal scores may inform reasoning but must not appear as published economic facts or dashboard prose",
+      "hiring, layoffs, closures, openings, extended hours, foot-traffic changes, and other observable actions require Packet support",
+      "I spoke with or another reporting claim requires a supplied interview or quote; generic scene texture is not a sourced perspective"
+    ],
+    "forbiddenClaimClasses": [
+      "a named person, business, venue, corridor, neighborhood, institution, office, union, Project, Initiative, or organization not found in the supplied record",
+      "an unsupported hiring, layoff, closure, opening, relocation, lease, rent change, wage change, contract, payment, disbursement, or beneficiary claim",
+      "an unsupported amount, percentage, employee count, job count, date, duration, address, metric direction, or economic trend",
+      "a raw engine label, load, volume, index, score, or decimal printed as public-facing evidence",
+      "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
+      "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
+    ]
+  }
+}

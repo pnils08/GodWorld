@@ -1,0 +1,618 @@
+{
+  "stage": "angle",
+  "desk": "culture",
+  "cycle": "105",
+  "persona": "maria-keen",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00013",
+      "name": "Maria Keen",
+      "role": "desk reporter",
+      "desk": "culture"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+      "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Maria (ground bag): hyper-local witness, one block one truth. Packet-named people/places only. Modes: One Block One Truth, Proud AND Wary, Neighbor Quote Spine, Quiet Joy. Assigned pulse: fame-sighting — Benji Dillon at Dimond Pharmacy (Dimond).",
+      "creativeBrief": {
+        "kind": "evening-life",
+        "bag": "ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "namedEvents": [
+          "The Corliss Family Block Party",
+          "Jack London First Friday Waterfront",
+          "Lake Merritt Community Joy Parade",
+          "Temescal Resolution Run",
+          "Fresh Start Special",
+          "Year in Review",
+          "Art Walk Live",
+          "Cultural Spotlight"
+        ],
+        "namedPlaces": [
+          "Merritt Reserve",
+          "Broadline Grab-N-Go",
+          "Cozy Pot",
+          "Festive Fireside",
+          "Underglow Lounge",
+          "After Hours Oakland"
+        ],
+        "famousSightings": [
+          "Benji Dillon",
+          "Derek Obi",
+          "Former A's Star Rodriguez",
+          "Marisol Rivera — fame-rise | Marisol Rivera — the city is watching: followed postseason updates closely"
+        ],
+        "streamingTrend": "feel-good new starts",
+        "sceneRule": "Named places only from Evening Texture / desk_signal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+        "sourcePointers": [
+          "docs/media/MARIA_GROUND_BAG.md",
+          "output/world_summary_c105.md ## Evening Texture",
+          "output/desk_signal_c105.json lanes.culture",
+          "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "story-signal",
+      "hood": "Dimond",
+      "score": null,
+      "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "nearby": [
+        {
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\""
+        },
+        {
+          "text": "Downtown | 2 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Downtown\"; events: world_summary_c105.md \"## World Events\""
+        },
+        {
+          "text": "Fruitvale | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Fruitvale\"; events: world_summary_c105.md \"## World Events\""
+        },
+        {
+          "text": "Montclair | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Montclair\"; events: world_summary_c105.md \"## World Events\""
+        },
+        {
+          "text": "Temescal | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Temescal\"; events: world_summary_c105.md \"## World Events\""
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "why": "ledger-resident",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — Line cook — Fruitvale",
+          "why": "ledger-resident",
+          "role": "Line cook",
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server — West Oakland",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00210",
+          "name": "Depak Ying",
+          "profile": "Depak Ying — Server — Rockridge",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-9e94d8dc5f1f"
+      },
+      {
+        "t": "FACT",
+        "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-2bad2deee024"
+      },
+      {
+        "t": "FACT",
+        "text": "NAMED: Dimond Pharmacy",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-03983d9d2fb1"
+      },
+      {
+        "t": "FACT",
+        "text": "PERSON: Benji Dillon",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-81e10e37f707"
+      },
+      {
+        "t": "FACT",
+        "text": "VENUE: Dimond Pharmacy",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-61cec5437bc8"
+      },
+      {
+        "t": "FACT",
+        "text": "HOOD: Dimond",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "id": "F-638940b5f199"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Maria Keen",
+    "popid": "POP-00013"
+  },
+  "assignment": {
+    "story": {
+      "angle": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+      "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "hookLine": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+      "hood": "Dimond",
+      "pulseClass": "fame-sighting",
+      "citizens": [
+        "Benji Dillon"
+      ],
+      "popids": [],
+      "named": "Dimond Pharmacy",
+      "venue": "Dimond Pharmacy",
+      "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "cycle": 105
+    },
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Maria (ground bag): hyper-local witness, one block one truth. Packet-named people/places only. Modes: One Block One Truth, Proud AND Wary, Neighbor Quote Spine, Quiet Joy. Assigned pulse: fame-sighting — Benji Dillon at Dimond Pharmacy (Dimond)."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": {
+    "pulse": {
+      "className": "fame-sighting",
+      "score": 23,
+      "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "named": "Dimond Pharmacy",
+      "hood": "Dimond",
+      "person": "Benji Dillon",
+      "venue": "Dimond Pharmacy"
+    },
+    "recommend": {
+      "bag": "ground",
+      "slug": "maria-keen",
+      "name": "Maria Keen",
+      "popid": "POP-00013",
+      "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+      "reason": "top pulse fame-sighting → ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Benji Dillon at Dimond Pharmacy (Dimond)"
+    },
+    "prewrite": {
+      "pulseClass": "fame-sighting",
+      "angle": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+      "hookLine": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+      "anchorFacts": [
+        "NAMED: Dimond Pharmacy",
+        "PERSON: Benji Dillon",
+        "VENUE: Dimond Pharmacy",
+        "HOOD: Dimond",
+        "PERSON: Benji Dillon",
+        "VENUE: Dimond Pharmacy",
+        "HOOD: Dimond"
+      ],
+      "bagRecommend": "ground",
+      "bagSlug": "maria-keen"
+    },
+    "texture": {
+      "famous": [
+        "Benji Dillon",
+        "Derek Obi",
+        "Former A's Star Rodriguez"
+      ],
+      "restaurants": [
+        {
+          "name": "Merritt Reserve",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Broadline Grab-N-Go",
+          "hood": "Fruitvale"
+        },
+        {
+          "name": "Cozy Pot",
+          "hood": "Rockridge"
+        }
+      ],
+      "fastFood": [
+        {
+          "name": "TacoRail",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "HotSlice Pizza",
+          "hood": "Rockridge"
+        }
+      ],
+      "nightlife": [
+        {
+          "name": "Festive Fireside",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Underglow Lounge",
+          "hood": "Jack London"
+        },
+        {
+          "name": "After Hours Oakland",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 8,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1.33
+      },
+      "cityEvents": [
+        "The Corliss Family Block Party",
+        "Jack London First Friday Waterfront",
+        "Lake Merritt Community Joy Parade",
+        "Temescal Resolution Run"
+      ],
+      "tv": [
+        "Fresh Start Special",
+        "Year in Review",
+        "Art Walk Live",
+        "Cultural Spotlight",
+        "Late Weather Watch",
+        "Late Shift Live",
+        "The Neighbors",
+        "A's Sports Central",
+        "The Benji Dillon (SP) Interview"
+      ],
+      "movies": [
+        "Resolution Road",
+        "New Beginnings",
+        "Creative Pulse",
+        "Art House Pick",
+        "Fog Harbor",
+        "Franchise"
+      ],
+      "sportsBroadcast": "Oakland Sports Tonight - Playoff Special",
+      "streamingTrend": "feel-good new starts",
+      "foodTrend": "First Friday arts district dining - gallery crowd"
+    },
+    "signals": {
+      "fameCount": 1,
+      "sightingCount": 3,
+      "sightings": [
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+          "name": "Benji Dillon",
+          "venue": "Dimond Pharmacy",
+          "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Dimond",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Derek Obi spotted at West Oakland Stabilization Fund",
+          "name": "Derek Obi",
+          "venue": "West Oakland Stabilization Fund",
+          "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "West Oakland",
+          "popids": []
+        },
+        {
+          "kind": "lifestyle-sighting",
+          "label": "sighting | Former A's Star Rodriguez spotted at Rockridge Pharmacy",
+          "name": "Former A's Star Rodriguez",
+          "venue": "Rockridge Pharmacy",
+          "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+          "hood": "Rockridge",
+          "popids": []
+        }
+      ]
+    },
+    "scene": {
+      "venues": [
+        {
+          "name": "Merritt Reserve",
+          "hood": "Lake Merritt"
+        },
+        {
+          "name": "Broadline Grab-N-Go",
+          "hood": "Fruitvale"
+        },
+        {
+          "name": "Cozy Pot",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "TacoRail",
+          "hood": "West Oakland"
+        },
+        {
+          "name": "HotSlice Pizza",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Festive Fireside",
+          "hood": "Rockridge"
+        },
+        {
+          "name": "Underglow Lounge",
+          "hood": "Jack London"
+        },
+        {
+          "name": "After Hours Oakland",
+          "hood": "Downtown"
+        }
+      ],
+      "nightlifeMeta": {
+        "volume": 8,
+        "vibe": "art-scene",
+        "movement": "art-walk",
+        "weatherImpact": 1.33
+      },
+      "cityEvents": [
+        "The Corliss Family Block Party",
+        "Jack London First Friday Waterfront",
+        "Lake Merritt Community Joy Parade",
+        "Temescal Resolution Run"
+      ],
+      "tv": [
+        "Fresh Start Special",
+        "Year in Review",
+        "Art Walk Live",
+        "Cultural Spotlight",
+        "Late Weather Watch",
+        "Late Shift Live",
+        "The Neighbors",
+        "A's Sports Central",
+        "The Benji Dillon (SP) Interview"
+      ],
+      "movies": [
+        "Resolution Road",
+        "New Beginnings",
+        "Creative Pulse",
+        "Art House Pick",
+        "Fog Harbor",
+        "Franchise"
+      ],
+      "colorRoom": "Named places only from Evening Texture / desk_signal.  Sensory room (weather, light, sound) is free; careers and employees are not."
+    },
+    "candidates": [
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "named": "Dimond Pharmacy",
+        "hood": "Dimond"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Derek Obi at West Oakland Stabilization Fund (West Oakland)",
+        "named": "West Oakland Stabilization Fund",
+        "hood": "West Oakland"
+      },
+      {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Former A's Star Rodriguez at Rockridge Pharmacy (Rockridge)",
+        "named": "Rockridge Pharmacy",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Merritt Reserve (Lake Merritt)",
+        "named": "Merritt Reserve",
+        "hood": "Lake Merritt"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Broadline Grab-N-Go (Fruitvale)",
+        "named": "Broadline Grab-N-Go",
+        "hood": "Fruitvale"
+      },
+      {
+        "className": "named-restaurant",
+        "score": 20,
+        "label": "Cozy Pot (Rockridge)",
+        "named": "Cozy Pot",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Festive Fireside (Rockridge)",
+        "named": "Festive Fireside",
+        "hood": "Rockridge"
+      },
+      {
+        "className": "nightlife-spot",
+        "score": 18,
+        "label": "Underglow Lounge (Jack London)",
+        "named": "Underglow Lounge",
+        "hood": "Jack London"
+      }
+    ],
+    "perSeat": {
+      "mason-ortega": {
+        "pulseClass": "named-restaurant",
+        "label": "Merritt Reserve (Lake Merritt)",
+        "score": 34,
+        "bag": "kitchen"
+      },
+      "kai-marston": {
+        "pulseClass": "city-event",
+        "label": "The Corliss Family Block Party",
+        "score": 31,
+        "bag": "arts"
+      },
+      "sharon-okafor": {
+        "pulseClass": "fame-sighting",
+        "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "score": 31,
+        "bag": "lifestyle"
+      },
+      "maria-keen": {
+        "pulseClass": "fame-sighting",
+        "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "score": 31,
+        "bag": "ground"
+      },
+      "elliot-graye": {
+        "pulseClass": "fame-sighting",
+        "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "score": 31,
+        "bag": "faith"
+      }
+    }
+  },
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Maria Keen",
+    "popid": "POP-00013",
+    "text": "I'm planning to investigate the sighting of Benji Dillon at Dimond Pharmacy in Dimond, to see if I can gather more information about what brought him to the area.",
+    "plan": {
+      "chase": "I'm planning to investigate the sighting of Benji Dillon at Dimond Pharmacy in Dimond, to see if I can gather more information about what brought him to the area.",
+      "focus": "Benji Dillon's visit to Dimond Pharmacy",
+      "why": "To understand the context and potential significance of the sighting",
+      "checks": [
+        "Verify the sighting with witnesses or staff",
+        "Research Benji Dillon's recent activities and connections to the Dimond area"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00170",
+          "question": "Did you see Benji Dillon at Dimond Pharmacy?",
+          "basis": "Eyewitness account"
+        }
+      ],
+      "interpretation": "The sighting of Benji Dillon at Dimond Pharmacy could indicate a personal or professional interest in the area, and further investigation may reveal more about his activities and connections",
+      "unverifiedLead": [
+        "Rumor of a potential new project or collaboration in the Dimond area"
+      ],
+      "closeQuestion": "What was the purpose of Benji Dillon's visit to Dimond Pharmacy?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Adams Point | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Adams Point",
+      "ref": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Downtown | 2 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Downtown",
+      "ref": "output/neighborhood_texture_c105.md \"### Downtown\"; events: world_summary_c105.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Fruitvale | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Fruitvale",
+      "ref": "output/neighborhood_texture_c105.md \"### Fruitvale\"; events: world_summary_c105.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Montclair | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Montclair",
+      "ref": "output/neighborhood_texture_c105.md \"### Montclair\"; events: world_summary_c105.md \"## World Events\"",
+      "popids": []
+    },
+    {
+      "label": "Temescal | 1 world event(s) this cycle",
+      "kind": "hood",
+      "hood": "Temescal",
+      "ref": "output/neighborhood_texture_c105.md \"### Temescal\"; events: world_summary_c105.md \"## World Events\"",
+      "popids": []
+    }
+  ],
+  "laneEntries": 19,
+  "ranAt": "2026-08-31T11:16:46.611Z"
+}

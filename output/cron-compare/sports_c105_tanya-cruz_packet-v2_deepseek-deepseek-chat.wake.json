@@ -1,0 +1,32 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "tanya-cruz",
+  "byline": {
+    "name": "Tanya Cruz",
+    "popid": "POP-00014",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 3,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "// tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"filed: Clubhouse Notes: Reading the Room After Another Preseason Loss\"\n}"
+  },
+  "ranAt": "2026-08-31T23:17:00.873Z"
+}

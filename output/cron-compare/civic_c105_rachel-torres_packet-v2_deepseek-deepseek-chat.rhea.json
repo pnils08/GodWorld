@@ -1,0 +1,73 @@
+{
+  "draft": "output/cron-compare/civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b0ad98dcc560620a03e8f2ea982f1d694ee3c9803ea47665d3a20f61b095dd0d",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "though he adds that neighborhood watch groups remain divided on the teams' effectiveness",
+      "issue": "Depak Ying's packet quote does not mention neighborhood watch groups; minor attribution stretch beyond supplied quote provenance.",
+      "severity": "low"
+    },
+    {
+      "claim": "white-and-teal vans ... unmarked vans",
+      "issue": "Minor visual texture inconsistency describing the response vans as white-and-teal in the lead and unmarked in the conclusion.",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 2,
+  "highSeverityCount": 0,
+  "summary": "Draft strictly adheres to C105 OARI implementation canon and validated citizen quote provenances with zero high-severity issues.",
+  "review": {
+    "profileId": "rachel-public-safety-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "rachel-public-safety-v1",
+    "packageVersion": "RACHEL-LEP2-1",
+    "manifestId": "AM-05ec049e77ac",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "911",
+          "1990",
+          "24"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Depak Ying",
+      "Elio Perez",
+      "Melton Neilon",
+      "Rachel Torres",
+      "Rick Walker"
+    ],
+    "unverified": [
+      "Alternative Response Initiative"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0104,
+  "durationMs": 12724,
+  "parseError": false,
+  "ranAt": "2026-08-31T23:16:26.375Z"
+}

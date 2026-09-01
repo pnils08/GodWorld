@@ -1,0 +1,37 @@
+{
+  "date": "2026-08-31",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Maria Keen",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-08-31T11:17:07.233Z"
+}

@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "105",
+  "model": "deepseek/deepseek-chat",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 6056,
+  "usageOutputTokens": 362,
+  "savedFiles": [
+    "output/cron-compare/sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c105.md",
+  "durationMs": 10238,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-08-31T23:16:44.171Z"
+}

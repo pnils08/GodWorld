@@ -1,0 +1,386 @@
+{
+  "v": "LEP/2",
+  "wake": "W3",
+  "actor": {
+    "id": "POP-00013",
+    "name": "Maria Keen",
+    "role": "desk reporter",
+    "desk": "culture"
+  },
+  "task": {
+    "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
+    "assignment": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+    "approach": "Evening-life approach (shared culture pack): open from a NAMED place or sighting in this slice — restaurant, bar, festival, TV slate, or fame stop — never invent venues or employees. Use nightlife volume/vibe/movement as scene color only; translate to human language (no raw engine decimals as lead). Pick ONE life pulse; ride the recommended consumer bag when it matches your seat (kitchen / arts / lifestyle / ground / faith). Do not file multi-voice culture-desk average. One room, one night, one truth. You are Maria (ground bag): hyper-local witness, one block one truth. Packet-named people/places only. Modes: One Block One Truth, Proud AND Wary, Neighbor Quote Spine, Quiet Joy. Assigned pulse: fame-sighting — Benji Dillon at Dimond Pharmacy (Dimond).",
+    "voice": null,
+    "creativeBrief": {
+      "kind": "evening-life",
+      "bag": "ground",
+      "pulseClass": "fame-sighting",
+      "pulseLabel": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "namedEvents": [
+        "The Corliss Family Block Party",
+        "Jack London First Friday Waterfront",
+        "Lake Merritt Community Joy Parade",
+        "Temescal Resolution Run",
+        "Fresh Start Special",
+        "Year in Review",
+        "Art Walk Live",
+        "Cultural Spotlight"
+      ],
+      "namedPlaces": [
+        "Merritt Reserve",
+        "Broadline Grab-N-Go",
+        "Cozy Pot",
+        "Festive Fireside",
+        "Underglow Lounge",
+        "After Hours Oakland"
+      ],
+      "famousSightings": [
+        "Benji Dillon",
+        "Derek Obi",
+        "Former A's Star Rodriguez",
+        "Marisol Rivera — fame-rise | Marisol Rivera — the city is watching: followed postseason updates closely"
+      ],
+      "streamingTrend": "feel-good new starts",
+      "sceneRule": "Named places only from Evening Texture / desk_signal. Sensory room (weather, light, sound) is free; careers and employees are not.",
+      "sourcePointers": [
+        "docs/media/MARIA_GROUND_BAG.md",
+        "output/world_summary_c105.md ## Evening Texture",
+        "output/desk_signal_c105.json lanes.culture",
+        "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
+      ]
+    },
+    "writingMode": "SOURCE_BRIEF"
+  },
+  "signal": {
+    "kind": "story-signal",
+    "hood": "Dimond",
+    "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+    "plan": {
+      "focus": "Benji Dillon's visit to Dimond Pharmacy",
+      "closeQuestion": "What was the purpose of Benji Dillon's visit to Dimond Pharmacy?"
+    }
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — Line cook — Fruitvale",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      }
+    ],
+    "sources": [
+      {
+        "id": "Q-POP-00170-5d3837b09a",
+        "pop": "POP-00170",
+        "name": "Melton Neilon",
+        "quote": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00198-0474550b3f",
+        "pop": "POP-00198",
+        "name": "Rick Walker",
+        "quote": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00201-dc68c32814",
+        "pop": "POP-00201",
+        "name": "Elio Perez",
+        "quote": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "src": "packet.W2[POP-00201]"
+      }
+    ],
+    "excludedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "Rumor of a potential new project or collaboration in the Dimond area",
+        "usable": false
+      }
+    ]
+  },
+  "known": [
+    {
+      "t": "FACT",
+      "text": "Current cycle: C105",
+      "src": "cron-desk-run explicit cycle argument",
+      "id": "F-b7a853efba64"
+    },
+    {
+      "t": "FACT",
+      "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+      "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-9e94d8dc5f1f"
+    },
+    {
+      "t": "FACT",
+      "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+      "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-2bad2deee024"
+    },
+    {
+      "t": "FACT",
+      "text": "NAMED: Dimond Pharmacy",
+      "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-03983d9d2fb1"
+    },
+    {
+      "t": "FACT",
+      "text": "PERSON: Benji Dillon",
+      "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-81e10e37f707"
+    },
+    {
+      "t": "FACT",
+      "text": "VENUE: Dimond Pharmacy",
+      "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-61cec5437bc8"
+    },
+    {
+      "t": "FACT",
+      "text": "HOOD: Dimond",
+      "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+      "id": "F-638940b5f199"
+    }
+  ],
+  "limits": {
+    "assert": [
+      "manifest.approvedFacts exact claims"
+    ],
+    "attribute": [
+      "manifest.approvedQuotes exact text"
+    ],
+    "reason": [
+      "INTERPRETATION clearly framed as analysis"
+    ],
+    "never": [
+      "assert excludedLead",
+      "invent a source",
+      "invent a hard event",
+      "invent a date or number",
+      "import a real-world Oakland entity"
+    ],
+    "rule": "The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact. Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition."
+  },
+  "output": {
+    "format": "markdown-article",
+    "intake": {
+      "heading": "## INTAKE",
+      "oneRecordPerLine": true,
+      "omitEmptyTypes": true,
+      "lines": [
+        "NAMES: <one citizen name> | <quoted-source OR subject OR mentioned>",
+        "BIZ: <one business/org name> | <quoted-source OR subject OR mentioned>",
+        "STORYLINE: <short-kebab-case-slug> | <advanced OR opened OR closed OR referenced>",
+        "HOOD: <one neighborhood>",
+        "CLAIM: <one fact> | <one supplied source ref>"
+      ],
+      "never": [
+        "comma-combine records",
+        "BIZ: None",
+        "invent a role enum"
+      ]
+    },
+    "footer": "<!-- SELF-SCORE: question-answered=yes|no; affected-citizen-shown=yes|no; sim-state-cited=yes|no -->",
+    "rule": "Article shape is assigned-fact lede, one scene, one Packet quote, unanswered question. Scene may be the supplied field or box score; it must not mint a room, access, dialogue, or count absent from this Packet. Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to one supplied src.",
+    "preflight": {
+      "facts": "select manifest.approvedFacts ids",
+      "quotes": "select manifest.approvedQuotes ids",
+      "subjects": "select manifest.approvedSubjects ids"
+    }
+  },
+  "reviewProfile": {
+    "id": "maria-ground-v1",
+    "canonPolicy": "load-bearing",
+    "purpose": "Translate one Packet-named neighborhood or evening condition into a human-scale ground brief without inventing Maria's attendance, a neighbor, an action, a quote, or a civic outcome.",
+    "articleContract": {
+      "renderMode": "SOURCE_BRIEF",
+      "voice": "intimate neighborhood ground brief",
+      "targetWords": "evidence-bounded",
+      "opening": "one Packet-named place and condition",
+      "closing": "the human observation still needed"
+    },
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "canonBlockers": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  },
+  "manifest": {
+    "id": "AM-d70e191ea6b7",
+    "policy": "load-bearing",
+    "approvedFacts": [
+      {
+        "id": "F-b7a853efba64",
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument"
+      },
+      {
+        "id": "F-9e94d8dc5f1f",
+        "t": "FACT",
+        "text": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-2bad2deee024",
+        "t": "FACT",
+        "text": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-03983d9d2fb1",
+        "t": "FACT",
+        "text": "NAMED: Dimond Pharmacy",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-81e10e37f707",
+        "t": "FACT",
+        "text": "PERSON: Benji Dillon",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-61cec5437bc8",
+        "t": "FACT",
+        "text": "VENUE: Dimond Pharmacy",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+      },
+      {
+        "id": "F-638940b5f199",
+        "t": "FACT",
+        "text": "HOOD: Dimond",
+        "src": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\""
+      }
+    ],
+    "approvedQuotes": [
+      {
+        "id": "Q-POP-00170-5d3837b09a",
+        "speakerId": "POP-00170",
+        "speakerName": "Melton Neilon",
+        "text": "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community.",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "src": "packet.W2[POP-00170]"
+      },
+      {
+        "id": "Q-POP-00198-0474550b3f",
+        "speakerId": "POP-00198",
+        "speakerName": "Rick Walker",
+        "text": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook.",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "src": "packet.W2[POP-00198]"
+      },
+      {
+        "id": "Q-POP-00201-dc68c32814",
+        "speakerId": "POP-00201",
+        "speakerName": "Elio Perez",
+        "text": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in West Oakland.",
+        "factIds": [
+          "F-9e94d8dc5f1f",
+          "F-2bad2deee024"
+        ],
+        "src": "packet.W2[POP-00201]"
+      }
+    ],
+    "approvedSubjects": [
+      {
+        "id": "POP-00170",
+        "name": "Melton Neilon",
+        "profile": "Melton Neilon — Sourdough Baker — Temescal",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00198",
+        "name": "Rick Walker",
+        "profile": "Rick Walker — Line cook — Fruitvale",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00201",
+        "name": "Elio Perez",
+        "profile": "Elio Perez — Server — West Oakland",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      }
+    ],
+    "permittedInterpretationSlots": [
+      {
+        "id": "P_EMPHASIS",
+        "rule": "Choose which approved fact deserves emphasis; add no new factual premise."
+      },
+      {
+        "id": "P_ACCOUNTABILITY",
+        "rule": "Ask who should answer; do not assert an unsupplied duty, action, or absence."
+      },
+      {
+        "id": "P_CLOSE",
+        "rule": "Use the supplied closeQuestion as a question, never as proof."
+      }
+    ],
+    "unverifiedLeads": [
+      {
+        "from": "Maria Keen",
+        "text": "Rumor of a potential new project or collaboration in the Dimond area",
+        "publishable": false
+      }
+    ],
+    "authorizedTexture": [
+      "warm interpretation of a supplied place or condition without claiming attendance or observation",
+      "unnamed sensory metaphor carrying no person, action, event, institution, or factual premise"
+    ],
+    "textureConditions": [
+      "first person may express interpretation but may not assert presence, walking, seeing, hearing, meeting, speaking, or memory unless the Packet supplies it",
+      "every named person, place, business, institution, gathering, action, quote, policy effect, and civic outcome requires Packet support"
+    ],
+    "forbiddenClaimClasses": [
+      "invented attendance, witnessed scene, neighbor, worker, patron, dialogue, gathering, action, policy consequence, or civic outcome",
+      "an invented or altered venue, person, neighborhood, event, institution, relationship, date, count, or quote",
+      "raw nightlife metrics, engine labels, or collective neighborhood sentiment presented as public fact"
+    ]
+  }
+}

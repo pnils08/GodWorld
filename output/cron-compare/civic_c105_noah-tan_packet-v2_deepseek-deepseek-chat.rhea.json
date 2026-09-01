@@ -1,0 +1,48 @@
+{
+  "draft": "output/cron-compare/civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "e76a43cee83fc323fe29f7da973d0193d65826908bc5f47e35deb911675a12a6",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified clean: all citizens resolve to ledger records, quote provenance matches exact manifest, and sensory texture stays within authorized profile bounds.",
+  "review": {
+    "profileId": "noah-weather-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "noah-weather-ground-v1",
+    "packageVersion": "NOAH-LEP2-1",
+    "manifestId": "AM-f20045bea4c0",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Drew Lemon",
+      "Jessie Hess"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0095,
+  "durationMs": 8104,
+  "parseError": false,
+  "ranAt": "2026-08-31T23:15:43.167Z"
+}

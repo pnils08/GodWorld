@@ -104,7 +104,7 @@ node scripts/ctxMap.js | sed -n '/^ORDERING/,$p'
 |---|---|---|
 | `ORDERING — READ BEFORE WRITE` | the read **always** precedes the write (readMax < writeMin) | `** N UNDEFAULTED **` / `<-- no fallback` is **CRITICAL**. `[all defaulted]` is a silent degradation — the branch never takes, but nothing crashes. Log it, don't block on it |
 | `AMBIGUOUS` | the reader runs at several slots that straddle the writer | needs a human look; may or may not be real |
-| `DEAD FILES` | **every** top-level function in the file is unreachable from `runWorldCycle()` | its ctx reads never execute at all. Not a cycle blocker — a standing inventory finding |
+| `DEAD FILES` | **every** top-level function in the file is unreachable from `runWorldCycle()` | its ctx reads never execute at all. Since S408 the block splits **UNDECLARED** (the signal — a file with no `// @cycle-status:` header; 0 today) from declared off-cycle/retired files listed for the record. A new UNDECLARED file is a real question; the declared list is not |
 
 **Three things the script will not do for you:**
 

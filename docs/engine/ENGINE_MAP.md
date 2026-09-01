@@ -305,7 +305,7 @@ These exist in the codebase but are NOT in the engine call chain:
 | `phase07-evening-media/storylineWeavingEngine.js` | Not in engine |
 | `phase07-evening-media/culturalLedger.js` | Not in engine |
 | `phase07-evening-media/citizenFameTracker.js` | Not in engine |
-| `phase07-evening-media/domainTracker.js` | Not in engine |
+| `phase07-evening-media/domainTracker.js` | Runs every cycle at Phase8-V3Integration — `v3Integration_` dispatches `domainTracker_`, `storyHookEngine_` (`storyHook.js`) and `chicagoSatelliteEngine_` (`chicagoSatellite.js`) by string through its `V3_FUNCTIONS` registry (`v3Integration.js:93-96`). Corrected S408 (G-PF32) |
 | `phase07-evening-media/updateMediaSpread.js` | Not in engine |
 | `phase07-evening-media/updateTrendTrajectory.js` | Not in engine |
 | `phase07-evening-media/parseMediaIntake.js` | Helper |

@@ -18,7 +18,14 @@ check('show pool present', P.SHOW_ROWS.length >= 12);
 check('has love split', P.ROWS.some(function (r) { return /warmth>=60/.test(r.Conditions); }));
 check('has sting split', P.ROWS.some(function (r) { return /warmth<=39/.test(r.Conditions); }));
 check('has lottery fame=0', P.ROWS.some(function (r) { return /fame=0/.test(r.Conditions); }));
-check('no mechanism words', P.ROWS.every(function (r) { return !/\btier\b|FameScore|UsageCount/.test(r.Text); }));
+check('has wager talk', P.SHOW_ROWS.filter(function (r) { return /ecl:kind:wager/.test(r.Tags); }).length >= 4);
+check('wager lines undocked-gated', P.SHOW_ROWS.filter(function (r) { return /ecl:kind:wager/.test(r.Tags); }).every(function (r) {
+  return /(^|;)undocked(;|$)/.test(r.Conditions);
+}));
+check('wager lines have no numbers', P.SHOW_ROWS.filter(function (r) { return /ecl:kind:wager/.test(r.Tags); }).every(function (r) {
+  return !/\d/.test(r.Text);
+}));
+check('no mechanism words', P.ROWS.every(function (r) { return !/\btier\b|FameScore|UsageCount|adapter|CreditsDelta|EpisodeId/.test(r.Text); }));
 
 P.ROWS.forEach(function (r, i) {
   check('row ' + i + ' source:undocked first', P.firstTag(r.Tags) === 'source:undocked');

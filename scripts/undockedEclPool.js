@@ -19,7 +19,8 @@ const POOL_PILOT = 'culture.spacemolt-pilot';
 const POOL_SHOW = 'culture.spacemolt-show';
 const POOL = POOL_SHOW;
 
-function row(pool, kind, text, weight, conditions) {
+function row(pool, kind, text, weight, conditions, grain) {
+  var cityKind = kind === 'watch' || kind === 'argue' || kind === 'wager';
   return {
     Kind: 'line',
     PoolKey: pool,
@@ -28,7 +29,7 @@ function row(pool, kind, text, weight, conditions) {
     Weight: String(weight),
     Conditions: conditions,
     Tags: 'source:undocked,show:undocked,ecl:kind:' + kind,
-    Grain: kind === 'pilot' ? 'citizen' : (kind === 'watch' || kind === 'argue' ? 'city' : 'citizen'),
+    Grain: grain || (kind === 'pilot' ? 'citizen' : (cityKind ? 'city' : 'citizen')),
     Active: 'yes',
   };
 }
@@ -72,13 +73,23 @@ const SHOW_ROWS = [
   row(POOL_SHOW, 'lottery', 'caught themselves planning a better episode than Walker\'s while the water ran', 1.05, 'undocked;fame=0;drive>=60'),
 
   row(POOL_SHOW, 'aspire', 'watched UNDOCKED like someone who already knew what a camera does to a week', 0.75, 'undocked;fame>=25'),
+
+  // 4a wager talk — the window, the napkin, the board. No numbers (numbers
+  // become canon the moment they print). No money moves. Plan:
+  // docs/for-claude-review/2026-08-31-grok-casino-ledger.md Task 0.
+  row(POOL_SHOW, 'wager', 'Baylight treated the UNDOCKED board like weather — you checked it whether you meant to or not', 1.15, 'undocked'),
+  row(POOL_SHOW, 'wager', 'Casino Town put the belt haul next to the A\'s and the window did not pretend they were different nights', 1.1, 'undocked'),
+  row(POOL_SHOW, 'wager', 'folded a slip for the dishwasher and then would not look at the table', 1.05, 'undocked', 'citizen'),
+  row(POOL_SHOW, 'wager', 'asked Manfred whether the dishwasher was on the board and then pretended they were asking for a friend', 1.0, 'undocked', 'citizen'),
+  row(POOL_SHOW, 'wager', 'walked past the window twice before they went in, then acted like it was nothing', 0.95, 'undocked;drive>=60', 'citizen'),
+  row(POOL_SHOW, 'wager', 'someone at the bar called a napkin a ledger and nobody laughed', 0.9, 'undocked'),
 ];
 
 const ROWS = PILOT_ROWS.concat(SHOW_ROWS);
 
 const HDR = ['Kind', 'PoolKey', 'Slot', 'Text', 'Weight', 'Conditions', 'Tags', 'Grain', 'Active'];
 const FOURTH_WALL = /videogame|video game|commander|get_action_log|mcp__|openrouter|spacemolt-lib|FameScore|UsageCount/i;
-const KINDS = { pilot: 0, watch: 0, argue: 0, love: 0, sting: 0, lottery: 0, aspire: 0 };
+const KINDS = { pilot: 0, watch: 0, argue: 0, love: 0, sting: 0, lottery: 0, aspire: 0, wager: 0 };
 
 function firstTag(tags) {
   return String(tags || '').split(',')[0].trim();
@@ -107,12 +118,12 @@ function validateRows(rows) {
     if (/=1/.test(r.Conditions) && /undocked=/.test(r.Conditions)) {
       errors.push(i + ': undocked is a flag — no =1');
     }
-    const kind = (r.Tags.match(/ecl:kind:(pilot|watch|argue|love|sting|lottery|aspire)/) || [])[1];
+    const kind = (r.Tags.match(/ecl:kind:(pilot|watch|argue|love|sting|lottery|aspire|wager)/) || [])[1];
     if (!kind) errors.push(i + ': ecl:kind');
     else KINDS[kind]++;
   });
   if (KINDS.pilot < 6) errors.push('need ≥6 pilot lines (gate is inert until they exist)');
-  ['watch', 'argue', 'love', 'sting', 'lottery'].forEach(function (k) {
+  ['watch', 'argue', 'love', 'sting', 'lottery', 'wager'].forEach(function (k) {
     if (KINDS[k] < 3) errors.push('need ≥3 ' + k + ' lines');
   });
   return { valid: errors.length === 0, errors: errors };

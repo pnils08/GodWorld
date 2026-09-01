@@ -1768,11 +1768,27 @@ function datawakeRota(officeMap, limit) {
     const wantDistrict = BLOC_SPOKESPERSON_DISTRICT[dir];
     seats.push(wantDistrict ? (rows.find(r => r.district === wantDistrict) || rows[0]) : rows[0]);
   }
+  // civic.29: datawake_<date>.results.json is written every run regardless of
+  // per-office outcome (unlike the success-only files in DATAWAKE_DIR). A seat
+  // that keeps failing its grounding gate never wrote a success file, so its
+  // lastWake stayed empty and it looked permanently overdue — winning every
+  // rota slot and starving healthy seats for weeks (mayor fabrication chase,
+  // 2026-08-31). Scanning attempts, not just successes, gives failing seats
+  // their turn and then moves on like everyone else.
   const lastWake = {};
+  const bump = (dir, date) => { if (date && (lastWake[dir] || '') < date) lastWake[dir] = date; };
   if (fs.existsSync(DATAWAKE_DIR)) {
     for (const f of fs.readdirSync(DATAWAKE_DIR)) {
       const m = f.match(/^(.+)_(\d{4}-\d{2}-\d{2})\.json$/);
-      if (m) lastWake[m[1]] = (lastWake[m[1]] || '') < m[2] ? m[2] : lastWake[m[1]];
+      if (m) bump(m[1], m[2]);
+    }
+  }
+  if (fs.existsSync(CIVIC)) {
+    for (const f of fs.readdirSync(CIVIC)) {
+      const m = f.match(/^datawake_(\d{4}-\d{2}-\d{2})\.results\.json$/);
+      if (!m) continue;
+      const rec = readJson(path.join(CIVIC, f));
+      for (const r of (rec && rec.results) || []) bump(r.office, m[1]);
     }
   }
   seats.sort((a, b) => (lastWake[a.agentDir] || '').localeCompare(lastWake[b.agentDir] || '') || a.agentDir.localeCompare(b.agentDir));
@@ -1796,6 +1812,7 @@ function datawakeUserPrompt(pack, wallInj, office) {
     hay,
     'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","action":null,"numberMoved":""}',
     'statement is one string that answers THIS WEEK\'S LEVER from the pack. Not a statement object. Not a prior-wall quote.',
+    'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
   ].join('\n');
 }
 
@@ -1896,32 +1913,55 @@ async function runDatawake() {
       const user = datawakeUserPrompt(pack, wallInj, office);
       const persona = readPersonaDir(civicSeat.personaDirFor(office, ROOT) || office.agentDir);
       let j = null;
+      let answeredModel = office.model || 'deepseek/deepseek-chat';
       let attemptUser = user;
-      for (let attempt = 1; attempt <= 2; attempt++) {
-        const r = await callOpenRouter(office.model || 'deepseek/deepseek-chat', persona, attemptUser, 1500);
-        let cand = null;
-        try { cand = JSON.parse(stripFences(r.text)); } catch (_) { cand = null; }
-        // kimi-k2 returned empty content on the first live IND wake (same class
-        // as the glm-4.7 bake-off failure) — JSON.parse('') / 'null' yields null.
-        const statement = datawakeStatementText(cand);
-        if (!cand || typeof cand !== 'object' || !statement) {
-          if (attempt === 2) throw new Error('no usable JSON statement after retry (model returned empty/invalid content)');
-          log(office.agentDir + ' attempt ' + attempt + ': empty/invalid model output — retrying');
-          attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT RETURNED NO USABLE JSON. Respond with ONLY the JSON object described above.';
-          continue;
+      // civic.29: a CALL failure (429, timeout, provider outage) used to burn
+      // both attempts on the office's own model and mute the seat for the day
+      // — the mayor's 08-31 Mistral 429 (Sunday chain already fixed this via
+      // callVoice's modelChainFor, civic.26; datawake never got the same fix).
+      // A VALIDITY failure (empty JSON, fabricated number) still repairs on the
+      // SAME model only — switching providers to dodge the grounding gate would
+      // weaken it, not fix it.
+      const chain = modelChainFor(answeredModel);
+      chainLoop:
+      for (let mi = 0; mi < chain.length; mi++) {
+        const active = chain[mi];
+        if (mi > 0) log(office.agentDir + ' falling back to ' + active + ' (after ' + chain[mi - 1] + ')');
+        for (let attempt = 1; attempt <= 2; attempt++) {
+          let r;
+          try {
+            r = await callOpenRouter(active, persona, attemptUser, 1500);
+          } catch (e) {
+            log(office.agentDir + ' ' + active + ' attempt ' + attempt + ' call failed: ' + e.message);
+            if (attempt < 2) { await sleep(2000 * attempt); continue; }
+            break; // this model's attempts are exhausted — try the next in chain
+          }
+          let cand = null;
+          try { cand = JSON.parse(stripFences(r.text)); } catch (_) { cand = null; }
+          // kimi-k2 returned empty content on the first live IND wake (same class
+          // as the glm-4.7 bake-off failure) — JSON.parse('') / 'null' yields null.
+          const statement = datawakeStatementText(cand);
+          if (!cand || typeof cand !== 'object' || !statement) {
+            if (attempt === 2) throw new Error('no usable JSON statement after retry (model returned empty/invalid content)');
+            log(office.agentDir + ' attempt ' + attempt + ': empty/invalid model output — retrying');
+            attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT RETURNED NO USABLE JSON. Respond with ONLY the JSON object described above.';
+            continue;
+          }
+          cand.statement = statement;
+          const bad = ungroundedNumbers(hay, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });
+          if (!bad.length) { j = cand; answeredModel = active; break chainLoop; }
+          log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
+          if (attempt === 2) throw new Error('fabricated statistic(s) after retry: ' + bad.join(', '));
+          attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: it cited number(s) [' + bad.join(', ') + '] that are NOT in your data. Use only quantities present in the material above, or say it in words without inventing figures.';
         }
-        cand.statement = statement;
-        const bad = ungroundedNumbers(hay, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });
-        if (!bad.length) { j = cand; break; }
-        log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
-        if (attempt === 2) throw new Error('fabricated statistic(s) after retry: ' + bad.join(', '));
-        attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: it cited number(s) [' + bad.join(', ') + '] that are NOT in your data. Use only quantities present in the material above, or say it in words without inventing figures.';
       }
+      if (!j) throw new Error('no result after trying ' + chain.length + ' model(s): ' + chain.join(', '));
       const rec = {
         office: voiceSlug(office.agentDir), agentDir: office.agentDir, holder: office.holder,
         popid: office.popid, title: office.title, date, cycle: Number(cycle),
-        model: office.model, statement: j.statement, action: j.action || null,
+        model: answeredModel, statement: j.statement, action: j.action || null,
         numberMoved: j.numberMoved || null, ranAt: new Date().toISOString(),
+        fellBackFrom: answeredModel === (office.model || 'deepseek/deepseek-chat') ? null : office.model,
       };
       const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + date + '.json');
       fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));

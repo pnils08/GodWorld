@@ -427,10 +427,15 @@ function initFact(init) {
   const id = init.id || init.InitiativeID;
   const phase = (init.implementation && (init.implementation.phase || init.implementation.status)) || init.status || '';
   const summary = (init.implementation && init.implementation.summary) || '';
+  // civic.29: budget is the one hard number a report/gavel turn can legitimately
+  // cite. Without it in known[], seats fabricate a plausible-sounding dollar or
+  // percent figure instead — the tracker already carries it, it was just never
+  // surfaced into the pack (mayor + health-center fabrication chase, 2026-08-31).
+  const budget = init.budget ? '; budget ' + init.budget : '';
   return {
     id: 'F-' + String(id || init.name || 'init'),
     t: 'FACT',
-    text: (init.name || id) + (phase ? ' is in ' + phase : '') + (summary ? ' — ' + clip(summary, 240) : ''),
+    text: (init.name || id) + (phase ? ' is in ' + phase : '') + budget + (summary ? ' — ' + clip(summary, 240) : ''),
     src: 'output/initiative_tracker.json',
   };
 }

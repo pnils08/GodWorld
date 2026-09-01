@@ -39,7 +39,7 @@
     "claim": "Month-six disbursement review + canvass launch",
     "lineFacts": [
       "approval 69",
-      "West Oakland Stabilization Fund is in disbursement-active — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+      "West Oakland Stabilization Fund is in disbursement-active; budget $28M — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
       "due: Month-six disbursement review + canvass launch"
     ],
     "missing": [
@@ -70,7 +70,7 @@
     {
       "id": "F-INIT-001",
       "t": "FACT",
-      "text": "West Oakland Stabilization Fund is in disbursement-active — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
+      "text": "West Oakland Stabilization Fund is in disbursement-active; budget $28M — C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
       "src": "output/initiative_tracker.json"
     }
   ],

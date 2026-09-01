@@ -38,7 +38,7 @@
   "prewrite": {
     "claim": "Structural frame groundbreaking",
     "lineFacts": [
-      "Temescal Community Health Center is in construction-active — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
+      "Temescal Community Health Center is in construction-active; budget $45M — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
       "due: Structural frame groundbreaking",
       "INIT-005 — construction-active — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106. — Structural frame groundbreaking",
       "Temescal crime: property 42, violent 31, incidents 6 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
@@ -129,7 +129,7 @@
     {
       "id": "F-INIT-005",
       "t": "FACT",
-      "text": "Temescal Community Health Center is in construction-active — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
+      "text": "Temescal Community Health Center is in construction-active; budget $45M — C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
       "src": "output/initiative_tracker.json"
     },
     {

@@ -1,0 +1,24 @@
+{
+  "office": "mayor",
+  "agentDir": "civic-office-mayor",
+  "holder": "Avery Santana",
+  "popid": "POP-00034",
+  "title": "Mayor",
+  "date": "2026-08-31",
+  "cycle": 105,
+  "model": "mistralai/mistral-large",
+  "statement": "Month six of the West Oakland Stabilization Fund, and we’re moving money into people’s hands—57 households now stabilized, with outreach teams hitting the blocks that need it most. This isn’t just disbursement; it’s delivery. And we’re accelerating because Oaklanders can’t wait for paperwork to catch up to urgency.",
+  "action": {
+    "type": "executive_order",
+    "topic": "West Oakland Stabilization Fund Canvass Expansion",
+    "initiative": "INIT-001",
+    "description": "Direct Brenda Okoro’s housing unit to deploy two additional outreach teams to slipping blocks by Cycle 106, funded from the existing $28M budget. Teams will prioritize households that missed prior disbursement windows due to documentation delays or outreach gaps.",
+    "conditions": [
+      "Monthly public dashboard updates on disbursement progress",
+      "Quarterly audit by the Finance Committee"
+    ]
+  },
+  "numberMoved": "57 households stabilized to date",
+  "ranAt": "2026-09-01T03:46:33.347Z",
+  "fellBackFrom": null
+}

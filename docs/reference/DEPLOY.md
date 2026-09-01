@@ -51,7 +51,17 @@ sandbox is the intended target for anything unverified.
 bench is the same state as live, so the bench fire + sheet verify is the smoke. Live runs
 clear whenever Mike fires them; they confirm, they don't gate.
 
-**CURRENT: `SANDBOX 0827` (stood up 2026-08-27, Mike-made copy).** Clean copy of live at C104 — the proving bench for the engine.131 wave and the engine.126/128/129 backlog that shipped live with it.
+**CURRENT: `SANDBOX 0831` (stood up 2026-08-31, Mike-made copy).** Copy of live post-C105 — the proving bench for the S405 C105 chase sessions (S-A through S-E, `docs/plans/2026-08-31-c105-chase-sessions.md`).
+- Spreadsheet ID `18BOJmzlO7EoaEhvUsUaqLIZvgrTC1yltUYk_Gz3I3W8`
+- Bound Apps Script ID `1_3PDs7CSUsYvjjcXWtYGKjpPd7ekiIsUKKLSwlMtj3ioQKV0ew8TAfPh`
+- Script Properties set by Mike 2026-08-31: `SIM_SSID`, `CYCLE_TRIGGER_TOKEN`. Authorization ran, access granted (protocol step 3b done).
+- **`CARRY_FORWARD_COLD_START_OK` — DO NOT SET (verified 2026-08-31, engine-sheet, read-only against the bench).** `assertCarryForwardPresent_` reads two layers, not one: script properties AND the `Carry_Forward_Store` sheet (`loadCarryForwardBlob_` / `loadPreviousEvening.js:88-98` fall back to it). That sheet copies with the spreadsheet, and 0831 carries `PREV_EVENING_JSON` / `PREV_CYCLE_STATE_JSON` / `CHAOS_NBHD_FOLD_JSON`, all `Cycle=105`, matching bench `cycleCount` 105 — not a cold start. `readCarryForwardFromSheet_` will find them and re-seed script properties on read; the gate will not abort. The override is one-shot and consumed on use — setting it here would silently waste it against a real cold start later.
+- Code: not yet staged. Repo HEAD at stand-up: `d5c5c0d3` (S405 chase-session plan commit).
+- Web-app deployment: not yet created — first `clasp push` (temp-dir route, sandbox `.clasp.json` written LAST) + `clasp deploy` owed, es-side.
+- Baseline sheet state not yet verified against live post-C105 — run before first proving fire.
+- **Now at C107 (2026-08-31, engine-sheet), two proving cycles ahead of live** — engine.137 + G-PF18 bench-proven (C106/C107, both `ok:true`, 130 phases, 0 errors). Carries engine.137's world effects (rivalry intensities, recovery state) as **bench-only — never replay to live**. Proving detail in the wave's plan / gap log, not here.
+
+**RETIRED: `SANDBOX 0827` (stood up 2026-08-27 → superseded 2026-08-31).** Predates the C105 live run (copy of live at C104) — superseded by SANDBOX 0831 above. Served the engine.131 wave and the engine.126/128/129 backlog that shipped live with it.
 - Spreadsheet ID `14-dUy_Uz_B90bKidZeBL-WHzhJ828kTpf24Lebu9GXA`
 - **engine.135 bench-side sheet writes + replay order:** the wave plan's §Live-wave replay checklist (`docs/plans/2026-08-29-employment-system-cascade.md`). Log per-wave writes THERE, not here.
 - **Bench 2026-08-30: synced from live C104, at @19 / C115 (engine.135 wave + engine.136 — per-deployment detail in the plan §Phase D/E/F).** One bench-only sheet write since the sync — NEVER replay to live: `World_Config!B8 cycleCount` 109 → 110 (engine.136 diff-restore). **@19 = repo HEAD `ce670201` (engine.136), pushed whole; C115 fired as its proof: ok:true / 152s / 130 phases, `cycleCount` 114 → 115 landed, `Engine_Errors` empty — the point of the fire was that the new read-back guard raises NOTHING on a healthy close.**
@@ -258,12 +268,18 @@ demographics prediction failed while the others held.
    deployment but cannot grant consent. (SANDBOX 0827's first fire died on
    exactly this — the same shape as the S319 `SIM_SSID` omission: a manual step
    the protocol did not name, found only at a first fire.)
-3c. **Mike (REQUIRED on a fresh bench, added 2026-08-27):** Script Properties →
-   `CARRY_FORWARD_COLD_START_OK` = `1`. A new copy has no `PREV_EVENING_JSON` /
-   `PREV_CYCLE_STATE_JSON` (PropertiesService does not copy) and the
-   carry-forward gate correctly aborts the first fire — *"The world must not
-   run without yesterday."* This is the third manual property a fresh bench
-   needs, alongside `SIM_SSID` and `CYCLE_TRIGGER_TOKEN`.
+3c. **Check `Carry_Forward_Store` FIRST (corrected 2026-08-31, SANDBOX 0831 finding)
+   — only set `CARRY_FORWARD_COLD_START_OK` if it's actually empty.**
+   `assertCarryForwardPresent_` reads two layers: script properties AND the
+   `Carry_Forward_Store` sheet (`loadCarryForwardBlob_` falls back to it,
+   `loadPreviousEvening.js:88-98`). That sheet copies with the spreadsheet — a
+   copy made from a live sheet that already had carry-forward rows is NOT a
+   cold start, even though script properties never carry over. Read the sheet
+   before assuming. If and only if it's genuinely empty: Script Properties →
+   `CARRY_FORWARD_COLD_START_OK` = `1` — the carry-forward gate would otherwise
+   correctly abort the first fire (*"The world must not run without
+   yesterday"*). **The override is one-shot, consumed on use** — setting it
+   when the sheet already has data wastes it against a real cold start later.
    **Order matters: authorize (3b) BEFORE bumping the deployment**, or the
    deployment pins an unauthorized version and every GET 404s.
 ### Does a bench cycle contaminate the crons? No — verified empirically 2026-08-27

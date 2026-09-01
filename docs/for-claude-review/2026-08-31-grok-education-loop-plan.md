@@ -12,7 +12,7 @@ sources:
   - docs/canon/INSTITUTIONS.md §Education — Oakland City Schools; no canon campus
   - OpenRouter Haiku wiring cards 2026-08-30: processEducationCareer_, updateCareerProgression_
 pointers:
-  - "[[../engine/ROLLOUT_PLAN]] — Claude files the row on accept (suggested engine.140)"
+  - "[[../engine/ROLLOUT_PLAN]] — Claude files the next free engine.* row on accept (engine.140 is already the storyline ager — do not reuse)"
   - "[[../research/2026-08-30-education-system]] — research (name after Claude moves the inbox copy)"
   - "[[../plans/2026-08-29-employment-system-cascade]] — E1/E2/E3 stay closed; this plan does not reopen them"
   - "[[../canon/INSTITUTIONS]]"

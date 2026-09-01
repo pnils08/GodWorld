@@ -492,7 +492,7 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 
 ## LOW-severity gaps
 
-- **G-PF11:** `/pre-flight` with no argument always exits 2. `scripts/preflightInputCheck.js` derives the target cycle by grepping SESSION_CONTEXT for a literal `Cycle: N` token; the PIN line has never carried one (verified 0 matches at both `f10d226c` and HEAD), so the documented canonical invocation cannot work and every run needs `--cycle=`. One-line fix — teach the deriver the PIN's actual `canonical C<NN>` format.
+- **G-PF11:** ~~`/pre-flight` with no argument always exits 2.~~ **CLOSED S407.** The deriver now tries the PIN's real `canonical C<N>` format first and falls back to the legacy `Cycle: N`. Fixed alongside G-PF26 in the same file. Verified live: `node scripts/preflightInputCheck.js` with no argument prints `PRE-FLIGHT: Cycle 105`, `Target derivation: auto: SESSION_CONTEXT Cycle 105 not shipped → same`, and exits 0 READY.
 
 ## Cross-gap patterns
 
@@ -565,8 +565,8 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 - **Category:** canon-risk
 - **What happened:** `Oakland_Sports_Feed!E212` (C105) carried two stacked defects in one cell: a missing comma merging two pitchers into one token, and, underneath it, a misspelling — `"… Pablo Almanzar (SP) Carmes Mesa (SP)"`. The engine consumed the row at Phase 2 without complaint; the defect surfaced only downstream at `/build-world-summary`, which reported the merged name as unresolvable and then, after the comma fix, auto-rescued `Carmes` → `Carmen Mesa` (POP-00081) by edit distance. Both repaired at source, read-back verified.
 - **Why it matters:** The row's story angle is "A's pitching rotation is stellar all season" — the sports desk could reach neither pitcher in it. Sports is the world, and its feed has no name validation between authoring and the engine reading it; the only thing that caught this was a downstream summary builder choosing to be loud.
-- **Suggested action:** OPEN. Run the same `canon-name-check` resolver over `NamesUsed` at feed-write time, or add a pre-flight check on the target cycle's feed rows so a name that cannot resolve is caught before the engine consumes it.
-- **Pointer:** engine.138
+- **Suggested action:** **CLOSED S407 — pre-flight, not write-time.** The dashboard write path already refuses a bad name at entry, and E212 landed anyway: it was typed into the sheet, and no code path can guard that. So the check goes where every row passes regardless of who wrote it — `preflightInputCheck.js` Step 1 now resolves every `NamesUsed` entry for the target cycle through `resolveFeedNames` (engine.125's resolver, imported, not reimplemented — the same exact-or-refuse contract the read side uses, moved earlier). A missing-comma heuristic rides with it: a comma-separated token of 4+ words with 3+ capitalised is named as the two-merged-names shape, because "unresolved" alone would not have pointed at the actual defect. Reports by SHEET ROW, so the finding is the fix. **WARNING, not a blocker** — a name typo degrades one story, it does not corrupt engine state, and holding a cycle for it is disproportionate. Replayed against the original cell: `"Pablo Almanzar (SP) Carmes Mesa (SP)"` → both the missing-comma line and `does NOT resolve`; comma-fixed → `Carmes Mesa MISSPELLED — rescued to "Carmen Mesa" (POP-00081); fix the feed row`; as repaired today → clean. Live no-arg run on C105: `[x] Sports Feed names: every NamesUsed entry resolves to a ledger citizen`.
+- **Pointer:** pipeline.63
 
 ## Cross-gap patterns (second pass, 2026-08-31)
 

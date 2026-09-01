@@ -15,6 +15,10 @@
  *   G-PF3 — Initiative output carries the §Placeholder Convention class
  *           breakdown (real / placeholder / partial-real / bloat), not a flat
  *           "all valid".
+ *   G-PF11 — the deriver reads the PIN's real `canonical C<N>` format; the old
+ *            `Cycle: N`-only grep matched nothing, so no-arg runs always exit 2.
+ *   G-PF26 — NamesUsed resolved against the ledger at pre-flight, not first at
+ *            world-summary time, after the engine already consumed the row.
  *   G-PF4 — target cycle auto-derived from SESSION_CONTEXT.md header (Cycle: N,
  *           +1 when that cycle has shipped); --cycle=<N> overrides.
  *   G-PF5 — Processed enum: a coverage row is unprocessed unless its Processed
@@ -35,6 +39,9 @@ require('../lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');
+// G-PF26: the read side's name resolver, reused verbatim — exact match or refuse,
+// with the S361 legacy-typo rescue. One contract, checked earlier.
+const { resolveFeedNames } = require('./buildWorldSummary');
 
 const SPORTS_SHEET = 'Oakland_Sports_Feed';
 const INITIATIVE_SHEET = 'Initiative_Tracker';
@@ -69,19 +76,30 @@ function parseArgCycle() {
 // CANONIZED / post-publish-COMPLETE / PUBLISHED marker for cycle N) the next
 // cycle to run is N+1, else N.
 function deriveTargetCycle() {
+  // G-PF11 (S407): this read ONLY `Cycle: N`, a token the PIN line has never
+  // carried — verified 0 matches across the file's history — so the documented
+  // no-argument invocation exited 2 every single time and every run needed
+  // --cycle=. The PIN's actual format is `canonical C105`. Both are accepted
+  // now, PIN format first since that is the line that exists.
   const scPath = path.join(__dirname, '..', 'SESSION_CONTEXT.md');
-  let header = '';
+  let text = '';
   try {
-    const text = fs.readFileSync(scPath, 'utf8');
-    header = (text.split('\n').find(l => /Cycle:\s*\d+/.test(l)) || '');
+    text = fs.readFileSync(scPath, 'utf8');
   } catch (e) {
     console.error('[ERROR] could not read SESSION_CONTEXT.md for cycle derivation: ' + e.message);
     console.error('        pass --cycle=<N> explicitly.');
     process.exit(2);
   }
-  const m = header.match(/Cycle:\s*(\d+)/);
+  const lines_ = text.split('\n');
+  const CYCLE_PATTERNS = [/canonical\s+C(\d+)/i, /Cycle:\s*(\d+)/];
+  let header = '', m = null;
+  for (const pat of CYCLE_PATTERNS) {
+    const line = lines_.find(l => pat.test(l));
+    if (line) { header = line; m = line.match(pat); break; }
+  }
   if (!m) {
-    console.error('[ERROR] no "Cycle: N" found in SESSION_CONTEXT header — pass --cycle=<N>.');
+    console.error('[ERROR] no cycle found in SESSION_CONTEXT — looked for "canonical C<N>" (PIN format)');
+    console.error('        and legacy "Cycle: N". Pass --cycle=<N>.');
     process.exit(2);
   }
   const current = parseInt(m[1], 10);
@@ -148,6 +166,10 @@ async function main() {
     warnings.push(`${SPORTS_SHEET} read failed`);
   } else {
     const rows = sports.filter(r => String(r.Cycle).match(/\d+/) && parseInt(String(r.Cycle).match(/\d+/)[0], 10) === target);
+    // Sheet row for every kept row — a name defect is only fixable at its cell,
+    // so "row 3" (filtered position) is useless and "E212" is the whole report.
+    const sheetRowOf = new Map();
+    sports.forEach((r, i) => sheetRowOf.set(r, i + 2));
     if (rows.length === 0) {
       lines.push(`[ ] Sports Feed: NO entries for C${target} — required inputs missing`);
       notReady = true;
@@ -166,6 +188,45 @@ async function main() {
         warnings.push(`sports recommended cols thin (${recMissing.length} cells)`);
       } else {
         lines.push(`[x] Sports Feed: ${rows.length} entries, all required + recommended columns populated`);
+      }
+      // ── G-PF26 (S407): NamesUsed resolution at pre-flight ──
+      // C105 `Oakland_Sports_Feed!E212` carried two stacked defects in one cell:
+      // a missing comma merging two pitchers into one token, and a misspelling
+      // under it. The engine consumed the row at Phase 2 without complaint; the
+      // only thing that caught it was buildWorldSummary choosing to be loud —
+      // AFTER the cycle had run. The row's angle was "the A's rotation is
+      // stellar" and the sports desk could reach neither pitcher in it.
+      //
+      // The dashboard write path already refuses a bad name at entry, but no
+      // code path can guard a human typing into the sheet, which is where this
+      // one came from. So the check goes where every row passes regardless of
+      // who wrote it. Same resolver the read side uses (engine.125's
+      // resolveFeedNames_) — not a second opinion, the same contract moved
+      // earlier. WARNING, not a blocker: a name typo degrades one story, it does
+      // not corrupt engine state, and the cycle should not be held for it.
+      const nameNotes = [];
+      for (const r of rows) {
+        const cell = 'row ' + (sheetRowOf.get(r) || '?');
+        const raw = String(r.NamesUsed || '');
+        // A comma-separated token with 4+ words is the missing-comma shape. The
+        // resolver would try the whole merged string and just say "unresolved";
+        // naming the actual defect is what makes it a 5-second fix.
+        for (const tok of raw.split(/[,;]/)) {
+          const words = tok.replace(/\([^)]*\)/g, '').replace(/\s+/g, ' ').trim().split(' ').filter(Boolean);
+          if (words.length >= 4 && words.filter(w => /^[A-Z]/.test(w)).length >= 3) {
+            nameNotes.push(`${cell}: "${tok.trim()}" looks like TWO names with a missing comma`);
+          }
+        }
+        try { resolveFeedNames(raw, nameNotes, cell); } catch (e) {
+          nameNotes.push(`${cell}: name resolver unavailable — ${e.message}`);
+        }
+      }
+      if (nameNotes.length > 0) {
+        lines.push(`[!] Sports Feed names: ${nameNotes.length} unresolved//suspect — the desk cannot interview these people`);
+        for (const n of nameNotes) lines.push(`      - ${n}`);
+        warnings.push(`sports feed names unresolved (${nameNotes.length})`);
+      } else {
+        lines.push(`[x] Sports Feed names: every NamesUsed entry resolves to a ledger citizen`);
       }
     }
   }

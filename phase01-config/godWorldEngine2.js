@@ -490,7 +490,17 @@ function runWorldCycle() {
   // C82-C101. Companion disables: loadActiveArcsFromLedger_ (v3preLoader) +
   // Phase10-Arcs below. Retained for reversibility.
   // safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
-  safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  // Storyline ager DISABLED S407: it worked Storyline_Tracker, DISCONTINUED
+  // 2026-08-05 and superseded by Storyline_Ledger. Its C105 line — 9 abandoned,
+  // 0 concluded — read as "storylines have no way to end" and opened a chase;
+  // it was ageing a tab nothing maintains. The last reader (buildDeskPackets)
+  // was repointed at the live ledger the same session, so this now writes to a
+  // tab with no readers at all. Writes nothing to ctx — pure sheet-side, so the
+  // removal cascades nowhere. Retained for reversibility.
+  // Still open, NOT covered by this line: monitorStorylineHealth_ below reads
+  // the same dead tab and DOES publish S.storyHooks + S.storylineHealth into
+  // ctx, so it needs its own caller-graph pass before it moves.
+  // safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
   safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
@@ -2203,7 +2213,17 @@ function runCyclePhases_(ctx) {
   // C82-C101. Companion disables: loadActiveArcsFromLedger_ (v3preLoader) +
   // Phase10-Arcs below. Retained for reversibility.
   // safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
-  safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  // Storyline ager DISABLED S407: it worked Storyline_Tracker, DISCONTINUED
+  // 2026-08-05 and superseded by Storyline_Ledger. Its C105 line — 9 abandoned,
+  // 0 concluded — read as "storylines have no way to end" and opened a chase;
+  // it was ageing a tab nothing maintains. The last reader (buildDeskPackets)
+  // was repointed at the live ledger the same session, so this now writes to a
+  // tab with no readers at all. Writes nothing to ctx — pure sheet-side, so the
+  // removal cascades nowhere. Retained for reversibility.
+  // Still open, NOT covered by this line: monitorStorylineHealth_ below reads
+  // the same dead tab and DOES publish S.storyHooks + S.storylineHealth into
+  // ctx, so it needs its own caller-graph pass before it moves.
+  // safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
   safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });

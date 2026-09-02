@@ -197,7 +197,7 @@ async function buildMagsSystemPrompt() {
   var identity = mags.loadIdentity();
   var journalTail = await loadPageReflections(2);  // her page reflections (POP-00005); git journal frozen S300 (pipe.40 T4)
   var worldState = mags.loadWorldState();           // compact orientation header; she searches for depth (S252 Task 5)
-  var simYear = mags.currentSimYear();              // 2041 + floor(cycle/52) — citizens age every 52 cycles (S252)
+  var simYear = mags.currentSimYear();              // the engine calendar's year (2040 + ceil(cycle/52) − 1; engine.148) — citizens age every 52 cycles
   var notesToSelf = mags.loadNotesToSelf(10);
   var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
 

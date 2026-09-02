@@ -210,6 +210,8 @@ function runGenerationalEngine_(ctx) {
   var iNumChildren = idx("NumChildren");
   var iDialState = idx("DialState"); // engine.32 T5 — dial-biased milestone odds
   var iHouseholdId = idx("HouseholdId"); // engine.57 P4 — household drives fates
+  var iEducationLevel = idx("EducationLevel"); // education loop (S409) — [Graduation] writes the credential
+  var iSchoolQuality = idx("SchoolQuality");   // education loop (S409) — four-year vs associate's
   var iGenderCol = idx("Gender"); // engine.57 P6 — births need parent sex + child sex
 
   // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
@@ -446,6 +448,12 @@ function runGenerationalEngine_(ctx) {
     if (counts.graduations < limits.graduations && birthYear) {
       var gradResult = checkGraduation_(ctx, popId, age, lifeHistory, tier, calendarContext);
       if (gradResult) {
+        // Education loop (S409): the event WRITES the credential — one writer,
+        // one cell. applyMilestone_ appends the single LifeHistory line.
+        if (iEducationLevel >= 0) {
+          var earned = graduationCredential_(row[iEducationLevel], iSchoolQuality >= 0 ? row[iSchoolQuality] : '');
+          if (earned) { row[iEducationLevel] = earned; gradResult.credential = earned; }
+        }
         ctx.summary.generationalEvents.push(applyMilestone_(
           ctx, row, iLife, iLastU, gradResult, name, popId, neighborhood, cycle, calendarContext
         ));
@@ -862,6 +870,28 @@ function getSeasonalLimits_(cal) {
 // ============================================================
 // MILESTONE CHECKS (same logic, but use rand_/chance_/pick_ + normalized season)
 // ============================================================
+
+// Education loop (S409): the credential a [Graduation] event confers, from
+// the credential the citizen holds. Pure. Never lowers a rank; masters and
+// doctorate holders still get the event line but keep their cell. Live
+// plural vocabulary only (matches lib/citizenDerivation EDUCATION_LEVELS and
+// every downstream exact-match: savings, courtship, settlement).
+var GRADUATION_LADDER_ = {
+  '': 'hs-diploma', 'none': 'hs-diploma', 'hs-dropout': 'hs-diploma',
+  'Pre-K': 'hs-diploma', 'Elementary': 'hs-diploma', 'Middle School': 'hs-diploma', 'High School': 'hs-diploma',
+  'some-college': 'bachelors', 'associates': 'bachelors', 'trade-cert': 'bachelors',
+  'bachelor': 'masters', 'bachelors': 'masters',
+  'graduate': null, 'masters': null, 'doctorate': null
+};
+function graduationCredential_(current, schoolQuality) {
+  var cur = String(current || '').trim();
+  if (cur === 'hs-diploma') {
+    // The four-year track needs the school behind it; otherwise the associate's.
+    return (Number(schoolQuality) >= 8) ? 'bachelors' : 'associates';
+  }
+  if (Object.prototype.hasOwnProperty.call(GRADUATION_LADDER_, cur)) return GRADUATION_LADDER_[cur];
+  return null; // unknown token: record the event, never overwrite what we cannot read
+}
 
 function checkGraduation_(ctx, popId, age, lifeHistory, tier, cal) {
   if (lifeHistory.indexOf("[Graduation]") >= 0) return null;

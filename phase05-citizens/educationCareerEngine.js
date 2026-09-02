@@ -10,9 +10,12 @@
  * Features:
  * - Education level derivation from UNI/MED/CIV flags
  * - Career stage tracking (student → entry → mid → senior → retired)
- * - Career advancement based on education + experience
- * - School quality impact on career outcomes
- * - Education → career advancement speed (was income correlation in v1.x)
+ * - School quality stamped on minors from the household's neighborhood
+ * - EducationLevel is identity plus lived graduation (education loop, S409):
+ *   minors carry a school stage derived from age; the 18th-birthday settlement
+ *   mints the adult credential; [Graduation] (generationalEventsEngine) writes
+ *   the next credential. CareerStage is age (engine.135 E1); employer success
+ *   is the promotion path (E2). Education does NOT change advancement speed.
  * - Career mobility detection
  *
  * v2.1 Phase 42 §5.6 alignment (S200):
@@ -36,12 +39,12 @@
  * v2.0 Changes (Phase 14.2):
  * - Removed INCOME_BY_EDUCATION and matchEducationToIncome_()
  * - Income no longer overridden by education level
- * - Education affects career advancement speed, not income directly
+ * - Education no longer touches income (and, since E1, not advancement either)
  * - Eliminates three-way income conflict (career/education/role-based)
  *
  * Integration:
  * - Reads UNI/MED/CIV flags from Simulation_Ledger via ctx.ledger
- * - Hooks into career engine for promotions
+ * - Career engine owns promotions; this file never reads EducationLevel for them
  * - Uses school quality from Neighborhood_Demographics (own tracking sheet,
  *   read directly — not SL-related)
  *
@@ -59,14 +62,53 @@
 // ════════════════════════════════════════════════════════════════════════════
 
 // Education levels
+// Education loop (S409): ONE vocabulary, the live plural one. Before this the
+// engine wrote singular `bachelor` / catch-all `graduate` while the ledger,
+// intake (lib/citizenDerivation EDUCATION_LEVELS), savings (EDU_SAVINGS_FACTOR)
+// and courtship (bondFitnessOf_) all exact-match the plural tokens — an
+// engine-filled graduate was invisible to every downstream that pays for a
+// degree. Child stages live in the same column until 18 (settleAdulthood_
+// overwrites with the credential — that overwrite IS the K-12 graduation).
 var EDUCATION_LEVELS = {
-  NONE: 'none',
+  // school stages (minors — derived from age each cycle, see deriveMinorEducationStage_)
+  PRE_K: 'Pre-K',
+  ELEMENTARY: 'Elementary',
+  MIDDLE: 'Middle School',
+  HIGH: 'High School',
+  // credentials (adults — identity once set; only settlement + [Graduation] write them)
   HS_DROPOUT: 'hs-dropout',
   HS_DIPLOMA: 'hs-diploma',
   SOME_COLLEGE: 'some-college',
-  BACHELOR: 'bachelor',
-  GRADUATE: 'graduate'
+  ASSOCIATES: 'associates',
+  TRADE_CERT: 'trade-cert',
+  BACHELORS: 'bachelors',
+  MASTERS: 'masters',
+  DOCTORATE: 'doctorate'
 };
+
+// Legacy tokens the engine used to write → canonical. Anything else passes
+// through unchanged (never invent a credential from an unknown string).
+var EDUCATION_LEGACY_WRITE = {
+  'bachelor': 'bachelors',
+  'graduate': 'masters',   // a graduate degree, not a doctorate — never mint PhDs from a flag
+  'none': 'Pre-K'
+};
+
+function canonicalEducationWrite_(v) {
+  var t = String(v || '').trim();
+  return Object.prototype.hasOwnProperty.call(EDUCATION_LEGACY_WRITE, t) ? EDUCATION_LEGACY_WRITE[t] : t;
+}
+
+// School stage from age — the E1 move for minors: a description of where the
+// child is, not a dice promotion. null for adults (their cell is a credential).
+function schoolStageForAge_(age) {
+  if (!(age >= 0)) return null;
+  if (age < 5) return EDUCATION_LEVELS.PRE_K;
+  if (age <= 10) return EDUCATION_LEVELS.ELEMENTARY;
+  if (age <= 13) return EDUCATION_LEVELS.MIDDLE;
+  if (age <= 17) return EDUCATION_LEVELS.HIGH;
+  return null;
+}
 
 // Career stages
 // ENGINE_REPAIR Row 24 (S327): the live CareerStage vocab drifted across
@@ -104,8 +146,8 @@ var CAREER_MOBILITY = {
 
 // v14.2: REMOVED — Education no longer overrides income.
 // Income is set by applyEconomicProfiles.js (role-based) and adjusted by
-// Career Engine transitions. Education affects career advancement speed,
-// not income directly. Old values preserved as comment for reference:
+// Career Engine transitions. Education does not touch income or, since
+// engine.135 E1, advancement speed. Old values preserved as comment for reference:
 // none: 28000, hs-dropout: 30000, hs-diploma: 42000,
 // some-college: 55000, bachelor: 75000, graduate: 120000
 
@@ -131,7 +173,7 @@ function processEducationCareer_(ctx) {
   var ss = ctx.ss;
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
 
-  Logger.log('processEducationCareer_ v2.1: Starting...');
+  Logger.log('processEducationCareer_ v2.2: Starting...');
 
   var results = {
     processed: 0,
@@ -141,9 +183,15 @@ function processEducationCareer_(ctx) {
     incomeAdjusted: 0
   };
 
-  // Step 1: Derive education levels from existing flags
+  // Step 1: Derive education levels from existing flags (fill-only)
   var eduResults = deriveEducationLevels_(ctx, rng);
   results.educationUpdated = eduResults.updated;
+
+  // Step 1b (education loop, S409): minors' school stage follows age — the E1
+  // analog. Runs after the fill so a freshly filled minor is stage-correct.
+  var stageResults = deriveMinorEducationStage_(ctx, cycle);
+  results.minorStagesRestamped = stageResults.restamped;
+  results.minors = stageResults.minors;
 
   // Step 2: Update career stages and track progression
   var careerResults = updateCareerProgression_(ctx, cycle, rng);
@@ -152,8 +200,8 @@ function processEducationCareer_(ctx) {
 
   // Step 3: REMOVED in v14.2 — income no longer derived from education.
   // Income is set by role-based economic profiles (applyEconomicProfiles.js)
-  // and adjusted by Career Engine transitions. Education affects career
-  // advancement speed (Step 2) but does not override income.
+  // and adjusted by Career Engine transitions. Education drives neither
+  // income nor advancement speed (E1: CareerStage is age).
   results.incomeAdjusted = 0;
 
   // Step 4: Detect career mobility (advancing/stagnant/declining)
@@ -174,8 +222,9 @@ function processEducationCareer_(ctx) {
   results.adulthood = settleAdulthood_(ctx, cycle, rng);
 
   Logger.log(
-    'processEducationCareer_ v2.1: Complete. ' +
+    'processEducationCareer_ v2.2: Complete. ' +
     'Education: ' + results.educationUpdated + ', ' +
+    'MinorStages: ' + results.minorStagesRestamped + '/' + results.minors + ', ' +
     'Career: ' + results.careerAdvanced + ', ' +
     'Stagnant: ' + results.stagnationDetected + ', ' +
     'Income: ' + results.incomeAdjusted
@@ -233,15 +282,15 @@ function deriveEducationLevels_(ctx, rng) {
     var eduLevel = EDUCATION_LEVELS.HS_DIPLOMA; // Default
 
     if (med === 'yes' || med === 'y') {
-      eduLevel = EDUCATION_LEVELS.GRADUATE; // Medical requires grad degree
+      eduLevel = EDUCATION_LEVELS.DOCTORATE; // Medical: the doctorate is the licence
     } else if (uni === 'yes' || uni === 'y') {
-      eduLevel = EDUCATION_LEVELS.BACHELOR; // University background
+      eduLevel = EDUCATION_LEVELS.BACHELORS; // University background
     } else if (civ === 'yes' || civ === 'y') {
       eduLevel = EDUCATION_LEVELS.SOME_COLLEGE; // Civic work often requires some college
     } else if (lifeHistory.indexOf('Graduation') >= 0) {
-      eduLevel = EDUCATION_LEVELS.BACHELOR; // Graduated in history
+      eduLevel = EDUCATION_LEVELS.BACHELORS; // Graduated in history
     } else if (age < 18) {
-      eduLevel = EDUCATION_LEVELS.NONE; // Youth
+      eduLevel = schoolStageForAge_(age); // Youth: school stage, healed forward each cycle
     } else if (age < 22) {
       eduLevel = rng() < 0.8 ? EDUCATION_LEVELS.HS_DIPLOMA : EDUCATION_LEVELS.HS_DROPOUT;
     } else {
@@ -255,7 +304,7 @@ function deriveEducationLevels_(ctx, rng) {
       else eduLevel = EDUCATION_LEVELS.HS_DIPLOMA;
     }
 
-    row[iEducation] = eduLevel;
+    row[iEducation] = canonicalEducationWrite_(eduLevel);
     updated++;
   }
 
@@ -264,6 +313,44 @@ function deriveEducationLevels_(ctx, rng) {
   }
 
   return { updated: updated };
+}
+
+
+/**
+ * Education loop (S409) — minors' EducationLevel is DERIVED from age each
+ * cycle, exactly the move engine.135 E1 made for CareerStage: a description
+ * of where the child is (Pre-K / Elementary / Middle School / High School),
+ * never a roll. Restamping heals a bad mint forward (a 16-year-old carrying
+ * `bachelors` reads High School next cycle). Adults are untouched here —
+ * settleAdulthood_ mints the credential at 18 and [Graduation] moves it.
+ * Same scope as E1: ENGINE-clock rows only; sports-layer rows skipped.
+ */
+function deriveMinorEducationStage_(ctx, cycle) {
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { restamped: 0, minors: 0 };
+  var idx = function(n) { return header.indexOf(n); };
+  var iEdu = idx('EducationLevel'), iBirth = idx('BirthYear'), iStatus = idx('Status'),
+      iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey');
+  if (iEdu < 0 || iBirth < 0) return { restamped: 0, minors: 0 };
+
+  var simYear = 2040 + Math.floor(((ctx && ctx.summary && ctx.summary.cycleId) || cycle || 0) / 52);
+  var restamped = 0, minors = 0;
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || !Array.isArray(row)) continue;
+    if (String(row[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+    if (!isEngineClockRow_(row, iClock)) continue;
+    if (isSportsLayerRow_(row, iClock, iEcon)) continue;
+    var by = Number(row[iBirth]) || 0;
+    if (by <= 0) continue;
+    var stage = schoolStageForAge_(simYear - by);
+    if (!stage) continue; // adult — credential, not a stage
+    minors++;
+    if (String(row[iEdu] || '').trim() !== stage) { row[iEdu] = stage; restamped++; }
+  }
+  if (restamped > 0) ctx.ledger.dirty = true;
+  return { restamped: restamped, minors: minors };
 }
 
 
@@ -369,7 +456,7 @@ function updateCareerProgression_(ctx, cycle, rng) {
   var idx = function(n) { return header.indexOf(n); };
   var iCareerStage = idx('CareerStage');
   var iYearsInCareer = idx('YearsInCareer');
-  var iEducation = idx('EducationLevel');
+  // (EducationLevel deliberately NOT read here — E1: CareerStage is age; S409 removed the dead read.)
   var iBirthYear = idx('BirthYear');
   var iStatus = idx('Status');
   var iLastPromotion = idx('LastPromotionCycle');
@@ -402,7 +489,6 @@ function updateCareerProgression_(ctx, cycle, rng) {
     var age = birthYear > 0 ? (simYear - birthYear) : 30;
     var careerStage = iCareerStage >= 0 ? (row[iCareerStage] || CAREER_STAGES.MID) : CAREER_STAGES.MID;
     var yearsInCareer = iYearsInCareer >= 0 ? (Number(row[iYearsInCareer]) || 0) : 0;
-    var education = iEducation >= 0 ? (row[iEducation] || 'hs-diploma') : 'hs-diploma';
     var lastPromotion = iLastPromotion >= 0 ? (Number(row[iLastPromotion]) || 0) : 0;
     var lifeHistory = iLife >= 0 ? (row[iLife] || '').toString() : '';
 
@@ -474,8 +560,8 @@ function updateCareerProgression_(ctx, cycle, rng) {
 // ════════════════════════════════════════════════════════════════════════════
 // matchEducationToIncome_() removed. Income is now set by role-based economic
 // profiles (applyEconomicProfiles.js) and adjusted by Career Engine transitions.
-// Education affects career advancement speed (updateCareerProgression_) but
-// does not directly set or override income. This eliminates the three-way
+// Education touches neither income nor (since engine.135 E1) advancement
+// speed; it is identity plus lived graduation. This eliminates the three-way
 // income conflict between Career Engine bands, Education income map, and
 // role-based profiles.
 

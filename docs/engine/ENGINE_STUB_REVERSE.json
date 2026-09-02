@@ -2,7 +2,7 @@
   "generated": "2026-09-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 186,
-  "functionsMapped": 1222,
+  "functionsMapped": 1226,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -726,6 +726,7 @@
         "phase05-citizens/civicInitiativeEngine.js::getInitiativeSummaryForMedia_",
         "phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_",
         "phase05-citizens/educationCareerEngine.js::deriveEducationLevels_",
+        "phase05-citizens/educationCareerEngine.js::deriveMinorEducationStage_",
         "phase05-citizens/educationCareerEngine.js::processEducationCareer_",
         "phase05-citizens/educationCareerEngine.js::updateMinorSchoolQuality_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",

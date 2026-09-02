@@ -694,6 +694,8 @@
 
 - **getSeasonalLimits_(cal)**
 
+- **graduationCredential_(current, schoolQuality)**
+
 - **checkGraduation_(ctx, popId, age, lifeHistory, tier, cal)**
 
 - **checkWedding_(ctx, popId, age, lifeHistory, cal, hasHousehold)**
@@ -1213,6 +1215,10 @@
 - **engineClockHold_(notes, nextActionCycle, cycle, engineWillAct)**
 
 ### educationCareerEngine.js
+- **canonicalEducationWrite_(v)**
+
+- **schoolStageForAge_(age)**
+
 - **careerStageClass_(v)**
 
 - **processEducationCareer_(ctx)**
@@ -1221,6 +1227,9 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **deriveEducationLevels_(ctx, rng)**
+  Reads: S.cycleId
+
+- **deriveMinorEducationStage_(ctx, cycle)**
   Reads: S.cycleId
 
 - **stampPromotion_(ctx, row, iLife, iLastU, iPop, iFirst, iLast, iNb, iOcc, verb, years, cycle)**
@@ -3625,4 +3634,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1222
+**Functions mapped:** 1226

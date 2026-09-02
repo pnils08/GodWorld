@@ -572,12 +572,12 @@ function generateSchoolWideEvents_(ctx, month, rng) {
   // Fall sports season kickoff
   if (period === 'fall_start' && rng() < 0.6) {
     events.push({
-      youthName: 'Oakland Unified',
-      youthId: 'SCHOOL-OUSD',
+      youthName: 'Oakland City Schools',
+      youthId: 'SCHOOL-OCS',
       age: 0,
       eventType: 'sports',
       description: 'fall sports season begins across Oakland schools',
-      school: 'Oakland Unified',
+      school: 'Oakland City Schools',
       neighborhood: 'Downtown',
       outcome: 'announced',
       status: 'school_event'

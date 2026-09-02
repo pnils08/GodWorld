@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 186 · **Functions mapped:** 1222 · **S.* fields:** 344 · **Sheets:** 59
+**Files scanned:** 186 · **Functions mapped:** 1226 · **S.* fields:** 344 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -116,7 +116,7 @@
 | `S.cycleCount` | _(none)_ | `phase04-events/eventArcEngine.js::getCurrentCycle_` | 0 | 1 |
 | `S.cycleFinalizedAt` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | `phase09-digest/finalizeCycleState.js::compactInitiativeRipples_` | 1 | 1 |
 | `S.cycleFinalState` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | `phase09-digest/finalizeCycleState.js::compactInitiativeRipples_` | 1 | 1 |
-| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase01-config/godWorldEngine2.js::runDryRunCycle`, `phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_`, …(+103 more) | 2 | 109 |
+| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase01-config/godWorldEngine2.js::runDryRunCycle`, `phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_`, …(+104 more) | 2 | 110 |
 | `S.cycleInMonth` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase08-v3-chicago/chicagoSatellite.js::chicagoSatelliteEngine_`, `phase08-v3-chicago/v3ChicagoWriter.js::saveV3Chicago_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 3 |
 | `S.cycleOfYear` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase07-evening-media/mediaRoomBriefingGenerator.js::generateMediaBriefing_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, …(+3 more) | 1 | 9 |
 | `S.cyclePacket` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | _(none)_ | 1 | 0 |

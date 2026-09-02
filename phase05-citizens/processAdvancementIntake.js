@@ -634,6 +634,11 @@ function processAdvancementRows_(ctx, now, cycle) {
       if (lRoleType >= 0 && roleType && String(ledgerRows[existingRow][lRoleType]).trim() !== roleType) {
         ledgerRows[existingRow][lRoleType] = roleType;
         roleChanged = true;
+        // engine.146 (S411): two truths — the new role's field leads SkillTags, the trained field follows.
+        var lTags146 = findColByName_(ledgerHeaders, 'SkillTags');
+        if (lTags146 >= 0 && typeof setCurrentField_ === 'function' && typeof roleFieldOf_ === 'function') {
+          ledgerRows[existingRow][lTags146] = setCurrentField_(ledgerRows[existingRow][lTags146], roleFieldOf_(roleType));
+        }
       } else if (lRoleType >= 0 && roleType) {
         ledgerRows[existingRow][lRoleType] = roleType;
       }

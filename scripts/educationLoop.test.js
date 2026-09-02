@@ -23,7 +23,7 @@ const E = new Function(R('phase05-citizens/educationCareerEngine.js') + '\nretur
   'processEducationCareer_, deriveEducationLevels_, deriveMinorEducationStage_, schoolStageForAge_,' +
   'canonicalEducationWrite_, eduRank_, updateCareerProgression_, EDUCATION_LEVELS,' +
   'settleField_, settleYouthCounts_, settleFieldClause_, settleAdulthood_, buildSettleBizPool_,' +
-  'SETTLE_FIELDS, SETTLE_ROLES_BY_FIELD, SETTLE_FIELD_ECON_KEYS, SETTLE_ECON_KEYS, skillTagField_, tagsMatchCategory_ };')();
+  'SETTLE_FIELDS, SETTLE_ROLES_BY_FIELD, SETTLE_FIELD_ECON_KEYS, SETTLE_ECON_KEYS, skillTagField_, tagsMatchCategory_, setCurrentField_, roleFieldOf_ };')();
 const G = new Function(R('phase04-events/generationalEventsEngine.js') + '\nreturn {' +
   'checkGraduation_, graduationCredential_, GRADUATION_LADDER_ };')();
 
@@ -203,6 +203,18 @@ console.log('\n8. engine.144 loops 1+2 — field-first settlement (S411):');
   check('own Trades tag settles as Construction & Baylight (cause own)', pk.field === 'Construction & Baylight' && pk.cause === 'own');
   pk = E.settleField_('', [{ name: 'Lu', tags: 'Trades' }], {}, {}, {}, one(0.5));
   check('a Trades parent now weighs: kid follows Lu into Construction & Baylight', pk.field === 'Construction & Baylight' && pk.cause === 'parent' && E.settleFieldClause_(pk) === ' (following Lu into Construction & Baylight)');
+  // engine.146: two truths — setCurrentField_ / roleFieldOf_
+  global.ECONOMIC_PARAMETERS = JSON.parse(R('data/economic_parameters.json'));
+  check('setCurrentField_: blank → the new field', E.setCurrentField_('', 'Healthcare') === 'Healthcare');
+  check('setCurrentField_: role change writes current|trained', E.setCurrentField_('Education', 'Trades') === 'Trades|Education');
+  check('setCurrentField_: same field again → unchanged', E.setCurrentField_('Trades|Education', 'Trades') === 'Trades|Education' && E.setCurrentField_('Healthcare', 'Healthcare') === 'Healthcare');
+  check('setCurrentField_: a second change keeps the ORIGINAL trained field', E.setCurrentField_('Trades|Education', 'Healthcare') === 'Healthcare|Education');
+  check('setCurrentField_: aliased equality (Trades ≡ Construction & Baylight) is not a change', E.setCurrentField_('Trades', 'Construction & Baylight') === 'Trades');
+  check('setCurrentField_: non-field tokens ride along; a non-field new value is ignored', E.setCurrentField_('athlete', 'Healthcare') === 'Healthcare|athlete' && E.setCurrentField_('Healthcare', 'athlete') === 'Healthcare');
+  check('roleFieldOf_: catalog role → its label; unknown → null', E.roleFieldOf_('Plumber') === 'Trades' && E.roleFieldOf_('ER Nurse') === 'Healthcare' && E.roleFieldOf_('Waterfront Resident') === null);
+  const eng2 = R('phase01-config/godWorldEngine2.js'), adv = R('phase05-citizens/processAdvancementIntake.js');
+  check('both role-change intake sites write the current field', /setCurrentField_\(oldTags146, roleFieldOf_\(givenRole\)\)/.test(eng2) && /setCurrentField_\(ledgerRows\[existingRow\]\[lTags146\], roleFieldOf_\(roleType\)\)/.test(adv));
+  delete global.ECONOMIC_PARAMETERS;
   // no source at all → null, legacy path
   pk = E.settleField_('', [{ name: 'Cy', tags: 'athlete' }], {}, {}, {}, one(0.3));
   check('no source → field null', pk.field === null && pk.cause === null);

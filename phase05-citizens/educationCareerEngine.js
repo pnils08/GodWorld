@@ -935,6 +935,39 @@ function skillTagField_(tag) {
   if (SETTLE_FIELDS.indexOf(t) >= 0) return t;
   return SKILLTAG_FIELD_ALIASES[t] || null;
 }
+// engine.146 (S411, builder: "true the design as it was intended"): TWO
+// TRUTHS. SkillTags = the CURRENT job's field first, the TRAINED field second
+// when they differ — the S336 design, which nothing had ever written (3 rows
+// of 968 carried a second token). Two intake paths change RoleType without
+// touching the tag (media-room role edit in godWorldEngine2.js, advancement
+// intake), so the tag was silently becoming the trained field while E3 read
+// it as the current one. Readers already take any token (tagsMatchCategory_),
+// pay reads the first (current). Non-field tokens (athlete/coach) ride along.
+function roleFieldOf_(roleText) {
+  var t = String(roleText || '').trim();
+  if (!t) return null;
+  var cat = null, lc = t.toLowerCase();
+  if (typeof ECONOMIC_PARAMETERS !== 'undefined' && ECONOMIC_PARAMETERS && ECONOMIC_PARAMETERS.length) {
+    for (var i = 0; i < ECONOMIC_PARAMETERS.length; i++) {
+      if (String(ECONOMIC_PARAMETERS[i].role || '').toLowerCase() === lc) { cat = ECONOMIC_PARAMETERS[i].category; break; }
+    }
+  }
+  if (!cat && typeof roleSectorCategory_ === 'function') cat = roleSectorCategory_(t);
+  return (cat && skillTagField_(cat)) ? cat : null; // the catalog label stays (Trades is Trades); non-field → null
+}
+function setCurrentField_(tagsStr, newField) {
+  var existing = String(tagsStr || '');
+  if (!newField || !skillTagField_(newField)) return existing;
+  var tokens = existing.split('|').map(function (x) { return x.trim(); }).filter(Boolean);
+  var fields = [], others = [];
+  for (var i = 0; i < tokens.length; i++) (skillTagField_(tokens[i]) ? fields : others).push(tokens[i]);
+  if (fields.length && skillTagField_(fields[0]) === skillTagField_(newField)) return tokens.join('|'); // already the current field
+  var trained = fields.length ? fields[fields.length - 1] : null; // token 2 if it exists, else the only field
+  var out = [newField];
+  if (trained && skillTagField_(trained) !== skillTagField_(newField)) out.push(trained);
+  return out.concat(others).join('|');
+}
+
 // Does a pipe-separated SkillTags string stand in this business category?
 function tagsMatchCategory_(tagsStr, cat) {
   var tags = Array.isArray(tagsStr) ? tagsStr : String(tagsStr || '').split('|');

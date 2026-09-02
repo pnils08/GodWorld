@@ -156,6 +156,18 @@ pointers:
 
 **Decision left open for the builder:** whether SkillTags should ever carry the second truth (trained field ≠ current job). Today the settlement writes the field the kid was aimed at, and E2/E3 then read it as the current field. If a career change should keep the trained field visible, that is a second token — the pipe design already allows it; nothing writes it.
 
+## engine.146 — SkillTags two truths (S411, engine-sheet, builder: "true the design as it was intended, unless the system itself wouldn't benefit")
+
+**Does the system benefit? Yes, on the record.** Two intake paths change a citizen's RoleType without touching SkillTags — the media-room role edit (`godWorldEngine2.js`, the canon door) and `processAdvancementIntake` — so after a role change the tag silently held the old field while E2/E3 read it as the current one. And live already disagreed: 24 ENGINE adults whose RoleType's catalog field was not in their tag (plumbers tagged Education, line cooks tagged Professional). For 11 of them the employer's own sector confirmed the tag as the current field (a plumber on the school district's payroll); for 13 the tag was an S336 keyword guess (`Security Guard` → default `Small Business`) with no employer sector behind it.
+
+**Convention.** `SkillTags = <current job's field>|<trained field>` when they differ; one token when equal (the settlement case — a kid works in the field they were aimed at). Non-field tokens (athlete/coach/scout) ride along at the end. Readers already honor both (E3 `tagsMatchCategory_` takes any token — both truths are hireable; `hoodReferencePay_` reads the first = current; a parent's two fields both weigh at a kid's settlement).
+
+**Writers (`educationCareerEngine.js`, shared scope):** `roleFieldOf_(roleText)` — catalog category via `ECONOMIC_PARAMETERS` (citizenDerivation.js), else `roleSectorCategory_` hints; catalog label kept. `setCurrentField_(tags, newField)` — new field leads; the ORIGINAL trained field (token 2 if present, else the only field) follows when different; aliased equality (Trades ≡ Construction & Baylight) is not a change. Called at both role-change sites; the media-room edit logs `SkillTags: a -> b` in its edits list.
+
+**Ledger (live, 2026-09-02, read back 24/24, snapshot refreshed):** 11 rows → `current|trained` (e.g. POP-00217 Plumber at Oakland City Schools: `Education|Trades`); 13 rows → the trained field alone, replacing the guess (e.g. POP-00234 self-employed Plumber: `Small Business` → `Trades`). Rule: the existing tag counts as the current truth only when the employer's sector reads as that field. Script `scratchpad/twoTruths.js`, `lib/sheets` direct, every row printed.
+
+**Tests:** `educationLoop.test.js` +8 (107/107) — blank, role change, same field, second change keeps the original trained field, aliased equality, non-field tokens, catalog lookup, both call sites. **Bench:** @12 C110 ok:true / 0 `Engine_Errors` (a role change needs a media-room or advancement row; the writer is unit-proven, the fire proves no crash). **Live: PROD @21**, pull + three-file overlay, diff vs bench stage empty, pull-back byte-identical.
+
 ## Backlog — builder direction 2026-09-02 (S410 close)
 
 Recorded as said, with the data point under each. None of these is started; each is its own loop after engine.144 has lived a few cycles.
@@ -186,6 +198,8 @@ None that block. Decisions made here (engine-sheet holds mechanism):
 - Layoff shield deferred to its own loop.
 
 ## Changelog
+
+- 2026-09-02 (engine-sheet, S411) — **engine.146 SkillTags two truths LIVE PROD @21:** `setCurrentField_` / `roleFieldOf_` at both role-change intake sites; convention current|trained; 24 disagreeing live rows trued (11 two-token, 13 guess→trained), read back 24/24. 107/107; bench @12 C110 clean. Design decision recorded in §engine.146.
 
 - 2026-09-02 (engine-sheet, S411, later) — **engine.145 LIVE PROD @20.** Bench @11 C109 ok:true / 0 errors. Live staged from a pull + three-file overlay, diff vs bench stage empty, pull-back byte-identical, HELD four at base. The 53-row SkillTags fill is live-only (bench keeps the blanks; it is a replica, not canon).
 - 2026-09-02 (engine-sheet, S411) — **engine.145 SkillTags gap coded + ledger restored:** alias table resolves the three catalog-only categories to the field a business carries, for E3 / settlement / hood pay; 53 blank adult rows filled from role on live (read back 53/53), 2 left blank; snapshot refreshed. 99/99 + 45/45; bench @11 C109 clean. Live: see the later entry.

@@ -1329,6 +1329,13 @@ function processIntake_(ctx) {
       if (givenRole && idxL('RoleType') >= 0 && String(lRow[idxL('RoleType')]).trim() !== givenRole) {
         edits.push('RoleType: ' + String(lRow[idxL('RoleType')]).trim() + ' -> ' + givenRole);
         lRow[idxL('RoleType')] = givenRole;
+        // engine.146 (S411): the new role's field becomes the CURRENT truth on
+        // SkillTags; the field they trained in stays as the second token.
+        if (idxL('SkillTags') >= 0 && typeof setCurrentField_ === 'function' && typeof roleFieldOf_ === 'function') {
+          var oldTags146 = String(lRow[idxL('SkillTags')] || '');
+          var newTags146 = setCurrentField_(oldTags146, roleFieldOf_(givenRole));
+          if (newTags146 !== oldTags146) { edits.push('SkillTags: ' + oldTags146 + ' -> ' + newTags146); lRow[idxL('SkillTags')] = newTags146; }
+        }
         // Role change re-derives income (retirement / career-change case)
         var redraw = drawIntakeProfile_(econPools, category || 'service', givenRole, rng);
         if (redraw && idxL('Income') >= 0) {

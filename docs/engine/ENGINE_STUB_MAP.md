@@ -1264,6 +1264,10 @@
 
 - **skillTagField_(tag)**
 
+- **roleFieldOf_(roleText)**
+
+- **setCurrentField_(tagsStr, newField)**
+
 - **tagsMatchCategory_(tagsStr, cat)**
 
 - **settleYouthCounts_(lifeHistory)**
@@ -3673,4 +3677,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1245
+**Functions mapped:** 1247

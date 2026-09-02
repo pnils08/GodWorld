@@ -33,7 +33,10 @@
  * - S.commuteFlows       origin → dest → worker count
  * - S.commuteInbound     dest → total inbound workers (precomputed for consumers)
  * - S.commuteFlowStats   { citizens, resolved, unresolved, sameHood, crossHood,
- *                          pairs, unresolvedReasons }
+ *                          pairs, nonHoodWorkplace, noEmployer, offLedger,
+ *                          unknownBiz, unknownHood }
+ *   Only unknownBiz / unknownHood are failures; nonHoodWorkplace (City-wide,
+ *   Chicago) and offLedger (UNTRACKED sentinel) are by-design exclusions.
  *
  * Consumers (engine.93 Task 9):
  * - updateTransitMetrics_ — ridership weighted by who actually rides in, and
@@ -69,6 +72,14 @@ var COMMUTE_CHILD_HOOD_FOLD = {
 // reported, not treated as failures to fix.
 var COMMUTE_NON_HOOD = ['City-wide', 'Chicago', 'Bridgeport'];
 
+// EmployerBizId sentinel for "employed somewhere off the tracked ledger"
+// (S357 rule; written by scripts/linkCitizensToEmployers.js, honoured by
+// runCareerEngine / generationalWealthEngine). Not a dangling ID and not
+// home — the workplace hood is unknown by design, so it is counted in its
+// own class and kept out of the matrix, like City-wide. Before S409 it fell
+// into unknownBiz and read as a broken reference (67 of C105's 210).
+var COMMUTE_OFF_LEDGER = 'UNTRACKED';
+
 
 function buildCommuteFlows_(ctx) {
   var S = ctx.summary || {};
@@ -77,7 +88,7 @@ function buildCommuteFlows_(ctx) {
   var stats = {
     citizens: 0, resolved: 0, unresolved: 0,
     sameHood: 0, crossHood: 0, pairs: 0,
-    nonHoodWorkplace: 0, noEmployer: 0, unknownBiz: 0, unknownHood: 0
+    nonHoodWorkplace: 0, noEmployer: 0, offLedger: 0, unknownBiz: 0, unknownHood: 0
   };
   S.commuteFlows = {};
   S.commuteInbound = {};
@@ -159,6 +170,9 @@ function buildCommuteFlows_(ctx) {
       // barber, a taquería owner, someone between jobs — not a data hole.
       work = home;
       stats.noEmployer++;
+    } else if (emp === COMMUTE_OFF_LEDGER) {
+      stats.unresolved++; stats.offLedger++;
+      continue;
     } else if (!Object.prototype.hasOwnProperty.call(bizHood, emp)) {
       stats.unresolved++; stats.unknownBiz++;
       continue;
@@ -205,10 +219,16 @@ function buildCommuteFlows_(ctx) {
   S.commuteFlows = ordered;
   S.commuteInbound = inboundOrdered;
 
-  Logger.log('buildCommuteFlows_ v1.0: ' + stats.resolved + '/' + stats.citizens +
+  // S409 (chase §S-E A6): the unresolved count is broken out by class, so the
+  // line says which are by-design (city-wide employers, off-ledger sentinel)
+  // and which are real failures (dangling BIZ-ID, business with no hood).
+  // C105: 210 unresolved = 143 city-wide + 67 off-ledger + 0 + 0.
+  Logger.log('buildCommuteFlows_ v1.1: ' + stats.resolved + '/' + stats.citizens +
     ' commuters resolved (' + stats.crossHood + ' cross-hood, ' + stats.sameHood +
     ' local), ' + stats.pairs + ' origin-destination pairs, ' +
-    stats.unresolved + ' unresolved');
+    stats.unresolved + ' unresolved (' + stats.nonHoodWorkplace + ' city-wide/non-hood, ' +
+    stats.offLedger + ' off-ledger, ' + stats.unknownBiz + ' dangling biz-id, ' +
+    stats.unknownHood + ' biz without hood)');
 
   return S.commuteFlows;
 }

@@ -849,6 +849,24 @@ function eduRank_(v) {
   return 0;
 }
 
+/**
+ * engine.144 (S410): one ordinal over the LIVE plural vocabulary, for the two
+ * employer-driven career events to read as a secondary key. Distinct from
+ * eduRank_ (0-2, feeds the 18th-birthday settlement — untouched). Never a
+ * gate: rank 0 is still eligible for everything.
+ */
+function credentialRank_(v) {
+  v = String(v || '').toLowerCase().trim();
+  if (!v) return 0;
+  if (v.indexOf('doctorate') >= 0) return 6;
+  if (v.indexOf('masters') >= 0 || v === 'graduate') return 5;
+  if (v.indexOf('bachelor') >= 0) return 4;
+  if (v.indexOf('associate') >= 0) return 3;
+  if (v.indexOf('trade-cert') >= 0 || v.indexOf('some-college') >= 0) return 2;
+  if (v.indexOf('hs-diploma') >= 0) return 1;
+  return 0; // hs-dropout, none, child-stage tokens
+}
+
 function settleAdulthood_(ctx, cycle, rng) {
   var results = { settled: 0, rich: 0, solid: 0, rough: 0 };
   var header = ctx.ledger.headers;

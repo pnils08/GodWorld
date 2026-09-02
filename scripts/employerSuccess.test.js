@@ -164,6 +164,59 @@ const bl = rows => [BLH].concat(rows);
   assert('rows unchanged', ctx.ledger.rows.every(r => Number(r[I('Income')]) === (r[I('POPID')] === 'S10' ? 0 : 60000)));
 }
 
+// ── engine.144: the credential is ONE cause among others (never a gate) ────
+{
+  const CR = sandbox.credentialRank_;
+  assert('1.0 credentialRank_ ordinal over the live vocab',
+    CR('') === 0 && CR('hs-dropout') === 0 && CR('High School') === 0 && CR('hs-diploma') === 1 && CR('trade-cert') === 2 &&
+    CR('some-college') === 2 && CR('associates') === 3 && CR('bachelors') === 4 && CR('bachelor') === 4 && CR('masters') === 5 &&
+    CR('graduate') === 5 && CR('doctorate') === 6);
+  assert('1.0b eduRank_ untouched (0-2)', sandbox.eduRank_('bachelors') === 1 && sandbox.eduRank_('doctorate') === 2 && sandbox.eduRank_('associates') === 0);
+
+  // 1a equal waiting → the higher credential is promoted, and the line says so
+  {
+    const rows = [
+      row({ POPID: 'P1', LastPromotionCycle: 0, Income: 70000, EducationLevel: 'hs-diploma' }),
+      row({ POPID: 'P2', LastPromotionCycle: 0, Income: 80000, EducationLevel: 'bachelors' }), // richer, but the degree breaks the tie
+    ];
+    const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.0001, 0.5]);
+    const S = makeS(); intents.length = 0;
+    const out = applyEmployerSuccess_(ctx, CYCLE, roll, [], S, 1);
+    const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
+    assert('1a equal waiting: the bachelors is promoted over the poorer hs-diploma', out.promotions === 1 && Number(g('P2')[I('LastPromotionCycle')]) === CYCLE && Number(g('P1')[I('Income')]) === 70000);
+    assert('1a the line names the cause', /\[Promotion\] Promoted at Da Dough \(the bachelors counted\) after 8 years as a Baker\./.test(g('P2')[I('LifeHistory')]), g('P2')[I('LifeHistory')]);
+  }
+  // 1b longer waiting still beats a better credential; no cause suffix
+  {
+    const rows = [
+      row({ POPID: 'P1', LastPromotionCycle: 0, Income: 70000, EducationLevel: 'hs-diploma' }),
+      row({ POPID: 'P2', LastPromotionCycle: 150, Income: 60000, EducationLevel: 'doctorate' }),
+    ];
+    const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.0001, 0.5]);
+    const out = applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), 1);
+    const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
+    assert('1b longest-waiting still wins over the doctorate', out.promotions === 1 && Number(g('P1')[I('LastPromotionCycle')]) === CYCLE);
+    assert('1b no cause suffix when the credential did not decide', /Promoted at Da Dough after 8 years/.test(g('P1')[I('LifeHistory')]) && !/counted/.test(g('P1')[I('LifeHistory')]));
+  }
+  // 1c an all-hs-diploma staff still promotes — no gate
+  {
+    const rows = [row({ POPID: 'P1', Income: 70000 }), row({ POPID: 'P2', Income: 60000 })];
+    const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.0001, 0.5]);
+    const out = applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), 1);
+    const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
+    assert('1c no gate: uncredentialed staff still promotes (poorer P2)', out.promotions === 1 && Number(g('P2')[I('LastPromotionCycle')]) === CYCLE && !/counted/.test(g('P2')[I('LifeHistory')]));
+  }
+  // 2 E3 slot order on pool entries
+  {
+    const O = sandbox.hireSlotOrder_;
+    const e = (pop, income, edu) => ({ pop, income, edu });
+    assert('2a same $10k band → the higher credential takes the slot', [e('B', 65000, 4), e('A', 60000, 1)].sort(O)[0].pop === 'B');
+    assert('2b poorer band still wins across bands', [e('B', 65000, 4), e('A', 45000, 1)].sort(O)[0].pop === 'A');
+    assert('2c uncredentialed pool still fills, poorest first', [e('B', 62000, 0), e('A', 60000, 0)].sort(O)[0].pop === 'A');
+    assert('2d matcher wires the order + the cause line', /sameField\.sort\(function \(a, b4\) \{ return hireSlotOrder_\(pool\[a\], pool\[b4\]\); \}\);/.test(src) && /' \(the ' \+ pool\[hIdx\]\.eduLabel \+ ' counted\)'/.test(src));
+  }
+}
+
 // ── gapFactor steers: below the attractor promotions are likelier, layoffs rarer ──
 {
   const mk = gf => { const { ctx, roll } = ctxWith([row({ POPID: 'P1' })], bl([['BIZ-1', 'X', 'Retail', 'Temescal', 6, 40000, 0, 10]]), [0.00025, 0.5]); return applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), gf); };

@@ -1212,6 +1212,8 @@
 - **lookupAuthoringSeat_(ctx, officeId)**
   Sheets: Civic_Office_Ledger
 
+- **applyEngineClockHold_(ctx, row, cycle, engineWillAct, initId, iNextActionCycle, iNotes, iLastUpdated)**
+
 - **engineClockHold_(notes, nextActionCycle, cycle, engineWillAct)**
 
 ### educationCareerEngine.js
@@ -1259,6 +1261,8 @@
 - **settleSkillTag_(role)**
 
 - **eduRank_(v)**
+
+- **credentialRank_(v)**
 
 - **settleAdulthood_(ctx, cycle, rng)**
   Reads: S.careerSignals
@@ -1636,6 +1640,14 @@
 
 ### runCareerEngine.js
 - **sectorCategory_(sector, strict)**
+
+- **credentialRankOf_(row, iEdu)**
+
+- **promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop)**
+
+- **hireIncomeBand_(income)**
+
+- **hireSlotOrder_(a, b)**
 
 - **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
   Reads: S.careerSignals, S.eventsGenerated
@@ -3634,4 +3646,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1226
+**Functions mapped:** 1232

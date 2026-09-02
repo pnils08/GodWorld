@@ -110,6 +110,41 @@ function sectorCategory_(sector, strict) {
  */
 var RARE_EVENT_SCALE = 0.1; // engine.135 doctrine point 21 — see applyEmployerSuccess_
 
+// engine.144 (S410): the credential as ONE cause among others in the two
+// employer-driven events. credentialRank_ lives in educationCareerEngine.js
+// (shared Apps Script scope); a missing column or helper reads as rank 0.
+function credentialRankOf_(row, iEdu) {
+  if (!row || iEdu < 0 || typeof credentialRank_ !== 'function') return 0;
+  return credentialRank_(row[iEdu]);
+}
+
+// E2 beneficiary order: longest since the last promotion (unchanged primary),
+// then the higher credential, then the lower earner, then POPID.
+function promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop) {
+  return function(a, b) {
+    var la = Number(rows[a][iLastPromo]) || 0, lb = Number(rows[b][iLastPromo]) || 0;
+    if (la !== lb) return la - lb;
+    var ea = credentialRankOf_(rows[a], iEdu), eb = credentialRankOf_(rows[b], iEdu);
+    if (ea !== eb) return eb - ea;
+    var ia = Number(rows[a][iIncome]) || 0, ib = Number(rows[b][iIncome]) || 0;
+    if (ia !== ib) return ia - ib;
+    return String(rows[a][iPop]) < String(rows[b][iPop]) ? -1 : 1;
+  };
+}
+
+// E3 same-field slot order on pool entries {income, edu, pop}: the poorest
+// $10k band first (raw-income ties are too rare for the credential to ever
+// be a lived cause), then the higher credential, then raw income, then POPID.
+function hireIncomeBand_(income) { return Math.floor((Number(income) || 0) / 10000); }
+function hireSlotOrder_(a, b) {
+  var ba = hireIncomeBand_(a.income), bb = hireIncomeBand_(b.income);
+  if (ba !== bb) return ba - bb;
+  var ea = Number(a.edu) || 0, eb = Number(b.edu) || 0;
+  if (ea !== eb) return eb - ea;
+  if (a.income !== b.income) return a.income - b.income;
+  return a.pop < b.pop ? -1 : 1;
+}
+
 function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
   var out = { promotions: 0, layoffs: 0, businesses: 0 };
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
@@ -118,7 +153,7 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
   var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'), iNb = idx('Neighborhood'), iRole = idx('RoleType'),
       iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'),
       iEcon = idx('EconomicProfileKey'), iLastPromo = idx('LastPromotionCycle'), iYears = idx('YearsInCareer'),
-      iLife = idx('LifeHistory'), iLastUpd = idx('LastUpdated');
+      iLife = idx('LifeHistory'), iLastUpd = idx('LastUpdated'), iEdu = idx('EducationLevel'); // engine.144
   if (iIncome < 0 || iEmp < 0) return out;
   var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
   if (!sheet) return out;
@@ -172,18 +207,20 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
     var layoffP = Math.min(0.5, Math.max(0, -b.growth) / 100 / 52 * n / gf * RARE_EVENT_SCALE);
     var draw = roll();
     if (promoP > 0 && draw < promoP) {
-      var who = b.staff.slice().sort(function(a, c2) {
-        var la = Number(rows[a][iLastPromo]) || 0, lb = Number(rows[c2][iLastPromo]) || 0;
-        if (la !== lb) return la - lb;
-        var ia = Number(rows[a][iIncome]) || 0, ib = Number(rows[c2][iIncome]) || 0;
-        if (ia !== ib) return ia - ib;
-        return byPop_(a, c2);
-      })[0];
+      // engine.144: longest-waiting first (unchanged), then the credential — one
+      // cause among others, never a gate — then the lower earner, then POPID.
+      var ranked = b.staff.slice().sort(promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop));
+      var who = ranked[0];
       var pRow = rows[who];
+      var byCredential = ranked.length > 1 &&
+        (Number(rows[ranked[1]][iLastPromo]) || 0) === (Number(pRow[iLastPromo]) || 0) &&
+        credentialRankOf_(rows[ranked[1]], iEdu) < credentialRankOf_(pRow, iEdu);
+      var promoVerb = 'Promoted at ' + b.name +
+        (byCredential ? ' (the ' + String(pRow[iEdu]).trim() + ' counted)' : '');
       pRow[iIncome] = Math.round((Number(pRow[iIncome]) || 0) * (1.06 + roll() * 0.06)); // +6–12%
       if (iLastPromo >= 0) pRow[iLastPromo] = cycle;
       if (typeof stampPromotion_ === 'function') {
-        stampPromotion_(ctx, pRow, iLife, iLastUpd, iPop, iFirst, iLast, iNb, iRole, 'Promoted at ' + b.name, Number(pRow[iYears]) || 0, cycle);
+        stampPromotion_(ctx, pRow, iLife, iLastUpd, iPop, iFirst, iLast, iNb, iRole, promoVerb, Number(pRow[iYears]) || 0, cycle);
       } else if (iLastUpd >= 0) pRow[iLastUpd] = ctx.now;
       S.careerSignals.promotions += 1;
       S.careerSignals.transitions += 1;
@@ -243,6 +280,7 @@ function runCareerEngine_(ctx) {
   var iIncome = idx('Income');
   var iEconKey = idx('EconomicProfileKey');
   var iEmployerBizId = idx('EmployerBizId'); // v2.4: employer tracking
+  var iEduLevel = idx('EducationLevel'); // engine.144: read by the E3 slot order, never a filter
   var iDialState = idx('DialState'); // engine.32 T5 — Drive dial -> career-event frequency
   var iCareerMobility = idx('CareerMobility'); // engine.61 wire (S321) — first reader ever
   var iStatus = idx('Status'); // engine.52 C1 — hospital status gates career activity
@@ -1061,7 +1099,8 @@ function runCareerEngine_(ctx) {
       if (uBy > 0) { var uAge = simYear - uBy; if (uAge < 18 || uAge >= 65) continue; }
       var tags = safeStr(uRow[iTags]).trim();
       if (!tags) continue; // untagged citizens aren't matchable — blank is honest
-      pool.push({ r: ur, tags: tags.split('|'), income: Number(uRow[iIncome]) || 0, pop: safeStr(uRow[iPopID]) });
+      pool.push({ r: ur, tags: tags.split('|'), income: Number(uRow[iIncome]) || 0, pop: safeStr(uRow[iPopID]),
+        edu: iEduLevel >= 0 ? credentialRankOf_(uRow, iEduLevel) : 0, eduLabel: iEduLevel >= 0 ? safeStr(uRow[iEduLevel]).trim() : '' });
     }
     if (!pool.length) return;
 
@@ -1091,12 +1130,11 @@ function runCareerEngine_(ctx) {
         if (taken[pi]) continue;
         if (pool[pi].tags.indexOf(cat) >= 0) sameField.push(pi);
       }
-      sameField.sort(function (a, b4) {
-        if (pool[a].income !== pool[b4].income) return pool[a].income - pool[b4].income; // poorest first
-        return pool[a].pop < pool[b4].pop ? -1 : 1;
-      });
+      // engine.144: poorest band first, then the credential (one cause, not a gate)
+      sameField.sort(function (a, b4) { return hireSlotOrder_(pool[a], pool[b4]); });
 
       var slots = sameField.slice(0, openings);
+      var leftOut = sameField.length > openings ? pool[sameField[openings]] : null;
       // engine.135 E3 (S401): the cross-field fallback is gone. "Rare" was a
       // 1-in-4 window PER BUSINESS — across ~180 businesses it fired 5–10
       // times a cycle, hiring an electrician at a bar and a line cook at a tech
@@ -1120,7 +1158,10 @@ function runCareerEngine_(ctx) {
           isCross ? 'Career-FieldChange' : 'Career-Hired',
           isCross
             ? 'Changed fields — hired at ' + bizName + ' (' + cat + ')'
-            : 'Hired at ' + bizName,
+            : 'Hired at ' + bizName + (
+                (leftOut && hireIncomeBand_(leftOut.income) === hireIncomeBand_(pool[hIdx].income) &&
+                 (Number(leftOut.edu) || 0) < (Number(pool[hIdx].edu) || 0) && pool[hIdx].eduLabel)
+                  ? ' (the ' + pool[hIdx].eduLabel + ' counted)' : ''),
           '', cycle
         ]);
         if (!S.careerSignals.businessDeltas[bizId2]) S.careerSignals.businessDeltas[bizId2] = { gained: 0, lost: 0 };

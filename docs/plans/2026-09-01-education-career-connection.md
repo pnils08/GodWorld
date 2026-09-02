@@ -57,7 +57,7 @@ pointers:
   1. Add `credentialRank_(v)`: `hs-dropout`/`none`/blank/child-stage → 0, `hs-diploma` → 1, `trade-cert`/`some-college` → 2, `associates` → 3, `bachelor(s)` → 4, `masters`/`graduate` → 5, `doctorate` → 6. Substring-tolerant like `eduRank_` (legacy singular tokens still exist in older LifeHistory-derived writes).
   2. Do NOT touch `eduRank_`.
 - **Verify:** `node scripts/employerSuccess.test.js` (new cases in Task 4) → all pass
-- **Status:** [ ] not started
+- **Status:** [x] DONE S410 (2026-09-01) — `employerSuccess.test.js` 43/43 (11 new: 1.0/1.0b ordinal, 1a–1c E2, 2a–2d E3)
 
 ### Task 2: E2 — credential as the second key of the beneficiary sort
 
@@ -67,7 +67,7 @@ pointers:
   2. Beneficiary sort becomes: `LastPromotionCycle` asc → `credentialRank_` **desc** → `Income` asc → `POPID`.
   3. Compute `decidedByCredential`: the runner-up exists, equal on `LastPromotionCycle`, and lower `credentialRank_`. Pass a reason suffix to the promotion text: `'Promoted at ' + b.name + (decidedByCredential ? ' — the ' + level + ' counted' : '')`.
 - **Verify:** unit cases 1a–1c (Task 4)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S410 (2026-09-01) — `employerSuccess.test.js` 43/43 (11 new: 1.0/1.0b ordinal, 1a–1c E2, 2a–2d E3)
 
 ### Task 3: E3 — credential as the second key of the same-field slot sort
 
@@ -77,7 +77,7 @@ pointers:
   2. `sameField.sort`: `Math.floor(income / 10000)` asc (poorest band first) → `edu` desc → `income` asc → `POPID`.
   3. Same `decidedByCredential` test against the first candidate left out of `slots` (equal band, lower rank); hire text `'Hired at ' + bizName + (decided ? ' — the ' + level + ' counted' : '')`.
 - **Verify:** unit cases 2a–2c (Task 4)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S410 (2026-09-01) — `employerSuccess.test.js` 43/43 (11 new: 1.0/1.0b ordinal, 1a–1c E2, 2a–2d E3)
 
 ### Task 4: Tests
 
@@ -87,7 +87,7 @@ pointers:
   2. 2a same $10k band, higher credential takes the slot; 2b poorer band wins across bands; 2c uncredentialed pool still fills.
   3. 3 legibility: the suffix appears only when the credential decided.
 - **Verify:** `node scripts/employerSuccess.test.js` → all pass; `node scripts/careerStage.test.js` unchanged
-- **Status:** [ ] not started
+- **Status:** [x] DONE S410 (2026-09-01) — `employerSuccess.test.js` 43/43 (11 new: 1.0/1.0b ordinal, 1a–1c E2, 2a–2d E3)
 
 ### Task 5: Truth docs + bench + live
 
@@ -109,4 +109,5 @@ None that block. Decisions made here (engine-sheet holds mechanism):
 
 ## Changelog
 
+- 2026-09-01 (engine-sheet, S410, later) — Tasks 1–4 coded same session: `credentialRank_` (educationCareerEngine.js), `promotionOrder_` / `hireSlotOrder_` / `credentialRankOf_` / `hireIncomeBand_` (runCareerEngine.js); E2 line reads `Promoted at X (the bachelors counted) after N years as a Role.` only when the credential broke the longest-waiting tie; E3 hire line likewise inside a $10k band. Bench @6 = HEAD (HELD four at base), C108 fire next.
 - 2026-09-01 (engine-sheet, S410) — Plan written on builder go ("your approach"). Connection loop opened after engine.143 isolation smoke on the bench (C106: 52 minors, 0 ENGINE-clock minors off their engine-year band; 0 errors).

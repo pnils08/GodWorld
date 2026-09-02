@@ -325,9 +325,9 @@ function computeCoverageMultiplier_(seedDomain, coverageState) {
 //
 // Score = domainWeight × severityMul × arcMul × coverageMul
 //
-// Clamp policy: if raw > 10, divide by 1.5 (per plan T2.4 step 1); if still
-// > 10, hard-cap at 10 and emit a console.warn so validation harness (T2.8)
-// can see when scoring saturates ceiling. Sub-zero scores clamp to 0
+// Clamp policy: if raw > 10, hard-cap at 10 and emit a console.warn so the
+// validation harness (T2.8) can see when scoring saturates ceiling. (The T2.4
+// divide-by-1.5 step was removed S409 — non-monotone, see the clamp site.) Sub-zero scores clamp to 0
 // (defensive — multiplicative composition can't go negative under current
 // constants but guard anyway).
 //
@@ -358,11 +358,19 @@ function computePriorityScore_(seed, auditPattern, storylineState, coverageState
   var raw = domainWeight * severityMul * arcMul * coverageMul;
   var clamped = raw;
   var clampLogged = false;
+  // S409 (chase §S-E A5): the T2.4 "divide by 1.5 if > 10" step was
+  // non-monotone — CIVIC×crisis 9×1.3 = 11.7 → 7.8 ranked BELOW plain CIVIC
+  // 9.0, HEALTH×crisis 13 → 8.67 below plain HEALTH 10. The crisis multiplier
+  // exists to boost; the divide turned it into a penalty for every top-tier
+  // domain. Hard cap only: order-preserving, ties at the ceiling. (C105 fired
+  // this six times on identical CIVIC MED crisis seeds — same raw, same clamp.)
+  // Nothing in the engine sorts on priorityScore today (applyStorySeeds sorts
+  // on the hand-set `priority`; the field rides through as transparency), so
+  // this corrects the number, not a live ranking.
   if (clamped > 10) {
-    clamped = clamped / 1.5;
+    clamped = 10;
     clampLogged = true;
   }
-  if (clamped > 10) clamped = 10;
   if (clamped < 0) clamped = 0;
 
   if (clampLogged && typeof console !== 'undefined' && console.warn) {
@@ -557,7 +565,7 @@ function _runPrioritySelfTests_() {
     { cyclesActive: 3, priorPeakSeverity: 'HIGH' },  // arc=1.6 (comeback amp)
     { ratings: [0, 0, -1], lastRating: -1 }           // crisis=1.3
   );
-  // raw = 10 * 1.5 * 1.6 * 1.3 = 31.2; /1.5 = 20.8; hard-cap 10
+  // raw = 10 * 1.5 * 1.6 * 1.3 = 31.2; hard-cap 10
   eq('compose: plan acceptance >= 8.0', planCase.priorityScore >= 8.0, true);
   eq('compose: components.domain', planCase.components.domain, 10);
   eq('compose: components.severity', planCase.components.severity, 1.5);
@@ -595,12 +603,23 @@ function _runPrioritySelfTests_() {
     { cyclesActive: 5, priorPeakSeverity: 'HIGH' },
     { ratings: [0, 0, -1], lastRating: -1 }
   );
-  // raw = 10 * 1.5 * 1.6 * 1.3 = 31.2 -> divide 1.5 = 20.8 -> cap 10
+  // raw = 10 * 1.5 * 1.6 * 1.3 = 31.2 -> cap 10
   eq('compose: extreme score caps at 10', bigCase.priorityScore, 10);
 
   // Case-insensitive domain
   var lowerDomain = computePriorityScore_({ domain: 'health' }, { severity: 'MED' }, null, null);
   eq('compose: lowercase domain normalized', lowerDomain.components.domain, 10);
+
+  // S409 A5 regression — the clamp must be order-preserving: a coverage
+  // crisis can never rank a seed below the same seed without the crisis.
+  var civicCrisis = computePriorityScore_({ domain: 'CIVIC' }, { severity: 'MED' }, null, { ratings: [-1, -1, -1], lastRating: -1 });
+  var civicPlain  = computePriorityScore_({ domain: 'CIVIC' }, { severity: 'MED' }, null, null);
+  var healthCrisis = computePriorityScore_({ domain: 'HEALTH' }, { severity: 'MED' }, null, { ratings: [-1, -1, -1], lastRating: -1 });
+  var healthPlain  = computePriorityScore_({ domain: 'HEALTH' }, { severity: 'MED' }, null, null);
+  eq('clamp: CIVIC MED crisis (raw 11.7) never below plain CIVIC (9)', civicCrisis.priorityScore >= civicPlain.priorityScore, true);
+  eq('clamp: HEALTH MED crisis (raw 13) never below plain HEALTH (10)', healthCrisis.priorityScore >= healthPlain.priorityScore, true);
+  eq('clamp: C105 shape — CIVIC MED crisis caps at 10 (was 7.8)', civicCrisis.priorityScore, 10);
+  eq('clamp: plain CIVIC untouched', civicPlain.priorityScore, 9);
 
   console.warn = origWarn;
 

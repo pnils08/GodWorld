@@ -13,7 +13,7 @@ const sandbox = {
   inWorldStamp_: (ctx) => 'Y3C4',
 };
 const src = (helperFile ? R(helperFile) + '\n' : '') + R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
-const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, TIER_BAR };')(...Object.values(sandbox));
+const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, TIER_BAR };')(...Object.values(sandbox));
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) { if (cond) { pass++; console.log('  ok   ' + name); } else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); } }
@@ -92,6 +92,15 @@ console.log('\n7. the citation event no longer decides Tier (grep-as-test):');
   check('processMediaUsage_ carries no bar comparison', !/newUsage >= [369]/.test(fn('processMediaUsage_')));
   check('the state pass runs before decay in the main sequence', a.indexOf('applyTierLadderState_(ctx, cycle)') < a.indexOf('decayMediaAttention_(ctx, cycle);'));
   check('decay recognises the old climb line as an earned rung (canon on record)', /Advanced from Tier \\d to Tier \(\\d\)/.test(fn('decayMediaAttention_')));
+  // functional: which log lines make a rung EARNED
+  const decayCtx = (logRows) => ({ summary: { cycleRef: 'Y3C4' }, ledger: { headers: H.slice(), rows: [row('POP-D', 'Quiet', 'Person', 3, 2)], dirty: false },
+    ss: { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => 2, getDataRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType'], ['', 'C90', 'Quiet Person', 'quoted']] }) }
+      : n === 'LifeHistory_Log' ? { getLastRow: () => logRows.length + 1, getDataRange: () => ({ getValues: () => [['Timestamp', 'POPID', 'Name', 'Type', 'Text', '', 'Cycle']].concat(logRows) }) } : null } });
+  const runDecay = (logRows) => { const c = decayCtx(logRows); E.decayMediaAttention_(c, 111); return c.ledger.rows[0][3]; };
+  check('intake stamp "Updated to Tier 3" on an Advancement row is AUTHORED — quiet row holds Tier 3', runDecay([['', 'POP-D', 'Quiet Person', 'Advancement', 'Updated to Tier 3. media usage', '', 100]]) === 3);
+  check('old climb "Advanced from Tier 4 to Tier 3" (Promotion) is EARNED — quiet row falls to 4', runDecay([['', 'POP-D', 'Quiet Person', 'Promotion', 'Advanced from Tier 4 to Tier 3', '', 100]]) === 4);
+  check('state-pass line (Media|tier-climb) is EARNED — quiet row falls to 4', runDecay([['C100', 'POP-D', 'Quiet Person', 'Media|tier-climb', 'Updated to Tier 3 — earned on 3 citations (was Tier 4)', '', 100]]) === 4);
+  check('no marker at all — held', runDecay([]) === 3);
   check('decay covers ENGINE + GAME; MEDIA and CIVIC held', /mode9 !== 'ENGINE' && mode9 !== 'GAME'\)\) continue/.test(fn('decayMediaAttention_')) && !/mode9 !== 'MEDIA'/.test(fn('decayMediaAttention_')));
 }
 

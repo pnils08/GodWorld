@@ -1055,7 +1055,15 @@ function decayMediaAttention_(ctx, cycle) {
       if (iLPop9 >= 0) {
         for (var lr = 1; lr < lv.length; lr++) {
           var lTxt = String(lv[lr][4] || '');
-          var m9 = lTxt.match(/Updated to Tier (\d)/) || lTxt.match(/Advanced from Tier \d to Tier (\d)/); // engine.150: the old climb's line counts — the canon is on record (builder, 2026-09-02)
+          // engine.150 (S412, builder 2026-09-02): an EARNED rung is one climbed on
+          // usage — the old citation climb's 'Promotion' line ("Advanced from Tier
+          // X to Tier Y") or the state pass's 'Media|tier-climb' line. Advancement
+          // intake stamps ("Updated to Tier N" on an 'Advancement' row, written on
+          // every intake whether or not the Tier moved) are authored, not earned —
+          // they were the ONLY marker read since S325, so decay had it backwards.
+          var lType9 = String(lv[lr][3] || '');
+          if (!/^Promotion$|tier-climb/.test(lType9)) continue;
+          var m9 = lTxt.match(/Updated to Tier (\d)/) || lTxt.match(/Advanced from Tier \d to Tier (\d)/);
           if (!m9) continue;
           var lp9 = String(lv[lr][iLPop9] || '').trim().toUpperCase();
           if (!lp9) continue;

@@ -628,6 +628,12 @@ function processAdvancementRows_(ctx, now, cycle) {
     }
 
     if (existingRow >= 0) {
+      // engine.150 (S412): an intake row never LOWERS an existing citizen's Tier.
+      // A blank intake Tier defaulted to 3 and was stamped over the row — on the
+      // bench that took Vinnie Keane (Tier 1) to Tier 3 at C106 on a packet
+      // mention. Tier is earned on the ladder; intake can only confirm or lift.
+      var tierBefore = lTier >= 0 ? (Number(ledgerRows[existingRow][lTier]) || 4) : 4;
+      tier = intakeTierForExisting_(tierBefore, iTier >= 0 ? row[iTier] : '');
       if (lTier >= 0) ledgerRows[existingRow][lTier] = tier;
       var roleChanged = false;
       if (lRoleType >= 0 && roleType && String(ledgerRows[existingRow][lRoleType]).trim() !== roleType) {
@@ -665,7 +671,7 @@ function processAdvancementRows_(ctx, now, cycle) {
       var popId = lPopId >= 0 ? ledgerRows[existingRow][lPopId] : '';
       if (logSheet) {
         logSheet.appendRow([now, popId, (first + ' ' + last).trim(), 'Advancement',
-          'Updated to Tier ' + tier + (roleChanged ? '; RoleType -> ' + roleType : '') + '. ' + notes, '', cycle]);
+          (tier !== tierBefore ? 'Updated to Tier ' + tier : 'Intake at Tier ' + tier) + (roleChanged ? '; RoleType -> ' + roleType : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
       }
     } else {
       maxPop++;
@@ -892,6 +898,17 @@ var TIER_BAR = { 1: 9, 2: 6, 3: 3 };
 // has; it just cannot climb on it. Promotions write the marker decay reads.
 // Ambiguous names (two ledger rows, one key) are skipped, never guessed.
 // (A CIVIC ladder on approval rating was floated and left for its own cut.)
+
+// Intake vs an existing row: blank keeps the row's Tier; a stated Tier can only
+// lift (lower number), never drop. Pure.
+function intakeTierForExisting_(existingTier, intakeRaw) {
+  var cur = Math.min(Math.max(Number(existingTier) || 4, 1), 4);
+  var raw = String(intakeRaw == null ? '' : intakeRaw).trim();
+  if (!raw) return cur;
+  var want = Number(raw);
+  if (!(want >= 1 && want <= 4)) return cur;
+  return Math.min(cur, want);
+}
 
 function tierForEarnedUsage_(earned) {
   var n = Number(earned) || 0;

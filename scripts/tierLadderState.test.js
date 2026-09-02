@@ -13,7 +13,7 @@ const sandbox = {
   inWorldStamp_: (ctx) => 'Y3C4',
 };
 const src = (helperFile ? R(helperFile) + '\n' : '') + R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
-const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, TIER_BAR };')(...Object.values(sandbox));
+const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, TIER_BAR };')(...Object.values(sandbox));
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) { if (cond) { pass++; console.log('  ok   ' + name); } else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); } }
@@ -74,7 +74,18 @@ console.log('\n5. citations on record — emergence types only, normalized names
   check('the read is cached on ctx for the cycle', c._earnedCitations150 === cit);
 }
 
-console.log('\n6. the citation event no longer decides Tier (grep-as-test):');
+console.log('\n6. intake never lowers an existing citizen (pure):');
+{
+  const f = E.intakeTierForExisting_;
+  check('blank intake Tier keeps the row (1 stays 1, 4 stays 4)', f(1, '') === 1 && f(4, '') === 4 && f(1, null) === 1);
+  check('a stated lower rank never drops the row (1 vs 3 → 1)', f(1, 3) === 1 && f(2, '4') === 2);
+  check('a stated higher rank lifts (4 vs 2 → 2)', f(4, 2) === 2 && f(3, '1') === 1);
+  check('garbage keeps the row', f(2, 'x') === 2 && f(2, 9) === 2 && f('', '') === 4);
+  const a = R('phase05-citizens/processAdvancementIntake.js');
+  check('the existing-row branch goes through the guard and only logs the marker on a real move', /tier = intakeTierForExisting_\(tierBefore/.test(a) && /tier !== tierBefore \? 'Updated to Tier '/.test(a));
+}
+
+console.log('\n7. the citation event no longer decides Tier (grep-as-test):');
 {
   const a = R('phase05-citizens/processAdvancementIntake.js');
   const fn = (name) => { const i = a.indexOf('function ' + name); const j = a.indexOf('\nfunction ', i + 1); return a.slice(i, j < 0 ? undefined : j); };

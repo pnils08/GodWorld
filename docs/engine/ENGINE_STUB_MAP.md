@@ -1610,6 +1610,8 @@
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
 
+- **intakeTierForExisting_(existingTier, intakeRaw)**
+
 - **tierForEarnedUsage_(earned)**
 
 - **earnedCitationsByKey_(ctx)**
@@ -3693,4 +3695,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1253
+**Functions mapped:** 1254

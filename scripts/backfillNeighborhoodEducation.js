@@ -34,9 +34,15 @@
  */
 
 require('/root/GodWorld/lib/env');
+// --sheet-id=<id> (S409, education loop Task 5 bench step): retarget AFTER lib/env
+// loads — DEPLOY.md trap 1: a shell-prefixed GODWORLD_SHEET_ID is overridden by
+// the env file, so the only safe redirect is set here and printed before any write.
+const sheetIdArg = process.argv.find(a => a.startsWith('--sheet-id='));
+if (sheetIdArg) process.env.GODWORLD_SHEET_ID = sheetIdArg.split('=')[1];
 const { getRawSheetData, updateRowFields } = require('/root/GodWorld/lib/sheets.js');
 
 const APPLY = process.argv.includes('--apply');
+console.log('TARGET SHEET: ' + process.env.GODWORLD_SHEET_ID + (sheetIdArg ? '  (from --sheet-id)' : '  (env default = LIVE)'));
 
 // Income → prosperity-calibrated education band. Floored well above crisis gates.
 // Variation tracks the real Neighborhood_Map MedianIncome tiers; unknown income →

@@ -298,6 +298,28 @@ Seven items, seven commits, each closed — none deferred. Node-side items are l
 
 ---
 
+## Proving record — wave 1: engine.139 + G-PF33 + engine.140 + casino + S408 headers + S-E (S409, 2026-09-01)
+
+**Bench: SANDBOX 0831 @2, code = live @12 pull + the pinned `2902f969` overlay (38 changed files + `casinoLedgerEngine.js` new), the four HELD engine.131 T7 files kept at live base.** Delta classified before staging: 29 files header-comment-only (S408 `@cycle-status`), 9 with code, 4 HELD (0 commits since S405, real code deltas).
+
+| | C108 | C109 |
+|---|---|---|
+| result | ok:true, 165s, 129 phases | ok:true, 177s, 129 phases |
+| Engine_Errors | 0 | 0 |
+| `World_Population.totalPopulation` (A7) | 391427.0135 → **392598** | **393772** |
+| `Riley_Digest` rows (G-PF31 dead-writer delete) | 105 → 106 | 107 |
+| `Initiative_Tracker` clock hold (G-PF33) | `[ENGINE-CLOCK n=1 from=C108]` on 001/003/005/007, `NextActionCycle` 105/106 → 109; 002/006 (passed+signed, skipped at `:201`) untouched | marker cleared on the four moved rows (re-arm rule) |
+| `PREV_CYCLE_STATE_JSON.initiativePhases` (engine.139 carrier) | present, 6 rows | present, reflects the C109 edits |
+| Mayor approval | 39 → **26** (−13) | 26 → **21** (−5; predicted 20) |
+
+**C108's −13 attributed without the execution log:** the approval engine reads the tracker sheet before the hold's Phase-10 write lands, so all six rows read `silence` (owned ladder −6−3−2−1 = −12) + civic media −1 (last CIVIC rating C103 = −2) + decay 0 (below 50). One-cycle lag on the hold, by construction.
+
+**C109 — the `advanced` path, proven by hand-staging (per the §S-A proving note):** four phases edited between fires (001 disbursement-active→operational, 003 visioning→visioning-complete, 005 construction-active→operational, 007 pilot-active→operational). Prediction: advanced owned +2+1+1+0 = +4, two unheld silence rows −6−3 = −9, media −1 → 26 → 20. Counterfactual with no advancement: sitting −4, silence −9, media −1 → 12. Observed **21** — the transition path paid; the 1-point gap fits the media term rolling out of its window (C103 rating now 6 cycles back). The exact reason string is log-only — asked of the builder after the next live cycle.
+
+**Bench-only state after the wave — never replay to live:** the four phase edits, approvals/office state (Santana demoted C110, Ariana Lee seated), carry-forward, rivalries.
+
+**Live: PROD @13 (2026-09-01)** — same stage with the prod `.clasp.json` written last, sandbox script + sheet IDs grep-absent, pull-back byte-verified 172/172, 0 test files, HELD four confirmed at base. Then wave 2 (engine.143) followed as **PROD @14** after its own two bench cycles (education plan §Changelog).
+
 ## Proving record — engine.137 + engine.138 G-PF18 (S405, 2026-08-31)
 
 Kept here rather than in `DEPLOY.md`: that file is protocol + pointers, and per the builder rule the per-wave proving narrative lives in the wave's plan.
@@ -324,6 +346,7 @@ Kept here rather than in `DEPLOY.md`: that file is protocol + pointers, and per 
 
 ## Changelog
 
+- 2026-09-01 (S409) — Wave 1 bench-proven on SANDBOX 0831 @2 (C108, C109) and LIVE at PROD @13; wave 2 (engine.143) followed at @14. Proving record above. Chase S-A…S-E fully landed; engine.138's only open item is the S-B wake acceptance (Tue 09-02 18:15).
 - 2026-09-01 (S409) — S-E DONE: all seven instrumentation items closed in seven commits (`a94e4dc8`…`535ff9cf`); three were wording/measurement defects (G-PF14 test coin-flip, A6 by-design classes, A7 log), four real fixes (G-PF31 regex, A5 non-monotone clamp, G-PF30 phase list, G-PF22 resolver). Chase sessions S-A…S-E all done; what remains on engine.138 is proving: the S-B wake acceptance (Tue 09-02 18:15) and the bench wave.
 - 2026-08-31 (S405) — engine.137 + G-PF18 bench-proven on SANDBOX 0831 (C106, C107) and deployed live at PROD @12. Proving record added above. Both previously-unreachable mechanisms fire and self-limit; recovery went from overloadScore 1/"none" on live C105 to 8/"moderate" then 4/"light" on the bench.
 - 2026-08-31 (S405) — Constraint 1 updated: deploy UNBLOCKED, SANDBOX 0831 stood up post-C105 (relayed by research-build, verified independently). `CARRY_FORWARD_COLD_START_OK` confirmed unnecessary by a read-only check of the bench's `Carry_Forward_Store` — both blobs present, C105-stamped, parseable.

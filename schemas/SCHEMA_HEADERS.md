@@ -1,7 +1,7 @@
 ---
 title: GodWorld Schema Headers
 created: 2026-01-21
-updated: 2026-08-17
+updated: 2026-09-01
 type: reference
 tags: [schema, infrastructure, auto-generated, active]
 sources:
@@ -112,6 +112,33 @@ pointers:
 | G | Annual_Revenue |
 | H | Growth_Rate |
 | I | Key_Personnel |
+
+---
+
+## Casino_Ledger
+
+- **Rows:** 2 (header + `HOUSE` float row; citizen slips append-only) — armed 2026-09-01 (S410, builder sign-off)
+- **Columns:** 15
+
+| Col | Header |
+|-----|--------|
+| A | WagerId |
+| B | CyclePlaced |
+| C | CycleSettled |
+| D | POPID |
+| E | HouseholdId |
+| F | MarketFamily |
+| G | MarketId |
+| H | EventId |
+| I | Side |
+| J | Stake |
+| K | Odds |
+| L | Payout |
+| M | Status |
+| N | HouseFloatAfter |
+| O | Seed |
+
+`WagerId=HOUSE` is the float row (`HouseFloatAfter` starts at 250000). Writer: `phase05-citizens/casinoLedgerEngine.js` via Phase-10 intents. Missing tab = no-op.
 
 ---
 

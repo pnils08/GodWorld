@@ -37,7 +37,7 @@ These are read/written during every cycle run.
 | **LifeHistory_Log** | 3,223 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Citizen life events. 7 columns. |
 | **Generic_Citizens** | 277 | ENGINE, SCRIPT | ENGINE | Emergence pipeline — Tier 4 citizen generation |
 | **Household_Ledger** | 529 | ENGINE | ENGINE | Household groupings, rent, ownership |
-| **Casino_Ledger** | (unarmed) | ENGINE | ENGINE | 4b wager tab — missing = no-op. Armed on bench by engine-sheet. |
+| **Casino_Ledger** | 2 + slips | ENGINE | ENGINE | 4b wager tab — ARMED on live 2026-09-01 (S410, builder sign-off): 15 headers + `HOUSE` float row 250000. Bench C106 proof: 9 open sports slips, 0 errors. |
 | **Family_Relationships** | 2 | ENGINE | ENGINE | Parent-child links (mostly in SL ParentIds/ChildrenIds) |
 | **Relationship_Bonds** | 211 | ENGINE | ENGINE | Active alliance/rivalry/mentorship bonds |
 | **Relationship_Bond_Ledger** | 2,424 | ENGINE | ENGINE | Full bond history |

@@ -100,6 +100,26 @@ pointers:
 
 ---
 
+---
+
+## Backlog — builder direction 2026-09-02 (S410 close)
+
+Recorded as said, with the data point under each. None of these is started; each is its own loop after engine.144 has lived a few cycles.
+
+**What the system is today (verified S410):**
+- There are no school entities. Quality is one number per neighborhood, `Neighborhood_Demographics.SchoolQualityIndex` (prosperity floor ≥7 since 2026-09-01), stamped onto each minor's `SchoolQuality` every cycle by `updateMinorSchoolQuality_`. `OAKLAND_SCHOOLS` are generic strings; `BIZ-00016` is the district as an employer.
+- "Which degree" is a band, not a choice. At 18 `settleAdulthood_` scores HH income (≥140k +2 / ≥60k +1) + SchoolQuality (≥8 +2 / ≥6 +1) + best-parent `eduRank_` + heritage (+1/+2) + rng×1.5 → `rich` (bachelors) / `solid` (some-college) / `rough` (hs-diploma, 15% dropout). Later, `[Graduation]` (22–28, once, ≈0.5–1%/cycle) steps the level: hs-diploma → associates (SchoolQuality <8) or bachelors (≥8); associates/some-college/trade-cert → bachelors; bachelors → masters. No field of study exists anywhere on the ledger.
+- Career choice at 18 is the SAME score: the band picks a starting role from a six-role list (`ADULT_START_BANDS`: rich = Junior Accountant / Paralegal / Biotech Lab Assistant…, solid = Apprentice Electrician / Nurse Aide / Bank Teller…, rough = Line Cook / Server / Barista…). After that E3 hires by `SkillTags` ∩ business sector and E2 promotes by employer growth — neither reads the degree except as engine.144's tie-break.
+- Minors draw adult texture. `runYouthEngine_` adds youth events (ages 5–22, 15–25%/cycle by school level) ON TOP of the adult decks; the daily/micro/personal texture writers do not read age. Live evidence: POP-00976 (11) "swapped stories with a neighbor about the cathedral…", "finally fixed the thing that had been broken for months"; POP-00743 (12) "silently judged the parking jobs", "didn't recognize themselves in an old photograph". `Youth_Events` tab is dead by ruling; youth lines go to LifeHistory.
+
+**Follow-on loops (order = builder's list):**
+1. **Degree field.** A field-of-study concept on the credential (one token, e.g. carried in `SkillTags` at settlement/graduation) so the degree can *aim* — E3's same-field rule would then read it directly, and the graduation step could follow the citizen's field instead of only SchoolQuality. Open design: where the field comes from (household sector, hood business mix, youth-event history).
+2. **Start-role choice.** Replace the band's flat six-role draw with a causal pick: parent's sector / hood's Business_Ledger sectors / the citizen's own youth events (youth sports → coaching/PT, arts → …). Same score, a reasoned role.
+3. **Youth mode.** Not a new `ClockMode` — ClockMode says who drives the row (ENGINE/GAME/MEDIA/CIVIC). A derived life-stage gate (`age < 18` from BirthYear at the writer) so minors draw ONLY from a youth texture pool and `runYouthEngine_` becomes their sole texture writer; adult decks skip them. First task is a caller-graph of every LifeHistory writer that lacks an age check (S410 found only `generateCitizensEvents.js` gating; the deck-based writers don't).
+4. **Youth events control.** Once (3) exists, youth event types (academic / sports / arts / coming-of-age / civic) become the stage's whole texture, with the same calendar and hood modifiers `runYouthEngine_` already has. `Youth_Events` stays dead.
+
+Filed by engine-sheet at the builder's request; research-build may pick up the design of (1)/(2), engine-sheet holds (3)/(4) mechanism.
+
 ## Open questions
 
 None that block. Decisions made here (engine-sheet holds mechanism):
@@ -108,6 +128,8 @@ None that block. Decisions made here (engine-sheet holds mechanism):
 - Layoff shield deferred to its own loop.
 
 ## Changelog
+
+- 2026-09-02 (engine-sheet, S410 close) — §Backlog added on builder direction: degree field, start-role choice, youth mode (life-stage gate, not a ClockMode), youth events control. Row engine.144 kept in-progress so the plan stays out of the archive sweep while the backlog is live.
 
 - 2026-09-01 (engine-sheet, S410, 23:30) — **LIVE PROD @16.** Bench @6 C108 clean; no `counted)` line yet on the bench (the tie the credential breaks is real but rare — E2 fires ≈1/10 cycles city-wide and E3 needs two same-band candidates in one field). Empirical proof accrues on live; watch `LifeHistory_Log` EventText for `counted)`.
 

@@ -854,6 +854,16 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S411 Archive Pass (2026-09-02, research-build) — post-S410 closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.*.
+
+- **engine.140** [engine-sheet] — S-B storyline return path — Storyline_Ledger read into desk_signal + packets; Saturday write bug fixed; Phase-8 ager off-path. LIVE PROD @13; smoke = S410 bench C106–C108 on the live-synced sheet, 0 errors. Detail: chase plan §S-B **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-31-c105-chase-sessions]] §Session S-B
+- **engine.145** [engine-sheet] — SkillTags gap — column holds 15 catalog categories, matcher reads 12; `Trades`/`The Vulnerable`/`2041-Specific` (104 adults) were unhireable. One alias table (`skillTagField_`) for E3 / settlement / hood pay; 53 blank rows filled from role. LIVE PROD @20 S411 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-01-education-career-connection]] §engine.145
+- **engine.146** [engine-sheet] — SkillTags two truths — `current` then `trained` token per the S336 design (never written before): `setCurrentField_`/`roleFieldOf_` at both role-change intake sites; 24 disagreeing live rows trued (11 two-token, 13 guess→trained). 107/107, bench C110, LIVE PROD @21 S411 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-01-education-career-connection]] §engine.146
+
+This pass: 3 rows — engine.140 + engine.145 + engine.146. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S410 Archive Pass (2026-09-02, research-build) — post-S409 closures sweep
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.*.

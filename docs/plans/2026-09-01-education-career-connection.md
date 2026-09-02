@@ -3,7 +3,7 @@ title: Education → Career Connection Plan (engine.144)
 created: 2026-09-01
 updated: 2026-09-02
 type: plan
-tags: [engine, citizens, education, career, active]
+tags: [engine, citizens, education, career, youth, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md engine.144
   - docs/archive/plans/2026-08-31-education-loop.md §After this loop — the connection is a separate file, after isolation proof
@@ -175,7 +175,8 @@ None that block. Decisions made here (engine-sheet holds mechanism):
 
 ## Changelog
 
-- 2026-09-02 (engine-sheet, S411) — **Loop 4 youth texture coded + unit-proven (95/95):** vocabulary rebuilt in `runYouthEngine.js` (the S357 helpers had been missing — every youth line read "youth activity (participated)"), texture pass over every minor 5–17 at the adults' rate, calendar year instead of the hardcoded 2041, GCE child/teen pools relocated. Backlog 7 (two year formulas) filed. Bench + live next.
+- 2026-09-02 (engine-sheet, S411, later) — **Loop 4 LIVE PROD @19.** Bench @9 C108 (Y3C4, January): ok:true, 0 `Engine_Errors`, `cycleCount` 107→108. Cohort 36; texture 24 (predicted 23) — Team 8 / Education 6 / Cultural 5 / Community 9 / Civic 4 / Graduation 1; event layer 9; per-citizen adult-source 0 (one household shared moment, by design); "(outcome)" suffixes 0; under-five youth lines 0. Sample: Mateo (11, Rockridge) "practiced free throws against the garage until the neighbor came out to rebound"; Riya (10, Downtown) "got their name on the wall at NeuroCity Youth Lab"; Mei (14, Jack London) "stayed after class to argue a grade and left with a better question instead". One text fix after the fire (a graduation-stage line is calendar-bound and fired in January → non-seasonal sentence; bench @10, text-only). Live: pull + two-file overlay, diff vs bench stage empty, PROD @19, pull-back byte-identical, HELD four at base.
+- 2026-09-02 (engine-sheet, S411) — **Loop 4 youth texture coded + unit-proven (95/95):** vocabulary rebuilt in `runYouthEngine.js` (the S357 helpers had been missing — every youth line read "youth activity (participated)"), texture pass over every minor 5–17 at the adults' rate, calendar year instead of the hardcoded 2041, GCE child/teen pools relocated. Backlog 7 (two year formulas) filed. Bench + live: see the later entry.
 
 - 2026-09-02 (engine-sheet, S411, later) — **Loop 3 LIVE PROD @18.** Bench @8 C107: ok:true, 0 `Engine_Errors`, `cycleCount` 106→107. Minor texture in `LifeHistory_Log`, 43 active minors (41 ENGINE / 2 GAME): C106 (before) 83 rows, 72 of them per-citizen adult-source lines; C107 (gate) 4 rows, all youth-engine `[Education]`, 0 adult-source. Live: pull + two-file overlay, diff vs bench stage empty, pull-back byte-identical, HELD four at base. Minors' lives are thin until loop 4 gives the youth engine the whole texture — that is the next loop, not a regression.
 - 2026-09-02 (engine-sheet, S411) — **Loop 3 youth mode coded + unit-proven (19/19):** caller-graph of every LifeHistory writer + the live log settled it on `generateCitizensEvents.js` (all `source:*` lines) and the `[Home]` member stamp; life-stage gate at both (BirthYear at the writer, not a ClockMode); household shared moment kept for minors. Bench + live: see the later entry.

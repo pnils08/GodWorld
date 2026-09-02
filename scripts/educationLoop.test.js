@@ -25,9 +25,9 @@ const E = new Function(CAL + R('phase05-citizens/educationCareerEngine.js') + '\
   'processEducationCareer_, deriveEducationLevels_, deriveMinorEducationStage_, schoolStageForAge_,' +
   'canonicalEducationWrite_, eduRank_, updateCareerProgression_, EDUCATION_LEVELS,' +
   'settleField_, settleYouthCounts_, settleFieldClause_, settleAdulthood_, buildSettleBizPool_,' +
-  'SETTLE_FIELDS, SETTLE_ROLES_BY_FIELD, SETTLE_FIELD_ECON_KEYS, SETTLE_ECON_KEYS, skillTagField_, tagsMatchCategory_, setCurrentField_, roleFieldOf_ };')();
+  'SETTLE_FIELDS, SETTLE_ROLES_BY_FIELD, SETTLE_FIELD_ECON_KEYS, SETTLE_ECON_KEYS, skillTagField_, tagsMatchCategory_, setCurrentField_, roleFieldOf_, credentialRank_ };')();
 const G = new Function(CAL + R('phase04-events/generationalEventsEngine.js') + '\nreturn {' +
-  'checkGraduation_, graduationCredential_, GRADUATION_LADDER_ };')();
+  'checkGraduation_, graduationCredential_, GRADUATION_LADDER_, graduationTradeTrack_, GRADUATION_TRADE_FIELDS_ };')();
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) {
@@ -126,6 +126,13 @@ console.log('\n4. graduation ladder (pure) — never lowers, plural only:');
   check('bachelors -> masters (legacy bachelor too)', gc('bachelors') === 'masters' && gc('bachelor') === 'masters');
   check('masters / doctorate -> null (cell stays)', gc('masters') === null && gc('doctorate') === null);
   check('unknown token -> null (never overwrite what we cannot read)', gc('weird-thing') === null);
+  // engine.149 (S412): the graduation follows the field — trade-cert on the trades track, whatever the school quality
+  check('hs-diploma + current field Construction & Baylight -> trade-cert (SQ 9 too)', gc('hs-diploma', 9, 'Construction & Baylight') === 'trade-cert' && gc('hs-diploma', 5, 'Construction & Baylight|Healthcare') === 'trade-cert');
+  check('hs-diploma + Port & Labor / Transit & Infrastructure / legacy Trades -> trade-cert', gc('hs-diploma', 8, 'Port & Labor') === 'trade-cert' && gc('hs-diploma', 8, 'Transit & Infrastructure') === 'trade-cert' && gc('hs-diploma', 8, 'Trades') === 'trade-cert');
+  check('the TRAINED field (token 2) does not aim it — only the current one', gc('hs-diploma', 8, 'Healthcare|Trades') === 'bachelors');
+  check('non-trade field / athlete / blank tags -> the school-quality draw as before', gc('hs-diploma', 8, 'Healthcare') === 'bachelors' && gc('hs-diploma', 7, 'athlete') === 'associates' && gc('hs-diploma', 7, '') === 'associates');
+  check('a trade-cert holder still climbs to bachelors on the ladder', gc('trade-cert', 5, 'Trades') === 'bachelors');
+  check('trade-cert ranks as a peer of associates for E2/E3 (builder ruling S412)', E.credentialRank_('trade-cert') === 3 && E.credentialRank_('associates') === 3 && E.credentialRank_('some-college') === 2 && E.credentialRank_('bachelors') === 4 && E.credentialRank_('hs-diploma') === 1);
   const all = Object.values(G.GRADUATION_LADDER_).filter(Boolean).concat(['associates', 'bachelors']);
   check('ladder emits no singular/catch-all', !all.includes('bachelor') && !all.includes('graduate'));
   // never lowers: rank after >= rank before for every input

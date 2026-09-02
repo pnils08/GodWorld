@@ -701,7 +701,9 @@
 
 - **getSeasonalLimits_(cal)**
 
-- **graduationCredential_(current, schoolQuality)**
+- **graduationTradeTrack_(skillTags)**
+
+- **graduationCredential_(current, schoolQuality, skillTags)**
 
 - **checkGraduation_(ctx, popId, age, lifeHistory, tier, cal)**
 
@@ -3682,4 +3684,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1249
+**Functions mapped:** 1250

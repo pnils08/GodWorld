@@ -1080,8 +1080,8 @@ function credentialRank_(v) {
   if (v.indexOf('doctorate') >= 0) return 6;
   if (v.indexOf('masters') >= 0 || v === 'graduate') return 5;
   if (v.indexOf('bachelor') >= 0) return 4;
-  if (v.indexOf('associate') >= 0) return 3;
-  if (v.indexOf('trade-cert') >= 0 || v.indexOf('some-college') >= 0) return 2;
+  if (v.indexOf('associate') >= 0 || v.indexOf('trade-cert') >= 0) return 3; // engine.149 (S412, builder ruling): a trade certificate is a peer of the associate's
+  if (v.indexOf('some-college') >= 0) return 2;
   if (v.indexOf('hs-diploma') >= 0) return 1;
   return 0; // hs-dropout, none, child-stage tokens
 }

@@ -171,7 +171,7 @@ const bl = rows => [BLH].concat(rows);
 {
   const CR = sandbox.credentialRank_;
   assert('1.0 credentialRank_ ordinal over the live vocab',
-    CR('') === 0 && CR('hs-dropout') === 0 && CR('High School') === 0 && CR('hs-diploma') === 1 && CR('trade-cert') === 2 &&
+    CR('') === 0 && CR('hs-dropout') === 0 && CR('High School') === 0 && CR('hs-diploma') === 1 && CR('trade-cert') === 3 /* engine.149: peer of associates (builder ruling S412) */ &&
     CR('some-college') === 2 && CR('associates') === 3 && CR('bachelors') === 4 && CR('bachelor') === 4 && CR('masters') === 5 &&
     CR('graduate') === 5 && CR('doctorate') === 6);
   assert('1.0b eduRank_ untouched (0-2)', sandbox.eduRank_('bachelors') === 1 && sandbox.eduRank_('doctorate') === 2 && sandbox.eduRank_('associates') === 0);

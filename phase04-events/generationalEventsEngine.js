@@ -212,6 +212,7 @@ function runGenerationalEngine_(ctx) {
   var iHouseholdId = idx("HouseholdId"); // engine.57 P4 — household drives fates
   var iEducationLevel = idx("EducationLevel"); // education loop (S409) — [Graduation] writes the credential
   var iSchoolQuality = idx("SchoolQuality");   // education loop (S409) — four-year vs associate's
+  var iSkillTags = idx("SkillTags");           // engine.149 (S412) — the graduation follows the citizen's current field
   var iGenderCol = idx("Gender"); // engine.57 P6 — births need parent sex + child sex
 
   // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
@@ -451,7 +452,7 @@ function runGenerationalEngine_(ctx) {
         // Education loop (S409): the event WRITES the credential — one writer,
         // one cell. applyMilestone_ appends the single LifeHistory line.
         if (iEducationLevel >= 0) {
-          var earned = graduationCredential_(row[iEducationLevel], iSchoolQuality >= 0 ? row[iSchoolQuality] : '');
+          var earned = graduationCredential_(row[iEducationLevel], iSchoolQuality >= 0 ? row[iSchoolQuality] : '', iSkillTags >= 0 ? row[iSkillTags] : '');
           if (earned) { row[iEducationLevel] = earned; gradResult.credential = earned; }
         }
         ctx.summary.generationalEvents.push(applyMilestone_(
@@ -883,9 +884,20 @@ var GRADUATION_LADDER_ = {
   'bachelor': 'masters', 'bachelors': 'masters',
   'graduate': null, 'masters': null, 'doctorate': null
 };
-function graduationCredential_(current, schoolQuality) {
+// engine.149 (S412, builder ruling: trade-cert = associates): a citizen whose
+// CURRENT field (SkillTags token 1 — engine.146 two truths) is a trade takes the
+// trade certificate at the hs-diploma step instead of the school-quality draw.
+// 'Trades' is the legacy catalog label (engine.145 aliases it to Construction &
+// Baylight for hiring); the three field names are the SETTLE_FIELDS spellings.
+var GRADUATION_TRADE_FIELDS_ = { 'Trades': 1, 'Construction & Baylight': 1, 'Port & Labor': 1, 'Transit & Infrastructure': 1 };
+function graduationTradeTrack_(skillTags) {
+  var first = String(skillTags || '').split('|')[0].trim();
+  return !!(first && GRADUATION_TRADE_FIELDS_[first]);
+}
+function graduationCredential_(current, schoolQuality, skillTags) {
   var cur = String(current || '').trim();
   if (cur === 'hs-diploma') {
+    if (graduationTradeTrack_(skillTags)) return 'trade-cert';   // engine.149: the field aims the credential
     // The four-year track needs the school behind it; otherwise the associate's.
     return (Number(schoolQuality) >= 8) ? 'bachelors' : 'associates';
   }

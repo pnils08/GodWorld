@@ -137,7 +137,7 @@ Recorded as said, with the data point under each. None of these is started; each
 4. **Youth events control.** Once (3) exists, youth event types (academic / sports / arts / coming-of-age / civic) become the stage's whole texture, with the same calendar and hood modifiers `runYouthEngine_` already has. `Youth_Events` stays dead.
 
 5. **Graduation follows the field** (deferred from loops 1+2, S411). `graduationCredential_` picks associates vs bachelors by SchoolQuality only; a trades/construction/port/transit field could take `trade-cert` instead. Blocker: `credentialRank_` ranks `trade-cert` (2) below `associates` (3), so aiming the degree would cost the citizen the E2/E3 tie-break — re-rate first, then aim.
-6. **E3 cannot hire 63 `Trades`-tagged citizens** (S411 finding). `sectorCategory_` never returns `Trades`, so no business category ever matches the tag; the same holds for `The Vulnerable` (27) and `2041-Specific` (22). Settlement no longer mints `Trades` (electricians settle under Construction & Baylight); the live rows need either a category or a re-tag. Own row when picked up.
+6. **E3 cannot hire 63 `Trades`-tagged citizens** (S411 finding). `sectorCategory_` never returns `Trades`, so no business category ever matches the tag; the same holds for `The Vulnerable` (27) and `2041-Specific` (22). The field path no longer mints `Trades` (electricians settle under Construction & Baylight); the no-source legacy fallback (`settleSkillTag_`) still can. The live rows need either a category or a re-tag. Own row when picked up.
 
 Filed by engine-sheet at the builder's request; (1)/(2) SHIPPED S411 as one mechanism (§Loops 1+2 above); engine-sheet holds (3)/(4) mechanism.
 

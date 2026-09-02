@@ -240,11 +240,17 @@ Every heritage counter but `lines` is zero, and the `founded` parenthetical is e
 **A5. `priorityEngine clamp: raw=11.70 final=7.80 domain=CIVIC severity=MED` ×6, identical.**
 Six identical clamps in the same second. A clamp firing once is a guardrail; the same value clamped six times is a signal that CIVIC MED items are systematically scoring above the ceiling. Either the ceiling is too low for civic or the raw scorer is over-weighting. Worth one look at whether the clamp is hiding a ranking problem.
 
+> **RESOLVED S409 (chase §S-E, `b128ec05`) — it was hiding one, and a worse one than the noise.** 11.70 = CIVIC 9 × coverage-crisis 1.3 on six identical seeds. The T2.4 divide-by-1.5 was non-monotone: CIVIC-in-crisis 7.8 ranked *below* plain CIVIC 9.0, HEALTH-in-crisis 13→8.67 below plain HEALTH 10 — the crisis boost was a penalty for every top-tier domain. Now a hard cap at 10 (order-preserving). Inert on the live ranking today — nothing sorts on `priorityScore` — so this corrects the number, not a published order. Expected on the bench: the six lines read `final=10.00`.
+
 **A6. `buildCommuteFlows_ v1.0: 705/915 commuters resolved … 210 unresolved`.**
 23% of commuters do not resolve to an origin-destination pair. Not new and not breaking, but it is a fifth of the commute model running blind, and commute feeds transit + city dynamics.
 
+> **RESOLVED S409 (chase §S-E, `ffca2df6`) — not blind; two by-design classes the log could not name.** Recomputed against the live Business_Ledger with the engine's own skip rules: 210 = **143** employed at `City-wide` (Oakland City Schools and the like — no hood by design, already excluded on purpose) + **67** on the `UNTRACKED` sentinel (S357 off-ledger employer, honoured by the career and wealth engines but unknown to the commute engine, which filed it as a dangling BIZ-ID). Dangling IDs: **0**. Businesses without a hood: **0**. The engine now counts `offLedger` as its own class and the v1.1 line prints the breakdown, so the only numbers that can mean "blind" are the last two.
+
 **A7. `applyMigrationDrift_: totalPopulation=387975.01346898626 worldMig=1107 (fallback source: World_Config)`.**
 Two things: population carries 11 decimal places (a count should be integral), and the source is a **fallback** — the primary source did not answer. Fallbacks that fire silently every cycle are the pattern this session has been closing all day.
+
+> **RESOLVED S409 (chase §S-E, `7b9f76ec`) — the primary source DID answer; the log lied.** The parenthetical printed `fallback source: World_Config` whenever the config key *existed*, regardless of which source supplied the number; 387975 was the live `World_Population` cell. Same wording-defect class as B2's `Processed N`. The line now names the source that answered. The decimals: `updateWorldPopulation_` adds `Math.round`'d births/deaths/migration to a total that only carried a fraction because the stored seed cell did (live today: 389122.0135) — rounded at the write, which heals the legacy fraction forward on the next cycle.
 
 ### B. Civic / world — for the builder's read
 

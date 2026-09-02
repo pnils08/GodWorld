@@ -43,7 +43,7 @@ pointers:
 | S-B | Storyline resolution | B3/G-PF20 + C1 + G-PF28 | ENGINE (bench) | `/sift` opens on an empty slate; blocks the newsroom |
 | S-C | Pipeline chain hygiene | G-PF24 + G-PF25 + G-PF23 + G-PF26 | NODE (no bench) | Cheap, offloadable, unblocks content quality |
 | S-D | Dead-file triage | G-PF32 | mixed | 35 files; decides what is history vs missing feature |
-| S-E | Instrumentation debt | A5 + A6 + A7 + G-PF22 + G-PF14 + G-PF30 + G-PF31 | mixed | Diagnostic only; batch and close |
+| S-E | Instrumentation debt | A5 + A6 + A7 + G-PF22 + G-PF14 + G-PF30 + G-PF31 | mixed | **DONE S409** — 7/7 closed, none deferred |
 | — | *then* | business cascade finish → education | — | Build resumes once the sim stops generating anomalies |
 
 **B4 needs no session — it is already answered.** The hood swings it flagged wanted `cascadeAudit`'s spread lane run against post-C105 state; S405 did that and it PASSes at 2.74pp with all five invariants green. ~~Close B4 citing `output/audit-reports/cascade-audit-2026-08-31.md` when S-A next touches the log.~~ **Closed on the execution log, S406.**
@@ -268,6 +268,24 @@ Low world impact, diagnostic. Batch them precisely because none deserves its own
 
 **Exit:** each closed or explicitly deferred with a reason. **G-PF31 first** — it corrupts the maps every other session depends on.
 
+#### DONE — S409, 2026-09-01
+
+Seven items, seven commits, each closed — none deferred. Node-side items are live now; the four Apps Script items are committed undeployed and ride the bench wave. Every close was verified against code or live data, not the log's wording — three of the seven turned out to be wording or measurement defects, the same class S-A found.
+
+| Item | Ruling | Fix | Commit |
+|---|---|---|---|
+| **G-PF31** | Real. Write regex matched `===`; 27 phantom writer edges across 15 fields | `=(?!=)`; regen. `civicLoad` 3→1, `cycleWeight` 2→1, `shockFlag` 3→1. `writeCycleWeightToDigest_` deleted (0 callers). `Riley_Digest` in manifest §1 | `a94e4dc8` |
+| **G-PF14** | **Not the suite — a coin flip in the test.** Fixtures said `CYCLE 900`; real editions say `THE CYCLE PULSE — EDITION 102`. Detection fell to the first digit run in the FULL tmp path, present only when mkdtemp's suffix had one (~65%). Reproduced 2/5 in isolation | Fixtures carry the real header; rater path fallback reads basename only; `lib/sheets` lazy-required in the apply branch; `run-tests.js` prints exit/signal on failure. 6/6 after | `ec6bf5e4` |
+| **G-PF22** | Real but ad-hoc. Every engine `indexOf('Name')` reads a tab that HAS a Name column; the S405 miss was a hand query | `lib/sheets.js` `citizenFullName` / `matchCitizensByName` / `findCitizensByName`; SIMULATION_LEDGER §Identity note. Does not make a bare `indexOf` loud — said so | `6239897f` |
+| **A5** | Real and worse than instrumentation: divide-by-1.5 was **non-monotone** — CIVIC×crisis 11.7→7.8 ranked below plain CIVIC 9; the crisis boost was a penalty for top-tier domains. Inert today: nothing sorts on `priorityScore` | `min(raw, 10)`; 4 regression cases, 89/89 | `b128ec05` |
+| **A6** | **Not blind.** 210 = 143 `City-wide` employers (no hood by design) + 67 `UNTRACKED` (S357 off-ledger sentinel the commute engine filed as a dangling ID). Real failures: 0 | `offLedger` class, excluded like City-wide; log v1.1 prints the breakdown; `commuteFlowEngine.test.js` 11/11 | `ffca2df6` |
+| **A7** | **Wording.** `(fallback source: World_Config)` printed whenever the config key existed; C105 read live 387975. Decimals: legacy fractional seed cell (live 389122.0135) plus integer deltas forever | `populationSource` names what answered; `Math.round` at the queueWrite heals the fraction forward | `7b9f76ec` |
+| **G-PF30** | Real. `runCyclePhases_` dropped two slots; `Phase9-DigestSummary` writes `S.compressedLine`/`S.cycleSummary` that `buildCyclePacket_` reads, so the dry-run packet was short | Both slots inserted at production positions; live lists diff identical. Not unified into one list (refactor, not a chase fix) | `535ff9cf` |
+
+**Bench-wave additions (GAS, undeployed):** `applyCycleWeight.js`, `priorityEngine.js`, `commuteFlowEngine.js`, `applyMigrationDrift.js`, `godWorldEngine2.js`. **Proving notes for the wave, on an unchanged ledger:** six C105-shape clamp lines read `final=10.00`; `buildCommuteFlows_ v1.1: … 210 unresolved (143 city-wide/non-hood, 67 off-ledger, 0 dangling biz-id, 0 biz without hood)`; `applyMigrationDrift_: totalPopulation=<int> … (source: World_Population)` and an integer `World_Population.totalPopulation` cell after the fire; a dry run's packet carries `compressedLine`. Plus S-A's owed `Examined 6 | In-scope 4 | Resolved 0`.
+
+**Verified, not inferred:** 0 GAS global collisions (`COMMUTE_OFF_LEDGER` is the only new global); ctxMap unchanged (no new `S.*` fields); stub maps regenerated in the G-PF31 commit and no function was added or removed after it.
+
 ---
 
 ## Open questions
@@ -304,6 +322,7 @@ Kept here rather than in `DEPLOY.md`: that file is protocol + pointers, and per 
 
 ## Changelog
 
+- 2026-09-01 (S409) — S-E DONE: all seven instrumentation items closed in seven commits (`a94e4dc8`…`535ff9cf`); three were wording/measurement defects (G-PF14 test coin-flip, A6 by-design classes, A7 log), four real fixes (G-PF31 regex, A5 non-monotone clamp, G-PF30 phase list, G-PF22 resolver). Chase sessions S-A…S-E all done; what remains on engine.138 is proving: the S-B wake acceptance (Tue 09-02 18:15) and the bench wave.
 - 2026-08-31 (S405) — engine.137 + G-PF18 bench-proven on SANDBOX 0831 (C106, C107) and deployed live at PROD @12. Proving record added above. Both previously-unreachable mechanisms fire and self-limit; recovery went from overloadScore 1/"none" on live C105 to 8/"moderate" then 4/"light" on the bench.
 - 2026-08-31 (S405) — Constraint 1 updated: deploy UNBLOCKED, SANDBOX 0831 stood up post-C105 (relayed by research-build, verified independently). `CARRY_FORWARD_COLD_START_OK` confirmed unnecessary by a read-only check of the bench's `Carry_Forward_Store` — both blobs present, C105-stamped, parseable.
 - 2026-08-31 (S405) — Plan created (engine-sheet). Backlog carved into five sessions after the builder ruled that chase work precedes both the unfinished business cascade and the education build, and that sandbox staleness blocks all deploys. B4 marked already-answered by the S405 cascadeAudit re-run; A2/A4 routed to the cascade plan rather than the chase.

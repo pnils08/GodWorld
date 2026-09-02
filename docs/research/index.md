@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-08-30
+updated: 2026-09-01
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -77,6 +77,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 | **[[2026-08-20-notebooklm-daily-branching]]** | Verified current Daily News path plus deterministic Cycle/wake/article-state routing across Brief, Deep Dive, and evidence-gated Debate; NotebookLM renders but never chooses editorial state. | `adopt` (extends [[../plans/2026-07-10-notebooklm-bridge-deploy]] §Phase 6, pipeline.51) |
 | **[[2026-08-27-cascade-loop-closure-design]]** | Three-lane trace (employment / illness / sentiment) of the full city→hood→citizen cascade: illness is the one closed loop, employment fully open (attractor dial → uniform hood smear → no citizen dose → no talk-back), sentiment top-down with one thin pulse return; 7 chain breaks incl. stale packet illness read, inert QoL fold, dead desk-packet column. Design: dials set climate, hoods localize, citizens sample, threshold-gated ground truth corrects; retune attractor ~0.945 / illnessBaseline ~0.025; employment closes by steering the career engine, not dosing | `adopt` (revision input to engine.104 [[../plans/2026-08-10-economy-native-rebuild]]; Claude review before code, builder-direct) |
 | **[[2026-08-29-casino-ledger]]** | Undocked Phase 4b design-question record — consolidates every repo constraint on the gated casino ledger (settlement vs adapter outcomes, stake caps + the wealth-scale contamination hazard, losses as life events, household/bond downstreams, operator canon gate, 12-question design checklist, failure modes) into the standing substrate for the future Mike-signed design doc | `watch` (adopt-trigger: 4a narrative texture ≥2 cycles AND Mike-only 4b sign-off; no own ROLLOUT row — pending-state stays on research.27's plan) |
+| **[[2026-08-30-education-system]]** | Education as it exists on the ledger (grok, accepted by engine-sheet S409) — fill-once credential not a school career; three dictionaries on one column (engine singular vs live plural); degrees push savings/courtship/displacement/settlement but never a job; SchoolQuality a childhood stamp; live ND below the S247 prosperity floor; Youth_Events dead; adults cannot earn a degree | `adopt` (ignites [[../plans/2026-08-31-education-loop]] — engine.143; built S409, undeployed) |
 | **[[2026-08-29-business-ledger-hood-fill]]** | Business_Ledger six-per-hood fill (grok, reviewed by engine-sheet S398) — live inventory vs the floor-6 rule per Neighborhood_Map hood, the 72-row sim-native proposal, the mislabeled child-fold rows NOT to remap, city-wide rows not counted as hood texture; accepted with 46 renames + pay re-base to the employment-cascade §Pay scale; landed on bench 72/72, live replay at the engine.135 deploy after the B1 profile | `accepted` (engine.135 Phase C; replay artifact `output/grok/business-ledger-hood-fill-c104.reviewed.json`) |
 
 ---
@@ -89,6 +90,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 ---
 
 ## Changelog
+- 2026-09-01 (engine-sheet) — Registered [[2026-08-30-education-system]] (S409): grok's inbox research accepted; four wiring cards cut on the repaired reverse map; ignited plan built the same session (engine.143, undeployed; live ND floor replay awaiting builder go).
 - 2026-08-07 — Cascade team review: engine-sheet S360 + grok second pass (grok).
 - 2026-08-08 — Registered [[2026-08-08-journalist-heat-slice-architecture]] (grok) — heat-slice packs architecture; adopt → pipeline.52.
 - 2026-08-07 — City/neighborhood cascade team review brief (grok).

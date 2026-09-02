@@ -1,7 +1,7 @@
 ---
 title: Education system (ledger, youth, careers) — research
 created: 2026-08-30
-updated: 2026-08-30
+updated: 2026-09-01
 type: reference
 tags: [research, engine, citizens, education, careers, neighborhoods, active]
 sources:
@@ -22,7 +22,7 @@ sources:
   - scripts/backfillNeighborhoodEducation.js — S247 prosperity floor (≥7 quality / ≥85 grad)
   - OpenRouter Haiku wiring cards 2026-08-30: processEducationCareer_, updateCareerProgression_
 pointers:
-  - "[[../engine/ROLLOUT_PLAN]] — pending-state home; Claude files a row only if verdict flips to adopt"
+  - "[[../engine/ROLLOUT_PLAN]] — engine.143 (filed S409 on accept)"
   - "[[../research/index]] — register on accept"
   - "[[../plans/2026-08-29-employment-system-cascade]] — E1/E2 are why degrees no longer drive promotions"
   - "[[../canon/INSTITUTIONS]] — district + no-campus rule"
@@ -31,7 +31,7 @@ pointers:
 
 # Education system (ledger, youth, careers) — research
 
-**Reviewer note (grok, 2026-08-30):** Inbox copy only. Not registered. No plan companion. Anthropic Haiku billed-out; wiring cards ran OpenRouter Haiku (`runEngineAgent.js --provider openrouter --model anthropic/claude-haiku-4.5`). Full cards: `output/grok/wiring-processEducationCareer.md`, `output/grok/wiring-updateCareerProgression.md`. On accept: move to `docs/research/2026-08-30-education-system.md`, register in `docs/research/index.md`. No new ROLLOUT row unless the verdict is flipped to adopt.
+**Reviewer note (grok, 2026-08-30):** written as an inbox copy; wiring cards ran OpenRouter Haiku (`runEngineAgent.js --provider openrouter --model anthropic/claude-haiku-4.5`). Full cards: `output/grok/wiring-processEducationCareer.md`, `output/grok/wiring-updateCareerProgression.md`. **Accepted S409 (engine-sheet, 2026-09-01)** — moved here, registered, engine.143 filed; see §Review.
 
 **Source:** Builder-directed teardown of education as it exists on C104 (grok, 2026-08-30). No external paper. Trigger: “tear into the education system and the lack of one.”
 
@@ -108,9 +108,13 @@ pointers:
 
 **Verdict:** `adopt` — S405 named education as the next system; builder asked for the plan 2026-08-31. Isolation loop only (companion plan). Adopt-trigger that fired: Mike asked to plan the fix + cascade ruling “do NOT widen E3. Build education next.” Connection-to-career is a later plan, not this one.
 
-**Ignited plans:** [[2026-08-31-grok-education-loop-plan]] (inbox sibling; isolation loop only).
+**Ignited plans:** [[../plans/2026-08-31-education-loop]] (isolation loop only; engine.143).
 
 ---
+
+## Review
+
+**Accepted S409 (engine-sheet, 2026-09-01).** Every claim in §Extraction re-verified against the code before the build, and the four owed wiring cards cut fresh on the S409-repaired reverse map (`output/wiring/wiring-settleAdulthood.md`, `-checkGraduation.md`, `-deriveEducationLevels.md`, `-runYouthEngine.md`). Two additions to the map: (1) `processAdvancementIntake_` (`phase05-citizens/processAdvancementIntake.js:705`) is a third EducationLevel writer — it mints through `lib/citizenDerivation` and already emits the plural vocab, so it needed no change; (2) live `Neighborhood_Demographics` read 2026-09-01 confirms the S247 floor never landed: West Oakland 3/62, Fruitvale 3/65, and the 62 sits on the `DROPOUT_WAVE` gate (<65) the canon forbids. The `checkGraduation_` per-cycle cap (`getSeasonalLimits_`: 2, spring 4) is pre-existing and was left alone — the plan said no *new* cap; the standing no-output-caps doctrine question on the existing one is noted, not decided here.
 
 ## Applications (living)
 
@@ -122,6 +126,7 @@ pointers:
 
 - 2026-08-30 (grok) — Initial extraction (C104 snapshot + two Haiku wiring cards + education/youth/career engines).
 - 2026-08-31 (grok) — Verdict watch→adopt; ignited isolation-loop plan. Connection to hiring still out of scope.
+- 2026-09-01 (engine-sheet, S409) — Accepted; §Review added; moved from the inbox and registered; engine.143 filed; plan Tasks 1–4 + 6 built the same session.
 
 ---
 

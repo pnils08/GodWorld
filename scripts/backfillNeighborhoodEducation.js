@@ -72,7 +72,7 @@ async function latestIncomeByNeighborhood() {
 }
 
 async function main() {
-  console.log(`\n=== backfillNeighborhoodEducation — ${APPLY ? 'APPLY (writing)' : 'DRY RUN (no writes)'} ===\n`);
+  console.log(`\n=== backfillNeighborhoodEducation — ${APPLY ? 'APPLY (writing)' : 'DRY RUN (no writes)'} — floor semantics: never lowers an existing value ===\n`);
 
   const income = await latestIncomeByNeighborhood();
   const demo = await getRawSheetData('Neighborhood_Demographics');
@@ -89,9 +89,18 @@ async function main() {
     const name = String(demo[r][iNeighborhood]).trim();
     if (!name) continue;
     const inc = income[name] ? income[name].inc : undefined;
-    const edu = deriveEducation(inc);
+    const derived = deriveEducation(inc);
     const before = iEdu.map(c => demo[r][c]);
     const allBlank = before.every(v => v === '' || v === undefined || v === null);
+    // S409 (education loop Task 5): this is a FLOOR, not a re-seed. A hood
+    // already above the prosperity band keeps its value (Rockridge 9 stays 9);
+    // only cells below the band rise to it. Same canon rule as before —
+    // never lower a school to make a crisis hook fire.
+    const edu = { tier: derived.tier };
+    EDU_FIELDS.forEach((f, k) => {
+      const cur = Number(before[k]);
+      edu[f] = (Number.isFinite(cur) && cur > derived[f]) ? cur : derived[f];
+    });
     plan.push({ row: r + 1, name, inc, edu, before, allBlank });
   }
 

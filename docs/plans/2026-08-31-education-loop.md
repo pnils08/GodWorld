@@ -1,19 +1,19 @@
 ---
 title: Education loop in isolation — earn a credential as a life event
 created: 2026-08-31
-updated: 2026-08-31
+updated: 2026-09-01
 type: plan
 tags: [engine, citizens, education, active]
 sources:
-  - docs/for-claude-review/2026-08-30-grok-education-system.md — research basis (inbox sibling)
+  - docs/research/2026-08-30-education-system.md — research basis (accepted S409)
   - docs/plans/2026-08-29-employment-system-cascade.md §acceptance verdict S405 — do not widen E3; education next; one loop at a time
   - docs/engine/ROLLOUT_PLAN.md Next Session Priorities — chase (engine.138) precedes this build; education starts from the inbox research
   - docs/SIM_DOCTRINE.md — causes then dice; events record; no output caps; no ghost people
   - docs/canon/INSTITUTIONS.md §Education — Oakland City Schools; no canon campus
   - OpenRouter Haiku wiring cards 2026-08-30: processEducationCareer_, updateCareerProgression_
 pointers:
-  - "[[../engine/ROLLOUT_PLAN]] — Claude files the next free engine.* row on accept (engine.140 is already the storyline ager — do not reuse)"
-  - "[[../research/2026-08-30-education-system]] — research (name after Claude moves the inbox copy)"
+  - "[[../engine/ROLLOUT_PLAN]] — engine.143"
+  - "[[../research/2026-08-30-education-system]] — research basis"
   - "[[../plans/2026-08-29-employment-system-cascade]] — E1/E2/E3 stay closed; this plan does not reopen them"
   - "[[../canon/INSTITUTIONS]]"
 ---
@@ -27,9 +27,9 @@ pointers:
 **Terminal:** engine-sheet (every code/sheet task). Grok: research+plan only. research-build: none.
 
 **Pointers:**
-- Prior work: inbox research `2026-08-30-grok-education-system.md`; E1 killed education-odds calendar promotions
+- Prior work: [[../research/2026-08-30-education-system]]; E1 killed education-odds calendar promotions
 - Related: engine.138 chase **precedes** any bench of this (ROLLOUT Next Session #3). Code may land committed-and-undeployed in the same wave as other undeployed engine work.
-- Research basis: that inbox file
+- Research basis: the research file above
 
 **Sequencing lock:** do not bench this against live until (a) engine.138 S-B…S-E are not the active session, and (b) the builder stands a post-C105 bench. Same “committed-undeployed” rule as the chase. Do not mix with widening E3.
 
@@ -50,7 +50,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-processEducat
 - **processEducationCareer_** — `educationCareerEngine.js:124` v2.1. Both entry points Phase5-EducationCareer (`godWorldEngine2.js:375` / `:2039`), before Phase10. Orchestrator: derive → career-stage → mobility → school-quality check → minor stamp → settleAdulthood_.
 - **updateCareerProgression_** — `:363`. E1: CareerStage from age. Reads EducationLevel into a dead local. This plan deletes that dead read or leaves it unused; it does **not** revive calendar promotion.
 
-**Owed before engine-sheet cuts Tasks 3–5** (same harness, Haiku): `settleAdulthood_`, `checkGraduation_`, `deriveEducationLevels_`, `runYouthEngine_`. Do not cut those tasks on the research file alone.
+**Cut S409 (engine-sheet, `engine-wiring` on the G-PF31-repaired map):** `output/wiring/wiring-settleAdulthood.md`, `wiring-checkGraduation.md`, `wiring-deriveEducationLevels.md`, `wiring-runYouthEngine.md`. All four agree with the research; one addition — `processAdvancementIntake_:705` is a third EducationLevel writer (plural vocab already, no change needed).
 
 ---
 
@@ -78,7 +78,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-processEducat
   4. Assert write vocab: engine must not emit `bachelor` or `graduate` (singular / catch-all). `eduRank_('bachelors') === 1`, `eduRank_('bachelor') === 1` still.
   5. Grep-as-test: `applyEmployerSuccess_` / `matchUnemployedToOpenings_` source still has no `EducationLevel`.
 - **Verify:** `node scripts/educationLoop.test.js` → RED (writer not yet pointed).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S409 — `scripts/educationLoop.test.js`, 52 cases (stage bands, restamp scope, fill vocab, ladder monotonicity, dice + once-per-life, orchestrator end-to-end on a stub ctx, grep-as-tests). 52/52.
 
 ### Task 2: Canonical write helper + kill the header lie
 
@@ -90,7 +90,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-processEducat
   3. Delete or rewrite the v2.0 header claim “Education affects career advancement speed” (`:15`, `:39`, `:107`, `:155`, `:477`). Replacement: “EducationLevel is identity plus lived graduation; CareerStage is age (E1); employer success is the promotion path (E2).”
   4. Remove the unused `education` local in `updateCareerProgression_` (`:405`) so the dead read cannot grow back.
 - **Verify:** Task 1 vocab asserts still RED until Task 4; `node --check phase05-citizens/educationCareerEngine.js`. Grep `affects career advancement` in that file → 0.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S409 — `EDUCATION_LEVELS` is now the live plural vocab (+ child stages); `EDUCATION_LEGACY_WRITE` + `canonicalEducationWrite_` (bachelor→bachelors, graduate→masters, none→Pre-K); fill writes MED→doctorate / UNI→bachelors / CIV→some-college / minors→stage; five header claims rewritten; dead `education` local and its `iEducation` index removed from `updateCareerProgression_`.
 
 ### Task 3: Minors — EducationLevel derived from age (E1 analog)
 
@@ -102,7 +102,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-processEducat
   2. Age ≥18: do not touch the cell here. `settleAdulthood_` remains the 18-year-old credential mint.
   3. Do not invent a new sheet column. School-stage lives in EducationLevel until 18, then the settlement overwrites it with a credential — that overwrite *is* the graduation-from-K12 the city already has.
 - **Verify:** Task 1 minor-derivation GREEN. A 16-year-old `bachelors` (bad mint) is restamped to High School — that is the heal-forward, same as E1 restamping CareerStage.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S409 — `deriveMinorEducationStage_` (Step 1b of `processEducationCareer_` v2.2), E1 scope (ENGINE-clock, non-deceased, sports-layer skipped); `schoolStageForAge_` bands; log line carries `MinorStages: restamped/minors`.
 
 ### Task 4: Graduation event writes the credential
 
@@ -114,7 +114,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-processEducat
   3. Never write singular `bachelor`/`graduate`. Never lower a rank (`eduRank_` after ≥ `eduRank_` before).
   4. If `checkGraduation_` has no row handle today (signature is popId/age/lifeHistory), thread the row or a setter from the caller — **do not** append LifeHistory in two places. One writer, one cell, one line. Wiring card for `checkGraduation_` before this cut.
 - **Verify:** Task 1 graduation asserts GREEN.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S409 — `graduationCredential_` (pure ladder, `GRADUATION_LADDER_`) in `generationalEventsEngine.js`; the caller writes `row[iEducationLevel]` on a hit and stamps `gradResult.credential`; `applyMilestone_` stays the single LifeHistory writer. `checkGraduation_` itself untouched (signature, odds, window).
 
 ### Task 5: Canon-voice leftover + prosperity ND replay (sheet, engine-sheet only)
 
@@ -127,7 +127,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-processEducat
   3. Engine-sheet replays `node scripts/backfillNeighborhoodEducation.js --apply` on **live** Neighborhood_Demographics (operator-gated; grok does not run this). Read-back: all rows SchoolQualityIndex ≥ 7, GraduationRate ≥ 85. Next cycle `updateMinorSchoolQuality_` restamps the 51 minors.
   4. Do not lower any hood to make crisis hooks fire.
 - **Verify:** `rg -n 'OUSD|Oakland Unified' phase05-citizens/runYouthEngine.js` → 0. Sheet read-back table in the plan changelog when engine-sheet runs it.
-- **Status:** [ ] not started
+- **Status:** [~] CODE DONE S409 (`SCHOOL-OCS` / `Oakland City Schools`; grep clean). **Live ND replay NOT run — builder go required** (22-row live write). `backfillNeighborhoodEducation.js` now has FLOOR semantics (never lowers: Rockridge keeps 9/95); dry run 2026-09-01 shows West Oakland 3/62 → 8/91, Fruitvale 3/65 → 8/89, 14 hoods below the band rise, 8 unchanged or floored.
 
 ### Task 6: Proof the career path was not touched
 
@@ -138,7 +138,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-processEducat
   1. Confirm `applyEmployerSuccess_` and `matchUnemployedToOpenings_` diffs are empty in this plan’s commits.
   2. Changelog this plan: “E2/E3 untouched.”
 - **Verify:** `git diff` on `runCareerEngine.js` empty across the education commits. Task 1 career-untouched GREEN.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S409 — `runCareerEngine.js` untouched across every education commit (`git diff` empty); Task 1 grep-as-tests green. E2/E3 untouched.
 
 ---
 
@@ -168,3 +168,4 @@ None that block. Decisions locked in this file:
 ## Changelog
 
 - 2026-08-31 (grok) — Initial plan after S405 “build education next” + builder ask. Isolation loop only. Companion to inbox research `2026-08-30-grok-education-system.md`.
+- 2026-09-01 (engine-sheet, S409) — Accepted and built the same session: Tasks 1–4 + 6 done, Task 5 code done with the live ND replay awaiting builder go. Engine code committed UNDEPLOYED — rides the wave AFTER the current bench batch proves (one unverified change in flight). Bench acceptance: `processEducationCareer_ v2.2: … MinorStages: N/51`, minors restamp to stage labels, a `[Graduation]` line whose row moved `hs-diploma → associates|bachelors`, `EDU_SAVINGS_FACTOR` now seeing plural tokens on engine-filled rows.

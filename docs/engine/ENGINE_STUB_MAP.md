@@ -137,7 +137,7 @@
 - **replayCycle(cycleId)**
 
 - **runCyclePhases_(ctx)**
-  Reads: S.citizenEvents, S.cityEvents, S.contractSeeds, S.eveningSports, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.undockedFeedEntries
+  Reads: S.citizenEvents, S.cityEvents, S.compressedLine, S.contractSeeds, S.cycleSummary, S.eveningSports, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.storylineWeaving, S.undockedFeedEntries
   Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
 
 ### initSimulationLedger.js

@@ -1588,6 +1588,32 @@
         "phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_"
       ]
     },
+    "compressedLine": {
+      "writers": [
+        "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_"
+      ],
+      "readers": [
+        "phase01-config/godWorldEngine2.js::runCyclePhases_",
+        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
+      ]
+    },
+    "cycleSummary": {
+      "writers": [
+        "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_"
+      ],
+      "readers": [
+        "phase01-config/godWorldEngine2.js::runCyclePhases_",
+        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
+      ]
+    },
+    "storylineWeaving": {
+      "writers": [
+        "phase07-evening-media/storylineWeavingEngine.js::weaveStorylines_"
+      ],
+      "readers": [
+        "phase01-config/godWorldEngine2.js::runCyclePhases_"
+      ]
+    },
     "previousEvening": {
       "writers": [
         "phase01-config/loadPreviousEvening.js::loadPreviousEvening_"
@@ -3824,12 +3850,6 @@
         "phase07-evening-media/storyHook.js::storyHookEngine_"
       ]
     },
-    "storylineWeaving": {
-      "writers": [
-        "phase07-evening-media/storylineWeavingEngine.js::weaveStorylines_"
-      ],
-      "readers": []
-    },
     "textureCalendarContext": {
       "writers": [
         "phase07-evening-media/textureTriggers.js::textureTriggerEngine_"
@@ -4054,22 +4074,6 @@
       ],
       "readers": [
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_"
-      ]
-    },
-    "compressedLine": {
-      "writers": [
-        "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_"
-      ],
-      "readers": [
-        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
-      ]
-    },
-    "cycleSummary": {
-      "writers": [
-        "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_"
-      ],
-      "readers": [
-        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
     "citizensGenerated": {

@@ -618,8 +618,18 @@ async function routePatternSeeds(cycle, opts) {
   const bylineState = { roster, cadence: {}, totalSeeds: 0, arcBinding: null };
   const seeds = collapsed.map((it) => finalizeSeed(it, bylineState, roster));
 
-  // sort final output by priorityScore desc for deck legibility
-  seeds.sort((a, b) => (b.priorityScore || 0) - (a.priorityScore || 0));
+  // sort final output by priorityScore desc for deck legibility.
+  // S409 (chase §S-E A5): the clamp is now min(raw, 10), so HIGH seeds in the
+  // top domains tie at the ceiling (HEALTH 15, SAFETY/CIVIC 13.5, INFRA 10.5
+  // all → 10). Tiebreak on the domain weight the score was built from, so the
+  // deck keeps HEALTH > SAFETY/CIVIC > INFRASTRUCTURE without touching the
+  // score — severity first (Phase C's own primary key), then domain weight. (The old divide-by-1.5 separated them but put INFRA HIGH 7.0 below
+  // ENVIRONMENT HIGH 9.0 — an inversion, not an order.)
+  const compW = (s, k) => (s.priorityComponents && Number(s.priorityComponents[k])) || 0;
+  seeds.sort((a, b) =>
+    ((b.priorityScore || 0) - (a.priorityScore || 0)) ||
+    (compW(b, 'severity') - compW(a, 'severity')) ||   // HEALTH HIGH before HEALTH MED (both cap at 10)
+    (compW(b, 'domain') - compW(a, 'domain')));        // then HEALTH > SAFETY/CIVIC > INFRA
 
   return { cycle, seeds, included: included.length, excluded, collapseLog,
     totalPatterns: patterns.length, briefCount: briefs.length,

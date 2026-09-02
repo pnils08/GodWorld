@@ -364,9 +364,11 @@ function computePriorityScore_(seed, auditPattern, storylineState, coverageState
   // exists to boost; the divide turned it into a penalty for every top-tier
   // domain. Hard cap only: order-preserving, ties at the ceiling. (C105 fired
   // this six times on identical CIVIC MED crisis seeds — same raw, same clamp.)
-  // Nothing in the engine sorts on priorityScore today (applyStorySeeds sorts
-  // on the hand-set `priority`; the field rides through as transparency), so
-  // this corrects the number, not a live ranking.
+  // In-engine, nothing sorts on priorityScore (applyStorySeeds sorts on the
+  // hand-set `priority`; the field rides through as transparency). The ONE
+  // live consumer is Node-side: scripts/engine-auditor/routePatternSeeds.js
+  // orders the pattern-seed deck by it, so this changes that deck's order at
+  // the next engine-auditor run — ties at 10 break on domain weight there.
   if (clamped > 10) {
     clamped = 10;
     clampLogged = true;

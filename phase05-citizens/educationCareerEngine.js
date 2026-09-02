@@ -796,6 +796,13 @@ function buildSettleBizPool_(ctx) {
     if (bId < 0 || bSector < 0) return null;
     var pools = { tech: [], service: [], public: [], creative: [] };
     var statedById = {};
+    // engine.144 loops 1+2: field counts per hood from the SAME read (no second
+    // Business_Ledger fetch — quota). sectorCategory_ is runCareerEngine's;
+    // absent (unit harness) the hood source is simply empty.
+    var byHood = {}, cityWide = {}, catById = {};
+    var bHood = -1;
+    for (var c2 = 0; c2 < bh.length; c2++) if (String(bh[c2]).trim() === 'Neighborhood') bHood = c2;
+    var catFn = (typeof sectorCategory_ === 'function') ? sectorCategory_ : null;
     for (var r = 1; r < bizData.length; r++) {
       var id = String(bizData[r][bId] || '').trim();
       if (!id) continue;
@@ -803,8 +810,17 @@ function buildSettleBizPool_(ctx) {
       var rawCount = bCount >= 0 ? bizData[r][bCount] : '';
       statedById[id] = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
         ? null : Number(rawCount);
+      if (catFn && bHood >= 0) {
+        var fcat = catFn(bizData[r][bSector], true);
+        if (fcat) {
+          catById[id] = fcat;
+          var hoodName = String(bizData[r][bHood] || '').trim();
+          if (hoodName === 'City-wide') cityWide[fcat] = (cityWide[fcat] || 0) + 1;
+          else if (hoodName) { if (!byHood[hoodName]) byHood[hoodName] = {}; byHood[hoodName][fcat] = (byHood[hoodName][fcat] || 0) + 1; }
+        }
+      }
     }
-    return { pools: pools, statedById: statedById };
+    return { pools: pools, statedById: statedById, byHood: byHood, cityWide: cityWide, catById: catById };
   } catch (e) {
     Logger.log('buildSettleBizPool_: Business_Ledger read failed (' + e.message + ') — settlement employer skipped');
     return null;
@@ -836,6 +852,149 @@ function settleSkillTag_(role) {
   if (/clean|janitor|custodial/.test(s)) return 'Trades';
   if (/aide|care/.test(s)) return 'Healthcare';
   return 'Small Business';
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.144 loops 1+2 (S411) — FIELD-FIRST SETTLEMENT
+// The field of study/work is chosen BEFORE the role, from causes the citizen
+// actually has: a parent's field (SkillTags), the neighborhood's businesses
+// (Business_Ledger by hood), and the school years already on the LifeHistory
+// (runYouthEngine_ dial tags). SkillTags = the field, directly — the same
+// token runCareerEngine's E3 same-field matcher reads, so the credential can
+// aim from the first adult cycle. No new column. The band still sets money
+// and the role's seniority; the field sets WHERE. No source → the legacy
+// band draw, unchanged. One rng draw per settlement, fixed field order.
+// ════════════════════════════════════════════════════════════════════════════
+
+// The twelve fields = sectorCategory_'s outputs (runCareerEngine.js), fixed
+// order so the weighted draw is deterministic. 'Trades' / 'The Vulnerable' /
+// '2041-Specific' are live tags but not fields E3 can match — never drawn.
+var SETTLE_FIELDS = [
+  'Port & Labor', 'Construction & Baylight', 'Healthcare', 'Tech & Innovation',
+  'Transit & Infrastructure', 'Education', 'Government & Civic', 'Faith & Community',
+  'Creative & Arts', 'Professional', 'Small Business', 'Food & Culture'
+];
+
+// One entry role per field × band. Existing settlement roles kept where they
+// fit; new ones name a first job an 18-year-old can hold in that field.
+var SETTLE_ROLES_BY_FIELD = {
+  'Port & Labor':             { rich: 'Logistics Coordinator Trainee', solid: 'Dockworker',                rough: 'Warehouse Hand' },
+  'Construction & Baylight':  { rich: 'Construction Engineering Trainee', solid: 'Apprentice Electrician', rough: 'Construction Laborer' },
+  'Healthcare':               { rich: 'Biotech Lab Assistant',        solid: 'Nurse Aide',                rough: 'Hospital Orderly' },
+  'Tech & Innovation':        { rich: 'Junior Software Developer',    solid: 'IT Support Technician',     rough: 'Data Entry Clerk' },
+  'Transit & Infrastructure': { rich: 'Smart Grid Trainee',           solid: 'Transit Operator Trainee',  rough: 'Station Attendant' },
+  'Education':                { rich: 'Teaching Assistant',           solid: 'After-School Program Aide', rough: 'Youth Program Aide' },
+  'Government & Civic':       { rich: 'Civic Program Assistant',      solid: 'Records Clerk',             rough: 'Parks Maintenance Aide' },
+  'Faith & Community':        { rich: 'Community Programs Coordinator', solid: 'Outreach Assistant',      rough: 'Food Bank Helper' },
+  'Creative & Arts':          { rich: 'Junior Graphic Designer',      solid: 'Studio Assistant',          rough: 'Gallery Attendant' },
+  'Professional':             { rich: 'Junior Accountant',            solid: 'Bank Teller',               rough: 'Mailroom Clerk' },
+  'Small Business':           { rich: 'Assistant Store Manager',      solid: 'Sales Associate',           rough: 'Retail Clerk' },
+  'Food & Culture':           { rich: 'Pastry Apprentice',            solid: 'Line Cook',                 rough: 'Server' }
+};
+
+// Econ keys for the new field roles (canonical economic_parameters.json roles;
+// the SETTLE_ECON_KEYS trainee→profile pattern). Others fall back to the role.
+var SETTLE_FIELD_ECON_KEYS = {
+  'Logistics Coordinator Trainee':    'Port Logistics Coordinator',
+  'Construction Engineering Trainee': 'Construction Engineer',
+  'Junior Software Developer':        'Software Engineer (General)',
+  'Transit Operator Trainee':         'Bus Operator',
+  'Records Clerk':                    'Municipal Court Clerk',
+  'Community Programs Coordinator':   'Community Organizer',
+  'Junior Graphic Designer':          'Graphic Designer (Freelance)',
+  'Pastry Apprentice':                'Pastry Chef',
+  'Hospital Orderly':                 'Home Health Aide'
+};
+
+// Youth dial tags (runYouthEngine_ YOUTH_DIAL_TAG) → the field they point to.
+var SETTLE_YOUTH_FIELD = {
+  'Education': 'Education', 'Team': 'Education',
+  'Cultural': 'Creative & Arts', 'Civic': 'Government & Civic', 'Community': 'Faith & Community'
+};
+var SETTLE_SOURCE_WEIGHT = 3; // each parent, the school years (capped), the hood (normalized) — equal pull
+
+function isSettleField_(tag) { return SETTLE_FIELDS.indexOf(String(tag || '').trim()) >= 0; }
+
+// Youth-history counts off a LifeHistory string: {dialTag: n} for the five
+// youth dial tags only. [Sports]/[Daily]/… are adult-deck lines, not school years.
+function settleYouthCounts_(lifeHistory) {
+  var counts = {};
+  var re = /\[(Education|Team|Cultural|Civic|Community)\]/g, m;
+  var s = String(lifeHistory || '');
+  while ((m = re.exec(s)) !== null) counts[m[1]] = (counts[m[1]] || 0) + 1;
+  return counts;
+}
+
+/**
+ * The field draw. PURE: no sheet, no ledger, exactly one rng() call.
+ *   ownTag      — the citizen's existing SkillTags (a canonical field wins outright)
+ *   parents     — [{name, tags}] resolved parent rows (tags = raw SkillTags string)
+ *   hoodCats    — {field: count} businesses in the citizen's hood
+ *   cityCats    — {field: count} 'City-wide' businesses (count half, for every hood)
+ *   youthCounts — settleYouthCounts_ output
+ * Returns {field, cause: 'own'|'parent'|'school'|'hood'|null, parentName}.
+ * cause names the source that put weight on the drawn field (parent > school
+ * > hood), so the [Adulthood] line can say why — only when a cause decided.
+ */
+function settleField_(ownTag, parents, hoodCats, cityCats, youthCounts, rng) {
+  var roll = rng(); // one draw, always, so the settlement's rng stream is stable
+  var own = String(ownTag || '').trim();
+  if (isSettleField_(own)) return { field: own, cause: 'own', parentName: '' };
+
+  var w = {}, byParent = {}, bySchool = {}, byHood = {}, i, f;
+  for (i = 0; i < SETTLE_FIELDS.length; i++) w[SETTLE_FIELDS[i]] = 0;
+
+  // parents — each canonical tag on each parent
+  for (i = 0; i < (parents || []).length; i++) {
+    var tags = String(parents[i].tags || '').split('|');
+    for (var t = 0; t < tags.length; t++) {
+      f = tags[t].trim();
+      if (!isSettleField_(f)) continue;
+      w[f] += SETTLE_SOURCE_WEIGHT;
+      if (!byParent[f]) byParent[f] = parents[i].name || '';
+    }
+  }
+  // school years — one per youth line, capped at one source's weight
+  var yc = youthCounts || {}, ySpent = 0;
+  for (var tag in SETTLE_YOUTH_FIELD) {
+    if (!Object.prototype.hasOwnProperty.call(yc, tag)) continue;
+    var n = Math.min(Number(yc[tag]) || 0, SETTLE_SOURCE_WEIGHT - ySpent);
+    if (n <= 0) continue;
+    f = SETTLE_YOUTH_FIELD[tag];
+    w[f] += n; ySpent += n; bySchool[f] = true;
+  }
+  // the hood — local businesses + half-weight city-wide ones, normalized to one source's weight
+  var hoodRaw = {}, hoodTotal = 0;
+  for (i = 0; i < SETTLE_FIELDS.length; i++) {
+    f = SETTLE_FIELDS[i];
+    var c = (Number((hoodCats || {})[f]) || 0) + 0.5 * (Number((cityCats || {})[f]) || 0);
+    if (c > 0) { hoodRaw[f] = c; hoodTotal += c; }
+  }
+  if (hoodTotal > 0) {
+    for (f in hoodRaw) { w[f] += SETTLE_SOURCE_WEIGHT * hoodRaw[f] / hoodTotal; byHood[f] = true; }
+  }
+
+  var total = 0;
+  for (i = 0; i < SETTLE_FIELDS.length; i++) total += w[SETTLE_FIELDS[i]];
+  if (total <= 0) return { field: null, cause: null, parentName: '' };
+
+  var pick = roll * total, acc = 0, chosen = SETTLE_FIELDS[SETTLE_FIELDS.length - 1];
+  for (i = 0; i < SETTLE_FIELDS.length; i++) {
+    f = SETTLE_FIELDS[i];
+    if (w[f] <= 0) continue;
+    acc += w[f];
+    if (pick < acc) { chosen = f; break; }
+  }
+  var cause = byParent[chosen] !== undefined ? 'parent' : (bySchool[chosen] ? 'school' : (byHood[chosen] ? 'hood' : null));
+  return { field: chosen, cause: cause, parentName: byParent[chosen] || '' };
+}
+
+// The clause on the [Adulthood] line — names the cause, never a score.
+function settleFieldClause_(pick) {
+  if (!pick || !pick.field || !pick.cause || pick.cause === 'own') return '';
+  if (pick.cause === 'parent') return ' (following ' + (pick.parentName || 'family') + ' into ' + pick.field + ')';
+  if (pick.cause === 'school') return ' (the field their school years pointed to: ' + pick.field + ')';
+  return ' (the neighborhood\'s trade: ' + pick.field + ')';
 }
 
 // Education rank shared by the settlement draw and career advancement.
@@ -905,7 +1064,7 @@ function settleAdulthood_(ctx, cycle, rng) {
 
   var diag = 0;
   var bizPool; // engine.62: lazy — Business_Ledger read only on cycles that settle someone
-  var trackedByBiz = {}; // v2.2 (S336): Active tracked count per business, built lazily with bizPool; reserves hires within the cycle
+  var trackedByBiz = {}, trackedBuilt = false; // v2.2 (S336): Active tracked count per business, built once with bizPool; reserves hires within the cycle
   var heritageByPop = null; // engine.66: lazy — Heritage_Ledger read only on cycles that settle someone
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -959,7 +1118,32 @@ function settleAdulthood_(ctx, cycle, rng) {
     var b = ADULT_START_BANDS[band];
 
     row[iEdu] = (band === 'rough' && rng() < 0.15) ? 'hs-dropout' : b.edu;
-    row[iRole] = b.roles[Math.floor(rng() * b.roles.length)];
+
+    // engine.144 loops 1+2 (S411): the FIELD first — parents' fields, the hood's
+    // businesses, the school years on the LifeHistory — then the role for that
+    // field at this band. No source → the legacy band draw, unchanged.
+    if (bizPool === undefined) bizPool = buildSettleBizPool_(ctx);
+    var iTagsF = idx('SkillTags'), iFirstF = idx('First'), iNbhdF = idx('Neighborhood');
+    var parentsF = [];
+    if (iParents >= 0 && row[iParents] && iTagsF >= 0) {
+      var pidsF = [];
+      try { pidsF = JSON.parse(String(row[iParents])); } catch (e2) { pidsF = []; }
+      for (var pk = 0; pk < pidsF.length; pk++) {
+        var pRowF = rowByPop[String(pidsF[pk]).trim()];
+        if (pRowF) parentsF.push({ name: iFirstF >= 0 ? String(pRowF[iFirstF] || '').trim() : '', tags: pRowF[iTagsF] });
+      }
+    }
+    var hoodF = iNbhdF >= 0 ? String(row[iNbhdF] || '').trim() : '';
+    var fieldPick = settleField_(
+      iTagsF >= 0 ? row[iTagsF] : '', parentsF,
+      (bizPool && bizPool.byHood && bizPool.byHood[hoodF]) || {},
+      (bizPool && bizPool.cityWide) || {},
+      settleYouthCounts_(life), rng);
+    if (fieldPick.field && SETTLE_ROLES_BY_FIELD[fieldPick.field]) {
+      row[iRole] = SETTLE_ROLES_BY_FIELD[fieldPick.field][band];
+    } else {
+      row[iRole] = b.roles[Math.floor(rng() * b.roles.length)];
+    }
     row[iInc] = Math.round((b.incomeMin + rng() * (b.incomeMax - b.incomeMin)) / 100) * 100;
 
     // engine.62b (S322): a settled 18-year-old starts adult money life —
@@ -985,11 +1169,12 @@ function settleAdulthood_(ctx, cycle, rng) {
     // already made this cycle) are candidates. Blank-count rows can't prove
     // room, so they never take hires. No opening anywhere → the citizen is
     // explicitly recorded as seeking work; silence is not an outcome.
-    if (iEcon >= 0) row[iEcon] = SETTLE_ECON_KEYS[row[iRole]] || row[iRole];
+    if (iEcon >= 0) row[iEcon] = SETTLE_ECON_KEYS[row[iRole]] || SETTLE_FIELD_ECON_KEYS[row[iRole]] || row[iRole];
     var settledBiz = '';
     if (iEmployer >= 0) {
-      if (bizPool === undefined) {
-        bizPool = buildSettleBizPool_(ctx);
+      if (bizPool === undefined) bizPool = buildSettleBizPool_(ctx); // (field pick above normally built it)
+      if (!trackedBuilt) {
+        trackedBuilt = true;
         if (bizPool) {
           // Active tracked headcount per business — one pass, then kept
           // current via the cycle-local reservation below.
@@ -1007,8 +1192,15 @@ function settleAdulthood_(ctx, cycle, rng) {
           var stated = bizPool.statedById[bid];
           return stated !== null && stated !== undefined && stated > (trackedByBiz[bid] || 0);
         };
-        var ind = SETTLE_INDUSTRY[row[iRole]] || 'service';
-        var pool = (bizPool.pools[ind] || []).filter(hasRoom);
+        // engine.144 loops 1+2: a field role hires INTO the field — businesses of
+        // that exact category first (any hood), then the field's industry bucket,
+        // then the legacy per-role bucket / service fallback.
+        var pool = [];
+        if (fieldPick.field && bizPool.catById) {
+          for (var fb in bizPool.catById) if (bizPool.catById[fb] === fieldPick.field && hasRoom(fb)) pool.push(fb);
+        }
+        var ind = fieldPick.field ? classifySettleSector_(fieldPick.field) : (SETTLE_INDUSTRY[row[iRole]] || 'service');
+        if (!pool.length) pool = (bizPool.pools[ind] || []).filter(hasRoom);
         if (!pool.length) pool = (bizPool.pools.service || []).filter(hasRoom);
         if (pool.length) {
           settledBiz = pool[Math.floor(rng() * pool.length)];
@@ -1027,13 +1219,14 @@ function settleAdulthood_(ctx, cycle, rng) {
 
     // v2.2 (S336 Task 7): stamp the field tag so the rehire matcher can route
     // this citizen from their first adult cycle. Never overwrites.
+    // engine.144 loops 1+2: the tag IS the field when one was drawn.
     var iTags2 = idx('SkillTags');
     if (iTags2 >= 0 && !String(row[iTags2] || '').trim()) {
-      row[iTags2] = settleSkillTag_(row[iRole]);
+      row[iTags2] = fieldPick.field || settleSkillTag_(row[iRole]);
     }
 
     row[iLife] = (life ? life + '\n' : '') +
-      stamp + ' — [Adulthood] ' + b.line + ' — ' + row[iRole] +
+      stamp + ' — [Adulthood] ' + b.line + ' — ' + row[iRole] + settleFieldClause_(fieldPick) +
       (settledBiz ? '' : ' — seeking work (no tracked opening)');
 
     results.settled++;
@@ -1045,6 +1238,7 @@ function settleAdulthood_(ctx, cycle, rng) {
         ' hhInc=' + hhInc + ' sq=' + sq + ' parentRank=' + parentRank +
         (hTier ? ' heritage=' + hTier : '') +
         ' total=' + Math.round(total * 100) / 100 + ' -> ' + band +
+        ' field=' + (fieldPick.field || 'none') + '/' + (fieldPick.cause || 'none') +
         ' (' + row[iRole] + ' @ ' + row[iInc] +
         ' key=' + (iEcon >= 0 ? row[iEcon] : 'n/a') +
         ' biz=' + (settledBiz || 'none') + ')');

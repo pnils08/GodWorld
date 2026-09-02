@@ -1,7 +1,7 @@
 ---
 title: Education → Career Connection Plan (engine.144)
 created: 2026-09-01
-updated: 2026-09-01
+updated: 2026-09-02
 type: plan
 tags: [engine, citizens, education, career, active]
 sources:
@@ -102,6 +102,24 @@ pointers:
 
 ---
 
+## Loops 1+2 — field-first settlement (S411, engine-sheet)
+
+**Builder go 2026-09-02 ("Go").** Items 1 and 2 of the backlog are ONE mechanism, so they shipped as one change: the field is chosen before the role, and `SkillTags` — the token E3 already matches on — IS the field. No new column, no new tab, no new event, no rate change. Graduation is left alone this loop (see §Backlog item 5).
+
+**Measure (S411, live data):** `SkillTags` is set at settlement by `settleSkillTag_(role)` from a role drawn flat from the band's six — the field was a side effect of a dice roll. 50 minors on the live ledger: 47 have a resolvable parent (parent tags span 15 categories), 49 a household; 39 carry no tag yet. `Business_Ledger` (175 rows) carries `Neighborhood`, so a hood's business mix is readable from the settlement's existing read. Youth history is thin but present on the LifeHistory as `runYouthEngine_` dial tags (`[Education]` 23, `[Team]`/`[Cultural]`/`[Civic]`/`[Community]` fewer); the 33 `[Sports]` lines on minors are adult-deck leak (backlog item 3), not youth history. The engine's `simYear` is `2040 + floor(cycle/52)` = 2042 through C155, so every BirthYear-2024 row is already settled — no live cycle settles anyone until C156; proof is hand-staged on the bench.
+
+**Mechanism (`phase05-citizens/educationCareerEngine.js`):**
+- `SETTLE_FIELDS` — the 12 `sectorCategory_` outputs, fixed order (deterministic draw). `Trades`, `The Vulnerable`, `2041-Specific` are live tags E3 cannot match, so they are never drawn.
+- `settleField_(ownTag, parents, hoodCats, cityCats, youthCounts, rng)` — PURE, one `rng()` call. An existing canonical tag wins outright (`cause: own`). Otherwise weights: each parent's canonical tag(s) +3; school years +1 per youth dial line, capped at 3 (`[Team]` → Education, `[Cultural]` → Creative & Arts, `[Civic]` → Government & Civic, `[Community]` → Faith & Community); the hood's businesses normalized to 3 total, `City-wide` rows counting half for every hood. Three sources, equal maximum pull. No weight anywhere → `null` → the legacy band draw, byte-identical to before.
+- `SETTLE_ROLES_BY_FIELD` — one entry role per field × band (36). Existing settlement roles kept where they fit; `SETTLE_FIELD_ECON_KEYS` maps the new trainee roles to catalog profiles (unit-checked against `data/economic_parameters.json`). Money stays the band's.
+- Employer: hires INTO the field — businesses of the exact category first (`buildSettleBizPool_` now also returns `byHood`, `cityWide`, `catById` from the same read; no second fetch), then the field's industry bucket, then the legacy per-role bucket.
+- `SkillTags` = the field, directly (never overwrites). The `[Adulthood]` line names the cause only when one decided: `(following Ada into Healthcare)` / `(the field their school years pointed to: Education)` / `(the neighborhood's trade: Food & Culture)`. `own` and `null` add nothing.
+- Diag: `ENGINE60_T4` log line carries `field=<field>/<cause>`.
+
+**Tests:** `scripts/educationLoop.test.js` §8 (29 new checks; 81/81). Also trued §7: `applyEmployerSuccess_` reads `EducationLevel` only through `credentialRankOf_` since engine.144 — the S409 "reads none" grep had been failing since S410.
+
+**Bench proof plan:** SANDBOX 0831 at C105. Stage three settled BirthYear-2024 rows back to unsettled (strip the `[Adulthood]` line, blank `EconomicProfileKey`/`EmployerBizId`/`SkillTags`/`RoleType`) — chosen for distinct causes: POP-00991 Tariq Mitchell (parent Creative & Arts + `[Team]`+`[Education]`, Uptown), POP-01003 Jabari Jack (parent Creative & Arts + 2×`[Education]`, Uptown), POP-00980 Karim Avery (parent Small Business, Fruitvale, no youth lines). Fire C106; read `ENGINE60_T4` lines and the three `[Adulthood]` lines; 0 `Engine_Errors`. Bench-only writes, never replayed.
+
 ## Backlog — builder direction 2026-09-02 (S410 close)
 
 Recorded as said, with the data point under each. None of these is started; each is its own loop after engine.144 has lived a few cycles.
@@ -118,7 +136,10 @@ Recorded as said, with the data point under each. None of these is started; each
 3. **Youth mode.** Not a new `ClockMode` — ClockMode says who drives the row (ENGINE/GAME/MEDIA/CIVIC). A derived life-stage gate (`age < 18` from BirthYear at the writer) so minors draw ONLY from a youth texture pool and `runYouthEngine_` becomes their sole texture writer; adult decks skip them. First task is a caller-graph of every LifeHistory writer that lacks an age check (S410 found only `generateCitizensEvents.js` gating; the deck-based writers don't).
 4. **Youth events control.** Once (3) exists, youth event types (academic / sports / arts / coming-of-age / civic) become the stage's whole texture, with the same calendar and hood modifiers `runYouthEngine_` already has. `Youth_Events` stays dead.
 
-Filed by engine-sheet at the builder's request; research-build may pick up the design of (1)/(2), engine-sheet holds (3)/(4) mechanism.
+5. **Graduation follows the field** (deferred from loops 1+2, S411). `graduationCredential_` picks associates vs bachelors by SchoolQuality only; a trades/construction/port/transit field could take `trade-cert` instead. Blocker: `credentialRank_` ranks `trade-cert` (2) below `associates` (3), so aiming the degree would cost the citizen the E2/E3 tie-break — re-rate first, then aim.
+6. **E3 cannot hire 63 `Trades`-tagged citizens** (S411 finding). `sectorCategory_` never returns `Trades`, so no business category ever matches the tag; the same holds for `The Vulnerable` (27) and `2041-Specific` (22). Settlement no longer mints `Trades` (electricians settle under Construction & Baylight); the live rows need either a category or a re-tag. Own row when picked up.
+
+Filed by engine-sheet at the builder's request; (1)/(2) SHIPPED S411 as one mechanism (§Loops 1+2 above); engine-sheet holds (3)/(4) mechanism.
 
 ## Open questions
 
@@ -128,6 +149,8 @@ None that block. Decisions made here (engine-sheet holds mechanism):
 - Layoff shield deferred to its own loop.
 
 ## Changelog
+
+- 2026-09-02 (engine-sheet, S411) — **Loops 1+2 coded + unit-proven (81/81):** field-first settlement — `settleField_` (pure, one draw), `SETTLE_FIELDS`, `SETTLE_ROLES_BY_FIELD`, `SETTLE_FIELD_ECON_KEYS`, `settleYouthCounts_`, `settleFieldClause_`; `buildSettleBizPool_` returns hood/city/category maps from its one read; the employer draw hires into the field. Bench proof next (hand-staged — nobody settles on live until C156). Backlog items 5 (graduation follows the field) and 6 (Trades unmatchable by E3) filed.
 
 - 2026-09-02 (engine-sheet, S410 close) — §Backlog added on builder direction: degree field, start-role choice, youth mode (life-stage gate, not a ClockMode), youth events control. Row engine.144 kept in-progress so the plan stays out of the archive sweep while the backlog is live.
 

@@ -21,7 +21,9 @@ global.safeRand_ = function (ctx) { return ctx.rng; };
 
 const E = new Function(R('phase05-citizens/educationCareerEngine.js') + '\nreturn {' +
   'processEducationCareer_, deriveEducationLevels_, deriveMinorEducationStage_, schoolStageForAge_,' +
-  'canonicalEducationWrite_, eduRank_, updateCareerProgression_, EDUCATION_LEVELS };')();
+  'canonicalEducationWrite_, eduRank_, updateCareerProgression_, EDUCATION_LEVELS,' +
+  'settleField_, settleYouthCounts_, settleFieldClause_, settleAdulthood_, buildSettleBizPool_,' +
+  'SETTLE_FIELDS, SETTLE_ROLES_BY_FIELD, SETTLE_FIELD_ECON_KEYS, SETTLE_ECON_KEYS };')();
 const G = new Function(R('phase04-events/generationalEventsEngine.js') + '\nreturn {' +
   'checkGraduation_, graduationCredential_, GRADUATION_LADDER_ };')();
 
@@ -161,13 +163,112 @@ console.log('\n7. career path untouched (grep-as-test):');
 {
   const career = R('phase05-citizens/runCareerEngine.js');
   const fn = (src, name) => { const i = src.indexOf('function ' + name); const j = src.indexOf('\nfunction ', i + 1); return src.slice(i, j < 0 ? undefined : j); };
-  check('applyEmployerSuccess_ reads no EducationLevel', !/EducationLevel/.test(fn(career, 'applyEmployerSuccess_')));
+  // engine.144 (S410): applyEmployerSuccess_ reads the credential ONLY through credentialRankOf_ (a secondary sort key), never as a gate
+  const emp = fn(career, 'applyEmployerSuccess_');
+  check('applyEmployerSuccess_ reads EducationLevel only via credentialRankOf_', (emp.match(/EducationLevel/g) || []).length <= 1 && /credentialRankOf_/.test(emp) && !/EducationLevel[^\n]*(>=|<=|===|<|>)\s*['"]/.test(emp));
   check('matchUnemployedToOpenings_ reads no EducationLevel', !/EducationLevel/.test(fn(career, 'matchUnemployedToOpenings_')));
   const edu = R('phase05-citizens/educationCareerEngine.js');
   check('updateCareerProgression_ reads no EducationLevel', !/idx\('EducationLevel'\)|iEducation\b/.test(fn(edu, 'updateCareerProgression_')));
   check('no "affects career advancement" claim left in the header', !/affects career advancement/.test(edu));
   const youth = R('phase05-citizens/runYouthEngine.js');
   check('runYouthEngine carries no Oakland Unified / OUSD', !/Oakland Unified|OUSD/.test(youth));
+}
+
+console.log('\n8. engine.144 loops 1+2 — field-first settlement (S411):');
+{
+  const F = E.SETTLE_FIELDS, T = E.SETTLE_ROLES_BY_FIELD;
+  check('12 fields, all with a rich/solid/rough role', F.length === 12 && F.every(f => T[f] && T[f].rich && T[f].solid && T[f].rough));
+  check('no Trades/The Vulnerable/2041-Specific in the field vocabulary', !F.includes('Trades') && !F.includes('The Vulnerable') && !F.includes('2041-Specific'));
+  const catalog = JSON.parse(R('data/economic_parameters.json')).map(x => x.role);
+  const keys = Object.assign({}, E.SETTLE_ECON_KEYS, E.SETTLE_FIELD_ECON_KEYS);
+  check('every econ key names a catalog role', Object.keys(keys).every(k => catalog.includes(keys[k])), Object.keys(keys).filter(k => !catalog.includes(keys[k])).join(','));
+
+  const one = (r) => { let n = 0; const rng = () => { n++; return r; }; rng.count = () => n; return rng; };
+  // own tag wins outright
+  let rng = one(0.99);
+  let pk = E.settleField_('Healthcare', [{ name: 'Ada', tags: 'Food & Culture' }], { 'Small Business': 5 }, {}, {}, rng);
+  check('existing canonical tag IS the field (cause own)', pk.field === 'Healthcare' && pk.cause === 'own' && rng.count() === 1);
+  check('own-tag clause is empty', E.settleFieldClause_(pk) === '');
+  // non-field own tag ignored; parent decides
+  pk = E.settleField_('2041-Specific', [{ name: 'Ada', tags: 'Healthcare' }], {}, {}, {}, one(0.5));
+  check('parent field with no other source → parent cause, named', pk.field === 'Healthcare' && pk.cause === 'parent' && pk.parentName === 'Ada');
+  check('parent clause names the parent and the field', E.settleFieldClause_(pk) === ' (following Ada into Healthcare)');
+  // pipe-joined + non-field parent tags filtered
+  pk = E.settleField_('', [{ name: 'Bo', tags: 'The Vulnerable|Creative & Arts' }, { name: 'Cy', tags: 'athlete' }], {}, {}, {}, one(0.1));
+  check('pipe-joined parent tag: only the canonical half counts', pk.field === 'Creative & Arts' && pk.cause === 'parent' && pk.parentName === 'Bo');
+  // no source at all → null, legacy path
+  pk = E.settleField_('', [{ name: 'Cy', tags: 'athlete' }], {}, {}, {}, one(0.3));
+  check('no source → field null', pk.field === null && pk.cause === null);
+  // hood normalized: 6 restaurants (3 total) vs one Healthcare parent (3) → 50/50
+  const hood6 = { 'Food & Culture': 6 };
+  const par = [{ name: 'Ada', tags: 'Healthcare' }];
+  const a = E.settleField_('', par, hood6, {}, {}, one(0.49)), b = E.settleField_('', par, hood6, {}, {}, one(0.51));
+  check('hood weight normalized to one source: parent wins below .5, hood above', a.field === 'Healthcare' && a.cause === 'parent' && b.field === 'Food & Culture' && b.cause === 'hood');
+  check('hood clause', E.settleFieldClause_(b) === " (the neighborhood's trade: Food & Culture)");
+  // city-wide counts half, for any hood
+  pk = E.settleField_('', [], {}, { 'Government & Civic': 6, 'Education': 2 }, {}, one(0.1));
+  check('city-wide businesses reach a hood with none of its own (half weight)', pk.field === 'Education' && pk.cause === 'hood');
+  pk = E.settleField_('', [], {}, { 'Government & Civic': 6, 'Education': 2 }, {}, one(0.9));
+  check('…and the bigger city-wide category takes the larger slice', pk.field === 'Government & Civic' && pk.cause === 'hood');
+  // school years: capped at 3, Team → Education
+  const yc = E.settleYouthCounts_('Y1C1 — [Education] read (good)\nY1C2 — [Team] joined (ok)\nY1C3 — [Sports] adult leak\nY1C4 — [Education] x (y)\nY1C5 — [Education] y\nY1C6 — [Education] z');
+  check('youth counts read only the five youth dial tags', yc.Education === 4 && yc.Team === 1 && yc.Sports === undefined);
+  pk = E.settleField_('', [], {}, {}, yc, one(0.2));
+  check('school years alone → Education, cause school', pk.field === 'Education' && pk.cause === 'school');
+  check('school clause', E.settleFieldClause_(pk) === ' (the field their school years pointed to: Education)');
+  const c1 = E.settleField_('', par, {}, {}, yc, one(0.49)), c2 = E.settleField_('', par, {}, {}, yc, one(0.51));
+  check('school years capped at one source weight (3): 5 youth lines tie a parent 50/50', c1.field === 'Healthcare' && c2.field === 'Education');
+  // determinism + single draw
+  const d1 = E.settleField_('', par, hood6, { Education: 2 }, yc, one(0.37)), d2 = E.settleField_('', par, hood6, { Education: 2 }, yc, one(0.37));
+  const rc = one(0.37); E.settleField_('', par, hood6, { Education: 2 }, yc, rc);
+  check('deterministic, exactly one rng draw', d1.field === d2.field && d1.cause === d2.cause && rc.count() === 1);
+
+  // end-to-end: settleAdulthood_ on a stub ctx with a parent, a hood, and Business_Ledger
+  const H2 = H.concat(['ParentIds', 'SkillTags', 'EmployerBizId', 'DebtLevel', 'NetWorth']);
+  const col2 = (n) => H2.indexOf(n);
+  const row2 = (o) => { const r = H2.map(() => ''); Object.keys(o).forEach(k => { r[col2(k)] = o[k]; }); return r; };
+  const sheets = {
+    Household_Ledger: [['HouseholdId', 'HouseholdIncome', 'Status'], ['HH-1', 150000, 'active']],
+    Business_Ledger: [['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count'],
+      ['BIZ-1', 'Temescal Clinic', 'Healthcare', 'Temescal', 5],
+      ['BIZ-2', 'Taqueria', 'Restaurant', 'Temescal', 5],
+      ['BIZ-3', 'City Hall', 'Municipal Government', 'City-wide', 50]]
+  };
+  const mkCtx = (rows, seq) => {
+    let i = 0;
+    return { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: { cycleCount: CYCLE },
+      rng: () => seq[(i++) % seq.length], now: 'now',
+      ss: { getSheetByName(n) { return sheets[n] ? { getDataRange() { return { getValues() { return sheets[n].map(r => r.slice()); } }; } } : null; } } };
+  };
+  global.sectorCategory_ = (sec, strict) => (/health/i.test(sec) ? 'Healthcare' : /restaurant/i.test(sec) ? 'Food & Culture' : /government/i.test(sec) ? 'Government & Civic' : (strict ? null : 'Small Business'));
+  global.deriveDebtLevel_ = () => 'low'; global.deriveNetWorth_ = () => 1000;
+  const parent = row2({ POPID: 'POP-P', First: 'Ada', Last: 'Ng', BirthYear: 1990, Status: 'active', ClockMode: 'ENGINE', EducationLevel: 'masters', SkillTags: 'Healthcare', EconomicProfileKey: 'ER Nurse' });
+  const kid = row2({ POPID: 'POP-K', First: 'Kim', Last: 'Ng', BirthYear: SIM_YEAR - 18, Status: 'active', ClockMode: 'ENGINE', HouseholdId: 'HH-1', SchoolQuality: 9, ParentIds: '["POP-P"]', Neighborhood: 'Temescal', LifeHistory: 'Y1C1 — [Education] read (good)' });
+  // draws (rich band → no dropout roll): band jitter, field roll (parent Healthcare 3 + school Education 1
+  // + hood 1.2 Healthcare / 1.2 Food / 0.6 Gov → Healthcare below ≈.6), income, employer
+  let ctx = mkCtx([parent, kid], [0.5, 0.1, 0.5, 0.0]);
+  let res = E.settleAdulthood_(ctx, CYCLE, ctx.rng);
+  let k = ctx.ledger.rows[1];
+  check('settled one, rich band (hh 150k + sq 9 + parent masters)', res.settled === 1 && res.rich === 1);
+  check('role = field × band table cell', k[col2('RoleType')] === 'Biotech Lab Assistant', k[col2('RoleType')]);
+  check('SkillTags = the field, directly', k[col2('SkillTags')] === 'Healthcare');
+  check('[Adulthood] line names the cause', /\[Adulthood\] .* — Biotech Lab Assistant \(following Ada into Healthcare\)/.test(k[col2('LifeHistory')]), k[col2('LifeHistory')].split('\n').pop());
+  check('employer is IN the field (the clinic, not City Hall / the taqueria)', k[col2('EmployerBizId')] === 'BIZ-1', k[col2('EmployerBizId')]);
+  check('econ key set', k[col2('EconomicProfileKey')] === 'Medical Lab Technician');
+  // same kid, hood decides (roll lands past parent + school on the Food & Culture slice)
+  ctx = mkCtx([parent, kid], [0.5, 0.93, 0.5, 0.0]);
+  res = E.settleAdulthood_(ctx, CYCLE, ctx.rng); k = ctx.ledger.rows[1];
+  check('hood-decided: Food & Culture rich role + hood clause', k[col2('RoleType')] === 'Pastry Apprentice' && / \(the neighborhood's trade: Food & Culture\)/.test(k[col2('LifeHistory')]), k[col2('RoleType')] + ' | ' + k[col2('LifeHistory')].split('\n').pop());
+  check('field-role econ key from the field table', k[col2('EconomicProfileKey')] === 'Pastry Chef');
+  check('hood-decided kid hires into the field (the taqueria)', k[col2('EmployerBizId')] === 'BIZ-2', k[col2('EmployerBizId')]);
+  // orphan in a hood with no businesses and no school lines → legacy band draw, tag from the role, no clause
+  const orphan = row2({ POPID: 'POP-O', First: 'Ori', Last: 'Lee', BirthYear: SIM_YEAR - 18, Status: 'active', ClockMode: 'ENGINE', Neighborhood: 'Nowhere', LifeHistory: '' });
+  sheets.Business_Ledger = [['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count']];
+  ctx = mkCtx([orphan], [0.5, 0.9, 0.1, 0.5, 0.0]);
+  res = E.settleAdulthood_(ctx, CYCLE, ctx.rng); k = ctx.ledger.rows[0];
+  check('no source → legacy band role, no clause', res.settled === 1 && k[col2('RoleType')] !== '' && !/following|school years|neighborhood's trade/.test(k[col2('LifeHistory')]), k[col2('LifeHistory')].split('\n').pop());
+  check('legacy tag still stamped from the role', k[col2('SkillTags')] !== '');
+  delete global.sectorCategory_; delete global.deriveDebtLevel_; delete global.deriveNetWorth_;
 }
 
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');

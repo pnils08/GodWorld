@@ -1260,6 +1260,14 @@
 
 - **settleSkillTag_(role)**
 
+- **isSettleField_(tag)**
+
+- **settleYouthCounts_(lifeHistory)**
+
+- **settleField_(ownTag, parents, hoodCats, cityCats, youthCounts, rng)**
+
+- **settleFieldClause_(pick)**
+
 - **eduRank_(v)**
 
 - **credentialRank_(v)**
@@ -3646,4 +3654,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1232
+**Functions mapped:** 1236

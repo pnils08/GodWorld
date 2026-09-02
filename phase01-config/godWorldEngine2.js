@@ -2186,6 +2186,11 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaFeedback', function() { runMediaFeedbackEngine_(ctx); });
+  // S409 (G-PF30): was missing from this list only — production runs it.
+  // Publishes S.storyHooks / S.storylineWeaving; its Storyline_Tracker direct
+  // writes are an existing §9 carve-out (same class dry-run already carries
+  // from Phase 3 own-tab writers).
+  safePhaseCall_(ctx, 'Phase7-StorylineWeaving', function() { weaveStorylines_(ctx); });
   safePhaseCall_(ctx, 'Phase7-SeasonalSeeds', function() { applySeasonalStorySeeds_(ctx); });
   safePhaseCall_(ctx, 'Phase7-ChaosWeights', function() { applyChaosCategoryWeights_(ctx); });
   // engine.11 chaos-cars (T5.4) — create a Storyline_Tracker arc per Tier-1 chaos hit.
@@ -2233,6 +2238,10 @@ function runCyclePhases_(ctx) {
   // S229 DISABLED — Chicago Path B no-grow-legacy. See production entry point
   // comment block above for full rationale + reversibility note. Cycle-phases sister.
   // safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });
+  // S409 (G-PF30): was missing from this list only — production runs it.
+  // Writes S.compressedLine / S.cycleSummary, which buildCyclePacket_ reads at
+  // Phase 10 — so the dry-run packet was missing fields the live one has.
+  safePhaseCall_(ctx, 'Phase9-DigestSummary', function() { applyCompressedDigestSummary_(ctx); });
   // v2.13: Compress LifeHistory into TraitProfiles for archetype-aware event generation
   safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });

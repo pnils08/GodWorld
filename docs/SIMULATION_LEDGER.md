@@ -173,6 +173,8 @@ Every column is a data point in someone's life. This maps who writes each column
 
 ### Identity (A–E)
 
+**There is no `Name` column (G-PF22, S409).** The sheet carries `First` (B) and `Last` (D) separately; the `Name` field in `output/simulation_ledger_snapshot.jsonl` is synthesized by `scripts/dumpLedger.js` and exists only in the snapshot. A sheet query using `headers.indexOf('Name')` gets −1 and reads `undefined` for every row — it manufactures absence, reporting "not in ledger" for citizens who are present. Resolve by name through `lib/sheets.js` `matchCitizensByName(name, rows)` / `findCitizensByName(name)` (exact full-name first, substring fallback, returns every hit — homonyms are the caller's call), never by a hand-rolled join.
+
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
 | A | 1 | POPID | `POP-00001` format. Unique. Never reuse. | processIntakeV3, integration scripts | Universal key — everything reads this | **CAUSAL** — `generateGameModeMicroEvents.js:502` `getCitizenDialBands_` lookup |

@@ -481,14 +481,21 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     /\[ENGINE-CLOCK n=1 from=C106\]/.test(first.notes), first.notes);
 
   // Grace accrues across consecutive uncovered cycles, keeping the ORIGIN.
-  const second = I.engineClockHold_(first.notes, 106, 107, false);
-  const third  = I.engineClockHold_(second.notes, 107, 108, false);
+  // S409: chained through the hold's OWN outputs — the clock it wrote (cycle+1)
+  // is what the next cycle reads. The old case fed an already-expired clock the
+  // loop can never produce, which is how the clear-branch bug hid (bench C107:
+  // "re-armed by the chain — grace cleared" with no chain run).
+  const second = I.engineClockHold_(first.notes, first.nextActionCycle, 107, false);
+  const third  = I.engineClockHold_(second.notes, second.nextActionCycle, 108, false);
   check('Q3 grace accrues and the origin cycle is preserved',
-    second.grace === 2 && third.grace === 3 && /from=C106/.test(third.notes),
-    JSON.stringify([second.grace, third.grace, third.notes]));
+    second.action === 'hold' && second.grace === 2 && second.nextActionCycle === 108 &&
+    third.action === 'hold' && third.grace === 3 && third.nextActionCycle === 109 && /from=C106/.test(third.notes),
+    JSON.stringify([second, third]));
+  check('Q3b the hold\'s own stamp arriving (clock === cycle, marker present) is NOT read as a chain re-arm',
+    I.engineClockHold_(first.notes, 107, 107, false).action === 'hold');
 
   // Budget spent -> released to silence. The drain is delayed, never removed.
-  const fourth = I.engineClockHold_(third.notes, 108, 109, false);
+  const fourth = I.engineClockHold_(third.notes, third.nextActionCycle, 109, false);
   check('Q4 grace exhausts and the row is released to silence',
     fourth.action === 'expire' && fourth.grace === 3, JSON.stringify(fourth));
   check('Q5 an expired row still classifies silence downstream',

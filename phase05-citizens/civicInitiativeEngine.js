@@ -2879,7 +2879,9 @@ if (typeof module !== 'undefined' && module.exports) {
  * Pure by design so the seam is testable without a sheet. Returns the action
  * plus the exact field values the caller should write.
  *
- *   'hold'   — clock re-stamped to cycle+1, grace consumed
+ *   'hold'   — clock re-stamped to cycle+1, grace consumed (a marker whose
+ *              clock reads exactly `cycle` is the hold's own stamp arriving,
+ *              and holds again — it is NOT a chain re-arm; S409)
  *   'clear'  — chain re-armed the clock; retire the marker
  *   'expire' — grace exhausted; write nothing, let it fall to silence
  *   'none'   — nothing to do
@@ -2893,9 +2895,16 @@ function engineClockHold_(notes, nextActionCycle, cycle, engineWillAct) {
   var stripped = notesNow.replace(ENGINE_CLOCK_RE_, '').replace(/\s{2,}/g, ' ').trim();
   var parsed = parseInt(nextActionCycle, 10);
   var expired = !isNaN(parsed) && Number(parsed) < Number(cycle);
+  // S409 (bench C106→C107, execution log): a hold stamps the clock to cycle+1,
+  // so on the very next cycle the row reads "not expired" — which this branch
+  // took for a chain re-arm, retired the marker and reset the budget. The
+  // grace never accrued: the row alternated hold / expired-silence forever
+  // and the three-cycle bound never engaged. The hold's own stamp is
+  // `parsed === cycle` WITH a marker; a chain re-arm lands strictly beyond it.
+  var heldHere = !!mark && !isNaN(parsed) && Number(parsed) === Number(cycle);
 
   // The chain moved the row (or it never was overdue). Retire any marker.
-  if (!expired) {
+  if (!expired && !heldHere) {
     if (!mark) return { action: 'none' };
     return { action: 'clear', notes: stripped, grace: 0 };
   }

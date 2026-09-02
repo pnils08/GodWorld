@@ -12,6 +12,14 @@
  * these drive it as a subprocess against fixture editions rather than importing.
  *
  * Run: node scripts/rateEditionCoverage.test.js
+ *
+ * G-PF14 (S409) — the "intermittent under the full suite" was a coin flip in
+ * this file, not the suite: fixtures carried `CYCLE 900`, not the real
+ * `THE CYCLE PULSE — EDITION 900` header, so cycle detection fell to the
+ * rater's path fallback, which only found a digit when mkdtemp's random
+ * six-char suffix happened to contain one (~65%). Reproduced 2/5 in
+ * isolation. Fixtures now carry the real header; the rater's fallback now
+ * reads the basename only.
  */
 'use strict';
 
@@ -53,7 +61,7 @@ console.log('reporter -> domain resolution:');
 // 1. No section headers anywhere — the C104 shape. Each byline must land on
 //    its OWN beat, not collapse into one default bucket.
 const headerless = fixture('headerless.txt', [
-  'CYCLE PULSE — CYCLE 900', '',
+  'THE CYCLE PULSE — EDITION 900', '',
   '============================================================', '',
   'Late-Season Push', 'By Tanya Cruz', body('The club took the series and the room felt it.'), '',
   '============================================================', '',
@@ -73,7 +81,7 @@ check('does NOT collapse everything into COMMUNITY', !/COMMUNITY: /.test(r.out),
 
 // 2. A title in the byline ("Dr. Lila Mezran") must still match the roster.
 const titled = fixture('titled.txt', [
-  'CYCLE PULSE — CYCLE 900', '',
+  'THE CYCLE PULSE — EDITION 900', '',
   'Clinic Hours', 'By Dr. Lila Mezran', body('The clinic extended its hours through the month.'), '',
 ].join('\n'));
 r = run(titled);
@@ -85,7 +93,7 @@ console.log('\nsection headers still win (backward compatibility):');
 //    a sports reporter filed under CIVIC rates CIVIC. Older editions must
 //    re-rate exactly as they always did.
 const sectioned = fixture('sectioned.txt', [
-  'CYCLE PULSE — CYCLE 900', '',
+  'THE CYCLE PULSE — EDITION 900', '',
   'CIVIC', '',
   'Council Vote', 'By Anthony Raines', body('The council took the vote after a long hearing.'), '',
 ].join('\n'));
@@ -98,7 +106,7 @@ console.log('\ndomain-resolution gate:');
 // 4. Articles found but nothing resolvable — the failure the old gate missed.
 //    Unknown bylines, no section headers: must FAIL, not emit one COMMUNITY row.
 const unresolvable = fixture('unresolvable.txt', [
-  'CYCLE PULSE — CYCLE 900', '',
+  'THE CYCLE PULSE — EDITION 900', '',
   'Something Happened', 'By Gwendolyn Fairweather', body('An unknown byline filed copy from somewhere.'), '',
   '============================================================', '',
   'Another Thing', 'By Bartholomew Quist', body('A second unknown byline filed more copy.'), '',
@@ -109,14 +117,14 @@ check('failure names the resolution problem', /0 resolved to a domain/.test(r.ou
 check('failure lists the bylines it could not place', /Gwendolyn Fairweather/.test(r.out));
 
 // 5. The pre-existing zero-article gate must still fire.
-const empty = fixture('empty.txt', 'CYCLE PULSE — CYCLE 900\n\nNo bylines here at all.\n');
+const empty = fixture('empty.txt', 'THE CYCLE PULSE — EDITION 900\n\nNo bylines here at all.\n');
 r = run(empty);
 check('zero-article gate still fires', r.code === 2 && /found 0 articles/.test(r.out), 'exit ' + r.code);
 
 // 6. Partial resolution is NOT a failure — one good byline carries the run,
 //    and the unresolved one is reported rather than silently bucketed.
 const mixed = fixture('mixed.txt', [
-  'CYCLE PULSE — CYCLE 900', '',
+  'THE CYCLE PULSE — EDITION 900', '',
   'Late Push', 'By Tanya Cruz', body('The club took the series in front of a full house.'), '',
   '============================================================', '',
   'Stray Copy', 'By Gwendolyn Fairweather', body('An unknown byline filed alongside a known one.'), '',

@@ -26,7 +26,10 @@
 require('/root/GodWorld/lib/env');  // S197 BUNDLE-B (G-P7) — loads GODWORLD_SHEET_ID + GOOGLE_APPLICATION_CREDENTIALS from /root/.config/godworld/.env
 var fs = require('fs');
 var path = require('path');
-var sheets = require('../lib/sheets');
+// lib/sheets (googleapis) is required lazily in the --apply branch below —
+// G-PF14 (S409): the default dry-run path never touches the API, and the
+// test drives seven dry-run subprocesses; loading googleapis in each was the
+// heaviest thing the suite's flakiest file did.
 var coverageAnchors = require('../lib/coverageAnchorRetirements');
 
 var args = process.argv.slice(2);
@@ -47,7 +50,11 @@ var text = fs.readFileSync(path.resolve(filePath), 'utf8');
 // ═══════════════════════════════════════════════════════════════════════════
 
 var cycle = 0;
-var cycleMatch = text.match(/EDITION\s+(\d+)/i) || filePath.match(/(\d+)/);
+// G-PF14 (S409): the path fallback matches the BASENAME only. The old
+// full-path match took the first digit run anywhere in the path — a dated
+// output dir would read as the cycle, and a tmp dir without digits read as
+// no cycle at all (the test's 35% flake: mkdtemp's random suffix).
+var cycleMatch = text.match(/EDITION\s+(\d+)/i) || path.basename(filePath).match(/(\d+)/);
 if (cycleMatch) cycle = parseInt(cycleMatch[1], 10);
 
 if (!cycle) {
@@ -639,6 +646,7 @@ if (outputRows.length === 0) {
 
 (async function() {
   try {
+    var sheets = require('../lib/sheets');
     var client = await sheets.getClient();
     var spreadsheetId = process.env.GODWORLD_SHEET_ID;
     if (!spreadsheetId) {

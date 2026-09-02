@@ -79,7 +79,13 @@ for (const t of tests) {
   });
   const elapsed = ((Date.now() - t0) / 1000).toFixed(2);
   if (result.status !== 0) {
-    console.log(red(`✗ FAILED: ${rel}`) + dim(` (${elapsed}s)\n`));
+    // G-PF14 (S409): a file that dies to a signal (OOM kill, SIGTERM) exits
+    // non-zero with NO assertion output — the exact shape rateEditionCoverage
+    // showed twice under the full suite. Print status/signal/spawn error so
+    // the next intermittent is diagnosable from the log instead of inferred.
+    const why = `exit=${result.status} signal=${result.signal || 'none'}` +
+      (result.error ? ` error=${result.error.message}` : '');
+    console.log(red(`✗ FAILED: ${rel}`) + dim(` (${elapsed}s) ${why}\n`));
     failed.push(rel);
   } else {
     console.log(green(`✓ ${rel}`) + dim(` (${elapsed}s)\n`));

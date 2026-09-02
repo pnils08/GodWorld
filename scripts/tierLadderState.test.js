@@ -56,16 +56,20 @@ console.log('\n4. never down, never a guess, never off-clock:');
   const amb = ctxOf([row('POP-5', 'Sam', 'Reyes', 4, 9), row('POP-6', 'Sam', 'Reyes', 4, 9)], usage(Array(9).fill(['Sam Reyes'])));
   const ra = E.applyTierLadderState_(amb, 111);
   check('two ledger rows on one name → both skipped as ambiguous', ra.promoted === 0 && ra.ambiguous === 2);
-  const off = ctxOf([row('POP-7', 'Kai', 'Bell', 4, 9, { 4: 'GAME' }), row('POP-8', 'Ann', 'Bell', 4, 9, { 6: 'Retired' })], usage(Array(9).fill(['Kai Bell']).concat(Array(9).fill(['Ann Bell']))));
-  check('GAME clock and non-active rows untouched', E.applyTierLadderState_(off, 111).promoted === 0 && off.ledger.rows[0][3] === 4 && off.ledger.rows[1][3] === 4);
+  const off = ctxOf([row('POP-7', 'Kai', 'Bell', 4, 9, { 4: 'GAME' }), row('POP-8', 'Ann', 'Bell', 4, 9, { 6: 'Retired' }), row('POP-8b', 'Cy', 'Bell', 4, 9, { 4: 'CIVIC' })], usage(Array(9).fill(['Kai Bell']).concat(Array(9).fill(['Ann Bell'])).concat(Array(3).fill(['Cy Bell']))));
+  const ro = E.applyTierLadderState_(off, 111);
+  check('GAME clock climbs on citations (builder 2026-09-02); non-active untouched; CIVIC on citations as before', ro.promoted === 2 && off.ledger.rows[0][3] === 1 && off.ledger.rows[1][3] === 4 && off.ledger.rows[2][3] === 3);
+  const med = ctxOf([row('POP-M1', 'Ida', 'Quill', 4, 9, { 4: 'MEDIA' }), row('POP-M2', 'Bo', 'Quill', 4, 9, { 4: 'MEDIA' })], usage(Array(9).fill(['Ida Quill', 'mentioned']).concat([['Bo Quill', 'byline-published'], ['Bo Quill', 'byline-published'], ['Bo Quill', 'byline-landed'], ['Bo Quill', 'mentioned']])));
+  const rm = E.applyTierLadderState_(med, 111);
+  check('MEDIA clock: being mentioned earns nothing; two Saturday-published pieces (worth 2 each) → Tier 3', rm.promoted === 1 && med.ledger.rows[0][3] === 4 && med.ledger.rows[1][3] === 3 && /Saturday paper \(2 published\)/.test(med.ledger.rows[1][7]));
 }
 
 console.log('\n5. citations on record — emergence types only, normalized names, honorifics:');
 {
-  const c = ctxOf([row('POP-9', 'Rosa', 'Núñez', 4, 5)], usage([['Rosa Nunez'], ['Dr. Rosa Núñez', 'interviewed'], ['Rosa Núñez', 'byline'], ['rosa núñez', 'author'], ['Rosa Núñez', 'featured']]));
+  const c = ctxOf([row('POP-9', 'Rosa', 'Núñez', 4, 5)], usage([['Rosa Nunez'], ['Dr. Rosa Núñez', 'interviewed'], ['Rosa Núñez', 'byline'], ['rosa núñez', 'stats'], ['Rosa Núñez', 'featured']]));
   const cit = E.earnedCitationsByKey_(c);
   const key = Object.keys(cit)[0];
-  check('accents/honorifics fold to one key; non-emergence types excluded', Object.keys(cit).length === 1 && /rosa nunez|rosa n/.test(key) && cit[key] >= 3, JSON.stringify(cit));
+  check('accents/honorifics fold to one key; non-emergence types excluded from cited', Object.keys(cit).length === 1 && /rosa nunez|rosa n/.test(key) && cit[key].cited === 3 && cit[key].published === 0, JSON.stringify(cit));
   check('cell 5, on record ≥3 → Tier 3 (min of the two)', E.applyTierLadderState_(c, 111).promoted === 1 && c.ledger.rows[0][3] === 3);
   check('the read is cached on ctx for the cycle', c._earnedCitations150 === cit);
 }
@@ -76,6 +80,8 @@ console.log('\n6. the citation event no longer decides Tier (grep-as-test):');
   const fn = (name) => { const i = a.indexOf('function ' + name); const j = a.indexOf('\nfunction ', i + 1); return a.slice(i, j < 0 ? undefined : j); };
   check('processMediaUsage_ carries no bar comparison', !/newUsage >= [369]/.test(fn('processMediaUsage_')));
   check('the state pass runs before decay in the main sequence', a.indexOf('applyTierLadderState_(ctx, cycle)') < a.indexOf('decayMediaAttention_(ctx, cycle);'));
+  check('decay recognises the old climb line as an earned rung (canon on record)', /Advanced from Tier \\d to Tier \(\\d\)/.test(fn('decayMediaAttention_')));
+  check('decay covers ENGINE + GAME + MEDIA, holds CIVIC', /mode9 !== 'ENGINE' && mode9 !== 'GAME' && mode9 !== 'MEDIA'/.test(fn('decayMediaAttention_')));
 }
 
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');

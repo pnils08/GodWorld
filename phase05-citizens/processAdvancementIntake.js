@@ -881,12 +881,17 @@ var TIER_BAR = { 1: 9, 2: 6, 3: 3 };
 //   - the climb logged "Advanced from Tier" while decay (engine.69) reads
 //     "Updated to Tier N" as the earned-rung marker, so a media-earned rung
 //     was never eligible to give way.
-// Now: every cycle, for every ENGINE-clock active citizen, the EARNED count =
-// min(cell, emergence citations on record for the name). Tier follows the bar
+// Now: every cycle, for every active citizen, the EARNED count = min(cell,
+// what is on record for the name) — and what counts is the clock's own door
+// (builder, 2026-09-02 16:15): ENGINE, GAME and CIVIC earn on emergence
+// citations (being named in print); MEDIA earns only on their OWN work
+// selected into the Saturday edition ('byline-published', worth 2 per the
+// engine.88 rule — a published piece was landed first). Tier follows the bar
 // that count clears, upward only (decay owns the way down). The seeded cell
 // itself is HELD — the builder's ruling is that the gifted era keeps what it
 // has; it just cannot climb on it. Promotions write the marker decay reads.
 // Ambiguous names (two ledger rows, one key) are skipped, never guessed.
+// (A CIVIC ladder on approval rating was floated and left for its own cut.)
 
 function tierForEarnedUsage_(earned) {
   var n = Number(earned) || 0;
@@ -896,8 +901,10 @@ function tierForEarnedUsage_(earned) {
   return 4;
 }
 
-// Emergence citations on record per normalized "first last" key — the same
-// key processMediaUsage_ matches on. Cached on ctx for the cycle.
+// Per normalized "first last" key (the key processMediaUsage_ matches on):
+// { cited: emergence citations on record, published: 'byline-published' rows }.
+// Cached on ctx for the cycle.
+var MEDIA_PUBLISHED_WORTH = 2; // engine.88: landed (1) + published (1)
 function earnedCitationsByKey_(ctx) {
   if (ctx && ctx._earnedCitations150) return ctx._earnedCitations150;
   var out = {};
@@ -911,11 +918,13 @@ function earnedCitationsByKey_(ctx) {
       var iType = findColByName_(uh, 'UsageType');
       if (iName >= 0) {
         for (var r = 1; r < uv.length; r++) {
-          if (!isEmergenceUsage_(iType >= 0 ? String(uv[r][iType] || '').trim() : '')) continue;
+          var ut = iType >= 0 ? String(uv[r][iType] || '').trim().toLowerCase() : '';
           var sp = splitUsageName_(String(uv[r][iName] || '').trim());
           if (!sp) continue;
           var key = normalizeCitizenName_(sp.first) + ' ' + normalizeCitizenName_(sp.last);
-          out[key] = (out[key] || 0) + 1;
+          var slot = out[key] || (out[key] = { cited: 0, published: 0 });
+          if (isEmergenceUsage_(ut)) slot.cited++;
+          if (ut === 'byline-published') slot.published++;
         }
       }
     }
@@ -947,10 +956,11 @@ function applyTierLadderState_(ctx, cycle) {
     var st = iStat >= 0 ? String(row[iStat] || '').trim().toLowerCase() : 'active';
     if (st !== 'active') continue;
     var mode = iClock >= 0 ? String(row[iClock] || 'ENGINE').trim().toUpperCase() : 'ENGINE';
-    if (mode !== 'ENGINE') continue;
+    if (mode !== 'ENGINE' && mode !== 'GAME' && mode !== 'CIVIC' && mode !== 'MEDIA') continue;
     var key = keyOf(row);
     if (keyCount[key] > 1) { results.ambiguous++; continue; }
-    var onRecord = citations[key] || 0;
+    var rec = citations[key] || { cited: 0, published: 0 };
+    var onRecord = (mode === 'MEDIA') ? rec.published * MEDIA_PUBLISHED_WORTH : rec.cited;
     var earned = Math.min(cell, onRecord);
     if (earned < cell && tierForEarnedUsage_(cell) < tierForEarnedUsage_(earned)) results.seededHeld++;
     var target = tierForEarnedUsage_(earned);
@@ -960,7 +970,9 @@ function applyTierLadderState_(ctx, cycle) {
     row[iTier] = target;
     var name = (String(row[iFirst] || '').trim() + ' ' + String(row[iLast] || '').trim()).trim();
     var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
-    var line = stamp + ' — [Media] Updated to Tier ' + target + ' — the city keeps saying the name (' + earned + ' citations on record)';
+    var line = stamp + ' — [Media] Updated to Tier ' + target + (mode === 'MEDIA' ?
+      ' — the work keeps making the Saturday paper (' + rec.published + ' published)' :
+      ' — the city keeps saying the name (' + earned + ' citations on record)');
     if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + line;
     if (iLastU >= 0) row[iLastU] = 'C' + cycle;
     rows[r] = row;
@@ -1026,7 +1038,7 @@ function decayMediaAttention_(ctx, cycle) {
       if (iLPop9 >= 0) {
         for (var lr = 1; lr < lv.length; lr++) {
           var lTxt = String(lv[lr][4] || '');
-          var m9 = lTxt.match(/Updated to Tier (\d)/);
+          var m9 = lTxt.match(/Updated to Tier (\d)/) || lTxt.match(/Advanced from Tier \d to Tier (\d)/); // engine.150: the old climb's line counts — the canon is on record (builder, 2026-09-02)
           if (!m9) continue;
           var lp9 = String(lv[lr][iLPop9] || '').trim().toUpperCase();
           if (!lp9) continue;
@@ -1057,7 +1069,7 @@ function decayMediaAttention_(ctx, cycle) {
     // rules 2+3: earned rungs give way
     var tier9 = Number(row[iTier]) || 4;
     var mode9 = iClock >= 0 ? String(row[iClock] || 'ENGINE').trim().toUpperCase() : 'ENGINE';
-    if (tier9 <= 1 || tier9 >= 4 || mode9 !== 'ENGINE') continue;
+    if (tier9 <= 1 || tier9 >= 4 || (mode9 !== 'ENGINE' && mode9 !== 'GAME' && mode9 !== 'MEDIA')) continue; // engine.150: the clocks that climb are the clocks that fall (CIVIC held)
     var pop9 = String(row[iPop] || '').trim().toUpperCase();
     var earned = earnedTiersByPop[pop9] || {};
     var bar = TIER_BAR[tier9] || 99;

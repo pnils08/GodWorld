@@ -50,6 +50,9 @@ assert('hiring window is dial-steered', /\/ 52 \* gapFactor/.test(src));
 // E3 (S401, builder points 5/14): hiring reaches only the jobless, in their own field
 assert('matcher candidates = blank employer only (UNTRACKED keep their job)', /var uEmp = safeStr\(uRow\[iEmployerBizId\]\)\.trim\(\);\n\s*if \(uEmp !== ''\) continue;/.test(src) && !/uEmp !== 'UNTRACKED'/.test(src));
 assert('cross-field fallback deleted', !/anyField/.test(src) && !/one career-changer at most/.test(src));
+// engine.145 (S411): both E3 tag∩category sites go through the alias-aware helper
+assert('E3 same-field + isCross both use tagsInCategory_', (src.match(/tagsInCategory_\(pool\[/g) || []).length === 2 && !/\.tags\.indexOf\(cat\)/.test(src));
+assert('tagsInCategory_ resolves aliases via the shared helper (loaded here with educationCareerEngine)', sandbox.tagsInCategory_(['Trades'], 'Construction & Baylight') === true && sandbox.tagsInCategory_(['Trades'], 'Trades') === false && sandbox.tagsInCategory_(['Healthcare'], 'Healthcare') === true);
 // Doctrine point 21: the lottery of chance is rare — ≈1 employer event per ten cycles city-wide
 assert('RARE_EVENT_SCALE = 0.1 applied to both budgets', sandbox.RARE_EVENT_SCALE === 0.1 && /promoP = [^\n]*RARE_EVENT_SCALE\)/.test(src) && /layoffP = [^\n]*RARE_EVENT_SCALE\)/.test(src));
 assert('reconciliation rate-limited', /Math\.min\(shortfall, 2\)/.test(src));

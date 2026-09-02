@@ -1262,6 +1262,10 @@
 
 - **isSettleField_(tag)**
 
+- **skillTagField_(tag)**
+
+- **tagsMatchCategory_(tagsStr, cat)**
+
 - **settleYouthCounts_(lifeHistory)**
 
 - **settleField_(ownTag, parents, hoodCats, cityCats, youthCounts, rng)**
@@ -1648,6 +1652,8 @@
 
 ### runCareerEngine.js
 - **sectorCategory_(sector, strict)**
+
+- **tagsInCategory_(tags, cat)**
 
 - **credentialRankOf_(row, iEdu)**
 
@@ -3667,4 +3673,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1242
+**Functions mapped:** 1245

@@ -915,6 +915,33 @@ var SETTLE_SOURCE_WEIGHT = 3; // each parent, the school years (capped), the hoo
 
 function isSettleField_(tag) { return SETTLE_FIELDS.indexOf(String(tag || '').trim()) >= 0; }
 
+// engine.145 (S411): the SkillTags column was backfilled from the economic
+// catalog's FIFTEEN categories, but a business Sector only ever reads as one
+// of the TWELVE above — so 'Trades' (59 live adults), 'The Vulnerable' (24)
+// and '2041-Specific' (21) could never be hired same-field, and a parent
+// holding one weighed nothing at their kid's settlement. The row keeps its
+// catalog category (it is a truth); the FIELD it stands in is resolved here,
+// in one place, for every reader: the E3 matcher, the settlement draw, the
+// hood reference pay. Sports-layer tags (athlete/coach/scout) resolve to
+// nothing on purpose — Paulson's domain.
+var SKILLTAG_FIELD_ALIASES = {
+  'Trades': 'Construction & Baylight',      // electricians, plumbers, roofers work for contractors
+  'The Vulnerable': 'Government & Civic',   // outreach, shelter, reentry, crisis — the social-services sectors read civic
+  '2041-Specific': 'Tech & Innovation'      // drone fleets, gene therapy, digital twins, carbon capture
+};
+function skillTagField_(tag) {
+  var t = String(tag || '').trim();
+  if (!t) return null;
+  if (SETTLE_FIELDS.indexOf(t) >= 0) return t;
+  return SKILLTAG_FIELD_ALIASES[t] || null;
+}
+// Does a pipe-separated SkillTags string stand in this business category?
+function tagsMatchCategory_(tagsStr, cat) {
+  var tags = Array.isArray(tagsStr) ? tagsStr : String(tagsStr || '').split('|');
+  for (var i = 0; i < tags.length; i++) if (skillTagField_(tags[i]) === cat) return true;
+  return false;
+}
+
 // Youth-history counts off a LifeHistory string: {dialTag: n} for the five
 // youth dial tags only. [Sports]/[Daily]/… are adult-deck lines, not school years.
 function settleYouthCounts_(lifeHistory) {
@@ -938,8 +965,8 @@ function settleYouthCounts_(lifeHistory) {
  */
 function settleField_(ownTag, parents, hoodCats, cityCats, youthCounts, rng) {
   var roll = rng(); // one draw, always, so the settlement's rng stream is stable
-  var own = String(ownTag || '').trim();
-  if (isSettleField_(own)) return { field: own, cause: 'own', parentName: '' };
+  var own = skillTagField_(ownTag); // engine.145: an aliased catalog tag is a field too
+  if (own) return { field: own, cause: 'own', parentName: '' };
 
   var w = {}, byParent = {}, bySchool = {}, byHood = {}, i, f;
   for (i = 0; i < SETTLE_FIELDS.length; i++) w[SETTLE_FIELDS[i]] = 0;
@@ -948,8 +975,8 @@ function settleField_(ownTag, parents, hoodCats, cityCats, youthCounts, rng) {
   for (i = 0; i < (parents || []).length; i++) {
     var tags = String(parents[i].tags || '').split('|');
     for (var t = 0; t < tags.length; t++) {
-      f = tags[t].trim();
-      if (!isSettleField_(f)) continue;
+      f = skillTagField_(tags[t]); // engine.145: 'Trades' parent → Construction & Baylight weight
+      if (!f) continue;
       w[f] += SETTLE_SOURCE_WEIGHT;
       if (!byParent[f]) byParent[f] = parents[i].name || '';
     }

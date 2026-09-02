@@ -113,6 +113,15 @@ var RARE_EVENT_SCALE = 0.1; // engine.135 doctrine point 21 — see applyEmploye
 // engine.144 (S410): the credential as ONE cause among others in the two
 // employer-driven events. credentialRank_ lives in educationCareerEngine.js
 // (shared Apps Script scope); a missing column or helper reads as rank 0.
+// engine.145 (S411): SkillTags ∋ category, through the one alias table in
+// educationCareerEngine.js (shared scope) — 'Trades' / 'The Vulnerable' /
+// '2041-Specific' stand in the field a hiring business carries. Helper
+// absent (unit harness) → the old exact match.
+function tagsInCategory_(tags, cat) {
+  if (typeof tagsMatchCategory_ === 'function') return tagsMatchCategory_(tags, cat);
+  return (Array.isArray(tags) ? tags : String(tags || '').split('|')).indexOf(cat) >= 0;
+}
+
 function credentialRankOf_(row, iEdu) {
   if (!row || iEdu < 0 || typeof credentialRank_ !== 'function') return 0;
   return credentialRank_(row[iEdu]);
@@ -1128,7 +1137,7 @@ function runCareerEngine_(ctx) {
       var sameField = [];
       for (var pi = 0; pi < pool.length; pi++) {
         if (taken[pi]) continue;
-        if (pool[pi].tags.indexOf(cat) >= 0) sameField.push(pi);
+        if (tagsInCategory_(pool[pi].tags, cat)) sameField.push(pi); // engine.145: aliased catalog tags count
       }
       // engine.144: poorest band first, then the credential (one cause, not a gate)
       sameField.sort(function (a, b4) { return hireSlotOrder_(pool[a], pool[b4]); });
@@ -1144,7 +1153,7 @@ function runCareerEngine_(ctx) {
       for (var sv = 0; sv < slots.length; sv++) {
         var hIdx = slots[sv];
         var hRow = rows[pool[hIdx].r];
-        var isCross = pool[hIdx].tags.indexOf(cat) < 0;
+        var isCross = !tagsInCategory_(pool[hIdx].tags, cat);
         hRow[iEmployerBizId] = bizId2;
         var hInc = Number(hRow[iIncome]) || 0;
         if (hInc > 0) {

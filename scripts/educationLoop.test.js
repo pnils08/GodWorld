@@ -23,7 +23,7 @@ const E = new Function(R('phase05-citizens/educationCareerEngine.js') + '\nretur
   'processEducationCareer_, deriveEducationLevels_, deriveMinorEducationStage_, schoolStageForAge_,' +
   'canonicalEducationWrite_, eduRank_, updateCareerProgression_, EDUCATION_LEVELS,' +
   'settleField_, settleYouthCounts_, settleFieldClause_, settleAdulthood_, buildSettleBizPool_,' +
-  'SETTLE_FIELDS, SETTLE_ROLES_BY_FIELD, SETTLE_FIELD_ECON_KEYS, SETTLE_ECON_KEYS };')();
+  'SETTLE_FIELDS, SETTLE_ROLES_BY_FIELD, SETTLE_FIELD_ECON_KEYS, SETTLE_ECON_KEYS, skillTagField_, tagsMatchCategory_ };')();
 const G = new Function(R('phase04-events/generationalEventsEngine.js') + '\nreturn {' +
   'checkGraduation_, graduationCredential_, GRADUATION_LADDER_ };')();
 
@@ -190,12 +190,19 @@ console.log('\n8. engine.144 loops 1+2 — field-first settlement (S411):');
   check('existing canonical tag IS the field (cause own)', pk.field === 'Healthcare' && pk.cause === 'own' && rng.count() === 1);
   check('own-tag clause is empty', E.settleFieldClause_(pk) === '');
   // non-field own tag ignored; parent decides
-  pk = E.settleField_('2041-Specific', [{ name: 'Ada', tags: 'Healthcare' }], {}, {}, {}, one(0.5));
+  pk = E.settleField_('athlete', [{ name: 'Ada', tags: 'Healthcare' }], {}, {}, {}, one(0.5));
   check('parent field with no other source → parent cause, named', pk.field === 'Healthcare' && pk.cause === 'parent' && pk.parentName === 'Ada');
   check('parent clause names the parent and the field', E.settleFieldClause_(pk) === ' (following Ada into Healthcare)');
   // pipe-joined + non-field parent tags filtered
-  pk = E.settleField_('', [{ name: 'Bo', tags: 'The Vulnerable|Creative & Arts' }, { name: 'Cy', tags: 'athlete' }], {}, {}, {}, one(0.1));
-  check('pipe-joined parent tag: only the canonical half counts', pk.field === 'Creative & Arts' && pk.cause === 'parent' && pk.parentName === 'Bo');
+  pk = E.settleField_('', [{ name: 'Bo', tags: 'athlete|Creative & Arts' }, { name: 'Cy', tags: 'coach' }], {}, {}, {}, one(0.1));
+  check('pipe-joined parent tag: only the field half counts (sports tags weigh nothing)', pk.field === 'Creative & Arts' && pk.cause === 'parent' && pk.parentName === 'Bo');
+  // engine.145: aliased catalog tags are fields
+  check('skillTagField_: the twelve pass through, the three aliases resolve, sports tags do not', E.skillTagField_('Healthcare') === 'Healthcare' && E.skillTagField_('Trades') === 'Construction & Baylight' && E.skillTagField_('The Vulnerable') === 'Government & Civic' && E.skillTagField_('2041-Specific') === 'Tech & Innovation' && E.skillTagField_('athlete') === null && E.skillTagField_('') === null);
+  check('tagsMatchCategory_: pipe-joined and aliased', E.tagsMatchCategory_('The Vulnerable|Healthcare', 'Healthcare') && E.tagsMatchCategory_('Trades', 'Construction & Baylight') && !E.tagsMatchCategory_('Trades', 'Trades') && !E.tagsMatchCategory_('athlete', 'Small Business'));
+  pk = E.settleField_('Trades', [], {}, {}, {}, one(0.5));
+  check('own Trades tag settles as Construction & Baylight (cause own)', pk.field === 'Construction & Baylight' && pk.cause === 'own');
+  pk = E.settleField_('', [{ name: 'Lu', tags: 'Trades' }], {}, {}, {}, one(0.5));
+  check('a Trades parent now weighs: kid follows Lu into Construction & Baylight', pk.field === 'Construction & Baylight' && pk.cause === 'parent' && E.settleFieldClause_(pk) === ' (following Lu into Construction & Baylight)');
   // no source at all → null, legacy path
   pk = E.settleField_('', [{ name: 'Cy', tags: 'athlete' }], {}, {}, {}, one(0.3));
   check('no source → field null', pk.field === null && pk.cause === null);

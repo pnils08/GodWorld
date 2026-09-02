@@ -144,6 +144,18 @@ pointers:
 
 **Bench prediction (C108 = Y3C4, January, calendar factor 1.0):** cohort 36, texture lines ≈ 23 (range 16–30), event-layer lines in C107's range (4–8), 0 `Engine_Errors`, no "(participated)" in any C108 line, every minor line tagged `|youth-…`.
 
+## engine.145 — the SkillTags gap (S411, engine-sheet, builder go "Go")
+
+**What SkillTags is.** One column (BB, S336). A business has a free-text `Sector`; `sectorCategory_` (runCareerEngine.js) reads it as one of TWELVE categories; the E3 matcher hires only citizens whose tag equals that category. Since loop 1 it is also the field an 18-year-old is aimed at. The S336 backfill wrote the economic catalog's FIFTEEN categories (`data/economic_parameters.json` `category`), so three of them — `Trades` (12 catalog roles), `The Vulnerable` (12), `2041-Specific` (16) — never equal any business category. Live adults (827 active): 609 matchable, 59 Trades, 24 The Vulnerable, 21 2041-Specific, 1 Organized_Crime, 58 blank, 55 sports-layer (intentional). The "two truths" pipe design (current job | trained field) never materialised: 3 rows of 968 carry a second tag. No business sector on the live ledger reads as Trades (7 Construction, 18 Services, no electrical/plumbing/HVAC), so adding a Trades category to the matcher would have matched nothing.
+
+**Mechanism.** The row KEEPS its catalog category (it is a truth about the role). The FIELD it stands in is resolved in one place — `SKILLTAG_FIELD_ALIASES` + `skillTagField_(tag)` + `tagsMatchCategory_(tags, cat)` in `educationCareerEngine.js` (shared scope): Trades → Construction & Baylight; The Vulnerable → Government & Civic (housing / social-services / crisis sectors read civic); 2041-Specific → Tech & Innovation. Sports-layer tags resolve to nothing. Readers: E3 same-field + isCross (`tagsInCategory_` in runCareerEngine.js, exact-match fallback when the helper is absent), the settlement draw (own tag + parents' tags), `hoodReferencePay_`. `isSettleField_` stays for the vocabulary check.
+
+**Ledger (live, 2026-09-02, one pass, read back 53/53).** The 55 blank ENGINE adults: catalog match on RoleType/EconomicProfileKey first (11), then keyword rules on the role (42); every row printed before and after (`scratchpad/tagRestore.js`, `lib/sheets` direct). Left blank on purpose: POP-00972 "Waterfront Resident", POP-00973 "Letter Writer" — not jobs. POP-01058 "basketball player" (T3 ENGINE) → `athlete`, the sports-layer convention. Snapshot refreshed (`dumpLedger`). The 46 catalog-labelled rows were NOT retagged — the alias makes the retag unnecessary and the label is truer than a guess.
+
+**Tests:** `educationLoop.test.js` (4 new; 99/99), `employerSuccess.test.js` (2 new; 45/45). **Bench:** @11 C109 ok:true, 0 `Engine_Errors` (hire volume is business-window-driven; the alias is unit-proven, the fire proves no crash).
+
+**Decision left open for the builder:** whether SkillTags should ever carry the second truth (trained field ≠ current job). Today the settlement writes the field the kid was aimed at, and E2/E3 then read it as the current field. If a career change should keep the trained field visible, that is a second token — the pipe design already allows it; nothing writes it.
+
 ## Backlog — builder direction 2026-09-02 (S410 close)
 
 Recorded as said, with the data point under each. None of these is started; each is its own loop after engine.144 has lived a few cycles.
@@ -162,7 +174,7 @@ Recorded as said, with the data point under each. None of these is started; each
 
 5. **Graduation follows the field** (deferred from loops 1+2, S411). `graduationCredential_` picks associates vs bachelors by SchoolQuality only; a trades/construction/port/transit field could take `trade-cert` instead. Blocker: `credentialRank_` ranks `trade-cert` (2) below `associates` (3), so aiming the degree would cost the citizen the E2/E3 tie-break — re-rate first, then aim.
 7. **Two year formulas** (S411 finding). The calendar sets `S.simYear = 2040 + (godWorldYear − 1)`; `settleAdulthood_` and the wealth loops use `2040 + floor(cycle/52)`. They agree except for one cycle at each year boundary (cycle 52·n). Pick one; the calendar's is the world's. Own row when picked up.
-6. **E3 cannot hire 63 `Trades`-tagged citizens** (S411 finding). `sectorCategory_` never returns `Trades`, so no business category ever matches the tag; the same holds for `The Vulnerable` (27) and `2041-Specific` (22). The field path no longer mints `Trades` (electricians settle under Construction & Baylight); the no-source legacy fallback (`settleSkillTag_`) still can. The live rows need either a category or a re-tag. Own row when picked up.
+6. ~~**E3 cannot hire 63 `Trades`-tagged citizens** (S411 finding).~~ **DONE S411 as engine.145 (§above).** `sectorCategory_` never returns `Trades`, so no business category ever matches the tag; the same holds for `The Vulnerable` (27) and `2041-Specific` (22). The field path no longer mints `Trades` (electricians settle under Construction & Baylight); the no-source legacy fallback (`settleSkillTag_`) still can. The live rows need either a category or a re-tag. Own row when picked up.
 
 Filed by engine-sheet at the builder's request; (1)/(2) SHIPPED S411 as one mechanism (§Loops 1+2 above); (3) SHIPPED S411 (§Loop 3 above); (4) SHIPPED S411 (§Loop 4 above).
 
@@ -174,6 +186,8 @@ None that block. Decisions made here (engine-sheet holds mechanism):
 - Layoff shield deferred to its own loop.
 
 ## Changelog
+
+- 2026-09-02 (engine-sheet, S411) — **engine.145 SkillTags gap coded + ledger restored:** alias table resolves the three catalog-only categories to the field a business carries, for E3 / settlement / hood pay; 53 blank adult rows filled from role on live (read back 53/53), 2 left blank; snapshot refreshed. 99/99 + 45/45; bench @11 C109 clean. Live next.
 
 - 2026-09-02 (engine-sheet, S411, later) — **Loop 4 LIVE PROD @19.** Bench @9 C108 (Y3C4, January): ok:true, 0 `Engine_Errors`, `cycleCount` 107→108. Cohort 36; texture 24 (predicted 23) — Team 8 / Education 6 / Cultural 5 / Community 9 / Civic 4 / Graduation 1; event layer 9; per-citizen adult-source 0 (one household shared moment, by design); "(outcome)" suffixes 0; under-five youth lines 0. Sample: Mateo (11, Rockridge) "practiced free throws against the garage until the neighbor came out to rebound"; Riya (10, Downtown) "got their name on the wall at NeuroCity Youth Lab"; Mei (14, Jack London) "stayed after class to argue a grade and left with a better question instead". One text fix after the fire (a graduation-stage line is calendar-bound and fired in January → non-seasonal sentence; bench @10, text-only). Live: pull + two-file overlay, diff vs bench stage empty, PROD @19, pull-back byte-identical, HELD four at base.
 - 2026-09-02 (engine-sheet, S411) — **Loop 4 youth texture coded + unit-proven (95/95):** vocabulary rebuilt in `runYouthEngine.js` (the S357 helpers had been missing — every youth line read "youth activity (participated)"), texture pass over every minor 5–17 at the adults' rate, calendar year instead of the hardcoded 2041, GCE child/teen pools relocated. Backlog 7 (two year formulas) filed. Bench + live: see the later entry.

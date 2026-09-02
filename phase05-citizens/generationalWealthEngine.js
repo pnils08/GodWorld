@@ -717,6 +717,7 @@ function hoodReferencePay_(ctx, hood, roleText, skillTags, careerStage, seed) {
   var tags = String(skillTags || '').split('|');
   for (var t = 0; t < tags.length && !set; t++) {
     var tg = tags[t].trim();
+    if (typeof skillTagField_ === 'function') tg = skillTagField_(tg) || tg; // engine.145: aliased catalog tags price in their field
     if (tg && e.byCat[tg] && e.byCat[tg].length) set = e.byCat[tg];
   }
   if (!set) { var rc = roleSectorCategory_(roleText); if (rc && e.byCat[rc] && e.byCat[rc].length) set = e.byCat[rc]; }

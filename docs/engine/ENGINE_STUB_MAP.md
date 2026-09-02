@@ -1734,9 +1734,22 @@
   Reads: S.eventArcs
 
 ### runYouthEngine.js
+- **youthStage_(age)**
+
+- **youthTypeCalendarMult_(type, period, age)**
+
+- **selectYouthEventType_(age, month, rng)**
+
+- **pickYouthEvent_(type, rng, ageOrStage)**
+  Reads: S.youthEvents
+
+- **generateYouthOutcome_(eventType, rng)**
+
+- **assignSchoolForYouth_(age, neighborhood, rng)**
+
 - **runYouthEngine_(ctx)**
-  Reads: S.absoluteCycle, S.crimeMetrics, S.season, S.simMonth
-  Writes: S.youthEvents
+  Reads: S.absoluteCycle, S.crimeMetrics, S.season, S.simMonth, S.youthEvents
+  Writes: S.youthEvents, S.youthTexture
   Sheets: Community_Programs
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -3654,4 +3667,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1236
+**Functions mapped:** 1242

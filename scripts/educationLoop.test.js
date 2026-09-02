@@ -271,5 +271,59 @@ console.log('\n8. engine.144 loops 1+2 — field-first settlement (S411):');
   delete global.sectorCategory_; delete global.deriveDebtLevel_; delete global.deriveNetWorth_;
 }
 
+console.log('\n9. engine.144 loop 4 — youth texture, the minors\' whole texture (S411):');
+{
+  global.getCitizenDialBands_ = () => null;
+  global.inWorldStamp_ = () => 'Y3C4';
+  const intents = [];
+  global.queueAppendIntent_ = (ctx, tab, row) => intents.push({ tab, row });
+  const Y = new Function(R('phase05-citizens/runYouthEngine.js') + '\nreturn { runYouthEngine_, getNamedYouth_, selectYouthEventType_, pickYouthEvent_, YOUTH_TEXTURE_POOLS, YOUTH_TYPE_ORDER, YOUTH_DIAL_TAG, youthStage_ };')();
+  const mul = (seed) => () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const YH = ['POPID', 'First', 'Last', 'BirthYear', 'Status', 'ClockMode', 'Neighborhood', 'LifeHistory', 'LastUpdated', 'DialState'];
+  const yrow = (pop, by, hood) => { const r = YH.map(() => ''); r[0] = pop; r[1] = pop; r[2] = 'T'; r[3] = by; r[4] = 'active'; r[5] = 'ENGINE'; r[6] = hood || 'Temescal'; return r; };
+  const yctx = (rows, seed, month) => ({ ss: { getSheetByName() { return null; } }, rng: mul(seed), now: 'now',
+    summary: { simYear: 2042, simMonth: month || 1, season: 'winter', absoluteCycle: 108, crimeMetrics: {} }, ledger: { headers: YH.slice(), rows: rows.map(r => r.slice()), dirty: false } });
+  // vocabulary shape
+  const dialOk = Y.YOUTH_TYPE_ORDER.concat(['resilience', 'safety_awareness']).every(t => Y.YOUTH_DIAL_TAG[t]);
+  check('every emitted type has a YOUTH_DIAL_TAG route (no silent Education default)', dialOk);
+  const allLines = [].concat(...Object.values(Y.YOUTH_TEXTURE_POOLS).map(st => [].concat(...Object.values(st))));
+  check('pools carry no real school/team/org names', !/Oakland Unified|OUSD|Skyline|Warriors|Raiders|Athletics|Golden State/.test(allLines.join('\n')) && allLines.length > 90, String(allLines.length));
+  check('the four GCE child/teen lines relocated here', ['turned the walk home from school into an expedition', 'built something out of nothing on the living-room floor and defended it fiercely', 'rewrote a text three times before sending it', 'stayed out until the exact minute of curfew, not one minute past'].every(l => allLines.includes(l)));
+  const gce = R('phase05-citizens/generateCitizensEvents.js');
+  check('…and gone from generateCitizensEvents agePoolFor_', !/turned the walk home from school/.test(gce) && /ageGroup === "child" \|\| ageGroup === "teen"\) return \[\]/.test(gce));
+  // age from the calendar year, BirthYear first
+  const named = Y.getNamedYouth_(yctx([yrow('P5', 2037), yrow('P4', 2038), yrow('P17', 2025), yrow('P18', 2024), yrow('P30', 2012)], 1));
+  const ids = named.map(n => n.id + ':' + n.age).join(',');
+  check('getNamedYouth_ reads simYear 2042 (2037-born is 5, in; 2038-born is 4, out; 2024-born is 18, still in the 5–22 window)', ids === 'P5:5,P17:17,P18:18', ids);
+  // the texture pass
+  let hit5to17 = 0, trials = 0, lineTeen = '', lineChild = '', under5 = 0, adult = 0, suffix = 0;
+  for (let i = 0; i < 300; i++) {
+    const rows = [yrow('K3', 2039), yrow('K8', 2034), yrow('K15', 2027), yrow('A30', 2012)];
+    const ctx = yctx(rows, i + 11, 1);
+    Y.runYouthEngine_(ctx);
+    const L = (r) => String(ctx.ledger.rows[r][YH.indexOf('LifeHistory')] || '');
+    if (L(0)) under5++; if (L(3)) adult++;
+    for (const r of [1, 2]) { trials++; if (L(r)) { hit5to17++; if (/\(participated\)|\(recognized\)|\(completed\)/.test(L(r))) suffix++; } }
+    if (!lineChild && L(1)) lineChild = L(1).split('\n')[0]; if (!lineTeen && L(2)) lineTeen = L(2).split('\n')[0];
+  }
+  const rate = hit5to17 / trials;
+  check('minors 5–17 draw texture at the adults\' rate (0.5–0.85 in January)', rate > 0.5 && rate < 0.85, rate.toFixed(3));
+  check('under-five draws nothing; a 30-year-old draws nothing here', under5 === 0 && adult === 0, under5 + '/' + adult);
+  check('no "(participated)" suffix on any line', suffix === 0, String(suffix));
+  check('lines are stamped with a routable dial tag', /^Y3C4 — \[(Education|Team|Cultural|Community|Civic|Graduation|Stabilized|Neighborhood)\] /.test(lineChild) && /^Y3C4 — \[/.test(lineTeen), lineChild + ' | ' + lineTeen);
+  const tex = intents.filter(x => x.tab === 'LifeHistory_Log' && /\|texture$/.test(x.row[3]));
+  const ev = intents.filter(x => x.tab === 'LifeHistory_Log' && !/\|texture$/.test(x.row[3]));
+  check('log rows: texture layer carries the |texture token; event layer does not', tex.length > 0 && ev.length > 0 && tex.every(x => /^\w[\w ]*\|youth-[a-z_]+\|texture$/.test(x.row[3])), tex.length + '/' + ev.length);
+  check('S.youthTexture reports cohort + generated', (() => { const c = yctx([yrow('K8', 2034)], 5, 1); Y.runYouthEngine_(c); return c.summary.youthTexture && c.summary.youthTexture.cohort === 1 && typeof c.summary.youthTexture.generated === 'number'; })());
+  // calendar pulls the type mix; summer cuts academic
+  const typeShare = (month, age, type) => { let n = 0; const rng = mul(3); for (let i = 0; i < 2000; i++) if (Y.selectYouthEventType_(age, month, rng) === type) n++; return n / 2000; };
+  check('summer (month 7) pulls academic down for a 10-year-old', typeShare(7, 10, 'academic') < typeShare(1, 10, 'academic') * 0.6, typeShare(7, 10, 'academic').toFixed(2) + ' vs ' + typeShare(1, 10, 'academic').toFixed(2));
+  check('graduation month (6) pulls coming_of_age up for a 17-year-old, not a 9-year-old', typeShare(6, 17, 'coming_of_age') > 0.15 && typeShare(6, 9, 'coming_of_age') === 0, typeShare(6, 17, 'coming_of_age').toFixed(2));
+  // determinism
+  const run = (seed) => { const c = yctx([yrow('K8', 2034), yrow('K15', 2027)], seed, 4); Y.runYouthEngine_(c); return c.ledger.rows.map(r => r[YH.indexOf('LifeHistory')]).join('||'); };
+  check('deterministic under the same rng', run(42) === run(42) && run(42) !== run(43));
+  delete global.getCitizenDialBands_; delete global.inWorldStamp_; delete global.queueAppendIntent_;
+}
+
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');
 process.exit(fail ? 1 : 0);

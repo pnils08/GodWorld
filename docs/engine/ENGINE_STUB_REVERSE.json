@@ -2,7 +2,7 @@
   "generated": "2026-09-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 186,
-  "functionsMapped": 1236,
+  "functionsMapped": 1242,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3343,8 +3343,16 @@
         "phase05-citizens/runYouthEngine.js::runYouthEngine_"
       ],
       "readers": [
-        "phase05-citizens/runYouthEngine.js::getYouthStorySignals_"
+        "phase05-citizens/runYouthEngine.js::getYouthStorySignals_",
+        "phase05-citizens/runYouthEngine.js::pickYouthEvent_",
+        "phase05-citizens/runYouthEngine.js::runYouthEngine_"
       ]
+    },
+    "youthTexture": {
+      "writers": [
+        "phase05-citizens/runYouthEngine.js::runYouthEngine_"
+      ],
+      "readers": []
     },
     "approvalCeilingEvents": {
       "writers": [

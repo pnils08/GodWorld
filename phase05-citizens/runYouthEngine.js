@@ -94,6 +94,251 @@ var OAKLAND_SCHOOLS = {
 };
 
 // ============================================================================
+// engine.144 loop 4 (S411) — YOUTH TEXTURE: the minors' whole texture
+// Loop 3 made this engine the sole texture writer for anyone under 18. The
+// helpers this file called for its vocabulary (selectYouthEventType_,
+// pickYouthEvent_, generateYouthOutcome_, assignSchoolForYouth_) left with
+// utilities/youthActivities.js at S357, so every youth line since has read
+// "[Education] youth activity (participated)". They are rebuilt HERE, in the
+// daily-life voice the adult decks use, by stage (child 5–12 / teen 13–17 /
+// college 18–22) and type, with the calendar the file already keeps.
+// batchRecordYouthEvents_ is left undefined ON PURPOSE — Youth_Events is dead
+// by ruling; youth lines go to LifeHistory + LifeHistory_Log only.
+// Two layers: the EVENT layer (15–25% by school level, capped, feeds
+// S.youthEvents) is unchanged; the TEXTURE layer is a second pass over every
+// minor 5–17 at the adults' participation rate, uncapped, one line each.
+// Under-fives draw nothing here — the household shared moment is their week.
+// ============================================================================
+
+var YOUTH_TEXTURE_BASE = 0.65; // per minor 5–17 per cycle before calendar / hood / drive factors (adult decks: 0.72)
+var YOUTH_TEXTURE_MAX = 0.95;
+
+function youthStage_(age) { return age <= 12 ? 'child' : (age <= 17 ? 'teen' : 'college'); }
+
+// Fixed key order — the weighted draw must be deterministic.
+var YOUTH_TYPE_ORDER = ['academic', 'sports', 'arts', 'clubs', 'civic_participation', 'coming_of_age', 'community_support'];
+var YOUTH_TYPE_WEIGHTS = {
+  child:   { academic: 0.30, sports: 0.22, arts: 0.18, clubs: 0.14, civic_participation: 0.08, coming_of_age: 0,    community_support: 0.08 },
+  teen:    { academic: 0.26, sports: 0.18, arts: 0.14, clubs: 0.10, civic_participation: 0.14, coming_of_age: 0.08, community_support: 0.10 },
+  college: { academic: 0.34, sports: 0.14, arts: 0.16, clubs: 0.14, civic_participation: 0.14, coming_of_age: 0.08, community_support: 0 }
+};
+
+// Calendar pull on the type mix (ACADEMIC_CALENDAR periods).
+function youthTypeCalendarMult_(type, period, age) {
+  if (period === 'graduation' || period === 'end_of_year') {
+    if (type === 'coming_of_age') return age >= 16 ? 3.0 : 0.5;
+    if (type === 'academic') return 1.3;
+  }
+  if (period === 'summer' || period === 'late_summer') {
+    if (type === 'academic') return 0.4;
+    if (type === 'sports' || type === 'arts' || type === 'clubs') return 1.4;
+  }
+  if (period === 'fall_start' || period === 'fall') {
+    if (type === 'sports') return 1.3;
+    if (type === 'academic') return 1.2;
+  }
+  if (period === 'winter' || period === 'mid_winter') {
+    if (type === 'arts') return 1.3;
+  }
+  return 1;
+}
+
+function selectYouthEventType_(age, month, rng) {
+  var stage = youthStage_(age);
+  var w = YOUTH_TYPE_WEIGHTS[stage] || YOUTH_TYPE_WEIGHTS.teen;
+  var period = (ACADEMIC_CALENDAR && ACADEMIC_CALENDAR[month]) ? ACADEMIC_CALENDAR[month].period : '';
+  var total = 0, i, t, adj = [];
+  for (i = 0; i < YOUTH_TYPE_ORDER.length; i++) {
+    t = YOUTH_TYPE_ORDER[i];
+    var v = (w[t] || 0) * youthTypeCalendarMult_(t, period, age);
+    adj.push(v); total += v;
+  }
+  var roll = rng() * total, acc = 0;
+  for (i = 0; i < YOUTH_TYPE_ORDER.length; i++) {
+    acc += adj[i];
+    if (roll < acc) return YOUTH_TYPE_ORDER[i];
+  }
+  return 'academic';
+}
+
+// The vocabulary. Daily-life voice, prosperity Oakland, no real school /
+// team / org names (canon: "an Oakland City Schools …"; sports stay generic).
+var YOUTH_TEXTURE_POOLS = {
+  child: {
+    academic: [
+      'turned the walk home from school into an expedition',
+      'read ahead in the chapter book and had to sit on the ending all week',
+      'got the long-division thing, finally, and explained it to the cat',
+      'brought home a spelling list and taped it to the fridge like a treaty',
+      'asked the teacher a question nobody in the room could answer and liked that',
+      'built a volcano for the science fair that erupted twice — once on purpose'
+    ],
+    sports: [
+      'ran the bases at the park until the streetlights came on',
+      'learned to ride without training wheels on the flat stretch by the lake',
+      'lost the pickup game on the blacktop and argued the last call all the way home',
+      'got picked first for once and pretended not to notice',
+      'wore the new cleats to school even though there was no practice',
+      'practiced free throws against the garage until the neighbor came out to rebound'
+    ],
+    arts: [
+      'drew the whole block from memory and got most of the doors right',
+      'sang the school-concert song in the shower until the house knew it too',
+      'painted a mural on butcher paper across the kitchen floor',
+      'made up a dance to the song from the corner store speaker and taught it at recess',
+      'took the library\'s craft hour seriously enough to bring their own scissors',
+      'found the hidden chords on a borrowed ukulele and would not put it down'
+    ],
+    clubs: [
+      'built something out of nothing on the living-room floor and defended it fiercely',
+      'started a club at recess with two members and a constitution',
+      'traded the good sticker for the rare one and called it a fair deal',
+      'joined the chess table at lunch and lost to the same kid four times, gladly',
+      'organized the block\'s kids into a parade nobody had scheduled',
+      'kept a secret code with a best friend that lasted three whole days'
+    ],
+    civic_participation: [
+      'helped hand out flyers for the block party and took the job very seriously',
+      'sat through a community meeting with the adults and drew the speakers',
+      'picked up litter along the creek trail with the class and counted every piece',
+      'made a sign for the neighborhood garden and spelled everything right',
+      'asked the librarian how the library decides what to buy and got a real answer'
+    ],
+    community_support: [
+      'got walked to school by a neighbor when the morning went sideways',
+      'ate dinner at the family upstairs and came home with a second dessert',
+      'found the after-school room open late and a grown-up who remembered their name',
+      'got a hand with homework from the retired teacher three doors down'
+    ],
+    resilience: [
+      'had a rough week and still showed up to the spelling bee',
+      'kept the good-luck rock in a pocket through the whole hard stretch',
+      'learned that a bad day ends, mostly by waiting it out on the stoop'
+    ],
+    safety_awareness: [
+      'practiced the walk to school with the safe corners marked in chalk',
+      'learned which porch lights on the block stay on and who answers them'
+    ]
+  },
+  teen: {
+    academic: [
+      'rewrote the essay at midnight and knew the second draft was the real one',
+      'stayed after class to argue a grade and left with a better question instead',
+      'studied for the chemistry test on the bus and again at the kitchen table',
+      'got the letter about the honors section and read it twice in the hallway',
+      'crammed for finals with the whole group at the library until closing',
+      'started the college list and crossed off half of it by dinner'
+    ],
+    sports: [
+      'made the cut at tryouts and walked home without touching the ground',
+      'ran the hill workout twice because the coach said once',
+      'sat the bench for the first half and played the second like it mattered',
+      'iced a rolled ankle and watched film of a game they were not in',
+      'took the late bus home from an away game, still in uniform, still buzzing',
+      'played pickup at the park with people twice their age and held their own'
+    ],
+    arts: [
+      'got a solo in the spring concert and told exactly one person',
+      'stayed late in the art room until the janitor turned the lights off',
+      'wrote a song about the block and would not play it for anyone yet',
+      'shot a short film on a phone with three friends and one very patient dog',
+      'sold the first print at a street market and framed the five-dollar bill',
+      'joined the drama club for the wrong reasons and stayed for the right ones'
+    ],
+    clubs: [
+      'rewrote a text three times before sending it',
+      'stayed out until the exact minute of curfew, not one minute past',
+      'ran the robotics meeting because the senior was out and nobody else would',
+      'learned to drive in the empty lot on Sunday with a parent gripping the door',
+      'took the first shift at the corner store and came home with sore feet and cash',
+      'spent the whole weekend on a group project that was mostly group'
+    ],
+    civic_participation: [
+      'spoke for two minutes at the council meeting and did not stop shaking until the bus',
+      'registered classmates for the youth advisory board with a clipboard and a grin',
+      'volunteered at the food drive and learned every regular\'s name',
+      'wrote a letter to the Tribune about the bus route and got a reply',
+      'helped run the block cleanup and argued for better trash cans'
+    ],
+    coming_of_age: [
+      'picked up the first paycheck and stood in the bank line like an adult',
+      'walked the graduation stage in borrowed shoes and did not trip',
+      'stayed up past everyone talking about what comes after this',
+      'got the acceptance email at lunch and let the table read it first',
+      'drove alone for the first time and took the long way home on purpose'
+    ],
+    community_support: [
+      'got a ride to practice from a neighbor when the week fell apart',
+      'found the youth center open late and someone who asked how it was really going',
+      'had a mentor show up to the game when nobody else could',
+      'ate at a friend\'s table for a week and nobody made it a thing'
+    ],
+    resilience: [
+      'kept going to class through the worst week of the year',
+      'lost the season and showed up to the banquet anyway',
+      'sat with the bad news on the roof and came down with a plan'
+    ],
+    safety_awareness: [
+      'walked the long, lit way home without being asked',
+      'texted the group when they got in, the way they had all agreed to'
+    ]
+  },
+  college: {
+    academic: [
+      'pulled an all-nighter for the midterm and swore it was the last one',
+      'switched majors on a Tuesday and told the family on Sunday',
+      'got the lab slot and started showing up before the professor',
+      'read the syllabus twice and the assigned reading once'
+    ],
+    sports: [
+      'played intramurals on a team named after a bad joke',
+      'ran the lake loop at dawn before the eight o\'clock lecture'
+    ],
+    arts: [
+      'put a first show up in a campus hallway and stood near it all afternoon',
+      'played an open mic to eleven people and one of them clapped early'
+    ],
+    clubs: [
+      'joined three clubs at the fair and kept one',
+      'worked the campus job and studied on the clock when it was slow'
+    ],
+    civic_participation: [
+      'canvassed the neighborhood for the student housing measure',
+      'sat on the first committee and learned what a quorum was the hard way'
+    ],
+    coming_of_age: [
+      'signed the first lease with a co-signer and a deep breath',
+      'came home for the weekend and noticed the house felt smaller'
+    ]
+  }
+};
+
+function pickYouthEvent_(type, rng, ageOrStage) {
+  var stage = typeof ageOrStage === 'number' ? youthStage_(ageOrStage) : (ageOrStage || 'teen');
+  var pools = YOUTH_TEXTURE_POOLS[stage] || YOUTH_TEXTURE_POOLS.teen;
+  var pool = pools[type] || YOUTH_TEXTURE_POOLS.teen[type] || pools.academic;
+  return pool[Math.floor(rng() * pool.length)];
+}
+
+// Kept for the event object / S.youthEvents shape; never printed on a line.
+function generateYouthOutcome_(eventType, rng) {
+  var r = rng();
+  if (r < 0.15) return 'recognized';
+  if (r < 0.30) return 'completed';
+  return 'participated';
+}
+
+// Cosmetic: the high-school list is the only roster canon allows.
+function assignSchoolForYouth_(age, neighborhood, rng) {
+  if (age < 14 || age > 17 || !OAKLAND_SCHOOLS || !OAKLAND_SCHOOLS.high || !OAKLAND_SCHOOLS.high.length) return null;
+  var hs = OAKLAND_SCHOOLS.high, i;
+  for (i = 0; i < hs.length; i++) if (hs[i].neighborhood === neighborhood) return hs[i];
+  var h = 0, nb = String(neighborhood || '');
+  for (i = 0; i < nb.length; i++) h = (h + nb.charCodeAt(i)) % 997;
+  return hs[h % hs.length];
+}
+
+// ============================================================================
 // MAIN ENGINE FUNCTION
 // ============================================================================
 
@@ -256,7 +501,52 @@ function runYouthEngine_(ctx) {
     }
   }
 
-  // Record events
+  // ── engine.144 loop 4 (S411): TEXTURE PASS — every minor 5–17, one line at
+  // the adults' rate. Same calendar / hood / drive factors as the event layer;
+  // no cap; not counted in S.youthEvents (the event layer keeps its signals).
+  var textureLines = [], textureCohort = 0;
+  for (var ti = 0; ti < allYouth.length; ti++) {
+    var ty = allYouth[ti];
+    if (ty.age < YOUTH_EVENT_LIMITS.MIN_AGE || ty.age > 17) continue;
+    textureCohort++;
+    var tHood = ty.neighborhood || 'Downtown';
+    var tProb = adjustProbByCalendar_(YOUTH_TEXTURE_BASE, month, season);
+    var tQoL = getNeighborhoodQoL_(tHood);
+    var tHot = crimeHotspots.indexOf(tHood) >= 0;
+    if (tQoL <= 0.35) tProb *= 1.15; else if (tQoL >= 0.75) tProb *= 1.05;
+    if (tHot) tProb *= 1.1;
+    var tBands = getCitizenDialBands_(ctx, ty.id, ty.dialState || "");
+    if (tBands) tProb *= tBands.mult.drive;
+    if (tProb > YOUTH_TEXTURE_MAX) tProb = YOUTH_TEXTURE_MAX;
+    if (rng() >= tProb) continue;
+    var tType = selectYouthEventType_(ty.age, month, rng);
+    if (tQoL <= 0.35 && rng() < 0.2) tType = rng() < 0.5 ? 'resilience' : 'community_support';
+    else if (tHot && rng() < 0.1) tType = 'safety_awareness';
+    var tText = pickYouthEvent_(tType, rng, ty.age);
+    var tPrograms = programsByHood[tHood];
+    if (tPrograms && tPrograms.length && rng() < 0.2) {
+      var tProg = tPrograms[Math.floor(rng() * tPrograms.length)];
+      var tTemplates = youthStage_(ty.age) === 'child'
+        ? [{ text: 'ran the whole way to ' + tProg + ' and was still early', type: 'sports' },
+           { text: 'made something at ' + tProg + ' and carried it home like glass', type: 'arts' },
+           { text: 'got their name on the wall at ' + tProg, type: 'community_support' }]
+        : [{ text: 'trained weekends at ' + tProg + ' and felt it on Monday', type: 'sports' },
+           { text: 'volunteered a shift at ' + tProg + ' and stayed past it', type: 'civic_participation' },
+           { text: 'got pulled aside at ' + tProg + ' and told to keep going', type: 'community_support' }];
+      var tt = tTemplates[Math.floor(rng() * tTemplates.length)];
+      tType = tt.type; tText = tt.text;
+    }
+    textureLines.push({
+      youthName: ty.name, youthId: ty.id, age: ty.age, eventType: tType,
+      description: tText, neighborhood: tHood, outcome: '', status: 'texture',
+      source: ty.source, program: '', layer: 'texture'
+    });
+  }
+  if (textureLines.length > 0) recordYouthLifeHistory_(ctx, textureLines);
+  S.youthTexture = { cohort: textureCohort, generated: textureLines.length, cycle: cycle };
+  Logger.log('runYouthEngine_ loop 4 texture: ' + textureLines.length + ' line(s) on ' + textureCohort + ' minor(s) 5–17');
+
+  // Record events (batchRecordYouthEvents_ is undefined by ruling — Youth_Events stays dead)
   if (events.length > 0 && typeof batchRecordYouthEvents_ === 'function') {
     batchRecordYouthEvents_(ctx, events);
   }
@@ -389,17 +679,20 @@ function getNamedYouth_(ctx) {
   }
 
   // v1.3: Compute current simulation year for age calculation from BirthYear
-  var currentYear = 2041; // Simulation year — aligned with roster intake
+  // engine.144 loop 4 (S411): the calendar's year, never a hardcoded one —
+  // 2041 sat here while the world reached 2042 and every youth read a year young.
+  var Sy = ctx.summary || {};
+  var currentYear = Number(Sy.simYear) || (2040 + Math.floor((Number(Sy.absoluteCycle) || 0) / 52)) || 2041;
 
   var result = [];
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     // v1.3: Compute age from BirthYear if Age column doesn't exist
     var age = 0;
-    if (iAge >= 0 && row[iAge]) {
+    if (iBirthYear >= 0 && row[iBirthYear]) {
+      age = currentYear - (Number(row[iBirthYear]) || currentYear); // computed live (loop 4)
+    } else if (iAge >= 0 && row[iAge]) {
       age = Number(row[iAge]) || 0;
-    } else if (iBirthYear >= 0 && row[iBirthYear]) {
-      age = currentYear - (Number(row[iBirthYear]) || currentYear);
     }
     var status = String(row[iStatus] || '').toLowerCase();
     var citizenId = String(row[iId] || '').trim();
@@ -478,7 +771,7 @@ function generateYouthEventForCitizen_(youth, month, rng, qolContext, programsBy
   // Get event description
   var description = '';
   if (typeof pickYouthEvent_ === 'function') {
-    description = pickYouthEvent_(eventType, rng);
+    description = pickYouthEvent_(eventType, rng, youth.age); // loop 4: stage-aware vocabulary
   } else {
     // v1.1: Fallback descriptions for new types
     if (eventType === 'resilience') {
@@ -757,7 +1050,7 @@ function recordYouthLifeHistory_(ctx, events) {
     var yIdx = rowByPop[String(e.youthId || '').trim().toUpperCase()];
     if (yIdx !== undefined && iLifeY >= 0) {
       var yRow = ctx.ledger.rows[yIdx];
-      var yLine = timestamp + ' — [' + dialTag + '] ' + e.description + ' (' + e.outcome + ')';
+      var yLine = timestamp + ' — [' + dialTag + '] ' + e.description; // loop 4: the sentence is the line — no "(participated)" suffix
       yRow[iLifeY] = (yRow[iLifeY] ? yRow[iLifeY] + '\n' : '') + yLine;
       if (iLastUY >= 0) yRow[iLastUY] = timestamp;
       ctx.ledger.rows[yIdx] = yRow;
@@ -769,8 +1062,8 @@ function recordYouthLifeHistory_(ctx, events) {
         timestamp,
         e.youthId,
         e.youthName,
-        dialTag + '|youth-' + e.eventType,
-        e.description + ' (' + e.outcome + ')',
+        dialTag + '|youth-' + e.eventType + (e.layer === 'texture' ? '|texture' : ''),
+        e.description,
         e.neighborhood,
         cycle
       ], 'youth life history', 'citizens', 100);

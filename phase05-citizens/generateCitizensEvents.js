@@ -1746,18 +1746,9 @@ function generateCitizensEvents_(ctx) {
     // a Pre-K kid and a 21-year-old no longer share a life. Bands arrive from
     // lifeState.band when the gate helper is deployed; 4-band ageGroup_ values
     // still resolve for callers that pass them.
-    if (ageGroup === "child") {
-      return [
-        makeEntry("turned the walk home from school into an expedition", ["source:age", "ageGroup:child"], 1.05, false),
-        makeEntry("built something out of nothing on the living-room floor and defended it fiercely", ["source:age", "ageGroup:child"], 1.0, false)
-      ];
-    }
-    if (ageGroup === "teen") {
-      return [
-        makeEntry("rewrote a text three times before sending it", ["source:age", "ageGroup:teen"], 1.05, false),
-        makeEntry("stayed out until the exact minute of curfew, not one minute past", ["source:age", "ageGroup:teen"], 1.0, false)
-      ];
-    }
+    // engine.144 loop 4 (S411): the child/teen entries moved to runYouthEngine_'s
+    // YOUTH_TEXTURE_POOLS — minors never reach this generator since loop 3.
+    if (ageGroup === "child" || ageGroup === "teen") return [];
     if (ageGroup === "youth") {
       return [
         makeEntry("connected with friends over something small but intense", ["source:age", "ageGroup:youth"], 1.05, false),

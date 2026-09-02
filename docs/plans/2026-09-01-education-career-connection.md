@@ -128,6 +128,22 @@ pointers:
 
 **Tests:** `scripts/citizensEventsFame.t3.test.js` §youth-mode (7 checks: minor/teen zero lines, adult/blank/18th-birthday fire, computed-age grep, household moment still reaches the kid). 19/19.
 
+## Loop 4 — youth texture, the minors' whole texture (S411, engine-sheet)
+
+**Measure.** The youth engine's vocabulary helpers (`selectYouthEventType_`, `pickYouthEvent_`, `generateYouthOutcome_`, `assignSchoolForYouth_`, `batchRecordYouthEvents_`) left with `utilities/youthActivities.js` at S357; every `typeof` guard has fallen through since, so every youth line on live reads "[Education] youth activity (participated)". `getNamedYouth_` hardcoded `currentYear = 2041` (the world is 2042) and read a stored `Age` column before BirthYear. `getYouthStorySignals_` has no callers; nothing parses the "(outcome)" suffix. Cohort 5–17 at the 2042 anchor: 36 (34 ENGINE / 2 GAME), 18 child / 18 teen; 7 more minors are under five.
+
+**Mechanism (`runYouthEngine.js`, nothing new):**
+- Vocabulary rebuilt in-file: `YOUTH_TEXTURE_POOLS` by stage (child 5–12 / teen 13–17 / college 18–22) × type (academic, sports, arts, clubs, civic_participation, coming_of_age, community_support, resilience, safety_awareness) — ~100 lines in the daily-life voice, no real school/team/org names (grep-tested). The four child/teen lines from `generateCitizensEvents.agePoolFor_` moved here; those two branches now return `[]` (minors never reach that generator since loop 3; the 18–22 `youth` branch stays).
+- `selectYouthEventType_(age, month, rng)` — weighted draw in fixed key order, stage weights × `ACADEMIC_CALENDAR` period pull (graduation months ×3 coming_of_age for 16+, summer academic ×0.4 and sports/arts/clubs ×1.4, fall sports ×1.3, winter arts ×1.3). `pickYouthEvent_(type, rng, age)`, `generateYouthOutcome_` (object only, never printed), `assignSchoolForYouth_` (cosmetic, `.high` by hood). `batchRecordYouthEvents_` stays undefined on purpose — `Youth_Events` is dead by ruling.
+- Two layers. The EVENT layer is unchanged (15–25% by school level, 25/5 caps, `S.youthEvents`, signals) but now draws stage-aware sentences. The TEXTURE layer is a second pass over every minor 5–17: `YOUTH_TEXTURE_BASE` 0.65 (adult decks 0.72) × the same calendar / QoL / hotspot / drive factors, capped 0.95, one line each, no cap; 20% name an active `Community_Programs` entry in the hood. `S.youthTexture = {cohort, generated}`; one Logger line.
+- Line format: `stamp — [DialTag] sentence` — the "(participated)" suffix is gone for both layers. `LifeHistory_Log` EventTag `Dial|youth-<type>` for events, `Dial|youth-<type>|texture` for the texture layer. Every type routes through `YOUTH_DIAL_TAG` (unit-checked) so no type silently defaults to `Education`.
+- Age: `currentYear = S.simYear || 2040 + floor(absoluteCycle/52)`, BirthYear first. This ages the youth cohort one year (2041 → 2042 anchor).
+- Decision: under-fives draw nothing from any texture writer; the household shared moment (`generateCitizensEvents`) is their week.
+
+**Tests:** `scripts/educationLoop.test.js` §9 (14 checks; 95/95): dial routing, canon-name grep, relocation both sides, calendar-year age, rate band, no under-five/adult lines, no suffix, log token, calendar pull on the type mix, determinism.
+
+**Bench prediction (C108 = Y3C4, January, calendar factor 1.0):** cohort 36, texture lines ≈ 23 (range 16–30), event-layer lines in C107's range (4–8), 0 `Engine_Errors`, no "(participated)" in any C108 line, every minor line tagged `|youth-…`.
+
 ## Backlog — builder direction 2026-09-02 (S410 close)
 
 Recorded as said, with the data point under each. None of these is started; each is its own loop after engine.144 has lived a few cycles.
@@ -145,9 +161,10 @@ Recorded as said, with the data point under each. None of these is started; each
 4. **Youth events control.** Once (3) exists, youth event types (academic / sports / arts / coming-of-age / civic) become the stage's whole texture, with the same calendar and hood modifiers `runYouthEngine_` already has. `Youth_Events` stays dead.
 
 5. **Graduation follows the field** (deferred from loops 1+2, S411). `graduationCredential_` picks associates vs bachelors by SchoolQuality only; a trades/construction/port/transit field could take `trade-cert` instead. Blocker: `credentialRank_` ranks `trade-cert` (2) below `associates` (3), so aiming the degree would cost the citizen the E2/E3 tie-break — re-rate first, then aim.
+7. **Two year formulas** (S411 finding). The calendar sets `S.simYear = 2040 + (godWorldYear − 1)`; `settleAdulthood_` and the wealth loops use `2040 + floor(cycle/52)`. They agree except for one cycle at each year boundary (cycle 52·n). Pick one; the calendar's is the world's. Own row when picked up.
 6. **E3 cannot hire 63 `Trades`-tagged citizens** (S411 finding). `sectorCategory_` never returns `Trades`, so no business category ever matches the tag; the same holds for `The Vulnerable` (27) and `2041-Specific` (22). The field path no longer mints `Trades` (electricians settle under Construction & Baylight); the no-source legacy fallback (`settleSkillTag_`) still can. The live rows need either a category or a re-tag. Own row when picked up.
 
-Filed by engine-sheet at the builder's request; (1)/(2) SHIPPED S411 as one mechanism (§Loops 1+2 above); (3) SHIPPED S411 (§Loop 3 above); engine-sheet holds (4).
+Filed by engine-sheet at the builder's request; (1)/(2) SHIPPED S411 as one mechanism (§Loops 1+2 above); (3) SHIPPED S411 (§Loop 3 above); (4) SHIPPED S411 (§Loop 4 above).
 
 ## Open questions
 
@@ -157,6 +174,8 @@ None that block. Decisions made here (engine-sheet holds mechanism):
 - Layoff shield deferred to its own loop.
 
 ## Changelog
+
+- 2026-09-02 (engine-sheet, S411) — **Loop 4 youth texture coded + unit-proven (95/95):** vocabulary rebuilt in `runYouthEngine.js` (the S357 helpers had been missing — every youth line read "youth activity (participated)"), texture pass over every minor 5–17 at the adults' rate, calendar year instead of the hardcoded 2041, GCE child/teen pools relocated. Backlog 7 (two year formulas) filed. Bench + live next.
 
 - 2026-09-02 (engine-sheet, S411, later) — **Loop 3 LIVE PROD @18.** Bench @8 C107: ok:true, 0 `Engine_Errors`, `cycleCount` 106→107. Minor texture in `LifeHistory_Log`, 43 active minors (41 ENGINE / 2 GAME): C106 (before) 83 rows, 72 of them per-citizen adult-source lines; C107 (gate) 4 rows, all youth-engine `[Education]`, 0 adult-source. Live: pull + two-file overlay, diff vs bench stage empty, pull-back byte-identical, HELD four at base. Minors' lives are thin until loop 4 gives the youth engine the whole texture — that is the next loop, not a regression.
 - 2026-09-02 (engine-sheet, S411) — **Loop 3 youth mode coded + unit-proven (19/19):** caller-graph of every LifeHistory writer + the live log settled it on `generateCitizensEvents.js` (all `source:*` lines) and the `[Home]` member stamp; life-stage gate at both (BirthYear at the writer, not a ClockMode); household shared moment kept for minors. Bench + live: see the later entry.

@@ -4264,7 +4264,8 @@
     "Generic_Citizens": {
       "writers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/processAdvancementIntake.js::processMediaUsage_"
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
@@ -4314,6 +4315,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
+        "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",

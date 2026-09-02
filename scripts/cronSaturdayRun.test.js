@@ -156,5 +156,16 @@ console.log('Test 6: mergeStorylineLedger');
   assert('reference never flips status', refOnly.updates[0].row[3] === 'closed');
 }
 
+// engine.152 (S412) — coverage runs both ways: the snippet the light classifier reads
+{
+  const { citationSnippet } = require('./cron-saturday-run');
+  const { extractLight_, LIGHT_VOCAB } = require('../lib/reflectionClassifier');
+  const text = 'Rain fell on Fruitvale. Tomas Aguilar argued with the board and lost the vote. The city moved on. Later, Aguilar left early.';
+  assert('citationSnippet returns the sentences naming the citizen (full name or surname)', citationSnippet(text, 'Tomas Aguilar') === 'Tomas Aguilar argued with the board and lost the vote. Later, Aguilar left early.');
+  assert('citationSnippet is empty when the name is not in the text', citationSnippet(text, 'Lena Okafor') === '');
+  assert('usageRowsFor carries the snippet on each row', (function () { const rows = require('./cron-saturday-run').usageRowsFor({ stem: 's', text, sidecar: { intake: { names: [{ name: 'Tomas Aguilar', popid: 'POP-00529', role: 'subject' }] } } }); return rows.length === 1 && /argued with the board/.test(rows[0].snippet) && rows[0].usageType === 'featured'; })());
+  assert('extractLight_ takes the first in-vocab word, null otherwise', extractLight_('Negative — blamed.') === 'negative' && extractLight_('neutral') === 'neutral' && extractLight_('positive') === 'positive' && extractLight_('unsure') === null && LIGHT_VOCAB.length === 3);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

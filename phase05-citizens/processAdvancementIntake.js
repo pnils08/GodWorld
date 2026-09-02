@@ -351,12 +351,18 @@ function processMediaUsage_(ctx, now, cycle) {
   var usageTypeCol = findColByName_(usageHeaders, 'UsageType');
   var processedCol = findColByName_(usageHeaders, 'Processed');
   var contextCol = findColByName_(usageHeaders, 'Context');
+  var sentimentCol = findColByName_(usageHeaders, 'Sentiment'); // engine.152: positive | neutral | negative | blank(=neutral)
   
   if (nameCol < 0) return results;
   
   if (processedCol < 0) {
     processedCol = usageHeaders.length;
     usageSheet.getRange(1, processedCol + 1).setValue('Processed');
+  }
+  if (sentimentCol < 0) {
+    // engine.152 (S412): coverage runs both ways — the column self-arms like Processed.
+    sentimentCol = Math.max(usageHeaders.length, processedCol + 1);
+    usageSheet.getRange(1, sentimentCol + 1).setValue('Sentiment');
   }
   
   var genericSheet = ss.getSheetByName('Generic_Citizens');
@@ -398,6 +404,7 @@ function processMediaUsage_(ctx, now, cycle) {
     var citizenName = row[nameCol] ? String(row[nameCol]).trim() : '';
     var usageType = usageTypeCol >= 0 ? String(row[usageTypeCol] || '').trim() : '';
     var context = contextCol >= 0 ? String(row[contextCol] || '').trim() : '';
+    var hardLight = sentimentCol >= 0 && String(row[sentimentCol] || '').trim().toLowerCase() === 'negative'; // engine.152
     var alreadyProcessed = processedCol >= 0 && row[processedCol] === 'Y';
 
     if (!citizenName || alreadyProcessed) continue;
@@ -424,7 +431,12 @@ function processMediaUsage_(ctx, now, cycle) {
 
           var currentUsage = ledgerUpdates[lr] ? ledgerUpdates[lr].usageCount :
                             (lUsageCol >= 0 ? (Number(ledgerRows[lr][lUsageCol]) || 0) : 0);
-          var newUsage = currentUsage + 1;
+          // engine.152 (S412, builder: "exposure can become negative as well"):
+          // a citation in a hard light counts AGAINST the name — one down, floor 0.
+          // The state pass then holds or lowers nothing itself (upward only);
+          // decay's bar does the demoting when the earned count falls under it.
+          var newUsage = hardLight ? Math.max(0, currentUsage - 1) : currentUsage + 1;
+          if (hardLight) results.hardLight = (results.hardLight || 0) + 1;
 
           var currentTier = ledgerUpdates[lr] ? ledgerUpdates[lr].tier :
                            (lTierCol >= 0 ? (Number(ledgerRows[lr][lTierCol]) || 4) : 4);
@@ -438,7 +450,8 @@ function processMediaUsage_(ctx, now, cycle) {
           ledgerUpdates[lr] = {
             usageCount: newUsage, tier: newTier,
             name: String(ledgerRows[lr][lFirstCol] || '').trim() + ' ' + String(ledgerRows[lr][lLastCol] || '').trim(),
-            popId: popId, oldTier: currentTier, usageType: usageType, context: context
+            popId: popId, oldTier: currentTier, usageType: usageType, context: context,
+            hard: hardLight || (ledgerUpdates[lr] && ledgerUpdates[lr].hard) || false
           };
         }
       } else if (ledgerHits.length > 1) {
@@ -454,7 +467,7 @@ function processMediaUsage_(ctx, now, cycle) {
           found = true;
           var currentEmergence = genericUpdates[gr] !== undefined ? genericUpdates[gr] :
                                 (gEmergenceCol >= 0 ? (Number(genericData[gr][gEmergenceCol]) || 0) : 0);
-          genericUpdates[gr] = currentEmergence + 1;
+          if (!hardLight) genericUpdates[gr] = currentEmergence + 1; // engine.152: a hard mention is no lottery ticket
         } else if (genericHits.length > 1) {
           Logger.log('processMediaUsage_: ambiguous name "' + citizenName + '" matches ' + genericHits.length + ' Generic_Citizens rows — skipped');
         }
@@ -482,6 +495,18 @@ function processMediaUsage_(ctx, now, cycle) {
     var rowIdx = Number(lRow);
     if (lUsageCol >= 0) {
       ledgerRows[rowIdx][lUsageCol] = update.usageCount;
+      ledgerDirtied = true;
+    }
+    if (update.hard) {
+      // engine.152: the hard light is a moment in the life, and a log row
+      var lLife152 = findColByName_(ledgerHeaders, 'LifeHistory');
+      var stamp152 = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+      var line152 = stamp152 + ' — [Media] Named in a hard light — the coverage was not kind (' + (update.context || 'the paper') + ')';
+      if (lLife152 >= 0) ledgerRows[rowIdx][lLife152] = (ledgerRows[rowIdx][lLife152] ? ledgerRows[rowIdx][lLife152] + '\n' : '') + line152;
+      if (typeof queueAppendIntent_ === 'function') {
+        queueAppendIntent_(ctx, 'LifeHistory_Log', ['C' + cycle, update.popId, update.name || '', 'Media|hard-light',
+          'Named in a hard light — UsageCount now ' + update.usageCount + ' (' + (update.context || '') + ')', '', cycle], 'engine.152 hard light', 'citizens', 100);
+      }
       ledgerDirtied = true;
     }
     if (lTierCol >= 0 && update.tier !== update.oldTier) {
@@ -933,14 +958,16 @@ function earnedCitationsByKey_(ctx) {
       var iName = findColByName_(uh, 'CitizenName');
       if (iName < 0) iName = findColByName_(uh, 'Name');
       var iType = findColByName_(uh, 'UsageType');
+      var iSent = findColByName_(uh, 'Sentiment');
       if (iName >= 0) {
         for (var r = 1; r < uv.length; r++) {
           var ut = iType >= 0 ? String(uv[r][iType] || '').trim().toLowerCase() : '';
           var sp = splitUsageName_(String(uv[r][iName] || '').trim());
           if (!sp) continue;
           var key = normalizeCitizenName_(sp.first) + ' ' + normalizeCitizenName_(sp.last);
-          var slot = out[key] || (out[key] = { cited: 0, published: 0 });
-          if (isEmergenceUsage_(ut)) slot.cited++;
+          var slot = out[key] || (out[key] = { cited: 0, published: 0, hard: 0 });
+          var hard = iSent >= 0 && String(uv[r][iSent] || '').trim().toLowerCase() === 'negative'; // engine.152
+          if (isEmergenceUsage_(ut)) { if (hard && ut.indexOf('byline') !== 0) slot.hard++; else slot.cited++; } // a byline is the author's own work, never coverage of them
           if (ut === 'byline-published') slot.published++;
         }
       }
@@ -976,8 +1003,8 @@ function applyTierLadderState_(ctx, cycle) {
     if (mode !== 'ENGINE' && mode !== 'GAME' && mode !== 'CIVIC' && mode !== 'MEDIA') continue;
     var key = keyOf(row);
     if (keyCount[key] > 1) { results.ambiguous++; continue; }
-    var rec = citations[key] || { cited: 0, published: 0 };
-    var onRecord = (mode === 'MEDIA') ? rec.published * MEDIA_PUBLISHED_WORTH : rec.cited;
+    var rec = citations[key] || { cited: 0, published: 0, hard: 0 };
+    var onRecord = (mode === 'MEDIA') ? rec.published * MEDIA_PUBLISHED_WORTH : Math.max(0, rec.cited - (rec.hard || 0)); // engine.152: hard light counts against
     var earned = Math.min(cell, onRecord);
     if (earned < cell && tierForEarnedUsage_(cell) < tierForEarnedUsage_(earned)) results.seededHeld++;
     var target = tierForEarnedUsage_(earned);

@@ -294,9 +294,21 @@ function usageRowsFor(entry) {
     const usageType = ROLE_TO_USAGE[n.role];
     if (!usageType) continue;             // quoted-source: wake-2 owns that class
     if (!n.popid) continue;               // unresolved/ambiguous — no fame credit on a guess
-    rows.push({ name: n.name, popid: n.popid, usageType, context: entry.stem });
+    rows.push({ name: n.name, popid: n.popid, usageType, context: entry.stem, snippet: citationSnippet(entry.text, n.name) });
   }
   return rows;
+}
+
+// engine.152 (S412): the sentences of the article that name the citizen — what the
+// light classifier reads. Pure. Empty when the name is not in the text.
+function citationSnippet(text, name) {
+  const body = String(text || '').replace(/\s+/g, ' ');
+  const nm = String(name || '').trim();
+  if (!nm || body.indexOf(nm) < 0) return '';
+  const last = nm.split(' ').pop();
+  const sentences = body.split(/(?<=[.!?])\s+/);
+  const hits = sentences.filter(s => s.indexOf(nm) >= 0 || (last.length > 3 && s.indexOf(last) >= 0));
+  return hits.slice(0, 4).join(' ').slice(0, 1200);
 }
 
 async function stepSheets(cycle) {
@@ -305,7 +317,7 @@ async function stepSheets(cycle) {
   const wanted = set.flatMap(e => usageRowsFor(e));
   if (!wanted.length) { console.log('no INTAKE usage rows for c' + cycle); return { written: 0 }; }
   if (!APPLY) {
-    for (const w of wanted) console.log('(dry-run) would append: ' + w.name + ' | ' + w.usageType + ' | ' + w.context);
+    for (const w of wanted) console.log('(dry-run) would append: ' + w.name + ' | ' + w.usageType + ' | ' + w.context + (w.snippet ? ' | light: (classified on --apply)' : ' | light: no snippet'));
     console.log(wanted.length + ' row(s) in dry-run scope');
     return { written: 0 };
   }
@@ -313,6 +325,14 @@ async function stepSheets(cycle) {
   const data = await sheets.getRawSheetData('Citizen_Media_Usage');
   const h = data[0] || [];
   const iN = h.indexOf('CitizenName'), iT = h.indexOf('UsageType'), iC = h.indexOf('Context');
+  // engine.152: classify the light each citation casts (cheap model, one call per row).
+  // A failed or absent judgment leaves the cell blank — the engine reads blank as neutral.
+  const { classifyCitationLight } = require(path.join(ROOT, 'lib', 'reflectionClassifier'));
+  for (const w of wanted) {
+    const res = await classifyCitationLight(w.name, w.snippet);
+    w.sentiment = res.light || '';
+    console.log('light: ' + w.name + ' -> ' + (res.light || '(unclassified: ' + String(res.raw).slice(0, 60) + ')'));
+  }
   if (iN < 0 || iT < 0) throw new Error('Citizen_Media_Usage headers missing CitizenName/UsageType');
   const existing = new Set(data.slice(1).map(r =>
     [String(r[iN] || '').trim(), String(r[iT] || '').trim(), iC < 0 ? '' : String(r[iC] || '').trim()].join('|')));
@@ -327,6 +347,7 @@ async function stepSheets(cycle) {
         case 'UsageType':   return w.usageType;
         case 'Context':     return w.context;
         case 'Reporter':    return entryByline(w.context);
+        case 'Sentiment':   return w.sentiment || '';   // engine.152
         default:            return '';
       }
     }));
@@ -951,6 +972,6 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
+module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief };

@@ -9,11 +9,12 @@ const intents = [], ripples = [];
 const sandbox = {
   Logger: { log() {} },
   queueAppendIntent_: (ctx, tab, row) => intents.push({ tab, row }),
+  queueCellIntent_: () => {},
   recordRipple_: (ctx, r) => ripples.push(r),
   inWorldStamp_: (ctx) => 'Y3C4',
 };
 const src = (helperFile ? R(helperFile) + '\n' : '') + R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
-const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, TIER_BAR };')(...Object.values(sandbox));
+const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, processMediaUsage_, TIER_BAR };')(...Object.values(sandbox));
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) { if (cond) { pass++; console.log('  ok   ' + name); } else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); } }
@@ -102,6 +103,31 @@ console.log('\n7. the citation event no longer decides Tier (grep-as-test):');
   check('state-pass line (Media|tier-climb) is EARNED — quiet row falls to 4', runDecay([['C100', 'POP-D', 'Quiet Person', 'Media|tier-climb', 'Updated to Tier 3 — earned on 3 citations (was Tier 4)', '', 100]]) === 4);
   check('no marker at all — held', runDecay([]) === 3);
   check('decay covers ENGINE + GAME; MEDIA and CIVIC held', /mode9 !== 'ENGINE' && mode9 !== 'GAME'\)\) continue/.test(fn('decayMediaAttention_')) && !/mode9 !== 'MEDIA'/.test(fn('decayMediaAttention_')));
+}
+
+console.log('\n8. engine.152 — coverage runs both ways:');
+{
+  const usage2 = (entries) => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed', 'Sentiment']].concat(entries.map(([n, t, s, p]) => ['', 'C111', n, t || 'quoted', 'ctx-' + n, '', p || '', s || '']));
+  const mkSs = (usageRows, gcRows) => { const set = []; return { set, getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => usageRows.length, getDataRange: () => ({ getValues: () => usageRows }), getRange: (r, c) => ({ setValue: (v) => set.push([r, c, v]) }) } : n === 'Generic_Citizens' && gcRows ? { getDataRange: () => ({ getValues: () => gcRows }), getRange: (r, c) => ({ setValue: (v) => set.push(['gc', r, c, v]) }) } : null }; };
+  const cited = E.earnedCitationsByKey_({ ss: mkSs(usage2([['Ada Lin', 'quoted', 'positive'], ['Ada Lin', 'quoted', 'negative'], ['Ada Lin', 'mentioned', ''], ['Ada Lin', 'byline-published', 'negative']])) });
+  check('earned splits cited vs hard; blank = neutral; a hard byline is still a byline', cited['ada lin'].cited === 3 && cited['ada lin'].hard === 1 && cited['ada lin'].published === 1, JSON.stringify(cited));
+  const c1 = ctxOf([row('POP-H', 'Ada', 'Lin', 4, 4)], usage2([['Ada Lin', 'quoted', 'positive'], ['Ada Lin', 'quoted', 'negative'], ['Ada Lin', 'quoted', 'negative']]));
+  check('state pass reads cited − hard: cell 4, 1 good − 2 hard → earned 0 → stays Tier 4', E.applyTierLadderState_(c1, 111).promoted === 0 && c1.ledger.rows[0][3] === 4);
+  // processMediaUsage_: a negative citation counts against, writes the life line, and gives a GC no ticket
+  intents.length = 0;
+  const gc = [['First', 'Last', 'EmergenceCount', 'Status'], ['Bo', 'Field', 1, 'Active']];
+  const ss2 = mkSs(usage2([['Ada Lin', 'quoted', 'negative'], ['Ida Park', 'quoted', 'positive'], ['Bo Field', 'mentioned', 'negative']]), gc);
+  const c2 = { summary: { cycleRef: 'Y3C4' }, ss: ss2, ledger: { headers: H.slice(), rows: [row('POP-H', 'Ada', 'Lin', 4, 3), row('POP-I', 'Ida', 'Park', 4, 1)], dirty: false } };
+  const r2 = E.processMediaUsage_(c2, 'now', 111);
+  check('negative citation: UsageCount 3 → 2, life line + log row written', c2.ledger.rows[0][5] === 2 && /Named in a hard light/.test(c2.ledger.rows[0][7]) && intents.some(i => i.tab === 'LifeHistory_Log' && /hard-light/.test(i.row[3])) && r2.hardLight === 1);
+  check('positive citation still +1; Tier untouched by the event itself', c2.ledger.rows[1][5] === 2 && c2.ledger.rows[1][3] === 4);
+  check('a hard mention gives a Generic citizen no EmergenceCount', !ss2.set.some(s => s[0] === 'gc'));
+  const c3 = { summary: {}, ss: mkSs([['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed'], ['', 'C111', 'Ada Lin', 'quoted', '', '', '']]), ledger: { headers: H.slice(), rows: [row('POP-H', 'Ada', 'Lin', 4, 0)], dirty: false } };
+  E.processMediaUsage_(c3, 'now', 111);
+  check('Sentiment header self-arms when absent (like Processed)', c3.ss.set.some(s => s[2] === 'Sentiment') && c3.ledger.rows[0][5] === 1);
+  const floor = { summary: {}, ss: mkSs(usage2([['Ada Lin', 'quoted', 'negative']])), ledger: { headers: H.slice(), rows: [row('POP-H', 'Ada', 'Lin', 4, 0)], dirty: false } };
+  E.processMediaUsage_(floor, 'now', 111);
+  check('floor 0 — a hard light on a count of 0 stays 0', floor.ledger.rows[0][5] === 0);
 }
 
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');

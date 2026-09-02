@@ -6,12 +6,12 @@ type: plan
 tags: [engine, citizens, education, career, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md engine.144
-  - docs/plans/2026-08-31-education-loop.md §After this loop — the connection is a separate file, after isolation proof
+  - docs/archive/plans/2026-08-31-education-loop.md §After this loop — the connection is a separate file, after isolation proof
   - docs/plans/2026-08-29-employment-system-cascade.md §engine.135 acceptance verdict (S405 builder ruling — education supplies the *reason*; do not widen E3)
   - docs/research/2026-08-30-education-system.md §Extraction — degrees push four things, none of them a job
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout"
-  - "[[plans/2026-08-31-education-loop]] — the isolation loop this connects (LIVE PROD @14)"
+  - "[[archive/plans/2026-08-31-education-loop]] — the isolation loop this connects (LIVE PROD @14)"
   - "[[plans/2026-08-29-employment-system-cascade]] — E2/E3, the events this plan lets read the credential"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — registered same commit"

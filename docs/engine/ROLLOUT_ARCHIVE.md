@@ -854,6 +854,15 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S410 Archive Pass (2026-09-02, research-build) — post-S409 closures sweep
+
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.*.
+
+- **engine.143** [engine-sheet] — Education loop in isolation — minors' stage from age, [Graduation] writes the credential, one plural vocab, OCS voice. LIVE PROD @14; smoke = bench C106 on the live-synced sheet (S410: 52 minors, 0 ENGINE-clock off-band, 0 errors). Detail: plan §Changelog **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-31-education-loop]]
+- **engine.137** [engine-sheet] — ctx read-before-write — ordering scan repointed at the orchestrator; 6 sites wired to carry-forward; bench-proven C106/C107, LIVE at PROD @12 **State at archive:** done-pending-archive. Pointer: [[../../output/production_log_run_cycle_c105_gaps]] §G-PF16 (corrected), §G-PF27
+
+This pass: 2 rows — engine.143 + engine.137. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S404 Archive Pass (2026-08-31, research-build) — research-build work-week housekeeping
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 1 engine.*.

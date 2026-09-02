@@ -318,7 +318,7 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
     }
   }
 
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
 
   // Mike-ruled S322 status set — SCOPED TO FORMATION ONLY (the engine's main
   // loadCitizens_ stays Active-only so births/marriages/divorces are
@@ -593,7 +593,7 @@ function reconcileHouseholds_(ctx, cycle) {
       iMarital = idx('MaritalStatus'), iBirthYear = idx('BirthYear'),
       iTierRec = idx('Tier'), iIncomeRec = idx('Income'); // engine.73: solo typing
   if (iPOPID < 0 || iHH < 0) return out;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
 
   var alive = function(row) {
     return String(row[iStatus] || 'active').toLowerCase() !== 'deceased';
@@ -1056,7 +1056,7 @@ function buildCitizenMoneyLookup_(ctx) {
   // S319 P8: adult/marital/spouse flags so updateHouseholdIncomes_ can price
   // off-camera parents. Missing BirthYear = adult (age-gate fallback).
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
 
   var lookup = {};
   for (var r = 0; r < rows.length; r++) {

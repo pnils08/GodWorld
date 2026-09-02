@@ -50,9 +50,11 @@ function mulberry32(seed) {
   };
 }
 
+// engine.148: the calendar file carries simYearOf_ — prepended so the year resolves as it does in the flat Apps Script namespace
+const CAL_SRC = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8');
 const loadEngine = (rel, fnName) => {
   const src = fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
-  return new Function(src + '\nreturn ' + fnName + ';')();
+  return new Function(CAL_SRC + '\n' + src + '\nreturn ' + fnName + ';')();
 };
 const processNeighborhoodTrajectory_ = loadEngine('../phase05-citizens/neighborhoodTrajectoryEngine.js', 'processNeighborhoodTrajectory_');
 const processMigrationTracking_ = loadEngine('../phase05-citizens/migrationTrackingEngine.js', 'processMigrationTracking_');

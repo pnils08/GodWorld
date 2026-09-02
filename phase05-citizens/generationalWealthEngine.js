@@ -309,7 +309,7 @@ function processMoneyLoop_(ctx, cycle) {
       iHH = idx('HouseholdId'), iBirth = idx('BirthYear'), iStatus = idx('Status'),
       iLife = idx('LifeHistory'), iHood = idx('Neighborhood');
   if (iInc < 0 || iNW < 0 || iSav < 0) return results;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
 
   // Household money state: crisis + SuperCouple, one read
@@ -461,7 +461,7 @@ function calculateCitizenIncomes_(ctx) {
   var rng = safeRand_(ctx);
 
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
 
   var updated = 0;
 
@@ -1236,7 +1236,7 @@ function trackWealthMobility_(ctx, cycle, prevLevels) {
       iBirth = idx('BirthYear'), iLife = idx('LifeHistory');
   if (iPop < 0 || iWL < 0 || iLife < 0 || !prevLevels) return results;
 
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
 
   for (var r = 0; r < rows.length; r++) {
@@ -1318,7 +1318,7 @@ function trackHomeOwnership_(ss, ctx, cycle) {
       iLife = idx('LifeHistory'), iLin = idx('LineageId'), iFirst = idx('First'),
       iLast = idx('Last'), iBirthH = idx('BirthYear');
   if (iPop < 0 || iNW < 0) return results;
-  var simYearH = 2040 + Math.floor(cycle / 52); // engine.144 loop 3 — youth-mode gate on the [Home] line
+  var simYearH = simYearOf_(ctx, cycle); // engine.144 loop 3 — youth-mode gate on the [Home] line
 
   var rowByPop = {};
   for (var r0 = 0; r0 < rows.length; r0++) {

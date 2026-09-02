@@ -29,6 +29,7 @@ const sandbox = {
 };
 vm.createContext(sandbox);
 for (const rel of [
+  ['phase01-config', 'advanceSimulationCalendar.js'],
   ['phase05-citizens', 'educationCareerEngine.js'],
   ['phase05-citizens', 'generationalWealthEngine.js'],
 ]) { const p = path.join(__dirname, '..', ...rel); vm.runInContext(fs.readFileSync(p, 'utf8'), sandbox, { filename: p }); }

@@ -99,7 +99,7 @@ function checkForPromotions_(ctx) {
   var sportsSeason = S.sportsSeason || "off-season";
 
   // Use simYear or calculate from cycle (52 cycles = 1 year)
-  var simYear = S.simYear || (2040 + Math.floor(cycle / 52));
+  var simYear = simYearOf_(ctx, cycle);
 
   // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
   var validNeighborhoods = getCoreSimNeighborhoods_(ctx);

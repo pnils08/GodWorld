@@ -18,13 +18,15 @@ global.Logger = { log() {} };
 // generationalWealthEngine global that updateMinorSchoolQuality_ reaches for
 global.heritageRank_ = function () { return 0; };
 global.safeRand_ = function (ctx) { return ctx.rng; };
+// engine.148: the calendar file carries simYearOf_ / simYearFromCycle_ — loaded first, as the flat Apps Script namespace does
+const CAL = R('phase01-config/advanceSimulationCalendar.js') + '\n';
 
-const E = new Function(R('phase05-citizens/educationCareerEngine.js') + '\nreturn {' +
+const E = new Function(CAL + R('phase05-citizens/educationCareerEngine.js') + '\nreturn {' +
   'processEducationCareer_, deriveEducationLevels_, deriveMinorEducationStage_, schoolStageForAge_,' +
   'canonicalEducationWrite_, eduRank_, updateCareerProgression_, EDUCATION_LEVELS,' +
   'settleField_, settleYouthCounts_, settleFieldClause_, settleAdulthood_, buildSettleBizPool_,' +
   'SETTLE_FIELDS, SETTLE_ROLES_BY_FIELD, SETTLE_FIELD_ECON_KEYS, SETTLE_ECON_KEYS, skillTagField_, tagsMatchCategory_, setCurrentField_, roleFieldOf_ };')();
-const G = new Function(R('phase04-events/generationalEventsEngine.js') + '\nreturn {' +
+const G = new Function(CAL + R('phase04-events/generationalEventsEngine.js') + '\nreturn {' +
   'checkGraduation_, graduationCredential_, GRADUATION_LADDER_ };')();
 
 let pass = 0, fail = 0;
@@ -296,12 +298,12 @@ console.log('\n9. engine.144 loop 4 — youth texture, the minors\' whole textur
   global.inWorldStamp_ = () => 'Y3C4';
   const intents = [];
   global.queueAppendIntent_ = (ctx, tab, row) => intents.push({ tab, row });
-  const Y = new Function(R('phase05-citizens/runYouthEngine.js') + '\nreturn { runYouthEngine_, getNamedYouth_, selectYouthEventType_, pickYouthEvent_, YOUTH_TEXTURE_POOLS, YOUTH_TYPE_ORDER, YOUTH_DIAL_TAG, youthStage_ };')();
+  const Y = new Function(CAL + R('phase05-citizens/runYouthEngine.js') + '\nreturn { runYouthEngine_, getNamedYouth_, selectYouthEventType_, pickYouthEvent_, YOUTH_TEXTURE_POOLS, YOUTH_TYPE_ORDER, YOUTH_DIAL_TAG, youthStage_ };')();
   const mul = (seed) => () => { seed |= 0; seed = (seed + 0x6D2B79F5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
   const YH = ['POPID', 'First', 'Last', 'BirthYear', 'Status', 'ClockMode', 'Neighborhood', 'LifeHistory', 'LastUpdated', 'DialState'];
   const yrow = (pop, by, hood) => { const r = YH.map(() => ''); r[0] = pop; r[1] = pop; r[2] = 'T'; r[3] = by; r[4] = 'active'; r[5] = 'ENGINE'; r[6] = hood || 'Temescal'; return r; };
   const yctx = (rows, seed, month) => ({ ss: { getSheetByName() { return null; } }, rng: mul(seed), now: 'now',
-    summary: { simYear: 2042, simMonth: month || 1, season: 'winter', absoluteCycle: 108, crimeMetrics: {} }, ledger: { headers: YH.slice(), rows: rows.map(r => r.slice()), dirty: false } });
+    summary: { simYear: 2042, simMonth: month || 1, season: 'winter', absoluteCycle: 108, cycleRef: 'Y3C4', crimeMetrics: {} }, ledger: { headers: YH.slice(), rows: rows.map(r => r.slice()), dirty: false } });
   // vocabulary shape
   const dialOk = Y.YOUTH_TYPE_ORDER.concat(['resilience', 'safety_awareness']).every(t => Y.YOUTH_DIAL_TAG[t]);
   check('every emitted type has a YOUTH_DIAL_TAG route (no silent Education default)', dialOk);
@@ -342,6 +344,19 @@ console.log('\n9. engine.144 loop 4 — youth texture, the minors\' whole textur
   const run = (seed) => { const c = yctx([yrow('K8', 2034), yrow('K15', 2027)], seed, 4); Y.runYouthEngine_(c); return c.ledger.rows.map(r => r[YH.indexOf('LifeHistory')]).join('||'); };
   check('deterministic under the same rng', run(42) === run(42) && run(42) !== run(43));
   delete global.getCitizenDialBands_; delete global.inWorldStamp_; delete global.queueAppendIntent_;
+}
+
+console.log('\n12. one year formula (engine.148, backlog 7):');
+{
+  const C = new Function(CAL + '\nreturn { simYearFromCycle_, simYearOf_ };')();
+  const calendar = (cycle) => 2040 + (Math.ceil(cycle / 52) - 1);   // Phase1-Calendar arithmetic, advanceSimulationCalendar.js
+  const oldFloor = (cycle) => 2040 + Math.floor(cycle / 52);          // the retired per-site formula
+  check('helper == calendar at 1, 52, 53, 104, 105, 156, 157', [1, 52, 53, 104, 105, 156, 157].every(c => C.simYearFromCycle_(c) === calendar(c)));
+  check('cycles 1-52 → 2040, 53-104 → 2041, 105-156 → 2042', C.simYearFromCycle_(1) === 2040 && C.simYearFromCycle_(52) === 2040 && C.simYearFromCycle_(53) === 2041 && C.simYearFromCycle_(104) === 2041 && C.simYearFromCycle_(105) === 2042 && C.simYearFromCycle_(156) === 2042);
+  check('the retired formula disagreed on exactly the last cycle of each year', oldFloor(104) !== calendar(104) && oldFloor(52) !== calendar(52) && oldFloor(105) === calendar(105) && oldFloor(103) === calendar(103));
+  check('simYearOf_ reads the calendar first', C.simYearOf_({ summary: { simYear: 2042, cycleId: 52 } }, 52) === 2042);
+  check('simYearOf_ derives from the cycle when the calendar has not run', C.simYearOf_({ summary: {} }, 104) === 2041 && C.simYearOf_({ summary: { cycleId: 105 } }) === 2042 && C.simYearOf_({ config: { cycleCount: 156 } }) === 2042);
+  check('no engine file re-derives the year itself', !fs.readdirSync(path.resolve(__dirname, '..')).filter(d => /^phase/.test(d)).some(d => fs.readdirSync(path.resolve(__dirname, '..', d)).filter(x => /\.js$/.test(x) && x !== 'advanceSimulationCalendar.js').some(x => /2040 \+ (Math\.floor|\()/.test(fs.readFileSync(path.resolve(__dirname, '..', d, x), 'utf8')))));
 }
 
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');

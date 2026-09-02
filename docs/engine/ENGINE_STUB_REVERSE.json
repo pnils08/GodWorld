@@ -2,7 +2,7 @@
   "generated": "2026-09-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 186,
-  "functionsMapped": 1247,
+  "functionsMapped": 1249,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -10,6 +10,7 @@
       ],
       "readers": [
         "phase01-config/advanceSimulationCalendar.js::inWorldStamp_",
+        "phase01-config/advanceSimulationCalendar.js::simYearOf_",
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
@@ -542,13 +543,12 @@
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
       ],
       "readers": [
+        "phase01-config/advanceSimulationCalendar.js::simYearFromCycle_",
+        "phase01-config/advanceSimulationCalendar.js::simYearOf_",
         "phase04-events/chaosCarsEngine.js::pickCitizenTarget_",
-        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::bondCompatibility_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
-        "phase05-citizens/checkForPromotions.js::checkForPromotions_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
-        "phase05-citizens/runEducationEngine.js::runEducationEngine_",
         "phase05-citizens/runYouthEngine.js::generateSchoolWideEvents_",
         "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_",
         "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_"
@@ -680,6 +680,7 @@
       ],
       "readers": [
         "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_",
+        "phase01-config/advanceSimulationCalendar.js::simYearOf_",
         "phase01-config/godWorldEngine2.js::emitPhaseTimings_",
         "phase01-config/godWorldEngine2.js::logEngineError_",
         "phase01-config/godWorldEngine2.js::processIntake_",
@@ -725,10 +726,7 @@
         "phase05-citizens/civicInitiativeEngine.js::createInitiative_",
         "phase05-citizens/civicInitiativeEngine.js::getInitiativeSummaryForMedia_",
         "phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_",
-        "phase05-citizens/educationCareerEngine.js::deriveEducationLevels_",
-        "phase05-citizens/educationCareerEngine.js::deriveMinorEducationStage_",
         "phase05-citizens/educationCareerEngine.js::processEducationCareer_",
-        "phase05-citizens/educationCareerEngine.js::updateMinorSchoolQuality_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
@@ -3008,13 +3006,6 @@
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
       ]
     },
-    "simulationYear": {
-      "writers": [],
-      "readers": [
-        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
-      ]
-    },
     "promotions": {
       "writers": [
         "phase05-citizens/checkForPromotions.js::checkForPromotions_",
@@ -3174,6 +3165,12 @@
       ]
     },
     "localEntities": {
+      "writers": [],
+      "readers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ]
+    },
+    "simulationYear": {
       "writers": [],
       "readers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"

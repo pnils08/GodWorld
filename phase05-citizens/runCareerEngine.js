@@ -1090,7 +1090,7 @@ function runCareerEngine_(ctx) {
     if (bId < 0 || bCount < 0 || bGrow < 0) return;
 
     // ── the unemployed pool: Active ENGINE adults (18-64), no employer, tagged ──
-    var simYear = 2040 + Math.floor(Number(cycle) / 52);
+    var simYear = simYearOf_(ctx, cycle);
     var pool = [];
     for (var ur = 0; ur < rows.length; ur++) {
       var uRow = rows[ur];

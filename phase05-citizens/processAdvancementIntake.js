@@ -650,7 +650,7 @@ function processAdvancementRows_(ctx, now, cycle) {
       // ungated assigner left (a minor advanced through intake got adult pay)
       var advBYCol = findColByName_(ledgerHeaders, 'BirthYear');
       var advBY = advBYCol >= 0 ? (Number(ledgerRows[existingRow][advBYCol]) || 0) : 0;
-      var advIsMinor = advBY > 0 && ((2040 + Math.floor(cycle / 52)) - advBY) < 18;
+      var advIsMinor = advBY > 0 && (simYearOf_(ctx, cycle) - advBY) < 18;
       if (roleChanged && !advIsMinor && lIncome >= 0 && advSalaryPools && typeof ctx.rng === 'function') {
         var newIncome = rederiveIncomeForRole_(advSalaryPools, roleType, ctx.rng);
         // engine.135 D2 (S399): the neighborhood prices the new role when it can.
@@ -682,9 +682,9 @@ function processAdvancementRows_(ctx, now, cycle) {
       var seed = first + '|' + last + '|' + newPopId;
       var rawBirthYear = (iBirthYear >= 0) ? Number(row[iBirthYear]) : NaN;
       var birthYear = (!isNaN(rawBirthYear) && rawBirthYear > 1900) ? rawBirthYear : 2003;
-      // S322: live sim-year (engine convention 2040 + cycle/52) — was hardcoded
+      // S322: live sim-year — was hardcoded; engine.148: the calendar's year via simYearOf_
       // 2041, understating age by 1/year as the sim advances.
-      var age = (2040 + Math.floor(cycle / 52)) - birthYear;
+      var age = simYearOf_(ctx, cycle) - birthYear;
       var rawNbhd = (iNeighborhood >= 0) ? String(row[iNeighborhood] || '').trim() : '';
       var profile = deriveCitizenProfile_(seed, age, rawNbhd, ledgerFreq, {
         roleTypeOverride: rawRole || null  // honor explicit intake RoleType if set
@@ -1182,7 +1182,7 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
       iNumKids = idx('NumChildren'), iHood = idx('Neighborhood');
   if (iPop < 0 || iLast < 0 || iStatus < 0 || iBY < 0) return results;
 
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var popCount = function(v) { return (String(v || '').match(/POP-\d+/g) || []).length; };
   var rowByPop = {};
   for (var p = 0; p < rows.length; p++) {

@@ -220,7 +220,7 @@ function runGenerationalEngine_(ctx) {
   ctx._rng = initRng_(ctx, cycle);
 
   // 52 cycles = 1 year
-  var simYear = (ctx.summary && ctx.summary.simYear) || (2040 + Math.floor(cycle / 52));
+  var simYear = simYearOf_(ctx, cycle);
 
   // Calendar context (normalize season for comparisons)
   var calendarContext = {
@@ -1072,7 +1072,7 @@ function createChildRow_(ctx, parentRowIdx, cycle) {
   var pool = CHILD_FIRST_NAMES[sex];
   var firstName = pool[Math.floor(rng() * pool.length)];
   var lastName = idx("Last") >= 0 ? (parent[idx("Last")] || "") : "";
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var hood = idx("Neighborhood") >= 0 ? parent[idx("Neighborhood")] : "";
   var hhId = idx("HouseholdId") >= 0 ? String(parent[idx("HouseholdId")] || "").trim() : "";
   var parentId = parent[iPop];

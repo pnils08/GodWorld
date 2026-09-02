@@ -11,6 +11,9 @@ global.queueCellIntent_ = function (ctx, tab, r, c, v) {
   ctx._cells.push({ tab: tab, r: r, c: c, v: v });
 };
 
+// engine.148: the calendar's year helper, from the real source — the flat Apps Script namespace resolves it the same way
+global.simYearOf_ = new Function(require('fs').readFileSync(require('path').resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8') + '\nreturn simYearOf_;')();
+
 const E = require('../phase05-citizens/casinoLedgerEngine.js');
 
 let failed = 0;

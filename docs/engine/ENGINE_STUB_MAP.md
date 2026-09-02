@@ -25,6 +25,13 @@
 - **inWorldStamp_(ctx)**
   Reads: S.absoluteCycle, S.cycle, S.cycleRef
 
+- **simYearFromCycle_(cycle)**
+  Reads: S.simYear
+
+- **simYearOf_(ctx, cycle)**
+  Reads: S.absoluteCycle, S.cycleId, S.simYear
+  Config: ctx.config.cycleCount
+
 ### canonNeighborhoodLoader.js
 - **loadCanonNeighborhoods_(ctx)**
   Writes: S.canonHoodCount, S.canonHoods
@@ -685,7 +692,7 @@
 - **pick_(ctx, arr)**
 
 - **runGenerationalEngine_(ctx)**
-  Reads: S.cycleId, S.generationalEvents, S.holiday, S.holidayPriority, S.hospitalEvents, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simYear, S.sportsSeason, S.storyHooks, S.weatherEvents
+  Reads: S.cycleId, S.generationalEvents, S.holiday, S.holidayPriority, S.hospitalEvents, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.sportsSeason, S.storyHooks, S.weatherEvents
   Writes: S.generationalEvents, S.hospitalEvents, S.storyHooks
   Config: ctx.config.cycleCount
   Sheets: Household_Ledger
@@ -1058,14 +1065,14 @@
 - **casinoCooldown_(history, cycle, weekly)**
 
 - **processCasinoLedger_(ctx, cycle)**
-  Reads: S.casinoSettlements, S.simYear, S.simulationYear, S.sportsFeedEntries, S.storyHooks, S.undockedFeedEntries, S.undockedPilots
+  Reads: S.casinoSettlements, S.simYear, S.sportsFeedEntries, S.storyHooks, S.undockedFeedEntries, S.undockedPilots
   Writes: S.casinoSettlements, S.storyHooks
   Sheets: Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### checkForPromotions.js
 - **checkForPromotions_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.simYear, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.promotions, S.promotionsCount
   Config: ctx.config.cycleCount
   Sheets: Generic_Citizens, LifeHistory_Log
@@ -1229,10 +1236,8 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **deriveEducationLevels_(ctx, rng)**
-  Reads: S.cycleId
 
 - **deriveMinorEducationStage_(ctx, cycle)**
-  Reads: S.cycleId
 
 - **stampPromotion_(ctx, row, iLife, iLastU, iPop, iFirst, iLast, iNb, iOcc, verb, years, cycle)**
   Sheets: LifeHistory_Log
@@ -1250,7 +1255,7 @@
   Writes: S.storyHooks
 
 - **updateMinorSchoolQuality_(ss, ctx, cycle)**
-  Reads: S.cycleId, S.heritage
+  Reads: S.heritage
   Sheets: Neighborhood_Demographics
 
 - **classifySettleSector_(sector)**
@@ -1705,7 +1710,7 @@
 
 ### runEducationEngine.js
 - **runEducationEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.simYear, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsAtmosphereEnabled, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.educationEvents, S.eventsGenerated
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
@@ -3677,4 +3682,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1247
+**Functions mapped:** 1249

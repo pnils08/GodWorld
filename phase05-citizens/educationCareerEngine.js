@@ -256,7 +256,7 @@ function deriveEducationLevels_(ctx, rng) {
   if (iEducation < 0) return { updated: 0 };
 
   var updated = 0;
-  var simYear = 2040 + Math.floor(((ctx && ctx.summary && ctx.summary.cycleId) || 0) / 52);
+  var simYear = simYearOf_(ctx);
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -334,7 +334,7 @@ function deriveMinorEducationStage_(ctx, cycle) {
       iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey');
   if (iEdu < 0 || iBirth < 0) return { restamped: 0, minors: 0 };
 
-  var simYear = 2040 + Math.floor(((ctx && ctx.summary && ctx.summary.cycleId) || cycle || 0) / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var restamped = 0, minors = 0;
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -477,7 +477,7 @@ function updateCareerProgression_(ctx, cycle, rng) {
   var stagnant = 0;
   var restamped = 0;  // engine.135 E1: rows whose derived stage differed from the stored one
   var yearsAccrued = 0;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -676,7 +676,7 @@ function updateMinorSchoolQuality_(ss, ctx, cycle) {
   var qualityByHood = {};
   for (var d = 1; d < demo.length; d++) qualityByHood[demo[d][dHood]] = Number(demo[d][dQ]) || 5;
 
-  var simYear = 2040 + Math.floor(((ctx && ctx.summary && ctx.summary.cycleId) || cycle || 0) / 52);
+  var simYear = simYearOf_(ctx, cycle);
   // engine.65 (S323): heritage tier unlock — a kid in an Established+ line
   // reads one notch above the neighborhood index (the parents' life buying
   // the children's start). Same-cycle signal: generationalWealthEngine runs
@@ -1098,7 +1098,7 @@ function settleAdulthood_(ctx, cycle, rng) {
       iInc = idx('Income'), iEcon = idx('EconomicProfileKey'), iEmployer = idx('EmployerBizId');
   if (iBirth < 0 || iLife < 0 || iEdu < 0 || iRole < 0 || iInc < 0) return results;
 
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
 
   // Household income map — one read, same source the money loop uses.

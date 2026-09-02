@@ -682,7 +682,7 @@ function getNamedYouth_(ctx) {
   // engine.144 loop 4 (S411): the calendar's year, never a hardcoded one —
   // 2041 sat here while the world reached 2042 and every youth read a year young.
   var Sy = ctx.summary || {};
-  var currentYear = Number(Sy.simYear) || (2040 + Math.floor((Number(Sy.absoluteCycle) || 0) / 52)) || 2041;
+  var currentYear = simYearOf_(ctx);
 
   var result = [];
   for (var r = 0; r < rows.length; r++) {

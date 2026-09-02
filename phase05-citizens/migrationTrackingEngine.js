@@ -221,7 +221,7 @@ function assessDisplacementRisk_(ctx, cycle) {
 
   var assessed = 0;
   var highRisk = 0;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
 
   for (var r = 0; r < simRows.length; r++) {
     var row = simRows[r];

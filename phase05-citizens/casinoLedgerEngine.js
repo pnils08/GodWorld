@@ -477,9 +477,8 @@ function processCasinoLedger_(ctx, cycle) {
   if (iLP < 0 || iNW < 0) return results;
 
   var byPop = {};
-  var ageYear = 2041;
-  if (S.simulationYear) ageYear = Number(S.simulationYear) || 2041;
-  else if (S.simYear) ageYear = 2040 + (Number(S.simYear) || 1);
+  // engine.148 (S412): was `2040 + S.simYear` (≈4082) — every citizen read ~2,000 years old and the 18+ gate in casinoEligible_ never held.
+  var ageYear = simYearOf_(ctx, cycle);
   var c, crow, pid, age;
   for (c = 0; c < lRows.length; c++) {
     crow = lRows[c];

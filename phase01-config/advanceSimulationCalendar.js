@@ -205,7 +205,7 @@ function advanceSimulationCalendar_(ctx) {
   S.godWorldYear = godWorldYear;
   S.cycleOfYear = cycleOfYear;
   S.cycleInMonth = cycleInMonth;
-  S.simYear = 2040 + (godWorldYear - 1);  // calendar year for age math (simYear - birthYear); godWorldYear stays the ordinal used by cycleRef/elections/display. S243 fix: was aliased to the ordinal, freezing every age-gated life event (age = 2 - birthYear ≈ -2000).
+  S.simYear = simYearFromCycle_(absoluteCycle);  // calendar year for age math (simYear - birthYear); godWorldYear stays the ordinal used by cycleRef/elections/display. S243 fix: was aliased to the ordinal, freezing every age-gated life event (age = 2 - birthYear ≈ -2000). engine.148: the ONE formula, see simYearFromCycle_ below.
   S.simMonth = simMonth;
   S.simDay = cycleInMonth;   // Alias for backwards compatibility
   S.monthName = monthName;
@@ -340,3 +340,39 @@ function inWorldStamp_(ctx) {
  * 
  * ============================================================================
  */
+// ═══════════════════════════════════════════════════════════════════════════
+// SIM YEAR — the one formula (engine.148, S412)
+// ═══════════════════════════════════════════════════════════════════════════
+// The calendar year the world is in, from the absolute cycle: cycles 1–52 are
+// 2040, 53–104 are 2041, 105–156 are 2042. Before engine.148, fifteen sites
+// re-derived the year as 2040 + floor(cycle/52), which disagrees with this
+// calendar on exactly the last cycle of every year (cycle 52·n) — a citizen
+// could read one age in Phase 1 and another in Phase 5 on that cycle.
+// Every phase reads simYearOf_(); nothing else does the arithmetic.
+
+/**
+ * @param {number} cycle absolute cycle (1-based)
+ * @returns {number} calendar year
+ */
+function simYearFromCycle_(cycle) {
+  var c = Number(cycle);
+  if (!(c > 0)) c = 1;
+  return 2040 + (Math.ceil(c / 52) - 1);
+}
+
+/**
+ * The world's year for age math. Reads the calendar's S.simYear (set in
+ * Phase1-Calendar); derives it from the cycle only when the calendar has not
+ * run yet (unit harnesses with a partial ctx).
+ * @param {Object} ctx engine context
+ * @param {number=} cycle absolute cycle, if the caller already has it
+ * @returns {number} calendar year
+ */
+function simYearOf_(ctx, cycle) {
+  var S = (ctx && ctx.summary) || {};
+  var y = Number(S.simYear);
+  if (y > 0) return y;
+  var c = Number(cycle);
+  if (!(c > 0)) c = Number(S.cycleId || S.absoluteCycle || (ctx && ctx.config && ctx.config.cycleCount) || 1);
+  return simYearFromCycle_(c);
+}

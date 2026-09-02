@@ -1882,7 +1882,7 @@ function processRomanceAndMarriage_(ctx) {
   if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.rows.length) return;
   var rng = safeRand_(ctx);
   var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var ageMin = (typeof AGE_RANGES !== 'undefined' && AGE_RANGES.WEDDING) ? AGE_RANGES.WEDDING.min : 20;
   var ageMax = (typeof AGE_RANGES !== 'undefined' && AGE_RANGES.WEDDING) ? AGE_RANGES.WEDDING.max : 65;
   var people = buildBondLedgerIndex_(ctx);
@@ -2006,7 +2006,7 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
     var iPar0 = idx('ParentIds'), iBirth0 = idx('BirthYear');
     if (iPar0 >= 0) {
       var cyc0 = ctx.summary.cycleId || ctx.config.cycleCount || 0;
-      var simY0 = 2040 + Math.floor(cyc0 / 52);
+      var simY0 = simYearOf_(ctx, cyc0);
       for (var mri = 0; mri < ctx.ledger.rows.length; mri++) {
         var mrow = ctx.ledger.rows[mri];
         if (String(mrow[iHH0] || '').trim() !== joinTarget.hid) continue;
@@ -2116,7 +2116,7 @@ function processGCCourtship_(ctx) {
   if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.rows.length) return;
   var rng = safeRand_(ctx);
   var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var bonds = ctx.summary.relationshipBonds || [];
   var gcSheet = ctx.ss.getSheetByName('Generic_Citizens');
   if (!gcSheet) return;
@@ -2265,7 +2265,7 @@ function processGCMarriageLottery_(ctx) {
   if (!ctx.ledger || !ctx.ledger.rows || !ctx.ledger.rows.length) return;
   var rng = safeRand_(ctx);
   var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
-  var simYear = 2040 + Math.floor(cycle / 52);
+  var simYear = simYearOf_(ctx, cycle);
   var ageMin = (typeof AGE_RANGES !== 'undefined' && AGE_RANGES.WEDDING) ? AGE_RANGES.WEDDING.min : 20;
   var ageMax = (typeof AGE_RANGES !== 'undefined' && AGE_RANGES.WEDDING) ? AGE_RANGES.WEDDING.max : 65;
   var people = buildBondLedgerIndex_(ctx);

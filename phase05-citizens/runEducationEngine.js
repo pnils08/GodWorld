@@ -80,7 +80,7 @@ function runEducationEngine_(ctx) {
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
   // Use simYear or calculate from cycle (52 cycles = 1 year)
-  var simYear = S.simYear || (2040 + Math.floor(cycle / 52));
+  var simYear = simYearOf_(ctx, cycle);
 
   var count = 0;
   var LIMIT = 10;

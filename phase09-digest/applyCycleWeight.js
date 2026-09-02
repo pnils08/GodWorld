@@ -453,41 +453,6 @@ function applyCycleWeight_(ctx) {
 
 
 /**
- * Legacy sheet writer - writes to digest sheet
- * Call separately if needed for backward compatibility
- */
-function writeCycleWeightToDigest_(ctx) {
-  var ss = ctx.ss;
-  var S = ctx.summary || {};
-
-  var sheet = ss.getSheetByName('Riley_Digest');
-  if (!sheet) return;
-
-  var lastRow = sheet.getLastRow();
-  if (lastRow < 2) return;
-
-  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-  var weightCol = headers.indexOf('CycleWeight') + 1;
-  var reasonCol = headers.indexOf('CycleWeightReason') + 1;
-  var calendarCol = headers.indexOf('CycleWeightCalendarFactors') + 1;
-
-  if (weightCol > 0) {
-    sheet.getRange(lastRow, weightCol).setValue(S.cycleWeight || 'low-signal');
-  }
-
-  if (reasonCol > 0) {
-    sheet.getRange(lastRow, reasonCol).setValue(S.cycleWeightReason || '');
-  }
-
-  // v2.2: Write calendar factors if column exists
-  if (calendarCol > 0 && S.cycleWeightCalendarFactors) {
-    sheet.getRange(lastRow, calendarCol).setValue(S.cycleWeightCalendarFactors.join(', '));
-  }
-}
-
-
-/**
  * ============================================================================
  * CYCLE WEIGHT REFERENCE
  * ============================================================================

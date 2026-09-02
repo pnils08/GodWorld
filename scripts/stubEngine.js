@@ -77,8 +77,12 @@ function analyzeFunction(fn) {
   let usesRng = false;
 
   // S.X / ctx.summary.X — writes (assignment target on LHS, or ++/+= / .push)
+  // S409 fix (G-PF31): bare `=` must reject `==` / `===` — before this, every
+  // comparison (`if (S.civicLoad === 'load-strain')`) counted as a write, so
+  // the reverse map listed 3 writers for S.civicLoad where one assigns. The
+  // read side (:107) already had the `(?!=)` lookahead; the write side did not.
   const writePatterns = [
-    /(?:^|[^.\w])(?:S|ctx\.summary)\.([A-Za-z_][A-Za-z0-9_]*)\s*(?:=|\+=|-=|\*=|\/=|\+\+|--|\.push|\.unshift)/g,
+    /(?:^|[^.\w])(?:S|ctx\.summary)\.([A-Za-z_][A-Za-z0-9_]*)\s*(?:=(?!=)|\+=|-=|\*=|\/=|\+\+|--|\.push|\.unshift)/g,
   ];
   for (const re of writePatterns) {
     let mm;

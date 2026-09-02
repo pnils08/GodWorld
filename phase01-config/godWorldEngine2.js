@@ -1128,7 +1128,10 @@ function updateWorldPopulation_(ctx) {
   // emp/econ stay as READS for the births-deaths coupling and summary below.
   // This function still owns totalPopulation + migration (v2.3 separation).
 
-  if (iTotal >= 0) ctx.cache.queueWrite('World_Population', 2, iTotal + 1, total);
+  // S409 (A7): births/deaths/mig are all Math.round'd, so total only carried
+  // decimals because the stored seed value did (live 389122.0135). A count is
+  // integral; rounding here heals the legacy fraction forward, loses nothing.
+  if (iTotal >= 0) ctx.cache.queueWrite('World_Population', 2, iTotal + 1, Math.round(total));
   if (iMig >= 0) ctx.cache.queueWrite('World_Population', 2, iMig + 1, mig);
 
   // ═══════════════════════════════════════════════════════════════════════════

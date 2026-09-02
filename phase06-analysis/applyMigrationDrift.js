@@ -137,6 +137,11 @@ function applyMigrationDrift_(ctx) {
   var worldMig = 0;
   // W2a (engine.102): hardcoded 400000 removed. Start from config fallback if present.
   var totalPopulation = Number(ctx.config.migrationPopulationFallback) || 400000;
+  // S409 (chase §S-E A7): name the source that actually answered. The old
+  // parenthetical printed "fallback source: World_Config" whenever the config
+  // key EXISTED, even when World_Population had answered — C105 read a live
+  // 387975 and still logged a fallback. Same wording-defect class as S-A.
+  var populationSource = ctx.config.migrationPopulationFallback ? 'World_Config fallback' : 'hardcoded 400000';
   var sheetEmployment = 0.91;
   var sheetEconomy = 'stable';
 
@@ -149,16 +154,18 @@ function applyMigrationDrift_(ctx) {
 
       worldMig = Number(row[idx('migration')] || 0);
       // W2a: live read from WP, then config fallback, then final guard.
-      totalPopulation = Number(row[idx('totalPopulation')] ||
-                               ctx.config.migrationPopulationFallback || 400000);
+      var livePopulation = Number(row[idx('totalPopulation')]);
+      if (livePopulation > 0) {
+        totalPopulation = livePopulation;
+        populationSource = 'World_Population';
+      }
       sheetEmployment = Number(row[idx('employmentRate')] || 0.91);
       sheetEconomy = (row[idx('economy')] || 'stable').toString();
     }
   }
 
-  Logger.log('applyMigrationDrift_: totalPopulation=' + totalPopulation +
-             ' worldMig=' + worldMig + ' (fallback source: ' +
-             (ctx.config.migrationPopulationFallback ? 'World_Config' : 'hardcoded 400000') + ')');
+  Logger.log('applyMigrationDrift_: totalPopulation=' + Math.round(totalPopulation) +
+             ' worldMig=' + worldMig + ' (source: ' + populationSource + ')');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.4: NEIGHBORHOOD_MAP PULL

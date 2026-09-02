@@ -100,6 +100,39 @@ function trials(n, usage, headersOverride) {
 
 const isFameLine = ln => FAME_LINES.some(t => ln.indexOf(t) >= 0);
 
+console.log('═══ engine.144 loop 3 — youth-mode gate (S411)');
+{
+  function trialsAge(n, birthYear, simYear) {
+    let events = 0, skipped = 0;
+    for (let i = 0; i < n; i++) {
+      const rows = [makeRow('POP-Y' + i, 0)]; rows[0][HEADERS.indexOf('BirthYear')] = birthYear;
+      const ctx = makeCtx(rows, mulberry32(i + 7)); if (simYear) ctx.summary.simYear = simYear;
+      generateCitizensEvents_(ctx);
+      const life = (rows[0][HEADERS.indexOf('LifeHistory')] || '').toString();
+      if (life) events += life.split('\n').length;
+      skipped += ctx.summary.minorsSkippedTexture || 0;
+    }
+    return { events, skipped };
+  }
+  const minor = trialsAge(400, 2030, 2042), teen = trialsAge(400, 2025, 2042), adult = trialsAge(400, 2000, 2042), blank = trialsAge(400, '', 2042), justAdult = trialsAge(400, 2024, 2042);
+  assert('Y.1 minor (12) draws zero adult-deck lines', minor.events === 0 && minor.skipped === 400, minor.events + ' lines, skipped ' + minor.skipped);
+  assert('Y.2 teen (17) draws zero adult-deck lines', teen.events === 0 && teen.skipped === 400, teen.events + ' lines');
+  assert('Y.3 adult still fires', adult.events > 100 && adult.skipped === 0, String(adult.events));
+  assert('Y.4 blank BirthYear reads as adult (fail-open, as every other age read)', blank.events > 100 && blank.skipped === 0, String(blank.events));
+  assert('Y.5 the 18th birthday opens the decks (2024 at simYear 2042)', justAdult.events > 100 && justAdult.skipped === 0, String(justAdult.events));
+  assert('Y.6 age is computed from BirthYear at the writer, not a stored Age', /simYear - birthYear\) < 18/.test(src) && /lifeState\.isMinor/.test(src));
+  const H2 = HEADERS.concat(['HouseholdId', 'Status']);
+  const mk = (pop, by) => { const r = makeRow(pop, 0).concat(['HH-1', 'active']); r[HEADERS.indexOf('BirthYear')] = by; return r; };
+  let kidHH = 0;
+  for (let i = 0; i < 300; i++) {
+    const rows = [mk('POP-A' + i, 1990), mk('POP-K' + i, 2032)];
+    const ctx = makeCtx(rows, mulberry32(i + 99)); ctx.ledger.headers = H2.slice(); ctx.summary.simYear = 2042;
+    generateCitizensEvents_(ctx);
+    if (/\[Daily\]/.test(String(rows[1][HEADERS.indexOf('LifeHistory')] || ''))) kidHH++;
+  }
+  assert('Y.7 household shared moment still lands on the kid (family-level)', kidHH > 0, String(kidHH));
+}
+
 console.log('═══ T3 Section 1 — fame gate');
 {
   const famous = trials(8000, 12);

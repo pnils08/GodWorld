@@ -1311,7 +1311,7 @@
 
 - **generateCitizensEvents_(ctx)**
   Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
-  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.storyHooks, S.templateCooldowns
+  Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)

@@ -3159,6 +3159,12 @@
       ],
       "readers": []
     },
+    "minorsSkippedTexture": {
+      "writers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
+      ],
+      "readers": []
+    },
     "templateCooldowns": {
       "writers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"

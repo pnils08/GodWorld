@@ -1315,8 +1315,9 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var idx = function(n) { return header.indexOf(n); };
   var iPop = idx('POPID'), iNW = idx('NetWorth'), iStatus = idx('Status'),
       iLife = idx('LifeHistory'), iLin = idx('LineageId'), iFirst = idx('First'),
-      iLast = idx('Last');
+      iLast = idx('Last'), iBirthH = idx('BirthYear');
   if (iPop < 0 || iNW < 0) return results;
+  var simYearH = 2040 + Math.floor(cycle / 52); // engine.144 loop 3 — youth-mode gate on the [Home] line
 
   var rowByPop = {};
   for (var r0 = 0; r0 < rows.length; r0++) {
@@ -1364,7 +1365,10 @@ function trackHomeOwnership_(ss, ctx, cycle) {
       var mNW = Number(String(members[m2][iNW]).replace(/[$,\s]/g, '')) || 0;
       var share = combinedNW > 0 ? mNW / combinedNW : 1 / members.length;
       members[m2][iNW] = Math.max(0, mNW - Math.round(down * share));
-      if (iLife >= 0) {
+      // engine.144 loop 3 (S411): minors share the house, not the mortgage line —
+      // "keys in hand, rent checks done" is the adults' sentence.
+      var mByH = iBirthH >= 0 ? (Number(members[m2][iBirthH]) || 0) : 0;
+      if (iLife >= 0 && !(mByH > 1900 && (simYearH - mByH) < 18)) {
         var lifeH = String(members[m2][iLife] || '');
         if (lifeH.indexOf(stamp + ' — [Home]') < 0) {
           members[m2][iLife] = (lifeH ? lifeH + '\n' : '') + stamp +

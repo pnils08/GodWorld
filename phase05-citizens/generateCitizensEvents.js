@@ -314,6 +314,7 @@ function generateCitizensEvents_(ctx) {
 
   // Limit
   var count = 0;
+  var minorsSkipped = 0; // engine.144 loop 3 — youth mode: minors the adult decks stepped aside for
   // engine.38 A1: full-population dial-weighted participation replaces the
   // LIMIT=25 catch-up throttle. Every Tier-3/4 ENGINE citizen rolls to live a
   // logged week at PARTICIPATION_BASE x activityScore(dials) — extroverts get
@@ -2057,6 +2058,17 @@ function generateCitizensEvents_(ctx) {
       wealthLevel: (iWealth >= 0 ? row[iWealth] : null)
     }) : null;
 
+    // engine.144 loop 3 (S411) — YOUTH MODE, the life-stage gate. A minor
+    // (age < 18 from BirthYear, computed live — never a stored Age) draws NO
+    // per-citizen adult-deck texture: runYouthEngine_ is their sole texture
+    // writer. Not a ClockMode — who drives the row is unchanged; this
+    // generator steps aside. Live C94–C105 log: 88 [Neighborhood], 44
+    // [Personal], 34 [Daily]… adult lines on three-year-olds, every one of
+    // them a source:* line from here. The household shared moment above is
+    // family-level and stays — a kid lives the family's week.
+    var isMinor = lifeState ? lifeState.isMinor : (birthYear > 1900 && (simYear - birthYear) < 18);
+    if (isMinor) { minorsSkipped++; continue; }
+
     // v2.6: Get neighborhood-level context
     var nhContext = getNeighborhoodContext_(neighborhood);
     var nhQoL = nhContext.qualityOfLifeIndex || 0.5;
@@ -3213,6 +3225,8 @@ function generateCitizensEvents_(ctx) {
   }
 
   S.cycleActiveCitizens = Object.keys(activeSetObj);
+  S.minorsSkippedTexture = minorsSkipped; // engine.144 loop 3 — youth-mode gate count
+  Logger.log('generateCitizensEvents_: youth-mode gate stepped aside for ' + minorsSkipped + ' minor(s)');
   S.citizenEventMemory = MEM;
   ctx.summary = S;
 }

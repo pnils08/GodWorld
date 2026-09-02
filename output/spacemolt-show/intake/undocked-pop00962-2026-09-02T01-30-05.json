@@ -1,0 +1,39 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-09-02T01:40:22.072Z",
+  "POPID": "POP-00962",
+  "Cycle": 105,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00962-2026-09-02T01-30-05",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00962-2026-09-02T01-30-05.json",
+  "Holder": "Marcus Walker",
+  "CreditsDelta": null,
+  "Magnitude": 1,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Marcus Walker credits=null systems=",
+  "DecidedAt": "2026-09-02T01:40:22.075Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 105,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00962",
+    "Holder": "Marcus Walker",
+    "EpisodeId": "undocked-pop00962-Y3C1",
+    "CreditsDelta": null,
+    "Systems": [],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 1,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-09-02T01-30-05.json"
+  }
+}

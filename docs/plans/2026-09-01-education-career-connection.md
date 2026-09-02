@@ -96,7 +96,7 @@ pointers:
   1. Regenerate STUB_MAP in the code commit (new function `credentialRank_`).
   2. Bench: stage HEAD with the HELD engine.131 T7 four at base, push, bump, one fire, 0 errors, `Career-Hired`/promotion lines unchanged in count vs the prior cycle's order of magnitude.
   3. Live: PROD bump per DEPLOY.md, pull-back byte-verify, HELD four at base.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S410 — STUB_MAP regen in the code commit; bench @6 C108 `ok:true` 100s, 0 errors, career tags C106/107/108 = Promotion 4/1/2, Career 10/10/9 (rate unchanged); LIVE PROD @16, pull-back byte-verified, HELD four at base.
 
 ---
 
@@ -108,6 +108,8 @@ None that block. Decisions made here (engine-sheet holds mechanism):
 - Layoff shield deferred to its own loop.
 
 ## Changelog
+
+- 2026-09-01 (engine-sheet, S410, 23:30) — **LIVE PROD @16.** Bench @6 C108 clean; no `counted)` line yet on the bench (the tie the credential breaks is real but rare — E2 fires ≈1/10 cycles city-wide and E3 needs two same-band candidates in one field). Empirical proof accrues on live; watch `LifeHistory_Log` EventText for `counted)`.
 
 - 2026-09-01 (engine-sheet, S410, later) — Tasks 1–4 coded same session: `credentialRank_` (educationCareerEngine.js), `promotionOrder_` / `hireSlotOrder_` / `credentialRankOf_` / `hireIncomeBand_` (runCareerEngine.js); E2 line reads `Promoted at X (the bachelors counted) after N years as a Role.` only when the credential broke the longest-waiting tie; E3 hire line likewise inside a $10k band. Bench @6 = HEAD (HELD four at base), C108 fire next.
 - 2026-09-01 (engine-sheet, S410) — Plan written on builder go ("your approach"). Connection loop opened after engine.143 isolation smoke on the bench (C106: 52 minors, 0 ENGINE-clock minors off their engine-year band; 0 errors).

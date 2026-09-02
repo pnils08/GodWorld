@@ -39,6 +39,7 @@ const initiativeSource = fs.readFileSync(
 );
 const I = new Function(initiativeSource + '\nreturn {' +
   'engineClockHold_: engineClockHold_,' +
+  'applyEngineClockHold_: applyEngineClockHold_,' +
   'ENGINE_CLOCK_GRACE_: ENGINE_CLOCK_GRACE_' +
 '};')();
 const electionSource = fs.readFileSync(
@@ -493,6 +494,23 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     JSON.stringify([second, third]));
   check('Q3b the hold\'s own stamp arriving (clock === cycle, marker present) is NOT read as a chain re-arm',
     I.engineClockHold_(first.notes, 107, 107, false).action === 'hold');
+
+  // S410 (builder call): a passed+signed row is skipped by the initiative loop
+  // but still scored by the approval engine. The hold must land on it BEFORE the
+  // skip — the live C105 board had INIT-002/INIT-006 at 105, un-held, −9/cycle.
+  {
+    const iNotes = 0, iNext = 1, iLU = 2;
+    const row = ['Cycle 82: Passed 5-4.', 105, ''];
+    const changed = I.applyEngineClockHold_({ now: 'T' }, row, 106, false, 'INIT-002', iNext, iNotes, iLU);
+    check('Q3c applyEngineClockHold_ holds a signed row in place (clock 105 → 107, marker, LastUpdated)',
+      changed === true && row[iNext] === 107 && /\[ENGINE-CLOCK n=1 from=C106\] Cycle 82/.test(row[iNotes]) && row[iLU] === 'T',
+      JSON.stringify(row));
+    const untouched = ['', 110, ''];
+    check('Q3d a row the chain re-armed beyond the cycle is left alone (no marker, no change)',
+      I.applyEngineClockHold_({ now: 'T' }, untouched, 106, false, 'X', iNext, iNotes, iLU) === false && untouched[iNext] === 110);
+    check('Q3e missing Notes column → no hold (unbounded grace would erase the silence signal)',
+      I.applyEngineClockHold_({ now: 'T' }, ['', 105, ''], 106, false, 'X', iNext, -1, iLU) === false);
+  }
 
   // Budget spent -> released to silence. The drain is delayed, never removed.
   const fourth = I.engineClockHold_(third.notes, third.nextActionCycle, 109, false);

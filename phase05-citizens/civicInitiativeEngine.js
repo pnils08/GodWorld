@@ -217,7 +217,17 @@ function runCivicInitiativeEngine_(ctx) {
     }
 
     // v1.7: Skip passed initiatives that have been signed (mayoral action complete)
+    // v2.1 (S410, builder call): hold the clock BEFORE skipping. A signed row is
+    // out of this engine's scope but still on the approval clock —
+    // updateCivicApprovalRatings_ scores NextActionCycle on every named row —
+    // and nothing in-cycle can advance it, so it is exactly "a row the engine
+    // has no path to move". Skipped un-held, INIT-002/INIT-006 sat at 105 and
+    // scored the Mayor silence every cycle (−6 −3) until the chain re-armed them.
     if (status === 'passed' && row[iMayoralAction] === 'signed') {
+      if (applyEngineClockHold_(ctx, row, cycle, false, initId, iNextActionCycle, iNotes, iLastUpdated)) {
+        rows[r] = row;
+        updated = true;
+      }
       continue;
     }
 
@@ -289,30 +299,12 @@ function runCivicInitiativeEngine_(ctx) {
     // v2.0 (G-PF33): hold the clock for a row the engine cannot advance. Runs
     // AFTER the v1.9 reschedule so `status`/`voteCycle` reflect any bump it
     // made, and BEFORE the vote trigger so a row the engine is about to resolve
-    // is left alone. Needs both columns present — without Notes there is no
-    // place to bound the grace, and an unbounded hold would erase the silence
-    // signal entirely, which is worse than the false blame it fixes.
-    if (iNextActionCycle >= 0 && iNotes >= 0) {
-      var engineWillAct = (voteCycle === cycle && (status === 'active' || status === 'pending-vote'));
-      var clock = engineClockHold_(row[iNotes], row[iNextActionCycle], cycle, engineWillAct);
-      if (clock.action === 'hold') {
-        row[iNextActionCycle] = clock.nextActionCycle;
-        row[iNotes] = clock.notes;
-        row[iLastUpdated] = ctx.now;
-        rows[r] = row;
-        updated = true;
-        Logger.log('civicInitiativeEngine: ' + initId + ' clock held to C' + clock.nextActionCycle +
-                   ' — no in-engine path to advance, waiting on the civic chain (grace ' +
-                   clock.grace + '/' + ENGINE_CLOCK_GRACE_ + ')');
-      } else if (clock.action === 'clear') {
-        row[iNotes] = clock.notes;
-        rows[r] = row;
-        updated = true;
-        Logger.log('civicInitiativeEngine: ' + initId + ' clock re-armed by the chain — grace cleared');
-      } else if (clock.action === 'expire') {
-        Logger.log('civicInitiativeEngine: ' + initId + ' grace exhausted (' + clock.grace + '/' +
-                   ENGINE_CLOCK_GRACE_ + ') — released to silence, this one is genuinely stalled');
-      }
+    // is left alone. (v2.1: body lives in applyEngineClockHold_ so the signed
+    // skip above can share it.)
+    var engineWillAct = (voteCycle === cycle && (status === 'active' || status === 'pending-vote'));
+    if (applyEngineClockHold_(ctx, row, cycle, engineWillAct, initId, iNextActionCycle, iNotes, iLastUpdated)) {
+      rows[r] = row;
+      updated = true;
     }
 
     // Check if this cycle triggers a vote or decision
@@ -549,7 +541,7 @@ function runCivicInitiativeEngine_(ctx) {
   // v2.0 (G-PF19): Examined / in-scope / resolved are three different numbers.
   // "Resolved 0" with "Examined 6" is a correct, quiet cycle — no scheduled
   // council action landed. "Examined 0" is the failure worth alarming on.
-  Logger.log('civicInitiativeEngine v2.0: Examined ' + examined +
+  Logger.log('civicInitiativeEngine v2.1: Examined ' + examined +
              ' initiatives | In-scope ' + inScope +
              ' | Resolved ' + S.initiativeEvents.length +
              ' | Votes: ' + S.votesThisCycle.length +
@@ -2886,6 +2878,37 @@ if (typeof module !== 'undefined' && module.exports) {
  *   'expire' — grace exhausted; write nothing, let it fall to silence
  *   'none'   — nothing to do
  */
+/**
+ * v2.1 (S410): apply engineClockHold_'s verdict to one tracker row IN PLACE.
+ * Returns true when the row changed (hold or clear). Needs both columns
+ * present — without Notes there is no place to bound the grace, and an
+ * unbounded hold would erase the silence signal entirely, which is worse
+ * than the false blame it fixes.
+ */
+function applyEngineClockHold_(ctx, row, cycle, engineWillAct, initId, iNextActionCycle, iNotes, iLastUpdated) {
+  if (iNextActionCycle < 0 || iNotes < 0) return false;
+  var clock = engineClockHold_(row[iNotes], row[iNextActionCycle], cycle, engineWillAct);
+  if (clock.action === 'hold') {
+    row[iNextActionCycle] = clock.nextActionCycle;
+    row[iNotes] = clock.notes;
+    if (iLastUpdated >= 0) row[iLastUpdated] = ctx.now;
+    Logger.log('civicInitiativeEngine: ' + initId + ' clock held to C' + clock.nextActionCycle +
+               ' — no in-engine path to advance, waiting on the civic chain (grace ' +
+               clock.grace + '/' + ENGINE_CLOCK_GRACE_ + ')');
+    return true;
+  }
+  if (clock.action === 'clear') {
+    row[iNotes] = clock.notes;
+    Logger.log('civicInitiativeEngine: ' + initId + ' clock re-armed by the chain — grace cleared');
+    return true;
+  }
+  if (clock.action === 'expire') {
+    Logger.log('civicInitiativeEngine: ' + initId + ' grace exhausted (' + clock.grace + '/' +
+               ENGINE_CLOCK_GRACE_ + ') — released to silence, this one is genuinely stalled');
+  }
+  return false;
+}
+
 var ENGINE_CLOCK_RE_ = /\[ENGINE-CLOCK n=(\d+) from=C(\d+)\]/;
 var ENGINE_CLOCK_GRACE_ = 3;
 

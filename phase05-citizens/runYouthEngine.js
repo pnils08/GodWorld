@@ -262,7 +262,7 @@ var YOUTH_TEXTURE_POOLS = {
     ],
     coming_of_age: [
       'picked up the first paycheck and stood in the bank line like an adult',
-      'walked the graduation stage in borrowed shoes and did not trip',
+      'sat for the senior portrait and did not recognize the adult in it',
       'stayed up past everyone talking about what comes after this',
       'got the acceptance email at lunch and let the table read it first',
       'drove alone for the first time and took the long way home on purpose'

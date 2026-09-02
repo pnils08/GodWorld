@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 186 · **Functions mapped:** 1254 · **S.* fields:** 347 · **Sheets:** 59
+**Files scanned:** 186 · **Functions mapped:** 1255 · **S.* fields:** 347 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -394,7 +394,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Civic_Sweep_Report` | _(none)_ | `phase05-citizens/generateMonthlyCivicSweep.js::generateMonthlyCivicSweep` | 0 | 1 |
 | `Community_Programs` | _(none)_ | `phase05-citizens/runYouthEngine.js::runYouthEngine_`, `phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_` | 0 | 2 |
 | `Content_Telemetry` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 1 |
-| `Cultural_Ledger` | `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase07-evening-media/culturalLedger.js::decayCulturalFame_`, `phase07-evening-media/culturalLedger.js::registerCulturalEntity_`, `utilities/ensureCultureLedger.js::ensureCulturalLedger_` | `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, `phase05-citizens/citizenContextBuilder.js::getCulturalStatus_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase07-evening-media/culturalLedger.js::culturalStatusByPop_`, `phase07-evening-media/culturalLedger.js::decayCulturalFame_`, …(+4 more) | 4 | 9 |
+| `Cultural_Ledger` | `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/processAdvancementIntake.js::dimCulturalFame_`, `phase07-evening-media/culturalLedger.js::decayCulturalFame_`, `phase07-evening-media/culturalLedger.js::registerCulturalEntity_`, `utilities/ensureCultureLedger.js::ensureCulturalLedger_` | `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, `phase05-citizens/citizenContextBuilder.js::getCulturalStatus_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/processAdvancementIntake.js::dimCulturalFame_`, `phase07-evening-media/culturalLedger.js::culturalStatusByPop_`, …(+5 more) | 5 | 10 |
 | `Cycle_Seeds` | `utilities/cycleModes.js::saveCycleSeed_` | `utilities/cycleModes.js::loadCycleSeed_`, `utilities/cycleModes.js::saveCycleSeed_` | 1 | 2 |
 | `Cycle_Weather` | `phase10-persistence/recordCycleWeather.js::recordCycleWeather_` | `phase10-persistence/recordCycleWeather.js::getWeatherForCycle_`, `phase10-persistence/recordCycleWeather.js::getWeatherHistory_`, `phase10-persistence/recordCycleWeather.js::recordCycleWeather_` | 1 | 3 |
 | `Dashboard` | _(none)_ | `utilities/godWorldDashboard.js::createGodWorldDashboard`, `utilities/godWorldDashboard.js::refreshDashboard` | 0 | 2 |

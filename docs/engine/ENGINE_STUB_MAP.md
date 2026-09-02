@@ -1610,6 +1610,9 @@
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
 
+- **dimCulturalFame_(ctx, popId, delta)**
+  Sheets: Cultural_Ledger
+
 - **intakeTierForExisting_(existingTier, intakeRaw)**
 
 - **tierForEarnedUsage_(earned)**
@@ -3695,4 +3698,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1254
+**Functions mapped:** 1255

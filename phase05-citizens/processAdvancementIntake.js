@@ -381,6 +381,7 @@ function processMediaUsage_(ctx, now, cycle) {
   var lTierCol = findColByName_(ledgerHeaders, 'Tier');
   var lUsageCol = findColByName_(ledgerHeaders, 'UsageCount');
   var lPopIdCol = findColByName_(ledgerHeaders, 'POPID');
+  var lFamousCol = findColByName_(ledgerHeaders, 'Famous'); // engine.118
   
   var genericUpdates = {};
   var ledgerUpdates = {};
@@ -435,7 +436,9 @@ function processMediaUsage_(ctx, now, cycle) {
           // a citation in a hard light counts AGAINST the name — one down, floor 0.
           // The state pass then holds or lowers nothing itself (upward only);
           // decay's bar does the demoting when the earned count falls under it.
-          var newUsage = hardLight ? Math.max(0, currentUsage - 1) : currentUsage + 1;
+          var isFamous = lFamousCol >= 0 && String(ledgerRows[lr][lFamousCol] || '').trim() !== '';
+          // engine.118: a famous name cannot shrink — the hard light dims FameScore instead (apply block)
+          var newUsage = hardLight ? (isFamous ? currentUsage : Math.max(0, currentUsage - 1)) : currentUsage + 1;
           if (hardLight) results.hardLight = (results.hardLight || 0) + 1;
 
           var currentTier = ledgerUpdates[lr] ? ledgerUpdates[lr].tier :
@@ -451,7 +454,8 @@ function processMediaUsage_(ctx, now, cycle) {
             usageCount: newUsage, tier: newTier,
             name: String(ledgerRows[lr][lFirstCol] || '').trim() + ' ' + String(ledgerRows[lr][lLastCol] || '').trim(),
             popId: popId, oldTier: currentTier, usageType: usageType, context: context,
-            hard: hardLight || (ledgerUpdates[lr] && ledgerUpdates[lr].hard) || false
+            hard: hardLight || (ledgerUpdates[lr] && ledgerUpdates[lr].hard) || false,
+            famous: isFamous
           };
         }
       } else if (ledgerHits.length > 1) {
@@ -501,7 +505,10 @@ function processMediaUsage_(ctx, now, cycle) {
       // engine.152: the hard light is a moment in the life, and a log row
       var lLife152 = findColByName_(ledgerHeaders, 'LifeHistory');
       var stamp152 = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
-      var line152 = stamp152 + ' — [Media] Named in a hard light — the coverage was not kind (' + (update.context || 'the paper') + ')';
+      var dimmed = update.famous ? dimCulturalFame_(ctx, update.popId, -1) : null; // engine.118
+      var line152 = stamp152 + (update.famous
+        ? ' — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims' + (dimmed !== null ? ' (fame ' + dimmed + ')' : '') + ' (' + (update.context || 'the paper') + ')'
+        : ' — [Media] Named in a hard light — the coverage was not kind (' + (update.context || 'the paper') + ')');
       if (lLife152 >= 0) ledgerRows[rowIdx][lLife152] = (ledgerRows[rowIdx][lLife152] ? ledgerRows[rowIdx][lLife152] + '\n' : '') + line152;
       if (typeof queueAppendIntent_ === 'function') {
         queueAppendIntent_(ctx, 'LifeHistory_Log', ['C' + cycle, update.popId, update.name || '', 'Media|hard-light',
@@ -924,6 +931,40 @@ var TIER_BAR = { 1: 9, 2: 6, 3: 3 };
 // Ambiguous names (two ledger rows, one key) are skipped, never guessed.
 // (A CIVIC ladder on approval rating was floated and left for its own cut.)
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.118 (S412, builder-direct 2026-09-02) — FAME IS PERMANENT
+// ═══════════════════════════════════════════════════════════════════════════
+// "Once a citizen hits 25 media usage they assume fame and only their fame
+// fluctuates once at that stage. Vinnie Keane is still famous when he is 80
+// but not as famous as he is at 37." The bar reads the UsageCount CELL — the
+// canon on record, gifted era included. Crossing it writes `Famous` = the
+// cycle, floors Tier at 1 forever, and takes the row out of decay entirely.
+// From then on a hard light dims Cultural_Ledger FameScore, never the count.
+var FAME_USAGE_BAR = 25;
+
+// Dim (or brighten) the citizen's Cultural_Ledger FameScore by delta on the
+// highest-fame row linked to the POPID. Queued as a cell intent (Phase 10
+// executes). Returns the new score, or null when no cultural row links them.
+function dimCulturalFame_(ctx, popId, delta) {
+  try {
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
+    if (!sheet || sheet.getLastRow() < 2) return null;
+    var v = sheet.getDataRange().getValues();
+    var h = v[0], iPop = h.indexOf('UniverseLinks'), iFame = h.indexOf('FameScore');
+    if (iPop < 0 || iFame < 0) return null;
+    var best = -1, bestFame = -1;
+    for (var r = 1; r < v.length; r++) {
+      if (String(v[r][iPop] || '').trim().toUpperCase() !== String(popId || '').trim().toUpperCase()) continue;
+      var f = Number(v[r][iFame]) || 0;
+      if (f > bestFame) { bestFame = f; best = r; }
+    }
+    if (best < 0) return null;
+    var next = Math.max(0, bestFame + delta);
+    if (typeof queueCellIntent_ === 'function') queueCellIntent_(ctx, 'Cultural_Ledger', best + 1, iFame + 1, next, 'engine.118 fame ' + (delta < 0 ? 'dims' : 'brightens'), 'media');
+    return next;
+  } catch (e) { Logger.log('dimCulturalFame_: ' + e.message); return null; }
+}
+
 // Intake vs an existing row: blank keeps the row's Tier; a stated Tier can only
 // lift (lower number), never drop. Pure.
 function intakeTierForExisting_(existingTier, intakeRaw) {
@@ -978,14 +1019,46 @@ function earnedCitationsByKey_(ctx) {
 }
 
 function applyTierLadderState_(ctx, cycle) {
-  var results = { promoted: 0, seededHeld: 0, ambiguous: 0, lines: [] };
+  var results = { promoted: 0, seededHeld: 0, ambiguous: 0, famed: 0, fameFloored: 0, lines: [] };
   if (!ctx || !ctx.ledger || !ctx.ledger.rows || !cycle) return results;
   var h = ctx.ledger.headers, rows = ctx.ledger.rows;
   var iPop = h.indexOf('POPID'), iTier = h.indexOf('Tier'), iClock = h.indexOf('ClockMode'),
       iUse = h.indexOf('UsageCount'), iStat = h.indexOf('Status'),
       iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'),
-      iLastU = h.indexOf('LastUpdated'), iNb = h.indexOf('Neighborhood');
+      iLastU = h.indexOf('LastUpdated'), iNb = h.indexOf('Neighborhood'), iFamous = h.indexOf('Famous');
   if (iPop < 0 || iTier < 0 || iUse < 0 || iFirst < 0 || iLast < 0) return results;
+  if (iFamous < 0) { Logger.log('applyTierLadderState_: Simulation_Ledger has no Famous column — engine.118 fame skipped this cycle (add the header)'); results.fameColumnMissing = true; }
+
+  // ── engine.118: fame first — the cell at the bar mints permanence ──
+  if (iFamous >= 0) {
+    for (var f = 0; f < rows.length; f++) {
+      var frow = rows[f];
+      if (!frow || !frow[iPop]) continue;
+      var fst = iStat >= 0 ? String(frow[iStat] || '').trim().toLowerCase() : 'active';
+      if (fst !== 'active') continue;
+      var famous = String(frow[iFamous] || '').trim();
+      var fcell = Number(frow[iUse]) || 0;
+      var fname = (String(frow[iFirst] || '').trim() + ' ' + String(frow[iLast] || '').trim()).trim();
+      var fpop = String(frow[iPop]).trim();
+      if (!famous && fcell >= FAME_USAGE_BAR) {
+        frow[iFamous] = 'C' + cycle;
+        var fstamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+        var fline = fstamp + ' — [Fame] Assumed fame — the city knows the name for good (' + fcell + ' on record); from here only the shine moves';
+        if (iLife >= 0) frow[iLife] = (frow[iLife] ? frow[iLife] + '\n' : '') + fline;
+        if (typeof queueAppendIntent_ === 'function') queueAppendIntent_(ctx, 'LifeHistory_Log', ['C' + cycle, fpop, fname, 'Media|fame', 'Assumed fame at ' + fcell + ' media usage — permanent; Tier 1 floor', '', cycle], 'engine.118 fame', 'citizens', 100);
+        if (typeof recordRipple_ === 'function') recordRipple_(ctx, { causeType: 'fame-event', causeId: fpop, causeDetail: fname + ' — assumed fame (' + fcell + ' on record)', effectType: 'fame-permanent', targetScope: 'citizen', targetIds: [fpop], neighborhood: iNb >= 0 ? String(frow[iNb] || '') : '', magnitude: 0.1, duration: 1, sourceEngine: 'processAdvancementIntake' });
+        famous = frow[iFamous];
+        results.famed++;
+        results.lines.push(fpop + ':famed:' + fcell);
+      }
+      if (famous && (Number(frow[iTier]) || 4) > 1) {
+        frow[iTier] = 1; // the floor, forever
+        if (iLastU >= 0) frow[iLastU] = 'C' + cycle;
+        results.fameFloored++;
+      }
+      if (famous) { if (iLastU >= 0 && results.lines.length && results.lines[results.lines.length - 1] === fpop + ':famed:' + fcell) frow[iLastU] = 'C' + cycle; rows[f] = frow; ctx.ledger.dirty = true; }
+    }
+  }
 
   var citations = earnedCitationsByKey_(ctx);
   var keyOf = function(row) { return normalizeCitizenName_(row[iFirst]) + ' ' + normalizeCitizenName_(row[iLast]); };
@@ -1042,7 +1115,8 @@ function applyTierLadderState_(ctx, cycle) {
   if (results.promoted || results.seededHeld || results.ambiguous) {
     Logger.log('applyTierLadderState_: ' + results.promoted + ' promoted, ' + results.seededHeld + ' seeded cell(s) held, ' + results.ambiguous + ' ambiguous name(s) skipped');
   }
-  if (ctx.summary) ctx.summary.tierLadder = { promoted: results.promoted, seededHeld: results.seededHeld, ambiguous: results.ambiguous };
+  if (results.famed || results.fameFloored) Logger.log('applyTierLadderState_: ' + results.famed + ' assumed fame, ' + results.fameFloored + ' fame-floored to Tier 1');
+  if (ctx.summary) ctx.summary.tierLadder = { promoted: results.promoted, seededHeld: results.seededHeld, ambiguous: results.ambiguous, famed: results.famed, fameFloored: results.fameFloored };
   return results;
 }
 
@@ -1100,11 +1174,13 @@ function decayMediaAttention_(ctx, cycle) {
     }
   } catch (eL) { Logger.log('decayMediaAttention_: log read failed — ' + eL.message); }
 
+  var iFamous9 = h.indexOf('Famous');
   var decays = 0, demotions = 0;
   for (var r = 0; r < ctx.ledger.rows.length; r++) {
     var row = ctx.ledger.rows[r];
     var use = Number(row[iUse]) || 0;
     if (use <= 0) continue;
+    if (iFamous9 >= 0 && String(row[iFamous9] || '').trim()) continue; // engine.118: fame is permanent — the count and the Tier are frozen; only FameScore moves
     var st9 = iStat >= 0 ? String(row[iStat] || '').trim().toLowerCase() : '';
     if (st9 === 'deceased' || st9 === 'traded' || st9 === 'pending' || st9 === 'inactive') continue;
     var nm9 = ((iFirst >= 0 ? row[iFirst] : '') + ' ' + (iLast >= 0 ? row[iLast] : '')).toString().trim().toLowerCase();

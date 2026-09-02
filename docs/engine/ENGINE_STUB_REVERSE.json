@@ -2,7 +2,7 @@
   "generated": "2026-09-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 186,
-  "functionsMapped": 1254,
+  "functionsMapped": 1255,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4639,6 +4639,7 @@
     "Cultural_Ledger": {
       "writers": [
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/processAdvancementIntake.js::dimCulturalFame_",
         "phase07-evening-media/culturalLedger.js::decayCulturalFame_",
         "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
         "utilities/ensureCultureLedger.js::ensureCulturalLedger_"
@@ -4647,6 +4648,7 @@
         "phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure",
         "phase05-citizens/citizenContextBuilder.js::getCulturalStatus_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/processAdvancementIntake.js::dimCulturalFame_",
         "phase07-evening-media/culturalLedger.js::culturalStatusByPop_",
         "phase07-evening-media/culturalLedger.js::decayCulturalFame_",
         "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",

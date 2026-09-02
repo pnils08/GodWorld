@@ -14,13 +14,13 @@ const sandbox = {
   inWorldStamp_: (ctx) => 'Y3C4',
 };
 const src = (helperFile ? R(helperFile) + '\n' : '') + R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
-const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, processMediaUsage_, TIER_BAR };')(...Object.values(sandbox));
+const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, processMediaUsage_, dimCulturalFame_, TIER_BAR, FAME_USAGE_BAR };')(...Object.values(sandbox));
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) { if (cond) { pass++; console.log('  ok   ' + name); } else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); } }
 
-const H = ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'UsageCount', 'Status', 'LifeHistory', 'LastUpdated', 'Neighborhood'];
-const row = (pop, first, last, tier, use, extra) => Object.assign([pop, first, last, tier, 'ENGINE', use, 'Active', '', '', 'Temescal'], extra || {});
+const H = ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'UsageCount', 'Status', 'LifeHistory', 'LastUpdated', 'Neighborhood', 'Famous'];
+const row = (pop, first, last, tier, use, extra) => Object.assign([pop, first, last, tier, 'ENGINE', use, 'Active', '', '', 'Temescal', ''], extra || {});
 const usage = (entries) => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType']].concat(entries.map(([n, t, c]) => ['', 'C' + (c || 100), n, t || 'quoted']));
 const ctxOf = (rows, usageRows) => ({
   summary: { cycleRef: 'Y3C4' }, ledger: { headers: H.slice(), rows: rows.map(r => r.slice()), dirty: false },
@@ -128,6 +128,37 @@ console.log('\n8. engine.152 — coverage runs both ways:');
   const floor = { summary: {}, ss: mkSs(usage2([['Ada Lin', 'quoted', 'negative']])), ledger: { headers: H.slice(), rows: [row('POP-H', 'Ada', 'Lin', 4, 0)], dirty: false } };
   E.processMediaUsage_(floor, 'now', 111);
   check('floor 0 — a hard light on a count of 0 stays 0', floor.ledger.rows[0][5] === 0);
+}
+
+console.log('\n9. engine.118 — fame is permanent:');
+{
+  check('the bar is 25 on the cell', E.FAME_USAGE_BAR === 25);
+  intents.length = 0; ripples.length = 0;
+  const c = ctxOf([row('POP-V', 'Vin', 'Keane', 3, 60, { 4: 'GAME' }), row('POP-W', 'Ann', 'Low', 4, 24)], usage([]));
+  const r = E.applyTierLadderState_(c, 111);
+  check('cell 60 (seeded, GAME) → Famous = C111, Tier floored to 1, [Fame] line + log row + ripple', r.famed === 1 && c.ledger.rows[0][10] === 'C111' && c.ledger.rows[0][3] === 1 && /\[Fame\] Assumed fame/.test(c.ledger.rows[0][7]) && intents.some(i => /Media\|fame/.test(i.row[3])) && ripples.some(x => x.effectType === 'fame-permanent'));
+  check('cell 24 stays unfamous', c.ledger.rows[1][10] === '' && c.ledger.rows[1][3] === 4);
+  const again = E.applyTierLadderState_(c, 112);
+  check('second cycle: not re-famed; the floor holds', again.famed === 0 && c.ledger.rows[0][10] === 'C111' && c.ledger.rows[0][3] === 1);
+  const dropped = ctxOf([row('POP-V', 'Vin', 'Keane', 3, 60, { 4: 'GAME', 10: 'C90' })], usage([]));
+  const rf = E.applyTierLadderState_(dropped, 111);
+  check('a famous row found below Tier 1 is floored back (permanent)', rf.fameFloored === 1 && dropped.ledger.rows[0][3] === 1);
+  // decay: a famous row is frozen (count and Tier)
+  const dc = { summary: { cycleRef: 'Y3C4' }, ledger: { headers: H.slice(), rows: [row('POP-V', 'Vin', 'Keane', 2, 30, { 10: 'C90' })], dirty: false },
+    ss: { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => 2, getDataRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType'], ['', 'C90', 'Vin Keane', 'quoted']] }) } : n === 'LifeHistory_Log' ? { getLastRow: () => 2, getDataRange: () => ({ getValues: () => [['Timestamp', 'POPID', 'Name', 'Type', 'Text', '', 'Cycle'], ['', 'POP-V', 'Vin Keane', 'Promotion', 'Advanced from Tier 3 to Tier 2', '', 90]] }) } : null } };
+  E.decayMediaAttention_(dc, 111);
+  check('decay skips a famous row entirely — count 30 and Tier 2 untouched after 21 quiet cycles', dc.ledger.rows[0][5] === 30 && dc.ledger.rows[0][3] === 2);
+  // hard light on a famous name dims Cultural_Ledger FameScore, never the count
+  const cells = [];
+  const cul = [['EntityName', 'UniverseLinks', 'FameScore'], ['Vin Keane', 'POP-V', 40], ['Vin Keane (dup)', 'POP-V', 12]];
+  const ssF = { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => 2, getDataRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed', 'Sentiment'], ['', 'C111', 'Vin Keane', 'quoted', 'ctx', '', '', 'negative']] }), getRange: () => ({ setValue: () => {} }) } : n === 'Cultural_Ledger' ? { getLastRow: () => 3, getDataRange: () => ({ getValues: () => cul }) } : null };
+  const fc = { summary: { cycleRef: 'Y3C4' }, ss: ssF, ledger: { headers: H.slice(), rows: [row('POP-V', 'Vin', 'Keane', 1, 60, { 10: 'C90' })], dirty: false } };
+  const saveCell = sandbox.queueCellIntent_; 
+  global.__cells = cells;
+  const E2 = new Function(...Object.keys(sandbox), src + '\nreturn { processMediaUsage_ };')(...Object.values(Object.assign({}, sandbox, { queueCellIntent_: (ctx, tab, r, c, v) => cells.push([tab, r, c, v]) })));
+  E2.processMediaUsage_(fc, 'now', 111);
+  check('famous + hard light: UsageCount 60 unchanged; FameScore 40 → 39 queued on the highest-fame cultural row', fc.ledger.rows[0][5] === 60 && cells.some(x => x[0] === 'Cultural_Ledger' && x[1] === 2 && x[2] === 3 && x[3] === 39) && /shine dims/.test(fc.ledger.rows[0][7]));
+  check('dimCulturalFame_ floors at 0 and returns null with no linked row', E.dimCulturalFame_({ ss: ssF }, 'POP-NOBODY', -1) === null);
 }
 
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');

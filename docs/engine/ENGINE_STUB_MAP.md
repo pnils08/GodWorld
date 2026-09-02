@@ -1610,6 +1610,15 @@
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
 
+- **tierForEarnedUsage_(earned)**
+
+- **earnedCitationsByKey_(ctx)**
+  Sheets: Citizen_Media_Usage
+
+- **applyTierLadderState_(ctx, cycle)**
+  Writes: S.tierLadder
+  Sheets: LifeHistory_Log
+
 - **decayMediaAttention_(ctx, cycle)**
   Writes: S.tierDecay
   Sheets: Citizen_Media_Usage, LifeHistory_Log
@@ -3684,4 +3693,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1250
+**Functions mapped:** 1253

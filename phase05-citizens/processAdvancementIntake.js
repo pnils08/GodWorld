@@ -138,7 +138,13 @@ function processAdvancementIntake_(ctx) {
   var usageResults = processMediaUsage_(ctx, now, cycle);
   results.usageProcessed = usageResults.processed;
   results.usageSkipped = usageResults.skipped;
-  results.promotionsTriggered = usageResults.promotionsTriggered;
+
+  // engine.150 (S412, builder-direct): the ladder is a STATE — every cycle a
+  // citizen's Tier follows the bar their EARNED count clears. Runs before decay
+  // so a rung climbed this cycle is on the row when decay reads it next time.
+  var ladderResults = applyTierLadderState_(ctx, cycle);
+  results.promotionsTriggered = ladderResults.promoted;
+  results.ladderSeededHeld = ladderResults.seededHeld;
 
   // engine.69 (S325, Mike-approved): attention fades, earned tiers follow.
   decayMediaAttention_(ctx, cycle);
@@ -422,19 +428,12 @@ function processMediaUsage_(ctx, now, cycle) {
 
           var currentTier = ledgerUpdates[lr] ? ledgerUpdates[lr].tier :
                            (lTierCol >= 0 ? (Number(ledgerRows[lr][lTierCol]) || 4) : 4);
+          // engine.150 (S412): the Tier decision no longer lives on the citation
+          // event. applyTierLadderState_ (same cycle, right after this pass)
+          // promotes on the EARNED count — citations on record — so a seeded
+          // cell never carries a citizen up on its own. Only the count moves here.
           var newTier = currentTier;
           var popId = lPopIdCol >= 0 ? ledgerRows[lr][lPopIdCol] : '';
-          
-          if (newUsage >= 9 && currentTier > 1) {
-            newTier = 1;
-            results.promotionsTriggered++;
-          } else if (newUsage >= 6 && currentTier > 2) {
-            newTier = 2;
-            results.promotionsTriggered++;
-          } else if (newUsage >= 3 && currentTier > 3) {
-            newTier = 3;
-            results.promotionsTriggered++;
-          }
           
           ledgerUpdates[lr] = {
             usageCount: newUsage, tier: newTier,
@@ -868,6 +867,128 @@ function processIntakeRows_(ss, now, cycle) {
 // ═══════════════════════════════════════════════════════════════════════════
 var ATTENTION_QUIET_CYCLES = 10;
 var TIER_BAR = { 1: 9, 2: 6, 3: 3 };
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.150 (S412, builder-direct 2026-09-02) — THE LADDER AS A STATE
+// ═══════════════════════════════════════════════════════════════════════════
+// Before this, the UsageCount bars (3 / 6 / 9 → Tier 3 / 2 / 1) were applied
+// only inside the citation-processing pass, on the cell + 1. Two consequences
+// the measure found (docs/plans/2026-09-02-bloodline-ascent.md §The measure):
+//   - 58 ENGINE rows carry a UsageCount cell ABOVE their citations on record
+//     (the Feb–Mar 2026 mint seeded them — "the gifted era"); 12 of them are
+//     Tier 4 at 3–15 and never climbed, because no event ever touched them —
+//     and one new citation would have carried a seeded 9 straight to Tier 1.
+//   - the climb logged "Advanced from Tier" while decay (engine.69) reads
+//     "Updated to Tier N" as the earned-rung marker, so a media-earned rung
+//     was never eligible to give way.
+// Now: every cycle, for every ENGINE-clock active citizen, the EARNED count =
+// min(cell, emergence citations on record for the name). Tier follows the bar
+// that count clears, upward only (decay owns the way down). The seeded cell
+// itself is HELD — the builder's ruling is that the gifted era keeps what it
+// has; it just cannot climb on it. Promotions write the marker decay reads.
+// Ambiguous names (two ledger rows, one key) are skipped, never guessed.
+
+function tierForEarnedUsage_(earned) {
+  var n = Number(earned) || 0;
+  if (n >= TIER_BAR[1]) return 1;
+  if (n >= TIER_BAR[2]) return 2;
+  if (n >= TIER_BAR[3]) return 3;
+  return 4;
+}
+
+// Emergence citations on record per normalized "first last" key — the same
+// key processMediaUsage_ matches on. Cached on ctx for the cycle.
+function earnedCitationsByKey_(ctx) {
+  if (ctx && ctx._earnedCitations150) return ctx._earnedCitations150;
+  var out = {};
+  try {
+    var us = ctx.ss.getSheetByName('Citizen_Media_Usage');
+    if (us && us.getLastRow() > 1) {
+      var uv = us.getDataRange().getValues();
+      var uh = uv[0];
+      var iName = findColByName_(uh, 'CitizenName');
+      if (iName < 0) iName = findColByName_(uh, 'Name');
+      var iType = findColByName_(uh, 'UsageType');
+      if (iName >= 0) {
+        for (var r = 1; r < uv.length; r++) {
+          if (!isEmergenceUsage_(iType >= 0 ? String(uv[r][iType] || '').trim() : '')) continue;
+          var sp = splitUsageName_(String(uv[r][iName] || '').trim());
+          if (!sp) continue;
+          var key = normalizeCitizenName_(sp.first) + ' ' + normalizeCitizenName_(sp.last);
+          out[key] = (out[key] || 0) + 1;
+        }
+      }
+    }
+  } catch (e) { Logger.log('earnedCitationsByKey_: usage read failed — ' + e.message); }
+  if (ctx) ctx._earnedCitations150 = out;
+  return out;
+}
+
+function applyTierLadderState_(ctx, cycle) {
+  var results = { promoted: 0, seededHeld: 0, ambiguous: 0, lines: [] };
+  if (!ctx || !ctx.ledger || !ctx.ledger.rows || !cycle) return results;
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var iPop = h.indexOf('POPID'), iTier = h.indexOf('Tier'), iClock = h.indexOf('ClockMode'),
+      iUse = h.indexOf('UsageCount'), iStat = h.indexOf('Status'),
+      iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'),
+      iLastU = h.indexOf('LastUpdated'), iNb = h.indexOf('Neighborhood');
+  if (iPop < 0 || iTier < 0 || iUse < 0 || iFirst < 0 || iLast < 0) return results;
+
+  var citations = earnedCitationsByKey_(ctx);
+  var keyOf = function(row) { return normalizeCitizenName_(row[iFirst]) + ' ' + normalizeCitizenName_(row[iLast]); };
+  var keyCount = {};
+  for (var k = 0; k < rows.length; k++) { var kk = keyOf(rows[k]); if (kk !== ' ') keyCount[kk] = (keyCount[kk] || 0) + 1; }
+
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    if (!row || !row[iPop]) continue;
+    var cell = Number(row[iUse]) || 0;
+    if (cell < TIER_BAR[3]) continue;
+    var st = iStat >= 0 ? String(row[iStat] || '').trim().toLowerCase() : 'active';
+    if (st !== 'active') continue;
+    var mode = iClock >= 0 ? String(row[iClock] || 'ENGINE').trim().toUpperCase() : 'ENGINE';
+    if (mode !== 'ENGINE') continue;
+    var key = keyOf(row);
+    if (keyCount[key] > 1) { results.ambiguous++; continue; }
+    var onRecord = citations[key] || 0;
+    var earned = Math.min(cell, onRecord);
+    if (earned < cell && tierForEarnedUsage_(cell) < tierForEarnedUsage_(earned)) results.seededHeld++;
+    var target = tierForEarnedUsage_(earned);
+    var current = Number(row[iTier]) || 4;
+    if (target >= current) continue;
+
+    row[iTier] = target;
+    var name = (String(row[iFirst] || '').trim() + ' ' + String(row[iLast] || '').trim()).trim();
+    var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+    var line = stamp + ' — [Media] Updated to Tier ' + target + ' — the city keeps saying the name (' + earned + ' citations on record)';
+    if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + line;
+    if (iLastU >= 0) row[iLastU] = 'C' + cycle;
+    rows[r] = row;
+    ctx.ledger.dirty = true;
+    results.promoted++;
+    results.lines.push(String(row[iPop]).trim() + ':' + current + '->' + target + ':' + earned);
+    if (typeof queueAppendIntent_ === 'function') {
+      queueAppendIntent_(ctx, 'LifeHistory_Log',
+        ['C' + cycle, row[iPop], name, 'Media|tier-climb',
+         'Updated to Tier ' + target + ' — earned on ' + earned + ' citations (was Tier ' + current + ')', '', cycle],
+        'engine.150 tier ladder state', 'citizens', 100);
+    }
+    if (typeof recordRipple_ === 'function') {
+      recordRipple_(ctx, {
+        causeType: 'fame-event', causeId: String(row[iPop]).trim(),
+        causeDetail: name + ' — the city keeps saying the name: Tier ' + current + ' -> ' + target,
+        effectType: 'tier-climb', targetScope: 'citizen', targetIds: [String(row[iPop]).trim()],
+        neighborhood: iNb >= 0 ? String(row[iNb] || '') : '', magnitude: 0.05, duration: 1,
+        sourceEngine: 'processAdvancementIntake'
+      });
+    }
+  }
+  if (results.promoted || results.seededHeld || results.ambiguous) {
+    Logger.log('applyTierLadderState_: ' + results.promoted + ' promoted, ' + results.seededHeld + ' seeded cell(s) held, ' + results.ambiguous + ' ambiguous name(s) skipped');
+  }
+  if (ctx.summary) ctx.summary.tierLadder = { promoted: results.promoted, seededHeld: results.seededHeld, ambiguous: results.ambiguous };
+  return results;
+}
 
 function decayMediaAttention_(ctx, cycle) {
   if (!ctx || !ctx.ledger || !cycle) return;

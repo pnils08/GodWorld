@@ -2,7 +2,7 @@
   "generated": "2026-09-02",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 186,
-  "functionsMapped": 1250,
+  "functionsMapped": 1253,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3269,6 +3269,12 @@
         "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_"
       ]
     },
+    "tierLadder": {
+      "writers": [
+        "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_"
+      ],
+      "readers": []
+    },
     "tierDecay": {
       "writers": [
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_"
@@ -4306,6 +4312,7 @@
         "phase04-events/generationalEventsEngine.js::applyMilestone_",
         "phase05-citizens/educationCareerEngine.js::stampPromotion_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase05-citizens/runCivicRoleEngine.js::runCivicRoleEngine_",
@@ -4331,6 +4338,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
+        "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
@@ -4619,6 +4627,7 @@
         "phase05-citizens/citizenContextBuilder.js::getMediaAppearances_",
         "phase05-citizens/citizenContextBuilder.js::getReturningCitizens",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
+        "phase05-citizens/processAdvancementIntake.js::earnedCitationsByKey_",
         "phase05-citizens/processAdvancementIntake.js::markUsageProcessed_",
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
         "phase07-evening-media/mediaRoomIntake.js::ensureCitizenMediaUsage_",

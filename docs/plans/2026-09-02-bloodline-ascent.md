@@ -19,7 +19,7 @@ pointers:
 
 # Bloodline Ascent — a generic citizen's path to heritage (engine.147)
 
-**Status: MEASURED (S412), BUILD ORDER PROPOSED, NOTHING BUILT.** The hop table below is the agreement on what the system does today; the build order under it waits on the builder.
+**Status: MEASURED (S412) + BUILDER DIRECTION ON THE CHAIN CAPTURED; build order revised to the chain; NOTHING BUILT.** §The chain as directed vs as built is the agreement; §Build order, revised is what ships next, one row per cut.
 
 ## Direction (builder, 2026-09-02, recorded as said)
 
@@ -28,6 +28,45 @@ pointers:
 Earlier the same day: *"we will be checking heritage and households in the next project to ensure all the systems landed and the infrastructure is set on the path to success or failure of bloodlines."*
 
 **Read of the direction (engine-sheet):** two halves. (1) **Audit** — do the systems that exist actually connect into one path from Tier-5 to heritage, and the inverse? (2) **The maneuvering cron** — a citizen-loop wake that reads what the cycle threw at a citizen (hood state, civic choices, media coverage, casino/UNDOCKED outcomes, dial deltas) and acts to move Tier and dial state toward advancing the bloodline. The test for every piece: does a row drive a fate (universal protagonism).
+
+
+**Builder, 2026-09-02 15:41 (S412, after reading the measure) — recorded as said:**
+
+> Ok lots of disconnected processes. I think generics have a slight chance to be married into Tier 4 from there as well, but yes Tier is the citizen hierarchy and raising your Tier should increase a citizen's life but exposure can become negative as well which would have the inverse effect. Once a citizen hits 25 media usage they assume fame and only their fame fluctuates once at that stage. An individual on their own can build a heritage line without a family but most will achieve it combined. So a citizen may start single as Tier 4, generate their pay, and the newer engines that could increase their pay and/or Tier; as that citizen builds their wealth they may purchase a house; once you have a house your odds of marriage increase; where you live, what your net worth is, determines the quality of spouse; now with a house and a spouse the odds of children increase; same neighborhood affects that kid's opportunities. Most citizens in the ledger were pre-populated before this system existed so they are the gifted era of not earning necessarily what they have, but going forward these elements are the ladder to your name and family being the pillars of the sim. So as a professional athlete has a better chance, a generic citizen could arguably become that as well — albeit a lot of engine determinism going their way.
+
+**Read (engine-sheet):** the chain is the spec. Tier is the hierarchy and must *pay* in lived odds; coverage runs both ways; fame is a UsageCount bar (25) that mints permanence; a line can be founded solo; the seeded counts are the gifted era and stay as they are; the maneuvering is engine determinism ("going their way"), so the maneuver step is an engine phase and the wake stays the voice.
+
+## The chain as directed vs as built (S412)
+
+| Link (builder's words) | As built | Pointer | State |
+|---|---|---|---|
+| Generic marries into Tier 4 | engine.66c family-slot lottery: 20 %/slot event, one GC reel × one open-slot reel, match = same hood / sex / age | `processAdvancementIntake.js:1266-1282` | WIRED, never matched on live |
+| Raising Tier increases a citizen's life | Tier gates almost nothing: solo household (≤3), election eligibility (2–4), one micro-event chance (T1), newsroom context (≤2) | `householdFormationEngine.js:270`; `runCivicElectionsv1.js:211`; `generateGenericCitizenMicroEvent.js:456`; `citizenContextBuilder.js:804` | GAP — Tier has no lived payoff in pay, hiring, housing, courtship |
+| Exposure can be negative → inverse | Every citation climbs; `Citizen_Media_Usage` carries no sentiment; no path lowers Tier on coverage | `mediaRoomIntake.js`; `processAdvancementIntake.js:428` | GAP |
+| 25 media usage → fame; only fame fluctuates after | engine.118 designed on FameScore ≥ 25; builder now sets the bar on **UsageCount 25**; permanence + decay exemption; FameScore keeps grading A/D-list | `TIER_MOBILITY.md` §3 | GAP — re-specified |
+| One person can found a line alone | Solo founding only at $350M (Door B); Door A needs three | `generationalWealthEngine.js:1449-1453` | GAP — an earned solo door |
+| Pay, and engines that raise pay / Tier | E2 promotion, E3 hiring, hood reference pay, employer success (engine.135), field-first settlement (engine.144) | `runCareerEngine.js`; `educationCareerEngine.js` | WIRED |
+| Wealth → buys a house | Home purchase is household physics — the citizen needs a `Household_Ledger` row; a single needs the solo door, which needs **Tier ≤ 3** | `householdFormationEngine.js:268-280`; `generationalWealthEngine.js:1309` (`trackHomeOwnership_`) | GAP — a single Tier-4 earner cannot own a home |
+| A house raises marriage odds | Household presence ×1.5 on the wedding roll; owned vs rented makes no difference | `generationalEventsEngine.js` `checkWedding_` (engine.57 P4) | PARTIAL |
+| Where you live + net worth → spouse quality | Compatibility: same hood +3, same job family +2, age gap, warmth. Net worth absent; "quality" is not a concept | `bondEngine.js:885-911` `bondCompatibility_` | PARTIAL — no wealth term, no quality |
+| House + spouse → children | Birth needs a household; family type ×1.25; heritage multiplier; dial familyFreq | `checkBirth_` | WIRED |
+| Same neighborhood → the kid's opportunities | `SchoolQualityIndex` by hood → settlement band; the hood's businesses pull the field | engine.60/66/143/144 | WIRED |
+| The gifted era | 58 ENGINE rows carry seeded UsageCount above their citations; pre-populated wealth | measure hop 8 | HELD — by the builder's framing these stay; earned-only from here |
+| A generic could become an athlete-level figure | Needs every link above plus the fame door | — | the whole build |
+
+## Build order, revised to the chain (S412 — proposed; numbers to be set in each cut)
+
+1. **engine.150 — the ladder as a state, earned counts only.** Tier follows the citation-backed bar every cycle; the 58 seeded cells are the gifted era and hold.
+2. **engine.152 — coverage runs both ways.** The media-room intake stamps each usage row with a sentiment; a negative citation counts −1 on UsageCount (the decay path already demotes below the bar). Fame-permanent citizens lose FameScore instead of Tier.
+3. **engine.118 (re-spec) — fame at UsageCount 25.** Permanent famous marker + Tier-1 floor + decay off; FameScore grades from there.
+4. **engine.153 — a single can own a home.** Solo household on income alone (drop the Tier gate), then the wedding roll reads owned > rented > none.
+5. **engine.151 — Tier pays.** Tier enters the same places dials do: hire-slot order, promotion order, spouse pool, home-purchase odds — a multiplier per rung. This is the "raising Tier increases a citizen's life" link.
+6. **engine.154 — spouse quality.** Compatibility adds a net-worth-band term and the hood's prosperity; the drawn spouse's band tracks the citizen's own hood + net worth.
+7. **engine.155 — Door C, earned, solo or family.** An owned home + a net-worth floor + Tier ≤ 2 (solo), or the same across a household (family), founds a line. Doors A and B stay.
+8. **engine.156 — heritage loss.** Score can fall; tier steps down; an empty line goes dormant.
+9. **engine.157 — the maneuver phase.** Engine determinism, Phase 5 after the money loop: reads Tier + dials + hood, sets the cycle's risk posture (casino stake, field change, relocation, the solo door), writes the LifeHistory line that moves the dials. Needs the ambition dial (engine.94 Track B) in the same cut.
+
+Each is its own row and plan cut; 1–4 need no further design words from the builder; 5–9 get their numbers proposed in the cut and approved on trust.
 
 ## What exists today (verified S411 or pointed)
 
@@ -102,5 +141,6 @@ Deliverable of the measure: a hop table with pointers and gaps, and a build orde
 
 ## Changelog
 
+- 2026-09-02 (engine-sheet, S412, 15:41) — Builder's chain direction captured verbatim; every link mapped against the code (13 links: 5 wired, 2 partial, 5 gaps, the gifted era held); build order rewritten in chain order, nine cuts. Decisions resolved by the builder's words: seeded counts hold (gifted era); fame bar = UsageCount 25; solo founding allowed; the maneuver is an engine phase.
 - 2026-09-02 (engine-sheet, S412) — **The measure.** Fifteen hops up, four down, every pointer opened. Findings: the Tier-5 door has never fired (max EmergenceCount 2 of 3; 0 lottery mints ever); Door A has 0 candidate units; the UsageCount climb is event-only (13 ENGINE Tier-4 rows stranded at 3–15); dials, heritage and the wake never touch Tier; the inverse has money loss only. engine.108 found landed (`e371d815`, 2026-08-16) with its ROLLOUT row still `ready` — row trued. Build order of six proposed; nothing cut. Advisor-driven checks the same session: dials DO reach money through odds (casino participation, career frequency) — hop 6 corrected; the 12 stranded Tier-4 rows carry seeded counts with 0 citations behind them (58 ENGINE rows seeded in all) — hop 8 and build item 1 corrected; the GC tab's 17 `Promoted` / 13 `Emerged` rows are pre-S320 statuses whose citizens are not on the ledger — hop 3 corrected.
 - 2026-09-02 (engine-sheet, S411) — Direction captured as said, the existing-mechanism map pointed, the measure defined as the first task. No design, no code.

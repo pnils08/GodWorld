@@ -92,7 +92,7 @@ console.log('\n7. the citation event no longer decides Tier (grep-as-test):');
   check('processMediaUsage_ carries no bar comparison', !/newUsage >= [369]/.test(fn('processMediaUsage_')));
   check('the state pass runs before decay in the main sequence', a.indexOf('applyTierLadderState_(ctx, cycle)') < a.indexOf('decayMediaAttention_(ctx, cycle);'));
   check('decay recognises the old climb line as an earned rung (canon on record)', /Advanced from Tier \\d to Tier \(\\d\)/.test(fn('decayMediaAttention_')));
-  check('decay covers ENGINE + GAME + MEDIA, holds CIVIC', /mode9 !== 'ENGINE' && mode9 !== 'GAME' && mode9 !== 'MEDIA'/.test(fn('decayMediaAttention_')));
+  check('decay covers ENGINE + GAME; MEDIA and CIVIC held', /mode9 !== 'ENGINE' && mode9 !== 'GAME'\)\) continue/.test(fn('decayMediaAttention_')) && !/mode9 !== 'MEDIA'/.test(fn('decayMediaAttention_')));
 }
 
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');

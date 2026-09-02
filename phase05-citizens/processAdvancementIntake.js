@@ -1086,7 +1086,7 @@ function decayMediaAttention_(ctx, cycle) {
     // rules 2+3: earned rungs give way
     var tier9 = Number(row[iTier]) || 4;
     var mode9 = iClock >= 0 ? String(row[iClock] || 'ENGINE').trim().toUpperCase() : 'ENGINE';
-    if (tier9 <= 1 || tier9 >= 4 || (mode9 !== 'ENGINE' && mode9 !== 'GAME' && mode9 !== 'MEDIA')) continue; // engine.150: the clocks that climb are the clocks that fall (CIVIC held)
+    if (tier9 <= 1 || tier9 >= 4 || (mode9 !== 'ENGINE' && mode9 !== 'GAME')) continue; // engine.150: ENGINE + GAME fall as they climb; MEDIA held from decay while the Saturday selection is unproven (bench C114 would have dropped three desk voices whose Tier has no published work behind it); CIVIC held
     var pop9 = String(row[iPop] || '').trim().toUpperCase();
     var earned = earnedTiersByPop[pop9] || {};
     var bar = TIER_BAR[tier9] || 99;

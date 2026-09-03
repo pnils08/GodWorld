@@ -2,7 +2,7 @@
   "generated": "2026-09-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 188,
-  "functionsMapped": 1291,
+  "functionsMapped": 1294,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2372,8 +2372,11 @@
         "phase05-citizens/bondEngine.js::bondWealthTerm_",
         "phase05-citizens/bondEngine.js::spouseNetWorthFor_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generationalWealthEngine.js::homeHoodFloorAdmits_",
+        "phase05-citizens/generationalWealthEngine.js::homeMarketRent_",
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
+        "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
         "phase05-citizens/migrationTrackingEngine.js::processMigrationEvents_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_",

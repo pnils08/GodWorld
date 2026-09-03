@@ -1478,12 +1478,52 @@ var HOME_PRICE_TO_RENT = 22;      // annual-rent multiple -> price
 var HOME_ELIGIBLE_NW = 0.35;      // of price: 20% down + reserves
 var HOME_DOWN = 0.20;             // of price paid at closing
 var HOME_MORTGAGE_MONTHLY = 0.8 * 0.07 / 12; // financed share x rate / 12
-var HOME_BUY_P = 0.06;            // per-cycle roll for an eligible household
-// engine.151 (S413): the eligible household's best rung multiplies the roll —
-// 6.0 / 6.9 / 7.8 / 9.0 % for Tier 4 / 3 / 2 / 1. Eligibility is untouched.
+// engine.158 (S414, builder 2026-09-03: "heritage isn't meant to be easy to
+// obtain, nor is having a house … net worth determines where you can live;
+// your income determines how you live in that hood — each hood should have a
+// minimum income to buy a house where your net worth says you live"). Live at
+// C105 the old rule cleared 236 of 319 renting households (74 %) because the
+// price rode a 2026 rent table. Three causes now sit in front of the dice:
+//   1. the house is priced by the hood's market — Neighborhood_Map MedianRent
+//      (S.neighborhoodState), never below the household's own lease;
+//   2. the household's combined NetWorth band clears the hood's WealthMin
+//      (net worth says where you live — the same admission band moves use);
+//   3. the mortgage fits inside HOME_CARRY_MAX of HouseholdIncome (income says
+//      how you live there — each hood's minimum income to buy falls out of its
+//      own rent: Rockridge ≈ $156K, Lake Merritt ≈ $145K, Uptown ≈ $94K).
+// Then a 1 %/cycle roll × the rung — a house is years of saving and a year of
+// looking, not a quarter. No cap, no quota: three couples qualify, three buy.
+var HOME_BUY_P = 0.01;            // per-cycle roll for a qualified household
+var HOME_CARRY_MAX = 0.30;        // mortgage ≤ this share of HouseholdIncome
+// engine.151 (S413): the qualified household's best rung multiplies the roll —
+// 1.0 / 1.15 / 1.3 / 1.5 % for Tier 4 / 3 / 2 / 1. Qualification is untouched.
 function homeBuyChance_(bestTier) {
   var pay = (typeof tierPayFactor_ === 'function') ? tierPayFactor_(bestTier) : 1;
   return Math.min(0.5, HOME_BUY_P * pay);
+}
+// engine.158: the hood's market rent, never below the household's own lease.
+// No hood row (or no MedianRent on it) → the lease is the market.
+function homeMarketRent_(ctx, hood, ownRent) {
+  var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
+  var med = st ? (Number(st.medianRent) || 0) : 0;
+  return Math.max(med, Number(ownRent) || 0);
+}
+// engine.158: net worth says where you live — the household's combined band
+// must clear the hood's WealthMin (floor only: buying is not moving, and a
+// household above the band buys the modest house where it already rents).
+// No band on the hood → open.
+function homeHoodFloorAdmits_(ctx, hood, combinedNW) {
+  var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
+  var lo = st ? (Number(st.wealthMin) || 0) : 0;
+  if (lo <= 0) return true;
+  return deriveWealthLevel_(0, 0, Number(combinedNW) || 0, 0) >= lo;
+}
+// engine.158: income says how you live there — a household with no income on
+// the column carries no loan.
+function homeCarries_(mortgageMonthly, householdIncome) {
+  var inc = Number(householdIncome) || 0;
+  if (inc <= 0) return false;
+  return (Number(mortgageMonthly) || 0) * 12 <= HOME_CARRY_MAX * inc;
 }
 
 function trackHomeOwnership_(ss, ctx, cycle) {
@@ -1510,8 +1550,9 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var hj = function(n) { return hh.indexOf(n); };
   var cId = hj('HouseholdId'), cMem = hj('Members'), cHood = hj('Neighborhood'),
       cType = hj('HousingType'), cRent = hj('MonthlyRent'), cCost = hj('HousingCost'),
-      cStat = hj('Status');
+      cStat = hj('Status'), cInc = hj('HouseholdIncome'); // engine.158: the carry test reads the burden column
   if (cId < 0 || cMem < 0 || cType < 0 || cRent < 0) return results;
+  if (cInc < 0) Logger.log('trackHomeOwnership_ engine.158: HouseholdIncome column missing — no household can carry a loan this cycle');
 
   var rng = safeRand_(ctx);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
@@ -1539,8 +1580,12 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     }
     if (!members.length) continue;
 
-    var price = Math.round(rent * 12 * HOME_PRICE_TO_RENT);
+    var hood = String(hv[q][cHood] || '').trim();
+    var price = Math.round(homeMarketRent_(ctx, hood, rent) * 12 * HOME_PRICE_TO_RENT); // engine.158: the hood's market prices the house
     if (combinedNW < price * HOME_ELIGIBLE_NW) continue; // can't carry it yet
+    if (!homeHoodFloorAdmits_(ctx, hood, combinedNW)) continue; // engine.158: net worth says where you live
+    var mortgage = Math.round(price * HOME_MORTGAGE_MONTHLY);
+    if (!homeCarries_(mortgage, cInc >= 0 ? hv[q][cInc] : 0)) continue; // engine.158: income says how you live there
     if (rng() >= homeBuyChance_(bestTier)) continue;     // not this week (engine.151: the rung pays on the odds, never on the cash)
 
     // ── the purchase ──
@@ -1570,7 +1615,6 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     }
     for (var lKey in linesInHouse) homesByLine[lKey] = (homesByLine[lKey] || 0) + 1;
     ctx.ledger.dirty = true;
-    var mortgage = Math.round(price * HOME_MORTGAGE_MONTHLY);
     hhSheet.getRange(q + 1, cType + 1).setValue('owned');
     hhSheet.getRange(q + 1, cRent + 1).setValue(mortgage);
     if (cCost >= 0) hhSheet.getRange(q + 1, cCost + 1).setValue(price);

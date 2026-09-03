@@ -317,8 +317,39 @@ console.log('engine.151 the rung pays on the courtship step and the home-buy rol
   assert('the engine.59 flip orbit stays as ruled', /var tierFactor = \(A\.tier \+ B\.tier\) \/ 8;/.test(bsrc));
   const wsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generationalWealthEngine.js'), 'utf8');
   const WE = new Function('Logger', 'tierPayFactor_', wsrc + '\nreturn { homeBuyChance_, HOME_BUY_P };')({ log() {} }, pay);
-  assert('home roll: 6.0 / 6.9 / 7.8 / 9.0 % by best rung; eligibility untouched', Math.abs(WE.homeBuyChance_(4) - 0.06) < 1e-9 && Math.abs(WE.homeBuyChance_(3) - 0.069) < 1e-9 && Math.abs(WE.homeBuyChance_(2) - 0.078) < 1e-9 && Math.abs(WE.homeBuyChance_(1) - 0.09) < 1e-9 && /if \(combinedNW < price \* HOME_ELIGIBLE_NW\) continue;/.test(wsrc));
+  // engine.158 (S414) re-based HOME_BUY_P 6 % → 1 %; the rung's multiplier is unchanged.
+  assert('home roll: 1.0 / 1.15 / 1.3 / 1.5 % by best rung; the cash floor untouched', Math.abs(WE.homeBuyChance_(4) - 0.01) < 1e-9 && Math.abs(WE.homeBuyChance_(3) - 0.0115) < 1e-9 && Math.abs(WE.homeBuyChance_(2) - 0.013) < 1e-9 && Math.abs(WE.homeBuyChance_(1) - 0.015) < 1e-9 && /if \(combinedNW < price \* HOME_ELIGIBLE_NW\) continue;/.test(wsrc));
   assert('the purchase roll reads the household\'s best rung', /if \(rng\(\) >= homeBuyChance_\(bestTier\)\) continue;/.test(wsrc) && /if \(mTier >= 1 && mTier < bestTier\) bestTier = mTier;/.test(wsrc));
+}
+
+// ═══ engine.158 (S414) — the home-purchase gates: three causes, then the dice ═══
+console.log('engine.158 the house is priced by the hood, admitted by net worth, carried by income');
+{
+  const wsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generationalWealthEngine.js'), 'utf8');
+  const WE = new Function('Logger', wsrc + '\nreturn { homeMarketRent_, homeHoodFloorAdmits_, homeCarries_, HOME_BUY_P, HOME_CARRY_MAX, HOME_PRICE_TO_RENT, HOME_MORTGAGE_MONTHLY };')({ log() {} });
+  const ctx = { summary: { neighborhoodState: {
+    'Rockridge': { medianRent: 3166, wealthMin: 7, wealthMax: 11 },
+    'Temescal': { medianRent: 2551, wealthMin: 2, wealthMax: 5 },
+    'Nowhere': { medianRent: null, wealthMin: null, wealthMax: null }
+  } } };
+  assert('constants: 1 % roll, 30 % carry', WE.HOME_BUY_P === 0.01 && WE.HOME_CARRY_MAX === 0.30);
+  // 1. price — the hood's market, never below the household's own lease
+  assert('market rent: hood median wins over a cheaper lease', WE.homeMarketRent_(ctx, 'Rockridge', 2400) === 3166);
+  assert('market rent: a lease above the median prices the bigger place', WE.homeMarketRent_(ctx, 'Temescal', 4000) === 4000);
+  assert('market rent: no hood row / no median → the lease is the market', WE.homeMarketRent_(ctx, 'Nowhere', 1700) === 1700 && WE.homeMarketRent_(ctx, 'Unmapped', 1500) === 1500 && WE.homeMarketRent_({}, 'Rockridge', 1200) === 1200);
+  // 2. net worth says where you live — floor only
+  assert('band floor: $400K (band 6) cannot buy in Rockridge (min 7); $600K (band 7) can', !WE.homeHoodFloorAdmits_(ctx, 'Rockridge', 400000) && WE.homeHoodFloorAdmits_(ctx, 'Rockridge', 600000));
+  assert('band floor: above the band still buys (buying is not moving) — $3.5M in Temescal (max 5)', WE.homeHoodFloorAdmits_(ctx, 'Temescal', 3500000));
+  assert('band floor: no band on the hood → open; unmapped hood → open', WE.homeHoodFloorAdmits_(ctx, 'Nowhere', 5) && WE.homeHoodFloorAdmits_(ctx, 'Unmapped', 0) && WE.homeHoodFloorAdmits_({}, 'Rockridge', 0));
+  // 3. income says how you live there
+  assert('carry: $3,000/mo needs $120K; $119K fails, $120K passes, blank / 0 income never carries', !WE.homeCarries_(3000, 119000) && WE.homeCarries_(3000, 120000) && !WE.homeCarries_(3000, 0) && !WE.homeCarries_(3000, '') && !WE.homeCarries_(3000, null));
+  // the gate order in the loop: cash → band → carry → dice; the roll is still the last word
+  assert('the loop prices by the hood, then cash, band, carry, dice — in that order', /var price = Math\.round\(homeMarketRent_\(ctx, hood, rent\) \* 12 \* HOME_PRICE_TO_RENT\);[\s\S]*?if \(combinedNW < price \* HOME_ELIGIBLE_NW\) continue;[\s\S]*?if \(!homeHoodFloorAdmits_\(ctx, hood, combinedNW\)\) continue;[\s\S]*?var mortgage = Math\.round\(price \* HOME_MORTGAGE_MONTHLY\);[\s\S]*?if \(!homeCarries_\(mortgage, cInc >= 0 \? hv\[q\]\[cInc\] : 0\)\) continue;[\s\S]*?if \(rng\(\) >= homeBuyChance_\(bestTier\)\) continue;/.test(wsrc));
+  assert('the carry test reads HouseholdIncome (the burden column processMoneyLoop_ reads)', /cInc = hj\('HouseholdIncome'\)/.test(wsrc));
+  assert('no Math.random in the purchase path', !/Math\.random/.test(wsrc.slice(wsrc.indexOf('function trackHomeOwnership_'), wsrc.indexOf('function trackHomeOwnership_') + 8000)));
+  // the per-hood minimum income to buy falls out of the hood's own rent
+  const minIncome = med => med * 12 * WE.HOME_PRICE_TO_RENT * WE.HOME_MORTGAGE_MONTHLY * 12 / WE.HOME_CARRY_MAX;
+  assert('implied floors: Rockridge ≈ $156K, Temescal ≈ $126K', Math.round(minIncome(3166) / 1000) === 156 && Math.round(minIncome(2551) / 1000) === 126);
 }
 
 // ═══ engine.154 (S413) — cut 6: spouse quality ══════════════════════════════════

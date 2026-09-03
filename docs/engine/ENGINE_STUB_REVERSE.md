@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 188 · **Functions mapped:** 1291 · **S.* fields:** 350 · **Sheets:** 60
+**Files scanned:** 188 · **Functions mapped:** 1294 · **S.* fields:** 350 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -252,7 +252,7 @@
 | `S.neighborhoodMigration` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_` | `phase06-analysis/applyMigrationDrift.js::renderMigrationBrief_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 2 |
 | `S.neighborhoodPresence` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | 1 | 1 |
 | `S.neighborhoodPulse` | `utilities/neighborhoodPulseMap.js::recordPulse_` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_`, `utilities/neighborhoodPulseMap.js::pulseForEvent_`, `utilities/neighborhoodPulseMap.js::recordPulse_`, `utilities/neighborhoodPulseMap.test.js::check` | 1 | 5 |
-| `S.neighborhoodState` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_`, `phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, …(+11 more) | 1 | 17 |
+| `S.neighborhoodState` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_`, `phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, …(+14 more) | 1 | 20 |
 | `S.neighborhoodStateCount` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_` | _(none)_ | 1 | 0 |
 | `S.neighborhoodTrajectory` | `phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_` | `phase05-citizens/migrationTrackingEngine.js::buildRelocationHoodState_`, `phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_` | 1 | 2 |
 | `S.neighborhoodWeather` | `phase02-world-state/applyWeatherModel.js::applyWeatherModel_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/applyWeatherModel.js::getNeighborhoodTemp_`, `phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 5 |

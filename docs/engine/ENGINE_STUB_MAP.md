@@ -1519,10 +1519,18 @@
 - **captureWealthLevels_(ctx)**
 
 - **trackWealthMobility_(ctx, cycle, prevLevels)**
-  Reads: S.homesPurchasedByLine, S.storyHooks
+  Reads: S.homesPurchasedByLine, S.neighborhoodState, S.storyHooks
   Writes: S.storyHooks
 
 - **homeBuyChance_(bestTier)**
+
+- **homeMarketRent_(ctx, hood, ownRent)**
+  Reads: S.neighborhoodState
+
+- **homeHoodFloorAdmits_(ctx, hood, combinedNW)**
+  Reads: S.neighborhoodState
+
+- **homeCarries_(mortgageMonthly, householdIncome)**
 
 - **trackHomeOwnership_(ss, ctx, cycle)**
   Reads: S.storyHooks
@@ -3792,4 +3800,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 188
-**Functions mapped:** 1291
+**Functions mapped:** 1294

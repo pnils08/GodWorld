@@ -320,5 +320,55 @@ console.log('engine.151 the rung pays on the courtship step and the home-buy rol
   assert('the purchase roll reads the household\'s best rung', /if \(rng\(\) >= homeBuyChance_\(bestTier\)\) continue;/.test(wsrc) && /if \(mTier >= 1 && mTier < bestTier\) bestTier = mTier;/.test(wsrc));
 }
 
+// ═══ engine.154 (S413) — cut 6: spouse quality ══════════════════════════════════
+console.log('engine.154 compatibility reads net worth + hood prosperity; the drawn spouse is priced by who and where');
+{
+  const wsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generationalWealthEngine.js'), 'utf8');
+  const WE = new Function('Logger', wsrc + '\nreturn { deriveWealthLevel_, netWorthForBand_, WEALTH_BAND_FLOORS };')({ log() {} });
+  const probes = [[999, 0], [1000, 1], [9999, 1], [10000, 2], [24999, 2], [25000, 3], [50000, 4], [100000, 5], [250000, 6], [500000, 7], [1e6, 8], [5e6, 9], [5e7, 10], [2.5e8, 11], [1e9, 12], [1e10, 12], [0, 0], [-5, 0]];
+  assert('deriveWealthLevel_ walks the one band table with the v15/D1 thresholds unchanged', probes.every(([nw, b]) => WE.deriveWealthLevel_(0, 0, nw, 0) === b), JSON.stringify(probes.map(([nw]) => WE.deriveWealthLevel_(0, 0, nw, 0))));
+  let inBand = true;
+  for (let b = 0; b <= 12; b++) for (const u of [0, 0.37, 0.5, 0.999]) { const v = WE.netWorthForBand_(b, u); if (WE.deriveWealthLevel_(0, 0, v, 0) !== b) { inBand = false; console.log('  band miss', b, u, v); } }
+  assert('netWorthForBand_ lands inside its band for every band × unit', inBand);
+  assert('netWorthForBand_ clamps junk (band −3 → 0, band 40 → 12, unit 1 → inside)', WE.deriveWealthLevel_(0, 0, WE.netWorthForBand_(-3, 0.5), 0) === 0 && WE.deriveWealthLevel_(0, 0, WE.netWorthForBand_(40, 0.5), 0) === 12 && WE.deriveWealthLevel_(0, 0, WE.netWorthForBand_(6, 1), 0) === 6);
+
+  const csrc = fs.readFileSync(path.resolve(__dirname, '../utilities/citizenDerivation.js'), 'utf8');
+  const CD = new Function('Logger', csrc + '\nreturn { rand01_, ageBracket_, deriveEducationLevel_ };')({ log() {} });
+  const simYearOf_ = new Function(CAL_SRC + '\nreturn simYearOf_;')();
+  const bsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondEngine.js'), 'utf8');
+  const BE = new Function('Logger', 'deriveWealthLevel_', 'netWorthForBand_', 'rand01_', 'ageBracket_', 'simYearOf_',
+    bsrc + '\nreturn { bondWealthTerm_, bondProsperityTerm_, bondCompatibility_, spouseNetWorthFor_, hoodEducationFreq_ };')(
+    { log() {} }, WE.deriveWealthLevel_, WE.netWorthForBand_, CD.rand01_, CD.ageBracket_, simYearOf_);
+  assert('wealth term: gap ≤1 +2, ≤3 +1, 4–5 0, ≥6 −1, blank/unknown 0', BE.bondWealthTerm_(5, 6) === 2 && BE.bondWealthTerm_(5, 5) === 2 && BE.bondWealthTerm_(5, 8) === 1 && BE.bondWealthTerm_(5, 10) === 0 && BE.bondWealthTerm_(0, 6) === -1 && BE.bondWealthTerm_(null, 5) === 0 && BE.bondWealthTerm_('', 5) === 0 && BE.bondWealthTerm_(undefined, undefined) === 0 && BE.bondWealthTerm_('x', 5) === 0);
+  const nctx = { summary: { neighborhoodState: { Rockridge: { incomeTier: 5 }, Downtown: { incomeTier: 4 }, Temescal: { incomeTier: 1 }, Blank: { incomeTier: null } } } };
+  assert('prosperity term: tiers within 1 → +1; a gulf, an unknown hood, a blank tier, no ctx → 0', BE.bondProsperityTerm_(nctx, 'Rockridge', 'Downtown') === 1 && BE.bondProsperityTerm_(nctx, 'Rockridge', 'Rockridge') === 1 && BE.bondProsperityTerm_(nctx, 'Rockridge', 'Temescal') === 0 && BE.bondProsperityTerm_(nctx, 'Rockridge', 'Nowhere') === 0 && BE.bondProsperityTerm_(nctx, 'Rockridge', 'Blank') === 0 && BE.bondProsperityTerm_(null, 'Rockridge', 'Downtown') === 0);
+  const A = { Name: 'A', Neighborhood: 'Rockridge', Occupation: 'Nurse', BirthYear: 2008, WealthLevel: 5 };
+  const B = { Name: 'B', Neighborhood: 'Rockridge', Occupation: 'Nurse', BirthYear: 2010, WealthLevel: 6 };
+  const B0 = Object.assign({}, B, { WealthLevel: null });
+  const base = BE.bondCompatibility_(A, B0, { summary: {} });
+  assert('compatibility: like bands + alike hoods add +3 on top of the old score; unknown band adds nothing', BE.bondCompatibility_(A, B, nctx) === base + 3 && BE.bondCompatibility_(A, B0, nctx) === base + 1 && base >= 8, base + ' / ' + BE.bondCompatibility_(A, B, nctx));
+  assert('compatibility: a gulf costs one point, never bars', BE.bondCompatibility_(A, Object.assign({}, B, { WealthLevel: 12 }), { summary: {} }) === base - 1);
+  // the drawn spouse
+  const hctx = { summary: { neighborhoodState: { Rockridge: { wealthMin: 7, wealthMax: 11 }, Temescal: { wealthMin: 2, wealthMax: 5 } } } };
+  const seeds = ['Ana|Lee|POP-1', 'Bo|Kim|POP-2', 'Cy|Ng|POP-3', 'Di|Oh|POP-4', 'Ed|Pa|POP-5', 'Fa|Qu|POP-6'];
+  const bandsR = seeds.map(sd => WE.deriveWealthLevel_(0, 0, BE.spouseNetWorthFor_(hctx, 300000, 'Rockridge', sd), 0));
+  const bandsT = seeds.map(sd => WE.deriveWealthLevel_(0, 0, BE.spouseNetWorthFor_(hctx, 300000, 'Temescal', sd), 0));
+  const bandsN = seeds.map(sd => WE.deriveWealthLevel_(0, 0, BE.spouseNetWorthFor_({ summary: {} }, 300000, 'Nowhere', sd), 0));
+  assert('spouse band: citizen at band 6 in Rockridge (7–11) → always 7; in Temescal (2–5) → always 5; no hood profile → 5–7', bandsR.every(b => b === 7) && bandsT.every(b => b === 5) && bandsN.every(b => b >= 5 && b <= 7) && new Set(bandsN).size >= 2, JSON.stringify([bandsR, bandsT, bandsN]));
+  assert('spouse band is seeded (same seed, same answer)', BE.spouseNetWorthFor_(hctx, 300000, 'Rockridge', seeds[0]) === BE.spouseNetWorthFor_(hctx, 300000, 'Rockridge', seeds[0]));
+  assert('the mint falls back to age+income pricing when the citizen is unpriced', /var spNW = pNW > 0 \? spouseNetWorthFor_\(ctx, pNW, P\.hood, dSeed\) : null;/.test(bsrc) && /deriveEducationLevel_\(dSeed, P\.hood, gAgeM, hoodEducationFreq_\(ctx\)\)/.test(bsrc));
+  // hood education frequencies
+  const H = ['POPID', 'Neighborhood', 'EducationLevel', 'BirthYear', 'Status'];
+  const rows = [['P1', 'Rockridge', 'bachelors', 2000, 'Active'], ['P2', 'Rockridge', 'masters', 2001, 'Active'], ['P3', 'Rockridge', 'hs-diploma', 2030, 'Active'], ['P4', 'Rockridge', 'doctorate', 1990, 'Deceased'], ['P5', 'Temescal', 'hs-diploma', 1999, 'Active'], ['P6', 'Temescal', '', 1999, 'Active']];
+  const ectx = { ledger: { headers: H, rows }, summary: { cycleId: 107 }, config: { cycleCount: 107 } };
+  const F = BE.hoodEducationFreq_(ectx);
+  const rk = F.byNeighborhood.Rockridge && F.byNeighborhood.Rockridge.educationByAge;
+  assert('hood education freq: adults only, deceased + blank dropped, citywide rolled up, cached on ctx', rk && rk['30-44'] && rk['30-44'].bachelors === 1 && rk['30-44'].masters === 1 && !rk['18-29'] && !F.byNeighborhood.Rockridge.educationByAge['30-44'].doctorate && F.byNeighborhood.Temescal.educationByAge['30-44']['hs-diploma'] === 1 && F.citywide.educationByAge['30-44'].bachelors === 1 && BE.hoodEducationFreq_(ectx) === F, JSON.stringify(F));
+  const big = { ledger: { headers: H, rows: [] }, summary: { cycleId: 107 }, config: { cycleCount: 107 } };
+  for (let i = 0; i < 12; i++) big.ledger.rows.push(['Q' + i, 'Rockridge', i < 9 ? 'masters' : 'hs-diploma', 2000, 'Active']);
+  const draws = seeds.map(sd => CD.deriveEducationLevel_(sd, 'Rockridge', 41, BE.hoodEducationFreq_(big)));
+  assert('deriveEducationLevel_ now draws from the hood (no longer hs-diploma for everyone)', draws.includes('masters') && CD.deriveEducationLevel_(seeds[0], 'Rockridge', 41, null) === 'hs-diploma', JSON.stringify(draws));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

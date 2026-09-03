@@ -513,11 +513,16 @@ function ensureBondEngineData_(ctx) {
     var eFirst = ctx.ledger.headers.indexOf('First');
     var eLast = ctx.ledger.headers.indexOf('Last');
     var eBY = ctx.ledger.headers.indexOf('BirthYear');
+    var eWL = ctx.ledger.headers.indexOf('WealthLevel'); // engine.154: the net-worth band term
     if (eFirst >= 0 && eLast >= 0 && eBY >= 0) {
       for (var er = 0; er < ctx.ledger.rows.length; er++) {
         var eName = ((ctx.ledger.rows[er][eFirst] || '') + ' ' + (ctx.ledger.rows[er][eLast] || '')).toString().trim();
         var eEntry = eName && ctx._bondNameLookup[eName];
         if (eEntry && !eEntry.BirthYear) eEntry.BirthYear = Number(ctx.ledger.rows[er][eBY]) || 0;
+        if (eEntry && eWL >= 0 && eEntry.WealthLevel === undefined) {
+          var eWv = ctx.ledger.rows[er][eWL];
+          eEntry.WealthLevel = (eWv === '' || eWv === null || eWv === undefined) ? null : (Number(eWv) || 0);
+        }
       }
     }
   }
@@ -912,7 +917,37 @@ function bondCompatibility_(dataA, dataB, ctx) {
     var wf = bondWarmthFactor_(ctx, dataA.Name || '', dataB.Name || '');
     score += Math.max(0, Math.min(2, (wf - 0.75) * 4));
   }
+  // engine.154 (S413, builder's chain cut 6): "where you live, what your net
+  // worth is, determines the quality of spouse" — like clears the gate sooner,
+  // a gulf costs a point and never bars.
+  score += bondWealthTerm_(dataA.WealthLevel, dataB.WealthLevel);
+  score += bondProsperityTerm_(ctx, nhA, nhB);
   return score;
+}
+
+// engine.154: the net-worth band term on WealthLevel (0–12). Blank/unknown on
+// either side → 0 (an unpriced arrival is not poverty).
+function bondWealthTerm_(wlA, wlB) {
+  if (wlA === null || wlA === undefined || wlA === '' || wlB === null || wlB === undefined || wlB === '') return 0;
+  var a = Number(wlA), b = Number(wlB);
+  if (isNaN(a) || isNaN(b)) return 0;
+  var gap = Math.abs(a - b);
+  if (gap <= 1) return 2;
+  if (gap <= 3) return 1;
+  if (gap >= 6) return -1;
+  return 0;
+}
+// engine.154: the hood prosperity term — both hoods' authored IncomeTier
+// (Neighborhood_Map, 1 pressured … 6 elite, via S.neighborhoodState) known and
+// within one step → +1. Same hood scores here too (it IS alike).
+function bondProsperityTerm_(ctx, hoodA, hoodB) {
+  var ns = ctx && ctx.summary && ctx.summary.neighborhoodState;
+  if (!ns) return 0;
+  var a = ns[String(hoodA || '').trim()], b = ns[String(hoodB || '').trim()];
+  if (!a || !b) return 0;
+  var ta = Number(a.incomeTier), tb = Number(b.incomeTier);
+  if (!ta || !tb) return 0;
+  return Math.abs(ta - tb) <= 1 ? 1 : 0;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1759,6 +1794,59 @@ var GC_MARRY_CHANCE = 0.02;   // engine.59: lottery base per no-prospects single
 var GC_POOL_REF = 60;         // engine.59: scarcity denominator (matches gen F-floor)
 var GC_SPOUSE_INCOME = 48000; // engine.59: same rate as off-camera spouse pricing
 
+// engine.154 (S413): the drawn spouse's net-worth band = the citizen's own band
+// ± 1 (seeded thirds), clamped into the hood's authored WealthMin..WealthMax
+// when known, then a seeded point inside that band. Pure on its inputs.
+function spouseNetWorthFor_(ctx, citizenNetWorth, hood, seed) {
+  if (typeof deriveWealthLevel_ !== 'function' || typeof netWorthForBand_ !== 'function' || typeof rand01_ !== 'function') return null;
+  var band = deriveWealthLevel_(0, 0, citizenNetWorth, 0);
+  var u = rand01_(seed, 'spouseBand');
+  if (u < 1 / 3) band -= 1; else if (u >= 2 / 3) band += 1;
+  var hs = ctx && ctx.summary && ctx.summary.neighborhoodState && ctx.summary.neighborhoodState[String(hood || '').trim()];
+  if (hs) {
+    var lo = Number(hs.wealthMin), hi = Number(hs.wealthMax);
+    if (lo > 0 && band < lo) band = lo;
+    if (hi > 0 && band > hi) band = hi;
+  }
+  band = Math.max(0, Math.min(12, band));
+  return netWorthForBand_(band, rand01_(seed, 'spouseNetWorth'));
+}
+
+// engine.154: the ledger's own adult education distribution, by hood and age
+// bracket, in the shape deriveEducationLevel_ reads (byNeighborhood[hood]
+// .educationByAge[bracket] with a citywide fallback). One pass per ctx.
+function hoodEducationFreq_(ctx) {
+  if (ctx._hoodEducationFreq154) return ctx._hoodEducationFreq154;
+  var out = { byNeighborhood: {}, citywide: { educationByAge: {} } };
+  ctx._hoodEducationFreq154 = out;
+  if (!ctx.ledger || !ctx.ledger.rows || typeof ageBracket_ !== 'function') return out;
+  var h = ctx.ledger.headers, idx = function(n) { return h.indexOf(n); };
+  var iH = idx('Neighborhood'), iE = idx('EducationLevel'), iB = idx('BirthYear'), iS = idx('Status');
+  if (iH < 0 || iE < 0 || iB < 0) return out;
+  var cycle = ctx.summary.cycleId || ctx.config.cycleCount || 0;
+  var simYear = simYearOf_(ctx, cycle);
+  for (var r = 0; r < ctx.ledger.rows.length; r++) {
+    var row = ctx.ledger.rows[r];
+    if (iS >= 0 && String(row[iS] || 'active').toLowerCase() === 'deceased') continue;
+    var by = Number(row[iB]) || 0;
+    if (by <= 1900) continue;
+    var age = simYear - by;
+    if (age < 18) continue;
+    var edu = String(row[iE] || '').trim();
+    if (!edu) continue;
+    var hood = String(row[iH] || '').trim();
+    var br = ageBracket_(age);
+    if (hood) {
+      var nb = out.byNeighborhood[hood] = out.byNeighborhood[hood] || { educationByAge: {} };
+      var nba = nb.educationByAge[br] = nb.educationByAge[br] || {};
+      nba[edu] = (nba[edu] || 0) + 1;
+    }
+    var ca = out.citywide.educationByAge[br] = out.citywide.educationByAge[br] || {};
+    ca[edu] = (ca[edu] || 0) + 1;
+  }
+  return out;
+}
+
 function bondInWorldStamp_(cycle) {
   var y = Math.floor((cycle - 1) / 52) + 1;
   var c = ((cycle - 1) % 52) + 1;
@@ -2220,9 +2308,15 @@ function processGCCourtship_(ctx) {
     var spInc = (typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx, P.hood, (gOcc >= 0 && gRowM[gOcc]) || '', '', dStage, spId) : null;
     if (spInc === null) spInc = GC_SPOUSE_INCOME;
     setC('Income', spInc);
-    setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, gAgeM, null));
+    // engine.154 (S413): the spouse is priced by who they married and where —
+    // education from the hood's own adult distribution, net worth in the
+    // citizen's band ± 1 clamped to the hood's WealthMin..WealthMax.
+    setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, gAgeM, hoodEducationFreq_(ctx)));
     setC('DebtLevel', deriveDebtLevel_(dSeed, gAgeM, spInc));
-    setC('NetWorth', deriveNetWorth_(dSeed, gAgeM, spInc, dRetired ? 'retired' : ''));
+    var iNWc = idxCol('NetWorth');
+    var pNW = iNWc >= 0 ? (Number(String(ctx.ledger.rows[P.idx][iNWc]).replace(/[$,\s]/g, '')) || 0) : 0;
+    var spNW = pNW > 0 ? spouseNetWorthFor_(ctx, pNW, P.hood, dSeed) : null;
+    setC('NetWorth', spNW !== null ? spNW : deriveNetWorth_(dSeed, gAgeM, spInc, dRetired ? 'retired' : ''));
     setC('LifeHistory', bondInWorldStamp_(cycle) + ' — [Family] Years in the making — the record finally sees them, beside ' + P.name);
     ctx.ledger.rows.push(newRow);
     ctx.ledger.dirty = true;

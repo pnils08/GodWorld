@@ -829,7 +829,13 @@
 - **bondJobFamily_(role)**
 
 - **bondCompatibility_(dataA, dataB, ctx)**
-  Reads: S.faithExposures, S.simYear
+  Reads: S.simYear
+
+- **bondWealthTerm_(wlA, wlB)**
+  Reads: S.neighborhoodState
+
+- **bondProsperityTerm_(ctx, hoodA, hoodB)**
+  Reads: S.faithExposures, S.neighborhoodState
 
 - **processFaithJoins_(ctx)**
   Reads: S._faithJoinRipple, S.cycleId, S.faithExposures
@@ -874,6 +880,13 @@
 
 - **resolveRivalry_(ctx, bondId, outcome)**
   Reads: S.cycleId, S.relationshipBonds
+  Config: ctx.config.cycleCount
+
+- **spouseNetWorthFor_(ctx, citizenNetWorth, hood, seed)**
+  Reads: S.neighborhoodState
+
+- **hoodEducationFreq_(ctx)**
+  Reads: S.cycleId
   Config: ctx.config.cycleCount
 
 - **bondInWorldStamp_(cycle)**
@@ -1423,6 +1436,8 @@
 - **calculateCitizenWealth_(ctx)**
 
 - **deriveWealthLevel_(income, inheritance, netWorth, debt)**
+
+- **netWorthForBand_(band, unit)**
 
 - **processInheritance_(ctx, cycle)**
   Reads: S.generationalEvents, S.storyHooks
@@ -3718,4 +3733,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1264
+**Functions mapped:** 1269

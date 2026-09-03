@@ -2,7 +2,7 @@
   "generated": "2026-09-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 186,
-  "functionsMapped": 1264,
+  "functionsMapped": 1269,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -709,6 +709,7 @@
         "phase05-citizens/bondEngine.js::createBond_",
         "phase05-citizens/bondEngine.js::detectNewBonds_",
         "phase05-citizens/bondEngine.js::detectTriangleRivalries_",
+        "phase05-citizens/bondEngine.js::hoodEducationFreq_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/bondEngine.js::processFaithJoins_",
         "phase05-citizens/bondEngine.js::processGCCourtship_",
@@ -2358,6 +2359,9 @@
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
+        "phase05-citizens/bondEngine.js::bondProsperityTerm_",
+        "phase05-citizens/bondEngine.js::bondWealthTerm_",
+        "phase05-citizens/bondEngine.js::spouseNetWorthFor_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
@@ -2959,7 +2963,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ],
       "readers": [
-        "phase05-citizens/bondEngine.js::bondCompatibility_",
+        "phase05-citizens/bondEngine.js::bondProsperityTerm_",
         "phase05-citizens/bondEngine.js::processFaithJoins_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
       ]

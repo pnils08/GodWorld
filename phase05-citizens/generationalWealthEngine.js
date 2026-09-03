@@ -853,20 +853,29 @@ function deriveWealthLevel_(income, inheritance, netWorth, debt) {
   // Plan: docs/plans/2026-08-09-wealthlevel-networth-bands.md
   // engine.135 D1 (S398, builder pushback 2026-08-29): the top extended
   // 10 → 12 — Varek at $10B and a $50M citizen are not the same level.
+  // engine.154 (S413): the one band table — floors by level, walked here and
+  // inverted by netWorthForBand_ (the spouse mint prices INTO a band).
   var nw = Number(netWorth) || 0;
-  if (nw >= 1000000000) return 12; // ≥ $1B
-  if (nw >= 250000000) return 11;  // ≥ $250M
-  if (nw >= 50000000) return 10;  // ≥ $50M
-  if (nw >= 5000000)  return 9;   // ≥ $5M
-  if (nw >= 1000000)  return 8;   // ≥ $1M
-  if (nw >= 500000)   return 7;   // ≥ $500K
-  if (nw >= 250000)   return 6;   // ≥ $250K
-  if (nw >= 100000)   return 5;   // ≥ $100K
-  if (nw >= 50000)    return 4;   // ≥ $50K
-  if (nw >= 25000)    return 3;   // ≥ $25K
-  if (nw >= 10000)    return 2;   // ≥ $10K
-  if (nw >= 1000)     return 1;   // ≥ $1K
+  for (var b = WEALTH_BAND_FLOORS.length - 1; b >= 1; b--) {
+    if (nw >= WEALTH_BAND_FLOORS[b]) return b;
+  }
   return 0;                        // < $1K
+}
+// Level floors: 0 <$1K, 1 $1K, 2 $10K, 3 $25K, 4 $50K, 5 $100K, 6 $250K, 7 $500K,
+// 8 $1M, 9 $5M, 10 $50M, 11 $250M, 12 $1B (v15 bands + the engine.135 D1 top).
+var WEALTH_BAND_FLOORS = [0, 1000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000, 5000000, 50000000, 250000000, 1000000000];
+// engine.154: a net worth INSIDE a band — log-uniform between the band's floor
+// and the next floor (band 12: floor × 1–3); unit ∈ [0,1) is the caller's seed.
+function netWorthForBand_(band, unit) {
+  var b = Math.max(0, Math.min(WEALTH_BAND_FLOORS.length - 1, Math.round(Number(band)) || 0));
+  var u = Math.max(0, Math.min(0.999999, Number(unit) || 0));
+  var lo = Math.max(500, WEALTH_BAND_FLOORS[b]);
+  var hi = b + 1 < WEALTH_BAND_FLOORS.length ? WEALTH_BAND_FLOORS[b + 1] : WEALTH_BAND_FLOORS[b] * 3;
+  var v = Math.exp(Math.log(lo) + (Math.log(hi) - Math.log(lo)) * u);
+  var step = b === 0 ? 100 : 1000;
+  var out = Math.round(v / step) * step;
+  if (b + 1 < WEALTH_BAND_FLOORS.length && out >= hi) out = hi - step; // rounding never crosses the next floor
+  return Math.max(WEALTH_BAND_FLOORS[b], out);
 }
 
 

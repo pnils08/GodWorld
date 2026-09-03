@@ -42,6 +42,12 @@ Earlier the same day: *"we will be checking heritage and households in the next 
 
 **Read (engine-sheet):** four rules and one doctrine. (1) **Tier 4 is the floor** — nothing demotes below 4 and no row leaves the ledger for the pool (true by construction today: decay stops at 4, no writer sets 5). (2) **Fame is permanent, only its grade moves** — the engine.118 cut. (3) **Media Tier is a routing signal** — the desk pipeline should hand more assignments to the higher-Tier byline; that is a cron-desk change (research-build lane), filed below, not an engine phase. (4) **Intake's job** is to land usage and coverage-driven changes — never to set a Tier (the guard). Doctrine: **the wake economy** — Tier and fame decide who wakes and how often; the more a citizen wakes, the more the sim knows them; the crons are playing a layered game whose math is the engine, and it should change their behavior as they learn it.
 
+**Builder, 2026-09-02 21:06 (S412, on the fame measure) — recorded as said:**
+
+> No, usage count is correct. You wouldn't be famous if the media didn't cover you, and since the media writes every day and one step is interview a citizen, the usage count is literally what drives their Tiers to increase — the 3-6-9 system is that. 25× being covered by the media pushes you to fame: a citizen whose presence alone becomes news. Media is the sim's voice; if the citizen's voice is making it to me they are doing something right. That's who I want to hear from and about. They earn that with consistency — perfect example, all I've heard about from the sim this week is Berkin Runner; the entire sim is talking about him right now. The cultural ledger is another thing — some citizens were planted as famous, so only really a couple of A's players I added manually are there. And Mark Aitken showed up in C104 and was covered a ton for it.
+
+**Read (engine-sheet):** the fame door stays on UsageCount (cut 3 as shipped). The Cultural_Ledger is a planted layer, not the fame truth; its FameScore is the A/D-list grade and the antenna feed. The one wire still open: the recognition antenna (`generateCitizensEvents.js:2370`, `buildEveningFamous.js:230`) reads only the cultural ledger, so a ledger-Famous citizen with no planted row (Paulson, Kelley today) is not yet "presence alone becomes news" in events — a read-side merge, filed as cut 3b.
+
 ## The chain as directed vs as built (S412)
 
 | Link (builder's words) | As built | Pointer | State |

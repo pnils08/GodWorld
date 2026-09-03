@@ -111,51 +111,54 @@ function bizRowFields_(row, iTags, iRole) {
   return out;
 }
 
-// The hood's most common business field on the Business_Ledger (the fallback
-// for a line with no field of its own). null when the hood has no rows.
-function bizHoodField_(ctx, hood) {
-  if (!hood) return null;
-  ctx._bizHoodField96 = ctx._bizHoodField96 || {};
-  if (ctx._bizHoodField96.hasOwnProperty(hood)) return ctx._bizHoodField96[hood];
-  var best = null;
+// The hood's business mix on the Business_Ledger — { field: count } over the
+// rows in that hood whose Sector resolves to a birth field. The market a new
+// business is born into. Cached per ctx.
+function bizHoodMix_(ctx, hood) {
+  ctx._bizHoodMix96 = ctx._bizHoodMix96 || {};
+  if (ctx._bizHoodMix96.hasOwnProperty(hood)) return ctx._bizHoodMix96[hood];
+  var mix = {};
   try {
     var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
     var v = sheet ? sheet.getDataRange().getValues() : null;
-    if (v && v.length > 1) {
+    if (v && v.length > 1 && hood) {
       var h = v[0], iS = h.indexOf('Sector'), iH = h.indexOf('Neighborhood');
-      var count = {};
       for (var r = 1; r < v.length && iS >= 0 && iH >= 0; r++) {
         if (String(v[r][iH] || '').trim() !== hood) continue;
         var cat = (typeof sectorCategory_ === 'function') ? sectorCategory_(v[r][iS], true) : null;
-        if (!cat || !BIZ_FIELD_BIRTH[cat]) continue;
-        count[cat] = (count[cat] || 0) + 1;
-        if (best === null || count[cat] > count[best] || (count[cat] === count[best] && cat < best)) best = cat;
+        if (cat && BIZ_FIELD_BIRTH[cat]) mix[cat] = (mix[cat] || 0) + 1;
       }
     }
-  } catch (e) { Logger.log('bizHoodField_: ' + e.message); }
-  ctx._bizHoodField96[hood] = best;
-  return best;
+  } catch (e) { Logger.log('bizHoodMix_: ' + e.message); }
+  ctx._bizHoodMix96[hood] = mix;
+  return mix;
 }
 
-// The field a heritage line opens in: the most common field across its living
-// members, a tie to the staker's own, else the staker's hood, else Small Business.
-function heritageBusinessField_(ctx, memberRows, stakeRow, iTags, iRole, hood) {
-  var tally = {};
+// The field a heritage line opens in — a WEIGHTED DRAW, never a lookup (the
+// builder, 2026-09-03: "Benji only opening sports businesses makes no sense";
+// doctrine 2, causes then dice). Two causes, one draw: every field a living
+// member stands in (one weight per member holding it) and the hood's own
+// business mix (one weight per business), so a family opens in its trade OR
+// in what its neighborhood already sells; an athlete weighs nothing and the
+// line draws from the market. Empty everywhere → Small Business.
+function heritageBusinessField_(ctx, memberRows, stakeRow, iTags, iRole, hood, unit) {
+  var weights = {}, familyW = 0, hoodW = 0;
   for (var m = 0; m < memberRows.length; m++) {
     var fs = bizRowFields_(memberRows[m], iTags, iRole);
-    for (var f = 0; f < fs.length; f++) tally[fs[f]] = (tally[fs[f]] || 0) + 1;
+    for (var f = 0; f < fs.length; f++) { if (!BIZ_FIELD_BIRTH[fs[f]]) continue; weights[fs[f]] = (weights[fs[f]] || 0) + 1; familyW += 1; }
   }
-  var stakerFields = stakeRow ? bizRowFields_(stakeRow, iTags, iRole) : [];
-  var best = null, bestN = 0;
-  for (var k in tally) {
-    if (!tally.hasOwnProperty(k) || !BIZ_FIELD_BIRTH[k]) continue;
-    var n = tally[k];
-    if (n > bestN || (n === bestN && stakerFields.indexOf(k) >= 0 && stakerFields.indexOf(best) < 0) || (n === bestN && stakerFields.indexOf(k) >= 0 === stakerFields.indexOf(best) >= 0 && k < best)) { best = k; bestN = n; }
-  }
-  if (best) return { field: best, source: 'family' };
-  var hf = bizHoodField_(ctx, hood);
-  if (hf) return { field: hf, source: 'hood' };
-  return { field: 'Small Business', source: 'default' };
+  var mix = bizHoodMix_(ctx, hood);
+  for (var k in mix) { if (!mix.hasOwnProperty(k)) continue; weights[k] = (weights[k] || 0) + mix[k]; hoodW += mix[k]; }
+  var keys = [], total = 0;
+  for (var w in weights) { if (weights.hasOwnProperty(w)) { keys.push(w); total += weights[w]; } }
+  if (!keys.length || total <= 0) return { field: 'Small Business', source: 'default', odds: {} };
+  keys.sort();
+  var u = Math.max(0, Math.min(0.999999, Number(unit) || 0)) * total, acc = 0, pick = keys[keys.length - 1];
+  for (var i = 0; i < keys.length; i++) { acc += weights[keys[i]]; if (u < acc) { pick = keys[i]; break; } }
+  var odds = {};
+  for (var o = 0; o < keys.length; o++) odds[keys[o]] = Math.round(weights[keys[o]] / total * 100) / 100;
+  var fromFamily = memberRows.some(function(row) { return bizRowFields_(row, iTags, iRole).indexOf(pick) >= 0; });
+  return { field: pick, source: fromFamily ? (mix[pick] ? 'family+hood' : 'family') : 'hood', odds: odds };
 }
 
 // What the business IS at birth: class sizes, capital capped at a year of the
@@ -488,7 +491,7 @@ if (typeof module !== 'undefined' && module.exports) {
     BIZ_CLASS_MINT: BIZ_CLASS_MINT,
     BIZ_FIELD_BIRTH: BIZ_FIELD_BIRTH,
     bizRowFields_: bizRowFields_,
-    bizHoodField_: bizHoodField_,
+    bizHoodMix_: bizHoodMix_,
     heritageBusinessField_: heritageBusinessField_,
     heritageBusinessBirth_: heritageBusinessBirth_
   };

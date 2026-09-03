@@ -2107,7 +2107,7 @@ function updateHeritage_(ss, ctx, cycle) {
           // lifecycle (Tasks 5–7) decides if it lives. The old roll hashed the
           // lineage id onto a six-flavor list and priced revenue at 4× the stake.
           var bizNbhd = String(stakeRow[iHood] || '') || 'Downtown';
-          var fieldPick = heritageBusinessField_(ctx, members, stakeRow, iTagsH, iRoleH, bizNbhd);
+          var fieldPick = heritageBusinessField_(ctx, members, stakeRow, iTagsH, iRoleH, bizNbhd, rng()); // one seeded draw: the family's trades and the hood's market, weighted
           var birth = heritageBusinessBirth_(fieldPick.field, String(hl[hName]), stakeNW);
           var capital = birth.capital;
           var bizId = 'BIZ-' + String(nextBizNum++).padStart(5, '0');

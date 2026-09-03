@@ -4517,7 +4517,7 @@
         "phase04-events/chaosCarsEngine.test.js::reset",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
-        "phase05-citizens/applyBusinessDynamics.js::bizHoodField_",
+        "phase05-citizens/applyBusinessDynamics.js::bizHoodMix_",
         "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/applyChaosDecay.test.js::ctxWith",

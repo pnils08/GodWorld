@@ -778,10 +778,10 @@
 ### applyBusinessDynamics.js
 - **bizRowFields_(row, iTags, iRole)**
 
-- **bizHoodField_(ctx, hood)**
+- **bizHoodMix_(ctx, hood)**
   Sheets: Business_Ledger
 
-- **heritageBusinessField_(ctx, memberRows, stakeRow, iTags, iRole, hood)**
+- **heritageBusinessField_(ctx, memberRows, stakeRow, iTags, iRole, hood, unit)**
 
 - **heritageBusinessBirth_(field, familyName, stakeNetWorth)**
 

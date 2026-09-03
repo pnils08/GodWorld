@@ -100,6 +100,10 @@ console.log('wiring');
   assert('finalizeCycleState carries businessDynamics from S.businessDynamicsState', /businessDynamics: S\.businessDynamicsState \|\| \{\}/.test(fin));
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
   assert('heritage business mint seeds Growth_Rate from the class table in whole percents (the 0.03 and the 4× stake are gone)', /birth\.emp, birth\.sal, birth\.revenue, birth\.growth/.test(gw) && !/capital \* 4/.test(gw));
+  assert('the heritage roll draws the field with one seeded unit and writes "(founder)" into Key_Personnel; the flavor table is retired', /heritageBusinessField_\(ctx, members, stakeRow, iTagsH, iRoleH, bizNbhd, rng\(\)\)/.test(gw) && /heritageBusinessBirth_\(fieldPick\.field, String\(hl\[hName\]\), stakeNW\)/.test(gw) && /\+ ' \(founder\)'\]/.test(gw) && !/HERITAGE_BIZ_SECTORS\[/.test(gw));
+  const intake = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'processBusinessIntake.js'), 'utf8');
+  assert('the intake script is born alive through economicSeedForSector and never runs on require', /economicSeedForSector\(\(entry\.Sector/.test(intake) && !/Growth_Rate: 'New'/.test(intake) && /if \(require\.main === module\)/.test(intake));
+  delete global.skillTagField_; delete global.roleFieldOf_; delete global.sectorCategory_;
 }
 console.log('Task 6 — decline sheds; Task 7 — closure winds down, then archives');
 {
@@ -178,7 +182,7 @@ console.log('Task 11 — the birth rule: field → class, sizes, capital cap');
   assert('Corliss at $2M in Creative & Arts: "Corliss Studio", capital 20 % = $400K (under the $800K class cap), revenue = capital', b2.name === 'Corliss Studio' && b2.capital === 400000 && b2.revenue === 400000 && b2.emp === 9);
   assert('the $50K floor holds for a thin stake; an unknown field falls to Small Business', mod.heritageBusinessBirth_('Small Business', 'X', 100000).capital === 50000 && mod.heritageBusinessBirth_('Nonsense', 'X', 1e9).name === 'X Mercantile');
   // fields from rows
-  global.skillTagField_ = (t) => ({ 'Creative & Arts': 'Creative & Arts', 'Education': 'Education', 'Professional': 'Professional', 'Trades': 'Construction & Baylight', 'Tech & Innovation': 'Tech & Innovation' })[String(t).trim()] || null;
+  global.skillTagField_ = (t) => ({ 'Creative & Arts': 'Creative & Arts', 'Education': 'Education', 'Professional': 'Professional', 'Trades': 'Construction & Baylight', 'Tech & Innovation': 'Tech & Innovation', 'Food & Culture': 'Food & Culture' })[String(t).trim()] || null;
   global.roleFieldOf_ = (r) => /teacher/i.test(String(r)) ? 'Education' : null;
   const H = ['POPID', 'SkillTags', 'RoleType', 'Neighborhood'];
   const r = (tags, role) => ['P', tags, role, 'Rockridge'];
@@ -186,18 +190,18 @@ console.log('Task 11 — the birth rule: field → class, sizes, capital cap');
   const ctxH = { ss: { getSheetByName: (n) => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => [['BIZ_ID', 'Sector', 'Neighborhood'], ['B1', 'Restaurant & Dining', 'Rockridge'], ['B2', 'Retail', 'Rockridge'], ['B3', 'Restaurant & Dining', 'Rockridge'], ['B4', 'Sports Franchise', 'Rockridge']] }) } : null } };
   global.sectorCategory_ = sectorCategory_;
   const dillon = [r('athlete', 'Pitcher'), r('Education', 'High School Science Teacher'), r('', 'Grade Schooler')];
-  assert('the Dillon line: Benji resolves to nothing, Maya\'s Education wins (family)', JSON.stringify(mod.heritageBusinessField_(ctxH, dillon, dillon[0], 1, 2, 'Rockridge')) === '{"field":"Education","source":"family"}');
+  const d1 = mod.heritageBusinessField_(ctxH, dillon, dillon[0], 1, 2, 'Rockridge', 0.0);
+  assert('the Dillon line draws over ONE weighted set: Maya\'s Education (1) + Rockridge\'s market (Food & Culture 2, Small Business 1) — odds 0.25 / 0.5 / 0.25; the sports row weighs nothing', JSON.stringify(d1.odds) === '{"Education":0.25,"Food & Culture":0.5,"Small Business":0.25}', JSON.stringify(d1));
+  const picks = [0.0, 0.2, 0.3, 0.6, 0.8, 0.95].map(u => mod.heritageBusinessField_(ctxH, dillon, dillon[0], 1, 2, 'Rockridge', u).field);
+  assert('the dice pick: low units → Education (family), the middle → Food & Culture (hood), the top → Small Business (hood)', JSON.stringify(picks) === '["Education","Education","Food & Culture","Food & Culture","Small Business","Small Business"]', JSON.stringify(picks));
+  assert('the source names where the pick came from', mod.heritageBusinessField_(ctxH, dillon, dillon[0], 1, 2, 'Rockridge', 0.1).source === 'family' && mod.heritageBusinessField_(ctxH, dillon, dillon[0], 1, 2, 'Rockridge', 0.5).source === 'hood');
   const kelley = [r('athlete', 'Shortstop')];
-  assert('the Kelley line (athlete only): the hood\'s most common business field — Rockridge reads Food & Culture', JSON.stringify(mod.heritageBusinessField_(ctxH, kelley, kelley[0], 1, 2, 'Rockridge')) === '{"field":"Food & Culture","source":"hood"}');
-  const tie = [r('Creative & Arts', ''), r('Professional', '')];
-  assert('a tie goes to the staker\'s own field', mod.heritageBusinessField_(ctxH, tie, tie[1], 1, 2, 'Nowhere').field === 'Professional' && mod.heritageBusinessField_(ctxH, tie, tie[0], 1, 2, 'Nowhere').field === 'Creative & Arts');
-  assert('no field anywhere → Small Business (default)', JSON.stringify(mod.heritageBusinessField_(ctxH, [r('', '')], null, 1, 2, 'Nowhere')) === '{"field":"Small Business","source":"default"}');
+  const kp = [0.1, 0.5, 0.9].map(u => mod.heritageBusinessField_(ctxH, kelley, kelley[0], 1, 2, 'Rockridge', u));
+  assert('the Kelley line (athlete only) draws from Rockridge\'s whole market — never a sports business, never a lock', kp.every(x => x.source === 'hood') && JSON.stringify(kp.map(x => x.field)) === '["Food & Culture","Food & Culture","Small Business"]', JSON.stringify(kp));
+  assert('a family trade the hood also sells reads family+hood', mod.heritageBusinessField_(ctxH, [r('Food & Culture', '')], null, 1, 2, 'Rockridge', 0.1).source === 'family+hood');
+  assert('no field anywhere → Small Business (default)', JSON.stringify(mod.heritageBusinessField_(ctxH, [r('', '')], null, 1, 2, 'Nowhere', 0.5).field) === '"Small Business"');
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
-  assert('the heritage roll reads the birth rule and writes "(founder)" into Key_Personnel; the flavor table is retired', /heritageBusinessField_\(ctx, members, stakeRow, iTagsH, iRoleH, bizNbhd\)/.test(gw) && /heritageBusinessBirth_\(fieldPick\.field, String\(hl\[hName\]\), stakeNW\)/.test(gw) && /\+ ' \(founder\)'\]/.test(gw) && !/HERITAGE_BIZ_SECTORS\[/.test(gw) && !/capital \* 4/.test(gw));
-  const intake = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'processBusinessIntake.js'), 'utf8');
-  assert('the intake script is born alive through economicSeedForSector and never runs on require', /economicSeedForSector\(\(entry\.Sector/.test(intake) && !/Growth_Rate: 'New'/.test(intake) && /if \(require\.main === module\)/.test(intake));
-  delete global.skillTagField_; delete global.roleFieldOf_; delete global.sectorCategory_;
+  assert('heritage business mint seeds Growth_Rate from the class table in whole percents (the 0.03 and the 4× stake are gone)', /birth\.emp, birth\.sal, birth\.revenue, birth\.growth/.test(gw) && !/capital \* 4/.test(gw));
 }
-
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

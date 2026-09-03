@@ -854,6 +854,16 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S413 Archive Pass (2026-09-03, research-build) — post-S412 closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.*.
+
+- **engine.151** [engine-sheet] — Tier pays (bloodline cut 5) — `TIER_PAY` 1.50/1.30/1.15/1.00 per rung beside `TIER_BAR`; hire slot band on income ÷ pay, promotion wait × pay (T3 vs T4; T1–2 outside by the engine.135 rule), courtship step × pay of the best rung (GC draw stays a lottery), home-buy roll × pay of the best member. LIVE PROD @30 S413 (bench @23 C107: 0 errors, 1 hire, 11 homes, 0 promotions) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]] §engine.151
+- **engine.154** [engine-sheet] — Spouse quality (bloodline cut 6) — compatibility adds a `WealthLevel` band term (≤1 +2 / ≤3 +1 / ≥6 −1) and a hood-prosperity term (`IncomeTier` within 1 → +1); the drawn GC spouse's education follows the hood's adult distribution and its NetWorth band = the citizen's band ± 1 clamped to the hood's WealthMin..Max. terms at the romance gate only + the gate resolves POPID→name (6b: the door had been welded shut since S325). LIVE PROD @32 S413 (bench C108/C109: 0 errors, formation unchanged, 0 romances as predicted) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]] §engine.154
+- **engine.155** [engine-sheet] — Door C, the household heritage door (bloodline cut 7) — an owned household with no lined member founds at NetWorth ≥ $50M, one member or combined, NO Tier gate (builder re-set 2026-09-03 from the shipped $500K + Tier ≤ 2, which founded 26 bench lines by C116); runs after A/B; every living member joins; the founding home counts. LIVE PROD @33 (bench C110/C111); re-set S413 pre-bench **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]] §engine.155
+
+This pass: 3 rows — engine.151 + engine.154 + engine.155. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S412 Archive Pass (2026-09-03, engine-sheet) — post-S411 closures sweep
 
 7 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 7 engine.*.

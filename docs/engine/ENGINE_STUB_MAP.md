@@ -47,6 +47,9 @@
   Reads: S.canonHoods
 
 ### engine94SheetContract.js
+- **ensureEngine96Config_(ss)**
+  Sheets: World_Config
+
 - **inspectEngine94Config_(values, seedList)**
 
 - **inspectEngine94CivicHeader_(header)**
@@ -771,6 +774,35 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ## Phase 5: Citizens (`phase05-citizens/`)
+
+### applyBusinessDynamics.js
+- **bizSectorClass_(sector)**
+
+- **bizParseGrowth_(v)**
+
+- **bizParseRevenue_(v)**
+
+- **bizDynamicsConfig_(ctx)**
+
+- **bizMayorApproval_(ctx)**
+  Sheets: Civic_Office_Ledger
+
+- **bizClamp_(n, lo, hi)**
+
+- **bizDriftOne_(cfg, biz, prevState, inputs, cycle)**
+
+- **applyBusinessDynamics_(ctx)**
+  Reads: S.chaosBusinessFold, S.chaosNeighborhoodFold, S.cycleId, S.editionSentimentBoost, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState
+  Writes: S.businessDynamicsState
+  Config: ctx.config.cycleCount
+  Sheets: Business_Ledger
+
+### applyBusinessDynamics.test.js
+- **assert(label, cond, detail)**
+
+- **ctxWith(o)**
+  Reads: S.businessDynamicsState
+  Sheets: Business_Ledger, Civic_Office_Ledger
 
 ### applyChaosDecay.js
 - **applyChaosDecay_(ctx)**
@@ -2688,7 +2720,7 @@
 
 ### finalizeCycleState.js
 - **finalizeCycleState_(ctx)**
-  Reads: S.activeCooldowns, S.bankRate, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
+  Reads: S.activeCooldowns, S.bankRate, S.businessDynamicsState, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
   Writes: S.cycleFinalState, S.cycleFinalizedAt, S.previousCycleState
   Config: ctx.config.cycleCount
 
@@ -3734,5 +3766,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 186
-**Functions mapped:** 1270
+**Files scanned:** 188
+**Functions mapped:** 1281

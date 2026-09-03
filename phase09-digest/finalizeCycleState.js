@@ -160,6 +160,11 @@ function finalizeCycleState_(ctx) {
     crisisArcs: compactCrisisArcs_(S.crisisArcsActive),
     hospitalEvents: compactHospitalEvents_(S.hospitalEvents),
 
+    // engine.96 Task 5 (S413): per-business distress streak + success window
+    // ({ BIZ_ID: [streak, win] }, nonzero entries only) — applyBusinessDynamics_
+    // reads it back next Cycle; a blob reset rebuilds from zero. ~20 bytes/row.
+    businessDynamics: S.businessDynamicsState || {},
+
   };
 
   // This is what downstream scripts read next cycle

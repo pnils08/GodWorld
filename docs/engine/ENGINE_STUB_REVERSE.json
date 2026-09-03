@@ -1,8 +1,8 @@
 {
   "generated": "2026-09-03",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 186,
-  "functionsMapped": 1270,
+  "filesScanned": 188,
+  "functionsMapped": 1281,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -704,6 +704,7 @@
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/bondEngine.js::checkConfrontationTriggers_",
         "phase05-citizens/bondEngine.js::createBond_",
@@ -1639,6 +1640,7 @@
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/bondEngine.js::updateExistingBonds_",
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
@@ -1752,7 +1754,8 @@
       ],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
+        "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
       ]
     },
     "neighborhoodDemographics": {
@@ -1865,7 +1868,8 @@
       ],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_"
+        "phase02-world-state/applyEditionCoverageEffects.js::applyEditionCoverageEffects_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
       ]
     },
     "initiativeImplementationEffects": {
@@ -2359,6 +2363,7 @@
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/bondEngine.js::bondProsperityTerm_",
         "phase05-citizens/bondEngine.js::bondWealthTerm_",
         "phase05-citizens/bondEngine.js::spouseNetWorthFor_",
@@ -2647,7 +2652,8 @@
       ],
       "readers": [
         "phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_",
-        "phase04-events/chaosCarsEngine.js::flushBusinessFold_"
+        "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
       ]
     },
     "chaosNeighborhoodFold": {
@@ -2659,6 +2665,7 @@
         "phase04-events/chaosCarsEngine.js::accumulateNeighborhoodFold_",
         "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
         "phase04-events/chaosCarsEngine.js::resolveChaosNeighborhoodFold_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
       ]
     },
@@ -2900,6 +2907,15 @@
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
+    },
+    "businessDynamicsState": {
+      "writers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+      ],
+      "readers": [
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
@@ -4200,6 +4216,20 @@
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
       ]
     },
+    "World_Config": {
+      "writers": [],
+      "readers": [
+        "phase01-config/engine94SheetContract.js::ensureEngine133Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine135Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
+        "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
+        "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",
+        "phase05-citizens/civicInitiativeEngine.js::manualRunVote",
+        "phase05-citizens/processAdvancementIntake.js::getCurrentCycleFromConfig_",
+        "phase07-evening-media/parseMediaRoomMarkdown.js::parseContinuityNotes_",
+        "utilities/cycleRollback.js::resetCycleCounter_"
+      ]
+    },
     "Civic_Office_Ledger": {
       "writers": [
         "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
@@ -4207,6 +4237,8 @@
       ],
       "readers": [
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
+        "phase05-citizens/applyBusinessDynamics.js::bizMayorApproval_",
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase05-citizens/civicInitiativeEngine.js::getCouncilState_",
         "phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_",
         "phase05-citizens/generateCivicModeEvents.js::buildOfficeLookup_",
@@ -4220,19 +4252,6 @@
         "utilities/exportCitizensSnapshot.js::exportCivicOfficials_",
         "utilities/setupCivicLedgerColumns.js::fixElliottCraneStatus",
         "utilities/setupCivicLedgerColumns.js::setupCivicLedgerColumns"
-      ]
-    },
-    "World_Config": {
-      "writers": [],
-      "readers": [
-        "phase01-config/engine94SheetContract.js::ensureEngine133Config_",
-        "phase01-config/engine94SheetContract.js::ensureEngine135Config_",
-        "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
-        "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",
-        "phase05-citizens/civicInitiativeEngine.js::manualRunVote",
-        "phase05-citizens/processAdvancementIntake.js::getCurrentCycleFromConfig_",
-        "phase07-evening-media/parseMediaRoomMarkdown.js::parseContinuityNotes_",
-        "utilities/cycleRollback.js::resetCycleCounter_"
       ]
     },
     "Engine_Errors": {
@@ -4460,6 +4479,7 @@
     "Business_Ledger": {
       "writers": [
         "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_"
@@ -4470,6 +4490,8 @@
         "phase04-events/chaosCarsEngine.js::loadBusinessRows_",
         "phase04-events/chaosCarsEngine.test.js::makeCtx",
         "phase04-events/chaosCarsEngine.test.js::reset",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/applyChaosDecay.test.js::ctxWith",
         "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",

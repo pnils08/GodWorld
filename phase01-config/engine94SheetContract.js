@@ -40,6 +40,54 @@ var ENGINE133_CONFIG_SEEDS = [
   ['illnessHoodWeightMax', 2.0, 'engine.133 upper clamp on a hood structural illness weight before envelope normalization', 1, 5, false]
 ];
 
+// engine.96 (S413) — business lifecycle tunables, the Task 3 table signed off by the
+// builder 2026-08-01 (docs/plans/2026-08-01-business-lifecycle-generator.md). Same
+// self-arm contract as engine.133: seeded once, read from ctx.config each Cycle,
+// tuned by editing the sheet cell. applyBusinessDynamics_ asserts every key.
+var ENGINE96_CONFIG_SEEDS = [
+  ['bizDriftMaxUp', 1.0, 'engine.96 max +pp Growth_Rate move per Cycle', 0, 10, false],
+  ['bizDriftMaxDown', 1.0, 'engine.96 max -pp Growth_Rate move per Cycle', 0, 10, false],
+  ['bizGrowthCeil', 40, 'engine.96 Growth_Rate ceiling (pp)', 0, 100, false],
+  ['bizGrowthFloor', -10, 'engine.96 Growth_Rate floor (pp)', -100, 0, false],
+  ['bizNoiseBound', 0.25, 'engine.96 seeded noise half-width (pp), texture only', 0, 2, false],
+  ['bizVitalityNeutral', 6.0, 'engine.96 hood RetailVitality at which the vitality term is 0', 0, 10, false],
+  ['bizVitalityGain', 0.15, 'engine.96 pp drift per vitality point from neutral (clamped +-0.5)', 0, 1, false],
+  ['bizSuccessWindow', 3, 'engine.96 consecutive prosperous Cycles before success pressure bites (27.10)', 1, 52, false],
+  ['bizSuccessVitalityHigh', 9.0, 'engine.96 hood RetailVitality that counts as prosperous', 0, 10, false],
+  ['bizSuccessApprovalHigh', 85, 'engine.96 mayor approval that counts as golden-era', 0, 100, false],
+  ['bizSuccessPenalty', 0.3, 'engine.96 pp drift penalty on incumbents under sustained success', 0, 5, false],
+  ['bizDisruptBaseChance', 2, 'engine.96 % per-Cycle disruption-shock chance per business (seeded)', 0, 100, false],
+  ['bizDisruptSuccessMult', 3, 'engine.96 disruption-chance multiplier while the success window is active', 1, 10, false],
+  ['bizDisruptShock', 2.0, 'engine.96 pp one-Cycle negative shock on disruption', 0, 10, false],
+  ['bizClosureStreak', 8, 'engine.96 consecutive negative-growth Cycles for closure eligibility (Task 7)', 1, 104, false],
+  ['bizClosureRevenueFloorPct', 40, 'engine.96 revenue below this % of the sector mint median closes (Task 7, with the streak)', 0, 100, false],
+  ['bizEventShockScale', 1.0, 'engine.96 scale of each event-driven pp contribution; event term capped +-2.0', 0, 5, false],
+  ['bizVol_faith', 0.5, 'engine.96 sector volatility multiplier: faith', 0, 5, false],
+  ['bizVol_retail', 1.2, 'engine.96 sector volatility multiplier: retail', 0, 5, false],
+  ['bizVol_food', 1.3, 'engine.96 sector volatility multiplier: food / nightlife', 0, 5, false],
+  ['bizVol_health', 0.7, 'engine.96 sector volatility multiplier: health', 0, 5, false],
+  ['bizVol_tech', 1.5, 'engine.96 sector volatility multiplier: tech', 0, 5, false],
+  ['bizVol_professional', 0.8, 'engine.96 sector volatility multiplier: professional', 0, 5, false],
+  ['bizVol_construction', 1.1, 'engine.96 sector volatility multiplier: construction', 0, 5, false],
+  ['bizVol_arts', 1.2, 'engine.96 sector volatility multiplier: arts / media', 0, 5, false],
+  ['bizVol_education', 0.6, 'engine.96 sector volatility multiplier: education', 0, 5, false],
+  ['bizVol_default', 1.0, 'engine.96 sector volatility multiplier: small neighborhood business (fallback)', 0, 5, false]
+];
+
+function ensureEngine96Config_(ss) {
+  if (!ss) throw new Error('engine.96 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.96 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE96_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE96_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.96 config: post-write verification failed');
+  }
+  Logger.log('engine.96 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE135_CONFIG_SEEDS = [
   ['employmentAttractorPull', 0.12, 'engine.135 fraction of the (attractor - rate) gap the city employment dial closes per Cycle', 0, 1, false],
   ['employmentHoodWeightMin', 0.5, 'engine.135 lower clamp on a hood structural employment weight before envelope normalization', 0.1, 1, false],

@@ -219,6 +219,7 @@ function runWorldCycle() {
     ensureEngine94SheetContract_(ss);
     ensureEngine133Config_(ss);  // engine.133 city-health physics keys, same self-arm contract
     ensureEngine135Config_(ss);  // engine.135 employment envelope keys, same self-arm contract
+    ensureEngine96Config_(ss);   // engine.96 business lifecycle keys, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet
@@ -346,6 +347,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
+  safePhaseCall_(ctx, 'Phase5-BusinessDynamics', function() { applyBusinessDynamics_(ctx); }); // engine.96 Task 5 — before Career so Task 6's decline records land in careerSignals
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });
@@ -2084,6 +2086,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
+  safePhaseCall_(ctx, 'Phase5-BusinessDynamics', function() { applyBusinessDynamics_(ctx); }); // engine.96 Task 5 — before Career so Task 6's decline records land in careerSignals
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });

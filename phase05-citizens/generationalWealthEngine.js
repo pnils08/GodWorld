@@ -1950,7 +1950,7 @@ function updateHeritage_(ss, ctx, cycle) {
           stakeRow[iNW] = stakeNW - capital;
           ctx.ledger.dirty = true;
           queueAppendIntent_(ctx, 'Business_Ledger',
-            [bizId, bizName, flavor.sector, bizNbhd, 2, 62000, capital * 4, 0.03,
+            [bizId, bizName, flavor.sector, bizNbhd, 2, 62000, capital * 4, 3 /* engine.96: whole percents on the tab, 0.03 read as 0.03 % and never hired */,
              stakePop + ' ' + String(stakeRow[iFirst] || '') + ' ' + String(stakeRow[iLast] || '')],
             'engine.65 heritage business roll (' + linId + ')', 'COMMUNITY', 70);
           bizList.push(bizId);

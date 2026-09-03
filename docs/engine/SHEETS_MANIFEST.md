@@ -20,7 +20,7 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 - **`Riley_Digest`**: The per-cycle digest row (CycleWeight, reason, calendar factors, summary). Writer: `writeDigest_` at Phase10-WriteDigest via intent — the only writer since `writeCycleWeightToDigest_` (zero callers, direct writer) was deleted S409 (G-PF31). Readers: `applyPatternDetection_`, `cycleExportAutomation.exportRileyDigest`, `cycleRollback` utilities. Was absent from this inventory until S409.
 
 ## 2. Infrastructure & Operations
-- **`Business_Ledger`**: Tracking businesses, employee counts, and revenue.
+- **`Business_Ledger`**: Tracking businesses, employee counts, and revenue. Writers, all by intent: `applyBusinessDynamics_` (engine.96, Phase5-BusinessDynamics — one range intent over Annual_Revenue..Growth_Rate every Cycle), `applyChaosDecay_` (Annual_Revenue cells), `flushBusinessFold_` (chaos cars), `runCareerEngine_` (Employee_Count write-back), `updateHeritage_` (heritage business row append). `Key_Personnel` is the ownership link (no engine reader yet — engine.96 Task 10).
 - **`Employment_Roster`**: Citizen-to-Business mapping.
 - **`Economic_Parameters`**: Reference limits for career and income generation.
 - **`Crime_Metrics`**: Safety, property/violent crime indexes per neighborhood.

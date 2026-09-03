@@ -13,6 +13,7 @@
  */
 
 var path = require('path');
+const { economicSeedForSector } = require('./ingestPublishedEntities'); // engine.96 T11: one birth table
 require('/root/GodWorld/lib/env');
 
 var fs = require('fs');
@@ -128,15 +129,19 @@ async function main() {
     var newBizId = formatBizId(nextBizNum);
     nextBizNum++;
 
+    // engine.96 Task 11 (S413): born alive through the one seed table (engine.85
+    // Task 8's economicSeedForSector) — the old row wrote 0 / blank / blank and the
+    // literal string "New" for Growth_Rate, which no reader could ever parse.
+    var econ = economicSeedForSector((entry.Sector || '').trim());
     var newRow = {
       BIZ_ID: newBizId,
       Name: name,
       Sector: (entry.Sector || '').trim(),
       Neighborhood: (entry.Neighborhood || '').trim(),
-      Employee_Count: 0,
-      Avg_Salary: '',
-      Annual_Revenue: '',
-      Growth_Rate: 'New',
+      Employee_Count: econ.emp,
+      Avg_Salary: econ.sal,
+      Annual_Revenue: econ.rev,
+      Growth_Rate: econ.growth,
       Key_Personnel: ''
     };
 
@@ -236,7 +241,9 @@ async function main() {
   console.log('Done. ' + promoted.length + ' businesses promoted to Business_Ledger.');
 }
 
+if (require.main === module) { // engine.96 T11 (S413): never run on require — this script applies by default
 main().catch(function(err) {
   console.error('FATAL:', err.message || err);
   process.exit(1);
 });
+}

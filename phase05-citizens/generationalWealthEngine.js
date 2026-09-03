@@ -1713,14 +1713,7 @@ function heritageHash8_(s) {
 
 // engine.65 — family business flavor by sector; name pattern is
 // deterministic per line (no gendered '& Sons' — lines are whole families).
-var HERITAGE_BIZ_SECTORS = [
-  { sector: 'Restaurant', suffix: 'Kitchen' },
-  { sector: 'Retail', suffix: 'Mercantile' },
-  { sector: 'Real Estate', suffix: 'Properties' },
-  { sector: 'Construction', suffix: 'Builders' },
-  { sector: 'Professional Services', suffix: '& Co.' },
-  { sector: 'Arts & Media', suffix: 'Studio' }
-];
+// HERITAGE_BIZ_SECTORS (S323, six flavors by lineage hash) retired by engine.96 Task 11 — the family's field picks the business (BIZ_FIELD_BIRTH in applyBusinessDynamics.js).
 
 // One-time schema arm: SL LineageId column + Heritage_Ledger tab. Direct
 // writes are the §1.1 schema-setup carve-out (≤1× per spreadsheet lifetime).
@@ -1757,6 +1750,7 @@ function updateHeritage_(ss, ctx, cycle) {
       iStatus = idx('Status'), iSpouse = idx('SpouseId'), iParents = idx('ParentIds'),
       iChildren = idx('ChildrenIds'), iNW = idx('NetWorth'), iCiv = idx('CIV (y/n)'),
       iUsage = idx('UsageCount'), iBirth = idx('BirthYear'), iLife = idx('LifeHistory'),
+      iTagsH = idx('SkillTags'), iRoleH = idx('RoleType'), // engine.96 Task 11: the family's field
       iHood = idx('Neighborhood');
   var hlSheet = ss.getSheetByName('Heritage_Ledger');
 
@@ -2106,18 +2100,24 @@ function updateHeritage_(ss, ctx, cycle) {
           }
         }
         if (nextBizNum !== null) {
-          var capital = Math.max(50000, Math.round(stakeNW * 0.2));
-          var flavorIdx = (parseInt(heritageHash8_(linId), 16) + bizList.length) % HERITAGE_BIZ_SECTORS.length;
-          var flavor = HERITAGE_BIZ_SECTORS[flavorIdx];
-          var bizId = 'BIZ-' + String(nextBizNum++).padStart(5, '0');
-          var bizName = String(hl[hName]) + ' ' + flavor.suffix;
+          // engine.96 Task 11 (S413, builder's four questions): the business is
+          // born in the FAMILY'S FIELD (the members' SkillTags/roles; the staker's
+          // hood as the fallback), at the class's mint size, with capital capped
+          // at a year of the class's revenue — a start-up starts small; the
+          // lifecycle (Tasks 5–7) decides if it lives. The old roll hashed the
+          // lineage id onto a six-flavor list and priced revenue at 4× the stake.
           var bizNbhd = String(stakeRow[iHood] || '') || 'Downtown';
+          var fieldPick = heritageBusinessField_(ctx, members, stakeRow, iTagsH, iRoleH, bizNbhd);
+          var birth = heritageBusinessBirth_(fieldPick.field, String(hl[hName]), stakeNW);
+          var capital = birth.capital;
+          var bizId = 'BIZ-' + String(nextBizNum++).padStart(5, '0');
+          var bizName = birth.name;
           stakeRow[iNW] = stakeNW - capital;
           ctx.ledger.dirty = true;
           queueAppendIntent_(ctx, 'Business_Ledger',
-            [bizId, bizName, flavor.sector, bizNbhd, 2, 62000, capital * 4, 3 /* engine.96: whole percents on the tab, 0.03 read as 0.03 % and never hired */,
-             stakePop + ' ' + String(stakeRow[iFirst] || '') + ' ' + String(stakeRow[iLast] || '')],
-            'engine.65 heritage business roll (' + linId + ')', 'COMMUNITY', 70);
+            [bizId, bizName, birth.sector, bizNbhd, birth.emp, birth.sal, birth.revenue, birth.growth,
+             stakePop + ' ' + String(stakeRow[iFirst] || '') + ' ' + String(stakeRow[iLast] || '') + ' (founder)'],
+            'engine.65 heritage business roll (' + linId + ') — engine.96 T11 birth in the family\'s field (' + fieldPick.field + ', ' + fieldPick.source + ')', 'COMMUNITY', 70);
           bizList.push(bizId);
           hl[hBiz] = JSON.stringify(bizList);
           var openLife = String(stakeRow[iLife] || '');
@@ -2129,7 +2129,7 @@ function updateHeritage_(ss, ctx, cycle) {
           ctx.summary.storyHooks.push({
             hookType: 'HERITAGE_BUSINESS_OPENING', severity: 4, priority: 4,
             description: 'The ' + String(hl[hName]) + ' family (' + newTier + ' line) opened ' + bizName +
-              ' in ' + bizNbhd + ' — $' + capital + ' of family capital staked by ' + stakePop,
+              ' in ' + bizNbhd + ' — $' + capital + ' of family capital staked by ' + stakePop + ' (' + fieldPick.field + ')',
             cycleGenerated: cycle, neighborhood: bizNbhd, domain: 'COMMUNITY',
             text: 'The ' + String(hl[hName]) + ' family opened ' + bizName
           });

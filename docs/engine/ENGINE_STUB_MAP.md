@@ -776,6 +776,15 @@
 ## Phase 5: Citizens (`phase05-citizens/`)
 
 ### applyBusinessDynamics.js
+- **bizRowFields_(row, iTags, iRole)**
+
+- **bizHoodField_(ctx, hood)**
+  Sheets: Business_Ledger
+
+- **heritageBusinessField_(ctx, memberRows, stakeRow, iTags, iRole, hood)**
+
+- **heritageBusinessBirth_(field, familyName, stakeNetWorth)**
+
 - **bizSectorClass_(sector)**
 
 - **bizParseGrowth_(v)**
@@ -3783,4 +3792,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 188
-**Functions mapped:** 1287
+**Functions mapped:** 1291

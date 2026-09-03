@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 188 · **Functions mapped:** 1287 · **S.* fields:** 350 · **Sheets:** 60
+**Files scanned:** 188 · **Functions mapped:** 1291 · **S.* fields:** 350 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -387,7 +387,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 |---|---|---|---:|---:|
 | `Advancement_Intake1` | _(none)_ | `phase05-citizens/processAdvancementIntake.js::checkEmergencePromotions_`, `phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_`, `phase05-citizens/processAdvancementIntake.js::processAdvancementRows_`, `phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_`, `phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_`, …(+2 more) | 0 | 7 |
 | `Business_Archive` | _(none)_ | `phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_` | 0 | 1 |
-| `Business_Ledger` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/applyChaosDecay.js::applyChaosDecay_`, `phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, …(+1 more) | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_`, `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase04-events/chaosCarsEngine.js::loadBusinessRows_`, `phase04-events/chaosCarsEngine.test.js::makeCtx`, `phase04-events/chaosCarsEngine.test.js::reset`, …(+16 more) | 6 | 21 |
+| `Business_Ledger` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/applyChaosDecay.js::applyChaosDecay_`, `phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_`, `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, …(+1 more) | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_`, `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase04-events/chaosCarsEngine.js::loadBusinessRows_`, `phase04-events/chaosCarsEngine.test.js::makeCtx`, `phase04-events/chaosCarsEngine.test.js::reset`, …(+17 more) | 6 | 22 |
 | `Chaos_Cars` | _(none)_ | `phase05-citizens/applyChaosDecay.js::applyChaosDecay_` | 0 | 1 |
 | `Chicago_Citizens` | _(none)_ | `phase05-citizens/generateChicagoCitizensv1.js::generateChicagoCitizens_` | 0 | 1 |
 | `Chicago_Feed` | _(none)_ | `phase08-v3-chicago/v3ChicagoWriter.js::saveV3Chicago_`, `utilities/diagnoseDashboardData.js::diagnoseDashboardData` | 0 | 2 |

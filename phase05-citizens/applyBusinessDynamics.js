@@ -57,8 +57,118 @@ var BIZ_DYNAMICS_REQUIRED_KEYS = [
   'bizDeclineStreak' // Task 6 (S413): distress cycles before shedding starts — not in the signed table; proposed 4, half the closure streak
 ];
 
-// Sector mint medians — SECTOR_ECON_SEEDS' rev per class (the closure floor's denominator)
-var BIZ_CLASS_MINT_REVENUE = { faith: 600000, retail: 380000, food: 720000, health: 4000000, tech: 9000000, professional: 6200000, construction: 8000000, arts: 800000, education: 1200000, 'default': 500000 };
+// The class mint table — the engine copy of scripts/ingestPublishedEntities.js
+// SECTOR_ECON_SEEDS (engine.85 Task 8, S336): what a business of each class IS
+// at birth. Every engine-side minter reads it (engine.96 Task 11); the Node
+// minters read the scripts copy. Same numbers, two runtimes.
+var BIZ_CLASS_MINT = {
+  faith:        { emp: 8,  sal: 52000,  rev: 600000,  growth: 2 },
+  retail:       { emp: 4,  sal: 42000,  rev: 380000,  growth: 2 },
+  food:         { emp: 11, sal: 48000,  rev: 720000,  growth: 3 },
+  health:       { emp: 38, sal: 85000,  rev: 4000000, growth: 3 },
+  tech:         { emp: 45, sal: 120000, rev: 9000000, growth: 8 },
+  professional: { emp: 26, sal: 95000,  rev: 6200000, growth: 4 },
+  construction: { emp: 30, sal: 80000,  rev: 8000000, growth: 5 },
+  arts:         { emp: 9,  sal: 55000,  rev: 800000,  growth: 3 },
+  education:    { emp: 15, sal: 62000,  rev: 1200000, growth: 2 },
+  'default':    { emp: 6,  sal: 45000,  rev: 500000,  growth: 2 }
+};
+// Sector mint medians — the closure floor's denominator (derived, one source)
+var BIZ_CLASS_MINT_REVENUE = (function () { var o = {}; for (var k in BIZ_CLASS_MINT) if (BIZ_CLASS_MINT.hasOwnProperty(k)) o[k] = BIZ_CLASS_MINT[k].rev; return o; })();
+
+// engine.96 Task 11 (S413): a citizen's FIELD (the hiring category a SkillTag
+// resolves to) → the class a business in that field is, the name it takes, and
+// the Sector label it carries (one sectorCategory_ round-trips back to the field).
+var BIZ_FIELD_BIRTH = {
+  'Creative & Arts':          { cls: 'arts',         suffix: 'Studio',     sector: 'Arts & Media' },
+  'Tech & Innovation':        { cls: 'tech',         suffix: 'Systems',    sector: 'Tech' },
+  'Professional':             { cls: 'professional', suffix: '& Co.',      sector: 'Professional Services' },
+  'Education':                { cls: 'education',    suffix: 'Academy',    sector: 'Education' },
+  'Healthcare':               { cls: 'health',       suffix: 'Clinic',     sector: 'Healthcare' },
+  'Construction & Baylight':  { cls: 'construction', suffix: 'Builders',   sector: 'Construction' },
+  'Port & Labor':             { cls: 'construction', suffix: 'Freight',    sector: 'Port & Logistics' },
+  'Transit & Infrastructure': { cls: 'construction', suffix: 'Works',      sector: 'Infrastructure' },
+  'Faith & Community':        { cls: 'faith',        suffix: 'Fellowship', sector: 'Community Organization' },
+  'Food & Culture':           { cls: 'food',         suffix: 'Kitchen',    sector: 'Restaurant & Dining' },
+  'Small Business':           { cls: 'retail',       suffix: 'Mercantile', sector: 'Retail' },
+  'Government & Civic':       { cls: 'professional', suffix: 'Advisory',   sector: 'Civic Affairs' }
+};
+
+// The field a citizen row stands in: every SkillTags token through
+// skillTagField_ (both truths; athlete/coach/scout → nothing), else the role.
+function bizRowFields_(row, iTags, iRole) {
+  var out = [];
+  var tags = iTags >= 0 ? String(row[iTags] || '').split('|') : [];
+  for (var t = 0; t < tags.length; t++) {
+    var f = (typeof skillTagField_ === 'function') ? skillTagField_(tags[t]) : null;
+    if (f && out.indexOf(f) < 0) out.push(f);
+  }
+  if (!out.length && iRole >= 0 && typeof roleFieldOf_ === 'function') {
+    var rf = roleFieldOf_(row[iRole]);
+    var rff = rf && typeof skillTagField_ === 'function' ? skillTagField_(rf) : null;
+    if (rff) out.push(rff);
+  }
+  return out;
+}
+
+// The hood's most common business field on the Business_Ledger (the fallback
+// for a line with no field of its own). null when the hood has no rows.
+function bizHoodField_(ctx, hood) {
+  if (!hood) return null;
+  ctx._bizHoodField96 = ctx._bizHoodField96 || {};
+  if (ctx._bizHoodField96.hasOwnProperty(hood)) return ctx._bizHoodField96[hood];
+  var best = null;
+  try {
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+    var v = sheet ? sheet.getDataRange().getValues() : null;
+    if (v && v.length > 1) {
+      var h = v[0], iS = h.indexOf('Sector'), iH = h.indexOf('Neighborhood');
+      var count = {};
+      for (var r = 1; r < v.length && iS >= 0 && iH >= 0; r++) {
+        if (String(v[r][iH] || '').trim() !== hood) continue;
+        var cat = (typeof sectorCategory_ === 'function') ? sectorCategory_(v[r][iS], true) : null;
+        if (!cat || !BIZ_FIELD_BIRTH[cat]) continue;
+        count[cat] = (count[cat] || 0) + 1;
+        if (best === null || count[cat] > count[best] || (count[cat] === count[best] && cat < best)) best = cat;
+      }
+    }
+  } catch (e) { Logger.log('bizHoodField_: ' + e.message); }
+  ctx._bizHoodField96[hood] = best;
+  return best;
+}
+
+// The field a heritage line opens in: the most common field across its living
+// members, a tie to the staker's own, else the staker's hood, else Small Business.
+function heritageBusinessField_(ctx, memberRows, stakeRow, iTags, iRole, hood) {
+  var tally = {};
+  for (var m = 0; m < memberRows.length; m++) {
+    var fs = bizRowFields_(memberRows[m], iTags, iRole);
+    for (var f = 0; f < fs.length; f++) tally[fs[f]] = (tally[fs[f]] || 0) + 1;
+  }
+  var stakerFields = stakeRow ? bizRowFields_(stakeRow, iTags, iRole) : [];
+  var best = null, bestN = 0;
+  for (var k in tally) {
+    if (!tally.hasOwnProperty(k) || !BIZ_FIELD_BIRTH[k]) continue;
+    var n = tally[k];
+    if (n > bestN || (n === bestN && stakerFields.indexOf(k) >= 0 && stakerFields.indexOf(best) < 0) || (n === bestN && stakerFields.indexOf(k) >= 0 === stakerFields.indexOf(best) >= 0 && k < best)) { best = k; bestN = n; }
+  }
+  if (best) return { field: best, source: 'family' };
+  var hf = bizHoodField_(ctx, hood);
+  if (hf) return { field: hf, source: 'hood' };
+  return { field: 'Small Business', source: 'default' };
+}
+
+// What the business IS at birth: class sizes, capital capped at a year of the
+// class's revenue (a start-up costs about a year of what it makes), revenue at
+// birth = the capital. Pure.
+function heritageBusinessBirth_(field, familyName, stakeNetWorth) {
+  var spec = BIZ_FIELD_BIRTH[field] || BIZ_FIELD_BIRTH['Small Business'];
+  var mint = BIZ_CLASS_MINT[spec.cls] || BIZ_CLASS_MINT['default'];
+  var capital = Math.max(50000, Math.min(Math.round((Number(stakeNetWorth) || 0) * 0.2), mint.rev));
+  return { name: String(familyName) + ' ' + spec.suffix, sector: spec.sector, cls: spec.cls,
+    emp: mint.emp, sal: mint.sal, revenue: capital, growth: mint.growth, capital: capital };
+}
+
 
 var BIZ_ARCHIVE_HEADERS = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel', 'ArchiveReason', 'ExitCycle', 'SourceEventId', 'ClosedCycle'];
 
@@ -374,6 +484,12 @@ if (typeof module !== 'undefined' && module.exports) {
     applyBusinessDynamics_: applyBusinessDynamics_,
     archiveClosedBusinesses_: archiveClosedBusinesses_,
     BIZ_ARCHIVE_HEADERS: BIZ_ARCHIVE_HEADERS,
-    BIZ_CLASS_MINT_REVENUE: BIZ_CLASS_MINT_REVENUE
+    BIZ_CLASS_MINT_REVENUE: BIZ_CLASS_MINT_REVENUE,
+    BIZ_CLASS_MINT: BIZ_CLASS_MINT,
+    BIZ_FIELD_BIRTH: BIZ_FIELD_BIRTH,
+    bizRowFields_: bizRowFields_,
+    bizHoodField_: bizHoodField_,
+    heritageBusinessField_: heritageBusinessField_,
+    heritageBusinessBirth_: heritageBusinessBirth_
   };
 }

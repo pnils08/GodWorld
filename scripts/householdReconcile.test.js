@@ -437,5 +437,40 @@ console.log('engine.155 Door C: an owned home + a Tier ≤ 2 name + the balance 
   assert('Door C runs after Door B and before the aggregates', wsrc2.indexOf("foundLine_([bRow], bName, 'B');") < wsrc2.indexOf("foundLine_(unitC, famC, 'C');") && wsrc2.indexOf("foundLine_(unitC, famC, 'C');") < wsrc2.indexOf('// ── aggregates + score accrual'));
 }
 
+// ═══ engine.96 Task 11 (S413) — the heritage roll, born in the family's field ═══
+console.log('engine.96 T11 the heritage roll mints in the family\'s field at the class size');
+{
+  const R2 = (rel) => fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
+  const appended = [];
+  const updateHeritageT11 = new Function('Logger', 'queueAppendIntent_', 'safeRand_', 'inWorldStamp_', 'recordHookRipple_', 'parseJSON', 'ECONOMIC_PARAMETERS',
+    CAL_SRC + '\n' + R2('../phase05-citizens/educationCareerEngine.js') + '\n' + R2('../phase05-citizens/runCareerEngine.js') + '\n' + R2('../phase05-citizens/applyBusinessDynamics.js') + '\n' + R2('../phase05-citizens/generationalWealthEngine.js') + '\nreturn updateHeritage_;')(
+    { log() {} }, (ctx, tab, row, reason) => appended.push({ tab, row, reason }), (ctx) => ctx.rng, () => 'Y3C110', () => {}, (v, f) => { try { return JSON.parse(v); } catch (e) { return f; } }, []);
+  const HDR = SL_HEADER.concat(['Tier', 'LineageId', 'SpouseId', 'UsageCount', 'CIV (y/n)', 'LifeHistory', 'SkillTags', 'RoleType']);
+  const hi = (n) => HDR.indexOf(n);
+  const person = (popid, first, last, hood, nw, line, tags, role) => cit(popid, first, last, hood, 90000, { netWorth: nw }).concat([1, line, '', 0, '', 'Y2C1 — born', tags, role]);
+  const HL_HDR = ['LineageId', 'FamilyName', 'FounderPopId', 'FoundedCycle', 'FoundedDoor', 'Generations', 'LivingMembers', 'MembersList', 'HeritageScore', 'HeritageTier', 'TotalNetWorth', 'HomesOwned', 'BusinessesOwned', 'CivicMembers', 'FameMembers', 'LastUpdated'];
+  const people = [
+    person('POP-00018', 'Benji', 'Dillon', 'Rockridge', 400000000, 'LIN-00002', 'athlete', 'Pitcher, Oakland A\'s Legend'),
+    person('POP-00742', 'Maya', 'Torres-Dillon', 'Rockridge', 50000, 'LIN-00002', 'Education', 'High School Science Teacher'),
+  ];
+  const sheets = {
+    Heritage_Ledger: mockSheet([HL_HDR.slice(), ['LIN-00002', 'Dillon', 'POP-00018', 103, 'A', 1, 2, '["POP-00018","POP-00742"]', 60, 'Established', 400050000, 1, '[]', 0, 1, 109]]),
+    Business_Ledger: mockSheet([['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'], ['BIZ-00179', 'Night Walk Records', 'Retail', 'Rockridge', 4, 42000, 380000, 2, '']]),
+    Household_Ledger: mockSheet([HH_HEADER.slice()]),
+    Family_Relationships: mockSheet([['RelationshipId', 'Citizen1', 'Citizen2', 'RelationshipType', 'SinceCycle', 'Status']])
+  };
+  const hwWrites = [];
+  const ctx = { ss: { getSheetByName: (n) => sheets[n] || null }, ledger: { headers: HDR.slice(), rows: people, dirty: false }, summary: { cycleId: 110, storyHooks: [] }, config: { cycleCount: 110, bizIdHighWater: 179 }, rng: () => 0.01, now: 'Y3C110', _sheets: sheets,
+    cache: { getData: () => ({ exists: true, values: [['Key', 'Value', 'Description'], ['bizIdHighWater', 179, '']] }), queueWrite: (tab, r, c, v) => hwWrites.push([tab, r, c, v]) } };
+  const res = updateHeritageT11(ctx.ss, ctx, 110);
+  const biz = appended.find(a => a.tab === 'Business_Ledger');
+  assert('an Established line with an open slot rolls (rng 0.01 < 0.15) and mints ONE business row', res.businessesOpened === 1 && !!biz, JSON.stringify(appended));
+  assert('born in the family\'s field: Maya\'s Education → "Dillon Academy", Sector Education, 15 staff at $62K, revenue = capital = $1.2M (the class cap, not $80M), growth 2', biz && biz.row[1] === 'Dillon Academy' && biz.row[2] === 'Education' && biz.row[4] === 15 && biz.row[5] === 62000 && biz.row[6] === 1200000 && biz.row[7] === 2, JSON.stringify(biz && biz.row));
+  assert('Key_Personnel carries the staker with the founder tag; the BIZ-ID follows the high-water mark', biz && biz.row[8] === 'POP-00018 Benji Dillon (founder)' && biz.row[0] === 'BIZ-00180', JSON.stringify(biz && biz.row));
+  assert('the stake leaves the staker: Benji\'s NetWorth − $1.2M; the reason names the field', Number(people[0][hi('NetWorth')]) === 400000000 - 1200000 && /Education, family/.test(biz.reason));
+  assert('the hook names the field', ctx.summary.storyHooks.some(h => h.hookType === 'HERITAGE_BUSINESS_OPENING' && /Dillon Academy/.test(h.description) && /\(Education\)/.test(h.description)));
+  assert('the BIZ-ID high-water mark advances to 180 through the cache write', hwWrites.some(w => w[0] === 'World_Config' && w[3] === 180) && ctx.config.bizIdHighWater === 180, JSON.stringify(hwWrites));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

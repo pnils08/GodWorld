@@ -99,7 +99,7 @@ console.log('wiring');
   const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
   assert('finalizeCycleState carries businessDynamics from S.businessDynamicsState', /businessDynamics: S\.businessDynamicsState \|\| \{\}/.test(fin));
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
-  assert('heritage business mint seeds Growth_Rate in whole percents (3, not 0.03)', /capital \* 4, 3 \/\*/.test(gw) && !/capital \* 4, 0\.03/.test(gw));
+  assert('heritage business mint seeds Growth_Rate from the class table in whole percents (the 0.03 and the 4× stake are gone)', /birth\.emp, birth\.sal, birth\.revenue, birth\.growth/.test(gw) && !/capital \* 4/.test(gw));
 }
 console.log('Task 6 — decline sheds; Task 7 — closure winds down, then archives');
 {
@@ -157,6 +157,46 @@ console.log('Task 6 — decline sheds; Task 7 — closure winds down, then archi
   assert('runCareerEngine_ folds S.businessDeclines into careerSignals.businessDeltas[id].lost after its own init', /if \(S\.businessDeclines\) \{[\s\S]*?S\.careerSignals\.businessDeltas\[dk\]\.lost \+= dn;/.test(career));
   const orch2 = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'godWorldEngine2.js'), 'utf8');
   assert('Phase11-BusinessArchive runs after Phase11-MediaIntake at both entry points', (orch2.match(/'Phase11-BusinessArchive'/g) || []).length === 2 && orch2.indexOf("'Phase11-MediaIntake'") < orch2.indexOf("'Phase11-BusinessArchive'") && orch2.lastIndexOf("'Phase11-MediaIntake'") < orch2.lastIndexOf("'Phase11-BusinessArchive'"));
+}
+
+console.log('Task 11 — the birth rule: field → class, sizes, capital cap');
+{
+  const seedsSrc = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'ingestPublishedEntities.js'), 'utf8');
+  const seedNums = [...seedsSrc.matchAll(/\{ emp: (\d+), sal: (\d+), rev: (\d+), growth: (\d+) \}/g)].map(m => m.slice(1, 5).map(Number));
+  const engineNums = ['faith', 'retail', 'food', 'health', 'tech', 'professional', 'construction', 'arts', 'education', 'default'].map(k => { const c = mod.BIZ_CLASS_MINT[k]; return [c.emp, c.sal, c.rev, c.growth]; });
+  assert('BIZ_CLASS_MINT mirrors the scripts SECTOR_ECON_SEEDS numbers, class for class (10 incl. the fallback)', JSON.stringify(seedNums) === JSON.stringify(engineNums), JSON.stringify([seedNums, engineNums]));
+  assert('BIZ_CLASS_MINT_REVENUE derives from the one table', mod.BIZ_CLASS_MINT_REVENUE.tech === 9000000 && mod.BIZ_CLASS_MINT_REVENUE['default'] === 500000);
+  const careerSrc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'runCareerEngine.js'), 'utf8');
+  const sectorCategory_ = new Function('Logger', careerSrc + '\nreturn sectorCategory_;')({ log() {} });
+  const fields = Object.keys(mod.BIZ_FIELD_BIRTH);
+  const roundTrip = fields.map(f => [f, sectorCategory_(mod.BIZ_FIELD_BIRTH[f].sector, true)]);
+  assert('every birth Sector label round-trips through the hiring engine back to its field (12/12)', roundTrip.every(([f, c]) => c === f), JSON.stringify(roundTrip.filter(([f, c]) => c !== f)));
+  assert('every field maps to a class in the mint table', fields.every(f => mod.BIZ_CLASS_MINT[mod.BIZ_FIELD_BIRTH[f].cls]));
+  const b1 = mod.heritageBusinessBirth_('Education', 'Dillon', 400000000);
+  assert('Dillon at $400M in Education: "Dillon Academy", 15 staff at $62K, capital + revenue capped at the class\'s $1.2M (not $80M / $320M)', b1.name === 'Dillon Academy' && b1.sector === 'Education' && b1.emp === 15 && b1.sal === 62000 && b1.capital === 1200000 && b1.revenue === 1200000 && b1.growth === 2, JSON.stringify(b1));
+  const b2 = mod.heritageBusinessBirth_('Creative & Arts', 'Corliss', 2000000);
+  assert('Corliss at $2M in Creative & Arts: "Corliss Studio", capital 20 % = $400K (under the $800K class cap), revenue = capital', b2.name === 'Corliss Studio' && b2.capital === 400000 && b2.revenue === 400000 && b2.emp === 9);
+  assert('the $50K floor holds for a thin stake; an unknown field falls to Small Business', mod.heritageBusinessBirth_('Small Business', 'X', 100000).capital === 50000 && mod.heritageBusinessBirth_('Nonsense', 'X', 1e9).name === 'X Mercantile');
+  // fields from rows
+  global.skillTagField_ = (t) => ({ 'Creative & Arts': 'Creative & Arts', 'Education': 'Education', 'Professional': 'Professional', 'Trades': 'Construction & Baylight', 'Tech & Innovation': 'Tech & Innovation' })[String(t).trim()] || null;
+  global.roleFieldOf_ = (r) => /teacher/i.test(String(r)) ? 'Education' : null;
+  const H = ['POPID', 'SkillTags', 'RoleType', 'Neighborhood'];
+  const r = (tags, role) => ['P', tags, role, 'Rockridge'];
+  assert('row fields: both SkillTags truths resolve; athlete resolves to nothing; the role is the fallback', JSON.stringify(mod.bizRowFields_(r('Creative & Arts|Trades', ''), 1, 2)) === '["Creative & Arts","Construction & Baylight"]' && mod.bizRowFields_(r('athlete', 'Pitcher'), 1, 2).length === 0 && JSON.stringify(mod.bizRowFields_(r('', 'High School Teacher'), 1, 2)) === '["Education"]');
+  const ctxH = { ss: { getSheetByName: (n) => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => [['BIZ_ID', 'Sector', 'Neighborhood'], ['B1', 'Restaurant & Dining', 'Rockridge'], ['B2', 'Retail', 'Rockridge'], ['B3', 'Restaurant & Dining', 'Rockridge'], ['B4', 'Sports Franchise', 'Rockridge']] }) } : null } };
+  global.sectorCategory_ = sectorCategory_;
+  const dillon = [r('athlete', 'Pitcher'), r('Education', 'High School Science Teacher'), r('', 'Grade Schooler')];
+  assert('the Dillon line: Benji resolves to nothing, Maya\'s Education wins (family)', JSON.stringify(mod.heritageBusinessField_(ctxH, dillon, dillon[0], 1, 2, 'Rockridge')) === '{"field":"Education","source":"family"}');
+  const kelley = [r('athlete', 'Shortstop')];
+  assert('the Kelley line (athlete only): the hood\'s most common business field — Rockridge reads Food & Culture', JSON.stringify(mod.heritageBusinessField_(ctxH, kelley, kelley[0], 1, 2, 'Rockridge')) === '{"field":"Food & Culture","source":"hood"}');
+  const tie = [r('Creative & Arts', ''), r('Professional', '')];
+  assert('a tie goes to the staker\'s own field', mod.heritageBusinessField_(ctxH, tie, tie[1], 1, 2, 'Nowhere').field === 'Professional' && mod.heritageBusinessField_(ctxH, tie, tie[0], 1, 2, 'Nowhere').field === 'Creative & Arts');
+  assert('no field anywhere → Small Business (default)', JSON.stringify(mod.heritageBusinessField_(ctxH, [r('', '')], null, 1, 2, 'Nowhere')) === '{"field":"Small Business","source":"default"}');
+  const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
+  assert('the heritage roll reads the birth rule and writes "(founder)" into Key_Personnel; the flavor table is retired', /heritageBusinessField_\(ctx, members, stakeRow, iTagsH, iRoleH, bizNbhd\)/.test(gw) && /heritageBusinessBirth_\(fieldPick\.field, String\(hl\[hName\]\), stakeNW\)/.test(gw) && /\+ ' \(founder\)'\]/.test(gw) && !/HERITAGE_BIZ_SECTORS\[/.test(gw) && !/capital \* 4/.test(gw));
+  const intake = fs.readFileSync(path.join(__dirname, '..', 'scripts', 'processBusinessIntake.js'), 'utf8');
+  assert('the intake script is born alive through economicSeedForSector and never runs on require', /economicSeedForSector\(\(entry\.Sector/.test(intake) && !/Growth_Rate: 'New'/.test(intake) && /if \(require\.main === module\)/.test(intake));
+  delete global.skillTagField_; delete global.roleFieldOf_; delete global.sectorCategory_;
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -2,7 +2,7 @@
   "generated": "2026-09-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 188,
-  "functionsMapped": 1287,
+  "functionsMapped": 1291,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4517,6 +4517,7 @@
         "phase04-events/chaosCarsEngine.test.js::reset",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
+        "phase05-citizens/applyBusinessDynamics.js::bizHoodField_",
         "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/applyChaosDecay.test.js::ctxWith",

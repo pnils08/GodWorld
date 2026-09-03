@@ -127,12 +127,27 @@ function credentialRankOf_(row, iEdu) {
   return credentialRank_(row[iEdu]);
 }
 
-// E2 beneficiary order: longest since the last promotion (unchanged primary),
-// then the higher credential, then the lower earner, then POPID.
-function promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop) {
+// engine.151 (S413): the rung's pay factor — tierPayFactor_ lives in
+// processAdvancementIntake.js beside TIER_BAR (shared Apps Script scope); a
+// missing helper or column reads as Tier 4 (×1).
+function tierPayOf_(row, iTier) {
+  if (!row || iTier < 0 || typeof tierPayFactor_ !== 'function') return 1;
+  return tierPayFactor_(row[iTier]);
+}
+// The wait a promotion order ranks on: cycles since the last promotion (a
+// never-promoted row waits the whole clock), × the rung's pay (engine.151).
+function promotionWait_(row, iLastPromo, iTier, cycle) {
+  var waited = Math.max(0, (Number(cycle) || 0) - (Number(row[iLastPromo]) || 0));
+  return waited * tierPayOf_(row, iTier);
+}
+
+// E2 beneficiary order: longest since the last promotion (unchanged primary,
+// engine.151: the wait carries the rung's pay), then the higher credential,
+// then the lower earner, then POPID.
+function promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle) {
   return function(a, b) {
-    var la = Number(rows[a][iLastPromo]) || 0, lb = Number(rows[b][iLastPromo]) || 0;
-    if (la !== lb) return la - lb;
+    var wa = promotionWait_(rows[a], iLastPromo, iTier, cycle), wb = promotionWait_(rows[b], iLastPromo, iTier, cycle);
+    if (wa !== wb) return wb - wa;
     var ea = credentialRankOf_(rows[a], iEdu), eb = credentialRankOf_(rows[b], iEdu);
     if (ea !== eb) return eb - ea;
     var ia = Number(rows[a][iIncome]) || 0, ib = Number(rows[b][iIncome]) || 0;
@@ -141,12 +156,17 @@ function promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop) {
   };
 }
 
-// E3 same-field slot order on pool entries {income, edu, pop}: the poorest
+// E3 same-field slot order on pool entries {income, edu, pop, tier}: the poorest
 // $10k band first (raw-income ties are too rare for the credential to ever
 // be a lived cause), then the higher credential, then raw income, then POPID.
-function hireIncomeBand_(income) { return Math.floor((Number(income) || 0) / 10000); }
+// engine.151: the band is taken on income ÷ the rung's pay — need still leads,
+// a rung buys up to ~2 bands of queue position (a T1 at 50k queues as 33k).
+function hireIncomeBand_(income, tier) {
+  var pay = (typeof tierPayFactor_ === 'function') ? tierPayFactor_(tier) : 1;
+  return Math.floor((Number(income) || 0) / pay / 10000);
+}
 function hireSlotOrder_(a, b) {
-  var ba = hireIncomeBand_(a.income), bb = hireIncomeBand_(b.income);
+  var ba = hireIncomeBand_(a.income, a.tier), bb = hireIncomeBand_(b.income, b.tier);
   if (ba !== bb) return ba - bb;
   var ea = Number(a.edu) || 0, eb = Number(b.edu) || 0;
   if (ea !== eb) return eb - ea;
@@ -218,14 +238,19 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
     if (promoP > 0 && draw < promoP) {
       // engine.144: longest-waiting first (unchanged), then the credential — one
       // cause among others, never a gate — then the lower earner, then POPID.
-      var ranked = b.staff.slice().sort(promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop));
+      var ranked = b.staff.slice().sort(promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle));
       var who = ranked[0];
       var pRow = rows[who];
-      var byCredential = ranked.length > 1 &&
-        (Number(rows[ranked[1]][iLastPromo]) || 0) === (Number(pRow[iLastPromo]) || 0) &&
-        credentialRankOf_(rows[ranked[1]], iEdu) < credentialRankOf_(pRow, iEdu);
+      var runnerUp = ranked.length > 1 ? rows[ranked[1]] : null;
+      // engine.151: the rung counted when a lower rung had waited as long or longer on the raw clock
+      var byTier = !!runnerUp && tierPayOf_(pRow, iTier) > tierPayOf_(runnerUp, iTier) &&
+        (Number(runnerUp[iLastPromo]) || 0) <= (Number(pRow[iLastPromo]) || 0);
+      var byCredential = !byTier && !!runnerUp &&
+        promotionWait_(runnerUp, iLastPromo, iTier, cycle) === promotionWait_(pRow, iLastPromo, iTier, cycle) &&
+        credentialRankOf_(runnerUp, iEdu) < credentialRankOf_(pRow, iEdu);
       var promoVerb = 'Promoted at ' + b.name +
-        (byCredential ? ' (the ' + String(pRow[iEdu]).trim() + ' counted)' : '');
+        (byTier ? ' (Tier ' + (Math.round(Number(pRow[iTier])) || 4) + ' counted)' :
+         byCredential ? ' (the ' + String(pRow[iEdu]).trim() + ' counted)' : '');
       pRow[iIncome] = Math.round((Number(pRow[iIncome]) || 0) * (1.06 + roll() * 0.06)); // +6–12%
       if (iLastPromo >= 0) pRow[iLastPromo] = cycle;
       if (typeof stampPromotion_ === 'function') {
@@ -1109,7 +1134,8 @@ function runCareerEngine_(ctx) {
       var tags = safeStr(uRow[iTags]).trim();
       if (!tags) continue; // untagged citizens aren't matchable — blank is honest
       pool.push({ r: ur, tags: tags.split('|'), income: Number(uRow[iIncome]) || 0, pop: safeStr(uRow[iPopID]),
-        edu: iEduLevel >= 0 ? credentialRankOf_(uRow, iEduLevel) : 0, eduLabel: iEduLevel >= 0 ? safeStr(uRow[iEduLevel]).trim() : '' });
+        edu: iEduLevel >= 0 ? credentialRankOf_(uRow, iEduLevel) : 0, eduLabel: iEduLevel >= 0 ? safeStr(uRow[iEduLevel]).trim() : '',
+        tier: Math.round(Number(uRow[iTier])) || 4 }); // engine.151: the rung pays on the slot order
     }
     if (!pool.length) return;
 
@@ -1168,7 +1194,10 @@ function runCareerEngine_(ctx) {
           isCross
             ? 'Changed fields — hired at ' + bizName + ' (' + cat + ')'
             : 'Hired at ' + bizName + (
-                (leftOut && hireIncomeBand_(leftOut.income) === hireIncomeBand_(pool[hIdx].income) &&
+                // engine.151: the rung counted when the one left out was poorer on the raw band
+                (leftOut && hireIncomeBand_(leftOut.income, 4) < hireIncomeBand_(pool[hIdx].income, 4))
+                  ? ' (Tier ' + pool[hIdx].tier + ' counted)' :
+                (leftOut && hireIncomeBand_(leftOut.income, leftOut.tier) === hireIncomeBand_(pool[hIdx].income, pool[hIdx].tier) &&
                  (Number(leftOut.edu) || 0) < (Number(pool[hIdx].edu) || 0) && pool[hIdx].eduLabel)
                   ? ' (the ' + pool[hIdx].eduLabel + ' counted)' : ''),
           '', cycle

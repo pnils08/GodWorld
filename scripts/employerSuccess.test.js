@@ -220,6 +220,68 @@ const bl = rows => [BLH].concat(rows);
   }
 }
 
+// ── engine.151 (S413): Tier pays on the promotion wait and the hire band ────
+{
+  // without the helper in scope (processAdvancementIntake.js not loaded here) every door reads ×1 — the suites above ran that way
+  assert('3.0 no helper → ×1 (the fallback the suites above ran under)', sandbox.tierPayOf_(row({ Tier: 1 }), I('Tier')) === 1 && sandbox.hireIncomeBand_(50000, 1) === 5);
+  sandbox.tierPayFactor_ = t => ({ 1: 1.5, 2: 1.3, 3: 1.15, 4: 1 })[Math.round(Number(t)) || 4] || 1; // the live table (tierLadderState.test.js proves it)
+  assert('3.0b helper in scope → the rung pays', sandbox.tierPayOf_(row({ Tier: 3 }), I('Tier')) === 1.15 && sandbox.tierPayOf_(row({ Tier: '' }), I('Tier')) === 1);
+  // 3a a Tier 3 who waited 40 cycles outranks a Tier 4 who waited 45 (46 vs 45), and the line says so
+  {
+    const rows = [
+      row({ POPID: 'P4', Tier: 4, LastPromotionCycle: 155, Income: 60000 }),
+      row({ POPID: 'P3', Tier: 3, LastPromotionCycle: 160, Income: 70000 }),
+    ];
+    const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.0001, 0.5]);
+    const out = applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), 1);
+    const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
+    assert('3a Tier 3 (40 × 1.15 = 46) beats Tier 4 (45)', out.promotions === 1 && Number(g('P3')[I('LastPromotionCycle')]) === CYCLE && Number(g('P4')[I('Income')]) === 60000);
+    assert('3a the line names the rung', /\[Promotion\] Promoted at Da Dough \(Tier 3 counted\) after 8 years/.test(g('P3')[I('LifeHistory')]), g('P3')[I('LifeHistory')]);
+  }
+  // 3b a much longer raw wait still beats the rung; no suffix
+  {
+    const rows = [
+      row({ POPID: 'P4', Tier: 4, LastPromotionCycle: 140, Income: 60000 }),
+      row({ POPID: 'P3', Tier: 3, LastPromotionCycle: 160, Income: 70000 }),
+    ];
+    const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.0001, 0.5]);
+    const out = applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), 1);
+    const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
+    assert('3b Tier 4 at 60 waited beats Tier 3 at 46', out.promotions === 1 && Number(g('P4')[I('LastPromotionCycle')]) === CYCLE);
+    assert('3b no suffix when the rung did not decide', !/counted/.test(g('P4')[I('LifeHistory')]), g('P4')[I('LifeHistory')]);
+  }
+  // 3c equal raw wait, the rung breaks the tie before the credential
+  {
+    const rows = [
+      row({ POPID: 'P4', Tier: 4, LastPromotionCycle: 0, Income: 60000, EducationLevel: 'doctorate' }),
+      row({ POPID: 'P3', Tier: 3, LastPromotionCycle: 0, Income: 70000, EducationLevel: 'hs-diploma' }),
+    ];
+    const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.0001, 0.5]);
+    applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), 1);
+    const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
+    assert('3c never-promoted tie: Tier 3 hs-diploma over Tier 4 doctorate, rung named', Number(g('P3')[I('LastPromotionCycle')]) === CYCLE && /\(Tier 3 counted\)/.test(g('P3')[I('LifeHistory')]));
+  }
+  // 3d Tier 1–2 stay outside the employer loop (engine.135 rule) — the pay never reaches them here
+  {
+    const rows = [row({ POPID: 'P2', Tier: 2, LastPromotionCycle: 0 }), row({ POPID: 'P4', Tier: 4, LastPromotionCycle: 100 })];
+    const { ctx, roll } = ctxWith(rows, bl([['BIZ-1', 'Da Dough', 'Bakery', 'Temescal', 6, 40000, 480000, 10]]), [0.0001, 0.5]);
+    applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), 1);
+    const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
+    assert('3d Tier 2 outside: the Tier 4 is promoted', Number(g('P4')[I('LastPromotionCycle')]) === CYCLE && Number(g('P2')[I('LastPromotionCycle')]) === 0);
+  }
+  // 3e E3 hire band on income ÷ pay
+  {
+    const O = sandbox.hireSlotOrder_;
+    const e = (pop, income, edu, tier) => ({ pop, income, edu, tier });
+    assert('3e band: 50k T1 → 3, 50k T3 → 4, 50k T4 → 5', sandbox.hireIncomeBand_(50000, 1) === 3 && sandbox.hireIncomeBand_(50000, 3) === 4 && sandbox.hireIncomeBand_(50000, 4) === 5);
+    assert('3e a Tier 3 at 55k queues ahead of a Tier 4 at 50k', [e('T4', 50000, 0, 4), e('T3', 55000, 0, 3)].sort(O)[0].pop === 'T3');
+    assert('3e need still leads: a Tier 4 at 30k beats a Tier 1 at 50k', [e('T1', 50000, 0, 1), e('T4', 30000, 0, 4)].sort(O)[0].pop === 'T4');
+    assert('3e blank tier reads as 4', [e('B', 50000, 0, ''), e('A', 50000, 0, 4)].sort(O)[0].pop === 'A');
+    assert('3e pool entries carry the rung + the hire line names it', /tier: Math\.round\(Number\(uRow\[iTier\]\)\) \|\| 4 \}\);/.test(src) && /' \(Tier ' \+ pool\[hIdx\]\.tier \+ ' counted\)'/.test(src));
+  }
+  delete sandbox.tierPayFactor_;
+}
+
 // ── gapFactor steers: below the attractor promotions are likelier, layoffs rarer ──
 {
   const mk = gf => { const { ctx, roll } = ctxWith([row({ POPID: 'P1' })], bl([['BIZ-1', 'X', 'Retail', 'Temescal', 6, 40000, 0, 10]]), [0.00025, 0.5]); return applyEmployerSuccess_(ctx, CYCLE, roll, [], makeS(), gf); };

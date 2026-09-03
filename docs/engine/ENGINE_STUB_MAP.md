@@ -893,6 +893,8 @@
 
 - **courtshipHousingBoost_(housingA, housingB)**
 
+- **courtshipTierBoost_(tierA, tierB)**
+
 - **buildBondLedgerIndex_(ctx)**
 
 - **processRomanceAndMarriage_(ctx)**
@@ -1446,6 +1448,8 @@
   Reads: S.homesPurchasedByLine, S.storyHooks
   Writes: S.storyHooks
 
+- **homeBuyChance_(bestTier)**
+
 - **trackHomeOwnership_(ss, ctx, cycle)**
   Reads: S.storyHooks
   Writes: S.homesPurchasedByLine, S.storyHooks
@@ -1615,6 +1619,8 @@
 - **processIntakeRows_(ss, now, cycle)**
   Sheets: Intake
 
+- **tierPayFactor_(tier)**
+
 - **dimCulturalFame_(ctx, popId, delta)**
   Sheets: Cultural_Ledger
 
@@ -1692,9 +1698,13 @@
 
 - **credentialRankOf_(row, iEdu)**
 
-- **promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop)**
+- **tierPayOf_(row, iTier)**
 
-- **hireIncomeBand_(income)**
+- **promotionWait_(row, iLastPromo, iTier, cycle)**
+
+- **promotionOrder_(rows, iLastPromo, iEdu, iIncome, iPop, iTier, cycle)**
+
+- **hireIncomeBand_(income, tier)**
 
 - **hireSlotOrder_(a, b)**
 
@@ -3708,4 +3718,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1259
+**Functions mapped:** 1264

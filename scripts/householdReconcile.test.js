@@ -302,5 +302,23 @@ console.log('engine.153 solo establishment on income alone; owned beats rented o
   assert('the courtship step reads the housing boost', /courtshipHousingBoost_\(lkA && lkA.householdId \? housingById/.test(bsrc));
 }
 
+// ═══ engine.151 (S413) — cut 5: Tier pays on the courtship step and the home roll ═
+console.log('engine.151 the rung pays on the courtship step and the home-buy roll');
+{
+  const pay = t => ({ 1: 1.5, 2: 1.3, 3: 1.15, 4: 1 })[Math.round(Number(t)) || 4] || 1; // the live table (tierLadderState.test.js proves it)
+  const bsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondEngine.js'), 'utf8');
+  const BE = new Function('Logger', 'tierPayFactor_', bsrc + '\nreturn { courtshipTierBoost_ };')({ log() {} }, pay);
+  assert('courtship: the pair\'s best rung pays — (3,4) 1.15, (4,1) 1.5, (4,4) 1, blanks 1', BE.courtshipTierBoost_(3, 4) === 1.15 && BE.courtshipTierBoost_(4, 1) === 1.5 && BE.courtshipTierBoost_(4, 4) === 1 && BE.courtshipTierBoost_(undefined, '') === 1);
+  const BE0 = new Function('Logger', bsrc + '\nreturn { courtshipTierBoost_ };')({ log() {} });
+  assert('courtship: no helper in scope → ×1', BE0.courtshipTierBoost_(1, 1) === 1);
+  assert('the step site multiplies the housing boost by the rung, under the same 0.5 cap', /boost \*= courtshipTierBoost_\(lkA \? lkA\.tier : 4, lkB \? lkB\.tier : 4\);\n\s*if \(boost > 1\) stepP = Math\.min\(0\.5, stepP \* boost\);/.test(bsrc));
+  assert('the GC draw stays an unweighted lottery (doctrine 10)', /var pid2 = singles\[Math\.floor\(rng\(\) \* singles\.length\)\];/.test(bsrc));
+  assert('the engine.59 flip orbit stays as ruled', /var tierFactor = \(A\.tier \+ B\.tier\) \/ 8;/.test(bsrc));
+  const wsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generationalWealthEngine.js'), 'utf8');
+  const WE = new Function('Logger', 'tierPayFactor_', wsrc + '\nreturn { homeBuyChance_, HOME_BUY_P };')({ log() {} }, pay);
+  assert('home roll: 6.0 / 6.9 / 7.8 / 9.0 % by best rung; eligibility untouched', Math.abs(WE.homeBuyChance_(4) - 0.06) < 1e-9 && Math.abs(WE.homeBuyChance_(3) - 0.069) < 1e-9 && Math.abs(WE.homeBuyChance_(2) - 0.078) < 1e-9 && Math.abs(WE.homeBuyChance_(1) - 0.09) < 1e-9 && /if \(combinedNW < price \* HOME_ELIGIBLE_NW\) continue;/.test(wsrc));
+  assert('the purchase roll reads the household\'s best rung', /if \(rng\(\) >= homeBuyChance_\(bestTier\)\) continue;/.test(wsrc) && /if \(mTier >= 1 && mTier < bestTier\) bestTier = mTier;/.test(wsrc));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

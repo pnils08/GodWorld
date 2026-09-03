@@ -701,6 +701,9 @@ function updateExistingBonds_(ctx) {
         // engine.153: owned > rented > none — read the household's HousingType
         var housingById = householdHousingById_(ctx);
         var boost = courtshipHousingBoost_(lkA && lkA.householdId ? housingById[lkA.householdId] : '', lkB && lkB.householdId ? housingById[lkB.householdId] : '');
+        // engine.151 (S413): the pair's best rung pays on the step — pace only; the
+        // GC draw stays a lottery (doctrine 10) and the engine.59 flip orbit stays as ruled.
+        boost *= courtshipTierBoost_(lkA ? lkA.tier : 4, lkB ? lkB.tier : 4);
         if (boost > 1) stepP = Math.min(0.5, stepP * boost);
       }
       if (rr < 0.02) intensity += 1.0;              // the week that changes everything
@@ -1871,6 +1874,13 @@ function courtshipHousingBoost_(housingA, housingB) {
   if (a === 'owned' || b === 'owned') return HOME_OWNED_COURTSHIP_BOOST;
   if (a || b) return HOUSEHOLD_COURTSHIP_BOOST;
   return 1;
+}
+// engine.151 (S413): the courtship-step multiplier for the pair's best rung —
+// tierPayFactor_ (processAdvancementIntake.js, shared scope); missing = ×1.
+function courtshipTierBoost_(tierA, tierB) {
+  if (typeof tierPayFactor_ !== 'function') return 1;
+  var a = Math.round(Number(tierA)) || 4, b = Math.round(Number(tierB)) || 4;
+  return tierPayFactor_(Math.min(a, b));
 }
 
 function buildBondLedgerIndex_(ctx) {

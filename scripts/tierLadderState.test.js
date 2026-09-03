@@ -15,7 +15,7 @@ const sandbox = {
   inWorldStamp_: (ctx) => 'Y3C4',
 };
 const src = (helperFile ? R(helperFile) + '\n' : '') + R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
-const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, processMediaUsage_, dimCulturalFame_, TIER_BAR, FAME_USAGE_BAR };')(...Object.values(sandbox));
+const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, processMediaUsage_, dimCulturalFame_, TIER_BAR, FAME_USAGE_BAR, TIER_PAY, tierPayFactor_ };')(...Object.values(sandbox));
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) { if (cond) { pass++; console.log('  ok   ' + name); } else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); } }
@@ -174,6 +174,15 @@ console.log('\n9. engine.118 — fame is permanent:');
   check('famous + no cultural row: registered once with role + hood by engine.118', registered.length === 1 && registered[0].name === 'Mike Paulson' && registered[0].j === 'engine.118' && registered[0].hood === 'Uptown' && r3.cultural === 2);
   E3.applyTierLadderState_(c3, 112);
   check('same ctx, second pass: no double registration', registered.length === 1);
+}
+
+// ═══ engine.151 (S413) — Tier pays: the one table beside the bars ═══════════
+{
+  check('TIER_PAY table 1.50 / 1.30 / 1.15 / 1.00', E.TIER_PAY[1] === 1.5 && E.TIER_PAY[2] === 1.3 && E.TIER_PAY[3] === 1.15 && E.TIER_PAY[4] === 1);
+  check('tierPayFactor_ reads the table; blank / 0 / 5 / junk read as Tier 4 (×1)',
+    E.tierPayFactor_(1) === 1.5 && E.tierPayFactor_('2') === 1.3 && E.tierPayFactor_(3) === 1.15 && E.tierPayFactor_(4) === 1 &&
+    E.tierPayFactor_('') === 1 && E.tierPayFactor_(0) === 1 && E.tierPayFactor_(5) === 1 && E.tierPayFactor_('x') === 1 && E.tierPayFactor_(undefined) === 1);
+  check('pay is monotone up the ladder', E.tierPayFactor_(1) > E.tierPayFactor_(2) && E.tierPayFactor_(2) > E.tierPayFactor_(3) && E.tierPayFactor_(3) > E.tierPayFactor_(4));
 }
 
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');

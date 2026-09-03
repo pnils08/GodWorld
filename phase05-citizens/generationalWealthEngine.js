@@ -1305,6 +1305,12 @@ var HOME_ELIGIBLE_NW = 0.35;      // of price: 20% down + reserves
 var HOME_DOWN = 0.20;             // of price paid at closing
 var HOME_MORTGAGE_MONTHLY = 0.8 * 0.07 / 12; // financed share x rate / 12
 var HOME_BUY_P = 0.06;            // per-cycle roll for an eligible household
+// engine.151 (S413): the eligible household's best rung multiplies the roll —
+// 6.0 / 6.9 / 7.8 / 9.0 % for Tier 4 / 3 / 2 / 1. Eligibility is untouched.
+function homeBuyChance_(bestTier) {
+  var pay = (typeof tierPayFactor_ === 'function') ? tierPayFactor_(bestTier) : 1;
+  return Math.min(0.5, HOME_BUY_P * pay);
+}
 
 function trackHomeOwnership_(ss, ctx, cycle) {
   var results = { purchased: 0 };
@@ -1316,7 +1322,7 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var idx = function(n) { return header.indexOf(n); };
   var iPop = idx('POPID'), iNW = idx('NetWorth'), iStatus = idx('Status'),
       iLife = idx('LifeHistory'), iLin = idx('LineageId'), iFirst = idx('First'),
-      iLast = idx('Last'), iBirthH = idx('BirthYear');
+      iLast = idx('Last'), iBirthH = idx('BirthYear'), iTierH = idx('Tier'); // engine.151
   if (iPop < 0 || iNW < 0) return results;
   var simYearH = simYearOf_(ctx, cycle); // engine.144 loop 3 — youth-mode gate on the [Home] line
 
@@ -1347,18 +1353,21 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     try { memIds = JSON.parse(String(hv[q][cMem] || '[]')); } catch (e) { memIds = []; }
     var members = [];
     var combinedNW = 0;
+    var bestTier = 4; // engine.151: the household's best rung pays on the roll
     for (var m = 0; m < memIds.length; m++) {
       var mRow = rowByPop[String(memIds[m]).trim()];
       if (!mRow) continue;
       if (String(mRow[iStatus] || 'active').toLowerCase() === 'deceased') continue;
       members.push(mRow);
       combinedNW += Number(String(mRow[iNW]).replace(/[$,\s]/g, '')) || 0;
+      var mTier = iTierH >= 0 ? (Math.round(Number(mRow[iTierH])) || 4) : 4;
+      if (mTier >= 1 && mTier < bestTier) bestTier = mTier;
     }
     if (!members.length) continue;
 
     var price = Math.round(rent * 12 * HOME_PRICE_TO_RENT);
     if (combinedNW < price * HOME_ELIGIBLE_NW) continue; // can't carry it yet
-    if (rng() >= HOME_BUY_P) continue;                    // not this week
+    if (rng() >= homeBuyChance_(bestTier)) continue;     // not this week (engine.151: the rung pays on the odds, never on the cash)
 
     // ── the purchase ──
     var down = Math.round(price * HOME_DOWN);

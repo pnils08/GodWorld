@@ -907,6 +907,20 @@ var ATTENTION_QUIET_CYCLES = 10;
 var TIER_BAR = { 1: 9, 2: 6, 3: 3 };
 
 // ═══════════════════════════════════════════════════════════════════════════
+// engine.151 (S413, builder's chain cut 5) — TIER PAYS
+// "Raising your Tier should increase a citizen's life." A rung is a pace
+// multiplier at the doors the dials already steer — hire-slot order, promotion
+// order, the courtship step, the home-purchase roll. It buys position and pace,
+// never cash: no gate opens, nothing fires that would not have fired.
+// Blank / 0 / ≥ 5 read as Tier 4 (the floor); the table is the whole spec.
+// ═══════════════════════════════════════════════════════════════════════════
+var TIER_PAY = { 1: 1.50, 2: 1.30, 3: 1.15, 4: 1.00 };
+function tierPayFactor_(tier) {
+  var t = Math.round(Number(tier)) || 4;
+  return TIER_PAY[t] || 1.0;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // engine.150 (S412, builder-direct 2026-09-02) — THE LADDER AS A STATE
 // ═══════════════════════════════════════════════════════════════════════════
 // Before this, the UsageCount bars (3 / 6 / 9 → Tier 3 / 2 / 1) were applied

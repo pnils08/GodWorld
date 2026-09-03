@@ -831,6 +831,8 @@
 - **bondCompatibility_(dataA, dataB, ctx)**
   Reads: S.simYear
 
+- **bondSpouseQuality_(dataA, dataB, ctx)**
+
 - **bondWealthTerm_(wlA, wlB)**
   Reads: S.neighborhoodState
 
@@ -3733,4 +3735,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1269
+**Functions mapped:** 1270

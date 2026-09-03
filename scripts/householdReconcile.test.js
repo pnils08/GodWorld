@@ -337,7 +337,7 @@ console.log('engine.154 compatibility reads net worth + hood prosperity; the dra
   const simYearOf_ = new Function(CAL_SRC + '\nreturn simYearOf_;')();
   const bsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondEngine.js'), 'utf8');
   const BE = new Function('Logger', 'deriveWealthLevel_', 'netWorthForBand_', 'rand01_', 'ageBracket_', 'simYearOf_',
-    bsrc + '\nreturn { bondWealthTerm_, bondProsperityTerm_, bondCompatibility_, spouseNetWorthFor_, hoodEducationFreq_ };')(
+    bsrc + '\nreturn { bondWealthTerm_, bondProsperityTerm_, bondSpouseQuality_, bondCompatibility_, spouseNetWorthFor_, hoodEducationFreq_ };')(
     { log() {} }, WE.deriveWealthLevel_, WE.netWorthForBand_, CD.rand01_, CD.ageBracket_, simYearOf_);
   assert('wealth term: gap ≤1 +2, ≤3 +1, 4–5 0, ≥6 −1, blank/unknown 0', BE.bondWealthTerm_(5, 6) === 2 && BE.bondWealthTerm_(5, 5) === 2 && BE.bondWealthTerm_(5, 8) === 1 && BE.bondWealthTerm_(5, 10) === 0 && BE.bondWealthTerm_(0, 6) === -1 && BE.bondWealthTerm_(null, 5) === 0 && BE.bondWealthTerm_('', 5) === 0 && BE.bondWealthTerm_(undefined, undefined) === 0 && BE.bondWealthTerm_('x', 5) === 0);
   const nctx = { summary: { neighborhoodState: { Rockridge: { incomeTier: 5 }, Downtown: { incomeTier: 4 }, Temescal: { incomeTier: 1 }, Blank: { incomeTier: null } } } };
@@ -346,8 +346,10 @@ console.log('engine.154 compatibility reads net worth + hood prosperity; the dra
   const B = { Name: 'B', Neighborhood: 'Rockridge', Occupation: 'Nurse', BirthYear: 2010, WealthLevel: 6 };
   const B0 = Object.assign({}, B, { WealthLevel: null });
   const base = BE.bondCompatibility_(A, B0, { summary: {} });
-  assert('compatibility: like bands + alike hoods add +3 on top of the old score; unknown band adds nothing', BE.bondCompatibility_(A, B, nctx) === base + 3 && BE.bondCompatibility_(A, B0, nctx) === base + 1 && base >= 8, base + ' / ' + BE.bondCompatibility_(A, B, nctx));
-  assert('compatibility: a gulf costs one point, never bars', BE.bondCompatibility_(A, Object.assign({}, B, { WealthLevel: 12 }), { summary: {} }) === base - 1);
+  assert('the like-at-all score (friendship formation) is UNCHANGED by the terms', BE.bondCompatibility_(A, B, nctx) === base && base >= 8, base + ' / ' + BE.bondCompatibility_(A, B, nctx));
+  assert('spouse quality at the gate: like bands + alike hoods +3; unknown band +1; a gulf −1, never a bar', BE.bondSpouseQuality_(A, B, nctx) === 3 && BE.bondSpouseQuality_(A, B0, nctx) === 1 && BE.bondSpouseQuality_(A, Object.assign({}, B, { WealthLevel: 12 }), { summary: {} }) === -1 && BE.bondSpouseQuality_({}, {}, null) === 0);
+  assert('the romance gate resolves POPID → name before the lookup and adds the term on both paths (6b: the welded door)', /var romA = romLk\[resolveCitizenName_\(ctx, bond\.citizenA\)\] \|\| \{\};/.test(bsrc) && /romCompat = bondCompatibility_\(romA, romB, ctx\);/.test(bsrc) && /romCompat \+= bondSpouseQuality_\(romA, romB, ctx\);/.test(bsrc) && !/romLk\[bond\.citizenA\]/.test(bsrc));
+  assert('detectNewBonds_ scores friendships on the base compatibility only (the term has one definition and one call site: the gate)', /var compat = bondCompatibility_\(dataA, dataB, ctx\);\n\s*if \(!ctx\._bondCompatByKey\)/.test(bsrc) && (bsrc.match(/bondSpouseQuality_\(/g) || []).length === 2);
   // the drawn spouse
   const hctx = { summary: { neighborhoodState: { Rockridge: { wealthMin: 7, wealthMax: 11 }, Temescal: { wealthMin: 2, wealthMax: 5 } } } };
   const seeds = ['Ana|Lee|POP-1', 'Bo|Kim|POP-2', 'Cy|Ng|POP-3', 'Di|Oh|POP-4', 'Ed|Pa|POP-5', 'Fa|Qu|POP-6'];
@@ -367,7 +369,7 @@ console.log('engine.154 compatibility reads net worth + hood prosperity; the dra
   const big = { ledger: { headers: H, rows: [] }, summary: { cycleId: 107 }, config: { cycleCount: 107 } };
   for (let i = 0; i < 12; i++) big.ledger.rows.push(['Q' + i, 'Rockridge', i < 9 ? 'masters' : 'hs-diploma', 2000, 'Active']);
   const draws = seeds.map(sd => CD.deriveEducationLevel_(sd, 'Rockridge', 41, BE.hoodEducationFreq_(big)));
-  assert('deriveEducationLevel_ now draws from the hood (no longer hs-diploma for everyone)', draws.includes('masters') && CD.deriveEducationLevel_(seeds[0], 'Rockridge', 41, null) === 'hs-diploma', JSON.stringify(draws));
+  assert('deriveEducationLevel_ now draws from the ledger frequencies (hood bucket when the bracket carries ≥5 distinct levels, else citywide — this fixture is citywide); no longer hs-diploma for everyone', draws.includes('masters') && CD.deriveEducationLevel_(seeds[0], 'Rockridge', 41, null) === 'hs-diploma', JSON.stringify(draws));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

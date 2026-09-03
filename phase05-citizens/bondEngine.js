@@ -917,12 +917,18 @@ function bondCompatibility_(dataA, dataB, ctx) {
     var wf = bondWarmthFactor_(ctx, dataA.Name || '', dataB.Name || '');
     score += Math.max(0, Math.min(2, (wf - 0.75) * 4));
   }
-  // engine.154 (S413, builder's chain cut 6): "where you live, what your net
-  // worth is, determines the quality of spouse" — like clears the gate sooner,
-  // a gulf costs a point and never bars.
-  score += bondWealthTerm_(dataA.WealthLevel, dataB.WealthLevel);
-  score += bondProsperityTerm_(ctx, nhA, nhB);
   return score;
+}
+
+// engine.154 (S413, builder's chain cut 6): "where you live, what your net
+// worth is, determines the quality of spouse" — the two terms below are added
+// AT THE ROMANCE GATE ONLY (processRomanceAndMarriage_), never in the
+// like-at-all score that forms friendships: like clears the gate sooner, a
+// gulf costs a point and never bars.
+function bondSpouseQuality_(dataA, dataB, ctx) {
+  var a = dataA || {}, b = dataB || {};
+  return bondWealthTerm_(a.WealthLevel, b.WealthLevel) +
+         bondProsperityTerm_(ctx, a.Neighborhood, b.Neighborhood);
 }
 
 // engine.154: the net-worth band term on WealthLevel (0–12). Blank/unknown on
@@ -2044,12 +2050,18 @@ function processRomanceAndMarriage_(ctx) {
     // path — never a hard bar on missing metadata, always a bar on mismatch.
     var romCompat;
     var romKey = (typeof getBondKey_ === 'function') ? getBondKey_(bond.citizenA, bond.citizenB) : '';
+    // engine.154 6b (S413): bonds carry POPIDs and the lookup is name-keyed —
+    // indexed raw, every existing pair scored as two strangers (~2) and the
+    // romance door never opened after engine.67 step 9. Resolve first.
+    var romLk = ctx._bondNameLookup || {};
+    var romA = romLk[resolveCitizenName_(ctx, bond.citizenA)] || {};
+    var romB = romLk[resolveCitizenName_(ctx, bond.citizenB)] || {};
     if (ctx._bondCompatByKey && romKey && ctx._bondCompatByKey[romKey] !== undefined) {
       romCompat = ctx._bondCompatByKey[romKey];
     } else {
-      var romLk = ctx._bondNameLookup || {};
-      romCompat = bondCompatibility_(romLk[bond.citizenA] || {}, romLk[bond.citizenB] || {}, ctx);
+      romCompat = bondCompatibility_(romA, romB, ctx);
     }
+    romCompat += bondSpouseQuality_(romA, romB, ctx); // engine.154: net worth + hood prosperity, at this gate only
     if (bond.bondType === BOND_TYPES.FRIENDSHIP &&
         Number(bond.intensity) >= ROMANCE_THRESHOLD &&
         romCompat >= 6 &&

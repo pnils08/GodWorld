@@ -70,6 +70,16 @@ Earlier the same day: *"we will be checking heritage and households in the next 
 
 > This is getting closer but the scale is off a bit. Elias Varek's net worth is $10 billion; John Ellis is an A's player, but that's not really the point. The A's are making a salary based on 2042. The citizens are not. Anything using real-world Oakland for its basis will break the sim. Rich get richer is real life. Heritage can own a business and multiple (likely not built); however there are plenty of business owners not on heritage — so citizens can open a business as their job, but the business system determines its success. An off-heritage citizen is dependent on the business for a salary; heritage business owners collect gains on top of their income. Think of it as the Matrix movie — it's a coded environment. Who becomes the Neo? Who's the Oracle? Who's the protagonist?
 
+**Builder, 2026-09-03 09:40 (S413, on Dillon Studio) — recorded as said:**
+
+> Some businesses aren't filled completely on the business ledger, which causes breaks in the code. Heritage names are active on business creation but not sure what's minting their staff numbers or profits. We have business owners that have no POPID but own a business. These are too many broken arms to a system being built. It may be easy to say "that's a different session's issue," but all these systems were built halfway and not wired properly or logically. Is Dillon Studios a logical business? Would Benji Dillon open this business type? Does a studio employ two people? Does a new business have $340M in profits as a start-up?
+
+**Builder, 2026-09-03 10:21 (S413) — recorded as said:**
+
+> I'm sure I'm asking for something very complex here, as the engine doesn't carry much that'll help determine the business type these heritage types may own. I don't know the answer to this; the fact it works at all should be my focus. I'm just hoping the work is meeting my doctrines and isn't falling into real-world Oakland stuff. I'm not really able to follow a lot of this, so I'll trust the mechanics and that the wiring is true with all of this.
+
+**Read (engine-sheet):** the engine carries a field for every row (RoleType, SkillTags → the hiring categories, hood) and a line has members with fields — enough for "the line opens a business in the field a member works in, in the hood the staker lives in"; character (what Benji would *want*) has no column and is not invented. Trust is the signal it always was; the guardrails owed for it: wiring card first, the doctrine test in the plan before code, the prediction before the fire, the record naming what the bench did not prove. Filed as engine.96 Task 11.
+
 ## The chain as directed vs as built (S412)
 
 | Link (builder's words) | As built | Pointer | State |

@@ -86,8 +86,10 @@ const APPLY = process.argv.includes('--apply');
 const WAIVE_STYLE_GATE_REASON = arg('--waive-style-gate', null);
 
 // USAGE-TYPE BIND (see header): INTAKE role → Citizen_Media_Usage UsageType.
-// quoted-source deliberately absent — wake-2 citizenVoice --record owns it.
-const ROLE_TO_USAGE = { subject: 'featured', mentioned: 'mentioned' };
+// engine.152/S412 (builder 2026-09-02): quoted citizens are credited HERE, at the canon door —
+// the interview wake (citizenVoice --record) writes the page + a reflection row, never a usage
+// row, so 'quoted-source' had fallen on the floor since the handoff (0 credits, C90→C105).
+const ROLE_TO_USAGE = { subject: 'featured', mentioned: 'mentioned', 'quoted-source': 'quoted' };
 
 // ---------------------------------------------------------------------------
 // Staged-set reader — every .staged.json for the cycle, with its article text.
@@ -292,7 +294,7 @@ function usageRowsFor(entry) {
   const rows = [];
   for (const n of (intake.names || [])) {
     const usageType = ROLE_TO_USAGE[n.role];
-    if (!usageType) continue;             // quoted-source: wake-2 owns that class
+    if (!usageType) continue;
     if (!n.popid) continue;               // unresolved/ambiguous — no fame credit on a guess
     rows.push({ name: n.name, popid: n.popid, usageType, context: entry.stem, snippet: citationSnippet(entry.text, n.name) });
   }

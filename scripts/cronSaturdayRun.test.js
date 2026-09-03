@@ -43,15 +43,16 @@ console.log('Test 1: usage-type bind (ROLE_TO_USAGE)');
 {
   assert('subject → featured', ROLE_TO_USAGE.subject === 'featured');
   assert('mentioned → mentioned', ROLE_TO_USAGE.mentioned === 'mentioned');
-  assert('quoted-source NOT mapped (wake-2 owns that class)', !('quoted-source' in ROLE_TO_USAGE));
+  assert('quoted-source → quoted (S412: credited at the canon door; the interview wake never wrote usage rows)', ROLE_TO_USAGE['quoted-source'] === 'quoted');
 }
 
 console.log('Test 2: usageRowsFor');
 {
   const rows = usageRowsFor(ENTRY);
-  assert('2 rows (quoted-source skipped, null-popid skipped)', rows.length === 2, JSON.stringify(rows));
-  assert('subject row', rows[0].name === 'Calvin Turner' && rows[0].usageType === 'featured');
-  assert('mentioned row', rows[1].name === 'Tomas Renteria' && rows[1].usageType === 'mentioned');
+  assert('3 rows (quoted-source credited, null-popid skipped)', rows.length === 3, JSON.stringify(rows));
+  assert('quoted row', rows[0].name === 'Lucia Polito' && rows[0].usageType === 'quoted');
+  assert('subject row', rows[1].name === 'Calvin Turner' && rows[1].usageType === 'featured');
+  assert('mentioned row', rows[2].name === 'Tomas Renteria' && rows[2].usageType === 'mentioned');
   assert('context is stem', rows.every(r => r.context === ENTRY.stem));
   assert('no intake → no rows', usageRowsFor({ stem: 'x', sidecar: {}, text: '' }).length === 0);
 }
@@ -164,6 +165,7 @@ console.log('Test 6: mergeStorylineLedger');
   assert('citationSnippet returns the sentences naming the citizen (full name or surname)', citationSnippet(text, 'Tomas Aguilar') === 'Tomas Aguilar argued with the board and lost the vote. Later, Aguilar left early.');
   assert('citationSnippet is empty when the name is not in the text', citationSnippet(text, 'Lena Okafor') === '');
   assert('usageRowsFor carries the snippet on each row', (function () { const rows = require('./cron-saturday-run').usageRowsFor({ stem: 's', text, sidecar: { intake: { names: [{ name: 'Tomas Aguilar', popid: 'POP-00529', role: 'subject' }] } } }); return rows.length === 1 && /argued with the board/.test(rows[0].snippet) && rows[0].usageType === 'featured'; })());
+  assert('quoted-source is credited at the canon door as quoted (S412)', (function () { const r = require('./cron-saturday-run').usageRowsFor({ stem: 's', text: 'Merkin Jumper said the show changed him.', sidecar: { intake: { names: [{ name: 'Merkin Jumper', popid: 'POP-00688', role: 'quoted-source' }, { name: 'No Pop', role: 'quoted-source' }] } } }); return r.length === 1 && r[0].usageType === 'quoted' && /changed him/.test(r[0].snippet); })());
   assert('extractLight_ takes the first in-vocab word, null otherwise', extractLight_('Negative — blamed.') === 'negative' && extractLight_('neutral') === 'neutral' && extractLight_('positive') === 'positive' && extractLight_('unsure') === null && LIGHT_VOCAB.length === 3);
 }
 

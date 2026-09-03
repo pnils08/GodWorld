@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-02",
+  "generated": "2026-09-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 186,
-  "functionsMapped": 1255,
+  "functionsMapped": 1257,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4648,6 +4648,7 @@
         "phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure",
         "phase05-citizens/citizenContextBuilder.js::getCulturalStatus_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/processAdvancementIntake.js::culturalFameOf_",
         "phase05-citizens/processAdvancementIntake.js::dimCulturalFame_",
         "phase07-evening-media/culturalLedger.js::culturalStatusByPop_",
         "phase07-evening-media/culturalLedger.js::decayCulturalFame_",

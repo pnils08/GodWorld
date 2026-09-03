@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-02 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-03 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1612,6 +1612,11 @@
 
 - **dimCulturalFame_(ctx, popId, delta)**
   Sheets: Cultural_Ledger
+
+- **culturalFameOf_(ctx, popId, name)**
+  Sheets: Cultural_Ledger
+
+- **ensureFamousOnCulturalLedger_(ctx, popId, name, roleType, neighborhood)**
 
 - **intakeTierForExisting_(existingTier, intakeRaw)**
 
@@ -3698,4 +3703,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1255
+**Functions mapped:** 1257

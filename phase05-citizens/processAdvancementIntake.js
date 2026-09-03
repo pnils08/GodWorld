@@ -965,6 +965,46 @@ function dimCulturalFame_(ctx, popId, delta) {
   } catch (e) { Logger.log('dimCulturalFame_: ' + e.message); return null; }
 }
 
+// engine.118 cut 3b (S412, builder 2026-09-02: "their likeness copies to the
+// culture ledger where fame citizens are tracked and the fame engine uses these
+// citizens for its events"): the Cultural_Ledger is the famous sub-roster. A
+// famous citizen with no row linked to their POPID gets one registered (the
+// evening-media registrar, queued for Phase 10); a linked row below the fame
+// bar is brightened to the bar so the antenna lights. Never re-registers a
+// linked name (the registrar bumps +5 on every call for an existing entity).
+function culturalFameOf_(ctx, popId, name) {
+  try {
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
+    if (!sheet || sheet.getLastRow() < 2) return null;
+    var v = sheet.getDataRange().getValues();
+    var h = v[0], iPop = h.indexOf('UniverseLinks'), iFame = h.indexOf('FameScore'), iName = h.indexOf('Name');
+    if (iFame < 0) return null;
+    var best = null, want = String(popId || '').trim().toUpperCase(), nm = String(name || '').trim().toLowerCase();
+    for (var r = 1; r < v.length; r++) {
+      var linked = iPop >= 0 && String(v[r][iPop] || '').trim().toUpperCase() === want;
+      var named = iName >= 0 && String(v[r][iName] || '').trim().toLowerCase() === nm;
+      if (!linked && !named) continue;
+      var f = Number(v[r][iFame]) || 0;
+      if (best === null || f > best) best = f;
+    }
+    return best;
+  } catch (e) { Logger.log('culturalFameOf_: ' + e.message); return null; }
+}
+function ensureFamousOnCulturalLedger_(ctx, popId, name, roleType, neighborhood) {
+  ctx._famousRegistered118 = ctx._famousRegistered118 || {};
+  if (ctx._famousRegistered118[popId]) return 'done';
+  var fame = culturalFameOf_(ctx, popId, name);
+  if (fame === null) {
+    if (typeof registerCulturalEntity_ !== 'function') return 'no-registrar';
+    registerCulturalEntity_(ctx, name, roleType || 'citizen', 'engine.118', neighborhood || '');
+    ctx._famousRegistered118[popId] = true;
+    return 'registered';
+  }
+  if (fame < FAME_USAGE_BAR) { dimCulturalFame_(ctx, popId, FAME_USAGE_BAR - fame); ctx._famousRegistered118[popId] = true; return 'brightened'; }
+  ctx._famousRegistered118[popId] = true;
+  return 'linked';
+}
+
 // Intake vs an existing row: blank keeps the row's Tier; a stated Tier can only
 // lift (lower number), never drop. Pure.
 function intakeTierForExisting_(existingTier, intakeRaw) {
@@ -1056,7 +1096,14 @@ function applyTierLadderState_(ctx, cycle) {
         if (iLastU >= 0) frow[iLastU] = 'C' + cycle;
         results.fameFloored++;
       }
-      if (famous) { if (iLastU >= 0 && results.lines.length && results.lines[results.lines.length - 1] === fpop + ':famed:' + fcell) frow[iLastU] = 'C' + cycle; rows[f] = frow; ctx.ledger.dirty = true; }
+      if (famous) {
+        if (iLastU >= 0 && results.lines.length && results.lines[results.lines.length - 1] === fpop + ':famed:' + fcell) frow[iLastU] = 'C' + cycle;
+        rows[f] = frow; ctx.ledger.dirty = true;
+        // cut 3b: the famous sub-roster follows the marker
+        var iRole118 = h.indexOf('RoleType');
+        var cul = ensureFamousOnCulturalLedger_(ctx, fpop, fname, iRole118 >= 0 ? frow[iRole118] : '', iNb >= 0 ? frow[iNb] : '');
+        if (cul === 'registered' || cul === 'brightened') results.cultural = (results.cultural || 0) + 1;
+      }
     }
   }
 
@@ -1115,7 +1162,7 @@ function applyTierLadderState_(ctx, cycle) {
   if (results.promoted || results.seededHeld || results.ambiguous) {
     Logger.log('applyTierLadderState_: ' + results.promoted + ' promoted, ' + results.seededHeld + ' seeded cell(s) held, ' + results.ambiguous + ' ambiguous name(s) skipped');
   }
-  if (results.famed || results.fameFloored) Logger.log('applyTierLadderState_: ' + results.famed + ' assumed fame, ' + results.fameFloored + ' fame-floored to Tier 1');
+  if (results.famed || results.fameFloored || results.cultural) Logger.log('applyTierLadderState_: ' + results.famed + ' assumed fame, ' + results.fameFloored + ' fame-floored to Tier 1, ' + (results.cultural || 0) + ' cultural row(s) registered/brightened');
   if (ctx.summary) ctx.summary.tierLadder = { promoted: results.promoted, seededHeld: results.seededHeld, ambiguous: results.ambiguous, famed: results.famed, fameFloored: results.fameFloored };
   return results;
 }

@@ -5,8 +5,9 @@ const fs = require('fs'), path = require('path');
 const R = (p) => fs.readFileSync(path.resolve(__dirname, '..', p), 'utf8');
 const findDef = (fn) => { for (const d of ['utilities', 'phase01-config', 'phase05-citizens', 'phase10-persistence']) for (const f of fs.readdirSync(path.resolve(__dirname, '..', d))) { if (/\.js$/.test(f) && new RegExp('^function ' + fn + '\\(', 'm').test(R(d + '/' + f))) return d + '/' + f; } return null; };
 const helperFile = findDef('findColByName_');
-const intents = [], ripples = [];
+const intents = [], ripples = [], registered = [], cellsG = [];
 const sandbox = {
+  registerCulturalEntity_: (ctx, name, role, j, hood) => registered.push({ name, role, j, hood }),
   Logger: { log() {} },
   queueAppendIntent_: (ctx, tab, row) => intents.push({ tab, row }),
   queueCellIntent_: () => {},
@@ -159,6 +160,20 @@ console.log('\n9. engine.118 — fame is permanent:');
   E2.processMediaUsage_(fc, 'now', 111);
   check('famous + hard light: UsageCount 60 unchanged; FameScore 40 → 39 queued on the highest-fame cultural row', fc.ledger.rows[0][5] === 60 && cells.some(x => x[0] === 'Cultural_Ledger' && x[1] === 2 && x[2] === 3 && x[3] === 39) && /shine dims/.test(fc.ledger.rows[0][7]));
   check('dimCulturalFame_ floors at 0 and returns null with no linked row', E.dimCulturalFame_({ ss: ssF }, 'POP-NOBODY', -1) === null);
+  // cut 3b: the famous sub-roster follows the marker
+  const culRows = [['Name', 'UniverseLinks', 'FameScore'], ['Vin Keane', 'POP-V', 26], ['Ann Low', 'POP-A', 15]];
+  const cellsB = [];
+  const E3 = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_ };')(...Object.values(Object.assign({}, sandbox, { queueCellIntent_: (ctx, tab, r, c, v) => cellsB.push([tab, r, c, v]) })));
+  registered.length = 0;
+  const mk = (rowsIn) => ({ summary: { cycleRef: 'Y3C4' }, ledger: { headers: H.slice(), rows: rowsIn, dirty: false },
+    ss: { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => 1, getDataRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType']] }) } : n === 'Cultural_Ledger' ? { getLastRow: () => culRows.length, getDataRange: () => ({ getValues: () => culRows }) } : null } });
+  const c3 = mk([row('POP-V', 'Vin', 'Keane', 1, 60, { 4: 'GAME', 10: 'C90' }), row('POP-A', 'Ann', 'Low', 1, 30, { 10: 'C90' }), row('POP-P', 'Mike', 'Paulson', 1, 38, { 4: 'GAME', 10: 'C90', 9: 'Uptown' })]);
+  const r3 = E3.applyTierLadderState_(c3, 111);
+  check('famous + linked at 26: nothing to do', !registered.some(x => x.name === 'Vin Keane') && !cellsB.some(x => x[1] === 2));
+  check('famous + linked at 15: brightened to the bar (25) on the cultural row', cellsB.some(x => x[0] === 'Cultural_Ledger' && x[1] === 3 && x[3] === 25));
+  check('famous + no cultural row: registered once with role + hood by engine.118', registered.length === 1 && registered[0].name === 'Mike Paulson' && registered[0].j === 'engine.118' && registered[0].hood === 'Uptown' && r3.cultural === 2);
+  E3.applyTierLadderState_(c3, 112);
+  check('same ctx, second pass: no double registration', registered.length === 1);
 }
 
 console.log('\n' + pass + '/' + (pass + fail) + ' passed');

@@ -52,9 +52,11 @@ function mulberry32(seed) {
 
 // engine.148: the calendar file carries simYearOf_ — prepended so the year resolves as it does in the flat Apps Script namespace
 const CAL_SRC = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8');
+// engine.160: hoodRentFromIncome_ (the one hood rent rule) lives beside the Phase-2 loader.
+const NS_SRC = fs.readFileSync(path.resolve(__dirname, '../phase02-world-state/loadNeighborhoodState.js'), 'utf8');
 const loadEngine = (rel, fnName) => {
   const src = fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
-  return new Function(CAL_SRC + '\n' + src + '\nreturn ' + fnName + ';')();
+  return new Function(CAL_SRC + '\n' + NS_SRC + '\n' + src + '\nreturn ' + fnName + ';')();
 };
 const processNeighborhoodTrajectory_ = loadEngine('../phase05-citizens/neighborhoodTrajectoryEngine.js', 'processNeighborhoodTrajectory_');
 const processMigrationTracking_ = loadEngine('../phase05-citizens/migrationTrackingEngine.js', 'processMigrationTracking_');
@@ -123,7 +125,7 @@ function buildCtx(slRows, hhRows, rngFn, nmRows) {
     ss: mockSS(sheets),
     ledger: { headers: SL_HEADER.slice(), rows: slRows, dirty: false },
     summary: { cycleId: 200, storyHooks: [] },
-    config: { cycleCount: 200 },
+    config: { cycleCount: 200, hoodRentShare: 0.30 }, // engine.160: the one hood rent rule's share
     rng: rngFn,
     now: '2041-06-01T00:00:00.000Z',
     _sheets: sheets
@@ -145,17 +147,20 @@ console.log('A1 trajectory summary payload rent/income');
   processNeighborhoodTrajectory_(ctx);
   const t = ctx.summary.neighborhoodTrajectory;
   assert('payload exists for all 4 hoods', t && Object.keys(t).length === 4, JSON.stringify(Object.keys(t || {})));
-  assert('rent present + numeric', t.Lowmarket && t.Lowmarket.rent === 1300);
+  // engine.160: rent is the one hood rent rule — share × MedianIncome / 12 —
+  // never the stored cell (Lowmarket's cell says 1300; the rule says 1125).
+  assert('rent is the rule, not the cell', t.Lowmarket && t.Lowmarket.rent === Math.round(0.30 * 45000 / 12));
   assert('income present + numeric', t.Lowmarket && t.Lowmarket.income === 45000);
-  // Highgate stays growth (score high) -> rent drifts up; payload must carry
-  // the POST-drift value, matching the queued intent, not the sheet value.
-  const rentIntent = cellIntents.find(i => i.why === 'trajectory rent drift');
-  if (rentIntent) {
-    assert('post-drift rent in payload matches queued intent', t.Highgate.rent === rentIntent.value,
-      `payload ${t.Highgate.rent} vs intent ${rentIntent.value}`);
-  } else {
-    assert('drift fired for growth hood (expected with growth trajectory)', false, 'no rent drift intent queued');
-  }
+  // Highgate stays growth (score high) -> income drifts up; the rent in the
+  // payload follows the POST-drift income through the rule, and the column is
+  // rendered to the same number.
+  assert('rent follows post-drift income', t.Highgate.rent === Math.round(0.30 * t.Highgate.income / 12),
+    `rent ${t.Highgate.rent} vs income ${t.Highgate.income}`);
+  const renders = cellIntents.filter(i => i.why === 'canon rent render');
+  assert('every hood whose cell disagrees with the rule is rendered (4/4 fixtures disagree)', renders.length === 4, `${renders.length} renders`);
+  const hg = renders.find(i => i.value === t.Highgate.rent);
+  assert('Highgate render carries the payload rent', !!hg, JSON.stringify(renders.map(i => i.value)));
+  assert('no rent drift intent survives', !cellIntents.some(i => i.why === 'trajectory rent drift'));
 }
 
 // ═══ A2: rent-burden fallback from MonthlyRent + HouseholdIncome ═════════════
@@ -220,7 +225,7 @@ console.log('A2d savings buffer suppresses burden risk');
       Household_Ledger: mockSheet([HH2.slice(), hhRow])
     };
     return { ss: mockSS(sheets), ledger: { headers: SL_HEADER.slice(), rows: sl, dirty: false },
-      summary: { cycleId: 200, storyHooks: [] }, config: { cycleCount: 200 }, rng: () => 0.99, now: 'x', _sheets: sheets };
+      summary: { cycleId: 200, storyHooks: [] }, config: { cycleCount: 200, hoodRentShare: 0.30 }, rng: () => 0.99, now: 'x', _sheets: sheets };
   };
   const ctxA = mk(slA, mkHH('HH-B1', 'POP-5', 0));
   const ctxB = mk(slB, mkHH('HH-B2', 'POP-6', 2600 * 12));
@@ -283,7 +288,7 @@ console.log('A3 pressure lane household move');
   const hhSheet = ctx._sheets.Household_Ledger;
   assert('Household_Ledger re-hooded', hhSheet._values[1][HH_HEADER.indexOf('Neighborhood')] === dest);
   assert('Household_Ledger rent re-priced to destination median',
-    hhSheet._values[1][HH_HEADER.indexOf('MonthlyRent')] === 1300,
+    hhSheet._values[1][HH_HEADER.indexOf('MonthlyRent')] === Math.round(0.30 * 45000 / 12) /* engine.160: the destination's RULE rent, not its stale cell (1300) */,
     String(hhSheet._values[1][HH_HEADER.indexOf('MonthlyRent')]));
   const moveHooks = ctx.summary.storyHooks.filter(h => h.hookType === 'CITIZEN_RELOCATED');
   assert('CITIZEN_RELOCATED hook emitted once', moveHooks.length === 1, String(moveHooks.length));

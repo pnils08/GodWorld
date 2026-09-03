@@ -75,6 +75,31 @@ var ENGINE96_CONFIG_SEEDS = [
   ['bizDeclineStreak', 4, 'engine.96 Task 6: consecutive negative-growth Cycles before a business sheds headcount (proposed S413, not in the signed table)', 1, 52, false]
 ];
 
+// engine.160 (S414) — one hood rent rule. A hood's MedianRent is this share of
+// its Neighborhood_Map MedianIncome (the INSTITUTIONS §Neighborhoods profile,
+// engine.135 B1) divided by twelve. The same share as HOME_CARRY_MAX: housing is
+// this much of a household's income, whether it rents or carries a mortgage.
+// Retired by this rule: the 12-hood 2026 rent table in estimateRent_, the dead
+// HOME_PRICES_BY_NEIGHBORHOOD table, and the trajectory engine's multiplicative
+// rent drift (rent now follows income; income still drifts).
+var ENGINE160_CONFIG_SEEDS = [
+  ['hoodRentShare', 0.30, 'engine.160 hood MedianRent = this share of Neighborhood_Map MedianIncome / 12; the one rent rule every lease and house price reads', 0.05, 0.6, false]
+];
+
+function ensureEngine160Config_(ss) {
+  if (!ss) throw new Error('engine.160 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.160 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE160_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE160_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.160 config: post-write verification failed');
+  }
+  Logger.log('engine.160 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 function ensureEngine96Config_(ss) {
   if (!ss) throw new Error('engine.96 config: spreadsheet required');
   var configSheet = ss.getSheetByName('World_Config');

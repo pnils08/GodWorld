@@ -47,6 +47,9 @@
   Reads: S.canonHoods
 
 ### engine94SheetContract.js
+- **ensureEngine160Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine96Config_(ss)**
   Sheets: World_Config
 
@@ -387,6 +390,9 @@
   Sheets: Undocked_Feed
 
 ### loadNeighborhoodState.js
+- **hoodRentFromIncome_(ctx, medianIncome)**
+  Config: ctx.config.hoodRentShare
+
 - **loadNeighborhoodState_(ctx)**
   Reads: S.neighborhoodState
   Writes: S.neighborhoodState, S.neighborhoodStateCount
@@ -1523,6 +1529,7 @@
   Writes: S.storyHooks
 
 - **homeBuyChance_(bestTier)**
+  Reads: S.neighborhoodState
 
 - **homeMarketRent_(ctx, hood, ownRent)**
   Reads: S.neighborhoodState
@@ -1580,7 +1587,8 @@
 - **formNewHouseholds_(ctx, citizens, existingHouseholds, cycle, rng)**
   Sheets: Household_Ledger
 
-- **estimateRent_(neighborhood)**
+- **estimateRent_(neighborhood, ctx)**
+  Reads: S.neighborhoodState
 
 - **generateBirths_(ss, citizens, households, cycle)**
 
@@ -3800,4 +3808,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 188
-**Functions mapped:** 1294
+**Functions mapped:** 1296

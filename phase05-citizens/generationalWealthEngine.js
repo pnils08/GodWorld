@@ -77,24 +77,9 @@ var WEALTH_THRESHOLDS = {
   ELITE: 10         // $300k+ or significant assets
 };
 
-// Home ownership thresholds by neighborhood (median home prices)
-var HOME_PRICES_BY_NEIGHBORHOOD = {
-  'Rockridge': 950000,
-  'Piedmont Ave': 850000,
-  'Grand Lake': 780000,
-  'Temescal': 720000,
-  'Lake Merritt': 680000,
-  'Adams Point': 650000,
-  'Downtown': 620000,
-  'Uptown': 580000,
-  'Jack London': 560000,
-  'Laurel': 520000,
-  'Chinatown': 480000,
-  'Fruitvale': 450000,
-  'West Oakland': 430000,
-  'Brooklyn': 410000,
-  'Eastlake': 400000
-};
+// engine.160 (S414): the 15-hood HOME_PRICES_BY_NEIGHBORHOOD table that sat here
+// (real-2026 Oakland prices, no reader) is gone. A house is priced by its hood's
+// rent × HOME_PRICE_TO_RENT, and the rent comes from the one hood rent rule.
 
 // Savings rate by wealth level
 var SAVINGS_RATE_BY_WEALTH = {
@@ -1502,7 +1487,10 @@ function homeBuyChance_(bestTier) {
   return Math.min(0.5, HOME_BUY_P * pay);
 }
 // engine.158: the hood's market rent, never below the household's own lease.
-// No hood row (or no MedianRent on it) → the lease is the market.
+// engine.160: the market rent is the one hood rent rule (hoodRentFromIncome_ via
+// S.neighborhoodState.medianRent). A household on geography the ledger does not
+// price (no row → no rule) keeps its own lease as the market: that is the
+// household's own number, not a table, and the purchase stays rare.
 function homeMarketRent_(ctx, hood, ownRent) {
   var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
   var med = st ? (Number(st.medianRent) || 0) : 0;

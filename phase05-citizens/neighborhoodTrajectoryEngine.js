@@ -30,7 +30,9 @@
  *                            decay/steady bleed it off. Feeds citizen-side
  *                            DisplacementRisk in migrationTrackingEngine (kept:
  *                            in prosperity terms, rent strain on households).
- * - MedianRent / MedianIncome  living columns — drift with trajectory
+ * - MedianIncome              living column — drifts with trajectory
+ * - MedianRent                rendered each cycle from MedianIncome by the one
+ *                            hood rent rule (engine.160, hoodRentFromIncome_)
  *
  * ctx.summary export: S.neighborhoodTrajectory = { hood: {trajectory, score,
  * momentum, pressure} } for same-cycle downstream consumers.
@@ -60,11 +62,10 @@ var TRAJECTORY_THRESHOLDS = {
   DECAY_MAX: -2    // score <= −2 → decay
 };
 
-// Rent/income drift per cycle by trajectory (fractions)
+// Income drift per cycle by trajectory (fractions). engine.160 (S414): rent no
+// longer drifts on its own — MedianRent is rendered from MedianIncome by the one
+// hood rent rule (hoodRentFromIncome_), so it follows income and nothing else.
 var TRAJECTORY_DRIFT = {
-  RENT_GROWTH: 0.003,
-  RENT_DECAY: -0.0015,
-  RENT_PRESSURE_KICKER: 0.002,  // extra when HousingPressure >= 8
   INCOME_GROWTH: 0.002,
   INCOME_DECAY: -0.001
 };
@@ -249,25 +250,10 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
         'housing pressure', 'civic');
     }
 
-    // ── Rent/income drift: trajectory makes these living columns ────────────
-    // rentNow/incomeNow carry the post-drift values into the summary payload so
+    // ── Income drift: trajectory makes this a living column ─────────────────
+    // incomeNow carries the post-drift value into the summary payload so
     // same-cycle consumers (Phase5-MigrationTracking relocation scoring) see
-    // this cycle's numbers — the queued cell intents don't commit until Phase 10.
-    var rentNow = (iRent >= 0 && row[iRent] !== '' && !isNaN(Number(row[iRent]))) ? Number(row[iRent]) : null;
-    if (rentNow !== null) {
-      var rentFactor = 0;
-      if (trajectory === TRAJECTORY_STATES.GROWTH) rentFactor = TRAJECTORY_DRIFT.RENT_GROWTH;
-      else if (trajectory === TRAJECTORY_STATES.DECAY) rentFactor = TRAJECTORY_DRIFT.RENT_DECAY;
-      if (pressure >= 8) rentFactor += TRAJECTORY_DRIFT.RENT_PRESSURE_KICKER;
-      if (rentFactor !== 0) {
-        var newRent = Math.round(rentNow * (1 + rentFactor));
-        if (newRent !== rentNow) {
-          queueCellIntent_(ctx, 'Neighborhood_Map', sheetRow, iRent + 1, newRent,
-            'trajectory rent drift', 'civic');
-          rentNow = newRent;
-        }
-      }
-    }
+    // this cycle's number — the queued cell intents don't commit until Phase 10.
     var incomeNow = (iIncome >= 0 && row[iIncome] !== '' && !isNaN(Number(row[iIncome]))) ? Number(row[iIncome]) : null;
     if (incomeNow !== null) {
       var incFactor = 0;
@@ -282,13 +268,25 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
         }
       }
     }
+    // ── engine.160: render MedianRent from the one hood rent rule ────────────
+    // The column is a rendering of hoodRentFromIncome_ (share × MedianIncome / 12)
+    // for the readers that take the sheet cell (migration re-pricing, crisis
+    // buckets, the desk packets). Written only when the cell disagrees.
+    var rentNow = hoodRentFromIncome_(ctx, incomeNow);
+    if (iRent >= 0 && rentNow !== null) {
+      var rentCell = (row[iRent] !== '' && !isNaN(Number(row[iRent]))) ? Number(row[iRent]) : null;
+      if (rentCell !== rentNow) {
+        queueCellIntent_(ctx, 'Neighborhood_Map', sheetRow, iRent + 1, rentNow,
+          'canon rent render', 'civic');
+      }
+    }
 
     S.neighborhoodTrajectory[neighborhood] = {
       trajectory: trajectory,
       score: score,
       momentum: momentum,
       pressure: pressure,
-      rent: rentNow,      // post-drift, this cycle (engine.55 relocation scoring)
+      rent: rentNow,      // engine.160: the rule's rent, this cycle (engine.55 relocation scoring)
       income: incomeNow   // post-drift, this cycle
     };
 

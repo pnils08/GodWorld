@@ -390,7 +390,7 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
           HouseholdId: soloId, HeadOfHousehold: pop, HouseholdType: 'solo',
           Members: JSON.stringify([pop]), Neighborhood: cz.neighborhood || 'Downtown',
           HousingType: 'rented',
-          MonthlyRent: (typeof estimateRent_ === 'function') ? estimateRent_(cz.neighborhood) : 1700,
+          MonthlyRent: estimateRent_(cz.neighborhood, ctx),
           HouseholdIncome: ownInc, FormedCycle: cycle, Status: 'active'
         };
         var soloRow = new Array(hHead.length).fill('');
@@ -424,7 +424,7 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
       HouseholdId: hhId, HeadOfHousehold: pop, HouseholdType: type,
       Members: JSON.stringify(members), Neighborhood: cz.neighborhood || 'Downtown',
       HousingType: 'rented',
-      MonthlyRent: (typeof estimateRent_ === 'function') ? estimateRent_(cz.neighborhood) : 1700,
+      MonthlyRent: estimateRent_(cz.neighborhood, ctx),
       HouseholdIncome: income, FormedCycle: cycle, Status: 'active'
     };
     var rowOut = new Array(hHead.length).fill('');
@@ -794,7 +794,7 @@ function reconcileHouseholds_(ctx, cycle) {
     newRow[lMembers] = JSON.stringify(mem);
     if (lHood >= 0) newRow[lHood] = hood2;
     if (li('HousingType') >= 0) newRow[li('HousingType')] = 'rented';
-    if (li('MonthlyRent') >= 0) newRow[li('MonthlyRent')] = estimateRent_(hood2);
+    if (li('MonthlyRent') >= 0) newRow[li('MonthlyRent')] = estimateRent_(hood2, ctx);
     if (li('HousingCost') >= 0) newRow[li('HousingCost')] = 0;
     if (li('HouseholdIncome') >= 0) newRow[li('HouseholdIncome')] = 0; // income pass fills
     if (li('FormedCycle') >= 0) newRow[li('FormedCycle')] = cycle;
@@ -851,7 +851,7 @@ function formNewHouseholds_(ctx, citizens, existingHouseholds, cycle, rng) {
     var householdId = 'HH-' + String(cycle).padStart(4, '0') + '-' + String(i + 1).padStart(3, '0');
 
     // Estimate rent based on neighborhood (simplified)
-    var monthlyRent = estimateRent_(citizen.neighborhood);
+    var monthlyRent = estimateRent_(citizen.neighborhood, ctx);
 
     var household = {
       householdId: householdId,
@@ -900,24 +900,21 @@ function formNewHouseholds_(ctx, citizens, existingHouseholds, cycle, rng) {
   return newHouseholds;
 }
 
-function estimateRent_(neighborhood) {
-  // Simplified rent estimates by neighborhood
-  var rentMap = {
-    'Rockridge': 2400,
-    'Piedmont Ave': 2200,
-    'Lake Merritt': 2000,
-    'Temescal': 1900,
-    'Uptown': 1850,
-    'Downtown': 1800,
-    'Jack London': 1750,
-    'KONO': 1700,
-    'Laurel': 1650,
-    'Fruitvale': 1500,
-    'West Oakland': 1450,
-    'Chinatown': 1600
-  };
-
-  return rentMap[neighborhood] || 1700;  // Default $1,700
+function estimateRent_(neighborhood, ctx) {
+  // engine.160 (S414): one hood rent rule. A new household pays its hood's
+  // MedianRent, which Phase 2 derives from the Neighborhood_Map MedianIncome
+  // (INSTITUTIONS §Neighborhoods, engine.135 B1) × World_Config hoodRentShare —
+  // see hoodRentFromIncome_ (loadNeighborhoodState.js). The 12-hood 2026 rent
+  // table that lived here priced 221 of 319 live leases under their hood's
+  // median; it is gone, and there is no fallback — a hood the ledger does not
+  // price cannot house anyone (ADR-0016).
+  var hood = (neighborhood || '').toString().trim();
+  var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
+  var med = st ? Number(st.medianRent) : NaN;
+  if (!(med > 0)) {
+    throw new Error('estimateRent_: no canon rent for hood "' + hood + '" — Neighborhood_Map has no row or no MedianIncome for it (ADR-0016, engine.160).');
+  }
+  return Math.round(med);
 }
 
 

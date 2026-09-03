@@ -23,6 +23,26 @@
  * ============================================================================
  */
 
+/**
+ * engine.160 (S414) — the one hood rent rule. A hood's median rent is
+ * World_Config hoodRentShare × its Neighborhood_Map MedianIncome ÷ 12. Every
+ * lease (estimateRent_), every house price (homeMarketRent_) and the rendered
+ * MedianRent column (neighborhoodTrajectoryEngine) come through here; nothing
+ * else in the engine may price a hood. No income on the row → null (the
+ * consumer fails loud, ADR-0016). No share on World_Config → throw: the
+ * Phase-1 self-arm (ensureEngine160Config_) seeds it, so its absence means the
+ * contract did not run.
+ */
+function hoodRentFromIncome_(ctx, medianIncome) {
+  var share = ctx && ctx.config ? Number(ctx.config.hoodRentShare) : NaN;
+  if (!(share > 0)) {
+    throw new Error('hoodRentFromIncome_: World_Config hoodRentShare missing or ≤ 0 — the engine.160 self-arm did not run (ADR-0015).');
+  }
+  var inc = Number(medianIncome);
+  if (!(inc > 0)) return null;
+  return Math.round(share * inc / 12);
+}
+
 function loadNeighborhoodState_(ctx) {
   var S = ctx.summary || (ctx.summary = {});
   S.neighborhoodState = {};
@@ -45,7 +65,6 @@ function loadNeighborhoodState_(ctx) {
   var iTraj = idx('NeighborhoodTrajectory');
   var iMom = idx('TrajectoryMomentum');
   var iPress = idx('HousingPressure');
-  var iRent = idx('MedianRent');
   var iFlow = idx('MigrationFlow');
   // engine.133 D3 — the two full-coverage structural layers the hood illness
   // envelope weights from (22/22 populated live at C104): density proxy + income.
@@ -96,7 +115,7 @@ function loadNeighborhoodState_(ctx) {
       trajectory: iTraj >= 0 ? (row[iTraj] || '').toString().trim() : '',
       trajectoryMomentum: num(row, iMom),
       housingPressure: num(row, iPress),
-      medianRent: num(row, iRent),
+      medianRent: hoodRentFromIncome_(ctx, num(row, iIncome)), // engine.160: the rule, never the stored cell (the column is a rendering of this)
       migrationFlow: num(row, iFlow),
       noiseIndex: num(row, iNoise),      // engine.133
       medianIncome: num(row, iIncome),   // engine.133

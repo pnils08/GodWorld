@@ -117,7 +117,12 @@ function buildCtx(slRows, hhRows, rngFn) {
   return {
     ss: { getSheetByName: (n) => sheets[n] || null },
     ledger: { headers: SL_HEADER.slice(), rows: slRows, dirty: false },
-    summary: { cycleId: 200, storyHooks: [] },
+    // engine.160: Phase 2 prices every hood from the one rent rule (0.30 × MedianIncome / 12);
+    // formation reads that, never a table. Fixture hoods priced at the live C105 incomes.
+    summary: { cycleId: 200, storyHooks: [], neighborhoodState: {
+      'Rockridge': { medianRent: 4008 }, 'Lake Merritt': { medianRent: 4634 },
+      'Fruitvale': { medianRent: 2450 }, 'Temescal': { medianRent: 1703 }, 'Downtown': { medianRent: 3006 }
+    } },
     config: { cycleCount: 200 },
     rng: rngFn,
     now: 'Y3C200',
@@ -518,6 +523,20 @@ console.log('engine.96 T11 the heritage roll mints in the family\'s field at the
   assert('the stake leaves the staker: Benji\'s NetWorth − $1.2M; the reason names the field', Number(people[0][hi('NetWorth')]) === 400000000 - 1200000 && /Education, family/.test(biz.reason));
   assert('the hook names the field', ctx.summary.storyHooks.some(h => h.hookType === 'HERITAGE_BUSINESS_OPENING' && /Dillon Academy/.test(h.description) && /\(Education\)/.test(h.description)));
   assert('the BIZ-ID high-water mark advances to 180 through the cache write', hwWrites.some(w => w[0] === 'World_Config' && w[3] === 180) && ctx.config.bizIdHighWater === 180, JSON.stringify(hwWrites));
+}
+
+// ═══ engine.160 (S414) — one hood rent rule: the lease is the hood's rule rent, no table ═══
+console.log('engine.160 estimateRent_ reads the rule, throws off-ledger');
+{
+  const hsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/householdFormationEngine.js'), 'utf8');
+  const HF = new Function('Logger', hsrc + '\nreturn { estimateRent_ };')({ log() {} });
+  const rctx = { summary: { neighborhoodState: { 'Rockridge': { medianRent: 4008 }, 'Nowhere': { medianRent: null } } } };
+  assert('Rockridge lease = the rule rent', HF.estimateRent_('Rockridge', rctx) === 4008);
+  let threw = false; try { HF.estimateRent_('Nowhere', rctx); } catch (e) { threw = /no canon rent/.test(e.message); }
+  assert('a hood with no rent throws (ADR-0016, no fallback)', threw);
+  threw = false; try { HF.estimateRent_('Montclair', rctx); } catch (e) { threw = /no canon rent/.test(e.message); }
+  assert('a hood with no row throws', threw);
+  assert('the 2026 rent table is gone', !/'Piedmont Ave': 2200/.test(hsrc));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -220,6 +220,7 @@ function runWorldCycle() {
     ensureEngine133Config_(ss);  // engine.133 city-health physics keys, same self-arm contract
     ensureEngine135Config_(ss);  // engine.135 employment envelope keys, same self-arm contract
     ensureEngine96Config_(ss);   // engine.96 business lifecycle keys, same self-arm contract
+    ensureEngine160Config_(ss);  // engine.160 hoodRentShare — the one hood rent rule, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet

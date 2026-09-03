@@ -1207,7 +1207,7 @@ function formSingleParentHousehold_(ctx, motherRowIdx, cycle) {
     var vals = {
       HouseholdId: hhId, HeadOfHousehold: popId, HouseholdType: "family",
       Members: JSON.stringify([popId]), Neighborhood: hood, HousingType: "rented",
-      MonthlyRent: (typeof estimateRent_ === "function") ? estimateRent_(hood) : 1700,
+      MonthlyRent: estimateRent_(hood, ctx),
       HousingCost: 0, HouseholdIncome: income, FormedCycle: cycle,
       DissolvedCycle: "", Status: "active", HouseholdSavings: 0
     };

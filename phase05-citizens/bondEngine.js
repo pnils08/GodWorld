@@ -2181,7 +2181,7 @@ function marryCitizens_(ctx, bond, A, B, cycle) {
       HouseholdId: hhId, HeadOfHousehold: bond.citizenA, HouseholdType: 'couple',
       Members: JSON.stringify([bond.citizenA, bond.citizenB]),
       Neighborhood: A.hood, HousingType: 'rented',
-      MonthlyRent: (typeof estimateRent_ === 'function') ? estimateRent_(A.hood) : 1700,
+      MonthlyRent: estimateRent_(A.hood, ctx),
       HousingCost: 0, HouseholdIncome: A.income + B.income,
       FormedCycle: cycle, DissolvedCycle: '', Status: 'active', HouseholdSavings: 0,
       SuperCouple: superCouple ? 'yes' : ''

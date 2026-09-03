@@ -374,7 +374,7 @@ console.log('engine.154 compatibility reads net worth + hood prosperity; the dra
 }
 
 // ═══ engine.155 (S413) — cut 7: Door C, the household heritage door ═══════════
-console.log('engine.155 Door C: an owned home + a Tier ≤ 2 name + the balance founds a line, solo or family');
+console.log('engine.155 Door C: an owned home + the money to be old money ($50M) founds a line, solo or family — no Tier gate');
 {
   const updateHeritage_ = loadEngine('../phase05-citizens/generationalWealthEngine.js', 'updateHeritage_');
   const HDR = SL_HEADER.concat(['Tier', 'LineageId', 'SpouseId', 'UsageCount', 'CIV (y/n)', 'LifeHistory']);
@@ -397,26 +397,26 @@ console.log('engine.155 Door C: an owned home + a Tier ≤ 2 name + the balance 
   };
   // C1 solo: T2 + $600K + owned → founds by C; the member joins; the line reads the door
   {
-    const t = run([person('POP-1', 'Keisha', 'Ramos', 'Lake Merritt', 2, 613000, 'HH-1')], [owned('HH-1', ['POP-1'], 'Lake Merritt')]);
+    const t = run([person('POP-1', 'Danny', 'Horn', 'Lake Merritt', 4, 90000000, 'HH-1')], [owned('HH-1', ['POP-1'], 'Lake Merritt')]);
     const line = t.hl.find(r => r[4] === 'C');
-    assert('C1 solo T2 at $613K in an owned home founds a Door-C line, numbered after the last', t.res.founded === 1 && line && line[0] === 'LIN-00006' && line[1] === 'Ramos' && line[2] === 'POP-1' && line[9] === 'Founding' && Number(line[11]) === 1 /* the founding home counts */, JSON.stringify(t.hl));
-    assert('C1 the member carries the line + the [Heritage] door-C line + a HERITAGE_FOUNDED hook naming the home', t.row('POP-1')[hi('LineageId')] === 'LIN-00006' && /\[Heritage\] the Ramos line is founded — a home, a name, and the standing to keep both/.test(t.row('POP-1')[hi('LifeHistory')]) && t.ctx.summary.storyHooks.some(h => h.hookType === 'HERITAGE_FOUNDED' && /an owned home in Lake Merritt, a Tier-2 name/.test(h.description)), t.row('POP-1')[hi('LifeHistory')]);
+    assert('C1 solo Tier 4 at $90M in an owned home founds a Door-C line (no Tier gate), numbered after the last', t.res.founded === 1 && line && line[0] === 'LIN-00006' && line[1] === 'Horn' && line[2] === 'POP-1' && line[9] === 'Founding' && Number(line[11]) === 1 /* the founding home counts */, JSON.stringify(t.hl));
+    assert('C1 the member carries the line + the [Heritage] door-C line + a HERITAGE_FOUNDED hook naming the home and the money', t.row('POP-1')[hi('LineageId')] === 'LIN-00006' && /\[Heritage\] the Horn line is founded — a home, a name, and the standing to keep both/.test(t.row('POP-1')[hi('LifeHistory')]) && t.ctx.summary.storyHooks.some(h => h.hookType === 'HERITAGE_FOUNDED' && /an owned home in Lake Merritt and the money to be old money/.test(h.description)), t.row('POP-1')[hi('LifeHistory')]);
   }
   // C2 the floors: solo below $500K, solo at Tier 3 with millions, a rented T1 with millions, a family below $1M → nothing
   {
     const t = run([
-      person('POP-1', 'A', 'Low', 'Temescal', 2, 400000, 'HH-1'),
-      person('POP-2', 'B', 'Rung', 'Temescal', 3, 5000000, 'HH-2'),
-      person('POP-3', 'C', 'Rent', 'Temescal', 1, 5000000, 'HH-3'),
-      person('POP-4', 'D', 'Fam', 'Temescal', 2, 500000, 'HH-4'), person('POP-5', 'E', 'Fam', 'Temescal', 4, 400000, 'HH-4'),
+      person('POP-1', 'A', 'Low', 'Temescal', 2, 613000, 'HH-1'),
+      person('POP-2', 'B', 'Rung', 'Temescal', 1, 5000000, 'HH-2'),
+      person('POP-3', 'C', 'Rent', 'Temescal', 1, 90000000, 'HH-3'),
+      person('POP-4', 'D', 'Fam', 'Temescal', 2, 30000000, 'HH-4'), person('POP-5', 'E', 'Fam', 'Temescal', 4, 19000000, 'HH-4'),
     ], [owned('HH-1', ['POP-1'], 'Temescal'), owned('HH-2', ['POP-2'], 'Temescal'), owned('HH-3', ['POP-3'], 'Temescal', 'rented'), owned('HH-4', ['POP-4', 'POP-5'], 'Temescal')]);
-    assert('C2 no floor is crossed: $400K solo, a Tier-3 millionaire, a renting Tier 1, a $900K family → 0 founded', t.res.founded === 0 && t.hl.length === 1 && [1, 2, 3, 4, 5].every(i => !t.row('POP-' + i)[hi('LineageId')]), JSON.stringify(t.res));
+    assert('C2 no floor is crossed: $613K (Ramos-class) and a $5M Tier 1 are light, a renting $90M has no home, a $49M family is under → 0 founded', t.res.founded === 0 && t.hl.length === 1 && [1, 2, 3, 4, 5].every(i => !t.row('POP-' + i)[hi('LineageId')]), JSON.stringify(t.res));
   }
   // C3 family: T2 + T4 spouse, $6.4M combined, owned → one line, both join, surname by count
   {
-    const t = run([person('POP-1', 'Johhny', 'Necklar', 'Rockridge', 2, 6000000, 'HH-1'), person('POP-2', 'Camila', 'Necklar', 'Rockridge', 4, 373000, 'HH-1')], [owned('HH-1', ['POP-1', 'POP-2'], 'Rockridge')]);
+    const t = run([person('POP-1', 'Henry', 'Necklar', 'Rockridge', 3, 49000000, 'HH-1'), person('POP-2', 'Camila', 'Necklar', 'Rockridge', 4, 1500000, 'HH-1')], [owned('HH-1', ['POP-1', 'POP-2'], 'Rockridge')]);
     const line = t.hl.find(r => r[4] === 'C');
-    assert('C3 family: one Door-C line, both members join, FamilyName by surname count, founder = elder', t.res.founded === 1 && line && line[1] === 'Necklar' && t.row('POP-1')[hi('LineageId')] === 'LIN-00006' && t.row('POP-2')[hi('LineageId')] === 'LIN-00006' && Number(line[6]) === 2, JSON.stringify(t.hl));
+    assert('C3 family at $50.5M combined (Tier 3 + Tier 4 — no Tier gate): one Door-C line, both members join, FamilyName by surname count, founder = elder', t.res.founded === 1 && line && line[1] === 'Necklar' && t.row('POP-1')[hi('LineageId')] === 'LIN-00006' && t.row('POP-2')[hi('LineageId')] === 'LIN-00006' && Number(line[6]) === 2, JSON.stringify(t.hl));
   }
   // C4 already on a line → the household is skipped (lines grow by lived events, never re-found)
   {
@@ -430,8 +430,8 @@ console.log('engine.155 Door C: an owned home + a Tier ≤ 2 name + the balance 
   }
   // C6 blank Tier reads as 4; Tier 1 at the solo floor exactly founds
   {
-    const t = run([person('POP-1', 'Blank', 'Tier', 'Laurel', '', 900000, 'HH-1'), person('POP-2', 'Edge', 'Case', 'Laurel', 1, 500000, 'HH-2')], [owned('HH-1', ['POP-1'], 'Laurel'), owned('HH-2', ['POP-2'], 'Laurel')]);
-    assert('C6 blank Tier is Tier 4 (no door); Tier 1 at exactly $500K founds', t.res.founded === 1 && !t.row('POP-1')[hi('LineageId')] && t.row('POP-2')[hi('LineageId')] === 'LIN-00006');
+    const t = run([person('POP-1', 'Blank', 'Tier', 'Laurel', '', 49999999, 'HH-1'), person('POP-2', 'Edge', 'Case', 'Laurel', '', 50000000, 'HH-2')], [owned('HH-1', ['POP-1'], 'Laurel'), owned('HH-2', ['POP-2'], 'Laurel')]);
+    assert('C6 exactly $50M founds, $1 under does not; a blank Tier is no bar either way', t.res.founded === 1 && !t.row('POP-1')[hi('LineageId')] && t.row('POP-2')[hi('LineageId')] === 'LIN-00006');
   }
   const wsrc2 = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generationalWealthEngine.js'), 'utf8');
   assert('Door C runs after Door B and before the aggregates', wsrc2.indexOf("foundLine_([bRow], bName, 'B');") < wsrc2.indexOf("foundLine_(unitC, famC, 'C');") && wsrc2.indexOf("foundLine_(unitC, famC, 'C');") < wsrc2.indexOf('// ── aggregates + score accrual'));

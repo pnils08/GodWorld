@@ -1635,10 +1635,13 @@ var HERITAGE_DOOR_A_MEMBERS = 3;        // living on-camera members
 var HERITAGE_DOOR_A_NETWORTH = 1000000; // combined family lived savings
 var HERITAGE_DOOR_B_NETWORTH = 350000000; // the apex-wealth door
 // engine.155 (S413, builder's chain cut 7) — Door C, the household door: an
-// OWNED home, a name at Tier ≤ 2, and the balance to keep both. Solo or family.
-var HERITAGE_DOOR_C_TIER = 2;             // a member at this rung or better
-var HERITAGE_DOOR_C_SOLO_NETWORTH = 500000;   // one living member (band 7)
-var HERITAGE_DOOR_C_FAMILY_NETWORTH = 1000000; // two or more, combined (Door A's bar)
+// OWNED home and the money to be old money. Builder ruling 2026-09-03: heritage
+// is MONEY — no Tier gate ("$100M is $100M whether you're famous or not"; Varek
+// at $10B and Tier 3 is the richest citizen in the sim); $500K and $5M are
+// light ("makes every A's player a Rockefeller"). Solo or family, $50M — band
+// 10, the top of the wealth ladder; nine citizens clear it at C105.
+var HERITAGE_DOOR_C_SOLO_NETWORTH = 50000000;   // one living member
+var HERITAGE_DOOR_C_FAMILY_NETWORTH = 50000000; // two or more, combined
 
 // Tier-scaled business roll: chance per cycle that a line with an open slot
 // stakes a storefront. Odds, not guarantees — a Dynasty roll can still miss.
@@ -1827,7 +1830,6 @@ function updateHeritage_(ss, ctx, cycle) {
   // ── FOUNDING: the threshold doors. No seeding, no picking, no caps —
   // if three families cross a door the same cycle, three lines found. ──
   var foundedLines = [];
-  var doorCTier = 0; // engine.155: the best rung in the founding household (hook text)
   var foundLine_ = function(memberRows, famName, door) {
     var newLin = 'LIN-' + String(++maxLin).padStart(5, '0');
     var founder = null, founderBirth = 99999;
@@ -1866,7 +1868,7 @@ function updateHeritage_(ss, ctx, cycle) {
       hookType: 'HERITAGE_FOUNDED', severity: 4, priority: 4,
       description: 'The ' + famName + ' family line (' + newLin + ') entered the heritage ledger via ' +
         (door === 'B' ? 'apex wealth' :
-         door === 'C' ? 'an owned home in ' + String(memberRows[0][iHood] || 'Oakland') + ', a Tier-' + doorCTier + ' name and the balance to keep both' :
+         door === 'C' ? 'an owned home in ' + String(memberRows[0][iHood] || 'Oakland') + ' and the money to be old money' :
          memberRows.length + ' on-camera members and a seven-figure balance'),
       cycleGenerated: cycle, neighborhood: String(memberRows[0][iHood] || ''), domain: 'COMMUNITY',
       text: 'The ' + famName + ' line is founded'
@@ -1928,16 +1930,16 @@ function updateHeritage_(ss, ctx, cycle) {
   }
 
   // Door C — engine.155 (S413): the household door. An OWNED, active household
-  // with no member on a line founds when a member stands at Tier ≤ 2 and the
-  // balance clears the bar — $500K alone, $1M combined for two or more. Every
-  // living member joins. After A and B, so apex cash still founds by B.
+  // with no member on a line founds when the balance clears the bar — $50M,
+  // alone or combined (builder: heritage is money, no Tier gate). Every living
+  // member joins. After A and B, so apex cash still founds by B.
   var hhSheetC = ss.getSheetByName('Household_Ledger');
   if (hhSheetC && hhSheetC.getLastRow() >= 2) {
     var cv = hhSheetC.getDataRange().getValues();
     var ch = cv[0];
     var cMem = ch.indexOf('Members'), cType = ch.indexOf('HousingType'), cStat = ch.indexOf('Status');
     var iTierC = idx('Tier');
-    if (cMem >= 0 && cType >= 0 && iTierC >= 0) {
+    if (cMem >= 0 && cType >= 0) {
       var claimedC = {};
       for (var cr = 1; cr < cv.length; cr++) {
         if (cStat >= 0 && String(cv[cr][cStat] || '').toLowerCase() !== 'active') continue;
@@ -1953,9 +1955,9 @@ function updateHeritage_(ss, ctx, cycle) {
           if (String(crow[iLin] || '').trim()) { linedC = true; break; }
           unitC.push(crow);
           var ct = Math.round(Number(crow[iTierC])) || 4;
-          if (ct >= 1 && ct < bestTier) bestTier = ct;
+          if (ct >= 1 && ct < bestTier) bestTier = ct; // read for the hook text only — Tier no longer gates (builder ruling 2026-09-03)
         }
-        if (linedC || !unitC.length || bestTier > HERITAGE_DOOR_C_TIER) continue;
+        if (linedC || !unitC.length) continue;
         var unitNWC = 0;
         for (var cn = 0; cn < unitC.length; cn++) unitNWC += nwOf(unitC[cn]);
         if (unitNWC < (unitC.length === 1 ? HERITAGE_DOOR_C_SOLO_NETWORTH : HERITAGE_DOOR_C_FAMILY_NETWORTH)) continue;
@@ -1967,7 +1969,6 @@ function updateHeritage_(ss, ctx, cycle) {
         var famC = '', bestC = 0;
         for (var skC in surC) { if (surC[skC] > bestC) { bestC = surC[skC]; famC = skC; } }
         if (!famC) continue;
-        doorCTier = bestTier;
         foundLine_(unitC, famC, 'C');
         for (var cc = 0; cc < unitC.length; cc++) claimedC[String(unitC[cc][iPop]).trim()] = true;
       }

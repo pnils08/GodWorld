@@ -153,6 +153,11 @@ function processGenerationalWealth_(ctx) {
   var hoodRefResults = applyUntrackedHoodReference_(ctx);
   results.hoodReferenceRaised = hoodRefResults.raised;
 
+  // Step 1.7 (engine.96 Task 10, S413, builder-direct 2026-09-03): the owner's draw —
+  // Key_Personnel is the ownership link. An off-heritage owner is paid by the
+  // books; a heritage owner keeps their income and collects the gains on top.
+  results.ownerDraw = applyOwnerDraw_(ctx, cycle);
+
   // engine.61 T5 (S321): capture WealthLevel before Step 2 recomputes it —
   // the diff is what mobility tracking reads at Step 5.
   var prevWealthLevels = captureWealthLevels_(ctx);
@@ -763,6 +768,166 @@ function applyUntrackedHoodReference_(ctx) {
     if (income < ref) { row[iIncome] = ref; out.raised++; }
   }
   if (out.raised > 0) ctx.ledger.dirty = true;
+  return out;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// engine.96 Task 10 (S413, builder-direct 2026-09-03) — THE OWNER'S DRAW
+// "Citizens can open a business as their job, but the business system
+// determines its success. An off-heritage citizen is dependent on the business
+// for a salary; heritage business owners collect gains on top of their income."
+// Business_Ledger.Key_Personnel IS the ownership link (Varek on Civis Systems,
+// Presti on Presti Accounting, Harris on Brie Bouquets). Profit = Annual_Revenue
+// − Employee_Count × Avg_Salary. Off-heritage owner (no LineageId, ENGINE clock,
+// Tier 3–4 — the engine.135 re-pay rule): Income := profit × OWNER_DRAW_SHARE
+// ÷ owners, the books deciding the draw, cut or raise. Heritage owner: Income
+// untouched, NetWorth += max(0, profit) × HERITAGE_GAIN_SHARE ÷ owners ÷ 52 per
+// cycle. Losses are the lifecycle cut's business (Growth_Rate), not this one's.
+// Owners resolve by NAME against the ledger; a POP id in the cell is verified
+// against the name beside it. Blank revenue = no signal, no draw.
+// ════════════════════════════════════════════════════════════════════════════
+var OWNER_DRAW_SHARE = 0.5;     // of profit, annual, paid to off-heritage owners as Income
+var HERITAGE_GAIN_SHARE = 0.5;  // of profit, annual, landing on a heritage owner's NetWorth
+
+// One Key_Personnel cell → [{ pop, name, tag, owner }]. Entries split on ';'
+// (and '/' between bare names); a trailing "(…)" is the tag — "(founder)",
+// "(Elias Varek, Owner)", "(Co-Founders)" — and applies to every name in the
+// entry. Owner = tag says founder/owner/proprietor, OR a bare "POP-nnnnn Name"
+// with no tag (the minted-owner convention). Named staff with a job tag or a
+// bare name with no id are personnel, not owners.
+function parseKeyPersonnelOwners_(cell) {
+  var out = [];
+  var text = String(cell || '').trim();
+  if (!text) return out;
+  var entries = text.split(/\s*;\s*/);
+  for (var e = 0; e < entries.length; e++) {
+    var ent = entries[e].trim();
+    if (!ent) continue;
+    var tag = '';
+    var pm = /\(([^()]*)\)\s*$/.exec(ent);
+    if (pm) { tag = pm[1].trim(); ent = ent.slice(0, pm.index).trim(); }
+    var names = [], pop = '';
+    var idm = /^(POP-\d+)\s*(.*)$/.exec(ent);
+    if (idm) { pop = idm[1]; ent = idm[2].trim(); }
+    // "(Elias Varek, Owner)" — the name rides inside the tag beside the id
+    if (pop && !ent && tag) {
+      var tparts = tag.split(/\s*,\s*/);
+      ent = tparts[0]; tag = tparts.slice(1).join(', ');
+    }
+    var parts = ent ? ent.split(/\s*\/\s*/) : [''];
+    for (var n = 0; n < parts.length; n++) {
+      var nm = parts[n].replace(/^(Dr|Rev|Bishop|Imam|Mr|Mrs|Ms)\.?\s+/i, '').trim();
+      names.push(nm);
+    }
+    var ownerTag = /founder|owner|proprietor/i.test(tag);
+    var isOwner = ownerTag || (!!pop && !tag);
+    for (var k = 0; k < names.length; k++) {
+      out.push({ pop: pop, name: names[k], tag: tag, owner: isOwner });
+    }
+  }
+  return out;
+}
+
+function ownerNameKey_(v) { return String(v || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim(); }
+
+// Resolve one parsed entry to a ledger row: id verified by the name beside it
+// when both are present (a mismatch resolves nothing); else by exact name.
+function resolveOwnerRow_(entry, rowByPop, rowByName) {
+  var byId = entry.pop ? (rowByPop[entry.pop] || null) : null;
+  var byName = entry.name ? (rowByName[ownerNameKey_(entry.name)] || null) : null;
+  if (entry.pop && entry.name) return (byId && byName && byId === byName) ? byId : null; // both given: both must agree
+  return byId || byName || null;
+}
+
+function businessProfit_(rev, empCount, avgSalary) {
+  var r = Number(String(rev === null || rev === undefined ? '' : rev).replace(/[$,\s]/g, ''));
+  if (rev === '' || rev === null || rev === undefined || isNaN(r)) return null;
+  var payroll = (Number(empCount) || 0) * (Number(avgSalary) || 0);
+  return Math.round(r - payroll);
+}
+
+function applyOwnerDraw_(ctx, cycle) {
+  var out = { businesses: 0, owners: 0, paid: 0, gains: 0, unresolved: 0 };
+  var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
+  if (!header || !rows || !rows.length) return out;
+  var idx = function(n) { return header.indexOf(n); };
+  var iPop = idx('POPID'), iFirst = idx('First'), iLast = idx('Last'), iIncome = idx('Income'), iNW = idx('NetWorth'),
+      iLin = idx('LineageId'), iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'),
+      iEcon = idx('EconomicProfileKey'), iLife = idx('LifeHistory'), iLastUpd = idx('LastUpdated');
+  if (iPop < 0 || iIncome < 0 || iNW < 0) return out;
+  var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
+  if (!sheet) return out;
+  var data = sheet.getDataRange().getValues();
+  if (!data || data.length < 2) return out;
+  var bh = data[0];
+  var bId = bh.indexOf('BIZ_ID'), bNm = bh.indexOf('Name'), bRev = bh.indexOf('Annual_Revenue'),
+      bCnt = bh.indexOf('Employee_Count'), bSal = bh.indexOf('Avg_Salary'), bKP = bh.indexOf('Key_Personnel');
+  if (bKP < 0 || bRev < 0 || bCnt < 0 || bSal < 0) return out;
+
+  var rowByPop = {}, rowByName = {};
+  for (var r0 = 0; r0 < rows.length; r0++) {
+    var row0 = rows[r0];
+    if (!row0 || !row0[iPop]) continue;
+    if (String(row0[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+    rowByPop[String(row0[iPop]).trim()] = row0;
+    var key0 = ownerNameKey_((row0[iFirst] || '') + ' ' + (row0[iLast] || ''));
+    if (key0 && !rowByName[key0]) rowByName[key0] = row0;
+  }
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+
+  for (var b = 1; b < data.length; b++) {
+    var entries = parseKeyPersonnelOwners_(data[b][bKP]);
+    var ownerRows = [];
+    for (var e = 0; e < entries.length; e++) {
+      if (!entries[e].owner) continue;
+      var orow = resolveOwnerRow_(entries[e], rowByPop, rowByName);
+      if (!orow) { out.unresolved++; continue; }
+      if (ownerRows.indexOf(orow) < 0) ownerRows.push(orow);
+    }
+    if (!ownerRows.length) continue;
+    var profit = businessProfit_(data[b][bRev], data[b][bCnt], data[b][bSal]);
+    if (profit === null) continue; // blank revenue: no signal
+    out.businesses++;
+    var bizName = String(bNm >= 0 ? (data[b][bNm] || data[b][bId]) : data[b][bId]);
+    for (var o = 0; o < ownerRows.length; o++) {
+      var orw = ownerRows[o];
+      out.owners++;
+      var onLine = iLin >= 0 && String(orw[iLin] || '').trim() !== '';
+      if (onLine) {
+        // heritage: gains on top of income, positive profit only
+        var gain = Math.round(Math.max(0, profit) * HERITAGE_GAIN_SHARE / ownerRows.length / 52);
+        if (gain <= 0) continue;
+        var nw0 = Number(String(orw[iNW]).replace(/[$,\s]/g, '')) || 0;
+        orw[iNW] = nw0 + gain;
+        if (iLastUpd >= 0) orw[iLastUpd] = ctx.now;
+        out.gains++;
+        ctx.ledger.dirty = true;
+        if (typeof queueAppendIntent_ === 'function') {
+          queueAppendIntent_(ctx, 'LifeHistory_Log', [ctx.now, orw[iPop], '', 'Business-Gain',
+            bizName + ' returned $' + gain + ' to the line this week', '', cycle]);
+        }
+        continue;
+      }
+      // off-heritage: the books set the draw — ENGINE clock, Tier 3–4 only (engine.135 re-pay rule)
+      if (typeof isEngineClockRow_ === 'function' && !isEngineClockRow_(orw, iClock)) continue;
+      if (typeof isSportsLayerRow_ === 'function' && isSportsLayerRow_(orw, iClock, iEcon)) continue;
+      var tier = iTier >= 0 ? Number(orw[iTier]) : 4;
+      if (tier === 1 || tier === 2) continue;
+      var draw = Math.max(0, Math.round(profit * OWNER_DRAW_SHARE / ownerRows.length));
+      var was = Number(orw[iIncome]) || 0;
+      if (draw === was) continue;
+      orw[iIncome] = draw;
+      if (iLastUpd >= 0) orw[iLastUpd] = ctx.now;
+      out.paid++;
+      ctx.ledger.dirty = true;
+      if (iLife >= 0 && (was <= 0 || Math.abs(draw - was) / was >= 0.10)) {
+        var lifeO = String(orw[iLife] || '');
+        var lineO = stamp + ' — [Business] ' + bizName + (draw > was ? ' paid its owner $' + draw + ' this year — the books raised the draw' : ' paid its owner $' + draw + ' this year — the books cut the draw');
+        if (lifeO.indexOf(stamp + ' — [Business] ' + bizName) < 0) orw[iLife] = (lifeO ? lifeO + '\n' : '') + lineO;
+      }
+    }
+  }
+  if (out.paid || out.gains) Logger.log('applyOwnerDraw_ engine.96 T10: ' + out.businesses + ' businesses, ' + out.owners + ' owners, ' + out.paid + ' paid, ' + out.gains + ' gains, ' + out.unresolved + ' unresolved');
   return out;
 }
 

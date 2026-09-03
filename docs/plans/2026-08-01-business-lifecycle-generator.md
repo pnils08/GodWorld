@@ -219,6 +219,14 @@ closure           = distress >= bizClosureStreak AND
 
 ---
 
+### Task 10: The owner's draw (engine-sheet) — builder-direct 2026-09-03
+
+- **Direction (bloodline plan §Direction 01:09):** "citizens can open a business as their job, but the business system determines its success. An off-heritage citizen is dependent on the business for a salary; heritage business owners collect gains on top of their income." Key_Personnel IS the ownership link (Varek on Civis Systems, Presti, Bubic, Harris, Keane on their rows).
+- **Files:** `phase05-citizens/generationalWealthEngine.js` — `parseKeyPersonnelOwners_`, `resolveOwnerRow_`, `businessProfit_`, `applyOwnerDraw_` at Step 1.7 (after the raise-only floors D3/D4, before the money loop reads Income).
+- **Mechanism:** owners = Key_Personnel entries tagged founder/owner/proprietor, or a bare `POP-nnnnn Name` (the minted-owner convention); named staff with a job tag or a bare name with no id are personnel. Resolve by NAME against the ledger; an id beside a name must agree or resolves nothing (never trust a bare id). Profit = Annual_Revenue − Employee_Count × Avg_Salary (blank revenue = no signal). **Off-heritage owner** (no LineageId; ENGINE clock; Tier 3–4 — the engine.135 re-pay rule keeps authored Tier 1–2 pay): Income := max(0, profit × `OWNER_DRAW_SHARE` 0.5 ÷ owners) — cut or raise, the books decide; a `[Business]` life line when the draw moves ≥ 10 %. **Heritage owner:** Income untouched, NetWorth += max(0, profit) × `HERITAGE_GAIN_SHARE` 0.5 ÷ owners ÷ 52 per cycle, one `Business-Gain` log row. Losses pay nothing (doctrine 3); the lifecycle (Tasks 5–7) is what turns a loss into layoffs and closure.
+- **Live reach at C105 (measured):** 20 Key_Personnel cells; owners that resolve: Varek (Civis + the Oaks), Presti, Keane (Firehouse — blank revenue, no signal), Bubic (Tier 2, outside), Harris. First live fire: Presti $350K → $180K (cut), Harris $98K → $92.5K (under the 10 % line), Varek + ~$486K/cycle from Civis (the Oaks run at a loss on the ledger's own payroll: 250 staff at $15.6M — a data oddity, pays nothing). **Six founder names on the Business_Ledger have no ledger row** (Chandrasekaran, Yoon, Nakamura, Tan, Osei, Torres) — doctrine 6 ghosts, counted as `unresolved`, never invented here; a mint decision for the builder.
+- **Status:** [x] BUILT + unit-proven 2026-09-03 (S413), pre-bench — hoodIncome.test.js T10 block. Bench + live: changelog.
+
 ## Open questions
 
 - [x] **Closure representation** — RESOLVED 2026-08-01 (Mike): a closure ledger. `Business_Archive` mirrors `Citizen_Archive`; full-row snapshot + exit metadata; BIZ-IDs never reissued. Mike's general principle: any sim exit (death, traded, closed business) lands on an archive ledger. Detail in Task 7.

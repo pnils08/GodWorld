@@ -1470,6 +1470,17 @@
 
 - **applyUntrackedHoodReference_(ctx)**
 
+- **parseKeyPersonnelOwners_(cell)**
+
+- **ownerNameKey_(v)**
+
+- **resolveOwnerRow_(entry, rowByPop, rowByName)**
+
+- **businessProfit_(rev, empCount, avgSalary)**
+
+- **applyOwnerDraw_(ctx, cycle)**
+  Sheets: Business_Ledger, LifeHistory_Log
+
 - **calculateIncomeFromBand_(incomeBand, tier, rng)**
 
 - **calculateCitizenWealth_(ctx)**
@@ -3772,4 +3783,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 188
-**Functions mapped:** 1282
+**Functions mapped:** 1287

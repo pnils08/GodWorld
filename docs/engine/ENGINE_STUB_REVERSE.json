@@ -2,7 +2,7 @@
   "generated": "2026-09-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 188,
-  "functionsMapped": 1282,
+  "functionsMapped": 1287,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4358,6 +4358,7 @@
         "phase04-events/generationalEventsEngine.js::applyMilestone_",
         "phase05-citizens/educationCareerEngine.js::stampPromotion_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
@@ -4385,6 +4386,7 @@
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
+        "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
@@ -4503,6 +4505,7 @@
         "phase04-events/chaosCarsEngine.js::flushBusinessFold_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
+        "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_"
       ],
@@ -4518,6 +4521,7 @@
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/applyChaosDecay.test.js::ctxWith",
         "phase05-citizens/educationCareerEngine.js::buildSettleBizPool_",
+        "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::applyTrackedEmployerFloor_",
         "phase05-citizens/generationalWealthEngine.js::loadHoodBusinessPay_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",

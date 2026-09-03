@@ -36,6 +36,7 @@ function assert(label, cond, detail) { if (cond) { passed++; console.log('ok ' +
 const sandbox = {
   Logger: { log: () => {} }, Math, JSON, Object, Array, String, Number, Date, isNaN, isFinite, parseInt, parseFloat, console, RegExp,
   safeRand_: ctx => (ctx && typeof ctx.rng === 'function') ? ctx.rng : (() => 0.6),
+  queueAppendIntent_: (ctx, tab, row) => { (global.__intents = global.__intents || []).push({ tab, row }); },
 };
 vm.createContext(sandbox);
 for (const rel of [
@@ -173,6 +174,53 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   assert('U1 priced by Downtown kitchen pay', inc('U1') === ref(62000, 1.0, 'U1'), inc('U1'));
   assert('U2 no hood reference → legacy band (35000 × 0.9 × 1.02)', inc('U2') === Math.round(35000 * 0.9 * 1.02), inc('U2'));
   assert('U3 already priced → untouched (fill, never re-roll)', inc('U3') === 55000);
+}
+
+
+// ── engine.96 Task 10 (S413): the owner's draw — Key_Personnel is the ownership link ──
+{
+  const P = sandbox.parseKeyPersonnelOwners_;
+  const own = (cell) => P(cell).filter(e => e.owner).map(e => (e.pop ? e.pop + ' ' : '') + e.name);
+  assert('T10 parse: "(founder)" tag → owner; "Dr." stripped', JSON.stringify(own('Elias Varek (founder)')) === '["Elias Varek"]' && JSON.stringify(own('Dr. Amara Osei (Founder)')) === '["Amara Osei"]');
+  assert('T10 parse: "A / B (Co-Founders)" → two owners', JSON.stringify(own('Daniel Yoon / Christine Nakamura (Co-Founders)')) === '["Daniel Yoon","Christine Nakamura"]');
+  assert('T10 parse: "POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)" → one owner, the ops man is personnel', JSON.stringify(own('POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)')) === '["POP-00789 Elias Varek"]');
+  assert('T10 parse: bare "POP-00048 Carlos Presti" (the minted-owner convention) → owner; bare "Rev. Daniel Han" / "Marcus Webb; Program Director" → personnel, not owners', JSON.stringify(own('POP-00048 Carlos Presti')) === '["POP-00048 Carlos Presti"]' && own('Rev. Daniel Han').length === 0 && own('Marcus Webb; Program Director').length === 0);
+  assert('T10 parse: the Bay Tribune staff list carries no owner tag → nobody owns the paper by this cell', own('Mags Corliss / P Slayer / Hal Richmond / Anthony / Carmen Delaine / Jordan Velez / Luis Navarro').length === 0);
+  assert('T10 profit = revenue − headcount × pay; blank revenue = null', sandbox.businessProfit_(720000, 3, 120000) === 360000 && sandbox.businessProfit_('$60,000,000', 41, 230000) === 50570000 && sandbox.businessProfit_('', 5, 1) === null);
+  // the pass
+  const HO = H.concat(['LineageId']);
+  const rowO = (o) => { const r = row(o); r.push(o.LineageId || ''); return r; };
+  const BLO = [['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'],
+    ['BIZ-1', 'Presti Accounting', 'Accounting', 'Downtown', 3, 120000, 720000, 1, 'POP-00048 Carlos Presti'],
+    ['BIZ-2', 'Civis Systems', 'Civic Tech', 'West Oakland', 41, 230000, 60000000, 15, 'Elias Varek (founder)'],
+    ['BIZ-3', 'Firehouse 29', 'Education', 'West Oakland', 20, 76000, '', 1, 'POP-00001 Vinnie Keane'],
+    ['BIZ-4', 'Bubic Burgers', 'Restaurant', 'West Oakland', 15, 73000, 2190000, 2, 'POP-00128 Kris Bubic'],
+    ['BIZ-5', 'Ridgeline Ventures', 'VC', 'Downtown', 12, 210000, 4400000, 15, 'Priya Chandrasekaran (Founder)'],
+    ['BIZ-6', 'Mismatch Co', 'Retail', 'Temescal', 2, 40000, 500000, 1, 'POP-00048 Somebody Else'],
+    ['BIZ-7', 'Loss Leader', 'Retail', 'Temescal', 6, 90000, 100000, -3, 'POP-00777 Ana Loss'],
+  ];
+  const people = [
+    rowO({ POPID: 'POP-00048', First: 'Carlos', Last: 'Presti', Tier: 4, Income: 350000, NetWorth: 482559, EmployerBizId: 'BIZ-1' }),
+    rowO({ POPID: 'POP-00789', First: 'Elias', Last: 'Varek', Tier: 1, Income: 100000000, NetWorth: 10000000000, EmployerBizId: 'BIZ-2', LineageId: 'LIN-00005' }),
+    rowO({ POPID: 'POP-00001', First: 'Vinnie', Last: 'Keane', Tier: 1, ClockMode: 'GAME', Income: 1500000, NetWorth: 450000000, EmployerBizId: 'BIZ-9', LineageId: 'LIN-00003' }),
+    rowO({ POPID: 'POP-00128', First: 'Kris', Last: 'Bubic', Tier: 2, Income: 243121, NetWorth: 180000000, EmployerBizId: 'BIZ-4' }),
+    rowO({ POPID: 'POP-00777', First: 'Ana', Last: 'Loss', Tier: 4, Income: 90000, NetWorth: 50000, EmployerBizId: 'SELF_EMPLOYED' }),
+  ];
+  const ctxO = { ledger: { headers: HO, rows: people.map(r => r.slice()), dirty: false }, summary: {}, config: { cycleCount: 106 }, now: 'C106',
+    ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BLO.map(r => r.slice()) }) } : null } };
+  global.__intents = [];
+  const out = sandbox.applyOwnerDraw_(ctxO, 106);
+  const g = p => ctxO.ledger.rows.find(r => r[HO.indexOf('POPID')] === p);
+  const inc = p => Number(g(p)[HO.indexOf('Income')]), nw = p => Number(g(p)[HO.indexOf('NetWorth')]);
+  assert('T10 off-heritage Tier 4 owner: Income := half the profit — Presti $350K → $180K, the books cut the draw, and the line says so', inc('POP-00048') === 180000 && /\[Business\] Presti Accounting paid its owner \$180000 this year — the books cut the draw/.test(g('POP-00048')[HO.indexOf('LifeHistory')]), g('POP-00048')[HO.indexOf('LifeHistory')]);
+  assert('T10 heritage owner: Income untouched, NetWorth += profit × 0.5 ÷ 52 — Varek + $486,250 from Civis, one Business-Gain log row', inc('POP-00789') === 100000000 && nw('POP-00789') === 10000000000 + 486250 && global.__intents.some(i => i.tab === 'LifeHistory_Log' && i.row[1] === 'POP-00789' && /Civis Systems returned \$486250/.test(i.row[4])), JSON.stringify(global.__intents));
+  assert('T10 blank revenue (Firehouse 29) = no signal: Keane untouched', inc('POP-00001') === 1500000 && nw('POP-00001') === 450000000);
+  assert('T10 Tier 2 off-heritage owner is outside the re-pay rule (engine.135): Bubic untouched', inc('POP-00128') === 243121);
+  assert('T10 a loss pays nothing: Ana Loss $90K → $0 (the world is allowed to hurt)', inc('POP-00777') === 0 && /the books cut the draw/.test(g('POP-00777')[HO.indexOf('LifeHistory')]));
+  assert('T10 unresolved owners counted, never invented: Priya (no row) + the id/name mismatch', out.unresolved === 2 && out.businesses === 4 && out.owners === 4 && out.paid === 2 && out.gains === 1 /* Mismatch Co resolves nobody, so it is not an owned business */, JSON.stringify(out));
+  const ctx2 = { ledger: { headers: HO, rows: ctxO.ledger.rows.map(r => r.slice()), dirty: false }, summary: {}, config: { cycleCount: 107 }, now: 'C107', ss: ctxO.ss };
+  const out2 = sandbox.applyOwnerDraw_(ctx2, 107);
+  assert('T10 idempotent draw: a second cycle at the same books pays nobody again (no change), heritage gains again', out2.paid === 0 && out2.gains === 1);
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

@@ -888,6 +888,11 @@
 
 - **bondFitnessOf_(person)**
 
+- **householdHousingById_(ctx)**
+  Sheets: Household_Ledger
+
+- **courtshipHousingBoost_(housingA, housingB)**
+
 - **buildBondLedgerIndex_(ctx)**
 
 - **processRomanceAndMarriage_(ctx)**
@@ -3703,4 +3708,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 186
-**Functions mapped:** 1257
+**Functions mapped:** 1259

@@ -698,9 +698,10 @@ function updateExistingBonds_(ctx) {
         ctx._bondLedgerIdx74 = ctx._bondLedgerIdx74 || buildBondLedgerIndex_(ctx) || {};
         var lkA = ctx._bondLedgerIdx74[String(bond.citizenA || '').trim().toUpperCase()];
         var lkB = ctx._bondLedgerIdx74[String(bond.citizenB || '').trim().toUpperCase()];
-        if ((lkA && lkA.householdId) || (lkB && lkB.householdId)) {
-          stepP = Math.min(0.5, stepP * HOUSEHOLD_COURTSHIP_BOOST);
-        }
+        // engine.153: owned > rented > none — read the household's HousingType
+        var housingById = householdHousingById_(ctx);
+        var boost = courtshipHousingBoost_(lkA && lkA.householdId ? housingById[lkA.householdId] : '', lkB && lkB.householdId ? housingById[lkB.householdId] : '');
+        if (boost > 1) stepP = Math.min(0.5, stepP * boost);
       }
       if (rr < 0.02) intensity += 1.0;              // the week that changes everything
       else if (rr < 0.02 + stepP) intensity += 0.25; // a real step
@@ -1741,6 +1742,7 @@ function resolveRivalry_(ctx, bondId, outcome) {
 var ROMANCE_THRESHOLD = 5.5;  // top of the real distribution — slow, not never
 var ROMANCE_CHANCE = 0.10;    // per-cycle base once conditions hold (× tier × fitness × family trait)
 var MARRIAGE_THRESHOLD = 8;   // a romance grown this strong marries
+var HOME_OWNED_COURTSHIP_BOOST = 2.0; // engine.153 (S412, builder's chain): "once you have a house your odds of marriage increase" — an OWNED home beats a rented household beats none
 var HOUSEHOLD_COURTSHIP_BOOST = 1.5; // engine.74 (S328, Mike-direct): an established
                                      // home feeds courtship — either partner holding
                                      // a household boosts the romance step chance
@@ -1841,6 +1843,34 @@ function bondFitnessOf_(person) {
   if (person.debt >= 5) f -= 0.15;
   else if (person.debt >= 3) f -= 0.05;
   return Math.max(0.6, Math.min(1.4, f));
+}
+
+// engine.153 (S412): HouseholdId -> HousingType ('owned' | 'rented' | ''), one read per cycle.
+function householdHousingById_(ctx) {
+  if (ctx._householdHousingById153) return ctx._householdHousingById153;
+  var map = {};
+  ctx._householdHousingById153 = map;
+  try {
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Household_Ledger') : null;
+    if (!sheet || sheet.getLastRow() < 2) return map;
+    var v = sheet.getDataRange().getValues();
+    var h = v[0], iId = h.indexOf('HouseholdId'), iHT = h.indexOf('HousingType'), iSt = h.indexOf('Status');
+    if (iId < 0 || iHT < 0) return map;
+    for (var r = 1; r < v.length; r++) {
+      if (iSt >= 0 && String(v[r][iSt] || '').toLowerCase() === 'dissolved') continue;
+      var id = String(v[r][iId] || '').trim();
+      if (id) map[id] = String(v[r][iHT] || '').trim().toLowerCase() || 'rented';
+    }
+  } catch (e) { Logger.log('householdHousingById_: ' + e.message); }
+  return map;
+}
+// The courtship-step multiplier for a pair: an owned home on either side beats a
+// rented household beats none. Pure; '' or undefined = no household.
+function courtshipHousingBoost_(housingA, housingB) {
+  var a = String(housingA || '').toLowerCase(), b = String(housingB || '').toLowerCase();
+  if (a === 'owned' || b === 'owned') return HOME_OWNED_COURTSHIP_BOOST;
+  if (a || b) return HOUSEHOLD_COURTSHIP_BOOST;
+  return 1;
 }
 
 function buildBondLedgerIndex_(ctx) {

@@ -2,7 +2,7 @@
   "generated": "2026-09-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 186,
-  "functionsMapped": 1257,
+  "functionsMapped": 1259,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4552,6 +4552,7 @@
         "phase04-events/generationalEventsEngine.js::createChildRow_",
         "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
+        "phase05-citizens/bondEngine.js::householdHousingById_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",

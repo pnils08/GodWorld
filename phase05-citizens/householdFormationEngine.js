@@ -267,14 +267,16 @@ function processHouseholdFormation_(ctx) {
 var GENERIC_OFFCAM_INCOME = 48000;
 
 // engine.73 (S328, Mike-direct): solo establishment. Household = 2+ group by
-// doctrine; the one exception is an ESTABLISHED single — Tier <=3 AND income
-// >= the floor — who rolls a per-cycle chance to form a household of one
-// (type 'solo'). This is an event in a life (coverable), not a stamp, and it
+// doctrine; the one exception is an ESTABLISHED single — income >= the floor —
+// who rolls a per-cycle chance to form a household of one (type 'solo').
+// engine.153 (S412, builder's chain 2026-09-02: "a citizen may start single as
+// Tier 4, generate their pay, build wealth, purchase a house"): the Tier <= 3
+// gate is gone — a Tier-4 earner establishes on income alone. Home purchase is
+// household physics, so this is the door to the first rung of the chain. This is an event in a life (coverable), not a stamp, and it
 // unlocks the household-only physics (home purchase, savings, relocation).
 // Gate sized S328: 67 of 358 unhoused true-singles eligible (~19%); at 10%
 // chance that's a ~6-7/cycle trickle. Solo households do NOT register in
 // Family_Relationships (that ledger is families with on-camera members).
-var SOLO_TIER_MAX = 3;
 var SOLO_INCOME_FLOOR = 85000;
 var SOLO_ESTABLISH_CHANCE = 0.10;
 
@@ -381,8 +383,8 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
 
     if (!married && !(age >= 18 && onKids.length) && !orphanMinor) {
       // engine.73 solo establishment — the one non-group door, gated + diced.
-      if (age >= 18 && cz.tier <= SOLO_TIER_MAX && ownInc >= SOLO_INCOME_FLOOR &&
-          rng() < SOLO_ESTABLISH_CHANCE) {
+      if (age >= 18 && ownInc >= SOLO_INCOME_FLOOR &&
+          rng() < SOLO_ESTABLISH_CHANCE) { // engine.153: income alone — no Tier gate
         var soloId = 'HH-' + String(cycle).padStart(4, '0') + '-F' + String(++seq).padStart(3, '0');
         var soloVals = {
           HouseholdId: soloId, HeadOfHousehold: pop, HouseholdType: 'solo',
@@ -728,13 +730,13 @@ function reconcileHouseholds_(ctx, cycle) {
           if (headMar === 'married' || headMar === 'partnered') {
             newType = 'couple';
           } else {
-            // engine.73: an established single (Tier <= SOLO_TIER_MAX, income
-            // >= SOLO_INCOME_FLOOR) legitimately holds a household of one —
+            // engine.73/153: an established single (income >= SOLO_INCOME_FLOOR,
+            // any Tier since engine.153) legitimately holds a household of one —
             // type 'solo'. Below the gate stays 'single' (visible debt,
             // NOT auto-dissolved), unchanged from engine.57.
             var recTier = headRow && iTierRec >= 0 ? (Number(headRow[iTierRec]) || 4) : 4;
             var recInc = headRow && iIncomeRec >= 0 ? (Number(String(headRow[iIncomeRec]).replace(/[$,\s]/g, '')) || 0) : 0;
-            newType = (recTier <= SOLO_TIER_MAX && recInc >= SOLO_INCOME_FLOOR) ? 'solo' : 'single';
+            newType = (recInc >= SOLO_INCOME_FLOOR) ? 'solo' : 'single';
           }
         }
         if (lrow[lType] !== newType) { lrow[lType] = newType; rowChanged = true; }

@@ -276,5 +276,31 @@ console.log('H8 determinism');
   assert('same-seed runs byte-identical', snap(ctxA, a.sl) === snap(ctxB, b.sl));
 }
 
+// ═══ engine.153 (S412) — cut 4: a single can own a home ═══════════════════════
+console.log('engine.153 solo establishment on income alone; owned beats rented on courtship');
+{
+  const sl = [cit('POP-00900', 'Dara', 'Quinn', 'Temescal', 92000, { netWorth: 120000 }),
+              cit('POP-00901', 'Ben', 'Poor', 'Temescal', 60000, { netWorth: 5000 })];
+  const ctx = buildCtx(sl, [], () => 0.05);
+  processHouseholdFormation_(ctx);
+  const rows = ctx._sheets.Household_Ledger._values.slice(1);
+  const dara = rows.find(r => JSON.stringify(r[hhi('Members')]).includes('POP-00900'));
+  const ben = rows.find(r => JSON.stringify(r[hhi('Members')]).includes('POP-00901'));
+  assert('a single earner at 92k with no Tier gate establishes a solo household at rng 0.05', !!dara && dara[hhi('HouseholdType')] === 'solo' && dara[hhi('HousingType')] === 'rented');
+  assert('below the income floor: no household', !ben);
+  const ctx2 = buildCtx([cit('POP-00902', 'Eve', 'Dice', 'Temescal', 92000, {})], [], () => 0.5);
+  processHouseholdFormation_(ctx2);
+  assert('the 10% roll still gates it (rng 0.5 → nothing)', ctx2._sheets.Household_Ledger._values.length === 1);
+  assert('SOLO_TIER_MAX is gone from the formation engine', !/SOLO_TIER_MAX/.test(fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/householdFormationEngine.js'), 'utf8')));
+  // bond side: pure helper + one-read map
+  const bsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/bondEngine.js'), 'utf8');
+  const BE = new Function('Logger', bsrc + '\nreturn { courtshipHousingBoost_, householdHousingById_, HOME_OWNED_COURTSHIP_BOOST, HOUSEHOLD_COURTSHIP_BOOST };')({ log() {} });
+  assert('owned on either side → 2.0; rented household → 1.5; none → 1', BE.courtshipHousingBoost_('owned', '') === 2 && BE.courtshipHousingBoost_('', 'owned') === 2 && BE.courtshipHousingBoost_('rented', '') === 1.5 && BE.courtshipHousingBoost_('', '') === 1 && BE.HOME_OWNED_COURTSHIP_BOOST > BE.HOUSEHOLD_COURTSHIP_BOOST);
+  const hctx = { ss: { getSheetByName: (n) => n === 'Household_Ledger' ? { getLastRow: () => 4, getDataRange: () => ({ getValues: () => [['HouseholdId', 'HousingType', 'Status'], ['HH-1', 'owned', 'active'], ['HH-2', '', 'active'], ['HH-3', 'owned', 'dissolved']] }) } : null } };
+  const m = BE.householdHousingById_(hctx);
+  assert('housing map: owned kept, blank reads rented, dissolved dropped, cached on ctx', m['HH-1'] === 'owned' && m['HH-2'] === 'rented' && !('HH-3' in m) && BE.householdHousingById_(hctx) === m);
+  assert('the courtship step reads the housing boost', /courtshipHousingBoost_\(lkA && lkA.householdId \? housingById/.test(bsrc));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

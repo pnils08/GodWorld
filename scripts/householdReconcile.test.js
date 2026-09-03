@@ -352,6 +352,23 @@ console.log('engine.158 the house is priced by the hood, admitted by net worth, 
   assert('implied floors: Rockridge ≈ $156K, Temescal ≈ $126K', Math.round(minIncome(3166) / 1000) === 156 && Math.round(minIncome(2551) / 1000) === 126);
 }
 
+// ═══ engine.159 (S414) — an owned home's burden is its mortgage, never its price ═══
+console.log('engine.159 detectHouseholdStress_ reads MonthlyRent for owned households (HousingCost is the price)');
+{
+  const hsrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/householdFormationEngine.js'), 'utf8');
+  const HF = new Function('Logger', hsrc + '\nreturn { detectHouseholdStress_, HOUSING_TYPES, RENT_BURDEN_CRISIS, SAVINGS_BUFFER_MONTHS };')({ log() {} });
+  const owned = { householdId: 'HH-O', housingType: 'owned', monthlyRent: 3200, housingCost: 700000, householdIncome: 150000, householdSavings: 0 };
+  const rentedCrisis = { householdId: 'HH-R', housingType: 'rented', monthlyRent: 3000, housingCost: 0, householdIncome: 48000, householdSavings: 0 };
+  const ownedCrisis = { householdId: 'HH-OC', housingType: 'owned', monthlyRent: 3200, housingCost: 700000, householdIncome: 60000, householdSavings: 0 };
+  const buffered = { householdId: 'HH-B', housingType: 'owned', monthlyRent: 3200, housingCost: 700000, householdIncome: 60000, householdSavings: 3200 * HF.SAVINGS_BUFFER_MONTHS };
+  const out = HF.detectHouseholdStress_(null, [owned, rentedCrisis, ownedCrisis, buffered]);
+  const ids = out.map(o => o.household.householdId);
+  assert('a buyer at 26 % of income on the mortgage is NOT stressed (the price is not a monthly cost)', ids.indexOf('HH-O') < 0);
+  assert('a renter at 75 % is in crisis; an owner at 64 % of income on the mortgage is in crisis too — the mortgage can still crush a bad year', ids.indexOf('HH-R') >= 0 && out.find(o => o.household.householdId === 'HH-R').severity === 'crisis' && ids.indexOf('HH-OC') >= 0 && out.find(o => o.household.householdId === 'HH-OC').severity === 'crisis');
+  assert('reserves covering SAVINGS_BUFFER_MONTHS of the mortgage absorb the stress', ids.indexOf('HH-B') < 0);
+  assert('the burden reads MonthlyRent for both tenures (no housingCost ternary)', /var monthlyCost = household\.monthlyRent;/.test(hsrc) && !/household\.monthlyRent : household\.housingCost/.test(hsrc));
+}
+
 // ═══ engine.154 (S413) — cut 6: spouse quality ══════════════════════════════════
 console.log('engine.154 compatibility reads net worth + hood prosperity; the drawn spouse is priced by who and where');
 {

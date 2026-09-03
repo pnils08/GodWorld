@@ -1090,9 +1090,14 @@ function detectHouseholdStress_(ss, households) {
 
     if (household.householdIncome === 0) continue;
 
-    // Calculate rent burden
-    var monthlyCost = household.housingType === HOUSING_TYPES.RENTED ?
-                      household.monthlyRent : household.housingCost;
+    // Calculate housing burden. engine.159 (S414): MonthlyRent is the monthly
+    // number for BOTH tenures — on a purchase trackHomeOwnership_ writes the
+    // mortgage payment into MonthlyRent and the PRICE into HousingCost. The
+    // old ternary read the price as an owned household's monthly cost, so
+    // every buyer sat in permanent "crisis" (burden ≈ 50×) and rolled the
+    // 10 % dissolution every cycle — live C105: 47 of 117 owned households,
+    // bench C106–C118: 9–14 owned dissolutions per fire, every one a buyer.
+    var monthlyCost = household.monthlyRent;
     var annualCost = monthlyCost * 12;
     var rentBurden = annualCost / household.householdIncome;
 

@@ -260,7 +260,7 @@ function applyBusinessDynamics_(ctx) {
       S.worldEvents.push({
         cycle: cycle, domain: 'COMMUNITY', subdomain: 'business-closure', neighborhood: hood,
         severity: stated >= 10 ? 'high' : 'medium',
-        description: bName + ' is closing in ' + (hood || 'Oakland') + ' — ' + d.streak + ' weeks of decline and revenue under the line; ' + stated + ' jobs go with it',
+        description: bName + ' is closing in ' + (hood || 'Oakland') + ' — ' + d.streak + (d.streak === 1 ? ' week' : ' weeks') + ' of decline and revenue under the line; ' + stated + ' jobs go with it',
         impactScore: stated >= 10 ? 40 : 25, source: 'ENGINE', timestamp: ctx.now, businessId: id
       });
       if (typeof queueEnsureTabIntent_ === 'function') {

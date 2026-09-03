@@ -792,16 +792,21 @@
 - **bizDriftOne_(cfg, biz, prevState, inputs, cycle)**
 
 - **applyBusinessDynamics_(ctx)**
-  Reads: S.chaosBusinessFold, S.chaosNeighborhoodFold, S.cycleId, S.editionSentimentBoost, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState
-  Writes: S.businessDynamicsState
+  Reads: S.chaosBusinessFold, S.chaosNeighborhoodFold, S.cycleId, S.editionSentimentBoost, S.initiativeNeighborhoodEffects, S.neighborhoodState, S.previousCycleState, S.worldEvents
+  Writes: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.worldEvents
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
+
+- **archiveClosedBusinesses_(ctx)**
+  Reads: S.businessClosures, S.cycleId
+  Config: ctx.config.cycleCount
+  Sheets: Business_Archive, Business_Ledger
 
 ### applyBusinessDynamics.test.js
 - **assert(label, cond, detail)**
 
 - **ctxWith(o)**
-  Reads: S.businessDynamicsState
+  Reads: S.businessClosures, S.businessDeclines, S.businessDynamicsState, S.worldEvents
   Sheets: Business_Ledger, Civic_Office_Ledger
 
 ### applyChaosDecay.js
@@ -1763,7 +1768,7 @@
   Sheets: Business_Ledger
 
 - **runCareerEngine_(ctx)**
-  Reads: S.absoluteCycle, S.careerSignals, S.cityDynamics, S.cycleId, S.demographicDrift, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.absoluteCycle, S.businessDeclines, S.careerSignals, S.cityDynamics, S.cycleId, S.demographicDrift, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
   Sheets: Business_Ledger, LifeHistory_Log
@@ -3767,4 +3772,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 188
-**Functions mapped:** 1281
+**Functions mapped:** 1282

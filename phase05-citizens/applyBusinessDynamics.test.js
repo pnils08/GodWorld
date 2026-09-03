@@ -6,7 +6,8 @@
 global.Logger = { log: () => {} };
 // seedUnit_ lives in generationalWealthEngine.js (shared Apps Script scope) — same hash here
 global.seedUnit_ = function (s) { var h = 2166136261; s = String(s || ''); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return (h % 10000) / 10000; };
-let ranges = [];
+let ranges = [], ensures = [];
+global.queueEnsureTabIntent_ = (ctx, tab, headers, reason, domain, priority) => ensures.push({ tab, headers, priority });
 global.queueRangeIntent_ = (ctx, tab, r, c, values, reason, domain, priority) => ranges.push({ tab, r, c, values, reason, domain, priority });
 const mod = require('./applyBusinessDynamics');
 const fs = require('fs'), path = require('path');
@@ -14,7 +15,7 @@ let passed = 0, failed = 0;
 function assert(label, cond, detail) { if (cond) { console.log(`  ok   ${label}`); passed++; } else { console.error(`  FAIL ${label}${detail ? ': ' + detail : ''}`); failed++; } }
 
 // the signed Task 3 table, as the self-arm seeds it
-const CFG = { bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizVitalityNeutral: 6.0, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0 };
+const CFG = { bizDeclineStreak: 4, bizDriftMaxUp: 1.0, bizDriftMaxDown: 1.0, bizGrowthCeil: 40, bizGrowthFloor: -10, bizNoiseBound: 0.25, bizVitalityNeutral: 6.0, bizVitalityGain: 0.15, bizSuccessWindow: 3, bizSuccessVitalityHigh: 9.0, bizSuccessApprovalHigh: 85, bizSuccessPenalty: 0.3, bizDisruptBaseChance: 2, bizDisruptSuccessMult: 3, bizDisruptShock: 2.0, bizClosureStreak: 8, bizClosureRevenueFloorPct: 40, bizEventShockScale: 1.0, bizVol_faith: 0.5, bizVol_retail: 1.2, bizVol_food: 1.3, bizVol_health: 0.7, bizVol_tech: 1.5, bizVol_professional: 0.8, bizVol_construction: 1.1, bizVol_arts: 1.2, bizVol_education: 0.6, bizVol_default: 1.0 };
 const BL_H = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', ' Annual_Revenue ', 'Growth_Rate ', 'Key_Personnel'];
 const BL = [BL_H,
   ['BIZ-00001', 'Civis Systems', 'Civic Tech', 'West Oakland', 41, 230000, 60000000, '15%', 'Elias Varek (founder)'],
@@ -94,11 +95,69 @@ console.log('wiring');
   assert('ensureEngine96Config_ self-arms beside 133/135', /ensureEngine135Config_\(ss\);[^\n]*\n\s*ensureEngine96Config_\(ss\);/.test(orch));
   const contract = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'engine94SheetContract.js'), 'utf8');
   const seeded = (contract.match(/\['biz[A-Za-z_]+',/g) || []).map(s => s.slice(2, -2));
-  assert('the 27 signed keys are seeded, and the pass requires exactly those', seeded.length === 27 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 27 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
+  assert('the 27 signed keys + bizDeclineStreak are seeded, and the pass requires exactly those', seeded.length === 28 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.length === 28 && mod.BIZ_DYNAMICS_REQUIRED_KEYS.every(k => seeded.includes(k)), JSON.stringify(seeded));
   const fin = fs.readFileSync(path.join(__dirname, '..', 'phase09-digest', 'finalizeCycleState.js'), 'utf8');
   assert('finalizeCycleState carries businessDynamics from S.businessDynamicsState', /businessDynamics: S\.businessDynamicsState \|\| \{\}/.test(fin));
   const gw = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'generationalWealthEngine.js'), 'utf8');
   assert('heritage business mint seeds Growth_Rate in whole percents (3, not 0.03)', /capital \* 4, 3 \/\*/.test(gw) && !/capital \* 4, 0\.03/.test(gw));
 }
+console.log('Task 6 — decline sheds; Task 7 — closure winds down, then archives');
+{
+  const ledger = (rows) => [BL_H].concat(rows);
+  const quietS = { neighborhoodState: {}, chaosBusinessFold: {}, chaosNeighborhoodFold: {}, initiativeNeighborhoodEffects: {}, editionSentimentBoost: 0 };
+  // a small retail shop deep in distress: growth −2, 6 staff, revenue $100K (< 40 % of retail's $380K median)
+  const shop = ['BIZ-00200', 'Corner Shop', 'Retail', 'Temescal', 6, 40000, 100000, -2, 'POP-00001 Owner'];
+  ranges = []; ensures = [];
+  let ctx = ctxWith({ bl: ledger([shop]), S: Object.assign({}, quietS, { previousCycleState: { businessDynamics: { 'BIZ-00200': [5, 0] } } }) });
+  let out = mod.applyBusinessDynamics_(ctx);
+  const g6 = ranges[0].values[0][1];
+  assert('Task 6: streak 6 (> D=4) sheds streak−D = 2 tracked-equivalents as S.businessDeclines', g6 < 0 && ctx.summary.businessDeclines['BIZ-00200'] === 2 && out.shed === 2 && out.closed === 0, JSON.stringify([g6, ctx.summary.businessDeclines]));
+  ctx = ctxWith({ bl: ledger([['BIZ-00201', 'Tiny', 'Retail', 'Temescal', 1, 40000, 100000, -2, '']]), S: Object.assign({}, quietS, { previousCycleState: { businessDynamics: { 'BIZ-00201': [6, 0] } } }) });
+  mod.applyBusinessDynamics_(ctx);
+  assert('Task 6: the shed never exceeds the stated count (1 staff, streak 7 → 1)', ctx.summary.businessDeclines['BIZ-00201'] === 1);
+  // closure: streak reaches 8 AND revenue below the floor
+  ranges = []; ensures = [];
+  ctx = ctxWith({ bl: ledger([shop]), S: Object.assign({}, quietS, { previousCycleState: { businessDynamics: { 'BIZ-00200': [7, 0] } }, worldEvents: [] }) });
+  out = mod.applyBusinessDynamics_(ctx);
+  const closedState = ctx.summary.businessDynamicsState['BIZ-00200'];
+  assert('Task 7: streak 8 + revenue under 40 % of the sector median → closes now: growth pinned at the floor, all 6 shed, state carries closedCycle', out.closed === 1 && ranges[0].values[0][1] === -10 && ctx.summary.businessDeclines['BIZ-00200'] === 6 && closedState && closedState[2] === 110, JSON.stringify([out, closedState, ranges[0].values]));
+  assert('Task 7: one worldEvents closure event the desks can read + the Business_Archive ensure intent (priority 25, before appends)', ctx.summary.worldEvents.length === 1 && ctx.summary.worldEvents[0].subdomain === 'business-closure' && /Corner Shop is closing in Temescal/.test(ctx.summary.worldEvents[0].description) && ensures.length === 1 && ensures[0].tab === 'Business_Archive' && ensures[0].headers.length === 13 && ensures[0].priority === 25, JSON.stringify(ctx.summary.worldEvents));
+  assert('Task 7: S.businessClosures names the closing business for the Phase-11 mover', ctx.summary.businessClosures.length === 1 && ctx.summary.businessClosures[0].id === 'BIZ-00200' && ctx.summary.businessClosures[0].closedCycle === 110);
+  ctx = ctxWith({ bl: ledger([['BIZ-00202', 'Rich Decline', 'Retail', 'Temescal', 6, 40000, 300000, -2, '']]), S: Object.assign({}, quietS, { previousCycleState: { businessDynamics: { 'BIZ-00202': [12, 0] } } }) });
+  out = mod.applyBusinessDynamics_(ctx);
+  assert('Task 7: a long streak with revenue ABOVE the floor does not close (both conditions required); it sheds instead', out.closed === 0 && ctx.summary.businessDeclines['BIZ-00202'] === 6 /* min(stated 6, 13−4) */);
+  // the wind-down: closed last cycle, still has 3 stated → pinned, shed 3, no drift, no reopen
+  ranges = []; ensures = [];
+  ctx = ctxWith({ bl: ledger([['BIZ-00200', 'Corner Shop', 'Retail', 'Temescal', 3, 40000, 100000, -10, '']]), S: Object.assign({}, quietS, { chaosBusinessFold: {}, initiativeNeighborhoodEffects: { Temescal: { traffic: 1 } }, editionSentimentBoost: 5, previousCycleState: { businessDynamics: { 'BIZ-00200': [8, 0, 110] } }, worldEvents: [] }) });
+  out = mod.applyBusinessDynamics_(ctx);
+  assert('Task 7: a closed business winds down — growth stays at the floor despite good news, sheds its 3 remaining, no second closure event, closedCycle preserved', out.closing === 1 && out.closed === 0 && ranges[0].values[0][1] === -10 && ctx.summary.businessDeclines['BIZ-00200'] === 3 && ctx.summary.worldEvents.length === 0 && ctx.summary.businessDynamicsState['BIZ-00200'][2] === 110 && ensures.length === 0);
+  // Phase 11 mover — mock sheets with deleteRow / getLastRow / getRange
+  function sheetMock(values) {
+    return { _v: values, getDataRange: () => ({ getValues: () => values.map(r => r.slice()) }), getLastRow: () => values.length,
+      getRange: (r, c, nr, nc) => ({ setValues: (vals) => { for (let i = 0; i < vals.length; i++) { values[r - 1 + i] = values[r - 1 + i] || []; for (let j = 0; j < vals[i].length; j++) values[r - 1 + i][c - 1 + j] = vals[i][j]; } }, getValues: () => Array.from({ length: nr || 1 }, (_, i) => Array.from({ length: nc || 1 }, (_, j) => (values[r - 1 + i] || [])[c - 1 + j])) }),
+      deleteRow: (r) => { values.splice(r - 1, 1); } };
+  }
+  const mkCtx = (blRows, arRows, ledgerRows, closures) => ({ config: { cycleCount: 112 }, summary: { cycleId: 112, businessClosures: closures }, ledger: { headers: ['POPID', 'Status', 'EmployerBizId'], rows: ledgerRows },
+    ss: { getSheetByName: (n) => n === 'Business_Ledger' ? sheetMock(blRows) : n === 'Business_Archive' ? (arRows ? sheetMock(arRows) : null) : null }, _bl: blRows, _ar: arRows });
+  const BLX = () => [BL_H.map(h => h.trim()), ['BIZ-00001', 'Keep', 'Retail', 'T', 5, 1, 1, 1, ''], ['BIZ-00200', 'Corner Shop', 'Retail', 'Temescal', 0, 40000, 100000, -10, ''], ['BIZ-00300', 'Also Keep', 'Food', 'T', 2, 1, 1, 1, '']];
+  let c1 = mkCtx(BLX(), [mod.BIZ_ARCHIVE_HEADERS.slice()], [['POP-1', 'Active', 'BIZ-00001']], [{ id: 'BIZ-00200', name: 'Corner Shop', closedCycle: 110 }]);
+  let res = mod.archiveClosedBusinesses_(c1);
+  assert('mover: stated 0 + no tracked worker → copied with exit metadata, read back, source row removed; neighbours intact', res.archived === 1 && c1._bl.length === 3 && c1._bl.map(r => r[0]).join() === 'BIZ_ID,BIZ-00001,BIZ-00300' && c1._ar.length === 2 && c1._ar[1][0] === 'BIZ-00200' && c1._ar[1][9] === 'closed' && c1._ar[1][10] === 112 && c1._ar[1][12] === 110, JSON.stringify([res, c1._ar]));
+  let c2 = mkCtx(BLX(), [mod.BIZ_ARCHIVE_HEADERS.slice()], [['POP-1', 'Active', 'BIZ-00200']], [{ id: 'BIZ-00200', closedCycle: 110 }]);
+  res = mod.archiveClosedBusinesses_(c2);
+  assert('mover: a tracked worker still on the books → waits, nothing moved', res.waiting === 1 && res.archived === 0 && c2._bl.length === 4 && c2._ar.length === 1);
+  let c3 = mkCtx(BLX(), null, [], [{ id: 'BIZ-00200', closedCycle: 110 }]);
+  res = mod.archiveClosedBusinesses_(c3);
+  assert('mover: Business_Archive absent → waits (never creates a tab at runtime)', res.waiting === 1 && c3._bl.length === 4);
+  const blS = BLX(); blS[2][4] = 2;
+  let c4 = mkCtx(blS, [mod.BIZ_ARCHIVE_HEADERS.slice()], [], [{ id: 'BIZ-00200', closedCycle: 110 }]);
+  res = mod.archiveClosedBusinesses_(c4);
+  assert('mover: stated count still > 0 → waits', res.waiting === 1 && c4._bl.length === 4);
+  const career = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'runCareerEngine.js'), 'utf8');
+  assert('runCareerEngine_ folds S.businessDeclines into careerSignals.businessDeltas[id].lost after its own init', /if \(S\.businessDeclines\) \{[\s\S]*?S\.careerSignals\.businessDeltas\[dk\]\.lost \+= dn;/.test(career));
+  const orch2 = fs.readFileSync(path.join(__dirname, '..', 'phase01-config', 'godWorldEngine2.js'), 'utf8');
+  assert('Phase11-BusinessArchive runs after Phase11-MediaIntake at both entry points', (orch2.match(/'Phase11-BusinessArchive'/g) || []).length === 2 && orch2.indexOf("'Phase11-MediaIntake'") < orch2.indexOf("'Phase11-BusinessArchive'") && orch2.lastIndexOf("'Phase11-MediaIntake'") < orch2.lastIndexOf("'Phase11-BusinessArchive'"));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

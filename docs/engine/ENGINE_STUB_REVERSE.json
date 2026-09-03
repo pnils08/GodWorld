@@ -2,7 +2,7 @@
   "generated": "2026-09-03",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 188,
-  "functionsMapped": 1281,
+  "functionsMapped": 1282,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -705,6 +705,7 @@
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/bondEngine.js::checkConfrontationTriggers_",
         "phase05-citizens/bondEngine.js::createBond_",
@@ -1245,6 +1246,7 @@
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase04-events/faithEventsEngine.js::runFaithEventsEngine_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_"
       ],
       "readers": [
@@ -1263,6 +1265,8 @@
         "phase04-events/generateGameModeMicroEvents.js::generateGameModeMicroEvents_",
         "phase04-events/generateGenericCitizenMicroEvent.js::generateGenericCitizenMicroEvents_",
         "phase04-events/worldEventsEngine.js::worldEventsEngine_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_",
         "phase05-citizens/bondEngine.js::ensureBondEngineData_",
         "phase05-citizens/checkForPromotions.js::checkForPromotions_",
@@ -2910,6 +2914,24 @@
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
+    "businessClosures": {
+      "writers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+      ],
+      "readers": [
+        "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith"
+      ]
+    },
+    "businessDeclines": {
+      "writers": [
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
+      ],
+      "readers": [
+        "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
+        "phase05-citizens/runCareerEngine.js::runCareerEngine_"
+      ]
+    },
     "businessDynamicsState": {
       "writers": [
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_"
@@ -4491,6 +4513,7 @@
         "phase04-events/chaosCarsEngine.test.js::makeCtx",
         "phase04-events/chaosCarsEngine.test.js::reset",
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_",
         "phase05-citizens/applyBusinessDynamics.test.js::ctxWith",
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/applyChaosDecay.test.js::ctxWith",
@@ -4612,6 +4635,12 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/householdFormationEngine.js::formCriteriaHouseholds_",
         "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_"
+      ]
+    },
+    "Business_Archive": {
+      "writers": [],
+      "readers": [
+        "phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_"
       ]
     },
     "Chaos_Cars": {

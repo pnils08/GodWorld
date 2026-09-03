@@ -30,6 +30,7 @@ const SCHEMA_HEADERS = path.join(REPO_ROOT, 'schemas', 'SCHEMA_HEADERS.md');
 // Tab names that are real/auto-created/pending but carry no
 // schemas/SCHEMA_HEADERS.md `## <Tab>` header. EVERY entry needs a citation.
 const ALLOWLIST = {
+  'Business_Archive':    'lazy tab, engine.96 Task 7 closure ledger — created by a Phase-10 ensure intent at the first closure, read/removed-from by Phase11-BusinessArchive (docs/SPREADSHEET.md:152); schema header lands when the tab exists live',
   // --- Live tabs, schema-doc gap (verified in docs/SPREADSHEET.md tab inventory) ---
   'Chicago_Citizens':    'live tab (docs/SPREADSHEET.md:143); schema header missing',
   'Chicago_Feed':        'live tab, engine-written every cycle (utilities/v3ChicagoWriter.js ensureSheet_; docs/SPREADSHEET.md:130); schema header missing',

@@ -71,7 +71,8 @@ var ENGINE96_CONFIG_SEEDS = [
   ['bizVol_construction', 1.1, 'engine.96 sector volatility multiplier: construction', 0, 5, false],
   ['bizVol_arts', 1.2, 'engine.96 sector volatility multiplier: arts / media', 0, 5, false],
   ['bizVol_education', 0.6, 'engine.96 sector volatility multiplier: education', 0, 5, false],
-  ['bizVol_default', 1.0, 'engine.96 sector volatility multiplier: small neighborhood business (fallback)', 0, 5, false]
+  ['bizVol_default', 1.0, 'engine.96 sector volatility multiplier: small neighborhood business (fallback)', 0, 5, false],
+  ['bizDeclineStreak', 4, 'engine.96 Task 6: consecutive negative-growth Cycles before a business sheds headcount (proposed S413, not in the signed table)', 1, 52, false]
 ];
 
 function ensureEngine96Config_(ss) {

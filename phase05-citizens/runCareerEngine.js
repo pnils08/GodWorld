@@ -382,6 +382,19 @@ function runCareerEngine_(ctx) {
       businessDeltas: {}  // v2.4: { "BIZ-00012": { gained: 1, lost: 0 }, ... }
     };
   }
+  // engine.96 Task 6 (S413): sustained business decline sheds headcount — the
+  // dynamics pass (Phase5-BusinessDynamics, just before this) leaves
+  // S.businessDeclines[BIZ_ID] = n; folded here as lost deltas so Half 1 lowers
+  // the stated count and Half 2 fires the tracked workers, ≤2/business/cycle.
+  if (S.businessDeclines) {
+    for (var dk in S.businessDeclines) {
+      if (!S.businessDeclines.hasOwnProperty(dk)) continue;
+      var dn = Number(S.businessDeclines[dk]) || 0;
+      if (dn <= 0) continue;
+      if (!S.careerSignals.businessDeltas[dk]) S.careerSignals.businessDeltas[dk] = { gained: 0, lost: 0 };
+      S.careerSignals.businessDeltas[dk].lost += dn;
+    }
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.3: CAREER MODEL (schema-safe, persists in LifeHistory via [CareerState])

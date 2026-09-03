@@ -399,7 +399,7 @@ console.log('engine.155 Door C: an owned home + a Tier ≤ 2 name + the balance 
   {
     const t = run([person('POP-1', 'Keisha', 'Ramos', 'Lake Merritt', 2, 613000, 'HH-1')], [owned('HH-1', ['POP-1'], 'Lake Merritt')]);
     const line = t.hl.find(r => r[4] === 'C');
-    assert('C1 solo T2 at $613K in an owned home founds a Door-C line, numbered after the last', t.res.founded === 1 && line && line[0] === 'LIN-00006' && line[1] === 'Ramos' && line[2] === 'POP-1' && line[9] === 'Founding', JSON.stringify(t.hl));
+    assert('C1 solo T2 at $613K in an owned home founds a Door-C line, numbered after the last', t.res.founded === 1 && line && line[0] === 'LIN-00006' && line[1] === 'Ramos' && line[2] === 'POP-1' && line[9] === 'Founding' && Number(line[11]) === 1 /* the founding home counts */, JSON.stringify(t.hl));
     assert('C1 the member carries the line + the [Heritage] door-C line + a HERITAGE_FOUNDED hook naming the home', t.row('POP-1')[hi('LineageId')] === 'LIN-00006' && /\[Heritage\] the Ramos line is founded — a home, a name, and the standing to keep both/.test(t.row('POP-1')[hi('LifeHistory')]) && t.ctx.summary.storyHooks.some(h => h.hookType === 'HERITAGE_FOUNDED' && /an owned home in Lake Merritt, a Tier-2 name/.test(h.description)), t.row('POP-1')[hi('LifeHistory')]);
   }
   // C2 the floors: solo below $500K, solo at Tier 3 with millions, a rented T1 with millions, a family below $1M → nothing

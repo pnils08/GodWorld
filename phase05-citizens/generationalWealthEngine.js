@@ -1684,6 +1684,7 @@ function updateHeritage_(ss, ctx, cycle) {
     newHl[hLin] = newLin; newHl[hName] = famName; newHl[hFounder] = founder;
     newHl[hFounded] = cycle; newHl[hDoor] = door; newHl[hGen] = 1;
     newHl[hScore] = 0; newHl[hTier] = 'Founding'; newHl[hBiz] = '[]';
+    if (door === 'C' && hHomes >= 0) newHl[hHomes] = 1; // engine.155: the founding home counts (purchases before the line existed never reached HomesOwned)
     newHl[hUpd] = cycle;
     lines[newLin] = newHl;
     var foundLife = door === 'B' ?

@@ -1469,6 +1469,11 @@ var HERITAGE_TIERS = [
 var HERITAGE_DOOR_A_MEMBERS = 3;        // living on-camera members
 var HERITAGE_DOOR_A_NETWORTH = 1000000; // combined family lived savings
 var HERITAGE_DOOR_B_NETWORTH = 350000000; // the apex-wealth door
+// engine.155 (S413, builder's chain cut 7) — Door C, the household door: an
+// OWNED home, a name at Tier ≤ 2, and the balance to keep both. Solo or family.
+var HERITAGE_DOOR_C_TIER = 2;             // a member at this rung or better
+var HERITAGE_DOOR_C_SOLO_NETWORTH = 500000;   // one living member (band 7)
+var HERITAGE_DOOR_C_FAMILY_NETWORTH = 1000000; // two or more, combined (Door A's bar)
 
 // Tier-scaled business roll: chance per cycle that a line with an open slot
 // stakes a storefront. Odds, not guarantees — a Dynasty roll can still miss.
@@ -1663,6 +1668,7 @@ function updateHeritage_(ss, ctx, cycle) {
   // ── FOUNDING: the threshold doors. No seeding, no picking, no caps —
   // if three families cross a door the same cycle, three lines found. ──
   var foundedLines = [];
+  var doorCTier = 0; // engine.155: the best rung in the founding household (hook text)
   var foundLine_ = function(memberRows, famName, door) {
     var newLin = 'LIN-' + String(++maxLin).padStart(5, '0');
     var founder = null, founderBirth = 99999;
@@ -1682,6 +1688,8 @@ function updateHeritage_(ss, ctx, cycle) {
     lines[newLin] = newHl;
     var foundLife = door === 'B' ?
       '[Heritage] the ' + famName + ' line is founded — wealth that size starts a lineage' :
+      door === 'C' ?
+      '[Heritage] the ' + famName + ' line is founded — a home, a name, and the standing to keep both' :
       '[Heritage] the ' + famName + ' line is founded — the family earned the ledger';
     for (var f1 = 0; f1 < memberRows.length; f1++) {
       memberRows[f1][iLin] = newLin;
@@ -1697,7 +1705,9 @@ function updateHeritage_(ss, ctx, cycle) {
     ctx.summary.storyHooks.push({
       hookType: 'HERITAGE_FOUNDED', severity: 4, priority: 4,
       description: 'The ' + famName + ' family line (' + newLin + ') entered the heritage ledger via ' +
-        (door === 'B' ? 'apex wealth' : memberRows.length + ' on-camera members and a seven-figure balance'),
+        (door === 'B' ? 'apex wealth' :
+         door === 'C' ? 'an owned home in ' + String(memberRows[0][iHood] || 'Oakland') + ', a Tier-' + doorCTier + ' name and the balance to keep both' :
+         memberRows.length + ' on-camera members and a seven-figure balance'),
       cycleGenerated: cycle, neighborhood: String(memberRows[0][iHood] || ''), domain: 'COMMUNITY',
       text: 'The ' + famName + ' line is founded'
     });
@@ -1755,6 +1765,53 @@ function updateHeritage_(ss, ctx, cycle) {
     var bName = String(bRow[iLast] || '').trim();
     if (!bName) continue;
     foundLine_([bRow], bName, 'B');
+  }
+
+  // Door C — engine.155 (S413): the household door. An OWNED, active household
+  // with no member on a line founds when a member stands at Tier ≤ 2 and the
+  // balance clears the bar — $500K alone, $1M combined for two or more. Every
+  // living member joins. After A and B, so apex cash still founds by B.
+  var hhSheetC = ss.getSheetByName('Household_Ledger');
+  if (hhSheetC && hhSheetC.getLastRow() >= 2) {
+    var cv = hhSheetC.getDataRange().getValues();
+    var ch = cv[0];
+    var cMem = ch.indexOf('Members'), cType = ch.indexOf('HousingType'), cStat = ch.indexOf('Status');
+    var iTierC = idx('Tier');
+    if (cMem >= 0 && cType >= 0 && iTierC >= 0) {
+      var claimedC = {};
+      for (var cr = 1; cr < cv.length; cr++) {
+        if (cStat >= 0 && String(cv[cr][cStat] || '').toLowerCase() !== 'active') continue;
+        if (String(cv[cr][cType] || '').toLowerCase() !== 'owned') continue;
+        var cIds = [];
+        try { cIds = JSON.parse(String(cv[cr][cMem] || '[]')); } catch (e) { cIds = []; }
+        var unitC = [], linedC = false, bestTier = 99;
+        for (var ci = 0; ci < cIds.length; ci++) {
+          var cpid = popIdOf(cIds[ci]);
+          if (!cpid || claimedC[cpid]) continue;
+          var crow = rowByPop[cpid];
+          if (!crow || !living(crow)) continue;
+          if (String(crow[iLin] || '').trim()) { linedC = true; break; }
+          unitC.push(crow);
+          var ct = Math.round(Number(crow[iTierC])) || 4;
+          if (ct >= 1 && ct < bestTier) bestTier = ct;
+        }
+        if (linedC || !unitC.length || bestTier > HERITAGE_DOOR_C_TIER) continue;
+        var unitNWC = 0;
+        for (var cn = 0; cn < unitC.length; cn++) unitNWC += nwOf(unitC[cn]);
+        if (unitNWC < (unitC.length === 1 ? HERITAGE_DOOR_C_SOLO_NETWORTH : HERITAGE_DOOR_C_FAMILY_NETWORTH)) continue;
+        var surC = {};
+        for (var cs = 0; cs < unitC.length; cs++) {
+          var snC = String(unitC[cs][iLast] || '').trim();
+          if (snC) surC[snC] = (surC[snC] || 0) + 1;
+        }
+        var famC = '', bestC = 0;
+        for (var skC in surC) { if (surC[skC] > bestC) { bestC = surC[skC]; famC = skC; } }
+        if (!famC) continue;
+        doorCTier = bestTier;
+        foundLine_(unitC, famC, 'C');
+        for (var cc = 0; cc < unitC.length; cc++) claimedC[String(unitC[cc][iPop]).trim()] = true;
+      }
+    }
   }
 
   // ── aggregates + score accrual + tier promotion + tier unlocks ──

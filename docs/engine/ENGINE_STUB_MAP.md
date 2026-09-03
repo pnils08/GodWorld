@@ -1489,7 +1489,7 @@
   Reads: S.homesPurchasedByLine, S.storyHooks
   Writes: S.heritage, S.storyHooks
   Config: ctx.config.bizIdHighWater
-  Sheets: Business_Ledger, Cultural_Ledger, Family_Relationships, Heritage_Ledger
+  Sheets: Business_Ledger, Cultural_Ledger, Family_Relationships, Heritage_Ledger, Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### householdFormationEngine.js

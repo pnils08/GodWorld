@@ -4549,6 +4549,7 @@
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/householdFormationEngine.js::dissolveStressedHouseholds_",
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_"
       ],
@@ -4562,6 +4563,7 @@
         "phase05-citizens/educationCareerEngine.js::settleAdulthood_",
         "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
         "phase05-citizens/generationalWealthEngine.js::trackHomeOwnership_",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/generationalWealthEngine.js::updateHouseholdWealth_",
         "phase05-citizens/householdFormationEngine.js::dissolveStressedHouseholds_",
         "phase05-citizens/householdFormationEngine.js::formCriteriaHouseholds_",

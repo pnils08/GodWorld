@@ -9,6 +9,7 @@
   "dailyNews": {
     "hours": 36,
     "honorRouter": true,
+    "reportedDayThreshold": 3,
     "audioFormat": "deep_dive",
     "audioLength": "default",
     "driveDest": "edition",

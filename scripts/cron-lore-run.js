@@ -10,6 +10,13 @@
  * against it, and writes a status file for the next research-build session
  * to pick up at /lore-ingest -- it never grades or ingests anything itself.
  *
+ * S417 (Mike-direct): every new quarantine file also mirrors to Drive (the
+ * `lore` destination in saveToDrive.js) after the local write succeeds.
+ * Local disk (output/lore-quarantine/) stays the one place /lore-ingest and
+ * the LRU "already lored" check actually read -- Drive is a delivery
+ * convenience only, never the record of truth, and a Drive failure is
+ * logged but never fails the run or blocks the local save.
+ *
  * Usage: node scripts/cron-lore-run.js [--dry-run]
  */
 
@@ -40,6 +47,28 @@ function listQuarantineFiles() {
 
 function writeStatus(status) {
   fs.writeFileSync(STATUS_PATH, JSON.stringify(status, null, 2) + '\n');
+}
+
+// S417 (Mike-direct): mirror new quarantine files to Drive as well as local
+// disk. Local disk stays authoritative -- this runs AFTER the local write
+// succeeds, uploads what's already safely on disk, and a Drive failure never
+// fails the cron or blocks /lore-ingest, which reads local files only.
+function uploadNewFilesToDrive(newFiles) {
+  const results = [];
+  for (const f of newFiles) {
+    const filePath = path.join(QUARANTINE_DIR, f);
+    try {
+      execFileSync('node', [path.join(ROOT, 'scripts', 'saveToDrive.js'), filePath, 'lore'], {
+        cwd: ROOT,
+        encoding: 'utf8',
+      });
+      results.push({ file: f, uploaded: true });
+    } catch (error) {
+      results.push({ file: f, uploaded: false, error: error.message });
+      console.error('[drive] upload failed for ' + f + ': ' + error.message);
+    }
+  }
+  return results;
 }
 
 function main() {
@@ -82,12 +111,15 @@ function main() {
     saveCursor({ lastPopid: target.popid, updatedAt: new Date().toISOString() });
   }
 
+  const driveUploads = newFiles.length ? uploadNewFilesToDrive(newFiles) : [];
+
   const status = {
     ranAt: new Date().toISOString(),
     target,
     ok,
     errorMessage,
     newQuarantineFiles: newFiles,
+    driveUploads,
     nextStep: ok && newFiles.length
       ? 'Run /lore-ingest on ' + newFiles.join(', ') + ' at next research-build session.'
       : ok

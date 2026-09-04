@@ -34,6 +34,7 @@
  *   bulls                → Bulls Universe Database / Player_Cards
  *   briefing             → Publications Archive / Mara_Vance
  *   civic                → City_Civic_Database (official civic documents)
+ *   lore                 → Mike-designated Drive folder — pipeline.56 lore-writer quarantine mirror
  *
  * Or pass a raw folder ID as destination.
  *
@@ -117,6 +118,10 @@ var DESTINATIONS = {
   civic:      '1_nZbCjbjnW5kfA7aqEjb5CooEcYy4fjL',  // City_Civic_Database
   // Server backups
   backup:     '1o310nbDxw75MGuRF8PIsfuyRFTT2CJVZ',  // GodWorld_Backups
+  // Lore-writer quarantine mirror (pipeline.56, S417 Mike-direct) — a local
+  // copy in output/lore-quarantine/ stays authoritative; this is a Drive
+  // mirror only, written after the local save, never instead of it.
+  lore:       '1T5oSZzkGjVeORQJbBpAIj1ICXMN3QjBT',  // Mike-designated folder
   // Aliases
   briefing:   '1LEClpCUeRpT91gUR3SUm-Yx-3MldMJ5G',  // = mara (Mara directives & briefings)
   pdf:        '118tCh9stHjuocSUYXj0LjGnuzp5mLFhf',  // = edition (PDFs go alongside editions)
@@ -424,7 +429,7 @@ async function main() {
     console.log('');
     console.log('Destinations: edition, supplement, supplemental, interview, dispatch,');
     console.log('              interview-transcript, chicago, mara, presser, player,');
-    console.log('              prospect, bulls, briefing, pdf, civic, podcast, backup');
+    console.log('              prospect, bulls, briefing, pdf, civic, podcast, backup, lore');
     console.log('Or pass a raw Drive folder ID.');
     console.log('');
     console.log('--type {edition|interview|supplemental|dispatch|interview-transcript}');

@@ -78,6 +78,21 @@ What this means for the employment cascade (engine-sheet reading, 2026-08-30):
     - **CIVIC** — bound by approval ratings or retirement. Nothing else moves a civic job.
     - **MEDIA** — no system in place yet other than retirement.
 
+### Direction, fifth pass (builder, 2026-09-04 — the intake income floor; generalises point 23)
+
+25. **$100k is the minor-league base salary.** That is where the GAME number comes from — it is not an arbitrary floor, it is what a player at the bottom of the professional ladder makes.
+26. **The A's and Oaks roster ledgers are mainly manual**, and **an article can introduce a new citizen as a sports player** — canon ingest is a real door into the roster, not just a hand-edit.
+27. **If a salary is not offered as part of that ingest, the base applies.** Generalised, and this is the rule that matters: **nobody arriving through ingest lands with 0 income — the only exceptions are a child or a retiree.**
+28. **MEDIA and CIVIC bases are an open question the builder has not ruled on** ("idk tbh"). It may come off the Business_Ledger, or it may be a locked base; either way those bases **may legitimately sit below $100k**. The one constraint given: **district leads and the mayor obviously make more.** Engine-sheet to determine how it is actually set today and report before proposing a number.
+
+**Findings (engine-sheet, 2026-09-04 — answering point 28, and correcting two of my own earlier claims):**
+
+- **The MEDIA/CIVIC base is the Business_Ledger, and as of engine.162 the engine enforces it.** Their staff sit at real employers: City of Oakland `BIZ-00017` $88,000 avg, Bay Tribune `BIZ-00018` $73,758, OakTown Echo `BIZ-00099` $90,000, Alameda County Courts `BIZ-00022` $95,000, Oakland Unified `BIZ-00016` $74,000. The D3 floor pays `avg × stage factor` (entry 0.75 / mid 1.0 / senior 1.3), so a senior City-of-Oakland row floors at $114,400. Both halves of the builder's instinct hold: the bases **are** below $100k, and **district leads and the mayor do make more** — partly by the senior 1.3× factor, and because Tier 1–2 rows are exempt from the floor outright and keep their story-set numbers. No locked base is needed or wanted; the books already say it.
+- **The live ingest door is `processAdvancementIntake_`** (Phase5-Advancement, `godWorldEngine2.js:378` / `:2119`), reading `Advancement_Intake1` — 17 columns carrying `ClockMode` and `EmployerBizId`, **no salary column**, 12 rows waiting at C105. That is exactly the "salary isn't offered as part of that ingest" case.
+- **CORRECTION to an earlier engine-sheet claim:** `processIntakeV3_` / the 9-column `Intake` tab is **dead** — never wired into either engine entry point, and its tab is empty. The earlier note that "intake drops Income for every clock" described unreachable code. The live path already prices a new arrival by `hoodReferencePay_`; the real gap was narrower — a null hood price left the row blank, and a GAME row got a neighborhood price instead of the professional base.
+- **`mintChallengerOnLedger_`** (`updateCivicApprovalRatings.js:1061`) mints a CIVIC election challenger with **no Income at all** — a live path that still lands a working adult on $0. Not fixed here; filed rather than patched mid-change.
+- Correct already, left alone: a newborn is stamped Income 0 (`generationalEventsEngine.js:1112`) and GC emergence carries its own income (`checkForPromotions.js:432`) — the child exception and the promotion door both behave.
+
 ---
 
 ## WealthLevel bands (proposal — engine-sheet, pending builder sign-off on the hood column)

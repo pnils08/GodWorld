@@ -263,6 +263,15 @@ function isEmergenceUsage_(usageType) {
  * case-insensitive First+Last match silently dropped "Dr. Vinnie Keane",
  * "O'Neil"/"ONeil", accent variants — starving tier promotion.
  */
+// engine.162 (builder 2026-09-04, Direction pt 25): the base a sports player
+// arrives on. It is not an arbitrary floor — $100k is what a minor-league
+// player makes at the bottom of the professional ladder, so a citizen an
+// article introduces as a player starts there when the ingest offers no
+// salary. Advancement_Intake1 carries no salary column at all (17 cols,
+// ClockMode and EmployerBizId among them, no Income), so for a GAME row this
+// base is the only number available at the door.
+var SPORTS_BASE_SALARY = 100000;
+
 var USAGE_HONORIFIC_RE = /^(?:dr|rev|revd|fr|prof|professor|mr|mrs|ms|mx|bishop|rabbi|imam|pastor|deacon|sister|father|mother|elder|hon|sen|rep|gov|mayor|councilmember|councilman|councilwoman|capt|lt|sgt|ofc|det|chief)\.?$/i;
 
 function normalizeCitizenName_(name) {
@@ -752,13 +761,32 @@ function processAdvancementRows_(ctx, now, cycle) {
       // engine.135 D2 (S399): a promoted citizen arrives priced by their own
       // neighborhood (Income was blank until the next cycle's fallback filled
       // it from the real-world table); Debt/NetWorth re-derive from that number.
+      // engine.162 (builder 2026-09-04, Direction pt 27): nobody who comes
+      // through ingest lands on $0 — the only citizens meant to earn nothing
+      // are a child and a retiree. A GAME row takes the minor-league base
+      // because the sports layer owns its salaries and the D3 employer floor
+      // never reaches it; everyone else is priced by their own neighborhood
+      // first, then by their role's salary pool rather than left blank.
+      // CIVIC and MEDIA need no base of their own: engine.162 reconnected
+      // them to the D3 Business_Ledger floor, so City of Oakland ($88,000
+      // avg) and the Bay Tribune ($73,758) price their staff from the books.
       var lIncomeN = findColByName_(ledgerHeaders, 'Income');
-      if (lIncomeN >= 0 && typeof hoodReferencePay_ === 'function') {
-        var hoodPay = hoodReferencePay_(ctx, profile._neighborhood, newRoleType, '', profile._careerStage, seed);
-        if (hoodPay !== null) {
-          newRow[lIncomeN] = hoodPay;
-          if (lDebtLevel >= 0) newRow[lDebtLevel] = deriveDebtLevel_(seed, age, hoodPay);
-          if (lNetWorth >= 0) newRow[lNetWorth] = deriveNetWorth_(seed, age, hoodPay, profile._careerStage);
+      if (lIncomeN >= 0) {
+        var intakePay = null;
+        if (String(clockMode || '').trim().toUpperCase() === 'GAME') {
+          intakePay = SPORTS_BASE_SALARY;
+        } else if (typeof hoodReferencePay_ === 'function') {
+          intakePay = hoodReferencePay_(ctx, profile._neighborhood, newRoleType, '', profile._careerStage, seed);
+        }
+        var earnsAtIntake = age >= 18 &&
+          String(profile._careerStage || '').toLowerCase() !== 'retired';
+        if (intakePay === null && earnsAtIntake && advSalaryPools && typeof ctx.rng === 'function') {
+          intakePay = rederiveIncomeForRole_(advSalaryPools, newRoleType, ctx.rng);
+        }
+        if (intakePay !== null) {
+          newRow[lIncomeN] = intakePay;
+          if (lDebtLevel >= 0) newRow[lDebtLevel] = deriveDebtLevel_(seed, age, intakePay);
+          if (lNetWorth >= 0) newRow[lNetWorth] = deriveNetWorth_(seed, age, intakePay, profile._careerStage);
         }
       }
       if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;

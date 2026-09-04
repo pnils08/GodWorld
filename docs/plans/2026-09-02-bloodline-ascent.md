@@ -284,7 +284,7 @@ Builder (2026-09-03 15:31): *"last session built an entire system on misaligned 
 
 **Seen, not touched (for the builder):** `RELOCATION.MAX_UNITS_PER_CYCLE: 2` is a live hard cap on moves — doctrine 1 says physics, never a quota. Lifting it changes world output; it is a ruling, not a cut.
 
-### engine.161 — relocation is a share, and the burden is the cause (S416, 2026-09-04) — coded, pre-bench
+### engine.161 — relocation is a share, and the burden is the cause (S416, 2026-09-04) — LIVE PROD @45 (bench @39 C109/C110/C111)
 
 **Direction it answers (builder, 2026-09-04 02:27, recorded as said):** *"The relocations was to percent a max move where citizens all move at once but 2 is too slow and defeats everything we just built, you can plan the accurate number on this but given living in the wrong neighborhood can put a citizen in crisis."*
 
@@ -298,6 +298,21 @@ Builder (2026-09-03 15:31): *"last session built an entire system on misaligned 
 3. **The maneuver posture multiplies the MISFIT lane only.** Moving up is ambition; the pressure lane is the crisis escape, and a household pulling in under debt is not made slower to leave a rent it cannot carry. (engine.157 applied the factor to both — corrected here.)
 
 **Live C106 prediction:** `World_Config` +1 (`relocationMaxShare`). Pressure lane 0 → **9 units** (the 9 unbuffered renters over 50 %), misfit lane 61, expected attempts **≈ 12.3/cycle** (9 × 0.35 + 61 × 0.15, before the destination-fit and admission filters that reject most candidates), cap 43 and not binding. Moves land as `cost` (priced out) and `opportunity` (moving up) reasons. Ledger-wide this reads as ~12 of 849 units per cycle ≈ 1.4 %, which at the 1:443 sample is a city-loud but not implausible churn.
+
+**As proven (S416, bench @39, C109–C111, 0 `Engine_Errors` ×3):** `World_Config` 91 → 92 (`relocationMaxShare` 0.05 self-armed). The intent wire fired immediately — `planning-to-leave` 1 → 7, `considering` 1 → 70 (209 by C111 as burdens spread). **All three move reasons now appear, where every move for four cycles before this had been the same trickle:** C109 two `displaced`, C110 two `cost` (Ingrid Bautista → KONO, Renée Cabrera → East Oakland — the pressure lane's first moves in the sim's history), C111 three rows / two units `cost` + `opportunity` (Andre and Bruce Lee moved to Rockridge together — a household moving up as one unit).
+
+**The honest read — the cap was not the main brake, and the margin should stay.** Running the real `processRelocations_` against bench state with every roll passing: **65 eligible units (7 pressure, 58 misfit), of which 49 have no destination that beats their current hood by `MIN_SCORE_GAIN` 1.5, leaving 16 reachable.** Cap 45, never binding. Expected throughput at the existing lane odds is **≈3.2 units/cycle**, and observed C109–C111 was 2 / 2 / 2 units — the physics, not a ceiling. Measured against the margin:
+
+| `MIN_SCORE_GAIN` | reachable units | expected moves/cycle | ledger rows/yr |
+|---|---|---|---|
+| **1.5 (current)** | 16 | 3.2 | ≈191 (20 % of the ledger) |
+| 1.25 | 40 | 6.8 | ≈407 (42 %) |
+| 1.0 | 47 | 7.8 | ≈469 (48 %) |
+| 0.5 | 59 | 9.7 | ≈577 (60 %) |
+
+A real city turns over ~10 % of its households a year. At 1.5 the sim already runs at twice that; one notch looser quadruples it. **`MIN_SCORE_GAIN` stays at 1.5** — the old flat cap of 2 was clipping an expected 3.2, so lifting it recovers the missing third and unlocks the *variety* of cause (all three reasons now fire) more than the volume. A citizen who wants a better hood and has one waiting now goes, and the engine.157 posture lifts a climber's misfit odds 0.15 → 0.225.
+
+**LIVE PROD @45** (live pull + the three-file overlay, diff vs the bench stage empty, pull-back 174 files / 0 tests, HELD four at base). **Live C106 prediction:** `World_Config` +1; `planning-to-leave` 1 → ~9 and `considering` climbing past 60; 2–4 units relocating with `cost` and `opportunity` reasons present, not `displaced` alone.
 
 **Bench proof:** `World_Config` +1; the pressure lane non-empty for the first time; moves per cycle in the high single digits with both reasons present; 0 errors; the cap does not bind.
 
@@ -374,6 +389,7 @@ Deliverable of the measure: a hop table with pointers and gaps, and a build orde
 
 ## Changelog
 
+- 2026-09-04 (engine-sheet, S416, ~05:00) — **engine.161 LIVE PROD @45** (bench @39 C109–C111, 0 errors ×3: `cost` and `opportunity` moves fire for the first time; the measured funnel says the 1.5 destination margin is correctly calibrated and stays — §engine.161 *As proven*).
 - 2026-09-04 (engine-sheet, S416, ~04:20) — **engine.161 coded** (§engine.161): the relocation cap becomes `relocationMaxShare` × movable units (43 at C105, was a flat 2 — builder: *"2 is too slow and defeats everything we just built"*); rent burden ≥ 50 % / 40 % now sets `planning-to-leave` / `considering` directly, so the pressure lane goes 0 → 9 units; the maneuver posture multiplies the misfit lane only. Named for the builder, untouched: 279 of 319 rented households clear the 12-month savings buffer, which is why burden risk almost never fires. migrationRelocation 43/43.
 - 2026-09-04 (engine-sheet, S416, ~03:30) — **engine.157 LIVE PROD @44** (bench @38: C106 195/39 exact-to-prediction on climb, C107 the Keane line retreats off its own standing, C108 one settle line — §engine.157 *As proven*). Builder steer "take TraitProfile dials into consideration" → ambition = the existing `drive` + `openness` dials, no ninth dial; engine.94 Track B ambition ruled. Owner's-draw dormancy seam closed. Bench re-synced from live at C105 this session (builder cleared the properties; `Carry_Forward_Store` carried C105 — the groundhog cold-start did not trip). Seen for the builder: the relocation cap. Chain cuts 1–9 are all live.
 - 2026-09-04 (engine-sheet, S415, ~01:30) — **engine.156 LIVE PROD @43.** Bench @37: the first GET fired inside the deployment's propagation window and ran the old tree (C125 — scores accrued, 16 columns; noted, re-fired). C126 clean: tab 16 → 23 in-cycle, Varek 52 Prominent and first, 22 of the bench's 27 old-door lines stepped down (Corliss Prominent → Founding on the lifetime counter's inflation), 29 life lines, tenure seeded, low clocks only where a line was ever Established. C127 with a bench-only `LowCycles` 51 seed: Mezran dormant — blank tier, tenure frozen, the *money that made it is gone* line on Lila. Live: pull + one-file overlay, diff vs bench stage empty, pull-back byte-identical. Live C106 is a re-base up (four to Established, Corliss holds), not down. Cut 9 (engine.157, the maneuver phase) is next; the wake-pack seam is still research-build's.

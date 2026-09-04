@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "claude",
+  "model": "sonnet",
+  "draftSha256": "a02d37dcec7fc69d365a8b4103a5ce249d7a1c85efafd01966116568f54dd585",
+  "pass": false,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "verdict parse failed",
+  "review": {
+    "profileId": "mason-kitchen-ground-v1",
+    "canonIntegrity": "revise",
+    "texture": "not-returned"
+  },
+  "reviewProfile": {
+    "id": "mason-kitchen-ground-v1",
+    "packageVersion": "MASON-LEP2-1",
+    "manifestId": "AM-1e4d13f89002",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Vanessa Treary",
+      "Yuki Ji"
+    ],
+    "unverified": [
+      "Merritt Reserve"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0,
+  "durationMs": 12302,
+  "parseError": true,
+  "ranAt": "2026-09-04T22:06:50.573Z"
+}

@@ -51,7 +51,8 @@
         "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 1"
       ]
     },
-    "writingMode": "SOURCE_BRIEF"
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
   },
   "signal": {
     "kind": "story-signal",
@@ -60,7 +61,76 @@
     "plan": {
       "focus": "Workplace dynamics at Merritt Reserve during evening service",
       "closeQuestion": "What does the rhythm of this kitchen say about Oakland's current food service climate?"
-    }
+    },
+    "openThreads": [
+      {
+        "slug": "adams-point-devon-willis-fame-sighting",
+        "label": "adams-point-devon-willis-fame-sighting | C104→C104 | 4 article(s) | advanced 1, opened 3",
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648",
+          "POP-00798"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "city-depak-ying-story-signal",
+        "label": "city-depak-ying-story-signal | C104→C104 | 1 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00170",
+          "POP-00198",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "adams-point-devon-willis-story-signal",
+        "label": "adams-point-devon-willis-story-signal | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Adams Point",
+        "popids": [
+          "POP-00782",
+          "POP-00645",
+          "POP-00648"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "city-depak-ying-tv-slate",
+        "label": "city-depak-ying-tv-slate | C104→C104 | 1 article(s) | opened 1",
+        "hood": null,
+        "popids": [
+          "POP-00210",
+          "POP-00170",
+          "POP-00198",
+          "POP-00201"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "rockridge-howard-yell-named-restaurant",
+        "label": "rockridge-howard-yell-named-restaurant | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00651"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "west-oakland-marcus-wright-quiet-nightlife",
+        "label": "west-oakland-marcus-wright-quiet-nightlife | C103→C103 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00288",
+          "POP-00794",
+          "POP-00722"
+        ],
+        "lastCycle": 103
+      }
+    ]
   },
   "exposure": {
     "subjects": [

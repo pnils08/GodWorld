@@ -30,7 +30,8 @@
         "Do not add outages, closures, delays, routes, timestamps, load scores, causes, repairs, agencies, or outcomes absent from the supplied entries."
       ]
     },
-    "writingMode": "SOURCE_BRIEF"
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
   },
   "signal": {
     "kind": "anomaly",
@@ -39,7 +40,129 @@
     "plan": {
       "focus": "The regression of the Fruitvale Transit Hub Phase II from visioning-complete back to active visioning status.",
       "closeQuestion": "Is this regression actually progress in disguise—more community voice being incorporated—or is it another delay in a string of them?"
-    }
+    },
+    "openThreads": [
+      {
+        "slug": "piedmont-ave-sandra-velazquez-season-feel",
+        "label": "piedmont-ave-sandra-velazquez-season-feel | C104→C104 | 4 article(s) | opened 4",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00168",
+          "POP-00830"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "west-oakland-elio-perez-initiative",
+        "label": "west-oakland-elio-perez-initiative | C104→C104 | 2 article(s) | advanced 1, opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00722",
+          "POP-00794",
+          "POP-00961"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "temescal-sonia-parikh-anomaly",
+        "label": "temescal-sonia-parikh-anomaly | C104→C104 | 2 article(s) | advanced 1, opened 1",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00745",
+          "POP-00761",
+          "POP-00775",
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "downtown-merkin-jumper-undocked",
+        "label": "downtown-merkin-jumper-undocked | C104→C104 | 2 article(s) | opened 2",
+        "hood": "Downtown",
+        "popids": [
+          "POP-00688",
+          "POP-00212",
+          "POP-00224",
+          "POP-00225"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "east-oakland-maria-conteras-anomaly",
+        "label": "east-oakland-maria-conteras-anomaly | C104→C104 | 1 article(s) | opened 1",
+        "hood": "East Oakland",
+        "popids": [
+          "POP-01047",
+          "POP-01055",
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "east-oakland-jerome-pittman-anomaly",
+        "label": "east-oakland-jerome-pittman-anomaly | C104→C104 | 1 article(s) | opened 1",
+        "hood": "East Oakland",
+        "popids": [
+          "POP-01055",
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "city-elio-perez-anomaly",
+        "label": "city-elio-perez-anomaly | C104→C104 | 1 article(s) | advanced 1",
+        "hood": null,
+        "popids": [
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+        "label": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety | C104→C104 | 1 article(s) | opened 1",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [
+          "POP-00201",
+          "POP-00198",
+          "POP-00170",
+          "POP-00210"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "temescal-melton-neilon-anomaly",
+        "label": "temescal-melton-neilon-anomaly | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Temescal",
+        "popids": [
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "west-oakland-east-oakland-fruitvale-melton-neilon-initiative",
+        "label": "west-oakland-east-oakland-fruitvale-melton-neilon-initiative | C103→C103 | 1 article(s) | opened 1",
+        "hood": "West Oakland, East Oakland, Fruitvale",
+        "popids": [
+          "POP-00170",
+          "POP-00201",
+          "POP-00210"
+        ],
+        "lastCycle": 103
+      },
+      {
+        "slug": "west-oakland-marcus-wright-initiative",
+        "label": "west-oakland-marcus-wright-initiative | C103→C103 | 1 article(s) | opened 1",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00288"
+        ],
+        "lastCycle": 103
+      }
+    ]
   },
   "exposure": {
     "subjects": [

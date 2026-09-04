@@ -1,18 +1,18 @@
 {
   "mode": "wake-write",
-  "desk": "civic",
+  "desk": "culture",
   "cycle": "105",
   "provider": "openrouter",
   "model": "deepseek/deepseek-chat",
   "configuredWriterModel": "deepseek/deepseek-chat",
   "gateModel": "sonnet",
-  "persona": "trevor-shimizu",
+  "persona": "mason-ortega",
   "byline": {
-    "name": "Trevor Shimizu",
-    "popid": "POP-00155",
-    "beatDomain": "INFRASTRUCTURE"
+    "name": "Mason Ortega",
+    "popid": "POP-00160",
+    "beatDomain": "CULTURE"
   },
-  "laneEntries": 58,
+  "laneEntries": 19,
   "quotesLanded": 2,
   "disposition": "flagged",
   "rheaPass": false,
@@ -23,7 +23,7 @@
   },
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat-2206.md",
+  "article": "output/cron-compare/flagged/culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat.md",
   "selfRecord": null,
-  "ranAt": "2026-09-04T22:06:12.138Z"
+  "ranAt": "2026-09-04T22:06:50.594Z"
 }

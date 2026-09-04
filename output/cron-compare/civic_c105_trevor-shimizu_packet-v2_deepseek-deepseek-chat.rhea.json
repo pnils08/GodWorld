@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "claude",
+  "model": "sonnet",
+  "draftSha256": "e702cf37b572d619fe7e4170ae143e4bd971dd8f291b94701a6d938e7e5e323d",
+  "pass": false,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "verdict parse failed",
+  "review": {
+    "profileId": "trevor-infrastructure-systems-v1",
+    "canonIntegrity": "revise",
+    "texture": "not-returned"
+  },
+  "reviewProfile": {
+    "id": "trevor-infrastructure-systems-v1",
+    "packageVersion": "TREVOR-LEP2-1",
+    "manifestId": "AM-73d09279c19d",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Manjit Singh",
+      "Nina Reyes"
+    ],
+    "unverified": [
+      "That's Oakland"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0,
+  "durationMs": 16737,
+  "parseError": true,
+  "ranAt": "2026-09-04T22:06:12.006Z"
+}

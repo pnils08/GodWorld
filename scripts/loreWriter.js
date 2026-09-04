@@ -113,6 +113,27 @@ function clampToQuarantine(relPath) {
   return fullPath;
 }
 
+// S417: a run that ends with a long final text turn and no write_file call
+// (2026-09-04 -- Gemini answered in prose instead of calling the tool, after
+// a string of 503/429 retries) used to just print the piece and exit,
+// silently discarding a paid generation. This derives a filesystem-safe slug
+// from the prompt so the fallback save below gets a readable name.
+function slugify(text) {
+  return String(text || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 40) || 'untitled';
+}
+
+// Minimum length to treat a final turn as a real generated piece rather than
+// closing chatter ("Done." / "Let me know if..."). The system prompt mandates
+// 1200-1500 words (well over 5000 chars); 400 is a deliberately low floor --
+// false positives (rescuing throwaway chatter) cost nothing since /lore-ingest
+// re-verifies every quarantine file against the ledger regardless of how it
+// got there. A false negative (losing a real piece) is the actual failure mode.
+const FALLBACK_MIN_CHARS = 400;
+
 // -----------------------------------------------------------------------------
 // CORE LOGIC
 // -----------------------------------------------------------------------------
@@ -189,6 +210,8 @@ async function main() {
 
   const messages = [{ role: 'user', parts: [{ text: prompt }] }];
   let iterations = 0;
+  let wroteFile = false;
+  let lastText = null;
 
   while (iterations < MAX_ITERATIONS) {
     iterations++;
@@ -218,6 +241,7 @@ async function main() {
     const textPart = parts.find(p => p.text);
     if (textPart) {
       console.log("\nModel says:\n" + textPart.text + "\n");
+      lastText = textPart.text;
     }
 
     const functionCalls = parts.filter(p => p.functionCall);
@@ -277,6 +301,7 @@ async function main() {
             const fullPath = clampToQuarantine(filename); // AC #3: PATH CLAMP
             fs.writeFileSync(fullPath, content, 'utf-8');
             resultData = "Wrote file: " + fullPath;
+            wroteFile = true;
             break;
           }
           default:
@@ -300,9 +325,26 @@ async function main() {
       parts: functionResponses
     });
   }
+
+  if (!wroteFile && lastText && lastText.trim().length >= FALLBACK_MIN_CHARS) {
+    const fallbackName = 'AUTOSAVE-' + Date.now() + '-' + slugify(prompt) + '.md';
+    const fullPath = clampToQuarantine(fallbackName);
+    const banner = '<!-- AUTOSAVE: the model never called write_file this run -- this is its ' +
+      'final text turn, persisted verbatim by the harness fallback so the generation is not ' +
+      'silently discarded. Unverified provenance: review before /lore-ingest treats this like ' +
+      'a normally-filed candidate. -->\n\n';
+    fs.writeFileSync(fullPath, banner + lastText, 'utf-8');
+    console.log('\nFALLBACK SAVE: model produced text but never called write_file. Persisted to ' + fullPath);
+  } else if (!wroteFile) {
+    console.log('\nNo file written and no substantial final text to rescue.');
+  }
 }
 
-main().catch(err => {
-  console.error("Fatal Error:", err);
-  process.exit(1);
-});
+if (require.main === module) {
+  main().catch(err => {
+    console.error("Fatal Error:", err);
+    process.exit(1);
+  });
+}
+
+module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, QUARANTINE_DIR };

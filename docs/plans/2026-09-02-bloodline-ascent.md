@@ -196,6 +196,38 @@ Builder (2026-09-03 15:31): *"last session built an entire system on misaligned 
 
 **Untouched, by rule:** the 319 existing leases (a many-row sheet write; the builder's word first — burden is computed from the household's own lease, so they are not harmed by the new medians). `Neighborhood_Map.MedianRent` cells: no hand write — the first fire renders all 22.
 
+### engine.156 — heritage loss, designed as standing + tenure (S414, 2026-09-03 23:15) — numbers proposed, pre-code
+
+**Direction it answers:** §Direction, second sitting — the Rockefeller ledger; wealth the gate and the defining factor; success = how long the line holds its status; influence not headcount; every heritage family acts differently; the math makes everyone fair game.
+
+**Measure (what the ledger does today, `updateHeritage_`).** `HeritageScore` is a lifetime counter: every cycle a line ADDS `min(4, TotalNetWorth/500K) + (generations−1) + min(3, civic) + min(3, fame) + 2×businesses + homes`, and the tier is read off the running total (Established 50, Prominent 150, Dynasty 350). Nothing subtracts, nothing goes dormant, and the wealth term tops out at $2M — so **Elias Varek at $10B scores 12, last of the five lines on his own ledger**, under Corliss at $2.5M (16). `BusinessesOwned` counts only heritage-minted storefronts: Civis Systems and the Oaks (Key_Personnel `Elias Varek (founder)` / `POP-00789 … Owner`) count for nothing, though `parseKeyPersonnelOwners_` (engine.96 T10) already resolves them for the owner's draw. The birth multiplier and the business roll read the tier, so they already follow a tier down once one can move. Node side: **no wake, voice or packet builder reads `Heritage_Ledger`** (only `queryLedger.js`) — "the LLM waking as a cron understands the game" is not wired; a pipeline seam, filed below, not this cut.
+
+**The reframe.** Two numbers, where there was one counter:
+- **Standing** — recomputed every cycle from what the family holds NOW. It can fall. It sets the tier.
+- **Tenure** — cycles the line has held its current tier, and cycles on the ledger at all. It only counts. It is the outcome the builder named ("how long that bloodline has that status"), and it is what the cron reads to know whether it is old money or new.
+
+**Standing (proposed):**
+`wealth + 3×(generations−1) + 3×min(3, civic) + 3×min(3, fame) + 4×businesses + 2×homes − 5×scandal`
+- `wealth = 10 × log10(TotalNetWorth / $1M)`, floored at 0 — $1M → 0, $10M → 10, $100M → 20, $1B → 30, $10B → 40. Money is the defining term and it keeps mattering at the top; it no longer saturates at $2M.
+- `businesses` = heritage-minted storefronts **plus** every active `Business_Ledger` row where a living member resolves as owner through `parseKeyPersonnelOwners_` (the same resolver the owner's draw uses). A closure (engine.96 T7 → `Business_Archive`) drops out on its own.
+- `scandal` = living members holding a `Civic_Office_Ledger` seat whose status is `scandal` this cycle (the only scandal state the engine has).
+- Tiers on standing: **Founding 0 · Established 30 · Prominent 50 · Dynasty 70.** Up or down, every cycle, no hysteresis — a family that loses its house or its business feels it the same week. Tenure at the new tier restarts at 0; `PeakTier` remembers the best.
+- Live C105 check (the doctrine test — the richest man in the sim must lead his own ledger): Varek 40 + 8 (Civis, Oaks) = **48 Prominent-adjacent**; Kelley 25.7 + 3 fame + 2 home + 4 biz ≈ 35 Established; Dillon 26 + 3 gen + 3 fame + 4 biz ≈ 36 Established; Keane 26.5 + 3 + 4 ≈ 34 Established; Corliss 4 + 3 + 3 + 4 ≈ 14 Founding. Varek first, Corliss last — the order the canon would write.
+
+**Dormancy (proposed):** a line with **0 living members for 4 consecutive cycles** goes `dormant` (`Status`, `DormantSince`): it stays on the ledger as history, leaves the ranked set, and its birth multiplier and business roll stop. A dormant line **revives under its own LineageId** when a descendant (a `ParentIds` chain back to a member) clears any door again — the name comes back, the tenure does not. A line whose standing sits under 10 (≈ $10M, nothing else) for 52 consecutive cycles goes dormant the same way: money gone for a year is a name, not a line.
+
+**Entry is unchanged** (Doors A/B/C as ruled; $50M + an owned home is the front door). The ledger is not capped by count: at $50M the door already admits nine citizens at C105, and dormancy prunes. "Not 50 families" is enforced by the door and the fall, not a quota.
+
+**Schema:** `Heritage_Ledger` gains `TenureCycles`, `TierTenure`, `PeakTier`, `Status`, `DormantSince` (append-only via `ensureHeritageSchema_`, both sheets, read back). `HeritageScore` becomes standing (the lifetime counter is retired — its only reader was the tier). `HERITAGE_TIERS` re-based to the standing bars.
+
+**Lines (LifeHistory, members):** `[Heritage] the <name> line stepped down — <tier> now`, `[Heritage] the <name> line went dormant — no one left to carry it`, `[Heritage] the <name> line revived — <first> <last> brought the name back`. Story hooks `HERITAGE_FALL` (severity 5) / `HERITAGE_DORMANT` (6) / `HERITAGE_REVIVED` (5), domain COMMUNITY, beside the existing rise hooks.
+
+**Blast radius (to open before cutting):** `heritageTierByPop_` (phase-4 birth boost reads the tier — dormant must read as no tier); `HERITAGE_BIZ_ROLL` (reads the tier); `lineByPop` same-cycle consumers; `scripts/householdReconcile.test.js` heritage blocks (the 67-test suite pins Door C and the counter); `queryLedger.js`.
+
+**Bench proof:** standing computed for all 5 lines with Varek first; a seeded line with a dead member set goes dormant on the 4th fire; a seeded NetWorth cut steps a tier down with the line and the hook; 0 errors; births and business rolls stop on the dormant line.
+
+**Pipeline seam, filed for research-build (not this cut):** hand the waking citizen its line's row — tier, tenure, peak, what the family holds — in the wake pack, so a Varek heir and a Corliss cousin wake as different people. Until that lands, "the cron understands the game" is one-way: the engine knows, the voice does not.
+
 ## What exists today (verified S411 or pointed)
 
 - **Tiers:** four tracked tiers + Generic_Citizens as the Tier-5 pool. Mobility as built is in `docs/engine/TIER_MOBILITY.md`: CLIMB via the UsageCount ladder (media appearances), the fame door (engine.118, designed, **unwired** — zero fame→Tier writes exist), demotion. Media promotion is structurally dead (engine.108: a Tier-5 can never be covered because the packet path stopped reading Generic_Citizens). **That is the first rung and it is missing.**
@@ -268,6 +300,7 @@ Deliverable of the measure: a hop table with pointers and gaps, and a build orde
 - Loss: what un-founds a line (last member dies, score below a floor, a scandal)? Nothing today.
 
 ## Changelog
+- 2026-09-03 (engine-sheet, S414, 23:15) — **engine.156 designed, pre-code** (§engine.156 above): the lifetime counter becomes standing (recomputed, can fall; wealth on a log scale so $10B outranks $2M) + tenure (cycles held); tiers re-based on standing; dormancy at 0 living × 4 cycles or under-$10M × 52, revival by descendant; real business ownership counted through the owner-draw resolver. Measure finding on record: **Varek at $10B is last on his own ledger today (score 12 under Corliss 16)** because the wealth term saturates at $2M. Pipeline seam filed: no wake/packet reads Heritage_Ledger.
 - 2026-09-03 (engine-sheet, S414, 22:24) — Builder direction, recorded as said, after the money-loop walk-through (rent is a threshold, never a cash flow; net worth = a week of salary × savings rate each cycle; debt drag, shocks and payoff are the only losses): *"What I like is if people are going broke it's a sim crisis the civic need to address."* Existing seam for that: `processMoneyLoop_` already emits `DEBT_CRISIS` / `MONEY_SHOCK` story hooks (domain COMMUNITY) — the civic chain sees them if it reads that domain. No build asked; noted for the next civic-repair pass (initiatives are the repair mechanism).
 - 2026-09-03 (engine-sheet, S414, 18:40) — **The 319 live leases trued to the rule (builder: "True them up").** Live-only write through `lib/sheets.js`: every active rented `MonthlyRent` = its hood's rule rent; 221 up, 98 down, read back 319/319. Consequence, stated before the write: households over the 50 % burden line go 2 → 24, so the crisis roll (10 %/cycle) reaches ~24 households from live C106 — the rule pricing the world's leases the way the canon incomes say, not the 2026 table. §engine.160's open item is closed.
 - 2026-09-03 (engine-sheet, S414, 17:20) — **engine.160 LIVE PROD @42.** Bench @36 C123 / C124 on SANDBOX 0831: ok / 0 errors ×2; `hoodRentShare` self-armed; 22/22 `MedianRent` cells rendered to the rule both fires; 6 new leases at their hood's rent (one at the Phase-2 income — the designed lag); 5 then 0 purchases, every price = rule rent × 264, mortgages 23–28 % of income; 0 owned dissolutions. Live: live pull + the eight-file overlay, diff vs bench stage empty, pull-back byte-identical 8/8, HELD four at base. Row engine.160 → done-pending-archive. Open for the builder's word only: the 319 existing leases (true them to the rule, or leave them as the world's history).

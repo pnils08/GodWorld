@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 189 · **Functions mapped:** 1315 · **S.* fields:** 351 · **Sheets:** 60
+**Files scanned:** 189 · **Functions mapped:** 1317 · **S.* fields:** 351 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -441,7 +441,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Storyline_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processStorylineIntake_`, `phase07-evening-media/mediaRoomIntake.js::setupMediaIntakeV2`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureStorylineIntakeSheet_` | 0 | 3 |
 | `Storyline_Tracker` | `phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_` | `phase06-analysis/storylineHealthEngine.js::checkResolutionConditions_`, `phase06-analysis/storylineHealthEngine.js::detectFizzledStorylines_`, `phase06-analysis/storylineHealthEngine.js::detectStaleStorylines_`, `phase06-analysis/storylineHealthEngine.js::loadActiveStorylinesForHealth_`, `phase06-analysis/storylineHealthEngine.js::updateCoverageGaps_`, …(+11 more) | 1 | 16 |
 | `Undocked_Feed` | _(none)_ | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_`, `phase05-citizens/casinoLedgerEngine.js::casinoUpcoming_` | 0 | 2 |
-| `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, `phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_`, …(+6 more) | 0 | 11 |
+| `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, `phase01-config/engine94SheetContract.js::ensureEngine161Config_`, …(+7 more) | 0 | 12 |
 | `World_Drift_Report` | _(none)_ | `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport` | 0 | 1 |
 | `World_Population` | `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_`, `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport`, `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, …(+9 more) | 1 | 14 |
 | `WorldEvents_Ledger` | _(none)_ | `phase02-world-state/updateTransitMetrics.js::loadPreviousCycleEvents_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase10-persistence/recordWorldEventsv25.js::ensureWorldEventsLedger_`, `phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_`, `phase10-persistence/recordWorldEventsv25.js::upgradeWorldEventsLedger_`, …(+2 more) | 0 | 7 |

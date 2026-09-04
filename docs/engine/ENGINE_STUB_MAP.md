@@ -50,6 +50,9 @@
 - **ensureEngine160Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine161Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine157Config_(ss)**
   Sheets: World_Config
 
@@ -1690,6 +1693,9 @@
   Sheets: Neighborhood_Map
 
 - **scoreHoodFit_(unitIncome, hood)**
+
+- **relocationCap_(ctx, unitCount)**
+  Config: ctx.config.relocationMaxShare
 
 - **processRelocations_(ctx, cycle)**
   Reads: S.neighborhoodState, S.storyHooks
@@ -3857,4 +3863,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 189
-**Functions mapped:** 1315
+**Functions mapped:** 1317

@@ -80,6 +80,20 @@ Earlier the same day: *"we will be checking heritage and households in the next 
 
 **Read (engine-sheet):** the engine carries a field for every row (RoleType, SkillTags → the hiring categories, hood) and a line has members with fields — enough for "the line opens a business in the field a member works in, in the hood the staker lives in"; character (what Benji would *want*) has no column and is not invented. Trust is the signal it always was; the guardrails owed for it: wiring card first, the doctrine test in the plan before code, the prediction before the fire, the record naming what the bench did not prove. Filed as engine.96 Task 11.
 
+### Direction, second sitting (builder, 2026-09-03 22:58, recorded as said)
+
+Context: after the money-loop walk-through and the heritage-loss explainer, the builder opened design latitude on heritage entry and exit — *"I think I may have limited you creativity on the inclusion and based on the depth of the money system I'd imagine you could design better than I can tell you."*
+
+- **The Heritage_Ledger is the "Rockefeller" ledger.** *"This is where the most wealthy bloodlines populate. If life starts as a generic citizen, the dream is to one day be on the heritage_ledger."*
+- **Wealth is the gate in, and the defining factor.** *"Right now wealth is the gate in. And is the most defining factor as your bloodline's success and or failure depends on how long that bloodline has that status."*
+- **Varek as the archetype.** *"Take Elias Varek, 10 billion, owns Civis Systems, majority owner of The Oaks, and set off the West Oakland tech boom, single young male. The most influential in the sim and someone like reporter Jax Caldera raises concerns on Varek power. He single-handedly created a bloodline. So his kids, wife carry that legacy. How their lives get determined tells the story as it goes."*
+- **Dillon as the other archetype.** *"Take someone like Benji Dillon, wife kid and almost retired. So his income stops but opening businesses can keep him getting paid, unless he decides to work in another field after."*
+- **Influence, not headcount.** *"The idea isn't that this list should have 50 families on it, it should have the most influential. Money to back what they do, whether fame or tier adds to this is likely, should determine what they do so all heritage families act differently."*
+- **The top level of the game.** *"This is the top level of the game within the sim. If you make it here your LLM waking as a cron understands the game, and the engine has brought them luck."*
+- **What is built vs what is being built.** *"The names there now are all manual adds. Varek and A's players are core implants. What we are building out now is the math that makes everyone fair game and the math plus cron influence tell me who is special in the sim."*
+
+Read for the cut (engine-sheet): heritage is an INFLUENCE ledger, capped by influence not by a count; entry is wealth, tenure is the score; the engine (math) decides who is fair game, the cron (the citizen waking) decides what a heritage family does with it; the inverse (engine.156) must be real so tenure means something. Design latitude granted on entry/exit rules — numbers proposed in the cut, approved on trust.
+
 ## The chain as directed vs as built (S412)
 
 | Link (builder's words) | As built | Pointer | State |

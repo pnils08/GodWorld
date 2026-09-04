@@ -1,12 +1,14 @@
 {
-  "ranAt": "2026-08-28T20:03:12.685Z",
+  "ranAt": "2026-09-04T20:37:46.862Z",
   "target": {
-    "popid": "POP-00001",
-    "name": "Vinnie Keane",
-    "tier": "1"
+    "popid": "POP-00005",
+    "name": "Mags Corliss",
+    "tier": "2"
   },
   "ok": true,
   "errorMessage": null,
-  "newQuarantineFiles": [],
-  "nextStep": "loreWriter.js exited clean but produced no new quarantine file -- read the log before assuming nothing happened."
+  "newQuarantineFiles": [
+    "AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag.md"
+  ],
+  "nextStep": "Run /lore-ingest on AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag.md at next research-build session."
 }

@@ -1,5 +1,5 @@
 {
-  "version": "CIVIC-DOMAIN-SLICE-4",
+  "version": "CIVIC-DOMAIN-SLICE-5",
   "cycle": 105,
   "kind": "civic-domain",
   "empty": false,
@@ -965,6 +965,102 @@
     },
     {
       "kind": "civic-datawake",
+      "label": "Keisha Ramos: The Baylight Authority has completed its Phase II bid evaluation—three qualified consortiums advance with proposals that meet our exacting standards. We await the council's final v",
+      "ref": "output/cron-civic/datawake/civic-office-baylight-authority_2026-09-02.json",
+      "hood": null,
+      "popids": [
+        "POP-00041"
+      ],
+      "handle": {
+        "angle": "The Baylight Authority has completed its Phase II bid evaluation—three qualified consortiums advance with proposals that meet our exacting standards. We await the council's final vote to move forward with the team that will deliver this lan",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 58
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Leonard Tran: described in words: significant headway on securing commitments, pending documented delivery schedule",
+      "ref": "output/cron-civic/datawake/civic-office-council-d2_2026-09-02.json",
+      "hood": null,
+      "popids": [
+        "POP-00502"
+      ],
+      "handle": {
+        "angle": "Jack London's got momentum—retail busy, events drawing crowds, people moving in. But momentum isn't self-sustaining. The crime index sits at 0.9 against the city's 0.699, and property incidents run 49 to the city's 40.2. I see the uptick. I",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 59
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Rose Delgado: 3 mutual aid teams",
+      "ref": "output/cron-civic/datawake/civic-office-council-d3_2026-09-03.json",
+      "hood": null,
+      "popids": [
+        "POP-00503"
+      ],
+      "handle": {
+        "angle": "The Oakland Alternative Response Initiative’s expansion to D1 isn’t just about replicating success—it’s about deepening community trust. Fruitvale’s mutual aid teams like those led by Toby Lamont and Marisol Achebe show we’re ready to adapt",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 60
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Ramon Vega: none",
+      "ref": "output/cron-civic/datawake/civic-office-council-d4_2026-09-02.json",
+      "hood": null,
+      "popids": [
+        "POP-00042"
+      ],
+      "handle": {
+        "angle": "Glenview's numbers are real: sentiment at 98 percent, crime incidents at 4 against a city average of 6.3, property crime half the city rate. These aren't talking points—they're the result of targeted investment and fiscal discipline working",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 61
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Janae Rivers: D1",
+      "ref": "output/cron-civic/datawake/civic-office-council-d5_2026-09-03.json",
+      "hood": null,
+      "popids": [
+        "POP-00043"
+      ],
+      "handle": {
+        "angle": "The launch of D1 expansion under the Oakland Alternative Response Initiative is a start, but East Oakland’s crime index at 1.17—nearly double the city’s 0.699—demands more than just programmatic checkboxes. Safety here isn’t a pilot; it’s s",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 62
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Elliott Crane: Piedmont Ave’s crime numbers are well below city averages, but sentiment gaps remain a concern. I’m convening a community safety walk to bridge that divide and ensure accountabilit",
+      "ref": "output/cron-civic/datawake/civic-office-council-d6_2026-09-03.json",
+      "hood": null,
+      "popids": [
+        "POP-00044"
+      ],
+      "handle": {
+        "angle": "Piedmont Ave’s crime numbers are well below city averages, but sentiment gaps remain a concern. I’m convening a community safety walk to bridge that divide and ensure accountability on the ground.",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 63
+    },
+    {
+      "kind": "civic-datawake",
       "label": "Avery Santana: 57 households stabilized to date",
       "ref": "output/cron-civic/datawake/civic-office-mayor_2026-08-31.json",
       "hood": null,
@@ -977,7 +1073,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 58
+      "sourceIndex": 64
     },
     {
       "kind": "civic-datawake",
@@ -993,7 +1089,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 59
+      "sourceIndex": 65
     },
     {
       "kind": "civic-datawake",
@@ -1009,7 +1105,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 60
+      "sourceIndex": 66
     },
     {
       "kind": "civic-datawake",
@@ -1025,7 +1121,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 61
+      "sourceIndex": 67
     },
     {
       "kind": "civic-datawake",
@@ -1041,7 +1137,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 62
+      "sourceIndex": 68
     },
     {
       "kind": "weather",
@@ -1055,7 +1151,7 @@
         "citizens": []
       },
       "source": "world-summary",
-      "sourceIndex": 63
+      "sourceIndex": 69
     },
     {
       "kind": "season-feel",
@@ -1073,7 +1169,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 64
+      "sourceIndex": 70
     },
     {
       "kind": "season-feel",
@@ -1091,7 +1187,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 65
+      "sourceIndex": 71
     },
     {
       "kind": "season-feel",
@@ -1109,7 +1205,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 66
+      "sourceIndex": 72
     },
     {
       "kind": "season-feel",
@@ -1127,7 +1223,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 67
+      "sourceIndex": 73
     },
     {
       "kind": "season-feel",
@@ -1145,7 +1241,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 68
+      "sourceIndex": 74
     },
     {
       "kind": "season-feel",
@@ -1159,7 +1255,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 69
+      "sourceIndex": 75
     },
     {
       "kind": "season-feel",
@@ -1173,7 +1269,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 70
+      "sourceIndex": 76
     },
     {
       "kind": "season-feel",
@@ -1187,7 +1283,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 71
+      "sourceIndex": 77
     },
     {
       "kind": "season-feel",
@@ -1201,7 +1297,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 72
+      "sourceIndex": 78
     },
     {
       "kind": "season-feel",
@@ -1215,7 +1311,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 73
+      "sourceIndex": 79
     },
     {
       "kind": "season-feel",
@@ -1229,7 +1325,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 74
+      "sourceIndex": 80
     },
     {
       "kind": "season-feel",
@@ -1243,7 +1339,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 75
+      "sourceIndex": 81
     },
     {
       "kind": "season-feel",
@@ -1257,7 +1353,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 76
+      "sourceIndex": 82
     },
     {
       "kind": "season-feel",
@@ -1271,7 +1367,125 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 77
+      "sourceIndex": 83
+    },
+    {
+      "kind": "health-city",
+      "label": "City illness rate 5.2% | Hospital 2 in care (5% load)",
+      "ref": "output/world_summary_c105.md \"## City State\"",
+      "hood": null,
+      "popids": [],
+      "handle": {
+        "angle": "The city illness rate stands at 5.2%, with 2 in hospital care at 5% of capacity.",
+        "hookLine": "The city carries its illness rate unevenly; the record shows where.",
+        "citizens": []
+      },
+      "source": "world-summary-health",
+      "sourceIndex": 84
+    },
+    {
+      "kind": "health-crisis",
+      "label": "Adams Point health cluster (crisis-spike) | HEALTH event (impactScore 36)",
+      "ref": "output/world_summary_c105.md \"## World Events\"",
+      "hood": "Adams Point",
+      "popids": [],
+      "handle": {
+        "angle": "Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 36).",
+        "hookLine": "One neighborhood is carrying more of the illness rate than the rest.",
+        "citizens": []
+      },
+      "source": "world-summary-health",
+      "sourceIndex": 85
+    },
+    {
+      "kind": "health-lived",
+      "label": "Alisha Peña — slept badly for a few nights running",
+      "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+      "hood": "Lake Merritt",
+      "popids": [
+        "POP-00029"
+      ],
+      "handle": {
+        "angle": "Alisha Peña slept badly for a few nights running (Lake Merritt).",
+        "hookLine": "A named resident is living the Cycle’s health record.",
+        "citizens": [
+          "Alisha Peña (POP-00029)"
+        ]
+      },
+      "source": "world-summary-health",
+      "sourceIndex": 86
+    },
+    {
+      "kind": "health-lived",
+      "label": "Lemante Naruto — took time to recover from the flu",
+      "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+      "hood": "Jack London",
+      "popids": [
+        "POP-00314"
+      ],
+      "handle": {
+        "angle": "Lemante Naruto took time to recover from the flu (Jack London).",
+        "hookLine": "A named resident is living the Cycle’s health record.",
+        "citizens": [
+          "Lemante Naruto (POP-00314)"
+        ]
+      },
+      "source": "world-summary-health",
+      "sourceIndex": 87
+    },
+    {
+      "kind": "health-lived-seasonal",
+      "label": "Drew Lemon — dealt with a seasonal health concern",
+      "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+      "hood": "Downtown",
+      "popids": [
+        "POP-00670"
+      ],
+      "handle": {
+        "angle": "Drew Lemon dealt with a seasonal health concern (Downtown).",
+        "hookLine": "A named resident is living the Cycle’s health record.",
+        "citizens": [
+          "Drew Lemon (POP-00670)"
+        ]
+      },
+      "source": "world-summary-health",
+      "sourceIndex": 88
+    },
+    {
+      "kind": "health-lived-seasonal",
+      "label": "Genevieve Liu — dealt with a seasonal health concern",
+      "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+      "hood": "Lake Merritt",
+      "popids": [
+        "POP-00928"
+      ],
+      "handle": {
+        "angle": "Genevieve Liu dealt with a seasonal health concern (Lake Merritt).",
+        "hookLine": "A named resident is living the Cycle’s health record.",
+        "citizens": [
+          "Genevieve Liu (POP-00928)"
+        ]
+      },
+      "source": "world-summary-health",
+      "sourceIndex": 89
+    },
+    {
+      "kind": "health-hospitalization",
+      "label": "Yu Zen was hospitalized after a workplace accident.",
+      "ref": "output/world_summary_c105.md \"## Chaos Events\"",
+      "hood": "Rockridge",
+      "popids": [
+        "POP-00194"
+      ],
+      "handle": {
+        "angle": "Yu Zen was hospitalized after a workplace accident.",
+        "hookLine": "The hospital census has a name behind it this Cycle.",
+        "citizens": [
+          "Yu Zen (POP-00194)"
+        ]
+      },
+      "source": "world-summary-health",
+      "sourceIndex": 90
     }
   ],
   "packets": {
@@ -1758,132 +1972,160 @@
       "empty": false,
       "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.",
       "story": {
-        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
-        "label": "Temescal Community Health Center is approved, and construction is active.",
-        "kind": "initiative",
-        "angle": "Temescal Community Health Center is approved, and construction is active.",
-        "hookLine": "The supplied civic record identifies a health-service question that needs careful accounting.",
-        "hood": "Temescal",
-        "popids": [],
-        "citizens": []
+        "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+        "label": "Alisha Peña slept badly for a few nights running (Lake Merritt).",
+        "kind": "health-lived",
+        "angle": "Alisha Peña slept badly for a few nights running (Lake Merritt).",
+        "hookLine": "A named resident is living the Cycle’s health record.",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00029"
+        ],
+        "citizens": [
+          "Alisha Peña (POP-00029)"
+        ]
       },
       "pulse": {
         "className": "health",
-        "score": 45,
-        "label": "Temescal Community Health Center is approved, and construction is active.",
-        "hood": "Temescal",
-        "source": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        "score": 80,
+        "label": "Alisha Peña slept badly for a few nights running (Lake Merritt).",
+        "hood": "Lake Merritt",
+        "source": "output/world_summary_c105.md \"## Who Lived It ### Health\""
       },
       "prewrite": {
         "anchorFacts": [
-          "Temescal Community Health Center is approved, and construction is active."
+          "Alisha Peña slept badly for a few nights running (Lake Merritt).",
+          "The city illness rate stands at 5.2%, with 2 in hospital care at 5% of capacity."
         ],
         "forbidden": [
-          "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+          "Do not add diagnoses, symptoms, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries.",
+          "Do not restate the supplied illness rate, hospital census, or impact score more than once — the figure is the anchor, not the story."
         ],
         "schema": "HEALTH-SERVICE-BRIEF-1",
-        "method": "ACCESS_TIMELINE_HUMAN_COST",
+        "method": "ILLNESS_RECORD_HUMAN_COST",
         "missing": [
-          "a named affected resident, patient, clinician, or service user",
-          "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
-          "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+          "a diagnosis, symptom pattern, treatment result, or causal health outcome beyond the supplied record"
         ],
         "humanConsequence": {
-          "state": "UNESTABLISHED",
-          "subjects": [],
-          "facts": [],
-          "src": null
+          "state": "SUPPLIED",
+          "subjects": [
+            "POP-00029"
+          ],
+          "facts": [
+            "Alisha Peña slept badly for a few nights running (Lake Merritt)."
+          ],
+          "src": "output/world_summary_c105.md \"## Who Lived It ### Health\""
+        },
+        "cityHealth": {
+          "fact": "The city illness rate stands at 5.2%, with 2 in hospital care at 5% of capacity.",
+          "src": "output/world_summary_c105.md \"## City State\""
         }
       },
       "citizens": [],
       "candidates": [
         {
-          "score": 45,
-          "kind": "initiative",
-          "label": "Temescal Community Health Center | Status passed | phase construction-active",
-          "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
-          "hood": "Temescal",
-          "popids": [],
-          "angle": null,
-          "hookLine": null,
-          "citizens": [],
-          "source": "desk-signal",
-          "sourceIndex": 36
-        },
-        {
-          "score": 45,
-          "kind": "vote",
-          "label": "Temescal Community Health Center | Structural frame groundbreaking C106",
-          "ref": "Initiative_Tracker (InitiativeID INIT-005)",
-          "hood": null,
-          "popids": [],
-          "angle": null,
-          "hookLine": null,
-          "citizens": [],
-          "source": "desk-signal",
-          "sourceIndex": 37
-        },
-        {
-          "score": 45,
-          "kind": "ripple",
-          "label": "sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal",
-          "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
-          "hood": "Temescal",
-          "popids": [],
-          "angle": null,
-          "hookLine": null,
-          "citizens": [],
-          "source": "desk-signal",
-          "sourceIndex": 46
-        },
-        {
-          "score": 45,
-          "kind": "ripple",
-          "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Temescal Community Health Center sitting, nothing free (-2); Baylight District — Final Council Vote …",
-          "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
-          "hood": "CITYWIDE",
-          "popids": [],
-          "angle": null,
-          "hookLine": null,
-          "citizens": [],
-          "source": "desk-signal",
-          "sourceIndex": 48
-        },
-        {
-          "score": 45,
-          "kind": "ripple",
-          "label": "approval/district-sentiment | Temescal Community Health Center sitting, nothing free (-1)",
-          "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
-          "hood": "D7",
-          "popids": [],
-          "angle": null,
-          "hookLine": null,
-          "citizens": [],
-          "source": "desk-signal",
-          "sourceIndex": 55
-        },
-        {
-          "score": 45,
-          "kind": "civic-datawake",
-          "label": "Bobby Chen-Ramirez: Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts.",
-          "ref": "output/cron-civic/datawake/civic-project-health-center_2026-08-31.json",
-          "hood": null,
+          "score": 80,
+          "kind": "health-lived",
+          "label": "Alisha Peña — slept badly for a few nights running",
+          "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+          "hood": "Lake Merritt",
           "popids": [
-            "POP-00792"
+            "POP-00029"
           ],
-          "angle": "Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts.",
-          "hookLine": null,
+          "angle": "Alisha Peña slept badly for a few nights running (Lake Merritt).",
+          "hookLine": "A named resident is living the Cycle’s health record.",
+          "citizens": [
+            "Alisha Peña (POP-00029)"
+          ],
+          "source": "world-summary-health",
+          "sourceIndex": 86
+        },
+        {
+          "score": 80,
+          "kind": "health-lived",
+          "label": "Lemante Naruto — took time to recover from the flu",
+          "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+          "hood": "Jack London",
+          "popids": [
+            "POP-00314"
+          ],
+          "angle": "Lemante Naruto took time to recover from the flu (Jack London).",
+          "hookLine": "A named resident is living the Cycle’s health record.",
+          "citizens": [
+            "Lemante Naruto (POP-00314)"
+          ],
+          "source": "world-summary-health",
+          "sourceIndex": 87
+        },
+        {
+          "score": 78,
+          "kind": "health-hospitalization",
+          "label": "Yu Zen was hospitalized after a workplace accident.",
+          "ref": "output/world_summary_c105.md \"## Chaos Events\"",
+          "hood": "Rockridge",
+          "popids": [
+            "POP-00194"
+          ],
+          "angle": "Yu Zen was hospitalized after a workplace accident.",
+          "hookLine": "The hospital census has a name behind it this Cycle.",
+          "citizens": [
+            "Yu Zen (POP-00194)"
+          ],
+          "source": "world-summary-health",
+          "sourceIndex": 90
+        },
+        {
+          "score": 65,
+          "kind": "health-lived-seasonal",
+          "label": "Drew Lemon — dealt with a seasonal health concern",
+          "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+          "hood": "Downtown",
+          "popids": [
+            "POP-00670"
+          ],
+          "angle": "Drew Lemon dealt with a seasonal health concern (Downtown).",
+          "hookLine": "A named resident is living the Cycle’s health record.",
+          "citizens": [
+            "Drew Lemon (POP-00670)"
+          ],
+          "source": "world-summary-health",
+          "sourceIndex": 88
+        },
+        {
+          "score": 65,
+          "kind": "health-lived-seasonal",
+          "label": "Genevieve Liu — dealt with a seasonal health concern",
+          "ref": "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+          "hood": "Lake Merritt",
+          "popids": [
+            "POP-00928"
+          ],
+          "angle": "Genevieve Liu dealt with a seasonal health concern (Lake Merritt).",
+          "hookLine": "A named resident is living the Cycle’s health record.",
+          "citizens": [
+            "Genevieve Liu (POP-00928)"
+          ],
+          "source": "world-summary-health",
+          "sourceIndex": 89
+        },
+        {
+          "score": 60,
+          "kind": "health-crisis",
+          "label": "Adams Point health cluster (crisis-spike) | HEALTH event (impactScore 36)",
+          "ref": "output/world_summary_c105.md \"## World Events\"",
+          "hood": "Adams Point",
+          "popids": [],
+          "angle": "Adams Point is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 36).",
+          "hookLine": "One neighborhood is carrying more of the illness rate than the rest.",
           "citizens": [],
-          "source": "civic-datawake",
-          "sourceIndex": 59
+          "source": "world-summary-health",
+          "sourceIndex": 85
         }
       ],
       "pointers": [
-        "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
-        "Initiative_Tracker (InitiativeID INIT-005)",
-        "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
-        "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
-        "output/cron-civic/datawake/civic-project-health-center_2026-08-31.json"
+        "output/world_summary_c105.md \"## Who Lived It ### Health\"",
+        "output/world_summary_c105.md \"## Chaos Events\"",
+        "output/world_summary_c105.md \"## World Events\""
       ]
     },
     "noah-tan": {
@@ -1958,7 +2200,7 @@
             "Drew Lemon (POP-00670)"
           ],
           "source": "season-feel",
-          "sourceIndex": 64
+          "sourceIndex": 70
         },
         {
           "score": 80,
@@ -1975,7 +2217,7 @@
             "Genevieve Liu (POP-00928)"
           ],
           "source": "season-feel",
-          "sourceIndex": 65
+          "sourceIndex": 71
         },
         {
           "score": 80,
@@ -1992,7 +2234,7 @@
             "Melton Neilon (POP-00170)"
           ],
           "source": "season-feel",
-          "sourceIndex": 66
+          "sourceIndex": 72
         },
         {
           "score": 80,
@@ -2009,7 +2251,7 @@
             "Marky Beal (POP-00202)"
           ],
           "source": "season-feel",
-          "sourceIndex": 67
+          "sourceIndex": 73
         },
         {
           "score": 80,
@@ -2026,7 +2268,7 @@
             "Rigo Ryno (POP-00197)"
           ],
           "source": "season-feel",
-          "sourceIndex": 68
+          "sourceIndex": 74
         },
         {
           "score": 80,
@@ -2039,7 +2281,7 @@
           "hookLine": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 69
+          "sourceIndex": 75
         }
       ],
       "pointers": [

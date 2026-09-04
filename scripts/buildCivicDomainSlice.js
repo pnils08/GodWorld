@@ -67,6 +67,157 @@ const MATCHERS = Object.freeze({
   'angela-reyes': /education|school|student|youth|apprentice|teacher|learning/i
 });
 
+// civic.30 — Dr. Mezran's beat is the city's health record: the illness rate,
+// the hoods carrying it, the hospital census, and the citizens living it.
+// buildWorldSummary.js emits every one of those; the civic desk_signal lane
+// emits none of them, which is why a construction tracker named "... Health
+// Center" used to win her slot. Scores are tiered so a named citizen outranks
+// a hood cluster, a hood cluster outranks the citywide rate, and the civic
+// initiative fallback only wins when the Cycle produced no health record.
+const HEALTH_KIND_SCORES = Object.freeze({
+  'health-lived': 80,
+  'health-hospitalization': 78,
+  // A "seasonal health concern" is Noah Tan's season-feel row by design — it
+  // is what seasonFeel.SEASON_RE was written to catch. Tiering it below every
+  // other health record means the two seats cannot land on the same citizen
+  // unless the Cycle produced nothing else, which is cheaper than a
+  // cross-seat arbitration pass.
+  'health-lived-seasonal': 65,
+  'health-crisis': 60,
+  'health-city': 40
+});
+const HEALTH_FALLBACK_SCORE = 12;
+const CARMEN_LEDGER_KINDS = /^(?:initiative|vote|decision)$/i;
+
+function summarySection(md, heading) {
+  const lines = String(md || '').split(/\r?\n/);
+  const start = lines.findIndex(line => new RegExp('^## ' + heading + '\\b', 'i').test(line));
+  if (start < 0) return '';
+  const out = [];
+  for (let i = start + 1; i < lines.length; i++) {
+    if (/^## /.test(lines[i])) break;
+    out.push(lines[i]);
+  }
+  return out.join('\n');
+}
+
+// A pro athlete's hospitalization is a sports story, not a health-beat one —
+// the same exclusion luisCandidateScope applies. NEVER_WOKEN is deliberately
+// NOT reused here: Luis interviews his subjects and needs a page, Dr. Mezran
+// only names the human consequence, so an unwoken citizen still counts.
+function healthSubjectIneligible(row) {
+  if (!row) return true;
+  return String(row['EconomicProfileKey'] || '') === 'SPORTS_OVERRIDE' ||
+    /\b(?:athlete|player|pitcher|catcher|fielder|shortstop|baseman|designated hitter|coach)\b/i
+      .test(String(row.RoleType || ''));
+}
+
+function loadHealthEntries(cycle, root = ROOT, profiles = null) {
+  const rows = profiles || loadCitizenProfiles(root);
+  const ref = 'output/world_summary_c' + cycle + '.md';
+  let md = '';
+  try { md = fs.readFileSync(path.join(root, 'output', 'world_summary_c' + cycle + '.md'), 'utf8'); }
+  catch (_) { return []; }
+  const out = [];
+
+  // Citywide record — emitCityState writes this line every Cycle, so the
+  // health beat is never left with nothing to stand on.
+  const cityLine = (md.match(/^- \*\*Population:\*\*.*$/m) || [])[0] || '';
+  const illness = (cityLine.match(/Illness rate\s+([\d.]+)%/) || [])[1];
+  const hospital = cityLine.match(/Hospital:\s*(\d+)\s+in care\s*\((\d+)%\s*load\)/i);
+  if (illness) {
+    const census = hospital
+      ? ', with ' + hospital[1] + ' in hospital care at ' + hospital[2] + '% of capacity'
+      : '';
+    out.push({
+      kind: 'health-city',
+      ref: ref + ' "## City State"',
+      label: 'City illness rate ' + illness + '%' +
+        (hospital ? ' | Hospital ' + hospital[1] + ' in care (' + hospital[2] + '% load)' : ''),
+      handle: {
+        angle: 'The city illness rate stands at ' + illness + '%' + census + '.',
+        hookLine: 'The city carries its illness rate unevenly; the record shows where.'
+      }
+    });
+  }
+
+  // Hood-level clusters — a HEALTH world event names the neighborhood.
+  for (const line of summarySection(md, 'World Events').split('\n')) {
+    const match = line.match(/^- \*\*HEALTH(?:\s+\u2014\s+([^\u2014]+?))?\s+\u2014\s+([^:]+):\*\*\s*(.+)$/);
+    if (!match) continue;
+    const hood = match[2].trim();
+    if (/^\(no neighborhood\)$/i.test(hood)) continue;
+    const detail = match[3].trim();
+    out.push({
+      kind: 'health-crisis',
+      ref: ref + ' "## World Events"',
+      label: hood + ' health cluster' + (match[1] ? ' (' + match[1].trim() + ')' : '') + ' | ' + detail,
+      hood,
+      handle: {
+        angle: hood + ' is carrying a recorded health cluster this Cycle: ' + detail + '.',
+        hookLine: 'One neighborhood is carrying more of the illness rate than the rest.'
+      }
+    });
+  }
+
+  // The citizens living it — Who Lived It, Health and Recovering tags.
+  let tag = null;
+  for (const line of summarySection(md, 'Who Lived It').split('\n')) {
+    const heading = line.match(/^###\s+(Health|Recovering)\b/i);
+    if (heading) { tag = heading[1]; continue; }
+    if (/^###\s/.test(line)) { tag = null; continue; }
+    if (!tag) continue;
+    const m = line.match(/^[-*]\s+(POP-\d+)\s*(.*?)\s+\u2014\s+(.+?)(?:\s+\(([^)]+)\))?\s*$/i);
+    if (!m) continue;
+    const popid = m[1].toUpperCase();
+    const row = rows.get(popid);
+    if (healthSubjectIneligible(row)) continue;
+    const name = String(m[2] || '').trim() || String(row.Name || '').trim();
+    if (!name) continue;
+    const hood = String(m[4] || row.Neighborhood || '').trim() || null;
+    const lived = m[3].trim();
+    out.push({
+      kind: seasonFeel.SEASON_RE.test(lived) ? 'health-lived-seasonal' : 'health-lived',
+      ref: ref + ' "## Who Lived It ### ' + tag + '"',
+      label: name + ' \u2014 ' + lived,
+      hood,
+      popids: [popid],
+      handle: {
+        angle: name + ' ' + lived + (hood ? ' (' + hood + ')' : '') + '.',
+        hookLine: 'A named resident is living the Cycle\u2019s health record.',
+        citizens: [name + ' (' + popid + ')']
+      }
+    });
+  }
+
+  // Hospitalizations — the chaos table's metric column names them outright.
+  for (const line of summarySection(md, 'Chaos Events').split('\n')) {
+    const cells = line.split('|').map(cell => cell.trim());
+    if (cells.length < 7 || !/^Hospitalized$/i.test(cells[4] || '')) continue;
+    const popid = ((cells[3] || '').match(/POP-\d+/i) || [])[0];
+    if (!popid) continue;
+    const row = rows.get(popid.toUpperCase());
+    if (healthSubjectIneligible(row)) continue;
+    const name = String(row.Name || '').trim();
+    if (!name) continue;
+    const cause = String(cells[2] || 'recorded incident').replace(/_/g, ' ');
+    const label = name + ' was hospitalized after a ' + cause + '.';
+    out.push({
+      kind: 'health-hospitalization',
+      ref: ref + ' "## Chaos Events"',
+      label,
+      hood: String(row.Neighborhood || '').trim() || null,
+      popids: [popid.toUpperCase()],
+      handle: {
+        angle: label,
+        hookLine: 'The hospital census has a name behind it this Cycle.',
+        citizens: [name + ' (' + popid.toUpperCase() + ')']
+      }
+    });
+  }
+  return out;
+}
+
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
   if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
@@ -157,7 +308,7 @@ function normalizeEntry(row, source, index) {
   };
 }
 
-function loadCycleCivicEntries(cycle, root = ROOT) {
+function loadCycleCivicEntries(cycle, root = ROOT, profiles = null) {
   const entries = [];
   const signalPath = path.join(root, 'output', 'desk_signal_c' + cycle + '.json');
   const signal = loadJson(signalPath);
@@ -219,6 +370,14 @@ function loadCycleCivicEntries(cycle, root = ROOT) {
     }
   } catch (_) { /* missing summary leaves Noah empty and fail-closed */ }
 
+  // civic.30 — the health record lives in the world summary, not the civic
+  // desk_signal lane. Parsed last so its sourceIndex never displaces an
+  // existing tiebreak.
+  for (const row of loadHealthEntries(cycle, root, profiles)) {
+    const entry = normalizeEntry(row, 'world-summary-health', entries.length);
+    if (entry) entries.push(entry);
+  }
+
   const seen = new Set();
   return entries.filter(entry => {
     const key = entry.ref + '\u0000' + entry.label;
@@ -241,6 +400,17 @@ function scoreEntryForSeat(entry, slug) {
     if (/anomaly/i.test(entry.kind)) score += 45;
     if (MATCHERS[slug].test(text)) score += 35;
     return score;
+  }
+  if (slug === 'lila-mezran') {
+    if (HEALTH_KIND_SCORES[entry.kind]) return HEALTH_KIND_SCORES[entry.kind];
+    // civic.30 — initiative, vote and decision rows are Carmen's civic-ledger
+    // lane by design. "Temescal Community Health Center | Status passed |
+    // phase construction-active" is a construction tracker, not a health
+    // fact; it may only stand in when no health record was produced.
+    if (CARMEN_LEDGER_KINDS.test(entry.kind)) {
+      return MATCHERS[slug].test(text) ? HEALTH_FALLBACK_SCORE : 0;
+    }
+    return MATCHERS[slug].test(text) ? 45 : 0;
   }
   if (slug === 'noah-tan' && entry.kind === 'season-feel') return 80;
   if (slug === 'noah-tan' && entry.kind === 'weather') return 5;
@@ -282,6 +452,11 @@ function publicInfrastructureFact(top) {
 
 function publicHealthFact(top) {
   const label = String(top && top.label || '').trim();
+  // civic.30 — a health-record entry already carries its public sentence.
+  if (top && HEALTH_KIND_SCORES[top.kind]) {
+    const fact = String(top.angle || top.handle && top.handle.angle || label).trim();
+    return /[.!?]$/.test(fact) ? fact : fact + '.';
+  }
   const tracker = label.match(/^(.+?)\s*\|\s*Status\s+([^|]+?)(?:\s*\|\s*phase\s+(.+))?$/i);
   if (tracker) {
     const name = tracker[1].trim();
@@ -326,7 +501,7 @@ function publicWeatherFact(top) {
     ' conditions: ' + weather + '.';
 }
 
-function prewriteForSeat(slug, top, candidateScope) {
+function prewriteForSeat(slug, top, candidateScope, cityHealth) {
   if (slug === 'trevor-shimizu') {
     return {
       anchorFacts: [publicInfrastructureFact(top)],
@@ -342,19 +517,41 @@ function prewriteForSeat(slug, top, candidateScope) {
     };
   }
   if (slug === 'lila-mezran') {
+    // civic.30 — what is missing depends on what the record supplied. A
+    // health-record entry hands her the rate, the hood or the named citizen
+    // outright; listing those as withheld would tell her to drop the story.
+    const record = !!HEALTH_KIND_SCORES[top.kind];
+    // The citywide rate and hospital census are standing context for every
+    // health story, not a competitor for the lede — carried outside the
+    // six candidate slots so a busy Cycle can never squeeze them out.
+    const city = (cityHealth && cityHealth.ref !== top.ref)
+      ? { fact: cityHealth.angle, src: cityHealth.ref }
+      : null;
+    const named = (top.popids || []).filter(Boolean);
+    const fact = publicHealthFact(top);
+    const missing = [];
+    if (!named.length) missing.push('a named affected resident, patient, clinician, or service user');
+    if (!record) missing.push('an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state');
+    missing.push('a diagnosis, symptom pattern, treatment result, or causal health outcome beyond the supplied record');
+    if (record && !named.length) missing.push('any second illness, hospital, or neighborhood figure the supplied record does not carry');
     return {
-      anchorFacts: [publicHealthFact(top)],
+      // cron-desk-run.js renders anchorFacts into the writer's brief, so the
+      // standing citywide figure travels there as well as in cityHealth.
+      anchorFacts: city ? [fact, city.fact] : [fact],
       forbidden: [
-        'Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries.'
+        'Do not add diagnoses, symptoms, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries.',
+        'Do not restate the supplied illness rate, hospital census, or impact score more than once — the figure is the anchor, not the story.'
       ],
       schema: 'HEALTH-SERVICE-BRIEF-1',
-      method: 'ACCESS_TIMELINE_HUMAN_COST',
-      missing: [
-        'a named affected resident, patient, clinician, or service user',
-        'an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state',
-        'a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome'
-      ],
-      humanConsequence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null }
+      method: record ? 'ILLNESS_RECORD_HUMAN_COST' : 'ACCESS_TIMELINE_HUMAN_COST',
+      missing,
+      humanConsequence: {
+        state: named.length ? 'SUPPLIED' : (record && top.hood ? 'PLACE_ONLY' : 'UNESTABLISHED'),
+        subjects: named,
+        facts: (named.length || (record && top.hood)) ? [fact] : [],
+        src: (named.length || (record && top.hood)) ? top.ref : null
+      },
+      cityHealth: city
     };
   }
   if (slug === 'angela-reyes') {
@@ -444,6 +641,9 @@ function packetForEntries(entries, slug, profiles) {
   const candidateScope = slug === 'luis-navarro'
     ? luisCandidateScope(top, profiles || new Map())
     : null;
+  const cityHealth = slug === 'lila-mezran'
+    ? entries.find(entry => entry.kind === 'health-city')
+    : null;
   const storyPopids = candidateScope ? candidateScope.allowed.map(row => row.popid) : top.popids;
   const storyCitizens = candidateScope
     ? candidateScope.allowed.map(row => row.name + ' (' + row.popid + ')')
@@ -482,7 +682,8 @@ function packetForEntries(entries, slug, profiles) {
       hood: top.hood,
       source: top.ref
     },
-    prewrite: prewriteForSeat(slug, top, candidateScope),
+    prewrite: prewriteForSeat(slug, top, candidateScope,
+      cityHealth && { angle: cityHealth.handle.angle, ref: cityHealth.ref }),
     citizens: candidateScope ? candidateScope.allowed : [],
     candidates,
     pointers: unique(candidates.map(candidate => candidate.ref))
@@ -490,13 +691,13 @@ function packetForEntries(entries, slug, profiles) {
 }
 
 function buildCivicDomainSlice(cycle, { root = ROOT } = {}) {
-  const entries = loadCycleCivicEntries(cycle, root);
   const profiles = loadCitizenProfiles(root);
+  const entries = loadCycleCivicEntries(cycle, root, profiles);
   const packets = Object.fromEntries(Object.keys(CIVIC_SEATS).map(slug =>
     [slug, packetForEntries(entries, slug, profiles)]));
   const nonempty = Object.values(packets).filter(packet => packet && !packet.empty);
   return {
-    version: 'CIVIC-DOMAIN-SLICE-4',
+    version: 'CIVIC-DOMAIN-SLICE-5',
     cycle: Number(cycle),
     kind: 'civic-domain',
     empty: nonempty.length === 0,
@@ -555,7 +756,7 @@ function writeCivicDomainSlice(cycle, slice, root = ROOT) {
 
 function loadCivicDomainSlice(cycle, root = ROOT) {
   const existing = loadJson(slicePaths(cycle, root).json);
-  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-4') return existing;
+  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-5') return existing;
   const slice = buildCivicDomainSlice(cycle, { root });
   if (!slice.empty) writeCivicDomainSlice(cycle, slice, root);
   return slice.empty ? null : slice;
@@ -624,7 +825,9 @@ module.exports = {
   scoreEntryForSeat,
   packetForEntries,
   publicInfrastructureFact,
+  publicHealthFact,
   publicEducationFact,
+  loadHealthEntries,
   publicWeatherFact,
   buildCivicDomainSlice,
   formatCivicDomainSliceMarkdown,

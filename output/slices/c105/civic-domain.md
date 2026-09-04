@@ -1,6 +1,6 @@
 # Civic Domain Slice — C105
 
-- Shared source entries: 75
+- Shared source entries: 88
 - Empty: no
 
 ## Carmen Delaine (`carmen-delaine`)
@@ -41,15 +41,15 @@
 
 ## Dr. Lila Mezran (`lila-mezran`)
 - Domain: health
-- Pulse: Temescal Community Health Center is approved, and construction is active.
-- Ref: Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker
+- Pulse: Alisha Peña slept badly for a few nights running (Lake Merritt).
+- Ref: output/world_summary_c105.md "## Who Lived It ### Health"
 - Candidates:
-  - [45] Temescal Community Health Center | Status passed | phase construction-active — Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker
-  - [45] Temescal Community Health Center | Structural frame groundbreaking C106 — Initiative_Tracker (InitiativeID INIT-005)
-  - [45] sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal — Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md "## What Moved" > "### initiative-implementation"
-  - [45] approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Temescal Community Health Center sitting, nothing free (-2); Baylight District — Final Council Vote … — Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md "## What Moved" > "### approval-shift"
-  - [45] approval/district-sentiment | Temescal Community Health Center sitting, nothing free (-1) — Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md "## What Moved" > "### approval-shift"
-  - [45] Bobby Chen-Ramirez: Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts. — output/cron-civic/datawake/civic-project-health-center_2026-08-31.json
+  - [80] Alisha Peña — slept badly for a few nights running — output/world_summary_c105.md "## Who Lived It ### Health"
+  - [80] Lemante Naruto — took time to recover from the flu — output/world_summary_c105.md "## Who Lived It ### Health"
+  - [78] Yu Zen was hospitalized after a workplace accident. — output/world_summary_c105.md "## Chaos Events"
+  - [65] Drew Lemon — dealt with a seasonal health concern — output/world_summary_c105.md "## Who Lived It ### Health"
+  - [65] Genevieve Liu — dealt with a seasonal health concern — output/world_summary_c105.md "## Who Lived It ### Health"
+  - [60] Adams Point health cluster (crisis-spike) | HEALTH event (impactScore 36) — output/world_summary_c105.md "## World Events"
 
 ## Noah Tan (`noah-tan`)
 - Domain: environment

@@ -69,6 +69,15 @@ What this means for the employment cascade (engine-sheet reading, 2026-08-30):
 - **E2's employer draw is a lottery of chance and must be rare.** As built it expects ≈1 raise or layoff per cycle city-wide (per-business budget |g|/5200 × staff) — a cadence, not an anomaly. Re-based to ≈1 per 10 cycles (divisor 52 000): a workplace raise or a business-driven layoff becomes something that happens to one citizen in the city every couple of months, with an employer reason behind it. Same for the reconciliation firings (kept — Employee_Count is ground truth — but they are chaos-fold / contraction consequences, not chance).
 - **Advancement proper is tier movement** — `checkForPromotions_` (Generic_Citizens → ledger emergence via media usage) and the tier ladder are the promotion system; E2 never touches CareerStage or Tier and never will.
 
+### Direction, fourth pass (builder, 2026-09-04 — the ENGINE-clock gate, correcting the 2026-08-30 03:45 entry)
+
+22. **Money and education apply to ALL clocks.** The `isEngineClockRow_` gate that holds GAME/CIVIC/MEDIA outside the income and education work is wrong in that direction — those citizens earn, and those citizens learn, like everyone else.
+23. **GAME carries a profession floor of $100k**, set at intake when a new player arrives without a specified salary, so the field is never blank. (Engine-sheet's earlier reading — "profession floor for every clock but GAME" — was backwards; GAME has the floor, and it is a named number.)
+24. **Job changes are per-clock, and each clock has its own door — the engine's generic career path is not it:**
+    - **GAME** — the builder's domain. The engine does not move a player's job.
+    - **CIVIC** — bound by approval ratings or retirement. Nothing else moves a civic job.
+    - **MEDIA** — no system in place yet other than retirement.
+
 ---
 
 ## WealthLevel bands (proposal — engine-sheet, pending builder sign-off on the hood column)

@@ -57,6 +57,12 @@ try {
     '### Relationship (1)',
     '- POP-90001 Test Civic Resident — relied on familiar social circles during cold period (Fruitvale)',
     '',
+    '### Education (1)',
+    '- POP-90005 Test Homework Student — dealt with holiday homework stress before school (East Oakland)',
+    '',
+    '### Transit (1)',
+    '- POP-90006 Test Storm Commuter — faced restricted movement on the road during the storm (Fruitvale)',
+    '',
     '## Chaos Events (Chaos_Cars, cycle 103 — 2 total)',
     '',
     '| Vehicle | Outcome | Target | Metric | Magnitude | Floor fired |',
@@ -176,6 +182,32 @@ try {
     story: slice.packets['angela-reyes'].story,
     prewrite: slice.packets['angela-reyes'].prewrite.anchorFacts
   })));
+  // civic.30 follow-up (flagged by engine-sheet, not observed at C105): the
+  // same season-feel leak that hit Lila reaches any seat whose keywords
+  // happen to co-occur with a SEASON_RE trigger in the same "Who Lived It"
+  // line — SEASON_RE carries "homework" (Angela's `school`/`student`) and
+  // "restricted movement" (Trevor's `traffic`/`mobility`/`road`).
+  const angelaKinds = slice.packets['angela-reyes'].candidates.map(row => row.kind);
+  const trevorKinds = slice.packets['trevor-shimizu'].candidates.map(row => row.kind);
+  assert(!angelaKinds.includes('season-feel'),
+    'a season-feel row is Noah Tan’s, even one that mentions homework and school');
+  assert(!trevorKinds.includes('season-feel'),
+    'a season-feel row is Noah Tan’s, even one that mentions restricted movement and a road');
+  assert.strictEqual(civic.scoreEntryForSeat({
+    kind: 'season-feel',
+    label: 'Test Homework Student dealt with holiday homework stress before school (East Oakland)',
+    ref: 'X'
+  }, 'angela-reyes'), 0);
+  assert.strictEqual(civic.scoreEntryForSeat({
+    kind: 'season-feel',
+    label: 'Test Storm Commuter faced restricted movement on the road during the storm (Fruitvale)',
+    ref: 'X'
+  }, 'trevor-shimizu'), 0);
+  // The apprenticeship pipeline stays Angela's top pick either way (it's her
+  // only signal, per civic.22/civic.30 — she must never end up empty), and
+  // the transit hub stays Trevor's — the gate must not touch initiative kind.
+  assert.strictEqual(slice.packets['angela-reyes'].story.ref, 'INIT-YOUTH');
+  assert.strictEqual(slice.packets['trevor-shimizu'].story.ref, 'INIT-TRANSIT');
   assert.strictEqual(slice.packets['noah-tan'].seat.popid, 'POP-00157');
   assert.strictEqual(slice.packets['noah-tan'].story.ref, 'output/world_summary_c103.md ## Who Lived It');
   assert.match(slice.packets['noah-tan'].story.label, /Test Seasonal Resident/);

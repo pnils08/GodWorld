@@ -88,12 +88,16 @@ const HEALTH_KIND_SCORES = Object.freeze({
 });
 const HEALTH_FALLBACK_SCORE = 12;
 const CARMEN_LEDGER_KINDS = /^(?:initiative|vote|decision)$/i;
-// Noah Tan's lane. parseSeasonFeel also reads the ### Health bullets — a
-// "seasonal health concern" is a season-feel row there and matches Dr.
-// Mezran's keywords, so without this gate she can claim his entry at the
-// generic score and defeat the tiering below. The same content reaches her
-// as health-lived-seasonal, ranked under every other health record.
-const NOAH_SEASON_KINDS = /^(?:season-feel|weather)$/i;
+// Noah Tan's lane, exclusively — parseSeasonFeel reads the whole ## Who Lived
+// It section, so any seat's generic keyword matcher can land on a season-feel
+// row that happens to share vocabulary with a season trigger (civic.30: "a
+// seasonal health concern" vs Dr. Mezran's `health`; SEASON_RE also carries
+// "homework" against Angela's `school`/`student` and "restricted movement"
+// against Trevor's `traffic`/`mobility`/`road` — same leak class, still open
+// when civic.30 shipped). Every generic-matcher seat gates this to 0; Noah's
+// own dedicated `season-feel`/`weather` branches above return their score
+// before ever reaching this check, so his claim is untouched.
+const SEASON_ONLY_KINDS = /^(?:season-feel|weather)$/i;
 
 function summarySection(md, heading) {
   const lines = String(md || '').split(/\r?\n/);
@@ -416,11 +420,15 @@ function scoreEntryForSeat(entry, slug) {
     if (CARMEN_LEDGER_KINDS.test(entry.kind)) {
       return MATCHERS[slug].test(text) ? HEALTH_FALLBACK_SCORE : 0;
     }
-    if (NOAH_SEASON_KINDS.test(entry.kind)) return 0;
+    if (SEASON_ONLY_KINDS.test(entry.kind)) return 0;
     return MATCHERS[slug].test(text) ? 45 : 0;
   }
   if (slug === 'noah-tan' && entry.kind === 'season-feel') return 80;
   if (slug === 'noah-tan' && entry.kind === 'weather') return 5;
+  // civic.30 follow-up: the same season-feel leak flagged for Lila reaches
+  // whichever seat falls through to here too (currently trevor-shimizu and
+  // angela-reyes) — gate it the same way, before the generic keyword test.
+  if (SEASON_ONLY_KINDS.test(entry.kind)) return 0;
   const matcher = MATCHERS[slug];
   return matcher && matcher.test(text) ? 45 : 0;
 }

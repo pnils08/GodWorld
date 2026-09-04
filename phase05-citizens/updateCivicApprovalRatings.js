@@ -1085,6 +1085,19 @@ function mintChallengerOnLedger_(ctx, spec) {
   set('DialState', challengerDialStateJson_());
   set('SkillTags', 'Government & Civic');
   set('CareerStage', 'mid-career');
+  // engine.162 (builder 2026-09-04, Direction pt 27): nobody who comes through
+  // ingest lands on $0 — only a child or a retiree earns nothing. A challenger
+  // was minted with no Income at all: a mid-career adult on the ledger earning
+  // nothing, which the D3 employer floor never repairs because a candidate
+  // carries no EmployerBizId. Priced by their own neighborhood and their civic
+  // field, the same hoodReferencePay_ the advancement door uses — no invented
+  // number, and no civic-specific base the builder has not set.
+  if (typeof hoodReferencePay_ === 'function') {
+    var challengerPay = hoodReferencePay_(ctx, spec.hood, 'Civic candidate',
+      'Government & Civic', 'mid-career',
+      String(spec.officeId || '') + ':' + String(spec.cycle || 0));
+    if (challengerPay !== null && challengerPay > 0) set('Income', challengerPay);
+  }
   set('MigrationReason', spec.reason || 'arrived to challenge a failing office');
   set('MigratedCycle', spec.cycle || '');
   set('OrginCity', spec.originCity || 'out-of-town');

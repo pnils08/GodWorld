@@ -343,6 +343,18 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   check('H8 high-Drive principled local scores',
     !!(A.scoreLedgerCitizenForOffice_(fit, scoreHeaders, 'D3', 'POP-00034', {})));
 
+  // civic.31 (builder 2026-09-04): "the path in is always Generic_Citizens —
+  // you emerge from there." An empty qualified pool no longer mints an
+  // out-of-town challenger straight onto the ledger. The arrival lands in
+  // Generic_Citizens by intent, this Cycle returns nobody, and the GC feeder
+  // promotes them next Cycle. An office CAN go a Cycle unopposed.
+  const gcHeaders = ['First', 'Last', 'Age', 'BirthYear', 'Neighborhood', 'Occupation',
+    'EmergenceCount', 'EmergedCycle', 'EmergenceContext', 'Status', 'Sex', 'EmployerBizId'];
+  const gcRows = [gcHeaders.slice()];
+  const ssStub = { getSheetByName: n => n === 'Generic_Citizens'
+    ? { getDataRange: () => ({ getValues: () => gcRows.map(r => r.slice()) }) } : null };
+  const queued = [];
+  global.queueAppendIntent_ = (ctx, tab, row) => { queued.push({ tab, row: row.slice() }); };
   const emptyPool = {
     headers,
     rows: [
@@ -350,14 +362,37 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     ]
   };
   const minted = A.pickCampaignChallenger_(
-    { ledger: emptyPool }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
+    { ledger: emptyPool, ss: ssStub }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
   );
-  check('H9 empty qualified pool mints an out-of-town challenger',
-    minted && minted.origin === 'out-of-town' && /^POP-/.test(minted.popId), JSON.stringify(minted));
-  check('H10 mint is deterministic',
-    A.pickCampaignChallenger_(
-      { ledger: { headers, rows: [emptyPool.rows[0].slice()] } }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
-    ).name === minted.name);
+  check('H9 empty qualified pool mints NOBODY onto the ledger this Cycle',
+    minted === null && emptyPool.rows.length === 1, JSON.stringify(minted));
+  check('H9b the arrival lands in Generic_Citizens by intent, with a job and the office marked',
+    queued.length === 1 && queued[0].tab === 'Generic_Citizens' &&
+    queued[0].row[gcHeaders.indexOf('Occupation')] === 'Community organizer' &&
+    /challenge COUNCIL-D3/.test(queued[0].row[gcHeaders.indexOf('EmergenceContext')]) &&
+    queued[0].row[gcHeaders.indexOf('Status')] === 'Active', JSON.stringify(queued));
+  const arrivalName = queued[0].row[0] + ' ' + queued[0].row[1];
+  const queued2 = [];
+  global.queueAppendIntent_ = (ctx, tab, row) => { queued2.push({ tab, row: row.slice() }); };
+  A.pickCampaignChallenger_(
+    { ledger: { headers, rows: [emptyPool.rows[0].slice()] }, ss: ssStub }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
+  );
+  check('H10 the arrival is deterministic for the same office and Cycle',
+    queued2.length === 1 && (queued2[0].row[0] + ' ' + queued2[0].row[1]) === arrivalName);
+  // Phase 10 ran: the arrival is in the pool. Next under-40 Cycle, tier 2 finds
+  // them and promotes them through the same GC feeder every citizen uses.
+  gcRows.push(queued[0].row.slice());
+  const queued3 = [];
+  global.queueAppendIntent_ = (ctx, tab) => { queued3.push(tab); };
+  const nextPool = { headers, rows: [emptyPool.rows[0].slice()] };
+  const promoted = A.pickCampaignChallenger_(
+    { ledger: nextPool, ss: ssStub }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 105
+  );
+  check('H10b next Cycle the GC feeder promotes the arrival — origin generic, on the ledger, nobody new queued',
+    !!promoted && promoted.origin === 'generic' && promoted.name === arrivalName &&
+    /^POP-/.test(promoted.popId) && nextPool.rows.length === 2 && queued3.length === 0,
+    JSON.stringify({ promoted, queued3 }));
+  delete global.queueAppendIntent_;
   const defaults = JSON.parse(A.challengerDialStateJson_());
   check('H11 out-of-town defaults pump Drive/Integrity/Composure and dump Family',
     defaults.base.drive >= 70 && defaults.base.integrity >= 60 &&

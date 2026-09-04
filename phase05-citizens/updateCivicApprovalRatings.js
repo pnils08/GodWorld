@@ -1169,7 +1169,43 @@ function pickGenericCitizenChallenger_(ctx, district, specBase) {
   });
 }
 
+/**
+ * civic.31 (builder 2026-09-04): "the path in is always Generic_Citizens —
+ * you emerge from there. Out of town or untracked still comes through
+ * generic." This door used to assemble a person from two name arrays and
+ * write them straight onto the Simulation_Ledger — the one thing SIM_DOCTRINE
+ * §5 and §9 forbid. It now does what engine.58 does for an unknown intake
+ * name: the arrival lands in Generic_Citizens as a Tier-5 with a real
+ * occupation and the district's hood, and returns NO challenger this Cycle.
+ * The intent executes at Phase 10; next Cycle, if the office is still under
+ * 40, pickGenericCitizenChallenger_ reads the pool, finds them (local hood +
+ * civic-adjacent occupation is the top score) and promotes them through the
+ * same GC feeder every other citizen uses. A one-Cycle delay is the honest
+ * shape: they arrived, then they ran. The only future exception is "gifted
+ * entry", which does not exist yet.
+ *
+ * Idempotent: a second under-40 Cycle with the arrival still waiting in the
+ * pool (the feeder passed on them) queues nobody new.
+ */
 function mintOutOfTownChallenger_(ctx, district, officeId, cycle) {
+  if (!ctx || !ctx.ss || typeof ctx.ss.getSheetByName !== 'function') return null;
+  if (typeof queueAppendIntent_ !== 'function') return null;
+  var sheet = ctx.ss.getSheetByName('Generic_Citizens');
+  if (!sheet || !sheet.getDataRange) return null;
+  var data = sheet.getDataRange().getValues();
+  if (!data || !data.length) return null;
+  var gh = data[0];
+  var idxG = function(name) {
+    for (var i = 0; i < gh.length; i++) if (String(gh[i] || '').trim() === name) return i;
+    return -1;
+  };
+  var iCtx = idxG('EmergenceContext');
+  var marker = 'arrived to challenge ' + String(officeId || district || '');
+  if (iCtx >= 0) {
+    for (var r = 1; r < data.length; r++) {
+      if (String(data[r][iCtx] || '').indexOf(marker) >= 0) return null; // already waiting in the pool
+    }
+  }
   var hoods = DISTRICT_HOODS[String(district || '').toUpperCase()] || [];
   var hood = hoods[0] || 'Downtown';
   var seed = String(officeId || district || '') + ':' + String(cycle || 0);
@@ -1178,19 +1214,31 @@ function mintOutOfTownChallenger_(ctx, district, officeId, cycle) {
   var last = OUT_OF_TOWN_LAST_[Math.floor(h / 7) % OUT_OF_TOWN_LAST_.length];
   var birthYear = 1976 + (h % 20);
   var gender = h % 2 === 0 ? 'F' : 'M';
-  return mintChallengerOnLedger_(ctx, {
-    first: first, last: last, hood: hood, birthYear: birthYear, gender: gender,
-    cycle: cycle, officeId: officeId, origin: 'out-of-town', originCity: 'out-of-town',
-    reason: 'arrived from outside the city to challenge a failing office'
-  });
+  var gcNew = new Array(gh.length).fill('');
+  var setG = function(name, val) { var gi = idxG(name); if (gi >= 0) gcNew[gi] = val; };
+  setG('First', first);
+  setG('Last', last);
+  setG('Age', 2041 - birthYear);
+  setG('BirthYear', birthYear);
+  setG('Neighborhood', hood);
+  setG('Occupation', 'Community organizer'); // civic-adjacent: the feeder's top score, and a job, not a placeholder
+  setG('EmergenceCount', 1);
+  setG('EmergedCycle', 'Cycle ' + cycle);
+  setG('EmergenceContext', ('Out-of-town C' + cycle + ': ' + marker + '.').slice(0, 250));
+  setG('Status', 'Active');
+  setG('Sex', gender);
+  queueAppendIntent_(ctx, 'Generic_Citizens', gcNew, 'civic.31 out-of-town challenger -> GC', 'population', 50);
+  return null; // no challenger this Cycle — they are in the pool, and the feeder finds them next Cycle
 }
 
 /**
- * Always return a challenger when the ledger is present.
+ * Three tiers, and only the first two can return a challenger this Cycle:
  * 1) in-ledger, dial-and-tag qualified
  * 2) Generic_Citizens occupation/hood feeder, minted onto the ledger
- * 3) out-of-town arrival with civic-challenger dial defaults
- * Vacant (null) only if there is no ledger to write.
+ * 3) out-of-town arrival — lands in Generic_Citizens, NOT on the ledger
+ *    (civic.31, builder 2026-09-04: the path in is always GC). Returns null;
+ *    tier 2 finds them next Cycle if the office is still under 40.
+ * So an office CAN go a Cycle unopposed. That is the world, not a gap.
  */
 function pickCampaignChallenger_(ctx, district, incumbentPopId, occupiedPopIds, officeId, cycle) {
   if (!ctx || !ctx.ledger || !ctx.ledger.headers || !ctx.ledger.rows) return null;

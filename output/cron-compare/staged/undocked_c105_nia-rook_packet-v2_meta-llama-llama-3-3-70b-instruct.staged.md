@@ -1,21 +1,21 @@
-In the bustling neighborhood of Fruitvale, the streets were alive with the sound of discussion and debate. Clarissa Dane, a well-known District Attorney and UNDOCKED cast pilot, had recently been the focus of attention after her latest episode. As she walked down the street, she couldn't help but notice the whispers and glances from the people around her.
+Downtown was buzzing as Merkin Jumper walked out of a local café, where he had just given an interview about his recent UNDOCKED episode. "I've seen that the episode has really gotten people in Downtown talking, and it's been interesting to hear all the different opinions and perspectives on what it means for our city," he said, reflecting on the experience.
 
-"I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying," Clarissa said, her voice laced with concern, as she stopped to talk to a group of people outside a local café.
+As he walked down the street, he was stopped by fans and well-wishers, all of whom had their own take on the episode. Some were still discussing the unsettled credits, while others were debating the implications of the systems and combat events that had unfolded. At a nearby street corner, a group of people were engaged in a heated discussion about the episode's magnitude and what it meant for the city's future.
 
-Rick Walker, a line cook at a nearby restaurant, overheard the conversation and chimed in with his thoughts. "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale," he said with a shrug.
+Jessie Hess, a local barista, was among those who had been following the episode closely. "I've noticed that people in Downtown are really talking about the recent episode and how it's affecting our city's discussions and opinions, it's like everyone has something to say about it," she said, as she poured coffee for a customer. "As a Barista, I hear a lot of conversations and it seems like people are really passionate about what's going on. I feel like it's bringing our community together in some ways, but also creating some tension."
 
-Rafael Pilgrim, who was standing nearby, nodded in agreement. "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation," he said.
+Dillon Trevor, who was sitting at the counter, nodded in agreement. "I've noticed that people around Downtown are talking more about the city's issues and opinions since the episode, it feels like everyone's got something to say and it's hard to avoid the conversations," he said.
 
-Tomas Renteria, a local resident, also shared his thoughts on the matter. "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation," he said.
+Meanwhile, Andre Turner, a line cook at a nearby restaurant, was observing the scene with interest. "I feel like the city's been buzzing with all sorts of discussions and opinions lately, and as someone who's always around people, working as a line cook, I've gotten to hear a lot of different perspectives," he said, as he expertly flipped a dish on the grill.
 
-As the discussion continued, it became clear that Clarissa Dane's episode had sparked a lively debate in the community. The question on everyone's mind was: what will be the lasting impact of Clarissa Dane's episode on her standing in the city?
+As the day wore on, the discussions only grew more heated, with everyone from street vendors to business owners weighing in on the episode and its implications. As the city continued to debate and discuss, one thing was clear: Merkin Jumper's UNDOCKED episode had left a lasting impact on the city's conversations and opinions.
 
 ## INTAKE
-NAMES: Clarissa Dane | quoted-source
-NAMES: Rick Walker | quoted-source
-NAMES: Rafael Pilgrim | quoted-source
-NAMES: Tomas Renteria | quoted-source
-STORYLINE: fruitvale-clarissa-dane-undocked | opened
-HOOD: Fruitvale
-CLAIM: I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying. | citizenVoice PRESS Clarissa Dane
+NAMES: Merkin Jumper | quoted-source
+NAMES: Jessie Hess | quoted-source
+NAMES: Dillon Trevor | quoted-source
+NAMES: Andre Turner | quoted-source
+STORYLINE: downtown-merkin-jumper-undocked | opened
+HOOD: Downtown
+CLAIM: I've seen that the episode has really gotten people in Downtown talking, and it's been interesting to hear all the different opinions and perspectives on what it means for our city. | citizenVoice PRESS Merkin Jumper
 <!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->

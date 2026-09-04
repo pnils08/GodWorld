@@ -23,7 +23,8 @@
   },
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat-2206.md",
+  "article": "output/cron-compare/flagged/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
   "selfRecord": null,
-  "ranAt": "2026-09-04T22:06:12.138Z"
+  "ranAt": "2026-09-04T22:06:12.138Z",
+  "dispositionReconciledAt": "2026-09-04T22:25:55.014Z"
 }

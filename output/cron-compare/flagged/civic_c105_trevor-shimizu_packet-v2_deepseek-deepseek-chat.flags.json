@@ -1,6 +1,9 @@
 {
   "draft": "civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
+  "draftSha256": "e702cf37b572d619fe7e4170ae143e4bd971dd8f291b94701a6d938e7e5e323d",
+  "verdict": "output/cron-compare/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.rhea.json",
   "flags": [],
   "contamination": [],
-  "summary": "verdict parse failed"
+  "summary": "verdict parse failed",
+  "reviewedAt": "2026-09-04T22:06:12.006Z"
 }

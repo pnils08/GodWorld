@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "105",
+  "persona": "hal-richmond",
+  "byline": "Hal Richmond",
+  "bylinePopid": "POP-00007",
+  "article": "output/cron-compare/staged/sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "mentioned",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Mark Aitken",
+        "role": "mentioned",
+        "popid": "POP-00003"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-62b75b3dd4d5",
+    "draftSha256": "9a63c385b3c9b5db7d5d3918c22d8fe077db5e6748d167210c4addc8264fe16c",
+    "verdict": "output/cron-compare/sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-03T23:17:55.420Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-04T22:25:55.046Z"
+}

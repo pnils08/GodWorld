@@ -13,17 +13,21 @@
     "beatDomain": "SPORTS"
   },
   "laneEntries": 12,
-  "quotesLanded": 3,
-  "disposition": "flagged",
-  "rheaPass": false,
-  "rheaFlagCount": 3,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
   "contamination": {
     "fail": false,
     "findings": []
   },
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat.md",
-  "selfRecord": null,
-  "ranAt": "2026-09-01T23:18:53.479Z"
+  "article": "output/cron-compare/staged/sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nv (31) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00007\",\n  \"name\": \"Hal Richmond\",\n  \"recorded\": true,\n  \"text\": \"filed: The Rhythm of Late Seasons\"\n}"
+  },
+  "ranAt": "2026-09-03T23:18:04.988Z",
+  "dispositionReconciledAt": "2026-09-04T22:25:55.046Z"
 }

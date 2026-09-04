@@ -5,10 +5,10 @@
   "persona": "nia-rook",
   "byline": "Nia Rook",
   "bylinePopid": "POP-01076",
-  "article": "output/cron-compare/staged/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "article": "output/cron-compare/staged/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2319.md",
   "bylineUsage": {
     "recorded": false,
-    "reason": "local Rhea reconciliation; no external byline write performed"
+    "reason": "duplicate — this stem already credited"
   },
   "intake": {
     "names": [
@@ -58,6 +58,6 @@
     "verdict": "output/cron-compare/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
     "ranAt": "2026-09-03T23:19:15.067Z"
   },
-  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
-  "stagedAt": "2026-09-04T22:25:55.055Z"
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-03T23:19:15.327Z"
 }

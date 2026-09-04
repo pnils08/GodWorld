@@ -1,6 +1,9 @@
 {
   "draft": "culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat.md",
+  "draftSha256": "a02d37dcec7fc69d365a8b4103a5ce249d7a1c85efafd01966116568f54dd585",
+  "verdict": "output/cron-compare/culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat.rhea.json",
   "flags": [],
   "contamination": [],
-  "summary": "verdict parse failed"
+  "summary": "verdict parse failed",
+  "reviewedAt": "2026-09-04T22:06:50.573Z"
 }

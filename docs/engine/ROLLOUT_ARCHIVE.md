@@ -854,6 +854,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S415 Archive Pass (2026-09-03, engine-sheet) — S414 housing closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6). This pass: 3 rows.
+
+- **engine.158** [engine-sheet] — Home-purchase gates LIVE @41 — hood-priced house, NetWorth band ≥ hood WealthMin, mortgage ≤ 30 % HouseholdIncome, 1 % × rung roll; live 236/319 → 104 qualified, ~1 buy/cycle; bench C122 Zhang bought at the hood price; 3 departures await the builder (plan §engine.158) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]] §engine.158.
+- **engine.159** [engine-sheet] — Owned home's burden is its mortgage, never its price LIVE @41 — detectHouseholdStress_ read HousingCost (the PRICE) as monthly cost: every buyer in permanent crisis, 10 % dissolution/cycle (live 48 of 117 owned; bench 9–14 owned dissolutions per fire → 0 ×3) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]] §Changelog S414.
+- **engine.160** [engine-sheet] — One hood rent rule — MedianRent = World_Config `hoodRentShare` (0.30, = HOME_CARRY_MAX) × Neighborhood_Map `MedianIncome` / 12, derived in Phase 2 (`hoodRentFromIncome_`) and rendered to the column each cycle; the 12-hood 2026 rent table in `estimateRent_` (221 of 319 live leases under their hood's median), the dead 15-hood `HOME_PRICES_BY_NEIGHBORHOOD`, the `: 1700` guards and the trajectory rent drift retired; a hood the ledger does not price throws (ADR-0016). The 319 live leases trued to the rule on the builder's word (221 up / 98 down, read back 319/319). LIVE @42 (bench C123/C124: 0 errors ×2, 22/22 rents rendered, 6/6 leases at the rule, 5 + 0 purchases all at rule × 264) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]] §engine.160.
+
 ## S413 Archive Pass (2026-09-03, research-build) — post-S412 closures sweep
 
 3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.*.

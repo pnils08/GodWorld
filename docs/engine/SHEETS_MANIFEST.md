@@ -136,6 +136,7 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase05-citizens/casinoLedgerEngine.js` | Casino_Ledger | intents | append/cell via `queueAppendIntent_` / `queueCellIntent_`; missing tab = no-op; does not insertSheet |
 | `phase05-citizens/casinoLedgerEngine.js` | Household_Ledger.HouseholdSavings | own-tab | same-cycle `setValues` so `processMoneyLoop_` and `processMigrationTracking_` see the debit; only when `|delta| >= weekly` |
 | `phase05-citizens/casinoLedgerEngine.js` | Undocked_Feed | (read) | upcoming TargetCycle+1 rows for line-posting only — does not write the feed, does not touch `S.undockedFeedEntries` |
+| `phase05-citizens/maneuverEngine.js` | Household_Ledger, Heritage_Ledger | (read) | engine.157 (S416): one `getDataRange` each per cycle — owned/rented + head per household, tier/standing/status per line — to name the goal and the retreat cause; tolerates the pre-engine.156 16-column heritage tab. Writes only `ctx.ledger` rows (DialState.maneuver, LifeHistory) + `LifeHistory_Log` append intents |
 | `phase05-citizens/educationCareerEngine.js` | own tracking tab | own-tab | Tier-5 engine |
 | `phase05-citizens/generateCitizensEvents.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |
 | `phase05-citizens/checkForPromotions.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |

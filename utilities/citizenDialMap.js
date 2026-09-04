@@ -58,6 +58,10 @@ var DIAL_MAP = {
   'Birth':             { family: 10, warmth: 4 },
   'Divorce':            { family: -8, composure: -5 },
   'Retirement':         { family: 4, drive: -4 },
+  // engine.157 — the maneuver phase's own lines, written on a posture change only
+  'Maneuver-Climb':     { drive: 2, openness: 1 },
+  'Maneuver-Retreat':   { composure: 2, family: 1 },
+  'Maneuver-Hold':      { composure: 1 },
   'PostCareer':         { family: 4, openness: 2 },
 
   // --- Health / Composure ---

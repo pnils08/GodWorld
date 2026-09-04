@@ -100,6 +100,29 @@ function ensureEngine160Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+var ENGINE157_CONFIG_SEEDS = [
+  ['maneuverClimbBar', 60, 'engine.157 ambition (drive-weighted blend of drive + openness, 0-100) at/over which a citizen plays to climb; also the openness bar for a willing field change', 50, 90, false],
+  ['maneuverRetreatDebt', 6, 'engine.157 DebtLevel at/over which a citizen pulls in (retreat) whatever their ambition', 3, 9, false],
+  ['maneuverStandingMargin', 5, 'engine.157 a heritage line whose standing sits within this many points of the bar below its tier puts its members in retreat', 0, 20, false],
+  ['maneuverClimbOdds', 1.5, 'engine.157 odds multiplier a climb posture applies to the casino placement, solo door, home purchase and relocation rolls', 1, 3, false],
+  ['maneuverRetreatOdds', 0.5, 'engine.157 odds multiplier a retreat posture applies to the same rolls', 0, 1, false],
+  ['maneuverDriveWeight', 0.7, 'engine.157 weight of drive in the ambition blend (openness carries the rest)', 0, 1, false]
+];
+
+function ensureEngine157Config_(ss) {
+  if (!ss) throw new Error('engine.157 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.157 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE157_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE157_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.157 config: post-write verification failed');
+  }
+  Logger.log('engine.157 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 function ensureEngine96Config_(ss) {
   if (!ss) throw new Error('engine.96 config: spreadsheet required');
   var configSheet = ss.getSheetByName('World_Config');

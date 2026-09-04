@@ -642,6 +642,8 @@ function processRelocations_(ctx, cycle) {
     if (!lane) continue;
 
     var chance = lane === 'pressure' ? RELOCATION.PRESSURE_MOVE_CHANCE : RELOCATION.MISFIT_MOVE_CHANCE;
+    // engine.157: the unit's first member (the household head in row order) carries the posture
+    if (typeof maneuverFactor_ === 'function') chance *= maneuverFactor_(ctx, rows[unit.rowIdxs[0]][iPOPID], null);
     if (rng() >= chance) continue;
 
     // ── Destination: best deterministic fit, must clear current by margin ──

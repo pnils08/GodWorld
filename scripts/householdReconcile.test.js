@@ -324,7 +324,7 @@ console.log('engine.151 the rung pays on the courtship step and the home-buy rol
   const WE = new Function('Logger', 'tierPayFactor_', wsrc + '\nreturn { homeBuyChance_, HOME_BUY_P };')({ log() {} }, pay);
   // engine.158 (S414) re-based HOME_BUY_P 6 % → 1 %; the rung's multiplier is unchanged.
   assert('home roll: 1.0 / 1.15 / 1.3 / 1.5 % by best rung; the cash floor untouched', Math.abs(WE.homeBuyChance_(4) - 0.01) < 1e-9 && Math.abs(WE.homeBuyChance_(3) - 0.0115) < 1e-9 && Math.abs(WE.homeBuyChance_(2) - 0.013) < 1e-9 && Math.abs(WE.homeBuyChance_(1) - 0.015) < 1e-9 && /if \(combinedNW < price \* HOME_ELIGIBLE_NW\) continue;/.test(wsrc));
-  assert('the purchase roll reads the household\'s best rung', /if \(rng\(\) >= homeBuyChance_\(bestTier\)\) continue;/.test(wsrc) && /if \(mTier >= 1 && mTier < bestTier\) bestTier = mTier;/.test(wsrc));
+  assert('the purchase roll reads the household\'s best rung × the head\'s posture (engine.157)', /if \(rng\(\) >= homeBuyChance_\(bestTier\) \* homeF\) continue;/.test(wsrc) && /if \(mTier >= 1 && mTier < bestTier\) bestTier = mTier;/.test(wsrc) && /maneuverFactor_\(ctx, headPop, 'home'\)/.test(wsrc));
 }
 
 // ═══ engine.158 (S414) — the home-purchase gates: three causes, then the dice ═══
@@ -349,7 +349,7 @@ console.log('engine.158 the house is priced by the hood, admitted by net worth, 
   // 3. income says how you live there
   assert('carry: $3,000/mo needs $120K; $119K fails, $120K passes, blank / 0 income never carries', !WE.homeCarries_(3000, 119000) && WE.homeCarries_(3000, 120000) && !WE.homeCarries_(3000, 0) && !WE.homeCarries_(3000, '') && !WE.homeCarries_(3000, null));
   // the gate order in the loop: cash → band → carry → dice; the roll is still the last word
-  assert('the loop prices by the hood, then cash, band, carry, dice — in that order', /var price = Math\.round\(homeMarketRent_\(ctx, hood, rent\) \* 12 \* HOME_PRICE_TO_RENT\);[\s\S]*?if \(combinedNW < price \* HOME_ELIGIBLE_NW\) continue;[\s\S]*?if \(!homeHoodFloorAdmits_\(ctx, hood, combinedNW\)\) continue;[\s\S]*?var mortgage = Math\.round\(price \* HOME_MORTGAGE_MONTHLY\);[\s\S]*?if \(!homeCarries_\(mortgage, cInc >= 0 \? hv\[q\]\[cInc\] : 0\)\) continue;[\s\S]*?if \(rng\(\) >= homeBuyChance_\(bestTier\)\) continue;/.test(wsrc));
+  assert('the loop prices by the hood, then cash, band, carry, dice — in that order', /var price = Math\.round\(homeMarketRent_\(ctx, hood, rent\) \* 12 \* HOME_PRICE_TO_RENT\);[\s\S]*?if \(combinedNW < price \* HOME_ELIGIBLE_NW\) continue;[\s\S]*?if \(!homeHoodFloorAdmits_\(ctx, hood, combinedNW\)\) continue;[\s\S]*?var mortgage = Math\.round\(price \* HOME_MORTGAGE_MONTHLY\);[\s\S]*?if \(!homeCarries_\(mortgage, cInc >= 0 \? hv\[q\]\[cInc\] : 0\)\) continue;[\s\S]*?if \(rng\(\) >= homeBuyChance_\(bestTier\) \* homeF\) continue;/.test(wsrc));
   assert('the carry test reads HouseholdIncome (the burden column processMoneyLoop_ reads)', /cInc = hj\('HouseholdIncome'\)/.test(wsrc));
   assert('no Math.random in the purchase path', !/Math\.random/.test(wsrc.slice(wsrc.indexOf('function trackHomeOwnership_'), wsrc.indexOf('function trackHomeOwnership_') + 8000)));
   // the per-hood minimum income to buy falls out of the hood's own rent

@@ -205,6 +205,7 @@ function deserialize_(obj) {
       if (obj.streak && obj.streak[d] != null) c.streak[d] = obj.streak[d];
     }
     if (obj.chaosExposure) c.chaosExposure = obj.chaosExposure;
+    if (obj.maneuver) c.maneuver = obj.maneuver; // engine.157 posture memory rides along
   }
   return c;
 }

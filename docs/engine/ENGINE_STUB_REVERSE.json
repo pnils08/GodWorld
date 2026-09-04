@@ -1,8 +1,8 @@
 {
   "generated": "2026-09-04",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 188,
-  "functionsMapped": 1297,
+  "filesScanned": 189,
+  "functionsMapped": 1315,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -737,6 +737,7 @@
         "phase05-citizens/generationalWealthEngine.js::calculateCitizenIncomes_",
         "phase05-citizens/generationalWealthEngine.js::processGenerationalWealth_",
         "phase05-citizens/householdFormationEngine.js::buildCitizenMoneyLookup_",
+        "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
         "phase05-citizens/migrationTrackingEngine.js::processMigrationTracking_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::processNeighborhoodTrajectory_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementIntake_",
@@ -3299,6 +3300,16 @@
       ],
       "readers": []
     },
+    "maneuver": {
+      "writers": [
+        "phase05-citizens/maneuverEngine.js::maneuverLines_",
+        "phase05-citizens/maneuverEngine.js::runManeuverEngine_"
+      ],
+      "readers": [
+        "phase05-citizens/maneuverEngine.js::maneuverPostureOf_",
+        "phase05-citizens/maneuverEngine.js::runManeuverEngine_"
+      ]
+    },
     "neighborhoodTrajectory": {
       "writers": [
         "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_"
@@ -4248,6 +4259,7 @@
       "readers": [
         "phase01-config/engine94SheetContract.js::ensureEngine133Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine135Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine157Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine160Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
@@ -4367,6 +4379,7 @@
         "phase05-citizens/educationCareerEngine.js::stampPromotion_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
+        "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
@@ -4395,6 +4408,7 @@
         "phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_",
         "phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
+        "phase05-citizens/maneuverEngine.js::runManeuverEngine_",
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_",
         "phase05-citizens/processAdvancementIntake.js::decayMediaAttention_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
@@ -4597,9 +4611,11 @@
       "writers": [],
       "readers": [
         "phase04-events/buildCityEvents.js::buildCityEvents_",
+        "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::ensureHeritageSchema_",
         "phase05-citizens/generationalWealthEngine.js::heritageTierByPop_",
-        "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/maneuverEngine.js::maneuverLines_"
       ]
     },
     "Household_Ledger": {
@@ -4630,6 +4646,7 @@
         "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_",
         "phase05-citizens/householdFormationEngine.js::reconcileHouseholds_",
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_",
+        "phase05-citizens/maneuverEngine.js::maneuverHouseholds_",
         "phase05-citizens/migrationTrackingEngine.js::buildHouseholdHousingMap_",
         "phase05-citizens/migrationTrackingEngine.js::updateHouseholdLedgerMove_"
       ]

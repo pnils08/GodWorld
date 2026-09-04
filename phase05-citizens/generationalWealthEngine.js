@@ -859,6 +859,13 @@ function applyOwnerDraw_(ctx, cycle) {
     if (key0 && !rowByName[key0]) rowByName[key0] = row0;
   }
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  // engine.157 (closing the engine.156 seam): heritage treatment needs an ACTIVE
+  // line, not just a LineageId — heritageTierByPop_ skips dormant lines. With no
+  // Heritage_Ledger sheet (Node harness) the map is null and LineageId alone rules.
+  var activeLine = null;
+  if (typeof heritageTierByPop_ === 'function' && ctx.ss && ctx.ss.getSheetByName('Heritage_Ledger')) {
+    activeLine = heritageTierByPop_(ctx.ss);
+  }
 
   for (var b = 1; b < data.length; b++) {
     var entries = parseKeyPersonnelOwners_(data[b][bKP]);
@@ -877,7 +884,8 @@ function applyOwnerDraw_(ctx, cycle) {
     for (var o = 0; o < ownerRows.length; o++) {
       var orw = ownerRows[o];
       out.owners++;
-      var onLine = iLin >= 0 && String(orw[iLin] || '').trim() !== '';
+      var onLine = iLin >= 0 && String(orw[iLin] || '').trim() !== '' &&
+        (activeLine === null || !!activeLine[String(orw[iPop]).trim()]);
       if (onLine) {
         // heritage: gains on top of income, positive profit only
         var gain = Math.round(Math.max(0, profit) * HERITAGE_GAIN_SHARE / ownerRows.length / 52);
@@ -1538,7 +1546,8 @@ function trackHomeOwnership_(ss, ctx, cycle) {
   var hj = function(n) { return hh.indexOf(n); };
   var cId = hj('HouseholdId'), cMem = hj('Members'), cHood = hj('Neighborhood'),
       cType = hj('HousingType'), cRent = hj('MonthlyRent'), cCost = hj('HousingCost'),
-      cStat = hj('Status'), cInc = hj('HouseholdIncome'); // engine.158: the carry test reads the burden column
+      cStat = hj('Status'), cInc = hj('HouseholdIncome'), // engine.158: the carry test reads the burden column
+      cHead = hj('HeadOfHousehold'); // engine.157: the head's posture multiplies the roll
   if (cId < 0 || cMem < 0 || cType < 0 || cRent < 0) return results;
   if (cInc < 0) Logger.log('trackHomeOwnership_ engine.158: HouseholdIncome column missing — no household can carry a loan this cycle');
 
@@ -1574,7 +1583,11 @@ function trackHomeOwnership_(ss, ctx, cycle) {
     if (!homeHoodFloorAdmits_(ctx, hood, combinedNW)) continue; // engine.158: net worth says where you live
     var mortgage = Math.round(price * HOME_MORTGAGE_MONTHLY);
     if (!homeCarries_(mortgage, cInc >= 0 ? hv[q][cInc] : 0)) continue; // engine.158: income says how you live there
-    if (rng() >= homeBuyChance_(bestTier)) continue;     // not this week (engine.151: the rung pays on the odds, never on the cash)
+    // engine.157: the head of household's posture multiplies the roll when the house is the goal
+    var headPop = cHead >= 0 ? String(hv[q][cHead] || '').trim() : '';
+    if (!headPop && memIds.length) headPop = String(memIds[0]).trim();
+    var homeF = (typeof maneuverFactor_ === 'function') ? maneuverFactor_(ctx, headPop, 'home') : 1;
+    if (rng() >= homeBuyChance_(bestTier) * homeF) continue;     // not this week (engine.151: the rung pays on the odds, never on the cash)
 
     // ── the purchase ──
     var down = Math.round(price * HOME_DOWN);

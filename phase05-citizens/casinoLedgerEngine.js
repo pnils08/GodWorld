@@ -265,16 +265,20 @@ function casinoPayout_(stake, odds) {
   return casinoRoundMoney_((Number(stake) || 0) * (Number(odds) || 0));
 }
 
-function casinoStake_(income, netWorth, wealthLevel, rng) {
+// engine.157: posture sets the band — a climber draws bigger under the 25 %
+// cap whatever their WealthLevel; a retreat halves the draw. Undefined = hold.
+function casinoStake_(income, netWorth, wealthLevel, rng, posture) {
   var weekly = casinoWeekly_(income);
   var nw = Number(netWorth) || 0;
   var wl = Number(wealthLevel);
   if (isNaN(wl)) wl = 5;
-  var weekCap = weekly * (wl <= 3 ? 0.10 : 0.25);
+  var climb = posture === 'climb', retreat = posture === 'retreat';
+  var weekCap = weekly * ((wl <= 3 && !climb) ? 0.10 : 0.25);
   var cap = Math.min(weekCap, nw * 0.04, CASINO_STAKE_CEIL);
   if (!(cap >= CASINO_STAKE_FLOOR)) return null;
   var roll = typeof rng === 'function' ? rng() : 0.5;
-  var raw = weekly * (0.08 + 0.12 * roll);
+  var raw = weekly * (climb ? (0.12 + 0.18 * roll) : (0.08 + 0.12 * roll));
+  if (retreat) raw = raw / 2;
   return casinoRoundMoney_(casinoClamp_(raw, CASINO_STAKE_FLOOR, cap));
 }
 
@@ -293,7 +297,9 @@ function casinoDrive_(dialState, traitProfile) {
   if (dialState) {
     try {
       var o = typeof dialState === 'string' ? JSON.parse(dialState) : dialState;
-      var d = o && o.current && o.current.drive;
+      // engine.157: the serializer persists base + streak only — current was never on the row
+      var d = (o && o.current && o.current.drive);
+      if (typeof d !== 'number') d = o && o.base && o.base.drive;
       if (typeof d === 'number') return d;
     } catch (e) { /* fall through */ }
   }
@@ -682,8 +688,11 @@ function processCasinoLedger_(ctx, cycle) {
     var cool = casinoCooldown_(historyByPop[pid], cycle, weeklyP);
     if (cool > cycle) continue;
 
+    // engine.157: the cycle's posture carries drive inside its ambition read —
+    // when the maneuver phase ran, its factor replaces the raw drive read.
+    var postureE = (typeof maneuverPostureOf_ === 'function') ? maneuverPostureOf_(ctx, pid) : null;
     var drive = casinoDrive_(iDial >= 0 ? crow[iDial] : '', iTrait >= 0 ? crow[iTrait] : '');
-    var driveF = drive >= 60 ? 1.4 : 1.0;
+    var driveF = postureE ? maneuverFactor_(ctx, pid, null) : (drive >= 60 ? 1.4 : 1.0);
     var wantShow = showOn && casinoEligible_(status, age, income, nw, emp, 'undocked', isPilot);
     var wantSports = casinoEligible_(status, age, income, nw, emp, 'sports', isPilot);
     if (!wantShow && !wantSports) continue;
@@ -694,7 +703,7 @@ function processCasinoLedger_(ctx, cycle) {
     if (rng() >= p) continue;
 
     var pickShow = wantShow && (!wantSports || rng() < 0.5);
-    var stake = casinoStake_(income, nw, iWL >= 0 ? crow[iWL] : 5, rng);
+    var stake = casinoStake_(income, nw, iWL >= 0 ? crow[iWL] : 5, rng, postureE ? postureE.posture : undefined);
     if (stake == null) continue;
 
     var fam, mkt, ev, side, odds, seed;

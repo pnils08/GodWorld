@@ -1183,6 +1183,20 @@ function runCareerEngine_(ctx) {
 
       var slots = sameField.slice(0, openings);
       var leftOut = sameField.length > openings ? pool[sameField[openings]] : null;
+      // engine.157: the citizen's side of the E3 ruling — a window with ZERO
+      // same-field candidates may take an unemployed climber open enough to
+      // change fields (maneuverWillingCrossField_). The citizen chooses the
+      // field change as their own move; the business never fills a slot with
+      // an unwilling stranger. Reads as Career-FieldChange below, as before.
+      if (!sameField.length && typeof maneuverWillingCrossField_ === 'function') {
+        var willing = [];
+        for (var wi = 0; wi < pool.length; wi++) {
+          if (taken[wi]) continue;
+          if (maneuverWillingCrossField_(ctx, rows[pool[wi].r][iPopID])) willing.push(wi);
+        }
+        willing.sort(function (a, b5) { return hireSlotOrder_(pool[a], pool[b5]); });
+        slots = willing.slice(0, openings);
+      }
       // engine.135 E3 (S401): the cross-field fallback is gone. "Rare" was a
       // 1-in-4 window PER BUSINESS — across ~180 businesses it fired 5–10
       // times a cycle, hiring an electrician at a bar and a line cook at a tech

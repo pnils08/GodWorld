@@ -1184,6 +1184,7 @@ function parseDialState_(str) {
 function serializeDialState_(c) {
   var o = { base: c.base, streak: c.streak };
   if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
+  if (c.maneuver) o.maneuver = c.maneuver; // engine.157 posture memory {p, g, a, c} — additive, never wiped
   return JSON.stringify(o);
 }
 

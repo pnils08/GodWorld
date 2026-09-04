@@ -221,6 +221,7 @@ function runWorldCycle() {
     ensureEngine135Config_(ss);  // engine.135 employment envelope keys, same self-arm contract
     ensureEngine96Config_(ss);   // engine.96 business lifecycle keys, same self-arm contract
     ensureEngine160Config_(ss);  // engine.160 hoodRentShare — the one hood rent rule, same self-arm contract
+    ensureEngine157Config_(ss);  // engine.157 maneuver posture keys, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet
@@ -349,6 +350,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-BusinessDynamics', function() { applyBusinessDynamics_(ctx); }); // engine.96 Task 5 — before Career so Task 6's decline records land in careerSignals
+  safePhaseCall_(ctx, 'Phase5-Maneuver', function() { runManeuverEngine_(ctx); }); // engine.157 — the cycle's risk posture, before every Phase-5 roll that reads it (career, solo door, casino, home, relocation)
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });
@@ -2089,6 +2091,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-BusinessDynamics', function() { applyBusinessDynamics_(ctx); }); // engine.96 Task 5 — before Career so Task 6's decline records land in careerSignals
+  safePhaseCall_(ctx, 'Phase5-Maneuver', function() { runManeuverEngine_(ctx); }); // engine.157 — the cycle's risk posture, before every Phase-5 roll that reads it (career, solo door, casino, home, relocation)
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });

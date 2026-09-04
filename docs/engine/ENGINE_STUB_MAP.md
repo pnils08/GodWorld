@@ -50,6 +50,9 @@
 - **ensureEngine160Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine157Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine96Config_(ss)**
   Sheets: World_Config
 
@@ -1123,7 +1126,7 @@
 
 - **casinoPayout_(stake, odds)**
 
-- **casinoStake_(income, netWorth, wealthLevel, rng)**
+- **casinoStake_(income, netWorth, wealthLevel, rng, posture)**
 
 - **casinoEligible_(status, age, income, netWorth, employerBizId, marketFamily, isPilot)**
 
@@ -1494,7 +1497,7 @@
 - **businessProfit_(rev, empCount, avgSalary)**
 
 - **applyOwnerDraw_(ctx, cycle)**
-  Sheets: Business_Ledger, LifeHistory_Log
+  Sheets: Business_Ledger, Heritage_Ledger, LifeHistory_Log
 
 - **calculateIncomeFromBand_(incomeBand, tier, rng)**
 
@@ -1615,6 +1618,50 @@
 - **generateHouseholdDissolvedHook_(household)**
 
 - **generateRentBurdenHook_(stressed)**
+
+### maneuverEngine.js
+- **maneuverConfig_(ctx)**
+
+- **maneuverParseDial_(dialStateStr)**
+
+- **maneuverDials_(dialStateStr, traitProfileStr)**
+
+- **maneuverAmbition_(drive, openness, driveWeight)**
+
+- **maneuverGoal_(householdId, owned, lineageId, lineStatus)**
+
+- **maneuverTierBars_()**
+
+- **maneuverLineNearBar_(line, margin)**
+
+- **maneuverPosture_(cfg, ambition, debtLevel, line)**
+
+- **maneuverGoalPhrase_(goal)**
+
+- **maneuverLine_(posture, goal, reason)**
+
+- **maneuverStamp_(ctx, cycle)**
+
+- **maneuverHouseholds_(ctx)**
+  Sheets: Household_Ledger
+
+- **maneuverLines_(ctx)**
+  Writes: S.maneuver
+  Sheets: Heritage_Ledger
+
+- **runManeuverEngine_(ctx)**
+  Reads: S.cycleId, S.maneuver
+  Writes: S.maneuver
+  Config: ctx.config.cycleCount
+  Sheets: LifeHistory_Log
+
+- **maneuverPostureOf_(ctx, popId)**
+  Reads: S.maneuver
+
+- **maneuverFactor_(ctx, popId, goalFilter)**
+
+- **maneuverWillingCrossField_(ctx, popId)**
+  Config: ctx.config.maneuverClimbBar
 
 ### migrationTrackingEngine.js
 - **processMigrationTracking_(ctx)**
@@ -3809,5 +3856,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 188
-**Functions mapped:** 1297
+**Files scanned:** 189
+**Functions mapped:** 1315

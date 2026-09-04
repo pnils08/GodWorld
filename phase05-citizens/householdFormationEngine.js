@@ -383,8 +383,10 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
 
     if (!married && !(age >= 18 && onKids.length) && !orphanMinor) {
       // engine.73 solo establishment — the one non-group door, gated + diced.
+      // engine.157: the citizen's posture multiplies the door's odds when the goal is a place of their own
+      var soloF = (typeof maneuverFactor_ === 'function') ? maneuverFactor_(ctx, pop, 'establish') : 1;
       if (age >= 18 && ownInc >= SOLO_INCOME_FLOOR &&
-          rng() < SOLO_ESTABLISH_CHANCE) { // engine.153: income alone — no Tier gate
+          rng() < SOLO_ESTABLISH_CHANCE * soloF) { // engine.153: income alone — no Tier gate
         var soloId = 'HH-' + String(cycle).padStart(4, '0') + '-F' + String(++seq).padStart(3, '0');
         var soloVals = {
           HouseholdId: soloId, HeadOfHousehold: pop, HouseholdType: 'solo',

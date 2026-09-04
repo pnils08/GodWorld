@@ -20,13 +20,23 @@
  * today). One retry of the standard write stage is cheap, safe (fails
  * closed exactly like the first attempt if the piece is genuinely bad), and
  * doesn't require knowing the root cause. A persona still uncovered after
- * the retry is left for a human at /sift or the next research-build session
- * -- this script's job is to catch the recoverable cases, not replace
- * editorial judgment.
+ * the retry is recorded in the status file -- there is no editorial review
+ * step downstream of that (checked, S417: `/sift` never reads flagged/;
+ * flagged pieces only ever get *mentioned*, in the Discord delivery ping and
+ * the daily NotebookLM brief). Whether that gets read is on a person, same
+ * as before this script existed -- this only stops the automatable half
+ * (the retry) from being missed too.
+ *
+ * Also runs reconcileRheaDisposition.js for the live cycle first (S417
+ * follow-up) -- that script already existed to file a standalone Rhea
+ * verdict into staged/flagged, but was on no schedule, so a verdict from a
+ * manual re-review or a write that crashed after writing its .rhea.json but
+ * before filing just sat there, invisible to everything downstream.
  *
  * Idempotent across re-runs within the same cycle: an attempted-list file
  * remembers who's already been retried this cycle, so running this twice
- * before Saturday (or by hand) never double-fires the same persona.
+ * before Saturday (or by hand) never double-fires the same persona. The
+ * reconcile pass is separately idempotent (a no-op once nothing's changed).
  *
  * Usage:
  *   node scripts/preSaturdayCoverageSweep.js [--dry-run] [--min-age-hours N]
@@ -34,7 +44,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { execFileSync } = require('child_process');
+const { execFileSync, spawnSync } = require('child_process');
 const getCurrentCycle = require('../lib/getCurrentCycle');
 
 const ROOT = path.join(__dirname, '..');
@@ -105,6 +115,37 @@ function saveAttempted(cycle, set) {
   fs.writeFileSync(attemptedPath(cycle), JSON.stringify([...set], null, 2) + '\n');
 }
 
+// S417 (Mike-direct): reconcileRheaDisposition.js existed but was on no
+// schedule -- a standalone verdict (a manual re-review, a write that crashed
+// after writing its .rhea.json but before filing) just sat there forever,
+// neither staged nor flagged, invisible to everything downstream. Running it
+// for the whole live cycle before the stuck-detection pass below is safe to
+// repeat: reconcileVerdict() is a no-op on a verdict whose draft hash already
+// matches what's filed, and only re-files when something actually changed.
+function runReconcile(cycle, dryRun) {
+  console.log('\n[reconcile] sweeping unfiled Rhea verdicts for cycle ' + cycle + '...');
+  const args = [path.join(ROOT, 'scripts', 'reconcileRheaDisposition.js'), '--cycle', String(cycle)];
+  if (!dryRun) args.push('--apply');
+  // reconcileRheaDisposition.js sets a nonzero exit whenever ANY verdict in
+  // the cycle fails (e.g. a stale verdict whose draft has since been
+  // overwritten by something else -- a correct refusal, not a crash), even
+  // though every other verdict that turn still gets processed. Capture
+  // stdout/stderr separately instead of letting execFileSync's thrown error
+  // (which only carries a truncated message) hide what actually happened.
+  const result = spawnSync('node', args, { cwd: ROOT, encoding: 'utf8' });
+  const out = (result.stdout || '').trim();
+  const err = (result.stderr || '').trim();
+  if (out) console.log(out.split('\n').map(l => '  ' + l).join('\n'));
+  if (result.status === 0) {
+    console.log('  (all verdicts for this cycle reconciled clean)');
+  } else {
+    console.log('  (' + (err.split('\n').filter(l => l.startsWith('BLOCKED')).length || 'some') +
+      ' verdict(s) blocked -- see BLOCKED lines above; usually a stale verdict ' +
+      'whose draft changed since, which is a correct refusal, not a failure)');
+    if (err) console.log(err.split('\n').map(l => '  ' + l).join('\n'));
+  }
+}
+
 function main() {
   const dryRun = process.argv.includes('--dry-run');
   const minAgeHours = parseFloat(arg('--min-age-hours', String(DEFAULT_MIN_AGE_HOURS)));
@@ -113,6 +154,8 @@ function main() {
     console.error('[sweep] no resolvable live cycle -- exiting clean (nothing to sweep).');
     return;
   }
+
+  runReconcile(cycle, dryRun);
 
   const reportComplete = loadReportComplete(cycle);
   const stagedStems = loadStagedStems();

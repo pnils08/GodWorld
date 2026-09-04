@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-03 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-04 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 188 · **Functions mapped:** 1296 · **S.* fields:** 350 · **Sheets:** 60
+**Files scanned:** 188 · **Functions mapped:** 1297 · **S.* fields:** 350 · **Sheets:** 60
 
 ## S.* / ctx.summary reverse index
 
@@ -394,7 +394,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Chicago_Sports_Feed` | _(none)_ | `utilities/setupSportsFeedValidation.js::setupChicagoFeedOnly`, `utilities/setupSportsFeedValidation.js::setupSportsFeedValidation` | 0 | 2 |
 | `Citizen_Media_Usage` | `phase05-citizens/processAdvancementIntake.js::markUsageProcessed_` | `phase05-citizens/citizenContextBuilder.js::getMediaAppearances_`, `phase05-citizens/citizenContextBuilder.js::getReturningCitizens`, `phase05-citizens/processAdvancementIntake.js::decayMediaAttention_`, `phase05-citizens/processAdvancementIntake.js::earnedCitationsByKey_`, `phase05-citizens/processAdvancementIntake.js::markUsageProcessed_`, …(+3 more) | 1 | 8 |
 | `Citizen_Usage_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processCitizenUsageIntake_`, `phase07-evening-media/mediaRoomIntake.js::setupMediaIntakeV2`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureCitizenUsageIntakeSheet_` | 0 | 3 |
-| `Civic_Office_Ledger` | `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_`, `phase05-citizens/applyBusinessDynamics.js::bizMayorApproval_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/civicInitiativeEngine.js::getCouncilState_`, `phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_`, …(+11 more) | 2 | 16 |
+| `Civic_Office_Ledger` | `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_`, `phase05-citizens/applyBusinessDynamics.js::bizMayorApproval_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/civicInitiativeEngine.js::getCouncilState_`, `phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_`, …(+12 more) | 3 | 17 |
 | `Civic_Sweep_Report` | _(none)_ | `phase05-citizens/generateMonthlyCivicSweep.js::generateMonthlyCivicSweep` | 0 | 1 |
 | `Community_Programs` | _(none)_ | `phase05-citizens/runYouthEngine.js::runYouthEngine_`, `phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_` | 0 | 2 |
 | `Content_Telemetry` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 1 |

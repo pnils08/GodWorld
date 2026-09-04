@@ -1656,12 +1656,27 @@ function trackHomeOwnership_(ss, ctx, cycle) {
 // is safe — no later phase reads it within the cycle.
 // ════════════════════════════════════════════════════════════════════════════
 
+// engine.156 (S415, bloodline cut 8): HeritageScore is STANDING — recomputed
+// every cycle from what the family holds now (heritageStanding_) — not a
+// lifetime counter. It can fall; the tier follows it up or down the same
+// cycle, no hysteresis. Bars on standing: wealth is 10 × log10(NetWorth/$1M)
+// ($10M → 10, $100M → 20, $1B → 30, $10B → 40), so money keeps mattering at
+// the top and the richest line leads its own ledger.
 var HERITAGE_TIERS = [
   { name: 'Founding', min: 0 },
-  { name: 'Established', min: 50 },
-  { name: 'Prominent', min: 150 },
-  { name: 'Dynasty', min: 350 }
+  { name: 'Established', min: 30 },
+  { name: 'Prominent', min: 50 },
+  { name: 'Dynasty', min: 70 }
 ];
+// engine.156 dormancy: no living member for 4 straight cycles, or — for a
+// line that has ever been Established — standing under 10 for a year. A
+// dormant line keeps its row (history), drops its tier (leaves the ranked
+// set: birth boost, business roll, estate rate, hosting all read a blank
+// tier as no line) and revives under its own LineageId when its members
+// clear a door again. Tenure does not come back; PeakTier remembers.
+var HERITAGE_EMPTY_CYCLES = 4;
+var HERITAGE_LOW_STANDING = 10;
+var HERITAGE_LOW_CYCLES = 52;
 
 var HERITAGE_DOOR_A_MEMBERS = 3;        // living on-camera members
 var HERITAGE_DOOR_A_NETWORTH = 1000000; // combined family lived savings
@@ -1693,8 +1708,28 @@ var HERITAGE_HEADERS = [
   'LineageId', 'FamilyName', 'FounderPopId', 'FoundedCycle', 'FoundedDoor',
   'Generations', 'LivingMembers', 'MembersList', 'HeritageScore',
   'HeritageTier', 'TotalNetWorth', 'HomesOwned', 'BusinessesOwned',
-  'CivicMembers', 'FameMembers', 'LastUpdated'
+  'CivicMembers', 'FameMembers', 'LastUpdated',
+  // engine.156 — standing + tenure. TenureCycles = completed cycles on the
+  // ledger since founding (or last revival); TierTenure = cycles at the
+  // current tier; PeakTier = the best tier ever held; Status active|dormant;
+  // EmptyCycles / LowCycles = the two dormancy clocks.
+  'TenureCycles', 'TierTenure', 'PeakTier', 'Status', 'DormantSince',
+  'EmptyCycles', 'LowCycles'
 ];
+
+// engine.156 — the standing formula, one place. Returns tenths.
+function heritageStanding_(totalNW, generations, civ, fame, businesses, homes, scandal) {
+  var nw = Number(totalNW) || 0;
+  var wealth = nw > 1000000 ? 10 * Math.log10(nw / 1000000) : 0;
+  var s = wealth +
+    3 * Math.max(0, (Number(generations) || 1) - 1) +
+    3 * Math.min(3, Number(civ) || 0) +
+    3 * Math.min(3, Number(fame) || 0) +
+    4 * (Number(businesses) || 0) +
+    2 * (Number(homes) || 0) -
+    5 * (Number(scandal) || 0);
+  return { standing: Math.max(0, Math.round(s * 10) / 10), wealth: Math.round(wealth * 10) / 10 };
+}
 
 function heritageTierFor_(score) {
   var t = HERITAGE_TIERS[0].name;
@@ -1722,11 +1757,12 @@ function heritageTierByPop_(ss) {
     var v = sheet.getDataRange().getValues();
     if (v.length < 2) return map;
     var h = v[0];
-    var iM = h.indexOf('MembersList'), iT = h.indexOf('HeritageTier');
+    var iM = h.indexOf('MembersList'), iT = h.indexOf('HeritageTier'), iS = h.indexOf('Status');
     if (iM < 0 || iT < 0) return map;
     for (var r = 1; r < v.length; r++) {
       var tier = String(v[r][iT] || '');
       if (!tier) continue;
+      if (iS >= 0 && String(v[r][iS] || '').toLowerCase() === 'dormant') continue; // engine.156: a dormant line is no line
       var mem = [];
       try { mem = JSON.parse(String(v[r][iM] || '[]')); } catch (e) { mem = []; }
       for (var m = 0; m < mem.length; m++) map[String(mem[m])] = tier;
@@ -1765,18 +1801,32 @@ function ensureHeritageSchema_(ss, ctx) {
       armed = true;
     }
   }
-  if (!ss.getSheetByName('Heritage_Ledger')) {
+  var hlExisting = ss.getSheetByName('Heritage_Ledger');
+  if (!hlExisting) {
     var hl = ss.insertSheet('Heritage_Ledger');
     hl.getRange(1, 1, 1, HERITAGE_HEADERS.length).setValues([HERITAGE_HEADERS]);
     hl.setFrozenRows(1);
     armed = true;
+  } else {
+    // engine.156: append-only column arm on a tab that predates a header
+    // (same §1.1 schema-setup carve-out, ≤1× per column per spreadsheet).
+    var hlLastCol = hlExisting.getLastColumn();
+    var hlHead = hlLastCol > 0 ? hlExisting.getRange(1, 1, 1, hlLastCol).getValues()[0] : [];
+    var appended = [];
+    for (var hc = 0; hc < HERITAGE_HEADERS.length; hc++) {
+      if (hlHead.indexOf(HERITAGE_HEADERS[hc]) < 0) appended.push(HERITAGE_HEADERS[hc]);
+    }
+    if (appended.length) {
+      hlExisting.getRange(1, hlLastCol + 1, 1, appended.length).setValues([appended]);
+      Logger.log('ensureHeritageSchema_ engine.156: Heritage_Ledger +' + appended.length + ' columns (' + appended.join(', ') + ')');
+    }
   }
   if (armed) Logger.log('ensureHeritageSchema_ engine.65: schema armed — heritage live next cycle');
   return armed;
 }
 
 function updateHeritage_(ss, ctx, cycle) {
-  var results = { lines: 0, joined: 0, founded: 0, promoted: 0, businessesOpened: 0 };
+  var results = { lines: 0, joined: 0, founded: 0, promoted: 0, demoted: 0, dormant: 0, revived: 0, businessesOpened: 0 };
 
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
@@ -1795,6 +1845,7 @@ function updateHeritage_(ss, ctx, cycle) {
     ensureHeritageSchema_(ss, ctx);
     return results;
   }
+  ensureHeritageSchema_(ss, ctx); // engine.156: the standing/tenure columns arm on the existing tab and read below, same cycle
 
   var rng = safeRand_(ctx);
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
@@ -1816,13 +1867,19 @@ function updateHeritage_(ss, ctx, cycle) {
       hLiving = hIdx('LivingMembers'), hMem = hIdx('MembersList'), hScore = hIdx('HeritageScore'),
       hTier = hIdx('HeritageTier'), hNW = hIdx('TotalNetWorth'), hHomes = hIdx('HomesOwned'),
       hBiz = hIdx('BusinessesOwned'), hCiv = hIdx('CivicMembers'), hFame = hIdx('FameMembers'),
-      hUpd = hIdx('LastUpdated');
+      hUpd = hIdx('LastUpdated'),
+      hTen = hIdx('TenureCycles'), hTierTen = hIdx('TierTenure'), hPeak = hIdx('PeakTier'),
+      hStat = hIdx('Status'), hDorm = hIdx('DormantSince'), hEmpty = hIdx('EmptyCycles'), hLow = hIdx('LowCycles');
+  if (hTen < 0 || hTierTen < 0 || hPeak < 0 || hStat < 0 || hDorm < 0 || hEmpty < 0 || hLow < 0) {
+    throw new Error('updateHeritage_ engine.156: Heritage_Ledger is missing a standing/tenure column after the schema arm');
+  }
 
   var lines = {}; // linId -> row array (existing from hv, new built here)
   var maxLin = 0;
   for (var r1 = 1; r1 < hv.length; r1++) {
     var lid = String(hv[r1][hLin] || '').trim();
     if (!lid) continue;
+    while (hv[r1].length < hh.length) hv[r1].push(''); // rows written before the engine.156 columns: pad to the header (setValues needs the exact width)
     lines[lid] = hv[r1];
     var lm = /^LIN-(\d+)$/.exec(lid);
     if (lm && +lm[1] > maxLin) maxLin = +lm[1];
@@ -1877,6 +1934,8 @@ function updateHeritage_(ss, ctx, cycle) {
     newHl[hLin] = newLin; newHl[hName] = famName; newHl[hFounder] = founder;
     newHl[hFounded] = cycle; newHl[hDoor] = door; newHl[hGen] = 1;
     newHl[hScore] = 0; newHl[hTier] = 'Founding'; newHl[hBiz] = '[]';
+    newHl[hTen] = 0; newHl[hTierTen] = 0; newHl[hPeak] = 'Founding'; newHl[hStat] = 'active';
+    newHl[hDorm] = ''; newHl[hEmpty] = 0; newHl[hLow] = 0; // engine.156
     if (door === 'C' && hHomes >= 0) newHl[hHomes] = 1; // engine.155: the founding home counts (purchases before the line existed never reached HomesOwned)
     newHl[hUpd] = cycle;
     lines[newLin] = newHl;
@@ -1961,6 +2020,7 @@ function updateHeritage_(ss, ctx, cycle) {
     foundLine_([bRow], bName, 'B');
   }
 
+  var ownedHomePops = {}; // engine.156: popId -> true when the citizen lives in an active owned household
   // Door C — engine.155 (S413): the household door. An OWNED, active household
   // with no member on a line founds when the balance clears the bar — $50M,
   // alone or combined (builder: heritage is money, no Tier gate). Every living
@@ -1974,6 +2034,13 @@ function updateHeritage_(ss, ctx, cycle) {
     if (cMem >= 0 && cType >= 0) {
       var claimedC = {};
       for (var cr = 1; cr < cv.length; cr++) {
+        // engine.156: every member of an active OWNED household — the revival check reads it below
+        if ((cStat < 0 || String(cv[cr][cStat] || '').toLowerCase() === 'active') &&
+            String(cv[cr][cType] || '').toLowerCase() === 'owned') {
+          var oIds = [];
+          try { oIds = JSON.parse(String(cv[cr][cMem] || '[]')); } catch (e) { oIds = []; }
+          for (var oi = 0; oi < oIds.length; oi++) { var opid = popIdOf(oIds[oi]); if (opid) ownedHomePops[opid] = true; }
+        }
         if (cStat >= 0 && String(cv[cr][cStat] || '').toLowerCase() !== 'active') continue;
         if (String(cv[cr][cType] || '').toLowerCase() !== 'owned') continue;
         var cIds = [];
@@ -2016,19 +2083,71 @@ function updateHeritage_(ss, ctx, cycle) {
     if (ml && lines[ml]) (membersByLine[ml] = membersByLine[ml] || []).push(mRow);
   }
 
+  // engine.156: one Business_Ledger read per cycle — (a) the active BIZ_ID set
+  // (a heritage-minted storefront that closed — engine.96 T7 → Business_Archive —
+  // drops off BusinessesOwned on its own and re-opens the roll slot), (b) every
+  // active row a LIVING member owns through the same Key_Personnel resolver the
+  // owner's draw uses (Civis Systems and the Oaks count for Varek), (c) the
+  // BIZ-ID high-water scan the roll needs. Missing tab: no ownership signal, no
+  // mint (as before).
+  var bizData = null, bizActiveIds = {}, bizOwnedByPop = {};
+  var bizSheet0 = ss.getSheetByName('Business_Ledger');
+  if (bizSheet0 && bizSheet0.getLastRow() >= 2) bizData = bizSheet0.getDataRange().getValues();
+  if (bizData && bizData.length > 1) {
+    var bh0 = bizData[0];
+    var bId0 = bh0.indexOf('BIZ_ID') >= 0 ? bh0.indexOf('BIZ_ID') : 0, bKP0 = bh0.indexOf('Key_Personnel');
+    var rowByPopLiving = {}, rowByNameLiving = {};
+    for (var rl = 0; rl < rows.length; rl++) {
+      var lrow = rows[rl];
+      if (!lrow || !lrow[iPop] || !living(lrow)) continue;
+      rowByPopLiving[String(lrow[iPop]).trim()] = lrow;
+      var lkey = ownerNameKey_((lrow[iFirst] || '') + ' ' + (lrow[iLast] || ''));
+      if (lkey && !rowByNameLiving[lkey]) rowByNameLiving[lkey] = lrow;
+    }
+    for (var bz = 1; bz < bizData.length; bz++) {
+      var bzId = String(bizData[bz][bId0] || '').trim();
+      if (!bzId) continue;
+      bizActiveIds[bzId] = true;
+      if (bKP0 < 0) continue;
+      var bzEntries = parseKeyPersonnelOwners_(bizData[bz][bKP0]);
+      for (var be = 0; be < bzEntries.length; be++) {
+        if (!bzEntries[be].owner) continue;
+        var bzRow = resolveOwnerRow_(bzEntries[be], rowByPopLiving, rowByNameLiving);
+        if (!bzRow) continue;
+        var bzPop = String(bzRow[iPop]).trim();
+        (bizOwnedByPop[bzPop] = bizOwnedByPop[bzPop] || []).push(bzId);
+      }
+    }
+  }
+  // engine.156: living members holding a Civic_Office_Ledger seat in scandal this cycle (last cycle's committed status)
+  var scandalPops = {};
+  var coSheet = ss.getSheetByName('Civic_Office_Ledger');
+  if (coSheet && coSheet.getLastRow() >= 2) {
+    var cov = coSheet.getDataRange().getValues();
+    var coP = cov[0].indexOf('PopId'), coS = cov[0].indexOf('Status');
+    if (coP >= 0 && coS >= 0) {
+      for (var co = 1; co < cov.length; co++) {
+        if (String(cov[co][coS] || '').toLowerCase() !== 'scandal') continue;
+        var coPid = popIdOf(cov[co][coP]);
+        if (coPid) scandalPops[coPid] = true;
+      }
+    }
+  }
+
   var outRows = [];
-  // Lazy Business_Ledger max-id read (only when a line's roll hits); shared
-  // counter so same-cycle multi-founding can't collide ids.
+  // Lazy BIZ-ID max scan over the one read above (only when a line's roll
+  // hits); shared counter so same-cycle multi-founding can't collide ids.
   var nextBizNum = null;
-  var promotedLines = [], businessesOpened = [], dynasties = [];
+  var promotedLines = [], demotedLines = [], dormantLines = [], revivedLines = [], businessesOpened = [], dynasties = [];
   var lineByPop = {}; // popId -> {lineageId, tier} for same-cycle phase-5 consumers
   for (var linId in lines) {
     if (!lines.hasOwnProperty(linId)) continue;
     var hl = lines[linId];
     var members = membersByLine[linId] || [];
-    var livingN = 0, totalNW = 0, civ = 0, fame = 0;
+    var livingN = 0, totalNW = 0, civ = 0, fame = 0, scandal = 0, maxLivingNW = 0, anyOwnedHome = false;
     var memberIds = [];
     var memberSet = {};
+    var ownedBizSet = {}, ownedBizCount = 0; // engine.156: active rows a living member owns
     for (var m2 = 0; m2 < members.length; m2++) {
       var mr = members[m2];
       var mid = String(mr[iPop]).trim();
@@ -2036,9 +2155,17 @@ function updateHeritage_(ss, ctx, cycle) {
       memberSet[mid] = true;
       if (!living(mr)) continue;
       livingN++;
-      totalNW += nwOf(mr);
+      var mNW = nwOf(mr);
+      totalNW += mNW;
+      if (mNW > maxLivingNW) maxLivingNW = mNW;
       if (String(mr[iCiv] || '').toLowerCase() === 'yes') civ++;
       if ((Number(mr[iUsage]) || 0) >= 5) fame++;
+      if (scandalPops[mid]) scandal++;
+      if (ownedHomePops[mid]) anyOwnedHome = true;
+      var ownedIds = bizOwnedByPop[mid] || [];
+      for (var ob = 0; ob < ownedIds.length; ob++) {
+        if (!ownedBizSet[ownedIds[ob]]) { ownedBizSet[ownedIds[ob]] = true; ownedBizCount++; }
+      }
     }
     // Generations: longest parent->child chain inside the line.
     var genMemo = {};
@@ -2069,31 +2196,84 @@ function updateHeritage_(ss, ctx, cycle) {
     hl[hHomes] = homes;
     var bizList = [];
     try { bizList = JSON.parse(String(hl[hBiz] || '[]')); } catch (e) { bizList = []; }
+    // engine.156: the heritage-minted list keeps only rows still on the
+    // Business_Ledger (a closure drops out; the roll slot re-opens) and
+    // BusinessesOwned counts those ∪ what the living members own outright.
+    if (bizData) {
+      var bizKept = [];
+      for (var bk = 0; bk < bizList.length; bk++) if (bizActiveIds[String(bizList[bk])]) bizKept.push(bizList[bk]);
+      bizList = bizKept;
+    }
+    var bizCount = bizList.length;
+    for (var bk2 = 0; bk2 < bizList.length; bk2++) if (ownedBizSet[String(bizList[bk2])]) ownedBizCount--; // a minted storefront the staker also owns by Key_Personnel counts once
+    bizCount += Math.max(0, ownedBizCount);
+    hl[hBiz] = JSON.stringify(bizList);
 
-    // Score accrual — physics per cycle, no caps on the total (SIM_DOCTRINE):
-    // wealth compounds (capped per-cycle contribution, not per-line total),
-    // depth of the line, civic presence, fame, owned assets.
-    var pts = Math.min(4, totalNW / 500000) +
-      Math.max(0, generations - 1) +
-      Math.min(3, civ) + Math.min(3, fame) +
-      (bizList.length * 2) + homes;
-    var score = (Number(hl[hScore]) || 0) + Math.round(pts * 10) / 10;
-    var oldTier = String(hl[hTier] || 'Founding');
-    var newTier = heritageTierFor_(score);
+    // ── engine.156: STANDING (what the family holds now) + TENURE (how long) ──
+    var st = heritageStanding_(totalNW, generations, civ, fame, bizCount, homes, scandal);
+    var standing = st.standing;
+    var wasDormant = String(hl[hStat] || '').toLowerCase() === 'dormant';
+    var oldTier = String(hl[hTier] || '');           // blank while dormant
+    var peakTier = String(hl[hPeak] || '') || oldTier || 'Founding';
+    var tenure = (hl[hTen] === '' || hl[hTen] === null || hl[hTen] === undefined) ?
+      Math.max(0, cycle - (Number(hl[hFounded]) || cycle) - 1) :   // first stamp on a pre-engine.156 row: completed cycles since founding (the +1 below makes it cycle − founded)
+      (Number(hl[hTen]) || 0);
+    var tierTen = Number(hl[hTierTen]) || 0;
+    var emptyC = Number(hl[hEmpty]) || 0, lowC = Number(hl[hLow]) || 0;
+    var status = wasDormant ? 'dormant' : 'active';
+    var newTier = '';
+    var lineEvent = null, dormantWhy = '';
+    if (wasDormant) {
+      // Revival: the line's OWN living members clear a door again (the door
+      // loops skip anyone who already carries a LineageId, so this is the
+      // only way back). The name comes back; the tenure does not.
+      var revive = livingN > 0 && (
+        maxLivingNW >= HERITAGE_DOOR_B_NETWORTH ||
+        (livingN >= HERITAGE_DOOR_A_MEMBERS && totalNW >= HERITAGE_DOOR_A_NETWORTH) ||
+        (anyOwnedHome && totalNW >= HERITAGE_DOOR_C_SOLO_NETWORTH));
+      if (revive) {
+        status = 'active'; newTier = heritageTierFor_(standing);
+        tenure = 0; tierTen = 0; emptyC = 0; lowC = 0; hl[hDorm] = '';
+        lineEvent = 'revived';
+      }
+    } else {
+      emptyC = livingN === 0 ? emptyC + 1 : 0;
+      lowC = (standing < HERITAGE_LOW_STANDING && heritageRank_(peakTier) >= 1) ? lowC + 1 : 0; // only a line that was ever Established can lose the money that made it
+      if (emptyC >= HERITAGE_EMPTY_CYCLES || lowC >= HERITAGE_LOW_CYCLES) {
+        status = 'dormant'; newTier = ''; hl[hDorm] = cycle;
+        lineEvent = 'dormant'; dormantWhy = emptyC >= HERITAGE_EMPTY_CYCLES ? 'empty' : 'low';
+      } else {
+        newTier = heritageTierFor_(standing);
+        if ((Number(hl[hFounded]) || cycle) < cycle) tenure += 1; // a completed cycle on the ledger
+        tierTen = (oldTier && newTier === oldTier) ? tierTen + 1 : 0;
+        if (oldTier && heritageRank_(newTier) > heritageRank_(oldTier)) lineEvent = 'rise';
+        else if (oldTier && heritageRank_(newTier) < heritageRank_(oldTier)) lineEvent = 'fall';
+      }
+    }
+    if (newTier && heritageRank_(newTier) > heritageRank_(peakTier)) peakTier = newTier;
+    var score = standing; // the Dynasty cultural row below reads it
 
     hl[hName] = hl[hName] || '';
     hl[hGen] = generations;
     hl[hLiving] = livingN;
     hl[hMem] = JSON.stringify(memberIds.sort());
-    hl[hScore] = Math.round(score * 10) / 10;
+    hl[hScore] = standing;
     hl[hTier] = newTier;
     hl[hNW] = totalNW;
     hl[hCiv] = civ;
     hl[hFame] = fame;
     hl[hUpd] = cycle;
+    hl[hTen] = tenure;
+    hl[hTierTen] = tierTen;
+    hl[hPeak] = peakTier;
+    hl[hStat] = status;
+    hl[hEmpty] = emptyC;
+    hl[hLow] = lowC;
 
-    for (var m5 = 0; m5 < memberIds.length; m5++) {
-      lineByPop[memberIds[m5]] = { lineageId: linId, tier: newTier };
+    if (status === 'active') {
+      for (var m5 = 0; m5 < memberIds.length; m5++) {
+        lineByPop[memberIds[m5]] = { lineageId: linId, tier: newTier };
+      }
     }
 
     // ── tier unlock: the business roll. An Established+ line with an open
@@ -2102,7 +2282,7 @@ function updateHeritage_(ss, ctx, cycle) {
     // their NetWorth (min $50k, needs $100k+). Business lands in
     // Business_Ledger via write-intent (Phase 10 commits); runCareerEngine's
     // live pool picks it up next cycle, so the family firm starts hiring.
-    var bizCfg = HERITAGE_BIZ_ROLL[newTier];
+    var bizCfg = status === 'active' ? HERITAGE_BIZ_ROLL[newTier] : null; // engine.156: a dormant line rolls nothing
     if (bizCfg && bizList.length < bizCfg.max && rng() < bizCfg.p) {
       var stakePop = null, stakeRow = null, stakeNW = 0;
       for (var s1 = 0; s1 < members.length; s1++) {
@@ -2113,15 +2293,13 @@ function updateHeritage_(ss, ctx, cycle) {
       }
       if (stakeRow && stakeNW >= 100000) {
         if (nextBizNum === null) {
-          nextBizNum = 1;
-          try {
-            var bizSheet = ss.getSheetByName('Business_Ledger');
-            var bizVals = bizSheet.getDataRange().getValues();
-            for (var b1 = 1; b1 < bizVals.length; b1++) {
-              var bm = /^BIZ-(\d+)$/.exec(String(bizVals[b1][0] || '').trim());
+          if (bizData) {
+            nextBizNum = 1;
+            for (var b1 = 1; b1 < bizData.length; b1++) {
+              var bm = /^BIZ-(\d+)$/.exec(String(bizData[b1][0] || '').trim());
               if (bm && +bm[1] >= nextBizNum) nextBizNum = +bm[1] + 1;
             }
-          } catch (eB) { nextBizNum = null; }
+          }
           // engine.96 allocator contract: next = max(highWater, activeMax)+1.
           // The active scan alone breaks once rows move to Business_Archive;
           // the World_Config mark (via loadConfig_/ctx.config) is monotonic
@@ -2172,9 +2350,69 @@ function updateHeritage_(ss, ctx, cycle) {
       }
     }
 
-    // Promotion is an event the family lives — one line per living member,
-    // once per promotion (tier changes are rare by construction).
-    if (heritageRank_(newTier) > heritageRank_(oldTier)) {
+    // engine.156: a tier is an event the family lives, up or down — one line
+    // per living member, one [Heritage] line per member per cycle.
+    var famNameE = String(hl[hName] || linId);
+    var lifeAll_ = function(lineText) {
+      for (var mE = 0; mE < members.length; mE++) {
+        var eRow = members[mE];
+        if (!living(eRow)) continue;
+        var eStr = String(eRow[iLife] || '');
+        if (eStr.indexOf(stamp + ' — [Heritage]') >= 0) continue;
+        eRow[iLife] = (eStr ? eStr + '\n' : '') + stamp + ' — ' + lineText;
+        ctx.ledger.dirty = true;
+      }
+    };
+    if (lineEvent === 'fall') {
+      results.demoted++;
+      demotedLines.push({ lineageId: linId, family: famNameE, from: oldTier, tier: newTier });
+      lifeAll_('[Heritage] the ' + famNameE + ' line stepped down — ' + newTier + ' now');
+      ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+      ctx.summary.storyHooks.push({
+        hookType: 'HERITAGE_FALL', severity: 5, priority: 5,
+        description: 'The ' + famNameE + ' family line (' + linId + ') stepped down from ' + oldTier + ' to ' + newTier +
+          ' — standing ' + standing + ' on $' + totalNW + ' held, ' + bizCount + ' business' + (bizCount === 1 ? '' : 'es') +
+          ', ' + homes + ' home' + (homes === 1 ? '' : 's') + (scandal ? ', ' + scandal + ' in scandal' : '') +
+          '; ' + tenure + ' cycles on the ledger, peak ' + peakTier,
+        cycleGenerated: cycle, neighborhood: '', domain: 'COMMUNITY',
+        text: 'The ' + famNameE + ' line stepped down'
+      });
+    } else if (lineEvent === 'dormant') {
+      results.dormant++;
+      dormantLines.push({ lineageId: linId, family: famNameE, why: dormantWhy, peak: peakTier });
+      if (dormantWhy === 'low') lifeAll_('[Heritage] the ' + famNameE + ' line went dormant — the money that made it is gone');
+      ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+      ctx.summary.storyHooks.push({
+        hookType: 'HERITAGE_DORMANT', severity: 6, priority: 6,
+        description: 'The ' + famNameE + ' family line (' + linId + ') went dormant — ' +
+          (dormantWhy === 'empty' ? 'no living member for ' + HERITAGE_EMPTY_CYCLES + ' cycles' :
+            'standing under ' + HERITAGE_LOW_STANDING + ' for ' + HERITAGE_LOW_CYCLES + ' cycles') +
+          '; peak ' + peakTier + ', founded C' + (Number(hl[hFounded]) || '?'),
+        cycleGenerated: cycle, neighborhood: '', domain: 'COMMUNITY',
+        text: 'The ' + famNameE + ' line went dormant'
+      });
+    } else if (lineEvent === 'revived') {
+      results.revived++;
+      var reviver = null, rNW = -1;
+      for (var rv = 0; rv < members.length; rv++) {
+        if (!living(members[rv])) continue;
+        var rvNW = nwOf(members[rv]);
+        if (rvNW > rNW) { rNW = rvNW; reviver = members[rv]; }
+      }
+      var reviverName = reviver ? (String(reviver[iFirst] || '') + ' ' + String(reviver[iLast] || '')).trim() : 'a descendant';
+      revivedLines.push({ lineageId: linId, family: famNameE, tier: newTier, by: reviver ? String(reviver[iPop]).trim() : '' });
+      lifeAll_('[Heritage] the ' + famNameE + ' line revived — ' + reviverName + ' brought the name back');
+      ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+      ctx.summary.storyHooks.push({
+        hookType: 'HERITAGE_REVIVED', severity: 5, priority: 5,
+        description: 'The ' + famNameE + ' family line (' + linId + ') revived at ' + newTier + ' — ' + reviverName +
+          ' cleared the door again on $' + totalNW + ' held; peak ' + peakTier + ', dormant since C' + String(hl[hDorm] || '?'),
+        cycleGenerated: cycle, neighborhood: String(reviver ? reviver[iHood] || '' : ''), domain: 'COMMUNITY',
+        text: 'The ' + famNameE + ' line revived'
+      });
+      hl[hDorm] = '';
+    }
+    if (lineEvent === 'rise') {
       results.promoted++;
       promotedLines.push({ lineageId: linId, family: String(hl[hName] || linId), tier: newTier });
       var famNameP = String(hl[hName] || linId);
@@ -2261,13 +2499,16 @@ function updateHeritage_(ss, ctx, cycle) {
   ctx.summary.heritage = {
     lines: results.lines, joined: results.joined,
     founded: results.founded, promoted: results.promoted,
+    demoted: results.demoted, dormant: results.dormant, revived: results.revived,
     foundedLines: foundedLines, promotedLines: promotedLines,
+    demotedLines: demotedLines, dormantLines: dormantLines, revivedLines: revivedLines,
     businessesOpened: businessesOpened, dynasties: dynasties,
     lineByPop: lineByPop
   };
 
   Logger.log('updateHeritage_ engine.65: lines ' + results.lines + ', joined ' + results.joined +
     ', founded ' + results.founded + ' (' + foundedLines.map(function(f){return f.family + '/' + f.door;}).join(',') + ')' +
-    ', promoted ' + results.promoted + ', biz ' + results.businessesOpened);
+    ', promoted ' + results.promoted + ', demoted ' + results.demoted + ', dormant ' + results.dormant +
+    ', revived ' + results.revived + ', biz ' + results.businessesOpened);
   return results;
 }

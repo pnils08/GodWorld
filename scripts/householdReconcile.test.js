@@ -503,11 +503,11 @@ console.log('engine.96 T11 the heritage roll mints in the family\'s field at the
   const person = (popid, first, last, hood, nw, line, tags, role) => cit(popid, first, last, hood, 90000, { netWorth: nw }).concat([1, line, '', 0, '', 'Y2C1 — born', tags, role]);
   const HL_HDR = ['LineageId', 'FamilyName', 'FounderPopId', 'FoundedCycle', 'FoundedDoor', 'Generations', 'LivingMembers', 'MembersList', 'HeritageScore', 'HeritageTier', 'TotalNetWorth', 'HomesOwned', 'BusinessesOwned', 'CivicMembers', 'FameMembers', 'LastUpdated'];
   const people = [
-    person('POP-00018', 'Benji', 'Dillon', 'Rockridge', 400000000, 'LIN-00002', 'athlete', 'Pitcher, Oakland A\'s Legend'),
+    person('POP-00018', 'Benji', 'Dillon', 'Rockridge', 1000000000, 'LIN-00002', 'athlete', 'Pitcher, Oakland A\'s Legend'), // engine.156: $1B → standing 32 (Established on the standing bars; $400M was 28)
     person('POP-00742', 'Maya', 'Torres-Dillon', 'Rockridge', 50000, 'LIN-00002', 'Education', 'High School Science Teacher'),
   ];
   const sheets = {
-    Heritage_Ledger: mockSheet([HL_HDR.slice(), ['LIN-00002', 'Dillon', 'POP-00018', 103, 'A', 1, 2, '["POP-00018","POP-00742"]', 60, 'Established', 400050000, 1, '[]', 0, 1, 109]]),
+    Heritage_Ledger: mockSheet([HL_HDR.slice(), ['LIN-00002', 'Dillon', 'POP-00018', 103, 'A', 1, 2, '["POP-00018","POP-00742"]', 60, 'Established', 1000050000, 1, '[]', 0, 1, 109]]),
     Business_Ledger: mockSheet([['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'], ['BIZ-00179', 'Night Walk Records', 'Retail', 'Rockridge', 4, 42000, 380000, 2, '']]),
     Household_Ledger: mockSheet([HH_HEADER.slice()]),
     Family_Relationships: mockSheet([['RelationshipId', 'Citizen1', 'Citizen2', 'RelationshipType', 'SinceCycle', 'Status']])
@@ -520,9 +520,138 @@ console.log('engine.96 T11 the heritage roll mints in the family\'s field at the
   assert('an Established line with an open slot rolls (rng 0.01 < 0.15) and mints ONE business row', res.businessesOpened === 1 && !!biz, JSON.stringify(appended));
   assert('born in the family\'s field: Maya\'s Education → "Dillon Academy", Sector Education, 15 staff at $62K, revenue = capital = $1.2M (the class cap, not $80M), growth 2', biz && biz.row[1] === 'Dillon Academy' && biz.row[2] === 'Education' && biz.row[4] === 15 && biz.row[5] === 62000 && biz.row[6] === 1200000 && biz.row[7] === 2, JSON.stringify(biz && biz.row));
   assert('Key_Personnel carries the staker with the founder tag; the BIZ-ID follows the high-water mark', biz && biz.row[8] === 'POP-00018 Benji Dillon (founder)' && biz.row[0] === 'BIZ-00180', JSON.stringify(biz && biz.row));
-  assert('the stake leaves the staker: Benji\'s NetWorth − $1.2M; the reason names the field', Number(people[0][hi('NetWorth')]) === 400000000 - 1200000 && /Education, family/.test(biz.reason));
+  assert('the stake leaves the staker: Benji\'s NetWorth − $1.2M; the reason names the field', Number(people[0][hi('NetWorth')]) === 1000000000 - 1200000 && /Education, family/.test(biz.reason));
   assert('the hook names the field', ctx.summary.storyHooks.some(h => h.hookType === 'HERITAGE_BUSINESS_OPENING' && /Dillon Academy/.test(h.description) && /\(Education\)/.test(h.description)));
   assert('the BIZ-ID high-water mark advances to 180 through the cache write', hwWrites.some(w => w[0] === 'World_Config' && w[3] === 180) && ctx.config.bizIdHighWater === 180, JSON.stringify(hwWrites));
+}
+
+// ═══ engine.156 (S415) — cut 8: heritage loss — standing + tenure, dormancy + revival ═══
+console.log('engine.156 heritage loss: standing is what the family holds now, tenure counts, an empty line goes dormant, a door revives it');
+{
+  const updateHeritage_ = loadEngine('../phase05-citizens/generationalWealthEngine.js', 'updateHeritage_');
+  const heritageStanding_ = loadEngine('../phase05-citizens/generationalWealthEngine.js', 'heritageStanding_');
+  const heritageTierByPop_ = loadEngine('../phase05-citizens/generationalWealthEngine.js', 'heritageTierByPop_');
+  const HDR = SL_HEADER.concat(['Tier', 'LineageId', 'SpouseId', 'UsageCount', 'CIV (y/n)', 'LifeHistory']);
+  const hi = (n) => HDR.indexOf(n);
+  const person = (popid, first, last, hood, nw, line, extra) => {
+    const e = extra || {};
+    const r = cit(popid, first, last, hood, 90000, { netWorth: nw, hh: e.hh || '', status: e.status, parents: e.parents });
+    if (e.children) r[sli('ChildrenIds')] = JSON.stringify(e.children);
+    return r.concat([e.tier || 4, line || '', '', e.usage || 0, e.civ || '', 'Y2C1 — born']);
+  };
+  const HL16 = ['LineageId', 'FamilyName', 'FounderPopId', 'FoundedCycle', 'FoundedDoor', 'Generations', 'LivingMembers', 'MembersList', 'HeritageScore', 'HeritageTier', 'TotalNetWorth', 'HomesOwned', 'BusinessesOwned', 'CivicMembers', 'FameMembers', 'LastUpdated'];
+  const HL23 = HL16.concat(['TenureCycles', 'TierTenure', 'PeakTier', 'Status', 'DormantSince', 'EmptyCycles', 'LowCycles']);
+  const line16 = (id, fam, founder, members, tier, nw, homes, biz) => [id, fam, founder, 103, 'B', 1, members.length, JSON.stringify(members), 12, tier, nw, homes || 0, biz || '[]', 0, 0, 105];
+  const line23 = (id, fam, founder, members, tier, nw, homes, biz, ext) => line16(id, fam, founder, members, tier, nw, homes, biz).concat([ext.tenure || 0, ext.tierTen || 0, ext.peak || tier || 'Founding', ext.status || 'active', ext.dormantSince || '', ext.empty || 0, ext.low || 0]);
+  const BIZ_HDR = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'];
+  const run = (people, hlRows, opts) => {
+    const o = opts || {};
+    const cyc = o.cycle || 106;
+    const sheets = {
+      Heritage_Ledger: mockSheet([(o.hdr || HL16).slice()].concat(hlRows)),
+      Family_Relationships: mockSheet([['RelationshipId', 'Citizen1', 'Citizen2', 'RelationshipType', 'SinceCycle', 'Status']]),
+      Household_Ledger: mockSheet([HH_HEADER.slice()].concat(o.hhs || []))
+    };
+    if (o.biz) sheets.Business_Ledger = mockSheet([BIZ_HDR.slice()].concat(o.biz));
+    if (o.civic) sheets.Civic_Office_Ledger = mockSheet([['OfficeId', 'Title', 'Holder', 'PopId', 'Status']].concat(o.civic));
+    const ctx = { ss: { getSheetByName: (n) => sheets[n] || null }, ledger: { headers: HDR.slice(), rows: people, dirty: false }, summary: { cycleId: cyc, storyHooks: [] }, config: { cycleCount: cyc, bizIdHighWater: 200 }, rng: () => (o.rng === undefined ? 0.99 : o.rng), now: 'Y3C' + cyc, _sheets: sheets,
+      cache: { getData: () => ({ exists: true, values: [['Key', 'Value'], ['bizIdHighWater', 200]] }), queueWrite: () => {} } };
+    const res = updateHeritage_(ctx.ss, ctx, cyc);
+    const hdr = sheets.Heritage_Ledger._values[0];
+    const rowsOut = sheets.Heritage_Ledger._values.slice(1);
+    return { ctx, res, hdr, sheets, hl: rowsOut, get: (id, n) => { const r = rowsOut.find(x => x[0] === id); return r ? r[hdr.indexOf(n)] : undefined; }, row: (id) => people.find(r => r[hi('POPID')] === id), hooks: (t) => ctx.summary.storyHooks.filter(h => h.hookType === t) };
+  };
+  const owned = (id, members, hood) => { const r = hhRow(id, members[0], members.length > 1 ? 'family' : 'solo', members, hood, 3000, 90000, 'active'); r[hhi('HousingType')] = 'owned'; return r; };
+
+  // 1 — the formula, one place
+  assert('standing: $10B + 2 businesses = 48; $1M and under = 0 wealth; Corliss-shaped $2.48M / 2 gens / 1 fame = 10.0',
+    heritageStanding_(1e10, 1, 0, 0, 2, 0, 0).standing === 48 && heritageStanding_(1e6, 1, 0, 0, 0, 0, 0).wealth === 0 && heritageStanding_(0, 1, 0, 0, 0, 0, 0).standing === 0 && heritageStanding_(2484454, 2, 0, 1, 0, 0, 0).standing === 10,
+    JSON.stringify([heritageStanding_(1e10, 1, 0, 0, 2, 0, 0), heritageStanding_(2484454, 2, 0, 1, 0, 0, 0)]));
+  assert('standing: a scandal seat costs 5; the floor is 0', heritageStanding_(1e8, 1, 1, 0, 0, 0, 1).standing === 18 && heritageStanding_(0, 1, 0, 0, 0, 0, 3).standing === 0);
+
+  // 2 — the five live lines at C105 shape, 16-column tab: the columns arm in-cycle, Varek leads, four rise to Established, Corliss stays Founding
+  {
+    const people = [
+      person('POP-00005', 'Mags', 'Corliss', 'Temescal', 310938, 'LIN-00001', { usage: 8, tier: 1 }),
+      person('POP-00594', 'Robert', 'Corliss', 'Temescal', 2006833, 'LIN-00001', { status: 'Retired', children: ['POP-00005'] }),
+      person('POP-00595', 'Sarah', 'Corliss', 'Temescal', 151832, 'LIN-00001', { parents: ['POP-00594'] }),
+      person('POP-00596', 'Michael', 'Corliss', 'Temescal', 14851, 'LIN-00001', { parents: ['POP-00594'] }),
+      person('POP-00018', 'Benji', 'Dillon', 'Rockridge', 400024317, 'LIN-00002', { usage: 58, children: ['POP-00743'] }),
+      person('POP-00742', 'Maya', 'Torres-Dillon', 'Rockridge', 398242, 'LIN-00002', { usage: 1 }),
+      person('POP-00743', 'Rick', 'Dillon', 'Rockridge', 16000, 'LIN-00002', { usage: 1, parents: ['POP-00018'] }),
+      person('POP-00001', 'Vinnie', 'Keane', 'West Oakland', 450002572, 'LIN-00003', { usage: 60 }),
+      person('POP-00002', 'Amara', 'Keane', 'West Oakland', 452705, 'LIN-00003', { usage: 4 }),
+      person('POP-00019', 'Isley', 'Kelley', 'Piedmont Ave', 375017309, 'LIN-00004', { usage: 28 }),
+      person('POP-00789', 'Elias', 'Varek', 'Downtown', 10001870196, 'LIN-00005', { usage: 0 }),
+      person('POP-00527', 'Mike', 'Paulson', 'Jack London', 75000000, '', { usage: 30 })
+    ];
+    const t = run(people, [
+      line16('LIN-00001', 'Corliss', 'POP-00594', ['POP-00005', 'POP-00594', 'POP-00595', 'POP-00596'], 'Founding', 2484454),
+      line16('LIN-00002', 'Dillon', 'POP-00018', ['POP-00018', 'POP-00742', 'POP-00743'], 'Founding', 400438559),
+      line16('LIN-00003', 'Keane', 'POP-00001', ['POP-00001', 'POP-00002'], 'Founding', 450455277),
+      line16('LIN-00004', 'Kelley', 'POP-00019', ['POP-00019'], 'Founding', 375017309, 1),
+      line16('LIN-00005', 'Varek', 'POP-00789', ['POP-00789'], 'Founding', 10001870196)
+    ], { biz: [
+      ['BIZ-00018', 'Bay Tribune', 'Media', 'Downtown', 40, 70000, 9000000, 1, 'Mags Corliss (Editor-in-Chief), P Slayer, Hal Richmond'],
+      ['BIZ-00052', 'Civis Systems', 'Technology', 'West Oakland', 900, 140000, 800000000, 4, 'Elias Varek (founder)'],
+      ['BIZ-00074', 'Oakland Oaks', 'Sports', 'Downtown', 200, 90000, 300000000, 3, 'POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)'],
+      ['BIZ-00103', 'Firehouse 29 West Oakland Baseball Academy', 'Education', 'West Oakland', 6, 52000, 600000, 2, 'POP-00001 Vinnie Keane']
+    ] });
+    assert('the seven standing/tenure columns arm on the 16-column tab in the same cycle; every row is written at the new width', t.hdr.length === 23 && t.hdr.slice(16).join() === 'TenureCycles,TierTenure,PeakTier,Status,DormantSince,EmptyCycles,LowCycles' && t.hl.every(r => r.length === 23), JSON.stringify(t.hdr));
+    const order = t.hl.slice().sort((a, b) => Number(b[8]) - Number(a[8])).map(r => r[1]);
+    assert('Varek leads his own ledger: 48 (40 wealth + Civis + the Oaks by Key_Personnel), Keane 33.5 (the Academy counts), Dillon 32, Kelley 30.7, Corliss 10',
+      order[0] === 'Varek' && order[4] === 'Corliss' && t.get('LIN-00005', 'HeritageScore') === 48 && t.get('LIN-00003', 'HeritageScore') === 33.5 && t.get('LIN-00002', 'HeritageScore') === 32 && t.get('LIN-00004', 'HeritageScore') === 30.7 && t.get('LIN-00001', 'HeritageScore') === 10, JSON.stringify(t.hl.map(r => [r[1], r[8], r[9]])));
+    assert('the re-base: four lines rise to Established, Corliss stays Founding; no falls; Bay Tribune staff tag is not ownership', t.res.promoted === 4 && t.res.demoted === 0 && ['LIN-00002', 'LIN-00003', 'LIN-00004', 'LIN-00005'].every(id => t.get(id, 'HeritageTier') === 'Established') && t.get('LIN-00001', 'HeritageTier') === 'Founding', JSON.stringify(t.res));
+    assert('tenure seeds from FoundedCycle on a pre-engine.156 row (C103 → 3 at C106); TierTenure restarts at 0 on the rise, counts 1 where the tier held; PeakTier follows; Status active; Corliss (never Established) starts no low clock',
+      t.get('LIN-00005', 'TenureCycles') === 3 && t.get('LIN-00005', 'TierTenure') === 0 && t.get('LIN-00005', 'PeakTier') === 'Established' && t.get('LIN-00001', 'TierTenure') === 1 && t.get('LIN-00001', 'PeakTier') === 'Founding' && t.get('LIN-00001', 'LowCycles') === 0 && t.hl.every(r => r[19] === 'active' && r[21] === 0), JSON.stringify(t.hl.map(r => r.slice(16))));
+    assert('the promotion line lands on the living members of the four; the S.heritage bus carries the new counters', /\[Heritage\] the Keane line has roots deep enough to notice — established/.test(t.row('POP-00001')[hi('LifeHistory')]) && !/\[Heritage\]/.test(t.row('POP-00005')[hi('LifeHistory')]) && t.ctx.summary.heritage.demotedLines.length === 0 && t.ctx.summary.heritage.dormantLines.length === 0 && Array.isArray(t.ctx.summary.heritage.revivedLines));
+  }
+
+  // 3 — the fall: an Established line loses its money and steps down the same cycle, with the line and the hook
+  {
+    const t = run([person('POP-00019', 'Isley', 'Kelley', 'Piedmont Ave', 50000000, 'LIN-00004', { usage: 28 })],
+      [line23('LIN-00004', 'Kelley', 'POP-00019', ['POP-00019'], 'Established', 375017309, 1, '[]', { tenure: 3, tierTen: 2, peak: 'Established' })], { hdr: HL23 });
+    assert('Kelley at $50M: standing 22 → Founding; demoted 1; TierTenure 0; TenureCycles 4; PeakTier stays Established; no low clock at 22',
+      t.res.demoted === 1 && t.get('LIN-00004', 'HeritageTier') === 'Founding' && t.get('LIN-00004', 'HeritageScore') === 22 && t.get('LIN-00004', 'TierTenure') === 0 && t.get('LIN-00004', 'TenureCycles') === 4 && t.get('LIN-00004', 'PeakTier') === 'Established' && t.get('LIN-00004', 'LowCycles') === 0, JSON.stringify(t.hl));
+    assert('the fall is lived: the [Heritage] stepped-down line on the member + HERITAGE_FALL (severity 5) naming what is held', /\[Heritage\] the Kelley line stepped down — Founding now/.test(t.row('POP-00019')[hi('LifeHistory')]) && t.hooks('HERITAGE_FALL').length === 1 && t.hooks('HERITAGE_FALL')[0].severity === 5 && /Established to Founding/.test(t.hooks('HERITAGE_FALL')[0].description), JSON.stringify(t.ctx.summary.storyHooks));
+    // the low clock: an ever-Established line under 10 ticks; a scandal seat costs 5
+    const t2 = run([person('POP-00019', 'Isley', 'Kelley', 'Piedmont Ave', 1200000, 'LIN-00004', { civ: 'yes' })],
+      [line23('LIN-00004', 'Kelley', 'POP-00019', ['POP-00019'], 'Founding', 1200000, 0, '[]', { peak: 'Established', low: 50 })], { hdr: HL23, civic: [['MAYOR', 'Mayor', 'Isley Kelley', 'POP-00019', 'scandal']] });
+    assert('standing 0.8 + 3 civic − 5 scandal → 0; LowCycles 50 → 51 (not yet dormant); no fall (Founding → Founding)', t2.get('LIN-00004', 'HeritageScore') === 0 && t2.get('LIN-00004', 'LowCycles') === 51 && t2.get('LIN-00004', 'Status') === 'active' && t2.res.demoted === 0 && t2.res.dormant === 0, JSON.stringify(t2.hl));
+    const t3 = run([person('POP-00019', 'Isley', 'Kelley', 'Piedmont Ave', 1200000, 'LIN-00004', {})],
+      [line23('LIN-00004', 'Kelley', 'POP-00019', ['POP-00019'], 'Founding', 1200000, 0, '[]', { peak: 'Established', low: 51 })], { hdr: HL23 });
+    assert('the 52nd low cycle: dormant, tier blank, DormantSince 106, the living member gets the money-is-gone line, HERITAGE_DORMANT severity 6', t3.res.dormant === 1 && t3.get('LIN-00004', 'Status') === 'dormant' && t3.get('LIN-00004', 'HeritageTier') === '' && t3.get('LIN-00004', 'DormantSince') === 106 && /\[Heritage\] the Kelley line went dormant — the money that made it is gone/.test(t3.row('POP-00019')[hi('LifeHistory')]) && t3.hooks('HERITAGE_DORMANT').length === 1 && t3.hooks('HERITAGE_DORMANT')[0].severity === 6, JSON.stringify(t3.hl) + JSON.stringify(t3.ctx.summary.storyHooks));
+  }
+
+  // 4 — the empty line: no living member for four cycles goes dormant; a dormant line is no line to the phase-4 readers, rolls nothing, and the door brings it back
+  {
+    const dead = person('POP-00019', 'Isley', 'Kelley', 'Piedmont Ave', 0, 'LIN-00004', { status: 'deceased' });
+    const t = run([dead], [line23('LIN-00004', 'Kelley', 'POP-00019', ['POP-00019'], 'Established', 0, 0, '[]', { tenure: 9, peak: 'Established', empty: 3 })], { hdr: HL23 });
+    assert('EmptyCycles 3 → 4: dormant, tier blank, no promotion/demotion, the hook names the empty house, no member left to write to', t.res.dormant === 1 && t.res.demoted === 0 && t.get('LIN-00004', 'EmptyCycles') === 4 && t.get('LIN-00004', 'Status') === 'dormant' && t.get('LIN-00004', 'HeritageTier') === '' && /no living member for 4 cycles/.test(t.hooks('HERITAGE_DORMANT')[0].description) && !/\[Heritage\]/.test(dead[hi('LifeHistory')]), JSON.stringify(t.hl));
+    assert('heritageTierByPop_ reads the dormant line as no line (the birth boost, the estate rate, the lottery all read this map); lineByPop skips it', Object.keys(heritageTierByPop_(t.ctx.ss)).length === 0 && !t.ctx.summary.heritage.lineByPop['POP-00019']);
+    // a living heir under the door: still dormant, tenure frozen, the roll does not fire even on a hit
+    const heir = person('POP-00900', 'June', 'Kelley', 'Piedmont Ave', 2000000, 'LIN-00004', { parents: ['POP-00019'] });
+    const t2 = run([dead, heir], [line23('LIN-00004', 'Kelley', 'POP-00019', ['POP-00019', 'POP-00900'], '', 0, 0, '[]', { tenure: 9, peak: 'Established', status: 'dormant', dormantSince: 106 })], { hdr: HL23, rng: 0.01, cycle: 110, biz: [['BIZ-00001', 'X', 'Retail', 'Downtown', 2, 40000, 100000, 1, '']] });
+    assert('$2M and no home clears no door: the line stays dormant, TenureCycles frozen at 9, no business roll on a 0.01 draw, revived 0', t2.get('LIN-00004', 'Status') === 'dormant' && t2.get('LIN-00004', 'TenureCycles') === 9 && t2.res.businessesOpened === 0 && t2.res.revived === 0 && t2.get('LIN-00004', 'HeritageTier') === '', JSON.stringify(t2.hl) + JSON.stringify(t2.res));
+    // Door C by the heir: an owned home + $50M revives under the same LineageId; the name comes back, the tenure does not
+    const heirRich = person('POP-00900', 'June', 'Kelley', 'Piedmont Ave', 60000000, 'LIN-00004', { parents: ['POP-00019'], hh: 'HH-9' });
+    const t3 = run([dead, heirRich], [line23('LIN-00004', 'Kelley', 'POP-00019', ['POP-00019', 'POP-00900'], '', 0, 0, '[]', { tenure: 9, peak: 'Established', status: 'dormant', dormantSince: 106 })], { hdr: HL23, cycle: 111, hhs: [owned('HH-9', ['POP-00900'], 'Piedmont Ave')] });
+    assert('June Kelley at $60M in an owned home revives LIN-00004: active, Founding (17.8), TenureCycles 0, PeakTier still Established, DormantSince cleared, founded 0 (no new line)', t3.res.revived === 1 && t3.res.founded === 0 && t3.get('LIN-00004', 'Status') === 'active' && t3.get('LIN-00004', 'HeritageTier') === 'Founding' && t3.get('LIN-00004', 'TenureCycles') === 0 && t3.get('LIN-00004', 'PeakTier') === 'Established' && t3.get('LIN-00004', 'DormantSince') === '' && t3.get('LIN-00004', 'HeritageScore') === 17.8, JSON.stringify(t3.hl));
+    assert('the revival is lived: the [Heritage] revived line names June + HERITAGE_REVIVED; the line is back in lineByPop', /\[Heritage\] the Kelley line revived — June Kelley brought the name back/.test(heirRich[hi('LifeHistory')]) && t3.hooks('HERITAGE_REVIVED').length === 1 && t3.ctx.summary.heritage.lineByPop['POP-00900'].tier === 'Founding', heirRich[hi('LifeHistory')]);
+    // Door B by the heir: apex cash revives without a home
+    const heirApex = person('POP-00900', 'June', 'Kelley', 'Piedmont Ave', 400000000, 'LIN-00004', { parents: ['POP-00019'] });
+    const t4 = run([dead, heirApex], [line23('LIN-00004', 'Kelley', 'POP-00019', ['POP-00019', 'POP-00900'], '', 0, 0, '[]', { peak: 'Established', status: 'dormant', dormantSince: 106 })], { hdr: HL23, cycle: 111 });
+    assert('$400M alone revives by the B bar (no home needed)', t4.res.revived === 1 && t4.get('LIN-00004', 'Status') === 'active');
+  }
+
+  // 5 — businesses: a closed heritage storefront drops off (the slot re-opens); a minted storefront the staker also owns by Key_Personnel counts once
+  {
+    const t = run([person('POP-1', 'Ada', 'Roe', 'Downtown', 100000000, 'LIN-00001', {})],
+      [line23('LIN-00001', 'Roe', 'POP-1', ['POP-1'], 'Established', 100000000, 0, '["BIZ-00001","BIZ-00002"]', { peak: 'Established' })],
+      { hdr: HL23, biz: [['BIZ-00001', 'Roe & Co.', 'Retail', 'Downtown', 4, 40000, 300000, 1, 'POP-1 Ada Roe (founder)'], ['BIZ-00003', 'Roe Holdings', 'Finance', 'Downtown', 10, 90000, 3000000, 2, 'POP-1 Ada Roe']] });
+    assert('BusinessesOwned prunes the archived BIZ-00002; standing counts BIZ-00001 once and BIZ-00003 (bare id+name = owner): 20 + 8 = 28 → Founding (a fall from Established)',
+      t.get('LIN-00001', 'BusinessesOwned') === '["BIZ-00001"]' && t.get('LIN-00001', 'HeritageScore') === 28 && t.get('LIN-00001', 'HeritageTier') === 'Founding' && t.res.demoted === 1, JSON.stringify(t.hl));
+  }
 }
 
 // ═══ engine.160 (S414) — one hood rent rule: the lease is the hood's rule rent, no table ═══

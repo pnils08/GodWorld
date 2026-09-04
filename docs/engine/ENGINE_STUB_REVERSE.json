@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-03",
+  "generated": "2026-09-04",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 188,
-  "functionsMapped": 1296,
+  "functionsMapped": 1297,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4260,6 +4260,7 @@
     },
     "Civic_Office_Ledger": {
       "writers": [
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
       ],
@@ -4270,6 +4271,7 @@
         "phase05-citizens/civicInitiativeEngine.js::getCouncilState_",
         "phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_",
         "phase05-citizens/generateCivicModeEvents.js::buildOfficeLookup_",
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/runCivicElectionsv1.js::runCivicElections_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase05-citizens/updateCivicLedgerFactions.js::getCouncilStateFromLedger_",

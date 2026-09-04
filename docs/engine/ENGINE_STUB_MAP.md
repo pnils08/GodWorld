@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-03 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-04 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1545,6 +1545,8 @@
   Sheets: Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
+- **heritageStanding_(totalNW, generations, civ, fame, businesses, homes, scandal)**
+
 - **heritageTierFor_(score)**
 
 - **heritageRank_(tierName)**
@@ -1561,7 +1563,7 @@
   Reads: S.homesPurchasedByLine, S.storyHooks
   Writes: S.heritage, S.storyHooks
   Config: ctx.config.bizIdHighWater
-  Sheets: Business_Ledger, Cultural_Ledger, Family_Relationships, Heritage_Ledger, Household_Ledger
+  Sheets: Business_Ledger, Civic_Office_Ledger, Cultural_Ledger, Family_Relationships, Heritage_Ledger, Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### householdFormationEngine.js
@@ -3808,4 +3810,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 188
-**Functions mapped:** 1296
+**Functions mapped:** 1297

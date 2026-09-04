@@ -465,7 +465,7 @@ function calculateCitizenIncomes_(ctx) {
     // educationCareerEngine.js. Status 'retired' or CareerStage 'retired'
     // both count; 'inactive' keeps its old skip.
     var sportsRow = isSportsLayerRow_(row, iClockMode, iEconKey);
-    if (sportsRow || !isEngineClockRow_(row, iClockMode)) continue; // GAME / CIVIC / MEDIA are outside this (builder 2026-08-30)
+    if (sportsRow) continue; // engine.162: GAME only (Direction pt 12); CIVIC/MEDIA rejoined 2026-09-04
     // Retirement is an EVENT — Status=Retired — never an age and never the
     // stored CareerStage (builder, 2026-08-30: a birthday retires nobody; 63
     // Active citizens are 65+). Deceased → 0 always. Tier 1–2 exempt like the
@@ -586,7 +586,7 @@ function applyTrackedEmployerFloor_(ctx) {
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     if (!row || !Array.isArray(row)) continue;
-    if (isSportsLayerRow_(row, iClock, iEcon) || !isEngineClockRow_(row, iClock)) continue; // GAME / CIVIC / MEDIA are outside this
+    if (isSportsLayerRow_(row, iClock, iEcon)) continue; // engine.162: GAME only; CIVIC/MEDIA rejoined 2026-09-04
     var status = String(row[iStatus] || 'active').toLowerCase();
     if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
     var tier = iTier >= 0 ? Number(row[iTier]) : 4;
@@ -738,7 +738,7 @@ function applyUntrackedHoodReference_(ctx) {
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     if (!row || !Array.isArray(row)) continue;
-    if (isSportsLayerRow_(row, iClock, iEcon) || !isEngineClockRow_(row, iClock)) continue;
+    if (isSportsLayerRow_(row, iClock, iEcon)) continue; // engine.162: GAME only; CIVIC/MEDIA rejoined 2026-09-04
     var status = String(row[iStatus] || 'active').toLowerCase();
     if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
     var tier = iTier >= 0 ? Number(row[iTier]) : 4;
@@ -901,8 +901,9 @@ function applyOwnerDraw_(ctx, cycle) {
         }
         continue;
       }
-      // off-heritage: the books set the draw — ENGINE clock, Tier 3–4 only (engine.135 re-pay rule)
-      if (typeof isEngineClockRow_ === 'function' && !isEngineClockRow_(orw, iClock)) continue;
+      // off-heritage: the books set the draw — Tier 3–4, sports layer out
+      // (engine.162: the ENGINE-clock half of this gate is gone; a CIVIC or
+      // MEDIA citizen who owns a business draws from its books like anyone)
       if (typeof isSportsLayerRow_ === 'function' && isSportsLayerRow_(orw, iClock, iEcon)) continue;
       var tier = iTier >= 0 ? Number(orw[iTier]) : 4;
       if (tier === 1 || tier === 2) continue;

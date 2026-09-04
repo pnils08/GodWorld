@@ -153,8 +153,8 @@ function ctxWith(rows, cycle) {
     row({ POPID: 'R6', age: 40, CareerStage: 'mid-career', Income: 61000 }),
     row({ POPID: 'R7', age: 12, CareerStage: 'student', Income: 9000 }),
     row({ POPID: 'R8', age: 40, CareerStage: 'mid-career', EconomicProfileKey: '', Income: 0, LifeHistory: '[CareerState] income=mid' }),
-    row({ POPID: 'R12', age: 60, Status: 'Retired', CareerStage: 'retired', ClockMode: 'CIVIC', Income: 120000 }), // CIVIC retired: outside
-    row({ POPID: 'R13', age: 45, Status: 'deceased', ClockMode: 'MEDIA', Income: 90000 }),                        // MEDIA deceased: outside
+    row({ POPID: 'R12', age: 60, Status: 'Retired', CareerStage: 'retired', ClockMode: 'CIVIC', Income: 120000 }), // engine.162: CIVIC rejoined D5
+    row({ POPID: 'R13', age: 45, Status: 'deceased', ClockMode: 'MEDIA', Income: 90000 }),                        // engine.162: MEDIA rejoined D5
   ];
   const ctx = ctxWith(rows); ctx.rng = () => 0.5;
   const res = calculateCitizenIncomes_(ctx);
@@ -170,9 +170,14 @@ function ctxWith(rows, cycle) {
   assert('D5 Active 64-year-old stamped retired keeps her salary', inc('R9') === 83497, inc('R9'));
   assert('D5 Tier-1 retired star untouched', inc('R10') === 223635, inc('R10'));
   assert('D5 68-year-old Active senior keeps salary — no age retires anyone', inc('R11') === 90000, inc('R11'));
-  assert('D5 CIVIC retired row untouched', inc('R12') === 120000, inc('R12'));
-  assert('D5 MEDIA deceased row untouched', inc('R13') === 90000, inc('R13'));
-  assert('D5 updated count: R2 (deceased) + R3 (Status Retired) zeroed + minor + fill', res.updated === 4, JSON.stringify(res));
+  // engine.162 (builder 2026-09-04): money applies to every clock. A retired
+  // CIVIC office-holder and a deceased MEDIA staffer are zeroed like anyone
+  // else; only the sports layer (R4/R5) keeps its own door.
+  assert('D5 CIVIC retired row zeroed', inc('R12') === 0, inc('R12'));
+  assert('D5 MEDIA deceased row zeroed', inc('R13') === 0, inc('R13'));
+  assert('D5 GAME retired row still untouched — the sports layer keeps its carve-out',
+    inc('R4') === 2000000, inc('R4'));
+  assert('D5 updated count: R2 + R3 + R12 + R13 zeroed + minor + fill', res.updated === 6, JSON.stringify(res));
 }
 
 // ── D3. tracked-employer Income floor ───────────────────────────────────────
@@ -201,7 +206,8 @@ function ctxWith(rows, cycle) {
     row2({ POPID: 'F11', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', Status: 'deceased' }),
     row2({ POPID: 'F12', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-99999' }),    // employer not on ledger
     row2({ POPID: 'F13', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00005' }),    // ENGINE row at a sports franchise: athlete avg must not floor it
-    row2({ POPID: 'F14', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', ClockMode: 'CIVIC' }), // CIVIC: no floor
+    row2({ POPID: 'F14', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', ClockMode: 'CIVIC' }), // engine.162: CIVIC rejoined D3
+    row2({ POPID: 'F15', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', ClockMode: 'MEDIA' }), // engine.162: MEDIA rejoined D3
   ];
   const ctx = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {},
     ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL.map(r => r.slice()) }) } : null } };
@@ -220,8 +226,11 @@ function ctxWith(rows, cycle) {
   assert('D3 deceased: no floor', inc('F11') === 30000, inc('F11'));
   assert('D3 unknown employer id: no floor', inc('F12') === 30000, inc('F12'));
   assert('D3 sports-franchise employer sets no floor for an ENGINE row', inc('F13') === 30000, inc('F13'));
-  assert('D3 CIVIC row gets no floor', inc('F14') === 30000, inc('F14'));
-  assert('D3 result counts', res.raised === 3 && res.checked >= 3, JSON.stringify(res));
+  // engine.162: a city-hall clerk and a newsroom staffer are paid what their
+  // employer pays, same floor as everyone else. GAME (F9) still is not.
+  assert('D3 CIVIC row gets the floor', inc('F14') === 45000, inc('F14'));
+  assert('D3 MEDIA row gets the floor', inc('F15') === 45000, inc('F15'));
+  assert('D3 result counts', res.raised === 5 && res.checked >= 5, JSON.stringify(res));
   assert('D3 no LifeHistory line (a floor correction is not an event)', ctx.ledger.rows.every(r => String(r[I2('LifeHistory')]) === 'Y1C1 — born'));
   assert('D3 ledger dirty', ctx.ledger.dirty === true);
   const ctxNoBL = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {}, ss: { getSheetByName: () => null } };

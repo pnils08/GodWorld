@@ -138,7 +138,7 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
     row({ POPID: 'P4', Income: 20000, EmployerBizId: '' }),                                       // unemployed → out of scope
     row({ POPID: 'P5', Income: 20000, EmployerBizId: 'BIZ-1' }),                                  // tracked → D3's
     row({ POPID: 'P6', Income: 20000, ClockMode: 'GAME' }),
-    row({ POPID: 'P7', Income: 20000, ClockMode: 'CIVIC' }),
+    row({ POPID: 'P7', Income: 20000, ClockMode: 'CIVIC' }),   // engine.162: CIVIC rejoined the hood reference pay
     row({ POPID: 'P8', Income: 20000, Tier: 2 }),
     row({ POPID: 'P9', Income: 20000, age: 19, CareerStage: 'student' }),
     row({ POPID: 'P10', Income: 20000, Status: 'Retired' }),
@@ -153,10 +153,13 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   assert('P1 raised to Temescal bakery pay', inc('P1') === ref(36000, 1.0, 'P1'), inc('P1'));
   assert('P2 raised to Downtown law × 1.3', inc('P2') === ref(130000, 1.3, 'P2'), inc('P2'));
   assert('P3 above reference untouched', inc('P3') === 90000);
-  for (const [p, why] of [['P4', 'unemployed'], ['P5', 'tracked'], ['P6', 'GAME'], ['P7', 'CIVIC'], ['P8', 'Tier 2'], ['P9', 'student'], ['P10', 'retired'], ['P11', 'deceased'], ['P12', 'sports'], ['P13', 'no reference']])
+  for (const [p, why] of [['P4', 'unemployed'], ['P5', 'tracked'], ['P6', 'GAME'], ['P8', 'Tier 2'], ['P9', 'student'], ['P10', 'retired'], ['P11', 'deceased'], ['P12', 'sports'], ['P13', 'no reference']])
     assert(p + ' ' + why + ' untouched', inc(p) === 20000, inc(p));
   assert('P14 SkillTags → clinic pay', inc('P14') === ref(88000, 1.0, 'P14'), inc('P14'));
-  assert('raised = 3, nobody lowered', out.raised === 3 && out.lowered === undefined, JSON.stringify(out));
+  // engine.162: CIVIC/MEDIA rejoin the hood reference pay; GAME (P6) and the
+  // sports layer (P12) keep their own door.
+  assert('CIVIC row now raised to the hood reference', inc('P7') > 20000, inc('P7'));
+  assert('raised = 4, nobody lowered', out.raised === 4 && out.lowered === undefined, JSON.stringify(out));
   assert('ledger dirty', ctx.ledger.dirty === true);
   assert('second pass moves nobody', applyUntrackedHoodReference_(ctx).raised === 0);
 }

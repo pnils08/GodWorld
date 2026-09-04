@@ -340,7 +340,8 @@ function deriveMinorEducationStage_(ctx, cycle) {
     var row = rows[r];
     if (!row || !Array.isArray(row)) continue;
     if (String(row[iStatus] || 'active').toLowerCase() === 'deceased') continue;
-    if (!isEngineClockRow_(row, iClock)) continue;
+    // engine.162: education applies to every clock. Sports rows stay out —
+    // a 16-year-old under contract is a professional, not a student.
     if (isSportsLayerRow_(row, iClock, iEcon)) continue;
     var by = Number(row[iBirth]) || 0;
     if (by <= 0) continue;
@@ -407,11 +408,22 @@ function isSportsLayerRow_(row, iClock, iEcon) {
 }
 
 /**
- * engine.135 (builder 2026-08-30): "game, civic and media are outside these."
- * The employment cascade's stage derivation (E1), tracked-employer floor
- * (D3) and retired/deceased zeroing (D5) apply to ClockMode=ENGINE rows
- * only. GAME rows are Paulson's, CIVIC and MEDIA rows are authored offices
- * and newsroom staff. A blank ClockMode reads as ENGINE.
+ * engine.162 (builder 2026-09-04, plan §Direction fourth pass): this gate now
+ * covers exactly ONE lane — the E1 career-stage derivation. It used to hold
+ * GAME/CIVIC/MEDIA out of the money and education work as well; the builder's
+ * rule is that "money and education apply to all", so those five call sites
+ * are gone and CIVIC/MEDIA rejoin the economy they were carved out of.
+ *
+ * What still keeps each clock out of the career lane is its own door, not
+ * this gate: GAME is the builder's domain outright, CIVIC moves on approval
+ * ratings or retirement, MEDIA has no system yet beyond retirement. None of
+ * those are an age-derived stage re-stamp, which is what this gate blocks.
+ *
+ * GAME's money is carved out separately and still is — by isSportsLayerRow_
+ * at every money site, per Direction point 12 ("sports-layer salaries exempt;
+ * the game engine owns them"), which the fourth pass did not revoke.
+ *
+ * A blank ClockMode reads as ENGINE.
  */
 function isEngineClockRow_(row, iClock) {
   if (iClock < 0) return true;

@@ -68,7 +68,7 @@ console.log('\n2. deriveMinorEducationStage_ — minors restamp, adults untouche
     kid(30, 'bachelors'),            // adult — untouched
     kid(18, 'hs-diploma'),           // 18 — settlement's, untouched
     kid(9, 'Pre-K', { ClockMode: 'GAME' }),        // sports layer — skipped
-    kid(9, 'Pre-K', { ClockMode: 'CIVIC' }),       // outside E1 scope — skipped
+    kid(9, 'Pre-K', { ClockMode: 'CIVIC' }),       // engine.162: education applies to every clock
     kid(9, 'Pre-K', { Status: 'Deceased' }),       // skipped
   ];
   const ctx = ctxOf(rows);
@@ -80,8 +80,13 @@ console.log('\n2. deriveMinorEducationStage_ — minors restamp, adults untouche
   check('16yo High School untouched', out[3] === 'High School');
   check('30yo bachelors untouched', out[4] === 'bachelors');
   check('18yo hs-diploma untouched (settlement owns 18)', out[5] === 'hs-diploma');
-  check('GAME / CIVIC / deceased rows untouched', out[6] === 'Pre-K' && out[7] === 'Pre-K' && out[8] === 'Pre-K');
-  check('counts: 4 minors in scope, 3 restamped', res.minors === 4 && res.restamped === 3, JSON.stringify(res));
+  // engine.162 (builder 2026-09-04): education applies to every clock. The
+  // 9-year-old on the CIVIC clock is stamped Elementary like any other child;
+  // GAME stays out (a minor under contract is the sports layer's) and the
+  // deceased row stays out.
+  check('GAME / deceased rows untouched', out[6] === 'Pre-K' && out[8] === 'Pre-K');
+  check('CIVIC minor now schooled', out[7] === 'Elementary', out[7]);
+  check('counts: 5 minors in scope, 4 restamped', res.minors === 5 && res.restamped === 4, JSON.stringify(res));
   check('ledger flagged dirty', ctx.ledger.dirty === true);
 }
 

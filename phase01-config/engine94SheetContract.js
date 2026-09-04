@@ -109,6 +109,24 @@ var ENGINE157_CONFIG_SEEDS = [
   ['maneuverDriveWeight', 0.7, 'engine.157 weight of drive in the ambition blend (openness carries the rest)', 0, 1, false]
 ];
 
+var ENGINE161_CONFIG_SEEDS = [
+  ['relocationMaxShare', 0.05, 'engine.161 per-cycle relocation ceiling as a share of the movable units (households + solo citizens with income) — a stampede guard, never a quota; ≈43 of 849 at C105', 0.005, 0.5, false]
+];
+
+function ensureEngine161Config_(ss) {
+  if (!ss) throw new Error('engine.161 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.161 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE161_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE161_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.161 config: post-write verification failed');
+  }
+  Logger.log('engine.161 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 function ensureEngine157Config_(ss) {
   if (!ss) throw new Error('engine.157 config: spreadsheet required');
   var configSheet = ss.getSheetByName('World_Config');

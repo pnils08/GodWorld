@@ -222,6 +222,7 @@ function runWorldCycle() {
     ensureEngine96Config_(ss);   // engine.96 business lifecycle keys, same self-arm contract
     ensureEngine160Config_(ss);  // engine.160 hoodRentShare — the one hood rent rule, same self-arm contract
     ensureEngine157Config_(ss);  // engine.157 maneuver posture keys, same self-arm contract
+    ensureEngine161Config_(ss);  // engine.161 relocationMaxShare — the stampede guard, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet

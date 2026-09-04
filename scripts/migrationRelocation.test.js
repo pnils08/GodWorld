@@ -125,7 +125,7 @@ function buildCtx(slRows, hhRows, rngFn, nmRows) {
     ss: mockSS(sheets),
     ledger: { headers: SL_HEADER.slice(), rows: slRows, dirty: false },
     summary: { cycleId: 200, storyHooks: [] },
-    config: { cycleCount: 200, hoodRentShare: 0.30 }, // engine.160: the one hood rent rule's share
+    config: { cycleCount: 200, hoodRentShare: 0.30, relocationMaxShare: 0.05 }, // engine.160 rent share; engine.161 the stampede guard
     rng: rngFn,
     now: '2041-06-01T00:00:00.000Z',
     _sheets: sheets
@@ -225,7 +225,7 @@ console.log('A2d savings buffer suppresses burden risk');
       Household_Ledger: mockSheet([HH2.slice(), hhRow])
     };
     return { ss: mockSS(sheets), ledger: { headers: SL_HEADER.slice(), rows: sl, dirty: false },
-      summary: { cycleId: 200, storyHooks: [] }, config: { cycleCount: 200, hoodRentShare: 0.30 }, rng: () => 0.99, now: 'x', _sheets: sheets };
+      summary: { cycleId: 200, storyHooks: [] }, config: { cycleCount: 200, hoodRentShare: 0.30, relocationMaxShare: 0.05 }, rng: () => 0.99, now: 'x', _sheets: sheets };
   };
   const ctxA = mk(slA, mkHH('HH-B1', 'POP-5', 0));
   const ctxB = mk(slB, mkHH('HH-B2', 'POP-6', 2600 * 12));
@@ -240,23 +240,28 @@ console.log('A2d savings buffer suppresses burden risk');
 console.log('A10 MASS_EXODUS threshold on planning intent');
 {
   rippleCalls = []; cellIntents = [];
-  // 5 renters in Middleton at burden>50% + no-college + senior = risk 8 ->
-  // planning. 5 more without senior = risk 7 -> considering (must NOT count).
+  // engine.161 (S416): the burden is the cause, so the fixture splits on the
+  // burden lines, not on the senior weight. 5 renters in Middleton at 78 % of
+  // income (2600 x 12 / 40000) are over RENT_BURDEN_CRISIS -> planning; 5 more
+  // at 45 % (1500 x 12 / 40000) sit between warning and crisis -> considering,
+  // and a considering row must NOT count toward the exodus.
   const hh = [], sl = [];
   for (let i = 0; i < 10; i++) {
     const hhId = 'HH-E' + i;
-    hh.push([hhId, 'POP-8' + i, 'single', '[]', 'Middleton', 'rented', 2600, 0, 40000, 100, '', 'active', '', '']);
+    hh.push([hhId, 'POP-8' + i, 'single', '[]', 'Middleton', 'rented', i < 5 ? 2600 : 1500, 0, 40000, 100, '', 'active', '', '']);
     sl.push(citizen('POP-8' + i, 'Ex', 'Od' + i, 'Middleton', 40000,
       { hh: hhId, edu: 'hs-diploma', birthYear: i < 5 ? 1970 : 2000 }));
   }
   const ctx = buildCtx(sl, hh, () => 0.99); // no relocation rolls pass
   runBoth(ctx);
   const planning = sl.filter(r => r[col('MigrationIntent')] === 'planning-to-leave').length;
-  assert('exactly 5 planning (seniors)', planning === 5, String(planning));
+  const considering = sl.filter(r => r[col('MigrationIntent')] === 'considering').length;
+  assert('exactly 5 planning (the crisis-burden half), 5 considering', planning === 5 && considering === 5,
+    planning + '/' + considering);
   const exodus = ctx.summary.storyHooks.filter(h => h.hookType === 'MASS_EXODUS');
   assert('one MASS_EXODUS for Middleton', exodus.length === 1 && exodus[0].neighborhood === 'Middleton',
     JSON.stringify(exodus.map(h => h.neighborhood)));
-  assert('exodus count = planning count, not risk>=7 count', exodus[0].atRiskCount === 5,
+  assert('exodus count = planning count; a considering row never inflates it', exodus[0].atRiskCount === 5,
     String(exodus[0].atRiskCount));
 }
 
@@ -315,13 +320,38 @@ console.log('A4 misfit lane upward sort');
 console.log('A5 relocation cap');
 {
   rippleCalls = []; cellIntents = [];
-  // 6 independent misfit citizens, all rolls pass — only MAX (2) may move.
+  // engine.161: 60 independent misfit citizens, all rolls pass — the ceiling is a
+  // share of the movable units (0.05 × 60 = 3), not a fixed 2.
   const sl = [];
-  for (let i = 0; i < 6; i++) sl.push(citizen('POP-3' + i, 'Cit', 'N' + i, 'Lowmarket', 160000, { edu: 'masters' }));
+  for (let i = 0; i < 60; i++) sl.push(citizen('POP-3' + i, 'Cit', 'N' + i, 'Lowmarket', 160000, { edu: 'masters' }));
   const ctx = buildCtx(sl, [], () => 0.0);
   runBoth(ctx);
   const movedN = sl.filter(r => r[col('Neighborhood')] !== 'Lowmarket').length;
-  assert('exactly 2 units moved (cap)', movedN === 2, String(movedN));
+  assert('exactly 3 units moved (5 % of 60 movable units)', movedN === 3, String(movedN));
+  const six = []; for (let i = 0; i < 6; i++) six.push(citizen('POP-5' + i, 'Cit', 'S' + i, 'Lowmarket', 160000, { edu: 'masters' }));
+  const c6 = buildCtx(six, [], () => 0.0); runBoth(c6);
+  assert('a tiny city still moves one (ceil, floor 1)', six.filter(r => r[col('Neighborhood')] !== 'Lowmarket').length === 1);
+  let threw = ''; try { buildCtx([citizen('POP-Z', 'Z', 'Z', 'Lowmarket', 160000)], [], () => 0.0); const cz = buildCtx([citizen('POP-Z', 'Z', 'Z', 'Lowmarket', 160000)], [], () => 0.0); delete cz.config.relocationMaxShare; runBoth(cz); } catch (e) { threw = e.message; }
+  assert('a missing relocationMaxShare throws naming the key', /relocationMaxShare/.test(threw), threw);
+}
+
+// ═══ A5b: engine.161 — the burden is the cause ═════════════════════════════
+console.log('A5b burden → intent → the escape');
+{
+  rippleCalls = []; cellIntents = [];
+  // one renter household in low-pressure Middleton paying 60 % of income
+  // (2000 x 12 / 40000), college-educated, not senior: every OTHER risk weight
+  // is 0 or 1, so DisplacementRisk lands at 5 — under the old >=8 planning gate.
+  const sl = [citizen('POP-60', 'Ren', 'Ter', 'Middleton', 40000, { edu: 'masters', hh: 'HH-B1' })];
+  const hh = [['HH-B1', 'POP-60', 'solo', '["POP-60"]', 'Middleton', 'rented', 2000, 0, 40000, 100, '', 'active', '', '']];
+  const ctx = buildCtx(sl, hh, () => 0.0);
+  runBoth(ctx);
+  assert('risk stays under the old >=8 planning gate', Number(sl[0][col('DisplacementRisk')]) < 8, String(sl[0][col('DisplacementRisk')]));
+  assert('the 60 % burden alone moved the household out — priced out', sl[0][col('Neighborhood')] !== 'Middleton' && sl[0][col('MigrationReason')] === 'cost', sl[0][col('Neighborhood')] + ' / ' + sl[0][col('MigrationReason')]);
+  const sl2 = [citizen('POP-61', 'War', 'Ning', 'Middleton', 40000, { edu: 'masters', hh: 'HH-B2' })];
+  const hh2 = [['HH-B2', 'POP-61', 'solo', '["POP-61"]', 'Middleton', 'rented', 1500, 0, 40000, 100, '', 'active', '', '']];
+  const ctx2 = buildCtx(sl2, hh2, () => 0.99); runBoth(ctx2);
+  assert('a 45 % burden reads considering, not planning', sl2[0][col('MigrationIntent')] === 'considering', sl2[0][col('MigrationIntent')]);
 }
 
 // ═══ A6: nodes permanent ═════════════════════════════════════════════════════

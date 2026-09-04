@@ -169,7 +169,7 @@ console.log('the consumers — the solo door and relocation read the factor thro
   const src = fs.readFileSync(path.join(__dirname, '../phase05-citizens/householdFormationEngine.js'), 'utf8');
   assert('solo door multiplies by maneuverFactor_(ctx, pop, "establish")', /SOLO_ESTABLISH_CHANCE \* soloF/.test(src) && /maneuverFactor_\(ctx, pop, 'establish'\)/.test(src));
   const mig = fs.readFileSync(path.join(__dirname, '../phase05-citizens/migrationTrackingEngine.js'), 'utf8');
-  assert('relocation lane chance multiplies by the unit head\'s factor', /chance \*= maneuverFactor_\(ctx, rows\[unit\.rowIdxs\[0\]\]\[iPOPID\], null\)/.test(mig));
+  assert('relocation: the misfit lane multiplies by the unit head\'s factor; the pressure lane does not (engine.161)', /if \(lane === 'misfit' && typeof maneuverFactor_ === 'function'\) chance \*= maneuverFactor_\(ctx, rows\[unit\.rowIdxs\[0\]\]\[iPOPID\], null\)/.test(mig));
   const car = fs.readFileSync(path.join(__dirname, '../phase05-citizens/runCareerEngine.js'), 'utf8');
   assert('career: a zero-same-field window takes willing climbers only', /if \(!sameField\.length && typeof maneuverWillingCrossField_ === 'function'\)/.test(car));
   const eng = fs.readFileSync(path.join(__dirname, '../phase01-config/godWorldEngine2.js'), 'utf8');

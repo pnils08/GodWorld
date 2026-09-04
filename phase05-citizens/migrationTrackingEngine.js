@@ -117,7 +117,12 @@ var RISK_WEIGHTS = {
 // their economic life actually fits, using the same-cycle trajectory state
 // exported by Phase5-Trajectory (ctx.summary.neighborhoodTrajectory).
 var RELOCATION = {
-  MAX_UNITS_PER_CYCLE: 2,     // hard cap — moves are rare, qualitative (1:438 sample)
+  // engine.161 (S416, builder 2026-09-04: "2 is too slow and defeats everything we
+  // just built"): the per-cycle ceiling is a SHARE of the city's movable units
+  // (World_Config relocationMaxShare, 0.05 → ≈43 of 849 at C105), not a fixed 2.
+  // It exists only to stop a whole-city stampede in one week; normal cycles
+  // (≈5–12 attempts) never touch it. Physics decides who moves.
+  MAX_UNITS_PER_CYCLE: 2,     // legacy floor — the share rule below replaces it (relocationCap_)
   PRESSURE_MOVE_CHANCE: 0.35, // per-cycle roll for planning-to-leave units
   MISFIT_MOVE_CHANCE: 0.15,   // per-cycle roll for economic-misfit units (slower burn)
   MISFIT_INCOME_RATIO: 2.5,   // unit income >= 2.5x hood median income = under-housed
@@ -254,6 +259,11 @@ function assessDisplacementRisk_(ctx, cycle) {
           var rentBurden = Math.round((hInfo.rent * 12 / annualIncome) * 100);
           if (rentBurden > 50) risk += RISK_WEIGHTS.RENT_BURDEN_HIGH;
           if (rentBurden > 30) risk += 1;
+          // engine.161: the burden itself is the cause the intent step reads —
+          // a household paying half its income in rent plans to leave whatever
+          // its education or its hood's pressure says. Same-cycle, ctx-scoped.
+          if (!ctx._unitBurden) ctx._unitBurden = {};
+          ctx._unitBurden[householdId] = rentBurden / 100;
         }
       }
     }
@@ -376,8 +386,17 @@ function updateMigrationIntent_(ctx, cycle) {
   var iStatus = idx('Status');
   var iDisplRisk = idx('DisplacementRisk');
   var iMigIntent = idx('MigrationIntent');
+  var iHH = idx('HouseholdId');
 
   if (iMigIntent < 0 || iDisplRisk < 0) return { updated: 0 };
+
+  // engine.161: the household engine's own lines (RENT_BURDEN_CRISIS 0.50 /
+  // RENT_BURDEN_WARNING 0.40, householdFormationEngine.js) — a household at
+  // the crisis line plans to leave; at the warning line it considers. The
+  // relocation is the escape the crisis dissolution otherwise beats to it.
+  var burdenPlan = (typeof RENT_BURDEN_CRISIS === 'number') ? RENT_BURDEN_CRISIS : 0.50;
+  var burdenConsider = (typeof RENT_BURDEN_WARNING === 'number') ? RENT_BURDEN_WARNING : 0.40;
+  var unitBurden = ctx._unitBurden || {};
 
   var updated = 0;
 
@@ -388,13 +407,15 @@ function updateMigrationIntent_(ctx, cycle) {
 
     var displRisk = Number(row[iDisplRisk]) || 0;
     var currentIntent = (row[iMigIntent] || 'staying').toString().toLowerCase();
+    var hhKey = iHH >= 0 ? String(row[iHH] || '').trim() : '';
+    var burden = hhKey && unitBurden[hhKey] !== undefined ? unitBurden[hhKey] : 0;
 
-    // Update intent based on risk
+    // Update intent based on risk — and, engine.161, on the burden itself
     var newIntent = currentIntent;
 
-    if (displRisk >= 8) {
+    if (displRisk >= 8 || burden >= burdenPlan) {
       newIntent = MIGRATION_INTENT.PLANNING;
-    } else if (displRisk >= 5) {
+    } else if (displRisk >= 5 || burden >= burdenConsider) {
       newIntent = MIGRATION_INTENT.CONSIDERING;
     } else {
       newIntent = MIGRATION_INTENT.STAYING;
@@ -574,6 +595,17 @@ function scoreHoodFit_(unitIncome, hood) {
   return { score: score, burden: burden };
 }
 
+// engine.161: the per-cycle move ceiling = World_Config relocationMaxShare × the
+// movable units this cycle, at least 1. Missing key throws (ADR-0015, the
+// engine.160 pattern) — the self-arm at open seeds it.
+function relocationCap_(ctx, unitCount) {
+  var share = ctx && ctx.config ? Number(ctx.config.relocationMaxShare) : NaN;
+  if (isNaN(share) || share <= 0) {
+    throw new Error('relocationCap_: World_Config relocationMaxShare missing or ≤ 0 — the engine.161 self-arm did not run (ADR-0015).');
+  }
+  return Math.max(1, Math.ceil(share * (Number(unitCount) || 0)));
+}
+
 function processRelocations_(ctx, cycle) {
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
@@ -632,7 +664,8 @@ function processRelocations_(ctx, cycle) {
 
   // ── Eligibility + roll + cap ──────────────────────────────────────────────
   var moved = 0;
-  for (var u2 = 0; u2 < units.length && moved < RELOCATION.MAX_UNITS_PER_CYCLE; u2++) {
+  var cap = relocationCap_(ctx, units.length); // engine.161: a share of the movable units
+  for (var u2 = 0; u2 < units.length && moved < cap; u2++) {
     var unit = units[u2];
     if (unit.income <= 0 || !unit.rowIdxs.length) continue;
 
@@ -642,8 +675,10 @@ function processRelocations_(ctx, cycle) {
     if (!lane) continue;
 
     var chance = lane === 'pressure' ? RELOCATION.PRESSURE_MOVE_CHANCE : RELOCATION.MISFIT_MOVE_CHANCE;
-    // engine.157: the unit's first member (the household head in row order) carries the posture
-    if (typeof maneuverFactor_ === 'function') chance *= maneuverFactor_(ctx, rows[unit.rowIdxs[0]][iPOPID], null);
+    // engine.157 / .161: the posture multiplies the MISFIT lane only (moving up is
+    // ambition); the pressure lane is the crisis escape and runs at its own odds —
+    // a household pulling in under debt is not made slower to leave a rent it cannot carry.
+    if (lane === 'misfit' && typeof maneuverFactor_ === 'function') chance *= maneuverFactor_(ctx, rows[unit.rowIdxs[0]][iPOPID], null);
     if (rng() >= chance) continue;
 
     // ── Destination: best deterministic fit, must clear current by margin ──

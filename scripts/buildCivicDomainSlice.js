@@ -88,6 +88,12 @@ const HEALTH_KIND_SCORES = Object.freeze({
 });
 const HEALTH_FALLBACK_SCORE = 12;
 const CARMEN_LEDGER_KINDS = /^(?:initiative|vote|decision)$/i;
+// Noah Tan's lane. parseSeasonFeel also reads the ### Health bullets — a
+// "seasonal health concern" is a season-feel row there and matches Dr.
+// Mezran's keywords, so without this gate she can claim his entry at the
+// generic score and defeat the tiering below. The same content reaches her
+// as health-lived-seasonal, ranked under every other health record.
+const NOAH_SEASON_KINDS = /^(?:season-feel|weather)$/i;
 
 function summarySection(md, heading) {
   const lines = String(md || '').split(/\r?\n/);
@@ -410,6 +416,7 @@ function scoreEntryForSeat(entry, slug) {
     if (CARMEN_LEDGER_KINDS.test(entry.kind)) {
       return MATCHERS[slug].test(text) ? HEALTH_FALLBACK_SCORE : 0;
     }
+    if (NOAH_SEASON_KINDS.test(entry.kind)) return 0;
     return MATCHERS[slug].test(text) ? 45 : 0;
   }
   if (slug === 'noah-tan' && entry.kind === 'season-feel') return 80;

@@ -62,6 +62,7 @@ try {
     '| Vehicle | Outcome | Target | Metric | Magnitude | Floor fired |',
     '|---|---|---|---|---|---|',
     '| ambulance | workplace_accident | citizen POP-90002 (T2) | Hospitalized | 0 | FALSE |',
+    '| ambulance | traffic_collision | citizen POP-90004 (T4) | Hospitalized | 0 | FALSE |',
     '| cop_car | ticket | citizen POP-90001 (T4) | Setback | 0 | FALSE |',
     ''
   ].join('\n'));
@@ -131,10 +132,19 @@ try {
   assert(lilaKinds.includes('health-lived-seasonal'), 'seasonal health rows stay available, tiered below');
   assert(lila.candidates.some(row => row.ref === 'INIT-HEALTH' && row.score === 12),
     'the civic health initiative survives only as a last-resort fallback');
+  assert(!lilaKinds.includes('season-feel'),
+    'a season-feel row is Noah Tan\u2019s, whatever keywords it happens to carry');
+  assert.strictEqual(civic.scoreEntryForSeat(
+    { kind: 'season-feel', label: 'Someone dealt with a seasonal health concern', ref: 'X' },
+    'lila-mezran'), 0);
   assert(!/POP-90002/.test(JSON.stringify(lila.candidates)),
     'a pro athlete stays out of the civic health beat, as with Luis');
-  assert(!lilaKinds.includes('health-hospitalization'),
-    'the only hospitalization on record belongs to the excluded athlete');
+  assert(lilaKinds.includes('health-hospitalization'),
+    'a civic-eligible hospitalization reaches the health beat');
+  assert(lila.candidates.some(row => row.kind === 'health-hospitalization' &&
+    row.label === 'Test Seasonal Resident was hospitalized after a traffic collision.' &&
+    row.hood === 'Laurel'),
+    'the hospitalization names the citizen and resolves the hood from the ledger');
   assert.notDeepStrictEqual(lila.story.popids, slice.packets['noah-tan'].story.popids,
     'the health seat and the season seat must not land on the same citizen');
   assert.strictEqual(civic.scoreEntryForSeat(

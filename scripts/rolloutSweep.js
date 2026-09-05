@@ -29,6 +29,14 @@ const ARCHIVE = path.join(ROOT, 'docs', 'engine', 'ROLLOUT_ARCHIVE.md');
 const STATE_TOKEN = ' | done-pending-archive | ';
 const ROW_ID = /^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/;
 const PASS_HEADER = /^## S(\d+) Archive Pass\b.*$/gm;
+
+// Local date, not UTC — toISOString() rolls to tomorrow's date in evening
+// sessions west of UTC, which mismatches every other dated entry in this repo.
+function localDateStr() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
 // New pass inserts immediately above the newest existing pass (highest session
 // number), auto-detected from the archive — no hand-maintained anchor (S263 loop-tighten).
 function findNewestPassAnchor(archiveText) {
@@ -92,7 +100,7 @@ function main() {
   const apply = process.argv.includes('--apply');
   const session = arg('session', '');
   if (!session) { console.error('FATAL: --session=<N> required (current session number for the pass header).'); process.exit(1); }
-  const date = arg('date', new Date().toISOString().slice(0, 10));
+  const date = arg('date', localDateStr());
   const label = arg('label', `post-S${Number(session) - 1} closures sweep`);
 
   const rolloutText = fs.readFileSync(ROLLOUT, 'utf8');

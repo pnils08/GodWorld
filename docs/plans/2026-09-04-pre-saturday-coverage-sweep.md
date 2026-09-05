@@ -49,7 +49,7 @@ Built `scripts/preSaturdayCoverageSweep.js` + `.test.js`, wired `reconcileRheaDi
 
 ### S418 — registered in ROLLOUT_PLAN (2026-09-04)
 
-Filed as `pipeline.64`, `in-progress` (not `done-pending-archive`): the fix landed and one live run confirmed the core retry mechanism, but acceptance per [[feedback_no-manual-pipeline-demos]] is the next *unattended* Saturday firing, not this hand-observed one. Close the row once a Saturday cron run confirms clean without the traced gate-parse artifact recurring.
+Filed as `pipeline.64`, `in-progress` (not `done-pending-archive`): the fix landed and one live run confirmed the core retry mechanism, but acceptance per the memory rule "no manual pipeline demos" is the next *unattended* Saturday firing, not this hand-observed one. Close the row once a Saturday cron run confirms clean without the traced gate-parse artifact recurring.
 
 ---
 
@@ -61,4 +61,4 @@ None — the S417 build is complete; the only remaining step is passive (watch t
 
 ## Changelog
 
-- 2026-09-04 — Initial plan filed retroactively (S418, research-build). Work itself shipped S417; this doc + the ROLLOUT_PLAN row were the missing registration, blocked at the time by the rollout lint's then-292 non-conforming legacy rows (cleared same session — see [[../engine/ROLLOUT_PLAN]] S418 archive pass).
+- 2026-09-04 — Initial plan filed retroactively (S418, research-build). Work shipped S417; filing was blocked by the rollout lint's pre-existing over-budget rows (5 measured, cleared same session).

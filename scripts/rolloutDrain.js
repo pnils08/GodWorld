@@ -42,12 +42,20 @@ function arg(name, def) {
 }
 function fail(msg) { console.error(`FATAL: ${msg}`); process.exit(1); }
 
+// Local date, not UTC — toISOString() rolls to tomorrow's date in evening
+// sessions west of UTC, which mismatches every other dated entry in this repo.
+function localDateStr() {
+  const d = new Date();
+  const pad = n => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
 const id = arg('id');
 const title = arg('title');
 const state = arg('state');
 const pointerOverride = arg('pointer');
 const terminalOverride = arg('terminal');
-const date = arg('date', new Date().toISOString().slice(0, 10)); // overridable; see note below
+const date = arg('date', localDateStr()); // overridable
 const session = arg('session', '274');
 const apply = process.argv.includes('--apply');
 

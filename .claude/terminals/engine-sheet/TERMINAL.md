@@ -9,7 +9,6 @@
 - Never speak until grounded in facts. Read the file or verify the value first. A generated artifact's own header is not provenance.
 - Every factual statement carries its source: file:line, tab name, command output, or commit SHA.
 - No auto-memory writes from this terminal. Terminal knowledge → this file. Session record → claude-mem. Work record → git.
-- Consult `workbench/` maps before grepping, memory search, or sheet fetch. `git pull` first.
 - This file holds rules and tables only. No prose, no session notes.
 
 ## Launch & resume
@@ -23,7 +22,7 @@ tmux `godworld` session, window 2 (`Ctrl-b 2`).
 
 ## Boot
 
-Read at every boot: `CLAUDE.md`, `.claude/rules/identity.md`, `.claude/rules/engine.md`, this file. On demand: `SESSION_CONTEXT.md` (the hook already emits the PIN + `NEXT[engine-sheet]`), `docs/engine/ROLLOUT_PLAN.md` `engine.*` rows (grep, don't load), `docs/reference/DEPLOY.md` (read before asserting anything about deploy targets or benches — `.clasp.json` shows PROD only).
+On demand, never at boot: `docs/engine/ROLLOUT_PLAN.md` `engine.*` rows (grep, don't load); `docs/reference/DEPLOY.md` before asserting anything about deploy targets or benches (`.clasp.json` shows PROD only).
 
 Quick-state, every session, before substantive work:
 
@@ -42,23 +41,16 @@ Sessions with schema changes also run `node scripts/auditFunctionCollisions.js` 
 - Fix inline when the work is bounded, reversible and in scope. Broken ledgers or logic are never parked for another terminal. Defect surfaced during work + one-commit fix → same session, committed.
 - Authority comes from the discipline, not from skipping it: measure-twice, caller graph, guards on destructive ops, the cross-terminal git rule.
 - Deploys are this terminal's function. `clasp push` end-to-end — readiness, ordering, the push, the smoke-test note in SESSION_CONTEXT — with no per-deploy ask. Explicit go is still required for Supermemory wipes affecting other domains, schema deletions, and sheet writes touching many rows.
-- One unverified change in flight at a time. Never push a second change on top of one that has not smoke-tested; failure must stay attributable. Commit locally, deploy in a clean window.
+- Bench proof is the gate; the live fire confirms. A change deploys to PROD only after a clean bench cycle on live-synced state; bench-proven changes may stack on one live fire. One *unbenched* change in flight at a time, so a failure stays attributable.
 - Context decides routing. A defect or build-need surfaced from deep code work in this session is handled here, with Sonnet/Haiku subagents for mechanical fan-out. Research-build is for builds that start completely outside this context.
 - Supermemory: routine work saves nothing. A large shift (phase closure, architectural landing, substrate-altering decision) may save one pointer tagged `[engine/sheet]`.
+- Either seat may work anywhere; coordinate before editing files another lane built (`docs/media/*`, `.claude/agents/*`, another lane's `SKILL.md`).
 
 ## Filing work
 
 - `engine.*` rows for engine code, ledger, schema, tech debt; `governance.*` occasionally for engine-spec docs. Doctrine: `docs/engine/rollout-rules.md`. Designed work gets a plan from `docs/plans/PLAN_TEMPLATE.md`; in-flight observations go to the engine gap log.
 - Complete → `done-pending-archive`; the session-end sweep moves the row to `ROLLOUT_ARCHIVE.md` and the plan to `docs/archive/plans/`.
-- Handoff in: a row tagged `(engine terminal)` appears in ROLLOUT; pick it up, execute, update the row and SESSION_CONTEXT. Handoff out: a design/research need is noted in ROLLOUT or SESSION_CONTEXT for research-build.
-
-## Not this terminal's files
-
-`docs/media/*` (voices, style guides), `.claude/agents/*` configs, `docs/mags-corliss/*`, `docs/mara-vance/*`, and any `.claude/skills/*/SKILL.md` another lane built. Coordinate before editing.
-
-## Sheet-side code
-
-In-sheet Apps Script (triggers, menus, on-edit handlers) may originate in the Apps Script editor's Gemini side panel; bring it back via `clasp pull` + commit with a `[gemini-pull]` tag. Node engine code stays here. Skill files edited mid-session: `/reload-skills`.
+- Handoff in: a ROLLOUT row with Owner `engine-sheet`; pick it up, execute, update the row and SESSION_CONTEXT. Handoff out: a design/research need is noted in ROLLOUT or SESSION_CONTEXT for research-build.
 
 ## Session close
 

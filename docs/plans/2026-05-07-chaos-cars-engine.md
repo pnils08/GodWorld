@@ -535,7 +535,7 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
   2. Per metric: distribution of magnitudes, post-decay residual at cycle+1/+2/+3.
   3. Surface: "neighborhood_mood positive recovers in X cycles, negative persists Y cycles" — confirm asymmetry holds.
 - **Verify:** runs against real cycle data; report shows asymmetric decay observable.
-- **Status:** [ ] not started
+- **Status:** [x] DONE, SCOPED S423 (research-build) — **not built to spec verbatim; checked live data availability first, scoped to what's real.** `scripts/chaosCarsMagnitudeReport.js`. Neighborhood scope IS measurable — the plan assumed no `Neighborhood_Map` cell history exists (true, §S265), but `buildWorldSummary.js`'s City State neighborhood table snapshots the 4 movable columns every cycle it runs, and `output/world_summary_c{103,104,105}.md` exist — that IS cross-cycle history. Parsed those tables against 30 live `Chaos_Cars` neighborhood rows: 14 events had both cycle-N and cycle-N+1 snapshots available (16 skipped, no overlap — C100-102/C105 gaps). Reported directionally (5 up-events, 2 reverted; 9 down-events, 1 persisted) with the confound stated plainly — a cell moves from chaos residual + the baseline `neighborhoodPulse` fold + any other same-cycle chaos event on the same cell, so this is observational signal supporting the asymmetry design, not a controlled decay-rate calibration (Q2 stays open). **Business scope NOT measured — explicit gap, not silently skipped:** no historical `Business_Ledger` snapshot exists, `buildWorldSummary.js` emits no business table; would need a new per-cycle dump script (`dumpLedger.js` pattern) to ever measure `applyChaosDecay_`'s effect on `Annual_Revenue`/`Employee_Count`. Citizen scope has no decay row by design. Report: `output/chaos_cars_magnitude_report.md`.
 
 #### T6.3: Frequency cap validator [research-build]
 
@@ -612,6 +612,7 @@ Chaos-cars engine — typed municipal-vehicle stochastic event injection. **DESI
 
 ## Changelog
 
+- 2026-09-05 — **T6.2 scoped + shipped (S423, research-build)** — `scripts/chaosCarsMagnitudeReport.js` measures neighborhood decay via `world_summary` snapshots (real history, plan assumed none existed); business scope reported as an explicit gap, not built blind (see T6.2 status).
 - 2026-09-05 — **T5.3 built + unit-tested, not live-verified (S423, research-build)** — `scripts/dumpChaosCascade.js` + `city-hall-prep` v1.12; live acceptance waits on a real Tier-1 hit (see T5.3 status).
 - 2026-09-05 — **T5.2 credited + tested (S423, research-build)** — pre-existing `emitChaosCars` (2026-07-06, unattributed) verified, exported, tested; see T5.2 status for detail.
 - 2026-09-05 — **T6.1 dry-run script shipped (S423, research-build)** — `scripts/chaosCarsDryRun.js`, synthetic Tier-1 fixture unblocking T5.2/T5.3 (see T6.1 status for detail).

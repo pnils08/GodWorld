@@ -238,7 +238,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 ## `docs/reference/` — operational how-tos
 
 - **[[reference/CROSS_LANE_MESSAGING]]** — reaching a non-Claude lane (agy/grok/kimi/codex) mid-session. `SendMessage` sees Claude sessions only; the rest are tmux panes reached with `send-keys -l` + a **separate** `C-m`. Capture-pane first — a pane at bare `bash` executes your message as shell commands. Manual until governance.47's `laneMessage.js` lands. *(reference, infrastructure, active)*
-- **[[reference/DEPLOY]]** — `clasp push` to Apps Script from Cloud Shell. *(reference, infrastructure, active)*
+- **[[reference/DEPLOY]]** — `clasp push` to Apps Script from Cloud Shell, plus CURRENT bench/live state. Protocol + pointers only (S418) — the full per-wave proving narrative lives in [[reference/DEPLOY_HISTORY]]. *(reference, infrastructure, active)*
+- **[[reference/DEPLOY_HISTORY]]** — full sandbox + PROD deploy ledger, relocated out of DEPLOY.md 2026-09-04 (S418) so that file stays protocol + current-state only. Not read at boot or on a normal deploy — open on demand to trace how a specific version got proven and shipped. *(reference, infrastructure, active)*
 - **[[reference/DISASTER_RECOVERY]]** — rebuild procedure if the machine dies. *(reference, infrastructure, active)*
 - **[[reference/DRIVE_UPLOAD_GUIDE]]** — saving files to Google Drive. *(reference, infrastructure, active)*
 - **[[reference/GODWORLD_REFERENCE]]** — simulation reference for Mara and the Media Room. *(reference, civic, active)*
@@ -516,6 +517,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 _(Newest first, per SCHEMA §12 — normalized 2026-07-24.)_
 
+- 2026-09-04 (research-build, S418) — Registered [[reference/DEPLOY_HISTORY]]. DEPLOY.md restructured to protocol + current-state only (366 → 280 lines); full per-wave proving narrative relocated verbatim. Mike-direct: "deploy.md needs to be clear and concise + a changelog that serves it."
 - 2026-09-04 (research-build, S418) — Registered [[plans/2026-09-04-pre-saturday-coverage-sweep]] (pipeline.64). Code shipped S417; filing was blocked by the rollout lint's pre-existing over-budget rows, cleared same session (ROLLOUT_PLAN.md S418 archive pass + 3 rows drained via `rolloutDrain.js`).
 
 - 2026-08-18 (research-build) — Registered [[plans/2026-08-18-cycle-output-compaction]]. Design only, no code yet — new script needs Mike's go-ahead on the concrete shape (S296) before build. Same session: audio-retention fix already shipped (`d9bc20c9`) — daily NotebookLM `.m4a` no longer git-tracked/disk-retained past confirmed Drive delivery.

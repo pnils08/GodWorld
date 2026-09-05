@@ -20,7 +20,8 @@ pointers:
 ## Current sandbox — full trail
 
 **`SANDBOX 0831` (stood up 2026-08-31, Mike-made copy).** Copy of live post-C105 — the proving bench for the S405 C105 chase sessions (S-A through S-E, `docs/plans/2026-08-31-c105-chase-sessions.md`).
-- **@40 (S417, 2026-09-04) = live @45 + the engine.162/civic.30/civic.31 wave (4 files, HELD four at base); C112 fired `ok:true`, 0 errors, 13/13 D3 raises exact — proof narrative in `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04.** Bench at C112.
+- **@41 (S419, 2026-09-04) = @40 + civic.32 (`updateCivicApprovalRatings.js`, `fa9782c4`); C113 fired `ok:true` 133s, 132 phases, 0 errors — readback in `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04 S419.** Bench at C113. Bench-only data: the two pre-fix C112 campaign doubles (Bautista MAYOR + D2 note, Diaz D3 + D5 note) — never replay.
+- @40 (S417, 2026-09-04) = live @45 + the engine.162/civic.30/civic.31 wave (4 files, HELD four at base); C112 fired `ok:true`, 0 errors, 13/13 D3 raises exact — proof narrative in the same plan §Changelog 2026-09-04.
 - Spreadsheet ID `18BOJmzlO7EoaEhvUsUaqLIZvgrTC1yltUYk_Gz3I3W8`
 - Bound Apps Script ID `1_3PDs7CSUsYvjjcXWtYGKjpPd7ekiIsUKKLSwlMtj3ioQKV0ew8TAfPh`
 - Script Properties set by Mike 2026-08-31: `SIM_SSID`, `CYCLE_TRIGGER_TOKEN`. Authorization ran, access granted (protocol step 3b done).
@@ -110,7 +111,11 @@ pointers:
 
 ---
 
-## PROD deploy log — full trail (pre-@46)
+## PROD deploy log — full trail
+
+### PROD @47 — civic.32 one citizen, one race (2026-09-04 20:12, S419 engine-sheet)
+
+Script tree = @46 + `updateCivicApprovalRatings.js` (`fa9782c4`), staged from a `clasp-real pull` of SANDBOX 0831 @41 (delta vs a fresh live pull = exactly that file; HELD engine.131 T7 four verified at base) with the repo `.clasp.json` copied last; prod id present / sandbox id absent / 0 tests / 174 files; `clasp-real push -f`; `deploy --deploymentId` → @47; pull-back 0 differing files, payload byte-exact to repo HEAD. Proof: bench C113 (plan §Changelog 2026-09-04 S419). Live smoke pending the builder's next fire.
 
 ### PROD @46 — engine.162 + civic.30/31 wave (2026-09-04 19:33, S417 engine-sheet)
 

@@ -43,19 +43,19 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 
 **This file is protocol + CURRENT pointers only.** Per-wave proving narrative and bench-write logs go to the wave's own plan doc (builder rule 2026-08-30) or to [[DEPLOY_HISTORY]] — a session that finds itself writing a paragraph here is writing in the wrong file.
 
-**Bench:** `SANDBOX 0831` (stood up 2026-08-31) — copy of live post-C105, the proving bench for the C105 chase wave. Code at **@40**, cycle **C112**. Spreadsheet `18BOJmzlO7EoaEhvUsUaqLIZvgrTC1yltUYk_Gz3I3W8` / Apps Script `1_3PDs7CSUsYvjjcXWtYGKjpPd7ekiIsUKKLSwlMtj3ioQKV0ew8TAfPh` / web-app deployment `AKfycbxbfP2Wu6haP4HXUGLk9T4wlW4ixWPsnfZJ51G5wVFTbkhESbT4teJG2xvRowP3BygIkw`. Script Properties `SIM_SSID` + `CYCLE_TRIGGER_TOKEN` set, authorized (protocol step 3b done). **`CARRY_FORWARD_COLD_START_OK` — do not set**: the bench's `Carry_Forward_Store` sheet already carries real C105 carry-forward, so this is not a cold start (see [[DEPLOY_HISTORY]] for the read-back that proved it). Full per-wave trail: [[DEPLOY_HISTORY]] §Current sandbox.
+**Bench:** `SANDBOX 0831` (stood up 2026-08-31) — copy of live post-C105, the proving bench for the C105 chase wave. Code at **@41** (= @40 + civic.32), cycle **C113**. Spreadsheet `18BOJmzlO7EoaEhvUsUaqLIZvgrTC1yltUYk_Gz3I3W8` / Apps Script `1_3PDs7CSUsYvjjcXWtYGKjpPd7ekiIsUKKLSwlMtj3ioQKV0ew8TAfPh` / web-app deployment `AKfycbxbfP2Wu6haP4HXUGLk9T4wlW4ixWPsnfZJ51G5wVFTbkhESbT4teJG2xvRowP3BygIkw`. Script Properties `SIM_SSID` + `CYCLE_TRIGGER_TOKEN` set, authorized (protocol step 3b done). **`CARRY_FORWARD_COLD_START_OK` — do not set**: the bench's `Carry_Forward_Store` sheet already carries real C105 carry-forward, so this is not a cold start (see [[DEPLOY_HISTORY]] for the read-back that proved it). Full per-wave trail: [[DEPLOY_HISTORY]] §Current sandbox.
 
-**Live:** PROD **@46** (2026-09-04, S417) = engine.162 + civic.30/civic.31 wave over @45; HELD engine.131 T7 four (`applySportsSeason.js`, `generateCrisisSpikes.js`, `economicRippleEngine.js`, `v3NeighborhoodWriter.js`) stay at base — repo HEAD differs from live by exactly those four. Wave proof: `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04. Full deploy ledger back to @1: [[DEPLOY_HISTORY]] §PROD deploy log.
+**Live:** PROD **@47** (2026-09-04 20:12, S419) = civic.32 over @46 (= engine.162 + civic.30/civic.31 wave over @45); HELD engine.131 T7 four (`applySportsSeason.js`, `generateCrisisSpikes.js`, `economicRippleEngine.js`, `v3NeighborhoodWriter.js`) stay at base — repo HEAD differs from live by exactly those four. Proofs: `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04 (S417 wave, S419 civic.32). Full deploy ledger back to @1: [[DEPLOY_HISTORY]] §PROD deploy log.
 
 **Recent PROD bumps** (last 5 — older → [[DEPLOY_HISTORY]] §PROD deploy log):
 
 | PROD | Date | Wave | Plan |
 |---|---|---|---|
+| @47 | 2026-09-04 | civic.32 one citizen one race | [[../plans/2026-08-29-employment-system-cascade]] |
 | @46 | 2026-09-04 | engine.162 + civic.30/31 | [[../plans/2026-08-29-employment-system-cascade]] |
 | @45 | 2026-09-04 | engine.161 relocation share | [[../plans/2026-09-02-bloodline-ascent]] |
 | @44 | 2026-09-04 | engine.157 maneuver phase | [[../plans/2026-09-02-bloodline-ascent]] |
 | @43 | 2026-09-04 | engine.156 heritage loss | [[../plans/2026-09-02-bloodline-ascent]] |
-| @42 | 2026-09-03 | engine.160 one hood rent rule | [[../plans/2026-09-02-bloodline-ascent]] |
 
 **Retired / contaminated sandboxes — never target these IDs** (full trail per ID: [[DEPLOY_HISTORY]] §Retired sandboxes):
 

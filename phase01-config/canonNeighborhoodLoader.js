@@ -15,7 +15,15 @@
  *                    set:  { lowercased-name: true },
  *                    core: [...CoreSimRank hoods, rank order],
  *                    district:   { hood: 'D<n>' }            (civic.18 4c)
- *                    byDistrict: { 'D<n>': [...hoods, row order] } }
+ *                    byDistrict: { 'D<n>': [...hoods, row order] },
+ *                    children:   { lowercased child area: parent hood },
+ *                    childList:  [...child areas, sheet order] }   (engine.99 #9)
+ *
+ * CHILD AREAS (engine.99 Finding #9, S423): a place the world can SAY without a
+ * row the engine has to run — Old Oakland, Brooklyn Basin, Montclair. The
+ * ledger's ChildAreas column names them per hood; resolveHoodOrChild_ folds a
+ * child to its parent and a hood to itself. Before this the fold lived in
+ * three engine files and a Node list, and they disagreed.
  *
  * DISTRICT EDGE (civic.18 4c, S423): the ledger's District column is the one
  * truth for which council seat a hood sits under. Seeded here so the approval
@@ -71,12 +79,15 @@ function loadCanonNeighborhoods_(ctx) {
   }
   var iRank = header.indexOf('CoreSimRank');
   var iDistrict = header.indexOf('District');
+  var iChildren = header.indexOf('ChildAreas');
 
   var list = [];
   var set = {};
   var ranked = [];
   var district = {};
   var byDistrict = {};
+  var children = {};
+  var childList = [];
   for (var r = 1; r < values.length; r++) {
     var hood = (values[r][iHood] || '').toString().trim();
     if (!hood) continue;
@@ -96,6 +107,17 @@ function loadCanonNeighborhoods_(ctx) {
         byDistrict[d].push(hood);
       }
     }
+    if (iChildren >= 0) {
+      var parts = (values[r][iChildren] || '').toString().split(',');
+      for (var p = 0; p < parts.length; p++) {
+        var child = parts[p].trim();
+        if (!child) continue;
+        var ck = child.toLowerCase();
+        if (set[ck] || children[ck]) continue; // a hood is not a child; first parent wins
+        children[ck] = hood;
+        childList.push(child);
+      }
+    }
   }
 
   if (list.length === 0) {
@@ -106,7 +128,7 @@ function loadCanonNeighborhoods_(ctx) {
   var core = [];
   for (var c = 0; c < ranked.length; c++) core.push(ranked[c].hood);
 
-  S.canonHoods = { list: list, set: set, core: core, district: district, byDistrict: byDistrict };
+  S.canonHoods = { list: list, set: set, core: core, district: district, byDistrict: byDistrict, children: children, childList: childList };
   S.canonHoodCount = list.length;
 }
 
@@ -167,4 +189,25 @@ function isCanonNeighborhood_(ctx, name) {
   }
   if (!name) return false;
   return S.canonHoods.set[name.toString().trim().toLowerCase()] === true;
+}
+
+/**
+ * Fold any spoken place to the hood the engine simulates (engine.99 #9, S423):
+ * a hood returns its own canonical spelling (case/space tolerant); a child area
+ * returns its parent; anything else — City-wide, a Chicago hood, a typo — is
+ * null, and the caller decides what null means there. Throws when the seed is
+ * absent, like every accessor above. Never a substring match.
+ */
+function resolveHoodOrChild_(ctx, name) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.canonHoods || !S.canonHoods.set || !S.canonHoods.children) {
+    throw new Error('resolveHoodOrChild_: canonical hood set not seeded — loadCanonNeighborhoods_ (Phase1-CanonHoods) did not run or failed. No embedded fallback (ADR-0016).');
+  }
+  var key = String(name || '').trim().toLowerCase();
+  if (!key) return null;
+  if (S.canonHoods.set[key]) {
+    var list = S.canonHoods.list;
+    for (var i = 0; i < list.length; i++) if (list[i].toLowerCase() === key) return list[i];
+  }
+  return S.canonHoods.children[key] || null;
 }

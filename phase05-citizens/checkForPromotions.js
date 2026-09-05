@@ -183,41 +183,14 @@ function checkForPromotions_(ctx) {
   // v2.3: DETERMINISTIC NEIGHBORHOOD VALIDATION
   // ═══════════════════════════════════════════════════════════════════════════
   function validateNeighborhood(neigh) {
-    neigh = (neigh || "").toString().trim();
-
-    // Direct match
-    if (validNeighborhoods.indexOf(neigh) >= 0) return neigh;
-
-    // Deterministic mappings (from real Oakland neighborhoods to canon 12)
-    var map = {
-      "Eastlake": "Lake Merritt",
-      "Adams Point": "Lake Merritt",
-      "Grand Lake": "Lake Merritt",
-      "Lakeshore": "Lake Merritt",
-      "Ivy Hill": "Fruitvale",
-      "San Antonio": "Fruitvale",
-      "Dimond": "Laurel",
-      "Glenview": "Laurel",
-      "Maxwell Park": "Laurel",
-      "Old Oakland": "Downtown",
-      "City Center": "Downtown",
-      "Jack London Square": "Jack London",
-      "Koreatown-Northgate": "KONO",
-      "Koreatown": "KONO",
-      "Northgate": "KONO",
-      "Montclair": "Rockridge",
-      "Claremont": "Rockridge",
-      "Longfellow": "Temescal",
-      "Shafter": "Temescal",
-      "Golden Gate": "West Oakland",
-      "McClymonds": "West Oakland",
-      "Prescott": "West Oakland",
-      "Hoover-Foster": "West Oakland"
-    };
-
-    if (map[neigh]) return map[neigh];
-
-    // v2.3: Deterministic fallback (no randomness)
+    // S423 engine.99 #9: hood → itself, child area → parent, from the ledger's
+    // ChildAreas column (Phase-1 seed). The literal map that lived here folded
+    // real tracked hoods into others (Eastlake → Lake Merritt, Glenview → Laurel,
+    // Ivy Hill → Fruitvale — pre-civic.21 thinking) and put Montclair under
+    // Rockridge while no other file knew it existed. Unknown keeps the v2.3
+    // deterministic fallback.
+    var resolved = resolveHoodOrChild_(ctx, neigh);
+    if (resolved) return resolved;
     return "Downtown";
   }
 

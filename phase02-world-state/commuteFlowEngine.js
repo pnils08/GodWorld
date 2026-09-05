@@ -52,19 +52,10 @@
 // unresolved rather than guessed, so a new workplace hood shows up in the stats
 // instead of quietly landing in the wrong neighborhood.
 // engine.99 Cohort 2 — the ALIAS half of the old COMMUTE_HOOD_ALIASES is
-// retired: 'Piedmont Avenue' spelling drift was fixed AT Business_Ledger
-// (3 rows reconciled S352, ADR-0016 §4 — reconcile ledgers, don't distribute
-// alias maps). What remains is GEOGRAPHIC HIERARCHY, not spelling: businesses
-// legitimately sit in child areas (Old Oakland, Brooklyn Basin, ...) and the
-// commute matrix folds them to their core hood. Do not add spelling entries —
-// a misspelled ledger value is a data fix, not a new row here. Child→parent
-// hierarchy as ledger truth is filed as engine.99 Finding #9.
-var COMMUTE_CHILD_HOOD_FOLD = {
-  'Old Oakland': 'Downtown',
-  'Telegraph corridor': 'Temescal',
-  'Brooklyn Basin': 'Jack London',
-  'Coliseum': 'East Oakland'
-};
+// The child-area → core-hood fold (Old Oakland → Downtown, Brooklyn Basin →
+// Jack London, ...) is LEDGER data since S423: Neighborhood_Map.ChildAreas,
+// seeded at Phase 1, read here through resolveHoodOrChild_ (engine.99 #9).
+// The literal that lived here was one of three copies that disagreed.
 
 // Workplace values that are real but carry no single hood. 'City-wide' is the
 // honest case (a citywide authority); the Chicago-side entries are outside
@@ -183,8 +174,7 @@ function buildCommuteFlows_(ctx) {
         stats.unresolved++; stats.nonHoodWorkplace++;
         continue;
       }
-      work = Object.prototype.hasOwnProperty.call(COMMUTE_CHILD_HOOD_FOLD, raw)
-        ? COMMUTE_CHILD_HOOD_FOLD[raw] : raw;
+      work = resolveHoodOrChild_(ctx, raw) || raw; // child → parent; unknown stays raw and counts below
     }
 
     if (!work) { stats.unresolved++; stats.unknownHood++; continue; }

@@ -150,16 +150,28 @@ console.log('═══ Tasks 2–3 — fold + economy blob from Neighborhood_Map
 {
   const sb = { Logger: { log() {} }, Math, Object, Array, Number, String, JSON, isFinite, isNaN, Date };
   vm.createContext(sb);
+  load(sb, 'phase01-config/canonNeighborhoodLoader.js');
   load(sb, 'phase06-analysis/economicRippleEngine.js');
   const src = fs.readFileSync(path.join(ROOT, 'phase06-analysis/economicRippleEngine.js'), 'utf8');
   check('T2a NEIGHBORHOOD_ECONOMIES literal is gone', !/var NEIGHBORHOOD_ECONOMIES\s*=/.test(src));
+  check('T2a2 no child-fold literal left in the economy engine', !/Old Oakland/.test(src));
   const ns = {}; NM.forEach(h => { ns[h] = { employerCharacter: 'residential', boomIndex: 0 }; });
   ns['KONO'].employerCharacter = 'arts'; ns['Jack London'].employerCharacter = 'nightlife'; ns['Temescal'].employerCharacter = 'clinic'; ns['Temescal'].boomIndex = -0.7; ns['Baylight District'].employerCharacter = 'stadium'; ns['Baylight District'].boomIndex = 1;
-  const S = { neighborhoodState: ns };
-  const fold = (n) => sb.mapToCanonicalNeighborhood_(n, S);
-  const cases = { 'Old Oakland': 'Downtown', 'Telegraph corridor': 'Temescal', 'Brooklyn Basin': 'Jack London', 'Coliseum': 'East Oakland', 'City-wide': null, 'Uptown': 'Uptown', 'KONO': 'KONO', 'Brooklyn': 'Brooklyn', 'Glenview': 'Glenview', 'Piedmont Ave': 'Piedmont Ave', 'Piedmont Avenue': null, 'Bridgeport': null, 'piedmont ave': 'Piedmont Ave', '': null };
+  // engine.99 #9 — the Phase-1 seed built from a Neighborhood_Map fixture WITH a ChildAreas column
+  const header = ['Neighborhood', 'CoreSimRank', 'District', 'ChildAreas'];
+  const childOf = { 'Downtown': 'Old Oakland, City Center', 'Jack London': 'Jack London Square, Brooklyn Basin', 'Temescal': 'Telegraph corridor', 'East Oakland': 'Coliseum, Elmhurst', 'Piedmont Ave': 'Montclair, Downtown' /* a hood named as a child is ignored */ };
+  const values = [header].concat(NM.map((h, i) => [h, i + 1, 'D1', childOf[h] || '']));
+  const seedCtx = { summary: {}, ss: { getSheetByName: (n) => n === 'Neighborhood_Map' ? ({ getDataRange: () => ({ getValues: () => values }) }) : null } };
+  sb.loadCanonNeighborhoods_(seedCtx);
+  const CH = seedCtx.summary.canonHoods;
+  check('T2c loader seeds children from ChildAreas (8 child areas; a hood named as a child is ignored)', CH.childList.length === 8 && CH.children['montclair'] === 'Piedmont Ave' && CH.children['downtown'] === undefined, JSON.stringify(CH.childList));
+  const S = Object.assign({ neighborhoodState: ns }, { canonHoods: CH });
+  const fold = (n) => sb.mapToCanonicalNeighborhood_(n, { summary: S });
+  const cases = { 'Old Oakland': 'Downtown', 'Telegraph corridor': 'Temescal', 'Brooklyn Basin': 'Jack London', 'Coliseum': 'East Oakland', 'Montclair': 'Piedmont Ave', 'City-wide': null, 'Uptown': 'Uptown', 'KONO': 'KONO', 'Brooklyn': 'Brooklyn', 'Glenview': 'Glenview', 'Piedmont Ave': 'Piedmont Ave', 'Piedmont Avenue': null, 'Bridgeport': null, 'piedmont ave': 'Piedmont Ave', 'OLD OAKLAND': 'Downtown', '': null };
   const bad = Object.keys(cases).filter(k => fold(k) !== cases[k]).map(k => k + '→' + fold(k));
-  check('T2b child-fold then identity, no substring matching (' + Object.keys(cases).length + ' cases)', bad.length === 0, bad.join(' '));
+  check('T2b ledger child-fold then identity, no substring matching (' + Object.keys(cases).length + ' cases)', bad.length === 0, bad.join(' '));
+  let threw = false; try { sb.resolveHoodOrChild_({ summary: {} }, 'Downtown'); } catch (e) { threw = /not seeded/.test(e.message); }
+  check('T2d accessor throws unseeded (ADR-0016 wall)', threw);
   const ctx = { summary: Object.assign({ economicRipples: [], economicMood: 50 }, S), economicCalendarContext: { holiday: 'none', isFirstFriday: true, sportsSeason: 'championship', sportsZones: ['Baylight District'] } };
   sb.calculateNeighborhoodEconomies_(ctx);
   const E = ctx.summary.neighborhoodEconomies;

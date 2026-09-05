@@ -33,7 +33,13 @@ var NEIGHBORHOOD_MAP_HEADERS = [
   // S215 civic.10b — District column. Canonical neighborhood→district owner
   // per docs/canon/INSTITUTIONS.md §Neighborhoods. Blank when canon hasn't
   // authorized a mapping yet (civic.10c auditor surfaces the orphan).
-  'District'
+  'District',
+  // S423 engine.99 Finding #9 — ChildAreas: the spoken sub-areas that fold into
+  // this hood (comma-separated; "Old Oakland, City Center" under Downtown).
+  // Authored data, never engine-written; the Phase-1 loader seeds the
+  // child→parent map from it and every fold in the engine reads that map.
+  // Self-arms as a blank column here; the values are a hand/replayed write.
+  'ChildAreas'
 ];
 
 // S315: the writer owns only the first 15 columns positionally (texture block

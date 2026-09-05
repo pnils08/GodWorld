@@ -93,9 +93,11 @@ async function fetchSheetHoods() {
   const iHood = header.indexOf('Neighborhood');
   if (iHood < 0) throw new Error('Neighborhood_Map has no "Neighborhood" header');
   const iRank = header.indexOf('CoreSimRank');
+  const iChildren = header.indexOf('ChildAreas'); // S423 engine.99 #9
   const seen = new Set();
   const list = [];
   const ranked = [];
+  const children = [];
   for (const row of rows.slice(1)) {
     const hood = String(row[iHood] || '').trim();
     if (!hood || seen.has(hood.toLowerCase())) continue;
@@ -105,10 +107,13 @@ async function fetchSheetHoods() {
       const rank = Number(row[iRank]);
       if (!isNaN(rank) && rank > 0) ranked.push({ hood, rank });
     }
+    if (iChildren >= 0) {
+      for (const c of String(row[iChildren] || '').split(',')) { const t = c.trim(); if (t) children.push(t); }
+    }
   }
   if (!list.length) throw new Error('Neighborhood_Map yielded zero hood names');
   const core = ranked.sort((a, b) => a.rank - b.rank).map(r => r.hood);
-  return { list, core };
+  return { list, core, children, hasChildrenColumn: iChildren >= 0 };
 }
 
 function scanFile(absPath, canonExact, canonLower, childLower, driftLower) {
@@ -156,7 +161,7 @@ async function main() {
     console.log('⚠ OFFLINE MODE — live-sheet reconcile SKIPPED. lib/canonNeighborhoods.js');
     console.log('  is being trusted as a cache without proof. Run without --offline before deploy.');
   } else {
-    const { list: sheetHoods, core: sheetCore } = await fetchSheetHoods();
+    const { list: sheetHoods, core: sheetCore, children: sheetChildren, hasChildrenColumn } = await fetchSheetHoods();
     const sheetSet = new Set(sheetHoods);
     const libSet = new Set(MAP_NEIGHBORHOODS);
     const inLibNotSheet = MAP_NEIGHBORHOODS.filter(h => !sheetSet.has(h));
@@ -178,6 +183,25 @@ async function main() {
       console.log('      lib CANON_12: ' + CANON_12.join(', '));
     } else {
       console.log('PASS  core reconcile: CANON_12 == CoreSimRank order (' + sheetCore.length + ' hoods)');
+    }
+    // Children reconcile (S423, engine.99 #9) — Neighborhood_Map.ChildAreas is the
+    // truth for child areas; lib CHILDREN is its cache. Set compare, case-insensitive.
+    if (!hasChildrenColumn) {
+      drift++;
+      console.log('FAIL  children reconcile: Neighborhood_Map has no ChildAreas column (engine.99 #9 not landed on this sheet)');
+    } else {
+      const sc = new Set(sheetChildren.map(h => h.toLowerCase()));
+      const lc = new Set(CHILDREN.map(h => h.toLowerCase()));
+      const inLibNotSheetC = CHILDREN.filter(h => !sc.has(h.toLowerCase()));
+      const inSheetNotLibC = sheetChildren.filter(h => !lc.has(h.toLowerCase()));
+      if (inLibNotSheetC.length || inSheetNotLibC.length) {
+        drift++;
+        console.log('FAIL  children reconcile: lib CHILDREN != Neighborhood_Map.ChildAreas');
+        if (inLibNotSheetC.length) console.log('      in lib, not sheet: ' + inLibNotSheetC.join(', '));
+        if (inSheetNotLibC.length) console.log('      in sheet, not lib: ' + inSheetNotLibC.join(', '));
+      } else {
+        console.log('PASS  children reconcile: lib CHILDREN == ChildAreas (' + sheetChildren.length + ' child areas)');
+      }
     }
   }
 

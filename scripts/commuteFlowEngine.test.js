@@ -17,7 +17,12 @@ const path = require('path');
 const logs = [];
 global.Logger = { log(m) { logs.push(String(m)); } };
 const src = fs.readFileSync(path.resolve(__dirname, '../phase02-world-state/commuteFlowEngine.js'), 'utf8');
-const E = new Function(src + '\nreturn { buildCommuteFlows_: buildCommuteFlows_ };')();
+// S423 engine.99 #9: the child-area fold is the Phase-1 seed's accessor now.
+const loaderSrc = fs.readFileSync(path.resolve(__dirname, '../phase01-config/canonNeighborhoodLoader.js'), 'utf8');
+const E = new Function(loaderSrc + src + '\nreturn { buildCommuteFlows_: buildCommuteFlows_ };')();
+const HOODS = ['Temescal', 'Fruitvale', 'Downtown', 'Rockridge', 'Laurel', 'KONO', 'Uptown'];
+const CANON_HOODS = { list: HOODS, set: Object.fromEntries(HOODS.map(h => [h.toLowerCase(), true])), core: HOODS,
+  district: {}, byDistrict: {}, children: { 'old oakland': 'Downtown' }, childList: ['Old Oakland'] };
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) {
@@ -50,7 +55,7 @@ const rows = [
   ['POP-11', 'Uptown', 'BIZ-1', 'Deceased'],       // skipped
 ];
 const ctx = {
-  summary: {},
+  summary: { canonHoods: CANON_HOODS },
   ss: { getSheetByName(n) { return n === 'Business_Ledger' ? sheetOf(biz) : null; } },
   ledger: { headers, rows },
 };

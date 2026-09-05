@@ -2,7 +2,7 @@
   "generated": "2026-09-05",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1279,
+  "functionsMapped": 1280,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -796,6 +796,7 @@
         "phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_",
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
+        "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"
       ]
     },
@@ -2319,7 +2320,6 @@
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
-        "phase06-analysis/economicRippleEngine.js::mapToCanonicalNeighborhood_",
         "phase06-analysis/economicRippleEngine.js::primarySportsZone_",
         "phase07-evening-media/buildEveningFood.js::eveningFoodHoodsByCharacter_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_",

@@ -49,6 +49,9 @@
 - **isCanonNeighborhood_(ctx, name)**
   Reads: S.canonHoods
 
+- **resolveHoodOrChild_(ctx, name)**
+  Reads: S.canonHoods
+
 ### engine94SheetContract.js
 - **ensureEngine160Config_(ss)**
   Sheets: World_Config
@@ -2120,8 +2123,7 @@
   Reads: S._bizLookup, S.careerSignals
   Writes: S.careerChurn
 
-- **mapToCanonicalNeighborhood_(blNeighborhood, S)**
-  Reads: S.neighborhoodState
+- **mapToCanonicalNeighborhood_(blNeighborhood, ctx)**
 
 - **detectCalendarRipples_(ctx, currentCycle)**
   Reads: S.economicRipples
@@ -3752,4 +3754,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1279
+**Functions mapped:** 1280

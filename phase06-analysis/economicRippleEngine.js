@@ -129,16 +129,6 @@ var EMPLOYER_CHARACTER_SECTORS_ = {
 };
 var DEFAULT_SECTORS_ = ['retail', 'services', 'community'];
 
-// The four child areas the Business_Ledger legitimately uses (geographic
-// hierarchy, not spelling drift) — a copy of commuteFlowEngine.js:59
-// COMMUTE_CHILD_HOOD_FOLD. Apps Script has no imports; keep the two in step.
-var ECON_CHILD_HOOD_FOLD_ = {
-  'Old Oakland': 'Downtown',
-  'Telegraph corridor': 'Temescal',
-  'Brooklyn Basin': 'Jack London',
-  'Coliseum': 'East Oakland'
-};
-
 var HOLIDAY_ECONOMIC_ZONES = {
   'OaklandPride': ['Downtown', 'Lake Merritt', 'Grand Lake', 'Jack London'],
   'ArtSoulFestival': ['Downtown', 'Jack London'],
@@ -361,7 +351,7 @@ function detectCareerRipples_(ctx, currentCycle) {
     var delta = deltas[bizId];
     var biz = bizLookup[bizId];
     if (!biz || !biz.neighborhood) continue;
-    var hood = mapToCanonicalNeighborhood_(biz.neighborhood, S);
+    var hood = mapToCanonicalNeighborhood_(biz.neighborhood, ctx);
     if (!hood) continue;
     var net = (delta.gained || 0) - (delta.lost || 0);
     // T4 (research.24, S313): thread the BIZ_ID onto the ripple so the ledger
@@ -384,26 +374,13 @@ function detectCareerRipples_(ctx, currentCycle) {
 
 
 // v2.5: Map Business_Ledger neighborhood names to Ripple Engine canonical names
-function mapToCanonicalNeighborhood_(blNeighborhood, S) {
-  // engine.134 Task 2 (S423): child-fold, then identity against the ledger set.
-  // The old 11-name literal + substring match sent Brooklyn/Glenview/Uptown/KONO
-  // rows somewhere else or nowhere ("Piedmont Ave" never hit "Piedmont Avenue";
-  // "Uptown" was folded into Downtown; Brooklyn matched nothing). A business in
-  // a Neighborhood_Map hood ripples in that hood. City-wide and the Chicago-side
-  // workplaces carry no single hood → null (the caller skips).
-  var n = (blNeighborhood || '').toString().trim();
-  if (!n) return null;
-  if (ECON_CHILD_HOOD_FOLD_.hasOwnProperty(n)) return ECON_CHILD_HOOD_FOLD_[n];
-  var ns = S && S.neighborhoodState;
-  if (ns && ns.hasOwnProperty(n)) return n;
-  // case/space tolerance against the same set — never a substring match
-  if (ns) {
-    var key = n.toLowerCase();
-    for (var hood in ns) {
-      if (ns.hasOwnProperty(hood) && hood.toLowerCase() === key) return hood;
-    }
-  }
-  return null;
+function mapToCanonicalNeighborhood_(blNeighborhood, ctx) {
+  // engine.134 Task 2 / engine.99 #9 (S423): the ledger's child→parent fold
+  // (Neighborhood_Map.ChildAreas via the Phase-1 seed), then identity. A
+  // business in a tracked hood ripples there; City-wide and the Chicago-side
+  // workplaces carry no single hood → null (the caller skips). No substring
+  // matching, no literal.
+  return resolveHoodOrChild_(ctx, blNeighborhood);
 }
 
 

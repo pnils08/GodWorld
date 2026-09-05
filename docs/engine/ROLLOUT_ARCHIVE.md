@@ -854,6 +854,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S420 Archive Pass (2026-09-04, research-build) — post-S419 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 civic.*.
+
+- **civic.32** [engine-sheet] — Campaign double-candidacy — `occupiedPopIds` now seeded from holders + every campaign note (`seedOccupiedPopIds_`); bench C113 clean, LIVE PROD @47 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-29-employment-system-cascade]] §Status log civic.32 + Changelog 2026-09-04 S419
+
+This pass: 1 rows — civic.32. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S418 Archive Pass (2026-09-04, research-build) — post-S417 closures sweep
 
 6 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 4 engine.* + 2 civic.*.

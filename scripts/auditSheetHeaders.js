@@ -23,7 +23,7 @@ const sheets = require('../lib/sheets');
 
 const SCHEMAS = {
   'Event_Arc_Ledger': {
-    file: 'v3LedgerWriter.js',
+    file: 'v3LedgerWriter.js (deleted engine.142 S419; Event_Arc_Ledger frozen S313, schema kept for the header audit)',
     version: 'v3.3',
     writerCols: [
       'Timestamp','Cycle','ArcId','Type','Phase','Tension','Neighborhood',

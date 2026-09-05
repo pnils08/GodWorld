@@ -22,21 +22,28 @@
  * ============================================================================
  */
 
-// Oakland micro-climate profiles (unchanged)
-var OAKLAND_WEATHER_PROFILES = {
-  'Downtown': { tempMod: 2, fogChance: 0.1, description: 'urban heat island' },
-  'Jack London': { tempMod: -1, fogChance: 0.3, description: 'waterfront cool' },
-  'Fruitvale': { tempMod: 1, fogChance: 0.15, description: 'inland warmth' },
-  'Temescal': { tempMod: 0, fogChance: 0.2, description: 'moderate' },
-  'Lake Merritt': { tempMod: -1, fogChance: 0.25, description: 'lake effect' },
-  'West Oakland': { tempMod: 0, fogChance: 0.35, description: 'bay fog corridor' },
-  'Rockridge': { tempMod: -2, fogChance: 0.15, description: 'hills cooler' },
-  'Laurel': { tempMod: 1, fogChance: 0.1, description: 'sheltered valley' },
-  'Uptown': { tempMod: 1, fogChance: 0.15, description: 'urban corridor' },
-  'KONO': { tempMod: 1, fogChance: 0.2, description: 'arts district' },
-  'Chinatown': { tempMod: 2, fogChance: 0.15, description: 'dense urban' },
-  'Piedmont Ave': { tempMod: -1, fogChance: 0.2, description: 'piedmont edge' }
+// engine.148 P2: zone → micro-climate. Which hood is which zone is sheet truth
+// (Neighborhood_Map.WeatherZone, authored geography); this table only says
+// what a zone means. An unknown label throws.
+var WEATHER_ZONES_ = {
+  'urban-core':     { tempMod: 2,  fogChance: 0.12, description: 'urban heat island' },
+  'urban-corridor': { tempMod: 1,  fogChance: 0.17, description: 'urban corridor' },
+  'waterfront':     { tempMod: -1, fogChance: 0.30, description: 'waterfront cool' },
+  'bay-fog':        { tempMod: 0,  fogChance: 0.35, description: 'bay fog corridor' },
+  'lake':           { tempMod: -1, fogChance: 0.25, description: 'lake effect' },
+  'inland':         { tempMod: 1,  fogChance: 0.15, description: 'inland warmth' },
+  'moderate':       { tempMod: 0,  fogChance: 0.20, description: 'moderate' },
+  'hills':          { tempMod: -2, fogChance: 0.15, description: 'hills cooler' },
+  'piedmont-edge':  { tempMod: -1, fogChance: 0.20, description: 'piedmont edge' },
+  'valley':         { tempMod: 1,  fogChance: 0.10, description: 'sheltered valley' }
 };
+
+function hoodWeatherProfile_(ctx, hood) {
+  var zone = getHoodWeatherZone_(ctx, hood);
+  var profile = WEATHER_ZONES_[zone];
+  if (!profile) throw new Error('hoodWeatherProfile_: Neighborhood_Map.WeatherZone "' + zone + '" for ' + hood + ' is not a zone applyWeatherModel knows (' + Object.keys(WEATHER_ZONES_).join(', ') + ').');
+  return profile;
+}
 
 // Fallback mulberry32_ if not defined elsewhere
 if (typeof mulberry32_ !== 'function') {
@@ -567,11 +574,11 @@ function applyWeatherModel_(ctx) {
    * PART 6: Neighborhood microclimates (preserve structure; add fields)
    * ───────────────────────────────────────────────────────────────────────── */
   S.neighborhoodWeather = {};
-  var neighborhoodKeys = Object.keys(OAKLAND_WEATHER_PROFILES);
+  var neighborhoodKeys = getCanonNeighborhoods_(ctx); // engine.148 P2: every hood on the map gets weather
 
   for (var nhIdx = 0; nhIdx < neighborhoodKeys.length; nhIdx++) {
     var nh = neighborhoodKeys[nhIdx];
-    var profile = OAKLAND_WEATHER_PROFILES[nh];
+    var profile = hoodWeatherProfile_(ctx, nh);
 
     var nhTemp = temp + profile.tempMod;
     var nhType = type;

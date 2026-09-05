@@ -39,7 +39,11 @@ var NEIGHBORHOOD_MAP_HEADERS = [
   // Authored data, never engine-written; the Phase-1 loader seeds the
   // child→parent map from it and every fold in the engine reads that map.
   // Self-arms as a blank column here; the values are a hand/replayed write.
-  'ChildAreas'
+  'ChildAreas',
+  // engine.148 P2 — authored geography (WeatherZone label, Adjacent comma list)
+  // + the one attention knob (0–2). Never engine-written; self-arm as blank
+  // columns, the values are a hand/replayed write; the loader throws on blanks.
+  'WeatherZone', 'Adjacent', 'AttentionWeight'
 ];
 
 // S315: the writer owns only the first 15 columns positionally (texture block

@@ -80,6 +80,9 @@ function loadCanonNeighborhoods_(ctx) {
   var iRank = header.indexOf('CoreSimRank');
   var iDistrict = header.indexOf('District');
   var iChildren = header.indexOf('ChildAreas');
+  var iZone = header.indexOf('WeatherZone');       // engine.148 P2 — authored geography
+  var iAdjacent = header.indexOf('Adjacent');      // engine.148 P2 — authored geography
+  var iAttention = header.indexOf('AttentionWeight'); // engine.148 P2 — one shared attention knob
 
   var list = [];
   var set = {};
@@ -88,6 +91,9 @@ function loadCanonNeighborhoods_(ctx) {
   var byDistrict = {};
   var children = {};
   var childList = [];
+  var weatherZone = {};
+  var adjacentRaw = {};
+  var attention = {};
   for (var r = 1; r < values.length; r++) {
     var hood = (values[r][iHood] || '').toString().trim();
     if (!hood) continue;
@@ -107,6 +113,9 @@ function loadCanonNeighborhoods_(ctx) {
         byDistrict[d].push(hood);
       }
     }
+    if (iZone >= 0) weatherZone[hood] = (values[r][iZone] || '').toString().trim();
+    if (iAdjacent >= 0) adjacentRaw[hood] = (values[r][iAdjacent] || '').toString();
+    if (iAttention >= 0) attention[hood] = values[r][iAttention];
     if (iChildren >= 0) {
       var parts = (values[r][iChildren] || '').toString().split(',');
       for (var p = 0; p < parts.length; p++) {
@@ -128,8 +137,78 @@ function loadCanonNeighborhoods_(ctx) {
   var core = [];
   for (var c = 0; c < ranked.length; c++) core.push(ranked[c].hood);
 
-  S.canonHoods = { list: list, set: set, core: core, district: district, byDistrict: byDistrict, children: children, childList: childList };
+  S.canonHoods = { list: list, set: set, core: core, district: district, byDistrict: byDistrict, children: children, childList: childList,
+    weatherZone: iZone >= 0 ? weatherZone : null, attention: iAttention >= 0 ? attention : null };
   S.canonHoodCount = list.length;
+  // engine.148 P2: adjacency is sheet truth (column `Adjacent`, comma list of
+  // hood names). Mirrored so spillover is symmetric; a name off the map throws.
+  S.neighborhoodAdjacency = iAdjacent >= 0 ? buildAdjacencyFromSheet_(ctx, adjacentRaw) : null;
+}
+
+function buildAdjacencyFromSheet_(ctx, raw) {
+  var S = ctx.summary;
+  var g = {};
+  for (var i = 0; i < S.canonHoods.list.length; i++) g[S.canonHoods.list[i]] = [];
+  for (var hood in raw) {
+    if (!raw.hasOwnProperty(hood)) continue;
+    var parts = raw[hood].split(',');
+    for (var p = 0; p < parts.length; p++) {
+      var name = parts[p].trim();
+      if (!name) continue;
+      var other = resolveHoodOrChild_(ctx, name);
+      if (!other) throw new Error('loadCanonNeighborhoods_: Neighborhood_Map.Adjacent for ' + hood + ' names "' + name + '", which is not a hood or child area on the map (ADR-0016).');
+      if (other === hood) continue;
+      if (g[hood].indexOf(other) < 0) g[hood].push(other);
+      if (g[other].indexOf(hood) < 0) g[other].push(hood);
+    }
+  }
+  return g;
+}
+
+function getAdjacentHoods_(ctx, hood) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.neighborhoodAdjacency) {
+    throw new Error('getAdjacentHoods_: Neighborhood_Map has no Adjacent column or Phase1-CanonHoods did not run — adjacency is sheet truth (engine.148 P2).');
+  }
+  var a = S.neighborhoodAdjacency[hood];
+  return a ? a.slice() : [];
+}
+
+// engine.148 P2: the zone label a hood carries on the sheet. Blank fails loud —
+// weather is computed for every hood on the map, none may be invisible.
+function getHoodWeatherZone_(ctx, hood) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.canonHoods || !S.canonHoods.weatherZone) {
+    throw new Error('getHoodWeatherZone_: Neighborhood_Map has no WeatherZone column or Phase1-CanonHoods did not run (engine.148 P2).');
+  }
+  var z = S.canonHoods.weatherZone[hood];
+  if (!z) throw new Error('getHoodWeatherZone_: Neighborhood_Map.WeatherZone is blank for ' + hood + ' — author the cell (engine.148 P2).');
+  return z;
+}
+
+// engine.148 P2: the one attention knob (0–2) — read by the spotlight bonus
+// and, through an affine map, by event priority. Blank/non-numeric fails loud.
+function getHoodAttention_(ctx, hood) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.canonHoods || !S.canonHoods.attention) {
+    throw new Error('getHoodAttention_: Neighborhood_Map has no AttentionWeight column or Phase1-CanonHoods did not run (engine.148 P2).');
+  }
+  var v = Number(S.canonHoods.attention[hood]);
+  if (S.canonHoods.attention[hood] === '' || S.canonHoods.attention[hood] === undefined || !isFinite(v)) {
+    throw new Error('getHoodAttention_: Neighborhood_Map.AttentionWeight is blank or non-numeric for ' + hood + ' — author the cell (engine.148 P2).');
+  }
+  return v;
+}
+
+// engine.148 P2: an event's neighborhood field. Blank → null (citywide,
+// neutral). A non-blank name that is not a hood or child area throws — that
+// is the drift signal, not a default.
+function eventHoodOrNull_(ctx, name) {
+  var raw = String(name || '').trim();
+  if (!raw) return null;
+  var hood = resolveHoodOrChild_(ctx, raw);
+  if (!hood) throw new Error('eventHoodOrNull_: event names neighborhood "' + raw + '", which is not on Neighborhood_Map (ADR-0016).');
+  return hood;
 }
 
 function countTrackedByHood_(ctx) {

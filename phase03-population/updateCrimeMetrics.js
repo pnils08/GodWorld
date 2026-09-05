@@ -95,20 +95,8 @@ var CRIME_ADVANCED = {
 };
 
 // Default adjacency (used if no better graph available)
-var DEFAULT_NEIGHBORHOOD_ADJACENCY = {
-  'Downtown': ['Uptown', 'Chinatown', 'Lake Merritt', 'Jack London'],
-  'Uptown': ['Downtown', 'KONO', 'Temescal', 'Lake Merritt'],
-  'KONO': ['Uptown', 'Downtown', 'Lake Merritt', 'Temescal'],
-  'Chinatown': ['Downtown', 'Lake Merritt', 'KONO'],
-  'Lake Merritt': ['Downtown', 'Uptown', 'KONO', 'Chinatown', 'Piedmont Ave'],
-  'Jack London': ['Downtown', 'West Oakland'],
-  'West Oakland': ['Jack London', 'Downtown'],
-  'Rockridge': ['Temescal', 'Piedmont Ave'],
-  'Temescal': ['Uptown', 'KONO', 'Rockridge'],
-  'Piedmont Ave': ['Lake Merritt', 'Rockridge'],
-  'Fruitvale': ['Laurel', 'Lake Merritt'],
-  'Laurel': ['Fruitvale']
-};
+// engine.148 P2: adjacency is sheet truth — Neighborhood_Map.Adjacent, seeded
+// into S.neighborhoodAdjacency at Phase1-CanonHoods (mirrored). No literal.
 
 // ============================================================================
 // MAIN ENGINE FUNCTION
@@ -657,49 +645,10 @@ function clamp01_(n) {
 }
 
 function buildCrimeAdjacencyGraph_(S) {
-  if (S && S.neighborhoodAdjacency && typeof S.neighborhoodAdjacency === 'object') {
-    return JSON.parse(JSON.stringify(S.neighborhoodAdjacency));
+  if (!S || !S.neighborhoodAdjacency || typeof S.neighborhoodAdjacency !== 'object') {
+    throw new Error('buildCrimeAdjacencyGraph_: S.neighborhoodAdjacency not seeded — Neighborhood_Map needs an Adjacent column and Phase1-CanonHoods must run first (engine.148 P2).');
   }
-
-  // Use clusterDefinitions from applyCityDynamics v2.6 if available
-  var clusters = S && (S.clusterDefinitions || S.clusterDefs);
-  if (clusters && typeof clusters === 'object') {
-    var g = {};
-    for (var ck in clusters) {
-      if (!clusters.hasOwnProperty(ck)) continue;
-      var hoods = (clusters[ck] && clusters[ck].neighborhoods) ? clusters[ck].neighborhoods : [];
-      for (var i = 0; i < hoods.length; i++) {
-        var a = hoods[i];
-        if (!g[a]) g[a] = [];
-        for (var j = 0; j < hoods.length; j++) {
-          if (i === j) continue;
-          if (g[a].indexOf(hoods[j]) === -1) g[a].push(hoods[j]);
-        }
-      }
-      // Also add adjacent clusters
-      var adjacent = (clusters[ck] && clusters[ck].adjacent) ? clusters[ck].adjacent : [];
-      for (var ai = 0; ai < adjacent.length; ai++) {
-        var adjCluster = adjacent[ai];
-        var adjHoods = (clusters[adjCluster] && clusters[adjCluster].neighborhoods) ? clusters[adjCluster].neighborhoods : [];
-        for (var hi = 0; hi < hoods.length; hi++) {
-          if (!g[hoods[hi]]) g[hoods[hi]] = [];
-          for (var ahi = 0; ahi < adjHoods.length; ahi++) {
-            if (g[hoods[hi]].indexOf(adjHoods[ahi]) === -1) g[hoods[hi]].push(adjHoods[ahi]);
-          }
-        }
-      }
-    }
-    // Merge with default
-    for (var k in DEFAULT_NEIGHBORHOOD_ADJACENCY) {
-      if (!DEFAULT_NEIGHBORHOOD_ADJACENCY.hasOwnProperty(k)) continue;
-      if (!g[k]) g[k] = [];
-      var arr = DEFAULT_NEIGHBORHOOD_ADJACENCY[k];
-      for (var x = 0; x < arr.length; x++) if (g[k].indexOf(arr[x]) === -1) g[k].push(arr[x]);
-    }
-    return g;
-  }
-
-  return JSON.parse(JSON.stringify(DEFAULT_NEIGHBORHOOD_ADJACENCY));
+  return JSON.parse(JSON.stringify(S.neighborhoodAdjacency));
 }
 
 function computeHotspotPressure_(currentMetrics, adjacency) {

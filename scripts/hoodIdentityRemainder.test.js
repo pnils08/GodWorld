@@ -67,7 +67,7 @@ console.log('═══ Task 4 — crime iterates the Neighborhood_Map set');
   sb.batchUpdateCrimeMetrics_ = (ctx, map) => { written = map; };
   const ns = {}; NM.forEach(h => { ns[h] = { boomIndex: 0.2 }; });
   const ctx = { ss: {}, rng: makeRng(7), config: {}, summary: {
-    absoluteCycle: 106, canonHoods: { list: NM }, neighborhoodState: ns, neighborhoodDynamics: {}, worldEvents: [], weather: { type: 'clear', impact: 1 } } };
+    absoluteCycle: 106, canonHoods: { list: NM }, neighborhoodAdjacency: Object.fromEntries(NM.map((h, i) => [h, [NM[(i + 1) % NM.length]]])), /* engine.148 P2: adjacency is a Phase-1 seed */ neighborhoodState: ns, neighborhoodDynamics: {}, worldEvents: [], weather: { type: 'clear', impact: 1 } } };
   let threw = null;
   try { sb.updateCrimeMetrics_Phase3_(ctx); } catch (e) { threw = e; }
   check('T4i Phase 3 runs on the 22-hood set', !threw, threw && threw.stack);

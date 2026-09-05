@@ -28,6 +28,95 @@
  * ============================================================================
  */
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.148 P3 — household texture pools (was a 12-key literal, ten hoods silent)
+// Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
+// (a label with no pool throws); the twelve original hoods keep their bespoke
+// lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
+// ═══════════════════════════════════════════════════════════════════════════
+var HOUSEHOLD_TEXTURE_BY_CHARACTER_ = {
+  'institutional': ["heard the civic district go quiet from inside", "noticed the official buildings lit up at night", "watched the last office workers head home"],
+  'clinic': ["heard an ambulance pass in the night", "noticed a neighbor coming home from a clinic shift", "felt the tired, caring pace of the block from inside"],
+  'schools-retail': ["heard school-age kids on the sidewalk", "noticed the main street quiet after closing", "watched neighbors carry groceries home"],
+  'campus': ["heard student voices drifting past", "noticed construction dust on the windowsill", "watched the block change from the window"],
+  'transit-retail': ["heard the trains from the window", "noticed the station crowd from the front step", "watched the commuter rush from inside"],
+  'nightlife': ["heard the bars from the window late", "noticed the night crowd on the corner", "felt the block's evening energy from inside"],
+  'professional': ["heard the avenue traffic fade in the evening", "noticed the tidy calm of the block from the window", "watched neighbors walk home from work"],
+  'residential': ["heard neighborhood kids playing outside", "noticed porch lights coming on down the street", "enjoyed the quiet of the block from inside"],
+  'retail': ["heard shop shutters roll down for the night", "noticed the storefronts lit from the window", "watched shoppers heading home with bags"],
+  'medical': ["heard the hospital shift change from the window", "noticed a neighbor in scrubs heading out", "felt the steady pace of the block from inside"],
+  'family-retail': ["smelled cooking from a neighbor's kitchen", "heard families gathering next door", "noticed the market street winding down from inside"],
+  'mixed': ["heard the corner store bell from the window", "noticed apartments lighting up across the street", "felt the block's patchwork rhythm from inside"],
+  'village-retail': ["heard the village street go quiet for the night", "noticed the bakery closing from the window", "waved to a neighbor from the porch"],
+  'service-labor': ["heard neighbors leaving for early shifts", "noticed the block's working rhythm from inside", "felt the tiredness of a hard-working street"],
+  'arts': ["heard music from a studio down the block", "noticed a new mural from the window", "felt the creative energy of the corridor from inside"],
+  'stadium': ["heard the crowd roar from the arena", "noticed game-day traffic from the window", "felt the district's pregame buzz from inside"],
+  'construction': ["heard construction start at dawn", "noticed a new building frame from the window", "felt the boom-time churn of the block from inside"]
+};
+
+var HOUSEHOLD_TEXTURE_BESPOKE_ = {
+  'Temescal': [
+    "heard neighborhood kids playing outside",
+    "smelled cooking from a nearby home",
+    "noticed the creative neighborhood energy from inside"
+  ],
+  'Downtown': [
+    "heard city sounds drifting up from the street",
+    "noticed the urban energy even from inside",
+    "watched Downtown activity from the window"
+  ],
+  'Fruitvale': [
+    "heard music from a neighbor's gathering",
+    "smelled food from a nearby kitchen",
+    "felt the neighborhood's cultural warmth"
+  ],
+  'Lake Merritt': [
+    "watched joggers pass by from the window",
+    "heard geese from the lake",
+    "enjoyed the lakeside neighborhood tranquility"
+  ],
+  'West Oakland': [
+    "heard trains in the distance",
+    "noticed the neighborhood's industrial rhythm",
+    "observed development activity from the window"
+  ],
+  'Laurel': [
+    "enjoyed the quiet residential evening",
+    "waved to a neighbor through the window",
+    "appreciated the peaceful block"
+  ],
+  'Rockridge': [
+    "appreciated the tree-lined street view",
+    "heard BART rumble in the distance",
+    "noticed the upscale neighborhood calm"
+  ],
+  'Jack London': [
+    "heard waterfront activity from the window",
+    "noticed the arts district energy nearby",
+    "smelled the estuary air"
+  ],
+  'Uptown': [
+    "heard gallery foot traffic from the window",
+    "noticed the urban arts neighborhood vibe",
+    "felt the creative energy from inside"
+  ],
+  'KONO': [
+    "noticed the neighborhood's artistic character from home",
+    "heard creative activity on the street",
+    "appreciated the DIY neighborhood spirit"
+  ],
+  'Chinatown': [
+    "heard the morning market bustle outside",
+    "smelled cooking from nearby restaurants",
+    "felt the neighborhood's bustling energy"
+  ],
+  'Piedmont Ave': [
+    "enjoyed the leafy street view from inside",
+    "noticed the boutique neighborhood's quiet charm",
+    "appreciated the residential tranquility"
+  ]
+};
+
 function runHouseholdEngine_(ctx) {
 
   // Phase 42 §5.6: read/mutate via shared ctx.ledger; commit handled in Phase 10.
@@ -294,68 +383,6 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOOD FLAVOR (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoodPool = {
-    'Temescal': [
-      "heard neighborhood kids playing outside",
-      "smelled cooking from a nearby home",
-      "noticed the creative neighborhood energy from inside"
-    ],
-    'Downtown': [
-      "heard city sounds drifting up from the street",
-      "noticed the urban energy even from inside",
-      "watched Downtown activity from the window"
-    ],
-    'Fruitvale': [
-      "heard music from a neighbor's gathering",
-      "smelled food from a nearby kitchen",
-      "felt the neighborhood's cultural warmth"
-    ],
-    'Lake Merritt': [
-      "watched joggers pass by from the window",
-      "heard geese from the lake",
-      "enjoyed the lakeside neighborhood tranquility"
-    ],
-    'West Oakland': [
-      "heard trains in the distance",
-      "noticed the neighborhood's industrial rhythm",
-      "observed development activity from the window"
-    ],
-    'Laurel': [
-      "enjoyed the quiet residential evening",
-      "waved to a neighbor through the window",
-      "appreciated the peaceful block"
-    ],
-    'Rockridge': [
-      "appreciated the tree-lined street view",
-      "heard BART rumble in the distance",
-      "noticed the upscale neighborhood calm"
-    ],
-    'Jack London': [
-      "heard waterfront activity from the window",
-      "noticed the arts district energy nearby",
-      "smelled the estuary air"
-    ],
-    'Uptown': [
-      "heard gallery foot traffic from the window",
-      "noticed the urban arts neighborhood vibe",
-      "felt the creative energy from inside"
-    ],
-    'KONO': [
-      "noticed the neighborhood's artistic character from home",
-      "heard creative activity on the street",
-      "appreciated the DIY neighborhood spirit"
-    ],
-    'Chinatown': [
-      "heard the morning market bustle outside",
-      "smelled cooking from nearby restaurants",
-      "felt the neighborhood's bustling energy"
-    ],
-    'Piedmont Ave': [
-      "enjoyed the leafy street view from inside",
-      "noticed the boutique neighborhood's quiet charm",
-      "appreciated the residential tranquility"
-    ]
-  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CIRCUMSTANCE POOLS (engine.32 T4) — gated per-citizen on MaritalStatus /
@@ -516,10 +543,8 @@ function runHouseholdEngine_(ctx) {
     var citizenPool = pool.slice();
 
     // Add neighborhood-specific events
-    if (neighborhood && neighborhoodPool[neighborhood]) {
-      var np = neighborhoodPool[neighborhood];
-      for (var i = 0; i < np.length; i++) { citizenPool.push(np[i]); }
-    }
+    var np = hoodTexturePool_(ctx, neighborhood, HOUSEHOLD_TEXTURE_BY_CHARACTER_, HOUSEHOLD_TEXTURE_BESPOKE_, 'runHouseholdEngine_');
+    for (var i = 0; i < np.length; i++) { citizenPool.push(np[i]); }
 
     // engine.32 T4 — circumstance gates: partnered/parent lines only for
     // citizens whose ledger row says so (lowercase enum per generational S248).

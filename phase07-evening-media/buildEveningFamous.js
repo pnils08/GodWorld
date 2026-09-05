@@ -82,7 +82,7 @@ function buildEveningFamous_(ctx) {
   var neighborhoods = getCoreSimNeighborhoods_(ctx);
 
   // Arts neighborhoods for First Friday
-  var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+  var artsNeighborhoods = hoodNamesWithScene_(ctx, 'arts'); // engine.148 P3 — Neighborhood_Map.Scenes
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CULTURAL POOLS (with categories)

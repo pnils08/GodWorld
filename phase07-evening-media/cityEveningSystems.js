@@ -308,33 +308,14 @@ function buildCityEveningSystems_(ctx) {
   crowd["Downtown"] = 2;
   crowd["Jack London"] = 2;
 
-  // Table-driven holiday crowd boosts
-  var HOLIDAY_CROWD = {
-    LunarNewYear:    [["Chinatown", 5], ["Downtown", 2]],
-    CincoDeMayo:     [["Fruitvale", 5], ["Downtown", 1]],
-    DiaDeMuertos:    [["Fruitvale", 5], ["Downtown", 1]],
-    Juneteenth:      [["West Oakland", 4], ["Downtown", 2], ["Lake Merritt", 2]],
-    OaklandPride:    [["Downtown", 4], ["Lake Merritt", 3], ["Uptown", 3]],
-    ArtSoulFestival: [["Downtown", 5], ["Lake Merritt", 2]],
-    NewYearsEve:     [["Downtown", 4], ["Jack London", 3], ["Uptown", 2]],
-    Halloween:       [["Temescal", 3], ["Rockridge", 2], ["Lake Merritt", 2]],
-    Independence:    [["Jack London", 3], ["Lake Merritt", 2]],
-    OpeningDay:      [["Jack London", 5], ["Downtown", 2]]
-  };
+  // engine.148 P3: holiday / First Friday / Creation Day crowd draws are
+  // Neighborhood_Map.Scenes tags (`<Holiday>:weight`, `FirstFriday:n`,
+  // `CreationDay:n`) — the hood table left ten hoods with no draw at all.
+  if (holiday && holiday !== "none") applyCrowdBoosts_(crowd, hoodsWithScene_(ctx, holiday));
 
-  applyCrowdBoosts_(crowd, HOLIDAY_CROWD[holiday]);
+  if (isFirstFriday) applyCrowdBoosts_(crowd, hoodsWithScene_(ctx, 'FirstFriday'));
 
-  if (isFirstFriday) {
-    applyCrowdBoosts_(crowd, [
-      ["Uptown", 4], ["KONO", 3], ["Temescal", 2], ["Jack London", 1], ["Downtown", 1]
-    ]);
-  }
-
-  if (isCreationDay) {
-    applyCrowdBoosts_(crowd, [
-      ["Downtown", 3], ["West Oakland", 2], ["Lake Merritt", 2], ["Jack London", 1]
-    ]);
-  }
+  if (isCreationDay) applyCrowdBoosts_(crowd, hoodsWithScene_(ctx, 'CreationDay'));
 
   if (sportsSeason === "championship") {
     applyCrowdBoosts_(crowd, [["Jack London", 4], ["Downtown", 3], ["Lake Merritt", 2]]);

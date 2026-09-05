@@ -43,6 +43,23 @@
 - **getAdjacentHoods_(ctx, hood)**
   Reads: S.neighborhoodAdjacency
 
+- **parseSceneTags_(hood, raw)**
+
+- **getHoodCharacter_(ctx, hood)**
+  Reads: S.canonHoods
+
+- **getHoodScenes_(ctx, hood)**
+  Reads: S.canonHoods
+
+- **hoodSceneWeight_(ctx, hood, tag)**
+
+- **hoodsWithScene_(ctx, tag)**
+  Reads: S.canonHoods
+
+- **hoodNamesWithScene_(ctx, tag)**
+
+- **hoodTexturePool_(ctx, rawHood, byCharacter, bespokeByHood, caller)**
+
 - **getHoodWeatherZone_(ctx, hood)**
   Reads: S.canonHoods
 
@@ -1186,7 +1203,7 @@
   Sheets: Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
-- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, rng)**
+- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng)**
   Config: ctx.config.hoodCitizenFloor, ctx.config.hoodFloorPromotePerCycle
 
 - **waveSexPreference_(ctx)**
@@ -3797,4 +3814,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1296
+**Functions mapped:** 1303

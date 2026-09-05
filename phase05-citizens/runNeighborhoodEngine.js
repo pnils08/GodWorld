@@ -46,6 +46,107 @@
  * ============================================================================
  */
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.148 P3 — neighborhood drift pools (was a 12-key literal + a silent generic fallback)
+// Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
+// (a label with no pool throws); the twelve original hoods keep their bespoke
+// lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
+// ═══════════════════════════════════════════════════════════════════════════
+var NEIGHBORHOOD_DRIFT_BY_CHARACTER_ = {
+  'institutional': ["noticed the civic buildings emptying out at dusk", "felt the neighborhood's official rhythm shift", "observed lines forming outside a public office"],
+  'clinic': ["noticed more people heading toward the clinics", "felt the neighborhood's weary, caring pace", "observed a health worker finishing a long shift"],
+  'schools-retail': ["noticed the after-school rush on the main street", "felt the block settle once the school bells finished", "observed parents talking outside the corner shops"],
+  'campus': ["noticed the campus crowd spilling onto the sidewalks", "felt the neighborhood's young, restless energy", "observed new construction beside the old blocks"],
+  'transit-retail': ["noticed the station crowd thinning after rush hour", "felt the neighborhood's constant coming and going", "observed vendors packing up near the transit stop"],
+  'nightlife': ["noticed the bars filling earlier than usual", "felt the neighborhood's evening energy rise", "observed the night crowd gathering on the corners"],
+  'professional': ["noticed the office crowd leaving in step", "felt the neighborhood's orderly hum", "observed shoppers lingering along the main avenue"],
+  'residential': ["noticed neighbors talking across a fence", "felt the block's quiet settle in", "observed porch lights coming on down the street"],
+  'retail': ["noticed the shops changing their window displays", "felt the neighborhood's shopping-day bustle", "observed a line outside a popular storefront"],
+  'medical': ["noticed hospital shift change on the sidewalks", "felt the neighborhood's steady, tended rhythm", "observed a scrubs-clad crowd at the coffee counter"],
+  'family-retail': ["noticed families filling the market street", "felt the neighborhood's generations mixing", "observed shopkeepers greeting regulars by name"],
+  'mixed': ["noticed apartments and storefronts sharing the block", "felt the neighborhood's patchwork rhythm", "observed the corner store doing steady business"],
+  'village-retail': ["noticed the village main street winding down", "felt the neighborhood's small-town pace", "observed regulars gathering outside the bakery"],
+  'service-labor': ["noticed the early shift heading out before dawn", "felt the neighborhood's working rhythm", "observed workers gathering at the bus stop"],
+  'arts': ["noticed a new mural going up on the corridor", "felt the neighborhood's creative pulse", "observed a gallery crowd drifting between openings"],
+  'stadium': ["noticed game-day crowds moving toward the arena", "felt the district's pregame anticipation", "observed vendors setting up along the concourse"],
+  'construction': ["noticed cranes swinging over the boom blocks", "felt the neighborhood's build-out energy", "observed a new frame rising where a lot stood empty"]
+};
+
+var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
+  'Temescal': [
+    "noticed the creative energy shifting in Temescal",
+    "felt Temescal's community vibe change slightly",
+    "observed new activity around Temescal's cafes",
+    "sensed the neighborhood's artistic pulse"
+  ],
+  'Downtown': [
+    "felt Downtown's urban rhythm intensify",
+    "noticed shifting crowds in the city center",
+    "observed changes in Downtown foot traffic",
+    "sensed the business district's mood"
+  ],
+  'Fruitvale': [
+    "felt Fruitvale's cultural energy",
+    "noticed community gathering patterns shift",
+    "observed the neighborhood's familiar rhythms",
+    "sensed changes in the local atmosphere"
+  ],
+  'Lake Merritt': [
+    "noticed activity patterns around the lake",
+    "felt the lakeside community's mood",
+    "observed joggers and families by Lake Merritt",
+    "sensed the peaceful energy near the water"
+  ],
+  'West Oakland': [
+    "noticed West Oakland's industrial rhythm",
+    "felt the neighborhood's changing landscape",
+    "observed development activity nearby",
+    "sensed the area's evolving character"
+  ],
+  'Laurel': [
+    "appreciated Laurel's residential calm",
+    "noticed the quiet neighborhood's subtle shifts",
+    "felt the local community's steady presence",
+    "observed familiar faces on the street"
+  ],
+  'Rockridge': [
+    "noticed Rockridge's upscale atmosphere",
+    "felt the tree-lined streets' ambiance",
+    "observed shoppers along College Ave",
+    "sensed the neighborhood's refined energy"
+  ],
+  'Jack London': [
+    "felt Jack London's waterfront energy",
+    "noticed nightlife activity picking up",
+    "observed the arts district's creative buzz",
+    "sensed the estuary's calming presence"
+  ],
+  'Uptown': [
+    "felt Uptown's urban arts energy",
+    "noticed gallery-goers and theater crowds",
+    "observed the neighborhood's creative pulse",
+    "sensed the cultural district's momentum"
+  ],
+  'KONO': [
+    "noticed KONO's artistic atmosphere",
+    "felt the Koreatown-Northgate creative vibe",
+    "observed murals and street art activity",
+    "sensed the neighborhood's DIY spirit"
+  ],
+  'Chinatown': [
+    "felt Chinatown's bustling energy",
+    "noticed the busy morning markets",
+    "observed multigenerational community activity",
+    "sensed the neighborhood's cultural rhythms"
+  ],
+  'Piedmont Ave': [
+    "noticed Piedmont Ave's leafy calm",
+    "felt the neighborhood's boutique atmosphere",
+    "observed afternoon strollers along the avenue",
+    "sensed the area's residential tranquility"
+  ]
+};
+
 function runNeighborhoodEngine_(ctx) {
 
   var rng = safeRand_(ctx);
@@ -83,90 +184,6 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOOD-SPECIFIC EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoodEvents = {
-    'Temescal': [
-      "noticed the creative energy shifting in Temescal",
-      "felt Temescal's community vibe change slightly",
-      "observed new activity around Temescal's cafes",
-      "sensed the neighborhood's artistic pulse"
-    ],
-    'Downtown': [
-      "felt Downtown's urban rhythm intensify",
-      "noticed shifting crowds in the city center",
-      "observed changes in Downtown foot traffic",
-      "sensed the business district's mood"
-    ],
-    'Fruitvale': [
-      "felt Fruitvale's cultural energy",
-      "noticed community gathering patterns shift",
-      "observed the neighborhood's familiar rhythms",
-      "sensed changes in the local atmosphere"
-    ],
-    'Lake Merritt': [
-      "noticed activity patterns around the lake",
-      "felt the lakeside community's mood",
-      "observed joggers and families by Lake Merritt",
-      "sensed the peaceful energy near the water"
-    ],
-    'West Oakland': [
-      "noticed West Oakland's industrial rhythm",
-      "felt the neighborhood's changing landscape",
-      "observed development activity nearby",
-      "sensed the area's evolving character"
-    ],
-    'Laurel': [
-      "appreciated Laurel's residential calm",
-      "noticed the quiet neighborhood's subtle shifts",
-      "felt the local community's steady presence",
-      "observed familiar faces on the street"
-    ],
-    'Rockridge': [
-      "noticed Rockridge's upscale atmosphere",
-      "felt the tree-lined streets' ambiance",
-      "observed shoppers along College Ave",
-      "sensed the neighborhood's refined energy"
-    ],
-    'Jack London': [
-      "felt Jack London's waterfront energy",
-      "noticed nightlife activity picking up",
-      "observed the arts district's creative buzz",
-      "sensed the estuary's calming presence"
-    ],
-    'Uptown': [
-      "felt Uptown's urban arts energy",
-      "noticed gallery-goers and theater crowds",
-      "observed the neighborhood's creative pulse",
-      "sensed the cultural district's momentum"
-    ],
-    'KONO': [
-      "noticed KONO's artistic atmosphere",
-      "felt the Koreatown-Northgate creative vibe",
-      "observed murals and street art activity",
-      "sensed the neighborhood's DIY spirit"
-    ],
-    'Chinatown': [
-      "felt Chinatown's bustling energy",
-      "noticed the busy morning markets",
-      "observed multigenerational community activity",
-      "sensed the neighborhood's cultural rhythms"
-    ],
-    'Piedmont Ave': [
-      "noticed Piedmont Ave's leafy calm",
-      "felt the neighborhood's boutique atmosphere",
-      "observed afternoon strollers along the avenue",
-      "sensed the area's residential tranquility"
-    ]
-  };
-
-  // Generic events (fallback)
-  var genericEvents = [
-    "noticed small tension in the neighborhood",
-    "heard more activity around the block",
-    "felt area slightly quieter than usual",
-    "sensed change in evening mood",
-    "observed unusual foot traffic",
-    "noticed shift in community energy"
-  ];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // EXTERNAL CONTEXT FROM ctx.summary
@@ -460,7 +477,7 @@ function runNeighborhoodEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (rng() < driftChance) {
 
-      var eventPool = (neighborhoodEvents[neighborhood] || genericEvents).slice();
+      var eventPool = hoodTexturePool_(ctx, neighborhood, NEIGHBORHOOD_DRIFT_BY_CHARACTER_, NEIGHBORHOOD_DRIFT_BESPOKE_, 'runNeighborhoodEngine_');
       var eventTag = "Neighborhood";
 
       // Add holiday-specific events (v2.2)

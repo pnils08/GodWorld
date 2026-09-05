@@ -301,8 +301,8 @@ function applyCalendarMediaModifiers_(ctx) {
     effects.coverageProfile.artsFocus = true;
     effects.coverageProfile.firstFriday = true;
 
-    // Arts district neighborhoods get spotlight
-    effects.artsSpotlight = ['Temescal', 'Uptown', 'Jack London'];
+    // Arts district neighborhoods get spotlight (engine.148 P3: Scenes `arts` — KONO joins)
+    effects.artsSpotlight = hoodNamesWithScene_(ctx, 'arts');
   }
 
   // ─────────────────────────────────────────────────────────────

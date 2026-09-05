@@ -30,6 +30,87 @@
  * ============================================================================
  */
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.148 P3 — education texture pools (was a 12-key literal, ten hoods silent)
+// Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
+// (a label with no pool throws); the twelve original hoods keep their bespoke
+// lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
+// ═══════════════════════════════════════════════════════════════════════════
+var EDUCATION_TEXTURE_BY_CHARACTER_ = {
+  'institutional': ["visited a public reading room near the civic offices", "attended a public information session"],
+  'clinic': ["read up on health topics at a community clinic", "attended a wellness workshop nearby"],
+  'schools-retail': ["visited the neighborhood school library", "attended a parent-and-community learning night"],
+  'campus': ["sat in on an open campus lecture", "browsed the campus bookstore"],
+  'transit-retail': ["read during the commute", "picked up a course flyer near the station"],
+  'nightlife': ["attended an evening talk at a local venue", "learned something from a late-night conversation"],
+  'professional': ["attended a professional development session nearby", "browsed a bookstore along the avenue"],
+  'residential': ["studied quietly at home", "visited the nearest library branch"],
+  'retail': ["browsed a bookstore between the shops", "attended a workshop hosted by a local store"],
+  'medical': ["attended a public health talk at the hospital", "read up on a medical topic nearby"],
+  'family-retail': ["learned from an elder in the neighborhood", "attended a cultural learning event on the market street"],
+  'mixed': ["studied at the corner cafe", "attended a community class on the block"],
+  'village-retail': ["visited the village library branch", "attended a small-group class nearby"],
+  'service-labor': ["took a night class after a shift", "learned a new skill on the job"],
+  'arts': ["attended an arts workshop on the corridor", "learned about murals and printmaking informally"],
+  'stadium': ["attended a youth program hosted at the arena", "learned about the district's development plan"],
+  'construction': ["attended a trades training session nearby", "learned about the neighborhood's build-out"]
+};
+
+var EDUCATION_TEXTURE_BESPOKE_ = {
+  'Temescal': [
+    "browsed the Temescal library branch",
+    "attended a community workshop in Temescal"
+  ],
+  'Downtown': [
+    "visited the main Oakland library Downtown",
+    "attended a public lecture in the city center"
+  ],
+  'Fruitvale': [
+    "participated in community education programs",
+    "engaged with cultural learning opportunities"
+  ],
+  'Lake Merritt': [
+    "read by Lake Merritt during a break",
+    "attended a lakeside community event"
+  ],
+  'West Oakland': [
+    "explored local history and development topics",
+    "learned about neighborhood changes"
+  ],
+  'Laurel': [
+    "visited the Laurel library branch",
+    "engaged in quiet study at home"
+  ],
+  'Rockridge': [
+    "browsed bookstores in Rockridge",
+    "attended an educational event nearby"
+  ],
+  'Jack London': [
+    "explored arts education in Jack London",
+    "attended a creative workshop"
+  ],
+  'Uptown': [
+    "attended an arts lecture in Uptown",
+    "explored gallery exhibitions for learning",
+    "engaged with urban arts education"
+  ],
+  'KONO': [
+    "learned about street art and muralism",
+    "attended a DIY workshop in KONO",
+    "explored creative skills informally"
+  ],
+  'Chinatown': [
+    "learned about Chinese culture and history",
+    "engaged with multilingual community resources",
+    "explored cultural heritage topics"
+  ],
+  'Piedmont Ave': [
+    "browsed independent bookstores on Piedmont Ave",
+    "attended a neighborhood lecture",
+    "engaged in quiet reading at a local cafe"
+  ]
+};
+
 function runEducationEngine_(ctx) {
 
   var rng = safeRand_(ctx);
@@ -252,60 +333,6 @@ function runEducationEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOOD EDUCATION POOLS (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoodEdu = {
-    'Temescal': [
-      "browsed the Temescal library branch",
-      "attended a community workshop in Temescal"
-    ],
-    'Downtown': [
-      "visited the main Oakland library Downtown",
-      "attended a public lecture in the city center"
-    ],
-    'Fruitvale': [
-      "participated in community education programs",
-      "engaged with cultural learning opportunities"
-    ],
-    'Lake Merritt': [
-      "read by Lake Merritt during a break",
-      "attended a lakeside community event"
-    ],
-    'West Oakland': [
-      "explored local history and development topics",
-      "learned about neighborhood changes"
-    ],
-    'Laurel': [
-      "visited the Laurel library branch",
-      "engaged in quiet study at home"
-    ],
-    'Rockridge': [
-      "browsed bookstores in Rockridge",
-      "attended an educational event nearby"
-    ],
-    'Jack London': [
-      "explored arts education in Jack London",
-      "attended a creative workshop"
-    ],
-    'Uptown': [
-      "attended an arts lecture in Uptown",
-      "explored gallery exhibitions for learning",
-      "engaged with urban arts education"
-    ],
-    'KONO': [
-      "learned about street art and muralism",
-      "attended a DIY workshop in KONO",
-      "explored creative skills informally"
-    ],
-    'Chinatown': [
-      "learned about Chinese culture and history",
-      "engaged with multilingual community resources",
-      "explored cultural heritage topics"
-    ],
-    'Piedmont Ave': [
-      "browsed independent bookstores on Piedmont Ave",
-      "attended a neighborhood lecture",
-      "engaged in quiet reading at a local cafe"
-    ]
-  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MERGE BASE POOL
@@ -419,9 +446,7 @@ function runEducationEngine_(ctx) {
     var pool = basePool.slice();
 
     // Add neighborhood events
-    if (neighborhood && neighborhoodEdu[neighborhood]) {
-      pool = pool.concat(neighborhoodEdu[neighborhood]);
-    }
+    pool = pool.concat(hoodTexturePool_(ctx, neighborhood, EDUCATION_TEXTURE_BY_CHARACTER_, EDUCATION_TEXTURE_BESPOKE_, 'runEducationEngine_'));
 
     // ═══════════════════════════════════════════════════════════════════════
     // PICK EVENT

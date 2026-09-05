@@ -1070,7 +1070,7 @@ function matchCitizenToJournalist_(citizenArchetype, neighborhoodContext, storyD
 
   // ── Neighborhoods with cultural/civic weight ────────────────────────────
   var CULTURE_NEIGHBORHOODS = ['Temescal', 'Fruitvale', 'Chinatown', 'Uptown', 'Jack London'];
-  var CIVIC_NEIGHBORHOODS = ['Downtown', 'West Oakland', 'Old Oakland', 'Lake Merritt'];
+  var CIVIC_NEIGHBORHOODS = ['Downtown', 'West Oakland', 'Lake Merritt']; // engine.148 P3: Old Oakland is a ChildArea of Downtown
 
   // Build theme list from archetype
   var archetype = citizenArchetype || 'Drifter';

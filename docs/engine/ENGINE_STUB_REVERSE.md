@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 181 · **Functions mapped:** 1296 · **S.* fields:** 342 · **Sheets:** 59
+**Files scanned:** 181 · **Functions mapped:** 1303 · **S.* fields:** 342 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -47,7 +47,7 @@
 | `S.businessDeclines` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/runCareerEngine.js::runCareerEngine_` | 1 | 2 |
 | `S.businessDynamicsState` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 2 |
 | `S.canonHoodCount` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | _(none)_ | 1 | 0 |
-| `S.canonHoods` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | `phase01-config/canonNeighborhoodLoader.js::buildAdjacencyFromSheet_`, `phase01-config/canonNeighborhoodLoader.js::countTrackedByHood_`, `phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_`, `phase01-config/canonNeighborhoodLoader.js::getHoodAttention_`, …(+5 more) | 1 | 11 |
+| `S.canonHoods` | `phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_` | `phase01-config/canonNeighborhoodLoader.js::buildAdjacencyFromSheet_`, `phase01-config/canonNeighborhoodLoader.js::countTrackedByHood_`, `phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_`, `phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_`, `phase01-config/canonNeighborhoodLoader.js::getHoodAttention_`, …(+8 more) | 1 | 14 |
 | `S.canonSportsPhase` | `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_` | _(none)_ | 1 | 0 |
 | `S.careerChurn` | `phase06-analysis/economicRippleEngine.js::detectCareerRipples_` | _(none)_ | 1 | 0 |
 | `S.careerEvents` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | _(none)_ | 1 | 0 |

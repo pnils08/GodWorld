@@ -21,6 +21,7 @@ global.Logger = { log() {} };
 const M = require('../utilities/citizenDialMap.js');
 const C = require('../utilities/compressLifeHistory.js');
 global.getCitizenDialBands_ = () => null;
+global.hoodTexturePool_ = (ctx, hood, byLabel, bespoke) => (bespoke && bespoke[hood] ? bespoke[hood].slice() : []); // engine.148 P3: hood texture stubbed to the bespoke lines
 global.getGriefConfig_ = C.getGriefConfig_;
 global.activeGriefFromRegisters_ = C.activeGriefFromRegisters_;
 

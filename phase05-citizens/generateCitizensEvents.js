@@ -123,6 +123,117 @@ function applyGriefPoolWeights_(pool, griefConfig) {
   return pool;
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.148 P3 — citizen-event texture, venues and institutions by place label.
+// Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
+// (a label with no pool throws); the twelve original hoods keep their bespoke
+// lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
+// ═══════════════════════════════════════════════════════════════════════════
+var CITIZEN_EVENT_TEXTURE_BY_CHARACTER_ = {
+  'institutional': ["passed the civic offices on routine business", "felt the official rhythm of the district", "noticed lines outside a public counter"],
+  'clinic': ["passed a clinic with a full waiting room", "felt the neighborhood's caring, worn pace", "noticed a health worker heading home"],
+  'schools-retail': ["walked the main street at school pickup", "stopped by a corner shop near the school", "felt the block's after-school bustle"],
+  'campus': ["cut through the campus on an errand", "noticed new construction beside the old blocks", "felt the neighborhood's young energy"],
+  'transit-retail': ["passed through the station crowd", "stopped at a vendor near the transit stop", "felt the neighborhood's constant motion"],
+  'nightlife': ["walked past bars opening for the evening", "felt the district's night energy building", "noticed the crowd gathering on the corner"],
+  'professional': ["stopped by a shop along the avenue", "felt the neighborhood's orderly hum", "noticed the office crowd heading home"],
+  'residential': ["walked the quiet residential blocks", "waved to a neighbor on the porch", "enjoyed the calm of the street"],
+  'retail': ["browsed the storefronts briefly", "noticed a line outside a popular shop", "felt the shopping-street bustle"],
+  'medical': ["passed the hospital at shift change", "stopped for coffee with the scrubs crowd", "felt the steady rhythm of the district"],
+  'family-retail': ["stopped by the market street for familiar flavors", "noticed generations mixing outside the shops", "felt the neighborhood's family warmth"],
+  'mixed': ["stopped at the corner store", "walked past apartments and storefronts sharing the block", "felt the neighborhood's patchwork rhythm"],
+  'village-retail': ["walked the village main street", "stopped by the bakery", "felt the neighborhood's small-town pace"],
+  'service-labor': ["caught the early bus with the shift crowd", "noticed the working rhythm of the block", "felt the neighborhood's tired resolve"],
+  'arts': ["walked past a new mural on the corridor", "noticed a gallery opening", "felt the neighborhood's creative pulse"],
+  'stadium': ["walked past the arena on an event day", "noticed vendors setting up on the concourse", "felt the district's pregame buzz"],
+  'construction': ["walked past a rising building frame", "noticed cranes over the block", "felt the neighborhood's boom-time churn"]
+};
+
+var CITIZEN_EVENT_TEXTURE_BESPOKE_ = {
+  "Temescal": ["grabbed coffee at a Temescal cafe", "noticed the neighborhood's creative energy", "browsed the Temescal Alley shops"],
+  "Downtown": ["navigated Downtown's busy streets", "felt the pulse of the city center", "passed by City Hall on routine business"],
+  "Fruitvale": ["enjoyed the Fruitvale community vibe", "stopped by a familiar Fruitvale spot", "appreciated the neighborhood's cultural richness"],
+  "Lake Merritt": ["took a moment by the lake", "enjoyed Lake Merritt's evening calm", "watched joggers circle the lake"],
+  "West Oakland": ["noticed West Oakland's changing landscape", "felt the neighborhood's industrial rhythm", "passed by historic Victorian homes"],
+  "Laurel": ["appreciated Laurel's quiet streets", "enjoyed the residential calm", "stopped by Laurel's small shops"],
+  "Rockridge": ["browsed Rockridge's shops briefly", "walked under Rockridge's tree canopy", "grabbed something from College Avenue"],
+  "Jack London": ["felt Jack London's waterfront energy", "noticed activity near the estuary", "enjoyed the district's evening atmosphere"],
+  "Uptown": ["walked through Uptown's gallery district", "noticed the neighborhood's artistic energy", "passed by the Fox Theater"],
+  "KONO": ["explored KONO's creative spaces", "noticed murals along the corridor", "felt the neighborhood's DIY spirit"],
+  "Chinatown": ["stopped by Chinatown for familiar flavors", "appreciated the neighborhood's bustling energy", "noticed the blend of old and new storefronts"],
+  "Piedmont Ave": ["strolled along Piedmont Avenue", "enjoyed the neighborhood's boutique charm", "appreciated the leafy residential streets"]
+};
+
+var CITIZEN_VENUES_BY_CHARACTER_ = {
+  'institutional': ["a public office lobby", "a civic plaza", "a bench outside the courthouse"],
+  'clinic': ["a clinic waiting room", "a pharmacy counter", "a cafe near the clinics"],
+  'schools-retail': ["the school gate", "a corner shop", "the main street sidewalk"],
+  'campus': ["a campus quad", "a student cafe", "a new-construction corner"],
+  'transit-retail': ["the station plaza", "a vendor by the transit stop", "a market near the tracks"],
+  'nightlife': ["a bar patio", "a venue doorway", "a late-night counter"],
+  'professional': ["a cafe on the avenue", "a bookstore corner", "a tidy sidewalk stretch"],
+  'residential': ["a front porch", "a quiet side street", "a small park"],
+  'retail': ["a storefront window", "a busy shopping block", "a coffee line"],
+  'medical': ["the hospital cafeteria", "a coffee cart by the entrance", "a bench on the hospital grounds"],
+  'family-retail': ["a family-run counter", "the market street", "a bakery line"],
+  'mixed': ["the corner store", "an apartment stoop", "a mixed-use block"],
+  'village-retail': ["the village main street", "the bakery", "a small-town cafe"],
+  'service-labor': ["a bus stop before dawn", "a workers' diner", "a corner market"],
+  'arts': ["a mural-lined block", "a gallery opening", "a studio doorway"],
+  'stadium': ["the arena concourse", "a pregame tailgate", "a sports bar near the arena"],
+  'construction': ["a fenced build site", "a lot mid-frame", "a lunch truck by the cranes"]
+};
+
+var CITIZEN_VENUES_BESPOKE_ = {
+  "Temescal": ["a Temescal cafe", "Temescal Alley", "a small gallery"],
+  "Downtown": ["City Hall steps", "a busy plaza", "a late-night diner"],
+  "Fruitvale": ["Fruitvale BART area", "a taqueria patio", "a corner market"],
+  "Lake Merritt": ["the lakeside path", "the pergola", "a bench near the water"],
+  "West Oakland": ["an old warehouse corridor", "a porch-lit block", "a local pop-up"],
+  "Laurel": ["a quiet main street", "a neighborhood bakery", "a small park"],
+  "Rockridge": ["College Avenue", "a bookstore corner", "a coffee line"],
+  "Jack London": ["the waterfront", "a ferry-adjacent corner", "a patio by the estuary"],
+  "Uptown": ["Fox Theater frontage", "a gallery opening", "a street mural"],
+  "KONO": ["a mural-lined block", "a pop-up studio", "a DIY show space"],
+  "Chinatown": ["a lantern-lit storefront", "a small bakery line", "a herb shop"],
+  "Piedmont Ave": ["a boutique corner", "a tree-lined cafe", "a calm sidewalk stretch"]
+};
+
+var CITIZEN_INSTITUTIONS_BY_CHARACTER_ = {
+  'institutional': ["a civic office", "a public service desk"],
+  'clinic': ["a community clinic", "a health nonprofit"],
+  'schools-retail': ["a school fundraiser", "a merchant association"],
+  'campus': ["a campus office", "a student organization"],
+  'transit-retail': ["a transit desk", "a merchant association"],
+  'nightlife': ["a venue coordinator", "a nightlife association"],
+  'professional': ["a neighborhood association", "a small business association"],
+  'residential': ["a neighborhood meetup", "a local council meeting"],
+  'retail': ["a merchant association", "a small business association"],
+  'medical': ["a hospital office", "a health program"],
+  'family-retail': ["a merchant association", "a family business network"],
+  'mixed': ["a neighborhood association", "a community workshop"],
+  'village-retail': ["a neighborhood association", "a local volunteer circle"],
+  'service-labor': ["a workers' center", "a mutual aid table"],
+  'arts': ["an artist collective", "an arts nonprofit"],
+  'stadium': ["an arena office", "an event crew"],
+  'construction': ["a development office", "a trades program"]
+};
+
+var CITIZEN_INSTITUTIONS_BESPOKE_ = {
+  "Temescal": ["a community board", "a neighborhood association"],
+  "Downtown": ["a civic office", "a public service desk"],
+  "Fruitvale": ["a community clinic", "a cultural center"],
+  "Lake Merritt": ["a volunteer meetup", "a public program"],
+  "West Oakland": ["a mutual aid table", "a community workshop"],
+  "Laurel": ["a school fundraiser", "a local council meeting"],
+  "Rockridge": ["a PTA meeting", "a small business association"],
+  "Jack London": ["a port office", "a transit desk"],
+  "Uptown": ["an arts nonprofit", "a venue coordinator"],
+  "KONO": ["an artist collective", "a community studio"],
+  "Chinatown": ["a merchant association", "a family business network"],
+  "Piedmont Ave": ["a neighborhood meetup", "a local volunteer circle"]
+};
+
 function generateCitizensEvents_(ctx) {
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
   if (!ctx.ledger) {
@@ -630,8 +741,8 @@ function generateCitizensEvents_(ctx) {
     var beats = TONE_BEATS[tone] || TONE_BEATS.plain;
     var beat = beats[Math.floor(roll() * beats.length)];
 
-    var venue = pickVenue_(neighborhood) || "a familiar spot";
-    var institution = pickInstitution_(neighborhood) || "a local office";
+    var venue = pickVenue_(neighborhood);
+    var institution = pickInstitution_(neighborhood);
     var contactName = (contact && contact.name) ? contact.name : "someone familiar";
 
     var rendered = beat
@@ -936,20 +1047,6 @@ function generateCitizensEvents_(ctx) {
   // v2.5: LOCAL ENTITIES / VENUES
   // =========================================================================
   var defaultEntities = {
-    neighborhoods: {
-      "Temescal": { venues: ["a Temescal cafe", "Temescal Alley", "a small gallery"], institutions: ["a community board", "a neighborhood association"] },
-      "Downtown": { venues: ["City Hall steps", "a busy plaza", "a late-night diner"], institutions: ["a civic office", "a public service desk"] },
-      "Fruitvale": { venues: ["Fruitvale BART area", "a taqueria patio", "a corner market"], institutions: ["a community clinic", "a cultural center"] },
-      "Lake Merritt": { venues: ["the lakeside path", "the pergola", "a bench near the water"], institutions: ["a volunteer meetup", "a public program"] },
-      "West Oakland": { venues: ["an old warehouse corridor", "a porch-lit block", "a local pop-up"], institutions: ["a mutual aid table", "a community workshop"] },
-      "Laurel": { venues: ["a quiet main street", "a neighborhood bakery", "a small park"], institutions: ["a school fundraiser", "a local council meeting"] },
-      "Rockridge": { venues: ["College Avenue", "a bookstore corner", "a coffee line"], institutions: ["a PTA meeting", "a small business association"] },
-      "Jack London": { venues: ["the waterfront", "a ferry-adjacent corner", "a patio by the estuary"], institutions: ["a port office", "a transit desk"] },
-      "Uptown": { venues: ["Fox Theater frontage", "a gallery opening", "a street mural"], institutions: ["an arts nonprofit", "a venue coordinator"] },
-      "KONO": { venues: ["a mural-lined block", "a pop-up studio", "a DIY show space"], institutions: ["an artist collective", "a community studio"] },
-      "Chinatown": { venues: ["a lantern-lit storefront", "a small bakery line", "a herb shop"], institutions: ["a merchant association", "a family business network"] },
-      "Piedmont Ave": { venues: ["a boutique corner", "a tree-lined cafe", "a calm sidewalk stretch"], institutions: ["a neighborhood meetup", "a local volunteer circle"] }
-    },
     occupation: {
       "Barista": ["a rush-hour counter", "a coffee order gone sideways", "a regular with a strange request"],
       "Server": ["a table with unusual energy", "a late reservation that changed the shift", "a customer who tipped in a story"],
@@ -966,21 +1063,19 @@ function generateCitizensEvents_(ctx) {
     }
   };
 
-  var entities = (S.localEntities && typeof S.localEntities === "object")
-    ? S.localEntities
-    : defaultEntities;
+  // engine.148 P3: S.localEntities had no writer — the occupation flavor is the
+  // literal; hood venues/institutions come from the character pools below.
+  var entities = defaultEntities;
 
   function pickVenue_(neighborhood) {
-    var nh = entities.neighborhoods && entities.neighborhoods[neighborhood];
-    var list = nh && nh.venues;
-    if (!list || !list.length) return "";
+    var list = hoodTexturePool_(ctx, neighborhood, CITIZEN_VENUES_BY_CHARACTER_, CITIZEN_VENUES_BESPOKE_, 'generateCitizensEvents_.pickVenue_');
+    if (!list.length) return "";
     return list[Math.floor(roll() * list.length)];
   }
 
   function pickInstitution_(neighborhood) {
-    var nh = entities.neighborhoods && entities.neighborhoods[neighborhood];
-    var list = nh && nh.institutions;
-    if (!list || !list.length) return "";
+    var list = hoodTexturePool_(ctx, neighborhood, CITIZEN_INSTITUTIONS_BY_CHARACTER_, CITIZEN_INSTITUTIONS_BESPOKE_, 'generateCitizensEvents_.pickInstitution_');
+    if (!list.length) return "";
     return list[Math.floor(roll() * list.length)];
   }
 
@@ -1773,20 +1868,6 @@ function generateCitizensEvents_(ctx) {
     ];
   }
 
-  var neighborhoodPools = {
-    "Temescal": ["grabbed coffee at a Temescal cafe", "noticed the neighborhood's creative energy", "browsed the Temescal Alley shops"],
-    "Downtown": ["navigated Downtown's busy streets", "felt the pulse of the city center", "passed by City Hall on routine business"],
-    "Fruitvale": ["enjoyed the Fruitvale community vibe", "stopped by a familiar Fruitvale spot", "appreciated the neighborhood's cultural richness"],
-    "Lake Merritt": ["took a moment by the lake", "enjoyed Lake Merritt's evening calm", "watched joggers circle the lake"],
-    "West Oakland": ["noticed West Oakland's changing landscape", "felt the neighborhood's industrial rhythm", "passed by historic Victorian homes"],
-    "Laurel": ["appreciated Laurel's quiet streets", "enjoyed the residential calm", "stopped by Laurel's small shops"],
-    "Rockridge": ["browsed Rockridge's shops briefly", "walked under Rockridge's tree canopy", "grabbed something from College Avenue"],
-    "Jack London": ["felt Jack London's waterfront energy", "noticed activity near the estuary", "enjoyed the district's evening atmosphere"],
-    "Uptown": ["walked through Uptown's gallery district", "noticed the neighborhood's artistic energy", "passed by the Fox Theater"],
-    "KONO": ["explored KONO's creative spaces", "noticed murals along the corridor", "felt the neighborhood's DIY spirit"],
-    "Chinatown": ["stopped by Chinatown for familiar flavors", "appreciated the neighborhood's bustling energy", "noticed the blend of old and new storefronts"],
-    "Piedmont Ave": ["strolled along Piedmont Avenue", "enjoyed the neighborhood's boutique charm", "appreciated the leafy residential streets"]
-  };
 
   var holidayPools = {
     Thanksgiving: ["prepared for a holiday gathering", "reflected on things to be grateful for", "helped with meal preparations"],
@@ -2285,8 +2366,8 @@ function generateCitizensEvents_(ctx) {
     }
 
     // Neighborhood
-    if (neighborhood && neighborhoodPools[neighborhood]) {
-      var nTexts = neighborhoodPools[neighborhood];
+    var nTexts = hoodTexturePool_(ctx, neighborhood, CITIZEN_EVENT_TEXTURE_BY_CHARACTER_, CITIZEN_EVENT_TEXTURE_BESPOKE_, 'generateCitizensEvents_');
+    if (nTexts.length) {
       for (var ni = 0; ni < nTexts.length; ni++) {
         pool.push(makeEntry(nTexts[ni], mergeTags(["source:neighborhood", "neighborhood:" + neighborhood], calendarTags), 1.1, false));
       }
@@ -2927,7 +3008,7 @@ function generateCitizensEvents_(ctx) {
       var clVenue = "", clUsedContact = false;
       var clSlots = entry.ledgerLine.slots || [];
       for (var cls = 0; cls < clSlots.length; cls++) {
-        if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "a familiar corner";
+        if (clSlots[cls] === "VENUE") clVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "";
         else if (clSlots[cls] === "CONTACT") clUsedContact = true;
       }
       var composedText = composeContentLine_(entry.ledgerLine, S.contentLedger, {
@@ -2961,8 +3042,8 @@ function generateCitizensEvents_(ctx) {
         chosenVenue = "local"; // for memory tracking
       } else {
         // Fallback to simple template rendering
-        chosenVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "a familiar corner";
-        chosenInstitution = pickInstitution_(neighborhood) || "a local office";
+        chosenVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "";
+        chosenInstitution = pickInstitution_(neighborhood);
 
         pick = renderTemplate_(pick, {
           VENUE: chosenVenue,

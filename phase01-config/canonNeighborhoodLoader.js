@@ -83,6 +83,8 @@ function loadCanonNeighborhoods_(ctx) {
   var iZone = header.indexOf('WeatherZone');       // engine.148 P2 — authored geography
   var iAdjacent = header.indexOf('Adjacent');      // engine.148 P2 — authored geography
   var iAttention = header.indexOf('AttentionWeight'); // engine.148 P2 — one shared attention knob
+  var iCharacter = header.indexOf('EmployerCharacter'); // engine.148 P3 — the one place label texture pools key by
+  var iScenes = header.indexOf('Scenes');           // engine.148 P3 — scene tags (arts, holiday hosts, crowd draws)
 
   var list = [];
   var set = {};
@@ -94,6 +96,8 @@ function loadCanonNeighborhoods_(ctx) {
   var weatherZone = {};
   var adjacentRaw = {};
   var attention = {};
+  var character = {};
+  var scenes = {};
   for (var r = 1; r < values.length; r++) {
     var hood = (values[r][iHood] || '').toString().trim();
     if (!hood) continue;
@@ -116,6 +120,8 @@ function loadCanonNeighborhoods_(ctx) {
     if (iZone >= 0) weatherZone[hood] = (values[r][iZone] || '').toString().trim();
     if (iAdjacent >= 0) adjacentRaw[hood] = (values[r][iAdjacent] || '').toString();
     if (iAttention >= 0) attention[hood] = values[r][iAttention];
+    if (iCharacter >= 0) character[hood] = (values[r][iCharacter] || '').toString().trim().toLowerCase();
+    if (iScenes >= 0) scenes[hood] = parseSceneTags_(hood, values[r][iScenes]);
     if (iChildren >= 0) {
       var parts = (values[r][iChildren] || '').toString().split(',');
       for (var p = 0; p < parts.length; p++) {
@@ -138,7 +144,8 @@ function loadCanonNeighborhoods_(ctx) {
   for (var c = 0; c < ranked.length; c++) core.push(ranked[c].hood);
 
   S.canonHoods = { list: list, set: set, core: core, district: district, byDistrict: byDistrict, children: children, childList: childList,
-    weatherZone: iZone >= 0 ? weatherZone : null, attention: iAttention >= 0 ? attention : null };
+    weatherZone: iZone >= 0 ? weatherZone : null, attention: iAttention >= 0 ? attention : null,
+    character: iCharacter >= 0 ? character : null, scenes: iScenes >= 0 ? scenes : null };
   S.canonHoodCount = list.length;
   // engine.148 P2: adjacency is sheet truth (column `Adjacent`, comma list of
   // hood names). Mirrored so spillover is symmetric; a name off the map throws.
@@ -172,6 +179,103 @@ function getAdjacentHoods_(ctx, hood) {
   }
   var a = S.neighborhoodAdjacency[hood];
   return a ? a.slice() : [];
+}
+
+// engine.148 P3: `Scenes` cell → { tag: weight }. Comma list, optional `:n`
+// (default 1). Blank is a legitimate value — the hood hosts nothing special
+// (membership absence is design, research 2026-09-05). A malformed weight throws.
+function parseSceneTags_(hood, raw) {
+  var out = {};
+  var parts = (raw === undefined || raw === null ? '' : String(raw)).split(',');
+  for (var i = 0; i < parts.length; i++) {
+    var t = parts[i].trim();
+    if (!t) continue;
+    var colon = t.indexOf(':');
+    var tag = colon >= 0 ? t.slice(0, colon).trim() : t;
+    var w = colon >= 0 ? Number(t.slice(colon + 1).trim()) : 1;
+    if (!tag || !isFinite(w) || w < 0) {
+      throw new Error('loadCanonNeighborhoods_: Neighborhood_Map.Scenes for ' + hood + ' has a malformed entry "' + t + '" — use tag or tag:weight (engine.148 P3).');
+    }
+    out[tag] = w;
+  }
+  return out;
+}
+
+// engine.148 P3: the one place label (Neighborhood_Map.EmployerCharacter) that
+// every texture pool keys by. Blank fails loud — a hood on the map with no
+// character has no texture, and silence is the bug this phase deletes.
+function getHoodCharacter_(ctx, hood) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.canonHoods || !S.canonHoods.character) {
+    throw new Error('getHoodCharacter_: Neighborhood_Map has no EmployerCharacter column or Phase1-CanonHoods did not run (engine.148 P3).');
+  }
+  var c = S.canonHoods.character[hood];
+  if (!c) throw new Error('getHoodCharacter_: Neighborhood_Map.EmployerCharacter is blank for ' + hood + ' — author the cell (engine.148 P3).');
+  return c;
+}
+
+// engine.148 P3: the scene tags a hood carries ({ tag: weight }); {} when the
+// cell is blank. Missing column fails loud.
+function getHoodScenes_(ctx, hood) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.canonHoods || !S.canonHoods.scenes) {
+    throw new Error('getHoodScenes_: Neighborhood_Map has no Scenes column or Phase1-CanonHoods did not run (engine.148 P3).');
+  }
+  if (!S.canonHoods.set[String(hood).toLowerCase()]) {
+    throw new Error('getHoodScenes_: "' + hood + '" is not a hood on Neighborhood_Map (ADR-0016).');
+  }
+  return S.canonHoods.scenes[hood] || {};
+}
+
+// engine.148 P3: weight of one tag on one hood (0 when absent).
+function hoodSceneWeight_(ctx, hood, tag) {
+  var w = getHoodScenes_(ctx, hood)[tag];
+  return w === undefined ? 0 : w;
+}
+
+// engine.148 P3: every hood carrying a tag, sheet row order, as [[hood, weight]].
+function hoodsWithScene_(ctx, tag) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.canonHoods || !S.canonHoods.scenes) {
+    throw new Error('hoodsWithScene_: Neighborhood_Map has no Scenes column or Phase1-CanonHoods did not run (engine.148 P3).');
+  }
+  var out = [];
+  for (var i = 0; i < S.canonHoods.list.length; i++) {
+    var h = S.canonHoods.list[i];
+    var w = (S.canonHoods.scenes[h] || {})[tag];
+    if (w !== undefined && w > 0) out.push([h, w]);
+  }
+  return out;
+}
+
+// engine.148 P3: hood names carrying a tag (the membership-list shape).
+function hoodNamesWithScene_(ctx, tag) {
+  var pairs = hoodsWithScene_(ctx, tag);
+  var names = [];
+  for (var i = 0; i < pairs.length; i++) names.push(pairs[i][0]);
+  return names;
+}
+
+// engine.148 P3: the texture pool for a citizen's hood. Every hood gets the
+// pool for its place label (byCharacter, keyed by EmployerCharacter — a label
+// with no pool throws: a new label is new logic); a hood with bespoke lines
+// (bespokeByHood, keyed by hood name) gets those on top. A blank hood cell is
+// absence (empty pool), never a default; a non-blank name off the map throws
+// (ADR-0016 — live ledger read 2026-09-05: 0 unresolvable, 0 blank).
+function hoodTexturePool_(ctx, rawHood, byCharacter, bespokeByHood, caller) {
+  var raw = (rawHood === undefined || rawHood === null ? '' : String(rawHood)).trim();
+  if (!raw || raw === 'Oakland, CA') return [];
+  var hood = resolveHoodOrChild_(ctx, raw);
+  if (!hood) throw new Error((caller || 'hoodTexturePool_') + ': citizen hood "' + raw + '" is not on Neighborhood_Map (ADR-0016).');
+  var label = getHoodCharacter_(ctx, hood);
+  var base = byCharacter[label];
+  if (!base || !base.length) {
+    throw new Error((caller || 'hoodTexturePool_') + ': no texture pool for EmployerCharacter "' + label + '" (' + hood + ') — a new label needs a pool (engine.148 P3).');
+  }
+  var pool = base.slice();
+  var extra = bespokeByHood && bespokeByHood[hood];
+  if (extra && extra.length) pool = pool.concat(extra);
+  return pool;
 }
 
 // engine.148 P2: the zone label a hood carries on the sheet. Blank fails loud —

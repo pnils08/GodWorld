@@ -17,6 +17,7 @@ global.Logger = { log() {} };
 const M = require('../utilities/citizenDialMap.js');
 // dial seam: bands not needed for T4 — return null (base rates), matching live pre-deploy
 global.getCitizenDialBands_ = () => null;
+global.hoodTexturePool_ = (ctx, hood, byLabel, bespoke) => (bespoke && bespoke[hood] ? bespoke[hood].slice() : []); // engine.148 P3: hood texture stubbed to the bespoke lines
 
 global.Utilities = { formatDate: () => 'STAMP' };
 global.Session = { getScriptTimeZone: () => 'UTC' };

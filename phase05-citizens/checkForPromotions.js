@@ -105,7 +105,7 @@ function checkForPromotions_(ctx) {
   var validNeighborhoods = getCoreSimNeighborhoods_(ctx);
 
   // Arts-focused neighborhoods for First Friday bonus
-  var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+  var artsNeighborhoods = hoodNamesWithScene_(ctx, 'arts'); // engine.148 P3 — Neighborhood_Map.Scenes
 
   // Ledger structure (Phase 42 §5.6: read from ctx.ledger; rows already body-only)
   var lHeader = ctx.ledger.headers;

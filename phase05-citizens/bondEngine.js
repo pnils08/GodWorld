@@ -124,18 +124,8 @@ var BOND_STATUS = {
   SEVERED: 'severed'
 };
 
-// v2.2: Arts district neighborhoods
-var ARTS_DISTRICT_NEIGHBORHOODS = ['Temescal', 'Uptown', 'KONO', 'Jack London'];
-
-// v2.2: Festival neighborhoods by holiday
-var FESTIVAL_NEIGHBORHOODS = {
-  'OaklandPride': ['Downtown', 'Lake Merritt', 'Grand Lake', 'Uptown'],
-  'ArtSoulFestival': ['Downtown', 'Jack London'],
-  'LunarNewYear': ['Chinatown', 'Downtown'],
-  'CincoDeMayo': ['Fruitvale', 'San Antonio'],
-  'DiaDeMuertos': ['Fruitvale', 'San Antonio'],
-  'Juneteenth': ['West Oakland', 'Downtown']
-};
+// engine.148 P3: arts hoods and festival hosts are Neighborhood_Map.Scenes tags
+// (`arts`, `<Holiday>:weight`) — read per cycle in detectNewBonds_, no literal.
 
 
 // ============================================================
@@ -1079,6 +1069,7 @@ function detectNewBonds_(ctx) {
   var S = ctx.summary || {};
   var currentCycle = S.cycleId || ctx.config.cycleCount || 0;
   var newBonds = [];
+  var artsHoods = hoodNamesWithScene_(ctx, 'arts'); // engine.148 P3
 
   // v2.6 (Row 33): read the name-resolved bond-local pool — the shared array
   // carries POPIDs, which miss every name-keyed metadata lookup below.
@@ -1151,9 +1142,9 @@ function detectNewBonds_(ctx) {
       // v2.2/v2.4: CALENDAR-SPECIFIC BOND DETECTION
       // ─────────────────────────────────────────────────────────────
 
-      // v2.4 FIX: FESTIVAL BONDS only for holidays with mapped neighborhoods
-      if (FESTIVAL_NEIGHBORHOODS[holiday] && (holidayPriority === 'oakland' || holidayPriority === 'major')) {
-        var festivalHoods = FESTIVAL_NEIGHBORHOODS[holiday];
+      // v2.4 FIX: FESTIVAL BONDS only for holidays some hood hosts (engine.148 P3: Scenes tag)
+      var festivalHoods = holiday && holiday !== 'none' ? hoodNamesWithScene_(ctx, holiday) : [];
+      if (festivalHoods.length && (holidayPriority === 'oakland' || holidayPriority === 'major')) {
         var inFestivalZone = festivalHoods.indexOf(nhA) >= 0 || festivalHoods.indexOf(nhB) >= 0;
 
         if (inFestivalZone && rng() < 0.4) {
@@ -1197,8 +1188,8 @@ function detectNewBonds_(ctx) {
 
       // FIRST FRIDAY professional/creative bonds
       if (isFirstFriday) {
-        var inArtsDistrict = ARTS_DISTRICT_NEIGHBORHOODS.indexOf(nhA) >= 0 ||
-                           ARTS_DISTRICT_NEIGHBORHOODS.indexOf(nhB) >= 0;
+        var inArtsDistrict = artsHoods.indexOf(nhA) >= 0 ||
+                           artsHoods.indexOf(nhB) >= 0;
 
         if (inArtsDistrict && rng() < 0.35) {
           newBonds.push(makeBond_(
@@ -2764,7 +2755,7 @@ function diagnoseBondEngine() {
  * - Neighbor decay condition corrected (decays when neighborhood MISSING)
  * - Confrontation intensity clamped after -2 reduction
  * - bondExists_ optimized with O(1) set lookup
- * - Festival bonds only for holidays with FESTIVAL_NEIGHBORHOODS mapping
+ * - Festival bonds only for holidays a hood hosts (Neighborhood_Map.Scenes, engine.148 P3)
  * - Neighborhoods stored on ctx.neighborhoodList (thread-safe)
  * - Cache header lookup defensive
  *

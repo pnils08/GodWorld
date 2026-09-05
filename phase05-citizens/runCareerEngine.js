@@ -286,6 +286,95 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
   return out;
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.148 P3 — workplace texture pools (was a 12-key literal, ten hoods silent)
+// Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
+// (a label with no pool throws); the twelve original hoods keep their bespoke
+// lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
+// ═══════════════════════════════════════════════════════════════════════════
+var CAREER_TEXTURE_BY_CHARACTER_ = {
+  'institutional': ["grabbed lunch near the civic offices", "noticed the public-sector rhythm around work", "walked past the government buildings on a break"],
+  'clinic': ["grabbed a quick bite near the clinics", "noticed the caretaking pace of the workday", "felt the strain of a neighborhood that works in health"],
+  'schools-retail': ["grabbed lunch on the main street near work", "noticed the school-day rhythm around the workplace", "stopped by the corner shops after a shift"],
+  'campus': ["grabbed lunch with the campus crowd", "noticed the young energy around the workplace", "walked past new construction on the way to work"],
+  'transit-retail': ["grabbed something near the station on a break", "noticed the commuter flow around the workplace", "picked up a coffee from a vendor by the stop"],
+  'nightlife': ["grabbed a late lunch before the evening crowd", "noticed the district shifting toward its night shift", "walked past bars setting up for the night"],
+  'professional': ["grabbed lunch along the main avenue", "noticed the professional rhythm of the workday", "stopped by the shops after work"],
+  'residential': ["appreciated the quiet blocks around the workplace", "noticed the calm of a residential workday", "walked home through familiar streets after a shift"],
+  'retail': ["grabbed lunch between the storefronts", "noticed the retail bustle around work", "stopped by a shop window on the walk back"],
+  'medical': ["grabbed coffee with the hospital crowd", "noticed the shift-change rhythm around work", "felt the steady pace of a medical neighborhood"],
+  'family-retail': ["grabbed lunch at a family-run counter near work", "noticed the market-street bustle around the workplace", "picked something up from a longtime shop after a shift"],
+  'mixed': ["grabbed lunch at the corner store near work", "noticed the mixed rhythm of the workday block", "walked past apartments and storefronts on a break"],
+  'village-retail': ["grabbed lunch on the village main street", "noticed the small-town pace of the workday", "stopped by the bakery after a shift"],
+  'service-labor': ["grabbed a quick meal before an early shift", "noticed the working rhythm of the neighborhood", "caught the bus home after a long day"],
+  'arts': ["grabbed lunch near the studios", "noticed new murals on the way to work", "felt inspired by the creative district's energy"],
+  'stadium': ["grabbed lunch near the arena concourse", "noticed the district gearing up for game day", "walked past event crews setting up near work"],
+  'construction': ["grabbed lunch near the build sites", "noticed cranes over the workplace blocks", "felt the boom-time pace of the workday"]
+};
+
+var CAREER_TEXTURE_BESPOKE_ = {
+  'Downtown': [
+    "navigated the busy Downtown commute",
+    "felt the energy of the business district",
+    "grabbed coffee near City Hall"
+  ],
+  'Jack London': [
+    "appreciated working near the waterfront",
+    "enjoyed the Jack London district atmosphere",
+    "took a lunchtime walk by the estuary"
+  ],
+  'Temescal': [
+    "grabbed lunch at a Temescal spot near work",
+    "appreciated the creative workplace environment",
+    "enjoyed the neighborhood's eclectic vibe"
+  ],
+  'Rockridge': [
+    "enjoyed the pleasant Rockridge work commute",
+    "noticed the professional atmosphere",
+    "stopped by College Ave shops after work"
+  ],
+  'West Oakland': [
+    "felt the industrial workplace rhythm",
+    "noticed development activity near work",
+    "observed the neighborhood's evolution"
+  ],
+  'Fruitvale': [
+    "connected with community near the workplace",
+    "appreciated the neighborhood's energy",
+    "grabbed lunch from a local taqueria"
+  ],
+  'Lake Merritt': [
+    "took a lunchtime walk by the lake",
+    "enjoyed the lakeside work location",
+    "felt refreshed by the natural surroundings"
+  ],
+  'Laurel': [
+    "appreciated the quiet commute through Laurel",
+    "enjoyed the residential-adjacent workplace",
+    "noticed the neighborhood's calm energy"
+  ],
+  'Uptown': [
+    "felt the urban arts district workplace energy",
+    "enjoyed working near galleries and theaters",
+    "grabbed lunch at an Uptown spot"
+  ],
+  'KONO': [
+    "appreciated the creative district atmosphere",
+    "noticed new murals on the commute",
+    "felt inspired by the neighborhood's DIY spirit"
+  ],
+  'Chinatown': [
+    "grabbed dim sum during lunch break",
+    "appreciated the bustling neighborhood energy",
+    "noticed the morning market activity"
+  ],
+  'Piedmont Ave': [
+    "enjoyed the leafy commute through Piedmont Ave",
+    "appreciated the boutique district atmosphere",
+    "stopped by local shops after work"
+  ]
+};
+
 function runCareerEngine_(ctx) {
 
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
@@ -722,68 +811,6 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOOD WORKPLACE POOLS (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoodCareer = {
-    'Downtown': [
-      "navigated the busy Downtown commute",
-      "felt the energy of the business district",
-      "grabbed coffee near City Hall"
-    ],
-    'Jack London': [
-      "appreciated working near the waterfront",
-      "enjoyed the Jack London district atmosphere",
-      "took a lunchtime walk by the estuary"
-    ],
-    'Temescal': [
-      "grabbed lunch at a Temescal spot near work",
-      "appreciated the creative workplace environment",
-      "enjoyed the neighborhood's eclectic vibe"
-    ],
-    'Rockridge': [
-      "enjoyed the pleasant Rockridge work commute",
-      "noticed the professional atmosphere",
-      "stopped by College Ave shops after work"
-    ],
-    'West Oakland': [
-      "felt the industrial workplace rhythm",
-      "noticed development activity near work",
-      "observed the neighborhood's evolution"
-    ],
-    'Fruitvale': [
-      "connected with community near the workplace",
-      "appreciated the neighborhood's energy",
-      "grabbed lunch from a local taqueria"
-    ],
-    'Lake Merritt': [
-      "took a lunchtime walk by the lake",
-      "enjoyed the lakeside work location",
-      "felt refreshed by the natural surroundings"
-    ],
-    'Laurel': [
-      "appreciated the quiet commute through Laurel",
-      "enjoyed the residential-adjacent workplace",
-      "noticed the neighborhood's calm energy"
-    ],
-    'Uptown': [
-      "felt the urban arts district workplace energy",
-      "enjoyed working near galleries and theaters",
-      "grabbed lunch at an Uptown spot"
-    ],
-    'KONO': [
-      "appreciated the creative district atmosphere",
-      "noticed new murals on the commute",
-      "felt inspired by the neighborhood's DIY spirit"
-    ],
-    'Chinatown': [
-      "grabbed dim sum during lunch break",
-      "appreciated the bustling neighborhood energy",
-      "noticed the morning market activity"
-    ],
-    'Piedmont Ave': [
-      "enjoyed the leafy commute through Piedmont Ave",
-      "appreciated the boutique district atmosphere",
-      "stopped by local shops after work"
-    ]
-  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FINAL BASE EVENT POOL
@@ -960,9 +987,7 @@ function runCareerEngine_(ctx) {
     var pool = basePool.slice();
 
     // Add neighborhood events
-    if (neighborhood && neighborhoodCareer[neighborhood]) {
-      pool = pool.concat(neighborhoodCareer[neighborhood]);
-    }
+    pool = pool.concat(hoodTexturePool_(ctx, neighborhood, CAREER_TEXTURE_BY_CHARACTER_, CAREER_TEXTURE_BESPOKE_, 'runCareerEngine_'));
 
     // v2.3: occasional training flavor
     if (chanceHit(0.25)) pool = pool.concat(trainingPool);

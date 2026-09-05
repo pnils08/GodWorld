@@ -309,7 +309,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
       fameBonus += 4;
     }
     // Arts neighborhood entities get extra boost
-    var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+    var artsNeighborhoods = hoodNamesWithScene_(ctx, 'arts'); // engine.148 P3 — Neighborhood_Map.Scenes
     for (var ani = 0; ani < artsNeighborhoods.length; ani++) {
       if (artsNeighborhoods[ani] === validNeighborhood) {
         fameBonus += 2;

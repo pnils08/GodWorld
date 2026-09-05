@@ -424,7 +424,7 @@ function generateGenericCitizens_(ctx) {
   var neighborhoodWeights = feederHoodWeights_(ctx, neighborhoods);
 
   // Arts neighborhoods for First Friday
-  var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+  var artsNeighborhoods = hoodNamesWithScene_(ctx, 'arts'); // engine.148 P3 — Neighborhood_Map.Scenes
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HELPERS

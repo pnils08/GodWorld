@@ -61,6 +61,7 @@ global.nudgesForEvent_ = M.nudgesForEvent_;
 global.baseTag_ = M.baseTag_;
 const C = require('../utilities/compressLifeHistory.js');
 global.getCitizenDialBands_ = C.getCitizenDialBands_;
+global.hoodTexturePool_ = (ctx, hood, byLabel, bespoke) => (bespoke && bespoke[hood] ? bespoke[hood].slice() : []); // engine.148 P3: hood texture stubbed to the bespoke lines
 
 global.Utilities = { formatDate: () => '2041-01-01 10:00' };
 global.Session = { getScriptTimeZone: () => 'UTC' };

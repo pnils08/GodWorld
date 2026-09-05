@@ -36,7 +36,7 @@ pointers:
 | 1 | Doors: World_Config `hoodCitizenFloor` 12 / `hoodFloorPromotePerCycle` 6 / `hoodFloorSurfaceQuota` 20 / `gcSurfaceChance` 0.06 (self-armed); lazy tracked headcount per hood; feeder weights from CoreSimRank × deficit; surfacing floor draw; **migration wave** in `checkForPromotions_` | **LIVE PROD @54** (`9dcc2a78`; bench C106/C107) |
 | 1c | Sex balance (builder-ruled): feeder floors on World_Config F 120 / M 40, full-cap refill while under floor, wave draws the under-represented sex first, one-cycle seasoning | **LIVE PROD @56** (`e30021f6`–`9acb6065`; bench C109–C111) |
 | 2 | Tables: `WeatherZone` (10-zone table in code, every hood gets weather), `Adjacent` (mirrored seed → crime spillover), `AttentionWeight` (spotlight bonus + event priority 0.8+0.25w), crisis weight earned from IncomeTier + CrimeIndex, gender table deleted, dead transit corridor map deleted | **LIVE PROD @55** (`bdccc08b` + `1a20a32f`; bench C108; 66 live cells) |
-| 3 | Texture: 7 phrase pools keyed by hood → keyed by character label; arts/holiday membership lists → labels; `lib/photoGenerator.js` (media lane, 16 keys) | queued |
+| 3 | Texture: 7 phrase pools keyed by hood → keyed by `EmployerCharacter` (17 label pools per engine, the twelve keep bespoke lines on top, `hoodTexturePool_`); arts / holiday / crowd membership lists → `Scenes` column (tag:weight); `lib/photoGenerator.js` left alone (ROLLOUT: media lane, not touched) | **code complete S427 — `scripts/hoodBlindTexture.test.js` 23/23, suite 203/204 (djDirect pre-existing); live `Scenes` seeded 22/22; bench re-synced from live C105; awaiting bench fires C106+C107** |
 
 ## Crisis weight — before / after (Phase 2 judgment, reversible by editing IncomeTier)
 
@@ -66,7 +66,7 @@ The literal encoded real-world Oakland (West Oakland poor). Canon says West Oakl
 - [x] Unit: `scripts/hoodBlindDoors.test.js` 16/16, `scripts/hoodBlindTables.test.js` 9/9; suite green but djDirect (pre-existing).
 - [x] PROD @54 / @55 byte-identical to HEAD (pull-back 0 differing).
 - [ ] Live smoke at the builder's C106 fire: six World_Config rows, six 'migration wave' ledger rows, 22 Crime_Metrics rows refreshed, no throw on a blank cell.
-- [ ] Phase 3 shipped.
+- [ ] Phase 3 shipped — bench: two fires (C106 mints wave rows, C107 gives them a texture draw); grep LifeHistory for a ten-hood label line; 0 Engine_Errors is not the proof.
 
 ## Findings filed
 
@@ -77,3 +77,4 @@ The literal encoded real-world Oakland (West Oakland poor). Canon says West Oakl
 
 - 2026-09-05 — Plan written after Phase 1 + 2 shipped (S423).
 - 2026-09-05 — Phase 1c (sex balance) shipped PROD @56; crisis-weight judgment confirmed by the builder (canon is the basis). Phase 0 results and rulings recorded in the research file.
+- 2026-09-05 (S427) — Phase 3 built. Design: every hood draws the pool for its `EmployerCharacter` label (17 labels × 9 pool sets across 7 engines — a label with no pool throws, a new label is new logic); the twelve original hoods keep their bespoke lines on top; `|| genericEvents` and the "a familiar spot / corner" hood defaults deleted (memory venue path kept). New `Neighborhood_Map.Scenes` column replaces the five identical arts lists, `bondEngine` `ARTS_DISTRICT_NEIGHBORHOODS` + `FESTIVAL_NEIGHBORHOODS`, `mediaFeedbackEngine` `artsSpotlight`, and `cityEveningSystems` `HOLIDAY_CROWD` / First-Friday / Creation-Day boosts. Behaviour changes stated: arts spotlight gains KONO (was a 3-hood list); festival crowd union adds Jack London ArtSoulFestival:1, Grand Lake OaklandPride:1, San Antonio Cinco/Día:1 (bondEngine hosts the crowd table never had). Left alone by design: `recordWorldEventsv3` domain lists, `economicRippleEngine` triggers, `applyCityDynamics` corridors, `parseMediaRoomMarkdown`, `holidayNeighborhoodEvents` / `firstFridayEvents` bespoke prose. Live ledger read: 0 blank / 0 unresolvable hoods → `hoodTexturePool_` throws on an off-map name, blank = empty pool.

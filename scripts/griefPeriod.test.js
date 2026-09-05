@@ -27,6 +27,7 @@ const C = require('../utilities/compressLifeHistory.js');
 global.getGriefConfig_ = C.getGriefConfig_;
 global.activeGriefFromRegisters_ = C.activeGriefFromRegisters_;
 global.getCitizenDialBands_ = () => null;
+global.hoodTexturePool_ = (ctx, hood, byLabel, bespoke) => (bespoke && bespoke[hood] ? bespoke[hood].slice() : []); // engine.148 P3: hood texture stubbed to the bespoke lines
 
 const genSrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
 const GEN = new Function(genSrc + '\nreturn { generateCitizensEvents_: generateCitizensEvents_, applyGriefPoolWeights_: applyGriefPoolWeights_ };')();

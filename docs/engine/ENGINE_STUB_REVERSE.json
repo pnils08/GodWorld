@@ -2,7 +2,7 @@
   "generated": "2026-09-05",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1296,
+  "functionsMapped": 1303,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -798,8 +798,11 @@
         "phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_",
         "phase01-config/canonNeighborhoodLoader.js::getHoodAttention_",
+        "phase01-config/canonNeighborhoodLoader.js::getHoodCharacter_",
         "phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_",
+        "phase01-config/canonNeighborhoodLoader.js::getHoodScenes_",
         "phase01-config/canonNeighborhoodLoader.js::getHoodWeatherZone_",
+        "phase01-config/canonNeighborhoodLoader.js::hoodsWithScene_",
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"

@@ -42,6 +42,95 @@ function mulberry32_uni_(seed) {
   };
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.148 P3 — post-career texture pools (was a 12-key literal, ten hoods silent)
+// Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
+// (a label with no pool throws); the twelve original hoods keep their bespoke
+// lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
+// ═══════════════════════════════════════════════════════════════════════════
+var POSTCAREER_TEXTURE_BY_CHARACTER_ = {
+  'institutional': ["watching the civic district from a bench in retirement", "enjoying quiet walks past the public buildings", "observing the official rhythm of the neighborhood"],
+  'clinic': ["volunteering at a neighborhood clinic", "appreciating the caretakers of the neighborhood", "keeping up with health news from the clinics"],
+  'schools-retail': ["walking the main street in the afternoon", "enjoying the school-day rhythm of the neighborhood", "chatting with shopkeepers in retirement"],
+  'campus': ["sitting in on open campus talks", "watching the neighborhood build out", "enjoying the young energy of the blocks"],
+  'transit-retail': ["watching the commuter flow from a station bench", "enjoying the neighborhood's constant motion", "picking up groceries near the transit stop"],
+  'nightlife': ["watching the district wake up in the evening", "enjoying an early dinner before the night crowd", "appreciating the neighborhood's late energy from a distance"],
+  'professional': ["strolling the main avenue in retirement", "enjoying the orderly pace of the neighborhood", "browsing the shops along the avenue"],
+  'residential': ["settling into the neighborhood's quiet pace", "enjoying the calm of the block", "waving to neighbors from the porch"],
+  'retail': ["browsing the storefronts in retirement", "enjoying the shopping-street bustle", "chatting with familiar shopkeepers"],
+  'medical': ["walking near the hospital grounds", "appreciating the steady rhythm of the neighborhood", "keeping appointments close to home"],
+  'family-retail': ["visiting the market street in the mornings", "enjoying the generations mixing on the block", "savoring a favorite family-run counter"],
+  'mixed': ["taking in the patchwork rhythm of the block", "enjoying the corner store's steady company", "watching the neighborhood change from a bench"],
+  'village-retail': ["enjoying the village main street in retirement", "settling into the neighborhood's small-town pace", "visiting the bakery each morning"],
+  'service-labor': ["watching the early shifts head out", "appreciating the working rhythm of the neighborhood", "reflecting on a lifetime of work from the front step"],
+  'arts': ["exploring the corridor's galleries in retirement", "enjoying the creative energy of the neighborhood", "attending openings along the corridor"],
+  'stadium': ["watching game-day crowds from a distance", "enjoying the district's event-day buzz", "following the arena's calendar in retirement"],
+  'construction': ["watching the neighborhood build out", "reflecting on how the blocks have changed", "following the boom from the front step"]
+};
+
+var POSTCAREER_TEXTURE_BESPOKE_ = {
+  'Temescal': [
+    "enjoying Temescal's cafe culture in retirement",
+    "appreciating the creative energy around Temescal",
+    "grabbing coffee at a favorite Temescal spot"
+  ],
+  'Downtown': [
+    "observing Downtown's bustling activity from a distance",
+    "taking in the urban rhythm of Downtown Oakland",
+    "watching city life from a Downtown bench"
+  ],
+  'Fruitvale': [
+    "connecting with Fruitvale's vibrant community",
+    "enjoying the cultural richness of the neighborhood",
+    "savoring tacos at a Fruitvale favorite"
+  ],
+  'Lake Merritt': [
+    "taking peaceful walks around Lake Merritt",
+    "enjoying the lake's calming presence",
+    "watching the birds at the lake"
+  ],
+  'West Oakland': [
+    "watching West Oakland's evolution in retirement",
+    "appreciating the neighborhood's character",
+    "reflecting on the area's history"
+  ],
+  'Laurel': [
+    "settling into Laurel's quiet residential pace",
+    "enjoying the neighborhood's calm atmosphere",
+    "appreciating the community feel"
+  ],
+  'Rockridge': [
+    "strolling through Rockridge's tree-lined streets",
+    "enjoying Rockridge's refined neighborhood feel",
+    "browsing shops along College Ave"
+  ],
+  'Jack London': [
+    "taking in Jack London's waterfront scenery",
+    "enjoying the arts district's creative energy",
+    "watching boats at the estuary"
+  ],
+  'Uptown': [
+    "enjoying Uptown's cultural scene in retirement",
+    "attending gallery openings in the arts district",
+    "appreciating the urban arts atmosphere"
+  ],
+  'KONO': [
+    "exploring KONO's street art and galleries",
+    "appreciating the neighborhood's creative spirit",
+    "enjoying the DIY arts scene"
+  ],
+  'Chinatown': [
+    "enjoying dim sum in Chinatown",
+    "appreciating the neighborhood's bustling markets",
+    "connecting with the community"
+  ],
+  'Piedmont Ave': [
+    "strolling along leafy Piedmont Ave",
+    "enjoying the boutique shops and cafes",
+    "appreciating the quiet neighborhood charm"
+  ]
+};
+
 function runAsUniversePipeline_(ctx) {
 
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
@@ -275,68 +364,6 @@ function runAsUniversePipeline_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOOD POST-CAREER POOLS (12 neighborhoods)
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoodPools = {
-    'Temescal': [
-      "enjoying Temescal's cafe culture in retirement",
-      "appreciating the creative energy around Temescal",
-      "grabbing coffee at a favorite Temescal spot"
-    ],
-    'Downtown': [
-      "observing Downtown's bustling activity from a distance",
-      "taking in the urban rhythm of Downtown Oakland",
-      "watching city life from a Downtown bench"
-    ],
-    'Fruitvale': [
-      "connecting with Fruitvale's vibrant community",
-      "enjoying the cultural richness of the neighborhood",
-      "savoring tacos at a Fruitvale favorite"
-    ],
-    'Lake Merritt': [
-      "taking peaceful walks around Lake Merritt",
-      "enjoying the lake's calming presence",
-      "watching the birds at the lake"
-    ],
-    'West Oakland': [
-      "watching West Oakland's evolution in retirement",
-      "appreciating the neighborhood's character",
-      "reflecting on the area's history"
-    ],
-    'Laurel': [
-      "settling into Laurel's quiet residential pace",
-      "enjoying the neighborhood's calm atmosphere",
-      "appreciating the community feel"
-    ],
-    'Rockridge': [
-      "strolling through Rockridge's tree-lined streets",
-      "enjoying Rockridge's refined neighborhood feel",
-      "browsing shops along College Ave"
-    ],
-    'Jack London': [
-      "taking in Jack London's waterfront scenery",
-      "enjoying the arts district's creative energy",
-      "watching boats at the estuary"
-    ],
-    'Uptown': [
-      "enjoying Uptown's cultural scene in retirement",
-      "attending gallery openings in the arts district",
-      "appreciating the urban arts atmosphere"
-    ],
-    'KONO': [
-      "exploring KONO's street art and galleries",
-      "appreciating the neighborhood's creative spirit",
-      "enjoying the DIY arts scene"
-    ],
-    'Chinatown': [
-      "enjoying dim sum in Chinatown",
-      "appreciating the neighborhood's bustling markets",
-      "connecting with the community"
-    ],
-    'Piedmont Ave': [
-      "strolling along leafy Piedmont Ave",
-      "enjoying the boutique shops and cafes",
-      "appreciating the quiet neighborhood charm"
-    ]
-  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY POST-CAREER POOLS
@@ -524,10 +551,8 @@ function runAsUniversePipeline_(ctx) {
         }
 
         // Neighborhood
-        if (neighborhood && neighborhoodPools[neighborhood]) {
-          np = neighborhoodPools[neighborhood];
-          for (i = 0; i < np.length; i++) { pool.push(np[i]); }
-        }
+        np = hoodTexturePool_(ctx, neighborhood, POSTCAREER_TEXTURE_BY_CHARACTER_, POSTCAREER_TEXTURE_BESPOKE_, 'runAsUniversePipeline_');
+        for (i = 0; i < np.length; i++) { pool.push(np[i]); }
 
         if (pool.length === 0) pool.push("continuing to adjust to post-career life");
 

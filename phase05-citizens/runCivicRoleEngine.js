@@ -25,6 +25,95 @@
  * ============================================================================
  */
 
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.148 P3 — civic note pools (was a 12-key literal, ten hoods silent)
+// Every hood gets the pool for its Neighborhood_Map.EmployerCharacter label
+// (a label with no pool throws); the twelve original hoods keep their bespoke
+// lines on top. Resolved by hoodTexturePool_ (canonNeighborhoodLoader.js).
+// ═══════════════════════════════════════════════════════════════════════════
+var CIVIC_NOTE_BY_CHARACTER_ = {
+  'institutional': ["Civic activity continues in the government district.", "Public offices report steady business.", "Administrative matters proceeding nearby."],
+  'clinic': ["Health-access matters under discussion locally.", "Clinic capacity remains a neighborhood concern.", "Community health initiatives continue."],
+  'schools-retail': ["School and main-street matters under review.", "Neighborhood association activity noted.", "Local business and school coordination continues."],
+  'campus': ["Campus and neighborhood coordination ongoing.", "Development matters in focus near the campus.", "Community planning discussions continue."],
+  'transit-retail': ["Transit-corridor matters under discussion.", "Station-area planning continues.", "Local merchant concerns noted."],
+  'nightlife': ["Nightlife and noise matters under review.", "Entertainment district coordination active.", "Local permitting discussions continue."],
+  'professional': ["Neighborhood association activity ongoing.", "Local business matters under review.", "Community planning discussions continue."],
+  'residential': ["Quiet civic engagement on the residential blocks.", "Neighborhood matters progressing steadily.", "Local initiatives moving forward."],
+  'retail': ["Retail district matters under review.", "Merchant association activity noted.", "Local business affairs addressed."],
+  'medical': ["Hospital-district civic matters in focus.", "Health infrastructure discussions ongoing.", "Community health coordination continues."],
+  'family-retail': ["Cultural preservation matters in focus.", "Community civic engagement active on the market street.", "Family business affairs addressed."],
+  'mixed': ["Mixed-use block matters under discussion.", "Neighborhood civic engagement continues.", "Local zoning discussions noted."],
+  'village-retail': ["Village main-street matters reviewed.", "Neighborhood association activity noted.", "Community planning discussions ongoing."],
+  'service-labor': ["Workforce and transit matters under discussion.", "Community civic engagement active.", "Local service concerns addressed."],
+  'arts': ["Creative district civic matters addressed.", "Community arts initiatives proceeding.", "Local cultural affairs receiving attention."],
+  'stadium': ["Arena-district coordination active.", "Event-day planning matters under review.", "Development civic matters in focus."],
+  'construction': ["Development and permitting matters in focus.", "Construction impact discussions ongoing.", "Community development meetings continue."]
+};
+
+var CIVIC_NOTE_BESPOKE_ = {
+  'Downtown': [
+    "City Hall activity continues in Downtown.",
+    "Civic presence noted in the government district.",
+    "Administrative matters proceeding at City Hall."
+  ],
+  'Fruitvale': [
+    "Community civic engagement active in Fruitvale.",
+    "Local civic matters addressed in Fruitvale.",
+    "Neighborhood council activity in Fruitvale."
+  ],
+  'West Oakland': [
+    "Infrastructure discussions ongoing in West Oakland.",
+    "Development civic matters in focus.",
+    "Community development meetings continue."
+  ],
+  'Temescal': [
+    "Community board activity noted in Temescal.",
+    "Local civic engagement continues.",
+    "Neighborhood matters under discussion."
+  ],
+  'Lake Merritt': [
+    "Parks and recreation civic matters active.",
+    "Civic presence around Lake Merritt noted.",
+    "Lakeside community initiatives proceeding."
+  ],
+  'Rockridge': [
+    "Neighborhood association activity in Rockridge.",
+    "Local civic matters under review.",
+    "Community planning discussions ongoing."
+  ],
+  'Laurel': [
+    "Quiet civic engagement in Laurel district.",
+    "Community matters progressing steadily.",
+    "Local initiatives moving forward."
+  ],
+  'Jack London': [
+    "Waterfront civic development discussions ongoing.",
+    "Arts district civic matters in focus.",
+    "Maritime and development coordination continues."
+  ],
+  'Uptown': [
+    "Arts district civic coordination active.",
+    "Cultural affairs receiving civic attention.",
+    "Urban development matters under review."
+  ],
+  'KONO': [
+    "Creative district civic matters addressed.",
+    "Community arts initiatives proceeding.",
+    "Local zoning discussions continue."
+  ],
+  'Chinatown': [
+    "Cultural preservation matters in focus.",
+    "Community civic engagement active in Chinatown.",
+    "Neighborhood business affairs addressed."
+  ],
+  'Piedmont Ave': [
+    "Local business district matters reviewed.",
+    "Neighborhood association activity noted.",
+    "Community planning discussions ongoing."
+  ]
+};
+
 function runCivicRoleEngine_(ctx) {
 
   var rng = safeRand_(ctx);
@@ -70,68 +159,6 @@ function runCivicRoleEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOOD CIVIC NOTES (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoodCivicNotes = {
-    'Downtown': [
-      "City Hall activity continues in Downtown.",
-      "Civic presence noted in the government district.",
-      "Administrative matters proceeding at City Hall."
-    ],
-    'Fruitvale': [
-      "Community civic engagement active in Fruitvale.",
-      "Local civic matters addressed in Fruitvale.",
-      "Neighborhood council activity in Fruitvale."
-    ],
-    'West Oakland': [
-      "Infrastructure discussions ongoing in West Oakland.",
-      "Development civic matters in focus.",
-      "Community development meetings continue."
-    ],
-    'Temescal': [
-      "Community board activity noted in Temescal.",
-      "Local civic engagement continues.",
-      "Neighborhood matters under discussion."
-    ],
-    'Lake Merritt': [
-      "Parks and recreation civic matters active.",
-      "Civic presence around Lake Merritt noted.",
-      "Lakeside community initiatives proceeding."
-    ],
-    'Rockridge': [
-      "Neighborhood association activity in Rockridge.",
-      "Local civic matters under review.",
-      "Community planning discussions ongoing."
-    ],
-    'Laurel': [
-      "Quiet civic engagement in Laurel district.",
-      "Community matters progressing steadily.",
-      "Local initiatives moving forward."
-    ],
-    'Jack London': [
-      "Waterfront civic development discussions ongoing.",
-      "Arts district civic matters in focus.",
-      "Maritime and development coordination continues."
-    ],
-    'Uptown': [
-      "Arts district civic coordination active.",
-      "Cultural affairs receiving civic attention.",
-      "Urban development matters under review."
-    ],
-    'KONO': [
-      "Creative district civic matters addressed.",
-      "Community arts initiatives proceeding.",
-      "Local zoning discussions continue."
-    ],
-    'Chinatown': [
-      "Cultural preservation matters in focus.",
-      "Community civic engagement active in Chinatown.",
-      "Neighborhood business affairs addressed."
-    ],
-    'Piedmont Ave': [
-      "Local business district matters reviewed.",
-      "Neighborhood association activity noted.",
-      "Community planning discussions ongoing."
-    ]
-  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ROLE-SPECIFIC CIVIC NOTES
@@ -338,9 +365,7 @@ function runCivicRoleEngine_(ctx) {
         }
 
         // Add neighborhood-specific notes
-        if (neighborhood && neighborhoodCivicNotes[neighborhood]) {
-          pool = pool.concat(neighborhoodCivicNotes[neighborhood]);
-        }
+        pool = pool.concat(hoodTexturePool_(ctx, neighborhood, CIVIC_NOTE_BY_CHARACTER_, CIVIC_NOTE_BESPOKE_, 'runCivicRoleEngine_'));
 
         // Add holiday-specific notes (v2.2)
         if (holiday !== "none" && holidayCivicNotes[holiday]) {

@@ -385,7 +385,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
   if (isCreationDay) basePool = basePool.concat(creationDayPool);
   if (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) basePool = basePool.concat(sportsSeasonPools[sportsSeason]);
 
-  var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+  var artsNeighborhoods = hoodNamesWithScene_(ctx, 'arts'); // engine.148 P3 — Neighborhood_Map.Scenes
 
   // Fast tag lookup using indexOf (ES5 compatible)
   var holidayPoolArr = (holiday !== "none" && holidayPools[holiday]) ? holidayPools[holiday] : [];

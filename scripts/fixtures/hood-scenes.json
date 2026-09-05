@@ -1,0 +1,27 @@
+{
+  "_comment": "engine.148 P3 — authored Neighborhood_Map.Scenes per hood. Comma list of scene tags, optional :weight (default 1). Tags: arts (the arts corridor), FirstFriday / CreationDay (crowd draw), and holiday hosts by holiday key (crowd draw + festival bonds). Blank = the hood hosts nothing special (membership absence is design). Values transcribed from the code literals they replace (cityEveningSystems HOLIDAY_CROWD / FirstFriday / CreationDay boosts, bondEngine FESTIVAL_NEIGHBORHOODS union, the four-hood arts list).",
+  "scenes": {
+    "Downtown": "FirstFriday:1, CreationDay:3, LunarNewYear:2, CincoDeMayo:1, DiaDeMuertos:1, Juneteenth:2, OaklandPride:4, ArtSoulFestival:5, NewYearsEve:4, OpeningDay:2",
+    "Temescal": "arts, FirstFriday:2, Halloween:3",
+    "Laurel": "",
+    "West Oakland": "CreationDay:2, Juneteenth:4",
+    "Fruitvale": "CincoDeMayo:5, DiaDeMuertos:5",
+    "Jack London": "arts, FirstFriday:1, CreationDay:1, ArtSoulFestival:1, NewYearsEve:3, Independence:3, OpeningDay:5",
+    "Rockridge": "Halloween:2",
+    "Adams Point": "",
+    "Grand Lake": "OaklandPride:1",
+    "Piedmont Ave": "",
+    "Chinatown": "LunarNewYear:5",
+    "Brooklyn": "",
+    "Eastlake": "",
+    "Glenview": "",
+    "Dimond": "",
+    "Ivy Hill": "",
+    "San Antonio": "CincoDeMayo:1, DiaDeMuertos:1",
+    "KONO": "arts, FirstFriday:3",
+    "Lake Merritt": "CreationDay:2, Juneteenth:2, OaklandPride:3, ArtSoulFestival:2, Halloween:2, Independence:2",
+    "Uptown": "arts, FirstFriday:4, OaklandPride:3, NewYearsEve:2",
+    "Baylight District": "",
+    "East Oakland": ""
+  }
+}

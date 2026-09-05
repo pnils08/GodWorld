@@ -545,7 +545,7 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
   1. Read live cycles' Engine_RunLog or chaos_cars row counts per cycle.
   2. Fail (exit 1) if any cycle has count < 3 or > 15. Else emit a one-line summary.
 - **Verify:** runs against C94+ live cycles; first run passes.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S423 (research-build). `scripts/chaosCarsFrequencyCheck.js` — groups live `Chaos_Cars` rows by `CycleId`, fails loud on any cycle outside [3,15]. First run against live C100-C105: PASS (C100:6, C101:15, C102:7, C103:15, C104:12, C105:11) — matches Hard Constraints exactly.
 
 #### T6.4: Friction-log skill at orchestrator end [engine/sheet]
 
@@ -606,12 +606,17 @@ Questions that block a task. Resolve and delete.
 
 ## Status log
 
+### engine.11 — status update, 2026-09-05 / S423 (research-build)
+
+All four Phase-5 cascade outputs and all three Phase-6 validators are now built. T5.1/T5.4/T5.5 (engine-sheet, shipped earlier) + T5.2 (credited: pre-existing `emitChaosCars`, verified+tested this session) + T5.3 (built this session: `dumpChaosCascade.js` + `city-hall-prep` v1.12) = the full cascade, code-complete. T6.1 (dry-run + synthetic Tier-1 fixture) / T6.2 (magnitude report, scoped to real `world_summary` history — neighborhood measurable, business an explicit documented gap) / T6.3 (frequency validator, PASS on live C100-C105) all shipped this session. **Only remaining gate: T5.3's live acceptance** — a real cron `/city-hall-prep` run producing an actual Tier-1 hit, showing the CHAOS CASCADE block in a real voice packet. Zero live Tier-1 hits so far (66 rows, C100-C105 — expected, ~0.15 statistically). Everything below this line is the prior S265/S274 design history, unchanged.
+
 ### engine.11 — status (drained from ROLLOUT, 2026-06-26 / S274)
 
 Chaos-cars engine — typed municipal-vehicle stochastic event injection. **DESIGN FINALIZED S265** (research-build): T2.1/T2.2/T4.1 RESOLVED + T3.8/9/10 + T4.2 corrected + T1.5 added — all in plan §S265 (adversarial-verify `wf_dc6874a9-2dc`). Build is a **cross-terminal split (§S265 Cross-terminal build split)** — NOT engine-sheet-only. **engine-sheet** = substrate + producer + 2 cascade outputs (T1.3/T1.5/T3.x/T4.2-3/T5.1/T5.4/T5.5/T6.4; **first pickup = T1.5** — gentrification full-width range intent clobbers the Phase-10 Neighborhood_Map fold, also a LATENT bug on the SHIPPED engine.33 pulse fold, verify live state first). **research-build RETAINS** the other 2 cascade outputs (T5.2 build-world-summary SKILL, T5.3 city-hall-prep SKILL) + validators (T6.1/2/3 scripts) — sequenced right behind engine-sheet's T5.1+T3.12, authored+verified vs a real synthetic Tier-1 event (not blind). Cascade Hard-Constraint "all four outputs live" closes across BOTH terminals. **ENGINE-SHEET HALF BUILT S265** (ultracode, 8 commits on main `486d070a`→`8822e6b5`, 323 test assertions, 5-agent verify `wf_4e2b7b99-1b4` — neighborhood-fold blocker fixed via PropertiesService residual). **CLASP-DEPLOYED LIVE S265 (Mike go-call, commit `825059a1`); engine-sheet SMOKE PENDING C100** — first chaos cycle: Chaos_Cars tab lazy-creates, 3-15 events, 0-1 scale, NM fold consumes-not-accumulates, Tier-1 hit → createChaosArcs_ cascade. **RESEARCH-BUILD HALF (T5.2/T5.3 + T6.1/2/3) now UNBLOCKED + live-verifiable at C100** (producer deployed) — do T6.1 dry-run first (yields the synthetic Tier-1 fixture), then T5.2 (`buildWorldSummary.js` emitter+test) / T5.3 (city-hall-prep Step-2 rule + `dumpChaosCascade.js`) / T6.2/3; author+verify vs the dry-run event. Open Q3 chaos-arc↔arcLifecycle — observe C100. **Deploy procedure staged: [[engine/archive/CHAOS_CARS_DEPLOY]] (S265 runbook — gate criteria, 10-file deploy surface, pre/post-deploy gates).**
 
 ## Changelog
 
+- 2026-09-05 — **T6.3 shipped (S423, research-build)** — `scripts/chaosCarsFrequencyCheck.js`, PASS against live C100-C105. Research-build's cascade+validator half of engine.11 is now code-complete; only T5.3 live-fire acceptance remains open (see status log).
 - 2026-09-05 — **T6.2 scoped + shipped (S423, research-build)** — `scripts/chaosCarsMagnitudeReport.js` measures neighborhood decay via `world_summary` snapshots (real history, plan assumed none existed); business scope reported as an explicit gap, not built blind (see T6.2 status).
 - 2026-09-05 — **T5.3 built + unit-tested, not live-verified (S423, research-build)** — `scripts/dumpChaosCascade.js` + `city-hall-prep` v1.12; live acceptance waits on a real Tier-1 hit (see T5.3 status).
 - 2026-09-05 — **T5.2 credited + tested (S423, research-build)** — pre-existing `emitChaosCars` (2026-07-06, unattributed) verified, exported, tested; see T5.2 status for detail.

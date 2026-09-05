@@ -560,6 +560,28 @@ function writeCitizenArc(stem, args) {
   return dest;
 }
 
+// pipeline.41 Task 8 (live wire, S424): the citizen-loop tension register as
+// WRITE-stage color for citizens already interviewed this cycle. READ-ONLY —
+// never writes TENSION_FILE (resolving a tension is the citizen loop's state,
+// not the newsroom's); fail-open (missing/malformed file -> no block, never
+// throws); bounded to citizens already in `quotes` (inherits all existing
+// interview-selection safety, no new citizen-surfacing path). Same 12-cycle
+// staleness window citizenVoice.js/personaProvider.js apply on the write side.
+const TENSION_FILE = path.join(ROOT, 'logs', 'citizen-tension-state.json');
+const TENSION_STALE_CYCLES = 12;
+function openTensionFor(pop, cycle) {
+  if (!pop) return null;
+  try {
+    const state = JSON.parse(fs.readFileSync(TENSION_FILE, 'utf8'));
+    const list = Array.isArray(state[pop]) ? state[pop] : [];
+    const open = list.filter(t => t && t.status === 'open' && t.q &&
+      (Number(cycle) - (Number(t.cy) || 0)) <= TENSION_STALE_CYCLES);
+    if (!open.length) return null;
+    open.sort((a, b) => (Number(b.cy) || 0) - (Number(a.cy) || 0));
+    return open[0];
+  } catch (_) { return null; }
+}
+
 // Layer 3 — compose the injected state: byline note + lane pointers + real quotes.
 // This REPLACES the 40k world_summary blob as the writer's injected state.
 // Task 2.5.2/2.5.3: an assigned story leads the state — the angle is the
@@ -1021,6 +1043,12 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     if (qBrief.total) profileStamp.quotes = qBrief.resolved + '/' + qBrief.total;
     for (const q of quotes) {
       L.push('- ' + q.name + ': "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"');
+      const tension = openTensionFor(q.pop, cycle);
+      if (tension) {
+        L.push('    (' + q.name + ' has also been privately sitting with an open question this cycle: "' +
+          String(tension.q).replace(/\s+/g, ' ').trim() +
+          '" — texture only, never something they said publicly; do not quote it or attribute it as a statement)');
+      }
     }
     if (qProfiles.length) {
       L.push('');

@@ -23,7 +23,6 @@ own rollout rows.
 2. **engine.109 Task 7** is the builder's (families on the Intake tab). Row stays in-progress until a live household lands.
 3. **civic.20 edge migration** — next build candidate.
 4. **engine.134 hood identity** — plan filed by research-build S420: [[../plans/2026-08-30-hood-identity-remainder-plan]].
-5. **engine.138 row recheck** — 11 sessions old (G-PF33 hold clear-branch push + S-B wake acceptance); verify against live before assuming current.
 
 ---
 
@@ -70,7 +69,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.51 | Boot-doc consolidation — rule-only boot docs under a confirmed size ceiling, no stacked change-logs; 121 memory files deduped via /batch, builder-reviewed deletes. | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] |
 | engine.134 | Hood identity — no single source for "what the neighborhoods are" (folded into engine.135; see plan) | ready | engine-sheet | [[../plans/2026-08-30-hood-identity-remainder-plan]] |
 | engine.139 | civic scoring re-wire — positives are events, negatives are conditions; symmetric media; width ladders. **Bench-proven C108–C109 (advanced path hand-staged: mayor 21 vs 12 counterfactual), LIVE PROD @13 2026-09-01; smoke pending next live cycle** | in-progress | engine-sheet | [[../plans/2026-08-31-c105-chase-sessions]] §G-PF34 |
-| engine.138 | C105 chase S-A…S-E all done, LIVE PROD @13 (bench C108–C109). Open: push the G-PF33 hold clear-branch fix (bench @4 proven) after the live C106 smoke; S-B wake acceptance Tue 09-02 18:15. Detail: plan §S-E DONE, §S-A amendments 1–3, §Proving record | in-progress | engine-sheet | [[../plans/2026-08-31-c105-chase-sessions]] §Session order |
+| engine.138 | C105 chase S-A…S-E all done. Recheck S423: G-PF33 clear-branch fix LIVE at PROD @15, v2.1 at @16 (DEPLOY_HISTORY); S-B wake acceptance MET — `openThreads` in 15 wake states, `\| advanced` rendered in 8 articles 09-02..09-04. Saturday cron ledger write is unattended proof, not a gate | done-pending-archive | engine-sheet | [[../plans/2026-08-31-c105-chase-sessions]] §Changelog |
 | engine.147 | Bloodline ascent — chain cuts 1–9 all live; open: the wake-pack seam | ready | research-build / engine-sheet | [[../plans/2026-09-02-bloodline-ascent]] |
 | canon.6 | Dillon Brooks + Pablo Almanzar in the C104 sports feed with no citizen row; POP-01023/01024 are the minting precedent. Canon write — needs Mike. | blocked | engine-sheet | [[../../output/world_summary_c104.md]] |
 | infrastructure.7 | Consolidate model calls on OpenRouter — Rhea, Saturday run, Discord pair. Price the models FIRST; OpenRouter margin may beat "cheaper". Vision/image paths need separate proof. | ready | engine-sheet | [[../plans/2026-08-20-consolidate-model-calls-on-openrouter]] |

@@ -323,7 +323,7 @@ function checkForPromotions_(ctx) {
   // from the waiting room, most-deficient hood first, World_Config
   // hoodFloorPromotePerCycle rows a cycle. Everyone else still earns the row
   // at EmergenceCount 3 through the lottery below (engine.58).
-  var waveRows = selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, rng);
+  var waveRows = selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng);
   var waveCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -651,7 +651,7 @@ function checkForPromotions_(ctx) {
 // this cycle's earlier picks), drawn uniformly among that hood's Active rows.
 // Returns { sheetRowIndex: hood }. Empty when the cell is 0 or nobody is
 // waiting in an under-floor hood.
-function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, rng) {
+function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, gEmergedCycle, cycle, rng) {
   var quota = ctx && ctx.config ? Number(ctx.config.hoodFloorPromotePerCycle) : NaN;
   if (!isFinite(quota)) {
     throw new Error('selectFloorWaveRows_: World_Config hoodFloorPromotePerCycle missing — the engine.148 self-arm did not run (ADR-0015).');
@@ -665,8 +665,12 @@ function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, rng) {
   // none are left. Self-correcting: the preference flips when the ledger does.
   var prefer = waveSexPreference_(ctx);
   var byHood = {};
+  var bornThisCycle = "Cycle " + cycle; // the feeder stamps EmergedCycle at creation
   for (var r = 1; r < gVals.length; r++) {
     if ((gVals[r][gStat] || "").toString() !== "Active") continue;
+    // engine.148: a row minted into the waiting room this cycle (Phase5-GenericCitizens
+    // runs first and writes direct) waits at least one cycle before a wave can take it.
+    if (gEmergedCycle >= 0 && String(gVals[r][gEmergedCycle] || "").trim() === bornThisCycle) continue;
     var hood = resolveHoodOrChild_(ctx, gVals[r][gNeigh]);
     if (!hood) continue;
     if (!byHood[hood]) byHood[hood] = { preferred: [], other: [] };

@@ -176,13 +176,14 @@ t('the surfacing dials read World_Config, not a literal', () => {
 });
 
 console.log('T6 migration wave');
-const GVALS = [['First', 'Last', 'Neighborhood', 'Status', 'Sex']]
-  .concat([['e1', 'x', 'Eastlake', 'Active', 'male'], ['e2', 'x', 'Eastlake', 'Active', 'female'], ['e3', 'x', 'Eastlake', 'Emerged', 'female'],
-           ['b1', 'x', 'Brooklyn', 'Active', 'male'], ['b2', 'x', 'Brooklyn Basin', 'Active', 'female'],
-           ['g1', 'x', 'Glenview', 'Active', 'male'], ['d1', 'x', 'Downtown', 'Active', 'female'], ['o1', 'x', 'Los Angeles', 'Active', 'female']]);
+const GVALS = [['First', 'Last', 'Neighborhood', 'Status', 'Sex', 'EmergedCycle']]
+  .concat([['e1', 'x', 'Eastlake', 'Active', 'male', ''], ['e2', 'x', 'Eastlake', 'Active', 'female', 'Cycle 100'], ['e3', 'x', 'Eastlake', 'Emerged', 'female', 'Cycle 104'],
+           ['b1', 'x', 'Brooklyn', 'Active', 'male', ''], ['b2', 'x', 'Brooklyn Basin', 'Active', 'female', ''],
+           ['g1', 'x', 'Glenview', 'Active', 'male', ''], ['d1', 'x', 'Downtown', 'Active', 'female', ''], ['o1', 'x', 'Los Angeles', 'Active', 'female', ''],
+           ['n1', 'x', 'Eastlake', 'Active', 'female', 'Cycle 106']]); // minted this cycle — waits
 t('greedy by deficit: quota 6 takes every waiting row in the under-floor hoods; never Downtown, a folded child of a full hood, or off-map', () => {
   const ctx = makeCtx(sb, SPARSE);
-  const picked = sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, 4, mulberry32(3));
+  const picked = sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, 4, 5, 106, mulberry32(3));
   const hoods = Object.values(picked).sort();
   // Eastlake 2 Active (Emerged row skipped) + Brooklyn 1 + Glenview 1 = 4 < quota 6;
   // 'Brooklyn Basin' folds to Jack London, which holds its floor → never drawn.
@@ -190,18 +191,19 @@ t('greedy by deficit: quota 6 takes every waiting row in the under-floor hoods; 
   eq(hoods, ['Brooklyn', 'Eastlake', 'Eastlake', 'Glenview']);
   assert.ok(!Object.keys(picked).includes('7')); // Downtown row
   assert.ok(!Object.keys(picked).includes('8')); // off-map row
+  assert.ok(!Object.keys(picked).includes('9')); // minted this cycle
 });
 t('quota 0 picks nothing; missing cell fails loud', () => {
   const off = makeCtx(sb, SPARSE, { hoodFloorPromotePerCycle: 0 });
-  eq(sb.selectFloorWaveRows_(off, GVALS, 2, 3, 4, mulberry32(3)), {});
+  eq(sb.selectFloorWaveRows_(off, GVALS, 2, 3, 4, 5, 106, mulberry32(3)), {});
   const missing = makeCtx(sb, SPARSE, { hoodFloorPromotePerCycle: undefined });
-  assert.throws(() => sb.selectFloorWaveRows_(missing, GVALS, 2, 3, 4, mulberry32(3)), /hoodFloorPromotePerCycle missing/);
+  assert.throws(() => sb.selectFloorWaveRows_(missing, GVALS, 2, 3, 4, 5, 106, mulberry32(3)), /hoodFloorPromotePerCycle missing/);
 });
 t('the wave draws the sex the ledger is short of first (male-heavy ledger → women first), then the rest', () => {
   const ctx = makeCtx(sb, SPARSE);
   assert.strictEqual(sb.waveSexPreference_(ctx), 'female');
   const one = makeCtx(sb, SPARSE, { hoodFloorPromotePerCycle: 1 });
-  const first = sb.selectFloorWaveRows_(one, GVALS, 2, 3, 4, mulberry32(5)); // Eastlake (deficit 1.0) has e1 male + e2 female → e2 (row 2)
+  const first = sb.selectFloorWaveRows_(one, GVALS, 2, 3, 4, 5, 106, mulberry32(5)); // Eastlake (deficit 1.0) has e1 male + e2 female → e2 (row 2)
   eq(Object.keys(first), ['2']);
   const balanced = makeCtx(sb, SPARSE); balanced.ledger.rows.forEach((r, i) => { r[5] = i % 2 ? 'female' : 'male'; }); balanced.ledger.rows.push(['POP-x', 'A', 'B', 'Downtown', 'Active', balanced.ledger.rows.filter(r => r[5] === 'female').length < balanced.ledger.rows.filter(r => r[5] === 'male').length ? 'female' : 'male']);
   const pref = sb.waveSexPreference_(balanced); assert.ok(pref === null || pref === 'female' || pref === 'male');
@@ -209,7 +211,7 @@ t('the wave draws the sex the ledger is short of first (male-heavy ledger → wo
 });
 t('a full city waves nobody', () => {
   const ctx = makeCtx(sb, FULL);
-  eq(sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, 4, mulberry32(3)), {});
+  eq(sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, 4, 5, 106, mulberry32(3)), {});
 });
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -83,7 +83,7 @@ D6 compounds: Crane is the `recovering` seat (`.claude/rules/civic.md` §status 
 | # | Task | Terminal | Acceptance |
 |---|---|---|---|
 | 1 | `Montclair` → writer C map as D6; seed `Neighborhood_Map` row | engine-sheet | Montclair appears in `world_summary` hood table at next cycle |
-| 2 | `DISTRICT_HOODS` (B): drop Coliseum/Elmhurst/Montclair-if-unseeded, move KONO D2→D7, add Baylight District→D5 | engine-sheet | B matches A exactly; diff test asserts equality |
+| 2 | ~~`DISTRICT_HOODS` (B): drop Coliseum/Elmhurst/Montclair-if-unseeded, move KONO D2→D7, add Baylight District→D5~~ **SUPERSEDED by 4d (S423)** — the literal is gone, B reads the sheet | engine-sheet | superseded |
 | 3 | `lib/districtMap.js` (A): drop Coliseum + Elmhurst | engine-sheet | A = 23 hoods (22 live + Montclair pending seed) |
 | 4 | ~~Single-source the map — B and C import A~~ **IMPOSSIBLE AS WRITTEN, see §7** | engine-sheet | superseded |
 | 5 | ~~Verify: Rivers' approval responds to an INIT-006 phase move~~ **unreachable in this plan, see §3 correction** | engine-sheet | superseded |
@@ -128,8 +128,8 @@ column is a derived view of C's literal, not a ledger. C must stop writing
 |---|---|---|---|
 | 4a | C stops writing `District` — delete `NEIGHBORHOOD_DISTRICT_MAP` + the L417–423 write block | engine-sheet | deploy-gated |
 | 4b | Seed `District` for all 22 live rows as ledger data, hand-authored like `CoreSimRank` | engine-sheet | after 4a deploys, else re-blanked |
-| 4c | `canonNeighborhoodLoader` also seeds district (`S.canonHoods.district`, `byDistrict`), fail-loud | engine-sheet | deploy-gated |
-| 4d | B drops `DISTRICT_HOODS`, reads the loader accessor | engine-sheet | deploy-gated |
+| 4c | `canonNeighborhoodLoader` also seeds district (`S.canonHoods.district`, `byDistrict`), fail-loud | engine-sheet | **DONE S423** (committed, rides the next PROD push) |
+| 4d | B drops `DISTRICT_HOODS`, reads the loader accessor | engine-sheet | **DONE S423** — `getDistrictHoods_`; 5 sites; 101/101 |
 | 4e | `auditHoodDrift.js` reconciles the live `District` column against the Node mirror | engine-sheet | Node-only |
 
 Ordering is load-bearing: **4a before 4b**, or the seed is erased by the next cycle.
@@ -194,6 +194,7 @@ error or intended canon before civic.19 leaves design.
 **Verified 2026-08-15 (no change needed):** every city-hall participant already has a heat-slice pack — 14/14 voiced offices + 4/4 projects, including all 9 `COUNCIL-D1..D9` individually. The 15 offices without packs are exactly the non-participant municipal seats (CHIEF-FIRE, DCOP-OPS, DCOP-COMM, IAD-LEAD, EMS-DIR, MED-EXAM, EMERG-DIR, ADA-MAJOR, ADA-SAFETY, DPD-DEPUTY, COURT-LIAISON, CPRB-CHAIR, OMBUDSMAN, REENTRY-DIR, PLANNING-DIR).
 
 ## Changelog
+- 2026-09-05 (engine-sheet, S423) — **4c + 4d shipped, Task 2 superseded.** Live read first: `Neighborhood_Map.District` is populated 22/22 (4b landed), so the sheet is the edge's truth and the approval engine's literal was the drift — KONO under D2 (sheet: D7), Coliseum/Elmhurst/Montclair listed with no row. `loadCanonNeighborhoods_` now seeds `S.canonHoods.district` + `byDistrict` from the column; `getDistrictHoods_(ctx, district)` is the accessor (throws unseeded, `[]` for a district the ledger names no hood for — the engine's existing city-wide reading). `updateCivicApprovalRatings.js` drops `DISTRICT_HOODS` at all five sites; `scoreLedgerCitizenForOffice_` takes the hood list as a parameter (it has no ctx). Geography correction only: KONO's citizens now count toward Ashford's (D7) condition instead of Tran's (D2); no scoring arithmetic changed (S406 ruling holds). `civicApprovalCeiling.test.js` 101/101 with the loader in scope; collisions 0/1245. Still open: Task 1 (Montclair row — builder's seed; the Node mirror `lib/districtMap.js` still lists it under D6 and otherwise matches the sheet exactly) and 4e (Node reconcile of the `District` column — cheap, on touch).
 
 - 2026-08-15 (research-build) — INIT-006 escalation RESOLVED without a builder
   ruling: read all 6 live initiatives, convention is project-site tagging (5 of

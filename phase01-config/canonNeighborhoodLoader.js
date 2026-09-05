@@ -13,7 +13,16 @@
  * Seeds ONE ctx field at Phase 1:
  *   S.canonHoods = { list: [...canonical spellings, sheet row order],
  *                    set:  { lowercased-name: true },
- *                    core: [...CoreSimRank hoods, rank order] }
+ *                    core: [...CoreSimRank hoods, rank order],
+ *                    district:   { hood: 'D<n>' }            (civic.18 4c)
+ *                    byDistrict: { 'D<n>': [...hoods, row order] } }
+ *
+ * DISTRICT EDGE (civic.18 4c, S423): the ledger's District column is the one
+ * truth for which council seat a hood sits under. Seeded here so the approval
+ * engine (4d) reads it through getDistrictHoods_ instead of its own literal —
+ * the literal had drifted (KONO under D2 while the sheet says D7; Coliseum,
+ * Elmhurst and Montclair listed though none has a row). A blank District cell
+ * simply leaves the hood out of every district — never a guessed seat.
  *
  * CORE SUBSET (engine.99 Cohort 2): the ledger's CoreSimRank column marks the
  * hoods the citizen/evening/crisis engines operate on (historically the
@@ -61,10 +70,13 @@ function loadCanonNeighborhoods_(ctx) {
     throw new Error('loadCanonNeighborhoods_: Neighborhood_Map has no "Neighborhood" header column.');
   }
   var iRank = header.indexOf('CoreSimRank');
+  var iDistrict = header.indexOf('District');
 
   var list = [];
   var set = {};
   var ranked = [];
+  var district = {};
+  var byDistrict = {};
   for (var r = 1; r < values.length; r++) {
     var hood = (values[r][iHood] || '').toString().trim();
     if (!hood) continue;
@@ -76,6 +88,14 @@ function loadCanonNeighborhoods_(ctx) {
       var rank = Number(values[r][iRank]);
       if (!isNaN(rank) && rank > 0) ranked.push({ hood: hood, rank: rank });
     }
+    if (iDistrict >= 0) {
+      var d = (values[r][iDistrict] || '').toString().trim().toUpperCase();
+      if (d) {
+        district[hood] = d;
+        if (!byDistrict[d]) byDistrict[d] = [];
+        byDistrict[d].push(hood);
+      }
+    }
   }
 
   if (list.length === 0) {
@@ -86,8 +106,25 @@ function loadCanonNeighborhoods_(ctx) {
   var core = [];
   for (var c = 0; c < ranked.length; c++) core.push(ranked[c].hood);
 
-  S.canonHoods = { list: list, set: set, core: core };
+  S.canonHoods = { list: list, set: set, core: core, district: district, byDistrict: byDistrict };
   S.canonHoodCount = list.length;
+}
+
+/**
+ * Hoods under one council district, sheet row order (civic.18 4c/4d). Throws
+ * when the seed is absent — same wall as the accessors above. A district the
+ * ledger names no hood for returns [] (the approval engine reads that as
+ * city-wide, as it always did for an unknown seat). Case-insensitive on the
+ * district key; a copy, never the seed.
+ */
+function getDistrictHoods_(ctx, districtId) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.canonHoods || !S.canonHoods.byDistrict) {
+    throw new Error('getDistrictHoods_: canonical hood set not seeded — loadCanonNeighborhoods_ (Phase1-CanonHoods) did not run or failed. No embedded fallback (ADR-0016).');
+  }
+  var key = String(districtId || '').trim().toUpperCase();
+  var hoods = S.canonHoods.byDistrict[key];
+  return hoods ? hoods.slice() : [];
 }
 
 /**

@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-04 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-05 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -36,6 +36,9 @@
 - **loadCanonNeighborhoods_(ctx)**
   Writes: S.canonHoodCount, S.canonHoods
   Sheets: Neighborhood_Map
+
+- **getDistrictHoods_(ctx, districtId)**
+  Reads: S.canonHoods
 
 - **getCanonNeighborhoods_(ctx)**
   Reads: S.canonHoods
@@ -2029,7 +2032,7 @@
 
 - **isCivicAdjacentText_(text)**
 
-- **scoreLedgerCitizenForOffice_(row, headers, district, incumbentPopId, occupiedPopIds)**
+- **scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPopId, occupiedPopIds)**
 
 - **nextChallengerPopId_(rows, iPop)**
 
@@ -3727,4 +3730,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1271
+**Functions mapped:** 1272

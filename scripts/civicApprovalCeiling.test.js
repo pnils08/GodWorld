@@ -12,7 +12,17 @@ const path = require('path');
 const approvalSource = fs.readFileSync(
   path.resolve(__dirname, '../phase05-citizens/updateCivicApprovalRatings.js'), 'utf8'
 );
-const A = new Function(approvalSource + '\nreturn {' +
+// civic.18 4d: the district→hood edge now comes from the Phase-1 canon loader,
+// so its accessor rides in the same function scope as the approval source.
+const loaderSource = fs.readFileSync(
+  path.resolve(__dirname, '../phase01-config/canonNeighborhoodLoader.js'), 'utf8'
+);
+const CANON_HOODS = {
+  list: ['Fruitvale', 'San Antonio', 'Downtown'], set: { fruitvale: true, 'san antonio': true, downtown: true }, core: [],
+  district: { Fruitvale: 'D3', 'San Antonio': 'D3', Downtown: 'D2' },
+  byDistrict: { D3: ['Fruitvale', 'San Antonio'], D2: ['Downtown'] }
+};
+const A = new Function(loaderSource + approvalSource + '\nreturn {' +
   'getApprovalCeilingConfig_: getApprovalCeilingConfig_,' +
   'resolveApprovalCeilingLifecycle_: resolveApprovalCeilingLifecycle_,' +
   'applyApprovalCeilingRisk_: applyApprovalCeilingRisk_,' +
@@ -190,7 +200,7 @@ console.log('═══ E. Every-Cycle writer integration');
   const ctx = {
     mode: {},
     config: { ...APPROVED, cycleCount: 113 },
-    summary: { cycleId: 113, economicMood: 50 },
+    summary: { cycleId: 113, economicMood: 50, canonHoods: CANON_HOODS },
     ss: {
       getSheetByName(name) {
         if (name !== 'Civic_Office_Ledger') return null;
@@ -213,7 +223,7 @@ console.log('═══ E. Every-Cycle writer integration');
   const missingHeaderCtx = {
     mode: {},
     config: { ...APPROVED, cycleCount: 113 },
-    summary: { cycleId: 113 },
+    summary: { cycleId: 113, canonHoods: CANON_HOODS },
     ss: {
       getSheetByName(name) {
         if (name !== 'Civic_Office_Ledger') return null;
@@ -319,12 +329,12 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     ]
   };
   const pick = A.pickCampaignChallenger_(
-    { ledger }, 'D3', 'POP-00034', { 'POP-00034': true }
+    { ledger, summary: { canonHoods: CANON_HOODS } }, 'D3', 'POP-00034', { 'POP-00034': true }
   );
   check('H5 prefers local civic-adjacent over remote higher tier',
     pick && pick.popId === 'POP-00900', JSON.stringify(pick));
   const again = A.pickCampaignChallenger_(
-    { ledger }, 'D3', 'POP-00034', { 'POP-00034': true }
+    { ledger, summary: { canonHoods: CANON_HOODS } }, 'D3', 'POP-00034', { 'POP-00034': true }
   );
   check('H6 pick is deterministic', again && again.popId === pick.popId);
 
@@ -340,9 +350,9 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   const fit = ['POP-00910', 'Fit', 'Local', 'Fit Local', 3, 'Fruitvale', 'n', 'active', '', dialsOk, 1988, 'community organizer'];
   const lazy = ['POP-00911', 'Lazy', 'Local', 'Lazy Local', 3, 'Fruitvale', 'n', 'active', '', dialsLowDrive, 1988, 'community organizer'];
   check('H7 low-Drive citizen is not built to run',
-    A.scoreLedgerCitizenForOffice_(lazy, scoreHeaders, 'D3', 'POP-00034', {}) === null);
+    A.scoreLedgerCitizenForOffice_(lazy, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {}) === null);
   check('H8 high-Drive principled local scores',
-    !!(A.scoreLedgerCitizenForOffice_(fit, scoreHeaders, 'D3', 'POP-00034', {})));
+    !!(A.scoreLedgerCitizenForOffice_(fit, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {})));
 
   // civic.31 (builder 2026-09-04): "the path in is always Generic_Citizens —
   // you emerge from there." An empty qualified pool no longer mints an
@@ -363,7 +373,7 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     ]
   };
   const minted = A.pickCampaignChallenger_(
-    { ledger: emptyPool, ss: ssStub }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
+    { ledger: emptyPool, ss: ssStub, summary: { canonHoods: CANON_HOODS } }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
   );
   check('H9 empty qualified pool mints NOBODY onto the ledger this Cycle',
     minted === null && emptyPool.rows.length === 1, JSON.stringify(minted));
@@ -376,7 +386,7 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   const queued2 = [];
   global.queueAppendIntent_ = (ctx, tab, row) => { queued2.push({ tab, row: row.slice() }); };
   A.pickCampaignChallenger_(
-    { ledger: { headers, rows: [emptyPool.rows[0].slice()] }, ss: ssStub }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
+    { ledger: { headers, rows: [emptyPool.rows[0].slice()] }, ss: ssStub, summary: { canonHoods: CANON_HOODS } }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 104
   );
   check('H10 the arrival is deterministic for the same office and Cycle',
     queued2.length === 1 && (queued2[0].row[0] + ' ' + queued2[0].row[1]) === arrivalName);
@@ -387,7 +397,7 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   global.queueAppendIntent_ = (ctx, tab) => { queued3.push(tab); };
   const nextPool = { headers, rows: [emptyPool.rows[0].slice()] };
   const promoted = A.pickCampaignChallenger_(
-    { ledger: nextPool, ss: ssStub }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 105
+    { ledger: nextPool, ss: ssStub, summary: { canonHoods: CANON_HOODS } }, 'D3', 'POP-00034', { 'POP-00034': true }, 'COUNCIL-D3', 105
   );
   check('H10b next Cycle the GC feeder promotes the arrival — origin generic, on the ledger, nobody new queued',
     !!promoted && promoted.origin === 'generic' && promoted.name === arrivalName &&
@@ -418,7 +428,7 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     Object.keys(seeded).length === 5, JSON.stringify(seeded));
   check('H12b every citizen already campaigning in ANY office is occupied',
     seeded['POP-00900'] === true && seeded['POP-00901'] === true, JSON.stringify(seeded));
-  const secondRace = A.pickCampaignChallenger_({ ledger }, 'D3', 'POP-00777', seeded);
+  const secondRace = A.pickCampaignChallenger_({ ledger, summary: { canonHoods: CANON_HOODS } }, 'D3', 'POP-00777', seeded);
   check('H12c a citizen running one race is not picked for a second — the pool falls to the next name',
     !!secondRace && secondRace.popId === 'POP-00902', JSON.stringify(secondRace));
   const noNotes = A.seedOccupiedPopIds_(offices, 1, 2, -1);

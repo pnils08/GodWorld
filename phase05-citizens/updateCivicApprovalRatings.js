@@ -53,17 +53,11 @@
  * ============================================================================
  */
 
-var DISTRICT_HOODS = {
-  'D1': ['West Oakland', 'Brooklyn'],
-  'D2': ['Downtown', 'Chinatown', 'Jack London', 'KONO'],
-  'D3': ['Fruitvale', 'San Antonio'],
-  'D4': ['Glenview', 'Dimond', 'Ivy Hill'],
-  'D5': ['East Oakland', 'Coliseum', 'Elmhurst'],
-  'D6': ['Montclair', 'Piedmont Ave'],
-  'D7': ['Temescal', 'Rockridge'],
-  'D8': ['Lake Merritt', 'Adams Point', 'Grand Lake', 'Eastlake'],
-  'D9': ['Laurel', 'Uptown']
-};
+// civic.18 4d (S423) — the district→hood edge is read from Neighborhood_Map's
+// District column through getDistrictHoods_ (canonNeighborhoodLoader, Phase 1).
+// The literal that lived here had drifted from the ledger: KONO under D2 (sheet:
+// D7), Coliseum/Elmhurst/Montclair listed with no row. Geography correction only
+// — the scoring arithmetic is unchanged (S406 ruling: approval scoring stays).
 
 function getApprovalCeilingConfig_(ctx) {
   if (ctx && ctx._approvalCeilingConfig) return ctx._approvalCeilingConfig;
@@ -369,7 +363,7 @@ function updateCivicApprovalRatings_(ctx) {
     // ─────────────────────────────────────────────────────────────────────
     // INITIATIVE PERFORMANCE IN DISTRICT
     // ─────────────────────────────────────────────────────────────────────
-    var districtHoods = DISTRICT_HOODS[district] || [];
+    var districtHoods = getDistrictHoods_(ctx, district);
     var isMayor = officeId.indexOf('MAYOR') === 0;
 
     for (var ii = 0; ii < initiatives.length; ii++) {
@@ -711,7 +705,7 @@ function updateCivicApprovalRatings_(ctx) {
 
   for (var ai = 0; ai < changes.length; ai++) {
     var ch = changes[ai];
-    var dHoods = DISTRICT_HOODS[ch.district] || [];
+    var dHoods = getDistrictHoods_(ctx, ch.district);
 
     // Small sentiment ripple: approval drop → district sentiment dips
     var ripple = ch.delta * 0.003; // +/-0.003 per approval point change
@@ -998,7 +992,7 @@ function isCivicAdjacentText_(text) {
  * Composure < 40 (can't sit a chamber). Missing DialState is not a reject —
  * score on tags/hood only. Empty seat is worse than a quieter local.
  */
-function scoreLedgerCitizenForOffice_(row, headers, district, incumbentPopId, occupiedPopIds) {
+function scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPopId, occupiedPopIds) {
   var col = function(name) { return headers.indexOf(name); };
   var iPop = col('POPID');
   if (iPop < 0) return null;
@@ -1039,7 +1033,7 @@ function scoreLedgerCitizenForOffice_(row, headers, district, incumbentPopId, oc
   var tags = iTags >= 0 ? String(row[iTags] || '') : '';
   var iHood = col('Neighborhood');
   var hood = iHood >= 0 ? String(row[iHood] || '') : '';
-  var hoods = DISTRICT_HOODS[String(district || '').toUpperCase()] || [];
+  hoods = hoods || [];
   var citywide = !hoods.length || String(district || '').toLowerCase() === 'citywide';
   var local = citywide;
   if (!local) {
@@ -1144,7 +1138,7 @@ function pickGenericCitizenChallenger_(ctx, district, specBase) {
   };
   var iF = idx('First'), iL = idx('Last'), iOcc = idx('Occupation');
   var iHood = idx('Neighborhood'), iBy = idx('BirthYear'), iSt = idx('Status'), iSex = idx('Sex');
-  var hoods = DISTRICT_HOODS[String(district || '').toUpperCase()] || [];
+  var hoods = getDistrictHoods_(ctx, district);
   var best = null, bestScore = -1;
   for (var r = 1; r < data.length; r++) {
     var row = data[r];
@@ -1222,7 +1216,7 @@ function mintOutOfTownChallenger_(ctx, district, officeId, cycle) {
       if (String(data[r][iCtx] || '').indexOf(marker) >= 0) return null; // already waiting in the pool
     }
   }
-  var hoods = DISTRICT_HOODS[String(district || '').toUpperCase()] || [];
+  var hoods = getDistrictHoods_(ctx, district);
   var hood = hoods[0] || 'Downtown';
   var seed = String(officeId || district || '') + ':' + String(cycle || 0);
   var h = civicHash_(seed);
@@ -1259,10 +1253,11 @@ function mintOutOfTownChallenger_(ctx, district, officeId, cycle) {
 function pickCampaignChallenger_(ctx, district, incumbentPopId, occupiedPopIds, officeId, cycle) {
   if (!ctx || !ctx.ledger || !ctx.ledger.headers || !ctx.ledger.rows) return null;
   var headers = ctx.ledger.headers;
+  var districtHoods = getDistrictHoods_(ctx, district);
   var best = null;
   for (var r = 0; r < ctx.ledger.rows.length; r++) {
     var scored = scoreLedgerCitizenForOffice_(
-      ctx.ledger.rows[r], headers, district, incumbentPopId, occupiedPopIds
+      ctx.ledger.rows[r], headers, district, districtHoods, incumbentPopId, occupiedPopIds
     );
     if (!scored) continue;
     if (!best || scored.score > best.score ||

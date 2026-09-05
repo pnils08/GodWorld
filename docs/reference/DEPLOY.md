@@ -52,6 +52,7 @@ bench is the same state as live, so the bench fire + sheet verify is the smoke. 
 clear whenever Mike fires them; they confirm, they don't gate.
 
 **CURRENT: `SANDBOX 0831` (stood up 2026-08-31, Mike-made copy).** Copy of live post-C105 — the proving bench for the S405 C105 chase sessions (S-A through S-E, `docs/plans/2026-08-31-c105-chase-sessions.md`).
+- **@40 (S417, 2026-09-04) = live @45 + the engine.162/civic.30/civic.31 wave (4 files, HELD four at base); C112 fired `ok:true`, 0 errors, 13/13 D3 raises exact — proof narrative in `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04.** Bench at C112.
 - Spreadsheet ID `18BOJmzlO7EoaEhvUsUaqLIZvgrTC1yltUYk_Gz3I3W8`
 - Bound Apps Script ID `1_3PDs7CSUsYvjjcXWtYGKjpPd7ekiIsUKKLSwlMtj3ioQKV0ew8TAfPh`
 - Script Properties set by Mike 2026-08-31: `SIM_SSID`, `CYCLE_TRIGGER_TOKEN`. Authorization ran, access granted (protocol step 3b done).
@@ -109,6 +110,10 @@ clear whenever Mike fires them; they confirm, they don't gate.
 - 2026-08-09 (kimi) proving fires C114–C115 — engine.102 Task 7 (W4 hospital) criterion-5 bench proof, token-fired per the §Groundhog carve-out, 128 phases ok:true ×2. C115: two new admissions with populated epidemic-aware Causes (POP-00662, POP-00990), six lifecycle bed closures (3 recovered / 3 deceased), no ghost reconciles needed (ledger clean), WP illness 0.1109→0.111 with talk-back correctly inactive (load 4 ≪ capacity 100 — binding math proven by `scripts/hospitalTalkback.test.js` 24/24). Grief config validated live in-code (validator passed, keys present). C114 also served as Codex's pending approval-ceiling smoke; independent post-hoc assertions are recorded below.
 - 2026-08-09 (codex) engine.94 approval-ceiling read-back after the shared fires — C115 retained config 8/8 and contiguous state columns 3/3; all four elected offices at approval ≥80 persisted streak 2, all six below threshold remained at 0, no auto/manual scandal fired before the third qualifying Cycle, and `Engine_Errors` was zero for both C114 and C115.
 - 2026-08-09 (codex) engine.94 code-only safety correction — exact main `d3b70f3c` deployed @41 and token-fired C116. The self-arm was idempotent on the prepared bench; all four qualifying offices reached streak 3, the seeded 5% rolls missed, no premature scandal appeared, one naturally active grief register carried one machine source, and C116 logged zero engine errors. Fresh-Sheet creation/conflict behavior is covered by the 24/24 offline first-live-Cycle harness; production remained untouched.
+
+### LIVE — engine.162 + civic.30/31 wave PUSHED 2026-09-04 ~19:25 (S417 engine-sheet) — deployment bump PENDING
+
+Script tree = @45 + 4 payload files (HELD engine.131 T7 four at base), staged from a `clasp-real pull` of SANDBOX 0831 @40 with the repo `.clasp.json` copied last; prod id present / sandbox id absent / 0 tests / 174 files; `clasp-real push -f`; pull-back 0 differing files. **`clasp deploy -i <prod id>` was refused by the auto-mode classifier** (the wall git history records: "run bumps outside auto mode") — builder runs it, then `clasp-real deployments` confirms @46. Until then the web app serves @45. Bench proof narrative: `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04.
 
 ### LIVE — engine.135 code wave DEPLOYED 2026-08-30 (S398 engine-sheet) — prod @8 00:45, @9 03:55
 

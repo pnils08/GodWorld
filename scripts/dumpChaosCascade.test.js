@@ -1,14 +1,17 @@
 /**
  * dumpChaosCascade.test.js — engine.11 T5.3 coverage. Node-only.
- * Stubs lib/sheets.getSheetAsObjects and canon-name-check.profilesForPopids so this
- * runs without live credentials.
+ * Stubs lib/sheets.getSheetAsObjects (no live sheet reads in a test) but resolves
+ * names against the REAL output/simulation_ledger_snapshot.jsonl on disk — a prior
+ * version stubbed canon-name-check's profilesForPopids() with a hand-typed display
+ * string and reverse-parsed it, which tested this script's model of that formatter
+ * rather than the real POPID->Name path (advisor-pass finding, S423). If the
+ * snapshot's shape ever drifts, this test now breaks for the right reason.
  * Run: node scripts/dumpChaosCascade.test.js
  */
 'use strict';
 
 require('/root/GodWorld/lib/env');
 const sheets = require('/root/GodWorld/lib/sheets');
-const canonNameCheck = require('./canon-name-check');
 const dcc = require('./dumpChaosCascade');
 
 let passed = 0, failed = 0;
@@ -18,13 +21,8 @@ function assert(label, cond, detail) {
 }
 
 const REAL_getSheetAsObjects = sheets.getSheetAsObjects;
-const REAL_profilesForPopids = canonNameCheck.profilesForPopids;
 function stubChaosRows(rows) { sheets.getSheetAsObjects = async () => rows; }
-function stubProfiles(fn) { canonNameCheck.profilesForPopids = fn; }
-function restore() {
-  sheets.getSheetAsObjects = REAL_getSheetAsObjects;
-  canonNameCheck.profilesForPopids = REAL_profilesForPopids;
-}
+function restore() { sheets.getSheetAsObjects = REAL_getSheetAsObjects; }
 
 (async () => {
   // Test 1: no rows at all for the cycle
@@ -48,8 +46,10 @@ function restore() {
     restore();
   }
 
-  // Test 3: a Tier-1 hit resolves a name via canon-name-check
-  console.log('\nTest 3: Tier-1 hit + name resolution');
+  // Test 3: a Tier-1 hit resolves a name against the REAL ledger snapshot on disk
+  // (POP-00001 = Vinnie Keane, confirmed live this session — not a stubbed model of
+  // the resolver).
+  console.log('\nTest 3: Tier-1 hit + real snapshot name resolution');
   {
     stubChaosRows([
       { CycleId: '999', EventId: 'x1', VehicleType: 'ambulance', TargetScope: 'citizen',
@@ -58,25 +58,23 @@ function restore() {
       { CycleId: '999', VehicleType: 'garbage_truck', TargetScope: 'business',
         TargetId: 'BIZ-00001', ConsequenceFloorFired: 'FALSE' }
     ]);
-    stubProfiles((popids) => popids.map((p) => `Vinnie Keane — role: DH; popid: ${p}`));
     const hits = await dcc.readTier1Hits('999');
     assert('exactly one Tier-1 hit', hits.length === 1);
-    assert('resolved name', hits[0] && hits[0].targetName === 'Vinnie Keane', JSON.stringify(hits[0]));
+    assert('resolved name against real snapshot', hits[0] && hits[0].targetName === 'Vinnie Keane', JSON.stringify(hits[0]));
     assert('cross-cycle / non-floor-fired rows excluded', hits.every((h) => h.eventId === 'x1'));
     restore();
   }
 
-  // Test 4: unresolved POPID falls back to the raw ID, never throws
+  // Test 4: a POPID absent from the real snapshot falls back to the raw ID, never throws
   console.log('\nTest 4: unresolved citizen falls back to POPID');
   {
     stubChaosRows([
       { CycleId: '999', EventId: 'x2', VehicleType: 'cop_car', TargetScope: 'citizen',
-        TargetId: 'POP-09999', TargetTier: '1', DiceOutcome: 'arrested',
+        TargetId: 'POP-99999', TargetTier: '1', DiceOutcome: 'arrested',
         ConsequenceFloorFired: 'TRUE' }
     ]);
-    stubProfiles(() => []); // no match in the ledger snapshot
     const hits = await dcc.readTier1Hits('999');
-    assert('fallback name is the POPID', hits[0] && hits[0].targetName === 'POP-09999', JSON.stringify(hits[0]));
+    assert('fallback name is the POPID', hits[0] && hits[0].targetName === 'POP-99999', JSON.stringify(hits[0]));
     restore();
   }
 

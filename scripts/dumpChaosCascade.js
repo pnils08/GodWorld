@@ -21,8 +21,31 @@
  */
 
 require('/root/GodWorld/lib/env');
+const fs = require('fs');
+const path = require('path');
 const sheets = require('/root/GodWorld/lib/sheets');
-const canonNameCheck = require('./canon-name-check');
+
+const LEDGER_SNAPSHOT = path.join(__dirname, '..', 'output', 'simulation_ledger_snapshot.jsonl');
+
+// Direct snapshot read, not canon-name-check's profilesForPopids() — that function
+// formats a composite display string ("Name — role: X; popid: Y") meant for a human
+// reading a canon-check report, and reverse-parsing it here coupled this script to
+// that formatter's exact join order/field list. One drift there breaks name
+// resolution here silently. POPID and Name are both plain columns on the same
+// snapshot row (dumpLedger.js synthesizes Name as "${First} ${Last}") — read them
+// directly.
+function popidToNameMap(popids) {
+  const want = new Set(popids.map((p) => String(p).trim().toUpperCase()));
+  const map = {};
+  if (!want.size || !fs.existsSync(LEDGER_SNAPSHOT)) return map;
+  for (const line of fs.readFileSync(LEDGER_SNAPSHOT, 'utf8').split('\n')) {
+    if (!line.trim()) continue;
+    const row = JSON.parse(line);
+    const pop = String(row.POPID || '').trim().toUpperCase();
+    if (want.has(pop) && row.Name) map[pop] = row.Name;
+  }
+  return map;
+}
 
 async function readTier1Hits(cycle) {
   const rows = await sheets.getSheetAsObjects('Chaos_Cars').catch(() => []);
@@ -33,12 +56,7 @@ async function readTier1Hits(cycle) {
   if (!hits.length) return [];
 
   const popids = hits.filter((r) => r.TargetScope === 'citizen').map((r) => r.TargetId);
-  const profiles = canonNameCheck.profilesForPopids(popids);
-  const nameByPopid = {};
-  for (const p of profiles) {
-    const m = /^(.+?) — .*popid: (POP-\d+)/.exec(p);
-    if (m) nameByPopid[m[2]] = m[1];
-  }
+  const nameByPopid = popidToNameMap(popids);
 
   return hits.map((r) => {
     const name = nameByPopid[r.TargetId] || r.TargetId; // fall back to POPID if unresolved

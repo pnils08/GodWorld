@@ -1785,6 +1785,8 @@
   Sheets: Advancement_Intake1, Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
+- **ensureGridColumns_(sheet, needed)**
+
 - **ensureHouseholdQueueSheet_(ss)**
   Sheets: Advancement_Intake1
 
@@ -3725,4 +3727,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1270
+**Functions mapped:** 1271

@@ -145,6 +145,7 @@ console.log('\n2. the mint — through the populator, wired, one household:');
   check('children on both parents, counted — no phantom kids for the drip', M[col('ChildrenIds')] === kids && D[col('ChildrenIds')] === kids && M[col('NumChildren')] === 2 && D[col('NumChildren')] === 2);
   check('kids carry both parents', JSON.parse(T[col('ParentIds')]).sort().join() === [M[col('POPID')], D[col('POPID')]].sort().join() && JSON.parse(I[col('ParentIds')]).length === 2);
   check('kids are students, single, childless', T[col('RoleType')] === 'student' && T[col('CareerStage')] === 'student' && T[col('MaritalStatus')] === 'single' && T[col('NumChildren')] === 0);
+  check('kids hold no employer and earn nothing; the adults were placed', T[col('EmployerBizId')] === '' && I[col('EmployerBizId')] === '' && !/Seeking work/.test(T[col('LifeHistory')]) && T[col('Income')] === '' && M[col('EmployerBizId')] !== undefined);
   check('one HouseholdId on all four, in the intake series', nu.every(r => r[col('HouseholdId')] === 'HH-0106-I001'));
   check('the ascent columns are filled (education, income, net worth, gender, tags)', M[col('EducationLevel')] && M[col('Income')] === 61000 && M[col('NetWorth')] !== '' && M[col('Gender')] === 'male' && D[col('Gender')] === 'female' && M[col('SkillTags')] !== '');
   const hh = w.sheets.Household_Ledger.appended;
@@ -159,6 +160,23 @@ console.log('\n2. the mint — through the populator, wired, one household:');
   const hooks = w.ctx.summary.storyHooks;
   check('hooks: three FAMILY_REALIZED + one HOUSEHOLD_ARRIVED', hooks.filter(h => h.hookType === 'FAMILY_REALIZED').length === 3 && hooks.filter(h => h.hookType === 'HOUSEHOLD_ARRIVED').length === 1 && !hooks.some(h => /lottery/.test(h.text)));
   check('the head\'s hood on everyone', nu.every(r => r[col('Neighborhood')] === 'Temescal'));
+}
+
+console.log('\n2b. an operator Sex column wins over name inference:');
+{
+  const w = world([
+    ['Jordan','Okafor',36,'Temescal','Teacher','white-collar','Okafor','','','head','female'],
+    ['Sam','Okafor',37,'','Chef','service','Okafor','','','spouse','male'],
+    ['Remy','Okafor',3,'','','','Okafor','','','child',''],
+  ], { intakeHeader: INTAKE_H.concat(['Sex']) });
+  runPlan(w);
+  const q = w.sheets.Advancement_Intake1; const qh = q.rows[0]; const qc = (n) => qh.indexOf(n);
+  check('Sex read from the tab; blank falls back to inference', q.appended[0][qc('Gender')] === 'female' && q.appended[1][qc('Gender')] === 'male' && q.appended[2][qc('Gender')] === '');
+  const before = w.ctx.ledger.rows.length;
+  E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
+  const nu = w.ctx.ledger.rows.slice(before); const J = nu[0], Sm = nu[1];
+  const fr = w.sheets.Family_Relationships.appended[0];
+  check('a female head is the wife, her husband beside her, in the register', J[col('Gender')] === 'female' && Sm[col('Gender')] === 'male' && /Sam Okafor/.test(fr[1]) && /Jordan Okafor/.test(fr[2]));
 }
 
 console.log('\n3. the drip path is untouched, and collisions are refused:');

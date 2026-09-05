@@ -834,7 +834,10 @@ function processAdvancementRows_(ctx, now, cycle) {
       // EmployerBizId (carried from Generic_Citizens) wins; else a
       // capacity-aware draw from the final RoleType. No opening anywhere →
       // explicitly recorded as seeking work; silence is not an outcome.
-      if (lEmployerBiz >= 0) {
+      // engine.109 (S419): a minor is a student, not a hire — the bench put a
+      // 9-year-old on a payroll. Minors earn nothing (S320) and hold no
+      // employer; the 18th-birthday settlement places them.
+      if (lEmployerBiz >= 0 && age >= 18) {
         if (mintBizPool === undefined) {
           mintBizPool = buildMintBizPool_(ss);
           mintTrackedByBiz = {};
@@ -1772,7 +1775,7 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
   var idxI = function(n) { return intakeHeader.indexOf(n); };
   var iF = idxI('First'), iLa = idxI('Last'), iAge = idxI('Age'), iNbhd = idxI('Neighborhood'),
       iRole = idxI('RoleType'), iFam = idxI('Family'), iNotes = idxI('Notes'), iStat = idxI('IntakeStatus'),
-      iRel = idxI('Relation');
+      iRel = idxI('Relation'), iSex = idxI('Sex'); // Sex: optional operator column — read when present, never armed
   if (iF < 0 || iLa < 0 || iFam < 0 || iStat < 0) return out;
   if (iRel < 0) {
     // the door's one new operator column self-arms (schema-setup carve-out)
@@ -1818,7 +1821,8 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
         age: Number(mrow[iAge]) || 0,
         role: iRole >= 0 ? (mrow[iRole] || '').toString().trim() : '',
         hood: iNbhd >= 0 ? (mrow[iNbhd] || '').toString().trim() : '',
-        notes: iNotes >= 0 ? (mrow[iNotes] || '').toString().trim() : '' };
+        notes: iNotes >= 0 ? (mrow[iNotes] || '').toString().trim() : '',
+        sex: iSex >= 0 ? (mrow[iSex] || '').toString().trim().toLowerCase() : '' };
       if (rel === 'head') { if (head) { reason = 'two members are marked head'; break; } head = mem; }
       members.push(mem);
     }
@@ -1852,7 +1856,8 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
         MatchType: mm.rel === 'head' ? '' : mm.rel,
         MatchName: mm.rel === 'head' ? '' : headName,
         HouseholdKey: order[g],
-        Gender: (typeof inferSexFromFirstName_ === 'function') ? (inferSexFromFirstName_(mm.first) || '') : ''
+        Gender: (mm.sex === 'male' || mm.sex === 'female') ? mm.sex
+          : ((typeof inferSexFromFirstName_ === 'function') ? (inferSexFromFirstName_(mm.first) || '') : '')
       };
       var qrow = new Array(adv.headers.length).fill('');
       for (var h = 0; h < adv.headers.length; h++) if (vals.hasOwnProperty(adv.headers[h])) qrow[h] = vals[adv.headers[h]];

@@ -387,6 +387,12 @@ Deliverable of the measure: a hop table with pointers and gaps, and a build orde
 - What is "advance the bloodline" as a number — HeritageScore, HeritageTier, generations, members in Tier ≤2? The line needs one target the cron can steer toward.
 - Loss: what un-founds a line (last member dies, score below a floor, a scandal)? Nothing today.
 
+## Status log
+
+### engine.147 — status (drained from ROLLOUT, 2026-09-04 / S418)
+
+Bloodline ascent — measured S412 + builder chain direction captured; cuts 1–7 LIVE (engine.150/152/118/153/151/154/155); cut 8 engine.156 LIVE @43 S415 (own row); cut 9 engine.157 the maneuver phase LIVE @44 S416 (own row) — the chain cuts 1–9 are all live; the relocation cap ruled + rebuilt as engine.161 (own row); open: the wake-pack seam (research-build)
+
 ## Changelog
 
 - 2026-09-04 (engine-sheet, S416, ~05:00) — **engine.161 LIVE PROD @45** (bench @39 C109–C111, 0 errors ×3: `cost` and `opportunity` moves fire for the first time; the measured funnel says the 1.5 destination margin is correctly calibrated and stays — §engine.161 *As proven*).

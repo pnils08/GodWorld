@@ -854,6 +854,19 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 <!-- ARCHIVE-PASS ORDERING CONVENTION (G-SE4, added S248). Foundational Phase sections + named passes through this S227 anchor are CHRONOLOGICAL top→bottom (oldest first). The post-S227 sweep-pass region below is NEWEST-FIRST going forward: insert a new "## S<NN> Archive Pass" block immediately below this comment (above the current first post-S227 pass), so the most recent pass sits nearest this anchor. The existing post-S227 region is NOT cleanly sorted (S230/S238/S236/S235/S234/S233 as of S248) — do NOT re-sort it; just insert new passes here at the top of the run. Each pass header records its own session + a "This pass: N rows" line. -->
 
+## S418 Archive Pass (2026-09-05, research-build) — post-S417 closures sweep
+
+6 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 4 engine.* + 2 civic.*.
+
+- **engine.156** [engine-sheet] — Heritage loss (bloodline cut 8) — HeritageScore is standing (can fall), tenure counts, dormancy + revival, 7 columns self-arm; unit 105/105, bench @37 C126/C127 clean, LIVE PROD @43 (2026-09-04) → plan §engine.156 *As coded* **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]] §engine.156
+- **engine.157** [engine-sheet] — The maneuver phase (bloodline cut 9) — Phase5-Maneuver sets each citizen's climb/hold/retreat posture off the drive+openness dials and their rung, multiplying the casino, solo-door, home, relocation and cross-field rolls; LIVE PROD @44, bench @38 → plan §engine.157 *As proven* **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]]
+- **engine.161** [engine-sheet] — Relocation is a share, not a flat 2 — `relocationMaxShare` × movable units (43 at C105); rent burden also sets migration intent; posture applies to the misfit lane only. Builder-direct 2026-09-04. LIVE PROD @45, bench @39 C109-C111 → plan §engine.161 *As proven* **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-02-bloodline-ascent]]
+- **engine.162** [engine-sheet] — ENGINE-clock gate inverted — BOTH halves shipped + BENCH-PROVEN C112 @40 (13/13 raises exact, 0 lowered, 0 stage moves on GAME/CIVIC/MEDIA, 0 errors): money+education universal (5 sites cut, E1 career gate kept), $100k GAME intake base + hood→role-pool fallback, challenger income. LIVE PROD @46 2026-09-04 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-29-employment-system-cascade]] §Direction 4th/5th pass + §Changelog 2026-09-04
+- **civic.30** [engine-sheet] — Health-beat mismatch (Mike spot-check, S417) — empty pool, not the matcher; health record now read into tiered entries. Angela/Trevor's same leak confirmed + gated (rb) **State at archive:** done-pending-archive. Pointer: `scripts/buildCivicDomainSlice.js` + `.test.js`
+- **civic.31** [engine-sheet] — Campaign challenger tier 3 wrote an invented out-of-towner straight onto the ledger. Builder ruling 2026-09-04 (plan §Direction pt 29): the path in is always Generic_Citizens. Tier 3 now lands the arrival in GC by intent and returns null; the GC feeder promotes them next Cycle. Never fired on live (floor Ashford 46) **State at archive:** done-pending-archive. Pointer: `phase05-citizens/updateCivicApprovalRatings.js` `mintOutOfTownChallenger_`
+
+This pass: 6 rows — engine.156 + engine.157 + engine.161 + engine.162 + civic.30 + civic.31. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S415 Archive Pass (2026-09-03, engine-sheet) — S414 housing closures sweep
 
 3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6). This pass: 3 rows.

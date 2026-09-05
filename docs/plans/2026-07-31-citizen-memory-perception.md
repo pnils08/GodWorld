@@ -174,6 +174,12 @@ Per [[../adr/0015-world-config-tunable-values]], these are required key→value 
 
 ---
 
+## Status log
+
+### engine.94 — status (drained from ROLLOUT, 2026-09-04 / S418)
+
+Citizen memory and approval ceiling — Track A code-only self-arm plus grief and approval mechanics sandbox-proven through C116. Track B **ambition RULED S416 by engine.157** — the ambition axis is the existing `drive` dial (+ `openness`), typed ambition is the goal read off the chain rung, no ninth dial; grudge + folk-memory design still gated on research.17 and a Mike design session
+
 ## Changelog
 
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #3+#4 combined with BACKLOG 27.9/27.10 (the project's own prior framing of the same gaps). Track A scoped to ungated work so the plan is pickable while research.17 is needs-info.

@@ -9,9 +9,8 @@
  *     from INSTITUTIONS canon, a derived default for a hood with no profile;
  *   - evening food names come from the live Business_Ledger, never a pool;
  *   - Opening Day athlete sightings follow S.sportsZones when set.
- * Tasks 2–3 (economicRippleEngine.js fold + economy keys) are NOT covered here:
- * that file is HELD for engine.131 T7 and the two functions collide — they get
- * their cases when T7's ruling lands.
+ * Tasks 2–3 (economicRippleEngine.js fold + economy keys) ride with engine.131
+ * T7 (ruled option 2, builder 2026-09-05) — covered below.
  *
  * Plan: docs/plans/2026-08-30-hood-identity-remainder-plan.md
  */
@@ -144,6 +143,33 @@ console.log('═══ Task 6 — athlete sightings follow the sports zone');
   const dark = new Set(); for (let s = 1; s <= 30; s++) dark.add(pick({ sportsZones: [] }, makeRng(s)));
   check('T6c empty zones (T7 dark) → Jack London / Downtown fallback only', [...dark].every(h => h === 'Jack London' || h === 'Downtown') && dark.size === 2);
   check('T6d no sportsZones field at all → same fallback', ['Jack London', 'Downtown'].indexOf(pick({}, makeRng(2))) !== -1);
+}
+
+// ── Tasks 2–3: the economy engine reads the ledger set ────────────────────
+console.log('═══ Tasks 2–3 — fold + economy blob from Neighborhood_Map B1');
+{
+  const sb = { Logger: { log() {} }, Math, Object, Array, Number, String, JSON, isFinite, isNaN, Date };
+  vm.createContext(sb);
+  load(sb, 'phase06-analysis/economicRippleEngine.js');
+  const src = fs.readFileSync(path.join(ROOT, 'phase06-analysis/economicRippleEngine.js'), 'utf8');
+  check('T2a NEIGHBORHOOD_ECONOMIES literal is gone', !/var NEIGHBORHOOD_ECONOMIES\s*=/.test(src));
+  const ns = {}; NM.forEach(h => { ns[h] = { employerCharacter: 'residential', boomIndex: 0 }; });
+  ns['KONO'].employerCharacter = 'arts'; ns['Jack London'].employerCharacter = 'nightlife'; ns['Temescal'].employerCharacter = 'clinic'; ns['Temescal'].boomIndex = -0.7; ns['Baylight District'].employerCharacter = 'stadium'; ns['Baylight District'].boomIndex = 1;
+  const S = { neighborhoodState: ns };
+  const fold = (n) => sb.mapToCanonicalNeighborhood_(n, S);
+  const cases = { 'Old Oakland': 'Downtown', 'Telegraph corridor': 'Temescal', 'Brooklyn Basin': 'Jack London', 'Coliseum': 'East Oakland', 'City-wide': null, 'Uptown': 'Uptown', 'KONO': 'KONO', 'Brooklyn': 'Brooklyn', 'Glenview': 'Glenview', 'Piedmont Ave': 'Piedmont Ave', 'Piedmont Avenue': null, 'Bridgeport': null, 'piedmont ave': 'Piedmont Ave', '': null };
+  const bad = Object.keys(cases).filter(k => fold(k) !== cases[k]).map(k => k + '→' + fold(k));
+  check('T2b child-fold then identity, no substring matching (' + Object.keys(cases).length + ' cases)', bad.length === 0, bad.join(' '));
+  const ctx = { summary: Object.assign({ economicRipples: [], economicMood: 50 }, S), economicCalendarContext: { holiday: 'none', isFirstFriday: true, sportsSeason: 'championship', sportsZones: ['Baylight District'] } };
+  sb.calculateNeighborhoodEconomies_(ctx);
+  const E = ctx.summary.neighborhoodEconomies;
+  check('T3a economy blob has exactly the 22 Neighborhood_Map keys', Object.keys(E).length === 22 && NM.every(h => E[h]) && !E.Montclair, Object.keys(E).join(','));
+  check('T3b sectors come from employerCharacter (stadium → entertainment-led; clinic → healthcare-led)', E['Baylight District'].sectors[0] === 'entertainment' && E['Temescal'].sectors[0] === 'healthcare');
+  check('T3c First Friday lifts arts/nightlife hoods by label, not by name', E['KONO'].mood === 53 && E['Jack London'].mood === 53 && E['Rockridge'].mood === 50, JSON.stringify([E.KONO.mood, E['Jack London'].mood, E.Rockridge.mood]));
+  check('T3d championship bonus lands on the sports zone only', E['Baylight District'].mood === 58 && E['Baylight District'].isSportsZone === true && E['Downtown'].isSportsZone === false, JSON.stringify([E['Baylight District'].mood, E.Downtown.mood]));
+  const dark = { summary: Object.assign({ economicRipples: [], economicMood: 50 }, S), economicCalendarContext: { holiday: 'none', sportsSeason: 'championship', sportsZones: [] } };
+  sb.calculateNeighborhoodEconomies_(dark);
+  check('T3e T7 dark (empty zones) → no sports bonus anywhere', NM.every(h => dark.summary.neighborhoodEconomies[h].mood === 50));
 }
 
 // ── Task 7: orphaned ctx publications are gone ────────────────────────────

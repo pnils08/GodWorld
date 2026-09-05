@@ -102,22 +102,41 @@ function primarySportsZone_(cal) {
 }
 
 
-var NEIGHBORHOOD_ECONOMIES = {
-  'Downtown': { primary: ['business', 'civic', 'retail'], sensitivity: 1.2 },
-  'Jack London': { primary: ['entertainment', 'food', 'nightlife'], sensitivity: 1.1 },
-  // engine.131 T7 — the stadium district needs its own economy or it cannot
-  // receive the sport that moves into it. Entertainment-led like Jack London
-  // (it inherits the crowd) and slightly more sensitive, being new-build with
-  // its trade still forming.
-  'Baylight District': { primary: ['entertainment', 'food', 'retail'], sensitivity: 1.15 },
-  'Rockridge': { primary: ['retail', 'services', 'food'], sensitivity: 0.9 },
-  'Temescal': { primary: ['healthcare', 'education', 'retail', 'arts'], sensitivity: 0.8 },
-  'Fruitvale': { primary: ['retail', 'food', 'community'], sensitivity: 1.0 },
-  'Lake Merritt': { primary: ['entertainment', 'tourism', 'food'], sensitivity: 0.9 },
-  'West Oakland': { primary: ['manufacturing', 'transit', 'construction'], sensitivity: 1.3 },
-  'Laurel': { primary: ['retail', 'services', 'community'], sensitivity: 0.8 },
-  'Chinatown': { primary: ['retail', 'food', 'community'], sensitivity: 1.0 },
-  'Grand Lake': { primary: ['entertainment', 'retail', 'food'], sensitivity: 0.9 }
+// engine.134 Task 3 (S423): NEIGHBORHOOD_ECONOMIES (an 11-hood literal) is gone.
+// The economy blob iterates S.neighborhoodState — every Neighborhood_Map hood —
+// and derives sectors/sensitivity from the authored B1 profile (engine.135:
+// employerCharacter, boomIndex). This table is a SECTOR VOCABULARY ADAPTER
+// (employerCharacter label → sector list), not a hood list: a new hood on the
+// sheet needs no edit here, a new employerCharacter label does.
+var EMPLOYER_CHARACTER_SECTORS_ = {
+  'residential':    ['services', 'retail', 'community'],
+  'professional':   ['retail', 'services', 'food'],
+  'medical':        ['healthcare', 'retail', 'services'],
+  'campus':         ['tech', 'manufacturing', 'construction'],
+  'stadium':        ['entertainment', 'food', 'retail'],
+  'institutional':  ['business', 'civic', 'retail'],
+  'nightlife':      ['entertainment', 'food', 'nightlife'],
+  'retail':         ['entertainment', 'retail', 'food'],
+  'transit-retail': ['retail', 'food', 'community'],
+  'family-retail':  ['retail', 'food', 'community'],
+  'arts':           ['arts', 'food', 'nightlife'],
+  'mixed':          ['retail', 'services', 'community'],
+  'schools-retail': ['retail', 'services', 'community'],
+  'village-retail': ['retail', 'services', 'community'],
+  'construction':   ['construction', 'retail', 'community'],
+  'service-labor':  ['services', 'food', 'community'],
+  'clinic':         ['healthcare', 'education', 'retail', 'arts']
+};
+var DEFAULT_SECTORS_ = ['retail', 'services', 'community'];
+
+// The four child areas the Business_Ledger legitimately uses (geographic
+// hierarchy, not spelling drift) — a copy of commuteFlowEngine.js:59
+// COMMUTE_CHILD_HOOD_FOLD. Apps Script has no imports; keep the two in step.
+var ECON_CHILD_HOOD_FOLD_ = {
+  'Old Oakland': 'Downtown',
+  'Telegraph corridor': 'Temescal',
+  'Brooklyn Basin': 'Jack London',
+  'Coliseum': 'East Oakland'
 };
 
 var HOLIDAY_ECONOMIC_ZONES = {
@@ -342,7 +361,7 @@ function detectCareerRipples_(ctx, currentCycle) {
     var delta = deltas[bizId];
     var biz = bizLookup[bizId];
     if (!biz || !biz.neighborhood) continue;
-    var hood = mapToCanonicalNeighborhood_(biz.neighborhood);
+    var hood = mapToCanonicalNeighborhood_(biz.neighborhood, S);
     if (!hood) continue;
     var net = (delta.gained || 0) - (delta.lost || 0);
     // T4 (research.24, S313): thread the BIZ_ID onto the ripple so the ledger
@@ -365,24 +384,25 @@ function detectCareerRipples_(ctx, currentCycle) {
 
 
 // v2.5: Map Business_Ledger neighborhood names to Ripple Engine canonical names
-function mapToCanonicalNeighborhood_(blNeighborhood) {
-  // S328: East Oakland promoted to its own slot (Mike-direct — represented,
-  // not folded into Fruitvale).
-  var canonical = ['Downtown', 'Jack London', 'Rockridge', 'Temescal', 'Fruitvale',
-    'Lake Merritt', 'West Oakland', 'Laurel', 'Chinatown', 'Grand Lake', 'East Oakland'];
-  var n = (blNeighborhood || '').trim();
-  for (var i = 0; i < canonical.length; i++) {
-    if (n === canonical[i] || n.indexOf(canonical[i]) >= 0) return canonical[i];
+function mapToCanonicalNeighborhood_(blNeighborhood, S) {
+  // engine.134 Task 2 (S423): child-fold, then identity against the ledger set.
+  // The old 11-name literal + substring match sent Brooklyn/Glenview/Uptown/KONO
+  // rows somewhere else or nowhere ("Piedmont Ave" never hit "Piedmont Avenue";
+  // "Uptown" was folded into Downtown; Brooklyn matched nothing). A business in
+  // a Neighborhood_Map hood ripples in that hood. City-wide and the Chicago-side
+  // workplaces carry no single hood → null (the caller skips).
+  var n = (blNeighborhood || '').toString().trim();
+  if (!n) return null;
+  if (ECON_CHILD_HOOD_FOLD_.hasOwnProperty(n)) return ECON_CHILD_HOOD_FOLD_[n];
+  var ns = S && S.neighborhoodState;
+  if (ns && ns.hasOwnProperty(n)) return n;
+  // case/space tolerance against the same set — never a substring match
+  if (ns) {
+    var key = n.toLowerCase();
+    for (var hood in ns) {
+      if (ns.hasOwnProperty(hood) && hood.toLowerCase() === key) return hood;
+    }
   }
-  if (n === 'Old Oakland' || n === 'Uptown' || n === 'KONO') return 'Downtown';
-  // T7: 'Baylight District' removed from this alias — it now carries its own
-  // NEIGHBORHOOD_ECONOMIES profile. Left aliased, every economic effect aimed at
-  // the new stadium district would have been redirected into the district the
-  // teams just LEFT, propping up Jack London on sport it no longer hosts and
-  // erasing the decline that is supposed to be felt.
-  if (n === 'Brooklyn Basin' || n === 'Coliseum') return 'Jack London';
-  if (n === 'Piedmont Avenue') return 'Rockridge';
-  if (n === 'City-wide') return 'Downtown';
   return null;
 }
 
@@ -800,11 +820,20 @@ function calculateNeighborhoodEconomies_(ctx) {
   
   var nhEconomies = {};
   var holidayZones = HOLIDAY_ECONOMIC_ZONES[cal.holiday] || [];
-  
-  for (var nh in NEIGHBORHOOD_ECONOMIES) {
-    if (!NEIGHBORHOOD_ECONOMIES.hasOwnProperty(nh)) continue;
-    
-    var profile = NEIGHBORHOOD_ECONOMIES[nh];
+  var sportsZones = cal.sportsZones || [];
+  var hoodState = S.neighborhoodState || {};
+
+  // engine.134 Task 3: every Neighborhood_Map hood, profile from the sheet.
+  for (var nh in hoodState) {
+    if (!hoodState.hasOwnProperty(nh) || !hoodState[nh]) continue;
+    var ns = hoodState[nh];
+    var character = String(ns.employerCharacter || '').toLowerCase();
+    var boom = (typeof ns.boomIndex === 'number' && isFinite(ns.boomIndex)) ? ns.boomIndex : 0;
+    var profile = {
+      primary: EMPLOYER_CHARACTER_SECTORS_[character] || DEFAULT_SECTORS_,
+      // new-build / boom-exposed hoods swing harder; the one the boom left behind is quieter
+      sensitivity: Math.max(0.7, Math.min(1.3, 1 + 0.3 * boom))
+    };
     var localMood = baseMood;
     var localRipples = 0;
     
@@ -823,17 +852,21 @@ function calculateNeighborhoodEconomies_(ctx) {
       }
     }
     
+    // holiday zones are hood names; one that is not on the sheet is skipped by construction
     if (holidayZones.indexOf(nh) >= 0) {
       localMood += 5;
       localRipples++;
     }
     
-    if (cal.isFirstFriday && (nh === 'Temescal' || nh === 'Jack London')) {
+    // First Friday lifts the arts / nightlife corridors — by the ledger's own label
+    if (cal.isFirstFriday && (character === 'arts' || character === 'nightlife')) {
       localMood += 3;
     }
     
+    // the post-season lifts wherever the sport physically is (engine.131 T7 set);
+    // while T7 is dark the set is empty and the bonus is zero, which is correct
     if ((cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship') && 
-        nh === 'Jack London') {
+        sportsZones.indexOf(nh) >= 0) {
       localMood += cal.sportsSeason === 'championship' ? 8 : 5;
     }
     
@@ -854,7 +887,7 @@ function calculateNeighborhoodEconomies_(ctx) {
       isHolidayZone: holidayZones.indexOf(nh) >= 0,
       // T7: a set, not a string — during the changeover the city has live sport
       // in two districts at once.
-      isSportsZone: (cal.sportsZones || []).indexOf(nh) >= 0 && cal.sportsSeason !== 'off-season'
+      isSportsZone: sportsZones.indexOf(nh) >= 0 && cal.sportsSeason !== 'off-season'
     };
   }
   

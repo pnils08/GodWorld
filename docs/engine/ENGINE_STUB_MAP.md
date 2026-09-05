@@ -2105,6 +2105,7 @@
 
 ### economicRippleEngine.js
 - **primarySportsZone_(cal)**
+  Reads: S.neighborhoodState
 
 - **runEconomicRippleEngine_(ctx)**
   Reads: S.careerSignals, S.cycleId, S.economicMood, S.economicRipples, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.neighborhoodEconomies, S.previousCycleState, S.season, S.sportsSeason, S.sportsZones
@@ -2119,7 +2120,8 @@
   Reads: S._bizLookup, S.careerSignals
   Writes: S.careerChurn
 
-- **mapToCanonicalNeighborhood_(blNeighborhood)**
+- **mapToCanonicalNeighborhood_(blNeighborhood, S)**
+  Reads: S.neighborhoodState
 
 - **detectCalendarRipples_(ctx, currentCycle)**
   Reads: S.economicRipples
@@ -2144,7 +2146,7 @@
   Writes: S.derivedEmploymentRate
 
 - **calculateNeighborhoodEconomies_(ctx)**
-  Reads: S.economicMood, S.economicRipples
+  Reads: S.economicMood, S.economicRipples, S.neighborhoodState
   Writes: S.neighborhoodEconomies
 
 - **generateEconomicSummary_(ctx)**

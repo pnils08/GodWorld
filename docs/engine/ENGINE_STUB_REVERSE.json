@@ -2318,6 +2318,9 @@
         "phase05-citizens/processAdvancementIntake.js::queueHouseholdIntake_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
+        "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
+        "phase06-analysis/economicRippleEngine.js::mapToCanonicalNeighborhood_",
+        "phase06-analysis/economicRippleEngine.js::primarySportsZone_",
         "phase07-evening-media/buildEveningFood.js::eveningFoodHoodsByCharacter_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_",
         "utilities/ensureCrimeMetrics.js::crimeProfileFor_"

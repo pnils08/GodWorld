@@ -337,7 +337,10 @@ function generateGenericCitizens_(ctx) {
     S.genericCitizensDistribution = { skipped: 'pool-at-floor', activeFemale: activeF, activeMale: activeM };
     return;
   }
-  var fillCount = Math.min(MAX_PER_CYCLE, deficitF + deficitM, Math.max(baseCount, 3));
+  // engine.148: while a side is under its floor the room refills at the full
+  // per-cycle cap — the day's mood (baseCount) no longer throttles it, or the
+  // migration wave drains women faster than they arrive (bench C109: +3/−5).
+  var fillCount = Math.min(MAX_PER_CYCLE, deficitF + deficitM);
   var sexQueue = [];
   for (var q = 0; q < fillCount; q++) {
     sexQueue.push(q < deficitF ? 'female' : 'male'); // scarce side fills first

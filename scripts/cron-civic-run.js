@@ -53,6 +53,7 @@ const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { buildPack, writePack } = require('./buildCivicOfficeSlice');
 const civicSeat = require('./civicSeat');
 const cityHallLedger = require('./cityHallLedger');
+const chaosCascade = require('./dumpChaosCascade');
 
 /** Non-fatal: prior CIVIC positions for holder of agentDir. */
 async function positionWallInject(officeMap, agentDir) {
@@ -636,6 +637,14 @@ async function runPrep() {
     if (!assignments[d]) assignments[d] = [];
   }
 
+  // engine.11 T5.3 — chaos cascade: a Tier-1 chaos-cars hit is citywide news,
+  // every packet gets the block regardless of topic assignment (city-hall-prep
+  // SKILL.md Step 2/3 — this is the deterministic-cron port of that rule; the
+  // SKILL.md itself carries disable-model-invocation:true and does not run on
+  // this path, so the check has to live here too or it never fires headless).
+  const chaosHits = await chaosCascade.readTier1Hits(cycle).catch(() => []);
+  if (chaosHits.length) log('chaos cascade: ' + chaosHits.length + ' Tier-1 hit(s) this cycle — prepending to every packet');
+
   fs.mkdirSync(PACKETS, { recursive: true });
   const written = [];
   const activeSeats = truesource.council.filter(c => c.status === 'active').length;
@@ -675,6 +684,11 @@ async function runPrep() {
     const ownInit = initiatives.find(i => INITIATIVE_AGENT.some(r => r.re.test(i.name) && r.dir === dir));
     if (ownInit && ownInit.budget) {
       L.push('', '## What you run', ownInit.name + ' — Budget: ' + ownInit.budget + '.');
+    }
+
+    if (chaosHits.length) {
+      const voice = rows[0].title + ' ' + rows[0].holder;
+      for (const hit of chaosHits) L.push('', chaosCascade.reactionBlockFor(hit, voice));
     }
 
     L.push('', '## City This Cycle');

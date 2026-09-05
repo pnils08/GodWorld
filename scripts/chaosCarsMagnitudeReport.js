@@ -34,6 +34,37 @@ const sheets = require('/root/GodWorld/lib/sheets');
 
 const ROOT = path.resolve(__dirname, '..');
 const NB_COLUMNS = ['Sentiment', 'RetailVitality', 'EventAttractiveness', 'CrimeIndex'];
+// DECAY_RULES (plan §S265 T4.1) key on GOOD vs BAD direction per metric, not raw
+// up/down. CrimeIndex is the inversion: down is good (crime falling) and reverts
+// fast; up is bad (crime rising) and lingers. Classifying by raw sign, as this
+// script did before this fix, silently lumped CrimeIndex-down (a good swing,
+// SUPPOSED to revert) in with Sentiment-down (a bad swing, supposed to persist)
+// and reported the asymmetry design as failing when it was actually working.
+const GOOD_DIRECTION = { Sentiment: 'up', RetailVitality: 'up', EventAttractiveness: 'up', CrimeIndex: 'down' };
+
+function median(values) {
+  if (!values.length) return null;
+  const s = values.slice().sort((a, b) => a - b);
+  const mid = Math.floor(s.length / 2);
+  return s.length % 2 ? s[mid] : (s[mid - 1] + s[mid]) / 2;
+}
+
+// Citywide median delta per metric between two cycles — the confound check.
+// A neighborhood's Sentiment jumping ~0.5 -> ~0.8-1.0 city-wide (observed c104->c105
+// live) swamps a -0.03 to -0.08 chaos swing by an order of magnitude; comparing the
+// chaos magnitude against this median tells us whether the observed delta is
+// measuring the chaos event or the citywide shift underneath it.
+function cityMedianDeltas(tableC0, tableC1) {
+  const out = {};
+  for (const col of NB_COLUMNS) {
+    const deltas = [];
+    for (const hood of Object.keys(tableC0)) {
+      if (tableC1[hood]) deltas.push(tableC1[hood][col] - tableC0[hood][col]);
+    }
+    out[col] = median(deltas);
+  }
+  return out;
+}
 
 function parseNeighborhoodTable(mdText) {
   const lines = mdText.split('\n');
@@ -76,6 +107,7 @@ async function main() {
   const nbEvents = chaosRows.filter((r) => r.TargetScope === 'neighborhood' && NB_COLUMNS.includes(r.PrimaryMetric));
   const bizEvents = chaosRows.filter((r) => r.TargetScope === 'business');
 
+  const cityMedianCache = {};
   const measured = [];
   const unmeasurable = [];
   for (const ev of nbEvents) {
@@ -88,10 +120,20 @@ async function main() {
     const before = nbTables[c0][ev.TargetId][ev.PrimaryMetric];
     const after = nbTables[c1][ev.TargetId][ev.PrimaryMetric];
     const magnitude = Number(ev.MetricMagnitude);
+    const direction = magnitude >= 0 ? 'up' : 'down';
+    const swingType = direction === GOOD_DIRECTION[ev.PrimaryMetric] ? 'good' : 'bad';
+    const observedDelta = Number((after - before).toFixed(4));
+
+    const pairKey = c0 + '-' + c1;
+    if (!cityMedianCache[pairKey]) cityMedianCache[pairKey] = cityMedianDeltas(nbTables[c0], nbTables[c1]);
+    const cityMedianDelta = cityMedianCache[pairKey][ev.PrimaryMetric];
+    const confounded = cityMedianDelta !== null && Math.abs(cityMedianDelta) > Math.abs(magnitude);
+
     measured.push({
       cycle: c0, neighborhood: ev.TargetId, metric: ev.PrimaryMetric,
-      direction: magnitude >= 0 ? 'up' : 'down', magnitude, before, after,
-      observedDelta: Number((after - before).toFixed(4))
+      direction, swingType, magnitude, before, after, observedDelta,
+      cityMedianDelta: cityMedianDelta === null ? null : Number(cityMedianDelta.toFixed(4)),
+      confounded
     });
   }
 
@@ -112,28 +154,40 @@ async function main() {
   lines.push('## Neighborhood events — measured (cycle N → N+1 observed)');
   lines.push('');
   if (measured.length) {
-    lines.push('| Cycle | Neighborhood | Metric | Direction | Magnitude | Before | After | Observed Δ |');
-    lines.push('|---|---|---|---|---|---|---|---|');
+    lines.push('| Cycle | Neighborhood | Metric | Swing | Magnitude | Before | After | Observed Δ | City median Δ | Confounded |');
+    lines.push('|---|---|---|---|---|---|---|---|---|---|');
     for (const m of measured) {
-      lines.push(`| ${m.cycle} | ${m.neighborhood} | ${m.metric} | ${m.direction} | ${m.magnitude} | ${m.before} | ${m.after} | ${m.observedDelta} |`);
+      lines.push(`| ${m.cycle} | ${m.neighborhood} | ${m.metric} | ${m.swingType} (${m.direction}) | ${m.magnitude} | ${m.before} | ${m.after} | ${m.observedDelta} | ${m.cityMedianDelta === null ? '—' : m.cityMedianDelta} | ${m.confounded ? 'YES' : ''} |`);
     }
   } else {
     lines.push('_(no neighborhood chaos event has both cycle N and N+1 world_summary snapshots available)_');
   }
   lines.push('');
 
-  const upEvents = measured.filter((m) => m.direction === 'up');
-  const downEvents = measured.filter((m) => m.direction === 'down');
-  const upReverted = upEvents.filter((m) => m.observedDelta <= 0).length; // moved back down toward baseline or held
-  const downPersisted = downEvents.filter((m) => m.observedDelta <= 0).length; // stayed down or fell further
+  // DECAY_RULES key on good-vs-bad direction per metric (CrimeIndex inverts:
+  // down is good). "Good" swings should revert FAST (observed delta moves back
+  // toward baseline); "bad" swings should PERSIST (observed delta does not
+  // bounce back). Confounded rows (citywide median move bigger than the chaos
+  // magnitude) are excluded from the tally and reported separately -- a city-wide
+  // Sentiment shift of +0.3 to +0.5 (observed c104->c105) swamps a -0.03 to -0.08
+  // chaos swing and would misread as "reverted" for the wrong reason.
+  const clean = measured.filter((m) => !m.confounded);
+  const confoundedRows = measured.filter((m) => m.confounded);
+  const goodEvents = clean.filter((m) => m.swingType === 'good');
+  const badEvents = clean.filter((m) => m.swingType === 'bad');
+  // Reverting = the observed delta moves opposite the chaos magnitude's sign
+  // (undoing it); persisting = it does not.
+  const goodReverted = goodEvents.filter((m) => Math.sign(m.observedDelta || 0) !== Math.sign(m.magnitude)).length;
+  const badPersisted = badEvents.filter((m) => Math.sign(m.observedDelta || 0) !== -Math.sign(m.magnitude)).length;
 
-  lines.push('## Asymmetry signal (directional only — see confound note)');
+  lines.push('## Asymmetry signal (good/bad-direction, confounded rows excluded)');
   lines.push('');
-  lines.push(`- Up-direction events measured: ${upEvents.length}; moved back toward/below prior value by next cycle: ${upReverted}.`);
-  lines.push(`- Down-direction events measured: ${downEvents.length}; stayed down or fell further by next cycle: ${downPersisted}.`);
-  lines.push(measured.length
+  lines.push(`- Good swings measured (expected to revert fast): ${goodEvents.length}; observed reverting toward baseline: ${goodReverted}.`);
+  lines.push(`- Bad swings measured (expected to persist): ${badEvents.length}; observed persisting (not bouncing back): ${badPersisted}.`);
+  lines.push(`- Confounded (citywide median move ≥ chaos magnitude, excluded above): ${confoundedRows.length}${confoundedRows.length ? ' — ' + confoundedRows.map((m) => `${m.neighborhood} c${m.cycle} ${m.metric}`).join(', ') : ''}.`);
+  lines.push(clean.length
     ? '_(Small sample from live data — this is a directional check, not a decay-rate calibration. Q2 in the plan stays open; DECAY_RULES values are starters per T4.1.)_'
-    : '_(insufficient overlapping cycle data to compute — need more consecutive world_summary files)_');
+    : '_(insufficient unconfounded overlapping data to compute — need more consecutive world_summary files, or a quieter cycle for the citywide baseline)_');
   lines.push('');
 
   lines.push(`## Business events — NOT measured (gap, ${bizEvents.length} live rows)`);

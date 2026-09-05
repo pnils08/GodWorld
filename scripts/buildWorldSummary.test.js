@@ -265,17 +265,20 @@ console.log('\nTest 9b: emitChaosCars');
   const fixture = JSON.parse(fs.readFileSync(fixturePath, 'utf8'));
   const out = helper.emitChaosCars(fixture.allEventsThisCycle, fixture.cycleId).join('\n');
 
+  const t1 = fixture.tier1Event;
   assertIncludes('header carries cycle + count', out, `cycle ${fixture.cycleId} — ${fixture.allEventsThisCycle.length} total`);
-  assertIncludes('Tier-1 row: vehicle', out, 'ambulance');
-  assertIncludes('Tier-1 row: dice outcome', out, 'medical_emergency');
-  assertIncludes('Tier-1 row: named target (POPID)', out, 'POP-00003');
-  assertIncludes('Tier-1 row: tier suffix', out, '(T1)');
+  assertIncludes('Tier-1 row: vehicle', out, t1.VehicleType);
+  assertIncludes('Tier-1 row: dice outcome', out, t1.DiceOutcome);
+  assertIncludes('Tier-1 row: named target (POPID)', out, t1.TargetId);
+  assertIncludes('Tier-1 row: tier suffix', out, `(T${t1.TargetTier})`);
   assertIncludes('Tier-1 row: floor-fired TRUE', out, '| TRUE |');
   assertIncludes('narrative seeds section present', out, '**Narrative seeds:**');
-  assertIncludes('Tier-1 narrative seed rendered', out, fixture.tier1Event.ChaosNarrativeSeed);
-  assertIncludes('sibling seeded row rendered (mail theft)', out, 'mail_theft_reported');
+  assertIncludes('Tier-1 narrative seed rendered', out, t1.ChaosNarrativeSeed);
+  const otherSeeded = fixture.allEventsThisCycle.find((r) => r.EventId !== t1.EventId && (r.ChaosNarrativeSeed || '').trim());
+  const unseeded = fixture.allEventsThisCycle.find((r) => !(r.ChaosNarrativeSeed || '').trim());
+  assert('sibling seeded row rendered', !otherSeeded || out.includes(otherSeeded.ChaosNarrativeSeed));
   assert('rows without a narrative seed are excluded from the seeds list',
-    !out.includes('BIZ-00035:'));
+    !unseeded || !out.includes(`${unseeded.VehicleType} → ${unseeded.TargetId}:`));
 }
 
 // ────────────────────────────────────────────────────────────────────────────

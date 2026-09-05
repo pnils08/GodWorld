@@ -143,11 +143,11 @@ on the day it fixes an old one.
 |---|---|---|---|
 | 1 | Fallback GC read in the seed/packet path — tracked-first, generics when a hood has none | engine-sheet | bench |
 | 2 | Presence-before-voice enforced: surfaced generics are nameable/describable, never quotable | engine-sheet | bench |
-| 3 | Household mint path — shared `HouseholdId`, `SpouseId` both ways, `ParentIds`/`ChildrenIds` wired | engine-sheet | bench |
-| 4 | Mint routes through the promotion populator so column fill is identical to an ascent | engine-sheet | bench |
-| 5 | Exception boundary documented in-code at the mint site | engine-sheet | — |
-| 6 | Reduce `Advancement_Intake` to solely the promotion/usage system | engine-sheet | after 4 |
-| 7 | Seed the event: husbands, wives, children into the hoods canon now calls for | builder + engine-sheet | after 3 |
+| 3 | Household mint path — shared `HouseholdId`, `SpouseId` both ways, `ParentIds`/`ChildrenIds` wired | engine-sheet | **DONE S419** — `queueHouseholdIntake_` + `formIntakeHouseholds_` (processAdvancementIntake.js) |
+| 4 | Mint routes through the promotion populator so column fill is identical to an ascent | engine-sheet | **DONE S419** — rows queue to `Advancement_Intake1`, `processAdvancementRows_` mints them (MatchName resolves the head minted earlier in the same pass) |
+| 5 | Exception boundary documented in-code at the mint site | engine-sheet | **DONE S419** — block comment above `queueHouseholdIntake_` + the `processIntake_` call site |
+| 6 | Reduce `Advancement_Intake` to solely the promotion/usage system | engine-sheet | **DONE S419** — `processIntakeRows_` (an Intake row counter) deleted |
+| 7 | Seed the event: husbands, wives, children into the hoods canon now calls for | builder + engine-sheet | **OPEN — the door is live; the builder authors the families.** Intake tab format: one row per member, shared `Family` key, `Relation` = head / spouse / child / parent, Age, the head's Neighborhood (must be a priced hood), optional RoleType (children default to `student`) |
 
 ## 5. Why the canon work is load-bearing here
 
@@ -202,6 +202,8 @@ newest. Same shape as the `ensure*` finding in
 producing but never removes.
 
 ## Changelog
+
+- 2026-09-04 (S419, engine-sheet) — **Tasks 3–6 built, LIVE.** The household door: `processIntake_` hands `queueHouseholdIntake_` the Intake rows before its own loop; rows sharing a `Family` key with a `Relation` (self-armed column) form a group; a group of one stays S320's; any member already on the ledger, two heads, no head, an honorific, or a hood with no canon rent routes the whole group to review; a complete group is queued to `Advancement_Intake1` head-first (Tier 4, ENGINE, `MatchType`/`MatchName` = the head, `HouseholdKey`, inferred `Gender`, children `student`). `processAdvancementRows_` mints them exactly as an ascent, resolves `MatchName` against the head it minted earlier in the pass, blanks the profile's marital/children dice for household rows (no phantom kid slots for the drip), wires links through `wireFamilyMatch_` (now carrying its provenance — no household line claims a lottery), and `formIntakeHouseholds_` sets one `HH-CCCC-Innn` on every member, marries head + spouse, counts the children onto both, appends the `Household_Ledger` row (hood rent rule) and the `Family_Relationships` row, writes the head's `[Household]` line and a `HOUSEHOLD_ARRIVED` hook. Task 6: `processIntakeRows_` deleted. Suite `scripts/householdIntake.test.js` 32/32; neighbours unchanged. Bench proof + deploy in DEPLOY_HISTORY.
 
 - 2026-08-16 (engine-sheet) — §6 added: `--wipe-old` fails silently (78 ok / 14
   failed, exit 0) and has been stacking card versions for months — Lumi Crest holds

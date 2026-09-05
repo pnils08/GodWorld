@@ -2,7 +2,7 @@
   "generated": "2026-09-04",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1268,
+  "functionsMapped": 1270,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1501,6 +1501,7 @@
         "phase05-citizens/migrationTrackingEngine.js::generateMigrationHooks_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::emitTrajectoryHooks_",
+        "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_",
         "phase05-citizens/processAdvancementIntake.js::wireFamilyMatch_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
@@ -1528,6 +1529,7 @@
         "phase05-citizens/migrationTrackingEngine.js::generateMigrationHooks_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::emitTrajectoryHooks_",
+        "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_",
         "phase05-citizens/processAdvancementIntake.js::wireFamilyMatch_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
@@ -2309,6 +2311,7 @@
         "phase05-citizens/migrationTrackingEngine.js::processMigrationEvents_",
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_",
+        "phase05-citizens/processAdvancementIntake.js::queueHouseholdIntake_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_"
       ]
@@ -4209,7 +4212,6 @@
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
-        "phase05-citizens/processAdvancementIntake.js::processIntakeRows_",
         "phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_",
         "phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_",
         "phase07-evening-media/mediaRoomIntake.js::routeCitizenUsageToIntake_"
@@ -4489,14 +4491,16 @@
         "phase05-citizens/householdFormationEngine.js::updateHouseholdIncomes_",
         "phase05-citizens/maneuverEngine.js::maneuverHouseholds_",
         "phase05-citizens/migrationTrackingEngine.js::buildHouseholdHousingMap_",
-        "phase05-citizens/migrationTrackingEngine.js::updateHouseholdLedgerMove_"
+        "phase05-citizens/migrationTrackingEngine.js::updateHouseholdLedgerMove_",
+        "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_"
       ]
     },
     "Family_Relationships": {
       "writers": [
         "phase04-events/generationalEventsEngine.js::formSingleParentHousehold_",
         "phase05-citizens/bondEngine.js::marryCitizens_",
-        "phase05-citizens/generationalWealthEngine.js::updateHeritage_"
+        "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_"
       ],
       "readers": [
         "phase04-events/generationalEventsEngine.js::createChildRow_",
@@ -4505,7 +4509,8 @@
         "phase05-citizens/generationalWealthEngine.js::recordInheritanceInFamily_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/householdFormationEngine.js::formCriteriaHouseholds_",
-        "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_"
+        "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_",
+        "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_"
       ]
     },
     "Business_Archive": {
@@ -4622,6 +4627,7 @@
       "readers": [
         "phase05-citizens/processAdvancementIntake.js::checkEmergencePromotions_",
         "phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_",
+        "phase05-citizens/processAdvancementIntake.js::ensureHouseholdQueueSheet_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
         "phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_",
         "phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_",

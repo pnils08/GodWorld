@@ -1747,9 +1747,6 @@
   Sheets: Advancement_Intake1, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
-- **processIntakeRows_(ss, now, cycle)**
-  Sheets: Intake
-
 - **tierPayFactor_(tier)**
 
 - **dimCulturalFame_(ctx, popId, delta)**
@@ -1788,7 +1785,19 @@
   Sheets: Advancement_Intake1, Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
-- **wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cycle, logSheet)**
+- **ensureHouseholdQueueSheet_(ss)**
+  Sheets: Advancement_Intake1
+
+- **queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameIndex, cycle)**
+  Reads: S.neighborhoodState
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **formIntakeHouseholds_(ctx, mints, cycle, now, logSheet)**
+  Reads: S.storyHooks
+  Writes: S.storyHooks
+  Sheets: Family_Relationships, Household_Ledger
+
+- **wireFamilyMatch_(ctx, newIdx, newPopId, targetPopId, matchType, now, cycle, logSheet, source)**
   Reads: S.storyHooks
   Writes: S.storyHooks
 
@@ -3716,4 +3725,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1268
+**Functions mapped:** 1270

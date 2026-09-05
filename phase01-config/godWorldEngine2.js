@@ -1282,6 +1282,18 @@ function processIntake_(ctx) {
 
   var statusWrites = [];   // [row1, text] — audit trail; rows are never cleared
   var minted = 0, updated = 0;
+  // engine.109 (S419): THE HOUSEHOLD DOOR — the one bounded exception to the
+  // S320 rule below. A complete household (a head plus spouse / children /
+  // parents sharing one Family key, every one new to the ledger) mints to
+  // Simulation_Ledger through the same promotion populator a Tier-5 ascent
+  // uses: rows queued to Advancement_Intake1 here, minted + wired by
+  // processAdvancementRows_ at Phase5-Advancement later this Phase. The family
+  // is the reason. Every other row on this tab keeps earning its row. Boundary
+  // and rules: queueHouseholdIntake_ (processAdvancementIntake.js).
+  var hhPlan = (typeof queueHouseholdIntake_ === 'function')
+    ? queueHouseholdIntake_(ctx, intake, intakeVals, intakeHeader, nameIndex, cycle)
+    : { rows: {}, statusWrites: [] };
+  for (var hw = 0; hw < hhPlan.statusWrites.length; hw++) statusWrites.push(hhPlan.statusWrites[hw]);
 
   for (var r = 1; r < intakeVals.length; r++) {
     var row = intakeVals[r];
@@ -1290,6 +1302,7 @@ function processIntake_(ctx) {
     var last = (row[iLa] || '').toString().trim();
     if (!first && !last) continue;
     if ((row[iStat] || '').toString().trim()) continue; // already minted/updated/review
+    if (hhPlan.rows[r + 1]) continue; // engine.109: this row went through the household door
 
     if (!first || !last) {
       statusWrites.push([r + 1, 'review — needs both First and Last']);

@@ -42,6 +42,7 @@ pointers:
 | L | Neighborhood |
 | M | MatchPopId |
 | N | MatchType |
+| — | MaidenName · MatchName · HouseholdKey · Gender (self-armed by the drip / household writers; engine.109 S419 — regenerate after the next live fire) |
 | O | MaidenName |
 | P | (empty) |
 | Q | EmployerBizId |

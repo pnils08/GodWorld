@@ -77,7 +77,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   2. Delete `n.indexOf(canonical[i])` substring match (that is how "Piedmont Ave" never hit "Piedmont Avenue" and how accidental substrings happen).
   3. `detectCareerRipples_` stays `if (!hood) continue` — after this, Brooklyn/Glenview survive.
 - **Verify:** Task 1 fold cases GREEN. `node --check phase06-analysis/economicRippleEngine.js`.
-- **Status:** [ ] HELD — `economicRippleEngine.js` is one of the four engine.131 T7 HELD files and T7's hunks land in this very function; ships with T7's ruling (S423)
+- **Status:** [x] DONE S423 (`4b164e75`) — child-fold + identity against `S.neighborhoodState`, no substring match; LIVE PROD @52
 
 ### Task 3: Economy blob from B1, delete `NEIGHBORHOOD_ECONOMIES`
 
@@ -92,7 +92,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   6. Delete `var NEIGHBORHOOD_ECONOMIES = { ... }`.
   7. `HOLIDAY_ECONOMIC_ZONES`: add Baylight District next to Jack London on sports-adjacent holidays only if T7 is still dark *and* the holiday is OpeningDay — actually no: leave holiday zones as hood names that exist in NM; add `'Baylight District'` to OpeningDay/Pride only as a *second* zone, do not remove Jack London (T7's decline story needs Jack London still able to receive a holiday). Prefer: holiday zones stay, but any zone not in `S.neighborhoodState` is skipped at apply time.
 - **Verify:** Task 1 economy-keys GREEN. 11-hood object grep in this file → 0.
-- **Status:** [ ] HELD — same file, same collision (`calculateNeighborhoodEconomies_` is a T7 hunk); ships with T7's ruling (S423)
+- **Status:** [x] DONE S423 (`4b164e75`) — iterates `S.neighborhoodState`, sectors from an employerCharacter adapter, sensitivity from boomIndex, First Friday by label, post-season on the T7 zone set; `NEIGHBORHOOD_ECONOMIES` deleted; LIVE PROD @52
 
 ### Task 4: Crime iterates 22 NM keys; retune strife literals
 
@@ -182,6 +182,7 @@ Leave engine.131 T7 and engine.136 untouched.
 
 ## Changelog
 
+- 2026-09-05 (engine-sheet, S423, latest) — **Tasks 2–3 shipped with engine.131 T7 — LIVE PROD @52.** The builder ruled the T7 split option 2, which unblocked the file. Bench @48 C111/C112 (proof table in the sports plan §T7 shipped): economy blob 22 keys, business fold survives Brooklyn/Glenview rows, 0 errors both fires. Every task on this plan is now live; the row closes pending the C106 live smoke.
 - 2026-09-05 (engine-sheet, S423, later) — **Bench-proven C109–C110 on SANDBOX 0831 @47, LIVE at PROD @51.** Predicted before the fire and observed exactly: Crime_Metrics 18 → 23 (five appends at 109), Montclair frozen at 108, 22 rows → 110 on the second fire; every served restaurant and fast-food name a Business_Ledger row across both cycles; Engine_Errors 0 → 0 → 0. Deploy record: [[../reference/DEPLOY_HISTORY]] §PROD @51. Live self-heals the five rows at C106 (engine append path) — the plan's "replay" note was wrong on inspection.
 - 2026-09-05 (engine-sheet, S423) — **Tasks 1, 4, 5, 6, 7, 8 shipped; 2–3 HELD behind engine.131 T7.** Measure-twice first: the four wiring cards still held (NEIGHBORHOOD_ECONOMIES at :105/:804, 18 crime profiles incl. Montclair, Dollar Pho at food:124, Jack London at famous:486, both weight blobs ORPHANED WRITE). Live read: Crime_Metrics 18 rows = Montclair ghost + five canon hoods missing (Brooklyn, Baylight District, Eastlake, Ivy Hill, San Antonio); Business_Ledger 52 food/nightlife/fast rows across all 22 hoods. **The collision:** `git show e9ce67a5` (T7, ships dark) lands hunks in `mapToCanonicalNeighborhood_` and `calculateNeighborhoodEconomies_` — exactly Tasks 2–3 — and DEPLOY staging overwrites that file with live base, so a second variant of the file would not survive a push. Tasks 2–3 wait for the T7 ruling and ride with it. Sequencing lock cleared (C105 fired 08-31 clean). Crime iterates `S.canonHoods.list` (the Phase-1 SET, ADR-0016) rather than `S.neighborhoodState` keys — the state loader filters to the max Cycle, the set does not. Characters authored from INSTITUTIONS §Neighborhoods per the builder's pointer. Food v2.4's pool ×3 concat + name-dedupe had cancelled every lean it applied; v2.5 draws weighted without replacement. Tests 28/28 new + 101/101 approval + 18/18 envelope; suite 200/201 (djDirect pre-existing).
 - 2026-08-30 (grok) — Initial plan from remainder research + four Haiku wiring cards. Inbox copy for Claude.

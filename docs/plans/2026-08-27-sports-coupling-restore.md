@@ -164,7 +164,7 @@ promises "profile rises as the build completes" with no code that raises it.
 That is a build-completion hook, not a present defect, and it is not this
 plan's. Filed as an open question below rather than built.
 
-**T7 — the sports zone follows the stadium. BUILT 2026-08-27, ships dark.**
+**T7 — the sports zone follows the stadium. BUILT 2026-08-27; LIVE PROD @52 (S423, 2026-09-05) after the builder's option-2 ruling — see §T7 shipped.**
 
 Mike-direct 2026-08-27, ratifying the T5 reversal and dating what T5 assumed
 had already happened:
@@ -316,12 +316,29 @@ This is the same failure class as the C104 Grand Lake contradiction that started
 this whole line of work: the engine recorded one thing and the published layer
 said another. Worth closing before the second opening makes it louder.
 
-Options, none chosen — this crosses into civic and is Mike's call:
+**RULED 2026-09-05 (Mike-direct, S423): option 2.** It was already built — `applyInitiativeImplementationEffects.js` (`95da9e52`, live since) advances the Baylight initiative to `operational` by cell intent and lands its effects on `S.sportsZones` the cycle a franchise opens; it sat dark because only T7 sets `S.sportsZones`. Lighting T7 lit it. Options as they stood:
 1. The opening trigger *requires* INIT-006 to have reached a completion phase —
    civic becomes the gate, feed becomes the timing.
 2. The opening *advances* INIT-006 — engine drives civic (matches
    PRODUCT_VISION's "vote passes → deploy cycle → engine feels it").
 3. Leave them independent and add a detector that flags the disagreement.
+
+## T7 shipped — S423 (2026-09-05)
+
+Bench SANDBOX 0831 @48 = full repo HEAD (T7 four + engine.134 Tasks 2–3 in `economicRippleEngine.js`), on live-synced C105 state at C110. Bench-only seed: `Oakland_Sports_Feed` row C111 / Oaks / mid-season (the canon opening trigger; never replay).
+
+| | C111 (opening) | C112 (quiet cycle, no feed row) |
+|---|---|---|
+| fire | `ok:true` 119s, 0 errors | `ok:true` 122s, 0 errors |
+| `S.sportsZones` (via Ripple_Ledger targets) | Jack London, Downtown, **Baylight District** | same — latched, does not un-open |
+| INIT-006 `ImplementationPhase` | `vote-scheduled` → **`operational`** (engine cell intent) | held; scored **`advanced (+1)`** to D2 on the transition (engine.139 carrier) |
+| implementation ripple | "…is operational — ongoing sports effects in Jack London, Downtown, **Baylight District**" | 11 ripple rows name Baylight |
+| `Neighborhood_Map` Baylight | retail 4 → **12.2**, nightlife 0.43 → **1.34**, SportsSeason **mid-season**, sentiment 0.61 | retail 9.67, nightlife 0.94 — profile lifted, phase reads off-season (no row = off-season, open question 1) |
+| economy blob | 22 keys from `S.neighborhoodState` (engine.134 T3) | same |
+
+EventAttractiveness fell citywide C110 → C111 (Jack London 46.69 → 8.38; every hood 2–8.4 at C111): First Friday spike ending, not T7 — Baylight's 8 is the second-highest value on the sheet. Bench-only side effect worth knowing: the C105-synced clocks (NextActionCycle 109) demoted Santana on the bench between C111 and C112 (22 → turnover → 50) — never replay, same class as the S409 bench turnover.
+
+Live: PROD @52 = repo HEAD, pull-back 0 differing, HELD list empty. **T7 stays dark on live until the builder enters an Oaks `mid-season` feed row at a cycle after C104** — live feed runs Oaks preseason through C106. The row's other "built+unshipped" claims checked: the civic override has been live since `95da9e52` (repo == live on that file at @51), the Rhea roster fix is Node-side (`f5f4a487`) and needs no deploy.
 
 ## Open questions — for Mike, not decided here
 

@@ -20,6 +20,8 @@ pointers:
 ## Current sandbox — full trail
 
 **`SANDBOX 0831` (stood up 2026-08-31, Mike-made copy).** Copy of live post-C105 — the proving bench for the S405 C105 chase sessions (S-A through S-E, `docs/plans/2026-08-31-c105-chase-sessions.md`).
+- **Re-synced from live at C105 (S419, 2026-09-04 22:18, `syncSandboxFromLive.js --apply`, 79 tabs / 47,322 rows, read-back OK; builder cleared the script properties first).** The C106–C114 bench-only memory and the two pre-fix campaign doubles died with it.
+- **@43 (S419, 2026-09-04) = @42 − `storylineHealthEngine.js` − `updateStorylineStatusv1.2.js` + `storyHook.js` (tracker block cut) + `godWorldEngine2.js` (Phase8-StorylineHealth slot off) = 166 files; C106 fired on the synced state `ok:true` 144s, **131 phases** (132 − the retired slot), `Engine_Errors` 0.** Bench at C106. This fire also stands in for the live smoke of @46/@47/@48 — same tree lineage, live C105 data.
 - **@42 (S419, 2026-09-04) = @41 − the six engine.142 dead files (168 files) + `godWorldEngine2.js` disable notes; C114 fired `ok:true` 200s, 132 phases, `Engine_Errors` 0 → 0; pull-back 168 js, six absent.** Bench at C114.
 - **@41 (S419, 2026-09-04) = @40 + civic.32 (`updateCivicApprovalRatings.js`, `fa9782c4`); C113 fired `ok:true` 133s, 132 phases, 0 errors — readback in `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04 S419.** Bench at C113. Bench-only data: the two pre-fix C112 campaign doubles (Bautista MAYOR + D2 note, Diaz D3 + D5 note) — never replay.
 - @40 (S417, 2026-09-04) = live @45 + the engine.162/civic.30/civic.31 wave (4 files, HELD four at base); C112 fired `ok:true`, 0 errors, 13/13 D3 raises exact — proof narrative in the same plan §Changelog 2026-09-04.
@@ -113,6 +115,10 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD @49 — engine.141 tracker readers retired (2026-09-04 22:33, S419 engine-sheet)
+
+Script tree = @48 − `storylineHealthEngine.js` − `updateStorylineStatusv1.2.js` + `storyHook.js` + `godWorldEngine2.js` (`775cfb1e`). Staged from a `clasp-real pull` of SANDBOX 0831 @43; delta vs a fresh live pull = exactly those four; HELD engine.131 T7 four at base; repo `.clasp.json` last, prod id present / sandbox id absent / 0 tests / 166 files; `clasp-real push -f`; `deploy --deploymentId` → @49; pull-back 166 js, 0 differing. Proof: bench C106 on live-synced C105 state, 131 phases, 0 errors.
 
 ### PROD @48 — engine.142 dead-file delete batch (2026-09-04 22:20, S419 engine-sheet)
 

@@ -43,19 +43,19 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 
 **This file is protocol + CURRENT pointers only.** Per-wave proving narrative and bench-write logs go to the wave's own plan doc (builder rule 2026-08-30) or to [[DEPLOY_HISTORY]] — a session that finds itself writing a paragraph here is writing in the wrong file.
 
-**Bench:** `SANDBOX 0831` (stood up 2026-08-31) — copy of live post-C105, the proving bench for the C105 chase wave. Code at **@42** (= @41 + engine.142: six dead files dropped, 168 files), cycle **C114**. Spreadsheet `18BOJmzlO7EoaEhvUsUaqLIZvgrTC1yltUYk_Gz3I3W8` / Apps Script `1_3PDs7CSUsYvjjcXWtYGKjpPd7ekiIsUKKLSwlMtj3ioQKV0ew8TAfPh` / web-app deployment `AKfycbxbfP2Wu6haP4HXUGLk9T4wlW4ixWPsnfZJ51G5wVFTbkhESbT4teJG2xvRowP3BygIkw`. Script Properties `SIM_SSID` + `CYCLE_TRIGGER_TOKEN` set, authorized (protocol step 3b done). **`CARRY_FORWARD_COLD_START_OK` — do not set**: the bench's `Carry_Forward_Store` sheet already carries real C105 carry-forward, so this is not a cold start (see [[DEPLOY_HISTORY]] for the read-back that proved it). Full per-wave trail: [[DEPLOY_HISTORY]] §Current sandbox.
+**Bench:** `SANDBOX 0831` (stood up 2026-08-31) — copy of live post-C105, the proving bench for the C105 chase wave. Code at **@43** (= live @49 tree, 166 files), cycle **C106** — **re-synced from live at C105 this session (S419, builder cleared the script properties)**; C106 = the first fire on the synced state. Spreadsheet `18BOJmzlO7EoaEhvUsUaqLIZvgrTC1yltUYk_Gz3I3W8` / Apps Script `1_3PDs7CSUsYvjjcXWtYGKjpPd7ekiIsUKKLSwlMtj3ioQKV0ew8TAfPh` / web-app deployment `AKfycbxbfP2Wu6haP4HXUGLk9T4wlW4ixWPsnfZJ51G5wVFTbkhESbT4teJG2xvRowP3BygIkw`. Script Properties `SIM_SSID` + `CYCLE_TRIGGER_TOKEN` set, authorized (protocol step 3b done). **`CARRY_FORWARD_COLD_START_OK` — do not set**: the bench's `Carry_Forward_Store` sheet already carries real C105 carry-forward, so this is not a cold start (see [[DEPLOY_HISTORY]] for the read-back that proved it). Full per-wave trail: [[DEPLOY_HISTORY]] §Current sandbox.
 
-**Live:** PROD **@48** (2026-09-04 22:20, S419) = engine.142 over @47 (six dead files dropped by the full-replace push, 168 engine files, `godWorldEngine2.js` disable notes); @47 = civic.32 over @46 (= engine.162 + civic.30/civic.31 wave over @45); HELD engine.131 T7 four (`applySportsSeason.js`, `generateCrisisSpikes.js`, `economicRippleEngine.js`, `v3NeighborhoodWriter.js`) stay at base — repo HEAD differs from live by exactly those four. Proofs: `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04 (S417 wave, S419 civic.32); `docs/plans/2026-08-31-c105-chase-sessions.md` §S-D (engine.142). Full deploy ledger back to @1: [[DEPLOY_HISTORY]] §PROD deploy log.
+**Live:** PROD **@49** (2026-09-04 22:33, S419) = engine.141 over @48 (`storylineHealthEngine.js` + `updateStorylineStatusv1.2.js` dropped, `storyHook.js` tracker block cut, Phase8-StorylineHealth off; 166 engine files); @48 = engine.142 over @47 (six dead files dropped, 168 files); @47 = civic.32 over @46 (= engine.162 + civic.30/civic.31 wave over @45); HELD engine.131 T7 four (`applySportsSeason.js`, `generateCrisisSpikes.js`, `economicRippleEngine.js`, `v3NeighborhoodWriter.js`) stay at base — repo HEAD differs from live by exactly those four. Proofs: `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04 (S417 wave, S419 civic.32); `docs/plans/2026-08-31-c105-chase-sessions.md` §S-D (engine.142). Full deploy ledger back to @1: [[DEPLOY_HISTORY]] §PROD deploy log.
 
 **Recent PROD bumps** (last 5 — older → [[DEPLOY_HISTORY]] §PROD deploy log):
 
 | PROD | Date | Wave | Plan |
 |---|---|---|---|
+| @49 | 2026-09-04 | engine.141 tracker readers retired | [[../plans/2026-08-31-c105-chase-sessions]] |
 | @48 | 2026-09-04 | engine.142 dead-file delete batch | [[../plans/2026-08-31-c105-chase-sessions]] |
 | @47 | 2026-09-04 | civic.32 one citizen one race | [[../plans/2026-08-29-employment-system-cascade]] |
 | @46 | 2026-09-04 | engine.162 + civic.30/31 | [[../plans/2026-08-29-employment-system-cascade]] |
 | @45 | 2026-09-04 | engine.161 relocation share | [[../plans/2026-09-02-bloodline-ascent]] |
-| @44 | 2026-09-04 | engine.157 maneuver phase | [[../plans/2026-09-02-bloodline-ascent]] |
 
 **Retired / contaminated sandboxes — never target these IDs** (full trail per ID: [[DEPLOY_HISTORY]] §Retired sandboxes):
 

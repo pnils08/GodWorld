@@ -21,6 +21,7 @@ pointers:
 
 **`SANDBOX 0831` (stood up 2026-08-31, Mike-made copy).** Copy of live post-C105 — the proving bench for the S405 C105 chase sessions (S-A through S-E, `docs/plans/2026-08-31-c105-chase-sessions.md`).
 - **Re-synced from live at C105 (S419, 2026-09-04 22:18, `syncSandboxFromLive.js --apply`, 79 tabs / 47,322 rows, read-back OK; builder cleared the script properties first).** The C106–C114 bench-only memory and the two pre-fix campaign doubles died with it.
+- **@44 → @46 (S419, 2026-09-04) = @43 + engine.109 (`godWorldEngine2.js`, `processAdvancementIntake.js`): @44 the door, @45 + the trimmed-grid guard (the bench seed refused `Intake!J1` — the live Intake grid is exactly 9 columns, so the unguarded `Relation` self-arm would have thrown at Phase5-Intake), @46 + minors hold no employer + the operator `Sex` column.** C107 (@45, Bell family of four seeded bench-only): `ok:true` 137s, 131 phases, 0 errors — POP-01085–01088 minted through the populator, `HH-0107-I001` on all four, SpouseIds symmetric, both kids carry both parents, one `Household_Ledger` + one `Family_Relationships` row, no lottery wording; caught: both children placed with an employer, Dana's gender off the dice. C108 (@46, Okafor family of three, `Sex` column): `ok:true` 122s, 131 phases, 0 errors — `HH-0108-I001`, female head = wife, child no employer / $0 / Pre-K. Bench at C108.
 - **@43 (S419, 2026-09-04) = @42 − `storylineHealthEngine.js` − `updateStorylineStatusv1.2.js` + `storyHook.js` (tracker block cut) + `godWorldEngine2.js` (Phase8-StorylineHealth slot off) = 166 files; C106 fired on the synced state `ok:true` 144s, **131 phases** (132 − the retired slot), `Engine_Errors` 0.** Bench at C106. This fire also stands in for the live smoke of @46/@47/@48 — same tree lineage, live C105 data.
 - **@42 (S419, 2026-09-04) = @41 − the six engine.142 dead files (168 files) + `godWorldEngine2.js` disable notes; C114 fired `ok:true` 200s, 132 phases, `Engine_Errors` 0 → 0; pull-back 168 js, six absent.** Bench at C114.
 - **@41 (S419, 2026-09-04) = @40 + civic.32 (`updateCivicApprovalRatings.js`, `fa9782c4`); C113 fired `ok:true` 133s, 132 phases, 0 errors — readback in `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04 S419.** Bench at C113. Bench-only data: the two pre-fix C112 campaign doubles (Bautista MAYOR + D2 note, Diaz D3 + D5 note) — never replay.
@@ -115,6 +116,10 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD @50 — engine.109 the household door (2026-09-04 23:02, S419 engine-sheet)
+
+Script tree = @49 + `godWorldEngine2.js` + `processAdvancementIntake.js` (`30ffc5ef` + `c90b1bde` + `2f4f8808`). Staged from a `clasp-real pull` of SANDBOX 0831 @46; delta vs a fresh live pull = exactly those two; HELD engine.131 T7 four at base; repo `.clasp.json` last, prod id present / sandbox id absent / 0 tests / 166 files; `clasp-real push -f`; `deploy --deploymentId` → @50; pull-back 166 js, 0 differing, both files byte-exact to repo HEAD. Proof: bench C107 + C108. Live side effects at the next fire: Intake grows one column and gains the `Relation` header (self-arm); `Advancement_Intake1` gains `MatchName` / `HouseholdKey` / `Gender` when the first household is queued.
 
 ### PROD @49 — engine.141 tracker readers retired (2026-09-04 22:33, S419 engine-sheet)
 

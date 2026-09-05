@@ -20,6 +20,7 @@ pointers:
 ## Current sandbox — full trail
 
 **`SANDBOX 0831` (stood up 2026-08-31, Mike-made copy).** Copy of live post-C105 — the proving bench for the S405 C105 chase sessions (S-A through S-E, `docs/plans/2026-08-31-c105-chase-sessions.md`).
+- **@42 (S419, 2026-09-04) = @41 − the six engine.142 dead files (168 files) + `godWorldEngine2.js` disable notes; C114 fired `ok:true` 200s, 132 phases, `Engine_Errors` 0 → 0; pull-back 168 js, six absent.** Bench at C114.
 - **@41 (S419, 2026-09-04) = @40 + civic.32 (`updateCivicApprovalRatings.js`, `fa9782c4`); C113 fired `ok:true` 133s, 132 phases, 0 errors — readback in `docs/plans/2026-08-29-employment-system-cascade.md` §Changelog 2026-09-04 S419.** Bench at C113. Bench-only data: the two pre-fix C112 campaign doubles (Bautista MAYOR + D2 note, Diaz D3 + D5 note) — never replay.
 - @40 (S417, 2026-09-04) = live @45 + the engine.162/civic.30/civic.31 wave (4 files, HELD four at base); C112 fired `ok:true`, 0 errors, 13/13 D3 raises exact — proof narrative in the same plan §Changelog 2026-09-04.
 - Spreadsheet ID `18BOJmzlO7EoaEhvUsUaqLIZvgrTC1yltUYk_Gz3I3W8`
@@ -112,6 +113,10 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD @48 — engine.142 dead-file delete batch (2026-09-04 22:20, S419 engine-sheet)
+
+Script tree = @47 − six files (`eventArcEngine.js`, `processIntakeV3.js`, `parseMediaIntake.js`, `processArcLifeCyclev1.js`, `mediaRoomBriefingGenerator.js`, `v3LedgerWriter.js`) + `godWorldEngine2.js` (disable-note comments only; `88495ac3`). Staged from a `clasp-real pull` of SANDBOX 0831 @42; delta vs a fresh live pull = exactly those seven; HELD engine.131 T7 four verified at base; repo `.clasp.json` last, prod id present / sandbox id absent / 0 tests / 168 files; `clasp-real push -f` (full replace drops the six remotely); `deploy --deploymentId` → @48; pull-back 168 js, 0 differing, six absent. Proof: bench C114. Live smoke pending the builder's next fire.
 
 ### PROD @47 — civic.32 one citizen, one race (2026-09-04 20:12, S419 engine-sheet)
 

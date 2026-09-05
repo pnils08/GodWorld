@@ -65,7 +65,7 @@ console.log('Test 1: module exports + version');
     'formatWeatherLine', 'sortNeighborhoods', 'filterApprovalRows',
     'classifyDelta',
     'emitHeader', 'emitSnapshotLine', 'emitCityState', 'emitCivicDecisions',
-    'emitSports', 'emitEveningTexture', 'emitWorldEvents',
+    'emitSports', 'emitEveningTexture', 'emitWorldEvents', 'emitChaosCars',
     'emitThreeCycleTrends', 'emitEngineReviewFindings',
     'emitApprovalRatings', 'emitFooter'
   ]) {
@@ -249,6 +249,33 @@ console.log('\nTest 9: emitWorldEvents');
   assertIncludes('high event with impact', out, 'KONO');
   assertIncludes('impactScore rendered', out, 'impactScore 50');
   assertIncludes('safety w/o neighborhood handled', out, '(no neighborhood)');
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 9b: emitChaosCars — engine.11 T5.2, verified against the T6.1 dry-run's
+// synthetic Tier-1 fixture (output/chaos_cars_tier1_fixture.json, seed 90084)
+// so this test exercises a real chaos row, not a hand-built stub.
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 9b: emitChaosCars');
+{
+  assertIncludes('empty cycle placeholder', helper.emitChaosCars([], 999).join('\n'),
+    '(no chaos-car events recorded for this cycle)');
+
+  const fixturePath = path.join(__dirname, '..', 'output', 'chaos_cars_tier1_fixture.json');
+  const fixture = JSON.parse(fs.readFileSync(fixturePath, 'utf8'));
+  const out = helper.emitChaosCars(fixture.allEventsThisCycle, fixture.cycleId).join('\n');
+
+  assertIncludes('header carries cycle + count', out, `cycle ${fixture.cycleId} — ${fixture.allEventsThisCycle.length} total`);
+  assertIncludes('Tier-1 row: vehicle', out, 'ambulance');
+  assertIncludes('Tier-1 row: dice outcome', out, 'medical_emergency');
+  assertIncludes('Tier-1 row: named target (POPID)', out, 'POP-00003');
+  assertIncludes('Tier-1 row: tier suffix', out, '(T1)');
+  assertIncludes('Tier-1 row: floor-fired TRUE', out, '| TRUE |');
+  assertIncludes('narrative seeds section present', out, '**Narrative seeds:**');
+  assertIncludes('Tier-1 narrative seed rendered', out, fixture.tier1Event.ChaosNarrativeSeed);
+  assertIncludes('sibling seeded row rendered (mail theft)', out, 'mail_theft_reported');
+  assert('rows without a narrative seed are excluded from the seeds list',
+    !out.includes('BIZ-00035:'));
 }
 
 // ────────────────────────────────────────────────────────────────────────────

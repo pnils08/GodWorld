@@ -50,6 +50,7 @@ Sheets via `lib/sheets.js` (service account):
 - **Neighborhood_Map** — neighborhood table (sorted by RetailVitality desc, ties by name asc)
 - **World_Population** — population aggregate
 - **Simulation_Calendar** — cycle calendar state
+- **Chaos_Cars** — engine.11 typed-vehicle event rows (tolerant of a missing tab — copies/sandboxes without the tab return an empty section, not a failure)
 
 Disk:
 
@@ -67,6 +68,7 @@ Single Markdown file with these sections (codified in `scripts/buildWorldSummary
 4. Sports (per-row `StoryAngle` verbatim from `Oakland_Sports_Feed`)
 5. Evening Texture (famous people / restaurants / nightlife / streaming from Riley_Digest)
 6. World Events (severity + neighborhood from Riley_Digest)
+6b. Chaos Events (engine.11, T5.2) — one row per `Chaos_Cars` event for the current cycle (vehicle / dice outcome / TargetId as POPID or BIZ-ID, not name-resolved / metric / magnitude / floor-fired flag), plus a Narrative Seeds list for rows carrying a `ChaosNarrativeSeed`. `ConsequenceFloorFired=TRUE` marks the Tier-1 cascade row(s) — no separate scandal-only section, the flag column carries it. Empty tab or no rows this cycle → placeholder text, not an error.
 7. Three-Cycle Trends (current vs prev 2 cycles)
 8. Engine Review Findings (structured pattern fields from engine_audit JSON; no editorial gloss)
 9. Approval Ratings (filtered to MAYOR-* + COUNCIL-D* rows, sorted by OfficeId)

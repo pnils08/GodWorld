@@ -1438,6 +1438,7 @@ module.exports = {
   emitSports,
   emitEveningTexture,
   emitWorldEvents,
+  emitChaosCars,
   emitThreeCycleTrends,
   emitEngineReviewFindings,
   emitApprovalRatings,

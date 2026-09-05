@@ -503,11 +503,15 @@ function runWorldCycle() {
   // was repointed at the live ledger the same session, so this now writes to a
   // tab with no readers at all. Writes nothing to ctx — pure sheet-side, so the
   // removal cascades nowhere. Retained for reversibility.
-  // Still open, NOT covered by this line: monitorStorylineHealth_ below reads
-  // the same dead tab and DOES publish S.storyHooks + S.storylineHealth into
-  // ctx, so it needs its own caller-graph pass before it moves.
+  // engine.141 (S419): both files deleted. updateStorylineStatusv1.2.js had no
+  // caller; storylineHealthEngine.js read the same dead tab — on live every one
+  // of its 239 rows is Status=abandoned, so the monitor returned at "0 active"
+  // every cycle and S.storylineHealth had no reader anywhere. The tab's other
+  // engine reader (storyHook.js loadStorylines_) filtered to status=active too
+  // and emitted nothing; that block is gone in the same commit. The successor
+  // (Storyline_Ledger) is consumed newsroom-side by buildWorldSummary openThreads.
   // safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
-  safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
+  // safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
 
@@ -2244,11 +2248,15 @@ function runCyclePhases_(ctx) {
   // was repointed at the live ledger the same session, so this now writes to a
   // tab with no readers at all. Writes nothing to ctx — pure sheet-side, so the
   // removal cascades nowhere. Retained for reversibility.
-  // Still open, NOT covered by this line: monitorStorylineHealth_ below reads
-  // the same dead tab and DOES publish S.storyHooks + S.storylineHealth into
-  // ctx, so it needs its own caller-graph pass before it moves.
+  // engine.141 (S419): both files deleted. updateStorylineStatusv1.2.js had no
+  // caller; storylineHealthEngine.js read the same dead tab — on live every one
+  // of its 239 rows is Status=abandoned, so the monitor returned at "0 active"
+  // every cycle and S.storylineHealth had no reader anywhere. The tab's other
+  // engine reader (storyHook.js loadStorylines_) filtered to status=active too
+  // and emitted nothing; that block is gone in the same commit. The successor
+  // (Storyline_Ledger) is consumed newsroom-side by buildWorldSummary openThreads.
   // safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
-  safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
+  // safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
   // S229 DISABLED — Chicago Path B no-grow-legacy. See production entry point

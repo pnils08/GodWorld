@@ -109,7 +109,7 @@ const SHEET_COLUMNS = {
   },
 
   'Storyline_Tracker': {
-    readers: ['updateStorylineStatusv1.2.js', 'storylineHealthEngine.js'],
+    readers: [], // engine readers deleted engine.141 S419 (tab discontinued 2026-08-05)
     required: [
       'StorylineId', 'Description', 'Neighborhood',
       'LinkedArc', 'Status', 'LastMentionedCycle', 'Priority',

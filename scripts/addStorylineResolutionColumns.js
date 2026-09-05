@@ -190,7 +190,7 @@ async function main() {
   } else {
     console.log(`\n✅ Migration complete!`);
     console.log('\nNext steps:');
-    console.log('1. Deploy storylineHealthEngine.js to Apps Script');
+    console.log('1. Deploy storylineHealthEngine.js to Apps Script (file deleted engine.141 S419 — this script is historical)');
     console.log('2. Update storyHook.js to v4.0 (hook lifecycle)');
     console.log('3. Wire into Phase 06 processing');
     console.log('4. Run a test cycle to verify stale detection');

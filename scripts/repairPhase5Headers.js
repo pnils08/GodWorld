@@ -4,7 +4,7 @@
  * ============================================================================
  *
  * Adds missing lifecycle columns to:
- *   1. Storyline_Tracker — 8 columns for storylineHealthEngine.js
+ *   1. Storyline_Tracker — 8 columns for storylineHealthEngine.js (deleted engine.141 S419; tab discontinued)
  *   2. Story_Hook_Deck — 8 columns for hookLifecycleEngine.js
  *
  * Usage:
@@ -17,7 +17,7 @@
 const sheets = require('../lib/sheets');
 
 // ════════════════════════════════════════════════════════════════════════════
-// STORYLINE_TRACKER — lifecycle columns for storylineHealthEngine.js
+// STORYLINE_TRACKER — lifecycle columns for storylineHealthEngine.js (deleted engine.141 S419)
 // ════════════════════════════════════════════════════════════════════════════
 
 const STORYLINE_LIFECYCLE = [

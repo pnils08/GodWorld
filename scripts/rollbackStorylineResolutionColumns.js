@@ -174,7 +174,7 @@ async function main() {
   } else {
     console.log(`\n✅ Rollback complete!`);
     console.log('\nNext steps:');
-    console.log('1. Remove storylineHealthEngine.js from Apps Script');
+    console.log('1. Remove storylineHealthEngine.js from Apps Script (already deleted engine.141 S419)');
     console.log('2. Remove hookLifecycleEngine.js from Apps Script');
     console.log('3. Remove monitorStorylineHealth_() and manageHookLifecycle_() calls from Phase 06');
     console.log('4. Verify simulation runs without errors');

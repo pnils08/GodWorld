@@ -28,7 +28,7 @@ Generators draw upon Phase 2 world states and dial bands.
 Micro events aggregate back into the city macro.
 - **`economicRippleEngine.js`:** The core cross-engine consumer. Reads Phase 5 `careerSignals` (e.g., `layoffs ≥ 3` → `MAJOR_LAYOFFS`), migration drift, and world/citizen events to create broad economic ripples. It recomputes `economicMood` and writes `employmentRate`/`economy` descriptors directly back to `World_Population`.
 - **Feedback Loop:** `economicMood` is read by Phase 5 citizen engines *next cycle*, darkening or brightening the entire city's event texture (ripple duration 4–12 cycles).
-- **Arc Resolution:** Phase 6 engines (`storylineHealthEngine`, `processArcLifeCycle`) parse events and ripples to advance or resolve city-wide narrative tension arcs.
+- **Arc Resolution:** RETIRED — the Phase 6 arc engines (`storylineHealthEngine`, `processArcLifeCycle`) were deleted engine.141/engine.142 (S419); the arc loop ended S313 and `Storyline_Tracker` was discontinued 2026-08-05. Open threads now reach the desks from `Storyline_Ledger` via `buildWorldSummary` openThreads.
 
 ### Phase 7: Evening Media & Story Contracts
 Ripples become digested narrative media for LLMs.

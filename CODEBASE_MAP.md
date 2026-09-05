@@ -189,8 +189,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `filterNoiseEvents.js` | Filters low-signal events before prioritisation |
 | `prePublicationValidation.js` | Validates event corpus before edition assembly |
 | `prioritizeEvents.js` (~25 KB) | Scores and ranks events for editorial selection |
-| `storylineHealthEngine.js` | Monitors storyline health metrics |
-| `updateStorylineStatusv1.2.js` | Updates storyline tracker status columns |
 
 ### Phase 07 — Evening Media (`phase07-evening-media/`)
 
@@ -851,7 +849,6 @@ Work is partitioned across four Claude Code conversation contexts:
 | `cleanup_storyline_tracker.js` | `scripts/` | Duplicate of `cleanupStorylineTracker.js`; snake_case is the older version — **delete candidate** |
 | `gdrive_fetch2.js` | `scripts/` | Minor variant of `gdrive_fetch.js`; likely redundant — **delete candidate** |
 | `editionIntake.js` vs `editionIntakeV3.js` | `scripts/` | V1/V2 vs V3 split; V3 is current; V1 kept for reference |
-| `updateStorylineStatusv1.2.js` | `phase06-analysis/` | Version suffix in filename — verify not superseded |
 | `day1` (root) | `/day1` | Unexplained 6-byte file — **undocumented entry point** |
 | `riley-intergrity-*` dirs | `riley/` | **Typo in directory names** ("intergrity" should be "integrity") — three directories affected |
 | `v2DeprecationGuide.js` | `utilities/` | Explicit v2→v3 migration guide; check if migration is complete |

@@ -843,22 +843,6 @@ Each file gets a `### <relpath>` entry with six fields. The bar: if an entry deg
 **Gap:** ⟪PENDING⟫
 **Touches:** ⟪PENDING⟫
 
-### phase06-analysis/storylineHealthEngine.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
-### phase06-analysis/updateStorylineStatusv1.2.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
 ## phase07-evening-media
 
 ### phase07-evening-media/applyStorySeeds.js

@@ -626,13 +626,6 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 - **Cross-sheet:** Feeds into prioritization and cultural mechanics.
 - **Full-read catches:** None.
 
-### `updateStorylineStatusv1.2.js` (updateStorylineStatus_, Phase 6) — FULL-READ
-- **Gate:** `ctx.summary.eventArcs`
-- **Layer 1:** Refreshes storyline states (active, fading, resolved).
-- **Layer 2:** Mutates `eventArcs` status inline.
-- **Cross-sheet:** Worked alongside `processArcLifeCyclev1.js` (deleted engine.142 S419; arc loop retired S313).
-- **Full-read catches:** None.
-
 ### `applyMigrationDrift.js` (applyMigrationDrift_, Phase 6) — FULL-READ
 - **Gate:** `ctx.summary.economicRipples`
 - **Layer 1:** Calculates population influx/exodus based on economics.
@@ -645,13 +638,6 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 - **Layer 1:** Quality gate for tone, continuity, and sensitivity.
 - **Layer 2:** N/A.
 - **Cross-sheet:** Final check before Phase 7 media generation.
-- **Full-read catches:** None.
-
-### `storylineHealthEngine.js` (storylineHealthEngine_, Phase 6) — FULL-READ
-- **Gate:** `ctx.summary.eventArcs`
-- **Layer 1:** Detects fizzled storylines and forces wrap-up hooks.
-- **Layer 2:** Complemented `processArcLifeCyclev1.js` (deleted engine.142 S419; arc loop retired S313).
-- **Cross-sheet:** Updates arc health status.
 - **Full-read catches:** None.
 
 ### `applyCivicLoadIndicator.js` (applyCivicLoadIndicator_, Phase 6) — FULL-READ

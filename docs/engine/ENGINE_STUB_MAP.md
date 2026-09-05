@@ -99,7 +99,7 @@
   Reads: S.cycleId, S.phaseTimings
 
 - **runWorldCycle()**
-  Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.engineErrorCount, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storyHooks, S.storylineHealth, S.undockedFeedEntries
+  Reads: S.auditIssues, S.citizenEvents, S.cityEvents, S.contractSeeds, S.engineErrorCount, S.eveningSports, S.mediaIntake, S.nightlife, S.nightlifeVolume, S.rippleEvents, S.storylineHealth, S.undockedFeedEntries
   Writes: S.faithStorySignals, S.transitStorySignals, S.validationReport
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2163,48 +2163,6 @@
   Reads: S.cityDynamics, S.civicLoad, S.demographicShifts, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.neighborhoodDemographics, S.patternFlag, S.season, S.shockFlag, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventPrioritization
 
-### storylineHealthEngine.js
-- **monitorStorylineHealth_(ctx)**
-  Reads: S.storyHooks
-  Writes: S.storyHooks, S.storylineHealth
-  Config: ctx.config.cycleCount
-
-- **loadActiveStorylinesForHealth_(ss)**
-  Sheets: Storyline_Tracker
-
-- **updateCoverageGaps_(ss, storylines, cycle)**
-  Sheets: Storyline_Tracker
-
-- **detectStaleStorylines_(ss, storylines, cycle)**
-  Sheets: Storyline_Tracker
-
-- **detectFizzledStorylines_(ss, storylines, cycle)**
-  Sheets: Storyline_Tracker
-
-- **checkResolutionConditions_(ss, storylines, cycle)**
-  Sheets: Storyline_Tracker
-
-- **checkResolutionKeywords_(condition, cycle)**
-
-- **generateWrapUpHook_(storyline)**
-
-- **generateStaleHook_(storyline)**
-
-- **generateFizzledHook_(storyline)**
-
-### updateStorylineStatusv1.2.js
-- **findColByArray_(headers, names)**
-
-- **updateStorylineStatus_(ctx)**
-  Config: ctx.config.cycleCount
-  Sheets: Storyline_Tracker
-
-- **loadArcStatuses_(ss)**
-  Sheets: Event_Arc_Ledger
-
-- **generateStorylineBriefingSection_(ss, cycle)**
-  Sheets: Storyline_Tracker
-
 ## Phase 7: Evening Media (`phase07-evening-media/`)
 
 ### applyStorySeeds.js
@@ -2506,9 +2464,8 @@
 ### storyHook.js
 - **storyHookEngine_(ctx)**
   Reads: S.absoluteCycle, S.citizenBonds, S.cityDynamics, S.creationDayAnniversary, S.cycleId, S.cycleOfYear, S.demographicShifts, S.domainPresence, S.eventArcs, S.failedInitiatives, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.initiativeEvents, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDemographics, S.patternFlag, S.positiveInitiatives, S.relationshipBonds, S.season, S.shockFlag, S.sportsEventTriggers, S.sportsSeason, S.storyHooks, S.votesThisCycle, S.weather, S.weatherEvents, S.weatherMood, S.worldEvents
-  Writes: S.activeStorylineCount, S.dormantStorylineCount, S.storyHooks
+  Writes: S.storyHooks
   Config: ctx.config.cycleCount
-  Sheets: Storyline_Tracker
 
 ### storylineWeavingEngine.chaos.test.js
 - **assert(label, cond, detail)**
@@ -3758,5 +3715,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 183
-**Functions mapped:** 1282
+**Files scanned:** 181
+**Functions mapped:** 1268

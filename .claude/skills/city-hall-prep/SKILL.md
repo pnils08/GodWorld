@@ -1,8 +1,8 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
-version: "1.11"
-updated: 2026-07-26
+version: "1.12"
+updated: 2026-09-05
 tags: [civic, active]
 effort: high
 disable-model-invocation: true
@@ -197,6 +197,14 @@ Based on tracker state + Mike's pressure + engine review ailments + Mara directi
 - Cascade order (Mayor always first, then who reacts to Mayor)
 - Engine review ailments auto-assign to relevant voices (Temescal health → Health Center + whoever owns health policy)
 
+**Chaos cascade check (engine.11 T5.3).** Run the Chaos_Cars Tier-1 reader before building topic assignments:
+
+```bash
+node scripts/dumpChaosCascade.js {XX}
+```
+
+It reads `Chaos_Cars` rows for this cycle where `ConsequenceFloorFired=TRUE` (a Tier-1 citizen hit by a chaos vehicle — engine.11), resolves the citizen's name from the local ledger snapshot, and renders perception-only text (no metrics, no phase codes — same translation contract as Step 3). Zero hits is the expected, normal case (Tier-1 is ~2% of citizens; rarity is the design feature) — proceed silently. On a hit, it is a citywide-known event: log it in the production log and carry it into Step 3 for every voice's packet, not just the affected voice's topic.
+
 Log assignments in the production log:
 ```
 ## Topic Assignments
@@ -208,6 +216,14 @@ Log assignments in the production log:
 ### Step 3: Write Pending Decisions
 
 For each voice with a decision, write `output/civic-voice-workspace/{office}/current/pending_decisions.md`.
+
+**Cycle Chaos Reaction block — REQUIRED in every packet when Step 2's chaos cascade check found a Tier-1 hit (engine.11 T5.3).** A chaos-cars hit on a Tier-1 citizen is citywide news — every voice with a decision this cycle sees it, not just whoever's domain the vehicle touched. Prepend to the top of every packet, above `## City This Cycle`:
+
+```
+**[CHAOS CASCADE]** {Named entity} was hit by {vehicle} this cycle — {outcome}. Decision required: how does {voice} respond?
+```
+
+Use `node scripts/dumpChaosCascade.js {XX}` output verbatim (it already renders perception-only — no metrics, no `ConsequenceFloorFired` flag, no phase codes) with `{voice}` filled in per-packet. No hit this cycle → omit the block entirely, don't write a placeholder. This is independent of topic assignment: a voice with no other business this cycle still gets the block if a Tier-1 hit occurred, because "no decision is not an option" applies to a citywide event too.
 
 **City This Cycle digest — REQUIRED in every packet (S256 RB-3, closes C96 G-PREP3).** Mara's directive is initiative-centric and structurally blind to the live `world_summary` — following it alone makes the cascade an initiative-checklist and strips the living-city texture that is the product ("this is a sim, not a civic-initiative sim" — Mike, S251). Independent of Mara, inject a `## City This Cycle` block at the top of every pending_decisions packet, derived from the disk inputs (NOT from the Mara directive):
 
@@ -346,6 +362,7 @@ It exits non-zero until the `## LEG: /city-hall-prep (G-PREP)` leg exists in the
 
 ## Changelog
 
+- 2026-09-05 — v1.12 (S423, research-build closing engine.11 T5.3). **Chaos cascade wired in.** Step 2 runs `scripts/dumpChaosCascade.js {XX}` (new) — reads `Chaos_Cars` rows for the cycle where `ConsequenceFloorFired=TRUE`, resolves the citizen's name from the local ledger snapshot, renders perception-only text. Step 3 prepends the resulting `**[CHAOS CASCADE]**` block to EVERY voice's packet (not just the affected domain — a Tier-1 hit is citywide news) when a hit occurred; omitted entirely otherwise. Plan: [[../../../docs/plans/2026-05-07-chaos-cars-engine]] §Cross-terminal build split, T5.3. Verified against the T6.1 dry-run's synthetic Tier-1 fixture, not live-run yet — live acceptance closes on the next cron cycle that produces a real Tier-1 hit.
 - 2026-06-20 — v1.8 (S265, research-build closing governance.41 RB-2 G-R6). **Live roster-status block at Step 3:** every faction-bloc packet now carries the current `active`/`recovering`/`vacant` status of its seats + the live active-voter denominator, taken from the Step-1 `get_council_member` reconciliation. Step 1 already *checked* status against truesource; the bloc agent never *received* it, so its whip-read ran off memory (C98: OPP carried a stale "Crane absent, 5 of 8" when Crane D6 was ACTIVE and the real tally was 9-0). Step 1 checks, Step 3 delivers. Source gap: `output/production_log_run_cycle_c98_gaps.md` §G-R6. Plan: [[../../../docs/archive/plans/2026-06-20-c98-gap-log-triage]] RB-2.
 - 2026-04-17 — v1.0 initial (S156). Voice routing table listed 17 voices including 9 individual council members.
 - 2026-05-03 — v1.1 (S197, engine-sheet executing research-build Wave 1 plan per [[archive/plans/2026-05-03-c93-gap-triage-execution]]). **G-10 Voice Data Routing rewritten:** table now shows the 11 actual agent rows (Mayor + Chief + DA + 3 faction-bloc agents speaking for the 9 council members + 5 project agents) instead of misleading reader into expecting 17 individual agents. Faction membership per Civic_Office_Ledger; previous text mis-listed Chen D8 as CRC, corrected to OPP. **[SUPERSEDED S246 G-PREP1 — this "corrected to OPP" was itself the error; truesource (`truesource_reference.json` + `buildCivicVoicePackets.js`) has Chen as CRC all along. Reverted forward; see roster above.]** **G-13 Step 1 sheet reads demoted to verification:** Disk inputs (world_summary + engine_review + prior production log + prior published canon) are PRIMARY; sheet reads run ONLY when world_summary is stale. Captures actual S192 working practice (sheet reads were skipped because world_summary already snapshotted everything that mattered). Companion entry on G-15 (between-cycle published canon ingestion) added to Step 1 as Disk source #5.

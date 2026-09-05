@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads sheet-primary canon (Oakland_Sports_Feed, Riley_Digest, Initiative_Tracker, Simulation_Ledger) + canon archive + NEWSROOM_MEMORY + city-hall production log. Proposes stories under cadence caps, locks slate via Mike approval gate, emits one brief per article slot + dispatch.json + letters candidate pool. The game moment.
-version: "2.6"
-updated: 2026-07-26
+version: "2.7"
+updated: 2026-09-05
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -30,6 +30,8 @@ v1.x companion files: [[../../../docs/media/brief_template|brief_template]] (v1)
 **v2.2 (S301):** Step 6 T4.1 `Story_Seed_Deck` reads converted from positional (fixed cols M-R + hardcoded col-1 `Cycle` filter) to **header-name resolution**, matching `validatePriorityEngine.js` / `checkBylineCadence.js`. Forced by the engine-sheet v4 deck migration (contract-seed schema — `Cycle` moved to col 0, columns renamed `SeedText`→`What` etc.), which silently breaks positional reads. Dual-schema: event-text column resolves `What` (v4) OR `SeedText` (legacy), so `/sift` works on either side of the prod cutover. Priority appends (`PriorityScore` etc.) resolved by name, absent-tolerant (still shadow until Engine-A lands — this is robustness, not ranking activation).
 
 **v2.3 (S305, pipeline.42):** the v4 deck's rich content (`What/Why/Citizens/CitizenEvents/Businesses/Magnitude/Trend`) flagged-but-unused in v2.2 is now consumed by candidate generation as an **enrichment layer** (Step 1 reads it; Step 3 §3d applies it). It deepens feed-derived candidates with engine-authored cause + citizen anchors (three-layer threading for free); it is **NOT** a parallel candidate stream — a deck row only becomes a standalone candidate for a genuine feed-missed event that clears the S257 citizen-protagonist lens + narrative-weight test, so the known-noisy deck can't flood the slate with engine-civic initiative-theater. **Dual-schema / degrade-safe:** if the running deck lacks the v4 content columns (prod still on legacy schema, whichever cycle the seed system deploys — C101 or C102), enrichment is a no-op and candidate-gen runs feed-only exactly as before. Sandbox (on v4) gets enrichment; legacy prod degrades silently. Deck `Citizens` stays a hint — MCP `lookup_citizen` verification at Step 4 is still mandatory (provenance fence, RB-1). `Magnitude`/`Trend` are a labeled content signal, never a priority proxy (Engine-A `PriorityScore` remains the only ranking authority, Step 6).
+
+**v2.7 (S424, pipeline.41 Task 8):** Step 3 gains a sixth bucket, **TENSION-REGISTER**, sourced by new **§3e** — reads `logs/citizen-tension-state.json` (the open-question register citizen wakes leave behind) and emits one candidate per OPEN entry (`{POPID} | "{q}" | opened c{cy}`, flagged `source: "tension-register"`). Subjective, never fact: a reporter can door-knock the question (interview/dispatch), but the tension text itself never anchors a brief as an established claim, and any citizen it names still clears the standard Step 4 `lookup_citizen` verification (same subjective→canon wall as loop-bot reflections, Step 4 provenance fence). Empty register (no OPEN entries) → no TENSION-REGISTER candidates, section absent.
 
 ---
 
@@ -232,6 +234,7 @@ Walk Step 1 raw inputs + Step 2 annotations through the five buckets:
 | **SPORTS** | Oakland_Sports_Feed rows | Game results, player arcs, roster moves, free-agent framing |
 | **CIVIC-WITH-WEIGHT** | city-hall log + engine_audit | Civic threads passing narrative-weight test: vote firing, voice debut, directive closing, engine-vs-action puzzle, **NEW canon being introduced**, arc closing / escalating |
 | **CIVIC-TRACKER-ONLY** | city-hall log + initiative tracker | Civic threads that DON'T pass narrative-weight: tracker-advanced-N-steps without other movement, routine phase ticks. Routes to baseline-brief Tier C, not slate. |
+| **TENSION-REGISTER** | `logs/citizen-tension-state.json` (citizen-wake open questions) | Subjective door-knock seeds — a citizen's own open question, never a standalone published claim (§3e) |
 
 **Atmospheric-overlay rule:** FamousPeople column entries (Vinnie Keane spotted at X, etc.) + streaming-trend rows + food-trend rows are treated as ambient mention layer, never anchored as standalone scene thread. Tag `atmosphericOnly: true` in candidate. Atmospheric signals route via Step 5 `defer-to-supplemental(target=dispatch)` if they warrant a /dispatch scene piece elsewhere.
 
@@ -253,6 +256,16 @@ ANY yes → CIVIC-WITH-WEIGHT (slate candidate). ALL no → CIVIC-TRACKER-ONLY (
 - **`Magnitude`/`Trend` are a labeled content signal, never priority** — do not use them to rank. Engine-A `PriorityScore` (Step 6) is the only ranking authority; `Trend` "carrying + strength remaining" is at most an arc-active *hint*, explicitly labeled.
 - **Degrade-safe:** if the running deck lacks v4 content columns (legacy prod, before the seed system deploys — whether that's C101 or C102), §3d is a no-op and candidate-gen runs feed-only exactly as before.
 
+**§3e — Tension-register story seeds (pipeline.41 Task 8, added S424).** Read `logs/citizen-tension-state.json` — the open-question register citizen wakes leave behind, keyed `{POPID}: [{q, cy, status}]`. For every entry with `status === "open"`, emit one `TENSION-REGISTER` candidate into the working set:
+
+`{POPID} | "{q}" | opened c{cy}` — flagged `source: "tension-register"`.
+
+**Scope — subjective, never fact.** A tension is the citizen's own private open question, not engine output and not a published claim. It earns a candidate the same way a loop-bot reflection does (Step 4 provenance fence) — a reporter can knock on the door (interview/dispatch) to see whether the citizen will speak to it, but the tension text itself must never anchor a brief as an established fact, and any citizen it names still clears the standard `lookup_citizen` verification before shaping a piece. Same subjective→canon wall that governs citizen-loop wake perception generally (invention is fine; publication as fact is not).
+
+**Empty register (no `status: "open"` entries anywhere in the file) → no TENSION-REGISTER candidates, section absent from the working set.** Don't emit an empty bucket header.
+
+**Step 5 default route.** A TENSION-REGISTER candidate whose POPID matches an existing feed-derived candidate → `fold` (the tension becomes texture inside that piece, not a separate slot). Otherwise → `defer-to-supplemental(target=dispatch)` — it's a door-knock lead, not slate-weight on its own; only promote to the slate if the door-knock itself produces genuine new material that clears the normal candidate bar.
+
 **Candidate proposal shape:**
 
 ```json
@@ -262,7 +275,7 @@ ANY yes → CIVIC-WITH-WEIGHT (slate candidate). ALL no → CIVIC-TRACKER-ONLY (
   "section": "<FRONT_PAGE | EDITORS_DESK | CIVIC | CULTURE | BUSINESS | SPORTS | OPINION>",
   "reporter": "<Reporter Full Name from REPORTER_DESK_INDEX, role=reporter only>",
   "desk": "<desk-slug>",
-  "bucket": "<WORLD | TEXTURE-CITY-LIFE | SPORTS | CIVIC-WITH-WEIGHT | CIVIC-TRACKER-ONLY>",
+  "bucket": "<WORLD | TEXTURE-CITY-LIFE | SPORTS | CIVIC-WITH-WEIGHT | CIVIC-TRACKER-ONLY | TENSION-REGISTER>",
   "sourceSignal": "<one-line: which thread surfaced this>",
   "narrativeWeightTest": {
     "introducesCanon": <bool>,
@@ -974,6 +987,7 @@ Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → 
 
 ## Changelog
 
+- 2026-09-05 (S424, research-build) — v2.7 minor (pipeline.41 Task 8). New Step 3 §3e + sixth bucket `TENSION-REGISTER`: reads `logs/citizen-tension-state.json`, emits one candidate per OPEN tension (`{POPID} | "{q}" | opened c{cy}`, `source: "tension-register"`). Subjective, never fact — same discipline as the Step 4 loop-bot provenance fence (door-knock candidate, not a publishable claim; named citizens still clear `lookup_citizen`). Empty register → section absent. Bucket table + candidate-shape `bucket` enum updated. Net-new rule text, no mechanism change to existing steps. Closes pipeline.41 (rollout row now done-pending-archive).
 - 2026-07-10 (S305, research-build) — v2.3 minor (pipeline.42). The v4 `Story_Seed_Deck` content columns (`What/Why/Citizens/CitizenEvents/Businesses/Magnitude/Trend`) flagged-unused in v2.2 are now consumed by candidate-gen as an **enrichment layer**: Step 1 reads the deck (`deckRows`, labeled enrichment-not-primary), new Step 3 §3d folds deck content into feed-derived candidates (three-layer cause + citizen anchors for free), stamps `seedId`. Enrichment IS the dedup (one candidate per event; semantic match on shared primary-POPID+Domain or `What`-describes-`sourceSignal`). Deck is NOT a parallel source — a deck row becomes standalone only for a feed-missed event clearing the S257 citizen-protagonist lens + narrative-weight test, so the known-noisy engine-civic deck can't flood the slate. `Class=texture→atmosphericOnly`; `Magnitude`/`Trend` labeled content signal never priority; provenance fence (RB-1 lookup_citizen) preserved. Dual-schema/degrade-safe — legacy prod (pre-seed-system, C101 or C102) → §3d no-op, feed-only as before. Step 6 T4.1 untouched. Net-new rule text, no mechanism change to existing steps. Acceptance rides next live /sift.
 - 2026-06-22 (S267, research-build) — v2.0.3 minor (governance.42 RB-1/RB-3/RB-4). Step 4 provenance fence gains three screens + a scout-age clause: **phantom/barred-reporter flags get verified against `lookup_citizen` + REPORTER_DESK_INDEX before they shape a brief** (a `media-reporter` name is a REAL reporter — route, never bar; C99 G-W1 Elliot Graye POP-00012); **retired coverage-anchor screen** (Beverly Hayes POP-00772, G-S6); **name-collision verify-at-source** (Marcus Osei MTC-planner vs Deputy Mayor, G-S5); **research scouts must be handed the 2041 age-anchor in their prompt** (G-S3). Step 6 names the `Story_Seed_Deck` cycle column index (col 1, header row 0 — col-0 filter false-returns 0, G-S1). Step 8 + slot-code examples: **culture slots emit `N{n}`, never `CU{n}`** (parser N-series; G-W10) — sift's own CU1 examples corrected. Net-new rule text, no mechanism change.
 - 2026-06-20 (S265, research-build) — v2.0.2 minor (governance.41 RB-1). Step 4 gains the **provenance fence**: loop-bot reflections are impressionistic not a verification source; prior-edition canon-recall is not self-certifying; real-world institutions surfaced by recall flag `status-TBD` and stay generic until lookup confirms; age resolves against ledger BirthYear at brief-time. Hardens into skill text the candidate-integrity discipline the S256/S258 pass enforced by eye. Closes C98 G-S2 / G-S3 / G-S4 / G-W (McClymonds). Net-new rule text, no mechanism change.

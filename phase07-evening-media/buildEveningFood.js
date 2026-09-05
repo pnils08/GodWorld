@@ -1,31 +1,27 @@
 /**
  * ============================================================================
- * buildEveningFood_ v2.4
+ * buildEveningFood_ v2.5
  * ============================================================================
  *
  * World-aware restaurant/food selection with GodWorld Calendar integration.
  *
- * v2.3 Changes:
- * - ES5 compatible (var instead of const/let, no arrow functions)
- * - Replaced spread operator with concat()
- * - Replaced Map deduplication with manual loop
- * - Defensive guards for ctx and ctx.summary
+ * v2.5 Changes (engine.134 Task 5, S423):
+ * - Every name comes from the live Business_Ledger (ADR-0016: the ledger is
+ *   the truth). The embedded pools (three dozen invented names across a dozen
+ *   themed lists) are gone — a restaurant the ledger does not carry does not
+ *   exist tonight.
+ * - Calendar / season / sports / mood no longer swap POOLS; they BIAS which
+ *   hoods the picker leans toward (Chinatown on Lunar New Year, Fruitvale on
+ *   Cinco / Día, the sports zone on Opening Day, the arts corridor on First
+ *   Friday) and still name the trend.
+ * - Arts hoods are the ledger's `employerCharacter` in {arts, nightlife}
+ *   (Neighborhood_Map B1, via S.neighborhoodState); the sports zone is
+ *   S.sportsZones when set (engine.131 T7), Jack London until it lights.
+ * - A hood with no food rows is skipped, never invented. Output shape is
+ *   unchanged (restaurants / restaurantDetails / fast / fastDetails / trend /
+ *   economicInfluence / calendarContext); details now carry bizId.
  *
- * v2.2 Enhancements:
- * - Expanded to 12 Oakland neighborhoods
- * - GodWorld Calendar integration (30+ holidays)
- * - Holiday-specific restaurant pools and trends
- * - First Friday arts district dining
- * - Creation Day community gathering spots
- * - Sports season game-day food
- * - Cultural activity and community engagement effects
- * - Aligned with GodWorld Calendar v1.0
- *
- * Previous features (v2.1):
- * - Season, weather, chaos, sentiment
- * - Economic mood integration
- * - Nightlife and traffic effects
- * - Oakland neighborhood integration
+ * v2.3: ES5 compatible. v2.2: calendar integration.
  *
  * ============================================================================
  */
@@ -53,8 +49,7 @@ function buildEveningFood_(ctx) {
   var traffic = dynamics.traffic || 1;
   var culturalActivity = dynamics.culturalActivity || 1;
   var communityEngagement = dynamics.communityEngagement || 1;
-  var nightlife = S.nightlifeVolume || 0;
-  var civicLoad = S.civicLoad || "";
+  var nightlife = S.nightlifeVolume || 5;
   var econMood = S.economicMood || 50;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -66,352 +61,71 @@ function buildEveningFood_(ctx) {
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
 
-  // engine.99 Cohort 2 — the embedded 12-hood list here was already DEAD (never
-  // read; the file draws venues by other means). Removed rather than migrated.
+  // ═══════════════════════════════════════════════════════════════════════════
+  // THE LEDGER (v2.5) — fail-soft Business_Ledger read, same pattern as
+  // buildEveningFamous_ / contractSeedBackdropIndex_. Empty on any failure.
+  // ═══════════════════════════════════════════════════════════════════════════
+  var index = buildEveningFoodIndex_(ctx);
+
+  // Hood sets the biases lean on — read from the ledger, never listed here.
+  var artsHoods = eveningFoodHoodsByCharacter_(S, { arts: true, nightlife: true });
+  var sportsHoods = (S.sportsZones && S.sportsZones.length) ? S.sportsZones.slice() : ["Jack London"]; // engine.131 T7 dark → Jack London
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // RESTAURANT POOLS (Oakland-themed)
+  // WEIGHT THE DRAW — every ledger row starts at weight 1; each bias that names
+  // a row's hood adds to its weight. The draw is weighted sampling WITHOUT
+  // replacement, so a lean changes the odds and never the honesty of the list.
+  // (v2.4 concatenated pool copies and then deduped by name, which cancelled
+  // every lean it thought it was applying.)
   // ═══════════════════════════════════════════════════════════════════════════
-
-  var UPSCALE = [
-    { name: "OakHouse", neighborhood: "Rockridge" },
-    { name: "Blue Lantern", neighborhood: "Jack London" },
-    { name: "The 44th Table", neighborhood: "Downtown" },
-    { name: "Merritt Reserve", neighborhood: "Lake Merritt" },
-    { name: "Rockridge Cellar", neighborhood: "Rockridge" },
-    { name: "Piedmont Heights", neighborhood: "Piedmont Ave" }
-  ];
-
-  var CASUAL = [
-    { name: "Harborline Grill", neighborhood: "Jack London" },
-    { name: "Miso Metro", neighborhood: "Downtown" },
-    { name: "Temescal Tap", neighborhood: "Temescal" },
-    { name: "Fruitvale Diner", neighborhood: "Fruitvale" },
-    { name: "Laurel Noodle", neighborhood: "Laurel" },
-    { name: "West Side Cafe", neighborhood: "West Oakland" },
-    { name: "KONO Kitchen", neighborhood: "KONO" },
-    { name: "Uptown Eats", neighborhood: "Uptown" }
-  ];
-
-  var NIGHTLIFE_FOOD = [
-    { name: "Midnight Bistro", neighborhood: "Downtown" },
-    { name: "Neon Kitchen", neighborhood: "Jack London" },
-    { name: "Railway Late Eats", neighborhood: "West Oakland" },
-    { name: "Merritt AfterDark", neighborhood: "Lake Merritt" },
-    { name: "Uptown After Hours", neighborhood: "Uptown" }
-  ];
-
-  var WINTER_COMFORT = [
-    { name: "Steamhaven Bowls", neighborhood: "Temescal" },
-    { name: "Cozy Pot", neighborhood: "Rockridge" },
-    { name: "Warm Hearth Kitchen", neighborhood: "Laurel" }
-  ];
-
-  var SUMMER_SPOTS = [
-    { name: "Harbor Patio", neighborhood: "Jack London" },
-    { name: "Sunset Tortilla Bar", neighborhood: "Fruitvale" },
-    { name: "Dockhouse BBQ", neighborhood: "Jack London" },
-    { name: "Lakeside Grill", neighborhood: "Lake Merritt" }
-  ];
-
-  var CHAOS_FOOD = [
-    { name: "Civic Street Tacos", neighborhood: "Downtown" },
-    { name: "Crisis Coffee Co.", neighborhood: "West Oakland" },
-    { name: "Broadline Grab-N-Go", neighborhood: "Fruitvale" }
-  ];
-
-  var BUDGET_SPOTS = [
-    { name: "Dollar Pho", neighborhood: "Fruitvale" },
-    { name: "Value Eats", neighborhood: "West Oakland" },
-    { name: "Budget Bites", neighborhood: "Downtown" }
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // HOLIDAY RESTAURANT POOLS (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var THANKSGIVING_SPOTS = [
-    { name: "Harvest Table", neighborhood: "Rockridge" },
-    { name: "Family Feast Kitchen", neighborhood: "Temescal" },
-    { name: "Gratitude Dining", neighborhood: "Lake Merritt" },
-    { name: "Turkey Day Buffet", neighborhood: "Downtown" }
-  ];
-
-  var HOLIDAY_SPOTS = [
-    { name: "Winter Wonderland Cafe", neighborhood: "Piedmont Ave" },
-    { name: "Seasonal Spirits", neighborhood: "Rockridge" },
-    { name: "Holiday Hearth", neighborhood: "Temescal" },
-    { name: "Festive Feast", neighborhood: "Downtown" }
-  ];
-
-  var LUNAR_NEW_YEAR_SPOTS = [
-    { name: "Golden Dragon", neighborhood: "Chinatown" },
-    { name: "Lucky Dim Sum", neighborhood: "Chinatown" },
-    { name: "Red Envelope Kitchen", neighborhood: "Chinatown" },
-    { name: "New Year Noodle House", neighborhood: "Downtown" }
-  ];
-
-  var CINCO_SPOTS = [
-    { name: "El Mercado Fruitvale", neighborhood: "Fruitvale" },
-    { name: "Taco Fiesta", neighborhood: "Fruitvale" },
-    { name: "Cinco Cantina", neighborhood: "Fruitvale" },
-    { name: "Margarita Mile", neighborhood: "Jack London" }
-  ];
-
-  var DIA_DE_MUERTOS_SPOTS = [
-    { name: "Altar Kitchen", neighborhood: "Fruitvale" },
-    { name: "Marigold Cafe", neighborhood: "Fruitvale" },
-    { name: "Ancestor's Table", neighborhood: "Fruitvale" }
-  ];
-
-  var BBQ_HOLIDAY_SPOTS = [
-    { name: "Independence Grill", neighborhood: "Jack London" },
-    { name: "Patriot BBQ", neighborhood: "West Oakland" },
-    { name: "Summer Cookout Kitchen", neighborhood: "Lake Merritt" },
-    { name: "Fireworks BBQ", neighborhood: "Temescal" }
-  ];
-
-  var SPORTS_GAME_FOOD = [
-    { name: "Stadium Grill", neighborhood: "Jack London" },
-    { name: "Green & Gold Tavern", neighborhood: "Jack London" },
-    { name: "Ninth Inning Bar", neighborhood: "Jack London" },
-    { name: "Playoff Pub", neighborhood: "Downtown" },
-    { name: "Championship Eats", neighborhood: "Jack London" }
-  ];
-
-  var FIRST_FRIDAY_SPOTS = [
-    { name: "Gallery Bites", neighborhood: "Uptown" },
-    { name: "Art Walk Cafe", neighborhood: "KONO" },
-    { name: "Canvas Kitchen", neighborhood: "Temescal" },
-    { name: "First Friday Food Hall", neighborhood: "Uptown" },
-    { name: "Creative Cuisine", neighborhood: "KONO" }
-  ];
-
-  var CREATION_DAY_SPOTS = [
-    { name: "Founders Table", neighborhood: "Downtown" },
-    { name: "Oakland Roots Kitchen", neighborhood: "West Oakland" },
-    { name: "Heritage Dining", neighborhood: "Lake Merritt" },
-    { name: "Community Gathering", neighborhood: "Temescal" }
-  ];
-
-  var PRIDE_SPOTS = [
-    { name: "Rainbow Kitchen", neighborhood: "Downtown" },
-    { name: "Pride Cafe", neighborhood: "Lake Merritt" },
-    { name: "Love Wins Bistro", neighborhood: "Uptown" }
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // FAST FOOD POOLS
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var FAST_BASE = [
-    { name: "SpeedyBurger", neighborhood: "Downtown" },
-    { name: "ChicknBox", neighborhood: "Fruitvale" },
-    { name: "TacoRail", neighborhood: "West Oakland" },
-    { name: "NoodleFast", neighborhood: "Temescal" },
-    { name: "HotSlice Pizza", neighborhood: "Rockridge" }
-  ];
-
-  var LATE_NIGHT = [
-    { name: "NightBite Grill", neighborhood: "Downtown" },
-    { name: "AfterHours Fry", neighborhood: "Jack London" },
-    { name: "Midnight Rollout", neighborhood: "Lake Merritt" }
-  ];
-
-  var WINTER_FAST = [
-    { name: "StewCup Express", neighborhood: "Downtown" },
-    { name: "SoupStop", neighborhood: "Temescal" },
-    { name: "WarmBun Kitchen", neighborhood: "Laurel" }
-  ];
-
-  var GAME_DAY_FAST = [
-    { name: "Stadium Dogs", neighborhood: "Jack London" },
-    { name: "Quick Score Burger", neighborhood: "Jack London" },
-    { name: "Inning Eats Express", neighborhood: "Downtown" }
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // BUILD DYNAMIC POOLS
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var restaurantPool = [].concat(CASUAL);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // HOLIDAY POOLS (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (holiday === "Thanksgiving") {
-    restaurantPool = restaurantPool.concat(THANKSGIVING_SPOTS, THANKSGIVING_SPOTS);
-  }
-
-  if (holiday === "Holiday" || holiday === "NewYearsEve" || holiday === "NewYear") {
-    restaurantPool = restaurantPool.concat(HOLIDAY_SPOTS, HOLIDAY_SPOTS);
-  }
-
-  if (holiday === "LunarNewYear") {
-    restaurantPool = restaurantPool.concat(LUNAR_NEW_YEAR_SPOTS, LUNAR_NEW_YEAR_SPOTS, LUNAR_NEW_YEAR_SPOTS);
-  }
-
-  if (holiday === "CincoDeMayo") {
-    restaurantPool = restaurantPool.concat(CINCO_SPOTS, CINCO_SPOTS, CINCO_SPOTS);
-  }
-
-  if (holiday === "DiaDeMuertos") {
-    restaurantPool = restaurantPool.concat(DIA_DE_MUERTOS_SPOTS, DIA_DE_MUERTOS_SPOTS);
-  }
-
-  if (holiday === "Independence" || holiday === "MemorialDay" || holiday === "LaborDay") {
-    restaurantPool = restaurantPool.concat(BBQ_HOLIDAY_SPOTS, SUMMER_SPOTS);
-  }
-
-  if (holiday === "OaklandPride") {
-    restaurantPool = restaurantPool.concat(PRIDE_SPOTS, PRIDE_SPOTS);
-  }
-
-  if (holiday === "OpeningDay") {
-    restaurantPool = restaurantPool.concat(SPORTS_GAME_FOOD, SPORTS_GAME_FOOD, SPORTS_GAME_FOOD);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // FIRST FRIDAY (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (isFirstFriday) {
-    restaurantPool = restaurantPool.concat(FIRST_FRIDAY_SPOTS, FIRST_FRIDAY_SPOTS, NIGHTLIFE_FOOD);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // CREATION DAY (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (isCreationDay) {
-    restaurantPool = restaurantPool.concat(CREATION_DAY_SPOTS, CREATION_DAY_SPOTS);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // SPORTS SEASON (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (sportsSeason === "championship") {
-    restaurantPool = restaurantPool.concat(SPORTS_GAME_FOOD, SPORTS_GAME_FOOD, SPORTS_GAME_FOOD);
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    restaurantPool = restaurantPool.concat(SPORTS_GAME_FOOD, SPORTS_GAME_FOOD);
-  } else if (sportsSeason === "late-season") {
-    restaurantPool = restaurantPool.concat(SPORTS_GAME_FOOD);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // CULTURAL ACTIVITY (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (culturalActivity >= 1.4) {
-    restaurantPool = restaurantPool.concat(FIRST_FRIDAY_SPOTS, UPSCALE);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // COMMUNITY ENGAGEMENT (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (communityEngagement >= 1.4) {
-    restaurantPool = restaurantPool.concat(CREATION_DAY_SPOTS, CASUAL);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // SEASONAL
-  // ───────────────────────────────────────────────────────────────────────────
-  if (season === "Winter" && holiday === "none") restaurantPool = restaurantPool.concat(WINTER_COMFORT);
-  if (season === "Summer" && holiday === "none") restaurantPool = restaurantPool.concat(SUMMER_SPOTS);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // NIGHTLIFE
-  // ───────────────────────────────────────────────────────────────────────────
-  if (nightlife >= 7) restaurantPool = restaurantPool.concat(NIGHTLIFE_FOOD);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // WEATHER
-  // ───────────────────────────────────────────────────────────────────────────
-  if (weather.impact >= 1.3) restaurantPool = restaurantPool.concat(WINTER_COMFORT);
-  if (weatherMood.primaryMood === 'cozy') restaurantPool = restaurantPool.concat(WINTER_COMFORT);
-  if (weatherMood.perfectWeather && holiday === "none") restaurantPool = restaurantPool.concat(SUMMER_SPOTS);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // CHAOS
-  // ───────────────────────────────────────────────────────────────────────────
-  if (chaos.length > 0) restaurantPool = restaurantPool.concat(CHAOS_FOOD);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // SENTIMENT
-  // ───────────────────────────────────────────────────────────────────────────
-  if (sentiment >= 0.3) restaurantPool = restaurantPool.concat(UPSCALE);
-  if (sentiment <= -0.3) restaurantPool = restaurantPool.concat(CASUAL);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // ECONOMIC MOOD
-  // ───────────────────────────────────────────────────────────────────────────
-  if (econMood >= 65) restaurantPool = restaurantPool.concat(UPSCALE);
-  if (econMood <= 35) restaurantPool = restaurantPool.concat(BUDGET_SPOTS);
-
-  // v2.3: ES5 deduplication (instead of Map)
-  var seenRestaurants = {};
-  var uniqueRestaurants = [];
-  for (var i = 0; i < restaurantPool.length; i++) {
-    var item = restaurantPool[i];
-    if (!seenRestaurants[item.name]) {
-      seenRestaurants[item.name] = true;
-      uniqueRestaurants.push(item);
+  var candidates = dedupeByName_(index.restaurants);
+  var weight = {};
+  for (var c = 0; c < candidates.length; c++) weight[candidates[c].name] = 1;
+  var lean = function(hoods, amount) {
+    for (var r = 0; r < candidates.length; r++) {
+      if (hoods.indexOf(candidates[r].neighborhood) !== -1) weight[candidates[r].name] += amount;
     }
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // FAST FOOD SELECTION
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var fastPool = [].concat(FAST_BASE);
-
-  if (nightlife >= 7) fastPool = fastPool.concat(LATE_NIGHT);
-  if (weather.impact >= 1.3 || season === "Winter") fastPool = fastPool.concat(WINTER_FAST);
-  if (traffic >= 1.3) {
-    fastPool.push({ name: "TransitQuick", neighborhood: "Downtown" });
-  }
-
-  // v2.2: Sports game day fast food
-  if (sportsSeason !== "off-season" || holiday === "OpeningDay") {
-    fastPool = fastPool.concat(GAME_DAY_FAST);
-  }
-
-  // v2.3: ES5 deduplication
-  var seenFast = {};
-  var uniqueFast = [];
-  for (var j = 0; j < fastPool.length; j++) {
-    var fastItem = fastPool[j];
-    if (!seenFast[fastItem.name]) {
-      seenFast[fastItem.name] = true;
-      uniqueFast.push(fastItem);
+  };
+  var addNightlife = function() {
+    var extra = dedupeByName_(index.nightlife);
+    for (var n = 0; n < extra.length; n++) {
+      if (weight[extra[n].name] === undefined) { candidates.push(extra[n]); weight[extra[n].name] = 1; }
     }
-  }
+  };
+
+  if (holiday === "LunarNewYear") lean(["Chinatown"], 3);
+  if (holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") lean(["Fruitvale"], 3);
+  if (holiday === "OpeningDay") lean(sportsHoods, 3);
+  if (holiday === "Independence" || holiday === "MemorialDay" || holiday === "LaborDay") lean(["Jack London", "Lake Merritt"], 1); // waterfront summer
+  if (holiday === "OaklandPride") lean(artsHoods, 2);
+  if (isFirstFriday) { lean(artsHoods, 2); addNightlife(); }
+  if (sportsSeason === "championship") lean(sportsHoods, 3);
+  else if (sportsSeason === "playoffs" || sportsSeason === "post-season") lean(sportsHoods, 2);
+  else if (sportsSeason === "late-season") lean(sportsHoods, 1);
+  if (culturalActivity >= 1.4) lean(artsHoods, 1);
+  if (nightlife >= 7) addNightlife();
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // FAST FOOD — the ledger's quick-service rows. One tracked chain is one name.
+  // ═══════════════════════════════════════════════════════════════════════════
+  var fastCandidates = dedupeByName_(index.fast);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PICK FINAL OUTPUT
   // ═══════════════════════════════════════════════════════════════════════════
-
-  // v2.3: ES5 compatible pickRandom
-  var pickRandom = function(arr, count) {
-    if (typeof pickRandomSet_ === 'function') {
-      return pickRandomSet_(arr, count, rng);
-    }
-    return arr.sort(function() { return rng() - 0.5; }).slice(0, count);
-  };
-
-  // v2.2: More restaurants on special occasions
   var restaurantCount = rng() < 0.3 ? 3 : 2;
   if (holidayPriority === "major" || holidayPriority === "oakland") restaurantCount = 3;
   if (isFirstFriday) restaurantCount = 3;
   if (sportsSeason === "championship") restaurantCount = 4;
 
-  var selectedRestaurants = pickRandom(uniqueRestaurants, restaurantCount);
-  var selectedFast = pickRandom(uniqueFast, sportsSeason !== "off-season" ? 2 : 1);
+  var selectedRestaurants = weightedDrawWithoutReplacement_(candidates, weight, restaurantCount, rng);
+  var selectedFast = weightedDrawWithoutReplacement_(fastCandidates, {}, sportsSeason !== "off-season" ? 2 : 1, rng);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BUILD TREND DESCRIPTION (v2.2 - calendar-aware)
   // ═══════════════════════════════════════════════════════════════════════════
-
   var trend = "Standard evening dining rhythm";
 
-  // Calendar trends take priority
   if (holiday === "Thanksgiving") {
     trend = "Thanksgiving feast dining - family gatherings";
   } else if (holiday === "Holiday" || holiday === "NewYearsEve") {
@@ -457,16 +171,10 @@ function buildEveningFood_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OUTPUT
   // ═══════════════════════════════════════════════════════════════════════════
-
   var restaurantNames = [];
-  for (var k = 0; k < selectedRestaurants.length; k++) {
-    restaurantNames.push(selectedRestaurants[k].name);
-  }
-
+  for (var k = 0; k < selectedRestaurants.length; k++) restaurantNames.push(selectedRestaurants[k].name);
   var fastNames = [];
-  for (var m = 0; m < selectedFast.length; m++) {
-    fastNames.push(selectedFast[m].name);
-  }
+  for (var m = 0; m < selectedFast.length; m++) fastNames.push(selectedFast[m].name);
 
   S.eveningFood = {
     restaurants: restaurantNames,
@@ -475,7 +183,6 @@ function buildEveningFood_(ctx) {
     fastDetails: selectedFast,
     trend: trend,
     economicInfluence: econMood <= 35 ? 'budget' : econMood >= 65 ? 'upscale' : 'normal',
-    // v2.2: Calendar context
     calendarContext: {
       holiday: holiday,
       holidayPriority: holidayPriority,
@@ -488,57 +195,90 @@ function buildEveningFood_(ctx) {
   ctx.summary = S;
 }
 
+/**
+ * Business_Ledger → { restaurants, nightlife, fast } (each [{ bizId, name,
+ * neighborhood, sector }]). Classified by the ledger's own Sector text:
+ *   fast       — quick service
+ *   nightlife  — bars, lounges, clubs, nightlife & entertainment, hospitality
+ *   restaurant — restaurant / dining / cafe / food / bakery / beverage / market
+ * A row can be both restaurant and nightlife (Sports Bar & Dining). Fast rows
+ * are never restaurants. Fail-soft: any read failure yields three empty lists.
+ */
+function buildEveningFoodIndex_(ctx) {
+  var out = { restaurants: [], nightlife: [], fast: [] };
+  var FAST_RE = /fast food|quick service/i;
+  var NIGHT_RE = /nightlife|\bbar\b|lounge|club|hospitality/i;
+  var FOOD_RE = /restaurant|dining|cafe|café|food|bakery|beverage|market/i;
+  try {
+    var bs = ctx && ctx.ss && typeof ctx.ss.getSheetByName === 'function' ? ctx.ss.getSheetByName('Business_Ledger') : null;
+    if (!bs || bs.getLastRow() <= 1) return out;
+    var vv = bs.getDataRange().getValues();
+    var h = vv[0];
+    var iId = h.indexOf('BIZ_ID');
+    var iName = h.indexOf('Name');
+    var iHood = h.indexOf('Neighborhood');
+    var iSector = h.indexOf('Sector');
+    if (iName < 0 || iHood < 0 || iSector < 0) return out;
+    for (var r = 1; r < vv.length; r++) {
+      var name = String(vv[r][iName] || '').trim();
+      var hood = String(vv[r][iHood] || '').trim();
+      var sector = String(vv[r][iSector] || '').trim();
+      if (!name || !hood || !sector) continue;
+      var row = { bizId: iId >= 0 ? String(vv[r][iId] || '') : '', name: name, neighborhood: hood, sector: sector };
+      if (FAST_RE.test(sector)) { out.fast.push(row); continue; }
+      if (NIGHT_RE.test(sector)) out.nightlife.push(row);
+      if (FOOD_RE.test(sector)) out.restaurants.push(row);
+    }
+  } catch (e) {
+    try { Logger.log('buildEveningFood_ ledger read failed (fail-soft): ' + e); } catch (ig) {}
+  }
+  return out;
+}
+
+/** Hoods whose Neighborhood_Map employerCharacter is one of the given labels. */
+function eveningFoodHoodsByCharacter_(S, labels) {
+  var hoods = [];
+  var ns = S && S.neighborhoodState;
+  if (!ns) return hoods;
+  for (var hood in ns) {
+    if (!ns.hasOwnProperty(hood)) continue;
+    var ch = String((ns[hood] && ns[hood].employerCharacter) || '').toLowerCase();
+    if (ch && labels[ch]) hoods.push(hood);
+  }
+  return hoods;
+}
 
 /**
- * ============================================================================
- * EVENING FOOD REFERENCE
- * ============================================================================
- *
- * RESTAURANT POOLS:
- * - Base: UPSCALE (6), CASUAL (8), NIGHTLIFE_FOOD (5)
- * - Seasonal: WINTER_COMFORT (3), SUMMER_SPOTS (4)
- * - Situational: CHAOS_FOOD (3), BUDGET_SPOTS (3)
- *
- * HOLIDAY POOLS (v2.2):
- * - THANKSGIVING_SPOTS (4): Harvest Table, Family Feast Kitchen, etc.
- * - HOLIDAY_SPOTS (4): Winter Wonderland Cafe, Seasonal Spirits, etc.
- * - LUNAR_NEW_YEAR_SPOTS (4): Golden Dragon, Lucky Dim Sum, etc.
- * - CINCO_SPOTS (4): El Mercado Fruitvale, Taco Fiesta, etc.
- * - DIA_DE_MUERTOS_SPOTS (3): Altar Kitchen, Marigold Cafe, etc.
- * - BBQ_HOLIDAY_SPOTS (4): Independence Grill, Patriot BBQ, etc.
- * - PRIDE_SPOTS (3): Rainbow Kitchen, Pride Cafe, etc.
- * - SPORTS_GAME_FOOD (5): Stadium Grill, Green & Gold Tavern, etc.
- * - FIRST_FRIDAY_SPOTS (5): Gallery Bites, Art Walk Cafe, etc.
- * - CREATION_DAY_SPOTS (4): Founders Table, Oakland Roots Kitchen, etc.
- *
- * FAST FOOD POOLS:
- * - FAST_BASE (5), LATE_NIGHT (3), WINTER_FAST (3)
- * - GAME_DAY_FAST (3) - v2.2
- *
- * RESTAURANT COUNT:
- * - Base: 2-3
- * - Major/Oakland holiday: 3
- * - First Friday: 3
- * - Championship: 4
- *
- * HOLIDAY TRENDS (v2.2):
- * - Thanksgiving → "Thanksgiving feast dining - family gatherings"
- * - Holiday/NYE → "Holiday celebration dining - festive atmosphere"
- * - LunarNewYear → "Lunar New Year dining - Chinatown spotlight"
- * - CincoDeMayo → "Cinco de Mayo dining - Fruitvale fiesta"
- * - DiaDeMuertos → "Día de los Muertos dining - traditional remembrance"
- * - Independence/Memorial/Labor → "BBQ and outdoor dining - summer celebration"
- * - OaklandPride → "Pride celebration dining - inclusive atmosphere"
- * - OpeningDay → "Opening Day dining - stadium district buzzing"
- * - First Friday → "First Friday arts district dining - gallery crowd"
- * - Creation Day → "Creation Day community dining - local roots"
- * - Championship → "Championship fever dining - game day crowds"
- * - Playoffs → "Playoff tension dining - sports bar surge"
- *
- * NEIGHBORHOODS (12):
- * - Temescal, Downtown, Fruitvale, Lake Merritt
- * - West Oakland, Laurel, Rockridge, Jack London
- * - Uptown, KONO, Chinatown, Piedmont Ave
- *
- * ============================================================================
+ * Weighted sampling without replacement (ES5, ctx.rng only). weight[name]
+ * missing → 1. Returns at most count items; an empty list returns [].
  */
+function weightedDrawWithoutReplacement_(items, weight, count, rng) {
+  var pool = items.slice();
+  var out = [];
+  while (pool.length && out.length < count) {
+    var total = 0;
+    for (var i = 0; i < pool.length; i++) total += (weight[pool[i].name] || 1);
+    var r = rng() * total;
+    var idx = 0;
+    for (var j = 0; j < pool.length; j++) {
+      r -= (weight[pool[j].name] || 1);
+      if (r < 0) { idx = j; break; }
+      idx = j;
+    }
+    out.push(pool[idx]);
+    pool.splice(idx, 1);
+  }
+  return out;
+}
+
+/** ES5 dedupe by name, first occurrence wins. */
+function dedupeByName_(arr) {
+  var seen = {};
+  var out = [];
+  for (var i = 0; i < arr.length; i++) {
+    if (!arr[i] || seen[arr[i].name]) continue;
+    seen[arr[i].name] = true;
+    out.push(arr[i]);
+  }
+  return out;
+}

@@ -538,8 +538,8 @@
 
 ### updateNeighborhoodDemographics.js
 - **updateNeighborhoodDemographics_(ctx)**
-  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.sportsAtmosphereEnabled, S.sportsSeason
-  Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights
+  Reads: S.cycleId, S.demographicDrift, S.demographicDriftFactors, S.holiday, S.initiativeHealthRelief, S.isCreationDay, S.isFirstFriday, S.neighborhoodEmploymentWeights, S.neighborhoodIllnessWeights, S.neighborhoodState, S.sportsAtmosphereEnabled, S.sportsSeason
+  Writes: S.demographicShifts, S.demographicShiftsCount, S.neighborhoodDemographics
   Config: ctx.config.cycleCount, ctx.config.employmentFallbackRate, ctx.config.illnessFallbackRate
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2243,17 +2243,31 @@
 
 ### buildEveningFamous.js
 - **buildEveningFamous_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eveningSports, S.famousPeople, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eveningSports, S.famousPeople, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.famousPeople, S.famousSightings, S.famousSightingsContext
   Config: ctx.config.cycleCount
   Sheets: Business_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
+- **pickAthleteSightingHood_(S, rng)**
+  Reads: S.sportsZones
+
 ### buildEveningFood.js
 - **buildEveningFood_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlifeVolume, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.cityDynamics, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlifeVolume, S.season, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eveningFood
   RNG: ctx.rng / safeRand_(ctx)
+
+- **buildEveningFoodIndex_(ctx)**
+  Sheets: Business_Ledger
+
+- **eveningFoodHoodsByCharacter_(S, labels)**
+  Reads: S.neighborhoodState
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **weightedDrawWithoutReplacement_(items, weight, count, rng)**
+
+- **dedupeByName_(arr)**
 
 ### buildEveningMedia.js
 - **buildEveningMedia_(ctx)**
@@ -3297,6 +3311,12 @@
   Sheets: Chicago_Feed, Oakland_Sports_Feed
 
 ### ensureCrimeMetrics.js
+- **crimeIterationHoods_(S)**
+  Reads: S.canonHoods, S.neighborhoodState
+
+- **crimeProfileFor_(hood, S)**
+  Reads: S.neighborhoodState
+
 - **ensureCrimeMetricsSchema_(ss)**
 
 - **getCrimeMetrics_(ss)**
@@ -3730,4 +3750,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1272
+**Functions mapped:** 1279

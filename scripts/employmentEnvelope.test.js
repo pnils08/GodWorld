@@ -151,13 +151,15 @@ assert('B2 employer depth matters: Downtown below Adams Point at the same tier b
   let demo = cloneDemo(); let written = null;
   sandbox.getNeighborhoodDemographics_ = () => demo; sandbox.batchUpdateNeighborhoodDemographics_ = (ss, map) => { written = map; };
   const ctx = { ss: {}, config: Object.assign({}, CONFIG), rng: () => 0.6, summary: { cycleId: 200, demographicDrift: { illnessRate: 0.04, employmentRate: CITY_EMP, migration: 0 }, neighborhoodState: hoodState(true), hoodEmployerDepth: depth(), weatherEvents: [] } };
+  // engine.134 Task 7: the ctx publication was an orphaned write and is gone;
+  // the target weights are recomputed from the same inputs the engine reads.
+  const W = sandbox.buildHoodEmploymentWeights_(ctx, ctx.summary, cloneDemo()).byHood;
   updateNeighborhoodDemographics_(ctx);
-  const W = ctx.summary.neighborhoodEmploymentWeights || {};
   let wa = 0, aa = 0; for (const h of HOODS) { wa += (W[h] ? W[h].weight : 1) * F[h][1]; aa += F[h][1]; } const mean = wa / aa;
   let ok = true, worst = '';
   for (const h of HOODS) { const target = F[h][1] * CITY_U * ((W[h] ? W[h].weight : 1) / mean); const gap = Math.abs(target - F[h][3]); const step = Math.abs(written[h].unemployed - F[h][3]); if (step > Math.max(3, Math.ceil(gap * 0.25)) + 1) { ok = false; worst += h + ':' + step + '/' + r4(gap) + ' '; } }
   assert('B4 per-cycle step is bounded (convergence, not a snap)', ok, worst);
-  assert('B4 S.neighborhoodEmploymentWeights published for audit/story', ctx.summary.neighborhoodEmploymentWeights && typeof ctx.summary.neighborhoodEmploymentWeights['Temescal'].weight === 'number');
+  assert('B4 S.neighborhoodEmploymentWeights is NOT published (orphaned write retired, engine.134 T7)', ctx.summary.neighborhoodEmploymentWeights === undefined);
 }
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

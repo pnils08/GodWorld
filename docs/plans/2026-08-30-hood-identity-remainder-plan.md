@@ -1,7 +1,7 @@
 ---
 title: Hood-identity remainder — point leftover copies at Neighborhood_Map B1
 created: 2026-08-30
-updated: 2026-08-30
+updated: 2026-09-05
 type: plan
 tags: [engine, neighborhoods, economy, crime, media, active]
 sources:
@@ -66,7 +66,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   3. Assert economy object keys === 22 NM names when given `S.neighborhoodState` with those keys.
   4. Assert a food picker given a BL slice returns only names from that slice; a pool containing Dollar Pho is rejected.
 - **Verify:** `node scripts/hoodIdentityRemainder.test.js` → failing RED (functions not yet pointed).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S423 — `scripts/hoodIdentityRemainder.test.js`, 28/28 (Tasks 4–7; Tasks 2–3 cases wait on T7, see Open questions)
 
 ### Task 2: One fold — `mapToCanonicalNeighborhood_`
 
@@ -77,7 +77,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   2. Delete `n.indexOf(canonical[i])` substring match (that is how "Piedmont Ave" never hit "Piedmont Avenue" and how accidental substrings happen).
   3. `detectCareerRipples_` stays `if (!hood) continue` — after this, Brooklyn/Glenview survive.
 - **Verify:** Task 1 fold cases GREEN. `node --check phase06-analysis/economicRippleEngine.js`.
-- **Status:** [ ] not started
+- **Status:** [ ] HELD — `economicRippleEngine.js` is one of the four engine.131 T7 HELD files and T7's hunks land in this very function; ships with T7's ruling (S423)
 
 ### Task 3: Economy blob from B1, delete `NEIGHBORHOOD_ECONOMIES`
 
@@ -92,7 +92,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   6. Delete `var NEIGHBORHOOD_ECONOMIES = { ... }`.
   7. `HOLIDAY_ECONOMIC_ZONES`: add Baylight District next to Jack London on sports-adjacent holidays only if T7 is still dark *and* the holiday is OpeningDay — actually no: leave holiday zones as hood names that exist in NM; add `'Baylight District'` to OpeningDay/Pride only as a *second* zone, do not remove Jack London (T7's decline story needs Jack London still able to receive a holiday). Prefer: holiday zones stay, but any zone not in `S.neighborhoodState` is skipped at apply time.
 - **Verify:** Task 1 economy-keys GREEN. 11-hood object grep in this file → 0.
-- **Status:** [ ] not started
+- **Status:** [ ] HELD — same file, same collision (`calculateNeighborhoodEconomies_` is a T7 hunk); ships with T7's ruling (S423)
 
 ### Task 4: Crime iterates 22 NM keys; retune strife literals
 
@@ -105,7 +105,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   3. Retune existing character strings only (mods: change East Oakland violent 1.4 → 1.0 and baseIncidents 11 → 7; West Oakland violent 1.3 → 0.9, drop gentrifying). Characters: East Oakland `frontier, Baylight money arriving`; West Oakland `boom campus, Civis`; Temescal `boom left behind, clinic corridor`; Brooklyn if present in the old table was not — skip. Do not retune `NEIGHBORHOOD_PROFILES` studentMod/adultMod (age-only, engine.135).
   4. Retune `NEIGHBORHOOD_PROFILES` **character** strings only: Temescal `boom left behind`; Brooklyn `new-build waterfront`; West Oakland `boom campus`. Leave the numeric mods.
 - **Verify:** A unit fixture of 22 NM keys produces 22 crime outputs; Montclair absent. Grep `underserved` / `gentrifying` in `utilities/ensureCrimeMetrics.js` → 0. `node --check` both files.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S423 — 22 authored profiles (characters from INSTITUTIONS §Neighborhoods), Montclair dropped, `crimeIterationHoods_` (S.canonHoods.list) + `crimeProfileFor_` (boom-derived default) at all three sites; NEIGHBORHOOD_PROFILES characters retuned (Temescal/Brooklyn/West Oakland)
 
 ### Task 5: Evening food from Business_Ledger
 
@@ -117,7 +117,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   3. Delete Dollar Pho, Value Eats, Budget Bites, Crisis Coffee Co., Golden Dragon, Lucky Dim Sum, and any other name not on the live ledger. If a live shop already shares a pool name (Harborline Grill, Fruitvale Diner, Art Walk Cafe, Marigold Cafe, Green & Gold Tavern, KONO Kitchen, OakHouse, West Side Cafe, Dockhouse BBQ, Midnight Bistro, Miso Metro), it survives *because it is on the ledger*, not because it is in the pool file.
   4. Empty hood food pool → skip that hood, do not invent.
 - **Verify:** Task 1 food-picker GREEN. Grep `Dollar Pho|Value Eats|Budget Bites|Crisis Coffee|Lucky Dim Sum` in this file → 0. `node --check`.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S423 — v2.5: Business_Ledger index by Sector (restaurant/nightlife/fast), weighted draw without replacement by hood lean, arts hoods from employerCharacter, sports zone from S.sportsZones (Jack London while T7 dark). Ledger cell fix: BIZ-00101 (talent agency) Sector `Nightlife & Entertainment` → `Services`, read back
 
 ### Task 6: Famous sightings consume `S.sportsZones`
 
@@ -127,7 +127,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   1. At the OpeningDay/championship athlete branch (`:484-486`): if `Array.isArray(S.sportsZones) && S.sportsZones.length`, pick `S.sportsZones[floor(rng * length)]`. Else keep Jack London 0.6 / Downtown 0.4 (T7 still dark — fail-soft).
   2. Do not edit engine.131 files. Do not clasp T7.
 - **Verify:** Fixture with sportsZones `['Baylight District']` → neighborhood Baylight. Fixture with `[]` → Jack London or Downtown. `node --check`.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S423 — `pickAthleteSightingHood_(S, rng)`; fixture-proven both ways (bench cannot light it)
 
 ### Task 7: Orphan `S.neighborhoodEmploymentWeights`
 
@@ -137,7 +137,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   1. Prefer consume: cascadeAudit's unemployment-spread lane already reads ND + NM. If the S. blob is a same-cycle convenience, have cascadeAudit read it when present as a cross-check against the sheet. If that is a stretch, delete `:290` assignment and the comment "audit + story consumers".
   2. Do not leave an unused S. field. Stub regen in Task 8 will show readers: [] or the new reader.
 - **Verify:** `node scripts/ctxMap.js neighborhoodEmploymentWeights` → CONNECTED or field gone. Not ORPHANED WRITE.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S423 — both orphan writes deleted (`neighborhoodEmploymentWeights` AND `neighborhoodIllnessWeights`, ctxMap ORPHANED WRITE on each); `employmentEnvelope.test.js` B4 re-pointed, 18/18
 
 ### Task 8: Stub regen + collision note
 
@@ -148,7 +148,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   2. Confirm `mapToCanonicalNeighborhood_` appears or stays unrecorded (helpers often do — if still unrecorded, that is acceptable; do not force a stub of every inner function).
   3. Record in the commit message: `updateCrimeMetrics_` name collision (Phase3 vs utilities) is pre-existing, not introduced here.
 - **Verify:** stub generated date = commit day; `neighborhoodEconomies` writers still Phase6; `NEIGHBORHOOD_ECONOMIES` gone from engine JS.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S423 — regen in the same commit; 0 collisions / 1279 functions; `updateCrimeMetrics_` collision note is pre-existing
 
 ### Task 9: Bench, then live sheet replay for crime appends
 
@@ -159,7 +159,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   2. Live: Crime_Metrics row-adds are sheet writes (ensure* append). Replay after bench proof. Economy/food/famous are code-only (clasp). Sequencing: after C105 verify.
   3. Montclair Crime_Metrics ghost: log as a one-row hand delete, separate replay, not this task's auto path.
 - **Verify:** bench HTTP 200, 0 new Engine_Errors; live read-back of Crime_Metrics includes the five hoods.
-- **Status:** [ ] not started
+- **Status:** [ ] bench next: SANDBOX 0831 @46 (C105-synced), NOT 0827 (retired); then live Crime_Metrics replay for the five appends
 
 ---
 
@@ -182,4 +182,5 @@ Leave engine.131 T7 and engine.136 untouched.
 
 ## Changelog
 
+- 2026-09-05 (engine-sheet, S423) — **Tasks 1, 4, 5, 6, 7, 8 shipped; 2–3 HELD behind engine.131 T7.** Measure-twice first: the four wiring cards still held (NEIGHBORHOOD_ECONOMIES at :105/:804, 18 crime profiles incl. Montclair, Dollar Pho at food:124, Jack London at famous:486, both weight blobs ORPHANED WRITE). Live read: Crime_Metrics 18 rows = Montclair ghost + five canon hoods missing (Brooklyn, Baylight District, Eastlake, Ivy Hill, San Antonio); Business_Ledger 52 food/nightlife/fast rows across all 22 hoods. **The collision:** `git show e9ce67a5` (T7, ships dark) lands hunks in `mapToCanonicalNeighborhood_` and `calculateNeighborhoodEconomies_` — exactly Tasks 2–3 — and DEPLOY staging overwrites that file with live base, so a second variant of the file would not survive a push. Tasks 2–3 wait for the T7 ruling and ride with it. Sequencing lock cleared (C105 fired 08-31 clean). Crime iterates `S.canonHoods.list` (the Phase-1 SET, ADR-0016) rather than `S.neighborhoodState` keys — the state loader filters to the max Cycle, the set does not. Characters authored from INSTITUTIONS §Neighborhoods per the builder's pointer. Food v2.4's pool ×3 concat + name-dedupe had cancelled every lean it applied; v2.5 draws weighted without replacement. Tests 28/28 new + 101/101 approval + 18/18 envelope; suite 200/201 (djDirect pre-existing).
 - 2026-08-30 (grok) — Initial plan from remainder research + four Haiku wiring cards. Inbox copy for Claude.

@@ -286,8 +286,10 @@ function updateNeighborhoodDemographics_(ctx) {
   // SUMMARY OUTPUT
   // ═══════════════════════════════════════════════════════════════════════════
   S.neighborhoodDemographics = demographics;
-  S.neighborhoodIllnessWeights = illnessWeights.byHood;   // engine.133 — audit + story consumers
-  S.neighborhoodEmploymentWeights = employmentWeights.byHood;   // engine.135 — audit + story consumers
+  // engine.134 Task 7 (S423): S.neighborhoodIllnessWeights / S.neighborhoodEmploymentWeights
+  // were published here "for audit + story consumers" (engine.133 / engine.135) and
+  // never read by anything — ctxMap: ORPHANED WRITE on both. The weights still
+  // drive the envelopes above; the ctx publication is gone, not the mechanism.
   S.demographicShifts = demographicShifts;
   S.demographicShiftsCount = demographicShifts.length;
 

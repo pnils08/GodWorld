@@ -190,7 +190,7 @@
 | 7-CityEvents | `buildCityEvents_()` | phase04-events/buildCityEvents.js | City-level event compilation. **SETS** `S.cityEvents` |
 | 7-Nightlife | `buildNightlife_()` | phase07-evening-media/buildNightLife.js | Nightlife scene generation. **SETS** `S.nightlife`, `S.nightlifeVolume` |
 | 7-Sports | `buildEveningSportsAndStreaming_()` | phase07-evening-media/sportsStreaming.js | Feed-driven S.eveningSports from sportsFeedEntries + streaming trends (v3.0) |
-| 7-Food | `buildEveningFood_()` | phase07-evening-media/buildEveningFood.js | Restaurant/food scene events. Reads `S.nightlifeVolume` |
+| 7-Food | `buildEveningFood_()` | phase07-evening-media/buildEveningFood.js | Restaurant/food scene events. v2.5 (engine.134): every name is a live `Business_Ledger` food/nightlife/quick-service row (fail-soft read); calendar/sports/mood bias the weighted draw by hood (`S.neighborhoodState` employerCharacter, `S.sportsZones`). Reads `S.nightlifeVolume` |
 | 7-Famous | `buildEveningFamous_()` | phase07-evening-media/buildEveningFamous.js | Celebrity/famous citizen sightings. Reads `S.eveningSports` |
 | 7-EveningMedia | `buildEveningMedia_()` | phase07-evening-media/buildEveningMedia.js | TV, movies, streaming selection. Reads `S.eveningSports` |
 | 7-CitySystems | `buildCityEveningSystems_()` | phase07-evening-media/cityEveningSystems.js | Infrastructure/transit evening updates. Reads `S.nightlife`, `S.eveningSports`, `S.cityEvents` |

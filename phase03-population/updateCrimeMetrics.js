@@ -187,7 +187,8 @@ function updateCrimeMetrics_Phase3_(ctx) {
 
   // Calculate new metrics
   var newMetrics = {};
-  var neighborhoods = Object.keys(NEIGHBORHOOD_CRIME_PROFILES);
+  // engine.134 Task 4 (S423): the Neighborhood_Map set, not the profile table's keys.
+  var neighborhoods = crimeIterationHoods_(S);
 
   // Precompute reporting signal
   var reportingSignal = deriveReportingSignal_({
@@ -215,7 +216,7 @@ function updateCrimeMetrics_Phase3_(ctx) {
 
   for (var i = 0; i < neighborhoods.length; i++) {
     var hood = neighborhoods[i];
-    var profile = NEIGHBORHOOD_CRIME_PROFILES[hood];
+    var profile = crimeProfileFor_(hood, S);
     var demo = demographics[hood] || {};
     var prev = currentMetrics[hood] || null;
     var nd = neighborhoodDynamics[hood] || {};
@@ -270,7 +271,7 @@ function updateCrimeMetrics_Phase3_(ctx) {
     cycle: cycle,
     // engine.72 G-EC56: per-hood real metrics exposed so Phase 8's
     // Neighborhood_Map.CrimeIndex derives from crime PHYSICS, not the
-    // SAFETY-event-count proxy. Keys = NEIGHBORHOOD_CRIME_PROFILES hoods.
+    // SAFETY-event-count proxy. Keys = the Neighborhood_Map hood set (engine.134).
     byNeighborhood: newMetrics,
     cityWide: cityWide,
     shifts: shifts,
@@ -852,7 +853,7 @@ function updateCrimeLagState_(S, demographics, neighborhoodDynamics) {
   var lag = S.crimeLag;
   if (!lag.historyByNeighborhood) lag.historyByNeighborhood = {};
 
-  var hoods = Object.keys(NEIGHBORHOOD_CRIME_PROFILES);
+  var hoods = crimeIterationHoods_(S); // engine.134 Task 4
   for (var i = 0; i < hoods.length; i++) {
     var hood = hoods[i];
     if (!lag.historyByNeighborhood[hood]) lag.historyByNeighborhood[hood] = [];

@@ -44,12 +44,14 @@ var DEMO_NEIGHBORHOODS = [
 /**
  * Neighborhood character profiles for demographic weighting
  * Used to derive initial demographics and influence citizen placement
+ * Character strings follow docs/canon/INSTITUTIONS.md §Neighborhoods
+ * (engine.134 Task 4, S423) — mods are age weights, not prosperity dials.
  */
 var NEIGHBORHOOD_PROFILES = {
   'Downtown': { studentMod: 0.7, adultMod: 1.4, seniorMod: 0.6, character: 'urban core' },
-  'Temescal': { studentMod: 0.9, adultMod: 1.3, seniorMod: 0.8, character: 'young professional' },
+  'Temescal': { studentMod: 0.9, adultMod: 1.3, seniorMod: 0.8, character: 'behind the boom, health-strained' },
   'Laurel': { studentMod: 1.1, adultMod: 1.0, seniorMod: 1.1, character: 'family oriented' },
-  'West Oakland': { studentMod: 1.0, adultMod: 1.1, seniorMod: 0.9, character: 'evolving industrial' },
+  'West Oakland': { studentMod: 1.0, adultMod: 1.1, seniorMod: 0.9, character: 'boom-born industrial, first-wave money' },
   'Fruitvale': { studentMod: 1.3, adultMod: 1.0, seniorMod: 1.0, character: 'multigenerational' },
   'Jack London': { studentMod: 0.6, adultMod: 1.4, seniorMod: 0.5, character: 'nightlife district' },
   'Rockridge': { studentMod: 0.8, adultMod: 1.0, seniorMod: 1.4, character: 'established affluent' },
@@ -57,7 +59,7 @@ var NEIGHBORHOOD_PROFILES = {
   'Grand Lake': { studentMod: 1.0, adultMod: 1.1, seniorMod: 1.1, character: 'theater district' },
   'Piedmont Ave': { studentMod: 0.8, adultMod: 1.0, seniorMod: 1.3, character: 'upscale residential' },
   'Chinatown': { studentMod: 1.0, adultMod: 1.0, seniorMod: 1.2, character: 'cultural enclave' },
-  'Brooklyn': { studentMod: 1.1, adultMod: 1.0, seniorMod: 0.9, character: 'working class' },
+  'Brooklyn': { studentMod: 1.1, adultMod: 1.0, seniorMod: 0.9, character: 'new waterfront residential' },
   'Eastlake': { studentMod: 1.0, adultMod: 1.1, seniorMod: 0.9, character: 'lakeside mixed' },
   'Glenview': { studentMod: 1.2, adultMod: 1.0, seniorMod: 1.0, character: 'family suburban' },
   'Dimond': { studentMod: 1.1, adultMod: 1.0, seniorMod: 1.0, character: 'neighborhood village' },

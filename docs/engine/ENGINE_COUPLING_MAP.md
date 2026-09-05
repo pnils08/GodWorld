@@ -764,7 +764,7 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 - **Gate:** `ctx.summary`
 - **Layer 1:** Generates daily world-aware content based on contexts.
 - **Layer 2:** N/A.
-- **Cross-sheet:** Reads and updates `ctx.summary`.
+- **Cross-sheet:** Reads and updates `ctx.summary`. `buildEveningFood.js` v2.5 (engine.134) also READS `Business_Ledger` (fail-soft) — dining names are ledger rows, never a pool.
 - **Full-read catches:** None.
 
 ### `mediaFeedbackEngine.js` / `storyHook.js` / `parseMediaRoomMarkdown.js` (Phase 7) — FULL-READ

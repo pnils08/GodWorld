@@ -5,6 +5,10 @@
  *
  * World-aware celebrity selection for evening coverage with calendar integration.
  *
+ * engine.134 Task 6 (S423): Opening Day / championship athlete sightings pick
+ * from S.sportsZones when engine.131 T7 has set it; the Jack London / Downtown
+ * split is the fallback while T7 is dark (pickAthleteSightingHood_).
+ *
  * v2.5 Changes:
  * - Phase 15.5: Real A's players from Simulation_Ledger replace generic athletes
  * - Tier 1-2 active MLB GAME citizens pulled dynamically
@@ -482,8 +486,9 @@ function buildEveningFamous_(ctx) {
     } else if ((holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") && rng() < 0.4) {
       neighborhood = "Fruitvale";
     } else if ((holiday === "OpeningDay" || sportsSeason === "championship") && (ent.role.indexOf("athlete") !== -1 || ent.role === "A's player")) {
-      // Athletes near stadium
-      neighborhood = rng() < 0.6 ? "Jack London" : "Downtown";
+      // Athletes near the stadium — engine.134 Task 6: the sports zone follows
+      // the stadium (S.sportsZones, engine.131 T7); Jack London/Downtown until it lights.
+      neighborhood = pickAthleteSightingHood_(S, rng);
     } else if (ent.role === "A's player" && ent.homeNeighborhood && rng() < 0.5) {
       // v2.5: Real players spotted in their home neighborhood half the time
       neighborhood = ent.homeNeighborhood;
@@ -645,3 +650,17 @@ function buildEveningFamous_(ctx) {
  *
  * ============================================================================
  */
+
+/**
+ * Where an athlete is seen on Opening Day / in a championship run. The sports
+ * zone set (S.sportsZones) when engine.131 T7 has derived one; otherwise the
+ * pre-T7 Jack London 0.6 / Downtown 0.4 split, so nothing moves until the
+ * stadium does.
+ */
+function pickAthleteSightingHood_(S, rng) {
+  var zones = S && S.sportsZones;
+  if (Array.isArray(zones) && zones.length) {
+    return zones[Math.floor(rng() * zones.length)];
+  }
+  return rng() < 0.6 ? "Jack London" : "Downtown";
+}

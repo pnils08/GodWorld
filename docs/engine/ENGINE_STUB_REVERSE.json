@@ -2,7 +2,7 @@
   "generated": "2026-09-05",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1272,
+  "functionsMapped": 1279,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -795,7 +795,8 @@
         "phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_",
-        "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_"
+        "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
+        "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"
       ]
     },
     "auditIssues": {
@@ -1249,7 +1250,6 @@
         "phase06-analysis/prePublicationValidation.js::checkToneContradictions_",
         "phase06-analysis/prioritizeEvents.js::prioritizeEvents_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
-        "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
@@ -1936,6 +1936,9 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
+        "phase07-evening-media/buildEveningFamous.js::pickAthleteSightingHood_",
+        "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_"
       ]
     },
@@ -2314,7 +2317,10 @@
         "phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_",
         "phase05-citizens/processAdvancementIntake.js::queueHouseholdIntake_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
-        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_"
+        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
+        "phase07-evening-media/buildEveningFood.js::eveningFoodHoodsByCharacter_",
+        "utilities/ensureCrimeMetrics.js::crimeIterationHoods_",
+        "utilities/ensureCrimeMetrics.js::crimeProfileFor_"
       ]
     },
     "neighborhoodStateCount": {
@@ -2547,17 +2553,16 @@
       ]
     },
     "neighborhoodEmploymentWeights": {
-      "writers": [
+      "writers": [],
+      "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
-      ],
-      "readers": []
+      ]
     },
     "neighborhoodIllnessWeights": {
-      "writers": [
-        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
-      ],
+      "writers": [],
       "readers": [
-        "phase03-population/updateNeighborhoodDemographics.js::buildNeighborhoodDemographicModifiers_"
+        "phase03-population/updateNeighborhoodDemographics.js::buildNeighborhoodDemographicModifiers_",
+        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
       ]
     },
     "cityEventDetails": {
@@ -4399,7 +4404,8 @@
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/buildContractSeeds.js::contractSeedBackdropIndex_",
-        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_"
+        "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
+        "phase07-evening-media/buildEveningFood.js::buildEveningFoodIndex_"
       ]
     },
     "Event_Content_Ledger": {

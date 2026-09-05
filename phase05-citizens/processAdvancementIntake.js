@@ -1731,6 +1731,17 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
 // door is not this door); a hood the ledger does not price cannot house them.
 // ═══════════════════════════════════════════════════════════════════════════
 var HOUSEHOLD_RELATIONS_ = { head: true, spouse: true, child: true, parent: true };
+
+/**
+ * engine.109: a header self-arm must not throw on a trimmed grid — getRange
+ * past getMaxColumns() is an error in Apps Script, and an operator tab like
+ * Intake can be exactly as wide as its headers. Grow the grid first.
+ */
+function ensureGridColumns_(sheet, needed) {
+  if (!sheet || typeof sheet.getMaxColumns !== 'function') return;
+  var have = sheet.getMaxColumns();
+  if (have < needed && typeof sheet.insertColumnsAfter === 'function') sheet.insertColumnsAfter(have, needed - have);
+}
 var HOUSEHOLD_QUEUE_COLS_ = ['BirthYear', 'Neighborhood', 'MatchPopId', 'MatchType', 'MaidenName', 'MatchName', 'HouseholdKey', 'Gender'];
 
 function ensureHouseholdQueueSheet_(ss) {
@@ -1742,6 +1753,7 @@ function ensureHouseholdQueueSheet_(ss) {
   var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
   for (var e = 0; e < HOUSEHOLD_QUEUE_COLS_.length; e++) {
     if (findColByName_(advHeaders, HOUSEHOLD_QUEUE_COLS_[e]) < 0) {
+      ensureGridColumns_(advSheet, advHeaders.length + 1);
       advSheet.getRange(1, advHeaders.length + 1).setValue(HOUSEHOLD_QUEUE_COLS_[e]); // schema-setup carve-out, same as the drip queue
       advHeaders.push(HOUSEHOLD_QUEUE_COLS_[e]);
     }
@@ -1764,7 +1776,10 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
   if (iF < 0 || iLa < 0 || iFam < 0 || iStat < 0) return out;
   if (iRel < 0) {
     // the door's one new operator column self-arms (schema-setup carve-out)
-    if (intakeSheet && intakeSheet.getRange) intakeSheet.getRange(1, intakeHeader.length + 1).setValue('Relation');
+    if (intakeSheet && intakeSheet.getRange) {
+      ensureGridColumns_(intakeSheet, intakeHeader.length + 1);
+      intakeSheet.getRange(1, intakeHeader.length + 1).setValue('Relation');
+    }
     intakeHeader.push('Relation');
     iRel = intakeHeader.length - 1;
   }

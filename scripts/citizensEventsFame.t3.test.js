@@ -65,7 +65,7 @@ function makeCtx(rows, rng) {
   return {
     now: new Date(0),
     rng,
-    config: { ...GRIEF_CONFIG },
+    config: { ...GRIEF_CONFIG, gcSurfaceChance: 0.06, hoodFloorSurfaceQuota: 0 }, // engine.148 dials (self-armed on World_Config in prod)
     ss: { getSheetByName: () => null }, // lifeLog path guarded
     summary: { cycleId: 100, season: 'Summer', economicMood: 50 },
     ledger: { headers: HEADERS.slice(), rows, dirty: false }

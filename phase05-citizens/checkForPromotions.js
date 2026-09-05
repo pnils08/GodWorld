@@ -319,6 +319,12 @@ function checkForPromotions_(ctx) {
 
   // Track promotions for summary
   var promotions = [];
+  // engine.148: the migration wave — under-floor hoods take their fill straight
+  // from the waiting room, most-deficient hood first, World_Config
+  // hoodFloorPromotePerCycle rows a cycle. Everyone else still earns the row
+  // at EmergenceCount 3 through the lottery below (engine.58).
+  var waveRows = selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, rng);
+  var waveCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MAIN LOOP
@@ -331,13 +337,14 @@ function checkForPromotions_(ctx) {
 
     // Only active candidates
     if (status !== "Active") continue;
-
-    // Must meet emergence threshold
-    if (emergence < 3) continue;
-
-    // World-aware promotion chance
-    var chance = promotionChance(0.20, row);
-    if (rng() > chance) continue;
+    var inWave = !!waveRows[r]; // engine.148: wave rows skip the tick gate and the roll
+    if (!inWave) {
+      if (emergence < 3) continue;
+      var chance = promotionChance(0.20, row);
+      if (rng() > chance) continue;
+    } else {
+      waveCount++;
+    }
 
     // === Promote to Tier-4 (S320: lottery entry tier — climbs via UsageCount) ===
     var first = row[gFirst] || "";
@@ -415,7 +422,7 @@ function checkForPromotions_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // WORLD-AWARE LIFEHISTORY CONTEXT (v2.2)
     // ═══════════════════════════════════════════════════════════════════════
-    var context = "";
+    var context = inWave ? ("Migration wave: settled " + neigh + " under the citizen floor. ") : ""; // engine.148
 
     // Seasonal context
     if (season === "Spring") context += "Promoted during spring renewal. ";
@@ -481,7 +488,9 @@ function checkForPromotions_(ctx) {
     }
 
     if (iLife >= 0) {
-      newRow[iLife] = "The record catches up: name kept surfacing until Cycle " + cycle + " made it official. Settled in " + neigh + ". " + context;
+      newRow[iLife] = inWave
+        ? ("Arrived in " + neigh + " with the Cycle " + cycle + " migration wave — one of the households that filled the neighborhood's empty streets. " + context)
+        : ("The record catches up: name kept surfacing until Cycle " + cycle + " made it official. Settled in " + neigh + ". " + context);
     }
     if (iCreatedAt >= 0) newRow[iCreatedAt] = ctx.now;
     if (iLastUpdated >= 0) newRow[iLastUpdated] = ctx.now;
@@ -528,6 +537,7 @@ function checkForPromotions_(ctx) {
       popId: popId,
       name: (first + " " + last).trim(),
       neighborhood: neigh,
+      wave: inWave, // engine.148
       occupation: occ,
       calendarContext: {
         holiday: holiday,
@@ -543,10 +553,11 @@ function checkForPromotions_(ctx) {
   // Summary
   S.promotions = promotions;
   S.promotionsCount = promotions.length;
+  S.hoodFloorWaveCount = waveCount; // engine.148
   ctx.summary = S;
 
   if (promotions.length > 0) {
-    Logger.log("checkForPromotions_ v2.3: " + promotions.length + " citizens promoted");
+    Logger.log("checkForPromotions_ v2.3: " + promotions.length + " citizens promoted (" + waveCount + " by migration wave)");
   }
 }
 
@@ -634,3 +645,44 @@ function checkForPromotions_(ctx) {
  *
  * ============================================================================
  */
+
+// engine.148: pick the migration-wave rows. Greedy by deficit — each pick goes
+// to the hood currently furthest under World_Config hoodCitizenFloor (counting
+// this cycle's earlier picks), drawn uniformly among that hood's Active rows.
+// Returns { sheetRowIndex: hood }. Empty when the cell is 0 or nobody is
+// waiting in an under-floor hood.
+function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, rng) {
+  var quota = ctx && ctx.config ? Number(ctx.config.hoodFloorPromotePerCycle) : NaN;
+  if (!isFinite(quota)) {
+    throw new Error('selectFloorWaveRows_: World_Config hoodFloorPromotePerCycle missing — the engine.148 self-arm did not run (ADR-0015).');
+  }
+  var picked = {};
+  if (quota <= 0 || gNeigh < 0) return picked;
+  var floor = Number(ctx.config.hoodCitizenFloor);
+  var byHood = {};
+  for (var r = 1; r < gVals.length; r++) {
+    if ((gVals[r][gStat] || "").toString() !== "Active") continue;
+    var hood = resolveHoodOrChild_(ctx, gVals[r][gNeigh]);
+    if (!hood) continue;
+    if (!byHood[hood]) byHood[hood] = [];
+    byHood[hood].push(r);
+  }
+  var added = {};
+  for (var q = 0; q < quota; q++) {
+    var best = null, bestDeficit = 0;
+    var hoods = underFloorHoods_(ctx);
+    for (var h = 0; h < hoods.length; h++) {
+      var name = hoods[h];
+      if (!byHood[name] || !byHood[name].length) continue;
+      var deficit = (floor - (getHoodHeadcount_(ctx, name) + (added[name] || 0))) / floor;
+      if (deficit > bestDeficit) { bestDeficit = deficit; best = name; }
+    }
+    if (!best) break;
+    var list = byHood[best];
+    var idx = Math.floor(rng() * list.length);
+    picked[list[idx]] = best;
+    list.splice(idx, 1);
+    added[best] = (added[best] || 0) + 1;
+  }
+  return picked;
+}

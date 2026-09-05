@@ -74,7 +74,7 @@ function makeCtx(rows, rng, ledgerRows) {
   const ctx = {
     now: new Date(0),
     rng,
-    config: { ...GRIEF_CONFIG },
+    config: { ...GRIEF_CONFIG, gcSurfaceChance: 0.06, hoodFloorSurfaceQuota: 0 }, // engine.148 dials (self-armed on World_Config in prod)
     ss: {
       getSheetByName: (name) => {
         if (name === 'Event_Content_Ledger' && ledgerRows) {

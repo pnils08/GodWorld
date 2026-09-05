@@ -41,7 +41,7 @@ These are read/written during every cycle run.
 | **Family_Relationships** | 2 | ENGINE | ENGINE | Parent-child links (mostly in SL ParentIds/ChildrenIds) |
 | **Relationship_Bonds** | 211 | ENGINE | ENGINE | Active alliance/rivalry/mentorship bonds |
 | **Relationship_Bond_Ledger** | 2,424 | ENGINE | ENGINE | Full bond history |
-| **Neighborhood_Map** | 22 | ENGINE, SCRIPT | ENGINE, SCRIPT | 22 neighborhoods, 30 cols (S398 engine.135 B1: cols Y–AD `IncomeTier, BoomExposure, BoomIndex, EmployerCharacter, WealthMin, WealthMax` authored from INSTITUTIONS §Neighborhoods, `MedianIncome` re-based; live 2026-08-30) (S315: trajectory block replaced gentrification block; S352 engine.99: East Oakland row added + CoreSimRank col X — ADR-0016 truth source for the hood set AND the core-sim subset/draw order; loader: phase01-config/canonNeighborhoodLoader.js, detector: scripts/auditHoodDrift.js) (S414 engine.160: `MedianRent` is a RENDERING of `hoodRentShare` × `MedianIncome` / 12 — Phase 2 derives it, `neighborhoodTrajectoryEngine` writes the cell only when it disagrees; edit `MedianIncome` or the share, never the rent cell) |
+| **Neighborhood_Map** | 22 | ENGINE, SCRIPT | ENGINE, SCRIPT | 22 neighborhoods, 31 cols (S423 engine.99 #9: col AE `ChildAreas` — authored spoken sub-places that fold to the row's hood, e.g. Montclair → Piedmont Ave; seeded into `S.canonHoods.children`, resolved by `resolveHoodOrChild_`) (S398 engine.135 B1: cols Y–AD `IncomeTier, BoomExposure, BoomIndex, EmployerCharacter, WealthMin, WealthMax` authored from INSTITUTIONS §Neighborhoods, `MedianIncome` re-based; live 2026-08-30) (S315: trajectory block replaced gentrification block; S352 engine.99: East Oakland row added + CoreSimRank col X — ADR-0016 truth source for the hood set AND the core-sim subset/draw order; loader: phase01-config/canonNeighborhoodLoader.js, detector: scripts/auditHoodDrift.js) (S414 engine.160: `MedianRent` is a RENDERING of `hoodRentShare` × `MedianIncome` / 12 — Phase 2 derives it, `neighborhoodTrajectoryEngine` writes the cell only when it disagrees; edit `MedianIncome` or the share, never the rent cell) |
 | **Event_Content_Ledger** | 253 | ENGINE, SCRIPT | HAND, SCRIPT | Sheet-resident event content (S289 Design A + engine.49 auto-author): `line` pool rows + `fragment` slot fillers, 9 cols A–I (Kind/PoolKey/Slot/Text/Weight/Conditions/Tags/Grain/Active). Read by `loadEventContentLedger_` Phase 2 → `S.contentLedger`; empty/missing tab = no-op fallback to hardcoded pools. Written by hand + post-cycle `scripts/draftContentRows.js` (`auth:auto` provenance; Active kill switch). DSL + source whitelist live in the loader — see `loadEventContentLedger.js` |
 | **Neighborhood_Demographics** | 22 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Per-neighborhood population/income/age; 22 hoods = the Neighborhood_Map set (East Oakland row added S398, live 2026-08-30); Unemployed/Sick are envelopes of the World_Population dials (engine.133/135) |
 | **Crime_Metrics** | 17 | ENGINE, SCRIPT, DASHBOARD | ENGINE | QoL index, patrol, hotspots per neighborhood |
@@ -81,6 +81,19 @@ These six required key→value rows calibrate the bounded `MemoryRegisters.grief
 | `griefResponseChance` | 0.35 | maximum-one reserved response probability |
 
 `phase01-config/engine94SheetContract.js` code-carries the approved starting calibration and seeds only missing rows before cache creation or any Cycle mutation. Existing valid operator-tuned values are preserved. `scripts/applyGriefWorldConfig.js` remains an explicit audit/rehearsal tool; the production Sheet does not depend on replaying sandbox writes.
+
+### `World_Config` citizen-floor dials (engine.148)
+
+Four rows, self-armed by `ensureEngine148Config_` at boot (same contract as engine.94/161; missing → seeded, malformed → throw). Builder tunes by cell, live next cycle.
+
+| Key | Default | Range | What it moves |
+|---|---|---|---|
+| `hoodCitizenFloor` | 12 | 0–500 int | Active Simulation_Ledger citizens a hood should hold. Under it the hood is *under-floor*: the generic feeder draws it heavier (×(1+2·deficit)), the surfacing quota and the migration wave point at it. 0 switches the floor off. |
+| `hoodFloorPromotePerCycle` | 6 | 0–100 int | **Migration wave** (builder-ruled 2026-09-05): Active Generic_Citizens rows promoted straight to the ledger from under-floor hoods each cycle, most-deficient hood first, no EmergenceCount gate. `checkForPromotions_` → `selectFloorWaveRows_`. 0 disables. |
+| `hoodFloorSurfaceQuota` | 20 | 0–500 int | Unnamed ENGINE citizen events per cycle whose Generic_Citizens crossing is forced and drawn from under-floor hoods (deficit-weighted) — the earned road (engine.58, 3 ticks = a row) pointed at the empty hoods. `generateCitizensEvents_` → `pickUnderFloorGc_`. |
+| `gcSurfaceChance` | 0.06 | 0–1 | The engine.58 lottery dial (was the `GC_SURFACE_CHANCE` code literal): per unnamed ENGINE citizen event, chance the week crosses a Generic_Citizens name. |
+
+Headcount per hood is counted once per cycle on first read (`getHoodHeadcount_`, child spellings fold via `ChildAreas`); `hoodFloorDeficit_` = (floor − count) / floor.
 
 ### Approval ceiling state and calibration (engine.94)
 

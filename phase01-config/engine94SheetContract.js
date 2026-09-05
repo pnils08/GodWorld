@@ -113,6 +113,27 @@ var ENGINE161_CONFIG_SEEDS = [
   ['relocationMaxShare', 0.05, 'engine.161 per-cycle relocation ceiling as a share of the movable units (households + solo citizens with income) — a stampede guard, never a quota; ≈43 of 849 at C105', 0.005, 0.5, false]
 ];
 
+var ENGINE148_CONFIG_SEEDS = [
+  ['hoodCitizenFloor', 12, 'engine.148 tracked (Active Simulation_Ledger) citizens a neighborhood should hold; below it the hood is under-floor: the generic feeder draws it heavier and the surfacing quota points at it', 0, 500, true],
+  ['gcSurfaceChance', 0.06, 'engine.58/148 per unnamed ENGINE citizen event, chance the week crosses a Generic_Citizens name — the emergence lottery dial (was the GC_SURFACE_CHANCE code literal)', 0, 1, false],
+  ['hoodFloorPromotePerCycle', 6, 'engine.148 migration wave (builder-ruled 2026-09-05: the slow drip will not fill ten hoods) — per cycle, Active Generic_Citizens rows promoted straight to the ledger from under-floor hoods, most-deficient hood first, no EmergenceCount gate. 0 disables', 0, 100, true],
+  ['hoodFloorSurfaceQuota', 20, 'engine.148 per cycle, unnamed ENGINE citizen events whose GC crossing is forced and drawn from under-floor hoods (deficit-weighted); ~45% of offerings tick, 3 ticks earn the row (engine.58). 0 disables', 0, 500, true]
+];
+
+function ensureEngine148Config_(ss) {
+  if (!ss) throw new Error('engine.148 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.148 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE148_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE148_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.148 config: post-write verification failed');
+  }
+  Logger.log('engine.148 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 function ensureEngine161Config_(ss) {
   if (!ss) throw new Error('engine.161 config: spreadsheet required');
   var configSheet = ss.getSheetByName('World_Config');

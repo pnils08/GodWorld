@@ -106,6 +106,7 @@ Three files already read the sheet's 22 (`ensureCrimeMetrics`, `ensureNeighborho
 ## Applications (living)
 
 - 2026-09-05 — civic.21 row corrected: "remainder = engine.109 Task 7" was wrong; the feeder is the bug, T7 is the patch.
+- 2026-09-05 — Phase 1 built (S423): builder ruled the slow drip will not fill ten hoods ("gifted" emergence = a migration event), superseding the engine.58 tick gate for under-floor hoods only. Four World_Config dials (`hoodCitizenFloor` 12, `hoodFloorPromotePerCycle` 6, `hoodFloorSurfaceQuota` 20, `gcSurfaceChance` 0.06), lazy per-cycle headcount seed, feeder weights from the rank order, surfacing floor draw, migration wave in `checkForPromotions_`. Tests `scripts/hoodBlindDoors.test.js` 16/16; suite 201/202. Bench pending.
 
 ---
 

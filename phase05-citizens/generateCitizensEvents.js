@@ -1862,7 +1862,11 @@ function generateCitizensEvents_(ctx) {
   // small chance per T3/T4 ENGINE event names a GC citizen as an acquaintance.
   // A picked line ticks that GC's EmergenceCount (batched write at the end)
   // toward the promotion threshold (3). The seed rate is the lottery dial.
-  var GC_SURFACE_CHANCE = 0.06;
+  // engine.148: both dials live on World_Config (ADR-0015); missing fails loud.
+  var GC_SURFACE_CHANCE = Number(ctx.config && ctx.config.gcSurfaceChance);
+  if (!isFinite(GC_SURFACE_CHANCE)) throw new Error('generateCitizensEvents_: World_Config gcSurfaceChance missing — the engine.148 self-arm did not run (ADR-0015).');
+  var gcForcedLeft = Number(ctx.config && ctx.config.hoodFloorSurfaceQuota);
+  if (!isFinite(gcForcedLeft)) throw new Error('generateCitizensEvents_: World_Config hoodFloorSurfaceQuota missing — the engine.148 self-arm did not run (ADR-0015).');
   var gcSurfacePool = [];   // {name, nbhd, sheetRow, count}
   var gsE = -1, gsC = -1;
   var gcSurfaceSheet = ctx.ss.getSheetByName('Generic_Citizens');
@@ -1880,7 +1884,7 @@ function generateCitizensEvents_(ctx) {
         if (gsName.indexOf(' ') < 0) continue; // needs first+last
         gcSurfacePool.push({
           name: gsName,
-          nbhd: gsN >= 0 ? String(gcSurfVals[gsi][gsN] || '').trim() : '',
+          nbhd: gsN >= 0 ? (resolveHoodOrChild_(ctx, gcSurfVals[gsi][gsN]) || String(gcSurfVals[gsi][gsN] || '').trim()) : '', // engine.148: child spellings fold to the parent
           sheetRow: gsi + 1,
           count: Number(gcSurfVals[gsi][gsE]) || 0,
           ctx0: gsC >= 0 ? String(gcSurfVals[gsi][gsC] || '').trim() : '' // engine.59: roster base
@@ -2506,13 +2510,23 @@ function generateCitizensEvents_(ctx) {
     // citizen's week sometimes crosses a Tier-5 name from the waiting room
     // (neighborhood-preferring pick). The named line seeds a story a desk can
     // chase; a pick ticks that GC's EmergenceCount toward promotion.
-    if (!isNamed && mode === "ENGINE" && gcSurfacePool.length && chanceHit(GC_SURFACE_CHANCE)) {
+    // engine.148: the floor draw runs first — while the cycle's quota lasts, an
+    // under-floor hood's waiting-room citizen crosses this week on purpose,
+    // not by lottery. The lottery below is unchanged for everyone else.
+    var gcPick = null;
+    if (!isNamed && mode === "ENGINE" && gcSurfacePool.length && gcForcedLeft > 0) {
+      gcPick = pickUnderFloorGc_(ctx, gcSurfacePool, rng);
+      if (gcPick) gcForcedLeft--;
+    }
+    if (!gcPick && !isNamed && mode === "ENGINE" && gcSurfacePool.length && chanceHit(GC_SURFACE_CHANCE)) {
       var gcLocal = [];
       for (var gci = 0; gci < gcSurfacePool.length; gci++) {
         if (neighborhood && gcSurfacePool[gci].nbhd === neighborhood) gcLocal.push(gcSurfacePool[gci]);
       }
       var gcFrom = gcLocal.length ? gcLocal : gcSurfacePool;
-      var gcPick = gcFrom[Math.floor(rng() * gcFrom.length)];
+      gcPick = gcFrom[Math.floor(rng() * gcFrom.length)];
+    }
+    if (gcPick) {
       var gcT1 = "swapped stories with " + gcPick.name + " while the line at the corner store crawled";
       var gcT2 = "got roped into helping " + gcPick.name + " haul something heavy up a flight of stairs";
       var gcT3 = "kept running into " + gcPick.name + " this week — the neighborhood kind of coincidence";
@@ -3300,3 +3314,32 @@ function generateCitizensEvents_(ctx) {
  *
  * ============================================================================
  */
+
+// engine.148: hood drawn by floor deficit among under-floor hoods that still
+// hold an Active Generic_Citizens row; the citizen drawn uniformly within it.
+// null when no under-floor hood has anyone waiting (the quota then idles).
+function pickUnderFloorGc_(ctx, pool, rng) {
+  var hoods = underFloorHoods_(ctx);
+  if (!hoods.length || !pool || !pool.length) return null;
+  var byHood = {};
+  for (var i = 0; i < pool.length; i++) {
+    var h = pool[i].nbhd;
+    if (!byHood[h]) byHood[h] = [];
+    byHood[h].push(pool[i]);
+  }
+  var cands = [], total = 0;
+  for (var j = 0; j < hoods.length; j++) {
+    if (!byHood[hoods[j]] || !byHood[hoods[j]].length) continue;
+    var d = hoodFloorDeficit_(ctx, hoods[j]);
+    cands.push({ hood: hoods[j], w: d });
+    total += d;
+  }
+  if (!cands.length) return null;
+  var r = rng() * total, chosen = cands[cands.length - 1].hood;
+  for (var k = 0; k < cands.length; k++) {
+    r -= cands[k].w;
+    if (r <= 0) { chosen = cands[k].hood; break; }
+  }
+  var list = byHood[chosen];
+  return list[Math.floor(rng() * list.length)];
+}

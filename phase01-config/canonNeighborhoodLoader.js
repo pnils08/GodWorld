@@ -132,6 +132,63 @@ function loadCanonNeighborhoods_(ctx) {
   S.canonHoodCount = list.length;
 }
 
+function countTrackedByHood_(ctx) {
+  var S = ctx && ctx.summary;
+  var L = ctx && ctx.ledger;
+  if (!L || !L.headers || !L.rows) {
+    throw new Error('countTrackedByHood_: ctx.ledger not loaded — initSimulationLedger_ must run before the first headcount read.');
+  }
+  var iN = L.headers.indexOf('Neighborhood'), iS = L.headers.indexOf('Status');
+  if (iN < 0) throw new Error('countTrackedByHood_: Simulation_Ledger has no Neighborhood column.');
+  var counts = { _other: 0 };
+  for (var i = 0; i < S.canonHoods.list.length; i++) counts[S.canonHoods.list[i]] = 0;
+  for (var r = 0; r < L.rows.length; r++) {
+    var row = L.rows[r];
+    if (!row) continue;
+    if (iS >= 0 && String(row[iS] || '').trim().toLowerCase() !== 'active') continue;
+    var raw = String(row[iN] || '').trim();
+    if (!raw) continue;
+    var hood = resolveHoodOrChild_(ctx, raw);
+    if (hood) counts[hood] += 1; else counts._other += 1;
+  }
+  return counts;
+}
+
+// engine.148: tracked headcount per hood, counted once per cycle on first use
+// from the ledger already in ctx (initSimulationLedger_ runs before Phase 1).
+// Child spellings fold to their parent; names off the map land in `_other`.
+function getHoodHeadcount_(ctx, hood) {
+  var S = ctx && ctx.summary;
+  if (!S || !S.canonHoods) {
+    throw new Error('getHoodHeadcount_: canonical hood set not seeded — loadCanonNeighborhoods_ (Phase1-CanonHoods) did not run or failed.');
+  }
+  if (!S.hoodHeadcount) S.hoodHeadcount = countTrackedByHood_(ctx);
+  var n = S.hoodHeadcount[hood];
+  return n === undefined ? 0 : n;
+}
+
+// engine.148: 0 when the hood holds its floor, else (floor − count) / floor in
+// (0, 1]. The floor is World_Config hoodCitizenFloor — missing fails loud
+// (ADR-0015 §4); 0 on the cell switches the whole floor mechanism off.
+function hoodFloorDeficit_(ctx, hood) {
+  var floor = ctx && ctx.config ? Number(ctx.config.hoodCitizenFloor) : NaN;
+  if (!isFinite(floor)) {
+    throw new Error('hoodFloorDeficit_: World_Config hoodCitizenFloor missing — the engine.148 self-arm did not run (ADR-0015).');
+  }
+  if (floor <= 0) return 0;
+  var n = getHoodHeadcount_(ctx, hood);
+  return n >= floor ? 0 : (floor - n) / floor;
+}
+
+function underFloorHoods_(ctx) {
+  var core = getCoreSimNeighborhoods_(ctx);
+  var out = [];
+  for (var i = 0; i < core.length; i++) {
+    if (hoodFloorDeficit_(ctx, core[i]) > 0) out.push(core[i]);
+  }
+  return out;
+}
+
 /**
  * Hoods under one council district, sheet row order (civic.18 4c/4d). Throws
  * when the seed is absent — same wall as the accessors above. A district the

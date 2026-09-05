@@ -223,6 +223,7 @@ function runWorldCycle() {
     ensureEngine160Config_(ss);  // engine.160 hoodRentShare — the one hood rent rule, same self-arm contract
     ensureEngine157Config_(ss);  // engine.157 maneuver posture keys, same self-arm contract
     ensureEngine161Config_(ss);  // engine.161 relocationMaxShare — the stampede guard, same self-arm contract
+    ensureEngine148Config_(ss);  // engine.148 hood floor + GC surfacing dials, same self-arm contract
   } catch (e) {
     Logger.log('FATAL: Cannot open or prepare spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet
@@ -1267,6 +1268,10 @@ function processIntake_(ctx) {
   // (Tier-5 waiting room), never direct SL mint (Mike-ruled: "there should be
   // a reason we are tracking you"). Known GC names tick EmergenceCount instead
   // of duplicating; SL row is earned at EmergenceCount 3 (Phase 5 checkpoint).
+  // engine.148 (builder-ruled 2026-09-05): the migration wave is the one
+  // exception — an under-floor hood fills from the waiting room without the
+  // tick gate (checkForPromotions_ → selectFloorWaveRows_, World_Config
+  // hoodFloorPromotePerCycle). The lottery road stays for everyone else.
   var gcSheet = ctx.ss.getSheetByName('Generic_Citizens');
   var gcVals = gcSheet ? gcSheet.getDataRange().getValues() : [['First', 'Last']];
   var gcHeader = gcVals[0];

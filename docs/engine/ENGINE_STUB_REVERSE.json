@@ -2,7 +2,7 @@
   "generated": "2026-09-05",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1280,
+  "functionsMapped": 1288,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -792,12 +792,22 @@
         "phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_"
       ],
       "readers": [
+        "phase01-config/canonNeighborhoodLoader.js::countTrackedByHood_",
         "phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_",
+        "phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_",
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"
+      ]
+    },
+    "hoodHeadcount": {
+      "writers": [
+        "phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_"
+      ],
+      "readers": [
+        "phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_"
       ]
     },
     "auditIssues": {
@@ -2953,6 +2963,12 @@
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
       ]
     },
+    "hoodFloorWaveCount": {
+      "writers": [
+        "phase05-citizens/checkForPromotions.js::checkForPromotions_"
+      ],
+      "readers": []
+    },
     "promotions": {
       "writers": [
         "phase05-citizens/checkForPromotions.js::checkForPromotions_",
@@ -4117,6 +4133,7 @@
       "readers": [
         "phase01-config/engine94SheetContract.js::ensureEngine133Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine135Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine148Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine157Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine160Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine161Config_",

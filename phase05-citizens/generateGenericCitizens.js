@@ -411,21 +411,9 @@ function generateGenericCitizens_(ctx) {
   // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
   var neighborhoods = getCoreSimNeighborhoods_(ctx);
 
-  // Base neighborhood weights
-  var neighborhoodWeights = {
-    'Temescal': 1.2,
-    'Downtown': 1.3,
-    'Fruitvale': 1.0,
-    'Lake Merritt': 1.1,
-    'West Oakland': 1.0,
-    'Laurel': 0.9,
-    'Rockridge': 0.8,
-    'Jack London': 1.1,
-    'Uptown': 1.2,
-    'KONO': 1.0,
-    'Chinatown': 0.9,
-    'Piedmont Ave': 0.7
-  };
+  // engine.148: base weight from the sheet's CoreSimRank order, × the hood's
+  // floor deficit. The old 12-key literal left ten hoods on a silent `|| 1.0`.
+  var neighborhoodWeights = feederHoodWeights_(ctx, neighborhoods);
 
   // Arts neighborhoods for First Friday
   var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
@@ -584,7 +572,8 @@ function generateGenericCitizens_(ctx) {
     var weighted = [];
     for (var n = 0; n < neighborhoods.length; n++) {
       var neighborhood = neighborhoods[n];
-      var weight = weights[neighborhood] || 1.0;
+      var weight = weights[neighborhood];
+      if (weight === undefined) throw new Error('pickWeightedNeighborhood: no weight for ' + neighborhood + ' — feederHoodWeights_ must cover every core hood (engine.148).');
       var count = Math.round(weight * 10);
       for (var c = 0; c < count; c++) {
         weighted.push(neighborhood);
@@ -824,3 +813,15 @@ function generateGenericCitizens_(ctx) {
  *
  * ============================================================================
  */
+
+// engine.148: rank 1 draws at 1.3 sliding 0.03 per rank to a 0.6 floor (the
+// shape the old literal approximated), times (1 + 2·deficit) so an under-floor
+// hood pulls up to 3× its base until it reaches World_Config hoodCitizenFloor.
+function feederHoodWeights_(ctx, coreHoods) {
+  var w = {};
+  for (var i = 0; i < coreHoods.length; i++) {
+    var base = Math.max(0.6, 1.3 - 0.03 * i);
+    w[coreHoods[i]] = base * (1 + 2 * hoodFloorDeficit_(ctx, coreHoods[i]));
+  }
+  return w;
+}

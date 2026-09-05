@@ -76,7 +76,7 @@ console.log('═══ A. World_Config contract');
 
 function cascadeCtx(holiday, bonds) {
   return {
-    config: { ...APPROVED },
+    config: { ...APPROVED, gcSurfaceChance: 0.06, hoodFloorSurfaceQuota: 0 }, // engine.148 dials (self-armed on World_Config in prod)
     rng: () => 0.99,
     summary: { relationshipBonds: bonds, pendingCascades: [], eventArcs: [] }
   };
@@ -208,7 +208,7 @@ function generatorCtx(seed, cfg, grief, guaranteed) {
     ctx: {
       now: new Date(0),
       rng: mulberry32(seed),
-      config: { ...cfg, cycleCount: 101 },
+      config: { ...cfg, cycleCount: 101, gcSurfaceChance: 0.06, hoodFloorSurfaceQuota: 0 }, // engine.148 dials
       ss: { getSheetByName: () => null },
       summary: {
         cycleId: 101,

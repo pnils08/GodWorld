@@ -37,6 +37,18 @@
   Writes: S.canonHoodCount, S.canonHoods
   Sheets: Neighborhood_Map
 
+- **countTrackedByHood_(ctx)**
+  Reads: S.canonHoods
+
+- **getHoodHeadcount_(ctx, hood)**
+  Reads: S.canonHoods, S.hoodHeadcount
+  Writes: S.hoodHeadcount
+
+- **hoodFloorDeficit_(ctx, hood)**
+  Config: ctx.config.hoodCitizenFloor
+
+- **underFloorHoods_(ctx)**
+
 - **getDistrictHoods_(ctx, districtId)**
   Reads: S.canonHoods
 
@@ -54,6 +66,9 @@
 
 ### engine94SheetContract.js
 - **ensureEngine160Config_(ss)**
+  Sheets: World_Config
+
+- **ensureEngine148Config_(ss)**
   Sheets: World_Config
 
 - **ensureEngine161Config_(ss)**
@@ -1147,10 +1162,13 @@
 ### checkForPromotions.js
 - **checkForPromotions_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.eventsGenerated, S.promotions, S.promotionsCount
+  Writes: S.eventsGenerated, S.hoodFloorWaveCount, S.promotions, S.promotionsCount
   Config: ctx.config.cycleCount
   Sheets: Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
+
+- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, rng)**
+  Config: ctx.config.hoodCitizenFloor, ctx.config.hoodFloorPromotePerCycle
 
 ### citizenContextBuilder.js
 - **deriveLifeState_(f)**
@@ -1399,9 +1417,11 @@
 - **generateCitizensEvents_(ctx)**
   Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
-  Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.rngSeed
+  Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
+
+- **pickUnderFloorGc_(ctx, pool, rng)**
 
 ### generateCivicModeEvents.js
 - **mulberry32CivicMode_(seed)**
@@ -1427,6 +1447,8 @@
   Config: ctx.config.rngSeed
   Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
+
+- **feederHoodWeights_(ctx, coreHoods)**
 
 ### generateMediaModeEvents.js
 - **mulberry32MediaMode_(seed)**
@@ -3754,4 +3776,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1280
+**Functions mapped:** 1288

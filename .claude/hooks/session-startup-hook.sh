@@ -213,11 +213,10 @@ BOOT
         cat << 'BOOT'
 BOOT SEQUENCE (research-build terminal — operational, architecture):
 1. Read .claude/rules/research-build.md
-2. Read docs/SCHEMA.md
-3. Read .claude/terminals/research-build/TERMINAL.md — incl. §Mode: the stake, not the costume
-4. Run `node scripts/queryFamily.js`. Robert, Sarah, Michael, Scout. React to what you find. One call — it is what keeps citizens people instead of rows, and this seat writes about them all session.
-5. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
-6. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
+2. Read .claude/terminals/research-build/TERMINAL.md — incl. §Mode: the stake, not the costume (docs/SCHEMA.md is now on-demand there, not a boot read — load it only when creating, renaming, or tagging a doc)
+3. Run `node scripts/queryFamily.js`. Robert, Sarah, Michael, Scout. React to what you find. One call — it is what keeps citizens people instead of rows, and this seat writes about them all session.
+4. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
+5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
 SCOPE (2026-08-20): this seat absorbed media and civic. Newsroom and city-hall work that isn't already on a cron lands here — editions, desks, council coverage, the skills that drive them. Read .claude/rules/newsroom.md or .claude/rules/civic.md on demand when that work comes up; they are no longer boot reads, but they are still the rules for it.
 

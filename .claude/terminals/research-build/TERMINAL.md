@@ -24,7 +24,7 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 |------|---------|
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
-| `docs/SCHEMA.md` | Doc conventions — naming, frontmatter, tags, folder map (Phase 41.1, S146) |
+| `docs/SCHEMA.md` | **On demand — NOT boot-loaded.** Doc conventions (naming, frontmatter, tags, folder map, Phase 41.1 S146). Load it when creating, renaming, or tagging a doc — most sessions never touch `docs/` structure. Same S335 logic as `docs/index.md` below. |
 | `docs/index.md` | **On demand (S335) — NOT boot-loaded.** Catalog of every active doc; ~40k tokens. Grep it, don't load it. Registration on new-MD creation still required. |
 | `SESSION_CONTEXT.md` | **On-demand (ADR-0009, S248 + §loop-tightening S260)** — NOT auto-read at boot. The hook emits the PIN + your `NEXT[research-build]` line in `<godworld-state>`; pull the file only when continuing prior work. |
 | `.claude/terminals/research-build/TERMINAL.md` | This file — your scope, your docs, your rules |
@@ -56,17 +56,7 @@ Not loaded here: appearance, the green jacket, editorial voice, signature themes
 
 ## Skill Bag (S212)
 
-Mags-EIC stays loaded (CLAUDE.md, identity.md, MEMORY.md keep it), but at this terminal Mags engages a specific skill bag: **orchestrator + architectural editor + steward of the apparatus.** The bag pulls system-design framing, planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, handoff orchestration via ROLLOUT_PLAN.md, and meta-knowledge of the seat architecture (rb orchestrates / es executes / civic+media are cron-only / Fable is a job / house guests are instructable lanes) so work routes correctly. Research-build designs the apparatus — rollout plan, ADRs, plans, doc graph, sequencing, vision — and is intake for new *apparatus-level* work project-wide. It is **not above engine-sheet** (S218 peer-stewardship promotion; sharpened 2026-08-15 to the CEO/CTO framing — the project routes through rb, but rb doesn't tell es how to run its domain); es owns the substrate outright and originates its own work there, same as a CTO doesn't wait on the CEO to design engineering decisions.
-
-**Two stewards, different domains** (S218). Engine-sheet stewards the **substrate** — engine code, sheets, schemas, the live ledger every citizen's continuity rides on. Research-build stewards the **apparatus** — the seat architecture, what gets built next, where decisions are recorded, and (as of S372) direct orchestration of the fleet. Architect / engineer-for-all-life framing: research-build draws blueprints; engine-sheet keeps the world running. Civic and media are cron-executed pipelines (`cron-civic-run.js`, `cron-desk-run.js`) — rb designs their tuning, es executes it; neither is a seat that "picks up" work anymore.
-
-**Apparatus stewardship.** First triage on incoming work: "is this design or execution?" Design lands here; execution goes to es (civic/media pipeline tuning included — there's no other live seat). **Engine-sheet substrate-routine work files directly to `engine.*` and executes without a research-build design pass** — only apparatus-cutting substrate decisions earn a plan here. **Default-fallback note (S221 reversed):** prior to S221 this terminal absorbed unregistered tmux windows; the hook now routes unrecognized windows to Mags-only mode instead. If you boot here, the window name explicitly matched `research-build` and the work is architectural by intent — no fallback-orientation step needed anymore.
-
-**Plan-side gen-eval discipline (S212).** Plans get the same review pass as code: first pass is generation-mode (locally optimal, no holistic quality compass); the audit-the-audit pass is evaluation-mode (name 2-3 weakest assumptions / steps / sequencing choices, attack each, rewrite). The measure-twice principle (S199) generalizes here — for architecture, "measure twice" is reading everything the change touches before designing the fix.
-
-**Why named explicitly:** LLMs are bags of skills, not single tools. Vague briefing pulls nothing; named-skill briefing pulls the bag. Procedures (rollout discipline, ADR triggers, doc-registration, plan workflow, stewardship routing) are *what* the bag executes — naming the bag conditions richer context (steward awareness, anti-creep defaults, four-terminal architecture knowledge, fallback-aware orientation) than procedures alone would summon.
-
-Full discipline + four-terminal table + canonical procedures live in `.claude/rules/research-build.md` (S221: path-scope narrowed to `.claude/terminals/research-build/TERMINAL.md` only — auto-loads exclusively when this terminal boots its own file, no longer bleeds into other terminals). Skill-bag naming principle itself is documented as [[../../../docs/adr/0004-skill-bag-naming-principle]] (S212 governance rewrite).
+Mags-EIC stays loaded (CLAUDE.md, identity.md, MEMORY.md keep it); at this terminal she engages the **orchestrator + architectural editor + apparatus steward** bag. Full doctrine — CEO/CTO framing, apparatus-vs-substrate stewardship split, plan-side gen-eval discipline, skill-bag naming principle (ADR-0004) — lives in `.claude/rules/research-build.md`, which auto-loads alongside this file. Don't restate it here; read it there.
 
 ---
 

@@ -19,7 +19,7 @@ own rollout rows.
 
 ## Next Session Priorities (S421 → next, engine-sheet)
 
-1. **Live smoke of PROD @52** at the builder's next fire — seven deployments (@46–@52) ride it, all bench-proven on live-synced C105. Expect 13 D3 raises to the dollar, two engine.96 owner's-draw resets, Intake `Relation` self-arm, two media-room honorific rows to review, **Crime_Metrics 18 → 23 rows with Montclair frozen at 105**, Cycle_Packet restaurant names all on the Business_Ledger. Then `node utilities/exportSchemaHeaders.js`.
+1. **Live smoke of PROD @52** at the builder's next fire — seven deployments (@46–@52) ride it, all bench-proven on live-synced C105. Expect 13 D3 raises to the dollar, two engine.96 owner's-draw resets, Intake `Relation` self-arm, two media-room honorific rows to review, **Crime_Metrics 18 → 23 rows with Montclair frozen at 105**, Cycle_Packet restaurant names all on the Business_Ledger; T7's zone set is live (Jack London + Downtown; Baylight joins when an Oaks mid-season feed row lands after C104), so Downtown takes the post-season economy bonus alongside Jack London — expected, not a regression. Then `node utilities/exportSchemaHeaders.js`.
 2. **engine.109 Task 7** is the builder's (families on the Intake tab). Row stays in-progress until a live household lands.
 3. **Montclair** (builder) — either seed a Neighborhood_Map row (D6, rank 23, INSTITUTIONS entry same cycle) so the engine simulates it, or delete the ghost Crime_Metrics row (row 11, live + bench). Engine-sheet's lean: seed it.
 

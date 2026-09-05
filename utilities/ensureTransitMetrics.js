@@ -559,26 +559,4 @@ function getNearestBARTStation_(neighborhood) {
  * @param {string} neighborhood
  * @return {string}
  */
-function getCorridorForNeighborhood_(neighborhood) {
-  var corridorMap = {
-    'Downtown': 'Broadway',
-    'Lake Merritt': 'Grand Ave',
-    'Temescal': 'Telegraph Ave',
-    'Rockridge': 'Telegraph Ave',
-    'Fruitvale': 'International Blvd',
-    'East Oakland': 'International Blvd',
-    'West Oakland': 'I-880 North',
-    'Jack London': 'I-880 North',
-    'Coliseum': 'I-880 South',
-    'Montclair': 'I-580 East',
-    'Piedmont Ave': 'Broadway',
-    'Grand Lake': 'Grand Ave',
-    'Adams Point': 'Grand Ave',
-    'Chinatown': 'Broadway',
-    'Dimond': 'MacArthur Blvd',
-    'Glenview': 'I-580 East',
-    'Elmhurst': 'International Blvd'
-  };
-
-  return corridorMap[neighborhood] || 'I-880 North';
-}
+// engine.148 P2: getCorridorForNeighborhood_ (17-key hood→corridor literal, 3 stale hoods, zero callers) deleted.

@@ -242,13 +242,9 @@ function generateCrisisSpikes_(ctx) {
   // hood without an entry runs at neutral 1.0, so promoting a hood via the
   // sheet needs no deploy.
   // ═══════════════════════════════════════════════════════════════════════════
-  var CRISIS_HOOD_WEIGHTS = {
-    'Temescal': 0.9, 'Downtown': 1.2, 'Fruitvale': 1.0, 'Lake Merritt': 0.8,
-    'West Oakland': 1.3, 'Laurel': 0.7, 'Rockridge': 0.6, 'Jack London': 1.0,
-    'Uptown': 1.1, 'KONO': 0.9, 'Chinatown': 1.0, 'Piedmont Ave': 0.5
-  };
+  // engine.148 P2: crisis weight is earned from the hood's own state (IncomeTier + CrimeIndex), see crisisHoodWeight_; no literal.
   var neighborhoods = getCoreSimNeighborhoods_(ctx).map(function(name) {
-    return { name: name, weight: CRISIS_HOOD_WEIGHTS[name] || 1.0 };
+    return { name: name, weight: crisisHoodWeight_(ctx, name) };
   });
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -456,3 +452,17 @@ function generateCrisisSpikes_(ctx) {
  * 
  * ============================================================================
  */
+
+// engine.148 P2: pressure, not priors. 0.5 + 0.15 × (6 − IncomeTier) + 0.3 × (CrimeIndex − 0.7),
+// clamped 0.4–1.5. A tier-1 hood with average crime ≈ 1.26; a tier-6 hood ≈ 0.54.
+// IncomeTier is authored on Neighborhood_Map, CrimeIndex is engine-written — the
+// weight moves with the sim (ADR-0015 §3). Missing state throws.
+function crisisHoodWeight_(ctx, hood) {
+  var st = ctx && ctx.summary && ctx.summary.neighborhoodState ? ctx.summary.neighborhoodState[hood] : null;
+  if (!st) throw new Error('crisisHoodWeight_: no S.neighborhoodState for ' + hood + ' — Phase2-NeighborhoodState must run before Phase3-CrisisSpikes (engine.148 P2).');
+  var tier = Number(st.incomeTier), crime = Number(st.crimeIndex);
+  if (!isFinite(tier) || tier <= 0) throw new Error('crisisHoodWeight_: Neighborhood_Map.IncomeTier missing for ' + hood + ' (engine.148 P2).');
+  if (!isFinite(crime)) crime = 0.7;
+  var w = 0.5 + 0.15 * (6 - tier) + 0.3 * (crime - 0.7);
+  return Math.max(0.4, Math.min(1.5, Math.round(w * 100) / 100));
+}

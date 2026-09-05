@@ -226,34 +226,9 @@ var ECONOMIC_PARAMETERS = [
 
 var BASE_FEMALE_PCT_ = 0.51;
 
-// Per-neighborhood gender variance — calibrated against real Oakland census +
-// prosperity-era assumptions. Values are p(female).
-var NEIGHBORHOOD_GENDER_VARIANCE_ = {
-  // Canon-12 (Simulation_Ledger neighborhoods)
-  'Temescal': 0.51,
-  'Downtown': 0.51,
-  'Fruitvale': 0.50,
-  'Lake Merritt': 0.52,
-  'West Oakland': 0.50,
-  'Laurel': 0.51,
-  'Rockridge': 0.51,
-  'Jack London': 0.49,
-  'Uptown': 0.50,
-  'KONO': 0.50,
-  'Chinatown': 0.51,
-  'Piedmont Ave': 0.52,
-  // Fine-grained extras (Neighborhood_Map)
-  'Adams Point': 0.53,
-  'Coliseum': 0.49,
-  'Eastlake': 0.50,
-  'Montclair': 0.51,
-  'San Antonio': 0.50,
-  'Glenview': 0.51,
-  'Ivy Hill': 0.51,
-  'Elmhurst': 0.50
-  // engine.99 Cohort 2 — dead keys removed: 'Coliseum District' (spelling
-  // variant) + 'Jingletown' (off-roster); zero live SL citizens in either.
-};
+// engine.148 P2: the per-neighborhood gender table is gone (20 keys, 3 stale, 5
+// tracked hoods missing — a ±0.03 texture nobody could author for 22 hoods).
+// Every hood draws at BASE_FEMALE_PCT_; the signature keeps `neighborhood`.
 
 var ANCHOR_YEAR_ = 2041;
 var FALLBACK_INCOME_ = 60000;
@@ -470,7 +445,7 @@ function deriveEducationLevel_(seed, neighborhood, age, ledgerFreq) {
 }
 
 function deriveGender_(seed, neighborhood) {
-  var p = NEIGHBORHOOD_GENDER_VARIANCE_[neighborhood] != null ? NEIGHBORHOOD_GENDER_VARIANCE_[neighborhood] : BASE_FEMALE_PCT_;
+  var p = BASE_FEMALE_PCT_; // engine.148 P2 — neighborhood no longer tilts the draw
   return rand01_(seed, 'gender') < p ? 'female' : 'male';
 }
 

@@ -2,7 +2,7 @@
   "generated": "2026-09-05",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1288,
+  "functionsMapped": 1295,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -792,14 +792,26 @@
         "phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_"
       ],
       "readers": [
+        "phase01-config/canonNeighborhoodLoader.js::buildAdjacencyFromSheet_",
         "phase01-config/canonNeighborhoodLoader.js::countTrackedByHood_",
         "phase01-config/canonNeighborhoodLoader.js::getCanonNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::getCoreSimNeighborhoods_",
         "phase01-config/canonNeighborhoodLoader.js::getDistrictHoods_",
+        "phase01-config/canonNeighborhoodLoader.js::getHoodAttention_",
         "phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_",
+        "phase01-config/canonNeighborhoodLoader.js::getHoodWeatherZone_",
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"
+      ]
+    },
+    "neighborhoodAdjacency": {
+      "writers": [
+        "phase01-config/canonNeighborhoodLoader.js::loadCanonNeighborhoods_"
+      ],
+      "readers": [
+        "phase01-config/canonNeighborhoodLoader.js::getAdjacentHoods_",
+        "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_"
       ]
     },
     "hoodHeadcount": {
@@ -1685,8 +1697,7 @@
       ],
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase02-world-state/applyCityDynamics.js::getClusterDynamics_",
-        "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_"
+        "phase02-world-state/applyCityDynamics.js::getClusterDynamics_"
       ]
     },
     "clusterDynamics": {
@@ -2308,6 +2319,7 @@
       "readers": [
         "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisSpikes.js::crisisHoodWeight_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
@@ -2532,18 +2544,6 @@
       "writers": [],
       "readers": [
         "phase03-population/updateCrimeMetrics.js::derivePatrolStrategy_"
-      ]
-    },
-    "clusterDefs": {
-      "writers": [],
-      "readers": [
-        "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_"
-      ]
-    },
-    "neighborhoodAdjacency": {
-      "writers": [],
-      "readers": [
-        "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_"
       ]
     },
     "demographicShifts": {

@@ -127,20 +127,7 @@ function prioritizeEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOOD IMPORTANCE (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoodWeight = {
-    'Downtown': 1.3,
-    'West Oakland': 1.2,
-    'Jack London': 1.15,
-    'Uptown': 1.15,
-    'Fruitvale': 1.1,
-    'Chinatown': 1.1,
-    'Temescal': 1.0,
-    'KONO': 1.0,
-    'Lake Merritt': 0.95,
-    'Rockridge': 0.9,
-    'Piedmont Ave': 0.85,
-    'Laurel': 0.8
-  };
+  // engine.148 P2: event weight = 0.8 + 0.25 × Neighborhood_Map.AttentionWeight (0–2 → 0.8–1.3); no literal.
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY-DOMAIN AFFINITY (v2.2)
@@ -351,7 +338,8 @@ function prioritizeEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // NEIGHBORHOOD IMPORTANCE (applied last as multiplier)
     // ═══════════════════════════════════════════════════════════════════════
-    var nWeight = neighborhoodWeight[evNeighborhood] || 1.0;
+    var nwHood = eventHoodOrNull_(ctx, evNeighborhood); // blank → citywide 1.0; unknown name throws
+    var nWeight = nwHood ? eventHoodWeight_(ctx, nwHood) : 1.0;
     score = Math.round(score * nWeight);
 
     return score;
@@ -483,3 +471,8 @@ function prioritizeEvents_(ctx) {
  * 
  * ============================================================================
  */
+
+// engine.148 P2: the one attention knob mapped onto the old 0.8–1.3 priority band.
+function eventHoodWeight_(ctx, hood) {
+  return 0.8 + 0.25 * getHoodAttention_(ctx, hood);
+}

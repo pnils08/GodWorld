@@ -34,8 +34,22 @@
 
 ### canonNeighborhoodLoader.js
 - **loadCanonNeighborhoods_(ctx)**
-  Writes: S.canonHoodCount, S.canonHoods
+  Writes: S.canonHoodCount, S.canonHoods, S.neighborhoodAdjacency
   Sheets: Neighborhood_Map
+
+- **buildAdjacencyFromSheet_(ctx, raw)**
+  Reads: S.canonHoods
+
+- **getAdjacentHoods_(ctx, hood)**
+  Reads: S.neighborhoodAdjacency
+
+- **getHoodWeatherZone_(ctx, hood)**
+  Reads: S.canonHoods
+
+- **getHoodAttention_(ctx, hood)**
+  Reads: S.canonHoods
+
+- **eventHoodOrNull_(ctx, name)**
 
 - **countTrackedByHood_(ctx)**
   Reads: S.canonHoods
@@ -311,6 +325,8 @@
   Writes: S.sportsAtmosphereEnabled
 
 ### applyWeatherModel.js
+- **hoodWeatherProfile_(ctx, hood)**
+
 - **applyWeatherModel_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.cycleOfYear, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodWeather, S.previousCycleState, S.previousSeason, S.season, S.simMonth, S.weather, S.weatherEventPools, S.weatherEvents, S.weatherFrontTracking, S.weatherSummary, S.weatherTracking
   Writes: S.neighborhoodWeather, S.previousSeason, S.weather, S.weatherEventPools, S.weatherEvents, S.weatherFrontTracking, S.weatherMood, S.weatherSummary, S.weatherTracking
@@ -508,6 +524,9 @@
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
+- **crisisHoodWeight_(ctx, hood)**
+  Reads: S.neighborhoodState
+
 ### generateMonthlyDriftReport.js
 - **generateMonthlyDriftReport(ssOverride)**
   Sheets: World_Drift_Report, World_Population
@@ -535,7 +554,7 @@
 - **clamp01_(n)**
 
 - **buildCrimeAdjacencyGraph_(S)**
-  Reads: S.clusterDefinitions, S.clusterDefs, S.neighborhoodAdjacency
+  Reads: S.neighborhoodAdjacency
 
 - **computeHotspotPressure_(currentMetrics, adjacency)**
 
@@ -2203,6 +2222,8 @@
   Reads: S.cityDynamics, S.civicLoad, S.demographicShifts, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.neighborhoodDemographics, S.patternFlag, S.season, S.shockFlag, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventPrioritization
 
+- **eventHoodWeight_(ctx, hood)**
+
 ## Phase 7: Evening Media (`phase07-evening-media/`)
 
 ### applyStorySeeds.js
@@ -3458,8 +3479,6 @@
 
 - **getNearestBARTStation_(neighborhood)**
 
-- **getCorridorForNeighborhood_(neighborhood)**
-
 ### ensureWorldEventsV3Ledger.js
 - **ensureWorldEventsV3Ledger_(ctx)**
   Sheets: WorldEvents_V3_Ledger
@@ -3776,4 +3795,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1288
+**Functions mapped:** 1295

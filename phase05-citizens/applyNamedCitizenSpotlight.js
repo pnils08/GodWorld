@@ -151,20 +151,7 @@ function applyNamedCitizenSpotlights_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOOD SPOTLIGHT BONUS (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  var neighborhoodBonus = {
-    'Downtown': 2,
-    'West Oakland': 1.5,
-    'Jack London': 1.5,
-    'Uptown': 1.5,
-    'Fruitvale': 1,
-    'Chinatown': 1,
-    'Temescal': 1,
-    'KONO': 1,
-    'Lake Merritt': 0.5,
-    'Rockridge': 0.5,
-    'Piedmont Ave': 0,
-    'Laurel': 0
-  };
+  // engine.148 P2: the neighborhood bonus is Neighborhood_Map.AttentionWeight (0–2); no literal.
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY-DOMAIN SPOTLIGHT BOOST (v2.2)
@@ -253,7 +240,8 @@ function applyNamedCitizenSpotlights_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // NEIGHBORHOOD BONUS (per-event, correct)
     // ═══════════════════════════════════════════════════════════════════════
-    var nb = neighborhoodBonus[neighborhood] || 0;
+    var nbHood = eventHoodOrNull_(ctx, neighborhood); // blank → citywide, no bonus; unknown name throws
+    var nb = nbHood ? getHoodAttention_(ctx, nbHood) : 0;
     if (nb > 0) {
       scores[pid] += nb;
       addReason(pid, "spotlight:" + neighborhood);

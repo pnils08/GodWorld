@@ -2026,6 +2026,8 @@
 
 - **shouldStartCampaign_(status, newApproval, existingCampaign)**
 
+- **seedOccupiedPopIds_(ledgerData, iPopId, iStatus, iNotes)**
+
 - **parseCampaignNote_(notes)**
 
 - **stripCampaignNote_(notes)**
@@ -2052,6 +2054,7 @@
   Sheets: Generic_Citizens
 
 - **mintOutOfTownChallenger_(ctx, district, officeId, cycle)**
+  Sheets: Generic_Citizens
 
 - **pickCampaignChallenger_(ctx, district, incumbentPopId, occupiedPopIds, officeId, cycle)**
 
@@ -3863,4 +3866,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 189
-**Functions mapped:** 1317
+**Functions mapped:** 1318

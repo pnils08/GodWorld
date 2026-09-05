@@ -2,7 +2,7 @@
   "generated": "2026-09-04",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 189,
-  "functionsMapped": 1317,
+  "functionsMapped": 1318,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4331,7 +4331,8 @@
       "writers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
-        "phase05-citizens/processAdvancementIntake.js::processMediaUsage_"
+        "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
+        "phase05-citizens/updateCivicApprovalRatings.js::mintOutOfTownChallenger_"
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
@@ -4350,6 +4351,7 @@
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
         "phase05-citizens/processAdvancementIntake.js::seedEmergenceBonds_",
         "phase05-citizens/runYouthEngine.js::getGenericYouth_",
+        "phase05-citizens/updateCivicApprovalRatings.js::mintOutOfTownChallenger_",
         "phase05-citizens/updateCivicApprovalRatings.js::pickGenericCitizenChallenger_",
         "phase07-evening-media/mediaRoomIntake.js::routeCitizenUsageToIntake_",
         "utilities/cycleRollback.js::rollbackToCycle78"

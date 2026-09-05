@@ -350,7 +350,7 @@ function writeReverseMd(reverse, meta) {
 }
 
 function main() {
-  const date = new Date().toISOString().slice(0, 10);
+  const date = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
   const forward = [];
   forward.push('# Engine Stub Map');
   forward.push('');

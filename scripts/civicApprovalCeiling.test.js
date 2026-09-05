@@ -27,6 +27,7 @@ const A = new Function(approvalSource + '\nreturn {' +
   'stripCampaignNote_: stripCampaignNote_,' +
   'formatCampaignNote_: formatCampaignNote_,' +
   'pickCampaignChallenger_: pickCampaignChallenger_,' +
+  'seedOccupiedPopIds_: seedOccupiedPopIds_,' +
   'scoreLedgerCitizenForOffice_: scoreLedgerCitizenForOffice_,' +
   'challengerDialStateJson_: challengerDialStateJson_,' +
   'MOTION_LADDERS_: MOTION_LADDERS_' +
@@ -397,6 +398,32 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   check('H11 out-of-town defaults pump Drive/Integrity/Composure and dump Family',
     defaults.base.drive >= 70 && defaults.base.integrity >= 60 &&
     defaults.base.composure >= 60 && defaults.base.family < 50);
+
+  // civic.32 — one citizen, one race. Bench C112 readback: Shai Diaz ran for D3
+  // (since 111) and D5 (since 112); Ingrid Bautista seated as Mayor at C112 and
+  // was picked as D2's challenger the same pass. The occupied set is seeded from
+  // holders AND every campaign note, before the office loop.
+  const oH = ['OfficeId', 'PopId', 'Status', 'Notes'];
+  const oNote = A.formatCampaignNote_({ pop: 'POP-00900', name: 'Better Local', since: 111 }, '');
+  const offices = [
+    oH,
+    ['MAYOR',      'POP-00034', 'active', oNote],   // Better Local is already running here
+    ['COUNCIL-D3', 'POP-00777', 'active', ''],
+    ['COUNCIL-D5', '',          'vacant', ''],      // a vacant seat holds nobody
+    ['COUNCIL-D7', 'POP-00778', 'active', oNote.replace('POP-00900', 'POP-00901').replace('Better Local', 'Local Organizer')]
+  ];
+  const seeded = A.seedOccupiedPopIds_(offices, 1, 2, 3);
+  check('H12 holders are occupied, a vacant seat is not',
+    seeded['POP-00034'] === true && seeded['POP-00777'] === true && seeded['POP-00778'] === true &&
+    Object.keys(seeded).length === 5, JSON.stringify(seeded));
+  check('H12b every citizen already campaigning in ANY office is occupied',
+    seeded['POP-00900'] === true && seeded['POP-00901'] === true, JSON.stringify(seeded));
+  const secondRace = A.pickCampaignChallenger_({ ledger }, 'D3', 'POP-00777', seeded);
+  check('H12c a citizen running one race is not picked for a second — the pool falls to the next name',
+    !!secondRace && secondRace.popId === 'POP-00902', JSON.stringify(secondRace));
+  const noNotes = A.seedOccupiedPopIds_(offices, 1, 2, -1);
+  check('H12d without a Notes column the seed is holders only (old behaviour, no throw)',
+    Object.keys(noNotes).length === 3 && !noNotes['POP-00900']);
 }
 
 // ── G-PF19 + G-PF34: the civic scoring contract ─────────────────────────────

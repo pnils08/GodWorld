@@ -306,12 +306,7 @@ function updateCivicApprovalRatings_(ctx) {
   // CALCULATE APPROVAL CHANGES
   // ═══════════════════════════════════════════════════════════════════════════
 
-  var occupiedPopIds = {};
-  for (var op = 1; op < ledgerData.length; op++) {
-    var opPop = iPopId !== -1 ? String(ledgerData[op][iPopId] || '').trim() : '';
-    var opStatus = iStatus !== -1 ? String(ledgerData[op][iStatus] || '').trim().toLowerCase() : '';
-    if (opPop && opStatus !== 'vacant') occupiedPopIds[opPop] = true;
-  }
+  var occupiedPopIds = seedOccupiedPopIds_(ledgerData, iPopId, iStatus, iNotes);
 
   var changes = [];
   var approvalTriggers = [];
@@ -908,6 +903,27 @@ function shouldStartCampaign_(status, newApproval, existingCampaign) {
 }
 
 var CAMPAIGN_RE_ = /\[CAMPAIGN pop=(POP-\d+) name=([^\]|]+?) since=(\d+)\]/;
+
+/**
+ * civic.32 — one citizen, one race. The occupied set is every office HOLDER
+ * (a vacant seat holds nobody) plus every citizen already CAMPAIGNING in any
+ * office's Notes. Seeded once, before the office loop, so row order cannot
+ * matter: a challenger picked for D3 last Cycle is not free for D5 this Cycle,
+ * and a challenger who seats this Cycle (their pop is in the note that seats
+ * them) is not free to be picked again as another office's challenger.
+ */
+function seedOccupiedPopIds_(ledgerData, iPopId, iStatus, iNotes) {
+  var occupied = {};
+  for (var op = 1; op < ledgerData.length; op++) {
+    var opRow = ledgerData[op] || [];
+    var opPop = iPopId !== -1 ? String(opRow[iPopId] || '').trim() : '';
+    var opStatus = iStatus !== -1 ? String(opRow[iStatus] || '').trim().toLowerCase() : '';
+    if (opPop && opStatus !== 'vacant') occupied[opPop] = true;
+    var running = iNotes !== -1 ? parseCampaignNote_(opRow[iNotes]) : null;
+    if (running && running.pop) occupied[running.pop] = true;
+  }
+  return occupied;
+}
 
 function parseCampaignNote_(notes) {
   var m = String(notes || '').match(CAMPAIGN_RE_);

@@ -336,6 +336,18 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S425 (2026-09-05, engine-sheet)
+
+| ID | Description | Status | Owner | Pointer |
+|---|---|---|---|---|
+| engine.131 | Sports coupling — T1–T4 live; T7 (the sports zone follows the stadium) LIVE PROD @52 S423 after the builder ruled option 2 (engine drives civic: a franchise opening advances INIT-006 — `95da9e52`, live since, lit by T7); bench C111/C112 proof in plan §T7 shipped. Rhea roster fix is Node (`f5f4a487`). Live lights when an Oaks mid-season feed row lands after C104. Open question 1 (phase carry across a quiet cycle) stays a design note | done | engine-sheet | [[../plans/2026-08-27-sports-coupling-restore]] §T7 shipped |
+| engine.134 | Hood identity — ALL tasks LIVE: 4–8 at PROD @51, 2–3 at PROD @52 (economy blob + business fold from the ledger set; bench C111/C112). Open: live smoke at C106; Montclair (seed a Neighborhood_Map row or delete the ghost Crime_Metrics row — builder) | done | engine-sheet | [[../plans/2026-08-30-hood-identity-remainder-plan]] §Changelog |
+| engine.138 | C105 chase S-A…S-E all done. Recheck S423: G-PF33 clear-branch fix LIVE at PROD @15, v2.1 at @16 (DEPLOY_HISTORY); S-B wake acceptance MET — `openThreads` in 15 wake states, `\| advanced` rendered in 8 articles 09-02..09-04. Saturday cron ledger write is unattended proof, not a gate | done | engine-sheet | [[../plans/2026-08-31-c105-chase-sessions]] §Changelog |
+| civic.18 | District map reconciliation — DONE S423: 4c/4d LIVE PROD @51 (approval engine reads `Neighborhood_Map.District`); Task 1 WITHDRAWN (builder 2026-09-05: Montclair is not a tracked hood) and the Node mirror stripped to the 22 sheet rows (= 4e). Leftover: ghost `Crime_Metrics` Montclair row, hand delete (live + bench) | done | engine-sheet | [[../plans/2026-08-15-district-map-reconciliation]] §7 |
+| civic.20 | Civic edge migration — RE-SCOPED S423 against S391/S406 doctrine (civic is background; approval scoring unchanged; initiatives hand-fed). E1 → civic.18 (4c/4d shipped S423); E2 → engine.134 T4; E3 MOOT (live read: all 25 non-canon Household_Ledger rows are dissolved; the 14 non-canon Business_Ledger values are child-fold aliases + City-wide, engine.134 T2); E4 done; E5/§8/§10 RULED OUT; E6 literal long tail rides engine.99 on touch. Nothing left to build under this id | done | engine-sheet | [[../plans/2026-08-15-civic-edge-truth-migration]] §Changelog 2026-09-05 |
+
+engine.131/134/138 + civic.18/20 all closed S423 (PROD @51–@53, live-verified); swept at the S425 hard close. Successor work: engine.148 (hood-blind engines) + engine.99 long tail.
+
 ### Archive Pass — S421 (2026-09-05, engine-sheet)
 
 | ID | Description | Status | Owner | Pointer |

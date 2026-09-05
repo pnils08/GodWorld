@@ -336,6 +336,19 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S421 (2026-09-05, engine-sheet)
+
+| ID | Description | Status | Owner | Pointer |
+|---|---|---|---|---|
+| engine.142 | Dead-file delete batch (G-PF32 S-D): 6 files deleted S419, caller graph + collision audit clean, 16 truth docs trued, STUB/COL_MAP regenerated; bench @42 C114 clean, LIVE PROD @48 | done | engine-sheet | [[../plans/2026-08-31-c105-chase-sessions]] §S-D DONE + §Changelog S419 |
+| engine.141 | Storyline_Tracker's two engine readers RETIRED S419 (live: 239/239 rows abandoned, both readers filtered to active → emitting nothing): `storylineHealthEngine.js` + `updateStorylineStatusv1.2.js` deleted, `storyHook.js` tracker block cut, Phase8-StorylineHealth slot off; bench C106 clean (131 phases), LIVE PROD @49 | done | engine-sheet | [[../engine/SHEETS_MANIFEST]] §Storyline_Tracker + [[../plans/2026-08-31-c105-chase-sessions]] §Changelog S419 |
+| engine.2 | Phase 42 writer consolidation | done | engine-sheet | [[../plans/2026-04-28-phase-42-writer-consolidation]] — B7's C100 smoke gate long cleared, `processAdvancementIntake.js` under live edit as of today (S417), closed 2026-09-04 |
+| engine.31 | Citizen dial engine | done | engine-sheet | [[../plans/2026-05-31-compression-tag-triage]] — deployed S256, DialState confirmed live-load-bearing across 9+ current phase04/05 files, closed 2026-09-04 |
+| engine.32 | Life-event generation | done | engine-sheet | [[../plans/2026-05-31-life-event-generation]] — T7 Conduct generator (`runConductEngine.js`) confirmed live today, closed 2026-09-04 |
+| research.14 | Citizen-loop Phase 2 | done | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] §research.14 row: "LOOP CLOSED S277" — 143 sessions stale, closed 2026-09-04 |
+
+engine.142/engine.141 shipped S419 (PROD @48/@49). engine.2/31/32/research.14 were closed by research-build's S420 triage and swept here.
+
 ### Archive Pass — S407 (2026-09-01, engine-sheet)
 
 | ID | Description | Status | Owner | Pointer |

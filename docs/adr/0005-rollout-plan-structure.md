@@ -74,7 +74,7 @@ Replace inline narrative with table rows:
 |---|------|-------|-------|---------|
 | pipeline.1 | C93 sift gap log triage | needs-info | media | [[output/production_log_edition_c93_sift_gaps]] |
 | engine.1 | Phase 42 §5.6 ctx.ledger redesign | in-progress | engine-sheet | [[plans/2026-04-28-phase-42-writer-consolidation]] |
-| canon.1 | Bay-tribune unified ingest rebuild | blocked | research-build/engine-sheet | [[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]] |
+| canon.1 | Bay-tribune unified ingest rebuild | blocked | research-build/engine-sheet | [[archive/plans/2026-04-30-bay-tribune-unified-ingest-rebuild]] |
 ```
 
 Five columns:

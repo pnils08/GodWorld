@@ -11,13 +11,13 @@ sources:
   - phase05-citizens/citizenContextBuilder.js (deriveLifeState_)
   - scripts/draftContentRows.js
   - docs/plans/2026-07-01-persistence-seams-content-ledger.md (Design A)
-  - docs/plans/2026-07-06-content-ledger-auto-authoring.md (engine.49)
+  - docs/archive/plans/2026-07-06-content-ledger-auto-authoring.md (engine.49)
   - docs/plans/2026-07-18-event-pools-design.md §D
   - docs/research/2026-07-06-city-citizen-seam-audit.md
   - schemas/SCHEMA_HEADERS.md (Event_Content_Ledger — 253 rows, 9 cols)
 pointers:
   - "[[../plans/2026-07-01-persistence-seams-content-ledger]] — parent Design A"
-  - "[[../plans/2026-07-06-content-ledger-auto-authoring]] — auto-authoring (engine.49)"
+  - "[[../archive/plans/2026-07-06-content-ledger-auto-authoring]] — auto-authoring (engine.49)"
   - "[[../research/2026-07-06-city-citizen-seam-audit]] — three event layers; Layer 1 is the volume"
 ---
 

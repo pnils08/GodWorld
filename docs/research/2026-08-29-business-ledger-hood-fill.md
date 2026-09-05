@@ -15,7 +15,7 @@ pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state home; Claude files the row on accept"
   - "[[../research/index]] — register here on accept, same commit Claude moves this file"
   - "[[../canon/INSTITUTIONS]] — hood essence this fill was written against"
-  - "[[../plans/2026-08-22-engine-agent-fleet]] §9 — engine-wiring; OpenRouter Haiku path"
+  - "[[../archive/plans/2026-08-22-engine-agent-fleet]] §9 — engine-wiring; OpenRouter Haiku path"
 ---
 
 # Business_Ledger six-per-hood fill — research

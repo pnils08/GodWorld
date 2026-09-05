@@ -22,7 +22,7 @@ sources:
 pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pipeline.52"
   - "[[index]] — research sub-catalog"
-  - "[[../plans/2026-08-08-journalist-heat-slice-packs]] — ignited plan"
+  - "[[../archive/plans/2026-08-08-journalist-heat-slice-packs]] — ignited plan"
 ---
 
 # Journalist heat-slice architecture — research
@@ -126,9 +126,9 @@ Hal and Anthony **share player/feed substrate**, not each other’s bags. Hal mu
 
 ## Verdict: `adopt`
 
-Mike-agreed 2026-08-08: shared packs + persona overlays; evening first; Anthony analytic; Hal sports historian with own bag on shared sports substrate. Ignites plan [[../plans/2026-08-08-journalist-heat-slice-packs]] and rollout **pipeline.52**.
+Mike-agreed 2026-08-08: shared packs + persona overlays; evening first; Anthony analytic; Hal sports historian with own bag on shared sports substrate. Ignites plan [[../archive/plans/2026-08-08-journalist-heat-slice-packs]] and rollout **pipeline.52**.
 
-**Ignited plans:** [[../plans/2026-08-08-journalist-heat-slice-packs]]
+**Ignited plans:** [[../archive/plans/2026-08-08-journalist-heat-slice-packs]]
 
 ---
 

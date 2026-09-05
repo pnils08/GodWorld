@@ -7,12 +7,12 @@ tags: [engine, citizens, heritage, household, tier, dials, active]
 sources:
   - builder direction 2026-09-02 (S411, engine-sheet chat) — recorded verbatim in §Direction
   - docs/engine/TIER_MOBILITY.md — the three mobility mechanisms as they exist
-  - docs/plans/2026-09-01-education-career-connection.md — the four loops + engine.145/146 this arc builds on
+  - docs/archive/plans/2026-09-01-education-career-connection.md — the four loops + engine.145/146 this arc builds on
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — engine.147"
   - "[[engine/TIER_MOBILITY]] — CLIMB / fame door / demotion as built"
   - "[[plans/2026-05-30-citizen-lifecycle-fame-system]] — engine.29, parked; the fame half of this arc"
-  - "[[plans/2026-07-13-family-household-loop-build]] — the household half, as built"
+  - "[[archive/plans/2026-07-13-family-household-loop-build]] — the household half, as built"
   - "[[plans/2026-07-31-citizen-memory-perception]] — engine.94, dials + memory + approval ceiling"
   - "[[index]] — registered same commit"
 ---

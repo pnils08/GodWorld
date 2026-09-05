@@ -6,7 +6,7 @@ type: reference
 tags: [infrastructure, media, active]
 sources:
   - docs/plans/2026-07-10-notebooklm-bridge-deploy.md
-  - docs/plans/2026-07-25-notebooklm-source-search-wiring.md
+  - docs/archive/plans/2026-07-25-notebooklm-source-search-wiring.md
   - docs/research/2026-07-10-notebooklm-mcp.md
   - config/notebooklm.json
   - scripts/notebooklmCanonSearch.js
@@ -19,7 +19,7 @@ sources:
   - https://github.com/jacob-bd/gemini-notebook-mcp-cli
 pointers:
   - "[[../plans/2026-07-10-notebooklm-bridge-deploy]] — build history, proofs, and remaining acceptance gate"
-  - "[[../plans/2026-07-25-notebooklm-source-search-wiring]] — fail-closed source policy, wrapper, routing, and observability"
+  - "[[../archive/plans/2026-07-25-notebooklm-source-search-wiring]] — fail-closed source policy, wrapper, routing, and observability"
   - "[[../research/2026-07-10-notebooklm-mcp]] — adoption research and canon-authority decision"
   - "[[../EDITION_PIPELINE_DEEP_DISPATCH]] — flagship publication path that converges on post-publish"
   - "[[../OPERATIONS]] — general GodWorld operations"

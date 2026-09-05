@@ -320,7 +320,7 @@ Rebuilds `output/desk-packets/base_context.json` (the cycle source-of-truth that
 
 Side effect: takes ~60 seconds. Harmless — desk packets get rebuilt anyway pre-cycle, and the bot's worldview catches up on its next hourly tick.
 
-Plan reference: [[../../../docs/plans/2026-04-26-discord-bot-edition-currency]] Task 1 (S180 surfaced; S184 wired here).
+Plan reference: [[../../../docs/archive/plans/2026-04-26-discord-bot-edition-currency]] Task 1 (S180 surfaced; S184 wired here).
 
 **Verification gate:** `output/desk-packets/base_context.json` mtime updated; the cycle field matches `<XX>` — the field is **nested**, so check `jq '.baseContext.cycle' output/desk-packets/base_context.json`, NOT `jq '.cycle'` (top-level `.cycle` returns `null` and false-alarms; the top-level keys are `baseContext` / `bondStats` / `canon` / `householdStats`). (G-P-C99-1.)
 

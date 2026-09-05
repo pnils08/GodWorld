@@ -105,7 +105,7 @@ GAME citizens do NOT get career transitions, household formation, education, or 
 
 ### Source-built sports state intake (not deployed)
 
-[[plans/2026-08-02-sports-stat-event-intake]] adds a separately gated
+[[archive/plans/2026-08-02-sports-stat-event-intake]] adds a separately gated
 Dashboard writer for four exact, existing-citizen actions: injury, return,
 call-up, and trade-away. Every confirmation resolves one POPID and physical
 roster row plus one `Simulation_Ledger` row, then applies the feed row and all

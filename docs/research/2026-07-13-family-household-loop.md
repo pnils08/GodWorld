@@ -12,7 +12,7 @@ pointers:
   - "[[../engine/ROLLOUT_PLAN]] — pending-state home"
   - "[[index]] — registered same commit"
   - "[[../SIMULATION_LEDGER]] — citizen column reference this redesign lands on"
-  - "[[../plans/2026-07-12-engine55-intra-city-relocation]] — relocation engine this must stay compatible with"
+  - "[[../archive/plans/2026-07-12-engine55-intra-city-relocation]] — relocation engine this must stay compatible with"
 ---
 
 # Family/Household Loop — audit + final-concept research

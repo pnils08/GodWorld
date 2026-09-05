@@ -85,7 +85,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.1 | Phase 40.2 cattle refactor (needs plan) | blocked | engine-sheet | [[engine/archive/PHASE_40_PLAN]] §40.2 |
-| engine.2 | Phase 42 writer consolidation | in-progress | engine-sheet | [[../plans/2026-04-28-phase-42-writer-consolidation]] + [[engine/archive/PHASE_42_PATTERNS]] — detail in pointer (relocated 2026-07-02) |
+| engine.2 | Phase 42 writer consolidation | done-pending-archive | engine-sheet | [[../plans/2026-04-28-phase-42-writer-consolidation]] — B7's C100 smoke gate long cleared, `processAdvancementIntake.js` under live edit as of today (S417), closed 2026-09-04 |
 | engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
 | engine.6 | Press_Drafts.LinkedStoryline 0% populated (DEAD-COLUMN, 164 rows) | blocked | engine-sheet | [[archive/ENGINE_REPAIR]] row |
 | engine.7 | Engine Routing Foundation — Phase 6 cutover (gated on 3 cycles shadow data) | in-progress | research-build / engine-sheet | [[../plans/2026-05-07-engine-routing-foundation]] |
@@ -165,13 +165,13 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | research.10 | Arc engine grafts + Patterns A/B/D in idea-park (chaos-cars sibling, deferred) | blocked | research-build / engine-sheet | inline-park (S190 grilling artifacts) |
 | research.12 | Autonomy roadmap | in-progress | research-build | [[../plans/2026-05-31-autonomy-roadmap]] — detail in pointer (relocated 2026-07-02) |
 | engine.30 | Citizen card full-life enrichment | blocked | engine-sheet | [[../plans/2026-05-31-emergent-bio-engine]] — detail in pointer (relocated 2026-07-02) |
-| engine.31 | Citizen dial engine | in-progress | engine-sheet | [[../plans/2026-05-31-compression-tag-triage]] — detail in pointer (relocated 2026-07-02) |
-| engine.32 | Life-event generation | in-progress | engine-sheet | [[../plans/2026-05-31-life-event-generation]] — detail in pointer (relocated 2026-07-02) |
+| engine.31 | Citizen dial engine | done-pending-archive | engine-sheet | [[../plans/2026-05-31-compression-tag-triage]] — deployed S256, DialState confirmed live-load-bearing across 9+ current phase04/05 files, closed 2026-09-04 |
+| engine.32 | Life-event generation | done-pending-archive | engine-sheet | [[../plans/2026-05-31-life-event-generation]] — T7 Conduct generator (`runConductEngine.js`) confirmed live today, closed 2026-09-04 |
 | engine.34 | Ledger is a representative sample | parked | engine-sheet | [[../plans/2026-06-14-ledger-representative-sample-migration-removal]] — detail in pointer (relocated 2026-07-02) |
 | engine.36 | Isolated staging environment | parked | engine-sheet | [[archive/ENGINE_REPAIR]] — detail in pointer (relocated 2026-07-02) |
 | engine.67 | Event pools — steps 1-9 + involvedCitizens wire LIVE S325, sweeps done; OPEN: Mike's live C102 verify + storylineWeaving status gap | in-progress | engine-sheet | [[../plans/2026-07-18-event-pools-design]] |
 | research.13 | Citizen-autonomous PoC | needs-info | research-build | [[../plans/2026-05-31-citizen-autonomous-poc]] — detail in pointer (relocated 2026-07-02) |
-| research.14 | Citizen-loop Phase 2 | in-progress | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] — detail in pointer (relocated 2026-07-02) |
+| research.14 | Citizen-loop Phase 2 | done-pending-archive | engine-sheet | [[../plans/2026-06-04-mags-citizen-loop]] §research.14 row: "LOOP CLOSED S277" — 143 sessions stale, closed 2026-09-04 |
 | research.16 | Tier-1 character voice agents | in-progress | research-build + engine-sheet | [[../plans/2026-06-16-tier1-character-voice-agents]] — detail in pointer (relocated 2026-07-02) |
 | research.17 | Storyline-spine memory — REGROUNDED S306 (Mike-direct, design WITH Mike); prior P1/P2 plans + ADR-0011 DEAD | needs-info | research-build | [[../research/2026-06-20-layered-memory-architecture]] §S306 regrounding |
 | research.19 | Citizen perception & immersion access layer | in-progress | research-build → engine-sheet | [[../plans/2026-06-23-citizen-perception-immersion-layer]] — detail in pointer (relocated 2026-07-02) |

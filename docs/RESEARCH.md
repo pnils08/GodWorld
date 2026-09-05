@@ -1,6 +1,6 @@
 # Research — What's Out There, What Helps Us
 
-> **FROZEN LEGACY LOG (S250).** This file is the early-project learning log + chronological findings (S99–S248) — Mags teaching herself the field, then session-by-session source notes. It is **frozen for append.** New deliberate research goes to per-topic files in `docs/research/` using [[research/RESEARCH_TEMPLATE]], catalogued in [[research/index]]. Existing sections below are a historical snapshot; they migrate opportunistically (not in a sweep) if ever revisited. Why the change: this log mixed learning history, findings, and a pending-work lane in one 2200-line file where grep was the only retrieval — see `docs/plans/2026-06-01-doc-loop-consolidation.md`.
+> **FROZEN LEGACY LOG (S250).** This file is the early-project learning log + chronological findings (S99–S248) — Mags teaching herself the field, then session-by-session source notes. It is **frozen for append.** New deliberate research goes to per-topic files in `docs/research/` using [[research/RESEARCH_TEMPLATE]], catalogued in [[research/index]]. Existing sections below are a historical snapshot; they migrate opportunistically (not in a sweep) if ever revisited. Why the change: this log mixed learning history, findings, and a pending-work lane in one 2200-line file where grep was the only retrieval — see `docs/archive/plans/2026-06-01-doc-loop-consolidation.md`.
 
 **Load this at the start of a Research session.** Then load the architecture docs you need for context on what we have.
 

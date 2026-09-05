@@ -2,8 +2,8 @@
 title: Casino Ledger (Undocked Phase 4b) Plan
 created: 2026-08-31
 updated: 2026-08-31
-type: plan
-tags: [engine, citizens, sports, draft]
+type: archive
+tags: [engine, citizens, sports, archived]
 sources:
   - docs/research/2026-08-29-casino-ledger.md
   - docs/plans/2026-08-07-spacemolt-game-show.md §Phase 4
@@ -26,6 +26,8 @@ pointers:
 # Casino Ledger (Undocked Phase 4b) Plan
 
 **Reviewer note (grok, 2026-08-31):** Inbox copy only. Not registered. This is the 4b design doc Kimi's research said was missing. It authorizes no Sheet, no balance, no odds. Mike-only sign-off still gates every money-moving task (Tasks 4–12). Task 0–1 (wager talk, no money) is still Phase 4a and can ship without that sign-off. On accept: move to `docs/plans/2026-08-31-casino-ledger.md`, register in `docs/index.md`, back-link from the show plan's 4b bullet. Proposed rollout row at the bottom.
+
+**Disposition (2026-09-04, S420, research-build, inbox sweep):** Shipped, not just accepted — code committed `60deddb5` (S406), LIVE PROD @13 (S409), `Casino_Ledger` armed on live `d1220bfa` (S410, builder sign-off "turn on the casino"). Never got a dedicated ROLLOUT row (tracked ad-hoc via commit messages instead); no row exists to close. Filed straight to `docs/archive/plans/` rather than the originally-suggested `docs/plans/` stop, since there's nothing left in flight. Registered in `docs/index.md` this pass.
 
 **Goal:** After Mike signs off, the engine settles in-world wagers against UNDOCKED episode rows and A's/Oaks `game-result` rows, moving citizen `NetWorth` / `DebtLevel` and writing a `[Casino]` week, so a bet can make a life better or worse without touching jobs, tiers, factions, or the Initiative_Tracker.
 

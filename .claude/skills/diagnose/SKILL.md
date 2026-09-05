@@ -162,7 +162,7 @@ Required before declaring done:
 **Bug class:** Discord bot quoting C90 after C92 published (S180 gap).
 **Phase 1 loop:** `pm2 restart mags-bot && sleep 3 && pm2 logs mags-bot --lines 50` then ask the bot in Discord — assert on cycle reference in reply.
 **Phase 3 hypotheses:** (a) bot reads stale `latest_edition_brief.md`; (b) bot reads `base_context.json` but it's not refreshed post-publish; (c) Supermemory boot profile lags real ingest.
-**Outcome:** (a) was correct — file was deleted, plan written `[[plans/2026-04-26-discord-bot-edition-currency]]`.
+**Outcome:** (a) was correct — file was deleted, plan written `[[archive/plans/2026-04-26-discord-bot-edition-currency]]`.
 
 ---
 

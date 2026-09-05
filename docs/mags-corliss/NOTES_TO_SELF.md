@@ -337,3 +337,6 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-07-21 (2026-07-21T05:22:33.864Z)
 - Martin Richards trade details are now appearing in search results after Mike's specific query — files present in output/, desk-packets/, and reporters/ containers. Previous search gaps may have been query-phrasing issue or indexing lag. Archive knowledge about Hal Richmond and P Slayer pieces checks out against search results.
+
+### 2026-09-02 (2026-09-02T20:23:30.956Z)
+- C105 stories are in-progress investigation mode, not published yet — need to clarify with Mike what's actually run vs. what's still in development

@@ -141,7 +141,7 @@ Archive-eligible today: **49 + 5 = 54 / 964 = 5.6%**. The 2026-08-17 figure was 
 1. **Status skip is not a lifecycle.** Every Phase 5 engine still walks the full `ctx.ledger.rows` array and `continue`s on terminal status. The skip list is copy-pasted and incomplete. Verified hole: `educationCareerEngine.js` L216 / L356 / L474 skip only `deceased` — `Traded` GAME rows still enter education/career fill loops. (`runCareerEngine.js` L740–744 and `bondEngine.js` L468–469 **do** skip `traded`/`pending`/`deceased`; those two are not the hole.) Removing terminal rows is the lifecycle fix; skip-gates will keep drifting.
 2. **POPID mint is `max(Simulation_Ledger)+1` in at least six live writers.** Safe only while the highest POPID never leaves the sheet. After archive, that allocator reissues identities.
 3. **Heritage and inheritance currently require the deceased row to still sit on Simulation_Ledger.** `findHeirs_`, `getCitizenWealth_`, and `updateHeritage_` all scan `ctx.ledger.rows`. The five deceased citizens have no LineageId; the archive row is the only durable source of NetWorth / family pointers until a line is founded.
-4. **Sports intake already stops at `Status=Traded`.** `docs/OAKLAND_SPORTS_FEED.md` and `docs/plans/2026-08-02-sports-stat-event-intake.md`: `trade-away` writes Status, does not delete or archive; engine.90 owns the later move.
+4. **Sports intake already stops at `Status=Traded`.** `docs/OAKLAND_SPORTS_FEED.md` and `docs/archive/plans/2026-08-02-sports-stat-event-intake.md`: `trade-away` writes Status, does not delete or archive; engine.90 owns the later move.
 5. **Workbook freeze is a different problem.** `docs/plans/2026-08-17-sheet-weight-reduction.md` measured Simulation_Ledger at 1.46 MB of ~14.53 MB text. Engine_Errors was 4.33 MB; LifeHistory_Log 2.18 MB. Do not sell this project as a freeze fix.
 
 ---
@@ -767,7 +767,7 @@ Doctrine / builder-only. Not silently picked.
 - `docs/plans/2026-08-17-ledger-trueup-sweep.md` — bidirectional; sequence after true-up; 5.5%
 - `docs/plans/2026-08-01-business-lifecycle-generator.md` Task 7 — Business_Archive sibling; `bizIdHighWater`
 - `docs/plans/2026-08-17-sheet-weight-reduction.md` — 1.46 MB / 14.53 MB
-- `docs/plans/2026-08-02-sports-stat-event-intake.md` — trade-away does not archive
+- `docs/archive/plans/2026-08-02-sports-stat-event-intake.md` — trade-away does not archive
 - `docs/OAKLAND_SPORTS_FEED.md` — engine.90 owns departure archive
 - `docs/SIMULATION_LEDGER.md`, `schemas/SCHEMA_HEADERS.md`, `docs/engine/SIMULATION_LEDGER_COL_MAP.md`
 - `docs/engine/LEDGER_AUDIT.md` / `LEDGER_REPAIR.md` — NBA reuse debt; 964-row headline

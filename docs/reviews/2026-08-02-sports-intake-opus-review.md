@@ -6,10 +6,10 @@ type: reference
 tags: [sports, engine, security, review, active]
 sources:
   - Opus 5 adversarial review of commit ce2a7d11 (S349) — Task 9 of the sports stat/event intake plan
-  - docs/plans/2026-08-02-sports-stat-event-intake.md — the plan under review
-  - docs/plans/2026-07-30-oakland-sports-workspace.md — underlying workspace security decisions
+  - docs/archive/plans/2026-08-02-sports-stat-event-intake.md — the plan under review
+  - docs/archive/plans/2026-07-30-oakland-sports-workspace.md — underlying workspace security decisions
 pointers:
-  - "[[../plans/2026-08-02-sports-stat-event-intake]] — Task 9 consumes this verdict"
+  - "[[../archive/plans/2026-08-02-sports-stat-event-intake]] — Task 9 consumes this verdict"
   - "[[../engine/ROLLOUT_PLAN]] — engine.40 / engine.77 rows"
   - "[[../index]] — registered same commit"
 ---

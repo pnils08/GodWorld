@@ -677,7 +677,7 @@ real proving event remain builder gates even after source approval.
 - **Files:**
   - `docs/DASHBOARD.md` — modify
   - `docs/OAKLAND_SPORTS_FEED.md` — modify
-  - `docs/plans/2026-07-30-oakland-sports-workspace.md` — modify
+  - `docs/archive/plans/2026-07-30-oakland-sports-workspace.md` — modify
   - `docs/engine/ROLLOUT_PLAN.md` — modify
 - **Steps:**
   1. Record the shipped endpoints, sources, cache behavior, UI, write-off
@@ -692,7 +692,7 @@ real proving event remain builder gates even after source approval.
 - **Status:** [x] runtime + write proof complete, corrected 2026-08-17 (S378)
   — this entry sat stale for 3 days claiming loopback/Secure-cookie config and
   live proving writes as remaining after both were already done. Per
-  `docs/plans/2026-08-02-sports-stat-event-intake.md` line 906 (2026-08-14,
+  `docs/archive/plans/2026-08-02-sports-stat-event-intake.md` line 906 (2026-08-14,
   engine-sheet, S369): "ROSTER-EVENT PROOF LANDED — attended C103 injury,
   POP-01028, all five write targets read-back verified. engine.77 →
   done-pending-archive." Loopback bind and Secure-cookie config are live
@@ -756,7 +756,7 @@ not authorize the sports-write runtime restart or a live write.
 
 Roster current-stat writes and team/roster state mutation are no longer
 out of scope — delivered and proven via the companion plan
-`docs/plans/2026-08-02-sports-stat-event-intake.md` (engine.77, S369,
+`docs/archive/plans/2026-08-02-sports-stat-event-intake.md` (engine.77, S369,
 2026-08-14; corrected here 2026-08-17). LifeHistory emission, structured
 NotebookLM extraction, Chicago redesign, historical row editing, and
 autonomous submission remain scope amendments requiring their own plan
@@ -945,7 +945,7 @@ change and builder approval.
 - 2026-08-17 (research-build, S378) — Corrected 3 days of drift: this plan
   kept claiming loopback/Secure-cookie config and the proving write as
   remaining after both landed 2026-08-14 (engine-sheet, S369, recorded in
-  `docs/plans/2026-08-02-sports-stat-event-intake.md`). Caught because
+  `docs/archive/plans/2026-08-02-sports-stat-event-intake.md`). Caught because
   research-build dispatched engine-sheet to redo the "remaining" runtime
   items against this stale doc instead of checking live state first — the
   exact failure this doc's own doctrine warns against. `SPORTS_WRITE_ENABLED`

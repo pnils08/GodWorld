@@ -5,7 +5,7 @@ updated: 2026-06-01
 type: reference
 tags: [research, architecture, active]
 sources:
-  - docs/plans/2026-06-01-doc-loop-consolidation.md — the plan that locked this shape (S250)
+  - docs/archive/plans/2026-06-01-doc-loop-consolidation.md — the plan that locked this shape (S250)
   - docs/plans/PLAN_TEMPLATE.md — sibling plan template; same self-contained discipline
   - docs/SCHEMA.md §3 (frontmatter), §7 (folder map), §12 (changelog)
   - docs/engine/ROLLOUT_PLAN.md §Convention — State labels (S204) + Watch List
@@ -110,4 +110,4 @@ The doc layer here is authoritative. claude-mem already auto-captures the *why* 
 
 ## Changelog
 
-- 2026-06-01 — Initial draft (S250). Shape locked in `docs/plans/2026-06-01-doc-loop-consolidation.md`, co-designed with Mike. Mirrors the plan-template discipline; adds the Applications living reuse-index, the verdict enum, the verdict-not-state rule, and the never-archives lifecycle. Advisor pressure-test folded in (Applications split from Changelog; sub-catalog registration for boot-burn).
+- 2026-06-01 — Initial draft (S250). Shape locked in `docs/archive/plans/2026-06-01-doc-loop-consolidation.md`, co-designed with Mike. Mirrors the plan-template discipline; adds the Applications living reuse-index, the verdict enum, the verdict-not-state rule, and the never-archives lifecycle. Advisor pressure-test folded in (Applications split from Changelog; sub-catalog registration for boot-burn).

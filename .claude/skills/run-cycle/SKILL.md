@@ -86,7 +86,7 @@ node scripts/draftContentRows.js --cycle {XX} --apply
 
 Validation is parity-by-execution — every candidate runs through the real `loadEventContentLedger_`, so a row the loader would skip is never written. Caps 10/3/2 + dedup + `auth:auto` provenance; rows land `Active=yes` (T4 auto-active — the fail-closed loader is the standing guard, `Active=no` in-sheet is Mike's kill switch). Script prints a draft report (written / invalid / dup / capped) and readback-verifies the append. If OpenRouter is unreachable it exits 1 with `ERR` — treat as non-blocking for the rest of the chain (the cycle already ran; pools just don't grow this cycle). Don't retry-loop; note the miss in the Step 6 gap log.
 
-Plan: `docs/plans/2026-07-06-content-ledger-auto-authoring.md` (engine.49).
+Plan: `docs/archive/plans/2026-07-06-content-ledger-auto-authoring.md` (engine.49).
 
 **Gate:** Draft report printed; on `--apply`, script exits 0 with rows verified (0 written is a valid outcome on a quiet cycle).
 

@@ -163,7 +163,7 @@ When trigger fires → plan under civic/research-build: “office-holder positio
 - Optional shared wall formatter for voiced wakes.  
 - Expand authored voices only with the POP ID line contract.
 
-**Ignited plans:** [[../plans/2026-08-07-office-holder-position-wall]] (civic.16) — design locked + `scripts/officeWall.js` + cron-civic wiring shipped (grok 2026-08-07).
+**Ignited plans:** [[../archive/plans/2026-08-07-office-holder-position-wall]] (civic.16) — design locked + `scripts/officeWall.js` + cron-civic wiring shipped (grok 2026-08-07).
 
 ### Duty calendar (Mike-clarified 2026-08-07 — load-bearing for wall design)
 

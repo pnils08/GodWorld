@@ -17,7 +17,7 @@ sources:
 pointers:
   - "[[../OAKLAND_SPORTS_FEED]] — verified current contract and consumer map"
   - "[[../engine/ROLLOUT_PLAN]] — engine.89 workspace-plan pointer; engine.40 and engine.77 implementation siblings"
-  - "[[../plans/2026-07-30-oakland-sports-workspace]] — engine.89 implementation plan"
+  - "[[../archive/plans/2026-07-30-oakland-sports-workspace]] — engine.89 implementation plan"
   - "[[../plans/2026-07-05-game-night-connection-design]] — downstream game-night design history"
   - "[[index]] — research registration"
 ---
@@ -432,7 +432,7 @@ and map approved submissions deterministically to the existing twenty-column
 row. Treat Sports Engine state/LifeHistory writes and stat OCR as linked sibling
 work, not hidden side effects of the first UI.
 
-**Ignited plans:** [[../plans/2026-07-30-oakland-sports-workspace]]
+**Ignited plans:** [[../archive/plans/2026-07-30-oakland-sports-workspace]]
 (`engine.89`) owns the dashboard/live endpoints, Notebook Daily Inbox, preview,
 and gated feed append. `engine.40` stat capture and `engine.77` roster/state and
 LifeHistory writes remain implementation siblings.

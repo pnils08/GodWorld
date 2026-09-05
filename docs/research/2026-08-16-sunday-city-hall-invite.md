@@ -10,7 +10,7 @@ sources:
   - .claude/rules/civic.md — Mayor first, IND not a bloc, Clerk is closer
   - .claude/skills/city-hall/SKILL.md v2.2 — live-session cascade the cron ports
   - docs/plans/2026-07-28-civic-cron-city-hall.md — civic.15
-  - docs/plans/2026-08-15-civic-office-lived-packets.md — civic.17 week-carry (Task 5 shipped)
+  - docs/archive/plans/2026-08-15-civic-office-lived-packets.md — civic.17 week-carry (Task 5 shipped)
   - docs/research/2026-08-14-civic-process-install.md — Sunday = expression, Mon–Thu = absorb
   - docs/engine/CRON_PIPELINE_MAP.md — Sunday 14:30 + 21:00, dry, no --apply
   - output/cron-civic/close_c103.json — C103 already closed, applied:false
@@ -20,7 +20,7 @@ pointers:
   - "[[index]] — register here, same change"
   - "[[2026-08-14-civic-process-install]] — parent week"
   - "[[../plans/2026-07-28-civic-cron-city-hall]] — Sunday chain"
-  - "[[../plans/2026-08-15-civic-office-lived-packets]] — weekday pack + Sunday week block"
+  - "[[../archive/plans/2026-08-15-civic-office-lived-packets]] — weekday pack + Sunday week block"
 ---
 
 # Sunday city-hall invite and hearing shape — research

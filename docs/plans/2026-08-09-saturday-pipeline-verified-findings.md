@@ -248,7 +248,7 @@ pushed.** research-build does not self-clear.
 ---
 
 Related: [`docs/index.md`](../index.md) · gate mechanics in `scripts/cron-saturday-run.js` ·
-slice packs in `docs/plans/2026-08-08-journalist-heat-slice-packs.md`
+slice packs in `docs/archive/plans/2026-08-08-journalist-heat-slice-packs.md`
 
 ---
 

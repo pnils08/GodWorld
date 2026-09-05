@@ -10,7 +10,7 @@ sources:
   - docs/research/2026-08-27-cascade-loop-closure-design.md — employment open-loop trace, retune + steering + talk-back extraction
   - docs/plans/2026-08-29-city-health-system.md — engine.133, the illness half this mirrors (§Next filed engine.135)
   - docs/for-claude-review/2026-08-29-grok-business-ledger-hood-fill.md — grok's 72-row fill (review delegated to engine-sheet 2026-08-29, align to canon essence)
-  - docs/plans/2026-08-09-wealthlevel-networth-bands.md — S363 WealthLevel = pure NetWorth bands (the scale this plan revisits)
+  - docs/archive/plans/2026-08-09-wealthlevel-networth-bands.md — S363 WealthLevel = pure NetWorth bands (the scale this plan revisits)
   - docs/research/2026-08-01-simulation-realism-audit.md — S361 hazard: wealth scale calibrated from real-world Oakland
   - Live sheet read 2026-08-29 C104 (scratchpad hoodEmp.js): WP employmentRate 0.9015 / attractor 0.90; 21 ND hoods 5.3–7.3% unemployed, 6.69% city; Neighborhood_Map.MedianIncome 11/22 placeholder (73.5–73.7k), Piedmont Ave 72k, KONO 32.7k; Business_Ledger Σ Employee_Count Downtown 6738 … Temescal 89, Laurel 13, five hoods 0; East Oakland has no ND row
 pointers:

@@ -9,7 +9,7 @@ sources:
   - docs/adr/0017-typed-lived-experience-packets.md — Packet order only. Media and civic are different teams.
   - docs/research/2026-08-08-journalist-heat-slice-architecture.md — pack *shape* (substrate + overlay), not the newsroom civic desk
   - docs/plans/2026-07-28-civic-cron-city-hall.md — civic.15 Sunday chain + weekday datawake
-  - docs/plans/2026-08-07-office-holder-position-wall.md — civic.16 wiki already saves stated:/datawake: to cp-POP
+  - docs/archive/plans/2026-08-07-office-holder-position-wall.md — civic.16 wiki already saves stated:/datawake: to cp-POP
   - scripts/cron-civic-run.js domainSlice — current office input (world_summary hoods + INIT ids)
   - Mike-direct 2026-08-15 — Sunday = city-hall packets; Mon–Thu = district packs; each wake reads prior wiki so Sunday they fight for what they learned
 pointers:

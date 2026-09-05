@@ -10,7 +10,7 @@ sources:
 pointers:
   - "[[ripple-traces/TEMPLATE|docs/research/ripple-traces/]] — the raw per-domain traces this synthesizes, preserved verbatim (economy, sports, civic-initiatives, crime-chaos, citizen-event-persistence) + the TEMPLATE for tracing the remaining domains"
   - "[[../plans/2026-07-04-ripple-ledger-attribution]] — the plan this research produced (engine.45)"
-  - "[[../plans/2026-06-15-story-seed-deck-engine-emergence]] — engine.35, the substrate this extends (built Phases 0–3, Phase 5 spec'd/gated)"
+  - "[[../archive/plans/2026-06-15-story-seed-deck-engine-emergence]] — engine.35, the substrate this extends (built Phases 0–3, Phase 5 spec'd/gated)"
   - "[[../plans/2026-07-03-sift-deep-dispatch-reconcile]] — the consumption-side sibling (research-build); this work is the producer side that feeds it"
   - "[[../engine/ENGINE_COUPLING_MAP]] — behavioral map; §M6 correction below updates its L242 TODO"
   - "[[../engine/ENGINE_TRUTH_MAP]] — per-file behavioral truth"

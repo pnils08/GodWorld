@@ -7,7 +7,7 @@ tags: [sports, engine, citizens, active]
 sources:
   - Mike-direct 2026-08-02 — draft and register the engine.40 and engine.77 implementation plan
   - docs/research/2026-07-27-oakland-sports-feed-entry-dashboard.md
-  - docs/plans/2026-07-30-oakland-sports-workspace.md
+  - docs/archive/plans/2026-07-30-oakland-sports-workspace.md
   - docs/OAKLAND_SPORTS_FEED.md
   - docs/SIMULATION_LEDGER.md
   - docs/research/2026-07-29-citizen-archive.md
@@ -566,8 +566,8 @@ deployment, closing the cross-session double-append finding in
   - `docs/OAKLAND_SPORTS_FEED.md` — modify
   - `docs/SIMULATION_LEDGER.md` — modify
   - `docs/DASHBOARD.md` — modify
-  - `docs/plans/2026-07-30-oakland-sports-workspace.md` — modify
-  - `docs/plans/2026-08-02-sports-stat-event-intake.md` — modify
+  - `docs/archive/plans/2026-07-30-oakland-sports-workspace.md` — modify
+  - `docs/archive/plans/2026-08-02-sports-stat-event-intake.md` — modify
   - `docs/engine/ROLLOUT_PLAN.md` — modify
   - `scripts/visual-qa.js` — modify
 - **Steps:**

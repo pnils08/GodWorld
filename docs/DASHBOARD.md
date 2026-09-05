@@ -14,8 +14,8 @@ pointers:
   - "[[STACK]] — service and provider inventory"
   - "[[OPERATIONS]] — dashboard health, transport, and recovery runbooks"
   - "[[OAKLAND_SPORTS_FEED]] — feed and roster contract"
-  - "[[plans/2026-07-30-oakland-sports-workspace]] — sports workspace rollout"
-  - "[[plans/2026-08-02-sports-stat-event-intake]] — gated stat and roster mutation work"
+  - "[[archive/plans/2026-07-30-oakland-sports-workspace]] — sports workspace rollout"
+  - "[[archive/plans/2026-08-02-sports-stat-event-intake]] — gated stat and roster mutation work"
 ---
 
 # GodWorld Dashboard
@@ -204,7 +204,7 @@ Tailscale Serve supplies private HTTPS. It does keep confirmation unavailable.
 
 The full stat/roster mutation contract, atomic read-back, audit behavior, and
 remaining proving gates live in
-[[plans/2026-08-02-sports-stat-event-intake]]. Sports writes must remain
+[[archive/plans/2026-08-02-sports-stat-event-intake]]. Sports writes must remain
 disabled unless the builder separately approves configuration and a proving
 event.
 

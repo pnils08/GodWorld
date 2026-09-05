@@ -13,7 +13,7 @@ sources:
 pointers:
   - "[[STACK]] — service and credential-location overview"
   - "[[plans/2026-05-22-supermemory-load-bearing-audit]] — open load-bearing test-off"
-  - "[[plans/2026-07-25-notebooklm-source-search-wiring]] Task 8 — corpus and retrieval audit"
+  - "[[archive/plans/2026-07-25-notebooklm-source-search-wiring]] Task 8 — corpus and retrieval audit"
   - "[[adr/0008-speaker-attribution-for-auto-save-writers]] — writer-side attribution invariant"
 ---
 
@@ -510,7 +510,7 @@ npx supermemory search "TERM" --tag bay-tribune --json
 
 **Phase 2-7 deferred pending SMFS pilot.** Supermemory released SMFS v0.0.1 on 2026-04-29 — POSIX filesystem layer over containers via FUSE/NFSv3, semantic grep, 30s sync. If pilot succeeds, Phase 2-7 collapse to file ops; the 16-tag taxonomy maps 1:1 to directory structure. Mags-first pilot proposed (smallest blast radius, editorial brain, tolerates 30s sync).
 
-- Plan: `[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]`
+- Plan: `[[archive/plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]`
 - Comparison: `[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]`
 
 ---

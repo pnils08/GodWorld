@@ -47,7 +47,7 @@ pointers:
 
 **Verdict:** `adopt` — ignites the row-contract-v2 rewrite of the seed plan. ROLLOUT row: engine.35 (existing, in-progress).
 
-**Ignited plans:** [[../plans/2026-06-15-story-seed-deck-engine-emergence]] — §"2026-07-05 — Corrected row contract" is the plan-side landing of this research.
+**Ignited plans:** [[../archive/plans/2026-06-15-story-seed-deck-engine-emergence]] — §"2026-07-05 — Corrected row contract" is the plan-side landing of this research.
 
 ---
 

@@ -6,7 +6,7 @@ type: doctrine
 tags: [doctrine, engine, crons, bonds, ledgers, always-consult]
 pointers:
   - "[[SIM_DOCTRINE]] — what makes GodWorld a sim, not a data system; consult alongside this"
-  - "[[plans/2026-08-21-ctx-rng-attractor-collapse]] — engine.128, the defect that exposed the missing edge"
+  - "[[archive/plans/2026-08-21-ctx-rng-attractor-collapse]] — engine.128, the defect that exposed the missing edge"
   - "[[engine/ENGINE_COUPLING_MAP]] — how an event becomes a dial; the mechanical layer under this doctrine"
   - "[[index]] — registered"
 ---
@@ -137,7 +137,7 @@ the reflex to grow a column every time canon records something the ledger cannot
 hold.
 
 Applied to the three gaps in the canon→bond mint
-([[plans/2026-08-21-published-canon-bond-mint]] §2):
+([[archive/plans/2026-08-21-published-canon-bond-mint]] §2):
 
 - **Citizen ↔ institution** bonds, **3+ party** bonds, and the **nature** of a
   bond (a legally-forced recusal, a bipartisan marriage under deadline) are the

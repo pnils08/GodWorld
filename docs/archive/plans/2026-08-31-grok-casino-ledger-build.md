@@ -2,8 +2,8 @@
 title: Casino ledger 4b — review build (grok)
 created: 2026-08-31
 updated: 2026-08-31
-type: plan
-tags: [engine, citizens, draft]
+type: archive
+tags: [engine, citizens, archived]
 sources:
   - docs/for-claude-review/2026-08-31-grok-casino-ledger.md
   - scripts/casinoLedger.js
@@ -15,6 +15,8 @@ pointers:
 # Casino ledger 4b — review build (grok)
 
 **Reviewer note:** Companion to the design in `2026-08-31-grok-casino-ledger.md`. This is the code. It is fail-closed. It has not been clasped, the tab has not been minted, ECL lines have not been `--apply`'d. On accept: land SCHEMA_HEADERS from `output/grok/casino-ledger/SCHEMA_HEADERS.snippet.md`, mint `Casino_Ledger` on bench with a HOUSE row at 250000, then bench-prove. Live deploy stays a separate Mike sign-off.
+
+**Disposition (2026-09-04, S420, research-build, inbox sweep):** All of the above happened — bench-proven, clasped, minted, armed on live `d1220bfa` (S410). See companion doc's Disposition note. Filed to `docs/archive/plans/` alongside it.
 
 **Goal of this file:** point at every artifact so engine-sheet can review without reconstructing the session.
 

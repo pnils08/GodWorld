@@ -66,4 +66,4 @@ Audio overviews are always off for lore (quota is for editions). The notebook su
 
 ## Full spec
 
-`docs/plans/2026-08-17-lore-canon-ingest-pipeline.md` (pipeline.59). Generation half: `.claude/skills/lore-writer/SKILL.md` (pipeline.56).
+`docs/archive/plans/2026-08-17-lore-canon-ingest-pipeline.md` (pipeline.59). Generation half: `.claude/skills/lore-writer/SKILL.md` (pipeline.56).

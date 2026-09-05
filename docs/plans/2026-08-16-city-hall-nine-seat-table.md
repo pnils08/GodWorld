@@ -8,7 +8,7 @@ sources:
   - docs/research/2026-08-16-sunday-city-hall-invite.md — D+B ruling (Mike-direct 2026-08-16)
   - docs/research/2026-08-14-civic-process-install.md — Sunday = expression; Mon–Thu = absorb
   - docs/plans/2026-07-28-civic-cron-city-hall.md — civic.15 chain; --apply stays theirs
-  - docs/plans/2026-08-15-civic-office-lived-packets.md — civic.17 packs + week block
+  - docs/archive/plans/2026-08-15-civic-office-lived-packets.md — civic.17 packs + week block
   - docs/mara-vance/INITIATIVE_TRACKER_CONTRACT.md — 28-col INIT schema this ledger must not clone
   - .claude/rules/civic.md — vote math, IND not a bloc, recovering = ABSENT
   - scripts/cron-civic-run.js — runDirective / runPrep / runDecide / runVoices / runProjects / runClose

@@ -39,7 +39,7 @@ pointers:
 
 *Where this research has been used. Append a dated line if grep ever surfaces it.*
 
-- 2026-06-01 — Filed as the live demo for the research-file template (`docs/plans/2026-06-01-doc-loop-consolidation.md`); first artifact in the new per-topic format.
+- 2026-06-01 — Filed as the live demo for the research-file template (`docs/archive/plans/2026-06-01-doc-loop-consolidation.md`); first artifact in the new per-topic format.
 
 ---
 

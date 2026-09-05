@@ -12,10 +12,10 @@ sources:
   - phase05-citizens/generateMediaModeEvents.js:52,105 (RoleType-gated; journalists only)
   - phase05-citizens/migrationTrackingEngine.js:135-283 (assessDisplacementRisk_ — Neighborhood_Map.DisplacementPressure + household rent burden + age/education → DisplacementRisk on the row)
   - phase01-config/godWorldEngine2.js:303-304 (Gentrification + MigrationTracking wired at Phase 5, both entry points)
-  - docs/plans/2026-06-15-story-seed-deck-engine-emergence.md (§Corrected row contract — entities attach at generation; V2-1..V2-4)
+  - docs/archive/plans/2026-06-15-story-seed-deck-engine-emergence.md (§Corrected row contract — entities attach at generation; V2-1..V2-4)
   - docs/plans/2026-07-04-ripple-ledger-attribution.md:160-169 (engine.45 T4/T5 purposes absorbed into deck columns; tasks DEAD)
 pointers:
-  - "[[../plans/2026-06-15-story-seed-deck-engine-emergence]] — Grade 1 lands inside its V2-3 seed writers"
+  - "[[../archive/plans/2026-06-15-story-seed-deck-engine-emergence]] — Grade 1 lands inside its V2-3 seed writers"
   - "[[../plans/2026-07-04-ripple-ledger-attribution]] — producer-side sibling; ripple carry survives for Why/Trend"
   - "[[index]] — registered same commit"
 ---

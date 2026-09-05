@@ -7,7 +7,7 @@ tags: [architecture, memory, citizens, engine, token-budget, decision, active]
 sources:
   - "[[../plans/2026-06-20-layered-memory-phase2-lineage-promotion]] — implementation plan (this ADR is Task 1)"
   - "[[../research/2026-06-20-layered-memory-architecture]] — verdict adopt; the auto-promotion rule is the unsolved core this ADR's substrate enables"
-  - "[[../plans/2026-06-15-story-seed-deck-engine-emergence]] — engine.35: the engine-EMERGES / Supermemory-MAINTAINS division of labor that decides where lineage lives"
+  - "[[../archive/plans/2026-06-15-story-seed-deck-engine-emergence]] — engine.35: the engine-EMERGES / Supermemory-MAINTAINS division of labor that decides where lineage lives"
   - "[[../SUPERMEMORY]] — container architecture; Supermemory metadata (50 keys) + bt-wiki entity records"
   - "[[adr/0001-adopt-context-and-adrs]] — ADR bar"
 pointers:

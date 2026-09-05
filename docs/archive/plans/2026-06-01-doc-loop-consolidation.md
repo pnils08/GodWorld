@@ -107,7 +107,7 @@ Boot-burn note (advisor): `docs/index.md` is a research-build boot read; "resear
   2. Top-level index.md: register `research/TEMPLATE` + the sub-catalog pointer + this plan.
   3. TERMINAL.md Research table: add the template row (full inbound treatment — template is a reference doc; instances get the sub-index line only).
   4. SCHEMA §7: back-link the template from the folder map (parent spec).
-  5. ROLLOUT_PLAN.md: add a `governance.N` row, `(research-build)`, pointing to `[[plans/2026-06-01-doc-loop-consolidation]]`; mark `done-pending-archive` once tasks 1–5 land.
+  5. ROLLOUT_PLAN.md: add a `governance.N` row, `(research-build)`, pointing to `[[archive/plans/2026-06-01-doc-loop-consolidation]]`; mark `done-pending-archive` once tasks 1–5 land.
 - **Verify:** template appears in top-level index + TERMINAL.md + SCHEMA; headroom appears in the sub-catalog only; ROLLOUT row present.
 - **Commit hygiene (advisor):** working tree has pre-existing modified `JOURNAL.md` / `JOURNAL_RECENT.md` that are NOT this terminal's to touch. Stage only this plan's specific files — no `git add -A`.
 - **Status:** [ ] not started

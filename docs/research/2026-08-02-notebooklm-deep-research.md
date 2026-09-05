@@ -42,7 +42,7 @@ discovery is a canon-contamination route. Use the deterministic local branch
 router in [[2026-08-20-notebooklm-daily-branching]] instead.
 
 **Ignited plans:** none. The former
-[[../plans/2026-08-02-notebooklm-deep-research-integration]] is closed and
+[[../archive/plans/2026-08-02-notebooklm-deep-research-integration]] is closed and
 historical only.
 
 ---

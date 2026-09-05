@@ -52,7 +52,7 @@ pointers:
 
 **Verdict:** `adopt` — but a different shape than the premise. Adopt the two free wins (jq projection, container routing) and the **question-scoped** data-analyst seat attributed to Rhea Morgan's Data Analyst function. Reject the per-search filter on measured economics. The Marbury Data Desk seat is a separate, genuinely-unbuilt opportunity.
 
-**Ignited plans:** [[../plans/2026-07-25-notebooklm-source-search-wiring]] Task
+**Ignited plans:** [[../archive/plans/2026-07-25-notebooklm-source-search-wiring]] Task
 8 owns the deterministic projection, provenance-filter, and domain-routing
 hardening applied 2026-07-27. Rollout `research.26` separately tracks the
 question-scoped Data Analyst seat; that agent design remains plan work rather
@@ -66,7 +66,7 @@ than being implied by the deterministic MCP change.
 - 2026-07-27 — Task 8 resolved the metadata-filter grammar and applied the
   result to `search_canon`, projected retrieval output, and `wd-*` domain
   fan-out. No Supermemory records were changed.
-- 2026-08-10 (kimi) — research.26 close-out. The question-scoped seat shipped same-day S334 as `source-search` attributed to **Elliot Marbury (POP-00166), Data Desk** (`794861f5`, hardened `4138acd1` S338); the Rhea Morgan attribution this doc recommended was superseded by this doc's own separation-of-duties hazard (verifier must not source what it verifies — now encoded in the seat's SKILL). Verdict map + zero residual gaps: [[../plans/2026-08-10-data-analyst-retrieval-seat]].
+- 2026-08-10 (kimi) — research.26 close-out. The question-scoped seat shipped same-day S334 as `source-search` attributed to **Elliot Marbury (POP-00166), Data Desk** (`794861f5`, hardened `4138acd1` S338); the Rhea Morgan attribution this doc recommended was superseded by this doc's own separation-of-duties hazard (verifier must not source what it verifies — now encoded in the seat's SKILL). Verdict map + zero residual gaps: [[../archive/plans/2026-08-10-data-analyst-retrieval-seat]].
 
 ---
 
@@ -76,4 +76,4 @@ than being implied by the deterministic MCP change.
 - 2026-07-27 — Resolved `--filter`: `AND`/`OR` wrapper required. A read-only
   `source=edition-ingest` proof returned 20/20 matching results, removing the
   research.26 sizing gate while leaving mixed-provenance adjudication open.
-- 2026-08-10 (kimi) — research.26 closed: seat shipped S334 attributed to Marbury (not Rhea — separation-of-duties); docs true-up + rollout row flip in [[../plans/2026-08-10-data-analyst-retrieval-seat]].
+- 2026-08-10 (kimi) — research.26 closed: seat shipped S334 attributed to Marbury (not Rhea — separation-of-duties); docs true-up + rollout row flip in [[../archive/plans/2026-08-10-data-analyst-retrieval-seat]].

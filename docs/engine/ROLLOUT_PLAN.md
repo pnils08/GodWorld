@@ -138,6 +138,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.114 | 4 canon-ingestion writers report success on partial ingest failure — ingestEdition.js is the Saturday canon door. Verified, escalated to Mike | ready | engine-sheet | [[../plans/2026-08-16-writer-fixed-artifact-persists-audit]] §governance.49 first run |
 | engine.109 | New-life intake — household mint path (complete family = the reason, S320 held for lone names); route through the promotion populator; reduce Advancement_Intake to solely promotion | ready | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §3.2 |
 | civic.22 | Initiative authorship — 0 proposer cols vs 5 mayoral-action cols; no createInitiative_; all 6 live INITs read LeadFaction=OPP as a result. Surfaces hard once civic.24 seats speak for themselves | ready | research-build | [[../plans/2026-08-15-civic-edge-truth-migration]] §7 + §10 |
+| civic.33 | Recall/challenger fall-rate — threshold-20 confirmed live; tiers 2/3 of the door not yet bench-exercised. Needs N sandbox cycles with city-hall + media active | ready | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] §Status log |
 
 ### infrastructure.* — Supermemory, services, ingest
 

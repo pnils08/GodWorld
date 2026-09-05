@@ -128,8 +128,8 @@ column is a derived view of C's literal, not a ledger. C must stop writing
 |---|---|---|---|
 | 4a | C stops writing `District` — delete `NEIGHBORHOOD_DISTRICT_MAP` + the L417–423 write block | engine-sheet | deploy-gated |
 | 4b | Seed `District` for all 22 live rows as ledger data, hand-authored like `CoreSimRank` | engine-sheet | after 4a deploys, else re-blanked |
-| 4c | `canonNeighborhoodLoader` also seeds district (`S.canonHoods.district`, `byDistrict`), fail-loud | engine-sheet | **DONE S423** (committed, rides the next PROD push) |
-| 4d | B drops `DISTRICT_HOODS`, reads the loader accessor | engine-sheet | **DONE S423** — `getDistrictHoods_`; 5 sites; 101/101 |
+| 4c | `canonNeighborhoodLoader` also seeds district (`S.canonHoods.district`, `byDistrict`), fail-loud | engine-sheet | **DONE S423 — LIVE PROD @51** |
+| 4d | B drops `DISTRICT_HOODS`, reads the loader accessor | engine-sheet | **DONE S423 — LIVE PROD @51** — `getDistrictHoods_`; 5 sites; 101/101; bench C109–C110 clean |
 | 4e | `auditHoodDrift.js` reconciles the live `District` column against the Node mirror | engine-sheet | Node-only |
 
 Ordering is load-bearing: **4a before 4b**, or the seed is erased by the next cycle.

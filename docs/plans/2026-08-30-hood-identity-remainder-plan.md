@@ -159,7 +159,7 @@ Ran 2026-08-30, OpenRouter Haiku. Full text in `output/grok/wiring-*.md`.
   2. Live: Crime_Metrics row-adds are sheet writes (ensure* append). Replay after bench proof. Economy/food/famous are code-only (clasp). Sequencing: after C105 verify.
   3. Montclair Crime_Metrics ghost: log as a one-row hand delete, separate replay, not this task's auto path.
 - **Verify:** bench HTTP 200, 0 new Engine_Errors; live read-back of Crime_Metrics includes the five hoods.
-- **Status:** [ ] bench next: SANDBOX 0831 @46 (C105-synced), NOT 0827 (retired); then live Crime_Metrics replay for the five appends
+- **Status:** [x] DONE S423 — bench @47 C109 (18 → 23 Crime_Metrics rows, Montclair frozen at 108, food names all on the ledger, 0 errors) + C110 (22 → 110, Montclair 108, 0 errors); LIVE PROD @51, pull-back 0 differing. No Crime_Metrics replay needed: `batchUpdateCrimeMetrics_` appends missing hoods on every fire, so live gains the five at C106 by the engine's own path. Montclair ghost row: hand delete, builder's call (Open questions)
 
 ---
 
@@ -182,5 +182,6 @@ Leave engine.131 T7 and engine.136 untouched.
 
 ## Changelog
 
+- 2026-09-05 (engine-sheet, S423, later) — **Bench-proven C109–C110 on SANDBOX 0831 @47, LIVE at PROD @51.** Predicted before the fire and observed exactly: Crime_Metrics 18 → 23 (five appends at 109), Montclair frozen at 108, 22 rows → 110 on the second fire; every served restaurant and fast-food name a Business_Ledger row across both cycles; Engine_Errors 0 → 0 → 0. Deploy record: [[../reference/DEPLOY_HISTORY]] §PROD @51. Live self-heals the five rows at C106 (engine append path) — the plan's "replay" note was wrong on inspection.
 - 2026-09-05 (engine-sheet, S423) — **Tasks 1, 4, 5, 6, 7, 8 shipped; 2–3 HELD behind engine.131 T7.** Measure-twice first: the four wiring cards still held (NEIGHBORHOOD_ECONOMIES at :105/:804, 18 crime profiles incl. Montclair, Dollar Pho at food:124, Jack London at famous:486, both weight blobs ORPHANED WRITE). Live read: Crime_Metrics 18 rows = Montclair ghost + five canon hoods missing (Brooklyn, Baylight District, Eastlake, Ivy Hill, San Antonio); Business_Ledger 52 food/nightlife/fast rows across all 22 hoods. **The collision:** `git show e9ce67a5` (T7, ships dark) lands hunks in `mapToCanonicalNeighborhood_` and `calculateNeighborhoodEconomies_` — exactly Tasks 2–3 — and DEPLOY staging overwrites that file with live base, so a second variant of the file would not survive a push. Tasks 2–3 wait for the T7 ruling and ride with it. Sequencing lock cleared (C105 fired 08-31 clean). Crime iterates `S.canonHoods.list` (the Phase-1 SET, ADR-0016) rather than `S.neighborhoodState` keys — the state loader filters to the max Cycle, the set does not. Characters authored from INSTITUTIONS §Neighborhoods per the builder's pointer. Food v2.4's pool ×3 concat + name-dedupe had cancelled every lean it applied; v2.5 draws weighted without replacement. Tests 28/28 new + 101/101 approval + 18/18 envelope; suite 200/201 (djDirect pre-existing).
 - 2026-08-30 (grok) — Initial plan from remainder research + four Haiku wiring cards. Inbox copy for Claude.

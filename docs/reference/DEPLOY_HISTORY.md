@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-09-04
+updated: 2026-09-05
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -21,6 +21,7 @@ pointers:
 
 **`SANDBOX 0831` (stood up 2026-08-31, Mike-made copy).** Copy of live post-C105 — the proving bench for the S405 C105 chase sessions (S-A through S-E, `docs/plans/2026-08-31-c105-chase-sessions.md`).
 - **Re-synced from live at C105 (S419, 2026-09-04 22:18, `syncSandboxFromLive.js --apply`, 79 tabs / 47,322 rows, read-back OK; builder cleared the script properties first).** The C106–C114 bench-only memory and the two pre-fix campaign doubles died with it.
+- **@47 (S423, 2026-09-05) = live @50 tree + the engine.134 T4–8 / civic.18 4c/4d wave (8 files), HELD four at base from the S419 live pull-back (md5-matched to `e9ce67a5^`).** C109 fired `ok:true` 174s, 0 errors: `Crime_Metrics` 18 → 23 rows (Brooklyn, Baylight District, Eastlake, Ivy Hill, San Antonio appended at 109), Montclair frozen at 108, the other 17 → 109; `Cycle_Packet` Restaurants = Port Grind / Lakeshore Cafe / Fruitvale Diner, FastFood = SpeedyBurger — all `Business_Ledger` rows. C110 `ok:true` 146s, 0 errors: 22 rows → 110, Montclair still 108; First Friday draw = West Side Cafe / Jack London Square Markets / Dragon Gate Lounge, all on the ledger. Approval engine ran on the sheet-seeded districts with no error (D7 42, D2 48 at C109).
 - **@44 → @46 (S419, 2026-09-04) = @43 + engine.109 (`godWorldEngine2.js`, `processAdvancementIntake.js`): @44 the door, @45 + the trimmed-grid guard (the bench seed refused `Intake!J1` — the live Intake grid is exactly 9 columns, so the unguarded `Relation` self-arm would have thrown at Phase5-Intake), @46 + minors hold no employer + the operator `Sex` column.** C107 (@45, Bell family of four seeded bench-only): `ok:true` 137s, 131 phases, 0 errors — POP-01085–01088 minted through the populator, `HH-0107-I001` on all four, SpouseIds symmetric, both kids carry both parents, one `Household_Ledger` + one `Family_Relationships` row, no lottery wording; caught: both children placed with an employer, Dana's gender off the dice. C108 (@46, Okafor family of three, `Sex` column): `ok:true` 122s, 131 phases, 0 errors — `HH-0108-I001`, female head = wife, child no employer / $0 / Pre-K. Bench at C108.
 - **@43 (S419, 2026-09-04) = @42 − `storylineHealthEngine.js` − `updateStorylineStatusv1.2.js` + `storyHook.js` (tracker block cut) + `godWorldEngine2.js` (Phase8-StorylineHealth slot off) = 166 files; C106 fired on the synced state `ok:true` 144s, **131 phases** (132 − the retired slot), `Engine_Errors` 0.** Bench at C106. This fire also stands in for the live smoke of @46/@47/@48 — same tree lineage, live C105 data.
 - **@42 (S419, 2026-09-04) = @41 − the six engine.142 dead files (168 files) + `godWorldEngine2.js` disable notes; C114 fired `ok:true` 200s, 132 phases, `Engine_Errors` 0 → 0; pull-back 168 js, six absent.** Bench at C114.
@@ -116,6 +117,10 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD @51 — engine.134 Tasks 4–8 + civic.18 4c/4d (2026-09-05 02:35, S423 engine-sheet)
+
+Script tree = @50 + 8 files (`c962f83f` + `2a8f64cb`): `canonNeighborhoodLoader.js` (district seed + `getDistrictHoods_`), `updateCivicApprovalRatings.js` (`DISTRICT_HOODS` literal gone), `updateCrimeMetrics.js` + `ensureCrimeMetrics.js` (22-hood set, INSTITUTIONS characters, derived default), `ensureNeighborhoodDemographics.js` (character strings), `updateNeighborhoodDemographics.js` (two orphan writes gone), `buildEveningFood.js` v2.5 (Business_Ledger names), `buildEveningFamous.js` (`S.sportsZones`). Staged from `git archive HEAD` + HELD engine.131 T7 four overlaid from the S419 live pull-back (md5 = `e9ce67a5^`); delta vs a fresh live pull = exactly those eight; repo `.clasp.json` last, prod id present / sandbox id absent / 0 tests / 166 files; `clasp-real push -f`; `deploy --deploymentId` → @51; pull-back 166 js, 0 differing, payload byte-exact to repo HEAD. Proof: bench @47 C109 + C110 (above). Live side effects at the next fire: `Crime_Metrics` gains five rows by the engine's own append path (no replay needed — `batchUpdateCrimeMetrics_` appends missing hoods every cycle); the Montclair row stops updating (hand delete pending); KONO's citizens count toward D7's condition. One live sheet write this session, already applied and read back: `Business_Ledger` BIZ-00101 `Sector` → `Services`.
 
 ### PROD @50 — engine.109 the household door (2026-09-04 23:02, S419 engine-sheet)
 

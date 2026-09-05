@@ -34,6 +34,7 @@ pointers:
 |---|---|---|
 | 0 | Measure: named-local-citizens per story per hood (coverage ≠ headcount); diff the thirteen 12-key literals (three classes, not one) | done S423 |
 | 1 | Doors: World_Config `hoodCitizenFloor` 12 / `hoodFloorPromotePerCycle` 6 / `hoodFloorSurfaceQuota` 20 / `gcSurfaceChance` 0.06 (self-armed); lazy tracked headcount per hood; feeder weights from CoreSimRank × deficit; surfacing floor draw; **migration wave** in `checkForPromotions_` | **LIVE PROD @54** (`9dcc2a78`; bench C106/C107) |
+| 1c | Sex balance (builder-ruled): feeder floors on World_Config F 120 / M 40, full-cap refill while under floor, wave draws the under-represented sex first, one-cycle seasoning | **LIVE PROD @56** (`e30021f6`–`9acb6065`; bench C109–C111) |
 | 2 | Tables: `WeatherZone` (10-zone table in code, every hood gets weather), `Adjacent` (mirrored seed → crime spillover), `AttentionWeight` (spotlight bonus + event priority 0.8+0.25w), crisis weight earned from IncomeTier + CrimeIndex, gender table deleted, dead transit corridor map deleted | **LIVE PROD @55** (`bdccc08b` + `1a20a32f`; bench C108; 66 live cells) |
 | 3 | Texture: 7 phrase pools keyed by hood → keyed by character label; arts/holiday membership lists → labels; `lib/photoGenerator.js` (media lane, 16 keys) | queued |
 
@@ -64,14 +65,15 @@ The literal encoded real-world Oakland (West Oakland poor). Canon says West Oakl
 - [x] Bench: World_Config gains the four rows on the first fire; 6 wave rows per cycle in the emptiest hoods; EmergenceCount ticks land in under-floor hoods; 0 Engine_Errors (C106–C108).
 - [x] Unit: `scripts/hoodBlindDoors.test.js` 16/16, `scripts/hoodBlindTables.test.js` 9/9; suite green but djDirect (pre-existing).
 - [x] PROD @54 / @55 byte-identical to HEAD (pull-back 0 differing).
-- [ ] Live smoke at the builder's C106 fire: four World_Config rows, six 'migration wave' ledger rows, 22 Crime_Metrics rows refreshed, no throw on a blank cell.
+- [ ] Live smoke at the builder's C106 fire: six World_Config rows, six 'migration wave' ledger rows, 22 Crime_Metrics rows refreshed, no throw on a blank cell.
 - [ ] Phase 3 shipped.
 
 ## Findings filed
 
-- Generic_Citizens is 205 M / 64 F; the wave inherits the skew (F floor 60 met → feeder never refills). Builder's call whether the wave draws sex-balanced.
+- Generic_Citizens was 205 M / 64 F → builder ruled the room skews female; shipped as Phase 1c (room women 61→69 across three bench cycles while the wave ran).
 - Wave roles in employer-less hoods price at 60000 (`lookupIncome_` default — engine.135 D2 has no Business_Ledger reference pay there). Resolves as businesses arrive.
 
 ## Changelog
 
-- 2026-09-05 — Plan written after Phase 1 + 2 shipped (S423). Phase 0 results and rulings recorded in the research file.
+- 2026-09-05 — Plan written after Phase 1 + 2 shipped (S423).
+- 2026-09-05 — Phase 1c (sex balance) shipped PROD @56; crisis-weight judgment confirmed by the builder (canon is the basis). Phase 0 results and rulings recorded in the research file.

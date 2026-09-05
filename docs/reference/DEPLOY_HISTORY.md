@@ -21,6 +21,7 @@ pointers:
 
 **`SANDBOX 0831` (stood up 2026-08-31, Mike-made copy).** Copy of live post-C105 — the proving bench for the S405 C105 chase sessions (S-A through S-E, `docs/plans/2026-08-31-c105-chase-sessions.md`).
 - **Re-synced from live at C105 (S419, 2026-09-04 22:18, `syncSandboxFromLive.js --apply`, 79 tabs / 47,322 rows, read-back OK; builder cleared the script properties first).** The C106–C114 bench-only memory and the two pre-fix campaign doubles died with it.
+- **@52 → @53 → @54 → @55 (S423, 2026-09-05 14:00–15:20) = engine.148 P1c in three bench steps (`e30021f6` floors + sex preference; `5c1f5b00` full-cap refill; `9acb6065` one-cycle seasoning). C109 ok 142s, C110 ok 136s, C111 ok 153s, 0 errors each; room women 61 → 64 → 69 while the wave took 4–5 a cycle.**
 - **@51 → @52 (S423, 2026-09-05 ~13:15) = HEAD `1a20a32f` (engine.148 Phase 2). Neighborhood_Map AF–AH seeded on the bench first (66 cells, one batched write after a per-cell run hit the Sheets write quota). C108 ok 134s, 0 errors; Crime_Metrics 22 rows LastUpdated 108 (Montclair ghost frozen at 105); wave C108 Ivy Hill / Eastlake 2 / Glenview / Grand Lake / Brooklyn; a weather-flavoured line landed on an Ivy Hill citizen.**
 - **@50 → @51 (S423, 2026-09-05 ~12:35) = HEAD `9dcc2a78` (engine.148 Phase 1: migration wave + floor dials on World_Config, feeder weights from the rank order, surfacing floor draw; 6 engine files + STUB). Bench re-synced from live at C105 right after (79 tabs, read-back OK); builder reset the script properties; C106 (ok, 144s, 0 errors) + C107 (ok, 190s, 0 errors) proved it — wave rows C106 Dimond 2 / Glenview 2 / Eastlake 1 / Brooklyn 1, C107 Ivy Hill 2 / Brooklyn / Glenview / Dimond / Eastlake. Expect on the fire: World_Config gains 4 rows (`hoodCitizenFloor` 12, `hoodFloorPromotePerCycle` 6, `hoodFloorSurfaceQuota` 20, `gcSurfaceChance` 0.06); Generic_Citizens Emerged rows in Eastlake / Brooklyn / Glenview first; `checkForPromotions_` log '(6 by migration wave)'.**
 - **@49 → @50 (S423, 2026-09-05) = HEAD `835cb097` (engine.99 #9: ChildAreas seed + `resolveHoodOrChild_`, three folds retired).** @49's push landed but its deploy bump failed on a mistyped deployment ID, so C113 fired on @48 (no change under test, `ok:true`, 0 errors); @50 bumped correctly, C114 `ok:true` 100s, 0 errors, `Neighborhood_Map` 31 cols with ChildAreas filled 10/22, promotions resolving hoods through the seed. Bench sheet write: ChildAreas header + 10 cells (grid grown 30 → 31) — replayed to live before the PROD push, so not bench-only.
@@ -121,6 +122,10 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD @56 — engine.148 Phase 1c, the waiting room skews female (2026-09-05 ~15:30, S423 engine-sheet)
+
+Script tree = @55 + 3 files (`e30021f6`, `5c1f5b00`, `9acb6065`): `engine94SheetContract.js` (+`gcPoolFloorFemale` 120 / `gcPoolFloorMale` 40 seeds), `generateGenericCitizens.js` (floors from World_Config; refill at the full 8/cycle cap while a side is under floor), `checkForPromotions.js` (`waveSexPreference_` — the wave draws the sex the Active ledger is short of first; a row minted this cycle waits one cycle). Builder-ruled 2026-09-05: the sim runs male-heavy (ledger 442 M / 387 F, room 205 M / 64 F). Bench @53 C109 (floors seeded, wave 4 F / 2 M, feeder +3 women — mood-capped), @54 C110 (cap lifted: +8 women, but 4 promoted the same cycle), @55 C111 (seasoning: all 8 new rows stayed Active; room F 61→69; 0 errors). Pull-back 0 differing / 166.
 
 ### PROD @55 — engine.148 Phase 2, hood tables → Neighborhood_Map columns (2026-09-05 ~13:35, S423 engine-sheet)
 

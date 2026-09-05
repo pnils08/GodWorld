@@ -802,6 +802,9 @@ async function runPrep() {
     '- Ledger snapshot: cycle=' + meta.cycle + ' rowCount=' + meta.rowCount,
     '- Packets: ' + written.map(w => w.dir + '(' + w.topics + ')').join(', '),
     '- Lint: ' + (leaks ? leaks + ' LEAK(S) — HALTED' : 'clean'),
+    '- Chaos cascade (engine.11 T5.3): ' + (chaosHits.length
+      ? chaosHits.length + ' Tier-1 hit(s) — CHAOS CASCADE block in every packet: ' + chaosHits.map(h => h.targetName + ' via ' + h.vehicle).join(', ')
+      : 'none this cycle'),
     '',
   ].join('\n');
   if (!fs.existsSync(plog)) fs.writeFileSync(plog, '# Production Log — Cycle ' + cycle + '\n\n(Opened by cron-civic-run.js --stage=prep)\n');

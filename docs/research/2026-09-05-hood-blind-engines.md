@@ -99,7 +99,7 @@ Three files already read the sheet's 22 (`ensureCrimeMetrics`, `ensureNeighborho
 
 **Verdict:** `adopt` — ignites engine.148 (ROLLOUT, `ready`, engine-sheet). Phase 1: World_Config dials (`hoodCitizenFloor`, `gcSurfaceChance`, `hoodFloorSurfaceBoost`), tracked headcount per hood seeded once per cycle, feeder weights from the seed with deficit, surfacing deficit-draw with ChildAreas fold on the pool. Phase 2: structure + numeric tables. Phase 3: texture pools by character label.
 
-**Ignited plans:** engine.148 plan to be written from Phase 0 results — `[[../plans/2026-09-05-hood-blind-engines-plan]]` (not yet written).
+**Ignited plans:** [[../plans/2026-09-05-hood-blind-engines-plan]] (engine.148; Phases 1–2 live PROD @54/@55, Phase 3 queued).
 
 ---
 
@@ -108,6 +108,7 @@ Three files already read the sheet's 22 (`ensureCrimeMetrics`, `ensureNeighborho
 - 2026-09-05 — civic.21 row corrected: "remainder = engine.109 Task 7" was wrong; the feeder is the bug, T7 is the patch.
 - 2026-09-05 — Phase 1 built (S423): builder ruled the slow drip will not fill ten hoods ("gifted" emergence = a migration event), superseding the engine.58 tick gate for under-floor hoods only. Four World_Config dials (`hoodCitizenFloor` 12, `hoodFloorPromotePerCycle` 6, `hoodFloorSurfaceQuota` 20, `gcSurfaceChance` 0.06), lazy per-cycle headcount seed, feeder weights from the rank order, surfacing floor draw, migration wave in `checkForPromotions_`. Tests `scripts/hoodBlindDoors.test.js` 16/16; suite 201/202.
 - 2026-09-05 — Bench @51 C106/C107 on live-synced C105: World_Config +4 rows self-armed; wave 6+6 rows greedy by deficit (C106 Dimond 2 / Glenview 2 / Eastlake 1 / Brooklyn 1; C107 Ivy Hill 2 / Brooklyn / Glenview / Dimond / Eastlake); EmergenceCount 50 → 63 → 76 with ticks in San Antonio / Ivy Hill / Brooklyn / Glenview; 0 Engine_Errors. **PROD @54** = HEAD, pull-back 0 differing. **Findings (S423 bench):** Generic_Citizens is 205 M / 64 F, so the wave inherits the skew (F floor 60 is met, the feeder never refills — builder's call whether the wave draws sex-balanced); wave roles in employer-less hoods all price at 60000 (`lookupIncome_` default — engine.135 D2 has no Business_Ledger reference pay there; resolves as businesses arrive).
+- 2026-09-05 — Phase 2 built + LIVE PROD @55 (S423): `WeatherZone` / `Adjacent` / `AttentionWeight` columns (66 authored cells, bench then live), 10-zone weather table, crime spillover from the sheet seed, crisis weight earned from IncomeTier + CrimeIndex (canon over priors — table in the plan), gender table and dead transit map deleted. Bench C108 clean: 22 Crime_Metrics rows refreshed, wave continued. `scripts/hoodBlindTables.test.js` 9/9.
 
 ---
 

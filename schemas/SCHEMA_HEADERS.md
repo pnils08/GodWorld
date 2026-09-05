@@ -959,6 +959,9 @@ pointers:
 | AC | WealthMin |
 | AD | WealthMax |
 | AE | ChildAreas |
+| AF | WeatherZone |
+| AG | Adjacent |
+| AH | AttentionWeight |
 
 ---
 

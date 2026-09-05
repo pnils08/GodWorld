@@ -318,7 +318,12 @@ function generateGenericCitizens_(ctx) {
   // live pool had drifted to 209M/29F. The world-aware churn count above
   // survives as fill pacing; the floor is the authorizer.
   // ═══════════════════════════════════════════════════════════════════════════
-  var FEMALE_FLOOR = 60, MALE_FLOOR = 40, MAX_PER_CYCLE = 8;
+  // engine.148: the floors are World_Config cells (builder 2026-09-05: the sim
+  // runs male-heavy, so the waiting room skews female). Missing fails loud.
+  var FEMALE_FLOOR = Number(ctx.config && ctx.config.gcPoolFloorFemale);
+  var MALE_FLOOR = Number(ctx.config && ctx.config.gcPoolFloorMale);
+  if (!isFinite(FEMALE_FLOOR) || !isFinite(MALE_FLOOR)) throw new Error('generateGenericCitizens_: World_Config gcPoolFloorFemale/gcPoolFloorMale missing — the engine.148 self-arm did not run (ADR-0015).');
+  var MAX_PER_CYCLE = 8;
   var activeF = 0, activeM = 0;
   for (var pr = 1; pr < genericValues.length; pr++) {
     if (norm(genericValues[pr][iStatus]) !== 'active') continue;

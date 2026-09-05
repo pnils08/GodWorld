@@ -117,6 +117,8 @@ var ENGINE148_CONFIG_SEEDS = [
   ['hoodCitizenFloor', 12, 'engine.148 tracked (Active Simulation_Ledger) citizens a neighborhood should hold; below it the hood is under-floor: the generic feeder draws it heavier and the surfacing quota points at it', 0, 500, true],
   ['gcSurfaceChance', 0.06, 'engine.58/148 per unnamed ENGINE citizen event, chance the week crosses a Generic_Citizens name — the emergence lottery dial (was the GC_SURFACE_CHANCE code literal)', 0, 1, false],
   ['hoodFloorPromotePerCycle', 6, 'engine.148 migration wave (builder-ruled 2026-09-05: the slow drip will not fill ten hoods) — per cycle, Active Generic_Citizens rows promoted straight to the ledger from under-floor hoods, most-deficient hood first, no EmergenceCount gate. 0 disables', 0, 100, true],
+  ['gcPoolFloorFemale', 120, 'engine.148 (builder 2026-09-05: the sim runs male-heavy, the waiting room should skew female) — Active female Generic_Citizens rows the feeder keeps the pool at; it grows only while a side is under its floor', 0, 500, true],
+  ['gcPoolFloorMale', 40, 'engine.148 — Active male Generic_Citizens rows the feeder keeps the pool at', 0, 500, true],
   ['hoodFloorSurfaceQuota', 20, 'engine.148 per cycle, unnamed ENGINE citizen events whose GC crossing is forced and drawn from under-floor hoods (deficit-weighted); ~45% of offerings tick, 3 ticks earn the row (engine.58). 0 disables', 0, 500, true]
 ];
 

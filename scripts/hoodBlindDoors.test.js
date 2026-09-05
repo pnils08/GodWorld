@@ -36,10 +36,10 @@ function mapSheet() {
 }
 
 function ledgerFixture(counts) {
-  const headers = ['POPID', 'First', 'Last', 'Neighborhood', 'Status'];
+  const headers = ['POPID', 'First', 'Last', 'Neighborhood', 'Status', 'Gender'];
   const rows = [];
   let n = 1;
-  Object.keys(counts).forEach(h => { for (let i = 0; i < counts[h]; i++) rows.push(['POP-' + (n++), 'A', 'B', h, 'Active']); });
+  Object.keys(counts).forEach(h => { for (let i = 0; i < counts[h]; i++) rows.push(['POP-' + (n++), 'A', 'B', h, 'Active', i % 3 === 0 ? 'female' : 'male']); }); // male-heavy, like the live ledger
   rows.push(['POP-9990', 'Dead', 'Row', 'Eastlake', 'Deceased']);
   rows.push(['POP-9991', 'Child', 'Spelling', 'Old Oakland', 'Active']);
   rows.push(['POP-9992', 'Off', 'Map', 'Los Angeles', 'Active']);
@@ -60,7 +60,7 @@ function makeSandbox() {
 function makeCtx(sb, counts, config) {
   const ctx = {
     summary: {},
-    config: Object.assign({ hoodCitizenFloor: 12, gcSurfaceChance: 0.06, hoodFloorSurfaceQuota: 20, hoodFloorPromotePerCycle: 6 }, config || {}),
+    config: Object.assign({ hoodCitizenFloor: 12, gcSurfaceChance: 0.06, hoodFloorSurfaceQuota: 20, hoodFloorPromotePerCycle: 6, gcPoolFloorFemale: 120, gcPoolFloorMale: 40 }, config || {}),
     ledger: ledgerFixture(counts),
     ss: { getSheetByName: name => name === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => mapSheet() }) } : null },
   };
@@ -77,10 +77,10 @@ const FULL = {}; HOODS.forEach(h => { FULL[h] = 20; });
 const SPARSE = Object.assign({}, FULL, { Eastlake: 0, Brooklyn: 3, Glenview: 6, 'San Antonio': 12 });
 
 console.log('T1 World_Config self-arm seeds');
-t('four engine.148 keys seed on a bare World_Config', () => {
+t('six engine.148 keys seed on a bare World_Config', () => {
   const plan = sb.inspectEngine94Config_([['Key', 'Value', 'Description']], sb.ENGINE148_CONFIG_SEEDS);
-  eq(plan.additions.map(a => a[0]).sort(), ['gcSurfaceChance', 'hoodCitizenFloor', 'hoodFloorPromotePerCycle', 'hoodFloorSurfaceQuota']);
-  assert.strictEqual(plan.additions.length, 4);
+  eq(plan.additions.map(a => a[0]).sort(), ['gcPoolFloorFemale', 'gcPoolFloorMale', 'gcSurfaceChance', 'hoodCitizenFloor', 'hoodFloorPromotePerCycle', 'hoodFloorSurfaceQuota']);
+  assert.strictEqual(plan.additions.length, 6);
 });
 t('an out-of-range or fractional integer cell fails loud', () => {
   assert.throws(() => sb.inspectEngine94Config_([['Key', 'Value', 'Description'], ['hoodCitizenFloor', 2.5, '']], sb.ENGINE148_CONFIG_SEEDS), /invalid World_Config.hoodCitizenFloor/);
@@ -176,13 +176,13 @@ t('the surfacing dials read World_Config, not a literal', () => {
 });
 
 console.log('T6 migration wave');
-const GVALS = [['First', 'Last', 'Neighborhood', 'Status']]
-  .concat([['e1', 'x', 'Eastlake', 'Active'], ['e2', 'x', 'Eastlake', 'Active'], ['e3', 'x', 'Eastlake', 'Emerged'],
-           ['b1', 'x', 'Brooklyn', 'Active'], ['b2', 'x', 'Brooklyn Basin', 'Active'],
-           ['g1', 'x', 'Glenview', 'Active'], ['d1', 'x', 'Downtown', 'Active'], ['o1', 'x', 'Los Angeles', 'Active']]);
+const GVALS = [['First', 'Last', 'Neighborhood', 'Status', 'Sex']]
+  .concat([['e1', 'x', 'Eastlake', 'Active', 'male'], ['e2', 'x', 'Eastlake', 'Active', 'female'], ['e3', 'x', 'Eastlake', 'Emerged', 'female'],
+           ['b1', 'x', 'Brooklyn', 'Active', 'male'], ['b2', 'x', 'Brooklyn Basin', 'Active', 'female'],
+           ['g1', 'x', 'Glenview', 'Active', 'male'], ['d1', 'x', 'Downtown', 'Active', 'female'], ['o1', 'x', 'Los Angeles', 'Active', 'female']]);
 t('greedy by deficit: quota 6 takes every waiting row in the under-floor hoods; never Downtown, a folded child of a full hood, or off-map', () => {
   const ctx = makeCtx(sb, SPARSE);
-  const picked = sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, mulberry32(3));
+  const picked = sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, 4, mulberry32(3));
   const hoods = Object.values(picked).sort();
   // Eastlake 2 Active (Emerged row skipped) + Brooklyn 1 + Glenview 1 = 4 < quota 6;
   // 'Brooklyn Basin' folds to Jack London, which holds its floor → never drawn.
@@ -193,13 +193,23 @@ t('greedy by deficit: quota 6 takes every waiting row in the under-floor hoods; 
 });
 t('quota 0 picks nothing; missing cell fails loud', () => {
   const off = makeCtx(sb, SPARSE, { hoodFloorPromotePerCycle: 0 });
-  eq(sb.selectFloorWaveRows_(off, GVALS, 2, 3, mulberry32(3)), {});
+  eq(sb.selectFloorWaveRows_(off, GVALS, 2, 3, 4, mulberry32(3)), {});
   const missing = makeCtx(sb, SPARSE, { hoodFloorPromotePerCycle: undefined });
-  assert.throws(() => sb.selectFloorWaveRows_(missing, GVALS, 2, 3, mulberry32(3)), /hoodFloorPromotePerCycle missing/);
+  assert.throws(() => sb.selectFloorWaveRows_(missing, GVALS, 2, 3, 4, mulberry32(3)), /hoodFloorPromotePerCycle missing/);
+});
+t('the wave draws the sex the ledger is short of first (male-heavy ledger → women first), then the rest', () => {
+  const ctx = makeCtx(sb, SPARSE);
+  assert.strictEqual(sb.waveSexPreference_(ctx), 'female');
+  const one = makeCtx(sb, SPARSE, { hoodFloorPromotePerCycle: 1 });
+  const first = sb.selectFloorWaveRows_(one, GVALS, 2, 3, 4, mulberry32(5)); // Eastlake (deficit 1.0) has e1 male + e2 female → e2 (row 2)
+  eq(Object.keys(first), ['2']);
+  const balanced = makeCtx(sb, SPARSE); balanced.ledger.rows.forEach((r, i) => { r[5] = i % 2 ? 'female' : 'male'; }); balanced.ledger.rows.push(['POP-x', 'A', 'B', 'Downtown', 'Active', balanced.ledger.rows.filter(r => r[5] === 'female').length < balanced.ledger.rows.filter(r => r[5] === 'male').length ? 'female' : 'male']);
+  const pref = sb.waveSexPreference_(balanced); assert.ok(pref === null || pref === 'female' || pref === 'male');
+  const noGender = makeCtx(sb, SPARSE); noGender.ledger.headers = noGender.ledger.headers.slice(0, 5); assert.strictEqual(sb.waveSexPreference_(noGender), null);
 });
 t('a full city waves nobody', () => {
   const ctx = makeCtx(sb, FULL);
-  eq(sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, mulberry32(3)), {});
+  eq(sb.selectFloorWaveRows_(ctx, GVALS, 2, 3, 4, mulberry32(3)), {});
 });
 
 console.log(`\n${passed} passed, ${failed} failed`);

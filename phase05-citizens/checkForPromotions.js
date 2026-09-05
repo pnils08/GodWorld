@@ -323,7 +323,7 @@ function checkForPromotions_(ctx) {
   // from the waiting room, most-deficient hood first, World_Config
   // hoodFloorPromotePerCycle rows a cycle. Everyone else still earns the row
   // at EmergenceCount 3 through the lottery below (engine.58).
-  var waveRows = selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, rng);
+  var waveRows = selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, rng);
   var waveCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -651,7 +651,7 @@ function checkForPromotions_(ctx) {
 // this cycle's earlier picks), drawn uniformly among that hood's Active rows.
 // Returns { sheetRowIndex: hood }. Empty when the cell is 0 or nobody is
 // waiting in an under-floor hood.
-function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, rng) {
+function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, rng) {
   var quota = ctx && ctx.config ? Number(ctx.config.hoodFloorPromotePerCycle) : NaN;
   if (!isFinite(quota)) {
     throw new Error('selectFloorWaveRows_: World_Config hoodFloorPromotePerCycle missing — the engine.148 self-arm did not run (ADR-0015).');
@@ -659,13 +659,19 @@ function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, rng) {
   var picked = {};
   if (quota <= 0 || gNeigh < 0) return picked;
   var floor = Number(ctx.config.hoodCitizenFloor);
+  // engine.148 (builder 2026-09-05): the wave draws the sex the tracked ledger
+  // is short of — the sim runs male-heavy, so today that is women. Within the
+  // chosen hood, rows of the preferred sex are drawn first; the rest only when
+  // none are left. Self-correcting: the preference flips when the ledger does.
+  var prefer = waveSexPreference_(ctx);
   var byHood = {};
   for (var r = 1; r < gVals.length; r++) {
     if ((gVals[r][gStat] || "").toString() !== "Active") continue;
     var hood = resolveHoodOrChild_(ctx, gVals[r][gNeigh]);
     if (!hood) continue;
-    if (!byHood[hood]) byHood[hood] = [];
-    byHood[hood].push(r);
+    if (!byHood[hood]) byHood[hood] = { preferred: [], other: [] };
+    var sx = gSex >= 0 ? String(gVals[r][gSex] || '').trim().toLowerCase() : '';
+    (prefer && sx === prefer ? byHood[hood].preferred : byHood[hood].other).push(r);
   }
   var added = {};
   for (var q = 0; q < quota; q++) {
@@ -673,16 +679,35 @@ function selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, rng) {
     var hoods = underFloorHoods_(ctx);
     for (var h = 0; h < hoods.length; h++) {
       var name = hoods[h];
-      if (!byHood[name] || !byHood[name].length) continue;
+      if (!byHood[name] || (!byHood[name].preferred.length && !byHood[name].other.length)) continue;
       var deficit = (floor - (getHoodHeadcount_(ctx, name) + (added[name] || 0))) / floor;
       if (deficit > bestDeficit) { bestDeficit = deficit; best = name; }
     }
     if (!best) break;
-    var list = byHood[best];
+    var list = byHood[best].preferred.length ? byHood[best].preferred : byHood[best].other;
     var idx = Math.floor(rng() * list.length);
     picked[list[idx]] = best;
     list.splice(idx, 1);
     added[best] = (added[best] || 0) + 1;
   }
   return picked;
+}
+
+// engine.148: 'female' when Active ledger citizens are under half female,
+// 'male' when over, null at parity or when the ledger carries no Gender column.
+function waveSexPreference_(ctx) {
+  var L = ctx && ctx.ledger;
+  if (!L || !L.headers) return null;
+  var iG = L.headers.indexOf('Gender'), iS = L.headers.indexOf('Status');
+  if (iG < 0) return null;
+  var f = 0, m = 0;
+  for (var r = 0; r < L.rows.length; r++) {
+    var row = L.rows[r];
+    if (!row) continue;
+    if (iS >= 0 && String(row[iS] || '').trim().toLowerCase() !== 'active') continue;
+    var g = String(row[iG] || '').trim().toLowerCase();
+    if (g === 'female') f++; else if (g === 'male') m++;
+  }
+  if (f + m === 0 || f === m) return null;
+  return f < m ? 'female' : 'male';
 }

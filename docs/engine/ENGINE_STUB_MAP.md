@@ -1186,8 +1186,10 @@
   Sheets: Generic_Citizens, LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
-- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, rng)**
+- **selectFloorWaveRows_(ctx, gVals, gNeigh, gStat, gSex, rng)**
   Config: ctx.config.hoodCitizenFloor, ctx.config.hoodFloorPromotePerCycle
+
+- **waveSexPreference_(ctx)**
 
 ### citizenContextBuilder.js
 - **deriveLifeState_(f)**
@@ -1463,7 +1465,7 @@
 - **generateGenericCitizens_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.genericCitizensDistribution, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensGenerated, S.newGenericCitizens
-  Config: ctx.config.rngSeed
+  Config: ctx.config.gcPoolFloorFemale, ctx.config.gcPoolFloorMale, ctx.config.rngSeed
   Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -3795,4 +3797,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1295
+**Functions mapped:** 1296

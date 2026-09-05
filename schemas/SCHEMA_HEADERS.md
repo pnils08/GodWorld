@@ -958,6 +958,7 @@ pointers:
 | AB | EmployerCharacter |
 | AC | WealthMin |
 | AD | WealthMax |
+| AE | ChildAreas |
 
 ---
 

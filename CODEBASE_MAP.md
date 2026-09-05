@@ -131,7 +131,6 @@ The simulation is organised into numbered phase directories. The master orchestr
 | `buildCityEvents.js` (~42 KB) | Generates city-wide headline events for the cycle |
 | `chaosCarsEngine.js` (~24 KB) | Chaos-Cars sub-event engine (traffic / car-culture events) |
 | `chaosCarsEngine.test.js` | Tests for ChaosCars engine |
-| `eventArcEngine.js` (~20 KB) | Manages multi-cycle event arc lifecycle |
 | `faithEventsEngine.js` (~16 KB) | Generates faith-community events |
 | `generateGameModeMicroEvents.js` (~24 KB) | Game-mode–specific micro-events |
 | `generateGenericCitizenMicroEvent.js` (~24 KB) | Generic citizen micro-event generator |
@@ -174,7 +173,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `generateCivicModeEvents.js` (~24 KB) | Civic-mode specific events |
 | `generateMediaModeEvents.js` (~21 KB) | Media-mode specific events |
 | `applyChaosDecay.js` / `applyChaosDecay.test.js` | Chaos stat decay logic + tests |
-| `processIntakeV3.js` (~10 KB) | V3 intake processing |
 | `seedRelationBondsv1.js` (~17 KB) | Seeds initial relationship bonds |
 | `runYouthEngine.js` (~20 KB) | Youth / child citizen lifecycle. **(S290)** Academic-period logic now uses `S.simMonth` (was wall-clock MONTH). Cohorts now named `'Class of ' + simYear` (was real-world year via `new Date().getFullYear()`). |
 
@@ -191,7 +189,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `filterNoiseEvents.js` | Filters low-signal events before prioritisation |
 | `prePublicationValidation.js` | Validates event corpus before edition assembly |
 | `prioritizeEvents.js` (~25 KB) | Scores and ranks events for editorial selection |
-| `processArcLifeCyclev1.js` (~32 KB) | Arc lifecycle management (open → active → resolved) |
 | `storylineHealthEngine.js` | Monitors storyline health metrics |
 | `updateStorylineStatusv1.2.js` | Updates storyline tracker status columns |
 
@@ -209,9 +206,7 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `culturalLedger.js` (~29 KB) | Cultural institution tracking ledger. **(S290)** Timestamp column now uses `inWorldStamp_(ctx)`. |
 | `domainTracker.js` (~18 KB) | Per-domain (crime, civic, arts, sports…) event tracker. Backup naming retains `new Date()` (allowed — operational-only). |
 | `mediaFeedbackEngine.js` (~50 KB) | Feeds media publication outcomes back into citizen state |
-| `mediaRoomBriefingGenerator.js` (~92 KB) | Generates the full media room briefing document |
 | `mediaRoomIntake.js` (~60 KB) | Intakes previously-published edition content. **(S290)** `birthYear` computation fixed: was `new Date().getFullYear()` (fallback 2026); now `cal.simYear - age` — never fabricated from wall clock. `parseMediaRoomMarkdown` Timestamp now stamps C+cycle. |
-| `parseMediaIntake.js` | Parses media intake Markdown |
 | `parseMediaRoomMarkdown.js` (~30 KB) | Parses structured media room Markdown. **(S290)** Timestamp column now stamps C+cycle. |
 | `sportsStreaming.js` (~18 KB) | Sports streaming / play-by-play events |
 | `storyHook.js` (~55 KB) | Generates story-hook suggestions for upcoming cycles |
@@ -233,7 +228,6 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `v3ChicagoWriter.js` (~16 KB) | Writes Chicago output to sheet tabs |
 | `v3DomainWriter.js` (~15 KB) | Writes per-domain output |
 | `v3NeighborhoodWriter.js` (~27 KB) | Writes neighbourhood-level output |
-| `v3LedgerWriter.js` | Writes cycle ledger entries |
 | `v3StoryHookWriter.js` | Writes story hooks to sheet |
 | `v3TextureWriter.js` | Writes texture/atmosphere data |
 

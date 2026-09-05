@@ -150,7 +150,7 @@
 | Story Hook | storyHook.js | v3.9 | Theme-aware hooks + sports feed triggers |
 | Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
 | Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
-| Media Briefing | mediaRoomBriefingGenerator.js | v2.7 | Consumer wiring, Continuity_Loop reference removed |
+| Media Briefing | mediaRoomBriefingGenerator.js | v2.7 | Consumer wiring, Continuity_Loop reference removed — DISABLED S328, file deleted engine.142 S419 |
 | Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
 | Media Intake | mediaRoomIntake.js | v2.5 | Storyline lifecycle, citizen routing |
 | Media Parser | parseMediaRoomMarkdown.js | v1.5 | Quotes to LifeHistory_Log |

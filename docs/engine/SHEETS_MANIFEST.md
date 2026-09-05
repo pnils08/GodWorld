@@ -163,19 +163,16 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase05-citizens/generateGenericCitizens.js` | Generic_Citizens | own-tab | ACTIVE v2.8 — Tier-5 feeder pool, sex-tagged, pool-floor gate F60/M40, max 8/cycle |
 | `phase05-citizens/processAdvancementIntake.js` | Advancement_Intake*, Generic_Citizens, Simulation_Ledger, LifeHistory_Log | own-tab | ACTIVE at `Phase5-Advancement`, both entry points; `checkEmergencePromotions_` promotes GC rows at EmergenceCount ≥ 3; `processIntake_` routes unknown intake names to Generic_Citizens, never mints SL rows |
 | `phase05-citizens/generateMediaModeEvents.js` | LifeHistory_Log, Simulation_Ledger | own-tab | |
-| `phase06-analysis/processArcLifeCyclev1.js` | Story_Arcs | own-tab | |
 | `phase06-analysis/storylineHealthEngine.js` | Storyline_Tracker | own-tab | ACTIVE at `Phase8-StorylineHealth`; reads the DISCONTINUED tracker and publishes `S.storyHooks` + `S.storylineHealth` into ctx — needs a caller-graph pass before it can follow engine.140 |
 | `phase06-analysis/updateStorylineStatusv1.2.js` | Storyline_Tracker | own-tab | OFF-PATH S407 (engine.140) — Phase-8 call commented at both entry points; the tab it ages is discontinued and readerless. `generateStorylineBriefingSection_` in the same file has no caller |
 | `phase06-analysis/applyMigrationDrift.js` | Neighborhood_Map | own-tab | |
 | `phase06-analysis/economicRippleEngine.js` | World_Population | own-tab | writes World_Population, not Population_Stats (that tab does not exist) |
 | `phase07-evening-media/mediaRoomIntake.js` | Media_Ledger, Storyline_Tracker, Cultural_Ledger, MediaRoom_Paste, Media_Intake, Media_Briefing, citizen/advancement/continuity intake tabs | phase11 + operator | cycle entry `processMediaIntake_(ctx)` runs at Phase 11; `processMediaIntakeV2()` is operator null-ctx; ~49 writes, NOT a migration target |
-| `phase07-evening-media/mediaRoomBriefingGenerator.js` | Media_Briefing family | phase11 + operator | same class as mediaRoomIntake |
 | `phase07-evening-media/parseMediaRoomMarkdown.js` | MediaRoom_Paste family | operator | self-opens the spreadsheet, `getUi().alert`, no ctx; `parseContinuityNotes_` here is live and unrelated to the deleted `continuityNotesParser.js` |
 | `phase07-evening-media/storylineWeavingEngine.js` | Storyline_Tracker | own-tab | |
 | `phase07-evening-media/updateTrendTrajectory.js` | (caller-passed) | caller-sheet | |
 | `phase07-evening-media/updateMediaSpread.js` | (caller-passed) | caller-sheet | |
 | `phase08-v3-chicago/v3NeighborhoodWriter.js`, `v3DomainWriter.js`, `v3ChicagoWriter.js` | tracking tabs | own-tab | |
-| `phase08-v3-chicago/v3LedgerWriter.js` | Event_Arc_Ledger | schema-setup | lazy `InvolvedCitizens` header-cell add; near-dormant since arc retirement |
 | `phase09-digest/applyCycleWeight.js` | Cycle_Weight | own-tab | signal-only on the cycle path; the digest row is written by `writeDigest_` at Phase 10 via intent |
 | `phase11-media-intake/healthCauseIntake.js` | Health_Cause_Intake, Health_Cause_Queue, Simulation_Ledger | operator | `runProcessHealthCauseIntake` manual trigger with stub ctx |
 | `utilities/archiveLifeHistory.js` `maintainLifeHistoryLog_` | LifeHistory_Log, LifeHistory_Archive | phase11 + rmd | final Phase-11 call, row-count gated; appends old rows to the archive then rewrites the active tab |

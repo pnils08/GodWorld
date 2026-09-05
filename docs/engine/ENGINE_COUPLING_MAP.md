@@ -338,13 +338,6 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 
 ## Intake / lifecycle engines
 
-### `processIntakeV3.js` (processIntakeV3_, Phase 5) — FULL-READ
-- **Gate:** Requires `Intake` and `Simulation_Ledger` sheets to exist. Only processes rows with at least a First or Last name.
-- **Layer 1:** Stages new citizens in memory from the `Intake` sheet. Checks against existing normalized ledger names and intra-batch duplicates. Generates new `POPID`s.
-- **Layer 2:** Implements the V3 write-intents model (`queueRangeIntent_`, `queueCellIntent_`). No random dials. Creates full empty-cell intents to clear processed rows without row-shift issues.
-- **Cross-sheet:** Reads `Intake` and `Simulation_Ledger`. Writes (via intents) to `Simulation_Ledger` (priority 100) and `Intake` (priority 150).
-- **Full-read catches:** Uses `ctx.now` directly for `CreatedAt` and `LastUpdated`. Reference footer explicitly notes the old `processIntake_` is preserved in `godWorldEngine2.js` for backwards compatibility. 
-
 ### `processAdvancementIntake.js` (processAdvancementIntake_, Phase 5) — FULL-READ
 - **Gate:** `ctx.ledger` must be initialized (except on manual operator run). Media usage rows must have valid names and not be marked processed. GC citizens require `EmergenceCount >= 3`.
 - **Layer 1:** Evaluates media usage (`UsageCount` bumps and Tier promotions at 9, 6, 3). Runs attention decay (losing tiers if usage drops). Processes lottery-based GC emergence promotions and family-match drip doors.
@@ -637,7 +630,7 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 - **Gate:** `ctx.summary.eventArcs`
 - **Layer 1:** Refreshes storyline states (active, fading, resolved).
 - **Layer 2:** Mutates `eventArcs` status inline.
-- **Cross-sheet:** Works alongside `processArcLifeCyclev1.js`.
+- **Cross-sheet:** Worked alongside `processArcLifeCyclev1.js` (deleted engine.142 S419; arc loop retired S313).
 - **Full-read catches:** None.
 
 ### `applyMigrationDrift.js` (applyMigrationDrift_, Phase 6) — FULL-READ
@@ -657,15 +650,8 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 ### `storylineHealthEngine.js` (storylineHealthEngine_, Phase 6) — FULL-READ
 - **Gate:** `ctx.summary.eventArcs`
 - **Layer 1:** Detects fizzled storylines and forces wrap-up hooks.
-- **Layer 2:** Complements `processArcLifeCyclev1.js`.
+- **Layer 2:** Complemented `processArcLifeCyclev1.js` (deleted engine.142 S419; arc loop retired S313).
 - **Cross-sheet:** Updates arc health status.
-- **Full-read catches:** None.
-
-### `processArcLifeCyclev1.js` (processArcLifeCycle_, Phase 6) — FULL-READ
-- **Gate:** `ctx.summary.worldEvents`, `ctx.summary.metrics`
-- **Layer 1:** Resolves storylines dynamically based on world conditions.
-- **Layer 2:** Core engine for narrative closure.
-- **Cross-sheet:** Evaluates global contexts to resolve arcs.
 - **Full-read catches:** None.
 
 ### `applyCivicLoadIndicator.js` (applyCivicLoadIndicator_, Phase 6) — FULL-READ
@@ -753,13 +739,6 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 - **Cross-sheet:** **High integration with GAS**. Uses `ctx.ss.getSheetByName` to perform read-only lookups on `LifeHistory_Log`, `Business_Ledger`, `Faith_Organizations`, `Community_Programs`.
 - **Full-read catches:** None.
 
-### `parseMediaIntake.js` (parseMediaIntake_, Phase 7) — FULL-READ
-- **Gate:** `ctx`, raw media text output.
-- **Layer 1:** Parses text looking for the `CULTURAL INDEX` block. Can trigger `registerCulturalEntity_()`.
-- **Layer 2:** Acts as a parser/middleware.
-- **Cross-sheet:** Potentially calls `registerCulturalEntity_` (which interacts with GAS).
-- **Full-read catches:** None.
-
 ### `buildMediaPacket.js` (buildMediaPacket_, Phase 7) — FULL-READ
 - **Gate:** `ctx.summary`
 - **Layer 1:** Builds a Markdown packet detailing the cycle for the newsroom (LLM agents).
@@ -779,13 +758,6 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 - **Layer 1:** Modifies the specified row to record a new `TrendTrajectory` ("viral", "surging", "stable", etc.) based on `fameScore` deltas, `MediaCount`, and `MediaSpread`.
 - **Layer 2:** Header-based column lookup.
 - **Cross-sheet:** **High integration with GAS**. Direct mutation of Google Sheets cells via `sheet.getRange()`.
-- **Full-read catches:** None.
-
-### `mediaRoomBriefingGenerator.js` (mediaRoomBriefingGenerator_, Phase 7) — FULL-READ
-- **Gate:** `ctx`, `ctx.ss`, `ctx.summary`
-- **Layer 1:** Reads `Storyline_Tracker`, `Civic_Office_Ledger`, `Election_Log`. Appends row to `Media_Briefing` sheet.
-- **Layer 2:** N/A.
-- **Cross-sheet:** **High integration with GAS**. Uses `ss.getSheetByName` to pull civic context and storylines. Creates `Media_Briefing` sheet if missing. Writes final briefing string via `sheet.appendRow()`.
 - **Full-read catches:** None.
 
 ### `mediaRoomIntake.js` (mediaRoomIntake_, Phase 7) — FULL-READ
@@ -885,13 +857,6 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 - **Layer 1:** Modifies probability scaling factors. High overload scores suppress active generation to simulate "cooldowns" or recovery cycles.
 - **Layer 2:** Governs macro-level volume, not individual citizen dials.
 - **Cross-sheet:** Modulates context state in `ctx.summary`.
-- **Full-read catches:** None.
-
-### `v3LedgerWriter.js` (v3LedgerWriter_, Phase 8) — FULL-READ
-- **Gate:** Phase 10 execution. Drains pending write-intents and persists multi-cycle event arcs.
-- **Layer 1:** N/A (Persistence layer).
-- **Layer 2:** Appends generated narrative arcs to the central tracking registry.
-- **Cross-sheet:** Append-only writes to `Event_Arc_Ledger`.
 - **Full-read catches:** None.
 
 ## Phase 9 & 11: Digest & Intake

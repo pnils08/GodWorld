@@ -313,8 +313,6 @@ Bay Area specifics:
 | `godWorldEngine2.js` | Main orchestrator - runs all 11 phases |
 | `worldEventsEngine.js` | Generates world events |
 | `bondEngine.js` | Manages relationships |
-| `eventArcEngine.js` | Multi-cycle story arcs |
-| `mediaRoomBriefingGenerator.js` | Creates briefings for journalists |
 | `citizenContextBuilder.js` | Assembles full citizen profiles |
 | `storyHook.js` | Generates narrative hooks |
 

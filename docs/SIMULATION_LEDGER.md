@@ -177,10 +177,10 @@ Every column is a data point in someone's life. This maps who writes each column
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
-| A | 1 | POPID | `POP-00001` format. Unique. Never reuse. | processIntakeV3, integration scripts | Universal key — everything reads this | **CAUSAL** — `generateGameModeMicroEvents.js:502` `getCitizenDialBands_` lookup |
-| B | 2 | First | Text | processIntakeV3, integration scripts | All event generators, buildDeskPackets, display | RECORD-by-design (display) |
+| A | 1 | POPID | `POP-00001` format. Unique. Never reuse. | processIntake_ (godWorldEngine2.js), integration scripts | Universal key — everything reads this | **CAUSAL** — `generateGameModeMicroEvents.js:502` `getCitizenDialBands_` lookup |
+| B | 2 | First | Text | processIntake_ (godWorldEngine2.js), integration scripts | All event generators, buildDeskPackets, display | RECORD-by-design (display) |
 | C | 3 | MaidenName | Birth surname (repurposed S321; was `Middle `) | bondEngine GC-spouse promotion (`setC('MaidenName', pick.last)`) | heritage scoring (future) | **RECORD-by-design** — keeps the birth-line after marriage; header renamed both sheets S321 |
-| D | 4 | Last | Text | processIntakeV3, integration scripts | All event generators, buildDeskPackets, display | RECORD-by-design (display) |
+| D | 4 | Last | Text | processIntake_ (godWorldEngine2.js), integration scripts | All event generators, buildDeskPackets, display | RECORD-by-design (display) |
 | E | 5 | OriginGame | Text (source game/integration) | Integration scripts | — | **CAUSAL** — `generateGameModeMicroEvents.js:363` MLB check routes event pool |
 
 ### Classification (F–J)
@@ -191,7 +191,7 @@ Every column is a data point in someone's life. This maps who writes each column
 | G | 7 | MED (y/n) | Yes/yes/No/no/n | Integration scripts | Same bug. | **CAUSAL** — routes media archetype, skips education |
 | H | 8 | CIV (y/n) | Yes/yes/No/no/n | Integration scripts | Same bug. | **CAUSAL** — routes civic pools |
 | I | 9 | ClockMode | ENGINE / GAME / CIVIC / MEDIA | Integration scripts, cleanup | Event generators (mode gates), lifecycle engines, buildDeskPackets | **CAUSAL** — `generateGameModeMicroEvents.js:482` mode routing, central lifecycle router |
-| J | 10 | Tier | 1-4 (integer) | processIntakeV3, integration scripts | Event generators (T1 +10% chance), buildDeskPackets, prioritizeEvents | **CAUSAL** — `runEducationEngine.js:338` T3/T4-only education; event-frequency bias T1+10%/T2+5% |
+| J | 10 | Tier | 1-4 (integer) | processIntake_ (godWorldEngine2.js), integration scripts | Event generators (T1 +10% chance), buildDeskPackets, prioritizeEvents | **CAUSAL** — `runEducationEngine.js:338` T3/T4-only education; event-frequency bias T1+10%/T2+5% |
 
 ### Core State (K–N)
 
@@ -210,13 +210,13 @@ Every column is a data point in someone's life. This maps who writes each column
 | P | 16 | SpouseId | 'POP-NNNNN First Last' (ID + name) | bondEngine `marryCitizens_` (both spouses) | spouse-drip tooling | **RECORD** (S321 regen caught live rename CreatedAt→SpouseId — the `marryCitizens_` 'prod no-ops until rollout rename' guard is now live-active; full verdict next audit) |
 | Q | 17 | Last Updated | ISO timestamp | Engine orchestrator | — | RECORD-by-design (timestamp) |
 | R | 18 | TraitProfile | `Archetype:X\|Mods:a,b\|social:0.7\|...\|V:1.5\|Updated:cNN` | compressLifeHistory v1.5 (Phase 9), integrateAthletes | generateCitizensEvents v2.8 (archetype weights, tone, motifs), buildDeskPackets (voice cards) | **CAUSAL** — `generateCitizensEvents.js:509` (archetype weight definitions), `:2775` (applied to event pools 1.3-1.4x); `storyHook.js:1214` persona match; derived from DialState by `compressLifeHistory.js:426` |
-| S | 19 | UsageCount | Integer | processIntakeV3, processAdvancementIntake | — | **CAUSAL** — `generateCitizensEvents.js:233` (public figure pool), `:2113` + `:2369` (UsageCount >= 8 gates). engine.88 (S339): journalists now accrue it from their OWN landed work — `cron-desk-run.js` appends a `byline-landed` Citizen_Media_Usage row at gate-pass, `ingestPublishedEntities.js` appends `byline-published` at edition publish; `processMediaUsage_` counts both into the author's row (tier bars 3/6/9, engine.69 decay) |
+| S | 19 | UsageCount | Integer | processIntake_ (godWorldEngine2.js), processAdvancementIntake | — | **CAUSAL** — `generateCitizensEvents.js:233` (public figure pool), `:2113` + `:2369` (UsageCount >= 8 gates). engine.88 (S339): journalists now accrue it from their OWN landed work — `cron-desk-run.js` appends a `byline-landed` Citizen_Media_Usage row at gate-pass, `ingestPublishedEntities.js` appends `byline-published` at edition publish; `processMediaUsage_` counts both into the author's row (tier bars 3/6/9, engine.69 decay) |
 
 ### Location & Household (T–Y)
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |
 |-----|---|--------|-------------|---------|---------|--------------|
-| T | 20 | Neighborhood | Canonical Oakland neighborhood (see `lib/canonNeighborhoods.js`; 21-name map roster as of S256) | runNeighborhoodEngine, migrationTrackingEngine, processIntakeV3 | Everything location-aware: buildDeskPackets, aggregateNeighborhoodEconomics, civic engines, gentrification | **CAUSAL** — `loadNeighborhoodState.js:37` per-hood dynamics; neighborhood event pools; engine.61 `creditFactorFor_` (banking credit) |
+| T | 20 | Neighborhood | Canonical Oakland neighborhood (see `lib/canonNeighborhoods.js`; 21-name map roster as of S256) | runNeighborhoodEngine, migrationTrackingEngine, processIntake_ (godWorldEngine2.js) | Everything location-aware: buildDeskPackets, aggregateNeighborhoodEconomics, civic engines, gentrification | **CAUSAL** — `loadNeighborhoodState.js:37` per-hood dynamics; neighborhood event pools; engine.61 `creditFactorFor_` (banking credit) |
 | U | 21 | HouseholdId | `HH-XXXX-XXX` format | householdFormationEngine, seedHouseholds | generationalWealthEngine, migrationTrackingEngine, queryFamily | **CAUSAL** — `generationalEventsEngine.js:343-366` birth physics requires household; household reconciliation grouping |
 | V | 22 | MaritalStatus | Single / Married / Divorced / Widowed | householdFormationEngine | buildInitiativePackets | **CAUSAL** — `generationalEventsEngine.js:352` birth eligibility; bondEngine marriage/divorce logic |
 | W | 23 | NumChildren | Integer | householdFormationEngine | — | **CAUSAL** — 3-child cap in `checkBirth_`; `runHouseholdEngine.js:523` family flavor |

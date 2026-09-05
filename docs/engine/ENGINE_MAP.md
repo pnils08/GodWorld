@@ -142,7 +142,7 @@
 
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
-| 5-Intake | `processIntake_()` | phase01-config/godWorldEngine2.js:1202 | Process new citizen intake rows. `processIntakeV3.js` was the write-intent rewrite that never landed (never wired — S408, G-PF32) |
+| 5-Intake | `processIntake_()` | phase01-config/godWorldEngine2.js:1202 | Process new citizen intake rows. (`processIntakeV3.js`, the write-intent rewrite that never landed, deleted engine.142 S419) |
 | 5-NamedCitizens | `updateNamedCitizens_()` | godWorldEngine2.js | Update named citizen status/fields |
 | 5-CitizenEvents | `generateCitizensEvents_()` | phase05-citizens/generateCitizensEvents.js | ENGINE-only citizen life events (rich pipeline) |
 | 5-Promotions | `checkForPromotions_()` | phase05-citizens/checkForPromotions.js | Career promotions |
@@ -208,7 +208,7 @@
 |------|----------|------|---------|
 | 8-CycleWeight | `applyCycleWeightForLatestCycle_()` | phase09-digest/applyCycleWeightForLatestCycle.js | Signal scoring (low/medium/high) |
 | 8-V3Preload | `v3PreloadContext_()` | phase08-v3-chicago/v3preLoader.js | Load domain/neighborhood state from ledgers. `loadActiveArcsFromLedger_` **DISABLED S313** — `S.eventArcs` no longer re-ingested (in-cycle crisis-bucket arcs only) |
-| ~~8-ArcLifecycle~~ | ~~`processArcLifecycle_()`~~ | phase06-analysis/processArcLifeCyclev1.js | **DISABLED S313 (Mike-direct)** — arc loop retired: stories are seeded, never re-ingested. Zombie loop (spawner off-path since S185; 36 arcs stuck at peak C82–C101). Call sites commented, retained for reversibility. Was: advance arc phases. |
+| ~~8-ArcLifecycle~~ | ~~`processArcLifecycle_()`~~ | ~~phase06-analysis/processArcLifeCyclev1.js~~ (deleted engine.142 S419) | **DISABLED S313 (Mike-direct)** — arc loop retired: stories are seeded, never re-ingested. Zombie loop (spawner off-path since S185; 36 arcs stuck at peak C82–C101). Call sites commented, retained for reversibility. Was: advance arc phases. |
 | ~~8-StorylineStatus~~ | ~~`updateStorylineStatus_()`~~ | phase06-analysis/updateStorylineStatusv1.2.js | **DISABLED S407 (engine.140)** — it aged `Storyline_Tracker`, DISCONTINUED 2026-08-05 and superseded by `Storyline_Ledger`; its C105 line (9 abandoned, 0 concluded) read as "storylines have no way to end" and opened a chase. Last reader repointed at the live ledger the same session, so the tab is readerless. Call sites commented at BOTH entry points (:493, :2206), retained for reversibility. Was: moved from Phase 6 S116. | **AUDIT CORRECTED S407:** the prior note claimed it writes `ctx.summary.storylineUpdates`. **It does not** — grep for `storylineUpdates`, `ctx.summary` and `S.` in that file returns nothing, and no reader exists anywhere in `phase*/`, `scripts/` or `lib/`. Pure sheet + Logger, which is why removing it cascades nowhere. |
 | 8-StorylineHealth | `monitorStorylineHealth_()` | phase06-analysis/storylineHealthEngine.js | Monitor storyline decay. **Moved from Phase 6 S116.** File path CORRECTED S407 — this row named `hookLifecycleEngine.js`, which does not exist on disk. **⚠ engine.141:** still ACTIVE and still reads the DISCONTINUED `Storyline_Tracker`, publishing `S.storyHooks` + `S.storylineHealth` into ctx from it — the one live path still carrying that tab's data into the world. Needs its own caller-graph pass before it can follow engine.140. |
 | 8-V3Integration | `v3Integration_()` | phase08-v3-chicago/v3Integration.js | V3 module orchestrator (arcs, domains, textures, hooks) |
@@ -238,16 +238,16 @@
 | 10-RecordEvents25 | `recordWorldEvents25_()` | phase10-persistence/recordWorldEventsv25.js | Archive events (v2.5 format) |
 | 10-RecordEventsV3 | `recordWorldEventsv3_()` | phase10-persistence/recordWorldEventsv3.js | Archive events (v3 format) |
 | 10-NeighborhoodMap | `saveV3NeighborhoodMap_()` | phase08-v3-chicago/v3NeighborhoodWriter.js | Persist neighborhood state |
-| ~~10-Arcs~~ | ~~`saveV3ArcsToLedger_()`~~ | phase08-v3-chicago/v3LedgerWriter.js | **DISABLED S313** — Event_Arc_Ledger frozen at 653 rows as historical data. See 8-ArcLifecycle note. |
+| ~~10-Arcs~~ | ~~`saveV3ArcsToLedger_()`~~ | ~~phase08-v3-chicago/v3LedgerWriter.js~~ (deleted engine.142 S419) | **DISABLED S313** — Event_Arc_Ledger frozen at 653 rows as historical data. See 8-ArcLifecycle note. |
 | 10-Bonds | `saveRelationshipBonds_()` | phase05-citizens/bondPersistence.js | Persist bonds to sheet |
-| 10-BondLedger | `saveV3BondsToLedger_()` | phase08-v3-chicago/v3LedgerWriter.js | Persist bonds (v3 format) |
+| 10-BondLedger | `saveV3BondsToLedger_()` | phase05-citizens/bondEngine.js:2621 | Persist bonds (v3 format) — row corrected S419: the writer was never in v3LedgerWriter.js |
 | 10-Domains | `saveV3Domains_()` | phase08-v3-chicago/v3DomainWriter.js | Persist domain state |
 | 10-Seeds | `saveV3Seeds_()` | phase10-persistence/saveV3Seeds.js | Persist story seeds |
 | 10-Hooks | `saveV3Hooks_()` | phase08-v3-chicago/v3StoryHookWriter.js | Persist story hooks |
 | 10-Textures | `saveV3Textures_()` | phase08-v3-chicago/v3TextureWriter.js | Persist texture triggers |
 | 10-Chicago | `saveV3Chicago_()` | phase08-v3-chicago/v3ChicagoWriter.js | Persist Chicago state |
 | 10-CyclePacket | `buildCyclePacket_()` | phase10-persistence/buildCyclePacket.js | Build JSON cycle packet |
-| 10-MediaBriefing | `generateMediaBriefing_()` | phase07-evening-media/mediaRoomBriefingGenerator.js | Generate media room briefing |
+| ~~10-MediaBriefing~~ | ~~`generateMediaBriefing_()`~~ | ~~phase07-evening-media/mediaRoomBriefingGenerator.js~~ | **DISABLED S328 W2a** — Media_Briefing had zero readers; file deleted engine.142 S419 |
 | 10-MediaLedger | `recordMediaLedger_()` | phase10-persistence/recordMediaLedger.js | Archive media events |
 | 10-CycleSeed | `saveCycleSeed_()` | phase10-persistence/saveV3Seeds.js | Save RNG seed for replay |
 | 10-EveningSnapshot | `saveEveningSnapshot_()` | phase09-digest/finalizeCycleState.js | Save evening snapshot to PropertiesService (~800 bytes). **S116** |
@@ -302,14 +302,12 @@ These exist in the codebase but are NOT in the engine call chain:
 | `phase05-citizens/updateCivicLedgerFactions.js` | Not in engine — setup script |
 | `phase06-analysis/hookLifecycleEngine.js` | Not in engine |
 | `phase06-analysis/storylineHealthEngine.js` | Not in engine |
-| `phase06-analysis/processArcLifeCyclev1.js` | **ACTIVE** — called by engine at godWorldEngine2.js:322,1622. The 4-param shadowed `arcLifecycleEngine.js` deleted S199. |
 | `phase07-evening-media/storylineWeavingEngine.js` | Not in engine |
 | `phase07-evening-media/culturalLedger.js` | Not in engine |
 | `phase07-evening-media/citizenFameTracker.js` | Not in engine |
 | `phase07-evening-media/domainTracker.js` | Runs every cycle at Phase8-V3Integration — `v3Integration_` dispatches `domainTracker_`, `storyHookEngine_` (`storyHook.js`) and `chicagoSatelliteEngine_` (`chicagoSatellite.js`) by string through its `V3_FUNCTIONS` registry (`v3Integration.js:93-96`). Corrected S408 (G-PF32) |
 | `phase07-evening-media/updateMediaSpread.js` | Not in engine |
 | `phase07-evening-media/updateTrendTrajectory.js` | Not in engine |
-| `phase07-evening-media/parseMediaIntake.js` | Helper |
 | `phase07-evening-media/parseMediaRoomMarkdown.js` | Helper |
 
 ---
@@ -390,8 +388,8 @@ Note: All engine files use `var S = ctx.summary`. Grep for `S.fieldName`, not `c
 |-------|--------|---------|-------|
 | `patternCalendarContext` | applyPatternDetection.js | 36, 46 | Always {} |
 | ~~`storylineUpdates`~~ | ~~updateStorylineStatusv1.2.js~~ | — | **REMOVED S407 — this field never existed.** The file writes no ctx field at all (verified by grep for the name, `ctx.summary` and `S.`), and nothing reads it across `phase*/`, `scripts/`, `lib/`. A phantom row that made a pure sheet-writer look like a ctx producer. |
-| `arcResolutions` | processArcLifeCyclev1.js | 200 | Active engine file |
-| `arcPhaseChanges` | processArcLifeCyclev1.js | 201 | Active engine file |
+| `arcResolutions` | processArcLifeCyclev1.js | 200 | File deleted engine.142 S419 (arc loop retired S313) |
+| `arcPhaseChanges` | processArcLifeCyclev1.js | 201 | File deleted engine.142 S419 (arc loop retired S313) |
 | `advancementResults` | processAdvancementIntake.js | 53 | |
 | `chicagoPopulation` | generateChicagoCitizensv1.js | 161 | chicagoCitizens array IS read |
 

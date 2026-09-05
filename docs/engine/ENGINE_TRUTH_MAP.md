@@ -471,14 +471,6 @@ Each file gets a `### <relpath>` entry with six fields. The bar: if an entry deg
 **Gap:** ⟪PENDING⟫
 **Touches:** ⟪PENDING⟫
 
-### phase04-events/eventArcEngine.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
 ### phase04-events/faithEventsEngine.js
 **Purpose:** ⟪PENDING⟫
 **Actual:** ⟪PENDING⟫
@@ -673,14 +665,6 @@ Each file gets a `### <relpath>` entry with six fields. The bar: if an entry deg
 **Gap:** ⟪PENDING⟫
 **Touches:** ⟪PENDING⟫
 
-### phase05-citizens/processIntakeV3.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
 ### phase05-citizens/runAsUniversePipeline.js
 **Purpose:** ⟪PENDING⟫
 **Actual:** ⟪PENDING⟫
@@ -859,14 +843,6 @@ Each file gets a `### <relpath>` entry with six fields. The bar: if an entry deg
 **Gap:** ⟪PENDING⟫
 **Touches:** ⟪PENDING⟫
 
-### phase06-analysis/processArcLifeCyclev1.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
 ### phase06-analysis/storylineHealthEngine.js
 **Purpose:** ⟪PENDING⟫
 **Actual:** ⟪PENDING⟫
@@ -965,23 +941,7 @@ Each file gets a `### <relpath>` entry with six fields. The bar: if an entry deg
 **Gap:** ⟪PENDING⟫
 **Touches:** ⟪PENDING⟫
 
-### phase07-evening-media/mediaRoomBriefingGenerator.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
 ### phase07-evening-media/mediaRoomIntake.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
-### phase07-evening-media/parseMediaIntake.js
 **Purpose:** ⟪PENDING⟫
 **Actual:** ⟪PENDING⟫
 **Reach:** ⟪PENDING⟫
@@ -1088,14 +1048,6 @@ Each file gets a `### <relpath>` entry with six fields. The bar: if an entry deg
 **Touches:** ⟪PENDING⟫
 
 ### phase08-v3-chicago/v3Integration.js
-**Purpose:** ⟪PENDING⟫
-**Actual:** ⟪PENDING⟫
-**Reach:** ⟪PENDING⟫
-**Status:** ⟪PENDING⟫
-**Gap:** ⟪PENDING⟫
-**Touches:** ⟪PENDING⟫
-
-### phase08-v3-chicago/v3LedgerWriter.js
 **Purpose:** ⟪PENDING⟫
 **Actual:** ⟪PENDING⟫
 **Reach:** ⟪PENDING⟫

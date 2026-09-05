@@ -122,7 +122,6 @@ GodWorld/
 | `phase06-analysis/economicRippleEngine.js` | JS | Economic ripple effects | ~1,050 |
 | `phase06-analysis/applyMigrationDrift.js` | JS | Migration drift analytics | ~1,000 |
 | `phase07-evening-media/applyStorySeeds.js` | JS | Applies story seeds to media (~90 KB) | ~2,450 |
-| `phase07-evening-media/mediaRoomBriefingGenerator.js` | JS | Generates media room briefing (~92 KB) | ~2,500 |
 | `phase07-evening-media/mediaRoomIntake.js` | JS | Parses incoming media room data | ~1,650 |
 | `phase07-evening-media/storyHook.js` | JS | Story hook assignment engine | ~1,500 |
 | `phase07-evening-media/mediaFeedbackEngine.js` | JS | Media feedback loop | ~1,350 |

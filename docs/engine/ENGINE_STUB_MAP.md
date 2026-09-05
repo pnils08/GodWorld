@@ -639,20 +639,6 @@
 - **reset()**
   Sheets: Business_Ledger, LifeHistory_Log, Neighborhood_Map
 
-### eventArcEngine.js
-- **getCurrentCycle_(ctx)**
-  Reads: S.absoluteCycle, S.cycleCount, S.cycleId
-  Config: ctx.config.cycleCount
-
-- **pickNeighborhoodForDomain_(domain, rng)**
-  Reads: S.eventArcs
-
-- **eventArcEngine_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.cycleWeight, S.domainPresence, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.shockFlag, S.sportsSeason, S.weather, S.worldPopulation
-
-- **generateSafeUuid_(rng)**
-  RNG: ctx.rng / safeRand_(ctx)
-
 ### faithEventsEngine.js
 - **runFaithEventsEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.season, S.simMonth, S.weather, S.worldEvents
@@ -1814,18 +1800,6 @@
 - **markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle)**
   Sheets: Generic_Citizens
 
-### processIntakeV3.js
-- **processIntakeV3_(ctx)**
-  Reads: S.intakeProcessed
-  Writes: S.intakeProcessed
-  Sheets: Intake, Simulation_Ledger
-
-- **getMaxPopIdFromValues_(ledgerValues)**
-
-- **existsInLedgerValues_(ledgerValues, first, last)**
-
-- **padNumber_(num, length)**
-
 ### runAsUniversePipeline.js
 - **mulberry32_uni_(seed)**
 
@@ -2189,28 +2163,6 @@
   Reads: S.cityDynamics, S.civicLoad, S.demographicShifts, S.economicMood, S.engineEvents, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.neighborhoodDemographics, S.patternFlag, S.season, S.shockFlag, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventPrioritization
 
-### processArcLifeCyclev1.js
-- **processArcLifecycle_(ctx)**
-  Reads: S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.storySeeds
-  Writes: S.storySeeds
-  Config: ctx.config.cycleCount
-  RNG: ctx.rng / safeRand_(ctx)
-
-- **gatherWorldState_(ctx)**
-  Reads: S.cityDynamics, S.economicMood, S.weather, S.worldEvents
-  Sheets: World_Population
-
-- **checkConditionResolution_(arc, worldState, calendar)**
-
-- **calculateTensionDrift_(arc, worldState, calendar, rng)**
-
-- **determinePhase_(arc)**
-
-- **getResolutionText_(arc, rng)**
-
-- **updateArcLedger_(ss, arcs, cycle)**
-  Sheets: Event_Arc_Ledger
-
 ### storylineHealthEngine.js
 - **monitorStorylineHealth_(ctx)**
   Reads: S.storyHooks
@@ -2431,56 +2383,6 @@
   Reads: S.mediaEffects
   RNG: ctx.rng / safeRand_(ctx)
 
-### mediaRoomBriefingGenerator.js
-- **getFormattedJournalist_(name, suffix)**
-
-- **getReporterBySignal_(signalType)**
-
-- **generateMediaBriefing_(ctx)**
-  Reads: S.advancementIntake, S.arcLifecycleResults, S.bondSummary, S.cityDynamics, S.civicLoad, S.culturalEntityCreates, S.culturalEntityUpdates, S.cycleId, S.cycleOfYear, S.cycleWeight, S.cycleWeightReason, S.economicMood, S.economicNarrative, S.economicSummary, S.employmentRate, S.eventArcs, S.godWorldYear, S.holiday, S.holidayPriority, S.hookLifecycle, S.illnessRate, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.month, S.neighborhoodEconomies, S.patternFlag, S.pendingConfrontations, S.promotions, S.season, S.sentiment, S.shockFlag, S.sportsEventTriggers, S.sportsSeason, S.storySeeds, S.storylineHealth, S.tierPromotions, S.totalPopulation, S.weather, S.worldEvents
-  Writes: S.mediaBriefing
-  Config: ctx.config.cycleCount
-  Sheets: Media_Briefing
-
-- **generateCitizenSpotlight_(ctx, S, cal)**
-  Reads: S.bondSummary, S.eventArcs
-
-- **generateStorylineBrief_(ctx, S, cycle)**
-  Sheets: Storyline_Tracker
-
-- **getCivicContext_(ss, cycle, cal)**
-  Sheets: Civic_Office_Ledger, Election_Log
-
-- **formatPercent_(value)**
-
-- **getHolidayZones_(holiday)**
-
-- **getHolidayStoryIdeas_(cal, civic, S)**
-
-- **determineFrontPage_(S, ctx, cal, civic)**
-  Reads: S.cycleWeightReason, S.eventArcs, S.shockFlag
-
-- **getArcReporter_(arcType, domain)**
-
-- **categorizeArcs_(arcs, cycle)**
-
-- **getContinuityFromLoop_(ss, cycle)**
-  Sheets: Storyline_Tracker
-
-- **getEngineContinuity_(S, arcs)**
-  Reads: S.migrationDrift, S.patternFlag
-
-- **generateVoiceProfiles_(frontPageCall, assignments, arcReport)**
-
-- **generateSectionAssignments_(S, arcReport, seeds, promotions, cal, civic)**
-  Reads: S.culturalEntityCreates
-
-- **extractJournalistName_(str)**
-
-- **extractAllJournalistNames_(str)**
-
-- **getAssignmentDetail_(assignmentStr)**
-
 ### mediaRoomIntake.js
 - **processMediaIntake_(ctx)**
   Writes: S.intakeProcessed
@@ -2559,10 +2461,6 @@
 
 - **processRawCitizenUsageLogManual()**
   Sheets: MediaRoom_Paste
-
-### parseMediaIntake.js
-- **parseMediaIntake_(ctx, mediaText)**
-  Reads: S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simMonth, S.sportsSeason
 
 ### parseMediaRoomMarkdown.js
 - **diagnosePasteSheet()**
@@ -2760,11 +2658,6 @@
 - **v3Integration_(ctx)**
   Reads: S.cycleId, S.domainPresence, S.economicRipples, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.relationshipBonds, S.season, S.sportsSeason, S.textureTriggers, S.v3ModulesRan
   Writes: S.cycleId, S.eventArcs, S.v3CalendarContext, S.v3IntegrationComplete, S.v3ModulesRan
-  Config: ctx.config.cycleCount
-
-### v3LedgerWriter.js
-- **saveV3ArcsToLedger_(ctx)**
-  Reads: S.cycleId, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsSeason
   Config: ctx.config.cycleCount
 
 ### v3NeighborhoodWriter.js
@@ -3865,5 +3758,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 189
-**Functions mapped:** 1318
+**Files scanned:** 183
+**Functions mapped:** 1282

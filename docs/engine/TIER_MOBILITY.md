@@ -57,7 +57,7 @@ What IS wired:
 
 | Fact | Value | Pointer |
 |---|---|---|
-| CUL rows auto-create | entities named in cultural coverage / evening-famous events register on `Cultural_Ledger` with accumulating `FameScore` + `MediaCount` | `parseMediaIntake.js` L142, `buildEveningFamous.js` L576 → `registerCulturalEntity_` |
+| CUL rows auto-create | entities named in cultural coverage / evening-famous events register on `Cultural_Ledger` with accumulating `FameScore` + `MediaCount` | `buildEveningFamous.js` L576 (`parseMediaIntake.js` registrar deleted engine.142 S419) → `registerCulturalEntity_` |
 | Fame bar | `CULTURAL_FAME_BAR = 25` (builder ruling) — at ≥25 the citizen-events antenna lights up via `UniverseLinks` POPID | `culturalLedger.js` L63, engine.68 |
 | A-list/D-list gradient | recognition-event weight scales with fame: ≥25 → 1.15, ≥40 → 1.25, ≥60 → 1.35 — the grade is lived texture already | `generateCitizensEvents.js` L2369-2370 |
 

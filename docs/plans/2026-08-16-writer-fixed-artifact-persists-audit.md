@@ -291,6 +291,71 @@ more duplicate POSTs per retry. With PATCH, a retry is idempotent — it refresh
 the existing document instead of adding one. Any future work on Half B should
 check the same interaction before adding a gate to a POST-only writer.
 
+### engine.114 blast-radius correction (S427, research-build) — the isolation gap S376 missed
+
+Mike asked to verify tonight's Saturday run (2026-09-05, 16:00) actually landed
+citizen usage, storylines, and canon ingest, not just logged success. Checked
+against live data (`lib/sheets.js` reads, not docs):
+
+- **Tonight's run: clean.** `saturday-run.log` step 4 shows `[DONE] Success: 1,
+  Errors: 0`. No incident — the false-clear didn't fire tonight because nothing
+  actually failed.
+- **Citizen usage → `Advancement_Intake1`: confirmed live.**
+  `phase07-evening-media/mediaRoomIntake.js` (Phase 11, every cycle) is the
+  writer — not the retired `editionIntakeV3.js` media-desk path. Last 8 rows
+  are real C105 citations (Almanzar, Keane, Rook, etc.), tagged `Media usage
+  C{cycle} (mentioned/featured/byline-landed): <article>`.
+- **Storylines → tracker: confirmed live.** `Storyline_Ledger` (the
+  Mike-ruled 2026-08-05 successor to the discontinued `Storyline_Tracker`) got
+  18 appended + 7 updated tonight via `cron-saturday-run.js` step 6b.
+- Both of the above run in the **same script, same invocation** as the canon
+  door (`stepPublish`), just later in `main()`'s step sequence.
+
+**This is the new risk the S376 analysis didn't check.** S376 (above) verified
+gating is safe from the *retry/duplicate-POST* angle (no daemon retries this
+cron path, so PATCH-idempotency isn't required here) and concluded "gating is
+the conservative move." True for that angle — but `cron-saturday-run.js:main()`
+runs its 8 steps as one bare sequential `await` chain with **no per-step
+try/catch**:
+
+```
+await stepAudit(cycle); await stepCurate(cycle); await stepNarrate(cycle);
+await stepPublish(cycle);   // <- ingestEdition spawnSync + the dead gate
+await stepCoverage(cycle); await stepSweep(cycle);
+await stepSheets(cycle);    // <- Citizen_Media_Usage / Advancement_Intake1
+await stepSignals(cycle);   // <- Storyline_Ledger
+main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
+```
+
+Activating the dead gate as originally scoped (just make `ingestEdition.js`
+exit 1 on `errors > 0`) makes the existing `if (ing.status !== 0) throw` in
+`stepPublish` fire for real. Because nothing isolates the steps, that throw
+would abort `stepCoverage` / `stepSweep` / `stepSheets` / `stepSignals` too —
+taking down citizen-usage tracking and the storyline ledger, both confirmed
+healthy tonight, as collateral from a canon-door problem they have no
+dependency on. That's a worse failure mode than today's silent false-clear:
+today, a partial canon failure clears silently but the rest of the week's
+tracking still lands; gated-but-unisolated, a partial canon failure would take
+the tracking down too, just loudly.
+
+**Revised fix (supersedes the "just add exit(1)" scope from S376):**
+1. Keep `ingestEdition.js` (+ the other 3 canon-ingestion writers) reporting
+   its true error count on exit, per S376/governance.49 — that part stands.
+2. At the `stepPublish` call site in `cron-saturday-run.js`, catch the
+   `ingestEdition` failure locally instead of letting it propagate: log it
+   loudly (stderr + a Discord ping, matching the pattern `notifyFanoutFailures`
+   already uses elsewhere in the newsroom pipeline) and continue to
+   `stepCoverage`/`stepSweep`/`stepSheets`/`stepSignals` regardless — they carry
+   no dependency on canon-door success.
+3. Do the same audit for `ingestCivicWiki.js` / `ingestEditionWiki.js` (both
+   operator-fired from `/post-publish`, no shared step sequence — lower risk,
+   but worth confirming their callers don't have the same bare-chain shape
+   before gating them per S376's original scope).
+
+Escalated to engine-sheet (Mike-direct 2026-09-05) to review this design and
+pair on the `cron-saturday-run.js` change together before it ships — the
+Saturday chain is the canon door for both terminals' work.
+
 ### governance.49 first run — 4 new instances, canon-ingestion writers (S376, kimi)
 
 `scripts/auditWriterExitCodes.js` shipped (`eac179de`) with ratcheted report +
@@ -352,4 +417,5 @@ built inline, per this plan's own instruction.
 - 2026-08-16 — CLOSED (S376). Sheet-is-canonical ruling; 5 orphans pruned, faith reconciled. Layer-wide 386 surplus → 0, every projection 1.00 with zero aliases and zero orphans.
 - 2026-08-16 — Both open questions resolved (S375, research-build): grouped rows ratified, census greenlit inside engine.111. governance.48 swept to ROLLOUT_ARCHIVE — this plan stays open, engine.111/112/governance.49 still point here.
 - 2026-08-16 (kimi) — governance.49 SHIPPED (`eac179de`): `auditWriterExitCodes.js`, report + `--gate` modes. Self-test passed; found 4 new canon-ingestion instances. See §governance.49 first run.
+- 2026-09-05 (S427, research-build) — engine.114 verified live (0 errors tonight); found `cron-saturday-run.js` has no per-step isolation, so a bare gate would take down healthy steps too. Fix rescoped, escalated to engine-sheet to pair. See §engine.114 blast-radius correction.
 - 2026-08-16 (research-build) — Filed engine.113 for the 4 canon-ingestion instances, escalated to Mike (Saturday canon door affected). See §governance.49 first run.

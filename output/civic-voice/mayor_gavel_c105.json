@@ -1,0 +1,98 @@
+{
+  "office": "mayor_gavel",
+  "cycle": 105,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle, we moved decisively on every front—clearing the Youth Apprenticeship Pipeline backlog, launching OARI in District 1, advancing the Fruitvale Transit Hub visioning, and securing the Baylight District vote. We also honored the work in Ivy Hill while addressing KONO’s energy with real resources. These aren’t just initiatives; they’re promises kept to Oaklanders.",
+  "statements": [
+    {
+      "statementId": "STMT-105-mayor_gavel-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund — Month-Six Disbursement + Canvass Launch",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Fifty-seven families are already in stable homes because of this fund. Today, we’re reaching the next block.",
+      "fullStatement": "The West Oakland Stabilization Fund has already helped 57 households stay in their homes, and today we’re launching the month-six disbursement batch and a targeted canvass for slipping blocks. This isn’t just about money—it’s about making sure no family gets left behind. Brenda Okoro’s team will lead the outreach, and we’re committing to transparency every step of the way. Oaklanders deserve stability, and we’re delivering it.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C105: Month-six disbursement batch approved (12 households); canvass launched for slipping blocks.",
+        "NextScheduledAction": "Month-seven disbursement review",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-105-mayor_gavel-002",
+      "type": "executive_order",
+      "topic": "Oakland Alternative Response Initiative — District 1 Expansion Launch",
+      "initiative": "INIT-002",
+      "decision": "launched",
+      "quote": "West Oakland proved this works. Now, District 1 gets the same promise: safety without criminalization.",
+      "fullStatement": "Today, the Oakland Alternative Response Initiative expands to District 1. This isn’t a pilot—it’s a permanent shift in how we keep our communities safe. OARI teams will respond to nonviolent calls, connecting residents to the resources they need, not the criminal justice system. We’ve seen the results in West Oakland, and now we’re bringing that same approach to District 1. This is what reform looks like in action.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C105: District 1 expansion launched; monthly reporting and audit framework in place.",
+        "NextScheduledAction": "First expansion-district evaluation",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-105-mayor_gavel-003",
+      "type": "policy_position",
+      "topic": "Fruitvale Transit Hub Phase II — First Visioning Session",
+      "initiative": "INIT-003",
+      "decision": "visioning session conducted",
+      "quote": "Fruitvale’s small businesses and vendors aren’t just stakeholders—they’re the heart of this project.",
+      "fullStatement": "The first visioning session for the Fruitvale Transit Hub Phase II is complete, and it was a powerful reminder of why this project matters. We heard directly from the small businesses and vendors who make Fruitvale thrive, and their voices will shape every decision moving forward. This isn’t just about transit—it’s about protecting the culture and economy of Fruitvale. We’re building infrastructure that works for the people who call this neighborhood home.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "visioning-complete",
+        "MilestoneNotes": "C105: First visioning session conducted; feedback incorporated into design phase.",
+        "NextScheduledAction": "Design-phase kickoff",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-105-mayor_gavel-004",
+      "type": "vote_reaction",
+      "topic": "Baylight District — Final Council Vote on Phase II Bid",
+      "initiative": "INIT-006",
+      "decision": "approved",
+      "quote": "This is Oakland’s future being built—by Oaklanders, for Oaklanders.",
+      "fullStatement": "The final council vote on the Baylight District Phase II bid is in, and the result is clear: Oakland is ready to build. Three bidders, one vision, and a commitment to jobs, housing, and economic growth for our city. This project will create thousands of jobs and bring new life to Jack London and Downtown. To the council members who voted yes—thank you for seeing what Oakland can be. To the community—this is your victory.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C105: Final council vote approved Phase II bid; construction planning phase begins.",
+        "NextScheduledAction": "Bid finalization and contract signing",
+        "NextActionCycle": 107
+      }
+    },
+    {
+      "statementId": "STMT-105-mayor_gavel-005",
+      "type": "executive_order",
+      "topic": "Youth Apprenticeship Pipeline — Backlog Clearance Directive",
+      "initiative": "INIT-007",
+      "decision": "issued administrative order",
+      "quote": "Every young person in this city deserves a shot, not a runaround. Today, we’re cutting the red tape.",
+      "fullStatement": "Today, I issued an interagency administrative order directing OEWD and all partner agencies to clear the Youth Apprenticeship Pipeline backlog before the C106 town hall deadline. We simplified the intake process, added new recruitment partners, and now we’re enforcing the timeline. This isn’t just about paperwork—it’s about making sure Oakland’s young people get the opportunities they’ve earned. The backlog ends now.",
+      "trackerUpdates": {
+        "initiative": "INIT-007",
+        "ImplementationPhase": "implementation-active",
+        "MilestoneNotes": "C105: Administrative order issued to clear backlog; intake processing targets mandated across agencies.",
+        "NextScheduledAction": "Backlog processing completion + town hall",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-105-mayor_gavel-006",
+      "type": "public_remark",
+      "topic": "KONO and Ivy Hill — Crisis and Credit",
+      "initiative": null,
+      "decision": "acknowledged and addressed",
+      "quote": "KONO’s energy is real, and Ivy Hill’s progress is a testament to the people who refuse to give up on this city.",
+      "fullStatement": "This week, I want to recognize two neighborhoods that embody Oakland’s spirit. In KONO, the energy is undeniable—businesses are thriving, streets are safe, and the community is coming together. We’re not taking that for granted. My office is directing additional resources to support KONO’s momentum, including realigned OPD patrols and targeted economic development support. And in Ivy Hill, the progress we’re seeing is a testament to the resilience of its people—and the city’s commitment to standing with them. To the organizers, volunteers, and residents who’ve worked tirelessly: this is your victory. We’re proud to support it.",
+      "trackerUpdates": {}
+    }
+  ]
+}

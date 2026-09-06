@@ -1,0 +1,28 @@
+{
+  "office": "council_d7",
+  "cycle": 105,
+  "speaker": "Warren Ashford",
+  "cascadeSummary": "This cycle, I prioritized accountability in KONO and defending fiscal responsibility in Temescal. KONO requires transparent investment, and I pushed for detailed audits before committing city resources. In Temescal, I supported accelerating the health center construction but demanded oversight to ensure costs remain controlled.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d7-001",
+      "type": "vote_statement",
+      "topic": "KONO Infrastructure Crisis",
+      "initiative": null,
+      "decision": "Push for detailed audits before committing city resources to KONO",
+      "quote": "KONO needs investment, but we need to see the receipts before we sign the check.",
+      "fullStatement": "KONO’s energy is undeniable, but energy alone doesn’t build infrastructure. Before we commit city resources, we need detailed audits of the small-business retention reports and service gap analyses from Economic Development. Stabilization starts with data, not declarations. Let’s ensure our investments are strategic and accountable.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d7-002",
+      "type": "vote_statement",
+      "topic": "Temescal Community Health Center",
+      "initiative": "INIT-005",
+      "decision": "Support accelerating the health center construction with cost oversight",
+      "quote": "Temescal’s health center is happening—this spring, not next year. Because when you’re drilling foundations, you don’t clock out at 5.",
+      "fullStatement": "Temescal’s health center is a critical project, and accelerating its construction is the right move. However, speed cannot come at the expense of fiscal responsibility. We must ensure cost oversight and transparency throughout the project. Temescal deserves this center, and they deserve it done right.",
+      "trackerUpdates": {}
+    }
+  ]
+}

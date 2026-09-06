@@ -1,0 +1,70 @@
+# C105 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 105
+**Issued:** C105 (auto-derived, cron-civic-run.js --stage=directive)
+**Source:** world_summary_c105 + engine review HIGHs + tracker + C104 voice record
+
+---
+## Ramon Vega — City Council District 4
+
+- **Agent:** `.claude/agents/civic-office-council-d4/`
+- **Address:** Call the final City Council authorization vote on the Baylight District Phase II development bid (INIT-006) during the C105 legislative session.
+- **Why:** Following C104 approval of the three-bidder shortlist and transmission of the evaluation rubric, INIT-006 is scheduled on the tracker for its decisive council vote in C105.
+- **Acceptance:** A recorded roll-call vote or official council action on the Phase II developer selection in the C105 legislative record.
+- **Silence consequence:** Stalls the Phase II procurement timeline, leaving the Baylight development pipeline without an authorized execution partner.
+
+## Keisha Ramos — Baylight Authority Director
+
+- **Agent:** `.claude/agents/civic-office-baylight-authority/`
+- **Address:** Deliver the final bid recommendation and contract term sheet for the Phase II developer selection to City Council ahead of the C105 vote.
+- **Why:** With three shortlisted consortiums finalized in C104, council members require the definitive scoring matrix and infrastructure financing commitments to execute the INIT-006 authorization vote in C105.
+- **Acceptance:** Public transmittal of the recommended Phase II developer contract summary to the Council President's desk.
+- **Silence consequence:** Council votes without vetted fiscal terms, risking deferral or contested approvals on the master development agreement.
+
+## Vanessa Tran-Muñoz — OARI Program Director
+
+- **Agent:** `.claude/agents/civic-project-oari/`
+- **Address:** Execute the District 1 operational launch for the Oakland Alternative Response Initiative (INIT-002) and publish shift deployment thresholds addressing elevated CrimeIndex levels in West Oakland (1.16), Fruitvale (1.00), and East Oakland (1.17).
+- **Why:** INIT-002 tracker milestones mandate the D1 expansion launch in C105, while engine review flagged severe incoherence between active implementation and persisting high CrimeIndex metrics in key corridors.
+- **Acceptance:** A published D1 operational rollout notice and responder dispatch schedule detailing coverage across West Oakland, Fruitvale, and East Oakland.
+- **Silence consequence:** Uncoordinated rollout across expansion districts and unaddressed safety variance undermining confidence in non-police response models.
+
+## Marcus Webb — OEWD Program Director (Stabilization Fund)
+
+- **Agent:** `.claude/agents/civic-project-stabilization-fund/`
+- **Address:** Publish the Month-six disbursement review and launch the targeted door-to-door canvass across West Oakland's slipping commercial blocks.
+- **Why:** With 57 of 280 target households funded through C104 (12 disbursed in batch five), INIT-001 requires Month-six execution in C105 to reverse depressed West Oakland RetailVitality (6.17).
+- **Acceptance:** Filing of the Month-six intake report and canvass launch verification covering West Oakland priority blocks.
+- **Silence consequence:** Outreach momentum stalls, leaving 223 target households unreached and commercial vitality depressed in West Oakland.
+
+## Elena Soria Dominguez — Transit Hub Planning Lead
+
+- **Agent:** `.claude/agents/civic-project-transit-hub/`
+- **Address:** Convene the first community visioning session for Fruitvale Transit Hub Phase II (INIT-003) and release the draft small business and vendor protection guidelines.
+- **Why:** Tracker milestones require the first visioning session to take place by January 15 (C105) following C104 session announcements, specifically safeguarding local commercial access along E. 12th Street.
+- **Acceptance:** A filed summary of proceedings from the initial visioning session including merchant access protocols.
+- **Silence consequence:** Public input lapses, risking vendor displacement and community opposition before transit hub design plans advance.
+
+## Bobby Chen-Ramirez — Health Center Project Director
+
+- **Agent:** `.claude/agents/civic-project-health-center/`
+- **Address:** File the Phase 2 structural frame mobilization schedule and double-shift compliance report for the Temescal Community Health Center (INIT-005).
+- **Why:** Double shifts continued through C105 following HCAI excavation sign-offs in C104, making structural frame groundbreaking the primary milestone gating early C106.
+- **Acceptance:** Submission of the certified structural contractor mobilization schedule and seismic frame inspection calendar.
+- **Silence consequence:** Groundbreaking delays that push Phase 2 structural completion past established fiscal and construction windows.
+
+## Rafael Montez — Police Chief
+
+- **Agent:** `.claude/agents/civic-office-police-chief/`
+- **Address:** Transmit the C105 patrol coordination plan detailing shift coverage alongside expanding OARI teams in East Oakland (CrimeIndex 1.17) and West Oakland (CrimeIndex 1.16).
+- **Why:** Safety metrics remain strained across East and West Oakland in C105, requiring explicit boundaries and communication protocols between OPD dispatch and OARI alternative response units.
+- **Acceptance:** A public departmental memo defining OPD dispatch thresholds and co-response coordination zones for C105.
+- **Silence consequence:** Conflicting dispatch protocols and fragmented emergency coverage in high-incident corridors.
+
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Transmit the interagency administrative order directing OEWD and partner agencies to clear the Youth Apprenticeship Pipeline (INIT-007) backlog before the C106 town hall deadline.
+- **Why:** Following C104 corrective plan filings and the executive approval shift to 69 in C105, executive authority must enforce partner intake processing to meet the C106 pilot clearance deadline.
+- **Acceptance:** An issued executive order or administrative directive mandating pipeline intake processing targets across participating municipal departments.
+- **Silence consequence:** The INIT-007 backlog remains unresolved into C106, compromising youth workforce commitments and administrative follow-through.

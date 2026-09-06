@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-001",
+  "initiativeId": "INIT-001",
+  "cycle": 105,
+  "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+  "consolidatedFrom": [
+    "STMT-105-mayor_gavel-001 (Mayor gavel — West Oakland Stabilization Fund — Month-Six Disbursement + Canvass Launch)",
+    "STMT-105-stabilization_fund-001 (Webb — Month-six disbursement)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-001",
+    "ImplementationPhase": "disbursement-active",
+    "MilestoneNotes": "C105: Month-six disbursement batch approved (12 households); canvass launched for slipping blocks.",
+    "NextScheduledAction": "Month-seven disbursement review",
+    "NextActionCycle": 106
+  }
+}

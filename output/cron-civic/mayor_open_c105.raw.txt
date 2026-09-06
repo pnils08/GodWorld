@@ -1,0 +1,60 @@
+```json
+{
+  "office": "mayor_open",
+  "cycle": 105,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle, I certified the Baylight Phase II contract terms to close procurement while addressing the 13-point approval drop with concrete operational milestones. I advanced the West Oakland Stabilization Fund with a month-six disbursement review and canvass launch, greenlit the Oakland Alternative Response Initiative's District 1 expansion, and committed to attending the first Fruitvale Transit Hub visioning session to protect small businesses. For KONO, I directed staff to coordinate with local artists on a pop-up cultural activation, while crediting Ivy Hill's progress to the Stabilization Fund and community partners like Temescal Islamic Center and St. Esperanza Parish.",
+  "statements": [
+    {
+      "statementId": "STMT-105-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "Baylight District Phase II Contract Certification",
+      "initiative": "INIT-006",
+      "decision": "approved",
+      "quote": "This contract isn’t just ink on paper—it’s 12,000 construction jobs and a district that will define Oakland for generations.",
+      "fullStatement": "Today, I certified the Baylight Phase II contract terms, closing procurement and locking in the vision we’ve fought for: a stadium district built by Oaklanders, for Oaklanders. This isn’t just about bricks and steel—it’s about the 12,000 construction jobs we’re creating, the small businesses we’re guaranteeing space for, and the legacy we’re building. To those who’ve questioned the timeline or the cost: I hear you. And that’s why we’re publishing a corrective response this cycle—detailing every milestone, every safeguard, and every dollar accounted for. Oakland doesn’t wait for permission to win.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-002",
+      "type": "executive_order",
+      "topic": "West Oakland Stabilization Fund Month-Six Disbursement Review",
+      "initiative": "INIT-001",
+      "decision": "launched",
+      "quote": "Fifty-seven families have waited long enough. Today, we’re cutting the red tape and getting money into hands that need it.",
+      "fullStatement": "The West Oakland Stabilization Fund has already disbursed funds to 57 households, but we’re not stopping there. This cycle, we’re launching a month-six review to audit our outreach, clear bottlenecks, and expand our canvass to the blocks where displacement pressure is highest. Brenda Okoro’s team will report directly to me on progress by the end of the month. To the families still waiting: we see you. And we’re coming to your door.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-003",
+      "type": "initiative_response",
+      "topic": "Oakland Alternative Response Initiative District 1 Expansion",
+      "initiative": "INIT-002",
+      "decision": "launched",
+      "quote": "West Oakland proved this works. Now, we’re bringing it to District 1—not as a pilot, but as a promise kept.",
+      "fullStatement": "The Oakland Alternative Response Initiative’s expansion into District 1 begins this cycle, with teams trained, protocols adapted, and community partners ready to go. This isn’t a test—it’s a commitment. We’ve seen the results in West Oakland: fewer 911 calls for mental health crises, faster response times, and real trust built between residents and responders. To the skeptics: the data is clear. And to the families who’ve waited for this: your neighborhood is next.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-004",
+      "type": "public_remark",
+      "topic": "Fruitvale Transit Hub Phase II Visioning Session",
+      "initiative": "INIT-003",
+      "decision": "attending",
+      "quote": "This isn’t just about transit—it’s about protecting the small businesses and vendors who make Fruitvale thrive.",
+      "fullStatement": "I’ll be at the first Fruitvale Transit Hub visioning session this cycle to listen—not just to planners, but to the small business owners, street vendors, and families who call this neighborhood home. This project will move forward, but it will move forward with Fruitvale’s voice at the center. That means guaranteed vendor spaces, rent protections for existing businesses, and a transit hub that serves the people who’ve built this community, not just the people passing through.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-005",
+      "type": "policy_position",
+      "topic": "KONO and Ivy Hill — Crisis and Credit",
+      "initiative": null,
+      "decision": "coordinating cultural activation for KONO; crediting community partners in Ivy Hill",
+      "quote": "KONO’s energy is real, and Ivy Hill’s progress is a testament to the resilience of its people—and the city’s support.",
+      "fullStatement": "KONO’s vibrancy this cycle is a reminder of what happens when artists, small businesses, and neighbors come together. My office is coordinating with local creatives to launch a pop-up cultural activation in KONO this month—because this city thrives when we invest in the energy that’s already here. Meanwhile, Ivy Hill’s progress isn’t an accident. It’s the result of the Stabilization Fund, the seniors lunch programs at Temescal Islamic Center and St. Esperanza Parish, and the community leaders who refused to let their neighborhood be left behind. That’s Oakland winning.",
+      "trackerUpdates": {}
+    }
+  ]
+}
+```

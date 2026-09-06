@@ -1,0 +1,24 @@
+{
+  "office": "stabilization_fund",
+  "cycle": 105,
+  "speaker": "Marcus Delano Webb",
+  "cascadeSummary": "We are advancing the Month-six disbursement batch to stabilize 12 additional households, bringing the total to 57 families protected. Simultaneously, we are launching a targeted canvass across West Oakland's slipping commercial blocks to accelerate outreach and ensure no eligible applicants are left behind. Every application is processed with precision to protect these futures.",
+  "statements": [
+    {
+      "statementId": "STMT-105-stabilization_fund-001",
+      "type": "operational_status",
+      "topic": "Month-six disbursement",
+      "initiative": "INIT-001",
+      "decision": "Approved disbursement for 12 households and launched canvass outreach",
+      "quote": "Twelve more households have final approval for stabilization assistance—bringing us to fifty-seven families protected with zero compliance exceptions.",
+      "fullStatement": "The Month-six disbursement batch for the West Oakland Stabilization Fund is now audit-ready and moving forward. Twelve additional households will receive stabilization assistance, bringing the total number of families protected to fifty-seven. Every application has been processed with precision and certainty, ensuring compliance with all program requirements. We are also launching a targeted canvass across West Oakland's slipping commercial blocks to accelerate outreach and ensure no eligible applicants are left behind. Stability isn't just a milestone—it's a mandate.",
+      "trackerUpdates": {
+        "initiative": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C105: Month-six disbursement approved for 12 households; total now 57 families stabilized.",
+        "NextScheduledAction": "Month-seven intake targeting",
+        "NextActionCycle": 106
+      }
+    }
+  ]
+}

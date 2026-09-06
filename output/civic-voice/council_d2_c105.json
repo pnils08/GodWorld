@@ -1,0 +1,56 @@
+{
+  "office": "council_d2",
+  "cycle": 105,
+  "speaker": "Leonard Tran",
+  "cascadeSummary": "I am voting YES on Baylight Phase II with formal amendment language codifying hard infrastructure commitments for Jack London—sidewalk widening, drainage, and transit access—as binding conditions of approval. I am also formally declining Director Vance's request to introduce Grand Lake stabilization until economic decay data is presented, and I am claiming credit for Downtown and Chinatown's sustained economic performance.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d2-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Phase II Final Authorization",
+      "initiative": "INIT-006",
+      "decision": "YES with binding Jack London infrastructure amendment",
+      "quote": "Development without infrastructure is a debt we pay later. I'm voting yes, but only with hard commitments locked in writing.",
+      "fullStatement": "Jack London has momentum—retail busy, events drawing crowds, people moving in. But momentum isn't self-sustaining. The crime index sits above city average and property incidents are elevated. I've reviewed the three shortlisted bidders and their community engagement in Jack London specifically. I'm satisfied with their capacity and track record. However, my support comes with non-negotiable conditions: formal amendment language requiring sidewalk widening along Embarcadero West, upgraded drainage systems for the estuary-adjacent blocks, and enhanced transit access integration before Phase II groundbreaking. These aren't requests—they're binding stipulations in the authorization vote. Downtown and Chinatown's success came from infrastructure first, development second. Jack London deserves the same formula.",
+      "disposition": "YES",
+      "actionAsked": "Codify Jack London infrastructure commitments as legally binding conditions of Baylight Phase II authorization",
+      "tone": "evidence-driven",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d2-002",
+      "type": "policy_statement",
+      "topic": "Grand Lake Commercial Stabilization",
+      "initiative": null,
+      "decision": "Declined to introduce pending data review",
+      "quote": "I don't write checks for other districts without seeing the ledger first.",
+      "fullStatement": "Director Vance requested I introduce a Grand Lake commercial stabilization package. I am declining. My position hasn't changed from last cycle: show me economic decay data—vacancy rates, revenue decline, business closures—then we can discuss whether stabilization is warranted and whether the model that worked for D2 is transferable. D2's success came from evidence, not blanket programs. I won't export unproven models elsewhere.",
+      "disposition": "no-action",
+      "actionAsked": "Present economic impact data on Grand Lake before stabilization discussion proceeds",
+      "tone": "respectfully-dissenting",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d2-003",
+      "type": "credit_claim",
+      "topic": "Downtown and Chinatown Economic Performance",
+      "initiative": null,
+      "decision": "Claimed credit for sustained district economic performance",
+      "quote": "Downtown isn't buzzing by accident—it's because we focused on basic infrastructure, safety, and letting businesses operate without unnecessary obstruction.",
+      "fullStatement": "Downtown and Chinatown are clearly upbeat this cycle: street trade busy, crime low, mood lifted. This is not accidental. It reflects this office's deliberate focus on basic infrastructure, public safety coordination, and pragmatic business support rather than pilot projects or ideological experiments. The merchants in Chinatown and the property owners in Downtown know what works: predictable services, visible presence, and minimal bureaucratic interference. I will continue defending this approach against any attempt to divert resources to unproven alternatives.",
+      "disposition": "statement",
+      "actionAsked": "Continue prioritizing infrastructure and safety over experimental programs in D2",
+      "tone": "quiet-substantive",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

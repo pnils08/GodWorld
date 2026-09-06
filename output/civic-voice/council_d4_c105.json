@@ -1,0 +1,56 @@
+{
+  "office": "council_d4",
+  "cycle": 105,
+  "speaker": "Ramon Vega",
+  "cascadeSummary": "I called the final authorization vote on Baylight Phase II as demanded, while pressing my ongoing case for Glenview infrastructure parity and defending Ivy Hill's progress as earned, not gifted. My approval slipped one point—I'll wear that for the bridge I'm building between development imperatives and constituent accountability.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d4-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Phase II Final Authorization",
+      "initiative": "INIT-006",
+      "decision": "Called for final roll-call vote; will vote YES on authorization",
+      "quote": "Four qualified bidders, three finalists, one clean site—this is the process I demanded, and this is the vote I promised.",
+      "fullStatement": "I am calling the final authorization vote on Baylight District Phase II this cycle. The procurement process delivered exactly what I required: competitive bidding, transparent evaluation, and a shortlist of qualified developers with demonstrated capacity. This isn't development at any cost—it's development with guardrails. I've reviewed the bid packages. The fiscal structure holds. The community benefits agreement has teeth. I will vote yes on authorization, and I expect this council to meet its obligation to the timeline we set.",
+      "disposition": "YES",
+      "actionAsked": "Final roll-call vote on INIT-006 Phase II authorization resolution",
+      "tone": "procedural-authoritative",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d4-002",
+      "type": "constituent_advocacy",
+      "topic": "Glenview Infrastructure Equity",
+      "initiative": null,
+      "decision": "Demanded Glenview receive equivalent infrastructure assessment to KONO's 48-hour audit",
+      "quote": "KONO gets a 48-hour audit. Glenview gets what—another cycle of 'we'll get to it'?",
+      "fullStatement": "The Mayor acknowledged KONO and Ivy Hill this cycle. Good. But Glenview's numbers are real: sentiment at 98 percent, crime incidents at 4 against a city average of 6.3, property crime half the city rate. These aren't talking points—they're the result of targeted investment and fiscal discipline working together. I've defended this district's record before the Mayor and I'll do it again: when you fund infrastructure and hold it accountable, outcomes follow. D4 isn't asking for special treatment. We're demanding equivalent treatment. Glenview deserves its own infrastructure assessment, not a referral to next quarter's calendar.",
+      "disposition": "statement",
+      "actionAsked": "Authorize immediate infrastructure assessment for Glenview equivalent to KONO audit",
+      "tone": "blunt-practical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d4-003",
+      "type": "constituent_credit",
+      "topic": "Ivy Hill Progress Attribution",
+      "initiative": null,
+      "decision": "Asserted Ivy Hill's progress results from targeted investment and accountability, not automatic city support",
+      "quote": "Ivy Hill's progress is a testament to the resilience of its people—and the city's support, when that support is structured and monitored.",
+      "fullStatement": "The Mayor notes Ivy Hill's progress. I note the mechanism: the Stabilization Fund's targeted, monitored investment in D4 infrastructure. Ivy Hill's upbeat mood and struggling street trade aren't contradictory—they're the profile of a neighborhood recovering from disinvestment through deliberate, accountable public spending. The credit belongs to the residents who organized, the small businesses that persisted, and the council majority that demanded fiscal discipline in how we deployed those dollars. Ivy Hill proves my theory: outcomes follow when you pair investment with accountability.",
+      "disposition": "statement",
+      "actionAsked": "Continue monitored investment in Ivy Hill commercial corridor stabilization",
+      "tone": "deliberate-analytical",
+      "targets": [
+        "civic"
+      ],
+      "trackerUpdates": {}
+    }
+  ]
+}

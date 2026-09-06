@@ -1,0 +1,18 @@
+{
+  "office": "council_d8",
+  "cycle": 105,
+  "speaker": "Nina Chen",
+  "cascadeSummary": "I'm highlighting the proven success of community partnerships in Adams Point while addressing Lake Merritt's growing needs through a proposed liquor license moratorium. My focus remains on protecting neighborhood character through proper process and documentation.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d8-001",
+      "type": "vote_statement",
+      "topic": "District 8 Community Progress",
+      "initiative": null,
+      "decision": "Support existing community partnerships in Adams Point and propose liquor license moratorium for Lake Merritt",
+      "quote": "Adams Point proves what happens when we follow the process - real results through documented partnerships, not flashy promises.",
+      "fullStatement": "The clear success in Adams Point demonstrates the value of doing this right - through proper MOUs, documented community benefits agreements, and measured progress tracking. That's the model we should replicate, not the temporary fixes. Meanwhile, Lake Merritt's growth needs responsible management. I'm renewing my call for that overdue safety impact study before any new liquor licenses are approved along Lakeshore. Growth shouldn't outpace our ability to properly assess impacts.",
+      "trackerUpdates": {}
+    }
+  ]
+}

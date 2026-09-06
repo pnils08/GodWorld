@@ -1,0 +1,17 @@
+{
+  "initiative": "INIT-003",
+  "initiativeId": "INIT-003",
+  "cycle": 105,
+  "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+  "consolidatedFrom": [
+    "STMT-105-mayor_gavel-003 (Mayor gavel — Fruitvale Transit Hub Phase II — First Visioning Session)",
+    "STMT-105-transit_hub-001 (Soria Dominguez — Fruitvale Transit Hub Phase II — Visioning)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-003",
+    "ImplementationPhase": "visioning-complete",
+    "MilestoneNotes": "C105: First visioning session conducted; feedback incorporated into design phase.",
+    "NextScheduledAction": "Design-phase kickoff",
+    "NextActionCycle": 106
+  }
+}

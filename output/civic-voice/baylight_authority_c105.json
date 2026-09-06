@@ -1,0 +1,24 @@
+{
+  "office": "baylight_authority",
+  "cycle": 105,
+  "speaker": "Keisha Ramos",
+  "cascadeSummary": "With council authorization secured, the Baylight Authority is mobilizing the Phase II development team to begin environmental remediation and early construction staging. Our focus remains delivering the project on time and within the allocated budget while meeting all infrastructure commitments.",
+  "statements": [
+    {
+      "statementId": "STMT-105-baylight_authority-001",
+      "type": "milestone_update",
+      "topic": "Baylight District Phase II Mobilization",
+      "initiative": "INIT-006",
+      "decision": "Proceed with selected development consortium post-council authorization",
+      "quote": "With the vote secured, we're moving dirt within two cycles — Baylight's future starts now.",
+      "fullStatement": "Baylight Authority Director Keisha Ramos confirms that with City Council's authorization vote complete, we are immediately mobilizing the selected Phase II development consortium. Environmental remediation crews will begin work within two cycles, starting with soil stabilization and infrastructure tie-ins along the Hegenberger corridor. The Jack London infrastructure amendments are being incorporated into the final contract language and monitored by our compliance team. This $2.1 billion project remains on track to meet all deliverable timelines.",
+      "trackerUpdates": {
+        "initiative": "INIT-006",
+        "ImplementationPhase": "construction-planning",
+        "MilestoneNotes": "C105: Council authorization secured; development team mobilized",
+        "NextScheduledAction": "Phase II environmental remediation commencement",
+        "NextActionCycle": 106
+      }
+    }
+  ]
+}

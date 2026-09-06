@@ -1,0 +1,200 @@
+{
+  "cycle": 105,
+  "v": "CITYHALL/1",
+  "hearing": [
+    {
+      "officeId": "COUNCIL-D2",
+      "popid": "POP-00502",
+      "holder": "Leonard Tran",
+      "district": "D2",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "stand with Jack London or leave it",
+      "quote": "Development without infrastructure is a debt we pay later. I'm voting yes, but only with hard commitments locked in writing.",
+      "actionAsked": "Codify Jack London infrastructure commitments as legally binding conditions of Baylight Phase II authorization",
+      "voiceFile": "output/civic-voice/council_d2_c105.json"
+    },
+    {
+      "officeId": "COUNCIL-D3",
+      "popid": "POP-00503",
+      "holder": "Rose Delgado",
+      "district": "D3",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "First expansion-district launch (D1)",
+      "quote": "Safety isn't a template. We'll adapt D7's model to Fruitvale's mutual aid networks—starting with Toby Lamont's street teams—before replicating in D1.",
+      "actionAsked": "Approve with conditions for Fruitvale-specific adaptations",
+      "voiceFile": "output/civic-voice/council_d3_c105.json"
+    },
+    {
+      "officeId": "COUNCIL-D4",
+      "popid": "POP-00042",
+      "holder": "Ramon Vega",
+      "district": "D4",
+      "faction": "IND",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "defend the district or go quiet",
+      "quote": "Four qualified bidders, three finalists, one clean site—this is the process I demanded, and this is the vote I promised.",
+      "actionAsked": "Final roll-call vote on INIT-006 Phase II authorization resolution",
+      "voiceFile": "output/civic-voice/council_d4_c105.json"
+    },
+    {
+      "officeId": "COUNCIL-D5",
+      "popid": "POP-00043",
+      "holder": "Janae Rivers",
+      "district": "D5",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "First expansion-district launch (D1)",
+      "quote": "Safety isn’t a pilot—it’s survival. We’ll vote YES, but only if monthly audits explicitly tie resource allocation to reducing violent crime disparities and empower community liaisons like Jerom.",
+      "actionAsked": "YES with explicit audit ties to violent crime reduction + community liaisons",
+      "voiceFile": "output/civic-voice/council_d5_c105.json"
+    },
+    {
+      "officeId": "COUNCIL-D6",
+      "popid": "POP-00044",
+      "holder": "Elliott Crane",
+      "district": "D6",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "stand with Piedmont Ave or leave it",
+      "quote": "Numbers don’t tell the whole story—community trust does.",
+      "actionAsked": "Convene a community safety walk in Piedmont Ave",
+      "voiceFile": "output/civic-voice/council_d6_c105.json"
+    },
+    {
+      "officeId": "COUNCIL-D7",
+      "popid": "POP-00504",
+      "holder": "Warren Ashford",
+      "district": "D7",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "KONO needs investment, but we need to see the receipts before we sign the check.",
+      "actionAsked": "Push for detailed audits before committing city resources to KONO",
+      "voiceFile": "output/civic-voice/council_d7_c105.json"
+    },
+    {
+      "officeId": "COUNCIL-D8",
+      "popid": "POP-00505",
+      "holder": "Nina Chen",
+      "district": "D8",
+      "faction": "CRC",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Adams Point proves what happens when we follow the process - real results through documented partnerships, not flashy promises.",
+      "actionAsked": "Support existing community partnerships in Adams Point and propose liquor license moratorium for Lake Merritt",
+      "voiceFile": "output/civic-voice/council_d8_c105.json"
+    },
+    {
+      "officeId": "COUNCIL-D9",
+      "popid": "POP-00506",
+      "holder": "Terrence Mobley",
+      "district": "D9",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Uptown’s success isn’t just numbers—it’s the people who showed up to build it. Let’s honor that by ensuring Baylight’s next phase stays rooted in community ownership, not corporate handshakes.",
+      "actionAsked": "YES",
+      "voiceFile": "output/civic-voice/council_d9_c105.json"
+    },
+    {
+      "officeId": "STAFF-DM-COMM",
+      "popid": "POP-00037",
+      "holder": "Brenda Okoro",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Fifty-seven households stabilized means fifty-seven families breathing easier — but West Oakland's storefronts tell me we're resetting outreach two cycles late. We're hitting the streets this cycle to find the next fifty-seven, because stability shouldn't be a waiting list.",
+      "actionAsked": "Proceed with Month-Six disbursement + launch canvass targeting slipping blocks",
+      "voiceFile": "output/civic-voice/okoro_c105.json"
+    },
+    {
+      "officeId": "CHIEF-POLICE",
+      "popid": "POP-00136",
+      "holder": "Rafael Montez",
+      "district": "citywide",
+      "faction": "STAFF",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "",
+      "quote": "Public safety resources must align with neighborhood needs — that’s why we’re adjusting patrol patterns where call volume data shows the highest demand.",
+      "actionAsked": "Realign OPD patrols in East Oakland and West Oakland; submit OARI co-response matrix",
+      "voiceFile": "output/civic-voice/police_chief_c105.json"
+    },
+    {
+      "officeId": "COUNCIL-D1",
+      "popid": "POP-00501",
+      "holder": "Denise Carter",
+      "district": "D1",
+      "faction": "OPP",
+      "seatStatus": "active",
+      "disposition": "statement",
+      "initiativeId": null,
+      "lever": "stand with West Oakland or leave it",
+      "quote": "Fifty-seven families stabilized isn’t a milestone—it’s a mandate. We’re hitting the streets this cycle to find the next fifty-seven, because stability shouldn’t be a waiting list.",
+      "actionAsked": "Approved Month-six disbursement batch and canvass launch",
+      "voiceFile": "output/civic-voice/council_d1_c105.json"
+    }
+  ],
+  "votes": [],
+  "gavel": {
+    "officeId": "MAYOR-01",
+    "popid": "POP-00034",
+    "holder": "Avery Santana",
+    "dispositions": [
+      {
+        "initiativeId": "INIT-001",
+        "mayoralAction": "none",
+        "implementationPhase": "disbursement-active",
+        "note": "C105: Month-six disbursement batch approved (12 households); canvass launched for slipping blocks."
+      },
+      {
+        "initiativeId": "INIT-002",
+        "mayoralAction": "none",
+        "implementationPhase": "implementation-active",
+        "note": "C105: District 1 expansion launched; monthly reporting and audit framework in place."
+      },
+      {
+        "initiativeId": "INIT-003",
+        "mayoralAction": "none",
+        "implementationPhase": "visioning-complete",
+        "note": "C105: First visioning session conducted; feedback incorporated into design phase."
+      },
+      {
+        "initiativeId": "INIT-006",
+        "mayoralAction": "none",
+        "implementationPhase": "construction-planning",
+        "note": "C105: Final council vote approved Phase II bid; construction planning phase begins."
+      },
+      {
+        "initiativeId": "INIT-007",
+        "mayoralAction": "none",
+        "implementationPhase": "implementation-active",
+        "note": "C105: Administrative order issued to clear backlog; intake processing targets mandated across agencies."
+      }
+    ],
+    "quote": "Fifty-seven families are already in stable homes because of this fund. Today, we’re reaching the next block.",
+    "voiceFile": "output/civic-voice/mayor_gavel_c105.json"
+  }
+}

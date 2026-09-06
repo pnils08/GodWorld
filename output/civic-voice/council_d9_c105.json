@@ -1,0 +1,18 @@
+{
+  "office": "council_d9",
+  "cycle": 105,
+  "speaker": "Terrence Mobley",
+  "cascadeSummary": "Voted YES on Baylight District Phase II to expand community-driven development. Highlighted Laurel's sustained progress as proof of focused investment and warned against letting Uptown's momentum overshadow smaller neighborhoods.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d9-001",
+      "type": "vote_statement",
+      "topic": "Baylight District Final Council Vote",
+      "initiative": "Baylight District — Final Council Vote on Phase II Bid",
+      "decision": "YES",
+      "quote": "Uptown’s success isn’t just numbers—it’s the people who showed up to build it. Let’s honor that by ensuring Baylight’s next phase stays rooted in community ownership, not corporate handshakes.",
+      "fullStatement": "The Baylight District’s Phase II bid isn’t just about development—it’s about accountability. We’ve seen Uptown thrive when we invest in residents, not just infrastructure. This vote ensures that growth isn’t a one-way street for developers. Laurel’s progress proves sustained, equitable investment works. Let’s apply that lesson across the district, not just where the cameras are.",
+      "trackerUpdates": {}
+    }
+  ]
+}

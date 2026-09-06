@@ -1,0 +1,18 @@
+{
+  "office": "police_chief",
+  "cycle": 105,
+  "speaker": "Rafael Montez",
+  "cascadeSummary": "Based on elevated crime indices in East Oakland (1.17) and West Oakland (1.16), I've prioritized patrol realignment to enhance public safety coverage in these districts. Simultaneously, I'm forwarding the finalized OARI co-response operational matrix to ensure behavioral health calls receive appropriate behavioral health responses.",
+  "statements": [
+    {
+      "statementId": "STMT-105-police_chief-001",
+      "type": "operations_update",
+      "topic": "Patrol Realignment & OARI Coordination",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Realign OPD patrols in East Oakland and West Oakland; submit OARI co-response matrix",
+      "quote": "Public safety resources must align with neighborhood needs — that’s why we’re adjusting patrol patterns where call volume data shows the highest demand.",
+      "fullStatement": "The Oakland Police Department is realigning patrol deployments in East Oakland and West Oakland based on elevated crime indices and call volume data. Additional marked units will be assigned to highest-demand areas while maintaining core response capacity district-wide. Simultaneously, the department is transmitting the finalized OARI co-response operational matrix to ensure behavioral health calls receive behavioral health responses. This matrix outlines dispatch protocols, scene management procedures, and post-response debriefing requirements for OPD and OARI teams. The safety of Oakland residents remains this department’s priority.",
+      "trackerUpdates": {}
+    }
+  ]
+}

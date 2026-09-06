@@ -1,0 +1,13 @@
+{
+  "stage": "mayor-open",
+  "cycle": 105,
+  "model": "(reused)",
+  "configuredModel": "mistralai/mistral-large",
+  "fellBackFrom": null,
+  "output": "output/civic-voice/mayor_open_c105.json",
+  "reused": true,
+  "statements": 7,
+  "cascadeInjected": 15,
+  "attempts": 0,
+  "ranAt": "2026-09-06T19:46:26.510Z"
+}

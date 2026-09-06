@@ -1,0 +1,18 @@
+{
+  "office": "council_d6",
+  "cycle": 105,
+  "speaker": "Elliott Crane",
+  "cascadeSummary": "I stand with Piedmont Ave, ensuring our community continues to thrive with steady street trade and low crime. I’m convening a community safety walk to bridge the disconnect between statistics and lived experience.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d6-001",
+      "type": "vote_statement",
+      "topic": "Community Safety",
+      "initiative": null,
+      "decision": "Convene a community safety walk in Piedmont Ave",
+      "quote": "Numbers don’t tell the whole story—community trust does.",
+      "fullStatement": "Piedmont Ave’s crime numbers are well below city averages, but sentiment gaps remain a concern. I’m convening a community safety walk to bridge that divide and ensure accountability on the ground. We must listen to the voices of our residents and business owners to truly understand the impact of our policies.",
+      "trackerUpdates": {}
+    }
+  ]
+}

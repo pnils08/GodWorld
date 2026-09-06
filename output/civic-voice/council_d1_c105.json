@@ -1,0 +1,58 @@
+{
+  "office": "council_d1",
+  "cycle": 105,
+  "speaker": "Denise Carter",
+  "cascadeSummary": "Approved Month-six Stabilization Fund disbursements with urgency for vulnerable households, launched OARI in D1 while addressing incoherence flags, demanded Youth Pipeline backlog clearance, and directly confronted systemic gaps in West Oakland. Credit for Brooklyn's progress goes to community resilience, not City Hall.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d1-001",
+      "type": "vote_statement",
+      "topic": "West Oakland Stabilization Fund",
+      "initiative": "West Oakland Stabilization Fund",
+      "decision": "Approved Month-six disbursement batch and canvass launch",
+      "quote": "Fifty-seven families stabilized isn’t a milestone—it’s a mandate. We’re hitting the streets this cycle to find the next fifty-seven, because stability shouldn’t be a waiting list.",
+      "fullStatement": "The Mayor’s approval of the Month-six disbursement aligns with our district’s urgent needs. I support this action but demand transparency in targeting the most vulnerable households. West Oakland’s storefront struggles persist alongside residential displacement pressures—our canvass must map both.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d1-002",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative",
+      "initiative": "Oakland Alternative Response Initiative",
+      "decision": "Approved District 1 expansion launch",
+      "quote": "Safety isn’t a pilot—it’s a promise. Bring OARI to West Oakland now, and measure its impact from day one.",
+      "fullStatement": "While engine flags note low-severity improvements, high incoherence in our district demands immediate OARI deployment. This isn’t an experiment—it’s a critical service. I’ll support the launch but require biweekly accountability reports specific to D1’s unique challenges.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d1-003",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiative": "Oakland Youth Apprenticeship Pipeline",
+      "decision": "Approved backlog clearance deadline and town hall",
+      "quote": "Fix the pipeline—connect East and West Oakland youth to real jobs, not paperwork. This cycle’s town hall must center student voices.",
+      "fullStatement": "The three new recruitment partners are a step forward, but West Oakland youth still face barriers. I’ll back the deadline only if the town hall includes direct input from apprentices themselves—no more decisions about our youth without them at the table.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d1-004",
+      "type": "policy_statement",
+      "topic": "Systemic Incoherence",
+      "initiative": null,
+      "decision": "Proposed cross-department task force for West Oakland coordination",
+      "quote": "High-severity incoherence isn’t a technicality—it’s a crisis. We need boots-on-the-ground collaboration, not more siloed programs.",
+      "fullStatement": "The engine’s high incoherence flag for West Oakland reveals broken coordination between housing, safety, and economic initiatives. I’m directing my office to form a task force with OARI, Stabilization Fund, and Economic Development teams to create unified street-level strategies by next cycle.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d1-005",
+      "type": "constituent_response",
+      "topic": "District 1 Constituents",
+      "initiative": null,
+      "decision": "Public credit for Brooklyn’s progress given to local merchants",
+      "quote": "Brooklyn’s vitality comes from its people—not City Hall’s policies. Let’s invest in the small businesses that kept lights on during lean years.",
+      "fullStatement": "While West Oakland faces systemic challenges, Brooklyn’s quiet comeback proves grassroots resilience. My office will spotlight Brooklyn merchants in next month’s economic development hearings. West Oakland deserves equal investment—not just praise for survival.",
+      "trackerUpdates": {}
+    }
+  ]
+}

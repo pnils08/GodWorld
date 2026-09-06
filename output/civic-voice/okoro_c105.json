@@ -1,0 +1,28 @@
+{
+  "office": "okoro",
+  "cycle": 105,
+  "speaker": "Brenda Okoro",
+  "cascadeSummary": "We're clearing Month-Six disbursement and launching canvass in West Oakland on schedule — fifty-seven households stabilized so far, outreach reset targeting slipping blocks. Ivy Hill's progress belongs to the residents; KONO's energy is driver momentum.",
+  "statements": [
+    {
+      "statementId": "STMT-105-okoro-001",
+      "type": "operational_status",
+      "topic": "West Oakland Stabilization Fund processing",
+      "initiative": "INIT-001",
+      "decision": "Proceed with Month-Six disbursement + launch canvass targeting slipping blocks",
+      "quote": "Fifty-seven households stabilized means fifty-seven families breathing easier — but West Oakland's storefronts tell me we're resetting outreach two cycles late. We're hitting the streets this cycle to find the next fifty-seven, because stability shouldn't be a waiting list.",
+      "fullStatement": "This cycle we're clearing the Month-Six disbursement batch and launching a canvass targeting West Oakland's slipping blocks. Fifty-seven households stabilized so far means fifty-seven families breathing easier — but West Oakland's storefronts tell me we're resetting outreach two cycles late. We're hitting the streets this cycle to find the next fifty-seven, because stability shouldn't be a waiting list. Outreach will focus on the neighborhoods where displacement is winning — we know which blocks, we can name landlords, we're putting feet on the ground.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-okoro-002",
+      "type": "cascade_response",
+      "topic": "KONO and Ivy Hill — Crisis and Credit",
+      "initiative": null,
+      "decision": "Credit Ivy Hill's progress to residents; name KONO's energy as driver momentum",
+      "quote": "KONO's energy is real, and Ivy Hill's progress belongs to the people who live there — resilience is their story, not ours.",
+      "fullStatement": "KONO's energy is real — street trade busy, crime low, momentum building. What drives that energy belongs to the people who live there, not this office. Ivy Hill's progress is a testament to the resilience of its people — resilience is their story, not ours. Our role is operational — making sure the systems that support their momentum stay strong.",
+      "trackerUpdates": {}
+    }
+  ]
+}

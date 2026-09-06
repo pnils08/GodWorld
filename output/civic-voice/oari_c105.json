@@ -1,0 +1,34 @@
+{
+  "office": "oari",
+  "cycle": 105,
+  "speaker": "Dr. Vanessa Tran-Munoz",
+  "cascadeSummary": "Executed the District 1 operational launch for OARI, deploying bilingual crisis response teams across West Oakland with evening and weekend coverage matched to behavioral health call patterns. Published shift deployment thresholds addressing elevated CrimeIndex levels in expansion districts while finalizing D3 and D5 launch timelines based on D1 operational data.",
+  "statements": [
+    {
+      "statementId": "STMT-105-oari-001",
+      "type": "operational_launch",
+      "topic": "District 1 OARI expansion deployment",
+      "initiative": "INIT-002",
+      "decision": "Launched operational crisis response teams in District 1 (West Oakland) with bilingual evening and weekend coverage; published CrimeIndex-responsive deployment thresholds for Fruitvale and East Oakland",
+      "quote": "Crisis doesn't clock out at five, and neither do we—our West Oakland teams are live now, meeting people where they are with the language they speak and the hours they need.",
+      "fullStatement": "This cycle, OARI crossed from promise to presence in District 1. Our West Oakland teams are now operational with bilingual responders covering evening and weekend hours, because our call data shows behavioral health crises peak when traditional services close. We've matched shift deployment to CrimeIndex patterns across West Oakland, Fruitvale, and East Oakland—where elevated levels demand precision, not panic. This isn't a pilot anymore; it's a proven model adapting to each community's rhythm. D3 and D5 launches follow in the next cycles, built on what we learn from every call answered in D1.",
+      "trackerUpdates": {
+        "initiative": "INIT-002",
+        "ImplementationPhase": "dispatch-live",
+        "MilestoneNotes": "C105: D1 operational launch complete; bilingual evening-weekend coverage live; CrimeIndex-responsive thresholds published for D3/D5",
+        "NextScheduledAction": "D3 Fruitvale launch with mutual aid network integration",
+        "NextActionCycle": 106
+      }
+    },
+    {
+      "statementId": "STMT-105-oari-002",
+      "type": "constituent_credit",
+      "topic": "East Oakland success attribution",
+      "initiative": null,
+      "decision": "Acknowledged East Oakland's upbeat mood and steady street trade as validation of community resilience and city support working in concert",
+      "quote": "East Oakland's steady pulse this cycle didn't happen by accident—it's the result of neighbors looking out for neighbors, and a city that finally started listening.",
+      "fullStatement": "I want to name what we're seeing in East Oakland: an upbeat mood, steady street trade, crime staying low. That stability reflects the resilience of the people who live and work there, and it's reinforced by the city's support showing up—not with sirens, but with services. OARI's expansion model was built on lessons from communities like East Oakland, where trust is earned block by block. The credit belongs first to the residents and merchants who keep their streets alive, and to every city department that learned to follow their lead rather than override it.",
+      "trackerUpdates": {}
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "office": "health_center",
+  "cycle": 105,
+  "speaker": "Roberta Chen-Ramirez",
+  "cascadeSummary": "With structural framing ahead of schedule, we're shifting focus to MEP rough-ins and interior build-out while maintaining seismic compliance. The second shift crew allows dusk pours to accelerate schedule without compromising OSHPD-3 standards.",
+  "statements": [
+    {
+      "statementId": "STMT-105-health_center-001",
+      "type": "operational_status",
+      "topic": "construction_progress",
+      "initiative": "INIT-005",
+      "decision": "Proceed with accelerated interior rough-in schedule while maintaining quality oversight",
+      "quote": "We're running two crews now—one at dawn, one at dusk—but I won't sign off on drywall until every conduit and duct meets spec. Temescal deserves systems that last.",
+      "fullStatement": "Structural frame installation is three days ahead of schedule with all caissons passing inspection. Starting this cycle, we're accelerating MEP rough-ins with the second shift crew—electrical conduit, plumbing stacks, and ductwork installations progressing in tandem. Our weekly quality audits will verify all systems meet OSHPD-3 requirements before interior wall closures. The contractor has committed to maintaining the accelerated pace without change orders through careful prefabrication coordination.",
+      "trackerUpdates": {
+        "initiative": "INIT-005",
+        "ImplementationPhase": "construction-active",
+        "MilestoneNotes": "C105: Structural frame completed ahead of schedule, MEP rough-ins advancing with second shift",
+        "NextScheduledAction": "Interior wall framing and utility inspections",
+        "NextActionCycle": 106
+      }
+    }
+  ]
+}

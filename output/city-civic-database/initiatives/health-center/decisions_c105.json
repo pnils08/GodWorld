@@ -1,0 +1,16 @@
+{
+  "initiative": "INIT-005",
+  "initiativeId": "INIT-005",
+  "cycle": 105,
+  "primaryVoice": "Chen-Ramirez (health_center-001)",
+  "consolidatedFrom": [
+    "STMT-105-health_center-001 (Chen-Ramirez — construction_progress)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-005",
+    "ImplementationPhase": "construction-active",
+    "MilestoneNotes": "C105: Structural frame completed ahead of schedule, MEP rough-ins advancing with second shift",
+    "NextScheduledAction": "Interior wall framing and utility inspections",
+    "NextActionCycle": 106
+  }
+}

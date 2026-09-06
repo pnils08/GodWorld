@@ -1,0 +1,20 @@
+{
+  "initiative": "INIT-007",
+  "initiativeId": "INIT-007",
+  "cycle": 105,
+  "primaryVoice": "Mayor gavel (mayor_gavel-005)",
+  "consolidatedFrom": [
+    "STMT-105-council_d1-003 (Carter D1 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-105-council_d3-003 (Delgado D3 — Youth Apprenticeship Pipeline Backlog Clearance)",
+    "STMT-105-council_d5-002 (Rivers D5 — Oakland Youth Apprenticeship Pipeline)",
+    "STMT-105-mayor_gavel-005 (Mayor gavel — Youth Apprenticeship Pipeline — Backlog Clearance Directive)",
+    "STMT-105-mayor_open-005 (Mayor agenda — Oakland Youth Apprenticeship Pipeline — Backlog Clearance Deadline)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-007",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C105: Administrative order issued to clear backlog; intake processing targets mandated across agencies.",
+    "NextScheduledAction": "Backlog processing completion + town hall",
+    "NextActionCycle": 106
+  }
+}

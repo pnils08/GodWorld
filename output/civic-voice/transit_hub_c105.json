@@ -1,0 +1,24 @@
+{
+  "office": "transit_hub",
+  "cycle": 105,
+  "speaker": "Elena Soria Dominguez",
+  "cascadeSummary": "Launched the first community visioning session for Fruitvale Transit Hub Phase II at St. Esperanza Parish, focused on small business and vendor protections during construction. This session prioritizes safeguarding pedestrian access to staples like the panadería on E. 12th Street and ensures Jamal Thompson's San Antonio apprenticeship cohort is supported. Fruitvale residents come first.",
+  "statements": [
+    {
+      "statementId": "STMT-105-transit_hub-001",
+      "type": "operational_status",
+      "topic": "Fruitvale Transit Hub Phase II — Visioning",
+      "initiative": "INIT-003",
+      "decision": "Conducted first visioning session at St. Esperanza Parish",
+      "quote": "This isn't compliance paperwork—it's protections for abuelas crossing to the panadería and proof we're putting Fruitvale residents first.",
+      "fullStatement": "Today at St. Esperanza Parish, we launched the first community visioning session for Fruitvale Transit Hub Phase II. This session prioritizes protecting small businesses and street vendors during construction, with a strong focus on ensuring pedestrian access to staples like the panadería on E. 12th Street. We're also committed to supporting Jamal Thompson's San Antonio apprenticeship cohort to ensure local workers maintain this hub. Fruitvale residents come first—this is their neighborhood, and their voices will shape this project.",
+      "trackerUpdates": {
+        "initiative": "INIT-003",
+        "ImplementationPhase": "visioning",
+        "MilestoneNotes": "C105: First visioning session held at St. Esperanza Parish, focused on small business and vendor protections",
+        "NextScheduledAction": "Draft small business and vendor protection guidelines",
+        "NextActionCycle": 106
+      }
+    }
+  ]
+}

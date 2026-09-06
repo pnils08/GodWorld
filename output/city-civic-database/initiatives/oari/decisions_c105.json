@@ -1,0 +1,19 @@
+{
+  "initiative": "INIT-002",
+  "initiativeId": "INIT-002",
+  "cycle": 105,
+  "primaryVoice": "Mayor gavel (mayor_gavel-002)",
+  "consolidatedFrom": [
+    "STMT-105-mayor_gavel-002 (Mayor gavel — Oakland Alternative Response Initiative — District 1 Expansion Launch)",
+    "STMT-105-oari-001 (Tran-Muñoz — District 1 OARI expansion deployment)",
+    "STMT-105-oari-002 (Tran-Muñoz — East Oakland success attribution)",
+    "STMT-105-police_chief-001 (Chief — Patrol Realignment & OARI Coordination)"
+  ],
+  "trackerUpdates": {
+    "InitiativeID": "INIT-002",
+    "ImplementationPhase": "implementation-active",
+    "MilestoneNotes": "C105: District 1 expansion launched; monthly reporting and audit framework in place.",
+    "NextScheduledAction": "First expansion-district evaluation",
+    "NextActionCycle": 107
+  }
+}

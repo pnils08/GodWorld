@@ -1,0 +1,78 @@
+{
+  "office": "mayor_open",
+  "cycle": 105,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle, I'm moving on all fronts: accelerating the West Oakland Stabilization Fund with a month-six disbursement and canvass launch, greenlighting the first expansion of OARI in District 1, ensuring the Fruitvale Transit Hub visioning sessions begin on schedule, pushing for the final Baylight District council vote, and holding the Youth Apprenticeship Pipeline accountable to its backlog clearance deadline. I'm also addressing the approval decline by reaffirming leadership in KONO and crediting Ivy Hill's progress to the community's resilience and city support—not letting others rewrite that story.",
+  "statements": [
+    {
+      "statementId": "STMT-105-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund — Month-Six Disbursement and Canvass Launch",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Fifty-seven households stabilized isn’t a milestone—it’s a mandate. We’re hitting the streets this cycle to find the next fifty-seven, because stability shouldn’t be a waiting list.",
+      "fullStatement": "This is month six of the West Oakland Stabilization Fund, and we’re not slowing down. Today, I’m authorizing the next disbursement batch and launching our expanded canvass teams to reach the blocks where displacement pressure is highest. Fifty-seven households have been stabilized so far—that’s real money in real hands, keeping families in their homes. But we know there are more who qualify and haven’t applied yet. Our teams will be door-to-door, block-by-block, because urgency doesn’t wait for paperwork. This is what delivery looks like: not just funding allocated, but families protected.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-002",
+      "type": "executive_order",
+      "topic": "Oakland Alternative Response Initiative — District 1 Expansion Launch",
+      "initiative": "INIT-002",
+      "decision": "launched",
+      "quote": "West Oakland proved this works. Now we’re bringing it to District 1—not as a pilot, but as a promise.",
+      "fullStatement": "The Oakland Alternative Response Initiative isn’t a test anymore—it’s a proven model. District 7 showed us what’s possible, and now we’re expanding to District 1. Starting this cycle, OARI teams will be on the ground in West Oakland, responding to non-violent calls with the care and expertise they demand. This isn’t about replacing police—it’s about giving Oaklanders the right response at the right time. We’ve finalized the district-specific adaptations, and the monthly reporting and audit framework are in place. This is how we build safety: by listening, adapting, and delivering.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-003",
+      "type": "policy_position",
+      "topic": "Fruitvale Transit Hub Phase II — First Visioning Session",
+      "initiative": "INIT-003",
+      "decision": "scheduled",
+      "quote": "This isn’t just about transit—it’s about protecting the small businesses and vendors who make Fruitvale thrive.",
+      "fullStatement": "The Fruitvale Transit Hub Phase II visioning sessions begin this cycle, and we’re making sure the voices of small businesses and vendors are at the center. This isn’t just about moving people—it’s about protecting the livelihoods of the entrepreneurs who make Fruitvale what it is. Our first session will focus on how we can design this hub to support, not displace, the community that’s already here. This is what investment looks like: infrastructure that lifts up the people who built this neighborhood.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-004",
+      "type": "vote_reaction",
+      "topic": "Baylight District — Final Council Vote on Phase II Bid",
+      "initiative": "INIT-006",
+      "decision": "pushing_for_vote",
+      "quote": "Three bidders, one vision: a Baylight District built by Oakland, for Oakland. The time to vote is now.",
+      "fullStatement": "The Baylight District Phase II shortlist is approved, and the final vote is on the calendar for this cycle. This is a $2.1 billion bet on Oakland’s future—one that will create jobs, drive development, and put our city on the map. Three bidders have stepped up, and all of them share our vision: a district built by Oaklanders, for Oaklanders. The council has a choice: vote yes and get to work, or delay and risk losing momentum. I’m not waiting. This city deserves a future we can build together, and that future starts with this vote.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-005",
+      "type": "executive_order",
+      "topic": "Oakland Youth Apprenticeship Pipeline — Backlog Clearance Deadline",
+      "initiative": "INIT-007",
+      "decision": "enforced",
+      "quote": "We simplified the intake. Now we’re clearing the backlog—because every young person in this city deserves a shot, not a runaround.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline’s corrective action plan is in place, and we’re holding ourselves accountable. The intake process is simplified, three new recruitment partners are on board, and the backlog clearance deadline is set for next cycle. But we’re not waiting. This cycle, I’m directing my team to prioritize backlog processing and ensure every young person who applied gets a fair shot. This isn’t just about fixing a system—it’s about keeping a promise to Oakland’s youth. We over-engineered the intake, and that ends now.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-006",
+      "type": "public_remark",
+      "topic": "KONO and Ivy Hill — Crisis and Credit",
+      "initiative": null,
+      "decision": "acknowledged_and_acted",
+      "quote": "KONO’s energy is real, and Ivy Hill’s progress is a testament to the resilience of its people—and the city’s support.",
+      "fullStatement": "This cycle, I’m seeing Oakland in all its complexity. In KONO, the streets are busy, the mood is upbeat, and the art scene is thriving. That doesn’t happen by accident—it happens because this city invests in its people and its places. And in Ivy Hill, where street trade is still finding its footing, I want to be clear: the progress we’re seeing is a testament to the resilience of its residents and the support of city programs like the Stabilization Fund and OARI. This administration doesn’t take credit for what we didn’t build, but we will fight for the neighborhoods that need us most. KONO’s success is Oakland’s success, and Ivy Hill’s future is ours to protect.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-mayor_open-007",
+      "type": "press_release",
+      "topic": "Executive Progress Report — Policy Stabilization Measures",
+      "initiative": null,
+      "decision": "transmitted",
+      "quote": "A 13-point drop in approval isn’t a setback—it’s a signal. And we’re responding with action, not excuses.",
+      "fullStatement": "To the people of Oakland: I hear the concerns, and I’m taking action. This cycle, my office is transmitting an executive progress report outlining policy stabilization measures to address the 13-point decline in mayoral approval. This isn’t about politics—it’s about delivery. We’re aligning our initiatives with council caucus priorities, ensuring that the West Oakland Stabilization Fund accelerates disbursements, OARI expands to new districts, and the Baylight District moves toward a final vote. We’re also doubling down on transparency, with monthly reporting and audits for every major initiative. Oaklanders deserve results, and that’s what we’re delivering.",
+      "trackerUpdates": {}
+    }
+  ]
+}

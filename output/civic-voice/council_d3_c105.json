@@ -1,0 +1,58 @@
+{
+  "office": "council_d3",
+  "cycle": 105,
+  "speaker": "Rose Delgado",
+  "cascadeSummary": "Prioritizing community-adapted safety models, accelerating transit-to-economic pipelines, and naming Fruitvale's grassroots recovery. San Antonio's revival requires actionable credit, not abstract praise.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d3-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative Expansion",
+      "initiative": "INIT-002",
+      "decision": "Approve with conditions for Fruitvale-specific adaptations",
+      "quote": "Safety isn't a template. We'll adapt D7's model to Fruitvale's mutual aid networks—starting with Toby Lamont's street teams—before replicating in D1.",
+      "fullStatement": "The expansion to D1 must learn from Fruitvale's success. Our community trust teams led by Marisol Achebe prove localized models work. I'll withhold full support until the plan integrates Fruitvale's lessons on hyperlocal crisis response.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d3-002",
+      "type": "vote_statement",
+      "topic": "Fruitvale Transit Hub Phase II Visioning",
+      "initiative": "INIT-003",
+      "decision": "Approve with San Antonio economic linkage requirement",
+      "quote": "Transit infrastructure must seed storefront revival. Phase II contracts will prioritize San Antonio apprentices maintaining this hub—starting with Jamal Thompson's cohort at the Echo.",
+      "fullStatement": "The visioning sessions must legally bind Phase II contracts to San Antonio workforce pipelines. Fruitvale's hub isn't a standalone project—it's the first link in a transit-to-jobs chain for neighboring districts.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d3-003",
+      "type": "vote_statement",
+      "topic": "Youth Apprenticeship Pipeline Backlog Clearance",
+      "initiative": "INIT-007",
+      "decision": "Enforce accelerated timeline with San Antonio storefront benchmarks",
+      "quote": "We're not clearing paperwork—we're clearing pathways. 50% of cleared backlog slots must go to San Antonio's commercial corridor projects by quarter's end.",
+      "fullStatement": "The corrective action plan lacks teeth. I'm amending the backlog clearance deadline to require 50% allocation to San Antonio's storefront revitalization—Delia Vargas-Ruiz's transit hub apprentices are ready to transition to this work.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d3-004",
+      "type": "policy_statement",
+      "topic": "Cross-District Incoherence Resolution",
+      "initiative": null,
+      "decision": "Propose D3-D5-D7 Community Alignment Task Force",
+      "quote": "Fruitvale's success shouldn't clash with East Oakland's needs. We'll form a task force to harmonize expansion models across flagged districts.",
+      "fullStatement": "The flagged incoherence demands direct collaboration. I'm launching a task force with D5 and D7 to align safety and economic models, ensuring Fruitvale's mutual aid strategies inform—not conflict with—East Oakland's initiatives.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d3-005",
+      "type": "constituent_statement",
+      "topic": "District Recovery Credit",
+      "initiative": null,
+      "decision": "Publicly attribute Fruitvale's recovery to mutual aid networks, San Antonio's progress to local investment",
+      "quote": "Fruitvale's comeback was built by diner owners and street teams. San Antonio's momentum? That's the result of deliberate, gritty investment.",
+      "fullStatement": "Let's name the truth: Fruitvale's low crime rates stem from community-led safety networks, not city programs. San Antonio's revival proves targeted investment works—when we fund people, not just plans.",
+      "trackerUpdates": {}
+    }
+  ]
+}

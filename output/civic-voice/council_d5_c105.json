@@ -1,0 +1,48 @@
+{
+  "office": "council_d5",
+  "cycle": 105,
+  "speaker": "Janae Rivers",
+  "cascadeSummary": "East Oakland’s safety demands action, not audits. The youth pipeline must center our neighborhoods. Engine incoherence requires community-led solutions. Baylight’s slow streets aren’t city wins—they’re people’s victories.",
+  "statements": [
+    {
+      "statementId": "STMT-105-council_d5-001",
+      "type": "vote_statement",
+      "topic": "Oakland Alternative Response Initiative",
+      "initiative": "INIT-002",
+      "decision": "YES with explicit audit ties to violent crime reduction + community liaisons",
+      "quote": "Safety isn’t a pilot—it’s survival. We’ll vote YES, but only if monthly audits explicitly tie resource allocation to reducing violent crime disparities and empower community liaisons like Jerom.",
+      "fullStatement": "The launch of D1 expansion under the Oakland Alternative Response Initiative is a start, but East Oakland’s crime index at 1.17—nearly double the city’s 0.699—demands more than programmatic checkboxes. Safety here isn’t a pilot; it’s survival. We’ll vote YES, but only if the monthly audits explicitly tie resource allocation to reducing violent crime disparities and empower community liaisons like Jerom.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d5-002",
+      "type": "vote_statement",
+      "topic": "Oakland Youth Apprenticeship Pipeline",
+      "initiative": "INIT-007",
+      "decision": "YES with quarterly benchmarks led by East Oakland youth",
+      "quote": "Backlog cleared isn’t a win—it’s accountability. East Oakland’s youth will lead the rebuild.",
+      "fullStatement": "The Oakland Youth Apprenticeship Pipeline’s stalled recruitment isn’t a bureaucratic hiccup—it’s a betrayal of East Oakland’s youth. With our district’s sentiment at rock bottom and crime rates soaring, we can’t afford half-measures. The corrective actions must prioritize community-led intake processes and tie funding to quarterly hiring benchmarks. If we’re serious about equity, we’ll reroute resources from symbolic gestures to real pipelines built by the people they’re meant to serve.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d5-003",
+      "type": "community_action",
+      "topic": "Engine-flagged incoherence",
+      "initiative": null,
+      "decision": "Demand community-led task force for West Oakland/Fruitvale/East Oakland",
+      "quote": "Incoherence isn’t a glitch—it’s systemic neglect. Our neighborhoods write their own stories.",
+      "fullStatement": "The engine’s high-severity incoherence flag for West Oakland, Fruitvale, and East Oakland isn’t a technical error—it’s a mirror. The city’s systems aren’t failing; they’re excluding. I’ll convene a district-led task force with residents, small business owners, and cultural workers to map solutions that reflect our lived realities, not spreadsheets.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-105-council_d5-004",
+      "type": "constituent_acknowledgment",
+      "topic": "District 5 constituents",
+      "initiative": null,
+      "decision": "Credit East Oakland’s community for crime reduction; Baylight residents for slow streets success",
+      "quote": "East Oakland’s peace isn’t paperwork—it’s people power. Baylight’s slow streets? That’s resilience, not planning.",
+      "fullStatement": "East Oakland’s upbeat mood and low crime aren’t Mayor stats—they’re the work of block captains, mutual aid crews, and families holding it down. Baylight’s slow street trade isn’t a ‘quiet victory’—it’s a symptom of a city that still prioritizes stadiums over storefronts. The real credit belongs to residents keeping their heads above water while we fix the system.",
+      "trackerUpdates": {}
+    }
+  ]
+}

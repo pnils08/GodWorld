@@ -13,6 +13,8 @@ SCOPE_RE='^(\.claude/agents/|\.claude/agent-memory/|docs/canon/|docs/media/)'
 # Builder identity: Mike-direct, bare Mike (Mike Paulson is canon and passes), the builder
 NAME_PAT='Mike-direct|\bMike\b(?!\s+P(aulson|AULSON))|\b[Tt]he [Bb]uilder\b'
 # Real-world-era date forms (2010s-2030s). Sim-era 2040s and bare years pass.
+# Model / provider ids and writer-wake packet stems (engine.163): infrastructure, never world text.
+MODEL_PAT='\b(deepseek|meta-llama|llama-3|anthropic-claude|claude-(sonnet|opus|haiku)|openrouter|packet-v[0-9])\b'
 DATE_PAT='\b20(1[0-9]|2[0-9]|3[0-9])-[01]?[0-9]-[0-3]?[0-9]\b|\b[01]?[0-9]/[0-3]?[0-9]/20(1[0-9]|2[0-9]|3[0-9])\b|\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+20(1[0-9]|2[0-9]|3[0-9])\b'
 
 # Drop file-path tokens (a date inside docs/research/2026-*.md is a pointer,
@@ -23,7 +25,7 @@ clean() {
 }
 
 scan() { # stdin: text to check → prints hits, returns 0 if leaks found
-  clean | grep -nP "$NAME_PAT|$DATE_PAT" | head -8
+  clean | grep -nP "$NAME_PAT|$DATE_PAT|$MODEL_PAT" | head -8
 }
 
 if [ "${1:-}" = "--staged" ]; then

@@ -38,6 +38,8 @@ input* (per universal-protagonism: does it drive a fate?) or dead schema. If cau
 neighborhood + household wealth through one shared helper at every write site. If not: retire the
 column rather than backfill 909 rows of noise.
 
+- **Status (S431, engine-sheet, 2026-09-06): RESOLVED BY DESIGN — no sweep.** The decide-first question is answered in code: `SchoolQuality` IS a causal input, for minors — written by `updateMinorSchoolQuality_` (educationCareerEngine.js L670, engine.57 P4: household minors stamped from Neighborhood_Demographics `SchoolQualityIndex`, heritage notch engine.65) and read at graduation by `graduationCredential_` (generationalEventsEngine.js L455, S409 four-year vs associate's). Adult cells (the 909 blank/5) are legacy by design — the column has no adult reader, so backfilling them is noise, not signal. Citizen Archive's `citizenExitDefects_` already names blank/5 as an exit defect for the record. Retire-the-column is not on the table while the minor path reads it.
+
 ### Task 2 — `MigrationIntent` on retired/deceased citizens (37 rows)
 
 All 37 read `staying`. A deceased citizen holding a migration intent is a state machine that never

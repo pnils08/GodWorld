@@ -695,3 +695,5 @@ Pre-flight passed. The gaps below are what it *reported as warnings* or *did not
 
 *Coder voice: terse, mechanical, commit-message style. Tag each entry `[judgment]`. Use G-EC{N+} numbering continuing from the mechanical pass.*
 
+
+- **G-EC57 [judgment]** — engine.163: Citizen_Media_Usage `Context` (the writer-wake packet stem, model id and all — an ops dedupe key) reached LifeHistory_Log `EventText` verbatim via the Advancement_Intake1 J note: 11 live `Advancement` rows carry `deepseek-deepseek-chat` / `packet-v2_…` filenames in a citizen's life record (C104–C105). Not in SL col-O (0), not rendered anywhere (0). Fixed at the seam (`describeUsageContext_`, mediaRoomIntake.js; bench @66 C110/C111 clean — note reads "a Bay Tribune sports desk piece, C109"). The 11 historical rows are a many-row sheet write, builder's go. Note: "Anthropic shuttles" event texture is library-s325 authored content, not this defect — 46 rows match a naive grep, only the 11 Advancement rows are real. Whether a real-world company name belongs in the world is the builder's call, flagged S431.

@@ -3,7 +3,7 @@ title: Ledger true-up sweep — the defect classes no open row covers
 created: 2026-08-17
 updated: 2026-08-22
 type: plan
-tags: [engine, ledger, active]
+tags: [engine, ledger, done]
 sources:
   - output/ledger_trueup_audit_2026-08-17.md — measured counts, all 10 classes
 pointers:
@@ -46,6 +46,8 @@ All 37 read `staying`. A deceased citizen holding a migration intent is a state 
 cleared. Find the writer, clear intent on the Status transition, one-time column repair for the
 existing 37.
 
+- **Status: SHIPPED S380 (37 cells cleared); writer-side clear superseded S431** — the migration engine skips `deceased`/`traded` rows at all three loops (migrationTrackingEngine.js L234/L406/L640, engine.90 C8) and a deceased row leaves the ledger through Citizen Archive with its defects named (`citizenExitDefects_`), so no death-site clear is needed. Re-measured S431: intent on non-active = Retired 6 / critical 1 / recovering 1 — all living statuses the engine still processes, legitimate state, not the defect class.
+
 ### Task 3 — `World_Config` has no machine-readable sim year
 
 An audit asking for the current year got `FALSE`. Every age-derived rule (senior status, school
@@ -53,10 +55,14 @@ enrolment, retirement) needs one authoritative anchor; today it is a convention 
 (`age = simYear − BirthYear`) rather than a value the code can read. Close this **before** any
 age-derived repair, or the repair encodes the wrong anchor into 961 rows.
 
+- **Status: SHIPPED S380** — `worldYearBase=2039` on World_Config; engine reads `simYearOf_()` (advanceSimulationCalendar.js L371, S.simYear from Phase 1, cycle-derived fallback L357). Re-measured S431: present.
+
 ### Task 4 — impossible BirthYear (1 row)
 
 POP-00173 Kaila Braun b.1889 → age 153. Single-row fix; add a range guard at the write sites so the
 class cannot recur.
+
+- **Status: SHIPPED S380** — POP-00173 1889→1989 (re-read S431: 1989). Guard: `auditSimulationLedger.js` BirthYear OOB — S431 closed a hole where a non-numeric cell (`2--6`, POP-01083 hand-mint typo) passed as falsy NaN; now flagged. POP-01083's true year is a sports-roster fact (gap log G-EC58).
 
 ## Batch shape — by issue, not by ClockMode (measured S378)
 
@@ -112,8 +118,7 @@ headline numbers (217 false-retired, 5 athlete-students) no longer match live st
 
 ## State
 
-Audited S378, unstarted. Awaiting Mike's go on scope — specifically the Task 1 causal-input-or-retire
-decision, which is a design call, not a mechanism call.
+**CLOSED S431.** Tasks 2–4 shipped S380 (changelog); Task 1 resolved by design S431 (SchoolQuality is a causal input for minors, adult cells legacy, no sweep). Residual outside this plan's classes: POP-01083 BirthYear `2--6` (hand-mint typo, sports roster fact) — gap log G-EC58.
 
 ## Changelog
 

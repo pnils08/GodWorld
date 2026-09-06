@@ -155,9 +155,13 @@ async function main() {
       roleTypeCitizen.push({ popid: popidRaw, name: `${first} ${last}`.trim() });
     }
 
-    const by = Number(row[c('BirthYear')]);
-    if (by && (2041 - by < 0 || 2041 - by > 110)) {
-      birthYearOOB.push({ popid: popidRaw, name: `${first} ${last}`.trim(), birthYear: by, age: 2041 - by });
+    const byRaw = String(row[c('BirthYear')] ?? '').trim();
+    const by = Number(byRaw);
+    // S431: a non-numeric cell ("2--6", a hand-mint typo on POP-01083) used to
+    // pass silently — Number() gave NaN, `by &&` skipped it. Non-empty + not a
+    // finite year is out-of-bounds by definition.
+    if (byRaw && (!Number.isFinite(by) || 2041 - by < 0 || 2041 - by > 110)) {
+      birthYearOOB.push({ popid: popidRaw, name: `${first} ${last}`.trim(), birthYear: Number.isFinite(by) ? by : byRaw, age: Number.isFinite(by) ? 2041 - by : 'n/a' });
     }
 
     const nbhd = String(row[c('Neighborhood')] || '').trim();

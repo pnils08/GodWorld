@@ -189,7 +189,7 @@ function main() {
       ' (report ' + r.reportAgeHours.toFixed(1) + 'h old)');
     if (dryRun) {
       console.log('  [DRY] would run: node scripts/cron-desk-run.js --desk ' + r.desk +
-        ' --persona ' + r.persona + ' --stage=write');
+        ' --persona ' + r.persona + ' --stage=write --gate-backend api');
       continue;
     }
     attempted.add(r.stem);
@@ -199,6 +199,7 @@ function main() {
       execFileSync('node', [
         path.join(ROOT, 'scripts', 'cron-desk-run.js'),
         '--desk', r.desk, '--persona', r.persona, '--stage=write',
+        '--gate-backend', 'api',
       ], { cwd: ROOT, encoding: 'utf8', stdio: 'inherit' });
     } catch (error) {
       ok = false;

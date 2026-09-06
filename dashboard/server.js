@@ -336,7 +336,7 @@ function getLatestEdition() {
   const edDir = join(ROOT, 'editions');
   if (!existsSync(edDir)) return null;
   const files = readdirSync(edDir)
-    .filter(f => f.match(/^cycle_pulse_edition_\d+\.txt$/))
+    .filter(f => f.match(/^cycle_pulse_c\d+\.txt$/))
     .sort((a, b) => {
       const na = parseInt(a.match(/\d+/)[0]);
       const nb = parseInt(b.match(/\d+/)[0]);

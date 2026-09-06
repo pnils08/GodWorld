@@ -50,7 +50,7 @@ async function call(handler, {
 const AS_HEADERS = [
   'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
   'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SV', 'SO',
-  'BB', 'WAR',
+  'BB', 'WAR', 'Awards', 'Current MLB rating', 'Year', 'Age',
 ];
 const FEED_HEADERS = [
   'Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'NamesUsed', 'Notes',
@@ -140,6 +140,7 @@ const syntheticSheets = {
         'POP-90001', 'Synthetic', '', 'Batter', '1', 'CF', "A's", '$1',
         '100', '.300', '30', '5', '20', '4', '21',
         '12.1', '2.50', '2-1', '2', '33', '7', '1.8',
+        '', '', '', '',
       ],
     }],
   },

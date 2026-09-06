@@ -102,6 +102,9 @@ function errorBody(error) {
 
 function sendError(res, error, sourceName = 'Oakland sports workspace') {
   const status = error.status || 500;
+  if (!status || status >= 500) {
+    console.error(`[sports:${sourceName}]`, error && error.stack || error);
+  }
   return res.status(status).json(envelope({
     source: { kind: 'projection', name: sourceName, fetchedAt: null, cycle: null },
     error: errorBody(error),

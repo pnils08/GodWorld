@@ -23,7 +23,7 @@ const {
 const AS_HEADERS = [
   'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
   'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SV', 'SO',
-  'BB', 'WAR',
+  'BB', 'WAR', 'Awards', 'Current MLB rating', 'Year', 'Age',
 ];
 const CITIZEN_HEADERS = CITIZEN_REQUIRED_HEADERS.slice();
 

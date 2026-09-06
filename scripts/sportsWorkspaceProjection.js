@@ -21,7 +21,7 @@ const ROSTER_SCHEMAS = Object.freeze({
     headers: Object.freeze([
       'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
       'AB', 'AVG', 'H', 'HR', 'RBI', 'SB', 'SO', 'IP', 'ERA', 'W-L', 'SV', 'SO',
-      'BB', 'WAR',
+      'BB', 'WAR', 'Awards', 'Current MLB rating', 'Year', 'Age',
     ]),
     stats: Object.freeze([
       ...Object.values(STAT_FIELD_MAPS.As_Roster),

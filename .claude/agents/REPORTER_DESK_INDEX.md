@@ -44,8 +44,8 @@ These reporters map 1:1 to a desk agent. Voice file's `**Desk:**` header is cano
 | Sharon Okafor | `docs/media/voices/sharon_okafor.md` | `culture-desk` | Routines, habits, behavior trends, daily life |
 | Kai Marston | `docs/media/voices/kai_marston.md` | `culture-desk` | Galleries, musicians, artists, First Fridays, Cultural Ledger figures |
 | Angela Reyes | `docs/media/voices/angela_reyes.md` | `culture-desk` | Schools, youth programs, packet-supplied school systems, after-school athletics |
-| Selena Grant | `docs/media/voices/selena_grant.md` | `chicago-desk` | Bulls coverage, roster construction, player development |
-| Talia Finch | `docs/media/voices/talia_finch.md` | `chicago-desk` | Street-level Chicago, city texture, neighborhood pulse |
+| Selena Grant | `docs/media/voices/selena_grant.md` | `selena-grant` (solo) | Oaks beat — roster construction, player development, the expansion front office (pipeline.67) |
+| Talia Finch | `docs/media/voices/talia_finch.md` | `talia-finch` (solo) | Oaks from the street — bars, platforms, who is deciding to become a fan (pipeline.67) |
 | Letters | (anonymous slate) | `letters-desk` | Citizen letters reacting to the edition |
 
 ## Beat-axis routing (multi-desk reporters)

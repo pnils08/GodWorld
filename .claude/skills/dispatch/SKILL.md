@@ -73,7 +73,7 @@ Engine B (`utilities/bylineEngine.js`) emits `bylineRationale.components.format`
 - **Mason Ortega** — kitchen scenes, motion under pressure
 - **Kai Marston** — music + nightlife + arts atmosphere
 
-Tier-2 dispatch fits (format-fit 3): Talia Finch (Chicago neighborhood texture), Sharon Okafor (lifestyle/social), Tanya Cruz (sideline/behind-the-scenes).
+Tier-2 dispatch fits (format-fit 3): Talia Finch (Oaks street texture — Jack London / West Oakland game nights), Sharon Okafor (lifestyle/social), Tanya Cruz (sideline/behind-the-scenes).
 
 **Scene-fit override behavior:**
 

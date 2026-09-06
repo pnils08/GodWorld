@@ -149,8 +149,8 @@ Reporters by specialty (not exhaustive — anyone can cover anything):
 | Maria Keen | Neighborhoods | Hyper-local culture, community pulse |
 | Simon Leary | Long View | Essays, philosophy, contemplative pieces |
 | Tanya Cruz | Sideline / Social | Behind-the-scenes, real-time dispatches |
-| Selena Grant | Bulls Beat | Chicago basketball, roster analysis |
-| Talia Finch | Chicago Ground | Chicago neighborhoods, street-level texture |
+| Selena Grant | Oaks Beat | Oaks roster construction, player development, front office |
+| Talia Finch | Oaks Ground | The Oaks from the street — bars, platforms, the deciding fan |
 | MintConditionOakTown | Internet/Rumors | Speculative threads, chaotic truth-seeking |
 | Carmen Delaine | Civic | Government, infrastructure, policy |
 | Jordan Velez | Business/Labor | Economics, workforce, port, development |

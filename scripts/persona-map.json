@@ -1,16 +1,16 @@
 {
-  "_comment": "Phase 2.3 (2026-07-24): persona slug -> ledger identity. When cron-desk-run.js gets --persona, the byline + self-record come from HERE (not the desk-roster resolveByline). Personas are real citizens \u2014 Jax is POP-00799, Tier 2 \u2014 so author-side self-record accretes to their own dials/page.",
+  "_comment": "Phase 2.3 (2026-07-24): persona slug -> ledger identity. When cron-desk-run.js gets --persona, the byline + self-record come from HERE (not the desk-roster resolveByline). Personas are real citizens — Jax is POP-00799, Tier 2 — so author-side self-record accretes to their own dials/page.",
   "freelance-firebrand": {
     "name": "Jax Caldera",
     "popid": "POP-00799",
     "beatDomain": "ACCOUNTABILITY",
-    "note": "Tier-2 ledger citizen, Tribune freelance accountability (Grok seat). Sim bullshit detector \u2014 short, hot, uncomfortable. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
+    "note": "Tier-2 ledger citizen, Tribune freelance accountability (Grok seat). Sim bullshit detector — short, hot, uncomfortable. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
   },
   "p-slayer": {
     "name": "P Slayer",
     "popid": "POP-00008",
     "beatDomain": "SPORTS",
-    "note": "Fan columnist (Grok heat seat, parallel to Jax). Die-hard fan voice \u2014 hate the signing / I was wrong arc. NOT multi-voice sports-desk. Wall cp-POP-00008. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
+    "note": "Fan columnist (Grok heat seat, parallel to Jax). Die-hard fan voice — hate the signing / I was wrong arc. NOT multi-voice sports-desk. Wall cp-POP-00008. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
   },
   "business-desk": {
     "name": "Jordan Velez",
@@ -136,6 +136,18 @@
     "name": "Nia Rook",
     "popid": "POP-01076",
     "beatDomain": "CULTURE",
-    "note": "Solo UNDOCKED recap \u2014 who's up, who's down, who the city is watching. Heat register, same band as p-slayer. NOT culture-desk generalist, NOT sports. Wall cp-POP-01076. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
+    "note": "Solo UNDOCKED recap — who's up, who's down, who the city is watching. Heat register, same band as p-slayer. NOT culture-desk generalist, NOT sports. Wall cp-POP-01076. Scheduled routing and Rhea authority come from newsroom-wake-packages.json; desk-model-map is legacy/manual fallback."
+  },
+  "selena-grant": {
+    "name": "Selena Grant",
+    "popid": "",
+    "beatDomain": "SPORTS",
+    "note": "Solo Oaks beat analyst (pipeline.67, 2026-09-06 — re-beat from the retired Chicago Bureau). Roster construction, player development, front office. NOT A's (Anthony/Hal/P Slayer/Tanya/Simon), NOT the street (Talia). popid PENDING engine-sheet mint; wake package sits under `_pending-selena-grant` in newsroom-wake-packages.json until then."
+  },
+  "talia-finch": {
+    "name": "Talia Finch",
+    "popid": "",
+    "beatDomain": "SPORTS",
+    "note": "Solo Oaks ground reporter (pipeline.67, 2026-09-06 — re-beat from the retired Chicago Bureau). Bars, platforms, corners; who is deciding to become a fan. NOT analysis (Selena), NOT A's. popid PENDING engine-sheet mint; wake package sits under `_pending-talia-finch` until then."
   }
 }

@@ -1,14 +1,10 @@
 {
-  "_comment": "Per-desk + persona model routing (research.25; grok firebrand 2026-08-07). Desk default: DeepSeek (S332 \u2014 pennies, canon-ok). Firebrand is a separate seat: needs more heat/voice than deepseek-chat's tidy default without leaving the penny band. Live OpenRouter prices (2026-08-07): deepseek/deepseek-chat ~$0.26/$1.03 per 1M; llama-3.3-70b ~$0.10/$0.32; hermes-4-70b ~$0.13/$0.40; x-ai/grok-4.x ~$1\u20132/$2\u20136 (too rich for M\u2013F cron). Override per-run with --provider/--model.",
+  "_comment": "Per-desk + persona model routing (research.25; grok firebrand 2026-08-07). Desk default: DeepSeek (S332 — pennies, canon-ok). Firebrand is a separate seat: needs more heat/voice than deepseek-chat's tidy default without leaving the penny band. Live OpenRouter prices (2026-08-07): deepseek/deepseek-chat ~$0.26/$1.03 per 1M; llama-3.3-70b ~$0.10/$0.32; hermes-4-70b ~$0.13/$0.40; x-ai/grok-4.x ~$1–2/$2–6 (too rich for M–F cron). Override per-run with --provider/--model.",
   "sports": {
     "provider": "openrouter",
     "model": "deepseek/deepseek-chat"
   },
   "civic": {
-    "provider": "openrouter",
-    "model": "deepseek/deepseek-chat"
-  },
-  "chicago": {
     "provider": "openrouter",
     "model": "deepseek/deepseek-chat"
   },
@@ -46,7 +42,7 @@
   "anthony-raines": {
     "provider": "openrouter",
     "model": "deepseek/deepseek-chat",
-    "note": "Anthony analytic seat (grok 2026-08-07). DeepSeek is fine for number-first press-box \u2014 heat models sand less relevant than clear structure. Solo persona, not multi-voice sports-desk."
+    "note": "Anthony analytic seat (grok 2026-08-07). DeepSeek is fine for number-first press-box — heat models sand less relevant than clear structure. Solo persona, not multi-voice sports-desk."
   },
   "hal-richmond": {
     "provider": "openrouter",
@@ -61,7 +57,7 @@
   "luis-navarro": {
     "provider": "openrouter",
     "model": "deepseek/deepseek-chat",
-    "note": "Luis investigations solo (grok 2026-08-07). Persistent fair pressure \u2014 not Jax Llama heat. DeepSeek default."
+    "note": "Luis investigations solo (grok 2026-08-07). Persistent fair pressure — not Jax Llama heat. DeepSeek default."
   },
   "trevor-shimizu": {
     "provider": "openrouter",

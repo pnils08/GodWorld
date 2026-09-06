@@ -73,7 +73,7 @@ pointers:
 - **Context:** Chicago is canon-retired (engine.116 §Task 4). Its desk — Selena Grant (Bulls beat) and Talia Finch (Chicago ground) — was never migrated to the headless newsroom: neither is in `scripts/persona-map.json`, neither has a cron lane. Mike's recollection that they were switched to Oaks reporters is not in the code. Oaks coverage today (Oakland_Sports_Feed rows with `TeamsUsed: Oaks`) flows through the general sports seats; no seat carries an Oaks beat.
 - **Decision to make (Mike):** re-beat Selena Grant to the Oaks (Bulls analyst → NBA expansion beat is a natural fit for her voice; Talia's Chicago-ground beat has no Oakland equivalent — retire with the city)? If yes: own Oaks slice, or the sports slice with an Oaks beat? Precedent: pipeline.58 gave Nia Rook a dedicated beat + feed rather than folding into a generalist desk, because episode-to-episode continuity needed one voice.
 - **Build once decided:** persona-map entry + wake-package routing + lane (same shape as Tasks 1–3 here), `.claude/agents/chicago-desk` → renamed/retired, Oaks rows in the sports slice or a new slice builder.
-- **Status:** [ ] awaiting Mike's call; nothing built.
+- **Status:** [x] Mike's call 2026-09-06: both are Oaks reporters, dedicated solo seats. Built S429 (research-build) — voice files, agent packages, persona-map, approach-map, wake packages staged under `_pending-*` keys; chicago-desk retired. Open: engine-sheet mints the two ledger rows (neither reporter exists on the Simulation_Ledger — Mike's recollection of POPIDs is not in the sheet), then activates the packages.
 
 ---
 
@@ -90,3 +90,4 @@ pointers:
 - 2026-08-07 (grok) — Hal archive bag + P Slayer charge bag.
 - 2026-08-07 (mags, research-build S357) — Task 3 closed: agent packages design-reviewed and landed, commit `0d2179b4`. Remaining: Tasks 4 (live observe) + 5 (media legacy note).
 - 2026-09-06 (S428, research-build) — Task 6 added (pipeline.67): Oaks beat decision. Verified the Chicago desk was never re-beat (no persona-map entry, no lane); Oaks coverage rides the general sports seats. Awaiting Mike's call, nothing built.
+- 2026-09-06 (S429, research-build) — Task 6 built: Selena Grant (Oaks beat analyst, Jack London) + Talia Finch (Oaks ground, West Oakland) as solo sports-lane seats; Chicago Bureau agent/skill retired. Mint handed to engine-sheet.

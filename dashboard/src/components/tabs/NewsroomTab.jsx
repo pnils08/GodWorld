@@ -15,7 +15,6 @@ const deskTone = {
   sports: 'warn',
   culture: 'accent',
   business: 'warn',
-  chicago: 'bad',
   letters: 'default',
 };
 

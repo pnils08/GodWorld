@@ -156,3 +156,4 @@ now unblocked — the S378 wave is deployed and bench-proven. Tasks 3–5 ready.
   tab. Browser-Claude live-doc audit folded into Measured state (onOpen ruled out, superseded pairs
   named).
 - 2026-09-06 (S428, research-build) — §Task 4 gains the dashboard + newsroom remainder (Mike-direct): ChicagoTab still rendered, chicago-desk agent never re-beat to the Oaks (verified: no persona-map entry, no lane). Filed pipeline.66 (retire page) + pipeline.67 (Oaks beat decision).
+- 2026-09-06 (S429, research-build) — pipeline.66 shipped: dashboard Chicago page retired (ChicagoTab, tab, loader, `chicago` packet filters, legacy `/api/sports`). `buildDeskPackets.js` still emits `chicago_c{N}.json` — that is the §Task 4 consumer-retirement remainder.

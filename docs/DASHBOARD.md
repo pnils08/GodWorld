@@ -59,7 +59,7 @@ this document.
 
 ## Frontend tabs
 
-The built frontend contains ten views:
+The built frontend contains nine views (the Chicago view was retired 2026-09-06, pipeline.66 — Chicago is canon-retired, engine.116 §Task 4):
 
 | Tab | Current source and purpose |
 |---|---|
@@ -71,16 +71,15 @@ The built frontend contains ten views:
 | Sports | Exact-Cycle A's/Oaks workspace, live rosters and state, local non-canon Notebook inbox, preview, and gated confirmation |
 | City | Neighborhood cards from `Neighborhood_Map`, enriched from demographics and crime data |
 | Search | Full-text article search across the aggregated Edition/archive/civic-document corpus |
-| Chicago | Deprecated sports packet's Chicago slice plus Chicago-section article search |
 | Mission | Service health, persisted session events, and authenticated quick actions |
 
 The frontend loads core data on page load and lazy-loads Newsroom, Intel,
-Chicago, and Mission. It has no general real-time subscription. Sports provides
+and Mission. It has no general real-time subscription. Sports provides
 its own refresh and Cycle controls.
 
 ## API contract
 
-The source registers 42 `/api/*` routes: 35 GET, 6 POST, and 1 DELETE. The
+The source registers 41 `/api/*` routes: 34 GET, 6 POST, and 1 DELETE. The
 tables below describe source contracts. A `200` means that the route completed;
 an empty collection is still a valid result and does not prove that its
 upstream artifact is fresh.
@@ -150,7 +149,6 @@ not hard-coded here because they change as artifacts are filed.
 |---|---|
 | `GET /api/players` | `output/player-index.json`; filters: `sport`, `team`, `position`, `q`, `limit` |
 | `GET /api/players/:popId` | Exact POPID player record, with an optional name fallback for universe players |
-| `GET /api/sports` | Deprecated Oakland/Chicago desk-packet compatibility endpoint; Oakland callers should migrate |
 | `GET /api/sports/overview?cycle=N` | Live feed and both rosters; exact-Cycle events, effective state, roster counts, available Cycles, provenance, warnings |
 | `GET /api/sports/workspace?cycle=N&team=as\|oaks` | One live team workspace with citizen-resolved roster, state, events, valid fields/actions, and public write policy |
 | `GET /api/sports/notebook?limit=1..7` | Complete local NotebookLM Daily News artifacts only; permanent `NOT_CANON`; invokes no NotebookLM call |

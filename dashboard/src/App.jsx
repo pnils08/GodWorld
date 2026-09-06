@@ -27,7 +27,6 @@ import TrackerTab from './components/tabs/TrackerTab';
 import IntelTab from './components/tabs/IntelTab';
 import CityTab from './components/tabs/CityTab';
 import SearchTab from './components/tabs/SearchTab';
-import ChicagoTab from './components/tabs/ChicagoTab';
 import MissionTab from './components/tabs/MissionTab';
 import WorldTab from './components/tabs/WorldTab';
 import { Stat, Badge, TabButton } from './components/ui';
@@ -67,7 +66,6 @@ export default function App() {
   const [citizenDetail, setCitizenDetail] = useState(null);
   const [coverageTrail, setCoverageTrail] = useState(null);
   const [missionData, setMissionData] = useState(null);
-  const [chicagoData, setChicagoData] = useState(null);
   const [supplementals, setSupplementals] = useState([]);
   const [world, setWorld] = useState(null);
   const [worldLoaded, setWorldLoaded] = useState(false);
@@ -165,25 +163,6 @@ export default function App() {
       })
       .catch(() => {});
   }
-
-  // Load chicago data when CHICAGO tab is selected
-  useEffect(() => {
-    if (activeTab === 'CHICAGO' && !chicagoData) {
-      Promise.all([
-        fetchAPI('/api/sports'),
-        fetchAPI('/api/search/articles?section=chicago&limit=20'),
-      ])
-        .then(([sportsData, articles]) => {
-          const chi = sportsData?.chicago || {};
-          setChicagoData({
-            feeds: chi.feeds || [],
-            digest: chi.digest || null,
-            articles: articles?.results || [],
-          });
-        })
-        .catch(() => {});
-    }
-  }, [activeTab, chicagoData]);
 
   // Load hooks/arcs when INTEL tab is selected
   useEffect(() => {
@@ -547,7 +526,6 @@ export default function App() {
             { label: 'Neighborhoods', view: 'neighborhoods', tab: 'CITY' },
             { label: 'World', view: 'world', tab: 'WORLD' },
             { label: 'Article Search', view: 'search', tab: 'SEARCH' },
-            { label: 'Chicago', view: 'chicago', tab: 'CHICAGO' },
             { label: 'Mission Control', view: 'mission', tab: 'MISSION' },
           ].map((item) => (
             <div
@@ -625,7 +603,6 @@ export default function App() {
               'CITY',
               'WORLD',
               'SEARCH',
-              'CHICAGO',
               'MISSION',
             ].map((tab) => (
               <button
@@ -662,7 +639,6 @@ export default function App() {
         {activeTab === 'SEARCH' && (
           <SearchTab fetchAPI={fetchAPI} FullArticleReader={FullArticleReader} />
         )}
-        {activeTab === 'CHICAGO' && <ChicagoTab chicagoData={chicagoData} />}
         {activeTab === 'WORLD' && (
           <WorldTab world={world} photos={photos} neighborhoods={neighborhoods} onCitizenClick={handleCitizenClick} />
         )}

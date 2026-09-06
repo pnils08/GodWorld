@@ -2212,7 +2212,7 @@ app.get('/api/hooks', (req, res) => {
 
   // Gather hooks from all desk packets for the latest cycle
   const packets = readdirSync(packetDir)
-    .filter(f => f.match(/^(civic|sports|culture|business|chicago|letters)_c\d+\.json$/))
+    .filter(f => f.match(/^(civic|sports|culture|business|letters)_c\d+\.json$/))
     .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
 
   // Group by cycle — only latest
@@ -2250,7 +2250,7 @@ app.get('/api/arcs', (req, res) => {
 
   // Gather arcs from all desk packets for latest cycle
   const packets = readdirSync(packetDir)
-    .filter(f => f.match(/^(civic|sports|culture|business|chicago|letters)_c\d+\.json$/))
+    .filter(f => f.match(/^(civic|sports|culture|business|letters)_c\d+\.json$/))
     .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
 
   const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
@@ -2286,7 +2286,7 @@ app.get('/api/storylines', (req, res) => {
   const storylineMap = new Map();
 
   const packets = readdirSync(packetDir)
-    .filter(f => f.match(/^(civic|sports|culture|business|chicago|letters)_c\d+\.json$/))
+    .filter(f => f.match(/^(civic|sports|culture|business|letters)_c\d+\.json$/))
     .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
 
   const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
@@ -2321,67 +2321,6 @@ app.get('/api/scores', (req, res) => {
   const scores = readJSON(join(ROOT, 'output/edition_scores.json'));
   if (!scores) return res.json({ scores: [] });
   res.json(scores);
-});
-
-// --- Sports Feeds ---
-// Oakland + Chicago sports data from desk packets
-app.get('/api/sports', (req, res) => {
-  const packetDir = join(ROOT, 'output/desk-packets');
-  const latestSports = readdirSync(packetDir)
-    .filter(f => f.match(/^sports_c\d+\.json$/))
-    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]))[0];
-
-  if (!latestSports) {
-    return res.json({
-      contractVersion: 1,
-      source: {
-        kind: 'desk-packet',
-        name: 'Legacy Oakland and Chicago sports packet endpoint',
-        fetchedAt: null,
-        cycle: null,
-        deprecated: true,
-        replacement: '/api/sports/overview',
-      },
-      warnings: [{ code: 'legacy_sports_packet_missing' }],
-      oakland: { feeds: [], digest: null },
-      chicago: { feeds: [], digest: null },
-    });
-  }
-
-  const packet = readJSON(join(packetDir, latestSports));
-  const feeds = packet?.sportsFeeds || {};
-  const digest = packet?.sportsFeedDigest || '';
-
-  // Also get Chicago feeds
-  const latestChicago = readdirSync(packetDir)
-    .filter(f => f.match(/^chicago_c\d+\.json$/))
-    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]))[0];
-
-  let chicagoFeeds = {};
-  let chicagoDigest = '';
-  if (latestChicago) {
-    const cp = readJSON(join(packetDir, latestChicago));
-    chicagoFeeds = cp?.sportsFeeds || {};
-    chicagoDigest = cp?.sportsFeedDigest || '';
-  }
-
-  res.json({
-    contractVersion: 1,
-    source: {
-      kind: 'desk-packet',
-      name: 'Legacy Oakland and Chicago sports packet endpoint',
-      fetchedAt: null,
-      cycle: latestSports ? parseInt(latestSports.match(/\d+/)[0]) : null,
-      deprecated: true,
-      replacement: '/api/sports/overview',
-    },
-    warnings: [{
-      code: 'legacy_sports_endpoint',
-      message: 'Oakland consumers should use /api/sports/overview and /api/sports/workspace.',
-    }],
-    oakland: { feeds, digest },
-    chicago: { feeds: chicagoFeeds, digest: chicagoDigest },
-  });
 });
 
 // --- Mara Directives ---
@@ -2467,7 +2406,7 @@ app.get('/api/newsroom', (req, res) => {
   }
 
   // 2. Desk status — latest packet cycle per desk, article counts from latest edition
-  const deskNames = ['civic', 'sports', 'culture', 'business', 'chicago', 'letters'];
+  const deskNames = ['civic', 'sports', 'culture', 'business', 'letters'];
   const deskStatus = {};
   for (const desk of deskNames) {
     const packets = readdirSync(packetDir)
@@ -2494,7 +2433,7 @@ app.get('/api/newsroom', (req, res) => {
     const parsed = parseEdition(readText(latestEd));
     const sectionDeskMap = {
       'CIVIC AFFAIRS': 'civic', 'SPORTS': 'sports', 'CULTURE & COMMUNITY': 'culture',
-      'BUSINESS TICKER': 'business', 'CHICAGO BUREAU': 'chicago', 'LETTERS TO THE EDITOR': 'letters',
+      'BUSINESS TICKER': 'business', 'LETTERS TO THE EDITOR': 'letters',
       'FRONT PAGE': 'civic',
     };
     for (const article of parsed.articles) {
@@ -2755,8 +2694,10 @@ if (existsSync(distPath)) {
   app.use(express.static(distPath));
   app.get('*', (req, res) => {
     if (!req.path.startsWith('/api')) {
-      res.sendFile(join(distPath, 'index.html'));
+      return res.sendFile(join(distPath, 'index.html'));
     }
+    // Unknown /api path: answer, don't hang the request
+    res.status(404).json({ error: 'not_found', path: req.path });
   });
 }
 
@@ -2769,7 +2710,6 @@ app.listen(PORT, BIND_HOST, () => {
   console.log(`  /api/citizens/:popId     — Full citizen detail + coverage trail`);
   console.log(`  /api/council             — Council + city staff`);
   console.log(`  /api/neighborhoods       — 17 Oakland neighborhoods`);
-  console.log(`  /api/sports              — Oakland + Chicago sports feeds`);
   console.log(`  /api/players             — Player profiles (?sport=&team=&position=&q=)`);
   console.log(`  /api/players/:popId      — Single player profile`);
   console.log(`  /api/roster              — Bay Tribune journalist roster`);

@@ -188,8 +188,6 @@
 
 - **drawIntakeProfile_(pools, category, givenRole, rng)**
 
-- **getMaxPopId_(ledgerValues)**
-
 - **existsInLedger_(ledgerValues, first, last)**
 
 - **updateNamedCitizens_(ctx)**
@@ -2101,8 +2099,6 @@
 
 - **scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPopId, occupiedPopIds)**
 
-- **nextChallengerPopId_(rows, iPop)**
-
 - **mintChallengerOnLedger_(ctx, spec)**
 
 - **pickGenericCitizenChallenger_(ctx, district, specBase)**
@@ -3585,6 +3581,19 @@
 - **check(name, cond)**
   Reads: S.neighborhoodPulse
 
+### popIdAllocator.js
+- **popIdActiveMax_(rows, iPop)**
+
+- **popIdFormat_(n)**
+
+- **popIdNext_(highWater, activeMax)**
+
+- **nextPopIdLocked_(ctx)**
+  Config: ctx.config.popIdHighWater
+
+- **persistPopIdHighWater_(ctx)**
+  Config: ctx.config.popIdHighWater
+
 ### priorityEngine.js
 - **computeArcMultiplier_(seed, storylineState)**
 
@@ -3817,5 +3826,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 181
-**Functions mapped:** 1307
+**Files scanned:** 182
+**Functions mapped:** 1310

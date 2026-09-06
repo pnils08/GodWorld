@@ -7,7 +7,7 @@
  * World-aware with Oakland neighborhood integration and GodWorld Calendar.
  *
  * v2.3 Fixes:
- * - POPID collision fix: compute maxN once, increment in-memory
+ * - POPID mint: engine.90 shared allocator (nextPopIdLocked_, World_Config popIdHighWater)
  * - Deterministic neighborhood mapping (no more random fallback)
  * - Required ledger column guard (prevents silent bad writes)
  * - Header-based Generic writes (no offset assumptions)
@@ -162,22 +162,9 @@ function checkForPromotions_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.3: SAFE POPID GENERATOR (fixes collision when multiple promotions)
   // ═══════════════════════════════════════════════════════════════════════════
-  var popCounter = 0;
-  for (var pr = 0; pr < lRows.length; pr++) {
-    var v = (lRows[pr][iPopID] || "").toString().trim();
-    var m = v.match(/^POP-(\d+)$/);
-    if (m) {
-      var num = parseInt(m[1], 10);
-      if (num > popCounter) popCounter = num;
-    }
-  }
-
-  function nextPopId() {
-    popCounter++;
-    var padded = String(popCounter);
-    while (padded.length < 5) padded = "0" + padded;
-    return "POP-" + padded;
-  }
+  // engine.90: the shared per-cycle allocator (World_Config popIdHighWater +
+  // active scan, counted once for every minter this cycle)
+  function nextPopId() { return nextPopIdLocked_(ctx); }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.3: DETERMINISTIC NEIGHBORHOOD VALIDATION
@@ -568,7 +555,7 @@ function checkForPromotions_(ctx) {
  * ============================================================================
  *
  * v2.3 FIXES:
- * - POPID collision: compute maxN once, increment in-memory counter
+ * - POPID mint: engine.90 shared allocator (nextPopIdLocked_)
  * - Deterministic neighborhood: expanded mappings, no random fallback
  * - Required column guard: aborts if POPID/First/Last/Tier/Status missing
  * - Header-based Generic writes: uses EmergedCycle/EmergenceContext by name

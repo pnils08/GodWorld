@@ -1059,22 +1059,13 @@ function scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPo
   return { popId: pop, name: name, neighborhood: hood, tier: tier, score: score, origin: 'ledger' };
 }
 
-function nextChallengerPopId_(rows, iPop) {
-  var max = 0;
-  for (var r = 0; r < (rows || []).length; r++) {
-    var m = String((rows[r] && rows[r][iPop]) || '').match(/POP-(\d+)/);
-    if (m) max = Math.max(max, Number(m[1]));
-  }
-  return 'POP-' + String(max + 1).padStart(5, '0');
-}
-
 function mintChallengerOnLedger_(ctx, spec) {
   var headers = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   var col = function(name) { return headers.indexOf(name); };
   var iPop = col('POPID');
   if (iPop < 0) return null;
-  var pop = nextChallengerPopId_(rows, iPop);
+  var pop = nextPopIdLocked_(ctx); // engine.90 shared allocator
   var row = [];
   for (var i = 0; i < headers.length; i++) row[i] = '';
   var set = function(name, val) {

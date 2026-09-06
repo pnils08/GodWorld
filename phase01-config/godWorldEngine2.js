@@ -580,6 +580,7 @@ function runWorldCycle() {
   // Save cycle state for next cycle's analyzers (shock, pattern, recovery)
   safePhaseCall_(ctx, 'Phase10-CycleState', function() { savePreviousCycleState_(ctx); });
   // Phase 42 §5.6: consolidated Simulation_Ledger commit (matches runCyclePhases_).
+  safePhaseCall_(ctx, 'Phase10-PopIdHighWater', function() { persistPopIdHighWater_(ctx); }); // engine.90 — mint mark rides the World_Config flush
   safePhaseCall_(ctx, 'Phase10-CommitLedger', function() { commitSimulationLedger_(ctx); });
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
@@ -1582,28 +1583,6 @@ function drawIntakeProfile_(pools, category, givenRole, rng) {
   };
 }
 
-/**
- * Helper: Get max POP-ID number from ledger
- */
-function getMaxPopId_(ledgerValues) {
-  if (ledgerValues.length < 2) return 0;
-
-  var header = ledgerValues[0];
-  var idx = header.indexOf('POPID');
-  if (idx < 0) return 0;
-
-  var maxN = 0;
-  for (var r = 1; r < ledgerValues.length; r++) {
-    var v = (ledgerValues[r][idx] || '').toString().trim();
-    var m = v.match(/^POP-(\d+)$/);
-    if (m) {
-      var n = Number(m[1]);
-      if (n > maxN) maxN = n;
-    }
-  }
-  return maxN;
-}
-
 
 /**
  * ============================================================================
@@ -2328,6 +2307,7 @@ function runCyclePhases_(ctx) {
   // Save cycle state for next cycle's analyzers (shock, pattern, recovery)
   safePhaseCall_(ctx, 'Phase10-CycleState', function() { savePreviousCycleState_(ctx); });
   // Phase 42 §5.6: consolidated Simulation_Ledger commit (matches runWorldCycle).
+  safePhaseCall_(ctx, 'Phase10-PopIdHighWater', function() { persistPopIdHighWater_(ctx); }); // engine.90 — mint mark rides the World_Config flush
   safePhaseCall_(ctx, 'Phase10-CommitLedger', function() { commitSimulationLedger_(ctx); });
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });

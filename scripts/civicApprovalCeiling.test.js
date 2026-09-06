@@ -189,6 +189,7 @@ console.log('═══ E. Every-Cycle writer integration');
   const intents = [];
   const ripples = [];
   global.Logger = { log() {} };
+  global.nextPopIdLocked_ = require('../utilities/popIdAllocator').nextPopIdLocked_; // engine.90: the real allocator
   global.safeRand_ = () => () => 0.01;
   global.queueCellIntent_ = (ctx, sheet, row, col, value, reason) => {
     intents.push({ sheet, row, col, value, reason });

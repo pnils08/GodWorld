@@ -156,6 +156,10 @@ async function main() {
   }
   console.log('  Current max POP-ID: POP-' + String(maxPop).padStart(5, '0'));
   console.log('  Ledger has ' + slRows.length + ' rows, ' + slHeader.length + ' columns');
+  // engine.90 allocator contract: next = max(highWater, activeSheetMax) + 1
+  var popHW = await sheets.getPopIdHighWater();
+  maxPop = sheets.nextPopIdNumber(popHW.value, maxPop) - 1;
+  console.log('  popIdHighWater: ' + (popHW.value === null ? 'absent' : popHW.value) + ' → next POP-' + String(maxPop + 1).padStart(5, '0'));
   console.log('');
 
   // Check for existing faith leaders (avoid duplicates)
@@ -268,6 +272,7 @@ async function main() {
   // ---------------------------------------------------------------
   console.log('Appending ' + newRows.length + ' rows to Simulation_Ledger...');
   await sheets.appendRows('Simulation_Ledger', newRows);
+  if (nextPop - 1 > maxPop) await sheets.setPopIdHighWater(nextPop - 1); // engine.90
   console.log('  Done.');
   console.log('');
 

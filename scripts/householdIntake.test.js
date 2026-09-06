@@ -24,6 +24,7 @@ const sandbox = {
   resolveHoodOrChild_: (ctx, name) => ({ temescal: 'Temescal', downtown: 'Downtown', 'old oakland': 'Downtown' }[String(name).trim().toLowerCase()] || null),
   setCurrentField_: (a) => a, roleFieldOf_: () => null,
   requireTab_: (ss, name) => ss.getSheetByName(name), // engine.119 (utilities/utilityFunctions.js)
+  nextPopIdLocked_: require('../utilities/popIdAllocator').nextPopIdLocked_, // engine.90: the real allocator
 };
 const src = R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('utilities/citizenDerivation.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
 const E = new Function(...Object.keys(sandbox), src + '\nreturn { queueHouseholdIntake_, processAdvancementRows_, formIntakeHouseholds_, wireFamilyMatch_, ensureHouseholdQueueSheet_, HOUSEHOLD_QUEUE_COLS_, normalizeCitizenName_, buildNameIndex_ };')(...Object.values(sandbox));

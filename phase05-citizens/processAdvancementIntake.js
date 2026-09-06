@@ -613,12 +613,6 @@ function processAdvancementRows_(ctx, now, cycle) {
   // citizenDerivation library auto-loaded from utilities/citizenDerivation.js.
   var ledgerFreq = buildLedgerFreqSnapshot_(ledgerHeaders, ledgerRows, { includesHeader: false });
 
-  var maxPop = 0;
-  for (var r = 0; r < ledgerRows.length; r++) {
-    var v = String(ledgerRows[r][lPopId] || '').match(/POP-(\d+)/);
-    if (v) maxPop = Math.max(maxPop, Number(v[1]));
-  }
-  
   var rowsToClear = [];
 
   // engine.51 T4/T5 (S302): normalized-name index replaces the exact
@@ -731,8 +725,7 @@ function processAdvancementRows_(ctx, now, cycle) {
           (tier !== tierBefore ? 'Updated to Tier ' + tier : 'Intake at Tier ' + tier) + (roleChanged ? '; RoleType -> ' + roleType : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
       }
     } else {
-      maxPop++;
-      var newPopId = 'POP-' + String(maxPop).padStart(5, '0');
+      var newPopId = nextPopIdLocked_(ctx); // engine.90 shared allocator
 
       // S184 (Phase 4.1.b) — derive 8 demographic + lifecycle fields for the new
       // citizen via the shared citizenDerivation library. Intake row may not

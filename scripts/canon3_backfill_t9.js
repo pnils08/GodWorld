@@ -183,6 +183,8 @@ async function main() {
     if (m) maxPop = Math.max(maxPop, parseInt(m[1], 10));
   }
   console.log('[canon3_backfill_t9] current max POPID: POP-' + String(maxPop).padStart(5, '0'));
+  // engine.90 allocator contract: the persisted mark counts as much as the active max
+  maxPop = sheets.nextPopIdNumber((await sheets.getPopIdHighWater()).value, maxPop) - 1;
   if (maxPop >= 958) {
     console.error('[canon3_backfill_t9] WARNING: max POPID is POP-' + String(maxPop).padStart(5, '0') +
       ', which collides with proposed append range POP-00958..POP-00973. Aborting.');
@@ -214,6 +216,7 @@ async function main() {
       const rowsToAppend = APPENDS.map(buildAppendRow);
       console.log('\n[canon3_backfill_t9] appending ' + rowsToAppend.length + ' rows to Simulation_Ledger…');
       await sheets.appendRows('Simulation_Ledger', rowsToAppend);
+      await sheets.setPopIdHighWater(973); // engine.90 — top of the fixed append range
       console.log('[canon3_backfill_t9] ✓ ' + rowsToAppend.length + ' rows appended');
     }
   } else {

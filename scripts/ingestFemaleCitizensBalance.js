@@ -202,8 +202,10 @@ async function main() {
       if (n > maxPopid) maxPopid = n;
     }
   }
-  const startNum = maxPopid + 1;
-  const endNum = maxPopid + TARGET_COUNT;
+  // engine.90 allocator contract: next = max(highWater, activeSheetMax) + 1
+  const popHW = await sheets.getPopIdHighWater();
+  const startNum = sheets.nextPopIdNumber(popHW.value, maxPopid);
+  const endNum = startNum + TARGET_COUNT - 1;
   console.log(`Live SL: ${dataRows.length} rows. Max POPID numeric: ${maxPopid}`);
   console.log(`Target POPID range: POP-${String(startNum).padStart(5, '0')}..POP-${String(endNum).padStart(5, '0')}`);
 
@@ -375,6 +377,7 @@ async function main() {
   if (apply) {
     console.log(`\nAppending ${composedRows.length} rows to ${SHEET}...`);
     await sheets.appendRows(SHEET, composedRows);
+    await sheets.setPopIdHighWater(endNum); // engine.90
 
     // Read back to verify.
     const verifyRaw = await sheets.getRawSheetData(SHEET);

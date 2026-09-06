@@ -155,6 +155,8 @@ function L(i) { return sheets.columnIndexToLetter(i); }
 
   let maxN = 0;
   sl.forEach(r => { const m = /^POP-(\d+)$/.exec(r[iPop] || ''); if (m && +m[1] > maxN) maxN = +m[1]; });
+  maxN = sheets.nextPopIdNumber((await sheets.getPopIdHighWater()).value, maxN) - 1; // engine.90 allocator contract
+  const popIdStart = maxN;
 
   for (const id of BACKFILL) {
     const cSex = (P[id][iGen] || '').toLowerCase();
@@ -223,6 +225,7 @@ function L(i) { return sheets.columnIndexToLetter(i); }
   if (!APPLY) { console.log('\nDRY RUN — nothing written. Re-run with --apply.'); return; }
 
   if (newSLRows.length) await sheets.appendRows('Simulation_Ledger', newSLRows);
+  if (maxN > popIdStart) await sheets.setPopIdHighWater(maxN); // engine.90
   if (newHHRows.length) await sheets.appendRows('Household_Ledger', newHHRows);
   const allCell = updates.concat(genUpdates);
   for (let i = 0; i < allCell.length; i += 400) await sheets.batchUpdate(allCell.slice(i, i + 400));

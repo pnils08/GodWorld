@@ -110,7 +110,9 @@ async function main() {
   // Max POPID + idempotency check
   const popNums = slData.map(r => popN(r[sc('POPID')])).filter(n => n < 1e9);
   const maxPop = Math.max(...popNums);
-  const startNum = maxPop + 1;
+  // engine.90 allocator contract: next = max(highWater, activeSheetMax) + 1
+  const popHW = await sheets.getPopIdHighWater();
+  const startNum = sheets.nextPopIdNumber(popHW.value, maxPop);
   const endNum = startNum + COUNT - 1;
   const taken = new Set(popNums);
   for (let n = startNum; n <= endNum; n++) {
@@ -274,6 +276,7 @@ async function main() {
   // ── Apply: SL append + Household_Ledger Members batchUpdate ────────────────
   console.log(`\nAppending ${slRows.length} youth rows to ${SL}...`);
   await sheets.appendRows(SL, slRows);
+  await sheets.setPopIdHighWater(endNum); // engine.90
 
   console.log(`Updating ${Object.keys(hhUpdates).length} ${HHL} households (Members + HouseholdType)...`);
   function colLetter(i) { let s = ''; i += 1; while (i > 0) { const m = (i - 1) % 26; s = String.fromCharCode(65 + m) + s; i = Math.floor((i - 1) / 26); } return s; }

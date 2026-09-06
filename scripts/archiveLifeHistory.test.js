@@ -11,6 +11,8 @@ const path = require('path');
 let logged = [];
 global.Logger = { log: (m) => logged.push(m) };
 global.openSimSpreadsheet_ = () => { throw new Error('cycle path must not re-open the spreadsheet'); };
+// engine.119: the cycle never creates tabs — the harness pre-creates via insertSheet below
+global.requireTab_ = (ss, name) => { const s = ss.getSheetByName(name); if (!s) throw new Error('engine.119: tab "' + name + '" is missing'); return s; };
 
 // Minimal Apps Script sheet stub: header + data rows, supports the methods the
 // archiver uses (getLastRow, getDataRange, getRange.setValues/clearContent,
@@ -88,6 +90,7 @@ function buildLog(maxCycle, span, perCycle) {
   const big = buildLog(120, 20, 700);
   const log = makeSheet(HEADER, big);
   const ss = makeSS(log);
+  ss.insertSheet('LifeHistory_Archive'); // engine.119: pre-created at rollout, never by the cycle
   maintainLifeHistoryLog_({ ss });
   const iCyc = HEADER.indexOf('Cycle');
   const remaining = log._rows.filter(r => r[iCyc] !== '');
@@ -97,11 +100,24 @@ function buildLog(maxCycle, span, perCycle) {
   ok('T2 retains exactly the last ' + CYCLE_RETAIN_CYCLES + ' cycles', minRemaining === cutoff + 1, 'minCycle=' + minRemaining + ' want=' + (cutoff + 1));
   ok('T2 active log bounded under trigger after trim', remaining.length <= CYCLE_TRIGGER_ROWS, String(remaining.length));
   const arch = ss._sheets['LifeHistory_Archive'];
-  ok('T2 archive sheet created + populated', !!arch && arch._rows.length > 0, arch ? String(arch._rows.length) : 'none');
+  ok('T2 pre-created archive sheet populated', !!arch && arch._rows.length > 0, arch ? String(arch._rows.length) : 'none');
   ok('T2 nothing lost (archived + retained == original)', arch._rows.length + remaining.length === 14000,
     arch._rows.length + '+' + remaining.length);
   ok('T2 current cycle (120) fully retained', remaining.filter(r => Number(r[iCyc]) === 120).length === 700,
     String(remaining.filter(r => Number(r[iCyc]) === 120).length));
+}
+
+// ── Test 3: above trigger, archive tab missing → engine.119 throws, log untouched ──
+{
+  logged = [];
+  const big = buildLog(120, 20, 700);
+  const log = makeSheet(HEADER, big);
+  const ss = makeSS(log);
+  let threw = null;
+  try { maintainLifeHistoryLog_({ ss }); } catch (e) { threw = e; }
+  ok('T3 missing archive tab throws the engine.119 error', !!threw && /engine\.119/.test(threw.message), threw ? threw.message : 'no throw');
+  ok('T3 missing archive tab leaves the log untouched', log._rows.length === 14000, String(log._rows.length));
+  ok('T3 the cycle never created the tab', !ss._sheets['LifeHistory_Archive']);
 }
 
 console.log(`\n${pass} passed, ${fail} failed`);

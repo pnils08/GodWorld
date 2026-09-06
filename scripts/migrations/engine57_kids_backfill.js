@@ -222,6 +222,7 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
   // ── drip: promote both parents for up to N orphan families ──
   const newSLRows = [], regRows = [], genUpdates = [];
   let dripped = 0;
+  let maxN = 0, popIdStart = 0; // engine.90: hoisted so the post-append persist can see them
   if (DRIP_N > 0) {
     const gc = await sheets.getRawSheetData('Generic_Citizens');
     const gh = gc[0]; const gi = n => gh.indexOf(n);
@@ -235,8 +236,9 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
       const a = Number(r[gAge]) || (Number(r[gBirth]) ? AGE_ANCHOR - Number(r[gBirth]) : 0);
       pool.push({ k, first: r[gF], last: r[gL], sex: sx, age: a, nbhd: r[gNbhd], occ: r[gOcc], used: false });
     });
-    let maxN = 0;
     rows.forEach(r => { const x = /^POP-(\d+)$/.exec(r[iPop] || ''); if (x && +x[1] > maxN) maxN = +x[1]; });
+    maxN = sheets.nextPopIdNumber((await sheets.getPopIdHighWater()).value, maxN) - 1; // engine.90 allocator contract
+    popIdStart = maxN;
 
     for (const t of dripTargets) {
       if (dripped >= DRIP_N) break;
@@ -397,6 +399,7 @@ const RENT = { 'West Oakland': 1400, 'Fruitvale': 1500, 'Downtown': 2100, 'Uptow
   if (updates.length) await sheets.batchUpdate(updates);
   if (newHHRows.length) await sheets.appendRows('Household_Ledger', newHHRows);
   if (newSLRows.length) await sheets.appendRows('Simulation_Ledger', newSLRows);
+  if (maxN > popIdStart) await sheets.setPopIdHighWater(maxN); // engine.90
   if (regRows.length) await sheets.appendRows('Family_Relationships', regRows);
   if (genUpdates.length) await sheets.batchUpdate(genUpdates);
 

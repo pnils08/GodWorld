@@ -1333,7 +1333,8 @@ async function main() {
   console.log('  ambiguous:  ' + citizenResolution.ambiguous.length);
   console.log('  phantom:    ' + citizenResolution.phantom.length);
   console.log('  cultural:   ' + citizenResolution.culturalOnly.length + ' (CUL-/non-POP — logged, not appended)');
-  console.log('  next POPID: POP-' + String(citizenResolution.maxPopNum + 1).padStart(5, '0'));
+  const popHW = await require('../lib/sheets').getPopIdHighWater(); // engine.90: mark + active max
+  console.log('  next POPID: POP-' + String(require('../lib/sheets').nextPopIdNumber(popHW.value, citizenResolution.maxPopNum)).padStart(5, '0'));
   console.log('');
   console.log('BUSINESSES:');
   console.log('  matched:    ' + bizResolution.matched.length);

@@ -1067,17 +1067,8 @@ function createChildRow_(ctx, parentRowIdx, cycle) {
   var iPop = idx("POPID");
   if (iPop < 0) return null;
 
-  // next POPID — cache the max scan once per cycle, count pushes after
-  if (!ctx._maxPopN) {
-    var maxN = 0;
-    for (var r = 0; r < rows.length; r++) {
-      var m = /^POP-(\d+)$/.exec(rows[r][iPop] || "");
-      if (m && +m[1] > maxN) maxN = +m[1];
-    }
-    ctx._maxPopN = maxN;
-  }
-  ctx._maxPopN++;
-  var childId = "POP-" + String(ctx._maxPopN).padStart(5, "0");
+  // next POPID — engine.90: one per-cycle counter shared by every minter
+  var childId = nextPopIdLocked_(ctx);
 
   var rng = ctx._rng || function() { return 0.5; };
   var sex = rng() < 0.5 ? "male" : "female";

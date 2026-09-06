@@ -2281,12 +2281,7 @@ function processGCCourtship_(ctx) {
     var gRowM = gcVals[found];
     var gAgeM = Number(gRowM[gAge]) || (Number(gRowM[gBirth]) ? simYear - Number(gRowM[gBirth]) : 35);
 
-    var maxN = 0;
-    for (var r0 = 0; r0 < ctx.ledger.rows.length; r0++) {
-      var mm = /^POP-(\d+)$/.exec(ctx.ledger.rows[r0][idxCol('POPID')] || '');
-      if (mm && +mm[1] > maxN) maxN = +mm[1];
-    }
-    var spId = 'POP-' + String(++maxN).padStart(5, '0');
+    var spId = nextPopIdLocked_(ctx); // engine.90 shared allocator
     var last = P.name.split(' ').slice(-1)[0] || '';
     var spFirst = String(gRowM[gF]).trim();
     var spName = spFirst + ' ' + last;
@@ -2444,14 +2439,8 @@ function processGCMarriageLottery_(ctx) {
       nbhd: gNbhd >= 0 ? String(gr[gNbhd] || '').trim() : '', occ: gOcc >= 0 ? gr[gOcc] : '' });
   }
 
-  // next POPID, counted once
+  // next POPID — engine.90 shared allocator (nextPopIdLocked_ below)
   var header = ctx.ledger.headers;
-  var iPop = header.indexOf('POPID');
-  var maxN = 0;
-  for (var r0 = 0; r0 < ctx.ledger.rows.length; r0++) {
-    var mm = /^POP-(\d+)$/.exec(ctx.ledger.rows[r0][iPop] || '');
-    if (mm && +mm[1] > maxN) maxN = +mm[1];
-  }
 
   var idxCol = function(n) { return header.indexOf(n); };
   for (var pid in people) {
@@ -2481,7 +2470,7 @@ function processGCMarriageLottery_(ctx) {
 
     // Full SL row — Tier 4 entry (Mike: "2 paths to becoming tier 4"),
     // spouse takes the citizen's surname (S319/S320 drip convention).
-    var spId = 'POP-' + String(++maxN).padStart(5, '0');
+    var spId = nextPopIdLocked_(ctx); // engine.90 shared allocator
     var last = P.name.split(' ').slice(-1)[0] || '';
     var spName = pick.first + ' ' + last;
     var newRow = new Array(header.length).fill('');

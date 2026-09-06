@@ -1140,8 +1140,7 @@
       ]
     }
   },
-  "_pending-selena-grant": {
-    "_pending": "POPID not yet minted — engine-sheet mints the ledger row, then renames this key to 'selena-grant' and fills assignment.popid (pipeline.67)",
+  "selena-grant": {
     "version": "SELENA-OAKS-1",
     "active": true,
     "requiredDaily": true,
@@ -1149,7 +1148,7 @@
     "assignment": {
       "desk": "sports",
       "name": "Selena Grant",
-      "popid": "POP-PENDING",
+      "popid": "POP-00591",
       "beatDomain": "SPORTS"
     },
     "packetContract": "v2",
@@ -1202,8 +1201,7 @@
       ]
     }
   },
-  "_pending-talia-finch": {
-    "_pending": "POPID not yet minted — engine-sheet mints the ledger row, then renames this key to 'talia-finch' and fills assignment.popid (pipeline.67)",
+  "talia-finch": {
     "version": "TALIA-OAKS-1",
     "active": true,
     "requiredDaily": true,
@@ -1211,7 +1209,7 @@
     "assignment": {
       "desk": "sports",
       "name": "Talia Finch",
-      "popid": "POP-PENDING",
+      "popid": "POP-00592",
       "beatDomain": "SPORTS"
     },
     "packetContract": "v2",

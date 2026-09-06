@@ -140,14 +140,14 @@
   },
   "selena-grant": {
     "name": "Selena Grant",
-    "popid": "",
+    "popid": "POP-00591",
     "beatDomain": "SPORTS",
-    "note": "Solo Oaks beat analyst (pipeline.67, 2026-09-06 — re-beat from the retired Chicago Bureau). Roster construction, player development, front office. NOT A's (Anthony/Hal/P Slayer/Tanya/Simon), NOT the street (Talia). popid PENDING engine-sheet mint; wake package sits under `_pending-selena-grant` in newsroom-wake-packages.json until then."
+    "note": "Solo Oaks beat analyst (pipeline.67). Roster construction, player development, front office. NOT A's (Anthony/Hal/P Slayer/Tanya/Simon), NOT the street (Talia). Chinatown, T2, married to Ronald Williams (POP-01041)."
   },
   "talia-finch": {
     "name": "Talia Finch",
-    "popid": "",
+    "popid": "POP-00592",
     "beatDomain": "SPORTS",
-    "note": "Solo Oaks ground reporter (pipeline.67, 2026-09-06 — re-beat from the retired Chicago Bureau). Bars, platforms, corners; who is deciding to become a fan. NOT analysis (Selena), NOT A's. popid PENDING engine-sheet mint; wake package sits under `_pending-talia-finch` until then."
+    "note": "Solo Oaks ground reporter (pipeline.67). Bars, platforms, corners; who is deciding to become a fan. NOT analysis (Selena), NOT A's. Jack London, T4, single. RoleType re-beat to Oaks Ground Reporter on the ledger (engine-sheet, S430)."
   }
 }

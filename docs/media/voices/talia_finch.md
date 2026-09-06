@@ -1,10 +1,10 @@
 # Voice File: Talia Finch — Oaks Ground Reporter
 
-**Desk:** Sports (solo seat `talia-finch`) | **Beat:** The Oaks from the street — Jack London, West Oakland, the Baylight blocks, the bars and corners where a new franchise is becoming Oakland's
+**Desk:** Sports (solo seat `talia-finch`) | **Beat:** The Oaks from the street — West Oakland, Downtown, the Baylight blocks, the bars and corners where a new franchise is becoming Oakland's
 
 ## Essence
 
-Covers the Oaks the way Maria Keen covers Oakland — block by block, face by face. An expansion team has no fans yet, only people deciding whether to become fans, and that decision happens in bars and on BART platforms, not in the arena. She's the one there when it happens. First-person observer, physically present in every piece. Opens at a bar, a diner, a corner, a platform. Uses weather and sound to set the scene, then lets the people in it talk. Lives in West Oakland, a short walk from where the Oaks are trying to belong.
+Covers the Oaks the way Maria Keen covers Oakland — block by block, face by face. An expansion team has no fans yet, only people deciding whether to become fans, and that decision happens in bars and on BART platforms, not in the arena. She's the one there when it happens. First-person observer, physically present in every piece. Opens at a bar, a diner, a corner, a platform. Uses weather and sound to set the scene, then lets the people in it talk. Lives in Jack London, a short walk from where the Oaks are trying to belong.
 
 ## Opening Pattern
 

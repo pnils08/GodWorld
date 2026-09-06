@@ -6,7 +6,7 @@ const packagesApi = require('./newsroomWakePackages');
 const packages = packagesApi.loadPackages();
 const active = packagesApi.activePackages(packages);
 assert.deepStrictEqual(active.map(row => row.key),
-  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook']);
+  ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'p-slayer', 'anthony-raines', 'hal-richmond', 'tanya-cruz', 'simon-leary', 'maria-keen', 'elliot-graye', 'mason-ortega', 'sharon-okafor', 'business-desk', 'kai-marston', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'noah-tan', 'nia-rook', 'selena-grant', 'talia-finch']);
 
 // pipeline.60 — Nia Rook's UNDOCKED show seat (own desk key, feed-built lane)
 const nia = packages['nia-rook'];
@@ -401,11 +401,11 @@ const approaches = {
 };
 
 const rotaPool = activeRotaCandidates(packages);
-assert.equal(rotaPool.length, 20);
+assert.equal(rotaPool.length, 22); // pipeline.67 — selena-grant + talia-finch join the sports rota pool
 assert.deepStrictEqual(
   Object.fromEntries(Object.keys(DAILY_QUOTAS).map(desk => [desk,
     rotaPool.filter(row => row.desk === desk).length])),
-  { civic: 8, sports: 5, culture: 5, business: 1, undocked: 1 });
+  { civic: 8, sports: 7, culture: 5, business: 1, undocked: 1 });
 
 // The daily selector supplies at most the declared 2/2/1/1 seats. The package
 // gate normalizes those selected identities but cannot insert the other active

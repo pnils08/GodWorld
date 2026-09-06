@@ -962,11 +962,36 @@ async function main() {
     await stepAudit(cycle);
     await stepCurate(cycle);
     await stepNarrate(cycle);
-    await stepPublish(cycle);
+    // engine.114 (S427): stepPublish can throw on either armed gate — the
+    // ingestEdition exit-code check or the NotebookLM `source add` check —
+    // and until now an uncaught throw here aborted every step below it.
+    // coverage/sweep/sheets/signals read the staged set and the scorecard,
+    // never the edition file or Supermemory ingest state (verified), so a
+    // canon-door failure has no reason to take Citizen_Media_Usage and
+    // Storyline_Ledger down with it. Surface it loud, keep going, still
+    // fail the run at the end so this doesn't become a new silent false-clear.
+    let publishErr = null;
+    try {
+      await stepPublish(cycle);
+    } catch (e) {
+      publishErr = e;
+      const recover = 'node scripts/cron-saturday-run.js --cycle ' + cycle + ' --step publish --apply';
+      console.error('[PUBLISH FAILED] ' + e.message);
+      console.error('  Canon door did not complete; coverage/sweep/sheets/signals will still run.');
+      console.error('  Recover: ' + recover);
+      try {
+        const { sendDiscordText } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
+        await sendDiscordText('🚨 **Saturday canon door failed (c' + cycle + ')**: ' + e.message +
+          '\nRecover: `' + recover + '`');
+      } catch (e2) {
+        console.error('[DISCORD PING FAILED] (non-blocking): ' + e2.message);
+      }
+    }
     await stepCoverage(cycle);
     await stepSweep(cycle);
     await stepSheets(cycle);
     await stepSignals(cycle);
+    if (publishErr) throw publishErr;
   }
 }
 

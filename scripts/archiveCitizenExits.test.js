@@ -91,6 +91,15 @@ test('copy → read-back → remove: 4 moved, contiguous run deleted in one call
   assert.deepStrictEqual(byPop['POP-00042'].slice(w), ['deceased', 108, 'death:C108:POP-00042', 'deceased', 'FALSE', w, '']);
   assert.deepStrictEqual(byPop['POP-00042'].slice(0, w), ['POP-00042', 'Late', 'Citizen', 'deceased', 4, 12]); // verbatim snapshot
 });
+test('two eligible rows sharing one POPID → duplicate-in-batch, neither moves (the (POPID, ExitCycle, Reason) key stays unique)', () => {
+  const b = body(); b.push(['POP-00040', 'Gone', 'One', 'Traded', 3, 10]); // second Traded row for 00040
+  const sl = makeSheet(H, b), ar = makeSheet(H.concat(META), []);
+  const out = M.archiveCitizenExits_(ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1300));
+  assert.strictEqual(out.skippedWhy['duplicate-in-batch'], 2);
+  assert.strictEqual(sl._rows.filter((r) => r[0] === 'POP-00040').length, 2, 'both duplicate rows kept');
+  assert.strictEqual(ar._rows.filter((r) => r[0] === 'POP-00040').length, 0);
+  assert.strictEqual(out.archived, 3);
+});
 test('high-water mark bumps to the archived POPID above it (queued World_Config write)', () => {
   const sl = makeSheet(H, body()), ar = makeSheet(H.concat(META), []);
   const ctx = ctxWith(1, { Simulation_Ledger: sl, Citizen_Archive: ar }, 1106);

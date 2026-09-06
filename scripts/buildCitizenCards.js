@@ -58,7 +58,7 @@ var WIPE_OLD = process.argv.includes('--wipe-old');
 // engine.112: deliberate override for writing over a known-partial wipe.
 var ALLOW_PARTIAL_WIPE = process.argv.includes('--allow-partial-wipe');
 var WIPE_ONLY = process.argv.includes('--wipe-only'); // S183: wipe and exit (no writes) — recovery passes after partial bulk runs
-var FROM_ARCHIVE = process.argv.includes('--from-archive'); // engine.90 Commit 4: union Citizen_Archive rows (A–BC identical to SL; Status = LastActiveStatus at exit)
+var FROM_ARCHIVE = process.argv.includes('--from-archive'); // engine.90 Commit 4: card set = Citizen_Archive POPIDs ONLY (newest snapshot each, minus any POPID back on SL) — never a union burst (plan §Consumer classification)
 var NO_QUALITY_GATE = process.argv.includes('--no-quality-gate'); // S183: write thin cards too (cold-start fix). Combined with --wipe-old, also wipes already-tagged wd-citizens for a clean rebuild.
 
 // Parse options
@@ -825,9 +825,11 @@ async function main() {
 
   console.log('[buildCitizenCards] Ledger rows: ' + (rows.length - 1));
 
-  // engine.90: archived citizens keep their card. The archive row is the
-  // Simulation_Ledger row verbatim in A–BC plus exit metadata past it, so the
-  // positional readers below see the same shape; the extra columns are ignored.
+  // engine.90: archived citizens keep their card. --from-archive REPLACES the
+  // body with Citizen_Archive rows (newest snapshot per POPID; a POPID that has
+  // been restored onto Simulation_Ledger is skipped — its live row owns the
+  // card). The archive row is the Simulation_Ledger row verbatim in A–BC plus
+  // exit metadata past it, so the positional readers below see the same shape.
   if (FROM_ARCHIVE) {
     try {
       var arRes = await client.spreadsheets.values.get({ spreadsheetId: spreadsheetId, range: 'Citizen_Archive!A:BZ' });
@@ -843,9 +845,12 @@ async function main() {
         var aexit = iExitA >= 0 ? (Number(arRows[ai][iExitA]) || 0) : 0;
         if (!latest[apop] || aexit >= latest[apop].exit) latest[apop] = { row: arRows[ai], exit: aexit };
       }
-      var added = 0;
-      Object.keys(latest).forEach(function(p) { rows.push(latest[p].row); added++; });
-      console.log('[buildCitizenCards] --from-archive: +' + added + ' archived citizens (newest snapshot per POPID)');
+      var onSL = {};
+      for (var si = 1; si < rows.length; si++) onSL[(rows[si][0] || '').trim()] = true;
+      var archiveBody = [], restoredSkipped = 0;
+      Object.keys(latest).forEach(function(p) { if (onSL[p]) { restoredSkipped++; return; } archiveBody.push(latest[p].row); });
+      rows = [rows[0]].concat(archiveBody);
+      console.log('[buildCitizenCards] --from-archive: card set = ' + archiveBody.length + ' archived citizens (newest snapshot per POPID; ' + restoredSkipped + ' back on Simulation_Ledger skipped)');
     } catch (e) {
       console.error('[buildCitizenCards] --from-archive: Citizen_Archive read failed (' + e.message + ') — no archived cards');
     }

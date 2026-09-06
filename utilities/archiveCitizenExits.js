@@ -90,6 +90,8 @@ function citizenArchiveCandidates_(header, body) {
     if (!CITIZEN_ARCHIVE_REASON_BY_STATUS[st0]) activeByPop[String(body[a][iPop] || '').trim().toUpperCase()] = true;
   }
   var skip = function(why) { out.skipped++; out.skippedWhy[why] = (out.skippedWhy[why] || 0) + 1; };
+  var count = {};
+  for (var n0 = 0; n0 < body.length; n0++) { var p0 = String((body[n0] && body[n0][iPop]) || '').trim().toUpperCase(); if (p0) count[p0] = (count[p0] || 0) + 1; }
   for (var q = 0; q < body.length; q++) {
     var row = body[q]; if (!row) continue;
     var st = String(row[iSt] || '').trim().toLowerCase();
@@ -99,6 +101,7 @@ function citizenArchiveCandidates_(header, body) {
     var m = /^POP-(\d+)$/.exec(popId);
     if (!m) { skip('malformed-popid'); continue; }
     if (activeByPop[popId]) { skip('active-duplicate'); continue; }
+    if (count[popId] > 1) { skip('duplicate-in-batch'); Logger.log('archiveCitizenExits_ engine.90: ' + popId + ' appears ' + count[popId] + ' times on Simulation_Ledger — no row moves; fix the duplicate'); continue; }
     out.rows.push({ q: q, popId: popId, reason: reason, num: +m[1] });
   }
   return out;

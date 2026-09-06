@@ -107,6 +107,18 @@ sports feed), `scripts/buildDeskPackets.js`, `utilities/rosterLookup.js`, `utili
 `phase10-persistence/cycleExportAutomation.js`. After Task 1, `Chicago_Citizens` + `Chicago_Sports_Feed`
 are ~9k cells combined, so there is no weight urgency. Retire the consumers first, archive second.
 
+**Dashboard + newsroom remainder (S428, Mike-direct 2026-09-06; filed pipeline.66 / pipeline.67):**
+the sheet-side retirement above does not cover the two surfaces that still present Chicago as live —
+(a) the dashboard: `dashboard/src/App.jsx` imports + renders `ChicagoTab` (`activeTab === 'CHICAGO'`),
+`dashboard/server.js` still parses the `CHICAGO BUREAU` masthead, matches `chicago_c{N}.json` desk
+packets (three filters), and the deprecated `/api/sports` endpoint is "Oakland + Chicago"; (b) the
+Chicago desk agent (`.claude/agents/chicago-desk` — Selena Grant, Bulls beat; Talia Finch, Chicago
+ground). Verified state: neither reporter is in `scripts/persona-map.json`, neither has a cron lane
+(`cron-desk-run.js` guards "chicago/letters have no lane"), so the remembered "switch to Oaks
+reporters" was never built — Oaks coverage today flows through the general sports seats. pipeline.66
+retires the dashboard page; pipeline.67 is the design decision Mike raised: re-beat Selena Grant to
+the Oaks, and if so, her own slice vs the sports slice with an Oaks beat.
+
 ## Task 5 — dead-tab + dead-code pruning (builder-direct 2026-08-18)
 
 The project carries no dead ledgers and no disconnected code. Method, per candidate tab:
@@ -143,3 +155,4 @@ now unblocked — the S378 wave is deployed and bench-proven. Tasks 3–5 ready.
   added: dead-tab + dead-code pruning, builder-direct — "referenced by dead code" no longer keeps a
   tab. Browser-Claude live-doc audit folded into Measured state (onOpen ruled out, superseded pairs
   named).
+- 2026-09-06 (S428, research-build) — §Task 4 gains the dashboard + newsroom remainder (Mike-direct): ChicagoTab still rendered, chicago-desk agent never re-beat to the Oaks (verified: no persona-map entry, no lane). Filed pipeline.66 (retire page) + pipeline.67 (Oaks beat decision).

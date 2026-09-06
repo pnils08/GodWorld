@@ -28,13 +28,23 @@
 // ════════════════════════════════════════════════════════════════════════════
 
 var CARRY_FORWARD_STORE_SHEET = 'Carry_Forward_Store';
+// engine.119 Task 3: rows kept per key on the sheet layer. A ring, not a log —
+// slots are overwritten in place (the oldest Cycle goes first), never deleted:
+// deleteRow is a structural mutation, the same wedge class as insertSheet.
+var CARRY_FORWARD_RING = 3;
 
 /**
- * Upsert one carry-forward blob into the Carry_Forward_Store tab.
+ * Mirror one carry-forward blob into the Carry_Forward_Store tab.
  * Direct write — Phase-10-location carve-out (same class as bondEngine
  * L1469); the tab is engine-owned state, never read mid-cycle by any phase
- * between this write and end-of-cycle. Lazy-create kept as fallback only;
- * the tab is pre-created on live (S380 lazy-insertSheet wedge lesson).
+ * between this write and end-of-cycle. Writes run under retry (engine.119 T2).
+ *
+ * engine.119 T3: one row per (key, cycle) inside a CARRY_FORWARD_RING-slot ring.
+ * Before this the mirror upserted by key alone, so a crashed run's blob (the
+ * self-ghost, see loadCarryForwardBlob_) overwrote the only copy of the last
+ * GOOD cycle on both layers — which is why recovery needed a manual property
+ * wipe plus a version-history restore. Now the good cycle's row survives the
+ * ghost and the loader can step back to it.
  */
 function mirrorCarryForwardToSheet_(ctx, key, json, cycle) {
   try {
@@ -46,36 +56,54 @@ function mirrorCarryForwardToSheet_(ctx, key, json, cycle) {
       Logger.log('mirrorCarryForwardToSheet_: ' + CARRY_FORWARD_STORE_SHEET + ' tab missing — mirror for ' + key + ' skipped (pre-create the tab)');
       return;
     }
+    var cyc = Number(cycle) || 0;
     var values = sheet.getDataRange().getValues();
-    var rowIndex = -1;
+    var slots = [];   // { rowIndex (1-based), cycle }
     for (var r = 1; r < values.length; r++) {
-      if (String(values[r][0]) === key) { rowIndex = r + 1; break; }
+      if (String(values[r][0]) === key) slots.push({ rowIndex: r + 1, cycle: Number(values[r][1]) || 0 });
     }
-    var row = [key, cycle || '', new Date().toISOString(), json];
-    if (rowIndex > 0) {
-      persistWithRetry_(function() { sheet.getRange(rowIndex, 1, 1, 4).setValues([row]); }, 'Carry_Forward_Store ' + key);
+    var target = -1;
+    for (var s = 0; s < slots.length; s++) {
+      if (slots[s].cycle === cyc) { target = slots[s].rowIndex; break; }   // same cycle → overwrite in place
+    }
+    if (target < 0 && slots.length >= CARRY_FORWARD_RING) {
+      var oldest = slots[0];
+      for (var o = 1; o < slots.length; o++) if (slots[o].cycle < oldest.cycle) oldest = slots[o];
+      target = oldest.rowIndex;                                             // ring full → reuse the oldest slot
+    }
+    var row = [key, cyc || '', new Date().toISOString(), json];
+    if (target > 0) {
+      persistWithRetry_(function() { sheet.getRange(target, 1, 1, 4).setValues([row]); }, 'Carry_Forward_Store ' + key);
     } else {
-      appendRowWithRetry_(sheet, row, 'Carry_Forward_Store ' + key);
+      appendRowWithRetry_(sheet, row, 'Carry_Forward_Store ' + key);           // ring not full → new slot
     }
   } catch (e) {
     Logger.log('mirrorCarryForwardToSheet_: Failed for ' + key + ' - ' + e.message);
   }
 }
 
-/** Read one carry-forward blob from the sheet layer. Returns JSON string or null. */
-function readCarryForwardFromSheet_(ctx, key) {
+/**
+ * Read one carry-forward blob from the sheet layer: the row for `key` with the
+ * highest Cycle strictly below `beforeCycle` (any cycle when beforeCycle is 0).
+ * Returns { json, cycle } or null.
+ */
+function readCarryForwardFromSheet_(ctx, key, beforeCycle) {
   try {
     if (!ctx || !ctx.ss) return null;
     var sheet = ctx.ss.getSheetByName(CARRY_FORWARD_STORE_SHEET);
     if (!sheet) return null;
+    var bound = Number(beforeCycle) || 0;
     var values = sheet.getDataRange().getValues();
+    var best = null;
     for (var r = 1; r < values.length; r++) {
-      if (String(values[r][0]) === key) {
-        var json = values[r][3];
-        return (json && String(json).length) ? String(json) : null;
-      }
+      if (String(values[r][0]) !== key) continue;
+      var json = values[r][3];
+      if (!json || !String(json).length) continue;
+      var cyc = Number(values[r][1]) || 0;
+      if (bound && cyc >= bound) continue;
+      if (!best || cyc > best.cycle) best = { json: String(json), cycle: cyc };
     }
-    return null;
+    return best;
   } catch (e) {
     Logger.log('readCarryForwardFromSheet_: Failed for ' + key + ' - ' + e.message);
     return null;
@@ -83,17 +111,50 @@ function readCarryForwardFromSheet_(ctx, key) {
 }
 
 /**
- * Load a carry-forward blob: prop first, sheet fallback. On sheet recovery
- * the prop is re-seeded so layer 1 heals itself. Returns JSON string or null.
+ * engine.119 T3 — the one writer for a carry-forward blob. Sets the prop, stamps
+ * the cycle the blob belongs to in a sibling prop (`<key>_CYCLE`, so a blob with
+ * no cycle field of its own — the chaos fold — can still be dated), and mirrors
+ * to the sheet ring. Folds the three set+mirror pairs that used to live in
+ * saveEveningSnapshot_ / savePreviousCycleState_ / writeChaosNeighborhoodStore_.
  */
-function loadCarryForwardBlob_(ctx, key) {
-  var json = PropertiesService.getScriptProperties().getProperty(key);
-  if (json) return json;
-  json = readCarryForwardFromSheet_(ctx, key);
+function saveCarryForwardBlob_(ctx, key, json, cycle) {
+  var props = PropertiesService.getScriptProperties();
+  props.setProperty(key, json);
+  props.setProperty(key + '_CYCLE', String(Number(cycle) || 0));
+  mirrorCarryForwardToSheet_(ctx, key, json, cycle);
+}
+
+/**
+ * Load a carry-forward blob for the cycle about to run. Prop first, sheet
+ * fallback; a sheet recovery re-seeds the prop so layer 1 heals itself.
+ *
+ * engine.119 T3 — self-ghost guard. A run that crashes in Phase 10 has already
+ * saved PREV_* for the cycle it was producing (Phase 9), but cycleCount never
+ * advanced — so the re-fire is producing THAT SAME cycle and would read the
+ * crashed run's half-world as "yesterday". A prop stamped at or past the cycle
+ * about to run is that ghost: it is ignored and the sheet ring is asked for the
+ * newest row BELOW the cycle (the last good one), which re-seeds the prop. The
+ * manual property wipe that recovery used to need is gone. `cycleId` is the
+ * cycle about to run; 0 = unknown → no ghost check (dry-run / replay / cold).
+ * Legacy props with no `_CYCLE` stamp are trusted (one fire on this code
+ * stamps them).
+ */
+function loadCarryForwardBlob_(ctx, key, cycleId) {
+  var props = PropertiesService.getScriptProperties();
+  var target = Number(cycleId) || 0;
+  var json = props.getProperty(key);
   if (json) {
-    PropertiesService.getScriptProperties().setProperty(key, json);
-    Logger.log('loadCarryForwardBlob_: ' + key + ' RECOVERED from Carry_Forward_Store (prop was missing; re-seeded)');
-    return json;
+    var stamped = Number(props.getProperty(key + '_CYCLE')) || 0;
+    if (!(target && stamped && stamped >= target)) return json;
+    Logger.log('loadCarryForwardBlob_: ' + key + ' prop is a SELF-GHOST (stamped cycle ' + stamped +
+      ' >= cycle ' + target + ' about to run — a crashed run wrote it); ignoring, stepping back to the sheet ring');
+  }
+  var rec = readCarryForwardFromSheet_(ctx, key, target);
+  if (rec && rec.json) {
+    props.setProperty(key, rec.json);
+    props.setProperty(key + '_CYCLE', String(rec.cycle || 0));
+    Logger.log('loadCarryForwardBlob_: ' + key + ' RECOVERED cycle ' + rec.cycle + ' from Carry_Forward_Store (re-seeded the prop)');
+    return rec.json;
   }
   return null;
 }
@@ -123,9 +184,12 @@ function assertCarryForwardPresent_(ctx) {
     Logger.log('assertCarryForwardPresent_: cold start explicitly allowed (one-shot override consumed)');
     return;
   }
+  // engine.119 T3: the authoritative "cycle about to run", computed BEFORE
+  // AdvanceTime bumps ctx.config.cycleCount in memory; the Phase-1/4 loaders read it.
+  ctx.carryForwardCycleId = cycleId;
   var missing = [];
-  if (!loadCarryForwardBlob_(ctx, 'PREV_EVENING_JSON')) missing.push('PREV_EVENING_JSON');
-  if (!loadCarryForwardBlob_(ctx, 'PREV_CYCLE_STATE_JSON')) missing.push('PREV_CYCLE_STATE_JSON');
+  if (!loadCarryForwardBlob_(ctx, 'PREV_EVENING_JSON', cycleId)) missing.push('PREV_EVENING_JSON');
+  if (!loadCarryForwardBlob_(ctx, 'PREV_CYCLE_STATE_JSON', cycleId)) missing.push('PREV_CYCLE_STATE_JSON');
   if (missing.length) {
     throw new Error('FATAL: carry-forward memory missing for cycle ' + cycleId + ' (' + missing.join(', ') +
       ') in BOTH script properties and Carry_Forward_Store. The world must not run without yesterday. ' +
@@ -133,10 +197,16 @@ function assertCarryForwardPresent_(ctx) {
   }
 }
 
+/** The cycle about to run: the assert's stash, else the post-AdvanceTime cycleCount. */
+function carryForwardCycleId_(ctx) {
+  if (ctx && ctx.carryForwardCycleId) return Number(ctx.carryForwardCycleId) || 0;
+  return Number(ctx && ctx.config && ctx.config.cycleCount) || 0;
+}
+
 function loadPreviousEvening_(ctx) {
   var S = ctx.summary || (ctx.summary = {});
   try {
-    var json = loadCarryForwardBlob_(ctx, 'PREV_EVENING_JSON');
+    var json = loadCarryForwardBlob_(ctx, 'PREV_EVENING_JSON', carryForwardCycleId_(ctx));
     if (json) {
       S.previousEvening = JSON.parse(json);
       Logger.log('loadPreviousEvening_: Loaded evening data from cycle ' + (S.previousEvening.cycle || '?'));
@@ -173,7 +243,7 @@ function loadPreviousCycleState_(ctx) {
   }
 
   try {
-    var json = loadCarryForwardBlob_(ctx, 'PREV_CYCLE_STATE_JSON');
+    var json = loadCarryForwardBlob_(ctx, 'PREV_CYCLE_STATE_JSON', carryForwardCycleId_(ctx));
     if (json) {
       S.previousCycleState = JSON.parse(json);
       Logger.log('loadPreviousCycleState_: Restored state from cycle ' + (S.previousCycleState.cycle || '?'));

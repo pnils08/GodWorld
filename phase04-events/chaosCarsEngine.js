@@ -455,10 +455,14 @@ var CHAOS_NBHD_STORE_KEY = 'CHAOS_NBHD_FOLD_JSON';
 function readChaosNeighborhoodStore_(ctx) {
   try {
     if (typeof PropertiesService === 'undefined') return {};
-    var json = PropertiesService.getScriptProperties().getProperty(CHAOS_NBHD_STORE_KEY);
-    // engine.122 layer-2 fallback: prop missing → Carry_Forward_Store tab (re-seeds the prop)
-    if (!json && typeof loadCarryForwardBlob_ === 'function' && ctx && ctx.ss) {
-      json = loadCarryForwardBlob_(ctx, CHAOS_NBHD_STORE_KEY);
+    var json;
+    // engine.122 layer-2 fallback + engine.119 T3 ghost guard: go through the
+    // loader whenever it is present (GAS); the unit harness reads the prop direct.
+    if (typeof loadCarryForwardBlob_ === 'function' && ctx && ctx.ss) {
+      var cyc = (typeof carryForwardCycleId_ === 'function') ? carryForwardCycleId_(ctx) : 0;
+      json = loadCarryForwardBlob_(ctx, CHAOS_NBHD_STORE_KEY, cyc);
+    } else {
+      json = PropertiesService.getScriptProperties().getProperty(CHAOS_NBHD_STORE_KEY);
     }
     return json ? JSON.parse(json) : {};
   } catch (e) { return {}; }
@@ -468,11 +472,13 @@ function writeChaosNeighborhoodStore_(fold, ctx) {
   try {
     if (typeof PropertiesService === 'undefined') return;
     var json = JSON.stringify(fold || {});
-    PropertiesService.getScriptProperties().setProperty(CHAOS_NBHD_STORE_KEY, json);
-    // engine.122 layer 2 (Phase-10 location — ChaosNbhdResolve): mirror to the sheet store
-    if (typeof mirrorCarryForwardToSheet_ === 'function' && ctx && ctx.ss) {
-      var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || '';
-      mirrorCarryForwardToSheet_(ctx, CHAOS_NBHD_STORE_KEY, json, cycle);
+    var cycle = (ctx && ctx.summary && ctx.summary.cycleId) || (ctx && ctx.config && ctx.config.cycleCount) || '';
+    // engine.122 layer 2 + engine.119 T3: the one writer stamps the cycle and mirrors
+    // to the sheet ring (Phase-10 location — ChaosNbhdResolve); unit harness: prop only.
+    if (typeof saveCarryForwardBlob_ === 'function' && ctx && ctx.ss) {
+      saveCarryForwardBlob_(ctx, CHAOS_NBHD_STORE_KEY, json, cycle);
+    } else {
+      PropertiesService.getScriptProperties().setProperty(CHAOS_NBHD_STORE_KEY, json);
     }
   } catch (e) { /* best-effort persistence; a write failure just resets the residual */ }
 }

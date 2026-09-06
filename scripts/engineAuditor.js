@@ -341,8 +341,14 @@ async function main() {
     const store = await sheets.getRawSheetData('Carry_Forward_Store');
     if (store && store.length > 1) {
       const carry = {};
+      // engine.119 T3: the tab is a per-key ring (several rows per key) — export
+      // the newest cycle per key, not whichever row happens to come last.
       for (const row of store.slice(1)) {
-        if (row[0]) carry[row[0]] = { cycle: row[1], updatedAt: row[2], json: row[3] };
+        if (!row[0]) continue;
+        const prev = carry[row[0]];
+        if (!prev || (Number(row[1]) || 0) > (Number(prev.cycle) || 0)) {
+          carry[row[0]] = { cycle: row[1], updatedAt: row[2], json: row[3] };
+        }
       }
       const carryPath = path.join(outputDir, `carry_forward_c${cycle}.json`);
       fs.writeFileSync(carryPath, JSON.stringify(carry, null, 2));

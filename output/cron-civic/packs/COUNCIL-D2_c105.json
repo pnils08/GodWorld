@@ -1,0 +1,180 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00502",
+    "name": "Leonard Tran",
+    "role": "City Council District 2",
+    "officeId": "COUNCIL-D2",
+    "district": "D2",
+    "faction": "IND",
+    "agentDir": "civic-office-council-d2",
+    "initiative": null,
+    "dials": {
+      "approval": 54
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "stand with Jack London or leave it"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 215.56363636363636,
+    "label": "Jack London — sentiment 0.77 vs city 0.885",
+    "lever": "stand with Jack London or leave it",
+    "hood": "Jack London",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.77,
+      "citySentiment": 0.8854545454545455,
+      "crime": 0.9,
+      "cityCrime": 0.6990909090909091,
+      "heat": 15.563636363636366,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "stand with Jack London or leave it",
+    "lineFacts": [
+      "approval 54",
+      "Jack London: sentiment 0.77 vs city 0.885; crime index 0.9 vs city 0.699; growth momentum 7",
+      "Jack London crime: property 49, violent 41, incidents 8 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "Jack London: sentiment 0.77 vs city 0.885; crime index 0.9 vs city 0.699; retail 9.4; housing pressure 2; growth; momentum 7"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Downtown",
+      "Chinatown",
+      "Jack London"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00028",
+        "name": "Manfred Owens",
+        "neighborhood": "Jack London",
+        "role": "Booky",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Jack London — sentiment 0.77 vs city 0.885"
+      },
+      {
+        "pop": "POP-00078",
+        "name": "Sergio Aybar",
+        "neighborhood": "Jack London",
+        "role": "Catcher, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Jack London — sentiment 0.77 vs city 0.885"
+      },
+      {
+        "pop": "POP-00150",
+        "name": "Helena Morr",
+        "neighborhood": "Jack London",
+        "role": "City Ombudsman",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Jack London — sentiment 0.77 vs city 0.885"
+      },
+      {
+        "pop": "POP-00177",
+        "name": "Elle Lilo",
+        "neighborhood": "Jack London",
+        "role": "Harbor Tugboat Captain",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Jack London — Jack London — sentiment 0.77 vs city 0.885"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D2",
+      "t": "FACT",
+      "text": "Leonard Tran holds COUNCIL-D2 at approval 54",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-JackLondon",
+      "t": "FACT",
+      "text": "Jack London: sentiment 0.77 vs city 0.885; crime index 0.9 vs city 0.699; growth momentum 7",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-JackLondon",
+      "t": "FACT",
+      "text": "Jack London crime: property 49, violent 41, incidents 8 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-JackLondon",
+      "t": "FACT",
+      "text": "Jack London: sentiment 0.77 vs city 0.885; crime index 0.9 vs city 0.699; retail 9.4; housing pressure 2; growth; momentum 7",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    },
+    {
+      "id": "F-event-0",
+      "t": "FACT",
+      "text": "Jack London First Friday Waterfront (Jack London) — Jack London",
+      "src": "world_summary city-event"
+    },
+    {
+      "id": "F-traj-2",
+      "t": "FACT",
+      "text": "Jack London turning upward: retail busy, events drawing crowds, people moving in",
+      "src": "world_summary trajectory"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D2",
+        "PopId": "POP-00502",
+        "Holder": "Leonard Tran",
+        "District": "D2",
+        "Approval": "54"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D4",
+        "PopId": "POP-00042",
+        "Holder": "Ramon Vega",
+        "District": "D4",
+        "Faction": "IND",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

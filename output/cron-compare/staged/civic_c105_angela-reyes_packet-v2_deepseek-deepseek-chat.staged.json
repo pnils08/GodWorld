@@ -7,7 +7,8 @@
   "bylinePopid": "POP-00156",
   "article": "output/cron-compare/staged/civic_c105_angela-reyes_packet-v2_deepseek-deepseek-chat.staged.md",
   "bylineUsage": {
-    "recorded": true
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
   },
   "intake": {
     "names": [
@@ -40,6 +41,6 @@
     "verdict": "output/cron-compare/civic_c105_angela-reyes_packet-v2_deepseek-deepseek-chat.rhea.json",
     "ranAt": "2026-09-01T23:15:21.002Z"
   },
-  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
-  "stagedAt": "2026-09-01T23:15:26.457Z"
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:13.892Z"
 }

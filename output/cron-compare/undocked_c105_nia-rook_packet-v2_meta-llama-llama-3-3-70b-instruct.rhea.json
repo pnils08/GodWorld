@@ -3,12 +3,12 @@
   "cycle": "105",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "f233994e40d9c5188fd22d3ea9865771438621fdf1935ba4374d6f8dbbe418e5",
+  "draftSha256": "7e4bf144cb6df27d21f760c245aa8f0db7e4057d75312dca47880f06528886b4",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "All citizen names, roles, and exact quotes match ledger and packet provenance without canon contradictions.",
+  "summary": "All citizen names, roles, and quotes match ledger and packet provenance with authorized recap texture.",
   "review": {
     "profileId": "nia-rook-undocked-recap-v1",
     "canonIntegrity": "pass",
@@ -17,7 +17,7 @@
   "reviewProfile": {
     "id": "nia-rook-undocked-recap-v1",
     "packageVersion": "NIAROOK-UNDOCKED-1",
-    "manifestId": "AM-9fb3c5ec9ae1",
+    "manifestId": "AM-08f7e178ea19",
     "lexicalObservations": []
   },
   "nameCheck": {
@@ -43,8 +43,8 @@
     "unbackedQuoted": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0095,
-  "durationMs": 8050,
+  "apiCostUsd": 0.0094,
+  "durationMs": 5407,
   "parseError": false,
-  "ranAt": "2026-09-01T23:20:59.442Z"
+  "ranAt": "2026-09-04T23:20:56.495Z"
 }

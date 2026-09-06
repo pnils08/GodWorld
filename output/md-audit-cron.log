@@ -1,0 +1,7 @@
+[md-audit] walking docs/, .claude/, and project memory ... 880 files (docs=432, control-plane=329, memory=119)
+[md-audit] building source-content index ... 884 source files
+[md-audit] active-edit set (30d) ... 2972 files touched
+[md-audit] loading batched Git mtimes ... 1070 tracked Markdown paths
+[md-audit] scanning 880 Markdown files ... done
+[md-audit] report → output/md_audit_2026-09-02.md (51.8s)
+[md-audit] orphan-candidates: 4 | stale-but-linked: 14

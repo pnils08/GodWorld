@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "carmen-delaine",
+  "byline": "Carmen Delaine",
+  "bylinePopid": "POP-00011",
+  "article": "output/cron-compare/staged/civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Elio Perez",
+        "role": "quoted-source",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Daniel Cloak",
+        "role": "mentioned",
+        "popid": "POP-00722"
+      },
+      {
+        "name": "Irene Fay",
+        "role": "quoted-source",
+        "popid": "POP-00794"
+      },
+      {
+        "name": "Darius Clark",
+        "role": "quoted-source",
+        "popid": "POP-00961"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "west-oakland-elio-perez-initiative",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "I’ve heard folks talking about the Stabilization Fund, and honestly, I’m just hoping it reaches the people who really need it—families like mine who’ve been holding on tight.",
+        "sourceRef": "citizenVoice PRESS Elio Perez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-0e191a93d287",
+    "draftSha256": "8015fffd7452ce4f8787575ddefb2ac165dd774e790d13296d3d126f210d0a60",
+    "verdict": "output/cron-compare/civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-03T23:15:57.741Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:13.900Z"
+}

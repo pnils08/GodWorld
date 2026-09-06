@@ -13,7 +13,7 @@
     "beatDomain": "SPORTS"
   },
   "laneEntries": 12,
-  "quotesLanded": 4,
+  "quotesLanded": 3,
   "disposition": "staged",
   "rheaPass": true,
   "rheaFlagCount": 0,
@@ -26,7 +26,8 @@
   "article": "output/cron-compare/staged/sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
   "selfRecord": {
     "recorded": true,
-    "out": "th/.env' }\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: I still remember the night I met Benji Dillon at the bar near Jack London Square. The A's had just w\"\n}"
+    "out": "ld/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00008\",\n  \"name\": \"P Slayer\",\n  \"recorded\": true,\n  \"text\": \"filed: A Farewell to a Legend: Vinnie Keane's Impact on Oakland\"\n}"
   },
-  "ranAt": "2026-09-01T23:17:22.542Z"
+  "ranAt": "2026-09-04T23:17:03.572Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:14.029Z"
 }

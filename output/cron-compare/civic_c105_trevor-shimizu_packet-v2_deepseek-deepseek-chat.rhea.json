@@ -1,24 +1,34 @@
 {
   "draft": "output/cron-compare/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
   "cycle": "105",
-  "backend": "claude",
-  "model": "sonnet",
-  "draftSha256": "e702cf37b572d619fe7e4170ae143e4bd971dd8f291b94701a6d938e7e5e323d",
-  "pass": false,
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "468b2a51193d398188ad2b8e09cb63635e73e1e25258d36a2eae613a0c7b7512",
+  "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "verdict parse failed",
+  "summary": "Phase II transit hub visioning status verified against cycle 105 ground truth and exact quote provenance.",
   "review": {
     "profileId": "trevor-infrastructure-systems-v1",
-    "canonIntegrity": "revise",
-    "texture": "not-returned"
+    "canonIntegrity": "pass",
+    "texture": "authorized"
   },
   "reviewProfile": {
     "id": "trevor-infrastructure-systems-v1",
     "packageVersion": "TREVOR-LEP2-1",
     "manifestId": "AM-73d09279c19d",
-    "lexicalObservations": []
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "12th",
+          "35th",
+          "4",
+          "30"
+        ]
+      }
+    ]
   },
   "nameCheck": {
     "verified": [
@@ -43,8 +53,8 @@
     "unbackedQuoted": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0,
-  "durationMs": 16737,
-  "parseError": true,
-  "ranAt": "2026-09-04T22:06:12.006Z"
+  "apiCostUsd": 0.0092,
+  "durationMs": 4969,
+  "parseError": false,
+  "ranAt": "2026-09-06T01:49:01.058Z"
 }

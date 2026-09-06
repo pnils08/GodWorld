@@ -1,0 +1,471 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "luis-navarro",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00636",
+      "name": "Luis Navarro",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one evidence-bounded records brief without inventing a reporting trail",
+      "assignment": "civic gap in city — who is accountable, what council has or hasn't done",
+      "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation.",
+      "creativeBrief": {
+        "kind": "civic-investigation",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "anomaly",
+      "hood": null,
+      "score": null,
+      "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+      "nearby": [
+        {
+          "text": "Rose Delgado (City Council District 3): 3 mutual aid teams",
+          "src": "output/cron-civic/datawake/civic-office-council-d3_2026-09-03.json"
+        },
+        {
+          "text": "Janae Rivers (City Council District 5): D1",
+          "src": "output/cron-civic/datawake/civic-office-council-d5_2026-09-03.json"
+        },
+        {
+          "text": "Elliott Crane (City Council District 6): Piedmont Ave’s crime numbers are well below city averages, but sentiment gaps remain a concern. I’m",
+          "src": "output/cron-civic/datawake/civic-office-council-d6_2026-09-03.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "why": "ledger-resident",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00198",
+          "name": "Rick Walker",
+          "profile": "Rick Walker — Line cook — Fruitvale",
+          "why": "ledger-resident",
+          "role": "Line cook",
+          "hood": "Fruitvale"
+        },
+        {
+          "pop": "POP-00201",
+          "name": "Elio Perez",
+          "profile": "Elio Perez — Server — West Oakland",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "West Oakland"
+        },
+        {
+          "pop": "POP-00210",
+          "name": "Depak Ying",
+          "profile": "Depak Ying — Server — Rockridge",
+          "why": "ledger-resident",
+          "role": "Server",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "civic gap in city — who is accountable, what council has or hasn't done",
+        "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+        "id": "F-431c03d5c5bc"
+      },
+      {
+        "t": "FACT",
+        "text": "No civic initiative addresses the city signal surfaced this cycle.",
+        "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+        "id": "F-09e3b8387878"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase. Missing reporting evidence is a typed state, not proof that an act or response did not occur."
+    }
+  },
+  "reporter": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+      "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+      "hood": null,
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Investigation approach: distinguish what the supplied record establishes from what it does not. Follow the unresolved gap fairly; no invented response, silence, or accusation."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "luis-navarro",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "domain": "accountability-anomaly"
+    },
+    "pulse": {
+      "className": "accountability-anomaly",
+      "score": 80,
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "hood": null,
+      "source": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles"
+      ],
+      "forbidden": [
+        "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+      ],
+      "schema": "INVESTIGATION-BRIEF-1",
+      "method": "KNOWN_UNKNOWN",
+      "missing": [
+        "documented response or documented non-response",
+        "request timestamp and elapsed silence duration",
+        "responsible person, office, or duty unless named by the source"
+      ],
+      "reportingEvidence": {
+        "recordChecks": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "requestEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responseEvents": {
+          "state": "NOT_SUPPLIED",
+          "events": []
+        },
+        "responsibleEntities": {
+          "state": "NOT_SUPPLIED",
+          "entities": []
+        }
+      },
+      "silenceClock": {
+        "state": "UNESTABLISHED",
+        "value": null,
+        "src": null
+      },
+      "excludedCandidates": []
+    },
+    "candidates": [
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+        "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+        "hood": null,
+        "popids": [],
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 0
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)",
+        "hood": null,
+        "popids": [],
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 1
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "production-imbalance (medium) | 22 neighborhoods report migration flow with zero economic events this cycle",
+        "ref": "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s)",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "popids": [
+          "POP-00136",
+          "POP-00154",
+          "POP-01080"
+        ],
+        "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+        "hookLine": "The economic initiative carrying Downtown has not advanced in 2 cycles.",
+        "citizens": [
+          "Louis Cross (POP-01080)",
+          "Lila Mezran (POP-00154)",
+          "Rafael Montez (POP-00136)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 2
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: pilot_evaluation → implementation-active",
+        "ref": "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3",
+        "hood": "West Oakland, Fruitvale, East Oakland",
+        "popids": [
+          "POP-00754",
+          "POP-00756",
+          "POP-00762"
+        ],
+        "angle": "Oakland Alternative Response Initiative advanced from pilot_evaluation to implementation-active — what the milestone delivers and who carried it",
+        "hookLine": "Oakland Alternative Response Initiative advanced from pilot_evaluation to implementation-active; a milestone worth covering, not burying.",
+        "citizens": [
+          "Ophelia Brenner (POP-00754)",
+          "Ramon Solano (POP-00756)",
+          "Aziz Rahimi (POP-00762)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 3
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: visioning-complete → visioning",
+        "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+        "hood": "Fruitvale",
+        "popids": [
+          "POP-00744",
+          "POP-00766",
+          "POP-01057"
+        ],
+        "angle": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning — what the milestone delivers and who carried it",
+        "hookLine": "Fruitvale Transit Hub Phase II — Visioning advanced from visioning-complete to visioning; a milestone worth covering, not burying.",
+        "citizens": [
+          "Tomas Renteria (POP-00744)",
+          "Manjit Singh (POP-00766)",
+          "Nina Reyes (POP-01057)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 4
+      },
+      {
+        "score": 80,
+        "kind": "anomaly",
+        "label": "improvement (low) | Initiative \"Baylight District — Final Council Vote\" advanced: construction-planning → vote-scheduled",
+        "ref": "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6",
+        "hood": "Jack London, Downtown",
+        "popids": [
+          "POP-00020",
+          "POP-00156",
+          "POP-01078"
+        ],
+        "angle": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled — what the milestone delivers and who carried it",
+        "hookLine": "Baylight District — Final Council Vote advanced from construction-planning to vote-scheduled; a milestone worth covering, not burying.",
+        "citizens": [
+          "Pablo Almanzar (POP-01078)",
+          "Angela Reyes (POP-00156)",
+          "Elena Vásquez (POP-00020)"
+        ],
+        "source": "desk-signal",
+        "sourceIndex": 5
+      }
+    ],
+    "pointers": [
+      "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+      "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)",
+      "output/engine_audit_c105.json patterns[2]; evidence: Neighborhood_Map row(s)",
+      "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3",
+      "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+      "output/engine_audit_c105.json patterns[5]; evidence: Initiative_Tracker row(s) 6"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "text": "I'm looking into a civic gap that's surfaced this cycle. There's no civic initiative addressing it, and I need to figure out who's accountable and what the council has or hasn't done. I'll start by distinguishing what the record establishes from what it doesn't, focusing on the unresolved gap without inventing responses or accusations.",
+    "plan": {
+      "chase": "I'm looking into a civic gap that's surfaced this cycle. There's no civic initiative addressing it, and I need to figure out who's accountable and what the council has or hasn't done. I'll start by distinguishing what the record establishes from what it doesn't, focusing on the unresolved gap without inventing responses or accusations.",
+      "focus": "Accountability and council actions or inactions regarding the civic gap.",
+      "why": "There's a clear signal of a civic gap with no initiative addressing it, and understanding accountability is crucial.",
+      "checks": [
+        "What does the record establish about the civic gap?",
+        "What is missing from the record regarding responses or non-responses?",
+        "Who is responsible for addressing this gap, if named by the source?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00170",
+          "question": "What have you observed regarding the civic gap in your area?",
+          "basis": "Resident perspective on civic issues."
+        },
+        {
+          "pop": "POP-00198",
+          "question": "How has the civic gap affected your daily life or work?",
+          "basis": "Resident perspective on civic issues."
+        },
+        {
+          "pop": "POP-00201",
+          "question": "Have you noticed any council actions or inactions related to the civic gap?",
+          "basis": "Resident perspective on civic issues."
+        },
+        {
+          "pop": "POP-00210",
+          "question": "What changes would you like to see regarding the civic gap?",
+          "basis": "Resident perspective on civic issues."
+        }
+      ],
+      "interpretation": "The civic gap seems to be a significant issue that hasn't been addressed by any civic initiative, indicating a possible oversight or prioritization issue.",
+      "unverifiedLead": [
+        "Is there a specific council member or office responsible for this gap?",
+        "Has there been any documented request or response regarding this gap?"
+      ],
+      "closeQuestion": "What steps can be taken to ensure accountability and address the civic gap effectively?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Rose Delgado (City Council District 3): 3 mutual aid teams",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d3_2026-09-03.json",
+      "popids": [
+        "POP-00503"
+      ]
+    },
+    {
+      "label": "Janae Rivers (City Council District 5): D1",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d5_2026-09-03.json",
+      "popids": [
+        "POP-00043"
+      ]
+    },
+    {
+      "label": "Elliott Crane (City Council District 6): Piedmont Ave’s crime numbers are well below city averages, but sentiment gaps remain a concern. I’m ",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d6_2026-09-03.json",
+      "popids": [
+        "POP-00044"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    }
+  ],
+  "laneEntries": 61,
+  "ranAt": "2026-09-03T11:16:10.917Z"
+}

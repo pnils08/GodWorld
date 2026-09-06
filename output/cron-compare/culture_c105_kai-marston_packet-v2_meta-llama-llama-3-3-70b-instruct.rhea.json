@@ -1,0 +1,52 @@
+{
+  "draft": "output/cron-compare/culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "2bfbcfc16e9f9d31bfb85bbbaf69fcf9aed046c8245102b5619b9b25997118a5",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen names, roles, neighborhoods, quotes, and event references perfectly match ledger data and packet provenance.",
+  "review": {
+    "profileId": "kai-arts-entertainment-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "kai-arts-entertainment-v1",
+    "packageVersion": "KAI-LEP2-1",
+    "manifestId": "AM-71109c625d66",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Depak Ying",
+      "Elio Perez",
+      "Melton Neilon",
+      "Rick Walker"
+    ],
+    "unverified": [
+      "Corliss Family Block Party"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 7124,
+  "parseError": false,
+  "ranAt": "2026-09-03T23:18:18.798Z"
+}

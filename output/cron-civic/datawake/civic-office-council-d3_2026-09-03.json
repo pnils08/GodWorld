@@ -1,0 +1,15 @@
+{
+  "office": "council_d3",
+  "agentDir": "civic-office-council-d3",
+  "holder": "Rose Delgado",
+  "popid": "POP-00503",
+  "title": "City Council District 3",
+  "date": "2026-09-03",
+  "cycle": 105,
+  "model": "qwen/qwen3-235b-a22b",
+  "statement": "The Oakland Alternative Response Initiative’s expansion to D1 isn’t just about replicating success—it’s about deepening community trust. Fruitvale’s mutual aid teams like those led by Toby Lamont and Marisol Achebe show we’re ready to adapt this model to neighborhood needs, not one-size-fits-all templates. With crime rates outpacing city averages and sentiment lagging, we must act swiftly but thoughtfully. Monthly audits and district-specific frameworks ensure accountability, but real progress hinges on embedding these efforts in local networks like St. Esperanza Parish’s outreach. This isn’t a handoff to bureaucracy—it’s a partnership with the people already doing the work.",
+  "action": "Partner with Fruitvale’s mutual aid organizers and faith groups to co-design district-specific response protocols",
+  "numberMoved": "3 mutual aid teams",
+  "ranAt": "2026-09-03T10:45:57.533Z",
+  "fellBackFrom": null
+}

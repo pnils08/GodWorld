@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "105",
+  "persona": "sharon-okafor",
+  "byline": "Sharon Okafor",
+  "bylinePopid": "POP-00159",
+  "article": "output/cron-compare/staged/culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "mentioned",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "mentioned",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Elio Perez",
+        "role": "mentioned",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Depak Ying",
+        "role": "mentioned",
+        "popid": "POP-00210"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "city-depak-ying-story-signal",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Dimond"
+    ],
+    "claims": [
+      {
+        "claim": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which isn't too far from where I live in Temescal, and I'm curious what brought him to that part of town.",
+        "sourceRef": "citizenVoice PRESS Melton Neilon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-b06cd6f4097b",
+    "draftSha256": "c0ff576581561504e064c674bbe3f937d54ead2427f56001a396ec7ff1b8b0e6",
+    "verdict": "output/cron-compare/culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-02T23:19:49.205Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:14.014Z"
+}

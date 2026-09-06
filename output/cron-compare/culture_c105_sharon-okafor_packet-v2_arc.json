@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "culture",
+  "persona": "sharon-okafor",
+  "storyline": {
+    "slug": "dimond-melton-neilon-fame-sighting",
+    "verb": "opened"
+  },
+  "hood": "Dimond",
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which isn't too far from where I live in Temescal, and I'm curious what brought him to that part of town."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I've heard Benji Dillon was spotted at Dimond Pharmacy, that's all I know about it."
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I've been busy with work and haven't had a chance to catch up with people in the Dimond area."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I've heard that Benji Dillon was spotted at Dimond Pharmacy, but I don't know much about it since I'm always busy working as a server in Rockridge."
+    }
+  ],
+  "claim": "I haven't seen Benji Dillon around my neighborhood, but I've heard he was spotted at Dimond Pharmacy, which isn't too far from where I live in Temescal, and I'm curious what brought him to that part of town.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-02T18:19:27.660Z"
+}

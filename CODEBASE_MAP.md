@@ -939,7 +939,7 @@ All 9 commits are part of **sprint S290 [engine-sheet]**, focused on **engine.44
 - *(plus ~20 additional files with Timestamp-column-only fixes)*
 - `SESSION_CONTEXT.md` — reverted to boot state at session end (Mike-direct)
 
-**Next work (S291 opener):** Resume engine.44 at `docs/plans/2026-07-03-sheet-walk-audit-triage.md` changelog. C101 live smoke pending (first use of the S289 window in production). Sports tab must load before C101 run.
+**Next work (S291 opener):** Resume engine.44 at `docs/archive/plans/2026-07-03-sheet-walk-audit-triage.md` changelog. C101 live smoke pending (first use of the S289 window in production). Sports tab must load before C101 run.
 
 ---
 

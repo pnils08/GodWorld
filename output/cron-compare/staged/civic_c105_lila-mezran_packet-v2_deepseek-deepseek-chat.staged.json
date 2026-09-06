@@ -1,0 +1,58 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "lila-mezran",
+  "byline": "Dr. Lila Mezran",
+  "bylinePopid": "POP-00154",
+  "article": "output/cron-compare/staged/civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Kevin Nelson",
+        "role": "quoted-source",
+        "popid": "POP-00269"
+      },
+      {
+        "name": "Omar Cleo",
+        "role": "quoted-source",
+        "popid": "POP-00290"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "temescal-sonia-parikh-anomaly",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Temescal"
+    ],
+    "claims": [
+      {
+        "claim": "I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end.",
+        "sourceRef": "citizenVoice PRESS Melton Neilon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-73db71c6b407",
+    "draftSha256": "369e78fd534f0e932f34760fa72ff4a4a5b82b6f37f6138f1ca91dd9e7f086ef",
+    "verdict": "output/cron-compare/civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-02T23:16:00.701Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:13.969Z"
+}

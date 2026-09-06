@@ -4,14 +4,14 @@
   "model": "deepseek/deepseek-chat",
   "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 16343,
-  "usageOutputTokens": 893,
+  "usageInputTokens": 10107,
+  "usageOutputTokens": 409,
   "savedFiles": [
     "output/cron-compare/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.md"
   ],
   "compareAgainst": "output/desk-output/business_c105.md",
-  "durationMs": 47771,
+  "durationMs": 9985,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-09-01T23:20:11.594Z"
+  "ranAt": "2026-09-04T23:20:04.198Z"
 }

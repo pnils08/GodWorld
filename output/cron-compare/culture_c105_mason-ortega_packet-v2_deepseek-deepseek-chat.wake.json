@@ -5,7 +5,7 @@
   "provider": "openrouter",
   "model": "deepseek/deepseek-chat",
   "configuredWriterModel": "deepseek/deepseek-chat",
-  "gateModel": "sonnet",
+  "gateModel": "google/gemini-3.7-flash",
   "persona": "mason-ortega",
   "byline": {
     "name": "Mason Ortega",
@@ -14,8 +14,8 @@
   },
   "laneEntries": 19,
   "quotesLanded": 2,
-  "disposition": "flagged",
-  "rheaPass": false,
+  "disposition": "staged",
+  "rheaPass": true,
   "rheaFlagCount": 0,
   "contamination": {
     "fail": false,
@@ -23,8 +23,10 @@
   },
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat.md",
-  "selfRecord": null,
-  "ranAt": "2026-09-04T22:06:50.594Z",
-  "dispositionReconciledAt": "2026-09-04T22:25:55.028Z"
+  "article": "output/cron-compare/staged/culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-00160\",\n  \"name\": \"Mason Ortega\",\n  \"recorded\": true,\n  \"text\": \"filed: The Pulse at Merritt Reserve’s Pass\"\n}"
+  },
+  "ranAt": "2026-09-06T01:49:47.827Z"
 }

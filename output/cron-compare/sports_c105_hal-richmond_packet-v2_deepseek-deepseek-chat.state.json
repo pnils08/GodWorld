@@ -48,16 +48,50 @@
         "docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 5"
       ]
     },
-    "writingMode": "SOURCE_BRIEF"
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
   },
   "signal": {
     "kind": "story-signal",
     "hood": "Jack London",
     "src": "world_summary_c105.md ## Sports",
     "plan": {
-      "focus": "The impact of Vinnie Keane's career on the A's and the community",
-      "closeQuestion": "How will Vinnie Keane's legacy be remembered and honored by the A's and the city of Oakland?"
-    }
+      "focus": "The A's late-season game and the performances of key players",
+      "closeQuestion": "What will be the lasting impact of this season on the A's franchise?"
+    },
+    "openThreads": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "label": "baylight-district-vinnie-keane-prospect-callup | C104→C104 | 4 article(s) | opened 4",
+        "hood": "Baylight District",
+        "popids": [
+          "POP-00001",
+          "POP-00050",
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "baylight-district-vinnie-keane-era-door",
+        "label": "baylight-district-vinnie-keane-era-door | C104→C104 | 1 article(s) | advanced 1",
+        "hood": "Baylight District",
+        "popids": [
+          "POP-00001",
+          "POP-00050",
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "old-oakland-melton-neilon-long-view-signal",
+        "label": "old-oakland-melton-neilon-long-view-signal | C104→C104 | 1 article(s) | advanced 1",
+        "hood": "Old Oakland",
+        "popids": [
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      }
+    ]
   },
   "exposure": {
     "subjects": [
@@ -76,6 +110,13 @@
         "src": "packet.W1.exposure"
       },
       {
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+        "quotationEligible": true,
+        "src": "packet.W1.exposure"
+      },
+      {
         "pop": "POP-00019",
         "name": "Isley Kelley",
         "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
@@ -85,32 +126,46 @@
     ],
     "sources": [
       {
-        "id": "Q-POP-00001-637a984a29",
+        "id": "Q-POP-00001-250f29a32a",
         "pop": "POP-00001",
         "name": "Vinnie Keane",
-        "quote": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.",
+        "quote": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player.",
         "factIds": [
-          "F-2b3e2e3d075f"
+          "F-9af30bf34151",
+          "F-7253339cd4be"
         ],
         "src": "packet.W2[POP-00001]"
       },
       {
-        "id": "Q-POP-00018-60732d5c01",
+        "id": "Q-POP-00003-1c2f629f32",
+        "pop": "POP-00003",
+        "name": "Mark Aitken",
+        "quote": "I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level.",
+        "factIds": [
+          "F-4330bada6d88",
+          "F-7253339cd4be"
+        ],
+        "src": "packet.W2[POP-00003]"
+      },
+      {
+        "id": "Q-POP-00018-3bfcb5c79e",
         "pop": "POP-00018",
         "name": "Benji Dillon",
-        "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland",
+        "quote": "I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going.",
         "factIds": [
-          "F-9af30bf34151"
+          "F-4330bada6d88",
+          "F-db6f160d52da"
         ],
         "src": "packet.W2[POP-00018]"
       },
       {
-        "id": "Q-POP-00019-b2f3848fc5",
+        "id": "Q-POP-00019-153dad398b",
         "pop": "POP-00019",
         "name": "Isley Kelley",
-        "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match.",
+        "quote": "I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance.",
         "factIds": [
-          "F-9af30bf34151"
+          "F-4330bada6d88",
+          "F-db6f160d52da"
         ],
         "src": "packet.W2[POP-00019]"
       }
@@ -118,7 +173,12 @@
     "excludedLeads": [
       {
         "from": "Hal Richmond",
-        "text": "The potential for Vinnie Keane's legacy to inspire future generations of players and fans",
+        "text": "The impact of Vinnie Keane's retirement on the team's future",
+        "usable": false
+      },
+      {
+        "from": "Hal Richmond",
+        "text": "The role of other veteran players in the team's success",
         "usable": false
       }
     ]
@@ -171,12 +231,6 @@
       "text": "Cycle: C105",
       "src": "world_summary_c105.md ## Sports",
       "id": "F-b46c89741eef"
-    },
-    {
-      "t": "FACT",
-      "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
-      "src": "Simulation_Ledger profile for POP-00001",
-      "id": "F-2b3e2e3d075f"
     }
   ],
   "limits": {
@@ -257,7 +311,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-2b7ad0829f82",
+    "id": "AM-62b75b3dd4d5",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -307,42 +361,50 @@
         "t": "FACT",
         "text": "Cycle: C105",
         "src": "world_summary_c105.md ## Sports"
-      },
-      {
-        "id": "F-2b3e2e3d075f",
-        "t": "FACT",
-        "text": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
-        "src": "Simulation_Ledger profile for POP-00001"
       }
     ],
     "approvedQuotes": [
       {
-        "id": "Q-POP-00001-637a984a29",
+        "id": "Q-POP-00001-250f29a32a",
         "speakerId": "POP-00001",
         "speakerName": "Vinnie Keane",
-        "text": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.",
+        "text": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player.",
         "factIds": [
-          "F-2b3e2e3d075f"
+          "F-9af30bf34151",
+          "F-7253339cd4be"
         ],
         "src": "packet.W2[POP-00001]"
       },
       {
-        "id": "Q-POP-00018-60732d5c01",
+        "id": "Q-POP-00003-1c2f629f32",
+        "speakerId": "POP-00003",
+        "speakerName": "Mark Aitken",
+        "text": "I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level.",
+        "factIds": [
+          "F-4330bada6d88",
+          "F-7253339cd4be"
+        ],
+        "src": "packet.W2[POP-00003]"
+      },
+      {
+        "id": "Q-POP-00018-3bfcb5c79e",
         "speakerId": "POP-00018",
         "speakerName": "Benji Dillon",
-        "text": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland",
+        "text": "I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going.",
         "factIds": [
-          "F-9af30bf34151"
+          "F-4330bada6d88",
+          "F-db6f160d52da"
         ],
         "src": "packet.W2[POP-00018]"
       },
       {
-        "id": "Q-POP-00019-b2f3848fc5",
+        "id": "Q-POP-00019-153dad398b",
         "speakerId": "POP-00019",
         "speakerName": "Isley Kelley",
-        "text": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match.",
+        "text": "I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance.",
         "factIds": [
-          "F-9af30bf34151"
+          "F-4330bada6d88",
+          "F-db6f160d52da"
         ],
         "src": "packet.W2[POP-00019]"
       }
@@ -359,6 +421,13 @@
         "id": "POP-00001",
         "name": "Vinnie Keane",
         "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+        "src": "packet.W1.exposure",
+        "quotationEligible": true
+      },
+      {
+        "id": "POP-00003",
+        "name": "Mark Aitken",
+        "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
         "src": "packet.W1.exposure",
         "quotationEligible": true
       },
@@ -387,7 +456,12 @@
     "unverifiedLeads": [
       {
         "from": "Hal Richmond",
-        "text": "The potential for Vinnie Keane's legacy to inspire future generations of players and fans",
+        "text": "The impact of Vinnie Keane's retirement on the team's future",
+        "publishable": false
+      },
+      {
+        "from": "Hal Richmond",
+        "text": "The role of other veteran players in the team's success",
         "publishable": false
       }
     ],

@@ -1,0 +1,149 @@
+{
+  "empty": false,
+  "cycle": 105,
+  "kind": "simon-longview",
+  "desk": "sports",
+  "journalist": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "persona": "simon-leary"
+  },
+  "pulse": {
+    "className": "role-change-under-continuity",
+    "score": 66,
+    "label": "The A's record is 127-35."
+  },
+  "prewrite": {
+    "bagModes": [
+      {
+        "id": 2,
+        "name": "Keystone Player"
+      },
+      {
+        "id": 4,
+        "name": "Load-Bearing Continuity"
+      }
+    ],
+    "anchorFacts": [
+      "The A's record is 127-35.",
+      "The A's have won 2 straight."
+    ],
+    "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+    "missing": [
+      "why the role change was made",
+      "historical comparison or franchise precedent",
+      "organizational intention or future plan",
+      "citywide, clubhouse, or fan interpretation"
+    ]
+  },
+  "story": {
+    "angle": "The A's record is 127-35.",
+    "label": "The A's record is 127-35.",
+    "hookLine": "The A's record is 127-35.",
+    "kind": "long-view-signal",
+    "hood": "Jack London",
+    "popids": [
+      "POP-00018",
+      "POP-00001",
+      "POP-00003",
+      "POP-00019"
+    ],
+    "citizens": [
+      "Benji Dillon (POP-00018)",
+      "Vinnie Keane (POP-00001)",
+      "Mark Aitken (POP-00003)",
+      "Isley Kelley (POP-00019)"
+    ],
+    "ref": "world_summary_c105.md ## Sports",
+    "cycle": 105
+  },
+  "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+  "players": [
+    {
+      "name": "Benji Dillon",
+      "popid": "POP-00018",
+      "role": "Pitcher, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    },
+    {
+      "name": "Vinnie Keane",
+      "popid": "POP-00001",
+      "role": "Designated Hitter, Oakland A's Legend",
+      "neighborhood": "Grand Lake",
+      "why": "feed-names"
+    },
+    {
+      "name": "Mark Aitken",
+      "popid": "POP-00003",
+      "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+      "neighborhood": "Jack London",
+      "why": "feed-names"
+    },
+    {
+      "name": "Isley Kelley",
+      "popid": "POP-00019",
+      "role": "Shortstop, Oakland A's Legend",
+      "neighborhood": "Rockridge",
+      "why": "feed-names"
+    }
+  ],
+  "scene": {
+    "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+  },
+  "candidates": [
+    {
+      "score": 66,
+      "cycle": 105,
+      "team": "A's",
+      "label": "A Farewell Gone Well:Vinnie Keane Benji Dillon"
+    },
+    {
+      "score": 66,
+      "cycle": 105,
+      "team": "A's",
+      "label": "As Pitching rotation is stellar all season"
+    },
+    {
+      "score": 56,
+      "cycle": 105,
+      "team": "A's",
+      "label": "Travis Coles secures his place in A's lore , while fans look to his arm to carry the torch from a era ending in Benji Dillon"
+    },
+    {
+      "score": 56,
+      "cycle": 105,
+      "team": "A's",
+      "label": "Danny Horn is the greatest MLB player on the planet"
+    },
+    {
+      "score": 56,
+      "cycle": 105,
+      "team": "A's",
+      "label": "Vinnie Keane : How Do You Like Them Apples.."
+    },
+    {
+      "score": 56,
+      "cycle": 105,
+      "team": "A's",
+      "label": "Benji Dillon : The Golden Arm era come to a close"
+    },
+    {
+      "score": 56,
+      "cycle": 105,
+      "team": "A's",
+      "label": "The As now wait on the outcome of the Wild Card round to host ALDS. A's tickets are the hottest ticket in town"
+    },
+    {
+      "score": 54,
+      "cycle": 104,
+      "team": "A's",
+      "label": "Happy NYE"
+    }
+  ],
+  "pointers": [
+    "output/world_summary_c105.md ## Sports",
+    "scripts/sportsSubstrate.js",
+    "docs/media/SIMON_LONGVIEW_BAG.md"
+  ]
+}

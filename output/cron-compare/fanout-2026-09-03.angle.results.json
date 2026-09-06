@@ -1,0 +1,42 @@
+{
+  "date": "2026-09-03",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-03T11:18:15.452Z"
+}

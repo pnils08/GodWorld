@@ -1,0 +1,183 @@
+{
+  "cycle": "105",
+  "total": 17,
+  "counts": {
+    "accurate": 13,
+    "corrections-needed": 3,
+    "canon-violation": 1
+  },
+  "accuracyPct": 76.5,
+  "auditModel": "google/gemini-3.7-flash",
+  "trend": [
+    {
+      "cycle": 103,
+      "pct": 75
+    },
+    {
+      "cycle": 104,
+      "pct": 62.5
+    }
+  ],
+  "articles": [
+    {
+      "stem": "business_c105_business-desk_packet-v2_deepseek-deepseek-chat",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c105_angela-reyes_packet-v2_deepseek-deepseek-chat",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Darren Briggs is characterized as a youth advocate ('Youth advocates like Briggs see the potential')",
+          "class": "citizen-bending",
+          "why": "Darren Briggs (POP-00588) is canonically a City Building Inspector, not a youth advocate."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "The Initiative Tracker confirms the shift / disbursement-active phase",
+          "class": "engine-verbiage",
+          "why": "References internal engine mechanics and state labels ('Initiative Tracker', 'disbursement-active') directly as in-world public records/entities."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "Phrasing referring to 'in the coming cycles' and 'question for the next record'",
+          "class": "engine-verbiage",
+          "why": "Simulation mechanics vocabulary ('cycles', 'record') leaked into the journalistic prose in the final paragraph."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "corrections-needed",
+      "failures": [
+        {
+          "what": "this cycle",
+          "class": "engine-verbiage",
+          "why": "The phrase 'this cycle' in the opening paragraph is internal simulation terminology leaking into news prose."
+        }
+      ]
+    },
+    {
+      "stem": "sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    }
+  ]
+}

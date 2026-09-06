@@ -28,5 +28,6 @@
     "recorded": true,
     "out": "/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00156\",\n  \"name\": \"Angela Reyes\",\n  \"recorded\": true,\n  \"text\": \"filed: Oakland Youth Apprenticeship Pipeline Moves to Pilot Phase\"\n}"
   },
-  "ranAt": "2026-09-01T23:15:35.205Z"
+  "ranAt": "2026-09-01T23:15:35.205Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:13.892Z"
 }

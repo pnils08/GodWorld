@@ -1,0 +1,165 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00041",
+    "name": "Keisha Ramos",
+    "role": "Baylight Authority Director",
+    "officeId": "STAFF-BAYLIGHT",
+    "district": "citywide",
+    "faction": "STAFF",
+    "agentDir": "civic-office-baylight-authority",
+    "initiative": "INIT-006",
+    "dials": {
+      "approval": 65
+    }
+  },
+  "task": {
+    "a": "initiative-week",
+    "goal": "Final council vote on Phase II bid"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 120,
+    "label": "Baylight District — Final Council Vote — Final council vote on Phase II bid",
+    "lever": "Final council vote on Phase II bid",
+    "hood": "Baylight District",
+    "initiative": "INIT-006",
+    "vsCity": {
+      "sentiment": 1.05,
+      "citySentiment": 0.8854545454545455,
+      "crime": 0.65,
+      "cityCrime": 0.6990909090909091,
+      "heat": -16.454545454545453,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "Final council vote on Phase II bid",
+    "lineFacts": [
+      "approval 65",
+      "Baylight District — Final Council Vote is in vote-scheduled; budget $2.1B — C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105.",
+      "due: Final council vote on Phase II bid",
+      "INIT-006 — vote-scheduled — C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105. — Final council vote on Phase II bid",
+      "Baylight District: sentiment 1.05 vs city 0.885; crime index 0.65 vs city 0.699; retail 5.02; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "initiative-heat",
+    "hoods": [
+      "Baylight District"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00777",
+        "name": "Rico Valdez",
+        "neighborhood": "Baylight District",
+        "role": "Lead Sports Reporter, OakTown Echo",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Baylight District — Baylight District — Final Council Vote — Final council vote on Phase II bid"
+      },
+      {
+        "pop": "POP-00050",
+        "name": "Ernesto Quintero",
+        "neighborhood": "Baylight District",
+        "role": "3B/1B , Oakland A's",
+        "tier": 1,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Baylight District — Baylight District — Final Council Vote — Final council vote on Phase II bid"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": [
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-baylight-authority",
+        "initiative": "INIT-006",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-okoro",
+        "initiative": "INIT-006",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-crc-faction",
+        "initiative": "INIT-006",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      },
+      {
+        "kind": "city-hall-voice",
+        "agentDir": "civic-office-opp-faction",
+        "initiative": "INIT-006",
+        "src": ".claude/skills/city-hall/CASCADE_ROUTING.md"
+      }
+    ]
+  },
+  "known": [
+    {
+      "id": "F-office-STAFF-BAYLIGHT",
+      "t": "FACT",
+      "text": "Keisha Ramos holds STAFF-BAYLIGHT at approval 65",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-006",
+      "t": "FACT",
+      "text": "Baylight District — Final Council Vote is in vote-scheduled; budget $2.1B — C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-cabinet-decisions_c104json",
+      "t": "FACT",
+      "text": "INIT-006 — vote-scheduled — C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105. — Final council vote on Phase II bid",
+      "src": "output/city-civic-database/initiatives/baylight/decisions_c104.json"
+    },
+    {
+      "id": "F-hood-BaylightDistrict",
+      "t": "FACT",
+      "text": "Baylight District: sentiment 1.05 vs city 0.885; crime index 0.65 vs city 0.699; retail 5.02; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "STAFF-BAYLIGHT",
+        "PopId": "POP-00041",
+        "Holder": "Keisha Ramos",
+        "District": "citywide",
+        "Approval": "65"
+      }
+    ],
+    "civicPeers": []
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

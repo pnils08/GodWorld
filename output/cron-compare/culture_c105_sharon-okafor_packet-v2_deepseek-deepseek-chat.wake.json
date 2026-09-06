@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "sharon-okafor",
+  "byline": {
+    "name": "Sharon Okafor",
+    "popid": "POP-00159",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 19,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 1,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nv // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00159\",\n  \"name\": \"Sharon Okafor\",\n  \"recorded\": true,\n  \"text\": \"filed: Benji Dillon’s Dimond Pharmacy Sighting Sparks Curiosity\"\n}"
+  },
+  "ranAt": "2026-09-02T23:19:57.335Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:14.014Z"
+}

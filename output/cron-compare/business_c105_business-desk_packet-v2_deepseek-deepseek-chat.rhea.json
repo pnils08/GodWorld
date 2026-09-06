@@ -3,12 +3,12 @@
   "cycle": "105",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "61130b7aeb2a2e5ce97434589f0dbfa6712dc750fe18ab237c22e4d1d5a18f85",
+  "draftSha256": "373f01c117d438c7a8747152ac4d63ff51f49cca91c7be6085ac333cce3969d0",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "Draft fully verified against ledger bios, exact quote provenance, and C105 Rockridge rising trajectory.",
+  "summary": "Article is fully grounded in Cycle 105 world data and verified interview provenance with zero canon violations.",
   "review": {
     "profileId": "jordan-economic-labor-v1",
     "canonIntegrity": "pass",
@@ -17,23 +17,24 @@
   "reviewProfile": {
     "id": "jordan-economic-labor-v1",
     "packageVersion": "JORDAN-LEP2-1",
-    "manifestId": "AM-981cf43633ab",
+    "manifestId": "AM-17d2e7ca15ee",
     "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [
       "Depak Ying",
-      "Howard Yell",
-      "Jacob King"
+      "Jordan Velez"
     ],
     "unverified": [
-      "Cozy Pot"
+      "Cozy Pot",
+      "Festive Fireside",
+      "Rockridge's Retail Uptick Feels"
     ]
   },
   "intake": {
     "found": true,
     "counts": {
-      "names": 3,
+      "names": 1,
       "businesses": 0,
       "storylines": 1,
       "hoods": 1,
@@ -44,8 +45,8 @@
     "unbackedQuoted": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0092,
-  "durationMs": 6514,
+  "apiCostUsd": 0.0102,
+  "durationMs": 9353,
   "parseError": false,
-  "ranAt": "2026-09-01T23:20:18.336Z"
+  "ranAt": "2026-09-04T23:20:13.833Z"
 }

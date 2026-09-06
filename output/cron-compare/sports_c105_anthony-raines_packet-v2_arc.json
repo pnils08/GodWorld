@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "sports",
+  "persona": "anthony-raines",
+  "storyline": {
+    "slug": "jack-london-isley-kelley-sports-analytics",
+    "verb": "advanced"
+  },
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00019",
+      "name": "Isley Kelley",
+      "quote": "I’ve been watching Vinnie and Benji closely this season, and their performances have been electric—they’re carrying the team with heart and grit, and it’s exactly what Oakland deserves for this farewell."
+    }
+  ],
+  "claim": "I’ve been watching Vinnie and Benji closely this season, and their performances have been electric—they’re carrying the team with heart and grit, and it’s exactly what Oakland deserves for this farewell.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-04T18:19:18.399Z"
+}

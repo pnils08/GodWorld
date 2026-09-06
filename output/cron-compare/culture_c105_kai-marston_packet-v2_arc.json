@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "culture",
+  "persona": "kai-marston",
+  "storyline": {
+    "slug": "city-melton-neilon-city-event",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I've heard The Corliss Family Block Party is happening and I'm looking forward to it, it sounds like a great way to bring the community together."
+    },
+    {
+      "pop": "POP-00198",
+      "name": "Rick Walker",
+      "quote": "I've heard The Corliss Family Block Party is happening, it sounds like something fun for the community, I'm curious to check it out."
+    },
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I've heard The Corliss Family Block Party is happening and I'm curious to check it out, I love seeing the community come together like that."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I've heard The Corliss Family Block Party is happening, it sounds like a fun event for the community, I'm curious to see how it all comes together."
+    }
+  ],
+  "claim": "I've heard The Corliss Family Block Party is happening and I'm looking forward to it, it sounds like a great way to bring the community together.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-03T18:19:30.921Z"
+}

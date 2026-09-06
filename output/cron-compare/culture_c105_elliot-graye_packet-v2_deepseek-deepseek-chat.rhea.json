@@ -1,0 +1,53 @@
+{
+  "draft": "output/cron-compare/culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "a4a5e69d6b90ac7b2c612a6e5ec3419e3728afc419259653f8616383918fb464",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Verified all citizen profiles, Dimond Pharmacy sighting, and verbatim quote provenance against Ground Truth and Wake-3 manifest.",
+  "review": {
+    "profileId": "graye-faith-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "graye-faith-ground-v1",
+    "packageVersion": "GRAYE-LEP2-1",
+    "manifestId": "AM-5d4608094f17",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Devon Willis",
+      "Ezekiel Campbell",
+      "Grace Yamamoto",
+      "Mart Johns"
+    ],
+    "unverified": [
+      "Nurse Aide"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 6032,
+  "parseError": false,
+  "ranAt": "2026-09-04T23:19:44.901Z"
+}

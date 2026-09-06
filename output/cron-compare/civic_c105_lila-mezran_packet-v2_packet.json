@@ -1,0 +1,831 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "lila-mezran",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "label": "Temescal Community Health Center is approved, and construction is active.",
+      "kind": "initiative",
+      "angle": "Temescal Community Health Center is approved, and construction is active.",
+      "hookLine": "The supplied civic record identifies a health-service question that needs careful accounting.",
+      "hood": "Temescal",
+      "popids": [],
+      "citizens": []
+    }
+  },
+  "angle": "output/cron-compare/civic_c105_lila-mezran_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 3,
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end.\",\"fact_ids\":[\"F-2b3e19368d02\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2b3e19368d02"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-28c9ff88db",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The timeline and access implications of the Temescal Community Health Center's construction phase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "Temescal",
+          "focus": "The timeline and access implications of the Temescal Community Health Center's construction phase.",
+          "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center is approved, and construction is active.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-2b3e19368d02"
+          },
+          {
+            "t": "FACT",
+            "text": "The supplied civic record identifies a health-service question that needs careful accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-119694326b41"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00269",
+      "name": "Kevin Nelson",
+      "quote": "I’ve been hearing about the health center construction, and honestly, it’s a mix of excitement and concern—excited for what it’ll bring to the neighborhood, but worried about how accessible things will be during the build.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve been hearing about the health center construction, and honestly, it’s a mix of excitement and concern—excited for what it’ll bring to the neighborhood, but worried about how accessible things will be during the build.\",\"fact_ids\":[\"F-2b3e19368d02\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2b3e19368d02"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00269-912203c625",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve been hearing about the health center construction, and honestly, it’s a mix of excitement and concern—excited for what it’ll bring to the neighborhood, but worried about how accessible things will be during the build."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00269",
+          "name": "Kevin Nelson",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The timeline and access implications of the Temescal Community Health Center's construction phase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "Temescal",
+          "focus": "The timeline and access implications of the Temescal Community Health Center's construction phase.",
+          "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Kevin Nelson — Line cook — Temescal",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center is approved, and construction is active.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-2b3e19368d02"
+          },
+          {
+            "t": "FACT",
+            "text": "The supplied civic record identifies a health-service question that needs careful accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-119694326b41"
+          },
+          {
+            "t": "FACT",
+            "text": "Kevin Nelson — Line cook — Temescal",
+            "src": "Simulation_Ledger profile for POP-00269",
+            "id": "F-8df966bc5632"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00290",
+      "name": "Omar Cleo",
+      "quote": "I’ve heard folks talking about the health center construction, and honestly, I’m just hoping it doesn’t disrupt the flow of the neighborhood too much—people need to get to work, and we’ve got lives to live.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the health center construction, and honestly, I’m just hoping it doesn’t disrupt the flow of the neighborhood too much—people need to get to work, and we’ve got lives to live.\",\"fact_ids\":[\"F-2b3e19368d02\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2b3e19368d02"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00290-4f4d99e262",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the health center construction, and honestly, I’m just hoping it doesn’t disrupt the flow of the neighborhood too much—people need to get to work, and we’ve got lives to live."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00290",
+          "name": "Omar Cleo",
+          "role": "Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The timeline and access implications of the Temescal Community Health Center's construction phase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "Temescal",
+          "focus": "The timeline and access implications of the Temescal Community Health Center's construction phase.",
+          "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Omar Cleo — Line Cook — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center is approved, and construction is active.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-2b3e19368d02"
+          },
+          {
+            "t": "FACT",
+            "text": "The supplied civic record identifies a health-service question that needs careful accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-119694326b41"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Cleo — Line Cook — Temescal",
+            "src": "Simulation_Ledger profile for POP-00290",
+            "id": "F-1c2b560cd52f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; warm, tender with people; curious, open to new things; unshakable, calm under anything; devoted, family is everything",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end.\",\"fact_ids\":[\"F-2b3e19368d02\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2b3e19368d02"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00170-28c9ff88db",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00170",
+          "name": "Melton Neilon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The timeline and access implications of the Temescal Community Health Center's construction phase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "Temescal",
+          "focus": "The timeline and access implications of the Temescal Community Health Center's construction phase.",
+          "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Melton Neilon — Sourdough Baker — Temescal",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center is approved, and construction is active.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-2b3e19368d02"
+          },
+          {
+            "t": "FACT",
+            "text": "The supplied civic record identifies a health-service question that needs careful accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-119694326b41"
+          },
+          {
+            "t": "FACT",
+            "text": "Melton Neilon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00170",
+            "id": "F-996744cc8aab"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00269",
+      "name": "Kevin Nelson",
+      "quote": "I’ve been hearing about the health center construction, and honestly, it’s a mix of excitement and concern—excited for what it’ll bring to the neighborhood, but worried about how accessible things will be during the build.",
+      "disp": "driven, hard to sit still; magnetic, center of every room; warm, tender with people; curious, open to new things; steady, hard to shake; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve been hearing about the health center construction, and honestly, it’s a mix of excitement and concern—excited for what it’ll bring to the neighborhood, but worried about how accessible things will be during the build.\",\"fact_ids\":[\"F-2b3e19368d02\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":null,\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2b3e19368d02"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00269-912203c625",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve been hearing about the health center construction, and honestly, it’s a mix of excitement and concern—excited for what it’ll bring to the neighborhood, but worried about how accessible things will be during the build."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00269",
+          "name": "Kevin Nelson",
+          "role": "Line cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The timeline and access implications of the Temescal Community Health Center's construction phase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "Temescal",
+          "focus": "The timeline and access implications of the Temescal Community Health Center's construction phase.",
+          "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Kevin Nelson — Line cook — Temescal",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center is approved, and construction is active.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-2b3e19368d02"
+          },
+          {
+            "t": "FACT",
+            "text": "The supplied civic record identifies a health-service question that needs careful accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-119694326b41"
+          },
+          {
+            "t": "FACT",
+            "text": "Kevin Nelson — Line cook — Temescal",
+            "src": "Simulation_Ledger profile for POP-00269",
+            "id": "F-8df966bc5632"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00290",
+      "name": "Omar Cleo",
+      "quote": "I’ve heard folks talking about the health center construction, and honestly, I’m just hoping it doesn’t disrupt the flow of the neighborhood too much—people need to get to work, and we’ve got lives to live.",
+      "disp": "relentless, can't stop working; magnetic, center of every room; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```json\n{\"answer\":\"quote\",\"quote\":\"I’ve heard folks talking about the health center construction, and honestly, I’m just hoping it doesn’t disrupt the flow of the neighborhood too much—people need to get to work, and we’ve got lives to live.\",\"fact_ids\":[\"F-2b3e19368d02\"],\"basis\":\"direct-reaction\",\"unverifiedLead\":[],\"abstain_reason\":null}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-2b3e19368d02"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00290-4f4d99e262",
+        "authoredQuote": true,
+        "publishableQuote": "I’ve heard folks talking about the health center construction, and honestly, I’m just hoping it doesn’t disrupt the flow of the neighborhood too much—people need to get to work, and we’ve got lives to live."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00290",
+          "name": "Omar Cleo",
+          "role": "Line Cook",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The timeline and access implications of the Temescal Community Health Center's construction phase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "Temescal",
+          "focus": "The timeline and access implications of the Temescal Community Health Center's construction phase.",
+          "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Omar Cleo — Line Cook — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center is approved, and construction is active.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-2b3e19368d02"
+          },
+          {
+            "t": "FACT",
+            "text": "The supplied civic record identifies a health-service question that needs careful accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-119694326b41"
+          },
+          {
+            "t": "FACT",
+            "text": "Omar Cleo — Line Cook — Temescal",
+            "src": "Simulation_Ledger profile for POP-00290",
+            "id": "F-1c2b560cd52f"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00666",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: appendReflection_: [err] [object Object],[object Object],[object Object],[object Object],[object Object]",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00666",
+          "name": "Kaila Raimon",
+          "role": "Sourdough Baker",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Dr. Lila Mezran",
+          "question": "As a resident of Temescal, what have you seen, felt, or understood about \"The timeline and access implications of the Temescal Community Health Center's construction phase.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "initiative",
+          "hood": "Temescal",
+          "focus": "The timeline and access implications of the Temescal Community Health Center's construction phase.",
+          "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-ledger",
+            "same-neighborhood"
+          ],
+          "self": "Kaila Raimon — Sourdough Baker — Temescal",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Temescal Community Health Center is approved, and construction is active.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-2b3e19368d02"
+          },
+          {
+            "t": "FACT",
+            "text": "The supplied civic record identifies a health-service question that needs careful accounting.",
+            "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+            "id": "F-119694326b41"
+          },
+          {
+            "t": "FACT",
+            "text": "Kaila Raimon — Sourdough Baker — Temescal",
+            "src": "Simulation_Ledger profile for POP-00666",
+            "id": "F-407e4a6ad9e3"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-02T18:16:00.842Z"
+}

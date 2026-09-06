@@ -4,8 +4,8 @@ Artifact class: CODEX_DIAGNOSTIC
 Canon status: NOT CANON. Review buckets are title-based suggestions only.
 Notebook: GodWorld
 Notebook ID: 417e2d29-4167-420f-a9cc-76fb6b2b7de2
-Generated: 2026-08-27T06:01:05.958Z
-Total sources: 70
+Generated: 2026-09-06T08:33:40.852Z
+Total sources: 75
 
 ## Review counts
 
@@ -14,12 +14,13 @@ Total sources: 70
 | `publication_candidate` | 37 |
 | `nonpublication_candidate` | 1 |
 | `exclude_candidate` | 1 |
-| `needs_review` | 31 |
+| `needs_review` | 36 |
 
 ## Sources
 
 | Title | Reported type | Review bucket | Reason | Source ID |
 |---|---|---|---|---|
+| 00_AUDIO_DIRECTION_GUIDE — weekly — 0d3edae9363e | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `086a5fa7-281e-4c13-ba8b-09e011df5892` |
 | 1. As_Sunset of a Dynasty: The Athletics' Final Stand | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `8e773c1f-8fde-4212-b138-af97df7370dd` |
 | 1. As_supplemental_c94_let_walks_reset.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `68d0ce88-c554-40ba-9b55-1256633afb58` |
 | 1. As_The Town: A Tale of Two Dynasties | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `799c044c-696b-4163-9877-78b4ca9e41fa` |
@@ -47,7 +48,9 @@ Total sources: 70
 | cycle_pulse_dispatch_102_drop_nobody_claimed.txt | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `44145b44-2bdf-4bda-af83-78abb892fbeb` |
 | cycle_pulse_dispatch_102_oaks_credibility.txt | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `a0d88e0f-bef6-4f53-80b1-418d65a382ad` |
 | cycle_pulse_edition_102.txt | `generated_text` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `b0cf1c08-258d-41ab-9604-0d7a13b127f4` |
+| Detailed Weekly Digest 105a.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `19673ffa-13f3-4ce4-8f1e-dc8f21e0b93a` |
 | dispatch_c92_kono_second_song.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `5a519026-77a2-46c6-87ea-e9dcb5c229d1` |
+| Lore: AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag (Y3C1) | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `a870cd68-4e21-4445-80e0-0709c806822e` |
 | Lore: POP-00131-lorenzo-jordan (Y2C51) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `a1722406-93b3-4ba5-afa9-61e4b82344d5` |
 | Mike Paulson-chat | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `e96f7462-8916-4eee-95b5-455a8929346e` |
 | Notebook Formatting Assistant Initialization | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `7c65472d-24a7-4ad3-8eaf-59a9db1a0aac` |
@@ -88,7 +91,9 @@ Total sources: 70
 | supplemental_oakland_tech_landscape_c84.txt | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `833558a2-2829-4d84-8677-7d9a2b510a58` |
 | The Cycle Pulse | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `298d8805-ddd2-400a-9151-422baceed65d` |
 | The Cycle Pulse — Y2C103 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `45906537-074f-4107-b971-862627341bc4` |
+| The Cycle Pulse — Y2C104 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `3b0b7cb7-439b-4a0c-8ea1-c3687a48432b` |
 | The Cycle Pulse — Y2C104 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `defd4884-1954-4657-84af-a19e69435ba3` |
+| The Cycle Pulse — Y2C105 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `fe335f6a-5be4-4d67-bcd9-08e496cf2d74` |
 | world_summary_c100.txt | `generated_text` | `nonpublication_candidate` | title signals derived world-state or process/reference material | `78327e9c-62fe-4405-9a5c-b5543fd534de` |
 
 No row in this report is admitted to a runtime canon-search allowlist. Every source requires explicit Task 2 review.

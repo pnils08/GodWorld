@@ -1,0 +1,57 @@
+{
+  "draft": "output/cron-compare/culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "c0ff576581561504e064c674bbe3f937d54ead2427f56001a396ec7ff1b8b0e6",
+  "pass": true,
+  "flags": [
+    {
+      "claim": "\"I’ve heard that Benji Dillon was spotted at Dimond Pharmacy, but I don’t know much about it since I’m always busy working.\"",
+      "issue": "Minor truncation of packet quote which ends with 'as a server in Rockridge.' (role context was stated in preceding prose).",
+      "severity": "low"
+    }
+  ],
+  "flagCount": 1,
+  "highSeverityCount": 0,
+  "summary": "All citizens, locations, and quotes resolve accurately to canon and packet ground truth.",
+  "review": {
+    "profileId": "sharon-behavior-ground-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "sharon-behavior-ground-v1",
+    "packageVersion": "SHARON-LEP2-1",
+    "manifestId": "AM-b06cd6f4097b",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Depak Ying",
+      "Elio Perez",
+      "Melton Neilon",
+      "Rick Walker"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0103,
+  "durationMs": 17584,
+  "parseError": false,
+  "ranAt": "2026-09-02T23:19:49.205Z"
+}

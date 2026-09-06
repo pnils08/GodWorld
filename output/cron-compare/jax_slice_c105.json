@@ -1,0 +1,360 @@
+{
+  "cycle": 105,
+  "builtAt": "2026-09-04T11:15:07.857Z",
+  "empty": false,
+  "kind": "jax-accountability",
+  "journalist": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "persona": "freelance-firebrand"
+  },
+  "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay, crisis with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Scene color is yours (weather, street, bar), including your own route through one or many bars, so long as it contradicts nothing on this slice. Do not invent a named business or institution that the sim has not supplied. Never invent careers for named people — RoleType lines are immutable. Never invent citizen names.",
+  "stink": {
+    "className": "anomaly",
+    "score": 38,
+    "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (implementation-active, safety) but 3 affected neighborhoods show contradicting CrimeIndex",
+    "ref": "output/engine_audit_c105.json patterns[29]; evidence: Initiative_Tracker row(s) 3",
+    "kind": "anomaly",
+    "desk": "civic"
+  },
+  "contradiction": {
+    "a": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+    "b": "The same Cycle 105 audit says no prior audit is available for comparison.",
+    "frame": "Civis flags a contradiction while its own comparison history is unavailable. What evidence supports the alert?",
+    "aSrc": "output/engine_audit_c105.json patterns[29].evidence.fields",
+    "bSrc": "output/engine_audit_c105.json patterns[29].measurement",
+    "scopeHoods": [
+      "West Oakland",
+      "Fruitvale",
+      "East Oakland"
+    ],
+    "measurementAvailable": false
+  },
+  "story": {
+    "ref": "output/engine_audit_c105.json patterns[29].evidence.fields",
+    "label": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+    "kind": "anomaly",
+    "angle": "Civis flags a contradiction while its own comparison history is unavailable. What evidence supports the alert?",
+    "hookLine": null,
+    "hood": "West Oakland",
+    "popids": [
+      "POP-00004",
+      "POP-00758",
+      "POP-00754",
+      "POP-00756",
+      "POP-00762",
+      "POP-01029",
+      "POP-00143",
+      "POP-01043",
+      "POP-00728",
+      "POP-00722"
+    ],
+    "citizens": [
+      "Lucia Polito — Aura Wellness Practitioner, Fruitvale",
+      "Robert Jaston — Senior Pastor / Faith Leader, West Oakland",
+      "Ophelia Brenner — Senior Pastor / Faith Leader, Fruitvale",
+      "Ramon Solano — Senior Pastor / Faith Leader, Fruitvale",
+      "Aziz Rahimi — Senior Pastor / Faith Leader, Fruitvale",
+      "Miguel Allen — Plumber, Fruitvale",
+      "Clarissa Dane — DISTRICT ATTORNEY, Fruitvale",
+      "Mei Renteria — Security guard, Fruitvale",
+      "DeShawn Avery — Community College Student, Fruitvale",
+      "Daniel Cloak — Bakery Worker, West Oakland"
+    ],
+    "stinkClass": "anomaly",
+    "stinkScore": 38
+  },
+  "prewrite": {
+    "method": "TWO_SIDED_DATA_AUDIT",
+    "anchorFacts": [
+      "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+      "The same Cycle 105 audit says no prior audit is available for comparison."
+    ],
+    "evidence": [
+      {
+        "side": "A",
+        "text": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+        "src": "output/engine_audit_c105.json patterns[29].evidence.fields"
+      },
+      {
+        "side": "B",
+        "text": "The same Cycle 105 audit says no prior audit is available for comparison.",
+        "src": "output/engine_audit_c105.json patterns[29].measurement"
+      }
+    ],
+    "scopeHoods": [
+      "West Oakland",
+      "Fruitvale",
+      "East Oakland"
+    ],
+    "missing": [
+      "the prior comparison needed to validate the flagged direction",
+      "an office response to the data mismatch"
+    ],
+    "closeQuestion": "Civis flags a contradiction while its own comparison history is unavailable. What evidence supports the alert?"
+  },
+  "citizens": [
+    {
+      "popid": "POP-00004",
+      "name": "Lucia Polito",
+      "role": "Aura Wellness Practitioner",
+      "neighborhood": "Fruitvale",
+      "careerStage": "retired",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "Lucia Polito (POP-00004) — role: Aura Wellness Practitioner; neighborhood: Fruitvale; born: 1987; careerStage: retired; wealth: 7; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 3",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-00758",
+      "name": "Robert Jaston",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "West Oakland",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00028",
+      "profile": "Robert Jaston (POP-00758) — role: Senior Pastor / Faith Leader; neighborhood: West Oakland; born: 1979; careerStage: mid-career; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+      "why": "stink-handle"
+    },
+    {
+      "popid": "POP-00754",
+      "name": "Ophelia Brenner",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00028",
+      "profile": "Ophelia Brenner (POP-00754) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1979; careerStage: mid-career; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00756",
+      "name": "Ramon Solano",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "careerStage": "retired",
+      "employerBizId": "BIZ-00028",
+      "profile": "Ramon Solano (POP-00756) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1976; careerStage: retired; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-00762",
+      "name": "Aziz Rahimi",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Fruitvale",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00028",
+      "profile": "Aziz Rahimi (POP-00762) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1991; careerStage: mid-career; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+      "why": "same-hood-signal"
+    },
+    {
+      "popid": "POP-01029",
+      "name": "Miguel Allen",
+      "role": "Plumber",
+      "neighborhood": "Fruitvale",
+      "careerStage": "entry-level",
+      "employerBizId": "UNTRACKED",
+      "profile": "Miguel Allen (POP-01029) — role: Plumber; neighborhood: Fruitvale; born: 1982; careerStage: entry-level; wealth: 0; employerBiz: UNTRACKED; skills: Trades; tier: 4",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00143",
+      "name": "Clarissa Dane",
+      "role": "DISTRICT ATTORNEY",
+      "neighborhood": "Fruitvale",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00022",
+      "profile": "Clarissa Dane (POP-00143) — role: DISTRICT ATTORNEY; neighborhood: Fruitvale; born: 1995; careerStage: mid-career; wealth: 6; employerBiz: BIZ-00022; skills: Government & Civic; tier: 2",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-01043",
+      "name": "Mei Renteria",
+      "role": "Security guard",
+      "neighborhood": "Fruitvale",
+      "careerStage": "entry-level",
+      "employerBizId": "BIZ-00023",
+      "profile": "Mei Renteria (POP-01043) — role: Security guard; neighborhood: Fruitvale; born: 2002; careerStage: entry-level; wealth: 0; employerBiz: BIZ-00023; skills: Government & Civic; tier: 4",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00728",
+      "name": "DeShawn Avery",
+      "role": "Community College Student",
+      "neighborhood": "Fruitvale",
+      "careerStage": "mid-career",
+      "employerBizId": "SELF_EMPLOYED",
+      "profile": "DeShawn Avery (POP-00728) — role: Community College Student; neighborhood: Fruitvale; born: 2007; careerStage: mid-career; wealth: 5; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 4",
+      "why": "bond-hop from interview pool"
+    },
+    {
+      "popid": "POP-00722",
+      "name": "Daniel Cloak",
+      "role": "Bakery Worker",
+      "neighborhood": "West Oakland",
+      "careerStage": "mid-career",
+      "employerBizId": "BIZ-00028",
+      "profile": "Daniel Cloak (POP-00722) — role: Bakery Worker; neighborhood: West Oakland; born: 1986; careerStage: mid-career; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 4",
+      "why": "bond-hop from interview pool"
+    }
+  ],
+  "bonds": [
+    {
+      "bondId": "BOND-39BB228F",
+      "a": "POP-00004",
+      "b": "POP-01029",
+      "type": "family",
+      "intensity": "10",
+      "origin": "household",
+      "neighborhood": "Fruitvale",
+      "aName": "Lucia Polito",
+      "bName": "Miguel Allen",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-7D996507",
+      "a": "POP-00762",
+      "b": "POP-00143",
+      "type": "friendship",
+      "intensity": "3.41",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Aziz Rahimi",
+      "bName": "Clarissa Dane",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-48393C67",
+      "a": "POP-01043",
+      "b": "POP-00762",
+      "type": "friendship",
+      "intensity": "4.82",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Mei Renteria",
+      "bName": "Aziz Rahimi",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-175291E8",
+      "a": "POP-00756",
+      "b": "POP-00728",
+      "type": "professional",
+      "intensity": "6",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Ramon Solano",
+      "bName": "DeShawn Avery",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-D06561BB",
+      "a": "POP-00758",
+      "b": "POP-00722",
+      "type": "professional",
+      "intensity": "4",
+      "origin": "neighbor",
+      "neighborhood": "West Oakland",
+      "aName": "Robert Jaston",
+      "bName": "Daniel Cloak",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-3A7B7CFD",
+      "a": "POP-00754",
+      "b": "POP-00728",
+      "type": "professional",
+      "intensity": "3",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Ophelia Brenner",
+      "bName": "DeShawn Avery",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    },
+    {
+      "bondId": "BOND-C9092434",
+      "a": "POP-00503",
+      "b": "POP-00762",
+      "type": "friendship",
+      "intensity": "3.41",
+      "origin": "neighbor",
+      "neighborhood": "Fruitvale",
+      "aName": "Rose Delgado",
+      "bName": "Aziz Rahimi",
+      "note": "Real bond — voice may reference this edge; do not invent careers for either party"
+    }
+  ],
+  "scene": {
+    "weather": "Season: Winter | Weather: 49°F rain, S 18 mph, rain (frontState RAIN), humidity 90, visibility 6",
+    "hood": "West Oakland",
+    "neighborhoodTexture": "The TacoRail drive-thru line stretches longer than usual today, and a few storefronts sit empty with handwritten \"Closed\" signs taped to the windows.",
+    "whoLivedIt": [],
+    "chaos": [],
+    "colorRoom": "You may invent one or many bar/street/sensory scenes and Jax's own presence or route through them, so long as the color contradicts no supplied sim fact. A generic bar is persona texture, not a new canon business. Named people must stay on the CITIZENS list or be unnamed. Do not invent a named business or institution. RoleType is immutable — do not reassign careers."
+  },
+  "gaps": {
+    "note": "Ledgers/surfaces that would deepen Jax further if wired or fixed",
+    "missingOrThin": [
+      {
+        "source": "EmployerBizId → Business_Ledger name/address",
+        "status": "gap",
+        "why": "RoleType alone; no shop name/street for employer scene color without inventing"
+      },
+      {
+        "source": "Cultural_Ledger venues by neighborhood",
+        "status": "gap-on-disk",
+        "why": "Bar/venue canon list not auto-attached to slice — Jax opens in bars; needs hood venue pointer"
+      },
+      {
+        "source": "Faith_Ledger / Faith_Organizations by hood",
+        "status": "partial",
+        "why": "Texture file sometimes names congregations; not joined to stink hood systematically"
+      },
+      {
+        "source": "LifeHistory_Log raw (beyond Who Lived It digest)",
+        "status": "partial",
+        "why": "Digest is tag-summary; full event prose would deepen street color without inventing people"
+      },
+      {
+        "source": "Relationship_Bonds live refresh",
+        "status": "stale-risk",
+        "why": "bond-ledger-live.tsv may lag; bond-hop quality depends on export freshness"
+      },
+      {
+        "source": "Neighborhood_Map row metrics on slice",
+        "status": "partial",
+        "why": "Stink label carries some decay numbers; full hood board not embedded as color (avoid engine jargon in prose)"
+      },
+      {
+        "source": "Map hoods with zero Simulation_Ledger residents (e.g. Brooklyn on C102)",
+        "status": "sim-gap",
+        "why": "Audit can flag decay for a hood nobody lives in on the ledger — stink is real, interview pool empty; slice walks to next candidate with residents"
+      },
+      {
+        "source": "Citizen pages / DialState",
+        "status": "via-citizenVoice",
+        "why": "Quote stage loads dials; slice does not pre-print dial prose (correct — voice owns it)"
+      }
+    ],
+    "colorAllowed": [
+      "Weather line from Riley/world_summary",
+      "neighborhood_texture paragraph (perception-only, often nameless)",
+      "Who Lived It lines for this hood",
+      "Chaos_Cars rows touching hood/citizen",
+      "Bond edges among pool (professional/friend/family)"
+    ]
+  },
+  "pointers": [
+    "output/cron-compare/stink_c105.json",
+    "output/desk_signal_c105.json",
+    "output/world_summary_c105.md",
+    "output/neighborhood_texture_c105.md",
+    "output/engine_audit_c105.json",
+    "output/engine_audit_c105.json patterns[29].evidence.fields",
+    "output/engine_audit_c105.json patterns[29].measurement",
+    "output/engine_audit_c105.json patterns[29]; evidence: Initiative_Tracker row(s) 3"
+  ],
+  "reportMeta": {
+    "illnessRate": 5.2,
+    "maxScore": 38,
+    "shouldForce": true,
+    "candidateCount": 30
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "luis-navarro",
+  "byline": "Luis Navarro",
+  "bylinePopid": "POP-00636",
+  "article": "output/cron-compare/staged/civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Elio Perez",
+        "role": "mentioned",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Depak Ying",
+        "role": "mentioned",
+        "popid": "POP-00210"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "city-elio-perez-anomaly",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I’ve seen how the council’s inaction leaves us feeling forgotten, like our voices don’t matter when it comes to fixing what’s broken in our neighborhoods.",
+        "sourceRef": "citizenVoice PRESS Elio Perez"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-1cd0c8248dc9",
+    "draftSha256": "3eb3f997f92aeb3e4bf42cebc2a897f0d73973f1f167755ae099706df01de69b",
+    "verdict": "output/cron-compare/civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-09-03T23:17:00.476Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:13.979Z"
+}

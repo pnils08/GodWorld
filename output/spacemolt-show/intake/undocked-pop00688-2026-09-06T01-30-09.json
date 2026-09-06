@@ -1,0 +1,43 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-09-06T01:40:26.042Z",
+  "POPID": "POP-00688",
+  "Cycle": 105,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00688-2026-09-06T01-30-09",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00688-2026-09-06T01-30-09.json",
+  "Holder": "Merkin Jumper",
+  "CreditsDelta": null,
+  "Magnitude": 1,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Merkin Jumper credits=null systems=sol,alpha_centauri,sirius",
+  "DecidedAt": "2026-09-06T01:40:26.044Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 105,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00688",
+    "Holder": "Merkin Jumper",
+    "EpisodeId": "undocked-pop00688-Y3C1-e2",
+    "CreditsDelta": null,
+    "Systems": [
+      "sol",
+      "alpha_centauri",
+      "sirius"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 1,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-09-06T01-30-09.json"
+  }
+}

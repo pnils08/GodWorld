@@ -1,0 +1,15 @@
+{
+  "office": "council_d5",
+  "agentDir": "civic-office-council-d5",
+  "holder": "Janae Rivers",
+  "popid": "POP-00043",
+  "title": "City Council District 5",
+  "date": "2026-09-03",
+  "cycle": 105,
+  "model": "qwen/qwen3-235b-a22b",
+  "statement": "The launch of D1 expansion under the Oakland Alternative Response Initiative is a start, but East Oakland’s crime index at 1.17—nearly double the city’s 0.699—demands more than just programmatic checkboxes. Safety here isn’t a pilot; it’s survival. We’ll vote YES, but only if the monthly audits explicitly tie resource allocation to reducing violent crime disparities and empower community liaisons like Jerome Pittman to shape the on-the-ground model. East Oakland’s resilience has always been met with systemic abandonment—this expansion must break that cycle.",
+  "action": "YES",
+  "numberMoved": "D1",
+  "ranAt": "2026-09-03T10:46:30.489Z",
+  "fellBackFrom": null
+}

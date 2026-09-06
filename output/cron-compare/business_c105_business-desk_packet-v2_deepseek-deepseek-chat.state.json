@@ -30,16 +30,52 @@
       ],
       "sceneRule": "Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. Headcount only when snapshot lists it. No invented owners or employee counts."
     },
-    "writingMode": "SOURCE_BRIEF"
+    "writingMode": "SOURCE_BRIEF",
+    "threadRule": "signal.openThreads are stories your desk already has running. Your article advances one automatically when it prints a person from that thread. If your piece is the one that ENDS a thread, put `THREAD-CLOSED: <its slug, character for character>` as the very last line. Otherwise write nothing about threads."
   },
   "signal": {
     "kind": "story-signal",
     "hood": "Rockridge",
     "src": "world_summary ## What Moved · trajectory",
     "plan": {
-      "focus": "Economic trajectory of Rockridge retail, specifically Cozy Pot and HotSlice Pizza, to determine if the uptick reflects sustained neighborhood investment or transient activity.",
-      "closeQuestion": "Is Rockridge's retail rise built on new roots or just better weather?"
-    }
+      "focus": "The lived experience behind Rockridge's retail uptick—what's bringing people in, how businesses are adapting, whether this feels different from past surges.",
+      "closeQuestion": "Does this feel like Rockridge finding its new normal, or just a good stretch?"
+    },
+    "openThreads": [
+      {
+        "slug": "grand-lake-vinnie-keane-retail-decay",
+        "label": "grand-lake-vinnie-keane-retail-decay | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00001",
+          "POP-00002",
+          "POP-00170"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "grand-lake-amara-keane-retail-decay",
+        "label": "grand-lake-amara-keane-retail-decay | C104→C104 | 1 article(s) | opened 1",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00002",
+          "POP-00170",
+          "POP-00198"
+        ],
+        "lastCycle": 104
+      },
+      {
+        "slug": "dimond-clarence-moody-hood-cooling",
+        "label": "dimond-clarence-moody-hood-cooling | C103→C103 | 1 article(s) | opened 1",
+        "hood": "Dimond",
+        "popids": [
+          "POP-00730",
+          "POP-00170",
+          "POP-00201"
+        ],
+        "lastCycle": 103
+      }
+    ]
   },
   "exposure": {
     "subjects": [
@@ -49,66 +85,30 @@
         "profile": "Depak Ying — Server — Rockridge",
         "quotationEligible": true,
         "src": "packet.W1.exposure"
-      },
-      {
-        "pop": "POP-00267",
-        "name": "Jacob King",
-        "profile": "Jacob King — Line cook — Rockridge",
-        "quotationEligible": true,
-        "src": "packet.W1.exposure"
-      },
-      {
-        "pop": "POP-00651",
-        "name": "Howard Yell",
-        "profile": "Howard Yell — Barista — Rockridge",
-        "quotationEligible": true,
-        "src": "packet.W1.exposure"
       }
     ],
     "sources": [
       {
-        "id": "Q-POP-00210-e900c7b899",
+        "id": "Q-POP-00210-812c90f6df",
         "pop": "POP-00210",
         "name": "Depak Ying",
-        "quote": "I've been serving in Rockridge for years, and lately, I see more faces at Cozy Pot and HotSlice Pizza—regulars and newcomers both. It feels like the neighborhood's settling into something steady, not just a flash in the pan.",
+        "quote": "I’ve noticed more people walking around, especially in the evenings—places like Cozy Pot and HotSlice Pizza seem busier than usual. It feels like there’s a buzz in the air, and businesses are definitely adapting to keep up with the crowd.",
         "factIds": [
           "F-2ba26a162863",
           "F-f95a888b8d34"
         ],
         "src": "packet.W2[POP-00210]"
-      },
-      {
-        "id": "Q-POP-00267-cb5db499cc",
-        "pop": "POP-00267",
-        "name": "Jacob King",
-        "quote": "I've been working the line at a place down the street for years, and lately I've noticed more folks coming in from Cozy Pot and HotSlice Pizza during their breaks—seems like those spots are holding their own. But who knows? This neighborhood always has its ups and downs.",
-        "factIds": [
-          "F-2ba26a162863",
-          "F-f95a888b8d34"
-        ],
-        "src": "packet.W2[POP-00267]"
-      },
-      {
-        "id": "Q-POP-00651-508ae9134f",
-        "pop": "POP-00651",
-        "name": "Howard Yell",
-        "quote": "I’ve noticed Cozy Pot and HotSlice Pizza seem busier lately, but it’s hard to tell if it’s just a seasonal thing or if the neighborhood’s really turning a corner.",
-        "factIds": [
-          "F-2ba26a162863",
-          "F-f95a888b8d34"
-        ],
-        "src": "packet.W2[POP-00651]"
       }
     ],
     "excludedLeads": [
       {
         "from": "Jordan Velez",
-        "text": "Festive Fireside's events might be pulling people deeper into Rockridge rather than just passing through",
+        "text": "Are new residents moving into the area, or is this purely commercial activity?",
         "usable": false
       },
       {
         "from": "Jordan Velez",
-        "text": "New residential moves could be driving sustained traffic rather than one-off visitors",
+        "text": "Is there any coordination between businesses to capitalize on the momentum?",
         "usable": false
       }
     ]
@@ -249,7 +249,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-981cf43633ab",
+    "id": "AM-17d2e7ca15ee",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -309,37 +309,15 @@
     ],
     "approvedQuotes": [
       {
-        "id": "Q-POP-00210-e900c7b899",
+        "id": "Q-POP-00210-812c90f6df",
         "speakerId": "POP-00210",
         "speakerName": "Depak Ying",
-        "text": "I've been serving in Rockridge for years, and lately, I see more faces at Cozy Pot and HotSlice Pizza—regulars and newcomers both. It feels like the neighborhood's settling into something steady, not just a flash in the pan.",
+        "text": "I’ve noticed more people walking around, especially in the evenings—places like Cozy Pot and HotSlice Pizza seem busier than usual. It feels like there’s a buzz in the air, and businesses are definitely adapting to keep up with the crowd.",
         "factIds": [
           "F-2ba26a162863",
           "F-f95a888b8d34"
         ],
         "src": "packet.W2[POP-00210]"
-      },
-      {
-        "id": "Q-POP-00267-cb5db499cc",
-        "speakerId": "POP-00267",
-        "speakerName": "Jacob King",
-        "text": "I've been working the line at a place down the street for years, and lately I've noticed more folks coming in from Cozy Pot and HotSlice Pizza during their breaks—seems like those spots are holding their own. But who knows? This neighborhood always has its ups and downs.",
-        "factIds": [
-          "F-2ba26a162863",
-          "F-f95a888b8d34"
-        ],
-        "src": "packet.W2[POP-00267]"
-      },
-      {
-        "id": "Q-POP-00651-508ae9134f",
-        "speakerId": "POP-00651",
-        "speakerName": "Howard Yell",
-        "text": "I’ve noticed Cozy Pot and HotSlice Pizza seem busier lately, but it’s hard to tell if it’s just a seasonal thing or if the neighborhood’s really turning a corner.",
-        "factIds": [
-          "F-2ba26a162863",
-          "F-f95a888b8d34"
-        ],
-        "src": "packet.W2[POP-00651]"
       }
     ],
     "approvedSubjects": [
@@ -347,20 +325,6 @@
         "id": "POP-00210",
         "name": "Depak Ying",
         "profile": "Depak Ying — Server — Rockridge",
-        "src": "packet.W1.exposure",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00267",
-        "name": "Jacob King",
-        "profile": "Jacob King — Line cook — Rockridge",
-        "src": "packet.W1.exposure",
-        "quotationEligible": true
-      },
-      {
-        "id": "POP-00651",
-        "name": "Howard Yell",
-        "profile": "Howard Yell — Barista — Rockridge",
         "src": "packet.W1.exposure",
         "quotationEligible": true
       }
@@ -382,12 +346,12 @@
     "unverifiedLeads": [
       {
         "from": "Jordan Velez",
-        "text": "Festive Fireside's events might be pulling people deeper into Rockridge rather than just passing through",
+        "text": "Are new residents moving into the area, or is this purely commercial activity?",
         "publishable": false
       },
       {
         "from": "Jordan Velez",
-        "text": "New residential moves could be driving sustained traffic rather than one-off visitors",
+        "text": "Is there any coordination between businesses to capitalize on the momentum?",
         "publishable": false
       }
     ],

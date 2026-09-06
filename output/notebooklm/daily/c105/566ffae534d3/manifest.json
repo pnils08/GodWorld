@@ -1,0 +1,85 @@
+{
+  "artifactClass": "NLM_DAILY_RUN",
+  "sourceVersion": "1.7",
+  "canonStatus": "NOT_CANON",
+  "cycle": 105,
+  "generatedAt": "2026-09-04T20:14:52.527Z",
+  "lastAttemptAt": "2026-09-04T20:14:52.527Z",
+  "hours": 36,
+  "packHash": "566ffae534d325fc7d890caaf07b5755c11465902cf0eab350a78706f7997368",
+  "worldSummary": "output/world_summary_c105.md",
+  "citizenDigest": "output/citizen-day-digest.md",
+  "reports": [
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.staged-2320.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat.staged.md"
+    },
+    {
+      "classification": "STAGED",
+      "path": "output/cron-compare/staged/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2319.md"
+    }
+  ],
+  "flaggedReports": [],
+  "routingShadow": {
+    "version": "NLM-DAILY-ROUTER/1",
+    "mode": "shadow",
+    "profile": "REPORTED_DAY",
+    "format": "deep_dive",
+    "length": "default",
+    "activationEligible": true,
+    "reportedDayThreshold": 3,
+    "sourceClasses": [
+      "WORLD_STATE",
+      "CITIZEN_DIGEST",
+      "W1_CHASE",
+      "W2_QUOTES",
+      "W3_PASSED",
+      "ENGINE_CIVIC_SIGNAL"
+    ],
+    "reasonCodes": [
+      "RHEA_PASSED_6",
+      "REPORTED_THRESHOLD_MET_3"
+    ],
+    "dispositionCounts": {
+      "passed": 6,
+      "rheaFlagged": 0,
+      "neverGated": 0
+    },
+    "fingerprint": "8d2f1c30def12715e7a55e05f7cfbc96b9ed7179d1fa8136db6478028632c226"
+  },
+  "newsroomPulse": {
+    "fingerprint": "a30a0aa9ce9c91ccb01a20c721ef1f5fa6f99d1d59144b4cebd371207c6d5aa2",
+    "counts": {
+      "angles": 12,
+      "asks": 12,
+      "fanoutAssignments": 7,
+      "w2Ready": 10,
+      "quotes": 29,
+      "passed": 6,
+      "rheaFlagged": 0,
+      "neverGated": 0,
+      "flagged": 0,
+      "pending": 6
+    },
+    "priorCompletedCycle": null
+  },
+  "archiveNotebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
+  "newsroomNotebookId": "53537b20-01a9-44c7-966c-1bdc5a491c1a",
+  "dryRun": true
+}

@@ -1,10 +1,9 @@
 {
-  "ranAt": "2026-09-04T22:06:50.615Z",
+  "ranAt": "2026-09-05T17:00:42.578Z",
   "cycle": 105,
   "reportComplete": 20,
   "candidates": [
     "civic_c105_trevor-shimizu_packet-v2",
-    "culture_c105_elliot-graye_packet-v2",
     "culture_c105_mason-ortega_packet-v2"
   ],
   "retried": [

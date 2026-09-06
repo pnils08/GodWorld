@@ -28,5 +28,6 @@
     "recorded": true,
     "out": "om ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }\n{\n  \"popId\": \"POP-00013\",\n  \"name\": \"Maria Keen\",\n  \"recorded\": true,\n  \"text\": \"filed: Dimond Pharmacy Draws Dimmed Spotlight\"\n}"
   },
-  "ranAt": "2026-08-31T23:17:31.107Z"
+  "ranAt": "2026-08-31T23:17:31.107Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:14.008Z"
 }

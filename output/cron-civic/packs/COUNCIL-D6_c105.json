@@ -1,0 +1,175 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00044",
+    "name": "Elliott Crane",
+    "role": "City Council District 6",
+    "officeId": "COUNCIL-D6",
+    "district": "D6",
+    "faction": "CRC",
+    "agentDir": "civic-office-council-d6",
+    "initiative": null,
+    "dials": {
+      "approval": 52
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "stand with Piedmont Ave or leave it"
+  },
+  "pulse": {
+    "className": "district-heat",
+    "score": 213.54545454545456,
+    "label": "Piedmont Ave — sentiment 0.75 vs city 0.885",
+    "lever": "stand with Piedmont Ave or leave it",
+    "hood": "Piedmont Ave",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.75,
+      "citySentiment": 0.8854545454545455,
+      "crime": 0.39,
+      "cityCrime": 0.6990909090909091,
+      "heat": 13.54545454545455,
+      "outlier": true
+    }
+  },
+  "prewrite": {
+    "claim": "stand with Piedmont Ave or leave it",
+    "lineFacts": [
+      "approval 52",
+      "Piedmont Ave: sentiment 0.75 vs city 0.885; crime index 0.39 vs city 0.699; steady momentum 5",
+      "Piedmont Ave crime: property 24, violent 15, incidents 3 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "Piedmont Ave: sentiment 0.75 vs city 0.885; crime index 0.39 vs city 0.699; retail 8.7; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Montclair",
+      "Piedmont Ave"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-00049",
+        "name": "Pamela Amelia",
+        "neighborhood": "Piedmont Ave",
+        "role": "Audit Commission",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.75 vs city 0.885"
+      },
+      {
+        "pop": "POP-00080",
+        "name": "Richie Haynes",
+        "neighborhood": "Piedmont Ave",
+        "role": "Starting Pitcher, Midland RockHounds (AA)",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.75 vs city 0.885"
+      },
+      {
+        "pop": "POP-00137",
+        "name": "Kimberly Cho",
+        "neighborhood": "Piedmont Ave",
+        "role": "DEPUTY CHIEF OF OPERATIONS",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.75 vs city 0.885"
+      },
+      {
+        "pop": "POP-00166",
+        "name": "Elliot Marbury",
+        "neighborhood": "Piedmont Ave",
+        "role": "Journalist, Data Desk",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in Piedmont Ave — Piedmont Ave — sentiment 0.75 vs city 0.885"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D6",
+      "t": "FACT",
+      "text": "Elliott Crane holds COUNCIL-D6 at approval 52",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-heat-PiedmontAve",
+      "t": "FACT",
+      "text": "Piedmont Ave: sentiment 0.75 vs city 0.885; crime index 0.39 vs city 0.699; steady momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map ranked vs city"
+    },
+    {
+      "id": "F-crime-PiedmontAve",
+      "t": "FACT",
+      "text": "Piedmont Ave crime: property 24, violent 15, incidents 3 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-PiedmontAve",
+      "t": "FACT",
+      "text": "Piedmont Ave: sentiment 0.75 vs city 0.885; crime index 0.39 vs city 0.699; retail 8.7; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D6",
+        "PopId": "POP-00044",
+        "Holder": "Elliott Crane",
+        "District": "D6",
+        "Approval": "52"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D7",
+        "PopId": "POP-00504",
+        "Holder": "Warren Ashford",
+        "District": "D7",
+        "Faction": "CRC",
+        "Approval": 51
+      },
+      {
+        "OfficeId": "COUNCIL-D8",
+        "PopId": "POP-00505",
+        "Holder": "Nina Chen",
+        "District": "D8",
+        "Faction": "CRC",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

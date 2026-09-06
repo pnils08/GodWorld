@@ -1,17 +1,24 @@
 {
   "artifactClass": "CODEX_NOTEBOOKLM_SOURCE_INVENTORY",
   "canonStatus": "NOT_CANON",
-  "generatedAt": "2026-08-27T06:01:05.958Z",
+  "generatedAt": "2026-09-06T08:33:40.852Z",
   "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
   "notebookName": "GodWorld",
-  "total": 70,
+  "total": 75,
   "counts": {
     "publication_candidate": 37,
     "nonpublication_candidate": 1,
     "exclude_candidate": 1,
-    "needs_review": 31
+    "needs_review": 36
   },
   "sources": [
+    {
+      "id": "086a5fa7-281e-4c13-ba8b-09e011df5892",
+      "title": "00_AUDIO_DIRECTION_GUIDE — weekly — 0d3edae9363e",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
     {
       "id": "8e773c1f-8fde-4212-b138-af97df7370dd",
       "title": "1. As_Sunset of a Dynasty: The Athletics' Final Stand",
@@ -202,11 +209,25 @@
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
     },
     {
+      "id": "19673ffa-13f3-4ce4-8f1e-dc8f21e0b93a",
+      "title": "Detailed Weekly Digest 105a.txt",
+      "type": "word_doc",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "5a519026-77a2-46c6-87ea-e9dcb5c229d1",
       "title": "dispatch_c92_kono_second_song.pdf",
       "type": "pdf",
       "reviewBucket": "publication_candidate",
       "reviewReason": "title resembles an Edition or approved off-cycle publication"
+    },
+    {
+      "id": "a870cd68-4e21-4445-80e0-0709c806822e",
+      "title": "Lore: AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag (Y3C1)",
+      "type": "unknown",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
       "id": "a1722406-93b3-4ba5-afa9-61e4b82344d5",
@@ -489,8 +510,22 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "3b0b7cb7-439b-4a0c-8ea1-c3687a48432b",
+      "title": "The Cycle Pulse — Y2C104",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "defd4884-1954-4657-84af-a19e69435ba3",
       "title": "The Cycle Pulse — Y2C104",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "fe335f6a-5be4-4d67-bcd9-08e496cf2d74",
+      "title": "The Cycle Pulse — Y2C105",
       "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"

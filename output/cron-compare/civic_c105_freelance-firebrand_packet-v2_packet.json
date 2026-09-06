@@ -1,0 +1,795 @@
+{
+  "stage": "report",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "freelance-firebrand",
+  "packetContract": "LEP/2",
+  "reporter": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799"
+  },
+  "assignment": {
+    "story": {
+      "ref": "output/engine_audit_c105.json patterns[29].evidence.fields",
+      "label": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+      "kind": "anomaly",
+      "angle": "Civis flags a contradiction while its own comparison history is unavailable. What evidence supports the alert?",
+      "hookLine": null,
+      "hood": "West Oakland",
+      "popids": [
+        "POP-00004",
+        "POP-00758",
+        "POP-00754",
+        "POP-00756",
+        "POP-00762",
+        "POP-01029",
+        "POP-00143",
+        "POP-01043",
+        "POP-00728",
+        "POP-00722"
+      ],
+      "citizens": [
+        "Lucia Polito — Aura Wellness Practitioner, Fruitvale",
+        "Robert Jaston — Senior Pastor / Faith Leader, West Oakland",
+        "Ophelia Brenner — Senior Pastor / Faith Leader, Fruitvale",
+        "Ramon Solano — Senior Pastor / Faith Leader, Fruitvale",
+        "Aziz Rahimi — Senior Pastor / Faith Leader, Fruitvale",
+        "Miguel Allen — Plumber, Fruitvale",
+        "Clarissa Dane — DISTRICT ATTORNEY, Fruitvale",
+        "Mei Renteria — Security guard, Fruitvale",
+        "DeShawn Avery — Community College Student, Fruitvale",
+        "Daniel Cloak — Bakery Worker, West Oakland"
+      ],
+      "stinkClass": "anomaly",
+      "stinkScore": 38
+    }
+  },
+  "angle": "output/cron-compare/civic_c105_freelance-firebrand_packet-v2_angle.json",
+  "quotesRequested": 4,
+  "quotesLanded": 2,
+  "quotes": [
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale.",
+      "disp": "draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale.\",\n  \"fact_ids\": [\"F-35e945f3842d\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-35e945f3842d"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00004-b63c3a5b88",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00004",
+          "name": "Lucia Polito",
+          "role": "Aura Wellness Practitioner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What have you seen, felt, or understood about \"Contradiction between Oakland Alternative Response Initiative's implementation and safety readings\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "West Oakland",
+          "focus": "Contradiction between Oakland Alternative Response Initiative's implementation and safety readings",
+          "src": "output/engine_audit_c105.json patterns[29].evidence.fields"
+        },
+        "exposure": {
+          "basis": [
+            "stink-handle"
+          ],
+          "self": "Lucia Polito (POP-00004) — role: Aura Wellness Practitioner; neighborhood: Fruitvale; born: 1987; careerStage: retired; wealth: 7; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 3",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-35e945f3842d"
+          },
+          {
+            "t": "FACT",
+            "text": "The same Cycle 105 audit says no prior audit is available for comparison.",
+            "src": "output/engine_audit_c105.json patterns[29].measurement",
+            "id": "F-423d9cae7f0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 49°F rain, S 18 mph, rain (frontState RAIN), humidity 90, visibility 6",
+            "src": "World_Config/weather snapshot for C105",
+            "id": "F-4401d9dcc47b"
+          },
+          {
+            "t": "FACT",
+            "text": "The TacoRail drive-thru line stretches longer than usual today, and a few storefronts sit empty with handwritten \"Closed\" signs taped to the windows.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-d6425b14af07"
+          },
+          {
+            "t": "FACT",
+            "text": "Lucia Polito (POP-00004) — role: Aura Wellness Practitioner; neighborhood: Fruitvale; born: 1987; careerStage: retired; wealth: 7; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00004",
+            "id": "F-6a07fd69ebb6"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00756",
+      "name": "Ramon Solano",
+      "quote": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening. As a faith leader, I want to believe that our city is working to make things better, but it's hard not to feel a little uncertain when you see things that don't seem to be adding up.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening. As a faith leader, I want to believe that our city is working to make things better, but it's hard not to feel a little uncertain when you see things that don't seem to be adding up.\",\n  \"fact_ids\": [\"F-35e945f3842d\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-35e945f3842d"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00756-2f0cf43c01",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening. As a faith leader, I want to believe that our city is working to make things better, but it's hard not to feel a little uncertain when you see things that don't seem to be adding up."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00756",
+          "name": "Ramon Solano",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What have you seen, felt, or understood about \"Contradiction between Oakland Alternative Response Initiative's implementation and safety readings\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "West Oakland",
+          "focus": "Contradiction between Oakland Alternative Response Initiative's implementation and safety readings",
+          "src": "output/engine_audit_c105.json patterns[29].evidence.fields"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-signal"
+          ],
+          "self": "Ramon Solano (POP-00756) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1976; careerStage: retired; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-35e945f3842d"
+          },
+          {
+            "t": "FACT",
+            "text": "The same Cycle 105 audit says no prior audit is available for comparison.",
+            "src": "output/engine_audit_c105.json patterns[29].measurement",
+            "id": "F-423d9cae7f0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 49°F rain, S 18 mph, rain (frontState RAIN), humidity 90, visibility 6",
+            "src": "World_Config/weather snapshot for C105",
+            "id": "F-4401d9dcc47b"
+          },
+          {
+            "t": "FACT",
+            "text": "The TacoRail drive-thru line stretches longer than usual today, and a few storefronts sit empty with handwritten \"Closed\" signs taped to the windows.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-d6425b14af07"
+          },
+          {
+            "t": "FACT",
+            "text": "Ramon Solano (POP-00756) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1976; careerStage: retired; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00756",
+            "id": "F-6a11d1d76129"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "interviews": [
+    {
+      "pop": "POP-00758",
+      "name": "Robert Jaston",
+      "quote": null,
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": "contract-invalid: invalid CITIZEN_INTERVIEW/1 output: direct reaction exceeds 80 words",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been hearing about the Oakland Alternative Response Initiative, and to be honest, it's got me feeling a bit uncertain about the direction our city is headed in terms of safety. As a faith leader in West Oakland, I want to see our community thrive, but I'm not sure this initiative is having the impact we need. I'm trying to stay hopeful and focus on the positive, but it's hard not to feel a little concerned when I see the contradictions between what's being implemented and the safety readings we're seeing.\",\n  \"fact_ids\": [\"F-35e945f3842d\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00758",
+          "name": "Robert Jaston",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "As a resident of West Oakland, what have you seen, felt, or understood about \"Contradiction between Oakland Alternative Response Initiative's implementation and safety readings\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "West Oakland",
+          "focus": "Contradiction between Oakland Alternative Response Initiative's implementation and safety readings",
+          "src": "output/engine_audit_c105.json patterns[29].evidence.fields"
+        },
+        "exposure": {
+          "basis": [
+            "stink-handle",
+            "same-neighborhood"
+          ],
+          "self": "Robert Jaston (POP-00758) — role: Senior Pastor / Faith Leader; neighborhood: West Oakland; born: 1979; careerStage: mid-career; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-35e945f3842d"
+          },
+          {
+            "t": "FACT",
+            "text": "The same Cycle 105 audit says no prior audit is available for comparison.",
+            "src": "output/engine_audit_c105.json patterns[29].measurement",
+            "id": "F-423d9cae7f0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 49°F rain, S 18 mph, rain (frontState RAIN), humidity 90, visibility 6",
+            "src": "World_Config/weather snapshot for C105",
+            "id": "F-4401d9dcc47b"
+          },
+          {
+            "t": "FACT",
+            "text": "The TacoRail drive-thru line stretches longer than usual today, and a few storefronts sit empty with handwritten \"Closed\" signs taped to the windows.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-d6425b14af07"
+          },
+          {
+            "t": "FACT",
+            "text": "Robert Jaston (POP-00758) — role: Senior Pastor / Faith Leader; neighborhood: West Oakland; born: 1979; careerStage: mid-career; wealth: 8; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00758",
+            "id": "F-c612772f0ff2"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00754",
+      "name": null,
+      "quote": null,
+      "disp": null,
+      "recorded": false,
+      "fallback": "call-failed: appendReflection_: [err] [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]",
+      "claims": null,
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00754",
+          "name": "Ophelia Brenner",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What have you seen, felt, or understood about \"Contradiction between Oakland Alternative Response Initiative's implementation and safety readings\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "West Oakland",
+          "focus": "Contradiction between Oakland Alternative Response Initiative's implementation and safety readings",
+          "src": "output/engine_audit_c105.json patterns[29].evidence.fields"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-signal"
+          ],
+          "self": "Ophelia Brenner (POP-00754) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1979; careerStage: mid-career; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-35e945f3842d"
+          },
+          {
+            "t": "FACT",
+            "text": "The same Cycle 105 audit says no prior audit is available for comparison.",
+            "src": "output/engine_audit_c105.json patterns[29].measurement",
+            "id": "F-423d9cae7f0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 49°F rain, S 18 mph, rain (frontState RAIN), humidity 90, visibility 6",
+            "src": "World_Config/weather snapshot for C105",
+            "id": "F-4401d9dcc47b"
+          },
+          {
+            "t": "FACT",
+            "text": "The TacoRail drive-thru line stretches longer than usual today, and a few storefronts sit empty with handwritten \"Closed\" signs taped to the windows.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-d6425b14af07"
+          },
+          {
+            "t": "FACT",
+            "text": "Ophelia Brenner (POP-00754) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1979; careerStage: mid-career; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00754",
+            "id": "F-a950d80895ed"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale.",
+      "disp": "draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale.\",\n  \"fact_ids\": [\"F-35e945f3842d\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-35e945f3842d"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00004-b63c3a5b88",
+        "authoredQuote": true,
+        "publishableQuote": "I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00004",
+          "name": "Lucia Polito",
+          "role": "Aura Wellness Practitioner",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What have you seen, felt, or understood about \"Contradiction between Oakland Alternative Response Initiative's implementation and safety readings\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "West Oakland",
+          "focus": "Contradiction between Oakland Alternative Response Initiative's implementation and safety readings",
+          "src": "output/engine_audit_c105.json patterns[29].evidence.fields"
+        },
+        "exposure": {
+          "basis": [
+            "stink-handle"
+          ],
+          "self": "Lucia Polito (POP-00004) — role: Aura Wellness Practitioner; neighborhood: Fruitvale; born: 1987; careerStage: retired; wealth: 7; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 3",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-35e945f3842d"
+          },
+          {
+            "t": "FACT",
+            "text": "The same Cycle 105 audit says no prior audit is available for comparison.",
+            "src": "output/engine_audit_c105.json patterns[29].measurement",
+            "id": "F-423d9cae7f0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 49°F rain, S 18 mph, rain (frontState RAIN), humidity 90, visibility 6",
+            "src": "World_Config/weather snapshot for C105",
+            "id": "F-4401d9dcc47b"
+          },
+          {
+            "t": "FACT",
+            "text": "The TacoRail drive-thru line stretches longer than usual today, and a few storefronts sit empty with handwritten \"Closed\" signs taped to the windows.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-d6425b14af07"
+          },
+          {
+            "t": "FACT",
+            "text": "Lucia Polito (POP-00004) — role: Aura Wellness Practitioner; neighborhood: Fruitvale; born: 1987; careerStage: retired; wealth: 7; employerBiz: SELF_EMPLOYED; skills: Small Business; tier: 3",
+            "src": "Simulation_Ledger profile for POP-00004",
+            "id": "F-6a07fd69ebb6"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00756",
+      "name": "Ramon Solano",
+      "quote": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening. As a faith leader, I want to believe that our city is working to make things better, but it's hard not to feel a little uncertain when you see things that don't seem to be adding up.",
+      "disp": "even-keeled, unremarkable",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening. As a faith leader, I want to believe that our city is working to make things better, but it's hard not to feel a little uncertain when you see things that don't seem to be adding up.\",\n  \"fact_ids\": [\"F-35e945f3842d\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-35e945f3842d"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00756-2f0cf43c01",
+        "authoredQuote": true,
+        "publishableQuote": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening. As a faith leader, I want to believe that our city is working to make things better, but it's hard not to feel a little uncertain when you see things that don't seem to be adding up."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00756",
+          "name": "Ramon Solano",
+          "role": "Senior Pastor / Faith Leader",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Jax Caldera",
+          "question": "What have you seen, felt, or understood about \"Contradiction between Oakland Alternative Response Initiative's implementation and safety readings\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "anomaly",
+          "hood": "West Oakland",
+          "focus": "Contradiction between Oakland Alternative Response Initiative's implementation and safety readings",
+          "src": "output/engine_audit_c105.json patterns[29].evidence.fields"
+        },
+        "exposure": {
+          "basis": [
+            "same-hood-signal"
+          ],
+          "self": "Ramon Solano (POP-00756) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1976; careerStage: retired; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+          "editorialTarget": false
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "Oakland Alternative Response Initiative is listed as implementation active, while Civis Systems flags readings in West Oakland, Fruitvale, East Oakland against an expected downward safety direction.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-35e945f3842d"
+          },
+          {
+            "t": "FACT",
+            "text": "The same Cycle 105 audit says no prior audit is available for comparison.",
+            "src": "output/engine_audit_c105.json patterns[29].measurement",
+            "id": "F-423d9cae7f0d"
+          },
+          {
+            "t": "FACT",
+            "text": "Season: Winter | Weather: 49°F rain, S 18 mph, rain (frontState RAIN), humidity 90, visibility 6",
+            "src": "World_Config/weather snapshot for C105",
+            "id": "F-4401d9dcc47b"
+          },
+          {
+            "t": "FACT",
+            "text": "The TacoRail drive-thru line stretches longer than usual today, and a few storefronts sit empty with handwritten \"Closed\" signs taped to the windows.",
+            "src": "output/engine_audit_c105.json patterns[29].evidence.fields",
+            "id": "F-d6425b14af07"
+          },
+          {
+            "t": "FACT",
+            "text": "Ramon Solano (POP-00756) — role: Senior Pastor / Faith Leader; neighborhood: Fruitvale; born: 1976; careerStage: retired; wealth: 7; employerBiz: BIZ-00028; skills: Faith & Community; tier: 2",
+            "src": "Simulation_Ledger profile for POP-00756",
+            "id": "F-6a11d1d76129"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    }
+  ],
+  "ranAt": "2026-09-04T18:16:20.376Z"
+}

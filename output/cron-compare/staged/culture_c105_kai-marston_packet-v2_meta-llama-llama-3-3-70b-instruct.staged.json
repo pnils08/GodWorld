@@ -1,0 +1,61 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "105",
+  "persona": "kai-marston",
+  "byline": "Kai Marston",
+  "bylinePopid": "POP-00158",
+  "article": "output/cron-compare/staged/culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Melton Neilon",
+        "role": "quoted-source",
+        "popid": "POP-00170"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Elio Perez",
+        "role": "quoted-source",
+        "popid": "POP-00201"
+      },
+      {
+        "name": "Depak Ying",
+        "role": "quoted-source",
+        "popid": "POP-00210"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "city-depak-ying-story-signal",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I've heard The Corliss Family Block Party is happening and I'm looking forward to it, it sounds like a great way to bring the community together.",
+        "sourceRef": "citizenVoice PRESS Melton Neilon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-71109c625d66",
+    "draftSha256": "2bfbcfc16e9f9d31bfb85bbbaf69fcf9aed046c8245102b5619b9b25997118a5",
+    "verdict": "output/cron-compare/culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-03T23:18:18.798Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:14.000Z"
+}

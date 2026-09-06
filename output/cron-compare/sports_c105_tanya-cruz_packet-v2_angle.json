@@ -230,32 +230,39 @@
   "angleRead": {
     "name": "Tanya Cruz",
     "popid": "POP-00014",
-    "text": "I'm planning to focus on the Oaks' preseason struggles, particularly Dame Sarr's performance. The clubhouse vibe after an 0-3 start will be key. I want to capture the team's mindset and any adjustments they're making.",
+    "text": "I’m heading into the Oaks clubhouse after their third preseason loss. The energy feels heavy, but I want to see how the team is processing this rough start. Dame Sarr’s performance—7 points, 3 rebounds, and 3 steals—stands out, but it’s not translating to wins. Coen Carr’s 14 points and solid three-point shooting show promise, but the team’s chemistry seems off. I’ll focus on how Coach Wilson Shepard is addressing the losses and whether the players are staying optimistic or starting to crack under the pressure.",
     "plan": {
-      "chase": "I'm planning to focus on the Oaks' preseason struggles, particularly Dame Sarr's performance. The clubhouse vibe after an 0-3 start will be key. I want to capture the team's mindset and any adjustments they're making.",
-      "focus": "Dame Sarr's performance and the Oaks' preseason record.",
-      "why": "The Oaks are 0-3 in the preseason, and Dame Sarr's stats suggest he's a key player to watch.",
+      "chase": "I’m heading into the Oaks clubhouse after their third preseason loss. The energy feels heavy, but I want to see how the team is processing this rough start. Dame Sarr’s performance—7 points, 3 rebounds, and 3 steals—stands out, but it’s not translating to wins. Coen Carr’s 14 points and solid three-point shooting show promise, but the team’s chemistry seems off. I’ll focus on how Coach Wilson Shepard is addressing the losses and whether the players are staying optimistic or starting to crack under the pressure.",
+      "focus": "Team morale and Coach Wilson Shepard’s approach to the 0-3 preseason start.",
+      "why": "The Oaks’ preseason struggles raise questions about team cohesion and leadership. Understanding how the players and coach are handling the losses could provide insight into their readiness for the regular season.",
       "checks": [
-        "Is Dame Sarr taking on more responsibility?",
-        "How is the team responding to the slow start?"
+        "Is Dame Sarr’s defensive effort (3 steals) being overshadowed by the losses?",
+        "How is Coen Carr’s scoring impacting the team’s overall performance?",
+        "What adjustments is Coach Wilson Shepard making to turn things around?"
       ],
       "targets": [
         {
           "pop": "POP-01025",
-          "question": "How are you adjusting to the preseason challenges?",
+          "question": "How are you staying focused despite the team’s slow start?",
           "basis": "Dame Sarr recorded 7pts and 3 rebounds and 3stls."
         },
         {
+          "pop": "POP-01026",
+          "question": "How do you see your role evolving as the preseason continues?",
+          "basis": "Coen Carr recorded 14pts and 3-4 3 points."
+        },
+        {
           "pop": "POP-01022",
-          "question": "What changes are you considering to turn the season around?",
+          "question": "What’s your message to the team after three straight losses?",
           "basis": "The Oaks preseason record is 0-3."
         }
       ],
-      "interpretation": "The Oaks' preseason struggles might be a sign of growing pains or a need for strategic adjustments.",
+      "interpretation": "The Oaks’ preseason struggles might be a sign of growing pains or a lack of cohesion. Dame Sarr’s defensive effort and Coen Carr’s scoring show individual potential, but the team needs to find a way to gel.",
       "unverifiedLead": [
-        "Is there a shift in team dynamics affecting performance?"
+        "Are there underlying tensions in the locker room contributing to the losses?",
+        "Is the team’s preseason schedule tougher than expected, affecting morale?"
       ],
-      "closeQuestion": "What’s the team’s outlook for the next game?"
+      "closeQuestion": "Can the Oaks turn this preseason around, or are these losses a sign of deeper issues?"
     }
   },
   "lanePicks": [
@@ -310,5 +317,5 @@
     }
   ],
   "laneEntries": 12,
-  "ranAt": "2026-08-31T11:16:20.089Z"
+  "ranAt": "2026-09-03T11:17:07.329Z"
 }

@@ -1,0 +1,52 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "trevor-shimizu",
+  "byline": "Trevor Shimizu",
+  "bylinePopid": "POP-00155",
+  "article": "output/cron-compare/staged/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Nina Reyes",
+        "role": "quoted-source",
+        "popid": "POP-01057"
+      },
+      {
+        "name": "Manjit Singh",
+        "role": "quoted-source",
+        "popid": "POP-00766"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "fruitvale-nina-reyes-anomaly",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "I heard they were making progress on the transit hub, but now it sounds like they're back to square one. That's Oakland for you - always planning, never doing.",
+        "sourceRef": "citizenVoice PRESS Nina Reyes"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-73d09279c19d",
+    "draftSha256": "468b2a51193d398188ad2b8e09cb63635e73e1e25258d36a2eae613a0c7b7512",
+    "verdict": "output/cron-compare/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-06T01:49:01.058Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-06T01:49:04.352Z"
+}

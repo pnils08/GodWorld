@@ -36,27 +36,28 @@
   },
   "angle": "output/cron-compare/sports_c105_hal-richmond_packet-v2_angle.json",
   "quotesRequested": 4,
-  "quotesLanded": 3,
+  "quotesLanded": 4,
   "quotes": [
     {
       "pop": "POP-00001",
       "name": "Vinnie Keane",
-      "quote": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.",
+      "quote": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player.",
       "disp": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood",
       "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.\",\n  \"fact_ids\": [\"F-2b3e2e3d075f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player.\",\n  \"fact_ids\": [\"F-9af30bf34151\", \"F-7253339cd4be\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-2b3e2e3d075f"
+          "F-9af30bf34151",
+          "F-7253339cd4be"
         ],
         "basis": "direct-reaction",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00001-637a984a29",
+        "quoteId": "Q-POP-00001-250f29a32a",
         "authoredQuote": true,
-        "publishableQuote": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career."
+        "publishableQuote": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -70,12 +71,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Hal Richmond",
-          "question": "What have you seen, felt, or understood about \"The impact of Vinnie Keane's career on the A's and the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "What have you seen, felt, or understood about \"The A's late-season game and the performances of key players\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Jack London",
-          "focus": "The impact of Vinnie Keane's career on the A's and the community",
+          "focus": "The A's late-season game and the performances of key players",
           "src": "world_summary_c105.md ## Sports"
         },
         "exposure": {
@@ -184,24 +185,172 @@
       }
     },
     {
-      "pop": "POP-00018",
-      "name": "Benji Dillon",
-      "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland",
-      "disp": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
+      "pop": "POP-00003",
+      "name": "Mark Aitken",
+      "quote": "I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; curious, open to new things",
       "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland\",\n  \"fact_ids\": [\"F-9af30bf34151\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level.\",\n  \"fact_ids\": [\"F-4330bada6d88\", \"F-7253339cd4be\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-9af30bf34151"
+          "F-4330bada6d88",
+          "F-7253339cd4be"
         ],
         "basis": "direct-reaction",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00018-60732d5c01",
+        "quoteId": "Q-POP-00003-1c2f629f32",
         "authoredQuote": true,
-        "publishableQuote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland"
+        "publishableQuote": "I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00003",
+          "name": "Mark Aitken",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The A's late-season game and the performances of key players\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The A's late-season game and the performances of key players",
+          "src": "world_summary_c105.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names",
+            "same-neighborhood"
+          ],
+          "self": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — game-result — supplied C105 line card",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-436805d090da"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon line (feed): 5.1 IP/8K/2H",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-5dd72cfc3cc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-9af30bf34151"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken line (feed): 2HR/6RBI",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-7253339cd4be"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 127-35 · streak W2",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-db6f160d52da"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — game-result (late-season)",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-4330bada6d88"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C105",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-b46c89741eef"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+            "src": "Simulation_Ledger profile for POP-00003",
+            "id": "F-a2cdfdf33ef7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going.",
+      "disp": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going.\",\n  \"fact_ids\": [\"F-4330bada6d88\", \"F-db6f160d52da\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4330bada6d88",
+          "F-db6f160d52da"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00018-3bfcb5c79e",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -215,12 +364,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Hal Richmond",
-          "question": "What have you seen, felt, or understood about \"The impact of Vinnie Keane's career on the A's and the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "What have you seen, felt, or understood about \"The A's late-season game and the performances of key players\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Jack London",
-          "focus": "The impact of Vinnie Keane's career on the A's and the community",
+          "focus": "The A's late-season game and the performances of key players",
           "src": "world_summary_c105.md ## Sports"
         },
         "exposure": {
@@ -331,22 +480,23 @@
     {
       "pop": "POP-00019",
       "name": "Isley Kelley",
-      "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match.",
+      "quote": "I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance.",
       "disp": "relentless, can't stop working; curious, open to new things; steady, hard to shake",
       "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match.\",\n  \"fact_ids\": [\"F-9af30bf34151\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance.\",\n  \"fact_ids\": [\"F-4330bada6d88\", \"F-db6f160d52da\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-9af30bf34151"
+          "F-4330bada6d88",
+          "F-db6f160d52da"
         ],
         "basis": "direct-reaction",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00019-b2f3848fc5",
+        "quoteId": "Q-POP-00019-153dad398b",
         "authoredQuote": true,
-        "publishableQuote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match."
+        "publishableQuote": "I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -360,12 +510,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Hal Richmond",
-          "question": "What have you seen, felt, or understood about \"The impact of Vinnie Keane's career on the A's and the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "What have you seen, felt, or understood about \"The A's late-season game and the performances of key players\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Jack London",
-          "focus": "The impact of Vinnie Keane's career on the A's and the community",
+          "focus": "The A's late-season game and the performances of key players",
           "src": "world_summary_c105.md ## Sports"
         },
         "exposure": {
@@ -478,22 +628,23 @@
     {
       "pop": "POP-00001",
       "name": "Vinnie Keane",
-      "quote": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.",
+      "quote": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player.",
       "disp": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood",
       "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.\",\n  \"fact_ids\": [\"F-2b3e2e3d075f\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player.\",\n  \"fact_ids\": [\"F-9af30bf34151\", \"F-7253339cd4be\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-2b3e2e3d075f"
+          "F-9af30bf34151",
+          "F-7253339cd4be"
         ],
         "basis": "direct-reaction",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00001-637a984a29",
+        "quoteId": "Q-POP-00001-250f29a32a",
         "authoredQuote": true,
-        "publishableQuote": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career."
+        "publishableQuote": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -507,12 +658,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Hal Richmond",
-          "question": "What have you seen, felt, or understood about \"The impact of Vinnie Keane's career on the A's and the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "What have you seen, felt, or understood about \"The A's late-season game and the performances of key players\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Jack London",
-          "focus": "The impact of Vinnie Keane's career on the A's and the community",
+          "focus": "The A's late-season game and the performances of key players",
           "src": "world_summary_c105.md ## Sports"
         },
         "exposure": {
@@ -621,24 +772,172 @@
       }
     },
     {
-      "pop": "POP-00018",
-      "name": "Benji Dillon",
-      "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland",
-      "disp": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
+      "pop": "POP-00003",
+      "name": "Mark Aitken",
+      "quote": "I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level.",
+      "disp": "driven, hard to sit still; draws people in, deep with them; curious, open to new things",
       "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland\",\n  \"fact_ids\": [\"F-9af30bf34151\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level.\",\n  \"fact_ids\": [\"F-4330bada6d88\", \"F-7253339cd4be\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-9af30bf34151"
+          "F-4330bada6d88",
+          "F-7253339cd4be"
         ],
         "basis": "direct-reaction",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00018-60732d5c01",
+        "quoteId": "Q-POP-00003-1c2f629f32",
         "authoredQuote": true,
-        "publishableQuote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland"
+        "publishableQuote": "I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level."
+      },
+      "inputPacket": {
+        "v": "LEP/2",
+        "wake": "W2",
+        "actor": {
+          "id": "POP-00003",
+          "name": "Mark Aitken",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "desk": null
+        },
+        "task": {
+          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+          "reporter": "Hal Richmond",
+          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The A's late-season game and the performances of key players\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+        },
+        "signal": {
+          "kind": "story-signal",
+          "hood": "Jack London",
+          "focus": "The A's late-season game and the performances of key players",
+          "src": "world_summary_c105.md ## Sports"
+        },
+        "exposure": {
+          "basis": [
+            "feed-names",
+            "same-neighborhood"
+          ],
+          "self": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "editorialTarget": true
+        },
+        "known": [
+          {
+            "t": "FACT",
+            "text": "Current cycle: C105",
+            "src": "cron-desk-run explicit cycle argument",
+            "id": "F-b7a853efba64"
+          },
+          {
+            "t": "FACT",
+            "text": "A's — game-result — supplied C105 line card",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-436805d090da"
+          },
+          {
+            "t": "FACT",
+            "text": "Benji Dillon line (feed): 5.1 IP/8K/2H",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-5dd72cfc3cc9"
+          },
+          {
+            "t": "FACT",
+            "text": "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-9af30bf34151"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken line (feed): 2HR/6RBI",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-7253339cd4be"
+          },
+          {
+            "t": "FACT",
+            "text": "Team record (feed): 127-35 · streak W2",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-db6f160d52da"
+          },
+          {
+            "t": "FACT",
+            "text": "Event (feed): A's — game-result (late-season)",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-4330bada6d88"
+          },
+          {
+            "t": "FACT",
+            "text": "Cycle: C105",
+            "src": "world_summary_c105.md ## Sports",
+            "id": "F-b46c89741eef"
+          },
+          {
+            "t": "FACT",
+            "text": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+            "src": "Simulation_Ledger profile for POP-00003",
+            "id": "F-a2cdfdf33ef7"
+          }
+        ],
+        "limits": {
+          "quoteEligible": true,
+          "assert": [
+            "FACT already supplied",
+            "your own feeling",
+            "your own intention"
+          ],
+          "classify": [
+            "FACT",
+            "OBSERVATION",
+            "INTERPRETATION",
+            "INTENTION",
+            "LEAD"
+          ],
+          "never": [
+            "invent a named person",
+            "invent a public event",
+            "invent a date",
+            "invent a count",
+            "turn suspicion into observation"
+          ],
+          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+        },
+        "output": {
+          "contract": "CITIZEN_INTERVIEW/1",
+          "format": "json-only",
+          "schema": {
+            "answer": "quote|abstain",
+            "quote": "your exact first-person response; null on abstain",
+            "fact_ids": [
+              "one or more supplied fact ids that prompted the response"
+            ],
+            "basis": "direct-reaction|null",
+            "unverifiedLead": [
+              "concrete follow-up lead that must not be printed as fact"
+            ],
+            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+          },
+          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+        }
+      }
+    },
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going.",
+      "disp": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
+      "recorded": true,
+      "fallback": null,
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going.\",\n  \"fact_ids\": [\"F-4330bada6d88\", \"F-db6f160d52da\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null\n}\n```",
+      "claims": {
+        "answer": "quote",
+        "factIds": [
+          "F-4330bada6d88",
+          "F-db6f160d52da"
+        ],
+        "basis": "direct-reaction",
+        "unverifiedLead": [],
+        "abstainReason": null,
+        "quoteId": "Q-POP-00018-3bfcb5c79e",
+        "authoredQuote": true,
+        "publishableQuote": "I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -652,12 +951,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Hal Richmond",
-          "question": "What have you seen, felt, or understood about \"The impact of Vinnie Keane's career on the A's and the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "What have you seen, felt, or understood about \"The A's late-season game and the performances of key players\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Jack London",
-          "focus": "The impact of Vinnie Keane's career on the A's and the community",
+          "focus": "The A's late-season game and the performances of key players",
           "src": "world_summary_c105.md ## Sports"
         },
         "exposure": {
@@ -766,158 +1065,25 @@
       }
     },
     {
-      "pop": "POP-00003",
-      "name": null,
-      "quote": null,
-      "disp": null,
-      "recorded": false,
-      "fallback": "call-failed: appendReflection_: [err] [object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]",
-      "claims": null,
-      "inputPacket": {
-        "v": "LEP/2",
-        "wake": "W2",
-        "actor": {
-          "id": "POP-00003",
-          "name": "Mark Aitken",
-          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
-          "desk": null
-        },
-        "task": {
-          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-          "reporter": "Hal Richmond",
-          "question": "As a resident of Jack London, what have you seen, felt, or understood about \"The impact of Vinnie Keane's career on the A's and the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
-        },
-        "signal": {
-          "kind": "story-signal",
-          "hood": "Jack London",
-          "focus": "The impact of Vinnie Keane's career on the A's and the community",
-          "src": "world_summary_c105.md ## Sports"
-        },
-        "exposure": {
-          "basis": [
-            "feed-names",
-            "same-neighborhood"
-          ],
-          "self": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
-          "editorialTarget": false
-        },
-        "known": [
-          {
-            "t": "FACT",
-            "text": "Current cycle: C105",
-            "src": "cron-desk-run explicit cycle argument",
-            "id": "F-b7a853efba64"
-          },
-          {
-            "t": "FACT",
-            "text": "A's — game-result — supplied C105 line card",
-            "src": "world_summary_c105.md ## Sports",
-            "id": "F-436805d090da"
-          },
-          {
-            "t": "FACT",
-            "text": "Benji Dillon line (feed): 5.1 IP/8K/2H",
-            "src": "world_summary_c105.md ## Sports",
-            "id": "F-5dd72cfc3cc9"
-          },
-          {
-            "t": "FACT",
-            "text": "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
-            "src": "world_summary_c105.md ## Sports",
-            "id": "F-9af30bf34151"
-          },
-          {
-            "t": "FACT",
-            "text": "Mark Aitken line (feed): 2HR/6RBI",
-            "src": "world_summary_c105.md ## Sports",
-            "id": "F-7253339cd4be"
-          },
-          {
-            "t": "FACT",
-            "text": "Team record (feed): 127-35 · streak W2",
-            "src": "world_summary_c105.md ## Sports",
-            "id": "F-db6f160d52da"
-          },
-          {
-            "t": "FACT",
-            "text": "Event (feed): A's — game-result (late-season)",
-            "src": "world_summary_c105.md ## Sports",
-            "id": "F-4330bada6d88"
-          },
-          {
-            "t": "FACT",
-            "text": "Cycle: C105",
-            "src": "world_summary_c105.md ## Sports",
-            "id": "F-b46c89741eef"
-          },
-          {
-            "t": "FACT",
-            "text": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
-            "src": "Simulation_Ledger profile for POP-00003",
-            "id": "F-a2cdfdf33ef7"
-          }
-        ],
-        "limits": {
-          "quoteEligible": true,
-          "assert": [
-            "FACT already supplied",
-            "your own feeling",
-            "your own intention"
-          ],
-          "classify": [
-            "FACT",
-            "OBSERVATION",
-            "INTERPRETATION",
-            "INTENTION",
-            "LEAD"
-          ],
-          "never": [
-            "invent a named person",
-            "invent a public event",
-            "invent a date",
-            "invent a count",
-            "turn suspicion into observation"
-          ],
-          "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
-        },
-        "output": {
-          "contract": "CITIZEN_INTERVIEW/1",
-          "format": "json-only",
-          "schema": {
-            "answer": "quote|abstain",
-            "quote": "your exact first-person response; null on abstain",
-            "fact_ids": [
-              "one or more supplied fact ids that prompted the response"
-            ],
-            "basis": "direct-reaction|null",
-            "unverifiedLead": [
-              "concrete follow-up lead that must not be printed as fact"
-            ],
-            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-          },
-          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-        }
-      }
-    },
-    {
       "pop": "POP-00019",
       "name": "Isley Kelley",
-      "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match.",
+      "quote": "I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance.",
       "disp": "relentless, can't stop working; curious, open to new things; steady, hard to shake",
       "recorded": true,
       "fallback": null,
-      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match.\",\n  \"fact_ids\": [\"F-9af30bf34151\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```\n{\n  \"answer\": \"quote\",\n  \"quote\": \"I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance.\",\n  \"fact_ids\": [\"F-4330bada6d88\", \"F-db6f160d52da\"],\n  \"basis\": \"direct-reaction\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
       "claims": {
         "answer": "quote",
         "factIds": [
-          "F-9af30bf34151"
+          "F-4330bada6d88",
+          "F-db6f160d52da"
         ],
         "basis": "direct-reaction",
         "unverifiedLead": [],
         "abstainReason": null,
-        "quoteId": "Q-POP-00019-b2f3848fc5",
+        "quoteId": "Q-POP-00019-153dad398b",
         "authoredQuote": true,
-        "publishableQuote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match."
+        "publishableQuote": "I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance."
       },
       "inputPacket": {
         "v": "LEP/2",
@@ -931,12 +1097,12 @@
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Hal Richmond",
-          "question": "What have you seen, felt, or understood about \"The impact of Vinnie Keane's career on the A's and the community\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "What have you seen, felt, or understood about \"The A's late-season game and the performances of key players\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "story-signal",
           "hood": "Jack London",
-          "focus": "The impact of Vinnie Keane's career on the A's and the community",
+          "focus": "The A's late-season game and the performances of key players",
           "src": "world_summary_c105.md ## Sports"
         },
         "exposure": {
@@ -1045,5 +1211,5 @@
       }
     }
   ],
-  "ranAt": "2026-09-01T18:18:56.623Z"
+  "ranAt": "2026-09-03T18:17:54.681Z"
 }

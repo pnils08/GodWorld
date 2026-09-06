@@ -1,0 +1,124 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00042",
+    "name": "Ramon Vega",
+    "role": "City Council District 4",
+    "officeId": "COUNCIL-D4",
+    "district": "D4",
+    "faction": "IND",
+    "agentDir": "civic-office-council-d4",
+    "initiative": null,
+    "dials": {
+      "approval": 52
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "defend the district or go quiet"
+  },
+  "pulse": {
+    "className": "approval-pressure",
+    "score": 53,
+    "label": "Ramon Vega at approval 52",
+    "lever": "defend the district or go quiet",
+    "hood": "Glenview",
+    "initiative": null,
+    "vsCity": {
+      "sentiment": 0.98,
+      "citySentiment": 0.8854545454545455,
+      "crime": 0.5,
+      "cityCrime": 0.6990909090909091,
+      "heat": -9.45454545454545,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "defend the district or go quiet",
+    "lineFacts": [
+      "approval 52",
+      "Glenview crime: property 31, violent 19, incidents 4 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "Glenview: sentiment 0.98 vs city 0.885; crime index 0.5 vs city 0.699; retail 6.91; housing pressure 0; steady; momentum 3"
+    ],
+    "missing": [
+      "no active ledger people in Glenview — do not borrow other hoods",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "Glenview",
+      "Dimond",
+      "Ivy Hill"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D4",
+      "t": "FACT",
+      "text": "Ramon Vega holds COUNCIL-D4 at approval 52",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-crime-Glenview",
+      "t": "FACT",
+      "text": "Glenview crime: property 31, violent 19, incidents 4 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-Glenview",
+      "t": "FACT",
+      "text": "Glenview: sentiment 0.98 vs city 0.885; crime index 0.5 vs city 0.699; retail 6.91; housing pressure 0; steady; momentum 3",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D4",
+        "PopId": "POP-00042",
+        "Holder": "Ramon Vega",
+        "District": "D4",
+        "Approval": "52"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D2",
+        "PopId": "POP-00502",
+        "Holder": "Leonard Tran",
+        "District": "D2",
+        "Faction": "IND",
+        "Approval": 59
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

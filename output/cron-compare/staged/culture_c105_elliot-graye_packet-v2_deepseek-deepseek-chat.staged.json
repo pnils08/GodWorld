@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "105",
+  "persona": "elliot-graye",
+  "byline": "Elliot Graye",
+  "bylinePopid": "POP-00012",
+  "article": "output/cron-compare/staged/culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Devon Willis",
+        "role": "mentioned",
+        "popid": "POP-00782"
+      },
+      {
+        "name": "Ezekiel Campbell",
+        "role": "mentioned",
+        "popid": "POP-00645"
+      },
+      {
+        "name": "Mart Johns",
+        "role": "mentioned",
+        "popid": "POP-00648"
+      },
+      {
+        "name": "Grace Yamamoto",
+        "role": "mentioned",
+        "popid": "POP-00798"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "adams-point-devon-willis-fame-sighting",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [
+      "Adams Point"
+    ],
+    "claims": [
+      {
+        "claim": "I've noticed that having someone like Benji Dillon around can bring a lot of attention to our neighborhood, and as a server, I've seen it affect the vibe of the places I work at.",
+        "sourceRef": "citizenVoice PRESS Devon Willis"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-5d4608094f17",
+    "draftSha256": "a4a5e69d6b90ac7b2c612a6e5ec3419e3728afc419259653f8616383918fb464",
+    "verdict": "output/cron-compare/culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-04T23:19:44.901Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:13.994Z"
+}

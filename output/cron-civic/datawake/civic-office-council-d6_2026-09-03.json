@@ -1,0 +1,15 @@
+{
+  "office": "council_d6",
+  "agentDir": "civic-office-council-d6",
+  "holder": "Elliott Crane",
+  "popid": "POP-00044",
+  "title": "City Council District 6",
+  "date": "2026-09-03",
+  "cycle": 105,
+  "model": "deepseek/deepseek-chat",
+  "statement": "Piedmont Ave’s crime numbers are well below city averages, but sentiment gaps remain a concern. I’m convening a community safety walk to bridge that divide and ensure accountability on the ground.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-03T10:45:21.876Z",
+  "fellBackFrom": null
+}

@@ -9,7 +9,7 @@
   },
   "task": {
     "goal": "Write the life this cycle's record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.",
-    "assignment": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+    "assignment": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems sol, alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
     "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
     "voice": null,
     "writingMode": "SOURCE_BRIEF"
@@ -17,11 +17,12 @@
   "signal": {
     "kind": "undocked",
     "hood": "Fruitvale",
-    "src": "undocked:undocked-pop00143-Y3C1",
+    "src": "undocked:undocked-pop00143-Y3C1-e2",
     "plan": {
-      "focus": "The impact of Clarissa Dane's episode on her reputation",
-      "closeQuestion": "What will be the lasting impact of Clarissa Dane's episode on her standing in the city?"
-    }
+      "focus": "The uncertainty surrounding the episode's outcome",
+      "closeQuestion": "What will be the lasting impact of the episode's outcome on the city?"
+    },
+    "openThreads": []
   },
   "exposure": {
     "subjects": [
@@ -56,44 +57,48 @@
     ],
     "sources": [
       {
-        "id": "Q-POP-00143-ec1278150b",
+        "id": "Q-POP-00143-21ade5450d",
         "pop": "POP-00143",
         "name": "Clarissa Dane",
-        "quote": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.",
+        "quote": "I feel like there's a lot of uncertainty in the air, and as a District Attorney, it's my job to stay on top of things and try to make sense of it all, but sometimes it feels like the more I learn, the more questions I have.",
         "factIds": [
           "F-b7a853efba64",
-          "F-e657add0ed97",
+          "F-404787dc5b40",
           "F-5361d31c74cb"
         ],
         "src": "packet.W2[POP-00143]"
       },
       {
-        "id": "Q-POP-00198-d9d80ca87f",
+        "id": "Q-POP-00198-76632224f1",
         "pop": "POP-00198",
         "name": "Rick Walker",
-        "quote": "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale.",
+        "quote": "I feel like there's a lot of uncertainty in the air, and it's hard to know what's going to happen next. As a line cook, I'm used to being in the thick of things, but this feels different. I'm just trying to stay focused on my work and my family, and hope that everything works out.",
         "factIds": [
-          "F-e657add0ed97"
+          "F-69bcadf46b69"
         ],
         "src": "packet.W2[POP-00198]"
       },
       {
-        "id": "Q-POP-00644-f74554bd68",
+        "id": "Q-POP-00644-1dc96d0b45",
         "pop": "POP-00644",
         "name": "Rafael Pilgrim",
-        "quote": "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation.",
+        "quote": "I feel like there's a lot of uncertainty in the air, and it's hard to know what's going to happen next. I've been talking to people around Fruitvale, and everyone seems to be waiting to see what happens. It's like we're all holding our breath, trying to make sense of things.",
         "factIds": [
-          "F-e657add0ed97"
+          "F-b7a853efba64",
+          "F-404787dc5b40",
+          "F-56d37e2ec062"
         ],
         "src": "packet.W2[POP-00644]"
       },
       {
-        "id": "Q-POP-00744-3c0862cc84",
+        "id": "Q-POP-00744-73cde54ad1",
         "pop": "POP-00744",
         "name": "Tomas Renteria",
-        "quote": "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation.",
+        "quote": "I feel like there's a lot of uncertainty in the air, you know, it's like people are waiting to see what's gonna happen next. I've been talking to folks around Fruitvale, and everyone's got their own take on it, but nobody really knows what's going on. It's like we're all just trying to figure it out as we go.",
         "factIds": [
-          "F-e657add0ed97"
+          "F-b7a853efba64",
+          "F-404787dc5b40",
+          "F-ba942a2b7b0a"
         ],
         "src": "packet.W2[POP-00744]"
       }
@@ -101,7 +106,7 @@
     "excludedLeads": [
       {
         "from": "Nia Rook",
-        "text": "There's a sense that Clarissa Dane's performance has raised questions about her future",
+        "text": "The episode's outcome has left many in the city wondering what's next",
         "usable": false
       }
     ]
@@ -115,15 +120,33 @@
     },
     {
       "t": "FACT",
-      "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
-      "src": "undocked:undocked-pop00143-Y3C1",
-      "id": "F-e657add0ed97"
+      "text": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+      "src": "undocked:undocked-pop00143-Y3C1-e2",
+      "id": "F-404787dc5b40"
     },
     {
       "t": "FACT",
       "text": "Clarissa Dane — UNDOCKED cast pilot",
       "src": "Simulation_Ledger profile for POP-00143",
       "id": "F-5361d31c74cb"
+    },
+    {
+      "t": "FACT",
+      "text": "Rick Walker — Line cook — Fruitvale",
+      "src": "Simulation_Ledger profile for POP-00198",
+      "id": "F-69bcadf46b69"
+    },
+    {
+      "t": "FACT",
+      "text": "Rafael Pilgrim — Server — Fruitvale",
+      "src": "Simulation_Ledger profile for POP-00644",
+      "id": "F-56d37e2ec062"
+    },
+    {
+      "t": "FACT",
+      "text": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+      "src": "Simulation_Ledger profile for POP-00744",
+      "id": "F-ba942a2b7b0a"
     }
   ],
   "limits": {
@@ -214,7 +237,7 @@
     ]
   },
   "manifest": {
-    "id": "AM-9fb3c5ec9ae1",
+    "id": "AM-08f7e178ea19",
     "policy": "load-bearing",
     "approvedFacts": [
       {
@@ -224,58 +247,80 @@
         "src": "cron-desk-run explicit cycle argument"
       },
       {
-        "id": "F-e657add0ed97",
+        "id": "F-404787dc5b40",
         "t": "FACT",
-        "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
-        "src": "undocked:undocked-pop00143-Y3C1"
+        "text": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+        "src": "undocked:undocked-pop00143-Y3C1-e2"
       },
       {
         "id": "F-5361d31c74cb",
         "t": "FACT",
         "text": "Clarissa Dane — UNDOCKED cast pilot",
         "src": "Simulation_Ledger profile for POP-00143"
+      },
+      {
+        "id": "F-69bcadf46b69",
+        "t": "FACT",
+        "text": "Rick Walker — Line cook — Fruitvale",
+        "src": "Simulation_Ledger profile for POP-00198"
+      },
+      {
+        "id": "F-56d37e2ec062",
+        "t": "FACT",
+        "text": "Rafael Pilgrim — Server — Fruitvale",
+        "src": "Simulation_Ledger profile for POP-00644"
+      },
+      {
+        "id": "F-ba942a2b7b0a",
+        "t": "FACT",
+        "text": "Tomas Renteria — Podcast Host / Line Cook — Fruitvale",
+        "src": "Simulation_Ledger profile for POP-00744"
       }
     ],
     "approvedQuotes": [
       {
-        "id": "Q-POP-00143-ec1278150b",
+        "id": "Q-POP-00143-21ade5450d",
         "speakerId": "POP-00143",
         "speakerName": "Clarissa Dane",
-        "text": "I've felt that my reputation as a District Attorney has been under scrutiny lately, and I'm not sure what to make of it. As someone who's dedicated to serving this community, it's concerning to think that my actions might be perceived in a way that undermines my work. I'm trying to stay focused on doing what's right for Fruitvale, regardless of what others might be saying.",
+        "text": "I feel like there's a lot of uncertainty in the air, and as a District Attorney, it's my job to stay on top of things and try to make sense of it all, but sometimes it feels like the more I learn, the more questions I have.",
         "factIds": [
           "F-b7a853efba64",
-          "F-e657add0ed97",
+          "F-404787dc5b40",
           "F-5361d31c74cb"
         ],
         "src": "packet.W2[POP-00143]"
       },
       {
-        "id": "Q-POP-00198-d9d80ca87f",
+        "id": "Q-POP-00198-76632224f1",
         "speakerId": "POP-00198",
         "speakerName": "Rick Walker",
-        "text": "I haven't really thought about how Clarissa Dane's episode affected her reputation, to be honest I'm more focused on my work as a line cook and what's going on in Fruitvale.",
+        "text": "I feel like there's a lot of uncertainty in the air, and it's hard to know what's going to happen next. As a line cook, I'm used to being in the thick of things, but this feels different. I'm just trying to stay focused on my work and my family, and hope that everything works out.",
         "factIds": [
-          "F-e657add0ed97"
+          "F-69bcadf46b69"
         ],
         "src": "packet.W2[POP-00198]"
       },
       {
-        "id": "Q-POP-00644-f74554bd68",
+        "id": "Q-POP-00644-1dc96d0b45",
         "speakerId": "POP-00644",
         "speakerName": "Rafael Pilgrim",
-        "text": "I've seen how people around Fruitvale talk about Clarissa Dane, and it seems like her episode has really changed how they think of her, I'm not sure what to make of it myself but it's definitely a topic of conversation.",
+        "text": "I feel like there's a lot of uncertainty in the air, and it's hard to know what's going to happen next. I've been talking to people around Fruitvale, and everyone seems to be waiting to see what happens. It's like we're all holding our breath, trying to make sense of things.",
         "factIds": [
-          "F-e657add0ed97"
+          "F-b7a853efba64",
+          "F-404787dc5b40",
+          "F-56d37e2ec062"
         ],
         "src": "packet.W2[POP-00644]"
       },
       {
-        "id": "Q-POP-00744-3c0862cc84",
+        "id": "Q-POP-00744-73cde54ad1",
         "speakerId": "POP-00744",
         "speakerName": "Tomas Renteria",
-        "text": "I've seen how people in Fruitvale talk about Clarissa Dane's episode and it seems like it's had a big impact on how they think of her, I feel like it's changed the way people perceive her reputation.",
+        "text": "I feel like there's a lot of uncertainty in the air, you know, it's like people are waiting to see what's gonna happen next. I've been talking to folks around Fruitvale, and everyone's got their own take on it, but nobody really knows what's going on. It's like we're all just trying to figure it out as we go.",
         "factIds": [
-          "F-e657add0ed97"
+          "F-b7a853efba64",
+          "F-404787dc5b40",
+          "F-ba942a2b7b0a"
         ],
         "src": "packet.W2[POP-00744]"
       }
@@ -327,7 +372,7 @@
     "unverifiedLeads": [
       {
         "from": "Nia Rook",
-        "text": "There's a sense that Clarissa Dane's performance has raised questions about her future",
+        "text": "The episode's outcome has left many in the city wondering what's next",
         "publishable": false
       }
     ],

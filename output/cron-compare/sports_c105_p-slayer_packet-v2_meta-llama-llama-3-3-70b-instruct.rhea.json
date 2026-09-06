@@ -3,12 +3,12 @@
   "cycle": "105",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "e6dad4020a74cefec5b92708d8dc661be6cc3132efe39b087833a6faab799ef0",
+  "draftSha256": "a8744fbbac22cf5a9e720f43d8efef52035d14b8fcd78f9dfc23d3c83962ccf5",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "All quotes match exact packet provenance, citizen identities and roles are canonical, and sports-columnist scene texture is fully authorized.",
+  "summary": "All player quotes match exact packet provenance and barroom fan texture is fully authorized under profile p-slayer-fan-heat-v1.",
   "review": {
     "profileId": "p-slayer-fan-heat-v1",
     "canonIntegrity": "pass",
@@ -17,14 +17,13 @@
   "reviewProfile": {
     "id": "p-slayer-fan-heat-v1",
     "packageVersion": "PSLAYER-LEP2-1",
-    "manifestId": "AM-82d1ff54cbe8",
+    "manifestId": "AM-ab70dc09dcd3",
     "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [
       "Benji Dillon",
       "Isley Kelley",
-      "Mark Aitken",
       "Vinnie Keane"
     ],
     "unverified": []
@@ -32,10 +31,10 @@
   "intake": {
     "found": true,
     "counts": {
-      "names": 4,
+      "names": 3,
       "businesses": 0,
       "storylines": 1,
-      "hoods": 1,
+      "hoods": 0,
       "claims": 1
     },
     "grammarErrors": 0,
@@ -44,7 +43,7 @@
     "packetChecked": true
   },
   "apiCostUsd": 0.0097,
-  "durationMs": 6336,
+  "durationMs": 6431,
   "parseError": false,
-  "ranAt": "2026-09-01T23:17:13.329Z"
+  "ranAt": "2026-09-04T23:16:52.829Z"
 }

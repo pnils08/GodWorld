@@ -15,18 +15,18 @@
     },
     "task": {
       "goal": "Plan one Article chase without choosing a new assignment",
-      "assignment": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+      "assignment": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems sol, alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
       "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
     },
     "signal": {
       "kind": "undocked",
       "hood": "Fruitvale",
       "score": null,
-      "src": "undocked:undocked-pop00143-Y3C1",
+      "src": "undocked:undocked-pop00143-Y3C1-e2",
       "nearby": [
         {
-          "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
-          "src": "undocked:undocked-pop00143-Y3C1"
+          "text": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+          "src": "undocked:undocked-pop00143-Y3C1-e2"
         }
       ]
     },
@@ -55,9 +55,9 @@
       },
       {
         "t": "FACT",
-        "text": "UNDOCKED: Clarissa Dane — up 72 on the night",
-        "src": "undocked:undocked-pop00143-Y3C1",
-        "id": "F-e657add0ed97"
+        "text": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
+        "src": "undocked:undocked-pop00143-Y3C1-e2",
+        "id": "F-404787dc5b40"
       }
     ],
     "limits": {
@@ -109,10 +109,10 @@
   },
   "assignment": {
     "story": {
-      "ref": "undocked:undocked-pop00143-Y3C1",
-      "label": "UNDOCKED: Clarissa Dane — up 72 on the night",
+      "ref": "undocked:undocked-pop00143-Y3C1-e2",
+      "label": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
       "kind": "undocked",
-      "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+      "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems sol, alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
       "citizens": [
         "Clarissa Dane — UNDOCKED cast pilot"
       ],
@@ -137,39 +137,40 @@
   "angleRead": {
     "name": "Nia Rook",
     "popid": "POP-01076",
-    "text": "I'm looking into how the city reacted to Clarissa Dane's performance on UNDOCKED, and what it means for her standing",
+    "text": "I'll be looking into how the city is reacting to the latest UNDOCKED episode, focusing on the impact on the community and what it means for those involved.",
     "plan": {
-      "chase": "I'm looking into how the city reacted to Clarissa Dane's performance on UNDOCKED, and what it means for her standing",
-      "focus": "The impact of Clarissa Dane's episode on her reputation",
-      "why": "To understand the buzz around Clarissa Dane's performance and its implications",
+      "chase": "I'll be looking into how the city is reacting to the latest UNDOCKED episode, focusing on the impact on the community and what it means for those involved.",
+      "focus": "The uncertainty surrounding the episode's outcome",
+      "why": "To understand the city's perspective on the situation",
       "checks": [
-        "How the city's residents are talking about Clarissa Dane's episode"
+        "How the episode's outcome is being discussed in the city",
+        "What the episode's impact is on the community"
       ],
       "targets": [
         {
           "pop": "POP-00143",
-          "question": "What does Clarissa Dane's performance say about her abilities?",
-          "basis": "Her episode on UNDOCKED"
+          "question": "What does the episode's outcome mean for Clarissa Dane's reputation?",
+          "basis": "The episode's outcome and its impact on the community"
         }
       ],
-      "interpretation": "The city's reaction to Clarissa Dane's episode will shape her reputation",
+      "interpretation": "The city is still trying to make sense of the episode's outcome and what it means for those involved",
       "unverifiedLead": [
-        "There's a sense that Clarissa Dane's performance has raised questions about her future"
+        "The episode's outcome has left many in the city wondering what's next"
       ],
-      "closeQuestion": "What will be the lasting impact of Clarissa Dane's episode on her standing in the city?"
+      "closeQuestion": "What will be the lasting impact of the episode's outcome on the city?"
     }
   },
   "lanePicks": [
     {
-      "label": "UNDOCKED: Clarissa Dane — up 72 on the night",
+      "label": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
       "kind": "undocked",
       "hood": "Fruitvale",
-      "ref": "undocked:undocked-pop00143-Y3C1",
+      "ref": "undocked:undocked-pop00143-Y3C1-e2",
       "popids": [
         "POP-00143"
       ]
     }
   ],
   "laneEntries": 1,
-  "ranAt": "2026-09-01T11:17:25.100Z"
+  "ranAt": "2026-09-04T11:17:23.258Z"
 }

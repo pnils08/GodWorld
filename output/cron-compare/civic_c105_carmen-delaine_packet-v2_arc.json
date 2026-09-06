@@ -1,0 +1,36 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "civic",
+  "persona": "carmen-delaine",
+  "storyline": {
+    "slug": "west-oakland-elio-perez-initiative",
+    "verb": "opened"
+  },
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve heard folks talking about the Stabilization Fund, and honestly, I’m just hoping it reaches the people who really need it—families like mine who’ve been holding on tight."
+    },
+    {
+      "pop": "POP-00722",
+      "name": "Daniel Cloak",
+      "quote": "I've heard folks at the bakery talking about the Stabilization Fund like it's supposed to help, but honestly, I don't see much changing on my block yet. People still struggling same as before."
+    },
+    {
+      "pop": "POP-00794",
+      "name": "Irene Fay",
+      "quote": "I’ve heard people talking about the Stabilization Fund at the coffee shop, mostly wondering how it’s going to help the neighborhood directly."
+    },
+    {
+      "pop": "POP-00961",
+      "name": "Darius Clark",
+      "quote": "I’ve heard folks talking about the Stabilization Fund at the bakery, but I haven’t seen much change around here yet."
+    }
+  ],
+  "claim": "I’ve heard folks talking about the Stabilization Fund, and honestly, I’m just hoping it reaches the people who really need it—families like mine who’ve been holding on tight.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-03T18:16:12.811Z"
+}

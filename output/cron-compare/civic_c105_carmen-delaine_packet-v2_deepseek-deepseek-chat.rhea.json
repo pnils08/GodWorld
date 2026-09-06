@@ -1,0 +1,58 @@
+{
+  "draft": "output/cron-compare/civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "8015fffd7452ce4f8787575ddefb2ac165dd774e790d13296d3d126f210d0a60",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen profiles, quotes, initiative statuses, and street texture verify cleanly against cycle 105 ground truth.",
+  "review": {
+    "profileId": "carmen-civic-ledger-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "carmen-civic-ledger-v1",
+    "packageVersion": "CARMEN-LEP2-1",
+    "manifestId": "AM-0e191a93d287",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Carmen Delaine",
+      "Daniel Cloak",
+      "Darius Clark",
+      "Elio Perez",
+      "Irene Fay"
+    ],
+    "unverified": [
+      "Adeline Street",
+      "Mandela Parkway",
+      "Peralta Street",
+      "Seventh Street",
+      "Stabilization Fund",
+      "West Oakland Stabilization Fund"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 4,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0096,
+  "durationMs": 6730,
+  "parseError": false,
+  "ranAt": "2026-09-03T23:15:57.741Z"
+}

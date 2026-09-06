@@ -5,7 +5,7 @@
   "provider": "openrouter",
   "model": "deepseek/deepseek-chat",
   "configuredWriterModel": "deepseek/deepseek-chat",
-  "gateModel": "sonnet",
+  "gateModel": "google/gemini-3.7-flash",
   "persona": "trevor-shimizu",
   "byline": {
     "name": "Trevor Shimizu",
@@ -14,8 +14,8 @@
   },
   "laneEntries": 58,
   "quotesLanded": 2,
-  "disposition": "flagged",
-  "rheaPass": false,
+  "disposition": "staged",
+  "rheaPass": true,
   "rheaFlagCount": 0,
   "contamination": {
     "fail": false,
@@ -23,8 +23,10 @@
   },
   "footerPresent": true,
   "toolUse": [],
-  "article": "output/cron-compare/flagged/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md",
-  "selfRecord": null,
-  "ranAt": "2026-09-04T22:06:12.138Z",
-  "dispositionReconciledAt": "2026-09-04T22:25:55.014Z"
+  "article": "output/cron-compare/staged/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00155\",\n  \"name\": \"Trevor Shimizu\",\n  \"recorded\": true,\n  \"text\": \"filed: Fruitvale Transit Hub Phase II Slips Back Into Visioning Stage\"\n}"
+  },
+  "ranAt": "2026-09-06T01:49:14.703Z"
 }

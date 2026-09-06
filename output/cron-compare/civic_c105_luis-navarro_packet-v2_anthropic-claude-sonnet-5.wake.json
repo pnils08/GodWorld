@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "luis-navarro",
+  "byline": {
+    "name": "Luis Navarro",
+    "popid": "POP-00636",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 61,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "◇ injected env (31) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00636\",\n  \"name\": \"Luis Navarro\",\n  \"recorded\": true,\n  \"text\": \"filed: Civic\"\n}"
+  },
+  "ranAt": "2026-09-03T23:17:09.794Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:13.979Z"
+}

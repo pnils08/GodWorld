@@ -5,27 +5,32 @@
   "persona": "hal-richmond",
   "storyline": {
     "slug": "jack-london-vinnie-keane-era-door",
-    "verb": "opened"
+    "verb": "advanced"
   },
   "hood": "Jack London",
   "quotes": [
     {
       "pop": "POP-00001",
       "name": "Vinnie Keane",
-      "quote": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career."
+      "quote": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player."
+    },
+    {
+      "pop": "POP-00003",
+      "name": "Mark Aitken",
+      "quote": "I've been feeling the energy around the A's late-season game, and I think our key players have really been stepping up - it's exciting to see them perform at this level."
     },
     {
       "pop": "POP-00018",
       "name": "Benji Dillon",
-      "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's been amazing to watch him play and see how much the fans love him, he's definitely a legend in Oakland"
+      "quote": "I feel like we're all coming together as a team, and it's showing in our performances - I'm proud of how we're playing, and I think we've got a good shot at keeping this streak going."
     },
     {
       "pop": "POP-00019",
       "name": "Isley Kelley",
-      "quote": "I've seen Vinnie Keane's career have a huge impact on the A's and the community, it's like a spark that ignites the whole team and the city, I feel like his presence on the field brings a level of excitement and energy that's hard to match."
+      "quote": "I've seen our team really come together late in the season, with key players stepping up and making big plays - it's been exciting to watch and be a part of. I feel like we're all feeding off each other's energy and it's showing in our performance."
     }
   ],
-  "claim": "I feel like my career has had a positive impact on the A's and the community, I've seen how it's brought people together and I'm proud to be a part of it. I've always tried to be a role model and give back to the community that has supported me throughout my career.",
+  "claim": "I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player.",
   "src": "citizenVoice PRESS c105",
-  "ranAt": "2026-09-01T18:18:56.626Z"
+  "ranAt": "2026-09-03T18:17:54.682Z"
 }

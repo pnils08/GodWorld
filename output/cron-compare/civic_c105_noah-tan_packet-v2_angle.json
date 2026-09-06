@@ -38,10 +38,6 @@
       "src": "output/world_summary_c105.md ## Who Lived It",
       "nearby": [
         {
-          "text": "Vanessa Tran-Muñoz (OARI Program Director): 12 teams now active in West Oakland",
-          "src": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json"
-        },
-        {
           "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
           "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
         },
@@ -56,6 +52,10 @@
         {
           "text": "improvement (low) | Initiative \"Oakland Alternative Response Initiative\" advanced: pilot_evaluation → implementation-active",
           "src": "output/engine_audit_c105.json patterns[3]; evidence: Initiative_Tracker row(s) 3"
+        },
+        {
+          "text": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: visioning-complete → visioning",
+          "src": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4"
         }
       ]
     },
@@ -216,7 +216,7 @@
           "Drew Lemon (POP-00670)"
         ],
         "source": "season-feel",
-        "sourceIndex": 60
+        "sourceIndex": 70
       },
       {
         "score": 80,
@@ -233,7 +233,7 @@
           "Genevieve Liu (POP-00928)"
         ],
         "source": "season-feel",
-        "sourceIndex": 61
+        "sourceIndex": 71
       },
       {
         "score": 80,
@@ -250,7 +250,7 @@
           "Melton Neilon (POP-00170)"
         ],
         "source": "season-feel",
-        "sourceIndex": 62
+        "sourceIndex": 72
       },
       {
         "score": 80,
@@ -267,7 +267,7 @@
           "Marky Beal (POP-00202)"
         ],
         "source": "season-feel",
-        "sourceIndex": 63
+        "sourceIndex": 73
       },
       {
         "score": 80,
@@ -284,7 +284,7 @@
           "Rigo Ryno (POP-00197)"
         ],
         "source": "season-feel",
-        "sourceIndex": 64
+        "sourceIndex": 74
       },
       {
         "score": 80,
@@ -297,7 +297,7 @@
         "hookLine": "FAITH — holy_day — Downtown: Telegraph Presbyterian Fellowship observes Epiphany",
         "citizens": [],
         "source": "season-feel",
-        "sourceIndex": 65
+        "sourceIndex": 75
       }
     ],
     "pointers": [
@@ -310,38 +310,30 @@
   "angleRead": {
     "name": "Noah Tan",
     "popid": "POP-00157",
-    "text": "Noah's been noticing how the seasonal shifts ripple through people's lives in subtle ways. He wants to explore how Drew Lemon's seasonal health concern reflects the quiet, personal adaptations Oaklanders make when the weather turns. Not the big dramatic changes, but the small shifts in routine, the slight rearrangements of daily life that add up to something meaningful.",
+    "text": "I’m chasing Drew Lemon’s story about dealing with a seasonal health concern. I’ll start by reaching out to see how this cycle’s shifts impacted their routine or outlook. I want to understand what moved for them on days like this, without making the season or temperature the focus.",
     "plan": {
-      "chase": "Noah's been noticing how the seasonal shifts ripple through people's lives in subtle ways. He wants to explore how Drew Lemon's seasonal health concern reflects the quiet, personal adaptations Oaklanders make when the weather turns. Not the big dramatic changes, but the small shifts in routine, the slight rearrangements of daily life that add up to something meaningful.",
-      "focus": "The human-scale adjustments to seasonal health concerns, using Drew Lemon as the lens.",
-      "why": "Because these small, personal stories reveal how we all navigate the larger forces that shape our lives, without ever making headlines.",
+      "chase": "I’m chasing Drew Lemon’s story about dealing with a seasonal health concern. I’ll start by reaching out to see how this cycle’s shifts impacted their routine or outlook. I want to understand what moved for them on days like this, without making the season or temperature the focus.",
+      "focus": "Exploring how Drew Lemon navigated a seasonal health concern and what it reveals about resilience or adaptation in Downtown Oakland.",
+      "why": "This feels like a grounded way to explore how people live through seasonal shifts without leaning into clichés or forecasts.",
       "checks": [
-        "Does Drew's experience reflect a broader pattern in the neighborhood?",
-        "What specific adaptations did Drew make that others might recognize?"
+        "Does Drew Lemon’s experience reflect broader patterns in Downtown Oakland?",
+        "Is there a connection between their health concern and the recurring issue strain noted in the Packet?"
       ],
       "targets": [
         {
           "pop": "POP-00670",
-          "question": "What small, everyday changes did you make to deal with your seasonal health concern?",
-          "basis": "F-1a376888eebe"
+          "question": "How did your seasonal health concern shape your days this cycle?",
+          "basis": "Assignment from the Packet’s Who Lived It section."
         }
       ],
-      "interpretation": "Seasonal health concerns aren't just about symptoms—they're about the quiet ways we rearrange our lives to accommodate them.",
+      "interpretation": "This could be a quiet story about small adjustments and resilience, showing how people adapt to seasonal shifts without grand gestures.",
       "unverifiedLead": [
-        "Whether others in the neighborhood made similar adjustments without realizing it"
+        "Is there a connection between Drew Lemon’s health concern and the recurring issue strain noted in the Packet?"
       ],
-      "closeQuestion": "How do these small seasonal adaptations become part of the fabric of a community over time?"
+      "closeQuestion": "What does Drew Lemon’s experience reveal about living through seasonal shifts in Downtown Oakland?"
     }
   },
   "lanePicks": [
-    {
-      "label": "Vanessa Tran-Muñoz (OARI Program Director): 12 teams now active in West Oakland",
-      "kind": "civic-datawake",
-      "ref": "output/cron-civic/datawake/civic-project-oari_2026-08-31.json",
-      "popids": [
-        "POP-01021"
-      ]
-    },
     {
       "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
       "kind": "anomaly",
@@ -375,8 +367,19 @@
         "POP-00756",
         "POP-00762"
       ]
+    },
+    {
+      "label": "improvement (low) | Initiative \"Fruitvale Transit Hub Phase II — Visioning\" advanced: visioning-complete → visioning",
+      "kind": "anomaly",
+      "hood": "Fruitvale",
+      "ref": "output/engine_audit_c105.json patterns[4]; evidence: Initiative_Tracker row(s) 4",
+      "popids": [
+        "POP-00744",
+        "POP-00766",
+        "POP-01057"
+      ]
     }
   ],
-  "laneEntries": 59,
-  "ranAt": "2026-08-31T11:15:24.953Z"
+  "laneEntries": 58,
+  "ranAt": "2026-09-04T11:15:45.603Z"
 }

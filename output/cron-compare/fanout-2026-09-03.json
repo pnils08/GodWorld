@@ -1,0 +1,462 @@
+{
+  "date": "2026-09-03",
+  "cycle": 105,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "beatDomain": "CIVIC",
+      "persona": "carmen-delaine",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "kind": "initiative",
+        "angle": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hookLine": "The civic record identifies a decision, initiative, or clock that needs a clear accounting.",
+        "hood": "West Oakland",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "carmen-delaine",
+      "pulse": {
+        "className": "civic-ledger",
+        "score": 55,
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hood": "West Oakland",
+        "source": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+          "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, or affected people absent from the supplied entries."
+        ]
+      },
+      "wakePackage": "CARMEN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Luis Navarro",
+      "popid": "POP-00636",
+      "beatDomain": "CIVIC",
+      "persona": "luis-navarro",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)",
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+        "kind": "anomaly",
+        "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+        "hookLine": "No civic initiative addresses the city signal surfaced this cycle.",
+        "hood": null,
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "luis-navarro",
+      "pulse": {
+        "className": "accountability-anomaly",
+        "score": 80,
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+        "hood": null,
+        "source": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles"
+        ],
+        "forbidden": [
+          "Do not add officials, votes, budgets, outcomes, measurements, quotes, responses, or affected people absent from the supplied entries."
+        ],
+        "schema": "INVESTIGATION-BRIEF-1",
+        "method": "KNOWN_UNKNOWN",
+        "missing": [
+          "documented response or documented non-response",
+          "request timestamp and elapsed silence duration",
+          "responsible person, office, or duty unless named by the source"
+        ],
+        "reportingEvidence": {
+          "recordChecks": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "requestEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responseEvents": {
+            "state": "NOT_SUPPLIED",
+            "events": []
+          },
+          "responsibleEntities": {
+            "state": "NOT_SUPPLIED",
+            "entities": []
+          }
+        },
+        "silenceClock": {
+          "state": "UNESTABLISHED",
+          "value": null,
+          "src": null
+        },
+        "excludedCandidates": []
+      },
+      "wakePackage": "LUIS-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Hal Richmond",
+      "popid": "POP-00007",
+      "beatDomain": "SPORTS_HISTORY",
+      "persona": "hal-richmond",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "angle": "What the supplied C105 line card establishes, and what history remains unsupplied.",
+        "label": "A's — game-result — supplied C105 line card",
+        "hookLine": "A's — game-result — supplied C105 line card",
+        "hood": "Jack London",
+        "pulseClass": "era-door",
+        "team": "A's",
+        "eventKind": "game-result",
+        "closingNote": "elegy",
+        "citizens": [
+          "Benji Dillon (POP-00018)",
+          "Vinnie Keane (POP-00001)",
+          "Mark Aitken (POP-00003)",
+          "Isley Kelley (POP-00019)"
+        ],
+        "popids": [
+          "POP-00018",
+          "POP-00001",
+          "POP-00003",
+          "POP-00019"
+        ],
+        "ref": "world_summary_c105.md ## Sports",
+        "cycle": 105
+      },
+      "halSlice": true,
+      "historian": true,
+      "pulse": {
+        "className": "era-door",
+        "score": 88,
+        "label": "A's — game-result — supplied C105 line card",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "late-season",
+        "storyAngle": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hasStats": true,
+        "record": "127-35",
+        "streak": "W2",
+        "foilNumber": "1 IP",
+        "closingNote": "elegy",
+        "feedCycle": 105
+      },
+      "bag": {
+        "modes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "closingNote": "elegy",
+        "claim": "Present fact: 1 IP on the feed. Archive claim: place this against time — A Farewell Gone Well:Vinnie Keane Benji Dillon Close toward elegy."
+      },
+      "prewrite": {
+        "reporter": "Hal Richmond",
+        "bagModes": [
+          {
+            "id": 1,
+            "name": "Era Comparison"
+          },
+          {
+            "id": 8,
+            "name": "Legacy Guarantee Piece"
+          }
+        ],
+        "historicalAnchor": "era door — living chapter vs the age it closes or extends",
+        "presentFacts": [
+          "Benji Dillon line (feed): 5.1 IP/8K/2H",
+          "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+          "Mark Aitken line (feed): 2HR/6RBI",
+          "Team record (feed): 127-35 · streak W2",
+          "Event (feed): A's — game-result (late-season)",
+          "Cycle: C105"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "closingNote": "elegy",
+        "priorFiling": "NONE — wall may still inject at wake",
+        "claim": "Present fact: 1 IP on the feed. Archive claim: place this against time — A Farewell Gone Well:Vinnie Keane Benji Dillon Close toward elegy.",
+        "foilNumber": "1 IP",
+        "missing": [
+          "Historical people, places, teams, events, seasons, and statistics are unsupplied unless named in the packet",
+          "No invented seasons or franchise history beyond packet + feed",
+          "No x-stats / barrel% / invented OPS+",
+          "Not a business-desk storefront assignment",
+          "Not P Slayer charge; not Anthony board architecture as spine"
+        ]
+      },
+      "wakePackage": "HAL-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Tanya Cruz",
+      "popid": "POP-00014",
+      "beatDomain": "SPORTS_SIDELINE",
+      "persona": "tanya-cruz",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "wakePackage": "TANYA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Kai Marston",
+      "popid": "POP-00158",
+      "beatDomain": "CULTURE",
+      "persona": "kai-marston",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Arts/cultural event: The Corliss Family Block Party — present-tense room, not calendar filler",
+        "label": "The Corliss Family Block Party",
+        "hookLine": "The Corliss Family Block Party is on the evening board.",
+        "hood": null,
+        "pulseClass": "city-event",
+        "citizens": [],
+        "popids": [],
+        "named": "The Corliss Family Block Party",
+        "venue": "The Corliss Family Block Party",
+        "ref": "world_summary ## Evening Texture · City events",
+        "cycle": 105
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "city-event",
+        "score": 17,
+        "label": "The Corliss Family Block Party"
+      },
+      "recommend": {
+        "bag": "ground",
+        "slug": "maria-keen",
+        "name": "Maria Keen",
+        "popid": "POP-00013",
+        "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+        "reason": "top pulse fame-sighting → ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Benji Dillon at Dimond Pharmacy (Dimond)"
+      },
+      "bag": "arts",
+      "wakePackage": "KAI-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+        "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "hood": "Rockridge",
+        "pulseClass": "hood-rising",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## What Moved · trajectory",
+        "cycle": 105
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "hood-rising",
+        "score": 33,
+        "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "hood": "Rockridge",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "retail": 10.51,
+        "retailDelta": null
+      },
+      "prewrite": {
+        "pulseClass": "hood-rising",
+        "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+        "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "anchorFacts": [
+          "HOOD: Rockridge",
+          "TRAJECTORY: rising",
+          "MAGNITUDE (translate, do not lead): 5",
+          "RETAIL VITALITY (scene color): 10.51",
+          "NAMED BUSINESSES (sources only): Cozy Pot; HotSlice Pizza; Festive Fireside",
+          "EVENING VENUE: Cozy Pot (restaurant)",
+          "EVENING VENUE: HotSlice Pizza (fast-food)"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "story": {
+        "ref": "undocked:undocked-pop00688-Y3C1",
+        "label": "UNDOCKED: Merkin Jumper — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Merkin Jumper's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems sol, sirius, combat 0, mishaps 0, magnitude 2/5.",
+        "citizens": [
+          "Merkin Jumper — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00688"
+        ],
+        "hood": "Downtown"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "seedless": 1,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Carmen Delaine",
+        "persona": "carmen-delaine",
+        "wakePackage": "CARMEN-LEP2-1"
+      },
+      {
+        "name": "Luis Navarro",
+        "persona": "luis-navarro",
+        "wakePackage": "LUIS-LEP2-1"
+      },
+      {
+        "name": "Hal Richmond",
+        "persona": "hal-richmond",
+        "wakePackage": "HAL-LEP2-1"
+      },
+      {
+        "name": "Tanya Cruz",
+        "persona": "tanya-cruz",
+        "wakePackage": "TANYA-LEP2-1"
+      },
+      {
+        "name": "Kai Marston",
+        "persona": "kai-marston",
+        "wakePackage": "KAI-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-27",
+    "top": {
+      "score": 38,
+      "className": "anomaly",
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (implementation-active, safety) but 3 affected neighborhoods show contradicting CrimeIndex"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c105.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=carmen-delaine,luis-navarro,hal-richmond,tanya-cruz,kai-marston,business-desk,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": false,
+    "reason": "no anthony-raines assignment in rota"
+  },
+  "halEnrich": {
+    "enriched": true,
+    "reason": "pulse=era-door score=88 close=elegy"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=hood-rising score=33 hood=Rockridge"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "kai-marston",
+        "bag": "arts",
+        "pulse": "city-event",
+        "score": 17
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=2",
+    "seats": [
+      {
+        "persona": "carmen-delaine",
+        "domain": "civic-ledger",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active"
+      },
+      {
+        "persona": "luis-navarro",
+        "domain": "accountability-anomaly",
+        "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles"
+      }
+    ]
+  },
+  "builtAt": "2026-09-03T11:15:07.077Z"
+}

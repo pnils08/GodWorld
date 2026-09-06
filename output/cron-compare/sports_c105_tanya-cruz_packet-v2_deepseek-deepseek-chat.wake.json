@@ -28,5 +28,6 @@
     "recorded": true,
     "out": "// tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"filed: Clubhouse Notes: Reading the Room After Another Preseason Loss\"\n}"
   },
-  "ranAt": "2026-08-31T23:17:00.873Z"
+  "ranAt": "2026-08-31T23:17:00.873Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:14.036Z"
 }

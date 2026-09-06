@@ -1,0 +1,498 @@
+[
+  {
+    "pop": "POP-00782",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00782\",\"name\":\"Devon Willis\",\"role\":\"Server\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Elliot Graye\",\"question\":\"As a resident of Adams Point, what have you seen, felt, or understood about \\\"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"hood\",\"hood\":\"Adams Point\",\"focus\":\"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Devon Willis — Server — Adams Point\",\"editorialTarget\":true},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C105\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-b7a853efba64\"},{\"t\":\"FACT\",\"text\":\"Adams Point | 1 world event(s) this cycle\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-ffdbcffc9415\"},{\"t\":\"FACT\",\"text\":\"NAMED: Dimond Pharmacy\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-bbdc07067cfb\"},{\"t\":\"FACT\",\"text\":\"PERSON: Benji Dillon\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-dc7402b7dfc6\"},{\"t\":\"FACT\",\"text\":\"VENUE: Dimond Pharmacy\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-c3eeabfe4460\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-e7dc74e492b7\"},{\"t\":\"FACT\",\"text\":\"Devon Willis — Server — Adams Point\",\"src\":\"Simulation_Ledger profile for POP-00782\",\"id\":\"F-b0c5df57b70e\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00782",
+        "name": "Devon Willis",
+        "role": "Server",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Elliot Graye",
+        "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "hood",
+        "hood": "Adams Point",
+        "focus": "The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.",
+        "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\""
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Devon Willis — Server — Adams Point",
+        "editorialTarget": true
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C105",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-b7a853efba64"
+        },
+        {
+          "t": "FACT",
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-ffdbcffc9415"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Dimond Pharmacy",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-bbdc07067cfb"
+        },
+        {
+          "t": "FACT",
+          "text": "PERSON: Benji Dillon",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-dc7402b7dfc6"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Dimond Pharmacy",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-c3eeabfe4460"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-e7dc74e492b7"
+        },
+        {
+          "t": "FACT",
+          "text": "Devon Willis — Server — Adams Point",
+          "src": "Simulation_Ledger profile for POP-00782",
+          "id": "F-b0c5df57b70e"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00645",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00645\",\"name\":\"Ezekiel Campbell\",\"role\":\"Taxi driver\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Elliot Graye\",\"question\":\"As a resident of Adams Point, what have you seen, felt, or understood about \\\"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"hood\",\"hood\":\"Adams Point\",\"focus\":\"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Ezekiel Campbell — Taxi driver — Adams Point\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C105\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-b7a853efba64\"},{\"t\":\"FACT\",\"text\":\"Adams Point | 1 world event(s) this cycle\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-ffdbcffc9415\"},{\"t\":\"FACT\",\"text\":\"NAMED: Dimond Pharmacy\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-bbdc07067cfb\"},{\"t\":\"FACT\",\"text\":\"PERSON: Benji Dillon\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-dc7402b7dfc6\"},{\"t\":\"FACT\",\"text\":\"VENUE: Dimond Pharmacy\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-c3eeabfe4460\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-e7dc74e492b7\"},{\"t\":\"FACT\",\"text\":\"Ezekiel Campbell — Taxi driver — Adams Point\",\"src\":\"Simulation_Ledger profile for POP-00645\",\"id\":\"F-ff810adb4710\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00645",
+        "name": "Ezekiel Campbell",
+        "role": "Taxi driver",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Elliot Graye",
+        "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "hood",
+        "hood": "Adams Point",
+        "focus": "The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.",
+        "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\""
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Ezekiel Campbell — Taxi driver — Adams Point",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C105",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-b7a853efba64"
+        },
+        {
+          "t": "FACT",
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-ffdbcffc9415"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Dimond Pharmacy",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-bbdc07067cfb"
+        },
+        {
+          "t": "FACT",
+          "text": "PERSON: Benji Dillon",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-dc7402b7dfc6"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Dimond Pharmacy",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-c3eeabfe4460"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-e7dc74e492b7"
+        },
+        {
+          "t": "FACT",
+          "text": "Ezekiel Campbell — Taxi driver — Adams Point",
+          "src": "Simulation_Ledger profile for POP-00645",
+          "id": "F-ff810adb4710"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00648",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00648\",\"name\":\"Mart Johns\",\"role\":\"Nurse Aide\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Elliot Graye\",\"question\":\"As a resident of Adams Point, what have you seen, felt, or understood about \\\"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"hood\",\"hood\":\"Adams Point\",\"focus\":\"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Mart Johns — Nurse Aide — Adams Point\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C105\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-b7a853efba64\"},{\"t\":\"FACT\",\"text\":\"Adams Point | 1 world event(s) this cycle\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-ffdbcffc9415\"},{\"t\":\"FACT\",\"text\":\"NAMED: Dimond Pharmacy\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-bbdc07067cfb\"},{\"t\":\"FACT\",\"text\":\"PERSON: Benji Dillon\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-dc7402b7dfc6\"},{\"t\":\"FACT\",\"text\":\"VENUE: Dimond Pharmacy\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-c3eeabfe4460\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-e7dc74e492b7\"},{\"t\":\"FACT\",\"text\":\"Mart Johns — Nurse Aide — Adams Point\",\"src\":\"Simulation_Ledger profile for POP-00648\",\"id\":\"F-212a52ca3cb2\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00648",
+        "name": "Mart Johns",
+        "role": "Nurse Aide",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Elliot Graye",
+        "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "hood",
+        "hood": "Adams Point",
+        "focus": "The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.",
+        "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\""
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Mart Johns — Nurse Aide — Adams Point",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C105",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-b7a853efba64"
+        },
+        {
+          "t": "FACT",
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-ffdbcffc9415"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Dimond Pharmacy",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-bbdc07067cfb"
+        },
+        {
+          "t": "FACT",
+          "text": "PERSON: Benji Dillon",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-dc7402b7dfc6"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Dimond Pharmacy",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-c3eeabfe4460"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-e7dc74e492b7"
+        },
+        {
+          "t": "FACT",
+          "text": "Mart Johns — Nurse Aide — Adams Point",
+          "src": "Simulation_Ledger profile for POP-00648",
+          "id": "F-212a52ca3cb2"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  },
+  {
+    "pop": "POP-00798",
+    "ask": "PACKET_JSON\n{\"v\":\"LEP/2\",\"wake\":\"W2\",\"actor\":{\"id\":\"POP-00798\",\"name\":\"Grace Yamamoto\",\"role\":\"Independent Bookstore Owner\",\"desk\":null},\"task\":{\"goal\":\"Answer one reporter question in your own first-person voice from your simulated life\",\"reporter\":\"Elliot Graye\",\"question\":\"As a resident of Adams Point, what have you seen, felt, or understood about \\\"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\\\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.\"},\"signal\":{\"kind\":\"hood\",\"hood\":\"Adams Point\",\"focus\":\"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\"},\"exposure\":{\"basis\":[\"same-hood-ledger\",\"same-neighborhood\"],\"self\":\"Grace Yamamoto — Independent Bookstore Owner — Adams Point\",\"editorialTarget\":false},\"known\":[{\"t\":\"FACT\",\"text\":\"Current cycle: C105\",\"src\":\"cron-desk-run explicit cycle argument\",\"id\":\"F-b7a853efba64\"},{\"t\":\"FACT\",\"text\":\"Adams Point | 1 world event(s) this cycle\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-ffdbcffc9415\"},{\"t\":\"FACT\",\"text\":\"NAMED: Dimond Pharmacy\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-bbdc07067cfb\"},{\"t\":\"FACT\",\"text\":\"PERSON: Benji Dillon\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-dc7402b7dfc6\"},{\"t\":\"FACT\",\"text\":\"VENUE: Dimond Pharmacy\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-c3eeabfe4460\"},{\"t\":\"FACT\",\"text\":\"HOOD: Dimond\",\"src\":\"output/neighborhood_texture_c105.md \\\"### Adams Point\\\"; events: world_summary_c105.md \\\"## World Events\\\"\",\"id\":\"F-e7dc74e492b7\"},{\"t\":\"FACT\",\"text\":\"Grace Yamamoto — Independent Bookstore Owner — Adams Point\",\"src\":\"Simulation_Ledger profile for POP-00798\",\"id\":\"F-5ac9e73a32a8\"}],\"limits\":{\"quoteEligible\":true,\"assert\":[\"FACT already supplied\",\"your own feeling\",\"your own intention\"],\"classify\":[\"FACT\",\"OBSERVATION\",\"INTERPRETATION\",\"INTENTION\",\"LEAD\"],\"never\":[\"invent a named person\",\"invent a public event\",\"invent a date\",\"invent a count\",\"turn suspicion into observation\"],\"rule\":\"Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction.\"},\"output\":{\"contract\":\"CITIZEN_INTERVIEW/1\",\"format\":\"json-only\",\"schema\":{\"answer\":\"quote|abstain\",\"quote\":\"your exact first-person response; null on abstain\",\"fact_ids\":[\"one or more supplied fact ids that prompted the response\"],\"basis\":\"direct-reaction|null\",\"unverifiedLead\":[\"concrete follow-up lead that must not be printed as fact\"],\"abstain_reason\":\"no_lived_basis|ineligible|contract_conflict|other|null\"},\"rule\":\"Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it.\"}}\nEND_PACKET\nReturn only the output format requested by packet.output.",
+    "packetContract": "LEP/2",
+    "inputPacket": {
+      "v": "LEP/2",
+      "wake": "W2",
+      "actor": {
+        "id": "POP-00798",
+        "name": "Grace Yamamoto",
+        "role": "Independent Bookstore Owner",
+        "desk": null
+      },
+      "task": {
+        "goal": "Answer one reporter question in your own first-person voice from your simulated life",
+        "reporter": "Elliot Graye",
+        "question": "As a resident of Adams Point, what have you seen, felt, or understood about \"The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.\"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+      },
+      "signal": {
+        "kind": "hood",
+        "hood": "Adams Point",
+        "focus": "The focus of my article will be on the human side of the story, exploring how the presence of a famous individual like Benji Dillon affects the everyday lives of people in the neighborhood.",
+        "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\""
+      },
+      "exposure": {
+        "basis": [
+          "same-hood-ledger",
+          "same-neighborhood"
+        ],
+        "self": "Grace Yamamoto — Independent Bookstore Owner — Adams Point",
+        "editorialTarget": false
+      },
+      "known": [
+        {
+          "t": "FACT",
+          "text": "Current cycle: C105",
+          "src": "cron-desk-run explicit cycle argument",
+          "id": "F-b7a853efba64"
+        },
+        {
+          "t": "FACT",
+          "text": "Adams Point | 1 world event(s) this cycle",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-ffdbcffc9415"
+        },
+        {
+          "t": "FACT",
+          "text": "NAMED: Dimond Pharmacy",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-bbdc07067cfb"
+        },
+        {
+          "t": "FACT",
+          "text": "PERSON: Benji Dillon",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-dc7402b7dfc6"
+        },
+        {
+          "t": "FACT",
+          "text": "VENUE: Dimond Pharmacy",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-c3eeabfe4460"
+        },
+        {
+          "t": "FACT",
+          "text": "HOOD: Dimond",
+          "src": "output/neighborhood_texture_c105.md \"### Adams Point\"; events: world_summary_c105.md \"## World Events\"",
+          "id": "F-e7dc74e492b7"
+        },
+        {
+          "t": "FACT",
+          "text": "Grace Yamamoto — Independent Bookstore Owner — Adams Point",
+          "src": "Simulation_Ledger profile for POP-00798",
+          "id": "F-5ac9e73a32a8"
+        }
+      ],
+      "limits": {
+        "quoteEligible": true,
+        "assert": [
+          "FACT already supplied",
+          "your own feeling",
+          "your own intention"
+        ],
+        "classify": [
+          "FACT",
+          "OBSERVATION",
+          "INTERPRETATION",
+          "INTENTION",
+          "LEAD"
+        ],
+        "never": [
+          "invent a named person",
+          "invent a public event",
+          "invent a date",
+          "invent a count",
+          "turn suspicion into observation"
+        ],
+        "rule": "Speak as yourself from your job and your block. One to three first-person sentences. The Packet fact is city news you heard about, not a spreadsheet. Name only people and places already in your life or the Packet. No invented bakery, bar, or official. Use basis direct-reaction."
+      },
+      "output": {
+        "contract": "CITIZEN_INTERVIEW/1",
+        "format": "json-only",
+        "schema": {
+          "answer": "quote|abstain",
+          "quote": "your exact first-person response; null on abstain",
+          "fact_ids": [
+            "one or more supplied fact ids that prompted the response"
+          ],
+          "basis": "direct-reaction|null",
+          "unverifiedLead": [
+            "concrete follow-up lead that must not be printed as fact"
+          ],
+          "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
+        },
+        "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
+      }
+    },
+    "evidenceBound": true,
+    "interviewMode": true,
+    "livedContextAllowed": false,
+    "model": "meta-llama/llama-3.3-70b-instruct",
+    "record": true,
+    "maxTokens": 420
+  }
+]

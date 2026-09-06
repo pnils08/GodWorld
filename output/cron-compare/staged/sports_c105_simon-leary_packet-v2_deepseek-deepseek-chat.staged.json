@@ -1,0 +1,46 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "105",
+  "persona": "simon-leary",
+  "byline": "Simon Leary",
+  "bylinePopid": "POP-00016",
+  "article": "output/cron-compare/staged/sports_c105_simon-leary_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Benji Dillon",
+        "role": "mentioned",
+        "popid": "POP-00018"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "jack-london-benji-dillon-long-view-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I’ve felt a shift in my role—less about carrying the team and more about guiding the younger guys, keeping that calm under pressure, and helping sustain this incredible record we’ve built.",
+        "sourceRef": "citizenVoice PRESS Benji Dillon"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-880b44cc954b",
+    "draftSha256": "30b547b4604252e2356735357ac94047d3fed1ec0cbb7e4e39ce6c1db5ad93c2",
+    "verdict": "output/cron-compare/sports_c105_simon-leary_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-02T23:18:10.959Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:14.032Z"
+}

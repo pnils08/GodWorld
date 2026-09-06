@@ -1,0 +1,58 @@
+{
+  "draft": "output/cron-compare/sports_c105_simon-leary_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "30b547b4604252e2356735357ac94047d3fed1ec0cbb7e4e39ce6c1db5ad93c2",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "Clean column: A's 127-35 record, W2 streak, and exact Benji Dillon quote verified with authorized structural metaphor texture.",
+  "review": {
+    "profileId": "simon-longview-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "simon-longview-v1",
+    "packageVersion": "SIMON-LEP2-1",
+    "manifestId": "AM-880b44cc954b",
+    "lexicalObservations": [
+      {
+        "code": "UNAPPROVED_NUMBER",
+        "values": [
+          "4"
+        ]
+      }
+    ]
+  },
+  "nameCheck": {
+    "verified": [
+      "Benji Dillon",
+      "Simon Leary"
+    ],
+    "unverified": [
+      "Keystone Player",
+      "Load-Bearing Continuity"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 7070,
+  "parseError": false,
+  "ranAt": "2026-09-02T23:18:10.959Z"
+}

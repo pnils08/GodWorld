@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "anthropic/claude-sonnet-5",
+  "configuredWriterModel": "anthropic/claude-sonnet-5",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "freelance-firebrand",
+  "byline": {
+    "name": "Jax Caldera",
+    "popid": "POP-00799",
+    "beatDomain": "ACCOUNTABILITY"
+  },
+  "laneEntries": 58,
+  "quotesLanded": 2,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": " (31) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-00799\",\n  \"name\": \"Jax Caldera\",\n  \"recorded\": true,\n  \"text\": \"filed: The Alert With No Yesterday\"\n}"
+  },
+  "ranAt": "2026-09-04T23:16:24.351Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:13.963Z"
+}

@@ -1,0 +1,63 @@
+{
+  "status": "staged",
+  "desk": "undocked",
+  "cycle": "105",
+  "persona": "nia-rook",
+  "byline": "Nia Rook",
+  "bylinePopid": "POP-01076",
+  "article": "output/cron-compare/staged/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2320.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Clarissa Dane",
+        "role": "quoted-source",
+        "popid": "POP-00143"
+      },
+      {
+        "name": "Rick Walker",
+        "role": "quoted-source",
+        "popid": "POP-00198"
+      },
+      {
+        "name": "Rafael Pilgrim",
+        "role": "quoted-source",
+        "popid": "POP-00644"
+      },
+      {
+        "name": "Tomas Renteria",
+        "role": "quoted-source",
+        "popid": "POP-00744"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "fruitvale-clarissa-dane-undocked",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Fruitvale"
+    ],
+    "claims": [
+      {
+        "claim": "I feel like there's a lot of uncertainty in the air, and as a District Attorney, it's my job to stay on top of things and try to make sense of it all, but sometimes it feels like the more I learn, the more questions I have.",
+        "sourceRef": "citizenVoice PRESS Clarissa Dane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-08f7e178ea19",
+    "draftSha256": "7e4bf144cb6df27d21f760c245aa8f0db7e4057d75312dca47880f06528886b4",
+    "verdict": "output/cron-compare/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-04T23:20:56.495Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-04T23:20:56.784Z"
+}

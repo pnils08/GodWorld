@@ -1,0 +1,15 @@
+{
+  "office": "council_d4",
+  "agentDir": "civic-office-council-d4",
+  "holder": "Ramon Vega",
+  "popid": "POP-00042",
+  "title": "City Council District 4",
+  "date": "2026-09-02",
+  "cycle": 105,
+  "model": "moonshotai/kimi-k2",
+  "statement": "Glenview's numbers are real: sentiment at 98 percent, crime incidents at 4 against a city average of 6.3, property crime half the city rate. These aren't talking points—they're the result of targeted investment and fiscal discipline working together. I've defended this district's record before the Mayor and I'll do it again: when you fund infrastructure and hold it accountable, outcomes follow. D4 isn't asking for special treatment. We're asking for the city to recognize what works, and to stop treating steady neighborhoods like afterthoughts in the budget cycle.",
+  "action": "public defense of district performance",
+  "numberMoved": "none",
+  "ranAt": "2026-09-02T10:45:48.423Z",
+  "fellBackFrom": null
+}

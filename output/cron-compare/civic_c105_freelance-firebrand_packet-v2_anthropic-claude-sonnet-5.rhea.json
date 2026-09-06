@@ -1,0 +1,51 @@
+{
+  "draft": "output/cron-compare/civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "6f405552653b09f84d3653408b81d2cdccf5371b1096e3c06e4e0ddad81b154f",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes match exact packet provenance verbatim and civic claims align accurately with Cycle 105 engine audit findings.",
+  "review": {
+    "profileId": "jax-accountability-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "jax-accountability-v1",
+    "packageVersion": "JAX-LEP2-1",
+    "manifestId": "AM-406c1d500b93",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Jax Caldera",
+      "Lucia Polito",
+      "Ramon Solano"
+    ],
+    "unverified": [
+      "Civis Systems"
+    ]
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.01,
+  "durationMs": 7659,
+  "parseError": false,
+  "ranAt": "2026-09-04T23:16:12.566Z"
+}

@@ -1,0 +1,21 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "sports",
+  "persona": "simon-leary",
+  "storyline": {
+    "slug": "jack-london-benji-dillon-long-view-signal",
+    "verb": "opened"
+  },
+  "hood": "Jack London",
+  "quotes": [
+    {
+      "pop": "POP-00018",
+      "name": "Benji Dillon",
+      "quote": "I’ve felt a shift in my role—less about carrying the team and more about guiding the younger guys, keeping that calm under pressure, and helping sustain this incredible record we’ve built."
+    }
+  ],
+  "claim": "I’ve felt a shift in my role—less about carrying the team and more about guiding the younger guys, keeping that calm under pressure, and helping sustain this incredible record we’ve built.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-02T18:17:44.717Z"
+}

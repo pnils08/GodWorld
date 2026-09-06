@@ -442,27 +442,27 @@
   "angleRead": {
     "name": "P Slayer",
     "popid": "POP-00008",
-    "text": "I'm chasing the emotional toll of Vinnie Keane's farewell season on the city of Oakland, and how the community is coming to terms with the end of an era.",
+    "text": "I'm chasing the emotional toll of Vinnie Keane's farewell season on the fans and the city, exploring the grief and nostalgia that comes with the end of an era.",
     "plan": {
-      "chase": "I'm chasing the emotional toll of Vinnie Keane's farewell season on the city of Oakland, and how the community is coming to terms with the end of an era.",
-      "focus": "The fan's perspective on Vinnie Keane's legacy",
-      "why": "To explore the grief and nostalgia that comes with the end of a legendary player's career",
+      "chase": "I'm chasing the emotional toll of Vinnie Keane's farewell season on the fans and the city, exploring the grief and nostalgia that comes with the end of an era.",
+      "focus": "The human side of Vinnie Keane's legacy",
+      "why": "To capture the essence of what Vinnie Keane means to Oakland and its people",
       "checks": [
-        "How the community is reacting to Vinnie Keane's farewell season",
-        "The impact of Vinnie Keane's career on the city of Oakland"
+        "How the community is coping with the loss of a legend",
+        "The impact of Vinnie Keane's career on the city's identity"
       ],
       "targets": [
         {
           "pop": "POP-00001",
-          "question": "What does Vinnie Keane's legacy mean to the city of Oakland?",
-          "basis": "His contributions to the team and the community"
+          "question": "What does Vinnie Keane's legacy mean to the people of Oakland?",
+          "basis": "His contributions to the team and the city"
         }
       ],
-      "interpretation": "The city of Oakland is grappling with the loss of a legendary player and the end of an era",
+      "interpretation": "The city's emotional response to Vinnie Keane's farewell season is a complex mix of grief, nostalgia, and gratitude",
       "unverifiedLead": [
-        "The emotional toll of Vinnie Keane's farewell season on the fans"
+        "The possibility that Vinnie Keane's legacy will continue to shape the city's identity long after his retirement"
       ],
-      "closeQuestion": "How will the city of Oakland remember Vinnie Keane's legacy?"
+      "closeQuestion": "How will Oakland come to terms with the end of Vinnie Keane's career and the impact it will have on the city's sense of self?"
     }
   },
   "lanePicks": [
@@ -517,5 +517,5 @@
     }
   ],
   "laneEntries": 12,
-  "ranAt": "2026-09-01T11:16:16.021Z"
+  "ranAt": "2026-09-04T11:15:57.038Z"
 }

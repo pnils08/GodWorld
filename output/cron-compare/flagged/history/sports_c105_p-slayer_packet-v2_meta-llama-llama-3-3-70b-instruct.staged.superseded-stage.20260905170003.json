@@ -1,0 +1,56 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "105",
+  "persona": "p-slayer",
+  "byline": "P Slayer",
+  "bylinePopid": "POP-00008",
+  "article": "output/cron-compare/staged/sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged-2316.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Benji Dillon",
+        "role": "quoted-source",
+        "popid": "POP-00018"
+      },
+      {
+        "name": "Vinnie Keane",
+        "role": "quoted-source",
+        "popid": "POP-00001"
+      },
+      {
+        "name": "Isley Kelley",
+        "role": "quoted-source",
+        "popid": "POP-00019"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "verb": "advanced"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I feel like my legacy is about more than just my stats or my time on the field, it's about the impact I've had on the people around me, like my family and the community here in Grand Lake.",
+        "sourceRef": "citizenVoice PRESS Vinnie Keane"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-ab70dc09dcd3",
+    "draftSha256": "a8744fbbac22cf5a9e720f43d8efef52035d14b8fcd78f9dfc23d3c83962ccf5",
+    "verdict": "output/cron-compare/sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
+    "ranAt": "2026-09-04T23:16:52.829Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-04T23:16:53.108Z"
+}

@@ -1,0 +1,53 @@
+{
+  "status": "staged",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "freelance-firebrand",
+  "byline": "Jax Caldera",
+  "bylinePopid": "POP-00799",
+  "article": "output/cron-compare/staged/civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.staged.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Lucia Polito",
+        "role": "quoted-source",
+        "popid": "POP-00004"
+      },
+      {
+        "name": "Ramon Solano",
+        "role": "quoted-source",
+        "popid": "POP-00756"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "west-oakland-lucia-polito-anomaly",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "West Oakland"
+    ],
+    "claims": [
+      {
+        "claim": "I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale.",
+        "sourceRef": "citizenVoice PRESS Lucia Polito"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-406c1d500b93",
+    "draftSha256": "6f405552653b09f84d3653408b81d2cdccf5371b1096e3c06e4e0ddad81b154f",
+    "verdict": "output/cron-compare/civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5.rhea.json",
+    "ranAt": "2026-09-04T23:16:12.566Z"
+  },
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:13.963Z"
+}

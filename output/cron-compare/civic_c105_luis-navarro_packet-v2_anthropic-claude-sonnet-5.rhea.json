@@ -1,0 +1,48 @@
+{
+  "draft": "output/cron-compare/civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "3eb3f997f92aeb3e4bf42cebc2a897f0d73973f1f167755ae099706df01de69b",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All citizen identities, roles, locations, and quotes match packet ground truth exactly with zero sourcing violations.",
+  "review": {
+    "profileId": "luis-investigation-record-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "luis-investigation-record-v1",
+    "packageVersion": "LUIS-LEP2-1",
+    "manifestId": "AM-1cd0c8248dc9",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Depak Ying",
+      "Elio Perez"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 2,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0088,
+  "durationMs": 5021,
+  "parseError": false,
+  "ranAt": "2026-09-03T23:17:00.476Z"
+}

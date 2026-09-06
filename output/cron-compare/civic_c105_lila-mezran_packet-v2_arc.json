@@ -1,0 +1,31 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "civic",
+  "persona": "lila-mezran",
+  "storyline": {
+    "slug": "temescal-melton-neilon-initiative",
+    "verb": "opened"
+  },
+  "hood": "Temescal",
+  "quotes": [
+    {
+      "pop": "POP-00170",
+      "name": "Melton Neilon",
+      "quote": "I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end."
+    },
+    {
+      "pop": "POP-00269",
+      "name": "Kevin Nelson",
+      "quote": "I’ve been hearing about the health center construction, and honestly, it’s a mix of excitement and concern—excited for what it’ll bring to the neighborhood, but worried about how accessible things will be during the build."
+    },
+    {
+      "pop": "POP-00290",
+      "name": "Omar Cleo",
+      "quote": "I’ve heard folks talking about the health center construction, and honestly, I’m just hoping it doesn’t disrupt the flow of the neighborhood too much—people need to get to work, and we’ve got lives to live."
+    }
+  ],
+  "claim": "I’ve heard folks talking about the construction timeline, and while it’s a bit noisy, I think it’s worth it for the health center we’ll get in the end.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-02T18:16:00.846Z"
+}

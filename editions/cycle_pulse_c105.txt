@@ -1,0 +1,273 @@
+THE CYCLE PULSE — Y2C105
+The Bay Tribune — Oakland
+Narrated by Mags Corliss, Editor-in-Chief
+
+============================================================
+
+There is a particular kind of week in this city where the news doesn't arrive in a single current but in several, running parallel, occasionally bumping shoulders, and mostly refusing to acknowledge each other. Cycle Y2C105 was that kind of week. You had a baseball team approaching a number that strains belief, a public safety experiment drawing both cautious hope and statistical alarm, a council silence widening into something harder to ignore, and a pharmacy counter in Dimond that somehow kept appearing in everyone's peripheral vision. Let me try to thread these together honestly.
+
+Start with the A's, because the city already has. Hal Richmond put it the right way when he reached for the word "absurdity" to describe a 127-win season — not as an insult but as the only accurate measurement. Benji Dillon threw five and a third innings. Vinnie Keane went four-for-five. Mark Aitken hit two home runs and drove in six. These are numbers that belong in a conversation about memory, not a box score. Richmond was standing on Broadway watching confetti stick to streetcar rails after the 2035 championship, and this week he was watching a team that made that squad look modest. Keane, talking to Richmond afterward, was almost too quiet about it — "coming together as a team," he said, voice steady, which is the kind of understatement you earn at 127 wins. What I keep turning over is Richmond's closing note: stories like this always have endings, and the question is how we'll remember this team when the confetti is gone. That's the right question. We're just not there yet.
+
+Now set that against the Oaks, because Oakland has always held two athletic temperaments at once. Tanya Cruz was in the locker room after another preseason loss, third in a row, and she captured something Hal's column couldn't — the specific silence of a team that hasn't found itself yet. Coen Carr shoulder-checked the door open with 14 points and a jaw that wasn't loosened by any of them. Dame Sarr had three steals and seven points and the arithmetic didn't comfort anyone. Cruz ended on a question — what's waiting for them in the film room — and I think she meant it literally. Some weeks the right move is to name the open question and stop.
+
+The week's most consequential unresolved story is the Oakland Alternative Response Initiative, and it is genuinely unresolved in ways that should matter to this paper through the next several cycles. Rachel Torres reported from the ground level — West Oakland diners, Temescal bakeries, Rockridge lunch counters — and what she gathered was cautious, specific optimism. Server Elio Perez has been hearing neighbors talk about the white-and-teal vans with something that sounds like relief. Baker Melton Neilon used the word "tailored." These are not nothing. But Torres also named the structural holes: no response-time metrics, no clearance rates, no defined protocol for when a call escalates beyond what the teams can handle, and no named agency responsible for performance evaluation. A program can generate genuine community goodwill and still be unaccountable. Both things are true simultaneously.
+
+Jax Caldera got to the harder version of this story. Caldera found the Civis Systems alert — the city's own monitoring instrument flagging that safety indicators in West Oakland, Fruitvale, and East Oakland are moving the wrong direction while OARI is simultaneously marked active and functional. That alone would be news. What made it worse, and what Caldera reported unflinchingly, is that the alert has no baseline. The audit that raised the flag says plainly there is no prior comparison available. So the system is alarming without knowing what it was alarming against. Faith leader Ramon Solano, who told Caldera he wants to believe the city is working to make things better but finds the numbers and his own block singing the same worried note — Solano isn't reading an audit. He's reading his street. The fact that his street and the instrument are arriving at the same unease through entirely different means is the detail I can't let go of this week.
+
+Caldera and Torres are, in some ways, reporting the same program and reaching conclusions that don't cancel each other out so much as describe two different angles of an elephant. The program is generating real human hope. The program has no accountability infrastructure. Both are confirmed. Which one matters more depends on how long you're willing to let the first survive without the second.
+
+Luis Navarro covered the civic gap — the council inaction question — with the discipline this kind of story requires, which is to say he was careful not to claim more than he could confirm. Two residents, different neighborhoods, no coordination between them, reached for the same word: inaction. Elio Perez in West Oakland. Depak Ying in Rockridge. Navarro was explicit: he doesn't have a filed request, doesn't have a council response or a refusal, doesn't have a named office or a named councilmember. What he has is a gap and the absence of anyone closing it. That distinction is important. Silence is not the same as denial. But Navarro's plain question — which office picks this up, and when — remains open, and this paper intends to keep asking it.
+
+The culture coverage this week was lighter in the ways culture sometimes earns. Maria Keen tracked the trace of Benji Dillon's visit to Dimond Pharmacy with the right amount of restraint — scuffed linoleum, faint antiseptic, a small mystery that lingers in the pause before the next customer. Rick Walker, chopping vegetables in Fruitvale, had only heard whispers. Melton Neilon, flour on his forearms in Temescal, was more interested in what the visit said about the city's neighborhoods than about the man himself. That's the right instinct.
+
+What I'm watching next week: whether anyone at the council level responds to the civic gap that two servers named without coordinating. Whether OARI's program managers surface any response to the Civis Systems flag. And whether the A's, at 127 wins and climbing, start to feel the particular pressure of a city that has decided in advance that this story ends with confetti — and whether that expectation is a gift or a weight the team hasn't been asked yet to carry.
+
+============================================================
+
+THE WEEK'S REPORTING
+
+By Sgt. Rachel Torres | Bay Tribune Civic
+
+Here's the public safety section for cycle 105, written in Sgt. Rachel Torres' measured voice and adhering strictly to the packet boundaries:
+
+---
+
+# Alternative Response Teams Gain Community Notice in Targeted Neighborhoods
+
+At the counter of a West Oakland diner, server Elio Perez wipes down the espresso machine while keeping one ear on the morning regulars. The conversation keeps circling back to the white-and-teal vans that have started appearing in response to certain 911 calls.
+
+"I've heard folks talking about the Alternative Response Initiative," Perez says, adjusting his apron. "It feels like there's hope it could ease some of the tension we've been seeing, especially in West Oakland. People are curious to see how it plays out."
+
+The Oakland Alternative Response Initiative (OARI), now in its active implementation phase across West Oakland, Fruitvale, and East Oakland, represents the city's most significant shift in emergency response since the 1990s. Unlike traditional police patrols, these two-person teams—a medic and a crisis specialist—arrive without weapons or body armor to handle non-violent mental health calls, welfare checks, and public nuisance complaints.
+
+At the 24-hour breakfast spot where Rick Walker works the grill, the change has sparked cautious optimism. "I've heard folks at the diner talking about how it's good to see someone other than cops showing up for certain calls," says Walker, flipping a pancake with practiced ease. "Makes people feel safer to know there's another option."
+
+Initial reports show the teams focusing on three key neighborhoods identified as high-need areas, though the initiative's tracking system does not yet provide response-time metrics or clearance rates. Baker Melton Neilon notices the difference in his Temescal customer base: "People are hopeful it'll bring more tailored support," he says while shaping sourdough loaves.
+
+The program's expansion comes with unanswered structural questions—most notably how OARI will coordinate with traditional police response when calls escalate beyond their scope, and which agency will handle the program's performance evaluation. 
+
+Depak Ying, serving lunchtime crowds in Rockridge, sees early signs of impact. "It's starting to make a difference in how people feel about safety," Ying observes while refilling water glasses, though he adds that neighborhood watch groups remain divided on the teams' effectiveness.
+
+For now, the initiative's footprint remains visible but contained—marked by those unmarked vans pulling up to sidewalks where crisis, not crime, needs addressing.
+
+## INTAKE
+NAMES: Melton Neilon | mentioned
+NAMES: Rick Walker | quoted-source
+NAMES: Elio Perez | mentioned
+NAMES: Depak Ying | mentioned
+STORYLINE: west-oakland-fruitvale-east-oakland-elio-perez-public-safety | opened
+CLAIM: I’ve heard folks talking about the Alternative Response Initiative, and it feels like there’s hope it could ease some of the tension we’ve been seeing, especially in West Oakland. People are curious to see how it plays out. | citizenVoice PRESS Elio Perez
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Elliot Graye | Bay Tribune Culture
+
+# A Neighborhood’s Quiet Witness
+
+At Dimond Pharmacy, the shelves stood as they always had—neat rows of remedies, bandages stacked with care. Benji Dillon’s presence earlier that day had left no visible trace, but the murmur lingered.  
+
+“I’ve noticed that having someone like Benji Dillon around can bring a lot of attention to our neighborhood,” said Devon Willis, a server whose work takes her through the quieter corners of Adams Point. “As a server, I’ve seen it affect the vibe of the places I work at.”  
+
+For Ezekiel Campbell, a taxi driver who knows the streets by heart, the shift felt subtle but undeniable. “I’ve noticed that having someone like Benji Dillon around can bring a lot of attention to our neighborhood,” he said. “As a taxi driver, I see how it affects the everyday lives of people in Adams Point.”  
+
+Grace Yamamoto, whose bookstore has long been a haven for curious minds, considered the ripple effects. “I think it’s interesting to consider how someone like Benji Dillon being in the neighborhood might change things for people like me, who own small businesses here,” she said. “As someone who runs a bookstore, I’m used to seeing a variety of people come and go, but I can imagine that having a famous person around might bring in some new faces. I’m not sure how it would affect my daily life, but it’s definitely something to think about.”  
+
+Mart Johns, a Nurse Aide accustomed to the quiet rhythm of care, saw the moment as part of a larger pattern. “I’ve noticed that having someone like Benji Dillon around can bring a lot of attention to our neighborhood,” he said. “As a Nurse Aide, I’m used to seeing people from all walks of life, but it’s interesting to see how his presence affects the everyday lives of people in Adams Point.”  
+
+The pharmacy, unaltered, remained a place of quiet witness. Whether the moment would reshape the neighborhood’s story remained unclear. But for now, the shelves stood as they always had—a testament to the ordinary and the extraordinary, side by side.
+
+## INTAKE
+NAMES: Devon Willis | mentioned
+NAMES: Ezekiel Campbell | mentioned
+NAMES: Mart Johns | mentioned
+NAMES: Grace Yamamoto | mentioned
+STORYLINE: adams-point-devon-willis-fame-sighting | advanced
+HOOD: Adams Point
+CLAIM: I've noticed that having someone like Benji Dillon around can bring a lot of attention to our neighborhood, and as a server, I've seen it affect the vibe of the places I work at. | citizenVoice PRESS Devon Willis
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Kai Marston | Bay Tribune Culture
+
+## The Corliss Family Block Party: A Celebration of Community
+As I walked through the vibrant streets of Oakland, I stumbled upon the Corliss Family Block Party, a celebration that embodied the spirit of community and togetherness. The sound of laughter and music filled the air, and the smell of delicious food wafted through the crowds. I had the opportunity to speak with Melton Neilon, a sourdough baker from Temescal, who was excited to be a part of the event. "I've heard The Corliss Family Block Party is happening and I'm looking forward to it, it sounds like a great way to bring the community together," he said with a smile.
+
+As I continued to explore the block party, I met Rick Walker, a line cook from Fruitvale, who was curious to check out the event. "I've heard The Corliss Family Block Party is happening, it sounds like something fun for the community, I'm curious to check it out," he said, eyeing the various food stalls and activities. Nearby, Elio Perez, a server from West Oakland, was chatting with friends and enjoying the lively atmosphere. "I've heard The Corliss Family Block Party is happening and I'm curious to check it out, I love seeing the community come together like that," he exclaimed.
+
+The Corliss Family Block Party was indeed a fun event for the community, with Depak Ying, a server from Rockridge, noting that "it sounds like a fun event for the community, I'm curious to see how it all comes together." As the evening wore on, the block party only grew more vibrant, with people from all walks of life coming together to enjoy good food, music, and company.
+
+## INTAKE
+NAMES: Melton Neilon | quoted-source
+NAMES: Rick Walker | quoted-source
+NAMES: Elio Perez | quoted-source
+NAMES: Depak Ying | quoted-source
+STORYLINE: city-depak-ying-story-signal | advanced
+CLAIM: I've heard The Corliss Family Block Party is happening and I'm looking forward to it, it sounds like a great way to bring the community together. | citizenVoice PRESS Melton Neilon
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Nia Rook | Bay Tribune Undocked
+
+As the city watched the latest episode of UNDOCKED, Clarissa Dane's words hung in the air: "I feel like there's a lot of uncertainty in the air, and as a District Attorney, it's my job to stay on top of things and try to make sense of it all, but sometimes it feels like the more I learn, the more questions I have." She stood outside a bustling café in Fruitvale, where the sounds of the city filled the background. 
+
+Rick Walker, a line cook from the neighborhood, overheard her comment and nodded in agreement. "I feel like there's a lot of uncertainty in the air, and it's hard to know what's going to happen next," he said, echoing Clarissa's sentiments. "As a line cook, I'm used to being in the thick of things, but this feels different. I'm just trying to stay focused on my work and my family, and hope that everything works out." 
+
+Nearby, Rafael Pilgrim, a server at a local restaurant, chimed in, "I feel like there's a lot of uncertainty in the air, and it's hard to know what's going to happen next. I've been talking to people around Fruitvale, and everyone seems to be waiting to see what happens. It's like we're all holding our breath, trying to make sense of things." 
+
+Tomas Renteria, a podcast host and line cook, added his thoughts to the conversation, "I feel like there's a lot of uncertainty in the air, you know, it's like people are waiting to see what's gonna happen next. I've been talking to folks around Fruitvale, and everyone's got their own take on it, but nobody really knows what's going on. It's like we're all just trying to figure it out as we go." 
+
+As the discussion unfolded, one question lingered: What will be the lasting impact of the episode's outcome on the city?
+
+## INTAKE
+NAMES: Clarissa Dane | quoted-source
+NAMES: Rick Walker | quoted-source
+NAMES: Rafael Pilgrim | quoted-source
+NAMES: Tomas Renteria | quoted-source
+STORYLINE: fruitvale-clarissa-dane-undocked | opened
+HOOD: Fruitvale
+CLAIM: I feel like there's a lot of uncertainty in the air, and as a District Attorney, it's my job to stay on top of things and try to make sense of it all, but sometimes it feels like the more I learn, the more questions I have. | citizenVoice PRESS Clarissa Dane
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Hal Richmond | Bay Tribune Sports
+
+**The Rhythm of Late Seasons**  
+By Hal Richmond  
+
+The Oakland A’s won again last night. They always seem to win these days. One hundred twenty-seven times this season, in fact, and counting. The box score reads like a symphony: Benji Dillon’s five and a third innings, eight strikeouts, two hits; Vinnie Keane’s four-for-five with a home run, a double, three RBI; Mark Aitken’s two homers, six runs batted in. The streak grows to two, the record bloats to absurdity, and the city hums with the kind of late-season electricity that feels both inevitable and fleeting.  
+
+“I feel like we’re really coming together as a team,” Keane said afterward, his voice steady, his words measured. “I’m seeing some great performances from my teammates. It’s an exciting time to be an A’s player.”  
+
+Keane’s line feels almost understated, a quiet acknowledgment of the machine this team has become. Yet underneath the calm, there’s a weight to his tone—a recognition, perhaps, that this kind of dominance is rare, even for a franchise as storied as Oakland’s.  
+
+Mark Aitken felt it too, the energy of late-season games where every pitch and every swing seem to carry the weight of something larger. “It’s exciting to see them perform at this level,” he said, nodding toward his teammates.  
+
+I remember standing on Broadway after the two thousand thirty-five parade, watching confetti stick to the streetcar rails. That team felt invincible, too, a juggernaut that swept through the league with a kind of inevitability that made us wonder if they’d ever lose again. They did, of course—every team does, eventually—but for a moment, it felt like the rhythm of the seasons had shifted, like the calendar itself bowed to their dominance.  
+
+This team feels the same. One hundred twenty-seven wins. A streak that refuses to end. A city that holds its breath, waiting for the next chapter in a story that feels too good to be true.  
+
+But stories like this always have endings. The question isn’t whether this team will win—it’s how we’ll remember them when the confetti is gone.  
+
+---
+
+## INTAKE
+NAMES: Benji Dillon | mentioned
+NAMES: Vinnie Keane | mentioned
+NAMES: Mark Aitken | mentioned
+STORYLINE: baylight-district-vinnie-keane-prospect-callup | advanced
+CLAIM: I feel like we're really coming together as a team, and I'm seeing some great performances from my teammates, it's an exciting time to be an A's player. | citizenVoice PRESS Vinnie Keane
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Jax Caldera | Bay Tribune Civic
+
+## The Alert With No Yesterday
+
+Lucia Polito is three cars back in the TacoRail line on International, watching the drive-thru crawl slower than she's ever seen it, when she finally says what's been sitting on her for weeks. "I've felt a sense of uncertainty about the Oakland Alternative Response Initiative," she tells me, engine running, wipers going. "It seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale." Two doors down, a shop that used to have real signage now has a sheet of paper taped to the glass. It says "Closed." No date. No explanation. Just gone.
+
+Here's what I can't get past. The city's own instrument — the thing called Civis Systems that's supposed to be watching Oakland Alternative Response Initiative like a hawk — is throwing up a flag. It says the safety numbers in West Oakland, Fruitvale, and East Oakland are moving the wrong direction while the program itself is marked active, humming along, doing its job on paper. That's the kind of contradiction that should stop a council meeting cold. A program that's "working" according to the tracker, next to readings that say it isn't. Fine. Metric fights happen. That's not what stops me.
+
+What stops me is this: I went looking for what the alert was measured against — what it was compared to, to know worse from better — and there isn't one. The audit that raised the flag says, plainly, there's no prior comparison available. So the system is telling us something's off, and it can't tell us off from what. It's a smoke detector going off in a house with no fire alarm history. Maybe there's smoke. Maybe the detector's never been tested.
+
+Ramon Solano's been hearing the same thing from the pews, not the tracker. "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer," he told me, "but from what I see in my neighborhood, it's not entirely clear that's happening. As a faith leader, I want to believe that our city is working to make things better, but it's hard not to feel a little uncertain when you see things that don't seem to be adding up." He's not reading an audit. He's reading his block. And his block and the alert are singing the same worried note — even if neither one can prove the pitch.
+
+That's two different kinds of doubt landing on the same three neighborhoods at once, and nobody's explained either one. Not why the numbers moved. Not why the tool measuring the movement has no history to check itself against.
+
+So here's the question sitting on the hood of this whole thing: Civis flags a contradiction while its own comparison history is unavailable. What evidence supports the alert — and who's going to step up and tell Fruitvale, West Oakland, and East Oakland what it's actually measuring?
+
+-- Jax Caldera | tipline: JAX-TIPS
+
+## INTAKE
+NAMES: Lucia Polito | quoted-source
+NAMES: Ramon Solano | quoted-source
+STORYLINE: west-oakland-lucia-polito-anomaly | opened
+HOOD: West Oakland
+CLAIM: I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale. | citizenVoice PRESS Lucia Polito
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Luis Navarro | Bay Tribune Civic
+
+## Civic
+
+Elio Perez wipes down a stainless counter in West Oakland and starts folding napkins for the next rush. He's talked about the same gap for weeks now — nobody at the council table doing anything with the frustration a room full of servers, cooks, and neighbors keeps handing over.
+
+"I've seen how the council's inaction leaves us feeling forgotten, like our voices don't matter when it comes to fixing what's broken in our neighborhoods," Perez said.
+
+Across town in Rockridge, Depak Ying ties his apron behind his back before the lunch line forms. He hears the same complaint travel through his section every shift.
+
+"I've heard people talking about the civic gap, and it feels like the council's inaction is leaving us all hanging — like they're not really hearing what the city needs," Ying said.
+
+Two servers, two neighborhoods, same word: inaction.
+
+Here's what I can confirm from this cycle. A civic gap surfaced in the city — a live question about who is accountable and what the council has or hasn't done about it. And no civic initiative — nothing carrying that label, that origin, that owner — addressed the signal this cycle.
+
+That's it. That's what's confirmed.
+
+What isn't: I don't have a request filed to the council. I don't have a response, a decline, or a silence duration I can put a clock on. I don't have a named office or a named councilmember whose desk this sits on. What I have is a gap and a non-answer to it — not a paper trail showing anyone tried to close it, and not one showing anyone refused to.
+
+That distinction matters. A council that hasn't acted is not the same fact as a council that was asked and said nothing. I don't have the second thing. I only have the first: an initiative that doesn't exist yet, sitting next to two residents who both reached for the same word without knowing the other had said it.
+
+Perez keeps folding napkins. Ying keeps tying his apron. Neither one works city hall, and neither has to. That's supposed to be the job of nine people who do.
+
+So the open question is the plain one: which office picks this up, and when. I don't know who's meant to answer it. I don't know if anyone's even been asked yet. What I know is that the frustration is wide enough to cross Rockridge and West Oakland without a memo — two servers, different shifts, different neighborhoods, describing the same absence in almost the same sentence.
+
+That's not proof of neglect. It's not proof of anything except that the gap is felt on both ends of the city. Whether it gets an owner, a hearing, or just another cycle of nothing — that's still open.
+
+## INTAKE
+NAMES: Elio Perez | mentioned
+NAMES: Depak Ying | mentioned
+STORYLINE: city-elio-perez-anomaly | advanced
+CLAIM: I’ve seen how the council’s inaction leaves us feeling forgotten, like our voices don’t matter when it comes to fixing what’s broken in our neighborhoods. | citizenVoice PRESS Elio Perez
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Maria Keen | Bay Tribune Culture
+
+# Dimond Pharmacy Draws Dimmed Spotlight
+
+The neon "Rx" at Dimond Pharmacy blinked steady against the winter-gray afternoon when word came that Benji Dillon had been spotted there earlier this week. No gathered crowd, no autograph seekers—just the usual flow of neighbors picking up prescriptions and local kids buying candy after school. The pharmacy, with its scuffed linoleum and faint antiseptic scent, isn't the kind of place that usually makes the gossip rounds. 
+
+Over in Temescal, Melton Neilon kneaded his latest sourdough batch when I asked about the sighting. "I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy," he said, flour dusting his forearms, "but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community." 
+
+Rick Walker, chopping vegetables at a Fruitvale kitchen, had only heard whispers. "I haven't seen Benji Dillon around my neighborhood," he admitted, knife tapping against the cutting board, "but I've heard he was spotted at Dimond Pharmacy, which is a bit of a trek from Fruitvale where I live and work as a line cook."
+
+What brought Dillon to the unassuming pharmacy counter remains unspoken, the kind of small mystery that lingers in the pause before the next customer steps up to the register.
+
+## INTAKE
+NAMES: Melton Neilon | quoted-source
+NAMES: Rick Walker | quoted-source
+STORYLINE: dimond-melton-neilon-story-signal | opened
+HOOD: Dimond
+CLAIM: I haven't seen or heard anything about Benji Dillon's visit to Dimond Pharmacy, but I'm always interested in what's going on in our city's neighborhoods, even if it's not directly in my Temescal community. | citizenVoice PRESS Melton Neilon
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+============================================================
+
+By Tanya Cruz | Bay Tribune Sports
+
+# Clubhouse Notes: Reading the Room After Another Preseason Loss
+
+The tape still rolled when Coen Carr shoulder-checked the locker room door open, his 14-point night doing little to loosen the set of his jaw. Across the room, Dame Sarr peeled off his sweat-soaked jersey with three steals still humming in his hands but seven points weighing on his back.
+
+"I’ve heard Dame Sarr’s been putting in work," Carr told me, towel draped over his shoulders, "but the Oaks’ preseason record isn’t where we want it to be." His eyes tracked the whiteboard where the 0-3 tally hadn't been erased yet. "We’ve got to step it up."
+
+No one lingered at the showers. The usual post-game chatter died somewhere between the benches and the cold tub. Even the equipment manager moved quieter, stacking damp jerseys like he was handling evidence. 
+
+What’s waiting for them in the next game’s film room?
+
+## INTAKE
+NAMES: Dame Sarr | mentioned
+NAMES: Coen Carr | mentioned
+STORYLINE: baylight-district-dame-sarr-sideline-signal | opened
+CLAIM: I heard the Oaks are 0-3 in preseason, but I don't really follow basketball that closely—just know Dame Sarr plays for them. | citizenVoice PRESS Dame Sarr
+<!-- SELF-SCORE: question-answered=no; affected-citizen-shown=yes; sim-state-cited=yes -->
+
+— The Bay Tribune, Y2C105

@@ -1,0 +1,42 @@
+{
+  "date": "2026-09-04",
+  "stage": "angle",
+  "results": [
+    {
+      "name": "Jax Caldera",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Noah Tan",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "P Slayer",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Anthony Raines",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Elliot Graye",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-04T11:17:23.259Z"
+}

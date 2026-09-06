@@ -4,14 +4,14 @@
   "model": "deepseek/deepseek-chat",
   "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 5980,
-  "usageOutputTokens": 564,
+  "usageInputTokens": 10176,
+  "usageOutputTokens": 1348,
   "savedFiles": [
     "output/cron-compare/civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat.md"
   ],
   "compareAgainst": "output/desk-output/civic_c105.md",
-  "durationMs": 38262,
+  "durationMs": 28451,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-09-01T23:16:13.766Z"
+  "ranAt": "2026-09-06T01:48:55.855Z"
 }

@@ -13,51 +13,51 @@
   "intake": {
     "names": [
       {
-        "name": "Merkin Jumper",
+        "name": "Clarissa Dane",
         "role": "quoted-source",
-        "popid": "POP-00688"
+        "popid": "POP-00143"
       },
       {
-        "name": "Jessie Hess",
+        "name": "Rick Walker",
         "role": "quoted-source",
-        "popid": "POP-00212"
+        "popid": "POP-00198"
       },
       {
-        "name": "Dillon Trevor",
+        "name": "Rafael Pilgrim",
         "role": "quoted-source",
-        "popid": "POP-00224"
+        "popid": "POP-00644"
       },
       {
-        "name": "Andre Turner",
+        "name": "Tomas Renteria",
         "role": "quoted-source",
-        "popid": "POP-00225"
+        "popid": "POP-00744"
       }
     ],
     "businesses": [],
     "storylines": [
       {
-        "slug": "downtown-merkin-jumper-undocked",
+        "slug": "fruitvale-clarissa-dane-undocked",
         "verb": "opened"
       }
     ],
     "hoods": [
-      "Downtown"
+      "Fruitvale"
     ],
     "claims": [
       {
-        "claim": "I've seen that the episode has really gotten people in Downtown talking, and it's been interesting to hear all the different opinions and perspectives on what it means for our city.",
-        "sourceRef": "citizenVoice PRESS Merkin Jumper"
+        "claim": "I feel like there's a lot of uncertainty in the air, and as a District Attorney, it's my job to stay on top of things and try to make sense of it all, but sometimes it feels like the more I learn, the more questions I have.",
+        "sourceRef": "citizenVoice PRESS Clarissa Dane"
       }
     ]
   },
   "rhea": {
     "pass": true,
     "model": "google/gemini-3.7-flash",
-    "manifestId": "AM-852ff611d08c",
-    "draftSha256": "1d6f904c286c0bdca1082d98ea54b11bbc93edfd5e85a53f0eea0d06ea252cfa",
+    "manifestId": "AM-08f7e178ea19",
+    "draftSha256": "7e4bf144cb6df27d21f760c245aa8f0db7e4057d75312dca47880f06528886b4",
     "verdict": "output/cron-compare/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
-    "ranAt": "2026-09-03T23:19:15.067Z"
+    "ranAt": "2026-09-04T23:20:56.495Z"
   },
   "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
-  "stagedAt": "2026-09-04T22:25:55.055Z"
+  "stagedAt": "2026-09-06T01:48:14.040Z"
 }

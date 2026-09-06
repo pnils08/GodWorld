@@ -1,0 +1,15 @@
+{
+  "office": "council_d2",
+  "agentDir": "civic-office-council-d2",
+  "holder": "Leonard Tran",
+  "popid": "POP-00502",
+  "title": "City Council District 2",
+  "date": "2026-09-02",
+  "cycle": 105,
+  "model": "moonshotai/kimi-k2",
+  "statement": "Jack London's got momentum—retail busy, events drawing crowds, people moving in. But momentum isn't self-sustaining. The crime index sits at 0.9 against the city's 0.699, and property incidents run 49 to the city's 40.2. I see the uptick. I also see the pressure. My call: stand with Jack London, but stand with eyes open. That means infrastructure commitments locked in before the next development cycle, not after. The Holiday Market proved this neighborhood can pull regional traffic. Now prove we can keep the people who live here safe while we build. I'm not writing blank checks for feel-good narratives. Show me the infrastructure timeline—streetscape, lighting, pedestrian flow—matched to the growth trajectory. That's the deal.",
+  "action": "demand infrastructure timeline locked before next development cycle",
+  "numberMoved": "described in words: significant headway on securing commitments, pending documented delivery schedule",
+  "ranAt": "2026-09-02T10:45:18.560Z",
+  "fellBackFrom": null
+}

@@ -7,7 +7,8 @@
   "bylinePopid": "POP-00008",
   "article": "output/cron-compare/staged/sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
   "bylineUsage": {
-    "recorded": true
+    "recorded": false,
+    "reason": "local Rhea reconciliation; no external byline write performed"
   },
   "intake": {
     "names": [
@@ -22,11 +23,6 @@
         "popid": "POP-00001"
       },
       {
-        "name": "Mark Aitken",
-        "role": "quoted-source",
-        "popid": "POP-00003"
-      },
-      {
         "name": "Isley Kelley",
         "role": "quoted-source",
         "popid": "POP-00019"
@@ -35,16 +31,14 @@
     "businesses": [],
     "storylines": [
       {
-        "slug": "jack-london-vinnie-keane-injury-load",
-        "verb": "opened"
+        "slug": "baylight-district-vinnie-keane-prospect-callup",
+        "verb": "advanced"
       }
     ],
-    "hoods": [
-      "Jack London"
-    ],
+    "hoods": [],
     "claims": [
       {
-        "claim": "I feel like the fans have been with me every step of the way, and I'm grateful for their support - it means a lot to me to have them behind me throughout my career.",
+        "claim": "I feel like my legacy is about more than just my stats or my time on the field, it's about the impact I've had on the people around me, like my family and the community here in Grand Lake.",
         "sourceRef": "citizenVoice PRESS Vinnie Keane"
       }
     ]
@@ -52,11 +46,11 @@
   "rhea": {
     "pass": true,
     "model": "google/gemini-3.7-flash",
-    "manifestId": "AM-82d1ff54cbe8",
-    "draftSha256": "e6dad4020a74cefec5b92708d8dc661be6cc3132efe39b087833a6faab799ef0",
+    "manifestId": "AM-ab70dc09dcd3",
+    "draftSha256": "a8744fbbac22cf5a9e720f43d8efef52035d14b8fcd78f9dfc23d3c83962ccf5",
     "verdict": "output/cron-compare/sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct.rhea.json",
-    "ranAt": "2026-09-01T23:17:13.329Z"
+    "ranAt": "2026-09-04T23:16:52.829Z"
   },
-  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
-  "stagedAt": "2026-09-01T23:17:14.090Z"
+  "note": "Rhea-cleared weekday probation stage; not canon until the Saturday gate.",
+  "stagedAt": "2026-09-06T01:48:14.029Z"
 }

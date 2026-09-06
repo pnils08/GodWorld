@@ -1,0 +1,52 @@
+{
+  "status": "staged",
+  "desk": "culture",
+  "cycle": "105",
+  "persona": "mason-ortega",
+  "byline": "Mason Ortega",
+  "bylinePopid": "POP-00160",
+  "article": "output/cron-compare/staged/culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat.staged.md",
+  "bylineUsage": {
+    "recorded": true
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Vanessa Treary",
+        "role": "mentioned",
+        "popid": "POP-00781"
+      },
+      {
+        "name": "Yuki Ji",
+        "role": "quoted-source",
+        "popid": "POP-00783"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "lake-merritt-vanessa-treary-story-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Lake Merritt"
+    ],
+    "claims": [
+      {
+        "claim": "I don't really know much about the evening service at Merritt Reserve - I'm usually finishing up at the coffee shop around then. But I've heard from customers that it gets pretty lively over there after dark, with a different crowd than the daytime.",
+        "sourceRef": "citizenVoice PRESS Vanessa Treary"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-1e4d13f89002",
+    "draftSha256": "f2e3e00f9961b6c1b262b67a5c77807f7960d37108494380580d21dd3961533f",
+    "verdict": "output/cron-compare/culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-06T01:49:37.021Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-06T01:49:41.054Z"
+}

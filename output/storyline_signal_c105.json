@@ -1,0 +1,528 @@
+{
+  "cycle": "105",
+  "signals": [
+    {
+      "slug": "west-oakland-elio-perez-initiative",
+      "advanced": 1,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+        "civic_c105_carmen-delaine_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00201",
+        "POP-00722",
+        "POP-00794",
+        "POP-00961"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "west-oakland-lucia-polito-anomaly",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+        "civic_c105_freelance-firebrand_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland"
+      ],
+      "citizens": [
+        "POP-00004",
+        "POP-00756"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "city-elio-perez-anomaly",
+      "advanced": 1,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+        "civic_c105_luis-navarro_packet-v2_arc"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00201",
+        "POP-00210"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "downtown-jessie-hess-season-feel",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat",
+        "civic_c105_noah-tan_packet-v2_arc"
+      ],
+      "hoods": [
+        "Downtown"
+      ],
+      "citizens": [
+        "POP-00212"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+        "civic_c105_rachel-torres_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland, Fruitvale, East Oakland"
+      ],
+      "citizens": [
+        "POP-00170",
+        "POP-00198",
+        "POP-00201",
+        "POP-00210"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "city-depak-ying-story-signal",
+      "advanced": 2,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+        "culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "Dimond"
+      ],
+      "citizens": [
+        "POP-00170",
+        "POP-00198",
+        "POP-00201",
+        "POP-00210"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "jack-london-isley-kelley-sports-analytics",
+      "advanced": 1,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat",
+        "sports_c105_anthony-raines_packet-v2_arc"
+      ],
+      "hoods": [
+        "Jack London"
+      ],
+      "citizens": [
+        "POP-00019"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "advanced": 2,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
+        "sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00018",
+        "POP-00001",
+        "POP-00003",
+        "POP-00019"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "baylight-district-dame-sarr-sideline-signal",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+        "sports_c105_tanya-cruz_packet-v2_arc"
+      ],
+      "hoods": [
+        "Baylight District"
+      ],
+      "citizens": [
+        "POP-01025",
+        "POP-01026",
+        "POP-00050"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "fruitvale-clarissa-dane-undocked",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+        "undocked_c105_nia-rook_packet-v2_arc"
+      ],
+      "hoods": [
+        "Fruitvale"
+      ],
+      "citizens": [
+        "POP-00143",
+        "POP-00198",
+        "POP-00644",
+        "POP-00744"
+      ],
+      "desks": [
+        "undocked"
+      ]
+    },
+    {
+      "slug": "dimond-melton-neilon-fame-sighting",
+      "advanced": 0,
+      "opened": 2,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c105_maria-keen_packet-v2_arc",
+        "culture_c105_sharon-okafor_packet-v2_arc"
+      ],
+      "hoods": [
+        "Dimond"
+      ],
+      "citizens": [
+        "POP-00170",
+        "POP-00198",
+        "POP-00201",
+        "POP-00210"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "rockridge-depak-ying-story-signal",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "business_c105_business-desk_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "Rockridge"
+      ],
+      "citizens": [
+        "POP-00210"
+      ],
+      "desks": [
+        "business"
+      ]
+    },
+    {
+      "slug": "temescal-sonia-parikh-anomaly",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "Temescal"
+      ],
+      "citizens": [
+        "POP-00170",
+        "POP-00269",
+        "POP-00290"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "adams-point-devon-willis-fame-sighting",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "Adams Point"
+      ],
+      "citizens": [
+        "POP-00782",
+        "POP-00645",
+        "POP-00648",
+        "POP-00798"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "dimond-melton-neilon-story-signal",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat"
+      ],
+      "hoods": [
+        "Dimond"
+      ],
+      "citizens": [
+        "POP-00170",
+        "POP-00198"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "rockridge-depak-ying-hood-rising",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "business_c105_business-desk_packet-v2_arc"
+      ],
+      "hoods": [
+        "Rockridge"
+      ],
+      "citizens": [
+        "POP-00210"
+      ],
+      "desks": [
+        "business"
+      ]
+    },
+    {
+      "slug": "west-oakland-east-oakland-fruitvale-darren-briggs-anomaly",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_angela-reyes_packet-v2_arc"
+      ],
+      "hoods": [
+        "West Oakland, East Oakland, Fruitvale"
+      ],
+      "citizens": [
+        "POP-00588"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "temescal-melton-neilon-initiative",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_lila-mezran_packet-v2_arc"
+      ],
+      "hoods": [
+        "Temescal"
+      ],
+      "citizens": [
+        "POP-00170",
+        "POP-00269",
+        "POP-00290"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "fruitvale-nina-reyes-anomaly",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "civic_c105_trevor-shimizu_packet-v2_arc"
+      ],
+      "hoods": [
+        "Fruitvale"
+      ],
+      "citizens": [
+        "POP-01057",
+        "POP-00766"
+      ],
+      "desks": [
+        "civic"
+      ]
+    },
+    {
+      "slug": "adams-point-devon-willis-hood",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c105_elliot-graye_packet-v2_arc"
+      ],
+      "hoods": [
+        "Adams Point"
+      ],
+      "citizens": [
+        "POP-00782",
+        "POP-00645",
+        "POP-00648",
+        "POP-00798"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "city-melton-neilon-city-event",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c105_kai-marston_packet-v2_arc"
+      ],
+      "hoods": [],
+      "citizens": [
+        "POP-00170",
+        "POP-00198",
+        "POP-00201",
+        "POP-00210"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "lake-merritt-vanessa-treary-named-restaurant",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "culture_c105_mason-ortega_packet-v2_arc"
+      ],
+      "hoods": [
+        "Lake Merritt"
+      ],
+      "citizens": [
+        "POP-00781",
+        "POP-00783"
+      ],
+      "desks": [
+        "culture"
+      ]
+    },
+    {
+      "slug": "jack-london-vinnie-keane-era-door",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c105_hal-richmond_packet-v2_arc"
+      ],
+      "hoods": [
+        "Jack London"
+      ],
+      "citizens": [
+        "POP-00001",
+        "POP-00003",
+        "POP-00018",
+        "POP-00019"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "jack-london-vinnie-keane-injury-load",
+      "advanced": 1,
+      "opened": 0,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c105_p-slayer_packet-v2_arc"
+      ],
+      "hoods": [
+        "Jack London"
+      ],
+      "citizens": [
+        "POP-00001",
+        "POP-00018",
+        "POP-00019"
+      ],
+      "desks": [
+        "sports"
+      ]
+    },
+    {
+      "slug": "jack-london-benji-dillon-long-view-signal",
+      "advanced": 0,
+      "opened": 1,
+      "closed": 0,
+      "referenced": 0,
+      "articles": [
+        "sports_c105_simon-leary_packet-v2_arc"
+      ],
+      "hoods": [
+        "Jack London"
+      ],
+      "citizens": [
+        "POP-00018"
+      ],
+      "desks": [
+        "sports"
+      ]
+    }
+  ]
+}

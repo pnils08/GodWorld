@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "sports",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "anthony-raines",
+  "byline": {
+    "name": "Anthony Raines",
+    "popid": "POP-00017",
+    "beatDomain": "SPORTS"
+  },
+  "laneEntries": 12,
+  "quotesLanded": 1,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nv (31) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00017\",\n  \"name\": \"Anthony Raines\",\n  \"recorded\": true,\n  \"text\": \"filed: The Weight of One IP\"\n}"
+  },
+  "ranAt": "2026-09-04T23:18:43.921Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:14.019Z"
+}

@@ -4,14 +4,14 @@
   "model": "meta-llama/llama-3.3-70b-instruct",
   "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 8880,
-  "usageOutputTokens": 1121,
+  "usageInputTokens": 6803,
+  "usageOutputTokens": 496,
   "savedFiles": [
     "output/cron-compare/undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct.md"
   ],
   "compareAgainst": "output/desk-output/undocked_c105.md",
-  "durationMs": 22391,
+  "durationMs": 27344,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-09-01T23:20:51.182Z"
+  "ranAt": "2026-09-04T23:20:50.852Z"
 }

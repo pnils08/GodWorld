@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "civic",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "carmen-delaine",
+  "byline": {
+    "name": "Carmen Delaine",
+    "popid": "POP-00011",
+    "beatDomain": "CIVIC"
+  },
+  "laneEntries": 61,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "ww.dotenvx.com]\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: The Shadows of What’s Promised: West Oakland Stabilization Fund Enters Disbursement Phase\"\n}"
+  },
+  "ranAt": "2026-09-03T23:16:10.158Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:13.900Z"
+}

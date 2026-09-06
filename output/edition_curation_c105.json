@@ -1,0 +1,146 @@
+{
+  "cycle": "105",
+  "top": 9,
+  "selected": [
+    "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+    "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat",
+    "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+    "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
+    "civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+    "civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+    "culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat",
+    "sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat"
+  ],
+  "ranked": [
+    {
+      "stem": "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "score": 7,
+      "slug": "west-oakland-fruitvale-east-oakland-elio-perez-public-safety",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "score": 7,
+      "slug": "adams-point-devon-willis-fame-sighting",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "score": 7,
+      "slug": "city-depak-ying-story-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "score": 7,
+      "slug": "fruitvale-clarissa-dane-undocked",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "score": 6.5,
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "score": 6.5,
+      "slug": "baylight-district-vinnie-keane-prospect-callup",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "score": 6,
+      "slug": "west-oakland-lucia-polito-anomaly",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "score": 6,
+      "slug": "city-elio-perez-anomaly",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "score": 6,
+      "slug": "dimond-melton-neilon-story-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "score": 6,
+      "slug": "baylight-district-dame-sarr-sideline-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "business_c105_business-desk_packet-v2_deepseek-deepseek-chat",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "score": 5.5,
+      "slug": "rockridge-depak-ying-story-signal",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "score": 5.5,
+      "slug": "downtown-jessie-hess-season-feel",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "score": 5.5,
+      "slug": "jack-london-isley-kelley-sports-analytics",
+      "verdict": "accurate"
+    },
+    {
+      "stem": "civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "score": 5,
+      "slug": "west-oakland-elio-perez-initiative",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "score": 5,
+      "slug": "city-depak-ying-story-signal",
+      "verdict": "corrections-needed"
+    },
+    {
+      "stem": "civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "score": 4.5,
+      "slug": "temescal-sonia-parikh-anomaly",
+      "verdict": "corrections-needed"
+    }
+  ],
+  "excludedCanonViolations": 1
+}

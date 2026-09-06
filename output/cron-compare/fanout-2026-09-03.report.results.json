@@ -1,0 +1,43 @@
+{
+  "date": "2026-09-03",
+  "stage": "report",
+  "results": [
+    {
+      "name": "Carmen Delaine",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Luis Navarro",
+      "desk": "civic",
+      "ok": true
+    },
+    {
+      "name": "Hal Richmond",
+      "desk": "sports",
+      "ok": true
+    },
+    {
+      "name": "Tanya Cruz",
+      "desk": "sports",
+      "ok": false,
+      "error": "W2: zero publishable answers — fail closed, do not open W3"
+    },
+    {
+      "name": "Kai Marston",
+      "desk": "culture",
+      "ok": true
+    },
+    {
+      "name": "Jordan Velez",
+      "desk": "business",
+      "ok": true
+    },
+    {
+      "name": "Nia Rook",
+      "desk": "undocked",
+      "ok": true
+    }
+  ],
+  "ranAt": "2026-09-03T18:21:36.274Z"
+}

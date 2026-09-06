@@ -1,0 +1,46 @@
+{
+  "status": "staged",
+  "desk": "sports",
+  "cycle": "105",
+  "persona": "anthony-raines",
+  "byline": "Anthony Raines",
+  "bylinePopid": "POP-00017",
+  "article": "output/cron-compare/staged/sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat.staged-2318.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Isley Kelley",
+        "role": "quoted-source",
+        "popid": "POP-00019"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "jack-london-isley-kelley-sports-analytics",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [],
+    "claims": [
+      {
+        "claim": "I’ve been watching Vinnie and Benji closely this season, and their performances have been electric—they’re carrying the team with heart and grit, and it’s exactly what Oakland deserves for this farewell.",
+        "sourceRef": "citizenVoice PRESS Isley Kelley"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-3344a48ebe66",
+    "draftSha256": "b611e3495474c2b5a0f1beca9e444882f2946231dd8f541da85f46174785127d",
+    "verdict": "output/cron-compare/sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-04T23:18:31.501Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-04T23:18:32.031Z"
+}

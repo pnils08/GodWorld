@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "meta-llama/llama-3.3-70b-instruct",
+  "configuredWriterModel": "meta-llama/llama-3.3-70b-instruct",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "kai-marston",
+  "byline": {
+    "name": "Kai Marston",
+    "popid": "POP-00158",
+    "beatDomain": "CULTURE"
+  },
+  "laneEntries": 19,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "nv // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00158\",\n  \"name\": \"Kai Marston\",\n  \"recorded\": true,\n  \"text\": \"filed: The Corliss Family Block Party: A Celebration of Community\"\n}"
+  },
+  "ranAt": "2026-09-03T23:18:26.680Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:14.000Z"
+}

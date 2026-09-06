@@ -1,0 +1,166 @@
+{
+  "v": "OFFICE/1",
+  "team": "civic-office",
+  "empty": false,
+  "actor": {
+    "id": "POP-00043",
+    "name": "Janae Rivers",
+    "role": "City Council District 5",
+    "officeId": "COUNCIL-D5",
+    "district": "D5",
+    "faction": "OPP",
+    "agentDir": "civic-office-council-d5",
+    "initiative": null,
+    "dials": {
+      "approval": 80
+    }
+  },
+  "task": {
+    "a": "district-week",
+    "goal": "First expansion-district launch (D1)"
+  },
+  "pulse": {
+    "className": "initiative",
+    "score": 48,
+    "label": "Oakland Alternative Response Initiative — First expansion-district launch (D1)",
+    "lever": "First expansion-district launch (D1)",
+    "hood": "East Oakland",
+    "initiative": "INIT-002",
+    "vsCity": {
+      "sentiment": 0.96,
+      "citySentiment": 0.8854545454545455,
+      "crime": 1.17,
+      "cityCrime": 0.6990909090909091,
+      "heat": 1.9636363636363692,
+      "outlier": false
+    }
+  },
+  "prewrite": {
+    "claim": "First expansion-district launch (D1)",
+    "lineFacts": [
+      "approval 80",
+      "Oakland Alternative Response Initiative is in implementation-active; budget $12.5M — C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established.",
+      "due: First expansion-district launch (D1)",
+      "East Oakland crime: property 51, violent 66, incidents 10 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "East Oakland: sentiment 0.96 vs city 0.885; crime index 1.17 vs city 0.699; retail 7.35; housing pressure 0; steady; momentum 5"
+    ],
+    "missing": [
+      "no shop names on disk for this turf",
+      "no invented vote, POPID, or complete"
+    ]
+  },
+  "signal": {
+    "kind": "district-heat",
+    "hoods": [
+      "East Oakland",
+      "Baylight District"
+    ],
+    "src": "lib/districtMap.js + civic-office-map.json"
+  },
+  "exposure": {
+    "subjects": [
+      {
+        "pop": "POP-01055",
+        "name": "Jerome Pittman",
+        "neighborhood": "East Oakland",
+        "role": "Transit Hub D5 Intake Liaison",
+        "tier": 4,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Alternative Response Initiative — First expansion-district launch (D1)"
+      },
+      {
+        "pop": "POP-01047",
+        "name": "Maria Conteras",
+        "neighborhood": "East Oakland",
+        "role": "High School Teacher",
+        "tier": 3,
+        "src": "output/simulation_ledger_snapshot.jsonl",
+        "why": "lives in East Oakland — Oakland Alternative Response Initiative — First expansion-district launch (D1)"
+      }
+    ],
+    "businesses": [],
+    "churches": [],
+    "sources": []
+  },
+  "known": [
+    {
+      "id": "F-office-COUNCIL-D5",
+      "t": "FACT",
+      "text": "Janae Rivers holds COUNCIL-D5 at approval 80",
+      "src": "engine_audit snapshots.Civic_Office_Ledger"
+    },
+    {
+      "id": "F-INIT-002",
+      "t": "FACT",
+      "text": "Oakland Alternative Response Initiative is in implementation-active; budget $12.5M — C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established.",
+      "src": "output/initiative_tracker.json"
+    },
+    {
+      "id": "F-crime-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland crime: property 51, violent 66, incidents 10 (cycle 105) — city property 40.2, violent 33.3, incidents 6.3",
+      "src": "engine_audit snapshots.Crime_Metrics"
+    },
+    {
+      "id": "F-hood-EastOakland",
+      "t": "FACT",
+      "text": "East Oakland: sentiment 0.96 vs city 0.885; crime index 1.17 vs city 0.699; retail 7.35; housing pressure 0; steady; momentum 5",
+      "src": "engine_audit snapshots.Neighborhood_Map"
+    }
+  ],
+  "role": {
+    "officeRows": [
+      {
+        "OfficeId": "COUNCIL-D5",
+        "PopId": "POP-00043",
+        "Holder": "Janae Rivers",
+        "District": "D5",
+        "Approval": "80"
+      }
+    ],
+    "civicPeers": [
+      {
+        "OfficeId": "COUNCIL-D1",
+        "PopId": "POP-00501",
+        "Holder": "Denise Carter",
+        "District": "D1",
+        "Faction": "OPP",
+        "Approval": 95
+      },
+      {
+        "OfficeId": "COUNCIL-D3",
+        "PopId": "POP-00503",
+        "Holder": "Rose Delgado",
+        "District": "D3",
+        "Faction": "OPP",
+        "Approval": 85
+      },
+      {
+        "OfficeId": "COUNCIL-D9",
+        "PopId": "POP-00506",
+        "Holder": "Terrence Mobley",
+        "District": "D9",
+        "Faction": "OPP",
+        "Approval": 55
+      }
+    ]
+  },
+  "limits": {
+    "assert": [
+      "only named subjects in exposure.subjects",
+      "only named shops in exposure.businesses",
+      "only named churches in exposure.churches",
+      "only project facts in known",
+      "no invented POPID, vote, or complete"
+    ],
+    "invent": [
+      "no new citizens",
+      "no new businesses",
+      "no sheet numbers"
+    ]
+  },
+  "output": {
+    "contract": "statement + action + numberMoved",
+    "dest": "office wiki (civic.16) then next Sunday city-hall packet"
+  }
+}

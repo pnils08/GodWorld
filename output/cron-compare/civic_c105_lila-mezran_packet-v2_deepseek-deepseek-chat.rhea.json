@@ -1,0 +1,50 @@
+{
+  "draft": "output/cron-compare/civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "369e78fd534f0e932f34760fa72ff4a4a5b82b6f37f6138f1ca91dd9e7f086ef",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All quotes, citizen bios, and initiative construction details verify cleanly against cycle 105 canon.",
+  "review": {
+    "profileId": "lila-health-service-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "lila-health-service-v1",
+    "packageVersion": "LILA-LEP2-1",
+    "manifestId": "AM-73db71c6b407",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Kevin Nelson",
+      "Lila Mezran",
+      "Melton Neilon",
+      "Omar Cleo"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 3,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 1,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0093,
+  "durationMs": 7327,
+  "parseError": false,
+  "ranAt": "2026-09-02T23:16:00.701Z"
+}

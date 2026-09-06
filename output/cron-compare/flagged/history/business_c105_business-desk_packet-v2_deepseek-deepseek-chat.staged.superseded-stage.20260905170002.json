@@ -1,0 +1,48 @@
+{
+  "status": "staged",
+  "desk": "business",
+  "cycle": "105",
+  "persona": "business-desk",
+  "byline": "Jordan Velez",
+  "bylinePopid": "POP-00153",
+  "article": "output/cron-compare/staged/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.staged-2320.md",
+  "bylineUsage": {
+    "recorded": false,
+    "reason": "duplicate — this stem already credited"
+  },
+  "intake": {
+    "names": [
+      {
+        "name": "Depak Ying",
+        "role": "quoted-source",
+        "popid": "POP-00210"
+      }
+    ],
+    "businesses": [],
+    "storylines": [
+      {
+        "slug": "rockridge-depak-ying-story-signal",
+        "verb": "opened"
+      }
+    ],
+    "hoods": [
+      "Rockridge"
+    ],
+    "claims": [
+      {
+        "claim": "I’ve noticed more people walking around, especially in the evenings—places like Cozy Pot and HotSlice Pizza seem busier than usual. It feels like there’s a buzz in the air, and businesses are definitely adapting to keep up with the crowd.",
+        "sourceRef": "citizenVoice PRESS Depak Ying"
+      }
+    ]
+  },
+  "rhea": {
+    "pass": true,
+    "model": "google/gemini-3.7-flash",
+    "manifestId": "AM-17d2e7ca15ee",
+    "draftSha256": "373f01c117d438c7a8747152ac4d63ff51f49cca91c7be6085ac333cce3969d0",
+    "verdict": "output/cron-compare/business_c105_business-desk_packet-v2_deepseek-deepseek-chat.rhea.json",
+    "ranAt": "2026-09-04T23:20:13.833Z"
+  },
+  "note": "M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.",
+  "stagedAt": "2026-09-04T23:20:14.154Z"
+}

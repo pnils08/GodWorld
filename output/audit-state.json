@@ -1,11 +1,11 @@
 {
   "doc:boot": {
-    "lastTouched": "2026-09-01T00:49:08.963Z",
-    "reportPath": "output/audit-reports/session-audit_2026-08-31_194908.md"
+    "lastTouched": "2026-09-05T02:51:10.959Z",
+    "reportPath": "output/audit-reports/session-audit_2026-09-04_215110.md"
   },
   "doc:engine": {
-    "lastTouched": "2026-08-29T08:26:59.770Z",
-    "reportPath": "output/audit-reports/session-audit_2026-08-29_032659.md"
+    "lastTouched": "2026-09-06T07:26:28.722Z",
+    "reportPath": "output/audit-reports/session-audit_2026-09-06_022628.md"
   },
   "skill:cycle-pipeline": {
     "lastTouched": "2026-08-21T07:18:49.808Z",
@@ -18,5 +18,9 @@
   "doc:data": {
     "lastTouched": "2026-09-01T02:56:58.556Z",
     "reportPath": "output/audit-reports/session-audit_2026-08-31_215658.md"
+  },
+  "doc:infra": {
+    "lastTouched": "2026-09-06T07:36:53.932Z",
+    "reportPath": "output/audit-reports/session-audit_2026-09-06_023653.md"
   }
 }

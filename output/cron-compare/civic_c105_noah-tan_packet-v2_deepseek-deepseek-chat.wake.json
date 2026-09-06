@@ -28,5 +28,6 @@
     "recorded": true,
     "out": "njected env (31) from ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00157\",\n  \"name\": \"Noah Tan\",\n  \"recorded\": true,\n  \"text\": \"filed: The Small Adjustments\"\n}"
   },
-  "ranAt": "2026-08-31T23:15:57.421Z"
+  "ranAt": "2026-08-31T23:15:57.421Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:13.986Z"
 }

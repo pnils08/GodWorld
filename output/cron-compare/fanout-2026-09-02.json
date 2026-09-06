@@ -1,0 +1,428 @@
+{
+  "date": "2026-09-02",
+  "cycle": 105,
+  "quotas": {
+    "civic": 2,
+    "sports": 2,
+    "culture": 1,
+    "business": 1,
+    "undocked": 1
+  },
+  "assignments": [
+    {
+      "desk": "civic",
+      "name": "Dr. Lila Mezran",
+      "popid": "POP-00154",
+      "beatDomain": "HEALTH",
+      "persona": "lila-mezran",
+      "approach": "Civic approach: start from the official action — who in city hall did what, this cycle, on the record. Then find the resident living its consequence; an official's report is not a story until a second, non-official citizen is shown carrying it. Name who must answer, and what question they haven't answered.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "label": "Temescal Community Health Center is approved, and construction is active.",
+        "kind": "initiative",
+        "angle": "Temescal Community Health Center is approved, and construction is active.",
+        "hookLine": "The supplied civic record identifies a health-service question that needs careful accounting.",
+        "hood": "Temescal",
+        "popids": [],
+        "citizens": []
+      },
+      "civicDomainSlice": true,
+      "civicDomainSeat": "lila-mezran",
+      "pulse": {
+        "className": "health",
+        "score": 45,
+        "label": "Temescal Community Health Center is approved, and construction is active.",
+        "hood": "Temescal",
+        "source": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+      },
+      "prewrite": {
+        "anchorFacts": [
+          "Temescal Community Health Center is approved, and construction is active."
+        ],
+        "forbidden": [
+          "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+        ],
+        "schema": "HEALTH-SERVICE-BRIEF-1",
+        "method": "ACCESS_TIMELINE_HUMAN_COST",
+        "missing": [
+          "a named affected resident, patient, clinician, or service user",
+          "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+          "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+        ],
+        "humanConsequence": {
+          "state": "UNESTABLISHED",
+          "subjects": [],
+          "facts": [],
+          "src": null
+        }
+      },
+      "wakePackage": "LILA-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "civic",
+      "name": "Jax Caldera",
+      "popid": "POP-00799",
+      "beatDomain": "ACCOUNTABILITY",
+      "persona": "freelance-firebrand",
+      "approach": "Firebrand approach (sim stink-audit): do NOT open from the official timeline. Find what does not line up — metric vs claim, money vs outcome, boomtown copy vs decay numbers, crisis signal with no owner. Write into the contradiction. Name who must answer. End on the unanswered question. Sparing heat: one stink, not a roundup.",
+      "story": {
+        "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+        "label": "West Oakland Stabilization Fund | Month-six disbursement review + canvass launch C105",
+        "kind": "vote"
+      },
+      "wakePackage": "JAX-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Simon Leary",
+      "popid": "POP-00016",
+      "beatDomain": "SPORTS_LONG_VIEW",
+      "persona": "simon-leary",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "ref": "Ripple_Ledger cycle 105 (CauseType sports); rendered: world_summary_c105.md \"## What Moved\" > \"### sports\"",
+        "label": "sentiment | A's W0 [player-energy]; A's W0 [awards]; Oaks L3 [player-frustration]; Oaks L3 [cold-streak]",
+        "kind": "ripple"
+      },
+      "wakePackage": "SIMON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "sports",
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "beatDomain": "SPORTS_ANALYTICS",
+      "persona": "anthony-raines",
+      "approach": "Sports approach: the game and the fan. What happened on the field is the skeleton — the story is what it felt like in the stands and the neighborhood sports bars. Records, scores, and player facts come straight from the feed; never invent a stat.",
+      "story": {
+        "kind": "sports-analytics",
+        "angle": "The season line (1 IP) has to carry the claim before the narrative does: A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "label": "A's · game-result — A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hookLine": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hood": "Jack London",
+        "pulseClass": "award-board",
+        "team": "A's",
+        "eventKind": "game-result",
+        "citizens": [
+          "Benji Dillon (POP-00018)",
+          "Vinnie Keane (POP-00001)",
+          "Mark Aitken (POP-00003)",
+          "Isley Kelley (POP-00019)"
+        ],
+        "popids": [
+          "POP-00018",
+          "POP-00001",
+          "POP-00003",
+          "POP-00019"
+        ],
+        "ref": "world_summary_c105.md ## Sports",
+        "cycle": 105
+      },
+      "anthonySlice": true,
+      "analytic": true,
+      "pulse": {
+        "className": "award-board",
+        "score": 79,
+        "label": "A's · game-result — A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "team": "A's",
+        "eventKind": "game-result",
+        "seasonType": "late-season",
+        "storyAngle": "A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "hasStats": true,
+        "record": "127-35",
+        "streak": "W2",
+        "foilNumber": "1 IP",
+        "feedCycle": 105
+      },
+      "bag": {
+        "tools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 7,
+            "name": "Is-It-Real (ledger PANDAS)"
+          }
+        ],
+        "claim": "The season line (1 IP) has to carry the claim before the narrative does: A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "foilNumber": "1 IP"
+      },
+      "prewrite": {
+        "reporter": "Anthony Raines",
+        "bagTools": [
+          {
+            "id": 1,
+            "name": "Box-Card Read"
+          },
+          {
+            "id": 7,
+            "name": "Is-It-Real (ledger PANDAS)"
+          }
+        ],
+        "lineFacts": [
+          "Benji Dillon line (feed): 5.1 IP/8K/2H",
+          "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+          "Mark Aitken line (feed): 2HR/6RBI",
+          "Team record (feed): 127-35 · W2",
+          "Event kind (feed): A's — game-result (late-season)",
+          "NamesUsed (feed): Benji Dillon (SP), Vinnie Keane (2B), Mark Aitken (1B), Isley Kelley (SS)"
+        ],
+        "dossierFacts": [
+          "NONE — offline slice; use packet TrueSource only if wake supplies"
+        ],
+        "feedFacts": [
+          "StoryAngle: A Farewell Gone Well:Vinnie Keane Benji Dillon",
+          "Notes: The farewell season reaches its final regular season curtain call as the As play host to the NL's top team in the Rockies. As Vinnie Keane HOF career comes to its close a legacy that reshaped Oakland ",
+          "Record/Streak: 127-35 / W2"
+        ],
+        "claim": "The season line (1 IP) has to carry the claim before the narrative does: A Farewell Gone Well:Vinnie Keane Benji Dillon",
+        "missing": [
+          "x-stats / barrel% / launch angle / OAA not on feed",
+          "contracts or salaries not printed on this feed row",
+          "As_Roster sheet cells (offline pack uses feed Stats only — do not invent WAR/ERA beyond feed)",
+          "TrueSource dossier lines not loaded offline — DossierFacts: NONE unless packet supplies"
+        ],
+        "foilNumber": "1 IP",
+        "anchorFacts": [
+          "Benji Dillon line (feed): 5.1 IP/8K/2H",
+          "Vinnie Keane line (feed): 4-5/HR/2B/3RBI",
+          "Mark Aitken line (feed): 2HR/6RBI",
+          "Team record (feed): 127-35 · W2"
+        ]
+      },
+      "wakePackage": "ANTHONY-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "culture",
+      "name": "Sharon Okafor",
+      "popid": "POP-00159",
+      "beatDomain": "CULTURE",
+      "persona": "sharon-okafor",
+      "approach": "Culture approach: what is the city vibing on? Find what people are actually doing — the block, the food, the music, the small rituals around this cycle's events. Ground it in the named places and people of the record, then let the street texture breathe.",
+      "story": {
+        "angle": "Benji Dillon spotted at Dimond Pharmacy in Dimond — ground truth only, no invented companions",
+        "label": "Benji Dillon at Dimond Pharmacy (Dimond)",
+        "hookLine": "sighting | Benji Dillon spotted at Dimond Pharmacy",
+        "hood": "Dimond",
+        "pulseClass": "fame-sighting",
+        "citizens": [
+          "Benji Dillon"
+        ],
+        "popids": [],
+        "named": "Dimond Pharmacy",
+        "venue": "Dimond Pharmacy",
+        "ref": "Ripple_Ledger cycle 105 (CauseType lifestyle-sighting); rendered: world_summary_c105.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "cycle": 105
+      },
+      "eveningSlice": true,
+      "eveningLife": true,
+      "pulse": {
+        "className": "fame-sighting",
+        "score": 23,
+        "label": "Benji Dillon at Dimond Pharmacy (Dimond)"
+      },
+      "recommend": {
+        "bag": "ground",
+        "slug": "maria-keen",
+        "name": "Maria Keen",
+        "popid": "POP-00013",
+        "bagDoc": "docs/media/MARIA_GROUND_BAG.md",
+        "reason": "top pulse fame-sighting → ground",
+        "pulseClass": "fame-sighting",
+        "pulseLabel": "Benji Dillon at Dimond Pharmacy (Dimond)"
+      },
+      "bag": "lifestyle",
+      "wakePackage": "SHARON-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "business",
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "beatDomain": "ECONOMIC",
+      "persona": "business-desk",
+      "approach": "Business approach: follow the money. Who pays, who collects, what changed hands this cycle, and which storefront or household feels it first. Anchor every claim to the record — never invent a figure; if the record gives no number, write the story without one.",
+      "story": {
+        "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+        "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "hood": "Rockridge",
+        "pulseClass": "hood-rising",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "citizens": [],
+        "popids": [],
+        "ref": "world_summary ## What Moved · trajectory",
+        "cycle": 105
+      },
+      "economicSlice": true,
+      "pulse": {
+        "className": "hood-rising",
+        "score": 33,
+        "label": "Rockridge rising · Cozy Pot, HotSlice Pizza",
+        "hood": "Rockridge",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "retail": 10.51,
+        "retailDelta": null
+      },
+      "prewrite": {
+        "pulseClass": "hood-rising",
+        "angle": "Retail turning upward in Rockridge — busy counters, people moving in; named on pack: Cozy Pot, HotSlice Pizza, Festive Fireside",
+        "hookLine": "Rockridge turning upward: retail busy, events drawing crowds, people moving in",
+        "namedBusinesses": [
+          "Cozy Pot",
+          "HotSlice Pizza",
+          "Festive Fireside"
+        ],
+        "anchorFacts": [
+          "HOOD: Rockridge",
+          "TRAJECTORY: rising",
+          "MAGNITUDE (translate, do not lead): 5",
+          "RETAIL VITALITY (scene color): 10.51",
+          "NAMED BUSINESSES (sources only): Cozy Pot; HotSlice Pizza; Festive Fireside",
+          "EVENING VENUE: Cozy Pot (restaurant)",
+          "EVENING VENUE: HotSlice Pizza (fast-food)"
+        ],
+        "forbidden": [
+          "Do not invent Employee_Count",
+          "Do not invent Key_Personnel",
+          "Do not invent storefronts not on ledger or evening texture",
+          "Do not lead with raw RetailVitality decimals — translate to scene"
+        ]
+      },
+      "wakePackage": "JORDAN-LEP2-1",
+      "packetContract": "v2"
+    },
+    {
+      "desk": "undocked",
+      "name": "Nia Rook",
+      "popid": "POP-01076",
+      "beatDomain": "CULTURE",
+      "persona": "nia-rook",
+      "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun.",
+      "story": {
+        "ref": "undocked:undocked-pop00962-Y3C1",
+        "label": "UNDOCKED: Marcus Walker — a night the books can't settle yet",
+        "kind": "undocked",
+        "angle": "Recap Marcus Walker's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems unlisted, combat 0, mishaps 0, magnitude 1/5.",
+        "citizens": [
+          "Marcus Walker — UNDOCKED cast pilot"
+        ],
+        "popids": [
+          "POP-00962"
+        ],
+        "hood": "Jack London"
+      },
+      "wakePackage": "NIAROOK-UNDOCKED-1",
+      "packetContract": "v2"
+    }
+  ],
+  "shortfalls": [],
+  "rotationShortfalls": [],
+  "seedless": 0,
+  "signalMissing": false,
+  "packageGate": {
+    "policy": "package-only",
+    "pinned": [],
+    "skipped": [],
+    "activeAssignments": [
+      {
+        "name": "Dr. Lila Mezran",
+        "persona": "lila-mezran",
+        "wakePackage": "LILA-LEP2-1"
+      },
+      {
+        "name": "Jax Caldera",
+        "persona": "freelance-firebrand",
+        "wakePackage": "JAX-LEP2-1"
+      },
+      {
+        "name": "Simon Leary",
+        "persona": "simon-leary",
+        "wakePackage": "SIMON-LEP2-1"
+      },
+      {
+        "name": "Anthony Raines",
+        "persona": "anthony-raines",
+        "wakePackage": "ANTHONY-LEP2-1"
+      },
+      {
+        "name": "Sharon Okafor",
+        "persona": "sharon-okafor",
+        "wakePackage": "SHARON-LEP2-1"
+      },
+      {
+        "name": "Jordan Velez",
+        "persona": "business-desk",
+        "wakePackage": "JORDAN-LEP2-1"
+      },
+      {
+        "name": "Nia Rook",
+        "persona": "nia-rook",
+        "wakePackage": "NIAROOK-UNDOCKED-1"
+      }
+    ]
+  },
+  "stinkForce": {
+    "attempted": true,
+    "forced": false,
+    "reason": "cooldown recentForce=2026-08-27",
+    "top": {
+      "score": 38,
+      "className": "anomaly",
+      "label": "incoherence (high) | Initiative \"Oakland Alternative Response Initiative\" (implementation-active, safety) but 3 affected neighborhoods show contradicting CrimeIndex"
+    },
+    "reportPath": "/root/GodWorld/output/cron-compare/stink_c105.json"
+  },
+  "pslayerEnrich": {
+    "enriched": false,
+    "reason": "no p-slayer assignment in rota (before=lila-mezran,freelance-firebrand,simon-leary,anthony-raines,sharon-okafor,business-desk,nia-rook)"
+  },
+  "anthonyEnrich": {
+    "enriched": true,
+    "reason": "pulse=award-board score=79 foil=1 IP"
+  },
+  "halEnrich": {
+    "enriched": false,
+    "reason": "no hal-richmond assignment in rota"
+  },
+  "economicEnrich": {
+    "enriched": true,
+    "reason": "pulse=hood-rising score=33 hood=Rockridge"
+  },
+  "eveningEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "sharon-okafor",
+        "bag": "lifestyle",
+        "pulse": "fame-sighting",
+        "score": 23
+      }
+    ]
+  },
+  "civicDomainEnrich": {
+    "enriched": true,
+    "reason": "seats=1",
+    "seats": [
+      {
+        "persona": "lila-mezran",
+        "domain": "health",
+        "label": "Temescal Community Health Center is approved, and construction is active."
+      }
+    ]
+  },
+  "builtAt": "2026-09-02T11:15:09.057Z"
+}

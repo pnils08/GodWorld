@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "civic",
+  "persona": "luis-navarro",
+  "storyline": {
+    "slug": "city-elio-perez-anomaly",
+    "verb": "opened"
+  },
+  "hood": null,
+  "quotes": [
+    {
+      "pop": "POP-00201",
+      "name": "Elio Perez",
+      "quote": "I’ve seen how the council’s inaction leaves us feeling forgotten, like our voices don’t matter when it comes to fixing what’s broken in our neighborhoods."
+    },
+    {
+      "pop": "POP-00210",
+      "name": "Depak Ying",
+      "quote": "I’ve heard people talking about the civic gap, and it feels like the council’s inaction is leaving us all hanging—like they’re not really hearing what the city needs."
+    }
+  ],
+  "claim": "I’ve seen how the council’s inaction leaves us feeling forgotten, like our voices don’t matter when it comes to fixing what’s broken in our neighborhoods.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-03T18:17:15.167Z"
+}

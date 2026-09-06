@@ -1,0 +1,15 @@
+{
+  "office": "baylight_authority",
+  "agentDir": "civic-office-baylight-authority",
+  "holder": "Keisha Ramos",
+  "popid": "POP-00041",
+  "title": "Baylight Authority Director",
+  "date": "2026-09-02",
+  "cycle": 105,
+  "model": "deepseek/deepseek-chat",
+  "statement": "The Baylight Authority has completed its Phase II bid evaluation—three qualified consortiums advance with proposals that meet our exacting standards. We await the council's final vote to move forward with the team that will deliver this landmark project.",
+  "action": null,
+  "numberMoved": null,
+  "ranAt": "2026-09-02T10:45:38.346Z",
+  "fellBackFrom": null
+}

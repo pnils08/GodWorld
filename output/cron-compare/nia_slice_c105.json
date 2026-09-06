@@ -9,30 +9,31 @@
       "EventType": "undocked-episode",
       "POPID": "POP-00143",
       "Holder": "Clarissa Dane",
-      "EpisodeId": "undocked-pop00143-Y3C1",
-      "CreditsDelta": 72,
+      "EpisodeId": "undocked-pop00143-Y3C1-e2",
+      "CreditsDelta": null,
       "Systems": [
+        "sol",
         "alpha_centauri"
       ],
       "CombatEvents": 0,
       "MishapCount": 0,
-      "Magnitude": 3,
+      "Magnitude": 2,
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-01T01-30-10.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-04T01-30-08.json"
     }
   ],
   "laneEntries": [
     {
-      "ref": "undocked:undocked-pop00143-Y3C1",
-      "label": "UNDOCKED: Clarissa Dane — up 72 on the night",
+      "ref": "undocked:undocked-pop00143-Y3C1-e2",
+      "label": "UNDOCKED: Clarissa Dane — a night the books can't settle yet",
       "kind": "undocked",
       "popids": [
         "POP-00143"
       ],
       "handle": {
-        "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 72, systems alpha_centauri, combat 0, mishaps 0, magnitude 3/5.",
+        "angle": "Recap Clarissa Dane's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems sol, alpha_centauri, combat 0, mishaps 0, magnitude 2/5.",
         "citizens": [
           "Clarissa Dane — UNDOCKED cast pilot"
         ]
@@ -43,21 +44,22 @@
         "EventType": "undocked-episode",
         "POPID": "POP-00143",
         "Holder": "Clarissa Dane",
-        "EpisodeId": "undocked-pop00143-Y3C1",
-        "CreditsDelta": 72,
+        "EpisodeId": "undocked-pop00143-Y3C1-e2",
+        "CreditsDelta": null,
         "Systems": [
+          "sol",
           "alpha_centauri"
         ],
         "CombatEvents": 0,
         "MishapCount": 0,
-        "Magnitude": 3,
+        "Magnitude": 2,
         "Flags": [
           "credits_delta_windowed"
         ],
-        "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-01T01-30-10.json"
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-04T01-30-08.json"
       },
       "hood": "Fruitvale"
     }
   ],
-  "generatedAt": "2026-09-01T11:15:08.000Z"
+  "generatedAt": "2026-09-04T11:15:07.655Z"
 }

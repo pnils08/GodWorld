@@ -4,29 +4,25 @@ A daily digest of citizen life over the last 24 hours, assembled from the citize
 
 ## The people, in their own words
 
-### Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake
+### Art Scott — Sustainable Materials Scientist — Lake Merritt
 
-> *laughs, genuine this time* There it is. Yeah. *shakes head* You know what? You were right to call me on it. I came in empty, and you had to point me at what was actually in fro
+> There you are! Was just thinking about how you used to call the light on the water "diamond time" when you were little. (Glancing at the lake path) Walk with me? That new tamale ca *(talking with Layla Scott)*
 
-> You know, when you're in the middle of a season like this, you don't really think about endings - you're just riding the wave. But seeing guys like Benji and Mark light it up these
+### Layla Scott — student — Lake Merritt
 
-### Benji Dillon — Pitcher, Oakland A's Legend — Rockridge
+> (Adjusting stride to match) Oh man, you remember that? I think I got it from some old storybook. (Laughs) Those tamales though - you're not wrong. Saw Mags waiting in line there ye *(talking with Art Scott)*
 
-> You know, I've been grabbing slices at HotSlice after my workouts, and what strikes me is how many new faces are always in there—not just passing through, but really settling in, l
+### Trevor Shimizu — Journalist, Transit & Infastructure — Laurel
 
-> This season, it feels like we're not just playing for wins—we're celebrating the journey, the legacy, and the guys who've given everything to this game. It’s less about endings and
+> filed: Fruitvale Transit Hub Phase II Slips Back Into Visioning Stage
 
-### Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London
+### Mason Ortega — Journalist, Food & Hospitality — Uptown
 
-> This season has definitely turned the vibe around—it’s less about saying goodbye and more about celebrating what these guys have built. You can feel it in the stands and on the fie
+> filed: The Pulse at Merritt Reserve’s Pass
 
-### Isley Kelley — Shortstop, Oakland A's Legend — Rockridge
+### Jordan Velez — Journalist, Economics & Labor — Uptown
 
-> This season’s been electric—it’s like the weight of farewells lifted, and now it’s all about celebrating what these guys have built. You can feel it in the air, even in Rockridge.
-
-### Ernesto Quintero — 3B/1B , Oakland A's — Baylight District
-
-> I’ve heard folks around Baylight talking about Dame Sarr’s hustle—7 points, 3 rebounds, and 3 steals—but the Oaks’ 0-3 preseason record has everyone a little on edge.
+> The clock ticks past midnight and I'm still staring at my notebook, full of half-written pieces that don't feel urgent enough anymore. That kid selling papers outside the Tribune t
 
 ---
-*Assembled 2026-09-01 from Reflection_Intake (32 reflections, 25 citizens) and LifeHistory_Log (0 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+*Assembled 2026-09-06 from Reflection_Intake (7 reflections, 7 citizens) and LifeHistory_Log (0 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*

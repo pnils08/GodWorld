@@ -1,0 +1,394 @@
+{
+  "stage": "angle",
+  "desk": "civic",
+  "cycle": "105",
+  "persona": "lila-mezran",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00154",
+      "name": "Dr. Lila Mezran",
+      "role": "desk reporter",
+      "desk": "civic"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "Temescal Community Health Center is approved, and construction is active.",
+      "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.",
+      "creativeBrief": {
+        "kind": "health-service",
+        "method": "ACCESS_TIMELINE_HUMAN_COST",
+        "missing": [
+          "a named affected resident, patient, clinician, or service user",
+          "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+          "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+        ],
+        "humanConsequence": {
+          "state": "UNESTABLISHED",
+          "subjects": [],
+          "facts": [],
+          "src": null
+        },
+        "forbidden": [
+          "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+        ]
+      }
+    },
+    "signal": {
+      "kind": "initiative",
+      "hood": "Temescal",
+      "score": null,
+      "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "nearby": [
+        {
+          "text": "Keisha Ramos (Baylight Authority Director): The Baylight Authority has completed its Phase II bid evaluation—three qualified consortiums advance",
+          "src": "output/cron-civic/datawake/civic-office-baylight-authority_2026-09-02.json"
+        },
+        {
+          "text": "Leonard Tran (City Council District 2): described in words: significant headway on securing commitments, pending documented delivery schedule",
+          "src": "output/cron-civic/datawake/civic-office-council-d2_2026-09-02.json"
+        },
+        {
+          "text": "Ramon Vega (City Council District 4): none",
+          "src": "output/cron-civic/datawake/civic-office-council-d4_2026-09-02.json"
+        },
+        {
+          "text": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+          "src": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s)"
+        },
+        {
+          "text": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+          "src": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00170",
+          "name": "Melton Neilon",
+          "profile": "Melton Neilon — Sourdough Baker — Temescal",
+          "why": "same-hood-ledger",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00269",
+          "name": "Kevin Nelson",
+          "profile": "Kevin Nelson — Line cook — Temescal",
+          "why": "same-hood-ledger",
+          "role": "Line cook",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00290",
+          "name": "Omar Cleo",
+          "profile": "Omar Cleo — Line Cook — Temescal",
+          "why": "same-hood-ledger",
+          "role": "Line Cook",
+          "hood": "Temescal"
+        },
+        {
+          "pop": "POP-00666",
+          "name": "Kaila Raimon",
+          "profile": "Kaila Raimon — Sourdough Baker — Temescal",
+          "why": "same-hood-ledger",
+          "role": "Sourdough Baker",
+          "hood": "Temescal"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "Temescal Community Health Center is approved, and construction is active.",
+        "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "id": "F-2b3e19368d02"
+      },
+      {
+        "t": "FACT",
+        "text": "The supplied civic record identifies a health-service question that needs careful accounting.",
+        "src": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "id": "F-119694326b41"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Dr. Lila Mezran",
+    "popid": "POP-00154"
+  },
+  "assignment": {
+    "story": {
+      "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "label": "Temescal Community Health Center is approved, and construction is active.",
+      "kind": "initiative",
+      "angle": "Temescal Community Health Center is approved, and construction is active.",
+      "hookLine": "The supplied civic record identifies a health-service question that needs careful accounting.",
+      "hood": "Temescal",
+      "popids": [],
+      "citizens": []
+    },
+    "approach": "Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": null,
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": {
+    "seat": {
+      "slug": "lila-mezran",
+      "name": "Dr. Lila Mezran",
+      "popid": "POP-00154",
+      "domain": "health"
+    },
+    "pulse": {
+      "className": "health",
+      "score": 45,
+      "label": "Temescal Community Health Center is approved, and construction is active.",
+      "hood": "Temescal",
+      "source": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker"
+    },
+    "prewrite": {
+      "anchorFacts": [
+        "Temescal Community Health Center is approved, and construction is active."
+      ],
+      "forbidden": [
+        "Do not add diagnoses, symptoms, prevalence, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries."
+      ],
+      "schema": "HEALTH-SERVICE-BRIEF-1",
+      "method": "ACCESS_TIMELINE_HUMAN_COST",
+      "missing": [
+        "a named affected resident, patient, clinician, or service user",
+        "an opening date, access change, service capacity, staffing level, or implementation timeline beyond the supplied construction state",
+        "a diagnosis, symptom pattern, prevalence measure, treatment result, or causal health outcome"
+      ],
+      "humanConsequence": {
+        "state": "UNESTABLISHED",
+        "subjects": [],
+        "facts": [],
+        "src": null
+      }
+    },
+    "candidates": [
+      {
+        "score": 45,
+        "kind": "initiative",
+        "label": "Temescal Community Health Center | Status passed | phase construction-active",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+        "hood": "Temescal",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 36
+      },
+      {
+        "score": 45,
+        "kind": "vote",
+        "label": "Temescal Community Health Center | Structural frame groundbreaking C106",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+        "hood": null,
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 37
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is construction-active — ongoing health effects in Temescal",
+        "ref": "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+        "hood": "Temescal",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 46
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting, nothing free (-2); Oakland Alternative Response Initiative sitting, nothing free (-2); Fruitvale Transit Hub Phase II — Visioning sitting, nothing free (-2); Temescal Community Health Center sitting, nothing free (-2); Baylight District — Final Council Vote …",
+        "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+        "hood": "CITYWIDE",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 48
+      },
+      {
+        "score": 45,
+        "kind": "ripple",
+        "label": "approval/district-sentiment | Temescal Community Health Center sitting, nothing free (-1)",
+        "ref": "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+        "hood": "D7",
+        "popids": [],
+        "angle": null,
+        "hookLine": null,
+        "citizens": [],
+        "source": "desk-signal",
+        "sourceIndex": 55
+      },
+      {
+        "score": 45,
+        "kind": "civic-datawake",
+        "label": "Bobby Chen-Ramirez: Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts.",
+        "ref": "output/cron-civic/datawake/civic-project-health-center_2026-08-31.json",
+        "hood": null,
+        "popids": [
+          "POP-00792"
+        ],
+        "angle": "Structural frame groundbreaking is ahead of schedule — caissons passed inspection, rebar placed per spec, and concrete pours complete. Temescal gets a building that lasts.",
+        "hookLine": null,
+        "citizens": [],
+        "source": "civic-datawake",
+        "sourceIndex": 62
+      }
+    ],
+    "pointers": [
+      "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c105.json snapshots.Initiative_Tracker",
+      "Initiative_Tracker (InitiativeID INIT-005)",
+      "Ripple_Ledger cycle 105 (CauseType initiative-implementation); rendered: world_summary_c105.md \"## What Moved\" > \"### initiative-implementation\"",
+      "Ripple_Ledger cycle 105 (CauseType approval-shift); rendered: world_summary_c105.md \"## What Moved\" > \"### approval-shift\"",
+      "output/cron-civic/datawake/civic-project-health-center_2026-08-31.json"
+    ]
+  },
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Lila Mezran",
+    "popid": "POP-00154",
+    "text": "Lila wants to understand the human impact of the Temescal Community Health Center's construction without overstepping the limited facts available. She'll focus on the gap between approval and operation, seeking to illuminate what 'active construction' means for neighborhood access without inventing specifics.",
+    "plan": {
+      "chase": "Lila wants to understand the human impact of the Temescal Community Health Center's construction without overstepping the limited facts available. She'll focus on the gap between approval and operation, seeking to illuminate what 'active construction' means for neighborhood access without inventing specifics.",
+      "focus": "The timeline and access implications of the Temescal Community Health Center's construction phase.",
+      "why": "Approval and construction are confirmed, but the human consequence of this phase remains unestablished. This is a health service question needing careful handling.",
+      "checks": [
+        "Verify if any public timeline exists for the health center's phases beyond 'active construction'.",
+        "Identify if any community meetings or notices have outlined interim health service adjustments during construction."
+      ],
+      "targets": [
+        {
+          "pop": "POP-00170",
+          "question": "As someone who works in Temescal, have you noticed any changes or communications about health services during the center's construction?",
+          "basis": "same-hood-ledger"
+        },
+        {
+          "pop": "POP-00269",
+          "question": "Have you or coworkers experienced any shifts in accessing local health resources since construction began?",
+          "basis": "same-hood-ledger"
+        }
+      ],
+      "interpretation": "Construction implies transition, but without confirmed details on interim services or completion, residents may face unmeasured access gaps.",
+      "unverifiedLead": [
+        "Possible temporary service relocations or partnerships during construction.",
+        "Community awareness of the project's progress and expected benefits."
+      ],
+      "closeQuestion": "What does 'active construction' functionally mean for health access in Temescal right now?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Keisha Ramos (Baylight Authority Director): The Baylight Authority has completed its Phase II bid evaluation—three qualified consortiums advance",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-baylight-authority_2026-09-02.json",
+      "popids": [
+        "POP-00041"
+      ]
+    },
+    {
+      "label": "Leonard Tran (City Council District 2): described in words: significant headway on securing commitments, pending documented delivery schedule",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d2_2026-09-02.json",
+      "popids": [
+        "POP-00502"
+      ]
+    },
+    {
+      "label": "Ramon Vega (City Council District 4): none",
+      "kind": "civic-datawake",
+      "ref": "output/cron-civic/datawake/civic-office-council-d4_2026-09-02.json",
+      "popids": [
+        "POP-00042"
+      ]
+    },
+    {
+      "label": "repeating-event (medium) | Issue \"strain\" (+ 1 co-occurring tokens) recurred 4 cycles",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[0]; evidence: Riley_Digest row(s) ",
+      "popids": []
+    },
+    {
+      "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+      "kind": "anomaly",
+      "ref": "output/engine_audit_c105.json patterns[1]; evidence: WorldEvents_V3_Ledger row(s) ",
+      "popids": []
+    }
+  ],
+  "laneEntries": 61,
+  "ranAt": "2026-09-02T11:15:24.868Z"
+}

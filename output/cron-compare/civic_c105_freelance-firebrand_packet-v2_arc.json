@@ -1,0 +1,26 @@
+{
+  "status": "arc-seed",
+  "cycle": "105",
+  "desk": "civic",
+  "persona": "freelance-firebrand",
+  "storyline": {
+    "slug": "west-oakland-lucia-polito-anomaly",
+    "verb": "opened"
+  },
+  "hood": "West Oakland",
+  "quotes": [
+    {
+      "pop": "POP-00004",
+      "name": "Lucia Polito",
+      "quote": "I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale."
+    },
+    {
+      "pop": "POP-00756",
+      "name": "Ramon Solano",
+      "quote": "I've heard that the Oakland Alternative Response Initiative is supposed to be making our community safer, but from what I see in my neighborhood, it's not entirely clear that's happening. As a faith leader, I want to believe that our city is working to make things better, but it's hard not to feel a little uncertain when you see things that don't seem to be adding up."
+    }
+  ],
+  "claim": "I've felt a sense of uncertainty about the Oakland Alternative Response Initiative, it seems like there's a disconnect between what's being implemented and how safe people actually feel in our community, especially in neighborhoods like mine in Fruitvale.",
+  "src": "citizenVoice PRESS c105",
+  "ranAt": "2026-09-04T18:16:20.381Z"
+}

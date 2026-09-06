@@ -1,0 +1,400 @@
+{
+  "stage": "angle",
+  "desk": "sports",
+  "cycle": "105",
+  "persona": "simon-leary",
+  "packetContract": "LEP/2",
+  "inputPacket": {
+    "v": "LEP/2",
+    "wake": "W1",
+    "actor": {
+      "id": "POP-00016",
+      "name": "Simon Leary",
+      "role": "desk reporter",
+      "desk": "sports"
+    },
+    "task": {
+      "goal": "Plan one Article chase without choosing a new assignment",
+      "assignment": "The A's record is 127-35.",
+      "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo.",
+      "creativeBrief": {
+        "kind": "sports-long-view",
+        "pulseClass": "role-change-under-continuity",
+        "bagModes": [
+          "2 Keystone Player",
+          "4 Load-Bearing Continuity"
+        ],
+        "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+        "anchorFacts": [
+          "The A's record is 127-35.",
+          "The A's have won 2 straight."
+        ],
+        "missing": [
+          "why the role change was made",
+          "historical comparison or franchise precedent",
+          "organizational intention or future plan",
+          "citywide, clubhouse, or fan interpretation"
+        ],
+        "sceneRule": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts.",
+        "sourcePointers": [
+          "output/world_summary_c105.md ## Sports",
+          "scripts/sportsSubstrate.js",
+          "docs/media/SIMON_LONGVIEW_BAG.md"
+        ]
+      }
+    },
+    "signal": {
+      "kind": "long-view-signal",
+      "hood": "Jack London",
+      "score": null,
+      "src": "world_summary_c105.md ## Sports",
+      "nearby": [
+        {
+          "text": "Oaks | game-result | (preseason) | Dame Sarr, Coen Carr, Wilson Shepard",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | game-result | (late-season) | Benji Dillon, Vinnie Keane, Mark Aitken, Isley Kelley",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Travis Coles",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Danny Horn",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        },
+        {
+          "text": "A's | player-feature | (late-season) | Arturo Ramos, Henry Rivas, John Ellis, Pablo Almanzar, Carmen Mesa",
+          "src": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)"
+        }
+      ]
+    },
+    "exposure": {
+      "basis": [
+        "editor-assignment",
+        "desk-signal"
+      ],
+      "candidates": [
+        {
+          "pop": "POP-00018",
+          "name": "Benji Dillon",
+          "profile": "Benji Dillon — Pitcher, Oakland A's Legend — Rockridge",
+          "why": "feed-names",
+          "role": "Pitcher, Oakland A's Legend",
+          "hood": "Rockridge"
+        },
+        {
+          "pop": "POP-00001",
+          "name": "Vinnie Keane",
+          "profile": "Vinnie Keane — Designated Hitter, Oakland A's Legend — Grand Lake",
+          "why": "feed-names",
+          "role": "Designated Hitter, Oakland A's Legend",
+          "hood": "Grand Lake"
+        },
+        {
+          "pop": "POP-00003",
+          "name": "Mark Aitken",
+          "profile": "Mark Aitken — First Baseman, Oakland A's Legend — Player Rep, Community Liaison — Jack London",
+          "why": "feed-names",
+          "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+          "hood": "Jack London"
+        },
+        {
+          "pop": "POP-00019",
+          "name": "Isley Kelley",
+          "profile": "Isley Kelley — Shortstop, Oakland A's Legend — Rockridge",
+          "why": "feed-names",
+          "role": "Shortstop, Oakland A's Legend",
+          "hood": "Rockridge"
+        }
+      ]
+    },
+    "known": [
+      {
+        "t": "FACT",
+        "text": "Current cycle: C105",
+        "src": "cron-desk-run explicit cycle argument",
+        "id": "F-b7a853efba64"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's record is 127-35.",
+        "src": "world_summary_c105.md ## Sports",
+        "id": "F-5d61be26d329"
+      },
+      {
+        "t": "FACT",
+        "text": "The A's have won 2 straight.",
+        "src": "world_summary_c105.md ## Sports",
+        "id": "F-0c80f4ba8ab8"
+      }
+    ],
+    "limits": {
+      "assert": [
+        "FACT"
+      ],
+      "reason": [
+        "INTERPRETATION",
+        "INTENTION",
+        "LEAD"
+      ],
+      "never": [
+        "new named person",
+        "new institution",
+        "new event",
+        "new date",
+        "new number"
+      ],
+      "rule": "A reporter plan may form a hunch, but a hunch is not a fact. Preserve angle autonomy inside the assigned signal."
+    },
+    "output": {
+      "format": "json-only",
+      "schema": {
+        "chase": "string — beat plan in the reporter register: where they stand, who they chase, what does not line up. Not JSON. Third-person allowed.",
+        "focus": "string",
+        "why": "string",
+        "checks": [
+          "string"
+        ],
+        "targets": [
+          {
+            "pop": "supplied non-empty candidate pop",
+            "question": "string",
+            "basis": "string"
+          }
+        ],
+        "interpretation": "string",
+        "unverifiedLead": [
+          "string"
+        ],
+        "closeQuestion": "string"
+      },
+      "rule": "Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. chase is the human story-doc slot. Do not serialize this plan object into chase."
+    }
+  },
+  "reporter": {
+    "name": "Simon Leary",
+    "popid": "POP-00016"
+  },
+  "assignment": {
+    "story": {
+      "angle": "The A's record is 127-35.",
+      "label": "The A's record is 127-35.",
+      "hookLine": "The A's record is 127-35.",
+      "kind": "long-view-signal",
+      "hood": "Jack London",
+      "popids": [
+        "POP-00018",
+        "POP-00001",
+        "POP-00003",
+        "POP-00019"
+      ],
+      "citizens": [
+        "Benji Dillon (POP-00018)",
+        "Vinnie Keane (POP-00001)",
+        "Mark Aitken (POP-00003)",
+        "Isley Kelley (POP-00019)"
+      ],
+      "ref": "world_summary_c105.md ## Sports",
+      "cycle": 105
+    },
+    "approach": "Long-view approach (Simon Leary): third-person essayist. Treat supplied sports facts as present structure, not as proof of history or collective memory. A metaphor about continuity, load, or change may interpret the Packet but may not add a person, place, institution, event, season, statistic, cause, organizational intention, or citywide belief. Do not write a game recap, Hal elegy, P Slayer fan heat, or Anthony board memo."
+  },
+  "jaxSlice": null,
+  "pslayerSlice": null,
+  "eveningSlice": null,
+  "anthonySlice": null,
+  "halSlice": null,
+  "simonSlice": {
+    "pulse": {
+      "className": "role-change-under-continuity",
+      "score": 66,
+      "label": "The A's record is 127-35."
+    },
+    "prewrite": {
+      "bagModes": [
+        {
+          "id": 2,
+          "name": "Keystone Player"
+        },
+        {
+          "id": 4,
+          "name": "Load-Bearing Continuity"
+        }
+      ],
+      "anchorFacts": [
+        "The A's record is 127-35.",
+        "The A's have won 2 straight."
+      ],
+      "claim": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "missing": [
+        "why the role change was made",
+        "historical comparison or franchise precedent",
+        "organizational intention or future plan",
+        "citywide, clubhouse, or fan interpretation"
+      ]
+    },
+    "players": [
+      {
+        "name": "Benji Dillon",
+        "popid": "POP-00018",
+        "role": "Pitcher, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      },
+      {
+        "name": "Vinnie Keane",
+        "popid": "POP-00001",
+        "role": "Designated Hitter, Oakland A's Legend",
+        "neighborhood": "Grand Lake",
+        "why": "feed-names"
+      },
+      {
+        "name": "Mark Aitken",
+        "popid": "POP-00003",
+        "role": "First Baseman, Oakland A's Legend — Player Rep, Community Liaison",
+        "neighborhood": "Jack London",
+        "why": "feed-names"
+      },
+      {
+        "name": "Isley Kelley",
+        "popid": "POP-00019",
+        "role": "Shortstop, Oakland A's Legend",
+        "neighborhood": "Rockridge",
+        "why": "feed-names"
+      }
+    ],
+    "scene": {
+      "colorRoom": "No witnessed room or scene is supplied. Structure and continuity may appear only as clearly interpretive metaphor grounded in the approved present facts."
+    },
+    "candidates": [
+      {
+        "score": 66,
+        "cycle": 105,
+        "team": "A's",
+        "label": "A Farewell Gone Well:Vinnie Keane Benji Dillon"
+      },
+      {
+        "score": 66,
+        "cycle": 105,
+        "team": "A's",
+        "label": "As Pitching rotation is stellar all season"
+      },
+      {
+        "score": 56,
+        "cycle": 105,
+        "team": "A's",
+        "label": "Travis Coles secures his place in A's lore , while fans look to his arm to carry the torch from a era ending in Benji Dillon"
+      },
+      {
+        "score": 56,
+        "cycle": 105,
+        "team": "A's",
+        "label": "Danny Horn is the greatest MLB player on the planet"
+      },
+      {
+        "score": 56,
+        "cycle": 105,
+        "team": "A's",
+        "label": "Vinnie Keane : How Do You Like Them Apples.."
+      },
+      {
+        "score": 56,
+        "cycle": 105,
+        "team": "A's",
+        "label": "Benji Dillon : The Golden Arm era come to a close"
+      }
+    ]
+  },
+  "economicSlice": null,
+  "safetySlice": null,
+  "civicDomainSlice": null,
+  "reporterWall": null,
+  "canonResearch": null,
+  "angleRead": {
+    "name": "Simon Leary",
+    "popid": "POP-00016",
+    "text": "Simon Leary stands at the edge of the newsroom, staring out the window as the city fades into twilight. The A’s record looms large—127-35—a number that feels less like a statistic and more like a monument. He’s chasing the story of continuity, of how a team sustains itself even as roles shift beneath the surface. Benji Dillon’s move to the bullpen lingers in his mind, not as a disruption but as a quiet pivot within a structure that remains unshaken. Simon doesn’t need to know why the change was made; he’s after the metaphor, the way a single beam can shift without the whole edifice crumbling.",
+    "plan": {
+      "chase": "Simon Leary stands at the edge of the newsroom, staring out the window as the city fades into twilight. The A’s record looms large—127-35—a number that feels less like a statistic and more like a monument. He’s chasing the story of continuity, of how a team sustains itself even as roles shift beneath the surface. Benji Dillon’s move to the bullpen lingers in his mind, not as a disruption but as a quiet pivot within a structure that remains unshaken. Simon doesn’t need to know why the change was made; he’s after the metaphor, the way a single beam can shift without the whole edifice crumbling.",
+      "focus": "The role change of Benji Dillon within the context of the A’s sustained record.",
+      "why": "To explore how continuity persists even as individual roles evolve.",
+      "checks": [
+        "Does Benji Dillon’s role change reflect a broader pattern within the team?",
+        "How does the team’s record inform the interpretation of this shift?"
+      ],
+      "targets": [
+        {
+          "pop": "POP-00018",
+          "question": "How does Benji Dillon perceive his role change in the context of the team’s success?",
+          "basis": "Benji Dillon’s move to the bullpen is a key element of the story."
+        },
+        {
+          "pop": "POP-00019",
+          "question": "How does Isley Kelley see the team’s continuity amidst individual role changes?",
+          "basis": "Isley Kelley’s perspective as a teammate can provide insight into the team’s structure."
+        }
+      ],
+      "interpretation": "A role change inside a sustained team record can support a structural interpretation; it does not establish franchise history, organizational intent, or citywide meaning.",
+      "unverifiedLead": [
+        "Is Benji Dillon’s move to the bullpen part of a larger strategy or a response to specific needs?"
+      ],
+      "closeQuestion": "What does Benji Dillon’s role change reveal about the A’s ability to maintain continuity?"
+    }
+  },
+  "lanePicks": [
+    {
+      "label": "Oaks | game-result | (preseason) | Dame Sarr, Coen Carr, Wilson Shepard",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-01025",
+        "POP-01026",
+        "POP-01022"
+      ]
+    },
+    {
+      "label": "A's | game-result | (late-season) | Benji Dillon, Vinnie Keane, Mark Aitken, Isley Kelley",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00018",
+        "POP-00001",
+        "POP-00003",
+        "POP-00019"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Travis Coles",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00533"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Danny Horn",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00022"
+      ]
+    },
+    {
+      "label": "A's | player-feature | (late-season) | Arturo Ramos, Henry Rivas, John Ellis, Pablo Almanzar, Carmen Mesa",
+      "kind": "feed",
+      "ref": "Oakland_Sports_Feed cycle 105; rendered: world_summary_c105.md \"## Sports\" C105 (StoryAngle at the pointer)",
+      "popids": [
+        "POP-00025",
+        "POP-00024",
+        "POP-00033",
+        "POP-01078",
+        "POP-00081"
+      ]
+    }
+  ],
+  "laneEntries": 12,
+  "ranAt": "2026-09-02T11:16:10.677Z"
+}

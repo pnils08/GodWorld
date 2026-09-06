@@ -1,0 +1,51 @@
+{
+  "draft": "output/cron-compare/sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat.md",
+  "cycle": "105",
+  "backend": "api",
+  "model": "google/gemini-3.7-flash",
+  "draftSha256": "b611e3495474c2b5a0f1beca9e444882f2946231dd8f541da85f46174785127d",
+  "pass": true,
+  "flags": [],
+  "flagCount": 0,
+  "highSeverityCount": 0,
+  "summary": "All player lines, game stats, team record, and quote provenance match cycle 105 ground truth.",
+  "review": {
+    "profileId": "anthony-sports-analytics-v1",
+    "canonIntegrity": "pass",
+    "texture": "authorized"
+  },
+  "reviewProfile": {
+    "id": "anthony-sports-analytics-v1",
+    "packageVersion": "ANTHONY-LEP2-1",
+    "manifestId": "AM-3344a48ebe66",
+    "lexicalObservations": []
+  },
+  "nameCheck": {
+    "verified": [
+      "Anthony Raines",
+      "Benji Dillon",
+      "Isley Kelley",
+      "Mark Aitken",
+      "Vinnie Keane"
+    ],
+    "unverified": []
+  },
+  "intake": {
+    "found": true,
+    "counts": {
+      "names": 1,
+      "businesses": 0,
+      "storylines": 1,
+      "hoods": 0,
+      "claims": 1
+    },
+    "grammarErrors": 0,
+    "unresolvable": [],
+    "unbackedQuoted": [],
+    "packetChecked": true
+  },
+  "apiCostUsd": 0.0094,
+  "durationMs": 6390,
+  "parseError": false,
+  "ranAt": "2026-09-04T23:18:31.501Z"
+}

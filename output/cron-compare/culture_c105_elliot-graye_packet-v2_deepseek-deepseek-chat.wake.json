@@ -1,0 +1,33 @@
+{
+  "mode": "wake-write",
+  "desk": "culture",
+  "cycle": "105",
+  "provider": "openrouter",
+  "model": "deepseek/deepseek-chat",
+  "configuredWriterModel": "deepseek/deepseek-chat",
+  "gateModel": "google/gemini-3.7-flash",
+  "persona": "elliot-graye",
+  "byline": {
+    "name": "Elliot Graye",
+    "popid": "POP-00012",
+    "beatDomain": "COMMUNITY"
+  },
+  "laneEntries": 19,
+  "quotesLanded": 4,
+  "disposition": "staged",
+  "rheaPass": true,
+  "rheaFlagCount": 0,
+  "contamination": {
+    "fail": false,
+    "findings": []
+  },
+  "footerPresent": true,
+  "toolUse": [],
+  "article": "output/cron-compare/staged/culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat.staged.md",
+  "selfRecord": {
+    "recorded": true,
+    "out": "config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }\n{\n  \"popId\": \"POP-00012\",\n  \"name\": \"Elliot Graye\",\n  \"recorded\": true,\n  \"text\": \"filed: A Neighborhood’s Quiet Witness\"\n}"
+  },
+  "ranAt": "2026-09-04T23:19:54.048Z",
+  "dispositionReconciledAt": "2026-09-06T01:48:13.994Z"
+}

@@ -434,7 +434,7 @@ Real-world stack entities are in the sim by design. The services that keep the c
 | DigitalOcean | Hosting / infrastructure | BIZ-00002 |
 | Discord | Communications platform | BIZ-00003 |
 | Moltbook | Social platform | BIZ-00004 |
-| Anthropic | AI research (an `EconomicProfileKey`, not yet a BIZ row) | — |
+| Anthropic | AI research (an `EconomicProfileKey`, not yet a BIZ row). In-world it is the software behind the city's systems — the model layer Civis Systems runs the ledgers on; DigitalOcean (BIZ-00002) is the data center under it. Stack companies serve in the sim the purpose they serve for real; citizens may gripe about them like any employer. | — |
 
 **Civis Systems is the blanket for engine and sheet language.** Elias Varek's urban-intelligence firm (POP-00789) is the in-world thing that *is* the engine and the spreadsheets — the system that tracks the city. So when media output leaks "the engine," "the sheet," "the ledger," or system vocabulary, it is not a fourth-wall break to be scrubbed: it reads as Civis Systems, the firm that instruments Oakland and sells the city its own telemetry. Prefer translating a leak into Civis terms over deleting it. This does **not** license engine *metrics* in prose — tension scores, severity levels and raw decimals stay out per `.claude/rules/newsroom.md`; the blanket covers the vocabulary of a tracking system, not its dashboard readings.
 

@@ -1305,6 +1305,20 @@ function writeVoiceJson(slug, cycle, json) {
   fs.writeFileSync(p, JSON.stringify(json, null, 2));
   return path.relative(ROOT, p);
 }
+// Re-entry reuse (S432, engine-sheet): a seat that already passed this cycle
+// keeps its output. The Sunday chain re-enters after a HALT (the 21:00 retry,
+// or by hand) and re-rolling seats that already passed just hands each of
+// them a fresh chance to fail the number check — C105: council_d1 halted the
+// 14:30 run, then the mayor (passed at 14:31) halted the 14:36 re-entry. This
+// is the "file-idempotent stages" contract runChain's guard comment promises.
+// To re-roll one seat, delete its output/civic-voice/<slug>_c<N>.json.
+function existingVoice(slug, cycle) {
+  const p = path.join(ROOT, 'output', 'civic-voice', slug + '_c' + cycle + '.json');
+  const j = readJson(p);
+  if (!j || !Array.isArray(j.statements)) return null;
+  log('reusing ' + path.relative(ROOT, p) + ' — delete it to re-roll');
+  return { json: j, output: path.relative(ROOT, p), attempts: 0, model: '(reused)', reused: true };
+}
 function officeModel(officeMap, dir) {
   const row = civicSeat.resolveOfficeRow(officeMap, dir)
     || [...officeMap.offices, ...(officeMap.projects || [])].find(o => o.agentDir === dir && o.model);
@@ -1381,27 +1395,32 @@ async function runMayorOpen() {
   const packet = mustRead(packetPathFor('civic-office-mayor', cycle), 'run --stage=prep first');
   const model = mayorModel(officeMap);
   log('mayor model=' + model);
-  const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
-  const user = [
-    'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):',
-    '', packet, wallInj || '',
-    'This is the AGENDA turn. Name what is on the floor. Do NOT emit trackerUpdates.ImplementationPhase or MayoralAction. The gavel comes after the hearing.',
-    outputContract('mayor_open', cycle, initiatives, { forbidPhase: true }),
-  ].join('\n');
-  const hay = packet + '\n' + (wallInj || '');
-  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap,
-    composeChecks(noPhaseCheck, statementNumberCheck(hay, { cycle })));
-  if (!r || r.error) {
-    console.error('HALT: Mayor open failed — ' + (r ? r.error : 'no result') + '. Hearing must not start.');
-    if (r && r.raw) { fs.mkdirSync(CIVIC, { recursive: true }); fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.raw.txt'), r.raw); }
-    process.exit(1);
+  let r = existingVoice('mayor_open', cycle);
+  let outPath = r ? r.output : null;
+  if (!r) {
+    const wallInj = await positionWallInject(officeMap, 'civic-office-mayor');
+    const user = [
+      'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + '):',
+      '', packet, wallInj || '',
+      'This is the AGENDA turn. Name what is on the floor. Do NOT emit trackerUpdates.ImplementationPhase or MayoralAction. The gavel comes after the hearing.',
+      outputContract('mayor_open', cycle, initiatives, { forbidPhase: true }),
+    ].join('\n');
+    const hay = packet + '\n' + (wallInj || '');
+    r = await callVoice('civic-office-mayor', model, user, 5000, officeMap,
+      composeChecks(noPhaseCheck, statementNumberCheck(hay, { cycle })));
+    if (!r || r.error) {
+      console.error('HALT: Mayor open failed — ' + (r ? r.error : 'no result') + '. Hearing must not start.');
+      if (r && r.raw) { fs.mkdirSync(CIVIC, { recursive: true }); fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.raw.txt'), r.raw); }
+      process.exit(1);
+    }
+    if (hearingHasPhase(r.json)) {
+      console.error('HALT: Mayor open emitted ImplementationPhase — agenda cannot stamp the tracker.');
+      process.exit(1);
+    }
+    outPath = writeVoiceJson('mayor_open', cycle, r.json);
+    await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
   }
-  if (hearingHasPhase(r.json)) {
-    console.error('HALT: Mayor open emitted ImplementationPhase — agenda cannot stamp the tracker.');
-    process.exit(1);
-  }
-  const outPath = writeVoiceJson('mayor_open', cycle, r.json);
-  await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
+  // The agenda is re-injected on every pass — prep regenerates the packets.
   const cascade = [AGENDA_MARK, ''];
   for (const st of r.json.statements) {
     const line = cleanInline([st.topic ? st.topic + ': ' : '', st.decision, st.quote ? ' — "' + st.quote + '"' : ''].join(''));
@@ -1412,7 +1431,7 @@ async function runMayorOpen() {
   fs.mkdirSync(CIVIC, { recursive: true });
   fs.writeFileSync(path.join(CIVIC, 'mayor_open_c' + cycle + '.json'), JSON.stringify({
     stage: 'mayor-open', cycle: Number(cycle), model: r.model || model, configuredModel: model,
-    fellBackFrom: r.fellBackFrom || null, output: outPath,
+    fellBackFrom: r.fellBackFrom || null, output: outPath, reused: !!r.reused,
     statements: r.json.statements.length, cascadeInjected: injected,
     attempts: r.attempts, usage: r.usage, ranAt: new Date().toISOString(),
   }, null, 2));
@@ -1444,6 +1463,16 @@ async function runHearing() {
     const slug = voiceSlug(dir);
     try {
       const model = officeModel(officeMap, dir);
+      const prior = existingVoice(slug, cycle);
+      if (prior) {
+        const packRef0 = districtPackRef(dir, cycle, officeMap, ROOT);
+        results.push({
+          dir, slug, model: prior.model, ok: true, output: prior.output,
+          statements: prior.json.statements.length, attempts: 0, reused: true,
+          seat: civicSeat.resolveOfficeRow(officeMap, dir), voiceJson: prior.json, lever: (packRef0 && packRef0.lever) || '',
+        });
+        return;
+      }
       const packet = fs.readFileSync(packetPathFor(dir, cycle), 'utf8');
       const wallInj = await positionWallInject(officeMap, dir);
       const user = [
@@ -1527,21 +1556,25 @@ async function runMayorGavel() {
   // Transcript is included in hay — a hearing figure was already checked when
   // spoken, so the gavel citing it back is legitimate, not a new fabrication.
   const gavelHay = packet + '\n' + (wallInj || '') + '\n' + transcript.join('\n');
-  const r = await callVoice('civic-office-mayor', model, user, 5000, officeMap,
-    statementNumberCheck(gavelHay, { cycle }));
-  if (!r || r.error) {
-    console.error('HALT: Mayor gavel failed — ' + (r ? r.error : 'no result'));
-    if (r && r.raw) fs.writeFileSync(path.join(CIVIC, 'mayor_gavel_c' + cycle + '.raw.txt'), r.raw);
-    process.exit(1);
+  let r = existingVoice('mayor_gavel', cycle);
+  let outPath = r ? r.output : null;
+  if (!r) {
+    r = await callVoice('civic-office-mayor', model, user, 5000, officeMap,
+      statementNumberCheck(gavelHay, { cycle }));
+    if (!r || r.error) {
+      console.error('HALT: Mayor gavel failed — ' + (r ? r.error : 'no result'));
+      if (r && r.raw) fs.writeFileSync(path.join(CIVIC, 'mayor_gavel_c' + cycle + '.raw.txt'), r.raw);
+      process.exit(1);
+    }
+    outPath = writeVoiceJson('mayor_gavel', cycle, r.json);
+    await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
   }
-  const outPath = writeVoiceJson('mayor_gavel', cycle, r.json);
-  await positionWallRecordCascade(officeMap, 'civic-office-mayor', r.json, cycle);
   const mayorRow = civicSeat.resolveOfficeRow(officeMap, 'civic-office-mayor');
   let ledger = cityHallLedger.loadOrCreate(cycle, ROOT);
   ledger = cityHallLedger.writeGavel(ledger, mayorRow || { officeId: 'MAYOR-01', holder: 'Avery Santana', popid: 'POP-00034' }, r.json, outPath, cityHallLedger.gavelPhases(r.json));
   cityHallLedger.save(ledger, ROOT);
   fs.writeFileSync(path.join(CIVIC, 'mayor_gavel_c' + cycle + '.json'), JSON.stringify({
-    stage: 'mayor-gavel', cycle: Number(cycle), model, output: outPath,
+    stage: 'mayor-gavel', cycle: Number(cycle), model, output: outPath, reused: !!r.reused,
     statements: r.json.statements.length, attempts: r.attempts, usage: r.usage,
     ranAt: new Date().toISOString(),
   }, null, 2));
@@ -1569,6 +1602,11 @@ async function runProjects() {
     if (!touches.length) { log('skip ' + slug + ' — no voice decision touched ' + seat.initiative + ' (Step 5 trigger rule)'); continue; }
     try {
       const model = officeModel(officeMap, seat.agentDir);
+      const prior = existingVoice(slug, cycle);
+      if (prior) {
+        results.push({ slug, model: prior.model, ok: true, output: prior.output, statements: prior.json.statements.length, reused: true, triggeredBy: touches.map(t => t.slug) });
+        continue;
+      }
       // civic.29: a Layer-3 seat only gets a packet file when its OWN
       // initiative is independently hot this cycle — Baylight Authority
       // speaks here via the Step 5 trigger (the mayor touched her initiative)
@@ -1960,6 +1998,7 @@ function ungroundedNumbers(slice, texts, context) {
   const d = String(ctx.district || '').match(/\d+/);
   if (d) allowed.add(d[0]);
   if (ctx.cycle) { allowed.add(String(ctx.cycle)); allowed.add(String(Number(ctx.cycle) - 1)); }
+  allowed.add('911');   // the emergency line, not a statistic — the C105 mayor re-roll (2026-09-06 14:37) was rejected on it
   const bad = new Set();
   for (const t of texts) {
     const nt = norm(t);

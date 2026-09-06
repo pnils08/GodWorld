@@ -129,3 +129,4 @@ Two shapes of cycle-tagged path found under `output/` via `find` + pattern match
 
 - 2026-08-18 — Built same day (Mike: "your call"). All 5 tasks done, cron wired, first real compaction landed (c90). Detail in task Status lines above.
 - 2026-08-18 — Initial draft (research-build session, following the audio-retention fix in the same session).
+- 2026-09-06 (S429) — Unattended Sunday runs confirmed (live 104 + 105, `Nothing eligible`); governance.50 → done-pending-archive. First real unattended compaction lands when live reaches c108 (c103 crosses the 5-cycle threshold).

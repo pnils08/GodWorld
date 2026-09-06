@@ -196,7 +196,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | governance.33 | C96 gap-log triage | in-progress | research-build / engine-sheet | [[../plans/2026-06-07-c96-gap-log-triage]] — detail in pointer (relocated 2026-07-02) |
 | governance.35 | REDUCED S260 by governance.36 §loop-tightening to the PIN-self-derive remnant | ready | engine-sheet (design: research-build DONE) | [[../plans/2026-06-14-session-context-mechanization]] — detail in pointer (relocated 2026-07-02) |
 | governance.47 | Cross-lane message bus — stop hand-relaying between lanes; deterministic transport + routing at a judgment seat | blocked | research-build | [[../plans/2026-08-15-cross-lane-message-bus]] |
-| governance.50 | Cycle-output compaction — archive cycle-tagged `output/` files per cycle past a threshold, bound disk/git growth | in-progress | research-build | [[../plans/2026-08-18-cycle-output-compaction]] |
+| governance.50 | Cycle-output compaction — archive cycle-tagged `output/` files per cycle past a threshold, bound disk/git growth. **CLOSED S429: the Sunday 22:30 cron has fired unattended at least twice (`logs/cycle-compaction.log.{1,2}.gz`: live 104 and 105, threshold 5, `Nothing eligible`) — the guard path is proven; the apply path was proven on c90 at build. Dormant by design until live ≥ c108 makes c103 eligible; nothing more to build.** | done-pending-archive | research-build | [[../plans/2026-08-18-cycle-output-compaction]] |
 
 ---
 

@@ -46,7 +46,8 @@
     "4f18e520-741a-472e-94c0-d8a99ebde658",
     "d0186fb6-4d99-4f9d-9baa-ca4bd8e1afb4",
     "c9b1ca9a-bb3d-48c6-b322-c530ad667f47",
-    "19d25578-1ec3-4fb0-969a-8ee77ec6aa2b"
+    "19d25578-1ec3-4fb0-969a-8ee77ec6aa2b",
+    "19673ffa-13f3-4ce4-8f1e-dc8f21e0b93a"
   ],
   "excludedSourceIds": [
     "3271f3d6-377e-4cb9-a2a7-03ca596e1a83",
@@ -712,6 +713,15 @@
       "reason": "Audio-direction production guide (pipeline.51 ensureDirectionSource) — a studio instruction for the audio overview, not canon content; re-uploads under a new hash when the guide changes.",
       "evidence": [
         "scripts/notebooklmPush.js ensureDirectionSource"
+      ]
+    },
+    "19673ffa-13f3-4ce4-8f1e-dc8f21e0b93a": {
+      "title": "Detailed Weekly Digest 105a.txt",
+      "classification": "canon-reference",
+      "reason": "Hand-added for depth: a detailed weekly digest pulled from Supermemory (bay-tribune) at C105 — a synthesis of already-canon material, not a new publication.",
+      "evidence": [
+        "https://drive.google.com/file/d/119gLQoxdcWkndFhjImv0Gl1JGmNTUyBs/view?usp=drivesdk",
+        "Supermemory bay-tribune container (source of the digest)"
       ]
     }
   }

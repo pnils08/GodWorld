@@ -98,12 +98,43 @@ function priorMetric(sheetName, neighborhood, field, priorAudits) {
   return null;
 }
 
+// engine.124 (S428): the engine writes one 'initiative-implementation' row per
+// initiative per cycle into Ripple_Ledger at the compute site (engine.45 T3e,
+// applyInitiativeImplementationEffects.js) — that row IS the proof the initiative
+// contributed this cycle, with its effect keys and intensity. The net column delta
+// the registry names (e.g. Neighborhood_Map.RetailVitality) is the sum of every
+// driver on the hood; an initiative's +0.08×intensity is routinely swamped by a
+// −4 point move from elsewhere. Reading the net delta as "the initiative is
+// silent" manufactured false remedy-not-firing verdicts + a spurious bugReport
+// (C104 review). Returns null when the ledger is not in the snapshot (fixtures,
+// pre-S428 audits) so the legacy net-delta read still runs.
+function ledgerContribution(initRow, ctx) {
+  const ledger = ctx.snapshot && ctx.snapshot.Ripple_Ledger;
+  if (!Array.isArray(ledger)) return null;
+  const name = String(initRow.Name || '').trim();
+  const cycle = String(ctx.cycle == null ? '' : ctx.cycle);
+  const rows = ledger.filter(r =>
+    String(r.CauseType || '') === 'initiative-implementation' &&
+    String(r.CauseId || '').trim() === name &&
+    (!cycle || String(r.Cycle || '') === cycle));
+  if (rows.length === 0) return { fired: false, rows: 0 };
+  const r = rows[rows.length - 1];
+  return {
+    fired: true,
+    rows: rows.length,
+    effectType: r.EffectType || '',
+    magnitude: num(r.Magnitude),
+    targets: String(r.TargetIds || '').split(/[|,;]/).map(s => s.trim()).filter(Boolean),
+  };
+}
+
 function computeEffect(initRow, category, ctx, registry) {
   const cat = registry.categories[category];
   if (!cat || !cat.expectedMetric) return { observedDelta: 0, verdict: 'unknown', expectedField: null };
   const { sheet, field, sign, magnitudeThreshold } = cat.expectedMetric;
   const neighborhoods = (initRow.AffectedNeighborhoods || '')
     .split(/[,;]/).map(s => s.trim()).filter(Boolean);
+  const contribution = ledgerContribution(initRow, ctx);
 
   let maxPositiveMove = 0;
   let anySignalRead = false;
@@ -117,11 +148,16 @@ function computeEffect(initRow, category, ctx, registry) {
     if (directional > maxPositiveMove) maxPositiveMove = directional;
   }
 
-  const verdict = !anySignalRead
-    ? 'no-history'
-    : maxPositiveMove >= magnitudeThreshold
-      ? 'effects-firing'
-      : 'effects-not-firing';
+  const netClears = maxPositiveMove >= magnitudeThreshold;
+  let verdict;
+  if (contribution) {
+    // Ledger-backed read: the contribution row decides firing; the net delta is
+    // reported beside it. No row this cycle = the engine really did not apply it
+    // (zero-intensity phase, no target hoods) — that is the only true not-firing.
+    verdict = contribution.fired ? 'effects-firing' : 'effects-not-firing';
+  } else {
+    verdict = !anySignalRead ? 'no-history' : (netClears ? 'effects-firing' : 'effects-not-firing');
+  }
 
   return {
     expectedField: `${sheet}.${field}`,
@@ -130,6 +166,12 @@ function computeEffect(initRow, category, ctx, registry) {
     magnitudeThreshold,
     verdict,
     neighborhoodsChecked: neighborhoods,
+    // engine.124: contribution-vs-net split. netSwamped = the initiative applied
+    // its effect this cycle but the column still moved the wrong way / not enough —
+    // a magnitude story (other drivers), not a silence story.
+    contribution: contribution || undefined,
+    netDelta: anySignalRead ? Number(maxPositiveMove.toFixed(4)) : null,
+    netSwamped: !!(contribution && contribution.fired && anySignalRead && !netClears),
   };
 }
 

@@ -84,6 +84,11 @@ const SHEETS_TO_READ = [
   // Event_Arc_Ledger already read above; these two were the gap.
   'WorldEvents_Ledger',
   'Texture_Trigger_Log',
+  // engine.124 (S428): the engine's own attribution trail (engine.45 recordRipple_).
+  // checkMitigators reads the 'initiative-implementation' rows to prove an
+  // initiative CONTRIBUTED this cycle, instead of inferring silence from a net
+  // column delta that other drivers swamp.
+  'Ripple_Ledger',
 ];
 
 async function getCurrentCycle() {

@@ -116,9 +116,14 @@ function validatePolicy(inventory, policy) {
     if (!Array.isArray(decision.evidence) || decision.evidence.length === 0) {
       throw new Error('decision ' + id + ' has no evidence');
     }
+    // Admission bases for a non-publication canon reference: the Richmond Archive
+    // (narrative-memory contract) or a hand-added Supermemory digest — a synthesis of
+    // already-canon material added to the notebook for depth (S429, builder-added
+    // 'Detailed Weekly Digest 105a'). Anything else is not a canon reference.
+    const basis = String(decision.reason).toLowerCase();
     if (
       expectedClass === 'canon-reference' &&
-      !String(decision.reason).toLowerCase().includes('richmond archive')
+      !basis.includes('richmond archive') && !basis.includes('supermemory digest')
     ) {
       throw new Error('canon reference ' + id + ' lacks its non-publication admission basis');
     }

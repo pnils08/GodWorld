@@ -32,6 +32,11 @@ var CARRY_FORWARD_STORE_SHEET = 'Carry_Forward_Store';
 // slots are overwritten in place (the oldest Cycle goes first), never deleted:
 // deleteRow is a structural mutation, the same wedge class as insertSheet.
 var CARRY_FORWARD_RING = 3;
+// engine.119 T3 diag-emit (same pattern as ENGINE59_DIAG / ENGINE95_TIMING_DIAG):
+// every ghost skip and sheet recovery is recorded here and rides the fire response
+// (utilities/webTrigger.js) — there is no GCP project, so clasp logs are unreachable
+// and Logger.log alone cannot prove a recovery from outside.
+var CARRY_FORWARD_DIAG = [];
 
 /**
  * Mirror one carry-forward blob into the Carry_Forward_Store tab.
@@ -148,14 +153,17 @@ function loadCarryForwardBlob_(ctx, key, cycleId) {
     if (!(target && stamped && stamped >= target)) return json;
     Logger.log('loadCarryForwardBlob_: ' + key + ' prop is a SELF-GHOST (stamped cycle ' + stamped +
       ' >= cycle ' + target + ' about to run — a crashed run wrote it); ignoring, stepping back to the sheet ring');
+    CARRY_FORWARD_DIAG.push({ key: key, event: 'ghost-skipped', stamped: stamped, cycleId: target });
   }
   var rec = readCarryForwardFromSheet_(ctx, key, target);
   if (rec && rec.json) {
     props.setProperty(key, rec.json);
     props.setProperty(key + '_CYCLE', String(rec.cycle || 0));
     Logger.log('loadCarryForwardBlob_: ' + key + ' RECOVERED cycle ' + rec.cycle + ' from Carry_Forward_Store (re-seeded the prop)');
+    CARRY_FORWARD_DIAG.push({ key: key, event: 'recovered-from-sheet', cycle: rec.cycle, cycleId: target });
     return rec.json;
   }
+  if (target) CARRY_FORWARD_DIAG.push({ key: key, event: 'missing', cycleId: target });
   return null;
 }
 

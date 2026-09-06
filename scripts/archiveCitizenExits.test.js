@@ -87,8 +87,11 @@ test('copy → read-back → remove: 4 moved, contiguous run deleted in one call
   assert.strictEqual(ar._rows.length, 4);
   const byPop = {}; ar._rows.forEach((r) => { byPop[r[0]] = r; });
   const w = H.length;
-  assert.deepStrictEqual(byPop['POP-00040'].slice(w), ['traded-away', 108, 'trade:C108:POP-00040', 'Traded', 'TRUE', w, '']);
-  assert.deepStrictEqual(byPop['POP-00042'].slice(w), ['deceased', 108, 'death:C108:POP-00042', 'deceased', 'FALSE', w, '']);
+  // engine.90 Commit 8: ArchiveNote names the measured defect classes the row leaves with — this
+  // narrow fixture has no SchoolQuality/CareerStage/BirthYear/Income columns, so the note says so.
+  const NOTE = 'defects-at-exit: schoolQualityUnusable,careerStageBlank,birthYearOOB,incomeBlank';
+  assert.deepStrictEqual(byPop['POP-00040'].slice(w), ['traded-away', 108, 'trade:C108:POP-00040', 'Traded', 'TRUE', w, NOTE]);
+  assert.deepStrictEqual(byPop['POP-00042'].slice(w), ['deceased', 108, 'death:C108:POP-00042', 'deceased', 'FALSE', w, NOTE]);
   assert.deepStrictEqual(byPop['POP-00042'].slice(0, w), ['POP-00042', 'Late', 'Citizen', 'deceased', 4, 12]); // verbatim snapshot
 });
 test('two eligible rows sharing one POPID → duplicate-in-batch, neither moves (the (POPID, ExitCycle, Reason) key stays unique)', () => {

@@ -28,6 +28,8 @@ if (typeof module !== 'undefined' && module.exports) {
     citizenArchiveRow_: function() { return citizenArchiveRow_.apply(null, arguments); },
     citizenArchiveCandidates_: function() { return citizenArchiveCandidates_.apply(null, arguments); },
     citizenArchiveLatestByPop_: function() { return citizenArchiveLatestByPop_.apply(null, arguments); },
+    citizenExitDefects_: function() { return citizenExitDefects_.apply(null, arguments); },
+    citizenArchiveNote_: function() { return citizenArchiveNote_.apply(null, arguments); },
     archiveCitizenExits_: function(ctx) { return archiveCitizenExits_(ctx); }
   };
 }
@@ -98,6 +100,35 @@ function citizenArchiveSourceEventId_(reason, cycle, popId) {
  * Build one archive row from a committed Simulation_Ledger row: A–<width>
  * verbatim, then the seven metadata cells in CITIZEN_ARCHIVE_META_HEADERS order.
  */
+/**
+ * engine.90 Commit 8 — the measured defect classes on ONE ledger row, derived from
+ * that row's own cells (docs/plans/2026-08-17-ledger-trueup-sweep.md §Batch shape).
+ * Pure; shared by the mover (ArchiveNote at exit) and the dry-run inventory so
+ * there is one rule. Age anchor 2041 (project convention).
+ */
+var CITIZEN_EXIT_CAREER_STAGE_ENUM = { student: 1, 'entry-level': 1, 'mid-career': 1, senior: 1, retired: 1 };
+function citizenExitDefects_(header, row) {
+  var g = function(n) { var i = header.indexOf(n); return i < 0 ? '' : String(row[i] == null ? '' : row[i]).trim(); };
+  var d = [];
+  var sq = g('SchoolQuality'), cs = g('CareerStage');
+  if (sq === '' || sq === '5') d.push('schoolQualityUnusable');
+  if (!cs) d.push('careerStageBlank');
+  else if (!CITIZEN_EXIT_CAREER_STAGE_ENUM[cs.toLowerCase()]) d.push('careerStageSpelling');
+  if (g('NetWorth') === '') d.push('netWorthBlank');
+  if (g('RoleType') && !g('EmployerBizId')) d.push('employerBlankWithRole');
+  if (g('MigrationIntent')) d.push('migrationIntentSet');
+  var by = Number(g('BirthYear')) || 0, age = by ? 2041 - by : null;
+  if (age === null || age < 0 || age > 110) d.push('birthYearOOB');
+  if (g('Income') === '') d.push('incomeBlank');
+  return d;
+}
+
+/** The ArchiveNote text for an exit — the defect classes the row carried out, or blank. */
+function citizenArchiveNote_(header, row) {
+  var d = citizenExitDefects_(header, row);
+  return d.length ? 'defects-at-exit: ' + d.join(',') : '';
+}
+
 function citizenArchiveRow_(slHeader, slRow, reason, cycle) {
   var out = [];
   for (var c = 0; c < slHeader.length; c++) out.push(c < slRow.length ? slRow[c] : '');
@@ -105,7 +136,7 @@ function citizenArchiveRow_(slHeader, slRow, reason, cycle) {
   var popId = String(slRow[slHeader.indexOf('POPID')] || '').trim();
   out.push(reason, cycle, citizenArchiveSourceEventId_(reason, cycle, popId),
     iStatus >= 0 ? slRow[iStatus] : '', CITIZEN_ARCHIVE_RETURN_ELIGIBLE[reason] ? 'TRUE' : 'FALSE',
-    slHeader.length, '');
+    slHeader.length, citizenArchiveNote_(slHeader, slRow)); // engine.90 Commit 8: the row leaves with its measured defects named, never repaired at exit
   return out;
 }
 

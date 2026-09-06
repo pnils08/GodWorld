@@ -231,7 +231,7 @@ function assessDisplacementRisk_(ctx, cycle) {
   for (var r = 0; r < simRows.length; r++) {
     var row = simRows[r];
     var status = (row[iStatus] || 'active').toString().toLowerCase();
-    if (status === 'deceased') continue;
+    if (status === 'deceased' || status === 'traded') continue; // engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent
 
     var neighborhood = row[iNeighborhood] || '';
     var birthYear = Number(row[iBirthYear]) || 0;
@@ -403,7 +403,7 @@ function updateMigrationIntent_(ctx, cycle) {
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var status = (row[iStatus] || 'active').toString().toLowerCase();
-    if (status === 'deceased') continue;
+    if (status === 'deceased' || status === 'traded') continue; // engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent
 
     var displRisk = Number(row[iDisplRisk]) || 0;
     var currentIntent = (row[iMigIntent] || 'staying').toString().toLowerCase();
@@ -637,7 +637,7 @@ function processRelocations_(ctx, cycle) {
   var byHousehold = {}; // householdId -> unit
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
-    if (String(row[iStatus] || 'active').toLowerCase() === 'deceased') continue;
+    if (/^(deceased|traded)$/.test(String(row[iStatus] || 'active').toLowerCase())) continue; // engine.90 Commit 8
     var hood = row[iNeighborhood] || '';
     if (!hoods[hood]) continue; // no canonical hood state -> not movable
     var hhId = iHouseholdId >= 0 ? (row[iHouseholdId] || '') : '';
@@ -826,7 +826,7 @@ function checkForDisplacedCitizens_(ctx, cycle) {
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var status = (row[iStatus] || 'active').toString().toLowerCase();
-    if (status === 'deceased') continue;
+    if (status === 'deceased' || status === 'traded') continue; // engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent
 
     var displRisk = Number(row[iDisplRisk]) || 0;
     var migIntent = (row[iMigIntent] || 'staying').toString().toLowerCase();
@@ -867,7 +867,7 @@ function generateMigrationHooks_(ctx, cycle) {
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var status = (row[iStatus] || 'active').toString().toLowerCase();
-    if (status === 'deceased') continue;
+    if (status === 'deceased' || status === 'traded') continue; // engine.90 Commit 8: a traded-away player carries no Oakland displacement risk or move intent
 
     var popid = row[iPOPID];
     var first = row[iFirst] || '';

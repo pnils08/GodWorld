@@ -8,8 +8,8 @@
  * exactly what `archiveCitizenExits_` would move at the next fire with the flag on.
  *
  * Per candidate: POPID, name, Status, ClockMode, Tier, RoleType, ArchiveReason,
- * ReturnEligible, the measured defect classes from
- * docs/plans/2026-08-17-ledger-trueup-sweep.md §Batch shape (SchoolQuality unusable,
+ * ReturnEligible, the measured defect classes via the mover's own `citizenExitDefects_`
+ * (docs/plans/2026-08-17-ledger-trueup-sweep.md §Batch shape: SchoolQuality unusable,
  * CareerStage spelling outside the enum, NetWorth blank, EmployerBizId blank with a
  * role, MigrationIntent still set, BirthYear out of range), and the relational
  * fields the archive must not orphan (LineageId, Heritage_Ledger membership,
@@ -24,10 +24,9 @@ require('../lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');
-const { citizenArchiveCandidates_, CITIZEN_ARCHIVE_RETURN_ELIGIBLE } = require('../utilities/archiveCitizenExits');
+const { citizenArchiveCandidates_, citizenExitDefects_, CITIZEN_ARCHIVE_RETURN_ELIGIBLE } = require('../utilities/archiveCitizenExits');
 
 const AGE_ANCHOR = 2041;
-const CAREER_STAGE_ENUM = new Set(['student', 'entry-level', 'mid-career', 'senior', 'retired']);
 const args = process.argv.slice(2);
 const opt = (k) => { const a = args.find((x) => x.startsWith('--' + k + '=')); return a ? a.split('=').slice(1).join('=') : null; };
 
@@ -72,15 +71,7 @@ async function main() {
     const age = by ? AGE_ANCHOR - by : null;
     const sq = g('SchoolQuality');
     const cs = g('CareerStage');
-    const defects = [];
-    if (sq === '' || sq === '5') defects.push('schoolQualityUnusable');
-    if (cs && !CAREER_STAGE_ENUM.has(cs.toLowerCase())) defects.push('careerStageSpelling');
-    if (!cs) defects.push('careerStageBlank');
-    if (g('NetWorth') === '') defects.push('netWorthBlank');
-    if (g('RoleType') && !g('EmployerBizId')) defects.push('employerBlankWithRole');
-    if (g('MigrationIntent')) defects.push('migrationIntentSet');
-    if (age === null || age < 0 || age > 110) defects.push('birthYearOOB');
-    if (g('Income') === '') defects.push('incomeBlank');
+    const defects = citizenExitDefects_(header, r); // one rule — the same classifier the mover stamps into ArchiveNote
     const ptr = (n) => idsOf(g(n)).map((p) => ({ popId: p, state: stateOf(p) }));
     return {
       popId, name: (g('First') + ' ' + g('Last')).trim(), status: g('Status'), clockMode: g('ClockMode'), tier: g('Tier'), roleType: g('RoleType'),

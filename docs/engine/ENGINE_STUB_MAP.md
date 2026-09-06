@@ -3069,6 +3069,10 @@
 
 - **citizenArchiveSourceEventId_(reason, cycle, popId)**
 
+- **citizenExitDefects_(header, row)**
+
+- **citizenArchiveNote_(header, row)**
+
 - **citizenArchiveRow_(slHeader, slRow, reason, cycle)**
 
 - **citizenArchiveCandidates_(header, body)**
@@ -3861,4 +3865,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1323
+**Functions mapped:** 1325

@@ -218,12 +218,17 @@
 ### loadPreviousEvening.js
 - **mirrorCarryForwardToSheet_(ctx, key, json, cycle)**
 
-- **readCarryForwardFromSheet_(ctx, key)**
+- **readCarryForwardFromSheet_(ctx, key, beforeCycle)**
 
-- **loadCarryForwardBlob_(ctx, key)**
+- **saveCarryForwardBlob_(ctx, key, json, cycle)**
+
+- **loadCarryForwardBlob_(ctx, key, cycleId)**
   Config: ctx.config.cycleCount
 
 - **assertCarryForwardPresent_(ctx)**
+  Config: ctx.config.cycleCount
+
+- **carryForwardCycleId_(ctx)**
   Config: ctx.config.cycleCount
 
 - **loadPreviousEvening_(ctx)**
@@ -3816,4 +3821,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1305
+**Functions mapped:** 1307

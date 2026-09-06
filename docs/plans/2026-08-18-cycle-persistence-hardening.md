@@ -85,6 +85,8 @@ property surgery.
 
 ## Changelog
 
+- 2026-09-06 (S428, engine-sheet) — **Wave A bench proof, SANDBOX 0831 @58, C106:** ok:true 155 s, 131 phases, cycleCount 105→106, Engine_Errors 0 rows (no `requireTab_` throw — every literal present), Carry_Forward_Store keys all @106 (mirror under retry, no create), Hospital_Ledger 2→3 rows via `appendRowWithRetry_`, Cycle_Weather row 106. Predicted before the fire, every number held.
+- 2026-09-06 (S428, engine-sheet) — **Wave B bench proof, SANDBOX 0831 @60:** C107 clean (ok:true 167 s, 131 phases, cycleCount 107, 0 Engine_Errors, ring = 106 + 107 rows per key, `carryForward` absent on a clean fire). Then the simulated crash: World_Config.cycleCount rolled 107→106 on the bench, re-fire → `carryForward` in the response = `PREV_EVENING_JSON` / `PREV_CYCLE_STATE_JSON` / `CHAOS_NBHD_FOLD_JSON` each `ghost-skipped` (stamped 107 ≥ cycleId 107) then `recovered-from-sheet` cycle 106; ok:true 126 s, cycleCount back to 107, 0 Engine_Errors, ring still 6 rows with only the 107 slots re-stamped (05:56Z) and the 106 rows untouched. No property wipe, no restore — the acceptance criterion as written. Recovery from a hard mid-Phase-10 crash is now: re-fire.
 - 2026-09-06 (S428, engine-sheet) — Wave A shipped: Tasks 1, 2 (hospital ledger + carry-forward mirror), 4 (decided: no journal), 5. Task 3 is Wave B, its own bench proof. Wiring cards for `ensureSheet_` and `executePersistIntents_` (engine-wiring, 2026-09-06) were the inventory; the persist-executor card found `persistWithRetry_` already live since S271 and `persistHospitalLedger_` absent from SHEETS_MANIFEST §9.
 
 - 2026-08-18 (S380) — plan created from the C104 double-crash post-mortem.

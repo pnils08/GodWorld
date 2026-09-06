@@ -335,7 +335,10 @@ function processHealthCauseIntake_(ctx, markdownInput) {
     
     var rowIdx = popIdMap[popId];
     if (rowIdx === undefined) {
-      errors.push('POPID not found: ' + popId);
+      // engine.90 Commit 12: say which kind of miss — a POPID that left the ledger is
+      // on Citizen_Archive and takes no HealthCause (the snapshot is history, not a patient).
+      var arc = (typeof citizenArchiveLatestByPop_ === 'function') ? citizenArchiveLatestByPop_({ ss: ss }, header)[popId] : null;
+      errors.push(arc ? ('POPID archived (' + arc.reason + ' C' + arc.exitCycle + '), HealthCause not written: ' + popId) : ('POPID not found: ' + popId));
       continue;
     }
     

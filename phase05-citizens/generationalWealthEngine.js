@@ -1144,6 +1144,10 @@ function getCitizenWealth_(ctx, popId) {
     }
   }
 
+  // engine.90 Commit 6: a POPID that already left the ledger keeps its last
+  // fortune on Citizen_Archive — the snapshot is the durable NetWorth source.
+  var arc = (typeof citizenArchiveLatestByPop_ === 'function') ? citizenArchiveLatestByPop_(ctx, header)[String(popId || '').toUpperCase()] : null;
+  if (arc) return { netWorth: Number(arc.row[iNetWorth]) || 0, wealthLevel: Number(arc.row[iWealth]) || 0, archived: true };
   return { netWorth: 0, wealthLevel: 0 };
 }
 
@@ -1196,6 +1200,12 @@ function findHouseholdSurvivors_(ctx, deceasedId) {
   var deceasedHH = '';
   for (var d = 0; d < rows.length; d++) {
     if (rows[d][iPOPID] === deceasedId) { deceasedHH = rows[d][iHH] || ''; break; }
+  }
+  if (!deceasedHH && typeof citizenArchiveLatestByPop_ === 'function') {
+    // engine.90 Commit 6: the deceased's row may already sit on Citizen_Archive — the
+    // survivors are still on the ledger, keyed by the HouseholdId the snapshot carries.
+    var arcD = citizenArchiveLatestByPop_(ctx, header)[String(deceasedId || '').toUpperCase()];
+    if (arcD) deceasedHH = arcD.row[iHH] || '';
   }
   if (!deceasedHH) return [];
 
@@ -1866,6 +1876,14 @@ function updateHeritage_(ss, ctx, cycle) {
   for (var r0 = 0; r0 < rows.length; r0++) {
     if (rows[r0] && rows[r0][iPop]) rowByPop[String(rows[r0][iPop]).trim()] = rows[r0];
   }
+  // engine.90 Commit 6: members who left the ledger (deceased / traded-away) resolve
+  // through Citizen_Archive — SL-shaped snapshots, never pushed onto ctx.ledger. They
+  // keep their place in MembersList and the generation chain; they are never living,
+  // never counted in TotalNetWorth. A listed member found on neither tab is dropped
+  // from the list and counted in results.membersUnresolved.
+  var archivedByPop = (typeof citizenArchiveLatestByPop_ === 'function') ? citizenArchiveLatestByPop_(ctx, header) : {};
+  var rowOrArchived = function(pid) { if (!pid) return null; if (rowByPop[pid]) return rowByPop[pid]; var a = archivedByPop[String(pid).toUpperCase()]; return a ? a.row : null; };
+  results.archivedMembers = 0; results.membersUnresolved = 0;
 
   // ── Heritage_Ledger snapshot ──
   var hv = hlSheet.getDataRange().getValues();
@@ -1906,7 +1924,7 @@ function updateHeritage_(ss, ctx, cycle) {
     var pids = [];
     try { pids = JSON.parse(String(row[iParents] || '[]')); } catch (e) { pids = []; }
     for (var k = 0; k < pids.length && !joined; k++) {
-      var pr = rowByPop[popIdOf(pids[k])];
+      var pr = rowOrArchived(popIdOf(pids[k])); // engine.90: a parent already archived still hands the line down
       if (pr && String(pr[iLin] || '').trim() && lines[String(pr[iLin]).trim()]) {
         row[iLin] = String(pr[iLin]).trim();
         joined = true;
@@ -1915,7 +1933,7 @@ function updateHeritage_(ss, ctx, cycle) {
     // Spouse joins the line whose surname they took (name follows the house;
     // their MaidenName keeps the birth line for later chains).
     if (!joined) {
-      var sp = rowByPop[popIdOf(row[iSpouse])];
+      var sp = rowOrArchived(popIdOf(row[iSpouse]));
       if (sp && String(sp[iLin] || '').trim() && lines[String(sp[iLin]).trim()] &&
           String(sp[iLast] || '').trim() === String(row[iLast] || '').trim()) {
         row[iLin] = String(sp[iLin]).trim();
@@ -2085,11 +2103,31 @@ function updateHeritage_(ss, ctx, cycle) {
 
   // ── aggregates + score accrual + tier promotion + tier unlocks ──
   var membersByLine = {};
+  var archivedPop = {}; // engine.90: members served from Citizen_Archive this cycle
   for (var r4 = 0; r4 < rows.length; r4++) {
     var mRow = rows[r4];
     if (!mRow || !mRow[iPop]) continue;
     var ml = String(mRow[iLin] || '').trim();
     if (ml && lines[ml]) (membersByLine[ml] = membersByLine[ml] || []).push(mRow);
+  }
+  for (var linA in lines) {
+    if (!lines.hasOwnProperty(linA)) continue;
+    var listed = [];
+    try { listed = JSON.parse(String(lines[linA][hMem] || '[]')); } catch (e) { listed = []; }
+    if (!listed || !listed.length) continue;
+    for (var la = 0; la < listed.length; la++) {
+      var lpid = popIdOf(listed[la]);
+      if (!lpid || rowByPop[lpid]) continue;
+      var arcM = archivedByPop[lpid.toUpperCase()];
+      if (arcM) {
+        archivedPop[lpid] = true;
+        results.archivedMembers++;
+        (membersByLine[linA] = membersByLine[linA] || []).push(arcM.row);
+      } else {
+        results.membersUnresolved++;
+        Logger.log('updateHeritage_ engine.90: ' + linA + ' lists ' + lpid + ' but it is on neither Simulation_Ledger nor Citizen_Archive — dropped from MembersList');
+      }
+    }
   }
 
   // engine.156: one Business_Ledger read per cycle — (a) the active BIZ_ID set
@@ -2162,7 +2200,7 @@ function updateHeritage_(ss, ctx, cycle) {
       var mid = String(mr[iPop]).trim();
       memberIds.push(mid);
       memberSet[mid] = true;
-      if (!living(mr)) continue;
+      if (!living(mr) || archivedPop[mid]) continue; // engine.90: off the ledger is never living here, whatever the snapshot's Status
       livingN++;
       var mNW = nwOf(mr);
       totalNW += mNW;
@@ -2183,7 +2221,7 @@ function updateHeritage_(ss, ctx, cycle) {
       if (seen[pid]) return 1;
       seen[pid] = true;
       var kids = [];
-      try { kids = JSON.parse(String((rowByPop[pid] || [])[iChildren] || '[]')); } catch (e) { kids = []; }
+      try { kids = JSON.parse(String((rowOrArchived(pid) || [])[iChildren] || '[]')); } catch (e) { kids = []; }
       var best = 0;
       for (var g = 0; g < kids.length; g++) {
         var kid = popIdOf(kids[g]);

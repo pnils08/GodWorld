@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1322 · **S.* fields:** 342 · **Sheets:** 58
+**Files scanned:** 184 · **Functions mapped:** 1323 · **S.* fields:** 342 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -384,6 +384,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Chicago_Citizens` | _(none)_ | `phase05-citizens/generateChicagoCitizensv1.js::generateChicagoCitizens_` | 0 | 1 |
 | `Chicago_Feed` | _(none)_ | `phase08-v3-chicago/v3ChicagoWriter.js::saveV3Chicago_`, `utilities/diagnoseDashboardData.js::diagnoseDashboardData` | 0 | 2 |
 | `Chicago_Sports_Feed` | _(none)_ | `utilities/setupSportsFeedValidation.js::setupChicagoFeedOnly`, `utilities/setupSportsFeedValidation.js::setupSportsFeedValidation` | 0 | 2 |
+| `Citizen_Archive` | _(none)_ | `utilities/archiveCitizenExits.js::citizenArchiveLatestByPop_` | 0 | 1 |
 | `Citizen_Media_Usage` | `phase05-citizens/processAdvancementIntake.js::markUsageProcessed_` | `phase05-citizens/citizenContextBuilder.js::getMediaAppearances_`, `phase05-citizens/citizenContextBuilder.js::getReturningCitizens`, `phase05-citizens/processAdvancementIntake.js::decayMediaAttention_`, `phase05-citizens/processAdvancementIntake.js::earnedCitationsByKey_`, `phase05-citizens/processAdvancementIntake.js::markUsageProcessed_`, …(+2 more) | 1 | 7 |
 | `Citizen_Usage_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processCitizenUsageIntake_`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureCitizenUsageIntakeSheet_` | 0 | 2 |
 | `Civic_Office_Ledger` | `phase05-citizens/generationalWealthEngine.js::updateHeritage_`, `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_`, `phase05-citizens/applyBusinessDynamics.js::bizMayorApproval_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/civicInitiativeEngine.js::getCouncilState_`, `phase05-citizens/civicInitiativeEngine.js::lookupAuthoringSeat_`, …(+11 more) | 3 | 16 |

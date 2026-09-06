@@ -2,7 +2,7 @@
   "generated": "2026-09-06",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1322,
+  "functionsMapped": 1323,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4786,6 +4786,12 @@
       "writers": [],
       "readers": [
         "phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_"
+      ]
+    },
+    "Citizen_Archive": {
+      "writers": [],
+      "readers": [
+        "utilities/archiveCitizenExits.js::citizenArchiveLatestByPop_"
       ]
     },
     "Reflection_Intake": {

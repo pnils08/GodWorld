@@ -27,6 +27,7 @@ if (typeof module !== 'undefined' && module.exports) {
     citizenArchiveEnabled_: function(ctx) { return citizenArchiveEnabled_(ctx); },
     citizenArchiveRow_: function() { return citizenArchiveRow_.apply(null, arguments); },
     citizenArchiveCandidates_: function() { return citizenArchiveCandidates_.apply(null, arguments); },
+    citizenArchiveLatestByPop_: function() { return citizenArchiveLatestByPop_.apply(null, arguments); },
     archiveCitizenExits_: function(ctx) { return archiveCitizenExits_(ctx); }
   };
 }
@@ -53,6 +54,39 @@ var CITIZEN_ARCHIVE_DIAG = null; // last run's counters — emitted in the fire 
 
 function citizenArchiveEnabled_(ctx) {
   return Number(ctx && ctx.config && ctx.config.citizenArchiveEnabled) === 1;
+}
+
+/**
+ * engine.90 Commit 6 — the one read-side view of Citizen_Archive for engine code.
+ * Newest exit snapshot per POPID, each re-shaped to the CALLER's Simulation_Ledger
+ * header (by column name, so a ledger that grew a column after the exit still
+ * indexes cleanly). Tab absent → {} (never created here; requireTab_ is the
+ * mover's, behind its flag). Cached on ctx for the cycle.
+ *   → { 'POP-00331': { row: [...SL-shaped...], reason: 'deceased', exitCycle: 107, returnEligible: false } }
+ */
+function citizenArchiveLatestByPop_(ctx, slHeader) {
+  if (ctx && ctx._citizenArchiveByPop) return ctx._citizenArchiveByPop;
+  var out = {};
+  var ss = ctx && ctx.ss;
+  var ar = ss && ss.getSheetByName ? ss.getSheetByName('Citizen_Archive') : null;
+  if (ar && ar.getLastRow() >= 2) {
+    var v = ar.getDataRange().getValues();
+    var ah = v[0] || [];
+    var iPop = ah.indexOf('POPID'), iExit = ah.indexOf('ExitCycle'), iReason = ah.indexOf('ArchiveReason'), iRet = ah.indexOf('ReturnEligible');
+    var map = [];
+    for (var c = 0; c < slHeader.length; c++) map.push(ah.indexOf(slHeader[c]));
+    for (var r = 1; r < v.length; r++) {
+      var pop = String(v[r][iPop] || '').trim().toUpperCase();
+      if (!pop) continue;
+      var exit = Number(v[r][iExit]) || 0;
+      if (out[pop] && out[pop].exitCycle > exit) continue;
+      var row = [];
+      for (var k = 0; k < map.length; k++) row.push(map[k] >= 0 ? v[r][map[k]] : '');
+      out[pop] = { row: row, reason: String(v[r][iReason] || ''), exitCycle: exit, returnEligible: String(v[r][iRet]).toUpperCase() === 'TRUE' };
+    }
+  }
+  if (ctx) ctx._citizenArchiveByPop = out;
+  return out;
 }
 
 /** Bookkeeping key for the exit, never published copy. */

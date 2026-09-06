@@ -3064,6 +3064,9 @@
 - **citizenArchiveEnabled_(ctx)**
   Config: ctx.config.citizenArchiveEnabled
 
+- **citizenArchiveLatestByPop_(ctx, slHeader)**
+  Sheets: Citizen_Archive
+
 - **citizenArchiveSourceEventId_(reason, cycle, popId)**
 
 - **citizenArchiveRow_(slHeader, slRow, reason, cycle)**
@@ -3858,4 +3861,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1322
+**Functions mapped:** 1323

@@ -7,7 +7,7 @@
  * Exits 0 on pass, 1 on failure.
  */
 
-const { extractCycle, intakeMeta, deriveCustomId } = require('./ingestEdition');
+const { extractCycle, intakeMeta, deriveCustomId, editionFrame } = require('./ingestEdition');
 
 let passed = 0;
 let failed = 0;
@@ -57,6 +57,25 @@ console.log('Test 3: intakeMeta');
 
   const explicit = intakeMeta('## INTAKE\nNAMES: Anyone AtAll | POP-00777 | subject');
   assert('explicit id wins without resolution', explicit.meta.popids === 'POP-00777');
+}
+
+console.log('Test 5: pipeline.65 — editionFrame');
+{
+  const divider = '============================================================';
+  const narrated = [
+    'THE CYCLE PULSE — Y2C105', 'The Bay Tribune — Oakland', 'Narrated by Mags Corliss, Editor-in-Chief', '',
+    divider, '', 'Narration paragraph one.', '', 'Narration paragraph two.', '',
+    divider, '', "THE WEEK'S REPORTING", '',
+    'By Someone | Bay Tribune Civic', '', '# Article', '', 'Body that must not ride along.', '',
+    '## INTAKE', 'NAMES: Carlos Presti | quoted-source', '', '— The Bay Tribune, Y2C105'
+  ].join('\n');
+  const f = editionFrame(narrated);
+  assert('frame found', typeof f === 'string' && f.length > 0);
+  assert('frame keeps masthead + narration', /^THE CYCLE PULSE — Y2C105/.test(f) && /Narration paragraph two\./.test(f));
+  assert('frame drops the bodies + INTAKE', !/must not ride along/.test(f) && !/## INTAKE/.test(f) && !/THE WEEK'S REPORTING/.test(f));
+  assert('frame does not end on the divider', !/={10,}\s*$/.test(f));
+  assert('legacy shape (no marker) → null', editionFrame('THE CYCLE PULSE — EDITION 88\n\nFRONT PAGE\n====\nold body') === null);
+  assert('empty → null', editionFrame('') === null);
 }
 
 console.log('Test 4: engine.114 — a partial ingest exits non-zero');

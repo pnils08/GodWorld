@@ -7,6 +7,15 @@
  * tagged bay-tribune. Future sessions, the Discord bot, and autonomous
  * scripts can then search for past canon content.
  *
+ * pipeline.65 (S429): a narrated edition (`THE WEEK'S REPORTING` marker,
+ * cron-saturday-run stepPublish shape) ingests as ONE frame doc — masthead +
+ * Mags narration. Article bodies are NOT duplicated here: the Saturday sweep
+ * (cron-saturday-run stepSweep) already owns one bay-tribune doc per curated
+ * article. Stale body chunks from an earlier monolith ingest of the same
+ * edition are deleted first (engine.91 T2 shape). Editions without the marker
+ * (pre-narration format) keep the full-body chunked path — no sweep exists for
+ * them.
+ *
  * Usage:
  *   node scripts/ingestEdition.js editions/cycle_pulse_edition_82.txt
  *   node scripts/ingestEdition.js editions/cycle_pulse_edition_82.txt --dry-run
@@ -258,6 +267,20 @@ function splitEdition(content, cycle, type) {
 }
 
 // ---------------------------------------------------------------------------
+// pipeline.65 — the edition frame. cron-saturday-run stepPublish assembles:
+//   masthead (3 lines) / ==== / narration / ==== / THE WEEK'S REPORTING / bodies
+// The frame is everything before the divider that precedes THE WEEK'S
+// REPORTING. Returns null when the marker is absent (legacy full-body shape).
+// ---------------------------------------------------------------------------
+var EDITION_FRAME_MARKER = /\n={10,}\n+THE WEEK'S REPORTING\n/;
+function editionFrame(content) {
+  var m = EDITION_FRAME_MARKER.exec(String(content || ''));
+  if (!m) return null;
+  var frame = content.slice(0, m.index).trim();
+  return frame || null;
+}
+
+// ---------------------------------------------------------------------------
 // engine.46 Phase 1 Task 2 — per-chunk byline/desk extraction so bay-tribune
 // queries can filter on who wrote it and which desk it ran under (the
 // "what I've said" self-knowledge axis). Published byline forms:
@@ -374,6 +397,46 @@ function addDocument(title, content, extraTags, metaExtras, customId) {
 }
 
 // ---------------------------------------------------------------------------
+// DELETE a document by customId (Supermemory accepts id OR customId on the
+// path). Resolves the HTTP status; 404 = nothing there, which callers treat
+// as a clean stop.
+// ---------------------------------------------------------------------------
+function deleteDocument(customId) {
+  return new Promise(function(resolve, reject) {
+    var req = https.request({
+      hostname: API_HOST,
+      path: '/v3/documents/' + encodeURIComponent(customId),
+      method: 'DELETE',
+      headers: { 'Authorization': 'Bearer ' + API_KEY }
+    }, function(res) {
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() { resolve({ status: res.statusCode, body: data }); });
+    });
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+// pipeline.65 — engine.91 T2 shape: before the frame upserts as chunk 1,
+// remove body chunks 2..N left by an earlier monolith ingest of the same
+// file. Probe upward until the first 404. Bounded so a bad key or a
+// misbehaving endpoint cannot loop.
+var STALE_CHUNK_PROBE_CAP = 20;
+async function deleteStaleChunks(type, cycle, filename) {
+  var deleted = 0;
+  for (var k = 2; k <= STALE_CHUNK_PROBE_CAP; k++) {
+    var id = deriveCustomId(type, cycle, filename, k);
+    var r = await deleteDocument(id);
+    if (r.status === 404) break;
+    if (r.status < 200 || r.status >= 300) throw new Error('DELETE ' + id + ' → HTTP ' + r.status + ': ' + r.body);
+    console.log('[DELETE] stale chunk ' + id);
+    deleted++;
+  }
+  return deleted;
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
@@ -442,11 +505,30 @@ async function main() {
   }
   if (DRY_RUN) console.log('[INFO] Mode: DRY RUN');
 
+  // pipeline.65 — narrated edition → frame only (masthead + narration). The
+  // article bodies live in the Saturday per-article sweep; ingesting them here
+  // too put every body in canon twice.
+  var frameMode = false;
+  if (type === 'edition') {
+    var frame = editionFrame(content);
+    if (frame) {
+      frameMode = true;
+      console.log('[FRAME] narrated edition — ingesting masthead + narration only (' + frame.length +
+        ' of ' + content.length + ' chars); article bodies stay with the Saturday sweep');
+      content = frame;
+    } else {
+      console.log('[WARN] No THE WEEK\'S REPORTING marker — legacy edition shape, full body ingested (no per-article sweep exists for it).');
+    }
+  }
+
   // pipeline.45 — INTAKE standard, enforced at ingest. File-level parse feeds
   // every chunk's metadata; per-section blocks (multi-article editions) merge
-  // on top in the loop below.
+  // on top in the loop below. A frame has no INTAKE block by design — the
+  // blocks ride with the articles the sweep owns.
   var fileIntake = intakeMeta(content);
-  if (!fileIntake.parsed.found) {
+  if (frameMode && !fileIntake.parsed.found) {
+    console.log('[FRAME] no INTAKE block by design (INTAKE lives on the swept articles)');
+  } else if (!fileIntake.parsed.found) {
     if (REQUIRE_INTAKE) {
       console.error('[ERROR] No ## INTAKE block found and --require-intake is set. Every');
       console.error('        article entering canon carries the INTAKE section (pipeline.45).');
@@ -468,6 +550,7 @@ async function main() {
   }
 
   var metaExtras = Object.assign({ type: type, cycle: cycle }, fileIntake.meta);
+  if (frameMode) metaExtras.scope = 'frame';
 
   // Print the metadata block prominently — post-publish verifier reads stdout
   // to confirm type/cycle plumbed correctly.
@@ -480,7 +563,20 @@ async function main() {
   }, null, 2));
 
   var sections = splitEdition(content, cycle, type);
+  if (frameMode) sections.forEach(function(sec) { sec.title = sec.title.replace(/ \((Full|Part \d+)\)$/, ' (Frame)'); });
   console.log('[INFO] Split into ' + sections.length + ' chunk(s)');
+
+  // pipeline.65 delete-first: clear body chunks 2..N from an earlier monolith
+  // ingest of this file so the frame is the only edition-level doc.
+  if (frameMode) {
+    var probeFrom = deriveCustomId(type, cycle, filename, 2);
+    if (DRY_RUN) {
+      console.log('[DRY] Would probe-delete stale chunks from ' + probeFrom + ' upward (stop at first 404)');
+    } else {
+      var staleDeleted = await deleteStaleChunks(type, cycle, filename);
+      console.log('[INFO] stale body chunks deleted: ' + staleDeleted);
+    }
+  }
 
   var success = 0;
   var errors = 0;
@@ -542,6 +638,7 @@ if (require.main === module) {
 module.exports = {
   extractCycle: extractCycle,
   splitEdition: splitEdition,
+  editionFrame: editionFrame,
   extractBylineMeta: extractBylineMeta,
   intakeMeta: intakeMeta,
   deriveCustomId: deriveCustomId,

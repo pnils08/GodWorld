@@ -116,6 +116,8 @@ Step 1b is the **only** home for edition text ingest. As of S215, `/write-editio
 ```bash
 node scripts/ingestEdition.js <source> --type <type> --cycle <XX>
 ```
+
+**`--type edition` is frame-only (pipeline.65, S429).** A narrated edition (the `THE WEEK'S REPORTING` shape `cron-saturday-run.js` publishes) ingests as ONE doc — masthead + Mags narration, `metadata.scope=frame`. Article bodies are NOT in that doc: the Saturday sweep (`stepSweep`, one `article-c{N}-{stem}` doc per curated article) owns them. The ingest deletes stale body chunks `edition-c{N}-…-2..N` from any earlier monolith ingest first. Editions without the marker (pre-narration format) still ingest full-body — no sweep exists for them. Dispatch/supplemental/interview types are unchanged.
 Full text chunked to bay-tribune. Wiki records rank higher for entity searches; text chunks are backup for full-text queries. Log doc IDs.
 
 For `--type interview` (post /interview v2.0, S233 pipeline.30): the `<source>` IS the transcript — no companion re-run. Step 1b runs once against the transcript `.txt`. The legacy two-invocation pattern (article + companion transcript) is retired; /interview v2.0 emits only the transcript.

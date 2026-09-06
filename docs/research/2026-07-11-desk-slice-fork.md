@@ -108,6 +108,7 @@ Run the fork on a live cycle (civic + sports first — the proof desks). Measure
 ## Applications (living)
 
 - 2026-07-11 — Ignition: pipeline.44 ROLLOUT row (this doc is its plan).
+- 2026-09-06 (S429) — pipeline.65 shipped from §Task 5's correction: `ingestEdition.js --type edition` is frame-only (masthead + narration, `scope=frame`), delete-first on stale body chunks; bodies stay with the Saturday per-article sweep. Test 5 in `ingestEdition.test.js`.
 
 ---
 

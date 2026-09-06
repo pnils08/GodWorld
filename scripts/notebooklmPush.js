@@ -161,6 +161,32 @@ function ensureDirectionSource(notebookId) {
   }
 }
 
+// S429 — find a source that landed without an id in the add output. Matches the
+// expected title first, then the upload's basename (what the notebook shows when the
+// --title never applied, e.g. the CLI died during --wait). Renames on a basename hit.
+// Returns { id, renamed } or null. Never throws.
+function recoverSourceId(notebookId, title, file) {
+  try {
+    const list = nlm(['source', 'list', notebookId, '--json']);
+    if (!list.ok) return null;
+    const sources = JSON.parse(list.out);
+    const arr = Array.isArray(sources) ? sources : (sources && sources.sources) || [];
+    const name = (s) => String((s && (s.title || s.name)) || '');
+    const base = path.basename(file);
+    const byTitle = arr.find((s) => name(s) === title);
+    if (byTitle && (byTitle.id || byTitle.source_id)) return { id: byTitle.id || byTitle.source_id, renamed: false };
+    const byFile = arr.find((s) => name(s) === base);
+    if (byFile && (byFile.id || byFile.source_id)) {
+      const id = byFile.id || byFile.source_id;
+      const ren = nlm(['source', 'rename', id, title, '--notebook', notebookId]);
+      return { id: id, renamed: ren.ok };
+    }
+    return null;
+  } catch (_) {
+    return null;
+  }
+}
+
 async function main() {
   const args = parseArgs(process.argv);
 
@@ -191,11 +217,24 @@ async function main() {
     return;
   }
 
-  // 1. Source add
-  const add = nlm(['source', 'add', config.notebookId, '--file', args.file, '--title', title, '--wait']);
-  if (!add.ok) degrade('source add failed: ' + add.out.slice(0, 300));
-  const idMatch = add.out.match(/Source ID: (\S+)/);
-  const sourceId = idMatch ? idMatch[1] : null;
+  // 1. Source add. --wait-timeout stays under nlm()'s own 180s process timeout so the
+  // CLI returns on its own instead of being killed mid-wait (S429: the upload had landed,
+  // the process was killed, the source sat under its filename with no id captured).
+  const add = nlm(['source', 'add', config.notebookId, '--file', args.file, '--title', title, '--wait', '--wait-timeout', '150']);
+  let sourceId = (add.out.match(/Source ID:\s*(\S+)/) || [])[1] || null;
+  if (!sourceId) {
+    // Recover: the source may have landed anyway. Find it by title (or by the upload's
+    // filename, which is what the notebook shows when --title never applied), rename it
+    // to the expected title, and carry on with the real id. Only degrade when it is
+    // genuinely not there.
+    const recovered = recoverSourceId(config.notebookId, title, args.file);
+    if (recovered) {
+      sourceId = recovered.id;
+      console.log('Source recovered from source list' + (recovered.renamed ? ' (renamed to the expected title)' : '') + ': ' + sourceId);
+    } else if (!add.ok) {
+      degrade('source add failed: ' + add.out.slice(0, 300));
+    }
+  }
   console.log('Source added: ' + title + (sourceId ? ' (' + sourceId + ')' : ''));
 
   // 2. Audio overview (editions only — quota is scarce, /post-publish passes --audio for --type edition)

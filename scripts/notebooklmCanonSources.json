@@ -81,7 +81,8 @@
     "56f79960-1550-4769-9591-b1b4add11f82"
   ],
   "allowedLoreSourceIds": [
-    "a1722406-93b3-4ba5-afa9-61e4b82344d5"
+    "a1722406-93b3-4ba5-afa9-61e4b82344d5",
+    "a870cd68-4e21-4445-80e0-0709c806822e"
   ],
   "decisions": {
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
@@ -673,6 +674,17 @@
       "evidence": [
         "docs/mags-corliss/JOURNAL_RECENT.md:884",
         "docs/mags-corliss/SESSION_HISTORY.md:15"
+      ]
+    },
+    "a870cd68-4e21-4445-80e0-0709c806822e": {
+      "title": "Lore: AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag (Y3C1)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/AUTOSAVE-1788554266831-write-a-ledger-grounded-deep-dive-on-mag.md",
+        "Cycle placement: Y3C1",
+        "Verdict: pass (rhea) — builder ruling 2026-09-06: lore is open-book; every ledger figure verified",
+        "Source id recovered from source list after the push printed no Source ID line (S429)"
       ]
     }
   }

@@ -336,6 +336,17 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S432 (2026-09-06, engine-sheet)
+
+| ID | Description | Status | Owner | Pointer |
+|---|---|---|---|---|
+| engine.163 | Packet stem leaked into citizens' life records — Citizen_Media_Usage `Context` (writer-wake stage stem incl. model id) folded raw into Advancement_Intake1 / Intake notes → LifeHistory_Log `EventText`. Fixed at the seam `describeUsageContext_` (mediaRoomIntake.js), bench @66 C110/C111 clean, LIVE PROD @64 (S431); the 11 historical Advancement rows scrubbed live S431 (`6b299af6`, read-back 11/11, 0 stems left); canon-leak-guard carries `MODEL_PAT`. Live smoke = the builder's C106 (Intake notes in-world, zero `deepseek`/`packet-v2` tokens) | done | engine-sheet | gap log `output/production_log_run_cycle_c105_gaps.md` G-EC57; commits `00d76804` + `6b299af6` |
+| engine.117 | Ledger true-up sweep — 348/961 rows carried ≥1 defect; scope only the classes no open row covers. Tasks 2–4 shipped S380; Task 1 resolved by design (SchoolQuality causal for minors, no sweep); `auditSimulationLedger` BirthYear guard now flags non-numeric cells (POP-01083 `2--6` → G-EC58, fixed live to 2016 by the builder 2026-09-06). Closed S431 | done | engine-sheet | [[../plans/2026-08-17-ledger-trueup-sweep]] |
+| engine.147 | Bloodline ascent — chain cuts 1–9 all live (engine.150–161, archived below); the wake-pack seam CLOSED S429 (research-build): `lib/wakePerception.js` `buildPool` reads `Heritage_Ledger` once and carries `line` + `DialState.maneuver`; `renderStanding` renders family line + posture in plain words, threaded in all three voices; 26/26 tests. Posture half inert on live until C106 stamps `maneuver`; acceptance = first live wake on a line member after that. Known gap carried: `BusinessesOwned` counts only heritage-minted storefronts | done | research-build / engine-sheet | [[../plans/2026-09-02-bloodline-ascent]] |
+| pipeline.67 | Oaks beat — Selena Grant + Talia Finch re-beat to two solo Oaks seats. CLOSED S431: no mint needed (Selena POP-00591 Chinatown T2, Talia POP-00592 Jack London T4, both already on the ledger); Talia's RoleType re-beat live; wake packages activated with real popids, voice-file neighborhoods corrected to the ledger, `newsroomWakePackages.test.js` fixture updated (sports rota 5→7), dry-run verified. Acceptance = first M–F fanout off a `TeamsUsed: Oaks` row (opening night C108) | done | research-build | [[../plans/2026-08-07-anthony-hal-solo-sports-seats]] §Task 6 |
+
+engine.163/117 closed S431 (engine-sheet), engine.147 S429 and pipeline.67 S431 (research-build); swept S432 on the builder's go. Plan docs stay in `docs/plans/` — `2026-08-17-ledger-trueup-sweep` is still cited by the open citizen-archive plan (engine.90) and two utility headers; `2026-08-07-anthony-hal-solo-sports-seats` is still pipeline.48's plan.
+
 ### Archive Pass — S425 (2026-09-05, engine-sheet)
 
 | ID | Description | Status | Owner | Pointer |

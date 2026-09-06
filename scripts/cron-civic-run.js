@@ -2146,12 +2146,60 @@ async function runChain() {
   }
 }
 
+// ---------------------------------------------------------------------------
+// --stage=status — Sunday 15:00 check-in (builder ask, S431): did the 14:30
+// chain run and WRITE? One Discord line via DISCORD_WEBHOOK_URL (the same
+// channel cron-civic-gate.js alerts on), so the silent-exit guards above
+// (engine not fired / already applied / staged-not-applied) become visible
+// without opening a log. --no-post prints the line and skips the webhook.
+// Never writes anything. Exit 0 always — a check-in must not fail a cron row.
+// ---------------------------------------------------------------------------
+function postDiscord(content) {
+  return new Promise((resolve) => {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    if (!webhookUrl) { log('Discord post skipped: DISCORD_WEBHOOK_URL not set'); return resolve(false); }
+    const parsed = new URL(webhookUrl);
+    const payload = JSON.stringify({ content });
+    const req = https.request({
+      hostname: parsed.hostname, path: parsed.pathname, method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(payload) }
+    }, (res) => { res.resume(); res.on('end', () => { log('Discord post sent (' + res.statusCode + ')'); resolve(res.statusCode < 300); }); });
+    req.on('error', (e) => { log('Discord post failed (non-blocking): ' + e.message); resolve(false); });
+    req.write(payload); req.end();
+  });
+}
+
+function civicStatusLine(cycle) {
+  const close = readJson(path.join(CIVIC, 'close_c' + cycle + '.json'));
+  const hhmm = (iso) => { try { return new Date(iso).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Chicago' }); } catch (_) { return iso || '?'; } };
+  if (close && close.applied === true) {
+    return '✅ **City-hall C' + cycle + ' ran and wrote the tracker** at ' + hhmm(close.ranAt) + ' — clerk ' + (close.clerk || '?') + ', ' + (close.laneEntries || 0) + ' lane entries. Cycle C' + (Number(cycle) + 1) + ' is clear to fire.';
+  }
+  if (close) {
+    return '⚠️ **City-hall C' + cycle + ' ran but did NOT write** (clerk ' + (close.clerk || '?') + ', gate ' + (close.gatePass ? 'pass' : 'blocked') + ') at ' + hhmm(close.ranAt) + '. The 21:00 retry re-enters the chain; decisions staged under output/cron-civic/staged/c' + cycle + '/. Do not fire the cycle yet.';
+  }
+  const need = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json'];
+  const missing = need.filter(f => !fs.existsSync(path.join(ROOT, 'output', f)));
+  if (missing.length) {
+    return 'ℹ️ **City-hall C' + cycle + ': nothing to do** — engine outputs missing (' + missing.join(', ') + '), so the chain exited clean. Run /engine-review + /build-world-summary for C' + cycle + ' first.';
+  }
+  const prep = readJson(path.join(CIVIC, 'prep_c' + cycle + '.json'));
+  return '❌ **City-hall C' + cycle + ' has not closed** — inputs are on disk but no close record' + (prep ? ' (prep ran; a later stage failed)' : ' (chain never started)') + '. Read logs/civic-cron.log; the 21:00 retry will try again. Do not fire the cycle yet.';
+}
+
+async function runStatus() {
+  const cycle = arg('--cycle', null) || detectCycle();
+  const line = civicStatusLine(cycle);
+  console.log(line);
+  if (!process.argv.includes('--no-post')) await postDiscord(line);
+}
+
 const STAGES = {
   prep: runPrep, directive: runDirective,
   decide: runMayorOpen, 'mayor-open': runMayorOpen,
   voices: runHearing, hearing: runHearing,
   'mayor-gavel': runMayorGavel,
-  projects: runProjects, close: runClose, datawake: runDatawake, chain: runChain,
+  projects: runProjects, close: runClose, datawake: runDatawake, chain: runChain, status: runStatus,
 };
 if (require.main === module) {
   if (!STAGE || !STAGES[STAGE]) {

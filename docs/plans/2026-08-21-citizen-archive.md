@@ -846,6 +846,8 @@ This plan is the engine.90 pointer. The commits below are implementation, not th
 - **Depends on:** Commit 3
 - **Changes:** POPID, Status, ClockMode, defect flags, LineageId, SpouseId/ParentIds, ArchiveReason mapping. **Do not assume the fifth deceased is defective.** No sheet writes.
 
+- **Landed 2026-09-06 (S430).** `scripts/inventoryCitizenArchiveCandidates.js` — read-only; eligibility comes from the mover's own `citizenArchiveCandidates_` over the live header + body, so the list is exactly the next flag-on move. Live C105 (968 rows): **53 candidates = 48 `traded-away` (all GAME, ReturnEligible) + 5 `deceased` (all ENGINE)**; mover skips 0; not exits and staying: Retired 45, `critical` 1, `recovering` 1, lowercase `active` 1 (POP-01028). **Relational: 0** — no LineageId, no Heritage_Ledger membership (FounderPopId or MembersList), no SpouseId / ParentIds / ChildrenIds on any of the 53, so the move orphans nothing today. **Defects (53 of 53 carry ≥1, 0 clean):** `careerStageSpelling` 44 (43 `early-career` + 1 `mid` — spellings `careerStageClass_` already folds; engine.82 owns the column, its S366 repair was reverted); `schoolQualityUnusable` 35 (blank or pinned 5 — Open Q5, citywide 95%); `migrationIntentSet` 6 (all Traded: POP-00032/00074/00122/00130/00793/01052 — the S380 Task 2 clear covered retired/deceased only); `employerBlankWithRole` 1 (POP-00828, deceased). The fifth deceased is not defect-free either (SchoolQuality). Full per-row JSON: `output/citizen_archive_inventory_c105.json` (regenerate any time; not tracked).
+
 ### Commit 8 — Repair or ArchiveNote only (no deletes)
 
 - **Title:** `engine.90: repair or ArchiveNote archive-eligible rows`

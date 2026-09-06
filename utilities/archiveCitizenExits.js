@@ -178,3 +178,90 @@ function archiveCitizenExits_(ctx) {
   Logger.log('archiveCitizenExits_ engine.90 C' + cycle + ': ' + out.archived + ' archived, ' + out.skipped + ' skipped, ' + out.remaining + ' remain on Simulation_Ledger');
   return out;
 }
+
+// ───────────────────────────────────────────────────────────────────────────
+// Restore — Status=Active brings a traded POPID back to Oakland (Commit 9)
+//
+// Pure planner over header+rows arrays (clasp-deployable; no cycle-path
+// caller yet — the operator surface is scripts/restoreCitizen.js, which runs
+// this same planner and executes the plan against a named spreadsheet).
+// Same POPID, never a new identity. Archive history is kept: restore copies
+// the latest snapshot onto Simulation_Ledger; nothing on Citizen_Archive is
+// edited or deleted.
+//
+//   restoreCitizenPlan_(popId, src, cycle, opts) →
+//     { action: 'noop' | 'flip' | 'restore', popId, slIndex, row, fields, reason }
+//   src = { slHeaders, slRows, arHeaders, arRows }; opts.canonHoods = Set/array
+//   Throws (fail-loud) on: missing everywhere; deceased latest exit; an SL row
+//   already present alongside an archive-only expectation with mismatched
+//   identity; snapshot header not a prefix-compatible layout of the SL header.
+// ───────────────────────────────────────────────────────────────────────────
+
+function restoreStampDate_(d) {
+  var p = function(n) { return (n < 10 ? '0' : '') + n; };
+  return d.getFullYear() + '-' + p(d.getMonth() + 1) + '-' + p(d.getDate());
+}
+
+function restoreCitizenPlan_(popId, src, cycle, opts) {
+  opts = opts || {};
+  var id = String(popId || '').trim().toUpperCase();
+  if (!/^POP-\d+$/.test(id)) throw new Error('restore: "' + popId + '" is not a POPID');
+  var slH = src.slHeaders || [], slR = src.slRows || [], arH = src.arHeaders || [], arR = src.arRows || [];
+  var iPop = slH.indexOf('POPID'), iSt = slH.indexOf('Status'), iRet = slH.indexOf('ReturnedCycle'), iUpd = slH.indexOf('LastUpdated');
+  var iCause = slH.indexOf('HealthCause'), iSSC = slH.indexOf('StatusStartCycle'), iDest = slH.indexOf('MigrationDestination'), iHood = slH.indexOf('Neighborhood'), iLH = slH.indexOf('LifeHistory');
+  if (iPop < 0 || iSt < 0) throw new Error('restore: Simulation_Ledger header lacks POPID/Status');
+  var now = opts.now || new Date();
+  var stamp = restoreStampDate_(now);
+  var hoods = {};
+  (opts.canonHoods || []).forEach(function(h) { hoods[String(h).trim().toLowerCase()] = true; });
+
+  // 1. on Simulation_Ledger?
+  var slHits = [];
+  for (var r = 0; r < slR.length; r++) if (slR[r] && String(slR[r][iPop] || '').trim().toUpperCase() === id) slHits.push(r);
+  if (slHits.length > 1) throw new Error('restore: ' + id + ' appears ' + slHits.length + ' times on Simulation_Ledger — fix the duplicate first');
+  if (slHits.length === 1) {
+    var row = slR[slHits[0]];
+    var st = String(row[iSt] || '').trim().toLowerCase();
+    if (st === 'active') return { action: 'noop', popId: id, slIndex: slHits[0], row: null, fields: {}, reason: 'already Active on Simulation_Ledger' };
+    if (st === 'deceased') throw new Error('restore: ' + id + ' is deceased on Simulation_Ledger — not ReturnEligible');
+    if (st !== 'traded') throw new Error('restore: ' + id + ' is "' + row[iSt] + '" on Simulation_Ledger — only Traded flips to Active here');
+    var flip = {}; flip[slH[iSt]] = 'Active';
+    if (iRet >= 0) flip[slH[iRet]] = cycle;
+    if (iUpd >= 0) flip[slH[iUpd]] = stamp;
+    return { action: 'flip', popId: id, slIndex: slHits[0], row: null, fields: flip, reason: 'Traded row still on Simulation_Ledger' };
+  }
+
+  // 2. archive-only: latest exit snapshot
+  var aPop = arH.indexOf('POPID'), aExit = arH.indexOf('ExitCycle'), aReason = arH.indexOf('ArchiveReason'), aSchema = arH.indexOf('SchemaVersion');
+  var snaps = [];
+  for (var a = 0; a < arR.length; a++) if (arR[a] && String(arR[a][aPop] || '').trim().toUpperCase() === id) snaps.push(arR[a]);
+  if (!snaps.length) throw new Error('restore: ' + id + ' is on neither Simulation_Ledger nor Citizen_Archive');
+  snaps.sort(function(x, y) { return (Number(x[aExit]) || 0) - (Number(y[aExit]) || 0); });
+  var latest = snaps[snaps.length - 1];
+  var reason = String(latest[aReason] || '').trim();
+  if (!CITIZEN_ARCHIVE_RETURN_ELIGIBLE[reason]) throw new Error('restore: ' + id + ' latest exit is "' + reason + '" (C' + latest[aExit] + ') — not ReturnEligible');
+  var width = Number(latest[aSchema]) || 0;
+  if (width < 1 || width > slH.length) throw new Error('restore: ' + id + ' snapshot SchemaVersion ' + latest[aSchema] + ' vs Simulation_Ledger width ' + slH.length + ' — restore must header-map, not pad');
+  for (var c = 0; c < width; c++) {
+    if (String(arH[c]) !== String(slH[c])) throw new Error('restore: Citizen_Archive column ' + (c + 1) + ' is "' + arH[c] + '" but Simulation_Ledger has "' + slH[c] + '" — layout drift, restore must header-map');
+  }
+  var out = [];
+  for (var c2 = 0; c2 < slH.length; c2++) out.push(c2 < width ? (latest[c2] === undefined || latest[c2] === null ? '' : latest[c2]) : ''); // pad on the right when SL grew
+  out[iSt] = 'Active';
+  if (iRet >= 0) out[iRet] = cycle;
+  if (iUpd >= 0) out[iUpd] = stamp;
+  if (iCause >= 0) out[iCause] = '';
+  if (iSSC >= 0) out[iSSC] = '';
+  var backInOakland = iHood >= 0 && hoods[String(out[iHood] || '').trim().toLowerCase()];
+  if (iDest >= 0 && backInOakland) out[iDest] = '';
+  if (iLH >= 0) {
+    var line = stamp + ' — [Return] Returned to Oakland (C' + cycle + ')';
+    out[iLH] = String(out[iLH] || '').trim() ? String(out[iLH]).trim() + ' | ' + line : line;
+  }
+  return { action: 'restore', popId: id, slIndex: -1, row: out, fields: { Status: 'Active', ReturnedCycle: cycle }, reason: 'latest exit ' + reason + ' C' + latest[aExit] + (backInOakland ? '; hood is canon, MigrationDestination cleared' : '') };
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports.restoreCitizenPlan_ = function() { return restoreCitizenPlan_.apply(null, arguments); };
+  module.exports.CITIZEN_ARCHIVE_RETURN_ELIGIBLE = CITIZEN_ARCHIVE_RETURN_ELIGIBLE;
+}

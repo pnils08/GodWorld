@@ -62,7 +62,7 @@
 | AN | `MigrationReason` | _(none)_ | `phase05-citizens/migrationTrackingEngine.js::processRelocations_`, `phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_`, `phase05-citizens/updateCivicApprovalRatings.js::mintChallengerOnLedger_` | 0 | 3 |
 | AO | `MigrationDestination` | _(none)_ | `phase05-citizens/migrationTrackingEngine.js::processRelocations_`, `phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_` | 0 | 2 |
 | AP | `MigratedCycle` | _(none)_ | `phase05-citizens/migrationTrackingEngine.js::processRelocations_`, `phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_`, `phase05-citizens/updateCivicApprovalRatings.js::mintChallengerOnLedger_` | 0 | 3 |
-| AQ | `ReturnedCycle` | _(none)_ | _(none)_ | 0 | 0 |
+| AQ | `ReturnedCycle` | _(none)_ | `utilities/archiveCitizenExits.js::restoreCitizenPlan_` (planner; executed by operator `scripts/restoreCitizen.js` — engine.90 Commit 9, S428; no cycle-path caller yet) | 0 | 1 |
 | AR | `EconomicProfileKey` | _(none)_ | `phase05-citizens/educationCareerEngine.js::deriveMinorEducationStage_`, `phase05-citizens/educationCareerEngine.js::settleAdulthood_`, `phase05-citizens/educationCareerEngine.js::updateCareerProgression_`, `phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_`, …(+5) | 0 | 9 |
 | AS | `EmployerBizId` | _(none)_ | `phase02-world-state/commuteFlowEngine.js::buildCommuteFlows_`, `phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, …(+8) | 0 | 12 |
 | AT | `CitizenBio` | _(none)_ | _(none)_ | 0 | 0 |

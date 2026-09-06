@@ -202,8 +202,14 @@ function selectedCitizenRow(snapshot, participant, rosterIdentity) {
   const matches = normalized.rows.filter((row) => (
     row.values[popIndex].trim() === participant.popid
   ));
+  if (matches.length === 0) {
+    // engine.90: a POPID that left Simulation_Ledger for Citizen_Archive comes
+    // back through restore (scripts/restoreCitizen.js), never through a roster
+    // action — call-up is Active → Active on an existing row.
+    throw new Error('Selected citizen POPID is not on Simulation_Ledger — an archived citizen returns through restore, not a roster action');
+  }
   if (matches.length !== 1) {
-    throw new Error('Selected citizen POPID is unavailable or ambiguous');
+    throw new Error('Selected citizen POPID is ambiguous on Simulation_Ledger');
   }
   const selected = {
     headers: normalized.headers,

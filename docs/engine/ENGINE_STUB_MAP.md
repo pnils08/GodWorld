@@ -3075,6 +3075,10 @@
   Config: ctx.config.cycleCount, ctx.config.popIdHighWater
   Sheets: Simulation_Ledger
 
+- **restoreStampDate_(d)**
+
+- **restoreCitizenPlan_(popId, src, cycle, opts)**
+
 ### archiveLifeHistory.js
 - **archiveLifeHistory()**
 
@@ -3854,4 +3858,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1320
+**Functions mapped:** 1322

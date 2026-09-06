@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1315 · **S.* fields:** 342 · **Sheets:** 58
+**Files scanned:** 184 · **Functions mapped:** 1320 · **S.* fields:** 342 · **Sheets:** 58
 
 ## S.* / ctx.summary reverse index
 
@@ -115,7 +115,7 @@
 | `S.cycleAuditIssues` | `phase06-analysis/applyCivicLoadIndicator.js::resetCycleAuditIssues_` | `phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_` | 1 | 1 |
 | `S.cycleFinalizedAt` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | `phase09-digest/finalizeCycleState.js::compactInitiativeRipples_` | 1 | 1 |
 | `S.cycleFinalState` | `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | `phase09-digest/finalizeCycleState.js::compactInitiativeRipples_` | 1 | 1 |
-| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase01-config/godWorldEngine2.js::runDryRunCycle`, …(+103 more) | 2 | 109 |
+| `S.cycleId` | `phase01-config/godWorldEngine2.js::advanceWorldTime_`, `phase08-v3-chicago/v3Integration.js::v3Integration_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase01-config/advanceSimulationCalendar.js::simYearOf_`, `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::logEngineError_`, `phase01-config/godWorldEngine2.js::processIntake_`, `phase01-config/godWorldEngine2.js::runDryRunCycle`, …(+104 more) | 2 | 110 |
 | `S.cycleInMonth` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase08-v3-chicago/chicagoSatellite.js::chicagoSatelliteEngine_`, `phase08-v3-chicago/v3ChicagoWriter.js::saveV3Chicago_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 3 |
 | `S.cycleOfYear` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `phase08-v3-chicago/chicagoSatellite.js::chicagoSatelliteEngine_`, …(+2 more) | 1 | 8 |
 | `S.cyclePacket` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | _(none)_ | 1 | 0 |
@@ -424,7 +424,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Riley_Digest` | `phase01-config/godWorldEngine2.js::writeDigest_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase06-analysis/applyPatternDetection.js::applyPatternDetection_`, `phase10-persistence/cycleExportAutomation.js::exportRileyDigest`, `phase10-persistence/cycleExportAutomation.js::formatMirrorEntry_`, `utilities/cycleRollback.js::previewRollbackToCycle78`, …(+1 more) | 1 | 6 |
 | `Ripple_Ledger` | `utilities/rippleLedger.test.js::assert` | `utilities/rippleLedger.test.js::assert` | 1 | 1 |
 | `Simulation_Calendar` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | 1 | 1 |
-| `Simulation_Ledger` | `phase05-citizens/generationalWealthEngine.js::ensureHeritageSchema_`, `phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_`, `phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_` | `phase01-config/initSimulationLedger.js::initSimulationLedger_`, `phase05-citizens/bondEngine.js::ensureBondEngineData_`, `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, `phase05-citizens/citizenContextBuilder.js::findInSimulationLedger_`, `phase05-citizens/citizenContextBuilder.js::listNamedCitizens`, …(+10 more) | 3 | 15 |
+| `Simulation_Ledger` | `phase05-citizens/generationalWealthEngine.js::ensureHeritageSchema_`, `phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_`, `phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_` | `phase01-config/initSimulationLedger.js::initSimulationLedger_`, `phase05-citizens/bondEngine.js::ensureBondEngineData_`, `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, `phase05-citizens/citizenContextBuilder.js::findInSimulationLedger_`, `phase05-citizens/citizenContextBuilder.js::listNamedCitizens`, …(+11 more) | 3 | 16 |
 | `Story_Hook_Deck` | _(none)_ | `phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_`, `utilities/cycleRollback.js::previewRollbackToCycle78`, `utilities/cycleRollback.js::rollbackToCycle78` | 0 | 3 |
 | `Story_Seed_Deck` | _(none)_ | `phase07-evening-media/buildContractSeeds.js::contractSeedUsageTally_`, `phase10-persistence/saveV3Seeds.js::migrateSeedDeckV4_`, `phase10-persistence/saveV3Seeds.js::saveV3Seeds_`, `utilities/cycleRollback.js::previewRollbackToCycle78`, `utilities/cycleRollback.js::rollbackToCycle78` | 0 | 5 |
 | `Storyline_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processStorylineIntake_`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureStorylineIntakeSheet_` | 0 | 2 |

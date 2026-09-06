@@ -3059,6 +3059,21 @@
 
 ### archiveCitizenExits.js
 - **citizenArchiveHeaders_(slHeader)**
+  Config: ctx.config.citizenArchiveEnabled
+
+- **citizenArchiveEnabled_(ctx)**
+  Config: ctx.config.citizenArchiveEnabled
+
+- **citizenArchiveSourceEventId_(reason, cycle, popId)**
+
+- **citizenArchiveRow_(slHeader, slRow, reason, cycle)**
+
+- **citizenArchiveCandidates_(header, body)**
+
+- **archiveCitizenExits_(ctx)**
+  Reads: S.cycleId
+  Config: ctx.config.cycleCount, ctx.config.popIdHighWater
+  Sheets: Simulation_Ledger
 
 ### archiveLifeHistory.js
 - **archiveLifeHistory()**
@@ -3839,4 +3854,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1315
+**Functions mapped:** 1320

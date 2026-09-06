@@ -23,6 +23,158 @@ function citizenArchiveHeaders_(slHeader) {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     CITIZEN_ARCHIVE_META_HEADERS: CITIZEN_ARCHIVE_META_HEADERS,
-    citizenArchiveHeaders_: citizenArchiveHeaders_
+    citizenArchiveHeaders_: citizenArchiveHeaders_,
+    citizenArchiveEnabled_: function(ctx) { return citizenArchiveEnabled_(ctx); },
+    citizenArchiveRow_: function() { return citizenArchiveRow_.apply(null, arguments); },
+    citizenArchiveCandidates_: function() { return citizenArchiveCandidates_.apply(null, arguments); },
+    archiveCitizenExits_: function(ctx) { return archiveCitizenExits_(ctx); }
   };
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+// Phase11-CitizenArchive — copy → read-back → remove (Commit 5, S428)
+//
+// Runs after Phase10-ExecuteIntents has committed Simulation_Ledger, after
+// Phase11-MediaIntake / BusinessArchive, before MaintainLifeHistoryLog. Reads
+// the COMMITTED sheet, never ctx.ledger.rows (Phase 11 consumers already ran
+// on those and they are not mutated here). Same transactional shape as
+// archiveClosedBusinesses_: nothing leaves Simulation_Ledger until its
+// snapshot has been read back from Citizen_Archive by POPID + ExitCycle.
+//
+// Gate: Number(ctx.config.citizenArchiveEnabled) === 1, else a no-op — the
+// requireTab_ sits inside the gate so a live sheet without the tab stays a
+// no-op rather than a Phase-11 error. The cycle never creates the tab
+// (engine.119); scripts/ensureCitizenArchive.js does.
+// ───────────────────────────────────────────────────────────────────────────
+
+var CITIZEN_ARCHIVE_REASON_BY_STATUS = { deceased: 'deceased', traded: 'traded-away' };
+var CITIZEN_ARCHIVE_RETURN_ELIGIBLE = { 'traded-away': true, 'permanent-migration': true };
+var CITIZEN_ARCHIVE_DIAG = null; // last run's counters — emitted in the fire JSON as out.citizenArchive
+
+function citizenArchiveEnabled_(ctx) {
+  return Number(ctx && ctx.config && ctx.config.citizenArchiveEnabled) === 1;
+}
+
+/** Bookkeeping key for the exit, never published copy. */
+function citizenArchiveSourceEventId_(reason, cycle, popId) {
+  return (reason === 'deceased' ? 'death' : 'trade') + ':C' + cycle + ':' + popId;
+}
+
+/**
+ * Build one archive row from a committed Simulation_Ledger row: A–<width>
+ * verbatim, then the seven metadata cells in CITIZEN_ARCHIVE_META_HEADERS order.
+ */
+function citizenArchiveRow_(slHeader, slRow, reason, cycle) {
+  var out = [];
+  for (var c = 0; c < slHeader.length; c++) out.push(c < slRow.length ? slRow[c] : '');
+  var iStatus = slHeader.indexOf('Status');
+  var popId = String(slRow[slHeader.indexOf('POPID')] || '').trim();
+  out.push(reason, cycle, citizenArchiveSourceEventId_(reason, cycle, popId),
+    iStatus >= 0 ? slRow[iStatus] : '', CITIZEN_ARCHIVE_RETURN_ELIGIBLE[reason] ? 'TRUE' : 'FALSE',
+    slHeader.length, '');
+  return out;
+}
+
+/**
+ * Eligibility over the committed sheet body. Returns {rows:[{q, popId, reason, num}], skipped}.
+ * q = 0-based index into `body` (sheet row = q + 2). Skips malformed POPIDs and
+ * any POPID that also has an Active row (a duplicate is a defect, not a move).
+ */
+function citizenArchiveCandidates_(header, body) {
+  var iPop = header.indexOf('POPID'), iSt = header.indexOf('Status');
+  var out = { rows: [], skipped: 0, skippedWhy: {} };
+  if (iPop < 0 || iSt < 0) return out;
+  var activeByPop = {};
+  for (var a = 0; a < body.length; a++) {
+    var st0 = String((body[a] && body[a][iSt]) || '').trim().toLowerCase();
+    if (!CITIZEN_ARCHIVE_REASON_BY_STATUS[st0]) activeByPop[String(body[a][iPop] || '').trim().toUpperCase()] = true;
+  }
+  var skip = function(why) { out.skipped++; out.skippedWhy[why] = (out.skippedWhy[why] || 0) + 1; };
+  for (var q = 0; q < body.length; q++) {
+    var row = body[q]; if (!row) continue;
+    var st = String(row[iSt] || '').trim().toLowerCase();
+    var reason = CITIZEN_ARCHIVE_REASON_BY_STATUS[st];
+    if (!reason) continue;
+    var popId = String(row[iPop] || '').trim().toUpperCase();
+    var m = /^POP-(\d+)$/.exec(popId);
+    if (!m) { skip('malformed-popid'); continue; }
+    if (activeByPop[popId]) { skip('active-duplicate'); continue; }
+    out.rows.push({ q: q, popId: popId, reason: reason, num: +m[1] });
+  }
+  return out;
+}
+
+function archiveCitizenExits_(ctx) {
+  var out = { enabled: false, candidates: 0, archived: 0, skipped: 0, skippedWhy: {}, remaining: null, highWaterBumped: false };
+  CITIZEN_ARCHIVE_DIAG = out;
+  if (!citizenArchiveEnabled_(ctx)) { Logger.log('archiveCitizenExits_ engine.90: citizenArchiveEnabled is not 1 — no-op'); return out; }
+  out.enabled = true;
+  if (!ctx.ss) return out;
+  var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
+  var sl = requireTab_(ctx.ss, 'Simulation_Ledger');
+  var ar = requireTab_(ctx.ss, 'Citizen_Archive');
+
+  var v = sl.getDataRange().getValues();
+  var header = v[0] || [], body = v.slice(1);
+  var ah = ar.getDataRange().getValues()[0] || [];
+  var want = citizenArchiveHeaders_(header);
+  if (JSON.stringify(ah) !== JSON.stringify(want)) {
+    throw new Error('engine.90: Citizen_Archive header does not match Simulation_Ledger header + metadata (' + ah.length + ' vs ' + want.length + ' cols) — nothing moved; re-run scripts/ensureCitizenArchive.js');
+  }
+  var iPopA = ah.indexOf('POPID'), iExitA = ah.indexOf('ExitCycle'), iReasonA = ah.indexOf('ArchiveReason');
+
+  var cand = citizenArchiveCandidates_(header, body);
+  out.skipped = cand.skipped; out.skippedWhy = cand.skippedWhy;
+  // a re-fire of the same cycle must not double-snapshot: (POPID, ExitCycle, ArchiveReason) is unique
+  var existing = {};
+  var av = ar.getDataRange().getValues();
+  for (var e = 1; e < av.length; e++) existing[String(av[e][iPopA] || '').trim().toUpperCase() + '|' + String(av[e][iExitA]) + '|' + String(av[e][iReasonA])] = true;
+  var moves = [];
+  for (var k = 0; k < cand.rows.length; k++) {
+    var c = cand.rows[k];
+    if (existing[c.popId + '|' + cycle + '|' + c.reason]) { out.skipped++; out.skippedWhy['already-archived-this-cycle'] = (out.skippedWhy['already-archived-this-cycle'] || 0) + 1; continue; }
+    moves.push(c);
+  }
+  out.candidates = moves.length;
+  if (!moves.length) { out.remaining = body.length; Logger.log('archiveCitizenExits_ engine.90 C' + cycle + ': no eligible rows'); return out; }
+
+  // 1. copy — one block append
+  var block = [];
+  for (var b = 0; b < moves.length; b++) block.push(citizenArchiveRow_(header, body[moves[b].q], moves[b].reason, cycle));
+  var start = ar.getLastRow() + 1;
+  ar.getRange(start, 1, block.length, want.length).setValues(block);
+
+  // 2. read back — every POPID + ExitCycle, in order
+  var back = ar.getRange(start, 1, block.length, want.length).getValues();
+  var verified = [];
+  for (var r = 0; r < moves.length; r++) {
+    var got = back[r] || [];
+    var okRow = String(got[iPopA] || '').trim().toUpperCase() === moves[r].popId && String(got[iExitA]) === String(cycle);
+    if (okRow) verified.push(moves[r]);
+    else Logger.log('archiveCitizenExits_ engine.90: read-back mismatch for ' + moves[r].popId + ' — source row kept');
+  }
+  out.skipped += moves.length - verified.length;
+
+  // 3. remove — verified rows only, bottom-up, contiguous runs in one call each
+  verified.sort(function(x, y) { return y.q - x.q; });
+  var i = 0, maxNum = 0;
+  while (i < verified.length) {
+    var j = i;
+    while (j + 1 < verified.length && verified[j + 1].q === verified[j].q - 1) j++;
+    var topQ = verified[j].q, n = verified[i].q - topQ + 1;
+    sl.deleteRows(topQ + 2, n);
+    for (var t = i; t <= j; t++) { out.archived++; if (verified[t].num > maxNum) maxNum = verified[t].num; Logger.log('archiveCitizenExits_ engine.90: ' + verified[t].popId + ' archived (' + verified[t].reason + ', C' + cycle + ')'); }
+    i = j + 1;
+  }
+  out.remaining = sl.getLastRow() - 1;
+
+  // 4. the mark never sits below an archived POPID (hand-appended-then-archived leak)
+  var hw = Number(ctx.config && ctx.config.popIdHighWater);
+  if (maxNum > 0 && (isNaN(hw) || maxNum > hw)) {
+    if (!ctx._popIdAlloc) ctx._popIdAlloc = { last: maxNum, seededFrom: { highWater: isNaN(hw) ? null : hw, activeMax: null, archiveBump: true } };
+    else if (maxNum > ctx._popIdAlloc.last) ctx._popIdAlloc.last = maxNum;
+    out.highWaterBumped = persistPopIdHighWater_(ctx);
+  }
+  Logger.log('archiveCitizenExits_ engine.90 C' + cycle + ': ' + out.archived + ' archived, ' + out.skipped + ' skipped, ' + out.remaining + ' remain on Simulation_Ledger');
+  return out;
 }

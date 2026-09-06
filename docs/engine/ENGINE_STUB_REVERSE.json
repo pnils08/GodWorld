@@ -2,7 +2,7 @@
   "generated": "2026-09-06",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1315,
+  "functionsMapped": 1320,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -751,6 +751,7 @@
         "phase10-persistence/saveV3Seeds.js::saveV3Seeds_",
         "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_",
         "phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_",
+        "utilities/archiveCitizenExits.js::archiveCitizenExits_",
         "utilities/compressLifeHistory.js::compressLifeHistory_",
         "utilities/cycleModes.js::initializeSeededRng_",
         "utilities/cycleModes.js::saveCycleSeed_",
@@ -4345,6 +4346,7 @@
         "phase10-persistence/cycleExportAutomation.js::exportSimulationLedger",
         "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_",
         "phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_",
+        "utilities/archiveCitizenExits.js::archiveCitizenExits_",
         "utilities/ensureNeighborhoodDemographics.js::seedNeighborhoodDemographicsFromLedger_",
         "utilities/exportCitizensSnapshot.js::exportCitizensSnapshot_"
       ]

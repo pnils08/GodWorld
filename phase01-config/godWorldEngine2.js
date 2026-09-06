@@ -594,6 +594,7 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase11-MediaIntake', function() { processMediaIntake_(ctx); });
   safePhaseCall_(ctx, 'Phase11-BusinessArchive', function() { archiveClosedBusinesses_(ctx); }); // engine.96 Task 7 — post-commit copy-verify-remove of drained closures
+  safePhaseCall_(ctx, 'Phase11-CitizenArchive', function() { archiveCitizenExits_(ctx); }); // engine.90 — deceased/Traded rows leave Simulation_Ledger for Citizen_Archive (flag citizenArchiveEnabled)
 
   // engine.38 B1 — final step: bound LifeHistory_Log (full-population coverage
   // grows it ~600-750 rows/cycle). Cheap getLastRow gate; heavy trim only above
@@ -2319,6 +2320,7 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase11-MediaIntake', function() { processMediaIntake_(ctx); });
   safePhaseCall_(ctx, 'Phase11-BusinessArchive', function() { archiveClosedBusinesses_(ctx); }); // engine.96 Task 7 — post-commit copy-verify-remove of drained closures
+  safePhaseCall_(ctx, 'Phase11-CitizenArchive', function() { archiveCitizenExits_(ctx); }); // engine.90 — deceased/Traded rows leave Simulation_Ledger for Citizen_Archive (flag citizenArchiveEnabled)
 
   // engine.38 B1 — final step: bound LifeHistory_Log (see first entry point).
   // Cheap getLastRow gate; heavy trim only above CYCLE_TRIGGER_ROWS. Last write.

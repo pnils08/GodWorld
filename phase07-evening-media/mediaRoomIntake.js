@@ -562,13 +562,7 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
 
   // Get target sheets
   var intakeSheet = ss.getSheetByName('Intake');
-  var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) {
-    // Lazy-create: pipeline self-heals if tab was reset/migrated.
-    // Schema matches the appendRow shape below (10 cols A–J).
-    advSheet = ss.insertSheet('Advancement_Intake1');
-    advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
-  }
+  var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create (Phase 11)
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
@@ -665,34 +659,13 @@ function setupMediaIntakeV2() {
   var created = [];
 
   // 1. Media_Intake (Articles)
-  var articleSheet = ss.getSheetByName('Media_Intake');
-  if (!articleSheet) {
-    articleSheet = ss.insertSheet('Media_Intake');
-    articleSheet.appendRow(['Reporter', 'StoryType', 'SignalSource', 'Headline', 'ArticleText', 'CulturalMentions', 'Status']);
-    articleSheet.setFrozenRows(1);
-    setupArticleValidation_(articleSheet);
-    created.push('Media_Intake');
-  }
+  var articleSheet = requireTab_(ss, 'Media_Intake'); // engine.119: no runtime create
 
   // 2. Storyline_Intake
-  var storylineSheet = ss.getSheetByName('Storyline_Intake');
-  if (!storylineSheet) {
-    storylineSheet = ss.insertSheet('Storyline_Intake');
-    storylineSheet.appendRow(['StorylineType', 'Description', 'Neighborhood', 'RelatedCitizens', 'Priority', 'Status']);
-    storylineSheet.setFrozenRows(1);
-    setupStorylineValidation_(storylineSheet);
-    created.push('Storyline_Intake');
-  }
+  var storylineSheet = requireTab_(ss, 'Storyline_Intake'); // engine.119: no runtime create
 
   // 3. Citizen_Usage_Intake
-  var usageSheet = ss.getSheetByName('Citizen_Usage_Intake');
-  if (!usageSheet) {
-    usageSheet = ss.insertSheet('Citizen_Usage_Intake');
-    usageSheet.appendRow(['CitizenName', 'UsageType', 'Context', 'Reporter', 'Status']);
-    usageSheet.setFrozenRows(1);
-    setupUsageValidation_(usageSheet);
-    created.push('Citizen_Usage_Intake');
-  }
+  var usageSheet = requireTab_(ss, 'Citizen_Usage_Intake'); // engine.119: no runtime create
 
   // 4. Continuity_Intake — REMOVED (continuity pipeline eliminated)
   // Quotes route to LifeHistory_Log via parseMediaRoomMarkdown.js
@@ -768,37 +741,12 @@ function setupUsageValidation_(sheet) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function ensureStorylineTracker_(ss) {
-  var sheet = ss.getSheetByName('Storyline_Tracker');
-  if (!sheet) {
-    sheet = ss.insertSheet('Storyline_Tracker');
-    // v2.1: 14 columns with calendar
-    sheet.appendRow([
-      'Timestamp', 'CycleAdded', 'StorylineType', 'Description', 'Neighborhood',
-      'RelatedCitizens', 'Priority', 'Status',
-      'Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason'
-    ]);
-    sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, 14).setFontWeight('bold');
-    sheet.setColumnWidth(4, 300);
-  }
+  var sheet = requireTab_(ss, 'Storyline_Tracker'); // engine.119: no runtime create (v2.1 header lives on the tab)
   return sheet;
 }
 
 function ensureCitizenMediaUsage_(ss) {
-  var sheet = ss.getSheetByName('Citizen_Media_Usage');
-  if (!sheet) {
-    sheet = ss.insertSheet('Citizen_Media_Usage');
-    // v2.5: 13 columns with calendar + Routed
-    sheet.appendRow([
-      'Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter',
-      'Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason',
-      'Routed'
-    ]);
-    sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, 13).setFontWeight('bold');
-    sheet.setColumnWidth(3, 150);
-    sheet.setColumnWidth(5, 250);
-  }
+  var sheet = requireTab_(ss, 'Citizen_Media_Usage'); // engine.119: no runtime create (v2.5 header lives on the tab)
   return sheet;
 }
 
@@ -818,24 +766,7 @@ function ensureCitizenMediaUsage_(ss) {
  * v2.1: Updated to include calendar context
  */
 function logCulturalMention_(ss, cycle, journalist, entityName, cal) {
-  var mediaSheet = ss.getSheetByName('Media_Ledger');
-  if (!mediaSheet) {
-    // Create with v2.1 headers
-    mediaSheet = ss.insertSheet('Media_Ledger');
-    mediaSheet.appendRow([
-      'Timestamp', 'Cycle', 'Journalist', 'NameUsed', 'FameCategory',
-      'CulturalDomain', 'FameScore', 'TrendTrajectory', 'MediaSpread',
-      'CityTier', 'Neighborhood', 'StorySeedCount', 'CycleWeight',
-      'CycleWeightReason', 'ChaosEvents', 'NightlifeVolume', 'Sentiment',
-      'CivicLoad', 'ShockFlag', 'PatternFlag', 'EconomicMood',
-      'WeatherType', 'WeatherMood', 'MediaIntensity', 'ActiveArcs',
-      // v2.1: Calendar columns
-      'Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday',
-      'IsCreationDay', 'SportsSeason', 'Month'
-    ]);
-    mediaSheet.setFrozenRows(1);
-    mediaSheet.getRange(1, 1, 1, 32).setFontWeight('bold');
-  }
+  var mediaSheet = requireTab_(ss, 'Media_Ledger'); // engine.119: no runtime create (v2.1 header lives on the tab)
 
   // Look up entity
   var culSheet = ss.getSheetByName('Cultural_Ledger');

@@ -40,10 +40,12 @@ crashed run overwrites them post-wedge) → pre-create the tab via API → bench
    deliberately. Same doctrine as economy-plan D4; codex's engine.104 vet already
    inventoried several sites (`godWorldEngine2.js:98`, `generationalWealthEngine.js:1276`,
    `saveCycleSeed_`→`ensureSheet_`). **DONE S428 (Wave A):** `requireTab_` in
-   `utilities/utilityFunctions.js`; 25 cycle-path literals converted across 19 phase/utility
+   `utilities/utilityFunctions.js`; 33 cycle-path sites converted across 21 phase/utility
    files (the `engine-wiring` card of 2026-09-06 is the inventory: 13 direct `insertSheet`
-   sites + 7 `ensureSheet_` callers in `phase*/`, plus 6 `ensure*Schema_` creators in
-   `utilities/`); the executor's replace/sheet paths record-and-skip a missing tab;
+   sites + 7 `ensureSheet_` callers in `phase*/`, 6 `ensure*Schema_` creators in
+   `utilities/`, and — found on the advisor's close-out check, the card had grepped
+   filenames not wrappers — 8 Phase-11 sites reachable through `processMediaIntake_` and
+   `maintainLifeHistoryLog_`, after the executor but still `runWorldCycle`); the executor's replace/sheet paths record-and-skip a missing tab;
    `executeEnsureIntent_` stays the one sanctioned creator (`queueEnsureTabIntent_`,
    priority 25, drained before the storm). Gate run before conversion: every literal
    present on live (79 tabs) and bench (80). `Business_Archive` (the one ensure-intent

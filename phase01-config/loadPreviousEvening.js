@@ -147,6 +147,9 @@ function saveCarryForwardBlob_(ctx, key, json, cycle) {
 function loadCarryForwardBlob_(ctx, key, cycleId) {
   var props = PropertiesService.getScriptProperties();
   var target = Number(cycleId) || 0;
+  // Replay rewinds cycleCount to a past cycle, so every live prop would read as a
+  // ghost and a 3-slot ring has nothing older to offer — same skip as the assert.
+  if (ctx && ctx.mode && (ctx.mode.replay || ctx.mode.dryRun)) target = 0;
   var json = props.getProperty(key);
   if (json) {
     var stamped = Number(props.getProperty(key + '_CYCLE')) || 0;

@@ -2462,12 +2462,11 @@
   Sheets: Citizen_Usage_Intake
 
 - **routeCitizenUsageToIntake_(ctx, ss, cycle, cal)**
-  Sheets: Advancement_Intake1, Citizen_Media_Usage, Generic_Citizens, Intake, Simulation_Ledger
+  Sheets: Citizen_Media_Usage, Generic_Citizens, Intake, Simulation_Ledger
 
 - **processContinuityIntake_(ss, cycle, cal)**
 
 - **setupMediaIntakeV2()**
-  Sheets: Citizen_Usage_Intake, Media_Intake, Storyline_Intake
 
 - **setupArticleValidation_(sheet)**
 
@@ -2476,13 +2475,11 @@
 - **setupUsageValidation_(sheet)**
 
 - **ensureStorylineTracker_(ss)**
-  Sheets: Storyline_Tracker
 
 - **ensureCitizenMediaUsage_(ss)**
-  Sheets: Citizen_Media_Usage
 
 - **logCulturalMention_(ss, cycle, journalist, entityName, cal)**
-  Sheets: Cultural_Ledger, Media_Ledger
+  Sheets: Cultural_Ledger
 
 - **flagCitizenForTierReview_(ss, citizenName, cycle, usageType)**
   Sheets: Advancement_Intake1
@@ -3073,7 +3070,7 @@
   Sheets: LifeHistory_Log
 
 - **runArchive_(dryRun, opts)**
-  Sheets: LifeHistory_Archive, LifeHistory_Log
+  Sheets: LifeHistory_Log
 
 - **logCycleSummary_(rows, iCycle, label)**
 

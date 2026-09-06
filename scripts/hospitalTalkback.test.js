@@ -43,6 +43,11 @@ const sandbox = {
   safeRand_: function(ctx) {
     return (ctx && typeof ctx.rng === 'function') ? ctx.rng : function() { return 0.6; };
   },
+  // engine.119: utilities/utilityFunctions.js + persistenceExecutor.js globals the
+  // hospital ledger now calls — pass-throughs (no retry, no tab gate) in the harness.
+  requireTab_: function(ss, name) { return ss.getSheetByName(name); },
+  persistWithRetry_: function(fn) { return fn(); },
+  appendRowWithRetry_: function(sheet, row) { sheet.appendRow(row); return 0; },
 };
 
 vm.createContext(sandbox);

@@ -34,6 +34,7 @@ global.inWorldStamp_ = (ctx) => 'Y3C' + ((ctx && ctx.config && ctx.config.cycleC
 global.safeRand_ = (ctx) => ctx.rng;
 global.queueAppendIntent_ = () => {};
 global.recordHookRipple_ = () => {};
+global.requireTab_ = (ss, name) => ss.getSheetByName(name); // engine.119 (utilities/utilityFunctions.js)
 
 function mulberry32(seed) {
   return function () {

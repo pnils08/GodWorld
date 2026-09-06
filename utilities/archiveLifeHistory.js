@@ -164,14 +164,8 @@ function runArchive_(dryRun, opts) {
     return;
   }
 
-  // --- Get or create LifeHistory_Archive sheet ---
-  var archiveSheet = ss.getSheetByName('LifeHistory_Archive');
-  if (!archiveSheet) {
-    archiveSheet = ss.insertSheet('LifeHistory_Archive');
-    // Write header row
-    archiveSheet.getRange(1, 1, 1, header.length).setValues([header]);
-    Logger.log('archiveLifeHistory: Created LifeHistory_Archive sheet');
-  }
+  // engine.119: no runtime create — the archive tab is pre-created (Phase 11)
+  var archiveSheet = requireTab_(ss, 'LifeHistory_Archive');
 
   // --- Append archived rows to archive sheet ---
   var archiveLastRow = archiveSheet.getLastRow();

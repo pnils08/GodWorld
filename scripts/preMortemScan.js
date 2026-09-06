@@ -233,17 +233,33 @@ function scanNeighborhoods(gaps) {
 // unconnected pre-fire on live, C104 2026-08-18).
 function requiredTabLiterals() {
   const found = new Map(); // tab → [file:line]
-  const rx = /requireTab_\(\s*[A-Za-z_.]+\s*,\s*'([^']+)'\s*\)/g;
+  // Literal form `requireTab_(ss, 'Tab')`, plus an identifier form
+  // `requireTab_(ss, NAME)` resolved through a same-file `var NAME = 'Tab';`
+  // (the utilities/ensure*Schema_ constants, v3NeighborhoodWriter's sheetName).
+  const rxLit = /requireTab_\(\s*[A-Za-z_.]+\s*,\s*'([^']+)'\s*\)/g;
+  const rxId = /requireTab_\(\s*[A-Za-z_.]+\s*,\s*([A-Za-z_][A-Za-z0-9_]*)\s*\)/g;
   for (const f of listJsFiles(SCAN_DIRS)) {
     if (f.endsWith('.test.js')) continue;
-    const lines = fs.readFileSync(f, 'utf8').split('\n');
+    const src = fs.readFileSync(f, 'utf8');
+    const lines = src.split('\n');
+    const consts = new Map();
+    for (const m of src.matchAll(/\bvar\s+([A-Za-z_][A-Za-z0-9_]*)\s*=\s*'([^']+)'\s*;/g)) {
+      if (!consts.has(m[1])) consts.set(m[1], m[2]);
+    }
     lines.forEach((line, i) => {
       if (isCommentLine(line)) return;
-      let m; rx.lastIndex = 0;
-      while ((m = rx.exec(line)) !== null) {
-        const rel = path.relative(ROOT, f) + ':' + (i + 1);
+      const rel = path.relative(ROOT, f) + ':' + (i + 1);
+      let m; rxLit.lastIndex = 0;
+      while ((m = rxLit.exec(line)) !== null) {
         if (!found.has(m[1])) found.set(m[1], []);
         found.get(m[1]).push(rel);
+      }
+      rxId.lastIndex = 0;
+      while ((m = rxId.exec(line)) !== null) {
+        const tab = consts.get(m[1]);
+        if (!tab) continue;                       // an unresolvable identifier is reported below
+        if (!found.has(tab)) found.set(tab, []);
+        found.get(tab).push(rel + ' (' + m[1] + ')');
       }
     });
   }

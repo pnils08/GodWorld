@@ -236,3 +236,4 @@ Four decisions, all Mike sign-off, taken after an engine-sheet wiring audit of t
 - 2026-08-18 (engine-sheet) — pipeline.60 BUILT: Nia dispatch live (undocked desk quota, feed-built lane, recap ledger, wake package, roster row); wake-2 packet interview = pilot source-of-speech. Acceptance: next 06:15 wake chain.
 - 2026-08-18 (engine-sheet) — tier system extracted to its own doc: [[../engine/TIER_MOBILITY]] (climb/decay/fame, code-verified). Fame-permanence door confirmed UNWIRED → engine.118 filed.
 - 2026-08-29 (kimi) — 4b bullet now points at [[../research/2026-08-29-casino-ledger]], the consolidated design-question record serving this gate (watch; authorizes nothing). No gate change.
+- 2026-09-06 (research-build) — pipeline.58 CLOSED. Verified live: Nia Rook POP-01076 minted, in persona-map.json + .claude/agents/nia-rook; tonight's C105 article landed 4 real quotes (quotesLanded:4). Both halves stale-resolved, no new work needed.

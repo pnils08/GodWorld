@@ -176,7 +176,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | research.25 | Headless newsroom pipeline — M–F writer-wakes + Sat compile; Phase 1 + Phase 2.0 done, next is Phase 2 daily writer-wakes (was gated on engine.76 W5 half 1, now shipped) | in-progress | research-build → engine-sheet | [[../plans/2026-07-20-headless-newsroom-pipeline]] |
 | research.27 | UNDOCKED/SpaceMolt — S379: §2.5 daily cadence LIVE (draw F7 fix, EpisodeId seq, auto-approve gate, cron-undocked-run.js orchestrator, undockedStandings.js). C104 retarget done S378 | in-progress | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §2.5 |
 | pipeline.60 | Nia Rook newsroom dispatch — BUILT S379 (undocked desk quota, feed-built lane via buildNiaSlice, recap ledger, NIAROOK-UNDOCKED-1 package, roster row + beat rule); acceptance = next unattended 06:15 wake chain | in-progress | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §2.5 |
-| pipeline.58 | Nia Rook (UNDOCKED beat) landed, wall-pending POPID mint. 2.2's feed carries no quote field yet — she writes facts-only until that's added | ready | engine-sheet (mint) / research-build (2.2 quote field) | [[../plans/2026-08-07-spacemolt-game-show]] §3.1 |
+| pipeline.58 | Nia Rook (UNDOCKED beat) — both halves done: POPID minted, quotes landing live | done-pending-archive | engine-sheet / research-build | [[../plans/2026-08-07-spacemolt-game-show]] §3.1 |
 
 ### governance.* — Skills, MDs, ADRs, project hygiene
 

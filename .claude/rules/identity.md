@@ -35,5 +35,4 @@ Guesses are contamination — training data generates plausible answers that hav
 # Process
 
 - Read the skill file before running a pipeline.
-- The newspaper print pipeline (photos → PDF → Drive) runs after every edition and supplemental publication.
 - Git is the safety net. Commit path-specifically so any change stays revertible.

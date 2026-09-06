@@ -181,6 +181,76 @@ pointers:
 
 ---
 
+## Citizen_Archive
+
+- **Rows:** 0 (bench-ensured S428 2026-09-06; live tab pending the builder's go — `scripts/ensureCitizenArchive.js`)
+- **Columns:** 62 — A–BC the Simulation_Ledger header verbatim (positional snapshot at exit, `SchemaVersion` = width), BD–BJ exit metadata (engine.90, [[../docs/plans/2026-08-21-citizen-archive]]). Hand-registered; `exportAllHeaders()` re-emits this section from the sheet once the live tab exists.
+
+| Col | Header |
+|-----|--------|
+| A | POPID |
+| B | First |
+| C | MaidenName |
+| D | Last |
+| E | OriginGame |
+| F | UNI (y/n) |
+| G | MED (y/n) |
+| H | CIV (y/n) |
+| I | ClockMode |
+| J | Tier |
+| K | RoleType |
+| L | Status |
+| M | BirthYear |
+| N | OrginCity |
+| O | LifeHistory |
+| P | SpouseId |
+| Q | LastUpdated |
+| R | TraitProfile |
+| S | UsageCount |
+| T | Neighborhood |
+| U | HouseholdId |
+| V | MaritalStatus |
+| W | NumChildren |
+| X | ParentIds |
+| Y | ChildrenIds |
+| Z | WealthLevel |
+| AA | Income |
+| AB | InheritanceReceived |
+| AC | NetWorth |
+| AD | SavingsRate |
+| AE | DebtLevel |
+| AF | EducationLevel |
+| AG | SchoolQuality |
+| AH | CareerStage |
+| AI | YearsInCareer |
+| AJ | CareerMobility |
+| AK | LastPromotionCycle |
+| AL | DisplacementRisk |
+| AM | MigrationIntent |
+| AN | MigrationReason |
+| AO | MigrationDestination |
+| AP | MigratedCycle |
+| AQ | ReturnedCycle |
+| AR | EconomicProfileKey |
+| AS | EmployerBizId |
+| AT | CitizenBio |
+| AU | Gender |
+| AV | DialState |
+| AW | SMPageId |
+| AX | MemoryRegisters |
+| AY | StatusStartCycle |
+| AZ | HealthCause |
+| BA | LineageId |
+| BB | SkillTags |
+| BC | Famous |
+| BD | ArchiveReason |
+| BE | ExitCycle |
+| BF | SourceEventId |
+| BG | LastActiveStatus |
+| BH | ReturnEligible |
+| BI | SchemaVersion |
+| BJ | ArchiveNote |
+
 ## Civic_Office_Ledger
 
 - **Rows:** 1000

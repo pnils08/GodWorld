@@ -33,6 +33,9 @@ var SHEET_NAMES = {
   RELATIONSHIP_BONDS: 'Relationship_Bonds',
   LIFEHISTORY_LOG: 'LifeHistory_Log',
 
+  // === Cold storage (engine.90) — full-row exits; never on the event loop ===
+  CITIZEN_ARCHIVE: 'Citizen_Archive',
+
   // === Media System ===
   MEDIA_BRIEFING: 'Media_Briefing',
   MEDIA_LEDGER: 'Media_Ledger',

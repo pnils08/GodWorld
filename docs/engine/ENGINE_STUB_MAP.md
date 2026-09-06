@@ -3057,6 +3057,9 @@
 
 ## Utilities (`utilities/`)
 
+### archiveCitizenExits.js
+- **citizenArchiveHeaders_(slHeader)**
+
 ### archiveLifeHistory.js
 - **archiveLifeHistory()**
 
@@ -3826,5 +3829,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 182
-**Functions mapped:** 1310
+**Files scanned:** 183
+**Functions mapped:** 1311

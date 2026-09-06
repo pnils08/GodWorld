@@ -801,6 +801,8 @@ This plan is the engine.90 pointer. The commits below are implementation, not th
 
 ### Commit 2 — Sandbox then approved live `popIdHighWater` seed
 
+- **Landed 2026-09-06 (S428, bench only).** `scripts/ensureCitizenArchive.js` (idempotent, dry-run default, `--live` required against the live id) seeded the bench: `popIdHighWater` = max(1106, bench SL max 1106) = 1106, `citizenArchiveEnabled` 0. Live seed is 1083 on the builder's go — same command, `--seed=1083 --apply --live`.
+
 - **Title:** `engine.90: seed World_Config popIdHighWater`
 - **Files:** none required beyond Commit 1 helpers; operator/sandbox write of World_Config
 - **Depends on:** Commit 1
@@ -812,6 +814,7 @@ This plan is the engine.90 pointer. The commits below are implementation, not th
 - **Files:** `utilities/sheetNames.js` (`CITIZEN_ARCHIVE`; optional `LIFEHISTORY_ARCHIVE`); `schemas/SCHEMA_HEADERS.md`; `docs/SPREADSHEET.md`; `docs/engine/SHEETS_MANIFEST.md`; `docs/SIMULATION_LEDGER.md` (pointer); `docs/index.md` only if a new registered doc is added
 - **Depends on:** Commit 1
 - **Changes:** Headers A–BB + BC–BI. Zero body rows. Ensure on **sandbox**, then approved live ensure (schema-setup §1.1, ≤1×). Live ensure sets World_Config `citizenArchiveTabLive=1`. `citizenArchiveEnabled` missing or `0` on live. **Not** a live row move.
+- **Landed 2026-09-06 (S428, bench).** Headers are A–BC (55) + BD–BJ (7) = 62 — the live sheet is 55 columns, so the tab header is built from the Simulation_Ledger header at ensure time (`citizenArchiveHeaders_` in `utilities/archiveCitizenExits.js`), never from this doc. `SHEET_NAMES.CITIZEN_ARCHIVE` registered; `schemas/SCHEMA_HEADERS.md`, `docs/SPREADSHEET.md`, `docs/SIMULATION_LEDGER.md` carry the tab. Live ensure = `node scripts/ensureCitizenArchive.js --sheet=<live> --seed=1083 --apply --live` (dry-run printed the exact plan: 3 config rows + the 62-col tab).
 
 ### Commit 4 — Resolver + dumpLedger both snapshots
 
@@ -884,5 +887,6 @@ This plan is the engine.90 pointer. The commits below are implementation, not th
 
 - 2026-08-21 (grok) — Design rev 1–4 (scratch). Review loop closed at 0 open issues.
 - 2026-08-22 (grok) — Filed as engine.90 plan. Mike: v1 = deceased + Traded only; live Status dump rerun (`dumpLedger.js` C104, 964 rows, 49 Traded + 5 deceased, no Migrated/pending/inactive); citywide engine.117 is not a gate. `Wendell Carter Jr.` POP-01028 remains lowercase `active` (not archive-eligible).
+- 2026-09-06 (engine-sheet, S428) — **Commits 2 + 3 landed on the bench** (seed 1106, flags, empty 62-col tab, registration) via `scripts/ensureCitizenArchive.js`; the live half is one command on the builder's go.
 - 2026-09-06 (engine-sheet, S428) — **Commit 1 landed** (allocator; see §PR Plan). Live facts re-measured at landing, superseding the plan's snapshot: Simulation_Ledger is **55 columns** (both sheets), not 54 — the archive snapshot is A–BC + 7 metadata (Commit 3 registers from the live header, not this doc); live SL max **POP-01083**, bench **POP-01106** — Commit 2 seeds are 1106 (bench) and 1083 (live, builder's go), not 1079; `popIdHighWater` / `citizenArchiveEnabled` rows absent on both sheets; bench eligible set 48 Traded + 7 deceased.
 - 2026-08-22 (grok) — Return trigger locked: Status→Active on a traded POPID moves them back to Oakland (same POPID). Pre-archive = in-place flip; post-archive = restore copy onto SL. Sports `return` stays injury-only.

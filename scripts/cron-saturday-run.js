@@ -872,6 +872,15 @@ async function stepPublish(cycle) {
   console.log('published: canon ingest + permanent notebook (' + config.notebookName + ')');
   const sourceIdMatch = String(add.out || '').match(/Source ID:\s*(\S+)/);
   const sourceId = sourceIdMatch ? sourceIdMatch[1] : null;
+  // S429 — the edition is canon the moment it lands; record it in the fail-closed source
+  // policy or notebooklmCanonSourcesValidate.js reports it unclassified (C104 + C105 were).
+  const { recordCanonSource } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
+  recordCanonSource(sourceId, 'allowedPublishedSourceIds', {
+    title: 'The Cycle Pulse — Y2C' + cycle,
+    classification: 'published',
+    reason: 'Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).',
+    evidence: [path.relative(ROOT, outPath)],
+  });
   if (config.saturdayAudio !== false) {
     try {
       const { generateAndDeliverEditionAudio } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));

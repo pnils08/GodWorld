@@ -37,7 +37,9 @@
     "b0cf1c08-258d-41ab-9604-0d7a13b127f4",
     "45906537-074f-4107-b971-862627341bc4",
     "defd4884-1954-4657-84af-a19e69435ba3",
-    "833558a2-2829-4d84-8677-7d9a2b510a58"
+    "833558a2-2829-4d84-8677-7d9a2b510a58",
+    "3b0b7cb7-439b-4a0c-8ea1-c3687a48432b",
+    "fe335f6a-5be4-4d67-bcd9-08e496cf2d74"
   ],
   "allowedCanonReferenceSourceIds": [
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6",
@@ -78,7 +80,8 @@
     "d62a5043-a859-4bcb-bb25-081a63acea25",
     "fc84bf14-d03d-41c8-9e8a-e83abed56cfd",
     "b2f8b11f-5799-4408-9903-b6971920ae05",
-    "56f79960-1550-4769-9591-b1b4add11f82"
+    "56f79960-1550-4769-9591-b1b4add11f82",
+    "086a5fa7-281e-4c13-ba8b-09e011df5892"
   ],
   "allowedLoreSourceIds": [
     "a1722406-93b3-4ba5-afa9-61e4b82344d5",
@@ -685,6 +688,30 @@
         "Cycle placement: Y3C1",
         "Verdict: pass (rhea) — builder ruling 2026-09-06: lore is open-book; every ledger figure verified",
         "Source id recovered from source list after the push printed no Source ID line (S429)"
+      ]
+    },
+    "3b0b7cb7-439b-4a0c-8ea1-c3687a48432b": {
+      "title": "The Cycle Pulse — Y2C104",
+      "classification": "published",
+      "reason": "Published Cycle Pulse edition (C104), added by the Saturday run; backfilled S429 — the run never recorded it.",
+      "evidence": [
+        "editions/cycle_pulse_c104.txt"
+      ]
+    },
+    "fe335f6a-5be4-4d67-bcd9-08e496cf2d74": {
+      "title": "The Cycle Pulse — Y2C105",
+      "classification": "published",
+      "reason": "Published Cycle Pulse edition (C105), added by the Saturday run; backfilled S429 — the run never recorded it.",
+      "evidence": [
+        "editions/cycle_pulse_c105.txt"
+      ]
+    },
+    "086a5fa7-281e-4c13-ba8b-09e011df5892": {
+      "title": "00_AUDIO_DIRECTION_GUIDE — weekly — 0d3edae9363e",
+      "classification": "excluded",
+      "reason": "Audio-direction production guide (pipeline.51 ensureDirectionSource) — a studio instruction for the audio overview, not canon content; re-uploads under a new hash when the guide changes.",
+      "evidence": [
+        "scripts/notebooklmPush.js ensureDirectionSource"
       ]
     }
   }

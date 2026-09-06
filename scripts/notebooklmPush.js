@@ -187,6 +187,30 @@ function recoverSourceId(notebookId, title, file) {
   }
 }
 
+// S429 — record a landed canon source in the fail-closed policy
+// (scripts/notebooklmCanonSources.json) so notebooklmCanonSourcesValidate.js stays
+// green. bucket ∈ allowedPublishedSourceIds | allowedCanonReferenceSourceIds |
+// allowedLoreSourceIds | excludedSourceIds. Idempotent; never throws (a policy
+// write must not fail a publish that already landed).
+function recordCanonSource(sourceId, bucket, decision) {
+  try {
+    if (!sourceId) return false;
+    const policyPath = path.join(ROOT, 'scripts', 'notebooklmCanonSources.json');
+    const policy = JSON.parse(fs.readFileSync(policyPath, 'utf-8'));
+    if (!Array.isArray(policy[bucket])) return false;
+    if (policy[bucket].indexOf(sourceId) !== -1) return true;
+    policy[bucket].push(sourceId);
+    policy.decisions = policy.decisions || {};
+    policy.decisions[sourceId] = decision;
+    fs.writeFileSync(policyPath, JSON.stringify(policy, null, 2) + '\n');
+    console.log('[POLICY] recorded ' + sourceId + ' in ' + bucket);
+    return true;
+  } catch (e) {
+    console.log('[POLICY] record skipped (non-blocking): ' + e.message);
+    return false;
+  }
+}
+
 async function main() {
   const args = parseArgs(process.argv);
 
@@ -435,5 +459,4 @@ module.exports = {
   deliver,
   generateAndDeliverEditionAudio,
   sendDiscordText,
-  sendDiscordFile,
-};
+  sendDiscordFile, recordCanonSource };

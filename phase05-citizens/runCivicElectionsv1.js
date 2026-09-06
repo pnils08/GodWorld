@@ -237,23 +237,10 @@ function runCivicElections_(ctx) {
   var sentiment = (S.cityDynamics && S.cityDynamics.sentiment) || 0;
   
   var results = [];
-  var electionLog = ss.getSheetByName('Election_Log');
-
-  // Create Election_Log if missing.
-  // SCHEMA-SETUP CARVE-OUT (Phase 42 §1.1 + .claude/rules/engine.md line 44):
-  //   insertSheet + headers appendRow + setFrozenRows fire ≤1× per spreadsheet
-  //   lifetime, outside the cycle-write path. Direct ops stay; cycle-path
-  //   election writes route via queueAppendIntent_ at line 394 + queueRangeIntent_
-  //   at line 432 below. Per Phase 2.1 decision A (PHASE_42_PATTERNS §1.1).
-  if (!electionLog) {
-    electionLog = ss.insertSheet('Election_Log');
-    electionLog.appendRow([
-      'Timestamp', 'Cycle', 'GodWorldYear', 'OfficeId', 'Title', 'District',
-      'Incumbent', 'Challenger', 'Winner', 'Margin', 'MarginType',
-      'IncumbentAdvantage', 'EconFactor', 'Narrative'
-    ]);
-    electionLog.setFrozenRows(1);
-  }
+  // engine.119: the schema-setup lazy-create that lived here is gone — the tab is
+  // pre-created; cycle-path election writes route via queueAppendIntent_ /
+  // queueRangeIntent_ below.
+  var electionLog = requireTab_(ss, 'Election_Log');
   
   for (var e = 0; e < seatsUp.length; e++) {
     var seat = seatsUp[e];

@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-05",
+  "generated": "2026-09-06",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1303,
+  "functionsMapped": 1305,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4175,9 +4175,7 @@
       ]
     },
     "Engine_Errors": {
-      "writers": [
-        "phase01-config/godWorldEngine2.js::logEngineError_"
-      ],
+      "writers": [],
       "readers": [
         "phase01-config/godWorldEngine2.cycleCount.test.js::mkCtx",
         "phase01-config/godWorldEngine2.js::logEngineError_"
@@ -4485,7 +4483,6 @@
       "readers": [
         "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
-        "phase05-citizens/generationalWealthEngine.js::ensureHeritageSchema_",
         "phase05-citizens/generationalWealthEngine.js::heritageTierByPop_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/maneuverEngine.js::maneuverLines_"
@@ -4569,9 +4566,7 @@
       ]
     },
     "Relationship_Bonds": {
-      "writers": [
-        "phase05-citizens/bondPersistence.js::loadRelationshipBonds_"
-      ],
+      "writers": [],
       "readers": [
         "phase05-citizens/bondEngine.js::diagnoseBondEngine",
         "phase05-citizens/bondPersistence.js::loadRelationshipBonds_",
@@ -4605,8 +4600,7 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::dimCulturalFame_",
         "phase07-evening-media/culturalLedger.js::decayCulturalFame_",
-        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
-        "utilities/ensureCultureLedger.js::ensureCulturalLedger_"
+        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_"
       ],
       "readers": [
         "phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure",
@@ -4655,9 +4649,6 @@
     "Advancement_Intake1": {
       "writers": [],
       "readers": [
-        "phase05-citizens/processAdvancementIntake.js::checkEmergencePromotions_",
-        "phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_",
-        "phase05-citizens/processAdvancementIntake.js::ensureHouseholdQueueSheet_",
         "phase05-citizens/processAdvancementIntake.js::processAdvancementRows_",
         "phase07-evening-media/mediaRoomIntake.js::flagCitizenForTierReview_",
         "phase07-evening-media/mediaRoomIntake.js::processCategoryEntries_",
@@ -4735,8 +4726,7 @@
       "readers": [
         "phase07-evening-media/mediaRoomIntake.js::logCulturalMention_",
         "phase07-evening-media/mediaRoomIntake.js::upgradeMediaLedgerWithCalendar_",
-        "phase10-persistence/recordMediaLedger.js::recordMediaLedger_",
-        "utilities/ensureMediaLedger.js::ensureMediaLedger_"
+        "phase10-persistence/recordMediaLedger.js::recordMediaLedger_"
       ]
     },
     "MediaRoom_Paste": {

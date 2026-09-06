@@ -190,14 +190,9 @@ function ensureTransitMetricsSchema_(ss) {
     throw new Error('ensureTransitMetricsSchema_: spreadsheet required');
   }
 
-  var sheet = ss.getSheetByName(TRANSIT_METRICS_SHEET_NAME);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(TRANSIT_METRICS_SHEET_NAME);
-    sheet.appendRow(TRANSIT_METRICS_HEADERS);
-    sheet.setFrozenRows(1);
-    return sheet;
-  }
+  // engine.119: no runtime create — the tab is pre-created; missing header
+  // columns still self-arm below (append-only, ≤1× per column).
+  var sheet = requireTab_(ss, TRANSIT_METRICS_SHEET_NAME);
 
   // Check for missing headers
   var existing = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];

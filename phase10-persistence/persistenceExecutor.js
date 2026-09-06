@@ -206,6 +206,21 @@ function persistWithRetry_(fn, label) {
   throw lastErr;
 }
 
+/**
+ * engine.119 Task 2 — retry-safe append for the Phase-10 direct writers outside
+ * the executor (persistHospitalLedger_, mirrorCarryForwardToSheet_). appendRow
+ * is NOT retry-safe: a timed-out-but-landed append double-writes on re-attempt.
+ * Compute the tail once, then setValues under retry — a re-attempt rewrites the
+ * same cells with the same values (same shape as the executor's batch append).
+ */
+function appendRowWithRetry_(sheet, row, label) {
+  var target = sheet.getLastRow() + 1;
+  persistWithRetry_(function() {
+    sheet.getRange(target, 1, 1, row.length).setValues([row]);
+  }, label);
+  return target;
+}
+
 
 /**
  * Executes an ensure-tab intent.
@@ -257,9 +272,10 @@ function executeReplaceIntent_(ctx, intent) {
 
     var sheet = ctx.ss.getSheetByName(intent.tab);
 
-    // Create sheet if it doesn't exist
+    // engine.119: a replace never creates its tab mid-storm. The ensure-intent
+    // (priority 25, drained before this) is the one sanctioned creator.
     if (!sheet) {
-      sheet = ctx.ss.insertSheet(intent.tab);
+      return { success: false, error: 'Replace ' + intent.tab + ': tab missing — the cycle never creates tabs (engine.119); queue an ensure intent or pre-create it' };
     }
 
     // Build padded rows first, then clear+write atomically under one retry — a
@@ -317,9 +333,9 @@ function executeSheetIntents_(ctx, sheetName, intents) {
     var sheet = ctx.ss.getSheetByName(sheetName);
 
     if (!sheet) {
-      // Try to create the sheet
-      sheet = ctx.ss.insertSheet(sheetName);
-      Logger.log('executeSheetIntents_: Created new sheet ' + sheetName);
+      // engine.119: never create mid-storm — record and skip this sheet's intents.
+      result.errors.push('Sheet ' + sheetName + ': tab missing — the cycle never creates tabs (engine.119); queue an ensure intent or pre-create it');
+      return result;
     }
 
     // Separate by kind for batching

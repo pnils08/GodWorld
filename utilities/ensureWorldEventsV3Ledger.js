@@ -17,49 +17,9 @@
 
 function ensureWorldEventsV3Ledger_(ctx) {
   var ss = ctx.ss;
-  var sheet = ss.getSheetByName('WorldEvents_V3_Ledger');
-
-  if (!sheet) {
-    sheet = ss.insertSheet('WorldEvents_V3_Ledger');
-
-    var headers = [
-      "Timestamp",           // A
-      "Cycle",               // B
-      "EventDescription",    // C
-      "EventType",           // D
-      "Domain",              // E
-      "Severity",            // F
-      "Neighborhood",        // G
-      "ImpactScore",         // H
-      "PopulationAffected",  // I
-      "HealthFlag",          // J
-      "CivicFlag",           // K
-      "EconomicFlag",        // L
-      "FestivalFlag",        // M
-      "SentimentShift",      // N
-      "WeatherType",         // O
-      "WeatherImpact",       // P
-      "CitySentiment",       // Q
-      "TextureSignal",       // R
-      "StoryHookSignal",     // S
-      "CivicLoad",           // T
-      "ShockFlag",           // U
-      "PatternFlag",         // V
-      "Holiday",             // W
-      "HolidayPriority",     // X
-      "IsFirstFriday",       // Y
-      "IsCreationDay",       // Z
-      "SportsSeason",        // AA
-      "SourceEngine",        // AB
-      "CanonStatus"          // AC
-    ];
-
-    sheet.appendRow(headers);
-    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-    sheet.setFrozenRows(1);
-
-    Logger.log('ensureWorldEventsV3Ledger_ v3.3: Created WorldEvents_V3_Ledger with ' + headers.length + ' columns');
-  }
+  // engine.119: no runtime create — the v3.3 header block that lived here is on
+  // the tab itself (pre-created live + bench); schema doc below stays the reference.
+  var sheet = requireTab_(ss, 'WorldEvents_V3_Ledger');
 
   return sheet;
 }

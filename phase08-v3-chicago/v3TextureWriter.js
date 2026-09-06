@@ -46,7 +46,7 @@ function saveV3Textures_(ctx) {
     'Intensity'         // G
   ];
 
-  var sheet = ensureSheet_(ss, 'Texture_Trigger_Log', headers);
+  var sheet = requireTab_(ss, 'Texture_Trigger_Log'); // engine.119: no runtime create
 
   var cycle = (ctx.config && ctx.config.cycleCount) || (ctx.summary && ctx.summary.cycleId) || 0;
   var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)

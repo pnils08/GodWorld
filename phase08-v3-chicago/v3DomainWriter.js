@@ -79,7 +79,7 @@ function saveV3Domains_(ctx) {
   }
 
   // Ensure sheet with headers
-  var sheet = ensureSheet_(ss, 'Domain_Tracker', DOMAIN_TRACKER_HEADERS);
+  var sheet = requireTab_(ss, 'Domain_Tracker'); // engine.119: no runtime create
 
   if (!sheet) {
     Logger.log('saveV3Domains_ v3.4: Could not access Domain_Tracker sheet');

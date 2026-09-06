@@ -19,6 +19,7 @@ disable-model-invocation: true
 # transcript — redirect to a file. Chat gets ONE line: verdict + file path. Nothing else.
 node scripts/preMortemScan.js > output/pre_mortem_scan.txt 2>&1; echo "exit=$? -> output/pre_mortem_scan.txt"
 node scripts/preMortemScan.js --since=2026-05-09 > output/pre_mortem_scan.txt 2>&1; echo "exit=$? -> output/pre_mortem_scan.txt"   # explicit window (last cycle's ship date)
+node scripts/preMortemScan.js --bench=<sandboxSheetId> > output/pre_mortem_scan.txt 2>&1; echo "exit=$? -> output/pre_mortem_scan.txt"   # + scan 7 bench half: required-tab parity live↔bench (engine.119); the bench id is in docs/reference/DEPLOY.md §Current state
 # Then Read/grep the file for CRITICAL/RECOMMENDATION lines only — never cat it whole.
 ```
 

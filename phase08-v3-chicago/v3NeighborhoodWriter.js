@@ -448,12 +448,7 @@ function saveV3NeighborhoodMap_(ctx) {
  * ES5 compatible version.
  */
 function ensureNeighborhoodMapSchemaAppendOnly_(ss, sheetName, headers) {
-  var sheet = ss.getSheetByName(sheetName);
-  if (!sheet) {
-    sheet = ss.insertSheet(sheetName);
-    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-    return sheet;
-  }
+  var sheet = requireTab_(ss, sheetName); // engine.119: no runtime create (Neighborhood_Map)
 
   var lastCol = Math.max(sheet.getLastColumn(), 1);
   var existingRaw = sheet.getRange(1, 1, 1, lastCol).getValues()[0];

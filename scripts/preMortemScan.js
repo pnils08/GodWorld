@@ -222,6 +222,73 @@ function scanNeighborhoods(gaps) {
   return { acknowledged, newStray };
 }
 
+// ── Scan 7 (engine.119 Task 5): tab parity ───────────────────────────────────
+// The cycle path never creates a tab (utilities/utilityFunctions.js requireTab_):
+// a missing one throws, the phase is skipped. So every tab literal the engine
+// requires MUST exist on the sheet it will fire against. Static half: every
+// `requireTab_(<ss>, '<Tab>')` literal in the engine tree, diffed against the LIVE
+// tab list (lib/sheets.listSheets, the .env sheet). Optional bench half: pass
+// --bench=<sheetId> to diff the same literals against the bench, and to list
+// live↔bench tab divergence — the Hospital_Ledger trap class (bench-only tab,
+// unconnected pre-fire on live, C104 2026-08-18).
+function requiredTabLiterals() {
+  const found = new Map(); // tab → [file:line]
+  const rx = /requireTab_\(\s*[A-Za-z_.]+\s*,\s*'([^']+)'\s*\)/g;
+  for (const f of listJsFiles(SCAN_DIRS)) {
+    if (f.endsWith('.test.js')) continue;
+    const lines = fs.readFileSync(f, 'utf8').split('\n');
+    lines.forEach((line, i) => {
+      if (isCommentLine(line)) return;
+      let m; rx.lastIndex = 0;
+      while ((m = rx.exec(line)) !== null) {
+        const rel = path.relative(ROOT, f) + ':' + (i + 1);
+        if (!found.has(m[1])) found.set(m[1], []);
+        found.get(m[1]).push(rel);
+      }
+    });
+  }
+  return found;
+}
+
+async function listTabsFor(sheetId) {
+  require(path.join(ROOT, 'lib', 'env'));
+  const { google } = require('googleapis');
+  const auth = new google.auth.GoogleAuth({ keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'] });
+  const api = google.sheets({ version: 'v4', auth });
+  const meta = await api.spreadsheets.get({ spreadsheetId: sheetId, fields: 'sheets.properties.title' });
+  return new Set(meta.data.sheets.map(s => s.properties.title));
+}
+
+async function scanTabParity(benchId) {
+  const out = { critical: [], warning: [], literals: 0, liveTabs: 0, benchTabs: 0, checked: false, error: null };
+  const required = requiredTabLiterals();
+  out.literals = required.size;
+  let live;
+  try {
+    require(path.join(ROOT, 'lib', 'env'));
+    live = await listTabsFor(process.env.GODWORLD_SHEET_ID);
+  } catch (e) { out.error = 'live tab list unavailable: ' + e.message; return out; }
+  out.checked = true; out.liveTabs = live.size;
+  for (const [tab, sites] of required.entries()) {
+    if (!live.has(tab)) out.critical.push(`tab "${tab}" required by ${sites.join(', ')} is MISSING on LIVE — the phase will throw at the next fire; pre-create it (engine.119)`);
+  }
+  if (benchId) {
+    try {
+      const bench = await listTabsFor(benchId);
+      out.benchTabs = bench.size;
+      for (const [tab, sites] of required.entries()) {
+        if (!bench.has(tab)) out.warning.push(`tab "${tab}" required by ${sites[0]} is missing on the BENCH (${benchId.slice(0, 8)}…) — a bench fire will throw there`);
+      }
+      const benchOnly = [...bench].filter(t => !live.has(t));
+      const liveOnly = [...live].filter(t => !bench.has(t));
+      if (benchOnly.length) out.warning.push('bench-only tabs (unconnected on live — Hospital_Ledger trap class): ' + benchOnly.join(', '));
+      if (liveOnly.length) out.warning.push('live-only tabs (bench is behind the sync): ' + liveOnly.join(', '));
+    } catch (e) { out.warning.push('bench tab list unavailable: ' + e.message); }
+  }
+  return out;
+}
+
 function deriveSinceDate() {
   const arg = process.argv.find(a => a.startsWith('--since='));
   if (arg) return arg.split('=')[1];
@@ -233,8 +300,10 @@ function deriveSinceDate() {
   return null;
 }
 
-function main() {
+async function main() {
   const gaps = loadKnownGaps();
+  const benchArg = process.argv.find(a => a.startsWith('--bench='));
+  const benchId = benchArg ? benchArg.slice('--bench='.length) : null;
   const sinceDate = deriveSinceDate();
   const out = [];
   const today = (() => { try { return execSync('date +%Y-%m-%d', { encoding: 'utf8' }).trim(); } catch (e) { return ''; } })();
@@ -261,8 +330,10 @@ function main() {
   const sw = scanSheetWrites(engineMdExceptionFiles());
   // Scan 5
   const nh = scanNeighborhoods(gaps);
+  // Scan 7 (engine.119): required-tab parity
+  const tp = await scanTabParity(benchId);
 
-  const critical = [...mr.critical];
+  const critical = [...mr.critical, ...tp.critical];
 
   out.push('CRITICAL (will cause silent failures in the cycle):');
   if (critical.length === 0) out.push('  none');
@@ -275,6 +346,8 @@ function main() {
   for (const [file, lns] of sw.entries()) warnings.push(`${file}:${lns.join(',')} — direct write NOT in SHEETS_MANIFEST.md §9 (verify: new undocumented writer OR manifest doc drift)`);
   nh.acknowledged.forEach(w => warnings.push(w + ' (acknowledged)'));
   nh.newStray.forEach(w => warnings.push(w + ' (NEW stray — not in known_gaps.json; investigate)'));
+  tp.warning.forEach(w => warnings.push(w));
+  if (tp.error) warnings.push('tab parity NOT checked — ' + tp.error);
   if (warnings.length === 0) out.push('  none');
   else warnings.forEach((w, i) => out.push(`  ${i + 1}. ${w}`));
   out.push('');
@@ -283,12 +356,13 @@ function main() {
   out.push(`  - Math.random cycle-path: ${mr.critical.length} unacknowledged hit(s); ${mr.warning.length} acknowledged off-path; ${mr.clean.length} defensive-throw`);
   out.push(`  - Sheet writes outside Phase 10: ${sw.size} file(s) with direct writes not carved out in SHEETS_MANIFEST.md §9`);
   out.push(`  - Neighborhoods: ${nh.newStray.length} new stray, ${nh.acknowledged.length} acknowledged legacy`);
+  out.push(`  - Required tabs (engine.119): ${tp.literals} literal(s) vs live ${tp.liveTabs} tab(s)` + (tp.checked ? `, ${tp.critical.length} missing on live` : ' — NOT CHECKED') + (benchId ? `; bench ${tp.benchTabs} tab(s)` : '; pass --bench=<sheetId> to diff the bench too'));
   out.push('');
 
   out.push('NOT AUTO-SCANNED (run from SKILL — see notes):');
   out.push('  - §3 ctx field dependency: judgment-based (G-PM5) — run /ctx-map, diff vs last cycle.');
   out.push('  - §4 sheet header alignment: needs sheet+SCHEMA_HEADERS read — run manually if columns changed.');
-  out.push('  - §6 write-intent target validation: needs Phase 10 target-sheet existence check — run manually.');
+  out.push('  - §6 write-intent target validation: scan 7 covers the requireTab_ literals; intent-queued tab names still need the manual check.');
   out.push('');
 
   out.push('='.repeat(56));
@@ -304,7 +378,7 @@ function main() {
 }
 
 if (require.main === module) {
-  try { main(); } catch (e) { console.error('[FATAL]', e.message); process.exit(2); }
+  main().catch(e => { console.error('[FATAL]', e.message); process.exit(2); });
 }
 
-module.exports = { enclosingFunction, scanMathRandom, scanNeighborhoods, engineMdExceptionFiles, CANONICAL_HOODS };
+module.exports = { enclosingFunction, scanMathRandom, scanNeighborhoods, engineMdExceptionFiles, requiredTabLiterals, scanTabParity, CANONICAL_HOODS };

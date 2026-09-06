@@ -8,49 +8,9 @@
 
 function ensureCulturalLedger_(ctx) {
 
-  var sheet = ctx.ss.getSheetByName('Cultural_Ledger');
-
-  if (!sheet) {
-
-    sheet = ctx.ss.insertSheet('Cultural_Ledger');
-
-    sheet.appendRow([
-      "Timestamp",        // A
-      "CUL-ID",           // B
-      "Name",             // C
-      "RoleType",         // D (raw role, e.g., musician/actor/etc)
-      "FameCategory",     // E (normalized role: actor/musician/etc)
-      "CulturalDomain",   // F (Arts/Sports/Media/Civic/Culinary/Literature/Fashion/Business)
-      "Status",           // G
-      "UniverseLinks",    // H
-      "FirstSeenCycle",   // I
-      "LastSeenCycle",    // J
-      "MediaCount",       // K
-      "FameScore",        // L
-      "TrendTrajectory",  // M
-      "FirstRefSource",   // N
-      "MediaSpread",      // O (# of unique journalists)
-      "CityTier",         // P
-      "Neighborhood",     // Q (Oakland neighborhood)
-      // engine.68 (S325 audit): the live writer (culturalLedger.js v2.6) writes
-      // 20 columns — this create-helper was 3 short, so a from-scratch recreate
-      // would silently drop the calendar columns (idx -1 guards no-op).
-      "FirstSeenHoliday", // R
-      "LastSeenHoliday",  // S
-      "CalendarContext"   // T
-    ]);
-
-    // Freeze header row
-    sheet.setFrozenRows(1);
-
-    // Set column widths for readability
-    sheet.setColumnWidth(1, 140); // Timestamp
-    sheet.setColumnWidth(3, 150); // Name
-    sheet.setColumnWidth(4, 120); // RoleType
-    sheet.setColumnWidth(5, 100); // FameCategory
-    sheet.setColumnWidth(6, 100); // CulturalDomain
-    sheet.setColumnWidth(17, 100); // Neighborhood
-  }
+  // engine.119: no runtime create — the 20-column header (engine.68) is on the
+  // tab itself (pre-created live + bench).
+  var sheet = requireTab_(ctx.ss, 'Cultural_Ledger');
 
   return sheet;
 }

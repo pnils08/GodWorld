@@ -2635,13 +2635,13 @@ function saveV3BondsToLedger_(ctx) {
   // lazy-create the sheet via inline `insertSheet + appendRow + setFrozenRows`,
   // hiding the deeper utilities-not-loaded bug + duplicating the schema-setup
   // path in a single file. Throw surfaces the real condition.
-  if (typeof ensureSheet_ !== 'function') {
+  if (typeof requireTab_ !== 'function') {
     throw new Error(
-      'saveV3BondsToLedger_: ensureSheet_ helper missing — utilities/utilityFunctions.js failed to load. ' +
-      '12 engine call sites depend on this helper; surface the load failure rather than silently shimming.'
+      'saveV3BondsToLedger_: requireTab_ helper missing — utilities/utilityFunctions.js failed to load. ' +
+      'Every cycle-path tab read depends on this helper; surface the load failure rather than silently shimming.'
     );
   }
-  var sheet = ensureSheet_(ss, 'Relationship_Bond_Ledger', headers);
+  var sheet = requireTab_(ss, 'Relationship_Bond_Ledger'); // engine.119: no runtime create
 
   var cycle = ctx.config.cycleCount || ctx.summary.cycleId || 0;
   var now = inWorldStamp_(ctx); // S290 in-world, not wall-clock (engine.44)

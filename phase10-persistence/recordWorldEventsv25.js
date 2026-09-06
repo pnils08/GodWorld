@@ -123,46 +123,9 @@ function recordWorldEvents25_(ctx) {
  */
 
 function ensureWorldEventsLedger_(ctx) {
-  var ss = ctx.ss;
-  var sheet = ss.getSheetByName('WorldEvents_Ledger');
-
-  if (!sheet) {
-    sheet = ss.insertSheet('WorldEvents_Ledger');
-
-    var headers = [
-      'Timestamp',        // A
-      'Cycle',            // B
-      'Description',      // C
-      'Severity',         // D
-      'Season',           // E
-      'Holiday',          // F
-      'WeatherType',      // G
-      'WeatherImpact',    // H
-      'TrafficLoad',      // I
-      'PublicSentiment',  // J
-      'CivicLoad',        // K
-      'ShockFlag',        // L
-      'PatternFlag',      // M
-      'MigrationDrift',   // N
-      'ChaosCount',       // O
-      'StorySeedCount',   // P
-      'NightlifeVolume',  // Q
-      // v2.1: Calendar columns
-      'HolidayPriority',  // R
-      'IsFirstFriday',    // S
-      'IsCreationDay',    // T
-      'SportsSeason',     // U
-      'Month'             // V
-    ];
-
-    sheet.appendRow(headers);
-    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-    sheet.setFrozenRows(1);
-
-    Logger.log('ensureWorldEventsLedger_ v2.2: Created WorldEvents_Ledger with ' + headers.length + ' columns');
-  }
-
-  return sheet;
+  // engine.119: the v2.1 header block that used to be created here lives on the
+  // tab itself (pre-created live + bench); a missing tab throws to safePhaseCall_.
+  return requireTab_(ctx.ss, 'WorldEvents_Ledger');
 }
 
 

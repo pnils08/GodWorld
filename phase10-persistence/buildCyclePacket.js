@@ -785,7 +785,7 @@ function buildCyclePacket_(ctx) {
   // ═══════════════════════════════════════════════════════════
   var HEADERS = ['Timestamp', 'Cycle', 'PacketText'];
   
-  var sheet = ensureSheet_(ctx.ss, 'Cycle_Packet', HEADERS);
+  var sheet = requireTab_(ctx.ss, 'Cycle_Packet'); // engine.119: no runtime create
 
   var startRow = Math.max(sheet.getLastRow() + 1, 2);
   sheet.getRange(startRow, 1, 1, 3).setValues([
@@ -854,16 +854,14 @@ function persistHospitalLedger_(ctx) {
   }
 
   var sheet = ctx.ss.getSheetByName('Hospital_Ledger');
-  if (!sheet && events.length === 0 && patientCount === 0) return null; // nothing to create, nothing to count
+  if (!sheet && events.length === 0 && patientCount === 0) return null; // nothing to count
 
-  var HEADERS = ['AdmissionId', 'POPID', 'Name', 'Neighborhood', 'Cause',
-                 'AdmitCycle', 'StatusNow', 'LastTransitionCycle',
-                 'DischargeCycle', 'Outcome', 'CyclesInCare'];
-  if (!sheet) {
-    sheet = ctx.ss.insertSheet('Hospital_Ledger');
-    sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
-    sheet.setFrozenRows(1);
-  }
+  // engine.119: the insertSheet that stood here, ~100s into the Phase-10 write
+  // storm, is the line that wedged the Spreadsheets service twice on 2026-08-18
+  // (C104). The tab is pre-created; a missing one is surfaced, never built mid-run.
+  // Every write below runs under persistWithRetry_ (Task 2) — this function is a
+  // Phase-10 direct writer outside the executor, so it had no retry of its own.
+  if (!sheet) sheet = requireTab_(ctx.ss, 'Hospital_Ledger');
 
   var data = sheet.getDataRange().getValues();
 
@@ -885,8 +883,10 @@ function persistHospitalLedger_(ctx) {
     if (HOSPITAL_OPEN_STATES.indexOf(ev.to) >= 0) {
       if (openRow >= 0) {
         // Transition inside care — update status + stamp, backfill cause.
-        sheet.getRange(openRow + 1, 7, 1, 2).setValues([[ev.to, ev.cycle]]);
-        if (ev.cause && !data[openRow][4]) sheet.getRange(openRow + 1, 5).setValue(ev.cause);
+        persistWithRetry_(function() {
+          sheet.getRange(openRow + 1, 7, 1, 2).setValues([[ev.to, ev.cycle]]);
+          if (ev.cause && !data[openRow][4]) sheet.getRange(openRow + 1, 5).setValue(ev.cause);
+        }, 'Hospital_Ledger transition');
         data[openRow][6] = ev.to;
       } else {
         // New admission. (A lifecycle transition with no open row — citizen
@@ -894,7 +894,7 @@ function persistHospitalLedger_(ctx) {
         var newRow = ['H-C' + ev.cycle + '-' + key, ev.popId, ev.name || '',
                       ev.neighborhood || '', ev.cause || '', ev.cycle, ev.to,
                       ev.cycle, '', '', ''];
-        sheet.appendRow(newRow);
+        appendRowWithRetry_(sheet, newRow, 'Hospital_Ledger admit');
         openByPopId[key] = data.length;
         data.push(newRow);
         admits++;
@@ -903,9 +903,11 @@ function persistHospitalLedger_(ctx) {
       if (openRow >= 0) {
         var admitCycle = Number(data[openRow][5]) || ev.cycle;
         var outcome = (ev.to === 'deceased') ? 'deceased' : 'recovered';
-        sheet.getRange(openRow + 1, 7, 1, 5).setValues([[
-          ev.to, ev.cycle, ev.cycle, outcome, Math.max(0, ev.cycle - admitCycle)
-        ]]);
+        persistWithRetry_(function() {
+          sheet.getRange(openRow + 1, 7, 1, 5).setValues([[
+            ev.to, ev.cycle, ev.cycle, outcome, Math.max(0, ev.cycle - admitCycle)
+          ]]);
+        }, 'Hospital_Ledger discharge');
         data[openRow][8] = ev.cycle;
         delete openByPopId[key];
         if (ev.to === 'deceased') deaths++; else discharges++;
@@ -945,9 +947,11 @@ function persistHospitalLedger_(ctx) {
         var gRow = openByPopId[gPop];
         var gAdmit = Number(data[gRow][5]) || cycle;
         var gOutcome = (gStatus === 'deceased') ? 'deceased' : 'recovered';
-        sheet.getRange(gRow + 1, 7, 1, 5).setValues([[
-          gStatus, cycle, cycle, gOutcome + '-reconciled', Math.max(0, cycle - gAdmit)
-        ]]);
+        persistWithRetry_(function() {
+          sheet.getRange(gRow + 1, 7, 1, 5).setValues([[
+            gStatus, cycle, cycle, gOutcome + '-reconciled', Math.max(0, cycle - gAdmit)
+          ]]);
+        }, 'Hospital_Ledger ghost-release');
         data[gRow][8] = cycle;
         delete openByPopId[gPop];
         ghostsClosed++;
@@ -976,7 +980,7 @@ function persistHospitalLedger_(ctx) {
     var mAdmit = mp.startCycle > 0 ? mp.startCycle : cycle;
     var mRow = ['H-C' + mAdmit + '-' + mPop, mPop, mp.name, mp.neighborhood,
                 mp.cause, mAdmit, mp.status, cycle, '', '', ''];
-    sheet.appendRow(mRow);
+    appendRowWithRetry_(sheet, mRow, 'Hospital_Ledger missed-admit');
     openByPopId[mPop] = data.length;
     data.push(mRow);
     missedAdmits++;

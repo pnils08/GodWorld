@@ -101,13 +101,14 @@ function logEngineError_(ctx, phase, error) {
   // ledger consistency (lib/diagnosticLedger reads same sheet). Severity
   // 'high' for FATAL phases, 'medium' for non-fatal phase failures.
   try {
-    if (ctx && ctx.ss) {
-      var errSheet = ctx.ss.getSheetByName('Engine_Errors');
-      if (!errSheet) {
-        errSheet = ctx.ss.insertSheet('Engine_Errors');
-        errSheet.appendRow(['Timestamp', 'Cycle', 'Phase', 'Error', 'Stack',
-          'Class', 'Source', 'Severity', 'Resolved', 'Hash']);
-      }
+    // engine.119: no runtime tab creation, not even here — a missing Engine_Errors
+    // is logged, never inserted mid-run (the insert is the wedge class itself).
+    var errSheet = (ctx && ctx.ss) ? ctx.ss.getSheetByName('Engine_Errors') : null;
+    if (ctx && ctx.ss && !errSheet) {
+      Logger.log('logEngineError_: Engine_Errors tab missing — row NOT persisted (engine.119: the cycle never creates tabs). ' +
+        phase + ': ' + (error && error.message));
+    }
+    if (errSheet) {
       var cycleId = (ctx.summary && ctx.summary.cycleId) ? ctx.summary.cycleId : 'Unknown';
       var severity = /FATAL/i.test(phase) ? 'high' : 'medium';
       var hashInput = 'engine-error|' + phase + '|' + (error.message || '').substring(0, 100);

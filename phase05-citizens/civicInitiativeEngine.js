@@ -94,12 +94,9 @@ function runCivicInitiativeEngine_(ctx) {
   // v1.5 FIX: Use deterministic RNG from context
   var rng = safeRand_(ctx);
 
-  var sheet = ss.getSheetByName('Initiative_Tracker');
-  
-  if (!sheet) {
-    Logger.log('civicInitiativeEngine: Initiative_Tracker sheet not found. Creating...');
-    sheet = createInitiativeTrackerSheet_(ss);
-  }
+  // engine.119: no runtime create — the manual seedInitiativeTracker() path still
+  // builds the tab; the cycle requires it.
+  var sheet = requireTab_(ss, 'Initiative_Tracker');
   
   var S = ctx.summary;
   var cycle = S.cycleId || ctx.config.cycleCount || 0;

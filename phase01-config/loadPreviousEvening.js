@@ -41,9 +41,10 @@ function mirrorCarryForwardToSheet_(ctx, key, json, cycle) {
     if (!ctx || !ctx.ss) return;
     var sheet = ctx.ss.getSheetByName(CARRY_FORWARD_STORE_SHEET);
     if (!sheet) {
-      sheet = ctx.ss.insertSheet(CARRY_FORWARD_STORE_SHEET);
-      sheet.appendRow(['Key', 'Cycle', 'UpdatedAt', 'JSON']);
-      sheet.setFrozenRows(1);
+      // engine.119: never insertSheet mid-run. The prop layer still holds the blob;
+      // assertCarryForwardPresent_ is the loud gate if BOTH layers end up empty.
+      Logger.log('mirrorCarryForwardToSheet_: ' + CARRY_FORWARD_STORE_SHEET + ' tab missing — mirror for ' + key + ' skipped (pre-create the tab)');
+      return;
     }
     var values = sheet.getDataRange().getValues();
     var rowIndex = -1;
@@ -52,9 +53,9 @@ function mirrorCarryForwardToSheet_(ctx, key, json, cycle) {
     }
     var row = [key, cycle || '', new Date().toISOString(), json];
     if (rowIndex > 0) {
-      sheet.getRange(rowIndex, 1, 1, 4).setValues([row]);
+      persistWithRetry_(function() { sheet.getRange(rowIndex, 1, 1, 4).setValues([row]); }, 'Carry_Forward_Store ' + key);
     } else {
-      sheet.appendRow(row);
+      appendRowWithRetry_(sheet, row, 'Carry_Forward_Store ' + key);
     }
   } catch (e) {
     Logger.log('mirrorCarryForwardToSheet_: Failed for ' + key + ' - ' + e.message);

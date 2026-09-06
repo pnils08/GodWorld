@@ -122,23 +122,7 @@ function recordCycleWeather_(ctx) {
  * @returns {SpreadsheetApp.Sheet}
  */
 function ensureCycleWeatherSheet_(ss) {
-  var sheetName = 'Cycle_Weather';
-  var sheet = ss.getSheetByName(sheetName);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(sheetName);
-    sheet.getRange(1, 1, 1, CYCLE_WEATHER_HEADERS.length).setValues([CYCLE_WEATHER_HEADERS]);
-    sheet.setFrozenRows(1);
-
-    // Format header row
-    var headerRange = sheet.getRange(1, 1, 1, CYCLE_WEATHER_HEADERS.length);
-    headerRange.setFontWeight('bold');
-    headerRange.setBackground('#E8F0FE');
-
-    Logger.log('ensureCycleWeatherSheet_: Created Cycle_Weather sheet');
-  }
-
-  return sheet;
+  return requireTab_(ss, 'Cycle_Weather'); // engine.119: no runtime create
 }
 
 

@@ -395,14 +395,9 @@ function ensureFaithLedgerSchema_(ss) {
     throw new Error('ensureFaithLedgerSchema_: spreadsheet required');
   }
 
-  var sheet = ss.getSheetByName(FAITH_LEDGER_SHEET_NAME);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(FAITH_LEDGER_SHEET_NAME);
-    sheet.appendRow(FAITH_LEDGER_HEADERS);
-    sheet.setFrozenRows(1);
-    return sheet;
-  }
+  // engine.119: no runtime create — the tab is pre-created; missing header
+  // columns still self-arm below (append-only, ≤1× per column).
+  var sheet = requireTab_(ss, FAITH_LEDGER_SHEET_NAME);
 
   // Check for missing headers
   var existing = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
@@ -435,35 +430,9 @@ function ensureFaithOrgsSchema_(ss) {
     throw new Error('ensureFaithOrgsSchema_: spreadsheet required');
   }
 
-  var sheet = ss.getSheetByName(FAITH_ORGS_SHEET_NAME);
-
-  if (!sheet) {
-    sheet = ss.insertSheet(FAITH_ORGS_SHEET_NAME);
-    sheet.appendRow(FAITH_ORGS_HEADERS);
-    sheet.setFrozenRows(1);
-
-    // Seed with organizations
-    var rows = [];
-    for (var i = 0; i < OAKLAND_FAITH_ORGANIZATIONS.length; i++) {
-      var org = OAKLAND_FAITH_ORGANIZATIONS[i];
-      rows.push([
-        org.organization,
-        org.tradition,
-        org.neighborhood,
-        org.founded,
-        org.congregation,
-        org.leader,
-        org.character,
-        'active'
-      ]);
-    }
-
-    if (rows.length > 0) {
-      sheet.getRange(2, 1, rows.length, FAITH_ORGS_HEADERS.length).setValues(rows);
-    }
-
-    return sheet;
-  }
+  // engine.119: no runtime create (the OAKLAND_FAITH_ORGANIZATIONS seed that lived
+  // here belongs to setup, not the cycle) — the tab is pre-created.
+  var sheet = requireTab_(ss, FAITH_ORGS_SHEET_NAME);
 
   return sheet;
 }

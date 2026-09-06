@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-05 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-06 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1615,7 +1615,7 @@
 - **heritageHash8_(s)**
 
 - **ensureHeritageSchema_(ss, ctx)**
-  Sheets: Heritage_Ledger, Simulation_Ledger
+  Sheets: Simulation_Ledger
 
 - **updateHeritage_(ss, ctx, cycle)**
   Reads: S.homesPurchasedByLine, S.storyHooks
@@ -1844,17 +1844,16 @@
   Sheets: Business_Ledger
 
 - **checkEmergencePromotions_(ss, cycle, maxQueue)**
-  Sheets: Advancement_Intake1, Generic_Citizens
+  Sheets: Generic_Citizens
 
 - **checkFamilyMatchPromotions_(ctx, cycle, slots)**
   Config: ctx.config.rngSeed
-  Sheets: Advancement_Intake1, Generic_Citizens
+  Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
 - **ensureGridColumns_(sheet, needed)**
 
 - **ensureHouseholdQueueSheet_(ss)**
-  Sheets: Advancement_Intake1
 
 - **queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameIndex, cycle)**
   Reads: S.neighborhoodState
@@ -2956,6 +2955,8 @@
 
 - **persistWithRetry_(fn, label)**
 
+- **appendRowWithRetry_(sheet, row, label)**
+
 - **executeEnsureIntent_(ctx, intent)**
 
 - **executeReplaceIntent_(ctx, intent)**
@@ -3440,7 +3441,6 @@
 
 ### ensureMediaLedger.js
 - **ensureMediaLedger_(ctx)**
-  Sheets: Media_Ledger
 
 ### ensureNeighborhoodDemographics.js
 - **ensureNeighborhoodDemographicsSchema_(ss)**
@@ -3753,6 +3753,8 @@ _No top-level function declarations found (helper/constants file)._
 
 - **ensureSheet_(ss, name, headers)**
 
+- **requireTab_(ss, name)**
+
 - **colIndex_(letter)**
 
 - **safeGet_(sheet, row, col)**
@@ -3814,4 +3816,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1303
+**Functions mapped:** 1305

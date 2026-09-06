@@ -59,7 +59,7 @@ function saveV3Hooks_(ctx) {
   }
 
   // Ensure sheet exists with headers
-  var sheet = ensureSheet_(ss, 'Story_Hook_Deck', HOOK_DECK_HEADERS);
+  var sheet = requireTab_(ss, 'Story_Hook_Deck'); // engine.119: no runtime create
 
   var S = ctx.summary;
   var cycle = ctx.config.cycleCount || S.cycleId;

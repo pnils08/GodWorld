@@ -8,49 +8,9 @@
 
 function ensureMediaLedger_(ctx) {
 
-  var sheet = ctx.ss.getSheetByName('Media_Ledger');
-
-  if (!sheet) {
-    sheet = ctx.ss.insertSheet('Media_Ledger');
-
-    sheet.appendRow([
-      "Timestamp",        // A
-      "Cycle",            // B
-      "Journalist",       // C
-      "NameUsed",         // D (Cultural Name)
-      "FameCategory",     // E
-      "CulturalDomain",   // F
-      "FameScore",        // G
-      "TrendTrajectory",  // H
-      "MediaSpread",      // I
-      "CityTier",         // J
-      "Neighborhood",     // K (NEW)
-      "StorySeedCount",   // L
-      "CycleWeight",      // M
-      "CycleWeightReason",// N
-      "ChaosEvents",      // O
-      "NightlifeVolume",  // P
-      "Sentiment",        // Q
-      "CivicLoad",        // R
-      "ShockFlag",        // S
-      "PatternFlag",      // T
-      "EconomicMood",     // U (NEW)
-      "WeatherType",      // V (NEW)
-      "WeatherMood",      // W (NEW)
-      "MediaIntensity",   // X (NEW)
-      "ActiveArcs"        // Y (NEW)
-    ]);
-
-    // Freeze header row
-    sheet.setFrozenRows(1);
-
-    // Set column widths for readability
-    sheet.setColumnWidth(1, 140);  // Timestamp
-    sheet.setColumnWidth(3, 120);  // Journalist
-    sheet.setColumnWidth(4, 150);  // NameUsed
-    sheet.setColumnWidth(11, 100); // Neighborhood
-    sheet.setColumnWidth(14, 200); // CycleWeightReason
-  }
+  // engine.119: no runtime create — the 25-column header is on the tab itself
+  // (pre-created live + bench).
+  var sheet = requireTab_(ctx.ss, 'Media_Ledger');
 
   return sheet;
 }

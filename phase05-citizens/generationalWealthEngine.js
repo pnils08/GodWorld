@@ -1815,13 +1815,8 @@ function ensureHeritageSchema_(ss, ctx) {
       armed = true;
     }
   }
-  var hlExisting = ss.getSheetByName('Heritage_Ledger');
-  if (!hlExisting) {
-    var hl = ss.insertSheet('Heritage_Ledger');
-    hl.getRange(1, 1, 1, HERITAGE_HEADERS.length).setValues([HERITAGE_HEADERS]);
-    hl.setFrozenRows(1);
-    armed = true;
-  } else {
+  var hlExisting = requireTab_(ss, 'Heritage_Ledger'); // engine.119: no runtime create
+  {
     // engine.156: append-only column arm on a tab that predates a header
     // (same §1.1 schema-setup carve-out, ≤1× per column per spreadsheet).
     var hlLastCol = hlExisting.getLastColumn();

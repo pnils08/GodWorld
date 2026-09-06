@@ -115,17 +115,8 @@ function loadRelationshipBonds_(ctx) {
   // Initialize the bonds array
   S.relationshipBonds = [];
 
-  // Get or create the bonds sheet
-  var sheet = ss.getSheetByName('Relationship_Bonds');
-  if (!sheet) {
-    sheet = ss.insertSheet('Relationship_Bonds');
-    sheet.appendRow(BOND_SHEET_HEADERS);
-    sheet.getRange(1, 1, 1, BOND_SHEET_HEADERS.length).setFontWeight('bold');
-    sheet.setFrozenRows(1);
-    ctx.summary = S;
-    Logger.log('loadRelationshipBonds_ v2.2: Created new Relationship_Bonds sheet');
-    return; // No bonds to load yet
-  }
+  // engine.119: the tab is pre-created; a missing one throws to safePhaseCall_
+  var sheet = requireTab_(ss, 'Relationship_Bonds');
 
   // Read existing bonds
   var data = sheet.getDataRange().getValues();

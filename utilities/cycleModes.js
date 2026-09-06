@@ -252,7 +252,7 @@ function saveCycleSeed_(ctx) {
   ];
 
   // Ensure sheet exists
-  var sheet = ensureSheet_(ss, 'Cycle_Seeds', CYCLE_SEEDS_HEADERS);
+  var sheet = requireTab_(ss, 'Cycle_Seeds'); // engine.119: no runtime create
 
   // Queue append intent
   queueAppendIntent_(

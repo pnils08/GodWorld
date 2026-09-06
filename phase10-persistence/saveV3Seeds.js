@@ -103,7 +103,7 @@ function saveV3Seeds_(ctx) {
   }
 
   migrateSeedDeckV4_(ss);
-  ensureSheet_(ss, 'Story_Seed_Deck', SEED_DECK_HEADERS);
+  requireTab_(ss, 'Story_Seed_Deck'); // engine.119: no runtime create
 
   var cycle = ctx.config.cycleCount || S.cycleId;
   var stamp = inWorldStamp_(ctx);

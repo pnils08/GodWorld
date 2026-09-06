@@ -1456,11 +1456,7 @@ function checkEmergencePromotions_(ss, cycle, maxQueue) {
       gEmp = findColByName_(h, 'EmployerBizId'); // S336 Task 5 — the pool's tracked workplace, when assigned
   if (gF < 0 || gL < 0 || gE < 0) return results;
 
-  var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) {
-    advSheet = ss.insertSheet('Advancement_Intake1');
-    advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
-  }
+  var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create
   var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
   var ensureCols = ['BirthYear', 'Neighborhood', 'EmployerBizId']; // EmployerBizId: S336 Task 5
   for (var e = 0; e < ensureCols.length; e++) {
@@ -1626,11 +1622,7 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
   if (!openSlots.length) return results;
 
   // ── Intake sheet + extra columns the family door rides on ──
-  var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) {
-    advSheet = ss.insertSheet('Advancement_Intake1');
-    advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
-  }
+  var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create
   var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
   var ensureCols = ['BirthYear', 'Neighborhood', 'MatchPopId', 'MatchType', 'MaidenName'];
   for (var e = 0; e < ensureCols.length; e++) {
@@ -1757,11 +1749,7 @@ function ensureGridColumns_(sheet, needed) {
 var HOUSEHOLD_QUEUE_COLS_ = ['BirthYear', 'Neighborhood', 'MatchPopId', 'MatchType', 'MaidenName', 'MatchName', 'HouseholdKey', 'Gender'];
 
 function ensureHouseholdQueueSheet_(ss) {
-  var advSheet = ss.getSheetByName('Advancement_Intake1');
-  if (!advSheet) {
-    advSheet = ss.insertSheet('Advancement_Intake1');
-    advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
-  }
+  var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create
   var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
   for (var e = 0; e < HOUSEHOLD_QUEUE_COLS_.length; e++) {
     if (findColByName_(advHeaders, HOUSEHOLD_QUEUE_COLS_[e]) < 0) {

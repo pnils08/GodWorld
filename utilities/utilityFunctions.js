@@ -61,11 +61,31 @@ function shortId_() {
   return Utilities.getUuid().slice(0, 8).toUpperCase();
 }
 
+// Setup-only creator: menu/operator paths (writeHandoffSheet_) may create a tab.
+// Nothing on the cycle path calls this any more — see requireTab_ (engine.119).
 function ensureSheet_(ss, name, headers) {
   var sheet = ss.getSheetByName(name);
   if (!sheet) {
     sheet = ss.insertSheet(name);
     if (headers && headers.length > 0) sheet.appendRow(headers);
+  }
+  return sheet;
+}
+
+// engine.119 Task 1 — the cycle path never creates a tab. insertSheet is a
+// whole-document structural mutation; attempted ~100s into the Phase-10 write
+// storm on a ~17 MB doc it timed out and wedged the Spreadsheets service, twice
+// (C104, 2026-08-18: Hospital_Ledger). A missing tab is a setup defect: the throw
+// reaches safePhaseCall_, which writes one Engine_Errors row and skips the phase.
+// Tabs are created deliberately — the deploy protocol (docs/reference/DEPLOY.md)
+// or a queued ensure-intent, which the executor drains first, before the storm.
+// Call with a string literal so scripts/preMortemScan.js can diff the literals
+// against the live tab list before a fire.
+function requireTab_(ss, name) {
+  var sheet = ss.getSheetByName(name);
+  if (!sheet) {
+    throw new Error('engine.119: tab "' + name + '" is missing — the cycle never creates tabs; ' +
+      'pre-create it before the fire (docs/reference/DEPLOY.md)');
   }
   return sheet;
 }

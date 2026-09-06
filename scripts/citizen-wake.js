@@ -34,7 +34,7 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 // shared with scripts/citizenVoice.js (edition voicing) + the Task-6 conversation engine.
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
-  loadCardAnchor, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice
+  loadCardAnchor, loadVoiceTexture, renderStanding } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice
 const { selectProvocation, _hash53 } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank; _hash53 seeds T1 draw + T2 slot
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
@@ -202,6 +202,8 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
     : '';
   const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : ''; // relationships-with-texture (ingredient 3)
   const family = familyLine ? `\n\n${familyLine}` : ''; // loop doctrine — the ledger's structural family, ahead of neighbors/bonds
+  const standingLine = renderStanding(c); // engine.147 seam — the family line's standing + the posture, plain words, no numbers
+  const standing = standingLine ? `\n\n${standingLine}` : '';
   const health = healthLine ? `\n\n${healthLine}` : ''; // engine.101 health slice — "in a hospital bed NOW" self-state, rides with continuity
   // B1 bias readback (seams Task 7): opinions the citizen carries join the voice ONLY
   // when today's perception mentions the target — carried history surfacing, not a
@@ -228,7 +230,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // facts never compete with page recall. T11 — authored speech texture rides beside it.
   const anchor = cardBlock ? `\n\nWho you are:\n${cardBlock}` : '';
   const talk = voiceLine ? `\n\nHow you talk: ${voiceLine}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}\n\nReal things from your life recently:\n${c.life}${family}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted

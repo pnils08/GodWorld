@@ -38,7 +38,7 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { _hash53 } = require('/root/GodWorld/lib/provocationBank');
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.130 — name-match fallback when the format has no structural counterpart
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
-  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice
+  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory, renderStanding } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice; renderStanding engine.147
 const { matchCitizenToJournalist_ } = require('/root/GodWorld/utilities/rosterLookup');
 
 const ARGV = process.argv.slice(2);
@@ -109,13 +109,15 @@ async function assembleParticipant(pool, popId, cycle, contextHint) {
   const who = neighbors.length ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.` : '';
   const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : '';
   const family = familyLine ? `\n\n${familyLine}` : ''; // loop doctrine — ledger family columns reach the exchange
+  const standingLine = renderStanding(c); // engine.147 seam — family line + posture, wake parity
+  const standing = standingLine ? `\n\n${standingLine}` : '';
   const health = healthLine ? `\n\n${healthLine}` : ''; // engine.101 health slice — current health state reaches the exchange
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : '';
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : '';
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : '';
   const memory = pageRead.block ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageRead.block}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}\n\nReal things from your life recently:\n${c.life}${family}${who}${bonds}${sports}${texture}${memory}`;
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
   return { c, system, bondsLine, disp };
 }
 

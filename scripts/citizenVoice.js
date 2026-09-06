@@ -47,7 +47,7 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const interviewContract = require('./newsroomInterviewContract');
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.130 — PRESS rows carry BondTarget (col I) like the wake
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
-  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice
+  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory, renderStanding } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice; renderStanding engine.147
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -134,6 +134,8 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const who = neighbors.length ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.` : '';
   const bonds = bondsLine ? `\n\nPeople you have history with: ${bondsLine}.` : '';
   const family = familyLine ? `\n\n${familyLine}` : ''; // loop doctrine — ledger family columns reach the voice
+  const standingLine = renderStanding(c); // engine.147 seam — family line + posture (lived context: stays out of the no-exposure interview branch)
+  const standing = standingLine ? `\n\n${standingLine}` : '';
   const health = healthLine ? `\n\n${healthLine}` : ''; // engine.101 health slice — current health state reaches the voice
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : '';
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
@@ -143,7 +145,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.`;
   const system = interviewMode && !livedContextAllowed
     ? identity + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
-    : identity + `${trajLine}${arcLine}${health}\n\nReal things from your life recently:\n${c.life}${family}${who}${bonds}${sports}${texture}${memory}`;
+    : identity + `${trajLine}${arcLine}${health}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
 
   // The ask arrives from the caller (letters desk, interview brief). Fence it — desk-authored
   // context is instructions TO the citizen, but anything quoted inside it must not be able to

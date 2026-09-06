@@ -44,6 +44,11 @@ const sheets = require('../lib/sheets');
 const ROOT = path.resolve(__dirname, '..');
 const OUT_JSONL = path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl');
 const OUT_META = path.join(ROOT, 'output', 'simulation_ledger_snapshot.meta.json');
+// engine.90: the cold half. Written every run the Citizen_Archive tab exists
+// (0 body rows → rowCount 0); absent tab → skipped loud unless World_Config
+// citizenArchiveTabLive=1 says it must be there, then abort.
+const OUT_ARCHIVE_JSONL = path.join(ROOT, 'output', 'citizen_archive_snapshot.jsonl');
+const OUT_ARCHIVE_META = path.join(ROOT, 'output', 'citizen_archive_snapshot.meta.json');
 
 const args = process.argv.slice(2);
 const quiet = args.includes('--quiet');
@@ -105,7 +110,40 @@ async function main() {
 
   log(`dumpLedger: wrote ${rows.length} citizens → ${path.relative(ROOT, OUT_JSONL)}`);
   log(`dumpLedger: meta → ${path.relative(ROOT, OUT_META)}`);
-  if (!quiet) console.log(JSON.stringify({ ok: true, rowCount: rows.length, cycle: meta.cycle }));
+
+  const archive = await dumpArchive(meta.cycle);
+  if (!quiet) console.log(JSON.stringify({ ok: true, rowCount: rows.length, cycle: meta.cycle, archiveRowCount: archive.rowCount }));
+}
+
+// engine.90 Commit 4 — Citizen_Archive → output/citizen_archive_snapshot.jsonl.
+// Returns { rowCount } (null when skipped). Never fails civic prep for a tab
+// that has not been ensured yet; fails loud once World_Config says it has.
+async function dumpArchive(cycle) {
+  const titles = (await sheets.listSheets()).map(s => s.title);
+  if (!titles.includes('Citizen_Archive')) {
+    const wc = await sheets.getSheetData('World_Config');
+    const live = wc.find(r => String(r[0] || '').trim() === 'citizenArchiveTabLive');
+    if (live && String(live[1]).trim() === '1') {
+      console.error('dumpLedger: ABORT — World_Config citizenArchiveTabLive=1 but the Citizen_Archive tab is missing.');
+      process.exit(1);
+    }
+    console.error('dumpLedger: Citizen_Archive tab absent (citizenArchiveTabLive not 1) — archive snapshot skipped; active snapshot written.');
+    return { rowCount: null };
+  }
+  const arRows = await sheets.getSheetAsObjects('Citizen_Archive');
+  const lines = arRows.map(r => JSON.stringify({ Name: `${r.First || ''} ${r.Last || ''}`.trim(), ...r }));
+  fs.writeFileSync(OUT_ARCHIVE_JSONL, lines.length ? lines.join('\n') + '\n' : '');
+  const ameta = {
+    source: 'Citizen_Archive',
+    cycle: Number.isFinite(cycle) ? cycle : null,
+    rowCount: arRows.length,
+    generatedAt: new Date().toISOString(),
+    generatedBy: 'scripts/dumpLedger.js',
+    note: 'engine.90 cold half of the ledger snapshot: every exit row (POPID, ExitCycle, ArchiveReason unique). Same stamp as the active snapshot.',
+  };
+  fs.writeFileSync(OUT_ARCHIVE_META, JSON.stringify(ameta, null, 2) + '\n');
+  log(`dumpLedger: wrote ${arRows.length} archived citizens → ${path.relative(ROOT, OUT_ARCHIVE_JSONL)}`);
+  return { rowCount: arRows.length };
 }
 
 main().catch(err => {

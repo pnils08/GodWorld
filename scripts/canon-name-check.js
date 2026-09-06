@@ -26,6 +26,7 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..');
 const LEDGER_SNAPSHOT = path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl');
 const LEDGER_SNAPSHOT_META = path.join(ROOT, 'output', 'simulation_ledger_snapshot.meta.json');
+const ARCHIVE_SNAPSHOT = path.join(ROOT, 'output', 'citizen_archive_snapshot.jsonl'); // engine.90: archived citizens are still canon names
 
 // Places/orgs/phrases that look like person names to the extractor. Neighborhoods
 // come from lib/canonNeighborhoods (canon source); the rest are recurring
@@ -59,6 +60,14 @@ function loadRows() {
     for (const line of lines) {
       try { rows.push(JSON.parse(line)); } catch (_) { /* skip bad line */ }
     }
+    // engine.90: a citizen who left Simulation_Ledger for Citizen_Archive is
+    // still a canon name (an edition may cite the late or the traded). Union
+    // when the archive snapshot exists; absent file = no archive yet.
+    try {
+      for (const line of fs.readFileSync(ARCHIVE_SNAPSHOT, 'utf8').split('\n').filter(Boolean)) {
+        try { const r = JSON.parse(line); r._archived = true; rows.push(r); } catch (_) { /* skip bad line */ }
+      }
+    } catch (_) { /* no archive snapshot yet */ }
   } catch (e) {
     // missing snapshot -> empty (fail-loud to the gate). R3: say so once per
     // process — a silent empty row set reads as "0 canon citizens" downstream.

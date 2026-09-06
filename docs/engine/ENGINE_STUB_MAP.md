@@ -3618,6 +3618,15 @@
 
 - **_runPrioritySelfTests_()**
 
+### resolveCitizen.js
+- **resolveNameKey_(first, last)**
+
+- **resolveRowObject_(headers, row)**
+
+- **resolveIsPopId_(q)**
+
+- **resolveCitizen_(query, src)**
+
 ### restoreCarryForward103.js
 - **restoreCarryForward103()**
 
@@ -3829,5 +3838,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 183
-**Functions mapped:** 1311
+**Files scanned:** 184
+**Functions mapped:** 1315

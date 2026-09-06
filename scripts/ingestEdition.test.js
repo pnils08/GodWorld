@@ -59,5 +59,27 @@ console.log('Test 3: intakeMeta');
   assert('explicit id wins without resolution', explicit.meta.popids === 'POP-00777');
 }
 
+console.log('Test 4: engine.114 — a partial ingest exits non-zero');
+{
+  // Every chunk fails (bogus key → HTTP 401, or no route → request error);
+  // either way the counter must reach the exit code. Before engine.114 this
+  // printed "[DONE] Success: 0, Errors: N" and exited 0. The env file is
+  // pointed at a fixture so the real key never loads (lib/env override:true).
+  const fs = require('fs'), os = require('os'), path = require('path');
+  const { spawnSync } = require('child_process');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ingest114-'));
+  const envFile = path.join(dir, 'test.env');
+  const fixture = path.join(dir, 'cycle_pulse_c1.txt');
+  fs.writeFileSync(envFile, 'SUPERMEMORY_CC_API_KEY=engine114-bogus-key\n');
+  fs.writeFileSync(fixture, 'THE CYCLE PULSE — Y2C1\n\nA one-paragraph fixture that must never land in canon.\n');
+  const r = spawnSync('node', [path.join(__dirname, 'ingestEdition.js'), fixture, '--cycle', '1'],
+    { env: Object.assign({}, process.env, { GODWORLD_ENV_FILE: envFile, SUPERMEMORY_CC_API_KEY: 'engine114-bogus-key' }), encoding: 'utf8', timeout: 60000 });
+  const out = String(r.stdout || '') + String(r.stderr || '');
+  assert('reached the ingest loop', /\[DONE\] Success: 0, Errors: [1-9]/.test(out), out.slice(-300));
+  assert('exit code is 1 on partial/total failure', r.status === 1, 'status=' + r.status);
+  assert('names the rerun', /rerun/.test(out));
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

@@ -798,5 +798,10 @@ function extractCitizenName(memory) {
   if (WIPE_PRIORS && wipedDocs > 0) {
     console.log('[DONE] Prior records wiped: ' + wipedDocs);
   }
+  // engine.114: partial write is a failure — exit non-zero so the caller reruns.
+  if (errors > 0) {
+    console.error('[FATAL] ' + errors + ' entity record(s) failed to write — edition wiki is partial; rerun.');
+    process.exit(1);
+  }
   if (success > 0) console.log('Edition ' + cycle + ' wiki entities are now in bay-tribune');
 })();

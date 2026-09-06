@@ -520,6 +520,13 @@ async function main() {
   }
 
   console.log('\n[DONE] Success: ' + success + ', Errors: ' + errors);
+  // engine.114: a partial ingest is a failure. Every chunk that landed is an
+  // idempotent customId upsert (engine.91 T1), so a rerun repairs it — but
+  // only if the exit code tells the caller to rerun.
+  if (errors > 0) {
+    console.error('[FATAL] ' + errors + ' of ' + sections.length + ' chunk(s) failed to ingest — canon is partial; rerun this command (upserts are idempotent).');
+    process.exit(1);
+  }
   if (errors === 0 && !DRY_RUN) {
     console.log('[INFO] ' + label + ' ' + cycle + ' is now searchable in Supermemory (type=' + type + ')');
   }

@@ -186,6 +186,11 @@ async function main() {
 
   log.info('');
   log.info('Done. Success: ' + success + ', Errors: ' + errors + ', Skipped: ' + skipped);
+  // engine.114: partial ingest is a failure — exit non-zero so the caller reruns.
+  if (errors > 0) {
+    log.error(errors + ' file(s) failed to ingest — run is partial; rerun.');
+    process.exit(1);
+  }
 }
 
 main().catch(function(err) {

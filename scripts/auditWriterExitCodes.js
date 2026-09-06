@@ -45,12 +45,10 @@ const KNOWN_OPEN = {
   // ingestPlayerTrueSource.js both classify DELETE status and abort before the
   // write pass now, so they leave the ratchet. dedupWdCitizens.js was dropped in
   // 95c18c12 against an uncommitted fix; that fix is in the same commit.
-  // Discovered by this lint's first run (kimi, 2026-08-16) — canon-ingestion
-  // writers with ungated error counters (Half-A-shaped). Pending rb row filing.
-  'ingestCivicWiki.js': 'pending rb row filing (discovered 2026-08-16, first lint run)',
-  'ingestEdition.js': 'pending rb row filing (discovered 2026-08-16 — the Saturday canon door)',
-  'ingestEditionWiki.js': 'pending rb row filing (discovered 2026-08-16)',
-  'supermemory-ingest.js': 'pending rb row filing (discovered 2026-08-16)',
+  // engine.114 CLOSED 2026-09-05 (S428) — the four canon-ingestion writers
+  // discovered by this lint's first run (kimi, 2026-08-16: ingestCivicWiki,
+  // ingestEdition, ingestEditionWiki, supermemory-ingest) now exit 1 on
+  // errors > 0 after their [DONE] summary, so they leave the ratchet.
 };
 
 const SELF = 'auditWriterExitCodes.js';

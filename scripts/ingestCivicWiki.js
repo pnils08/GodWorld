@@ -333,6 +333,11 @@ function addMemory(content) {
   }
 
   console.log('\n[DONE] Written: ' + success + ', Errors: ' + errors);
+  // engine.114: partial write is a failure — exit non-zero so the caller reruns.
+  if (errors > 0) {
+    console.error('[FATAL] ' + errors + ' record(s) failed to write — civic wiki is partial; rerun.');
+    process.exit(1);
+  }
   if (success > 0) {
     console.log('Civic voice + decision records C' + cycle + ' are now in bay-tribune.');
   }

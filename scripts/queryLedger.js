@@ -242,6 +242,24 @@ async function queryCitizen(search) {
   const citizen = findCitizen(ledger, search);
 
   if (!citizen) {
+    // engine.90 Commit 12: a POPID that left Simulation_Ledger lives on Citizen_Archive.
+    // The profile served is the newest exit snapshot, labelled as such — never silently
+    // the same shape as a living row.
+    let hit = null;
+    try { hit = await require('../lib/resolveCitizen').resolveCitizen(search); }
+    catch (e) { console.error(`resolveCitizen: ${e.message}`); }
+    if (hit && hit.archiveHistory.length) {
+      const latest = hit.archiveHistory[hit.archiveHistory.length - 1];
+      console.error(`Citizen ${latest.POPID} is on Citizen_Archive — ${latest.ArchiveReason} at C${latest.ExitCycle}, ReturnEligible=${latest.ReturnEligible} (${hit.archiveHistory.length} snapshot${hit.archiveHistory.length === 1 ? '' : 's'}); profile below is the exit snapshot`);
+      const aux = await loadCitizenAux(latest);
+      output('citizen', {
+        archived: true,
+        exit: { reason: latest.ArchiveReason, cycle: latest.ExitCycle, sourceEventId: latest.SourceEventId, lastActiveStatus: latest.LastActiveStatus, returnEligible: latest.ReturnEligible, archiveNote: latest.ArchiveNote || null },
+        archiveHistory: hit.archiveHistory.map(s => ({ reason: s.ArchiveReason, cycle: s.ExitCycle, lastActiveStatus: s.LastActiveStatus })),
+        ...buildCitizenProfile(latest, aux),
+      });
+      return;
+    }
     console.error(`Citizen not found: ${search}`);
     process.exit(1);
   }

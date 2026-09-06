@@ -51,6 +51,50 @@ async function main() {
   const headers = rows[0] || [];
   const data = rows.slice(1);
 
+  // engine.90 Commit 12 — archive integrity. Citizen_Archive holds every exit snapshot;
+  // World_Config popIdHighWater is the allocator mark. Invariants: no POPID twice on the
+  // ledger; every POPID on either tab ≤ the mark; a POPID on both tabs is a restore
+  // (ReturnEligible exit + Active row) — a deceased latest exit back on the ledger is a
+  // ghost, and an exit-status row that already has a snapshot is a pending re-archive.
+  const archive = { present: false, rows: 0, maxId: null, highWater: null, duplicates: [], overMark: [], onBoth: [] };
+  try {
+    const wc = (await sheets.spreadsheets.values.get({ spreadsheetId: process.env.GODWORLD_SHEET_ID, range: `'World_Config'!A:B` })).data.values || [];
+    const hw = wc.find(r => String(r[0] || '').trim() === 'popIdHighWater');
+    archive.highWater = hw ? Number(hw[1]) : null;
+  } catch (e) { archive.highWaterError = e.message; }
+  let arRows = [];
+  try {
+    arRows = (await sheets.spreadsheets.values.get({ spreadsheetId: process.env.GODWORLD_SHEET_ID, range: `'Citizen_Archive'` })).data.values || [];
+    archive.present = true;
+  } catch (e) { archive.present = false; }
+  {
+    const iPop = headers.indexOf('POPID'), iSt = headers.indexOf('Status');
+    const seen = {};
+    for (const r of data) { const p = String(r[iPop] || '').trim().toUpperCase(); if (p) seen[p] = (seen[p] || 0) + 1; }
+    archive.duplicates = Object.keys(seen).filter(p => seen[p] > 1);
+    const arH = arRows[0] || [], arB = arRows.slice(1);
+    archive.rows = arB.length;
+    const aPop = arH.indexOf('POPID'), aExit = arH.indexOf('ExitCycle'), aReason = arH.indexOf('ArchiveReason'), aRet = arH.indexOf('ReturnEligible');
+    const latest = {};
+    for (const r of arB) {
+      const p = String(r[aPop] || '').trim().toUpperCase(); const n = parsePopId(p);
+      if (n != null && (archive.maxId == null || n > archive.maxId)) archive.maxId = n;
+      if (!latest[p] || (Number(r[aExit]) || 0) >= (Number(latest[p][aExit]) || 0)) latest[p] = r;
+    }
+    if (archive.highWater != null) {
+      for (const p of Object.keys(seen)) { const n = parsePopId(p); if (n != null && n > archive.highWater) archive.overMark.push(p); }
+      for (const p of Object.keys(latest)) { const n = parsePopId(p); if (n != null && n > archive.highWater) archive.overMark.push(p + ' (archive)'); }
+    }
+    for (const r of data) {
+      const p = String(r[iPop] || '').trim().toUpperCase();
+      if (!latest[p]) continue;
+      const st = String(r[iSt] || '').trim().toLowerCase();
+      const reason = String(latest[p][aReason] || '');
+      const kind = (st === 'traded' || st === 'deceased') ? 'pending-re-archive' : reason === 'deceased' ? 'GHOST-deceased-back-on-ledger' : (String(latest[p][aRet]).toUpperCase() === 'TRUE' ? 'restored' : 'on-both-not-return-eligible');
+      archive.onBoth.push({ popid: p, status: r[iSt], latestExit: `${reason} C${latest[p][aExit]}`, kind });
+    }
+  }
+
   const idx = h => headers.indexOf(h);
   const colMap = {};
   headers.forEach((h, i) => { colMap[h.trim()] = i; });
@@ -175,6 +219,7 @@ async function main() {
     popidRange: { min: minId, max: maxId },
     popidGapCount: gaps.length,
     popidGapsSample: gaps.slice(0, 10),
+    archiveIntegrity: archive,
     tierClockMatrix,
     statusEnum,
     roleTypeCitizenCount: roleTypeCitizen.length,
@@ -215,6 +260,13 @@ async function main() {
   if (nonCanonTotal) {
     Object.entries(nonCanonNeighborhood).sort(([,a],[,b]) => b - a).slice(0, 8).forEach(([k, v]) => console.log(`    ${v.toString().padStart(4)} ${k}`));
   }
+  console.log('');
+  console.log('Archive integrity (engine.90):');
+  console.log(`  Citizen_Archive:        ${archive.present ? archive.rows + ' rows, max ' + (archive.maxId == null ? '—' : 'POP-' + String(archive.maxId).padStart(5, '0')) : 'ABSENT'} | popIdHighWater ${archive.highWater == null ? 'MISSING' : archive.highWater} (ledger max POP-${String(maxId).padStart(5,'0')})`);
+  console.log(`  Duplicate POPIDs:       ${archive.duplicates.length}` + (archive.duplicates.length ? ' — ' + archive.duplicates.slice(0, 5).join(', ') : ''));
+  console.log(`  POPID above the mark:   ${archive.overMark.length}` + (archive.overMark.length ? ' — ' + archive.overMark.slice(0, 5).join(', ') : ''));
+  const bad = archive.onBoth.filter(x => x.kind !== 'restored');
+  console.log(`  On ledger AND archive:  ${archive.onBoth.length} (${archive.onBoth.length - bad.length} restored, ${bad.length} flagged)` + (bad.length ? ' — ' + bad.slice(0, 5).map(x => `${x.popid} ${x.status} / ${x.latestExit} → ${x.kind}`).join('; ') : ''));
   console.log('');
   console.log('Narrative-column population:');
   Object.entries(narrative).forEach(([k, v]) => console.log(`  ${k.padEnd(16)} ${v} / ${extantCount} (${(100*v/extantCount).toFixed(1)}%)`));

@@ -2011,6 +2011,17 @@ app.get('/api/citizens/:popId', async (req, res) => {
     const row = liveData.find(r => r.POPID?.toLowerCase() === popId.toLowerCase());
     if (row) ledgerRecord = { ...row };
   }
+  // Layer 1b (engine.90): a POPID that left Simulation_Ledger lives on Citizen_Archive —
+  // serve the newest exit snapshot, flagged, before falling back to the cycle archive.
+  if (!ledgerRecord) {
+    const archiveRows = await getLiveSheetData('Citizen_Archive');
+    if (archiveRows) {
+      const snaps = archiveRows
+        .filter(r => r.POPID?.toLowerCase() === popId.toLowerCase())
+        .sort((a, b) => (Number(a.ExitCycle) || 0) - (Number(b.ExitCycle) || 0));
+      if (snaps.length) ledgerRecord = { ...snaps[snaps.length - 1], _archived: true, _archiveSnapshots: snaps.length };
+    }
+  }
   if (!ledgerRecord) {
     const cycleDir = getLatestCycleDir();
     if (cycleDir) {

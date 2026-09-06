@@ -6,7 +6,8 @@
     "frictionRule": "mayor, opp, crc, ind must land on different model families at Task 1.2",
     "modelAssignment": {
       "when": "S343 Task 1.2",
-      "basis": "output/cron-civic/eval/*_c101_scorecard.json (4 friction seats x 5 models, gemini-3.5-flash judge)", "judgeNote": "The c101 scorecards above were produced by a gemini-3.5-flash judge. The default judge moved to gemini-3.7-flash on 2026-08-20 (infrastructure.7, cost). Scores produced under the new judge are NOT directly comparable to these — re-baseline the friction seats before reading a new scorecard against this assignment.",
+      "basis": "output/cron-civic/eval/*_c101_scorecard.json (4 friction seats x 5 models, gemini-3.5-flash judge)",
+      "judgeNote": "The c101 scorecards above were produced by a gemini-3.5-flash judge. The default judge moved to gemini-3.7-flash on 2026-08-20 (infrastructure.7, cost). Scores produced under the new judge are NOT directly comparable to these — re-baseline the friction seats before reading a new scorecard against this assignment.",
       "frictionSeats": {
         "MAYOR-01": "mistralai/mistral-large (voice 10)",
         "OPP": "qwen/qwen3-235b-a22b (voice 10)",
@@ -83,7 +84,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "qwen/qwen3-235b-a22b"
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "COUNCIL-D2",
@@ -117,7 +118,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "qwen/qwen3-235b-a22b"
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "COUNCIL-D4",
@@ -151,7 +152,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "qwen/qwen3-235b-a22b"
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "COUNCIL-D6",
@@ -219,7 +220,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "qwen/qwen3-235b-a22b"
+      "model": "deepseek/deepseek-chat"
     },
     {
       "officeId": "STAFF-COS",
@@ -332,7 +333,9 @@
       "approval": 65,
       "agentDir": "civic-office-baylight-authority",
       "initiative": "INIT-006",
-      "neighborhoods": ["Baylight District"],
+      "neighborhoods": [
+        "Baylight District"
+      ],
       "dataDomain": "baylight-project",
       "dataSources": [
         "Initiative_Tracker (baylight)",
@@ -612,7 +615,9 @@
       "popid": "POP-00790",
       "agentDir": "civic-project-stabilization-fund",
       "initiative": "INIT-001",
-      "neighborhoods": ["West Oakland"],
+      "neighborhoods": [
+        "West Oakland"
+      ],
       "dutyDays": "sun-thu",
       "model": "deepseek/deepseek-chat"
     },
@@ -623,7 +628,11 @@
       "popid": "POP-01021",
       "agentDir": "civic-project-oari",
       "initiative": "INIT-002",
-      "neighborhoods": ["West Oakland", "Fruitvale", "East Oakland"],
+      "neighborhoods": [
+        "West Oakland",
+        "Fruitvale",
+        "East Oakland"
+      ],
       "dutyDays": "sun-thu",
       "model": "deepseek/deepseek-chat"
     },
@@ -634,7 +643,9 @@
       "popid": "POP-00792",
       "agentDir": "civic-project-health-center",
       "initiative": "INIT-005",
-      "neighborhoods": ["Temescal"],
+      "neighborhoods": [
+        "Temescal"
+      ],
       "dutyDays": "sun-thu",
       "model": "deepseek/deepseek-chat"
     },
@@ -645,7 +656,9 @@
       "popid": "POP-00791",
       "agentDir": "civic-project-transit-hub",
       "initiative": "INIT-003",
-      "neighborhoods": ["Fruitvale"],
+      "neighborhoods": [
+        "Fruitvale"
+      ],
       "_note": "S344: ledger FullName corrected Eloise->Elena by Mike; agent canon and ledger now agree",
       "dutyDays": "sun-thu",
       "model": "deepseek/deepseek-chat"

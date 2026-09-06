@@ -123,6 +123,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.109 | New-life intake — household door BUILT S419, bench C107/C108 proven, **LIVE PROD @50** (Tasks 3–6: `queueHouseholdIntake_` → `Advancement_Intake1` → populator → `formIntakeHouseholds_`; 35/35); open: Task 7 the builder seeds the families | in-progress | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §4 + §Changelog S419 |
 | civic.22 | Initiative authorship — BLOCKED by S406 ruling 1 (chase plan §S-A addendum): initiatives stay hand-fed, `createInitiative_` stays unwired until city-hall seats work a full week autonomously and there is something to author from. Grok's Task 1 draft (§12) stays on the shelf | blocked | research-build | [[../plans/2026-08-15-civic-edge-truth-migration]] §12 |
 | civic.33 | Recall/challenger fall-rate — threshold-20 confirmed live; tiers 2/3 of the door not yet bench-exercised. Needs N sandbox cycles with city-hall + media active | ready | engine-sheet | [[../plans/2026-08-29-employment-system-cascade]] §Status log |
+| civic.34 | D1 number-gate failures traced to qwen (~10x deepseek's per-seat rate, fleet-wide); 4 seats swapped, qwen dropped from FALLBACK_MODELS; mayor/mistral flagged not fixed | done-pending-archive | research-build | [[../plans/2026-09-06-civic-model-grounding-rates]] |
 
 ### infrastructure.* — Supermemory, services, ingest
 

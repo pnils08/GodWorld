@@ -1228,10 +1228,17 @@ function composeChecks() {
 }
 
 // civic.26 — seats a voice can fall back to when its own model is unreachable.
-// Ordered by how little the fleet already leans on them (kimi 3 seats, qwen 5,
-// deepseek 30), so a fallback costs as little voice distinctiveness as it can:
-// a seat that borrows deepseek sounds like thirty other seats.
-const FALLBACK_MODELS = ['moonshotai/kimi-k2', 'qwen/qwen3-235b-a22b', 'deepseek/deepseek-chat'];
+// Ordered by how little the fleet already leans on them, so a fallback costs
+// as little voice distinctiveness as it can: a seat that borrows deepseek
+// sounds like thirty other seats.
+//
+// civic.34 (2026-09-06): qwen/qwen3-235b-a22b dropped after the fleet's own
+// number-gate log named it the worst offender by a wide margin — 12 ungrounded-
+// number incidents across its 4 seats (D1/D3/D5/D9) vs deepseek's 8 across its
+// ~30, a per-seat rate roughly 10x worse. A fallback exists to rescue a seat
+// from a CALL failure (429/timeout); one that reliably reintroduces the exact
+// defect the two-attempt VALIDITY gate exists to catch is not a rescue.
+const FALLBACK_MODELS = ['moonshotai/kimi-k2', 'deepseek/deepseek-chat'];
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 

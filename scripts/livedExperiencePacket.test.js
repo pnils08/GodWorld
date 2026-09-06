@@ -225,4 +225,28 @@ assert.throws(() => p.assertBase({ ...w3, known: [{ t: 'FACT', text: 'missing re
 const roundTrip = p.parseJsonObject('```json\n{"answer":"abstain","observation":[],"interpretation":[],"intention":[],"unverifiedLead":[],"quoteParts":[],"limits":["unknown"]}\n```');
 assert.equal(p.validateReportOutput(roundTrip, resident).answer, 'abstain');
 
+// pipeline.57 — ADR-0017 §1/§4: exposure.evidence populates for a candidate the
+// engine itself linked to this story (why != the neighborsFromLedger proximity
+// markers), sourced to story.ref; a pure same-hood/ledger-proximity fallback gets
+// none, matching "same-neighborhood ... is not lived exposure."
+assert.equal(official.exposure.evidence.length, 1, 'story-linked candidate gets an evidence row');
+assert.equal(official.exposure.evidence[0].src, story.ref);
+assert.equal(official.exposure.evidence[0].text, story.hookLine);
+assert.ok(/^EV-[0-9a-f]{10}$/.test(official.exposure.evidence[0].id));
+assert.deepStrictEqual(resident.exposure.evidence, [], 'proximity-only candidate gets no evidence row');
+
+const evForNoRefStory = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
+  angleInput: w1, anglePlan: plan, story: { ...story, ref: undefined }, candidate: candidates[0] });
+assert.deepStrictEqual(evForNoRefStory.exposure.evidence, [],
+  'no engine-authored story.ref (falls back to the literal "assignment" src) means no evidence, even for a story-linked candidate');
+
+const noPopCandidate = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
+  angleInput: w1, anglePlan: plan, story, candidate: { ...candidates[0], pop: null } });
+assert.deepStrictEqual(noPopCandidate.exposure.evidence, [], 'a candidate with no resolvable pop gets no evidence row');
+
+const differentStoryEv = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
+  angleInput: w1, anglePlan: plan, story: { ...story, ref: 'output/TEST_ONLY.json rows[2]' }, candidate: candidates[0] });
+assert.notEqual(differentStoryEv.exposure.evidence[0].id, official.exposure.evidence[0].id,
+  'evidence id is derived from pop+ref — a different story yields a different id for the same citizen');
+
 console.log('livedExperiencePacket.test.js: PASS');

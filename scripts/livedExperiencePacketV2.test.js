@@ -698,4 +698,39 @@ assert.deepStrictEqual(kaiW1.task.creativeBrief, {
 });
 assert.ok(kaiW1.known.some(row => row.text === kaiStory.label));
 
+// pipeline.57 — evidence survives the V1 -> V2 upgrade (V2.buildReportPacket clones
+// V1's output and merges into packet.exposure without dropping the evidence array).
+assert.equal(official.exposure.evidence.length, 1, 'story-linked candidate gets an evidence row in LEP/2');
+assert.equal(official.exposure.evidence[0].src, story.ref);
+assert.deepStrictEqual(resident.exposure.evidence, [], 'proximity-only candidate gets none in LEP/2');
+
+const interviewContract = require('./newsroomInterviewContract');
+// official is institutional (Council Member) -- quote-INeligible regardless of evidence,
+// so the eligibility check and the evidence check are exercised on separate candidates.
+const officialInterview = interviewContract.prepareInterviewPacket(official);
+assert.equal(officialInterview.output.schema.basis, 'lived-context|direct-reaction|null',
+  'a story-linked candidate may claim lived-context, even one later blocked on institutional grounds');
+const residentInterview = interviewContract.prepareInterviewPacket(resident);
+assert.equal(residentInterview.output.schema.basis, 'direct-reaction|null',
+  'a proximity-only candidate is restricted to direct-reaction');
+
+// A story-linked, quote-ELIGIBLE candidate is what actually exercises the full
+// lived-context accept/reject roundtrip.
+const linkedNonOfficial = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter, angleInput: w1,
+  anglePlan: plan, story,
+  candidate: { pop: 'TEST-POP-03', name: 'Test Third', role: 'Resident', hood: 'TEST-HOOD',
+    profile: 'Test Third — Resident, TEST-HOOD', why: 'feed-names' } });
+assert.equal(linkedNonOfficial.exposure.evidence.length, 1,
+  'any non-proximity why (a desk-specific label, not just literal "assignment") still earns an evidence row');
+assert.notEqual(linkedNonOfficial.limits.quoteEligible, false);
+const linkedInterview = interviewContract.prepareInterviewPacket(linkedNonOfficial);
+const factId = linkedInterview.known[0].id;
+const liveQuote = { answer: 'quote', quote: 'I watched this happen on my own street, and it matters to me.',
+  fact_ids: [factId], basis: 'lived-context', unverifiedLead: [], abstain_reason: null };
+assert.doesNotThrow(() => interviewContract.validateInterviewOutput(liveQuote, linkedInterview),
+  'lived-context basis validates when exposure.evidence is present');
+assert.throws(() => interviewContract.validateInterviewOutput(liveQuote, residentInterview),
+  /lived-context basis requires addressable story-linked evidence/,
+  'lived-context basis is rejected when exposure.evidence is absent');
+
 console.log('livedExperiencePacketV2.test.js: PASS');

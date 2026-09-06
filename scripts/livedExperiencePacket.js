@@ -9,6 +9,7 @@
  * inspection artifacts second. Markdown remains the human audit view.
  */
 
+const crypto = require('crypto');
 const VERSION = 'LEP/1';
 const CLAIM_TYPES = Object.freeze(['FACT', 'OBSERVATION', 'INTERPRETATION', 'INTENTION', 'LEAD']);
 const WAKES = Object.freeze(['W1', 'W2', 'W3']);
@@ -583,6 +584,34 @@ function questionFor(candidate, anglePlan, story) {
   return 'What have you seen, felt, or understood about "' + focus + '"? Speak from your life. Do not add a concrete example, object, event, or rumor that is not in the Packet.';
 }
 
+// pipeline.57 — ADR-0017 §1/§4: "same-neighborhood ... is not lived exposure; lived-context
+// requires an addressable story-linked evidence row." No builder ever populated
+// packet.exposure.evidence, so hasLivedEvidence() (newsroomInterviewContract.js) was
+// permanently false and every interview fell back to direct-reaction, even for a
+// citizen the engine itself named as this story's affected party.
+//
+// candidateRows() already marks the ONE non-addressable path: the neighborsFromLedger()
+// proximity fallback stamps why:'same-hood-ledger'|'ledger-resident' when nothing more
+// specific supplied a candidate. Every other why value — 'assignment', a desk's own
+// label ('feed-names', 'bond-hop from interview pool', 'assigned-official', ...) —
+// traces back through story.citizens/story.popids/a packet-seat pool to the SAME
+// engine-authored citation carried in story.ref (buildWorldSummary.js: a specific
+// sheet+row, a StorylineId, a feed cycle — verified addressable, never a bare label).
+// A candidate reached only by that proximity fallback gets no evidence row; everyone
+// else does, sourced to story.ref.
+const PROXIMITY_WHY = new Set(['same-hood-ledger', 'ledger-resident']);
+function evidenceFor(candidate, story) {
+  const ref = clean(story && story.ref, 300);
+  if (!ref || ref === 'assignment') return [];
+  if (PROXIMITY_WHY.has(candidate && candidate.why)) return [];
+  const pop = clean(candidate && candidate.pop, 40);
+  if (!pop) return [];
+  const id = 'EV-' + crypto.createHash('sha256').update(pop + '|' + ref).digest('hex').slice(0, 10);
+  const text = clean((story && (story.hookLine || story.label || story.angle)), 400);
+  if (!text) return [];
+  return [{ id, src: ref, text }];
+}
+
 function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story, candidate }) {
   if (!story || !candidate) throw new Error('W2 Packet requires story+candidate');
   const src = story.ref || 'assignment';
@@ -601,7 +630,8 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
       focus: clean(anglePlan && anglePlan.focus || story.angle || story.label, 500), src },
     exposure: { basis: uniq([candidate.why || 'assignment', candidate.hood === story.hood ? 'same-neighborhood' : null]),
       self: clean(candidate.profile, 400) || null,
-      planTarget: (anglePlan && anglePlan.targets || []).find(t => t.pop === candidate.pop) || null },
+      planTarget: (anglePlan && anglePlan.targets || []).find(t => t.pop === candidate.pop) || null,
+      evidence: evidenceFor(candidate, story) },
     known,
     limits: {
       quoteEligible: !block,

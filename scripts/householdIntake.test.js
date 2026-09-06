@@ -20,6 +20,8 @@ const sandbox = {
   estimateRent_: (hood) => (hood === 'Temescal' ? 2200 : 1900),
   inferSexFromFirstName_: (f) => ({ marcus: 'male', dana: 'female', theo: 'male', ivy: 'female', rosa: 'female' }[String(f).toLowerCase()] || ''),
   getCoreSimNeighborhoods_: () => ['Temescal'],
+  // engine.148 P3: the door folds an authored hood to the map; off-map → null
+  resolveHoodOrChild_: (ctx, name) => ({ temescal: 'Temescal', downtown: 'Downtown', 'old oakland': 'Downtown' }[String(name).trim().toLowerCase()] || null),
   setCurrentField_: (a) => a, roleFieldOf_: () => null,
 };
 const src = R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('utilities/citizenDerivation.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
@@ -199,6 +201,28 @@ console.log('\n3. the drip path is untouched, and collisions are refused:');
 console.log('\n4. Task 6 — Advancement_Intake handles solely promotion:');
 check('processIntakeRows_ is gone', !/function processIntakeRows_/.test(R('phase05-citizens/processAdvancementIntake.js')));
 check('processIntake_ hands the household door its rows and skips them', /queueHouseholdIntake_\(ctx, intake, intakeVals, intakeHeader, nameIndex, cycle\)/.test(R('phase01-config/godWorldEngine2.js')) && /if \(hhPlan\.rows\[r \+ 1\]\) continue;/.test(R('phase01-config/godWorldEngine2.js')));
+
+console.log('\n7. engine.148 P3 — the door refuses an off-map hood and folds a child area:');
+{
+  const w = world([]);
+  const adv = w.sheets.Advancement_Intake1;
+  E.ensureHouseholdQueueSheet_(w.ctx.ss);
+  const qh = adv.rows[0]; const qc = (n) => qh.indexOf(n);
+  const typo = new Array(qh.length).fill(''); typo[qc('First')] = 'Nadia'; typo[qc('Last')] = 'Okafor'; typo[qc('Tier')] = 4; typo[qc('ClockMode')] = 'ENGINE'; typo[qc('BirthYear')] = 1991; typo[qc('Neighborhood')] = 'Atlantis';
+  adv.appendRow(typo);
+  let err = null; try { E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err = e; }
+  check('a typo hood throws at the door, naming the row', !!err && /Advancement_Intake row for "Nadia Okafor" names neighborhood "Atlantis", which is not on Neighborhood_Map/.test(err.message), err && err.message);
+  const w2 = world([]);
+  const adv2 = w2.sheets.Advancement_Intake1;
+  E.ensureHouseholdQueueSheet_(w2.ctx.ss);
+  const q2 = adv2.rows[0]; const c2 = (n) => q2.indexOf(n);
+  const kid = new Array(q2.length).fill(''); kid[c2('First')] = 'Nadia'; kid[c2('Last')] = 'Okafor'; kid[c2('Tier')] = 4; kid[c2('ClockMode')] = 'ENGINE'; kid[c2('BirthYear')] = 1991; kid[c2('Neighborhood')] = 'Old Oakland';
+  adv2.appendRow(kid);
+  const before2 = w2.ctx.ledger.rows.length;
+  E.processAdvancementRows_(w2.ctx, 'C' + CYCLE, CYCLE);
+  const minted = w2.ctx.ledger.rows[before2];
+  check('a child-area hood folds to its parent on the minted row', w2.ctx.ledger.rows.length === before2 + 1 && minted[col('Neighborhood')] === 'Downtown', minted && minted[col('Neighborhood')]);
+}
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

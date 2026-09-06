@@ -748,6 +748,15 @@ function processAdvancementRows_(ctx, now, cycle) {
       // 2041, understating age by 1/year as the sim advances.
       var age = simYearOf_(ctx, cycle) - birthYear;
       var rawNbhd = (iNeighborhood >= 0) ? String(row[iNeighborhood] || '').trim() : '';
+      // engine.148 P3: the door folds an authored hood to the map (child area →
+      // parent) and refuses a name that is not on it — every Phase-5 texture
+      // engine now throws on an off-map ledger hood, so the typo stops here,
+      // naming the intake row, instead of dropping seven engines next cycle.
+      if (rawNbhd) {
+        var foldedNbhd = resolveHoodOrChild_(ctx, rawNbhd);
+        if (!foldedNbhd) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + first + ' ' + last + '" names neighborhood "' + rawNbhd + '", which is not on Neighborhood_Map (ADR-0016) — fix the cell.');
+        rawNbhd = foldedNbhd;
+      }
       var profile = deriveCitizenProfile_(seed, age, rawNbhd, ledgerFreq, {
         roleTypeOverride: rawRole || null,  // honor explicit intake RoleType if set
         genderOverride: (queuedGender === 'male' || queuedGender === 'female') ? queuedGender : null // engine.109: the household knows

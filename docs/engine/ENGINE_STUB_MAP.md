@@ -2460,6 +2460,8 @@
 - **routeCitizenUsageToIntake_(ctx, ss, cycle, cal)**
   Sheets: Citizen_Media_Usage, Generic_Citizens, Intake, Simulation_Ledger
 
+- **describeUsageContext_(context)**
+
 - **processContinuityIntake_(ss, cycle, cal)**
 
 - **setupMediaIntakeV2()**
@@ -3865,4 +3867,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1325
+**Functions mapped:** 1326

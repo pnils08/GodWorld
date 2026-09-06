@@ -593,7 +593,7 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
           '',                       // G: CIV
           '',                       // H: MED
           '',                       // I: UNI
-          'Media usage C' + cycle + ' (' + usageType + '): ' + context // J: Notes
+          'Media usage C' + cycle + ' (' + usageType + '): ' + describeUsageContext_(context) // J: Notes — engine.163: in-world text, never the packet stem
         ]);
         results.existingCitizens++;
         landed = true;
@@ -610,7 +610,7 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
         appendLeanIntakeRow_(intakeSheet, {
           first: nameParts.first,
           last: nameParts.last,
-          notes: 'Introduced via Media Room C' + cycle + '. ' + context
+          notes: 'Introduced via Media Room C' + cycle + '. ' + describeUsageContext_(context) // engine.163: same seam, in-world text
         });
         results.newCitizens++;
         landed = true;
@@ -643,6 +643,26 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
  * Direct quotes route to LifeHistory_Log via parseContinuityNotes_ in parseMediaRoomMarkdown.js.
  * This stub exists only for backwards compatibility if called from old code.
  */
+/**
+ * engine.163 — the Citizen_Media_Usage Context column is an OPS key: the
+ * writer-wake packet stem (`<desk>_c<N>_<persona>[_packet-v2][_<model id>]`),
+ * kept verbatim there because recordBylineUsage() dedupes on it. It is NOT
+ * world text: folded raw into the Advancement_Intake1 note it reached
+ * LifeHistory_Log EventText — 58 live rows carried model-provider ids and
+ * internal filenames in a citizen's life record (measured C105). This is the
+ * one seam where the stem becomes a life-record sentence. Stem → "a Bay
+ * Tribune <desk> desk piece, C<N>". Anything that is not a stem (the human
+ * contexts: roles, teams, "first published byline…") passes through unchanged.
+ */
+function describeUsageContext_(context) {
+  var c = String(context || '').trim();
+  var m = c.match(/^([a-z][a-z-]*)_c(\d+)_/i);
+  if (!m) return c;
+  var desk = m[1].toLowerCase();
+  var label = desk === 'undocked' ? 'an UNDOCKED show segment' : 'a Bay Tribune ' + desk + ' desk piece';
+  return label + ', C' + m[2];
+}
+
 function processContinuityIntake_(ss, cycle, cal) {
   Logger.log('processContinuityIntake_: DEPRECATED — continuity pipeline removed. Quotes route via parseMediaRoomMarkdown.');
   return 0;

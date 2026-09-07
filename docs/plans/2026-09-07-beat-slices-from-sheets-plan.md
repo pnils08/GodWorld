@@ -39,7 +39,10 @@
      `Community_Programs` (Program_ID, Name, Founder_POPID, Neighborhood, Type, Status) ·
      `Faith_Organizations` (Organization, FaithTradition, Neighborhood, Congregation, Leader, LeaderPOPID, MembersList) ·
      `Cycle_Weather` (CycleID, Type, Temp, Impact, Advisory, Comfort, Mood, Streak, StreakType) ·
-     `Household_Ledger` (HouseholdId, HeadOfHousehold, HouseholdType, Members, Neighborhood, HousingType, MonthlyRent, HouseholdIncome, Status).
+     `Household_Ledger` (HouseholdId, HeadOfHousehold, HouseholdType, Members, Neighborhood, HousingType, MonthlyRent, HouseholdIncome, Status) ·
+     `Casino_Ledger` (WagerId, CyclePlaced, CycleSettled, POPID, HouseholdId, MarketFamily, MarketId, EventId, Side, Stake, Odds, Payout) ·
+     `Story_Seed_Deck` (Cycle, SeedID, Desk, Class, Domain, Neighborhood, What, Why, Citizens, CitizenEvents, Businesses, OtherEntities, Magnitude, Trend) ·
+     `Story_Hook_Deck` (Cycle, HookId, HookType, Domain, Neighborhood, Priority, HookText, SuggestedDesks, SuggestedJournalist, SuggestedAngle).
   2. Keep the prior cycle's dump as `output/beats/prev/` before overwriting, so builders can compute "what moved" (Transit_Metrics and Crime_Metrics deltas) without a second Sheets read.
   3. Read-only: no `appendRows`/`updateRange` anywhere in the file (pre-commit hook enforces).
 - **Verify:** `node scripts/dumpBeatTabs.js 106 --quiet && node -e "const m=require('./output/beats/meta.json');console.log(m.cycle,m.rows)"` → cycle 106; Business_Ledger 176, Employment_Roster 859, Transit_Metrics 522, Crime_Metrics 23, Neighborhood_Demographics 22, Youth_Events 168, Household_Ledger 712 (live counts 2026-09-07; re-read live before asserting)
@@ -103,16 +106,28 @@
 - **Verify:** a test article with an invented crowd size and a real citizen passes; one with an invented citizen name fails
 - **Status:** [ ] not started
 
-### Task 7: Rota = every journalist once per cycle — builder-ruled S433
+### Task 7: Rota = every journalist once per cycle, on a themed week — builder-ruled S433
 
 - **Files:** `scripts/newsroom-fanout.js` (`quotas`, `boundDailyAssignments`), `scripts/cron-desk-run.js` (fanout stages)
-- **Ruling (Mike, 2026-09-07):** each journalist files one article per cycle; Carmen's civic ledger once a week is the right cadence, not the floor for a desk. City hall is a function, not a city — cover the city. Saturday publishes the best; the rest is still the week's record.
+- **Ruling (Mike, 2026-09-07):** each journalist gets their own slice and files one article per cycle. Nothing in the ledgers is confidential — health covers who is in `Hospital_Ledger`, business covers `Casino_Ledger` activity. Nia Rook writes every day the Undocked show runs (daily 20:30 cron). Days carry themes so the news reads differently day to day: civic / business / health / sports / transit early in the week, nightlife / culture Friday; sports has four seats across Mon–Thu counting the Oaks reporters; civic may carry a second reporter. City hall is a function, not a city.
+- **Engine input already there:** `Story_Seed_Deck` (184 rows: Cycle, SeedID, Desk, Class, Domain, Neighborhood, What, Why, **Citizens, CitizenEvents, Businesses**, Magnitude, Trend) and `Story_Hook_Deck` (1,716 rows incl. **SuggestedJournalist**, SuggestedAngle) are the engine's own per-desk seeds with citizens and businesses attached. Add both to the Task 1 dump; each journalist's slice opens with their seeds for the cycle.
+- **Draft week grid for the builder's yes/no (one slot = one journalist = one article; Nia daily on top):**
+
+| Day | Seats |
+|---|---|
+| Mon | Carmen Delaine (civic ledger) · Jordan Velez (business + casino) · Dr. Lila Mezran (health, hospital rows) · Trevor Shimizu (transit) · Anthony Raines (A's) |
+| Tue | Luis Navarro (investigations) · Sgt. Rachel Torres (safety) · Angela Reyes (schools) · Selena Grant (Oaks) |
+| Wed | Jax Caldera (accountability) · Noah Tan (environment) · Elliot Marbury (data desk) · P Slayer (fan pulse) |
+| Thu | Elliot Graye (faith) · Simon Leary (sports as civic architecture) · Hal Richmond / Tanya Cruz alternating (A's) · Talia Finch (Oaks, the street) |
+| Fri | Mason Ortega (food) · Kai Marston (arts, nightlife) · Sharon Okafor (lifestyle) · Maria Keen (neighborhood) · Celeste Tran (social trends — seat exists on the ledger, no writer agent yet) |
+
+  ≈22 slots/week + Nia ×5 ≈ 27 articles, down from 35 attempts; every seat exactly once. Unseated ledger journalists (Farrah Del Rio, Reed Thompson, Lena Carrow, Dana Reeve, the OakTown Echo six) stay off the rota until they have a voice agent.
 - **Steps:**
-  1. Replace desk quotas with a per-journalist roster pass: every active reporter RoleType on `Simulation_Ledger` (ClockMode MEDIA, Bay Tribune) gets exactly one slot per cycle, spread across the Mon–Fri days (≈24 seats → ≈5/day). Least-recently-filed decides day order, not desk.
-  2. The slot's slice is the journalist's beat slice (Tasks 2–4), not a desk lane.
-  3. Measured S433 baseline for the before/after: 14 days, most reporters 1 byline, Nia 4, Jordan 3, 18 sidecars with no byline recorded.
-- **Verify:** the first full cycle after cut: `output/cron-compare/staged|flagged` sidecars show every roster journalist exactly once.
-- **Status:** [ ] not started
+  1. Replace desk quotas with a day→seats table (above, once ruled), each seat bound to its beat slice (Tasks 2–4) and its `Story_Seed_Deck` rows.
+  2. Nia keeps the undocked lane, daily.
+  3. Baseline for before/after (S433): 14 days, most reporters 1 byline, Nia 4, Jordan 3; 70 attempts, 35 staged, 35 flagged.
+- **Verify:** first full cycle after cut: `output/cron-compare/staged|flagged` sidecars show every rota seat exactly once, on its day.
+- **Status:** [ ] awaiting builder yes/no on the grid
 
 ### Task 7b: Article latency — audit, then cut
 

@@ -2,18 +2,24 @@
   {
     "role": "Longshoreman",
     "category": "Port & Labor",
-    "incomeRange": [105000, 165000],
+    "incomeRange": [
+      105000,
+      165000
+    ],
     "medianIncome": 138000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Port/Industrial",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "ILWU scale plus automation-oversight premium. Port of Oakland 2041 throughput at historic highs. Overtime common."
   },
   {
     "role": "Crane Operator",
     "category": "Port & Labor",
-    "incomeRange": [115000, 185000],
+    "incomeRange": [
+      115000,
+      185000
+    ],
     "medianIncome": 152000,
     "effectiveTaxRate": 0.34,
     "economicOutputCategory": "Port/Industrial",
@@ -24,7 +30,10 @@
   {
     "role": "Trade Union Representative",
     "category": "Port & Labor",
-    "incomeRange": [95000, 145000],
+    "incomeRange": [
+      95000,
+      145000
+    ],
     "medianIncome": 118000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Port/Industrial",
@@ -35,9 +44,12 @@
   {
     "role": "Port Logistics Coordinator",
     "category": "Port & Labor",
-    "incomeRange": [88000, 135000],
+    "incomeRange": [
+      88000,
+      135000
+    ],
     "medianIncome": 112000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Port/Industrial",
     "housingBurdenPct": 0.33,
     "consumerProfile": "moderate",
@@ -46,7 +58,10 @@
   {
     "role": "Ship Pilot",
     "category": "Port & Labor",
-    "incomeRange": [195000, 340000],
+    "incomeRange": [
+      195000,
+      340000
+    ],
     "medianIncome": 265000,
     "effectiveTaxRate": 0.39,
     "economicOutputCategory": "Port/Industrial",
@@ -57,7 +72,10 @@
   {
     "role": "Warehouse Automation Technician",
     "category": "Port & Labor",
-    "incomeRange": [78000, 120000],
+    "incomeRange": [
+      78000,
+      120000
+    ],
     "medianIncome": 98000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Port/Industrial",
@@ -68,7 +86,10 @@
   {
     "role": "Dockworker",
     "category": "Port & Labor",
-    "incomeRange": [82000, 130000],
+    "incomeRange": [
+      82000,
+      130000
+    ],
     "medianIncome": 105000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Port/Industrial",
@@ -79,7 +100,10 @@
   {
     "role": "Port Security Officer",
     "category": "Port & Labor",
-    "incomeRange": [72000, 110000],
+    "incomeRange": [
+      72000,
+      110000
+    ],
     "medianIncome": 90000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Port/Industrial",
@@ -90,9 +114,12 @@
   {
     "role": "Maritime Environmental Compliance Officer",
     "category": "Port & Labor",
-    "incomeRange": [92000, 140000],
+    "incomeRange": [
+      92000,
+      140000
+    ],
     "medianIncome": 115000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Port/Industrial",
     "housingBurdenPct": 0.32,
     "consumerProfile": "moderate",
@@ -101,7 +128,10 @@
   {
     "role": "Freight Broker",
     "category": "Port & Labor",
-    "incomeRange": [98000, 210000],
+    "incomeRange": [
+      98000,
+      210000
+    ],
     "medianIncome": 148000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Port/Industrial",
@@ -112,7 +142,10 @@
   {
     "role": "Site Foreman",
     "category": "Construction & Baylight",
-    "incomeRange": [105000, 165000],
+    "incomeRange": [
+      105000,
+      165000
+    ],
     "medianIncome": 135000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Trades/Construction",
@@ -123,18 +156,24 @@
   {
     "role": "Ironworker",
     "category": "Construction & Baylight",
-    "incomeRange": [95000, 155000],
+    "incomeRange": [
+      95000,
+      155000
+    ],
     "medianIncome": 128000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Trades/Construction",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Structural steel for Baylight towers and stadium district. Hazard premium. Union Ironworkers Local 378."
   },
   {
     "role": "Construction Engineer",
     "category": "Construction & Baylight",
-    "incomeRange": [125000, 205000],
+    "incomeRange": [
+      125000,
+      205000
+    ],
     "medianIncome": 165000,
     "effectiveTaxRate": 0.34,
     "economicOutputCategory": "Trades/Construction",
@@ -145,7 +184,10 @@
   {
     "role": "Tower Crane Operator (Construction)",
     "category": "Construction & Baylight",
-    "incomeRange": [110000, 175000],
+    "incomeRange": [
+      110000,
+      175000
+    ],
     "medianIncome": 145000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Trades/Construction",
@@ -156,7 +198,10 @@
   {
     "role": "Construction Safety Inspector",
     "category": "Construction & Baylight",
-    "incomeRange": [88000, 135000],
+    "incomeRange": [
+      88000,
+      135000
+    ],
     "medianIncome": 110000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Trades/Construction",
@@ -167,7 +212,10 @@
   {
     "role": "Concrete Finisher",
     "category": "Construction & Baylight",
-    "incomeRange": [78000, 125000],
+    "incomeRange": [
+      78000,
+      125000
+    ],
     "medianIncome": 100000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Trades/Construction",
@@ -178,9 +226,12 @@
   {
     "role": "Heavy Equipment Operator",
     "category": "Construction & Baylight",
-    "incomeRange": [88000, 145000],
+    "incomeRange": [
+      88000,
+      145000
+    ],
     "medianIncome": 118000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.31,
     "consumerProfile": "moderate",
@@ -189,7 +240,10 @@
   {
     "role": "Glazier",
     "category": "Construction & Baylight",
-    "incomeRange": [82000, 130000],
+    "incomeRange": [
+      82000,
+      130000
+    ],
     "medianIncome": 105000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Trades/Construction",
@@ -200,7 +254,10 @@
   {
     "role": "Project Manager (Construction)",
     "category": "Construction & Baylight",
-    "incomeRange": [135000, 225000],
+    "incomeRange": [
+      135000,
+      225000
+    ],
     "medianIncome": 180000,
     "effectiveTaxRate": 0.35,
     "economicOutputCategory": "Trades/Construction",
@@ -211,18 +268,24 @@
   {
     "role": "Seismic Retrofit Specialist",
     "category": "Construction & Baylight",
-    "incomeRange": [95000, 155000],
+    "incomeRange": [
+      95000,
+      155000
+    ],
     "medianIncome": 125000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Trades/Construction",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Mandated soft-story retrofit program ongoing. Hayward Fault proximity keeps demand constant."
   },
   {
     "role": "BART Station Manager",
     "category": "Transit & Infrastructure",
-    "incomeRange": [95000, 145000],
+    "incomeRange": [
+      95000,
+      145000
+    ],
     "medianIncome": 120000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -233,7 +296,10 @@
   {
     "role": "Bus Operator",
     "category": "Transit & Infrastructure",
-    "incomeRange": [72000, 105000],
+    "incomeRange": [
+      72000,
+      105000
+    ],
     "medianIncome": 88000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -244,9 +310,12 @@
   {
     "role": "Smart Grid Technician",
     "category": "Transit & Infrastructure",
-    "incomeRange": [88000, 140000],
+    "incomeRange": [
+      88000,
+      140000
+    ],
     "medianIncome": 115000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.32,
     "consumerProfile": "moderate",
@@ -255,7 +324,10 @@
   {
     "role": "Traffic Systems Engineer",
     "category": "Transit & Infrastructure",
-    "incomeRange": [105000, 165000],
+    "incomeRange": [
+      105000,
+      165000
+    ],
     "medianIncome": 135000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -266,7 +338,10 @@
   {
     "role": "Water Treatment Plant Operator",
     "category": "Transit & Infrastructure",
-    "incomeRange": [82000, 125000],
+    "incomeRange": [
+      82000,
+      125000
+    ],
     "medianIncome": 102000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -277,7 +352,10 @@
   {
     "role": "Telecommunications Infrastructure Tech",
     "category": "Transit & Infrastructure",
-    "incomeRange": [85000, 135000],
+    "incomeRange": [
+      85000,
+      135000
+    ],
     "medianIncome": 108000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -288,7 +366,10 @@
   {
     "role": "Civil Engineer (Infrastructure)",
     "category": "Transit & Infrastructure",
-    "incomeRange": [115000, 185000],
+    "incomeRange": [
+      115000,
+      185000
+    ],
     "medianIncome": 150000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -299,7 +380,10 @@
   {
     "role": "Transit Dispatcher",
     "category": "Transit & Infrastructure",
-    "incomeRange": [68000, 98000],
+    "incomeRange": [
+      68000,
+      98000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -310,7 +394,10 @@
   {
     "role": "EV Charging Network Technician",
     "category": "Transit & Infrastructure",
-    "incomeRange": [75000, 115000],
+    "incomeRange": [
+      75000,
+      115000
+    ],
     "medianIncome": 95000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -321,7 +408,10 @@
   {
     "role": "Autonomous Vehicle Fleet Monitor",
     "category": "Transit & Infrastructure",
-    "incomeRange": [82000, 130000],
+    "incomeRange": [
+      82000,
+      130000
+    ],
     "medianIncome": 105000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -332,7 +422,10 @@
   {
     "role": "ER Nurse",
     "category": "Healthcare",
-    "incomeRange": [115000, 175000],
+    "incomeRange": [
+      115000,
+      175000
+    ],
     "medianIncome": 148000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Healthcare",
@@ -343,7 +436,10 @@
   {
     "role": "Trauma Surgeon",
     "category": "Healthcare",
-    "incomeRange": [385000, 620000],
+    "incomeRange": [
+      385000,
+      620000
+    ],
     "medianIncome": 495000,
     "effectiveTaxRate": 0.42,
     "economicOutputCategory": "Healthcare",
@@ -354,7 +450,10 @@
   {
     "role": "Mental Health Counselor",
     "category": "Healthcare",
-    "incomeRange": [72000, 115000],
+    "incomeRange": [
+      72000,
+      115000
+    ],
     "medianIncome": 92000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Healthcare",
@@ -365,7 +464,10 @@
   {
     "role": "Physician Assistant",
     "category": "Healthcare",
-    "incomeRange": [145000, 225000],
+    "incomeRange": [
+      145000,
+      225000
+    ],
     "medianIncome": 185000,
     "effectiveTaxRate": 0.35,
     "economicOutputCategory": "Healthcare",
@@ -376,7 +478,10 @@
   {
     "role": "Pharmacy Technician",
     "category": "Healthcare",
-    "incomeRange": [55000, 82000],
+    "incomeRange": [
+      55000,
+      82000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Healthcare",
@@ -387,7 +492,10 @@
   {
     "role": "Medical Lab Technician",
     "category": "Healthcare",
-    "incomeRange": [68000, 105000],
+    "incomeRange": [
+      68000,
+      105000
+    ],
     "medianIncome": 85000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Healthcare",
@@ -398,9 +506,12 @@
   {
     "role": "Home Health Aide",
     "category": "Healthcare",
-    "incomeRange": [48000, 72000],
+    "incomeRange": [
+      48000,
+      72000
+    ],
     "medianIncome": 58000,
-    "effectiveTaxRate": 0.20,
+    "effectiveTaxRate": 0.2,
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.48,
     "consumerProfile": "essential-heavy",
@@ -409,7 +520,10 @@
   {
     "role": "Paramedic",
     "category": "Healthcare",
-    "incomeRange": [82000, 130000],
+    "incomeRange": [
+      82000,
+      130000
+    ],
     "medianIncome": 105000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Healthcare",
@@ -420,7 +534,10 @@
   {
     "role": "Physical Therapist",
     "category": "Healthcare",
-    "incomeRange": [105000, 165000],
+    "incomeRange": [
+      105000,
+      165000
+    ],
     "medianIncome": 135000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Healthcare",
@@ -431,7 +548,10 @@
   {
     "role": "Psychiatric Nurse Practitioner",
     "category": "Healthcare",
-    "incomeRange": [155000, 240000],
+    "incomeRange": [
+      155000,
+      240000
+    ],
     "medianIncome": 195000,
     "effectiveTaxRate": 0.35,
     "economicOutputCategory": "Healthcare",
@@ -442,20 +562,26 @@
   {
     "role": "Public Health Epidemiologist",
     "category": "Healthcare",
-    "incomeRange": [98000, 155000],
+    "incomeRange": [
+      98000,
+      155000
+    ],
     "medianIncome": 125000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Healthcare",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Alameda County Public Health. Post-pandemic permanent investment in disease surveillance."
   },
   {
     "role": "Dental Hygienist",
     "category": "Healthcare",
-    "incomeRange": [88000, 135000],
+    "incomeRange": [
+      88000,
+      135000
+    ],
     "medianIncome": 112000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.32,
     "consumerProfile": "moderate",
@@ -464,7 +590,10 @@
   {
     "role": "K-8 Teacher",
     "category": "Education",
-    "incomeRange": [72000, 115000],
+    "incomeRange": [
+      72000,
+      115000
+    ],
     "medianIncome": 92000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Education",
@@ -475,7 +604,10 @@
   {
     "role": "High School Teacher",
     "category": "Education",
-    "incomeRange": [75000, 125000],
+    "incomeRange": [
+      75000,
+      125000
+    ],
     "medianIncome": 98000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Education",
@@ -486,7 +618,10 @@
   {
     "role": "School Principal",
     "category": "Education",
-    "incomeRange": [125000, 195000],
+    "incomeRange": [
+      125000,
+      195000
+    ],
     "medianIncome": 158000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Education",
@@ -497,18 +632,24 @@
   {
     "role": "ESL Instructor",
     "category": "Education",
-    "incomeRange": [62000, 98000],
+    "incomeRange": [
+      62000,
+      98000
+    ],
     "medianIncome": 78000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Education",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Adult education and K-12. Oakland's immigrant population diversifying with dynasty-era growth."
   },
   {
     "role": "Youth Literacy Coordinator",
     "category": "Education",
-    "incomeRange": [58000, 88000],
+    "incomeRange": [
+      58000,
+      88000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Education",
@@ -519,7 +660,10 @@
   {
     "role": "Special Education Teacher",
     "category": "Education",
-    "incomeRange": [78000, 125000],
+    "incomeRange": [
+      78000,
+      125000
+    ],
     "medianIncome": 100000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Education",
@@ -530,9 +674,12 @@
   {
     "role": "Community College Professor",
     "category": "Education",
-    "incomeRange": [88000, 145000],
+    "incomeRange": [
+      88000,
+      145000
+    ],
     "medianIncome": 115000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.32,
     "consumerProfile": "moderate",
@@ -541,7 +688,10 @@
   {
     "role": "School Counselor",
     "category": "Education",
-    "incomeRange": [72000, 112000],
+    "incomeRange": [
+      72000,
+      112000
+    ],
     "medianIncome": 90000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Education",
@@ -552,18 +702,24 @@
   {
     "role": "After-School Program Director",
     "category": "Education",
-    "incomeRange": [62000, 95000],
+    "incomeRange": [
+      62000,
+      95000
+    ],
     "medianIncome": 78000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Education",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Oakland Fund for Children and Youth supported. STEAM enrichment focus."
   },
   {
     "role": "University Research Faculty",
     "category": "Education",
-    "incomeRange": [125000, 225000],
+    "incomeRange": [
+      125000,
+      225000
+    ],
     "medianIncome": 175000,
     "effectiveTaxRate": 0.34,
     "economicOutputCategory": "Education",
@@ -574,7 +730,10 @@
   {
     "role": "Early Childhood Educator",
     "category": "Education",
-    "incomeRange": [48000, 75000],
+    "incomeRange": [
+      48000,
+      75000
+    ],
     "medianIncome": 60000,
     "effectiveTaxRate": 0.21,
     "economicOutputCategory": "Education",
@@ -585,7 +744,10 @@
   {
     "role": "Instructional Technology Specialist",
     "category": "Education",
-    "incomeRange": [85000, 135000],
+    "incomeRange": [
+      85000,
+      135000
+    ],
     "medianIncome": 108000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Education",
@@ -596,18 +758,24 @@
   {
     "role": "OakMesh Systems Engineer",
     "category": "Tech & Innovation",
-    "incomeRange": [165000, 275000],
+    "incomeRange": [
+      165000,
+      275000
+    ],
     "medianIncome": 218000,
     "effectiveTaxRate": 0.37,
     "economicOutputCategory": "Tech/Innovation",
-    "housingBurdenPct": 0.20,
+    "housingBurdenPct": 0.2,
     "consumerProfile": "high-discretionary",
     "notes": "Oakland's municipal mesh network backbone. Network engineering + ML for traffic optimization."
   },
   {
     "role": "Portside Bio Researcher",
     "category": "Tech & Innovation",
-    "incomeRange": [135000, 235000],
+    "incomeRange": [
+      135000,
+      235000
+    ],
     "medianIncome": 182000,
     "effectiveTaxRate": 0.35,
     "economicOutputCategory": "Tech/Innovation",
@@ -618,9 +786,12 @@
   {
     "role": "AI Safety Researcher (Anthropic)",
     "category": "Tech & Innovation",
-    "incomeRange": [225000, 425000],
+    "incomeRange": [
+      225000,
+      425000
+    ],
     "medianIncome": 320000,
-    "effectiveTaxRate": 0.40,
+    "effectiveTaxRate": 0.4,
     "economicOutputCategory": "Tech/Innovation",
     "housingBurdenPct": 0.15,
     "consumerProfile": "high-discretionary",
@@ -629,7 +800,10 @@
   {
     "role": "Sports Analytics Engineer (Gridiron)",
     "category": "Tech & Innovation",
-    "incomeRange": [145000, 245000],
+    "incomeRange": [
+      145000,
+      245000
+    ],
     "medianIncome": 192000,
     "effectiveTaxRate": 0.35,
     "economicOutputCategory": "Tech/Innovation",
@@ -640,18 +814,24 @@
   {
     "role": "Software Engineer (General)",
     "category": "Tech & Innovation",
-    "incomeRange": [155000, 285000],
+    "incomeRange": [
+      155000,
+      285000
+    ],
     "medianIncome": 215000,
     "effectiveTaxRate": 0.37,
     "economicOutputCategory": "Tech/Innovation",
-    "housingBurdenPct": 0.20,
+    "housingBurdenPct": 0.2,
     "consumerProfile": "high-discretionary",
     "notes": "Oakland tech corridor. Total comp with equity/bonuses significantly higher. Remote-hybrid common."
   },
   {
     "role": "Data Scientist",
     "category": "Tech & Innovation",
-    "incomeRange": [145000, 260000],
+    "incomeRange": [
+      145000,
+      260000
+    ],
     "medianIncome": 198000,
     "effectiveTaxRate": 0.36,
     "economicOutputCategory": "Tech/Innovation",
@@ -662,7 +842,10 @@
   {
     "role": "Cybersecurity Analyst",
     "category": "Tech & Innovation",
-    "incomeRange": [135000, 225000],
+    "incomeRange": [
+      135000,
+      225000
+    ],
     "medianIncome": 178000,
     "effectiveTaxRate": 0.34,
     "economicOutputCategory": "Tech/Innovation",
@@ -673,7 +856,10 @@
   {
     "role": "UX Designer",
     "category": "Tech & Innovation",
-    "incomeRange": [125000, 210000],
+    "incomeRange": [
+      125000,
+      210000
+    ],
     "medianIncome": 165000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Tech/Innovation",
@@ -684,18 +870,24 @@
   {
     "role": "Robotics Engineer",
     "category": "Tech & Innovation",
-    "incomeRange": [155000, 275000],
+    "incomeRange": [
+      155000,
+      275000
+    ],
     "medianIncome": 212000,
     "effectiveTaxRate": 0.37,
     "economicOutputCategory": "Tech/Innovation",
-    "housingBurdenPct": 0.20,
+    "housingBurdenPct": 0.2,
     "consumerProfile": "high-discretionary",
     "notes": "Port automation, construction robotics, warehouse systems. Hardware + software hybrid skill set."
   },
   {
     "role": "Quantum Computing Researcher",
     "category": "Tech & Innovation",
-    "incomeRange": [195000, 380000],
+    "incomeRange": [
+      195000,
+      380000
+    ],
     "medianIncome": 285000,
     "effectiveTaxRate": 0.39,
     "economicOutputCategory": "Tech/Innovation",
@@ -706,7 +898,10 @@
   {
     "role": "Biotech Lab Manager",
     "category": "Tech & Innovation",
-    "incomeRange": [115000, 180000],
+    "incomeRange": [
+      115000,
+      180000
+    ],
     "medianIncome": 148000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Tech/Innovation",
@@ -717,7 +912,10 @@
   {
     "role": "Taqueria Owner",
     "category": "Small Business",
-    "incomeRange": [55000, 135000],
+    "incomeRange": [
+      55000,
+      135000
+    ],
     "medianIncome": 88000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Small Business",
@@ -728,18 +926,24 @@
   {
     "role": "Barbershop Owner",
     "category": "Small Business",
-    "incomeRange": [52000, 120000],
+    "incomeRange": [
+      52000,
+      120000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Small Business",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Cultural anchor businesses. West Oakland, East Oakland corridors. Chair rental model supplements income."
   },
   {
     "role": "Independent Bookstore Owner",
     "category": "Small Business",
-    "incomeRange": [45000, 98000],
+    "incomeRange": [
+      45000,
+      98000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Small Business",
@@ -750,18 +954,24 @@
   {
     "role": "Bakery Owner",
     "category": "Small Business",
-    "incomeRange": [50000, 125000],
+    "incomeRange": [
+      50000,
+      125000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Small Business",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Artisanal premium in dynasty-era Oakland. Commercial rent pressure significant. Wholesale + retail mix."
   },
   {
     "role": "Corner Store / Bodega Owner",
     "category": "Small Business",
-    "incomeRange": [42000, 95000],
+    "incomeRange": [
+      42000,
+      95000
+    ],
     "medianIncome": 65000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Small Business",
@@ -772,7 +982,10 @@
   {
     "role": "Florist / Plant Shop Owner",
     "category": "Small Business",
-    "incomeRange": [45000, 105000],
+    "incomeRange": [
+      45000,
+      105000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Small Business",
@@ -783,7 +996,10 @@
   {
     "role": "Auto Repair Shop Owner",
     "category": "Small Business",
-    "incomeRange": [62000, 145000],
+    "incomeRange": [
+      62000,
+      145000
+    ],
     "medianIncome": 98000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Small Business",
@@ -794,7 +1010,10 @@
   {
     "role": "Laundromat Owner",
     "category": "Small Business",
-    "incomeRange": [48000, 110000],
+    "incomeRange": [
+      48000,
+      110000
+    ],
     "medianIncome": 75000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Small Business",
@@ -805,7 +1024,10 @@
   {
     "role": "Nail Salon Owner",
     "category": "Small Business",
-    "incomeRange": [48000, 115000],
+    "incomeRange": [
+      48000,
+      115000
+    ],
     "medianIncome": 78000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Small Business",
@@ -816,18 +1038,24 @@
   {
     "role": "Cannabis Dispensary Owner",
     "category": "Small Business",
-    "incomeRange": [65000, 195000],
+    "incomeRange": [
+      65000,
+      195000
+    ],
     "medianIncome": 125000,
     "effectiveTaxRate": 0.35,
     "economicOutputCategory": "Small Business",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Oakland equity program licensees. 280E tax burden still significant despite reforms. High gross, high overhead."
   },
   {
     "role": "Muralist",
     "category": "Creative & Arts",
-    "incomeRange": [42000, 95000],
+    "incomeRange": [
+      42000,
+      95000
+    ],
     "medianIncome": 62000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Creative/Arts",
@@ -838,9 +1066,12 @@
   {
     "role": "Jazz Musician",
     "category": "Creative & Arts",
-    "incomeRange": [35000, 88000],
+    "incomeRange": [
+      35000,
+      88000
+    ],
     "medianIncome": 55000,
-    "effectiveTaxRate": 0.20,
+    "effectiveTaxRate": 0.2,
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.52,
     "consumerProfile": "essential-heavy",
@@ -849,7 +1080,10 @@
   {
     "role": "Hip-Hop Producer",
     "category": "Creative & Arts",
-    "incomeRange": [38000, 185000],
+    "incomeRange": [
+      38000,
+      185000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Creative/Arts",
@@ -860,7 +1094,10 @@
   {
     "role": "Theater Director",
     "category": "Creative & Arts",
-    "incomeRange": [48000, 105000],
+    "incomeRange": [
+      48000,
+      105000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Creative/Arts",
@@ -871,18 +1108,24 @@
   {
     "role": "Graphic Designer (Freelance)",
     "category": "Creative & Arts",
-    "incomeRange": [52000, 125000],
+    "incomeRange": [
+      52000,
+      125000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Creative/Arts",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Brand identity, event design, tech company contracts. Oakland creative economy hub status helps."
   },
   {
     "role": "Documentary Filmmaker",
     "category": "Creative & Arts",
-    "incomeRange": [40000, 115000],
+    "incomeRange": [
+      40000,
+      115000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Creative/Arts",
@@ -893,9 +1136,12 @@
   {
     "role": "Ceramicist / Studio Artist",
     "category": "Creative & Arts",
-    "incomeRange": [35000, 85000],
+    "incomeRange": [
+      35000,
+      85000
+    ],
     "medianIncome": 52000,
-    "effectiveTaxRate": 0.20,
+    "effectiveTaxRate": 0.2,
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.55,
     "consumerProfile": "essential-heavy",
@@ -904,18 +1150,24 @@
   {
     "role": "Dance Choreographer",
     "category": "Creative & Arts",
-    "incomeRange": [38000, 92000],
+    "incomeRange": [
+      38000,
+      92000
+    ],
     "medianIncome": 58000,
     "effectiveTaxRate": 0.21,
     "economicOutputCategory": "Creative/Arts",
-    "housingBurdenPct": 0.50,
+    "housingBurdenPct": 0.5,
     "consumerProfile": "essential-heavy",
     "notes": "Dimensions Dance Theater legacy. AGMA or project-based contracts. Teaching is primary income for most."
   },
   {
     "role": "Podcast Producer",
     "category": "Creative & Arts",
-    "incomeRange": [55000, 135000],
+    "incomeRange": [
+      55000,
+      135000
+    ],
     "medianIncome": 88000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Creative/Arts",
@@ -926,7 +1178,10 @@
   {
     "role": "Tattoo Artist",
     "category": "Creative & Arts",
-    "incomeRange": [48000, 135000],
+    "incomeRange": [
+      48000,
+      135000
+    ],
     "medianIncome": 85000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Creative/Arts",
@@ -937,7 +1192,10 @@
   {
     "role": "Immigration Attorney",
     "category": "Professional",
-    "incomeRange": [105000, 215000],
+    "incomeRange": [
+      105000,
+      215000
+    ],
     "medianIncome": 155000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Professional Services",
@@ -948,18 +1206,24 @@
   {
     "role": "Public Defender",
     "category": "Professional",
-    "incomeRange": [95000, 165000],
+    "incomeRange": [
+      95000,
+      165000
+    ],
     "medianIncome": 128000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Professional Services",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Alameda County Public Defender's Office. Union represented. Step increases with seniority. Heavy caseloads."
   },
   {
     "role": "Architect",
     "category": "Professional",
-    "incomeRange": [115000, 225000],
+    "incomeRange": [
+      115000,
+      225000
+    ],
     "medianIncome": 168000,
     "effectiveTaxRate": 0.34,
     "economicOutputCategory": "Professional Services",
@@ -970,7 +1234,10 @@
   {
     "role": "Accountant / CPA",
     "category": "Professional",
-    "incomeRange": [95000, 175000],
+    "incomeRange": [
+      95000,
+      175000
+    ],
     "medianIncome": 132000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Professional Services",
@@ -981,18 +1248,24 @@
   {
     "role": "Urban Planner",
     "category": "Professional",
-    "incomeRange": [92000, 155000],
+    "incomeRange": [
+      92000,
+      155000
+    ],
     "medianIncome": 122000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Professional Services",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "AICP certified. City of Oakland and private sector. Baylight master plan, transit-oriented development."
   },
   {
     "role": "Civil Rights Attorney",
     "category": "Professional",
-    "incomeRange": [88000, 195000],
+    "incomeRange": [
+      88000,
+      195000
+    ],
     "medianIncome": 135000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Professional Services",
@@ -1003,7 +1276,10 @@
   {
     "role": "Environmental Consultant",
     "category": "Professional",
-    "incomeRange": [98000, 175000],
+    "incomeRange": [
+      98000,
+      175000
+    ],
     "medianIncome": 135000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Professional Services",
@@ -1014,7 +1290,10 @@
   {
     "role": "Structural Engineer",
     "category": "Professional",
-    "incomeRange": [125000, 210000],
+    "incomeRange": [
+      125000,
+      210000
+    ],
     "medianIncome": 168000,
     "effectiveTaxRate": 0.34,
     "economicOutputCategory": "Professional Services",
@@ -1025,7 +1304,10 @@
   {
     "role": "Real Estate Agent",
     "category": "Professional",
-    "incomeRange": [65000, 285000],
+    "incomeRange": [
+      65000,
+      285000
+    ],
     "medianIncome": 145000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Finance/Real Estate",
@@ -1036,9 +1318,12 @@
   {
     "role": "Building Inspector",
     "category": "Government & Civic",
-    "incomeRange": [88000, 140000],
+    "incomeRange": [
+      88000,
+      140000
+    ],
     "medianIncome": 112000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Government/Civic",
     "housingBurdenPct": 0.32,
     "consumerProfile": "moderate",
@@ -1047,7 +1332,10 @@
   {
     "role": "Social Worker",
     "category": "Government & Civic",
-    "incomeRange": [68000, 112000],
+    "incomeRange": [
+      68000,
+      112000
+    ],
     "medianIncome": 88000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Government/Civic",
@@ -1058,7 +1346,10 @@
   {
     "role": "Firefighter",
     "category": "Government & Civic",
-    "incomeRange": [105000, 185000],
+    "incomeRange": [
+      105000,
+      185000
+    ],
     "medianIncome": 148000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Government/Civic",
@@ -1069,7 +1360,10 @@
   {
     "role": "Police Officer",
     "category": "Government & Civic",
-    "incomeRange": [105000, 195000],
+    "incomeRange": [
+      105000,
+      195000
+    ],
     "medianIncome": 152000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Government/Civic",
@@ -1080,18 +1374,24 @@
   {
     "role": "City Council Aide",
     "category": "Government & Civic",
-    "incomeRange": [62000, 98000],
+    "incomeRange": [
+      62000,
+      98000
+    ],
     "medianIncome": 78000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Government/Civic",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Political staff positions. At-will employment. Networking value supplements modest salary."
   },
   {
     "role": "Code Enforcement Officer",
     "category": "Government & Civic",
-    "incomeRange": [72000, 112000],
+    "incomeRange": [
+      72000,
+      112000
+    ],
     "medianIncome": 90000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Government/Civic",
@@ -1102,7 +1402,10 @@
   {
     "role": "Public Librarian",
     "category": "Government & Civic",
-    "incomeRange": [68000, 108000],
+    "incomeRange": [
+      68000,
+      108000
+    ],
     "medianIncome": 86000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Government/Civic",
@@ -1113,18 +1416,24 @@
   {
     "role": "Parks & Recreation Director",
     "category": "Government & Civic",
-    "incomeRange": [95000, 155000],
+    "incomeRange": [
+      95000,
+      155000
+    ],
     "medianIncome": 125000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Government/Civic",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Oakland Parks Dept. Climate-resilient green space expansion. Baylight park district management."
   },
   {
     "role": "911 Dispatcher",
     "category": "Government & Civic",
-    "incomeRange": [72000, 115000],
+    "incomeRange": [
+      72000,
+      115000
+    ],
     "medianIncome": 92000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Government/Civic",
@@ -1135,18 +1444,24 @@
   {
     "role": "Municipal Court Clerk",
     "category": "Government & Civic",
-    "incomeRange": [62000, 95000],
+    "incomeRange": [
+      62000,
+      95000
+    ],
     "medianIncome": 78000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Government/Civic",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Alameda County Superior Court. Union represented. Stable employment, CalPERS pension."
   },
   {
     "role": "Community Organizer",
     "category": "Faith & Community",
-    "incomeRange": [48000, 82000],
+    "incomeRange": [
+      48000,
+      82000
+    ],
     "medianIncome": 62000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1157,7 +1472,10 @@
   {
     "role": "Food Bank Coordinator",
     "category": "Faith & Community",
-    "incomeRange": [52000, 85000],
+    "incomeRange": [
+      52000,
+      85000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1168,7 +1486,10 @@
   {
     "role": "Tenant Rights Advocate",
     "category": "Faith & Community",
-    "incomeRange": [52000, 88000],
+    "incomeRange": [
+      52000,
+      88000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1179,9 +1500,12 @@
   {
     "role": "Youth Pastor",
     "category": "Faith & Community",
-    "incomeRange": [42000, 72000],
+    "incomeRange": [
+      42000,
+      72000
+    ],
     "medianIncome": 55000,
-    "effectiveTaxRate": 0.20,
+    "effectiveTaxRate": 0.2,
     "economicOutputCategory": "Nonprofit/Community",
     "housingBurdenPct": 0.52,
     "consumerProfile": "essential-heavy",
@@ -1190,18 +1514,24 @@
   {
     "role": "Senior Pastor / Faith Leader",
     "category": "Faith & Community",
-    "incomeRange": [55000, 135000],
+    "incomeRange": [
+      55000,
+      135000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Nonprofit/Community",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Extreme variance by congregation size. Housing allowance + benefits. Political influence exceeds salary."
   },
   {
     "role": "Mutual Aid Network Coordinator",
     "category": "Faith & Community",
-    "incomeRange": [38000, 68000],
+    "incomeRange": [
+      38000,
+      68000
+    ],
     "medianIncome": 52000,
     "effectiveTaxRate": 0.19,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1212,9 +1542,12 @@
   {
     "role": "Nonprofit Executive Director",
     "category": "Faith & Community",
-    "incomeRange": [82000, 165000],
+    "incomeRange": [
+      82000,
+      165000
+    ],
     "medianIncome": 118000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Nonprofit/Community",
     "housingBurdenPct": 0.32,
     "consumerProfile": "moderate",
@@ -1223,7 +1556,10 @@
   {
     "role": "Interfaith Dialogue Facilitator",
     "category": "Faith & Community",
-    "incomeRange": [45000, 78000],
+    "incomeRange": [
+      45000,
+      78000
+    ],
     "medianIncome": 60000,
     "effectiveTaxRate": 0.21,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1234,7 +1570,10 @@
   {
     "role": "Immigrant Rights Organizer",
     "category": "Faith & Community",
-    "incomeRange": [48000, 82000],
+    "incomeRange": [
+      48000,
+      82000
+    ],
     "medianIncome": 63000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1245,7 +1584,10 @@
   {
     "role": "Climate Adaptation Planner",
     "category": "2041-Specific",
-    "incomeRange": [105000, 175000],
+    "incomeRange": [
+      105000,
+      175000
+    ],
     "medianIncome": 140000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Government/Civic",
@@ -1256,7 +1598,10 @@
   {
     "role": "Drone Fleet Operator",
     "category": "2041-Specific",
-    "incomeRange": [82000, 140000],
+    "incomeRange": [
+      82000,
+      140000
+    ],
     "medianIncome": 110000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Tech/Innovation",
@@ -1267,7 +1612,10 @@
   {
     "role": "Drone Fleet Manager",
     "category": "2041-Specific",
-    "incomeRange": [115000, 185000],
+    "incomeRange": [
+      115000,
+      185000
+    ],
     "medianIncome": 148000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Tech/Innovation",
@@ -1278,18 +1626,24 @@
   {
     "role": "Vertical Farm Technician",
     "category": "2041-Specific",
-    "incomeRange": [62000, 98000],
+    "incomeRange": [
+      62000,
+      98000
+    ],
     "medianIncome": 78000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Food/Hospitality",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "West Oakland and Jack London vertical farms. Hydroponics, LED grow systems, automated harvesting."
   },
   {
     "role": "Vertical Farm Director",
     "category": "2041-Specific",
-    "incomeRange": [105000, 175000],
+    "incomeRange": [
+      105000,
+      175000
+    ],
     "medianIncome": 138000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Food/Hospitality",
@@ -1300,7 +1654,10 @@
   {
     "role": "Gene Therapy Researcher",
     "category": "2041-Specific",
-    "incomeRange": [155000, 295000],
+    "incomeRange": [
+      155000,
+      295000
+    ],
     "medianIncome": 225000,
     "effectiveTaxRate": 0.37,
     "economicOutputCategory": "Healthcare",
@@ -1311,7 +1668,10 @@
   {
     "role": "Gene Therapy Clinician",
     "category": "2041-Specific",
-    "incomeRange": [185000, 350000],
+    "incomeRange": [
+      185000,
+      350000
+    ],
     "medianIncome": 265000,
     "effectiveTaxRate": 0.39,
     "economicOutputCategory": "Healthcare",
@@ -1322,7 +1682,10 @@
   {
     "role": "Carbon Capture Technician",
     "category": "2041-Specific",
-    "incomeRange": [75000, 120000],
+    "incomeRange": [
+      75000,
+      120000
+    ],
     "medianIncome": 96000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -1333,7 +1696,10 @@
   {
     "role": "Autonomous Vehicle Safety Engineer",
     "category": "2041-Specific",
-    "incomeRange": [155000, 265000],
+    "incomeRange": [
+      155000,
+      265000
+    ],
     "medianIncome": 208000,
     "effectiveTaxRate": 0.36,
     "economicOutputCategory": "Tech/Innovation",
@@ -1344,7 +1710,10 @@
   {
     "role": "Smart Building Systems Manager",
     "category": "2041-Specific",
-    "incomeRange": [98000, 165000],
+    "incomeRange": [
+      98000,
+      165000
+    ],
     "medianIncome": 130000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Tech/Innovation",
@@ -1355,7 +1724,10 @@
   {
     "role": "Synthetic Biology Technician",
     "category": "2041-Specific",
-    "incomeRange": [78000, 125000],
+    "incomeRange": [
+      78000,
+      125000
+    ],
     "medianIncome": 100000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Tech/Innovation",
@@ -1366,7 +1738,10 @@
   {
     "role": "Digital Twin Engineer",
     "category": "2041-Specific",
-    "incomeRange": [135000, 235000],
+    "incomeRange": [
+      135000,
+      235000
+    ],
     "medianIncome": 182000,
     "effectiveTaxRate": 0.35,
     "economicOutputCategory": "Tech/Innovation",
@@ -1377,7 +1752,10 @@
   {
     "role": "Space Logistics Coordinator",
     "category": "2041-Specific",
-    "incomeRange": [105000, 185000],
+    "incomeRange": [
+      105000,
+      185000
+    ],
     "medianIncome": 145000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Port/Industrial",
@@ -1388,7 +1766,10 @@
   {
     "role": "Neural Interface Technician",
     "category": "2041-Specific",
-    "incomeRange": [105000, 185000],
+    "incomeRange": [
+      105000,
+      185000
+    ],
     "medianIncome": 142000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Healthcare",
@@ -1399,9 +1780,12 @@
   {
     "role": "Electrician",
     "category": "Trades",
-    "incomeRange": [88000, 145000],
+    "incomeRange": [
+      88000,
+      145000
+    ],
     "medianIncome": 118000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.31,
     "consumerProfile": "moderate",
@@ -1410,9 +1794,12 @@
   {
     "role": "Plumber",
     "category": "Trades",
-    "incomeRange": [85000, 140000],
+    "incomeRange": [
+      85000,
+      140000
+    ],
     "medianIncome": 112000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.32,
     "consumerProfile": "moderate",
@@ -1421,7 +1808,10 @@
   {
     "role": "Solar Installer",
     "category": "Trades",
-    "incomeRange": [72000, 115000],
+    "incomeRange": [
+      72000,
+      115000
+    ],
     "medianIncome": 92000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Trades/Construction",
@@ -1432,7 +1822,10 @@
   {
     "role": "Elevator Mechanic",
     "category": "Trades",
-    "incomeRange": [105000, 175000],
+    "incomeRange": [
+      105000,
+      175000
+    ],
     "medianIncome": 142000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Trades/Construction",
@@ -1443,7 +1836,10 @@
   {
     "role": "HVAC Technician",
     "category": "Trades",
-    "incomeRange": [78000, 130000],
+    "incomeRange": [
+      78000,
+      130000
+    ],
     "medianIncome": 105000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Trades/Construction",
@@ -1454,7 +1850,10 @@
   {
     "role": "Welder",
     "category": "Trades",
-    "incomeRange": [75000, 125000],
+    "incomeRange": [
+      75000,
+      125000
+    ],
     "medianIncome": 100000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Trades/Construction",
@@ -1465,7 +1864,10 @@
   {
     "role": "Roofer",
     "category": "Trades",
-    "incomeRange": [68000, 112000],
+    "incomeRange": [
+      68000,
+      112000
+    ],
     "medianIncome": 88000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Trades/Construction",
@@ -1476,18 +1878,24 @@
   {
     "role": "Locksmith",
     "category": "Trades",
-    "incomeRange": [62000, 105000],
+    "incomeRange": [
+      62000,
+      105000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Trades/Construction",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Smart lock and biometric access systems require updated training. Emergency callout premium."
   },
   {
     "role": "Sheet Metal Worker",
     "category": "Trades",
-    "incomeRange": [82000, 135000],
+    "incomeRange": [
+      82000,
+      135000
+    ],
     "medianIncome": 108000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Trades/Construction",
@@ -1498,9 +1906,12 @@
   {
     "role": "Millwright",
     "category": "Trades",
-    "incomeRange": [88000, 145000],
+    "incomeRange": [
+      88000,
+      145000
+    ],
     "medianIncome": 118000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.31,
     "consumerProfile": "moderate",
@@ -1509,18 +1920,24 @@
   {
     "role": "Painter (Commercial/Industrial)",
     "category": "Trades",
-    "incomeRange": [62000, 100000],
+    "incomeRange": [
+      62000,
+      100000
+    ],
     "medianIncome": 80000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Trades/Construction",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "IUPAT District Council 16. Lead abatement certification adds premium. New construction + recoating."
   },
   {
     "role": "Sushi Chef",
     "category": "Food & Culture",
-    "incomeRange": [58000, 125000],
+    "incomeRange": [
+      58000,
+      125000
+    ],
     "medianIncome": 85000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Food/Hospitality",
@@ -1531,18 +1948,24 @@
   {
     "role": "BBQ Pitmaster",
     "category": "Food & Culture",
-    "incomeRange": [52000, 135000],
+    "incomeRange": [
+      52000,
+      135000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Food/Hospitality",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Oakland BBQ tradition. Owner-operators at higher end. Catering + restaurant revenue. Competition circuit fame adds premium."
   },
   {
     "role": "Coffee Roaster",
     "category": "Food & Culture",
-    "incomeRange": [52000, 110000],
+    "incomeRange": [
+      52000,
+      110000
+    ],
     "medianIncome": 75000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Food/Hospitality",
@@ -1553,7 +1976,10 @@
   {
     "role": "Brewmaster",
     "category": "Food & Culture",
-    "incomeRange": [62000, 130000],
+    "incomeRange": [
+      62000,
+      130000
+    ],
     "medianIncome": 92000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Food/Hospitality",
@@ -1564,18 +1990,24 @@
   {
     "role": "Head Chef / Executive Chef",
     "category": "Food & Culture",
-    "incomeRange": [82000, 175000],
+    "incomeRange": [
+      82000,
+      175000
+    ],
     "medianIncome": 120000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Food/Hospitality",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Fine dining through casual concepts. Baylight restaurant row creates new venues. Michelin-adjacent Oakland scene."
   },
   {
     "role": "Line Cook",
     "category": "Food & Culture",
-    "incomeRange": [42000, 65000],
+    "incomeRange": [
+      42000,
+      65000
+    ],
     "medianIncome": 52000,
     "effectiveTaxRate": 0.19,
     "economicOutputCategory": "Food/Hospitality",
@@ -1586,7 +2018,10 @@
   {
     "role": "Sommelier",
     "category": "Food & Culture",
-    "incomeRange": [62000, 135000],
+    "incomeRange": [
+      62000,
+      135000
+    ],
     "medianIncome": 92000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Food/Hospitality",
@@ -1597,7 +2032,10 @@
   {
     "role": "Food Truck Owner",
     "category": "Food & Culture",
-    "incomeRange": [45000, 120000],
+    "incomeRange": [
+      45000,
+      120000
+    ],
     "medianIncome": 75000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Food/Hospitality",
@@ -1608,7 +2046,10 @@
   {
     "role": "Pastry Chef",
     "category": "Food & Culture",
-    "incomeRange": [55000, 110000],
+    "incomeRange": [
+      55000,
+      110000
+    ],
     "medianIncome": 78000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Food/Hospitality",
@@ -1619,7 +2060,10 @@
   {
     "role": "Ethiopian / Eritrean Restaurant Owner",
     "category": "Food & Culture",
-    "incomeRange": [52000, 130000],
+    "incomeRange": [
+      52000,
+      130000
+    ],
     "medianIncome": 85000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Food/Hospitality",
@@ -1630,7 +2074,10 @@
   {
     "role": "Distiller",
     "category": "Food & Culture",
-    "incomeRange": [58000, 125000],
+    "incomeRange": [
+      58000,
+      125000
+    ],
     "medianIncome": 88000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Food/Hospitality",
@@ -1641,7 +2088,10 @@
   {
     "role": "Homeless Outreach Worker",
     "category": "The Vulnerable",
-    "incomeRange": [52000, 85000],
+    "incomeRange": [
+      52000,
+      85000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1652,7 +2102,10 @@
   {
     "role": "Domestic Violence Shelter Counselor",
     "category": "The Vulnerable",
-    "incomeRange": [52000, 88000],
+    "incomeRange": [
+      52000,
+      88000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1663,7 +2116,10 @@
   {
     "role": "Reentry Counselor",
     "category": "The Vulnerable",
-    "incomeRange": [52000, 88000],
+    "incomeRange": [
+      52000,
+      88000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1674,7 +2130,10 @@
   {
     "role": "Substance Abuse Counselor",
     "category": "The Vulnerable",
-    "incomeRange": [55000, 92000],
+    "incomeRange": [
+      55000,
+      92000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Healthcare",
@@ -1685,7 +2144,10 @@
   {
     "role": "Crisis Intervention Specialist",
     "category": "The Vulnerable",
-    "incomeRange": [58000, 95000],
+    "incomeRange": [
+      58000,
+      95000
+    ],
     "medianIncome": 75000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1696,18 +2158,24 @@
   {
     "role": "Shelter Operations Manager",
     "category": "The Vulnerable",
-    "incomeRange": [62000, 105000],
+    "incomeRange": [
+      62000,
+      105000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Nonprofit/Community",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Manages transitional housing sites. Facilities + case management oversight. City and county contracts."
   },
   {
     "role": "Harm Reduction Specialist",
     "category": "The Vulnerable",
-    "incomeRange": [48000, 82000],
+    "incomeRange": [
+      48000,
+      82000
+    ],
     "medianIncome": 63000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Healthcare",
@@ -1718,7 +2186,10 @@
   {
     "role": "Disability Rights Advocate",
     "category": "The Vulnerable",
-    "incomeRange": [55000, 95000],
+    "incomeRange": [
+      55000,
+      95000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1729,7 +2200,10 @@
   {
     "role": "Trafficking Survivor Advocate",
     "category": "The Vulnerable",
-    "incomeRange": [48000, 82000],
+    "incomeRange": [
+      48000,
+      82000
+    ],
     "medianIncome": 63000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1740,7 +2214,10 @@
   {
     "role": "Veterans Services Coordinator",
     "category": "The Vulnerable",
-    "incomeRange": [58000, 95000],
+    "incomeRange": [
+      58000,
+      95000
+    ],
     "medianIncome": 75000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1751,7 +2228,10 @@
   {
     "role": "Elder Abuse Prevention Specialist",
     "category": "The Vulnerable",
-    "incomeRange": [55000, 92000],
+    "incomeRange": [
+      55000,
+      92000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Nonprofit/Community",
@@ -1762,7 +2242,10 @@
   {
     "role": "Street Medicine Physician",
     "category": "The Vulnerable",
-    "incomeRange": [175000, 285000],
+    "incomeRange": [
+      175000,
+      285000
+    ],
     "medianIncome": 225000,
     "effectiveTaxRate": 0.37,
     "economicOutputCategory": "Healthcare",
@@ -1773,7 +2256,10 @@
   {
     "role": "Property Manager",
     "category": "Professional",
-    "incomeRange": [72000, 135000],
+    "incomeRange": [
+      72000,
+      135000
+    ],
     "medianIncome": 98000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Finance/Real Estate",
@@ -1784,7 +2270,10 @@
   {
     "role": "Bank Branch Manager",
     "category": "Professional",
-    "incomeRange": [82000, 140000],
+    "incomeRange": [
+      82000,
+      140000
+    ],
     "medianIncome": 108000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Finance/Real Estate",
@@ -1795,7 +2284,10 @@
   {
     "role": "Insurance Agent",
     "category": "Professional",
-    "incomeRange": [65000, 155000],
+    "incomeRange": [
+      65000,
+      155000
+    ],
     "medianIncome": 105000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Finance/Real Estate",
@@ -1806,7 +2298,10 @@
   {
     "role": "Financial Planner",
     "category": "Professional",
-    "incomeRange": [95000, 225000],
+    "incomeRange": [
+      95000,
+      225000
+    ],
     "medianIncome": 155000,
     "effectiveTaxRate": 0.33,
     "economicOutputCategory": "Finance/Real Estate",
@@ -1817,18 +2312,24 @@
   {
     "role": "Mortgage Loan Officer",
     "category": "Professional",
-    "incomeRange": [72000, 195000],
+    "incomeRange": [
+      72000,
+      195000
+    ],
     "medianIncome": 125000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Finance/Real Estate",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Baylight condo sales and Oakland homeownership programs. Commission-heavy. NMLS licensed."
   },
   {
     "role": "Veterinarian",
     "category": "Professional",
-    "incomeRange": [125000, 215000],
+    "incomeRange": [
+      125000,
+      215000
+    ],
     "medianIncome": 168000,
     "effectiveTaxRate": 0.34,
     "economicOutputCategory": "Professional Services",
@@ -1839,7 +2340,10 @@
   {
     "role": "Journalist / Reporter",
     "category": "Creative & Arts",
-    "incomeRange": [52000, 105000],
+    "incomeRange": [
+      52000,
+      105000
+    ],
     "medianIncome": 75000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Creative/Arts",
@@ -1850,7 +2354,10 @@
   {
     "role": "Radio DJ / Media Host",
     "category": "Creative & Arts",
-    "incomeRange": [45000, 105000],
+    "incomeRange": [
+      45000,
+      105000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Creative/Arts",
@@ -1861,7 +2368,10 @@
   {
     "role": "Museum Curator",
     "category": "Creative & Arts",
-    "incomeRange": [68000, 125000],
+    "incomeRange": [
+      68000,
+      125000
+    ],
     "medianIncome": 92000,
     "effectiveTaxRate": 0.27,
     "economicOutputCategory": "Creative/Arts",
@@ -1872,7 +2382,10 @@
   {
     "role": "Personal Trainer / Fitness Instructor",
     "category": "Small Business",
-    "incomeRange": [42000, 98000],
+    "incomeRange": [
+      42000,
+      98000
+    ],
     "medianIncome": 62000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Small Business",
@@ -1883,7 +2396,10 @@
   {
     "role": "Childcare Provider / Daycare Owner",
     "category": "Small Business",
-    "incomeRange": [42000, 88000],
+    "incomeRange": [
+      42000,
+      88000
+    ],
     "medianIncome": 62000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Small Business",
@@ -1894,9 +2410,12 @@
   {
     "role": "Dog Walker / Pet Sitter (Business Owner)",
     "category": "Small Business",
-    "incomeRange": [38000, 78000],
+    "incomeRange": [
+      38000,
+      78000
+    ],
     "medianIncome": 55000,
-    "effectiveTaxRate": 0.20,
+    "effectiveTaxRate": 0.2,
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.52,
     "consumerProfile": "essential-heavy",
@@ -1905,7 +2424,10 @@
   {
     "role": "Cleaning Service Owner",
     "category": "Small Business",
-    "incomeRange": [42000, 95000],
+    "incomeRange": [
+      42000,
+      95000
+    ],
     "medianIncome": 65000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Small Business",
@@ -1916,7 +2438,10 @@
   {
     "role": "Catering Business Owner",
     "category": "Food & Culture",
-    "incomeRange": [52000, 140000],
+    "incomeRange": [
+      52000,
+      140000
+    ],
     "medianIncome": 88000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Food/Hospitality",
@@ -1927,7 +2452,10 @@
   {
     "role": "Acupuncturist / Traditional Medicine Practitioner",
     "category": "Healthcare",
-    "incomeRange": [62000, 120000],
+    "incomeRange": [
+      62000,
+      120000
+    ],
     "medianIncome": 85000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Healthcare",
@@ -1938,40 +2466,52 @@
   {
     "role": "Midwife",
     "category": "Healthcare",
-    "incomeRange": [95000, 155000],
+    "incomeRange": [
+      95000,
+      155000
+    ],
     "medianIncome": 125000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Healthcare",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "CNM certified. Birth center and home birth practice. Maternal health equity focus in Oakland."
   },
   {
     "role": "Occupational Therapist",
     "category": "Healthcare",
-    "incomeRange": [98000, 155000],
+    "incomeRange": [
+      98000,
+      155000
+    ],
     "medianIncome": 125000,
     "effectiveTaxRate": 0.31,
     "economicOutputCategory": "Healthcare",
-    "housingBurdenPct": 0.30,
+    "housingBurdenPct": 0.3,
     "consumerProfile": "moderate",
     "notes": "Pediatric and adult rehab. School-based and clinical settings. Assistive technology integration."
   },
   {
     "role": "Sanitation Worker",
     "category": "Government & Civic",
-    "incomeRange": [62000, 98000],
+    "incomeRange": [
+      62000,
+      98000
+    ],
     "medianIncome": 78000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Government/Civic",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "Waste Management and city contracts. Composting and zero-waste sorting. Teamsters represented."
   },
   {
     "role": "Animal Control Officer",
     "category": "Government & Civic",
-    "incomeRange": [58000, 88000],
+    "incomeRange": [
+      58000,
+      88000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Government/Civic",
@@ -1982,7 +2522,10 @@
   {
     "role": "Probation Officer",
     "category": "Government & Civic",
-    "incomeRange": [78000, 125000],
+    "incomeRange": [
+      78000,
+      125000
+    ],
     "medianIncome": 100000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Government/Civic",
@@ -1993,7 +2536,10 @@
   {
     "role": "Affordable Housing Developer",
     "category": "Professional",
-    "incomeRange": [95000, 175000],
+    "incomeRange": [
+      95000,
+      175000
+    ],
     "medianIncome": 132000,
     "effectiveTaxRate": 0.32,
     "economicOutputCategory": "Finance/Real Estate",
@@ -2004,7 +2550,10 @@
   {
     "role": "Labor Organizer",
     "category": "Faith & Community",
-    "incomeRange": [52000, 88000],
+    "incomeRange": [
+      52000,
+      88000
+    ],
     "medianIncome": 68000,
     "effectiveTaxRate": 0.23,
     "economicOutputCategory": "Nonprofit/Community",
@@ -2015,7 +2564,10 @@
   {
     "role": "Environmental Justice Advocate",
     "category": "Faith & Community",
-    "incomeRange": [52000, 92000],
+    "incomeRange": [
+      52000,
+      92000
+    ],
     "medianIncome": 70000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Nonprofit/Community",
@@ -2026,7 +2578,10 @@
   {
     "role": "Commercial Fisherman",
     "category": "Port & Labor",
-    "incomeRange": [48000, 105000],
+    "incomeRange": [
+      48000,
+      105000
+    ],
     "medianIncome": 72000,
     "effectiveTaxRate": 0.24,
     "economicOutputCategory": "Port/Industrial",
@@ -2037,9 +2592,12 @@
   {
     "role": "Marine Biologist (Applied)",
     "category": "2041-Specific",
-    "incomeRange": [85000, 145000],
+    "incomeRange": [
+      85000,
+      145000
+    ],
     "medianIncome": 112000,
-    "effectiveTaxRate": 0.30,
+    "effectiveTaxRate": 0.3,
     "economicOutputCategory": "Tech/Innovation",
     "housingBurdenPct": 0.32,
     "consumerProfile": "moderate",
@@ -2048,7 +2606,10 @@
   {
     "role": "3D Printing Technician",
     "category": "2041-Specific",
-    "incomeRange": [68000, 110000],
+    "incomeRange": [
+      68000,
+      110000
+    ],
     "medianIncome": 88000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Tech/Innovation",
@@ -2059,7 +2620,10 @@
   {
     "role": "Urban Farmer",
     "category": "Food & Culture",
-    "incomeRange": [38000, 72000],
+    "incomeRange": [
+      38000,
+      72000
+    ],
     "medianIncome": 52000,
     "effectiveTaxRate": 0.19,
     "economicOutputCategory": "Food/Hospitality",
@@ -2070,7 +2634,10 @@
   {
     "role": "Doula",
     "category": "Healthcare",
-    "incomeRange": [45000, 88000],
+    "incomeRange": [
+      45000,
+      88000
+    ],
     "medianIncome": 62000,
     "effectiveTaxRate": 0.22,
     "economicOutputCategory": "Healthcare",
@@ -2081,18 +2648,24 @@
   {
     "role": "Sign Language Interpreter",
     "category": "Professional",
-    "incomeRange": [62000, 105000],
+    "incomeRange": [
+      62000,
+      105000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Professional Services",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "ASL/English. Court, medical, educational settings. RID certified. Freelance and staff positions."
   },
   {
     "role": "Rideshare / Delivery Driver (Professional)",
     "category": "Transit & Infrastructure",
-    "incomeRange": [38000, 68000],
+    "incomeRange": [
+      38000,
+      68000
+    ],
     "medianIncome": 48000,
     "effectiveTaxRate": 0.18,
     "economicOutputCategory": "Transit/Infrastructure",
@@ -2103,20 +2676,26 @@
   {
     "role": "Bike Mechanic / Bike Shop Owner",
     "category": "Small Business",
-    "incomeRange": [42000, 85000],
+    "incomeRange": [
+      42000,
+      85000
+    ],
     "medianIncome": 58000,
     "effectiveTaxRate": 0.21,
     "economicOutputCategory": "Small Business",
-    "housingBurdenPct": 0.50,
+    "housingBurdenPct": 0.5,
     "consumerProfile": "essential-heavy",
     "notes": "E-bike boom. Oakland's cycling infrastructure investment drives demand. Community bike kitchen roots."
   },
   {
     "role": "Security Guard",
     "category": "Government & Civic",
-    "incomeRange": [45000, 72000],
+    "incomeRange": [
+      45000,
+      72000
+    ],
     "medianIncome": 55000,
-    "effectiveTaxRate": 0.20,
+    "effectiveTaxRate": 0.2,
     "economicOutputCategory": "Government/Civic",
     "housingBurdenPct": 0.52,
     "consumerProfile": "essential-heavy",
@@ -2125,7 +2704,10 @@
   {
     "role": "Hotel Manager",
     "category": "Food & Culture",
-    "incomeRange": [82000, 145000],
+    "incomeRange": [
+      82000,
+      145000
+    ],
     "medianIncome": 110000,
     "effectiveTaxRate": 0.29,
     "economicOutputCategory": "Food/Hospitality",
@@ -2136,7 +2718,10 @@
   {
     "role": "Event Planner",
     "category": "Professional",
-    "incomeRange": [58000, 125000],
+    "incomeRange": [
+      58000,
+      125000
+    ],
     "medianIncome": 85000,
     "effectiveTaxRate": 0.26,
     "economicOutputCategory": "Professional Services",
@@ -2147,7 +2732,10 @@
   {
     "role": "Phlebotomist",
     "category": "Healthcare",
-    "incomeRange": [48000, 72000],
+    "incomeRange": [
+      48000,
+      72000
+    ],
     "medianIncome": 58000,
     "effectiveTaxRate": 0.21,
     "economicOutputCategory": "Healthcare",
@@ -2158,7 +2746,10 @@
   {
     "role": "Funeral Director",
     "category": "Small Business",
-    "incomeRange": [72000, 135000],
+    "incomeRange": [
+      72000,
+      135000
+    ],
     "medianIncome": 98000,
     "effectiveTaxRate": 0.28,
     "economicOutputCategory": "Small Business",
@@ -2169,12 +2760,1527 @@
   {
     "role": "Arborist",
     "category": "Trades",
-    "incomeRange": [62000, 105000],
+    "incomeRange": [
+      62000,
+      105000
+    ],
     "medianIncome": 82000,
     "effectiveTaxRate": 0.25,
     "economicOutputCategory": "Trades/Construction",
-    "housingBurdenPct": 0.40,
+    "housingBurdenPct": 0.4,
     "consumerProfile": "moderate",
     "notes": "ISA certified. Oakland's urban canopy management. Fire-resistant landscaping demand from wildfire risk."
+  },
+  {
+    "role": "Janitor",
+    "category": "Small Business",
+    "incomeRange": [
+      40000,
+      62000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Building services. Night shifts common. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Custodian",
+    "category": "Small Business",
+    "incomeRange": [
+      40000,
+      62000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Building services. Night shifts common. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Server",
+    "category": "Food & Culture",
+    "incomeRange": [
+      40000,
+      68000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Waiter",
+    "category": "Food & Culture",
+    "incomeRange": [
+      40000,
+      68000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Waitress",
+    "category": "Food & Culture",
+    "incomeRange": [
+      40000,
+      68000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Bartender",
+    "category": "Food & Culture",
+    "incomeRange": [
+      45000,
+      78000
+    ],
+    "medianIncome": 58000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Tips carry the band. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Barista",
+    "category": "Food & Culture",
+    "incomeRange": [
+      38000,
+      58000
+    ],
+    "medianIncome": 46000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Counter service. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Dishwasher",
+    "category": "Food & Culture",
+    "incomeRange": [
+      38000,
+      52000
+    ],
+    "medianIncome": 44000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Back-of-house entry job. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Cook",
+    "category": "Food & Culture",
+    "incomeRange": [
+      42000,
+      68000
+    ],
+    "medianIncome": 54000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Kitchen line, one step above line cook. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Prep Cook",
+    "category": "Food & Culture",
+    "incomeRange": [
+      42000,
+      68000
+    ],
+    "medianIncome": 54000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Kitchen line, one step above line cook. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Bakery Worker",
+    "category": "Food & Culture",
+    "incomeRange": [
+      40000,
+      60000
+    ],
+    "medianIncome": 48000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Early shifts. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Sourdough Baker",
+    "category": "Food & Culture",
+    "incomeRange": [
+      45000,
+      72000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Skilled bread work. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Baker",
+    "category": "Food & Culture",
+    "incomeRange": [
+      45000,
+      72000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Skilled bread work. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Food Truck Operator",
+    "category": "Food & Culture",
+    "incomeRange": [
+      45000,
+      120000
+    ],
+    "medianIncome": 75000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Food/Hospitality",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Same band as Food Truck Owner. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Mover",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      42000,
+      66000
+    ],
+    "medianIncome": 52000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Moving crews; physical, seasonal peaks. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Taxi driver",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      40000,
+      68000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Cab Driver",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      40000,
+      68000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Driver",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      40000,
+      68000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Delivery driver",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      38000,
+      66000
+    ],
+    "medianIncome": 48000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Same band as Rideshare / Delivery Driver. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Bus driver",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      68000,
+      105000
+    ],
+    "medianIncome": 85000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Union transit wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "AC Transit Bus Driver",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      68000,
+      105000
+    ],
+    "medianIncome": 85000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Union transit wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Transit Operator (AC Transit)",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      68000,
+      105000
+    ],
+    "medianIncome": 85000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Union transit wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Parking garage manager",
+    "category": "Transit & Infrastructure",
+    "incomeRange": [
+      52000,
+      82000
+    ],
+    "medianIncome": 65000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Transit/Infrastructure",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Facility management. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Mechanic",
+    "category": "Trades",
+    "incomeRange": [
+      62000,
+      105000
+    ],
+    "medianIncome": 80000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Shop mechanic; EV/autonomy certs push the top. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Auto Mechanic",
+    "category": "Trades",
+    "incomeRange": [
+      62000,
+      105000
+    ],
+    "medianIncome": 80000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Shop mechanic; EV/autonomy certs push the top. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Appliance Repair Technician",
+    "category": "Trades",
+    "incomeRange": [
+      55000,
+      90000
+    ],
+    "medianIncome": 70000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Field repair. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Maintenance tech",
+    "category": "Trades",
+    "incomeRange": [
+      52000,
+      85000
+    ],
+    "medianIncome": 66000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Building maintenance; not a software job. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Carpet Installer",
+    "category": "Trades",
+    "incomeRange": [
+      50000,
+      82000
+    ],
+    "medianIncome": 64000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Flooring trade. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Painter",
+    "category": "Trades",
+    "incomeRange": [
+      48000,
+      80000
+    ],
+    "medianIncome": 62000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "House and commercial painting. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Landscaper",
+    "category": "Trades",
+    "incomeRange": [
+      42000,
+      70000
+    ],
+    "medianIncome": 54000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Grounds and gardens. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Licensed Plumber",
+    "category": "Trades",
+    "incomeRange": [
+      88000,
+      145000
+    ],
+    "medianIncome": 115000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Licensed trade, same band as Plumber. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Master Electrician",
+    "category": "Trades",
+    "incomeRange": [
+      105000,
+      170000
+    ],
+    "medianIncome": 135000,
+    "effectiveTaxRate": 0.31,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "high-discretionary",
+    "notes": "Above Electrician. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Roofing Contractor",
+    "category": "Trades",
+    "incomeRange": [
+      78000,
+      135000
+    ],
+    "medianIncome": 100000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Licensed contractor. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Construction laborer",
+    "category": "Construction & Baylight",
+    "incomeRange": [
+      52000,
+      85000
+    ],
+    "medianIncome": 66000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Baylight-era demand keeps the floor up. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Construction worker",
+    "category": "Construction & Baylight",
+    "incomeRange": [
+      52000,
+      85000
+    ],
+    "medianIncome": 66000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Baylight-era demand keeps the floor up. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Construction Foreman",
+    "category": "Construction & Baylight",
+    "incomeRange": [
+      88000,
+      140000
+    ],
+    "medianIncome": 110000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Crew lead. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Carpenter Apprentice",
+    "category": "Construction & Baylight",
+    "incomeRange": [
+      48000,
+      72000
+    ],
+    "medianIncome": 58000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Apprentice wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Stone Mason",
+    "category": "Construction & Baylight",
+    "incomeRange": [
+      72000,
+      115000
+    ],
+    "medianIncome": 90000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Trades/Construction",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Skilled masonry. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Warehouse worker",
+    "category": "Port & Labor",
+    "incomeRange": [
+      45000,
+      72000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Port/Industrial",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Port-adjacent warehousing. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Warehouse Hand",
+    "category": "Port & Labor",
+    "incomeRange": [
+      45000,
+      72000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Port/Industrial",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Port-adjacent warehousing. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Warehouse Supervisor",
+    "category": "Port & Labor",
+    "incomeRange": [
+      68000,
+      105000
+    ],
+    "medianIncome": 84000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Port/Industrial",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Shift supervision. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Port Worker",
+    "category": "Port & Labor",
+    "incomeRange": [
+      62000,
+      105000
+    ],
+    "medianIncome": 80000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Port/Industrial",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "General port labor below longshore. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Nurse aide",
+    "category": "Healthcare",
+    "incomeRange": [
+      46000,
+      70000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "CNA-level care, same band as Home Health Aide. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Nursing Assistant",
+    "category": "Healthcare",
+    "incomeRange": [
+      46000,
+      70000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "CNA-level care, same band as Home Health Aide. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Community Health Worker",
+    "category": "Healthcare",
+    "incomeRange": [
+      52000,
+      82000
+    ],
+    "medianIncome": 65000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Clinic outreach. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Radiologic Technician",
+    "category": "Healthcare",
+    "incomeRange": [
+      82000,
+      125000
+    ],
+    "medianIncome": 100000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Imaging. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Emergency Room Nurse",
+    "category": "Healthcare",
+    "incomeRange": [
+      115000,
+      175000
+    ],
+    "medianIncome": 140000,
+    "effectiveTaxRate": 0.31,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "high-discretionary",
+    "notes": "Hospital RN. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Emergency Room Nurse (Highland Hospital)",
+    "category": "Healthcare",
+    "incomeRange": [
+      115000,
+      175000
+    ],
+    "medianIncome": 140000,
+    "effectiveTaxRate": 0.31,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "high-discretionary",
+    "notes": "Hospital RN. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Registered Nurse",
+    "category": "Healthcare",
+    "incomeRange": [
+      115000,
+      175000
+    ],
+    "medianIncome": 140000,
+    "effectiveTaxRate": 0.31,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "high-discretionary",
+    "notes": "Hospital RN. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Nurse Practitioner",
+    "category": "Healthcare",
+    "incomeRange": [
+      135000,
+      195000
+    ],
+    "medianIncome": 160000,
+    "effectiveTaxRate": 0.31,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "high-discretionary",
+    "notes": "Advanced practice. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Pediatric Nurse Practitioner",
+    "category": "Healthcare",
+    "incomeRange": [
+      135000,
+      195000
+    ],
+    "medianIncome": 160000,
+    "effectiveTaxRate": 0.31,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "high-discretionary",
+    "notes": "Advanced practice. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Mobile Clinic Nurse",
+    "category": "Healthcare",
+    "incomeRange": [
+      135000,
+      195000
+    ],
+    "medianIncome": 160000,
+    "effectiveTaxRate": 0.31,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "high-discretionary",
+    "notes": "Advanced practice. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Pharmacist",
+    "category": "Healthcare",
+    "incomeRange": [
+      135000,
+      185000
+    ],
+    "medianIncome": 158000,
+    "effectiveTaxRate": 0.31,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "high-discretionary",
+    "notes": "Licensed pharmacist. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Medical Social Worker",
+    "category": "Healthcare",
+    "incomeRange": [
+      68000,
+      105000
+    ],
+    "medianIncome": 85000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Hospital social work. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Herbalist",
+    "category": "Healthcare",
+    "incomeRange": [
+      40000,
+      75000
+    ],
+    "medianIncome": 55000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Chinatown and Fruitvale shops. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Acupuncturist",
+    "category": "Healthcare",
+    "incomeRange": [
+      62000,
+      110000
+    ],
+    "medianIncome": 82000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Healthcare",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Licensed practice. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Retail worker",
+    "category": "Small Business",
+    "incomeRange": [
+      38000,
+      56000
+    ],
+    "medianIncome": 45000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Shop floor. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Retail clerk",
+    "category": "Small Business",
+    "incomeRange": [
+      38000,
+      56000
+    ],
+    "medianIncome": 45000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Shop floor. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Cashier",
+    "category": "Small Business",
+    "incomeRange": [
+      38000,
+      56000
+    ],
+    "medianIncome": 45000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Shop floor. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Hair Stylist",
+    "category": "Small Business",
+    "incomeRange": [
+      42000,
+      80000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Chair rental or shop wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Barber",
+    "category": "Small Business",
+    "incomeRange": [
+      42000,
+      80000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Chair rental or shop wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Tailor",
+    "category": "Small Business",
+    "incomeRange": [
+      40000,
+      70000
+    ],
+    "medianIncome": 52000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Alterations and bespoke. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Seamstress",
+    "category": "Small Business",
+    "incomeRange": [
+      40000,
+      70000
+    ],
+    "medianIncome": 52000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Alterations and bespoke. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Bank teller",
+    "category": "Professional",
+    "incomeRange": [
+      42000,
+      62000
+    ],
+    "medianIncome": 50000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Branch teller. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Office worker",
+    "category": "Professional",
+    "incomeRange": [
+      45000,
+      72000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Office administration. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Administrative Assistant",
+    "category": "Professional",
+    "incomeRange": [
+      45000,
+      72000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Office administration. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Receptionist",
+    "category": "Professional",
+    "incomeRange": [
+      45000,
+      72000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Office administration. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Bookkeeper",
+    "category": "Professional",
+    "incomeRange": [
+      55000,
+      85000
+    ],
+    "medianIncome": 68000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Small-firm books. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Junior Accountant",
+    "category": "Professional",
+    "incomeRange": [
+      62000,
+      92000
+    ],
+    "medianIncome": 75000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Entry accounting. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Insurance Adjuster",
+    "category": "Professional",
+    "incomeRange": [
+      68000,
+      105000
+    ],
+    "medianIncome": 85000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Claims. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "IT Support Specialist",
+    "category": "Tech & Innovation",
+    "incomeRange": [
+      65000,
+      100000
+    ],
+    "medianIncome": 80000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Tech/Innovation",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Help desk and endpoint support. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Library Worker",
+    "category": "Education",
+    "incomeRange": [
+      45000,
+      70000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Library assistant. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Librarian",
+    "category": "Education",
+    "incomeRange": [
+      68000,
+      100000
+    ],
+    "medianIncome": 82000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Credentialed librarian. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Teacher",
+    "category": "Education",
+    "incomeRange": [
+      72000,
+      125000
+    ],
+    "medianIncome": 95000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Middle School Teacher",
+    "category": "Education",
+    "incomeRange": [
+      72000,
+      125000
+    ],
+    "medianIncome": 95000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "High School Science Teacher",
+    "category": "Education",
+    "incomeRange": [
+      72000,
+      125000
+    ],
+    "medianIncome": 95000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Oakland Unified Elementary Teacher",
+    "category": "Education",
+    "incomeRange": [
+      72000,
+      125000
+    ],
+    "medianIncome": 95000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "ESL Teacher",
+    "category": "Education",
+    "incomeRange": [
+      72000,
+      125000
+    ],
+    "medianIncome": 95000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Creative Writing Teacher",
+    "category": "Education",
+    "incomeRange": [
+      72000,
+      125000
+    ],
+    "medianIncome": 95000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "GED Program Instructor",
+    "category": "Education",
+    "incomeRange": [
+      72000,
+      125000
+    ],
+    "medianIncome": 95000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "After-school program aide",
+    "category": "Education",
+    "incomeRange": [
+      38000,
+      58000
+    ],
+    "medianIncome": 46000,
+    "effectiveTaxRate": 0.18,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.57,
+    "consumerProfile": "subsistence",
+    "notes": "Part-time-shaped work. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "STEM Program Coordinator",
+    "category": "Education",
+    "incomeRange": [
+      62000,
+      95000
+    ],
+    "medianIncome": 78000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Program coordination. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Youth Counselor",
+    "category": "The Vulnerable",
+    "incomeRange": [
+      52000,
+      85000
+    ],
+    "medianIncome": 66000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Nonprofit/Community",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Youth and family counseling. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Counselor",
+    "category": "The Vulnerable",
+    "incomeRange": [
+      52000,
+      85000
+    ],
+    "medianIncome": 66000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Nonprofit/Community",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Youth and family counseling. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Social Services Caseworker",
+    "category": "The Vulnerable",
+    "incomeRange": [
+      58000,
+      90000
+    ],
+    "medianIncome": 72000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Nonprofit/Community",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "County caseload. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Housing Authority Inspector",
+    "category": "Government & Civic",
+    "incomeRange": [
+      72000,
+      110000
+    ],
+    "medianIncome": 88000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Government/Civic",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Inspections. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "City Building Inspector",
+    "category": "Government & Civic",
+    "incomeRange": [
+      78000,
+      120000
+    ],
+    "medianIncome": 96000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Government/Civic",
+    "housingBurdenPct": 0.35,
+    "consumerProfile": "moderate",
+    "notes": "Permit inspections. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "City Permit Coordinator",
+    "category": "Government & Civic",
+    "incomeRange": [
+      65000,
+      98000
+    ],
+    "medianIncome": 80000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Government/Civic",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Permit desk. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Musician",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Actor",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Actress",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Artist",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Sculptor",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Printmaker",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Glassblower",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Ceramicist",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Photographer",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Street Photographer",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Spoken Word Poet",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Rapper",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "singer",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      38000,
+      90000
+    ],
+    "medianIncome": 56000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Graphic Designer",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      58000,
+      98000
+    ],
+    "medianIncome": 75000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Studio and freelance design. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Sound Designer",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      58000,
+      98000
+    ],
+    "medianIncome": 75000,
+    "effectiveTaxRate": 0.25,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.41,
+    "consumerProfile": "moderate",
+    "notes": "Studio and freelance design. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Freelance Writer",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      45000,
+      95000
+    ],
+    "medianIncome": 65000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Same family as Journalist / Reporter. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Journalist",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      45000,
+      95000
+    ],
+    "medianIncome": 65000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Same family as Journalist / Reporter. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Yoga Instructor",
+    "category": "Small Business",
+    "incomeRange": [
+      42000,
+      98000
+    ],
+    "medianIncome": 62000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Same band as Personal Trainer. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Tai Chi Instructor",
+    "category": "Small Business",
+    "incomeRange": [
+      42000,
+      98000
+    ],
+    "medianIncome": 62000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Same band as Personal Trainer. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+  },
+  {
+    "role": "Fitness Trainer",
+    "category": "Small Business",
+    "incomeRange": [
+      42000,
+      98000
+    ],
+    "medianIncome": 62000,
+    "effectiveTaxRate": 0.22,
+    "economicOutputCategory": "Small Business",
+    "housingBurdenPct": 0.47,
+    "consumerProfile": "essential-heavy",
+    "notes": "Same band as Personal Trainer. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
   }
 ]

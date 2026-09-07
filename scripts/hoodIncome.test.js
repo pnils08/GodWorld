@@ -51,6 +51,7 @@ assert('jobReferencePay_ loaded', typeof jobReferencePay_ === 'function');
 assert('applyUntrackedJobReference_ loaded', typeof applyUntrackedJobReference_ === 'function');
 const CATALOG = require('../data/economic_parameters.json');
 const catMedian = (cat) => { const a = CATALOG.filter(e => e.category === cat).map(e => e.medianIncome).sort((x, y) => x - y); return a[Math.floor(a.length / 2)]; };
+assert('Caterer stays unlisted (the unlisted-role fixture)', !CATALOG.some(e => e.role.toLowerCase() === 'caterer'));
 const roleMedian = (role) => CATALOG.find(e => e.role.toLowerCase() === role.toLowerCase()).medianIncome;
 assert('sectorCategory_ lifted to file scope', typeof sectorCategory_ === 'function');
 
@@ -71,7 +72,7 @@ const I = n => H.indexOf(n);
 const CYCLE = 200, SIM_YEAR = 2043;
 function row(o) {
   const r = new Array(H.length).fill('');
-  const d = { POPID: 'POP-X', First: 'A', Last: 'B', Neighborhood: 'Temescal', RoleType: 'Baker', Status: 'Active', Tier: 4,
+  const d = { POPID: 'POP-X', First: 'A', Last: 'B', Neighborhood: 'Temescal', RoleType: 'Caterer', Status: 'Active', Tier: 4,
     CareerStage: 'mid', YearsInCareer: 8, EducationLevel: 'hs-diploma', LastPromotionCycle: 0, LifeHistory: 'Y1C1 — born',
     ClockMode: 'ENGINE', EconomicProfileKey: 'Bakery Owner', Income: 100000, NetWorth: 10000, WealthLevel: 2, EmployerBizId: 'SELF_EMPLOYED', SkillTags: '', age: 40 };
   Object.assign(d, o);
@@ -105,20 +106,21 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
 {
   assert('exact catalog role = its median', jobReferencePay_('Bakery Owner', '', 'mid', 'P1') === ref(roleMedian('Bakery Owner'), 1.0, 'P1'));
   assert('exact match is case-insensitive', jobReferencePay_('line cook', '', 'mid', 'P1') === ref(roleMedian('Line Cook'), 1.0, 'P1'));
-  assert('unlisted role → its field median (Baker → Food & Culture)', jobReferencePay_('Baker', '', 'mid', 'P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'));
-  assert('senior × 1.3', jobReferencePay_('Baker', '', 'senior', 'P1') === ref(catMedian('Food & Culture'), 1.3, 'P1'));
-  assert('entry-level × 0.75 (old spelling accepted)', jobReferencePay_('Baker', '', 'entry-level', 'P1') === ref(catMedian('Food & Culture'), 0.75, 'P1'));
-  assert('a placed role ignores a stale tag (the C106 janitor priced as a tech worker)', jobReferencePay_('Baker', '2041-Specific', 'mid', 'P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'));
-  assert('janitor → Small Business (the counter-and-building hint)', jobReferencePay_('Janitor', '2041-Specific', 'senior', 'P1') === ref(catMedian('Small Business'), 1.3, 'P1'));
+  assert('unlisted role → its field median (Caterer → Food & Culture)', jobReferencePay_('Caterer', '', 'mid', 'P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'));
+  assert('senior × 1.3', jobReferencePay_('Caterer', '', 'senior', 'P1') === ref(catMedian('Food & Culture'), 1.3, 'P1'));
+  assert('entry-level × 0.75 (old spelling accepted)', jobReferencePay_('Caterer', '', 'entry-level', 'P1') === ref(catMedian('Food & Culture'), 0.75, 'P1'));
+  assert('a placed role ignores a stale tag (the C106 janitor priced as a tech worker)', jobReferencePay_('Caterer', '2041-Specific', 'mid', 'P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'));
+  assert('janitor = the janitor band (listed 2026-09-07), never the tech tag', jobReferencePay_('Janitor', '2041-Specific', 'senior', 'P1') === ref(roleMedian('Janitor'), 1.3, 'P1'));
+  assert('an unlisted counter-and-building job → Small Business via the hint', jobReferencePay_('Groundskeeper', '2041-Specific', 'senior', 'P1') === ref(catMedian('Small Business'), 1.3, 'P1'));
   assert('an unplaceable role prices by its tag', jobReferencePay_('Xyzzy', 'Healthcare', 'mid', 'P1') === ref(catMedian('Healthcare'), 1.0, 'P1'));
   assert('unplaceable, untagged → null (caller keeps its draw)', jobReferencePay_('Xyzzy', '', 'mid', 'P1') === null);
-  assert('the hood is not an input: same job, any street, same number', jobReferencePay_('Baker', '', 'mid', 'P1') === jobReferencePay_('Baker', '', 'mid', 'P1'));
+  assert('the hood is not an input: same job, any street, same number', jobReferencePay_('Caterer', '', 'mid', 'P1') === jobReferencePay_('Caterer', '', 'mid', 'P1'));
   assert('two neighbours differ (seeded jitter)', jobReferencePay_('Line cook', '', 'mid', 'POP-00001') !== jobReferencePay_('Line cook', '', 'mid', 'POP-00002'));
   assert('deterministic per seed', jobReferencePay_('Line cook', '', 'mid', 'POP-00001') === jobReferencePay_('Line cook', '', 'mid', 'POP-00001'));
   assert('jitter inside ±8%', (() => { const m = roleMedian('Line Cook'); for (let i = 0; i < 200; i++) { const v = jobReferencePay_('Line cook', '', 'mid', 'S' + i); if (v < m * 0.92 - 100 || v > m * 1.08 + 100) return false; } return true; })());
-  assert('student → null', jobReferencePay_('Baker', '', 'student', 'P1') === null);
-  assert('retired → null', jobReferencePay_('Baker', '', 'retired', 'P1') === null);
-  assert('rounded to $100', jobReferencePay_('Baker', '', 'mid', 'P1') % 100 === 0);
+  assert('student → null', jobReferencePay_('Caterer', '', 'student', 'P1') === null);
+  assert('retired → null', jobReferencePay_('Caterer', '', 'retired', 'P1') === null);
+  assert('rounded to $100', jobReferencePay_('Caterer', '', 'mid', 'P1') % 100 === 0);
 }
 
 // ── D4: applyUntrackedJobReference_ ────────────────────────────────────────

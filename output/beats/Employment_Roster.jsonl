@@ -1,0 +1,859 @@
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00001","CitizenName":"Vinnie Keane","RoleType":"Designated Hitter, Oakland A's Legend","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00002","CitizenName":"Amara Keane","RoleType":"Pianist, Philanthropist","Status":"SELF_EMPLOYED","MappingLayer":"keyword"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00003","CitizenName":"Mark Aitken","RoleType":"First Baseman, Oakland A's — Player Rep, Community Liaison","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00004","CitizenName":"Lucia Polito","RoleType":"Aura Wellness Practitioner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00005","CitizenName":"Mags Corliss","RoleType":"Editor-in-Chief","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00007","CitizenName":"Hal Richmond","RoleType":"Journalist, Senior Historian","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00008","CitizenName":"P Slayer","RoleType":"Journalist, Fan Columnist - Sports","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00009","CitizenName":"Lena Carrow","RoleType":"Field Reporter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00010","CitizenName":"Dana Reeve","RoleType":"Lead Journalist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00011","CitizenName":"Carmen Delaine","RoleType":"Journalist, Civic Affairs Reporter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00012","CitizenName":"Elliot Graye","RoleType":"Journalist, Ethics & Faith Journalist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00013","CitizenName":"Maria Keen","RoleType":"Journalist, Cultural Liason","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00014","CitizenName":"Tanya Cruz","RoleType":"Sideline Reporter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00015","CitizenName":"DeShawn Hartley","RoleType":"Photographer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00016","CitizenName":"Simon Leary","RoleType":"Journalist, The Long View Columnist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00017","CitizenName":"Anthony Raines","RoleType":"Journalist, Lead Beat Reporter - Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00018","CitizenName":"Benji Dillon","RoleType":"Pitcher, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00019","CitizenName":"Isley Kelley","RoleType":"Shortstop, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00020","CitizenName":"Elena Vásquez","RoleType":"Waterfront Urban Planner","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00021","CitizenName":"Darrin Davis","RoleType":"Left Fielder, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00022","CitizenName":"Danny Horn","RoleType":"Center Fielder, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00023","CitizenName":"Gregory Mims","RoleType":"Organized Crime","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00024","CitizenName":"Henry Rivas","RoleType":"Starting Pitcher, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00025","CitizenName":"Arturo Ramos","RoleType":"Starting Pitcher, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00026","CitizenName":"Allen Lopez","RoleType":"Starting Pitcher, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00027","CitizenName":"Philly Rodriguez","RoleType":"Casino Manager","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00028","CitizenName":"Manfred Owens","RoleType":"Booky","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00029","CitizenName":"Alisha Peña","RoleType":"Female Model","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00030","CitizenName":"Derek Simmons","RoleType":"A's Marketing Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00031","CitizenName":"Martin Richards","RoleType":"Third Baseman, New York Mets","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00032","CitizenName":"Anthony Casto","RoleType":"1B, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00033","CitizenName":"John Ellis","RoleType":"Starting Pitcher, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00034","CitizenName":"Avery Santana","RoleType":"Mayor of Oakland","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00035","CitizenName":"Laila Cortez","RoleType":"Chief of Staff","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00036","CitizenName":"Marcus Osei","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00037","CitizenName":"Brenda Okoro","RoleType":"Deputy Mayor (Community Affairs)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00038","CitizenName":"Theo Park","RoleType":"Communications Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00039","CitizenName":"Simone Ellis","RoleType":"Chief Legal Counsel","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00040","CitizenName":"Aaron Whitfield","RoleType":"City Manager","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00041","CitizenName":"Keisha Ramos","RoleType":"Director, Baylight Redevelopment Authority","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00043","CitizenName":"Janae Rivers","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00044","CitizenName":"Elliott Crane","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00045","CitizenName":"Eric Clove","RoleType":"Ethics Commission","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00046","CitizenName":"Manny Ellen","RoleType":"Elections Office","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00047","CitizenName":"Babe Bono","RoleType":"Redevelopment Board","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00048","CitizenName":"Carlos Presti","RoleType":"Corporate Accountant","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00049","CitizenName":"Pamela Amelia","RoleType":"Audit Commission","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00050","CitizenName":"Ernesto Quintero","RoleType":"Designated Hitter, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00051","CitizenName":"Desmond Morton","RoleType":"Left Fielder, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00052","CitizenName":"Clark Saryan","RoleType":"Closing Pitcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00053","CitizenName":"Kevin Clark","RoleType":"Third Baseman, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00054","CitizenName":"JR Rosado","RoleType":"Left Fielder, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00055","CitizenName":"Ross Cabral","RoleType":"Catcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00056","CitizenName":"Mint Condition","RoleType":"Speculative Internet","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00057","CitizenName":"Rachel Torres","RoleType":"Public Safety","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00058","CitizenName":"Sidney Tumolo","RoleType":"Second Baseman, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00059","CitizenName":"Buford Park","RoleType":"Third Baseman, New York Yankees","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00060","CitizenName":"Marco Fabregas","RoleType":"Catcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00061","CitizenName":"JP Bolden","RoleType":"Second Baseman, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00062","CitizenName":"Leo Lamar","RoleType":"Relief Pitcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00063","CitizenName":"Jose Baez","RoleType":"Starting Pitcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00064","CitizenName":"Jamaal West","RoleType":"Starting Pitcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00065","CitizenName":"William Tata","RoleType":"Closing Pitcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00066","CitizenName":"Johnny Carter","RoleType":"Relief Pitcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00067","CitizenName":"Patrick Fiore","RoleType":"Left Fielder, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00068","CitizenName":"Bryan Franco","RoleType":"Shortstop, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00069","CitizenName":"Craig Miller","RoleType":"Right Fielder, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00070","CitizenName":"Dustin Mills","RoleType":"Starting Pitcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00071","CitizenName":"Jeff Cobain","RoleType":"First Baseman, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00072","CitizenName":"Francisco Davila","RoleType":"Relief Pitcher, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00073","CitizenName":"Rich Barnett","RoleType":"Starting Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00074","CitizenName":"Lenny Ryan","RoleType":"Relief Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00075","CitizenName":"Julian Porcelli","RoleType":"Center Fielder, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00076","CitizenName":"Edgar Fabregas","RoleType":"Relief Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00077","CitizenName":"Julio Valencia","RoleType":"Closing Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00078","CitizenName":"Sergio Aybar","RoleType":"Catcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00079","CitizenName":"Frank Reyna","RoleType":"Right Fielder, Las Vegas Aviators (AAA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00080","CitizenName":"Richie Haynes","RoleType":"Starting Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00081","CitizenName":"Carmen Mesa","RoleType":"Starting Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00082","CitizenName":"Reese Aulert","RoleType":"Closing Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00083","CitizenName":"Chad Tipre","RoleType":"Relief Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00084","CitizenName":"Garry Fraser","RoleType":"Starting Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00085","CitizenName":"Richie Ramiro","RoleType":"First Baseman, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00086","CitizenName":"Chuck Haskett","RoleType":"Third Baseman, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00087","CitizenName":"Fred Ciccone","RoleType":"Right Fielder, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00088","CitizenName":"Damien Johnson","RoleType":"Second Baseman, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00089","CitizenName":"Kelly McCloud","RoleType":"Second Baseman, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00090","CitizenName":"Sean Prado","RoleType":"First Baseman, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00091","CitizenName":"Delmon Regan","RoleType":"Relief Pitcher, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00092","CitizenName":"Carlos Flores","RoleType":"Center Fielder, Midland RockHounds (AA)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00093","CitizenName":"Esteban Ramos","RoleType":"Relief Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00094","CitizenName":"Humberto Mejia","RoleType":"Catcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00095","CitizenName":"Andy Seymour","RoleType":"Shortstop, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00096","CitizenName":"Matt Thomas","RoleType":"Second Baseman, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00097","CitizenName":"David Hand","RoleType":"Relief Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00098","CitizenName":"Dave Mullins","RoleType":"Starting Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00099","CitizenName":"Koji Ono","RoleType":"Relief Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00100","CitizenName":"Reggie McGregor","RoleType":"First Baseman, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00101","CitizenName":"Jose Fuentes","RoleType":"Second Baseman, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00102","CitizenName":"Rod Geary","RoleType":"Third Baseman, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00103","CitizenName":"Kevin Ham","RoleType":"Second Baseman, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00104","CitizenName":"Willy Rodriguez","RoleType":"Starting Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00105","CitizenName":"Robby Branham","RoleType":"Relief Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00106","CitizenName":"Jeff Mateo","RoleType":"First Baseman, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00107","CitizenName":"Giuseppe Santiago","RoleType":"Relief Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00108","CitizenName":"Kilian Saunders","RoleType":"Catcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00109","CitizenName":"Troy William","RoleType":"Second Baseman, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00110","CitizenName":"Estevan Carmona","RoleType":"Starting Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00111","CitizenName":"Roscoe Reese","RoleType":"Relief Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00112","CitizenName":"Armando Marquez","RoleType":"Third Baseman, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00113","CitizenName":"Ray Clark","RoleType":"Starting Pitcher, Stockton Ports (A)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00114","CitizenName":"Mike Kinder","RoleType":"Former Manager, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00115","CitizenName":"Dan Perez","RoleType":"Hitting Coach, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00116","CitizenName":"Fernando Lima","RoleType":"Pitching Coach, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00117","CitizenName":"Babe Bradford","RoleType":"First Base Coach, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00118","CitizenName":"Stephan Kollars","RoleType":"Third Base Coach, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00119","CitizenName":"Beverly Peterson","RoleType":"Scout, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00120","CitizenName":"Lou Hollis","RoleType":"Scout, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00121","CitizenName":"Otis Redd","RoleType":"Scout, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00122","CitizenName":"Miguel Casillas","RoleType":"Starting Pitcher, Former Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00123","CitizenName":"Tre Mingo","RoleType":"Port Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00124","CitizenName":"Steve Conrad","RoleType":"Ex-As Star - RF","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00130","CitizenName":"Carlos Chávez","RoleType":"Relief Pitcher, Former Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00131","CitizenName":"Lorenzo Jordan","RoleType":"Public Defender","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00089","POP_ID":"POP-00132","CitizenName":"Tobias Jurko","RoleType":"Landscape Architect","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00008","POP_ID":"POP-00133","CitizenName":"Ariana Reyes","RoleType":"Data Analyst (Gridiron Analytics)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00134","CitizenName":"Brianna Lee","RoleType":"Historic Preservation Carpenter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00135","CitizenName":"Mina Linas","RoleType":"Sea Level Monitoring Technician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00136","CitizenName":"Rafael Montez","RoleType":"Police Chief","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00137","CitizenName":"Kimberly Cho","RoleType":"DEPUTY CHIEF OF OPERATIONS","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00138","CitizenName":"Leonard Briggs","RoleType":"DEPUTY CHIEF OF COMMUNITY ENGAGEMENT","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00139","CitizenName":"Samantha Viteri","RoleType":"INTERNAL AFFAIRS DIVISION LEAD","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00140","CitizenName":"Marcus Hollowell","RoleType":"FIRE CHIEF","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00141","CitizenName":"Priya Narang","RoleType":"EMS DIRECTOR","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00142","CitizenName":"Jonas Patel","RoleType":"MEDICAL EXAMINER","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00143","CitizenName":"Clarissa Dane","RoleType":"DISTRICT ATTORNEY","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00144","CitizenName":"Ethan D’Souza","RoleType":"ASSISTANT DISTRICT ATTORNEY (Major Crimes)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00145","CitizenName":"Janelle Rourke","RoleType":"ASSISTANT DISTRICT ATTORNEY (Community Safety)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00146","CitizenName":"Caleb Reyes","RoleType":"PUBLIC DEFENDER","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00147","CitizenName":"Marisol Guzman","RoleType":"DEPUTY PUBLIC DEFENDER","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00148","CitizenName":"Gordon Tate","RoleType":"SUPERIOR COURT LIAISON","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00149","CitizenName":"Lamine Sissoko","RoleType":"CIVILIAN POLICE REVIEW BOARD CHAIR","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00150","CitizenName":"Helena Morr","RoleType":"City Ombudsman","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00151","CitizenName":"Victor Han","RoleType":"PROBATION & REENTRY DIRECTOR","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00152","CitizenName":"Shawna Delgado","RoleType":"DIRECTOR OF EMERGENCY MANAGEMENT","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00153","CitizenName":"Jordan Velez","RoleType":"Journalist, Economics & Labor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00154","CitizenName":"Lila Mezran","RoleType":"Journalist, Health Desk","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00155","CitizenName":"Trevor Shimizu","RoleType":"Journalist, Transit & Infastructure","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00156","CitizenName":"Angela Reyes","RoleType":"Journalist, Education","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00157","CitizenName":"Noah Tan","RoleType":"Journalist, Weather & Environment","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00158","CitizenName":"Kai Marston","RoleType":"Journalist, Arts & Entertainment","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00159","CitizenName":"Sharon Okafor","RoleType":"Journalist, Lifestyle","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00160","CitizenName":"Mason Ortega","RoleType":"Journalist, Food & Hospitality","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00161","CitizenName":"Farrah Del Rio","RoleType":"Journalist, Civic & Cultural Opinion","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00162","CitizenName":"Reed Thompson","RoleType":"Journalist, TWS Wire Reporter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00164","CitizenName":"Celeste Tran","RoleType":"Journalist, Social Trends","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00165","CitizenName":"Arman Gutierrez","RoleType":"Photo Assistant","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00166","CitizenName":"Elliot Marbury","RoleType":"Journalist, Data Desk","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00167","CitizenName":"Carlo Jist","RoleType":"Medical Social Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00168","CitizenName":"Ariana Lee","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00169","CitizenName":"Brie Harris","RoleType":"Flower Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00170","CitizenName":"Melton Neilon","RoleType":"Sourdough Baker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00171","CitizenName":"Sofia Jordan","RoleType":"Environmental Consultant","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00172","CitizenName":"Marlon Hingsley","RoleType":"Housing Authority Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00173","CitizenName":"Kaila Braun","RoleType":"Immigrant Legal Aid Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00174","CitizenName":"Tariq Jello","RoleType":"Appliance Repair Technician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00175","CitizenName":"Sara Copper","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00176","CitizenName":"Talmon Lint","RoleType":"Solar Panel Installation Lead","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00177","CitizenName":"Elle Lilo","RoleType":"Harbor Tugboat Captain","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00178","CitizenName":"Tobi Sobi","RoleType":"Climate Modeling Scientist","Status":"SELF_EMPLOYED","MappingLayer":"keyword"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00179","CitizenName":"Leo Leonard","RoleType":"Juvenile Probation Officer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00180","CitizenName":"Cameron Wallen","RoleType":"Corporate Accountant","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00181","CitizenName":"Xavier Ramington","RoleType":"Herbalist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00182","CitizenName":"Jorry Cula","RoleType":"Record Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00183","CitizenName":"Toby Lamont","RoleType":"Mutual Aid Network Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00184","CitizenName":"Brooklyn Nguyen","RoleType":"Teacher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00185","CitizenName":"Lila Patty","RoleType":"Solar Panel Installation Lead","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00186","CitizenName":"Ray Samson","RoleType":"Appliance Repair Technician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00187","CitizenName":"Isla Sike","RoleType":"Domestic Violence Shelter Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00188","CitizenName":"Simone Cleng","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00189","CitizenName":"Blair Patel","RoleType":"Ship Repair Foreman","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00190","CitizenName":"Jackson Sift","RoleType":"Ex-Offender Reentry Counselor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00191","CitizenName":"Darius Scoot","RoleType":"Patent Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00192","CitizenName":"Bea Cartier","RoleType":"Roofing Contractor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00193","CitizenName":"Elena Leon","RoleType":"Longshoreman (Port of Oakland)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00194","CitizenName":"Yu Zen","RoleType":"Commercial Insurance Broker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00195","CitizenName":"Lonzo Jailon","RoleType":"Sea Level Monitoring Technician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00196","CitizenName":"Inga Creator","RoleType":"Boutique Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00197","CitizenName":"Rigo Ryno","RoleType":"Vintage Clothing Store Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00198","CitizenName":"Rick Walker","RoleType":"Line cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00199","CitizenName":"Mateo Allen","RoleType":"Nurse aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00200","CitizenName":"Evan Lewis","RoleType":"Bus driver","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00201","CitizenName":"Elio Perez","RoleType":"Server","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00202","CitizenName":"Marky Beal","RoleType":"Retail worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00203","CitizenName":"Jacob Perez","RoleType":"Mover","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00204","CitizenName":"Orlando Phillips","RoleType":"Retail worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00205","CitizenName":"Travis Golin","RoleType":"Construction laborer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00206","CitizenName":"Omar Lingio","RoleType":"Vintage Clothing Store Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00026","POP_ID":"POP-00207","CitizenName":"Owen Tower","RoleType":"Taxi driver","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00208","CitizenName":"Patrick When","RoleType":"Janitor","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00209","CitizenName":"Tiu Xiong","RoleType":"Kombucha Brewer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00210","CitizenName":"Depak Ying","RoleType":"Server","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00211","CitizenName":"Christopher Johnson","RoleType":"Janitor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00212","CitizenName":"Jessie Hess","RoleType":"Barista","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00213","CitizenName":"Davey Martinez","RoleType":"Maintenance tech","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00214","CitizenName":"Jacquez Tearn","RoleType":"Dishwasher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00215","CitizenName":"Ricky Wilton","RoleType":"Janitor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00216","CitizenName":"Victor Alize","RoleType":"Warehouse worker","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00217","CitizenName":"Kenton Pearl","RoleType":"Plumber","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00013","POP_ID":"POP-00218","CitizenName":"Joel Wren","RoleType":"Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00219","CitizenName":"Tyrone Bennington","RoleType":"Nurse aide","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00220","CitizenName":"Shawn Gown","RoleType":"Taxi driver","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00221","CitizenName":"Broderick Mitchell","RoleType":"Security guard","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00222","CitizenName":"Travis Paiz","RoleType":"Mover","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00223","CitizenName":"Rafael Brannie","RoleType":"Mover","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00224","CitizenName":"Dillon Trevor","RoleType":"Server","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00225","CitizenName":"Andre Turner","RoleType":"Line cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00035","POP_ID":"POP-00226","CitizenName":"Jemeal Brim","RoleType":"Bakery worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00227","CitizenName":"Colin Soria","RoleType":"Security guard","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00228","CitizenName":"Javier Robertson","RoleType":"Delivery driver","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00229","CitizenName":"Bennet Green","RoleType":"Painter","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00230","CitizenName":"Jett Walker","RoleType":"Plumber","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00231","CitizenName":"Calvin Turner","RoleType":"Mechanic","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00232","CitizenName":"Jori Clame","RoleType":"Server","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00233","CitizenName":"Mason Walt","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00234","CitizenName":"Melo Arnez","RoleType":"Plumber","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00235","CitizenName":"Aaliyah Brennan","RoleType":"Mobile Clinic Nurse","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00236","CitizenName":"Ravi O'Connell","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00237","CitizenName":"Jerry Nelson","RoleType":"Janitor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00238","CitizenName":"Clearence Leighton","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00239","CitizenName":"Xiu Cello","RoleType":"Mover","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00240","CitizenName":"Daley Hill","RoleType":"Painter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00241","CitizenName":"Marc Allie","RoleType":"Security guard","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00242","CitizenName":"Jaden Phillips","RoleType":"Barista","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00243","CitizenName":"Xanny Allen","RoleType":"Warehouse worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00244","CitizenName":"Derlik Green","RoleType":"Delivery Driver","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00245","CitizenName":"Jaren Lanning","RoleType":"Mechanic","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00246","CitizenName":"Dearie Beacon","RoleType":"Security guard","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00247","CitizenName":"Baxter Thompson","RoleType":"Construction laborer","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00248","CitizenName":"Joaquín Nakamura","RoleType":"Kombucha Brewer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00249","CitizenName":"Marrin Benry","RoleType":"Mechanic","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00250","CitizenName":"Ty Yule","RoleType":"Taxi driver","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00251","CitizenName":"Shawn Weller","RoleType":"Janitor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00252","CitizenName":"Hector Leech","RoleType":"Dishwasher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00253","CitizenName":"Jango Lango","RoleType":"Hardware Store Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00254","CitizenName":"Tyrie Groin","RoleType":"Retail worker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00255","CitizenName":"Howard Travis","RoleType":"Construction laborer","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00256","CitizenName":"Brady Lopez","RoleType":"Dishwasher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00257","CitizenName":"Farah Lindqvist","RoleType":"City Building Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00258","CitizenName":"Brian Adams","RoleType":"Janitor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00259","CitizenName":"Kwame Fitzgerald","RoleType":"Craft Brewery Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00260","CitizenName":"Kevel Phoul","RoleType":"Warehouse worker","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00261","CitizenName":"Ronnie Lar","RoleType":"Painter","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00262","CitizenName":"Victor King","RoleType":"Retail worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00263","CitizenName":"Omar Amici","RoleType":"Construction laborer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00264","CitizenName":"Bodhi Davis","RoleType":"Mover","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00265","CitizenName":"Matty Lipo","RoleType":"Dishwasher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00266","CitizenName":"Priya Marchetti","RoleType":"Vintage Clothing Store Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00267","CitizenName":"Jacob King","RoleType":"Line cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00268","CitizenName":"Shane Phelps","RoleType":"Janitor","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00269","CitizenName":"Kevin Nelson","RoleType":"Line cook","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00270","CitizenName":"Tevan Walker","RoleType":"Bus driver","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00271","CitizenName":"Luca Petrov","RoleType":"Dance Choreographer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00272","CitizenName":"Joseph Cramp","RoleType":"Janitor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00273","CitizenName":"Trenton Nawan","RoleType":"Server","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00274","CitizenName":"Evan Bing","RoleType":"Retail worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00009","POP_ID":"POP-00275","CitizenName":"Elijah Roberts","RoleType":"Construction laborer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00276","CitizenName":"Dmitri Soto","RoleType":"Container Yard Supervisor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00277","CitizenName":"Emmet Gorn","RoleType":"Nurse aide","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00278","CitizenName":"Colt Biker","RoleType":"Painter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00279","CitizenName":"Mac Hillie","RoleType":"Bakery worker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00013","POP_ID":"POP-00280","CitizenName":"Jerald Jensen","RoleType":"Janitor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00281","CitizenName":"Jay Adams","RoleType":"Bakery worker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00282","CitizenName":"Edmund Alegero","RoleType":"Construction laborer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00283","CitizenName":"Owen Low","RoleType":"Mechanic","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00284","CitizenName":"Tyrone Lulu","RoleType":"Maintenance tech","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00285","CitizenName":"Ben Clark","RoleType":"Mover","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00286","CitizenName":"Yammie Perez","RoleType":"Delivery driver","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00287","CitizenName":"Simone Adesanya","RoleType":"School Principal","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00288","CitizenName":"Marcus Wright","RoleType":"Server","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00289","CitizenName":"Joesph Allen","RoleType":"Taxi driver","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00290","CitizenName":"Omar Cleo","RoleType":"Line Cook","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00009","POP_ID":"POP-00291","CitizenName":"Enzo Walker","RoleType":"Plumber","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00292","CitizenName":"Jack Phillips","RoleType":"Bus driver","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00293","CitizenName":"Malot Bielo","RoleType":"Warehouse worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00026","POP_ID":"POP-00294","CitizenName":"Miguel Joson","RoleType":"Plumber","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00295","CitizenName":"Christopher Clerk","RoleType":"Mover","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00296","CitizenName":"Den Blue","RoleType":"Nurse aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00297","CitizenName":"Jorge Wusther","RoleType":"Nurse aide","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00298","CitizenName":"Luis Taz","RoleType":"Janitor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00299","CitizenName":"Joel Henry","RoleType":"Plumber","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00300","CitizenName":"Belle Lopez","RoleType":"Home Health Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00301","CitizenName":"Lila Leap","RoleType":"Muralist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00302","CitizenName":"Toto Foto","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00303","CitizenName":"Lee Coo","RoleType":"School Psychologist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00304","CitizenName":"Alma Lewis","RoleType":"International Trade Consultant","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00305","CitizenName":"Rico Fister","RoleType":"High School Science Teacher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00306","CitizenName":"Mika Loop","RoleType":"Real Estate Developer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00307","CitizenName":"Minka Slayton","RoleType":"Jazz Musician","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00308","CitizenName":"Cathy Skeet","RoleType":"Elder Tech Liaison","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00309","CitizenName":"Amy Cook","RoleType":"Radiologic Technician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00310","CitizenName":"Arnie Carter","RoleType":"Immigrant Legal Aid Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00311","CitizenName":"Andre Lee","RoleType":"Electrician","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00312","CitizenName":"Wiu Wiu","RoleType":"High School Science Teacher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00313","CitizenName":"Soria Herrin","RoleType":"Stone Mason","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00314","CitizenName":"Lemante Naruto","RoleType":"Crane Operator (Port of Oakland)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00315","CitizenName":"Jahill West","RoleType":"Hair Stylist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00316","CitizenName":"Chris Foster","RoleType":"Grade Schooler","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00317","CitizenName":"Lila Bennington","RoleType":"Oakland Unified Elementary Teacher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00318","CitizenName":"Carter Harris","RoleType":"Emergency Management Coordinator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00319","CitizenName":"Marquis Cale","RoleType":"Hair Stylist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00320","CitizenName":"Cee Lee","RoleType":"Autonomous Systems Engineer","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00321","CitizenName":"Jee Lei","RoleType":"After-School Program Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00322","CitizenName":"Lillie Regis","RoleType":"Addiction Recovery Specialist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00323","CitizenName":"Cooper Erazmo","RoleType":"Upholstery Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00324","CitizenName":"Milan Warmon","RoleType":"Ceramicist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00325","CitizenName":"Isabel Lopes","RoleType":"ESL Teacher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00031","POP_ID":"POP-00326","CitizenName":"Eva Langoria","RoleType":"Vertical Farm Systems Engineer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00327","CitizenName":"Bambi Wart","RoleType":"Ex-Offender Reentry Counselor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00328","CitizenName":"Javier Trenton","RoleType":"Affordable Childcare Advocate","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00329","CitizenName":"Aaron Jackson","RoleType":"Tai Chi Instructor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00330","CitizenName":"Blaire Jackson","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00332","CitizenName":"Diego Remo","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00333","CitizenName":"Moot Soot","RoleType":"Hair Stylist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00334","CitizenName":"Solis Walmart","RoleType":"Housing Authority Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00335","CitizenName":"Imie Calero","RoleType":"Civil Rights Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00336","CitizenName":"Marmol Lemon","RoleType":"Graffiti Restoration Artist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00337","CitizenName":"Iris Baron","RoleType":"Emergency Management Coordinator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00013","POP_ID":"POP-00338","CitizenName":"Coen Cartier","RoleType":"Transit Operator (AC Transit)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00339","CitizenName":"Kaila Nguyen","RoleType":"Pupuseria Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00340","CitizenName":"Jimmie Joseph","RoleType":"Sustainable Materials Scientist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00341","CitizenName":"Emilia Wurford","RoleType":"Tea House Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00342","CitizenName":"Leo Ling","RoleType":"Nonprofit Executive Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00343","CitizenName":"Iman Horton","RoleType":"Refugee Resettlement Case Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00344","CitizenName":"Tobert Lewis","RoleType":"Civil Rights Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00007","POP_ID":"POP-00345","CitizenName":"Bonnie Brown","RoleType":"Venture Partner (Ridgeline Ventures)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00346","CitizenName":"Ingmar Jordan","RoleType":"Spoken Word Poet","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00008","POP_ID":"POP-00347","CitizenName":"Dawson Nguyen","RoleType":"Sports Analytics Lead (Gridiron Analytics)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00348","CitizenName":"Melony Foster","RoleType":"Fashion Designer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00349","CitizenName":"Jiu Wong","RoleType":"Carpet Installer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00350","CitizenName":"Tobias Nort","RoleType":"Tea House Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00351","CitizenName":"Ryan Stark","RoleType":"Housing Policy Analyst","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00352","CitizenName":"Kaila Jordache","RoleType":"GED Program Instructor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00353","CitizenName":"Ridley Holt","RoleType":"Nonprofit Executive Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00354","CitizenName":"Illy Jile","RoleType":"Translation Services Provider","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00355","CitizenName":"Sammie Soft","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00356","CitizenName":"Bethany Foster","RoleType":"Ship Repair Foreman","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00357","CitizenName":"Andrew Cook","RoleType":"Neighborhood Watch Captain","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00358","CitizenName":"Rilen Lend","RoleType":"Laundromat Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00359","CitizenName":"Soira Flesher","RoleType":"Emergency Management Coordinator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00360","CitizenName":"Lingo Kim","RoleType":"Hair Stylist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00361","CitizenName":"Jason Flower","RoleType":"Immigrant Legal Aid Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00362","CitizenName":"Xavier Davis","RoleType":"Housing Authority Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00363","CitizenName":"Rayon Dart","RoleType":"Climate Modeling Scientist","Status":"SELF_EMPLOYED","MappingLayer":"keyword"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00365","CitizenName":"Dexter Patel","RoleType":"Cybersecurity Analyst","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00366","CitizenName":"Alicia Hernandez","RoleType":"Coffee Roaster","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00367","CitizenName":"Ron Arenson","RoleType":"Maintenance Tech","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00009","POP_ID":"POP-00368","CitizenName":"Dom Will","RoleType":"Machine Learning Engineer (Oakmesh Systems)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00430","CitizenName":"Juniper Walken","RoleType":"Flower Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00431","CitizenName":"Hassan Montero","RoleType":"Craft Brewery Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00432","CitizenName":"Duarte Washerman","RoleType":"Sound Designer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00433","CitizenName":"Brooke Garcia","RoleType":"Homeless Outreach Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00008","POP_ID":"POP-00434","CitizenName":"Jade Soy","RoleType":"Data Analyst (Gridiron Analytics)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00435","CitizenName":"Driscoll Fester","RoleType":"Graphic Designer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00026","POP_ID":"POP-00436","CitizenName":"Augusta Davis","RoleType":"Community Health Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00437","CitizenName":"Amelia Kim","RoleType":"Fashion Designer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00438","CitizenName":"Charolette Flores","RoleType":"Music Venue Operator","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00439","CitizenName":"Timmie Hall","RoleType":"Refugee Resettlement Case Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00440","CitizenName":"Xing Patel","RoleType":"Ship Repair Foreman","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00441","CitizenName":"Soriya Rodriguez","RoleType":"Ex-Offender Reentry Counselor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00013","POP_ID":"POP-00442","CitizenName":"Daire Green","RoleType":"Transit Operator (AC Transit)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00443","CitizenName":"Ace Hill","RoleType":"ESL Teacher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00444","CitizenName":"Cilla Hall","RoleType":"BBQ Pitmaster","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00052","POP_ID":"POP-00445","CitizenName":"Sam Fazio","RoleType":"Digital Twin Architect","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00446","CitizenName":"Dimas Wong","RoleType":"Stone Mason","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00010","POP_ID":"POP-00447","CitizenName":"Tyler Filet","RoleType":"Biotech Lab Director (Portside Bio)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00013","POP_ID":"POP-00448","CitizenName":"Ray Neal","RoleType":"AC Transit Bus Operator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00449","CitizenName":"Teri Mitchell","RoleType":"Graphic Designer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00450","CitizenName":"Rivers Escodedo","RoleType":"Carpet Installer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00451","CitizenName":"Andie Topez","RoleType":"Upholstery Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00010","POP_ID":"POP-00452","CitizenName":"Jodi Foil","RoleType":"Biotech Lab Director (Portside Bio)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00453","CitizenName":"Thomas Farrot","RoleType":"Autonomous Systems Engineer","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00454","CitizenName":"Amanda Hall","RoleType":"Glazier","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00455","CitizenName":"Ily Gonzalez","RoleType":"Fashion Designer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00456","CitizenName":"Bailey Allen","RoleType":"Licensed Plumber","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00457","CitizenName":"Chole Kim","RoleType":"Affordable Childcare Advocate","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00458","CitizenName":"Riley Boon","RoleType":"Food Truck Operator","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00459","CitizenName":"Brielle Lewis","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00460","CitizenName":"Kenji Okafor","RoleType":"Patent Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00008","POP_ID":"POP-00461","CitizenName":"Wesley Clark","RoleType":"Sports Analytics Lead (Gridiron Analytics)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00462","CitizenName":"Birdie Flores","RoleType":"Sourdough Baker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00463","CitizenName":"Rosie Piru","RoleType":"Homeless Outreach Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00464","CitizenName":"Celeste Park","RoleType":"Psychotherapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00465","CitizenName":"April Nelson","RoleType":"Printmaker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00007","POP_ID":"POP-00466","CitizenName":"Juliette Park","RoleType":"Venture Partner (Ridgeline Ventures)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00467","CitizenName":"Cedric Yamamoto","RoleType":"Craft Brewery Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00468","CitizenName":"Collete Allen","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00469","CitizenName":"Yusuf Carmichael","RoleType":"Pediatric Nurse Practitioner","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00470","CitizenName":"Maren Johns","RoleType":"Psychotherapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00471","CitizenName":"Anna Baker","RoleType":"Trade Union Representative","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00472","CitizenName":"Josie Wong","RoleType":"Commercial Painter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00473","CitizenName":"Destiny Ochoa","RoleType":"Disability Rights Advocate","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00474","CitizenName":"Ally Scott","RoleType":"City Building Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00475","CitizenName":"Maya Santos","RoleType":"Ceramicist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00476","CitizenName":"Jenna Comer","RoleType":"Real Estate Developer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00477","CitizenName":"Timothy Leal","RoleType":"Maritime Safety Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00478","CitizenName":"Maya Brooks","RoleType":"Concrete Specialist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00479","CitizenName":"Rango Young","RoleType":"Hair Stylist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00480","CitizenName":"Terrance Robinson","RoleType":"Printmaker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00481","CitizenName":"Kelvon Ochoa","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00052","POP_ID":"POP-00482","CitizenName":"Catherine Santos","RoleType":"Digital Twin Architect","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00009","POP_ID":"POP-00483","CitizenName":"Jace Robinson","RoleType":"Machine Learning Engineer (Oakmesh Systems)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00484","CitizenName":"Tim Allenson","RoleType":"Yoga Studio Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00485","CitizenName":"Jillian Tort","RoleType":"City Permit Coordinator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00486","CitizenName":"Remo Rodriguez","RoleType":"Farmers Market Organizer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00487","CitizenName":"Jimar Garcia","RoleType":"Fish Market Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00488","CitizenName":"Rupert Ochoa","RoleType":"Mutual Aid Network Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00489","CitizenName":"Thalia Okwu","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00490","CitizenName":"Keenan Kim","RoleType":"Master Electrician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00491","CitizenName":"Brenda Gonzalez","RoleType":"Neighborhood Watch Captain","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00492","CitizenName":"Dune Topez","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00493","CitizenName":"Lima Fila","RoleType":"Maritime Safety Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00494","CitizenName":"Weston Herrin","RoleType":"Refugee Resettlement Case Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00495","CitizenName":"Rosalind Young","RoleType":"Smoke Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00496","CitizenName":"Rosa Simon","RoleType":"Auto Body Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00497","CitizenName":"Abraham Wright","RoleType":"Tea House Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00498","CitizenName":"Beatrix Santos","RoleType":"Herbalist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00499","CitizenName":"Jalen Serf","RoleType":"School Psychologist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00500","CitizenName":"Bali Cruz","RoleType":"Historic Preservation Carpenter","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00501","CitizenName":"Denise Carter","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00502","CitizenName":"Leonard Tran","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00503","CitizenName":"Rose Delgado","RoleType":"City Council District 3","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00504","CitizenName":"Warren Ashford","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00505","CitizenName":"Nina Chen","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00506","CitizenName":"Terrence Mobley","RoleType":"City Council Member","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00507","CitizenName":"Mara Vance","RoleType":"City Planning Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00511","CitizenName":"Dimmie Washington","RoleType":"Executive Director - WONA","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00512","CitizenName":"Raymond Torres","RoleType":"Bay Area Tenants Union Rep","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00515","CitizenName":"Ingrid Bautista","RoleType":"Neighborhood Watch Captain","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00516","CitizenName":"Luis Mitchell","RoleType":"Barista","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00517","CitizenName":"Shai Diaz","RoleType":"Mover","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00518","CitizenName":"Chase West","RoleType":"Mechanic","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00519","CitizenName":"Wei Thomas","RoleType":"Acupuncturist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00520","CitizenName":"Derwin Train","RoleType":"Grocery Store Owner","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00521","CitizenName":"Jude Hess","RoleType":"Electrician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00522","CitizenName":"Ethan Horton","RoleType":"Plumber","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00523","CitizenName":"Serg Cerrano","RoleType":"Mover","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00524","CitizenName":"Maston Burke","RoleType":"Nurse Aide","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00525","CitizenName":"Miguel King","RoleType":"Warehouse Worker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00526","CitizenName":"Marisol Achebe","RoleType":"Mutual Aid Network Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00527","CitizenName":"Mike Paulson","RoleType":"General Manager, Oakland A's & The Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00528","CitizenName":"Deacon Seymour","RoleType":"Rookie Manager, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00529","CitizenName":"Tomas Aguilar","RoleType":"Freight Logistics Coordinator (Port of Oakland)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00530","CitizenName":"Lena Okafor","RoleType":"Daycare Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00019","POP_ID":"POP-00531","CitizenName":"Priya Nair","RoleType":"Climate Adaptation Engineer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00532","CitizenName":"Marcus Whitfield","RoleType":"Youth Basketball Coach","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00533","CitizenName":"Travis Coles","RoleType":"Starting Pitcher, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00534","CitizenName":"Dak Leo","RoleType":"Emergency Room Nurse (Highland Hospital)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00535","CitizenName":"Lisa Tanaka","RoleType":"Small Business Loan Officer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00536","CitizenName":"Everson Morello","RoleType":"Actor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00537","CitizenName":"Marin Tao","RoleType":"Musician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00538","CitizenName":"Nila James","RoleType":"Athlete","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00539","CitizenName":"Lena Cross","RoleType":"Actor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00027","POP_ID":"POP-00540","CitizenName":"Jade Orion","RoleType":"Musician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00541","CitizenName":"Theo Burkes","RoleType":"Rapper","Status":"SELF_EMPLOYED","MappingLayer":"keyword"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00542","CitizenName":"Nina Rines","RoleType":"Actress","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00543","CitizenName":"Derek Obi","RoleType":"IT Support Specialist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00544","CitizenName":"Jem Steele","RoleType":"Athlete","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00545","CitizenName":"Rowan Pierce","RoleType":"Freelance Writer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00546","CitizenName":"Tara Ellison","RoleType":"Journalist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00547","CitizenName":"Jocelyn Santo","RoleType":"Yoga Instructor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00554","CitizenName":"Patricia Nwosu","RoleType":"Deputy Health Officer, Alameda County","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00555","CitizenName":"Mariano Rosales","RoleType":"Club Manager","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00556","CitizenName":"Renata Voss","RoleType":"Pharmacist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00013","POP_ID":"POP-00573","CitizenName":"Calvin Mwangi","RoleType":"AC Transit Bus Driver","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00576","CitizenName":"Beth Hayes","RoleType":"Landscaper","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00588","CitizenName":"Darren Briggs","RoleType":"City Building Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00589","CitizenName":"Michael Creighton","RoleType":"Writer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00590","CitizenName":"Reggie Soto","RoleType":"Auto Body Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00591","CitizenName":"Selena Grant","RoleType":"Journalist - Chicago Sports","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00592","CitizenName":"Talia Finch","RoleType":"Journalist - Chicago Sports","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00593","CitizenName":"Priscilla Odom","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00595","CitizenName":"Sarah Corliss","RoleType":"Capacity Analyst, DigitalOcean","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00596","CitizenName":"Michael Corliss","RoleType":"Photographer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00597","CitizenName":"Eric Taveras","RoleType":"Second Baseman, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00598","CitizenName":"Vladimir Gonzalez","RoleType":"Right Fielder, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00599","CitizenName":"Jose Colon","RoleType":"Catcher, Oakland A's","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00603","CitizenName":"Amir Delia","RoleType":"Home Health Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00604","CitizenName":"Timu Aguilar","RoleType":"Barbershop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00014","POP_ID":"POP-00617","CitizenName":"Eleanor Rivera","RoleType":"BART Station Manager","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00618","CitizenName":"Lucy Ferreira","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00619","CitizenName":"Tarrance Bolden","RoleType":"Auto Mechanic","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00620","CitizenName":"Yuki Tanaka","RoleType":"Florist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00621","CitizenName":"Delvon Pratt","RoleType":"Warehouse Supervisor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00622","CitizenName":"Marisela Rios","RoleType":"Home Health Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00624","CitizenName":"Aisha Toure","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00625","CitizenName":"Gregory Cho","RoleType":"Restaurant Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00626","CitizenName":"Fatima Al-Hassan","RoleType":"Social Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00627","CitizenName":"Emma Washington","RoleType":"Barber","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00025","POP_ID":"POP-00628","CitizenName":"Tina Kozlov","RoleType":"Dental Hygienist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00629","CitizenName":"Marcus Ibarra","RoleType":"Construction Foreman","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00630","CitizenName":"Patricia Leung","RoleType":"Bookkeeper","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00631","CitizenName":"Derry Webb","RoleType":"Youth Basketball Coach","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00632","CitizenName":"Rico Valez","RoleType":"Musician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00633","CitizenName":"Dolores Fuentes","RoleType":"Seamstress","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00634","CitizenName":"Dame Reed","RoleType":"Artist/Muralist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00635","CitizenName":"Mei Chen","RoleType":"Gallery Owner/Curator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00636","CitizenName":"Luis Navarro","RoleType":"Journalist, Investigations","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00637","CitizenName":"Brooks Wright","RoleType":"Line cook","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00638","CitizenName":"Dean Nelson","RoleType":"Security Guard","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00639","CitizenName":"Juan White","RoleType":"Electrician","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00640","CitizenName":"Bryce Lee","RoleType":"Retail worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00641","CitizenName":"Hector Campbell","RoleType":"Taxi Driver","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00642","CitizenName":"Ollie Campbell","RoleType":"Bakery Worker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00643","CitizenName":"Guadalupe Lupe","RoleType":"Bartender","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00644","CitizenName":"Rafael Pilgrim","RoleType":"Server","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00645","CitizenName":"Ezekiel Campbell","RoleType":"Taxi driver","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00646","CitizenName":"Tiro Worso","RoleType":"Mover","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00647","CitizenName":"Ronald Silk","RoleType":"Electrician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00009","POP_ID":"POP-00648","CitizenName":"Mart Johns","RoleType":"Nurse Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00649","CitizenName":"Jire Hilt","RoleType":"Line Cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00650","CitizenName":"Mesi Westin","RoleType":"Dishwasher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00651","CitizenName":"Howard Yell","RoleType":"Barista","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00652","CitizenName":"Brine Williams","RoleType":"Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00653","CitizenName":"Jerome Jessup","RoleType":"Record Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00654","CitizenName":"Willy Wally","RoleType":"International Trade Consultant","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00655","CitizenName":"Antwan Warren","RoleType":"Container Yard Supervisor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00656","CitizenName":"Brianna Scott","RoleType":"Food Truck Operator","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00657","CitizenName":"Aida Jackson","RoleType":"Orthodontist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00658","CitizenName":"Darius Cike","RoleType":"Quantum Computing Researcher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00659","CitizenName":"Ripley Court","RoleType":"STEM Program Coordinator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00660","CitizenName":"Ala Lewis","RoleType":"Tailor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00661","CitizenName":"Bianca Crook","RoleType":"Autonomous Systems Engineer","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00662","CitizenName":"Simone Limone","RoleType":"Herbalist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00663","CitizenName":"Soo Loo","RoleType":"Corporate Accountant","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00664","CitizenName":"Lilan Cert","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00665","CitizenName":"Art Scott","RoleType":"Sustainable Materials Scientist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00666","CitizenName":"Kaila Raimon","RoleType":"Sourdough Baker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00667","CitizenName":"Lo Thoop","RoleType":"Creative Writing Teacher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00668","CitizenName":"Tobias Wing","RoleType":"Muralist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00010","POP_ID":"POP-00669","CitizenName":"Tank Fiester","RoleType":"Biotech Lab Director (Portside Bio)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00670","CitizenName":"Drew Lemon","RoleType":"Housing Authority Inspector","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00671","CitizenName":"Siu Niu","RoleType":"Orthodontist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00672","CitizenName":"Waymen Brown","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00673","CitizenName":"Lilac Hint","RoleType":"Glassblower","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00674","CitizenName":"Reggio Leo","RoleType":"Jazz Musician","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00675","CitizenName":"Ilandra Tain","RoleType":"Muralist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00676","CitizenName":"Teddy Tamus","RoleType":"Neighborhood Pharmacy Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00677","CitizenName":"Tio Rio","RoleType":"Jade Jewelry Artisan","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00678","CitizenName":"Celo Patel","RoleType":"Container Yard Supervisor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00679","CitizenName":"Amear Thompson","RoleType":"Jade Jewelry Artisan","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00680","CitizenName":"Ammie Carter","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00681","CitizenName":"Moltin Tilton","RoleType":"International Trade Consultant","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00043","POP_ID":"POP-00682","CitizenName":"Mimmie Carlisle","RoleType":"Pastry Chef","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00683","CitizenName":"Mark Fisher","RoleType":"Smart City Infrastructure Planner","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00684","CitizenName":"Jarko Freako","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00685","CitizenName":"Eliza Nguyen","RoleType":"Climate Adaptation Specialist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00686","CitizenName":"Kaila Jack","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00687","CitizenName":"Alexa Ward","RoleType":"Licensed Plumber","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00688","CitizenName":"Merkin Jumper","RoleType":"Social Services Caseworker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00689","CitizenName":"Warchester Nathan","RoleType":"Climate Adaptation Specialist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00690","CitizenName":"Eloise Jackson","RoleType":"Food Truck Operator","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00691","CitizenName":"Tom Jilner","RoleType":"Wine Bar Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00692","CitizenName":"Weslie Cooper","RoleType":"Tailor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00693","CitizenName":"Mina Temp","RoleType":"Port Logistics Coordinator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00695","CitizenName":"Annika Delgado","RoleType":"Auto Body Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00696","CitizenName":"Soleil Kapoor","RoleType":"Vietnamese Pho Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00697","CitizenName":"Declan Toto","RoleType":"Gene Therapy Counselor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00698","CitizenName":"Marisio Curazo","RoleType":"Elder Care Coordinator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00699","CitizenName":"Iggy Davis","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00700","CitizenName":"Dave Eriksson","RoleType":"Disability Rights Advocate","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00701","CitizenName":"Tee Dee","RoleType":"Smoke Shop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00702","CitizenName":"Tiu Kim","RoleType":"Algae Biofuel Technician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00703","CitizenName":"Ira Leu","RoleType":"Artisan Cheesemaker","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00704","CitizenName":"Iwwa Cruz","RoleType":"Herbalist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00705","CitizenName":"Jessie Berry","RoleType":"Harbor Tugboat Captain","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00706","CitizenName":"Rosa Ochoa","RoleType":"Library Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00707","CitizenName":"Markenie Tian","RoleType":"Algae Biofuel Technician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00708","CitizenName":"Dyami Mitchell","RoleType":"Graffiti Restoration Artist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00709","CitizenName":"Jessica Brooks","RoleType":"Herbalist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00710","CitizenName":"Julie Santos","RoleType":"Acupuncturist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00711","CitizenName":"Xavier Robinson","RoleType":"Sea Level Monitoring Technician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00009","POP_ID":"POP-00712","CitizenName":"Jeremy Wong","RoleType":"Civic Data Engineer (Oakmesh Systems)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00714","CitizenName":"Drago Helio","RoleType":"Home Health Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00715","CitizenName":"Nadine Beckett","RoleType":"Nurse Practitioner","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00019","POP_ID":"POP-00716","CitizenName":"Omarion Farah","RoleType":"Cab Driver","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00717","CitizenName":"Nikolai Fuentes","RoleType":"Street Photographer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00718","CitizenName":"Ileana Vasquez","RoleType":"Sculptor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00719","CitizenName":"Debbie Kaplan","RoleType":"Harbor Tugboat Captain","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00720","CitizenName":"Russell Hayward","RoleType":"Insurance Adjuster","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00043","POP_ID":"POP-00721","CitizenName":"Jesus Jorden","RoleType":"Pastry Chef, OakHouse","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00722","CitizenName":"Daniel Cloak","RoleType":"Bakery Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00723","CitizenName":"Ronald Wough","RoleType":"Taxi Driver","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00724","CitizenName":"Milo Lanning","RoleType":"Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00725","CitizenName":"Matthew Welker","RoleType":"Trade Union Representative","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00726","CitizenName":"Vivian Fong","RoleType":"Dim Sum Restaurant Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00728","CitizenName":"DeShawn Avery","RoleType":"Community College Student","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00731","CitizenName":"Leanne Wu","RoleType":"Director of Sustainability","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00009","POP_ID":"POP-00732","CitizenName":"Deon Whitfield","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00736","CitizenName":"Vincent Cho","RoleType":"small business owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00738","CitizenName":"Vivian Tse","RoleType":"Dim Sum Restaurant Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00739","CitizenName":"Karem Asante","RoleType":"Youth Counselor","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00021","POP_ID":"POP-00740","CitizenName":"Miriam Shelton","RoleType":"Librarian","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00741","CitizenName":"Hector Navarro","RoleType":"HVAC Technician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00742","CitizenName":"Maya Torres-Dillon","RoleType":"Bay Conservation Alliance Advisory board, High School Science Teacher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00743","CitizenName":"Rick Dillon","RoleType":"Grade Schooler","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00044","POP_ID":"POP-00744","CitizenName":"Tomas Renteria","RoleType":"Podcast Host / Line Cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00745","CitizenName":"Sonia Parikh","RoleType":"Podcast Host / Software Engineer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00746","CitizenName":"Shawn Neighbor","RoleType":"Construction laborer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00747","CitizenName":"Gloria Meeks","RoleType":"Parking garage manager","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00027","POP_ID":"POP-00748","CitizenName":"Vince Okoye","RoleType":"Software engineer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00749","CitizenName":"Linda Chow","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00750","CitizenName":"Sandra Liu","RoleType":"Deputy Director, OEWD Community Investment","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00753","CitizenName":"Eunice Marston","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00754","CitizenName":"Ophelia Brenner","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00755","CitizenName":"Antoine Vermeer","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00756","CitizenName":"Ramon Solano","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00757","CitizenName":"Daniel Han","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00758","CitizenName":"Robert Jaston","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00759","CitizenName":"Naomi Sterling","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00760","CitizenName":"Yael Bauer","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00761","CitizenName":"Idris Karim","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00762","CitizenName":"Aziz Rahimi","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00763","CitizenName":"Kenji Tanaka","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00764","CitizenName":"Tao Lee","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00765","CitizenName":"Anand Krishnamurthy","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00766","CitizenName":"Manjit Singh","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00767","CitizenName":"Miriam Goldstein","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00768","CitizenName":"Eleanor Bishop","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00769","CitizenName":"Dax Monroe","RoleType":"Artist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00770","CitizenName":"Kato Rivers","RoleType":"Fitness Trainer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00771","CitizenName":"Sage Vienta","RoleType":"Actor","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00772","CitizenName":"Beverly Hayes","RoleType":"Community Director, West Oakland Community Center","Status":"Active","MappingLayer":"keyword"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00773","CitizenName":"Jada Rayes","RoleType":"Editor-in-Chief, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00774","CitizenName":"Malik Hayes","RoleType":"Lead Investigator, OakTown Echo","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00775","CitizenName":"Sam Alvarez","RoleType":"Civic & Neighborhood Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00776","CitizenName":"Kwame Ellis","RoleType":"Civic Opinion Columnist, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00777","CitizenName":"Rico Valdez","RoleType":"Lead Sports Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00778","CitizenName":"Jamal Thompson","RoleType":"Fan & Culture Columnist, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00779","CitizenName":"Nia Patel","RoleType":"Economics Reporter, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00780","CitizenName":"Delin Morales","RoleType":"Senior Photographer, OakTown Echo","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00038","POP_ID":"POP-00781","CitizenName":"Vanessa Treary","RoleType":"Barista","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00782","CitizenName":"Devon Willis","RoleType":"Server","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00036","POP_ID":"POP-00783","CitizenName":"Yuki Ji","RoleType":"Bartender","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00784","CitizenName":"Isaac Martinez","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00785","CitizenName":"Matra Woven","RoleType":"Janitor","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00786","CitizenName":"Colin Phillips","RoleType":"Bakery Worker","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00787","CitizenName":"Robert Hayes","RoleType":"Community Director","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00788","CitizenName":"Terrence Wussin","RoleType":"Security Guard","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00052","POP_ID":"POP-00789","CitizenName":"Elias  Varek","RoleType":"Founder of Civis Systems","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00094","POP_ID":"POP-00790","CitizenName":"Marcus Webb","RoleType":"OEWD Program Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00096","POP_ID":"POP-00791","CitizenName":"Elena Soria-Dominguez","RoleType":"Transit Hub Planning Lead","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00097","POP_ID":"POP-00792","CitizenName":"Bobby Chen-Ramirez","RoleType":"Health Center Project Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00005","POP_ID":"POP-00793","CitizenName":"Gil Saucedo","RoleType":"Athletics Player","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00794","CitizenName":"Irene Fay","RoleType":"Barista","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00795","CitizenName":"Marisol Trujillo","RoleType":"Drug Dealer","Status":"SELF_EMPLOYED","MappingLayer":"selfEmployed"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00796","CitizenName":"Dank Abara","RoleType":"Waiter","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00797","CitizenName":"Curtis Boone","RoleType":"Longshoreman","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00798","CitizenName":"Grace Yamamoto","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00799","CitizenName":"Jax  Caldera","RoleType":"Journalist, freelance accountability writer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00018","POP_ID":"POP-00800","CitizenName":"Rhea Morgan","RoleType":"Copy Chief and Data Analyst","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00052","POP_ID":"POP-00801","CitizenName":"Maurice Franklin","RoleType":"Drone Fleet Coordinator","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00802","CitizenName":"Funmi Shah","RoleType":"Glazier","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00803","CitizenName":"Akua Adeyemi","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00804","CitizenName":"Yasmin Robinson","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00805","CitizenName":"Latasha Jefferson","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00806","CitizenName":"Nakia Pena","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00807","CitizenName":"Daphne Choi","RoleType":"Coffee Roaster","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00808","CitizenName":"Sahana Joshi","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00809","CitizenName":"Hazel Lockhart","RoleType":"Glazier","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00810","CitizenName":"An Lopez","RoleType":"Disability Rights Advocate","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00811","CitizenName":"Inez Mendoza","RoleType":"Nonprofit Executive Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00812","CitizenName":"Millicent Kumar","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00813","CitizenName":"Akemi Fukuda","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00814","CitizenName":"Margarita Tanaka","RoleType":"Trade Union Representative","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00815","CitizenName":"Amal Nair","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00816","CitizenName":"Daphne Stafford","RoleType":"Home Health Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00817","CitizenName":"Habiba Ward","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00818","CitizenName":"Latasha Rivera","RoleType":"Quantum Computing Researcher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00819","CitizenName":"Jada Alvarez","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00820","CitizenName":"Akua Pinckney","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00821","CitizenName":"Funmi Ng","RoleType":"Civil Rights Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00822","CitizenName":"Patrice Rao","RoleType":"Home Health Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00823","CitizenName":"Genevieve Wu","RoleType":"Laundromat Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00824","CitizenName":"Padma Hong","RoleType":"Security Guard","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00825","CitizenName":"Imogen Soto","RoleType":"After-School Program Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00826","CitizenName":"Chiyo Vasquez","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00827","CitizenName":"Gloria Liu","RoleType":"School Principal","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00829","CitizenName":"Theodora Donovan","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00830","CitizenName":"Sandra Velazquez","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00831","CitizenName":"Yvette Hwang","RoleType":"Coffee Roaster","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00832","CitizenName":"Matilda Diop","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00833","CitizenName":"Kasumi Verma","RoleType":"Barbershop Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00834","CitizenName":"Alma Zhang","RoleType":"Glazier","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00835","CitizenName":"Mei-Lin Kang","RoleType":"Trade Union Representative","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00836","CitizenName":"Cristina Booker","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00837","CitizenName":"Fang Crawford","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00838","CitizenName":"Lillian Gebre","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00839","CitizenName":"Manju Chung","RoleType":"Nonprofit Executive Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00840","CitizenName":"Soledad Coleman","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00841","CitizenName":"Shanice Sanchez","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00842","CitizenName":"Wanjiru Liu","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00843","CitizenName":"Rasha Mensah","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00844","CitizenName":"Harmony Gupta","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00845","CitizenName":"Crystal Oh","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00846","CitizenName":"Karima Pinckney","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00016","POP_ID":"POP-00847","CitizenName":"Caroline Cabrera","RoleType":"After-School Program Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00848","CitizenName":"Tanisha Freeman","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00849","CitizenName":"Rosa Foster","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00850","CitizenName":"Charlene Underwood","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00851","CitizenName":"Maeve Pillai","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00852","CitizenName":"Naoko Morales","RoleType":"HVAC Technician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00853","CitizenName":"Winifred Jordan","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00854","CitizenName":"Kasumi Norwood","RoleType":"Muralist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00855","CitizenName":"Estrella Mehta","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00022","POP_ID":"POP-00856","CitizenName":"Emiko Suzuki","RoleType":"Public Defender","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00857","CitizenName":"Juliet Choi","RoleType":"Security Guard","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-00858","CitizenName":"Nandini Rojas","RoleType":"Social Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00859","CitizenName":"Tatiana Flores","RoleType":"HVAC Technician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00860","CitizenName":"Saniya Williams","RoleType":"Quantum Computing Researcher","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00861","CitizenName":"Aanya Rivera","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00862","CitizenName":"Magdalena Ortiz","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00025","POP_ID":"POP-00863","CitizenName":"Charlene Gutierrez","RoleType":"Dental Hygienist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00864","CitizenName":"Genevieve Martinez","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00865","CitizenName":"Farah Underwood","RoleType":"Muralist","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00866","CitizenName":"Yadira Rao","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00867","CitizenName":"Makayla Wu","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00868","CitizenName":"Chiamaka Zamora","RoleType":"Jazz Musician","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00869","CitizenName":"Eshe Nakamura","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00870","CitizenName":"Sabah Cruz","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00871","CitizenName":"Latasha Owusu","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00872","CitizenName":"Amal Doan","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00045","POP_ID":"POP-00873","CitizenName":"Hazel Salazar","RoleType":"Line Cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00874","CitizenName":"Nandini Muhammad","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00875","CitizenName":"Inez Diop","RoleType":"Nonprofit Executive Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00876","CitizenName":"Jia Carmichael","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00877","CitizenName":"Tess Zhou","RoleType":"Laundromat Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00044","POP_ID":"POP-00878","CitizenName":"Quynh Le","RoleType":"Line Cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00030","POP_ID":"POP-00879","CitizenName":"Ruth Gaines","RoleType":"Cybersecurity Analyst","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00880","CitizenName":"Chandni Aguilar","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00881","CitizenName":"Matilda Okonkwo","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00882","CitizenName":"Basma Inoue","RoleType":"BBQ Pitmaster","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00883","CitizenName":"Daphne Zamora","RoleType":"Jazz Musician","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00884","CitizenName":"Inara Nakamura","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00885","CitizenName":"Bria Ramirez","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00886","CitizenName":"Keisha Mensah","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00887","CitizenName":"Erica Faulkner","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00888","CitizenName":"Funmi Ghosh","RoleType":"Laundromat Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00889","CitizenName":"Noor Ng","RoleType":"Environmental Consultant","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00890","CitizenName":"Mireya Pinckney","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00891","CitizenName":"Renée Cabrera","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00892","CitizenName":"Geneva Zhou","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00893","CitizenName":"Erica Le","RoleType":"Trade Union Representative","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00894","CitizenName":"Maryam Dawson","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00895","CitizenName":"Abigail Aguilar","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00896","CitizenName":"Habiba Morales","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00897","CitizenName":"Soledad Brown","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00898","CitizenName":"Yolande McAllister","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00899","CitizenName":"Lucinda Tanaka","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00900","CitizenName":"Gauri Han","RoleType":"Security Guard","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00901","CitizenName":"Olive Sanchez","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00902","CitizenName":"Yesenia Desai","RoleType":"Security Guard","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00903","CitizenName":"Tianna Mori","RoleType":"Environmental Consultant","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00904","CitizenName":"Josephine Holloway","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00043","POP_ID":"POP-00905","CitizenName":"Kalyani Alvarez","RoleType":"Pastry Chef","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00906","CitizenName":"Idalia Okonkwo","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00907","CitizenName":"Jia Reyes","RoleType":"Disability Rights Advocate","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00908","CitizenName":"Cristina Norwood","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00909","CitizenName":"Nguyet Mukherjee","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00910","CitizenName":"Carmen Hong","RoleType":"BBQ Pitmaster","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00911","CitizenName":"Devika Wu","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00912","CitizenName":"Chandni Kessler","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00913","CitizenName":"Beatriz Kapoor","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00914","CitizenName":"Soo-jin Pham","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00915","CitizenName":"Tess Whitfield","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00025","POP_ID":"POP-00916","CitizenName":"Jia Pena","RoleType":"Dental Hygienist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00917","CitizenName":"Josefina Williams","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00918","CitizenName":"Manju Abebe","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00919","CitizenName":"Imogen Muhammad","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00920","CitizenName":"Tanisha Salazar","RoleType":"Jazz Musician","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00921","CitizenName":"Constanza Doan","RoleType":"Civil Rights Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00922","CitizenName":"Rasha Brown","RoleType":"Disability Rights Advocate","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00923","CitizenName":"Eshe Norwood","RoleType":"Home Health Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00924","CitizenName":"Donna Xu","RoleType":"Immigration Attorney","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00925","CitizenName":"Makayla Hashimoto","RoleType":"Dance Choreographer","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00926","CitizenName":"Briar Soto","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00927","CitizenName":"Farah Vasquez","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00928","CitizenName":"Genevieve Liu","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00929","CitizenName":"Zaniya Diop","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00930","CitizenName":"Margarita Crawford","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00931","CitizenName":"Devika Desai","RoleType":"Trade Union Representative","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00932","CitizenName":"Winifred Chen","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00933","CitizenName":"Quynh Abebe","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00934","CitizenName":"Florencia Shah","RoleType":"Independent Bookstore Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00935","CitizenName":"Emiko Zhang","RoleType":"Home Health Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00936","CitizenName":"Karina Lai","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00937","CitizenName":"Manju Crenshaw","RoleType":"Midwife","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00938","CitizenName":"Hazel Reed","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00939","CitizenName":"Saniya Washington","RoleType":"Nonprofit Executive Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00940","CitizenName":"Constanza Mensah","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00941","CitizenName":"Nadia Alvarez","RoleType":"Physical Therapist","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00001","POP_ID":"POP-00942","CitizenName":"Zaniya Adams","RoleType":"AI Safety Researcher (Anthropic)","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00943","CitizenName":"Pilar Ramirez","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00034","POP_ID":"POP-00944","CitizenName":"Basma Bello","RoleType":"Disability Rights Advocate","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00945","CitizenName":"Briar Crawford","RoleType":"Elevator Mechanic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00012","POP_ID":"POP-00946","CitizenName":"LaTrice Desai","RoleType":"Trade Union Representative","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00947","CitizenName":"Damaris Murakami","RoleType":"Theater Director","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00020","POP_ID":"POP-00948","CitizenName":"Akua Ortiz","RoleType":"HVAC Technician","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00949","CitizenName":"Noor Gutierrez","RoleType":"Paramedic","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00950","CitizenName":"Mojisola Cook","RoleType":"Community Organizer","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00951","CitizenName":"Niani Oakley","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00952","CitizenName":"Roberto Iglesias","RoleType":"Restaurant Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00953","CitizenName":"Carmen Solis","RoleType":"Community Advocate","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00028","POP_ID":"POP-00954","CitizenName":"Rev. Han","RoleType":"Senior Pastor / Faith Leader","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00955","CitizenName":"Keisha Morris","RoleType":"Counselor","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00956","CitizenName":"Miguel Santos","RoleType":"Restaurant Owner","Status":"SELF_EMPLOYED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00958","CitizenName":"Rafael Phillips","RoleType":"Server","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00959","CitizenName":"Dante Nelson","RoleType":"Security Guard","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00044","POP_ID":"POP-00960","CitizenName":"Jalen Hill","RoleType":"Line Cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00961","CitizenName":"Darius Clark","RoleType":"Bakery Worker","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00962","CitizenName":"Marcus Walker","RoleType":"Dishwasher","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00963","CitizenName":"Jose Wright","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00964","CitizenName":"Owen Campbell","RoleType":"Bakery Worker","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00044","POP_ID":"POP-00965","CitizenName":"Bruce Wright","RoleType":"Line Cook","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00015","POP_ID":"POP-00966","CitizenName":"Marco Johnson","RoleType":"Nurse Aide","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00967","CitizenName":"Marco Lopez","RoleType":"Mechanic","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00968","CitizenName":"Jose Johnson","RoleType":"Warehouse Worker","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00969","CitizenName":"Elijah Campbell","RoleType":"Taxi Driver","Status":"SELF_EMPLOYED","MappingLayer":"keyword"}
+{"BIZ_ID":"BIZ-00036","POP_ID":"POP-00970","CitizenName":"Guadalupe Lee","RoleType":"Bartender","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-00971","CitizenName":"Shawn Nguyen","RoleType":"Construction Laborer","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-00973","CitizenName":"Delia Fuentes","RoleType":"Letter Writer","Status":"SELF_EMPLOYED","MappingLayer":"keyword"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01019","CitizenName":"Patrick Hill","RoleType":"Line cook","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"BIZ-00017","POP_ID":"POP-01020","CitizenName":"Dr. Brenner","RoleType":"Social Worker","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00095","POP_ID":"POP-01021","CitizenName":"Vanessa Tran-Muñoz","RoleType":"OARI Program Director","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00074","POP_ID":"POP-01022","CitizenName":"Wilson Shepard","RoleType":"Head Coach, Oakland Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00074","POP_ID":"POP-01023","CitizenName":"Adash Stanley","RoleType":"PG / The Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00074","POP_ID":"POP-01024","CitizenName":"AJ Dybantsa","RoleType":"SF / The Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00074","POP_ID":"POP-01025","CitizenName":"Dame Sarr","RoleType":"SG / The Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00074","POP_ID":"POP-01026","CitizenName":"Coen Carr","RoleType":"SG / The Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00074","POP_ID":"POP-01027","CitizenName":"Austin Reaves","RoleType":"SG / The Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00074","POP_ID":"POP-01028","CitizenName":"Wendell  Carter Jr.","RoleType":"C / The Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00074","POP_ID":"POP-01046","CitizenName":"Elliot Abraham","RoleType":"General Manager, Oakland Oaks","Status":"Active","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01029","CitizenName":"Miguel Allen","RoleType":"Plumber","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01030","CitizenName":"Elena Patel","RoleType":"Cook","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01031","CitizenName":"Aaliyah Yamamoto","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01032","CitizenName":"Sakura Foster","RoleType":"Electrician","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01033","CitizenName":"Cedric Nakamura","RoleType":"Retail clerk","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01034","CitizenName":"Howard Perez","RoleType":"Server","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01035","CitizenName":"Kaila Brown","RoleType":"Construction worker","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01036","CitizenName":"Mei Wong","RoleType":"After-school program aide","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01037","CitizenName":"Ivy Tran","RoleType":"Driver","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"SELF_EMPLOYED","POP_ID":"POP-01038","CitizenName":"Camila Cook","RoleType":"Painter","Status":"SELF_EMPLOYED","MappingLayer":"keyword"}
+{"BIZ_ID":"BIZ-00014","POP_ID":"POP-01039","CitizenName":"Ximena Mehta","RoleType":"Bart Transit PR","Status":"Active","MappingLayer":"keyword"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01040","CitizenName":"Aaliyah Santos","RoleType":"Office worker","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01041","CitizenName":"Ronald Williams","RoleType":"Line cook","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01042","CitizenName":"Isaac Renteria","RoleType":"Construction laborer","Status":"UNTRACKED","MappingLayer":"unmatched"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01043","CitizenName":"Mei Renteria","RoleType":"Security guard","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"UNTRACKED","POP_ID":"POP-01044","CitizenName":"Tobias Ramas","RoleType":"Bank teller","Status":"UNTRACKED","MappingLayer":"existing"}
+{"BIZ_ID":"BIZ-00038","POP_ID":"POP-01045","CitizenName":"Vanessa Ramas","RoleType":"Barista","Status":"Active","MappingLayer":"existing"}

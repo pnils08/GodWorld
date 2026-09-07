@@ -1,0 +1,23 @@
+{"Neighborhood":"Downtown","PropertyCrimeIndex":"58","ViolentCrimeIndex":"55","ResponseTimeAvg":"9.3","ClearanceRate":"0.15","IncidentCount":"14","LastUpdated":"106"}
+{"Neighborhood":"Temescal","PropertyCrimeIndex":"43","ViolentCrimeIndex":"33","ResponseTimeAvg":"10.5","ClearanceRate":"0.15","IncidentCount":"6","LastUpdated":"106"}
+{"Neighborhood":"Rockridge","PropertyCrimeIndex":"28","ViolentCrimeIndex":"21","ResponseTimeAvg":"10.8","ClearanceRate":"0.15","IncidentCount":"1","LastUpdated":"106"}
+{"Neighborhood":"Fruitvale","PropertyCrimeIndex":"50","ViolentCrimeIndex":"50","ResponseTimeAvg":"12.3","ClearanceRate":"0.15","IncidentCount":"7","LastUpdated":"106"}
+{"Neighborhood":"West Oakland","PropertyCrimeIndex":"54","ViolentCrimeIndex":"56","ResponseTimeAvg":"13.3","ClearanceRate":"0.15","IncidentCount":"9","LastUpdated":"106"}
+{"Neighborhood":"East Oakland","PropertyCrimeIndex":"51","ViolentCrimeIndex":"60","ResponseTimeAvg":"13.8","ClearanceRate":"0.15","IncidentCount":"5","LastUpdated":"106"}
+{"Neighborhood":"Lake Merritt","PropertyCrimeIndex":"48","ViolentCrimeIndex":"37","ResponseTimeAvg":"10.4","ClearanceRate":"0.15","IncidentCount":"5","LastUpdated":"106"}
+{"Neighborhood":"Jack London","PropertyCrimeIndex":"48","ViolentCrimeIndex":"39","ResponseTimeAvg":"9.9","ClearanceRate":"0.15","IncidentCount":"9","LastUpdated":"106"}
+{"Neighborhood":"Piedmont Ave","PropertyCrimeIndex":"22","ViolentCrimeIndex":"13","ResponseTimeAvg":"10.3","ClearanceRate":"0.15","IncidentCount":"1","LastUpdated":"106"}
+{"Neighborhood":"Montclair","PropertyCrimeIndex":"17","ViolentCrimeIndex":"12","ResponseTimeAvg":"10.5","ClearanceRate":"0.15","IncidentCount":"4","LastUpdated":"105"}
+{"Neighborhood":"Grand Lake","PropertyCrimeIndex":"28","ViolentCrimeIndex":"23","ResponseTimeAvg":"11","ClearanceRate":"0.15","IncidentCount":"3","LastUpdated":"106"}
+{"Neighborhood":"Chinatown","PropertyCrimeIndex":"49","ViolentCrimeIndex":"41","ResponseTimeAvg":"11.3","ClearanceRate":"0.15","IncidentCount":"9","LastUpdated":"106"}
+{"Neighborhood":"Adams Point","PropertyCrimeIndex":"38","ViolentCrimeIndex":"26","ResponseTimeAvg":"11.9","ClearanceRate":"0.15","IncidentCount":"4","LastUpdated":"106"}
+{"Neighborhood":"Dimond","PropertyCrimeIndex":"38","ViolentCrimeIndex":"26","ResponseTimeAvg":"10.7","ClearanceRate":"0.15","IncidentCount":"5","LastUpdated":"106"}
+{"Neighborhood":"Glenview","PropertyCrimeIndex":"30","ViolentCrimeIndex":"20","ResponseTimeAvg":"10.5","ClearanceRate":"0.15","IncidentCount":"1","LastUpdated":"106"}
+{"Neighborhood":"Laurel","PropertyCrimeIndex":"28","ViolentCrimeIndex":"24","ResponseTimeAvg":"11.5","ClearanceRate":"0.15","IncidentCount":"3","LastUpdated":"106"}
+{"Neighborhood":"Uptown","PropertyCrimeIndex":"49","ViolentCrimeIndex":"27","ResponseTimeAvg":"11.2","ClearanceRate":"0.15","IncidentCount":"7","LastUpdated":"106"}
+{"Neighborhood":"KONO","PropertyCrimeIndex":"38","ViolentCrimeIndex":"27","ResponseTimeAvg":"11.8","ClearanceRate":"0.15","IncidentCount":"7","LastUpdated":"106"}
+{"Neighborhood":"Brooklyn","PropertyCrimeIndex":"34","ViolentCrimeIndex":"21","ResponseTimeAvg":"11.6","ClearanceRate":"0.19","IncidentCount":"1","LastUpdated":"106"}
+{"Neighborhood":"Eastlake","PropertyCrimeIndex":"35","ViolentCrimeIndex":"25","ResponseTimeAvg":"11.8","ClearanceRate":"0.18","IncidentCount":"3","LastUpdated":"106"}
+{"Neighborhood":"Ivy Hill","PropertyCrimeIndex":"31","ViolentCrimeIndex":"20","ResponseTimeAvg":"10.8","ClearanceRate":"0.19","IncidentCount":"4","LastUpdated":"106"}
+{"Neighborhood":"San Antonio","PropertyCrimeIndex":"46","ViolentCrimeIndex":"36","ResponseTimeAvg":"11","ClearanceRate":"0.16","IncidentCount":"6","LastUpdated":"106"}
+{"Neighborhood":"Baylight District","PropertyCrimeIndex":"49","ViolentCrimeIndex":"40","ResponseTimeAvg":"10.4","ClearanceRate":"0.23","IncidentCount":"6","LastUpdated":"106"}

@@ -1,0 +1,522 @@
+{"Timestamp":"C78","Cycle":"78","Station":"12th St Oakland City Center","RidershipVolume":"4645","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C78","Cycle":"78","Station":"19th St Oakland","RidershipVolume":"3167","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C78","Cycle":"78","Station":"Lake Merritt","RidershipVolume":"1827","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C78","Cycle":"78","Station":"Fruitvale","RidershipVolume":"2622","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C78","Cycle":"78","Station":"Coliseum","RidershipVolume":"1975","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C78","Cycle":"78","Station":"West Oakland","RidershipVolume":"1769","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C78","Cycle":"78","Station":"MacArthur","RidershipVolume":"2979","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C78","Cycle":"78","Station":"Rockridge","RidershipVolume":"2690","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"I-880 South","Notes":"light traffic"}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"42","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"31","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"21","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"30","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"22","Corridor":"International Blvd","Notes":"light traffic"}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"MacArthur Blvd","Notes":"light traffic"}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"21","Corridor":"Telegraph Ave","Notes":"light traffic"}
+{"Timestamp":"C78","Cycle":"78","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"27","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"C79","Cycle":"79","Station":"12th St Oakland City Center","RidershipVolume":"4645","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C79","Cycle":"79","Station":"19th St Oakland","RidershipVolume":"3167","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C79","Cycle":"79","Station":"Lake Merritt","RidershipVolume":"1827","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C79","Cycle":"79","Station":"Fruitvale","RidershipVolume":"2622","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C79","Cycle":"79","Station":"Coliseum","RidershipVolume":"1975","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C79","Cycle":"79","Station":"West Oakland","RidershipVolume":"1769","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C79","Cycle":"79","Station":"MacArthur","RidershipVolume":"2979","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C79","Cycle":"79","Station":"Rockridge","RidershipVolume":"2690","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"I-880 South","Notes":"light traffic"}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"42","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"31","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"21","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"30","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"22","Corridor":"International Blvd","Notes":"light traffic"}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"MacArthur Blvd","Notes":"light traffic"}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"21","Corridor":"Telegraph Ave","Notes":"light traffic"}
+{"Timestamp":"C79","Cycle":"79","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"27","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"C80","Cycle":"80","Station":"12th St Oakland City Center","RidershipVolume":"5069","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C80","Cycle":"80","Station":"19th St Oakland","RidershipVolume":"3978","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C80","Cycle":"80","Station":"Lake Merritt","RidershipVolume":"1899","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C80","Cycle":"80","Station":"Fruitvale","RidershipVolume":"2652","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C80","Cycle":"80","Station":"Coliseum","RidershipVolume":"2438","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C80","Cycle":"80","Station":"West Oakland","RidershipVolume":"1732","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C80","Cycle":"80","Station":"MacArthur","RidershipVolume":"3698","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C80","Cycle":"80","Station":"Rockridge","RidershipVolume":"2999","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"46","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"49","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"I-980","Notes":""}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"27","Corridor":"Broadway","Notes":"light traffic"}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"MacArthur Blvd","Notes":"light traffic"}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C80","Cycle":"80","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"26","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"C81","Cycle":"81","Station":"12th St Oakland City Center","RidershipVolume":"15492","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C81","Cycle":"81","Station":"19th St Oakland","RidershipVolume":"10331","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C81","Cycle":"81","Station":"Lake Merritt","RidershipVolume":"5244","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C81","Cycle":"81","Station":"Fruitvale","RidershipVolume":"7577","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C81","Cycle":"81","Station":"Coliseum","RidershipVolume":"9201","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"game day crowds; above-average ridership"}
+{"Timestamp":"C81","Cycle":"81","Station":"West Oakland","RidershipVolume":"4733","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C81","Cycle":"81","Station":"MacArthur","RidershipVolume":"11228","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C81","Cycle":"81","Station":"Rockridge","RidershipVolume":"8292","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-880 North","Notes":"heavy congestion; event traffic"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-880 South","Notes":"heavy congestion; event traffic"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-580 East","Notes":"heavy congestion"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-580 West","Notes":"heavy congestion"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"73","Corridor":"I-980","Notes":"moderate delays"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"90","Corridor":"Broadway","Notes":"heavy congestion"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"92","Corridor":"International Blvd","Notes":"heavy congestion"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"86","Corridor":"MacArthur Blvd","Notes":"heavy congestion"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"87","Corridor":"Telegraph Ave","Notes":"heavy congestion"}
+{"Timestamp":"C81","Cycle":"81","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"73","Corridor":"Grand Ave","Notes":"moderate delays"}
+{"Timestamp":"C82","Cycle":"82","Station":"12th St Oakland City Center","RidershipVolume":"14217","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C82","Cycle":"82","Station":"19th St Oakland","RidershipVolume":"9480","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C82","Cycle":"82","Station":"Lake Merritt","RidershipVolume":"4807","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C82","Cycle":"82","Station":"Fruitvale","RidershipVolume":"6959","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C82","Cycle":"82","Station":"Coliseum","RidershipVolume":"8434","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"game day crowds; above-average ridership"}
+{"Timestamp":"C82","Cycle":"82","Station":"West Oakland","RidershipVolume":"4344","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C82","Cycle":"82","Station":"MacArthur","RidershipVolume":"10304","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C82","Cycle":"82","Station":"Rockridge","RidershipVolume":"7605","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-880 North","Notes":"heavy congestion; event traffic"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-880 South","Notes":"heavy congestion; event traffic"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-580 East","Notes":"heavy congestion"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"87","Corridor":"I-580 West","Notes":"heavy congestion"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"62","Corridor":"I-980","Notes":"moderate delays"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"77","Corridor":"Broadway","Notes":"heavy congestion"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"79","Corridor":"International Blvd","Notes":"heavy congestion"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"75","Corridor":"MacArthur Blvd","Notes":"moderate delays"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"75","Corridor":"Telegraph Ave","Notes":"moderate delays"}
+{"Timestamp":"C82","Cycle":"82","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"63","Corridor":"Grand Ave","Notes":"moderate delays"}
+{"Timestamp":"C83","Cycle":"83","Station":"12th St Oakland City Center","RidershipVolume":"13585","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C83","Cycle":"83","Station":"19th St Oakland","RidershipVolume":"9059","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C83","Cycle":"83","Station":"Lake Merritt","RidershipVolume":"4589","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C83","Cycle":"83","Station":"Fruitvale","RidershipVolume":"6648","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C83","Cycle":"83","Station":"Coliseum","RidershipVolume":"8051","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"game day crowds; above-average ridership"}
+{"Timestamp":"C83","Cycle":"83","Station":"West Oakland","RidershipVolume":"4148","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C83","Cycle":"83","Station":"MacArthur","RidershipVolume":"9840","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C83","Cycle":"83","Station":"Rockridge","RidershipVolume":"7269","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-880 North","Notes":"heavy congestion; event traffic"}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-880 South","Notes":"heavy congestion; event traffic"}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-580 East","Notes":"heavy congestion"}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"80","Corridor":"I-580 West","Notes":"heavy congestion"}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"56","Corridor":"I-980","Notes":""}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"71","Corridor":"Broadway","Notes":"moderate delays"}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"72","Corridor":"International Blvd","Notes":"moderate delays"}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"69","Corridor":"MacArthur Blvd","Notes":"moderate delays"}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"68","Corridor":"Telegraph Ave","Notes":"moderate delays"}
+{"Timestamp":"C83","Cycle":"83","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"58","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"12th St Oakland City Center","RidershipVolume":"8321","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"19th St Oakland","RidershipVolume":"4914","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C84","Cycle":"84","Station":"Lake Merritt","RidershipVolume":"2559","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C84","Cycle":"84","Station":"Fruitvale","RidershipVolume":"4286","OnTimePerformance":"0.9","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C84","Cycle":"84","Station":"Coliseum","RidershipVolume":"3074","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C84","Cycle":"84","Station":"West Oakland","RidershipVolume":"2542","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C84","Cycle":"84","Station":"MacArthur","RidershipVolume":"5635","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"Rockridge","RidershipVolume":"3863","OnTimePerformance":"0.9","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"53","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"45","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"59","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"I-980","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"42","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C84","Cycle":"84","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C85","Cycle":"85","Station":"12th St Oakland City Center","RidershipVolume":"5698","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C85","Cycle":"85","Station":"19th St Oakland","RidershipVolume":"3799","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C85","Cycle":"85","Station":"Lake Merritt","RidershipVolume":"1923","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C85","Cycle":"85","Station":"Fruitvale","RidershipVolume":"2792","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C85","Cycle":"85","Station":"Coliseum","RidershipVolume":"3374","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"game day crowds; light ridership"}
+{"Timestamp":"C85","Cycle":"85","Station":"West Oakland","RidershipVolume":"1739","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C85","Cycle":"85","Station":"MacArthur","RidershipVolume":"4127","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C85","Cycle":"85","Station":"Rockridge","RidershipVolume":"3047","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"68","Corridor":"I-880 North","Notes":"moderate delays; event traffic"}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"60","Corridor":"I-880 South","Notes":"event traffic"}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"64","Corridor":"I-580 East","Notes":"moderate delays"}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"46","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"28","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C85","Cycle":"85","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C86","Cycle":"86","Station":"12th St Oakland City Center","RidershipVolume":"5437","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C86","Cycle":"86","Station":"19th St Oakland","RidershipVolume":"3626","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C86","Cycle":"86","Station":"Lake Merritt","RidershipVolume":"1836","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C86","Cycle":"86","Station":"Fruitvale","RidershipVolume":"2664","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C86","Cycle":"86","Station":"Coliseum","RidershipVolume":"3220","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"game day crowds; light ridership"}
+{"Timestamp":"C86","Cycle":"86","Station":"West Oakland","RidershipVolume":"1660","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C86","Cycle":"86","Station":"MacArthur","RidershipVolume":"3944","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C86","Cycle":"86","Station":"Rockridge","RidershipVolume":"2909","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"63","Corridor":"I-880 North","Notes":"moderate delays; event traffic"}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"55","Corridor":"I-880 South","Notes":"event traffic"}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"59","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"43","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C86","Cycle":"86","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"31","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"12th St Oakland City Center","RidershipVolume":"8324","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"19th St Oakland","RidershipVolume":"4916","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C87","Cycle":"87","Station":"Lake Merritt","RidershipVolume":"2559","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C87","Cycle":"87","Station":"Fruitvale","RidershipVolume":"4292","OnTimePerformance":"0.9","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C87","Cycle":"87","Station":"Coliseum","RidershipVolume":"3074","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C87","Cycle":"87","Station":"West Oakland","RidershipVolume":"2544","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C87","Cycle":"87","Station":"MacArthur","RidershipVolume":"5644","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"Rockridge","RidershipVolume":"3865","OnTimePerformance":"0.9","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"53","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"45","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"59","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"I-980","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"42","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C87","Cycle":"87","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C88","Cycle":"88","Station":"12th St Oakland City Center","RidershipVolume":"6619","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C88","Cycle":"88","Station":"19th St Oakland","RidershipVolume":"4414","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C88","Cycle":"88","Station":"Lake Merritt","RidershipVolume":"2234","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C88","Cycle":"88","Station":"Fruitvale","RidershipVolume":"3247","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C88","Cycle":"88","Station":"Coliseum","RidershipVolume":"3919","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"game day crowds"}
+{"Timestamp":"C88","Cycle":"88","Station":"West Oakland","RidershipVolume":"2022","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C88","Cycle":"88","Station":"MacArthur","RidershipVolume":"4803","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C88","Cycle":"88","Station":"Rockridge","RidershipVolume":"3542","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"73","Corridor":"I-880 North","Notes":"moderate delays; event traffic"}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"64","Corridor":"I-880 South","Notes":"moderate delays; event traffic"}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"70","Corridor":"I-580 East","Notes":"moderate delays"}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"31","Corridor":"I-980","Notes":""}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"43","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"44","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C88","Cycle":"88","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"36","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C89","Cycle":"89","Station":"12th St Oakland City Center","RidershipVolume":"6336","OnTimePerformance":"0.88","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C89","Cycle":"89","Station":"19th St Oakland","RidershipVolume":"4225","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C89","Cycle":"89","Station":"Lake Merritt","RidershipVolume":"2137","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C89","Cycle":"89","Station":"Fruitvale","RidershipVolume":"3106","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C89","Cycle":"89","Station":"Coliseum","RidershipVolume":"3748","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"game day crowds"}
+{"Timestamp":"C89","Cycle":"89","Station":"West Oakland","RidershipVolume":"1936","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C89","Cycle":"89","Station":"MacArthur","RidershipVolume":"4598","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C89","Cycle":"89","Station":"Rockridge","RidershipVolume":"3392","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"68","Corridor":"I-880 North","Notes":"moderate delays; event traffic"}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"60","Corridor":"I-880 South","Notes":"event traffic"}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"64","Corridor":"I-580 East","Notes":"moderate delays"}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"46","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"28","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C89","Cycle":"89","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C90","Cycle":"90","Station":"12th St Oakland City Center","RidershipVolume":"6913","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C90","Cycle":"90","Station":"19th St Oakland","RidershipVolume":"4610","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C90","Cycle":"90","Station":"Lake Merritt","RidershipVolume":"2331","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C90","Cycle":"90","Station":"Fruitvale","RidershipVolume":"3392","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C90","Cycle":"90","Station":"Coliseum","RidershipVolume":"4089","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"game day crowds"}
+{"Timestamp":"C90","Cycle":"90","Station":"West Oakland","RidershipVolume":"2112","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C90","Cycle":"90","Station":"MacArthur","RidershipVolume":"5015","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C90","Cycle":"90","Station":"Rockridge","RidershipVolume":"3699","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"78","Corridor":"I-880 North","Notes":"heavy congestion; event traffic"}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"69","Corridor":"I-880 South","Notes":"moderate delays; event traffic"}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"75","Corridor":"I-580 East","Notes":"moderate delays"}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"53","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"I-980","Notes":""}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"46","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"44","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"47","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"43","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C90","Cycle":"90","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C91","Cycle":"91","Station":"12th St Oakland City Center","RidershipVolume":"14686","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C91","Cycle":"91","Station":"19th St Oakland","RidershipVolume":"9826","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C91","Cycle":"91","Station":"Lake Merritt","RidershipVolume":"5644","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C91","Cycle":"91","Station":"Fruitvale","RidershipVolume":"8039","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C91","Cycle":"91","Station":"Coliseum","RidershipVolume":"6477","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C91","Cycle":"91","Station":"West Oakland","RidershipVolume":"5604","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C91","Cycle":"91","Station":"MacArthur","RidershipVolume":"10553","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C91","Cycle":"91","Station":"Rockridge","RidershipVolume":"8744","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"89","Corridor":"I-880 North","Notes":"heavy congestion"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"72","Corridor":"I-880 South","Notes":"moderate delays"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"93","Corridor":"I-580 East","Notes":"heavy congestion"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"68","Corridor":"I-580 West","Notes":"moderate delays"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"66","Corridor":"I-980","Notes":"moderate delays"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"65","Corridor":"Broadway","Notes":"moderate delays"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"75","Corridor":"International Blvd","Notes":"moderate delays"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"63","Corridor":"MacArthur Blvd","Notes":"moderate delays"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"66","Corridor":"Telegraph Ave","Notes":"moderate delays"}
+{"Timestamp":"C91","Cycle":"91","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"52","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C92","Cycle":"92","Station":"12th St Oakland City Center","RidershipVolume":"14684","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C92","Cycle":"92","Station":"19th St Oakland","RidershipVolume":"9825","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C92","Cycle":"92","Station":"Lake Merritt","RidershipVolume":"5644","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C92","Cycle":"92","Station":"Fruitvale","RidershipVolume":"8041","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C92","Cycle":"92","Station":"Coliseum","RidershipVolume":"6477","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C92","Cycle":"92","Station":"West Oakland","RidershipVolume":"5606","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C92","Cycle":"92","Station":"MacArthur","RidershipVolume":"10554","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C92","Cycle":"92","Station":"Rockridge","RidershipVolume":"8745","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"89","Corridor":"I-880 North","Notes":"heavy congestion"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"72","Corridor":"I-880 South","Notes":"moderate delays"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"93","Corridor":"I-580 East","Notes":"heavy congestion"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"68","Corridor":"I-580 West","Notes":"moderate delays"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"66","Corridor":"I-980","Notes":"moderate delays"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"65","Corridor":"Broadway","Notes":"moderate delays"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"75","Corridor":"International Blvd","Notes":"moderate delays"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"63","Corridor":"MacArthur Blvd","Notes":"moderate delays"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"66","Corridor":"Telegraph Ave","Notes":"moderate delays"}
+{"Timestamp":"C92","Cycle":"92","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"52","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"12th St Oakland City Center","RidershipVolume":"6217","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C93","Cycle":"93","Station":"19th St Oakland","RidershipVolume":"4045","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C93","Cycle":"93","Station":"Lake Merritt","RidershipVolume":"2011","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C93","Cycle":"93","Station":"Fruitvale","RidershipVolume":"3719","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C93","Cycle":"93","Station":"Coliseum","RidershipVolume":"2428","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C93","Cycle":"93","Station":"West Oakland","RidershipVolume":"2248","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C93","Cycle":"93","Station":"MacArthur","RidershipVolume":"4561","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C93","Cycle":"93","Station":"Rockridge","RidershipVolume":"3503","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"36","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"23","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"30","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C93","Cycle":"93","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"C94","Cycle":"94","Station":"12th St Oakland City Center","RidershipVolume":"14685","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C94","Cycle":"94","Station":"19th St Oakland","RidershipVolume":"9826","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C94","Cycle":"94","Station":"Lake Merritt","RidershipVolume":"5644","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C94","Cycle":"94","Station":"Fruitvale","RidershipVolume":"8045","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C94","Cycle":"94","Station":"Coliseum","RidershipVolume":"6477","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C94","Cycle":"94","Station":"West Oakland","RidershipVolume":"5607","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C94","Cycle":"94","Station":"MacArthur","RidershipVolume":"10557","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C94","Cycle":"94","Station":"Rockridge","RidershipVolume":"8746","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"89","Corridor":"I-880 North","Notes":"heavy congestion"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"72","Corridor":"I-880 South","Notes":"moderate delays"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"93","Corridor":"I-580 East","Notes":"heavy congestion"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"68","Corridor":"I-580 West","Notes":"moderate delays"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"66","Corridor":"I-980","Notes":"moderate delays"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"65","Corridor":"Broadway","Notes":"moderate delays"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"75","Corridor":"International Blvd","Notes":"moderate delays"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"63","Corridor":"MacArthur Blvd","Notes":"moderate delays"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"66","Corridor":"Telegraph Ave","Notes":"moderate delays"}
+{"Timestamp":"C94","Cycle":"94","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"52","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C95","Cycle":"95","Station":"12th St Oakland City Center","RidershipVolume":"14685","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C95","Cycle":"95","Station":"19th St Oakland","RidershipVolume":"9825","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C95","Cycle":"95","Station":"Lake Merritt","RidershipVolume":"5644","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C95","Cycle":"95","Station":"Fruitvale","RidershipVolume":"8044","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C95","Cycle":"95","Station":"Coliseum","RidershipVolume":"6477","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C95","Cycle":"95","Station":"West Oakland","RidershipVolume":"5608","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C95","Cycle":"95","Station":"MacArthur","RidershipVolume":"10558","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"C95","Cycle":"95","Station":"Rockridge","RidershipVolume":"8747","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"89","Corridor":"I-880 North","Notes":"heavy congestion"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"72","Corridor":"I-880 South","Notes":"moderate delays"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"93","Corridor":"I-580 East","Notes":"heavy congestion"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"68","Corridor":"I-580 West","Notes":"moderate delays"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"66","Corridor":"I-980","Notes":"moderate delays"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"65","Corridor":"Broadway","Notes":"moderate delays"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"75","Corridor":"International Blvd","Notes":"moderate delays"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"63","Corridor":"MacArthur Blvd","Notes":"moderate delays"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"66","Corridor":"Telegraph Ave","Notes":"moderate delays"}
+{"Timestamp":"C95","Cycle":"95","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"52","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"12th St Oakland City Center","RidershipVolume":"6499","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C96","Cycle":"96","Station":"19th St Oakland","RidershipVolume":"4229","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C96","Cycle":"96","Station":"Lake Merritt","RidershipVolume":"2103","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C96","Cycle":"96","Station":"Fruitvale","RidershipVolume":"3889","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C96","Cycle":"96","Station":"Coliseum","RidershipVolume":"2538","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C96","Cycle":"96","Station":"West Oakland","RidershipVolume":"2352","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C96","Cycle":"96","Station":"MacArthur","RidershipVolume":"4769","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C96","Cycle":"96","Station":"Rockridge","RidershipVolume":"3663","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"44","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"32","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C96","Cycle":"96","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"27","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"C97","Cycle":"97","Station":"12th St Oakland City Center","RidershipVolume":"6220","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C97","Cycle":"97","Station":"19th St Oakland","RidershipVolume":"4047","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C97","Cycle":"97","Station":"Lake Merritt","RidershipVolume":"2011","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C97","Cycle":"97","Station":"Fruitvale","RidershipVolume":"3719","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C97","Cycle":"97","Station":"Coliseum","RidershipVolume":"2428","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C97","Cycle":"97","Station":"West Oakland","RidershipVolume":"2250","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C97","Cycle":"97","Station":"MacArthur","RidershipVolume":"4561","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C97","Cycle":"97","Station":"Rockridge","RidershipVolume":"3504","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"36","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"23","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"30","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C97","Cycle":"97","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"C98","Cycle":"98","Station":"12th St Oakland City Center","RidershipVolume":"6786","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C98","Cycle":"98","Station":"19th St Oakland","RidershipVolume":"4415","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C98","Cycle":"98","Station":"Lake Merritt","RidershipVolume":"2194","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C98","Cycle":"98","Station":"Fruitvale","RidershipVolume":"4057","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C98","Cycle":"98","Station":"Coliseum","RidershipVolume":"2648","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C98","Cycle":"98","Station":"West Oakland","RidershipVolume":"2454","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C98","Cycle":"98","Station":"MacArthur","RidershipVolume":"4975","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C98","Cycle":"98","Station":"Rockridge","RidershipVolume":"3823","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"44","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"47","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"43","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"28","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"42","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C98","Cycle":"98","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"29","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"C99","Cycle":"99","Station":"12th St Oakland City Center","RidershipVolume":"6502","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C99","Cycle":"99","Station":"19th St Oakland","RidershipVolume":"4230","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C99","Cycle":"99","Station":"Lake Merritt","RidershipVolume":"2103","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C99","Cycle":"99","Station":"Fruitvale","RidershipVolume":"3889","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C99","Cycle":"99","Station":"Coliseum","RidershipVolume":"2538","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C99","Cycle":"99","Station":"West Oakland","RidershipVolume":"2351","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C99","Cycle":"99","Station":"MacArthur","RidershipVolume":"4767","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C99","Cycle":"99","Station":"Rockridge","RidershipVolume":"3663","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"44","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"Broadway","Notes":""}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"32","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"C99","Cycle":"99","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"27","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"12th St Oakland City Center","RidershipVolume":"5937","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"19th St Oakland","RidershipVolume":"3863","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"Lake Merritt","RidershipVolume":"1920","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"Fruitvale","RidershipVolume":"3551","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"Coliseum","RidershipVolume":"2317","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"West Oakland","RidershipVolume":"2148","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"MacArthur","RidershipVolume":"4355","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"Rockridge","RidershipVolume":"3346","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"21","Corridor":"I-980","Notes":"light traffic"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"35","Corridor":"Broadway","Notes":""}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"30","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"28","Corridor":"MacArthur Blvd","Notes":"light traffic"}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"32","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"Y2C48","Cycle":"100","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"23","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"12th St Oakland City Center","RidershipVolume":"14843","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"19th St Oakland","RidershipVolume":"9658","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"Lake Merritt","RidershipVolume":"4800","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"Fruitvale","RidershipVolume":"8880","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"Coliseum","RidershipVolume":"5793","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"West Oakland","RidershipVolume":"5372","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"MacArthur","RidershipVolume":"10889","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"Rockridge","RidershipVolume":"8367","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"70","Corridor":"I-880 North","Notes":"moderate delays"}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"71","Corridor":"I-880 South","Notes":"moderate delays"}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"71","Corridor":"I-580 East","Notes":"moderate delays"}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"63","Corridor":"I-580 West","Notes":"moderate delays"}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"46","Corridor":"I-980","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"62","Corridor":"Broadway","Notes":"moderate delays"}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"60","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"53","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"60","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"Y2C49","Cycle":"101","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"45","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"12th St Oakland City Center","RidershipVolume":"7060","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"19th St Oakland","RidershipVolume":"4170","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"Lake Merritt","RidershipVolume":"2334","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"Fruitvale","RidershipVolume":"3649","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"Coliseum","RidershipVolume":"2603","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"West Oakland","RidershipVolume":"2159","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"MacArthur","RidershipVolume":"4789","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"Rockridge","RidershipVolume":"3279","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"49","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"41","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"54","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"I-980","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"31","Corridor":"Broadway","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"46","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"31","Corridor":"MacArthur Blvd","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"Y2C50","Cycle":"102","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"Grand Ave","Notes":""}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"12th St Oakland City Center","RidershipVolume":"6007","OnTimePerformance":"0.84","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"19th St Oakland","RidershipVolume":"4715","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"Lake Merritt","RidershipVolume":"2298","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"Fruitvale","RidershipVolume":"3221","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"Coliseum","RidershipVolume":"2709","OnTimePerformance":"0.87","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"West Oakland","RidershipVolume":"2021","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"MacArthur","RidershipVolume":"4235","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"Rockridge","RidershipVolume":"3417","OnTimePerformance":"0.85","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"I-880 North","Notes":""}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"46","Corridor":"I-880 South","Notes":""}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"49","Corridor":"I-580 East","Notes":""}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"I-580 West","Notes":""}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"34","Corridor":"I-980","Notes":""}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"27","Corridor":"Broadway","Notes":"light traffic"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"38","Corridor":"International Blvd","Notes":""}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"25","Corridor":"MacArthur Blvd","Notes":"light traffic"}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"Telegraph Ave","Notes":""}
+{"Timestamp":"Y2C51","Cycle":"103","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"26","Corridor":"Grand Ave","Notes":"light traffic"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"12th St Oakland City Center","RidershipVolume":"4915","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"19th St Oakland","RidershipVolume":"3351","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"Lake Merritt","RidershipVolume":"1813","OnTimePerformance":"0.79","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"Fruitvale","RidershipVolume":"2603","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"Coliseum","RidershipVolume":"2076","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"West Oakland","RidershipVolume":"1670","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"MacArthur","RidershipVolume":"3681","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"Rockridge","RidershipVolume":"2706","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"43","Corridor":"I-880 North","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"31","Corridor":"I-880 South","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"40","Corridor":"I-580 East","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"28","Corridor":"I-580 West","Notes":"light traffic; weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"28","Corridor":"I-980","Notes":"light traffic; weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"26","Corridor":"Broadway","Notes":"light traffic; weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"37","Corridor":"International Blvd","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"26","Corridor":"MacArthur Blvd","Notes":"light traffic; weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"33","Corridor":"Telegraph Ave","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y2C52","Cycle":"104","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"23","Corridor":"Grand Ave","Notes":"light traffic; weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"12th St Oakland City Center","RidershipVolume":"7300","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"19th St Oakland","RidershipVolume":"5035","OnTimePerformance":"0.75","TrafficIndex":"50","Corridor":"","Notes":"service delays; light ridership"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"Lake Merritt","RidershipVolume":"2948","OnTimePerformance":"0.77","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"Fruitvale","RidershipVolume":"4146","OnTimePerformance":"0.73","TrafficIndex":"50","Corridor":"","Notes":"service delays; light ridership"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"Coliseum","RidershipVolume":"2985","OnTimePerformance":"0.75","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"West Oakland","RidershipVolume":"2560","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"MacArthur","RidershipVolume":"5255","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"Rockridge","RidershipVolume":"3482","OnTimePerformance":"0.75","TrafficIndex":"50","Corridor":"","Notes":"light ridership"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"72","Corridor":"I-880 North","Notes":"moderate delays; weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"69","Corridor":"I-880 South","Notes":"moderate delays; weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"81","Corridor":"I-580 East","Notes":"heavy congestion; weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"60","Corridor":"I-580 West","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"43","Corridor":"I-980","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"62","Corridor":"Broadway","Notes":"moderate delays; weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"60","Corridor":"International Blvd","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"45","Corridor":"MacArthur Blvd","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"55","Corridor":"Telegraph Ave","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y3C1","Cycle":"105","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"48","Corridor":"Grand Ave","Notes":"weather-related slowdowns"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"12th St Oakland City Center","RidershipVolume":"17822","OnTimePerformance":"0.81","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"19th St Oakland","RidershipVolume":"12666","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"Lake Merritt","RidershipVolume":"7528","OnTimePerformance":"0.82","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"Fruitvale","RidershipVolume":"11234","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"Coliseum","RidershipVolume":"8527","OnTimePerformance":"0.83","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"West Oakland","RidershipVolume":"6845","OnTimePerformance":"0.86","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"MacArthur","RidershipVolume":"12368","OnTimePerformance":"0.78","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"Rockridge","RidershipVolume":"8867","OnTimePerformance":"0.8","TrafficIndex":"50","Corridor":"","Notes":"above-average ridership"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-880 North","Notes":"heavy congestion"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-880 South","Notes":"heavy congestion"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"100","Corridor":"I-580 East","Notes":"heavy congestion"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"88","Corridor":"I-580 West","Notes":"heavy congestion"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"74","Corridor":"I-980","Notes":"moderate delays"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"83","Corridor":"Broadway","Notes":"heavy congestion"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"92","Corridor":"International Blvd","Notes":"heavy congestion"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"76","Corridor":"MacArthur Blvd","Notes":"heavy congestion"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"83","Corridor":"Telegraph Ave","Notes":"heavy congestion"}
+{"Timestamp":"Y3C2","Cycle":"106","Station":"","RidershipVolume":"0","OnTimePerformance":"0.85","TrafficIndex":"69","Corridor":"Grand Ave","Notes":"moderate delays"}

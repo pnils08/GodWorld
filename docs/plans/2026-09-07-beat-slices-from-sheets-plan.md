@@ -46,7 +46,7 @@
   2. Keep the prior cycle's dump as `output/beats/prev/` before overwriting, so builders can compute "what moved" (Transit_Metrics and Crime_Metrics deltas) without a second Sheets read.
   3. Read-only: no `appendRows`/`updateRange` anywhere in the file (pre-commit hook enforces).
 - **Verify:** `node scripts/dumpBeatTabs.js 106 --quiet && node -e "const m=require('./output/beats/meta.json');console.log(m.cycle,m.rows)"` → cycle 106; Business_Ledger 176, Employment_Roster 859, Transit_Metrics 522, Crime_Metrics 23, Neighborhood_Demographics 22, Youth_Events 168, Household_Ledger 712 (live counts 2026-09-07; re-read live before asserting)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S433 — ran live at C106: 15 tabs, readback line counts = meta for all 15, 1.6 MB, backward stamp (105) refused. Wired into run-cycle Step 5.56. Acceptance 1 is met on the next run-cycle.
 
 ### Task 2: Business / food slice reads the ledger — owner research-build (file), spec here
 
@@ -153,3 +153,4 @@
 ## Changelog
 
 - 2026-09-07 — Initial draft (S433 engine-sheet, drafted from the facts-not-color ruling and the desk-signal audit the same night).
+- 2026-09-07 — Task 1 cut and verified live (S433): `scripts/dumpBeatTabs.js`, 15 tabs incl. Story_Seed_Deck / Story_Hook_Deck / Casino_Ledger, run-cycle Step 5.56 wired. Tasks 2–7 handed to research-build (their files).

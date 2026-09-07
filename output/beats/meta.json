@@ -1,0 +1,25 @@
+{
+  "source": "beat tabs (15)",
+  "cycle": 106,
+  "prevCycle": null,
+  "rows": {
+    "Business_Ledger": 176,
+    "Employment_Roster": 859,
+    "Casino_Ledger": 13,
+    "Transit_Metrics": 522,
+    "Crime_Metrics": 23,
+    "Neighborhood_Demographics": 22,
+    "Youth_Events": 168,
+    "Hospital_Ledger": 3,
+    "Health_Cause_Queue": 3,
+    "Community_Programs": 31,
+    "Faith_Organizations": 16,
+    "Cycle_Weather": 31,
+    "Household_Ledger": 712,
+    "Story_Seed_Deck": 184,
+    "Story_Hook_Deck": 1716
+  },
+  "generatedAt": "2026-09-07T07:11:27.268Z",
+  "generatedBy": "scripts/dumpBeatTabs.js",
+  "note": "pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/."
+}

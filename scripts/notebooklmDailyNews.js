@@ -40,6 +40,8 @@ const OUTPUT_DIR = path.join(ROOT, 'output', 'notebooklm', 'daily');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 30;
 const AUDIO_CREATE_ATTEMPTS = 2;
+const CANON_POLICY_PATH = path.join(ROOT, 'scripts', 'notebooklmCanonSources.json');
+const CONTINUITY_EDITIONS = 2;
 const SOURCE_VERSION = '1.7';
 const DEFAULT_AUDIO_LENGTH = 'default';
 const DEFAULT_AUDIO_FORMAT = 'deep_dive';
@@ -661,11 +663,33 @@ function archivePrompt(cycle, reports) {
     return '- ' + (heading ? heading[1] : path.basename(report.file));
   }).join('\n');
   return [
-    'Using only the published sources in this notebook, prepare a cited continuity brief for Cycle ' + cycle + '.',
+    'Using only the selected published editions, prepare a cited continuity brief for Cycle ' + cycle + '.',
     'Trace prior events, promises, named citizens, institutions, and unresolved storylines that bear on these current newsroom leads:',
     reportHeads || '- No current report headlines; identify the most consequential unresolved published storylines entering this Cycle.',
     'Separate direct published fact from inference. Do not invent missing history, quotes, figures, or current-cycle outcomes.',
   ].join('\n');
+}
+
+// Continuity reads the last N published Cycle Pulse editions, not the whole
+// archive notebook (73 sources on 2026-09-07): the unscoped query grew past
+// 5 GB in the nlm CLI and was OOM-killed, and had come back "unavailable" on
+// 8 of the prior 16 mornings. Editions are picked off the fail-closed canon
+// policy (scripts/notebooklmCanonSources.json): allowedPublishedSourceIds
+// whose decision evidence names editions/cycle_pulse_c{N}.txt, highest N
+// first, one id per cycle. Returns { cycles: [N...], sourceIds: [id...] }.
+function continuitySourceIds(policy, count) {
+  const ids = (policy && Array.isArray(policy.allowedPublishedSourceIds)) ? policy.allowedPublishedSourceIds : [];
+  const decisions = (policy && policy.decisions) || {};
+  const byCycle = new Map();
+  ids.forEach((id) => {
+    const evidence = (decisions[id] && decisions[id].evidence) || [];
+    evidence.forEach((e) => {
+      const m = String(e).match(/cycle_pulse_c(\d+)\.txt$/);
+      if (m) byCycle.set(Number(m[1]), id); // later-listed id wins for a cycle
+    });
+  });
+  const cycles = Array.from(byCycle.keys()).sort((a, b) => b - a).slice(0, count || 2);
+  return { cycles, sourceIds: cycles.map((c) => byCycle.get(c)) };
 }
 
 function dailyPrompt(cycle, hasFlagged) {
@@ -963,10 +987,22 @@ async function run(argv) {
     // measured 69s live on 2026-08-19, so the continuity prompt (which carries
     // the whole newsroom report set) walks straight past a 180s cap. Both the
     // internal and wall budgets are sized off that measurement, not a guess.
+    let scope = { cycles: [], sourceIds: [] };
+    try {
+      scope = continuitySourceIds(readJson(CANON_POLICY_PATH), CONTINUITY_EDITIONS);
+    } catch (e) {
+      console.log('WARN: canon policy unreadable, continuity runs unscoped: ' + e.message);
+    }
+    const scopeArgs = scope.sourceIds.length ? ['--source-ids', scope.sourceIds.join(',')] : [];
+    manifest.archiveScope = scope;
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+    console.log('Archive continuity scope: ' + (scope.cycles.length
+      ? scope.cycles.map((c) => 'C' + c).join(', ') + ' (' + scope.sourceIds.length + ' source(s))'
+      : 'whole notebook (no published editions in the policy)'));
     let queried = nlm([
       'notebook', 'query', config.notebookId, continuityPrompt,
       '--json', '--timeout', '420',
-    ], { timeoutMs: 480 * 1000 });
+    ].concat(scopeArgs), { timeoutMs: 480 * 1000 });
     // Retry only what a retry can fix. NotebookLM is a reader over published
     // sources — the same prompt against the same notebook returns the same
     // answer, so re-running a query that TIMED OUT just buys another 8 minutes
@@ -977,7 +1013,7 @@ async function run(argv) {
       queried = nlm([
         'notebook', 'query', config.notebookId, continuityPrompt,
         '--json', '--timeout', '420',
-      ], { timeoutMs: 480 * 1000 });
+      ].concat(scopeArgs), { timeoutMs: 480 * 1000 });
     }
     if (!queried.ok) {
       // Continuity is enrichment, not the story. Three consecutive days of
@@ -1207,6 +1243,7 @@ module.exports = {
   findArtifactStatus,
   sourceTitle,
   archivePrompt,
+  continuitySourceIds,
   dailyPrompt,
   dailyAudioFocus,
   SOURCE_VERSION,

@@ -40,7 +40,17 @@ Read world state from sheets. Identify ailments, improvements, incoherence. Prod
 ### Step 5: /build-world-summary
 Read Riley_Digest (3 cycles), Sports Feed (3 cycles), civic production log (if exists), and engine review output. Produce factual world summary. Output: `output/world_summary_c{XX}.md`. Ingest to world-data Supermemory. The writer also emits `output/desk_signal_c{XX}.json` (engine.76 W5 half 1) — per-desk signal partition, pointers only, consumed by `/desk-slice` and the headless writer-wakes.
 
-**Gate:** File exists on disk + ingest confirmed.
+**Ingest (S432 — this is the cycle-time write, not post-publish's):** the summary and its `Snapshot:` line go into the `world-data` container here, tagged `wd-summary` / `wd-snapshot`. Before S432 the only ingest lived in `/post-publish` Step 2c (`--type edition` only), so cycles without an edition (C103–C106) never reached world-data and `search_world` answered from C102. Post-publish 2c stays as the re-ingest on publish; run both.
+
+```bash
+source ~/.bashrc && XX={XX} && for tag in wd-summary wd-snapshot; do
+  if [ "$tag" = wd-summary ]; then C=$(jq -n --rawfile c output/world_summary_c$XX.md '$c'); T=cycle_summary; else C=$(jq -n --arg c "$(grep -m1 '^Snapshot: Cycle ' output/world_summary_c$XX.md)" '$c'); T=cycle_snapshot; fi
+  curl -s -X POST https://api.supermemory.ai/v3/documents -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY" -H "Content-Type: application/json" \
+    -d "$(jq -n --argjson content "$C" --arg cycle "$XX" --arg tag "$tag" --arg type "$T" '{content: $content, containerTags: ["world-data", $tag], metadata: {type: $type, cycle: $cycle}}')" | jq -r '.id // .error'
+done
+```
+
+**Gate:** File exists on disk + both POSTs return a doc id.
 
 ### Step 5.5: Neighborhood texture (citizen perception — research.19 T2)
 

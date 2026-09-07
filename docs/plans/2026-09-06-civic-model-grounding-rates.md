@@ -78,11 +78,28 @@ with 2 fallback models instead of 3; no test assumed exactly 3.
 
 ## Open
 
-- Mayor (mistral) — same measurement, one seat, awaiting Mike's read on
-  whether her voice is worth the swap risk.
+- ~~Mayor (mistral) — same measurement, one seat, awaiting Mike's read on
+  whether her voice is worth the swap risk.~~ **CLOSED same night.** Mike
+  ruled a standing principle instead of a one-seat swap: different parties
+  never share a model (same model = same voice). Engine-sheet applied it
+  fleet-wide in `civic-office-map.json` (commit `500e8e25`): mayor
+  mistral-large -> kimi-k2 (her 6-incident tally here plus 13 provider
+  errors in the retained logs, vs kimi's 0/0); this also caught that
+  civic.34's OPP swap had left OPP (D1/D3/D5/D9) and CRC (D6/D7/D8)
+  seats sharing deepseek — CRC moved to gemini-3.7-flash, IND (D2/D4)
+  moved off kimi to llama-3.3-70b so they don't share the mayor's new
+  family either. Four factions, four distinct model families. Live
+  civic tests 7/7 green (verified independently). Gemini and llama are
+  new to the number-gate path — the next unattended Sunday chain (or a
+  manual dry run) is the proof.
+- PD-01 (Public Defender, citywide, not a council seat) is still on
+  qwen — left as-is, out of scope for the council/mayor re-model.
 - deepseek's residual project-seat rate — a content-shape problem
   (thin-pack metric seats), not a model-swap candidate; watch, don't act.
 
 ## Changelog
 
 - 2026-09-06 (research-build, S431) — Measured + closed. civic.34.
+- 2026-09-06 (engine-sheet, S432, `500e8e25`) — Mayor swap + fleet-wide
+  one-family-per-faction re-model, closing the Open item above same
+  night rather than waiting on a future session.

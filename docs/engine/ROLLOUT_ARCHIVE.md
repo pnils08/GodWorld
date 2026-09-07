@@ -336,6 +336,14 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S434 (2026-09-07, engine-sheet)
+
+| ID | Description | Status | Owner | Pointer |
+|---|---|---|---|---|
+| civic.35 | Gate the facts, not the color (Mike-direct S433): number gate moved off speech (decision/quote/fullStatement) onto tracker fact fields (MilestoneNotes, NextScheduledAction) + datawake action/numberMoved; packet arithmetic (sum/diff) grounded. C106 mayor open (rejected on 69 = 57+12 and "two hundred residents") replays PASS. Test: `scripts/cron-civic-number-gate.test.js`. Sunday 09-13 chain is the live proof | archived S434 | engine-sheet | `docs/SIM_DOCTRINE.md` §13; `scripts/cron-civic-run.js` civic.35 comments |
+
+civic.35 closed S433 (engine-sheet, 5dbd899a); live proof = Mon 09-07 05:45 datawake + Sun 09-13 chain. Swept S434 (prior sweep S432, ≥2 sessions).
+
 ### Archive Pass — S432 (2026-09-06, engine-sheet)
 
 | ID | Description | Status | Owner | Pointer |

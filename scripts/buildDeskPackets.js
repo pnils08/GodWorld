@@ -605,7 +605,7 @@ function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
     var empBizId = c.EmployerBizId || '';
     var empBiz = (bizIndex && empBizId) ? bizIndex[empBizId] : null;
     var birthYear = parseInt(c.BirthYear) || 0;
-    var age = birthYear > 0 ? 2041 - birthYear : '';
+    var age = birthYear > 0 ? require('../lib/citizenDerivation').currentSimYear() - birthYear : '';
     var hood = c.Neighborhood || '';
     var popId = c.POPID || '';
 

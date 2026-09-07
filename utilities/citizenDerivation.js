@@ -230,7 +230,6 @@ var BASE_FEMALE_PCT_ = 0.51;
 // tracked hoods missing — a ±0.03 texture nobody could author for 22 hoods).
 // Every hood draws at BASE_FEMALE_PCT_; the signature keeps `neighborhood`.
 
-var ANCHOR_YEAR_ = 2041;
 var FALLBACK_INCOME_ = 60000;
 var EDUCATION_LEVELS_ = ['hs-diploma', 'bachelors', 'masters', 'associates', 'trade-cert', 'doctorate'];
 
@@ -321,6 +320,8 @@ function computeCareerStage_(seed, age, roleType) {
 function buildLedgerFreqSnapshot_(headers, data, options) {
   options = options || {};
   var includesHeader = options.includesHeader === true;
+  var simYear = Number(options.simYear); // the calendar's year for the age brackets (2026-09-07: was a 2041 literal)
+  if (!(simYear > 0)) throw new Error('buildLedgerFreqSnapshot_: options.simYear required');
   var startRow = includesHeader ? 1 : 0;
 
   var iNbhd = headers.indexOf('Neighborhood');
@@ -341,7 +342,7 @@ function buildLedgerFreqSnapshot_(headers, data, options) {
 
     if (role) citywide.roleTypes[role] = (citywide.roleTypes[role] || 0) + 1;
     if (edu && birthYear) {
-      var bracket = ageBracket_(ANCHOR_YEAR_ - birthYear);
+      var bracket = ageBracket_(simYear - birthYear);
       if (!citywide.educationByAge[bracket]) citywide.educationByAge[bracket] = {};
       citywide.educationByAge[bracket][edu] = (citywide.educationByAge[bracket][edu] || 0) + 1;
     }
@@ -351,7 +352,7 @@ function buildLedgerFreqSnapshot_(headers, data, options) {
       var bucket = byNeighborhood[nbhd];
       if (role) bucket.roleTypes[role] = (bucket.roleTypes[role] || 0) + 1;
       if (edu && birthYear) {
-        var bracket2 = ageBracket_(ANCHOR_YEAR_ - birthYear);
+        var bracket2 = ageBracket_(simYear - birthYear);
         if (!bucket.educationByAge[bracket2]) bucket.educationByAge[bracket2] = {};
         bucket.educationByAge[bracket2][edu] = (bucket.educationByAge[bracket2][edu] || 0) + 1;
       }

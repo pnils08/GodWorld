@@ -50,11 +50,9 @@ const MODEL = PROVIDER === 'anthropic'
   : 'anthropic/claude-haiku-4.5';
 const MAX_TOKENS = 1024;
 
-// Age-reference convention: the A's roster is set in 2041, so every citizen age
-// across the project is computed as (2041 - BirthYear). The simulation itself is
-// not "in" 2041 — this is a reference anchor only, applied uniformly so ages
-// align with the sports roster. See mem: user_research-behavior, S147.
-const AGE_REFERENCE_YEAR = 2041;
+// Age convention: every citizen and player age is the sim's calendar year − BirthYear
+// (2042 from C105; lib/citizenDerivation currentSimYear). The 2041 anchor is retired (2026-09-07).
+const AGE_REFERENCE_YEAR = require('../lib/citizenDerivation').currentSimYear(); // the sim's calendar year (2042 from C105)
 
 function resolveArgs() {
   const args = process.argv.slice(2);
@@ -223,7 +221,7 @@ function formatAuthoritativeBlock(canon, cycle) {
   const lines = [];
   lines.push(`# AUTHORITATIVE CANON (cycle ${cycle})`);
   lines.push('');
-  lines.push(`**Age convention**: every citizen and player age below is computed as ${AGE_REFERENCE_YEAR} − BirthYear. This is the project's canonical anchor (driven by the A's 2041 roster). If the article's age matches this value, it is correct; if it differs, the article is wrong — not this canon.`);
+  lines.push(`**Age convention**: every citizen and player age below is computed as ${AGE_REFERENCE_YEAR} − BirthYear. This is the sim's calendar year (2042 from C105). If the article's age matches this value, it is correct; if it differs, the article is wrong — not this canon.`);
   lines.push('');
   lines.push(`## Citizens referenced in this edition (from Simulation_Ledger)`);
   for (const c of canon.citizens) {
@@ -313,7 +311,7 @@ Respond with JSON in this exact shape:
 
 const PASS_B_SYSTEM = `You are Rhea Morgan running Pass B of a two-pass hallucination check. Canon sources are provided in two tiers.
 
-TIER 1 — AUTHORITATIVE CANON (sheet-derived). This is ground truth. Ages are computed as 2041 − BirthYear (the project's anchor; the simulation is not "in" 2041, but every age uses this reference year so the A's 2041 roster stays consistent with citizen ages). If the authoritative block says age 38, age 38 is canon.
+TIER 1 — AUTHORITATIVE CANON (sheet-derived). This is ground truth. Ages are computed as ${AGE_REFERENCE_YEAR} − BirthYear (the sim's calendar year). If the authoritative block says age 38, age 38 is canon.
 
 TIER 2 — DERIVED CONTEXT (world summaries, engine reviews, desk packets). Useful for narrative cycle state but known to drift. ON ANY CONFLICT between Tier 1 and Tier 2, trust Tier 1.
 

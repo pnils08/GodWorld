@@ -31,7 +31,7 @@ async function main() {
   // Build live ledger snapshot for neighborhood-aware draws.
   const raw = await sheets.getRawSheetData('Simulation_Ledger');
   const headers = raw[0];
-  const ledgerFreq = cd.buildLedgerFreqSnapshot(headers, raw, { includesHeader: true });
+  const ledgerFreq = cd.buildLedgerFreqSnapshot(headers, raw, { includesHeader: true, simYear: cd.currentSimYear() });
 
   console.log('═══ Phase 5 — Intake derivation validation ═══\n');
   console.log('Snapshot: ' + Object.keys(ledgerFreq.byNeighborhood).length + ' neighborhoods, ' +

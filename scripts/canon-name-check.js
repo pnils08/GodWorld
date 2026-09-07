@@ -163,7 +163,7 @@ function profilesForPopids(popids) {
     out.push(full + ' — ' + [
       row.RoleType && 'role: ' + row.RoleType,
       row.Neighborhood && 'neighborhood: ' + row.Neighborhood,
-      row.BirthYear && 'age: ' + (2041 - Number(row.BirthYear)),
+      row.BirthYear && 'age: ' + (require('../lib/citizenDerivation').currentSimYear() - Number(row.BirthYear)),
       row.WealthLevel && 'wealth: ' + row.WealthLevel,
       row.CareerStage && 'careerStage: ' + row.CareerStage,
       row.EmployerBizId && 'employerBiz: ' + row.EmployerBizId,

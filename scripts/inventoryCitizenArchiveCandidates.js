@@ -26,7 +26,7 @@ const path = require('path');
 const sheets = require('../lib/sheets');
 const { citizenArchiveCandidates_, citizenExitDefects_, CITIZEN_ARCHIVE_RETURN_ELIGIBLE } = require('../utilities/archiveCitizenExits');
 
-const AGE_ANCHOR = 2041;
+const AGE_ANCHOR = require('../lib/citizenDerivation').currentSimYear(); // the sim's calendar year (was the 2041 anchor)
 const args = process.argv.slice(2);
 const opt = (k) => { const a = args.find((x) => x.startsWith('--' + k + '=')); return a ? a.split('=').slice(1).join('=') : null; };
 

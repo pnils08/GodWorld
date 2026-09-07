@@ -2,7 +2,7 @@ const { google } = require('googleapis');
 
 const SPREADSHEET_ID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
 // Simulation year for age calculation from BirthYear
-const CURRENT_SIM_YEAR = 2041;
+const CURRENT_SIM_YEAR = require('../lib/citizenDerivation').currentSimYear(); // the sim's calendar year
 
 async function main() {
   const auth = new google.auth.GoogleAuth({

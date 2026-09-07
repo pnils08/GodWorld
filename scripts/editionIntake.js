@@ -24,7 +24,7 @@ const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');
 
-const WORLD_YEAR = 2041;
+const WORLD_YEAR = require('../lib/citizenDerivation').currentSimYear(); // an edition's ages are this year's ages
 
 const NEIGHBORHOODS = [
   'Downtown', 'Jack London', 'Rockridge', 'Temescal', 'Fruitvale',

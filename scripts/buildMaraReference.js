@@ -24,7 +24,7 @@ const sheets = require('../lib/sheets');
 const fs = require('fs');
 
 const OUT_DIR = path.resolve(__dirname, '..', 'output', 'mara-reference');
-const SIM_YEAR = 2041;
+const SIM_YEAR = require('../lib/citizenDerivation').currentSimYear(); // the sim's calendar year
 
 async function main() {
   console.log('Building Mara reference files...\n');

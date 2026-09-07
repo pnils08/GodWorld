@@ -222,7 +222,7 @@ async function main() {
   }
 
   // ─── Build derivation inputs ─────────────────────────────────────────────
-  const ledgerFreq = library.buildLedgerFreqSnapshot(headers, raw, { includesHeader: true });
+  const ledgerFreq = library.buildLedgerFreqSnapshot(headers, raw, { includesHeader: true, simYear: library.currentSimYear() });
   const { firstCounts, lastCounts } = buildNameCounts(dataRows, headers);
 
   // Snapshot pre-existing live counts so the audit JSON shows what we

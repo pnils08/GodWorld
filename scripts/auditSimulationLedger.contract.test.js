@@ -6,7 +6,7 @@
  * S217 engine.17 Phase 5.2 — sheet-dep audit coverage.
  *
  * Section A: source-level — argv flags (--json + --since), CANON12 set,
- *   summary keys, 2041 anchor, brief vs json output paths.
+ *   summary keys, calendar-year age, brief vs json output paths.
  * Section B: subprocess smoke with --json when sheets creds available;
  *   parses stdout JSON, asserts headcount range + Status enum present +
  *   POPID range valid.
@@ -81,10 +81,10 @@ console.log('\nTest 4: CANON12 set covers all 12 canonical Oakland neighborhoods
   }
 }
 
-console.log('\nTest 5: 2041 anchor (canon age = 2041 − BirthYear)');
+console.log('\nTest 5: calendar-year age (age = SIM_YEAR − BirthYear, SIM_YEAR from lib/citizenDerivation)');
 {
-  // The age computation references 2041 explicitly (per project_age-2041-anchor-convention).
-  assert("2041 anchor in age formula", /2041\s*-\s*by/.test(source));
+  // The age computation reads SIM_YEAR (the calendar year from lib/citizenDerivation).
+  assert("calendar year in age formula", /SIM_YEAR\s*-\s*by/.test(source));
 }
 
 console.log('\nTest 6: summary object exposes load-bearing keys');
@@ -119,9 +119,9 @@ console.log('\nTest 9: drift sentinels — RoleType="Citizen" + BirthYear OOB');
 {
   assert("RoleType 'Citizen' sentinel check",
     /role\s*===\s*['"]Citizen['"]/.test(source));
-  // 2041 - by < 0 || 2041 - by > 110 — OOB bound
+  // SIM_YEAR - by < 0 || SIM_YEAR - by > 110 — OOB bound
   assert("BirthYear OOB bounds (0-110)",
-    /2041\s*-\s*by\s*>\s*110/.test(source));
+    /SIM_YEAR\s*-\s*by\s*>\s*110/.test(source));
 }
 
 console.log('\nTest 10: exit-1 on caught error');

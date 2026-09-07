@@ -34,6 +34,7 @@ require('/root/GodWorld/lib/env');  // S197 BUNDLE-B (G-S10) — loads GODWORLD_
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');
+const SIM_YEAR = require('../lib/citizenDerivation').currentSimYear(); // the sim's calendar year for age math (2042 from C105)
 
 const ROOT = path.resolve(__dirname, '..');
 const QUERIES_DIR = path.join(ROOT, 'output', 'queries');
@@ -125,11 +126,10 @@ function buildCitizenProfile(citizen, aux) {
     name: `${citizen.First} ${citizen.Last}`,
     maidenName: citizen.MaidenName || null,
     tier: parseInt(citizen.Tier) || 4,
-    // Age is ALWAYS computed as 2041 - BirthYear. The Simulation_Ledger `Age`
-    // column is empty by design, so reading it returned null for every citizen
-    // (S334 — surfaced on POP-00166, applied to all). Never trust a pre-computed
-    // Age field; the 2041 anchor keeps every age in the project consistent.
-    age: citizen.BirthYear ? 2041 - parseInt(citizen.BirthYear) : null,
+    // Age is ALWAYS computed as the sim's calendar year − BirthYear (2042 from
+    // C105; lib/citizenDerivation currentSimYear). The Simulation_Ledger `Age`
+    // column is empty by design (S334). Never trust a pre-computed Age field.
+    age: citizen.BirthYear ? SIM_YEAR - parseInt(citizen.BirthYear) : null,
     gender: citizen.Gender || null,
     neighborhood: citizen.Neighborhood || null,
     role: citizen.RoleType || null,
@@ -443,7 +443,7 @@ async function queryNeighborhood(name) {
       name: `${r.First} ${r.Last}`,
       tier: parseInt(r.Tier) || 4,
       role: r.RoleType,
-      age: r.BirthYear ? 2041 - parseInt(r.BirthYear) : null,  // 2041 anchor; Age column is empty by design (S334)
+      age: r.BirthYear ? SIM_YEAR - parseInt(r.BirthYear) : null,  // calendar year; Age column is empty by design (S334)
       status: r.Status,
     }));
 

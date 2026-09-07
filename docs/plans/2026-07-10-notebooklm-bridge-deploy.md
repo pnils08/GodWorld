@@ -468,3 +468,20 @@ failure recovery: [[../reference/notebookLM-CLI]].
   manifest: reproducible `CYCLE_OPEN` at 2/4/0 dispositions, unchanged
   `deep_dive/default` delivery, bounded-source growth, and the legacy-source
   admission seam that remains outside shadow activation.
+- 2026-09-07 (engine-sheet, S435) — 08:00 run: NotebookLM marked the audio
+  render `failed`; the download poll ran its full 15 min blind and Discord
+  got the "did not run" warning. `b199bc95`: `downloadAudio` reads
+  `studio status --json` each poll, returns early on `failed`, and the
+  call site creates a second artifact before throwing
+  (`AUDIO_CREATE_ATTEMPTS=2`). Manual C106 re-run delivered 12:34 via a
+  `systemd-run` unit after three in-session relaunches died (archive query
+  OOM-killed at 5+ GB twice; tmux scope teardown once). `8cc188bf`
+  (Mike-approved): the archive continuity query is scoped with
+  `--source-ids` to the two newest published Cycle Pulse editions off
+  `scripts/notebooklmCanonSources.json` (`continuitySourceIds`,
+  `CONTINUITY_EDITIONS=2`) instead of the whole 73-source archive; scope
+  logged and written to the manifest as `archiveScope`. Live proof: 65 s,
+  275 MB peak, full cited brief (unscoped: killed at 5+ GB; "unavailable"
+  on 8 of the prior 16 mornings). Phase 5 item 1 above ("queries it for
+  cited continuity") now means the last two editions, not the notebook.
+  First unattended proof Tue 09-08 08:00.

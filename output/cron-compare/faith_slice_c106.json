@@ -1,0 +1,101 @@
+{
+  "version": "FAITH-SLICE-1",
+  "empty": false,
+  "cycle": 106,
+  "kind": "beat-faith",
+  "seat": {
+    "slug": "elliot-graye",
+    "name": "Elliot Graye",
+    "popid": "POP-00159",
+    "desk": "culture",
+    "domain": "faith",
+    "builder": "buildFaithSlice.js"
+  },
+  "hood": "Chinatown",
+  "pulse": {
+    "className": "beat-faith",
+    "score": 100,
+    "label": "Bay Pure Land Buddhist Temple in Chinatown | 1 named on the record",
+    "hood": "Chinatown",
+    "source": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\""
+  },
+  "story": {
+    "kind": "beat-faith",
+    "angle": "Bay Pure Land Buddhist Temple in Chinatown | 1 named on the record — the congregation and the quiet work around it",
+    "label": "Bay Pure Land Buddhist Temple in Chinatown | 1 named on the record",
+    "hookLine": "Rev. Kenji Tanaka leads Bay Pure Land Buddhist Temple, 300 strong.",
+    "hood": "Chinatown",
+    "citizens": [
+      "Kenji Tanaka (POP-00763)"
+    ],
+    "popids": [
+      "POP-00763"
+    ],
+    "ref": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\"",
+    "cycle": 106
+  },
+  "approach": "Faith and quiet-work approach: this slice is one congregation from the record — its tradition, its size, its leader and members — and the community programs around it. Dignity, not doctrine wars. The institution and the people are real; the service, the basement kitchen, the Tuesday meeting are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00763",
+      "name": "Kenji Tanaka",
+      "role": "Senior Pastor / Faith Leader",
+      "neighborhood": "Chinatown",
+      "business": null,
+      "profile": "Kenji Tanaka — Senior Pastor / Faith Leader — Chinatown",
+      "why": "leads Bay Pure Land Buddhist Temple (Faith_Organizations)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 1926, led by Rev. Kenji Tanaka — Jodo Shinshu, Japanese-American heritage",
+      "src": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\""
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Bay Pure Land Buddhist Temple in Chinatown | 1 named on the record — the congregation and the quiet work around it",
+    "hookLine": "Rev. Kenji Tanaka leads Bay Pure Land Buddhist Temple, 300 strong.",
+    "anchorFacts": [
+      "Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 1926, led by Rev. Kenji Tanaka — Jodo Shinshu, Japanese-American heritage"
+    ],
+    "evidence": [
+      {
+        "text": "Bay Pure Land Buddhist Temple — Buddhist, Chinatown, congregation 300, founded 1926, led by Rev. Kenji Tanaka — Jodo Shinshu, Japanese-American heritage",
+        "src": "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\""
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": null,
+    "hooks": [],
+    "note": null,
+    "roomIsYours": "the sanctuary on a weeknight, the folding chairs, who sets up and who stays late, what the leader says when the room is half empty"
+  },
+  "organization": {
+    "Organization": "Bay Pure Land Buddhist Temple",
+    "FaithTradition": "Buddhist",
+    "Neighborhood": "Chinatown",
+    "Founded": "1926",
+    "Congregation": "300",
+    "Leader": "Rev. Kenji Tanaka",
+    "Character": "Jodo Shinshu, Japanese-American heritage",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00763",
+    "MembersList": ""
+  },
+  "programs": [],
+  "rotation": {
+    "index": 10,
+    "of": 16
+  },
+  "pointers": [
+    "output/beats/Faith_Organizations.jsonl \"Bay Pure Land Buddhist Temple\"",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

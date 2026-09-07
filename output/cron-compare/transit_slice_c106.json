@@ -1,0 +1,519 @@
+{
+  "version": "TRANSIT-SLICE-1",
+  "empty": false,
+  "cycle": 106,
+  "kind": "beat-transit",
+  "seat": {
+    "slug": "trevor-shimizu",
+    "name": "Trevor Shimizu",
+    "popid": "POP-00155",
+    "desk": "civic",
+    "domain": "transit",
+    "builder": "buildTransitSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-transit",
+    "score": 100,
+    "label": "12th St Oakland City Center ridership up 10,522 vs C105 | 18 stations on the record",
+    "hood": null,
+    "source": "output/beats/Transit_Metrics.jsonl Cycle 106"
+  },
+  "story": {
+    "kind": "beat-transit",
+    "angle": "12th St Oakland City Center ridership up 10,522 vs C105 | 18 stations on the record — the platforms and the people who run them",
+    "label": "12th St Oakland City Center ridership up 10,522 vs C105 | 18 stations on the record",
+    "hookLine": "12th St Oakland City Center moved up the most this cycle; 9 transit workers on the roster.",
+    "hood": null,
+    "citizens": [
+      "Joel Wren (POP-00218)",
+      "Jerald Jensen (POP-00280)",
+      "Coen Cartier (POP-00338)",
+      "Daire Green (POP-00442)",
+      "Ray Neal (POP-00448)",
+      "Calvin Mwangi (POP-00573)",
+      "Eleanor Rivera (POP-00617)",
+      "Elena Soria-Dominguez (POP-00791)",
+      "Ximena Mehta (POP-01039)"
+    ],
+    "popids": [
+      "POP-00218",
+      "POP-00280",
+      "POP-00338",
+      "POP-00442",
+      "POP-00448",
+      "POP-00573",
+      "POP-00617",
+      "POP-00791",
+      "POP-01039"
+    ],
+    "ref": "output/beats/Transit_Metrics.jsonl Cycle 106",
+    "cycle": 106
+  },
+  "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00218",
+      "name": "Joel Wren",
+      "role": "Mechanic",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Joel Wren — Mechanic — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00280",
+      "name": "Jerald Jensen",
+      "role": "Janitor",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Jerald Jensen — Janitor — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00338",
+      "name": "Coen Cartier",
+      "role": "Transit Operator (AC Transit)",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Coen Cartier — Transit Operator (AC Transit) — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00442",
+      "name": "Daire Green",
+      "role": "Transit Operator (AC Transit)",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Daire Green — Transit Operator (AC Transit) — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00448",
+      "name": "Ray Neal",
+      "role": "AC Transit Bus Operator",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Ray Neal — AC Transit Bus Operator — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00573",
+      "name": "Calvin Mwangi",
+      "role": "AC Transit Bus Driver",
+      "neighborhood": null,
+      "business": "AC Transit",
+      "profile": "Calvin Mwangi — AC Transit Bus Driver — AC Transit",
+      "why": "works at AC Transit (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00617",
+      "name": "Eleanor Rivera",
+      "role": "BART Station Manager",
+      "neighborhood": null,
+      "business": "BART Oakland Division",
+      "profile": "Eleanor Rivera — BART Station Manager — BART Oakland Division",
+      "why": "works at BART Oakland Division (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00791",
+      "name": "Elena Soria-Dominguez",
+      "role": "Transit Hub Planning Lead",
+      "neighborhood": null,
+      "business": "Fruitvale Transit Hub Authority",
+      "profile": "Elena Soria-Dominguez — Transit Hub Planning Lead — Fruitvale Transit Hub Authority",
+      "why": "works at Fruitvale Transit Hub Authority (Employment_Roster)"
+    },
+    {
+      "popid": "POP-01039",
+      "name": "Ximena Mehta",
+      "role": "Bart Transit PR",
+      "neighborhood": null,
+      "business": "BART Oakland Division",
+      "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
+      "why": "works at BART Oakland Division (Employment_Roster)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "18 stations on the record this cycle; total ridership 85,857 (C105: 33,711)",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": "12th St Oakland City Center: ridership 17,822 (+10,522 vs C105), on-time 81% (+1 pts) — above-average ridership",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": "19th St Oakland: ridership 12,666 (+7,631 vs C105), on-time 78% (+3 pts) — above-average ridership",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": "MacArthur: ridership 12,368 (+7,113 vs C105), on-time 78% (-2 pts) — above-average ridership",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": "Fruitvale: ridership 11,234 (+7,088 vs C105), on-time 83% (+10 pts) — above-average ridership",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": "Coliseum: ridership 8,527 (+5,542 vs C105), on-time 83% (+8 pts) — above-average ridership",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": "Rockridge: ridership 8,867 (+5,385 vs C105), on-time 80% (+5 pts) — above-average ridership",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": "Lake Merritt: ridership 7,528 (+4,580 vs C105), on-time 82% (+5 pts) — above-average ridership",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": "West Oakland: ridership 6,845 (+4,285 vs C105), on-time 86% (+8 pts) — above-average ridership",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, I-880 North — heavy congestion",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, I-880 South — heavy congestion",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, I-580 East — heavy congestion",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, I-580 West — heavy congestion",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, I-980 — moderate delays",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, Broadway — heavy congestion",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, International Blvd — heavy congestion",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, MacArthur Blvd — heavy congestion",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, Telegraph Ave — heavy congestion",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    },
+    {
+      "text": ": ridership 0 (+0 vs C105), on-time 85%, Grand Ave — moderate delays",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "12th St Oakland City Center ridership up 10,522 vs C105 | 18 stations on the record — the platforms and the people who run them",
+    "hookLine": "12th St Oakland City Center moved up the most this cycle; 9 transit workers on the roster.",
+    "anchorFacts": [
+      "18 stations on the record this cycle; total ridership 85,857 (C105: 33,711)",
+      "12th St Oakland City Center: ridership 17,822 (+10,522 vs C105), on-time 81% (+1 pts) — above-average ridership",
+      "19th St Oakland: ridership 12,666 (+7,631 vs C105), on-time 78% (+3 pts) — above-average ridership",
+      "MacArthur: ridership 12,368 (+7,113 vs C105), on-time 78% (-2 pts) — above-average ridership",
+      "Fruitvale: ridership 11,234 (+7,088 vs C105), on-time 83% (+10 pts) — above-average ridership",
+      "Coliseum: ridership 8,527 (+5,542 vs C105), on-time 83% (+8 pts) — above-average ridership",
+      "Rockridge: ridership 8,867 (+5,385 vs C105), on-time 80% (+5 pts) — above-average ridership",
+      "Lake Merritt: ridership 7,528 (+4,580 vs C105), on-time 82% (+5 pts) — above-average ridership",
+      "West Oakland: ridership 6,845 (+4,285 vs C105), on-time 86% (+8 pts) — above-average ridership",
+      ": ridership 0 (+0 vs C105), on-time 85%, I-880 North — heavy congestion",
+      ": ridership 0 (+0 vs C105), on-time 85%, I-880 South — heavy congestion",
+      ": ridership 0 (+0 vs C105), on-time 85%, I-580 East — heavy congestion",
+      ": ridership 0 (+0 vs C105), on-time 85%, I-580 West — heavy congestion",
+      ": ridership 0 (+0 vs C105), on-time 85%, I-980 — moderate delays",
+      ": ridership 0 (+0 vs C105), on-time 85%, Broadway — heavy congestion",
+      ": ridership 0 (+0 vs C105), on-time 85%, International Blvd — heavy congestion",
+      ": ridership 0 (+0 vs C105), on-time 85%, MacArthur Blvd — heavy congestion",
+      ": ridership 0 (+0 vs C105), on-time 85%, Telegraph Ave — heavy congestion",
+      ": ridership 0 (+0 vs C105), on-time 85%, Grand Ave — moderate delays"
+    ],
+    "evidence": [
+      {
+        "text": "18 stations on the record this cycle; total ridership 85,857 (C105: 33,711)",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": "12th St Oakland City Center: ridership 17,822 (+10,522 vs C105), on-time 81% (+1 pts) — above-average ridership",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": "19th St Oakland: ridership 12,666 (+7,631 vs C105), on-time 78% (+3 pts) — above-average ridership",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": "MacArthur: ridership 12,368 (+7,113 vs C105), on-time 78% (-2 pts) — above-average ridership",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": "Fruitvale: ridership 11,234 (+7,088 vs C105), on-time 83% (+10 pts) — above-average ridership",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": "Coliseum: ridership 8,527 (+5,542 vs C105), on-time 83% (+8 pts) — above-average ridership",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": "Rockridge: ridership 8,867 (+5,385 vs C105), on-time 80% (+5 pts) — above-average ridership",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": "Lake Merritt: ridership 7,528 (+4,580 vs C105), on-time 82% (+5 pts) — above-average ridership",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": "West Oakland: ridership 6,845 (+4,285 vs C105), on-time 86% (+8 pts) — above-average ridership",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, I-880 North — heavy congestion",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, I-880 South — heavy congestion",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, I-580 East — heavy congestion",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, I-580 West — heavy congestion",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, I-980 — moderate delays",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, Broadway — heavy congestion",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, International Blvd — heavy congestion",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, MacArthur Blvd — heavy congestion",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, Telegraph Ave — heavy congestion",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      },
+      {
+        "text": ": ridership 0 (+0 vs C105), on-time 85%, Grand Ave — moderate delays",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 106"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_IN_TABLE",
+      "vs": 105
+    },
+    "hooks": [],
+    "note": null,
+    "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first"
+  },
+  "stations": [
+    {
+      "station": "12th St Oakland City Center",
+      "ridership": 17822,
+      "onTime": 0.81,
+      "traffic": 50,
+      "corridor": null,
+      "notes": "above-average ridership",
+      "dRidership": 10522,
+      "dOnTime": 1
+    },
+    {
+      "station": "19th St Oakland",
+      "ridership": 12666,
+      "onTime": 0.78,
+      "traffic": 50,
+      "corridor": null,
+      "notes": "above-average ridership",
+      "dRidership": 7631,
+      "dOnTime": 3
+    },
+    {
+      "station": "Lake Merritt",
+      "ridership": 7528,
+      "onTime": 0.82,
+      "traffic": 50,
+      "corridor": null,
+      "notes": "above-average ridership",
+      "dRidership": 4580,
+      "dOnTime": 5
+    },
+    {
+      "station": "Fruitvale",
+      "ridership": 11234,
+      "onTime": 0.83,
+      "traffic": 50,
+      "corridor": null,
+      "notes": "above-average ridership",
+      "dRidership": 7088,
+      "dOnTime": 10
+    },
+    {
+      "station": "Coliseum",
+      "ridership": 8527,
+      "onTime": 0.83,
+      "traffic": 50,
+      "corridor": null,
+      "notes": "above-average ridership",
+      "dRidership": 5542,
+      "dOnTime": 8
+    },
+    {
+      "station": "West Oakland",
+      "ridership": 6845,
+      "onTime": 0.86,
+      "traffic": 50,
+      "corridor": null,
+      "notes": "above-average ridership",
+      "dRidership": 4285,
+      "dOnTime": 8
+    },
+    {
+      "station": "MacArthur",
+      "ridership": 12368,
+      "onTime": 0.78,
+      "traffic": 50,
+      "corridor": null,
+      "notes": "above-average ridership",
+      "dRidership": 7113,
+      "dOnTime": -2
+    },
+    {
+      "station": "Rockridge",
+      "ridership": 8867,
+      "onTime": 0.8,
+      "traffic": 50,
+      "corridor": null,
+      "notes": "above-average ridership",
+      "dRidership": 5385,
+      "dOnTime": 5
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 100,
+      "corridor": "I-880 North",
+      "notes": "heavy congestion",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 100,
+      "corridor": "I-880 South",
+      "notes": "heavy congestion",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 100,
+      "corridor": "I-580 East",
+      "notes": "heavy congestion",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 88,
+      "corridor": "I-580 West",
+      "notes": "heavy congestion",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 74,
+      "corridor": "I-980",
+      "notes": "moderate delays",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 83,
+      "corridor": "Broadway",
+      "notes": "heavy congestion",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 92,
+      "corridor": "International Blvd",
+      "notes": "heavy congestion",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 76,
+      "corridor": "MacArthur Blvd",
+      "notes": "heavy congestion",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 83,
+      "corridor": "Telegraph Ave",
+      "notes": "heavy congestion",
+      "dRidership": 0,
+      "dOnTime": 0
+    },
+    {
+      "station": "",
+      "ridership": 0,
+      "onTime": 0.85,
+      "traffic": 69,
+      "corridor": "Grand Ave",
+      "notes": "moderate delays",
+      "dRidership": 0,
+      "dOnTime": 0
+    }
+  ],
+  "pointers": [
+    "output/beats/Transit_Metrics.jsonl Cycle 106",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

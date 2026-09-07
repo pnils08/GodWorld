@@ -199,6 +199,22 @@ function creativeBriefFromSlice(slice) {
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
       sourcePointers: uniq(slice.pointers || []).slice(0, 5),
     };
+  } else if (slice.prewrite && slice.prewrite.schema === 'BEAT-SLICE-1') {
+    // pipeline.68 Task 4 — a journalist's own beat slice built from their sheet
+    // tabs. The facts are the rows; the room is the reporter's.
+    const prewrite = slice.prewrite;
+    brief = {
+      kind: 'beat-slice',
+      domain: clean(slice.seat && slice.seat.domain, 60) || null,
+      hood: clean(slice.hood, 80) || null,
+      facts: uniq(prewrite.anchorFacts).slice(0, 12),
+      priorCycle: clean(prewrite.deltas && prewrite.deltas.state, 40) || null,
+      note: clean(prewrite.note, 200) || null,
+      engineHooks: (prewrite.hooks || []).slice(0, 4).map(h => clean(
+        [h && h.text, h && h.angle ? '(' + h.angle + ')' : null].filter(Boolean).join(' '), 240)).filter(Boolean),
+      roomIsYours: clean(prewrite.roomIsYours, 300) || null,
+      forbidden: uniq(prewrite.forbidden).slice(0, 6),
+    };
   } else if (slice.kind === 'economic-storefront' || slice.kind === 'food-workplaces') {
     // pipeline.68: one neighborhood off the ledger — its businesses and the
     // roster workers at each. Facts are the names; the room is the reporter's.

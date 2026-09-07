@@ -1,0 +1,404 @@
+{
+  "version": "SCHOOLS-SLICE-1",
+  "empty": false,
+  "cycle": 106,
+  "kind": "beat-schools",
+  "seat": {
+    "slug": "angela-reyes",
+    "name": "Angela Reyes",
+    "popid": "POP-00156",
+    "desk": "civic",
+    "domain": "schools",
+    "builder": "buildSchoolsSlice.js"
+  },
+  "hood": "Rockridge",
+  "pulse": {
+    "className": "beat-schools",
+    "score": 100,
+    "label": "Rockridge has the strongest school record on the table (index 9)",
+    "hood": "Rockridge",
+    "source": "output/beats/Neighborhood_Demographics.jsonl @C106"
+  },
+  "story": {
+    "kind": "beat-schools",
+    "angle": "Rockridge has the strongest school record on the table (index 9) — the students and teachers who live it",
+    "label": "Rockridge has the strongest school record on the table (index 9)",
+    "hookLine": "10 students and educators in Rockridge are on the ledger; the table says why their school reads the way it does.",
+    "hood": "Rockridge",
+    "citizens": [
+      "Mei Wong (POP-01036)",
+      "Maya Torres-Dillon (POP-00742)",
+      "Rick Dillon (POP-00743)",
+      "Rico Fister (POP-00305)",
+      "Wiu Wiu (POP-00312)",
+      "Gloria Liu (POP-00827)",
+      "Simone Adesanya (POP-00287)",
+      "Mateo Jilner (POP-01001)",
+      "Mateo Wally (POP-01012)",
+      "Salma Campbell (POP-01018)"
+    ],
+    "popids": [
+      "POP-01036",
+      "POP-00742",
+      "POP-00743",
+      "POP-00305",
+      "POP-00312",
+      "POP-00827",
+      "POP-00287",
+      "POP-01001",
+      "POP-01012",
+      "POP-01018"
+    ],
+    "ref": "output/beats/Neighborhood_Demographics.jsonl @C106",
+    "cycle": 106
+  },
+  "approach": "Schools approach: this slice is the school table for every neighborhood — which school is doing well is answerable from the quality index — and the students and teachers on the ledger in the lead neighborhood. Warm, precise. Never invent a named student or teacher; a score trend is colour unless it is on this table. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-01036",
+      "name": "Mei Wong",
+      "role": "After-school program aide",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Mei Wong — After-school program aide — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00742",
+      "name": "Maya Torres-Dillon",
+      "role": "Bay Conservation Alliance Advisory board, High School Science Teacher",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00743",
+      "name": "Rick Dillon",
+      "role": "Grade Schooler",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Rick Dillon — Grade Schooler — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00305",
+      "name": "Rico Fister",
+      "role": "High School Science Teacher",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Rico Fister — High School Science Teacher — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00312",
+      "name": "Wiu Wiu",
+      "role": "High School Science Teacher",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Wiu Wiu — High School Science Teacher — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00827",
+      "name": "Gloria Liu",
+      "role": "School Principal",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Gloria Liu — School Principal — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-00287",
+      "name": "Simone Adesanya",
+      "role": "School Principal",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Simone Adesanya — School Principal — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-01001",
+      "name": "Mateo Jilner",
+      "role": "student",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Mateo Jilner — student — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-01012",
+      "name": "Mateo Wally",
+      "role": "student",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Mateo Wally — student — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    },
+    {
+      "popid": "POP-01018",
+      "name": "Salma Campbell",
+      "role": "student",
+      "neighborhood": "Rockridge",
+      "business": null,
+      "profile": "Salma Campbell — student — Rockridge",
+      "why": "on the ledger in Rockridge (Simulation_Ledger)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Uptown 8, Baylight District 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C106"
+    },
+    {
+      "text": "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 223 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C106"
+    },
+    {
+      "text": "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 39 students",
+      "src": "output/beats/Neighborhood_Demographics.jsonl @C106"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "Rockridge has the strongest school record on the table (index 9) — the students and teachers who live it",
+    "hookLine": "10 students and educators in Rockridge are on the ledger; the table says why their school reads the way it does.",
+    "anchorFacts": [
+      "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Uptown 8, Baylight District 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+      "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 223 students",
+      "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 39 students"
+    ],
+    "evidence": [
+      {
+        "text": "Ranked by school quality index: Rockridge 9, Fruitvale 8, Brooklyn 8, Laurel 8, Grand Lake 8, West Oakland 8, Adams Point 8, Piedmont Ave 8, Downtown 8, Jack London 8, Uptown 8, Baylight District 8, Lake Merritt 8, East Oakland 7, San Antonio 7, Glenview 7, Dimond 7, Ivy Hill 7, Temescal 7, Chinatown 7, Eastlake 7, KONO 7 (22 neighborhoods)",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C106"
+      },
+      {
+        "text": "Rockridge: school quality index 9, graduation 95%, college-ready 78%, teacher quality 9, funding 15,000, 223 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C106"
+      },
+      {
+        "text": "KONO: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 39 students",
+        "src": "output/beats/Neighborhood_Demographics.jsonl @C106"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "NO_PRIOR_CYCLE",
+      "vs": null
+    },
+    "hooks": [],
+    "note": null,
+    "roomIsYours": "the classroom, the pickup line, what a parent asks at the door, what the teacher is worried about, what the hallway sounds like at 3:05"
+  },
+  "table": [
+    {
+      "hood": "Rockridge",
+      "students": 223,
+      "sqi": 9,
+      "grad": 95,
+      "college": 78,
+      "teacher": 9,
+      "funding": 15000
+    },
+    {
+      "hood": "Fruitvale",
+      "students": 386,
+      "sqi": 8,
+      "grad": 89,
+      "college": 61,
+      "teacher": 8,
+      "funding": 13000
+    },
+    {
+      "hood": "Brooklyn",
+      "students": 318,
+      "sqi": 8,
+      "grad": 91,
+      "college": 66,
+      "teacher": 8,
+      "funding": 14500
+    },
+    {
+      "hood": "Laurel",
+      "students": 307,
+      "sqi": 8,
+      "grad": 89,
+      "college": 61,
+      "teacher": 8,
+      "funding": 13000
+    },
+    {
+      "hood": "Grand Lake",
+      "students": 287,
+      "sqi": 8,
+      "grad": 89,
+      "college": 61,
+      "teacher": 8,
+      "funding": 13000
+    },
+    {
+      "hood": "West Oakland",
+      "students": 282,
+      "sqi": 8,
+      "grad": 91,
+      "college": 66,
+      "teacher": 8,
+      "funding": 14500
+    },
+    {
+      "hood": "Adams Point",
+      "students": 250,
+      "sqi": 8,
+      "grad": 89,
+      "college": 61,
+      "teacher": 8,
+      "funding": 13000
+    },
+    {
+      "hood": "Piedmont Ave",
+      "students": 228,
+      "sqi": 8,
+      "grad": 93,
+      "college": 72,
+      "teacher": 8,
+      "funding": 14500
+    },
+    {
+      "hood": "Downtown",
+      "students": 220,
+      "sqi": 8,
+      "grad": 91,
+      "college": 66,
+      "teacher": 8,
+      "funding": 14500
+    },
+    {
+      "hood": "Jack London",
+      "students": 182,
+      "sqi": 8,
+      "grad": 91,
+      "college": 66,
+      "teacher": 8,
+      "funding": 14500
+    },
+    {
+      "hood": "Uptown",
+      "students": 43,
+      "sqi": 8,
+      "grad": 89,
+      "college": 61,
+      "teacher": 8,
+      "funding": 13000
+    },
+    {
+      "hood": "Baylight District",
+      "students": 42,
+      "sqi": 8,
+      "grad": 91,
+      "college": 66,
+      "teacher": 8,
+      "funding": 14500
+    },
+    {
+      "hood": "Lake Merritt",
+      "students": 39,
+      "sqi": 8,
+      "grad": 91,
+      "college": 66,
+      "teacher": 8,
+      "funding": 14500
+    },
+    {
+      "hood": "East Oakland",
+      "students": 441,
+      "sqi": 7,
+      "grad": 85,
+      "college": 52,
+      "teacher": 7,
+      "funding": 11000
+    },
+    {
+      "hood": "San Antonio",
+      "students": 354,
+      "sqi": 7,
+      "grad": 85,
+      "college": 52,
+      "teacher": 7,
+      "funding": 11000
+    },
+    {
+      "hood": "Glenview",
+      "students": 349,
+      "sqi": 7,
+      "grad": 87,
+      "college": 56,
+      "teacher": 7,
+      "funding": 12000
+    },
+    {
+      "hood": "Dimond",
+      "students": 319,
+      "sqi": 7,
+      "grad": 87,
+      "college": 56,
+      "teacher": 7,
+      "funding": 12000
+    },
+    {
+      "hood": "Ivy Hill",
+      "students": 299,
+      "sqi": 7,
+      "grad": 85,
+      "college": 52,
+      "teacher": 7,
+      "funding": 11000
+    },
+    {
+      "hood": "Temescal",
+      "students": 290,
+      "sqi": 7,
+      "grad": 86,
+      "college": 58,
+      "teacher": 7,
+      "funding": 11500
+    },
+    {
+      "hood": "Chinatown",
+      "students": 287,
+      "sqi": 7,
+      "grad": 87,
+      "college": 56,
+      "teacher": 7,
+      "funding": 12000
+    },
+    {
+      "hood": "Eastlake",
+      "students": 283,
+      "sqi": 7,
+      "grad": 87,
+      "college": 56,
+      "teacher": 7,
+      "funding": 12000
+    },
+    {
+      "hood": "KONO",
+      "students": 39,
+      "sqi": 7,
+      "grad": 87,
+      "college": 56,
+      "teacher": 7,
+      "funding": 12000
+    }
+  ],
+  "pointers": [
+    "output/beats/Neighborhood_Demographics.jsonl @C106",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

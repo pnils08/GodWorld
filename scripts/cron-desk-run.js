@@ -39,7 +39,29 @@ const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 const PUBLISHED = path.join(COMPARE, 'published');
 const FLAGGED = path.join(COMPARE, 'flagged');
 const STAGED = path.join(COMPARE, 'staged');   // Phase 2 probation wall (S332): M–F articles stage here, NOT canon-ingested
-const SAMPLES = path.join(COMPARE, 'samples'); // --no-gate ungated review samples (S332): never canon
+const SAMPLES = path.join(COMPARE, 'samples');
+// pipeline.68 Task 4 — one beat slice per journalist, built from the beat dump
+// (scripts/dumpBeatTabs.js). Each builder fails loud on a missing or stale dump;
+// that failure is scoped to the one seat's wake, never the run.
+const BEAT_BUILDERS = {
+  'trevor-shimizu': 'buildTransitSlice',
+  'lila-mezran': 'buildHealthSlice',
+  'angela-reyes': 'buildSchoolsSlice',
+  'noah-tan': 'buildEnvironmentSlice',
+  'elliot-graye': 'buildFaithSlice',
+  'rachel-torres': 'buildSafetySlice'
+};
+const BEAT_NAME_RE = /trevor\s*shimizu|lila\s*mezran|angela\s*reyes|noah\s*tan|elliot\s*graye|rachel\s*torres/i;
+function beatSlugForName(name) {
+  const n = String(name || '');
+  if (/trevor\s*shimizu/i.test(n)) return 'trevor-shimizu';
+  if (/lila\s*mezran/i.test(n)) return 'lila-mezran';
+  if (/angela\s*reyes/i.test(n)) return 'angela-reyes';
+  if (/noah\s*tan/i.test(n)) return 'noah-tan';
+  if (/elliot\s*graye/i.test(n)) return 'elliot-graye';
+  if (/rachel\s*torres/i.test(n)) return 'rachel-torres';
+  return null;
+} // --no-gate ungated review samples (S332): never canon
 
 function exactRheaProof(rhea, articleText) {
   const articleSha256 = crypto.createHash('sha256').update(articleText).digest('hex');
@@ -381,7 +403,7 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
   const exactPacketCandidates = ((angleArt && angleArt.inputPacket &&
     angleArt.inputPacket.exposure && angleArt.inputPacket.exposure.candidates) || [])
     .filter(c => c && /^(?:POP-|TEST-)/i.test(String(c.pop || '')));
-  const slice = angleArt && (angleArt.jaxSlice || angleArt.pslayerSlice ||
+  const slice = angleArt && (angleArt.beatSlice || angleArt.jaxSlice || angleArt.pslayerSlice ||
     angleArt.economicSlice || angleArt.safetySlice || angleArt.eveningSlice ||
     angleArt.civicDomainSlice);
   const filled = story
@@ -837,9 +859,37 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('STANCE: senior photographer. Visual record/prompts. Not prose articles.');
       L.push('ONE visual assignment set — not multi-voice desk average.');
     }
-    // pipeline.52 Task 6: selected packet from the shared civic substrate.
-    // Rachel is intentionally absent: her completed safety slice stays separate.
-    if (/carmen\s*delaine|luis\s*navarro|trevor\s*shimizu|lila\s*mezran|noah\s*tan|angela\s*reyes/i.test(persona.name || '')) {
+    // pipeline.68 Task 4: the journalist's own beat slice (facts + people + the room line).
+    // The typed packet already carries these; this block is the readable brief for the writer.
+    if (BEAT_NAME_RE.test(persona.name || '')) {
+      try {
+        const slug = beatSlugForName(persona.name);
+        const { loadSlice } = require(path.join(__dirname, BEAT_BUILDERS[slug]));
+        const bs = loadSlice(cycle);
+        if (bs && !bs.empty) {
+          L.push('');
+          L.push('### YOUR BEAT SLICE (' + bs.seat.domain + ' — one file, yours; facts are the rows below)');
+          if (bs.hood) L.push('WHERE: ' + bs.hood);
+          L.push('HOOK: ' + bs.story.hookLine);
+          L.push('FACTS (real — every line is a row on the record):');
+          for (const f of bs.prewrite.anchorFacts.slice(0, 12)) L.push('  - ' + f);
+          if (bs.citizens.length) {
+            L.push('PEOPLE ON THE RECORD (your sources — never invent another):');
+            for (const c of bs.citizens.slice(0, 10)) L.push('  - ' + c.profile);
+          }
+          if (bs.prewrite.note) L.push('NOTE: ' + bs.prewrite.note);
+          if ((bs.prewrite.hooks || []).length) {
+            L.push('ENGINE HOOKS FOR YOU (colour, not fact):');
+            for (const h of bs.prewrite.hooks.slice(0, 3)) L.push('  - ' + h.text);
+          }
+          L.push('THE ROOM IS YOURS: ' + bs.prewrite.roomIsYours);
+          L.push('');
+        }
+      } catch (e) { log('[beat-slice] write-stage render skipped for ' + persona.name + ': ' + e.message); }
+    }
+    // pipeline.52 Task 6: selected packet from the shared civic substrate — Carmen and Luis
+    // (the tab-backed seats moved to their own beat slices, pipeline.68 Task 4).
+    if (/carmen\s*delaine|luis\s*navarro/i.test(persona.name || '')) {
       try {
         const {
           CIVIC_SEATS,
@@ -868,9 +918,9 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     // grok pipeline.52: economic pack when this is a business-desk assignment (desk via assignment approach).
     // (Persona-named inject for culture evening follows; business often has no solo persona.)
     // grok pipeline.52: shared evening-life pack for culture consumers (kai/sharon/maria/graye).
-    // Mason Ortega left this pack for the food slice (pipeline.68 Task 3).
+    // Mason Ortega left this pack for the food slice (pipeline.68 Task 3); Elliot Graye for the faith slice (Task 4).
     if (persona.name &&
-        /maria\s*keen|elliot\s*graye|kai\s*marston|sharon\s*okafor/i.test(persona.name)) {
+        /maria\s*keen|kai\s*marston|sharon\s*okafor/i.test(persona.name)) {
       try {
         const { loadEveningSlice, pickPulseForPersona, EVENING_CONSUMERS } =
           require(path.join(__dirname, 'buildEveningSlice'));
@@ -1323,10 +1373,12 @@ async function runAngle(assign) {
   let civicDomainSlice = null;
   // Mason Ortega is not an evening consumer any more — he draws the food
   // variant of the economic slice (pipeline.68 Task 3).
+  // Elliot Graye draws the faith slice (pipeline.68 Task 4), not the evening pack.
   const EVENING_SLUGS = {
     'kai-marston': 1, 'sharon-okafor': 1,
-    'maria-keen': 1, 'elliot-graye': 1
+    'maria-keen': 1
   };
+  let beatSlice = null;
   if (personaSlug === 'freelance-firebrand' && !story) {
     try {
       const { loadJaxSlice } = require(path.join(__dirname, 'buildJaxSlice'));
@@ -1461,18 +1513,18 @@ async function runAngle(assign) {
     } catch (e) {
       log('evening slice load failed (non-fatal): ' + e.message);
     }
-  } else if (personaSlug === 'rachel-torres') {
-    try {
-      const { loadSafetySlice } = require(path.join(__dirname, 'buildSafetySlice'));
-      safetySlice = loadSafetySlice(cycle);
-      if (safetySlice && !safetySlice.empty) {
-        story = safetySlice.story || story;
-        approach = safetySlice.approach || approach;
-        log('safety slice loaded — pulse ' + safetySlice.pulse.className +
-          ' hood ' + (safetySlice.pulse.hood || '—'));
-      }
-    } catch (e) { log('safety slice load failed (non-fatal): ' + e.message); }
-  } else if (personaSlug && /^(carmen-delaine|luis-navarro|trevor-shimizu|lila-mezran|noah-tan|angela-reyes)$/.test(personaSlug)) {
+  } else if (personaSlug && BEAT_BUILDERS[personaSlug]) {
+    // pipeline.68 Task 4 — the journalist's own beat slice. No try/catch: a
+    // missing or stale dump fails this one wake, loudly, and nothing else.
+    const { loadSlice } = require(path.join(__dirname, BEAT_BUILDERS[personaSlug]));
+    beatSlice = loadSlice(cycle);
+    if (beatSlice && !beatSlice.empty) {
+      story = beatSlice.story || story;
+      approach = beatSlice.approach || approach;
+      log('beat slice loaded [' + beatSlice.kind + '] — ' + personaSlug + ' hood ' + (beatSlice.hood || '—') +
+        ' facts ' + beatSlice.facts.length + ' people ' + beatSlice.citizens.length);
+    }
+  } else if (personaSlug && /^(carmen-delaine|luis-navarro)$/.test(personaSlug)) {
     try {
       const { loadCivicDomainSlice, packetForPersona } = require(path.join(__dirname, 'buildCivicDomainSlice'));
       civicDomainSlice = loadCivicDomainSlice(cycle);
@@ -1697,19 +1749,21 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn your own beat voice: state the one record-backed claim, identify what remains unestablished, ' +
         'and name the next record or affected resident to pursue. No invented official action, metrics, votes, or outcomes. One civic domain story, not a desk roundup.';
-    } else if (persona && personaSlug === 'rachel-torres' && story) {
-      const sceneBits = [];
-      if (safetySlice && safetySlice.pulse) sceneBits.push('PULSE: ' + safetySlice.pulse.className + ' · ' + safetySlice.pulse.label);
-      if (safetySlice && safetySlice.prewrite) {
-        sceneBits.push('ANCHOR FACTS:\n' + safetySlice.prewrite.anchorFacts.map(f => '  - ' + f).join('\n'));
-        sceneBits.push('MISSING: ' + safetySlice.prewrite.missing.join('; '));
-      }
-      ask = 'You\'re ' + asker.name + '. This is the supplied public-safety record — one claim spine, no crime sensationalism:\n' +
-        'SIGNAL: ' + (story.angle || story.label) + (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
-        (brief.names.length ? '\nCITIZENS (packet only):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
-        (story.hood ? '\nAREA: ' + story.hood : '') + (sceneBits.length ? '\nSAFETY PACK:\n' + sceneBits.join('\n') : '') +
-        (approach ? '\n\n' + approach : '') + (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
-        '\n\nIn measured third person: what does the record establish, what classification or response question remains, which supplied citizen should the Tribune ask about, and what will you not invent? One public-safety claim. No officers, cases, quotes, counts, or fear claims absent from the Packet.';
+    } else if (persona && beatSlice && !beatSlice.empty && story) {
+      // pipeline.68 Task 4 — the journalist's own beat slice (legacy free-text ask;
+      // under packet-v2 the typed packet below replaces it).
+      const facts = beatSlice.prewrite.anchorFacts.slice(0, 12);
+      ask = 'You\'re ' + asker.name + '. This is your ' + beatSlice.seat.domain + ' beat this cycle, straight off the record:\n' +
+        'ANGLE: ' + (story.angle || story.label) +
+        (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
+        (beatSlice.hood ? '\nWHERE: ' + beatSlice.hood : '') +
+        (facts.length ? '\nFACTS (real — every line is a row on the record):\n' + facts.map(f => '  - ' + f).join('\n') : '') +
+        (brief.names.length ? '\nPEOPLE ON THE RECORD (your sources — never invent another):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
+        (beatSlice.prewrite.note ? '\nNOTE: ' + beatSlice.prewrite.note : '') +
+        '\nTHE ROOM IS YOURS: ' + beatSlice.prewrite.roomIsYours +
+        (approach ? '\n\n' + approach : '') +
+        (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
+        '\n\nIn your own voice: which row are you standing in, who on the record is your source, and what is true there today? One beat, one claim, the room painted freely.';
     } else if (persona && story) {
       const sceneBits = [];
       if (jaxSlice && jaxSlice.scene) {
@@ -1752,7 +1806,7 @@ async function runAngle(assign) {
     if (PACKET_ACTIVE) {
       inputPacket = livedPacket.buildAnglePacket({
         cycle, desk, reporter: asker, story, approach,
-        slice: selectTypedSlice([jaxSlice, pslayerSlice, anthonySlice, halSlice, tanyaSlice, simonSlice,
+        slice: selectTypedSlice([beatSlice, jaxSlice, pslayerSlice, anthonySlice, halSlice, tanyaSlice, simonSlice,
           economicSlice, safetySlice, eveningSlice, civicDomainSlice]), lane,
       });
       ask = livedPacket.prompt(inputPacket);
@@ -1896,6 +1950,16 @@ async function runAngle(assign) {
       seeds: (economicSlice.seeds || []).map(sd => ({ seedId: sd.seedId, hood: sd.hood, citizens: sd.citizens })),
       rotation: economicSlice.rotation,
       candidates: (economicSlice.candidates || []).slice(0, 8)
+    } : null,
+    beatSlice: beatSlice && !beatSlice.empty ? {
+      version: beatSlice.version,
+      kind: beatSlice.kind,
+      seat: beatSlice.seat,
+      hood: beatSlice.hood,
+      pulse: beatSlice.pulse,
+      prewrite: beatSlice.prewrite,
+      citizens: beatSlice.citizens.slice(0, 12),
+      pointers: beatSlice.pointers
     } : null,
     safetySlice: safetySlice && !safetySlice.empty ? {
       pulse: safetySlice.pulse,

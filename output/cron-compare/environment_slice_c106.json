@@ -1,0 +1,219 @@
+{
+  "version": "ENVIRONMENT-SLICE-1",
+  "empty": false,
+  "cycle": 106,
+  "kind": "beat-weather",
+  "seat": {
+    "slug": "noah-tan",
+    "name": "Noah Tan",
+    "popid": "POP-00157",
+    "desk": "civic",
+    "domain": "environment",
+    "builder": "buildEnvironmentSlice.js"
+  },
+  "hood": null,
+  "pulse": {
+    "className": "beat-weather",
+    "score": 100,
+    "label": "C106 overcast, 52°F after rain",
+    "hood": null,
+    "source": "output/beats/Cycle_Weather.jsonl CycleID 106"
+  },
+  "story": {
+    "kind": "beat-weather",
+    "angle": "C106 overcast, 52°F after rain — what this weather does to a day in the city",
+    "label": "C106 overcast, 52°F after rain",
+    "hookLine": "C106 overcast, 52°F after rain; 4 residents on the record lived it.",
+    "hood": null,
+    "citizens": [
+      "Toby Lamont (POP-00183)",
+      "Mina Linas (POP-00135)",
+      "Enzo Walker (POP-00291)",
+      "Tobi Sobi (POP-00178)"
+    ],
+    "popids": [
+      "POP-00183",
+      "POP-00135",
+      "POP-00291",
+      "POP-00178"
+    ],
+    "ref": "output/beats/Cycle_Weather.jsonl CycleID 106",
+    "cycle": 106
+  },
+  "approach": "Weather and environment approach: this slice is the cycle's weather row, the streak, and the last three cycles beside it, plus whoever the record says lived it. Science-first ground translation — temperature is context, never the lede. Show what this weather moved. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "citizens": [
+    {
+      "popid": "POP-00183",
+      "name": "Toby Lamont",
+      "role": "Mutual Aid Network Organizer",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Toby Lamont — Mutual Aid Network Organizer — Fruitvale",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00135",
+      "name": "Mina Linas",
+      "role": "Sea Level Monitoring Technician",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Mina Linas — Sea Level Monitoring Technician — Lake Merritt",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00291",
+      "name": "Enzo Walker",
+      "role": "Plumber",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Enzo Walker — Plumber — Lake Merritt",
+      "why": "lived the weather this cycle (Who Lived It)"
+    },
+    {
+      "popid": "POP-00178",
+      "name": "Tobi Sobi",
+      "role": "Climate Modeling Scientist",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Tobi Sobi — Climate Modeling Scientist — Lake Merritt",
+      "why": "lived the weather this cycle (Who Lived It)"
+    }
+  ],
+  "facts": [
+    {
+      "text": "This cycle: overcast, 52°F, comfort 0.5, mood neutral",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 106"
+    },
+    {
+      "text": "Last 3 cycles: C103 overcast 49°F, C104 rain 48°F, C105 rain 49°F",
+      "src": "output/beats/Cycle_Weather.jsonl"
+    },
+    {
+      "text": "Toby Lamont — fought off a head cold that lingered all week",
+      "src": "output/world_summary_c106.md ## Who Lived It"
+    },
+    {
+      "text": "Mina Linas — limited social activity due to winter mood",
+      "src": "output/world_summary_c106.md ## Who Lived It"
+    },
+    {
+      "text": "Enzo Walker — limited social activity due to winter mood",
+      "src": "output/world_summary_c106.md ## Who Lived It"
+    },
+    {
+      "text": "Tobi Sobi — helped the kids with homework at the kitchen table",
+      "src": "output/world_summary_c106.md ## Who Lived It"
+    }
+  ],
+  "prewrite": {
+    "schema": "BEAT-SLICE-1",
+    "method": "BEAT_TAB_FACTS",
+    "missing": [],
+    "angle": "C106 overcast, 52°F after rain — what this weather does to a day in the city",
+    "hookLine": "C106 overcast, 52°F after rain; 4 residents on the record lived it.",
+    "anchorFacts": [
+      "This cycle: overcast, 52°F, comfort 0.5, mood neutral",
+      "Last 3 cycles: C103 overcast 49°F, C104 rain 48°F, C105 rain 49°F",
+      "Toby Lamont — fought off a head cold that lingered all week",
+      "Mina Linas — limited social activity due to winter mood",
+      "Enzo Walker — limited social activity due to winter mood",
+      "Tobi Sobi — helped the kids with homework at the kitchen table"
+    ],
+    "evidence": [
+      {
+        "text": "This cycle: overcast, 52°F, comfort 0.5, mood neutral",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 106"
+      },
+      {
+        "text": "Last 3 cycles: C103 overcast 49°F, C104 rain 48°F, C105 rain 49°F",
+        "src": "output/beats/Cycle_Weather.jsonl"
+      },
+      {
+        "text": "Toby Lamont — fought off a head cold that lingered all week",
+        "src": "output/world_summary_c106.md ## Who Lived It"
+      },
+      {
+        "text": "Mina Linas — limited social activity due to winter mood",
+        "src": "output/world_summary_c106.md ## Who Lived It"
+      },
+      {
+        "text": "Enzo Walker — limited social activity due to winter mood",
+        "src": "output/world_summary_c106.md ## Who Lived It"
+      },
+      {
+        "text": "Tobi Sobi — helped the kids with homework at the kitchen table",
+        "src": "output/world_summary_c106.md ## Who Lived It"
+      }
+    ],
+    "forbidden": [
+      "Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice",
+      "Do not contradict a role, employer or neighborhood listed here",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose"
+    ],
+    "deltas": {
+      "state": "PRIOR_CYCLE_IN_TABLE",
+      "vs": 105
+    },
+    "hooks": [],
+    "note": null,
+    "roomIsYours": "the sidewalk, the coats, what this weather does to a plan, who is out in it and who stayed in, what the bay smells like today"
+  },
+  "weather": {
+    "CycleID": "106",
+    "Type": "overcast",
+    "Temp": "52",
+    "Impact": "1.05",
+    "Advisory": "",
+    "Comfort": "0.5",
+    "Mood": "neutral",
+    "Alerts": "",
+    "Streak": "1",
+    "StreakType": "overcast",
+    "Timestamp": "Y3C2"
+  },
+  "recent": [
+    {
+      "CycleID": "103",
+      "Type": "overcast",
+      "Temp": "49",
+      "Impact": "1.05",
+      "Advisory": "",
+      "Comfort": "0.5",
+      "Mood": "neutral",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "overcast",
+      "Timestamp": "Y2C51"
+    },
+    {
+      "CycleID": "104",
+      "Type": "rain",
+      "Temp": "48",
+      "Impact": "1.33",
+      "Advisory": "",
+      "Comfort": "0.21",
+      "Mood": "introspective",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "rain",
+      "Timestamp": "Y2C52"
+    },
+    {
+      "CycleID": "105",
+      "Type": "rain",
+      "Temp": "49",
+      "Impact": "1.33",
+      "Advisory": "",
+      "Comfort": "0.21",
+      "Mood": "introspective",
+      "Alerts": "",
+      "Streak": "2",
+      "StreakType": "rain",
+      "Timestamp": "Y3C1"
+    }
+  ],
+  "pointers": [
+    "output/beats/Cycle_Weather.jsonl CycleID 106",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+  ]
+}

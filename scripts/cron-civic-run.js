@@ -39,6 +39,7 @@
 require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
+const https = require('https');   // postDiscord (--stage=status) — was scoped inside another function, crashed every Sunday 15:00 (rb catch, S432)
 const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');

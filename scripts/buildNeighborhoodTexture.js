@@ -155,24 +155,40 @@ function buildPrompt(bundles, canon) {
   return { system, user };
 }
 
+// Provider chain (S432): deepseek returned "Provider returned error" twice on
+// the C106 run (upstream 429 the same evening the civic chain fell back), and
+// a missing texture leaves world_state.json with 0 hoods for the whole cycle.
+// Same distinct-family fallback order the civic cron uses.
+const TEXTURE_MODELS = ['deepseek/deepseek-chat', 'moonshotai/kimi-k2', 'qwen/qwen3-235b-a22b'];
+
 async function generateTexture(system, user) {
-  const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY,
-      'Content-Type': 'application/json',
-      'HTTP-Referer': 'https://godworld.local',
-    },
-    body: JSON.stringify({
-      model: 'deepseek/deepseek-chat',
-      max_tokens: 2200,
-      temperature: 0.7,
-      messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
-    }),
-  });
-  const j = await r.json();
-  if (j.error) throw new Error('texture-gen: ' + (j.error.message || JSON.stringify(j.error)));
-  return String(j.choices?.[0]?.message?.content || '').trim();
+  let lastErr = null;
+  for (const model of TEXTURE_MODELS) {
+    const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY,
+        'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://godworld.local',
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: 2200,
+        temperature: 0.7,
+        messages: [{ role: 'system', content: system }, { role: 'user', content: user }],
+      }),
+    });
+    const j = await r.json();
+    if (j.error) {
+      lastErr = model + ': ' + (j.error.message || JSON.stringify(j.error));
+      console.error('texture-gen: ' + lastErr + ' — trying next model');
+      continue;
+    }
+    const text = String(j.choices?.[0]?.message?.content || '').trim();
+    if (text) { if (model !== TEXTURE_MODELS[0]) console.error('texture-gen: answered by fallback ' + model); return text; }
+    lastErr = model + ': empty completion';
+  }
+  throw new Error('texture-gen: ' + lastErr + ' (all ' + TEXTURE_MODELS.length + ' models tried)');
 }
 
 // Parse the "### Hood\ntext" blocks back into a map keyed by exact hood name.

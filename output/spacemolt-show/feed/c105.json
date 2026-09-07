@@ -118,6 +118,25 @@
         "credits_delta_windowed"
       ],
       "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-09-06T01-30-09.json"
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 105,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00143",
+      "Holder": "Clarissa Dane",
+      "EpisodeId": "undocked-pop00143-Y3C1-e3",
+      "CreditsDelta": null,
+      "Systems": [
+        "alpha_centauri"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-07T01-30-04.json"
     }
   ]
 }

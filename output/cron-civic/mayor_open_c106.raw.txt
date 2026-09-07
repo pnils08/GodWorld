@@ -1,0 +1,80 @@
+```json
+{
+  "office": "mayor_open",
+  "cycle": 106,
+  "speaker": "Avery Santana",
+  "cascadeSummary": "This cycle, I am addressing the urgent needs of Oakland's neighborhoods by clearing the backlog in the Youth Apprenticeship Pipeline, launching the District 1 expansion of the Alternative Response Initiative, and ensuring the West Oakland Stabilization Fund reaches more families. I am also advancing the Fruitvale Transit Hub visioning process, breaking ground on the Temescal Community Health Center, and preparing for the final council vote on the Baylight District Phase II bid. These decisions reflect my commitment to delivering on promises and stabilizing neighborhoods in decline.",
+  "statements": [
+    {
+      "statementId": "STMT-106-mayor_open-001",
+      "type": "authorization_response",
+      "topic": "Oakland Youth Apprenticeship Pipeline — Backlog Clearance and Town Hall",
+      "initiative": "INIT-007",
+      "decision": "approved",
+      "quote": "Every young person in this city deserves a shot, not a runaround. Today, we’re publishing the numbers and setting the date—no more delays.",
+      "fullStatement": "This morning, my office is transmitting the verified backlog clearance figures for the Oakland Youth Apprenticeship Pipeline. We have processed every application in the queue, and we are announcing the public hearing date for the community town hall: February 10th at the Fruitvale Senior Center. This is what accountability looks like—numbers on the page, a date on the calendar, and young people in this city getting the opportunities they were promised.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-002",
+      "type": "initiative_response",
+      "topic": "Oakland Alternative Response Initiative — District 1 Expansion Launch",
+      "initiative": "INIT-002",
+      "decision": "launched",
+      "quote": "West Oakland proved this model works. Now, District 1 gets the same promise: safety without criminalization.",
+      "fullStatement": "Today, the Oakland Alternative Response Initiative expands into District 1. This means trained responders—mental health professionals, outreach workers, and community mediators—will be on the streets of West Oakland, answering calls that don’t require a police officer. This is how we build trust: by showing up, listening, and delivering real alternatives to the cycle of arrest and incarceration. The data from our pilot districts is clear—this works. Now, we scale it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-003",
+      "type": "authorization_response",
+      "topic": "West Oakland Stabilization Fund — Month-Six Disbursement + Canvass Launch",
+      "initiative": "INIT-001",
+      "decision": "approved",
+      "quote": "Fifty-seven families are already in stable homes because of this fund. Today, we’re reaching the next block.",
+      "fullStatement": "The West Oakland Stabilization Fund’s month-six disbursement is now complete. We’ve reached an additional twelve households, bringing the total to sixty-nine families who are no longer at risk of displacement. But we’re not stopping there. Today, we’re launching a door-to-door canvass in the blocks where daily life is slipping—because no one should have to wait for stability. This fund is working, and we’re going to make sure it reaches every family who needs it.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-004",
+      "type": "initiative_response",
+      "topic": "Fruitvale Transit Hub Phase II — First Visioning Session",
+      "initiative": "INIT-003",
+      "decision": "conducted",
+      "quote": "Fruitvale’s small businesses and vendors aren’t just stakeholders—they’re the heart of this project.",
+      "fullStatement": "The first community visioning session for the Fruitvale Transit Hub Phase II took place this week at the Fruitvale Senior Center. Over two hundred residents, small business owners, and vendors showed up to share their priorities: protecting local jobs, ensuring affordable vendor spaces, and designing a hub that reflects Fruitvale’s culture. This is what investment in Oakland looks like—not just steel and concrete, but a project built by and for the people who call this neighborhood home.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-005",
+      "type": "executive_order",
+      "topic": "Temescal Community Health Center — Structural Frame Groundbreaking",
+      "initiative": "INIT-005",
+      "decision": "groundbreaking_scheduled",
+      "quote": "This is how we turn decline into opportunity—by putting shovels in the ground and care in the community.",
+      "fullStatement": "Today, I am issuing an executive order to break ground on the structural frame of the Temescal Community Health Center. This $45 million investment will bring primary care, mental health services, and a full-service pharmacy to a neighborhood where daily life is visibly slipping. The groundbreaking ceremony will take place on January 20th, with construction crews on site by the end of the month. This is how we stabilize neighborhoods: by delivering the services people need, where they need them.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-006",
+      "type": "policy_position",
+      "topic": "Baylight District — Final Council Vote on Phase II Bid",
+      "initiative": "INIT-006",
+      "decision": "vote_preparation",
+      "quote": "This is Oakland’s future being built—by Oaklanders, for Oaklanders.",
+      "fullStatement": "The final council vote on the Baylight District Phase II bid is scheduled for this cycle. This $2.1 billion project will create thousands of jobs, bring new housing and retail to Jack London and Downtown, and ensure that Oakland remains a city where people want to live, work, and play. I am confident that the council will recognize what’s at stake: not just a stadium, but a generational investment in Oakland’s economy and identity. The future is on the agenda, and I urge my colleagues to vote yes.",
+      "trackerUpdates": {}
+    },
+    {
+      "statementId": "STMT-106-mayor_open-007",
+      "type": "public_remark",
+      "topic": "San Antonio and Temescal — Crisis and Credit",
+      "initiative": null,
+      "decision": "acknowledged",
+      "quote": "San Antonio’s quiet strength is a reminder that this city’s resilience doesn’t always make headlines. And Temescal’s progress? That’s what happens when neighbors and city hall work together.",
+      "fullStatement": "This cycle, I want to acknowledge two neighborhoods that don’t always get the attention they deserve. In San Antonio, the mood is upbeat, street trade is steady, and crime is low. That’s not an accident—it’s the result of years of hard work by residents, community organizations, and city services that show up every day. And in Temescal, where daily life has been slipping, we’re seeing real progress. The groundbreaking of the Community Health Center is a turning point, and I want to credit the advocates, the small business owners, and the city staff who made it happen. Oakland’s strength is in its neighborhoods, and we’re going to keep fighting for every single one.",
+      "trackerUpdates": {}
+    }
+  ]
+}
+```

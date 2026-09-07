@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-08-31",
+  "lastUpdated": "2026-09-07",
   "updatedBy": "buildInitiativePackets.js (auto)",
   "initiatives": [
     {
@@ -17,9 +17,9 @@
       "implementation": {
         "status": "disbursement-active",
         "phase": "disbursement-active",
-        "summary": "C104: Month-five batch disbursed (12 households; total 57/280). Outreach expansion to slipping blocks approved for C105.",
-        "nextScheduledAction": "Month-six disbursement review + canvass launch",
-        "nextActionCycle": 105
+        "summary": "C105: Month-six disbursement batch approved (12 households); canvass launched for slipping blocks.",
+        "nextScheduledAction": "Month-seven disbursement review",
+        "nextActionCycle": 106
       }
     },
     {
@@ -39,9 +39,9 @@
       "implementation": {
         "status": "implementation-active",
         "phase": "implementation-active",
-        "summary": "C104: Expansion approved for D1/D3/D5; district-specific adaptations finalized. Monthly reporting + audit framework established.",
-        "nextScheduledAction": "First expansion-district launch (D1)",
-        "nextActionCycle": 105
+        "summary": "C105: District 1 expansion launched; monthly reporting and audit framework in place.",
+        "nextScheduledAction": "First expansion-district evaluation",
+        "nextActionCycle": 107
       }
     },
     {
@@ -57,11 +57,11 @@
         "Fruitvale"
       ],
       "implementation": {
-        "status": "visioning",
-        "phase": "visioning",
-        "summary": "C104: Launched community visioning sessions focused on small business and vendor protections",
-        "nextScheduledAction": "Conduct first visioning session by January 15",
-        "nextActionCycle": 105
+        "status": "visioning-complete",
+        "phase": "visioning-complete",
+        "summary": "C105: First visioning session conducted; feedback incorporated into design phase.",
+        "nextScheduledAction": "Design-phase kickoff",
+        "nextActionCycle": 106
       }
     },
     {
@@ -79,8 +79,8 @@
       "implementation": {
         "status": "construction-active",
         "phase": "construction-active",
-        "summary": "C104: Phase 1 closed; HCAI comments resolved. Double shifts extended through C105; structural frame target set for early C106.",
-        "nextScheduledAction": "Structural frame groundbreaking",
+        "summary": "C105: Structural frame completed ahead of schedule, MEP rough-ins advancing with second shift",
+        "nextScheduledAction": "Interior wall framing and utility inspections",
         "nextActionCycle": 106
       }
     },
@@ -98,11 +98,11 @@
         "Downtown"
       ],
       "implementation": {
-        "status": "vote-scheduled",
-        "phase": "vote-scheduled",
-        "summary": "C104: Phase II shortlist approved (3 bidders). Final vote scheduled for C105.",
-        "nextScheduledAction": "Final council vote on Phase II bid",
-        "nextActionCycle": 105
+        "status": "construction-planning",
+        "phase": "construction-planning",
+        "summary": "C105: Final council vote approved Phase II bid; construction planning phase begins.",
+        "nextScheduledAction": "Bid finalization and contract signing",
+        "nextActionCycle": 107
       }
     },
     {
@@ -120,9 +120,9 @@
         "Fruitvale"
       ],
       "implementation": {
-        "status": "pilot-active",
-        "phase": "pilot-active",
-        "summary": "C104: Corrective action plan published; intake simplified, 3 new recruitment partners added. Backlog clearance deadline set for C106.",
+        "status": "implementation-active",
+        "phase": "implementation-active",
+        "summary": "C105: Administrative order issued to clear backlog; intake processing targets mandated across agencies.",
         "nextScheduledAction": "Backlog processing completion + town hall",
         "nextActionCycle": 106
       }

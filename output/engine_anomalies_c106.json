@@ -1,0 +1,477 @@
+{
+  "cycle": 106,
+  "generatedAt": "C106",
+  "detectorVersion": "1.0.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00260"
+        ],
+        "neighborhoods": [
+          "Lake Merritt"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00260",
+          "previousIncome": 104500,
+          "currentIncome": 215100,
+          "ratio": "2.058",
+          "peerShare": "0.01",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00260 income Δ 106% (104500 → 215100); peer move share 1%",
+      "historicalContext": {
+        "priorCycles": [
+          104500,
+          45400,
+          45400
+        ],
+        "currentCycle": 215100
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00268"
+        ],
+        "neighborhoods": [
+          "Lake Merritt"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00268",
+          "previousIncome": 106000,
+          "currentIncome": 283800,
+          "ratio": "2.677",
+          "peerShare": "0.01",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00268 income Δ 168% (106000 → 283800); peer move share 1%",
+      "historicalContext": {
+        "priorCycles": [
+          106000,
+          93271,
+          93271
+        ],
+        "currentCycle": 283800
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "West Oakland"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          6
+        ],
+        "fields": {
+          "Neighborhood": "West Oakland",
+          "ViolentCrimeIndex": 56,
+          "historicalMean": "60.33",
+          "stddev": "0.47",
+          "zScore": "-9.19",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "West Oakland violent crime 56 at -9.2σ from 3-cycle mean 60.33",
+      "historicalContext": {
+        "priorCycles": [
+          60,
+          60,
+          61
+        ],
+        "currentCycle": 56
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "East Oakland"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          7
+        ],
+        "fields": {
+          "Neighborhood": "East Oakland",
+          "ViolentCrimeIndex": 60,
+          "historicalMean": "66.33",
+          "stddev": "0.47",
+          "zScore": "-13.44",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "East Oakland violent crime 60 at -13.4σ from 3-cycle mean 66.33",
+      "historicalContext": {
+        "priorCycles": [
+          66,
+          67,
+          66
+        ],
+        "currentCycle": 60
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Downtown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Downtown",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 4,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Downtown migration flow shifted 5 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "West Oakland"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "West Oakland",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 2,
+          "delta": "-3.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "West Oakland migration flow shifted 5 → 2",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Jack London"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Jack London",
+          "previousMigrationFlow": 4,
+          "currentMigrationFlow": 3,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Jack London migration flow shifted 4 → 3",
+      "historicalContext": {
+        "priorCycles": [
+          4
+        ],
+        "currentCycle": 3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Adams Point"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Adams Point",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 3,
+          "delta": "-2.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Adams Point migration flow shifted 5 → 3",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Grand Lake"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Grand Lake",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 4,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Grand Lake migration flow shifted 5 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Chinatown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Chinatown",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 4,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Chinatown migration flow shifted 5 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "KONO"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "KONO",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 4,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "KONO migration flow shifted 5 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Lake Merritt"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Lake Merritt",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 4,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Lake Merritt migration flow shifted 5 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Baylight District"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Baylight District",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 4,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Baylight District migration flow shifted 5 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    }
+  ],
+  "summary": {
+    "total": 13,
+    "byTriage": {
+      "route-to-engine-debug": 2,
+      "cover-as-story": 2,
+      "suppress-until-verified": 9
+    }
+  }
+}

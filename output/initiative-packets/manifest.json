@@ -1,66 +1,66 @@
 {
-  "cycle": 105,
-  "generatedAt": "2026-08-31T06:18:37.573Z",
+  "cycle": 106,
+  "generatedAt": "2026-09-07T02:45:50.186Z",
   "packets": {
     "stabilization_fund": {
-      "file": "stabilization_fund_c105.json",
+      "file": "stabilization_fund_c106.json",
       "initiativeId": "INIT-001",
       "status": "passed",
-      "citizenCount": 164,
+      "citizenCount": 167,
       "linkedCitizens": 1,
       "neighborhoods": 7,
       "businesses": 39,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 6
+      "previousDocCount": 7
     },
     "oari": {
-      "file": "oari_c105.json",
+      "file": "oari_c106.json",
       "initiativeId": "INIT-002",
       "status": "passed",
-      "citizenCount": 320,
+      "citizenCount": 322,
       "linkedCitizens": 0,
       "neighborhoods": 7,
       "businesses": 52,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 6
+      "previousDocCount": 7
     },
     "transit_hub": {
-      "file": "transit_hub_c105.json",
+      "file": "transit_hub_c106.json",
       "initiativeId": "INIT-003",
       "status": "visioning-complete",
-      "citizenCount": 91,
+      "citizenCount": 92,
       "linkedCitizens": 0,
       "neighborhoods": 2,
       "businesses": 12,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 4
+      "previousDocCount": 5
     },
     "health_center": {
-      "file": "health_center_c105.json",
+      "file": "health_center_c106.json",
       "initiativeId": "INIT-005",
       "status": "passed",
       "citizenCount": 156,
       "linkedCitizens": 0,
       "neighborhoods": 2,
-      "businesses": 13,
+      "businesses": 14,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 4
+      "previousDocCount": 5
     },
     "baylight": {
-      "file": "baylight_c105.json",
+      "file": "baylight_c106.json",
       "initiativeId": "INIT-006",
       "status": "passed",
-      "citizenCount": 157,
+      "citizenCount": 160,
       "linkedCitizens": 0,
       "neighborhoods": 4,
       "businesses": 33,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 8
+      "previousDocCount": 9
     }
   }
 }

@@ -1,0 +1,102 @@
+# C106 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 106
+**Issued:** C106 (auto-derived, cron-civic-run.js --stage=directive)
+**Source:** world_summary_c106 + engine review HIGHs + tracker + C105 voice record
+
+---
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Publish the verified backlog clearance figures and set the public hearing date for the Oakland Youth Apprenticeship Pipeline (INIT-007) town hall.
+- **Why:** The INIT-007 corrective action plan established C106 as the binding operational deadline to clear the applicant backlog and host the community town hall following C105 partner onboarding.
+- **Acceptance:** An official executive transmittal detailing the total number of cleared applicant files and an announced date for the C106 town hall.
+- **Silence consequence:** Unresolved intake queues stall youth workforce placements and leave executive administration vulnerable to council inquiries after a 5-point approval drop in C106.
+
+## Bobby Chen-Ramirez — Health Center Project Director
+
+- **Agent:** `.claude/agents/civic-project-health-center/`
+- **Address:** File the structural frame completion sign-off and schedule the MEP rough-in inspection sequence for the Temescal Community Health Center (INIT-005).
+- **Why:** Structural frame groundbreaking is the gating C106 milestone on the INIT-005 tracker following extended second-shift concrete pours in C105.
+- **Acceptance:** Submission of certified structural frame sign-off documentation and the Phase 2 MEP rough-in schedule to the Planning Committee.
+- **Silence consequence:** Unverified structural milestones risk regulatory halts under OSHPD-3 compliance standards and delay clinic opening timelines.
+
+## Keisha Ramos — Baylight Authority Director
+
+- **Agent:** `.claude/agents/civic-office-baylight-authority/`
+- **Address:** Transmit the executed Phase II master developer agreement incorporating codified Jack London infrastructure conditions and the environmental remediation schedule.
+- **Why:** Following the C105 City Council authorization vote on INIT-006, the Authority must bind developer commitments on sidewalk widening, drainage, and transit access before site staging begins.
+- **Acceptance:** A publicly filed contract term sheet executed with the selected developer and an attached environmental remediation timeline.
+- **Silence consequence:** Ground staging commences without legally binding municipal infrastructure covenants protecting adjacent Jack London corridors.
+
+## Vanessa Tran-Muñoz — OARI Program Director
+
+- **Agent:** `.claude/agents/civic-project-oari/`
+- **Address:** Publish the initial District 1 dispatch volume metrics and release the finalized deployment calendar for District 3 and District 5 expansion corridors.
+- **Why:** Engine audits in C106 flagged incoherence between active INIT-002 operations and persistent CrimeIndex levels in West Oakland (1.10), Fruitvale (1.00), and East Oakland (1.11).
+- **Acceptance:** A published operational report detailing D1 call-diversion rates and confirmed rollout dates for D3 and D5.
+- **Silence consequence:** Sequential expansion into D3 and D5 proceeds without baseline operational verification, eroding confidence in non-police response models.
+
+## Marcus Webb — OEWD Program Director (Stabilization Fund)
+
+- **Agent:** `.claude/agents/civic-project-stabilization-fund/`
+- **Address:** Transmit the Month-six canvass completion report and publish the intake targets for the Month-seven disbursement batch of the West Oakland Stabilization Fund (INIT-001).
+- **Why:** With 57 of 280 target households funded through C105 and West Oakland RetailVitality depressed at 5.01, OEWD must show canvass conversion data to reach the remaining 223 households.
+- **Acceptance:** A filed program status report listing verified commercial contacts and the target household count for Month-seven disbursements.
+- **Silence consequence:** Under-enrollment leaves allocated stabilization capital unspent while West Oakland commercial vitality continues to rank among the bottom three in the city.
+
+## Elena Soria Dominguez — Transit Hub Planning Lead
+
+- **Agent:** `.claude/agents/civic-project-transit-hub/`
+- **Address:** File the formal synthesis of proceedings from the initial St. Esperanza Parish visioning session and publish draft vendor protection protocols for Fruitvale Transit Hub Phase II (INIT-003).
+- **Why:** The first community visioning session concluded in C105, requiring stakeholder input on E. 12th Street small business protections to be codified before transit hub engineering proceeds.
+- **Acceptance:** A filed synthesis document and draft small business protection guidelines submitted to the Planning Commission.
+- **Silence consequence:** Phase II engineering advances without codified merchant safeguards, risking commercial displacement along the Fruitvale corridor.
+
+## Rafael Montez — Police Chief
+
+- **Agent:** `.claude/agents/civic-office-police-chief/`
+- **Address:** Transmit the C106 patrol deployment allocation and co-response diversion audit for East Oakland (CrimeIndex 1.11), West Oakland (1.10), and Downtown (1.10).
+- **Why:** High incident rates across these three districts in C106 require verification that non-violent behavioral health calls are successfully transferring to OARI while OPD units maintain commercial corridor coverage.
+- **Acceptance:** A departmental dispatch report showing monthly diversion counts and patrol shift allocations across East Oakland, West Oakland, and Downtown.
+- **Silence consequence:** Overlapping or uncoordinated dispatches between OPD and OARI teams create emergency response delays in high-incident sectors.
+
+## Leonard Tran — City Council District 2
+
+- **Agent:** `.claude/agents/civic-office-council-d2/`
+- **Address:** Present a formal legislative response or commercial revitalization proposal addressing documented decay signals in Grand Lake (RetailVitality -2.17) and Downtown (RetailVitality -2.76).
+- **Why:** After declining in C105 to introduce stabilization measures pending economic decay data, C106 engine audits documented severe retail and sentiment declines in Grand Lake (0.32 sentiment) and Downtown (0.41 sentiment).
+- **Acceptance:** A filed council memo, resolution, or committee request establishing commercial support measures for Grand Lake and Downtown.
+- **Silence consequence:** Significant commercial vitality decay in core D2 retail districts goes unaddressed by district leadership.
+
+## Denise Carter — City Council District 1
+
+- **Agent:** `.claude/agents/civic-office-council-d1/`
+- **Address:** File a District 1 commercial recovery plan addressing West Oakland's low RetailVitality score (5.01) and aligning district resources with the INIT-001 canvass.
+- **Why:** West Oakland exhibits a 5.01 RetailVitality score alongside a 1.10 CrimeIndex in C106, coinciding with a 5-point drop in District 1 council approval.
+- **Acceptance:** A published council memorandum or committee agenda item on West Oakland small business retention and commercial safety.
+- **Silence consequence:** Sustained commercial stagnation in West Oakland without district-level legislative intervention.
+
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Submit the District 3 site coordination plan and community safety roadmap ahead of the scheduled OARI expansion into Fruitvale and San Antonio.
+- **Why:** San Antonio recorded the city's lowest sentiment (+0.23) and Fruitvale's CrimeIndex held at 1.00 in C106, requiring district-level coordination before OARI deployment begins.
+- **Acceptance:** A filed district safety memo detailing designated responder staging areas and merchant liaison contacts for Fruitvale and San Antonio.
+- **Silence consequence:** OARI expansion into D3 risks dispatch friction and poor merchant coordination in sensitive commercial corridors.
+
+## Warren Ashford — City Council District 7
+
+- **Agent:** `.claude/agents/civic-office-council-d7/`
+- **Address:** Introduce targeted commercial support and public safety legislation for East Oakland corridors facing suppressed RetailVitality (6.01) and an elevated CrimeIndex (1.11).
+- **Why:** District 7 approval dropped to 45 in C106 while East Oakland registered low sentiment (+0.28) and elevated crime metrics, requiring active policy proposals beyond audit demands in other districts.
+- **Acceptance:** A filed council resolution or budget appropriation request targeting East Oakland commercial strips and public safety infrastructure.
+- **Silence consequence:** East Oakland commercial and safety conditions continue to lag without legislative advocacy from its district representative.
+
+## Ramon Vega — City Council District 4
+
+- **Agent:** `.claude/agents/civic-office-council-d4/`
+- **Address:** Schedule a Planning and Infrastructure Committee hearing on neighborhood commercial equity, reviewing capital distribution across mid-tier districts like Glenview (RetailVitality 5.66) and Ivy Hill (RetailVitality 3.66).
+- **Why:** Following the conclusion of the Baylight Phase II vote in C105, council leadership must ensure mid-tier commercial strips receive infrastructure parity alongside master waterfront developments.
+- **Acceptance:** An official council calendar notice scheduling a committee review on neighborhood commercial infrastructure parity.
+- **Silence consequence:** Mid-tier neighborhood retail corridors remain deprioritized in municipal capital improvement programming.

@@ -1,0 +1,746 @@
+{
+  "meta": {
+    "type": "initiative-packet",
+    "initiative": "stabilization-fund",
+    "initiativeId": "INIT-001",
+    "cycle": 106,
+    "generatedAt": "2026-09-07T02:45:50.192Z",
+    "description": "Neighborhood Stabilization Fund — $28M for housing stability, small business support, and workforce development in displacement-risk neighborhoods"
+  },
+  "initiative": {
+    "id": "INIT-001",
+    "name": "West Oakland Stabilization Fund",
+    "type": "vote",
+    "status": "passed",
+    "budget": "$28M",
+    "voteRequirement": "6-3",
+    "voteCycle": "78",
+    "projection": "lean pass",
+    "outcome": "PASSED",
+    "leadFaction": "OPP",
+    "oppositionFaction": "CRC",
+    "swingVoter": "Ramon Vega",
+    "affectedNeighborhoods": "West Oakland",
+    "policyDomain": "economic",
+    "consequences": "Initiative approved. Implementation begins.",
+    "mayoralAction": "none",
+    "mayoralActionCycle": "",
+    "notes": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
+    "lastUpdated": "9/6/2026",
+    "implementationPhase": "disbursement-active",
+    "milestoneNotes": "C105: Month-six disbursement batch approved (12 households); canvass launched for slipping blocks.",
+    "nextScheduledAction": "Month-seven disbursement review",
+    "nextActionCycle": "106"
+  },
+  "office": {
+    "name": "Office of Economic and Workforce Development (OEWD)",
+    "policyDomains": [
+      "economic",
+      "housing",
+      "workforce"
+    ],
+    "officials": [
+      {
+        "officeId": "MAYOR-01",
+        "title": "Mayor",
+        "name": "Avery Santana",
+        "popId": "POP-00034",
+        "status": "active",
+        "faction": "OPP"
+      },
+      {
+        "officeId": "STAFF-COS",
+        "title": "Chief of Staff",
+        "name": "Laila Cortez",
+        "popId": "POP-00035",
+        "status": "active",
+        "faction": "STAFF"
+      },
+      {
+        "officeId": "PLANNING-DIR",
+        "title": "City Planning Director",
+        "name": "Mara Vance",
+        "popId": "POP-00507",
+        "status": "active",
+        "faction": "STAFF"
+      }
+    ]
+  },
+  "previousCycle": {
+    "decisions": {
+      "initiative": "INIT-001",
+      "initiativeId": "INIT-001",
+      "cycle": 105,
+      "primaryVoice": "Mayor gavel (mayor_gavel-001)",
+      "consolidatedFrom": [
+        "STMT-105-mayor_gavel-001 (Mayor gavel — West Oakland Stabilization Fund — Month-Six Disbursement + Canvass Launch)",
+        "STMT-105-stabilization_fund-001 (Webb — Month-six disbursement)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-001",
+        "ImplementationPhase": "disbursement-active",
+        "MilestoneNotes": "C105: Month-six disbursement batch approved (12 households); canvass launched for slipping blocks.",
+        "NextScheduledAction": "Month-seven disbursement review",
+        "NextActionCycle": 106
+      }
+    },
+    "voiceDecisions": null,
+    "documentsProduced": [
+      "STAB-C000-ProjectCharter-20400101.md",
+      "STAB-C076-CouncilPositions-20410301.md",
+      "STAB-C084-OEWDResponse-20410801.md",
+      "STAB-C085-DisbursementRequest-20410901.md",
+      "decisions_c103.json",
+      "decisions_c104.json",
+      "decisions_c105.json"
+    ]
+  },
+  "maraDirective": null,
+  "citizens": {
+    "total": 167,
+    "tierBreakdown": {
+      "1": 2,
+      "2": 13,
+      "3": 32,
+      "4": 120
+    },
+    "avgIncome": 829341,
+    "medianIncome": 91000,
+    "atDisplacementRisk": 105,
+    "linkedProfiles": [
+      {
+        "popId": "POP-00772",
+        "name": "Beverly Hayes",
+        "tier": 3,
+        "age": 0,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "roleType": "Community Director, West Oakland Community Center",
+        "employer": "",
+        "income": 58000,
+        "householdId": "",
+        "maritalStatus": "single",
+        "displacementRisk": 2,
+        "migrationIntent": "staying",
+        "healthStatus": "",
+        "notes": ""
+      }
+    ],
+    "notableCitizens": [
+      {
+        "popId": "POP-00031",
+        "name": "Martin Richards",
+        "tier": 1,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00037",
+        "name": "Brenda Okoro",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00143",
+        "name": "Clarissa Dane",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00231",
+        "name": "Calvin Turner",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00744",
+        "name": "Tomas Renteria",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00754",
+        "name": "Ophelia Brenner",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00756",
+        "name": "Ramon Solano",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 3
+      },
+      {
+        "popId": "POP-00758",
+        "name": "Robert Jaston",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00762",
+        "name": "Aziz Rahimi",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00766",
+        "name": "Manjit Singh",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00771",
+        "name": "Sage Vienta",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00773",
+        "name": "Jada Rayes",
+        "tier": 2,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00789",
+        "name": "Elias Varek",
+        "tier": 1,
+        "neighborhood": "West Oakland",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00953",
+        "name": "Carmen Solis",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-01057",
+        "name": "Nina Reyes",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      }
+    ]
+  },
+  "neighborhoods": [
+    {
+      "neighborhood": "West Oakland",
+      "sentiment": 0.43,
+      "medianIncome": "144855",
+      "medianRent": "3621",
+      "trajectory": "decay",
+      "housingPressure": "0",
+      "crimeIndex": 1.1,
+      "retailVitality": 5.01,
+      "students": 282,
+      "adults": 1504,
+      "seniors": 272,
+      "unemployed": 77,
+      "sick": 97,
+      "schoolQuality": 8,
+      "propertyCrime": 54,
+      "violentCrime": 56,
+      "responseTime": 13.3,
+      "incidents": 9
+    },
+    {
+      "neighborhood": "Fruitvale",
+      "sentiment": 0.48,
+      "medianIncome": "98000",
+      "medianRent": "2450",
+      "trajectory": "steady",
+      "housingPressure": "0",
+      "crimeIndex": 1,
+      "retailVitality": 8.05,
+      "students": 386,
+      "adults": 1419,
+      "seniors": 323,
+      "unemployed": 85,
+      "sick": 110,
+      "schoolQuality": 8,
+      "propertyCrime": 50,
+      "violentCrime": 50,
+      "responseTime": 12.3,
+      "incidents": 7
+    },
+    {
+      "neighborhood": "Brooklyn",
+      "sentiment": 0.26,
+      "medianIncome": "130000",
+      "medianRent": "3250",
+      "trajectory": "steady",
+      "housingPressure": "0",
+      "crimeIndex": 0.53,
+      "retailVitality": 5.54,
+      "students": 318,
+      "adults": 1357,
+      "seniors": 265,
+      "unemployed": 77,
+      "sick": 93,
+      "schoolQuality": 8,
+      "propertyCrime": 34,
+      "violentCrime": 21,
+      "responseTime": 11.6,
+      "incidents": 1
+    },
+    {
+      "neighborhood": "San Antonio",
+      "sentiment": 0.23,
+      "medianIncome": "69930",
+      "medianRent": "1748",
+      "trajectory": "steady",
+      "housingPressure": "0",
+      "crimeIndex": 0.82,
+      "retailVitality": 6.48,
+      "students": 354,
+      "adults": 1386,
+      "seniors": 275,
+      "unemployed": 110,
+      "sick": 110,
+      "schoolQuality": 7,
+      "propertyCrime": 46,
+      "violentCrime": 36,
+      "responseTime": 11,
+      "incidents": 6
+    },
+    {
+      "neighborhood": "East Oakland",
+      "sentiment": 0.28,
+      "medianIncome": "72144",
+      "medianRent": "1804",
+      "trajectory": "growth",
+      "housingPressure": "0.5",
+      "crimeIndex": 1.11,
+      "retailVitality": 6.01,
+      "students": 441,
+      "adults": 1402,
+      "seniors": 300,
+      "unemployed": 120,
+      "sick": 113,
+      "schoolQuality": 7,
+      "propertyCrime": 51,
+      "violentCrime": 60,
+      "responseTime": 13.8,
+      "incidents": 5
+    }
+  ],
+  "businesses": [
+    {
+      "bizId": "BIZ-00056",
+      "name": "Coastline Construction",
+      "sector": "Construction",
+      "neighborhood": "West Oakland",
+      "employeeCount": 221,
+      "avgSalary": 85000,
+      "growthRate": "5.6",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00058",
+      "name": "Mariner Construction",
+      "sector": "Construction",
+      "neighborhood": "West Oakland",
+      "employeeCount": 165,
+      "avgSalary": 90000,
+      "growthRate": "4.36",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00059",
+      "name": "Foothill Builders",
+      "sector": "Construction",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 110,
+      "avgSalary": 78000,
+      "growthRate": "5.84",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00028",
+      "name": "West Oakland Community Center",
+      "sector": "Community Services",
+      "neighborhood": "West Oakland",
+      "employeeCount": 95,
+      "avgSalary": 58000,
+      "growthRate": "8.32",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00060",
+      "name": "Northgate Construction",
+      "sector": "Construction",
+      "neighborhood": "West Oakland",
+      "employeeCount": 95,
+      "avgSalary": 76000,
+      "growthRate": "5.44",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00009",
+      "name": "Oakmesh Systems",
+      "sector": "Civic Tech",
+      "neighborhood": "West Oakland",
+      "employeeCount": 46,
+      "avgSalary": 135000,
+      "growthRate": "30.87",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00052",
+      "name": "Civis Systems",
+      "sector": "Urban Systems Intelligence Firm",
+      "neighborhood": "West Oakland",
+      "employeeCount": 41,
+      "avgSalary": 230000,
+      "growthRate": "115%",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00026",
+      "name": "Fruitvale Community Clinic",
+      "sector": "Healthcare",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 38,
+      "avgSalary": 85000,
+      "growthRate": "8.62",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00029",
+      "name": "Coliseum District Development",
+      "sector": "Real Estate",
+      "neighborhood": "Coliseum",
+      "employeeCount": 31,
+      "avgSalary": 105000,
+      "growthRate": "8.48",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00068",
+      "name": "Marigold Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 30,
+      "avgSalary": 51000,
+      "growthRate": "5",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00078",
+      "name": "Allen Temple Baptist Church",
+      "sector": "Faith Organization",
+      "neighborhood": "East Oakland",
+      "employeeCount": 26,
+      "avgSalary": 58000,
+      "growthRate": "2.4",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00082",
+      "name": "Acts Full Gospel Church",
+      "sector": "Faith Organization",
+      "neighborhood": "West Oakland",
+      "employeeCount": 22,
+      "avgSalary": 56000,
+      "growthRate": "2.15",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00099",
+      "name": "OakTown Echo",
+      "sector": "Media & Journalism",
+      "neighborhood": "West Oakland",
+      "employeeCount": 20,
+      "avgSalary": 90000,
+      "growthRate": "0.42",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00103",
+      "name": "Firehouse 29 West Oakland Baseball Academy",
+      "sector": "Sports",
+      "neighborhood": "West Oakland",
+      "employeeCount": 20,
+      "avgSalary": 76000,
+      "growthRate": "1.29",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00096",
+      "name": "Fruitvale Transit Hub Authority",
+      "sector": "Transit & Infrastructure",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 18,
+      "avgSalary": 92000,
+      "growthRate": "0.83",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00116",
+      "name": "Slip Street Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 16,
+      "avgSalary": 68000,
+      "growthRate": "5.86",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00073",
+      "name": "Spooky Spirits Lounge",
+      "sector": "Hospitality",
+      "neighborhood": "West Oakland",
+      "employeeCount": 14,
+      "avgSalary": 80000,
+      "growthRate": "5.48",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00094",
+      "name": "West Oakland Stabilization Fund",
+      "sector": "Community Development",
+      "neighborhood": "West Oakland",
+      "employeeCount": 14,
+      "avgSalary": 78000,
+      "growthRate": "0.31",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00114",
+      "name": "Basin Grocer",
+      "sector": "Retail",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 14,
+      "avgSalary": 72000,
+      "growthRate": "5.41",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00129",
+      "name": "Eastside Family Market",
+      "sector": "Retail",
+      "neighborhood": "East Oakland",
+      "employeeCount": 13,
+      "avgSalary": 40000,
+      "growthRate": "6.93",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00115",
+      "name": "Basin Athletic Club",
+      "sector": "Services",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 12,
+      "avgSalary": 72000,
+      "growthRate": "6.39",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00132",
+      "name": "Foothill Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "East Oakland",
+      "employeeCount": 12,
+      "avgSalary": 37000,
+      "growthRate": "5.76",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00172",
+      "name": "Shift Change Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "San Antonio",
+      "employeeCount": 12,
+      "avgSalary": 36000,
+      "growthRate": "3.89",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00048",
+      "name": "West Side Cafe",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "West Oakland",
+      "employeeCount": 11,
+      "avgSalary": 75000,
+      "growthRate": "5.67",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00081",
+      "name": "St. Columba Catholic Church",
+      "sector": "Faith Organization",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 54000,
+      "growthRate": "1.39",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00173",
+      "name": "Twelfth Avenue Market",
+      "sector": "Retail",
+      "neighborhood": "San Antonio",
+      "employeeCount": 11,
+      "avgSalary": 39000,
+      "growthRate": "3.51",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00113",
+      "name": "Quay Coffee",
+      "sector": "Cafe / dining",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 9,
+      "avgSalary": 65000,
+      "growthRate": "6.63",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00131",
+      "name": "Eastside Auto",
+      "sector": "Services",
+      "neighborhood": "East Oakland",
+      "employeeCount": 9,
+      "avgSalary": 40000,
+      "growthRate": "4.94",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00117",
+      "name": "Brooklyn Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 8,
+      "avgSalary": 72000,
+      "growthRate": "4.39",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00130",
+      "name": "Sunrise Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "East Oakland",
+      "employeeCount": 8,
+      "avgSalary": 36000,
+      "growthRate": "5.89",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00176",
+      "name": "Park Boulevard Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "San Antonio",
+      "employeeCount": 8,
+      "avgSalary": 35000,
+      "growthRate": "3.92",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00072",
+      "name": "Mendez Printing",
+      "sector": "Services",
+      "neighborhood": "West Oakland",
+      "employeeCount": 7,
+      "avgSalary": 80000,
+      "growthRate": "2.59",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00175",
+      "name": "San Antonio Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "San Antonio",
+      "employeeCount": 7,
+      "avgSalary": 39000,
+      "growthRate": "2.52",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00174",
+      "name": "Sunny Day Laundry",
+      "sector": "Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 6,
+      "avgSalary": 39000,
+      "growthRate": "2.77",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00079",
+      "name": "Masjid Al-Islam",
+      "sector": "Faith Organization",
+      "neighborhood": "East Oakland",
+      "employeeCount": 5,
+      "avgSalary": 49000,
+      "growthRate": "2.46",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00118",
+      "name": "Estuary Cleaners",
+      "sector": "Services",
+      "neighborhood": "Brooklyn",
+      "employeeCount": 5,
+      "avgSalary": 72000,
+      "growthRate": "3.39",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00177",
+      "name": "Crew Cut Barbers",
+      "sector": "Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 5,
+      "avgSalary": 39000,
+      "growthRate": "2.9",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00070",
+      "name": "Vance's Vintage",
+      "sector": "Retail",
+      "neighborhood": "West Oakland",
+      "employeeCount": 4,
+      "avgSalary": 80000,
+      "growthRate": "3.86",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00045",
+      "name": "Fruitvale Diner",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 2,
+      "avgSalary": 51000,
+      "growthRate": "5",
+      "status": ""
+    }
+  ]
+}

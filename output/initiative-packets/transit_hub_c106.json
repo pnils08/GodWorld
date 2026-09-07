@@ -1,0 +1,356 @@
+{
+  "meta": {
+    "type": "initiative-packet",
+    "initiative": "transit-hub",
+    "initiativeId": "INIT-003",
+    "cycle": 106,
+    "generatedAt": "2026-09-07T02:45:50.201Z",
+    "description": "Fruitvale Transit Hub Modernization — $230M for transit-oriented development and community hub"
+  },
+  "initiative": {
+    "id": "INIT-003",
+    "name": "Fruitvale Transit Hub Phase II — Visioning",
+    "type": "visioning",
+    "status": "visioning-complete",
+    "budget": "$230M",
+    "voteRequirement": "",
+    "voteCycle": "94",
+    "projection": "uncertain",
+    "outcome": "COMPLETED",
+    "leadFaction": "OPP",
+    "oppositionFaction": "",
+    "swingVoter": "",
+    "affectedNeighborhoods": "Fruitvale",
+    "policyDomain": "transit",
+    "consequences": "Community input gathered. Next phase: formal proposal.",
+    "mayoralAction": "none",
+    "mayoralActionCycle": "",
+    "notes": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
+    "lastUpdated": "9/6/2026",
+    "implementationPhase": "visioning-complete",
+    "milestoneNotes": "C105: First visioning session conducted; feedback incorporated into design phase.",
+    "nextScheduledAction": "Design-phase kickoff",
+    "nextActionCycle": "106"
+  },
+  "office": {
+    "name": "Fruitvale Transit Hub Planning Office",
+    "policyDomains": [
+      "infrastructure",
+      "transit",
+      "economic"
+    ],
+    "officials": [
+      {
+        "officeId": "MAYOR-01",
+        "title": "Mayor",
+        "name": "Avery Santana",
+        "popId": "POP-00034",
+        "status": "active",
+        "faction": "OPP"
+      },
+      {
+        "officeId": "STAFF-COS",
+        "title": "Chief of Staff",
+        "name": "Laila Cortez",
+        "popId": "POP-00035",
+        "status": "active",
+        "faction": "STAFF"
+      },
+      {
+        "officeId": "PLANNING-DIR",
+        "title": "City Planning Director",
+        "name": "Mara Vance",
+        "popId": "POP-00507",
+        "status": "active",
+        "faction": "STAFF"
+      }
+    ]
+  },
+  "previousCycle": {
+    "decisions": {
+      "initiative": "INIT-003",
+      "initiativeId": "INIT-003",
+      "cycle": 105,
+      "primaryVoice": "Mayor gavel (mayor_gavel-003)",
+      "consolidatedFrom": [
+        "STMT-105-mayor_gavel-003 (Mayor gavel — Fruitvale Transit Hub Phase II — First Visioning Session)",
+        "STMT-105-transit_hub-001 (Soria Dominguez — Fruitvale Transit Hub Phase II — Visioning)"
+      ],
+      "trackerUpdates": {
+        "InitiativeID": "INIT-003",
+        "ImplementationPhase": "visioning-complete",
+        "MilestoneNotes": "C105: First visioning session conducted; feedback incorporated into design phase.",
+        "NextScheduledAction": "Design-phase kickoff",
+        "NextActionCycle": 106
+      }
+    },
+    "voiceDecisions": null,
+    "documentsProduced": [
+      "TRAN-C000-ProjectCharter-20400101.md",
+      "TRAN-C083-ScopeRelease-20410801.md",
+      "decisions_c103.json",
+      "decisions_c104.json",
+      "decisions_c105.json"
+    ]
+  },
+  "maraDirective": null,
+  "citizens": {
+    "total": 92,
+    "tierBreakdown": {
+      "1": 1,
+      "2": 9,
+      "3": 17,
+      "4": 65
+    },
+    "avgIncome": 337144,
+    "medianIncome": 92000,
+    "atDisplacementRisk": 60,
+    "linkedProfiles": [],
+    "notableCitizens": [
+      {
+        "popId": "POP-00031",
+        "name": "Martin Richards",
+        "tier": 1,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00143",
+        "name": "Clarissa Dane",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00231",
+        "name": "Calvin Turner",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00744",
+        "name": "Tomas Renteria",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-00754",
+        "name": "Ophelia Brenner",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00756",
+        "name": "Ramon Solano",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 3
+      },
+      {
+        "popId": "POP-00762",
+        "name": "Aziz Rahimi",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00766",
+        "name": "Manjit Singh",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      },
+      {
+        "popId": "POP-00953",
+        "name": "Carmen Solis",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 0
+      },
+      {
+        "popId": "POP-01057",
+        "name": "Nina Reyes",
+        "tier": 2,
+        "neighborhood": "Fruitvale",
+        "occupation": "",
+        "displacementRisk": 2
+      }
+    ]
+  },
+  "neighborhoods": [
+    {
+      "neighborhood": "Fruitvale",
+      "sentiment": 0.48,
+      "medianIncome": "98000",
+      "medianRent": "2450",
+      "trajectory": "steady",
+      "housingPressure": "0",
+      "crimeIndex": 1,
+      "retailVitality": 8.05,
+      "students": 386,
+      "adults": 1419,
+      "seniors": 323,
+      "unemployed": 85,
+      "sick": 110,
+      "schoolQuality": 8,
+      "propertyCrime": 50,
+      "violentCrime": 50,
+      "responseTime": 12.3,
+      "incidents": 7
+    },
+    {
+      "neighborhood": "San Antonio",
+      "sentiment": 0.23,
+      "medianIncome": "69930",
+      "medianRent": "1748",
+      "trajectory": "steady",
+      "housingPressure": "0",
+      "crimeIndex": 0.82,
+      "retailVitality": 6.48,
+      "students": 354,
+      "adults": 1386,
+      "seniors": 275,
+      "unemployed": 110,
+      "sick": 110,
+      "schoolQuality": 7,
+      "propertyCrime": 46,
+      "violentCrime": 36,
+      "responseTime": 11,
+      "incidents": 6
+    }
+  ],
+  "businesses": [
+    {
+      "bizId": "BIZ-00059",
+      "name": "Foothill Builders",
+      "sector": "Construction",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 110,
+      "avgSalary": 78000,
+      "growthRate": "5.84",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00026",
+      "name": "Fruitvale Community Clinic",
+      "sector": "Healthcare",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 38,
+      "avgSalary": 85000,
+      "growthRate": "8.62",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00068",
+      "name": "Marigold Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 30,
+      "avgSalary": 51000,
+      "growthRate": "5",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00096",
+      "name": "Fruitvale Transit Hub Authority",
+      "sector": "Transit & Infrastructure",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 18,
+      "avgSalary": 92000,
+      "growthRate": "0.83",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00172",
+      "name": "Shift Change Kitchen",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "San Antonio",
+      "employeeCount": 12,
+      "avgSalary": 36000,
+      "growthRate": "3.89",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00081",
+      "name": "St. Columba Catholic Church",
+      "sector": "Faith Organization",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 11,
+      "avgSalary": 54000,
+      "growthRate": "1.39",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00173",
+      "name": "Twelfth Avenue Market",
+      "sector": "Retail",
+      "neighborhood": "San Antonio",
+      "employeeCount": 11,
+      "avgSalary": 39000,
+      "growthRate": "3.51",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00176",
+      "name": "Park Boulevard Cafe",
+      "sector": "Cafe / dining",
+      "neighborhood": "San Antonio",
+      "employeeCount": 8,
+      "avgSalary": 35000,
+      "growthRate": "3.92",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00175",
+      "name": "San Antonio Pharmacy",
+      "sector": "Retail",
+      "neighborhood": "San Antonio",
+      "employeeCount": 7,
+      "avgSalary": 39000,
+      "growthRate": "2.52",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00174",
+      "name": "Sunny Day Laundry",
+      "sector": "Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 6,
+      "avgSalary": 39000,
+      "growthRate": "2.77",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00177",
+      "name": "Crew Cut Barbers",
+      "sector": "Services",
+      "neighborhood": "San Antonio",
+      "employeeCount": 5,
+      "avgSalary": 39000,
+      "growthRate": "2.9",
+      "status": ""
+    },
+    {
+      "bizId": "BIZ-00045",
+      "name": "Fruitvale Diner",
+      "sector": "Restaurant & Dining",
+      "neighborhood": "Fruitvale",
+      "employeeCount": 2,
+      "avgSalary": 51000,
+      "growthRate": "5",
+      "status": ""
+    }
+  ]
+}

@@ -121,13 +121,14 @@
 | Thu | Elliot Graye (faith) · Simon Leary (sports as civic architecture) · Hal Richmond / Tanya Cruz alternating (A's) · Talia Finch (Oaks, the street) |
 | Fri | Mason Ortega (food) · Kai Marston (arts, nightlife) · Sharon Okafor (lifestyle) · Maria Keen (neighborhood) · Celeste Tran (social trends — seat exists on the ledger, no writer agent yet) |
 
-  ≈22 slots/week + Nia ×5 ≈ 27 articles, down from 35 attempts; every seat exactly once. Unseated ledger journalists (Farrah Del Rio, Reed Thompson, Lena Carrow, Dana Reeve, the OakTown Echo six) stay off the rota until they have a voice agent.
+  ≈22 slots/week + Nia ×5 ≈ 27 articles, down from 35 attempts; every seat exactly once.
+  **Off the rota by ruling (Mike, S433):** the OakTown Echo six are a background competitor — they never publish, they run on the civic clock; the podcast hosts belong to a separate skill that is not run; photographers, photo assistant, Data Analyst (Ariana) and Copy Chief (Rhea) are roles, not writers. Bay Tribune seats with no voice agent (Farrah Del Rio, Reed Thompson, Lena Carrow, Dana Reeve, Celeste Tran) stay off until seated.
 - **Steps:**
   1. Replace desk quotas with a day→seats table (above, once ruled), each seat bound to its beat slice (Tasks 2–4) and its `Story_Seed_Deck` rows.
   2. Nia keeps the undocked lane, daily.
   3. Baseline for before/after (S433): 14 days, most reporters 1 byline, Nia 4, Jordan 3; 70 attempts, 35 staged, 35 flagged.
 - **Verify:** first full cycle after cut: `output/cron-compare/staged|flagged` sidecars show every rota seat exactly once, on its day.
-- **Status:** [ ] awaiting builder yes/no on the grid
+- **Status:** [ ] grid accepted in principle (Mike "Yea", S433) with the exclusions above — ready to cut after Tasks 1–4
 
 ### Task 7b: Article latency — audit, then cut
 

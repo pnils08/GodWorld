@@ -37,6 +37,35 @@ const COMPARE = path.join(ROOT, 'output', 'cron-compare');
 // unknown desk and silently dropping it.
 const DAILY_QUOTAS = { civic: 2, sports: 2, culture: 1, business: 1, undocked: 1 };
 
+// pipeline.68 Task 7 — themed week (builder-ruled S433, cut 2026-09-07): one
+// slot = one journalist = one article, each seat once a week on its day; Nia
+// Rook daily on top when UNDOCKED has an un-recapped episode. DAILY_QUOTAS
+// stays only for boundDailyAssignments (legacy fanout files) and the tests.
+// Off the grid by ruling: the OakTown Echo six, podcast hosts, photographers,
+// Ariana (data analyst), Rhea (copy chief), and Bay Tribune seats with no voice
+// agent (Celeste Tran) or no wake package (Elliot Marbury) until seated.
+const WEEK_GRID = Object.freeze({
+  1: ['carmen-delaine', 'business-desk', 'lila-mezran', 'trevor-shimizu', 'anthony-raines'],
+  2: ['luis-navarro', 'rachel-torres', 'angela-reyes', 'selena-grant'],
+  3: ['freelance-firebrand', 'noah-tan', 'p-slayer'],
+  4: ['elliot-graye', 'simon-leary', 'hal-richmond|tanya-cruz', 'talia-finch'],
+  5: ['mason-ortega', 'kai-marston', 'sharon-okafor', 'maria-keen']
+});
+function weekdayOf(date) {
+  return new Date(String(date) + 'T12:00:00Z').getUTCDay();
+}
+function weekParity(date) {
+  const d = new Date(String(date) + 'T12:00:00Z');
+  const jan1 = Date.UTC(d.getUTCFullYear(), 0, 1);
+  return Math.floor((d.getTime() - jan1) / 86400000 / 7) % 2;
+}
+/** Today's grid seats as persona slugs; an "a|b" slot alternates by week parity. */
+function gridSeatsFor(date) {
+  const slots = WEEK_GRID[weekdayOf(date)] || [];
+  const parity = weekParity(date);
+  return slots.map(slot => slot.includes('|') ? slot.split('|')[parity] : slot);
+}
+
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
   if (i !== -1 && process.argv[i + 1]) return process.argv[i + 1];
@@ -370,9 +399,16 @@ async function buildFanout(date) {
   const rosterPopids = new Set((roster.included || []).map(row => row.popid));
   const absent = pool.filter(row => !rosterPopids.has(row.popid));
   if (absent.length) {
-    throw new Error('active wake package absent from canonical byline roster: ' +
+    // 2026-09-07 (Mike-direct: the daily news arrives, period): an active
+    // package whose reporter is not on the Bay_Tribune_Oakland tab drops THAT
+    // seat for the day, loudly — it no longer kills the whole rota. Found live:
+    // pipeline.67 activated Selena Grant / Talia Finch without adding them to
+    // the tab; unfixed, Monday's 06:15 fanout would have thrown here.
+    console.error('[fanout] SEAT DROPPED — active wake package absent from canonical byline roster (add the row to Bay_Tribune_Oakland): ' +
       absent.map(row => row.persona + '/' + row.popid).join(', '));
   }
+  const rosterAbsent = absent.map(row => row.persona + '/' + row.popid);
+  const eligible = pool.filter(row => rosterPopids.has(row.popid));
   const hist = usageHistory();
   const getCurrentCycle = require(path.join(ROOT, 'lib', 'getCurrentCycle'));
   const cycle = getCurrentCycle({ soft: true, noArgv: true });
@@ -412,28 +448,47 @@ async function buildFanout(date) {
   const shortfalls = [];
   const usedToday = new Set();
 
-  for (const [desk, quota] of Object.entries(DAILY_QUOTAS)) {
-    const candidates = pool.filter(j => j.desk === desk);
-    candidates.sort(bylinePreference(stagedBy, hist));
-    const seeds = laneSeeds(lanes[desk], takenRefs, date);
-    let taken = 0;
-    for (const j of candidates) {
-      if (taken >= quota) break;
-      if (usedToday.has(j.name)) continue;
-      usedToday.add(j.name);
-      const a = {
-        desk, name: j.name, popid: j.popid, beatDomain: j.beatDomain,
-        persona: j.persona,
-        approach: approachFor(approachMap, desk, j.persona)
-      };
-      // EIC assignment: hand this reporter the next unassigned seed. Seed pool
-      // exhausted -> approach-only open beat (never drops the slot).
-      const seed = seeds.shift();
-      if (seed) { a.story = storyFromSeed(seed); takenRefs.add(seed.ref); }
-      assignments.push(a);
-      taken++;
+  // pipeline.68 Task 7 — the themed week grid replaces desk quotas + LRU.
+  const gridSeats = gridSeatsFor(date);
+  const seedsByDesk = {};
+  for (const persona of gridSeats) {
+    const j = eligible.find(row => row.persona === persona);
+    if (!j) {
+      const why = pool.some(row => row.persona === persona) ? 'absent from the byline roster' : 'no active wake package';
+      console.error('[fanout] GRID SEAT MISSING ' + persona + ' — ' + why);
+      shortfalls.push({ desk: persona, wanted: 1, got: 0, reason: why });
+      continue;
     }
-    if (taken < quota) shortfalls.push({ desk, wanted: quota, got: taken });
+    if (usedToday.has(j.name)) continue;
+    usedToday.add(j.name);
+    const a = {
+      desk: j.desk, name: j.name, popid: j.popid, beatDomain: j.beatDomain,
+      persona: j.persona,
+      approach: approachFor(approachMap, j.desk, j.persona),
+      gridDay: weekdayOf(date)
+    };
+    // The editor hands each seat the next unassigned seed on its desk; the beat
+    // slices (pipeline.68 T2–T4) replace it downstream for the tab-backed seats.
+    // Jax is left seedless on purpose: cron-desk-run builds his stink slice
+    // only when the seat carries no story.
+    if (persona !== 'freelance-firebrand') {
+      if (!seedsByDesk[j.desk]) seedsByDesk[j.desk] = laneSeeds(lanes[j.desk], takenRefs, date);
+      const seed = seedsByDesk[j.desk].shift();
+      if (seed) { a.story = storyFromSeed(seed); takenRefs.add(seed.ref); }
+    }
+    assignments.push(a);
+  }
+  // Nia Rook daily on top — dropped below when there is no un-recapped episode.
+  const nia = eligible.find(row => row.persona === 'nia-rook');
+  if (nia && !usedToday.has(nia.name)) {
+    usedToday.add(nia.name);
+    const a = {
+      desk: nia.desk, name: nia.name, popid: nia.popid, beatDomain: nia.beatDomain, persona: nia.persona,
+      approach: approachFor(approachMap, nia.desk, nia.persona), gridDay: weekdayOf(date)
+    };
+    const seed = laneSeeds(lanes[nia.desk], takenRefs, date).shift();
+    if (seed) { a.story = storyFromSeed(seed); takenRefs.add(seed.ref); }
+    assignments.push(a);
   }
 
   // pipeline.60: an undocked seat with no seed means no un-recapped episode
@@ -446,8 +501,8 @@ async function buildFanout(date) {
     }
   }
 
-  // grok: after LRU rota is built, optionally force one firebrand stink slot.
-  const stinkForce = applyStinkForce(assignments, cycle, date, approachMap, takenRefs);
+  // pipeline.68 Task 7: the grid seats Jax on his own day; no forced extra slot.
+  const stinkForce = { attempted: false, forced: false, reason: 'themed-week grid — Jax seated on his day only', top: null, reportPath: null };
 
   // grok: enrich any P Slayer sports seat with fan-pulse slice (charge bag + prior takes).
   let pslayerEnrich = { enriched: false, reason: 'none' };
@@ -569,23 +624,67 @@ async function buildFanout(date) {
         isFoodSeat
       } = require(path.join(__dirname, 'buildEconomicSlice'));
       const seats = [];
-      for (let i = 0; i < assignments.length; i++) {
+      const dropped = [];
+      for (let i = assignments.length - 1; i >= 0; i--) {
         if (!isBusinessDesk(assignments[i]) && !isFoodSeat(assignments[i])) continue;
-        const next = enrichEconomic(assignments[i], cycle);
-        if (next && next.economicSlice) {
-          assignments[i] = next;
-          seats.push((next.persona || next.name || next.popid) + '/' + next.economicVariant + ':' + (next.pulse && next.pulse.hood));
+        try {
+          const next = enrichEconomic(assignments[i], cycle);
+          if (next && next.economicSlice) {
+            assignments[i] = next;
+            seats.push((next.persona || next.name || next.popid) + '/' + next.economicVariant + ':' + (next.pulse && next.pulse.hood));
+          }
+        } catch (e) {
+          // Seat-scoped: this seat is not staged on nothing; every other desk runs.
+          const who = assignments[i].persona || assignments[i].name || assignments[i].popid;
+          console.error('[fanout] SEAT DROPPED ' + who + ' — economic slice: ' + e.message);
+          dropped.push(who + ': ' + e.message);
+          assignments.splice(i, 1);
         }
       }
       economicEnrich = seats.length
-        ? { enriched: true, reason: 'seats=' + seats.length + ' ' + seats.join(', ') }
-        : { enriched: false, reason: 'no business desk or Mason assignment in rota' };
+        ? { enriched: true, reason: 'seats=' + seats.length + ' ' + seats.join(', '), dropped }
+        : { enriched: false, reason: dropped.length ? 'dropped: ' + dropped.join('; ') : 'no business desk or Mason assignment in rota', dropped };
       if (economicEnrich.enriched) console.error('[fanout] BEAT SLICE (economic/food) — ' + economicEnrich.reason);
     } catch (e) {
       economicEnrich = { enriched: false, reason: 'error: ' + e.message };
-      console.error('[fanout] economic slice enrich FAILED: ' + e.message);
-      throw e;
+      console.error('[fanout] economic slice enrich skipped: ' + e.message);
     }
+  }
+
+  // pipeline.68 Task 4: one beat slice per journalist, from the beat dump. A
+  // builder that throws (missing/stale dump) drops THAT seat with a loud log;
+  // the rest of the rota is untouched.
+  const BEAT_BUILDERS = {
+    'trevor-shimizu': 'buildTransitSlice',
+    'lila-mezran': 'buildHealthSlice',
+    'angela-reyes': 'buildSchoolsSlice',
+    'noah-tan': 'buildEnvironmentSlice',
+    'elliot-graye': 'buildFaithSlice',
+    'rachel-torres': 'buildSafetySlice'
+  };
+  let beatEnrich = { enriched: false, reason: 'none', seats: [], dropped: [] };
+  if (cycle != null) {
+    for (let i = assignments.length - 1; i >= 0; i--) {
+      const slug = assignments[i].persona;
+      if (!slug || !BEAT_BUILDERS[slug]) continue;
+      try {
+        const { enrichAssignment } = require(path.join(__dirname, BEAT_BUILDERS[slug]));
+        const next = enrichAssignment(assignments[i], cycle);
+        if (next && next.beatSlice) {
+          assignments[i] = next;
+          beatEnrich.enriched = true;
+          beatEnrich.seats.push(slug + '/' + next.pulse.className + ':' + (next.pulse.hood || '—'));
+        }
+      } catch (e) {
+        console.error('[fanout] SEAT DROPPED ' + slug + ' — beat slice: ' + e.message);
+        beatEnrich.dropped.push(slug + ': ' + e.message);
+        assignments.splice(i, 1);
+      }
+    }
+    beatEnrich.reason = beatEnrich.enriched ? 'seats=' + beatEnrich.seats.length + ' ' + beatEnrich.seats.join(', ')
+      : (beatEnrich.dropped.length ? 'dropped: ' + beatEnrich.dropped.join('; ') : 'no beat-slice persona in rota');
+    if (beatEnrich.enriched) console.error('[fanout] BEAT SLICES — ' + beatEnrich.reason);
+    if (beatEnrich.dropped.length) console.error('[fanout] BEAT SLICES dropped — ' + beatEnrich.dropped.join('; '));
   }
 
   // grok pipeline.52: enrich culture evening consumers with evening-life pack.
@@ -602,6 +701,7 @@ async function buildFanout(date) {
       for (let i = 0; i < assignments.length; i++) {
         if (!isEveningConsumer(assignments[i])) continue;
         if (isMason(assignments[i])) continue; // Mason draws the food slice (pipeline.68 Task 3)
+        if (assignments[i].beatSlice) continue; // Graye draws the faith slice (pipeline.68 Task 4)
         const next = enrichEvening(assignments[i], cycle);
         if (next && next.eveningSlice) {
           assignments[i] = next;
@@ -645,6 +745,7 @@ async function buildFanout(date) {
       } = require(path.join(__dirname, 'buildCivicDomainSlice'));
       for (let i = 0; i < assignments.length; i++) {
         if (!isCivicDomainPersona(assignments[i])) continue;
+        if (assignments[i].beatSlice) continue; // tab-backed seats carry their own slice (pipeline.68 Task 4)
         const next = enrichCivicDomain(assignments[i], cycle);
         if (next && next.civicDomainSlice) {
           assignments[i] = next;
@@ -676,12 +777,13 @@ async function buildFanout(date) {
 
   const packageGate = applyWakePackageGate(assignments, approachMap);
   assignments.splice(0, assignments.length, ...packageGate.assignments);
-  const packageShortfalls = Object.entries(DAILY_QUOTAS).map(([desk, wanted]) => ({
-    desk, wanted, got: assignments.filter(a => a.desk === desk).length,
-  })).filter(row => row.got < row.wanted);
+  // Shortfalls are grid seats that did not land (missing package / roster row / dropped by a slice).
+  const packageShortfalls = gridSeats.filter(persona => !assignments.some(a => a.persona === persona))
+    .map(persona => ({ desk: persona, wanted: 1, got: 0 }));
   const seedless = assignments.filter(a => !a.story).length;
-  return { date, cycle, quotas: DAILY_QUOTAS, assignments, shortfalls: packageShortfalls,
+  return { date, cycle, quotas: { grid: gridSeats, weekday: weekdayOf(date) }, assignments, shortfalls: packageShortfalls,
     rotationShortfalls: shortfalls,
+    rosterAbsent,                        // seats dropped for the day: package active, reporter not on the byline tab
     seedless, signalMissing: !signal,   // loud in the file too — the 06:00 digest and any reader sees a seedless day
     packageGate: {
       policy: packageGate.policy,
@@ -694,6 +796,7 @@ async function buildFanout(date) {
     anthonyEnrich,
     halEnrich,
     economicEnrich,
+    beatEnrich,
     eveningEnrich,
     civicDomainEnrich,
     builtAt: new Date().toISOString() };
@@ -732,4 +835,4 @@ if (require.main === module) {
 
 module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
   assignedStoryRefs, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
-  applyWakePackageGate, activeRotaCandidates, boundDailyAssignments, DAILY_QUOTAS };
+  applyWakePackageGate, activeRotaCandidates, boundDailyAssignments, DAILY_QUOTAS, WEEK_GRID, gridSeatsFor };

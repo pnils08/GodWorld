@@ -23,6 +23,7 @@ const {
   findSourceId,
   parseAddedSourceId,
   parseCreatedArtifactId,
+  findArtifactStatus,
   sourceTitle,
   dailyPrompt,
   dailyAudioFocus,
@@ -360,6 +361,18 @@ const syntheticDigest = {
   assert.throws(() => parseAddedSourceId('Done'), /without a Source ID/);
   assert.strictEqual(parseCreatedArtifactId('Audio started\nArtifact ID: art-123\n'), 'art-123');
   assert.throws(() => parseCreatedArtifactId('Audio started'), /without an Artifact ID/);
+  // A render NotebookLM marked failed is read off `studio status --json`;
+  // anything else (missing, malformed, non-string) is unknown → keep polling.
+  const studio = [
+    { id: 'art-fail', type: 'audio', status: 'failed' },
+    { id: 'art-ok', type: 'audio', status: 'completed' },
+    { id: 'art-odd', type: 'audio', status: 7 },
+  ];
+  assert.strictEqual(findArtifactStatus(studio, 'art-fail'), 'failed');
+  assert.strictEqual(findArtifactStatus(studio, 'art-ok'), 'completed');
+  assert.strictEqual(findArtifactStatus(studio, 'art-odd'), null);
+  assert.strictEqual(findArtifactStatus(studio, 'art-missing'), null);
+  assert.strictEqual(findArtifactStatus({ not: 'a list' }, 'art-fail'), null);
 }
 
 {

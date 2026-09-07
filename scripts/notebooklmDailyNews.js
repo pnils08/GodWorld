@@ -39,6 +39,7 @@ const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
 const OUTPUT_DIR = path.join(ROOT, 'output', 'notebooklm', 'daily');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 30;
+const AUDIO_CREATE_ATTEMPTS = 2;
 const SOURCE_VERSION = '1.7';
 const DEFAULT_AUDIO_LENGTH = 'default';
 const DEFAULT_AUDIO_FORMAT = 'deep_dive';
@@ -614,6 +615,25 @@ function parseCreatedArtifactId(output) {
   return match[1];
 }
 
+// `nlm studio status <notebook> --json` lists every Studio artifact with a
+// status (completed | in_progress | failed). A render NotebookLM has marked
+// `failed` never downloads — polling it for 15 minutes is a dead wait.
+function findArtifactStatus(statusList, artifactId) {
+  if (!Array.isArray(statusList)) return null;
+  const hit = statusList.find((a) => a && a.id === artifactId);
+  return hit && typeof hit.status === 'string' ? hit.status : null;
+}
+
+function artifactStatus(notebookId, artifactId) {
+  const res = nlm(['studio', 'status', notebookId, '--json'], { timeoutMs: 120 * 1000 });
+  if (!res.ok) return null;
+  try {
+    return findArtifactStatus(parseJsonOutput(res.out, 'studio status'), artifactId);
+  } catch (e) {
+    return null;
+  }
+}
+
 function sourceTitle(kind, cycle, hash) {
   return 'The Bay Tribune Daily C' + cycle + ' — ' + kind + ' — ' + hash.slice(0, 12);
 }
@@ -710,6 +730,9 @@ function dailyAudioFocus(hasDirectionGuide) {
     ' Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.';
 }
 
+// Returns true (downloaded), 'failed' (NotebookLM marked the render failed —
+// stop polling, the caller re-creates), or false (still not ready after the
+// poll window).
 async function downloadAudio(notebookId, artifactId, audioPath) {
   for (let i = 0; i < AUDIO_RETRY_MAX; i++) {
     await sleep(AUDIO_RETRY_INTERVAL_MS);
@@ -720,6 +743,7 @@ async function downloadAudio(notebookId, artifactId, audioPath) {
     if (downloaded.ok && fs.existsSync(audioPath) && fs.statSync(audioPath).size > 0) {
       return true;
     }
+    if (artifactStatus(notebookId, artifactId) === 'failed') return 'failed';
   }
   return false;
 }
@@ -1063,22 +1087,40 @@ async function run(argv) {
     fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
     console.log('Daily audio program: ' + (presentation.profile || routing && routing.profile || 'none') +
       ' · ' + presentation.format + '/' + presentation.length + ' (' + presentation.source + ')');
-    const create = nlm([
-      'audio', 'create', config.newsroomNotebookId,
-      '--format', presentation.format,
-      '--length', presentation.length,
-      '--source-ids', audioSourceIds.join(','),
-      '--focus', dailyAudioFocus(Boolean(directionSourceId)),
-      '--confirm',
-    ]);
-    if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));
-    const artifactId = parseCreatedArtifactId(create.out);
-    manifest.audioArtifactId = artifactId;
-    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
     audioPath = path.join(runDir, 'godworld_daily_c' + cycle + '.m4a');
-    if (!await downloadAudio(config.newsroomNotebookId, artifactId, audioPath)) {
-      throw new Error('daily audio did not render within ' +
-        (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' minutes');
+    // NotebookLM can mark a render `failed` on its side (2026-09-07 08:00: the
+    // artifact failed, the download poll ran the full 15 minutes, no audio
+    // reached Discord). One re-create on a failed render; a second failure or
+    // a timeout still throws.
+    let rendered = false;
+    for (let attempt = 1; attempt <= AUDIO_CREATE_ATTEMPTS && !rendered; attempt++) {
+      const create = nlm([
+        'audio', 'create', config.newsroomNotebookId,
+        '--format', presentation.format,
+        '--length', presentation.length,
+        '--source-ids', audioSourceIds.join(','),
+        '--focus', dailyAudioFocus(Boolean(directionSourceId)),
+        '--confirm',
+      ]);
+      if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));
+      const artifactId = parseCreatedArtifactId(create.out);
+      manifest.audioArtifactId = artifactId;
+      fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+      const outcome = await downloadAudio(config.newsroomNotebookId, artifactId, audioPath);
+      if (outcome === true) {
+        rendered = true;
+      } else if (outcome === 'failed') {
+        console.log('Daily audio render FAILED on NotebookLM (artifact ' + artifactId +
+          ', attempt ' + attempt + '/' + AUDIO_CREATE_ATTEMPTS + ')' +
+          (attempt < AUDIO_CREATE_ATTEMPTS ? ' — re-creating' : ''));
+        if (attempt === AUDIO_CREATE_ATTEMPTS) {
+          throw new Error('daily audio render failed on NotebookLM ' + AUDIO_CREATE_ATTEMPTS +
+            ' time(s) (last artifact ' + artifactId + ')');
+        }
+      } else {
+        throw new Error('daily audio did not render within ' +
+          (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' minutes');
+      }
     }
     manifest.audioPath = path.relative(ROOT, audioPath);
     fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
@@ -1162,6 +1204,7 @@ module.exports = {
   findSourceId,
   parseAddedSourceId,
   parseCreatedArtifactId,
+  findArtifactStatus,
   sourceTitle,
   archivePrompt,
   dailyPrompt,

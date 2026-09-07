@@ -66,7 +66,7 @@
 
 /**
  * Business Sector → canonical hiring category. Lifted from inside
- * runCareerEngine_ (engine.135 D2/D4, S399) so hoodReferencePay_ in
+ * runCareerEngine_ (engine.135 D2/D4, S399) so the pay/sector readers in
  * generationalWealthEngine.js reads the same map. Pure. `strict` returns null
  * instead of the 'Small Business' default — used for ROLE text, where an
  * unmatched role must fall to the whole-neighborhood reference, not to the
@@ -1129,7 +1129,7 @@ function runCareerEngine_(ctx) {
   // via 'hospital', and 'Public Services'/'Housing & Social Services' falling
   // to Small Business because 'services' outran the civic rule).
   // sectorCategory_ lifted to file scope (engine.135 D2/D4, S399) — pure;
-  // hoodReferencePay_ in generationalWealthEngine.js reads the same map.
+  // generationalWealthEngine.js reads the same map.
 
   function matchUnemployedToOpenings_() {
     if (iEmployerBizId < 0) return;

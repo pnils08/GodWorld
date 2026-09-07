@@ -1091,10 +1091,10 @@ function mintChallengerOnLedger_(ctx, spec) {
   // was minted with no Income at all: a mid-career adult on the ledger earning
   // nothing, which the D3 employer floor never repairs because a candidate
   // carries no EmployerBizId. Priced by their own neighborhood and their civic
-  // field, the same hoodReferencePay_ the advancement door uses — no invented
+  // field, the same jobReferencePay_ the advancement door uses — no invented
   // number, and no civic-specific base the builder has not set.
-  if (typeof hoodReferencePay_ === 'function') {
-    var challengerPay = hoodReferencePay_(ctx, spec.hood, 'Civic candidate',
+  if (typeof jobReferencePay_ === 'function') {
+    var challengerPay = jobReferencePay_('Community organizer',
       'Government & Civic', 'mid-career',
       String(spec.officeId || '') + ':' + String(spec.cycle || 0));
     if (challengerPay !== null && challengerPay > 0) set('Income', challengerPay);

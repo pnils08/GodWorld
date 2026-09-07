@@ -1535,16 +1535,15 @@
 
 - **roleSectorCategory_(roleText)**
 
-- **loadHoodBusinessPay_(ctx)**
-  Sheets: Business_Ledger
-
 - **median_(a)**
 
 - **seedUnit_(s)**
 
-- **hoodReferencePay_(ctx, hood, roleText, skillTags, careerStage, seed)**
+- **jobPayTable_()**
 
-- **applyUntrackedHoodReference_(ctx)**
+- **jobReferencePay_(roleText, skillTags, careerStage, seed)**
+
+- **applyUntrackedJobReference_(ctx)**
 
 - **parseKeyPersonnelOwners_(cell)**
 

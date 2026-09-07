@@ -410,10 +410,9 @@ function formCriteriaHouseholds_(ctx, households, cycle) {
     var members = [pop];
     var income = ownInc;
     var type = 'couple';
-    // engine.135 D2 (S399): an off-camera member earns what this neighborhood
-    // pays ordinary mid-career work, not a flat $48k; generic only as fallback.
-    var offcamInc = (typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx, cz.neighborhood, '', '', 'mid', pop + '|offcam') : null;
-    if (offcamInc === null) offcamInc = GENERIC_OFFCAM_INCOME;
+    // An off-camera member has no job on record, so they earn the generic figure
+    // (2026-09-07: the hood is out of the pay math — pay comes from a job).
+    var offcamInc = GENERIC_OFFCAM_INCOME;
     if (married) income += offcamInc;                       // off-camera spouse
     if (age >= 18 && onKids.length) {
       type = 'family';

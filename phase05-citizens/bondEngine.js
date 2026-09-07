@@ -2303,7 +2303,7 @@ function processGCCourtship_(ctx) {
     var dStage = dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level');
     setC('CareerStage', dStage);
     // engine.135 D2 (S399): the spouse is priced by the household's neighborhood, not a flat $48k.
-    var spInc = (typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx, P.hood, (gOcc >= 0 && gRowM[gOcc]) || '', '', dStage, spId) : null;
+    var spInc = (typeof jobReferencePay_ === 'function') ? jobReferencePay_((gOcc >= 0 && gRowM[gOcc]) || '', '', dStage, spId) : null;
     if (spInc === null) spInc = GC_SPOUSE_INCOME;
     setC('Income', spInc);
     // engine.154 (S413): the spouse is priced by who they married and where —
@@ -2499,7 +2499,7 @@ function processGCMarriageLottery_(ctx) {
     var dStage = dRetired ? 'retired' : (dYears >= 5 ? 'mid-career' : 'entry-level');
     setC('CareerStage', dStage);
     // engine.135 D2 (S399): priced by the household's neighborhood, not a flat $48k.
-    var spInc = (typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx, P.hood, pick.occ || '', '', dStage, spId) : null;
+    var spInc = (typeof jobReferencePay_ === 'function') ? jobReferencePay_(pick.occ || '', '', dStage, spId) : null;
     if (spInc === null) spInc = GC_SPOUSE_INCOME;
     setC('Income', spInc);
     setC('EducationLevel', deriveEducationLevel_(dSeed, P.hood, pick.age, null));

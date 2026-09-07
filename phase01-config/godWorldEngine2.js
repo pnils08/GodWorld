@@ -1371,9 +1371,9 @@ function processIntake_(ctx) {
         // Role change re-derives income (retirement / career-change case)
         var redraw = drawIntakeProfile_(econPools, category || 'service', givenRole, rng);
         if (redraw && idxL('Income') >= 0) {
-          // engine.135 D2 (S399): the neighborhood prices the new role when it can.
-          var hoodPay = (typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx,
-            nbhd || lRow[idxL('Neighborhood')], givenRole, idxL('SkillTags') >= 0 ? lRow[idxL('SkillTags')] : '',
+          // engine.135 D2 (S399), re-based 2026-09-07: the job's catalog band prices the new role when it can.
+          var hoodPay = (typeof jobReferencePay_ === 'function') ? jobReferencePay_(
+            givenRole, idxL('SkillTags') >= 0 ? lRow[idxL('SkillTags')] : '',
             idxL('CareerStage') >= 0 ? lRow[idxL('CareerStage')] : '', popIdE) : null;
           var newInc = hoodPay !== null ? hoodPay : redraw.income;
           edits.push('Income -> ' + newInc);

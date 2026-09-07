@@ -6,24 +6,24 @@
  * engine.135 — Employment System Cascade, Phases D2 / D4
  * (docs/plans/2026-08-29-employment-system-cascade.md).
  *
- * The concept (builder, 2026-08-30): a citizen's money is what THEIR LIFE IN
- * THEIR NEIGHBORHOOD pays — the canon-re-based businesses around them, in
- * their sector, at their stage, with their own variance. Never
- * Economic_Parameters (real-world Oakland leaking through the ledger).
+ * Pay comes from the JOB (builder ruling 2026-09-07 — a neighborhood has nothing
+ * to do with a person's income; income decides where they live). This supersedes
+ * the S398/S399 hood-reference concept the earlier header described.
  *
- *   hoodReferencePay_      — median Avg_Salary of the hood's businesses in the
- *                            citizen's sector (SkillTags → role text → whole
- *                            hood) × stage 0.75/1.0/1.3 × seeded ±8%; null
- *                            when the hood has no reference or the stage
- *                            earns nothing.
- *   D4 applyUntrackedHoodReference_ — SELF_EMPLOYED / UNTRACKED raise-only to
+ *   jobReferencePay_        — the economic catalog's median for the exact role,
+ *                            else the median of the catalog's roles in the
+ *                            role's field (roleFieldOf_ / sector hints; the
+ *                            SkillTag only for an unplaceable role) × stage
+ *                            0.75/1.0/1.3 × seeded ±8%; null when nothing
+ *                            places the role or the stage earns nothing.
+ *   D4 applyUntrackedJobReference_ — SELF_EMPLOYED / UNTRACKED raise-only to
  *                            that reference; nobody lowered; blank employer
- *                            (unemployed), tracked, GAME/CIVIC/MEDIA, sports,
- *                            Tier 1–2, student/retired/deceased untouched;
- *                            second pass moves nobody.
+ *                            (unemployed), tracked, GAME, sports, Tier 1–2,
+ *                            student/retired/deceased untouched; second pass
+ *                            moves nobody.
  *   D2 calculateCitizenIncomes_ fallback — an unpriced citizen is priced by
- *                            the hood reference first, legacy band only
- *                            where the hood has no businesses.
+ *                            the job's band first, legacy band only where
+ *                            the catalog cannot place the role.
  *   sectorCategory_ (lifted) — unchanged for businesses; strict mode returns
  *                            null instead of the 'Small Business' default.
  */
@@ -41,13 +41,17 @@ const sandbox = {
 vm.createContext(sandbox);
 for (const rel of [
   ['phase01-config', 'advanceSimulationCalendar.js'],
+  ['utilities', 'citizenDerivation.js'], // ECONOMIC_PARAMETERS — the job catalog
   ['phase05-citizens', 'educationCareerEngine.js'],
   ['phase05-citizens', 'runCareerEngine.js'],
   ['phase05-citizens', 'generationalWealthEngine.js'],
 ]) { const p = path.join(__dirname, '..', ...rel); vm.runInContext(fs.readFileSync(p, 'utf8'), sandbox, { filename: p }); }
-const { hoodReferencePay_, applyUntrackedHoodReference_, calculateCitizenIncomes_, sectorCategory_, roleSectorCategory_, loadHoodBusinessPay_ } = sandbox;
-assert('hoodReferencePay_ loaded', typeof hoodReferencePay_ === 'function');
-assert('applyUntrackedHoodReference_ loaded', typeof applyUntrackedHoodReference_ === 'function');
+const { jobReferencePay_, applyUntrackedJobReference_, calculateCitizenIncomes_, sectorCategory_, roleSectorCategory_ } = sandbox;
+assert('jobReferencePay_ loaded', typeof jobReferencePay_ === 'function');
+assert('applyUntrackedJobReference_ loaded', typeof applyUntrackedJobReference_ === 'function');
+const CATALOG = require('../data/economic_parameters.json');
+const catMedian = (cat) => { const a = CATALOG.filter(e => e.category === cat).map(e => e.medianIncome).sort((x, y) => x - y); return a[Math.floor(a.length / 2)]; };
+const roleMedian = (role) => CATALOG.find(e => e.role.toLowerCase() === role.toLowerCase()).medianIncome;
 assert('sectorCategory_ lifted to file scope', typeof sectorCategory_ === 'function');
 
 // ── fixtures ────────────────────────────────────────────────────────────────
@@ -97,45 +101,30 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   assert('role hint: unmatched → null (whole hood)', roleSectorCategory_('Mover of Furniture') === 'Transit & Infrastructure' && roleSectorCategory_('Xyzzy') === null);
 }
 
-// ── loadHoodBusinessPay_ ────────────────────────────────────────────────────
+// ── jobReferencePay_ ────────────────────────────────────────────────────────
 {
-  const ctx = ctxWith([]);
-  const pay = loadHoodBusinessPay_(ctx);
-  assert('three hoods loaded', Object.keys(pay).sort().join() === 'Downtown,Rockridge,Temescal');
-  assert('sports franchise excluded from Downtown', pay.Downtown.all.length === 3 && !pay.Downtown.all.includes(3300000));
-  assert('Temescal by category', pay.Temescal.byCat['Food & Culture'][0] === 36000 && pay.Temescal.byCat['Small Business'][0] === 38000 && pay.Temescal.byCat['Healthcare'][0] === 88000);
-  assert('cached on ctx', loadHoodBusinessPay_(ctx) === pay);
+  assert('exact catalog role = its median', jobReferencePay_('Bakery Owner', '', 'mid', 'P1') === ref(roleMedian('Bakery Owner'), 1.0, 'P1'));
+  assert('exact match is case-insensitive', jobReferencePay_('line cook', '', 'mid', 'P1') === ref(roleMedian('Line Cook'), 1.0, 'P1'));
+  assert('unlisted role → its field median (Baker → Food & Culture)', jobReferencePay_('Baker', '', 'mid', 'P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'));
+  assert('senior × 1.3', jobReferencePay_('Baker', '', 'senior', 'P1') === ref(catMedian('Food & Culture'), 1.3, 'P1'));
+  assert('entry-level × 0.75 (old spelling accepted)', jobReferencePay_('Baker', '', 'entry-level', 'P1') === ref(catMedian('Food & Culture'), 0.75, 'P1'));
+  assert('a placed role ignores a stale tag (the C106 janitor priced as a tech worker)', jobReferencePay_('Baker', '2041-Specific', 'mid', 'P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'));
+  assert('janitor → Small Business (the counter-and-building hint)', jobReferencePay_('Janitor', '2041-Specific', 'senior', 'P1') === ref(catMedian('Small Business'), 1.3, 'P1'));
+  assert('an unplaceable role prices by its tag', jobReferencePay_('Xyzzy', 'Healthcare', 'mid', 'P1') === ref(catMedian('Healthcare'), 1.0, 'P1'));
+  assert('unplaceable, untagged → null (caller keeps its draw)', jobReferencePay_('Xyzzy', '', 'mid', 'P1') === null);
+  assert('the hood is not an input: same job, any street, same number', jobReferencePay_('Baker', '', 'mid', 'P1') === jobReferencePay_('Baker', '', 'mid', 'P1'));
+  assert('two neighbours differ (seeded jitter)', jobReferencePay_('Line cook', '', 'mid', 'POP-00001') !== jobReferencePay_('Line cook', '', 'mid', 'POP-00002'));
+  assert('deterministic per seed', jobReferencePay_('Line cook', '', 'mid', 'POP-00001') === jobReferencePay_('Line cook', '', 'mid', 'POP-00001'));
+  assert('jitter inside ±8%', (() => { const m = roleMedian('Line Cook'); for (let i = 0; i < 200; i++) { const v = jobReferencePay_('Line cook', '', 'mid', 'S' + i); if (v < m * 0.92 - 100 || v > m * 1.08 + 100) return false; } return true; })());
+  assert('student → null', jobReferencePay_('Baker', '', 'student', 'P1') === null);
+  assert('retired → null', jobReferencePay_('Baker', '', 'retired', 'P1') === null);
+  assert('rounded to $100', jobReferencePay_('Baker', '', 'mid', 'P1') % 100 === 0);
 }
 
-// ── hoodReferencePay_ ───────────────────────────────────────────────────────
-{
-  const ctx = ctxWith([]);
-  // Temescal mid baker: role text → Food & Culture → 36000 × 1.0 × jitter
-  assert('Temescal baker mid = bakery pay', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'mid', 'P1') === ref(36000, 1.0, 'P1'));
-  assert('senior × 1.3', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'senior', 'P1') === ref(36000, 1.3, 'P1'));
-  assert('entry-level × 0.75 (old spelling accepted)', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'entry-level', 'P1') === ref(36000, 0.75, 'P1'));
-  // engine.166: the role's own field prices first; a tag that disagrees with a placed role is stale (the C106 janitor priced as a tech worker)
-  assert('a placed role wins over a stale tag', hoodReferencePay_(ctx, 'Temescal', 'Baker', 'Healthcare', 'mid', 'P1') === ref(36000, 1.0, 'P1'));
-  assert('a placed role whose sector is absent in the hood prices at the hood median, never at the tag', hoodReferencePay_(ctx, 'Temescal', 'Immigration Attorney', 'Healthcare', 'mid', 'P1') === ref(38000, 1.0, 'P1'));
-  assert('an unplaceable role prices by its tag', hoodReferencePay_(ctx, 'Temescal', 'Xyzzy', 'Healthcare', 'mid', 'P1') === ref(88000, 1.0, 'P1'));
-  assert('unmatched role → whole-hood median', hoodReferencePay_(ctx, 'Temescal', 'Xyzzy', '', 'mid', 'P1') === ref(38000, 1.0, 'P1'));
-  assert('sector absent in hood → whole-hood median', hoodReferencePay_(ctx, 'Temescal', 'Immigration Attorney', '', 'mid', 'P1') === ref(38000, 1.0, 'P1'));
-  assert('Downtown attorney senior = law pay × 1.3', hoodReferencePay_(ctx, 'Downtown', 'Immigration Attorney', '', 'senior', 'P2') === ref(130000, 1.3, 'P2'));
-  assert('two neighbours differ (seeded jitter)', hoodReferencePay_(ctx, 'Downtown', 'Line cook', '', 'mid', 'POP-00001') !== hoodReferencePay_(ctx, 'Downtown', 'Line cook', '', 'mid', 'POP-00002'));
-  assert('deterministic per seed', hoodReferencePay_(ctx, 'Downtown', 'Line cook', '', 'mid', 'POP-00001') === hoodReferencePay_(ctx, 'Downtown', 'Line cook', '', 'mid', 'POP-00001'));
-  assert('jitter inside ±8%', (() => { for (let i = 0; i < 200; i++) { const v = hoodReferencePay_(ctx, 'Downtown', 'Line cook', '', 'mid', 'S' + i); if (v < 62000 * 0.92 - 100 || v > 62000 * 1.08 + 100) return false; } return true; })());
-  assert('student → null', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'student', 'P1') === null);
-  assert('retired → null', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'retired', 'P1') === null);
-  assert('unknown hood → null', hoodReferencePay_(ctx, 'Nowhere', 'Baker', '', 'mid', 'P1') === null);
-  assert('rounded to $100', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'mid', 'P1') % 100 === 0);
-  const noBL = ctxWith([]); noBL.ss = { getSheetByName: () => null };
-  assert('no Business_Ledger → null', hoodReferencePay_(noBL, 'Temescal', 'Baker', '', 'mid', 'P1') === null);
-}
-
-// ── D4: applyUntrackedHoodReference_ ────────────────────────────────────────
+// ── D4: applyUntrackedJobReference_ ────────────────────────────────────────
 {
   const rows = [
-    row({ POPID: 'P1', Income: 20000 }),                                                          // Temescal baker mid, self-employed → raised to bakery pay
+    row({ POPID: 'P1', Income: 20000 }),                                                          // baker mid, self-employed → raised to the baker's band
     row({ POPID: 'P2', Neighborhood: 'Downtown', RoleType: 'Immigration Attorney', CareerStage: 'senior', Income: 30000 }), // → law pay × 1.3
     row({ POPID: 'P3', Income: 90000 }),                                                          // above reference → untouched (raise-only)
     row({ POPID: 'P4', Income: 20000, EmployerBizId: '' }),                                       // unemployed → out of scope
@@ -147,38 +136,40 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
     row({ POPID: 'P10', Income: 20000, Status: 'Retired' }),
     row({ POPID: 'P11', Income: 20000, Status: 'Deceased' }),
     row({ POPID: 'P12', Income: 20000, EconomicProfileKey: 'SPORTS_OVERRIDE' }),
-    row({ POPID: 'P13', Income: 20000, Neighborhood: 'Nowhere' }),                                // no hood reference → untouched
-    row({ POPID: 'P14', Income: 20000, EmployerBizId: 'UNTRACKED', RoleType: 'Xyzzy', SkillTags: 'Healthcare' }), // tags → clinic pay
+    row({ POPID: 'P13', Income: 20000, Neighborhood: 'Nowhere' }),                                // the hood is not an input → raised like P1
+    row({ POPID: 'P14', Income: 20000, EmployerBizId: 'UNTRACKED', RoleType: 'Xyzzy', SkillTags: 'Healthcare' }), // unplaceable role → its tag's band
+    row({ POPID: 'P15', Income: 20000, EmployerBizId: 'UNTRACKED', RoleType: 'Xyzzy', SkillTags: '' }),           // nothing places it → untouched
   ];
   const ctx = ctxWith(rows);
-  const out = applyUntrackedHoodReference_(ctx);
+  const out = applyUntrackedJobReference_(ctx);
   const inc = p => Number(ctx.ledger.rows.find(r => r[I('POPID')] === p)[I('Income')]);
-  assert('P1 raised to Temescal bakery pay', inc('P1') === ref(36000, 1.0, 'P1'), inc('P1'));
-  assert('P2 raised to Downtown law × 1.3', inc('P2') === ref(130000, 1.3, 'P2'), inc('P2'));
+  assert('P1 raised to the baker band', inc('P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'), inc('P1'));
+  assert('P2 raised to the attorney band × 1.3', inc('P2') === ref(roleMedian('Immigration Attorney'), 1.3, 'P2'), inc('P2'));
   assert('P3 above reference untouched', inc('P3') === 90000);
-  for (const [p, why] of [['P4', 'unemployed'], ['P5', 'tracked'], ['P6', 'GAME'], ['P8', 'Tier 2'], ['P9', 'student'], ['P10', 'retired'], ['P11', 'deceased'], ['P12', 'sports'], ['P13', 'no reference']])
+  for (const [p, why] of [['P4', 'unemployed'], ['P5', 'tracked'], ['P6', 'GAME'], ['P8', 'Tier 2'], ['P9', 'student'], ['P10', 'retired'], ['P11', 'deceased'], ['P12', 'sports'], ['P15', 'unplaceable']])
     assert(p + ' ' + why + ' untouched', inc(p) === 20000, inc(p));
-  assert('P14 SkillTags → clinic pay', inc('P14') === ref(88000, 1.0, 'P14'), inc('P14'));
+  assert('P13 raised regardless of hood', inc('P13') === ref(catMedian('Food & Culture'), 1.0, 'P13'), inc('P13'));
+  assert('P14 unplaceable role → its tag band', inc('P14') === ref(catMedian('Healthcare'), 1.0, 'P14'), inc('P14'));
   // engine.162: CIVIC/MEDIA rejoin the hood reference pay; GAME (P6) and the
   // sports layer (P12) keep their own door.
   assert('CIVIC row now raised to the hood reference', inc('P7') > 20000, inc('P7'));
-  assert('raised = 4, nobody lowered', out.raised === 4 && out.lowered === undefined, JSON.stringify(out));
+  assert('raised = 5, nobody lowered', out.raised === 5 && out.lowered === undefined, JSON.stringify(out));
   assert('ledger dirty', ctx.ledger.dirty === true);
-  assert('second pass moves nobody', applyUntrackedHoodReference_(ctx).raised === 0);
+  assert('second pass moves nobody', applyUntrackedJobReference_(ctx).raised === 0);
 }
 
-// ── D2: calculateCitizenIncomes_ fallback prices by the hood ───────────────
+// ── D2: calculateCitizenIncomes_ fallback prices by the job ───────────────
 {
   const unpriced = o => row(Object.assign({ EconomicProfileKey: '', Income: 0, LifeHistory: 'Y1C1 — born', EmployerBizId: '' }, o));
   const ctx = ctxWith([
     unpriced({ POPID: 'U1', Neighborhood: 'Downtown', RoleType: 'Line cook', CareerStage: 'mid' }),
-    unpriced({ POPID: 'U2', Neighborhood: 'Nowhere', RoleType: 'Line cook', CareerStage: 'mid' }),
+    unpriced({ POPID: 'U2', Neighborhood: 'Nowhere', RoleType: 'Xyzzy', CareerStage: 'mid' }),
     unpriced({ POPID: 'U3', Neighborhood: 'Downtown', RoleType: 'Line cook', CareerStage: 'mid', Income: 55000 }),
   ]);
   calculateCitizenIncomes_(ctx);
   const inc = p => Number(ctx.ledger.rows.find(r => r[I('POPID')] === p)[I('Income')]);
-  assert('U1 priced by Downtown kitchen pay', inc('U1') === ref(62000, 1.0, 'U1'), inc('U1'));
-  assert('U2 no hood reference → legacy band (35000 × 0.9 × 1.02)', inc('U2') === Math.round(35000 * 0.9 * 1.02), inc('U2'));
+  assert('U1 priced by the line cook band', inc('U1') === ref(roleMedian('Line Cook'), 1.0, 'U1'), inc('U1'));
+  assert('U2 unplaceable role → legacy band (35000 × 0.9 × 1.02)', inc('U2') === Math.round(35000 * 0.9 * 1.02), inc('U2'));
   assert('U3 already priced → untouched (fill, never re-roll)', inc('U3') === 55000);
 }
 

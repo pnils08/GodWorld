@@ -611,7 +611,7 @@ function processAdvancementRows_(ctx, now, cycle) {
   // S184 (Phase 4.1.b) — build ledger frequency snapshot ONCE per intake batch.
   // Used by deriveCitizenProfile_ for neighborhood-aware RoleType + EducationLevel draws.
   // citizenDerivation library auto-loaded from utilities/citizenDerivation.js.
-  var ledgerFreq = buildLedgerFreqSnapshot_(ledgerHeaders, ledgerRows, { includesHeader: false });
+  var ledgerFreq = buildLedgerFreqSnapshot_(ledgerHeaders, ledgerRows, { includesHeader: false, simYear: simYearOf_(ctx, cycle) });
 
   var rowsToClear = [];
 
@@ -709,10 +709,10 @@ function processAdvancementRows_(ctx, now, cycle) {
       var advIsMinor = advBY > 0 && (simYearOf_(ctx, cycle) - advBY) < 18;
       if (roleChanged && !advIsMinor && lIncome >= 0 && advSalaryPools && typeof ctx.rng === 'function') {
         var newIncome = rederiveIncomeForRole_(advSalaryPools, roleType, ctx.rng);
-        // engine.135 D2 (S399): the neighborhood prices the new role when it can.
+        // engine.135 D2 (S399), re-based 2026-09-07: the job's catalog band prices the new role when it can.
         var lStageA = findColByName_(ledgerHeaders, 'CareerStage'), lTagsA = findColByName_(ledgerHeaders, 'SkillTags');
-        var hoodIncome = (lNeighborhood >= 0 && typeof hoodReferencePay_ === 'function') ? hoodReferencePay_(ctx,
-          ledgerRows[existingRow][lNeighborhood], roleType, lTagsA >= 0 ? ledgerRows[existingRow][lTagsA] : '',
+        var hoodIncome = (typeof jobReferencePay_ === 'function') ? jobReferencePay_(
+          roleType, lTagsA >= 0 ? ledgerRows[existingRow][lTagsA] : '',
           lStageA >= 0 ? ledgerRows[existingRow][lStageA] : '', ledgerRows[existingRow][lPopId]) : null;
         if (hoodIncome !== null) ledgerRows[existingRow][lIncome] = hoodIncome;
         else if (newIncome !== null) ledgerRows[existingRow][lIncome] = newIncome;
@@ -794,8 +794,8 @@ function processAdvancementRows_(ctx, now, cycle) {
         var intakePay = null;
         if (String(clockMode || '').trim().toUpperCase() === 'GAME') {
           intakePay = SPORTS_BASE_SALARY;
-        } else if (typeof hoodReferencePay_ === 'function') {
-          intakePay = hoodReferencePay_(ctx, profile._neighborhood, newRoleType, '', profile._careerStage, seed);
+        } else if (typeof jobReferencePay_ === 'function') {
+          intakePay = jobReferencePay_(newRoleType, '', profile._careerStage, seed);
         }
         var earnsAtIntake = age >= 18 &&
           String(profile._careerStage || '').toLowerCase() !== 'retired';

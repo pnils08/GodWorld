@@ -16,7 +16,7 @@ const sandbox = {
   queueCellIntent_: () => {},
   recordRipple_: () => {},
   inWorldStamp_: () => 'Y3C2',
-  hoodReferencePay_: (ctx, hood, role) => (role === 'student' ? null : 61000),
+  jobReferencePay_: (role) => (role === 'student' ? null : 61000),
   estimateRent_: (hood) => (hood === 'Temescal' ? 2200 : 1900),
   inferSexFromFirstName_: (f) => ({ marcus: 'male', dana: 'female', theo: 'male', ivy: 'female', rosa: 'female' }[String(f).toLowerCase()] || ''),
   getCoreSimNeighborhoods_: () => ['Temescal'],

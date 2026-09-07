@@ -134,8 +134,8 @@ function processGenerationalWealth_(ctx) {
   results.employerFloorRaised = floorResults.raised;
 
   // Step 1.6 (engine.135 D4, S399): untracked / self-employed residents earn
-  // at least what their neighborhood pays their kind of work. Raise-only.
-  var hoodRefResults = applyUntrackedHoodReference_(ctx);
+  // at least what their job pays. Raise-only.
+  var hoodRefResults = applyUntrackedJobReference_(ctx);
   results.hoodReferenceRaised = hoodRefResults.raised;
 
   // Step 1.7 (engine.96 Task 10, S413, builder-direct 2026-09-03): the owner's draw —
@@ -519,11 +519,11 @@ function calculateCitizenIncomes_(ctx) {
     // Extract incomeBand from most recent CareerState
     var incomeBand = extractIncomeBand_(lifeHistory);
 
-    // engine.135 D2 (S399): an unpriced citizen is priced by their own
-    // neighborhood's businesses first; the legacy band is the fallback only
-    // where the neighborhood has no reference.
-    var income = (iNbhd >= 0) ? hoodReferencePay_(ctx, row[iNbhd], iRoleType >= 0 ? row[iRoleType] : '',
-      iSkillTags >= 0 ? row[iSkillTags] : '', iCareerStage >= 0 ? row[iCareerStage] : '', iPopId >= 0 ? row[iPopId] : r) : null;
+    // engine.135 D2 (S399), re-based 2026-09-07: an unpriced citizen is priced by
+    // their job's catalog band; the legacy band is the fallback only where the
+    // catalog cannot place the role.
+    var income = jobReferencePay_(iRoleType >= 0 ? row[iRoleType] : '',
+      iSkillTags >= 0 ? row[iSkillTags] : '', iCareerStage >= 0 ? row[iCareerStage] : '', iPopId >= 0 ? row[iPopId] : r);
     if (income === null) income = calculateIncomeFromBand_(incomeBand, tier, rng); // legacy band, deterministic RNG
 
     row[iIncome] = income;
@@ -657,87 +657,68 @@ function roleSectorCategory_(roleText) {
   return (typeof sectorCategory_ === 'function') ? sectorCategory_(t, true) : null;
 }
 
-// Business_Ledger → { hood: { all: [Avg_Salary…], byCat: { category: [Avg_Salary…] } } }.
-// Read once per cycle, cached on ctx (not S — it is a lookup, not a signal).
-function loadHoodBusinessPay_(ctx) {
-  if (ctx && ctx._engine135HoodPay) return ctx._engine135HoodPay;
-  var out = {};
-  if (!ctx) return out;
-  ctx._engine135HoodPay = out;
-  var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
-  if (!sheet) return out;
-  var data = sheet.getDataRange().getValues();
-  if (!data || data.length < 2) return out;
-  var h = data[0], iHood = -1, iSec = -1, iSal = -1;
-  for (var c = 0; c < h.length; c++) {
-    var n = String(h[c]).trim();
-    if (n === 'Neighborhood') iHood = c; else if (n === 'Sector') iSec = c; else if (n === 'Avg_Salary') iSal = c;
-  }
-  if (iHood < 0 || iSal < 0) return out;
-  for (var r = 1; r < data.length; r++) {
-    var hood = String(data[r][iHood] || '').trim(), sal = Number(data[r][iSal]) || 0;
-    if (!hood || sal <= 0 || sal > 400000) continue; // athlete-scale rows are not a wage reference
-    var cat = (typeof sectorCategory_ === 'function') ? sectorCategory_(iSec >= 0 ? data[r][iSec] : '') : 'Small Business';
-    if (!cat) continue; // sports orgs — Paulson's domain
-    var e = out[hood] || (out[hood] = { all: [], byCat: {} });
-    e.all.push(sal);
-    (e.byCat[cat] = e.byCat[cat] || []).push(sal);
-  }
-  return out;
-}
 function median_(a) { if (!a || !a.length) return 0; var b = a.slice().sort(function(x, y) { return x - y; }); return b[Math.floor(b.length / 2)]; }
 function seedUnit_(s) { var h = 2166136261; s = String(s || ''); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return (h % 10000) / 10000; }
 
-/**
- * What this citizen's life pays: the median Avg_Salary of their
- * neighborhood's businesses in their sector (the role's own field first —
- * engine.166 — then SkillTags, then the role's sector hint, then the whole
- * neighborhood) × career stage (0.75 / 1.0 / 1.3 — the
- * D3 scale) × a per-citizen seeded ±8% so no two neighbours make the same
- * thing. Rounded to $100. null when the neighborhood has no business
- * reference (caller keeps its old draw) or the stage earns nothing
- * (student / retired / unknown).
- */
-function hoodReferencePay_(ctx, hood, roleText, skillTags, careerStage, seed) {
-  var pay = loadHoodBusinessPay_(ctx);
-  var e = pay[String(hood || '').trim()];
-  if (!e || !e.all.length) return null;
-  var STAGE_FACTOR = { ENTRY: 0.75, MID: 1.0, SENIOR: 1.3 };
-  var factor = STAGE_FACTOR[careerStageClass_(careerStage)];
-  if (!factor) return null;
-  var set = null;
-  // engine.166: the CURRENT job prices first. engine.146's two-truths design makes SkillTags
-  // token 1 the current job's field, but two intake paths rewrote RoleType without touching
-  // the tag for months, so rows carry a stale field beside a plain role (a Lake Merritt
-  // janitor tagged '2041-Specific' was priced as a senior tech worker — 93k → 284k, RAISE-ONLY,
-  // twice). When the role text resolves to a field, that field is the job — priced in that
-  // sector, else at the whole-neighborhood median; the tag never overrides a placed role. Tags
-  // price only the roles the catalog cannot place.
-  var roleField = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(roleText) : null;
-  if (roleField) { if (e.byCat[roleField] && e.byCat[roleField].length) set = e.byCat[roleField]; else set = e.all; }
-  var tags = String(skillTags || '').split('|');
-  for (var t = 0; t < tags.length && !set; t++) {
-    var tg = tags[t].trim();
-    if (typeof skillTagField_ === 'function') tg = skillTagField_(tg) || tg; // engine.145: aliased catalog tags price in their field
-    if (tg && e.byCat[tg] && e.byCat[tg].length) set = e.byCat[tg];
+// The economic catalog (utilities/citizenDerivation.js ECONOMIC_PARAMETERS) by
+// role and by category — a citizen's job is what pays them. Built once.
+var JOB_PAY_CACHE_ = null;
+function jobPayTable_() {
+  if (JOB_PAY_CACHE_) return JOB_PAY_CACHE_;
+  var byRole = {}, byCat = {};
+  var E = (typeof ECONOMIC_PARAMETERS !== 'undefined' && ECONOMIC_PARAMETERS) ? ECONOMIC_PARAMETERS : [];
+  for (var i = 0; i < E.length; i++) {
+    var med = Number(E[i].medianIncome) || 0; if (!(med > 0)) continue;
+    byRole[String(E[i].role || '').trim().toLowerCase()] = med;
+    (byCat[E[i].category] = byCat[E[i].category] || []).push(med);
   }
-  if (!set) { var rc = roleSectorCategory_(roleText); if (rc && e.byCat[rc] && e.byCat[rc].length) set = e.byCat[rc]; }
-  if (!set) set = e.all;
-  var jitter = 0.92 + 0.16 * seedUnit_(seed);
-  return Math.round(median_(set) * factor * jitter / 100) * 100;
+  var catMed = {}; for (var c in byCat) catMed[c] = median_(byCat[c]);
+  JOB_PAY_CACHE_ = { byRole: byRole, byCat: catMed };
+  return JOB_PAY_CACHE_;
 }
 
 /**
- * engine.135 D4 (S399, builder 2026-08-30): SELF_EMPLOYED / UNTRACKED
- * residents earn at least what their neighborhood pays their kind of work —
- * hoodReferencePay_ above. RAISE-ONLY (nobody is lowered — the builder's
+ * What this citizen's JOB pays (builder ruling 2026-09-07, supersedes the
+ * S398/S399 hood-reference concept: a neighborhood has nothing to do with a
+ * person's income — income decides where they can live, never the reverse).
+ * The economic catalog's median for the exact role; else the median of the
+ * catalog's roles in the role's field (roleFieldOf_ / the sector hints; the
+ * SkillTag only for a role the catalog cannot place); × career stage
+ * (0.75 / 1.0 / 1.3) × a per-citizen seeded ±8%; rounded to $100. null when
+ * nothing places the role or the stage earns nothing (student / retired /
+ * unknown) — the caller keeps its old draw.
+ */
+function jobReferencePay_(roleText, skillTags, careerStage, seed) {
+  var STAGE_FACTOR = { ENTRY: 0.75, MID: 1.0, SENIOR: 1.3 };
+  var factor = STAGE_FACTOR[careerStageClass_(careerStage)];
+  if (!factor) return null;
+  var pay = jobPayTable_();
+  var med = pay.byRole[String(roleText || '').trim().toLowerCase()] || 0;
+  if (!(med > 0)) {
+    var field = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(roleText) : null;
+    if (!field) field = roleSectorCategory_(roleText);
+    if (!field) {
+      var tags = String(skillTags || '').split('|');
+      for (var t = 0; t < tags.length && !field; t++) { var tg = tags[t].trim(); if (tg && pay.byCat[tg]) field = tg; }
+    }
+    med = field ? (pay.byCat[field] || 0) : 0;
+  }
+  if (!(med > 0)) return null;
+  var jitter = 0.92 + 0.16 * seedUnit_(seed);
+  return Math.round(med * factor * jitter / 100) * 100;
+}
+
+/**
+ * engine.135 D4 (S399): SELF_EMPLOYED / UNTRACKED residents earn at least what
+ * their JOB pays — jobReferencePay_ above (builder ruling 2026-09-07: the hood
+ * is out of the pay math). RAISE-ONLY (nobody is lowered — the builder's
  * rule, same as the D3 floor). Blank employer = unemployed, not in scope (a
  * layoff's cut stays a cut). Tracked BIZ rows are D3's. GAME/CIVIC/MEDIA,
  * sports layer, Tier 1–2, students, retired, deceased untouched. Idempotent:
  * once at or above the reference a row never moves again here — money moves
  * by events after this. Silent, like D3: a description catching up.
  */
-function applyUntrackedHoodReference_(ctx) {
+function applyUntrackedJobReference_(ctx) {
   var out = { checked: 0, raised: 0 };
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
   if (!header || !rows || !rows.length) return out;
@@ -745,7 +726,7 @@ function applyUntrackedHoodReference_(ctx) {
   var iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStage = idx('CareerStage'), iStatus = idx('Status'),
       iTier = idx('Tier'), iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey'), iHood = idx('Neighborhood'),
       iRole = idx('RoleType'), iTags = idx('SkillTags'), iPop = idx('POPID');
-  if (iIncome < 0 || iEmp < 0 || iStage < 0 || iHood < 0) return out;
+  if (iIncome < 0 || iEmp < 0 || iStage < 0) return out;
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     if (!row || !Array.isArray(row)) continue;
@@ -757,7 +738,7 @@ function applyUntrackedHoodReference_(ctx) {
     var employer = String(row[iEmp] || '').trim();
     if (employer !== 'SELF_EMPLOYED' && employer !== 'UNTRACKED') continue;
     var roleText = (iRole >= 0 && row[iRole]) ? row[iRole] : (iEcon >= 0 ? row[iEcon] : '');
-    var ref = hoodReferencePay_(ctx, row[iHood], roleText, iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r);
+    var ref = jobReferencePay_(roleText, iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r);
     if (ref === null) continue;
     out.checked++;
     var income = Number(row[iIncome]) || 0;

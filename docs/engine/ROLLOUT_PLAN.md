@@ -70,9 +70,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.164 | Sim-year literal `2041` live at ≥15 age-math sites after the calendar rolled to 2042 at C105 — ages a year young, mints a year late. Sweep to `S.simYear`, bench C107 | open | engine-sheet | C106 gap log G-EC59; `output/engine_anomalies_c106_followup.md` §C |
-| engine.165 | Hood Sentiment sawtooth: +0.375 mean at C105 (4 hoods >1.0), −0.515 at C106, mostly unsourced. C105 "improvements" and C106 "decays" are one artifact. Find the one-shot term + save clamp | open | engine-sheet | C106 gap log G-EC58; followup §B |
-| engine.166 | POP-00260 / POP-00268 incomes doubled twice with 1% peer share (`Maneuver-Climb` C106). Find the Income writer, cap to the hood pay band. Suppressed from the edition | open | engine-sheet | C106 gap log G-EC60; followup §A |
+| engine.164 | Sim-year literal `2041` live at ≥15 age-math sites after the calendar rolled to 2042 at C105 — ages a year young, mints a year late. Sweep to `S.simYear`, bench C107 | ready | engine-sheet | C106 gap log G-EC59; `output/engine_anomalies_c106_followup.md` §C |
+| engine.165 | Hood Sentiment sawtooth: +0.375 mean at C105 (4 hoods >1.0), −0.515 at C106, mostly unsourced. C105 "improvements" and C106 "decays" are one artifact. Find the one-shot term + save clamp | ready | engine-sheet | C106 gap log G-EC58; followup §B |
+| engine.166 | POP-00260 / POP-00268 incomes doubled twice with 1% peer share (`Maneuver-Climb` C106). Find the Income writer, cap to the hood pay band. Suppressed from the edition | ready | engine-sheet | C106 gap log G-EC60; followup §A |
 | engine.1 | Phase 40.2 cattle refactor (needs plan) | blocked | engine-sheet | [[engine/archive/PHASE_40_PLAN]] §40.2 |
 | engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
 | engine.6 | Press_Drafts.LinkedStoryline 0% populated (DEAD-COLUMN, 164 rows) | blocked | engine-sheet | [[archive/ENGINE_REPAIR]] row |

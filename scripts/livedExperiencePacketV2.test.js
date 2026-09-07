@@ -602,15 +602,32 @@ assert.ok(economicW1.known.some(row =>
   row.text === economicSlice.prewrite.anchorFacts[0]));
 assert.ok(!economicW1.known.some(row =>
   row.text === economicSlice.prewrite.anchorFacts[1]));
+// pipeline.68: the brief now carries the neighborhood, the workplaces with
+// their roster names, the engine's colour lines and the "room is yours" line.
 assert.deepStrictEqual(economicW1.task.creativeBrief, {
   kind: 'economic-storefront',
+  hood: null,
   pulseClass: 'hood-cooling',
   economicFrame: 'TEST-ONLY storefront pressure reaches payroll decisions',
   hook: 'TEST-ONLY counters are quieter in the supplied record',
   namedBusinesses: ['Test Storefront'],
+  workplaces: [],
+  engineColour: [],
+  roomIsYours: 'the counter, the hiring board, the back office, what the owner is worried about',
   forbidden: ['Do not invent employee counts', 'Do not print raw engine decimals'],
   sceneRule: 'TEST-ONLY generic shutters and counter light only',
 });
+const foodW1 = p.buildAnglePacket({
+  cycle: 999, desk: 'culture', reporter: jordanReporter, story: economicStory,
+  approach: 'TEST-ONLY kitchens', lane: [],
+  slice: { ...economicSlice, kind: 'food-workplaces', hood: 'TEST-HOOD',
+    businesses: [{ name: 'Test Diner', sector: 'Restaurant & Dining', staff: [{ name: 'Test Cook', role: 'Line Cook' }] }],
+    seeds: [{ citizenEvents: ['Test Cook — burned the toast'] }] },
+});
+assert.equal(foodW1.task.creativeBrief.kind, 'food-workplaces');
+assert.deepStrictEqual(foodW1.task.creativeBrief.workplaces, ['Test Diner — Restaurant & Dining — Test Cook (Line Cook)']);
+assert.deepStrictEqual(foodW1.task.creativeBrief.engineColour, ['Test Cook — burned the toast']);
+assert.ok(/tip jar/.test(foodW1.task.creativeBrief.roomIsYours));
 
 // C103 Jordan regression: a selected economic signal can carry no citizen POPIDs.
 // W1 now fills from the ledger instead of sealing an empty interview set.

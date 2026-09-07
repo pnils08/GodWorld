@@ -397,6 +397,22 @@ function buildEconomicSlice(cycle, opts) {
     cycle: cyc
   };
 
+  // Typed-packet exposure (livedExperiencePacket.candidateRows reads slice.citizens
+  // first): every worker on the slice is an interview target with a clean profile.
+  const citizenRows = workers.map(w => ({
+    popid: w.popid, name: w.name, role: w.role, neighborhood: hood, business: w.business,
+    profile: [w.name, w.role, w.business + ', ' + hood].filter(Boolean).join(' — '),
+    why: 'works at ' + w.business + ' (Employment_Roster)'
+  }));
+  for (const sd of seedsHere) for (const c of sd.citizens) {
+    if (c.popid && !citizenRows.some(r => r.popid === c.popid)) {
+      citizenRows.push({ popid: c.popid, name: c.name, role: null, neighborhood: hood, business: null,
+        profile: c.name + ' — ' + hood, why: 'engine seed for ' + hood + ' this cycle (Story_Seed_Deck)' });
+    }
+  }
+  const factSrc = 'output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C' + cyc;
+  const seedSrc = 'output/beats/Story_Seed_Deck.jsonl @C' + cyc;
+
   return {
     version: VERSION, empty: false, cycle: cyc, kind, variant,
     hood,
@@ -405,11 +421,13 @@ function buildEconomicSlice(cycle, opts) {
     approach,
     businesses,
     seeds,
+    citizens: citizenRows,
     prewrite: {
       pulseClass: pulse.className,
       angle, hookLine,
       namedBusinesses: named,
       anchorFacts,
+      evidence: anchorFacts.map(text => ({ text, src: /^ENGINE SEED/.test(text) ? seedSrc : factSrc })),
       forbidden: [
         'Do not invent a business, a worker, an owner or a place — every name comes from this slice',
         'Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose',

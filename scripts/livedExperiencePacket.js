@@ -199,14 +199,25 @@ function creativeBriefFromSlice(slice) {
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
       sourcePointers: uniq(slice.pointers || []).slice(0, 5),
     };
-  } else if (slice.kind === 'economic-storefront') {
+  } else if (slice.kind === 'economic-storefront' || slice.kind === 'food-workplaces') {
+    // pipeline.68: one neighborhood off the ledger — its businesses and the
+    // roster workers at each. Facts are the names; the room is the reporter's.
     const prewrite = slice.prewrite || {};
+    const food = slice.kind === 'food-workplaces';
     brief = {
-      kind: 'economic-storefront',
+      kind: food ? 'food-workplaces' : 'economic-storefront',
+      hood: clean(slice.hood, 80) || null,
       pulseClass: clean(prewrite.pulseClass, 100) || null,
       economicFrame: clean(prewrite.angle, 500) || null,
       hook: clean(prewrite.hookLine, 500) || null,
       namedBusinesses: uniq(prewrite.namedBusinesses).slice(0, 8),
+      workplaces: (slice.businesses || []).slice(0, 5).map(b => clean(
+        [b.name, b.sector, (b.staff || []).slice(0, 4).map(w => w.name + (w.role ? ' (' + w.role + ')' : '')).join('; ') || 'no roster names']
+          .filter(Boolean).join(' — '), 300)),
+      engineColour: uniq((slice.seeds || []).flatMap(sd => sd.citizenEvents || [])).slice(0, 6),
+      roomIsYours: food
+        ? 'the line, the regulars, the pace, the tip jar, what the cook is worried about'
+        : 'the counter, the hiring board, the back office, what the owner is worried about',
       forbidden: uniq(prewrite.forbidden).slice(0, 8),
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
     };

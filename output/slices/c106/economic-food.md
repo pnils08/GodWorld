@@ -4,7 +4,7 @@ Cycle **C106** · kind `food-workplaces` · hood **Jack London**
 
 ## THE SLICE
 - Angle: Jack London kitchens: Harborline Grill, Blue Lantern Bar, Green & Gold Tavern — the people who work the shift
-- Hook: Tomas Renteria, podcast host / line cook at Harborline Grill. 6 named workers at 2 named kitchens in Jack London on the ledger this cycle.
+- Hook: Tomas Renteria, Podcast Host / Line Cook at Harborline Grill. 6 named workers at 2 named kitchens in Jack London on the ledger this cycle.
 
 ## BUSINESSES (ledger) AND WHO WORKS THERE (roster)
 - **Harborline Grill** — Restaurant & Dining · 7 employees · growth 5%

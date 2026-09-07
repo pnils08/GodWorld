@@ -21,7 +21,7 @@
   "story": {
     "angle": "Jack London kitchens: Harborline Grill, Blue Lantern Bar, Green & Gold Tavern — the people who work the shift",
     "label": "Jack London kitchens · Harborline Grill, Blue Lantern Bar",
-    "hookLine": "Tomas Renteria, podcast host / line cook at Harborline Grill. 6 named workers at 2 named kitchens in Jack London on the ledger this cycle.",
+    "hookLine": "Tomas Renteria, Podcast Host / Line Cook at Harborline Grill. 6 named workers at 2 named kitchens in Jack London on the ledger this cycle.",
     "hood": "Jack London",
     "pulseClass": "hood-kitchens",
     "namedBusinesses": [
@@ -197,10 +197,93 @@
       "suggestedAngle": "baseline context piece"
     }
   ],
+  "citizens": [
+    {
+      "popid": "POP-00744",
+      "name": "Tomas Renteria",
+      "role": "Podcast Host / Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Tomas Renteria — Podcast Host / Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00878",
+      "name": "Quynh Le",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Quynh Le — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00960",
+      "name": "Jalen Hill",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Jalen Hill — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00965",
+      "name": "Bruce Wright",
+      "role": "Line Cook",
+      "neighborhood": "Jack London",
+      "business": "Harborline Grill",
+      "profile": "Bruce Wright — Line Cook — Harborline Grill, Jack London",
+      "why": "works at Harborline Grill (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00783",
+      "name": "Yuki Ji",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": "Blue Lantern Bar",
+      "profile": "Yuki Ji — Bartender — Blue Lantern Bar, Jack London",
+      "why": "works at Blue Lantern Bar (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00970",
+      "name": "Guadalupe Lee",
+      "role": "Bartender",
+      "neighborhood": "Jack London",
+      "business": "Blue Lantern Bar",
+      "profile": "Guadalupe Lee — Bartender — Blue Lantern Bar, Jack London",
+      "why": "works at Blue Lantern Bar (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00835",
+      "name": "Mei-Lin Kang",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Mei-Lin Kang — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00718",
+      "name": "Ileana Vasquez",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Ileana Vasquez — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00471",
+      "name": "Anna Baker",
+      "role": null,
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Anna Baker — Jack London",
+      "why": "engine seed for Jack London this cycle (Story_Seed_Deck)"
+    }
+  ],
   "prewrite": {
     "pulseClass": "hood-kitchens",
     "angle": "Jack London kitchens: Harborline Grill, Blue Lantern Bar, Green & Gold Tavern — the people who work the shift",
-    "hookLine": "Tomas Renteria, podcast host / line cook at Harborline Grill. 6 named workers at 2 named kitchens in Jack London on the ledger this cycle.",
+    "hookLine": "Tomas Renteria, Podcast Host / Line Cook at Harborline Grill. 6 named workers at 2 named kitchens in Jack London on the ledger this cycle.",
     "namedBusinesses": [
       "Harborline Grill",
       "Blue Lantern Bar",
@@ -215,6 +298,32 @@
       "Jack London Square Markets · Retail & Food · 30 employees · growth 5%",
       "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 5%",
       "ENGINE SEED (Jack London): citizens Mei-Lin Kang; Quynh Le; Ileana Vasquez; Anna Baker · businesses Baylight Construction Authority; Anchor Build"
+    ],
+    "evidence": [
+      {
+        "text": "Harborline Grill · Restaurant & Dining · 7 employees · growth 5% · on the roster: Tomas Renteria (Podcast Host / Line Cook); Quynh Le (Line Cook); Jalen Hill (Line Cook); Bruce Wright (Line Cook)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "Blue Lantern Bar · Nightlife & Entertainment · 30 employees · growth 5% · on the roster: Yuki Ji (Bartender); Guadalupe Lee (Bartender)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "Green & Gold Tavern · Sports Bar & Dining · 30 employees · growth 5%",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "Jack London Square Markets · Retail & Food · 30 employees · growth 5%",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "Dockhouse BBQ · Restaurant & Dining · 2 employees · growth 5%",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "ENGINE SEED (Jack London): citizens Mei-Lin Kang; Quynh Le; Ileana Vasquez; Anna Baker · businesses Baylight Construction Authority; Anchor Build",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C106"
+      }
     ],
     "forbidden": [
       "Do not invent a business, a worker, an owner or a place — every name comes from this slice",

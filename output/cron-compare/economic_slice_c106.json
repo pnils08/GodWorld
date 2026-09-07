@@ -487,6 +487,152 @@
       "suggestedAngle": "general coverage"
     }
   ],
+  "citizens": [
+    {
+      "popid": "POP-00183",
+      "name": "Toby Lamont",
+      "role": "Mutual Aid Network Organizer",
+      "neighborhood": "West Oakland",
+      "business": "West Oakland Community Center",
+      "profile": "Toby Lamont — Mutual Aid Network Organizer — West Oakland Community Center, West Oakland",
+      "why": "works at West Oakland Community Center (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00184",
+      "name": "Brooklyn Nguyen",
+      "role": "Teacher",
+      "neighborhood": "West Oakland",
+      "business": "West Oakland Community Center",
+      "profile": "Brooklyn Nguyen — Teacher — West Oakland Community Center, West Oakland",
+      "why": "works at West Oakland Community Center (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00188",
+      "name": "Simone Cleng",
+      "role": "Community Organizer",
+      "neighborhood": "West Oakland",
+      "business": "West Oakland Community Center",
+      "profile": "Simone Cleng — Community Organizer — West Oakland Community Center, West Oakland",
+      "why": "works at West Oakland Community Center (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00342",
+      "name": "Leo Ling",
+      "role": "Nonprofit Executive Director",
+      "neighborhood": "West Oakland",
+      "business": "West Oakland Community Center",
+      "profile": "Leo Ling — Nonprofit Executive Director — West Oakland Community Center, West Oakland",
+      "why": "works at West Oakland Community Center (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00275",
+      "name": "Elijah Roberts",
+      "role": "Construction laborer",
+      "neighborhood": "West Oakland",
+      "business": "Oakmesh Systems",
+      "profile": "Elijah Roberts — Construction laborer — Oakmesh Systems, West Oakland",
+      "why": "works at Oakmesh Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00291",
+      "name": "Enzo Walker",
+      "role": "Plumber",
+      "neighborhood": "West Oakland",
+      "business": "Oakmesh Systems",
+      "profile": "Enzo Walker — Plumber — Oakmesh Systems, West Oakland",
+      "why": "works at Oakmesh Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00368",
+      "name": "Dom Will",
+      "role": "Machine Learning Engineer (Oakmesh Systems)",
+      "neighborhood": "West Oakland",
+      "business": "Oakmesh Systems",
+      "profile": "Dom Will — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+      "why": "works at Oakmesh Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00483",
+      "name": "Jace Robinson",
+      "role": "Machine Learning Engineer (Oakmesh Systems)",
+      "neighborhood": "West Oakland",
+      "business": "Oakmesh Systems",
+      "profile": "Jace Robinson — Machine Learning Engineer (Oakmesh Systems) — Oakmesh Systems, West Oakland",
+      "why": "works at Oakmesh Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00445",
+      "name": "Sam Fazio",
+      "role": "Digital Twin Architect",
+      "neighborhood": "West Oakland",
+      "business": "Civis Systems",
+      "profile": "Sam Fazio — Digital Twin Architect — Civis Systems, West Oakland",
+      "why": "works at Civis Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00482",
+      "name": "Catherine Santos",
+      "role": "Digital Twin Architect",
+      "neighborhood": "West Oakland",
+      "business": "Civis Systems",
+      "profile": "Catherine Santos — Digital Twin Architect — Civis Systems, West Oakland",
+      "why": "works at Civis Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00789",
+      "name": "Elias  Varek",
+      "role": "Founder of Civis Systems",
+      "neighborhood": "West Oakland",
+      "business": "Civis Systems",
+      "profile": "Elias  Varek — Founder of Civis Systems — Civis Systems, West Oakland",
+      "why": "works at Civis Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00801",
+      "name": "Maurice Franklin",
+      "role": "Drone Fleet Coordinator",
+      "neighborhood": "West Oakland",
+      "business": "Civis Systems",
+      "profile": "Maurice Franklin — Drone Fleet Coordinator — Civis Systems, West Oakland",
+      "why": "works at Civis Systems (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00898",
+      "name": "Yolande McAllister",
+      "role": null,
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Yolande McAllister — West Oakland",
+      "why": "engine seed for West Oakland this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00357",
+      "name": "Andrew Cook",
+      "role": null,
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Andrew Cook — West Oakland",
+      "why": "engine seed for West Oakland this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-01060",
+      "name": "Yvonne Hayes",
+      "role": null,
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Yvonne Hayes — West Oakland",
+      "why": "engine seed for West Oakland this cycle (Story_Seed_Deck)"
+    },
+    {
+      "popid": "POP-00511",
+      "name": "Dimmie Washington",
+      "role": null,
+      "neighborhood": "West Oakland",
+      "business": null,
+      "profile": "Dimmie Washington — West Oakland",
+      "why": "engine seed for West Oakland this cycle (Story_Seed_Deck)"
+    }
+  ],
   "prewrite": {
     "pulseClass": "hood-businesses",
     "angle": "West Oakland businesses: West Oakland Community Center, Oakmesh Systems, Civis Systems — the people who work there",
@@ -505,6 +651,32 @@
       "Coastline Construction · Construction · 221 employees · growth 5.6%",
       "Mariner Construction · Construction · 165 employees · growth 4.4%",
       "ENGINE SEED (West Oakland): citizens Yolande McAllister; Andrew Cook; Yvonne Hayes; Dimmie Washington · businesses Coastline Construction; West Oakland Stabilization Fund · Keane Auxiliary Flag Football League (program)"
+    ],
+    "evidence": [
+      {
+        "text": "West Oakland Community Center · Community Services · 95 employees · growth 8.3% · on the roster: Toby Lamont (Mutual Aid Network Organizer); Brooklyn Nguyen (Teacher); Simone Cleng (Community Organizer); Leo Ling (Nonprofit Executive Director) +46 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "Oakmesh Systems · Civic Tech · 46 employees · growth 30.9% · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "Civis Systems · Urban Systems Intelligence Firm · 41 employees · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias  Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "Coastline Construction · Construction · 221 employees · growth 5.6%",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "Mariner Construction · Construction · 165 employees · growth 4.4%",
+        "src": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106"
+      },
+      {
+        "text": "ENGINE SEED (West Oakland): citizens Yolande McAllister; Andrew Cook; Yvonne Hayes; Dimmie Washington · businesses Coastline Construction; West Oakland Stabilization Fund · Keane Auxiliary Flag Football League (program)",
+        "src": "output/beats/Story_Seed_Deck.jsonl @C106"
+      }
     ],
     "forbidden": [
       "Do not invent a business, a worker, an owner or a place — every name comes from this slice",

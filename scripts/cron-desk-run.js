@@ -622,41 +622,30 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     L.push('like. That color is the job — invent it freely so long as it contradicts nothing.');
     L.push('');
   }
-  // grok pipeline.52: economic / storefront pack for business desk (shared substrate).
-  if (desk === 'business') {
-    try {
-      const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
-      const es = loadEconomicSlice(cycle);
-      if (es && !es.empty) {
-        L.push('### ECONOMIC / STOREFRONT SLICE (business pack — not civic process filler)');
-        L.push('PULSE: ' + es.pulse.className + ' · score ' + es.pulse.score + ' · ' + es.pulse.label);
-        if ((es.pulse.namedBusinesses || []).length) {
-          L.push('NAMED BUSINESSES (sources only): ' + es.pulse.namedBusinesses.join('; '));
-        }
-        if (es.texture) {
-          if ((es.texture.cooling || []).length) {
-            L.push('COOLING: ' + es.texture.cooling.slice(0, 8).join('; '));
-          }
-          if ((es.texture.rising || []).length) {
-            L.push('RISING: ' + es.texture.rising.slice(0, 8).join('; '));
-          }
-          if ((es.texture.venues || []).length) {
-            L.push('EVENING VENUES: ' +
-              es.texture.venues.slice(0, 6).map(v => v.name + (v.hood ? ' (' + v.hood + ')' : '')).join('; '));
-          }
-          if (es.texture.ledgerSource) {
-            L.push('LEDGER SNAPSHOT: ' + es.texture.ledgerCount + ' rows (`' + es.texture.ledgerSource +
-              '`) — headcount only when listed; never invent Employee_Count or Key_Personnel.');
-          }
-        }
-        if (es.prewrite && es.prewrite.anchorFacts) {
-          L.push('ANCHORS:');
-          for (const a of es.prewrite.anchorFacts.slice(0, 6)) L.push('  - ' + a);
-        }
-        if (es.scene && es.scene.colorRoom) L.push('COLOR: ' + es.scene.colorRoom);
-        L.push('');
+  // pipeline.68 Task 2/3: the beat slice for the business desk, and the food
+  // variant for Mason Ortega. Built from the beat-tab dump; a missing or stale
+  // dump throws here on purpose — no seat is staged on nothing.
+  const foodSeat = !!(persona && persona.name && /mason\s*ortega/i.test(persona.name));
+  if (desk === 'business' || foodSeat) {
+    const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
+    const es = loadEconomicSlice(cycle, { foodFilter: foodSeat });
+    if (es && !es.empty) {
+      L.push(foodSeat
+        ? '### FOOD & HOSPITALITY SLICE (kitchens as workplaces — one neighborhood from the ledger)'
+        : '### BUSINESS SLICE (one neighborhood, its businesses, the people who work there)');
+      L.push('WHERE: ' + es.hood);
+      L.push('HOOK: ' + es.story.hookLine);
+      L.push('BUSINESSES ON THE LEDGER AND WHO WORKS THERE (real — do not invent a name, a role or a place):');
+      for (const a of es.prewrite.anchorFacts) L.push('  - ' + a);
+      if ((es.seeds || []).length) {
+        L.push('ENGINE COLOUR LINES (the engine\'s own texture for these citizens this cycle — use or ignore):');
+        for (const sd of es.seeds.slice(0, 2)) for (const e of sd.citizenEvents.slice(0, 4)) L.push('  - ' + e);
       }
-    } catch (_) { /* optional */ }
+      L.push('THE ROOM IS YOURS: ' + (foodSeat
+        ? 'the line on a Tuesday, the regulars, the walk-in, the tip jar, what the cook is worried about.'
+        : 'the counter, the hiring board, the back office, what the owner is worried about.'));
+      L.push('');
+    }
   }
   if (persona) {
     // Stance anchor (Phase 2.3, 2026-07-24 tuning fix): the injected lane is
@@ -821,7 +810,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('STANCE: arts present-tense. Neighborhood act not gallery PR.');
       L.push('ONE piece — not multi-voice culture-desk average.');
     } else if (persona.name && /mason\s*ortega/i.test(persona.name)) {
-      L.push('STANCE: kitchen workplaces first. Packet-named workers only.');
+      L.push('STANCE: kitchens as workplaces — the people on this slice are real, the rest of the room is yours.');
       L.push('ONE piece — not multi-voice culture-desk average.');
     } else if (persona.name && /angela\s*reyes/i.test(persona.name)) {
       L.push('STANCE: education stability. Warm brief. No invented scores.');
@@ -878,9 +867,10 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     }
     // grok pipeline.52: economic pack when this is a business-desk assignment (desk via assignment approach).
     // (Persona-named inject for culture evening follows; business often has no solo persona.)
-    // grok pipeline.52: shared evening-life pack for culture consumers (mason/kai/sharon/maria/graye).
+    // grok pipeline.52: shared evening-life pack for culture consumers (kai/sharon/maria/graye).
+    // Mason Ortega left this pack for the food slice (pipeline.68 Task 3).
     if (persona.name &&
-        /maria\s*keen|elliot\s*graye|kai\s*marston|mason\s*ortega|sharon\s*okafor/i.test(persona.name)) {
+        /maria\s*keen|elliot\s*graye|kai\s*marston|sharon\s*okafor/i.test(persona.name)) {
       try {
         const { loadEveningSlice, pickPulseForPersona, EVENING_CONSUMERS } =
           require(path.join(__dirname, 'buildEveningSlice'));
@@ -1331,8 +1321,10 @@ async function runAngle(assign) {
   let economicSlice = null;
   let safetySlice = null;
   let civicDomainSlice = null;
+  // Mason Ortega is not an evening consumer any more — he draws the food
+  // variant of the economic slice (pipeline.68 Task 3).
   const EVENING_SLUGS = {
-    'mason-ortega': 1, 'kai-marston': 1, 'sharon-okafor': 1,
+    'kai-marston': 1, 'sharon-okafor': 1,
     'maria-keen': 1, 'elliot-graye': 1
   };
   if (personaSlug === 'freelance-firebrand' && !story) {
@@ -1420,19 +1412,17 @@ async function runAngle(assign) {
     } catch (e) {
       log('simon slice load failed (non-fatal): ' + e.message);
     }
-  } else if (desk === 'business') {
-    try {
-      const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
-      economicSlice = loadEconomicSlice(cycle);
-      if (economicSlice && !economicSlice.empty) {
-        story = economicSlice.story || story;
-        approach = economicSlice.approach || approach;
-        log('economic slice loaded — pulse ' + economicSlice.pulse.className +
-          ' score ' + economicSlice.pulse.score +
-          ' hood ' + (economicSlice.pulse.hood || '—'));
-      }
-    } catch (e) {
-      log('economic slice load failed (non-fatal): ' + e.message);
+  } else if (desk === 'business' || personaSlug === 'mason-ortega') {
+    // pipeline.68: beat slice from the dump. A missing or stale dump throws —
+    // the seat does not run on the old signal-only slice or on nothing.
+    const { loadEconomicSlice } = require(path.join(__dirname, 'buildEconomicSlice'));
+    economicSlice = loadEconomicSlice(cycle, { foodFilter: personaSlug === 'mason-ortega' });
+    if (economicSlice && !economicSlice.empty) {
+      story = economicSlice.story || story;
+      approach = economicSlice.approach || approach;
+      log('economic slice loaded [' + economicSlice.variant + '] — hood ' + economicSlice.hood +
+        ' businesses ' + economicSlice.businesses.length +
+        ' workers ' + economicSlice.story.citizens.length);
     }
   } else if (personaSlug && EVENING_SLUGS[personaSlug]) {
     try {
@@ -1621,37 +1611,26 @@ async function runAngle(assign) {
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
         '\n\nIn first-person reflective voice: name the present fact, the era echo you will touch, ' +
         'and which closing note you ride. Not fan we. Not Anthony board. Not business storefront. Not wire copy.';
-    } else if (desk === 'business' && story && economicSlice && !economicSlice.empty) {
-      const sceneBits = [];
-      if (economicSlice.pulse) {
-        sceneBits.push('PULSE: ' + economicSlice.pulse.className + ' · score ' + economicSlice.pulse.score +
-          ' · ' + economicSlice.pulse.label);
+    } else if ((desk === 'business' || personaSlug === 'mason-ortega') && story && economicSlice && !economicSlice.empty) {
+      const food = economicSlice.variant === 'food';
+      const sceneBits = economicSlice.prewrite.anchorFacts.slice();
+      for (const sd of (economicSlice.seeds || []).slice(0, 2)) {
+        for (const e of sd.citizenEvents.slice(0, 3)) sceneBits.push('ENGINE COLOUR: ' + e);
       }
-      if ((economicSlice.pulse.namedBusinesses || []).length) {
-        sceneBits.push('NAMED BUSINESSES (sources only): ' + economicSlice.pulse.namedBusinesses.join('; '));
-      }
-      if (economicSlice.texture) {
-        if ((economicSlice.texture.cooling || []).length) {
-          sceneBits.push('COOLING HOODS: ' + economicSlice.texture.cooling.slice(0, 6).join('; '));
-        }
-        if ((economicSlice.texture.rising || []).length) {
-          sceneBits.push('RISING HOODS: ' + economicSlice.texture.rising.slice(0, 6).join('; '));
-        }
-      }
-      if (economicSlice.prewrite && economicSlice.prewrite.forbidden) {
-        sceneBits.push('FORBIDDEN: ' + economicSlice.prewrite.forbidden.join('; '));
-      }
-      ask = 'You\'re ' + asker.name + '. This is the economic / storefront pulse — named places only:\n' +
-        'PULSE: ' + (story.angle || story.label) +
-        (story.pulseClass ? '\nCLASS: ' + story.pulseClass : '') +
+      ask = 'You\'re ' + asker.name + '. This is ' + economicSlice.hood + (food ? ' — its kitchens' : ' — its businesses') +
+        ' and the people who work there, straight off the ledger:\n' +
+        'ANGLE: ' + (story.angle || story.label) +
         (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
-        (brief.names.length ? '\nCITIZENS (packet only):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
-        (story.hood ? '\nWHERE: ' + story.hood : '') +
-        (sceneBits.length ? '\nSTOREFRONT PACK:\n' + sceneBits.join('\n') : '') +
+        (brief.names.length ? '\nNAMES ON THE SLICE (real — never invent another):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
+        '\nWHERE: ' + economicSlice.hood +
+        (sceneBits.length ? '\n' + (food ? 'KITCHENS' : 'BUSINESSES') + ' AND WHO WORKS THERE:\n' + sceneBits.map(b => '  - ' + b).join('\n') : '') +
         (approach ? '\n\n' + approach : '') +
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
-        '\n\nIn your own voice: which hood or named business is moving, what does the block feel like, ' +
-        'and what must not be invented (employees, owners, counts)? One economic claim. Not civic process filler.';
+        (food
+          ? '\n\nIn your own voice: which kitchen are you standing in, whose shift is it, and what is true about the work tonight? ' +
+            'The room, the regulars, the pace, the worry — yours to paint. One kitchen. Not a review. Not multi-voice culture average.'
+          : '\n\nIn your own voice: which business are you standing in, who on the roster is your source, and what is true about the block? ' +
+            'The counter, the hiring board, the worry — yours to paint. One claim about how the block is moving. Not civic process filler.');
     } else if (persona && EVENING_SLUGS[personaSlug] && story) {
       const sceneBits = [];
       if (eveningSlice && !eveningSlice.empty) {
@@ -1905,16 +1884,17 @@ async function runAngle(assign) {
       candidates: (simonSlice.candidates || []).slice(0, 6)
     } : null,
     economicSlice: economicSlice && !economicSlice.empty ? {
+      version: economicSlice.version,
+      variant: economicSlice.variant,
+      hood: economicSlice.hood,
       pulse: economicSlice.pulse,
       prewrite: economicSlice.prewrite,
-      texture: {
-        rising: economicSlice.texture && economicSlice.texture.rising,
-        cooling: economicSlice.texture && economicSlice.texture.cooling,
-        ledgerCount: economicSlice.texture && economicSlice.texture.ledgerCount,
-        ledgerSource: economicSlice.texture && economicSlice.texture.ledgerSource,
-        venues: (economicSlice.texture && economicSlice.texture.venues || []).slice(0, 8)
-      },
-      scene: economicSlice.scene,
+      businesses: economicSlice.businesses.map(b => ({
+        bizId: b.bizId, name: b.name, sector: b.sector,
+        staff: b.staff.slice(0, 4).map(s => ({ popid: s.popid, name: s.name, role: s.role }))
+      })),
+      seeds: (economicSlice.seeds || []).map(sd => ({ seedId: sd.seedId, hood: sd.hood, citizens: sd.citizens })),
+      rotation: economicSlice.rotation,
       candidates: (economicSlice.candidates || []).slice(0, 8)
     } : null,
     safetySlice: safetySlice && !safetySlice.empty ? {

@@ -560,37 +560,31 @@ async function buildFanout(date) {
   let economicEnrich = { enriched: false, reason: 'none' };
   if (cycle != null) {
     try {
+      // pipeline.68 Task 2/3: the beat slice from the dump for the business
+      // desk and the food variant for Mason Ortega. A missing or stale dump
+      // throws out of the fanout — the rota is not staged on nothing.
       const {
         enrichAssignment: enrichEconomic,
-        buildEconomicSlice,
-        writeEconomicSlice,
-        isBusinessDesk
+        isBusinessDesk,
+        isFoodSeat
       } = require(path.join(__dirname, 'buildEconomicSlice'));
+      const seats = [];
       for (let i = 0; i < assignments.length; i++) {
-        if (!isBusinessDesk(assignments[i])) continue;
+        if (!isBusinessDesk(assignments[i]) && !isFoodSeat(assignments[i])) continue;
         const next = enrichEconomic(assignments[i], cycle);
         if (next && next.economicSlice) {
           assignments[i] = next;
-          economicEnrich = {
-            enriched: true,
-            reason: 'pulse=' + (next.pulse && next.pulse.className) +
-              ' score=' + (next.pulse && next.pulse.score) +
-              ' hood=' + (next.pulse && next.pulse.hood)
-          };
+          seats.push((next.persona || next.name || next.popid) + '/' + next.economicVariant + ':' + (next.pulse && next.pulse.hood));
         }
       }
-      try {
-        const slice = buildEconomicSlice(cycle);
-        writeEconomicSlice(cycle, slice);
-      } catch (_) { /* non-fatal */ }
-      if (!economicEnrich.enriched) {
-        economicEnrich.reason = 'no business desk assignment in rota';
-      } else {
-        console.error('[fanout] ECONOMIC STOREFRONT — ' + economicEnrich.reason);
-      }
+      economicEnrich = seats.length
+        ? { enriched: true, reason: 'seats=' + seats.length + ' ' + seats.join(', ') }
+        : { enriched: false, reason: 'no business desk or Mason assignment in rota' };
+      if (economicEnrich.enriched) console.error('[fanout] BEAT SLICE (economic/food) — ' + economicEnrich.reason);
     } catch (e) {
       economicEnrich = { enriched: false, reason: 'error: ' + e.message };
-      console.error('[fanout] economic slice enrich skipped: ' + e.message);
+      console.error('[fanout] economic slice enrich FAILED: ' + e.message);
+      throw e;
     }
   }
 
@@ -604,8 +598,10 @@ async function buildFanout(date) {
         writeEveningSlice,
         isEveningConsumer
       } = require(path.join(__dirname, 'buildEveningSlice'));
+      const { isFoodSeat: isMason } = require(path.join(__dirname, 'buildEconomicSlice'));
       for (let i = 0; i < assignments.length; i++) {
         if (!isEveningConsumer(assignments[i])) continue;
+        if (isMason(assignments[i])) continue; // Mason draws the food slice (pipeline.68 Task 3)
         const next = enrichEvening(assignments[i], cycle);
         if (next && next.eveningSlice) {
           assignments[i] = next;

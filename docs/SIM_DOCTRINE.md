@@ -95,18 +95,26 @@ life — those crossings tick EmergenceCount, and three namings land the dream
 crossings off froze every GC dream and killed the pool — that correction is
 the proof: their liveliness is the system, never noise.
 
-## 13. Gate the facts, not the color. (S433, Mike-direct)
-The offices exist to move initiatives and earn or lose approval; by cycle 200
-no model will know what the stories covered, and nobody can tell a cron what
-its world looks like. So an office SPEAKS freely — if the Mayor says two
-hundred people showed up, that is the point, and the desk prints it as her
-claim. What is gated is the FACT layer: the tracker fields (MilestoneNotes,
-NextScheduledAction) that the next cycle's seats read as ground truth, and a
-datawake's action/numberMoved. Arithmetic on packet figures is grounded (57 +
-12 = 69). Gating speech turned the seats into drones reciting engine output —
-the C106 mayor open was rejected for a correct sum and a crowd estimate.
-Mechanism: `statementNumberCheck` / `ungroundedNumbers` in
-`scripts/cron-civic-run.js` (civic.35).
+## 13. Gate the facts, not the color. (S433, Mike-direct — literal)
+FACTS are the canonized citizens (every row is one), the district offices and
+who holds them, the teams and rosters, the initiative record in the tracker.
+COLOR is everything else — who the Mayor's neighbor is, her favorite
+restaurant, which school is doing well, a business nobody minted, a crowd of
+two hundred, an issue nobody scripted. Inventing color is the job, in print
+too. The builder cannot visualize the world he provides; LLMs see numbers, not
+a city, and predict — the crons are paid to use that prediction to paint the
+world from the cheap Apps Script framework, with no CLI hand on them, and to
+tell the builder what the citizens need, want and hate without knowing he is
+listening. So statements and articles are SUPPOSED to fail sometimes: the
+models hallucinate rather than reason across gaps, and a run where every gate
+and every Rhea check passes is not the proof it looks like. Civic gravity is
+drift: civic and sports both write TO the engine, neither is what it provides,
+and a front page about local restaurants colors the world more than another
+initiative. City-hall need not obsess over initiatives — the Mayor is a huge
+A's fan; when did she last say so?
+Mechanism: the civic number gate runs on tracker fact fields only
+(`statementNumberCheck` / `ungroundedNumbers`, `scripts/cron-civic-run.js`,
+civic.35). Any gate that rejects invented color is scope creep.
 
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make

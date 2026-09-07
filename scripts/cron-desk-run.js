@@ -2975,7 +2975,10 @@ async function runFanoutStage() {
     log('[package-gate] skipped ' + skipped.name + ' (' + skipped.desk + '): ' + skipped.reason);
   }
   list = packageGate.eligible;
-  if (!only) {
+  // pipeline.68 Task 7: a grid-built fanout (quotas.grid) is already one seat per
+  // journalist on its day — never re-cap it by the old desk quotas (Monday carries
+  // three civic seats, Friday four culture seats). The cap stays for legacy files.
+  if (!only && !(fanout.quotas && Array.isArray(fanout.quotas.grid))) {
     const bounded = fanoutApi.boundDailyAssignments(list);
     if (bounded.dropped.length) {
       log('[fanout-cap] dropped ' + bounded.dropped.length + ' assignment(s) from oversized saved rota: ' +

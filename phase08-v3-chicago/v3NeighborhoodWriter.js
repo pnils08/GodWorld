@@ -405,6 +405,12 @@ function saveV3NeighborhoodMap_(ctx) {
       eventAttract = round2(Math.max(0, eventAttract + (cFold.EventAttractiveness || 0)));
       sent = round2(Math.max(0, sent + (cFold.Sentiment || 0))); // clamp ≥0: chaos hits harder than pulse
     }
+    // engine.165: the saved value is bounded like the Phase-2 value it started from ([-1, 1],
+    // applyCityDynamics clampSent). Profile mod + city nudge + variance + pulse + chaos are all
+    // additive after that clamp, so a holiday cycle (NewYear: +0.4 on the city term, which every
+    // cluster inherits) pushed four hoods past 1.0 at C105 and the momentum carry read the
+    // fall-back at C106 as decay. The holiday is the world; the unbounded save was the defect.
+    sent = round2(Math.max(-1, Math.min(1, sent)));
 
     var demoLabel = getDemographicMarkerV35_(name, baseDemoLabel, arcByNeighborhood, S, holiday, isFirstFriday, isCreationDay);
 

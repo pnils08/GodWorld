@@ -136,6 +136,13 @@
 - **Steps:** measure per-stage value on the last 14 days of sidecars (what the report stage adds that the angle stage lacked); propose collapsing to one wake per article where the beat slice already carries the citizens (Tasks 2–4 make the report stage's citizen-quote hunt largely redundant). Decision recorded here before cutting.
 - **Status:** [ ] not started
 
+### Task 7c: Canon = published only — builder-ruled S433, CUT
+
+- **Files:** `scripts/cron-saturday-run.js` `stepSweep` — modified S433
+- **Ruling (Mike, 2026-09-07):** published articles are canon; no paying to canonize copy that isn't used. The Saturday sweep (step 5) now upserts only `edition_curation_c{N}.selected` stems to Supermemory; missing curation fails loud. Steps 6 (Citizen_Media_Usage credits) and signals still read the full staged set — not ruled on; flag if a citizen quoted only in an unpublished article should earn no credit.
+- **Verify:** `node scripts/cron-saturday-run.js --step sweep --cycle 105` (dry) → scope = curated count, not staged count. Live proof: Saturday 09-13 16:00 run.
+- **Status:** [x] cut S433; live proof Saturday
+
 ### Task 8: Docs — same commit as Task 1
 
 - **Files:** `docs/media/charge_brief_template.md` (LOCKED #1 note: superseded for the cron path per §13, kept for CLI-era retrieval), `docs/index.md` (this plan registered), `docs/engine/ROLLOUT_PLAN.md` pipeline.68

@@ -265,9 +265,16 @@ function loadStagedSetExcludingCanonViolations(cycle) {
 }
 
 async function stepSweep(cycle) {
-  console.log('--- step 5: Supermemory sweep (per-article) ---');
-  const set = loadStagedSetExcludingCanonViolations(cycle);
-  if (!set.length) { console.log('no staged articles for c' + cycle); return { swept: 0 }; }
+  console.log('--- step 5: Supermemory sweep (per-article, PUBLISHED set only) ---');
+  // Builder ruling 2026-09-07 (S433): published articles are canon. Before this
+  // the sweep upserted EVERY staged article (35 over the last 14 days) while the
+  // edition carried ~9 — paying to canonize copy nobody reads. Scope = the
+  // curated/published stems; a missing curation file fails loud, never widens.
+  const curation = readJsonSafe(path.join(ROOT, 'output', 'edition_curation_c' + cycle + '.json'));
+  if (!curation || !Array.isArray(curation.selected)) throw new Error('no edition_curation_c' + cycle + '.json — run --step curate first (sweep is published-only)');
+  const published = new Set(curation.selected);
+  const set = loadStagedSetExcludingCanonViolations(cycle).filter(e => published.has(e.stem));
+  if (!set.length) { console.log('no published articles for c' + cycle); return { swept: 0 }; }
   if (!API_KEY && APPLY) throw new Error('SUPERMEMORY_CC_API_KEY missing');
   let swept = 0;
   for (const entry of set) {

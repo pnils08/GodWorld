@@ -346,7 +346,8 @@ function batchUpdateNeighborhoodDemographics_(ss, demographicsMap, cycle) {
  * @param {number} cycle - The current cycle
  * @return {Object} The seeded demographics map
  */
-function seedNeighborhoodDemographicsFromLedger_(ss, cycle) {
+function seedNeighborhoodDemographicsFromLedger_(ss, cycle, simYear) {
+  if (!(Number(simYear) > 0)) throw new Error('seedNeighborhoodDemographicsFromLedger_: simYear required (engine.164)');
   var ledger = ss.getSheetByName('Simulation_Ledger');
   if (!ledger) {
     Logger.log('seedNeighborhoodDemographicsFromLedger_: No Simulation_Ledger found');
@@ -368,8 +369,7 @@ function seedNeighborhoodDemographicsFromLedger_(ss, cycle) {
   var iOccupation = idx('Occupation');
   var iStatus = idx('Status');
 
-  // SimYear for age calculation (GodWorld uses 2041)
-  var simYear = 2041;
+  // engine.164: simYear is the caller's calendar year
 
   // Initialize demographics for all neighborhoods
   var demographics = {};

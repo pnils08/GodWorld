@@ -12,7 +12,8 @@ const logs = [];
 global.Logger = { log(m) { logs.push(String(m)); } };
 global.requireTab_ = (ss, name) => { const s = ss.getSheetByName(name); if (!s) throw new Error('engine.119: tab "' + name + '" is missing'); return s; };
 global.persistPopIdHighWater_ = require('../utilities/popIdAllocator').persistPopIdHighWater_;
-const src = fs.readFileSync(path.resolve(__dirname, '../utilities/archiveCitizenExits.js'), 'utf8');
+const src = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8') + '\n' + // engine.164: the mover reads simYearOf_
+  fs.readFileSync(path.resolve(__dirname, '../utilities/archiveCitizenExits.js'), 'utf8');
 const M = new Function('module', src + '\nreturn { archiveCitizenExits_, citizenArchiveCandidates_, citizenArchiveRow_, citizenArchiveHeaders_, CITIZEN_ARCHIVE_META_HEADERS };')(undefined);
 
 function makeSheet(header, rows, opts) {

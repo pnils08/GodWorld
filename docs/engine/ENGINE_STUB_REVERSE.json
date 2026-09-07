@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-06",
+  "generated": "2026-09-07",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1326,
+  "functionsMapped": 1327,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -518,10 +518,7 @@
       "readers": [
         "phase01-config/advanceSimulationCalendar.js::simYearFromCycle_",
         "phase01-config/advanceSimulationCalendar.js::simYearOf_",
-        "phase04-events/chaosCarsEngine.js::pickCitizenTarget_",
-        "phase05-citizens/bondEngine.js::bondCompatibility_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/runYouthEngine.js::generateSchoolWideEvents_",
         "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_",
         "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_"
@@ -3131,12 +3128,6 @@
       ]
     },
     "localEntities": {
-      "writers": [],
-      "readers": [
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
-      ]
-    },
-    "simulationYear": {
       "writers": [],
       "readers": [
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"

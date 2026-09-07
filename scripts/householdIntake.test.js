@@ -27,7 +27,7 @@ const sandbox = {
   nextPopIdLocked_: require('../utilities/popIdAllocator').nextPopIdLocked_, // engine.90: the real allocator
 };
 const src = R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('utilities/citizenDerivation.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
-const E = new Function(...Object.keys(sandbox), src + '\nreturn { queueHouseholdIntake_, processAdvancementRows_, formIntakeHouseholds_, wireFamilyMatch_, ensureHouseholdQueueSheet_, HOUSEHOLD_QUEUE_COLS_, normalizeCitizenName_, buildNameIndex_ };')(...Object.values(sandbox));
+const E = new Function(...Object.keys(sandbox), src + '\nreturn { queueHouseholdIntake_, processAdvancementRows_, formIntakeHouseholds_, wireFamilyMatch_, ensureHouseholdQueueSheet_, HOUSEHOLD_QUEUE_COLS_, normalizeCitizenName_, buildNameIndex_, simYearFromCycle_ };')(...Object.values(sandbox));
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) { if (cond) { pass++; console.log('  ok   ' + name); } else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); } }
@@ -104,7 +104,7 @@ console.log('\n1. the plan — grouping and boundaries:');
   check('four queue rows, head first', q.appended.length === 4 && q.appended[0][qc('First')] === 'Marcus' && q.appended[0][qc('MatchType')] === '' && q.appended[0][qc('MatchName')] === '');
   check('spouse then children, each naming the head', q.appended[1][qc('MatchType')] === 'spouse' && q.appended[1][qc('MatchName')] === 'Marcus Bell' && q.appended[2][qc('MatchType')] === 'child' && q.appended[3][qc('MatchType')] === 'child');
   check('Tier 4 / ENGINE / HouseholdKey / the head\'s hood on every row', q.appended.every(r => r[qc('Tier')] === 4 && r[qc('ClockMode')] === 'ENGINE' && r[qc('HouseholdKey')] === 'bell' && r[qc('Neighborhood')] === 'Temescal'));
-  check('children queue as student with BirthYear from Age', q.appended[2][qc('RoleType')] === 'student' && q.appended[2][qc('BirthYear')] === 2041 - 9 && q.appended[3][qc('BirthYear')] === 2041 - 5);
+  check('children queue as student with BirthYear from Age', q.appended[2][qc('RoleType')] === 'student' && q.appended[2][qc('BirthYear')] === E.simYearFromCycle_(CYCLE) - 9 && q.appended[3][qc('BirthYear')] === E.simYearFromCycle_(CYCLE) - 5);
   check('adults keep their intake role; gender inferred', q.appended[1][qc('RoleType')] === 'Nurse' && q.appended[1][qc('Gender')] === 'female' && q.appended[0][qc('Gender')] === 'male');
   check('statuses say queued, per member', plan.statusWrites.length === 4 && plan.statusWrites.every(s => /queued household "Bell" \(4 members/.test(s[1])));
 }

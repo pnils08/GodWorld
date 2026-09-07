@@ -80,8 +80,10 @@ function mulberry32(seed) {
 let rngImpl = mulberry32(2026);
 global.safeRand_ = () => rngImpl;
 
+// engine.164: only the calendar's two sim-year functions ride into this sandbox (the whole file would shadow the stubs above)
+const simYearSrc_ = () => { const s = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8'); return s.match(/function simYearFromCycle_[\s\S]*?\n}\n/)[0] + s.match(/function simYearOf_[\s\S]*?\n}\n/)[0]; };
 const loadEngine = (rel, fnName) => {
-  const src = fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
+  const src = simYearSrc_() + fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
   return new Function(src + '\nreturn ' + fnName + ';')();
 };
 const runHouseholdEngine_ = loadEngine('../phase05-citizens/runHouseholdEngine.js', 'runHouseholdEngine_');

@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-06 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-07 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -637,7 +637,6 @@
 - **impactsForScope_(vehicle, scope, outcomeName)**
 
 - **pickCitizenTarget_(rng, ctx)**
-  Reads: S.simYear
 
 - **loadBusinessRows_(ctx)**
   Sheets: Business_Ledger
@@ -933,7 +932,6 @@
 - **bondJobFamily_(role)**
 
 - **bondCompatibility_(dataA, dataB, ctx)**
-  Reads: S.simYear
 
 - **bondSpouseQuality_(dataA, dataB, ctx)**
 
@@ -1212,6 +1210,8 @@
 - **waveSexPreference_(ctx)**
 
 ### citizenContextBuilder.js
+- **ccbSimYear_(ss)**
+
 - **deriveLifeState_(f)**
 
 - **eventClassFromTags_(tags)**
@@ -1456,7 +1456,7 @@
 - **applyGriefPoolWeights_(pool, griefConfig)**
 
 - **generateCitizensEvents_(ctx)**
-  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.simYear, S.simulationYear, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
+  Reads: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.cityDynamics, S.contentLedger, S.crimeByNeighborhood, S.crimeMetrics, S.cycle, S.cycleActiveCitizens, S.cycleId, S.economicMood, S.eventsGenerated, S.faithEvents, S.faithExposures, S.holiday, S.holidayPriority, S.initiativeEvents, S.isCreationDay, S.isFirstFriday, S.localEntities, S.neighborhoodState, S.neighborhoodWeather, S.previousEvening, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsSentimentBoost, S.storyHooks, S.templateCooldowns, S.transitState, S.undockedFeedEntries, S.undockedPilots, S.weather, S.worldEvents
   Writes: S.biasIntents, S.citizenEventMemory, S.citizenEvents, S.crimeMetrics, S.cycleActiveCitizens, S.eventsGenerated, S.faithExposures, S.householdMoments, S.minorsSkippedTexture, S.storyHooks, S.templateCooldowns
   Config: ctx.config.cycleCount, ctx.config.eclExclusiveMinLines, ctx.config.eclExclusivePools, ctx.config.gcSurfaceChance, ctx.config.hoodFloorSurfaceQuota, ctx.config.rngSeed
   Sheets: Content_Telemetry, Generic_Citizens, LifeHistory_Log
@@ -1846,7 +1846,7 @@
 - **buildMintBizPool_(ss)**
   Sheets: Business_Ledger
 
-- **checkEmergencePromotions_(ss, cycle, maxQueue)**
+- **checkEmergencePromotions_(ss, cycle, maxQueue, simYear)**
   Sheets: Generic_Citizens
 
 - **checkFamilyMatchPromotions_(ctx, cycle, slots)**
@@ -2097,7 +2097,7 @@
 
 - **isCivicAdjacentText_(text)**
 
-- **scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPopId, occupiedPopIds)**
+- **scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPopId, occupiedPopIds, simYear)**
 
 - **mintChallengerOnLedger_(ctx, spec)**
 
@@ -3071,11 +3071,11 @@
 
 - **citizenArchiveSourceEventId_(reason, cycle, popId)**
 
-- **citizenExitDefects_(header, row)**
+- **citizenExitDefects_(header, row, simYear)**
 
-- **citizenArchiveNote_(header, row)**
+- **citizenArchiveNote_(header, row, simYear)**
 
-- **citizenArchiveRow_(slHeader, slRow, reason, cycle)**
+- **citizenArchiveRow_(slHeader, slRow, reason, cycle, simYear)**
 
 - **citizenArchiveCandidates_(header, body)**
 
@@ -3484,7 +3484,7 @@
 
 - **batchUpdateNeighborhoodDemographics_(ss, demographicsMap, cycle)**
 
-- **seedNeighborhoodDemographicsFromLedger_(ss, cycle)**
+- **seedNeighborhoodDemographicsFromLedger_(ss, cycle, simYear)**
   Sheets: Simulation_Ledger
 
 - **calculateDemographicShifts_(previous, current)**
@@ -3867,4 +3867,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1326
+**Functions mapped:** 1327

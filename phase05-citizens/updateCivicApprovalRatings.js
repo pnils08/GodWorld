@@ -992,7 +992,7 @@ function isCivicAdjacentText_(text) {
  * Composure < 40 (can't sit a chamber). Missing DialState is not a reject —
  * score on tags/hood only. Empty seat is worse than a quieter local.
  */
-function scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPopId, occupiedPopIds) {
+function scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPopId, occupiedPopIds, simYear) {
   var col = function(name) { return headers.indexOf(name); };
   var iPop = col('POPID');
   if (iPop < 0) return null;
@@ -1013,7 +1013,7 @@ function scoreLedgerCitizenForOffice_(row, headers, district, hoods, incumbentPo
   if (iBy >= 0 && row[iBy] !== '' && row[iBy] != null) {
     var by = Number(row[iBy]);
     if (isFinite(by)) {
-      var age = 2041 - by;
+      var age = simYear - by; // engine.164: the caller passes the calendar's year
       if (age < 25 || age > 70) return null;
     }
   }
@@ -1141,7 +1141,7 @@ function pickGenericCitizenChallenger_(ctx, district, specBase) {
     var occ = iOcc >= 0 ? String(row[iOcc] || '') : '';
     var hood = iHood >= 0 ? String(row[iHood] || '') : '';
     if (iBy >= 0 && row[iBy] !== '' && row[iBy] != null) {
-      var age = 2041 - Number(row[iBy]);
+      var age = simYearOf_(ctx) - Number(row[iBy]); // engine.164
       if (isFinite(age) && (age < 25 || age > 70)) continue;
     }
     var local = !hoods.length;
@@ -1219,7 +1219,7 @@ function mintOutOfTownChallenger_(ctx, district, officeId, cycle) {
   var setG = function(name, val) { var gi = idxG(name); if (gi >= 0) gcNew[gi] = val; };
   setG('First', first);
   setG('Last', last);
-  setG('Age', 2041 - birthYear);
+  setG('Age', simYearOf_(ctx, cycle) - birthYear); // engine.164
   setG('BirthYear', birthYear);
   setG('Neighborhood', hood);
   setG('Occupation', 'Community organizer'); // civic-adjacent: the feeder's top score, and a job, not a placeholder
@@ -1245,10 +1245,11 @@ function pickCampaignChallenger_(ctx, district, incumbentPopId, occupiedPopIds, 
   if (!ctx || !ctx.ledger || !ctx.ledger.headers || !ctx.ledger.rows) return null;
   var headers = ctx.ledger.headers;
   var districtHoods = getDistrictHoods_(ctx, district);
+  var scoreYear = simYearOf_(ctx); // engine.164
   var best = null;
   for (var r = 0; r < ctx.ledger.rows.length; r++) {
     var scored = scoreLedgerCitizenForOffice_(
-      ctx.ledger.rows[r], headers, district, districtHoods, incumbentPopId, occupiedPopIds
+      ctx.ledger.rows[r], headers, district, districtHoods, incumbentPopId, occupiedPopIds, scoreYear
     );
     if (!scored) continue;
     if (!best || scored.score > best.score ||

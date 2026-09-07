@@ -1381,7 +1381,7 @@ function processIntake_(ctx) {
         }
       }
       if (age > 0 && idxL('BirthYear') >= 0) {
-        var by = 2041 - age; // Age = 2041 − BirthYear anchor convention
+        var by = simYearOf_(ctx) - age; // engine.164: the calendar's year, never a literal
         if (Number(lRow[idxL('BirthYear')]) !== by) {
           edits.push('BirthYear: ' + lRow[idxL('BirthYear')] + ' -> ' + by);
           lRow[idxL('BirthYear')] = by;
@@ -1432,7 +1432,8 @@ function processIntake_(ctx) {
     // engine.58 (S320): unknown name → Generic_Citizens row, NOT an SL mint.
     // Profile draw survives for Occupation; income/education are derived at
     // promotion time by processAdvancementRows_.
-    var birthYear = age > 0 ? (2041 - age) : (2041 - (22 + Math.floor(rng() * 44))); // adult band 22-65
+    var intakeYear = simYearOf_(ctx); // engine.164
+    var birthYear = age > 0 ? (intakeYear - age) : (intakeYear - (22 + Math.floor(rng() * 44))); // adult band 22-65
     // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
     if (!nbhd) {
       var intakeHoods = getCoreSimNeighborhoods_(ctx);
@@ -1443,7 +1444,7 @@ function processIntake_(ctx) {
     var setG = function(name, val) { var gi2 = idxG(name); if (gi2 >= 0) gcNew[gi2] = val; };
     setG('First', first);
     setG('Last', last);
-    setG('Age', age > 0 ? age : (2041 - birthYear));
+    setG('Age', age > 0 ? age : (intakeYear - birthYear));
     setG('BirthYear', birthYear);
     setG('Neighborhood', nbhd);
     setG('Occupation', draw.role);

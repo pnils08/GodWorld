@@ -29,7 +29,9 @@ global.activeGriefFromRegisters_ = C.activeGriefFromRegisters_;
 global.getCitizenDialBands_ = () => null;
 global.hoodTexturePool_ = (ctx, hood, byLabel, bespoke) => (bespoke && bespoke[hood] ? bespoke[hood].slice() : []); // engine.148 P3: hood texture stubbed to the bespoke lines
 
-const genSrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
+// engine.164: only the calendar's two sim-year functions ride into this sandbox (the whole file would shadow the stubs above)
+const simYearSrc_ = () => { const s = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8'); return s.match(/function simYearFromCycle_[\s\S]*?\n}\n/)[0] + s.match(/function simYearOf_[\s\S]*?\n}\n/)[0]; };
+const genSrc = simYearSrc_() + fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
 const GEN = new Function(genSrc + '\nreturn { generateCitizensEvents_: generateCitizensEvents_, applyGriefPoolWeights_: applyGriefPoolWeights_ };')();
 const generationSrc = fs.readFileSync(path.resolve(__dirname, '../phase04-events/generationalEventsEngine.js'), 'utf8');
 const triggerDeathCascade_ = new Function(generationSrc + '\nreturn triggerDeathCascade_;')();

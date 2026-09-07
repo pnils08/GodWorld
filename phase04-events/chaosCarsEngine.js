@@ -174,7 +174,7 @@ function pickCitizenTarget_(rng, ctx) {
     var iBY8 = header.indexOf('BirthYear'), iRT8 = header.indexOf('RoleType');
     tgtLifeState = deriveLifeState_({
       birthYear: iBY8 >= 0 ? row[iBY8] : 0,
-      simYear: (ctx.summary && ctx.summary.simYear) || 2041,
+      simYear: simYearOf_(ctx), // engine.164
       status: iStatus >= 0 ? row[iStatus] : '',
       occupation: iRT8 >= 0 ? row[iRT8] : '',
       roleType: iRT8 >= 0 ? row[iRT8] : ''

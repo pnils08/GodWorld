@@ -378,8 +378,8 @@ function generateCitizensEvents_(ctx) {
   var isCreationDay = !!S.isCreationDay;
   var sportsSeason = S.sportsSeason || "off-season";
 
-  // v2.5: Sim year for age grouping (defaults to 2041 if not provided)
-  var simYear = Number(S.simYear || S.simulationYear || 2041);
+  // v2.5: Sim year for age grouping — the calendar's (engine.164)
+  var simYear = simYearOf_(ctx);
 
   // =========================================================================
   // v2.6: CRIME METRICS CONTEXT (from updateCrimeMetrics v1.2)

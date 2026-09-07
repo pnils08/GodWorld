@@ -231,7 +231,7 @@ function runNeighborhoodEngine_(ctx) {
     }
 
     // Determine citizen type based on age
-    var simYear = 2041;
+    var simYear = simYearOf_(ctx); // engine.164
     var citizenType = 'young_professional';
 
     if (iBirthYear >= 0 && row[iBirthYear]) {

@@ -818,7 +818,7 @@ function reconcileHouseholds_(ctx, cycle) {
 function formNewHouseholds_(ctx, citizens, existingHouseholds, cycle, rng) {
   var ss = ctx.ss;
   var newHouseholds = [];
-  var currentYear = 2041;  // Simulation year — aligned with roster intake
+  var currentYear = simYearOf_(ctx, cycle); // engine.164 (no live caller — kept honest)
 
   // Find young adults without households
   var eligibleSingles = [];

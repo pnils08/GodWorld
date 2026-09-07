@@ -508,7 +508,7 @@ function generateGenericCitizens_(ctx) {
     }
 
     // v2.5: Apply demographic weighting based on citizen age
-    var simYear = 2041;
+    var simYear = simYearOf_(ctx); // engine.164
     var age = simYear - (birthYear || 2010);
     var citizenType = 'young_professional';
     if (age >= 5 && age <= 22) {
@@ -597,7 +597,7 @@ function generateGenericCitizens_(ctx) {
   var citizenTypeCounts = {};
 
   function getCitizenType(birthYear) {
-    var simYear = 2041;
+    var simYear = simYearOf_(ctx); // engine.164
     var age = simYear - (birthYear || 2010);
     if (age >= 5 && age <= 22) return 'student';
     if (age >= 65) return 'senior';

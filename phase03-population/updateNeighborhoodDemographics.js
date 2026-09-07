@@ -52,7 +52,7 @@ function updateNeighborhoodDemographics_(ctx) {
 
   if (needsSeed) {
     Logger.log('updateNeighborhoodDemographics_: No demographics found, seeding from ledger');
-    demographics = seedNeighborhoodDemographicsFromLedger_(ss, cycle);
+    demographics = seedNeighborhoodDemographicsFromLedger_(ss, cycle, simYearOf_(ctx, cycle)); // engine.164
   }
 
   // Store previous demographics for shift calculation

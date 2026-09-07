@@ -47,7 +47,9 @@ function mulberry32(seed) {
 }
 
 const src = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
-const generateCitizensEvents_ = new Function(src + '\nreturn generateCitizensEvents_;')();
+// engine.164: only the calendar's two sim-year functions ride into this sandbox (the whole file would shadow the stubs above)
+const simYearSrc_ = () => { const s = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8'); return s.match(/function simYearFromCycle_[\s\S]*?\n}\n/)[0] + s.match(/function simYearOf_[\s\S]*?\n}\n/)[0]; };
+const generateCitizensEvents_ = new Function(simYearSrc_() + src + '\nreturn generateCitizensEvents_;')();
 
 let passed = 0, failed = 0;
 function assert(label, cond, detail) {

@@ -894,7 +894,7 @@ function bondCompatibility_(dataA, dataB, ctx) {
     if (ageGap <= 10) score += 2;
     else if (ageGap <= 20) score += 1;
     // same life-stage: both working-age or both senior (coarse, sim-anchor read)
-    var simY = (ctx && ctx.summary && ctx.summary.simYear) || 2041;
+    var simY = simYearOf_(ctx); // engine.164
     var aA = simY - byA, aB = simY - byB;
     if ((aA >= 23 && aA <= 64 && aB >= 23 && aB <= 64) || (aA >= 65 && aB >= 65)) score += 1;
   } else {

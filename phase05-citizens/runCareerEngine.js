@@ -864,7 +864,7 @@ function runCareerEngine_(ctx) {
     // the retired are done (impossible-bar ruling, both hard gates).
     if (iBirthYear >= 0) {
       var cby = Number(row[iBirthYear]) || 0;
-      if (cby > 1900 && cby < 2100 && (2041 - cby) < 18) continue;
+      if (cby > 1900 && cby < 2100 && (simYearOf_(ctx) - cby) < 18) continue; // engine.164
     }
     if (iCareerStage >= 0 && String(row[iCareerStage] || "").trim().toLowerCase() === "retired") continue;
 

@@ -71,7 +71,7 @@ async function main() {
     const age = by ? AGE_ANCHOR - by : null;
     const sq = g('SchoolQuality');
     const cs = g('CareerStage');
-    const defects = citizenExitDefects_(header, r); // one rule — the same classifier the mover stamps into ArchiveNote
+    const defects = citizenExitDefects_(header, r, AGE_ANCHOR); // one rule — the same classifier the mover stamps into ArchiveNote
     const ptr = (n) => idsOf(g(n)).map((p) => ({ popId: p, state: stateOf(p) }));
     return {
       popId, name: (g('First') + ' ' + g('Last')).trim(), status: g('Status'), clockMode: g('ClockMode'), tier: g('Tier'), roleType: g('RoleType'),

@@ -22,7 +22,8 @@ const CANON_HOODS = {
   district: { Fruitvale: 'D3', 'San Antonio': 'D3', Downtown: 'D2' },
   byDistrict: { D3: ['Fruitvale', 'San Antonio'], D2: ['Downtown'] }
 };
-const A = new Function(loaderSource + approvalSource + '\nreturn {' +
+const calendarSource = fs.readFileSync(path.resolve(__dirname, '../phase01-config/advanceSimulationCalendar.js'), 'utf8'); // engine.164: simYearOf_
+const A = new Function(calendarSource + loaderSource + approvalSource + '\nreturn {' +
   'getApprovalCeilingConfig_: getApprovalCeilingConfig_,' +
   'resolveApprovalCeilingLifecycle_: resolveApprovalCeilingLifecycle_,' +
   'applyApprovalCeilingRisk_: applyApprovalCeilingRisk_,' +
@@ -351,9 +352,9 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   const fit = ['POP-00910', 'Fit', 'Local', 'Fit Local', 3, 'Fruitvale', 'n', 'active', '', dialsOk, 1988, 'community organizer'];
   const lazy = ['POP-00911', 'Lazy', 'Local', 'Lazy Local', 3, 'Fruitvale', 'n', 'active', '', dialsLowDrive, 1988, 'community organizer'];
   check('H7 low-Drive citizen is not built to run',
-    A.scoreLedgerCitizenForOffice_(lazy, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {}) === null);
+    A.scoreLedgerCitizenForOffice_(lazy, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {}, 2042) === null);
   check('H8 high-Drive principled local scores',
-    !!(A.scoreLedgerCitizenForOffice_(fit, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {})));
+    !!(A.scoreLedgerCitizenForOffice_(fit, scoreHeaders, 'D3', CANON_HOODS.byDistrict.D3, 'POP-00034', {}, 2042)));
 
   // civic.31 (builder 2026-09-04): "the path in is always Generic_Citizens —
   // you emerge from there." An empty qualified pool no longer mints an

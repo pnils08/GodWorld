@@ -104,10 +104,12 @@ function citizenArchiveSourceEventId_(reason, cycle, popId) {
  * engine.90 Commit 8 — the measured defect classes on ONE ledger row, derived from
  * that row's own cells (docs/plans/2026-08-17-ledger-trueup-sweep.md §Batch shape).
  * Pure; shared by the mover (ArchiveNote at exit) and the dry-run inventory so
- * there is one rule. Age anchor 2041 (project convention).
+ * there is one rule. `simYear` is the calendar year the caller is in (engine.164:
+ * the mover passes simYearOf_(ctx); the Node inventory passes its own anchor).
  */
 var CITIZEN_EXIT_CAREER_STAGE_ENUM = { student: 1, 'entry-level': 1, 'mid-career': 1, senior: 1, retired: 1 };
-function citizenExitDefects_(header, row) {
+function citizenExitDefects_(header, row, simYear) {
+  if (!(Number(simYear) > 0)) throw new Error('citizenExitDefects_: simYear required (engine.164)');
   var g = function(n) { var i = header.indexOf(n); return i < 0 ? '' : String(row[i] == null ? '' : row[i]).trim(); };
   var d = [];
   var sq = g('SchoolQuality'), cs = g('CareerStage');
@@ -117,26 +119,26 @@ function citizenExitDefects_(header, row) {
   if (g('NetWorth') === '') d.push('netWorthBlank');
   if (g('RoleType') && !g('EmployerBizId')) d.push('employerBlankWithRole');
   if (g('MigrationIntent')) d.push('migrationIntentSet');
-  var by = Number(g('BirthYear')) || 0, age = by ? 2041 - by : null;
+  var by = Number(g('BirthYear')) || 0, age = by ? Number(simYear) - by : null;
   if (age === null || age < 0 || age > 110) d.push('birthYearOOB');
   if (g('Income') === '') d.push('incomeBlank');
   return d;
 }
 
 /** The ArchiveNote text for an exit — the defect classes the row carried out, or blank. */
-function citizenArchiveNote_(header, row) {
-  var d = citizenExitDefects_(header, row);
+function citizenArchiveNote_(header, row, simYear) {
+  var d = citizenExitDefects_(header, row, simYear);
   return d.length ? 'defects-at-exit: ' + d.join(',') : '';
 }
 
-function citizenArchiveRow_(slHeader, slRow, reason, cycle) {
+function citizenArchiveRow_(slHeader, slRow, reason, cycle, simYear) {
   var out = [];
   for (var c = 0; c < slHeader.length; c++) out.push(c < slRow.length ? slRow[c] : '');
   var iStatus = slHeader.indexOf('Status');
   var popId = String(slRow[slHeader.indexOf('POPID')] || '').trim();
   out.push(reason, cycle, citizenArchiveSourceEventId_(reason, cycle, popId),
     iStatus >= 0 ? slRow[iStatus] : '', CITIZEN_ARCHIVE_RETURN_ELIGIBLE[reason] ? 'TRUE' : 'FALSE',
-    slHeader.length, citizenArchiveNote_(slHeader, slRow)); // engine.90 Commit 8: the row leaves with its measured defects named, never repaired at exit
+    slHeader.length, citizenArchiveNote_(slHeader, slRow, simYear)); // engine.90 Commit 8: the row leaves with its measured defects named, never repaired at exit
   return out;
 }
 
@@ -208,7 +210,8 @@ function archiveCitizenExits_(ctx) {
 
   // 1. copy — one block append
   var block = [];
-  for (var b = 0; b < moves.length; b++) block.push(citizenArchiveRow_(header, body[moves[b].q], moves[b].reason, cycle));
+  var exitYear = simYearOf_(ctx, cycle); // engine.164
+  for (var b = 0; b < moves.length; b++) block.push(citizenArchiveRow_(header, body[moves[b].q], moves[b].reason, cycle, exitYear));
   var start = ar.getLastRow() + 1;
   ar.getRange(start, 1, block.length, want.length).setValues(block);
 

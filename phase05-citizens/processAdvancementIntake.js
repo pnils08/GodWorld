@@ -154,7 +154,7 @@ function processAdvancementIntake_(ctx) {
   // processAdvancementRows_ immediately below (same cycle). Single checkpoint
   // catches every count source: media usage (above), intake re-mentions
   // (Phase 1), event surfacing (generateCitizensEvents).
-  var emergenceResults = checkEmergencePromotions_(ss, cycle, DRIP_CAP_PER_CYCLE);
+  var emergenceResults = checkEmergencePromotions_(ss, cycle, DRIP_CAP_PER_CYCLE, simYearOf_(ctx, cycle));
   results.emergencePromotionsQueued = emergenceResults.queued;
 
   // engine.66 (S324): family-match drip door — rolls only for the cap slots
@@ -1430,7 +1430,8 @@ function buildMintBizPool_(ss) {
   }
 }
 
-function checkEmergencePromotions_(ss, cycle, maxQueue) {
+function checkEmergencePromotions_(ss, cycle, maxQueue, simYear) {
+  if (!(Number(simYear) > 0)) throw new Error('checkEmergencePromotions_: simYear required (engine.164)');
   var results = { queued: 0 };
   // engine.66: shared drip cap — deferred citizens stay Active at threshold
   // and re-queue next cycle (the self-healing property below already covers
@@ -1474,7 +1475,7 @@ function checkEmergencePromotions_(ss, cycle, maxQueue) {
     var last = String(data[r][gL] || '').trim();
     if (!first || !last) continue;
     var birthYear = gB >= 0 ? (Number(data[r][gB]) || 0) : 0;
-    if (!birthYear && gA >= 0 && Number(data[r][gA]) > 0) birthYear = 2041 - Number(data[r][gA]);
+    if (!birthYear && gA >= 0 && Number(data[r][gA]) > 0) birthYear = simYear - Number(data[r][gA]); // engine.164
 
     var out = new Array(advHeaders.length).fill('');
     if (aF >= 0) out[aF] = first;
@@ -1655,7 +1656,7 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
     var gRow = gData[candidates[pickIdx]];
     var candSex = gX >= 0 ? String(gRow[gX] || '').trim().toLowerCase() : '';
     var candBY = gB >= 0 ? (Number(gRow[gB]) || 0) : 0;
-    if (!candBY && gA >= 0 && Number(gRow[gA]) > 0) candBY = 2041 - Number(gRow[gA]);
+    if (!candBY && gA >= 0 && Number(gRow[gA]) > 0) candBY = simYearOf_(ctx, cycle) - Number(gRow[gA]); // engine.164
     var candHood0 = gN >= 0 ? String(gRow[gN] || '').trim() : '';
 
     // Reel 2: the family slot (heritage-tier weighted draw)
@@ -1842,7 +1843,7 @@ function queueHouseholdIntake_(ctx, intakeSheet, intakeVals, intakeHeader, nameI
       var vals = {
         First: mm.first, Middle: '', Last: mm.last, RoleType: role, Tier: 4, ClockMode: 'ENGINE',
         Notes: 'Household intake C' + cycle + ' — "' + grp.label + '"' + (mm.notes ? ': ' + mm.notes : '') + ' (engine.109: the family is the reason)',
-        BirthYear: 2041 - age, Neighborhood: hood,
+        BirthYear: simYearOf_(ctx, cycle) - age, Neighborhood: hood, // engine.164
         MatchType: mm.rel === 'head' ? '' : mm.rel,
         MatchName: mm.rel === 'head' ? '' : headName,
         HouseholdKey: order[g],

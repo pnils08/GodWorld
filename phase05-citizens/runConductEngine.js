@@ -75,7 +75,7 @@ function runConductEngine_(ctx) {
   var S = ctx.summary;
   var econMood = S.economicMood || 50;
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
-  var simYear = 2041;
+  var simYear = simYearOf_(ctx, cycle); // engine.164
 
   var cRng = safeRand_(ctx);
   var count = 0;

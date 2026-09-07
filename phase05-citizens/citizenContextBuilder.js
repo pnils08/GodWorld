@@ -36,7 +36,8 @@
  * ============================================================================
  */
 
-var SIM_YEAR = 2041;
+// engine.164: no module-level sim year — manual-path readers derive it from World_Config.cycleCount; cycle-path callers pass it in.
+function ccbSimYear_(ss) { return simYearFromCycle_(getCurrentCycleFromConfig_(ss)); }
 
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -58,7 +59,8 @@ var SIM_YEAR = 2041;
  */
 function deriveLifeState_(f) {
   f = f || {};
-  var simYear = Number(f.simYear) || SIM_YEAR;
+  var simYear = Number(f.simYear);
+  if (!(simYear > 0)) throw new Error('deriveLifeState_: simYear required (engine.164 — callers pass simYearOf_(ctx))');
   var by = Number(f.birthYear) || 0;
   var age = (by > 1900 && by < 2100) ? (simYear - by) : null; // unknown age -> adult defaults
   var band;
@@ -371,12 +373,12 @@ function findInSimulationLedger_(ss, identifier) {
           fullNameLower.indexOf(identifierLower) >= 0 ||
           identifierLower.indexOf(fullNameLower) >= 0) {
         
-        // v1.1 FIX: Calculate age from birth year using SimYear 2041
+        // engine.164: age from the calendar's year (was the 2041 literal; the < 2030 ceiling hid every child born after it)
         var age = null;
         if (birthYearCol >= 0 && row[birthYearCol]) {
           var birthYear = Number(row[birthYearCol]);
-          if (birthYear > 1900 && birthYear < 2030) {
-            age = SIM_YEAR - birthYear;
+          if (birthYear > 1900 && birthYear < 2100) {
+            age = ccbSimYear_(ss) - birthYear;
           }
         }
         
@@ -446,8 +448,8 @@ function findInGenericCitizens_(ss, identifier) {
         var age = null;
         if (birthYearCol >= 0 && row[birthYearCol]) {
           var birthYear = Number(row[birthYearCol]);
-          if (birthYear > 1900 && birthYear < 2030) {
-            age = SIM_YEAR - birthYear;
+          if (birthYear > 1900 && birthYear < 2100) {
+            age = ccbSimYear_(ss) - birthYear; // engine.164
           }
         } else if (ageCol >= 0 && row[ageCol]) {
           age = Number(row[ageCol]) || null;

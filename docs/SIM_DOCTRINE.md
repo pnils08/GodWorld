@@ -116,6 +116,10 @@ Mechanism: the civic number gate runs on tracker fact fields only
 (`statementNumberCheck` / `ungroundedNumbers`, `scripts/cron-civic-run.js`,
 civic.35). Any gate that rejects invented color is scope creep.
 
+## 14. Income comes from the job. The hood follows income, never the reverse. (S436, Mike-direct)
+
+A neighborhood has nothing to do with what a person earns. Their job pays them — the economic catalog's band for that role, at their stage — and what they earn decides where they can afford to live. Any mechanic that prices a citizen off the businesses around them has it backwards. (Supersedes the S398/S399 "pay = own hood's businesses" concept in the employment-cascade plan, which was recorded as builder direction and was not.)
+
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make
 a row drive a fate the builder didn't choose — or does it just tidy data?**

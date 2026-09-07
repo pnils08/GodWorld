@@ -9,12 +9,12 @@
       "basis": "output/cron-civic/eval/*_c101_scorecard.json (4 friction seats x 5 models, gemini-3.5-flash judge)",
       "judgeNote": "The c101 scorecards above were produced by a gemini-3.5-flash judge. The default judge moved to gemini-3.7-flash on 2026-08-20 (infrastructure.7, cost). Scores produced under the new judge are NOT directly comparable to these — re-baseline the friction seats before reading a new scorecard against this assignment.",
       "frictionSeats": {
-        "MAYOR-01": "mistralai/mistral-large (voice 10)",
-        "OPP": "qwen/qwen3-235b-a22b (voice 10)",
-        "CRC": "deepseek/deepseek-chat (voice 7.5)",
-        "IND": "moonshotai/kimi-k2 (voice 9)"
+        "MAYOR-01": "moonshotai/kimi-k2 (S432 2026-09-06, builder-approved: mistral-large scored voice 10 at S343 but 13 provider errors + 6 grounding failures in the retained logs, halted the chain twice on 2026-09-06; kimi voice 9, 0 grounding, 0 provider errors)",
+        "OPP": "deepseek/deepseek-chat (civic.34 S431: qwen's grounding rate ~10x deepseek's)",
+        "CRC": "google/gemini-3.7-flash (S432: distinct family from OPP — builder rule 2026-09-06: different parties never share a model; already this chain's directive + sanity-read model)",
+        "IND": "meta-llama/llama-3.3-70b-instruct (S432: distinct family from the mayor; the newsroom's desk-writer model, proven for voice at volume)"
       },
-      "note": "4 distinct families across the friction seats. kimi->IND over CRC (9+7.5=16.5 beats 9.5+5=14.5 total). STAFF/projects/clerk -> deepseek (cheapest passing, matches all-desks-DeepSeek precedent S332). z-ai/glm-4.7 DROPPED: returned empty content on 3 of 4 offices."
+      "note": "S432 re-seat (builder rule 2026-09-06: different parties never share a model — same model = same voice; with a limited proven roster we work with what we've got): mayor=kimi, OPP=deepseek, CRC=gemini-3.7-flash, IND=llama-3.3-70b — 4 distinct families, all already paid for elsewhere in the pipeline. mistral (mayor) and qwen (OPP) retired for reliability/grounding, see civic.34 + the C106 gap log. First unattended Sunday chain is the proof for the two families new to the number gate (gemini, llama). Original S343 note: 4 distinct families across the friction seats. kimi->IND over CRC (9+7.5=16.5 beats 9.5+5=14.5 total). STAFF/projects/clerk -> deepseek (cheapest passing, matches all-desks-DeepSeek precedent S332). z-ai/glm-4.7 DROPPED: returned empty content on 3 of 4 offices."
     }
   },
   "offices": [
@@ -34,7 +34,7 @@
         "output/civic_sentiment_c{XX}.json"
       ],
       "dutyDays": "sun-thu",
-      "model": "mistralai/mistral-large"
+      "model": "moonshotai/kimi-k2"
     },
     {
       "officeId": "DA-01",
@@ -101,7 +101,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "moonshotai/kimi-k2"
+      "model": "meta-llama/llama-3.3-70b-instruct"
     },
     {
       "officeId": "COUNCIL-D3",
@@ -135,7 +135,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "moonshotai/kimi-k2"
+      "model": "meta-llama/llama-3.3-70b-instruct"
     },
     {
       "officeId": "COUNCIL-D5",
@@ -169,7 +169,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "google/gemini-3.7-flash"
     },
     {
       "officeId": "COUNCIL-D7",
@@ -186,7 +186,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "google/gemini-3.7-flash"
     },
     {
       "officeId": "COUNCIL-D8",
@@ -203,7 +203,7 @@
         "Initiative_Tracker AffectedNeighborhoods"
       ],
       "dutyDays": "sun-thu",
-      "model": "deepseek/deepseek-chat"
+      "model": "google/gemini-3.7-flash"
     },
     {
       "officeId": "COUNCIL-D9",

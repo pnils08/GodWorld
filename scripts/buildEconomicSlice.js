@@ -1,26 +1,31 @@
 #!/usr/bin/env node
 /**
- * buildEconomicSlice.js — Grok-owned economic / storefront heat slice (pipeline.52 Task 2)
+ * buildEconomicSlice.js — business / food beat slice built from the beat-tab dump
+ * (pipeline.68 Task 2; supersedes the pipeline.52 world_summary parser build).
  *
- * Shared substrate for business desk wakes:
- *   neighborhood rising/cooling + retail vitality + named storefronts when on disk
+ * The slice is ONE neighborhood's businesses from Business_Ledger joined to the
+ * people on Employment_Roster who work there, plus the engine's own business
+ * seeds for the cycle (Story_Seed_Deck). No engine summary, no crisis lane.
  *
- * Hard rule: never invent Employee_Count, Key_Personnel, or businesses not in sources.
- * Named businesses come from Business_Ledger snapshot (if present) and/or Evening Texture venues.
+ * Ruling (docs/SIM_DOCTRINE.md §13 — gate the facts, not the color): the facts
+ * are the names, places, roles and numbers on this slice. Everything else about
+ * the beat is the reporter's to paint.
  *
- * Sources (disk-first, no Sheets required):
- *   output/world_summary_c{N}.md  — Neighborhood snapshot, What Moved, Engine Review
- *   output/desk_signal_c{N}.json  — lanes.business
- *   output/world_summary ## Evening Texture — restaurants/nightlife as named venues
- *   output/engine83_business_ledger.txt (or business_ledger*.txt) — optional BIZ snapshot
+ * Sources (disk-first; the dump is written by scripts/dumpBeatTabs.js at cycle time):
+ *   output/beats/meta.json                — must carry the requested cycle
+ *   output/beats/Business_Ledger.jsonl    — BIZ_ID, Name, Sector, Neighborhood, Employee_Count, ...
+ *   output/beats/Employment_Roster.jsonl  — BIZ_ID, POP_ID, CitizenName, RoleType, Status
+ *   output/beats/Story_Seed_Deck.jsonl    — cumulative; filtered to Cycle === current, Desk business
+ *   output/desk_signal_c{N}.json          — optional; lanes.business as pointers only
+ *
+ * A missing or stale dump throws. There is no fallback to the old signal-only slice.
  *
  * Artifacts:
- *   output/slices/c{N}/economic.md
- *   output/cron-compare/economic_slice_c{N}.json
+ *   business variant: output/slices/c{N}/economic.md · output/cron-compare/economic_slice_c{N}.json
+ *   food variant:     output/slices/c{N}/economic-food.md · output/cron-compare/economic_food_slice_c{N}.json
  *
  * Usage:
- *   node scripts/buildEconomicSlice.js --cycle 102
- *   node scripts/buildEconomicSlice.js --cycle 102 --json
+ *   node scripts/buildEconomicSlice.js --cycle 106 [--food] [--json]
  */
 
 'use strict';
@@ -29,13 +34,45 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
+const VERSION = 'ECONOMIC-SLICE-2';
+
+const FACTS_TAIL =
+  'Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent ' +
+  'people or places. Everything else about this beat — what it looks like, who is there, what they ' +
+  'want and hate — is yours to paint.';
 
 const ECONOMIC_APPROACH =
-  'Economic / storefront approach (business desk pack): open from a named hood trajectory or ' +
-  'named business on this pack — rising retail, cooling storefronts, workforce/initiative footprint. ' +
-  'Never invent Employee_Count, Key_Personnel, or storefronts not listed. ' +
-  'Translate RetailVitality / magnitude into human language (busy counters, empty windows) — do not lead with raw engine decimals. ' +
-  'One claim about how the block or the board is moving. Not civic process roundup. Not multi-voice business-desk average.';
+  'Business desk approach: this slice is one neighborhood\'s businesses from the ledger and the ' +
+  'people on the roster who work there. Open from a named business or a named worker on it — the ' +
+  'block, the counter, the hiring board, what the owner is worried about. One claim about how the ' +
+  'block is moving. Not civic process roundup. Not multi-voice business-desk average. ' + FACTS_TAIL;
+
+const FOOD_APPROACH =
+  'Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood\'s ' +
+  'restaurants, cafes and bars from the ledger and the people on the roster who work in them. The ' +
+  'people on this slice are real; the rest of the room is yours — the line on a Tuesday, the ' +
+  'regulars, the walk-in, the tip jar. One kitchen, one shift, one true thing about the work. ' +
+  'Not a review. Not multi-voice culture-desk average. ' + FACTS_TAIL;
+
+// Live Business_Ledger.Sector values that are a kitchen, a counter or a bar
+// (read from the C106 dump, 52 of 176 rows): Restaurant & Dining, Cafe / dining,
+// Cafe / gallery, Food & Beverage, Fast Food & Quick Service, Sports Bar & Dining,
+// Retail & Food, Nightlife & Entertainment, Bar / nightlife, Bar / lounge, Hospitality.
+const FOOD_SECTOR_RE = /restaurant|dining|cafe|food|\bbar\b|lounge|nightlife|hospitality|brew/i;
+
+// Business_Ledger uses this for citywide institutions (OUSD, the hospital,
+// the library system). It is an org address, not a neighborhood a reporter walks.
+const NON_HOODS = new Set(['city-wide', 'citywide', '']);
+
+// The business desk covers private employers. Offices of the city, transit
+// agencies, courts, faith bodies and the newsroom itself sit on the same
+// ledger but belong to the civic, faith and media beats (civic gravity is
+// drift — SIM_DOCTRINE §13). The teams belong to the sports desks. Live
+// sector strings from the C106 dump.
+const NON_BUSINESS_SECTOR_RE =
+  /municipal|public (transit|services|safety)|legal|judicial|faith|synagogue|church|community development|transit & infrastructure|housing & social|media & journalism|crisis response|^sports( franchise)?$/i;
+
+const BEAT_TABS = ['Business_Ledger', 'Employment_Roster', 'Story_Seed_Deck'];
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -47,726 +84,420 @@ function arg(flag, def) {
 function loadJson(p) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; }
 }
-function loadText(p) {
-  try { return fs.readFileSync(p, 'utf8'); } catch (_) { return null; }
-}
 
-function extractSection(md, headingPrefix) {
-  if (!md) return null;
-  const re = new RegExp('^##\\s+' + headingPrefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^\\n]*$', 'mi');
-  const m = md.match(re);
-  if (!m) return null;
-  const start = m.index + m[0].length;
-  const rest = md.slice(start);
-  const next = rest.search(/^##\s+/m);
-  return (next < 0 ? rest : rest.slice(0, next)).trim();
-}
-
-function extractSubsection(body, heading) {
-  if (!body) return null;
-  const re = new RegExp('^###\\s+' + heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*$', 'mi');
-  const m = body.match(re);
-  if (!m) return null;
-  const start = m.index + m[0].length;
-  const rest = body.slice(start);
-  const next = rest.search(/^###\s+/m);
-  return (next < 0 ? rest : rest.slice(0, next)).trim();
-}
-
-/** Parse Neighborhood snapshot table → { name, sentiment, retail, events, crime } */
-function parseNeighborhoodSnapshot(md) {
-  const city = extractSection(md, 'City State') || '';
-  // table may live under City State
+function readJsonl(p) {
   const out = [];
-  const lines = (city || md || '').split('\n');
-  let inTable = false;
-  for (const raw of lines) {
-    const line = raw.trim();
-    if (/^\| Neighborhood \|/i.test(line)) {
-      inTable = true;
-      continue;
-    }
-    if (inTable && /^\|[-| :]+$/.test(line)) continue;
-    if (inTable && !line.startsWith('|')) {
-      if (out.length) break;
-      continue;
-    }
-    if (!inTable || !line.startsWith('|')) continue;
-    const cols = line.split('|').map(c => c.trim()).filter(Boolean);
-    if (cols.length < 3) continue;
-    if (/^Neighborhood$/i.test(cols[0])) continue;
-    const name = cols[0];
-    const sentiment = parseFloat(cols[1]);
-    const retail = parseFloat(cols[2]);
-    out.push({
-      name,
-      sentiment: Number.isFinite(sentiment) ? sentiment : null,
-      retail: Number.isFinite(retail) ? retail : null,
-      eventAttractiveness: cols[3] != null && cols[3] !== '' ? parseFloat(cols[3]) : null,
-      crime: cols[4] != null && cols[4] !== '' ? parseFloat(cols[4]) : null
-    });
+  for (const line of fs.readFileSync(p, 'utf8').split('\n')) {
+    const t = line.trim();
+    if (!t) continue;
+    out.push(JSON.parse(t));
   }
   return out;
 }
 
 /**
- * Parse What Moved trajectory bullets:
- * - NEIGHBORHOOD_RISING | Downtown turning upward: ... | Downtown | mag 5 | targets Downtown
+ * Load the beat-tab dump for a cycle. Throws — never falls back — when the dump
+ * is missing, stamped for another cycle, or missing a tab this builder reads.
  */
-function parseTrajectories(md) {
-  const moved = extractSection(md, 'What Moved') || '';
-  const traj = extractSubsection(moved, 'trajectory') || '';
-  // also accept bare lines under What Moved if subsection missing
-  const body = traj || moved;
-  const out = [];
-  for (const raw of body.split('\n')) {
-    const line = raw.trim();
-    if (!line.startsWith('-')) continue;
-    if (!/NEIGHBORHOOD_(RISING|COOLING)/i.test(line)) continue;
-    const rising = /NEIGHBORHOOD_RISING/i.test(line);
-    const cooling = /NEIGHBORHOOD_COOLING/i.test(line);
-    const parts = line.replace(/^-\s*/, '').split('|').map(s => s.trim());
-    // kind | prose | hood | mag N | targets ...
-    let hood = null;
-    let mag = null;
-    let prose = '';
-    for (let i = 0; i < parts.length; i++) {
-      const p = parts[i];
-      if (/^NEIGHBORHOOD_/i.test(p)) continue;
-      if (/^mag\s+/i.test(p)) {
-        const m = p.match(/mag\s+([-\d.]+)/i);
-        if (m) mag = Number(m[1]);
-        continue;
-      }
-      if (/^targets\s+/i.test(p)) continue;
-      if (!prose && /turning upward|cooling off|retail|storefront|foot traffic/i.test(p)) {
-        prose = p;
-        continue;
-      }
-      // hood often a short token after prose
-      if (!hood && p && p.length < 40 && !/mag|targets|NEIGHBORHOOD/i.test(p) &&
-          !/turning|cooling|retail|storefronts|foot/i.test(p)) {
-        hood = p;
-      }
+function loadBeatTabs(root, cycle, tabs) {
+  const dir = path.join(root, 'output', 'beats');
+  const metaPath = path.join(dir, 'meta.json');
+  const meta = loadJson(metaPath);
+  if (!meta) {
+    throw new Error('beat dump missing (' + path.relative(root, metaPath) +
+      '): run scripts/dumpBeatTabs.js ' + cycle);
+  }
+  if (Number(meta.cycle) !== Number(cycle)) {
+    throw new Error('beat dump is C' + meta.cycle + ', slice wants C' + cycle +
+      ': run scripts/dumpBeatTabs.js ' + cycle);
+  }
+  const out = { meta };
+  for (const tab of tabs) {
+    const p = path.join(dir, tab + '.jsonl');
+    if (!fs.existsSync(p)) {
+      throw new Error('beat dump missing tab ' + tab + ' (' + path.relative(root, p) +
+        '): run scripts/dumpBeatTabs.js ' + cycle);
     }
-    // fallback hood from prose
-    if (!hood) {
-      const hm = prose.match(/^([^:]+?)\s+(?:turning upward|cooling off)/i);
-      if (hm) hood = hm[1].trim();
-    }
-    if (!hood && parts[2] && parts[2].length < 40) hood = parts[2];
-    out.push({
-      kind: rising ? 'rising' : cooling ? 'cooling' : 'trajectory',
-      hood,
-      mag: Number.isFinite(mag) ? mag : null,
-      prose: prose || line.replace(/^-\s*/, '').slice(0, 160),
-      raw: line
-    });
+    out[tab] = readJsonl(p);
   }
   return out;
-}
-
-/** initiative-implementation lines with retail/economic flavor */
-function parseInitiativeEconomic(md) {
-  const moved = extractSection(md, 'What Moved') || '';
-  const sec = extractSubsection(moved, 'initiative-implementation') || '';
-  const out = [];
-  for (const raw of (sec || '').split('\n')) {
-    const line = raw.trim();
-    if (!line.startsWith('-')) continue;
-    if (!/retail|economic|workforce|stabilization|disbursement|construction|transit|nightlife/i.test(line)) {
-      continue;
-    }
-    const parts = line.replace(/^-\s*/, '').split('|').map(s => s.trim());
-    let hood = null;
-    let mag = null;
-    let prose = parts[1] || parts[0] || line;
-    for (const p of parts) {
-      if (/^mag\s+/i.test(p)) {
-        const m = p.match(/mag\s+([-\d.]+)/i);
-        if (m) mag = Number(m[1]);
-      }
-      if (/^targets\s+/i.test(p)) {
-        hood = p.replace(/^targets\s+/i, '').split('|')[0].trim();
-      }
-    }
-    // hood sometimes middle field
-    if (!hood && parts[2] && parts[2].length < 40 && !/mag/i.test(parts[2])) hood = parts[2];
-    out.push({
-      kind: 'initiative-economic',
-      hood,
-      mag: Number.isFinite(mag) ? mag : null,
-      prose: String(prose).slice(0, 200),
-      raw: line
-    });
-  }
-  return out;
-}
-
-/** Engine review math-imbalance with RetailVitality decay */
-function parseRetailDecay(md) {
-  const rev = extractSection(md, 'Engine Review Findings') ||
-    extractSection(md, 'Engine Review') || '';
-  const out = [];
-  // **math-imbalance** — Downtown: decay [Sentiment -0.250, RetailVitality -1.04, ...]
-  const re = /\*\*math-imbalance\*\*\s*—\s*([^:]+):\s*decay\s*\[([^\]]+)\]/gi;
-  let m;
-  while ((m = re.exec(rev))) {
-    const hood = m[1].trim();
-    const body = m[2];
-    const retailM = body.match(/RetailVitality\s+([+\-0-9.]+)/i);
-    const sentM = body.match(/Sentiment\s+([+\-0-9.]+)/i);
-    if (!retailM && !/RetailVitality/i.test(body)) continue;
-    out.push({
-      kind: 'retail-decay',
-      hood,
-      retailDelta: retailM ? Number(retailM[1]) : null,
-      sentimentDelta: sentM ? Number(sentM[1]) : null,
-      evidence: body.slice(0, 160),
-      raw: m[0]
-    });
-  }
-  return out;
-}
-
-function parseNamedVenuesFromEvening(md) {
-  const body = extractSection(md, 'Evening Texture') || (() => {
-    if (!md) return null;
-    const m = md.match(/^##\s+Evening Texture[^\n]*$/mi);
-    if (!m) return null;
-    const start = m.index + m[0].length;
-    const rest = md.slice(start);
-    const next = rest.search(/^##\s+/m);
-    return (next < 0 ? rest : rest.slice(0, next)).trim();
-  })();
-  if (!body) return [];
-  const venues = [];
-  function grab(label, kind) {
-    const re = new RegExp(
-      '^-\\s+\\*\\*' + label + ':\\*\\*\\s*(.*)$',
-      'mi'
-    );
-    const m = body.match(re);
-    if (!m) return;
-    const text = m[1];
-    const vre = /\*\*([^*]+)\*\*(?:\s*\(([^)]+)\))?/g;
-    let vm;
-    while ((vm = vre.exec(text))) {
-      venues.push({
-        name: vm[1].trim(),
-        hood: vm[2] ? vm[2].trim() : null,
-        kind,
-        source: 'evening-texture'
-      });
-    }
-  }
-  grab('Restaurants', 'restaurant');
-  grab('Fast food', 'fast-food');
-  grab('Nightlife', 'nightlife');
-  return venues;
-}
-
-/**
- * Parse optional Business_Ledger disk export:
- *   BIZ-00001 | Name | Sector | Hood | Headcount
- * Headcount is snapshot-sourced only — never invent if missing.
- */
-function loadBusinessLedger(root) {
-  const candidates = [
-    path.join(root, 'output', 'engine83_business_ledger.txt'),
-    path.join(root, 'output', 'business_ledger.txt'),
-    path.join(root, 'output', 'business_ledger_snapshot.txt')
-  ];
-  // also any business_ledger*.txt
-  try {
-    for (const f of fs.readdirSync(path.join(root, 'output'))) {
-      if (/business.?ledger/i.test(f) && /\.txt$/i.test(f)) {
-        candidates.push(path.join(root, 'output', f));
-      }
-    }
-  } catch (_) { /* */ }
-
-  const seen = new Set();
-  const businesses = [];
-  let sourceFile = null;
-  for (const p of candidates) {
-    if (seen.has(p)) continue;
-    seen.add(p);
-    const text = loadText(p);
-    if (!text) continue;
-    sourceFile = path.relative(root, p);
-    for (const raw of text.split('\n')) {
-      const line = raw.trim();
-      if (!line || line.startsWith('#')) continue;
-      const parts = line.split('|').map(s => s.trim());
-      if (parts.length < 4) continue;
-      if (!/^BIZ-/i.test(parts[0]) && !/^[A-Z0-9-]+$/.test(parts[0])) continue;
-      const headcountRaw = parts[4];
-      let headcount = null;
-      if (headcountRaw != null && headcountRaw !== '' && headcountRaw !== '—') {
-        const n = Number(String(headcountRaw).replace(/,/g, ''));
-        if (Number.isFinite(n)) headcount = n;
-      }
-      businesses.push({
-        bizId: parts[0],
-        name: parts[1],
-        sector: parts[2] || null,
-        hood: parts[3] || null,
-        // only when present on snapshot — never invent
-        headcount: headcount,
-        headcountSource: headcount != null ? sourceFile : null
-      });
-    }
-    if (businesses.length) break;
-  }
-  return { businesses, sourceFile };
-}
-
-function parseBusinessSignals(signal) {
-  const lane = (signal && signal.lanes && signal.lanes.business) || [];
-  return lane.map(e => ({
-    kind: e.kind || 'seed',
-    causeType: e.causeType || null,
-    label: e.label || '',
-    angle: (e.handle && e.handle.angle) || e.label || '',
-    hookLine: (e.handle && e.handle.hookLine) || null,
-    hood: e.hood || null,
-    popids: e.popids || [],
-    citizens: (e.handle && e.handle.citizens) || [],
-    ref: e.ref || null
-  }));
 }
 
 function hoodKey(h) {
   return String(h || '').toLowerCase().replace(/\s+/g, ' ').trim();
 }
 
-function businessesInHood(ledger, hood) {
-  if (!hood || !ledger || !ledger.length) return [];
-  const k = hoodKey(hood);
-  return ledger.filter(b => {
-    const bh = hoodKey(b.hood);
-    return bh === k || bh.includes(k) || k.includes(bh);
+function num(v) {
+  if (v == null || v === '') return null;
+  const n = Number(String(v).replace(/,/g, ''));
+  return Number.isFinite(n) ? n : null;
+}
+
+/** Business_Ledger rows joined to their Active roster staff. */
+function joinLedgerToRoster(ledgerRows, rosterRows) {
+  const byBiz = new Map();
+  for (const r of rosterRows || []) {
+    if (String(r.Status || '').toUpperCase() !== 'ACTIVE') continue;
+    if (!r.BIZ_ID || !/^BIZ-/i.test(r.BIZ_ID)) continue;
+    if (!byBiz.has(r.BIZ_ID)) byBiz.set(r.BIZ_ID, []);
+    byBiz.get(r.BIZ_ID).push({
+      popid: r.POP_ID || null,
+      name: String(r.CitizenName || '').trim(),
+      role: String(r.RoleType || '').trim() || null
+    });
+  }
+  return (ledgerRows || []).filter(b => b.BIZ_ID && b.Name).map(b => ({
+    bizId: b.BIZ_ID,
+    name: String(b.Name).trim(),
+    sector: b.Sector || null,
+    hood: b.Neighborhood || null,
+    employeeCount: num(b.Employee_Count),
+    avgSalary: num(b.Avg_Salary),
+    annualRevenue: num(b.Annual_Revenue),
+    growthRate: num(b.Growth_Rate),
+    keyPersonnel: String(b.Key_Personnel || '').trim() || null,
+    staff: (byBiz.get(b.BIZ_ID) || []).filter(s => s.name)
+  }));
+}
+
+/** "POP-00835 Mei-Lin Kang; POP-00878 Quynh Le" → [{popid, name}] */
+function parseSeedCitizens(s) {
+  return String(s || '').split(';').map(t => t.trim()).filter(Boolean).map(t => {
+    const m = t.match(/^(POP-\d+)\s+(.+)$/i);
+    return m ? { popid: m[1].toUpperCase(), name: m[2].trim() } : { popid: null, name: t };
   });
 }
 
-function venuesInHood(venues, hood) {
-  if (!hood || !venues || !venues.length) return [];
-  const k = hoodKey(hood);
-  return venues.filter(v => {
-    const vh = hoodKey(v.hood);
-    return vh === k || vh.includes(k) || k.includes(vh);
+/** "BIZ-00020 Baylight Construction Authority; BIZ-00057 Anchor Build" → [{bizId, name}] */
+function parseSeedBusinesses(s) {
+  return String(s || '').split(';').map(t => t.trim()).filter(Boolean).map(t => {
+    const m = t.match(/^(BIZ-\d+)\s+(.+)$/i);
+    return m ? { bizId: m[1].toUpperCase(), name: m[2].trim() } : { bizId: null, name: t };
   });
+}
+
+/** Story_Seed_Deck is cumulative — keep this cycle's business seeds only. */
+function seedsForCycle(seedRows, cycle) {
+  return (seedRows || [])
+    .filter(r => Number(r.Cycle) === Number(cycle) && /^business$/i.test(String(r.Desk || '')))
+    .map(r => ({
+      seedId: r.SeedID || null,
+      hood: r.Neighborhood || null,
+      domain: r.Domain || null,
+      citizens: parseSeedCitizens(r.Citizens),
+      // engine-written colour lines, one per citizen — colour, not fact
+      citizenEvents: String(r.CitizenEvents || '').split('|').map(t => t.trim()).filter(Boolean),
+      businesses: parseSeedBusinesses(r.Businesses),
+      otherEntities: String(r.OtherEntities || '').trim() || null,
+      magnitude: num(r.Magnitude),
+      trend: r.Trend || null,
+      suggestedJournalist: String(r.SuggestedJournalist || '').trim() || null,
+      suggestedAngle: String(r.SuggestedAngle || '').trim() || null
+    }));
+}
+
+function variantOf(opts) {
+  return opts && opts.foodFilter ? 'food' : 'business';
+}
+
+function slicePaths(cycle, root, opts) {
+  const r = root || ROOT;
+  const v = variantOf(opts);
+  return v === 'food'
+    ? {
+      md: path.join(r, 'output', 'slices', 'c' + cycle, 'economic-food.md'),
+      json: path.join(r, 'output', 'cron-compare', 'economic_food_slice_c' + cycle + '.json')
+    }
+    : {
+      md: path.join(r, 'output', 'slices', 'c' + cycle, 'economic.md'),
+      json: path.join(r, 'output', 'cron-compare', 'economic_slice_c' + cycle + '.json')
+    };
 }
 
 /**
- * Emit scored economic pulses — named businesses only from ledger/evening.
+ * Which hoods this variant has covered before, from prior slice artifacts on
+ * disk (both the v1 shape and this one carry pulse.hood). Returns hood → last cycle.
  */
-function emitEconomicPulses(ctx, cycle) {
-  const {
-    hoods, trajectories, initiatives, decays, venues, ledger, signals
-  } = ctx;
-  const pulses = [];
-  const hoodByName = new Map((hoods || []).map(h => [hoodKey(h.name), h]));
-
-  function add(p) {
-    if (!p) return;
-    p.cycle = Number(cycle);
-    pulses.push(p);
+function priorCoverage(root, cycle, opts) {
+  const dir = path.join(root || ROOT, 'output', 'cron-compare');
+  const stem = variantOf(opts) === 'food' ? 'economic_food_slice_c' : 'economic_slice_c';
+  const last = new Map();
+  let files = [];
+  try { files = fs.readdirSync(dir); } catch (_) { return last; }
+  for (const f of files) {
+    const m = f.match(new RegExp('^' + stem + '(\\d+)\\.json$'));
+    if (!m) continue;
+    const c = Number(m[1]);
+    if (!(c < Number(cycle))) continue;
+    const j = loadJson(path.join(dir, f));
+    const hood = j && ((j.pulse && j.pulse.hood) || (j.story && j.story.hood) || j.hood);
+    if (!hood) continue;
+    const k = hoodKey(hood);
+    if (!last.has(k) || last.get(k) < c) last.set(k, c);
   }
+  return last;
+}
 
-  // Trajectories with optional named businesses in hood
-  for (const t of trajectories || []) {
-    if (!t.hood) continue;
-    const snap = hoodByName.get(hoodKey(t.hood));
-    const biz = businessesInHood(ledger, t.hood).slice(0, 4);
-    const ven = venuesInHood(venues, t.hood).slice(0, 3);
-    const named = biz.map(b => b.name).concat(ven.map(v => v.name));
-    const isCool = t.kind === 'cooling';
-    const isRise = t.kind === 'rising';
-    let score = isCool ? 18 : isRise ? 16 : 10;
-    if (t.mag != null) score += Math.min(Math.abs(t.mag), 8);
-    if (named.length) score += 6 + Math.min(named.length, 3);
-    if (snap && snap.retail != null) {
-      // extreme retail ends of the table
-      if (snap.retail <= 5.5 && isCool) score += 4;
-      if (snap.retail >= 10 && isRise) score += 3;
-    }
-
-    add({
-      className: isCool ? 'hood-cooling' : isRise ? 'hood-rising' : 'hood-trajectory',
-      score,
-      label: t.hood + (isCool ? ' cooling' : isRise ? ' rising' : ' trajectory') +
-        (named.length ? ' · ' + named.slice(0, 2).join(', ') : ''),
-      hood: t.hood,
-      mag: t.mag,
-      retail: snap ? snap.retail : null,
-      sentiment: snap ? snap.sentiment : null,
-      namedBusinesses: named,
-      businesses: biz,
-      venues: ven,
-      requiresName: false,
-      source: 'world_summary ## What Moved · trajectory',
-      angle: (isCool
-        ? 'Storefronts quieter in ' + t.hood + ' — foot traffic down'
-        : 'Retail turning upward in ' + t.hood + ' — busy counters, people moving in') +
-        (named.length ? '; named on pack: ' + named.slice(0, 3).join(', ') : ''),
-      hookLine: t.prose || (t.hood + (isCool ? ' is cooling.' : ' is rising.')),
-      sceneBits: [
-        'HOOD: ' + t.hood,
-        isCool ? 'TRAJECTORY: cooling' : 'TRAJECTORY: rising',
-        t.mag != null ? 'MAGNITUDE (translate, do not lead): ' + t.mag : null,
-        snap && snap.retail != null ? 'RETAIL VITALITY (scene color): ' + snap.retail : null,
-        named.length ? 'NAMED BUSINESSES (sources only): ' + named.join('; ') : 'NAMED BUSINESSES: none on disk for this hood — do not invent',
-        ...biz.slice(0, 3).map(b =>
-          'LEDGER: ' + b.bizId + ' ' + b.name +
-          (b.sector ? ' · ' + b.sector : '') +
-          (b.headcount != null ? ' · headcount ' + b.headcount + ' (snapshot)' : '')
-        ),
-        ...ven.slice(0, 2).map(v => 'EVENING VENUE: ' + v.name + ' (' + v.kind + ')')
-      ].filter(Boolean)
-    });
+/**
+ * Eligible hoods: at least one business (passing the sector filter) with at
+ * least one Active roster worker. Acceptance needs a Business_Ledger.Name AND an
+ * Employment_Roster.CitizenName in the article; a hood with no staffed business
+ * cannot satisfy that, so it never gets picked.
+ */
+function eligibleHoods(businesses) {
+  const byHood = new Map();
+  for (const b of businesses) {
+    const k = hoodKey(b.hood);
+    if (NON_HOODS.has(k)) continue;
+    if (!byHood.has(k)) byHood.set(k, { hood: b.hood, businesses: [], staffed: 0, workers: 0 });
+    const h = byHood.get(k);
+    h.businesses.push(b);
+    if (b.staff.length) { h.staffed += 1; h.workers += b.staff.length; }
   }
+  return [...byHood.values()].filter(h => h.staffed > 0);
+}
 
-  // Retail decay from engine review (math-imbalance with RetailVitality)
-  for (const d of decays || []) {
-    if (!d.hood) continue;
-    const biz = businessesInHood(ledger, d.hood).slice(0, 3);
-    const ven = venuesInHood(venues, d.hood).slice(0, 2);
-    const named = biz.map(b => b.name).concat(ven.map(v => v.name));
-    let score = 20;
-    if (d.retailDelta != null && d.retailDelta < 0) score += Math.min(Math.abs(d.retailDelta) * 2, 8);
-    if (named.length) score += 5;
+/** Least-recently-covered hood; ties → most staffed businesses → most workers → name. */
+function pickHood(pool, coverage) {
+  const ranked = pool.slice().sort((a, b) => {
+    const la = coverage.get(hoodKey(a.hood));
+    const lb = coverage.get(hoodKey(b.hood));
+    const ca = la == null ? -Infinity : la;
+    const cb = lb == null ? -Infinity : lb;
+    if (ca !== cb) return ca - cb;
+    if (b.staffed !== a.staffed) return b.staffed - a.staffed;
+    if (b.workers !== a.workers) return b.workers - a.workers;
+    return String(a.hood).localeCompare(String(b.hood));
+  });
+  return ranked[0] || null;
+}
 
-    add({
-      className: 'retail-decay',
-      score,
-      label: d.hood + ' retail decay' + (named.length ? ' · ' + named[0] : ''),
-      hood: d.hood,
-      retailDelta: d.retailDelta,
-      sentimentDelta: d.sentimentDelta,
-      namedBusinesses: named,
-      businesses: biz,
-      venues: ven,
-      source: 'world_summary ## Engine Review · math-imbalance',
-      angle: 'Retail vitality decay in ' + d.hood + ' without a matching initiative — ' +
-        'what the storefront line feels like' +
-        (named.length ? ' near ' + named.slice(0, 2).join(' / ') : ''),
-      hookLine: d.hood + ' is losing retail heat on the map' +
-        (d.retailDelta != null ? ' (RetailVitality ' + d.retailDelta + ' — translate only).' : '.'),
-      sceneBits: [
-        'HOOD: ' + d.hood,
-        d.retailDelta != null ? 'RETAIL DELTA (do not lead with decimal): ' + d.retailDelta : null,
-        named.length ? 'NAMED: ' + named.join('; ') : 'NAMED: none — do not invent storefronts',
-        'EVIDENCE: ' + (d.evidence || '').slice(0, 120)
-      ].filter(Boolean)
-    });
+function citizenTag(s) {
+  return s.popid ? s.name + ' (' + s.popid + ')' : s.name;
+}
+
+function pct(n) {
+  return n == null ? null : (Math.round(n * 10) / 10) + '%';
+}
+
+function businessFactLine(b, maxStaff) {
+  const bits = [b.name];
+  if (b.sector) bits.push(b.sector);
+  if (b.employeeCount != null) bits.push(b.employeeCount + ' employees');
+  if (b.growthRate != null) bits.push('growth ' + pct(b.growthRate));
+  if (b.keyPersonnel) bits.push('key personnel: ' + b.keyPersonnel);
+  const staff = b.staff.slice(0, maxStaff).map(s => s.name + (s.role ? ' (' + s.role + ')' : ''));
+  if (staff.length) {
+    bits.push('on the roster: ' + staff.join('; ') +
+      (b.staff.length > maxStaff ? ' +' + (b.staff.length - maxStaff) + ' more' : ''));
   }
+  return bits.join(' · ');
+}
 
-  // Initiative economic footprints
-  for (const init of initiatives || []) {
-    let score = 12 + (init.mag != null ? Math.min(Math.abs(init.mag) * 3, 6) : 0);
-    const biz = init.hood ? businessesInHood(ledger, init.hood).slice(0, 3) : [];
-    // Prefer matching initiative name in ledger
-    const proseBiz = (ledger || []).filter(b =>
-      init.prose && init.prose.toLowerCase().includes(String(b.name).toLowerCase().slice(0, 18))
-    ).slice(0, 2);
-    const namedBiz = proseBiz.length ? proseBiz : biz;
-    const named = namedBiz.map(b => b.name);
-    if (named.length) score += 6;
-
-    add({
-      className: 'initiative-economic',
-      score,
-      label: (named[0] || init.hood || 'initiative') + ' · economic footprint',
-      hood: init.hood,
-      mag: init.mag,
-      namedBusinesses: named,
-      businesses: namedBiz,
-      source: 'world_summary ## What Moved · initiative-implementation',
-      angle: init.prose,
-      hookLine: init.prose,
-      sceneBits: [
-        init.hood ? 'HOOD: ' + init.hood : null,
-        'INITIATIVE / EFFECT: ' + init.prose,
-        named.length ? 'NAMED ORGS (ledger): ' + named.join('; ') : null
-      ].filter(Boolean)
-    });
-  }
-
-  // Named storefront pulses when venue sits in a hot/cool hood
-  const trajHoods = new Map((trajectories || []).map(t => [hoodKey(t.hood), t]));
-  for (const v of venues || []) {
-    if (!v.name) continue;
-    const t = v.hood ? trajHoods.get(hoodKey(v.hood)) : null;
-    const snap = v.hood ? hoodByName.get(hoodKey(v.hood)) : null;
-    let score = 14;
-    if (t) score += t.kind === 'cooling' ? 6 : 4;
-    if (snap && snap.retail != null && snap.retail <= 6) score += 3;
-
-    add({
-      className: 'named-storefront',
-      score,
-      label: v.name + (v.hood ? ' (' + v.hood + ')' : ''),
-      hood: v.hood,
-      namedBusinesses: [v.name],
-      venues: [v],
-      businesses: businessesInHood(ledger, v.hood).filter(b =>
-        hoodKey(b.name) === hoodKey(v.name) ||
-        String(b.name).toLowerCase().includes(String(v.name).toLowerCase().slice(0, 8))
-      ).slice(0, 1),
-      requiresName: true,
-      named: v.name,
-      source: 'world_summary ## Evening Texture + trajectory context',
-      angle: 'Named ' + v.kind + ' ' + v.name +
-        (v.hood ? ' in ' + v.hood : '') +
-        (t ? (t.kind === 'cooling' ? ' against a cooling retail block' : ' on a rising retail block') : ''),
-      hookLine: v.name + ' is on the evening board' + (v.hood ? ' in ' + v.hood : '') + '.',
-      sceneBits: [
-        'VENUE: ' + v.name,
-        v.hood ? 'HOOD: ' + v.hood : null,
-        'KIND: ' + v.kind,
-        t ? 'TRAJECTORY: ' + t.kind : null,
-        'Never invent Employee_Count or Key_Personnel for this room.'
-      ].filter(Boolean)
-    });
-  }
-
-  // Business desk_signal anomalies / workforce
-  for (const s of signals || []) {
-    const isWorkforce = /workforce|employment|labor|ailment|economic|transit|housing/i.test(
-      s.angle + ' ' + s.label
-    );
-    if (!isWorkforce && s.kind !== 'anomaly') continue;
-    let score = s.kind === 'anomaly' ? 15 : 10;
-    const hood = s.hood ? String(s.hood).split(',')[0].trim() : null;
-    const biz = hood ? businessesInHood(ledger, hood).slice(0, 3) : [];
-    const named = biz.map(b => b.name);
-    if (named.length) score += 4;
-    if (/economic ailment|workforce/i.test(s.angle + s.label)) score += 4;
-
-    add({
-      className: /workforce|apprenticeship|employment/i.test(s.angle + s.label)
-        ? 'workforce-pressure'
-        : 'economic-ailment',
-      score,
-      label: (hood || 'city') + ' · ' + String(s.angle || s.label).slice(0, 80),
-      hood,
-      namedBusinesses: named,
-      businesses: biz,
-      popids: s.popids || [],
-      citizens: s.citizens || [],
-      source: s.ref || 'desk_signal lanes.business',
-      angle: s.angle || s.label,
-      hookLine: s.hookLine || s.label,
-      sceneBits: [
-        hood ? 'HOOD: ' + hood : null,
-        'SIGNAL: ' + (s.angle || s.label),
-        named.length ? 'NAMED (ledger, same hood): ' + named.join('; ') : 'NAMED: none — do not invent businesses',
-        (s.citizens || []).length
-          ? 'CITIZENS (packet only): ' + s.citizens.slice(0, 3).join('; ')
-          : null
-      ].filter(Boolean)
-    });
-  }
-
-  pulses.sort((a, b) => b.score - a.score || String(a.className).localeCompare(b.className));
-  return pulses;
+function parseBusinessSignals(signal) {
+  const lane = (signal && signal.lanes && signal.lanes.business) || [];
+  return lane.map(e => ({
+    kind: e.kind || 'seed',
+    label: String((e.handle && e.handle.angle) || e.label || '').slice(0, 160),
+    hood: e.hood || null,
+    ref: e.ref || null
+  }));
 }
 
 function buildEconomicSlice(cycle, opts) {
   const o = opts || {};
   const root = o.root || ROOT;
   const cyc = Number(cycle);
-  const summaryPath = path.join(root, 'output', 'world_summary_c' + cyc + '.md');
+  const variant = variantOf(o);
+  const food = variant === 'food';
+
+  const beats = o.beats || loadBeatTabs(root, cyc, BEAT_TABS);
+  const all = joinLedgerToRoster(beats.Business_Ledger, beats.Employment_Roster);
+  const filtered = food
+    ? all.filter(b => FOOD_SECTOR_RE.test(String(b.sector || '')))
+    : all.filter(b => !NON_BUSINESS_SECTOR_RE.test(String(b.sector || '')));
+  const pool = eligibleHoods(filtered);
+  const coverage = o.coverage || priorCoverage(root, cyc, o);
+  const seedsAll = seedsForCycle(beats.Story_Seed_Deck, cyc);
+  const approach = food ? FOOD_APPROACH : ECONOMIC_APPROACH;
+  const kind = food ? 'food-workplaces' : 'economic-storefront';
+
   const signalPath = path.join(root, 'output', 'desk_signal_c' + cyc + '.json');
-  const summaryMd = o.summaryMd != null ? o.summaryMd : loadText(summaryPath);
-  const signal = o.signal != null ? o.signal : loadJson(signalPath);
+  const signals = parseBusinessSignals(o.signal != null ? o.signal : loadJson(signalPath));
 
-  const hoods = parseNeighborhoodSnapshot(summaryMd || '');
-  const trajectories = parseTrajectories(summaryMd || '');
-  const initiatives = parseInitiativeEconomic(summaryMd || '');
-  const decays = parseRetailDecay(summaryMd || '');
-  const venues = parseNamedVenuesFromEvening(summaryMd || '');
-  const { businesses: ledger, sourceFile: ledgerSource } = o.ledger
-    ? { businesses: o.ledger, sourceFile: 'opts' }
-    : loadBusinessLedger(root);
-  const signals = parseBusinessSignals(signal);
-
-  const pulses = emitEconomicPulses({
-    hoods, trajectories, initiatives, decays, venues, ledger, signals
-  }, cyc);
-
-  if (!pulses.length) {
+  if (!pool.length) {
     return {
-      empty: true,
-      cycle: cyc,
-      kind: 'economic-storefront',
-      reason: 'no-economic-signals',
-      approach: ECONOMIC_APPROACH
+      version: VERSION, empty: true, cycle: cyc, kind, variant,
+      reason: food
+        ? 'no food-sector business with an Active roster worker in the dump'
+        : 'no business with an Active roster worker in the dump',
+      approach
     };
   }
 
-  const top = pulses[0];
+  const picked = pickHood(pool, coverage);
+  const hood = picked.hood;
+  const businesses = picked.businesses.slice().sort((a, b) =>
+    (b.staff.length - a.staff.length) ||
+    ((b.employeeCount || 0) - (a.employeeCount || 0)) ||
+    String(a.name).localeCompare(String(b.name))
+  ).slice(0, 5);
+  const staffedOnSlice = businesses.filter(b => b.staff.length);
+  const workers = [];
+  for (const b of businesses) for (const s of b.staff.slice(0, 4)) workers.push(Object.assign({ business: b.name }, s));
+
+  const seedsHere = seedsAll.filter(s => hoodKey(s.hood) === hoodKey(hood));
+  const seeds = seedsHere.length ? seedsHere : seedsAll.slice(0, 2);
+
+  const named = businesses.map(b => b.name);
+  const lead = staffedOnSlice[0];
+  const leadWorker = lead && lead.staff[0];
+  const angle = food
+    ? hood + ' kitchens: ' + named.slice(0, 3).join(', ') + ' — the people who work the shift'
+    : hood + ' businesses: ' + named.slice(0, 3).join(', ') + ' — the people who work there';
+  const plural = (n, one, many) => n + ' ' + (n === 1 ? one : many);
+  const hookLine = (leadWorker
+    ? leadWorker.name + (leadWorker.role ? ', ' + leadWorker.role : '') + ' at ' + lead.name + '. '
+    : '') +
+    plural(workers.length, 'named worker', 'named workers') + ' at ' +
+    plural(staffedOnSlice.length, food ? 'named kitchen' : 'named business', food ? 'named kitchens' : 'named businesses') +
+    ' in ' + hood + ' on the ledger this cycle.';
+
+  const anchorFacts = businesses.map(b => businessFactLine(b, 4));
+  for (const s of seeds.slice(0, 2)) {
+    const who = s.citizens.slice(0, 4).map(c => c.name).join('; ');
+    const where = s.businesses.map(b => b.name).join('; ');
+    anchorFacts.push('ENGINE SEED' + (s.hood ? ' (' + s.hood + ')' : '') + ': ' +
+      (who ? 'citizens ' + who : 'no citizens attached') +
+      (where ? ' · businesses ' + where : '') +
+      (s.otherEntities ? ' · ' + s.otherEntities : ''));
+  }
+
+  const citizens = workers.map(citizenTag);
+  for (const s of seedsHere) for (const c of s.citizens) {
+    const tag = citizenTag(c);
+    if (!citizens.includes(tag)) citizens.push(tag);
+  }
+
+  const pulse = {
+    className: food ? 'hood-kitchens' : 'hood-businesses',
+    score: 10 + staffedOnSlice.length * 4 + Math.min(workers.length, 8) + (seedsHere.length ? 3 : 0),
+    label: hood + (food ? ' kitchens' : ' businesses') + ' · ' + named.slice(0, 2).join(', '),
+    hood,
+    namedBusinesses: named
+  };
+
   const story = {
-    angle: top.angle,
-    label: top.label,
-    hookLine: top.hookLine,
-    hood: top.hood || null,
-    pulseClass: top.className,
-    namedBusinesses: top.namedBusinesses || [],
-    citizens: top.citizens || [],
-    popids: top.popids || [],
-    ref: top.source || ('economic-slice-c' + cyc),
+    angle, label: pulse.label, hookLine, hood,
+    pulseClass: pulse.className,
+    namedBusinesses: named,
+    citizens,
+    popids: citizens.map(t => (t.match(/\((POP-\d+)\)/) || [])[1]).filter(Boolean),
+    ref: 'output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C' + cyc,
     cycle: cyc
   };
 
   return {
-    empty: false,
-    cycle: cyc,
-    kind: 'economic-storefront',
-    pulse: {
-      className: top.className,
-      score: top.score,
-      label: top.label,
-      hood: top.hood || null,
-      namedBusinesses: top.namedBusinesses || [],
-      retail: top.retail != null ? top.retail : null,
-      retailDelta: top.retailDelta != null ? top.retailDelta : null
-    },
+    version: VERSION, empty: false, cycle: cyc, kind, variant,
+    hood,
+    pulse,
     story,
-    approach: ECONOMIC_APPROACH,
+    approach,
+    businesses,
+    seeds,
     prewrite: {
-      pulseClass: top.className,
-      angle: top.angle,
-      hookLine: top.hookLine,
-      namedBusinesses: top.namedBusinesses || [],
-      anchorFacts: (top.sceneBits || []).slice(0, 8),
+      pulseClass: pulse.className,
+      angle, hookLine,
+      namedBusinesses: named,
+      anchorFacts,
       forbidden: [
-        'Do not invent Employee_Count',
-        'Do not invent Key_Personnel',
-        'Do not invent storefronts not on ledger or evening texture',
-        'Do not lead with raw RetailVitality decimals — translate to scene'
+        'Do not invent a business, a worker, an owner or a place — every name comes from this slice',
+        'Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose',
+        'Do not contradict a role, employer or neighborhood listed here'
       ]
     },
-    texture: {
-      hoodCount: hoods.length,
-      rising: trajectories.filter(t => t.kind === 'rising').map(t => t.hood),
-      cooling: trajectories.filter(t => t.kind === 'cooling').map(t => t.hood),
-      venues: venues.slice(0, 12),
-      ledgerCount: ledger.length,
-      ledgerSource: ledgerSource,
-      topRetail: hoods.slice().sort((a, b) => (b.retail || 0) - (a.retail || 0)).slice(0, 5),
-      bottomRetail: hoods.slice().sort((a, b) => (a.retail || 0) - (b.retail || 0)).slice(0, 5)
+    rotation: {
+      pool: pool.map(h => ({ hood: h.hood, staffed: h.staffed, workers: h.workers,
+        lastCovered: coverage.get(hoodKey(h.hood)) != null ? coverage.get(hoodKey(h.hood)) : null })),
+      picked: hood
     },
-    signals: {
-      businessLaneCount: signals.length,
-      sample: signals.slice(0, 5)
-    },
-    candidates: pulses.slice(0, 12).map(p => ({
-      className: p.className,
-      score: p.score,
-      label: p.label,
-      hood: p.hood || null,
-      namedBusinesses: p.namedBusinesses || []
+    candidates: pool.filter(h => h.hood !== hood).map(h => ({
+      className: pulse.className, hood: h.hood,
+      label: h.hood + ' · ' + h.staffed + ' staffed / ' + h.businesses.length + ' listed',
+      namedBusinesses: h.businesses.filter(b => b.staff.length).slice(0, 3).map(b => b.name)
     })),
-    pulses: pulses.slice(0, 20),
-    scene: {
-      colorRoom:
-        'Storefront light, foot traffic, open/closed shutters. Named places only from ledger or evening texture. ' +
-        'Headcount only when snapshot lists it. No invented owners or employee counts.',
-      namedOnTop: top.namedBusinesses || []
-    },
+    signals: { businessLaneCount: signals.length, sample: signals.slice(0, 5) },
+    scene: { namedOnTop: named },
     pointers: [
-      'output/world_summary_c' + cyc + '.md ## What Moved / Neighborhood snapshot',
-      'output/desk_signal_c' + cyc + '.json lanes.business',
-      ledgerSource || null,
-      'docs/plans/2026-08-08-journalist-heat-slice-packs.md Task 2'
+      'output/beats/Business_Ledger.jsonl (' + beats.meta.rows.Business_Ledger + ' rows @C' + beats.meta.cycle + ')',
+      'output/beats/Employment_Roster.jsonl (' + beats.meta.rows.Employment_Roster + ' rows)',
+      'output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: ' + seedsAll.length + ')',
+      signals.length ? 'output/desk_signal_c' + cyc + '.json lanes.business (pointers only)' : null,
+      'docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2'
     ].filter(Boolean)
   };
 }
 
 function formatEconomicSliceMarkdown(slice) {
   if (!slice || slice.empty) {
-    return '# SLICE — economic / storefront (EMPTY)\n\n_No economic signals for this cycle._\n';
+    return '# SLICE — ' + ((slice && slice.kind) || 'economic') + ' (EMPTY)\n\n_' +
+      ((slice && slice.reason) || 'no slice') + '_\n';
   }
+  const food = slice.variant === 'food';
   const L = [];
-  L.push('# SLICE — economic / storefront (business desk pack)');
+  L.push('# SLICE — ' + (food ? 'food & hospitality (kitchens as workplaces)' : 'business desk (one neighborhood, its businesses, its workers)'));
   L.push('');
-  L.push('Cycle **C' + slice.cycle + '** · kind `' + slice.kind + '`');
+  L.push('Cycle **C' + slice.cycle + '** · kind `' + slice.kind + '` · hood **' + slice.hood + '**');
   L.push('');
-  L.push('## TOP PULSE');
-  L.push('- **Class:** ' + slice.pulse.className);
-  L.push('- **Score:** ' + slice.pulse.score);
-  L.push('- **Label:** ' + slice.pulse.label);
-  if (slice.pulse.hood) L.push('- **Hood:** ' + slice.pulse.hood);
-  if ((slice.pulse.namedBusinesses || []).length) {
-    L.push('- **Named businesses:** ' + slice.pulse.namedBusinesses.join('; '));
-  }
-  L.push('');
-  L.push('## PREWRITE');
+  L.push('## THE SLICE');
   L.push('- Angle: ' + slice.prewrite.angle);
   L.push('- Hook: ' + slice.prewrite.hookLine);
-  L.push('Anchor facts:');
-  for (const a of slice.prewrite.anchorFacts || []) L.push('  - ' + a);
-  L.push('Forbidden:');
-  for (const f of slice.prewrite.forbidden || []) L.push('  - ' + f);
+  L.push('');
+  L.push('## BUSINESSES (ledger) AND WHO WORKS THERE (roster)');
+  for (const b of slice.businesses) {
+    L.push('- **' + b.name + '**' + (b.sector ? ' — ' + b.sector : '') +
+      (b.employeeCount != null ? ' · ' + b.employeeCount + ' employees' : '') +
+      (b.growthRate != null ? ' · growth ' + pct(b.growthRate) : '') +
+      (b.keyPersonnel ? ' · key personnel: ' + b.keyPersonnel : ''));
+    for (const s of b.staff.slice(0, 4)) L.push('  - ' + s.name + (s.role ? ' — ' + s.role : ''));
+    if (b.staff.length > 4) L.push('  - +' + (b.staff.length - 4) + ' more on the roster');
+    if (!b.staff.length) L.push('  - _no roster names — the staff here are yours to paint_');
+  }
+  L.push('');
+  L.push('## ENGINE SEEDS (this cycle, business desk)');
+  if (!slice.seeds.length) L.push('_none this cycle_');
+  for (const s of slice.seeds) {
+    L.push('- ' + (s.hood || 'city') + (s.trend ? ' · ' + s.trend : ''));
+    if (s.citizens.length) L.push('  - citizens: ' + s.citizens.map(c => c.name).join('; '));
+    if (s.businesses.length) L.push('  - businesses: ' + s.businesses.map(b => b.name).join('; '));
+    for (const e of s.citizenEvents.slice(0, 4)) L.push('  - colour: ' + e);
+  }
   L.push('');
   L.push('## APPROACH');
   L.push(slice.approach);
   L.push('');
-  L.push('## CITY ECONOMIC TEXTURE');
-  if (slice.texture) {
-    L.push('**Rising:** ' + (slice.texture.rising || []).join('; '));
-    L.push('**Cooling:** ' + (slice.texture.cooling || []).join('; '));
-    if (slice.texture.ledgerSource) {
-      L.push('**Business ledger:** ' + slice.texture.ledgerCount + ' rows from `' +
-        slice.texture.ledgerSource + '`');
-    } else {
-      L.push('**Business ledger:** none on disk (venues from evening texture only)');
-    }
-    if ((slice.texture.venues || []).length) {
-      L.push('**Evening venues:** ' +
-        slice.texture.venues.map(v => v.name + (v.hood ? ' (' + v.hood + ')' : '')).join('; '));
-    }
-    if ((slice.texture.bottomRetail || []).length) {
-      L.push('**Lowest retail vitality:** ' +
-        slice.texture.bottomRetail.map(h => h.name + ' ' + h.retail).join('; '));
-    }
+  L.push('## FORBIDDEN');
+  for (const f of slice.prewrite.forbidden) L.push('- ' + f);
+  L.push('');
+  L.push('## ROTATION');
+  L.push('picked **' + slice.rotation.picked + '** (least recently covered). Pool: ' +
+    slice.rotation.pool.map(h => h.hood + ' (' + h.staffed + ' staffed' +
+      (h.lastCovered != null ? ', last C' + h.lastCovered : ', never') + ')').join('; '));
+  L.push('');
+  if (slice.signals.businessLaneCount) {
+    L.push('## DESK SIGNAL (pointers only — not the source)');
+    for (const s of slice.signals.sample) L.push('- ' + s.label + (s.hood ? ' [' + s.hood + ']' : ''));
+    L.push('');
   }
-  L.push('');
-  L.push('## BUSINESS LANE SEEDS');
-  L.push('count: ' + (slice.signals && slice.signals.businessLaneCount));
-  for (const s of (slice.signals && slice.signals.sample) || []) {
-    L.push('- ' + String(s.angle || s.label).slice(0, 120));
-  }
-  L.push('');
-  L.push('## SCENE COLOR');
-  if (slice.scene && slice.scene.colorRoom) L.push(slice.scene.colorRoom);
-  L.push('');
-  L.push('## OTHER CANDIDATES');
-  for (const c of slice.candidates || []) {
-    L.push('- [' + c.score + '] ' + c.className + ' — ' + c.label +
-      ((c.namedBusinesses || []).length ? ' · ' + c.namedBusinesses.slice(0, 2).join(', ') : ''));
-  }
-  L.push('');
   L.push('## POINTERS');
-  for (const p of slice.pointers || []) L.push('- ' + p);
+  for (const p of slice.pointers) L.push('- ' + p);
   L.push('');
-  L.push('_Generated by scripts/buildEconomicSlice.js — no LLM. Never invent employees or storefronts._');
+  L.push('_Generated by scripts/buildEconomicSlice.js — no LLM. Facts are the names on this page; the room is the reporter\'s._');
   return L.join('\n') + '\n';
 }
 
-function slicePaths(cycle, root) {
-  const r = root || ROOT;
-  return {
-    md: path.join(r, 'output', 'slices', 'c' + cycle, 'economic.md'),
-    json: path.join(r, 'output', 'cron-compare', 'economic_slice_c' + cycle + '.json')
-  };
-}
-
-function writeEconomicSlice(cycle, slice, root) {
-  const paths = slicePaths(cycle, root);
+function writeEconomicSlice(cycle, slice, root, opts) {
+  const paths = slicePaths(cycle, root, opts || { foodFilter: slice && slice.variant === 'food' });
   fs.mkdirSync(path.dirname(paths.md), { recursive: true });
   fs.mkdirSync(path.dirname(paths.json), { recursive: true });
   fs.writeFileSync(paths.json, JSON.stringify(slice, null, 2));
@@ -774,57 +505,74 @@ function writeEconomicSlice(cycle, slice, root) {
   return paths;
 }
 
-function loadEconomicSlice(cycle, root) {
-  const paths = slicePaths(cycle, root);
+/**
+ * loadEconomicSlice(cycle[, root][, opts]) — the second positional stays the
+ * root (newsroom-fanout / cron-desk-run pass it); an object there is read as opts.
+ * A cached artifact is served only when it carries this builder's VERSION and
+ * the same variant; anything older is rebuilt from the dump.
+ */
+function loadEconomicSlice(cycle, rootOrOpts, maybeOpts) {
+  let root = ROOT;
+  let opts = maybeOpts || {};
+  if (rootOrOpts && typeof rootOrOpts === 'object') opts = Object.assign({}, rootOrOpts, opts);
+  else if (typeof rootOrOpts === 'string') root = rootOrOpts;
+  if (opts.root) root = opts.root;
+  const paths = slicePaths(cycle, root, opts);
   const j = loadJson(paths.json);
-  if (j && !j.empty) return j;
-  const slice = buildEconomicSlice(cycle, { root: root || ROOT });
-  if (!slice.empty) writeEconomicSlice(cycle, slice, root);
+  if (j && j.version === VERSION && j.variant === variantOf(opts) && !j.empty) return j;
+  const slice = buildEconomicSlice(cycle, Object.assign({}, opts, { root }));
+  writeEconomicSlice(cycle, slice, root, opts);
   return slice.empty ? null : slice;
 }
 
 function isBusinessDesk(assign) {
   if (!assign) return false;
-  if (String(assign.desk || '').toLowerCase() === 'business') return true;
-  if (assign.beatDomain === 'ECONOMIC' || assign.beatDomain === 'GENERAL') {
-    // only when already on business desk slot
-    return String(assign.desk || '').toLowerCase() === 'business';
-  }
-  return false;
+  return String(assign.desk || '').toLowerCase() === 'business';
+}
+
+/** Mason Ortega draws the food variant wherever he is seated (pipeline.68 Task 3). */
+function isFoodSeat(assign) {
+  if (!assign) return false;
+  if (String(assign.persona || '') === 'mason-ortega') return true;
+  return /mason\s*ortega/i.test(String(assign.name || ''));
 }
 
 function assignmentFromSlice(slice, assign) {
   if (!slice || slice.empty) return null;
+  const food = slice.variant === 'food';
   return {
-    desk: 'business',
-    name: (assign && assign.name) || 'Business desk',
+    desk: (assign && assign.desk) || (food ? 'culture' : 'business'),
+    name: (assign && assign.name) || (food ? 'Mason Ortega' : 'Business desk'),
     popid: (assign && assign.popid) || null,
-    beatDomain: (assign && assign.beatDomain) || 'ECONOMIC',
-    persona: (assign && assign.persona) || null,
+    beatDomain: (assign && assign.beatDomain) || (food ? 'FOOD' : 'ECONOMIC'),
+    persona: (assign && assign.persona) || (food ? 'mason-ortega' : null),
     approach: slice.approach,
     story: slice.story,
     economicSlice: true,
+    economicVariant: slice.variant,
     pulse: slice.pulse,
     prewrite: slice.prewrite
   };
 }
 
+/**
+ * Attach the slice to a business-desk or Mason assignment. Throws when the dump
+ * is missing or stale — the fanout must not stage a seat built on nothing.
+ */
 function enrichAssignment(assign, cycle, root) {
-  if (!isBusinessDesk(assign)) return assign;
-  try {
-    const slice = loadEconomicSlice(cycle, root);
-    if (!slice || slice.empty) return assign;
-    const from = assignmentFromSlice(slice, assign);
-    return Object.assign({}, assign, {
-      approach: from.approach,
-      story: from.story || assign.story,
-      economicSlice: true,
-      pulse: from.pulse,
-      prewrite: from.prewrite
-    });
-  } catch (_) {
-    return assign;
-  }
+  const food = isFoodSeat(assign);
+  if (!food && !isBusinessDesk(assign)) return assign;
+  const slice = loadEconomicSlice(cycle, root || ROOT, { foodFilter: food });
+  if (!slice || slice.empty) return assign;
+  const from = assignmentFromSlice(slice, assign);
+  return Object.assign({}, assign, {
+    approach: from.approach,
+    story: from.story || assign.story,
+    economicSlice: true,
+    economicVariant: from.economicVariant,
+    pulse: from.pulse,
+    prewrite: from.prewrite
+  });
 }
 
 if (require.main === module) {
@@ -837,30 +585,32 @@ if (require.main === module) {
     console.error('buildEconomicSlice: pass --cycle N');
     process.exit(1);
   }
-  const slice = buildEconomicSlice(cycle);
-  const paths = writeEconomicSlice(cycle, slice);
+  const opts = { foodFilter: process.argv.includes('--food') };
+  let slice;
+  try {
+    slice = buildEconomicSlice(cycle, opts);
+  } catch (e) {
+    console.error('buildEconomicSlice: ' + e.message);
+    process.exit(2);
+  }
+  const paths = writeEconomicSlice(cycle, slice, ROOT, opts);
   if (process.argv.includes('--json')) {
     console.log(JSON.stringify(slice, null, 2));
   } else {
-    console.log('economic slice c' + cycle +
-      (slice.empty ? ' EMPTY' :
-        ' pulse=' + slice.pulse.className +
-        ' score=' + slice.pulse.score +
-        ' hood=' + (slice.pulse.hood || '—') +
-        ' named=' + ((slice.pulse.namedBusinesses || []).length) +
-        ' candidates=' + (slice.candidates || []).length));
-    if (!slice.empty) {
-      console.log('  ' + String(slice.pulse.label).slice(0, 120));
-      if ((slice.pulse.namedBusinesses || []).length) {
-        console.log('  businesses: ' + slice.pulse.namedBusinesses.slice(0, 4).join(', '));
-      }
-    }
+    console.log('economic slice c' + cycle + ' [' + slice.variant + ']' +
+      (slice.empty ? ' EMPTY — ' + slice.reason :
+        ' hood=' + slice.hood +
+        ' businesses=' + slice.businesses.length +
+        ' workers=' + slice.story.citizens.length +
+        ' seeds=' + slice.seeds.length));
+    if (!slice.empty) console.log('  ' + slice.story.hookLine);
     console.log('→ ' + path.relative(ROOT, paths.md));
     console.log('→ ' + path.relative(ROOT, paths.json));
   }
 }
 
 module.exports = {
+  VERSION,
   buildEconomicSlice,
   writeEconomicSlice,
   loadEconomicSlice,
@@ -868,13 +618,17 @@ module.exports = {
   assignmentFromSlice,
   enrichAssignment,
   isBusinessDesk,
+  isFoodSeat,
   slicePaths,
-  parseNeighborhoodSnapshot,
-  parseTrajectories,
-  parseInitiativeEconomic,
-  parseRetailDecay,
-  parseNamedVenuesFromEvening,
-  loadBusinessLedger,
-  emitEconomicPulses,
-  ECONOMIC_APPROACH
+  loadBeatTabs,
+  joinLedgerToRoster,
+  seedsForCycle,
+  eligibleHoods,
+  pickHood,
+  priorCoverage,
+  FOOD_SECTOR_RE,
+  NON_BUSINESS_SECTOR_RE,
+  ECONOMIC_APPROACH,
+  FOOD_APPROACH,
+  FACTS_TAIL
 };

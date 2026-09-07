@@ -1,0 +1,726 @@
+{
+  "version": "ECONOMIC-SLICE-2",
+  "empty": false,
+  "cycle": 106,
+  "kind": "economic-storefront",
+  "variant": "business",
+  "hood": "West Oakland",
+  "pulse": {
+    "className": "hood-businesses",
+    "score": 33,
+    "label": "West Oakland businesses · West Oakland Community Center, Oakmesh Systems",
+    "hood": "West Oakland",
+    "namedBusinesses": [
+      "West Oakland Community Center",
+      "Oakmesh Systems",
+      "Civis Systems",
+      "Coastline Construction",
+      "Mariner Construction"
+    ]
+  },
+  "story": {
+    "angle": "West Oakland businesses: West Oakland Community Center, Oakmesh Systems, Civis Systems — the people who work there",
+    "label": "West Oakland businesses · West Oakland Community Center, Oakmesh Systems",
+    "hookLine": "Toby Lamont, Mutual Aid Network Organizer at West Oakland Community Center. 12 named workers at 3 named businesses in West Oakland on the ledger this cycle.",
+    "hood": "West Oakland",
+    "pulseClass": "hood-businesses",
+    "namedBusinesses": [
+      "West Oakland Community Center",
+      "Oakmesh Systems",
+      "Civis Systems",
+      "Coastline Construction",
+      "Mariner Construction"
+    ],
+    "citizens": [
+      "Toby Lamont (POP-00183)",
+      "Brooklyn Nguyen (POP-00184)",
+      "Simone Cleng (POP-00188)",
+      "Leo Ling (POP-00342)",
+      "Elijah Roberts (POP-00275)",
+      "Enzo Walker (POP-00291)",
+      "Dom Will (POP-00368)",
+      "Jace Robinson (POP-00483)",
+      "Sam Fazio (POP-00445)",
+      "Catherine Santos (POP-00482)",
+      "Elias  Varek (POP-00789)",
+      "Maurice Franklin (POP-00801)",
+      "Yolande McAllister (POP-00898)",
+      "Andrew Cook (POP-00357)",
+      "Yvonne Hayes (POP-01060)",
+      "Dimmie Washington (POP-00511)"
+    ],
+    "popids": [
+      "POP-00183",
+      "POP-00184",
+      "POP-00188",
+      "POP-00342",
+      "POP-00275",
+      "POP-00291",
+      "POP-00368",
+      "POP-00483",
+      "POP-00445",
+      "POP-00482",
+      "POP-00789",
+      "POP-00801",
+      "POP-00898",
+      "POP-00357",
+      "POP-01060",
+      "POP-00511"
+    ],
+    "ref": "output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C106",
+    "cycle": 106
+  },
+  "approach": "Business desk approach: this slice is one neighborhood's businesses from the ledger and the people on the roster who work there. Open from a named business or a named worker on it — the block, the counter, the hiring board, what the owner is worried about. One claim about how the block is moving. Not civic process roundup. Not multi-voice business-desk average. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "businesses": [
+    {
+      "bizId": "BIZ-00028",
+      "name": "West Oakland Community Center",
+      "sector": "Community Services",
+      "hood": "West Oakland",
+      "employeeCount": 95,
+      "avgSalary": 58000,
+      "annualRevenue": 25111543,
+      "growthRate": 8.32,
+      "keyPersonnel": null,
+      "staff": [
+        {
+          "popid": "POP-00183",
+          "name": "Toby Lamont",
+          "role": "Mutual Aid Network Organizer"
+        },
+        {
+          "popid": "POP-00184",
+          "name": "Brooklyn Nguyen",
+          "role": "Teacher"
+        },
+        {
+          "popid": "POP-00188",
+          "name": "Simone Cleng",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00342",
+          "name": "Leo Ling",
+          "role": "Nonprofit Executive Director"
+        },
+        {
+          "popid": "POP-00343",
+          "name": "Iman Horton",
+          "role": "Refugee Resettlement Case Worker"
+        },
+        {
+          "popid": "POP-00353",
+          "name": "Ridley Holt",
+          "role": "Nonprofit Executive Director"
+        },
+        {
+          "popid": "POP-00355",
+          "name": "Sammie Soft",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00357",
+          "name": "Andrew Cook",
+          "role": "Neighborhood Watch Captain"
+        },
+        {
+          "popid": "POP-00439",
+          "name": "Timmie Hall",
+          "role": "Refugee Resettlement Case Worker"
+        },
+        {
+          "popid": "POP-00488",
+          "name": "Rupert Ochoa",
+          "role": "Mutual Aid Network Organizer"
+        },
+        {
+          "popid": "POP-00491",
+          "name": "Brenda Gonzalez",
+          "role": "Neighborhood Watch Captain"
+        },
+        {
+          "popid": "POP-00494",
+          "name": "Weston Herrin",
+          "role": "Refugee Resettlement Case Worker"
+        },
+        {
+          "popid": "POP-00511",
+          "name": "Dimmie Washington",
+          "role": "Executive Director - WONA"
+        },
+        {
+          "popid": "POP-00515",
+          "name": "Ingrid Bautista",
+          "role": "Neighborhood Watch Captain"
+        },
+        {
+          "popid": "POP-00517",
+          "name": "Shai Diaz",
+          "role": "Mover"
+        },
+        {
+          "popid": "POP-00521",
+          "name": "Jude Hess",
+          "role": "Electrician"
+        },
+        {
+          "popid": "POP-00526",
+          "name": "Marisol Achebe",
+          "role": "Mutual Aid Network Organizer"
+        },
+        {
+          "popid": "POP-00576",
+          "name": "Beth Hayes",
+          "role": "Landscaper"
+        },
+        {
+          "popid": "POP-00638",
+          "name": "Dean Nelson",
+          "role": "Security Guard"
+        },
+        {
+          "popid": "POP-00684",
+          "name": "Jarko Freako",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00722",
+          "name": "Daniel Cloak",
+          "role": "Bakery Worker"
+        },
+        {
+          "popid": "POP-00753",
+          "name": "Eunice Marston",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00754",
+          "name": "Ophelia Brenner",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00755",
+          "name": "Antoine Vermeer",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00756",
+          "name": "Ramon Solano",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00757",
+          "name": "Daniel Han",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00758",
+          "name": "Robert Jaston",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00759",
+          "name": "Naomi Sterling",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00760",
+          "name": "Yael Bauer",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00761",
+          "name": "Idris Karim",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00762",
+          "name": "Aziz Rahimi",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00763",
+          "name": "Kenji Tanaka",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00764",
+          "name": "Tao Lee",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00765",
+          "name": "Anand Krishnamurthy",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00766",
+          "name": "Manjit Singh",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00767",
+          "name": "Miriam Goldstein",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00768",
+          "name": "Eleanor Bishop",
+          "role": "Senior Pastor / Faith Leader"
+        },
+        {
+          "popid": "POP-00772",
+          "name": "Beverly Hayes",
+          "role": "Community Director, West Oakland Community Center"
+        },
+        {
+          "popid": "POP-00811",
+          "name": "Inez Mendoza",
+          "role": "Nonprofit Executive Director"
+        },
+        {
+          "popid": "POP-00839",
+          "name": "Manju Chung",
+          "role": "Nonprofit Executive Director"
+        },
+        {
+          "popid": "POP-00875",
+          "name": "Inez Diop",
+          "role": "Nonprofit Executive Director"
+        },
+        {
+          "popid": "POP-00890",
+          "name": "Mireya Pinckney",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00894",
+          "name": "Maryam Dawson",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00898",
+          "name": "Yolande McAllister",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00911",
+          "name": "Devika Wu",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00917",
+          "name": "Josefina Williams",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00932",
+          "name": "Winifred Chen",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00939",
+          "name": "Saniya Washington",
+          "role": "Nonprofit Executive Director"
+        },
+        {
+          "popid": "POP-00950",
+          "name": "Mojisola Cook",
+          "role": "Community Organizer"
+        },
+        {
+          "popid": "POP-00954",
+          "name": "Rev. Han",
+          "role": "Senior Pastor / Faith Leader"
+        }
+      ]
+    },
+    {
+      "bizId": "BIZ-00009",
+      "name": "Oakmesh Systems",
+      "sector": "Civic Tech",
+      "hood": "West Oakland",
+      "employeeCount": 46,
+      "avgSalary": 135000,
+      "annualRevenue": 9053429,
+      "growthRate": 30.87,
+      "keyPersonnel": "Marcus Tan (Founder)",
+      "staff": [
+        {
+          "popid": "POP-00275",
+          "name": "Elijah Roberts",
+          "role": "Construction laborer"
+        },
+        {
+          "popid": "POP-00291",
+          "name": "Enzo Walker",
+          "role": "Plumber"
+        },
+        {
+          "popid": "POP-00368",
+          "name": "Dom Will",
+          "role": "Machine Learning Engineer (Oakmesh Systems)"
+        },
+        {
+          "popid": "POP-00483",
+          "name": "Jace Robinson",
+          "role": "Machine Learning Engineer (Oakmesh Systems)"
+        },
+        {
+          "popid": "POP-00648",
+          "name": "Mart Johns",
+          "role": "Nurse Aide"
+        },
+        {
+          "popid": "POP-00712",
+          "name": "Jeremy Wong",
+          "role": "Civic Data Engineer (Oakmesh Systems)"
+        },
+        {
+          "popid": "POP-00732",
+          "name": "Deon Whitfield",
+          "role": "Community Organizer"
+        }
+      ]
+    },
+    {
+      "bizId": "BIZ-00052",
+      "name": "Civis Systems",
+      "sector": "Urban Systems Intelligence Firm",
+      "hood": "West Oakland",
+      "employeeCount": 41,
+      "avgSalary": 230000,
+      "annualRevenue": 60013269,
+      "growthRate": null,
+      "keyPersonnel": "Elias Varek (founder)",
+      "staff": [
+        {
+          "popid": "POP-00445",
+          "name": "Sam Fazio",
+          "role": "Digital Twin Architect"
+        },
+        {
+          "popid": "POP-00482",
+          "name": "Catherine Santos",
+          "role": "Digital Twin Architect"
+        },
+        {
+          "popid": "POP-00789",
+          "name": "Elias  Varek",
+          "role": "Founder of Civis Systems"
+        },
+        {
+          "popid": "POP-00801",
+          "name": "Maurice Franklin",
+          "role": "Drone Fleet Coordinator"
+        }
+      ]
+    },
+    {
+      "bizId": "BIZ-00056",
+      "name": "Coastline Construction",
+      "sector": "Construction",
+      "hood": "West Oakland",
+      "employeeCount": 221,
+      "avgSalary": 85000,
+      "annualRevenue": 185199231,
+      "growthRate": 5.6,
+      "keyPersonnel": null,
+      "staff": []
+    },
+    {
+      "bizId": "BIZ-00058",
+      "name": "Mariner Construction",
+      "sector": "Construction",
+      "hood": "West Oakland",
+      "employeeCount": 165,
+      "avgSalary": 90000,
+      "annualRevenue": 1,
+      "growthRate": 4.36,
+      "keyPersonnel": null,
+      "staff": []
+    }
+  ],
+  "seeds": [
+    {
+      "seedId": "88153394",
+      "hood": "West Oakland",
+      "domain": "ECONOMIC",
+      "citizens": [
+        {
+          "popid": "POP-00898",
+          "name": "Yolande McAllister"
+        },
+        {
+          "popid": "POP-00357",
+          "name": "Andrew Cook"
+        },
+        {
+          "popid": "POP-01060",
+          "name": "Yvonne Hayes"
+        },
+        {
+          "popid": "POP-00511",
+          "name": "Dimmie Washington"
+        }
+      ],
+      "citizenEvents": [
+        "Yolande McAllister — couldn't shake a strange dream through the morning coffee",
+        "Andrew Cook — a line forms outside a small business newly funded by the stabilization fund, the owner handing out samples with a tired smile",
+        "Yvonne Hayes — attended a small local gathering and stayed later than planned",
+        "Dimmie Washington — ran into someone familiar near a mutual aid table"
+      ],
+      "businesses": [
+        {
+          "bizId": "BIZ-00056",
+          "name": "Coastline Construction"
+        },
+        {
+          "bizId": "BIZ-00094",
+          "name": "West Oakland Stabilization Fund"
+        }
+      ],
+      "otherEntities": "Keane Auxiliary Flag Football League (program)",
+      "magnitude": -8,
+      "trend": "carrying, -6.00 strength left of 4-cycle run",
+      "suggestedJournalist": null,
+      "suggestedAngle": "general coverage"
+    }
+  ],
+  "prewrite": {
+    "pulseClass": "hood-businesses",
+    "angle": "West Oakland businesses: West Oakland Community Center, Oakmesh Systems, Civis Systems — the people who work there",
+    "hookLine": "Toby Lamont, Mutual Aid Network Organizer at West Oakland Community Center. 12 named workers at 3 named businesses in West Oakland on the ledger this cycle.",
+    "namedBusinesses": [
+      "West Oakland Community Center",
+      "Oakmesh Systems",
+      "Civis Systems",
+      "Coastline Construction",
+      "Mariner Construction"
+    ],
+    "anchorFacts": [
+      "West Oakland Community Center · Community Services · 95 employees · growth 8.3% · on the roster: Toby Lamont (Mutual Aid Network Organizer); Brooklyn Nguyen (Teacher); Simone Cleng (Community Organizer); Leo Ling (Nonprofit Executive Director) +46 more",
+      "Oakmesh Systems · Civic Tech · 46 employees · growth 30.9% · key personnel: Marcus Tan (Founder) · on the roster: Elijah Roberts (Construction laborer); Enzo Walker (Plumber); Dom Will (Machine Learning Engineer (Oakmesh Systems)); Jace Robinson (Machine Learning Engineer (Oakmesh Systems)) +3 more",
+      "Civis Systems · Urban Systems Intelligence Firm · 41 employees · key personnel: Elias Varek (founder) · on the roster: Sam Fazio (Digital Twin Architect); Catherine Santos (Digital Twin Architect); Elias  Varek (Founder of Civis Systems); Maurice Franklin (Drone Fleet Coordinator)",
+      "Coastline Construction · Construction · 221 employees · growth 5.6%",
+      "Mariner Construction · Construction · 165 employees · growth 4.4%",
+      "ENGINE SEED (West Oakland): citizens Yolande McAllister; Andrew Cook; Yvonne Hayes; Dimmie Washington · businesses Coastline Construction; West Oakland Stabilization Fund · Keane Auxiliary Flag Football League (program)"
+    ],
+    "forbidden": [
+      "Do not invent a business, a worker, an owner or a place — every name comes from this slice",
+      "Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose",
+      "Do not contradict a role, employer or neighborhood listed here"
+    ]
+  },
+  "rotation": {
+    "pool": [
+      {
+        "hood": "Baylight District",
+        "staffed": 2,
+        "workers": 62,
+        "lastCovered": null
+      },
+      {
+        "hood": "Lake Merritt",
+        "staffed": 1,
+        "workers": 2,
+        "lastCovered": null
+      },
+      {
+        "hood": "Temescal",
+        "staffed": 3,
+        "workers": 7,
+        "lastCovered": null
+      },
+      {
+        "hood": "West Oakland",
+        "staffed": 3,
+        "workers": 61,
+        "lastCovered": null
+      },
+      {
+        "hood": "Brooklyn Basin",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Jack London",
+        "staffed": 3,
+        "workers": 40,
+        "lastCovered": null
+      },
+      {
+        "hood": "Downtown",
+        "staffed": 2,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Piedmont Ave",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": null
+      },
+      {
+        "hood": "Fruitvale",
+        "staffed": 2,
+        "workers": 4,
+        "lastCovered": null
+      },
+      {
+        "hood": "Uptown",
+        "staffed": 1,
+        "workers": 14,
+        "lastCovered": null
+      },
+      {
+        "hood": "Rockridge",
+        "staffed": 1,
+        "workers": 3,
+        "lastCovered": 105
+      }
+    ],
+    "picked": "West Oakland"
+  },
+  "candidates": [
+    {
+      "className": "hood-businesses",
+      "hood": "Baylight District",
+      "label": "Baylight District · 2 staffed / 10 listed",
+      "namedBusinesses": [
+        "Anthropic",
+        "Baylight Construction Authority"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Lake Merritt",
+      "label": "Lake Merritt · 1 staffed / 3 listed",
+      "namedBusinesses": [
+        "Ridgeline Ventures"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Temescal",
+      "label": "Temescal · 3 staffed / 6 listed",
+      "namedBusinesses": [
+        "Gridiron Analytics",
+        "OakTown Social",
+        "Temescal Community Health Center"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Brooklyn Basin",
+      "label": "Brooklyn Basin · 1 staffed / 1 listed",
+      "namedBusinesses": [
+        "Portside Bio"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Jack London",
+      "label": "Jack London · 3 staffed / 7 listed",
+      "namedBusinesses": [
+        "Port of Oakland",
+        "Blue Lantern Bar",
+        "Harborline Grill"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Downtown",
+      "label": "Downtown · 2 staffed / 11 listed",
+      "namedBusinesses": [
+        "EBMUD",
+        "Atlas Bay Architects"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Piedmont Ave",
+      "label": "Piedmont Ave · 1 staffed / 4 listed",
+      "namedBusinesses": [
+        "Kaiser Permanente Oakland"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Fruitvale",
+      "label": "Fruitvale · 2 staffed / 4 listed",
+      "namedBusinesses": [
+        "Fruitvale Community Clinic",
+        "Fruitvale Diner"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Uptown",
+      "label": "Uptown · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "Oakland Tech Collective"
+      ]
+    },
+    {
+      "className": "hood-businesses",
+      "hood": "Rockridge",
+      "label": "Rockridge · 1 staffed / 6 listed",
+      "namedBusinesses": [
+        "OakHouse"
+      ]
+    }
+  ],
+  "signals": {
+    "businessLaneCount": 33,
+    "sample": [
+      {
+        "kind": "anomaly",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c106.json patterns[4]; evidence: Neighborhood_Map row(s) 6"
+      },
+      {
+        "kind": "anomaly",
+        "label": "housing ailment — economic footprint, affected businesses, workforce impact in Baylight District",
+        "hood": "Baylight District",
+        "ref": "output/engine_audit_c106.json patterns[18]; evidence: Neighborhood_Map row(s) 22"
+      },
+      {
+        "kind": "anomaly",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District, East Oakland",
+        "ref": "output/engine_audit_c106.json patterns[21]; evidence: Neighborhood_Map row(s) "
+      },
+      {
+        "kind": "anomaly",
+        "label": "Fruitvale Transit Hub Phase II — Visioning — economic upside, jobs and footprint in Fruitvale",
+        "hood": "Fruitvale",
+        "ref": "output/engine_audit_c106.json patterns[22]; evidence: Initiative_Tracker row(s) 4"
+      },
+      {
+        "kind": "anomaly",
+        "label": "Baylight District — Final Council Vote — economic upside, jobs and footprint in Jack London",
+        "hood": "Jack London, Downtown",
+        "ref": "output/engine_audit_c106.json patterns[23]; evidence: Initiative_Tracker row(s) 6"
+      }
+    ]
+  },
+  "scene": {
+    "namedOnTop": [
+      "West Oakland Community Center",
+      "Oakmesh Systems",
+      "Civis Systems",
+      "Coastline Construction",
+      "Mariner Construction"
+    ]
+  },
+  "pointers": [
+    "output/beats/Business_Ledger.jsonl (176 rows @C106)",
+    "output/beats/Employment_Roster.jsonl (859 rows)",
+    "output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: 2)",
+    "output/desk_signal_c106.json lanes.business (pointers only)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2"
+  ]
+}

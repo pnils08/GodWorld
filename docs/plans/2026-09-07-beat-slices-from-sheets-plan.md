@@ -103,12 +103,22 @@
 - **Verify:** a test article with an invented crowd size and a real citizen passes; one with an invented citizen name fails
 - **Status:** [ ] not started
 
-### Task 7: Rota quotas — Mike's call, not decided here
+### Task 7: Rota = every journalist once per cycle — builder-ruled S433
 
-- **Files:** `scripts/newsroom-fanout.js` (`quotas`)
-- **Current:** civic 2 · sports 2 · culture 1 · business 1 · undocked 1 (7/day, Mon–Fri).
-- **Recommended shape for his yes/no:** civic 1 · sports 2 · beat 2 (rotating health / transit / schools / safety / environment / faith, least-used-wins) · business-food 1 · undocked 1. Same seven slots, same cost; civic gravity halves, the beats get ten turns a week instead of sharing two.
-- **Status:** [ ] awaiting builder ruling
+- **Files:** `scripts/newsroom-fanout.js` (`quotas`, `boundDailyAssignments`), `scripts/cron-desk-run.js` (fanout stages)
+- **Ruling (Mike, 2026-09-07):** each journalist files one article per cycle; Carmen's civic ledger once a week is the right cadence, not the floor for a desk. City hall is a function, not a city — cover the city. Saturday publishes the best; the rest is still the week's record.
+- **Steps:**
+  1. Replace desk quotas with a per-journalist roster pass: every active reporter RoleType on `Simulation_Ledger` (ClockMode MEDIA, Bay Tribune) gets exactly one slot per cycle, spread across the Mon–Fri days (≈24 seats → ≈5/day). Least-recently-filed decides day order, not desk.
+  2. The slot's slice is the journalist's beat slice (Tasks 2–4), not a desk lane.
+  3. Measured S433 baseline for the before/after: 14 days, most reporters 1 byline, Nia 4, Jordan 3, 18 sidecars with no byline recorded.
+- **Verify:** the first full cycle after cut: `output/cron-compare/staged|flagged` sidecars show every roster journalist exactly once.
+- **Status:** [ ] not started
+
+### Task 7b: Article latency — audit, then cut
+
+- **Current:** one article spans three wakes, angle 06:15 → report 13:15 → write 18:15 (12 h). Builder: too slow, and the civic articles read alike week to week.
+- **Steps:** measure per-stage value on the last 14 days of sidecars (what the report stage adds that the angle stage lacked); propose collapsing to one wake per article where the beat slice already carries the citizens (Tasks 2–4 make the report stage's citizen-quote hunt largely redundant). Decision recorded here before cutting.
+- **Status:** [ ] not started
 
 ### Task 8: Docs — same commit as Task 1
 
@@ -121,7 +131,6 @@
 ## Open questions
 
 - [ ] Task 4: extend `buildCivicDomainSlice.js`'s packet model or split per-beat builders — decide at Task 4 start from the packet code, not here.
-- [ ] Task 7 blocks on Mike.
 
 ---
 

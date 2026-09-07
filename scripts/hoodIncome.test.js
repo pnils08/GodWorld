@@ -114,7 +114,10 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   assert('Temescal baker mid = bakery pay', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'mid', 'P1') === ref(36000, 1.0, 'P1'));
   assert('senior × 1.3', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'senior', 'P1') === ref(36000, 1.3, 'P1'));
   assert('entry-level × 0.75 (old spelling accepted)', hoodReferencePay_(ctx, 'Temescal', 'Baker', '', 'entry-level', 'P1') === ref(36000, 0.75, 'P1'));
-  assert('SkillTags win over role text', hoodReferencePay_(ctx, 'Temescal', 'Baker', 'Healthcare', 'mid', 'P1') === ref(88000, 1.0, 'P1'));
+  // engine.166: the role's own field prices first; a tag that disagrees with a placed role is stale (the C106 janitor priced as a tech worker)
+  assert('a placed role wins over a stale tag', hoodReferencePay_(ctx, 'Temescal', 'Baker', 'Healthcare', 'mid', 'P1') === ref(36000, 1.0, 'P1'));
+  assert('a placed role whose sector is absent in the hood prices at the hood median, never at the tag', hoodReferencePay_(ctx, 'Temescal', 'Immigration Attorney', 'Healthcare', 'mid', 'P1') === ref(38000, 1.0, 'P1'));
+  assert('an unplaceable role prices by its tag', hoodReferencePay_(ctx, 'Temescal', 'Xyzzy', 'Healthcare', 'mid', 'P1') === ref(88000, 1.0, 'P1'));
   assert('unmatched role → whole-hood median', hoodReferencePay_(ctx, 'Temescal', 'Xyzzy', '', 'mid', 'P1') === ref(38000, 1.0, 'P1'));
   assert('sector absent in hood → whole-hood median', hoodReferencePay_(ctx, 'Temescal', 'Immigration Attorney', '', 'mid', 'P1') === ref(38000, 1.0, 'P1'));
   assert('Downtown attorney senior = law pay × 1.3', hoodReferencePay_(ctx, 'Downtown', 'Immigration Attorney', '', 'senior', 'P2') === ref(130000, 1.3, 'P2'));

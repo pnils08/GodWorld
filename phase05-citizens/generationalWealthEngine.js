@@ -648,6 +648,7 @@ var ROLE_SECTOR_HINTS_ = [
   [/developer|programmer|engineer|technician|scientist|biolog|robotic|data/i, 'Tech & Innovation'],
   [/longshore|dock|crane|\bport\b|freight|warehouse/i, 'Port & Labor'],
   [/pastor|imam|rabbi|minister|chaplain|organizer|advocate|community/i, 'Faith & Community'],
+  [/janitor|custodi|cleaner|housekeep|groundskeep|cashier|clerk|receptionist|security guard/i, 'Small Business'], // engine.166: the building-and-counter jobs had no hint and fell through to a stale tag
 ];
 function roleSectorCategory_(roleText) {
   var t = String(roleText || '');
@@ -689,8 +690,9 @@ function seedUnit_(s) { var h = 2166136261; s = String(s || ''); for (var i = 0;
 
 /**
  * What this citizen's life pays: the median Avg_Salary of their
- * neighborhood's businesses in their sector (SkillTags first, then the role
- * text, then the whole neighborhood) × career stage (0.75 / 1.0 / 1.3 — the
+ * neighborhood's businesses in their sector (the role's own field first —
+ * engine.166 — then SkillTags, then the role's sector hint, then the whole
+ * neighborhood) × career stage (0.75 / 1.0 / 1.3 — the
  * D3 scale) × a per-citizen seeded ±8% so no two neighbours make the same
  * thing. Rounded to $100. null when the neighborhood has no business
  * reference (caller keeps its old draw) or the stage earns nothing
@@ -704,6 +706,15 @@ function hoodReferencePay_(ctx, hood, roleText, skillTags, careerStage, seed) {
   var factor = STAGE_FACTOR[careerStageClass_(careerStage)];
   if (!factor) return null;
   var set = null;
+  // engine.166: the CURRENT job prices first. engine.146's two-truths design makes SkillTags
+  // token 1 the current job's field, but two intake paths rewrote RoleType without touching
+  // the tag for months, so rows carry a stale field beside a plain role (a Lake Merritt
+  // janitor tagged '2041-Specific' was priced as a senior tech worker — 93k → 284k, RAISE-ONLY,
+  // twice). When the role text resolves to a field, that field is the job — priced in that
+  // sector, else at the whole-neighborhood median; the tag never overrides a placed role. Tags
+  // price only the roles the catalog cannot place.
+  var roleField = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(roleText) : null;
+  if (roleField) { if (e.byCat[roleField] && e.byCat[roleField].length) set = e.byCat[roleField]; else set = e.all; }
   var tags = String(skillTags || '').split('|');
   for (var t = 0; t < tags.length && !set; t++) {
     var tg = tags[t].trim();

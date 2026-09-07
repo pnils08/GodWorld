@@ -33,7 +33,6 @@
      `Transit_Metrics` (Cycle, Station, RidershipVolume, OnTimePerformance, TrafficIndex, Corridor, Notes) ·
      `Crime_Metrics` (Neighborhood, PropertyCrimeIndex, ViolentCrimeIndex, ResponseTimeAvg, ClearanceRate, IncidentCount) ·
      `Neighborhood_Demographics` (Neighborhood, Students, Adults, Seniors, Unemployed, Sick, SchoolQualityIndex, GraduationRate, CollegeReadinessRate, TeacherQuality, Funding) ·
-     `Youth_Events` (Cycle, YouthName, YouthID, Age, EventType, EventDescription, School, Neighborhood, Outcome) ·
      `Hospital_Ledger` (POPID, Name, Neighborhood, Cause, AdmitCycle, StatusNow, Outcome) ·
      `Health_Cause_Queue` (POPID, Name, Status, CyclesSick, Neighborhood, AssignedCause) ·
      `Community_Programs` (Program_ID, Name, Founder_POPID, Neighborhood, Type, Status) ·
@@ -46,7 +45,7 @@
   2. Keep the prior cycle's dump as `output/beats/prev/` before overwriting, so builders can compute "what moved" (Transit_Metrics and Crime_Metrics deltas) without a second Sheets read.
   3. Read-only: no `appendRows`/`updateRange` anywhere in the file (pre-commit hook enforces).
 - **Verify:** `node scripts/dumpBeatTabs.js 106 --quiet && node -e "const m=require('./output/beats/meta.json');console.log(m.cycle,m.rows)"` → cycle 106; Business_Ledger 176, Employment_Roster 859, Transit_Metrics 522, Crime_Metrics 23, Neighborhood_Demographics 22, Youth_Events 168, Household_Ledger 712 (live counts 2026-09-07; re-read live before asserting)
-- **Status:** [x] DONE S433 — ran live at C106: 15 tabs, readback line counts = meta for all 15, 1.6 MB, backward stamp (105) refused. Wired into run-cycle Step 5.56. Acceptance 1 is met on the next run-cycle.
+- **Status:** [x] DONE S433 — ran live at C106: 14 tabs (Youth_Events dropped, dead by ruling since C102), readback line counts = meta for all, backward stamp (105) refused. Wired into run-cycle Step 5.56. Acceptance 1 is met on the next run-cycle.
 
 ### Task 2: Business / food slice reads the ledger — owner research-build (file), spec here
 
@@ -78,11 +77,12 @@
 - **Steps (tab.column per seat):**
   1. Trevor Shimizu — `Transit_Metrics` rows for this cycle vs `prev/`: per `Station`/`Corridor`, `RidershipVolume`, `OnTimePerformance`, `TrafficIndex` deltas; `Notes` verbatim. Fact = stations, corridors, numbers on the slice. Color = the platform at 7:40.
   2. Sgt. Rachel Torres — `Crime_Metrics` per `Neighborhood` (`PropertyCrimeIndex`, `ViolentCrimeIndex`, `ResponseTimeAvg`, `ClearanceRate`, `IncidentCount`) with deltas vs `prev/`; `desk_signal` incidents as pointers. Delete `scene.colorRoom: 'carries no incident fact, quote, or public sentiment'`.
-  3. Angela Reyes — `Neighborhood_Demographics` (`Students`, `SchoolQualityIndex`, `GraduationRate`, `CollegeReadinessRate`, `TeacherQuality`, `Funding`) per hood + this cycle's `Youth_Events` (`YouthName`, `Age`, `EventType`, `School`, `Outcome`). "Which school is doing well" is answerable from `SchoolQualityIndex` ranked.
+  3. Angela Reyes — `Neighborhood_Demographics` (`Students`, `SchoolQualityIndex`, `GraduationRate`, `CollegeReadinessRate`, `TeacherQuality`, `Funding`) per hood, ranked — "which school is doing well" is answerable from `SchoolQualityIndex`. **`Youth_Events` is dead by ruling** (`phase05-citizens/runYouthEngine.js:105`, last row C102) and is deliberately NOT in the dump; students she names come from `Simulation_Ledger` snapshot rows with student roles in the hood, not from that tab.
   4. Dr. Lila Mezran — `Neighborhood_Demographics.Sick` per hood (the volume) + `Health_Cause_Queue` (`Name`, `AssignedCause`, `CyclesSick`, `Neighborhood`) + `Hospital_Ledger` (`Name`, `Cause`, `StatusNow`). Note in the slice when the named rows are few (3 today) so she writes the neighborhood, not a fake ward.
   5. Noah Tan — `Cycle_Weather` this cycle + streak (`Type`, `Temp`, `Impact`, `Advisory`, `Comfort`, `Mood`, `Streak`, `StreakType`).
   6. Elliot Graye — `Faith_Organizations` (`Organization`, `FaithTradition`, `Neighborhood`, `Congregation`, `Leader`, `MembersList`) + `Community_Programs` (`Name`, `Founder_POPID`, `Type`, `Status`).
   7. Every builder: fail loud on missing dump (Task 2 step 4 wording); `desk_signal` becomes an optional pointer list, not the source.
+  8. Decks are cumulative — `Story_Seed_Deck` C101→C106 (44 rows at C106), `Story_Hook_Deck` C68→C106 (39 at C106, 1,716 total): **filter by `Cycle === current`** before handing anything to a reporter. A seed's `What`/`Why` are engine-metric strings ("sentiment +48.03", "traffic/retail +0.26") — use `Citizens`, `Businesses`, `Neighborhood`; never quote the `What` as a fact in prose (canon-is-color rule). `Transit_Metrics` carries 18 station rows per cycle, so this-cycle-vs-`prev/` is real.
 - **Verify:** each builder `--cycle 106` emits a slice whose `facts[]` entries resolve to a dump row; `node scripts/run-tests.js Slice` → pass
 - **Status:** [ ] not started
 
@@ -153,4 +153,4 @@
 ## Changelog
 
 - 2026-09-07 — Initial draft (S433 engine-sheet, drafted from the facts-not-color ruling and the desk-signal audit the same night).
-- 2026-09-07 — Task 1 cut and verified live (S433): `scripts/dumpBeatTabs.js`, 15 tabs incl. Story_Seed_Deck / Story_Hook_Deck / Casino_Ledger, run-cycle Step 5.56 wired. Tasks 2–7 handed to research-build (their files).
+- 2026-09-07 — Task 1 cut and verified live (S433): `scripts/dumpBeatTabs.js`, 14 tabs incl. Story_Seed_Deck / Story_Hook_Deck / Casino_Ledger, run-cycle Step 5.56 wired. Tasks 2–7 handed to research-build (their files).

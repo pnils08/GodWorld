@@ -48,7 +48,7 @@ const BEAT_TABS = [
   'Transit_Metrics',          // Trevor
   'Crime_Metrics',            // Rachel
   'Neighborhood_Demographics',// Angela (schools), Lila (Sick)
-  'Youth_Events',             // Angela
+  // Youth_Events is NOT dumped: dead by ruling (phase05-citizens/runYouthEngine.js:105, last row C102) — a reporter would print C102 as news. Angela reads Neighborhood_Demographics.
   'Hospital_Ledger',          // Lila — who is in the hospital
   'Health_Cause_Queue',       // Lila
   'Community_Programs',       // Elliot Graye, Maria

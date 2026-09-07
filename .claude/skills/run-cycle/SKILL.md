@@ -86,13 +86,13 @@ node scripts/dumpLedger.js {XX} --quiet
 
 **Gate:** `output/simulation_ledger_snapshot.meta.json` read back shows `"cycle": {XX}` and current `generatedAt`. Never report this step done from the command exit alone.
 
-**Beat-tab dump (pipeline.68 Task 1, S433):** the same seam carries the reporters' world. One free read of the 15 beat tabs (Business_Ledger, Employment_Roster, Casino_Ledger, Transit_Metrics, Crime_Metrics, Neighborhood_Demographics, Youth_Events, Hospital_Ledger, Health_Cause_Queue, Community_Programs, Faith_Organizations, Cycle_Weather, Household_Ledger, Story_Seed_Deck, Story_Hook_Deck) to `output/beats/*.jsonl`; the prior cycle rotates to `output/beats/prev/` so builders can compute what moved. Every `scripts/build*Slice.js` reads this instead of the crisis lane (Tasks 2–4 of the plan). Same monotonic-stamp rule as dumpLedger.
+**Beat-tab dump (pipeline.68 Task 1, S433):** the same seam carries the reporters' world. One free read of the 14 beat tabs (Business_Ledger, Employment_Roster, Casino_Ledger, Transit_Metrics, Crime_Metrics, Neighborhood_Demographics, Hospital_Ledger, Health_Cause_Queue, Community_Programs, Faith_Organizations, Cycle_Weather, Household_Ledger, Story_Seed_Deck, Story_Hook_Deck) to `output/beats/*.jsonl`; the prior cycle rotates to `output/beats/prev/` so builders can compute what moved. Every `scripts/build*Slice.js` reads this instead of the crisis lane (Tasks 2–4 of the plan). Same monotonic-stamp rule as dumpLedger.
 
 ```bash
 node scripts/dumpBeatTabs.js {XX} --quiet
 ```
 
-**Gate:** `output/beats/meta.json` shows `"cycle": {XX}` and 15 entries under `rows`; a missing tab aborts the script (schema event, not a soft skip).
+**Gate:** `output/beats/meta.json` shows `"cycle": {XX}` and 14 entries under `rows`; a missing tab aborts the script (schema event, not a soft skip).
 
 ### Step 5.6: Content-ledger drafter (engine.49 T4)
 

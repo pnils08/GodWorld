@@ -95,6 +95,19 @@ life — those crossings tick EmergenceCount, and three namings land the dream
 crossings off froze every GC dream and killed the pool — that correction is
 the proof: their liveliness is the system, never noise.
 
+## 13. Gate the facts, not the color. (S433, Mike-direct)
+The offices exist to move initiatives and earn or lose approval; by cycle 200
+no model will know what the stories covered, and nobody can tell a cron what
+its world looks like. So an office SPEAKS freely — if the Mayor says two
+hundred people showed up, that is the point, and the desk prints it as her
+claim. What is gated is the FACT layer: the tracker fields (MilestoneNotes,
+NextScheduledAction) that the next cycle's seats read as ground truth, and a
+datawake's action/numberMoved. Arithmetic on packet figures is grounded (57 +
+12 = 69). Gating speech turned the seats into drones reciting engine output —
+the C106 mayor open was rejected for a correct sum and a crowd estimate.
+Mechanism: `statementNumberCheck` / `ungroundedNumbers` in
+`scripts/cron-civic-run.js` (civic.35).
+
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make
 a row drive a fate the builder didn't choose — or does it just tidy data?**

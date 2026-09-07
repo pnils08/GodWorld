@@ -1198,19 +1198,33 @@ function noPhaseCheck(json) {
 // Sunday chain — mayor_open_c104's actual published statement invented
 // "Thirty-two eligible applicants... clear the backlog in 60 days" with
 // nothing in her packet naming 32 or 60. Nothing caught it; it sat as citable
-// civic-voice source material for a full week. This is the same check, wired
-// against every statement's narrative text AND its trackerUpdates.MilestoneNotes
-// (the one field that propagates into a future cycle's known[] via initFact()
-// — a number that lands there becomes ground truth for every seat after it).
+// civic-voice source material for a full week.
+//
+// civic.35 (builder-ruled S433): GATE THE FACTS, NOT THE COLOR. The check
+// runs against the tracker fields only — MilestoneNotes and NextScheduledAction,
+// the fields that propagate into a future cycle's known[] via initFact() and
+// become ground truth for every seat after them. Speech (decision / quote /
+// fullStatement) is NOT gated: a mayor saying "over two hundred residents
+// showed up" is a mayor talking, and the desk quotes her as her claim. Gating
+// speech made the offices drones of the engine's numbers; the C106 mayor open
+// (2026-09-06 21:43, mistral) was rejected on "sixty-nine families" — a correct
+// 57+12 from her own packet — and "two hundred residents". Neither was a
+// tracker fact. Arithmetic on packet figures is also accepted now (see
+// ungroundedNumbers). Doctrine: docs/SIM_DOCTRINE.md §13.
+const TRACKER_FACT_FIELDS = ['MilestoneNotes', 'NextScheduledAction'];
+function trackerFactTexts(tu) {
+  if (!tu || typeof tu !== 'object') return [];
+  const out = [];
+  const take = (obj) => { for (const f of TRACKER_FACT_FIELDS) if (obj && obj[f] != null) out.push(obj[f]); };
+  take(tu);                                   // flat contract shape
+  for (const v of Object.values(tu)) if (v && typeof v === 'object') take(v);   // legacy nested-by-initiative shape
+  return out;
+}
 function statementNumberCheck(hay, context) {
   return function (json) {
     const bad = new Set();
     for (const st of (json && json.statements) || []) {
-      const tu = st && st.trackerUpdates;
-      const notes = tu && typeof tu === 'object'
-        ? Object.values(tu).map(v => (v && typeof v === 'object' ? v.MilestoneNotes : null)).concat(tu.MilestoneNotes)
-        : [];
-      const texts = [st && st.decision, st && st.quote, st && st.fullStatement, ...notes];
+      const texts = trackerFactTexts(st && st.trackerUpdates);
       for (const n of ungroundedNumbers(hay, texts, context)) bad.add(n);
     }
     if (!bad.size) return null;
@@ -2002,6 +2016,7 @@ function ungroundedNumbers(slice, texts, context) {
   // prior cycle it cites. First live cron run rejected all three as fabricated
   // (IND on "4", Okoro on "102") — false positives, not invented statistics.
   const allowed = new Set();
+  let hayNums = null;   // civic.35 lazy cache for derivedFromHay
   const ctx = context || {};
   const d = String(ctx.district || '').match(/\d+/);
   if (d) allowed.add(d[0]);
@@ -2023,11 +2038,29 @@ function ungroundedNumbers(slice, texts, context) {
     const tokens = digitTokens.concat(spelledNumberTokens(String(t || '')));
     for (const tok of tokens) {
       const bare = tok.replace(/%$/, '');
-      if (allowed.has(bare) || hay.includes(bare)) continue;
+      if (allowed.has(bare) || hay.includes(bare) || derivedFromHay(bare)) continue;
       bad.add(tok);
     }
   }
   return [...bad];
+
+  // civic.35: a number that is the sum or difference of two figures in the
+  // packet is grounded — "12 households; total 57/280" grounds 69. The gate
+  // used to reject the office for doing its own arithmetic correctly.
+  function derivedFromHay(bare) {
+    if (!/^\d+(?:\.\d+)?$/.test(bare)) return false;
+    const target = Number(bare);
+    if (!hayNums) {
+      hayNums = [...new Set((hay.match(/\d+(?:\.\d+)?/g) || []).map(Number))].slice(0, 400);
+    }
+    for (let i = 0; i < hayNums.length; i++) {
+      for (let j = i; j < hayNums.length; j++) {
+        const a = hayNums[i], b = hayNums[j];
+        if (Math.abs(a + b - target) < 1e-9 || Math.abs(Math.abs(a - b) - target) < 1e-9) return true;
+      }
+    }
+    return false;
+  }
 }
 
 async function runDatawake() {
@@ -2125,7 +2158,8 @@ async function runDatawake() {
             continue;
           }
           cand.statement = statement;
-          const bad = ungroundedNumbers(hay, [cand.statement, cand.action, cand.numberMoved], { district: office.district, cycle });
+          // civic.35: facts only — action + numberMoved feed the office wall and desk slices; statement is speech.
+          const bad = ungroundedNumbers(hay, [cand.action, cand.numberMoved], { district: office.district, cycle });
           if (!bad.length) { j = cand; answeredModel = active; break chainLoop; }
           log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
           if (attempt === 2) throw new Error('fabricated statistic(s) after retry: ' + bad.join(', '));

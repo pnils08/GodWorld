@@ -840,6 +840,12 @@ Files: `scripts/createInitiative.js`, `scripts/addInitiativeAuthorshipColumns.js
 
 Default backfill is blank. `--backfill-mayor` is optional and still does not invent ProposedCycle. No `--apply` from this lane.
 
+## Status log
+
+### civic.21 — status (drained from ROLLOUT, 2026-09-07 / S436)
+
+All 22 hoods RANKED live. Feeder SKIPS every cycle (pool at floor) so ranking alone seeded nobody — live read S423: the ten newly-ranked hoods still hold 0–3 citizens 20 days on. Remainder: engine.148 (the GC→ledger emergence door is dead for the ten hoods — pool holds them, nobody surfaces them; authored households on Intake are the patch, not the fix)
+
 ## Changelog
 - 2026-09-05 (engine-sheet, S423) — **RE-SCOPED against the standing doctrine; row closed.** Checked every cohort against live data and the rulings that landed after this plan's last edit (2026-08-16): S391 (sports is the world, civic is background), 2026-08-27 (civic machinery exists only to repair broken numbers), S406 (approval scoring unchanged; initiatives stay hand-fed). Verdicts — **E1** → civic.18: 4a/4b were already live (District 22/22 on the sheet), 4c/4d shipped this session (`c962f83f`). **E2** crime writer → engine.134 Task 4 (live Crime_Metrics: 18 rows, Montclair ghost, five canon hoods missing); demographics writer inert, nothing to do. **E3** MOOT — all 25 non-canon Household_Ledger rows (Piedmont Avenue 14, Montclair 5, Bridgeport 2, Oakland/Near North Side/traveling/A's 1 each) carry `DissolvedCycle`; every live household sits on a canon hood. Business_Ledger's 14 non-canon values are the four child-fold aliases + City-wide ×10 — engine.134 Task 2's fold, not a data fix. **E4** done (`bedbbedb`). **E5 / §8 / §10** ruled out — approval = condition + conduct and the conduct ledger are civic machinery for its own sake, and S406 says scoring stays. **civic.22** → blocked by the same ruling. **E6** (49 engine files still carry a `'Temescal'` literal) is engine.99's cohort long tail, migrated on touch, not a build. **civic.21** remainder is engine.109 Task 7 — the ten newly-ranked hoods still hold 0–3 citizens 20 days after ranking; the feeder cannot seed them, the builder's household door can.
 

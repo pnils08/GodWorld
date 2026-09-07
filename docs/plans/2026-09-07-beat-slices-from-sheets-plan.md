@@ -157,6 +157,12 @@
 
 ---
 
+## Status log
+
+### pipeline.68 — status (drained from ROLLOUT, 2026-09-07 / S436)
+
+Beat slices from Sheets (§13). T1 dump (ac808611) · T2 economic/food slice (662e614d) · T3 Mason + packet-v2 wiring (6860e07f) · T4 one builder + artifact per journalist: transit/health/schools/environment/faith/safety (1e1f0ead) · T7 WEEK_GRID rota, seat-scoped failure (69396c28, a553ca9c) — all LIVE 2026-09-07. Open: T5 approach strings (non-beat seats), T6 write-gate audit, T7b latency, T8 docs. Acceptance = unattended Mon–Fri rota from 2026-09-07
+
 ## Changelog
 
 - 2026-09-07 — Initial draft (S433 engine-sheet, drafted from the facts-not-color ruling and the desk-signal audit the same night).

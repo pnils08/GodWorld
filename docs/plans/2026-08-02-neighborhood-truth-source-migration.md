@@ -225,6 +225,12 @@ Every finding: what, where, and its triage — `fix-in-cohort` / `escalate`
 
 ---
 
+## Status log
+
+### engine.99 — status (drained from ROLLOUT, 2026-09-07 / S436)
+
+Neighborhood truth-source migration (ADR-0016) — entity set (Cohort 1–2) live; **Finding #9 child areas LIVE PROD @53 S423** (`Neighborhood_Map.ChildAreas` → Phase-1 seed → `resolveHoodOrChild_`; three fold literals gone; drift audit reconciles children, 0 findings). Remaining: the ~49-file hood-literal long tail, migrated on touch; first named site: `utilities/citizenDerivation.js` `NEIGHBORHOOD_GENDER_VARIANCE_` (20 keys — 5 tracked hoods absent → base 0.51 on promotion-minted gender: East Oakland, Baylight District, Dimond, Grand Lake, Brooklyn; 3 stale: Coliseum, Montclair, Elmhurst)
+
 ## Changelog
 - 2026-09-05 (engine-sheet, S423) — **Finding #9 landed: child areas are ledger truth. LIVE PROD @53.** Builder direction ("we should be moving to 1 true source for hoods") after the Montclair confusion exposed that the child→parent fold lived in three engine files and a Node list that disagreed (promotions folded tracked hoods into other hoods and put Montclair under Rockridge; commute and economy carried four-entry copies; nobody else knew Montclair existed). `Neighborhood_Map.ChildAreas` (authored, 10 hoods carry children, 20 child areas) → `loadCanonNeighborhoods_` seeds `children`/`childList` → `resolveHoodOrChild_(ctx, name)` (hood → itself, child → parent, else null) → `commuteFlowEngine`, `economicRippleEngine.mapToCanonicalNeighborhood_`, `checkForPromotions.validateNeighborhood` read it; three literals deleted. `lib/canonNeighborhoods.CHILDREN` is a cache of the column (hood names removed from it) and `auditHoodDrift` reconciles it — 0 findings against live. Montclair → Piedmont Ave (the hills above D6), recorded on the sheet, not in code. Bench @50 C114 clean; column replayed to live (read back) before the code push. Also this session: `CANON_12` brought to the sheet's 22-rank order (the core reconcile had failed since civic.21), and the Node district mirror stripped to 22 (Montclair is not a tracked hood — builder ruling). The 49-file literal long tail (`'Temescal'` etc.) remains the cohort work of this row.
 

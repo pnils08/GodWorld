@@ -902,6 +902,12 @@ This plan is the engine.90 pointer. The commits below are implementation, not th
 
 ---
 
+## Status log
+
+### engine.90 — status (drained from ROLLOUT, 2026-09-07 / S436)
+
+Citizen Archive — implement Citizen_Archive (v1 deceased+Traded); popIdHighWater first; restore before live Traded move. Commits 1–5 + 9 landed S428, bench-proven C108–C111 (56-row move + same-POPID restore) + the builder's editor C106/C107 (54 moved, 0 errors); LIVE S430: ensure ran (mark 1083, flag 0, empty tab) + PROD @61; Commits 7 (53 candidates, 0 relational), 12, 6 landed same session, PROD @62 (bench @64 C108 clean); Commit 8 landed PROD @63 (ArchiveNote at exit, 6 MigrationIntent cells cleared, Traded gate; bench @65 C109 organic-death proof); left: Commit 11 = the builder's flag flip after his live C106, then `buildCitizenCards.js --apply --from-archive`
+
 ## Changelog
 
 - 2026-09-06 (engine-sheet, S430, latest) — **Commit 8 landed, PROD @63** (§Commit 8). All code commits 1–9 + 12 are live; the only step left is **Commit 11**: the builder flips `citizenArchiveEnabled` to 1 after his live C106 fire smokes @46–@63, the next cycle moves the 53 (48 traded + 5 deceased, each with its ArchiveNote), then `node scripts/buildCitizenCards.js --apply --from-archive` + `dumpLedger.js`. Open Q5 (SchoolQuality) is no longer a gate for the move.

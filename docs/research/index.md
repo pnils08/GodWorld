@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-09-01
+updated: 2026-09-08
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -130,3 +130,4 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 - 2026-08-29 (kimi) — Registered [[2026-08-29-casino-ledger]] (S393, builder-directed): Undocked Phase 4b design-question consolidation; watch verdict — adopt-trigger is 4a texture ≥2 cycles + Mike-only sign-off. No new ROLLOUT row; research.27's plan carries the gate.
 - 2026-09-04 (S420, research-build) — Registered [[2026-08-30-hood-identity-remainder]] (grok): research basis for the engine.134 plan [[../plans/2026-08-30-hood-identity-remainder-plan]]. Sat unregistered in `docs/for-claude-review/` since 2026-08-30; filed during an inbox sweep, not a stale-claim correction — this one is genuinely unshipped.
 - 2026-09-05 (engine-sheet) — Registered [[2026-09-05-hood-blind-engines]] (S423, builder-directed): why ten hoods hold 0–7 citizens — relocation is a gate not a pull, the feeder and blank-hood intake are blind to ten hoods, 26 keyed hood tables (13 the same 12-key shape) vs 31 membership lists; adopt → engine.148, hood untangling is in scope as a project (overrides ADR-0015 §2 for the hood domain).
+- 2026-09-08 (S437, engine-sheet) — Registered [[2026-09-08-dials-as-a-game]] (builder-directed): what feeds the dials, what reads them, why they decide nothing yet — live C106: 546/911 all-neutral, no negative pole, the fold reaches only the 221 rows over 20 lines, mood decay never called, eight contests resolved without character; the four source games mapped to what is live; six cuts ordered B→A→C→D→E→F. research.28; kimi review before a plan ignites.

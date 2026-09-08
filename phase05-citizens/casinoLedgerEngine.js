@@ -280,6 +280,17 @@ function casinoResolveUndocked_(wager, feed, cycle) {
   return { status: CASINO_ST.VOID_GATE };
 }
 
+function casinoResolveSports_(wager, feed) {
+  var fid = wager.franchiseId || (String(wager.marketId || '').indexOf('oaks') >= 0 ? 'oaks' : 'as');
+  var parsed = casinoParseSports_(feed, fid);
+  if (parsed.kind === 'carry') return { status: 'carry' };
+  var wantWin = String(wager.side || '') === 'win';
+  return {
+    status: wantWin === parsed.franchiseWon ? CASINO_ST.WIN : CASINO_ST.LOSS,
+    eventId: parsed.eventId
+  };
+}
+
 function casinoResolve_(wager, feeds, cycle) {
   feeds = feeds || {};
   if (wager.status && wager.status !== CASINO_ST.OPEN) {

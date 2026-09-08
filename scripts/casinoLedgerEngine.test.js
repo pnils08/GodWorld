@@ -278,5 +278,25 @@ check('all credits windowed (null): void', ures('credits_sign', 'c106:POP-00099'
 check('night_winner past its cycle: void', ures('night_winner', 'night-106', 'POP-00098', 107) === E.CASINO_ST.VOID_GATE);
 check('night_winner on its cycle resolves', ures('night_winner', 'night-106', 'POP-00098', 106) === E.CASINO_ST.WIN);
 
+
+// Bench C119 (S438b) caught casinoResolveSports_ missing — the sports path must run through the main entry.
+const sportsSlipCtx = {
+  ledger: { headers: slHeaders, rows: [slRow.slice()], dirty: false },
+  ss: { getSheetByName: function (name) {
+    if (name === 'Casino_Ledger') return sheet([headers,
+      rowFrom({ WagerId: 'w-sp', CyclePlaced: 104, POPID: 'POP-TEST-1', MarketFamily: 'sports', MarketId: 'sports:as',
+        EventId: 'next-as', Side: 'win', Stake: 40, Odds: 1.83, Payout: 0, Status: 'open' }),
+      rowFrom({ WagerId: 'HOUSE', Status: 'house', HouseFloatAfter: 250000 })]);
+    return null;
+  } },
+  rng: function () { return 0.99; },
+  summary: { undockedFeedEntries: [], undockedPilots: {}, sportsFeedEntries: [
+    { eventType: 'game-result', teamsUsed: "A's", streak: 'W3', cycle: 105, teamRecord: '100-40' }
+  ], storyHooks: [] }
+};
+const sportsRan = E.processCasinoLedger_(sportsSlipCtx, 105);
+check('sports slip settles through the main entry', sportsRan.settled === 1 &&
+  (sportsSlipCtx._cells || []).some(function (c) { return c.v === 'settled-win'; }));
+
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('casinoLedgerEngine: ok');

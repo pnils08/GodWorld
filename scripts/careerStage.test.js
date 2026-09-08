@@ -215,6 +215,7 @@ function ctxWith(rows, cycle) {
     row2({ POPID: 'F17', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00177', RoleType: 'Nurse Aide' }),   // in-sector → the clinic's 154k
     row2({ POPID: 'F18', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00177', RoleType: 'Xyzzy' }),        // unplaceable → the employer average stands
     row2({ POPID: 'F19', age: 35, CareerStage: 'mid-career', Income: 120000, EmployerBizId: 'BIZ-00177', RoleType: 'Taxi driver' }), // out-of-sector, above the band → untouched (raise-only)
+    row2({ POPID: 'F20', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', RoleType: 'Registered Nurse' }), // out-of-sector, band ABOVE the employer → the employer average (the lower signal)
   ];
   const ctx = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {},
     ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL.map(r => r.slice()) }) } : null } };
@@ -242,7 +243,8 @@ function ctxWith(rows, cycle) {
   assert('engine.169 in-sector job floors at the employer average', inc('F17') === 154000, inc('F17'));
   assert('engine.169 unplaceable role keeps the employer average', inc('F18') === 154000, inc('F18'));
   assert('engine.169 out-of-sector above its band: untouched', inc('F19') === 120000, inc('F19'));
-  assert('D3 result counts', res.raised === 8 && res.checked >= 8 && res.outOfSector === 2, JSON.stringify(res));
+  assert('engine.169 out-of-sector with a band above the employer: floors at the employer, never past either signal', inc('F20') === 45000, inc('F20'));
+  assert('D3 result counts', res.raised === 9 && res.checked >= 9 && res.outOfSector === 3, JSON.stringify(res));
   assert('D3 no LifeHistory line (a floor correction is not an event)', ctx.ledger.rows.every(r => String(r[I2('LifeHistory')]) === 'Y1C1 — born'));
   assert('D3 ledger dirty', ctx.ledger.dirty === true);
   const ctxNoBL = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {}, ss: { getSheetByName: () => null } };

@@ -546,10 +546,13 @@ function calculateCitizenIncomes_(ctx) {
  * engine.169 (2026-09-07, builder): the employer's average is the floor ONLY
  * for a job in the employer's own sector — a Civis engineer earns Civis's
  * rate, a Civis janitor earns the janitor band. A job whose field the catalog
- * places outside the business's sector floors at jobReferencePay_ instead
- * (88 tracked rows were paid a company average for a job the company does
- * not do — a taxi driver at a clinic on 110k). An unplaceable role keeps the
- * employer average: the business is the only signal there.
+ * places outside the business's sector floors at the LOWER of its own band
+ * (jobReferencePay_) and the employer average — the floor never lifts anyone
+ * past what either signal supports, so a mis-read role title (the sector
+ * hints are regexes) can only hold a floor down, never inflate it. 88 tracked
+ * rows were paid a company average for a job the company does not do (a taxi
+ * driver at a clinic on 110k). An unplaceable role keeps the employer
+ * average: the business is the only signal there.
  * Exempt: sports-layer rows (game engine owns their pay), Tier-1 (never
  * auto-re-paid) and Tier-2 (story events only), students/retired/deceased,
  * untracked employers (SELF_EMPLOYED / UNTRACKED / blank), employers with no
@@ -611,8 +614,9 @@ function applyTrackedEmployerFloor_(ctx) {
     var bizField = sectorById[employer] || null;
     var floor;
     if (jobField && bizField && jobField !== bizField) {
-      floor = jobReferencePay_(row[iRole], iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r);
-      if (floor === null) continue;
+      var band = jobReferencePay_(row[iRole], iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r);
+      if (band === null) continue;
+      floor = Math.min(band, Math.round(avg * factor));
       out.outOfSector = (out.outOfSector || 0) + 1;
     } else {
       floor = Math.round(avg * factor);

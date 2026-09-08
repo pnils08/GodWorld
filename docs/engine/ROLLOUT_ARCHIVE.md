@@ -336,6 +336,14 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 
 ## S142 Archive Pass (2026-04-11)
 
+### Archive Pass — S438 (2026-09-08, engine-sheet)
+
+research.28 closed: the dials-as-a-game research (`docs/research/2026-09-08-dials-as-a-game.md`) — kimi review adopt, plan ignited as engine.176–182 (open in ROLLOUT).
+
+| ID | Item | State | Owner | Pointer |
+|---|---|---|---|---|
+| research.28 | Dials as a game — S437 measure (546/911 all-neutral, no negative pole, fold reaches only >20-line rows, 8 contests without character); kimi review 2026-09-08 adopt + order endorsed; plan ignited → engine.176–181 | done-pending-archive | engine-sheet | [[../research/2026-09-08-dials-as-a-game]] |
+
 ### Archive Pass — S434 (2026-09-07, engine-sheet)
 
 | ID | Description | Status | Owner | Pointer |

@@ -30,7 +30,9 @@ const sandbox = {
 vm.createContext(sandbox);
 for (const rel of [
   ['phase01-config', 'advanceSimulationCalendar.js'],
+  ['utilities', 'citizenDerivation.js'], // engine.169: the job catalog
   ['phase05-citizens', 'educationCareerEngine.js'],
+  ['phase05-citizens', 'runCareerEngine.js'], // engine.169: sectorCategory_
   ['phase05-citizens', 'generationalWealthEngine.js'],
 ]) { const p = path.join(__dirname, '..', ...rel); vm.runInContext(fs.readFileSync(p, 'utf8'), sandbox, { filename: p }); }
 const { updateCareerProgression_, deriveWealthLevel_, calculateCitizenIncomes_, SAVINGS_RATE_BY_WEALTH } = sandbox;
@@ -184,9 +186,9 @@ function ctxWith(rows, cycle) {
 {
   const applyTrackedEmployerFloor_ = sandbox.applyTrackedEmployerFloor_;
   assert('applyTrackedEmployerFloor_ loaded', typeof applyTrackedEmployerFloor_ === 'function');
-  const H2 = H.concat(['EmployerBizId']);
+  const H2 = H.concat(['EmployerBizId', 'RoleType', 'SkillTags']);
   const I2 = n => H2.indexOf(n);
-  function row2(o) { const r = row(o).concat(['']); r[I2('EmployerBizId')] = o.EmployerBizId || ''; return r; }
+  function row2(o) { const r = row(o).concat(['', '', '']); r[I2('EmployerBizId')] = o.EmployerBizId || ''; r[I2('RoleType')] = o.RoleType || ''; r[I2('SkillTags')] = o.SkillTags || ''; return r; }
   const BL = [['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'],
     ['BIZ-00170', 'MacArthur Kitchen', 'Restaurant & Dining', 'Laurel', 11, 45000, 990000, 3, ''],
     ['BIZ-00177', 'College Avenue Dental', 'Healthcare', 'Rockridge', 8, 154000, 2464000, 2, ''],
@@ -208,6 +210,11 @@ function ctxWith(rows, cycle) {
     row2({ POPID: 'F13', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00005' }),    // ENGINE row at a sports franchise: athlete avg must not floor it
     row2({ POPID: 'F14', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', ClockMode: 'CIVIC' }), // engine.162: CIVIC rejoined D3
     row2({ POPID: 'F15', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', ClockMode: 'MEDIA' }), // engine.162: MEDIA rejoined D3
+    // engine.169: the employer's average is the floor only for a job in its sector
+    row2({ POPID: 'F16', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00177', RoleType: 'Taxi driver' }),  // out-of-sector → the taxi band, not 154k
+    row2({ POPID: 'F17', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00177', RoleType: 'Nurse Aide' }),   // in-sector → the clinic's 154k
+    row2({ POPID: 'F18', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00177', RoleType: 'Xyzzy' }),        // unplaceable → the employer average stands
+    row2({ POPID: 'F19', age: 35, CareerStage: 'mid-career', Income: 120000, EmployerBizId: 'BIZ-00177', RoleType: 'Taxi driver' }), // out-of-sector, above the band → untouched (raise-only)
   ];
   const ctx = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {},
     ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL.map(r => r.slice()) }) } : null } };
@@ -230,12 +237,24 @@ function ctxWith(rows, cycle) {
   // employer pays, same floor as everyone else. GAME (F9) still is not.
   assert('D3 CIVIC row gets the floor', inc('F14') === 45000, inc('F14'));
   assert('D3 MEDIA row gets the floor', inc('F15') === 45000, inc('F15'));
-  assert('D3 result counts', res.raised === 5 && res.checked >= 5, JSON.stringify(res));
+  const taxiBand = sandbox.jobReferencePay_('Taxi driver', '', 'mid-career', 'F16');
+  assert('engine.169 out-of-sector job floors at its own band', inc('F16') === taxiBand && taxiBand < 80000, inc('F16') + ' vs ' + taxiBand);
+  assert('engine.169 in-sector job floors at the employer average', inc('F17') === 154000, inc('F17'));
+  assert('engine.169 unplaceable role keeps the employer average', inc('F18') === 154000, inc('F18'));
+  assert('engine.169 out-of-sector above its band: untouched', inc('F19') === 120000, inc('F19'));
+  assert('D3 result counts', res.raised === 8 && res.checked >= 8 && res.outOfSector === 2, JSON.stringify(res));
   assert('D3 no LifeHistory line (a floor correction is not an event)', ctx.ledger.rows.every(r => String(r[I2('LifeHistory')]) === 'Y1C1 — born'));
   assert('D3 ledger dirty', ctx.ledger.dirty === true);
   const ctxNoBL = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {}, ss: { getSheetByName: () => null } };
   const res2 = applyTrackedEmployerFloor_(ctxNoBL);
   assert('D3 no Business_Ledger → no-op', res2.raised === 0 && ctxNoBL.ledger.dirty === false, JSON.stringify(res2));
+}
+
+// ── engine.170: a field-change hire takes a job in the employer's field ──────
+{
+  const car = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens', 'runCareerEngine.js'), 'utf8');
+  assert('engine.170 hire block re-roles into the employer field (SETTLE_ROLES_BY_FIELD[cat]) and moves the current-field tag', /var curField = roleFieldOf_\(hRow\[iRoleM\]\);[\s\S]*?SETTLE_ROLES_BY_FIELD\[cat\]\[eduRank >= 4 \? 'rich' : eduRank >= 1 \? 'solid' : 'rough'\][\s\S]*?setCurrentField_\(hRow\[iTags\], cat\)/.test(car));
+  assert('engine.170 a same-field hire keeps its role (the block is gated on curField !== cat)', /if \(curField !== cat\) \{/.test(car));
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

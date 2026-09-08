@@ -543,6 +543,13 @@ function calculateCitizenIncomes_(ctx) {
  * Income raised to that business's minimum if below — never reduced if above.
  * Floor = Avg_Salary × 0.75 (entry) · 1.0 (mid) · 1.3 (senior), the same
  * stage scale the plan's §Pay scale sets for the businesses themselves.
+ * engine.169 (2026-09-07, builder): the employer's average is the floor ONLY
+ * for a job in the employer's own sector — a Civis engineer earns Civis's
+ * rate, a Civis janitor earns the janitor band. A job whose field the catalog
+ * places outside the business's sector floors at jobReferencePay_ instead
+ * (88 tracked rows were paid a company average for a job the company does
+ * not do — a taxi driver at a clinic on 110k). An unplaceable role keeps the
+ * employer average: the business is the only signal there.
  * Exempt: sports-layer rows (game engine owns their pay), Tier-1 (never
  * auto-re-paid) and Tier-2 (story events only), students/retired/deceased,
  * untracked employers (SELF_EMPLOYED / UNTRACKED / blank), employers with no
@@ -557,7 +564,8 @@ function applyTrackedEmployerFloor_(ctx) {
   if (!header || !rows || !rows.length) return out;
   var idx = function(n) { return header.indexOf(n); };
   var iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStage = idx('CareerStage'),
-      iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey');
+      iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey'),
+      iRole = idx('RoleType'), iTags = idx('SkillTags'), iPop = idx('POPID'); // engine.169
   if (iIncome < 0 || iEmp < 0 || iStage < 0) return out;
 
   var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
@@ -570,7 +578,7 @@ function applyTrackedEmployerFloor_(ctx) {
     if (hn === 'BIZ_ID') bId = c; else if (hn === 'Avg_Salary') bSal = c; else if (hn === 'Sector') bSec = c;
   }
   if (bId < 0 || bSal < 0) return out;
-  var salaryById = {};
+  var salaryById = {}, sectorById = {}; // engine.169: the business's field, for the in-sector test
   for (var b = 1; b < bizData.length; b++) {
     var id = String(bizData[b][bId] || '').trim();
     var sal = Number(bizData[b][bSal]) || 0;
@@ -579,7 +587,7 @@ function applyTrackedEmployerFloor_(ctx) {
     // floored at it. Same regex sectorCategory_ uses to keep hires out.
     var sector = bSec >= 0 ? String(bizData[b][bSec] || '') : '';
     if (/sports|stadium|franchise|athletic/i.test(sector)) continue;
-    if (id && sal > 0) salaryById[id] = sal;
+    if (id && sal > 0) { salaryById[id] = sal; sectorById[id] = (typeof sectorCategory_ === 'function') ? sectorCategory_(sector, true) : null; }
   }
 
   var STAGE_FACTOR = { ENTRY: 0.75, MID: 1.0, SENIOR: 1.3 };
@@ -598,7 +606,17 @@ function applyTrackedEmployerFloor_(ctx) {
     var factor = STAGE_FACTOR[careerStageClass_(row[iStage])];
     if (!factor) continue; // student / retired / unknown stage: no floor
     out.checked++;
-    var floor = Math.round(avg * factor);
+    // engine.169: in-sector job → the employer's average; out-of-sector job → the job's own band
+    var jobField = (iRole >= 0 && typeof roleFieldOf_ === 'function') ? roleFieldOf_(row[iRole]) : null;
+    var bizField = sectorById[employer] || null;
+    var floor;
+    if (jobField && bizField && jobField !== bizField) {
+      floor = jobReferencePay_(row[iRole], iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r);
+      if (floor === null) continue;
+      out.outOfSector = (out.outOfSector || 0) + 1;
+    } else {
+      floor = Math.round(avg * factor);
+    }
     var income = Number(row[iIncome]) || 0;
     if (income < floor) {
       row[iIncome] = floor;

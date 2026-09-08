@@ -1135,6 +1135,7 @@ function runCareerEngine_(ctx) {
     if (iEmployerBizId < 0) return;
     var iTags = idx('SkillTags');
     if (iTags < 0) { Logger.log('v2.7 rehire matcher skipped: SkillTags column missing'); return; }
+    var iRoleM = idx('RoleType'); // engine.170: the hire's job follows the employer's field
 
     var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
     if (!bizSheet) return;
@@ -1233,6 +1234,23 @@ function runCareerEngine_(ctx) {
         var hRow = rows[pool[hIdx].r];
         var isCross = !tagsInCategory_(pool[hIdx].tags, cat);
         hRow[iEmployerBizId] = bizId2;
+        // engine.170 (2026-09-07, builder: business in its sector): a citizen hired
+        // into a field their current job is not in takes an entry job IN that field
+        // (the settlement table's first job for it, banded by credential) and the
+        // current-field tag follows (engine.146 two truths). Before this a taxi
+        // driver could be hired by a clinic and stay a taxi driver on the clinic's
+        // payroll. A same-field hire keeps the role they have.
+        if (iRoleM >= 0 && typeof roleFieldOf_ === 'function' && typeof SETTLE_ROLES_BY_FIELD !== 'undefined' && SETTLE_ROLES_BY_FIELD[cat]) {
+          var curField = roleFieldOf_(hRow[iRoleM]);
+          if (curField !== cat) {
+            var eduRank = Number(pool[hIdx].edu) || 0;
+            var newRole = SETTLE_ROLES_BY_FIELD[cat][eduRank >= 4 ? 'rich' : eduRank >= 1 ? 'solid' : 'rough'];
+            hRow[iRoleM] = newRole;
+            if (typeof setCurrentField_ === 'function') hRow[iTags] = setCurrentField_(hRow[iTags], cat);
+            if (typeof jobReferencePay_ === 'function') { var np = jobReferencePay_(newRole, hRow[iTags], hRow[idx('CareerStage')], hRow[iPopID]); if (np !== null) hRow[iIncome] = np; }
+            isCross = true; // the story is a field change whichever token matched
+          }
+        }
         var hInc = Number(hRow[iIncome]) || 0;
         if (hInc > 0) {
           // same-field rehire recovers ground (+5-10%); a career change starts flatter

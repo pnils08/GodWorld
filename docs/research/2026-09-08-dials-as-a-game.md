@@ -150,3 +150,5 @@ Fenced off by doctrine §10, explicitly: the family-match lottery (`processAdvan
   - **Cut D romantic triangle is §11-clean** (it weights maturation pace of bonds that already exist; marriage still runs maintain → mature), and the loser keeping the RIVALRY bond at intensity 5 with the +1.5 co-active drift (bondEngine.js:656-677) means the rivalry self-reinforces — good drama, confirm intended in the plan.
 
   Nothing above blocks ignition; conditions 1(a)/1(b) and the Cut B tint-exclusivity + ratchet items belong in the plan text when the six engine.NN rows are cut.
+
+- 2026-09-08 (S437, engine-sheet) — Plan ignited: [[../plans/2026-09-08-dials-as-a-game-plan]], engine.176–181, kimi's four answers and six hazards folded in as pinned conditions (contest weights 1 / two dials / credential on the band scale; bond warmth consolidated not stacked; tint exclusive with a collision tag, hood sign off persisted Neighborhood_Map; Friction→Strain recurrence decay; unlived capture at arrival; legacy no-stamp lines fold once at trim; posture push after Phase5-Maneuver, never over a cause-held retreat). Bench occupied by engine.175 at filing.

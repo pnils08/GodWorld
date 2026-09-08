@@ -632,7 +632,8 @@ function processRelocations_(ctx, cycle) {
       iDisplRisk = idx('DisplacementRisk'), iMigIntent = idx('MigrationIntent'),
       iMigReason = idx('MigrationReason'), iMigDest = idx('MigrationDestination'),
       iMigCycle = idx('MigratedCycle'),
-      iWealthLevel = idx('WealthLevel'); // engine.135 F — admission band
+      iWealthLevel = idx('WealthLevel'), // engine.135 F — admission band
+      iDialStateR = idx('DialState');   // engine.178 — openness gates the misfit lane
   if (iNeighborhood < 0 || iIncome < 0 || iMigIntent < 0) return { moved: 0 };
   // engine.135 F (S399): the B1 hood profile (S.neighborhoodState, Phase 2)
   // carries each neighborhood's WealthLevel admission band.
@@ -676,7 +677,16 @@ function processRelocations_(ctx, cycle) {
     if (unit.income <= 0 || !unit.rowIdxs.length) continue;
 
     var current = hoods[unit.hood];
-    var misfit = unit.income >= current.income * RELOCATION.MISFIT_INCOME_RATIO;
+    // engine.178 (S438): the unit head's OPENNESS band closes or opens the misfit door —
+    // a rigid citizen (-2) never moves for money alone; a restless one (+2) clears the
+    // income ratio at dialOpenMoveThresholdMult of it. The pressure lane (displacement)
+    // is a cause, not a want, and reads no dial.
+    var headRow = rows[unit.rowIdxs[0]];
+    var headBands = (iDialStateR >= 0 && typeof getCitizenDialBands_ === 'function')
+      ? getCitizenDialBands_(ctx, String(headRow[iPOPID] || ''), headRow[iDialStateR] || '') : null;
+    var openBand = headBands ? headBands.bands.openness : 0;
+    var misfitRatio = RELOCATION.MISFIT_INCOME_RATIO * (openBand >= 2 ? pressureBar_(ctx, 'dialOpenMoveThresholdMult') : 1);
+    var misfit = openBand > -2 && unit.income >= current.income * misfitRatio;
     var lane = unit.planning ? 'pressure' : (misfit ? 'misfit' : null);
     if (!lane) continue;
 

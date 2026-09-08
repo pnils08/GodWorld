@@ -96,6 +96,8 @@ This layer is real and pervasive. "If crime spikes in a neighborhood it affects 
 
 All are pre-cap multipliers; `null` bands (no DialState) → base rates unchanged.
 
+**engine.178 (S438): dials CLOSE DOORS — band gates at outcome rolls, not frequency knobs.** openness −2 refuses the misfit relocation lane / +2 lowers its income ratio (`migrationTrackingEngine.js` `processRelocations_`); integrity +2 does not sit at the casino, composure −2 draws the tilt stake band (`casinoLedgerEngine.js`, around the engine.157 posture factor); the bond engine reads warmth/family as signed bands off live DialState (`bondDialBand_`, face fallback) and warmth scales the stale-bond decay — maintenance, not formation (`bondEngine.js`); an owner's composure moves the closure streak bar ±1 and drive +2 multiplies a positive drift (`applyBusinessDynamics.js` `bizOwnerBands_`, owner by POPID or full name off `Key_Personnel`); an officeholder's integrity band scales the approval-ceiling scandal chance (`updateCivicApprovalRatings.js` `holderIntegrityBand_`). Every site passes the row's DialState string — `ctx.citizenLookup` is built late in Phase 5.
+
 ### Layer 2 — Outcome: *what the event does to the citizen*. Always a dial nudge; real state-mutation only in some engines.
 
 - **Always:** the event's tag → dial delta (the spine). Even a generic `Daily`/`Household` line moves composure/family. So every logged event shapes the citizen's essence over time.

@@ -156,7 +156,7 @@ function applyApprovalCeilingRisk_(state, config, rng) {
   if (out.highStreak < config.minStreakCycles) return out;
 
   out.chance = Math.min(config.maxChance,
-    config.baseChance + (out.highStreak - config.minStreakCycles) * config.chanceStep);
+    (config.baseChance + (out.highStreak - config.minStreakCycles) * config.chanceStep) * (state.chanceMult > 0 ? state.chanceMult : 1)); // engine.178: the holder's integrity
   out.roll = rng();
   if (out.roll >= out.chance) return out;
 
@@ -463,14 +463,25 @@ function updateCivicApprovalRatings_(ctx) {
     // APPLY AND CLAMP
     // ─────────────────────────────────────────────────────────────────────
     var newApproval = Math.max(10, Math.min(95, currentApproval + delta));
+    // engine.178 (S438): the officeholder's INTEGRITY band scales the ceiling's scandal
+    // chance — -2 x dialIntegrityScandalLow, +2 x dialIntegrityScandalHigh, +-1 halfway,
+    // neutral x1. Holder resolved by name against the ledger (the office row carries no POPID).
+    var holderInteg = holderIntegrityBand_(ctx, holder);
+    var scandalMult = 1;
+    if (holderInteg !== null && holderInteg !== 0) {
+      var lowM = pressureBar_(ctx, 'dialIntegrityScandalLow'), highM = pressureBar_(ctx, 'dialIntegrityScandalHigh');
+      scandalMult = holderInteg < 0 ? 1 + (lowM - 1) * (-holderInteg / 2) : 1 + (highM - 1) * (holderInteg / 2);
+    }
     var ceiling = applyApprovalCeilingRisk_({
       cycle: cycle,
       status: status,
       approval: newApproval,
       highStreak: lifecycle.highStreak,
       untilCycle: lifecycle.untilCycle,
-      source: lifecycle.source
+      source: lifecycle.source,
+      chanceMult: scandalMult
     }, ceilingConfig, rng);
+    if (scandalMult !== 1) reasons.push('integrity band ' + holderInteg + ' scales scandal chance x' + scandalMult.toFixed(2));
 
     if (ceiling.triggered) {
       reasons.push('sustained high approval scandal (-' + ceilingConfig.approvalDrop + ')');
@@ -954,6 +965,26 @@ function dialBandIndexFromValue_(v) {
   if (n < 60) return 2;
   if (n < 80) return 3;
   return 4;
+}
+
+// engine.178 (S438): an officeholder's signed integrity band, resolved by full name
+// against ctx.ledger (First + Last, case-insensitive). null when unresolved / no dials.
+function holderIntegrityBand_(ctx, holderName) {
+  var nm = String(holderName || '').trim().toLowerCase();
+  if (!nm || !ctx || !ctx.ledger || !ctx.ledger.headers) return null;
+  if (!ctx._holderDialByName) {
+    ctx._holderDialByName = {};
+    var h = ctx.ledger.headers, iF = h.indexOf('First'), iL = h.indexOf('Last'), iP = h.indexOf('POPID'), iD = h.indexOf('DialState');
+    if (iF >= 0 && iL >= 0 && iD >= 0) for (var r = 0; r < ctx.ledger.rows.length; r++) {
+      var row = ctx.ledger.rows[r];
+      var key = (String(row[iF] || '').trim() + ' ' + String(row[iL] || '').trim()).trim().toLowerCase();
+      if (key && row[iD]) ctx._holderDialByName[key] = { pop: iP >= 0 ? String(row[iP] || '') : key, ds: String(row[iD]) };
+    }
+  }
+  var hit = ctx._holderDialByName[nm];
+  if (!hit || typeof getCitizenDialBands_ !== 'function') return null;
+  var gb = getCitizenDialBands_(ctx, hit.pop.toUpperCase(), hit.ds);
+  return (gb && gb.bands && gb.bands.integrity != null) ? gb.bands.integrity : null;
 }
 
 function readDialBase_(dialState, dial) {

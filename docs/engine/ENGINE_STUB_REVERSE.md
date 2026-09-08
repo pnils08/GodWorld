@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1337 · **S.* fields:** 344 · **Sheets:** 59
+**Files scanned:** 184 · **Functions mapped:** 1342 · **S.* fields:** 345 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -52,6 +52,7 @@
 | `S.careerChurn` | `phase06-analysis/economicRippleEngine.js::detectCareerRipples_` | _(none)_ | 1 | 0 |
 | `S.careerEvents` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | _(none)_ | 1 | 0 |
 | `S.careerSignals` | `phase05-citizens/runCareerEngine.js::runCareerEngine_` | `phase05-citizens/educationCareerEngine.js::settleAdulthood_`, `phase05-citizens/processAdvancementIntake.js::processAdvancementRows_`, `phase05-citizens/runCareerEngine.js::applyEmployerSuccess_`, `phase05-citizens/runCareerEngine.js::runCareerEngine_`, `phase06-analysis/economicRippleEngine.js::detectCareerRipples_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_` | 1 | 6 |
+| `S.casinoGates` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | 1 | 1 |
 | `S.casinoSettlements` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_` | 1 | 1 |
 | `S.chaosBusinessFold` | `phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_` | `phase04-events/chaosCarsEngine.js::accumulateBusinessEvent_`, `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | 1 | 3 |
 | `S.chaosCarsEvents` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_` | `phase04-events/chaosCarsEngine.js::runChaosCarsEngine_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_` | 1 | 2 |
@@ -268,7 +269,7 @@
 | `S.phaseTimings` | `phase01-config/godWorldEngine2.js::recordPhaseTiming_` | `phase01-config/godWorldEngine2.js::emitPhaseTimings_`, `phase01-config/godWorldEngine2.js::recordPhaseTiming_`, `phase01-config/godWorldEngine2.js::safePhaseCall_` | 1 | 3 |
 | `S.positiveInitiatives` | `phase05-citizens/civicInitiativeEngine.js::applyInitiativeConsequences_` | `phase05-citizens/civicInitiativeEngine.js::applyInitiativeConsequences_`, `phase07-evening-media/storyHook.js::storyHookEngine_` | 1 | 2 |
 | `S.postCareerEvents` | `phase05-citizens/runAsUniversePipeline.js::runAsUniversePipeline_` | _(none)_ | 1 | 0 |
-| `S.pressureCounts` | `utilities/citizenDialMap.js::emitPressureTag_` | `utilities/citizenDialMap.js::emitPressureTag_` | 1 | 1 |
+| `S.pressureCounts` | `utilities/citizenDialMap.js::emitPressureTag_` | `utilities/citizenDialMap.js::emitPressureTag_`, `utilities/compressLifeHistory.js::compressLifeHistory_` | 1 | 2 |
 | `S.pressureTagged` | `utilities/citizenDialMap.js::emitPressureTag_` | `utilities/citizenDialMap.js::emitPressureTag_`, `utilities/citizenDialMap.js::hasTag_` | 1 | 2 |
 | `S.previousCityDynamics` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | 1 | 1 |
 | `S.previousClusterDynamics` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | _(none)_ | 1 | 0 |
@@ -433,7 +434,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Storyline_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processStorylineIntake_`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureStorylineIntakeSheet_` | 0 | 2 |
 | `Storyline_Tracker` | `phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_` | `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/storylineWeavingEngine.js::assignCitizenRoles_`, `phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_`, `phase07-evening-media/storylineWeavingEngine.js::loadActiveStorylinesForWeaving_`, `phase07-evening-media/storylineWeavingEngine.js::updateCrossStorylineLinks_` | 1 | 5 |
 | `Undocked_Feed` | _(none)_ | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_`, `phase05-citizens/casinoLedgerEngine.js::casinoUpcoming_` | 0 | 2 |
-| `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine148Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, …(+9 more) | 0 | 14 |
+| `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine148Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, …(+10 more) | 0 | 15 |
 | `World_Drift_Report` | _(none)_ | `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport` | 0 | 1 |
 | `World_Population` | `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_`, `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport`, `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, …(+8 more) | 1 | 13 |
 | `WorldEvents_Ledger` | _(none)_ | `phase02-world-state/updateTransitMetrics.js::loadPreviousCycleEvents_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase10-persistence/recordWorldEventsv25.js::ensureWorldEventsLedger_`, `phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_`, `phase10-persistence/recordWorldEventsv25.js::upgradeWorldEventsLedger_`, …(+2 more) | 0 | 7 |

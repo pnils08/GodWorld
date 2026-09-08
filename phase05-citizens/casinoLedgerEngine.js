@@ -267,12 +267,13 @@ function casinoPayout_(stake, odds) {
 
 // engine.157: posture sets the band — a climber draws bigger under the 25 %
 // cap whatever their WealthLevel; a retreat halves the draw. Undefined = hold.
-function casinoStake_(income, netWorth, wealthLevel, rng, posture) {
+function casinoStake_(income, netWorth, wealthLevel, rng, posture, tilt) {
   var weekly = casinoWeekly_(income);
   var nw = Number(netWorth) || 0;
   var wl = Number(wealthLevel);
   if (isNaN(wl)) wl = 5;
-  var climb = posture === 'climb', retreat = posture === 'retreat';
+  // engine.178: tilt (composure -2) draws the climb band and ignores a retreat's halving
+  var climb = posture === 'climb' || !!tilt, retreat = posture === 'retreat' && !tilt;
   var weekCap = weekly * ((wl <= 3 && !climb) ? 0.10 : 0.25);
   var cap = Math.min(weekCap, nw * 0.04, CASINO_STAKE_CEIL);
   if (!(cap >= CASINO_STAKE_FLOOR)) return null;
@@ -698,6 +699,13 @@ function processCasinoLedger_(ctx, cycle) {
     var postureE = (typeof maneuverPostureOf_ === 'function') ? maneuverPostureOf_(ctx, pid) : null;
     var drive = casinoDrive_(iDial >= 0 ? crow[iDial] : '', iTrait >= 0 ? crow[iTrait] : '');
     var driveF = postureE ? maneuverFactor_(ctx, pid, null) : (drive >= 60 ? 1.4 : 1.0);
+    // engine.178 (S438): the dials gate AROUND the posture factor. An incorruptible
+    // citizen (integrity +2) does not sit down; a volatile one (composure -2) draws
+    // the tilt stake band whatever the posture says. Bands off the row's DialState.
+    var gateBands = (iDial >= 0 && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, pid, crow[iDial] || '') : null;
+    if (gateBands && gateBands.bands.integrity >= 2) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.refused++; continue; }
+    var tilt = !!(gateBands && gateBands.bands.composure <= -2);
+    if (tilt) { S.casinoGates = S.casinoGates || { refused: 0, tilt: 0 }; S.casinoGates.tilt++; }
     var wantShow = showOn && casinoEligible_(status, age, income, nw, emp, 'undocked', isPilot);
     var wantSports = casinoEligible_(status, age, income, nw, emp, 'sports', isPilot);
     if (!wantShow && !wantSports) continue;
@@ -708,7 +716,7 @@ function processCasinoLedger_(ctx, cycle) {
     if (rng() >= p) continue;
 
     var pickShow = wantShow && (!wantSports || rng() < 0.5);
-    var stake = casinoStake_(income, nw, iWL >= 0 ? crow[iWL] : 5, rng, postureE ? postureE.posture : undefined);
+    var stake = casinoStake_(income, nw, iWL >= 0 ? crow[iWL] : 5, rng, postureE ? postureE.posture : undefined, tilt);
     if (stake == null) continue;
 
     var fam, mkt, ev, side, odds, seed;

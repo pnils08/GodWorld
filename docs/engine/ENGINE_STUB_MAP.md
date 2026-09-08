@@ -103,6 +103,9 @@
 - **ensureEngine176Config_(ss)**
   Sheets: World_Config
 
+- **ensureEngine178Config_(ss)**
+  Sheets: World_Config
+
 - **ensureEngine148Config_(ss)**
   Sheets: World_Config
 
@@ -859,6 +862,8 @@
 
 - **bizClamp_(n, lo, hi)**
 
+- **bizOwnerBands_(ctx, keyPersonnelCell)**
+
 - **bizDriftOne_(cfg, biz, prevState, inputs, cycle)**
 
 - **applyBusinessDynamics_(ctx)**
@@ -1002,6 +1007,10 @@
 - **appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle)**
 
 - **bondTraitOf_(ctx, popId, trait)**
+
+- **bondDialBand_(ctx, popId, dial)**
+
+- **bondPairFactor_(ctx, popA, popB, dial)**
 
 - **bondWarmthFactor_(ctx, popA, popB)**
 
@@ -1177,7 +1186,7 @@
 
 - **casinoPayout_(stake, odds)**
 
-- **casinoStake_(income, netWorth, wealthLevel, rng, posture)**
+- **casinoStake_(income, netWorth, wealthLevel, rng, posture, tilt)**
 
 - **casinoEligible_(status, age, income, netWorth, employerBizId, marketFamily, isPilot)**
 
@@ -1195,8 +1204,8 @@
 - **casinoCooldown_(history, cycle, weekly)**
 
 - **processCasinoLedger_(ctx, cycle)**
-  Reads: S.casinoSettlements, S.simYear, S.sportsFeedEntries, S.storyHooks, S.undockedFeedEntries, S.undockedPilots
-  Writes: S.casinoSettlements, S.storyHooks
+  Reads: S.casinoGates, S.casinoSettlements, S.simYear, S.sportsFeedEntries, S.storyHooks, S.undockedFeedEntries, S.undockedPilots
+  Writes: S.casinoGates, S.casinoSettlements, S.storyHooks
   Sheets: Household_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2098,6 +2107,8 @@
 - **civicHash_(s)**
 
 - **dialBandIndexFromValue_(v)**
+
+- **holderIntegrityBand_(ctx, holderName)**
 
 - **readDialBase_(dialState, dial)**
 
@@ -3293,7 +3304,7 @@
 - **nudgeBondIntensity_(bonds, totals, fromPop, toPop, delta, cycle)**
 
 - **compressLifeHistory_(ctx, options)**
-  Reads: S.absoluteCycle, S.biasIntents, S.cycleId, S.pendingCascades, S.relationshipBonds
+  Reads: S.absoluteCycle, S.biasIntents, S.cycleId, S.pendingCascades, S.pressureCounts, S.relationshipBonds
   Writes: S.lifeHistoryCompression
 
 - **parseLifeHistoryEntries_(historyStr)**
@@ -3894,4 +3905,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1337
+**Functions mapped:** 1342

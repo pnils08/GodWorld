@@ -249,6 +249,44 @@ function bizMayorApproval_(ctx) {
 function bizClamp_(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 
 // Pure: one business, one cycle. Returns { growth, revenue, drift, streak, win, disrupted, parts }.
+// engine.178 (S438): the owner's signed dial bands off Key_Personnel -> ledger DialState.
+// First owner/founder entry carrying a POPID wins; null when none resolves.
+function bizOwnerBands_(ctx, keyPersonnelCell) {
+  if (!keyPersonnelCell || typeof parseKeyPersonnelOwners_ !== 'function' || typeof getCitizenDialBands_ !== 'function') return null;
+  if (!ctx._bizDialByPop) {
+    ctx._bizDialByPop = {}; ctx._bizDialByName = {};
+    if (ctx.ledger && ctx.ledger.headers) {
+      var h = ctx.ledger.headers, iP = h.indexOf('POPID'), iD = h.indexOf('DialState'), iF = h.indexOf('First'), iL = h.indexOf('Last');
+      if (iP >= 0 && iD >= 0) for (var r = 0; r < ctx.ledger.rows.length; r++) {
+        var pp = String(ctx.ledger.rows[r][iP] || '').trim().toUpperCase();
+        if (!pp || !ctx.ledger.rows[r][iD]) continue;
+        var dsRow = String(ctx.ledger.rows[r][iD]);
+        ctx._bizDialByPop[pp] = dsRow;
+        // live Key_Personnel is mostly names ("Priya Chandrasekaran (Founder)"): 6 of 21 owner
+        // entries carry a POPID (measured S438) — resolve the rest by full name, the
+        // same key the bond engine and the civic holder read use.
+        if (iF >= 0 && iL >= 0) {
+          var nk = (String(ctx.ledger.rows[r][iF] || '').trim() + ' ' + String(ctx.ledger.rows[r][iL] || '').trim()).trim().toLowerCase();
+          if (nk) ctx._bizDialByName[nk] = { pop: pp, ds: dsRow };
+        }
+      }
+    }
+  }
+  var entries = parseKeyPersonnelOwners_(keyPersonnelCell);
+  for (var e = 0; e < entries.length; e++) {
+    if (!entries[e].owner) continue;
+    var pop = entries[e].pop ? String(entries[e].pop).toUpperCase() : '', ds = pop ? ctx._bizDialByPop[pop] : null;
+    if (!ds && entries[e].name) {
+      var byName = ctx._bizDialByName[String(entries[e].name).trim().toLowerCase()];
+      if (byName) { pop = byName.pop; ds = byName.ds; }
+    }
+    if (!ds) continue;
+    var gb = getCitizenDialBands_(ctx, pop, ds);
+    if (gb && gb.bands) return gb.bands;
+  }
+  return null;
+}
+
 function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   var cls = bizSectorClass_(biz.sector);
   var vol = cfg['bizVol_' + cls];
@@ -285,6 +323,8 @@ function bizDriftOne_(cfg, biz, prevState, inputs, cycle) {
   var noise = (seedUnit_(cycle + '|' + biz.id + '|noise') * 2 - 1) * cfg.bizNoiseBound;
 
   var drift = bizClamp_((ev + vitMod + pressure + shock + noise) * vol, -cfg.bizDriftMaxDown, cfg.bizDriftMaxUp);
+  // engine.178: a driven owner (drive +2) turns a good week into a bigger one; never a bad one into a good one
+  if (drift > 0 && inputs.ownerDriveBand >= 2 && inputs.ownerExpandMult > 1) drift = bizClamp_(drift * inputs.ownerExpandMult, 0, cfg.bizDriftMaxUp);
   var growth = Math.round(bizClamp_(biz.growth + drift, cfg.bizGrowthFloor, cfg.bizGrowthCeil) * 100) / 100;
   var revenue = biz.revenue === null ? null : Math.round(biz.revenue * (1 + growth / 100 / 52));
   var streak = growth < 0 ? (Number(prevState.streak) || 0) + 1 : 0;
@@ -305,7 +345,7 @@ function applyBusinessDynamics_(ctx) {
   var bh = bl[0];
   var col = function(name) { for (var c = 0; c < bh.length; c++) if (String(bh[c]).trim() === name) return c; return -1; };
   var iId = col('BIZ_ID'), iSec = col('Sector'), iHood = col('Neighborhood'), iRev = col('Annual_Revenue'), iGrow = col('Growth_Rate');
-  var iCnt = col('Employee_Count'), iNm = col('Name');
+  var iCnt = col('Employee_Count'), iNm = col('Name'), iKP = col('Key_Personnel'); // engine.178: the owner's dials
   if (iId < 0 || iSec < 0 || iHood < 0 || iRev < 0 || iGrow < 0) {
     throw new Error('applyBusinessDynamics_: Business_Ledger missing one of BIZ_ID/Sector/Neighborhood/Annual_Revenue/Growth_Rate (trimmed)');
   }
@@ -344,15 +384,23 @@ function applyBusinessDynamics_(ctx) {
       continue;
     }
     var hs = ns[hood];
+    // engine.178 (S438): the OWNER's dials — composure buys (or costs) a decline cycle
+    // before closure; drive +2 multiplies a positive drift. Owner = Key_Personnel
+    // (owner/founder tag, POPID-carrying) resolved to the ledger row's DialState.
+    var ownerB = bizOwnerBands_(ctx, iKP >= 0 ? row[iKP] : '');
     var inputs = {
       chaosAtBusiness: !!chaosBizIds[id],
       chaosInHood: !!(hood && chaosHood[hood]),
       initiativeInHood: !!(hood && initHood[hood]),
       coverageSentiment: coverage,
       vitality: hs && hs.retailVitality !== undefined ? hs.retailVitality : null,
-      mayorApproval: mayorApproval
+      mayorApproval: mayorApproval,
+      ownerDriveBand: ownerB ? ownerB.drive : 0,
+      ownerExpandMult: pressureBar_(ctx, 'dialOwnerDriveExpandMult')
     };
     var d = bizDriftOne_(cfg, biz, ps, inputs, cycle);
+    var ownerRoom = ownerB ? (ownerB.composure >= 1 ? 1 : ownerB.composure <= -1 ? -1 : 0) * pressureBar_(ctx, 'dialOwnerStreakRoom') : 0;
+    if (ownerRoom) { out.ownerRoom = (out.ownerRoom || 0) + 1; }
     out.rows++;
     if (d.drift !== 0) out.drifted++;
     if (d.streak > 0) out.distressed++;
@@ -362,7 +410,7 @@ function applyBusinessDynamics_(ctx) {
     // Task 7: closure — the streak AND the revenue floor, both (27.10)
     var cls = d.cls;
     var floorRev = (cfg.bizClosureRevenueFloorPct / 100) * (BIZ_CLASS_MINT_REVENUE[cls] || BIZ_CLASS_MINT_REVENUE['default']);
-    var closesNow = d.streak >= cfg.bizClosureStreak && d.revenue !== null && d.revenue < floorRev;
+    var closesNow = d.streak >= (cfg.bizClosureStreak + ownerRoom) && d.revenue !== null && d.revenue < floorRev; // engine.178: the owner's composure moves the bar
     if (closesNow) {
       out.closed++;
       var bName = String(iNm >= 0 ? row[iNm] : id);

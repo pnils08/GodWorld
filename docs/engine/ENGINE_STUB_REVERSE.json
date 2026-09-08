@@ -2,7 +2,7 @@
   "generated": "2026-09-08",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1337,
+  "functionsMapped": 1342,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2959,6 +2959,14 @@
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
+    "casinoGates": {
+      "writers": [
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
+      ],
+      "readers": [
+        "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
+      ]
+    },
     "casinoSettlements": {
       "writers": [
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
@@ -4109,7 +4117,8 @@
         "utilities/citizenDialMap.js::emitPressureTag_"
       ],
       "readers": [
-        "utilities/citizenDialMap.js::emitPressureTag_"
+        "utilities/citizenDialMap.js::emitPressureTag_",
+        "utilities/compressLifeHistory.js::compressLifeHistory_"
       ]
     },
     "lifeHistoryCompression": {
@@ -4161,6 +4170,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine160Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine161Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine176Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine178Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
         "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",

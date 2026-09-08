@@ -802,7 +802,11 @@ function updateExistingBonds_(ctx) {
     }
 
     if (bondAge > 15 && (currentCycle - (bond.lastUpdate || 0)) > 5) {
-      intensity -= 0.5;
+      // engine.178 (S438): WARMTH IS MAINTENANCE — a warm pair's neglected bond fades
+      // slower (x0.75 at +2/+2), a cold pair's faster (x1.25). Growth keeps its one
+      // warmth factor above; this is the other half of the same term, never stacked
+      // on formation (doctrine §11: marriage is years of a MAINTAINED bond).
+      intensity -= 0.5 * (2 - bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB));
     }
 
     // v2.2: Festival bonds decay faster outside festivals
@@ -1872,20 +1876,33 @@ function appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle) {
 function bondTraitOf_(ctx, popId, trait) {
   if (!ctx._bondTraits) {
     ctx._bondTraits = {};
+    ctx._bondDials = {}; // engine.178: DialState strings, same dual key
     ctx._bondTraitStats = { hits: 0, misses: 0 };
     var header = ctx.ledger ? ctx.ledger.headers : null;
     if (header) {
-      var iPop = -1, iTP = -1, iF = -1, iL = -1;
+      var iPop = -1, iTP = -1, iF = -1, iL = -1, iDS = -1;
       for (var hh = 0; hh < header.length; hh++) {
         var hn = String(header[hh] || '').trim();
         if (hn === 'POPID') iPop = hh;
         else if (hn === 'TraitProfile') iTP = hh;
         else if (hn === 'First') iF = hh;
         else if (hn === 'Last') iL = hh;
+        else if (hn === 'DialState') iDS = hh;
       }
       if (iPop >= 0 && iTP >= 0) {
         for (var r = 0; r < ctx.ledger.rows.length; r++) {
           var tp = String(ctx.ledger.rows[r][iTP] || '');
+          // engine.178 (S438): the band surface fills whether or not the row carries a face
+          if (iDS >= 0) {
+            var dsStr = String(ctx.ledger.rows[r][iDS] || '');
+            if (dsStr) {
+              ctx._bondDials[String(ctx.ledger.rows[r][iPop]).trim().toUpperCase()] = dsStr;
+              if (iF >= 0 && iL >= 0) {
+                var nmKey2 = (String(ctx.ledger.rows[r][iF] || '').trim() + ' ' + String(ctx.ledger.rows[r][iL] || '').trim()).trim().toLowerCase();
+                if (nmKey2) ctx._bondDials[nmKey2] = dsStr;
+              }
+            }
+          }
           if (!tp) continue;
           // dual-key (S312 pattern): POPID + lowercase full name — bond rows
           // are POPID-canonical but defensive against any name-shaped stragglers
@@ -1907,17 +1924,28 @@ function bondTraitOf_(ctx, popId, trait) {
   return m ? Number(m[1]) : 50;
 }
 
+// engine.178 (S438): the BAND surface replaces the face regex — signed band -2..+2
+// off the row's live DialState (base+mood) via the same getCitizenDialBands_ seam every
+// generator reads; the face (`warmth:NN`) is the cadence-lagged fallback, a miss is 0.
+function bondDialBand_(ctx, popId, dial) {
+  bondTraitOf_(ctx, popId, dial); // ensures the maps are built (same walk)
+  var key = String(popId || '').trim();
+  var ds = ctx._bondDials ? (ctx._bondDials[key.toUpperCase()] || ctx._bondDials[key.toLowerCase()]) : null;
+  if (ds && typeof getCitizenDialBands_ === 'function') {
+    var gb = getCitizenDialBands_(ctx, key.toUpperCase(), ds);
+    if (gb && gb.bands && gb.bands[dial] != null) return gb.bands[dial];
+  }
+  var v = bondTraitOf_(ctx, popId, dial); // face fallback, 0-100 -> band
+  return v < 20 ? -2 : v < 40 ? -1 : v < 60 ? 0 : v < 80 ? 1 : 2;
+}
+// Pair factor 0.75x (both -2) .. 1.25x (both +2), the engine.59 envelope kept
+function bondPairFactor_(ctx, popA, popB, dial) {
+  return 1 + 0.125 * ((bondDialBand_(ctx, popA, dial) + bondDialBand_(ctx, popB, dial)) / 2);
+}
 // Pair warmth: 0.75x (cold pair) .. 1.25x (warm pair)
-function bondWarmthFactor_(ctx, popA, popB) {
-  var avg = (bondTraitOf_(ctx, popA, 'warmth') + bondTraitOf_(ctx, popB, 'warmth')) / 2;
-  return 0.75 + (avg / 200);
-}
-
+function bondWarmthFactor_(ctx, popA, popB) { return bondPairFactor_(ctx, popA, popB, 'warmth'); }
 // Pair family-mindedness: same band — courts and marries faster
-function bondFamilyFactor_(ctx, popA, popB) {
-  var avg = (bondTraitOf_(ctx, popA, 'family') + bondTraitOf_(ctx, popB, 'family')) / 2;
-  return 0.75 + (avg / 200);
-}
+function bondFamilyFactor_(ctx, popA, popB) { return bondPairFactor_(ctx, popA, popB, 'family'); }
 
 // engine.59 (S320): suitor fitness — education, savings, debt as courtship
 // physics (Mike: "who gets a wife"). Clamp 0.6-1.4; nobody excluded, only paced.
@@ -2454,7 +2482,7 @@ function processGCMarriageLottery_(ctx) {
     if (!avail.length) continue;
     var scarcity = Math.min(1, avail.length / GC_POOL_REF);
     var chance = GC_MARRY_CHANCE * bondFitnessOf_(P) * scarcity *
-      (0.75 + bondTraitOf_(ctx, pid, 'family') / 200);
+      (1 + 0.125 * bondDialBand_(ctx, pid, 'family')); // engine.178: band surface (was the face regex)
     if (rng() >= chance) continue;
 
     // ── Winner: pick the spouse (age ±8 pref, nbhd pref) ──

@@ -6,7 +6,11 @@
  *
  * Nia Rook's lane is feed-built, not desk_signal-built: her facts come ONLY
  * from the gate-approved feed pack (output/spacemolt-show/feed/c{N}.json),
- * never raw episodes or the Undocked_Feed tab (her bag's data contract).
+ * never raw episodes or the Undocked_Feed tab (her bag's data contract). The
+ * one addition (plan (a′) piece 4, 2026-09-08): the standings sidecar
+ * (output/spacemolt-show/standings.json, written by undockedStandings.js at
+ * each recompute) — the recap names the board leader with Rank / CyclesLed /
+ * CurrentStreak. Still fully local: no live-sheet reads in this builder.
  *
  * The slice turns each APPROVED, NOT-YET-RECAPPED feed event into a lane
  * entry shaped for the standard fanout/wake machinery (laneSeeds ->
@@ -29,6 +33,7 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const SHOW = path.join(ROOT, 'output', 'spacemolt-show');
 const RECAPS = path.join(SHOW, 'recaps.json');
+const STANDINGS = path.join(SHOW, 'standings.json');
 const SNAPSHOT = path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl');
 const V = 'NIA-SLICE/1';
 
@@ -38,6 +43,24 @@ function loadJson(p, fallback) {
 
 function loadRecaps() {
   return loadJson(RECAPS, {});
+}
+
+// Standings sidecar (written by undockedStandings.js at each recompute). The
+// leader is the recap's editorial hook: Nia names who's on top.
+function loadStandings() {
+  const s = loadJson(STANDINGS, null);
+  return s && Array.isArray(s.rows) && s.rows.length ? s : null;
+}
+
+function standingsLeader(standings) {
+  if (!standings) return null;
+  return standings.rows.find(r => Number(r.Rank) === 1) || null;
+}
+
+function standingsNote(leader) {
+  if (!leader) return '';
+  return ' Standings: ' + leader.Holder + ' leads the board — rank #1, ' +
+    leader.CyclesLed + ' cycle(s) led, current streak ' + leader.CurrentStreak + '.';
 }
 
 // One ledger scan for pilot hoods — cheap, and hood seats the wake-2 bench
@@ -66,7 +89,7 @@ function creditsPhrase(delta) {
   return 'dead even on the night';
 }
 
-function laneEntryFor(e, hood) {
+function laneEntryFor(e, hood, leader) {
   const label = 'UNDOCKED: ' + (e.Holder || e.POPID) + ' — ' + creditsPhrase(e.CreditsDelta) +
     (e.CombatEvents ? ', ' + e.CombatEvents + ' combat event(s)' : '') +
     (e.MishapCount ? ', ' + e.MishapCount + ' mishap(s)' : '');
@@ -82,7 +105,8 @@ function laneEntryFor(e, hood) {
         ', systems ' + ((e.Systems || []).join(', ') || 'unlisted') +
         ', combat ' + (e.CombatEvents || 0) + ', mishaps ' + (e.MishapCount || 0) +
         ', magnitude ' + (e.Magnitude || 1) + '/5' +
-        ((e.Flags || []).indexOf('open_escrow') >= 0 ? ', open escrow position' : '') + '.',
+        ((e.Flags || []).indexOf('open_escrow') >= 0 ? ', open escrow position' : '') + '.' +
+        standingsNote(leader),
       citizens: [(e.Holder || e.POPID) + ' — UNDOCKED cast pilot'],
     },
     // typed feed facts ride whole for the write stage — never a new fact source
@@ -102,12 +126,15 @@ function buildNiaSlice(cycle) {
   const unwritten = pack.events.filter(e => e && e.EpisodeId && !recaps[e.EpisodeId]);
   if (!unwritten.length) return empty;
   const hoods = hoodsFor(unwritten.map(e => e.POPID));
+  const standings = loadStandings();
+  const leader = standingsLeader(standings);
   return {
     v: V,
     cycle: c,
     empty: false,
     events: unwritten,
-    laneEntries: unwritten.map(e => laneEntryFor(e, hoods[String(e.POPID).toUpperCase()])),
+    laneEntries: unwritten.map(e => laneEntryFor(e, hoods[String(e.POPID).toUpperCase()], leader)),
+    standings: leader ? { asOf: standings.computedAt, leader } : null,
     generatedAt: new Date().toISOString(),
   };
 }
@@ -142,4 +169,4 @@ function markRecapped(episodeIds, meta) {
   return recaps;
 }
 
-module.exports = { V, buildNiaSlice, writeNiaSlice, loadNiaSlice, markRecapped, slicePath };
+module.exports = { V, buildNiaSlice, writeNiaSlice, loadNiaSlice, markRecapped, slicePath, standingsLeader, standingsNote };

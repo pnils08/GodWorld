@@ -28,10 +28,16 @@
  */
 
 require('/root/GodWorld/lib/env');
+const fs = require('fs');
+const path = require('path');
 const sheets = require('../lib/sheets');
 
 const FEED_TAB = 'Undocked_Feed';
 const TAB = 'Undocked_Standings';
+// Local sidecar (plan (a′) piece 4, 2026-09-08): the same recompute, written
+// where the slice builders can read it without a live-sheet call — Nia's
+// slice reads this file, never the tab (her data contract is local packs).
+const SIDECAR = path.join(__dirname, '..', 'output', 'spacemolt-show', 'standings.json');
 const HEADERS = ['Rank', 'POPID', 'Holder', 'Episodes', 'CreditsTotal',
   'CombatTotal', 'MishapTotal', 'BestMagnitude', 'LastAiredCycle',
   'CyclesLed', 'CurrentStreak'];
@@ -143,6 +149,20 @@ async function main() {
     throw new Error('verify failed: wrote ' + rows.length + ' pilot rows, read back ' + gotRows);
   }
   console.log('[standings] ' + TAB + ' updated + verified (' + rows.length + ' rows)');
+
+  // Sidecar for the slice builders (same data, local file, no sheet read).
+  fs.mkdirSync(path.dirname(SIDECAR), { recursive: true });
+  fs.writeFileSync(SIDECAR, JSON.stringify({
+    v: 'UNDOCKED-STANDINGS/1',
+    computedAt: new Date().toISOString(),
+    rows: rows.map(r => ({
+      Rank: r[0], POPID: r[1], Holder: r[2], Episodes: r[3], CreditsTotal: r[4],
+      CombatTotal: r[5], MishapTotal: r[6],
+      BestMagnitude: r[7] === '' ? null : r[7], LastAiredCycle: r[8] === '' ? null : r[8],
+      CyclesLed: r[9], CurrentStreak: r[10],
+    })),
+  }, null, 2) + '\n');
+  console.log('[standings] sidecar written: ' + path.relative(path.join(__dirname, '..'), SIDECAR));
 }
 
 main().catch(e => {

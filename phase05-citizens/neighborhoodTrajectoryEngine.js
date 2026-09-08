@@ -117,6 +117,7 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
   var iPressure = idx('HousingPressure');
   var iRent = idx('MedianRent');
   var iIncome = idx('MedianIncome');
+  var iShare = idx('RentShare'); // engine.171
 
   if (iTrajectory < 0 || iNeighborhood < 0) return empty; // schema not migrated — no-op
 
@@ -272,7 +273,7 @@ function updateNeighborhoodTrajectories_(ctx, cycle) {
     // The column is a rendering of hoodRentFromIncome_ (share × MedianIncome / 12)
     // for the readers that take the sheet cell (migration re-pricing, crisis
     // buckets, the desk packets). Written only when the cell disagrees.
-    var rentNow = hoodRentFromIncome_(ctx, incomeNow);
+    var rentNow = hoodRentFromIncome_(ctx, incomeNow, iShare >= 0 ? Number(row[iShare]) : null); // engine.171: the hood's own share
     if (iRent >= 0 && rentNow !== null) {
       var rentCell = (row[iRent] !== '' && !isNaN(Number(row[iRent]))) ? Number(row[iRent]) : null;
       if (rentCell !== rentNow) {

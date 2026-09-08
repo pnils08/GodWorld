@@ -59,12 +59,23 @@ const loadEngine = (rel, fnName) => {
   return new Function(CAL_SRC + '\n' + NS_SRC + '\n' + src + '\nreturn ' + fnName + ';')();
 };
 const processNeighborhoodTrajectory_ = loadEngine('../phase05-citizens/neighborhoodTrajectoryEngine.js', 'processNeighborhoodTrajectory_');
+const hoodRentFromIncome_ = new Function(NS_SRC + '\nreturn hoodRentFromIncome_;')();
 const processMigrationTracking_ = loadEngine('../phase05-citizens/migrationTrackingEngine.js', 'processMigrationTracking_');
 
 let passed = 0, failed = 0;
 function assert(label, cond, detail) {
   if (cond) { console.log(`  ok   ${label}`); passed++; }
   else { console.error(`  FAIL ${label}${detail ? ': ' + detail : ''}`); failed++; }
+}
+
+// ── engine.171: a hood may carry its own rent share ─────────────────────────
+{
+  const c = { config: { hoodRentShare: 0.30 } };
+  assert('engine.171 no hood share → the World_Config share (0.30 × 120000 / 12 = 3000)', hoodRentFromIncome_(c, 120000) === 3000 && hoodRentFromIncome_(c, 120000, null) === 3000 && hoodRentFromIncome_(c, 120000, '') === 3000);
+  assert('engine.171 a hood share overrides (0.24 → 2400; 0.40 → 4000)', hoodRentFromIncome_(c, 120000, 0.24) === 2400 && hoodRentFromIncome_(c, 120000, '0.40') === 4000);
+  assert('engine.171 a nonsense share (0, 1.5, text) falls back to the default', hoodRentFromIncome_(c, 120000, 0) === 3000 && hoodRentFromIncome_(c, 120000, 1.5) === 3000 && hoodRentFromIncome_(c, 120000, 'x') === 3000);
+  let threw = false; try { hoodRentFromIncome_({ config: {} }, 120000, 0.24); } catch (e) { threw = true; }
+  assert('engine.171 the World_Config default is still required even when a hood share is given', threw);
 }
 
 // --- mock sheet infrastructure ---

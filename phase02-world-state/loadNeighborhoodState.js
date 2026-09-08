@@ -33,11 +33,18 @@
  * Phase-1 self-arm (ensureEngine160Config_) seeds it, so its absence means the
  * contract did not run.
  */
-function hoodRentFromIncome_(ctx, medianIncome) {
+function hoodRentFromIncome_(ctx, medianIncome, hoodShare) {
   var share = ctx && ctx.config ? Number(ctx.config.hoodRentShare) : NaN;
   if (!(share > 0)) {
     throw new Error('hoodRentFromIncome_: World_Config hoodRentShare missing or ≤ 0 — the engine.160 self-arm did not run (ADR-0015).');
   }
+  // engine.171 (2026-09-07, builder 'go'): a hood may carry its own share on
+  // Neighborhood_Map.RentShare — the passed-over villages cheap (0.24), the
+  // dense working cores held (0.28), everyone else the World_Config default.
+  // One dial made rent the hood-income table's shadow: it could never outrun
+  // wages anywhere, and the thin hoods had no reason to be the relief valve.
+  var hs = Number(hoodShare);
+  if (hs > 0 && hs < 1) share = hs;
   var inc = Number(medianIncome);
   if (!(inc > 0)) return null;
   return Math.round(share * inc / 12);
@@ -70,6 +77,7 @@ function loadNeighborhoodState_(ctx) {
   // envelope weights from (22/22 populated live at C104): density proxy + income.
   var iNoise = idx('NoiseIndex');
   var iIncome = idx('MedianIncome');
+  var iShare = idx('RentShare'); // engine.171: per-hood share, blank = World_Config hoodRentShare
   // engine.135 B1 — the authored hood economic profile (INSTITUTIONS
   // §Neighborhoods rendered as Neighborhood_Map columns, ADR-0016: the sheet is
   // the truth, code reads it). Employment envelope, pay bands, business fill
@@ -115,7 +123,8 @@ function loadNeighborhoodState_(ctx) {
       trajectory: iTraj >= 0 ? (row[iTraj] || '').toString().trim() : '',
       trajectoryMomentum: num(row, iMom),
       housingPressure: num(row, iPress),
-      medianRent: hoodRentFromIncome_(ctx, num(row, iIncome)), // engine.160: the rule, never the stored cell (the column is a rendering of this)
+      medianRent: hoodRentFromIncome_(ctx, num(row, iIncome), iShare >= 0 ? num(row, iShare) : null), // engine.160: the rule, never the stored cell (the column is a rendering of this); engine.171: the hood's own share when it has one
+      rentShare: iShare >= 0 ? num(row, iShare) : null, // engine.171
       migrationFlow: num(row, iFlow),
       noiseIndex: num(row, iNoise),      // engine.133
       medianIncome: num(row, iIncome),   // engine.133

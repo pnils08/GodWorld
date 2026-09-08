@@ -453,7 +453,7 @@
   Sheets: Undocked_Feed
 
 ### loadNeighborhoodState.js
-- **hoodRentFromIncome_(ctx, medianIncome)**
+- **hoodRentFromIncome_(ctx, medianIncome, hoodShare)**
   Config: ctx.config.hoodRentShare
 
 - **loadNeighborhoodState_(ctx)**

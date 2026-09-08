@@ -51,12 +51,19 @@ function usernameCandidates(name, popid) {
   return n > 0 ? [base, base + n] : [base];
 }
 
+// S438b: the shared env file carried the key as <ak_…> — literal angle brackets
+// from a placeholder paste. `Bearer <…>` is a 401 at the server (kimi read it as
+// an expired key). Strip quotes AND brackets so that shape still authenticates.
+function cleanClerkKey(v) {
+  return String(v == null ? '' : v).trim().replace(/^["']|["']$/g, '').replace(/^<|>$/g, '').trim();
+}
+
 function loadClerkKey() {
   for (const envPath of ['/root/.config/godworld/.env', path.join(ROOT, '.env')]) {
     try {
       for (const line of fs.readFileSync(envPath, 'utf8').split('\n')) {
         if (line.startsWith('SPACEMOLT_CLERK_API_KEY=')) {
-          return line.split('=').slice(1).join('=').trim().replace(/^["']|["']$/g, '');
+          return cleanClerkKey(line.split('=').slice(1).join('='));
         }
       }
     } catch (_) { /* try next */ }
@@ -130,7 +137,7 @@ function main() {
     ', playerId ' + written.playerId + ', empire ' + written.empire);
 }
 
-module.exports = { sessionNameFor, sessionDirFor, credentialsExist, usernameCandidates, loadClerkKey };
+module.exports = { sessionNameFor, sessionDirFor, credentialsExist, usernameCandidates, loadClerkKey, cleanClerkKey };
 
 if (require.main === module) {
   try { main(); } catch (e) { console.error('[mint] FATAL: ' + (e && e.message || e)); process.exit(1); }

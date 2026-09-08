@@ -23,5 +23,10 @@ check('no popid digits -> base only', M.usernameCandidates('Ada Lovelace', '').j
 check('existing cast creds detected', M.credentialsExist('POP-00962') === true);
 check('unminted popid detected', M.credentialsExist('POP-99999') === false);
 
+// S438b: the env value was pasted as <ak_…>; the loader must hand the server a bare key.
+check('angle-bracket paste stripped', M.cleanClerkKey('<ak_ABC123>') === 'ak_ABC123');
+check('quoted key stripped', M.cleanClerkKey('"ak_ABC123"') === 'ak_ABC123');
+check('bare key untouched', M.cleanClerkKey(' ak_ABC123 ') === 'ak_ABC123');
+
 if (failed) { console.error('undockedMintAccount: ' + failed + ' FAIL'); process.exit(1); }
 console.log('undockedMintAccount: ok');

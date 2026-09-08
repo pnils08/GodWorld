@@ -348,25 +348,26 @@ function generateGenericCitizens_(ctx) {
   // engine.148: while a side is under its floor the room refills at the full
   // per-cycle cap — the day's mood (baseCount) no longer throttles it, or the
   // migration wave drains women faster than they arrive (bench C109: +3/−5).
-  var sexFill = Math.min(MAX_PER_CYCLE, deficitF + deficitM);
-  var hoodFill = Math.min(MAX_PER_CYCLE - sexFill, shortfall.total); // engine.174: the rest of the cap goes to the short hoods
+  // engine.174: ONE queue serves both floors. The cap covers whichever need is
+  // larger; every slot's SEX follows the sex floor (scarce side first, then the
+  // wave's preference), every slot's HOOD is placed into the short hoods first
+  // (largest shortfall, round-robin) and drawn by weight after. A woman minted
+  // into Glenview counts for both floors — bench C115 showed the sex floor
+  // otherwise taking all eight slots and the short hoods getting none.
+  var fillCount = Math.min(MAX_PER_CYCLE, Math.max(deficitF + deficitM, shortfall.total));
   var sexQueue = [], hoodQueue = [];
-  for (var q = 0; q < sexFill; q++) {
-    sexQueue.push(q < deficitF ? 'female' : 'male'); // scarce side fills first
-    hoodQueue.push(null);                              // the weighted draw places these
-  }
-  // engine.174: short hoods, largest shortfall first, round-robin; sex follows
-  // the wave's preference (the ledger's scarce side), else alternates.
-  var shortHoods = Object.keys(shortfall.byHood).sort(function(a, b) { return shortfall.byHood[b] - shortfall.byHood[a]; });
-  var left = {}; for (var sh = 0; sh < shortHoods.length; sh++) left[shortHoods[sh]] = shortfall.byHood[shortHoods[sh]];
   var prefSex = (typeof waveSexPreference_ === 'function') ? waveSexPreference_(ctx) : null;
-  for (var hq = 0, rr = 0; hq < hoodFill && shortHoods.length; rr++) {
-    var hName = shortHoods[rr % shortHoods.length];
-    if (left[hName] <= 0) { if (rr > shortHoods.length * 50) break; continue; }
-    left[hName]--; hoodQueue.push(hName);
-    sexQueue.push(prefSex || (hq % 2 === 0 ? 'female' : 'male'));
-    hq++;
+  for (var q = 0; q < fillCount; q++) {
+    sexQueue.push(q < deficitF ? 'female' : (q < deficitF + deficitM ? 'male' : (prefSex || (q % 2 === 0 ? 'female' : 'male'))));
   }
+  var shortHoods = Object.keys(shortfall.byHood).sort(function(x, y) { return shortfall.byHood[y] - shortfall.byHood[x]; });
+  var left = {}; for (var sh = 0; sh < shortHoods.length; sh++) left[shortHoods[sh]] = shortfall.byHood[shortHoods[sh]];
+  for (var hq = 0, rr = 0; hq < fillCount && shortHoods.length && rr < shortHoods.length * 64; rr++) {
+    var hName = shortHoods[rr % shortHoods.length];
+    if (left[hName] <= 0) continue;
+    left[hName]--; hoodQueue.push(hName); hq++;
+  }
+  while (hoodQueue.length < fillCount) hoodQueue.push(null); // the weighted draw places the rest
   baseCount = sexQueue.length;
 
   // ═══════════════════════════════════════════════════════════════════════════

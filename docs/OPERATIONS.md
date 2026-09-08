@@ -48,8 +48,10 @@ This table was verified against the live crontab on 2026-08-10.
 | `30 12 * * *` | Citizen midday wake | `scripts/citizen-wake.js --wake=midday` | `logs/citizen-wake.log` |
 | `15 13 * * 1-5` | Weekday newsroom report wake | `scripts/cron-desk-run.js --stage=report --fanout` | `logs/newsroom-fanout.log` |
 | `0 17 * * *` | Citizen exchange | `scripts/citizen-exchange.js` | `logs/citizen-exchange.log` |
+| `30 20 * * *` | UNDOCKED daily flight (orchestrator: flight→adapter→gate→push→standings) | `scripts/cron-undocked-run.js` | `logs/undocked-run.log` |
 | `15 18 * * 1-5` | Weekday newsroom write + Rhea gate | `scripts/cron-desk-run.js --stage=write --fanout --gate-backend api` | `logs/newsroom-fanout.log` |
 | `30 21 * * *` | Citizen night wake | `scripts/citizen-wake.js --wake=night` | `logs/citizen-wake.log` |
+| `47 21 * * *` | UNDOCKED show canary (Clerk key validity + episode recency, fails loud) | `scripts/undockedHealthcheck.js` | `logs/undocked-health.log` |
 | `0 */6 * * *` | Server health check | `scripts/server-health-check.sh` | `logs/health-check.log` |
 | `7 23 * * 0` | Citizen bond graph rebuild (post-cycle, --live from Sheets) | `scripts/buildCitizenBondGraph.js` | `logs/bond-graph.log` |
 | `0 4 * * 3` | Weekly maintenance | `scripts/weekly-maintenance.sh` | `logs/weekly-maintenance.log` |

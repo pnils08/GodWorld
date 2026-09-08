@@ -130,7 +130,7 @@ function main() {
     ', playerId ' + written.playerId + ', empire ' + written.empire);
 }
 
-module.exports = { sessionNameFor, sessionDirFor, credentialsExist, usernameCandidates };
+module.exports = { sessionNameFor, sessionDirFor, credentialsExist, usernameCandidates, loadClerkKey };
 
 if (require.main === module) {
   try { main(); } catch (e) { console.error('[mint] FATAL: ' + (e && e.message || e)); process.exit(1); }

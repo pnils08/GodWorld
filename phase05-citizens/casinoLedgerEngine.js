@@ -20,8 +20,17 @@
  *   Household_Ledger.HouseholdSavings via setValues (own-tab; money loop
  *     and migrationTracking read that sheet later in Phase 5)
  *
+ *   Undocked_Draw via queueAppendIntent_ (engine.175 — next cycle's cast,
+ *     drawn here at fire N for cycle N+1; the tab is the switch: missing = no
+ *     draw, show market closed)
+ *
  * Does not write Tier, RoleType, EmployerBizId, CareerStage,
  * Initiative_Tracker, DialState, Undocked_Feed, or Oakland_Sports_Feed.
+ *
+ * engine.175 (S438): show markets key to the PILOT for a cycle, not to an
+ * episode — `c<N>:<POPID>`. An EpisodeId is minted by sequence at push time,
+ * so nothing placed before the flight could ever match one; the pilot's
+ * aggregated aired rows for the cycle settle the slip instead.
  *
  * In-world money only. Fourth wall: no adapter / feed / cycle-fire copy.
  */
@@ -47,6 +56,17 @@ var CASINO_ODDS_CEIL = 8.00;
 var CASINO_SPORTS_FLOOR = 1.05;
 var CASINO_PLACE_P = 0.012;
 var CASINO_RECORD_RE = /^\d+\s*[-–]\s*\d+$/;
+
+var UNDOCKED_DRAW_TAB = 'Undocked_Draw';
+var UNDOCKED_DRAW_HEADERS = [
+  'TargetCycle', 'DrawCycle', 'Seed', 'Slot', 'POPID', 'Name', 'BirthYear',
+  'Neighborhood', 'Role', 'Employer'
+];
+var UNDOCKED_CAST_N = 3;
+var UNDOCKED_ALT_N = 3;
+var UNDOCKED_MIN_AGE = 18;
+var CASINO_PILOT_EVENT_RE = /^c(\d+):(POP-\d+)$/i;
+var CASINO_NIGHT_EVENT_RE = /^night-(\d+)$/i;
 
 var CASINO_HEADERS = [
   'WagerId', 'CyclePlaced', 'CycleSettled', 'POPID', 'HouseholdId',
@@ -171,9 +191,35 @@ function casinoNightWinner_(feed) {
   return best;
 }
 
-function casinoResolveUndocked_(wager, feed) {
+function casinoPilotRows_(feed, popId) {
+  var rows = feed || [];
+  var out = [];
+  var i;
+  for (i = 0; i < rows.length; i++) {
+    if (String(rows[i].popId || '').trim().toUpperCase() === popId) out.push(rows[i]);
+  }
+  return out;
+}
+
+// engine.175: the slip names a cycle. Before it: carry. After it: the pilot's
+// rows for that cycle are no longer loaded, so the slip can never settle — void.
+function casinoCycleGate_(target, cycle) {
+  if (!(cycle > 0)) return null;
+  if (cycle < target) return { status: 'carry' };
+  if (cycle > target) return { status: CASINO_ST.VOID_GATE };
+  return null;
+}
+
+function casinoResolveUndocked_(wager, feed, cycle) {
   var market = String(wager.marketId || '');
+  var ev = String(wager.eventId || '').trim();
+  var m, gate;
   if (market === 'night_winner') {
+    m = CASINO_NIGHT_EVENT_RE.exec(ev);
+    if (m) {
+      gate = casinoCycleGate_(Number(m[1]), Number(cycle));
+      if (gate) return gate;
+    }
     var winner = casinoNightWinner_(feed);
     if (!winner) return { status: CASINO_ST.VOID_GATE };
     return {
@@ -181,42 +227,65 @@ function casinoResolveUndocked_(wager, feed) {
       eventId: winner.episodeId
     };
   }
+  m = CASINO_PILOT_EVENT_RE.exec(ev);
+  if (m) {
+    // engine.175: pilot-for-a-cycle market — aggregate every aired row of that pilot.
+    gate = casinoCycleGate_(Number(m[1]), Number(cycle));
+    if (gate) return gate;
+    var pop = String(m[2]).toUpperCase();
+    var rows = casinoPilotRows_(feed, pop);
+    if (!rows.length) return { status: CASINO_ST.VOID_GATE };
+    var i, n, seen = 0, sum = 0;
+    if (market === 'credits_sign') {
+      for (i = 0; i < rows.length; i++) {
+        if (rows[i].creditsDelta == null || rows[i].creditsDelta === '') continue;
+        n = Number(rows[i].creditsDelta);
+        if (isNaN(n)) continue;
+        seen++; sum += n;
+      }
+      if (!seen) return { status: CASINO_ST.VOID_GATE };
+      var wantPos = String(wager.side || '') === 'pos';
+      return { status: wantPos === (sum > 0) ? CASINO_ST.WIN : CASINO_ST.LOSS, eventId: ev };
+    }
+    if (market === 'mishap') {
+      for (i = 0; i < rows.length; i++) {
+        if (rows[i].mishapCount == null || rows[i].mishapCount === '') continue;
+        n = Number(rows[i].mishapCount);
+        if (isNaN(n)) continue;
+        seen++; sum += n;
+      }
+      if (!seen) return { status: CASINO_ST.VOID_GATE };
+      var wantYes = String(wager.side || '') === 'yes';
+      return { status: wantYes === (sum > 0) ? CASINO_ST.WIN : CASINO_ST.LOSS, eventId: ev };
+    }
+    return { status: CASINO_ST.VOID_GATE };
+  }
+  // Legacy episode-keyed slip (pre-engine.175 shape): exact EpisodeId match.
   var ep = casinoFindEpisode_(feed, wager.eventId);
   if (!ep) return { status: 'carry' };
   if (market === 'credits_sign') {
     if (ep.creditsDelta == null || ep.creditsDelta === '') return { status: CASINO_ST.VOID_GATE };
     var d = Number(ep.creditsDelta);
     if (isNaN(d)) return { status: CASINO_ST.VOID_GATE };
-    var wantPos = String(wager.side || '') === 'pos';
-    return { status: wantPos === (d > 0) ? CASINO_ST.WIN : CASINO_ST.LOSS, eventId: ep.episodeId };
+    var wantPosE = String(wager.side || '') === 'pos';
+    return { status: wantPosE === (d > 0) ? CASINO_ST.WIN : CASINO_ST.LOSS, eventId: ep.episodeId };
   }
   if (market === 'mishap') {
     if (ep.mishapCount == null || ep.mishapCount === '') return { status: CASINO_ST.VOID_GATE };
-    var m = Number(ep.mishapCount);
-    if (isNaN(m)) return { status: CASINO_ST.VOID_GATE };
-    var wantYes = String(wager.side || '') === 'yes';
-    return { status: wantYes === (m > 0) ? CASINO_ST.WIN : CASINO_ST.LOSS, eventId: ep.episodeId };
+    var mc = Number(ep.mishapCount);
+    if (isNaN(mc)) return { status: CASINO_ST.VOID_GATE };
+    var wantYesE = String(wager.side || '') === 'yes';
+    return { status: wantYesE === (mc > 0) ? CASINO_ST.WIN : CASINO_ST.LOSS, eventId: ep.episodeId };
   }
   return { status: CASINO_ST.VOID_GATE };
 }
 
-function casinoResolveSports_(wager, feed) {
-  var fid = wager.franchiseId || (String(wager.marketId || '').indexOf('oaks') >= 0 ? 'oaks' : 'as');
-  var parsed = casinoParseSports_(feed, fid);
-  if (parsed.kind === 'carry') return { status: 'carry' };
-  var wantWin = String(wager.side || '') === 'win';
-  return {
-    status: wantWin === parsed.franchiseWon ? CASINO_ST.WIN : CASINO_ST.LOSS,
-    eventId: parsed.eventId
-  };
-}
-
-function casinoResolve_(wager, feeds) {
+function casinoResolve_(wager, feeds, cycle) {
   feeds = feeds || {};
   if (wager.status && wager.status !== CASINO_ST.OPEN) {
     return { status: wager.status, alreadySettled: true };
   }
-  if (wager.marketFamily === 'undocked') return casinoResolveUndocked_(wager, feeds.undocked || []);
+  if (wager.marketFamily === 'undocked') return casinoResolveUndocked_(wager, feeds.undocked || [], cycle);
   if (wager.marketFamily === 'sports') return casinoResolveSports_(wager, feeds.sports || []);
   return { status: CASINO_ST.VOID_GATE };
 }
@@ -324,26 +393,125 @@ function casinoCol_(header, name) {
   return header.indexOf(name);
 }
 
-function casinoUpcoming_(ss, cycle) {
-  if (!ss) return [];
-  var sheet = ss.getSheetByName('Undocked_Feed');
-  if (!sheet) return [];
-  var data = sheet.getDataRange().getValues();
-  if (!data || data.length < 2) return [];
-  var h = data[0];
-  var iTarget = casinoCol_(h, 'TargetCycle');
-  var iPop = casinoCol_(h, 'POPID');
-  var iEp = casinoCol_(h, 'EpisodeId');
-  if (iTarget < 0 || iPop < 0 || iEp < 0) return [];
-  var out = [];
-  var r, row, pop, ep;
+// ============================================================================
+// engine.175 — the draw. Fire N draws cycle N+1's cast from the ledger with the
+// cycle's rng and appends it to Undocked_Draw; the same fire places show slips
+// against that cast. The nightly orchestrator flies whoever the tab names.
+// Missing tab = no draw (bench first; live only when the apparatus can fly a
+// fresh cast). Append-only; a cycle that already has rows is read, never redrawn.
+// ============================================================================
+function undockedEligible_(row, li, ageYear) {
+  var iP = li('POPID'), iS = li('Status'), iB = li('BirthYear'), iH = li('Neighborhood');
+  var iDest = li('MigrationDestination'), iMig = li('MigratedCycle'), iRet = li('ReturnedCycle');
+  if (iP < 0 || iS < 0 || iB < 0 || iH < 0) return false;
+  var pid = String(row[iP] || '').trim().toUpperCase();
+  if (!/^POP-\d+$/.test(pid)) return false;
+  if (String(row[iS] || '').trim() !== 'Active') return false;
+  var by = Number(row[iB]) || 0;
+  if (!(by > 0) || by > ageYear - UNDOCKED_MIN_AGE) return false;
+  if (!String(row[iH] || '').trim()) return false;
+  if (iDest >= 0 && String(row[iDest] || '').trim()) {
+    var mig = iMig >= 0 ? Number(row[iMig]) : NaN;
+    var ret = iRet >= 0 ? Number(row[iRet]) : NaN;
+    if (!(ret >= 0) || !(mig >= 0) || ret < mig) return false;
+  }
+  return true;
+}
+
+function undockedDrawCast_(ctx, cycle) {
+  var results = { drawn: 0, existing: 0, skipped: false, missingTab: false };
+  var S = ctx.summary || (ctx.summary = {});
+  S.undockedNextCast = [];
+  var ss = ctx.ss;
+  if (!ss || !ctx.ledger) { results.skipped = true; return results; }
+  var sheet = ss.getSheetByName(UNDOCKED_DRAW_TAB);
+  if (!sheet) { results.missingTab = true; return results; }
+  var target = Number(cycle) + 1;
+  var data = sheet.getDataRange().getValues() || [];
+  var h = data.length ? data[0] : UNDOCKED_DRAW_HEADERS;
+  var iT = casinoCol_(h, 'TargetCycle'), iSlot = casinoCol_(h, 'Slot'), iPop = casinoCol_(h, 'POPID'), iName = casinoCol_(h, 'Name');
+  if (iT < 0 || iSlot < 0 || iPop < 0) {
+    Logger.log('undockedDrawCast_: Undocked_Draw headers malformed — no draw');
+    results.skipped = true;
+    return results;
+  }
+  var r, row;
   for (r = 1; r < data.length; r++) {
     row = data[r];
-    if (Number(row[iTarget]) !== cycle + 1) continue;
-    pop = String(row[iPop] == null ? '' : row[iPop]).trim().toUpperCase();
-    ep = String(row[iEp] == null ? '' : row[iEp]).trim();
-    if (!pop || !ep) continue;
-    out.push({ popId: pop, episodeId: ep, targetCycle: cycle + 1 });
+    if (Number(row[iT]) !== target) continue;
+    results.existing++;
+    if (String(row[iSlot] || '').indexOf('cast-') === 0) {
+      S.undockedNextCast.push({
+        popId: String(row[iPop] || '').trim().toUpperCase(),
+        name: iName >= 0 ? String(row[iName] || '') : '',
+        slot: String(row[iSlot] || ''),
+        targetCycle: target
+      });
+    }
+  }
+  if (results.existing) {
+    Logger.log('undockedDrawCast_: c' + target + ' already drawn (' + results.existing + ' rows) — read, not redrawn');
+    return results;
+  }
+
+  var lHeader = ctx.ledger.headers, lRows = ctx.ledger.rows;
+  var li = function (n) { return lHeader.indexOf(n); };
+  var ageYear = simYearOf_(ctx, cycle);
+  var pool = [];
+  for (r = 0; r < lRows.length; r++) {
+    if (undockedEligible_(lRows[r], li, ageYear)) pool.push(lRows[r]);
+  }
+  var iP = li('POPID');
+  pool.sort(function (a, b) { return String(a[iP]).localeCompare(String(b[iP])); });
+  var want = UNDOCKED_CAST_N + UNDOCKED_ALT_N;
+  if (pool.length < want) {
+    Logger.log('undockedDrawCast_: only ' + pool.length + ' eligible — no draw');
+    results.skipped = true;
+    return results;
+  }
+  var rng = safeRand_(ctx);
+  var seed = String(rng());
+  // Partial Fisher-Yates over the sorted pool: the first `want` slots are the draw.
+  var k, j, tmp;
+  for (k = 0; k < want; k++) {
+    j = k + Math.floor(rng() * (pool.length - k));
+    tmp = pool[k]; pool[k] = pool[j]; pool[j] = tmp;
+  }
+  var iF = li('First'), iL = li('Last'), iB = li('BirthYear'), iH = li('Neighborhood'),
+      iRole = li('RoleType'), iEmp = li('EmployerBizId');
+  for (k = 0; k < want; k++) {
+    row = pool[k];
+    var slot = k < UNDOCKED_CAST_N ? 'cast-' + (k + 1) : 'alt-' + (k - UNDOCKED_CAST_N + 1);
+    var pid = String(row[iP] || '').trim().toUpperCase();
+    var name = ((iF >= 0 ? row[iF] : '') + ' ' + (iL >= 0 ? row[iL] : '')).replace(/\s+/g, ' ').trim();
+    var arr = [
+      target, cycle, seed, slot, pid, name,
+      iB >= 0 ? row[iB] : '', iH >= 0 ? row[iH] : '',
+      iRole >= 0 ? row[iRole] : '', iEmp >= 0 ? row[iEmp] : ''
+    ];
+    if (typeof queueAppendIntent_ === 'function') {
+      queueAppendIntent_(ctx, UNDOCKED_DRAW_TAB, arr, 'undocked draw ' + slot, 'undocked', 100);
+    }
+    if (k < UNDOCKED_CAST_N) {
+      S.undockedNextCast.push({ popId: pid, name: name, slot: slot, targetCycle: target });
+    }
+    results.drawn++;
+  }
+  Logger.log('undockedDrawCast_: c' + target + ' cast ' + S.undockedNextCast.map(function (c) { return c.popId; }).join(', ') +
+    ' (pool ' + pool.length + ')');
+  return results;
+}
+
+// The casino's "upcoming" is the drawn cast for cycle+1 — set by undockedDrawCast_
+// in the same fire (or read back off the tab on a re-run). Never the feed.
+function casinoUpcoming_(S, cycle) {
+  var cast = (S && S.undockedNextCast) || [];
+  var out = [];
+  var i;
+  for (i = 0; i < cast.length; i++) {
+    if (!cast[i] || !cast[i].popId) continue;
+    if (cast[i].targetCycle && Number(cast[i].targetCycle) !== cycle + 1) continue;
+    out.push({ popId: String(cast[i].popId).toUpperCase(), targetCycle: cycle + 1 });
   }
   return out;
 }
@@ -426,7 +594,7 @@ function processCasinoLedger_(ctx, cycle) {
     sports: S.sportsFeedEntries || []
   };
   var pilots = S.undockedPilots || {};
-  var upcoming = casinoUpcoming_(ss, cycle);
+  var upcoming = casinoUpcoming_(S, cycle);
   var upcomingPilots = {};
   var u;
   for (u = 0; u < upcoming.length; u++) upcomingPilots[upcoming[u].popId] = true;
@@ -527,7 +695,7 @@ function processCasinoLedger_(ctx, cycle) {
       resolved.push({ wager: w, outcome: { status: CASINO_ST.VOID_DEATH } });
       continue;
     }
-    resolved.push({ wager: w, outcome: casinoResolve_(w, feeds) });
+    resolved.push({ wager: w, outcome: casinoResolve_(w, feeds, cycle) });
   }
 
   for (i = 0; i < resolved.length; i++) {
@@ -670,6 +838,7 @@ function processCasinoLedger_(ctx, cycle) {
   }
 
   // Placement against NEXT cycle only — this cycle's outcomes are already known.
+  // engine.175: "next cycle" is the drawn cast; the show is open iff a cast exists.
   var showOn = upcoming.length > 0;
   var sportsAs = { marketId: 'sports:as', franchiseId: 'as', eventId: 'next-as' };
   var lastSportsRecord = '';
@@ -724,15 +893,16 @@ function processCasinoLedger_(ctx, cycle) {
     if (pickShow) {
       fam = 'undocked';
       var epPick = upcoming[Math.floor(rng() * upcoming.length)];
+      var pilotEv = 'c' + (cycle + 1) + ':' + epPick.popId;   // engine.175: pilot-for-a-cycle key
       var kindRoll = rng();
       if (kindRoll < 0.55) {
         mkt = 'credits_sign';
-        ev = epPick.episodeId;
+        ev = pilotEv;
         side = rng() < 0.5 ? 'pos' : 'neg';
         odds = side === 'pos' ? credOdds.pos : credOdds.neg;
       } else if (kindRoll < 0.85) {
         mkt = 'mishap';
-        ev = epPick.episodeId;
+        ev = pilotEv;
         side = rng() < 0.5 ? 'yes' : 'no';
         odds = CASINO_JUICE;
       } else {
@@ -792,6 +962,11 @@ if (typeof module !== 'undefined' && module.exports) {
     casinoEligible_: casinoEligible_,
     casinoStake_: casinoStake_,
     casinoWagerId_: casinoWagerId_,
+    casinoResolveUndocked_: casinoResolveUndocked_,
+    undockedDrawCast_: undockedDrawCast_,
+    undockedEligible_: undockedEligible_,
+    UNDOCKED_DRAW_HEADERS: UNDOCKED_DRAW_HEADERS,
+    UNDOCKED_DRAW_TAB: UNDOCKED_DRAW_TAB,
     CASINO_HEADERS: CASINO_HEADERS,
     CASINO_HOUSE_BIZ: CASINO_HOUSE_BIZ,
     CASINO_ST: CASINO_ST

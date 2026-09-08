@@ -166,5 +166,117 @@ const ctxRerun = {
 const rerun = E.processCasinoLedger_(ctxRerun, 105);
 check('re-run does not double-pay', rerun.settled === 0 && ctxRerun.ledger.rows[0][4] === 1000);
 
+
+// ---------------------------------------------------------------------------
+// engine.175 (S438): the draw + pilot-keyed show markets
+// ---------------------------------------------------------------------------
+check('draw headers 10 cols', E.UNDOCKED_DRAW_HEADERS.length === 10 && E.UNDOCKED_DRAW_HEADERS[0] === 'TargetCycle');
+
+const drawHeaders = ['POPID', 'Status', 'BirthYear', 'First', 'Last', 'Neighborhood', 'RoleType', 'EmployerBizId',
+  'MigrationDestination', 'MigratedCycle', 'ReturnedCycle', 'NetWorth', 'Income'];
+function drawRow(pid, over) {
+  var base = { POPID: pid, Status: 'Active', BirthYear: 1990, First: 'F' + pid.slice(-2), Last: 'L', Neighborhood: 'Temescal',
+    RoleType: 'Clerk', EmployerBizId: 'BIZ-00018', MigrationDestination: '', MigratedCycle: '', ReturnedCycle: '', NetWorth: 5000, Income: 52000 };
+  Object.keys(over || {}).forEach(function (k) { base[k] = over[k]; });
+  return drawHeaders.map(function (h) { return base[h]; });
+}
+const drawRows = [
+  drawRow('POP-00001'), drawRow('POP-00002'), drawRow('POP-00003'), drawRow('POP-00004'),
+  drawRow('POP-00005'), drawRow('POP-00006'), drawRow('POP-00007'),
+  drawRow('POP-00008', { BirthYear: 2030 }),                       // minor
+  drawRow('POP-00009', { Status: 'Traded' }),                       // not Active
+  drawRow('POP-00010', { MigrationDestination: 'Reno', MigratedCycle: 100, ReturnedCycle: '' }), // away
+  drawRow('POP-00011', { MigrationDestination: 'Reno', MigratedCycle: 100, ReturnedCycle: 103 }), // back — eligible
+  drawRow('POP-00012', { Neighborhood: '' })                         // no hood
+];
+function seq(vals) { var i = 0; return function () { var v = vals[i % vals.length]; i++; return v; }; }
+
+const drawCtx = {
+  ledger: { headers: drawHeaders, rows: drawRows.map(function (r) { return r.slice(); }), dirty: false },
+  ss: { getSheetByName: function (n) { return n === 'Undocked_Draw' ? sheet([E.UNDOCKED_DRAW_HEADERS.slice()]) : null; } },
+  rng: seq([0.11, 0.5, 0.25, 0.9, 0.1, 0.3, 0.7]),
+  summary: {}
+};
+const dr = E.undockedDrawCast_(drawCtx, 105);
+const drawAppends = (drawCtx._appends || []).filter(function (a) { return a.tab === 'Undocked_Draw'; });
+check('draw appends 6 rows', dr.drawn === 6 && drawAppends.length === 6);
+check('draw rows are 10 wide, target 106, draw 105', drawAppends.every(function (a) { return a.row.length === 10 && a.row[0] === 106 && a.row[1] === 105; }));
+check('draw slots cast-1..3 then alt-1..3', drawAppends.map(function (a) { return a.row[3]; }).join(',') === 'cast-1,cast-2,cast-3,alt-1,alt-2,alt-3');
+check('draw cast on S (3)', drawCtx.summary.undockedNextCast.length === 3 && drawCtx.summary.undockedNextCast[0].targetCycle === 106);
+const drawnIds = drawAppends.map(function (a) { return a.row[4]; });
+check('draw excludes minor/traded/away/no-hood', ['POP-00008', 'POP-00009', 'POP-00010', 'POP-00012'].every(function (x) { return drawnIds.indexOf(x) < 0; }));
+check('draw no duplicate', new Set(drawnIds).size === 6);
+check('draw name from First Last', /^F\d\d L$/.test(drawAppends[0].row[5]));
+check('draw carries role + employer', drawAppends[0].row[8] === 'Clerk' && drawAppends[0].row[9] === 'BIZ-00018');
+
+const drawCtx2 = {
+  ledger: drawCtx.ledger, rng: seq([0.11, 0.5, 0.25, 0.9, 0.1, 0.3, 0.7]), summary: {},
+  ss: { getSheetByName: function (n) { return n === 'Undocked_Draw' ? sheet([E.UNDOCKED_DRAW_HEADERS.slice()]) : null; } }
+};
+E.undockedDrawCast_(drawCtx2, 105);
+check('draw deterministic on same rng', drawCtx2._appends.map(function (a) { return a.row[4]; }).join() === drawnIds.join());
+
+const existingVals = [E.UNDOCKED_DRAW_HEADERS.slice(),
+  [106, 105, '0.1', 'cast-1', 'POP-00099', 'Ex One', 1980, 'Temescal', 'Clerk', ''],
+  [106, 105, '0.1', 'cast-2', 'POP-00098', 'Ex Two', 1981, 'Temescal', 'Clerk', ''],
+  [106, 105, '0.1', 'cast-3', 'POP-00097', 'Ex Three', 1982, 'Temescal', 'Clerk', ''],
+  [106, 105, '0.1', 'alt-1', 'POP-00096', 'Ex Alt', 1983, 'Temescal', 'Clerk', ''],
+  [105, 104, '0.2', 'cast-1', 'POP-00050', 'Old One', 1980, 'Temescal', 'Clerk', '']];
+const drawCtx3 = { ledger: drawCtx.ledger, rng: seq([0.5]), summary: {},
+  ss: { getSheetByName: function (n) { return n === 'Undocked_Draw' ? sheet(existingVals) : null; } } };
+const dr3 = E.undockedDrawCast_(drawCtx3, 105);
+check('re-run reads, never redraws', dr3.drawn === 0 && dr3.existing === 4 && !(drawCtx3._appends || []).length);
+check('re-run cast off the tab (3, not the old cycle)', drawCtx3.summary.undockedNextCast.map(function (c) { return c.popId; }).join() === 'POP-00099,POP-00098,POP-00097');
+
+const drawCtx4 = { ledger: drawCtx.ledger, rng: seq([0.5]), summary: {}, ss: { getSheetByName: function () { return null; } } };
+const dr4 = E.undockedDrawCast_(drawCtx4, 105);
+check('missing tab = no draw, empty cast', dr4.missingTab === true && drawCtx4.summary.undockedNextCast.length === 0);
+
+// placement keys to the pilot for the cycle
+const placeHeaders = slHeaders;
+const placeCtx = {
+  ledger: { headers: placeHeaders, rows: [slRow.slice()], dirty: false },
+  ss: { getSheetByName: function (name) {
+    if (name === 'Casino_Ledger') return sheet([headers, rowFrom({ WagerId: 'HOUSE', Status: 'house', HouseFloatAfter: 250000 })]);
+    return null;
+  } },
+  // p-roll (place), pickShow roll, stake roll(s), seed, epPick, kindRoll(<0.55 → credits_sign), side
+  rng: seq([0.0, 0.1, 0.5, 0.5, 0.5, 0.0, 0.1, 0.1, 0.1, 0.1]),
+  summary: { undockedFeedEntries: [], undockedPilots: {}, sportsFeedEntries: [],
+    undockedNextCast: [{ popId: 'POP-00099', name: 'Ex One', slot: 'cast-1', targetCycle: 106 }] }
+};
+const placed = E.processCasinoLedger_(placeCtx, 105);
+const slip = (placeCtx._appends || []).filter(function (a) { return a.tab === 'Casino_Ledger'; }).map(function (a) { return a.row; })
+  .filter(function (r) { return r[0] !== 'HOUSE'; })[0];
+check('show slip placed against the cast', placed.placed === 1 && !!slip);
+check('show slip keyed c106:<POPID>', !!slip && slip[headers.indexOf('MarketFamily')] === 'undocked' && slip[headers.indexOf('EventId')] === 'c106:POP-00099');
+
+const noCastCtx = { ledger: placeCtx.ledger, ss: placeCtx.ss, rng: seq([0.0, 0.1, 0.5, 0.5, 0.5, 0.0, 0.1]),
+  summary: { undockedFeedEntries: [], undockedPilots: {}, sportsFeedEntries: [], undockedNextCast: [] } };
+E.processCasinoLedger_(noCastCtx, 105);
+const noCastSlips = (noCastCtx._appends || []).filter(function (a) { return a.tab === 'Casino_Ledger' && a.row[0] !== 'HOUSE'; });
+check('no cast → no show slip (sports only)', noCastSlips.every(function (a) { return a.row[headers.indexOf('MarketFamily')] === 'sports'; }));
+
+// resolve: aggregate the pilot's aired rows for the cycle
+const pilotFeed = [
+  { popId: 'POP-00099', episodeId: 'e1', creditsDelta: 30, mishapCount: 0 },
+  { popId: 'POP-00099', episodeId: 'e2', creditsDelta: -50, mishapCount: 2 },
+  { popId: 'POP-00098', episodeId: 'e3', creditsDelta: 900, mishapCount: 0 }
+];
+function ures(mkt, ev, side, cycle, feed) {
+  return E.casinoResolve_({ status: 'open', marketFamily: 'undocked', marketId: mkt, eventId: ev, side: side }, { undocked: feed || pilotFeed }, cycle).status;
+}
+check('credits_sign sums the pilot (30-50<0): pos loses', ures('credits_sign', 'c106:POP-00099', 'pos', 106) === E.CASINO_ST.LOSS);
+check('credits_sign neg wins on the same sum', ures('credits_sign', 'c106:POP-00099', 'neg', 106) === E.CASINO_ST.WIN);
+check('mishap any>0: yes wins', ures('mishap', 'c106:POP-00099', 'yes', 106) === E.CASINO_ST.WIN);
+check('mishap none: no wins', ures('mishap', 'c106:POP-00098', 'no', 106) === E.CASINO_ST.WIN);
+check('before the cycle: carry', ures('credits_sign', 'c106:POP-00099', 'pos', 105) === 'carry');
+check('after the cycle: void', ures('credits_sign', 'c106:POP-00099', 'pos', 107) === E.CASINO_ST.VOID_GATE);
+check('pilot never flew: void', ures('credits_sign', 'c106:POP-00001', 'pos', 106) === E.CASINO_ST.VOID_GATE);
+check('all credits windowed (null): void', ures('credits_sign', 'c106:POP-00099', 'pos', 106,
+  [{ popId: 'POP-00099', episodeId: 'e1', creditsDelta: null, mishapCount: 1 }]) === E.CASINO_ST.VOID_GATE);
+check('night_winner past its cycle: void', ures('night_winner', 'night-106', 'POP-00098', 107) === E.CASINO_ST.VOID_GATE);
+check('night_winner on its cycle resolves', ures('night_winner', 'night-106', 'POP-00098', 106) === E.CASINO_ST.WIN);
+
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('casinoLedgerEngine: ok');

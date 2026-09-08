@@ -37,6 +37,7 @@ These are read/written during every cycle run.
 | **LifeHistory_Log** | 3,223 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Citizen life events. 7 columns. |
 | **Generic_Citizens** | 277 | ENGINE, SCRIPT | ENGINE | Emergence pipeline — Tier 4 citizen generation |
 | **Household_Ledger** | 529 | ENGINE | ENGINE | Household groupings, rent, ownership |
+| **Undocked_Draw** | 6/cycle | ENGINE, SCRIPT | ENGINE | engine.175 (S438): next cycle's UNDOCKED cast — fire N appends `cast-1..3` + `alt-1..3` for TargetCycle N+1 (`TargetCycle, DrawCycle, Seed, Slot, POPID, Name, BirthYear, Neighborhood, Role, Employer`). Append-only; a cycle with rows is read, never redrawn. The tab is the switch: missing = no draw, show market closed. Orchestrator reads it for `TargetCycle = cycleCount+1` (contract: spacemolt plan (a′)). Bench first; live only when the apparatus can fly a fresh cast. |
 | **Casino_Ledger** | 2 + slips | ENGINE | ENGINE | 4b wager tab — ARMED on live 2026-09-01 (S410, builder sign-off): 15 headers + `HOUSE` float row 250000. Bench C106 proof: 9 open sports slips, 0 errors. |
 | **Family_Relationships** | 2 | ENGINE | ENGINE | Parent-child links (mostly in SL ParentIds/ChildrenIds) |
 | **Relationship_Bonds** | 211 | ENGINE | ENGINE | Active alliance/rivalry/mentorship bonds |

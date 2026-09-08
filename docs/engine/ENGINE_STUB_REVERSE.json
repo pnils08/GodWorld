@@ -2,7 +2,7 @@
   "generated": "2026-09-08",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1350,
+  "functionsMapped": 1353,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2959,6 +2959,15 @@
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
+    "undockedNextCast": {
+      "writers": [
+        "phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_"
+      ],
+      "readers": [
+        "phase05-citizens/casinoLedgerEngine.js::casinoUpcoming_",
+        "phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_"
+      ]
+    },
     "casinoGates": {
       "writers": [
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_"
@@ -4480,8 +4489,7 @@
     "Undocked_Feed": {
       "writers": [],
       "readers": [
-        "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
-        "phase05-citizens/casinoLedgerEngine.js::casinoUpcoming_"
+        "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_"
       ]
     },
     "WorldEvents_Ledger": {

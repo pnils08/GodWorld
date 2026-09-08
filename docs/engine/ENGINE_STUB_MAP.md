@@ -1176,11 +1176,13 @@
 
 - **casinoNightWinner_(feed)**
 
-- **casinoResolveUndocked_(wager, feed)**
+- **casinoPilotRows_(feed, popId)**
 
-- **casinoResolveSports_(wager, feed)**
+- **casinoCycleGate_(target, cycle)**
 
-- **casinoResolve_(wager, feeds)**
+- **casinoResolveUndocked_(wager, feed, cycle)**
+
+- **casinoResolve_(wager, feeds, cycle)**
 
 - **casinoApplyMoney_(nw, debt, stake, payout, won)**
 
@@ -1204,8 +1206,15 @@
 
 - **casinoCol_(header, name)**
 
-- **casinoUpcoming_(ss, cycle)**
-  Sheets: Undocked_Feed
+- **undockedEligible_(row, li, ageYear)**
+
+- **undockedDrawCast_(ctx, cycle)**
+  Reads: S.undockedNextCast
+  Writes: S.undockedNextCast
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **casinoUpcoming_(S, cycle)**
+  Reads: S.undockedNextCast
 
 - **casinoCooldown_(history, cycle, weekly)**
 
@@ -3924,4 +3933,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1350
+**Functions mapped:** 1353

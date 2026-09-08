@@ -86,6 +86,12 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
   was flown — they differ when approval lands after a cycle closes. Transport
   window, not an archive: the git-tracked feed packs under
   `output/spacemolt-show/feed/` are the track record.
+- **`Undocked_Draw`**: next cycle's UNDOCKED cast (engine.175, S438). `undockedDrawCast_`
+  (`phase05-citizens/casinoLedgerEngine.js`, Step 2.44 of the wealth pass) draws
+  3 + 3 alternates from the ledger with `ctx.rng` at fire N and appends them at
+  `TargetCycle = N+1`; the same fire's casino places show slips against that cast
+  (`c<N+1>:<POPID>`). Read by `scripts/cron-undocked-run.js` (kimi's half) for the
+  nightly pilot. Missing tab = no draw (bench-first switch). Append-only.
 - **`Oakland_Sports_Feed`**: Interactive sports event intake. **This is the live
   feed-tab precedent** — a Phase-2 read (`applySportsSeason.js` L302,
   `applySportsFeedTriggers_`) sets summary state before Phase 5 events. Copy this
@@ -137,7 +143,8 @@ Rule (engine rules): sheet writes go through `ctx.writeIntents`; only `phase10-p
 | `phase05-citizens/generationalWealthEngine.js` `ensureHeritageSchema_` / `updateHeritage_` | Heritage_Ledger (engine.156 column append; tab itself is `requireTab_`, engine.119), Simulation_Ledger (`LineageId` header) | schema-setup + own-tab | engine.65 arm: insertSheet + 16 headers + frozen row, ≤1× per spreadsheet; engine.156 (S415): appends any missing `HERITAGE_HEADERS` column to an existing tab (the seven standing/tenure columns), ≤1× per column, and runs every cycle as a no-op re-inspect. `updateHeritage_` full-table rewrite of its own tab at Phase5-GenerationalWealth Step 7 — Phase-4 readers (`heritageTierByPop_`, `buildCityEvents_`) read LAST cycle's rows by design; the ECE reads the same-cycle signal off `S.heritage.lineByPop`. READS `Business_Ledger` (active BIZ_ID set + `Key_Personnel` ownership, engine.156), `Civic_Office_Ledger` (`PopId` + `Status` = scandal), `Household_Ledger` (Door C + the owned-home set), `Family_Relationships` (Door A), **`Citizen_Archive`** (engine.90 Commit 6, S430: `citizenArchiveLatestByPop_` in `utilities/archiveCitizenExits.js` — newest exit snapshot per POPID, re-shaped to the ledger header, cached on `ctx`; `getSheetByName`, never a create — members who left the ledger keep their MembersList/generation place, are never living, never in TotalNetWorth; `getCitizenWealth_` / `findHouseholdSurvivors_` / `healthCauseIntake.js` read the same view). Was missing from this table until S415 (engine-wiring card) |
 | `phase05-citizens/casinoLedgerEngine.js` | Casino_Ledger | intents | append/cell via `queueAppendIntent_` / `queueCellIntent_`; missing tab = no-op; does not insertSheet |
 | `phase05-citizens/casinoLedgerEngine.js` | Household_Ledger.HouseholdSavings | own-tab | same-cycle `setValues` so `processMoneyLoop_` and `processMigrationTracking_` see the debit; only when `|delta| >= weekly` |
-| `phase05-citizens/casinoLedgerEngine.js` | Undocked_Feed | (read) | upcoming TargetCycle+1 rows for line-posting only — does not write the feed, does not touch `S.undockedFeedEntries` |
+| `phase05-citizens/casinoLedgerEngine.js` `undockedDrawCast_` | Undocked_Draw | intents | engine.175 (S438): 6 append intents per fire (`cast-1..3`, `alt-1..3`, TargetCycle = cycle+1); reads the tab first and never redraws a cycle that has rows; missing tab = no-op; does not insertSheet. `S.undockedNextCast` is the same-fire handoff to the casino |
+| `phase05-citizens/casinoLedgerEngine.js` | Undocked_Feed | — | **no longer read** (engine.175 retired the TargetCycle+1 feed scan — announcement rows can never exist; the cast comes off Undocked_Draw). `S.undockedFeedEntries` still settles show slips |
 | `phase05-citizens/maneuverEngine.js` | Household_Ledger, Heritage_Ledger | (read) | engine.157 (S416): one `getDataRange` each per cycle — owned/rented + head per household, tier/standing/status per line — to name the goal and the retreat cause; tolerates the pre-engine.156 16-column heritage tab. Writes only `ctx.ledger` rows (DialState.maneuver, LifeHistory) + `LifeHistory_Log` append intents |
 | `phase05-citizens/educationCareerEngine.js` | own tracking tab | own-tab | Tier-5 engine |
 | `phase05-citizens/generateCitizensEvents.js` | Simulation_Ledger, LifeHistory_Log | own-tab | SL writer |

@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1350 · **S.* fields:** 346 · **Sheets:** 59
+**Files scanned:** 184 · **Functions mapped:** 1353 · **S.* fields:** 347 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -345,6 +345,7 @@
 | `S.transitState` | `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_` | `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 4 |
 | `S.transitStorySignals` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycle` | _(none)_ | 2 | 0 |
 | `S.undockedFeedEntries` | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycle`, `phase02-world-state/loadEventContentLedger.js::loadEventContentLedger_`, `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 6 |
+| `S.undockedNextCast` | `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | `phase05-citizens/casinoLedgerEngine.js::casinoUpcoming_`, `phase05-citizens/casinoLedgerEngine.js::undockedDrawCast_` | 1 | 2 |
 | `S.undockedPilots` | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 3 |
 | `S.v3Arcs` | _(none)_ | `phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_` | 0 | 1 |
 | `S.v3CalendarContext` | `phase08-v3-chicago/v3Integration.js::v3Integration_` | _(none)_ | 1 | 0 |
@@ -434,7 +435,7 @@ Sheet detection: `getSheetByName`, `queue*Intent_`, known sheet-name string + wr
 | `Story_Seed_Deck` | _(none)_ | `phase07-evening-media/buildContractSeeds.js::contractSeedUsageTally_`, `phase10-persistence/saveV3Seeds.js::migrateSeedDeckV4_`, `phase10-persistence/saveV3Seeds.js::saveV3Seeds_`, `utilities/cycleRollback.js::previewRollbackToCycle78`, `utilities/cycleRollback.js::rollbackToCycle78` | 0 | 5 |
 | `Storyline_Intake` | _(none)_ | `phase07-evening-media/mediaRoomIntake.js::processStorylineIntake_`, `phase07-evening-media/parseMediaRoomMarkdown.js::ensureStorylineIntakeSheet_` | 0 | 2 |
 | `Storyline_Tracker` | `phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_` | `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/storylineWeavingEngine.js::assignCitizenRoles_`, `phase07-evening-media/storylineWeavingEngine.js::createChaosArcs_`, `phase07-evening-media/storylineWeavingEngine.js::loadActiveStorylinesForWeaving_`, `phase07-evening-media/storylineWeavingEngine.js::updateCrossStorylineLinks_` | 1 | 5 |
-| `Undocked_Feed` | _(none)_ | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_`, `phase05-citizens/casinoLedgerEngine.js::casinoUpcoming_` | 0 | 2 |
+| `Undocked_Feed` | _(none)_ | `phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_` | 0 | 1 |
 | `World_Config` | _(none)_ | `phase01-config/engine94SheetContract.js::ensureEngine133Config_`, `phase01-config/engine94SheetContract.js::ensureEngine135Config_`, `phase01-config/engine94SheetContract.js::ensureEngine148Config_`, `phase01-config/engine94SheetContract.js::ensureEngine157Config_`, `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, …(+10 more) | 0 | 15 |
 | `World_Drift_Report` | _(none)_ | `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport` | 0 | 1 |
 | `World_Population` | `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_`, `phase03-population/generateMonthlyDriftReport.js::generateMonthlyDriftReport`, `phase05-citizens/citizenContextBuilder.js::diagnoseLedgerStructure`, …(+8 more) | 1 | 13 |

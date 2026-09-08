@@ -159,6 +159,12 @@ function processGenerationalWealth_(ctx) {
   // money loop so a lost slip can stack with crisis-debt the same week.
   // Missing Casino_Ledger tab is a no-op. typeof-guarded so an undeployed
   // file cannot throw at the wealth pass.
+  // Step 2.44 (engine.175, S438): draw next cycle's UNDOCKED cast BEFORE the
+  // casino so this fire's show slips ride the cast this fire named. Missing
+  // Undocked_Draw tab is a no-op (the tab is the switch).
+  if (typeof undockedDrawCast_ === 'function') {
+    results.undockedDraw = undockedDrawCast_(ctx, cycle);
+  }
   if (typeof processCasinoLedger_ === 'function') {
     results.casino = processCasinoLedger_(ctx, cycle);
   }

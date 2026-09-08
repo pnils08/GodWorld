@@ -82,18 +82,27 @@ function tabPilot(r) {
   };
 }
 
+// Pure row filter, exported for tests: Undocked_Draw rows at TargetCycle ->
+// {cast, alternates} in Slot order. Empty cast = caller falls back to the
+// local manifest.
+function drawRowsToRoster(rows, targetCycle) {
+  const mine = (rows || []).filter(r => Number(r.TargetCycle) === Number(targetCycle));
+  return {
+    cast: mine.filter(r => String(r.Slot || '').startsWith('cast-')).sort(bySlot).map(tabPilot),
+    alternates: mine.filter(r => String(r.Slot || '').startsWith('alt-')).sort(bySlot).map(tabPilot),
+  };
+}
+
 async function loadCast(cycle) {
   const target = cycle + 1;
   try {
     const sheets = require('../lib/sheets');
     const rows = await sheets.getSheetAsObjects('Undocked_Draw');
-    const mine = rows.filter(r => Number(r.TargetCycle) === target);
-    const cast = mine.filter(r => String(r.Slot || '').startsWith('cast-')).sort(bySlot);
-    const alts = mine.filter(r => String(r.Slot || '').startsWith('alt-')).sort(bySlot);
+    const { cast, alternates } = drawRowsToRoster(rows, target);
     if (cast.length) {
       return {
-        source: 'Undocked_Draw tab (TargetCycle=' + target + ', ' + cast.length + ' cast, ' + alts.length + ' alt)',
-        cast: cast.map(tabPilot), alternates: alts.map(tabPilot),
+        source: 'Undocked_Draw tab (TargetCycle=' + target + ', ' + cast.length + ' cast, ' + alternates.length + ' alt)',
+        cast, alternates,
       };
     }
     log('Undocked_Draw has no rows for TargetCycle=' + target + ' — falling back to latest local draw manifest');
@@ -304,7 +313,11 @@ async function main() {
   log('done');
 }
 
-main().catch(e => {
-  console.error('[undocked-run] FATAL: ' + (e && e.message || e));
-  process.exit(1);
-});
+module.exports = { drawRowsToRoster, tabPilot, sessionName, employerNameFor };
+
+if (require.main === module) {
+  main().catch(e => {
+    console.error('[undocked-run] FATAL: ' + (e && e.message || e));
+    process.exit(1);
+  });
+}

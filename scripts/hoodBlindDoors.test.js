@@ -193,6 +193,20 @@ t('greedy by deficit: quota 6 takes every waiting row in the under-floor hoods; 
   assert.ok(!Object.keys(picked).includes('8')); // off-map row
   assert.ok(!Object.keys(picked).includes('9')); // minted this cycle
 });
+t('engine.174 feeder shortfall: seats minus the waiting line, per under-floor hood; full hoods and full lines absent', () => {
+  const ctx = makeCtx(sb, SPARSE);
+  const s = sb.feederHoodShortfall_(ctx, GVALS, 2, 3);
+  // Eastlake 0 tracked → 12 seats, 3 Active waiting (e1, e2, n1; e3 is Emerged) → 9; Brooklyn 3 → 9 seats, 1 waiting → 8;
+  // Glenview 6 → 6 seats, 1 waiting → 5; San Antonio 12 → at the floor, absent. 'Brooklyn Basin' folds to Jack London (full).
+  eq(Object.keys(s.byHood).sort(), ['Brooklyn', 'Eastlake', 'Glenview']);
+  assert.strictEqual(s.byHood.Eastlake, 9); assert.strictEqual(s.byHood.Brooklyn, 8); assert.strictEqual(s.byHood.Glenview, 5);
+  assert.strictEqual(s.total, 22);
+  const full = sb.feederHoodShortfall_(makeCtx(sb, FULL), GVALS, 2, 3);
+  eq(full, { byHood: {}, total: 0 });
+  assert.ok(/shortfall\.total === 0\) \{/.test(fs.readFileSync(path.join(ROOT, 'phase05-citizens/generateGenericCitizens.js'), 'utf8')), 'the pool-at-floor skip is gated on the hood shortfall too');
+  assert.ok(/hoodQueue\[i\] \|\| pickWeightedNeighborhood\(birthYear\)/.test(fs.readFileSync(path.join(ROOT, 'phase05-citizens/generateGenericCitizens.js'), 'utf8')), 'a short hood\'s seat is placed, not drawn');
+});
+
 t('quota 0 picks nothing; missing cell fails loud', () => {
   const off = makeCtx(sb, SPARSE, { hoodFloorPromotePerCycle: 0 });
   eq(sb.selectFloorWaveRows_(off, GVALS, 2, 3, 4, 5, 106, mulberry32(3)), {});

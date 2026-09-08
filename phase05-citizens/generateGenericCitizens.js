@@ -333,17 +333,39 @@ function generateGenericCitizens_(ctx) {
   }
   var deficitF = Math.max(0, FEMALE_FLOOR - activeF);
   var deficitM = Math.max(0, MALE_FLOOR - activeM);
-  if (deficitF + deficitM === 0) {
+  // engine.174 (2026-09-07, builder 'go'): the room also refills PER HOOD. The
+  // migration wave can only surface who is waiting in a hood's own line, and the
+  // line was empty exactly where the map was thin (Glenview 3, Brooklyn 5, East
+  // Oakland 1 waiting) while the citywide pool sat over its floor and the feeder
+  // skipped every cycle (civic.21). A hood under the citizen floor with fewer
+  // waiting than its open seats gets the difference minted into it.
+  var shortfall = feederHoodShortfall_(ctx, genericValues, iNeighborhood, iStatus);
+  if (deficitF + deficitM === 0 && shortfall.total === 0) {
     S.genericCitizensDistribution = { skipped: 'pool-at-floor', activeFemale: activeF, activeMale: activeM };
     return;
   }
+  S.genericCitizensHoodShortfall = shortfall; // engine.174: read by the log line below
   // engine.148: while a side is under its floor the room refills at the full
   // per-cycle cap — the day's mood (baseCount) no longer throttles it, or the
   // migration wave drains women faster than they arrive (bench C109: +3/−5).
-  var fillCount = Math.min(MAX_PER_CYCLE, deficitF + deficitM);
-  var sexQueue = [];
-  for (var q = 0; q < fillCount; q++) {
+  var sexFill = Math.min(MAX_PER_CYCLE, deficitF + deficitM);
+  var hoodFill = Math.min(MAX_PER_CYCLE - sexFill, shortfall.total); // engine.174: the rest of the cap goes to the short hoods
+  var sexQueue = [], hoodQueue = [];
+  for (var q = 0; q < sexFill; q++) {
     sexQueue.push(q < deficitF ? 'female' : 'male'); // scarce side fills first
+    hoodQueue.push(null);                              // the weighted draw places these
+  }
+  // engine.174: short hoods, largest shortfall first, round-robin; sex follows
+  // the wave's preference (the ledger's scarce side), else alternates.
+  var shortHoods = Object.keys(shortfall.byHood).sort(function(a, b) { return shortfall.byHood[b] - shortfall.byHood[a]; });
+  var left = {}; for (var sh = 0; sh < shortHoods.length; sh++) left[shortHoods[sh]] = shortfall.byHood[shortHoods[sh]];
+  var prefSex = (typeof waveSexPreference_ === 'function') ? waveSexPreference_(ctx) : null;
+  for (var hq = 0, rr = 0; hq < hoodFill && shortHoods.length; rr++) {
+    var hName = shortHoods[rr % shortHoods.length];
+    if (left[hName] <= 0) { if (rr > shortHoods.length * 50) break; continue; }
+    left[hName]--; hoodQueue.push(hName);
+    sexQueue.push(prefSex || (hq % 2 === 0 ? 'female' : 'male'));
+    hq++;
   }
   baseCount = sexQueue.length;
 
@@ -626,7 +648,7 @@ function generateGenericCitizens_(ctx) {
     var maxBirthYear = 2023;
     var birthYear = minBirthYear + randInt(maxBirthYear - minBirthYear + 1);
 
-    var neighborhood = pickWeightedNeighborhood(birthYear);
+    var neighborhood = hoodQueue[i] || pickWeightedNeighborhood(birthYear); // engine.174: a short hood's seat is placed, not drawn
     var occupation = randItem(occupations);
 
     // v2.6: Track distribution
@@ -780,7 +802,8 @@ function generateGenericCitizens_(ctx) {
   Logger.log('generateGenericCitizens_ v2.6: Generated ' + newCitizens.length +
     ' (baseCount=' + baseCount + ', rng=' + (rng ? 'seeded' : 'random') + ')' +
     ' | neighborhoods: ' + hoodParts.join(', ') +
-    ' | types: ' + typeParts.join(', '));
+    ' | types: ' + typeParts.join(', ') +
+    (S.genericCitizensHoodShortfall && S.genericCitizensHoodShortfall.total ? ' | engine.174 short hoods: ' + Object.keys(S.genericCitizensHoodShortfall.byHood).map(function(h) { return h + ' ' + S.genericCitizensHoodShortfall.byHood[h]; }).join(', ') : ''));
 }
 
 
@@ -825,6 +848,37 @@ function generateGenericCitizens_(ctx) {
 // engine.148: rank 1 draws at 1.3 sliding 0.03 per rank to a 0.6 floor (the
 // shape the old literal approximated), times (1 + 2·deficit) so an under-floor
 // hood pulls up to 3× its base until it reaches World_Config hoodCitizenFloor.
+/**
+ * engine.174: per under-floor hood, open seats (floor − tracked headcount) minus
+ * the Active pool rows already waiting in it. {byHood: {hood: short}, total}.
+ * Child-area names fold to their parent hood like the wave does; a hood at or
+ * above the floor, or with a full line, is not listed.
+ */
+function feederHoodShortfall_(ctx, genericValues, iNeighborhood, iStatus) {
+  var out = { byHood: {}, total: 0 };
+  if (!ctx || !ctx.config || iNeighborhood < 0) return out;
+  var floor = Number(ctx.config.hoodCitizenFloor);
+  if (!(floor > 0)) return out;
+  var hoods = underFloorHoods_(ctx);
+  if (!hoods.length) return out;
+  var waiting = {};
+  for (var r = 1; r < genericValues.length; r++) {
+    var row = genericValues[r];
+    if (!row) continue;
+    if (iStatus >= 0 && String(row[iStatus] || '').trim().toLowerCase() !== 'active') continue;
+    var raw = String(row[iNeighborhood] || '').trim();
+    if (!raw) continue;
+    var name = (typeof resolveHoodOrChild_ === 'function') ? (resolveHoodOrChild_(ctx, raw) || raw) : raw;
+    waiting[name] = (waiting[name] || 0) + 1;
+  }
+  for (var h = 0; h < hoods.length; h++) {
+    var seats = floor - getHoodHeadcount_(ctx, hoods[h]);
+    var short = seats - (waiting[hoods[h]] || 0);
+    if (short > 0) { out.byHood[hoods[h]] = short; out.total += short; }
+  }
+  return out;
+}
+
 function feederHoodWeights_(ctx, coreHoods) {
   var w = {};
   for (var i = 0; i < coreHoods.length; i++) {

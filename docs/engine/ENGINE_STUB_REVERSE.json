@@ -2,7 +2,7 @@
   "generated": "2026-09-07",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1328,
+  "functionsMapped": 1329,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -3158,6 +3158,14 @@
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_"
       ],
       "readers": []
+    },
+    "genericCitizensHoodShortfall": {
+      "writers": [
+        "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_"
+      ],
+      "readers": [
+        "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_"
+      ]
     },
     "newGenericCitizens": {
       "writers": [

@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 184 · **Functions mapped:** 1328 · **S.* fields:** 341 · **Sheets:** 59
+**Files scanned:** 184 · **Functions mapped:** 1329 · **S.* fields:** 342 · **Sheets:** 59
 
 ## S.* / ctx.summary reverse index
 
@@ -179,6 +179,7 @@
 | `S.generationalSummary` | `phase04-events/generationalEventsEngine.js::generateGenerationalSummary_` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 1 |
 | `S.genericCitizensDistribution` | `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_` | `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_` | 1 | 1 |
 | `S.genericCitizensGenerated` | `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_` | _(none)_ | 1 | 0 |
+| `S.genericCitizensHoodShortfall` | `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_` | `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_` | 1 | 1 |
 | `S.godWorldYear` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase05-citizens/runCivicElectionsv1.js::runCivicElections_`, `phase08-v3-chicago/chicagoSatellite.js::chicagoSatelliteEngine_`, `phase08-v3-chicago/v3ChicagoWriter.js::saveV3Chicago_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 4 |
 | `S.grantsThisCycle` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_`, `utilities/exportCycleArtifacts.js::buildCycleContextPack_` | 1 | 4 |
 | `S.healthCauseBriefing` | `phase11-media-intake/healthCauseIntake.js::runGenerateHealthBriefing` | _(none)_ | 1 | 0 |

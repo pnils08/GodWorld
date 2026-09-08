@@ -1483,11 +1483,14 @@
 - **inferSexFromFirstName_(first)**
 
 - **generateGenericCitizens_(ctx)**
-  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.genericCitizensDistribution, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
-  Writes: S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensGenerated, S.newGenericCitizens
+  Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensHoodShortfall, S.holiday, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Writes: S.eventsGenerated, S.genericCitizensDistribution, S.genericCitizensGenerated, S.genericCitizensHoodShortfall, S.newGenericCitizens
   Config: ctx.config.gcPoolFloorFemale, ctx.config.gcPoolFloorMale, ctx.config.rngSeed
   Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
+
+- **feederHoodShortfall_(ctx, genericValues, iNeighborhood, iStatus)**
+  Config: ctx.config.hoodCitizenFloor
 
 - **feederHoodWeights_(ctx, coreHoods)**
 
@@ -3868,4 +3871,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1328
+**Functions mapped:** 1329

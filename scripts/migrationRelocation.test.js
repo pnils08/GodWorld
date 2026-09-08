@@ -306,7 +306,7 @@ console.log('A3 pressure lane household move');
 console.log('A4 misfit lane upward sort');
 {
   rippleCalls = []; cellIntents = [];
-  // 160k income in Lowmarket (median 45k): ratio 3.5x >= 2.5 -> misfit lane.
+  // 160k income in Lowmarket (median 45k): ratio 3.5x >= 1.5 (engine.173) -> misfit lane.
   const sl = [citizen('POP-20', 'Vera', 'Rich', 'Lowmarket', 160000, { edu: 'masters' })];
   const ctx = buildCtx(sl, [], () => 0.0);
   runBoth(ctx);

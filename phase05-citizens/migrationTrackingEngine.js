@@ -125,7 +125,7 @@ var RELOCATION = {
   MAX_UNITS_PER_CYCLE: 2,     // legacy floor — the share rule below replaces it (relocationCap_)
   PRESSURE_MOVE_CHANCE: 0.35, // per-cycle roll for planning-to-leave units
   MISFIT_MOVE_CHANCE: 0.15,   // per-cycle roll for economic-misfit units (slower burn)
-  MISFIT_INCOME_RATIO: 2.5,   // unit income >= 2.5x hood median income = under-housed
+  MISFIT_INCOME_RATIO: 1.5,   // engine.173 (2026-09-07, builder): unit income >= 1.5x hood median = under-housed. At 2.5x, 9 of 699 working adults ever cleared it — nobody's pay rise opened the door; at 1.5x ~54 do, and the destination score already prefers the empty mid-priced hoods
   MAX_BURDEN: 0.40,           // never move where rent > 40% of monthly income
   TARGET_BURDEN: 0.30,        // affordability scoring peak (rent = 30% of monthly income)
   MIN_SCORE_GAIN: 1.5         // destination must beat current hood by this margin

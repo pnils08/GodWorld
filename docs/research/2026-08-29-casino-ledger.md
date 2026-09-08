@@ -1,7 +1,7 @@
 ---
 title: Casino Ledger (Undocked Phase 4b) — research
 created: 2026-08-29
-updated: 2026-08-29
+updated: 2026-09-08
 type: reference
 tags: [research, citizens, engine, active]
 sources:
@@ -22,9 +22,9 @@ pointers:
 
 **Source:** Internal design-question consolidation, 2026-08-29 (kimi, builder-directed). No new external source — this file gathers every constraint the repo already carries about the gated 4b casino ledger into one standing record, so the future design doc starts from the questions instead of re-deriving them.
 
-**What this addresses:** The SpaceMolt game-show plan's Phase 4b — the first mechanism where the *audience* takes downside, not just the cast. It is explicitly NOT authorized ("a casino ledger is not authorized by mentioning it"); 4b sign-off is Mike-only. This file is the measure-twice substrate behind that future sign-off: what the ledger would have to answer before any Sheet, tab, schema, balance, or odds exist.
+**What this addresses:** The SpaceMolt game-show plan's Phase 4b — the first mechanism where the *audience* takes downside, not just the cast. It is explicitly NOT authorized *(historical — 4b shipped 2026-09-01; see Shipped status below)* ("a casino ledger is not authorized by mentioning it"); 4b sign-off is Mike-only. This file is the measure-twice substrate behind that future sign-off: what the ledger would have to answer before any Sheet, tab, schema, balance, or odds exist.
 
-**What it does (current verified state):** Nothing economic exists today. Phase 4a is narrative-only wager texture (ECL pool lines authored 2026-08-17, fail-closed until engine-sheet lands the flag/dial wiring); no balances move and no odds are canon. `Undocked_Standings` (greenlit 2026-08-18, deterministic aggregation over `Undocked_Feed`) is named in the plan as the 4b *substrate* — the settled-outcome source a ledger would resolve against. The show's adapter already produces the fact/subjective split a settlement engine needs: typed, provenance-marked outcomes, gate-approved before they are sim-facing. Sequencing constraint from the plan: 4a runs ≥2 cycles before 4b is even *designed* — this record is the question list, not the design.
+**What it does (verified state at 2026-08-29, superseded):** At consolidation time nothing economic existed. *(Superseded — the ledger went live 2026-09-01; current state under Shipped status below.)* Phase 4a is narrative-only wager texture (ECL pool lines authored 2026-08-17, fail-closed until engine-sheet lands the flag/dial wiring); no balances move and no odds are canon. `Undocked_Standings` (greenlit 2026-08-18, deterministic aggregation over `Undocked_Feed`) is named in the plan as the 4b *substrate* — the settled-outcome source a ledger would resolve against. The show's adapter already produces the fact/subjective split a settlement engine needs: typed, provenance-marked outcomes, gate-approved before they are sim-facing. Sequencing constraint from the plan: 4a runs ≥2 cycles before 4b is even *designed* — this record is the question list, not the design.
 
 **Extraction — the design dimensions already constrained by the repo:**
 
@@ -63,16 +63,38 @@ pointers:
 
 **Verdict:** `watch` — this is a design-question record for a Mike-gated lane, not a build recommendation. Adopt-trigger (both required): (1) Phase 4a narrative wager texture has run ≥2 cycles, AND (2) Mike signs off on opening the 4b design doc. Until then this file only accretes constraints. No dedicated ROLLOUT row — pending-state stays on research.27's plan, whose Phase 4b gate this file serves.
 
-**Ignited plans:** none (gated; the future design doc ignites from this file).
+**Shipped status (2026-09-08 true-up, kimi):** 4b is no longer gated — it shipped live 2026-09-01 (S410, commit `d1220bfa`, direct builder sign-off "turn on the casino"; bench C106 run at arm time: 9 open sports slips, 0 errors). Design + build docs archived with disposition notes: [[../archive/plans/2026-08-31-grok-casino-ledger]] and [[../archive/plans/2026-08-31-grok-casino-ledger-build]] (filed 2026-09-04, S420). The `watch` verdict and its adopt-trigger above are superseded as gate mechanics — they stay as history. This file's role shifts from gate substrate to **constraint record** for future casino work (election/initiative markets, settlement-proof watch); new findings land here.
+
+**Live state at C106** (output/beats/Casino_Ledger.jsonl, full-tab dump via scripts/dumpBeatTabs.js:47 — no row filter; output/beats/meta.json cycle 106, prevCycle null): HOUSE float row at 250000 + 12 open sports slips — all CyclePlaced=106, all MarketFamily sports / sports:as / event next-as, odds 1.83, stakes 134–667, per-slip Seed recorded, all Status open, zero settled rows. Four slips carry empty HouseholdId, verified by design rather than defect (builder-confirmed rule: not everyone has a household; it is life progression): POP-00214 / POP-00645 / POP-00656 each held a single-person household dissolved at C101, POP-00806 has no household row at all (output/beats/Household_Ledger.jsonl: 712 rows, 465 active / 247 dissolved, 137 dissolved@C101); the truthy householdId guard (casinoLedgerEngine.js:606) skips household writes cleanly for them.
+
+**Checklist questions the shipped build answered** (verified against phase05-citizens/casinoLedgerEngine.js, 2026-09-08):
+
+- **Q1 Event IDs / settlement source** — adapter/feed rows only, no LLM in the settlement path: `casinoResolveUndocked_` (:174) and `casinoResolveSports_` (:203) settle against typed feed rows. Null CreditsDelta resolves `VOID_GATE` (:187) — already exercised live by episode undocked-pop00143-2026-09-08T01-30-06 (feed c106, flag `credits_delta_windowed`).
+- **Q3 Eligible citizens** — `casinoEligible_` (:285): active adults only, income/net-worth solvency floor (:290), house business barred (:291), and **pilots barred from wagering their own show** (:292, `marketFamily === 'undocked' && isPilot` → false).
+- **Q7 Household economic effects** — household writes guarded on a truthy householdId (:606); Household_Ledger.HouseholdSavings mutated in-memory and written own-tab via setValues (:661-663); the slip's HouseholdId is read from the citizen's Simulation_Ledger row (:749).
+- **Q8 Audit trail** — append-only wager rows (placement queues an append intent, :760-762) with a per-slip Seed recorded (:710, :759); house float tracked per row via HouseFloatAfter (:758); HOUSE bankroll seeded at 250000 (`CASINO_HOUSE_SEED`, :32).
+- **Q9 Loss safeguards** — placement probability `CASINO_PLACE_P = 0.012` base rate (:48, scaled by drive/show/sports factors at :702) plus `casinoCooldown_` cooling-off after settled-loss streaks (:350).
+- **Q10 Downstream typing** — CASINO_WIN / CASINO_LOSS / CASINO_DEBT story hooks pushed into S.storyHooks on material outcomes (≥ half weekly income, :622-634).
+
+**Open items carried forward:**
+
+1. **Undocked-market placement is structurally dead (off-by-one).** Placement requires `casinoUpcoming_` rows with TargetCycle === fireCycle+1 (:341; the placement block's own comment reads "Placement against NEXT cycle only — this cycle's outcomes are already known", :666-667), but the nightly orchestrator reads currentCycle and only then pushes TargetCycle = currentCycle+1 (scripts/cron-undocked-run.js:104-107, 149-152) — always after the fire that set currentCycle. At fire N every feed row has TargetCycle ≤ N → `upcoming` is always empty → `showOn` false (:667) → no undocked-market slip ever places. C106 dump: 12 slips, zero undocked (against a live show market at ~50/50 pick odds, 0/12 ≈ 2.4e-4). **Engine-sheet decision item** — options recorded in the owning plan's post-ship open items.
+2. **Settlement path unproven live as of C106** — zero settled rows exist; the first real settlement is expected C107+. Watch.
+3. **Stake caps still key off the S361-flagged wealth scale** — `casinoStake_` (:270-283) reads Income/NetWorth/WealthLevel from the ledger; if the population-derived wealth-scale rebuild has not landed, the cap math inherits that defect. Verify before asserting in any future casino work.
+4. **Pre-C106 placement history not locally observable** — the beats dump pipeline only started at C106 (output/beats/meta.json prevCycle null; pipeline.68 Task 1), so nothing before that is reconstructable from local dumps.
+
+**Ignited plans:** none (gated; the future design doc ignites from this file). *(Historical — the design/build docs ignited from this file and shipped; see Shipped status above.)*
 
 ---
 
 ## Applications (living)
 
 - 2026-08-29 — Created as the standing question record for plan Phase 4b; consolidates the wagering design questions previously scattered across the SpaceMolt research, the game-environment review, and the plan itself.
+- 2026-09-08 — 4b shipped via direct builder sign-off (S410, `d1220bfa`), superseding this file's watch verdict / adopt-trigger as gate mechanics. Live C106 state recorded (HOUSE float 250000 + 12 open sports slips, zero settled; undocked-market placement structurally dead). Role shifts from gate substrate to constraint record for future casino work — election/initiative markets and the C107+ settlement-proof watch start here.
 
 ---
 
 ## Changelog
 
 - 2026-08-29 (kimi) — Initial consolidation (S393, builder-directed).
+- 2026-09-08 (kimi) — True-up to shipped reality: 4b live 2026-09-01 (S410, `d1220bfa`); Shipped status note added near the Verdict (verdict kept as history); live C106 tab state + the six answered checklist questions verified against phase05-citizens/casinoLedgerEngine.js and output/beats dumps; open items recorded: undocked placement off-by-one (engine-sheet), settlement-proof watch C107+, S361 wealth-scale keying for stake caps, pre-C106 observability gap. Stale 2026-08-29 claims marked, not rewritten.

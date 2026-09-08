@@ -1,7 +1,7 @@
 ---
 title: SpaceMolt Game Show — Oakland's Serialized Obsession
 created: 2026-08-07
-updated: 2026-08-29
+updated: 2026-09-08
 type: plan
 tags: [research, citizens, media, engine, active]
 sources:
@@ -35,10 +35,10 @@ pointers:
 1. **Adopt upstream, bound it — don't rebuild.** `SpaceMolt/commander` (MIT) is the pilot agent: mission-driven tool loop, OpenRouter support, context compaction, per-session state. `SpaceMolt/spacemolt-lib` (MIT) is the telemetry substrate: typed WS SDK, multi-account via one Clerk key, live events, local state cache. The dead miner is replaced by adoption + a bounding wrapper, not a from-scratch agent.
 2. **External fact → staged event → review gate → sim perception.** Raw game output is never canon. Deterministic adapter (no LLM in the writer loop — buildWorldSummary precedent) summarizes each episode; a gate decides what becomes a sim-facing cultural event.
 3. **Second instance of the played-events pattern, not a framework.** Sports is instance 1. This is instance 2 — generalize `sportsFeedContract` to exactly one new feed type (kimi review rule). The third instance forces the abstraction, not this one.
-4. **Wagering is wholly ours.** No server-side wager/leaderboard tools exist — settlement is against verified adapter outcomes. Narrative-first; the casino ledger stays gated behind a dedicated design + Mike sign-off (research hazard: "a casino ledger is not authorized by mentioning it").
+4. **Wagering is wholly ours.** No server-side wager/leaderboard tools exist — settlement is against verified adapter outcomes. Narrative-first; the casino ledger stays gated behind a dedicated design + Mike sign-off *(historical — 4b shipped 2026-09-01, S410; see the Phase 4 status note)* (research hazard: "a casino ledger is not authorized by mentioning it").
 5. **One-shot jobs run from crontab, never pm2 `cron_restart`** (S360 moltbook lesson: pm2 re-fires every 30s tick in the matching window, mid-run SIGINT duplicates actions).
 
-**Terminals:** research-build builds the Node/apparatus side (runner, adapter, gate plumbing); engine-sheet wires the sim side (feed type, ECL pool, any ledger); media runs coverage. Mike holds eligibility-filter/draw-parameter approval, show identity, and gate flips — reached THROUGH research-build, who carries proposals to him; build execution does not wait on step-by-step Mike direction (Mike-direct 2026-08-15, clarified: pace only). The 4b casino-ledger sign-off stays Mike-only.
+**Terminals:** research-build builds the Node/apparatus side (runner, adapter, gate plumbing); engine-sheet wires the sim side (feed type, ECL pool, any ledger); media runs coverage. Mike holds eligibility-filter/draw-parameter approval, show identity, and gate flips — reached THROUGH research-build, who carries proposals to him; build execution does not wait on step-by-step Mike direction (Mike-direct 2026-08-15, clarified: pace only). The 4b casino-ledger sign-off stays Mike-only *(historical — 4b shipped 2026-09-01 via direct builder sign-off, S410; see the Phase 4 status note)*.
 
 ---
 
@@ -76,6 +76,8 @@ pointers:
 - **4a Narrative-only (first).** Wager texture in the ECL pool + letters — citizens talk stakes, no balances move. Runs ≥2 cycles before 4b is even designed.
 - **4b Casino ledger (NOT authorized by this plan).** Requires its own design doc + Mike sign-off: event IDs from adapter outcomes, published odds, eligible citizens, stake caps, funding source, settlement at cycle fire, household economic effects, audit trail, loss safeguards. Feeds grudge/ambition typing downstream. In-world money only — no real-money anything, ever. Design questions consolidated in [[../research/2026-08-29-casino-ledger]] (watch; serves this gate, authorizes nothing).
 
+  **Status 2026-09-08 (kimi true-up):** 4b SHIPPED live 2026-09-01 (S410, commit `d1220bfa`, direct builder sign-off "turn on the casino"; bench C106 run at arm time: 9 open sports slips, 0 errors). Design + build docs archived at [[../archive/plans/2026-08-31-grok-casino-ledger]] and [[../archive/plans/2026-08-31-grok-casino-ledger-build]] (filed 2026-09-04, S420). The "NOT authorized" language above is superseded as gate mechanics and stays as history. Post-ship findings and open items: the plan's "Post-ship open items" section below and [[../research/2026-08-29-casino-ledger]] (now a constraint record, not a gate).
+
 ---
 
 ## Acceptance criteria
@@ -84,13 +86,13 @@ pointers:
 2. Adapter emits a staged episode event with provenance; zero sim writes without gate approval.
 3. First approved episode event surfaces in ≥1 citizen wake AND a Tribune piece within the same cycle window.
 4. `culture.spacemolt-show` pool draws in Content_Telemetry.
-5. Phase 4a lines draw; 4b remains unbuilt until its own sign-off.
+5. Phase 4a lines draw; 4b remains unbuilt until its own sign-off. *(Superseded 2026-09-01 — 4b shipped S410, `d1220bfa`; see the Phase 4 status note.)*
 
 ## Open questions
 
 - [ ] In-world broadcaster: who *airs* the show in Oakland — an existing business entity (Civis Systems? a media house?) or a new minted business? (Shapes coverage voice + a possible sponsor thread; decide with Mike at Phase 0.3.)
 - [x] Episode cadence — **RE-DECIDED daily, rotating cast** (2026-08-18, Mike sign-off; supersedes the 2026-08-16 per-cycle decision; see 1.1).
-- [ ] Themed special weeks (Mike-direction 2026-08-16): full special-event weeks around holidays and city moments once the base loop is locked in — a cadence variant, not a new mechanism. Revisit after the first cycles prove ingestion → coverage → feedback. The casino era spawning from the show remains Phase 4b: its own design doc + Mike sign-off, unchanged.
+- [ ] Themed special weeks (Mike-direction 2026-08-16): full special-event weeks around holidays and city moments once the base loop is locked in — a cadence variant, not a new mechanism. Revisit after the first cycles prove ingestion → coverage → feedback. The casino era spawning from the show remains Phase 4b: its own design doc + Mike sign-off, unchanged *(historical — 4b shipped 2026-09-01, S410; see the Phase 4 status note)*.
 - [ ] Does the audience wake-day participation need any mechanic beyond perception + ECL (e.g., a "watched the episode" LifeHistory event), or is texture enough for v1?
 
 
@@ -148,7 +150,7 @@ feed UsageCount; only article citations do. The leaderboard's mobility power is
 therefore indirect and editorial — being on top earns more bylined coverage.
 Remaining design scope, replacing the old "mobility engine" item: (a) whether
 standings mechanically pull extra coverage (a leader-feature slot beyond the
-recap), (b) the casino (4b, unchanged gate) — the first mechanism where the
+recap), (b) the casino (4b, unchanged gate — historical, shipped 2026-09-01 S410; see Phase 4 status note) — the first mechanism where the
 AUDIENCE takes downside, not just the cast. (c) trending as a scored
 mechanic — today the show's heat is emergent co-presence (the first content
 class ever live in all four social surfaces the same week: wake ECL lines,
@@ -176,6 +178,15 @@ Four decisions, all Mike sign-off, taken after an engine-sheet wiring audit of t
 - No crontab entries exist for any show stage — every episode/approve/push to date was hand-run.
 - Dane + Jumper C103 flights sit undecided (`Applied=no`) in intake.
 - EpisodeId `undocked-{pop}-Y{n}C{m}` is one-per-pilot-per-cycle — daily cadence requires a sequence component or same-cycle repeat flights silently collide.
+
+## Post-ship open items (2026-09-08, kimi)
+
+True-up after the 4b ship — every item verified against code and live dumps same day. All four need an engine-sheet decision or a scheduled watch; none is kimi-implementable under lane scope.
+
+- **(a) Cast redraw cadence.** The cast still flies from draw-1 (output/spacemolt-show/draws/draw-1.json, drawn 2026-08-16, manifest cycle 103): Clarissa Dane POP-00143 / Marcus Walker POP-00962 / Merkin Jumper POP-00688; alternates LaTrice Desai POP-00946, Jango Lango POP-00253, Renata Voss POP-00556. Rotation is static by construction: the orchestrator loads only the latest draw manifest (scripts/cron-undocked-run.js:42-50) and picks fewest-flights-this-cycle, cast-order tiebreak (:59-78). Crontab carries only the daily 20:30 flight job (scripts/cron-undocked-run.js); redraws are manual (scripts/undockedDraw.js --draw N --cycle M). No draw cadence exists and alternates have never been promoted. Decide cadence + succession rule.
+- **(b) Runner completion detection + mission-brief command cheatsheet.** scripts/undockedEpisode.js has no completion signal — the only stop is the wall-clock cap (SIGINT at --minutes, default 10; SIGKILL after a 15s grace, :143-145). Episode 2026-09-08 (undocked-pop00143-2026-09-08T01-30-06): the pilot aborted its mining mission honestly (no ice harvester), ignored the brief's "dock and stop", jumped to Sol, and capped mid-mission (46 turns, 9 tool errors, exitCode null, capped=true — staged/archive sidecar). The adapter output was still factually honest and gate-approved. Future work: watch the episode log for captains_log_add success + dock, then early-graceful SIGINT; the timeout stays the backstop. The 9 tool errors were wrong-shape command guesses (`spacemolt/travel destination=` vs `target_poi=`, `spacemolt/captains_log_add` vs `spacemolt_social/captains_log_add`, `spacemolt/view_market` vs `spacemolt_market/view_market`); the three static mission briefs (output/spacemolt-show/missions/*.txt) carry no command cheatsheet — add one.
+- **(c) Undocked-market placement off-by-one.** The casino only places show wagers against Undocked_Feed rows with TargetCycle === fireCycle+1 (phase05-citizens/casinoLedgerEngine.js:341), but the orchestrator reads currentCycle and only then pushes TargetCycle = currentCycle+1 (scripts/cron-undocked-run.js:104-107, 149-152) — always after the fire that set currentCycle. At fire N all feed rows have TargetCycle ≤ N → the casino's upcoming list is always empty → zero undocked slips ever place (C106 dump: 12 slips, all sports). Engine-sheet decision: either place against the current-cycle feed as prediction markets, or have the orchestrator pre-announce TargetCycle+1 episodes before the fire.
+- **(d) Settlement-proof watch (C107+).** Casino_Ledger has zero settled rows as of the C106 dump (output/beats/Casino_Ledger.jsonl: HOUSE float 250000 + 12 open sports slips, odds 1.83, stakes 134–667, per-slip Seed; output/beats/meta.json cycle 106, prevCycle null — the dump pipeline only started at C106, so pre-C106 placement history is not locally observable). Watch C107+ for the first real settlement. The VOID path is already exercised live: episode undocked-pop00143-2026-09-08T01-30-06 aired with CreditsDelta null (flag credits_delta_windowed) and resolves VOID_GATE by design (casinoLedgerEngine.js:187).
 
 ## Changelog
 
@@ -237,3 +248,4 @@ Four decisions, all Mike sign-off, taken after an engine-sheet wiring audit of t
 - 2026-08-18 (engine-sheet) — tier system extracted to its own doc: [[../engine/TIER_MOBILITY]] (climb/decay/fame, code-verified). Fame-permanence door confirmed UNWIRED → engine.118 filed.
 - 2026-08-29 (kimi) — 4b bullet now points at [[../research/2026-08-29-casino-ledger]], the consolidated design-question record serving this gate (watch; authorizes nothing). No gate change.
 - 2026-09-06 (research-build) — pipeline.58 CLOSED. Verified live: Nia Rook POP-01076 minted, in persona-map.json + .claude/agents/nia-rook; tonight's C105 article landed 4 real quotes (quotesLanded:4). Both halves stale-resolved, no new work needed.
+- 2026-09-08 (kimi) — True-up to shipped reality: 4b casino ledger shipped live 2026-09-01 (S410, `d1220bfa`, direct builder sign-off; design/build archived at [[../archive/plans/2026-08-31-grok-casino-ledger]] + [[../archive/plans/2026-08-31-grok-casino-ledger-build]]). Phase 4 gate language marked superseded-as-gate and kept as history (4b bullet, principle 4, Terminals, acceptance #5, open question, §2.4 addendum). Added "Post-ship open items" §: (a) cast redraw cadence, (b) runner completion detection + mission-brief command cheatsheet, (c) undocked-market placement off-by-one (engine-sheet decision), (d) settlement-proof watch C107+. Companion record: [[../research/2026-08-29-casino-ledger]] Shipped status.

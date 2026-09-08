@@ -255,6 +255,26 @@ Each read is one `getCitizenDialBands_` call at a roll that already exists. Bars
 
 ---
 
+## engine.182 — ambition costs (the missing half of "traits cost") — READY, builder go 2026-09-08 02:37
+
+**Direction (builder, recorded as said):** *"why would 'never sits still' be a trait? what does that trait do — make her sick with anxiety and end up on drugs and in the hospital?"* High drive today only helps: more career events, bigger casino bets, a climb posture. A trait that only helps is a bonus, not a trait. The source games make ambition dangerous (CK3 stress → coping; DF the overworked dwarf breaks).
+
+**Design (engine-sheet, inside the engine.176 pressure system — no new dial, no new file):**
+- **Overwork as a cause.** A citizen in the drive `+2` band whose composure band is `≤ 0` for `dialOverworkCycles` (3) consecutive cycles takes a pressure tag from `emitPressureTag_(…, 'overwork', …)` — Strain first (−1 composure; it is a slow burn, not a breach), and after `PRESSURE_ADAPT` the same adaptation as every cause — except overwork does NOT adapt while drive stays `+2`: the DF desensitization is to a hostile world, not to yourself. Emitted in Phase5-Career beside the unemployment emitter (same file, same `S.pressureTagged` first-writer rule).
+- **The hospital path is already there.** Composure erosion feeds the health engine's existing composure read (`runConductEngine` composure ≤ −1 ×1.25; the health lifecycle's `[Health]/[Hospitalized]` events fold −2/−6). Verify on the bench which health generator reads composure, and wire the overwork citizen into it if none does — measure first, this is the unverified hop.
+- **Drugs ride conduct.** A burned-out citizen (composure `−2`) with integrity slipping reaches `crimeReachable` sooner: add composure `−2` as a second key to the conduct throttle (`runConductEngine.js:184`, today composure ≤ −1 is ×1.25 only) so the dark end opens off burnout, not only off prior crime.
+- **The words.** Retire the adjective poles in `lib/citizenDials.js` `POLES` for drive/composure in favour of consequence-shaped phrases ("working herself thin", "can't switch off") — the wake reads a life, not a trait card.
+- Doctrine test: a Striver who never stops now pays for it on the row the builder didn't choose; a steady Striver (composure `+1`) does not. Bench: after 176+177, count `overwork:*` in `S.pressureCounts`; no citizen pins (edge damping holds).
+- Config: `dialOverworkCycles` 3 via `ensureEngine178Config_` (extend, no new arm call).
+
+### engine.182 — CUT LOCALLY 2026-09-08 (S438, builder go), UNBENCHED
+- Overwork emits every cycle the condition holds (drive `+2` and composure `≤ 0`), Strain from the first week, `PRESSURE_NO_ADAPT.overwork` — deviation from the filed "3 consecutive cycles" counter: the band condition itself persists, so a counter added memory for nothing. Emitted in Phase5-Career's per-row loop beside the drive-frequency read (`runCareerEngine.js`); one pressure tag per citizen per cycle still holds.
+- Health: `checkHealthEvent_` (`generationalEventsEngine.js`) multiplies the health-event chance by `dialBurnoutHealthMult` (2, seeded with the engine.178 keys) when composure sits in the bottom band — the cache-prime at the top of the generational loop makes the band read free. **Measured first: no health generator read composure before this.**
+- Conduct: `crimeReachable` is now `integrity band −2 OR (integrity band −1 AND composure band −2)` (`getCitizenDialBands_`).
+- Words: drive top band → "can't switch off, working themselves thin"; composure bottom band → "frayed, feels everything hard and sleeps badly".
+- Proof: `pressureTags.test.js` 41/41 (overwork first = Strain, never adapts while rent still does, the widened crime gate four ways); dial suites green.
+- Bench: `overwork:Strain` in `S.pressureCounts`; health events on burned-out citizens; `crimeReachable` count rises without a transgression pattern; no pin.
+
 ## engine.181 — the citywide floor (Cut F) — WATCH
 
 Filed, not designed. Trigger: after 176+177 have run three live cycles, read the citywide negative share and `Crime_Metrics`. If the negative share climbs past 35% or any hood's mean composure band drops to −1, design the RimWorld floor (ambient tint leans positive citywide) as its own cut. Until then, nothing.
@@ -313,3 +333,5 @@ Measured first: the wake pack already rendered posture + goal through the engine
 - 2026-09-08 — engine.178 cut locally (builder go, S438), unbenched. See §Status log.
 - 2026-09-08 — engine.179 cut locally (builder go, S438), unbenched. See §Status log.
 - 2026-09-08 — engine.180 cut locally (builder go, S438). Cron side; proves on the next scheduled wakes after deploy, not on the bench. See §Status log.
+- 2026-09-08 02:37 — engine.182 filed READY (builder go): ambition costs — overwork as a pressure cause, burnout opens the health and conduct paths, consequence-shaped words. Desk temperament label reverted (builder: the writer hears a person, not a dial).
+- 2026-09-08 02:45 — engine.182 cut locally, unbenched (builder: 'work, your call').

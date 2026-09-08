@@ -293,7 +293,8 @@ function hasTag_(tag, text) {
 //   Breach state is read off the citizen's own recent LifeHistory lines — no column.
 //   Returns the tag written, or null (already tagged / adapted / no column).
 // ============================================================================
-var PRESSURE_FIRST = { rent: 'Friction', debt: 'Friction', hood: 'Friction', unemployed: 'Stumble' };
+var PRESSURE_FIRST = { rent: 'Friction', debt: 'Friction', hood: 'Friction', unemployed: 'Stumble', overwork: 'Strain' }; // engine.182: overwork is a slow burn, Strain from the first week
+var PRESSURE_NO_ADAPT = { overwork: true }; // engine.182: you do not get used to yourself — desensitization is to a hostile world, not to your own drive
 var PRESSURE_ONGOING = 'Strain';
 var PRESSURE_RE = /\[(Friction|Strain|Stumble)\]/;
 var PRESSURE_LOOKBACK = 3;   // an ongoing breach = a pressure tag within the last 3 cycles
@@ -341,7 +342,7 @@ function emitPressureTag_(ctx, row, iLife, popId, cause, text, opts) {
   var cycle = Number(S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || 0);
   var state = pressureState_(row[iLife], cycle);
   if (!S.pressureCounts) S.pressureCounts = {};
-  if (state === 'adapted') { S.pressureCounts[cause + ':adapted'] = (S.pressureCounts[cause + ':adapted'] || 0) + 1; S.pressureTagged[popId] = 'adapted'; return null; }
+  if (state === 'adapted' && !PRESSURE_NO_ADAPT[cause]) { S.pressureCounts[cause + ':adapted'] = (S.pressureCounts[cause + ':adapted'] || 0) + 1; S.pressureTagged[popId] = 'adapted'; return null; }
   var tag = state === 'ongoing' ? PRESSURE_ONGOING : (PRESSURE_FIRST[cause] || 'Friction');
   var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
   var line = stamp + ' — [' + tag + '] ' + text;
@@ -361,7 +362,8 @@ var PRESSURE_TEXT = {
   rent: ['rent took the biggest bite of the month again', 'did the math on the rent twice and it came out the same', 'the lease renewal letter sat on the table for three days'],
   debt: ['the card statement was the first thing read and the last thing forgotten', 'paid the minimum and looked away', 'borrowed against next month to close this one'],
   unemployed: ['another week of applications and no callback', 'checked the listings before coffee, nothing new', 'told a neighbor the job search was going fine'],
-  hood: ['heard the rent talk on the block turn sharp', 'noticed the corner had a different crowd after dark', 'the for-rent signs outnumbered the welcome mats this month']
+  hood: ['heard the rent talk on the block turn sharp', 'noticed the corner had a different crowd after dark', 'the for-rent signs outnumbered the welcome mats this month'],
+  overwork: ['worked through another weekend and called it fine', 'could not switch off, even at the table', 'the third late night this week, and the ceiling again at four']
 };
 function pressureText_(cause, seed) {
   var pool = PRESSURE_TEXT[cause] || PRESSURE_TEXT.rent;
@@ -372,7 +374,7 @@ function pressureText_(cause, seed) {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     emitPressureTag_: emitPressureTag_, pressureState_: pressureState_, pressureAbsCycle_: pressureAbsCycle_,
-    pressureBar_: pressureBar_, pressureText_: pressureText_, PRESSURE_ADAPT: PRESSURE_ADAPT, PRESSURE_LOOKBACK: PRESSURE_LOOKBACK,
+    pressureBar_: pressureBar_, pressureText_: pressureText_, PRESSURE_ADAPT: PRESSURE_ADAPT, PRESSURE_LOOKBACK: PRESSURE_LOOKBACK, PRESSURE_NO_ADAPT: PRESSURE_NO_ADAPT,
     DIAL_MAP: DIAL_MAP, CONTENT_RULES: CONTENT_RULES, STRUCTURAL: STRUCTURAL,
     EDITION_RE: EDITION_RE, CALENDAR_SUFFIXES: CALENDAR_SUFFIXES, DEFAULT_AMBIENT: DEFAULT_AMBIENT,
     baseTag_: baseTag_, nudgesForEvent_: nudgesForEvent_,

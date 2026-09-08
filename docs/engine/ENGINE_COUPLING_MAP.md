@@ -102,6 +102,8 @@ All are pre-cap multipliers; `null` bands (no DialState) → base rates unchange
 
 **engine.180 (S438): the cron reads the game and pushes one notch.** The wake/exchange/voice standing line (`lib/wakePerception.js` `renderStanding`) carries posture + goal (engine.147) and now *what the last stretch threw* as words (`lib/citizenDials.js` `thrown`, off the pressure tags and named events, never a number). A `[Maneuver-*]` line stamped this cycle puts the citizen in the wake's posture slot. A wake reflection whose `Resolves` names an action queues `DialState.maneuver.push` at the Phase 9 drain (`pushFromResolves_`); Phase5-Maneuver applies it after its cause recompute, one notch, never over a debt/standing retreat, consumed the same cycle (`maneuverApplyPush_`). The cron leans a fate; it never sets one (§13).
 
+**engine.182 (S438): ambition costs.** Drive +2 with composure ≤ 0 emits `Strain` every cycle it holds (`runCareerEngine.js`, cause `overwork`, never adapts); composure −2 multiplies the health-event chance (`checkHealthEvent_`, `dialBurnoutHealthMult`); `crimeReachable` also opens at integrity −1 when composure is −2. The workaholic burns out, the burnout opens the hospital and the dark end. Builder-direct: a trait that only helps is a bonus, not a trait.
+
 ### Layer 2 — Outcome: *what the event does to the citizen*. Always a dial nudge; real state-mutation only in some engines.
 
 - **Always:** the event's tag → dial delta (the spine). Even a generic `Daily`/`Household` line moves composure/family. So every logged event shapes the citizen's essence over time.

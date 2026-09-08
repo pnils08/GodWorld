@@ -1174,7 +1174,10 @@ function getCitizenDialBands_(ctx, popId, dialStrOpt) {
     bands: bands,
     mult: mult,
     current: current,
-    crimeReachable: bandIndex_(current_(c, 'integrity')) <= 0, // low band gates crime at all
+    // engine.182 (S438): the lowest integrity band opens crime; so does integrity slipping (band -1)
+    // on a citizen who has come apart (composure band -2) — burnout reaches the dark end sooner.
+    crimeReachable: bandIndex_(current_(c, 'integrity')) <= 0 ||
+      (bandIndex_(current_(c, 'integrity')) <= 1 && bandIndex_(current_(c, 'composure')) <= 0),
     careerFreq: mult.drive,                                    // Drive -> career events
     familyFreq: mult.family                                    // Family-oriented -> birth/marriage
   };

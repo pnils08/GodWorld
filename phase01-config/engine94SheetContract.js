@@ -126,7 +126,8 @@ var ENGINE178_CONFIG_SEEDS = [
   ['dialOwnerStreakRoom', 1, 'engine.178 decline cycles a steady owner (composure +1/+2) adds before closure, and a volatile owner (-1/-2) loses', 0, 3, true],
   ['dialOwnerDriveExpandMult', 1.25, 'engine.178 multiplier on a POSITIVE growth drift when the owner sits in the drive +2 band', 1, 2, false],
   ['dialIntegrityScandalLow', 1.5, 'engine.178 approval-ceiling scandal chance multiplier for an officeholder in the integrity -2 band (-1 band = halfway)', 1, 3, false],
-  ['dialIntegrityScandalHigh', 0.5, 'engine.178 the same multiplier for the integrity +2 band (+1 band = halfway)', 0, 1, false]
+  ['dialIntegrityScandalHigh', 0.5, 'engine.178 the same multiplier for the integrity +2 band (+1 band = halfway)', 0, 1, false],
+  ['dialBurnoutHealthMult', 2, 'engine.182 health-event chance multiplier for a citizen whose composure sits in the bottom band (burnout opens the hospital path)', 1, 5, false]
 ];
 
 function ensureEngine178Config_(ss) {

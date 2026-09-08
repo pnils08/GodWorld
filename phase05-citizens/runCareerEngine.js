@@ -976,6 +976,13 @@ function runCareerEngine_(ctx) {
     // null bands (no DialState) -> base rates unchanged.
     var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
     if (dialBands) chance *= dialBands.careerFreq;
+    // engine.182 (S438, builder: "what does that trait do?"): AMBITION COSTS. A citizen in the
+    // top drive band whose composure sits at or below neutral is working themselves thin —
+    // Strain every cycle the condition holds, and it never adapts (PRESSURE_NO_ADAPT).
+    // One pressure tag per citizen per cycle still applies (the hood tint claims first).
+    if (dialBands && dialBands.bands.drive >= 2 && dialBands.bands.composure <= 0 && iLife >= 0) {
+      emitPressureTag_(ctx, row, iLife, popId, 'overwork', pressureText_('overwork', cycle + r));
+    }
 
     // Cap chance
     if (chance > 0.14) chance = 0.14;

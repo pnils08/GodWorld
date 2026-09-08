@@ -58,6 +58,30 @@ assert('adapted counted', ctx.summary.pressureCounts['rent:adapted'] === 1);
 assert('missing config bar throws (ADR-0015)', (() => { try { M.pressureBar_({ config: {} }, 'dialFrictionRentBurden'); return false; } catch (e) { return /engine\.176/.test(e.message); } })());
 assert('no LifeHistory column -> null', M.emitPressureTag_(ctxAt(5), row(''), -1, 'POP-9', 'rent', 'x') === null);
 
+// ---- engine.182: overwork — Strain from the first week, never adapts
+t = M.emitPressureTag_(ctxAt(120), row(''), L, 'POP-5', 'overwork', 'x');
+assert('overwork first week -> Strain (not Friction)', t === 'Strain', t);
+const sixOW = [114,115,116,117,118,119].map(c => 'C' + c + ' — [Strain] worked through').join('\n');
+ctx = ctxAt(120); r = row(sixOW);
+t = M.emitPressureTag_(ctx, r, L, 'POP-6', 'overwork', 'x');
+assert('overwork never adapts (6 consecutive still emits)', t === 'Strain' && /C120 — \[Strain\]/.test(r[L]), t);
+t = M.emitPressureTag_(ctxAt(120), row(sixOW), L, 'POP-7', 'rent', 'x');
+assert('rent still adapts after 6', t === null);
+assert('overwork text pool', /switch off|late night|weekend/.test(M.pressureText_('overwork', 1)));
+
+// ---- engine.182: burnout + slipping integrity opens the dark end
+{
+  const E2 = require('../utilities/citizenMemory.js'); Object.keys(E2).forEach(k => { global[k] = E2[k]; });
+  global.nudgesForEvent_ = M.nudgesForEvent_; global.baseTag_ = M.baseTag_;
+  const C2 = require('../utilities/compressLifeHistory.js');
+  const mk = (over) => { const c = E2.newCitizen_(); Object.assign(c.base, over); return C2.serializeDialState_(c); };
+  const reach = (over, id) => C2.getCitizenDialBands_({}, id, mk(over)).crimeReachable;
+  assert('integrity 15 -> reachable', reach({ integrity: 15 }, 'P-A') === true);
+  assert('integrity 30 + composure 15 (burnout) -> reachable', reach({ integrity: 30, composure: 15 }, 'P-B') === true);
+  assert('integrity 30 + composure 50 -> not reachable', reach({ integrity: 30, composure: 50 }, 'P-C') === false);
+  assert('integrity 50 + composure 15 -> not reachable (integrity must slip)', reach({ integrity: 50, composure: 15 }, 'P-D') === false);
+}
+
 // ---- the map: ambient tints, pressure tags move, casino/layoff route
 const sum = fx => Object.keys(fx).reduce((a, k) => a + fx[k], 0);
 assert('Neighborhood is a +1 tint', sum(M.nudgesForEvent_('Neighborhood', 1, 'x')) === 1);

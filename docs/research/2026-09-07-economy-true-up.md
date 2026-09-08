@@ -69,11 +69,14 @@ The ledger is the tracked ~0.25%; the Business_Ledger is the untracked world in 
 - **Employer modifies within its sector.** A Civis engineer earns Civis's rate; a Civis janitor earns the janitor band. Rule: the employer's Avg_Salary applies to a citizen only when the job's field matches the business's sector (`sectorCategory_` vs `roleFieldOf_`); otherwise the job band stands. One condition in `applyTrackedEmployerFloor_`.
 - **Rent share per hood.** Replace the one dial with a Neighborhood_Map column `RentShare` from the narrative: hot hoods (Lake Merritt, Rockridge, West Oakland, Jack London, Fruitvale, Baylight) ≈ 0.40; passed-over D4 villages ≈ 0.24; Chinatown held ≈ 0.28; the rest 0.30. The existing 30% / 50% burden rules in migration and household formation then do the sorting on their own.
 - **Businesses hire in their sector.** The rehire matcher's candidate filter: `tagsMatchCategory_(SkillTags, business sector)` or `roleFieldOf_(RoleType) === sector`. A clinic hires healthcare; a port hires port and labor.
+- **Income reaches the map** (engine.173). Income already feeds three gates: rent burden (30% / 50% risk), destination fit (rent at 30% of income + class alignment to the hood median) and the move-up lane. The lane required 2.5× the hood median — 9 of 699 working adults ever cleared it, a Chinatown citizen needed 210k to consider leaving. Now 1.5×: ~54 units enter the lane; the per-cycle roll (0.15 × maneuver posture), the 40% burden ceiling and the 1.5-point fit gain still decide who moves, and the class-alignment term points them at the empty mid-priced hoods (KONO, Dimond, Glenview, Eastlake, Grand Lake, Adams Point, 78–105k). Builder ruling the same night: citizens who were overpaid by the old floors KEEP the pay — no true-down; events move money.
 - **The gifted residence stays.** Inherited money (Lake Merritt's register) is heritage, not wages; it lives in NetWorth and the owner's draw, and those readers are untouched.
 
 Order: employer-floor sector rule → sector-gated hiring → per-hood rent share. Each is one bench cycle; the first two are one function each.
 
 ## 4. Status log
+
+- 2026-09-07 S436 (night) — builder rulings: (a) overpaid citizens keep the pay, no true-down (closed); (b) engine.173 move-up gate 1.5× ("I'll take your advice"), bench C114, PROD @71. engine.171 per-hood rent share still needs-info.
 
 - 2026-09-07 S436 (later still) — engine.172 LIVE @70: the personal pay position. The flat "all plumbers make x" correction never landed on live; C107 lifts each untracked citizen to their own figure instead (~102 of 238; 37 by >1.4×). Still open for the builder: the rows ABOVE their own figure (≈107 untracked + the employed above-band) stay by the raise-only rule; a one-time true-down is a many-row sheet write and waits for an explicit go.
 

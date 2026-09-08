@@ -296,8 +296,60 @@ function decayChaosExposure_(c, currentCycle) {
   return true;
 }
 
+// ============================================================================
+// engine.179 (S438) — CONTESTS RESOLVED BY CHARACTER (research.28 Cut D)
+// ----------------------------------------------------------------------------
+// Two citizens want the same thing. Exactly TWO terms per contest, weight 1 each,
+// every term on the signed band scale -2..+2 (a credential is converted, never an
+// ordinal). gap = Σ(a − b) ∈ [−8, +8]; p(a wins) = clamp(0.5 + 0.08·gap, 0.2, 0.8):
+// the fully polar mismatch caps at 4:1, the underdog always can win (doctrine §2:
+// causes, then dice). The CK3 scheme-against-resistance shape. Fenced by §10: the
+// GC family-match and marriage lotteries never call this.
+// ============================================================================
+var CONTEST_GAIN = 0.08, CONTEST_FLOOR = 0.2, CONTEST_CEIL = 0.8;
+var CREDENTIAL_BAND = {
+  'none': -2, 'hs-dropout': -2, 'dropout': -2,
+  'hs-diploma': -1, 'ged': -1, 'high school': -1,
+  'some-college': 0, 'associates': 0, 'associate': 0, 'trade-cert': 0, 'trade': 0, 'certificate': 0,
+  'bachelors': 1, 'bachelor': 1,
+  'masters': 2, 'master': 2, 'doctorate': 2, 'phd': 2, 'professional': 2, 'jd': 2, 'md': 2
+};
+function credentialBand_(edu) {
+  var k = String(edu || '').trim().toLowerCase().replace(/[’']s$/, 's');
+  if (!k) return 0;
+  if (CREDENTIAL_BAND.hasOwnProperty(k)) return CREDENTIAL_BAND[k];
+  for (var key in CREDENTIAL_BAND) { if (CREDENTIAL_BAND.hasOwnProperty(key) && k.indexOf(key) === 0) return CREDENTIAL_BAND[key]; }
+  return 0;
+}
+function bandClamp_(v) { var n = Number(v) || 0; return n < -2 ? -2 : (n > 2 ? 2 : n); }
+// contestRoll_(S, rng, aTerms, bTerms, site, aId, bId) -> { aWins, p, gap, roll }
+//   aTerms/bTerms: { <term>: signedBand } with exactly the same two keys each.
+//   S (ctx.summary) receives S.contests = { n, aWins, underdogWins, bySite:{site:n}, gaps:{gap:n} }.
+function contestRoll_(S, rng, aTerms, bTerms, site, aId, bId) {
+  var keys = [];
+  for (var k in aTerms) { if (aTerms.hasOwnProperty(k)) keys.push(k); }
+  if (keys.length !== 2) throw new Error('contestRoll_: exactly two terms per contest (' + keys.length + ' given at ' + site + ')');
+  var gap = 0;
+  for (var i = 0; i < 2; i++) gap += bandClamp_(aTerms[keys[i]]) - bandClamp_(bTerms[keys[i]]);
+  var p = 0.5 + CONTEST_GAIN * gap;
+  if (p < CONTEST_FLOOR) p = CONTEST_FLOOR;
+  if (p > CONTEST_CEIL) p = CONTEST_CEIL;
+  var roll = typeof rng === 'function' ? rng() : 0.5;
+  var aWins = roll < p;
+  if (S) {
+    var c = S.contests || (S.contests = { n: 0, aWins: 0, underdogWins: 0, bySite: {}, gaps: {} });
+    c.n++; if (aWins) c.aWins++;
+    if ((gap > 0 && !aWins) || (gap < 0 && aWins)) c.underdogWins++;
+    c.bySite[site || '?'] = (c.bySite[site || '?'] || 0) + 1;
+    c.gaps[String(gap)] = (c.gaps[String(gap)] || 0) + 1;
+  }
+  return { aWins: aWins, p: p, gap: gap, roll: roll, a: aId, b: bId };
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
+    contestRoll_: contestRoll_, credentialBand_: credentialBand_, CREDENTIAL_BAND: CREDENTIAL_BAND,
+    CONTEST_GAIN: CONTEST_GAIN, CONTEST_FLOOR: CONTEST_FLOOR, CONTEST_CEIL: CONTEST_CEIL,
     DIALS: DIALS, MIDPOINT: MIDPOINT, BAND_CUTS: BAND_CUTS, BAND_MULT: BAND_MULT,
     HARDEN_STREAK: HARDEN_STREAK,
     newCitizen_: newCitizen_, current_: current_,

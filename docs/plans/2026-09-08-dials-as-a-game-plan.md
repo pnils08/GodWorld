@@ -288,7 +288,17 @@ Five reads, each one `getCitizenDialBands_` call with the row's DialState string
 - Proof: `scripts/dialGates.test.js` 30/30 (new — casino band, bond bands/factors/maintenance, owner resolution by POPID and name, drift expansion never on a bad week, civic multiplier + holder resolution); touched suites green (`migrationRelocation` 47, `casinoLedgerEngine` ok, `civicApprovalCeiling` 101, `hoodIncome` 74, `careerStage` 83, `employerSuccess` 58, `householdReconcile` 105, `maneuverEngine` 47, `archiveHeritageResolve` 15) plus the dial suites.
 - Bench: after 176+177's 12 cycles on the same re-sync, one cycle with 178; read `S.casinoGates`, `out.ownerRoom`, the civic reason lines, and the relocation lane counts.
 
+### engine.179 — CUT LOCALLY 2026-09-08 (S438, builder go), UNBENCHED
+`contestRoll_(S, rng, aTerms, bTerms, site, aId, bId)` + `credentialBand_` in `utilities/citizenMemory.js` — exactly two terms, weight 1, band-clamped, `p = clamp(0.5 + 0.08·gap, 0.2, 0.8)`, every contest tallied into `S.contests {n, aWins, underdogWins, bySite, gaps}` and printed on the Phase 9 log line. Decisions in the cut:
+- **Job slot**: the LAST open slot is contested only when the first left-out candidate shares its need band — drive + credential (credential on the band scale: none −2 … masters/doctorate +2). The need sort stays. Adult intake (`educationCareerEngine.js:1270`) is a business pick, not two citizens wanting one thing — left as is, recorded here as the deviation from Task 2.
+- **Heritage stake**: wealth is the floor ($100k); every living member over it contests on drive + integrity, wealthiest as first champion, challengers in POPID order.
+- **Civic challenger**: a second draw from the same tier-weighted pool contests the nomination on sociability + integrity; the tier weighting stays the cause.
+- **Romantic triangle**: `romanceRivalOf_` / `romanceSuitorOf_` (one index per cycle, ACTIVE romances only); when a romance shares an endpoint with a rival's, each tick is contested on warmth + sociability via `bondDialBand_` — the loser's bond takes no step that week (`rr = 1`), the rivalry bond keeps burning. Pace only; §11 shape untouched.
+- Proof: `scripts/contestRoll.test.js` 31/31 (curve, clamps, two-term rule, 10k-roll distributions at gap +2 and the 0.2 floor, bookkeeping, credential map, triangle helpers); touched suites green (`careerStage` 83, `employerSuccess` 58, `hoodIncome` 74, `archiveHeritageResolve` 15, `householdReconcile` 105, `civicApprovalCeiling` 101) plus the dial suites and `dialGates` 30.
+- Bench: one cycle after 178's; read `S.contests` on the Phase 9 log line — the gap distribution and the underdog rate (kimi: meaningful only on the post-176/177 population).
+
 ## Changelog
 - 2026-09-08 — created (engine-sheet, S437).
 - 2026-09-08 — engine.176 + engine.177 cut locally, unit-proven, unbenched (engine-sheet, S438). Edge-damped hardening + the adaptation rule recorded under §Status log.
 - 2026-09-08 — engine.178 cut locally (builder go, S438), unbenched. See §Status log.
+- 2026-09-08 — engine.179 cut locally (builder go, S438), unbenched. See §Status log.

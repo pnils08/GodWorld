@@ -1054,6 +1054,12 @@
   Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
+- **romanceTriangleIndex_(ctx, bonds)**
+
+- **romanceRivalOf_(ctx, bonds, bond)**
+
+- **romanceSuitorOf_(ctx, bonds, bond, rivalPop)**
+
 - **detectTriangleRivalries_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
   Config: ctx.config.cycleCount
@@ -3292,6 +3298,15 @@
 
 - **decayChaosExposure_(c, currentCycle)**
 
+- **credentialBand_(edu)**
+
+- **bandClamp_(v)**
+  Writes: S.contests
+
+- **contestRoll_(S, rng, aTerms, bTerms, site, aId, bId)**
+  Reads: S.contests
+  Writes: S.contests
+
 ### compressLifeHistory.js
 - **griefConfigNumber_(ctx, key, min, max, integerOnly)**
 
@@ -3304,7 +3319,7 @@
 - **nudgeBondIntensity_(bonds, totals, fromPop, toPop, delta, cycle)**
 
 - **compressLifeHistory_(ctx, options)**
-  Reads: S.absoluteCycle, S.biasIntents, S.cycleId, S.pendingCascades, S.pressureCounts, S.relationshipBonds
+  Reads: S.absoluteCycle, S.biasIntents, S.contests, S.cycleId, S.pendingCascades, S.pressureCounts, S.relationshipBonds
   Writes: S.lifeHistoryCompression
 
 - **parseLifeHistoryEntries_(historyStr)**
@@ -3905,4 +3920,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1342
+**Functions mapped:** 1348

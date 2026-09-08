@@ -287,6 +287,23 @@ function runCivicElections_(ctx) {
         }
       }
       challenger = weighted[Math.floor(rng() * weighted.length)];
+      // engine.179 (S438): a second draw from the same weighted pool contests the
+      // nomination on sociability + integrity — the room picks between two, not one.
+      if (typeof contestRoll_ === 'function' && challengerSource.length > 1) {
+        var rival = weighted[Math.floor(rng() * weighted.length)];
+        var guard = 0;
+        while (rival === challenger && guard++ < 8) rival = weighted[Math.floor(rng() * weighted.length)];
+        if (rival && rival !== challenger) {
+          var iSDial = sCol('DialState');
+          var termsOf = function (cand) {
+            var srowC = iSDial >= 0 && cand.rowIndex != null ? simRows[cand.rowIndex] : null;
+            var gb = (srowC && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, String(cand.popId || ''), srowC[iSDial] || '') : null;
+            return { sociability: gb ? gb.bands.sociability : 0, integrity: gb ? gb.bands.integrity : 0 };
+          };
+          var crC = contestRoll_(ctx.summary, rng, termsOf(challenger), termsOf(rival), 'civic-challenger', challenger.popId, rival.popId);
+          if (!crC.aWins) challenger = rival;
+        }
+      }
       
       // Remove from pool so they don't run for multiple seats
       var poolIdx = candidatePool.indexOf(challenger);

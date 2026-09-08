@@ -2432,6 +2432,27 @@ function updateHeritage_(ss, ctx, cycle) {
         var sNW = nwOf(sRow);
         if (sNW > stakeNW) { stakeNW = sNW; stakeRow = sRow; stakePop = String(sRow[iPop]).trim(); }
       }
+      // engine.179 (S438): wealth is the FLOOR, not the pick — every living member over
+      // $100k contests the stake on drive + integrity, wealthiest as the first champion,
+      // challengers in POPID order. A rich idle heir can lose the storefront to a driven cousin.
+      if (stakeRow && stakeNW >= 100000 && typeof contestRoll_ === 'function') {
+        var iDialH = idx('DialState');
+        var challengers = [];
+        for (var s2 = 0; s2 < members.length; s2++) {
+          var cRow = members[s2];
+          if (cRow === stakeRow || !living(cRow) || nwOf(cRow) < 100000) continue;
+          challengers.push(cRow);
+        }
+        challengers.sort(function (a, b) { return String(a[iPop]) < String(b[iPop]) ? -1 : 1; });
+        var champTerms = function (row) {
+          var gb = (iDialH >= 0 && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, String(row[iPop]).trim(), row[iDialH] || '') : null;
+          return { drive: gb ? gb.bands.drive : 0, integrity: gb ? gb.bands.integrity : 0 };
+        };
+        for (var ch = 0; ch < challengers.length; ch++) {
+          var crH = contestRoll_(ctx.summary, rng, champTerms(stakeRow), champTerms(challengers[ch]), 'heritage-stake', String(stakeRow[iPop]), String(challengers[ch][iPop]));
+          if (!crH.aWins) { stakeRow = challengers[ch]; stakeNW = nwOf(stakeRow); stakePop = String(stakeRow[iPop]).trim(); }
+        }
+      }
       if (stakeRow && stakeNW >= 100000) {
         if (nextBizNum === null) {
           if (bizData) {

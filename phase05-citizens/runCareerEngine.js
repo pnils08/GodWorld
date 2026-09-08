@@ -1209,6 +1209,21 @@ function runCareerEngine_(ctx) {
 
       var slots = sameField.slice(0, openings);
       var leftOut = sameField.length > openings ? pool[sameField[openings]] : null;
+      // engine.179 (S438): the LAST slot is contested when the first left-out candidate
+      // shares its need band — drive + credential (both on the band scale), the dice
+      // decide, the underdog can win. The need sort stays: poorest first is the cause.
+      if (leftOut && openings > 0 && typeof contestRoll_ === 'function') {
+        var lastIdx = slots[openings - 1], outIdx = sameField[openings];
+        if (hireIncomeBand_(pool[lastIdx].income, pool[lastIdx].tier) === hireIncomeBand_(leftOut.income, leftOut.tier)) {
+          var bandsIn = getCitizenDialBands_(ctx, pool[lastIdx].pop, iDialState >= 0 ? (rows[pool[lastIdx].r][iDialState] || '') : '');
+          var bandsOut = getCitizenDialBands_(ctx, leftOut.pop, iDialState >= 0 ? (rows[leftOut.r][iDialState] || '') : '');
+          var cr = contestRoll_(S, roll,
+            { drive: bandsIn ? bandsIn.bands.drive : 0, credential: credentialBand_(pool[lastIdx].eduLabel) },
+            { drive: bandsOut ? bandsOut.bands.drive : 0, credential: credentialBand_(leftOut.eduLabel) },
+            'job-slot', pool[lastIdx].pop, leftOut.pop);
+          if (!cr.aWins) { slots[openings - 1] = outIdx; leftOut = pool[lastIdx]; }
+        }
+      }
       // engine.157: the citizen's side of the E3 ruling — a window with ZERO
       // same-field candidates may take an unemployed climber open enough to
       // change fields (maneuverWillingCrossField_). The citizen chooses the

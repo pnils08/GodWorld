@@ -685,6 +685,19 @@ function updateExistingBonds_(ctx) {
     if (bond.bondType === BOND_TYPES.ROMANTIC) {
       var rr = rng();
       var stepP = (aActive && bActive) ? 0.20 : 0.10;
+      // engine.179 (S438): THE TRIANGLE. When this romance shares an endpoint with a
+      // rival's, each maturation tick is contested on warmth + sociability — the winner's
+      // bond takes the tick, the loser's does not; the RIVALRY bond keeps burning. §11
+      // shape untouched: pace only, no formation, no marriage shortcut.
+      var rivalPop = romanceRivalOf_(ctx, bonds, bond);
+      if (rivalPop) {
+        var suitorPop = romanceSuitorOf_(ctx, bonds, bond, rivalPop);
+        var crT = contestRoll_(S, rng,
+          { warmth: bondDialBand_(ctx, suitorPop, 'warmth'), sociability: bondDialBand_(ctx, suitorPop, 'sociability') },
+          { warmth: bondDialBand_(ctx, rivalPop, 'warmth'), sociability: bondDialBand_(ctx, rivalPop, 'sociability') },
+          'romantic-triangle', suitorPop, rivalPop);
+        if (!crT.aWins) rr = 1; // the rival took the week: no step, no big week
+      }
       // engine.74 (S328, Mike-direct): the household ledger is a causal input
       // on family fates — an established home (either partner holds a
       // household, incl. engine.73 solo establishment) makes courtship steps
@@ -2552,6 +2565,46 @@ function processGCMarriageLottery_(ctx) {
     marryCitizens_(ctx, lotteryBond, P, B, cycle);
     Logger.log('engine.59 GC LOTTERY: ' + pid + ' (' + P.name + ') married ' + spId + ' (' + spName + ') — pool ' + wantSex + ' now ' + avail.length);
   }
+}
+
+// engine.179 (S438): the triangle map — for a ROMANTIC bond, the rival suitor's
+// POPID when one of its endpoints holds another ACTIVE romance, else null. Built
+// once per cycle off the same walk detectTriangleRivalries_ uses.
+function romanceTriangleIndex_(ctx, bonds) {
+  if (ctx._romTriangles) return ctx._romTriangles;
+  var romBy = {};
+  for (var b = 0; b < bonds.length; b++) {
+    var bd = bonds[b];
+    if (!bd || bd.bondType !== BOND_TYPES.ROMANTIC || bd.status !== BOND_STATUS.ACTIVE) continue;
+    (romBy[bd.citizenA] = romBy[bd.citizenA] || []).push(bd.citizenB);
+    (romBy[bd.citizenB] = romBy[bd.citizenB] || []).push(bd.citizenA);
+  }
+  ctx._romTriangles = romBy;
+  return romBy;
+}
+function romanceRivalOf_(ctx, bonds, bond) {
+  if (!bond || bond.status !== BOND_STATUS.ACTIVE) return null; // a dormant romance is not a live want
+  var romBy = romanceTriangleIndex_(ctx, bonds);
+  var ends = [[bond.citizenA, bond.citizenB], [bond.citizenB, bond.citizenA]];
+  for (var e = 0; e < 2; e++) {
+    var target = ends[e][0], suitor = ends[e][1];
+    var suitors = romBy[target] || [];
+    if (suitors.length < 2) continue;
+    var others = [];
+    for (var i = 0; i < suitors.length; i++) { if (suitors[i] !== suitor) others.push(suitors[i]); }
+    if (!others.length) continue;
+    others.sort();
+    return others[0];
+  }
+  return null;
+}
+function romanceSuitorOf_(ctx, bonds, bond, rivalPop) {
+  var romBy = romanceTriangleIndex_(ctx, bonds);
+  // the suitor is the endpoint that is NOT the shared target
+  var aSuitors = romBy[bond.citizenA] || [], bSuitors = romBy[bond.citizenB] || [];
+  if (aSuitors.indexOf(rivalPop) >= 0) return bond.citizenB; // A is the target
+  if (bSuitors.indexOf(rivalPop) >= 0) return bond.citizenA; // B is the target
+  return bond.citizenA;
 }
 
 function detectTriangleRivalries_(ctx) {

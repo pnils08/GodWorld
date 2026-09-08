@@ -2,7 +2,7 @@
   "generated": "2026-09-08",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1342,
+  "functionsMapped": 1348,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4118,6 +4118,16 @@
       ],
       "readers": [
         "utilities/citizenDialMap.js::emitPressureTag_",
+        "utilities/compressLifeHistory.js::compressLifeHistory_"
+      ]
+    },
+    "contests": {
+      "writers": [
+        "utilities/citizenMemory.js::bandClamp_",
+        "utilities/citizenMemory.js::contestRoll_"
+      ],
+      "readers": [
+        "utilities/citizenMemory.js::contestRoll_",
         "utilities/compressLifeHistory.js::compressLifeHistory_"
       ]
     },

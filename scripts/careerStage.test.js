@@ -238,7 +238,7 @@ function ctxWith(rows, cycle) {
   // employer pays, same floor as everyone else. GAME (F9) still is not.
   assert('D3 CIVIC row gets the floor', inc('F14') === 45000, inc('F14'));
   assert('D3 MEDIA row gets the floor', inc('F15') === 45000, inc('F15'));
-  const taxiBand = sandbox.jobReferencePay_('Taxi driver', '', 'mid-career', 'F16');
+  const taxiBand = sandbox.jobReferencePay_('Taxi driver', '', 'mid-career', 'F16', sandbox.payProfileFromRow_(H2, rows.find(x => x[I2('POPID')] === 'F16'), 2)); // engine.172: the row's own profile, the clinic's Growth_Rate 2
   assert('engine.169 out-of-sector job floors at its own band', inc('F16') === taxiBand && taxiBand < 80000, inc('F16') + ' vs ' + taxiBand);
   assert('engine.169 in-sector job floors at the employer average', inc('F17') === 154000, inc('F17'));
   assert('engine.169 unplaceable role keeps the employer average', inc('F18') === 154000, inc('F18'));

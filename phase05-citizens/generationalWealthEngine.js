@@ -523,7 +523,8 @@ function calculateCitizenIncomes_(ctx) {
     // their job's catalog band; the legacy band is the fallback only where the
     // catalog cannot place the role.
     var income = jobReferencePay_(iRoleType >= 0 ? row[iRoleType] : '',
-      iSkillTags >= 0 ? row[iSkillTags] : '', iCareerStage >= 0 ? row[iCareerStage] : '', iPopId >= 0 ? row[iPopId] : r);
+      iSkillTags >= 0 ? row[iSkillTags] : '', iCareerStage >= 0 ? row[iCareerStage] : '', iPopId >= 0 ? row[iPopId] : r,
+      payProfileFromRow_(ctx.ledger.headers, row, null)); // engine.172: the life places them in the band
     if (income === null) income = calculateIncomeFromBand_(incomeBand, tier, rng); // legacy band, deterministic RNG
 
     row[iIncome] = income;
@@ -581,7 +582,8 @@ function applyTrackedEmployerFloor_(ctx) {
     if (hn === 'BIZ_ID') bId = c; else if (hn === 'Avg_Salary') bSal = c; else if (hn === 'Sector') bSec = c;
   }
   if (bId < 0 || bSal < 0) return out;
-  var salaryById = {}, sectorById = {}; // engine.169: the business's field, for the in-sector test
+  var salaryById = {}, sectorById = {}, growthById = {}; // engine.169: the business's field, for the in-sector test; engine.172: its growth
+  var bGrow = -1; for (var gc = 0; gc < bh.length; gc++) if (String(bh[gc]).trim() === 'Growth_Rate') bGrow = gc;
   for (var b = 1; b < bizData.length; b++) {
     var id = String(bizData[b][bId] || '').trim();
     var sal = Number(bizData[b][bSal]) || 0;
@@ -590,7 +592,7 @@ function applyTrackedEmployerFloor_(ctx) {
     // floored at it. Same regex sectorCategory_ uses to keep hires out.
     var sector = bSec >= 0 ? String(bizData[b][bSec] || '') : '';
     if (/sports|stadium|franchise|athletic/i.test(sector)) continue;
-    if (id && sal > 0) { salaryById[id] = sal; sectorById[id] = (typeof sectorCategory_ === 'function') ? sectorCategory_(sector, true) : null; }
+    if (id && sal > 0) { salaryById[id] = sal; sectorById[id] = (typeof sectorCategory_ === 'function') ? sectorCategory_(sector, true) : null; growthById[id] = bGrow >= 0 ? Number(bizData[b][bGrow]) : null; }
   }
 
   var STAGE_FACTOR = { ENTRY: 0.75, MID: 1.0, SENIOR: 1.3 };
@@ -614,7 +616,7 @@ function applyTrackedEmployerFloor_(ctx) {
     var bizField = sectorById[employer] || null;
     var floor;
     if (jobField && bizField && jobField !== bizField) {
-      var band = jobReferencePay_(row[iRole], iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r);
+      var band = jobReferencePay_(row[iRole], iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r, payProfileFromRow_(header, row, growthById[employer])); // engine.172
       if (band === null) continue;
       floor = Math.min(band, Math.round(avg * factor));
       out.outOfSector = (out.outOfSector || 0) + 1;
@@ -683,51 +685,112 @@ function median_(a) { if (!a || !a.length) return 0; var b = a.slice().sort(func
 function seedUnit_(s) { var h = 2166136261; s = String(s || ''); for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return (h % 10000) / 10000; }
 
 // The economic catalog (utilities/citizenDerivation.js ECONOMIC_PARAMETERS) by
-// role and by category — a citizen's job is what pays them. Built once.
+// role and by category — a citizen's job is what pays them. Each entry is a
+// BAND {min, max, med}; a category's band is the median of its roles' mins /
+// maxes / medians. Built once.
 var JOB_PAY_CACHE_ = null;
 function jobPayTable_() {
   if (JOB_PAY_CACHE_) return JOB_PAY_CACHE_;
-  var byRole = {}, byCat = {};
+  var byRole = {}, cat = {};
   var E = (typeof ECONOMIC_PARAMETERS !== 'undefined' && ECONOMIC_PARAMETERS) ? ECONOMIC_PARAMETERS : [];
   for (var i = 0; i < E.length; i++) {
     var med = Number(E[i].medianIncome) || 0; if (!(med > 0)) continue;
-    byRole[String(E[i].role || '').trim().toLowerCase()] = med;
-    (byCat[E[i].category] = byCat[E[i].category] || []).push(med);
+    var rng = E[i].incomeRange || [];
+    var lo = Number(rng[0]) || med, hi = Number(rng[1]) || med;
+    if (hi < lo) { var t = lo; lo = hi; hi = t; }
+    byRole[String(E[i].role || '').trim().toLowerCase()] = { min: lo, max: hi, med: med, cat: E[i].category };
+    var c = cat[E[i].category] = cat[E[i].category] || { mins: [], maxes: [], meds: [] };
+    c.mins.push(lo); c.maxes.push(hi); c.meds.push(med);
   }
-  var catMed = {}; for (var c in byCat) catMed[c] = median_(byCat[c]);
-  JOB_PAY_CACHE_ = { byRole: byRole, byCat: catMed };
+  var byCat = {};
+  for (var k in cat) byCat[k] = { min: median_(cat[k].mins), max: median_(cat[k].maxes), med: median_(cat[k].meds), cat: k };
+  JOB_PAY_CACHE_ = { byRole: byRole, byCat: byCat };
   return JOB_PAY_CACHE_;
 }
 
+// engine.172 (2026-09-07, builder: "what makes each differ?"): the credential
+// a field expects of its workers. A citizen above it sits higher in the band,
+// below it lower. credentialRank_ scale: 0 none · 1 hs · 2 some-college ·
+// 3 associates/trade-cert · 4 bachelors · 5 masters · 6 doctorate.
+var PAY_EXPECTED_CREDENTIAL_ = {
+  'Professional': 4, 'Healthcare': 4, 'Tech & Innovation': 4, 'Education': 4, '2041-Specific': 4,
+  'Government & Civic': 3, 'Trades': 3, 'Construction & Baylight': 3, 'The Vulnerable': 3,
+  'Transit & Infrastructure': 2, 'Faith & Community': 2, 'Creative & Arts': 2,
+  'Port & Labor': 1, 'Small Business': 1, 'Food & Culture': 1
+};
+
 /**
- * What this citizen's JOB pays (builder ruling 2026-09-07, supersedes the
- * S398/S399 hood-reference concept: a neighborhood has nothing to do with a
- * person's income — income decides where they can live, never the reverse).
- * The economic catalog's median for the exact role; else the median of the
- * catalog's roles in the role's field (roleFieldOf_ / the sector hints; the
- * SkillTag only for a role the catalog cannot place); × career stage
- * (0.75 / 1.0 / 1.3) × a per-citizen seeded ±8%; rounded to $100. null when
- * nothing places the role or the stage earns nothing (student / retired /
- * unknown) — the caller keeps its old draw.
+ * engine.172: the per-citizen inputs jobReferencePay_ places a life in its
+ * job's band by — read off the ledger row. employerGrowth is the employer's
+ * Business_Ledger Growth_Rate when the caller has it (null = unknown).
  */
-function jobReferencePay_(roleText, skillTags, careerStage, seed) {
-  var STAGE_FACTOR = { ENTRY: 0.75, MID: 1.0, SENIOR: 1.3 };
-  var factor = STAGE_FACTOR[careerStageClass_(careerStage)];
-  if (!factor) return null;
+function payProfileFromRow_(header, row, employerGrowth) {
+  var idx = function(n) { return header.indexOf(n); };
+  var iY = idx('YearsInCareer'), iE = idx('EducationLevel'), iD = idx('DialState'), iT = idx('Tier');
+  var drive = null;
+  if (iD >= 0 && row[iD]) {
+    try { var o = typeof row[iD] === 'string' ? JSON.parse(row[iD]) : row[iD]; if (o && o.base && o.base.drive != null) drive = Number(o.base.drive); } catch (e) { drive = null; }
+  }
+  var g = Number(employerGrowth);
+  var yv = iY >= 0 ? row[iY] : null, ev = iE >= 0 ? row[iE] : null; // a blank cell is unknown, never 0 years / no credential
+  return {
+    years: (yv !== '' && yv != null) ? Number(yv) : NaN,
+    eduRank: (ev !== '' && ev != null && typeof credentialRank_ === 'function') ? credentialRank_(ev) : null,
+    drive: (drive != null && isFinite(drive)) ? drive : null,
+    tier: iT >= 0 ? Number(row[iT]) : 4,
+    employerGrowth: (employerGrowth == null || !isFinite(g)) ? null : g
+  };
+}
+
+/**
+ * What this citizen's JOB pays THEM (builder rulings 2026-09-07: a
+ * neighborhood has nothing to do with income — the job pays; and "if all
+ * plumbers make x, what makes each differ?" — the life does).
+ *
+ * The band: the economic catalog's [min, max] for the exact role; else the
+ * role's field (roleFieldOf_ / the sector hints; the SkillTag only for a role
+ * the catalog cannot place). The position in the band, 0..1:
+ *   years in the career   0.6 × (1 − e^(−years/12))   — the spine: 0 at day one, 0.47 at 18 yrs, 0.55 at 30
+ *   credential vs expected ±0.05 per rank above/below the field's expected credential
+ *   drive (DialState)     ±0.10 across the dial (50 = neutral)
+ *   tier                  +0.08 for a Tier-3 (Tier 1–2 never pass through the floors)
+ *   employer              ±0.10 by the employer's Growth_Rate (p10 1.5 → p90 8.8), unknown = neutral
+ * × a seeded ±5%, rounded to $100. A profile-less call (a mint with no history
+ * yet) reads years from the stage (entry 2 · mid 12 · senior 25) and neutral
+ * everything else. null when nothing places the role or the stage earns
+ * nothing (student / retired) — the caller keeps its old draw.
+ */
+function jobReferencePay_(roleText, skillTags, careerStage, seed, profile) {
+  var cls = careerStageClass_(careerStage);
+  if (cls === 'STUDENT' || cls === 'RETIRED') return null;
   var pay = jobPayTable_();
-  var med = pay.byRole[String(roleText || '').trim().toLowerCase()] || 0;
-  if (!(med > 0)) {
+  var band = pay.byRole[String(roleText || '').trim().toLowerCase()] || null;
+  if (!band) {
     var field = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(roleText) : null;
     if (!field) field = roleSectorCategory_(roleText);
     if (!field) {
       var tags = String(skillTags || '').split('|');
       for (var t = 0; t < tags.length && !field; t++) { var tg = tags[t].trim(); if (tg && pay.byCat[tg]) field = tg; }
     }
-    med = field ? (pay.byCat[field] || 0) : 0;
+    band = field ? (pay.byCat[field] || null) : null;
   }
-  if (!(med > 0)) return null;
-  var jitter = 0.92 + 0.16 * seedUnit_(seed);
-  return Math.round(med * factor * jitter / 100) * 100;
+  if (!band || !(band.max > 0)) return null;
+  var p = profile || {};
+  var years = Number(p.years);
+  if (!(years >= 0)) years = cls === 'ENTRY' ? 2 : cls === 'SENIOR' ? 25 : 12;
+  var pos = 0.6 * (1 - Math.exp(-years / 12));
+  var expected = PAY_EXPECTED_CREDENTIAL_[band.cat] || 2;
+  if (p.eduRank != null && isFinite(Number(p.eduRank))) pos += (Number(p.eduRank) - expected) * 0.05;
+  if (p.drive != null && isFinite(Number(p.drive))) pos += ((Number(p.drive) - 50) / 100) * 0.2;
+  var tier = Math.round(Number(p.tier)) || 4;
+  if (tier === 3) pos += 0.08;
+  if (p.employerGrowth != null && isFinite(Number(p.employerGrowth))) {
+    var g = Math.max(0, Math.min(1, (Number(p.employerGrowth) - 1.5) / 7.3));
+    pos += (g - 0.5) * 0.2;
+  }
+  pos = Math.max(0, Math.min(1, pos));
+  var jitter = 0.95 + 0.10 * seedUnit_(seed);
+  return Math.round((band.min + pos * (band.max - band.min)) * jitter / 100) * 100;
 }
 
 /**
@@ -760,7 +823,7 @@ function applyUntrackedJobReference_(ctx) {
     var employer = String(row[iEmp] || '').trim();
     if (employer !== 'SELF_EMPLOYED' && employer !== 'UNTRACKED') continue;
     var roleText = (iRole >= 0 && row[iRole]) ? row[iRole] : (iEcon >= 0 ? row[iEcon] : '');
-    var ref = jobReferencePay_(roleText, iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r);
+    var ref = jobReferencePay_(roleText, iTags >= 0 ? row[iTags] : '', row[iStage], iPop >= 0 ? row[iPop] : r, payProfileFromRow_(header, row, null)); // engine.172
     if (ref === null) continue;
     out.checked++;
     var income = Number(row[iIncome]) || 0;

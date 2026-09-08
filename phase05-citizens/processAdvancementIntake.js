@@ -713,7 +713,8 @@ function processAdvancementRows_(ctx, now, cycle) {
         var lStageA = findColByName_(ledgerHeaders, 'CareerStage'), lTagsA = findColByName_(ledgerHeaders, 'SkillTags');
         var hoodIncome = (typeof jobReferencePay_ === 'function') ? jobReferencePay_(
           roleType, lTagsA >= 0 ? ledgerRows[existingRow][lTagsA] : '',
-          lStageA >= 0 ? ledgerRows[existingRow][lStageA] : '', ledgerRows[existingRow][lPopId]) : null;
+          lStageA >= 0 ? ledgerRows[existingRow][lStageA] : '', ledgerRows[existingRow][lPopId],
+          (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ledgerHeaders, ledgerRows[existingRow], null) : null) : null; // engine.172
         if (hoodIncome !== null) ledgerRows[existingRow][lIncome] = hoodIncome;
         else if (newIncome !== null) ledgerRows[existingRow][lIncome] = newIncome;
       }

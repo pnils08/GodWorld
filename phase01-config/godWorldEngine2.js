@@ -1374,7 +1374,8 @@ function processIntake_(ctx) {
           // engine.135 D2 (S399), re-based 2026-09-07: the job's catalog band prices the new role when it can.
           var hoodPay = (typeof jobReferencePay_ === 'function') ? jobReferencePay_(
             givenRole, idxL('SkillTags') >= 0 ? lRow[idxL('SkillTags')] : '',
-            idxL('CareerStage') >= 0 ? lRow[idxL('CareerStage')] : '', popIdE) : null;
+            idxL('CareerStage') >= 0 ? lRow[idxL('CareerStage')] : '', popIdE,
+            (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ctx.ledger.headers, lRow, null) : null) : null; // engine.172
           var newInc = hoodPay !== null ? hoodPay : redraw.income;
           edits.push('Income -> ' + newInc);
           lRow[idxL('Income')] = newInc;

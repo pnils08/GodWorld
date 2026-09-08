@@ -1541,7 +1541,9 @@
 
 - **jobPayTable_()**
 
-- **jobReferencePay_(roleText, skillTags, careerStage, seed)**
+- **payProfileFromRow_(header, row, employerGrowth)**
+
+- **jobReferencePay_(roleText, skillTags, careerStage, seed, profile)**
 
 - **applyUntrackedJobReference_(ctx)**
 
@@ -3866,4 +3868,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1327
+**Functions mapped:** 1328

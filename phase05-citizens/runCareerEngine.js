@@ -1247,7 +1247,7 @@ function runCareerEngine_(ctx) {
             var newRole = SETTLE_ROLES_BY_FIELD[cat][eduRank >= 4 ? 'rich' : eduRank >= 1 ? 'solid' : 'rough'];
             hRow[iRoleM] = newRole;
             if (typeof setCurrentField_ === 'function') hRow[iTags] = setCurrentField_(hRow[iTags], cat);
-            if (typeof jobReferencePay_ === 'function') { var np = jobReferencePay_(newRole, hRow[iTags], hRow[idx('CareerStage')], hRow[iPopID]); if (np !== null) hRow[iIncome] = np; }
+            if (typeof jobReferencePay_ === 'function') { var np = jobReferencePay_(newRole, hRow[iTags], hRow[idx('CareerStage')], hRow[iPopID], (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ctx.ledger.headers, hRow, bGrow >= 0 ? Number(bizData[br3][bGrow]) : null) : null); if (np !== null) hRow[iIncome] = np; }
             isCross = true; // the story is a field change whichever token matched
           }
         }

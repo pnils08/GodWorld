@@ -102,25 +102,53 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   assert('role hint: unmatched → null (whole hood)', roleSectorCategory_('Mover of Furniture') === 'Transit & Infrastructure' && roleSectorCategory_('Xyzzy') === null);
 }
 
-// ── jobReferencePay_ ────────────────────────────────────────────────────────
+// ── jobReferencePay_ (engine.172: the life places the citizen in the job's band) ──
+// Mirror of the engine formula, written independently so drift shows.
+const posOf = (band, prof, cls) => {
+  let years = Number(prof && prof.years); if (!(years >= 0)) years = cls === 'ENTRY' ? 2 : cls === 'SENIOR' ? 25 : 12;
+  let p = 0.6 * (1 - Math.exp(-years / 12));
+  const expected = sandbox.PAY_EXPECTED_CREDENTIAL_[band.cat] || 2;
+  if (prof && prof.eduRank != null) p += (prof.eduRank - expected) * 0.05;
+  if (prof && prof.drive != null) p += ((prof.drive - 50) / 100) * 0.2;
+  if (Math.round(Number(prof && prof.tier)) === 3) p += 0.08;
+  if (prof && prof.employerGrowth != null) { const g = Math.max(0, Math.min(1, (prof.employerGrowth - 1.5) / 7.3)); p += (g - 0.5) * 0.2; }
+  return Math.max(0, Math.min(1, p));
+};
+const bandOf = (role) => { const t = sandbox.jobPayTable_(); return t.byRole[role.toLowerCase()] || t.byCat[sandbox.roleFieldOf_(role) || sandbox.roleSectorCategory_(role)]; };
+const payBand = (band, stage, seed, prof) => { const cls = sandbox.careerStageClass_(stage); return Math.round((band.min + posOf(band, prof, cls) * (band.max - band.min)) * (0.95 + 0.10 * sandbox.seedUnit_(seed)) / 100) * 100; };
+const pay = (role, stage, seed, prof) => payBand(bandOf(role), stage, seed, prof);
+const P = (o) => Object.assign({ years: NaN, eduRank: null, drive: null, tier: 4, employerGrowth: null }, o);
 {
-  assert('exact catalog role = its median', jobReferencePay_('Bakery Owner', '', 'mid', 'P1') === ref(roleMedian('Bakery Owner'), 1.0, 'P1'));
-  assert('exact match is case-insensitive', jobReferencePay_('line cook', '', 'mid', 'P1') === ref(roleMedian('Line Cook'), 1.0, 'P1'));
-  assert('unlisted role → its field median (Caterer → Food & Culture)', jobReferencePay_('Caterer', '', 'mid', 'P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'));
-  assert('senior × 1.3', jobReferencePay_('Caterer', '', 'senior', 'P1') === ref(catMedian('Food & Culture'), 1.3, 'P1'));
-  assert('entry-level × 0.75 (old spelling accepted)', jobReferencePay_('Caterer', '', 'entry-level', 'P1') === ref(catMedian('Food & Culture'), 0.75, 'P1'));
-  assert('a placed role ignores a stale tag (the C106 janitor priced as a tech worker)', jobReferencePay_('Caterer', '2041-Specific', 'mid', 'P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'));
-  assert('janitor = the janitor band (listed 2026-09-07), never the tech tag', jobReferencePay_('Janitor', '2041-Specific', 'senior', 'P1') === ref(roleMedian('Janitor'), 1.3, 'P1'));
-  assert('an unlisted counter-and-building job → Small Business via the hint', jobReferencePay_('Groundskeeper', '2041-Specific', 'senior', 'P1') === ref(catMedian('Small Business'), 1.3, 'P1'));
-  assert('an unplaceable role prices by its tag', jobReferencePay_('Xyzzy', 'Healthcare', 'mid', 'P1') === ref(catMedian('Healthcare'), 1.0, 'P1'));
+  assert('exact catalog role, no profile = its band at the stage years', jobReferencePay_('Bakery Owner', '', 'mid', 'P1') === pay('Bakery Owner', 'mid', 'P1'));
+  assert('exact match is case-insensitive', jobReferencePay_('line cook', '', 'mid', 'P1') === jobReferencePay_('Line Cook', '', 'mid', 'P1'));
+  assert('unlisted role → its field band (Caterer → Food & Culture)', jobReferencePay_('Caterer', '', 'mid', 'P1') === pay('Caterer', 'mid', 'P1'));
+  assert('no profile: senior > mid > entry (years read from the stage)', jobReferencePay_('Caterer', '', 'senior', 'P1') > jobReferencePay_('Caterer', '', 'mid', 'P1') && jobReferencePay_('Caterer', '', 'mid', 'P1') > jobReferencePay_('Caterer', '', 'entry-level', 'P1'));
+  assert('a placed role ignores a stale tag (the C106 janitor priced as a tech worker)', jobReferencePay_('Caterer', '2041-Specific', 'mid', 'P1') === jobReferencePay_('Caterer', '', 'mid', 'P1'));
+  assert('janitor = the janitor band, never the tech tag', jobReferencePay_('Janitor', '2041-Specific', 'senior', 'P1') === pay('Janitor', 'senior', 'P1'));
+  assert('an unlisted counter-and-building job → Small Business via the hint', jobReferencePay_('Groundskeeper', '2041-Specific', 'senior', 'P1') === pay('Groundskeeper', 'senior', 'P1'));
+  assert('an unplaceable role prices by its tag', jobReferencePay_('Xyzzy', 'Healthcare', 'mid', 'P1') === payBand(sandbox.jobPayTable_().byCat['Healthcare'], 'mid', 'P1'));
   assert('unplaceable, untagged → null (caller keeps its draw)', jobReferencePay_('Xyzzy', '', 'mid', 'P1') === null);
-  assert('the hood is not an input: same job, any street, same number', jobReferencePay_('Caterer', '', 'mid', 'P1') === jobReferencePay_('Caterer', '', 'mid', 'P1'));
+  assert('the hood is not an input: same job, same life, same number', jobReferencePay_('Plumber', '', 'mid', 'P1', P({ years: 10 })) === jobReferencePay_('Plumber', '', 'mid', 'P1', P({ years: 10 })));
+  // what makes each differ
+  const base = P({ years: 10, eduRank: 3, drive: 50, tier: 4, employerGrowth: 4 });
+  const v = (o) => jobReferencePay_('Plumber', '', 'mid', 'P1', P(Object.assign({}, base, o)));
+  assert('years in the career lift the pay (30 > 10 > 1)', v({ years: 30 }) > v({ years: 10 }) && v({ years: 10 }) > v({ years: 1 }));
+  assert('a credential above the field expectation lifts it; below lowers it', v({ eduRank: 6 }) > v({ eduRank: 3 }) && v({ eduRank: 3 }) > v({ eduRank: 0 }));
+  assert('drive moves it (90 > 50 > 20)', v({ drive: 90 }) > v({ drive: 50 }) && v({ drive: 50 }) > v({ drive: 20 }));
+  assert('a Tier-3 sits higher than a Tier-4', v({ tier: 3 }) > v({ tier: 4 }));
+  assert('a growing employer pays more than a flat one; unknown employer is neutral', v({ employerGrowth: 9 }) > v({ employerGrowth: 1.5 }) && v({ employerGrowth: null }) === v({ employerGrowth: 5.15 }));
+  assert('the whole formula matches the mirror', v({ years: 22.6, eduRank: 3, drive: 81, tier: 4, employerGrowth: 6 }) === pay('Plumber', 'mid', 'P1', P({ years: 22.6, eduRank: 3, drive: 81, tier: 4, employerGrowth: 6 })));
+  const pb = bandOf('Plumber');
+  assert('never outside the band (±5% jitter)', (() => { for (let i = 0; i < 200; i++) { const x = jobReferencePay_('Plumber', '', 'mid', 'S' + i, P({ years: (i * 7) % 45, eduRank: i % 7, drive: (i * 13) % 100, tier: 3 + (i % 2), employerGrowth: (i % 10) })); if (x < pb.min * 0.95 - 100 || x > pb.max * 1.05 + 100) return false; } return true; })());
   assert('two neighbours differ (seeded jitter)', jobReferencePay_('Line cook', '', 'mid', 'POP-00001') !== jobReferencePay_('Line cook', '', 'mid', 'POP-00002'));
   assert('deterministic per seed', jobReferencePay_('Line cook', '', 'mid', 'POP-00001') === jobReferencePay_('Line cook', '', 'mid', 'POP-00001'));
-  assert('jitter inside ±8%', (() => { const m = roleMedian('Line Cook'); for (let i = 0; i < 200; i++) { const v = jobReferencePay_('Line cook', '', 'mid', 'S' + i); if (v < m * 0.92 - 100 || v > m * 1.08 + 100) return false; } return true; })());
   assert('student → null', jobReferencePay_('Caterer', '', 'student', 'P1') === null);
   assert('retired → null', jobReferencePay_('Caterer', '', 'retired', 'P1') === null);
   assert('rounded to $100', jobReferencePay_('Caterer', '', 'mid', 'P1') % 100 === 0);
+  const prof = sandbox.payProfileFromRow_(['YearsInCareer', 'EducationLevel', 'DialState', 'Tier'], [12.5, 'bachelors', JSON.stringify({ base: { drive: 70 } }), 3], 7);
+  assert('payProfileFromRow_ reads years / credential rank / drive / tier / employer growth off the row', prof.years === 12.5 && prof.eduRank === 4 && prof.drive === 70 && prof.tier === 3 && prof.employerGrowth === 7);
+  const prof2 = sandbox.payProfileFromRow_(['YearsInCareer', 'EducationLevel', 'DialState', 'Tier'], ['', '', 'not json', ''], null);
+  assert('payProfileFromRow_ is honest about blanks (unknown, never 0 years / no credential)', isNaN(prof2.years) && prof2.eduRank === null && prof2.drive === null && prof2.employerGrowth === null);
 }
 
 // ── D4: applyUntrackedJobReference_ ────────────────────────────────────────
@@ -145,13 +173,15 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   const ctx = ctxWith(rows);
   const out = applyUntrackedJobReference_(ctx);
   const inc = p => Number(ctx.ledger.rows.find(r => r[I('POPID')] === p)[I('Income')]);
-  assert('P1 raised to the baker band', inc('P1') === ref(catMedian('Food & Culture'), 1.0, 'P1'), inc('P1'));
-  assert('P2 raised to the attorney band × 1.3', inc('P2') === ref(roleMedian('Immigration Attorney'), 1.3, 'P2'), inc('P2'));
+  const rowOf = p => rows.find(r => r[I('POPID')] === p);
+  const own = (p, role, stage) => pay(role, stage, p, sandbox.payProfileFromRow_(H, rowOf(p), null));
+  assert('P1 raised to the caterer band at their own place in it', inc('P1') === own('P1', 'Caterer', 'mid'), inc('P1'));
+  assert('P2 raised to the attorney band, senior', inc('P2') === own('P2', 'Immigration Attorney', 'senior'), inc('P2'));
   assert('P3 above reference untouched', inc('P3') === 90000);
   for (const [p, why] of [['P4', 'unemployed'], ['P5', 'tracked'], ['P6', 'GAME'], ['P8', 'Tier 2'], ['P9', 'student'], ['P10', 'retired'], ['P11', 'deceased'], ['P12', 'sports'], ['P15', 'unplaceable']])
     assert(p + ' ' + why + ' untouched', inc(p) === 20000, inc(p));
-  assert('P13 raised regardless of hood', inc('P13') === ref(catMedian('Food & Culture'), 1.0, 'P13'), inc('P13'));
-  assert('P14 unplaceable role → its tag band', inc('P14') === ref(catMedian('Healthcare'), 1.0, 'P14'), inc('P14'));
+  assert('P13 raised regardless of hood', inc('P13') === own('P13', 'Caterer', 'mid'), inc('P13'));
+  assert('P14 unplaceable role → its tag band', inc('P14') === jobReferencePay_('Xyzzy', 'Healthcare', 'mid', 'P14', sandbox.payProfileFromRow_(H, rowOf('P14'), null)), inc('P14'));
   // engine.162: CIVIC/MEDIA rejoin the hood reference pay; GAME (P6) and the
   // sports layer (P12) keep their own door.
   assert('CIVIC row now raised to the hood reference', inc('P7') > 20000, inc('P7'));
@@ -170,7 +200,7 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   ]);
   calculateCitizenIncomes_(ctx);
   const inc = p => Number(ctx.ledger.rows.find(r => r[I('POPID')] === p)[I('Income')]);
-  assert('U1 priced by the line cook band', inc('U1') === ref(roleMedian('Line Cook'), 1.0, 'U1'), inc('U1'));
+  assert('U1 priced by the line cook band at their own place in it', inc('U1') === pay('Line cook', 'mid', 'U1', sandbox.payProfileFromRow_(H, ctx.ledger.rows.find(r => r[I('POPID')] === 'U1'), null)), inc('U1'));
   assert('U2 unplaceable role → legacy band (35000 × 0.9 × 1.02)', inc('U2') === Math.round(35000 * 0.9 * 1.02), inc('U2'));
   assert('U3 already priced → untouched (fill, never re-roll)', inc('U3') === 55000);
 }

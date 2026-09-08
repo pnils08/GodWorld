@@ -133,6 +133,19 @@ function maneuverPosture_(cfg, ambition, debtLevel, line) {
   return { posture: 'hold', reason: 'even' };
 }
 
+// engine.180 (S438): one notch, one cycle, never over a cause. push = { d: +1|-1, u: untilCycle }.
+var MANEUVER_LADDER = ['retreat', 'hold', 'climb'];
+function maneuverApplyPush_(decided, push, cycle) {
+  if (!push || !(Number(push.d) === 1 || Number(push.d) === -1)) return decided;
+  if (Number(push.u) < Number(cycle)) return decided;                       // expired
+  if (decided.posture === 'retreat' && decided.reason !== 'ambition' && decided.reason !== 'even') return decided; // cause-held retreat
+  var i = MANEUVER_LADDER.indexOf(decided.posture);
+  if (i < 0) return decided;
+  var j = Math.max(0, Math.min(MANEUVER_LADDER.length - 1, i + Number(push.d)));
+  if (j === i) return decided;
+  return { posture: MANEUVER_LADDER[j], reason: 'wake-push' };
+}
+
 function maneuverGoalPhrase_(goal) {
   switch (goal) {
     case 'establish': return 'a place of their own first';
@@ -146,7 +159,7 @@ function maneuverGoalPhrase_(goal) {
 
 function maneuverLine_(posture, goal, reason) {
   var g = maneuverGoalPhrase_(goal);
-  if (posture === 'climb') return '[Maneuver-Climb] playing to climb — ' + g;
+  if (posture === 'climb') return '[Maneuver-Climb] playing to climb — ' + (reason === 'wake-push' ? 'said so out loud, and meant it' : g);
   if (posture === 'retreat') {
     return '[Maneuver-Retreat] pulling in — ' + (reason === 'standing' ? "the line's standing is near the bar" : 'the debt says so');
   }
@@ -252,6 +265,16 @@ function runManeuverEngine_(ctx) {
     var line = (lines && linId) ? (lines[linId] || null) : null;
     var goal = maneuverGoal_(hhId, owned, linId, line ? line.status : 'active');
     var decided = maneuverPosture_(cfg, ambition, iDebt >= 0 ? row[iDebt] : 0, line);
+    // engine.180 (S438): a wake's resolve pushes the posture ONE notch, AFTER the cause
+    // recompute and never over a cause-held retreat (debt / the line near its bar), for
+    // the one cycle it was queued for. Read here, cleared below whether or not it moved.
+    var pushDial = iDial >= 0 ? maneuverParseDial_(row[iDial]) : null;
+    var pushMem = (pushDial && pushDial.maneuver && pushDial.maneuver.push) ? pushDial.maneuver.push : null;
+    if (pushMem) {
+      var applied = maneuverApplyPush_(decided, pushMem, cycle);
+      if (applied.posture !== decided.posture) { result.counts.pushed = (result.counts.pushed || 0) + 1; decided = applied; }
+      else result.counts.pushBlocked = (result.counts.pushBlocked || 0) + 1;
+    }
 
     var entry = { posture: decided.posture, goal: goal, ambition: ambition, drive: dials.drive, openness: dials.openness, reason: decided.reason };
     result.byPop[pop] = entry;
@@ -269,9 +292,13 @@ function runManeuverEngine_(ctx) {
     var prevPosture = prev ? String(prev.p) : 'hold';
     var prevGoal = prev ? String(prev.g || '') : '';
     var changed = prevPosture !== decided.posture || (prev && prevGoal !== goal);
-    if (!changed) continue;
+    if (!changed) {
+      // engine.180: a consumed push clears even when the posture did not move
+      if (pushMem && dialObj.maneuver) { delete dialObj.maneuver.push; row[iDial] = JSON.stringify(dialObj); ctx.ledger.dirty = true; }
+      continue;
+    }
 
-    dialObj.maneuver = { p: decided.posture, g: goal, a: ambition, c: cycle };
+    dialObj.maneuver = { p: decided.posture, g: goal, a: ambition, c: cycle }; // engine.180: push consumed (not carried)
     row[iDial] = JSON.stringify(dialObj);
     ctx.ledger.dirty = true;
 
@@ -336,6 +363,7 @@ function maneuverWillingCrossField_(ctx, popId) {
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
+    maneuverApplyPush_: maneuverApplyPush_, MANEUVER_LADDER: MANEUVER_LADDER,
     runManeuverEngine_: runManeuverEngine_,
     maneuverConfig_: maneuverConfig_,
     maneuverDials_: maneuverDials_,

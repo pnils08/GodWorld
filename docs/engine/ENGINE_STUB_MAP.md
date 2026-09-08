@@ -1717,6 +1717,8 @@
 
 - **maneuverPosture_(cfg, ambition, debtLevel, line)**
 
+- **maneuverApplyPush_(decided, push, cycle)**
+
 - **maneuverGoalPhrase_(goal)**
 
 - **maneuverLine_(posture, goal, reason)**
@@ -3364,6 +3366,8 @@
 
 - **serializeDialState_(c)**
 
+- **pushFromResolves_(text)**
+
 - **zeroMood_(c)**
 
 - **parseMemoryRegisters_(str)**
@@ -3920,4 +3924,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1348
+**Functions mapped:** 1350

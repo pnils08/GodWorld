@@ -183,6 +183,18 @@ function selectCitizen(pool, state, cycle) {
     logLine('voiced slot fired but no voiced citizen passes the pool filters; falling through to rotation');
   }
 
+  // engine.180 (S438) — the POSTURE slot: a citizen whose game state moved this cycle
+  // (a [Maneuver-*] line stamped on the current cycle) and who has not woken since
+  // speaks the day it happened. Least-recently-woken first. One per wake, before the draw.
+  if (cycle) {
+    const moved = pool.filter((p) => p.postureChangedCycle === Number(cycle) && !recent.has(p.popId));
+    if (moved.length) {
+      const oldnessM = (p) => { const i = recentList.indexOf(p.popId); return i < 0 ? Number.MAX_SAFE_INTEGER : i; };
+      moved.sort((a, b) => oldnessM(b) - oldnessM(a));
+      return { c: moved[0], slot: 'posture' };
+    }
+  }
+
   let candidates = pool.filter((p) => !recent.has(p.popId));
   if (!candidates.length) candidates = pool; // everyone woken recently -> reset the cycle
   const weights = candidates.map((p) => 1 + p.eventMag * 2 + dials.deviation(p.cur) / 50);

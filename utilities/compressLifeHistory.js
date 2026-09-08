@@ -424,6 +424,7 @@ function compressLifeHistory_(ctx, options) {
   var biasApplied = 0, biasCitizens = 0;
   var unlivedApplied = 0; // engine.38 B3 (S283) — branch events captured at fold
   var foldedEntries = 0, settled = 0; // engine.177 — watermark fold + mood settle counts
+  var pushesQueued = 0; // engine.180 — resolves that name an action
 
   // engine.94 Task 3: Phase-4 grief cascades drain into the same single-writer
   // MemoryRegisters RMW as biases/unlived. Group by normalized survivor POPID;
@@ -588,6 +589,17 @@ function compressLifeHistory_(ctx, options) {
         queueCellIntent_(ctx, REFLECTION_INTAKE_TAB, pending[p].rowNum, RI_COL_APPLIED, 'yes',
           'reflection-drain accreted (citizen-loop)', 'citizens', 100);
       }
+      // engine.180 (S438): a resolve that names an ACTION pushes next cycle's posture one
+      // notch — queued on DialState.maneuver.push, applied by Phase5-Maneuver AFTER its own
+      // recompute and never over a cause-held retreat (the clamp lives there). One cycle.
+      for (var pr = 0; pr < pending.length; pr++) {
+        var pd = pushFromResolves_(pending[pr].resolves);
+        if (!pd) continue;
+        c.maneuver = c.maneuver || {};
+        c.maneuver.push = { d: pd, u: cycle + 1 };
+        pushesQueued++;
+        break; // one push per citizen per drain
+      }
       // engine.101 bond write-back: same drain, same gate. Nudge the named bond's
       // intensity IN MEMORY — Phase 10 full-replaces Relationship_Bonds from
       // ctx.summary.relationshipBonds, so only an in-memory mutation survives.
@@ -647,6 +659,7 @@ function compressLifeHistory_(ctx, options) {
     unlivedApplied: unlivedApplied,
     foldedEntries: foldedEntries,
     settled: settled,
+    pushesQueued: pushesQueued,
     griefApplied: griefApplied,
     griefCitizens: griefCitizens,
     griefExpired: griefExpired,
@@ -660,6 +673,7 @@ function compressLifeHistory_(ctx, options) {
     ', folded ' + foldedEntries + ' entries, settled ' + settled +
     (S.pressureCounts ? ', pressure ' + JSON.stringify(S.pressureCounts) : ', pressure none') + // engine.176 per-emitter counts (S.pressureCounts)
     (S.contests ? ', contests ' + JSON.stringify(S.contests) : ', contests none') + // engine.179 (S.contests)
+    ', pushes ' + pushesQueued + // engine.180
     ', unlived ' + unlivedApplied +
     ', bonds nudged ' + bondsNudged + (bondTargetsMissed ? ' (missed ' + bondTargetsMissed + ')' : ''));
 }
@@ -1225,6 +1239,19 @@ function serializeDialState_(c) {
   return JSON.stringify(o);
 }
 
+// engine.180 (S438): a Reflection_Intake `Resolves` text -> +1 (an action that reaches:
+// look for / apply / open / move / save / start / ask / take / build), -1 (an action that
+// pulls in: stop / wait / hold off / sit tight / rest / pull back / let it go), else 0.
+var PUSH_UP_RE = /\b(look(ing)? for|apply|applied|open(ing)?( up)?|move|moving|save|saving|start(ing)?|ask(ing)? for|take the|build(ing)?|go for|put in for|sign up)\b/i;
+var PUSH_DOWN_RE = /\b(stop|wait|hold off|sit tight|rest|pull(ing)? back|let it go|step back|slow down|not (now|yet)|stay put)\b/i;
+function pushFromResolves_(text) {
+  var t = String(text || '').trim();
+  if (!t) return 0;
+  if (PUSH_DOWN_RE.test(t)) return -1;
+  if (PUSH_UP_RE.test(t)) return 1;
+  return 0;
+}
+
 function zeroMood_(c) {
   for (var i = 0; i < DIALS.length; i++) c.mood[DIALS[i]] = 0;
 }
@@ -1517,6 +1544,7 @@ function dialFaceShim_(c) {
 
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
+    pushFromResolves_: pushFromResolves_,
     compressLifeHistory_: compressLifeHistory_,
     parseLifeHistoryEntries_: parseLifeHistoryEntries_,
     parseLastUpdateCycle_: parseLastUpdateCycle_,

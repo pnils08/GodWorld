@@ -14,7 +14,7 @@
  *                  staleness-flagged: the edition pipeline that refreshes it is
  *                  FROZEN (S313), so its cycle usually lags the engine's
  *   hoods        — neighborhood_texture_c{N}.md parsed per-hood blocks
- *   dispositions — output/voice-disposition-cache/<POPID>.md phrases
+ *   (dispositions fold removed engine.180 S438 — it had no reader)
  *   pointers     — paths to the deep artifacts (world_summary, texture, audit)
  *
  * No LLM in the loop — all content verbatim from named sources. Missing
@@ -159,21 +159,7 @@ async function main() {
     notes.push(`hoods absent: ${path.basename(texturePath)} unreadable — ` + err.message);
   }
 
-  // --- dispositions (voice cache fold) ---
-  const dispositions = {};
-  try {
-    for (const f of fs.readdirSync(CACHE_DIR).filter((f) => /^POP-\d+\.md$/.test(f))) {
-      const body = fs.readFileSync(path.join(CACHE_DIR, f), 'utf-8');
-      const refreshed = (body.match(/Refreshed:\s*c(\d+)/) || [])[1];
-      dispositions[f.replace(/\.md$/, '')] = {
-        text: body.split(/\n\s*Refreshed:/)[0].trim(),
-        refreshedCycle: refreshed ? parseInt(refreshed, 10) : null
-      };
-    }
-    if (!Object.keys(dispositions).length) notes.push('dispositions empty: no POP-*.md in voice-disposition-cache');
-  } catch (err) {
-    notes.push('dispositions absent: voice-disposition-cache unreadable — ' + err.message);
-  }
+  // engine.180 (S438): the dispositions fold was an orphaned write (no reader) — removed.
 
   // --- pointers ---
   const pointers = {};
@@ -198,7 +184,6 @@ async function main() {
     orientation,
     canon,
     hoods,
-    dispositions,
     pointers
   };
 
@@ -210,7 +195,7 @@ async function main() {
   }
   fs.writeFileSync(OUT_PATH, json + '\n');
   console.log(`wrote ${OUT_PATH} (${json.length} bytes) — cycle ${cycle}, ` +
-    `${Object.keys(hoods).length} hoods, ${Object.keys(dispositions).length} dispositions, ` +
+    `${Object.keys(hoods).length} hoods, ` +
     `canon ${canon ? (canon.stale ? `STALE c${canon.sourceCycle}` : 'current') : 'absent'}` +
     (notes.length ? `\nnotes:\n  - ${notes.join('\n  - ')}` : ''));
 }

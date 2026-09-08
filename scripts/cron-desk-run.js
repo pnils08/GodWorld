@@ -1082,7 +1082,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
     const qProfiles = qBrief.profiles;
     if (qBrief.total) profileStamp.quotes = qBrief.resolved + '/' + qBrief.total;
     for (const q of quotes) {
-      L.push('- ' + q.name + ': "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"');
+      L.push('- ' + q.name + (q.disp && q.disp !== 'even-keeled, unremarkable' ? ' (' + q.disp + ')' : '') + ': "' + String(q.quote).replace(/\s+/g, ' ').trim() + '"'); // engine.180: the temperament the voice already computed
       const tension = openTensionFor(q.pop, cycle);
       if (tension) {
         L.push('    (' + q.name + ' has also been privately sitting with an open question this cycle: "' +

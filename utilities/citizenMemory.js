@@ -85,9 +85,15 @@ function applyEvent_(c, event) {
     // reinforcement: same direction again -> streak builds; a flip resets it
     if (delta > 0) c.streak[d] = c.streak[d] >= 0 ? c.streak[d] + 1 : 1;
     else c.streak[d] = c.streak[d] <= 0 ? c.streak[d] - 1 : -1;
-    // a sustained pattern hardens into who they ARE (permanent), then streak resets
+    // a sustained pattern hardens into who they ARE (permanent), then streak resets.
+    // engine.177 (S438): hardening TOWARD an edge has diminishing room (1 at 50, 0 at
+    // 0/100) so accumulation approaches an extreme and never pins it — the bounded
+    // accumulator every source game keeps (research4_1 §3). Hardening back toward
+    // the middle keeps full room, so a pinned citizen can always recover.
     if (Math.abs(c.streak[d]) >= HARDEN_STREAK) {
-      c.base[d] = clamp100_(c.base[d] + c.mood[d] * HARDEN_FRACTION);
+      var towardEdge = (c.mood[d] > 0) === (c.base[d] >= MIDPOINT);
+      var room = towardEdge ? (1 - Math.abs(c.base[d] - MIDPOINT) / 50) : 1;
+      c.base[d] = clamp100_(c.base[d] + c.mood[d] * HARDEN_FRACTION * room);
       c.mood[d] = c.mood[d] * (1 - HARDEN_FRACTION);
       c.streak[d] = 0;
     }
@@ -104,8 +110,9 @@ function applyTaggedEvent_(c, tag, dialMap, severityMult) {
 // composure (composure-as-affect-only) + its own deltas, composed by dialMap.nudgesForReflection_.
 // Distinct from applyTaggedEvent_ (objective single tag): this is the SUBJECTIVE wake-reflection path.
 // SUPERSEDED for the live drain by accreteReflectionsIntoBase_ (S269 finding: this moves MOOD,
-// which zeroMood_ wipes every compress — it never persists). Retained for the offline composer
-// test (Test 7) + as the mood-path reference. No live cycle caller.
+// which the v2.0 fold zeroed every compress). Since engine.177 (S438) mood persists and decays,
+// but the drain keeps the direct-base path so a lone reflection still registers durably.
+// Retained for the offline composer test (Test 7) + as the mood-path reference. No live cycle caller.
 function applyReflectionDualTag_(c, eventTag, affectTag, dialMap, severityMult) {
   var effects = dialMap && dialMap.nudgesForReflection_
     ? dialMap.nudgesForReflection_(eventTag, affectTag, severityMult)
@@ -114,9 +121,9 @@ function applyReflectionDualTag_(c, eventTag, affectTag, dialMap, severityMult) 
 }
 
 // Direct-base reflection accretion — the LIVE write-back path (citizen-loop research.14, S269).
-// Why not applyReflectionDualTag_/applyEvent_: those land deltas in `mood`, and the compressor's
-// serializeDialState_ persists only {base, streak} (zeroMood_ wipes mood each cycle), so a
-// reflection's effect would evaporate; and `base` is reached objectively ONLY via a >=HARDEN_STREAK
+// Why not applyReflectionDualTag_/applyEvent_: those land deltas in `mood`, which decays 0.8/cycle
+// (persisted since engine.177, S438; zeroed at fold before that), so a lone reflection's effect
+// would fade out; and `base` is reached objectively ONLY via a >=HARDEN_STREAK
 // run, so a lone reflection aged out among real events never durably registers. The subjective
 // wake-reflection must reach durable `base` WITHOUT that streak gate. So: compose the dual-tag
 // deltas (nudgesForReflection_ — event's non-composure dials + affect's full deltas) and accrete a
@@ -206,6 +213,7 @@ function deserialize_(obj) {
     }
     if (obj.chaosExposure) c.chaosExposure = obj.chaosExposure;
     if (obj.maneuver) c.maneuver = obj.maneuver; // engine.157 posture memory rides along
+    if (obj.folded > 0) c.folded = obj.folded;   // engine.177 watermark (last folded cycle)
   }
   return c;
 }

@@ -589,13 +589,18 @@ function processCasinoLedger_(ctx, cycle) {
 
     if (citizen && iNW >= 0) {
       var weekly = casinoWeekly_(iInc >= 0 ? citizen.row[iInc] : 0);
+      var nwBefore = Number(citizen.row[iNW]) || 0;
       var money = casinoApplyMoney_(citizen.row[iNW], iDebt >= 0 ? citizen.row[iDebt] : 0,
         w.stake, pay, won);
       citizen.row[iNW] = money.netWorth;
       if (iDebt >= 0) citizen.row[iDebt] = money.debtLevel;
       var lineTag = casinoLine_(won ? CASINO_ST.WIN : CASINO_ST.LOSS);
+      // engine.176 (S438): a loss at/over dialSetbackLossPct of what the citizen had is a Setback, not a bad night
+      if (!won && nwBefore > 0 && (Number(w.stake) || 0) >= nwBefore * pressureBar_(ctx, 'dialSetbackLossPct') / 100) {
+        lineTag = '[Setback] the slip came back empty — and it was most of what there was';
+      }
       if (!won && money.debtLevel > (Number(w.debtLevel) || 0) && money.netWorth === 0) {
-        lineTag = '[Casino] the window took the last of it — borrowed to walk home';
+        lineTag = '[Setback] the window took the last of it — borrowed to walk home';
       }
       if (lineTag && iLife >= 0) {
         var line = stamp + ' — ' + lineTag;

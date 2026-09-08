@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-07 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-08 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -97,6 +97,10 @@
 
 ### engine94SheetContract.js
 - **ensureEngine160Config_(ss)**
+  Reads: S.neighborhoodState
+  Sheets: World_Config
+
+- **ensureEngine176Config_(ss)**
   Sheets: World_Config
 
 - **ensureEngine148Config_(ss)**
@@ -3220,6 +3224,21 @@
 - **nudgesForReflection_(eventTag, affectTag, severityMult, text)**
 
 - **hasTag_(tag, text)**
+  Reads: S.pressureTagged
+
+- **pressureAbsCycle_(line)**
+
+- **pressureState_(lifeHistory, cycle)**
+
+- **pressureBar_(ctx, key)**
+
+- **emitPressureTag_(ctx, row, iLife, popId, cause, text, opts)**
+  Reads: S.absoluteCycle, S.cycleId, S.pressureCounts, S.pressureTagged
+  Writes: S.pressureCounts, S.pressureTagged
+  Config: ctx.config.cycleCount
+  Sheets: LifeHistory_Log
+
+- **pressureText_(cause, seed)**
 
 ### citizenMemory.js
 - **clamp100_(n)**
@@ -3335,7 +3354,11 @@
 
 - **foldBiasIntents_(regs, intents, cycle)**
 
-- **foldAgedOutEntries_(c, entries, keepCount, regs)**
+- **foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly)**
+
+- **foldNewEntries_(c, newEntries, regs)**
+
+- **foldOneEntry_(c, e, regs)**
 
 - **deriveArchetypeFromBands_(c)**
 
@@ -3871,4 +3894,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1329
+**Functions mapped:** 1337

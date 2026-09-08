@@ -60,7 +60,7 @@
  * Output example:
  * Archetype:Watcher|Mods:curious,steady|reflective:0.73|social:0.45|TopTags:Neighborhood,Weather,Arc|Motifs:coffee,gallery|Entries:47|Basis:entries|V:1.1|Hash:8f2c1a|Updated:c47
  *
- * @version 1.4
+ * @version 3.0
  * @phase utilities
  * ============================================================================
  */
@@ -69,7 +69,7 @@
 // CONSTANTS
 // ============================================================================
 
-var COMPRESS_VERSION = '2.0';
+var COMPRESS_VERSION = '3.0'; // engine.177 (S438): watermark fold every cycle, mood persisted + settled
 
 // Decay per unit (entry or cycle depending on basis)
 var TAG_DECAY_RATE = 0.95;
@@ -423,6 +423,7 @@ function compressLifeHistory_(ctx, options) {
   }
   var biasApplied = 0, biasCitizens = 0;
   var unlivedApplied = 0; // engine.38 B3 (S283) — branch events captured at fold
+  var foldedEntries = 0, settled = 0; // engine.177 — watermark fold + mood settle counts
 
   // engine.94 Task 3: Phase-4 grief cascades drain into the same single-writer
   // MemoryRegisters RMW as biases/unlived. Group by normalized survivor POPID;
@@ -497,19 +498,36 @@ function compressLifeHistory_(ctx, options) {
       var lastUpdate = parseLastUpdateCycle_(existingProfile);
       if (lastUpdate > 0 && (cycle - lastUpdate) < MIN_CYCLES_BETWEEN_COMPRESS) compressEligible = false;
     }
-    var entries = null;
-    if (compressEligible) {
-      entries = parseLifeHistoryEntries_(lifeHistory).entries;
-      if (!entries || entries.length < 3) compressEligible = false;
+    var entries = lifeHistory ? parseLifeHistoryEntries_(lifeHistory).entries : null;
+    if (compressEligible && (!entries || entries.length < 3)) compressEligible = false;
+
+    // engine.177 (S438): the WATERMARK fold. Every stamped entry (Y<n>C<m> -> entry.cycle)
+    // newer than DialState.folded folds THIS cycle, whatever the trim cadence says. The
+    // 20-line raw window the wake journal reads is untouched; trim still runs on its
+    // own cadence and folds only the LEGACY (unstamped) lines, once, as before.
+    // Also: a row carrying residual mood must be settled (decayed) even on a quiet cycle.
+    var parsedDial = parseDialState_(existingDialState);
+    var foldedMark = (parsedDial && parsedDial.folded > 0) ? parsedDial.folded : 0;
+    var newEntries = [];
+    if (entries && entries.length) {
+      for (var ne = 0; ne < entries.length; ne++) {
+        var neC = entries[ne].cycle;
+        if (neC != null && neC > 0 && neC > foldedMark && entries[ne].tag !== 'CareerState') newEntries.push(entries[ne]); // cycle <= 0 (C0 / C?) = legacy, folds at trim
+      }
+    }
+    var moodPending = false;
+    if (parsedDial && parsedDial.mood) {
+      for (var md in parsedDial.mood) { if (parsedDial.mood.hasOwnProperty(md) && Math.abs(parsedDial.mood[md] || 0) >= 0.5) { moodPending = true; break; } }
     }
 
-    if (!compressEligible && !pending.length && !biasPending.length && !griefPending.length && !griefNeedsMaintenance) { skipped++; continue; }
+    if (!compressEligible && !newEntries.length && !moodPending && !pending.length && !biasPending.length && !griefPending.length && !griefNeedsMaintenance) { skipped++; continue; }
 
     // Grief-only maintenance must not even normalize the DialState cell. Existing
     // compressor/reflection/bias paths keep their prior RMW behavior; an envelope
     // insert/expiry by itself is strictly a MemoryRegisters change.
-    var dialRmwNeeded = compressEligible || pending.length || biasPending.length;
-    var c = dialRmwNeeded ? deserialize_(parseDialState_(existingDialState)) : null;
+    var dialRmwNeeded = compressEligible || newEntries.length || moodPending || pending.length || biasPending.length;
+    var c = dialRmwNeeded ? deserialize_(parsedDial) : null;
+    if (c && foldedMark) c.folded = foldedMark;
 
     // engine.42 chaos-trauma (S275): chaos-free time heals. Lazily fade the persisted
     // chaos accumulator (and lift the labeled break) so positive folds + quiet weeks recover
@@ -517,12 +535,25 @@ function compressLifeHistory_(ctx, options) {
     // Gap-based, so a citizen compressed every few cycles still decays at the right rate.
     if (dialRmwNeeded) decayChaosExposure_(c, cycle);
 
+    // engine.177: the temporary swing fades toward the permanent self once per cycle,
+    // BEFORE this cycle's events land (settleCycle_ — MOOD_DECAY 0.8, citizenMemory.js).
+    // First production caller; until S438 the fold zeroed mood outright.
+    if (dialRmwNeeded) { settleCycle_(c); settled++; }
+
     // engine.38 B1+B3 (S283): ONE parse of the register cell serves both the
     // unlived capture (fold-time, below) and the bias drain; written back only
     // when a fold actually changed it — blank cells stay blank, no churn.
-    var regs = (iMemoryRegisters >= 0 && (compressEligible || biasPending.length || griefPending.length || griefNeedsMaintenance))
+    var regs = (iMemoryRegisters >= 0 && (compressEligible || newEntries.length || biasPending.length || griefPending.length || griefNeedsMaintenance))
       ? (preParsedRegs || parseMemoryRegisters_(row[iMemoryRegisters])) : null;
     var regsDirty = false;
+
+    // engine.177: fold the new stamped entries (oldest first) and move the watermark.
+    // engine.38 B3 unlived capture rides THIS walk now (arrival), not the trim.
+    if (newEntries.length) {
+      var wmCaptured = foldNewEntries_(c, newEntries, regs);
+      if (wmCaptured > 0) { unlivedApplied += wmCaptured; regsDirty = true; }
+      foldedEntries += newEntries.length;
+    }
 
     if (regs && pruneExpiredGrief_(regs, cycle)) {
       griefExpired++;
@@ -536,14 +567,12 @@ function compressLifeHistory_(ctx, options) {
     }
 
     if (compressEligible) {
-      // FOLD-ON-TRIM (the stateful spine): events LEAVING the raw-20 window accrete
-      // into base + streak, each folded exactly once by construction (the window
-      // physically removes them on trim). No watermark, no double-count. Inert tags
-      // (Compressed / CareerState / edition citations) map to {} -> no movement.
-      // B3 rides the same walk: branch-tagged aged-out events -> regs.unlived.
-      var unlivedCaptured = foldAgedOutEntries_(c, entries, KEEP_RAW_ENTRIES, regs);
+      // FOLD-ON-TRIM, LEGACY ONLY (engine.177): entries leaving the raw-20 window that
+      // carry NO cycle stamp (timestamp-era / bare lines, ~7% of live) fold here, once,
+      // exactly as v2.0 did. Stamped entries were already folded by the watermark above
+      // and are skipped. Mood is no longer zeroed — it persists and decays (settleCycle_).
+      var unlivedCaptured = foldAgedOutEntries_(c, entries, KEEP_RAW_ENTRIES, regs, true);
       if (unlivedCaptured > 0) { unlivedApplied += unlivedCaptured; regsDirty = true; }
-      zeroMood_(c); // aged-out events leave no lingering mood; base carries the permanent mark
     }
 
     // Accrete pending reflections into base BEFORE deriving the face, so the readable
@@ -616,6 +645,8 @@ function compressLifeHistory_(ctx, options) {
     biasApplied: biasApplied,
     biasCitizens: biasCitizens,
     unlivedApplied: unlivedApplied,
+    foldedEntries: foldedEntries,
+    settled: settled,
     griefApplied: griefApplied,
     griefCitizens: griefCitizens,
     griefExpired: griefExpired,
@@ -626,6 +657,7 @@ function compressLifeHistory_(ctx, options) {
   Logger.log('compressLifeHistory_ v' + COMPRESS_VERSION + ': Updated ' + updated + ', skipped ' + skipped +
     ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens' +
     ', biases ' + biasApplied + '/' + biasCitizens + ' citizens' +
+    ', folded ' + foldedEntries + ' entries, settled ' + settled +
     ', unlived ' + unlivedApplied +
     ', bonds nudged ' + bondsNudged + (bondTargetsMissed ? ' (missed ' + bondTargetsMissed + ')' : ''));
 }
@@ -1178,11 +1210,14 @@ function parseDialState_(str) {
   } catch (e) { return {}; }
 }
 
-// persist base + streak ONLY (mood is a re-derivable window swing, never stored).
+// persist base + streak + mood + folded (engine.177, S438: mood is the live swing that
+// settleCycle_ decays each cycle; folded is the watermark cycle of the last stamped entry
+// folded). Before S438 only {base, streak} persisted and mood was zeroed at fold.
 // chaosExposure (engine.42 chaos-trauma, S275) rides along when present — additive,
 // backward-compatible; old rows lack it and deserialize to no exposure.
 function serializeDialState_(c) {
-  var o = { base: c.base, streak: c.streak };
+  var o = { base: c.base, streak: c.streak, mood: c.mood };
+  if (c.folded > 0) o.folded = c.folded;
   if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
   if (c.maneuver) o.maneuver = c.maneuver; // engine.157 posture memory {p, g, a, c} — additive, never wiped
   return JSON.stringify(o);
@@ -1355,9 +1390,10 @@ function foldBiasIntents_(regs, intents, cycle) {
   return applied;
 }
 
-// Fold events LEAVING the raw window into base+streak. Mirrors the EXACT
-// oldEntries split trimLifeHistory_ uses (CareerState excluded + persisted), so
-// fold and trim always agree on what ages out — each aged-out event folds once.
+// Fold LEGACY (unstamped) events LEAVING the raw window into base+streak. Mirrors
+// the EXACT oldEntries split trimLifeHistory_ uses (CareerState excluded + persisted),
+// so fold and trim agree on what ages out — each legacy event folds once. Stamped
+// events fold at ARRIVAL via foldNewEntries_ (engine.177 watermark, S438).
 //
 // engine.38 B3 (seams Task 8, S283): the same walk captures branch-shaped events
 // into regs.unlived — paths not taken, persisted as the ACTUAL recorded event
@@ -1370,7 +1406,9 @@ function foldBiasIntents_(regs, intents, cycle) {
 var UNLIVED_CAP = 3;
 var UNLIVED_TXT_MAX = 120;
 var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, divorce: 1, retirement: 1, businessclose: 1, displacementmove: 1 };
-function foldAgedOutEntries_(c, entries, keepCount, regs) {
+// engine.177 (S438): unstampedOnly=true skips entries that carry a cycle stamp — those
+// were folded at arrival by foldNewEntries_ (the watermark); only legacy lines fold here.
+function foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly) {
   var filtered = [];
   for (var k = 0; k < entries.length; k++) {
     if (entries[k].tag !== 'CareerState') filtered.push(entries[k]);
@@ -1380,18 +1418,39 @@ function foldAgedOutEntries_(c, entries, keepCount, regs) {
   var captured = 0;
   for (var i = 0; i < oldCount; i++) {
     var e = filtered[i];
-    applyEvent_(c, { label: e.tag, effects: nudgesForEvent_(e.tag, 1, e.text) }); // structural markers -> {} no-op
-    if (regs && UNLIVED_BRANCH_TAGS[String(e.tag || '').toLowerCase()]) {
-      regs.unlived.push({
-        tag: String(e.tag),
-        txt: String(e.text || '').slice(0, UNLIVED_TXT_MAX),
-        cy: (e.cycle != null ? e.cycle : 0)
-      });
-      while (regs.unlived.length > UNLIVED_CAP) regs.unlived.shift();
-      captured++;
-    }
+    if (unstampedOnly && e.cycle != null && e.cycle > 0) continue; // already folded at arrival (cycle <= 0 is legacy)
+    captured += foldOneEntry_(c, e, regs);
   }
   return captured;
+}
+
+// engine.177 (S438): the watermark fold. newEntries = stamped entries with
+// cycle > c.folded, in LifeHistory order (oldest first). Each folds exactly once
+// because the watermark moves to the highest cycle folded. Returns unlived captured.
+function foldNewEntries_(c, newEntries, regs) {
+  var captured = 0, maxCycle = c.folded || 0;
+  for (var i = 0; i < newEntries.length; i++) {
+    var e = newEntries[i];
+    captured += foldOneEntry_(c, e, regs);
+    if (e.cycle > maxCycle) maxCycle = e.cycle;
+  }
+  c.folded = maxCycle;
+  return captured;
+}
+
+// One entry -> applyEvent_ (structural markers map to {} -> no-op) + B3 unlived capture.
+function foldOneEntry_(c, e, regs) {
+  applyEvent_(c, { label: e.tag, effects: nudgesForEvent_(e.tag, 1, e.text) });
+  if (regs && UNLIVED_BRANCH_TAGS[String(e.tag || '').toLowerCase()]) {
+    regs.unlived.push({
+      tag: String(e.tag),
+      txt: String(e.text || '').slice(0, UNLIVED_TXT_MAX),
+      cy: (e.cycle != null ? e.cycle : 0)
+    });
+    while (regs.unlived.length > UNLIVED_CAP) regs.unlived.shift();
+    return 1;
+  }
+  return 0;
 }
 
 // Map the 7 dial bands -> one of the readable archetypes the 6 readers expect.

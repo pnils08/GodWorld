@@ -264,6 +264,12 @@ function assessDisplacementRisk_(ctx, cycle) {
           // its education or its hood's pressure says. Same-cycle, ctx-scoped.
           if (!ctx._unitBurden) ctx._unitBurden = {};
           ctx._unitBurden[householdId] = rentBurden / 100;
+          // engine.176 (S438): the rent collision is a cause the dials read — one
+          // pressure tag on the row (Friction first, Strain ongoing, adapts after 6).
+          if (rentBurden > pressureBar_(ctx, 'dialFrictionRentBurden')) {
+            var iLifeP = idx('LifeHistory'), iPopP = idx('POPID');
+            emitPressureTag_(ctx, row, iLifeP, String(row[iPopP] || ''), 'rent', pressureText_('rent', cycle + r), { hood: neighborhood });
+          }
         }
       }
     }

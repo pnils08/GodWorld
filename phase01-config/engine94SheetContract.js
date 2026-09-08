@@ -100,6 +100,27 @@ function ensureEngine160Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+var ENGINE176_CONFIG_SEEDS = [
+  ['dialFrictionRentBurden', 50, 'engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause', 10, 90, false],
+  ['dialSetbackLossPct', 5, 'engine.176 a lost casino stake at/over this % of the citizen\'s net worth logs [Setback] instead of the ordinary [Casino] loss line', 1, 50, false],
+  ['dialHoodPressureBar', 8, 'engine.176 Neighborhood_Map HousingPressure (persisted, read via S.neighborhoodState) at/over which a Neighborhood line tints to Friction instead of sociability', 0, 10, false],
+  ['dialHoodCrimeBar', 8, 'engine.176 Neighborhood_Map CrimeIndex at/over which the same tint applies', 0, 10, false]
+];
+
+function ensureEngine176Config_(ss) {
+  if (!ss) throw new Error('engine.176 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.176 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE176_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE176_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.176 config: post-write verification failed');
+  }
+  Logger.log('engine.176 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE157_CONFIG_SEEDS = [
   ['maneuverClimbBar', 60, 'engine.157 ambition (drive-weighted blend of drive + openness, 0-100) at/over which a citizen plays to climb; also the openness bar for a willing field change', 50, 90, false],
   ['maneuverRetreatDebt', 6, 'engine.157 DebtLevel at/over which a citizen pulls in (retreat) whatever their ambition', 3, 9, false],

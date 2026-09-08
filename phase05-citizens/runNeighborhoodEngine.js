@@ -531,6 +531,26 @@ function runNeighborhoodEngine_(ctx) {
 
       var entry = eventPool[Math.floor(rng() * eventPool.length)];
 
+      // engine.176 (S438): a hood under PERSISTED pressure (Neighborhood_Map via
+      // S.neighborhoodState — never the same-cycle pulse) tints this citizen's
+      // neighborhood line to a pressure tag instead of the ordinary sociability
+      // line. Claims the citizen's one pressure tag for the cycle (Neighborhoods
+      // runs before Career/Money/Migration), so the collision emitters skip.
+      var hoodSt = S.neighborhoodState ? S.neighborhoodState[neighborhood] : null;
+      if (hoodSt && ((Number(hoodSt.housingPressure) >= pressureBar_(ctx, 'dialHoodPressureBar')) ||
+                     (Number(hoodSt.crimeIndex) >= pressureBar_(ctx, 'dialHoodCrimeBar')))) {
+        var tintTag = emitPressureTag_(ctx, row, iLife, String(row[iPopID] || ''), 'hood', pressureText_('hood', cycle + r),
+          { name: ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(), hood: neighborhood });
+        if (tintTag) {
+          row[iLastUpdated] = ctx.now;
+          neighborhoodDriftEvents.push({ citizen: (row[iFirst] + " " + row[iLast]).trim(), neighborhood: neighborhood, event: pressureText_('hood', cycle + r), tag: tintTag });
+          globalEvents++;
+          S.eventsGenerated = (S.eventsGenerated || 0) + 1;
+          rows[r] = row;
+          continue;
+        }
+      }
+
       // Determine event tag (v2.2)
       if (isFirstFriday && firstFridayEvents[neighborhood] && firstFridayEvents[neighborhood].indexOf(entry) >= 0) {
         eventTag = "FirstFriday";

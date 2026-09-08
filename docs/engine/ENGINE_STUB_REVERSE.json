@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-07",
+  "generated": "2026-09-08",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1329,
+  "functionsMapped": 1337,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -43,6 +43,7 @@
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_",
         "phase10-persistence/recordCycleWeather.js::recordCycleWeather_",
+        "utilities/citizenDialMap.js::emitPressureTag_",
         "utilities/compressLifeHistory.js::compressLifeHistory_",
         "utilities/ensureCrimeMetrics.js::batchUpdateCrimeMetrics_",
         "utilities/ensureCrimeMetrics.js::updateCrimeMetrics_",
@@ -749,6 +750,7 @@
         "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_",
         "phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_",
         "utilities/archiveCitizenExits.js::archiveCitizenExits_",
+        "utilities/citizenDialMap.js::emitPressureTag_",
         "utilities/compressLifeHistory.js::compressLifeHistory_",
         "utilities/cycleModes.js::initializeSeededRng_",
         "utilities/cycleModes.js::saveCycleSeed_",
@@ -821,6 +823,43 @@
       ],
       "readers": [
         "phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_"
+      ]
+    },
+    "neighborhoodState": {
+      "writers": [
+        "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_"
+      ],
+      "readers": [
+        "phase01-config/engine94SheetContract.js::ensureEngine160Config_",
+        "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
+        "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
+        "phase03-population/generateCrisisSpikes.js::crisisHoodWeight_",
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
+        "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
+        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
+        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
+        "phase05-citizens/bondEngine.js::bondProsperityTerm_",
+        "phase05-citizens/bondEngine.js::bondWealthTerm_",
+        "phase05-citizens/bondEngine.js::spouseNetWorthFor_",
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/generationalWealthEngine.js::homeBuyChance_",
+        "phase05-citizens/generationalWealthEngine.js::homeHoodFloorAdmits_",
+        "phase05-citizens/generationalWealthEngine.js::homeMarketRent_",
+        "phase05-citizens/generationalWealthEngine.js::processBankRate_",
+        "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
+        "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
+        "phase05-citizens/householdFormationEngine.js::estimateRent_",
+        "phase05-citizens/migrationTrackingEngine.js::processMigrationEvents_",
+        "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
+        "phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_",
+        "phase05-citizens/processAdvancementIntake.js::queueHouseholdIntake_",
+        "phase05-citizens/runConductEngine.js::runConductEngine_",
+        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
+        "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
+        "phase06-analysis/economicRippleEngine.js::primarySportsZone_",
+        "phase07-evening-media/buildEveningFood.js::eveningFoodHoodsByCharacter_",
+        "utilities/ensureCrimeMetrics.js::crimeIterationHoods_",
+        "utilities/ensureCrimeMetrics.js::crimeProfileFor_"
       ]
     },
     "auditIssues": {
@@ -2311,42 +2350,6 @@
         "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_"
-      ]
-    },
-    "neighborhoodState": {
-      "writers": [
-        "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_"
-      ],
-      "readers": [
-        "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
-        "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
-        "phase03-population/generateCrisisSpikes.js::crisisHoodWeight_",
-        "phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_",
-        "phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_",
-        "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
-        "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
-        "phase05-citizens/bondEngine.js::bondProsperityTerm_",
-        "phase05-citizens/bondEngine.js::bondWealthTerm_",
-        "phase05-citizens/bondEngine.js::spouseNetWorthFor_",
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
-        "phase05-citizens/generationalWealthEngine.js::homeBuyChance_",
-        "phase05-citizens/generationalWealthEngine.js::homeHoodFloorAdmits_",
-        "phase05-citizens/generationalWealthEngine.js::homeMarketRent_",
-        "phase05-citizens/generationalWealthEngine.js::processBankRate_",
-        "phase05-citizens/generationalWealthEngine.js::processMoneyLoop_",
-        "phase05-citizens/generationalWealthEngine.js::trackWealthMobility_",
-        "phase05-citizens/householdFormationEngine.js::estimateRent_",
-        "phase05-citizens/migrationTrackingEngine.js::processMigrationEvents_",
-        "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
-        "phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_",
-        "phase05-citizens/processAdvancementIntake.js::queueHouseholdIntake_",
-        "phase05-citizens/runConductEngine.js::runConductEngine_",
-        "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
-        "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
-        "phase06-analysis/economicRippleEngine.js::primarySportsZone_",
-        "phase07-evening-media/buildEveningFood.js::eveningFoodHoodsByCharacter_",
-        "utilities/ensureCrimeMetrics.js::crimeIterationHoods_",
-        "utilities/ensureCrimeMetrics.js::crimeProfileFor_"
       ]
     },
     "neighborhoodStateCount": {
@@ -4092,6 +4095,23 @@
       ],
       "readers": []
     },
+    "pressureTagged": {
+      "writers": [
+        "utilities/citizenDialMap.js::emitPressureTag_"
+      ],
+      "readers": [
+        "utilities/citizenDialMap.js::emitPressureTag_",
+        "utilities/citizenDialMap.js::hasTag_"
+      ]
+    },
+    "pressureCounts": {
+      "writers": [
+        "utilities/citizenDialMap.js::emitPressureTag_"
+      ],
+      "readers": [
+        "utilities/citizenDialMap.js::emitPressureTag_"
+      ]
+    },
     "lifeHistoryCompression": {
       "writers": [
         "utilities/compressLifeHistory.js::compressLifeHistory_"
@@ -4140,6 +4160,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine157Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine160Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine161Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine176Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
         "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",
@@ -4263,7 +4284,8 @@
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
         "phase05-citizens/runRelationshipEngine.js::runRelationshipEngine_",
         "phase05-citizens/runYouthEngine.js::recordYouthLifeHistory_",
-        "phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_"
+        "phase07-evening-media/mediaRoomIntake.js::processQuotedCitizens_",
+        "utilities/citizenDialMap.js::emitPressureTag_"
       ],
       "readers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
@@ -4301,6 +4323,7 @@
         "phase10-persistence/compileHandoff.js::loadRecentQuotes_",
         "utilities/archiveLifeHistory.js::maintainLifeHistoryLog_",
         "utilities/archiveLifeHistory.js::runArchive_",
+        "utilities/citizenDialMap.js::emitPressureTag_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",
         "utilities/cycleRollback.js::rollbackToCycle78",
         "utilities/sheetCache.test.js::mkSS"

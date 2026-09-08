@@ -396,6 +396,11 @@ function processMoneyLoop_(ctx, cycle) {
       row[iDebt] = debt;
       if (debt > debtBefore) results.debtUp++; else results.debtDown++;
     }
+    // engine.176 (S438): debt at/over the retreat bar is a pressure the dials read.
+    if (iDebt >= 0 && iLife >= 0 && debt >= pressureBar_(ctx, 'maneuverRetreatDebt')) {
+      var iPopM = header.indexOf('POPID');
+      emitPressureTag_(ctx, row, iLife, String(row[iPopM] || ''), 'debt', pressureText_('debt', cycle + r), { hood: iHood >= 0 ? row[iHood] : '' });
+    }
     if (line && iLife >= 0) {
       row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — ' + line;
       results.lines++;

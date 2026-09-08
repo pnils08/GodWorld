@@ -1282,7 +1282,14 @@ function runCareerEngine_(ctx) {
       }
     }
 
-    S.careerSignals.rehires = { hired: hired, crossField: crossField, unemployedPool: pool.length };
+    // engine.176 (S438): every pool member the windows did not take lives the
+    // cycle without work — Stumble the first cycle, Strain ongoing, adapts after 6.
+    var unmatched = 0;
+    for (var up = 0; up < pool.length; up++) {
+      if (taken[up]) continue;
+      if (emitPressureTag_(ctx, rows[pool[up].r], iLife, pool[up].pop, 'unemployed', pressureText_('unemployed', cycle + up))) unmatched++;
+    }
+    S.careerSignals.rehires = { hired: hired, crossField: crossField, unemployedPool: pool.length, pressureTagged: unmatched };
     Logger.log('runCareerEngine v2.7 rehire matcher: ' + hired + ' hired (' + crossField +
       ' career changes) from unemployed pool of ' + pool.length);
   }

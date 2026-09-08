@@ -13,8 +13,11 @@
  *     commander's sessions/<name>/credentials.json. This wrapper refuses to
  *     run without it, and every mission brief must forbid register/login —
  *     a self-registering agent burns the episode hallucinating codes.
- *   - Stop = wall-clock timeout -> SIGINT -> commander's AbortSignal seam
- *     (clean exit, handoff written), SIGKILL only after a grace period.
+ *   - Stop = mission completion (captains_log written while docked -> graceful
+ *     SIGINT) or wall-clock timeout -> SIGINT -> commander's AbortSignal seam
+ *     (clean exit, handoff written), SIGKILL only after a grace period. The
+ *     LLM's obedience to "dock and stop" is NOT a stop mechanism (2026-09-08:
+ *     pop00143 finished its mission and burned 6 more minutes to the cap).
  *
  * Usage:
  *   node scripts/undockedEpisode.js --session undocked-pop00962 \
@@ -104,6 +107,35 @@ function parseLog(logText) {
   return { turns, tokensIn, tokensOut, toolErrors };
 }
 
+// Completion detection: the mission contract is "write one captains_log
+// entry, then dock and stop" — watch the telemetry stream for that instead of
+// trusting the model's obedience. Only SUCCESSFUL tool_call events move state
+// (tool_error events are failed attempts). The ship starts docked per the
+// mission brief's preconditions. The tracker can only end an episode EARLY;
+// the wall-clock cap remains the backstop either way.
+const ANSI_RE = /\x1b\[[0-9;]*m/g;
+// After the end condition is seen, give the current turn a moment to flush,
+// then take the same graceful SIGINT path the cap uses.
+const COMPLETION_SETTLE_MS = 20000;
+
+function createCompletionTracker() {
+  let docked = true, logWritten = false, done = false;
+  return {
+    push(line) {
+      let e;
+      try { e = JSON.parse(line); } catch (_) { return done; }
+      if (e.event !== 'tool_call' || !e.args || typeof e.args.command !== 'string') return done;
+      const cmd = e.args.command;
+      if (/(^|\/)undock$/.test(cmd)) docked = false;
+      else if (/(^|\/)dock$/.test(cmd)) docked = true;
+      else if (/captains_log_add$/.test(cmd)) logWritten = true;
+      if (logWritten && docked) done = true;
+      return done;
+    },
+    get complete() { return done; },
+  };
+}
+
 async function main() {
   const a = parseArgs(process.argv);
   if (!a.session) { console.error('--session required'); process.exit(2); }
@@ -139,7 +171,31 @@ async function main() {
   child.stdout.pipe(out);
   child.stderr.pipe(out);
 
+  // Stream-scan stdout for the mission end condition. JSON events arrive one
+  // per line amid ANSI-colored chatter; buffer to line boundaries and strip
+  // color codes before matching.
+  const tracker = createCompletionTracker();
+  let completed = false;
+  let timedOut = false;
+  let lineBuf = '';
+  child.stdout.on('data', chunk => {
+    lineBuf += chunk.toString('utf8').replace(ANSI_RE, '');
+    let idx;
+    while ((idx = lineBuf.indexOf('\n')) >= 0) {
+      const line = lineBuf.slice(0, idx).trim();
+      lineBuf = lineBuf.slice(idx + 1);
+      if (!line.startsWith('{"event"')) continue;
+      if (!completed && tracker.push(line)) {
+        completed = true;
+        console.log('[episode] mission complete (captains_log written, docked) — settling ' +
+          (COMPLETION_SETTLE_MS / 1000) + 's then graceful stop');
+        setTimeout(() => { try { child.kill('SIGINT'); } catch (_) {} }, COMPLETION_SETTLE_MS).unref();
+      }
+    }
+  });
+
   const killer = setTimeout(() => {
+    timedOut = true;
     child.kill('SIGINT');
     setTimeout(() => { try { child.kill('SIGKILL'); } catch (_) {} }, GRACE_MS).unref();
   }, a.minutes * 60 * 1000);
@@ -157,7 +213,8 @@ async function main() {
     endedAt: new Date().toISOString(),
     capMinutes: a.minutes,
     exitCode: code,
-    capped: code === null || code !== 0, // SIGINT kill => code null/130
+    capped: timedOut,              // wall-clock cap fired (was: any non-clean exit)
+    completedCleanly: completed,   // mission end condition seen before the cap
     ...stats,
     // deepseek-chat list prices; cache reads push real cost lower
     estCostUsd: +((stats.tokensIn * 0.14 + stats.tokensOut * 0.28) / 1e6).toFixed(4),
@@ -172,4 +229,8 @@ async function main() {
   console.log('[episode] sidecar: ' + path.relative(ROOT, sidePath));
 }
 
-main().catch(e => { console.error('[episode] FATAL: ' + (e && e.message || e)); process.exit(1); });
+module.exports = { createCompletionTracker, parseLog };
+
+if (require.main === module) {
+  main().catch(e => { console.error('[episode] FATAL: ' + (e && e.message || e)); process.exit(1); });
+}

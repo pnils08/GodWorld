@@ -76,6 +76,8 @@ Order: employer-floor sector rule → sector-gated hiring → per-hood rent shar
 
 ## 4. Status log
 
+- 2026-09-07 S436 (late) — engine.174 LIVE @72: the generic-citizen feeder refills per short hood (the wave could only surface who waited in a hood's own line; civic.21 closed). Bench C116: Glenview 0→4 waiting, East Oakland 1→3. Live C107 will show the feeder naming the short hoods.
+
 - 2026-09-07 S436 (night) — builder rulings: (a) overpaid citizens keep the pay, no true-down (closed); (b) engine.173 move-up gate 1.5× ("I'll take your advice"), bench C114, PROD @71. engine.171 per-hood rent share still needs-info.
 
 - 2026-09-07 S436 (later still) — engine.172 LIVE @70: the personal pay position. The flat "all plumbers make x" correction never landed on live; C107 lifts each untracked citizen to their own figure instead (~102 of 238; 37 by >1.4×). Still open for the builder: the rows ABOVE their own figure (≈107 untracked + the employed above-band) stay by the raise-only rule; a one-time true-down is a many-row sheet write and waits for an explicit go.

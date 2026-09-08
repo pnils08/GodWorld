@@ -938,3 +938,7 @@ All 22 hoods RANKED live. Feeder SKIPS every cycle (pool at floor) so ranking al
 - 2026-08-15 (engine-sheet) — Survey + plan created. Entity layer verified healthy
   (840/840 citizens, 9/9 offices); edge layer surveyed across 7 ledgers and the
   full engine file set. Writer-before-data rule generalised from civic.18 §7.
+
+### civic.21 — closed (2026-09-07 / S436)
+
+The ten-hood remainder is closed by engine.174: the engine.148 wave (6 a cycle into the hood furthest under the citizen floor of 12) could only surface who was waiting in that hood's own Generic_Citizens line, and the line was empty where the map was thin while the feeder skipped on the citywide pool floor. The feeder now refills per short hood (open seats minus the waiting line, placed not drawn). Trail: docs/reference/DEPLOY_HISTORY.md §PROD @72.

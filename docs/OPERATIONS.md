@@ -2,7 +2,8 @@
 
 **Droplet:** `ubuntu-s-1vcpu-2gb` | 1 vCPU, 2GB RAM, 25GB disk | $12/mo | nyc3
 **IP:** 64.225.50.16 | **Access:** SSH as root, or `mags` command (tmux auto-wiring)
-**Last verified:** crontab 2026-08-10 via live `crontab -l`; PM2 2026-07-28 via
+**Last verified:** crontab 2026-09-08 via live `crontab -l` (all times
+server-local America/Chicago — the table previously claimed UTC); PM2 2026-07-28 via
 live `pm2 list`. Dashboard transport reverified 2026-08-03 via live Tailscale,
 UFW, and health probes.
 
@@ -34,28 +35,43 @@ pm2 save                    # Persist process list for reboot survival
 
 ## Cron Schedule
 
-All times in UTC. Server is UTC. Central time = UTC - 5 (CDT) or UTC - 6 (CST).
-This table was verified against the live crontab on 2026-08-10.
+**All times are server-local (America/Chicago — CDT = UTC−5, CST = UTC−6).** Cron
+expressions shown exactly as they appear in `crontab -l`. This table was
+verified against the live crontab on 2026-09-08 (the 2026-08-10 verification
+predated the show/civic/Saturday jobs and mis-stated the snapshot as monthly;
+it is weekly).
 
-| Schedule (UTC) | Job | Script | Log |
+| Schedule (server-local) | Job | Script | Log |
 |----------------|-----|--------|-----|
+| `0 3 * * 1` | Weekly droplet snapshot (Mon) | `scripts/snapshot-droplet.sh` | `logs/snapshot.log` |
+| `0 4 * * 3` | Weekly maintenance (Wed) | `scripts/weekly-maintenance.sh` | `logs/weekly-maintenance.log` |
 | `0 5 * * *` | Daily backup | `scripts/backup.sh` | `logs/backup.log` |
+| `45 5 * * 1-4` | Civic office datawakes (Mon–Thu) | `scripts/cron-civic-run.js --stage=datawake` | `logs/civic-cron.log` |
 | `0 6 * * *` | Newsroom digest | `scripts/newsroom-digest.js` | `logs/newsroom-digest.log` |
 | `15 6 * * 1-5` | Weekday newsroom angle wake | `scripts/cron-desk-run.js --stage=angle --fanout` | `logs/newsroom-fanout.log` |
 | `0 7,12,19 * * *` | Mags Discord reflections | `scripts/discord-reflection.js` | `logs/discord-reflection.log` |
 | `30 7 * * *` | Citizen morning wake | `scripts/citizen-wake.js --wake=morning` | `logs/citizen-wake.log` |
 | `0 8 * * *` | NotebookLM newsroom listening brief | `scripts/notebooklmDailyNews.js` | `logs/notebooklm-daily-news.log` |
+| `0 12 * * 6` | Pre-Saturday coverage sweep | `scripts/preSaturdayCoverageSweep.js` | `logs/pre-saturday-sweep.log` |
 | `30 12 * * *` | Citizen midday wake | `scripts/citizen-wake.js --wake=midday` | `logs/citizen-wake.log` |
 | `15 13 * * 1-5` | Weekday newsroom report wake | `scripts/cron-desk-run.js --stage=report --fanout` | `logs/newsroom-fanout.log` |
+| `0 14 * * *` | Moltbook heartbeat | `scripts/moltbook-heartbeat.js` | `logs/moltbook-out.log` |
+| `30 14 * * 0` | Civic Sunday chain (APPLY; guarded) | `scripts/cron-civic-run.js --stage=chain --apply` | `logs/civic-cron.log` |
+| `0 15 * * 0` | Civic chain Sunday status check | `scripts/cron-civic-run.js --stage=status` | `logs/civic-cron.log` |
+| `0 15 * * 5` | Weekly lore-writer (Fri, generate-only) | `scripts/cron-lore-run.js` | `logs/lore-cron.log` |
+| `0 16 * * 6` | Saturday compile | `scripts/cron-saturday-run.js --apply` | `logs/saturday-run.log` |
+| `30 16 * * 6` | Saturday edition to Discord | `scripts/deliver-articles.js` | `logs/deliver-articles.log` |
 | `0 17 * * *` | Citizen exchange | `scripts/citizen-exchange.js` | `logs/citizen-exchange.log` |
-| `30 20 * * *` | UNDOCKED daily flight (orchestrator: flight→adapter→gate→push→standings) | `scripts/cron-undocked-run.js` | `logs/undocked-run.log` |
 | `15 18 * * 1-5` | Weekday newsroom write + Rhea gate | `scripts/cron-desk-run.js --stage=write --fanout --gate-backend api` | `logs/newsroom-fanout.log` |
+| `45 18 * * 1-5` | Weekday articles to Discord | `scripts/deliver-articles.js` | `logs/deliver-articles.log` |
+| `30 20 * * *` | UNDOCKED daily flight (orchestrator: flight→adapter→gate→push→standings) | `scripts/cron-undocked-run.js` | `logs/undocked-run.log` |
+| `0 21 * * 0` | Civic Sunday chain late retry (same guard) | `scripts/cron-civic-run.js --stage=chain --apply` | `logs/civic-cron.log` |
 | `30 21 * * *` | Citizen night wake | `scripts/citizen-wake.js --wake=night` | `logs/citizen-wake.log` |
 | `47 21 * * *` | UNDOCKED show canary (Clerk key validity + episode recency, fails loud) | `scripts/undockedHealthcheck.js` | `logs/undocked-health.log` |
-| `0 */6 * * *` | Server health check | `scripts/server-health-check.sh` | `logs/health-check.log` |
+| `30 22 * * 0` | Cycle-output compaction (dormant until the 5-cycle threshold) | `scripts/compactCycleOutput.js --apply` | `logs/cycle-compaction.log` |
 | `7 23 * * 0` | Citizen bond graph rebuild (post-cycle, --live from Sheets) | `scripts/buildCitizenBondGraph.js` | `logs/bond-graph.log` |
-| `0 4 * * 3` | Weekly maintenance | `scripts/weekly-maintenance.sh` | `logs/weekly-maintenance.log` |
-| `0 3 1 * *` | Monthly droplet snapshot | `scripts/snapshot-droplet.sh` | `logs/snapshot.log` |
+| `0 */6 * * *` | Server health check | `scripts/server-health-check.sh` | `logs/health-check.log` |
+| `30 * 1,2 * *` (UTC-guarded) | Monthly md-audit staleness detector | `scripts/mdStalenessDetector.js` | `output/md-audit-cron.log` |
 
 **Disabled:**
 | Job | Script | Why |

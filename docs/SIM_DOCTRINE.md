@@ -120,6 +120,8 @@ civic.35). Any gate that rejects invented color is scope creep.
 
 A neighborhood has nothing to do with what a person earns. Their job pays them — the economic catalog's band for that role, at their stage — and what they earn decides where they can afford to live. Any mechanic that prices a citizen off the businesses around them has it backwards. (Supersedes the S398/S399 "pay = own hood's businesses" concept in the employment-cascade plan, which was recorded as builder direction and was not.)
 
+And within the job, the life sets the number (S436, Mike-direct: "if all plumbers make x, what makes each differ? Since the concept is that citizens be different, this would be that opportunity"). Years in the career, the credential against what the field expects, drive, tier and the employer's health place each citizen inside their job's band. Two plumbers never make the same money, and the reason is on their row.
+
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make
 a row drive a fate the builder didn't choose — or does it just tidy data?**

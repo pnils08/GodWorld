@@ -51,7 +51,7 @@ UNAPPROVED_QUOTE outage, fixed `1d67333a`, was three write days of lost climb).
 | Exempt | Tier 1 (protected class — **reach Tier 1 and decay never demotes you**), non-ENGINE clocks, hand-authored tiers (no marker = authored = held) | same, rule 3 |
 | Parallel | Cultural `FameScore` decays the same way: 10 quiet cycles (`CULTURAL_FAME_QUIET_CYCLES`) → −1/cycle, floor 0 (engine.68 "fame fades") | `culturalLedger.js` L59-90 |
 
-## 3. FAME — the cultural layer (PARTIALLY WIRED; permanence door is the gap)
+## 3. FAME — the cultural layer (WIRED — permanence door landed engine.118, S412)
 
 What IS wired:
 
@@ -61,7 +61,9 @@ What IS wired:
 | Fame bar | `CULTURAL_FAME_BAR = 25` (builder ruling) — at ≥25 the citizen-events antenna lights up via `UniverseLinks` POPID | `culturalLedger.js` L63, engine.68 |
 | A-list/D-list gradient | recognition-event weight scales with fame: ≥25 → 1.15, ≥40 → 1.25, ≥60 → 1.35 — the grade is lived texture already | `generateCitizensEvents.js` L2369-2370 |
 
-What is NOT wired (builder-direct design intent, 2026-08-18 — **engine.118**):
+**Permanence — WIRED (engine.118, LIVE PROD @27/@28 S412; re-spec builder 2026-09-02: bar = UsageCount 25 on the cell, not FameScore).** Simulation_Ledger `Famous` column: crossing writes `C<cycle>`, floors Tier at 1 forever, freezes the row out of decay; a hard light on a famous name dims Cultural_Ledger FameScore instead of the count (`processAdvancementIntake.js` L390, L445-447; cut 3b registers/brightens the Cultural_Ledger row). Trued up 2026-09-08 (S438) — the block below was the pre-S412 design intent and is kept as history:
+
+What was NOT wired as of 2026-08-18 (builder-direct design intent — **engine.118**, since shipped):
 
 - **No fame→Tier write exists anywhere.** Zero code paths set Simulation_Ledger
   `Tier` from `FameScore`.
@@ -79,5 +81,5 @@ UNDOCKED (research.27) is the worked example: a cast seat generates emergence
 citations (recap + wake-2 pilot interview = `quoted`) → mechanism 1 climbs the
 pilot; falling off the leaderboard stops the citations → mechanism 2 pulls the
 earned rungs back; sustained cultural presence accretes FameScore → mechanism 3
-(once engine.118 lands) converts a hot run into tenure. The casino (plan Phase
+(engine.118, live) converts a hot run into tenure. The unread wire as of 2026-09-08: `Undocked_Standings` has no readers — Nia's slice never sees the leaderboard, so the recap cannot name the leader (see [[../research/2026-09-08-kimi-casino-undocked-trueup]] §Review). The casino (plan Phase
 4b, gated) reuses the same attention economy with downside for the audience.

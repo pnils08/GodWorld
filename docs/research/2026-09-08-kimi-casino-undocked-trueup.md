@@ -66,3 +66,55 @@ pointers:
 ## Changelog
 
 - 2026-09-08 (kimi) — Initial audit (S437+), builder-directed lane review of casino 4b live state + Undocked pipeline.
+
+---
+
+## Review — 2026-09-08 (engine-sheet, S438)
+
+**Verdict: accepted with two mechanism departures.** Every file:line pointer in Findings 1–6 was re-read and holds (`casinoLedgerEngine.js:341, :187, :606, :666-667, :749`; `cron-undocked-run.js:42-50, :59-78, :104-107, :149-152`). The cycle arithmetic behind Finding 3 is confirmed at the source: the fire reads `World_Config.cycleCount = N-1` and runs as cycle N (`godWorldEngine2.js:693-710`); the orchestrator reads `cycleCount = N` after that fire and stamps `TargetCycle = N+1`; the next fire asks `casinoUpcoming_` for `N+2`. `upcoming` is empty at every fire. The show market has never been open.
+
+### Corrections to the record
+
+- **There is no pre-C106 history to observe.** C105 fired before the 2026-09-01 arming (`SANDBOX 0831` is a post-C105 copy stood up 2026-08-31, `DEPLOY_HISTORY.md:22`). The 12 C106 slips are the casino's entire live history, not a windowed view.
+- **The dirty-tree hazard is stale.** `generationalWealthEngine.js` and `hoodIncome.test.js` were engine-sheet's S436 work, since committed as engine.167 / engine.169 / engine.172.
+- **G-EC9 does not touch the casino.** `runYouthEngine.js` has no `Casino_Ledger` reference; the gap text lists `Casino_Ledger` only as one of the sheets carrying the `POPID` case-variant of its `PopID` literal.
+- **The Household_Ledger same-cycle `setValues` (`:662`) is a registered §9 carve-out** (`SHEETS_MANIFEST.md:139`), so Finding 2 holds on the write side too.
+- **Settlement watch has a precondition the doc doesn't name:** `readOaklandFeedEntries_(ctx, currentCycle)` filters the sports feed to the firing cycle. A C106 sports slip settles at C107 only if a `game-result` row for the A's with a `W#`/`L#` Streak is in the C107 feed; otherwise it carries and VOIDs at C109 (`CASINO_VOID_AFTER = 3`). The builder logs the games, so the watch depends on him.
+
+### Departure 1 — the off-by-one remedy: draw the cast in the engine, key show markets to the pilot, not the episode
+
+Pre-announce (recommendation 1) has a hole the doc doesn't name. `EpisodeId` is minted at push time from the flown cycle and a sequence number — `undocked-<pop>-Y<n>C<m>[-e<k>]` (`undockedShowContract.js:40-45`) — and 85% of show picks (`credits_sign` + `mishap`, `casinoLedgerEngine.js:713-724`) resolve by exact `episodeId` match (`casinoFindEpisode_`, `:141`). An announcement row cannot know the sequence number the aired row will get; a mismatch is `carry` forever → `VOID_GATE` at 3 cycles. Pre-announce as written places bets that cannot settle, on top of the feed-contract hazard already noted (at fire N+1 an announcement row and the aired rows share `TargetCycle`, so `loadUndockedFeed_` and `undockedStandings.js` would both ingest the phantom).
+
+What the engine actually needs at fire N is not next cycle's episodes; it is next cycle's **cast**. Under the 2026-09-08 reseed ruling that cast is a fresh draw every cycle — and the fire is the one moment that knows a new cycle has begun. So:
+
+- **Engine draws.** A Phase-5 step ahead of Step 2.45 (`generationalWealthEngine.js:163`) draws 3 pilots + alternates for cycle N+1 from `ctx.ledger` under `undockedDraw.js`'s eligibility (Active, adult by BirthYear, resident, has Neighborhood) with `ctx.rng` — deterministic, bench-replayable, and a citizen fate the row drives (universal protagonism). Output: `S.undockedNextCast` for the same fire, plus an append intent to a draw tab the orchestrator reads.
+- **Show markets re-key to pilot-per-cycle.** `eventId = 'c<N+1>:<POPID>'`. `credits_sign` resolves on the pilot's summed `CreditsDelta` across their aired rows for that cycle; `mishap` on any `MishapCount > 0` across them; `night_winner` already resolves per cast over the cycle's feed (`casinoNightWinner_`, `:155`). `casinoUpcoming_` is replaced by the cast read. No `Undocked_Feed` contract change; `loadUndockedFeed_`, standings, Nia's slice untouched.
+- **Orchestrator reads the draw tab** for `TargetCycle = cycleCount + 1` instead of the latest local manifest (`cron-undocked-run.js:42-50, :106`). This is the doc's item 2(iii) folded into one read.
+
+Costs, stated plainly: (1) the draw leaves `scripts/undockedDraw.js` for the engine — a cross-lane move into research-build's apparatus, handed over as a row, not slipped in; (2) the draw tab is a **new tab** — an ADD needing the builder's nod (engine never inserts tabs; `SCHEMA.md` + manifest §9 in the same commit); (3) **deploy is gated on the doc's items 2(i) and 2(ii).** The runner preflight refuses an uncredentialed pilot and the orchestrator exits non-zero — an engine draw on PROD before minting + brief generation breaks every nightly flight after the first fresh-cast fire. Bench-prove now; PROD deploy waits on the apparatus or rides a `World_Config` flag. The "minting first" order in recommendation 2 is a hard gate on this cut, not a preference.
+
+### Departure 2 — the fame loop is a wire, not a design doc
+
+Recommendation 4 asks for a mobility design against `TIER_MOBILITY`. The doc it would design against is stale in its §3 and the machinery already exists end to end:
+
+| Piece | State | Pointer |
+|---|---|---|
+| Climb ladder: emergence citation → `UsageCount` → Tier 3/2/1 at 3/6/9 | wired | `processAdvancementIntake.js` `processMediaUsage_` |
+| Decay at 10 quiet cycles, Tier 1 exempt | wired (engine.69) | same, `decayMediaAttention_` |
+| Fame permanence: `Famous` column, UsageCount 25 → Tier 1 forever | **LIVE PROD @27/@28 S412 (engine.118, archived)** — `TIER_MOBILITY` §3 says "NOT wired"; trued up this commit | `processAdvancementIntake.js:390,445-447`; `ROLLOUT_ARCHIVE.md:1010` |
+| Nia's recap → staged → Saturday sweep → canon ingest → `Citizen_Media_Usage` | wired; 7 recaps staged to date (`output/spacemolt-show/recaps.json`) | `cron-saturday-run.js` step 5 "ALL staged"; `mediaRoomIntake.js` |
+| `Undocked_Standings` → anything | **zero readers** — grep finds only its writer | `scripts/undockedStandings.js`; `buildNiaSlice.js` reads the feed pack + recaps only |
+
+An A's player is Tier 1. The top contestant reaches that tier through the ladder that exists the moment coverage names them repeatedly — and coverage can't name the leader because Nia's slice never sees the standings. Item 4 shrinks to: **wire `Undocked_Standings` into `buildNiaSlice.js` so the recap carries rank/streak/cycles-led** (research-build, small), then the existing ladder promotes. "More events and crons aware" is the cultural-layer antenna (`FameScore ≥ 25`, engine.68) fed by the same coverage. No new mobility engine.
+
+### Rulings carried by relay
+
+Findings 4 and 6 record two builder rulings (per-cycle reseed; A's-player fame target) as Mike-direct 2026-09-08. They reached engine-sheet through this document. Adopted as the plan's intent; **the reseed cut does not ship until the builder confirms both in a Claude seat** (house-guest relay is not source of truth).
+
+### Disposition
+
+- Accepted → moved to `docs/research/`, registered in `docs/index.md`.
+- ROLLOUT `engine.175` filed (engine draw + pilot-keyed show markets, gated on rb minting/briefs + builder confirmations + new-tab nod).
+- Plan post-ship items (c) and (e) updated with this verdict; item (a) carries the rb apparatus order: minting → brief generation → orchestrator reads the draw tab.
+- `TIER_MOBILITY` §3 trued up to engine.118 shipped.
+- Settlement watch (item 3) stands, with the game-logging precondition added.

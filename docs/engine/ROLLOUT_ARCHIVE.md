@@ -916,6 +916,15 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 ## S436 Archive Pass (2026-09-07, research-build) — post-S435 closures sweep
 
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 engine.*.
+
+- **engine.171** [engine-sheet] — Per-hood rent share: Neighborhood_Map.RentShare — D4 villages 0.24, Eastlake / East Oakland 0.26, Chinatown / San Antonio 0.28, else the 0.30 default. Raising the hot hoods was measured and rejected (the lake empties). Bench C118; PROD @74; column replayed to live **State at archive:** done-pending-archive. Pointer: [[../research/2026-09-07-economy-true-up]] §3; [[../reference/DEPLOY_HISTORY]] §PROD @74
+- **engine.167** [engine-sheet] — Sector hints re-ordered and made precise (sports → null first, newsroom, civic, port, tech, then the rest; bare director/planner/counselor/data gone). Every live title lands where the job is (`8ba55e45`). Bench C117; PROD @73 **State at archive:** done-pending-archive. Pointer: [[../reference/DEPLOY_HISTORY]] §PROD @73
+
+This pass: 2 rows — engine.171 + engine.167. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S436 Archive Pass (2026-09-07, research-build) — post-S435 closures sweep
+
 11 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 10 engine.* + 1 civic.*.
 
 - **engine.164** [engine-sheet] — Sim-year literal 2041 swept to `simYearOf_` at 17 engine sites (`5337fbff`, PROD @65) and the readers now follow the calendar too (`c0f5c4c5`, builder: "it's 2042 in the sim now"); bench C107/C109 clean; live smoke = the builder's C107 **State at archive:** done-pending-archive. Pointer: [[../reference/DEPLOY_HISTORY]] §PROD @65 + @67; C106 gap log G-EC59

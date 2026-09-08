@@ -19,8 +19,8 @@ own rollout rows.
 
 ## Next Session Priorities (S436 → next, engine-sheet)
 
-0. **PROD @72 is unsmoked on live — the builder's C107 fire carries ten changes (@65–@72, S436, each bench-proven on a same-day C106 re-sync):** engine.164 sim-year sweep (ages = 2042 − BirthYear, readers too), engine.165 sentiment clamp, engine.166 v2 pay from the JOB (hood pricing retired), engine.168 the working jobs in the catalog, engine.169 in-sector employer floor, engine.170 field-change hire, engine.172 the life places the citizen in the band, engine.173 move-up gate 1.5×, engine.174 feeder per short hood. Expect: newborn BirthYears at 2042 − age; hood Sentiment ≤ 1.0; ~102 of 238 untracked rows lifted to their own figure (37 by >1.4×) — the correction, not a bug; a burst of ~20 opportunity moves (Piedmont Ave / Lake Merritt magnets); the feeder line naming Glenview / Brooklyn / East Oakland. Trail: [[../reference/DEPLOY_HISTORY]] §PROD @65–@72; design + measurements: [[../research/2026-09-07-economy-true-up]].
-1. **engine.171** per-hood rent share — needs the builder's shares (research doc §3 proposes hot ≈0.40 / D4 ≈0.24 / Chinatown ≈0.28). **engine.167** sector-hint order (ready).
+0. **PROD @72 is unsmoked on live — the builder's C107 fire carries twelve changes (@65–@74, S436, each bench-proven on a same-day C106 re-sync):** engine.164 sim-year sweep (ages = 2042 − BirthYear, readers too), engine.165 sentiment clamp, engine.166 v2 pay from the JOB (hood pricing retired), engine.168 the working jobs in the catalog, engine.169 in-sector employer floor, engine.170 field-change hire, engine.172 the life places the citizen in the band, engine.173 move-up gate 1.5×, engine.174 feeder per short hood, engine.167 sector hints, engine.171 per-hood rent share (Neighborhood_Map.RentShare, live-seeded). Expect: newborn BirthYears at 2042 − age; hood Sentiment ≤ 1.0; ~102 of 238 untracked rows lifted to their own figure (37 by >1.4×) — the correction, not a bug; a burst of ~20 opportunity moves (Piedmont Ave / Lake Merritt magnets); the feeder line naming Glenview / Brooklyn / East Oakland. Trail: [[../reference/DEPLOY_HISTORY]] §PROD @65–@72; design + measurements: [[../research/2026-09-07-economy-true-up]].
+1. Nothing open from the S436 economy true-up — engine.167 (@73) and engine.171 (@74, Neighborhood_Map.RentShare live) closed it. Twelve changes @65–@74 ride the builder's C107.
 2. **engine.109 Task 7** is the builder's (families on the Intake tab). **Montclair ghost row** `Crime_Metrics` row 11 on live + bench — builder's hand.
 
 ---
@@ -70,8 +70,6 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.171 | Rent is one dial (0.30 × hood median) so rent never outruns wages anywhere. Per-hood `RentShare` on Neighborhood_Map from the narrative (hot ≈0.40, D4 ≈0.24, Chinatown ≈0.28); the 30/50% burden rules then sort. Builder confirms the shares first | needs-info | engine-sheet | [[../research/2026-09-07-economy-true-up]] §3 |
-| engine.167 | `ROLE_SECTOR_HINTS_` order decides a job's field when the catalog has no exact role: `director` (arts) beats `community` (faith), `Maintenance tech` reads tech. Re-order / tighten, bench one cycle | ready | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD @67 |
 | engine.1 | Phase 40.2 cattle refactor (needs plan) | blocked | engine-sheet | [[engine/archive/PHASE_40_PLAN]] §40.2 |
 | engine.5 | Household + family simulation (Representative Sample model, reframed S243) — functional youth seed → engine life-event simulation → publication-driven family materialization. Steward authority granted S243. | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
 | engine.6 | Press_Drafts.LinkedStoryline 0% populated (DEAD-COLUMN, 164 rows) | blocked | engine-sheet | [[archive/ENGINE_REPAIR]] row |

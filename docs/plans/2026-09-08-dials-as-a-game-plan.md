@@ -68,19 +68,19 @@ pointers:
 - **Steps:**
   1. When `rentBurden > dialFrictionRentBurden` and unbuffered and `!S.pressureTagged[pop]` for each adult member of the unit: emit `[Friction]` (first breach) or `[Strain]` (ongoing) with a rent line from a small pool; set `S.pressureTagged[pop]`; `LifeHistory_Log` append intent as the file already does for its own lines.
   2. Breach-state read: scan the member's last 3 stamped cycles of LifeHistory for `[Friction]`/`[Strain]`.
-- **Verify:** unit: a seeded renter at burden 60 gets Friction cycle 1, Strain cycle 2; a buffered renter gets nothing; an owner gets nothing.
+- **Verify:** helper-level unit proof shipped (`scripts/pressureTags.test.js`); SITE proof moves to the bench — read `S.pressureCounts` in the Phase 9 log line. Was: a seeded renter at burden 60 gets Friction cycle 1, Strain cycle 2; a buffered renter gets nothing; an owner gets nothing.
 - **Status:** [ ] not started
 
 ### Task 4: the debt collision emits
 - **Files:** `phase05-citizens/generationalWealthEngine.js` — the DebtLevel step (`iDebt` :1053 region, after the cycle's debt move)
 - **Steps:** when `DebtLevel ≥ maneuverRetreatDebt` and not pressure-tagged: Friction/Strain by breach state, debt pool text.
-- **Verify:** unit: DebtLevel 6 → Friction; 7 next cycle → Strain; 5 → nothing.
+- **Verify:** helper-level unit proof shipped (`scripts/pressureTags.test.js`); SITE proof moves to the bench — read `S.pressureCounts` in the Phase 9 log line. Was: DebtLevel 6 → Friction; 7 next cycle → Strain; 5 → nothing.
 - **Status:** [ ] not started
 
 ### Task 5: the unemployment collision emits
 - **Files:** `phase05-citizens/runCareerEngine.js` — `matchUnemployedToOpenings_` (:1134), after the slice
 - **Steps:** every pool member NOT hired this cycle and not pressure-tagged: `[Stumble]` (`composure −2, drive −1`, already mapped) on the first unmatched cycle, `[Strain]` ongoing.
-- **Verify:** unit: an unemployed adult unmatched two cycles carries Stumble then Strain; a hired one carries the hire line only.
+- **Verify:** helper-level unit proof shipped (`scripts/pressureTags.test.js`); SITE proof moves to the bench — read `S.pressureCounts` in the Phase 9 log line. Was: an unemployed adult unmatched two cycles carries Stumble then Strain; a hired one carries the hire line only.
 - **Status:** [ ] not started
 
 ### Task 6: money losses carry the sign
@@ -88,13 +88,13 @@ pointers:
 - **Steps:**
   1. Measure first: replay the live `[Money]` lines through `nudgesForEvent_`; if a casino loss text already routes negative through `CONTENT_RULES` (`/invest|lost money|…/`), no change there.
   2. A resolved casino loss ≥ `dialSetbackLossPct` of NetWorth tags `[Setback]` instead of `[Money]`; a layoff line tags `[Setback]` (`composure −5`, mapped) — only if the measure shows them landing positive or ambient today.
-- **Verify:** the replay after the change: Money/Setback lines net negative on losses.
+- **Verify:** `[Money]` measured balanced on live (342 pos / 313 neg), untouched; casino text routing + `[Setback]` unit-proven; layoff lines on the bench.
 - **Status:** [ ] not started
 
 ### Task 7: the hood tint
 - **Files:** `phase05-citizens/runNeighborhoodEngine.js` — the Neighborhood line emit
 - **Steps:** when the citizen's hood in `S.neighborhoodState` sits at or above `dialHoodPressureBar` or `dialHoodCrimeBar`, and `!S.pressureTagged[pop]`: the line is tagged `[Friction]` from a hood-strain pool (rents on the block, the corner, the noise) and the citizen is pressure-tagged; otherwise the ordinary `[Neighborhood]` line. Neighborhoods runs before Career/Migration in Phase 5 (`godWorldEngine2.js:346` vs `:357`, `:380`), so the tint claims first and the collision emitters skip — one cause, one tag.
-- **Verify:** unit: a citizen in a hood at pressure 9 gets one Friction; the same citizen over the rent bar gets no second tag that cycle.
+- **Verify:** helper-level unit proof shipped (`scripts/pressureTags.test.js`); SITE proof moves to the bench — read `S.pressureCounts` in the Phase 9 log line. Was: a citizen in a hood at pressure 9 gets one Friction; the same citizen over the rent bar gets no second tag that cycle.
 - **Status:** [ ] not started
 
 **Bench (with 177):** acceptance 3 and 4 above; log per-emitter counts to the phase log.
@@ -274,6 +274,8 @@ Code + unit proof landed; waits for a fresh SANDBOX re-sync from live once engin
 - **Ambient retune** to ±1 across Neighborhood/Daily/Personal/PrevEvening/Background/Civic/Civic Perception/Lifestyle/Sports/Season/Team/Holiday/FirstFriday/CreationDay.
 - Unit proof: `scripts/pressureTags.test.js` 33/33 (new); `citizenDialMultiCycle` 15, `compressLifeHistory.dial` 49, `engine32MultiCycle` 19, `unlivedFold` 23, `biasFold` 25, `griefPeriod` 38, `chaosTrauma` 26, `citizenDials` 38, `migrationRelocation` 47 (harness given the dial-map globals + the rent key), `hoodIncome` 74, `careerStage` 83, `employerSuccess` 58, `casinoLedgerEngine` ok, `maneuverEngine` 47; full suite 215/216 (the one failure, `djDirect.schema-and-slot`, is a missing C94 sift fixture, pre-existing).
 - Offline replay of the live C106 snapshot through the new fold: 922 rows updated, 13,924 entries folded, all-neutral 546 → 538 (the tints are small by design; the emitters are what the bench measures), wake-eligible 218 → 256 after catch-up (mood) → 227 after 12 quiet cycles, pins 5 → 5.
+- **Advisor pass (S438), fixed same night:** hood bars re-set from the live distribution (`dialHoodPressureBar` 3 → 5 of 22 hoods; `dialHoodCrimeBar` 1.0 → 4 hoods; at 8 both were inert — HousingPressure tops at 4.5, CrimeIndex at 1.11); the unemployment emitter gates on **Income 0** as well as no employer (the live pool is 19 self-employed creatives at $55–90k — not jobless); `scripts/backdateCitizenDials.js` + `seedTier1EssenceLive.js` set `folded` to the newest stamped col-O entry after a rebuild (else the next Phase 9 re-folds the raw window); `S.pressureCounts` prints in the Phase 9 log line.
+- **Hazards recorded:** (1) adaptation is cross-cause — six cycles of rent Strain marks the citizen adapted and a fresh job loss the next cycle emits nothing; a new cause arguably breaks through — for kimi; (2) edge damping gives room 0.6–0.8 at base 60–70, so kimi's ~15 cycles to a band crossing is now a floor; (3) the hood tint is the largest emitter by reach (~12% Neighborhood draw across 8 pressured hoods) — the bench's per-cause counts decide whether the bars hold.
 - **Bench next:** fresh SANDBOX re-sync from live (not a revert to C105 — the catch-up must run on the current LifeHistory), then 12 cycles; acceptance block above; per-emitter counts in `S.pressureCounts` land in the phase log.
 
 ## Changelog

@@ -1287,6 +1287,10 @@ function runCareerEngine_(ctx) {
     var unmatched = 0;
     for (var up = 0; up < pool.length; up++) {
       if (taken[up]) continue;
+      // the cause is no work AND no money coming in — the live pool is 19 self-employed
+      // creatives at $55-90k (measured S438); an influencer without an EmployerBizId is
+      // not jobless. Income 0 is the ledger's own record of a citizen out of work.
+      if (pool[up].income > 0) continue;
       if (emitPressureTag_(ctx, rows[pool[up].r], iLife, pool[up].pop, 'unemployed', pressureText_('unemployed', cycle + up))) unmatched++;
     }
     S.careerSignals.rehires = { hired: hired, crossField: crossField, unemployedPool: pool.length, pressureTagged: unmatched };

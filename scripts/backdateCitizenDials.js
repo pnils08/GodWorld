@@ -138,6 +138,9 @@ function backdate(events) {
     events.sort((a, b) => (a.cycle == null && b.cycle == null) ? a._i - b._i : a.cycle == null ? 1 : b.cycle == null ? -1 : (a.cycle - b.cycle || a._i - b._i));
 
     const c = backdate(events);
+    // engine.177: a rebuilt citizen carries the watermark at the newest stamped col-O entry,
+    // else the next Phase 9 re-folds the whole raw window on top of this replay.
+    c.folded = oParsed.entries.reduce((m, e) => (e.cycle > m ? e.cycle : m), 0);
     dialCol.push([C.serializeDialState_(c)]);
     faceCol.push([C.formatDialFace_(c, oParsed.entries, SEED_CYCLE)]);
 

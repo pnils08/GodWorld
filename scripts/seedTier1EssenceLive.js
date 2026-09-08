@@ -144,6 +144,7 @@ function backdate(events) {
     const misses = E.DIALS.filter((d) => { const tgt = (ess.target && ess.target[d]) || 'neutral'; return !TGT_OK[tgt](dials.bandIdx(curRounded[d]), curRounded[d]); })
       .map((d) => `${d}=${curRounded[d]}/${(ess.target && ess.target[d]) || 'neutral'}`);
     const oParsed = C.parseLifeHistoryEntries_(String(rowByPop[pop][iLife] || ''));
+    c.folded = oParsed.entries.reduce((m, e) => (e.cycle > m ? e.cycle : m), 0); // engine.177 watermark survives a rebuild
     writes[pop] = { dialState: C.serializeDialState_(c), face: C.formatDialFace_(c, oParsed.entries, SEED_CYCLE) };
     if (dev < WAKE_GATE) belowGate++;
     if (misses.length) withMiss++;

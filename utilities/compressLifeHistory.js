@@ -658,6 +658,7 @@ function compressLifeHistory_(ctx, options) {
     ', reflections ' + reflectionsMoved + '/' + reflectionCitizens + ' citizens' +
     ', biases ' + biasApplied + '/' + biasCitizens + ' citizens' +
     ', folded ' + foldedEntries + ' entries, settled ' + settled +
+    (S.pressureCounts ? ', pressure ' + JSON.stringify(S.pressureCounts) : ', pressure none') + // engine.176 per-emitter counts (S.pressureCounts)
     ', unlived ' + unlivedApplied +
     ', bonds nudged ' + bondsNudged + (bondTargetsMissed ? ' (missed ' + bondTargetsMissed + ')' : ''));
 }

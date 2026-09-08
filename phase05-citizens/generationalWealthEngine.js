@@ -662,17 +662,29 @@ function extractIncomeBand_(lifeHistory) {
 // SkillTags are blank. Word list only; the business-side map stays
 // sectorCategory_'s. Unmatched → null → the whole neighborhood is the reference.
 var ROLE_SECTOR_HINTS_ = [
-  [/attorney|lawyer|paralegal|notary|accountant|\bcpa\b|consultant|planner|analyst|insurance|loan officer/i, 'Professional'],
-  [/nurse|physician|doctor|dentist|therapist|veterinar|pharmac|paramedic|counselor|midwife|caregiver|health aide/i, 'Healthcare'],
-  [/cook|chef|barista|waiter|server|bartender|baker|pitmaster|caterer|food truck|taqueria|restaurant/i, 'Food & Culture'],
-  [/plumb|electric|carpent|hvac|roof|weld|mechanic|contractor|foreman|ironwork|glazier|concrete|painter/i, 'Construction & Baylight'],
-  [/artist|musician|muralist|writer|author|photograph|dancer|actor|choreograph|ceramic|designer|director|sculpt|filmmaker|\bdj\b/i, 'Creative & Arts'],
-  [/teacher|professor|tutor|instructor|educator|librarian/i, 'Education'],
-  [/driver|taxi|courier|dispatcher|mover|transit|delivery/i, 'Transit & Infrastructure'],
-  [/developer|programmer|engineer|technician|scientist|biolog|robotic|data/i, 'Tech & Innovation'],
-  [/longshore|dock|crane|\bport\b|freight|warehouse/i, 'Port & Labor'],
-  [/pastor|imam|rabbi|minister|chaplain|organizer|advocate|community/i, 'Faith & Community'],
-  [/janitor|custodi|cleaner|housekeep|groundskeep|cashier|clerk|receptionist|security guard/i, 'Small Business'], // engine.166: the building-and-counter jobs had no hint and fell through to a stale tag
+  // engine.167 (2026-09-07): ORDER and precision are load-bearing since pay
+  // prices by the role's field (engine.166/172). Sports first and to NULL —
+  // Paulson's domain, never priced here. Then the newsroom (a 'Journalist,
+  // Data Desk' is a journalist, not a data engineer), then civic titles (a
+  // 'Deputy Mayor (Community Affairs)' is civic, not a community organizer;
+  // a 'Reentry Counselor' is civic, not healthcare), then the port before the
+  // trades (a ship-repair foreman works the port), then tech before the arts
+  // (a biotech lab director is not a theater director). Bare 'director',
+  // 'planner', 'counselor' and 'data' are gone from the broad rules.
+  [/\b(athlete|coach|scout|closer|pitcher|catcher|infielder|outfielder|point guard|forward|center|sports analyst|sports analytics|sideline reporter|fan columnist)\b/i, null],
+  [/journalist|reporter|columnist|editor|correspondent|anchor|broadcast|blogger|streamer|influencer|podcast|photograph|copy chief|data desk/i, 'Creative & Arts'],
+  [/mayor|council|city manager|chief of staff|commission|elections office|ombudsman|district attorney|public defender|police|fire chief|\bems\b|public safety|emergency management|internal affairs|medical examiner|probation|reentry|case ?worker|social services|housing authority|housing policy|inspector|permit|urban planner|city planner|city planning|communications director|civic|municipal|program director|redevelopment/i, 'Government & Civic'],
+  [/longshore|dock|crane|\bport\b|freight|warehouse|container|maritime|ship repair|tugboat|harbor|shipping|logistics/i, 'Port & Labor'],
+  [/developer|programmer|software|engineer|technician|scientist|biolog|biotech|robotic|autonomous|drone|gene therapy|synthetic|carbon capture|neural|smart building|digital twin|machine learning|cloud|\bai\b|data (analyst|scientist|engineer|entry)|venture|capacity analyst/i, 'Tech & Innovation'],
+  [/attorney|lawyer|paralegal|notary|legal|accountant|bookkeeper|\bcpa\b|consultant|financial planner|wealth planner|analyst|insurance|loan officer|bank teller|office worker|adjuster/i, 'Professional'],
+  [/nurse|physician|doctor|dentist|orthodont|optometr|chiropract|therapist|veterinar|pharmac|paramedic|midwife|caregiver|health aide|health worker|phlebotom|radiolog|surgeon|clinician|herbalist|acupunct|doula/i, 'Healthcare'],
+  [/cook|chef|barista|waiter|server|bartender|baker|pastry|pitmaster|caterer|food truck|taqueria|pupuser|pho |dim sum|restaurant|brewer|brewery|kombucha|tea house|wine bar|cheesemaker|fish market|grocery/i, 'Food & Culture'],
+  [/plumb|electric|carpent|hvac|roof|weld|mechanic|contractor|foreman|ironwork|glazier|concrete|painter|solar|installation|mason|carpet|upholster|appliance repair|maintenance tech|landscap/i, 'Construction & Baylight'],
+  [/artist|musician|pianist|singer|rapper|muralist|writer|author|poet|dancer|actor|actress|model\b|choreograph|ceramic|glassblow|printmak|sculpt|filmmaker|\bdj\b|designer|sound design|gallery|curator|theater director|film director|creative director|art director|music director|music venue/i, 'Creative & Arts'],
+  [/teacher|professor|tutor|instructor|educator|librar|school psycholog|program aide|program coordinator|stem program/i, 'Education'],
+  [/driver|taxi|cab\b|courier|dispatcher|mover|transit|delivery|bus\b|parking/i, 'Transit & Infrastructure'],
+  [/pastor|priest|imam|rabbi|minister|chaplain|organizer|advocate|community|neighborhood watch|mutual aid|volunteer|outreach|activist|cultural (leader|figure)|philanthrop/i, 'Faith & Community'],
+  [/janitor|custodi|cleaner|housekeep|groundskeep|cashier|clerk|receptionist|security guard|owner|shop\b|store\b|boutique|salon|barber|stylist|tailor|seamstress|florist|casino|proprietor|small business/i, 'Small Business'],
 ];
 function roleSectorCategory_(roleText) {
   var t = String(roleText || '');

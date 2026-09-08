@@ -100,6 +100,12 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   assert('role hint: attorney → Professional', roleSectorCategory_('Immigration Attorney') === 'Professional');
   assert('role hint: line cook → Food & Culture', roleSectorCategory_('Line cook') === 'Food & Culture');
   assert('role hint: unmatched → null (whole hood)', roleSectorCategory_('Mover of Furniture') === 'Transit & Infrastructure' && roleSectorCategory_('Xyzzy') === null);
+  // engine.167: order + precision
+  assert('sports titles resolve to NULL, never priced here', roleSectorCategory_('Sports Analytics Lead (Gridiron Analytics)') === null && roleSectorCategory_('Youth Basketball Coach') === null && roleSectorCategory_('Athlete') === null);
+  assert('a journalist on the data desk is a journalist', roleSectorCategory_('Journalist, Data Desk') === 'Creative & Arts' && roleSectorCategory_('Journalist, Civic Affairs Reporter') === 'Creative & Arts');
+  assert('civic titles are civic (deputy mayor, reentry counselor, urban planner, case worker)', roleSectorCategory_('Deputy Mayor (Community Affairs)') === 'Government & Civic' && roleSectorCategory_('Ex-Offender Reentry Counselor') === 'Government & Civic' && roleSectorCategory_('Waterfront Urban Planner') === 'Government & Civic' && roleSectorCategory_('Refugee Resettlement Case Worker') === 'Government & Civic');
+  assert('the port before the trades; tech before the arts', roleSectorCategory_('Ship Repair Foreman') === 'Port & Labor' && roleSectorCategory_('Biotech Lab Director (Portside Bio)') === 'Tech & Innovation' && roleSectorCategory_('Theater Director') === 'Creative & Arts');
+  assert('a Community Director organizes, a Solar Panel Installation Lead builds', roleSectorCategory_('Community Director') === 'Faith & Community' && roleSectorCategory_('Solar Panel Installation Lead') === 'Construction & Baylight');
 }
 
 // ── jobReferencePay_ (engine.172: the life places the citizen in the job's band) ──

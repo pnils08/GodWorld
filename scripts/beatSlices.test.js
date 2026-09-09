@@ -33,7 +33,13 @@ function writeDump(dir, cycle) {
       { Cycle: String(cycle - 1), Station: 'Test Central', RidershipVolume: '1000', OnTimePerformance: '0.80', TrafficIndex: '50', Corridor: '', Notes: 'light' },
       { Cycle: String(cycle - 1), Station: 'Test North', RidershipVolume: '500', OnTimePerformance: '0.90', TrafficIndex: '40', Corridor: '', Notes: '' },
       { Cycle: String(cycle), Station: 'Test Central', RidershipVolume: '1600', OnTimePerformance: '0.75', TrafficIndex: '55', Corridor: 'Test Corridor', Notes: 'above-average ridership' },
-      { Cycle: String(cycle), Station: 'Test North', RidershipVolume: '450', OnTimePerformance: '0.92', TrafficIndex: '40', Corridor: '', Notes: '' }
+      { Cycle: String(cycle), Station: 'Test North', RidershipVolume: '450', OnTimePerformance: '0.92', TrafficIndex: '40', Corridor: '', Notes: '', Factors: 'game day: Test Park; storm front' },
+      // Corridor rows carry no Station — they used to collide under '' in the
+      // prev-cycle lookup; these two must produce DISTINCT deltas.
+      { Cycle: String(cycle - 1), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '50', Corridor: 'Test Freeway', Notes: 'moderate delays' },
+      { Cycle: String(cycle - 1), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '40', Corridor: 'Test Avenue', Notes: 'light traffic' },
+      { Cycle: String(cycle), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '65', Corridor: 'Test Freeway', Notes: 'heavy congestion; weather-related slowdowns' },
+      { Cycle: String(cycle), Station: '', RidershipVolume: '0', OnTimePerformance: '0.85', TrafficIndex: '38', Corridor: 'Test Avenue', Notes: 'light traffic' }
     ],
     Crime_Metrics: [
       { Neighborhood: 'Fruitvale', PropertyCrimeIndex: '40', ViolentCrimeIndex: '30', ResponseTimeAvg: '8.1', ClearanceRate: '0.2', IncidentCount: '9', LastUpdated: String(cycle) },
@@ -119,6 +125,10 @@ try {
   ok('kind', t.kind === 'beat-transit' && t.prewrite.schema === 'BEAT-SLICE-1');
   ok('label from in-table delta', /Test Central ridership up 600 vs C102 \| 2 stations/.test(t.story.label));
   ok('station fact with delta', t.facts.some(f => /Test Central: ridership 1,600 \(\+600 vs C102\), on-time 75% \(-5 pts\), Test Corridor — above-average ridership/.test(f.text)));
+  ok('Factors names the why when present', t.facts.some(f => /Test North: ridership 450 \(-50 vs C102\), on-time 92% \(\+2 pts\) — game day: Test Park; storm front/.test(f.text)));
+  ok('corridor facts are traffic rows, not pseudo-stations', t.facts.some(f => /Test Freeway: traffic index 65 \(\+15 vs C102\) — heavy congestion; weather-related slowdowns/.test(f.text)));
+  ok('corridor deltas do not collide', t.facts.some(f => /Test Avenue: traffic index 38 \(-2 vs C102\) — light traffic/.test(f.text)));
+  ok('inventory counts stations + corridors, ridership sums stations only', t.facts.some(f => /2 stations \+ 2 corridors on the record this cycle; total ridership 2,050 \(C102: 1,500\)/.test(f.text)));
   ok('every fact sourced', t.facts.every(f => /output\/beats\//.test(f.src)));
   ok('workers by BIZ_ID join only', t.story.citizens.length === 1 && t.story.citizens[0] === 'Test Operator (POP-90020)');
   ok('bartender at "BART Bar" never attaches', !JSON.stringify(t.citizens).includes('Bartender'));

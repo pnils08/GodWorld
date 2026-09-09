@@ -2,7 +2,8 @@
 /**
  * buildTransitSlice.js — Trevor Shimizu's transit slice (pipeline.68 Task 4).
  * Source: output/beats/Transit_Metrics.jsonl (this cycle vs the prior cycle in
- * the same table — 18 stations per cycle), transit workers from the roster
+ * the same table — 8 BART stations + 10 traffic corridors per cycle), transit
+ * workers from the roster
  * (Public Transit / Transit & Infrastructure BIZ_IDs), Story_Hook_Deck hooks.
  * Artifacts: output/slices/c{N}/trevor-shimizu.md · output/cron-compare/transit_slice_c{N}.json
  */
@@ -24,24 +25,42 @@ function build(cycle, { beats }) {
   const rows = all.filter(r => Number(r.Cycle) === cycle);
   if (!rows.length) return K.emptySlice(SEAT, cycle, 'no Transit_Metrics rows for C' + cycle);
   const prev = all.filter(r => Number(r.Cycle) === cycle - 1);
-  const prevBy = new Map(prev.map(r => [r.Station, r]));
+  // Composite key: corridor rows carry no Station and used to collide under
+  // the empty string — every corridor delta read off one shared prev entry.
+  // Stations key by station name, corridors by corridor name.
+  const keyOf = r => ((r.Station || '') !== '' ? 'S:' + r.Station : 'C:' + (r.Corridor || ''));
+  const prevBy = new Map(prev.map(r => [keyOf(r), r]));
   const src = 'output/beats/Transit_Metrics.jsonl Cycle ' + cycle;
-  const stations = rows.map(r => {
-    const p = prevBy.get(r.Station);
+  const isStation = r => (r.Station || '') !== '';
+  // Cause: the engine's Factors column (post-causal-frame cycles) names why a
+  // row moved; older rows fall back to the Notes texture column.
+  const causeOf = r => r.Factors || r.Notes || null;
+  const stations = rows.filter(isStation).map(r => {
+    const p = prevBy.get(keyOf(r));
     const rid = K.num(r.RidershipVolume), otp = K.num(r.OnTimePerformance);
     const pr = p ? K.num(p.RidershipVolume) : null, po = p ? K.num(p.OnTimePerformance) : null;
     return {
-      station: r.Station, ridership: rid, onTime: otp, traffic: K.num(r.TrafficIndex), corridor: r.Corridor || null, notes: r.Notes || null,
+      station: r.Station, ridership: rid, onTime: otp, corridor: r.Corridor || null, cause: causeOf(r),
       dRidership: rid != null && pr != null ? rid - pr : null,
       dOnTime: otp != null && po != null ? Math.round((otp - po) * 100) : null
+    };
+  });
+  const corridors = rows.filter(r => !isStation(r)).map(r => {
+    const p = prevBy.get(keyOf(r));
+    const tix = K.num(r.TrafficIndex);
+    const pt = p ? K.num(p.TrafficIndex) : null;
+    return {
+      corridor: r.Corridor, traffic: tix, cause: causeOf(r),
+      dTraffic: tix != null && pt != null ? tix - pt : null
     };
   });
   const movers = stations.filter(s => s.dRidership != null).sort((a, b) => Math.abs(b.dRidership) - Math.abs(a.dRidership));
   const lead = movers[0] || stations.slice().sort((a, b) => (b.ridership || 0) - (a.ridership || 0))[0];
   const total = stations.reduce((a, s) => a + (s.ridership || 0), 0);
-  const prevTotal = prev.reduce((a, r) => a + (K.num(r.RidershipVolume) || 0), 0);
+  const prevTotal = prev.filter(isStation).reduce((a, r) => a + (K.num(r.RidershipVolume) || 0), 0);
+  const inventory = stations.length + ' stations' + (corridors.length ? ' + ' + corridors.length + ' corridors' : '');
   const facts = [{
-    text: stations.length + ' stations on the record this cycle; total ridership ' + K.fmtInt(total) +
+    text: inventory + ' on the record this cycle; total ridership ' + K.fmtInt(total) +
       (prev.length ? ' (C' + (cycle - 1) + ': ' + K.fmtInt(prevTotal) + ')' : ' (no prior cycle in the table)'),
     src
   }];
@@ -51,7 +70,15 @@ function build(cycle, { beats }) {
         (st.dRidership != null ? ' (' + (st.dRidership >= 0 ? '+' : '') + K.fmtInt(st.dRidership) + ' vs C' + (cycle - 1) + ')' : '') +
         (st.onTime != null ? ', on-time ' + Math.round(st.onTime * 100) + '%' : '') +
         (st.dOnTime ? ' (' + (st.dOnTime > 0 ? '+' : '') + st.dOnTime + ' pts)' : '') +
-        (st.corridor ? ', ' + st.corridor : '') + (st.notes ? ' — ' + st.notes : ''),
+        (st.corridor ? ', ' + st.corridor : '') + (st.cause ? ' — ' + st.cause : ''),
+      src
+    });
+  }
+  for (const co of corridors) {
+    facts.push({
+      text: co.corridor + ': traffic index ' + K.fmtInt(co.traffic) +
+        (co.dTraffic != null ? ' (' + (co.dTraffic >= 0 ? '+' : '') + K.fmtInt(co.dTraffic) + ' vs C' + (cycle - 1) + ')' : '') +
+        (co.cause ? ' — ' + co.cause : ''),
       src
     });
   }
@@ -59,16 +86,17 @@ function build(cycle, { beats }) {
     .map(w => K.person(w.popid, w.name, w.role, null, 'works at ' + w.business + ' (Employment_Roster)', w.business));
   const dir = lead.dRidership == null ? null : (lead.dRidership >= 0 ? 'up' : 'down');
   const label = lead.station + (dir ? ' ridership ' + dir + ' ' + K.fmtInt(Math.abs(lead.dRidership)) + ' vs C' + (cycle - 1)
-    : ' ridership ' + K.fmtInt(lead.ridership)) + ' | ' + stations.length + ' stations on the record';
+    : ' ridership ' + K.fmtInt(lead.ridership)) + ' | ' + inventory + ' on the record';
   return K.makeSlice(SEAT, cycle, beats, {
     ref: src, hood: null, label,
     angle: label + ' — the platforms and the people who run them',
-    hookLine: lead.station + (dir ? ' moved ' + dir + ' the most' : ' carried the most riders') + ' this cycle; ' + people.length + ' transit workers on the roster.',
+    hookLine: lead.station + (dir ? ' moved ' + dir + ' the most' : ' carried the most riders') + ' this cycle' +
+      (lead.cause ? ' — ' + lead.cause : '') + '; ' + people.length + ' transit workers on the roster.',
     facts, people,
     deltas: { state: prev.length ? 'PRIOR_CYCLE_IN_TABLE' : 'NO_PRIOR_CYCLE', vs: prev.length ? cycle - 1 : null },
     hooks: K.hooksFor(beats, cycle, SEAT.name),
     note: people.length ? null : 'no transit workers on the roster this cycle',
-    extra: { stations }
+    extra: { stations, corridors }
   });
 }
 

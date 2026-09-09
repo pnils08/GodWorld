@@ -1865,6 +1865,21 @@ function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
       aEmp = findColByName_(advHeaders, 'EmployerBizId'), aOwn = findColByName_(advHeaders, 'OwnerOfBizId'),
       aG = findColByName_(advHeaders, 'Gender');
 
+  // A business whose owner is already waiting on the queue is spoken for —
+  // Key_Personnel is still blank until that row mints and Phase 10 writes it,
+  // and the door runs before the populator in the same phase.
+  var advData = advSheet.getDataRange().getValues();
+  if (aOwn >= 0 && advData.length > 1) {
+    var pending = {};
+    for (var pr = 1; pr < advData.length; pr++) {
+      var pv = String(advData[pr][aOwn] || '').trim();
+      if (pv) pending[pv] = true;
+    }
+    pool = pool.filter(function(p) { return !pending[p.id]; });
+    results.eligible = pool.length;
+    if (!pool.length) return results;
+  }
+
   for (var s = 0; s < slots; s++) {
     if (!pool.length) break;
     if (rng() >= cfg.bizOwnerMintP) continue; // the event did not fire this slot

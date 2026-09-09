@@ -179,6 +179,16 @@ console.log('\n4. a seat taken in the meantime, and a name collision:');
   check('an owner row naming an existing citizen is skipped, not bumped, seat untouched', w2.ctx.ledger.rows.length === b2 && r2.processed === 0 && w2.ctx.ledger.rows[0][col('Tier')] === 1 && logs.some(m => /owner-door row "Avery Santana" collides/.test(m)));
 }
 
+console.log('\n4b. a business already waiting on the queue is spoken for:');
+{
+  const w = world();
+  E.checkBusinessOwnerPromotions_(w.ctx, CYCLE, 1); // Coastline → Ray, queued (not yet minted)
+  const w2 = { ctx: w.ctx, sheets: w.sheets };
+  const res = E.checkBusinessOwnerPromotions_(w2.ctx, CYCLE, 2); // pool now Coliseum + Marigold; seq continues: fires, roll → Coliseum whiff, fires, roll → Marigold → Tomas
+  const q = w.sheets.Advancement_Intake1.appended;
+  check('Coastline is out of the pool while its row waits; nothing draws it twice', res.eligible === 2 && q.filter(r => r[qc(w, 'OwnerOfBizId')] === 'BIZ-00056').length === 1, JSON.stringify(res) + ' ' + q.map(r => r[qc(w, 'OwnerOfBizId')]).join());
+}
+
 console.log('\n5. the plumbing — cap, order, keys:');
 {
   const src = R('phase05-citizens/processAdvancementIntake.js');

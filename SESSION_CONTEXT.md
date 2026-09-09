@@ -4,7 +4,7 @@
 **NEXT[engine-sheet]:** Stage `68dc5a66` to bench @7, fire C109, continue dials acceptance C109–C118 per dials plan §Acceptance, then HEAD → PROD (175+176–183+owner door together). After next live fire: backfill Key_Personnel for Intake rows 65–70 by name.
 **NEXT[research-build]:** After the builder's next live fire: resolve the six founders (Intake rows 65–70) by name off Simulation_Ledger, write `POP-nnnnn <Name> (Founder/Co-Founder)` to Business_Ledger Key_Personnel for BIZ-00007/8/9/10/11 ONLY, read back, confirm `applyOwnerDraw_` unresolved → 0 for those five. Standing: Monday 06:15 pipeline.41 check; Friday Hal retry; Saturday pipeline.65 acceptance. pipeline.68 Tasks 2–7 are engine-sheet's — don't start them.
 
-**NEXT[kimi]:** Health-slice freshness shipped `78d1d836` (stale-cycle guard, queue fossil filter, world-summary material; C106 slice rebuilt). Engine one-liner + rulings wait in `docs/for-claude-review/2026-09-09-kimi-health-slice-freshness.md` — engine-sheet's move. Next: verify the Monday fanout drops or files cleanly at C107.
+**NEXT[kimi]:** Health-slice freshness + S.demographicDrift clobber fix both landed (`78d1d836`, `e0f69e0d` builder-direct); plan registered at `docs/plans/2026-09-09-health-slice-freshness.md`. Engine fix is at HEAD only — NOT clasp-pushed (bench mid dials-acceptance); insert next bench window. Next: Monday fanout behavior at C107; rulings 1–5 in the plan sit with the builder.
 
 **NEXT[codex]:** Nothing queued. AGENTS.md authorization stands for when it returns.
 

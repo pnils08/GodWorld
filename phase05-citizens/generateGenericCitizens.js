@@ -59,8 +59,46 @@
 // ═══════════════════════════════════════════════════════════════════════════
 var GC_FEMALE_FIRST_NAMES = null; // populated on first generator run (below)
 var GC_MALE_FIRST_NAMES = null;
+var GC_LAST_NAMES = null; // engine.96 Task 12 (S440b): hoisted from generateGenericCitizens_'s
+                           // local `lastNames` so the owner door can author a brand-new
+                           // person too, not just this generator.
 
 function gcInitNamePools_() {
+  GC_LAST_NAMES = [
+    // v2.6 base (53) — preserved
+    "Lopez", "Carter", "Nguyen", "Patel", "Jackson", "Harris", "Wong", "Thompson",
+    "Brown", "Lee", "Lewis", "Jordan", "Reyes", "Scott", "Ward", "Foster", "Cook",
+    "Martinez", "Robinson", "Kim", "Davis", "Garcia", "Chen", "Williams", "Santos",
+    "Tran", "Chung", "Park", "Liu", "Hernandez", "Ramirez", "Cruz", "Mendoza",
+    "Washington", "Morales", "Okonkwo", "Yamamoto", "Rivera", "Freeman", "Gutierrez",
+    "Singh", "Jefferson", "Flores", "Muhammad", "Torres", "Coleman", "Vasquez", "Adams",
+    "Espinoza", "Nakamura", "Reed", "Delgado", "Franklin",
+    // v2.7 additions — Latino
+    "Aguilar", "Alvarez", "Cabrera", "Castillo", "Ortiz", "Pena", "Rojas", "Salazar",
+    "Sandoval", "Sanchez", "Soto", "Vega", "Velazquez", "Zamora",
+    // v2.7 additions — Black
+    "Booker", "Crenshaw", "Dawson", "Gaines", "Hayes", "Holloway", "Pinckney", "Sterling",
+    "Whitfield",
+    // v2.7 additions — East/Southeast Asian
+    "Cao", "Choi", "Doan", "Fukuda", "Han", "Hashimoto", "Hong", "Hwang", "Inoue",
+    "Kang", "Lai", "Le", "Mori", "Murakami", "Ng", "Oh", "Pham", "Sasaki",
+    "Shimizu", "Suzuki", "Takahashi", "Tanaka", "Truong", "Wu", "Xu", "Yamada",
+    "Yang", "Zhang", "Zhou",
+    // v2.7 additions — South Asian
+    "Banerjee", "Desai", "Ghosh", "Gupta", "Joshi", "Kapoor", "Kumar", "Mehta",
+    "Mukherjee", "Nair", "Pillai", "Rao", "Reddy", "Sharma", "Shah", "Verma",
+    // v2.7 additions — Anglo
+    "Carmichael", "Crawford", "Donovan", "Faulkner", "Holcomb", "Kessler", "Lockhart",
+    "McAllister", "Norwood", "Oakley", "Quinlan", "Stafford", "Underwood", "Vance",
+    // v2.7 additions — African (West/East)
+    "Abebe", "Adeyemi", "Bello", "Diop", "Fofana", "Gebre", "Mensah", "Owusu", "Tadesse",
+    // v2.8 additions (S320) — world-broad: Nordic/Slavic/European, Lusophone/
+    // Italian/French, Celtic, Pacific, MENA/Horn
+    "Andersson", "Lindqvist", "Kowalski", "Novak", "Ivanov", "Petrov", "Silva",
+    "Oliveira", "Ferreira", "Costa", "Rossi", "Ricci", "Moreau", "Dubois",
+    "Laurent", "Schmidt", "Weber", "Novotny", "Popescu", "O'Connell", "Gallagher",
+    "Kahale", "Fetu", "Ali", "Hassan", "Osman", "Rahimi", "Haddad", "Nasser"
+  ];
   GC_FEMALE_FIRST_NAMES = [
     // v2.6/v2.7 pool, classified (unisex assigned by dominant usage)
     "Mina", "Brianna", "Sofia", "Elena", "Kaila", "Ariana", "Lila", "Ivy", "Maya",
@@ -380,41 +418,8 @@ function generateGenericCitizens_(ctx) {
   var femaleFirstNames = GC_FEMALE_FIRST_NAMES;
   var maleFirstNames = GC_MALE_FIRST_NAMES;
 
-  var lastNames = [
-    // v2.6 base (53) — preserved
-    "Lopez", "Carter", "Nguyen", "Patel", "Jackson", "Harris", "Wong", "Thompson",
-    "Brown", "Lee", "Lewis", "Jordan", "Reyes", "Scott", "Ward", "Foster", "Cook",
-    "Martinez", "Robinson", "Kim", "Davis", "Garcia", "Chen", "Williams", "Santos",
-    "Tran", "Chung", "Park", "Liu", "Hernandez", "Ramirez", "Cruz", "Mendoza",
-    "Washington", "Morales", "Okonkwo", "Yamamoto", "Rivera", "Freeman", "Gutierrez",
-    "Singh", "Jefferson", "Flores", "Muhammad", "Torres", "Coleman", "Vasquez", "Adams",
-    "Espinoza", "Nakamura", "Reed", "Delgado", "Franklin",
-    // v2.7 additions — Latino
-    "Aguilar", "Alvarez", "Cabrera", "Castillo", "Ortiz", "Pena", "Rojas", "Salazar",
-    "Sandoval", "Sanchez", "Soto", "Vega", "Velazquez", "Zamora",
-    // v2.7 additions — Black
-    "Booker", "Crenshaw", "Dawson", "Gaines", "Hayes", "Holloway", "Pinckney", "Sterling",
-    "Whitfield",
-    // v2.7 additions — East/Southeast Asian
-    "Cao", "Choi", "Doan", "Fukuda", "Han", "Hashimoto", "Hong", "Hwang", "Inoue",
-    "Kang", "Lai", "Le", "Mori", "Murakami", "Ng", "Oh", "Pham", "Sasaki",
-    "Shimizu", "Suzuki", "Takahashi", "Tanaka", "Truong", "Wu", "Xu", "Yamada",
-    "Yang", "Zhang", "Zhou",
-    // v2.7 additions — South Asian
-    "Banerjee", "Desai", "Ghosh", "Gupta", "Joshi", "Kapoor", "Kumar", "Mehta",
-    "Mukherjee", "Nair", "Pillai", "Rao", "Reddy", "Sharma", "Shah", "Verma",
-    // v2.7 additions — Anglo
-    "Carmichael", "Crawford", "Donovan", "Faulkner", "Holcomb", "Kessler", "Lockhart",
-    "McAllister", "Norwood", "Oakley", "Quinlan", "Stafford", "Underwood", "Vance",
-    // v2.7 additions — African (West/East)
-    "Abebe", "Adeyemi", "Bello", "Diop", "Fofana", "Gebre", "Mensah", "Owusu", "Tadesse",
-    // v2.8 additions (S320) — world-broad: Nordic/Slavic/European, Lusophone/
-    // Italian/French, Celtic, Pacific, MENA/Horn
-    "Andersson", "Lindqvist", "Kowalski", "Novak", "Ivanov", "Petrov", "Silva",
-    "Oliveira", "Ferreira", "Costa", "Rossi", "Ricci", "Moreau", "Dubois",
-    "Laurent", "Schmidt", "Weber", "Novotny", "Popescu", "O'Connell", "Gallagher",
-    "Kahale", "Fetu", "Ali", "Hassan", "Osman", "Rahimi", "Haddad", "Nasser"
-  ];
+  if (!GC_LAST_NAMES) gcInitNamePools_(); // v2.9 (engine.96 Task 12): pool now file-scoped
+  var lastNames = GC_LAST_NAMES;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OCCUPATIONS

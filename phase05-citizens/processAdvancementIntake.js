@@ -1728,18 +1728,28 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// engine.96 Task 12 (S440, builder go 2026-09-08) — THE OWNER DOOR
-// "The business is the reason." The third drip door out of Generic_Citizens,
-// beside emergence (engine.58, earned) and family-match (engine.66, chance).
+// engine.96 Task 12 (S440, builder go 2026-09-08; reel-2 corrected S440b) —
+// THE OWNER DOOR. "The business is the reason." A third drip mechanism beside
+// emergence (engine.58, earned) and family-match (engine.66, chance), sharing
+// their cap, but never a promotion OUT of Generic_Citizens — it authors a
+// brand-new person, same as a household-door member or the six/eight
+// hand-authored founders, never an existing resident's identity repurposed.
 // Reel 1 draws an ownerless private business weighted by PROFIT — the number
 // applyOwnerDraw_ pays from (engine.96 Task 10) — so the wealthy tier gets its
-// owners first and the shop tail trickles. Reel 2 draws one Active Generic
-// citizen from the business's own hood (engine.66b: same hood REQUIRED), old
-// enough to own it. The business writes the RoleType at mint the way the
-// family door writes the surname; the pool's trade rides in the Notes.
-// Shares DRIP_CAP_PER_CYCLE (Mike-pinned S324): takes only the slots the two
-// earlier doors left. Key_Personnel lands by cell intent at Phase 10, so the
-// books pay the owner from the cycle after the mint.
+// owners first and the shop tail trickles. Reel 2 authors a fresh citizen in
+// the business's own hood, old enough to own it (name pools shared with
+// generateGenericCitizens_ via GC_FEMALE_FIRST_NAMES/GC_MALE_FIRST_NAMES/
+// GC_LAST_NAMES — same naming convention, never a repurposed row). S440
+// correction, heated: the first cut drew a live Generic_Citizens row and
+// reassigned their RoleType — a pool "delivery driver" ended up owning a
+// $166M contractor. Top-tier seats are authored (memory
+// feedback_top-tier-entities-are-authored-not-pool-drawn); this door now
+// authors every seat it fills, tail included — the "dice roll" is which
+// business and whether the slot fires, never whose life gets redirected.
+// The business writes the RoleType at mint the way the family door writes
+// the surname. Shares DRIP_CAP_PER_CYCLE (Mike-pinned S324): takes only the
+// slots the two earlier doors left. Key_Personnel lands by cell intent at
+// Phase 10, so the books pay the owner from the cycle after the mint.
 // Tunables: World_Config bizOwnerMintP / bizOwnerMaxStaff / bizOwnerMinAge /
 // bizOwnerMinProfit (ENGINE96_CONFIG_SEEDS, self-armed at open).
 // ═══════════════════════════════════════════════════════════════════════════
@@ -1812,7 +1822,7 @@ function buildOwnerDoorPool_(ctx, cfg) {
 }
 
 function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
-  var results = { queued: 0, whiffs: 0, eligible: 0 };
+  var results = { queued: 0, eligible: 0 };
   if (!slots || slots <= 0) return results;
   if (!ctx || !ctx.ledger || !ctx.ss || typeof safeRand_ !== 'function') return results;
   // A cycle event — manual admin runs (runAdvancementIntakeManual) carry no
@@ -1827,32 +1837,7 @@ function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
   results.eligible = pool.length;
   if (!pool.length) return results;
 
-  var genericSheet = ss.getSheetByName('Generic_Citizens');
-  if (!genericSheet) return results;
-  var gData = genericSheet.getDataRange().getValues();
-  if (gData.length < 2) return results;
-  var gh = gData[0];
-  var gF = findColByName_(gh, 'First'), gL = findColByName_(gh, 'Last'), gB = findColByName_(gh, 'BirthYear'),
-      gA = findColByName_(gh, 'Age'), gN = findColByName_(gh, 'Neighborhood'), gO = findColByName_(gh, 'Occupation'),
-      gS = findColByName_(gh, 'Status'), gX = findColByName_(gh, 'Sex');
-  if (gF < 0 || gL < 0 || gN < 0) return results;
   var simYear = simYearOf_(ctx, cycle);
-  var birthYearOf = function(gRow) {
-    var by = gB >= 0 ? (Number(gRow[gB]) || 0) : 0;
-    if (!by && gA >= 0 && Number(gRow[gA]) > 0) by = simYear - Number(gRow[gA]); // engine.164
-    return by;
-  };
-  var byHood = {}; // hood -> [gData index]: Active, named, old enough to own
-  for (var g = 1; g < gData.length; g++) {
-    if (gS >= 0 && String(gData[g][gS] || '').toLowerCase() !== 'active') continue;
-    if (!String(gData[g][gF] || '').trim() || !String(gData[g][gL] || '').trim()) continue;
-    var by = birthYearOf(gData[g]);
-    if (!by || (simYear - by) < cfg.bizOwnerMinAge) continue;
-    var hood = String(gData[g][gN] || '').trim();
-    if (!hood) continue;
-    if (!byHood[hood]) byHood[hood] = [];
-    byHood[hood].push(g);
-  }
 
   var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create
   var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
@@ -1885,6 +1870,13 @@ function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
     if (!pool.length) return results;
   }
 
+  // engine.96 Task 12 (S440b): the name pools are file-scoped in
+  // generateGenericCitizens.js, but that file's randItem() is nested INSIDE
+  // generateGenericCitizens_ and is not global — this door draws with its own
+  // ctx rng so the cycle stays deterministic (Phase 40.3: the seeded rng only).
+  if (!GC_LAST_NAMES) gcInitNamePools_();
+  var pickName_ = function(arr) { return arr[Math.floor(rng() * arr.length)]; };
+
   for (var s = 0; s < slots; s++) {
     if (!pool.length) break;
     if (rng() >= cfg.bizOwnerMintP) continue; // the event did not fire this slot
@@ -1894,20 +1886,19 @@ function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
     var roll = rng() * tot, pick = pool.length - 1;
     for (var q = 0; q < pool.length; q++) { roll -= pool[q].profit; if (roll <= 0) { pick = q; break; } }
     var biz = pool[pick];
-    pool.splice(pick, 1); // one draw per business per cycle, hit or whiff
-    // Reel 2: someone from its hood
-    var cands = byHood[biz.hood] || [];
-    if (!cands.length) {
-      results.whiffs++;
-      Logger.log('checkBusinessOwnerPromotions_: ' + biz.name + ' drew, but no one in ' + (biz.hood || '(no hood)') + ' fits (C' + cycle + ')');
-      continue;
-    }
-    var ci = Math.floor(rng() * cands.length);
-    var gRow = gData[cands[ci]];
-    cands.splice(ci, 1);
-    var first = String(gRow[gF]).trim(), last = String(gRow[gL]).trim();
-    var trade = gO >= 0 ? String(gRow[gO] || '').trim() : '';
-    var sex = gX >= 0 ? String(gRow[gX] || '').trim().toLowerCase() : '';
+    pool.splice(pick, 1); // one draw per business per cycle
+    // Reel 2 (S440b correction): author a brand-new person for the seat — never
+    // an existing resident's identity repurposed. The first build drew a live
+    // Generic_Citizens row and reassigned their RoleType, which handed a pool
+    // "delivery driver" ownership of a $166M contractor (Mike: "this is trash").
+    // A seat this size needs a person built for it, same as the six founders
+    // and the eight principals, not someone else's life redirected. Names draw
+    // from the same file-scoped pools generateGenericCitizens_ uses, so this
+    // door never invents new naming conventions.
+    var sex = rng() < 0.5 ? 'male' : 'female';
+    var first = pickName_(sex === 'female' ? GC_FEMALE_FIRST_NAMES : GC_MALE_FIRST_NAMES);
+    var last = pickName_(GC_LAST_NAMES);
+    var age = cfg.bizOwnerMinAge + Math.floor(rng() * 30); // e.g. 35-64 at the default floor
     var out = new Array(advHeaders.length).fill('');
     if (aF >= 0) out[aF] = first;
     if (aL >= 0) out[aL] = last;
@@ -1915,12 +1906,12 @@ function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
     if (aT >= 0) out[aT] = 4;
     if (aC >= 0) out[aC] = 'ENGINE';
     if (aNo >= 0) out[aNo] = 'Owner door — ' + biz.name + ' (' + biz.id + '), C' + cycle +
-      (trade ? '; the pool listed them as ' + trade : '') + ' (engine.96 Task 12: the business is the reason)';
-    if (aBY >= 0) out[aBY] = birthYearOf(gRow);
-    if (aNB >= 0) out[aNB] = String(gRow[gN]).trim();
+      ' (engine.96 Task 12: the business is the reason; authored, not a pool draw)';
+    if (aBY >= 0) out[aBY] = simYear - age;
+    if (aNB >= 0) out[aNB] = biz.hood;
     if (aEmp >= 0) out[aEmp] = biz.id;
     if (aOwn >= 0) out[aOwn] = biz.id;
-    if (aG >= 0 && (sex === 'male' || sex === 'female')) out[aG] = sex;
+    if (aG >= 0) out[aG] = sex;
     advSheet.appendRow(out); // Phase-5 direct write to the promotion queue — the drip writers' class (§9)
     results.queued++;
     Logger.log('checkBusinessOwnerPromotions_: ' + first + ' ' + last + ' takes over ' + biz.name + ' in ' + biz.hood +

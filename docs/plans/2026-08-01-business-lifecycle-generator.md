@@ -205,7 +205,7 @@ closure           = distress >= bizClosureStreak AND
   1. Wire the Task 3 success-pressure modifiers into the drift computation: sustained neighborhood prosperity (3+ cycles) applies competitive-pressure drift penalty to incumbent high-growth businesses; outside-investment disruption probability rises with sustained city-wide growth.
   2. Thresholds stay probabilistic and tunable per 27.10 — "correction isn't guaranteed but becomes increasingly likely."
 - **Verify:** bench: a sustained-prosperity fixture measurably increases incumbent drift penalty vs a flat-prosperity fixture.
-- **Status:** [ ] not started
+- **Status:** [x] DONE — shipped inside Task 5 (`applyBusinessDynamics.js:314-318`: `bizSuccessWindow` → `bizSuccessPenalty` drift pressure + `bizDisruptSuccessMult` on the disruption chance; unit-covered in the 41/41 suite). Status trued 2026-09-08 (S440) — it had read "not started" since S413.
 
 ### Task 9: Tests + bench + cycle-time measurement
 
@@ -215,7 +215,7 @@ closure           = distress >= bizClosureStreak AND
   1. Cover: drift determinism, decline-streak → layoff path, closure threshold → event + pool exclusion, success-pressure modifier on/off, fail-loud on missing columns. — [x] 41/41 in `applyBusinessDynamics.test.js` (S413): drift + events + vitality + success window + disruption rate + floors, decline shed sizing/cap, closure both-conditions, the wind-down, the mover (archived / waiting on workers / waiting on stated / tab absent), the career-engine fold, both phase hooks.
   2. Run the pass under engine.95's per-phase instrumentation; record cycle-time cost in this plan's changelog.
 - **Verify:** `node phase05-citizens/applyBusinessDynamics.test.js` green; timing recorded; `git diff --check` clean.
-- **Status:** [ ] not started
+- **Status:** [x] DONE — suite 41/41 (S413); `Phase5-BusinessDynamics` timed 1.3s at bench C112 (changelog 2026-09-03). Open: the suite currently throws `pressureBar_ is not defined` — engine.178's dial helper is not in the test sandbox (harness gap from the dials wave, S438), not a product defect. Status trued 2026-09-08 (S440).
 
 ---
 

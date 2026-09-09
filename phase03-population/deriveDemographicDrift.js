@@ -322,7 +322,12 @@ function deriveDemographicDrift_(ctx) {
     }
   }
 
-  S.demographicDrift = drift;
+  // S.demographicDrift stays Phase 3's object (applyDemographicDrift_). The
+  // drift label travels via demographicDriftSummary.primary and, explicitly,
+  // demographicDriftLabel — overwriting the object here silently zeroed the
+  // Phase 9 digest and Phase 10 neighborhood-map readers (2026-09-09, kimi,
+  // builder-direct).
+  S.demographicDriftLabel = drift;
   S.demographicDriftFactors = driftFactors;
   S.demographicDriftSummary = {
     primary: drift,
@@ -378,7 +383,8 @@ function deriveDemographicDrift_(ctx) {
  * - Late-season: Sports interest
  * 
  * OUTPUT:
- * - demographicDrift: string (primary drift label)
+ * - demographicDriftLabel: string (primary drift label; S.demographicDrift itself
+ *   remains Phase 3's object — applyDemographicDrift_)
  * - demographicDriftFactors: array of factor strings
  * - demographicDriftSummary: {primary, factors, netDirection, calendar context}
  * 

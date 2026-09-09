@@ -189,6 +189,20 @@ console.log('\n4b. a business already waiting on the queue is spoken for:');
   check('Coastline is out of the pool while its row waits; nothing draws it twice', res.eligible === 2 && q.filter(r => r[qc(w, 'OwnerOfBizId')] === 'BIZ-00056').length === 1, JSON.stringify(res) + ' ' + q.map(r => r[qc(w, 'OwnerOfBizId')]).join());
 }
 
+console.log('\n4c. an authored row carries its bio onto the ledger (builder-direct):');
+{
+  const w = world();
+  const adv = w.sheets.Advancement_Intake1; const qh = adv.rows[0];
+  if (qh.indexOf('OwnerOfBizId') < 0) qh.push('OwnerOfBizId'); if (qh.indexOf('Gender') < 0) qh.push('Gender'); qh.push('CitizenBio');
+  const c = (n) => qh.indexOf(n);
+  const r = new Array(qh.length).fill(''); r[c('First')] = 'Desmond'; r[c('Last')] = 'Achebe'; r[c('RoleType')] = 'Founder, Coastline Construction'; r[c('Tier')] = 3; r[c('ClockMode')] = 'ENGINE'; r[c('Notes')] = 'Founder, Coastline Construction (BIZ-00056)'; r[c('BirthYear')] = 1984; r[c('Neighborhood')] = 'West Oakland'; r[c('EmployerBizId')] = 'BIZ-00056'; r[c('OwnerOfBizId')] = 'BIZ-00056'; r[c('Gender')] = 'male'; r[c('CitizenBio')] = 'Ironworker who started his own crew.';
+  adv.appendRow(r);
+  const before = w.ctx.ledger.rows.length;
+  const res = E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
+  const d = w.ctx.ledger.rows[before];
+  check('Tier 3 founder minted with the bio on CitizenBio, the role from the row, wired as (founder)', w.ctx.ledger.rows.length === before + 1 && d[col('CitizenBio')] === 'Ironworker who started his own crew.' && d[col('Tier')] === 3 && d[col('RoleType')] === 'Founder, Coastline Construction' && res.ownersWired === 1 && cells[cells.length - 1].value === d[col('POPID')] + ' Desmond Achebe (founder)' && /\[Business\] Founder of Coastline Construction/.test(d[col('LifeHistory')]), d && JSON.stringify([d[col('CitizenBio')], d[col('Tier')], d[col('RoleType')]]));
+}
+
 console.log('\n5. the plumbing — cap, order, keys:');
 {
   const src = R('phase05-citizens/processAdvancementIntake.js');

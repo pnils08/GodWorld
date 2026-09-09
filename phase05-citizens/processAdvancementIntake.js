@@ -588,6 +588,7 @@ function processAdvancementRows_(ctx, now, cycle) {
   var iHouseholdKey = findColByName_(intakeHeaders, 'HouseholdKey');
   var iGenderQ = findColByName_(intakeHeaders, 'Gender');
   var iOwnerBiz = findColByName_(intakeHeaders, 'OwnerOfBizId'); // engine.96 Task 12 — owner-door payload (blank on every other row)
+  var iBioQ = findColByName_(intakeHeaders, 'CitizenBio'); // engine.96 Task 12 (builder-direct): an authored row's bio lands on the ledger row, not in the notes
 
   var lPopId = findColByName_(ledgerHeaders, 'POPID');
   var lFirst = findColByName_(ledgerHeaders, 'First');
@@ -657,6 +658,7 @@ function processAdvancementRows_(ctx, now, cycle) {
     var householdKey = iHouseholdKey >= 0 ? String(row[iHouseholdKey] || '').trim() : '';
     var queuedGender = iGenderQ >= 0 ? String(row[iGenderQ] || '').trim().toLowerCase() : '';
     var ownerBiz = iOwnerBiz >= 0 ? String(row[iOwnerBiz] || '').trim() : '';
+    var queuedBio = iBioQ >= 0 ? String(row[iBioQ] || '').trim() : '';
 
     var advKey = normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last);
     var advHits = advNameIndex[advKey] || [];
@@ -839,6 +841,9 @@ function processAdvancementRows_(ctx, now, cycle) {
         var stMap = { early: 'entry-level', mid: 'mid-career', senior: 'senior', retired: 'retired' };
         newRow[lCareerStage] = age < 22 ? 'student' : (stMap[profile._careerStage] || 'entry-level');
       }
+      // engine.96 Task 12 — an authored bio rides the queue row onto the ledger
+      var lBioNew = findColByName_(ledgerHeaders, 'CitizenBio');
+      if (lBioNew >= 0 && queuedBio) newRow[lBioNew] = queuedBio;
       // engine.66 — the name they carried before taking the family surname
       var lMaiden = findColByName_(ledgerHeaders, 'MaidenName');
       if (lMaiden >= 0 && maiden) newRow[lMaiden] = maiden;
@@ -1944,7 +1949,7 @@ function wireBusinessOwners_(ctx, mints, cycle, now, logSheet) {
   var rowOf = {};
   for (var b = 1; b < data.length; b++) { var id = String(data[b][bId] || '').trim(); if (id && !rowOf[id]) rowOf[id] = b; }
   var h = ctx.ledger.headers, rows = ctx.ledger.rows;
-  var iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'), iHood = h.indexOf('Neighborhood');
+  var iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'), iHood = h.indexOf('Neighborhood'), iRoleT = h.indexOf('RoleType');
   var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
   for (var m = 0; m < mints.length; m++) {
     var mt = mints[m], b1 = rowOf[mt.biz];
@@ -1954,10 +1959,13 @@ function wireBusinessOwners_(ctx, mints, cycle, now, logSheet) {
     if (String(data[b1][bKP] || '').trim()) { out.skipped++; Logger.log('wireBusinessOwners_: ' + mt.biz + ' already names its people — ' + name + ' (' + mt.pop + ') minted unlinked'); continue; }
     var bizName = bNm >= 0 ? String(data[b1][bNm] || mt.biz) : mt.biz;
     var hood = bHood >= 0 ? String(data[b1][bHood] || '') : (iHood >= 0 ? String(row[iHood] || '') : '');
-    queueCellIntent_(ctx, 'Business_Ledger', b1 + 1, bKP + 1, mt.pop + ' ' + name + ' (owner)',
+    // the tag is the seat the row named — "Founder, X" → (founder), "Principal, X" → (principal), "Managing Partner, X" → (managing partner); anything else → (owner)
+    var seat = String(row[iRoleT] || '').split(',')[0].trim().toLowerCase();
+    var tag = /^(founder|owner|proprietor|principal|managing partner)$/.test(seat) ? seat : 'owner';
+    queueCellIntent_(ctx, 'Business_Ledger', b1 + 1, bKP + 1, mt.pop + ' ' + name + ' (' + tag + ')',
       'engine.96 Task 12 owner door — Key_Personnel', 'economy', 90);
     data[b1][bKP] = mt.pop; // a second mint this pass sees the seat taken
-    if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — [Business] Took over ' + bizName + ' in ' + hood + ' — the business is the reason';
+    if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — [Business] ' + (tag === 'owner' ? 'Took over ' : (tag.charAt(0).toUpperCase() + tag.slice(1)) + ' of ') + bizName + ' in ' + hood + ' — the business is the reason';
     if (logSheet) logSheet.appendRow([now, mt.pop, name, 'Business-Owner', 'Became the owner of ' + bizName + ' — ' + hood + ' (engine.96 Task 12)', hood, cycle]);
     if (ctx.summary) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];

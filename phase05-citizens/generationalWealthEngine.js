@@ -904,7 +904,7 @@ function parseKeyPersonnelOwners_(cell) {
       var nm = parts[n].replace(/^(Dr|Rev|Bishop|Imam|Mr|Mrs|Ms)\.?\s+/i, '').trim();
       names.push(nm);
     }
-    var ownerTag = /founder|owner|proprietor/i.test(tag);
+    var ownerTag = /founder|owner|proprietor|principal|managing partner/i.test(tag); // engine.96 Task 12: the Oakland principal of a canon-substitute major draws like a founder (INSTITUTIONS.md §Construction & Architecture)
     var isOwner = ownerTag || (!!pop && !tag);
     for (var k = 0; k < names.length; k++) {
       out.push({ pop: pop, name: names[k], tag: tag, owner: isOwner });

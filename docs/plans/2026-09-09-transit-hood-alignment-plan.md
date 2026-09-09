@@ -9,7 +9,7 @@ sources:
   - docs/canon/INSTITUTIONS.md §Civic Agencies, §Neighborhoods
   - docs/research/2026-09-05-hood-blind-engines.md (transit literal cleanup already landed S423)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (row filed on accept)"
+  - "[[engine/ROLLOUT_PLAN]] — engine.183 (filed on accept, S440)"
   - "[[SCHEMA]] — doc conventions"
   - "[[index]] — register on accept"
 ---
@@ -24,7 +24,7 @@ pointers:
 
 **Sequencing constraint (Mike, 2026-09-09):** SANDBOX 0908 is the dials acceptance run — pure dials measurement, 11 cycles to go, one unbenched change in flight. The engine batch waits for a fresh transit bench after that run. Slice work had no gate and shipped.
 
-**Wiring card:** NOT ATTACHED — `scripts/runEngineAgent.js --agent engine-wiring` failed 2026-09-09 on OpenRouter 402 (insufficient credits). Re-run before landing; manual trace below covers callers in the interim.
+**Wiring card:** ATTACHED — see §Dated note (`output/agent_engine-wiring_2026-09-09T03-47-57.md`, `…T04-53-26.md`); the manual trace below matched both cards.
 
 **Manual wiring trace (verified by reading source 2026-09-09):**
 - `updateTransitMetrics_Phase2_` called at `phase01-config/godWorldEngine2.js:301` (and second entry point :2045).
@@ -110,7 +110,7 @@ pointers:
 
 - **What:** delete Supermemory `bay-tribune` record `j7jcZLkY5LQvjBgEj3Ztdv` ("Cycle Pulse Edition 30 (Full)" — extracted memory whose entire content is the degenerate "AC Transit extends mandatory mandatory Mand Mand…" text; `id === rootMemoryId`). Then rebuild the derived AC Transit business card (`buildBusinessCards` path) and verify via `lookup_business "AC Transit"` the appearance is gone.
 - **Why delete not edit:** the memory is 100% garbage; replacement prose would be invented canon. Local mirrors (`archive/editions/Cycle_1-69_*`) are clean — corruption exists only in Supermemory + derived card.
-- **Status:** [ ] blocked on Mike's explicit go
+- **Status:** [x] done — 2026-09-09 (kimi, builder go in-session); engine-sheet verified the same night: `npx supermemory search "AC Transit extends mandatory" --tag bay-tribune` no longer returns `j7jcZLkY5LQvjBgEj3Ztdv`.
 
 ---
 
@@ -122,6 +122,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-09 (engine-sheet, S440) — ACCEPTED: moved to `docs/plans/`, indexed, ROLLOUT engine.183 filed; Task 1 re-verified green, Task 7 verified gone; Tasks 2–6 = engine-sheet batch on a fresh bench after the 0908 dials run.
 - 2026-09-09 (kimi) — v2 filed for review: builder corrections folded (foundation fix, single tracker read, live phase values, v3 ledger, bus lines held, bench sequencing). Task 1 shipped, commit 0806aba5.
 - 2026-09-09 (kimi) — v1 drafted and rejected in review (dead SPORTS flag, duplicate tracker read, wrong phase values, v2.1 regex source, bench conflict).
 

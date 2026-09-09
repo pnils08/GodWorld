@@ -109,7 +109,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.180 | The cron reads the game: thrown/stance, posture-changed wake slot, clamped one-notch push via Resolves — CUT LOCALLY S438 (cronStance 32/32); proves on scheduled wakes after deploy | in-progress | engine-sheet | [[../plans/2026-09-08-dials-as-a-game-plan]] §engine.180 |
 | engine.181 | The citywide floor (RimWorld counterweight) — after 176+177 run three live cycles, design only if negative share > 35% or a hood's mean composure band hits −1 | needs-info | engine-sheet | [[../plans/2026-09-08-dials-as-a-game-plan]] §engine.181 |
 | engine.182 | Ambition costs: overwork Strain that never adapts, burnout ×2 on health events, burnout + slipping integrity opens crime — CUT LOCALLY S438 (pressureTags 41/41), unbenched; rides the 176+177 bench | in-progress | engine-sheet | [[../plans/2026-09-08-dials-as-a-game-plan]] §engine.182 |
-| engine.183 | Transit × hoods: game day = the feed, v3 event hoods, Coliseum → East Oakland, initiative slice, `Factors` column — slice SHIPPED `0806aba5`; engine batch after the 0908 dials run | ready | engine-sheet | [[../plans/2026-09-09-transit-hood-alignment-plan]] §Tasks 2–6 |
+| engine.183 | Transit × hoods: game day = the feed, v3 event hoods, Coliseum → East Oakland, initiative slice, `Factors` column — slice SHIPPED `0806aba5`; engine batch CUT S440 (transitCauses 75/75), unbenched — rides the next 0908 fire | in-progress | engine-sheet | [[../plans/2026-09-09-transit-hood-alignment-plan]] §Tasks 2–6 |
 
 ### canon.* — World-fidelity layer
 

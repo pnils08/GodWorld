@@ -13,7 +13,7 @@ A citizen event does not happen in isolation. The system bridges micro-level cit
 
 ### Phase 2: World State & Infrastructure Ripples
 Macro events trigger baseline ripples that set the daily stage.
-- **`applyWeatherModel.js` & `updateTransitMetrics.js`:** Emit discrete `recordRipple_` events for storms, disruptions, and heat waves (SAFETY/CIVIC domains).
+- **`applyWeatherModel.js` & `updateTransitMetrics.js`:** Emit discrete `recordRipple_` events for storms, disruptions, and heat waves (SAFETY/CIVIC domains). Transit (engine.183) reads its causes upstream: game day = `S.sportsFeedEntries` (the sports feed), game-day hoods = feed `HomeNeighborhood` ∪ `S.sportsZones`; previous-cycle events from `WorldEvents_V3_Ledger` (Domain / Severity / Neighborhood — the v2.1 ledger has no Domain column); initiative build phases from `S.initiativeImplementationEffects.transit`. Every `Transit_Metrics` row carries a `Factors` string and `S.transitMetrics.causes` keys it per station/corridor.
 - **`applySportsSeason.js` & `applyCityDynamics.js`:** Write tracking events via `recordRipple_` for sports outcomes and crime/sentiment shifts.
 - **`applyInitiativeImplementationEffects.js`:** Translates civic policy into `sentimentBoost` and emits `recordRipple_` tracking entries into the Ripple_Ledger.
 

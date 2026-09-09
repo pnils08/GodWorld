@@ -246,6 +246,10 @@ function applyInitiativeImplementationEffects_(ctx) {
   var triggers = [];
   var totalSentiment = 0;
   var processed = 0;
+  // engine.183 — the transit slice: every transit-domain initiative and Baylight,
+  // with the phase and hoods AFTER the T7 correction, for updateTransitMetrics_
+  // (Phase2-Transit, downstream). One tracker read serves the whole Phase 2.
+  var transitSlice = [];
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
@@ -305,6 +309,26 @@ function applyInitiativeImplementationEffects_(ctx) {
           break;
         }
       }
+    }
+
+    // engine.183 — publish before the zero-intensity skip: a hub in design
+    // (intensity 0.2) and one merely announced (0) both name themselves on the
+    // transit rows; only construction and opening move the numbers.
+    if (domain === 'transit' || isBaylightInitiative_(name)) {
+      var tHoods = [];
+      var tParts = String(hoodsStr || '').split(/[,;]+/);
+      for (var tp = 0; tp < tParts.length; tp++) {
+        var th = tParts[tp].replace(/^\s+|\s+$/g, '');
+        if (th) tHoods.push(th);
+      }
+      transitSlice.push({
+        name: name,
+        phase: phase,
+        intensity: intensity,
+        domain: domain,
+        hoods: tHoods,
+        baylight: isBaylightInitiative_(name)
+      });
     }
 
     // Skip zero-intensity phases
@@ -459,7 +483,8 @@ function applyInitiativeImplementationEffects_(ctx) {
     processed: processed,
     sentimentBoost: totalSentiment,
     neighborhoodCount: Object.keys(neighborhoodEffects).length,
-    triggerCount: triggers.length
+    triggerCount: triggers.length,
+    transit: transitSlice   // engine.183 — read by updateTransitMetrics_Phase2_
   };
 
   // Merge into existing neighborhood effects (don't overwrite)

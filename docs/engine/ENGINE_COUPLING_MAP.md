@@ -222,7 +222,9 @@ The external-misfortune counterpart to conduct's internal agency — both write 
 
 ### `updateTransitMetrics.js` (Phase 2)
 - **Coupling & Salience:** Detects bad-day states (`service-disruption` and `gridlock-day`) from computed on-time performance and traffic indexes. Writes to `S.transitState` and emits ripples.
-- **Citizen Impacts:** Working citizens (`ls.working === 'working'`) in affected neighborhoods draw commute-disruption events (ECL vocab rows) during service disruptions. Ripples as `transit-event` (CIVIC domain).
+- **Causes (engine.183):** game day = `S.sportsFeedEntries` has a row (feed-driven; the old 15% rng roll and prev-cycle SPORTS scan are gone — the scan was dead, v2.1 ledger has no Domain column); game-day hoods = feed `HomeNeighborhood` ∪ `S.sportsZones`, applied to stations/corridors by hood intersection (`OAKLAND_BART_STATIONS[].corridors`, `TRAFFIC_CORRIDORS[].hoods`); previous-cycle events from `WorldEvents_V3_Ledger` — per-hood tally lifts the stations serving those hoods (+4%/event, cap +12%); initiative phases from `S.initiativeImplementationEffects.transit` (published by `applyInitiativeImplementationEffects_`, one tracker read): construction → station ×0.95 / on-time −0.03 / build street +8, open → station ×1.20 / on-time +0.02, Baylight construction → freeways +6 / serving station ×1.05. `Coliseum` station is keyed to `East Oakland` and serves `Baylight District`.
+- **Citizen Impacts:** Working citizens (`ls.working === 'working'`) in affected neighborhoods draw commute-disruption events (ECL vocab rows) during service disruptions. Ripples as `transit-event` (CIVIC domain). `affectedHoods` now names canon hoods only (the `Coliseum` ghost key is gone).
+- **Outputs:** `Transit_Metrics` rows carry `Factors` (causes in words); `S.transitMetrics.factors` (weather / dayType / majorEvents / gameDay / gameDayHoods / eventHoods / initiatives) + `S.transitMetrics.causes` (per row); `getTransitStorySignals_` data carries `factors`, `drivers`, per-alert `cause`.
 
 ---
 
@@ -472,12 +474,11 @@ GenericMicroEvents → GameModeMicroEvents → (ensure ledgers/bonds) → LoadBo
 - **Cross-sheet:** Loads static definitions from `GodWorld_Neighborhoods` and active stats from `City_Demographics` / `Crime_Metrics`.
 - **Full-read catches:** Serves as the primary dependency for micro-climate and cluster-based calculations later in Phase 2.
 
-### `updateTransitMetrics.js` (updateTransitMetrics_, Phase 2) — FULL-READ
-- **Gate:** Runs unconditionally.
-- **Layer 1:** Evaluates `S.weather` (via `getTransitWeatherModifier_`) and base transit capacities to calculate `transitCongestion` and delays.
-- **Layer 2:** Mutates `S.cityDynamicsCapacity` transit fields and issues transit alerts.
-- **Cross-sheet:** Feeds into `applyCityDynamics_` to apply capacity friction to cluster traffic.
-- **Full-read catches:** Heavily dependent on precipitation and visibility metrics.
+### `updateTransitMetrics.js` (updateTransitMetrics_Phase2_, Phase 2) — FULL-READ (trued engine.183; the earlier entry described functions not in the file)
+- **Gate:** Runs unconditionally at `Phase2-Transit` (godWorldEngine2.js:301 / :2045), after SportsSeason, InitiativeEffects, NeighborhoodState, CommuteFlows.
+- **Layer 1:** Per BART station (`calculateStationMetrics_`) and traffic corridor (`calculateCorridorTraffic_`): weather (`S.weather.type`, storm keyed off `frontState`), day type, previous-cycle events (V3 ledger), game day (sports feed), demographics (`Neighborhood_Demographics` by the station's hood), inbound commuters (`commuteInboundExternal_`), initiative phases.
+- **Layer 2:** Writes `S.transitMetrics` (+ `factors`, `causes`, `alerts`) and `S.transitState` (disruption / gridlock / `affectedHoods`); `Transit_Metrics` rows via `queueBatchAppendIntent_`; `transit-event` ripples via `recordRipple_`.
+- **Cross-sheet:** `S.transitState` → `generateCrisisBuckets_` (P3), `generateCitizensEvents_` (P5 commute-disruption draw), `finalizeCycleState_` (P9); `S.transitMetrics` → `getTransitStorySignals_` (P6), `buildCyclePacket_` (P10).
 
 ### `applyWeatherModel.js` (applyWeatherModel_, Phase 2) — FULL-READ
 - **Gate:** Runs unconditionally. Requires `S.simMonth` and `ctx.rng`.

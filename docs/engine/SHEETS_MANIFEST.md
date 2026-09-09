@@ -24,7 +24,7 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
 - **`Employment_Roster`**: Citizen-to-Business mapping.
 - **`Economic_Parameters`**: Reference limits for career and income generation.
 - **`Crime_Metrics`**: Safety, property/violent crime indexes per neighborhood.
-- **`Transit_Metrics`**: System congestion and delay data.
+- **`Transit_Metrics`**: System congestion and delay data. 18 rows/cycle (8 BART stations + 10 corridors); engine.183 added col I `Factors` (self-arms via `ensureTransitMetricsSchema_`, append-safe) — the row's causes in words.
 - **`Chaos_Cars`**: Random disruption logic injection mapping.
 - **`Texture_Trigger_Log`**: Environmental texture tracking.
 

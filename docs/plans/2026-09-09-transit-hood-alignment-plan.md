@@ -66,7 +66,7 @@ pointers:
   1. `OAKLAND_BART_STATIONS` Coliseum entry: `neighborhood: 'Coliseum'` → `'East Oakland'`. Station name string unchanged (corridors still list `'Coliseum'`, child-area lookups still resolve).
   2. Add `'Baylight District'` to that entry's `corridors` array.
 - **Verify:** bench cycle → Coliseum station ridership uses East Oakland demographics (no 0.6 default); a disruption worst-listing Coliseum puts `East Oakland` in `affectedHoods`.
-- **Status:** [ ] not started
+- **Status:** [x] cut — 2026-09-09 (engine-sheet, S440); `scripts/transitCauses.test.js` green; unbenched
 
 ### Task 3: Item 0 — foundation fix (game day = the feed)
 
@@ -78,7 +78,7 @@ pointers:
   4. `loadPreviousCycleEvents_` → read `WorldEvents_V3_Ledger` (SHEET_NAMES key if present, else literal), columns Domain/Severity/Neighborhood; return `{domain, severity, neighborhood}` per row.
   5. `countMajorEvents_` unchanged in shape (domain branch now live); add per-hood tally → stations whose `corridors` include an event hood get +0.04 ridership mod per hood-event, cap +0.12. Publish tally as `S.transitMetrics.factors.eventHoods`.
 - **Verify:** bench → game day cycles match feed rows exactly; event-hood lift appears only where v3 rows carry a Neighborhood.
-- **Status:** [ ] not started
+- **Status:** [x] cut — 2026-09-09 (engine-sheet, S440); `scripts/transitCauses.test.js` green; unbenched
 
 ### Task 4: Item A — initiative slice published + consumed
 
@@ -88,7 +88,7 @@ pointers:
   2. Transit engine reads that slice. Phase map (live values only): `design-phase`/`visioning-complete` → cause tag, no numeric effect; `construction-active` → station on-time −0.03, ridership ×0.95, +8 traffic to the corridor serving the hood (INIT-003: Fruitvale station, International Blvd); `operational`/`complete` → ridership ×1.20, on-time +0.02. Baylight name-matched rows: `construction-planning`/`construction-active` → I-880 N/S +6, Coliseum station ×1.05; `operational` → no extra effect (feed/game-day path covers it).
   3. Initiative tags join the row `Factors` string and `S.transitMetrics.factors.initiatives`.
 - **Verify:** bench with tracker at `design-phase` → Fruitvale rows tagged, numbers unchanged; flip bench tracker to `construction-active` → numbers move as mapped.
-- **Status:** [ ] not started
+- **Status:** [x] cut — 2026-09-09 (engine-sheet, S440); `scripts/transitCauses.test.js` green; unbenched
 
 ### Task 5: Item C — causal frame (Factors column + signals)
 
@@ -98,13 +98,13 @@ pointers:
   2. Assemble per-row cause string from: weather type, dayType, game-day hoods, event hoods, initiative tags, station/corridor notes.
   3. `getTransitStorySignals_`: each signal's `data` gains the causal fields (factors object + per-station causes); ridership/performance headlines name drivers.
 - **Verify:** bench → Transit_Metrics rows carry Factors; slice md prints "— <cause>" per row; story signal data names game-day/event/initiative drivers.
-- **Status:** [ ] not started
+- **Status:** [x] cut — 2026-09-09 (engine-sheet, S440); `scripts/transitCauses.test.js` green; unbenched
 
 ### Task 6: Doc propagation (same change as engine batch)
 
 - **Files:** `docs/engine/EVENT_SYSTEM_MAP.md`, `docs/engine/ENGINE_COUPLING_MAP.md`, `schemas/SCHEMA_HEADERS.md` (or `docs/SIMULATION_LEDGER.md` pointer), `docs/index.md` — modify
 - **Steps:** update transit entries for: feed-derived game day, v3-ledger event source, Factors column, initiative coupling, East Oakland key. Fix the stale ENGINE_COUPLING_MAP:475 entry (describes functions not in the file).
-- **Status:** [ ] not started
+- **Status:** [x] cut — 2026-09-09 (engine-sheet, S440); `scripts/transitCauses.test.js` green; unbenched
 
 ### Task 7: Item D — canon garbage delete (GATED on Mike's go)
 
@@ -122,6 +122,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-09 (engine-sheet, S440) — Tasks 2–6 CUT (builder-direct, same night): 4 engine/doc files + `scripts/transitCauses.test.js` 75/75; served-hood dedup caught by the test; unbenched — proves on the next 0908 fire with the dials + owner door.
 - 2026-09-09 (engine-sheet, S440) — ACCEPTED: moved to `docs/plans/`, indexed, ROLLOUT engine.183 filed; Task 1 re-verified green, Task 7 verified gone; Tasks 2–6 = engine-sheet batch on a fresh bench after the 0908 dials run.
 - 2026-09-09 (kimi) — v2 filed for review: builder corrections folded (foundation fix, single tracker read, live phase values, v3 ledger, bus lines held, bench sequencing). Task 1 shipped, commit 0806aba5.
 - 2026-09-09 (kimi) — v1 drafted and rejected in review (dead SPORTS flag, duplicate tracker read, wrong phase values, v2.1 regex source, bench conflict).

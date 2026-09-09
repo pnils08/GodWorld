@@ -20,7 +20,8 @@ var TRANSIT_METRICS_HEADERS = [
   'OnTimePerformance',
   'TrafficIndex',
   'Corridor',
-  'Notes'
+  'Notes',
+  'Factors'   // engine.183 — the row's causes, in words (weather / day / game day hoods / event hoods / initiative phase)
 ];
 
 var TRANSIT_METRICS_SHEET_NAME = 'Transit_Metrics';
@@ -64,10 +65,15 @@ var OAKLAND_BART_STATIONS = [
   },
   {
     station: 'Coliseum',
-    neighborhood: 'Coliseum',
+    // engine.183: keyed to the canon hood row (Neighborhood_Demographics /
+    // Neighborhood_Map carry East Oakland, never a 'Coliseum' row — the old key
+    // hit the 0.6 adults default and put a hood no citizen carries into
+    // S.transitState.affectedHoods). Baylight District sits on the former
+    // Coliseum site (INSTITUTIONS.md §Neighborhoods), so this station serves it.
+    neighborhood: 'East Oakland',
     baseRidership: 6000,
     character: 'event venue, airport connector',
-    corridors: ['Coliseum', 'East Oakland', 'Elmhurst']
+    corridors: ['Coliseum', 'East Oakland', 'Elmhurst', 'Baylight District']
   },
   {
     station: 'West Oakland',
@@ -111,67 +117,94 @@ var AC_TRANSIT_LINES = [
 
 /**
  * Major traffic corridors with baseline congestion.
+ *
+ * engine.183: `hoods` = the canon Neighborhood_Map hoods each corridor runs
+ * through. Game-day and initiative effects land on a corridor by hood
+ * intersection (a stadium in Baylight loads I-880, a hub build in Fruitvale
+ * loads International Blvd) — the old code named I-880 / I-580 East by string.
+ * `freeway` marks the interstates: initiative construction congests the
+ * surface street through its hood, the freeway only carries stadium traffic.
  */
 var TRAFFIC_CORRIDORS = [
   {
     corridor: 'I-880 North',
     baseTrafficIndex: 65,
     peakHours: [7, 8, 17, 18],
-    character: 'industrial freight, commuter'
+    character: 'industrial freight, commuter',
+    freeway: true,
+    hoods: ['Baylight District', 'East Oakland', 'Jack London', 'West Oakland', 'Downtown']
   },
   {
     corridor: 'I-880 South',
     baseTrafficIndex: 60,
     peakHours: [7, 8, 17, 18],
-    character: 'to San Jose corridor'
+    character: 'to San Jose corridor',
+    freeway: true,
+    hoods: ['Baylight District', 'East Oakland', 'Fruitvale', 'San Antonio']
   },
   {
     corridor: 'I-580 East',
     baseTrafficIndex: 70,
     peakHours: [6, 7, 8, 17, 18, 19],
-    character: 'contra costa commute'
+    character: 'contra costa commute',
+    freeway: true,
+    hoods: ['Grand Lake', 'Glenview', 'Dimond', 'Laurel', 'East Oakland']
   },
   {
     corridor: 'I-580 West',
     baseTrafficIndex: 55,
     peakHours: [7, 8, 17, 18],
-    character: 'to SF via bridge'
+    character: 'to SF via bridge',
+    freeway: true,
+    hoods: ['Rockridge', 'Temescal', 'Piedmont Ave', 'Grand Lake']
   },
   {
     corridor: 'I-980',
     baseTrafficIndex: 45,
     peakHours: [8, 17],
-    character: 'downtown connector'
+    character: 'downtown connector',
+    freeway: true,
+    hoods: ['Downtown', 'Uptown', 'West Oakland']
   },
   {
     corridor: 'Broadway',
     baseTrafficIndex: 50,
     peakHours: [8, 9, 12, 17, 18],
-    character: 'downtown-uptown artery'
+    character: 'downtown-uptown artery',
+    freeway: false,
+    hoods: ['Downtown', 'Uptown', 'KONO', 'Rockridge']
   },
   {
     corridor: 'International Blvd',
     baseTrafficIndex: 55,
     peakHours: [7, 8, 9, 17, 18],
-    character: 'east oakland main street'
+    character: 'east oakland main street',
+    freeway: false,
+    hoods: ['Eastlake', 'San Antonio', 'Fruitvale', 'East Oakland']
   },
   {
     corridor: 'MacArthur Blvd',
     baseTrafficIndex: 45,
     peakHours: [8, 17, 18],
-    character: 'north oakland cross-town'
+    character: 'north oakland cross-town',
+    freeway: false,
+    hoods: ['Temescal', 'Laurel', 'Dimond', 'Glenview']
   },
   {
     corridor: 'Telegraph Ave',
     baseTrafficIndex: 50,
     peakHours: [8, 12, 17, 18],
-    character: 'temescal to downtown'
+    character: 'temescal to downtown',
+    freeway: false,
+    hoods: ['Temescal', 'KONO', 'Uptown', 'Downtown']
   },
   {
     corridor: 'Grand Ave',
     baseTrafficIndex: 40,
     peakHours: [8, 12, 17],
-    character: 'lake merritt to piedmont'
+    character: 'lake merritt to piedmont',
+    freeway: false,
+    hoods: ['Lake Merritt', 'Adams Point', 'Grand Lake', 'Piedmont Ave']
   }
 ];
 
@@ -323,7 +356,8 @@ function getTransitMetrics_(ss, cycle) {
       onTimePerformance: Number(row[idx('OnTimePerformance')]) || 0,
       trafficIndex: Number(row[idx('TrafficIndex')]) || 0,
       corridor: String(row[idx('Corridor')] || ''),
-      notes: String(row[idx('Notes')] || '')
+      notes: String(row[idx('Notes')] || ''),
+      factors: idx('Factors') >= 0 ? String(row[idx('Factors')] || '') : ''
     });
   }
 
@@ -392,7 +426,8 @@ function recordTransitMetrics_(ctx, metrics) {
     metrics.onTimePerformance || 0.85,
     metrics.trafficIndex || 50,
     metrics.corridor || '',
-    metrics.notes || ''
+    metrics.notes || '',
+    metrics.factors || ''
   ];
 
   if (typeof queueAppendIntent_ === 'function') {
@@ -428,7 +463,8 @@ function batchRecordTransitMetrics_(ctx, metricsArray) {
       m.onTimePerformance || 0.85,
       m.trafficIndex || 50,
       m.corridor || '',
-      m.notes || ''
+      m.notes || '',
+      m.factors || ''
     ]);
   }
 

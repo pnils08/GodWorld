@@ -10,8 +10,24 @@
  * - Season
  * - City sentiment and economic conditions
  *
- * @version 1.2
+ * @version 1.3
  * @tier 6.4
+ *
+ * v1.3 Changes (engine.183 — the numbers carry their causes):
+ * - Game day is the sports feed: S.sportsFeedEntries (applySportsSeason_,
+ *   Phase2-SportsSeason, runs before this) has a row this cycle. The 15%
+ *   season rng roll and the prev-cycle SPORTS-domain scan are gone — the scan
+ *   was dead since v1.1 (WorldEvents_Ledger v2.1 has no Domain column).
+ * - Game-day hoods = feed HomeNeighborhood ∪ S.sportsZones; stations and
+ *   corridors take the boost by hood intersection, not by a 'Coliseum' /
+ *   'I-880' string.
+ * - Previous-cycle events read from WorldEvents_V3_Ledger (Domain, Severity,
+ *   Neighborhood); a per-hood tally lifts the stations serving those hoods.
+ * - Initiative phases move the stations they build: reads the transit slice
+ *   applyInitiativeImplementationEffects_ publishes on
+ *   S.initiativeImplementationEffects.transit (one tracker read, upstream).
+ * - Every Transit_Metrics row carries a Factors string; S.transitMetrics.factors
+ *   and getTransitStorySignals_ data name the drivers.
  *
  * v1.2 Changes:
  * - JOURNALISM AI: Added signalChain tracking to getTransitStorySignals_()
@@ -29,7 +45,21 @@
 // CONSTANTS
 // ============================================================================
 
-var TRANSIT_UPDATE_VERSION = '1.2';
+var TRANSIT_UPDATE_VERSION = '1.3';
+
+// engine.183 — how much a hood's previous-cycle events and an initiative's
+// build phase move the stations and corridors that serve the hood.
+var TRANSIT_CAUSES = {
+  EVENT_HOOD_RIDERSHIP_LIFT: 0.04,   // per recorded event in a served hood
+  EVENT_HOOD_RIDERSHIP_CAP: 0.12,
+  BUILD_ON_TIME_DROP: 0.03,          // a station under construction
+  BUILD_RIDERSHIP_MULT: 0.95,
+  BUILD_STREET_TRAFFIC: 8,           // the surface corridor through the build hood
+  OPEN_RIDERSHIP_MULT: 1.20,         // the hub is open
+  OPEN_ON_TIME_LIFT: 0.02,
+  STADIUM_BUILD_RIDERSHIP_MULT: 1.05, // Baylight under construction: the station serving it
+  STADIUM_BUILD_FREEWAY_TRAFFIC: 6    // and the freeways through it
+};
 
 // Transit variability factors
 var TRANSIT_FACTORS = {
@@ -94,11 +124,19 @@ function updateTransitMetrics_Phase2_(ctx) {
   var dayType = (holiday && holiday !== 'none') ? 'holiday' : (rng() < TRANSIT_FACTORS.WEEKEND_PROBABILITY ? 'weekend' : 'weekday');
 
   // Read PREVIOUS cycle events — current cycle events don't exist yet (generated in Phase 4)
+  // engine.183: from WorldEvents_V3_Ledger, which carries Domain + Neighborhood.
   var prevCycleEvents = loadPreviousCycleEvents_(ctx, cycle);
-  var majorEvents = countMajorEvents_(prevCycleEvents);
+  var eventSummary = summarizePrevCycleEvents_(prevCycleEvents);
+  var majorEvents = eventSummary.major;
 
-  // Check for game day (uses previous cycle events + season-based probability)
-  var gameDay = isGameDay_(ctx, rng, prevCycleEvents);
+  // engine.183: game day is the sports feed — a row this cycle means a game was
+  // played (applySportsSeason_ published S.sportsFeedEntries upstream). The
+  // hoods are where the sport physically is: feed HomeNeighborhood ∪ S.sportsZones.
+  var gameDay = isGameDay_(ctx);
+  var gameDayHoods = gameDay ? gameDayHoodsFor_(S) : [];
+
+  // engine.183: initiative build phases → the stations/corridors they touch.
+  var initiativeEffects = initiativeTransitEffects_(S);
 
   // Get demographics for ridership correlation
   var demographics = {};
@@ -113,6 +151,9 @@ function updateTransitMetrics_Phase2_(ctx) {
     dayType: dayType,
     events: majorEvents,
     gameDay: gameDay,
+    gameDayHoods: gameDayHoods,
+    eventHoods: eventSummary.byHood,
+    initiatives: initiativeEffects,
     // engine.93 Task 9: the commute matrix rides along so per-station ridership
     // can weight by who commutes IN, not just who lives nearby.
     summary: S
@@ -157,8 +198,14 @@ function updateTransitMetrics_Phase2_(ctx) {
       weather: weatherType,
       dayType: dayType,
       majorEvents: majorEvents,
-      gameDay: gameDay
+      gameDay: gameDay,
+      // engine.183 — the whole causal frame in one place
+      gameDayHoods: gameDayHoods,
+      eventHoods: eventSummary.byHood,
+      initiatives: initiativeEffects.tags
     },
+    // engine.183 — per-row causes, keyed by station / corridor name
+    causes: rowCauses_(allMetrics),
     alerts: generateTransitAlerts_(stationMetrics, corridorMetrics, context)
   };
 
@@ -313,9 +360,47 @@ function calculateStationMetrics_(station, context, demographics, rng) {
     }
   }
 
-  // Game day boost for Coliseum
-  if (context.gameDay && station.station.indexOf('Coliseum') !== -1) {
+  var causes = [];
+  // the station's own hood + the hoods it serves, each once
+  var servedHoods = intersectHoods_([station.neighborhood].concat(station.corridors || []),
+                                    [station.neighborhood].concat(station.corridors || []));
+
+  // engine.183: game day lands on the stations serving where the game IS
+  // (feed HomeNeighborhood ∪ S.sportsZones), not on a station named 'Coliseum'.
+  var gameHoodsHere = intersectHoods_(servedHoods, context.gameDayHoods || []);
+  var gameDayHere = context.gameDay && gameHoodsHere.length > 0;
+  if (gameDayHere) {
     ridershipMod *= (1 + TRANSIT_FACTORS.GAMEDAY_RIDERSHIP_BOOST);
+    causes.push('game day (' + gameHoodsHere.join(', ') + ')');
+  }
+
+  // engine.183: last cycle's recorded events in a served hood bring riders —
+  // +4% each, capped at +12% (the world's own events, WorldEvents_V3_Ledger).
+  var eventLift = 0;
+  var eventHoodNames = [];
+  var byHood = context.eventHoods || {};
+  for (var sh = 0; sh < servedHoods.length; sh++) {
+    var n = byHood[servedHoods[sh]] || 0;
+    if (n > 0) {
+      eventLift += n * TRANSIT_CAUSES.EVENT_HOOD_RIDERSHIP_LIFT;
+      eventHoodNames.push(servedHoods[sh] + (n > 1 ? ' ×' + n : ''));
+    }
+  }
+  if (eventLift > 0) {
+    eventLift = Math.min(TRANSIT_CAUSES.EVENT_HOOD_RIDERSHIP_CAP, eventLift);
+    ridershipMod *= (1 + eventLift);
+    causes.push('events in ' + eventHoodNames.join(', '));
+  }
+
+  // engine.183: an initiative building or opening in a served hood.
+  var onTimeDelta = 0;
+  var inits = (context.initiatives && context.initiatives.stations) || [];
+  for (var ii = 0; ii < inits.length; ii++) {
+    var eff = inits[ii];
+    if (intersectHoods_(servedHoods, eff.hoods).length === 0) continue;
+    ridershipMod *= eff.ridershipMult;
+    onTimeDelta += eff.onTimeDelta;
+    causes.push(eff.tag);
   }
 
   // Random variance
@@ -332,17 +417,57 @@ function calculateStationMetrics_(station, context, demographics, rng) {
   if (context.events > 2) {
     onTime -= 0.03; // Crowding affects performance
   }
+  onTime += onTimeDelta;
   onTime += (rng() - 0.5) * TRANSIT_FACTORS.ON_TIME_VARIANCE;
   onTime = Math.max(0.6, Math.min(0.98, onTime));
 
+  var notes = generateStationNotes_(station, ridership, onTime, gameDayHere);
   return {
     station: station.station,
     ridershipVolume: ridership,
     onTimePerformance: Math.round(onTime * 100) / 100,
     trafficIndex: 0, // Stations don't have traffic index
     corridor: '',
-    notes: generateStationNotes_(station, context, ridership, onTime)
+    notes: notes,
+    factors: factorsString_(context, causes)
   };
+}
+
+/**
+ * engine.183 — canon hood names shared by two lists (order of the first).
+ */
+function intersectHoods_(a, b) {
+  var out = [];
+  for (var i = 0; i < (a || []).length; i++) {
+    if ((b || []).indexOf(a[i]) >= 0 && out.indexOf(a[i]) < 0) out.push(a[i]);
+  }
+  return out;
+}
+
+/**
+ * engine.183 — the row's causes as one readable string: the cycle-wide frame
+ * (weather, day type) then the row's own drivers. Empty causes still name the
+ * frame, so no row is ever unexplained.
+ */
+function factorsString_(context, causes) {
+  var parts = [];
+  var w = context.weather || 'clear';
+  if (w !== 'clear') parts.push(w);
+  if (context.dayType && context.dayType !== 'weekday') parts.push(context.dayType);
+  for (var i = 0; i < (causes || []).length; i++) parts.push(causes[i]);
+  return parts.length ? parts.join('; ') : 'ordinary weekday';
+}
+
+/**
+ * engine.183 — station/corridor name → its Factors string, for the summary.
+ */
+function rowCauses_(allMetrics) {
+  var out = {};
+  for (var i = 0; i < (allMetrics || []).length; i++) {
+    var key = allMetrics[i].station || allMetrics[i].corridor;
+    if (key) out[key] = allMetrics[i].factors || '';
+  }
+  return out;
 }
 
 /**
@@ -372,14 +497,33 @@ function calculateCorridorTraffic_(corridor, context, rng) {
     trafficMod *= 0.5;
   }
 
-  // Coliseum corridor game day
-  if (context.gameDay && (corridor.corridor.indexOf('880') !== -1 || corridor.corridor === 'I-580 East')) {
+  var causes = [];
+  var hoods = corridor.hoods || [];
+
+  // engine.183: game-day traffic loads the corridors through the game's hoods
+  // (Baylight → I-880; the legacy Jack London / Downtown zones → I-880 North,
+  // I-980, Broadway, Telegraph), not a string-matched pair.
+  var gameHoodsHere = intersectHoods_(hoods, context.gameDayHoods || []);
+  var gameDayHere = context.gameDay && gameHoodsHere.length > 0;
+  if (gameDayHere) {
     trafficMod *= (1 + TRANSIT_FACTORS.GAMEDAY_TRAFFIC_INCREASE);
+    causes.push('game day (' + gameHoodsHere.join(', ') + ')');
+  }
+
+  // engine.183: initiative construction through this corridor's hoods.
+  var extraTraffic = 0;
+  var inits = (context.initiatives && context.initiatives.corridors) || [];
+  for (var ii = 0; ii < inits.length; ii++) {
+    var eff = inits[ii];
+    if (eff.freeway !== !!corridor.freeway) continue;
+    if (intersectHoods_(hoods, eff.hoods).length === 0) continue;
+    extraTraffic += eff.traffic;
+    causes.push(eff.tag);
   }
 
   // Random variance
   var variance = (rng() - 0.5) * TRANSIT_FACTORS.TRAFFIC_VARIANCE;
-  var traffic = Math.round(baseTraffic * trafficMod + variance);
+  var traffic = Math.round(baseTraffic * trafficMod + extraTraffic + variance);
   traffic = Math.max(10, Math.min(100, traffic));
 
   return {
@@ -388,7 +532,8 @@ function calculateCorridorTraffic_(corridor, context, rng) {
     onTimePerformance: 0,
     trafficIndex: traffic,
     corridor: corridor.corridor,
-    notes: generateCorridorNotes_(corridor, context, traffic)
+    notes: generateCorridorNotes_(context, traffic, gameDayHere),
+    factors: factorsString_(context, causes)
   };
 }
 
@@ -445,26 +590,25 @@ function calculateTrafficModLocal_(context) {
  * Transit metrics react to recent event patterns since current cycle
  * events are not generated until Phase 4.
  *
+ * engine.183: reads WorldEvents_V3_Ledger — the v2.1 ledger this used to read
+ * never carried a Domain column (recordWorldEventsv25.js writes A–V without
+ * one), so the domain branch downstream was dead and every event counted by
+ * severity only. V3 carries Domain, Severity and Neighborhood (cols E–G).
+ *
  * @param {Object} ctx - Engine context
  * @param {number} currentCycle
- * @return {Array}
+ * @return {Array} [{domain, severity, neighborhood}]
  */
 function loadPreviousCycleEvents_(ctx, currentCycle) {
   if (currentCycle <= 1) return [];
 
   var prevCycle = currentCycle - 1;
   var ss = ctx.ss;
-  var sheetName = (typeof SHEET_NAMES !== 'undefined' && SHEET_NAMES.WORLD_EVENTS_LEDGER)
-    ? SHEET_NAMES.WORLD_EVENTS_LEDGER
-    : 'WorldEvents_Ledger';
+  var sheetName = (typeof SHEET_NAMES !== 'undefined' && SHEET_NAMES.WORLD_EVENTS_V3_LEDGER)
+    ? SHEET_NAMES.WORLD_EVENTS_V3_LEDGER
+    : 'WorldEvents_V3_Ledger';
 
-  var sheet = null;
-  if (typeof getCachedSheet_ === 'function') {
-    sheet = getCachedSheet_(ss, sheetName);
-  } else {
-    sheet = ss.getSheetByName(sheetName);
-  }
-
+  var sheet = ss.getSheetByName(sheetName);
   if (!sheet || sheet.getLastRow() < 2) return [];
 
   var data = sheet.getDataRange().getValues();
@@ -474,6 +618,7 @@ function loadPreviousCycleEvents_(ctx, currentCycle) {
   var cycleIdx = header.indexOf('Cycle');
   var domainIdx = header.indexOf('Domain');
   var severityIdx = header.indexOf('Severity');
+  var hoodIdx = header.indexOf('Neighborhood');
   if (cycleIdx === -1) return [];
 
   var events = [];
@@ -483,11 +628,104 @@ function loadPreviousCycleEvents_(ctx, currentCycle) {
 
     events.push({
       domain: domainIdx >= 0 ? String(rows[i][domainIdx] || '') : '',
-      severity: severityIdx >= 0 ? String(rows[i][severityIdx] || '') : ''
+      severity: severityIdx >= 0 ? String(rows[i][severityIdx] || '') : '',
+      neighborhood: hoodIdx >= 0 ? String(rows[i][hoodIdx] || '').replace(/^\s+|\s+$/g, '') : ''
     });
   }
 
   return events;
+}
+
+/**
+ * engine.183 — the previous cycle's events as the transit engine reads them:
+ * the major-event count (unchanged rule) plus a per-hood tally of every
+ * recorded event that names a neighborhood. The tally is what lets a station
+ * fill because something happened in a hood it serves.
+ *
+ * @param {Array} worldEvents
+ * @return {{major:number, byHood:Object}}
+ */
+function summarizePrevCycleEvents_(worldEvents) {
+  var byHood = {};
+  for (var i = 0; i < (worldEvents || []).length; i++) {
+    var hood = worldEvents[i].neighborhood;
+    if (!hood) continue;
+    byHood[hood] = (byHood[hood] || 0) + 1;
+  }
+  return { major: countMajorEvents_(worldEvents || []), byHood: byHood };
+}
+
+/**
+ * engine.183 — where the game is this cycle: every feed row's HomeNeighborhood
+ * plus the stadium zones applySportsSeason_ derived (legacy Jack London /
+ * Downtown until Baylight opens, then Baylight District). Canon hood names only.
+ *
+ * @param {Object} S - ctx.summary
+ * @return {Array<string>}
+ */
+function gameDayHoodsFor_(S) {
+  var out = [];
+  var entries = (S && S.sportsFeedEntries) || [];
+  for (var i = 0; i < entries.length; i++) {
+    var h = String(entries[i].homeNeighborhood || entries[i].neighborhood || '').replace(/^\s+|\s+$/g, '');
+    if (h && out.indexOf(h) < 0) out.push(h);
+  }
+  var zones = (S && S.sportsZones) || [];
+  for (var z = 0; z < zones.length; z++) {
+    if (zones[z] && out.indexOf(zones[z]) < 0) out.push(zones[z]);
+  }
+  return out;
+}
+
+/**
+ * engine.183 — the transit slice applyInitiativeImplementationEffects_ publishes
+ * (Phase2-InitiativeEffects, upstream of this phase; one tracker read for the
+ * whole engine) mapped to station / corridor effects. Live phase vocabulary
+ * only (docs/plans/2026-06-01-initiative-tracker-contract.md): a design or
+ * visioning phase names itself on the row and moves nothing; construction
+ * moves the station and its street; open lifts the station for good. Baylight
+ * is name-matched: its construction loads the freeways and the station serving
+ * the site; once the sport is in it the feed's game-day path is the effect.
+ *
+ * @param {Object} S - ctx.summary
+ * @return {{stations:Array, corridors:Array, tags:Array<string>}}
+ */
+function initiativeTransitEffects_(S) {
+  var out = { stations: [], corridors: [], tags: [] };
+  var slice = S && S.initiativeImplementationEffects && S.initiativeImplementationEffects.transit;
+  if (!slice || !slice.length) return out;
+
+  for (var i = 0; i < slice.length; i++) {
+    var it = slice[i];
+    var phase = String(it.phase || '').toLowerCase();
+    var hoods = it.hoods || [];
+    if (!hoods.length) continue;
+    var tag = it.name + ': ' + phase;
+    var building = phase.indexOf('construction') === 0;
+    var open = phase === 'operational' || phase === 'complete' || phase === 'open';
+
+    if (it.baylight) {
+      if (building) {
+        out.stations.push({ hoods: hoods, ridershipMult: TRANSIT_CAUSES.STADIUM_BUILD_RIDERSHIP_MULT, onTimeDelta: 0, tag: tag });
+        out.corridors.push({ hoods: hoods, freeway: true, traffic: TRANSIT_CAUSES.STADIUM_BUILD_FREEWAY_TRAFFIC, tag: tag });
+        out.tags.push(tag);
+      }
+      // operational Baylight: the sport is in it — the game-day path carries it
+      continue;
+    }
+
+    if (building && phase !== 'construction-planning') {
+      out.stations.push({ hoods: hoods, ridershipMult: TRANSIT_CAUSES.BUILD_RIDERSHIP_MULT, onTimeDelta: -TRANSIT_CAUSES.BUILD_ON_TIME_DROP, tag: tag });
+      out.corridors.push({ hoods: hoods, freeway: false, traffic: TRANSIT_CAUSES.BUILD_STREET_TRAFFIC, tag: tag });
+    } else if (open) {
+      out.stations.push({ hoods: hoods, ridershipMult: TRANSIT_CAUSES.OPEN_RIDERSHIP_MULT, onTimeDelta: TRANSIT_CAUSES.OPEN_ON_TIME_LIFT, tag: tag });
+    } else {
+      // planning / visioning / design: the row names it, the number holds
+      out.stations.push({ hoods: hoods, ridershipMult: 1, onTimeDelta: 0, tag: tag });
+    }
+    out.tags.push(tag);
+  }
+  return out;
 }
 
 /**
@@ -516,27 +754,17 @@ function countMajorEvents_(worldEvents) {
 /**
  * Determine if it's a game day.
  *
+ * engine.183: a game was played this cycle iff the sports feed has a row for
+ * it — applySportsSeason_ (Phase2-SportsSeason, before this phase) publishes
+ * the rows on S.sportsFeedEntries. No rng, no prev-cycle domain scan: the
+ * feed is the record of games, and the quiet case is the normal case.
+ *
  * @param {Object} ctx
- * @param {Function} rng
  * @return {boolean}
  */
-function isGameDay_(ctx, rng, prevCycleEvents) {
+function isGameDay_(ctx) {
   var S = ctx.summary || {};
-
-  // Check previous cycle for sports events (current cycle events don't exist yet)
-  var events = prevCycleEvents || [];
-  for (var i = 0; i < events.length; i++) {
-    var domain = (events[i].domain || events[i]._domain || '').toUpperCase();
-    if (domain === 'SPORTS') return true;
-  }
-
-  // Season-based probability (baseball season ~50% of days have games)
-  var season = (S.season || 'spring').toLowerCase();
-  if (season === 'spring' || season === 'summer' || season === 'fall') {
-    return rng() < 0.15;
-  }
-
-  return false;
+  return ((S.sportsFeedEntries || []).length > 0);
 }
 
 /**
@@ -577,10 +805,10 @@ function avgTraffic_(corridorMetrics) {
 /**
  * Generate station notes.
  */
-function generateStationNotes_(station, context, ridership, onTime) {
+function generateStationNotes_(station, ridership, onTime, gameDayHere) {
   var notes = [];
 
-  if (context.gameDay && station.station.indexOf('Coliseum') !== -1) {
+  if (gameDayHere) {
     notes.push('game day crowds');
   }
   if (onTime < 0.75) {
@@ -600,7 +828,7 @@ function generateStationNotes_(station, context, ridership, onTime) {
 /**
  * Generate corridor notes.
  */
-function generateCorridorNotes_(corridor, context, traffic) {
+function generateCorridorNotes_(context, traffic, gameDayHere) {
   var notes = [];
 
   if (traffic > 75) {
@@ -615,7 +843,7 @@ function generateCorridorNotes_(corridor, context, traffic) {
     notes.push('weather-related slowdowns');
   }
 
-  if (context.gameDay && (corridor.corridor.indexOf('880') !== -1)) {
+  if (gameDayHere) {
     notes.push('event traffic');
   }
 
@@ -688,10 +916,49 @@ function createTransitSignalChain_(detected, value, context) {
   }];
 }
 
+/**
+ * engine.183 — the drivers behind this cycle's numbers, as a phrase the desk
+ * can print: "game day in Baylight District; events in Fruitvale; Fruitvale
+ * Transit Hub Phase II: construction-active". Empty when nothing but the
+ * weather and the calendar moved.
+ */
+function transitDriversPhrase_(factors) {
+  var f = factors || {};
+  var parts = [];
+  if (f.gameDay) parts.push('game day' + ((f.gameDayHoods || []).length ? ' in ' + f.gameDayHoods.join(', ') : ''));
+  var hoods = [];
+  for (var h in (f.eventHoods || {})) if (Object.prototype.hasOwnProperty.call(f.eventHoods, h)) hoods.push(h);
+  if (hoods.length) parts.push('events in ' + hoods.join(', '));
+  for (var i = 0; i < (f.initiatives || []).length; i++) parts.push(f.initiatives[i]);
+  if (f.weather && f.weather !== 'clear') parts.push(f.weather);
+  if (f.dayType && f.dayType !== 'weekday') parts.push(f.dayType);
+  return parts.join('; ');
+}
+
+/**
+ * engine.183 — attach each alert's row cause so a desk can say why.
+ */
+function alertsWithCauses_(alerts, causes) {
+  var out = [];
+  for (var i = 0; i < alerts.length; i++) {
+    var a = alerts[i];
+    var key = a.station || a.corridor || '';
+    var copy = {};
+    for (var k in a) if (Object.prototype.hasOwnProperty.call(a, k)) copy[k] = a[k];
+    copy.cause = (causes && causes[key]) || '';
+    out.push(copy);
+  }
+  return out;
+}
+
 function getTransitStorySignals_(ctx) {
   var S = ctx.summary || {};
   var transitData = S.transitMetrics || {};
   var alerts = transitData.alerts || [];
+  // engine.183 — every signal carries the causal frame + per-row causes
+  var factors = transitData.factors || {};
+  var causes = transitData.causes || {};
+  var drivers = transitDriversPhrase_(factors);
 
   var signals = [];
 
@@ -703,8 +970,8 @@ function getTransitStorySignals_(ctx) {
       priority: 2,
       headline: 'BART service delays reported',
       desk: 'metro',
-      data: { alerts: serviceAlerts },
-      signalChain: createTransitSignalChain_('service_disruption', serviceAlerts.length, 'BART delays detected')
+      data: { alerts: alertsWithCauses_(serviceAlerts, causes), factors: factors, drivers: drivers },
+      signalChain: createTransitSignalChain_('service_disruption', serviceAlerts.length, drivers ? 'BART delays — ' + drivers : 'BART delays detected')
     });
   }
 
@@ -716,8 +983,8 @@ function getTransitStorySignals_(ctx) {
       priority: 2,
       headline: 'Heavy traffic across Oakland corridors',
       desk: 'metro',
-      data: { alerts: trafficAlerts },
-      signalChain: createTransitSignalChain_('traffic_congestion', trafficAlerts.length, 'Multiple corridors affected')
+      data: { alerts: alertsWithCauses_(trafficAlerts, causes), factors: factors, drivers: drivers },
+      signalChain: createTransitSignalChain_('traffic_congestion', trafficAlerts.length, drivers ? 'Multiple corridors — ' + drivers : 'Multiple corridors affected')
     });
   }
 
@@ -726,10 +993,10 @@ function getTransitStorySignals_(ctx) {
     signals.push({
       type: 'transit_ridership',
       priority: 1,
-      headline: 'Strong BART ridership day',
+      headline: drivers ? 'Strong BART ridership day — ' + drivers : 'Strong BART ridership day',
       desk: 'metro',
-      data: { ridership: transitData.totalRidership },
-      signalChain: createTransitSignalChain_('ridership_milestone', transitData.totalRidership, 'Above 60k threshold')
+      data: { ridership: transitData.totalRidership, factors: factors, drivers: drivers, causes: causes },
+      signalChain: createTransitSignalChain_('ridership_milestone', transitData.totalRidership, drivers ? 'Above 60k — ' + drivers : 'Above 60k threshold')
     });
   }
 
@@ -740,8 +1007,8 @@ function getTransitStorySignals_(ctx) {
       priority: 3,
       headline: 'BART on-time performance drops',
       desk: 'metro',
-      data: { onTime: transitData.avgOnTime },
-      signalChain: createTransitSignalChain_('performance_drop', Math.round(transitData.avgOnTime * 100), 'Below 75% on-time')
+      data: { onTime: transitData.avgOnTime, factors: factors, drivers: drivers, causes: causes },
+      signalChain: createTransitSignalChain_('performance_drop', Math.round(transitData.avgOnTime * 100), drivers ? 'Below 75% on-time — ' + drivers : 'Below 75% on-time')
     });
   } else if (transitData.avgOnTime > 0.92) {
     signals.push({
@@ -749,20 +1016,21 @@ function getTransitStorySignals_(ctx) {
       priority: 1,
       headline: 'BART reports strong on-time performance',
       desk: 'metro',
-      data: { onTime: transitData.avgOnTime },
+      data: { onTime: transitData.avgOnTime, factors: factors, drivers: drivers },
       signalChain: createTransitSignalChain_('performance_excellence', Math.round(transitData.avgOnTime * 100), 'Above 92% on-time')
     });
   }
 
-  // Game day transit
-  if (transitData.factors && transitData.factors.gameDay) {
+  // Game day transit — engine.183: the headline names where the game was
+  if (factors.gameDay) {
+    var where = (factors.gameDayHoods || []).join(', ');
     signals.push({
       type: 'gameday_transit',
       priority: 2,
-      headline: 'Coliseum crowds impact transit',
+      headline: (where ? where : 'Game-day') + ' crowds impact transit',
       desk: 'sports',
-      data: transitData.factors,
-      signalChain: createTransitSignalChain_('gameday_impact', 1, 'Game day detected')
+      data: { factors: factors, drivers: drivers, causes: causes },
+      signalChain: createTransitSignalChain_('gameday_impact', 1, where ? 'Game in ' + where + ' (sports feed)' : 'Game day (sports feed)')
     });
   }
 

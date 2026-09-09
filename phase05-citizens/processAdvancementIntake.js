@@ -164,8 +164,15 @@ function processAdvancementIntake_(ctx) {
     DRIP_CAP_PER_CYCLE - emergenceResults.queued);
   results.familyMatchesQueued = familyResults.queued;
 
+  // engine.96 Task 12 (S440): the owner door — "the business is the reason."
+  // Takes only the cap slots emergence and the family door left this cycle.
+  var ownerResults = checkBusinessOwnerPromotions_(ctx, cycle,
+    DRIP_CAP_PER_CYCLE - emergenceResults.queued - familyResults.queued);
+  results.ownerMintsQueued = ownerResults.queued;
+
   var advResults = processAdvancementRows_(ctx, now, cycle);
   results.advancementsProcessed = advResults.processed;
+  results.ownersWired = advResults.ownersWired;
 
   // engine.59 (S320): namers → bonds. A promoted GC enters the world knowing
   // the citizens who kept naming them — friendship bonds seeded from the
@@ -580,6 +587,7 @@ function processAdvancementRows_(ctx, now, cycle) {
   var iMatchName = findColByName_(intakeHeaders, 'MatchName');
   var iHouseholdKey = findColByName_(intakeHeaders, 'HouseholdKey');
   var iGenderQ = findColByName_(intakeHeaders, 'Gender');
+  var iOwnerBiz = findColByName_(intakeHeaders, 'OwnerOfBizId'); // engine.96 Task 12 — owner-door payload (blank on every other row)
 
   var lPopId = findColByName_(ledgerHeaders, 'POPID');
   var lFirst = findColByName_(ledgerHeaders, 'First');
@@ -621,6 +629,7 @@ function processAdvancementRows_(ctx, now, cycle) {
   var advNameIndex = buildNameIndex_(ledgerRows, lFirst, lLast, null, 0);
   var advSalaryPools = (typeof buildIntakeSalaryPools_ === 'function') ? buildIntakeSalaryPools_(ctx) : null;
   var householdMints = {}; // engine.109: HouseholdKey -> { head, members[] } minted this pass
+  var ownerMints = []; // engine.96 Task 12: rows queued with OwnerOfBizId minted this pass
 
   for (var i = 1; i < intakeData.length; i++) {
     var row = intakeData[i];
@@ -647,6 +656,7 @@ function processAdvancementRows_(ctx, now, cycle) {
     var matchName = iMatchName >= 0 ? String(row[iMatchName] || '').trim() : '';
     var householdKey = iHouseholdKey >= 0 ? String(row[iHouseholdKey] || '').trim() : '';
     var queuedGender = iGenderQ >= 0 ? String(row[iGenderQ] || '').trim().toLowerCase() : '';
+    var ownerBiz = iOwnerBiz >= 0 ? String(row[iOwnerBiz] || '').trim() : '';
 
     var advKey = normalizeCitizenName_(first) + ' ' + normalizeCitizenName_(last);
     var advHits = advNameIndex[advKey] || [];
@@ -671,8 +681,8 @@ function processAdvancementRows_(ctx, now, cycle) {
     // engine.66 — a family-drip row must mint a NEW citizen; a name collision
     // with an existing ledger row means the wiring would land on the wrong
     // person. Skip and release the slot (GC row stays Active, re-drawable).
-    if ((matchPop || matchName || householdKey) && existingRow >= 0) {
-      Logger.log('processAdvancementRows_: ' + (householdKey ? 'household' : 'family-drip') + ' row "' + first + ' ' + last +
+    if ((matchPop || matchName || householdKey || ownerBiz) && existingRow >= 0) {
+      Logger.log('processAdvancementRows_: ' + (householdKey ? 'household' : ownerBiz ? 'owner-door' : 'family-drip') + ' row "' + first + ' ' + last +
         '" collides with existing ledger citizen — row skipped' + (householdKey ? '' : ', slot released'));
       rowsToClear.push(i + 1);
       continue;
@@ -913,6 +923,7 @@ function processAdvancementRows_(ctx, now, cycle) {
         wireFamilyMatch_(ctx, ledgerRows.length - 1, newPopId, matchPop, matchType, now, cycle, logSheet,
           householdKey ? 'household intake' : 'drip lottery');
       }
+      if (ownerBiz) ownerMints.push({ pop: newPopId, idx: ledgerRows.length - 1, biz: ownerBiz }); // engine.96 Task 12
       if (householdKey) {
         if (!householdMints[householdKey]) householdMints[householdKey] = { head: null, members: [] };
         var hhMint = { pop: newPopId, idx: ledgerRows.length - 1, type: matchType || 'head', linked: !!(matchPop && matchType) };
@@ -927,6 +938,8 @@ function processAdvancementRows_(ctx, now, cycle) {
   
   var hhFormed = formIntakeHouseholds_(ctx, householdMints, cycle, now, logSheet);
   results.householdsFormed = hhFormed.formed;
+  var owned = wireBusinessOwners_(ctx, ownerMints, cycle, now, logSheet); // engine.96 Task 12
+  results.ownersWired = owned.wired;
 
   if (rowsToClear.length > 0) {
     rowsToClear.sort(function(a, b) { return b - a; });
@@ -1707,6 +1720,244 @@ function checkFamilyMatchPromotions_(ctx, cycle, slots) {
       ' won the family lottery — ' + won.type + ' of ' + won.targetPop + ' (C' + cycle + ')');
   }
   return results;
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// engine.96 Task 12 (S440, builder go 2026-09-08) — THE OWNER DOOR
+// "The business is the reason." The third drip door out of Generic_Citizens,
+// beside emergence (engine.58, earned) and family-match (engine.66, chance).
+// Reel 1 draws an ownerless private business weighted by PROFIT — the number
+// applyOwnerDraw_ pays from (engine.96 Task 10) — so the wealthy tier gets its
+// owners first and the shop tail trickles. Reel 2 draws one Active Generic
+// citizen from the business's own hood (engine.66b: same hood REQUIRED), old
+// enough to own it. The business writes the RoleType at mint the way the
+// family door writes the surname; the pool's trade rides in the Notes.
+// Shares DRIP_CAP_PER_CYCLE (Mike-pinned S324): takes only the slots the two
+// earlier doors left. Key_Personnel lands by cell intent at Phase 10, so the
+// books pay the owner from the cycle after the mint.
+// Tunables: World_Config bizOwnerMintP / bizOwnerMaxStaff / bizOwnerMinAge /
+// bizOwnerMinProfit (ENGINE96_CONFIG_SEEDS, self-armed at open).
+// ═══════════════════════════════════════════════════════════════════════════
+var OWNER_DOOR_REQUIRED_KEYS = ['bizOwnerMintP', 'bizOwnerMaxStaff', 'bizOwnerMinAge', 'bizOwnerMinProfit'];
+// Institutions, public bodies, faith, and the real-world vendors on the ledger
+// never draw an owner — an explicit denylist on Sector and Name, not an income
+// cut (a hospital out-earns every contractor). classifyMintSector_'s
+// file-scoped duplication pattern, deliberate.
+var OWNER_DOOR_INST_SECTOR_RE = /public|municipal|government|transit|utilit|education|school|legal|judicial|safety|police|fire|port|logistic|faith|church|synagogue|mosque|temple|community|housing|social|workforce|stadium|franchise|sports|media|journalism|platform|cloud|research|agent|science|development|authority|corporate|civic/i;
+var OWNER_DOOR_INST_NAME_RE = /authority|department|county|city of|unified|public|district$/i;
+var OWNER_QUEUE_COLS_ = ['BirthYear', 'Neighborhood', 'EmployerBizId', 'OwnerOfBizId', 'Gender'];
+
+function ownerDoorConfig_(ctx) {
+  var cfg = (ctx && ctx.config) || {};
+  var out = {}, missing = [];
+  for (var i = 0; i < OWNER_DOOR_REQUIRED_KEYS.length; i++) {
+    var k = OWNER_DOOR_REQUIRED_KEYS[i], v = cfg[k];
+    if (v === undefined || v === null || v === '' || isNaN(Number(v))) missing.push(k);
+    else out[k] = Number(v);
+  }
+  if (missing.length) throw new Error('checkBusinessOwnerPromotions_: World_Config missing ' + missing.join(', ') + ' (engine.96 Task 12 keys — ensureEngine96Config_ self-arms them at open)');
+  return out;
+}
+
+// The businesses the door can draw: no Key_Personnel, not an institution, not
+// over the staff cap, the books in profit, and room on the stated headcount
+// for one more tracked worker (the populator's own mintRoom rule — without it
+// a carried-but-full citizen is re-homed at another employer while
+// Key_Personnel points here). Returns [{ id, name, hood, profit }].
+function buildOwnerDoorPool_(ctx, cfg) {
+  var ss = ctx.ss;
+  var sheet = ss ? ss.getSheetByName('Business_Ledger') : null;
+  if (!sheet) return [];
+  var data = sheet.getDataRange().getValues();
+  if (!data || data.length < 2) return [];
+  var bh = data[0];
+  var bId = bh.indexOf('BIZ_ID'), bNm = bh.indexOf('Name'), bSec = bh.indexOf('Sector'), bHood = bh.indexOf('Neighborhood'),
+      bRev = bh.indexOf('Annual_Revenue'), bCnt = bh.indexOf('Employee_Count'), bSal = bh.indexOf('Avg_Salary'), bKP = bh.indexOf('Key_Personnel');
+  if (bId < 0 || bNm < 0 || bSec < 0 || bHood < 0 || bRev < 0 || bCnt < 0 || bSal < 0 || bKP < 0) {
+    throw new Error('buildOwnerDoorPool_: Business_Ledger missing one of BIZ_ID/Name/Sector/Neighborhood/Annual_Revenue/Employee_Count/Avg_Salary/Key_Personnel');
+  }
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var lEmp = h.indexOf('EmployerBizId'), lStatus = h.indexOf('Status');
+  var tracked = {};
+  if (lEmp >= 0) {
+    for (var r = 0; r < rows.length; r++) {
+      var row = rows[r];
+      if (!row) continue;
+      if (lStatus >= 0 && String(row[lStatus] || 'active').toLowerCase() !== 'active') continue;
+      var e = String(row[lEmp] || '').trim();
+      if (e.indexOf('BIZ-') === 0) tracked[e] = (tracked[e] || 0) + 1;
+    }
+  }
+  var pool = [];
+  for (var b = 1; b < data.length; b++) {
+    var id = String(data[b][bId] || '').trim();
+    if (!id) continue;
+    if (String(data[b][bKP] || '').trim()) continue; // already names its people
+    var name = String(data[b][bNm] || '').trim();
+    if (OWNER_DOOR_INST_SECTOR_RE.test(String(data[b][bSec] || '')) || OWNER_DOOR_INST_NAME_RE.test(name)) continue;
+    var rawEmp = data[b][bCnt];
+    var emp = Number(rawEmp);
+    if (rawEmp === '' || rawEmp === null || isNaN(emp) || emp > cfg.bizOwnerMaxStaff) continue;
+    if (!(emp > (tracked[id] || 0))) continue; // no room on the stated headcount
+    var profit = businessProfit_(data[b][bRev], emp, data[b][bSal]);
+    if (profit === null || profit <= 0 || profit < cfg.bizOwnerMinProfit) continue;
+    pool.push({ id: id, name: name, hood: String(data[b][bHood] || '').trim(), profit: profit });
+  }
+  return pool;
+}
+
+function checkBusinessOwnerPromotions_(ctx, cycle, slots) {
+  var results = { queued: 0, whiffs: 0, eligible: 0 };
+  if (!slots || slots <= 0) return results;
+  if (!ctx || !ctx.ledger || !ctx.ss || typeof safeRand_ !== 'function') return results;
+  // A cycle event — manual admin runs (runAdvancementIntakeManual) carry no
+  // ctx.rng/rngSeed and must not fire it (safeRand_ would throw).
+  if (typeof ctx.rng !== 'function' &&
+      !(ctx.config && typeof ctx.config.rngSeed === 'number')) return results;
+  var cfg = ownerDoorConfig_(ctx);
+  var rng = safeRand_(ctx);
+  var ss = ctx.ss;
+
+  var pool = buildOwnerDoorPool_(ctx, cfg);
+  results.eligible = pool.length;
+  if (!pool.length) return results;
+
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
+  if (!genericSheet) return results;
+  var gData = genericSheet.getDataRange().getValues();
+  if (gData.length < 2) return results;
+  var gh = gData[0];
+  var gF = findColByName_(gh, 'First'), gL = findColByName_(gh, 'Last'), gB = findColByName_(gh, 'BirthYear'),
+      gA = findColByName_(gh, 'Age'), gN = findColByName_(gh, 'Neighborhood'), gO = findColByName_(gh, 'Occupation'),
+      gS = findColByName_(gh, 'Status'), gX = findColByName_(gh, 'Sex');
+  if (gF < 0 || gL < 0 || gN < 0) return results;
+  var simYear = simYearOf_(ctx, cycle);
+  var birthYearOf = function(gRow) {
+    var by = gB >= 0 ? (Number(gRow[gB]) || 0) : 0;
+    if (!by && gA >= 0 && Number(gRow[gA]) > 0) by = simYear - Number(gRow[gA]); // engine.164
+    return by;
+  };
+  var byHood = {}; // hood -> [gData index]: Active, named, old enough to own
+  for (var g = 1; g < gData.length; g++) {
+    if (gS >= 0 && String(gData[g][gS] || '').toLowerCase() !== 'active') continue;
+    if (!String(gData[g][gF] || '').trim() || !String(gData[g][gL] || '').trim()) continue;
+    var by = birthYearOf(gData[g]);
+    if (!by || (simYear - by) < cfg.bizOwnerMinAge) continue;
+    var hood = String(gData[g][gN] || '').trim();
+    if (!hood) continue;
+    if (!byHood[hood]) byHood[hood] = [];
+    byHood[hood].push(g);
+  }
+
+  var advSheet = requireTab_(ss, 'Advancement_Intake1'); // engine.119: no runtime create
+  var advHeaders = advSheet.getRange(1, 1, 1, advSheet.getLastColumn()).getValues()[0];
+  for (var e = 0; e < OWNER_QUEUE_COLS_.length; e++) {
+    if (findColByName_(advHeaders, OWNER_QUEUE_COLS_[e]) < 0) {
+      ensureGridColumns_(advSheet, advHeaders.length + 1);
+      advSheet.getRange(1, advHeaders.length + 1).setValue(OWNER_QUEUE_COLS_[e]); // schema-setup carve-out, the drip queue's class
+      advHeaders.push(OWNER_QUEUE_COLS_[e]);
+    }
+  }
+  var aF = findColByName_(advHeaders, 'First'), aL = findColByName_(advHeaders, 'Last'),
+      aR = findColByName_(advHeaders, 'RoleType'), aT = findColByName_(advHeaders, 'Tier'),
+      aC = findColByName_(advHeaders, 'ClockMode'), aNo = findColByName_(advHeaders, 'Notes'),
+      aBY = findColByName_(advHeaders, 'BirthYear'), aNB = findColByName_(advHeaders, 'Neighborhood'),
+      aEmp = findColByName_(advHeaders, 'EmployerBizId'), aOwn = findColByName_(advHeaders, 'OwnerOfBizId'),
+      aG = findColByName_(advHeaders, 'Gender');
+
+  for (var s = 0; s < slots; s++) {
+    if (!pool.length) break;
+    if (rng() >= cfg.bizOwnerMintP) continue; // the event did not fire this slot
+    // Reel 1: the business, by profit
+    var tot = 0;
+    for (var p = 0; p < pool.length; p++) tot += pool[p].profit;
+    var roll = rng() * tot, pick = pool.length - 1;
+    for (var q = 0; q < pool.length; q++) { roll -= pool[q].profit; if (roll <= 0) { pick = q; break; } }
+    var biz = pool[pick];
+    pool.splice(pick, 1); // one draw per business per cycle, hit or whiff
+    // Reel 2: someone from its hood
+    var cands = byHood[biz.hood] || [];
+    if (!cands.length) {
+      results.whiffs++;
+      Logger.log('checkBusinessOwnerPromotions_: ' + biz.name + ' drew, but no one in ' + (biz.hood || '(no hood)') + ' fits (C' + cycle + ')');
+      continue;
+    }
+    var ci = Math.floor(rng() * cands.length);
+    var gRow = gData[cands[ci]];
+    cands.splice(ci, 1);
+    var first = String(gRow[gF]).trim(), last = String(gRow[gL]).trim();
+    var trade = gO >= 0 ? String(gRow[gO] || '').trim() : '';
+    var sex = gX >= 0 ? String(gRow[gX] || '').trim().toLowerCase() : '';
+    var out = new Array(advHeaders.length).fill('');
+    if (aF >= 0) out[aF] = first;
+    if (aL >= 0) out[aL] = last;
+    if (aR >= 0) out[aR] = 'Owner, ' + biz.name;
+    if (aT >= 0) out[aT] = 4;
+    if (aC >= 0) out[aC] = 'ENGINE';
+    if (aNo >= 0) out[aNo] = 'Owner door — ' + biz.name + ' (' + biz.id + '), C' + cycle +
+      (trade ? '; the pool listed them as ' + trade : '') + ' (engine.96 Task 12: the business is the reason)';
+    if (aBY >= 0) out[aBY] = birthYearOf(gRow);
+    if (aNB >= 0) out[aNB] = String(gRow[gN]).trim();
+    if (aEmp >= 0) out[aEmp] = biz.id;
+    if (aOwn >= 0) out[aOwn] = biz.id;
+    if (aG >= 0 && (sex === 'male' || sex === 'female')) out[aG] = sex;
+    advSheet.appendRow(out); // Phase-5 direct write to the promotion queue — the drip writers' class (§9)
+    results.queued++;
+    Logger.log('checkBusinessOwnerPromotions_: ' + first + ' ' + last + ' takes over ' + biz.name + ' in ' + biz.hood +
+      ' (C' + cycle + ', profit $' + biz.profit + ')');
+  }
+  return results;
+}
+
+/**
+ * After a processAdvancementRows_ pass: every row queued with OwnerOfBizId
+ * becomes that business's owner on the Business_Ledger — Key_Personnel by
+ * Phase-10 cell intent (never a direct write), a [Business] life line, the
+ * log row, a story hook. applyOwnerDraw_ reads the sheet, so the books pay
+ * from the next cycle. A seat that filled in the meantime is left alone and
+ * logged — the citizen is minted either way.
+ */
+function wireBusinessOwners_(ctx, mints, cycle, now, logSheet) {
+  var out = { wired: 0, skipped: 0 };
+  if (!ctx || !ctx.ledger || !ctx.ss || !mints || !mints.length) return out;
+  var sheet = ctx.ss.getSheetByName('Business_Ledger');
+  if (!sheet) return out;
+  var data = sheet.getDataRange().getValues();
+  var bh = data[0] || [];
+  var bId = bh.indexOf('BIZ_ID'), bNm = bh.indexOf('Name'), bHood = bh.indexOf('Neighborhood'), bKP = bh.indexOf('Key_Personnel');
+  if (bId < 0 || bKP < 0) return out;
+  var rowOf = {};
+  for (var b = 1; b < data.length; b++) { var id = String(data[b][bId] || '').trim(); if (id && !rowOf[id]) rowOf[id] = b; }
+  var h = ctx.ledger.headers, rows = ctx.ledger.rows;
+  var iFirst = h.indexOf('First'), iLast = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'), iHood = h.indexOf('Neighborhood');
+  var stamp = 'Y' + (Math.floor((cycle - 1) / 52) + 1) + 'C' + (((cycle - 1) % 52) + 1);
+  for (var m = 0; m < mints.length; m++) {
+    var mt = mints[m], b1 = rowOf[mt.biz];
+    var row = rows[mt.idx];
+    var name = (String(row[iFirst] || '') + ' ' + String(row[iLast] || '')).trim();
+    if (!b1) { out.skipped++; Logger.log('wireBusinessOwners_: ' + mt.biz + ' is not on the Business_Ledger — ' + name + ' (' + mt.pop + ') minted unlinked'); continue; }
+    if (String(data[b1][bKP] || '').trim()) { out.skipped++; Logger.log('wireBusinessOwners_: ' + mt.biz + ' already names its people — ' + name + ' (' + mt.pop + ') minted unlinked'); continue; }
+    var bizName = bNm >= 0 ? String(data[b1][bNm] || mt.biz) : mt.biz;
+    var hood = bHood >= 0 ? String(data[b1][bHood] || '') : (iHood >= 0 ? String(row[iHood] || '') : '');
+    queueCellIntent_(ctx, 'Business_Ledger', b1 + 1, bKP + 1, mt.pop + ' ' + name + ' (owner)',
+      'engine.96 Task 12 owner door — Key_Personnel', 'economy', 90);
+    data[b1][bKP] = mt.pop; // a second mint this pass sees the seat taken
+    if (iLife >= 0) row[iLife] = (row[iLife] ? row[iLife] + '\n' : '') + stamp + ' — [Business] Took over ' + bizName + ' in ' + hood + ' — the business is the reason';
+    if (logSheet) logSheet.appendRow([now, mt.pop, name, 'Business-Owner', 'Became the owner of ' + bizName + ' — ' + hood + ' (engine.96 Task 12)', hood, cycle]);
+    if (ctx.summary) {
+      ctx.summary.storyHooks = ctx.summary.storyHooks || [];
+      ctx.summary.storyHooks.push({
+        hookType: 'BUSINESS_OWNER_ARRIVED', severity: 3, priority: 2,
+        description: name + ' takes over ' + bizName + ' in ' + hood,
+        cycleGenerated: cycle, neighborhood: hood, domain: 'BUSINESS',
+        text: name + ' is the new owner of ' + bizName + ' in ' + hood + ' (C' + cycle + ')'
+      });
+    }
+    ctx.ledger.dirty = true;
+    out.wired++;
+  }
+  if (out.wired || out.skipped) Logger.log('wireBusinessOwners_ engine.96 T12: ' + out.wired + ' wired, ' + out.skipped + ' skipped');
+  return out;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

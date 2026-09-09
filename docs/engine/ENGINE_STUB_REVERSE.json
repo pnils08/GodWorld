@@ -2,7 +2,7 @@
   "generated": "2026-09-08",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 184,
-  "functionsMapped": 1353,
+  "functionsMapped": 1358,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1566,6 +1566,7 @@
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::emitTrajectoryHooks_",
         "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_",
+        "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/processAdvancementIntake.js::wireFamilyMatch_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
@@ -1594,6 +1595,7 @@
         "phase05-citizens/migrationTrackingEngine.js::processRelocations_",
         "phase05-citizens/neighborhoodTrajectoryEngine.js::emitTrajectoryHooks_",
         "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_",
+        "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/processAdvancementIntake.js::wireFamilyMatch_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase07-evening-media/storyHook.js::storyHookEngine_",
@@ -4268,6 +4270,7 @@
         "phase05-citizens/citizenContextBuilder.js::getCitizensForQuotes",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
+        "phase05-citizens/processAdvancementIntake.js::checkBusinessOwnerPromotions_",
         "phase05-citizens/processAdvancementIntake.js::checkEmergencePromotions_",
         "phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_",
         "phase05-citizens/processAdvancementIntake.js::markAsEmergedInGeneric_",
@@ -4453,6 +4456,7 @@
         "phase05-citizens/applyChaosDecay.js::applyChaosDecay_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_"
       ],
       "readers": [
@@ -4472,6 +4476,8 @@
         "phase05-citizens/generationalWealthEngine.js::applyTrackedEmployerFloor_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
+        "phase05-citizens/processAdvancementIntake.js::buildOwnerDoorPool_",
+        "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/runCareerEngine.js::applyEmployerSuccess_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",

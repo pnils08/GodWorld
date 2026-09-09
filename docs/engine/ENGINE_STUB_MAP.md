@@ -1182,6 +1182,8 @@
 
 - **casinoResolveUndocked_(wager, feed, cycle)**
 
+- **casinoResolveSports_(wager, feed)**
+
 - **casinoResolve_(wager, feeds, cycle)**
 
 - **casinoApplyMoney_(nw, debt, stake, payout, won)**
@@ -1887,6 +1889,21 @@
   Config: ctx.config.rngSeed
   Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
+
+- **ownerDoorConfig_(ctx)**
+
+- **buildOwnerDoorPool_(ctx, cfg)**
+  Sheets: Business_Ledger
+
+- **checkBusinessOwnerPromotions_(ctx, cycle, slots)**
+  Config: ctx.config.rngSeed
+  Sheets: Generic_Citizens
+  RNG: ctx.rng / safeRand_(ctx)
+
+- **wireBusinessOwners_(ctx, mints, cycle, now, logSheet)**
+  Reads: S.storyHooks
+  Writes: S.storyHooks
+  Sheets: Business_Ledger
 
 - **ensureGridColumns_(sheet, needed)**
 
@@ -3933,4 +3950,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 184
-**Functions mapped:** 1353
+**Functions mapped:** 1358

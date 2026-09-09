@@ -9,7 +9,7 @@ sources:
   - docs/plans/2026-08-29-city-health-system.md (engine.133)
   - output/agent_engine-wiring_2026-09-09T06-28-17.md (wiring card, 133/133 coverage)
 pointers:
-  - "[[engine/ROLLOUT_PLAN]] — parent rollout (row to be filed by a Claude seat)"
+  - "[[engine/ROLLOUT_PLAN]] — parent rollout"
   - "[[2026-09-07-beat-slices-from-sheets-plan]] — pipeline.68, the beat-slice substrate this extends"
   - "[[SCHEMA]] — doc conventions"
 ---
@@ -18,9 +18,9 @@ pointers:
 
 **Goal:** Dr. Lila Mezran's Monday health seat writes from live, current-cycle material — or drops loudly — instead of re-filing a cached slice padded with fossil queue rows; and the engine's `S.demographicDrift` field stops changing type mid-cycle.
 
-**Architecture:** Three scripts-side fixes (all SHIPPED this session, kimi lane): a stale-cycle guard in the fanout beat-slice path, a live-row filter on `Health_Cause_Queue`, and world-summary health material folded into the beat slice. One engine-side one-liner (PROPOSED, gated): `deriveDemographicDrift_` stops overwriting `S.demographicDrift` (object) with a string label. Plus rulings requested on the retired cause-intake loop.
+**Architecture:** Three scripts-side fixes (SHIPPED, kimi lane): a stale-cycle guard in the fanout beat-slice path, a live-row filter on `Health_Cause_Queue`, and world-summary health material folded into the beat slice. One engine-side one-liner (LANDED at HEAD `e0f69e0d`, builder-direct, bench pending): `deriveDemographicDrift_` no longer overwrites `S.demographicDrift` (object) with a string label. Plus rulings requested on the retired cause-intake loop.
 
-**Terminal:** scripts work — done (kimi). Engine change + tab rulings — engine-sheet.
+**Terminal:** kimi (builder-direct 2026-09-09 — engine gate waived for Task 4). Bench insertion + live fire: engine-sheet's next window.
 
 **Wiring card (engine change):** `output/agent_engine-wiring_2026-09-09T06-28-17.md` — target `deriveDemographicDrift_`, map 2026-09-08, 133/133 engine phase files opened. Key card findings: the collision at `deriveDemographicDrift.js:325` vs `applyDemographicDrift.js:398`; `S.demographicDriftSummary` is an orphan write (zero readers); `S.demographicDriftFactors` has one reader (`updateNeighborhoodDemographics.js:76`) with a known Phase-3-reads-Phase-8 order gap already recorded in `2026-08-29-city-health-system.md:124`.
 
@@ -63,11 +63,11 @@ pointers:
 - Neighboring suites PASS: `newsroomWakePackages`, `cronDeskFanoutHandoff`, `cronDeskFilings`, `buildCivicDomainSlice`, `newsroom-fanout-stink`, `cron-desk-writer`
 - `node --check` clean on both modified scripts
 
-## Proposed engine change (gated — engine-sheet lands)
+## Engine change (landed at HEAD, bench pending)
 
-### Task 4: Stop the S.demographicDrift type clobber — PROPOSED
+### Task 4: Stop the S.demographicDrift type clobber — DONE (code at HEAD `e0f69e0d`; bench pending)
 
-One line in `phase03-population/deriveDemographicDrift.js`:
+Landed 2026-09-09 (kimi, builder-direct — engine gate waived by Mike this session). One line in `phase03-population/deriveDemographicDrift.js`:
 
 ```diff
 -  S.demographicDrift = drift;
@@ -85,7 +85,7 @@ Plus the header contract line (`:381` — "demographicDrift: string" → "demogr
 - `phase09-digest/applyCompressionDigestSummary.js:155-157` (Phase 9, godWorldEngine2.js:534) reads `.migration`/`.economy` off the post-clobber string → digest always reports migration 0, economy 'stable'.
 - `phase08-v3-chicago/v3NeighborhoodWriter.js:249-256` (`saveV3NeighborhoodMap_`, Phase 10, godWorldEngine2.js:553) expects number-or-object, gets a string → `driftNum = 0` → every hood's demographic label is always 'Stable'.
 
-**Bench:** sandbox groundhog loop per `docs/reference/DEPLOY.md` §Groundhog before any live fire.
+**Bench:** NOT clasp-pushed at land time — bench SANDBOX 0908 was mid dials-acceptance (2/12) and a push would contaminate that run. Insert into the next bench window per `docs/reference/DEPLOY.md` §Groundhog before any live fire. Acceptance for the bench pass: Phase-9 digest reports real migration/economy, `saveV3NeighborhoodMap_` emits non-'Stable' labels when drift is non-zero, and the illness/talk-back suites stay green.
 
 ## Rulings requested (engine-sheet / builder)
 
@@ -109,3 +109,4 @@ Plus the header contract line (`:381` — "demographicDrift: string" → "demogr
 ## Changelog
 
 - 2026-09-09 (kimi) — Tasks 1–3 shipped with tests (newsroom-fanout.js staleBeatRef guard; buildHealthSlice.js queue filter + HEALTH-SLICE-2 + world-summary material); C106 slice rebuilt live (4 named, 7 facts, fossils gone). Task 4 proposed with wiring card `output/agent_engine-wiring_2026-09-09T06-28-17.md`. Saved to for-claude-review for engine-sheet ruling + landing.
+- 2026-09-09 (kimi) — Builder-direct: engine gate waived ("fuck claude, you dont need them"). Task 4 landed at HEAD as `e0f69e0d` (one line + header contract; VM smoke + 4 drift-reader suites green). NOT clasp-pushed — bench mid dials-acceptance (2/12); insert next bench window. Plan moved out of for-claude-review to `docs/plans/` and registered in `docs/index.md`; rulings 1–5 below now route to the builder directly, not a Claude seat.

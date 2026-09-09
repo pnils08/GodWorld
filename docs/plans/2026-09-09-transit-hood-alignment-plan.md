@@ -122,6 +122,7 @@ pointers:
 
 ## Changelog
 
+- 2026-09-09 (engine-sheet, S440) — BENCH C108 clean on SANDBOX 0908 @6 = `6ee31754`: 0 errors, `Factors` self-armed 18/18, event hoods + initiative slice on the rows, no game day (feed empty) — acceptance 2, 3 (design-phase tag), 4 met; 1 waits on a feed row.
 - 2026-09-09 (engine-sheet, S440) — Tasks 2–6 CUT (builder-direct, same night): 4 engine/doc files + `scripts/transitCauses.test.js` 75/75; served-hood dedup caught by the test; unbenched — proves on the next 0908 fire with the dials + owner door.
 - 2026-09-09 (engine-sheet, S440) — ACCEPTED: moved to `docs/plans/`, indexed, ROLLOUT engine.183 filed; Task 1 re-verified green, Task 7 verified gone; Tasks 2–6 = engine-sheet batch on a fresh bench after the 0908 dials run.
 - 2026-09-09 (kimi) — v2 filed for review: builder corrections folded (foundation fix, single tracker read, live phase values, v3 ledger, bus lines held, bench sequencing). Task 1 shipped, commit 0806aba5.

@@ -55,7 +55,11 @@ function writeDump(dir, cycle) {
       { POPID: 'POP-90002', Name: 'Test Pro Athlete', Neighborhood: 'Downtown', Cause: 'a slide', AdmitCycle: String(cycle), StatusNow: 'recovering' }
     ],
     Health_Cause_Queue: [
-      { POPID: 'POP-90007', Name: 'Test Queue Patient', Status: 'recovering', CyclesSick: '2', Neighborhood: 'Chinatown', Age: '67', AssignedCause: 'car accident' }
+      { POPID: 'POP-90007', Name: 'Test Queue Patient', Status: 'recovering', StatusStartCycle: '102', CyclesSick: '2', Neighborhood: 'Chinatown', Age: '67', AssignedCause: 'car accident', Processed: '' },
+      // Fossil from the retired intake export — zeroed counters, never rides the slice.
+      { POPID: 'POP-90008', Name: 'Test Fossil Patient', Status: 'recovering', StatusStartCycle: '0', CyclesSick: '0', Neighborhood: 'Uptown', Age: '79', AssignedCause: 'broken leg', Processed: '' },
+      // Already processed by the media room — done, not story material.
+      { POPID: 'POP-90009', Name: 'Test Processed Patient', Status: 'active', StatusStartCycle: '101', CyclesSick: '3', Neighborhood: 'Downtown', Age: '50', AssignedCause: 'pneumonia', Processed: 'yes' }
     ],
     Cycle_Weather: [
       { CycleID: String(cycle - 2), Type: 'rain', Temp: '48', Comfort: '0.2', Mood: 'introspective', Streak: '1', StreakType: 'rain' },
@@ -140,9 +144,13 @@ try {
   ok('sick table fact', /Sick residents by neighborhood: Chinatown 125, Fruitvale 110, Rockridge 60 — 295 across 3 neighborhoods/.test(h.facts[0].text));
   ok('hospital row named with ledger role', h.citizens.some(c => c.popid === 'POP-90003' && c.role === 'Line Cook'));
   ok('queue row named', h.facts.some(f => /Test Queue Patient \(Chinatown\), 67 — recovering, car accident, 2 cycles/.test(f.text)));
+  ok('queue fossil (StatusStartCycle 0) never rides', !JSON.stringify(h).includes('Test Fossil Patient'));
+  ok('processed queue row never rides', !JSON.stringify(h).includes('Test Processed Patient'));
   ok('pro athlete excluded', !JSON.stringify(h).includes('Test Pro Athlete'));
   ok('no prev/ → typed state', h.prewrite.deltas.state === 'NO_PRIOR_CYCLE');
-  ok('few-named note', /named rows are few \(2\)/.test(h.prewrite.note));
+  ok('world-summary Health resident joins the slice', h.citizens.some(c => c.popid === 'POP-90004' && c.role === 'Bus Operator') &&
+    h.facts.some(f => /Test Seasonal Resident dealt with a seasonal health concern/.test(f.text) && /world_summary_c103\.md/.test(f.src)));
+  ok('few-named note', /named rows are few \(3\)/.test(h.prewrite.note));
   ok('only this cycle\'s hook', h.prewrite.hooks.length === 1 && h.prewrite.hooks[0].text === 'Heavy health activity this cycle.');
 
   console.log('schools:');

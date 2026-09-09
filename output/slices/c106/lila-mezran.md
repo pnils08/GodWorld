@@ -3,24 +3,25 @@
 Cycle **C106** · kind `beat-health` · hood **Chinatown**
 
 ## THE SLICE
-- Angle: Chinatown carries the most sick residents (125) | 5 named on the hospital and cause records
-- Hook: Yu Zen is one of 5 residents on the record this cycle; Chinatown carries the most illness.
+- Angle: Chinatown carries the most sick residents (125) | 4 named on the hospital and cause records
+- Hook: Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.
+- Note: named rows are few (4) — write the neighborhood, not a ward
 - Prior cycle: NO_PRIOR_CYCLE
 
 ## FACTS (each line is a row on the record)
 - Sick residents by neighborhood: Chinatown 125, East Oakland 113, Laurel 111, Fruitvale 110, Ivy Hill 110, San Antonio 110, Temescal 108, Rockridge 107 — 1,918 across 22 neighborhoods  _[output/beats/Neighborhood_Demographics.jsonl Sick @C106]_
 - Yu Zen (Rockridge) — in hospital care, critical, admitted C105 after a workplace accident  _[output/beats/Hospital_Ledger.jsonl POP-00194]_
 - Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu  _[output/beats/Hospital_Ledger.jsonl POP-00801]_
-- Marcus Osei (Chinatown), 67 — recovering, car accident  _[output/beats/Health_Cause_Queue.jsonl POP-00036]_
-- Elliott Crane (Uptown), 79 — recovering, broken leg  _[output/beats/Health_Cause_Queue.jsonl POP-00044]_
-- Ariana Lee (Piedmont Ave), 42 — serious-condition, Cancer  _[output/beats/Health_Cause_Queue.jsonl POP-00168]_
+- The city illness rate stands at 5.0%, with 3 in hospital care at 8% of capacity.  _[output/world_summary_c106.md "## City State"]_
+- Laurel is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 5).  _[output/world_summary_c106.md "## World Events"]_
+- Elle Lilo skipped plans to rest off a stubborn bug (Jack London).  _[output/world_summary_c106.md "## Who Lived It ### Health"]_
+- Toby Lamont fought off a head cold that lingered all week (Fruitvale).  _[output/world_summary_c106.md "## Who Lived It ### Health"]_
 
 ## PEOPLE ON THE RECORD (your sources — real; never invent another)
 - Yu Zen — Commercial Insurance Broker — Rockridge — on Hospital_Ledger this cycle
 - Maurice Franklin — Drone Fleet Coordinator — Rockridge — on Hospital_Ledger this cycle
-- Marcus Osei — City Council Member — Chinatown — on Health_Cause_Queue this cycle
-- Elliott Crane — City Council Member — Uptown — on Health_Cause_Queue this cycle
-- Ariana Lee — Middle School Teacher — Piedmont Ave — on Health_Cause_Queue this cycle
+- Elle Lilo — Harbor Tugboat Captain — Jack London — named in the cycle health record
+- Toby Lamont — Mutual Aid Network Organizer — Fruitvale — named in the cycle health record
 
 ## ENGINE HOOKS FOR YOU (colour, not fact)
 - Illness rates in Lake Merritt up 17%. Public health concern? Investigation warranted. (public health coverage)
@@ -30,7 +31,7 @@ Cycle **C106** · kind `beat-health` · hood **Chinatown**
 the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift
 
 ## APPROACH
-Health approach: this slice is the illness count by neighborhood and every resident named on the hospital and cause records this cycle. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.
+Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, and the residents the cycle summary names under Health/Recovering. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.
 
 ## FORBIDDEN
 - Do not invent a named person, place, station, school, clinic, congregation or number that is not on this slice

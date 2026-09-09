@@ -1,5 +1,5 @@
 {
-  "version": "HEALTH-SLICE-1",
+  "version": "HEALTH-SLICE-2",
   "empty": false,
   "cycle": 106,
   "kind": "beat-health",
@@ -15,34 +15,32 @@
   "pulse": {
     "className": "beat-health",
     "score": 100,
-    "label": "Chinatown carries the most sick residents (125) | 5 named on the hospital and cause records",
+    "label": "Chinatown carries the most sick residents (125) | 4 named on the hospital and cause records",
     "hood": "Chinatown",
     "source": "output/beats/Neighborhood_Demographics.jsonl Sick @C106 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl"
   },
   "story": {
     "kind": "beat-health",
-    "angle": "Chinatown carries the most sick residents (125) | 5 named on the hospital and cause records",
-    "label": "Chinatown carries the most sick residents (125) | 5 named on the hospital and cause records",
-    "hookLine": "Yu Zen is one of 5 residents on the record this cycle; Chinatown carries the most illness.",
+    "angle": "Chinatown carries the most sick residents (125) | 4 named on the hospital and cause records",
+    "label": "Chinatown carries the most sick residents (125) | 4 named on the hospital and cause records",
+    "hookLine": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
     "hood": "Chinatown",
     "citizens": [
       "Yu Zen (POP-00194)",
       "Maurice Franklin (POP-00801)",
-      "Marcus Osei (POP-00036)",
-      "Elliott Crane (POP-00044)",
-      "Ariana Lee (POP-00168)"
+      "Elle Lilo (POP-00177)",
+      "Toby Lamont (POP-00183)"
     ],
     "popids": [
       "POP-00194",
       "POP-00801",
-      "POP-00036",
-      "POP-00044",
-      "POP-00168"
+      "POP-00177",
+      "POP-00183"
     ],
     "ref": "output/beats/Neighborhood_Demographics.jsonl Sick @C106 + Hospital_Ledger.jsonl + Health_Cause_Queue.jsonl",
     "cycle": 106
   },
-  "approach": "Health approach: this slice is the illness count by neighborhood and every resident named on the hospital and cause records this cycle. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "approach": "Health approach: this slice is the illness count by neighborhood, every resident named on the hospital and live cause records, and the residents the cycle summary names under Health/Recovering. Clinical calm, human cost, no diagnosis beyond what the record says. When the named rows are few, write the neighborhood, not a ward. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
   "citizens": [
     {
       "popid": "POP-00194",
@@ -63,31 +61,22 @@
       "why": "on Hospital_Ledger this cycle"
     },
     {
-      "popid": "POP-00036",
-      "name": "Marcus Osei",
-      "role": "City Council Member",
-      "neighborhood": "Chinatown",
+      "popid": "POP-00177",
+      "name": "Elle Lilo",
+      "role": "Harbor Tugboat Captain",
+      "neighborhood": "Jack London",
       "business": null,
-      "profile": "Marcus Osei — City Council Member — Chinatown",
-      "why": "on Health_Cause_Queue this cycle"
+      "profile": "Elle Lilo — Harbor Tugboat Captain — Jack London",
+      "why": "named in the cycle health record"
     },
     {
-      "popid": "POP-00044",
-      "name": "Elliott Crane",
-      "role": "City Council Member",
-      "neighborhood": "Uptown",
+      "popid": "POP-00183",
+      "name": "Toby Lamont",
+      "role": "Mutual Aid Network Organizer",
+      "neighborhood": "Fruitvale",
       "business": null,
-      "profile": "Elliott Crane — City Council Member — Uptown",
-      "why": "on Health_Cause_Queue this cycle"
-    },
-    {
-      "popid": "POP-00168",
-      "name": "Ariana Lee",
-      "role": "Middle School Teacher",
-      "neighborhood": "Piedmont Ave",
-      "business": null,
-      "profile": "Ariana Lee — Middle School Teacher — Piedmont Ave",
-      "why": "on Health_Cause_Queue this cycle"
+      "profile": "Toby Lamont — Mutual Aid Network Organizer — Fruitvale",
+      "why": "named in the cycle health record"
     }
   ],
   "facts": [
@@ -104,31 +93,36 @@
       "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
     },
     {
-      "text": "Marcus Osei (Chinatown), 67 — recovering, car accident",
-      "src": "output/beats/Health_Cause_Queue.jsonl POP-00036"
+      "text": "The city illness rate stands at 5.0%, with 3 in hospital care at 8% of capacity.",
+      "src": "output/world_summary_c106.md \"## City State\""
     },
     {
-      "text": "Elliott Crane (Uptown), 79 — recovering, broken leg",
-      "src": "output/beats/Health_Cause_Queue.jsonl POP-00044"
+      "text": "Laurel is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 5).",
+      "src": "output/world_summary_c106.md \"## World Events\""
     },
     {
-      "text": "Ariana Lee (Piedmont Ave), 42 — serious-condition, Cancer",
-      "src": "output/beats/Health_Cause_Queue.jsonl POP-00168"
+      "text": "Elle Lilo skipped plans to rest off a stubborn bug (Jack London).",
+      "src": "output/world_summary_c106.md \"## Who Lived It ### Health\""
+    },
+    {
+      "text": "Toby Lamont fought off a head cold that lingered all week (Fruitvale).",
+      "src": "output/world_summary_c106.md \"## Who Lived It ### Health\""
     }
   ],
   "prewrite": {
     "schema": "BEAT-SLICE-1",
     "method": "BEAT_TAB_FACTS",
     "missing": [],
-    "angle": "Chinatown carries the most sick residents (125) | 5 named on the hospital and cause records",
-    "hookLine": "Yu Zen is one of 5 residents on the record this cycle; Chinatown carries the most illness.",
+    "angle": "Chinatown carries the most sick residents (125) | 4 named on the hospital and cause records",
+    "hookLine": "Yu Zen is one of 4 residents on the record this cycle; Chinatown carries the most illness.",
     "anchorFacts": [
       "Sick residents by neighborhood: Chinatown 125, East Oakland 113, Laurel 111, Fruitvale 110, Ivy Hill 110, San Antonio 110, Temescal 108, Rockridge 107 — 1,918 across 22 neighborhoods",
       "Yu Zen (Rockridge) — in hospital care, critical, admitted C105 after a workplace accident",
       "Maurice Franklin (Rockridge) — in hospital care, hospitalized, admitted C106 after severe seasonal flu",
-      "Marcus Osei (Chinatown), 67 — recovering, car accident",
-      "Elliott Crane (Uptown), 79 — recovering, broken leg",
-      "Ariana Lee (Piedmont Ave), 42 — serious-condition, Cancer"
+      "The city illness rate stands at 5.0%, with 3 in hospital care at 8% of capacity.",
+      "Laurel is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 5).",
+      "Elle Lilo skipped plans to rest off a stubborn bug (Jack London).",
+      "Toby Lamont fought off a head cold that lingered all week (Fruitvale)."
     ],
     "evidence": [
       {
@@ -144,16 +138,20 @@
         "src": "output/beats/Hospital_Ledger.jsonl POP-00801"
       },
       {
-        "text": "Marcus Osei (Chinatown), 67 — recovering, car accident",
-        "src": "output/beats/Health_Cause_Queue.jsonl POP-00036"
+        "text": "The city illness rate stands at 5.0%, with 3 in hospital care at 8% of capacity.",
+        "src": "output/world_summary_c106.md \"## City State\""
       },
       {
-        "text": "Elliott Crane (Uptown), 79 — recovering, broken leg",
-        "src": "output/beats/Health_Cause_Queue.jsonl POP-00044"
+        "text": "Laurel is carrying a recorded health cluster this Cycle: HEALTH event (impactScore 5).",
+        "src": "output/world_summary_c106.md \"## World Events\""
       },
       {
-        "text": "Ariana Lee (Piedmont Ave), 42 — serious-condition, Cancer",
-        "src": "output/beats/Health_Cause_Queue.jsonl POP-00168"
+        "text": "Elle Lilo skipped plans to rest off a stubborn bug (Jack London).",
+        "src": "output/world_summary_c106.md \"## Who Lived It ### Health\""
+      },
+      {
+        "text": "Toby Lamont fought off a head cold that lingered all week (Fruitvale).",
+        "src": "output/world_summary_c106.md \"## Who Lived It ### Health\""
       }
     ],
     "forbidden": [
@@ -181,7 +179,7 @@
         "priority": 2
       }
     ],
-    "note": null,
+    "note": "named rows are few (4) — write the neighborhood, not a ward",
     "roomIsYours": "the waiting room, the walk to the clinic, what a household does when one person is sick, who covers the shift"
   },
   "byHood": [

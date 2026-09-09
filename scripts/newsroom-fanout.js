@@ -157,6 +157,16 @@ function assignedStoryRefs(cycle) {
   return taken;
 }
 
+// Stale-cycle guard (2026-09-09): beat slices are version-cached per cycle, so
+// when the engine cycle has not advanced the seat would re-file the identical
+// story. Seed dedup never sees beat refs (they bypass laneSeeds), so check the
+// prior same-cycle fanouts explicitly. Returns the already-filed ref or null.
+function staleBeatRef(assignment, takenRefs) {
+  if (!assignment || !assignment.beatSlice) return null;
+  const ref = assignment.story && assignment.story.ref;
+  return ref && takenRefs && takenRefs.has(ref) ? ref : null;
+}
+
 // Per-desk seed queue from the desk_signal lane: entries the engine framed a
 // handle for lead (they carry angle + hookLine + affected citizens); the rest
 // of the lane follows so every desk assigns across ALL kinds (anomalies,
@@ -670,8 +680,17 @@ async function buildFanout(date) {
       try {
         const { enrichAssignment } = require(path.join(__dirname, BEAT_BUILDERS[slug]));
         const next = enrichAssignment(assignments[i], cycle);
+        const staleRef = staleBeatRef(next, takenRefs);
+        if (staleRef) {
+          console.error('[fanout] SEAT DROPPED ' + slug + ' — beat slice already filed at c' + cycle +
+            ' (engine cycle has not advanced; ref: ' + staleRef + ')');
+          beatEnrich.dropped.push(slug + ': stale slice — already filed at c' + cycle);
+          assignments.splice(i, 1);
+          continue;
+        }
         if (next && next.beatSlice) {
           assignments[i] = next;
+          if (next.story && next.story.ref) takenRefs.add(next.story.ref);
           beatEnrich.enriched = true;
           beatEnrich.seats.push(slug + '/' + next.pulse.className + ':' + (next.pulse.hood || '—'));
         }
@@ -834,5 +853,5 @@ if (require.main === module) {
 }
 
 module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
-  assignedStoryRefs, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
+  assignedStoryRefs, staleBeatRef, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
   applyWakePackageGate, activeRotaCandidates, boundDailyAssignments, DAILY_QUOTAS, WEEK_GRID, gridSeatsFor };

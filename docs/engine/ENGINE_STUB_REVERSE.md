@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 183 · **Functions mapped:** 1356 · **S.* fields:** 347 · **Sheets:** 57
+**Files scanned:** 183 · **Functions mapped:** 1357 · **S.* fields:** 347 · **Sheets:** 57
 
 ## S.* / ctx.summary reverse index
 
@@ -127,7 +127,7 @@
 | `S.cycleWeightCalendarFactors` | `phase09-digest/applyCycleWeight.js::applyCycleWeight_` | _(none)_ | 1 | 0 |
 | `S.cycleWeightReason` | `phase09-digest/applyCycleWeight.js::applyCycleWeight_` | `phase01-config/godWorldEngine2.js::writeDigest_`, `phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_`, `phase10-persistence/recordMediaLedger.js::recordMediaLedger_` | 1 | 5 |
 | `S.cycleWeightScore` | `phase09-digest/applyCycleWeight.js::applyCycleWeight_` | `phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 2 |
-| `S.demographicDrift` | `phase03-population/applyDemographicDrift.js::applyDemographicDrift_` | `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_`, `phase04-events/generationalEventsEngine.js::checkHealthEvent_`, `phase05-citizens/runCareerEngine.js::runCareerEngine_`, `phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_`, `phase06-analysis/applyShockMonitor.js::applyShockMonitor_`, …(+3 more) | 1 | 9 |
+| `S.demographicDrift` | `phase03-population/applyDemographicDrift.js::applyDemographicDrift_` | `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_`, `phase04-events/generationalEventsEngine.js::checkHealthEvent_`, `phase05-citizens/runCareerEngine.js::runCareerEngine_`, `phase06-analysis/applyCivicLoadIndicator.js::applyCivicLoadIndicator_`, `phase06-analysis/applyShockMonitor.js::applyShockMonitor_`, …(+5 more) | 1 | 11 |
 | `S.demographicDriftFactors` | `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_` | `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | 1 | 1 |
 | `S.demographicDriftLabel` | `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_` | _(none)_ | 1 | 0 |
 | `S.demographicDriftSummary` | `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_` | _(none)_ | 1 | 0 |
@@ -197,7 +197,7 @@
 | `S.hoodHeadcount` | `phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_` | `phase01-config/canonNeighborhoodLoader.js::getHoodHeadcount_` | 1 | 1 |
 | `S.hookSuppression` | `phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_` | _(none)_ | 1 | 0 |
 | `S.hospitalCensus` | `phase10-persistence/buildCyclePacket.js::persistHospitalLedger_` | _(none)_ | 1 | 0 |
-| `S.hospitalEvents` | `phase04-events/generationalEventsEngine.js::runGenerationalEngine_` | `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_`, `phase10-persistence/buildCyclePacket.js::persistHospitalLedger_` | 1 | 4 |
+| `S.hospitalEvents` | `phase04-events/generationalEventsEngine.js::runGenerationalEngine_` | `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_`, `phase10-persistence/buildCyclePacket.js::hospitalCapacity_`, `phase10-persistence/buildCyclePacket.js::persistHospitalLedger_` | 1 | 4 |
 | `S.hospitalTalkback` | `phase03-population/applyDemographicDrift.js::applyDemographicDrift_` | _(none)_ | 1 | 0 |
 | `S.householdEvents` | `phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_` | _(none)_ | 1 | 0 |
 | `S.householdFormation` | `phase05-citizens/householdFormationEngine.js::processHouseholdFormation_` | _(none)_ | 1 | 0 |

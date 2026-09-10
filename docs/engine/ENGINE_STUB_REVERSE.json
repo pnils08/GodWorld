@@ -2,7 +2,7 @@
   "generated": "2026-09-09",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1356,
+  "functionsMapped": 1357,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2398,7 +2398,9 @@
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
-        "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_"
+        "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
+        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
+        "phase10-persistence/buildCyclePacket.js::hospitalCapacity_"
       ]
     },
     "hospitalTalkback": {
@@ -2723,7 +2725,7 @@
       "readers": [
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
-        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
+        "phase10-persistence/buildCyclePacket.js::hospitalCapacity_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
       ]
     },

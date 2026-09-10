@@ -2881,8 +2881,11 @@
 
 ### buildCyclePacket.js
 - **buildCyclePacket_(ctx)**
-  Reads: S.absoluteCycle, S.bondSummary, S.chicagoFeed, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.hospitalEvents, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.month, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.simMonth, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
+  Reads: S.absoluteCycle, S.bondSummary, S.chicagoFeed, S.cityDynamics, S.cityEventDetails, S.civicLoad, S.civicLoadFactors, S.civicLoadScore, S.compressedLine, S.creationDayAnniversary, S.crimeMetrics, S.crowdHotspots, S.crowdMap, S.cycleId, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.cycleSummary, S.cycleWeight, S.cycleWeightReason, S.demographicDrift, S.demographicShifts, S.domainPresence, S.dominantDomain, S.economicSummary, S.eveningFood, S.eveningSafety, S.eveningTraffic, S.eventArcs, S.generationalEvents, S.generationalSummary, S.godWorldYear, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaSummary, S.migrationBrief, S.migrationDrift, S.month, S.namedSpotlights, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodMigration, S.nightlife, S.patternFlag, S.season, S.shockDuration, S.shockFlag, S.shockReasons, S.shockScore, S.simMonth, S.storyHooks, S.textureTriggers, S.transitMetrics, S.weather, S.weatherSummary, S.worldEvents, S.worldPopulation
   Writes: S.cyclePacket
+
+- **hospitalCapacity_(ctx)**
+  Reads: S.demographicDrift, S.hospitalEvents
 
 - **persistHospitalLedger_(ctx)**
   Reads: S.absoluteCycle, S.cycleId, S.hospitalEvents
@@ -3937,4 +3940,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1356
+**Functions mapped:** 1357

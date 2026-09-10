@@ -181,7 +181,12 @@ function buildCyclePacket_(ctx) {
   // ═══════════════════════════════════════════════════════════
   lines.push('--- POPULATION ---');
   lines.push('Total: ' + (pop.totalPopulation || 'n/a'));
-  lines.push('IllnessRate: ' + round2(pop.illnessRate || 0));
+  // Fresh post-attractor rate surfaced by applyDemographicDrift_ — the
+  // S.worldPopulation.illnessRate twin is computed pre-drift and stale
+  // (ruling 2026-09-09, builder-direct).
+  var freshIllness = (S.demographicDrift && typeof S.demographicDrift === 'object' &&
+    S.demographicDrift.illnessRate) || pop.illnessRate || 0;
+  lines.push('IllnessRate: ' + round2(freshIllness));
   lines.push('EmploymentRate: ' + round2(pop.employmentRate || 0));
   lines.push('Economy: ' + (pop.economy || 'stable'));
   if (hospital) {
@@ -807,7 +812,16 @@ function buildCyclePacket_(ctx) {
 // HOSPITAL LEDGER (engine.52 B2)
 // ═══════════════════════════════════════════════════════════
 
-var HOSPITAL_CAPACITY = 40; // beds — placeholder scaled to ~900 sampled citizens (plan Open Q)
+// Hospital census load divides by the same World_Config key the talk-back
+// binds at (hospitalBaseCapacity), surfaced by applyDemographicDrift_ (W2b) —
+// ruling 2026-09-09 (builder-direct): the old hardcoded 40 placeholder is gone.
+function hospitalCapacity_(ctx) {
+  var hc = ctx && ctx.summary && ctx.summary.demographicDrift &&
+    ctx.summary.demographicDrift.hospitalConfig;
+  if (hc && hc.baseCapacity) return hc.baseCapacity;
+  Logger.log('hospitalCapacity_: demographicDrift.hospitalConfig missing — defaulting to 100');
+  return 100;
+}
 
 var HOSPITAL_OPEN_STATES = ['hospitalized', 'critical', 'serious-condition', 'injured', 'recovering'];
 
@@ -998,7 +1012,7 @@ function persistHospitalLedger_(ctx) {
     deathsThisCycle: deaths,
     ghostsReleased: ghostsClosed,
     missedAdmitsReconciled: missedAdmits,
-    load: open / HOSPITAL_CAPACITY
+    load: open / hospitalCapacity_(ctx)
   };
   ctx.summary.hospitalCensus = census;
 

@@ -245,22 +245,49 @@ function saveV3NeighborhoodMap_(ctx) {
   // Base sentiment
   var baseSentiment = Number(dynamics.sentiment || 0);
 
-  // Demographic drift: number OR object { migration }
-  var driftRaw = (typeof S.demographicDrift !== 'undefined') ? S.demographicDrift :
-    (typeof S.migrationDrift !== 'undefined') ? S.migrationDrift : 0;
+  // ── engine.184 (2026-09-10): DemographicMarker is a PER-HOOD column and is now
+  // scored per hood. It used to be one city number banded once, here, and handed
+  // to all 22 rows — so every hood carried the same label by construction and the
+  // only variation in the column came from the override table in
+  // getDemographicMarkerV35_ (holiday, First Friday, arc, shock).
+  //
+  // The band it used (±5/20/35) was written for S.migrationDrift, which
+  // applyMigrationDrift.js:44 documents as −50..+50. It was being fed
+  // S.demographicDrift.migration instead — the city's net migration COUNT
+  // (1306 at C110, clamped ±5000) — which clears +20 every cycle, so the column
+  // read 'Inflow surge' everywhere. Before the Phase-8 clobber fix it read a
+  // string, coerced to 0, and the column read 'Stable' everywhere. Same flat
+  // column, two different constants.
+  //
+  // The per-hood number is S.neighborhoodMigration[hood].drift — Phase 6,
+  // scale −5..+5, built from that hood's own crime/sentiment/retail/event/mood
+  // against the city median. Bands below are the original proportions carried
+  // onto that scale (±0.1/0.4/0.7 of full range). The city-wide path is kept as
+  // the fallback for a cycle where Phase 6 did not run.
+  var hoodMig = (S.neighborhoodMigration && typeof S.neighborhoodMigration === 'object')
+    ? S.neighborhoodMigration : null;
 
-  var driftNum = (typeof driftRaw === 'number')
-    ? driftRaw
-    : (driftRaw && typeof driftRaw === 'object' && typeof driftRaw.migration === 'number')
-      ? driftRaw.migration
-      : 0;
+  var cityDriftNum = (typeof S.migrationDrift === 'number') ? S.migrationDrift : 0;
 
-  var baseDemoLabel = 'Stable';
-  if (driftNum < -35) baseDemoLabel = 'Outflow accelerating';
-  else if (driftNum < -20) baseDemoLabel = 'Outflow pressure';
-  else if (driftNum < -5) baseDemoLabel = 'Mild outflow';
-  else if (driftNum > 20) baseDemoLabel = 'Inflow surge';
-  else if (driftNum > 5) baseDemoLabel = 'Mild inflow';
+  // Fallback only: the city band on the ±50 scale it was written for.
+  var cityDemoLabel = 'Stable';
+  if (cityDriftNum < -35) cityDemoLabel = 'Outflow accelerating';
+  else if (cityDriftNum < -20) cityDemoLabel = 'Outflow pressure';
+  else if (cityDriftNum < -5) cityDemoLabel = 'Mild outflow';
+  else if (cityDriftNum > 20) cityDemoLabel = 'Inflow surge';
+  else if (cityDriftNum > 5) cityDemoLabel = 'Mild inflow';
+
+  function hoodDemoLabel_(hoodName) {
+    var rec = hoodMig ? hoodMig[hoodName] : null;
+    if (!rec || typeof rec.drift !== 'number') return cityDemoLabel;
+    var d = rec.drift;                       // −5..+5, this hood's own
+    if (d <= -4) return 'Outflow accelerating';
+    if (d <= -3) return 'Outflow pressure';
+    if (d <= -1) return 'Mild outflow';
+    if (d >= 3) return 'Inflow surge';
+    if (d >= 1) return 'Mild inflow';
+    return 'Stable';
+  }
 
   // Arc lookup by neighborhood
   var arcByNeighborhood = {};
@@ -412,7 +439,7 @@ function saveV3NeighborhoodMap_(ctx) {
     // fall-back at C106 as decay. The holiday is the world; the unbounded save was the defect.
     sent = round2(Math.max(-1, Math.min(1, sent)));
 
-    var demoLabel = getDemographicMarkerV35_(name, baseDemoLabel, arcByNeighborhood, S, holiday, isFirstFriday, isCreationDay);
+    var demoLabel = getDemographicMarkerV35_(name, hoodDemoLabel_(name), arcByNeighborhood, S, holiday, isFirstFriday, isCreationDay);
 
     // civic.18 Task 4a — District no longer computed here; it is ledger truth.
 

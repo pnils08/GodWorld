@@ -353,36 +353,90 @@ function applyMigrationDrift_(ctx) {
   var iRetail = nhIdx('RetailVitality');
   var iEvent = nhIdx('EventAttractiveness');
 
+  // ── engine.184 (2026-09-10): per-hood thresholds as ratios of the cycle's own
+  // cross-hood median, same fix class as engine.38 B2 in applyPatternDetection.
+  //
+  // The absolutes these replace (retail >= 1.3, event >= 1.3, crime <= 0.8,
+  // sentiment >= 0.3) were written against metric scales that have since drifted
+  // far past them — measured at C110: retail runs 3.71–9.95, event 11–55.78, so
+  // EVERY hood cleared both "high" gates and none could ever trip the low ones;
+  // crime peaks at 1.09 so no hood could ever draw the crime penalty; sentiment
+  // tops out at 0.25 so neither sentiment branch could fire at all. Three of the
+  // four local signals had degenerated into flat bonuses and the fourth was
+  // dead — which, on top of a city term worth 3 of the 5-point ceiling, pinned
+  // 19 of 22 hoods at the +5 clamp and made MigrationFlow uninformative.
+  //
+  // A median-relative band cannot degenerate that way: half the city sits above
+  // its own middle and half below, at any future scale, so the column keeps
+  // separating hoods without anyone re-tuning a constant.
+
+  var hoodMetrics = [];
   for (var n = 0; n < nhMapData.length; n++) {
     var nhRow = nhMapData[n];
     var nh = (iNh >= 0) ? String(nhRow[iNh] || '') : '';
     if (!nh) continue;
+    hoodMetrics.push({
+      nh: nh,
+      crimeIndex: (iCrime >= 0) ? Number(nhRow[iCrime] || 1) : 1,
+      nhSentiment: (iSentiment >= 0) ? Number(nhRow[iSentiment] || 0) : 0,
+      retailVitality: (iRetail >= 0) ? Number(nhRow[iRetail] || 1) : 1,
+      eventAttract: (iEvent >= 0) ? Number(nhRow[iEvent] || 1) : 1,
+      nhEcon: neighborhoodEconomies[nh] || { mood: 50, descriptor: 'stable' }
+    });
+  }
 
-    var crimeIndex = (iCrime >= 0) ? Number(nhRow[iCrime] || 1) : 1;
-    var nhSentiment = (iSentiment >= 0) ? Number(nhRow[iSentiment] || 0) : 0;
-    var retailVitality = (iRetail >= 0) ? Number(nhRow[iRetail] || 1) : 1;
-    var eventAttract = (iEvent >= 0) ? Number(nhRow[iEvent] || 1) : 1;
+  function median_(arr) {
+    var a = arr.filter(function(x) { return isFinite(x); }).sort(function(x, y) { return x - y; });
+    if (!a.length) return 0;
+    var mid = Math.floor(a.length / 2);
+    return (a.length % 2) ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+  }
 
-    var nhEcon = neighborhoodEconomies[nh] || { mood: 50, descriptor: 'stable' };
-    var nhDrift = Math.round(drift / 8);
+  var medCrime  = median_(hoodMetrics.map(function(m) { return m.crimeIndex; }));
+  var medSent   = median_(hoodMetrics.map(function(m) { return m.nhSentiment; }));
+  var medRetail = median_(hoodMetrics.map(function(m) { return m.retailVitality; }));
+  var medEvent  = median_(hoodMetrics.map(function(m) { return m.eventAttract; }));
+  var medMood   = median_(hoodMetrics.map(function(m) { return m.nhEcon.mood; }));
 
-    // v2.4: Apply Neighborhood_Map metrics
-    if (crimeIndex >= 1.5) { nhDrift -= rInt(3) + 1; }
-    else if (crimeIndex >= 1.2) { nhDrift -= rInt(2); }
-    else if (crimeIndex <= 0.8) { nhDrift += rInt(2); }
+  // A metric reads "high"/"low" for a hood when it sits this far off the city's
+  // own middle. Ratio for the strictly-positive metrics; absolute offset for
+  // sentiment, which centres near zero and would make a ratio meaningless.
+  var HI = 1.15, LO = 0.85, SENT_BAND = 0.05;
 
-    if (nhSentiment >= 0.3) { nhDrift += rInt(2) + 1; }
-    else if (nhSentiment <= -0.3) { nhDrift -= rInt(2) + 1; }
+  // The city-wide term is a TILT, not the baseline. It was Math.round(drift / 8)
+  // — at the C110 drift of 21 that spent 3 of the ±5 range before a single local
+  // signal was read, so local differences could only ever move a hood within the
+  // last two points. /25 keeps the city's direction legible (±2 at the ±50
+  // extremes) and leaves the ±5 range for the hood's own character.
+  var cityTilt = Math.round(drift / 25);
 
-    if (retailVitality >= 1.3) { nhDrift += rInt(2); }
-    else if (retailVitality <= 0.7) { nhDrift -= rInt(2); }
+  for (var hm = 0; hm < hoodMetrics.length; hm++) {
+    var m = hoodMetrics[hm];
+    var nh = m.nh;
+    var crimeIndex = m.crimeIndex, nhSentiment = m.nhSentiment;
+    var retailVitality = m.retailVitality, eventAttract = m.eventAttract;
+    var nhEcon = m.nhEcon;
 
-    if (eventAttract >= 1.3) { nhDrift += rInt(2); }
-    else if (eventAttract <= 0.7) { nhDrift -= rInt(1); }
+    var nhDrift = cityTilt;
 
-    if (nhEcon.mood >= 65) { nhDrift += rInt(2); }
-    else if (nhEcon.mood <= 35) { nhDrift -= rInt(2); }
+    // Crime: safer than the city's middle pulls people in, rougher pushes out.
+    if (medCrime > 0 && crimeIndex >= medCrime * HI) { nhDrift -= rInt(2) + 1; }
+    else if (medCrime > 0 && crimeIndex <= medCrime * LO) { nhDrift += rInt(2); }
 
+    if (nhSentiment >= medSent + SENT_BAND) { nhDrift += rInt(2) + 1; }
+    else if (nhSentiment <= medSent - SENT_BAND) { nhDrift -= rInt(2) + 1; }
+
+    if (medRetail > 0 && retailVitality >= medRetail * HI) { nhDrift += rInt(2); }
+    else if (medRetail > 0 && retailVitality <= medRetail * LO) { nhDrift -= rInt(2); }
+
+    if (medEvent > 0 && eventAttract >= medEvent * HI) { nhDrift += rInt(2); }
+    else if (medEvent > 0 && eventAttract <= medEvent * LO) { nhDrift -= rInt(1); }
+
+    if (medMood > 0 && nhEcon.mood >= medMood * HI) { nhDrift += rInt(2); }
+    else if (medMood > 0 && nhEcon.mood <= medMood * LO) { nhDrift -= rInt(2); }
+
+    // Descriptor stays absolute — 'thriving'/'struggling' are named states, not
+    // a scale that can drift out from under a threshold.
     if (nhEcon.descriptor === 'thriving') { nhDrift += rInt(2); }
     else if (nhEcon.descriptor === 'struggling') { nhDrift -= rInt(2); }
 

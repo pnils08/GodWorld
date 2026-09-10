@@ -791,18 +791,35 @@ function renderMigrationBrief_(ctx) {
  * - Reads Neighborhood_Map metrics (CrimeIndex, Sentiment, RetailVitality, EventAttractiveness)
  * - Writes MigrationFlow to column P of Neighborhood_Map
  *
- * NEIGHBORHOOD_MAP INTEGRATION:
- * | Metric              | Effect on MigrationFlow |
- * |---------------------|-------------------------|
- * | CrimeIndex >= 1.5   | -3 to -4 (outflow)      |
- * | CrimeIndex >= 1.2   | -1 to -2 (outflow)      |
- * | CrimeIndex <= 0.8   | +1 to +2 (inflow)       |
- * | Sentiment >= 0.3    | +2 to +3 (inflow)       |
- * | Sentiment <= -0.3   | -2 to -3 (outflow)      |
- * | RetailVitality >= 1.3 | +1 to +2 (inflow)     |
- * | RetailVitality <= 0.7 | -1 to -2 (outflow)    |
- * | EventAttract >= 1.3 | +1 to +2 (inflow)       |
- * | EventAttract <= 0.7 | -1 (outflow)            |
+ * NEIGHBORHOOD_MAP INTEGRATION (engine.184, 2026-09-10 — thresholds are RATIOS of
+ * the cycle's own cross-hood median, not absolutes. Measured against live bench
+ * data, the absolutes this replaced had stopped discriminating:
+ *   retail    3.71-9.95 vs gates >= 1.3 / <= 0.7 — high gate always on for every
+ *             hood, low gate structurally unreachable
+ *   event     11-55.78 vs the same gates — identical shape
+ *   crime     0.34-1.09 vs penalties >= 1.5 / >= 1.2 — neither reachable; the
+ *             <= 0.8 bonus fires for most of the city
+ *   sentiment INTERMITTENT, not dead: >= 0.3 caught 0 of 22 hoods at C110 (max
+ *             0.25) and 16 of 22 at C111 (max 0.43). It flips the whole city at
+ *             once rather than separating hoods. The <= -0.3 outflow branch is
+ *             unreachable — sentiment does not go negative in this city.
+ * Net: five of eight local branches could not fire, two were always-on constants,
+ * and the one that moved moved for everyone together. On top of a city term worth
+ * 3 of the 5-point ceiling, that pinned 19 of 22 hoods at +5. A median-relative
+ * band cannot degenerate that way at any future scale.):
+ * | Metric vs city median this cycle | Effect on MigrationFlow |
+ * |----------------------------------|-------------------------|
+ * | CrimeIndex   >= 1.15x median     | -1 to -3 (outflow)      |
+ * | CrimeIndex   <= 0.85x median     | +0 to +2 (inflow)       |
+ * | Sentiment    >= median + 0.05    | +1 to +3 (inflow)       |
+ * | Sentiment    <= median - 0.05    | -1 to -3 (outflow)      |
+ * | RetailVitality >= 1.15x median   | +0 to +2 (inflow)       |
+ * | RetailVitality <= 0.85x median   | -0 to -2 (outflow)      |
+ * | EventAttract >= 1.15x median     | +0 to +2 (inflow)       |
+ * | EventAttract <= 0.85x median     | -0 to -1 (outflow)      |
+ * | economicMood >= / <= 1.15/0.85x  | +/- 0 to 2              |
+ * | descriptor thriving / struggling | +/- 0 to 2 (named state, stays absolute) |
+ * City-wide term is a TILT: Math.round(migrationDrift / 25), +/-2 at the extremes.
  *
  * OUTPUTS:
  * - ctx.summary.migrationDrift (-50 to +50)

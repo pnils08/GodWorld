@@ -206,6 +206,18 @@ function emitHeader(cycle, rileyCurr, calendar, sportsRows) {
 // One-line world-state snapshot (S313). Stable `Snapshot:` prefix — /post-publish
 // Step 2c greps this line out and ingests it as a standalone wd-snapshot memory
 // (cheap "where are we now" anchor; full doc chunks stay under wd-summary).
+/**
+ * World_Config hospitalBaseCapacity — the one capacity number. Falls back to 100
+ * (the live value) with a warning rather than silently re-introducing a constant.
+ */
+function hospitalBaseCapacity(worldConfigAll) {
+  const row = (worldConfigAll || []).find(r => String(r.Key ?? '').trim() === 'hospitalBaseCapacity');
+  const n = Number(row?.Value);
+  if (Number.isFinite(n) && n > 0) return n;
+  console.warn('buildWorldSummary: World_Config hospitalBaseCapacity missing — defaulting to 100');
+  return 100;
+}
+
 function emitSnapshotLine(cycle, rileyCurr, worldPop, hospitalCensus) {
   const parts = [
     `Snapshot: Cycle ${cycle}`,
@@ -1267,7 +1279,8 @@ async function loadCycleData(cycle) {
     rippleAll,
     lhlAll,
     householdAll,
-    storylineLedger
+    storylineLedger,
+    worldConfigAll
   ] = await Promise.all([
     sheets.getSheetAsObjects('Riley_Digest'),
     sheets.getSheetAsObjects('Oakland_Sports_Feed'),
@@ -1285,7 +1298,10 @@ async function loadCycleData(cycle) {
     sheets.getSheetAsObjects('Household_Ledger').catch(() => []),
     // S407: the newsroom's own open threads, read back into the desk signal.
     // Tolerant like the others — a bench without the tab still ships a signal.
-    sheets.getSheetAsObjects('Storyline_Ledger').catch(() => [])
+    sheets.getSheetAsObjects('Storyline_Ledger').catch(() => []),
+    // 2026-09-09: hospital capacity is a World_Config key, not a constant —
+    // the engine binds at it too (applyDemographicDrift_ W2b hospitalConfig).
+    sheets.getSheetAsObjects('World_Config').catch(() => [])
   ]);
 
   const rileyCurr = rileyAll.find(r => String(r.Cycle) === String(cycle));
@@ -1331,11 +1347,14 @@ async function buildWorldSummary(cycle, preloaded) {
   // Build sections
   const out = [];
   out.push(...emitHeader(cycle, rileyCurr, calendarAll.slice(1), sportsAll));
-  // engine.52 D2 — hospital census from open Hospital_Ledger rows (capacity 40,
-  // matches persistHospitalLedger_); null when the tab is absent or empty.
+  // engine.52 D2 — hospital census from open Hospital_Ledger rows; null when the
+  // tab is absent or empty. Capacity comes from World_Config hospitalBaseCapacity
+  // — the same key persistHospitalLedger_ divides by and the illness talk-back
+  // binds at (2026-09-09: the hardcoded 40 here outlived the engine's, so the
+  // published load ran 2.5x the engine's own figure).
   const hospitalOpen = hospitalAll.filter(r => r.POPID && String(r.DischargeCycle ?? '').trim() === '');
   const hospitalCensus = hospitalAll.length
-    ? { inCare: hospitalOpen.length, loadPct: Math.round((hospitalOpen.length / 40) * 100) }
+    ? { inCare: hospitalOpen.length, loadPct: Math.round((hospitalOpen.length / hospitalBaseCapacity(worldConfigAll)) * 100) }
     : null;
 
   out.push(emitSnapshotLine(cycle, rileyCurr, worldPopCurr, hospitalCensus), '');

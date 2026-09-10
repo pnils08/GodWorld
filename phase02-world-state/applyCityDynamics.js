@@ -190,13 +190,19 @@ function applyCityDynamics_(ctx) {
   // ─────────────────────────────────────────────────────────────────────────
   // MODIFIER FUNCTIONS
   // ─────────────────────────────────────────────────────────────────────────
+  // engine.188 (2026-09-10): the four season pushes summed to +0.20 across a
+  // 52-cycle year (13 cycles each, exactly even), so the calendar alone paid the
+  // city +0.05 of mood every cycle forever. Re-centred to sum to zero: the same
+  // seasonal swing, no net annual drift. Winter/Fall are still the low half and
+  // Summer still the high one — a year just no longer ends happier than it began
+  // for no reason. SIM_DOCTRINE §15.
   function applySeasonModifiers_(m, seasonName) {
     if (seasonName === 'Winter') {
       m.traffic *= 0.8;
       m.tourism *= 0.6;
       m.nightlife *= 0.7;
       m.publicSpaces *= 0.7;
-      m.sentiment -= 0.2;
+      m.sentiment -= 0.25;   // engine.188: season centred (see note below)
       m.culturalActivity *= 0.9;
       m.communityEngagement *= 0.8;
     } else if (seasonName === 'Spring') {
@@ -205,7 +211,7 @@ function applyCityDynamics_(ctx) {
       m.tourism *= 1.2;
       m.nightlife *= 1.1;
       m.publicSpaces *= 1.1;
-      m.sentiment += 0.2;
+      m.sentiment += 0.15;   // engine.188
       m.culturalActivity *= 1.2;
       m.communityEngagement *= 1.1;
     } else if (seasonName === 'Summer') {
@@ -214,14 +220,14 @@ function applyCityDynamics_(ctx) {
       m.tourism *= 1.6;
       m.nightlife *= 1.4;
       m.publicSpaces *= 1.4;
-      m.sentiment += 0.3;
+      m.sentiment += 0.25;   // engine.188
       m.culturalActivity *= 1.3;
       m.communityEngagement *= 1.2;
     } else if (seasonName === 'Fall') {
       m.retail *= 1.1;
       m.tourism *= 0.9;
       m.publicSpaces *= 0.9;
-      m.sentiment -= 0.1;
+      m.sentiment -= 0.15;   // engine.188
       m.culturalActivity *= 1.1;
       m.communityEngagement *= 1.0;
     }
@@ -413,12 +419,23 @@ function applyCityDynamics_(ctx) {
     var phase = normalizeSportsPhase_(sportsSeasonRaw);
 
     // Base sports modifiers
-    if (phase === 'preseason') m.sentiment += 0.1;
-    else if (phase === 'in-season') { m.sentiment += 0.1; m.nightlife *= 1.05; }
-    else if (phase === 'mid-season') { m.traffic *= 1.2; m.nightlife *= 1.1; m.sentiment += 0.2; }
-    else if (phase === 'late-season') { m.traffic *= 1.3; m.nightlife *= 1.2; m.sentiment += 0.25; }
-    else if (phase === 'postseason') { m.traffic *= 1.4; m.nightlife *= 1.3; m.communityEngagement *= 1.2; m.sentiment += 0.3; }
-    else if (phase === 'finals') { m.traffic *= 1.5; m.nightlife *= 1.5; m.publicSpaces *= 1.3; m.communityEngagement *= 1.4; m.sentiment += 0.5; }
+    // engine.188 (2026-09-10): the PHASE is a calendar fact, not a result. The
+    // city is in some non-off-season phase for most of the year, so a flat
+    // +0.10..+0.25 on the calendar alone was an always-on lift — §15's tax
+    // wearing a gate's clothes, and the largest single one on the up side.
+    // It was also double-counting: how the team is actually DOING already
+    // reaches city mood through S.sportsSentimentBoost (record + streak,
+    // clamped +/-0.10 per team, folded into sentiment further down this file).
+    // The crowd effects are untouched — the bars and the streets still fill up
+    // for a mid-season game. What comes off is the mood the calendar was
+    // paying regardless of how the season was going. A playoff run stays a
+    // thing the whole city feels, because that IS an event.
+    if (phase === 'preseason') m.sentiment += 0.02;
+    else if (phase === 'in-season') { m.sentiment += 0.02; m.nightlife *= 1.05; }
+    else if (phase === 'mid-season') { m.traffic *= 1.2; m.nightlife *= 1.1; m.sentiment += 0.04; }
+    else if (phase === 'late-season') { m.traffic *= 1.3; m.nightlife *= 1.2; m.sentiment += 0.06; }
+    else if (phase === 'postseason') { m.traffic *= 1.4; m.nightlife *= 1.3; m.communityEngagement *= 1.2; m.sentiment += 0.20; }
+    else if (phase === 'finals') { m.traffic *= 1.5; m.nightlife *= 1.5; m.publicSpaces *= 1.3; m.communityEngagement *= 1.4; m.sentiment += 0.35; }
 
     // Cluster-specific sports ripple (Coliseum area = East Oakland/Waterfront)
     if (phase === 'postseason' || phase === 'finals') {
@@ -471,9 +488,14 @@ function applyCityDynamics_(ctx) {
     // Unemployment — engine.185 repricing (2026-09-10). 12%+ joblessness is a
     // depression, not a bad mood; it now weighs like a major holiday does in the
     // other direction. See the header note on severity tiers.
+    // engine.188 (2026-09-10): the reward tier read the ORDINARY state as good
+    // news. Live range across 22 hoods is 2.19% - 5.92%, median 4.45%, so
+    // `< 0.05` was true for 15 of 22 and paid a standing +0.05. Moved below the
+    // live median so it marks a hood that is genuinely exceptional. NOTE the
+    // two tiers above it fire 0 of 22 at this range — see the engine.185 row.
     if (ur > 0.12) { m.retail *= 0.92; m.sentiment -= 0.32; }
     else if (ur > 0.08) { m.retail *= 0.96; m.sentiment -= 0.15; }
-    else if (ur < 0.05) { m.retail *= 1.05; m.sentiment += 0.05; }
+    else if (ur < 0.03) { m.retail *= 1.05; m.sentiment += 0.05; }
 
     // Sickness (v2.5 values)
     if (sr > 0.10) {
@@ -517,11 +539,26 @@ function applyCityDynamics_(ctx) {
     var seeds = safeNum_(obs.storySeedCount, 0);
     var shocks = safeNum_(obs.shockCount, 0);
 
-    if (e >= 4) { m.publicSpaces *= 1.08; m.culturalActivity *= 1.06; m.sentiment += 0.05; }
-    else if (e >= 2) { m.publicSpaces *= 1.04; m.culturalActivity *= 1.03; }
+    // engine.188 (2026-09-10): the UP side of the same defect engine.185 fixed
+    // below. These gates read absolute activity counts that never fall to their
+    // floor — worldEvents runs 8-13 and Story_Seed_Deck 28-44 EVERY cycle, and
+    // both arrive here as 6-cycle ROLLING AVERAGES, which never dip either. So
+    // `e >= 4` and `seeds >= 10` were true 6 of 6 cycles measured: a standing
+    // +0.08 that no state could switch off. Now relative to their own baseline
+    // on the same bands as crime and shock. A busy city is the ordinary case
+    // and costs nothing; a cycle genuinely busier than its own recent past
+    // still lifts the mood.
+    var eventsNow = safeNum_(obs.eventsNow, e);
+    var eX = (e > 0) ? eventsNow / e : 1;
+    if (eX >= 1.5) { m.publicSpaces *= 1.08; m.culturalActivity *= 1.06; m.sentiment += 0.05; }
+    else if (eX >= 1.25) { m.publicSpaces *= 1.04; m.culturalActivity *= 1.03; }
 
-    if (seeds >= 10 || media >= 10) { m.communityEngagement *= 1.05; m.culturalActivity *= 1.05; m.sentiment += 0.03; }
-    else if (seeds >= 6 || media >= 6) { m.communityEngagement *= 1.03; }
+    var seedsNow = safeNum_(obs.storySeedCountNow, seeds);
+    var mediaNow = safeNum_(obs.mediaNow, media);
+    var attnX = Math.max((seeds > 0) ? seedsNow / seeds : 1,
+                         (media > 0) ? mediaNow / media : 1);
+    if (attnX >= 1.5) { m.communityEngagement *= 1.05; m.culturalActivity *= 1.05; m.sentiment += 0.03; }
+    else if (attnX >= 1.25) { m.communityEngagement *= 1.03; }
 
     // engine.185 fix-up (2026-09-10): crime and shock are RELATIVE to their own
     // 6-cycle baseline, priced by how far above it this cycle sits. The absolute
@@ -838,21 +875,58 @@ function applyCityDynamics_(ctx) {
     return sig;
   }
 
+  // engine.188 (2026-09-10): median of a set of cluster/domain weights, so a
+  // gate can ask "busier than the rest of the city THIS cycle?" instead of
+  // "past a number picked when the deck was smaller". engine.38 B2 / engine.184
+  // pattern — a ratio of the cycle's own middle cannot rot when the scale moves.
+  function medianOf_(vals) {
+    if (!vals || !vals.length) return 0;
+    var a = vals.slice().sort(function(x, y) { return x - y; });
+    var mid = Math.floor(a.length / 2);
+    return (a.length % 2) ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+  }
+
+  function seedClusterMedian_(seedSig) {
+    var vals = [];
+    for (var k in seedSig.byCluster) {
+      if (!seedSig.byCluster.hasOwnProperty(k)) continue;
+      vals.push(safeNum_(seedSig.byCluster[k].weighted, 0));
+    }
+    return medianOf_(vals);
+  }
+
+  function seedDomainMedian_(seedSig, domain) {
+    var vals = [];
+    for (var k in seedSig.byDomainCluster) {
+      if (!seedSig.byDomainCluster.hasOwnProperty(k)) continue;
+      vals.push(safeNum_((seedSig.byDomainCluster[k] || {})[domain], 0));
+    }
+    return medianOf_(vals);
+  }
+
   function applySeedLocalBoost_(m, seedSig, clusterName) {
     if (!seedSig || !seedSig.byCluster || !seedSig.byCluster[clusterName]) return;
 
     var c = seedSig.byCluster[clusterName];
     var w = safeNum_(c.weighted, 0);
 
-    if (w >= 10) {
+    // engine.188: the absolute ladder fired for 23 of 25 cluster-cycles measured
+    // (C102-C106, five clusters) — every cluster in the city collecting a
+    // standing lift for having any story activity at all. Against the cycle's
+    // own cross-cluster median, the boost marks the cluster the city is actually
+    // looking at, and an ordinary week pays nothing.
+    var wMed = seedClusterMedian_(seedSig);
+    var wX = (wMed > 0) ? w / wMed : 1;
+
+    if (wX >= 1.75) {
       m.culturalActivity *= 1.08;
       m.communityEngagement *= 1.04;
       m.sentiment += 0.04;
-    } else if (w >= 6) {
+    } else if (wX >= 1.35) {
       m.culturalActivity *= 1.05;
       m.communityEngagement *= 1.03;
       m.sentiment += 0.02;
-    } else if (w >= 3) {
+    } else if (wX >= 1.15) {
       m.culturalActivity *= 1.03;
       m.communityEngagement *= 1.02;
       m.sentiment += 0.01;
@@ -869,11 +943,15 @@ function applyCityDynamics_(ctx) {
     if (wCulture >= 6) { m.culturalActivity *= 1.05; m.publicSpaces *= 1.03; }
     else if (wCulture >= 3) { m.culturalActivity *= 1.03; }
 
-    if (wComm >= 6) { m.communityEngagement *= 1.05; m.sentiment += 0.03; }
-    else if (wComm >= 3) { m.communityEngagement *= 1.03; }
+    // engine.188: same treatment for the two domain gates that move sentiment.
+    // CULTURE / NIGHTLIFE stay absolute — they move no mood, only activity.
+    var commX = (function() { var d = seedDomainMedian_(seedSig, 'COMMUNITY'); return d > 0 ? wComm / d : 1; })();
+    if (commX >= 1.5) { m.communityEngagement *= 1.05; m.sentiment += 0.03; }
+    else if (commX >= 1.25) { m.communityEngagement *= 1.03; }
 
-    if (wBiz >= 6) { m.retail *= 1.04; m.sentiment += 0.02; }
-    else if (wBiz >= 3) { m.retail *= 1.02; }
+    var bizX = (function() { var d = seedDomainMedian_(seedSig, 'BUSINESS'); return d > 0 ? wBiz / d : 1; })();
+    if (bizX >= 1.5) { m.retail *= 1.04; m.sentiment += 0.02; }
+    else if (bizX >= 1.25) { m.retail *= 1.02; }
 
     if (wNight >= 6) { m.nightlife *= 1.05; m.traffic *= 1.03; }
     else if (wNight >= 3) { m.nightlife *= 1.03; }
@@ -1041,7 +1119,10 @@ function applyCityDynamics_(ctx) {
       storySeedCount: obsAvg.storySeedCount,
       shockCount: obsAvg.shockCount,
       crimeNow: obsCur.crime,
-      shockCountNow: obsCur.shockCount
+      shockCountNow: obsCur.shockCount,
+      eventsNow: obsCur.events,             // engine.188
+      storySeedCountNow: obsCur.storySeedCount,
+      mediaNow: obsCur.media
     });
 
     // Story seed boosts
@@ -1482,6 +1563,10 @@ function applyCityDynamics_(ctx) {
     finalCity[mk] = blend(prev ? prev[mk] : null, rawCity[mk], mf);
   }
 
+  // engine.188: the blended sentiment BEFORE the four one-cycle boosts below.
+  // This is what carries to the next cycle — see the note at the persist site.
+  var preBoostSentiment = finalCity.sentiment;
+
   // ─────────────────────────────────────────────────────────────────────────
   // MEDIA FEEDBACK (v3.0 — previous cycle's media coverage affects today)
   // ─────────────────────────────────────────────────────────────────────────
@@ -1650,7 +1735,33 @@ function applyCityDynamics_(ctx) {
     communityEngagement: round2(finalCity.communityEngagement)
   };
 
+  // ─────────────────────────────────────────────────────────────────────────
+  // MOMENTUM CARRIER (engine.188, 2026-09-10)
+  // ─────────────────────────────────────────────────────────────────────────
+  // The four sentiment boosts folded in above (media hope/anxiety, sports
+  // record, initiative implementation, edition coverage) are applied AFTER the
+  // momentum blend, and the blended-plus-boosted value was then persisted as
+  // the carrier the NEXT cycle blends against. So each boost was re-added on
+  // top of its own echo, every cycle, forever:
+  //
+  //     f = m*f + (1-m)*raw + b   ->   f = raw + b/(1-m)
+  //
+  // With the sentiment momentum factor at 0.50 that is 2x, and at 0.40 (the
+  // in-shock factor, which engine.187 shows has been on 19 of 19 cycles) it is
+  // 1.67x. Every one of those four is a LEVEL recomputed from current state
+  // each cycle, not a one-off impulse, so integrating it was double-counting —
+  // and it made the caps the code documents a fiction: the initiative boost is
+  // clamped +/-0.15 and was landing +/-0.30 in the resting mood, edition
+  // +/-0.20 landing +/-0.40. Measured on live C101-C106 the four summed to
+  // about +0.13 and contributed about +0.26. A cap that doesn't cap is the
+  // same trick as a gate that can't fire — SIM_DOCTRINE §15.
+  //
+  // The carrier is now the blended value WITHOUT this cycle's boosts, so a
+  // boost lands at full strength in the cycle it belongs to and does not echo.
+  // S.previousCityDynamics is private to this file (written here, read only at
+  // the momentum blend above) — nothing downstream reads it.
   S.previousCityDynamics = copyObj_(S.cityDynamics);
+  S.previousCityDynamics.sentiment = round2(clampSent(preBoostSentiment));
 
   // Additive outputs
   S.clusterDynamics = clusterDynamics;

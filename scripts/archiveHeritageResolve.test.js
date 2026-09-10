@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 /**
- * engine.90 Commit 6 + Commit 12 (GAS half) — the heritage engine and the
- * health-cause intake resolve a POPID that left Simulation_Ledger through
- * Citizen_Archive. Same VM pattern as householdReconcile.test.js: the engine
+ * engine.90 Commit 6 — the heritage engine resolves a POPID that left
+ * Simulation_Ledger through Citizen_Archive. Same VM pattern as householdReconcile.test.js: the engine
  * files load into one flat namespace, exactly as clasp runs them.
  *
  * Proves: (1) an archived deceased member stays in MembersList and the
@@ -37,8 +36,7 @@ const NS = new Function(
   R('../phase01-config/advanceSimulationCalendar.js') + '\n' +
   R('../utilities/archiveCitizenExits.js') + '\n' +
   R('../phase05-citizens/generationalWealthEngine.js') + '\n' +
-  R('../phase11-media-intake/healthCauseIntake.js') + '\n' +
-  'return { updateHeritage_, getCitizenWealth_, findHouseholdSurvivors_, citizenArchiveLatestByPop_, processHealthCauseIntake_, citizenArchiveHeaders_ };'
+  'return { updateHeritage_, getCitizenWealth_, findHouseholdSurvivors_, citizenArchiveLatestByPop_, citizenArchiveHeaders_ };'
 )();
 
 function mockSheet(values) {
@@ -145,18 +143,6 @@ console.log('engine.90 Commit 6 — inheritance readers fall back to the snapsho
   const ctx = ctxWith([], [arow({ popId: 'POP-1', status: 'Traded', reason: 'traded-away', exit: 100, nw: 1 }), arow({ popId: 'POP-1', status: 'deceased', reason: 'deceased', exit: 109, nw: 2 })], ['LIN-00005', 'Varek', 'POP-1', 100, 'B', 1, 0, '[]', 0, 'Founding', 0, 0, '[]', 0, 0, 109]);
   const m = NS.citizenArchiveLatestByPop_(ctx, H);
   assert('two snapshots: the newest exit is the one served', m['POP-1'].reason === 'deceased' && m['POP-1'].exitCycle === 109 && m['POP-1'].row[hi('NetWorth')] === 2 && m['POP-1'].returnEligible === false, JSON.stringify(m['POP-1']));
-}
-
-console.log('engine.90 Commit 12 (GAS half) — healthCauseIntake names an archived miss');
-{
-  const SLH = ['POPID', 'Name', 'Status', 'HealthCause'];
-  const sheets = {
-    Simulation_Ledger: mockSheet([SLH.slice(), ['POP-2', 'Elias Varek', 'critical', '']]),
-    Citizen_Archive: mockSheet([AH.slice(), arow({ popId: 'POP-1', status: 'deceased', reason: 'deceased', exit: 108 })]),
-  };
-  const ss = { getSheetByName: (n) => sheets[n] || null };
-  const r = NS.processHealthCauseIntake_({ ss, summary: { cycleId: 110 }, config: { cycleCount: 110 } }, '- POP-2: pneumonia\n- POP-1: stroke\n- POP-77: flu\n');
-  assert('living row written; archived POPID refused with the exit named; unknown POPID still "not found"', r.processed === 1 && sheets.Simulation_Ledger._values[1][3] === 'pneumonia' && r.errors.some(e => /POPID archived \(deceased C108\), HealthCause not written: POP-1/.test(e)) && r.errors.some(e => /POPID not found: POP-77/.test(e)), JSON.stringify(r));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

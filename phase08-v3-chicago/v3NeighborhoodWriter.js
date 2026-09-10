@@ -430,7 +430,12 @@ function saveV3NeighborhoodMap_(ctx) {
       crime = round2(Math.max(0, crime + (cFold.CrimeIndex || 0)));
       retail = round2(Math.max(0, retail + (cFold.RetailVitality || 0)));
       eventAttract = round2(Math.max(0, eventAttract + (cFold.EventAttractiveness || 0)));
-      sent = round2(Math.max(0, sent + (cFold.Sentiment || 0))); // clamp ≥0: chaos hits harder than pulse
+      // engine.185 fix-up (2026-09-10): no floor on sentiment. The §S265 Math.max(0)
+      // guard is right for crime/retail/event, which cannot be negative, and was
+      // copied onto sentiment, which can. It pinned Brooklyn and San Antonio at
+      // exactly 0.00 and meant no hood could ever feel worse than neutral. The
+      // engine.165 clamp below already bounds this to [-1, 1].
+      sent = round2(sent + (cFold.Sentiment || 0));
     }
     // engine.165: the saved value is bounded like the Phase-2 value it started from ([-1, 1],
     // applyCityDynamics clampSent). Profile mod + city nudge + variance + pulse + chaos are all

@@ -523,12 +523,23 @@ function applyCityDynamics_(ctx) {
     if (seeds >= 10 || media >= 10) { m.communityEngagement *= 1.05; m.culturalActivity *= 1.05; m.sentiment += 0.03; }
     else if (seeds >= 6 || media >= 6) { m.communityEngagement *= 1.03; }
 
-    // Crime dampens nightlife and tourism (ripple effect)
-    if (crime >= 3) { m.nightlife *= 0.88; m.publicSpaces *= 0.90; m.tourism *= 0.92; m.sentiment -= 0.28; }  // engine.185: a crime wave
-    else if (crime >= 1) { m.nightlife *= 0.95; m.tourism *= 0.97; m.sentiment -= 0.06; }
+    // engine.185 fix-up (2026-09-10): crime and shock are RELATIVE to their own
+    // 6-cycle baseline, priced by how far above it this cycle sits. The absolute
+    // `>= 3` / `>= 1` gates were satisfied every cycle (counts never drop below
+    // the floor in a city this size), so they were a permanent tax wearing a
+    // gate's clothes — and the first repricing pass made that tax 2.5x heavier.
+    // At or below baseline is normal activity and costs nothing. This duplicates
+    // applyShockMonitor's job as a workaround; once that detector is unstuck
+    // (19 of 19 cycles shock-flag) this should read S.shockFlag instead.
+    var crimeNow = safeNum_(obs.crimeNow, crime);
+    var crimeX = (crime > 0) ? crimeNow / crime : 1;
+    if (crimeX >= 1.5) { m.nightlife *= 0.88; m.publicSpaces *= 0.90; m.tourism *= 0.92; m.sentiment -= 0.28; }  // half again the usual: a crime wave
+    else if (crimeX >= 1.25) { m.nightlife *= 0.95; m.tourism *= 0.97; m.sentiment -= 0.12; }            // a bad stretch
 
-    if (shocks >= 3) { m.traffic *= 0.94; m.sentiment -= 0.20; }   // engine.185: three shocks in one cycle
-    else if (shocks >= 1) { m.sentiment -= 0.05; }
+    var shocksNow = safeNum_(obs.shockCountNow, shocks);
+    var shockX = (shocks > 0) ? shocksNow / shocks : 1;
+    if (shockX >= 1.5) { m.traffic *= 0.94; m.sentiment -= 0.20; }   // a genuine shock cycle
+    else if (shockX >= 1.25) { m.sentiment -= 0.10; }                 // an unusually busy one
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -689,6 +700,13 @@ function applyCityDynamics_(ctx) {
     crime: rollingAvg_('crime', 6),
     shockCount: rollingAvg_('shockCount', 6)
   };
+  // engine.185 fix-up (2026-09-10): this cycle's raw counts, so the crime and
+  // shock gates below can ask "more than usual?" instead of "more than three?".
+  // worldEvents.length runs 8-13 EVERY cycle (mostly low-severity texture — a
+  // holy day counts), so `shocks >= 3` was true 19 of 19 cycles measured and
+  // the line it gates was a flat per-cycle tax, never a shock signal.
+  var obsHist = S.activityObservations.history;
+  var obsCur = obsHist[obsHist.length - 1] || obs;
 
   // ─────────────────────────────────────────────────────────────────────────
   // STORY SEED SIGNALS (cluster-aware, calendar-aware)
@@ -1021,7 +1039,9 @@ function applyCityDynamics_(ctx) {
       media: obsAvg.media,
       crime: obsAvg.crime,
       storySeedCount: obsAvg.storySeedCount,
-      shockCount: obsAvg.shockCount
+      shockCount: obsAvg.shockCount,
+      crimeNow: obsCur.crime,
+      shockCountNow: obsCur.shockCount
     });
 
     // Story seed boosts

@@ -77,7 +77,7 @@ const NON_HOODS = new Set(['city-wide', 'citywide', '']);
 // drift — SIM_DOCTRINE §13). The teams belong to the sports desks. Live
 // sector strings from the C106 dump.
 const NON_BUSINESS_SECTOR_RE =
-  /municipal|public (transit|services|safety)|legal|judicial|faith|synagogue|church|community development|transit & infrastructure|housing & social|media & journalism|crisis response|^sports( franchise)?$/i;
+  /municipal|public (transit|services|safety)|legal|judicial|faith|synagogue|church|community (development|services)|transit & infrastructure|housing & social|media & journalism|crisis response|^sports( franchise)?$/i;
 
 const BEAT_TABS = ['Business_Ledger', 'Employment_Roster', 'Story_Seed_Deck', 'Story_Hook_Deck', 'Business_Archive', 'Casino_Ledger'];
 

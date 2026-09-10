@@ -53,7 +53,9 @@ function makeRoot(cycle) {
     { BIZ_ID: 'BIZ-00009', Name: 'Oakmesh Systems', Sector: 'Civic Tech', Neighborhood: 'West Oakland', Employee_Count: '46', Avg_Salary: '140000', Annual_Revenue: '30000000', Growth_Rate: '9', Key_Personnel: 'POP-00789 Marcus Tan (Founder)' },
     { BIZ_ID: 'BIZ-00017', Name: 'City of Oakland', Sector: 'Municipal Government', Neighborhood: 'Downtown', Employee_Count: '1202', Avg_Salary: '80000', Annual_Revenue: '0', Growth_Rate: '0', Key_Personnel: '' },
     { BIZ_ID: 'BIZ-00016', Name: 'Oakland Unified School District', Sector: 'Education', Neighborhood: 'City-wide', Employee_Count: '5201', Avg_Salary: '70000', Annual_Revenue: '0', Growth_Rate: '0', Key_Personnel: '' },
-    { BIZ_ID: 'BIZ-00070', Name: 'Glenview Hardware', Sector: 'Retail', Neighborhood: 'Glenview', Employee_Count: '4', Avg_Salary: '35000', Annual_Revenue: '300000', Growth_Rate: '2', Key_Personnel: '' }
+    { BIZ_ID: 'BIZ-00070', Name: 'Glenview Hardware', Sector: 'Retail', Neighborhood: 'Glenview', Employee_Count: '4', Avg_Salary: '35000', Annual_Revenue: '300000', Growth_Rate: '2', Key_Personnel: '' },
+    // Mutual-aid org with a payroll — civic/faith territory, not the business desk (builder ruling, 2026-09-10).
+    { BIZ_ID: 'BIZ-00080', Name: 'Test Community Center', Sector: 'Community Services', Neighborhood: 'West Oakland', Employee_Count: '95', Avg_Salary: '42000', Annual_Revenue: '2000000', Growth_Rate: '8', Key_Personnel: '' }
   ];
   const ER = [
     { BIZ_ID: 'BIZ-00043', POP_ID: 'POP-00900', CitizenName: 'Rosa Delgado', RoleType: 'Line Cook', Status: 'Active', MappingLayer: 'existing' },
@@ -64,6 +66,7 @@ function makeRoot(cycle) {
     { BIZ_ID: 'BIZ-00009', POP_ID: 'POP-00905', CitizenName: 'Priya Natarajan', RoleType: 'Civic Data Engineer', Status: 'Active', MappingLayer: 'existing' },
     { BIZ_ID: 'BIZ-00017', POP_ID: 'POP-00906', CitizenName: 'Avery Santana', RoleType: 'Mayor of Oakland', Status: 'Active', MappingLayer: 'existing' },
     { BIZ_ID: 'BIZ-00016', POP_ID: 'POP-00907', CitizenName: 'A Teacher', RoleType: 'Teacher', Status: 'Active', MappingLayer: 'existing' },
+    { BIZ_ID: 'BIZ-00080', POP_ID: 'POP-00911', CitizenName: 'Test Organizer', RoleType: 'Community Organizer', Status: 'Active', MappingLayer: 'existing' },
     { BIZ_ID: 'SELF_EMPLOYED', POP_ID: 'POP-00908', CitizenName: 'Solo Painter', RoleType: 'Painter', Status: 'SELF_EMPLOYED', MappingLayer: 'keyword' },
     { BIZ_ID: 'UNTRACKED', POP_ID: 'POP-00909', CitizenName: 'Nobody Tracked', RoleType: 'Janitor', Status: 'UNTRACKED', MappingLayer: 'unmatched' }
   ];
@@ -158,6 +161,7 @@ console.log('business variant:');
   ok('public sector excluded (City of Oakland never on a business slice)',
     !slice.businesses.some(b => /City of Oakland/.test(b.name)) &&
     !slice.candidates.some(c => c.hood === 'Downtown'));
+  ok('community-services orgs excluded (mutual aid is civic/faith territory)', !JSON.stringify(slice.businesses).includes('Test Community Center'));
   ok('picked hood has a staffed business', slice.businesses.some(b => b.staff.length > 0));
   ok('story.citizens are "Name (POP-xxxxx)"', slice.story.citizens.length > 0 &&
     slice.story.citizens.every(c => /^.+ \(POP-\d+\)$/.test(c)));

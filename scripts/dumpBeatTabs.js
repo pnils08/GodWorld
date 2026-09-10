@@ -53,6 +53,7 @@ const BEAT_TABS = [
   'Health_Cause_Queue',       // Lila
   'Community_Programs',       // Elliot Graye, Maria
   'Faith_Organizations',      // Elliot Graye
+  'Faith_Ledger',             // Elliot Graye — the week's faith events (Phase4-FaithEvents → ensureFaithLedger)
   'Cycle_Weather',            // Noah
   'Household_Ledger',         // every hood story — who lives there, what they pay
   'Story_Seed_Deck',          // the engine's per-desk seeds: Citizens + Businesses attached

@@ -826,7 +826,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('STANCE: culture ground. First-person witness. One block one truth.');
       L.push('ONE piece — not multi-voice culture-desk average.');
     } else if (persona.name && /elliot\s*graye/i.test(persona.name)) {
-      L.push('STANCE: faith/quiet work. Dignity. Packet institutions only.');
+      L.push('STANCE: faith/quiet work. Dignity. The week\'s events and congregations on this slice are real; the rest of the room is yours.');
       L.push('ONE piece — not multi-voice culture-desk average.');
     } else if (persona.name && /kai\s*marston/i.test(persona.name)) {
       L.push('STANCE: arts present-tense. Neighborhood act not gallery PR.');

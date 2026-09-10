@@ -73,6 +73,12 @@ function writeDump(dir, cycle) {
     Community_Programs: [
       { Program_ID: 'PRG-T', Name: 'Test Program', Founder_POPID: 'POP-90001', Neighborhood: 'Downtown', Type: 'mutual-aid', Status: 'active', Founded_Cycle: '100' }
     ],
+    Faith_Ledger: [
+      { Timestamp: 't3', Cycle: String(cycle), Organization: 'Test Temple', FaithTradition: 'Buddhist', EventType: 'holy_day', EventDescription: 'Vesak observance held', Neighborhood: 'Chinatown', Attendance: '120', Status: 'occurred' },
+      { Timestamp: 't2', Cycle: String(cycle - 1), Organization: 'Test Fellowship', FaithTradition: 'Protestant', EventType: 'crisis_response', EventDescription: 'emergency assistance fund activated', Neighborhood: 'Downtown', Attendance: '', Status: 'occurred' },
+      // Nine cycles back — outside the 7-cycle window of a weekly seat.
+      { Timestamp: 't1', Cycle: String(cycle - 9), Organization: 'Test Fellowship', FaithTradition: 'Protestant', EventType: 'outreach', EventDescription: 'STALE event outside the window', Neighborhood: 'Downtown', Attendance: '30', Status: 'occurred' }
+    ],
     Employment_Roster: [
       { BIZ_ID: 'BIZ-T-TRANSIT', POP_ID: 'POP-90020', CitizenName: 'Test Operator', RoleType: 'Transit Operator (AC Transit)', Status: 'Active', MappingLayer: 'existing' },
       { BIZ_ID: 'BIZ-T-BAR', POP_ID: 'POP-90021', CitizenName: 'Test Bartender', RoleType: 'Bartender', Status: 'Active', MappingLayer: 'existing' },
@@ -88,7 +94,9 @@ function writeDump(dir, cycle) {
     ],
     Story_Hook_Deck: [
       { Cycle: String(cycle), HookId: 'h1', HookType: 'cluster', Domain: 'HEALTH', Neighborhood: 'Chinatown', Priority: '3', HookText: 'Heavy health activity this cycle.', SuggestedJournalist: 'Dr. Lila Mezran', SuggestedAngle: 'general coverage' },
-      { Cycle: String(cycle - 1), HookId: 'h0', HookType: 'cluster', Domain: 'HEALTH', Neighborhood: '', Priority: '3', HookText: 'STALE hook.', SuggestedJournalist: 'Dr. Lila Mezran', SuggestedAngle: '' }
+      { Cycle: String(cycle - 1), HookId: 'h0', HookType: 'cluster', Domain: 'HEALTH', Neighborhood: '', Priority: '3', HookText: 'STALE hook.', SuggestedJournalist: 'Dr. Lila Mezran', SuggestedAngle: '' },
+      // The engine's deskMap has no FAITH key — this is how a faith hook actually arrives: City Desk, no journalist.
+      { Cycle: String(cycle), HookId: 'h2', HookType: 'signal', Domain: 'FAITH', Neighborhood: 'Chinatown', Priority: '2', HookText: 'Notable event: "Test Temple: Vesak observance held". Follow-up recommended.', SuggestedDesks: 'City Desk', SuggestedJournalist: '', SuggestedAngle: '' }
     ],
     Story_Seed_Deck: []
   };
@@ -174,7 +182,15 @@ try {
 
   console.log('faith:');
   const f = faith.buildFaithSlice(CYCLE, { root });
+  ok('seat POPID is the ledger\'s Graye (POP-00012), not Sharon Okafor', f.seat.popid === 'POP-00012');
   ok('rotates by cycle (103 % 2 = 1 → Test Temple)', f.organization && f.organization.Organization === 'Test Temple');
+  ok('week events lead, crisis before holy_day even a cycle older', /^Test Fellowship \(Downtown\), C102 — crisis response: emergency assistance fund activated/.test(f.facts[0].text) &&
+    f.facts[1] && /^Test Temple \(Chinatown\), C103 — holy day: Vesak observance held \(attendance 120\)/.test(f.facts[1].text));
+  ok('event outside the 7-cycle window never rides', !JSON.stringify(f.facts).includes('STALE event'));
+  ok('week line in the label', /2 faith events on the record since C97/.test(f.story.label));
+  ok('event-org leader joins the people on the record', f.citizens.some(c => c.popid === 'POP-90010' && /crisis response this week/.test(c.why)));
+  ok('FAITH-domain hook reaches him despite the City Desk misroute', f.prewrite.hooks.some(h => /Test Temple: Vesak observance held/.test(h.text) && h.domain === 'FAITH'));
+  ok('every fact sourced', f.facts.every(x => /output\/beats\//.test(x.src)));
   const fellowship = (() => {
     const meta = path.join(output, 'beats', 'meta.json');
     const m = JSON.parse(fs.readFileSync(meta, 'utf8')); m.cycle = CYCLE + 1; fs.writeFileSync(meta, JSON.stringify(m));
@@ -197,7 +213,7 @@ try {
   ok('legacy loadSafetySlice export still works', typeof safety.loadSafetySlice === 'function');
 
   console.log('typed packet (LEP/2) per seat:');
-  for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00159'], ['rachel', r, 'POP-00057']]) {
+  for (const [label, slice, popid] of [['trevor', t, 'POP-00155'], ['lila', h, 'POP-00154'], ['angela', s, 'POP-00156'], ['noah', e, 'POP-00157'], ['graye', f, 'POP-00012'], ['rachel', r, 'POP-00057']]) {
     const pk = v2.buildAnglePacket({ cycle: CYCLE, desk: slice.seat.desk, reporter: { popid, name: slice.seat.name }, story: slice.story, approach: slice.approach, slice, lane: [] });
     const b = pk.task.creativeBrief;
     ok(label + ': brief beat-slice with facts + room', b && b.kind === 'beat-slice' && b.facts.length >= 1 && !!b.roomIsYours);

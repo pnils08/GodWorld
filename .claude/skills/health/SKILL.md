@@ -58,6 +58,15 @@ node scripts/ctxMap.js | tail -3   # Connected | Orphaned | Phantom counts
 
 This catches new orphans introduced since the last `/tech-debt-audit`.
 
+## Scan 4: Dead Branches (WARNING) — SIM_DOCTRINE §15
+
+```bash
+node scripts/deadBranchScan.js | grep -E "^TOTAL|^=====|^phase|^utilities|^  :"   # live
+node scripts/deadBranchScan.js --sheet-id=<bench id>                              # bench
+```
+
+A gate that can't fire is a trick. Every bare numeric threshold in `phase*/` and `utilities/` is checked against the live range of the sheet column it gates on. **NEVER-FIRES** = the metric never reaches the threshold (the branch has never run). **ALWAYS-TRUE** = it always does (a constant, not a gate). Column-index guards (`iFoo >= 0`) and clamp bounds (`> 1`, `< -1` on a [-1,1] field) are expected always/never — read the list, don't count it. What matters is a NEVER-FIRES on a real condition (sentiment `<= -0.3` ×62 was the S441 find) or an ALWAYS-TRUE on a "crisis" gate (`shocks >= 3`, true 19/19). Fix pattern: relative to the column's own baseline (engine.38 B2, engine.184), never a re-tuned constant.
+
 ## Output Format
 
 ```
@@ -67,6 +76,7 @@ ENGINE HEALTH CHECK — [date]
 DETERMINISM: [CLEAN | N violations]
 CHAINS: [INTACT | N broken]
 ORPHANS: [CLEAN | N new orphans]
+DEAD BRANCHES: [N never-fire / M always-true — list the real-condition ones]
 
 Overall: [HEALTHY | NEEDS ATTENTION | CRITICAL]
 ================================

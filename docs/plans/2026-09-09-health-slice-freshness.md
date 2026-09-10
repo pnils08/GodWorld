@@ -44,7 +44,12 @@ pointers:
    - **A hood-level migration number already exists.** `Neighborhood_Map.MigrationFlow` (col P), per-hood, scale −5..+5, written in Phase 6 by `applyMigrationDrift.js` from local metrics and loaded to `S.neighborhoodState[hood].migrationFlow` at Phase 2 (`loadNeighborhoodState.js:128`). Also available: `S.relocationPressureDeltas` (actual per-hood arrivals/departures, `migrationTrackingEngine.js:787-791`) and `CITIZEN_RELOCATED` story hooks carrying `fromNeighborhood`/`neighborhood`.
    - **Blocker on the correct fix: `MigrationFlow` is currently pinned at its ceiling.** Bench C110 reads 19 of 22 hoods at 5, three at 4 — no spread to threshold against. Pointing `driftRaw` at it with today's bands would also drive every hood to one label ('Stable', since `driftNum > 5` is false at exactly 5). So the per-hood fix needs the bands rescaled to −5..+5 **and** the `applyMigrationDrift` saturation understood first.
 
-   Recommended order: (1) rescale/repoint `DemographicMarker` to `S.neighborhoodState[hood].migrationFlow` inside the hood loop; (2) diagnose why `MigrationFlow` saturates at +5. Neither is in this plan's scope — filed here because the drift fix is what exposed them, and (1) gates this wave's PROD push.
+   **BOTH SHIPPED as engine.184 (`83707f93`), builder go 2026-09-10 — bench-proven on 0908 @8 / C111, ok:true 149s, 0 Engine_Errors.**
+   - `v3NeighborhoodWriter` now scores the label per hood off `S.neighborhoodMigration[hood].drift` (Phase 6, −5..+5) inside the hood loop, original band proportions carried onto that scale, city path kept as the Phase-6-absent fallback.
+   - `applyMigrationDrift` per-hood thresholds became ratios of the cycle's own cross-hood median (the engine.38 B2 pattern), and the city term dropped from `drift/8` (3 of the 5-point ceiling) to `drift/25` (a tilt).
+   - **Saturation root cause, measured:** three of the four local signals had degenerated into flat bonuses and the fourth was dead — retail 3.71–9.95 against a `>= 1.3` gate, event 11–55.78 against `>= 1.3`, crime peaking at 1.09 against a `>= 1.2` penalty, sentiment topping at 0.25 against `>= 0.3`. Metric scales had drifted past thresholds written for them.
+   - **Result:** `MigrationFlow` `5`x19/`4`x3 → `-4`x1 `-3`x1 `-2`x3 `-1`x5 `0`x6 `+1`x1 `+2`x4 `+5`x1. `DemographicMarker` 1 base label → 6 distinct. Reads true to hood character (East Oakland outflow pressure, Baylight District −4 under construction, Grand Lake the lone inflow surge).
+   - PROD gate on this wave is cleared by the same commit.
 
 ---
 

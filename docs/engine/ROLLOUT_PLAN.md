@@ -5,6 +5,7 @@
 **Status:** ACTIVE (building) | **Last Updated:** 2026-08-15 — S371 consolidation (research-build). This file is now the ONLY open-work tracker: [[archive/ENGINE_REPAIR]] retired to history, its 2 unique open rows migrated as `engine.106`/`engine.107`, and `engine.105` registered retroactively after shipping live with no row. S371 sweep moved 6 `done-pending-archive` rows out. 110 rows open — of the 107 triaged at sweep close, 40 were touched within 30 days, 53 are stale past 30 days, and 14 have never been cited by any commit; the other 3 are `engine.105`/`106`/`107`, registered after the triage ran. Full triage table + the 14 ids: [[ROLLOUT_ARCHIVE]] §S371 triage.
 **Filing protocol (S212):** semantic groups + pointer-only entries — see [[rollout-rules]] §3–§5 (taxonomy, add, close). Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
+**The lens (S441, Mike-direct):** [[SIM_DOCTRINE]] §15 — a gate that can't fire is a trick. Check every threshold against its column's live range; the chain to test is start → peak → end → aftermath → referenced. Read before touching any mechanic.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
 **Wiki layer:** [[SCHEMA]] (conventions) + [[index]] (catalog) — read at boot. (Phase 41.1 + 41.2, S146.)

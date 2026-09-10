@@ -122,6 +122,24 @@ A neighborhood has nothing to do with what a person earns. Their job pays them �
 
 And within the job, the life sets the number (S436, Mike-direct: "if all plumbers make x, what makes each differ? Since the concept is that citizens be different, this would be that opportunity"). Years in the career, the credential against what the field expects, drive, tier and the employer's health place each citizen inside their job's band. Two plumbers never make the same money, and the reason is on their row.
 
+## 15. A gate that can't fire is a trick. (S441, Mike-direct)
+
+Real life and real-world Oakland are two separate things. Prosperity-era bars
+importing Oakland's problems and cynicism; it never barred adversity. Older
+models flattened the two into one rule and built a world that could not have a
+bad day — Mike's verdict: "a code to trick me, not simulate life." The tell is
+mechanical: **an absolute threshold whose input never crosses it.** City
+sentiment never went below −0.02 in 37 cycles; 62 branches across 37 files
+gated on `<= −0.3`. Every downside pathway sat behind a door that had never
+opened, and the output stayed plausible the whole time. Same shape on the way
+up: `shocks >= 3` was true 19 of 19 cycles, a tax wearing a gate's clothes.
+When you write or touch a threshold, check it against the column's live range
+first — and prefer a band relative to the city's own middle (engine.38 B2,
+engine.184), which cannot rot when the scale moves. The chain to test is not
+"how bad does the worst day feel" — it is start, peak, end, aftermath, and can
+it be referenced afterwards as that event. Both directions. Memory:
+`project_real-life-is-not-real-world-oakland`.
+
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make
 a row drive a fate the builder didn't choose — or does it just tidy data?**

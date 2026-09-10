@@ -242,7 +242,13 @@ function compactCrisisArcs_(arcs) {
       domain: a.domain,
       summary: String(a.summary || '').slice(0, 160),
       citizens: (a.citizens || []).slice(0, 6),
-      consecutiveBad: a.consecutiveBad || 1,
+      consecutiveBad: a.consecutiveBad || 0,
+      // engine.186: the recovery counter has to survive the carry or an arc can
+      // never close — it was stripped here on the first bench, restarted at 0
+      // every cycle, and Brooklyn sat in 'decline' for three clean cycles
+      // without ever reaching RESOLVE_CYCLES. (consecutiveBad || 1 above also
+      // re-armed a zeroed bad-counter to 1 on every carry; now || 0.)
+      consecutiveGood: a.consecutiveGood || 0,
       cycleCreated: a.cycleCreated,
       phaseStartCycle: a.phaseStartCycle || a.cycleCreated,
       source: a.source || 'DETECTED'

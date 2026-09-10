@@ -15,6 +15,21 @@ cd /root/GodWorld
 CLAUDE_CTL=1 npx clasp push
 ```
 
+**`push` alone does NOT change what a fire runs.** The web-app deployments are
+pinned to a script VERSION, so `clasp push` updates the project's files while the
+`/exec` URL keeps serving the old version. A pull-back can verify byte-identical
+and the next fire still runs the previous code — engine.188 (S443) burned two
+bench cycles that way, and the result looked like the fix had failed rather than
+like it had never been loaded. Always check, then cut a version:
+
+```bash
+npx clasp deployments                     # "@12" = pinned; "@HEAD" = follows push
+CLAUDE_CTL=1 npx clasp deploy -i <deploymentId> -d "<what changed>"
+npx clasp deployments                     # read back: the id should now say @13
+```
+
+Only a deployment listed as `@HEAD` picks up a bare push.
+
 ## From Cloud Shell (manual fallback)
 
 ```bash

@@ -63,6 +63,15 @@ var CRISIS_DETECT = {
   MIGRATION_OUT_MIN: -30,      // defensive; column 0-filled on prod
   HOUSING_Z: 1.5,              // defensive; z-relative (scale differs bench vs prod)
   ONSET_CHANNELS: 2,
+  // engine.186 (2026-09-10): resolution MIRRORS onset. It used to demand ZERO bad
+  // channels on two consecutive cycles while onset fired at two — so a hood that
+  // was chronically slightly-bad (one channel, the normal state of a real place)
+  // could enter a crisis but never leave it. Measured on the live ledger before
+  // this change: 36 of 38 arcs reached peak (95%), 1 reached resolved (3%), and
+  // arcs oscillated peak<->decline ~6.6 times each instead of completing.
+  // Three consecutive bad cycles make a peak; three consecutive cycles back under
+  // the onset bar now close it.
+  RESOLVE_CYCLES: 3,
   RESOLVED_RIPPLE: 0.02, ONSET_RIPPLE: 0.05
 };
 
@@ -231,6 +240,7 @@ function generateCrisisBuckets_(ctx) {
     arc.prevPhase = arc.phase;
     if (ch.count >= CRISIS_DETECT.ONSET_CHANNELS) {
       arc.consecutiveBad = (arc.consecutiveBad || 1) + 1;
+      arc.consecutiveGood = 0;                       // engine.186: a bad cycle restarts recovery
       arc.tension = Math.min(10, 2 * ch.count + arc.consecutiveBad);
       var newPhase = arc.consecutiveBad >= 3 ? 'peak' : (arc.consecutiveBad === 2 ? 'rising' : 'early');
       if (newPhase !== arc.phase) {
@@ -244,22 +254,27 @@ function generateCrisisBuckets_(ctx) {
       arc.phase = newPhase;
       arc.summary = arc.neighborhood + ' under strain: ' + ch.evidence.join('; ');
       arc.citizens = ch.citizens.length ? ch.citizens : (arc.citizens || []);
-    } else if (ch.count === 1) {
-      arc.tension = Math.round(arc.tension * 0.7 * 100) / 100;
-      if (arc.tension < 3) { arc.phase = 'decline'; arc.phaseStartCycle = cycle; }
-      arc.summary = arc.neighborhood + ' still strained: ' + ch.evidence.join('; ');
     } else {
-      arc.tension = Math.round(arc.tension * 0.5 * 100) / 100;
-      if (arc.phase === 'decline') {
+      // engine.186: BELOW the onset bar is recovery, whether that is one channel
+      // or none. Tension still bleeds at the old two rates so a fully-clear cycle
+      // recovers faster than a lingering one, but both now COUNT toward closing.
+      arc.consecutiveGood = (arc.consecutiveGood || 0) + 1;
+      arc.consecutiveBad = 0;
+      arc.tension = Math.round(arc.tension * (ch.count === 1 ? 0.7 : 0.5) * 100) / 100;
+
+      if (arc.consecutiveGood >= CRISIS_DETECT.RESOLVE_CYCLES) {
         arc.phase = 'resolved';
         arc.cycleResolved = cycle;
-        arc.summary = arc.neighborhood + ' crisis eased — conditions back within city range';
+        arc.summary = arc.neighborhood + ' crisis eased after ' +
+          arc.consecutiveGood + ' cycles back within city range';
         emitRipple_(arc, 'crisis-resolved', CRISIS_DETECT.RESOLVED_RIPPLE, arc.summary);
         queueAppendIntent_(ctx, 'Event_Arc_Ledger', ledgerRow_(arc, 'resolved'), 'crisis arc resolved', 'events');
       } else {
+        if (arc.phase !== 'decline') arc.phaseStartCycle = cycle;
         arc.phase = 'decline';
-        arc.phaseStartCycle = cycle;
-        arc.summary = arc.neighborhood + ' recovering — pressure lifting';
+        arc.summary = ch.count === 1
+          ? arc.neighborhood + ' easing but still strained: ' + ch.evidence.join('; ')
+          : arc.neighborhood + ' recovering — pressure lifting';
       }
     }
     S.eventArcs.push(arc);

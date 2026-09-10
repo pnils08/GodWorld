@@ -468,9 +468,11 @@ function applyCityDynamics_(ctx) {
     var stud = safeNum_(demoAgg.studentRatio, 0);
     var sen = safeNum_(demoAgg.seniorRatio, 0);
 
-    // Unemployment (v2.5 values)
-    if (ur > 0.12) { m.retail *= 0.92; m.sentiment -= 0.15; }
-    else if (ur > 0.08) { m.retail *= 0.96; m.sentiment -= 0.08; }
+    // Unemployment — engine.185 repricing (2026-09-10). 12%+ joblessness is a
+    // depression, not a bad mood; it now weighs like a major holiday does in the
+    // other direction. See the header note on severity tiers.
+    if (ur > 0.12) { m.retail *= 0.92; m.sentiment -= 0.32; }
+    else if (ur > 0.08) { m.retail *= 0.96; m.sentiment -= 0.15; }
     else if (ur < 0.05) { m.retail *= 1.05; m.sentiment += 0.05; }
 
     // Sickness (v2.5 values)
@@ -478,10 +480,11 @@ function applyCityDynamics_(ctx) {
       m.publicSpaces *= 0.88;
       m.communityEngagement *= 0.90;
       m.nightlife *= 0.92;
-      m.sentiment -= 0.10;
+      m.sentiment -= 0.30;   // engine.185: an epidemic, priced as one
     } else if (sr > 0.06) {
       m.publicSpaces *= 0.95;
       m.communityEngagement *= 0.96;
+      m.sentiment -= 0.12;   // engine.185: a serious outbreak used to cost nothing
     }
 
     // Youth population (v2.5 values)
@@ -500,11 +503,11 @@ function applyCityDynamics_(ctx) {
 
     if (mood >= 70) { m.retail *= 1.06; m.sentiment += 0.05; m.tourism *= 1.04; }
     else if (mood >= 60) { m.retail *= 1.03; m.sentiment += 0.02; }
-    else if (mood <= 30) { m.retail *= 0.90; m.sentiment -= 0.10; m.tourism *= 0.93; }
-    else if (mood <= 40) { m.retail *= 0.95; m.sentiment -= 0.05; }
+    else if (mood <= 30) { m.retail *= 0.90; m.sentiment -= 0.30; m.tourism *= 0.93; }  // engine.185: a depression
+    else if (mood <= 40) { m.retail *= 0.95; m.sentiment -= 0.12; }
 
     if (desc === 'thriving') { m.retail *= 1.04; m.culturalActivity *= 1.03; }
-    if (desc === 'struggling') { m.retail *= 0.95; m.sentiment -= 0.04; }
+    if (desc === 'struggling') { m.retail *= 0.95; m.sentiment -= 0.07; }
   }
 
   function applyObservedFeedback_(m, obs) {
@@ -521,11 +524,11 @@ function applyCityDynamics_(ctx) {
     else if (seeds >= 6 || media >= 6) { m.communityEngagement *= 1.03; }
 
     // Crime dampens nightlife and tourism (ripple effect)
-    if (crime >= 3) { m.nightlife *= 0.88; m.publicSpaces *= 0.90; m.tourism *= 0.92; m.sentiment -= 0.12; }
-    else if (crime >= 1) { m.nightlife *= 0.95; m.tourism *= 0.97; m.sentiment -= 0.04; }
+    if (crime >= 3) { m.nightlife *= 0.88; m.publicSpaces *= 0.90; m.tourism *= 0.92; m.sentiment -= 0.28; }  // engine.185: a crime wave
+    else if (crime >= 1) { m.nightlife *= 0.95; m.tourism *= 0.97; m.sentiment -= 0.06; }
 
-    if (shocks >= 3) { m.traffic *= 0.94; m.sentiment -= 0.08; }
-    else if (shocks >= 1) { m.sentiment -= 0.03; }
+    if (shocks >= 3) { m.traffic *= 0.94; m.sentiment -= 0.20; }   // engine.185: three shocks in one cycle
+    else if (shocks >= 1) { m.sentiment -= 0.05; }
   }
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -883,14 +886,14 @@ function applyCityDynamics_(ctx) {
       m.nightlife *= 0.85;
       m.tourism *= 0.88;
       m.publicSpaces *= 0.88;
-      m.sentiment -= 0.15;
+      m.sentiment -= 0.30;   // engine.185: a cluster under a crime wave
     } else if (localCrime >= 2) {
       m.nightlife *= 0.92;
       m.tourism *= 0.94;
-      m.sentiment -= 0.08;
+      m.sentiment -= 0.15;
     } else if (localCrime >= 1) {
       m.nightlife *= 0.97;
-      m.sentiment -= 0.04;
+      m.sentiment -= 0.06;
     }
 
     // engine.45 T3b: persist the crime→dynamics fold with its cause — first
@@ -1218,7 +1221,7 @@ function applyCityDynamics_(ctx) {
           var sick0 = (d0.sick || 0) / pop0;
           if (stud0 >= 0.25) { nm.nightlife *= 1.04; nm.culturalActivity *= 1.03; }
           if (sen0 >= 0.25) { nm.communityEngagement *= 1.04; nm.nightlife *= 0.97; }
-          if (sick0 >= 0.10) { nm.publicSpaces *= 0.95; nm.sentiment -= 0.04; }
+          if (sick0 >= 0.10) { nm.publicSpaces *= 0.95; nm.sentiment -= 0.22; }  // engine.185: a tenth of the hood is sick
         }
       }
 
@@ -1226,13 +1229,13 @@ function applyCityDynamics_(ctx) {
       var e0 = neighborhoodEconomies[nhood];
       if (e0 && e0.mood !== undefined) {
         if (e0.mood >= 70) { nm.retail *= 1.03; nm.sentiment += 0.02; }
-        else if (e0.mood <= 30) { nm.retail *= 0.95; nm.sentiment -= 0.04; }
+        else if (e0.mood <= 30) { nm.retail *= 0.95; nm.sentiment -= 0.20; }  // engine.185: local depression
       }
 
       // Neighborhood-specific crime
       var nhCrime = safeNum_(crimeByNeighborhood[nhood], 0);
-      if (nhCrime >= 2) { nm.nightlife *= 0.90; nm.sentiment -= 0.08; }
-      else if (nhCrime >= 1) { nm.nightlife *= 0.96; nm.sentiment -= 0.03; }
+      if (nhCrime >= 2) { nm.nightlife *= 0.90; nm.sentiment -= 0.20; }   // engine.185
+      else if (nhCrime >= 1) { nm.nightlife *= 0.96; nm.sentiment -= 0.06; }
 
       // v3.0: Neighborhood momentum — blend with previous cycle's state
       // S247 FIX (substrate-critical): `prevState` is a var declared at L1254 —

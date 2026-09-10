@@ -116,6 +116,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per [[rollout-rules]] §3
 | engine.188 | Sentiment TOP end: resting mood climbs toward 1.0 once the −0.48/cycle tax came off (bench hood mean 0.89 at C119, cells at 1.00). Upward vocabulary (+10.26, 54 sites) needs the 185 treatment. **Gates PROD push of 185/186.** Detail: commit `f60a2ea7` | needs-info | engine-sheet | ROLLOUT row (S441) |
 | engine.189 | Faith lane routing: `FAITH` in storyHook deskMap + angle match; FAITH row in buildContractSeeds (3 tables) + rosterLookup/bylineEngine keyword maps; `S.faithStorySignals` persist-or-delete. Shares hook loop with engine.190 | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] §Proposed engine cuts + §Review |
 | engine.190 | Business closures reach the business desk: stamp `domain: 'BUSINESS'`, let `'high'` severity hook (§15), one `recordRipple_` per closure (`economic-event`/`business`) so a closure is an ECONOMIC seed same cycle | ready | engine-sheet | [[../research/2026-09-10-kimi-business-lane-lifecycle]] §Proposed engine cuts + §Review |
+| engine.191 | School-district roster mis-mapped: 12/29 active BIZ-00016/35 rows off-role (plumber, line cooks, taxi driver, a Grade Schooler b.2030) — `EmployerBizId` set by the Education skill tag, not the job. Targeted restore of the 12 + linker guard, never a sweep | ready | engine-sheet | [[../plans/2026-09-07-beat-slices-from-sheets-plan]] §Changelog 2026-09-10 (kimi education lane) |
 
 ### canon.* — World-fidelity layer
 

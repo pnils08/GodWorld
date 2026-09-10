@@ -140,6 +140,29 @@ engine.184), which cannot rot when the scale moves. The chain to test is not
 it be referenced afterwards as that event. Both directions. Memory:
 `project_real-life-is-not-real-world-oakland`.
 
+## 16. A column that never moves is scenery, not simulation. (S442, Mike-direct — "gravitate to all systems drift")
+
+A frozen table reads like data because it has a header and a value, but if no
+phase ever rewrites it, it is backfill wearing a column's clothes — one layer
+under §15's gate that can't fire: a static *reading* instead of a static
+*gate*. Live case: Neighborhood_Demographics' SchoolQualityIndex,
+GraduationRate, CollegeReadinessRate, TeacherQuality, and Funding were
+backfilled once by script and untouched by any phase since — Angela Reyes was
+about to write "weakest school" copy off a number the city cannot move no
+matter what happens to it (kimi, education lane, S442). Ruling: gravitate
+every system toward **drift** — a value that moves cycle-to-cycle as a
+function of its own causal inputs (hood pressure, funding, initiatives, the
+event stream) — over a static backfill that only ever gets read. Drift is not
+noise; the movement still has to trace to a cause, same as §2's causes-then-
+dice. A column earns its place in a beat slice only once something in the
+engine can move it.
+
+Mechanism: no dedicated scan exists yet for this the way `deadBranchScan.js`
+(§15, /health Scan 4) finds dead gates — a candidate is any column a beat
+slice or story-hook path reads with no phase writer. Flag on discovery, file
+per-system as found (engine.192 is the first instance); a project-wide sweep
+is Watch List, not a build (ROLLOUT §Watch List).
+
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make
 a row drive a fate the builder didn't choose — or does it just tidy data?**

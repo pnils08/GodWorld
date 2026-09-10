@@ -45,8 +45,6 @@ const ALLOWLIST = {
   'Storyline_Tracker':   'live tab, DISCONTINUED 2026-08-05 but legacy writers still touch it (docs/SPREADSHEET.md:116); schema header missing',
   // --- Auto-created manual-entry tabs (Election_Log precedent: created on write) ---
   'MediaRoom_Paste':     'auto-created manual-entry tab — phase07-evening-media/parseMediaRoomMarkdown.js insertSheet on operator run; menu-wired (utilities/godWorldMenu.js "Parse Media Room Markdown")',
-  // --- Pending disposition ---
-  'Health_Cause_Intake': 'PENDING CREATE (Mike-ruled 2026-08-16, infrastructure.6 Track B; engine-sheet executes live tab creation) — only input path of operator-fired runProcessHealthCauseIntake (phase11-media-intake/healthCauseIntake.js)',
 };
 
 const REF_RE = /(?:getSheetByName|insertSheet)\(\s*['"`]([^'"`]+)['"`]/g;

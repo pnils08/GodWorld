@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-08",
+  "generated": "2026-09-09",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 184,
-  "functionsMapped": 1358,
+  "filesScanned": 183,
+  "functionsMapped": 1356,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -446,7 +446,6 @@
         "phase02-world-state/applyWeatherModel.js::applyWeatherModel_",
         "phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_",
         "phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_",
-        "phase02-world-state/updateTransitMetrics.js::isGameDay_",
         "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
         "phase03-population/finalizeWorldPopulation.js::finalizeWorldPopulation_",
@@ -521,8 +520,7 @@
         "phase01-config/advanceSimulationCalendar.js::simYearOf_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/runYouthEngine.js::generateSchoolWideEvents_",
-        "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_",
-        "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_"
+        "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_"
       ]
     },
     "weather": {
@@ -747,8 +745,6 @@
         "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
         "phase10-persistence/recordWorldEventsv3.js::recordWorldEventsv3_",
         "phase10-persistence/saveV3Seeds.js::saveV3Seeds_",
-        "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_",
-        "phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_",
         "utilities/archiveCitizenExits.js::archiveCitizenExits_",
         "utilities/citizenDialMap.js::emitPressureTag_",
         "utilities/compressLifeHistory.js::compressLifeHistory_",
@@ -1880,7 +1876,8 @@
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_"
       ],
       "readers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase02-world-state/updateTransitMetrics.js::initiativeTransitEffects_"
       ]
     },
     "manualDynamicsInputs": {
@@ -1998,6 +1995,9 @@
       "readers": [
         "phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_",
         "phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_",
+        "phase02-world-state/updateTransitMetrics.js::calculateStationMetrics_",
+        "phase02-world-state/updateTransitMetrics.js::gameDayHoodsFor_",
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
         "phase07-evening-media/buildEveningFamous.js::buildEveningFamous_",
@@ -2163,6 +2163,10 @@
       ],
       "readers": [
         "phase02-world-state/applySportsSeason.js::findColumnIndex_",
+        "phase02-world-state/updateTransitMetrics.js::countMajorEvents_",
+        "phase02-world-state/updateTransitMetrics.js::gameDayHoodsFor_",
+        "phase02-world-state/updateTransitMetrics.js::isGameDay_",
+        "phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
@@ -2383,10 +2387,10 @@
     },
     "demographicDrift": {
       "writers": [
-        "phase03-population/applyDemographicDrift.js::applyDemographicDrift_",
-        "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_"
+        "phase03-population/applyDemographicDrift.js::applyDemographicDrift_"
       ],
       "readers": [
+        "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_",
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_",
         "phase04-events/generationalEventsEngine.js::checkHealthEvent_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_",
@@ -2424,6 +2428,12 @@
       "readers": [
         "phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_"
       ]
+    },
+    "demographicDriftLabel": {
+      "writers": [
+        "phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_"
+      ],
+      "readers": []
     },
     "demographicDriftSummary": {
       "writers": [
@@ -4108,12 +4118,6 @@
       ],
       "readers": []
     },
-    "healthCauseBriefing": {
-      "writers": [
-        "phase11-media-intake/healthCauseIntake.js::runGenerateHealthBriefing"
-      ],
-      "readers": []
-    },
     "pressureTagged": {
       "writers": [
         "utilities/citizenDialMap.js::emitPressureTag_"
@@ -4270,7 +4274,6 @@
         "phase05-citizens/citizenContextBuilder.js::getCitizensForQuotes",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_",
-        "phase05-citizens/processAdvancementIntake.js::checkBusinessOwnerPromotions_",
         "phase05-citizens/processAdvancementIntake.js::checkEmergencePromotions_",
         "phase05-citizens/processAdvancementIntake.js::checkFamilyMatchPromotions_",
         "phase05-citizens/processAdvancementIntake.js::markAsEmergedInGeneric_",
@@ -4382,9 +4385,7 @@
     },
     "Simulation_Ledger": {
       "writers": [
-        "phase05-citizens/generationalWealthEngine.js::ensureHeritageSchema_",
-        "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_",
-        "phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_"
+        "phase05-citizens/generationalWealthEngine.js::ensureHeritageSchema_"
       ],
       "readers": [
         "phase01-config/initSimulationLedger.js::initSimulationLedger_",
@@ -4398,8 +4399,6 @@
         "phase07-evening-media/mediaRoomIntake.js::processRawCitizenUsageLog_",
         "phase07-evening-media/mediaRoomIntake.js::routeCitizenUsageToIntake_",
         "phase10-persistence/cycleExportAutomation.js::exportSimulationLedger",
-        "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_",
-        "phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_",
         "utilities/archiveCitizenExits.js::archiveCitizenExits_",
         "utilities/ensureNeighborhoodDemographics.js::seedNeighborhoodDemographicsFromLedger_",
         "utilities/exportCitizensSnapshot.js::exportCitizensSnapshot_"
@@ -4498,16 +4497,14 @@
         "phase02-world-state/loadEventContentLedger.js::loadUndockedFeed_"
       ]
     },
-    "WorldEvents_Ledger": {
+    "WorldEvents_V3_Ledger": {
       "writers": [],
       "readers": [
         "phase02-world-state/updateTransitMetrics.js::loadPreviousCycleEvents_",
-        "phase04-events/worldEventsEngine.js::worldEventsEngine_",
-        "phase10-persistence/recordWorldEventsv25.js::ensureWorldEventsLedger_",
-        "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
-        "phase10-persistence/recordWorldEventsv25.js::upgradeWorldEventsLedger_",
+        "phase10-persistence/recordWorldEventsv3.js::recordWorldEventsv3_",
         "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78"
+        "utilities/cycleRollback.js::rollbackToCycle78",
+        "utilities/ensureWorldEventsV3Ledger.js::ensureWorldEventsV3Ledger_"
       ]
     },
     "Hospital_Ledger": {
@@ -4594,6 +4591,17 @@
         "phase05-citizens/householdFormationEngine.js::formCriteriaHouseholds_",
         "phase05-citizens/householdFormationEngine.js::processHouseholdFormation_",
         "phase05-citizens/processAdvancementIntake.js::formIntakeHouseholds_"
+      ]
+    },
+    "WorldEvents_Ledger": {
+      "writers": [],
+      "readers": [
+        "phase04-events/worldEventsEngine.js::worldEventsEngine_",
+        "phase10-persistence/recordWorldEventsv25.js::ensureWorldEventsLedger_",
+        "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_",
+        "phase10-persistence/recordWorldEventsv25.js::upgradeWorldEventsLedger_",
+        "utilities/cycleRollback.js::previewRollbackToCycle78",
+        "utilities/cycleRollback.js::rollbackToCycle78"
       ]
     },
     "Business_Archive": {
@@ -4818,29 +4826,6 @@
         "phase10-persistence/recordCycleWeather.js::getWeatherForCycle_",
         "phase10-persistence/recordCycleWeather.js::getWeatherHistory_",
         "phase10-persistence/recordCycleWeather.js::recordCycleWeather_"
-      ]
-    },
-    "WorldEvents_V3_Ledger": {
-      "writers": [],
-      "readers": [
-        "phase10-persistence/recordWorldEventsv3.js::recordWorldEventsv3_",
-        "utilities/cycleRollback.js::previewRollbackToCycle78",
-        "utilities/cycleRollback.js::rollbackToCycle78",
-        "utilities/ensureWorldEventsV3Ledger.js::ensureWorldEventsV3Ledger_"
-      ]
-    },
-    "Health_Cause_Queue": {
-      "writers": [],
-      "readers": [
-        "phase11-media-intake/healthCauseIntake.js::exportHealthCauseQueue_",
-        "phase11-media-intake/healthCauseIntake.js::generateHealthCauseBriefing_",
-        "phase11-media-intake/healthCauseIntake.js::updateHealthCauseQueue_"
-      ]
-    },
-    "Health_Cause_Intake": {
-      "writers": [],
-      "readers": [
-        "phase11-media-intake/healthCauseIntake.js::processHealthCauseIntake_"
       ]
     },
     "Citizen_Archive": {

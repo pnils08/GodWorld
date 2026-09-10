@@ -1216,8 +1216,9 @@ function padStart_(str, targetLength, padChar) {
  * clear waits; if Phase 10 partial-fails the source rows live on and are
  * re-staged next cycle → duplicates). The writeIntents API also has no
  * clear intent type; introducing one would be invasive for a single
- * use-case. Same reasoning as the healthCauseIntake operator-fired
- * carve-out documented in engine.md §Phase 11 media intake (S236).
+ * use-case. Same reasoning as the (since retired, 2026-09-09)
+ * healthCauseIntake operator-fired carve-out documented in engine.md
+ * §Phase 11 media intake (S236).
  */
 function processIntake_(ctx) {
   // Phase 42 §5.6: SL writes via shared ctx.ledger (push staged rows;

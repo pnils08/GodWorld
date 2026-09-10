@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-08 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-09 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -472,11 +472,18 @@
 
 ### updateTransitMetrics.js
 - **updateTransitMetrics_Phase2_(ctx)**
-  Reads: S.absoluteCycle, S.commuteFlows, S.holiday, S.previousCycleState, S.season, S.transitMetrics, S.transitState, S.weather
+  Reads: S.absoluteCycle, S.commuteFlows, S.holiday, S.previousCycleState, S.season, S.sportsFeedEntries, S.sportsZones, S.transitMetrics, S.transitState, S.weather
   Writes: S.transitMetrics, S.transitState
   RNG: ctx.rng / safeRand_(ctx)
 
 - **calculateStationMetrics_(station, context, demographics, rng)**
+  Reads: S.sportsZones
+
+- **intersectHoods_(a, b)**
+
+- **factorsString_(context, causes)**
+
+- **rowCauses_(allMetrics)**
 
 - **calculateCorridorTraffic_(corridor, context, rng)**
 
@@ -485,12 +492,21 @@
 - **calculateTrafficModLocal_(context)**
 
 - **loadPreviousCycleEvents_(ctx, currentCycle)**
-  Sheets: WorldEvents_Ledger
+  Sheets: WorldEvents_V3_Ledger
+
+- **summarizePrevCycleEvents_(worldEvents)**
+
+- **gameDayHoodsFor_(S)**
+  Reads: S.sportsFeedEntries, S.sportsZones
+
+- **initiativeTransitEffects_(S)**
+  Reads: S.initiativeImplementationEffects
 
 - **countMajorEvents_(worldEvents)**
+  Reads: S.sportsFeedEntries
 
-- **isGameDay_(ctx, rng, prevCycleEvents)**
-  Reads: S.season
+- **isGameDay_(ctx)**
+  Reads: S.sportsFeedEntries
 
 - **sumRidership_(stationMetrics)**
 
@@ -498,13 +514,17 @@
 
 - **avgTraffic_(corridorMetrics)**
 
-- **generateStationNotes_(station, context, ridership, onTime)**
+- **generateStationNotes_(station, ridership, onTime, gameDayHere)**
 
-- **generateCorridorNotes_(corridor, context, traffic)**
+- **generateCorridorNotes_(context, traffic, gameDayHere)**
 
 - **generateTransitAlerts_(stationMetrics, corridorMetrics, context)**
 
 - **createTransitSignalChain_(detected, value, context)**
+
+- **transitDriversPhrase_(factors)**
+
+- **alertsWithCauses_(alerts, causes)**
 
 - **getTransitStorySignals_(ctx)**
   Reads: S.transitMetrics
@@ -527,8 +547,8 @@
 
 ### deriveDemographicDrift.js
 - **deriveDemographicDrift_(ctx)**
-  Reads: S.cityDynamics, S.civicLoad, S.civicLoadScore, S.economicMood, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlifeVolume, S.shockFlag, S.sportsAtmosphereEnabled, S.sportsSeason, S.storyHooks, S.textureTriggers, S.weatherMood, S.worldEvents
-  Writes: S.demographicDrift, S.demographicDriftFactors, S.demographicDriftSummary
+  Reads: S.cityDynamics, S.civicLoad, S.civicLoadScore, S.demographicDrift, S.economicMood, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlifeVolume, S.shockFlag, S.sportsAtmosphereEnabled, S.sportsSeason, S.storyHooks, S.textureTriggers, S.weatherMood, S.worldEvents
+  Writes: S.demographicDriftFactors, S.demographicDriftLabel, S.demographicDriftSummary
 
 ### finalizeWorldPopulation.js
 - **finalizeWorldPopulation_(ctx)**
@@ -1897,7 +1917,6 @@
 
 - **checkBusinessOwnerPromotions_(ctx, cycle, slots)**
   Config: ctx.config.rngSeed
-  Sheets: Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
 - **wireBusinessOwners_(ctx, mints, cycle, now, logSheet)**
@@ -3078,38 +3097,6 @@
   Config: ctx.config.cycleCount
   Sheets: Story_Seed_Deck
 
-## Phase 11: Media Intake (`phase11-media-intake/`)
-
-### healthCauseIntake.js
-- **normalizeHealthStatus_(status)**
-
-- **isHealthStatusNeedingCause_(status)**
-
-- **exportHealthCauseQueue_(ctx)**
-  Reads: S.cycleId, S.simYear
-  Config: ctx.config.cycleCount
-  Sheets: Health_Cause_Queue, Simulation_Ledger
-
-- **parseHealthCauseMarkdown_(markdown)**
-
-- **processHealthCauseIntake_(ctx, markdownInput)**
-  Reads: S.cycleId
-  Config: ctx.config.cycleCount
-  Sheets: Health_Cause_Intake, Simulation_Ledger
-
-- **updateHealthCauseQueue_(ss, assignments, cycle)**
-  Sheets: Health_Cause_Queue
-
-- **generateHealthCauseBriefing_(ctx)**
-  Sheets: Health_Cause_Queue
-
-- **runExportHealthCauseQueue()**
-
-- **runProcessHealthCauseIntake()**
-
-- **runGenerateHealthBriefing()**
-  Writes: S.healthCauseBriefing
-
 ## Utilities (`utilities/`)
 
 ### archiveCitizenExits.js
@@ -3949,5 +3936,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 184
-**Functions mapped:** 1358
+**Files scanned:** 183
+**Functions mapped:** 1356

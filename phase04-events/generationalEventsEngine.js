@@ -626,7 +626,8 @@ function runGenerationalEngine_(ctx) {
 
         // engine.102 W4 (Task 7) — stamp a known cause at admission instead of
         // leaving it blank for the operator queue (criterion 5; the queue flow
-        // becomes optional refinement — healthCauseIntake skips non-blank).
+        // was retired 2026-09-09 with healthCauseIntake.js — causes are
+        // engine-written, period).
         var cause102 = buildAdmissionCause_(ctx, admitStatus, healthResult2, calendarContext);
         if (iHealthCause >= 0 && !row[iHealthCause]) row[iHealthCause] = cause102;
 

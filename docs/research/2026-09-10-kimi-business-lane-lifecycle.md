@@ -112,6 +112,8 @@ pattern verbatim, and demoting severity would also shrink `impactScore` for the
 v3 writers. This change is shared with engine.189 (faith hooks) — one pass on
 the loop.
 
-**Still open, sim call (not a row):** the Monday fanout slot is `business-desk`
-(`newsroom-fanout.js:48`) and Jordan Velez appears in no `.claude/agents/`
-file. Whether his byline lands on Monday business copy is the builder's.
+**Not open — kimi's byline concern is a non-issue.** The Monday slot slug
+`business-desk` IS Jordan Velez: `.claude/agents/business-desk/IDENTITY.md:3`
+("You are Jordan Velez"), `RULES.md:19` (single reporter), and
+`utilities/rosterLookup.js:56,329-331` (POP-00153; economics/labor/business →
+Velez). The byline lands.

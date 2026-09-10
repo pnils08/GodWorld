@@ -16,6 +16,10 @@
  *   output/beats/Business_Ledger.jsonl    — BIZ_ID, Name, Sector, Neighborhood, Employee_Count, ...
  *   output/beats/Employment_Roster.jsonl  — BIZ_ID, POP_ID, CitizenName, RoleType, Status
  *   output/beats/Story_Seed_Deck.jsonl    — cumulative; filtered to Cycle === current, Desk business
+ *   output/beats/Story_Hook_Deck.jsonl    — BUSINESS hooks / hooks addressed to Jordan Velez
+ *   output/beats/Business_Archive.jsonl   — closures with exit metadata (engine.96 Phase11)
+ *   output/beats/Casino_Ledger.jsonl      — wagers + house float (business covers casino, S433)
+ *   output/beats/prev/Business_Ledger.jsonl — prior cycle, for movement facts (typed NO_PRIOR_CYCLE until it exists)
  *   output/desk_signal_c{N}.json          — optional; lanes.business as pointers only
  *
  * A missing or stale dump throws. There is no fallback to the old signal-only slice.
@@ -34,7 +38,7 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
-const VERSION = 'ECONOMIC-SLICE-2';
+const VERSION = 'ECONOMIC-SLICE-3';
 
 const FACTS_TAIL =
   'Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent ' +
@@ -43,9 +47,12 @@ const FACTS_TAIL =
 
 const ECONOMIC_APPROACH =
   'Business desk approach: this slice is one neighborhood\'s businesses from the ledger and the ' +
-  'people on the roster who work there. Open from a named business or a named worker on it — the ' +
-  'block, the counter, the hiring board, what the owner is worried about. One claim about how the ' +
-  'block is moving. Not civic process roundup. Not multi-voice business-desk average. ' + FACTS_TAIL;
+  'people on the roster who work there — plus what moved since last cycle: revenue and headcount ' +
+  'deltas, contractions, closures on the archive, and the week\'s casino action. When the record ' +
+  'shows a business closing or shedding workers, that is the story. Open from a named business or ' +
+  'a named worker on it — the block, the counter, the hiring board, what the owner is worried ' +
+  'about. One claim about how the block is moving. Not civic process roundup. Not multi-voice ' +
+  'business-desk average. ' + FACTS_TAIL;
 
 const FOOD_APPROACH =
   'Food & hospitality approach — kitchens as workplaces: this slice is one neighborhood\'s ' +
@@ -72,7 +79,7 @@ const NON_HOODS = new Set(['city-wide', 'citywide', '']);
 const NON_BUSINESS_SECTOR_RE =
   /municipal|public (transit|services|safety)|legal|judicial|faith|synagogue|church|community development|transit & infrastructure|housing & social|media & journalism|crisis response|^sports( franchise)?$/i;
 
-const BEAT_TABS = ['Business_Ledger', 'Employment_Roster', 'Story_Seed_Deck'];
+const BEAT_TABS = ['Business_Ledger', 'Employment_Roster', 'Story_Seed_Deck', 'Story_Hook_Deck', 'Business_Archive', 'Casino_Ledger'];
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);
@@ -133,6 +140,61 @@ function num(v) {
   return Number.isFinite(n) ? n : null;
 }
 
+/** Prior-cycle rows for a tab from output/beats/prev/ — a typed first-cycle state, never a throw. */
+function loadPrevTab(root, tab) {
+  const dir = path.join(root, 'output', 'beats', 'prev');
+  const meta = loadJson(path.join(dir, 'meta.json'));
+  if (!meta) return { state: 'NO_PRIOR_CYCLE', vs: null, rows: [] };
+  const p = path.join(dir, tab + '.jsonl');
+  if (!fs.existsSync(p)) return { state: 'NO_PRIOR_CYCLE', vs: null, rows: [] };
+  return { state: 'PRIOR_CYCLE_ON_DISK', vs: Number(meta.cycle), rows: readJsonl(p) };
+}
+
+/** Simulation_Ledger snapshot rows keyed by POPID (absence = empty map, never a throw). */
+function loadProfiles(root) {
+  const out = new Map();
+  try {
+    for (const line of readJsonl(path.join(root, 'output', 'simulation_ledger_snapshot.jsonl'))) {
+      const popid = String(line.POPID || '').trim().toUpperCase();
+      if (popid) out.set(popid, line);
+    }
+  } catch (_) { /* no snapshot on disk */ }
+  return out;
+}
+
+/** $1,800,000 → $1.8M · $41,000 → $41k · $900 → $900 */
+function fmtMoney(n) {
+  if (n == null) return null;
+  const abs = Math.abs(n);
+  const body = abs >= 1e6 ? (Math.round(abs / 1e5) / 10) + 'M' : abs >= 1e3 ? Math.round(abs / 1e3) + 'k' : String(Math.round(abs));
+  return (n < 0 ? '-$' : '$') + body;
+}
+
+/** Signed movement clause: +$50k / -$50k → null when zero or unknown. */
+function fmtDelta(n) {
+  if (n == null || n === 0) return null;
+  return (n > 0 ? '+$' : '-$') + fmtMoney(Math.abs(n)).slice(1);
+}
+
+/** This cycle's hooks for the business desk: named to Jordan Velez or Domain BUSINESS. */
+function hooksForBusiness(hookRows, cycle) {
+  const seen = new Set();
+  return (hookRows || [])
+    .filter(r => Number(r.Cycle) === Number(cycle) &&
+      (/jordan\s*velez/i.test(String(r.SuggestedJournalist || '')) || String(r.Domain || '').toUpperCase() === 'BUSINESS'))
+    .map(r => ({
+      text: String(r.HookText || '').trim(), angle: String(r.SuggestedAngle || '').trim() || null,
+      hood: r.Neighborhood || null
+    }))
+    .filter(h => h.text && !seen.has(h.text) && seen.add(h.text))
+    .slice(0, 6);
+}
+
+/** Key_Personnel can carry a "POP-xxxxx Name (role)" tag — the name is the fact, the ID never prints. */
+function cleanKeyPersonnel(s) {
+  return String(s || '').replace(/POP-\d+\s*/g, '').replace(/\s{2,}/g, ' ').trim() || null;
+}
+
 /** Business_Ledger rows joined to their Active roster staff. */
 function joinLedgerToRoster(ledgerRows, rosterRows) {
   const byBiz = new Map();
@@ -155,7 +217,7 @@ function joinLedgerToRoster(ledgerRows, rosterRows) {
     avgSalary: num(b.Avg_Salary),
     annualRevenue: num(b.Annual_Revenue),
     growthRate: num(b.Growth_Rate),
-    keyPersonnel: String(b.Key_Personnel || '').trim() || null,
+    keyPersonnel: cleanKeyPersonnel(b.Key_Personnel),
     staff: (byBiz.get(b.BIZ_ID) || []).filter(s => s.name)
   }));
 }
@@ -283,8 +345,14 @@ function pct(n) {
 function businessFactLine(b, maxStaff) {
   const bits = [b.name];
   if (b.sector) bits.push(b.sector);
-  if (b.employeeCount != null) bits.push(b.employeeCount + ' employees');
+  if (b.employeeCount != null) {
+    bits.push(b.employeeCount + ' employees' +
+      (b.delta && b.delta.employees ? ' (' + (b.delta.employees > 0 ? '+' : '') + b.delta.employees + ' vs C' + b.delta.vsCycle + ')' : ''));
+  }
   if (b.growthRate != null) bits.push('growth ' + pct(b.growthRate));
+  if (b.annualRevenue != null && b.delta && b.delta.revenue) {
+    bits.push('revenue ' + fmtMoney(b.annualRevenue) + ' (' + fmtDelta(b.delta.revenue) + ' vs C' + b.delta.vsCycle + ')');
+  }
   if (b.keyPersonnel) bits.push('key personnel: ' + b.keyPersonnel);
   const staff = b.staff.slice(0, maxStaff).map(s => s.name + (s.role ? ' (' + s.role + ')' : ''));
   if (staff.length) {
@@ -313,6 +381,72 @@ function buildEconomicSlice(cycle, opts) {
 
   const beats = o.beats || loadBeatTabs(root, cyc, BEAT_TABS);
   const all = joinLedgerToRoster(beats.Business_Ledger, beats.Employment_Roster);
+
+  // Movement: the prior dump (output/beats/prev/) turns static values into what
+  // moved. Typed NO_PRIOR_CYCLE until the first rotation exists.
+  const prev = loadPrevTab(root, 'Business_Ledger');
+  const prevById = new Map(prev.rows.map(r => [r.BIZ_ID, r]));
+  for (const b of all) {
+    const pr = prevById.get(b.bizId);
+    if (!pr) continue;
+    const dEmp = b.employeeCount != null && num(pr.Employee_Count) != null ? b.employeeCount - num(pr.Employee_Count) : null;
+    const dRev = b.annualRevenue != null && num(pr.Annual_Revenue) != null ? b.annualRevenue - num(pr.Annual_Revenue) : null;
+    const dGro = b.growthRate != null && num(pr.Growth_Rate) != null ? b.growthRate - num(pr.Growth_Rate) : null;
+    if (dEmp || dRev || dGro) b.delta = { vsCycle: prev.vs, employees: dEmp, revenue: dRev, growth: dGro };
+  }
+
+  // Closures: this cycle's Business_Archive rows (engine.96 Phase 11), plus
+  // anything on the prior dump that vanished with no archive row — the engine
+  // archives same-cycle, so a bare disappearance is a question, not silence.
+  const sectorOk = b => food ? FOOD_SECTOR_RE.test(String(b.sector || '')) : !NON_BUSINESS_SECTOR_RE.test(String(b.sector || ''));
+  const archiveRows = beats.Business_Archive || [];
+  const archivedIds = new Set(archiveRows.map(r => r.BIZ_ID));
+  const currentIds = new Set(all.map(b => b.bizId));
+  const archiveSrc = 'output/beats/Business_Archive.jsonl @C' + cyc;
+  const diffSrc = 'output/beats/prev/Business_Ledger.jsonl vs Business_Ledger.jsonl @C' + cyc;
+  const closures = archiveRows
+    .filter(r => Number(r.ClosedCycle || r.ExitCycle) === cyc)
+    .map(r => ({ name: String(r.Name || '').trim(), sector: r.Sector || null, hood: r.Neighborhood || null,
+      reason: String(r.ArchiveReason || 'closed').trim(), keyPersonnel: cleanKeyPersonnel(r.Key_Personnel), src: archiveSrc }))
+    .filter(cl => cl.name && sectorOk(cl))
+    .concat(prev.state === 'PRIOR_CYCLE_ON_DISK'
+      ? prev.rows.filter(r => r.BIZ_ID && !currentIds.has(r.BIZ_ID) && !archivedIds.has(r.BIZ_ID))
+        .map(r => ({ name: String(r.Name || '').trim(), sector: r.Sector || null, hood: r.Neighborhood || null,
+          reason: 'was on the ledger at C' + prev.vs + ' and is gone, with no archive row', keyPersonnel: cleanKeyPersonnel(r.Key_Personnel), src: diffSrc }))
+        .filter(cl => cl.name && sectorOk(cl))
+      : []);
+
+  // Contraction watch: shedding roster workers while growth sits at or under
+  // zero. Stated as fact; what it means is the reporter's.
+  const contractionWatch = (!food && prev.state === 'PRIOR_CYCLE_ON_DISK')
+    ? all.filter(b => !NON_BUSINESS_SECTOR_RE.test(String(b.sector || '')) && b.delta &&
+        b.delta.employees != null && b.delta.employees < 0 && b.growthRate != null && b.growthRate <= 0)
+      .sort((a, b) => a.delta.employees - b.delta.employees).slice(0, 5)
+    : [];
+
+  // Casino action (business desk covers it, S433): this cycle's wagers by
+  // ledger-tracked patrons, plus the house float. Untracked patrons never print.
+  const profiles = loadProfiles(root);
+  const houseRow = (beats.Casino_Ledger || []).find(r => String(r.WagerId || '').toUpperCase() === 'HOUSE');
+  const casino = { wagers: [], houseFloat: houseRow ? num(houseRow.HouseFloatAfter) : null, totalRows: 0 };
+  if (!food) {
+    const rows = (beats.Casino_Ledger || []).filter(r => String(r.WagerId || '').toUpperCase() !== 'HOUSE' &&
+      (Number(r.CyclePlaced) === cyc || Number(r.CycleSettled) === cyc));
+    casino.totalRows = rows.length;
+    for (const w of rows) {
+      const popid = String(w.POPID || '').toUpperCase();
+      const prof = profiles.get(popid);
+      if (!prof || !prof.Name) continue;
+      casino.wagers.push({
+        popid, name: String(prof.Name).trim(), market: w.MarketFamily || null,
+        stake: num(w.Stake), payout: num(w.Payout), settled: Number(w.CycleSettled) === cyc,
+        status: String(w.Status || '').trim() || null
+      });
+      if (casino.wagers.length >= 5) break;
+    }
+  }
+
+  const hooks = hooksForBusiness(beats.Story_Hook_Deck, cyc);
   const filtered = food
     ? all.filter(b => FOOD_SECTOR_RE.test(String(b.sector || '')))
     : all.filter(b => !NON_BUSINESS_SECTOR_RE.test(String(b.sector || '')));
@@ -356,22 +490,15 @@ function buildEconomicSlice(cycle, opts) {
     ? hood + ' kitchens: ' + named.slice(0, 3).join(', ') + ' — the people who work the shift'
     : hood + ' businesses: ' + named.slice(0, 3).join(', ') + ' — the people who work there';
   const plural = (n, one, many) => n + ' ' + (n === 1 ? one : many);
-  const hookLine = (leadWorker
+  const closureLead = closures.length
+    ? 'CLOSED: ' + closures.map(cl => cl.name).join('; ') + '. '
+    : '';
+  const hookLine = closureLead + (leadWorker
     ? leadWorker.name + (leadWorker.role ? ', ' + leadWorker.role : '') + ' at ' + lead.name + '. '
     : '') +
     plural(workers.length, 'named worker', 'named workers') + ' at ' +
     plural(staffedOnSlice.length, food ? 'named kitchen' : 'named business', food ? 'named kitchens' : 'named businesses') +
     ' in ' + hood + ' on the ledger this cycle.';
-
-  const anchorFacts = businesses.map(b => businessFactLine(b, 4));
-  for (const s of seeds.slice(0, 2)) {
-    const who = s.citizens.slice(0, 4).map(c => c.name).join('; ');
-    const where = s.businesses.map(b => b.name).join('; ');
-    anchorFacts.push('ENGINE SEED' + (s.hood ? ' (' + s.hood + ')' : '') + ': ' +
-      (who ? 'citizens ' + who : 'no citizens attached') +
-      (where ? ' · businesses ' + where : '') +
-      (s.otherEntities ? ' · ' + s.otherEntities : ''));
-  }
 
   const citizens = workers.map(citizenTag);
   for (const s of seedsHere) for (const c of s.citizens) {
@@ -412,6 +539,46 @@ function buildEconomicSlice(cycle, opts) {
   }
   const factSrc = 'output/beats/Business_Ledger.jsonl + Employment_Roster.jsonl @C' + cyc;
   const seedSrc = 'output/beats/Story_Seed_Deck.jsonl @C' + cyc;
+  const casinoSrc = 'output/beats/Casino_Ledger.jsonl @C' + cyc;
+
+  // Casino bettors are interview candidates too (business covers the casino, S433).
+  for (const g of casino.wagers) {
+    if (citizenRows.some(r => r.popid === g.popid)) continue;
+    const prof = profiles.get(g.popid);
+    citizenRows.push({
+      popid: g.popid, name: g.name,
+      role: prof ? String(prof.RoleType || '').trim() || null : null,
+      neighborhood: (prof && String(prof.Neighborhood || '').trim()) || null, business: null,
+      profile: [g.name, prof && String(prof.RoleType || '').trim(), prof && String(prof.Neighborhood || '').trim()].filter(Boolean).join(' — '),
+      why: 'on the Casino_Ledger this cycle — ' + (g.settled ? 'settled' : 'placed') + ' a ' + (g.market || 'casino') + ' wager'
+    });
+  }
+
+  const factEntries = businesses.map(b => ({ text: businessFactLine(b, 4), src: factSrc }));
+  for (const s of seeds.slice(0, 2)) {
+    const who = s.citizens.slice(0, 4).map(c => c.name).join('; ');
+    const where = s.businesses.map(b => b.name).join('; ');
+    factEntries.push({ text: 'ENGINE SEED' + (s.hood ? ' (' + s.hood + ')' : '') + ': ' +
+      (who ? 'citizens ' + who : 'no citizens attached') +
+      (where ? ' · businesses ' + where : '') +
+      (s.otherEntities ? ' · ' + s.otherEntities : ''), src: seedSrc });
+  }
+  for (const cl of closures) {
+    factEntries.push({ text: 'CLOSED: ' + cl.name + (cl.sector ? ' (' + cl.sector + ')' : '') + (cl.hood ? ', ' + cl.hood : '') +
+      ' — ' + cl.reason + (cl.keyPersonnel ? ' · key personnel: ' + cl.keyPersonnel : ''), src: cl.src });
+  }
+  for (const w of contractionWatch) {
+    factEntries.push({ text: 'CONTRACTING: ' + w.name + (w.hood ? ' (' + w.hood + ')' : '') + ' shed ' + Math.abs(w.delta.employees) +
+      ' worker' + (w.delta.employees === -1 ? '' : 's') + ' vs C' + w.delta.vsCycle + ' and growth is ' + pct(w.growthRate), src: diffSrc });
+  }
+  for (const g of casino.wagers) {
+    factEntries.push({ text: 'CASINO: ' + g.name + ' — ' + (g.market || 'casino') + ' wager, staked ' + fmtMoney(g.stake) +
+      (g.settled ? ', settled for ' + fmtMoney(g.payout) : ', placed this cycle'), src: casinoSrc });
+  }
+  if (!food && casino.houseFloat != null) {
+    factEntries.push({ text: 'CASINO: the house float stands at ' + fmtMoney(casino.houseFloat), src: casinoSrc });
+  }
+  const anchorFacts = factEntries.map(e => e.text);
 
   return {
     version: VERSION, empty: false, cycle: cyc, kind, variant,
@@ -422,12 +589,17 @@ function buildEconomicSlice(cycle, opts) {
     businesses,
     seeds,
     citizens: citizenRows,
+    closures,
+    contractionWatch,
+    casino: food ? null : casino,
+    deltas: { state: prev.state, vs: prev.vs },
     prewrite: {
       pulseClass: pulse.className,
       angle, hookLine,
       namedBusinesses: named,
       anchorFacts,
-      evidence: anchorFacts.map(text => ({ text, src: /^ENGINE SEED/.test(text) ? seedSrc : factSrc })),
+      evidence: factEntries,
+      hooks,
       forbidden: [
         'Do not invent a business, a worker, an owner or a place — every name comes from this slice',
         'Do not print internal IDs (POP-/BIZ-) or raw ledger decimals in prose',
@@ -450,6 +622,10 @@ function buildEconomicSlice(cycle, opts) {
       'output/beats/Business_Ledger.jsonl (' + beats.meta.rows.Business_Ledger + ' rows @C' + beats.meta.cycle + ')',
       'output/beats/Employment_Roster.jsonl (' + beats.meta.rows.Employment_Roster + ' rows)',
       'output/beats/Story_Seed_Deck.jsonl (business seeds this cycle: ' + seedsAll.length + ')',
+      prev.state === 'PRIOR_CYCLE_ON_DISK' ? 'output/beats/prev/Business_Ledger.jsonl (movement vs C' + prev.vs + ')' : null,
+      closures.length ? 'output/beats/Business_Archive.jsonl (closures this cycle: ' + closures.length + ')' : null,
+      !food && casino.totalRows ? 'output/beats/Casino_Ledger.jsonl (' + casino.totalRows + ' wager rows this cycle)' : null,
+      hooks.length ? 'output/beats/Story_Hook_Deck.jsonl (business hooks this cycle: ' + hooks.length + ')' : null,
       signals.length ? 'output/desk_signal_c' + cyc + '.json lanes.business (pointers only)' : null,
       'docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 2'
     ].filter(Boolean)
@@ -474,14 +650,50 @@ function formatEconomicSliceMarkdown(slice) {
   L.push('## BUSINESSES (ledger) AND WHO WORKS THERE (roster)');
   for (const b of slice.businesses) {
     L.push('- **' + b.name + '**' + (b.sector ? ' — ' + b.sector : '') +
-      (b.employeeCount != null ? ' · ' + b.employeeCount + ' employees' : '') +
+      (b.employeeCount != null ? ' · ' + b.employeeCount + ' employees' +
+        (b.delta && b.delta.employees ? ' (' + (b.delta.employees > 0 ? '+' : '') + b.delta.employees + ' vs C' + b.delta.vsCycle + ')' : '') : '') +
       (b.growthRate != null ? ' · growth ' + pct(b.growthRate) : '') +
+      (b.annualRevenue != null && b.delta && b.delta.revenue ? ' · revenue ' + fmtMoney(b.annualRevenue) + ' (' + fmtDelta(b.delta.revenue) + ' vs C' + b.delta.vsCycle + ')' : '') +
       (b.keyPersonnel ? ' · key personnel: ' + b.keyPersonnel : ''));
     for (const s of b.staff.slice(0, 4)) L.push('  - ' + s.name + (s.role ? ' — ' + s.role : ''));
     if (b.staff.length > 4) L.push('  - +' + (b.staff.length - 4) + ' more on the roster');
     if (!b.staff.length) L.push('  - _no roster names — the staff here are yours to paint_');
   }
   L.push('');
+  if (slice.deltas && slice.deltas.state === 'NO_PRIOR_CYCLE') {
+    L.push('_Movement: NO_PRIOR_CYCLE — the prior dump rotation starts next cycle._');
+    L.push('');
+  }
+  if (slice.closures && slice.closures.length) {
+    L.push('## CLOSED / GONE THIS CYCLE');
+    for (const cl of slice.closures) {
+      L.push('- **' + cl.name + '**' + (cl.sector ? ' — ' + cl.sector : '') + (cl.hood ? ', ' + cl.hood : '') +
+        ' · ' + cl.reason + (cl.keyPersonnel ? ' · key personnel: ' + cl.keyPersonnel : ''));
+    }
+    L.push('');
+  }
+  if (slice.contractionWatch && slice.contractionWatch.length) {
+    L.push('## CONTRACTION WATCH (shedding workers, growth at or under zero)');
+    for (const w of slice.contractionWatch) {
+      L.push('- **' + w.name + '**' + (w.hood ? ' — ' + w.hood : '') + ' · ' + w.employeeCount + ' employees (' +
+        w.delta.employees + ' vs C' + w.delta.vsCycle + ') · growth ' + pct(w.growthRate));
+    }
+    L.push('');
+  }
+  if (slice.casino && (slice.casino.wagers.length || slice.casino.houseFloat != null)) {
+    L.push('## THE CASINO THIS CYCLE (the business desk covers it)');
+    for (const g of slice.casino.wagers) {
+      L.push('- ' + g.name + ' — ' + (g.market || 'casino') + ' wager, staked ' + fmtMoney(g.stake) +
+        (g.settled ? ', settled for ' + fmtMoney(g.payout) : ', placed this cycle'));
+    }
+    if (slice.casino.houseFloat != null) L.push('- The house float stands at ' + fmtMoney(slice.casino.houseFloat) + '.');
+    L.push('');
+  }
+  if (slice.prewrite.hooks && slice.prewrite.hooks.length) {
+    L.push('## ENGINE HOOKS (colour, not fact)');
+    for (const h of slice.prewrite.hooks) L.push('- ' + h.text + (h.angle ? ' (' + h.angle + ')' : ''));
+    L.push('');
+  }
   L.push('## ENGINE SEEDS (this cycle, business desk)');
   if (!slice.seeds.length) L.push('_none this cycle_');
   for (const s of slice.seeds) {

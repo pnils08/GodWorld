@@ -48,9 +48,9 @@ function makeRoot(cycle) {
     { BIZ_ID: 'BIZ-00043', Name: 'OakHouse', Sector: 'Restaurant & Dining', Neighborhood: 'Rockridge', Employee_Count: '22', Avg_Salary: '41000', Annual_Revenue: '1800000', Growth_Rate: '4.2', Key_Personnel: 'Dana Okafor' },
     { BIZ_ID: 'BIZ-00050', Name: 'Rockridge Books', Sector: 'Retail', Neighborhood: 'Rockridge', Employee_Count: '6', Avg_Salary: '38000', Annual_Revenue: '400000', Growth_Rate: '1.0', Key_Personnel: '' },
     { BIZ_ID: 'BIZ-00044', Name: 'Harborline Grill', Sector: 'Restaurant & Dining', Neighborhood: 'Jack London', Employee_Count: '7', Avg_Salary: '39000', Annual_Revenue: '900000', Growth_Rate: '5', Key_Personnel: '' },
-    { BIZ_ID: 'BIZ-00036', Name: 'Blue Lantern Bar', Sector: 'Nightlife & Entertainment', Neighborhood: 'Jack London', Employee_Count: '30', Avg_Salary: '36000', Annual_Revenue: '2000000', Growth_Rate: '5', Key_Personnel: '' },
+    { BIZ_ID: 'BIZ-00036', Name: 'Blue Lantern Bar', Sector: 'Nightlife & Entertainment', Neighborhood: 'Jack London', Employee_Count: '30', Avg_Salary: '36000', Annual_Revenue: '2000000', Growth_Rate: '-0.5', Key_Personnel: '' },
     { BIZ_ID: 'BIZ-00060', Name: 'Dockhouse BBQ', Sector: 'Restaurant & Dining', Neighborhood: 'Jack London', Employee_Count: '2', Avg_Salary: '33000', Annual_Revenue: '150000', Growth_Rate: '5', Key_Personnel: '' },
-    { BIZ_ID: 'BIZ-00009', Name: 'Oakmesh Systems', Sector: 'Civic Tech', Neighborhood: 'West Oakland', Employee_Count: '46', Avg_Salary: '140000', Annual_Revenue: '30000000', Growth_Rate: '9', Key_Personnel: '' },
+    { BIZ_ID: 'BIZ-00009', Name: 'Oakmesh Systems', Sector: 'Civic Tech', Neighborhood: 'West Oakland', Employee_Count: '46', Avg_Salary: '140000', Annual_Revenue: '30000000', Growth_Rate: '9', Key_Personnel: 'POP-00789 Marcus Tan (Founder)' },
     { BIZ_ID: 'BIZ-00017', Name: 'City of Oakland', Sector: 'Municipal Government', Neighborhood: 'Downtown', Employee_Count: '1202', Avg_Salary: '80000', Annual_Revenue: '0', Growth_Rate: '0', Key_Personnel: '' },
     { BIZ_ID: 'BIZ-00016', Name: 'Oakland Unified School District', Sector: 'Education', Neighborhood: 'City-wide', Employee_Count: '5201', Avg_Salary: '70000', Annual_Revenue: '0', Growth_Rate: '0', Key_Personnel: '' },
     { BIZ_ID: 'BIZ-00070', Name: 'Glenview Hardware', Sector: 'Retail', Neighborhood: 'Glenview', Employee_Count: '4', Avg_Salary: '35000', Annual_Revenue: '300000', Growth_Rate: '2', Key_Personnel: '' }
@@ -72,11 +72,46 @@ function makeRoot(cycle) {
     { Cycle: String(cycle - 1), SeedID: 'old', Desk: 'business', Class: 'major', Domain: 'ECONOMIC', Neighborhood: 'Rockridge', What: 'old', Why: 'x', Citizens: 'POP-00001 Stale Seed', CitizenEvents: '', Businesses: '', OtherEntities: '', Magnitude: '1', Trend: '' },
     { Cycle: String(cycle), SeedID: 'civ', Desk: 'civic', Class: 'major', Domain: 'CIVIC', Neighborhood: 'Rockridge', What: 'civic', Why: 'x', Citizens: 'POP-00002 Civic Seed', CitizenEvents: '', Businesses: '', OtherEntities: '', Magnitude: '1', Trend: '' }
   ];
+  const HOOKS = [
+    { Cycle: String(cycle), HookId: 'bh1', HookType: 'signal', Domain: 'BUSINESS', Neighborhood: 'Jack London', Priority: '3', HookText: 'Notable event: "Harborline Grill posts a record week". Follow-up recommended.', SuggestedDesks: 'Business Desk', SuggestedJournalist: 'Jordan Velez', SuggestedAngle: '' },
+    { Cycle: String(cycle - 1), HookId: 'bh0', HookType: 'signal', Domain: 'BUSINESS', Neighborhood: '', Priority: '3', HookText: 'STALE business hook.', SuggestedDesks: 'Business Desk', SuggestedJournalist: 'Jordan Velez', SuggestedAngle: '' }
+  ];
+  const ARCHIVE = [
+    { BIZ_ID: 'BIZ-00091', Name: 'Fruitvale Fruit Carts', Sector: 'Food & Beverage', Neighborhood: 'Fruitvale', Employee_Count: '0', Avg_Salary: '30000', Annual_Revenue: '80000', Growth_Rate: '-15', Key_Personnel: 'Maria Foo', ArchiveReason: 'closed', ExitCycle: String(cycle), SourceEventId: 'engine.96:BIZ-00091:C' + cycle, ClosedCycle: String(cycle) },
+    { BIZ_ID: 'BIZ-00090', Name: 'Old Closure', Sector: 'Retail', Neighborhood: 'Glenview', Employee_Count: '0', Avg_Salary: '', Annual_Revenue: '', Growth_Rate: '', Key_Personnel: '', ArchiveReason: 'closed', ExitCycle: '98', SourceEventId: 'engine.96:BIZ-00090:C98', ClosedCycle: '98' }
+  ];
+  const CASINO = [
+    { WagerId: 'HOUSE', HouseFloatAfter: '250000' },
+    { WagerId: 'W1', CyclePlaced: String(cycle - 1), CycleSettled: String(cycle), POPID: 'POP-00910', HouseholdId: '', MarketFamily: 'sports', Side: 'home', Stake: '500', Odds: '2.1', Payout: '2100', Status: 'settled' },
+    { WagerId: 'W2', CyclePlaced: String(cycle), CycleSettled: '', POPID: 'POP-00900', HouseholdId: '', MarketFamily: 'civic', Side: 'yes', Stake: '200', Odds: '1.8', Payout: '', Status: 'placed' },
+    // Untracked patron — no ledger row, never prints a name.
+    { WagerId: 'W3', CyclePlaced: String(cycle), CycleSettled: '', POPID: 'POP-99999', HouseholdId: '', MarketFamily: 'sports', Side: 'away', Stake: '100', Odds: '1.5', Payout: '', Status: 'placed' }
+  ];
+  // The prior-cycle dump: OakHouse shed 3 workers and grew revenue; Blue
+  // Lantern shed 4 with growth gone negative (the contraction); Temescal
+  // Widgets vanished with no archive row.
+  const PREV_BL = [
+    { BIZ_ID: 'BIZ-00043', Name: 'OakHouse', Sector: 'Restaurant & Dining', Neighborhood: 'Rockridge', Employee_Count: '25', Avg_Salary: '41000', Annual_Revenue: '1750000', Growth_Rate: '4.2', Key_Personnel: 'Dana Okafor' },
+    { BIZ_ID: 'BIZ-00036', Name: 'Blue Lantern Bar', Sector: 'Nightlife & Entertainment', Neighborhood: 'Jack London', Employee_Count: '34', Avg_Salary: '36000', Annual_Revenue: '2000000', Growth_Rate: '2.0', Key_Personnel: '' },
+    { BIZ_ID: 'BIZ-00077', Name: 'Temescal Widgets', Sector: 'Manufacturing', Neighborhood: 'Temescal', Employee_Count: '12', Avg_Salary: '40000', Annual_Revenue: '600000', Growth_Rate: '-1', Key_Personnel: '' }
+  ];
   writeJsonl(path.join(beats, 'Business_Ledger.jsonl'), BL);
   writeJsonl(path.join(beats, 'Employment_Roster.jsonl'), ER);
   writeJsonl(path.join(beats, 'Story_Seed_Deck.jsonl'), SEEDS);
+  writeJsonl(path.join(beats, 'Story_Hook_Deck.jsonl'), HOOKS);
+  writeJsonl(path.join(beats, 'Business_Archive.jsonl'), ARCHIVE);
+  writeJsonl(path.join(beats, 'Casino_Ledger.jsonl'), CASINO);
+  writeJsonl(path.join(root, 'output', 'simulation_ledger_snapshot.jsonl'), [
+    { POPID: 'POP-00900', Name: 'Rosa Delgado', RoleType: 'Line Cook', Neighborhood: 'Rockridge' },
+    { POPID: 'POP-00910', Name: 'Test Bettor', RoleType: 'Mechanic', Neighborhood: 'Fruitvale' }
+  ]);
+  const prevDir = path.join(beats, 'prev');
+  fs.mkdirSync(prevDir, { recursive: true });
+  writeJsonl(path.join(prevDir, 'Business_Ledger.jsonl'), PREV_BL);
+  fs.writeFileSync(path.join(prevDir, 'meta.json'), JSON.stringify({ cycle: cycle - 1, rows: { Business_Ledger: PREV_BL.length } }));
   fs.writeFileSync(path.join(beats, 'meta.json'), JSON.stringify({
-    cycle, rows: { Business_Ledger: BL.length, Employment_Roster: ER.length, Story_Seed_Deck: SEEDS.length }
+    cycle, rows: { Business_Ledger: BL.length, Employment_Roster: ER.length, Story_Seed_Deck: SEEDS.length,
+      Story_Hook_Deck: HOOKS.length, Business_Archive: ARCHIVE.length, Casino_Ledger: CASINO.length }
   }));
   return root;
 }
@@ -92,6 +127,7 @@ console.log('join:');
   const oak = joined.find(b => b.bizId === 'BIZ-00043');
   ok('OakHouse has 2 Active staff (Inactive dropped)', oak && oak.staff.length === 2 && !oak.staff.some(s => s.name === 'Gone Person'));
   ok('numbers parsed', oak.employeeCount === 22 && oak.growthRate === 4.2);
+  ok('Key_Personnel POPID tags never reach a fact line', joined.find(b => b.bizId === 'BIZ-00009').keyPersonnel === 'Marcus Tan (Founder)');
   ok('SELF_EMPLOYED / UNTRACKED never attach', !joined.some(b => b.staff.some(s => /Solo Painter|Nobody Tracked/.test(s.name))));
   const pool = eligibleHoods(joined);
   ok('Glenview (no staff) not eligible', !pool.some(h => h.hood === 'Glenview'));
@@ -137,6 +173,41 @@ console.log('business variant:');
   ok('md lists the rotation pool', /## ROTATION/.test(md));
   const a = assignmentFromSlice(slice, { name: 'Jordan Velez', popid: 'POP-TEST', desk: 'business' });
   ok('assignment carries slice', a && a.economicSlice === true && a.economicVariant === 'business' && a.desk === 'business');
+
+  console.log('movement / closures / casino / hooks (business variant):');
+  const blb = slice.businesses.find(b => b.name === 'Blue Lantern Bar');
+  ok('delta attached from prev/', !!blb && !!blb.delta && blb.delta.employees === -4 && blb.delta.vsCycle === CYCLE - 1);
+  ok('movement in the fact line', slice.prewrite.anchorFacts.some(f => /Blue Lantern Bar · Nightlife & Entertainment · 30 employees \(-4 vs C105\)/.test(f)));
+  ok('no delta clause when nothing moved', slice.prewrite.anchorFacts.some(f => /Harborline Grill · Restaurant & Dining · 7 employees · /.test(f) && !/Harborline Grill.*vs C105/.test(f)));
+  ok('deltas typed with the prev cycle', slice.deltas.state === 'PRIOR_CYCLE_ON_DISK' && slice.deltas.vs === CYCLE - 1);
+  ok('closure from the archive', slice.closures.some(c => c.name === 'Fruitvale Fruit Carts' && c.reason === 'closed' && /Business_Archive/.test(c.src)));
+  ok('gone without an archive row is a diff closure', slice.closures.some(c => c.name === 'Temescal Widgets' && /no archive row/.test(c.reason)));
+  ok('old archive rows are not this cycle\'s news', !slice.closures.some(c => c.name === 'Old Closure'));
+  ok('closure leads the hook', /^CLOSED: /.test(slice.story.hookLine) && /Fruitvale Fruit Carts/.test(slice.story.hookLine));
+  ok('contraction watch: Blue Lantern (shed 4, growth -0.5%)', slice.contractionWatch.length === 1 && slice.contractionWatch[0].name === 'Blue Lantern Bar' && slice.contractionWatch[0].delta.employees === -4);
+  ok('contraction watch spares growers (OakHouse shed 3 but grows)', !slice.contractionWatch.some(c => c.name === 'OakHouse'));
+  ok('casino: settled wager named via the ledger snapshot', slice.casino.wagers.some(g => g.name === 'Test Bettor' && g.settled && g.payout === 2100));
+  ok('casino: placed wager named', slice.casino.wagers.some(g => g.name === 'Rosa Delgado' && !g.settled && g.stake === 200));
+  ok('casino: untracked patron never prints', !JSON.stringify(slice.casino).includes('POP-99999'));
+  ok('casino: house float carried', slice.casino.houseFloat === 250000);
+  ok('casino bettors are candidates, not story.citizens', slice.citizens.some(c => c.popid === 'POP-00910' && /Casino_Ledger/.test(c.why)) && !slice.story.citizens.some(t => /Test Bettor/.test(t)));
+  ok('BUSINESS hook reaches the slice; the stale one does not', slice.prewrite.hooks.length === 1 && /Harborline Grill posts a record week/.test(slice.prewrite.hooks[0].text));
+  ok('every evidence line is sourced to a file on disk', slice.prewrite.evidence.length === slice.prewrite.anchorFacts.length &&
+    slice.prewrite.evidence.every(e => /^output\//.test(e.src)));
+  const mdV3 = formatEconomicSliceMarkdown(slice);
+  ok('md carries the new sections', /## CLOSED \/ GONE THIS CYCLE/.test(mdV3) && /## CONTRACTION WATCH/.test(mdV3) && /## THE CASINO THIS CYCLE/.test(mdV3) && /## ENGINE HOOKS/.test(mdV3));
+}
+
+console.log('movement: no prev/ → typed NO_PRIOR_CYCLE, archive closures still reported');
+{
+  const root2 = makeRoot(CYCLE);
+  fs.rmSync(path.join(root2, 'output', 'beats', 'prev'), { recursive: true, force: true });
+  const s2 = buildEconomicSlice(CYCLE, { root: root2, coverage: new Map() });
+  ok('NO_PRIOR_CYCLE', s2.deltas.state === 'NO_PRIOR_CYCLE' && s2.deltas.vs === null);
+  ok('no deltas, no watch, no diff closures', !s2.businesses.some(b => b.delta) && s2.contractionWatch.length === 0 &&
+    !s2.closures.some(c => c.name === 'Temescal Widgets'));
+  ok('archive closures still reported without prev/', s2.closures.some(c => c.name === 'Fruitvale Fruit Carts'));
+  fs.rmSync(root2, { recursive: true, force: true });
 }
 
 console.log('food variant:');
@@ -152,6 +223,9 @@ console.log('food variant:');
   ok('seed citizens join story.citizens', slice.story.citizens.includes('Mei-Lin Kang (POP-00835)'));
   ok('food approach', slice.approach === FOOD_APPROACH && /kitchens as workplaces/i.test(slice.approach));
   ok('lead worker in hook, role casing kept (biggest staffed kitchen leads)', /Yuki Ji, Bartender at Blue Lantern Bar/.test(slice.story.hookLine));
+  ok('food variant: the closed kitchen is Mason\'s story too', slice.closures.some(c => c.name === 'Fruitvale Fruit Carts'));
+  ok('food variant: non-food closures stay with the business desk', !slice.closures.some(c => c.name === 'Temescal Widgets'));
+  ok('food variant: no casino, no contraction watch', slice.casino === null && slice.contractionWatch.length === 0);
 }
 
 console.log('rotation across cycles:');

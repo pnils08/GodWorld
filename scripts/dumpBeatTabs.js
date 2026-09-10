@@ -60,6 +60,13 @@ const BEAT_TABS = [
   'Story_Hook_Deck',          // the engine's hooks: SuggestedJournalist + SuggestedAngle
 ];
 
+// Lazy-created tabs (engine.119: the cycle never creates a tab; the closure
+// intent creates Business_Archive on first use). Absent on the live sheet is a
+// legal state — dumped as an empty file, never an abort.
+const OPTIONAL_TABS = [
+  'Business_Archive',         // business — closures + exit metadata (engine.96 Phase11)
+];
+
 const args = process.argv.slice(2);
 const quiet = args.includes('--quiet');
 const cycleArg = args.find(a => !a.startsWith('--')) || null;
@@ -83,18 +90,21 @@ function rotatePrev(priorMeta, stamp) {
 async function main() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
 
-  // Every beat tab must exist — a missing one is a schema event, not a soft skip.
+  // Every required beat tab must exist — a missing one is a schema event, not a
+  // soft skip. Optional (lazy-created) tabs absent from the sheet dump empty.
   const titles = new Set((await sheets.listSheets()).map(s => s.title));
   const missing = BEAT_TABS.filter(t => !titles.has(t));
   if (missing.length) {
     console.error('dumpBeatTabs: ABORT — tab(s) missing from the live sheet: ' + missing.join(', '));
     process.exit(1);
   }
+  const ALL_TABS = BEAT_TABS.concat(OPTIONAL_TABS);
 
   // Read everything first; write nothing until every read succeeded, so a
   // mid-run failure never leaves a half-rotated dump.
   const data = {};
-  for (const tab of BEAT_TABS) {
+  for (const tab of ALL_TABS) {
+    if (!titles.has(tab)) { data[tab] = []; log('dumpBeatTabs: ' + tab + ' not on the sheet yet (optional) — dumping empty.'); continue; }
     log('dumpBeatTabs: reading ' + tab + '…');
     const rows = await sheets.getSheetAsObjects(tab);
     if (!Array.isArray(rows)) {
@@ -119,13 +129,13 @@ async function main() {
   const rotated = rotatePrev(priorMeta, stamp);
 
   const counts = {};
-  for (const tab of BEAT_TABS) {
+  for (const tab of ALL_TABS) {
     const lines = data[tab].map(r => JSON.stringify(r));
     fs.writeFileSync(path.join(OUT_DIR, tab + '.jsonl'), lines.length ? lines.join('\n') + '\n' : '');
     counts[tab] = data[tab].length;
   }
   const meta = {
-    source: 'beat tabs (' + BEAT_TABS.length + ')',
+    source: 'beat tabs (' + ALL_TABS.length + ')',
     cycle: Number.isFinite(stamp) ? stamp : null,
     prevCycle: rotated ? Number(priorMeta.cycle) : (fs.existsSync(path.join(PREV_DIR, 'meta.json')) ? Number((readMeta(path.join(PREV_DIR, 'meta.json')) || {}).cycle) : null),
     rows: counts,
@@ -135,7 +145,7 @@ async function main() {
   };
   fs.writeFileSync(META, JSON.stringify(meta, null, 2) + '\n');
 
-  log(`dumpBeatTabs: wrote ${BEAT_TABS.length} tabs → ${path.relative(ROOT, OUT_DIR)}/` + (rotated ? ` (prior cycle ${priorMeta.cycle} kept in prev/)` : ''));
+  log(`dumpBeatTabs: wrote ${ALL_TABS.length} tabs → ${path.relative(ROOT, OUT_DIR)}/` + (rotated ? ` (prior cycle ${priorMeta.cycle} kept in prev/)` : ''));
   if (!quiet) console.log(JSON.stringify({ ok: true, cycle: meta.cycle, prevCycle: meta.prevCycle, rows: counts }));
 }
 

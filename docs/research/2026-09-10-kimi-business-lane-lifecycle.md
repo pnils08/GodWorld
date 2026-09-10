@@ -95,3 +95,23 @@ turns). Load-bearing lines:
 - READERS: engine read-back only (:478, :518) — no newsroom reader existed
   before this session's dump.
 - OPEN WORK: engine.96 @ `docs/plans/2026-08-01-business-lifecycle-generator.md`.
+
+## Review — 2026-09-10 (research-build, S442)
+
+**Accepted. Verdict adopt stands.** Verified: `applyBusinessDynamics.js:420-426`
+stamps closures `domain: 'COMMUNITY'` with `severity: 'high'` at ≥10 jobs; the
+hook loop (`storyHook.js:910-925`) hooks `'medium'` only, so a large closure
+gets no hook; the file makes zero `recordRipple_` calls. Scripts half is in git
+(`6c761f21`). **Closed by ruling, not carried forward:** the Community Services
+exclusion landed in `80acd9f5` (builder ruling 2026-09-10).
+
+**Filed as engine.190** (ready, engine-sheet) — cuts 1–2 as written. Mechanism
+recommendation on cut 1's fork: **let `'high'` hook**, don't demote closure
+severity. A gate the beat's biggest event cannot pass is the SIM_DOCTRINE §15
+pattern verbatim, and demoting severity would also shrink `impactScore` for the
+v3 writers. This change is shared with engine.189 (faith hooks) — one pass on
+the loop.
+
+**Still open, sim call (not a row):** the Monday fanout slot is `business-desk`
+(`newsroom-fanout.js:48`) and Jordan Velez appears in no `.claude/agents/`
+file. Whether his byline lands on Monday business copy is the builder's.

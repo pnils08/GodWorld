@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-09",
+  "generated": "2026-09-11",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
   "functionsMapped": 1357,
@@ -3481,6 +3481,7 @@
       ],
       "readers": [
         "phase06-analysis/applyMigrationDrift.js::renderMigrationBrief_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
         "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },

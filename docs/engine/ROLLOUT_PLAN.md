@@ -18,13 +18,16 @@ own rollout rows.
 
 ---
 
-## Next Session Priorities (S444 → next, engine-sheet)
+## Next Session Priorities (S445 → next, engine-sheet)
 
-0. **Dials acceptance HARD FAILS criterion 4 (engine.197) — blocks the 176-183 PROD push.** Three of eight dials have no downward vocabulary at all (sociability/openness/outabout monotonic-up); mechanism found, what-should-move-them-down is a sim call for Mike.
-1. **engine.188 bench-proven, releases the 185/186 hold** — sentiment resting level 0.98→0.43, matches the model's 0.42 prediction. engine.195 (same carrier defect, 4 other metrics) and engine.196 (holiday peaks still saturate) ride behind it.
-2. **Economic_Parameters catalog scatter** — engine.198 (push 108 missing rows to the sheet, immediate), engine.199 (collapse to one runtime source), engine.200 (RoleType/EconomicProfileKey/SkillTags/EmployerBizId 4-field overlap, never adjudicated). Plan: [[../plans/2026-09-10-economic-parameters-one-source]].
-3. **Two SIM rulings queued for Mike, filed not yet answered:** engine.193 (adversity thresholds unreachable — ruled, fix the generators, scoping in progress) already has its ruling; engine.194 (should the A's record swing city mood harder) still needs one.
-4. **engine.109 Task 7** is the builder's (families on the Intake tab). **Montclair ghost row** `Crime_Metrics` row 11 on live + bench — builder's hand.
+0. **engine.201 — the dials need ENGINE EVENTS, both directions, from city / hood / workplace (builder-ruled S444).** Supersedes neglect-fade, which was designed on a half-measured number. Real figure: the wake pool returns 223 of 930, so **707 citizens (76%) can never be woken** — neglect reaches all of them identically and makes two blobs, not variety. The things that already differ per citizen (city state, the hood's own condition, employer/sector/job) are the variety generators. Prerequisite for engine.197.
+1. **PROD @75 is SHIPPED and UNFIRED — smoke-test is the builder's next live cycle.** 21 engine commits went out 2026-09-11 00:32, pull-back verified. Carries a known defect by decision: the dials wave fails its own acceptance criterion 4 (engine.197 — 32 pins, all at 100, none at 0), shipped because live had 546/911 citizens identical. `healthCauseIntake.js` is orphaned on PROD and needs a manual Apps Script editor delete.
+2. **Resync SANDBOX 0908 from live before any further dial work.** The bench is 25 cycles and a whole season ahead of live (Summer vs January) — dial measurements taken there do not describe the live city. Check ledger column 47 (DialState) first: bench-only accumulator state has no other carrier.
+3. **engine.187 root cause found, not fixed** — `applyCivicLoadIndicator.js` caps the severity term at exactly 12 against a `>= 12` threshold, so ~6 medium events pin the top class; that pins PatternFlag `strain-trend` 14/14 and ShockFlag `shock-flag` 14/14, which drops sentiment momentum to the in-shock 0.40. **engine.195** carrier fix for the other 4 metrics (up to 4.5x). **engine.196** holiday peaks pin 20/22 hoods.
+4. **Economic_Parameters catalog scatter** — engine.198/199/200. Plan: [[../plans/2026-09-10-economic-parameters-one-source]].
+5. **One SIM ruling still open:** engine.194 — should the A's record swing city mood harder (measured +0.015 against a ±0.10 clamp). engine.193 is ruled: fix the generators, do not lower thresholds to the range they produce.
+6. **engine.109 Task 7** is the builder's (families on the Intake tab). **Montclair ghost row** `Crime_Metrics` row 11 on live + bench — builder's hand.
+7. **ROLLOUT conformance:** eight rows are over the 280-char pointer budget (185/187/188/194/195/196/197/201) — drain with `rolloutDrain.js` on the next clean close.
 
 ---
 

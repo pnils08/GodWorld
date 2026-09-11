@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-09 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-11 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -246,7 +246,7 @@
 | `S.neighborhoodEconomyFeedback` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_` | `phase06-analysis/applyMigrationDrift.js::renderMigrationBrief_` | 1 | 1 |
 | `S.neighborhoodEmploymentWeights` | _(none)_ | `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | 0 | 1 |
 | `S.neighborhoodIllnessWeights` | _(none)_ | `phase03-population/updateNeighborhoodDemographics.js::buildNeighborhoodDemographicModifiers_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_` | 0 | 2 |
-| `S.neighborhoodMigration` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_` | `phase06-analysis/applyMigrationDrift.js::renderMigrationBrief_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 2 |
+| `S.neighborhoodMigration` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_` | `phase06-analysis/applyMigrationDrift.js::renderMigrationBrief_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 3 |
 | `S.neighborhoodPresence` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | 1 | 1 |
 | `S.neighborhoodPulse` | `utilities/neighborhoodPulseMap.js::recordPulse_` | `phase04-events/chaosCarsEngine.js::flushBusinessFold_`, `phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_`, `utilities/neighborhoodPulseMap.js::pulseForEvent_`, `utilities/neighborhoodPulseMap.js::recordPulse_`, `utilities/neighborhoodPulseMap.test.js::check` | 1 | 5 |
 | `S.neighborhoodState` | `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_` | `phase01-config/engine94SheetContract.js::ensureEngine160Config_`, `phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_`, `phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_`, `phase03-population/generateCrisisSpikes.js::crisisHoodWeight_`, `phase03-population/updateNeighborhoodDemographics.js::buildHoodEmploymentWeights_`, `phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_`, …(+24 more) | 1 | 30 |

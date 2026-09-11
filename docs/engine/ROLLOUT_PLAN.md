@@ -18,11 +18,13 @@ own rollout rows.
 
 ---
 
-## Next Session Priorities (S436 → next, engine-sheet)
+## Next Session Priorities (S444 → next, engine-sheet)
 
-0. **PROD @72 is unsmoked on live — the builder's C107 fire carries twelve changes (@65–@74, S436, each bench-proven on a same-day C106 re-sync):** engine.164 sim-year sweep (ages = 2042 − BirthYear, readers too), engine.165 sentiment clamp, engine.166 v2 pay from the JOB (hood pricing retired), engine.168 the working jobs in the catalog, engine.169 in-sector employer floor, engine.170 field-change hire, engine.172 the life places the citizen in the band, engine.173 move-up gate 1.5×, engine.174 feeder per short hood, engine.167 sector hints, engine.171 per-hood rent share (Neighborhood_Map.RentShare, live-seeded). Expect: newborn BirthYears at 2042 − age; hood Sentiment ≤ 1.0; ~102 of 238 untracked rows lifted to their own figure (37 by >1.4×) — the correction, not a bug; a burst of ~20 opportunity moves (Piedmont Ave / Lake Merritt magnets); the feeder line naming Glenview / Brooklyn / East Oakland. Trail: [[../reference/DEPLOY_HISTORY]] §PROD @65–@72; design + measurements: [[../research/2026-09-07-economy-true-up]].
-1. Nothing open from the S436 economy true-up — engine.167 (@73) and engine.171 (@74, Neighborhood_Map.RentShare live) closed it. Twelve changes @65–@74 ride the builder's C107.
-2. **engine.109 Task 7** is the builder's (families on the Intake tab). **Montclair ghost row** `Crime_Metrics` row 11 on live + bench — builder's hand.
+0. **Dials acceptance HARD FAILS criterion 4 (engine.197) — blocks the 176-183 PROD push.** Three of eight dials have no downward vocabulary at all (sociability/openness/outabout monotonic-up); mechanism found, what-should-move-them-down is a sim call for Mike.
+1. **engine.188 bench-proven, releases the 185/186 hold** — sentiment resting level 0.98→0.43, matches the model's 0.42 prediction. engine.195 (same carrier defect, 4 other metrics) and engine.196 (holiday peaks still saturate) ride behind it.
+2. **Economic_Parameters catalog scatter** — engine.198 (push 108 missing rows to the sheet, immediate), engine.199 (collapse to one runtime source), engine.200 (RoleType/EconomicProfileKey/SkillTags/EmployerBizId 4-field overlap, never adjudicated). Plan: [[../plans/2026-09-10-economic-parameters-one-source]].
+3. **Two SIM rulings queued for Mike, filed not yet answered:** engine.193 (adversity thresholds unreachable — ruled, fix the generators, scoping in progress) already has its ruling; engine.194 (should the A's record swing city mood harder) still needs one.
+4. **engine.109 Task 7** is the builder's (families on the Intake tab). **Montclair ghost row** `Crime_Metrics` row 11 on live + bench — builder's hand.
 
 ---
 

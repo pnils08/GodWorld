@@ -123,18 +123,66 @@ Four systems, one disease.
 
 ---
 
-## Why "inactivity is a regression" is the right cut
+## CORRECTED (builder, S444) — neglect-fade is the background, ENGINE EVENTS are the job
 
-It breaks the ratchet at the only link that needs no new invention:
+The section below this one argued neglect-fade was "the right cut". **It is not
+the cut, and the number it rested on was wrong.**
+
+**The measurement error.** This plan said 32.7% are wake-eligible. That was the
+trait-deviation threshold alone — one filter of several. The pool also requires a
+minimum lived-history length, a present disposition, a name, a neighborhood, and
+excludes the anchor character. Running the pool builder itself against live:
+
+```
+citizens in ledger            930
+eligible for a cron wake      223
+IGNORED                       707  =  76.0%
+```
+
+The builder's estimate of 80% was closer than the figure in this document.
+
+**Why that kills neglect-fade as the mechanism.** If 707 of 930 citizens can
+never be woken, and the only downward force is neglect, then all 707 fade
+together at the same rate. One uniform population is replaced by two. The
+citizens who most need to become distinct are exactly the ones neglect cannot
+distinguish, because neglect is the one thing they all share.
+
+**The ruling (builder, S444):**
+
+> And that 76% that don't wake now the entire system pointless, and yes all the
+> dials need engine events that affect them positively and negatively and the
+> city around them and the hood they are in, where they work all play into that.
+> Thats how they are different.
+
+So the job is **engine events reaching all eight dials in both directions**,
+sourced from the things that already differ between citizens:
+
+- **the city** — its state, its cycle, what is happening citywide
+- **the neighborhood** — the hood's own condition, which already varies per hood
+- **where they work** — employer, sector, business health, the job itself
+
+Those three are the variety generators. They already hold different values for
+different citizens, they reach the 76% who are never woken, and they can push in
+both directions. A closing business, a hood turning, a job lost, a friend moving
+away — the world doing something TO a person, not a narrator describing them.
+
+Neglect-fade stays, demoted: the slow background drift, not the mechanism.
+
+---
+
+## Superseded — why neglect-fade looked like the right cut
+
+Kept because the reasoning is still half-right and the ratchet analysis above it
+stands. The error was treating "needs no new vocabulary" as a virtue when new
+vocabulary is exactly what the 76% require.
 
 - **It needs no new event vocabulary.** Absence is already a measurable signal —
   cycles since last event, cycles since last wake, cycles since last bond touch.
   Nothing has to be authored per-tag.
 - **It reaches the three monotonic dials**, which neither pressure tags nor affect
   tags can reach, without giving those dials a contrived negative event.
-- **It un-freezes the 67%.** A neglected citizen accumulates *negative* deviation,
-  crosses the 60 gate from below, and enters the wake pool as a shaped-downward
-  citizen. The pool stops being a list of the city's happiest people.
+- ~~**It un-freezes the 67%.**~~ It does not. The real figure is 76%, and they
+  would all fade in lockstep — see the correction above.
 - **It is self-balancing.** Attention pulls up, neglect pulls down, and the
   0.5–1.5 event multiplier becomes a real trade instead of a one-way subsidy.
 - **It matches the world.** Someone who stops going out becomes someone who

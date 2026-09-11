@@ -148,15 +148,29 @@ It breaks the ratchet at the only link that needs no new invention:
 1. **Rate and shape.** Linear decay per idle cycle, or accelerating after a
    threshold? Toward 50, or past it toward the low pole? A hermit should be able
    to exist, which argues for past-50.
-2. **Which dials decay on inactivity.** sociability / outabout / openness are the
-   obvious three. Does drive decay from unemployment idleness? Does family decay
-   from no household events?
+2. ~~Which dials decay on inactivity.~~ **RULED (builder, S443): all of them.**
+   "Why wouldn't they all decay?" There is no principled reason to exempt any —
+   drive without work, family without household contact, warmth without people,
+   integrity without being tested. The three-dial framing was timidity, not
+   design.
 3. **Floor.** engine.176 chose desensitization (`PRESSURE_ADAPT`) so chronic
    pressure never grinds a dial to zero. Does idle decay adopt the same adapt
    rule, or is a true recluse at sociability 5 allowed?
 4. **Does an affect tag get to touch identity dials at all?** Whether repeated
    anger at a community should eventually lower sociability, rather than only
    composure, is a character question.
+
+5. **The dials are eight uncoupled scalars — no dial ever moves another.**
+   Builder, S443: *"how can your composure be low but your sociability and drive
+   high?"* Verified: composure is an INPUT to a few event probabilities
+   (`runConductEngine.js:223` crime, `runCareerEngine.js:983`,
+   `casinoLedgerEngine.js:887` tilt) but **no dial write ever reads another
+   dial**. Every change comes through a tag in DIAL_MAP. So a citizen can be
+   falling apart and stay magnetic and driven, because the engine has no notion
+   that those are the same person. Coupling — composure as a governor on the
+   identity dials rather than a sink they ignore — is the second half of this
+   plan, and is why "every cron ingest is composure" is a defect and not just an
+   oddity: all the feeling drains into one dial that nothing flows out of.
 
 ## Sequencing note
 

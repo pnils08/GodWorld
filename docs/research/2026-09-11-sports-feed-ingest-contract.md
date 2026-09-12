@@ -1,7 +1,7 @@
 ---
 title: Oakland_Sports_Feed — ingest contract audit
 created: 2026-09-11
-updated: 2026-09-11
+updated: 2026-09-12
 type: reference
 tags: [research, engine, sports, ingest, active]
 sources:
@@ -30,7 +30,7 @@ pointers:
 
 ## 1. What the feed actually moves
 
-Two functions read the tab, independently, with **different parsers for the same column**:
+Two functions read the tab independently. At the audit they used **different SeasonType vocabularies**; the S447 D1 source correction below shares the existing canonical parser (built locally, not deployed):
 
 | Reader | Line | Produces |
 |---|---|---|
@@ -80,7 +80,7 @@ Meanwhile the *calendar* still pays more than the record: after engine.188, `app
 | Column | Verdict | Where it lands |
 |---|---|---|
 | Cycle | ENGINE | row selection + engine.75 aging |
-| SeasonType | ENGINE | **parsed twice, two vocabularies** — see §4 |
+| SeasonType | ENGINE | Shared canonical parser built locally in S447; live audit found two vocabularies — see §4 D1 |
 | TeamsUsed | ENGINE | `normalizeOaklandFeedTeam_`; `nba`→Oaks |
 | Team Record | ENGINE | `(winPct−0.5)×0.06`, ±0.03 ceiling |
 | Streak | ENGINE | ±0.02 + hot/cold-streak hooks |
@@ -128,13 +128,17 @@ Three findings:
 ## 4. Defects found
 
 **D1 — SeasonType has two parsers with different vocabularies.**
-`canonicalSportsPhase_` (applySportsSeason.js:296) has an alias table (`world-series`→championship, `summer league`→preseason, …) and fails closed to `off-season` on anything unknown. It feeds the city phase. `processFeedSheet_` (:761-772) re-parses the same cell with a bare `indexOf` ladder and **no alias table**, feeding sentiment. Consequence: `summer league` scores ×1.0 in the sentiment path — full regular-season weight for exhibition ball — while the phase path correctly reads it as preseason.
+At audit, `canonicalSportsPhase_` (applySportsSeason.js:296) had an alias table (`world-series`→championship, `summer league`→preseason, …) and failed closed to `off-season` on anything unknown, while `processFeedSheet_` used a bare `indexOf` ladder for sentiment. Consequence: `summer league` scored ×1.0 in sentiment while the phase path read preseason. **S447 correction, built locally by codex:** the reducer now uses `canonicalSportsPhase_` before sentiment and inferred season triggers. The alias set is unchanged; summer league scores ×0.5, and unknown/blank labels get off-season ×0.3. Review and deployment pending.
 
-**D2 — The postseason zeroes the season.** C105/C106 carry `Team Record = 0-0` because the postseason starts a fresh record. `parseWinPercentage_` returns 0-0 → `null` → base 0. So the ×2 playoff multiplier multiplies nothing, and a 127-win season evaporates the moment October arrives. The +0.029 in C105 is almost entirely the word `high`, doubled.
+**D2 — Zero-total records contribute no base sentiment; the reset diagnosis was unsupported.** `parseWinPercentage_` returns 0-0 → `null` → base 0. The original claim that C105/C106 zeroes established a postseason reset was not verified. Engine-sheet's S447 live C106 trace instead showed a `127-35` player-feature row followed by blank, roster-move `0-0`, and team-update `0-0`: same-Cycle filler overwrote the informative record. This is D4's reducer defect. A genuine unplayed Oaks `0-0` correctly has zero base sentiment.
 
 **D3 — Field carry-forward never expires.** `processFeedSheet_` scans every row ever written and applies "last non-empty wins" per team. engine.75 ages out the *team* (`state.cycle !== currentCycle` → skip) but never the *fields*. An A's `MediaProfile` set at C85 is still in force at C106 if no later row re-states it. At 46% fill this is the normal case, not the edge case — roughly half of every cycle's sentiment is computed from values authored in an earlier cycle.
 
-**D4 — `-` is a value, not a blank.** The guard is `if (record) ts.record = record`. A literal `"-"` is truthy, so it overwrites a real prior value with an unparseable one. Used in 42 distinct Team Record strings and heavily in Streak.
+**S447 ruling: engine.203-D3 deferred, not built.** Current-Cycle-only reduction was denied: the C106 damaging rows are current-Cycle, and removing historical fields changes sim-visible outputs. Engine.210 benches first and alone. Any D3 implementation follows it and requires the builder's ruling. D1/D4 retain existing historical carry-forward and team aging.
+
+**D4 — No-information fields overwrite informative state (widened S447).** The old `if (record) ts.record = record` accepted both literal `-` and filler `0-0`. Engine-sheet measured C106 A's rows in order: player-feature `127-35`, player-feature blank, roster-move `0-0`, team-update `0-0`. The final two erased the record, reducing its base sentiment to zero before the playoff multiplier.
+
+**Built locally by codex, review/deployment pending:** gate record replacement using the existing `parseWinPercentage_`, so a no-information value cannot overwrite an informative one. A lone genuine `0-0` remains stored with zero base sentiment; actual `0-3` is informative and can replace a winning record. Blank and literal `-` preserve earlier values across all eleven reducer fields. No new sentinel vocabulary or second record parser; no published `S.` shape changes. `scripts/sportsFeedParser.test.js` replays the measured four-row shape and guards unplayed records, each dash field, D1 aliases/fail-closed behavior, and unchanged D3 carry-forward: 23 failures against pre-fix source, 47/47 passing after the fix.
 
 **D5 — 44% of EventTrigger entries reach nothing.** `TRIGGER_HOOKS` recognizes 12 values. The feed uses 27. 71 rows produce a story hook; **55 produce nothing**: `breaking-news`×16, `awards`×6, `draft`×4, `community outreach`×4, `pre-season`×4, `playoffs`×3, plus 18 one-offs (`blockbuster-trade`, `all-star`, `call-up`, `closer-battle`, `quiet-excellence`…). These are good, specific authored signals landing on the floor. Note `pre-season` and `playoffs` are *SeasonType* words typed into the trigger column — a vocabulary the author had no way to know.
 
@@ -217,5 +221,6 @@ And `deepestSportsPhase_` resolves the city phase as the **max depth across fran
 
 ## Changelog
 
+- 2026-09-12 (codex) — S447 D1/D4 source fixes built and tested locally; corrected D2's unsupported reset diagnosis using engine-sheet's four-row C106 measurement; D3 deferred after engine.210 pending builder ruling, no deployment.
 - 2026-09-11 — Initial audit (S446). Method: full-tab fill/variance analysis + consumer grep per column + Ripple_Ledger cross-check of replayed sentiment.
 - 2026-09-12 — Added §5b (casino sports market stuck since it shipped: 12 open wagers, 0 settled, no A's `game-result` row at C106). Corrected the F1 framing after Mike's ruling: a static stadium zone set is correct; the defect is uniform intensity and stadium-only reach. Four extraction principles added.

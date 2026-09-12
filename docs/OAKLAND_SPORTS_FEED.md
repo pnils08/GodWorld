@@ -1,7 +1,7 @@
 ---
 title: Oakland Sports Feed
 created: 2026-07-28
-updated: 2026-08-03
+updated: 2026-09-12
 type: reference
 tags: [sports, engine, citizens, active]
 sources:
@@ -86,8 +86,9 @@ The feed has two different time views:
 - **Current-Cycle event view:** Phase 5, evening media, and most newsroom
   surfaces select rows whose `Cycle` equals the engine Cycle.
 - **Through-Cycle team-state view:** Phase 2 scans rows through the current
-  Cycle and keeps the latest non-empty state values for each exact team key.
-  Within one Cycle, later rows can override earlier values.
+  Cycle and keeps the latest non-empty, non-dash state values for each exact
+  team key. Within one Cycle, later informative records can override earlier
+  records; a no-information record cannot replace an informative one.
 
 Phase 2 only lets a team's accumulated state affect a Cycle when that team also
 has a current-Cycle row. Old team state does not speak by itself.
@@ -139,10 +140,23 @@ activating unrelated synthetic sports atmosphere.
 ### Team state and effects
 
 For each normalized A's/Oaks team key—and any historical NFL compatibility
-row—the reducer keeps the latest non-empty record, streak, fan sentiment,
+row—the reducer keeps the latest non-empty, non-dash record, streak, fan sentiment,
 franchise stability, economic footprint, community investment, media profile,
 and related values through the Cycle. `NBA` and `Warriors` normalize to Oaks
 only on read.
+
+The engine.203 D1/D4 source change is built locally, pending review and deployment.
+Record assignment uses the same `parseWinPercentage_` as sentiment: filler `0-0`
+or an unparseable value cannot erase a played record. A team with only `0-0`
+keeps it and contributes zero base sentiment; a played `0-3` remains informative.
+Blank and literal `-` fields preserve earlier values. Historical field
+carry-forward remains unchanged (engine.203-D3 is deferred).
+
+The reducer uses `canonicalSportsPhase_` for SeasonType before sentiment and
+season-trigger inference. Existing aliases apply, including `summer league`
+to `preseason`; unknown or blank phases fail closed to `off-season`. Multipliers
+are ×0.3 off-season, ×0.5 spring-training/preseason, ×2 playoffs/post-season,
+×3 championship, and ×1 for the other accepted phases.
 
 Current effects include:
 
@@ -364,6 +378,7 @@ parsers, validators, and consumers through an approved implementation plan.
 
 ## Changelog
 
+- 2026-09-12 (codex) — Documented locally built engine.203 D1/D4: shared SeasonType parsing and informative-record preservation; genuine 0-0 and historical carry-forward retained; review and deployment pending.
 - 2026-07-28 — Created from the schema and end-to-end consumer trace; documented
   the roster relationship, current operator contract, known drift, and adopted
   entry-workspace direction; clarified roster stat columns as current snapshots

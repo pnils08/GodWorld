@@ -720,18 +720,23 @@ function processFeedSheet_(sheet, currentCycle) {
       var community = communityCol !== -1 ? (row[communityCol] || '').toString().trim() : '';
       var mediaProfile = mediaProfileCol !== -1 ? (row[mediaProfileCol] || '').toString().trim() : '';
 
-      // Only overwrite with non-empty values (preserves earlier data if latest row is blank)
-      if (record) ts.record = record;
-      if (seasonType) ts.seasonType = seasonType;
-      if (streak) ts.streak = streak;
-      if (trigger) ts.trigger = trigger;
-      if (neighborhood) ts.neighborhood = neighborhood;
-      if (playerMood) ts.playerMood = playerMood;
-      if (fanSentiment) ts.fanSentiment = fanSentiment;
-      if (franchise) ts.franchiseStability = franchise;
-      if (economic) ts.economicFootprint = economic;
-      if (community) ts.communityInvestment = community;
-      if (mediaProfile) ts.mediaProfile = mediaProfile;
+      // Blank/dash fields preserve earlier data. Use the sentiment parser to
+      // prevent filler records (including 0-0) from clobbering a played record.
+      // A team with only 0-0 still keeps that legitimate, unplayed record.
+      if (record && record !== '-' &&
+          (parseWinPercentage_(record) !== null || parseWinPercentage_(ts.record) === null)) {
+        ts.record = record;
+      }
+      if (seasonType && seasonType !== '-') ts.seasonType = seasonType;
+      if (streak && streak !== '-') ts.streak = streak;
+      if (trigger && trigger !== '-') ts.trigger = trigger;
+      if (neighborhood && neighborhood !== '-') ts.neighborhood = neighborhood;
+      if (playerMood && playerMood !== '-') ts.playerMood = playerMood;
+      if (fanSentiment && fanSentiment !== '-') ts.fanSentiment = fanSentiment;
+      if (franchise && franchise !== '-') ts.franchiseStability = franchise;
+      if (economic && economic !== '-') ts.economicFootprint = economic;
+      if (community && community !== '-') ts.communityInvestment = community;
+      if (mediaProfile && mediaProfile !== '-') ts.mediaProfile = mediaProfile;
       ts.cycle = cycle;
     }
   }
@@ -759,16 +764,18 @@ function processFeedSheet_(sheet, currentCycle) {
       baseSentiment = (winPct - 0.5) * 0.06;
     }
 
-    // 2. Season multiplier
+    // 2. Share the phase reader's aliases and fail-closed vocabulary with
+    // sentiment and the inferred trigger below.
+    state.seasonType = canonicalSportsPhase_(state.seasonType);
     var seasonMultiplier = 1.0;
-    var st = (state.seasonType || '').toLowerCase();
-    if (st.indexOf('playoff') >= 0 || st.indexOf('post') >= 0) {
+    var st = state.seasonType;
+    if (st === 'playoffs' || st === 'post-season') {
       seasonMultiplier = 2.0;
-    } else if (st.indexOf('championship') >= 0 || st.indexOf('finals') >= 0 || st.indexOf('world') >= 0) {
+    } else if (st === 'championship') {
       seasonMultiplier = 3.0;
-    } else if (st.indexOf('off') >= 0) {
+    } else if (st === 'off-season') {
       seasonMultiplier = 0.3;
-    } else if (st.indexOf('spring') >= 0 || st.indexOf('pre') >= 0) {
+    } else if (st === 'spring-training' || st === 'preseason') {
       seasonMultiplier = 0.5;
     }
 

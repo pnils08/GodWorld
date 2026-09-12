@@ -249,7 +249,24 @@ That also gives Mike's franchise-weight ruling its home: weight is **derived, no
 Resolve every dead column per §3. Surface every closed vocabulary into the tab (data validation + legend) so authored effort lands by construction. Add the games-played/home-count column from §2. Delete `VideoGame` / `VideoGameDate`.
 
 ### Task 2 — engine.203: one parser per column
-D1 (two SeasonType vocabularies), D3 (field carry-forward never expires), D4 (`-` is truthy). See the research file §4.
+**Status: in-progress — D1 + widened D4 built locally by codex (S447), review pending; no push or deployment.** See [[research/2026-09-11-sports-feed-ingest-contract]] §4.
+
+- **D1:** `processFeedSheet_` uses `canonicalSportsPhase_` before sentiment and inferred season triggers. Existing aliases and fail-closed `off-season` behavior are preserved; no vocabulary expansion.
+- **D4:** the reducer uses the existing `parseWinPercentage_` to prevent a no-information record from replacing an informative record. Engine-sheet's measured C106 sequence (`127-35`, blank, `0-0`, `0-0`) now retains `127-35`; a lone Oaks `0-0` remains valid with zero base sentiment. Literal `-` acts as blank across all eleven state fields. Published `S.` field shapes are unchanged.
+- **engine.203-D3: deferred, not built.** The proposed current-Cycle-only reducer was denied: it does not fix the same-Cycle overwrites and changes sim-visible carry-forward. Sequence after engine.210, which benches first and alone; a builder ruling is required before implementation.
+
+**Local proof:** `scripts/sportsFeedParser.test.js` has 47 cases: 23 fail against the pre-fix engine and all 47 pass with D1/D4. Coverage includes the measured four-row sequence, genuine 0-0, played 0-3, each dash field, aliases/unknown labels, retained historical carry-forward, and unchanged published output shapes.
+
+**Verified wiring card (S447, engine-wiring/Haiku; no direct writes in the reducer):**
+
+| Surface | File:line |
+|---|---|
+| Reducer definition; caller | `phase02-world-state/applySportsSeason.js:662`; `phase02-world-state/applySportsSeason.js:598` |
+| Shared phase parser; record parser | `phase02-world-state/applySportsSeason.js:296`; `phase02-world-state/applySportsSeason.js:896` |
+| Phase 2 position, before Phase 10 | `phase01-config/godWorldEngine2.js:287`, `:2032`; Phase 10 `:588`, `:2319` |
+| Caller publishes sentiment / triggers / neighborhood effects | `phase02-world-state/applySportsSeason.js:607`, `:608`, `:609` |
+| Sentiment readers | `phase02-world-state/applyCityDynamics.js:1658`; `phase05-citizens/generateCitizensEvents.js:1707` |
+| Trigger / neighborhood readers | `phase07-evening-media/storyHook.js:575`; `phase07-evening-media/cityEveningSystems.js:420` |
 
 ### Task 3 — engine.204 (REVISED per Mike S446): intensity and reach, not geography
 Original scope (union `HomeNeighborhood` into `S.sportsZones`) is **superseded** — the zone set is correctly static and already tracks the Baylight move. New scope: (a) drive a **varying intensity** into the existing zone set from record × season state instead of the current constant; (b) give sports a **city-wide component** so a pennant race is felt outside the stadium hood, with the zone set as the concentration; (c) transit reads the zone set directly so `HomeNeighborhood` can come off the tab. Same seven already-wired consumers benefit — economic ripple, crisis spikes, evening food/famous, `v3NeighborhoodWriter`, transit, initiatives.
@@ -289,6 +306,7 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 
 ## Changelog
 
+- 2026-09-12 (codex) — engine.203 D1 + widened D4 built locally with 47 passing parser tests (23 fail pre-fix); D3 denied as proposed and deferred after engine.210 pending builder ruling; review pending, no push/deployment.
 - 2026-09-12 (codex) — engine.208 prerequisite built locally: consolidated seven DIALS copies onto citizenMemory's existing export, preserving the Apps Script/Node seam; corrected the census and paths; review pending, no deployment.
 - 2026-09-12 (engine-sheet S447) — measured live: C107 already carries A's `game-result` W1, so the 12 open slips settle on the next fire; "blocked settlement" retired. Filed engine.207b (pricing reads latest / settlement reads first; three C107 games, one settles; `EventId` never compared) as a SIM call for the builder.
 - 2026-09-12 (codex) — engine.207a pricing built and reviewed S447; corrected F5 and Task 5 to distinguish newly placed C106 slips from stalled settlement and document the C109 expiry; weekly settlement remains pending.

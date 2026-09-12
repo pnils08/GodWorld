@@ -193,6 +193,7 @@ This is the ingest defect in its purest form: a fully-built mechanism that took 
 - 2026-09-11 — Initial audit; scoped engine.194, filed engine.202 / engine.203.
 - 2026-09-11 — Ignited [[../plans/2026-09-11-sports-as-a-lived-system]]; engine.204 / .205 / .206 filed off traces F1-F4.
 - 2026-09-12 — §5b casino trace added (F5); engine.207 filed. F1 corrected per Mike — static zones are the right shape, missing intensity is the defect.
+- 2026-09-12 — Dial-system trace (F6 in the plan): `DialState` is ledger **column 48**, JSON `{base,mood,streak}`, 919/930 rows — a ninth dial costs no schema change. Sports' whole dial footprint is `'Sports': {outabout:1}` (citizenDialMap.js:156). `DIALS` array duplicated across six files. Fandom RULED as dial 9 → engine.208; franchise weight as a drifting number → engine.209.
 
 ## Changelog
 

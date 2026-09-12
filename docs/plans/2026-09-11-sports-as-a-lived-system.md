@@ -51,6 +51,13 @@ pointers:
 - **Nightlife and retail rise with season state, but the magnitude must come from the RECORD.** With two franchises, one of them is always late in a season, so season state alone is permanently "on" — the same §15 always-on shape. RULED.
 - **The negative drift is carried by record, trade news and injuries.** Those are the downside vocabulary; there is no adversity channel without them. RULED.
 - **The author is the engine's sensor.** "As I'm playing this out on my end you should use me for this to tell the engine what's happening, what's the excitement." The feed is the interface between a game being played outside the sim and the city inside it — design it as an instrument he reports through, not a form he fills.
+### Rulings, third block
+
+- **Fandom is DIAL 9.** Not a ledger column — a ninth dial in the existing dial system. "It's a major element of the city with sports and Undocked, and a cron should know how much they like the sports." RULED — supersedes the §4 derived-field sketch.
+- **Fandom carries negative drift.** "It becomes another negative drift — if a cron is negative about the team, the dial moves down." The desks' own tone about the franchise feeds back into how much citizens care. RULED.
+- **The A's weigh harder than the Oaks, and that weight is a NUMBER ITSELF that drifts.** The A's are a dynasty; the Oaks are an expansion team that has never played a game. Franchise weight is not a constant — it is earned and lost. RULED (§16: a column that never moves is scenery).
+- **Open question from Mike:** should the Oaks and the A's live on the same ledger, and is the engine able to use the team-name column effectively in this sheet? — answered in §7.
+
 - **Acceptance criterion, in his words:** when NotebookLM gives him the daily news, it must **stop telling him the data and the lived experience don't align.** That is the test this whole build passes or fails.
 
 ---
@@ -89,6 +96,14 @@ Two structural facts that decide the design:
 
 This is the strongest single argument for the one-row-per-team-per-week ruling: it is not a new mechanism, it is the **missing input to a mechanism that is already built, already placed real citizens' money, and has been silently stuck since it shipped.**
 
+**F6 — The dial system can take a ninth dial at no schema cost, and sports barely touches the eight it has.** `DialState` is **ledger column 48** (919 of 930 rows populated) and stores JSON — `{base:{...}, mood:{...}, streak:{...}}` keyed by dial name. **Adding a ninth dial requires no new column and no ledger migration.**
+
+The eight today: `drive, sociability, warmth, openness, composure, integrity, family, outabout`.
+
+Sports' entire footprint in that system is one line — `'Sports': { outabout: 1 }` in `utilities/citizenDialMap.js:156`, an engine.176 ambient tint. A pennant race and a last-place season move the same dial by the same +1. The `Sports` calendar suffix is the only other hook.
+
+Cost of dial 9, measured: the `DIALS` array is duplicated across **six** files (`utilities/citizenMemory.js:33`, `lib/citizenDials.js:12`, `scripts/classifierGate.js:24`, `scripts/seedTier1Essence.js:23`, and two probes). That duplication is the spaghetti, not the dial — consolidating to one source is a prerequisite and is a builder-lane call.
+
 ---
 
 ## 2. The cadence answer — what a game day is
@@ -125,28 +140,46 @@ The rule this encodes: **a column that solicits input either moves a number or i
 
 ---
 
-## 4. Fandom — the missing layer
+## 4. Fandom — dial 9 (RULED, Mike S446)
 
-The design question Mike asked: *how can citizens be big fans or casual fans?*
+Superseded the derived-field sketch. Fandom is **the ninth dial**, living in the same `DialState` JSON as the other eight (F6 — no schema change, no new column).
 
-**Constraint from the ledger:** 930 rows, no free column, and §16 says a static backfill nothing rewrites is scenery. Fandom must be a *drifting* value with causal inputs, not a one-time dice roll.
+**Why a dial and not a field.** A dial already has everything fandom needs and a field has none of it: a 0-100 value with `base`/`mood`/`streak`, a decay model, band-phrase poles the voice layer reads, and — critically — an event→delta map that is *already* the engine's mechanism for "something happened to this person, move them." Fandom as a ledger field would be another static column nobody rewrites (§16). Fandom as a dial drifts by construction.
 
-**Shape to build to:**
+**Poles (low → high), to be written into `POLES` in `lib/citizenDials.js`:** doesn't follow the teams → keeps half an eye on the scores → a real fan, plans around games → lives and dies with them.
 
-- Fandom is **derived, not stored flat** — from inputs the ledger already carries: `Neighborhood` (proximity to the stadium / game-day hoods), `TraitProfile`, `EmployerBizId` (stadium-adjacent employers), household (`SpouseId`, `ParentIds` — fandom is inherited), and accumulated exposure.
-- It **drifts**: winning seasons recruit casual fans; a losing stretch or a relocation scare sheds them. That is the §16 requirement and it is also the sim answer — a bandwagon is a real thing a city does.
-- It is **the multiplier on every citizen-facing sports effect.** Today game-night intensity is one city-wide number (`abs(boost)/0.15`). With fandom it becomes per-citizen: the same pennant race is an event for a big fan, background noise for a non-fan, and that difference is what makes a game day *happen to people*.
-- It is **a reason to wake a citizen** — which is directly the engine.201 problem. 707 of 930 citizens (76%) can never be woken by a cron. A big fan on a playoff week is a wake reason that has nothing to do with attention or neglect, and it reaches citizens the current pools never touch.
+**What moves it UP:** winning stretches, a playoff run, a championship, going to a game (`outabout` correlate), living in a game-day hood, a household member who is already a fan (fandom is inherited — `SpouseId`/`ParentIds`), Undocked engagement.
 
-**This is the seam that makes sports load-bearing rather than decorative, and it is the one Mike named as missing.**
+**What moves it DOWN — the ruling that matters (Mike S446):** losing stretches, trade news that guts the roster, injuries to stars, franchise-stability wobbles, **and the desks' own tone — "if a cron is negative about the team, the dial moves down."** This is the feedback loop the sim has never had: coverage shapes fandom, fandom shapes who the coverage is *about*. It is also the fix for engine.197's exact failure — three of eight dials have no downward vocabulary at all; dial 9 must ship with its negative pole or it repeats that defect on day one.
 
----
+**Why this is load-bearing beyond sports:**
+- It is the per-citizen multiplier on every sports effect. Today game-night intensity is one city-wide number (`abs(sportsSentimentBoost)/0.15`); with dial 9 the same pennant race is an event for a big fan and background noise for a non-fan. That difference is what makes a game day happen to *people*.
+- It reaches **Undocked** as well as sports — Mike named both. One dial covers a citizen's relationship to the city's spectacle.
+- **It is a wake reason for engine.201.** 707 of 930 citizens (76%) can never be woken by a cron because every wake reason is attention-or-neglect, which they all share. A big fan during a playoff week is a wake reason grounded in something that *differs* between citizens and reaches people the current pools never touch.
 
 ## 5. Sports as seeds
 
 Currently sports reaches the story layer through `S.sportsEventTriggers` → `storyHook.js` TRIGGER_HOOKS (12 recognized values, 44% of authored triggers land nowhere) and through desk packets. It does **not** produce `Cycle_Seeds` / economic seeds except at championship level.
 
 Target: a week of sports emits seeds the same way a business closure does after engine.190 — intensity and stakes produce `recordRipple_` entries with real geography (`HomeNeighborhood`, not the static zone list), which become economic and story seeds in the same cycle.
+
+---
+
+## 7. Should the A's and the Oaks share a ledger? (Mike's question, answered)
+
+**Keep one tab. The team column already works; what fails is downstream collapse.**
+
+`normalizeOaklandFeedTeam_` resolves `TeamsUsed` → `A's` | `Oaks` | `NFL` cleanly, and two consumers already honour it: `processFeedSheet_` builds genuine per-team state, and the Casino keys markets per franchise (`sports:as`, `franchiseId` `as`/`oaks`). Separation at the point of entry is **not** the problem.
+
+The problem is that per-team state gets **collapsed** two steps later:
+- sentiment is computed per team and then **summed** into one scalar, so a good A's week and a bad Oaks week cancel;
+- `cal.sportsSeason` resolves to a **single city-wide phase**, so the economic ripple cannot tell the franchises apart at all (live C106: A's `playoffs`, Oaks `preseason` — one is invisible).
+
+Splitting the tab would double the reader code and fix neither collapse. **Verdict: one tab, and stop collapsing.** Carry per-franchise state through to the consumers that need it.
+
+That also gives Mike's franchise-weight ruling its home: weight is **derived, not authored**, so it does not belong in the feed. `World_Config` holds no sports keys today (104 rows, zero franchise-related) and is the wrong shape anyway — it is config, and this value must drift. The carrier is `Carry_Forward_Store`, which already exists for exactly this: a per-cycle-rewritten derived value.
+
+**What franchise weight is:** how much this city's mood is the team's to move. The A's earned theirs over 100+ cycles of dynasty; the Oaks start near zero because they have never played a game, and climb by playing them. It is the coefficient on every sports effect, per franchise, drifting on results, tenure, and attendance — never a constant, never authored.
 
 ---
 
@@ -175,8 +208,14 @@ Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds
 ### Task 7 — engine.194: reprice sentiment
 Only after 1-4. Magnitude is downstream of the contract. Carries the `generateCitizensEvents.js:1707` saturation fix (`min(1,abs(boost)/0.15)`).
 
-### Task 8 — fandom (NOT FILED — needs Mike)
-§4 is a design sketch, not a ruling. Sim-class decision: whether fandom is derived-and-drifting per §4, and how hard a fan's week should differ from a non-fan's. Do not build until ruled.
+### Task 8 — engine.208 (NEW): dial 9, fandom
+RULED by Mike S446. Ships with its negative pole or not at all (engine.197's lesson). Prerequisite: consolidate the `DIALS` array — duplicated across six files — to one source; builder-lane call, no ask. Then poles, `DIAL_MAP` entries both directions, inheritance from household, and the cron-tone feedback channel. Verify against engine.197 criterion 4 (a spread, not two blobs) and engine.201 (does it wake citizens the pools never reach).
+
+### Task 9 — engine.209 (NEW): franchise weight that drifts
+RULED by Mike S446 — the A's weigh harder than the Oaks and the weight is a number that drifts, not a constant. Derived, never authored; carried in `Carry_Forward_Store` (World_Config is config and holds zero sports keys). Coefficient on every sports effect, per franchise, moving on results, tenure and attendance. Fixes the symmetry artefact where an 0-3 Oaks preseason outweighed a 127-win A's season.
+
+### Task 10 — stop collapsing per-franchise state (§7)
+Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one city-wide phase so the economic ripple cannot tell them apart. Carry per-franchise state to the consumers that need it. Folds into engine.205; listed separately so it is not lost.
 
 ---
 
@@ -192,5 +231,6 @@ Only after 1-4. Magnitude is downstream of the contract. Carries the `generateCi
 
 ## Changelog
 
+- 2026-09-12 — Third ruling block (S446): fandom is DIAL 9 with a negative pole fed by cron tone; franchise weight is a drifting number (A's dynasty vs Oaks expansion); same-ledger question answered in §7 (one tab, stop collapsing). F6 added — DialState is ledger col 48, JSON, so dial 9 costs no schema change; sports' entire dial footprint today is `Sports: {outabout:+1}`. engine.208/.209 filed; §4 rewritten from sketch to ruled design.
 - 2026-09-12 — Second ruling block folded in (S446): one row per team per week; `VideoGame`/`VideoGameDate` repurposed to the week record (Casino input); `HomeNeighborhood` deleted; record supplies magnitude, season state only scales it; record/trade-news/injuries carry the negative drift; acceptance criterion set to the NotebookLM data-vs-lived-experience test. F1 corrected (static zones are right, intensity is what is missing), F5 added (casino stuck since it shipped). engine.204 rescoped, engine.207 filed.
 - 2026-09-11 — Initial draft (S446). Direction captured verbatim from Mike in §0, including the mid-session crossover ruling (sports is a horizontal, every desk can carry an A's seed) which added F4 and Task 5. Measured state in §1 from the research file plus four new traces: `deriveSportsZones_` is Baylight-only (F1), economic ripple is championship-gated and team-blind (F2), no fandom concept exists in 55 ledger columns or anywhere in `phase*/` (F3).

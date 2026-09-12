@@ -13,7 +13,9 @@ sources:
   - phase07-evening-media/storyHook.js:575-600 — TRIGGER_HOOKS table
   - utilities/setupSportsFeedValidation.js — the tab's own dead-column notes
 pointers:
-  - "[[../engine/ROLLOUT_PLAN]] — engine.194 / engine.202 / engine.203 carry the pending state"
+  - "[[../engine/ROLLOUT_PLAN]] — engine.194 / .202 / .203 / .204 / .205 / .206 / .207 carry the pending state"
+  - "[[../plans/2026-09-11-sports-as-a-lived-system]] — the plan this ignited; rulings live there, findings live here"
+  - "Sibling research (Mike-direct S446): every sports research file cross-points to the others and all of them feed the plan. Add the back-pointer in the same commit as the new file."
   - "[[index]] — registered here"
   - "[[../SIM_DOCTRINE]] §15 a gate that can't fire, §16 a column that never moves is scenery"
 ---
@@ -153,6 +155,16 @@ Net effect on the city: in C105 the Oaks going **0-3 in preseason** pulled city 
 
 ---
 
+## 5b. The casino is the proof (added S446)
+
+`Casino_Ledger` carries **12 live sports wagers** — `MarketFamily=sports`, `MarketId=sports:as`, `EventId=next-as` — placed by named citizens (POP-00214, POP-00335, …) at C106. **All 12 are `open`. Not one has ever settled.**
+
+`casinoResolveSports_` → `casinoParseSports_` (phase05-citizens/casinoLedgerEngine.js:147) needs a feed row with `EventType='game-result'` **and** a parseable W/L `Streak`, matched to the franchise. Measured: 33 `game-result` rows across 48 cycles, only **20** with a parseable streak, and **C106 carries no A's `game-result` row at all** — the A's last one was C105, before that C95. With no settleable event the resolver returns `carry`, every cycle, forever.
+
+This is the ingest defect in its purest form: a fully-built mechanism that took real citizens' money and has been silently stuck since it shipped, waiting on a row the tab never told the author to write.
+
+---
+
 ## 6. Extraction — what this means for the build
 
 - **The ingest is a contract with no schema → every hand-authored tab needs a closed vocabulary surfaced at the point of entry.** Same failure class as Initiative_Tracker. The fix is not more parsing leniency; it is publishing the vocabulary into the tab (data validation + a legend) so authored effort lands by construction.
@@ -160,6 +172,9 @@ Net effect on the city: in C105 the Oaks going **0-3 in preseason** pulled city 
 - **A computed field with no reader is invisible waste → grep the consumer before adding a term.** `retail`/`nightlife`/`communityEngagement` have been computed every cycle since v3.0 and read by nothing.
 - **Authored effort should be measurable → fill-rate × reach is the metric.** Any ingest tab can be scored this way; this audit's method is reusable for Initiative_Tracker, Reflection_Intake and NBA/MLB_Game_Intake.
 - **Two parsers for one column is a latent divergence → one vocabulary per column, one parser.** D1 was invisible until measured.
+- **A stuck mechanism is silent → any market/queue that can return `carry` needs a staleness alarm.** The casino carried 12 wagers indefinitely and nothing anywhere reported it. Applies to every deferred-resolution surface in the sim.
+- **Repurpose before adding → a dead column is cheaper to revive than a new column is to introduce.** Mike's ruling: `VideoGame`/`VideoGameDate` becomes the week record rather than adding a games-played column. Cuts the author's per-row cost instead of raising it.
+- **Static is not the same as stale → check whether the constant is WRONG or merely constant.** `S.sportsZones` being fixed is correct (stadiums do not move); the defect was that nothing varied the intensity driven into it. Corrected by Mike S446 after this audit initially flagged the constancy itself.
 
 ## Not applicable / hazard
 
@@ -176,7 +191,10 @@ Net effect on the city: in C105 the Oaks going **0-3 in preseason** pulled city 
 ## Applications (living)
 
 - 2026-09-11 — Initial audit; scoped engine.194, filed engine.202 / engine.203.
+- 2026-09-11 — Ignited [[../plans/2026-09-11-sports-as-a-lived-system]]; engine.204 / .205 / .206 filed off traces F1-F4.
+- 2026-09-12 — §5b casino trace added (F5); engine.207 filed. F1 corrected per Mike — static zones are the right shape, missing intensity is the defect.
 
 ## Changelog
 
 - 2026-09-11 — Initial audit (S446). Method: full-tab fill/variance analysis + consumer grep per column + Ripple_Ledger cross-check of replayed sentiment.
+- 2026-09-12 — Added §5b (casino sports market stuck since it shipped: 12 open wagers, 0 settled, no A's `game-result` row at C106). Corrected the F1 framing after Mike's ruling: a static stadium zone set is correct; the defect is uniform intensity and stadium-only reach. Four extraction principles added.

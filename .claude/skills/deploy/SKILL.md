@@ -1,8 +1,8 @@
 ---
 name: deploy
 description: Deploy engine to Google Apps Script via clasp push with pre-flight checks, verification, and rollback guidance.
-version: "2.0"
-updated: 2026-07-02
+version: "2.1"
+updated: 2026-09-12
 tags: [engine, active]
 disable-model-invocation: true
 effort: medium
@@ -61,6 +61,33 @@ CLAUDE_CTL=1 npx clasp push
 
 Clasp prints every pushed file. Count the `└─` lines (~166).
 
+## The version step — `push` is only half a deploy (S447)
+
+**A `clasp push` updates the project's files. It does NOT change what a pinned web-app deployment serves.** Any `/exec` fire keeps running the pinned version until the deployment is repointed. This trap has now bitten three separate ways; check which one you are in before concluding anything from a fire:
+
+| Symptom | Cause | Fix |
+|---|---|---|
+| Push clean, pull-back byte-identical, fire still runs old behaviour | S325 — deployment pinned to an older version | bump the deployment |
+| Fix "fails" on the bench for two consecutive cycles, output looks plausible | S443 — fired @12 while the fix sat at @13; the climbing series was never the fix failing | bump, then re-fire; discard those cycles as drift, not evidence |
+| `clasp deploy -i <id> -d "..."` prints `Deployed … @14`, but `clasp deployments` still reads `@13` | **S447 — the bare form CREATED version 14 and left the deployment pinned.** `clasp versions` showed 14 existed the whole time | re-run **with an explicit `-V <n>`**, then read back |
+
+**Correct sequence. The read-back is not optional — the deploy command's own success line lied in the S447 case.**
+
+```bash
+npx clasp deployments                 # @HEAD follows push; @N is pinned and needs a bump
+CLAUDE_CTL=1 npx clasp deploy -i <deploymentId> -V <versionNumber> -d "<what changed>"
+npx clasp deployments                 # MUST now read @<versionNumber>; if not, it did not land
+```
+
+Get `<versionNumber>` from `npx clasp versions` (the bare `deploy` call creates it even when it fails to repoint, so the number usually already exists).
+
+**Which targets need this:**
+
+- **Bench / sandbox — ALWAYS.** The bench is fired by a web-app GET against a pinned deployment, so a push with no bump proves nothing and the cycle is wasted.
+- **PROD — check, do not assume.** Live is fired from the Apps Script editor / trigger, which runs HEAD, so pushes have historically been push-only (the version counter sits well behind the deploy trail's `@N`). But a PROD web-app deployment does exist and is pinned; if anything is ever fired through that URL it runs the pinned version. Run `npx clasp deployments` and read it rather than trusting this paragraph.
+
+**Rule that generalises:** any time the served version could predate the current script state — new deployment, fresh authorize, new copy, or a `deploy` whose read-back you did not check — bump and read back *before* drawing any conclusion from a fire.
+
 ## Post-Deploy Verification
 
 Never report success from push output alone:
@@ -87,5 +114,6 @@ Never report success from push output alone:
 - [ ] Payload: which files, from which commits (empirical delta, not assumption)
 - [ ] Files pushed: N (~166)
 - [ ] Pull-back verify: live == HEAD on payload, 0 test files live
+- [ ] Deployment version: `clasp deployments` READ BACK at the intended `@N` (or confirmed `@HEAD` / editor-fired)
 - [ ] SESSION_CONTEXT smoke-test note written
 - [ ] Branch main; dirty files named (deployable vs claspignored)

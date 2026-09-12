@@ -21,7 +21,7 @@
 const rc = require('/root/GodWorld/lib/reflectionClassifier');
 const dm = require('/root/GodWorld/utilities/citizenDialMap'); // SCORING ONLY (harness-side, never production)
 
-const DIALS = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family', 'outabout'];
+const { DIALS } = require('/root/GodWorld/utilities/citizenMemory.js');
 
 // DANGEROUS — high-magnitude life events. [eventTruth, affectTruth(null = not asserted), text].
 // affectTruth left null: these certify EVENT-tag accuracy + big-dial integrity; composure is the

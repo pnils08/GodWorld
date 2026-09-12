@@ -20,7 +20,7 @@ const M = require('/root/GodWorld/utilities/citizenDialMap.js');
 const dials = require('/root/GodWorld/lib/citizenDials.js');
 const { TIER1_ESSENCE } = require('/root/GodWorld/utilities/tier1EssenceEvents.js');
 
-const DIALS = ['drive', 'sociability', 'warmth', 'openness', 'composure', 'integrity', 'family', 'outabout'];
+const { DIALS } = dials;
 const SEED_SCALE = 30; // mirror backdateCitizenDials.js
 
 function arg(name) {

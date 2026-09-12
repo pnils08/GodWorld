@@ -107,7 +107,7 @@ The eight today: `drive, sociability, warmth, openness, composure, integrity, fa
 
 Sports' entire footprint in that system is one line — `'Sports': { outabout: 1 }` in `utilities/citizenDialMap.js:156`, an engine.176 ambient tint. A pennant race and a last-place season move the same dial by the same +1. The `Sports` calendar suffix is the only other hook.
 
-Cost of dial 9, measured: the `DIALS` array is duplicated across **six** files (`utilities/citizenMemory.js:33`, `lib/citizenDials.js:12`, `scripts/classifierGate.js:24`, `scripts/seedTier1Essence.js:23`, and two probes). That duplication is the spaghetti, not the dial — consolidating to one source is a prerequisite and is a builder-lane call.
+The prerequisite census found **seven** identical `DIALS` arrays: `utilities/citizenMemory.js`, `lib/citizenDials.js`, `scripts/classifierGate.js`, `scripts/seedTier1Essence.js`, `scripts/_probe_voice_openrouter.js`, `scripts/_probe_voice_grounded.js`, and `scripts/_probe_classifier.js`. **Consolidated locally (codex, S447; review pending):** `utilities/citizenMemory.js` remains the single definition, an Apps Script global with its existing guarded CommonJS export. Node consumers import that export; `lib/citizenDials.js` re-exports it and `seedTier1Essence.js` uses that existing import. No dial values, order, or behavior changed.
 
 **F7 — The feed is FORBIDDEN from moving the city, by design, and the switch that would allow it has never been set.** This is the literal answer to "nothing in the engine knows it exists."
 
@@ -201,7 +201,7 @@ POP-00002 DialState:    {"base":{"drive":50,"sociability":54.95,"warmth":49.1,"o
 
 Same eight dials, same names, same values — `TraitProfile` is the **rounded readable face of `DialState`**, written by the same engine. `utilities/compressLifeHistory.js` header, verbatim: *"citizen dial engine (engine.31 Phase 2) — scans LifeHistory and ACCRETES it into a per-citizen dial trait profile… the readable face (Archetype + dials + Conduct seam) from `base`."* One writer, one source of truth. They are the same thing in two representations.
 
-**What this changes for dial 9:** the build is larger than the earlier "no schema change" framing implied. A ninth dial must land in **three** places, not one — the `DialState` JSON, the `TraitProfile` renderer in `compressLifeHistory.js` (Archetype/Mods/dial-list/Hash), and the six duplicated `DIALS` arrays. Mike's read that this is "a decent size build" is the correct one; the earlier framing understated it.
+**What this changes for dial 9:** the build is larger than the earlier "no schema change" framing implied. A ninth dial must land in **three** places, not one — the `DialState` JSON, the `TraitProfile` renderer in `compressLifeHistory.js` (Archetype/Mods/dial-list/Hash), and the shared `DIALS` source used across seven files (consolidation in F6). Mike's read that this is "a decent size build" is the correct one; the earlier framing understated it.
 
 *(Also observed: the two representations drift. POP-00001 carries `TraitProfile drive:89 Updated:c104` against a live `DialState drive:100` — TraitProfile is a lagging snapshot, refreshed on wake, not a live mirror. Worth a row of its own; not filed yet.)*
 
@@ -267,7 +267,7 @@ Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds
 Only after 1-4. Magnitude is downstream of the contract. Carries the `generateCitizensEvents.js:1707` saturation fix (`min(1,abs(boost)/0.15)`).
 
 ### Task 8 — engine.208 (NEW): dial 9, fandom
-RULED by Mike S446. Ships with its negative pole or not at all (engine.197's lesson). Prerequisite: consolidate the `DIALS` array — duplicated across six files — to one source; builder-lane call, no ask. Then poles, `DIAL_MAP` entries both directions, inheritance from household, and the cron-tone feedback channel. Verify against engine.197 criterion 4 (a spread, not two blobs) and engine.201 (does it wake citizens the pools never reach).
+RULED by Mike S446. Ships with its negative pole or not at all (engine.197's lesson). **Prerequisite built locally (codex, S447; review pending):** the seven `DIALS` copies now use the existing exported source in `utilities/citizenMemory.js` (F6). Apps Script keeps its global `var`; Node keeps CommonJS imports. Remaining: poles, `DIAL_MAP` entries both directions, inheritance from household, and the cron-tone feedback channel. Verify against engine.197 criterion 4 (a spread, not two blobs) and engine.201 (does it wake citizens the pools never reach).
 
 ### Task 9 — engine.209 (NEW): franchise weight that drifts
 RULED by Mike S446 — the A's weigh harder than the Oaks and the weight is a number that drifts, not a constant. Derived, never authored; carried in `Carry_Forward_Store` (World_Config is config and holds zero sports keys). Coefficient on every sports effect, per franchise, moving on results, tenure and attendance. Fixes the symmetry artefact where an 0-3 Oaks preseason outweighed a 127-win A's season.
@@ -289,6 +289,7 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 
 ## Changelog
 
+- 2026-09-12 (codex) — engine.208 prerequisite built locally: consolidated seven DIALS copies onto citizenMemory's existing export, preserving the Apps Script/Node seam; corrected the census and paths; review pending, no deployment.
 - 2026-09-12 (codex) — engine.207a pricing built and reviewed S447; corrected F5 and Task 5 to distinguish newly placed C106 slips from stalled settlement and document the C109 expiry; weekly settlement remains pending.
 - 2026-09-12 — Third ruling block (S446): fandom is DIAL 9 with a negative pole fed by cron tone; franchise weight is a drifting number (A's dynasty vs Oaks expansion); same-ledger question answered in §7 (one tab, stop collapsing). F6 added — DialState is ledger col 48, JSON, so dial 9 costs no schema change; sports' entire dial footprint today is `Sports: {outabout:+1}`. engine.208/.209 filed; §4 rewritten from sketch to ruled design.
 - 2026-09-12 — Second ruling block folded in (S446): one row per team per week; `VideoGame`/`VideoGameDate` repurposed to the week record (Casino input); `HomeNeighborhood` deleted; record supplies magnitude, season state only scales it; record/trade-news/injuries carry the negative drift; acceptance criterion set to the NotebookLM data-vs-lived-experience test. F1 corrected (static zones are right, intensity is what is missing), F5 added (casino stuck since it shipped). engine.204 rescoped, engine.207 filed.

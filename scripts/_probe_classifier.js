@@ -28,7 +28,7 @@ const ONLY_SET = (process.env.SET || 'all').toLowerCase();          // 'all' | '
 const TEMP = 0;
 const CONSISTENCY_N = 3;
 const PER_TAG_CAP = 4;     // real-set: up to N examples per tag (stratify)
-const DIALS = ['drive','sociability','warmth','openness','composure','integrity','family','outabout'];
+const { DIALS } = require('/root/GodWorld/utilities/citizenMemory.js');
 
 // ---- the closed vocab presented to the model: canonical tags + one-line gloss.
 // Curated from DIAL_MAP (drop space/case duplicates the resolver folds anyway).

@@ -5,7 +5,7 @@
 require('/root/GodWorld/lib/env');
 const sheets = require('/root/GodWorld/lib/sheets');
 
-const DIALS = ['drive','sociability','warmth','openness','composure','integrity','family','outabout'];
+const { DIALS } = require('/root/GodWorld/utilities/citizenMemory.js');
 const POLES = {
   drive:['drifting, no urgency','easygoing, unhurried','driven, hard to sit still',"relentless, can't stop working"],
   sociability:['a loner, keeps to themselves','private, few close ties','draws people in, deep with them','magnetic, center of every room'],

@@ -101,7 +101,7 @@ Two structural facts that decide the design:
 
 This is the strongest single argument for the one-row-per-team-per-week ruling: it is not a new mechanism, it is the **missing input to a mechanism that is already built, already placed real citizens' money, and has been silently stuck since it shipped.**
 
-**F6 — The dial system can take a ninth dial at no schema cost, and sports barely touches the eight it has.** `DialState` is **ledger column 48** (919 of 930 rows populated) and stores JSON — `{base:{...}, mood:{...}, streak:{...}}` keyed by dial name. **Adding a ninth dial requires no new column and no ledger migration.**
+**F6 — The dial system can take a ninth dial at no schema cost, and sports barely touches the eight it has.** `DialState` is **ledger column 48** (919 of 930 rows populated) and stores JSON — `{base:{...}, mood:{...}, streak:{...}}` keyed by dial name. **Adding a ninth dial requires no new *column*** — but see §4: it is not free, because `TraitProfile` (col 18) is the same data's readable face and must render the ninth dial too.
 
 The eight today: `drive, sociability, warmth, openness, composure, integrity, family, outabout`.
 
@@ -111,7 +111,7 @@ Cost of dial 9, measured: the `DIALS` array is duplicated across **six** files (
 
 **F7 — The feed is FORBIDDEN from moving the city, by design, and the switch that would allow it has never been set.** This is the literal answer to "nothing in the engine knows it exists."
 
-`S.sportsSeason` — not sentiment — is the engine's real sports channel. It is read in **~40 files across every phase**: crisis spikes, promotions, bonds, nightlife, evening food, migration drift, cycle weight, event prioritisation, civic load, the neighborhood writer, demographics. It dwarfs the ±0.10 sentiment scalar.
+`S.sportsSeason` — not sentiment — is the engine's real sports channel. It is read in **64 files across every phase** (counted, not estimated): crisis spikes, promotions, bonds, nightlife, evening food, migration drift, cycle weight, event prioritisation, civic load, the neighborhood writer, demographics. It dwarfs the ±0.10 sentiment scalar (64 files vs 1 fold).
 
 It is **not** calendar-derived. `applySportsSeason.js:98` sets it from Mike's own feed: `S.sportsSeasonByTeam = deriveSeasonByTeamFromFeed_(entries)` then `S.sportsSeason = deepestSportsPhase_(...)`. Mike's ruling is satisfied on that point — no calendar is read.
 
@@ -125,7 +125,18 @@ Nine consumers gate on it and see an **empty string** every cycle, so every spor
 
 City events, demographic drift, micro-events, season weights, chaos weights and the education engine are all structurally blind to sports. Not mis-tuned — **switched off**, by a gate built to stop the author's own game logs from reaching the city.
 
-**F8 — The ~30 ungated consumers only listen for two words.** The rest read `S.sportsSeason` directly, but branch almost exclusively on `'championship'` and `'playoffs'` (a handful also on `'late-season'`). A 127-win regular season satisfies none of them. This is §15 at scale: the machinery Mike wants for traffic, retail, nightlife and crime **already exists and is already wired everywhere** — it is gated on two words the feed almost never says.
+**F8 — The 55 ungated consumers listen for a handful of extreme words.** Counted branch census across `phase*/` — every `sportsSeason === '<word>'` test in the engine:
+
+| value tested | occurrences |
+|---|---|
+| `championship` | 78 |
+| `playoffs` | 60 |
+| `post-season` | 27 |
+| `late-season` | 16 |
+| `off-season` | 2 |
+| `world-series` / `regular` | 1 each |
+
+165 of 185 tests (89%) are for championship / playoffs / post-season. A 127-win regular season satisfies none of them. This is §15 at scale: the machinery Mike wants for traffic, retail, nightlife and crime **already exists and is already wired everywhere** — it is gated on two words the feed almost never says.
 
 *(This also corrects an earlier claim in this plan: crime IS linked to sports — `generateCrisisSpikes.js:191` raises SAFETY pressure on `championship` — but only at that extreme.)*
 
@@ -179,9 +190,20 @@ Superseded the derived-field sketch. Fandom is **the ninth dial**, living in the
 
 **What moves it DOWN — the ruling that matters (Mike S446):** losing stretches, trade news that guts the roster, injuries to stars, franchise-stability wobbles, **and the desks' own tone — "if a cron is negative about the team, the dial moves down."** This is the feedback loop the sim has never had: coverage shapes fandom, fandom shapes who the coverage is *about*. It is also the fix for engine.197's exact failure — three of eight dials have no downward vocabulary at all; dial 9 must ship with its negative pole or it repeats that defect on day one.
 
-**Dial 9 vs `TraitProfile` (Mike's question).** They are different layers and both stay. `TraitProfile` (ledger col 18) is authored character — who a citizen *is*. A dial is a 0-100 state that **moves** with `base`/`mood`/`streak` and a decay model. Fandom belongs in the dial layer precisely because it must change: a bandwagon fan in a title run and a burnt-out fan after a firesale are the same person at different values. `TraitProfile` can *seed* a citizen's starting fandom (a `sports-fan` trait starts high, a `bookish` one starts low) — that is the right relationship: trait seeds, dial drifts.
+**Dial 9 and `TraitProfile` — CORRECTED 2026-09-12.** An earlier revision of this plan claimed they were separate layers ("trait seeds, dial drifts"). **That was wrong, asserted from the column name without reading the column.** Mike corrected it; verified against the live ledger:
 
-**Build size, honestly:** it is a decent-size build, as Mike said. Every one of 919 citizens with a `DialState` needs the new key backfilled, six duplicated `DIALS` arrays consolidated first, poles written, `DIAL_MAP` entries in both directions, and a seeding pass off `TraitProfile` + neighborhood + household. The schema costs nothing; the backfill and the wiring are the work.
+```
+POP-00002 TraitProfile: Archetype:Drifter|drive:50|sociability:55|warmth:49|openness:50|
+                        composure:57|integrity:50|family:50|outabout:51|Conduct:b0|...
+POP-00002 DialState:    {"base":{"drive":50,"sociability":54.95,"warmth":49.1,"openness":50,
+                        "composure":56.85,"integrity":50,"family":50,"outabout":50.675}...
+```
+
+Same eight dials, same names, same values — `TraitProfile` is the **rounded readable face of `DialState`**, written by the same engine. `utilities/compressLifeHistory.js` header, verbatim: *"citizen dial engine (engine.31 Phase 2) — scans LifeHistory and ACCRETES it into a per-citizen dial trait profile… the readable face (Archetype + dials + Conduct seam) from `base`."* One writer, one source of truth. They are the same thing in two representations.
+
+**What this changes for dial 9:** the build is larger than the earlier "no schema change" framing implied. A ninth dial must land in **three** places, not one — the `DialState` JSON, the `TraitProfile` renderer in `compressLifeHistory.js` (Archetype/Mods/dial-list/Hash), and the six duplicated `DIALS` arrays. Mike's read that this is "a decent size build" is the correct one; the earlier framing understated it.
+
+*(Also observed: the two representations drift. POP-00001 carries `TraitProfile drive:89 Updated:c104` against a live `DialState drive:100` — TraitProfile is a lagging snapshot, refreshed on wake, not a live mirror. Worth a row of its own; not filed yet.)*
 
 **Dial 9 is the SELECTOR (Mike, fourth block).** Its first job is not flavour — it is **deciding who a sports event happens to.** Today sports events are drawn from generic pools with no notion of who cares. With dial 9 the pool is "people who would actually be at this game / arguing about this trade," which is how a city of 930 stops reacting to a pennant race as one undifferentiated blob.
 

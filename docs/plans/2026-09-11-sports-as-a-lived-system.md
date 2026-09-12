@@ -51,6 +51,11 @@ pointers:
 - **Nightlife and retail rise with season state, but the magnitude must come from the RECORD.** With two franchises, one of them is always late in a season, so season state alone is permanently "on" — the same §15 always-on shape. RULED.
 - **The negative drift is carried by record, trade news and injuries.** Those are the downside vocabulary; there is no adversity channel without them. RULED.
 - **The author is the engine's sensor.** "As I'm playing this out on my end you should use me for this to tell the engine what's happening, what's the excitement." The feed is the interface between a game being played outside the sim and the city inside it — design it as an instrument he reports through, not a form he fills.
+### Rulings, fourth block
+
+- **There is no sports calendar and the engine must not read one.** "That was retired 9 months ago. There are 2 teams — how could a calendar track that? There are no months, just cycles, and my sports don't follow a calendar." RULED. *Verified:* the `Sports_Calendar` tab is genuinely dead — 13 Month-keyed rows, and the only reference in the codebase is a comment recording its removal at S139. **But see F7: the engine still has a `sportsSeason`, and the real problem is worse than a calendar.**
+- **Dial 9 is the mechanism for who gets sports events.** Fandom is not just flavour on a citizen — it is the selector. It decides who a sports event happens to.
+
 ### Rulings, third block
 
 - **Fandom is DIAL 9.** Not a ledger column — a ninth dial in the existing dial system. "It's a major element of the city with sports and Undocked, and a cron should know how much they like the sports." RULED — supersedes the §4 derived-field sketch.
@@ -104,6 +109,28 @@ Sports' entire footprint in that system is one line — `'Sports': { outabout: 1
 
 Cost of dial 9, measured: the `DIALS` array is duplicated across **six** files (`utilities/citizenMemory.js:33`, `lib/citizenDials.js:12`, `scripts/classifierGate.js:24`, `scripts/seedTier1Essence.js:23`, and two probes). That duplication is the spaghetti, not the dial — consolidating to one source is a prerequisite and is a builder-lane call.
 
+**F7 — The feed is FORBIDDEN from moving the city, by design, and the switch that would allow it has never been set.** This is the literal answer to "nothing in the engine knows it exists."
+
+`S.sportsSeason` — not sentiment — is the engine's real sports channel. It is read in **~40 files across every phase**: crisis spikes, promotions, bonds, nightlife, evening food, migration drift, cycle weight, event prioritisation, civic load, the neighborhood writer, demographics. It dwarfs the ±0.10 sentiment scalar.
+
+It is **not** calendar-derived. `applySportsSeason.js:98` sets it from Mike's own feed: `S.sportsSeasonByTeam = deriveSeasonByTeamFromFeed_(entries)` then `S.sportsSeason = deepestSportsPhase_(...)`. Mike's ruling is satisfied on that point — no calendar is read.
+
+**But `applySportsSeason.js:110` then sets `S.sportsAtmosphereEnabled = false` on the feed path**, with the comment: *"feed rows are Mike's game logs, not a license to synthesize city-wide sports mood (S302 C122 'playoffs' contamination)."* The flag is set `true` **only** by a `World_Config` override key `sportsState_Oakland`.
+
+**Measured: `World_Config` has 104 rows and zero `sportsState*` keys. The flag has therefore been permanently `false` on live.**
+
+Nine consumers gate on it and see an **empty string** every cycle, so every sports branch inside them is dead code:
+
+`applySeasonWeights.js:34` · `calendarChaosWeights.js:33` · `buildCityEvents.js:75` · `generateGameModeMicroEvents.js:91` · `runEducationEngine.js:159` · `updateNeighborhoodDemographics.js:97` · `deriveDemographicDrift.js:69` · `applyDemographicDrift.js:123` · `generateGenericCitizenMicroEvent.js:79`
+
+City events, demographic drift, micro-events, season weights, chaos weights and the education engine are all structurally blind to sports. Not mis-tuned — **switched off**, by a gate built to stop the author's own game logs from reaching the city.
+
+**F8 — The ~30 ungated consumers only listen for two words.** The rest read `S.sportsSeason` directly, but branch almost exclusively on `'championship'` and `'playoffs'` (a handful also on `'late-season'`). A 127-win regular season satisfies none of them. This is §15 at scale: the machinery Mike wants for traffic, retail, nightlife and crime **already exists and is already wired everywhere** — it is gated on two words the feed almost never says.
+
+*(This also corrects an earlier claim in this plan: crime IS linked to sports — `generateCrisisSpikes.js:191` raises SAFETY pressure on `championship` — but only at that extreme.)*
+
+**F9 — `deepestSportsPhase_` takes the MAX of the two franchises.** With per-team phases from the feed, the city-wide value is whichever team is deepest in its season. Live C106: A's `playoffs` (depth 5), Oaks `preseason` (depth 1) → the city reads **`playoffs`**. This is precisely Mike's "one of them is always late in a season" observation, confirmed in code: the resolver guarantees the city sits at the deeper team's phase permanently. It is an always-on shape *and* it erases the other franchise.
+
 ---
 
 ## 2. The cadence answer — what a game day is
@@ -152,6 +179,12 @@ Superseded the derived-field sketch. Fandom is **the ninth dial**, living in the
 
 **What moves it DOWN — the ruling that matters (Mike S446):** losing stretches, trade news that guts the roster, injuries to stars, franchise-stability wobbles, **and the desks' own tone — "if a cron is negative about the team, the dial moves down."** This is the feedback loop the sim has never had: coverage shapes fandom, fandom shapes who the coverage is *about*. It is also the fix for engine.197's exact failure — three of eight dials have no downward vocabulary at all; dial 9 must ship with its negative pole or it repeats that defect on day one.
 
+**Dial 9 vs `TraitProfile` (Mike's question).** They are different layers and both stay. `TraitProfile` (ledger col 18) is authored character — who a citizen *is*. A dial is a 0-100 state that **moves** with `base`/`mood`/`streak` and a decay model. Fandom belongs in the dial layer precisely because it must change: a bandwagon fan in a title run and a burnt-out fan after a firesale are the same person at different values. `TraitProfile` can *seed* a citizen's starting fandom (a `sports-fan` trait starts high, a `bookish` one starts low) — that is the right relationship: trait seeds, dial drifts.
+
+**Build size, honestly:** it is a decent-size build, as Mike said. Every one of 919 citizens with a `DialState` needs the new key backfilled, six duplicated `DIALS` arrays consolidated first, poles written, `DIAL_MAP` entries in both directions, and a seeding pass off `TraitProfile` + neighborhood + household. The schema costs nothing; the backfill and the wiring are the work.
+
+**Dial 9 is the SELECTOR (Mike, fourth block).** Its first job is not flavour — it is **deciding who a sports event happens to.** Today sports events are drawn from generic pools with no notion of who cares. With dial 9 the pool is "people who would actually be at this game / arguing about this trade," which is how a city of 930 stops reacting to a pennant race as one undifferentiated blob.
+
 **Why this is load-bearing beyond sports:**
 - It is the per-citizen multiplier on every sports effect. Today game-night intensity is one city-wide number (`abs(sportsSentimentBoost)/0.15`); with dial 9 the same pennant race is an event for a big fan and background noise for a non-fan. That difference is what makes a game day happen to *people*.
 - It reaches **Undocked** as well as sports — Mike named both. One dial covers a citizen's relationship to the city's spectacle.
@@ -186,6 +219,9 @@ That also gives Mike's franchise-weight ruling its home: weight is **derived, no
 ## Tasks
 
 *Ordered. Each is independently benchable. Task 1 is the prerequisite for 2-5.*
+
+### Task 0 — engine.210: let the feed reach the city (DO FIRST)
+`S.sportsAtmosphereEnabled` is permanently `false` on live (F7), so nine consumers see an empty string and every sports branch in them is dead. This is the single highest-leverage change in the plan and also the highest blast radius — nine files, all of them population/event generators, wake up at once. Do it FIRST because every later task's measurement is meaningless while the channel is off, and do it ALONE on the bench (TERMINAL.md: one unbenched change in flight) so a failure stays attributable. Respect S302's actual concern — the fear was invented atmosphere, so the fix is not "flip the flag" but "let RECORDED facts through while invented atmosphere stays gated." Verify: a bench cycle where the flag is live shows movement in demographic drift, city events and micro-events that C106 does not have.
 
 ### Task 1 — engine.202: wire or delete, and publish the vocabulary
 Resolve every dead column per §3. Surface every closed vocabulary into the tab (data validation + legend) so authored effort lands by construction. Add the games-played/home-count column from §2. Delete `VideoGame` / `VideoGameDate`.

@@ -165,6 +165,20 @@ This is the ingest defect in its purest form: a fully-built mechanism that took 
 
 ---
 
+## 5c. The channel was switched off (added S446, fourth block)
+
+The sentiment scalar this audit opened with is **not** the engine's main sports channel. `S.sportsSeason` is — read in **~40 files across every phase**. And it is feed-derived, not calendar-derived (`applySportsSeason.js:98`; the `Sports_Calendar` tab is genuinely dead, its only codebase reference a comment recording its S139 removal).
+
+`applySportsSeason.js:110` sets `S.sportsAtmosphereEnabled = false` whenever the source is the feed — S302's ruling that *"feed rows are Mike's game logs, not a license to synthesize city-wide sports mood."* The flag goes true only via a `World_Config` key `sportsState_Oakland`. **World_Config has 104 rows and zero `sportsState*` keys**, so the flag has been permanently false on live.
+
+Nine consumers gate on it and read an empty string every cycle — `applySeasonWeights:34`, `calendarChaosWeights:33`, `buildCityEvents:75`, `generateGameModeMicroEvents:91`, `runEducationEngine:159`, `updateNeighborhoodDemographics:97`, `deriveDemographicDrift:69`, `applyDemographicDrift:123`, `generateGenericCitizenMicroEvent:79`. City events, demographic drift, micro-events, season weights, chaos weights and education are structurally blind to sports. Not mis-tuned — switched off.
+
+The ~30 ungated consumers branch almost exclusively on `'championship'` and `'playoffs'`. Crime linkage does exist (`generateCrisisSpikes.js:191`, SAFETY × championship) but only at that extreme — correcting §2's "crime: no linkage" line, which was scoped to the crime-metrics file alone.
+
+And `deepestSportsPhase_` resolves the city phase as the **max depth across franchises**: live C106, A's `playoffs`(5) + Oaks `preseason`(1) → the city reads `playoffs`. The deeper team's phase is permanently the city's, and the other franchise is erased.
+
+---
+
 ## 6. Extraction — what this means for the build
 
 - **The ingest is a contract with no schema → every hand-authored tab needs a closed vocabulary surfaced at the point of entry.** Same failure class as Initiative_Tracker. The fix is not more parsing leniency; it is publishing the vocabulary into the tab (data validation + a legend) so authored effort lands by construction.
@@ -174,6 +188,8 @@ This is the ingest defect in its purest form: a fully-built mechanism that took 
 - **Two parsers for one column is a latent divergence → one vocabulary per column, one parser.** D1 was invisible until measured.
 - **A stuck mechanism is silent → any market/queue that can return `carry` needs a staleness alarm.** The casino carried 12 wagers indefinitely and nothing anywhere reported it. Applies to every deferred-resolution surface in the sim.
 - **Repurpose before adding → a dead column is cheaper to revive than a new column is to introduce.** Mike's ruling: `VideoGame`/`VideoGameDate` becomes the week record rather than adding a games-played column. Cuts the author's per-row cost instead of raising it.
+- **A guard against bad input can become a guard against ALL input → any `enabled` flag needs a live check that something sets it true.** S302 gated feed-driven sports atmosphere to stop invented playoff mood; the enabling key was never added to World_Config, so the gate has been total. Nine generators went dark and nothing reported it.
+- **Find the channel before tuning the scalar → grep the `S.` field's consumer count first.** This audit opened on a ±0.10 sentiment scalar and the real channel was a string read in ~40 files.
 - **Static is not the same as stale → check whether the constant is WRONG or merely constant.** `S.sportsZones` being fixed is correct (stadiums do not move); the defect was that nothing varied the intensity driven into it. Corrected by Mike S446 after this audit initially flagged the constancy itself.
 
 ## Not applicable / hazard
@@ -193,6 +209,7 @@ This is the ingest defect in its purest form: a fully-built mechanism that took 
 - 2026-09-11 — Initial audit; scoped engine.194, filed engine.202 / engine.203.
 - 2026-09-11 — Ignited [[../plans/2026-09-11-sports-as-a-lived-system]]; engine.204 / .205 / .206 filed off traces F1-F4.
 - 2026-09-12 — §5b casino trace added (F5); engine.207 filed. F1 corrected per Mike — static zones are the right shape, missing intensity is the defect.
+- 2026-09-12 — §5c added: `S.sportsAtmosphereEnabled` permanently false on live (World_Config has zero `sportsState*` keys), nine consumers dark; `S.sportsSeason` is the real channel at ~40 files; ungated consumers listen only for championship/playoffs; `deepestSportsPhase_` takes the max across franchises. `Sports_Calendar` confirmed dead per Mike. engine.210/.211 filed. Corrected the §2 "crime has no sports linkage" line.
 - 2026-09-12 — Dial-system trace (F6 in the plan): `DialState` is ledger **column 48**, JSON `{base,mood,streak}`, 919/930 rows — a ninth dial costs no schema change. Sports' whole dial footprint is `'Sports': {outabout:1}` (citizenDialMap.js:156). `DIALS` array duplicated across six files. Fandom RULED as dial 9 → engine.208; franchise weight as a drifting number → engine.209.
 
 ## Changelog

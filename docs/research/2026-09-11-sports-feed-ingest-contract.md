@@ -169,7 +169,7 @@ Net effect on the city: in C105 the Oaks going **0-3 in preseason** pulled city 
 
 **Verdict:** `adopt` — engine.194 was scoped as a magnitude question ("should the record swing harder"). This audit shows magnitude is downstream of a broken contract: the record is the weakest term in its own formula, three columns feed dead fields, 44% of triggers land nowhere, and half the sentiment is computed from stale carry-forward. The contract gets fixed first.
 
-**Ignited plans:** engine.194 (reprice), engine.202 (dead-field wiring + vocabulary surfaced in-tab), engine.203 (carry-forward expiry + `-` handling + D1 parser merge).
+**Ignited plans:** [[../plans/2026-09-11-sports-as-a-lived-system]] — engine.194 (reprice), engine.202 (dead-field wiring + vocabulary in-tab), engine.203 (parser merge), engine.204 (feed drives geography), engine.205 (game-day economy), fandom unfiled pending Mike.
 
 ---
 

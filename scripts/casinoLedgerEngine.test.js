@@ -298,5 +298,68 @@ const sportsRan = E.processCasinoLedger_(sportsSlipCtx, 105);
 check('sports slip settles through the main entry', sportsRan.settled === 1 &&
   (sportsSlipCtx._cells || []).some(function (c) { return c.v === 'settled-win'; }));
 
+// engine.207a: synthetic, in-memory pricing cases. No feed or ledger writes.
+function sportsPricingContext(entries, openSlip, side) {
+  var values = [headers, rowFrom({ WagerId: 'HOUSE', Status: 'house', HouseFloatAfter: 250000 })];
+  if (openSlip) values.push(rowFrom(openSlip));
+  return {
+    ledger: { headers: slHeaders, rows: [slRow.slice()], dirty: false },
+    ss: { getSheetByName: function (name) { return name === 'Casino_Ledger' ? sheet(values) : null; } },
+    // No show cast: placement, stake, seed, then side.
+    rng: seq([0, 0.5, 0.5, side === 'loss' ? 0.9 : 0.1]),
+    summary: { sportsFeedEntries: entries, undockedFeedEntries: [], undockedPilots: {} }
+  };
+}
+const asPricingRow = { cycle: 105, teamsUsed: "A's", teamRecord: '100-40' };
+const oaksPricingRow = { cycle: 105, teamsUsed: 'Oaks', teamRecord: '0-3' };
+const pricingCases = [
+  ['A\'s first, Oaks last', [asPricingRow, oaksPricingRow], 'win', 1.30],
+  ['Oaks first, A\'s last', [oaksPricingRow, asPricingRow], 'win', 1.30],
+  ['loss side uses A\'s record too', [asPricingRow, oaksPricingRow], 'loss', 3.08],
+  ['team alias uses existing matcher', [{ cycle: 105, teamsUsed: 'Athletics', teamRecord: '100-40' }, oaksPricingRow], 'win', 1.30],
+  ['latest usable A\'s record wins', [asPricingRow, { cycle: 105, teamsUsed: "A's", teamRecord: '120-40' }, oaksPricingRow], 'win', 1.24],
+  ['blank later A\'s row keeps usable record', [asPricingRow, { cycle: 105, teamsUsed: "A's", teamRecord: '' }], 'win', 1.30],
+  ['malformed later A\'s row keeps usable record', [asPricingRow, { cycle: 105, teamsUsed: "A's", teamRecord: '-' }], 'win', 1.30],
+  ['no feed uses juice', [], 'win', 1.83],
+  ['Oaks-only feed uses juice', [oaksPricingRow], 'win', 1.83],
+  ['missing A\'s record uses juice', [{ cycle: 105, teamsUsed: "A's" }, oaksPricingRow], 'loss', 1.83],
+  ['invalid A\'s record uses juice', [{ cycle: 105, teamsUsed: "A's", teamRecord: 'bad' }, oaksPricingRow], 'win', 1.83],
+  ['zero-game A\'s record uses juice', [{ cycle: 105, teamsUsed: "A's", teamRecord: '0-0' }, oaksPricingRow], 'win', 1.83],
+  ['past and future records do not price this Cycle', [
+    { cycle: 104, teamsUsed: "A's", teamRecord: '100-40' },
+    { cycle: 106, teamsUsed: "A's", teamRecord: '120-40' }, oaksPricingRow
+  ], 'win', 1.83]
+];
+pricingCases.forEach(function (tc) {
+  var ctx = sportsPricingContext(tc[1], null, tc[2]);
+  var result = E.processCasinoLedger_(ctx, 105);
+  var slips = (ctx._appends || []).filter(function (a) { return a.tab === 'Casino_Ledger' && a.row[0] !== 'HOUSE'; });
+  var placedSlip = slips.length === 1 ? slips[0].row : [];
+  check('sports pricing: ' + tc[0], result.placed === 1 &&
+    placedSlip[headers.indexOf('MarketId')] === 'sports:as' &&
+    placedSlip[headers.indexOf('Side')] === tc[2] && placedSlip[headers.indexOf('Odds')] === tc[3]);
+});
+
+const issuedSlip = {
+  WagerId: 'w-pricing-issued', CyclePlaced: 104, POPID: 'POP-TEST-1',
+  MarketFamily: 'sports', MarketId: 'sports:as', EventId: 'next-as',
+  Side: 'win', Stake: 40, Odds: 2.52, Status: 'open'
+};
+const carriedPricingCtx = sportsPricingContext([asPricingRow, oaksPricingRow], issuedSlip);
+const carriedPricing = E.processCasinoLedger_(carriedPricingCtx, 105);
+check('issued slip carries without repricing or replacing it', carriedPricing.carried === 1 && carriedPricing.placed === 0 &&
+  !(carriedPricingCtx._cells || []).some(function (c) { return c.tab === 'Casino_Ledger' && c.r === 3; }) &&
+  carriedPricingCtx.ledger.rows[0][slHeaders.indexOf('NetWorth')] === slRow[slHeaders.indexOf('NetWorth')]);
+const settledPricingCtx = sportsPricingContext([
+  Object.assign({}, asPricingRow, { eventType: 'game-result', streak: 'W1' }), oaksPricingRow
+], issuedSlip);
+const settledPricing = E.processCasinoLedger_(settledPricingCtx, 105);
+check('issued slip settles at posted odds, not new market odds', settledPricing.settled === 1 &&
+  (settledPricingCtx._cells || []).some(function (c) {
+    return c.tab === 'Casino_Ledger' && c.r === 3 && c.c === headers.indexOf('Payout') + 1 && c.v === 101;
+  }) && !(settledPricingCtx._cells || []).some(function (c) {
+    return c.tab === 'Casino_Ledger' && c.r === 3 && c.c === headers.indexOf('Odds') + 1;
+  }) && settledPricingCtx.ledger.rows[0][slHeaders.indexOf('NetWorth')] === slRow[slHeaders.indexOf('NetWorth')] + 101);
+
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('casinoLedgerEngine: ok');

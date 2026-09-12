@@ -1,7 +1,7 @@
 ---
 title: Sports as a lived system — plan
 created: 2026-09-11
-updated: 2026-09-11
+updated: 2026-09-12
 type: plan
 status: draft
 tags: [plan, engine, sports, ingest, fandom, active]
@@ -95,11 +95,11 @@ Two structural facts that decide the design:
 
 **F4 — Sports is siloed to the sports desk.** Of 20 slice builders in `scripts/`, exactly **five** read the sports feed — `buildHalSlice`, `buildAnthonySlice`, `buildTanyaSlice`, `buildSimonSlice`, `buildPSlayerSlice`. All five are sports voices. Every other lane reads **zero**: transit, economic, economic-food (restaurants), civic-domain, civic-office, safety, health, faith, schools, environment, evening, Nia, Jax. The crossover Mike describes — a transit desk carrying an A's seed, a restaurant slice carrying a game-day seed — has no mechanism. Sports is a vertical that only sports writers can see, which is the media-layer mirror of F1/F2 in the engine layer.
 
-**F5 — The casino already bets on the A's and can never settle.** `Casino_Ledger` carries 12 live sports wagers (`MarketFamily=sports`, `MarketId=sports:as`, `EventId=next-as`), placed by real citizens (POP-00214, POP-00335, …) at C106. **All 12 are `open`. None has ever settled.**
+**F5 — Sports settlement is starved of usable feed input.** `Casino_Ledger` carries 12 live sports wagers (`MarketFamily=sports`, `MarketId=sports:as`, `EventId=next-as`), placed by real citizens (POP-00214, POP-00335, …) at C106. **All 12 are `open` and were placed at C106; being open at C106 is expected and does not prove stalled settlement.**
 
-`casinoResolveSports_` → `casinoParseSports_` (casinoLedgerEngine.js:147) requires a feed row with `EventType='game-result'` **and** a parseable W/L `Streak`, matched to the franchise. The feed carries 33 `game-result` rows across 48 cycles — only 20 with a parseable streak — and **C106 has no A's `game-result` row at all** (the A's last one was C105; before that C95). With no settleable event the resolver returns `carry`, forever.
+`casinoResolveSports_` → `casinoParseSports_` (casinoLedgerEngine.js:147) requires a feed row with `EventType='game-result'` **and** a parseable W/L `Streak`, matched to the franchise. The feed carries 33 `game-result` rows across 48 cycles — only 20 with a parseable streak — and **C106 has no A's `game-result` row at all** (the A's last one was C105; before that C95). With no settleable event the resolver returns `carry`, but `processCasinoLedger_` checks expiry first: `CASINO_VOID_AFTER = 3` (:52), gate at :699-701. An unmatched C106 slip carries at C107/C108 and void-gates at C109.
 
-This is the strongest single argument for the one-row-per-team-per-week ruling: it is not a new mechanism, it is the **missing input to a mechanism that is already built, already placed real citizens' money, and has been silently stuck since it shipped.**
+The sparse usable results support the one-row-per-team-per-week ruling: the settlement mechanism is already built, but needs dependable input to resolve wagers before expiry. The C106 snapshot establishes newly placed wagers, not a history of failed settlement. Independently, pricing used the last feed row's record regardless of team; engine.207a now selects the A's own usable current-Cycle record while preserving issued odds and the existing juice fallback (code and tests accepted S447; not deployed).
 
 **F6 — The dial system can take a ninth dial at no schema cost, and sports barely touches the eight it has.** `DialState` is **ledger column 48** (919 of 930 rows populated) and stores JSON — `{base:{...}, mood:{...}, streak:{...}}` keyed by dial name. **Adding a ninth dial requires no new *column*** — but see §4: it is not free, because `TraitProfile` (col 18) is the same data's readable face and must render the ninth dial too.
 
@@ -258,7 +258,7 @@ Original scope (union `HomeNeighborhood` into `S.sportsZones`) is **superseded**
 Intensity × stakes drives traffic / retail / transit at week scale, both directions, off the §2 derivation. Retires the championship-only ripple gates as the *only* sports economy (they stay as the top of the scale). Crime enters here or is explicitly ruled out — today it has no sports linkage at all.
 
 ### Task 5 — engine.207 (NEW): unstick the casino
-Repurposed `VideoGame`/`VideoGameDate` week-record column feeds `casinoParseSports_`. Ensure the one-row-per-team-per-week row is stamped `EventType='game-result'` with a parseable `Streak`, so the 12 open wagers settle and the market stops carrying forever. Cheapest task in the plan and the only one with citizens' money already on the table. Verify: `Casino_Ledger` Status flips off `open`, `CycleSettled` populates, `HouseFloatAfter` moves.
+Repurposed `VideoGame`/`VideoGameDate` week-record column feeds `casinoParseSports_` once the weekly feed and settlement contract is defined. The current resolver requires `EventType='game-result'` and a parseable `Streak`; dependable input must reach it before the three-Cycle expiry (`CASINO_VOID_AFTER = 3`), or an unmatched C106 slip void-gates at C109. The 12 C106 slips were newly placed, so their open status does not prove a stall. Engine.207a's team-specific pricing correction is built and accepted S447, not deployed; weekly settlement remains pending behind the feed contract and engine.210. Verify actual win/loss settlement, `CycleSettled`, posted-odds payouts, and financial consequences; a void alone is not proof of successful settlement.
 
 ### Task 6 — engine.206 (NEW): sports as a crossover seed
 Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds tagged with the lane they land in, not just `SPORTS` — a homestand is a **transit** seed and a **restaurant** seed; a stadium-adjacent hood on a playoff week is an **economic** seed; a franchise-stability wobble is a **civic** seed. Mechanism already exists in two places to copy: engine.190 stamps `domain` on business closures so a closure becomes an ECONOMIC seed the same cycle, and `recordRipple_` already carries `targetScope` / `neighborhood`. The slice builders then read the seed by domain, which is how every other lane already works — no per-slice sports wiring. Depends on Task 3 (geography) so a seed knows where it landed.
@@ -289,6 +289,7 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 
 ## Changelog
 
+- 2026-09-12 (codex) — engine.207a pricing built and reviewed S447; corrected F5 and Task 5 to distinguish newly placed C106 slips from stalled settlement and document the C109 expiry; weekly settlement remains pending.
 - 2026-09-12 — Third ruling block (S446): fandom is DIAL 9 with a negative pole fed by cron tone; franchise weight is a drifting number (A's dynasty vs Oaks expansion); same-ledger question answered in §7 (one tab, stop collapsing). F6 added — DialState is ledger col 48, JSON, so dial 9 costs no schema change; sports' entire dial footprint today is `Sports: {outabout:+1}`. engine.208/.209 filed; §4 rewritten from sketch to ruled design.
 - 2026-09-12 — Second ruling block folded in (S446): one row per team per week; `VideoGame`/`VideoGameDate` repurposed to the week record (Casino input); `HomeNeighborhood` deleted; record supplies magnitude, season state only scales it; record/trade-news/injuries carry the negative drift; acceptance criterion set to the NotebookLM data-vs-lived-experience test. F1 corrected (static zones are right, intensity is what is missing), F5 added (casino stuck since it shipped). engine.204 rescoped, engine.207 filed.
 - 2026-09-11 — Initial draft (S446). Direction captured verbatim from Mike in §0, including the mid-session crossover ruling (sports is a horizontal, every desk can carry an A's seed) which added F4 and Task 5. Measured state in §1 from the research file plus four new traces: `deriveSportsZones_` is Baylight-only (F1), economic ripple is championship-gated and team-blind (F2), no fandom concept exists in 55 ledger columns or anywhere in `phase*/` (F3).

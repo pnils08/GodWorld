@@ -853,8 +853,19 @@ function processCasinoLedger_(ctx, cycle) {
   var showOn = upcoming.length > 0;
   var sportsAs = { marketId: 'sports:as', franchiseId: 'as', eventId: 'next-as' };
   var lastSportsRecord = '';
-  if (feeds.sports && feeds.sports.length) {
-    lastSportsRecord = feeds.sports[feeds.sports.length - 1].teamRecord || '';
+  // engine.207a: latest usable record for this market's team and Cycle only.
+  // Missing/invalid rows leave the existing juice fallback; issued odds stay on the slip.
+  for (var si = feeds.sports.length - 1; si >= 0; si--) {
+    var sportsEntry = feeds.sports[si];
+    if (!sportsEntry || Number(sportsEntry.cycle) !== Number(cycle) ||
+        !casinoTeamsMatch_(sportsEntry.teamsUsed, sportsAs.franchiseId)) continue;
+    var sportsRecord = String(sportsEntry.teamRecord || '').trim();
+    if (!CASINO_RECORD_RE.test(sportsRecord)) continue;
+    var recordParts = sportsRecord.split(/\s*[-–]\s*/);
+    var recordWins = Number(recordParts[0]), recordLosses = Number(recordParts[1]);
+    if (!isFinite(recordWins) || !isFinite(recordLosses) || recordWins + recordLosses <= 0) continue;
+    lastSportsRecord = sportsRecord;
+    break;
   }
   var sportsOdds = casinoOddsSports_(lastSportsRecord);
   var credOdds = casinoOddsCredits_();

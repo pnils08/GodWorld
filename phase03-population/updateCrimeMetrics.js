@@ -154,7 +154,10 @@ function updateCrimeMetrics_Phase3_(ctx) {
   for (var e = 0; e < worldEvents.length; e++) {
     var evt = worldEvents[e] || {};
     var domain = (evt.domain || evt._domain || '').toString().toUpperCase();
-    if (domain === 'CHAOS' || domain === 'CRIME') {
+    // engine.212: SAFETY counts — crisis spikes (generateCrisisSpikes.js DOMAINS) and chaos-cars
+    // outcomes emit domain 'SAFETY' with a hood; nothing live ever emitted CHAOS/CRIME, so this
+    // gate had never fired (SIM_DOCTRINE §15: a gate that can't fire is a trick).
+    if (domain === 'CHAOS' || domain === 'CRIME' || domain === 'SAFETY') {
       chaosEvents++;
       var evHood = String(evt.neighborhood || '').trim();
       if (evHood) chaosByHood[evHood] = (chaosByHood[evHood] || 0) + 1; else chaosCityWide++;
@@ -205,6 +208,10 @@ function updateCrimeMetrics_Phase3_(ctx) {
 
   // engine.212: the reversion target is the city's own median level from LAST cycle's rows
   var cityMedianLevel = crimeCityMedianLevels_(currentMetrics);
+  // engine.212: a hood's joblessness / youth share is read AGAINST THE CITY'S OWN median — the
+  // signed, self-relative cause that keeps hoods distinct from their own data (no threshold literal
+  // decides who is rough). Absolute thresholds below still add on top for the extreme case.
+  var cityMedianDemo = crimeCityMedianDemo_(demographics, neighborhoods);
 
   // Track loads for enforcement
   var predictedCityIncidents = 0;
@@ -251,6 +258,7 @@ function updateCrimeMetrics_Phase3_(ctx) {
         adjacency: adjacency,
         lag: getNeighborhoodLag_(S, hood),
         cityMedianLevel: cityMedianLevel, // engine.212
+        cityMedianDemo: cityMedianDemo,   // engine.212
         policingCapacity: policingCapacity,
         cityLoad: cityLoad,
         patrolStrategy: patrolStrategy
@@ -335,7 +343,9 @@ function updateCrimeMetrics_Phase3_(ctx) {
 var CRIME_LEVEL = {
   REVERT_RATE: 0.04,        // per-cycle pull toward the city median level (half-life ~17 cycles)
   CAUSE_CAP: 3.0,           // max |signed cause push| per level per cycle (index points)
-  UNEMPLOYMENT_PUSH: 1.0,   // per 5 pts of unemployment above CRIME_FACTORS.UNEMPLOYMENT_THRESHOLD
+  UNEMPLOYMENT_PUSH: 1.0,   // per 5 pts of unemployment above CRIME_FACTORS.UNEMPLOYMENT_THRESHOLD (the extreme case)
+  REL_UNEMPLOYMENT_PUSH: 0.15, // per 1 pt of unemployment above (+) / below (−) the CITY MEDIAN — signed, self-relative
+  REL_YOUTH_PUSH: 0.05,     // per 1 pt of youth share above / below the city median (violent)
   ECON_LAG_PUSH: 1.0,       // × economicStressLag (0..1)
   HOTSPOT_PUSH: 0.10,       // × hotspot pressure (0..HOTSPOT_PRESSURE_CAP)
   CHAOS_PUSH: 0.5,          // per CHAOS/CRIME world event this cycle (residue, decays via reversion)
@@ -381,6 +391,20 @@ function crimeCityMedianLevels_(currentMetrics) {
   return { property: crimeMedian_(p), violent: crimeMedian_(v), qol: crimeMedian_(q) };
 }
 
+// City median unemployment rate and youth share across the iterated hoods (null when no data).
+function crimeCityMedianDemo_(demographics, hoods) {
+  var u = [], y = [];
+  for (var i = 0; i < hoods.length; i++) {
+    var d = demographics[hoods[i]];
+    if (!d) continue;
+    var tot = (d.students || 0) + (d.adults || 0) + (d.seniors || 0);
+    if (tot <= 0) continue;
+    u.push((d.unemployed || 0) / tot);
+    y.push((d.students || 0) / tot);
+  }
+  return { unemployment: crimeMedian_(u), youth: crimeMedian_(y) };
+}
+
 function crimeClampLevel_(n) { return Math.max(CRIME_LEVEL.MIN, Math.min(CRIME_LEVEL.MAX, n)); }
 function crimeCapPush_(n) { return Math.max(-CRIME_LEVEL.CAUSE_CAP, Math.min(CRIME_LEVEL.CAUSE_CAP, n)); }
 
@@ -411,6 +435,16 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
 
   // ---- SIGNED CAUSES move the level (persist) ---------------------------------------------------
   var pushProperty = 0, pushViolent = 0, pushQoL = 0;
+  var medDemo = (advanced && advanced.cityMedianDemo) || {};
+  if (totalPop > 0 && medDemo.unemployment !== null && medDemo.unemployment !== undefined) {
+    var relU = (unemploymentRate - medDemo.unemployment) / 0.01;   // points above (+) / below (−) the city's median
+    pushProperty += relU * CRIME_LEVEL.REL_UNEMPLOYMENT_PUSH;
+    pushQoL += relU * CRIME_LEVEL.REL_UNEMPLOYMENT_PUSH * CRIME_ADVANCED.QOL_UNEMPLOYMENT_SENS;
+  }
+  if (totalPop > 0 && medDemo.youth !== null && medDemo.youth !== undefined) {
+    var relY = (youthRatio - medDemo.youth) / 0.01;
+    pushViolent += relY * CRIME_LEVEL.REL_YOUTH_PUSH;
+  }
   if (unemploymentRate > CRIME_FACTORS.UNEMPLOYMENT_THRESHOLD) {
     var excessUnemployment = unemploymentRate - CRIME_FACTORS.UNEMPLOYMENT_THRESHOLD;
     pushProperty += (excessUnemployment / 0.05) * CRIME_LEVEL.UNEMPLOYMENT_PUSH;

@@ -57,7 +57,7 @@ function runCycle(sb, rows, cycle, opts, rng) {
   sb.getCrimeMetrics_ = () => rows;
   sb.getNeighborhoodDemographics_ = () => { const o = {}; NM.forEach(h => { o[h] = opts.demo(h); }); return o; };
   sb.batchUpdateCrimeMetrics_ = (ctx, map) => { written = map; };
-  const worldEvents = [];
+  const worldEvents = (opts.worldEvents || []).slice();
   for (let i = 0; i < (opts.chaos || 0); i++) worldEvents.push({ domain: 'CHAOS' });
   const ctx = { ss: {}, rng, config: {}, summary: {
     absoluteCycle: cycle, canonHoods: { list: NM },
@@ -182,5 +182,38 @@ console.log('═══ 7 — the authored table is inert on the per-cycle path')
     a['Downtown'].propertyLevel === b['Downtown'].propertyLevel, JSON.stringify({ a: a['Downtown'].propertyLevel, b: b['Downtown'].propertyLevel }));
 }
 
+// ── 8. Live-shaped causes for 200 cycles: SAFETY spikes land in random hoods, holidays celebrate —
+//      the city mean must not ratchet, no pins, and the live demographics keep hoods distinct ────
+console.log('═══ 8 — 200 live-shaped cycles: no ratchet, no pins, hoods stay distinct from their own data');
+{
+  // live Neighborhood_Demographics C106 (read 2026-09-13): pop, unemployed, students
+  const LIVE_DEMO = { Downtown: [2544, 89, 219], Temescal: [2517, 149, 289], Laurel: [2008, 100, 307], 'West Oakland': [2058, 76, 282],
+    Fruitvale: [2128, 85, 385], 'Jack London': [2344, 91, 183], Rockridge: [2000, 78, 224], 'Adams Point': [2178, 98, 250], 'Grand Lake': [2107, 93, 287],
+    'Piedmont Ave': [1974, 71, 229], Chinatown: [2007, 98, 287], Brooklyn: [1940, 78, 318], Eastlake: [2047, 106, 282], Glenview: [1996, 104, 349],
+    Dimond: [1965, 104, 318], 'Ivy Hill': [1898, 95, 300], 'San Antonio': [2015, 111, 355], 'Lake Merritt': [410, 12, 39], Uptown: [427, 14, 43],
+    KONO: [336, 15, 39], 'Baylight District': [319, 7, 42], 'East Oakland': [2143, 120, 441] };
+  const liveDemo = h => { const [pop, un, st] = LIVE_DEMO[h]; return { students: st, adults: pop - st - Math.round(pop * 0.1), seniors: Math.round(pop * 0.1), unemployed: un }; };
+  const sb = sandbox(); let rows = liveRows(); const rng = makeRng(2026);
+  const before = stats(rows, 'propertyCrimeIndex');
+  let minLevel = 100, maxLevel = 0, spikes = 0;
+  for (let c = 107; c < 307; c++) {
+    // 1–2 crisis spikes a cycle (generateCrisisSpikes MAX_SPIKES), ~1 in 4 SAFETY, each in one hood; a holiday every 13th cycle
+    const n = rng() < 0.6 ? 1 : 2; const worldEvents = [];
+    for (let i = 0; i < n; i++) if (rng() < 0.25) { worldEvents.push({ domain: 'SAFETY', neighborhood: NM[Math.floor(rng() * NM.length)] }); spikes++; }
+    if ((c - 107) % 13 === 0) worldEvents.push({ domain: 'CELEBRATION' });
+    const r = runCycle(sb, rows, c, { demo: liveDemo, worldEvents, season: ['spring', 'summer', 'fall', 'winter'][Math.floor(((c - 107) % 52) / 13)] }, rng);
+    rows = r.next;
+    NM.forEach(h => { minLevel = Math.min(minLevel, rows[h].propertyLevel, rows[h].violentLevel); maxLevel = Math.max(maxLevel, rows[h].propertyLevel, rows[h].violentLevel); });
+  }
+  const after = stats(rows, 'propertyLevel');
+  check('8a ' + spikes + ' SAFETY spikes over 200 cycles: no level touched 5 / 95', minLevel > 5 && maxLevel < 95, JSON.stringify({ minLevel, maxLevel }));
+  check('8b the city mean did not ratchet (' + before.mean.toFixed(1) + ' → ' + after.mean.toFixed(1) + ', |Δ| < 10 over 200 cycles)', Math.abs(after.mean - before.mean) < 10, JSON.stringify({ before: before.mean, after: after.mean }));
+  check('8c hoods stay DISTINCT from their own data (spread ' + after.spread.toFixed(1) + ' ≥ 8): the jobless-above-median hoods sit above the jobless-below-median ones',
+    after.spread >= 8 && rows['Temescal'].propertyLevel > rows['Baylight District'].propertyLevel && rows['East Oakland'].propertyLevel > rows['Lake Merritt'].propertyLevel,
+    JSON.stringify({ Temescal: rows['Temescal'].propertyLevel, Baylight: rows['Baylight District'].propertyLevel, EO: rows['East Oakland'].propertyLevel, LM: rows['Lake Merritt'].propertyLevel }));
+  check('8d a SAFETY spike counts as a cause (the CHAOS/CRIME-only gate never fired on live)',
+    (() => { const s2 = sandbox(); const a = runCycle(s2, liveRows(), 107, { demo: flatDemo, worldEvents: [{ domain: 'SAFETY', neighborhood: 'Dimond' }] }, () => 0.5).written;
+      const b = runCycle(s2, liveRows(), 107, { demo: flatDemo }, () => 0.5).written; return a['Dimond'].propertyLevel > b['Dimond'].propertyLevel && a['Laurel'].propertyLevel === b['Laurel'].propertyLevel; })());
+}
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

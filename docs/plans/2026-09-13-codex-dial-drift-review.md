@@ -314,6 +314,7 @@ Approve or amend the five contract choices above, then authorize one bounded imp
 
 - 2026-09-13 (codex) — Completed source review, historical pool reproduction, defect probes and proposed engine.201 repair sequence; submitted for Claude review, implementation unstarted.
 - 2026-09-13 (codex) — Took execution lead; conduct repair `0a9306e1` proved on sandbox C108–C109 and deployed PROD @80 (Apps Script version 69); engine.201 remains unaccepted.
+- 2026-09-13 (codex) — Owner-reader repair proved against `7322823a`; verified-ID and unique-name controls retained; sandbox/deployment pending below.
 
 ## Final verification note — 2026-09-13 (codex)
 
@@ -376,6 +377,25 @@ Bond primitives inspected: Simulation_Ledger HouseholdId is actual membership (`
 
 Owner/venture input and final fixed-cohort causal acceptance remain open under engine.201. Historical multi-Cycle metrics containing removed retags/remaps cannot accept the current build.
 
-**Owner reader follow-up (CONFIRMED, same-session local probe):** `bizOwnerBands_` still falls back from an unresolved explicit POPID to a namesake, and its name cache overwrites duplicates (`applyBusinessDynamics.js:303–326`). Synthetic absent-ID owner returned drive band +2 instead of null. Two same-name rows with drive 90/10 returned −2; reversing their ledger order returned +2. This is separate from the already-repaired closure writer and can alter business growth/closure thresholds using the wrong person's dials. Next bounded mechanical repair: make the owner-dial reader fail closed on unresolved IDs and ambiguous names; preserve verified-ID and unique-name controls, prove actual business decision effects. No owner-reader source change landed in the conduct deployment.
+**Owner reader follow-up (IN PROGRESS, locally proved; deployment pending):** `bizOwnerBands_` now treats an explicit POPID as authoritative: an absent ID or an ID without DialState never borrows a namesake; duplicate full names resolve null even when one row has blank DialState; a later valid owner entry can still resolve. Name ambiguity remains after a third duplicate. The caches are used only by this function, retain serialized strings rather than shared citizen objects, and add no RNG draws or cell mutation. Existing identity precedence is preserved; wealth's separate `resolveOwnerRow_` requires name agreement and is unchanged.
+
+**Regression proof:** `scripts/businessOwnerDials.test.js`: clean source archive of `7322823a` gives 6 passes / 23 failures; repaired source gives 29/29. Actual `applyBusinessDynamics_` paths queue growth 1.63 instead of 1.50 and defer closure on unresolved ownership before repair; afterward they match neutral growth and close at the ordinary threshold with six job losses, rather than shedding four while staying open. Verified owners still amplify growth, calm composure delays closure, and low composure brings closure forward one Cycle. Exact IDs remain usable after a cached ambiguous-name lookup. Existing seam tests 24/24 and employer tests 65/65; syntax/whitespace checks clean.
+
+**Current-input comparison:** a read-only C106 snapshot has 177 businesses, 30 populated personnel cells, and 16 businesses with resolvable owner bands under both implementations; zero businesses change bands on these current inputs. The boundary tests establish the repair; an ordinary bench fire alone cannot prove an ambiguity branch that these inputs do not contain. No ownership backfill or live Sheet write is part of this repair.
+
+**Broader validation:** offline suite 230/232 files (105.41 seconds). `ingestEdition.test.js` and `rateEditionCoverage.test.js` retain the subprocess-output failures seen in the conduct run; the C94 fixture test now passes. No clean-full-suite claim. Documentation lint retains 19 oversized rows outside engine.201.
+
+**Owner wiring card:** required Haiku inspection completed; the following dependencies were verified directly against source.
+
+| Connection | Source |
+|---|---|
+| Both Cycle entrypoints run business dynamics before Career | `phase01-config/godWorldEngine2.js:357`, `phase01-config/godWorldEngine2.js:2102` |
+| Personnel parser; explicit-ID/name-only reader | `phase05-citizens/generationalWealthEngine.js:883`, `phase05-citizens/applyBusinessDynamics.js:297` |
+| Serialized DialState to signed bands | `utilities/compressLifeHistory.js:1148` |
+| Owner read and positive drift multiplier | `phase05-citizens/applyBusinessDynamics.js:433`, `phase05-citizens/applyBusinessDynamics.js:370` |
+| Composure room and closure decision | `phase05-citizens/applyBusinessDynamics.js:445`, `phase05-citizens/applyBusinessDynamics.js:456` |
+| Job losses into career; revenue/growth write intents | `phase05-citizens/applyBusinessDynamics.js:488`, `phase05-citizens/runCareerEngine.js:529`, `phase05-citizens/applyBusinessDynamics.js:496` |
+
+Fixed-cohort causal proof, deployment, and final engine.201 acceptance remain pending.
 
 **Fresh input observation (live read only, C106):** Business_Ledger has 177 rows and 30 nonblank Key_Personnel cells; the older 21-cell figure is stale. Eight ledger rows with explicit founder/owner/principal/managing-partner-style RoleType prefixes were found; none had an exact unique business-name match with blank personnel. These counts do not prove all owners resolve, and blank personnel does not establish a missing individual owner for an institution. No backfill was performed.

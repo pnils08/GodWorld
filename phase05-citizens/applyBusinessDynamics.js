@@ -302,15 +302,13 @@ function bizOwnerBands_(ctx, keyPersonnelCell) {
       var h = ctx.ledger.headers, iP = h.indexOf('POPID'), iD = h.indexOf('DialState'), iF = h.indexOf('First'), iL = h.indexOf('Last');
       if (iP >= 0 && iD >= 0) for (var r = 0; r < ctx.ledger.rows.length; r++) {
         var pp = String(ctx.ledger.rows[r][iP] || '').trim().toUpperCase();
-        if (!pp || !ctx.ledger.rows[r][iD]) continue;
-        var dsRow = String(ctx.ledger.rows[r][iD]);
-        ctx._bizDialByPop[pp] = dsRow;
-        // live Key_Personnel is mostly names ("Priya Chandrasekaran (Founder)"): 6 of 21 owner
-        // entries carry a POPID (measured S438) — resolve the rest by full name, the
-        // same key the bond engine and the civic holder read use.
+        var dsRow = String(ctx.ledger.rows[r][iD] || '');
+        if (pp && dsRow) ctx._bizDialByPop[pp] = dsRow;
+        // Name-only ownership must identify one ledger row, even when a namesake
+        // has no DialState yet. Null marks ambiguity for the rest of this Cycle.
         if (iF >= 0 && iL >= 0) {
           var nk = (String(ctx.ledger.rows[r][iF] || '').trim() + ' ' + String(ctx.ledger.rows[r][iL] || '').trim()).trim().toLowerCase();
-          if (nk) ctx._bizDialByName[nk] = { pop: pp, ds: dsRow };
+          if (nk) ctx._bizDialByName[nk] = ctx._bizDialByName.hasOwnProperty(nk) ? null : { pop: pp, ds: dsRow };
         }
       }
     }
@@ -319,11 +317,13 @@ function bizOwnerBands_(ctx, keyPersonnelCell) {
   for (var e = 0; e < entries.length; e++) {
     if (!entries[e].owner) continue;
     var pop = entries[e].pop ? String(entries[e].pop).toUpperCase() : '', ds = pop ? ctx._bizDialByPop[pop] : null;
-    if (!ds && entries[e].name) {
+    // An explicit POPID is authoritative; never borrow a namesake's dials when
+    // that ID is absent or has no DialState. A later valid owner can still resolve.
+    if (!pop && entries[e].name) {
       var byName = ctx._bizDialByName[String(entries[e].name).trim().toLowerCase()];
       if (byName) { pop = byName.pop; ds = byName.ds; }
     }
-    if (!ds) continue;
+    if (!pop || !ds) continue;
     var gb = getCitizenDialBands_(ctx, pop, ds);
     if (gb && gb.bands) return gb.bands;
   }

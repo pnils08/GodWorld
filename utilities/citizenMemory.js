@@ -55,13 +55,20 @@ var BAND_SIGNED = [-2, -1, 0, 1, 2];            // signed band for readability
 
 function clamp100_(n) { return n < 0 ? 0 : (n > 100 ? 100 : n); }
 function round1_(n) { return Math.round(n * 10) / 10; }
+// engine.201b (S449): no rule can put base exactly on a pole any more (engine.177 hardening
+// room is 0 there; roomScaled_ stops at 95% of the room). A base AT 0/100 is residue of the
+// pre-177 code (5 live cells at C106: POP-00001 drive, POP-00170/198/210/231 sociability) and
+// reads as a pin forever — upward pushes have no room, so only a rare downward event moves it.
+// Read it back to the 95% bound of the half-range so it behaves like every other extreme.
+var POLE_UNPIN = 2.5;
+function unpinBase_(n) { return n >= 100 ? 100 - POLE_UNPIN : (n <= 0 ? POLE_UNPIN : n); }
 
 // A citizen = permanent self (base) + current swing (mood) + reinforcement (streak), per dial.
 function newCitizen_(base) {
   var c = { base: {}, mood: {}, streak: {} };
   for (var i = 0; i < DIALS.length; i++) {
     var d = DIALS[i];
-    c.base[d] = (base && base[d] != null) ? clamp100_(base[d]) : MIDPOINT;
+    c.base[d] = (base && base[d] != null) ? unpinBase_(clamp100_(base[d])) : MIDPOINT;
     c.mood[d] = 0;
     c.streak[d] = 0;
   }

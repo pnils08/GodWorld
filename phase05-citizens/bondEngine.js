@@ -673,6 +673,11 @@ function updateExistingBonds_(ctx) {
         ENGINE59_DIAG.friendGrowths++;
         if (ENGINE59_DIAG.factors.length < 5) ENGINE59_DIAG.factors.push(bond.citizenA + 'x' + bond.citizenB + ':' + wf59.toFixed(3));
         intensity += FRIENDSHIP_GROWTH * wf59;
+      } else if (bond.bondType === BOND_TYPES.FAMILY || bond.bondType === BOND_TYPES.PROFESSIONAL ||
+                 bond.bondType === BOND_TYPES.NEIGHBOR) {
+        // engine.201b (S449): these types had no shared-cycle path, so once neglect fades
+        // them (below) nothing could ever bring one back. A shared cycle keeps them up.
+        intensity += BOND_MAINTAIN * bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB);
       }
     }
 
@@ -810,16 +815,17 @@ function updateExistingBonds_(ctx) {
       intensity -= 0.1;
     }
 
-    if (!aActive && !bActive) {
-      intensity -= 0.2;
-    }
-
-    if (bondAge > 15 && (currentCycle - (bond.lastUpdate || 0)) > 5) {
-      // engine.178 (S438): WARMTH IS MAINTENANCE — a warm pair's neglected bond fades
-      // slower (x0.75 at +2/+2), a cold pair's faster (x1.25). Growth keeps its one
-      // warmth factor above; this is the other half of the same term, never stacked
-      // on formation (doctrine §11: marriage is years of a MAINTAINED bond).
-      intensity -= 0.5 * (2 - bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB));
+    // engine.201b (S449): NEGLECT IS A CYCLE THE PAIR DID NOT SHARE, not a clock. The old gate
+    // (bondAge > 15 AND lastUpdate > 5 cycles back) read CycleCreated, which the S312 key repair
+    // reset to C102–C106 on every live bond, so no bond could fade before C118 — and lastUpdate
+    // is a ledger-bloat stamp, not contact, so from C118 every bond would have faded every cycle,
+    // maintained or not. One party present fades it by half the full rate; neither, the full rate.
+    // engine.178 (S438): WARMTH IS MAINTENANCE — a warm pair's neglected bond fades slower
+    // (x0.75 at +2/+2), a cold pair's faster (x1.25) (doctrine §11: marriage is years of a
+    // MAINTAINED bond).
+    if (!(aActive && bActive)) {
+      var fadeRate = (aActive || bActive) ? BOND_FADE_ONE_ABSENT : BOND_FADE_BOTH_ABSENT;
+      intensity -= fadeRate * (2 - bondWarmthFactor_(ctx, bond.citizenA, bond.citizenB));
     }
 
     // v2.2: Festival bonds decay faster outside festivals
@@ -1416,6 +1422,13 @@ function detectNewBonds_(ctx) {
 // CONFRONTATION TRIGGERS
 // ============================================================
 
+// engine.201b: the cycle of the latest "[Confrontation Cn]" stamp in a bond's notes, 0 if none.
+function lastConfrontationCycle_(notes) {
+  var re = /\[Confrontation C(\d+)\]/g, m, last = 0;
+  while ((m = re.exec(String(notes || '')))) last = Number(m[1]);
+  return last;
+}
+
 function checkConfrontationTriggers_(ctx) {
   var bonds = ctx.summary.relationshipBonds || [];
   var confrontations = [];
@@ -1436,6 +1449,13 @@ function checkConfrontationTriggers_(ctx) {
     if (bond.bondType === BOND_TYPES.SPORTS_RIVAL && sportsSeason === 'championship') {
       threshold = 6;
     }
+
+    // engine.201b (S449): a feud RESTS between flare-ups. +1.5/cycle growth against −2 here had an
+    // active rivalry confronting nearly every cycle (TrustGuarded 410 lines / 12 bench cycles);
+    // gating only the sting left it firing 0 (no feud ever showed a quiet gap). Within
+    // CONFRONT_ADAPT cycles of the last flare-up there is no confrontation at all.
+    var lastConfront = lastConfrontationCycle_(bond.notes);
+    if (lastConfront > 0 && currentCycle - lastConfront <= CONFRONT_ADAPT) continue;
 
     if (bond.intensity >= threshold) {
       confrontations.push({
@@ -1803,6 +1823,10 @@ var HOUSEHOLD_COURTSHIP_BOOST = 1.5; // engine.74 (S328, Mike-direct): an establ
                                      // a household boosts the romance step chance
 var TRIANGLE_BIRTH_INTENSITY = 5; // rivals born from a shared love start here
 var FRIENDSHIP_GROWTH = 0.4;  // engine.59: per-cycle when both co-active (× warmth trait)
+var BOND_MAINTAIN = 0.15;         // engine.201b: family/professional/neighbor, per shared cycle (× warmth)
+var BOND_FADE_ONE_ABSENT = 0.5;   // engine.201b: per cycle only one of the pair lived (× 2 − warmth)
+var BOND_FADE_BOTH_ABSENT = 0.7;  // engine.201b: per cycle neither did — the old 0.2 + 0.5 together
+var CONFRONT_ADAPT = 6;           // engine.201b: a feud rests this many cycles after a confrontation before it can flare again
 // engine.66e (S324, Mike-direct): romance growth is a per-cycle CHANCE draw,
 // not a rate — see the ROMANTIC block in updateBondIntensities. The old flat
 // constants (0.3/0.6 = weeks to marry; then 0.02/0.05 = a forced uniform

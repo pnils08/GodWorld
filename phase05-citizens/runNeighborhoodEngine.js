@@ -151,7 +151,14 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
 // opening snapshot (S.neighborhoodState, never the same-cycle pulse). Ties at the cut are included.
 // A hood over either engine.176 pressure bar is excluded: pressure claims first, exactly as the
 // neighborhood engine's own fork does. Returns { hood: true }; empty when the snapshot is missing.
-function activityTopHoods_(state, ctx) {
+function activityTopHoods_(state, ctx) { return activityBandHoods_(state, ctx, 1); }
+
+// engine.201b (S449): the mirror band — shops and events in the city's bottom quarter, same
+// relative cut, same pressure exclusion. The ordinary line there is the hood giving people
+// fewer reasons to go out (ActivityContracted, outabout −1).
+function activityBottomHoods_(state, ctx) { return activityBandHoods_(state, ctx, -1); }
+
+function activityBandHoods_(state, ctx, sign) {
   var pBar = (ctx && typeof pressureBar_ === 'function') ? pressureBar_(ctx, 'dialHoodPressureBar') : Infinity;
   var cBar = (ctx && typeof pressureBar_ === 'function') ? pressureBar_(ctx, 'dialHoodCrimeBar') : Infinity;
   var out = {}, list = [];
@@ -162,15 +169,22 @@ function activityTopHoods_(state, ctx) {
     if (sc > 0) list.push({ h: h, sc: sc });
   }
   if (!list.length) return out;
-  list.sort(function(a, b) { return b.sc - a.sc; });
+  list.sort(function(a, b) { return sign > 0 ? b.sc - a.sc : a.sc - b.sc; });
   var cut = list[Math.max(0, Math.ceil(list.length / 4) - 1)].sc;
   for (var k = 0; k < list.length; k++) {
-    if (list[k].sc < cut) continue;
+    if (sign > 0 ? list[k].sc < cut : list[k].sc > cut) continue;
     var st = state[list[k].h];
     if (Number(st.housingPressure) >= pBar || Number(st.crimeIndex) >= cBar) continue;
     out[list[k].h] = true;
   }
   return out;
+}
+
+// engine.201b (S449): a hood at or over the crime bar closes its residents off — the ordinary
+// line there is StreetsGuarded (openness −1). Reads the persisted snapshot like the bands above.
+function hoodOverCrimeBar_(state, ctx, hood) {
+  var st = state ? state[hood] : null;
+  return !!(st && typeof pressureBar_ === 'function' && Number(st.crimeIndex) >= pressureBar_(ctx, 'dialHoodCrimeBar'));
 }
 
 function runNeighborhoodEngine_(ctx) {
@@ -584,6 +598,10 @@ function runNeighborhoodEngine_(ctx) {
       // their own tag (plain days).
       if (!ctx._activityTopHoods) ctx._activityTopHoods = activityTopHoods_(S.neighborhoodState, ctx);
       if (ctx._activityTopHoods[neighborhood]) eventTag = "ActivityExpanded";
+      // engine.201b (S449): the bottom band is the same line pointed down. Crime-bar hoods never
+      // reach here — they took the pressure tint above.
+      if (!ctx._activityBottomHoods) ctx._activityBottomHoods = activityBottomHoods_(S.neighborhoodState, ctx);
+      if (ctx._activityBottomHoods[neighborhood]) eventTag = "ActivityContracted";
 
       // Determine event tag (v2.2)
       if (isFirstFriday && firstFridayEvents[neighborhood] && firstFridayEvents[neighborhood].indexOf(entry) >= 0) {

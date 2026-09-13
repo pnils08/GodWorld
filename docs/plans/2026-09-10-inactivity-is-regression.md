@@ -311,7 +311,7 @@ Pressure tags carry their cause: `Friction-Rent`, `Strain-Hood`, `Stumble-Jobles
 
 Seam volumes C107–C118: Career-Layoff 10, Career-Hired 17, Career-FieldChange 4, BoundaryKept 19 / BoundaryCompromised 12, ConnectionWithdrawn 2, RoutineRetrenched 0, ActivityExpanded 323, TrustGuarded 410; pressure records 110 rows (debt 46, hood 35, overwork 23, rent 13, unemployed 5), 56 adapted. Cells: max LifeHistory 3,969 chars, max DialState 697.
 
-**Builder questions this leaves (sim, not mechanism):** (1) openness has no ordinary downward cause at volume — the approved ones (venture closure, field change then layoff) fired 0 times in 12 cycles; (2) sociability down rides bond dormancy, which live has never produced (0 dormant of 606); (3) the five seeded 100s stay until a downward event lands on that dial; (4) whether a mostly-neutral city under plain days is the intended resting state.
+**Posed to the builder as four sim questions — answered 2026-09-13: "1, 2, 3 — broken code. 4 — your idea was incorrect."** (1) openness had no downward cause at volume; (2) sociability down rides bond dormancy, which live could not produce; (3) five bases sat exactly at 100; (4) plain-days-move-nothing left 60% of the city all-neutral. All four traced to code → §engine.201b below.
 
 Codex adversarial diff review of the build: `output/codex/engine201-diff-review.md` — 4 CONFIRMED + 1 PLAUSIBLE fixed in `830e05ac` (owner POPID fails closed, gone owners excluded, cross-cause seeding, unemployment evidence after trim, inactive retag) plus a 95% pole cap.
 
@@ -321,6 +321,35 @@ Codex adversarial diff review of the build: `output/codex/engine201-diff-review.
 
 **Mechanism defect found in the proof (engine-sheet, not a builder ruling):** TrustGuarded 410 lines in 12 cycles ≈ 21 rivalries × 2 × most cycles. `updateExistingBonds_` adds +1.5/cycle to an active rivalry and `checkConfrontationTriggers_` fires at ≥ 8 then subtracts only 2, so a rivalry confronts nearly every cycle and both parties lose warmth each time (warmth +229/−403). Pre-existing bond shape; engine.201 made it reach the dials. Fix = confrontation cooldown or the Friction→Strain→adapt run already built for pressure. Filed under engine.197.
 
+## engine.201b (S449) — the four follow-ups, as built
+
+| # | What was broken | Change |
+|---|---|---|
+| 1 openness down | The approved causes are structurally rare: 2 closures in 14 bench cycles, both with blank Key_Personnel → 0 `RoutineRetrenched`. | The ordinary hood line in a hood at/over `dialHoodCrimeBar` is `StreetsGuarded` openness −1 (`hoodOverCrimeBar_`, `generateCitizensEvents.js` retag). |
+| 2 sociability down | Neglect fade sat behind `bondAge > 15 && lastUpdate > 5`. Every live bond's CycleCreated is C102–C106 (S312 key repair), so nothing could fade before C118; lastUpdate is a ledger-bloat stamp, so from C118 every bond would fade every cycle, maintained or not. Family/professional/neighbor had no shared-cycle growth, so no return path. | Neglect = a cycle the pair did not share: one party active −0.5, neither −0.7, × (2 − pair warmth). Family/professional/neighbor +0.15 × warmth on a shared cycle. Clock gate removed. |
+| 2b warmth tax | Active rivalry +1.5/cycle vs −2 at the ≥8 trigger → confronts nearly every cycle; `TrustGuarded` 410 lines / 12 cycles. | A feud rests: no confrontation within 6 cycles of the last `[Confrontation Cn]` stamp (`lastConfrontationCycle_`, `CONFRONT_ADAPT`); the next flare-up confronts and stings. (First cut gated only the sting → 13 lines in 15 cycles, a dead channel; @21 gates the confrontation.) Consumers of the list: bond summary count + packet line only. |
+| 3 pins at 100 | Pre-177 residue: base exactly 100 (POP-00001 drive; POP-00170/198/210/231 sociability); room is 0 there, so only a rare downward event moved it. | `unpinBase_` reads a base at 0/100 back to 2.5/97.5 (`newCitizen_`); no current rule can reach a pole. |
+| 4 neutral city (NOT moved — see proof) | Plain days swept ~6,000 hood-caused `Neighborhood` lines (12 cycles) to `{}`. | The ordinary hood line carries the hood's sign: top quarter `ActivityExpanded` outabout +1, bottom quarter `ActivityContracted` outabout −1 (`activityBottomHoods_`, both generators), crime bar `StreetsGuarded`. Housing-pressured and middle-band hoods stay `Neighborhood` (pressure runs cover housing). Pulse unchanged (`{sentiment:1}`). |
+
+Tests: `dialWave2Seams.test.js` +7 (all fail on `4d87d74b`), 196 test files, 1 pre-existing unrelated failure (`djDirect.schema-and-slot`, missing C94 fixture).
+
+**Bench proof (SANDBOX 0908 resynced from live C106; @20 C107–C119, @21 feud rest C120–C121; 0 Engine_Errors; C112/C114 returned the 404 HTML body and ran; one 404 fire executed twice, so 13 cycles for 12 fires; C120 ran @20 — propagation window, the C119-stamped feuds confronted again).** Measured C107–C121 from the cells (`output/engine201/measure-c121-all.json`), against the engine.201 proof C107–C118:
+
+| | engine.201 @18 | engine.201b | |
+|---|---|---|---|
+| downward share | 30.0% | 40.7% | |
+| openness +/− | 392 / 0 | 396 / 907 (`StreetsGuarded` 1,218) | #1 closed |
+| sociability +/− | 699 / 2 | 750 / 97; bonds dormant 0 → 40 (friendship 24, professional 10, family 6), `ConnectionWithdrawn` 119 / `ConnectionMaintained` 89 | #2 closed |
+| warmth +/− | 229 / 403 | 235 / 13 — up-heavy; feud rest (@21) restores ~8 `TrustGuarded`/cycle, pulsed while live's feuds share a C106 stamp | open under engine.197 |
+| pins at 0/100 | 5 | 0 | #3 closed |
+| all-neutral (8 dials in 40–60) | 617 (60.0%) | 59.7% | **#4 NOT moved** |
+| wake-eligible (deviation ≥ 60) | 22.6% | 21.8% (live C106 24.6%) | |
+
+Hood groups at bench C118 (openness / outabout / all-neutral): crime-bar 51.82 / 50.57 / 60.6%, top band 52.65 / 51.94 / 61.8%, housing-pressured 54.14 / 51.07 / 54.4%, middle 53.30 / 50.90 / 59.6%. Residents already differ by hood in the direction of the cause, by 1–2 points in 12 cycles.
+
+**Why #4 did not move:** a ±1 line reaches a hood resident about once every 2–4 cycles; with mood fading 20%/cycle and base hardening only after three felt pushes in a row, nobody leaves 40–60 in 12 cycles, and the new −1 lines pull the elevated citizens (gt60) back toward the band as often as they push anyone out. The shaping volume pre-201 lived in the ~14,000 other plain-day lines (Daily, Civic Perception, Personal, PrevEvening, Sports, Lifestyle, Background) at +1–+4 unsigned. Next cut for #4 is magnitude or those lines' sign from the citizen's own circumstances — open under engine.197. Two-way dials also shrink the wake pool short-term (24.6% → 21.8%): the one-way ratchet was inflating it.
+
+
 ## Changelog
 
 - 2026-09-13 (codex) — Linked the completed engine.201 source review and proposed repair sequence for Claude approval; no implementation or live-state changes.
@@ -328,3 +357,4 @@ Codex adversarial diff review of the build: `output/codex/engine201-diff-review.
 - 2026-09-13 (engine-sheet S449) — Wave 1 bench C107 clean (0 errors, pressure records live, no new pins) but negative share 5.1%; ruling 1b captured; Wave 2 built (table above).
 - 2026-09-13 (engine-sheet S449) — Proof scope stated (@18 twelve cycles, @19 two); live C107 first-fold expectation; rivalry confrontation cadence filed under engine.197.
 - 2026-09-13 (engine-sheet S449) — 12-cycle proof + review fixes; PROD @77; acceptance results recorded; engine.201 done-pending-archive, engine.197 open on the four builder questions.
+- 2026-09-13 (engine-sheet S449) — Builder: 1–3 broken code, 4 plain-days cut wrong. engine.201b built + benched (§engine.201b): openness/sociability down, pins 0, feud rest; all-neutral share unmoved — stays open.

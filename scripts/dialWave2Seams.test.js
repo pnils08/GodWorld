@@ -48,7 +48,7 @@ function people() { return [citizen('POP-99001', 'Synthetic', 'Alpha'), citizen(
 
 // Status transitions are produced by the real intensity update, not the new note helper.
 for (const [before, after, intensity, tag] of [
-  ['active', 'dormant', 1.1, 'ConnectionWithdrawn'], ['dormant', 'active', 3.6, 'ConnectionMaintained']
+  ['active', 'dormant', 1.1, 'ConnectionWithdrawn'], ['dormant', 'active', 4.3, 'ConnectionMaintained']
 ]) {
   const observations = [];
   for (const type of ['friendship', 'family', 'romantic', 'mentorship', 'alliance', 'neighbor', 'professional', 'festival']) {
@@ -75,7 +75,7 @@ for (const [before, after, intensity, tag] of [
   w.updateExistingBonds_(ctx); // no second status flip
   const withdrawn = counts(ctx, 'ConnectionWithdrawn');
   // Fresh Cycle, same citizens and bonds: a genuinely recovered connection is a new tag.
-  bonds.forEach(b => { b.intensity = 3.6; });
+  bonds.forEach(b => { b.intensity = 4.3; }); // engine.201b: neither present fades 0.7
   const next = context(rows, bonds, 201); w.updateExistingBonds_(next);
   const maintained = counts(next, 'ConnectionMaintained');
   bonds.forEach(b => { b.intensity = 1.1; });
@@ -200,6 +200,57 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
   const gc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
   assert('review P2: an inactive citizen never takes the ActivityExpanded retag', /primaryTag === "Neighborhood" && status !== "inactive"/.test(gc));
   assert('review: one netted cycle of +56 never lands on 100', (() => { const c = w.newCitizen_(); w.applyEvent_(c, { effects: { drive: 56 } }); w.applyEvent_(c, { effects: { drive: 56 } }); return w.current_(c, 'drive') < 100; })());
+}
+
+// engine.201b (S449): the four follow-ups — every assert below fails on 4d87d74b.
+{
+  const step = (type, active, created, cycle = 200, intensity = 5) => {
+    const bond = pair(type, 'active', intensity); bond.cycleCreated = created; bond.lastUpdate = created;
+    const ctx = context(people(), [bond], cycle); ctx._bondActivePool = active;
+    w.updateExistingBonds_(ctx); return Math.round((bond.intensity - intensity) * 100) / 100;
+  };
+  const young1 = step('friendship', ['POP-99001'], 199), young0 = step('friendship', [], 199);
+  assert('201b a young bond fades when the pair does not share the cycle (one present −0.5, neither −0.7) — no bondAge clock',
+    young1 === -0.5 && young0 === -0.7, JSON.stringify({ young1, young0 }));
+  const oldShared = step('friendship', ['POP-99001', 'POP-99002'], 100);
+  assert('201b an old friendship the pair keeps sharing grows (+0.4); the lastUpdate stamp no longer fades it', oldShared === 0.4, String(oldShared));
+  const kept = ['family', 'professional', 'neighbor'].map(t => step(t, ['POP-99001', 'POP-99002'], 199));
+  assert('201b family / professional / neighbor bonds rise +0.15 on a shared cycle (a return path from neglect)',
+    kept.every(d => d === 0.15), JSON.stringify(kept));
+}
+{
+  const bond = pair('rivalry', 'active', 8);
+  const fire = cycle => { bond.intensity = 8; const ctx = context(people(), [bond], cycle); const n = w.checkConfrontationTriggers_(ctx).length; return [n].concat(counts(ctx, 'TrustGuarded', cycle)); };
+  const first = fire(200), repeat = fire(201), within = fire(206), after = fire(207);
+  assert('201b a feud rests: no confrontation (and no TrustGuarded) within 6 cycles of the last; the next flare-up confronts and stings',
+    JSON.stringify([first, repeat, within, after]) === '[[1,1,1],[0,0,0],[0,0,0],[1,1,1]]', JSON.stringify([first, repeat, within, after]));
+}
+{
+  const st = {};
+  [['A', 20, 0, 0], ['B', 18, 0, 0], ['C', 15, 0, 1.2], ['D', 12, 0, 0], ['E', 11, 0, 0], ['F', 10, 3, 0], ['G', 9, 0, 0], ['H', 8, 0, 0]]
+    .forEach(([h, sc, hp, cr]) => { st[h] = { retailVitality: sc / 2, eventAttractiveness: sc / 2, housingPressure: hp, crimeIndex: cr }; });
+  const cfg = { config: { dialHoodPressureBar: 3, dialHoodCrimeBar: 1 } };
+  const bottom = w.activityBottomHoods_(st, cfg);
+  assert('201b activityBottomHoods_ takes the unpressured bottom quarter; hoodOverCrimeBar_ flags the crime-bar hood',
+    JSON.stringify(Object.keys(bottom).sort()) === '["G","H"]' && w.hoodOverCrimeBar_(st, cfg, 'C') && !w.hoodOverCrimeBar_(st, cfg, 'A'),
+    JSON.stringify(bottom));
+  const M = w.nudgesForEvent_;
+  assert('201b ActivityContracted is outabout −1 and StreetsGuarded openness −1',
+    JSON.stringify(M('ActivityContracted')) === '{"outabout":-1}' && JSON.stringify(M('StreetsGuarded')) === '{"openness":-1}',
+    JSON.stringify([M('ActivityContracted'), M('StreetsGuarded')]));
+  const gc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
+  assert('201b the generator gives the ordinary hood line the hood\'s sign (top / bottom / crime bar)',
+    /primaryTag = "ActivityContracted"/.test(gc) && /hoodOverCrimeBar_\(S\.neighborhoodState, ctx, neighborhood\)\) primaryTag = "StreetsGuarded"/.test(gc));
+  const rows = [citizen('POP-99001', 'Synthetic', 'Alpha', 'H')];
+  const ctx = context(rows); ctx.rng = () => 0; Object.assign(ctx.config, cfg.config); ctx.summary.neighborhoodState = st;
+  writes.length = 0; w.runNeighborhoodEngine_(ctx);
+  const tags = writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3]);
+  assert('201b the neighborhood engine writes ActivityContracted for a bottom-quarter resident', tags[0] === 'ActivityContracted', JSON.stringify(tags));
+}
+{
+  const c = w.deserialize_({ base: { drive: 100, sociability: 0, warmth: 99.9 }, streak: {} });
+  assert('201b a base read AT a pole comes back to 97.5 / 2.5; anything inside the range is untouched',
+    c.base.drive === 97.5 && c.base.sociability === 2.5 && c.base.warmth === 99.9, JSON.stringify(c.base));
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

@@ -984,6 +984,8 @@
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
+- **lastConfrontationCycle_(notes)**
+
 - **checkConfrontationTriggers_(ctx)**
   Reads: S.cycleId, S.relationshipBonds
   Config: ctx.config.cycleCount
@@ -1986,6 +1988,8 @@
 
 - **noteRetrenchAfterFieldChange_(ctx, row, iLife, cycle)**
 
+- **unemployedRunHeldLastCycle_(dialStateCell, cycle)**
+
 - **latestCareerMoveIsLayoff_(lifeHistory)**
 
 - **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
@@ -2041,7 +2045,13 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runNeighborhoodEngine.js
-- **activityTopHoods_(state)**
+- **activityTopHoods_(state, ctx)**
+
+- **activityBottomHoods_(state, ctx)**
+
+- **activityBandHoods_(state, ctx, sign)**
+
+- **hoodOverCrimeBar_(state, ctx, hood)**
 
 - **runNeighborhoodEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.season, S.weather, S.weatherMood, S.worldEvents
@@ -3283,7 +3293,7 @@
 
 - **pressureBar_(ctx, key)**
 
-- **pressureRun_(lifeHistory, cycle)**
+- **pressureRun_(lifeHistory, cycle, cause)**
 
 - **pressureRunFromState_(ctx, row, iLife, cause, cycle)**
 
@@ -3299,6 +3309,8 @@
 - **clamp100_(n)**
 
 - **round1_(n)**
+
+- **unpinBase_(n)**
 
 - **newCitizen_(base)**
 
@@ -3966,4 +3978,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1369
+**Functions mapped:** 1375

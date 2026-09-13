@@ -3151,9 +3151,16 @@ function generateCitizensEvents_(ctx) {
     // engine.201 Wave 2 (builder ruling 2): the ordinary hood line in a hood whose shops and events
     // run in the city's top quarter is the hood pulling people out — outabout +1 (activityTopHoods_,
     // runNeighborhoodEngine.js; same persisted snapshot, same cache). Elsewhere it stays a plain day.
+    // engine.201b (S449): the hood's sign reaches every resident's ordinary hood line — the
+    // bottom quarter is ActivityContracted (outabout −1), a hood at/over the crime bar is
+    // StreetsGuarded (openness −1). Plain-days-move-nothing had swept these hood-caused lines
+    // ({} for ~6,000 lines in 12 bench cycles) and left 60% of the city all-neutral.
     if (primaryTag === "Neighborhood" && status !== "inactive" && typeof activityTopHoods_ === 'function') { // codex review S449 P2
       if (!ctx._activityTopHoods) ctx._activityTopHoods = activityTopHoods_(S.neighborhoodState, ctx);
+      if (!ctx._activityBottomHoods) ctx._activityBottomHoods = activityBottomHoods_(S.neighborhoodState, ctx);
       if (ctx._activityTopHoods[neighborhood]) primaryTag = "ActivityExpanded";
+      else if (ctx._activityBottomHoods[neighborhood]) primaryTag = "ActivityContracted";
+      else if (hoodOverCrimeBar_(S.neighborhoodState, ctx, neighborhood)) primaryTag = "StreetsGuarded";
     }
     var tagString = [primaryTag].concat(tags).join("|");
 

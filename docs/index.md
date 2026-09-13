@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Index
 created: 2026-04-14
-updated: 2026-08-22
+updated: 2026-09-13
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -45,6 +45,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 ## Top level — `docs/`
 
 - **[[for-claude-review/README]]** — the house-guest inbox (builder-direct 2026-08-29). A finished research/plan MD from Kimi/Codex/Grok/Antigravity saved to `docs/for-claude-review/` is a message to Claude; the session-startup hook greets with `REVIEW INBOX: clean` or `N waiting — <files>` (count + names only, never contents). Claude reads on demand, then accepts (moves to `docs/research/` or `docs/plans/`, registers here, files the ROLLOUT row, updates the guest `NEXT` line) or sends back (dated `## Review` section appended, file stays). Clean inbox = no guest work waiting. *(reference, governance, house-guests, active)*
+
+- **[[for-claude-review/2026-09-13-codex-dial-drift-review]]** — engine.201 review proposal: verified dial feed, timing, pressure and outcome defects; historical C106 pool reproduction; proposed bidirectional citizen responses and staged acceptance. Implementation awaits approval. Offline evidence: `output/codex/dial-drift-review-20260913/` (probes.js, probes.json, wiring-card.txt). *(plan, engine, citizens, draft)*
 
 ### Schema & navigation
 - **[[SCHEMA]]** — conventions for naming, frontmatter, tags, links, folder map. Read first when creating any new doc. *(reference, architecture, active)*

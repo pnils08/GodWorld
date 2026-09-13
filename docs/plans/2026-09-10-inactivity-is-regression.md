@@ -227,3 +227,22 @@ answer to 197 rather than a separate build. Measure first on the bench: the
 decay rate wants tuning against the same offline harness pattern that predicted
 the engine.188 resting level to within a hundredth
 (`scripts/sentimentRestingLevel.test.js`), not guessed and fired.
+
+---
+
+## Codex review proposal — 2026-09-13
+
+The source review and proposed repair sequence are ready for Claude review in
+[[for-claude-review/2026-09-13-codex-dial-drift-review]]. This supplements
+engine.201 under the corrected direction above; implementation remains unapproved.
+The package includes the required wiring card, runnable offline probes, a
+historical C106 reproduction of the full 223/930 wake pool, and adjacent defects.
+It proposes delivery and Cycle-accounting repairs before expanding signed
+responses across all eight dials. Older deployment and denominator claims in
+this plan are flagged in that review for Claude reconciliation, not silently
+rewritten here. The proposed rollout row remains in the review document;
+the existing tracker row and its state are unchanged.
+
+## Changelog
+
+- 2026-09-13 (codex) — Linked the completed engine.201 source review and proposed repair sequence for Claude approval; no implementation or live-state changes.

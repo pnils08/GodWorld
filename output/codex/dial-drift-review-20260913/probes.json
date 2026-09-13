@@ -1,0 +1,270 @@
+{
+  "scope": "Offline diagnostics; synthetic probes are NON-CANON; snapshot is historical, not live",
+  "sourceHashes": {
+    "utilities/citizenMemory.js": "d3d72a9d6632bcbd581f2d5fe7e1396fc6c0f55a3f88d012d800a8396a7839f4",
+    "utilities/citizenDialMap.js": "5ab637d61b26c92a20038f9a4152864edad1d74225a694339b1e325770546d6a",
+    "utilities/compressLifeHistory.js": "c3fad41966d8b95db052dc8ca840c0246d9a5d06b9df20283980d5a8b63eca7c",
+    "phase05-citizens/runCareerEngine.js": "6f418fd0447dee5d852ac4d674be65e034cbea81bc5f6a32901699258f8fde0a",
+    "lib/wakePerception.js": "475e34027675a8b7a320d3d256b357699361b4035bd7e76ebb8c2e59b5e02b39",
+    "lib/citizenDials.js": "10cae37b0e56184453df0026c8a6dc0bffdb35f83d1086720ef700942eb749e9",
+    "output/simulation_ledger_snapshot.jsonl": "e551d96eb241227af984bc68b19b466f1f96969768a8861eebc4f913a0b5b0b3"
+  },
+  "map": {
+    "drive": {
+      "positiveEntries": 18,
+      "negativeEntries": 3,
+      "positiveSum": 62,
+      "negativeSum": -7
+    },
+    "sociability": {
+      "positiveEntries": 14,
+      "negativeEntries": 0,
+      "positiveSum": 43,
+      "negativeSum": 0
+    },
+    "warmth": {
+      "positiveEntries": 8,
+      "negativeEntries": 3,
+      "positiveSum": 29,
+      "negativeSum": -5
+    },
+    "openness": {
+      "positiveEntries": 13,
+      "negativeEntries": 0,
+      "positiveSum": 33,
+      "negativeSum": 0
+    },
+    "composure": {
+      "positiveEntries": 21,
+      "negativeEntries": 20,
+      "positiveSum": 47,
+      "negativeSum": -64
+    },
+    "integrity": {
+      "positiveEntries": 3,
+      "negativeEntries": 3,
+      "positiveSum": 12,
+      "negativeSum": -24
+    },
+    "family": {
+      "positiveEntries": 6,
+      "negativeEntries": 1,
+      "positiveSum": 34,
+      "negativeSum": -8
+    },
+    "outabout": {
+      "positiveEntries": 8,
+      "negativeEntries": 0,
+      "positiveSum": 10,
+      "negativeSum": 0
+    }
+  },
+  "streak": {
+    "threeEventsOneCycle": {
+      "base": 59.6,
+      "mood": 14.399999999999999
+    },
+    "afterThirtyQuietCycles": {
+      "base": 50,
+      "mood": 0,
+      "streak": 2
+    },
+    "nextEventBase": 53.2
+  },
+  "hardeningDirection": {
+    "evidence": [
+      -20,
+      1,
+      1,
+      1
+    ],
+    "base": 43.2,
+    "mood": -10.2
+  },
+  "pin": {
+    "firstPinCycle": 38,
+    "base": 99.55756210091984,
+    "mood": 8.452655889145497,
+    "current": 100
+  },
+  "reflectionPin": {
+    "count": 1000,
+    "mult": 0.45,
+    "fraction": 0.5,
+    "sociabilityBase": 100
+  },
+  "lateArrival": {
+    "foldedBefore": 106,
+    "foldedAfter": 106,
+    "driveBase": 50,
+    "driveMood": 0
+  },
+  "settle": {
+    "sameCycleFirst": 8,
+    "sameCycleSecond": 6.4,
+    "elevenCycleJump": 8
+  },
+  "pressure": {
+    "continuousRent": [
+      "Friction",
+      "Strain",
+      "Strain",
+      "Strain",
+      "Strain",
+      "Strain",
+      null,
+      "Strain",
+      "Strain",
+      "Strain",
+      "Strain",
+      "Strain",
+      "Strain",
+      null,
+      "Strain"
+    ],
+    "firstUnemploymentAfterRent": "Strain",
+    "sameCycleOverwork": null
+  },
+  "routing": [
+    {
+      "tag": "Faith",
+      "text": "drifted from the congregation at SYNTHETIC-NONCANON, quietly",
+      "effects": {
+        "warmth": 3,
+        "composure": 2
+      }
+    },
+    {
+      "tag": "Bond",
+      "text": "there is someone else circling SYNTHETIC-NONCANON — and it stings",
+      "effects": {
+        "composure": 1
+      }
+    },
+    {
+      "tag": "Bond",
+      "text": "met SYNTHETIC-NONCANON — something starting",
+      "effects": {
+        "composure": 1
+      }
+    },
+    {
+      "tag": "EngineEvent",
+      "text": "SYNTHETIC-NONCANON business closed",
+      "effects": {
+        "drive": 6,
+        "openness": 3
+      }
+    }
+  ],
+  "cache": {
+    "first": null,
+    "withValidOverrideAfterMiss": null
+  },
+  "workplace": {
+    "layoffs": 1,
+    "employerAfter": "",
+    "incomeAfter": 40000,
+    "logTags": [
+      "Career-Layoff"
+    ],
+    "lifeHistoryUnchanged": true
+  },
+  "snapshot": {
+    "meta": {
+      "source": "Simulation_Ledger",
+      "cycle": 106,
+      "rowCount": 930,
+      "generatedAt": "2026-09-09T04:54:47.033Z",
+      "generatedBy": "scripts/dumpLedger.js",
+      "note": "Local-disk snapshot for search_everything disk shelf. Stable filename, overwritten each cycle."
+    },
+    "rows": 930,
+    "validDials": 919,
+    "allNeutral40to60Inclusive": 546,
+    "deviationAtLeast60": 226,
+    "actualPool": 223,
+    "notInPool": 707,
+    "employerKinds": {
+      "trackedBusiness": 575,
+      "SELF_EMPLOYED": 219,
+      "UNTRACKED": 67,
+      "blank": 69
+    },
+    "status": {
+      "Active": 882,
+      "Retired": 44,
+      "critical": 1,
+      "recovering": 1,
+      "hospitalized": 1,
+      "active": 1
+    },
+    "parsedOutsidePool": 696,
+    "dials": {
+      "drive": {
+        "mean": 57.197863993953895,
+        "min": 43.37256058045608,
+        "max": 100,
+        "below40": 0,
+        "at0": 0,
+        "at100": 1
+      },
+      "sociability": {
+        "mean": 58.10626802350669,
+        "min": 50,
+        "max": 100,
+        "below40": 0,
+        "at0": 0,
+        "at100": 4
+      },
+      "warmth": {
+        "mean": 52.883241466280516,
+        "min": 44,
+        "max": 78.44624913247578,
+        "below40": 0,
+        "at0": 0,
+        "at100": 0
+      },
+      "openness": {
+        "mean": 53.226747717930486,
+        "min": 44,
+        "max": 89.21208906586433,
+        "below40": 0,
+        "at0": 0,
+        "at100": 0
+      },
+      "composure": {
+        "mean": 54.52793942296581,
+        "min": 36.973977708224865,
+        "max": 88.96489350995128,
+        "below40": 2,
+        "at0": 0,
+        "at100": 0
+      },
+      "integrity": {
+        "mean": 50.53132097783904,
+        "min": 50,
+        "max": 70.40516276171624,
+        "below40": 0,
+        "at0": 0,
+        "at100": 0
+      },
+      "family": {
+        "mean": 57.16896752369203,
+        "min": 38,
+        "max": 95.88382937101527,
+        "below40": 1,
+        "at0": 0,
+        "at100": 0
+      },
+      "outabout": {
+        "mean": 51.051368481028774,
+        "min": 40,
+        "max": 72.53339973124773,
+        "below40": 0,
+        "at0": 0,
+        "at100": 0
+      }
+    }
+  }
+}

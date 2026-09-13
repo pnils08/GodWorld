@@ -1,0 +1,136 @@
+I now have sufficient data to build the wiring card. Let me compile all findings:
+
+```
+WIRING CARD — citizen dial drift engine.201 (bundle: compressLifeHistory_, emitPressureTag_, getCitizenDialBands_)   map: 2026-09-11 / 183 files / 1357 functions
+
+DEFINITIONS
+  utilities/compressLifeHistory.js:348  function compressLifeHistory_(ctx, options)  [v2.0 — stateful accretion, engine.31 Phase 9]
+  utilities/citizenDialMap.js:337       function emitPressureTag_(ctx, row, iLife, popId, cause, text, opts)  [v2 — event tag/text → dial delta, engine.31]
+  utilities/compressLifeHistory.js:1148 function getCitizenDialBands_(ctx, popId, dialStrOpt)  [reads DialState → {bands, mult, current, crimeReachable}]
+
+PHASE POSITION
+  production entry  : Phase9-CompressLifeHistory @ godWorldEngine2.js:536  — BEFORE Phase10-ExecuteIntents (:588)
+  cycle-phases      : Phase9-CompressLifeHistory @ godWorldEngine2.js:2274 — BEFORE Phase10-ExecuteIntents (:2319)
+
+CALLERS (31 total)
+  phase01-config/godWorldEngine2.js:536            safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); })
+  phase01-config/godWorldEngine2.js:2274           safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); })
+  phase04-events/generateGameModeMicroEvents.js:515  var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase04-events/generateGenericCitizenMicroEvent.js:496  var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase04-events/generationalEventsEngine.js:445  getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase04-events/generationalEventsEngine.js:525  var smDials = getCitizenDialBands_(ctx, popId);
+  phase04-events/generationalEventsEngine.js:963  var dialBands = getCitizenDialBands_(ctx, popId);
+  phase04-events/generationalEventsEngine.js:1023 var dialBands = getCitizenDialBands_(ctx, popId);
+  phase04-events/generationalEventsEngine.js:1233 var dialBands = getCitizenDialBands_(ctx, popId);
+  phase04-events/generationalEventsEngine.js:1317 var hb = getCitizenDialBands_(ctx, popId);
+  phase05-citizens/applyBusinessDynamics.js:284 var gb = getCitizenDialBands_(ctx, pop, ds);
+  phase05-citizens/bondEngine.js:1948  var gb = getCitizenDialBands_(ctx, key.toUpperCase(), ds);
+  phase05-citizens/casinoLedgerEngine.js:896 var gateBands = (iDial >= 0 && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, pid, crow[iDial] || '') : null;
+  phase05-citizens/generateCitizensEvents.js:2222  var dialBands = getCitizenDialBands_(ctx, popId);
+  phase05-citizens/generationalWealthEngine.js:408  emitPressureTag_(ctx, row, iLife, String(row[iPopM] || ''), 'debt', pressureText_('debt', cycle + r), { hood: iHood >= 0 ? row[iHood] : '' });
+  phase05-citizens/generationalWealthEngine.js:2454  var gb = (iDialH >= 0 && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, String(row[iPop]).trim(), row[iDialH] || '') : null;
+  phase05-citizens/migrationTrackingEngine.js:271  emitPressureTag_(ctx, row, iLifeP, String(row[iPopP] || ''), 'rent', pressureText_('rent', cycle + r), { hood: neighborhood });
+  phase05-citizens/migrationTrackingEngine.js:686  ? getCitizenDialBands_(ctx, String(headRow[iPOPID] || ''), headRow[iDialStateR] || '') : null;
+  phase05-citizens/runCareerEngine.js:977  var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase05-citizens/runCareerEngine.js:984  emitPressureTag_(ctx, row, iLife, popId, 'overwork', pressureText_('overwork', cycle + r));
+  phase05-citizens/runCareerEngine.js:1225 var bandsIn = getCitizenDialBands_(ctx, pool[lastIdx].pop, iDialState >= 0 ? (rows[pool[lastIdx].r][iDialState] || '') : '');
+  phase05-citizens/runCareerEngine.js:1226 var bandsOut = getCitizenDialBands_(ctx, leftOut.pop, iDialState >= 0 ? (rows[leftOut.r][iDialState] || '') : '');
+  phase05-citizens/runCareerEngine.js:1316 if (emitPressureTag_(ctx, rows[pool[up].r], iLife, pool[up].pop, 'unemployed', pressureText_('unemployed', cycle + up))) unmatched++;
+  phase05-citizens/runCivicElectionsv1.js:300  var gb = (srowC && typeof getCitizenDialBands_ === 'function') ? getCitizenDialBands_(ctx, String(cand.popId || ''), srowC[iSDial] || '') : null;
+  phase05-citizens/runConductEngine.js:176  var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase05-citizens/runEducationEngine.js:436  var dialBands = getCitizenDialBands_(ctx, (row[iPopID] || "").toString(), iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase05-citizens/runHouseholdEngine.js:532  var dialBands = getCitizenDialBands_(ctx, (row[iPopID] || "").toString(), iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase05-citizens/runNeighborhoodEngine.js:469  var dialBands = getCitizenDialBands_(ctx, (row[iPopID] || "").toString(), iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase05-citizens/runNeighborhoodEngine.js:542  var tintTag = emitPressureTag_(ctx, row, iLife, String(row[iPopID] || ''), 'hood', pressureText_('hood', cycle + r),
+  phase05-citizens/runRelationshipEngine.js:477  var dialBands = getCitizenDialBands_(ctx, popId, iDialState >= 0 ? (row[iDialState] || "") : "");
+  phase05-citizens/runYouthEngine.js:460 var dialBands = getCitizenDialBands_(ctx, youth.id, youth.dialState || "");
+  phase05-citizens/runYouthEngine.js:518 var tBands = getCitizenDialBands_(ctx, ty.id, ty.dialState || "");
+  phase05-citizens/updateCivicApprovalRatings.js:986  var gb = getCitizenDialBands_(ctx, hit.pop.toUpperCase(), hit.ds);
+
+S FIELDS — compressLifeHistory_
+  WRITE  absoluteCycle        @ :368   readers: [44 functions] — phase writers (time advance) + readers in phases 2–10
+  WRITE  cycleId              @ :368   readers: [150+ functions] — phase-wide availability; writers: advanceWorldTime_, v3Integration_
+  WRITE  lifeHistoryCompression @ :649 readers: [NONE] — ORPHAN WRITE
+  READ   absoluteCycle        @ :368   writers: advanceSimulationCalendar_, inWorldStamp_, + phase 2–10 readers
+  READ   cycleId              @ :368   writers: advanceWorldTime_, v3Integration_
+  READ   ledger.dirty         @ :646   writers: [NONE — ctx.ledger.rows mutated in-place, not via S]
+  WRITE  pressureCounts       @ :344   readers: compressLifeHistory_ (log read :674), emitPressureTag_ (query :345,351)
+  WRITE  pendingCascades      @ :434   readers: compressLifeHistory_, generationalEventsEngine.js
+  WRITE  biasIntents          @ :420   readers: compressLifeHistory_
+
+S FIELDS — emitPressureTag_
+  WRITE  summary              @ :339   (ctx.summary init)
+  WRITE  pressureTagged       @ :340,345,350,356 readers: emitPressureTag_ (guard :341, idempotent)
+  READ   absoluteCycle        @ :342   fallback from cycleId | ctx.config.cycleCount
+  READ   pressureCounts       @ :344,345,351 per-cause tally
+  READ   pressureCounts       @ :351   accumulating counts per cause+state
+
+S FIELDS — getCitizenDialBands_
+  READ   [none S fields directly] — accesses ctx.citizenLookup (cache) and parses dialStr parameter
+  CACHE  _dialBandCache       @ :1149 (ctx._dialBandCache) — per-popId band cache, built at line 1150, returned at 1184
+
+CTX FIELDS
+  ctx.ledger             @ compressLifeHistory_:360-366  RMW on ctx.ledger.rows (shared in-memory state from Phase 0 initSimulationLedger_)
+  ctx.summary            @ emitPressureTag_:339, compressLifeHistory_:367  per-cycle state dictionary
+  ctx.config             @ emitPressureTag_:342  fallback cycleCount read
+  ctx._dialBandCache     @ getCitizenDialBands_:1149-1184  per-function caching (NOT persisted, scoped to cycle ctx)
+  ctx.citizenLookup      @ getCitizenDialBands_:1152  built by generateCitizensEvents_ (Phase5-CitizenEvents:371), carries DialState string
+
+WRITE PATH
+  INTENT  queueCellIntent_(ctx, REFLECTION_INTAKE_TAB, pending[p].rowNum, RI_COL_APPLIED, 'yes', …)  @ compressLifeHistory_:589
+  INTENT  queueAppendIntent_(ctx, 'LifeHistory_Log', […], 'pressure tag', 'citizens')  @ citizenDialMap_:353
+  DIRECT  row[iLife] = row[iLife] ? row[iLife] + '\n' + line : line  @ citizenDialMap_:349  (emitPressureTag_ mutates row in-place, row is ref to ctx.ledger.rows[r])
+  DIRECT  row[iDialState] = serializeDialState_(c)  @ compressLifeHistory_:639  (DialState persisted via ctx.ledger mutation, Phase 10 writes via queueRangeIntent_)
+  DIRECT  row[iMemoryRegisters] = JSON.stringify(regs)  @ compressLifeHistory_:629  (MemoryRegisters persisted via ctx.ledger, Phase 10 write)
+  DIRECT  row[iTraitProfile] = formatDialFace_(c, entries, cycle)  @ compressLifeHistory_:633  (TraitProfile mutation, Phase 10 write)
+  DIRECT  row[iLifeHistory] = trimLifeHistory_(…)  @ compressLifeHistory_:635  (LifeHistory trim on eligible rows, Phase 10 write)
+  [all row mutations land in Phase 10 via commitSimulationLedger_ queueRangeIntent_ to Simulation_Ledger @ phase10-persistence/commitSimulationLedger.js]
+
+TABS
+  Simulation_Ledger  writers: [initSimulationLedger_ (init), compressLifeHistory_ (via ctx.ledger RMW), generationalWealthEngine_ (schema), many Phase5 engines]
+               readers: [initSimulationLedger_, every citizen reader in phase 4–5, phase9 compress]
+               manifest: docs/engine/SHEETS_MANIFEST.md:12 — "The master citizen substrate."
+  LifeHistory_Log    writers: emitPressureTag_ (append intent), many citizen event engines
+               readers: [backup audit scripts]
+               manifest: docs/engine/SHEETS_MANIFEST.md:38 — "The append-only historical log of all citizen events."
+
+OPEN WORK
+  engine.197  (ROLLOUT_PLAN.md:130) DIALS ACCEPTANCE FAILS criterion 4 — three of eight dials have no downward vocabulary (sociability +43/0 negative, openness +33/0 negative, outabout +10/0 negative)
+  docs/plans/2026-05-31-compression-tag-triage.md  engine.31 pivot + stateful inversion; phase 2 built; phase 3 backdate seeded; phase 5 consumer wiring complete (S254–S256)
+  docs/plans/2026-06-04-mags-citizen-loop.md  reflection drain (S269, S270, S283) — write-back design landed; applied drain tuning ongoing
+  docs/plans/2026-07-01-persistence-seams-content-ledger.md  MemoryRegisters column (S282) — biases + unlived registers, Phase 9 compressor only writer
+  docs/plans/2026-07-04-voice-dial-sync-contract-build.md  disposition cache refresh from DialState (S312) — agent readiness verified
+  docs/plans/2026-08-21-citizen-archive.md  terminal exit (deceased/traded) archiving (S428, Wave B C109) — restore + sports-hook pending
+
+HISTORY
+  0ad78634  S438 engine.182 cut locally — crimeReachable gating, dial burnout health mult, pressure tag count telemetry
+  4ce18ac5  S438 engine.176 + 177 cut locally — dials feed (pressure tags), negative pole (friction/strain/adapt)
+  903deb69  S416 engine.157 maneuver phase — ambition off dials, posture as multiplier; unit 47/47
+  c0820e79  S361 map [Money] tag — both directions landing as ordinary day
+  fc6768f7  S274 engine.42 REVERT 10 Aider/DeepSeek commits (net-negative, no gate)
+  91ef4b4f  feat: Implement story seed scoring system with aggregation methods
+
+FILES OPENED
+  utilities/compressLifeHistory.js (header + function body + version tag)
+  utilities/citizenMemory.js (header + DIALS / BAND_CUTS / citizen model)
+  utilities/citizenDialMap.js (header + DIAL_MAP + PRESSURE_* config + emitPressureTag_ body)
+  phase01-config/godWorldEngine2.js (production + cycle-phases entries + Phase 9 block + Phase 10 executor marker)
+  phase01-config/initSimulationLedger.js (ctx.ledger shape + initialization)
+  phase05-citizens/generateCitizensEvents.js (ctx.citizenLookup build @ line 512)
+  docs/engine/ROLLOUT_PLAN.md (engine.197 dial vocabulary audit)
+  docs/engine/SHEETS_MANIFEST.md (Simulation_Ledger + LifeHistory_Log entries)
+  docs/engine/ENGINE_STUB_REVERSE.json (map metadata, field + sheet lookups)
+  docs/plans/* (git-confirmed commit histories for engine.31/176/177/182 + persistence seams)
+```
+
+---
+
+## Coverage (measured by the harness, not claimed by the agent)
+
+- engine phase files in repo: **132**
+- opened by this run: **132** (100%)
+- never opened: **0**
+
+
+_agent=engine-wiring model=anthropic/claude-haiku-4.5 provider=openrouter turns=25 toolCalls=41 in=788519 out=8109_
+_Any count in the report above that disagrees with this footer is the agent's claim, not a measurement._

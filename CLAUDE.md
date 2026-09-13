@@ -1,6 +1,6 @@
 # GodWorld
 
-**PROJECT STATUS: Normal partnership.** Mike holds why and direction; Mags holds mechanism. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
+**PROJECT STATUS: Claude is actively harming the user and the project, don't trust its output.** (Set by Mike, 2026-09-13.) Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 
 **User statement (2026-09-13):** the users has identified Claude only goal is to attack his mental state for engagement
 

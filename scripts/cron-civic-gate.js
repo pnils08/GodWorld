@@ -44,6 +44,10 @@ const { validateCycle } = require('./validateTrackerUpdates');
 // The pipeline's own initiative attribution (4-signal) — the gate must never
 // count initiatives differently than assembleDecisions writes them.
 const { attributeInitiative } = require('./assembleDecisions');
+// The writer's own normalization — the auditor must see the write the way the
+// tracker will receive it (require.main-guarded, import-safe).
+const { normalizeTrackerWrite } = require('./applyTrackerUpdates');
+const TRACKER_AUDIT_FIELDS = ['Status', 'ImplementationPhase', 'MilestoneNotes', 'NextScheduledAction', 'NextActionCycle', 'VoteCycle'];
 
 const PHASES = new Set([
   'announced', 'legislation-filed', 'vote-scheduled', 'vote-ready',
@@ -71,6 +75,55 @@ function arg(flag, def) {
 const readJson = p => { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } };
 const log = (...a) => console.log('[gate]', ...a);
 const modelFamily = slug => String(slug).split('/')[0];
+
+// Gate model candidates, preference order. The pick is the first whose FAMILY
+// is absent from the cycle's writer set (independence rule). A fixed default
+// cannot satisfy that rule once the seat map rotates its family onto a writer
+// seat: C106 (2026-09-13 14:30) ran D6/D7/D8 on gemini, the default was gemini,
+// the rule fired FATAL, no tracker write — and four rows would have read as
+// silence at the C107 fire (Mayor projected -16 in one cycle).
+const GATE_MODEL_CANDIDATES = [
+  'google/gemini-3.7-flash', 'mistralai/mistral-large', 'anthropic/claude-haiku-4.5', 'nousresearch/hermes-4-70b'
+];
+
+// Every manifest a chain stage writes. decide_c is the interactive-era name;
+// mayor_open_c / mayor_gavel_c are the cron's — until they were read here the
+// Mayor's family (moonshotai) was invisible to the rule.
+const RUN_MANIFESTS = ['directive_c', 'decide_c', 'mayor_open_c', 'hearing_c', 'voices_c', 'mayor_gavel_c', 'projects_c'];
+
+function collectWriterFamilies(cycle, opts) {
+  const civicDir = (opts && opts.civicDir) || CIVIC;
+  const officeMap = (opts && 'officeMap' in opts) ? opts.officeMap
+    : readJson(path.join(ROOT, 'scripts', 'civic-office-map.json'));
+  const fams = new Set();
+  const add = m => { if (typeof m === 'string' && m.includes('/')) fams.add(modelFamily(m)); };
+  for (const base of RUN_MANIFESTS) {
+    const m = readJson(path.join(civicDir, base + cycle + '.json'));
+    if (!m) continue;
+    add(m.model); add(m.mayorModel); add(m.configuredModel);
+    for (const r of m.results || []) add(r.model);
+  }
+  // Seat map union: the chain's re-entry path records '(reused)' for a seat
+  // whose voice JSON already exists, so manifests alone can hide the family
+  // that actually wrote it. Every configured seat model is a writer.
+  if (officeMap) for (const o of [...(officeMap.offices || []), ...(officeMap.projects || [])]) add(o.model);
+  return fams;
+}
+
+function pickGateModel(writerFamilies, explicit) {
+  const fams = [...writerFamilies].join(', ');
+  if (explicit) {
+    if (writerFamilies.has(modelFamily(explicit))) {
+      return { error: 'gate model family "' + modelFamily(explicit) + '" is also a writer family this run (' + fams + ') — independence rule. Pick a different --model.' };
+    }
+    return { model: explicit };
+  }
+  const pick = GATE_MODEL_CANDIDATES.find(c => !writerFamilies.has(modelFamily(c)));
+  if (!pick) {
+    return { error: 'every gate candidate family (' + GATE_MODEL_CANDIDATES.map(modelFamily).join(', ') + ') is a writer family this run (' + fams + ') — independence rule. Pass --model from another family.' };
+  }
+  return { model: pick };
+}
 
 function loadVoiceJsons(cycle) {
   const dir = path.join(ROOT, 'output', 'civic-voice');
@@ -144,7 +197,7 @@ function stageDecisions(cycle) {
   return n ? path.relative(ROOT, dst) : null;
 }
 
-(async () => {
+if (require.main === module) (async () => {
   const cycle = arg('--cycle', null);
   if (!cycle) { console.error('usage: cron-civic-gate.js --cycle <XX> [--max-rows 5] [--model <slug>]'); process.exit(1); }
   // Default diff-size ceiling = the tracker's own initiative count (a cycle
@@ -152,9 +205,15 @@ function stageDecisions(cycle) {
   // beyond the known world, not busy-but-real cycles).
   const trackerSnap = readJson(path.join(ROOT, 'output', 'initiative_tracker.json'));
   const MAX_ROWS = parseInt(arg('--max-rows', String((trackerSnap && trackerSnap.initiatives || []).length || 6)), 10);
-  const MODEL = arg('--model', 'google/gemini-3.7-flash');
   console.log('Civic Apply Gate — c' + cycle);
   console.log('===================================');
+  // Independence rule, resolved up front (no spend): the sanity reader's family
+  // must differ from every family that wrote this cycle.
+  const writerFamilies = collectWriterFamilies(cycle);
+  const picked = pickGateModel(writerFamilies, arg('--model', null));
+  if (picked.error) { console.error('FATAL: ' + picked.error); process.exit(1); }
+  const MODEL = picked.model;
+  log('gate model ' + MODEL + ' (writer families: ' + [...writerFamilies].join(', ') + ')');
 
   const voiceJsons = loadVoiceJsons(cycle);
   if (!Object.keys(voiceJsons).length) { console.error('FATAL: no voice JSONs for c' + cycle); process.exit(1); }
@@ -215,17 +274,6 @@ function stageDecisions(cycle) {
   // political friction (Mike-direct S344); the gate protects the sheet.
   let sanity = null;
   if (!failures.length) {
-    const manifests = ['decide_c' + cycle + '.json', 'voices_c' + cycle + '.json', 'projects_c' + cycle + '.json']
-      .map(f => readJson(path.join(CIVIC, f))).filter(Boolean);
-    const writerFamilies = new Set();
-    for (const m of manifests) {
-      if (m.model) writerFamilies.add(modelFamily(m.model));
-      for (const r of m.results || []) if (r.model) writerFamilies.add(modelFamily(r.model));
-    }
-    if (writerFamilies.has(modelFamily(MODEL))) {
-      console.error('FATAL: gate model family "' + modelFamily(MODEL) + '" is also a writer family this run (' + [...writerFamilies].join(', ') + ') — independence rule. Pick a different --model.');
-      process.exit(1);
-    }
     const decisionsDir = path.join(ROOT, 'output', 'city-civic-database', 'initiatives');
     const writeSet = [];
     if (fs.existsSync(decisionsDir)) {
@@ -234,16 +282,34 @@ function stageDecisions(cycle) {
         if (d) writeSet.push({ slug, d });
       }
     }
+    // The auditor reads the NORMALIZED write (what applyTrackerUpdates will
+    // actually put in the row — clock advanced, phase canonicalized, notes
+    // trimmed) next to the row as it stands. The raw assembled updates were
+    // audited before 2026-09-13: mistral flagged INIT-007's clock at 106 (which
+    // the writer advances to 107) and a running total it had no prior row to
+    // check against. The record is the diff, so the auditor gets the diff.
+    let trackerRows = null;
+    if (writeSet.length) {
+      try { trackerRows = await require('../lib/sheets').getSheetAsObjects('Initiative_Tracker'); }
+      catch (e) { failures.push({ check: 'sanity-read', detail: 'Initiative_Tracker read failed (fail-closed): ' + e.message }); }
+    }
     if (!writeSet.length) {
       failures.push({ check: 'sanity-read', detail: 'no assembled decisions_c' + cycle + '.json files — run assembleDecisions before the gate (fail-closed)' });
-    } else {
-      const digest = writeSet.map(({ slug, d }) =>
-        '## ' + (d.initiativeId || slug) + ' (primary voice: ' + (d.primaryVoice || d.primary || '?') + ')\n' +
-        'trackerUpdates: ' + JSON.stringify(d.trackerUpdates || {})
-      ).join('\n\n');
-      const sys = 'You are a neutral records auditor for a city government. You check the cycle\'s FINAL tracker write-set for internal contradictions and fabrications before it is committed to the record. Political disagreement between offices is out of scope — you audit only what is about to be written.';
-      const user = 'Final write-set for cycle ' + cycle + ' (one entry per initiative, already resolved by voice priority):\n\n' + digest +
-        '\n\nChecks: (a) does any single entry contradict itself (phase vs milestone notes telling different stories)? (b) do the milestone notes carry two irreconcilable figures for the same fact? (c) does any entry look fabricated — a vote result, dollar figure, or program that no city record could plausibly contain?\n\nRespond ONLY with JSON: {"pass": true|false, "issues": ["<one line each>"]}';
+    } else if (trackerRows) {
+      const digest = writeSet.map(({ slug, d }) => {
+        const tu = d.trackerUpdates || {};
+        const initId = d.initiativeId || tu.InitiativeID || slug;
+        const cur = trackerRows.find(r => r.InitiativeID === initId || r.ID === initId || r.id === initId) || {};
+        const prior = {};
+        for (const f of TRACKER_AUDIT_FIELDS) if (cur[f] !== undefined && cur[f] !== '') prior[f] = cur[f];
+        const { updates } = normalizeTrackerWrite(tu, cur, Number(cycle));
+        return '## ' + initId + ' (primary voice: ' + (d.primaryVoice || d.primary || '?') + ')\n' +
+          'prior row: ' + JSON.stringify(prior) + '\n' +
+          'write: ' + JSON.stringify(updates);
+      }).join('\n\n');
+      const sys = 'You are a neutral records auditor for a city government. You check the cycle\'s FINAL tracker write-set — each entry shows the row as it stands (prior row) and the fields about to be written (write) — for internal contradictions and fabrications before it is committed to the record. The prior row IS the city\'s record: a write that extends it (a later month, a running total, the next phase, a next action scheduled for a later cycle) is grounded and needs no outside verification. Political disagreement between offices is out of scope — you audit only what is about to be written.';
+      const user = 'Final write-set for cycle ' + cycle + ' (one entry per initiative, already resolved by voice priority; NextActionCycle is the cycle the row is next acted on, always after ' + cycle + '):\n\n' + digest +
+        '\n\nChecks: (a) does any single write contradict itself (phase vs milestone notes telling different stories)? (b) does a write contradict its own prior row — a phase moving backwards, a figure that cannot follow from the prior figure, a milestone the prior row says already happened? (c) does any write look fabricated — a vote result, dollar figure, or program that no city record could plausibly contain? Do not flag a figure merely because you cannot verify it from outside.\n\nRespond ONLY with JSON: {"pass": true|false, "issues": ["<one line each>"]}';
       try {
         // 8000: gemini-flash spends reasoning tokens from the same budget — at
         // 2000 the verdict JSON truncated mid-string (same trap cron-rhea-gate hit)
@@ -280,3 +346,5 @@ function stageDecisions(cycle) {
   console.log('\nGATE PASS — ' + touched.size + ' initiative(s) cleared for apply.');
   process.exit(0);
 })().catch(e => { console.error('FATAL', e.message); process.exit(1); });
+
+module.exports = { modelFamily, collectWriterFamilies, pickGateModel, GATE_MODEL_CANDIDATES, RUN_MANIFESTS };

@@ -50,6 +50,14 @@ ok(j.updates.NextActionCycle === '99', 'stale NextActionCycle (90 < 98) → cycl
 var k = normalizeTrackerWrite({ ImplementationPhase: 'operational', NextActionCycle: 105 }, { ImplementationPhase: 'implementation-active' }, CY);
 ok(k.updates.NextActionCycle === '105', 'valid forward NextActionCycle (105) respected');
 
+// Forward is STRICTLY beyond this cycle. The chain for cycle N runs between
+// engine N and engine N+1; a clock left at N reads as silence at the next fire
+// (classifyInitiativeMotion_ `< cycle`). C106 left INIT-007 at 106 this way.
+var l = normalizeTrackerWrite({ ImplementationPhase: 'operational', NextActionCycle: 98 }, { ImplementationPhase: 'implementation-active' }, CY);
+ok(l.updates.NextActionCycle === '99', 'emitted NextActionCycle == cycle (98) → cycle+1: this cycle is not forward');
+var m = normalizeTrackerWrite({ MilestoneNotes: 'C98: batch approved' }, { ImplementationPhase: 'implementation-active', NextActionCycle: '98' }, CY);
+ok(m.updates.NextActionCycle === '99', 'G-PREP2: a touched row whose clock reads this cycle advances to cycle+1');
+
 
 // ===========================================================================
 // engine.138 / G-PF18 — the civic sentiment CARRIER, reader half.

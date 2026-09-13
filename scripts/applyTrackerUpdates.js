@@ -185,9 +185,14 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
   // NextActionCycle — validate it's a forward cycle int; a garbage/stale emitted
   // value (e.g. "99abc", or a cycle already past) falls back to cycle+1 rather
   // than writing the bad literal (S265 review LOW fix).
+  // Forward means STRICTLY beyond this cycle. The chain for cycle N runs after
+  // engine N fired and before engine N+1; a value of N is already past when the
+  // next fire reads it (updateCivicApprovalRatings_ classifyInitiativeMotion_:
+  // `< cycle` → silence; civicInitiativeEngine.js S409: "a chain re-arm lands
+  // strictly beyond it"). C106: INIT-007 was touched and left at 106.
   if (tu.NextActionCycle !== undefined) {
     const n = parseInt(tu.NextActionCycle, 10);
-    if (Number.isFinite(n) && n >= cycle) setField('NextActionCycle', n);
+    if (Number.isFinite(n) && n > cycle) setField('NextActionCycle', n);
     else { setField('NextActionCycle', cycle + 1); warnings.push(`NextActionCycle "${tu.NextActionCycle}" invalid/stale → ${cycle + 1}.`); }
   }
 
@@ -202,9 +207,11 @@ function normalizeTrackerWrite(trackerUpdates, currentRow, cycle) {
   }
 
   // G-PREP2 — any write must leave NextActionCycle forward, never stale.
+  // Same rule as above: a touched row whose clock reads THIS cycle is silence
+  // at the next fire, so it advances too.
   if (Object.keys(updates).length > 0 && updates.NextActionCycle === undefined && tu.NextActionCycle === undefined) {
     const curNext = parseInt(cur.NextActionCycle, 10);
-    if (!Number.isFinite(curNext) || curNext < cycle) setField('NextActionCycle', cycle + 1);
+    if (!Number.isFinite(curNext) || curNext <= cycle) setField('NextActionCycle', cycle + 1);
   }
 
   // G-R3 — a phase advance with no MilestoneNotes records the cycle's motion.

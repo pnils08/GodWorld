@@ -121,7 +121,8 @@ for (const [resolution, personnel] of [['POPID', 'POP-99001 (Synthetic Nonmatchi
     JSON.stringify({ resolved: counts(resolved, 'RoutineRetrenched'), ambiguous: counts(ambiguous, 'RoutineRetrenched') }));
 }
 
-// The highest retail score is deliberately NOT the highest combined score.
+// S451 (builder ruling 2026-09-13): the hood-rank retag is GONE. The ordinary hood line stays a plain
+// `Neighborhood` line whatever the hood's rank; only a PERSISTED pressure bar still tints it (engine.176).
 for (const pressure of ['housingPressure', 'crimeIndex']) {
   const rows = [citizen('POP-99001', 'Synthetic', 'Alpha', 'Synthetic Hood A'),
     citizen('POP-99002', 'Synthetic', 'Beta', 'Synthetic Hood B')];
@@ -139,24 +140,16 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     return { ctx, tags: writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3]) };
   }
   const ordinary = neighborhoodRun(false), stressed = neighborhoodRun(true);
-  assert(`W2 top-quarter combined hood activity emits ActivityExpanded; ${pressure} retains pressure tint`,
-    JSON.stringify(ordinary.tags) === '["ActivityExpanded","Neighborhood"]' &&
-    JSON.stringify(counts(ordinary.ctx, 'ActivityExpanded')) === '[1,0]' &&
-    stressed.tags[0] === 'Friction' && counts(stressed.ctx, 'ActivityExpanded')[0] === 0 && counts(stressed.ctx, 'Friction')[0] === 1,
+  assert(`S451 a top-band hood's ordinary line is a plain Neighborhood line (no ActivityExpanded); ${pressure} still tints Friction`,
+    JSON.stringify(ordinary.tags) === '["Neighborhood","Neighborhood"]' &&
+    stressed.tags[0] === 'Friction' && counts(stressed.ctx, 'Friction')[0] === 1,
     JSON.stringify({ ordinary: ordinary.tags, stressed: stressed.tags }));
 }
 {
-  // engine.201 S449 bench fix: the top quarter is cut across ALL hoods, then a hood over either
-  // pressure bar is dropped (pressure claims first in both generators). Relative cut, ties included.
-  const st = {};
-  [['A', 20, 3, 0], ['B', 19, 0, 0.5], ['C', 19, 0, 1.2], ['D', 12, 0, 0], ['E', 11, 0, 0], ['F', 10, 0, 0], ['G', 9, 0, 0], ['H', 8, 0, 0]]
-    .forEach(([h, sc, hp, cr]) => { st[h] = { retailVitality: sc / 2, eventAttractiveness: sc / 2, housingPressure: hp, crimeIndex: cr }; });
-  const top = w.activityTopHoods_(st, { config: { dialHoodPressureBar: 3, dialHoodCrimeBar: 1 } });
-  assert('W2 activityTopHoods_ keeps the unpressured top-quarter hood, drops housing- and crime-pressured ones, ties at the cut included',
-    JSON.stringify(Object.keys(top).sort()) === '["B"]', JSON.stringify(top));
-  const src = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
-  assert('W2 generateCitizensEvents retags only the Neighborhood primary tag through the shared top-hood helper',
-    /primaryTag === "Neighborhood" && status !== "inactive" && typeof activityTopHoods_ === 'function'/.test(src) && /activityTopHoods_\(S\.neighborhoodState, ctx\)/.test(src));
+  const gc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
+  const ne = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/runNeighborhoodEngine.js'), 'utf8');
+  assert('S451 no retag helper or retag tag survives in either generator',
+    !/activityTopHoods_|activityBottomHoods_|activityBandHoods_|hoodOverCrimeBar_|"ActivityExpanded"|"ActivityContracted"|"StreetsGuarded"/.test(gc + ne));
 }
 {
   // codex diff review S449 P1: a supplied POPID that does not resolve fails closed (no namesake), and a
@@ -197,8 +190,6 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
   assert('review P2: unemployedRunHeldLastCycle_ reads the persisted run and the income gate consults it',
     w.unemployedRunHeldLastCycle_(held, 200) === true && w.unemployedRunHeldLastCycle_(lapsed, 200) === false &&
     w.unemployedRunHeldLastCycle_('not json', 200) === false && /!unemployedRunHeldLastCycle_\(/.test(src));
-  const gc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
-  assert('review P2: an inactive citizen never takes the ActivityExpanded retag', /primaryTag === "Neighborhood" && status !== "inactive"/.test(gc));
   assert('review: one netted cycle of +56 never lands on 100', (() => { const c = w.newCitizen_(); w.applyEvent_(c, { effects: { drive: 56 } }); w.applyEvent_(c, { effects: { drive: 56 } }); return w.current_(c, 'drive') < 100; })());
 }
 
@@ -226,31 +217,31 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     JSON.stringify([first, repeat, within, after]) === '[[1,1,1],[0,0,0],[0,0,0],[1,1,1]]', JSON.stringify([first, repeat, within, after]));
 }
 {
+  // S451: the three retag tags are unmapped — a legacy line carrying one resolves to a plain day ({}),
+  // and a bottom-quarter resident's ordinary line is a plain Neighborhood line.
   const st = {};
   [['A', 20, 0, 0], ['B', 18, 0, 0], ['C', 15, 0, 1.2], ['D', 12, 0, 0], ['E', 11, 0, 0], ['F', 10, 3, 0], ['G', 9, 0, 0], ['H', 8, 0, 0]]
     .forEach(([h, sc, hp, cr]) => { st[h] = { retailVitality: sc / 2, eventAttractiveness: sc / 2, housingPressure: hp, crimeIndex: cr }; });
   const cfg = { config: { dialHoodPressureBar: 3, dialHoodCrimeBar: 1 } };
-  const bottom = w.activityBottomHoods_(st, cfg);
-  assert('201b activityBottomHoods_ takes the unpressured bottom quarter; hoodOverCrimeBar_ flags the crime-bar hood',
-    JSON.stringify(Object.keys(bottom).sort()) === '["G","H"]' && w.hoodOverCrimeBar_(st, cfg, 'C') && !w.hoodOverCrimeBar_(st, cfg, 'A'),
-    JSON.stringify(bottom));
   const M = w.nudgesForEvent_;
-  assert('201b ActivityContracted is outabout −1 and StreetsGuarded openness −1',
-    JSON.stringify(M('ActivityContracted')) === '{"outabout":-1}' && JSON.stringify(M('StreetsGuarded')) === '{"openness":-1}',
-    JSON.stringify([M('ActivityContracted'), M('StreetsGuarded')]));
-  const gc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
-  assert('201b the generator gives the ordinary hood line the hood\'s sign (top / bottom / crime bar)',
-    /primaryTag = "ActivityContracted"/.test(gc) && /hoodOverCrimeBar_\(S\.neighborhoodState, ctx, neighborhood\)\) primaryTag = "StreetsGuarded"/.test(gc));
+  assert('S451 ActivityExpanded / ActivityContracted / StreetsGuarded resolve to {} (unmapped, plain day)',
+    ['ActivityExpanded', 'ActivityContracted', 'StreetsGuarded'].every(t => Object.keys(M(t)).length === 0),
+    JSON.stringify([M('ActivityExpanded'), M('ActivityContracted'), M('StreetsGuarded')]));
   const rows = [citizen('POP-99001', 'Synthetic', 'Alpha', 'H')];
   const ctx = context(rows); ctx.rng = () => 0; Object.assign(ctx.config, cfg.config); ctx.summary.neighborhoodState = st;
   writes.length = 0; w.runNeighborhoodEngine_(ctx);
   const tags = writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row[3]);
-  assert('201b the neighborhood engine writes ActivityContracted for a bottom-quarter resident', tags[0] === 'ActivityContracted', JSON.stringify(tags));
+  assert('S451 the neighborhood engine writes a plain Neighborhood line for a bottom-quarter resident', tags[0] === 'Neighborhood', JSON.stringify(tags));
 }
 {
+  // S451 (builder ruling): a base read AT a pole is read back AS IS — the five seeded 100s are not remapped.
   const c = w.deserialize_({ base: { drive: 100, sociability: 0, warmth: 99.9 }, streak: {} });
-  assert('201b a base read AT a pole comes back to 97.5 / 2.5; anything inside the range is untouched',
-    c.base.drive === 97.5 && c.base.sociability === 2.5 && c.base.warmth === 99.9, JSON.stringify(c.base));
+  assert('S451 a base read at 100 / 0 stays 100 / 0 (no read-side unpin); inside the range untouched',
+    c.base.drive === 100 && c.base.sociability === 0 && c.base.warmth === 99.9, JSON.stringify(c.base));
+  const down = w.newCitizen_({ drive: 100 }); w.applyEvent_(down, { effects: { drive: -5 } });
+  const up = w.newCitizen_({ drive: 100 }); w.applyEvent_(up, { effects: { drive: 5 } });
+  assert('S451 a pinned 100 moves only on a real downward event (down < 100, up stays 100)',
+    w.current_(down, 'drive') < 100 && w.current_(up, 'drive') === 100, JSON.stringify({ down: w.current_(down, 'drive'), up: w.current_(up, 'drive') }));
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

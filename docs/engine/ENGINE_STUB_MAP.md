@@ -2045,14 +2045,6 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runNeighborhoodEngine.js
-- **activityTopHoods_(state, ctx)**
-
-- **activityBottomHoods_(state, ctx)**
-
-- **activityBandHoods_(state, ctx, sign)**
-
-- **hoodOverCrimeBar_(state, ctx, hood)**
-
 - **runNeighborhoodEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
@@ -3310,8 +3302,6 @@
 
 - **round1_(n)**
 
-- **unpinBase_(n)**
-
 - **newCitizen_(base)**
 
 - **current_(c, dial)**
@@ -3978,4 +3968,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1375
+**Functions mapped:** 1370

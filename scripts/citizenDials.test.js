@@ -90,7 +90,7 @@ console.log('═══ Section C — tag -> dial map');
   // Out-and-About split: attendance/evening events feed outabout, NOT sociability
   // engine.201 ruling 1b: routine attendance/evening generator lines are plain days; outabout moves from causes
   assert('C7a FirstFriday is a plain day (moves nothing)', Object.keys(M.nudgesForEvent_('FirstFriday')).length === 0);
-  assert('C7b Sports/Team are plain days; ActivityExpanded is the out-and-about cause', Object.keys(M.nudgesForEvent_('Sports')).length === 0 && Object.keys(M.nudgesForEvent_('Team')).length === 0 && M.nudgesForEvent_('ActivityExpanded').outabout === 1 && !M.nudgesForEvent_('ActivityExpanded').sociability);
+  assert('C7b Sports/Team are plain days (S451: no ActivityExpanded retag — outabout moves from causes: pressure, health, Cultural)', Object.keys(M.nudgesForEvent_('Sports')).length === 0 && Object.keys(M.nudgesForEvent_('Team')).length === 0 && Object.keys(M.nudgesForEvent_('ActivityExpanded')).length === 0);
   assert('C7c Cultural -> out-and-about + openness', M.nudgesForEvent_('Cultural').outabout > 0 && M.nudgesForEvent_('Cultural').openness > 0);
   assert('C7d Relationship still feeds sociability (depth of connection)', M.nudgesForEvent_('Relationship').sociability > 0 && !M.nudgesForEvent_('Relationship').outabout);
   assert('C7 Conduct severity ladder: Grave erodes integrity more than Petty', M.nudgesForEvent_('Transgression-Grave').integrity < M.nudgesForEvent_('Transgression-Petty').integrity);
@@ -195,7 +195,7 @@ console.log('═══ Wave 1 — sign, current-value room, and meaningful tags'
   const cases = [
     ['ConnectionWithdrawn', { sociability: -1 }], ['ConnectionMaintained', { sociability: 1 }],
     ['TrustGuarded', { warmth: -1 }], ['RoutineRetrenched', { openness: -1 }],
-    ['ActivityExpanded', { outabout: 1 }], ['BoundaryKept', { integrity: 1 }],
+    ['BoundaryKept', { integrity: 1 }],
     ['BoundaryCompromised', { integrity: -1 }], ['Bond', { warmth: 1 }],
     ['Hospitalized', { composure: -6, outabout: -1 }], ['Critical', { composure: -8, outabout: -1 }]
   ];

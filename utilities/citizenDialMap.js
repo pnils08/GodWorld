@@ -170,9 +170,7 @@ var DIAL_MAP = {
   'ConnectionMaintained': { sociability: 1 },           // a named bond picked back up (dormant -> active)
   'TrustGuarded':        { warmth: -1 },                // a confrontation / someone else circling, with a person they know
   'RoutineRetrenched':   { openness: -1 },              // a venture closed, or a field change ended in a layoff
-  'ActivityExpanded':    { outabout: 1 },               // the hood's shops and events run in the city's top band
-  'ActivityContracted':  { outabout: -1 },              // engine.201b: the hood's shops and events run in the city's bottom band
-  'StreetsGuarded':      { openness: -1 },              // engine.201b: the hood sits at/over the crime bar — residents close off
+  // ActivityExpanded / ActivityContracted / StreetsGuarded REMOVED S451 — hood-rank retags of a plain day, not events
   'BoundaryKept':        { integrity: 1 },              // an ordinary chance to cut a corner, declined (non-crime-reachable citizens)
   'BoundaryCompromised': { integrity: -1 },             // ruling 3: an ordinary non-criminal slip
   'Bond':                { warmth: 1 },                 // a bond deepened ("more than friends now") — real event, was the +composure fallback

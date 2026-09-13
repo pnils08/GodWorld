@@ -106,7 +106,7 @@ All are pre-cap multipliers; `null` bands (no DialState) → base rates unchange
 
 ### Layer 2 — Outcome: *what the event does to the citizen*. Always a dial nudge; real state-mutation only in some engines.
 
-- **Always:** a real event's tag → dial delta (the spine). `Household` moves family; a plain `Daily` line moves nothing (engine.201 rulings 1 / 1b); the ordinary hood line carries the hood's sign — `ActivityExpanded` / `ActivityContracted` / `StreetsGuarded` (engine.201b, `activityBandHoods_` + `hoodOverCrimeBar_` in `runNeighborhoodEngine.js`, read by both hood-line generators).
+- **Always:** a real event's tag → dial delta (the spine). `Household` moves family; a plain `Daily` line moves nothing (engine.201 rulings 1 / 1b); the ordinary hood line is a plain `Neighborhood` line whatever the hood's rank — the engine.201b rank retags (`ActivityExpanded` / `ActivityContracted` / `StreetsGuarded`) were removed S451 (builder ruling 2026-09-13: dials follow events, never a retag of texture); only a persisted pressure bar (engine.176) still tints it.
 - **Real state mutation (beyond dials):** verified in **career only** so far — transitions rewrite `Income`, swap `EmployerBizId`, and emit `businessDeltas` that the **Economic Ripple Engine** consumes → economy → sentiment → other citizens. This is the cross-sheet ripple.
 - **The cosmetic edge:** where a column gates *which text* is drawn but all those texts share **one tag**, the column changes the prose, not the dial outcome (e.g. household's married/parent pools all emit `Household`→`family:5`; conduct's per-severity strings). The column individuates the *story*, not the *mechanics*, in those spots. This is a depth residual, not "unwired."
 

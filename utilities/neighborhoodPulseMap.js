@@ -28,9 +28,6 @@ var PULSE_MAP = {
   // --- Community / neighborhood life ---
   'Community':          { sentiment: 2, attractiveness: 1 },
   'Neighborhood':       { sentiment: 1 },
-  'ActivityExpanded':   { sentiment: 1 },   // engine.201: the Neighborhood line retagged in a top-quarter hood — same pulse, never a sentiment change
-  'ActivityContracted': { sentiment: 1 },   // engine.201b: the Neighborhood line retagged in a bottom-quarter hood — same pulse
-  'StreetsGuarded':     { sentiment: 1 },   // engine.201b: the Neighborhood line retagged in a crime-bar hood — same pulse
   'Mentorship':         { sentiment: 1 },
   'CivicRole':          { sentiment: 1 },
   'Civic Role':         { sentiment: 1 },

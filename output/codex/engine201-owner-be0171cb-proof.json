@@ -1,0 +1,135 @@
+{
+  "commit": "be0171cb",
+  "sourceFile": "phase05-citizens/applyBusinessDynamics.js",
+  "sourceSha256": "3c66ef7b7ddcb69d70d581209138f0388ea5ea6f924e9e53fd079cab41690d15",
+  "tests": {
+    "baseCommit": "7322823a",
+    "before": {
+      "passed": 6,
+      "failed": 23
+    },
+    "after": {
+      "passed": 29,
+      "failed": 0
+    },
+    "seamsPassed": 24,
+    "employerPassed": 65,
+    "offlineSuite": {
+      "passedFiles": 230,
+      "totalFiles": 232,
+      "failures": [
+        "scripts/ingestEdition.test.js",
+        "scripts/rateEditionCoverage.test.js"
+      ]
+    }
+  },
+  "currentInputComparison": {
+    "cycle": 106,
+    "businessRows": 177,
+    "populatedPersonnel": 30,
+    "resolvedBefore": 16,
+    "resolvedAfter": 16,
+    "changedBusinessIds": [],
+    "unresolvedPopulatedCells": {
+      "ownerEntryDoesNotResolveBands": 5,
+      "noOwnerTaggedEntry": 9
+    },
+    "unresolvedOwners": [
+      {
+        "businessId": "BIZ-00007",
+        "entries": [
+          {
+            "identifier": "fullName",
+            "reason": "noMatchingDialCandidate"
+          }
+        ]
+      },
+      {
+        "businessId": "BIZ-00008",
+        "entries": [
+          {
+            "identifier": "fullName",
+            "reason": "noMatchingDialCandidate"
+          },
+          {
+            "identifier": "fullName",
+            "reason": "noMatchingDialCandidate"
+          }
+        ]
+      },
+      {
+        "businessId": "BIZ-00009",
+        "entries": [
+          {
+            "identifier": "fullName",
+            "reason": "noMatchingDialCandidate"
+          }
+        ]
+      },
+      {
+        "businessId": "BIZ-00010",
+        "entries": [
+          {
+            "identifier": "fullName",
+            "reason": "noMatchingDialCandidate"
+          }
+        ]
+      },
+      {
+        "businessId": "BIZ-00011",
+        "entries": [
+          {
+            "identifier": "fullName",
+            "reason": "noMatchingDialCandidate"
+          }
+        ]
+      }
+    ]
+  },
+  "sandbox": {
+    "version": 25,
+    "cycleBefore": 106,
+    "cycleAfter": 107,
+    "ok": true,
+    "ranMs": 194843,
+    "engineErrors": 0,
+    "ledgerRows": 942,
+    "businessRows": 177,
+    "businessRevenueOrGrowthChanged": 177,
+    "businessRowsWithNumericRevenueAndGrowth": 173,
+    "crimeColumnCount": 10,
+    "crimeRowsStamped": 22,
+    "invalidDialStateRows": [],
+    "maxLifeHistoryChars": 3327,
+    "maxDialStateChars": 705,
+    "byteIdenticalFiles": 169,
+    "testFilesDeployed": 0,
+    "finiteGrowthRows": 177,
+    "preservedBlankRevenueRows": 4
+  },
+  "limitations": [
+    "Current input owner bands are identical before and after; the ambiguity repair is proved by local real-function boundary tests.",
+    "One sandbox Cycle is runtime integration proof, not engine.201 fixed-cohort causal acceptance."
+  ],
+  "production": {
+    "deploymentLedgerLabel": "PROD @81",
+    "appsScriptVersion": 70,
+    "previousWebAppVersion": 69,
+    "deploymentReadBack": true,
+    "byteIdenticalFiles": 169,
+    "testFiles": 0,
+    "liveCycle": 106,
+    "liveCycleFired": false
+  },
+  "postProofSandboxReset": {
+    "cycle": 106,
+    "ledgerRows": 930,
+    "businessRows": 177,
+    "engineErrors": 0,
+    "tabsCopied": 82,
+    "rowsCopied": 50534,
+    "oversizedCellsSanitizedByExistingHelper": 11,
+    "largestFiveTabCountsVerified": true,
+    "independentReadBack": true
+  }
+}

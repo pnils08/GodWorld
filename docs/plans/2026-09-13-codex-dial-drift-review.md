@@ -32,7 +32,7 @@ pointers:
 
 **Author:** codex. **Terminal/reviewer/engine lander:** engine-sheet.
 
-**Current execution authority (Mike-direct, 2026-09-13 14:34):** codex leads engine.201 and has substrate, commit, deployment, bench and Sheet authority. Engine-sheet is optional execution support. Sim decisions on pressure and bond contact remain Mike's rulings; live C107 has not fired. The earlier review/lander assignment above records the original package.
+**Current execution routing (Mike-direct reversal recorded at 17:29 in `c11ffc9a`):** Mags/engine-sheet leads substrate work; Codex handles bounded jobs and engine-sheet verifies each cut. This supersedes the 14:34 Codex-lead authorization under which the conduct and owner-reader repairs were executed. Sim decisions on pressure and bond contact remain Mike's rulings; live C107 has not fired.
 
 **Status:** ACCEPTED IN PART by engine-sheet S449 (2026-09-13). Findings D1–D14 verified in code; the repair was cut to widening the existing engine.176 pressure mechanism (no new phase, files, envelope, receipts or migration) and shipped as engine.201 PROD @77 — see [[2026-09-10-inactivity-is-regression]] §BUILD SPEC. Deferred: A3 receipts/settledThrough, A4 exp curve, B4 all-ledger evaluation phase. Original status: research complete; proposed implementation awaited Claude review and builder approval. No engine, schema, classifier, cron, Sheet, or deployment changed by this package. Diagnostic code only runs locally against in-memory fixtures and a historical snapshot.
 
@@ -314,7 +314,7 @@ Approve or amend the five contract choices above, then authorize one bounded imp
 
 - 2026-09-13 (codex) — Completed source review, historical pool reproduction, defect probes and proposed engine.201 repair sequence; submitted for Claude review, implementation unstarted.
 - 2026-09-13 (codex) — Took execution lead; conduct repair `0a9306e1` proved on sandbox C108–C109 and deployed PROD @80 (Apps Script version 69); engine.201 remains unaccepted.
-- 2026-09-13 (codex) — Owner-reader repair proved against `7322823a`; verified-ID and unique-name controls retained; sandbox/deployment pending below.
+- 2026-09-13 (codex) — Owner-reader repair `be0171cb` proved against `7322823a`, sandbox C107 clean, deployed PROD @81 / Apps Script version 70; engine.201 remains unaccepted.
 
 ## Final verification note — 2026-09-13 (codex)
 
@@ -377,11 +377,13 @@ Bond primitives inspected: Simulation_Ledger HouseholdId is actual membership (`
 
 Owner/venture input and final fixed-cohort causal acceptance remain open under engine.201. Historical multi-Cycle metrics containing removed retags/remaps cannot accept the current build.
 
-**Owner reader follow-up (IN PROGRESS, locally proved; deployment pending):** `bizOwnerBands_` now treats an explicit POPID as authoritative: an absent ID or an ID without DialState never borrows a namesake; duplicate full names resolve null even when one row has blank DialState; a later valid owner entry can still resolve. Name ambiguity remains after a third duplicate. The caches are used only by this function, retain serialized strings rather than shared citizen objects, and add no RNG draws or cell mutation. Existing identity precedence is preserved; wealth's separate `resolveOwnerRow_` requires name agreement and is unchanged.
+**Owner reader follow-up (SHIPPED `be0171cb`, PROD @81):** `bizOwnerBands_` now treats an explicit POPID as authoritative: an absent ID or an ID without DialState never borrows a namesake; duplicate full names resolve null even when one row has blank DialState; a later valid owner entry can still resolve. Name ambiguity remains after a third duplicate. The caches are used only by this function, retain serialized strings rather than shared citizen objects, and add no RNG draws or cell mutation. Existing identity precedence is preserved; wealth's separate `resolveOwnerRow_` requires name agreement and is unchanged.
 
 **Regression proof:** `scripts/businessOwnerDials.test.js`: clean source archive of `7322823a` gives 6 passes / 23 failures; repaired source gives 29/29. Actual `applyBusinessDynamics_` paths queue growth 1.63 instead of 1.50 and defer closure on unresolved ownership before repair; afterward they match neutral growth and close at the ordinary threshold with six job losses, rather than shedding four while staying open. Verified owners still amplify growth, calm composure delays closure, and low composure brings closure forward one Cycle. Exact IDs remain usable after a cached ambiguous-name lookup. Existing seam tests 24/24 and employer tests 65/65; syntax/whitespace checks clean.
 
 **Current-input comparison:** a read-only C106 snapshot has 177 businesses, 30 populated personnel cells, and 16 businesses with resolvable owner bands under both implementations; zero businesses change bands on these current inputs. The boundary tests establish the repair; an ordinary bench fire alone cannot prove an ambiguity branch that these inputs do not contain. No ownership backfill or live Sheet write is part of this repair.
+
+**Remaining owner-input reach:** of the 14 populated but unresolved personnel cells, nine contain no owner-tagged entry. Five businesses (`BIZ-00007` through `BIZ-00011`) have owner-tagged names without a matching dial candidate in the ledger. The current research-build handoff already assigns reconciliation of six intake founders after the builder's next live Cycle; no duplicate backfill task was started. Blank personnel elsewhere does not establish that an institution needs an individual owner.
 
 **Broader validation:** offline suite 230/232 files (105.41 seconds). `ingestEdition.test.js` and `rateEditionCoverage.test.js` retain the subprocess-output failures seen in the conduct run; the C94 fixture test now passes. No clean-full-suite claim. Documentation lint retains 19 oversized rows outside engine.201.
 
@@ -396,6 +398,8 @@ Owner/venture input and final fixed-cohort causal acceptance remain open under e
 | Composure room and closure decision | `phase05-citizens/applyBusinessDynamics.js:445`, `phase05-citizens/applyBusinessDynamics.js:456` |
 | Job losses into career; revenue/growth write intents | `phase05-citizens/applyBusinessDynamics.js:488`, `phase05-citizens/runCareerEngine.js:529`, `phase05-citizens/applyBusinessDynamics.js:496` |
 
-Fixed-cohort causal proof, deployment, and final engine.201 acceptance remain pending.
+**Owner deployment proof:** one-file delta against both live and bench, no additions/deletions; all 169 files byte-identical after upload on both targets, zero tests. Bench web app @25 pinned/read back; C106→C107 `ok:true` in 194,843 ms with zero Engine_Errors. All 177 businesses persisted revenue/growth changes; growth finite throughout, four pre-existing blank revenues preserved. Ledger 942, all DialState JSON valid; maximum DialState 705 characters, LifeHistory 3,327. Crime_Metrics ten columns, 22 active hoods stamped. Production's existing web app pinned/read back at Apps Script version 70; deployment-ledger label @81. Live remains C106, unfired. [Proof artifact](../../output/codex/engine201-owner-be0171cb-proof.json). Post-proof sandbox reset completed: 82 tabs / 50,534 rows, 11 oversized cells sanitized by the existing helper, five largest-tab row counts verified. Independent read-back: C106, 930 ledger rows, 177 businesses, zero Engine_Errors. Bench code remains @25.
+
+Pressure/contact rulings, owner-input reconciliation, fixed-cohort causal proof, and final engine.201 acceptance remain pending.
 
 **Fresh input observation (live read only, C106):** Business_Ledger has 177 rows and 30 nonblank Key_Personnel cells; the older 21-cell figure is stale. Eight ledger rows with explicit founder/owner/principal/managing-partner-style RoleType prefixes were found; none had an exact unique business-name match with blank personnel. These counts do not prove all owners resolve, and blank personnel does not establish a missing individual owner for an institution. No backfill was performed.

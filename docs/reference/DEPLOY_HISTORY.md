@@ -129,6 +129,16 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @81 — owner-reader repair (2026-09-13, Codex)
+
+Source commit `be0171cb`; @81 is the deployment-ledger label. Exactly one payload file changed: `phase05-citizens/applyBusinessDynamics.js`; no additions/deletions. Explicit owner POPIDs no longer fall back to namesakes, and ambiguous names supply no dial bands, including when a duplicate has blank DialState.
+
+- **Bench @25:** pinned/read back; C106→C107 `ok:true` in 194,843 ms, zero Engine_Errors. All 177 businesses changed revenue/growth; all growth values finite, 173 numeric revenues and four prior blanks preserved. Ledger 942 rows, valid DialState JSON throughout, max DialState 705 characters and LifeHistory 3,327. Crime_Metrics ten columns / 22 hoods stamped.
+- **Behavioral proof:** owner tests 29/29 versus baseline `7322823a` with six passes / 23 failures; seams 24/24, employer 65/65. Offline suite 230/232 with the previously observed `ingestEdition` and `rateEditionCoverage` subprocess-output failures. The current C106 input yields identical owner bands before/after (16 resolved businesses); this bench run proves runtime integration, while local boundary tests prove the ambiguity repair.
+- **Production:** uploaded and all 169 files byte-identical on pull-back; zero tests deployed. Existing web app explicitly pinned and read back at Apps Script version 70. Live remains C106; no live Cycle fired.
+
+Sandbox reset completed: 82 tabs / 50,534 rows, 11 oversized cells sanitized by the existing helper, five largest-tab counts verified. Independent read-back: C106, 930 ledger rows, 177 businesses, zero Engine_Errors. Code remains bench @25. [Proof artifact](../../output/codex/engine201-owner-be0171cb-proof.json); [owning plan](../plans/2026-09-13-codex-dial-drift-review.md). Engine.201 remains unaccepted pending sim rulings, owner-input reconciliation and fixed-cohort causal proof.
+
 ### PROD @80 — engine.201 S453 conduct scan (2026-09-13 ~15:02 Chicago, Codex)
 
 Commit `0a9306e1`; @80 is the deployment-ledger label. Exactly one payload file changed on live and bench: `phase05-citizens/runConductEngine.js`. No additions or deletions. The repair rotates the capped scan, excludes Deceased, and preserves Retired plus prior eligibility. It adds no selection RNG draws.

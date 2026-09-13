@@ -109,7 +109,7 @@ var ENGINE176_CONFIG_SEEDS = [
   ['dialFrictionRentBurden', 50, 'engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause', 10, 90, false],
   ['dialSetbackLossPct', 5, 'engine.176 a lost casino stake at/over this % of the citizen\'s net worth logs [Setback] instead of the ordinary [Casino] loss line', 1, 50, false],
   ['dialHoodPressureBar', 3, 'engine.176 Neighborhood_Map HousingPressure (persisted, read via S.neighborhoodState) at/over which a Neighborhood line tints to Friction instead of sociability — live C106: 5 of 22 hoods at/over 3, max 4.5', 0, 10, false],
-  ['dialHoodCrimeBar', 1, 'engine.176 Neighborhood_Map CrimeIndex at/over which the same tint applies — live C106 scale 0.35-1.11, 4 hoods at/over 1.0', 0, 5, false]
+  ['dialHoodCrimeBar', 1.45, 'engine.176/212 MULTIPLE of the city median Neighborhood_Map CrimeIndex (persisted snapshot) at/over which the same tint applies — relative, so the bar cannot rot as the city drifts. Seeded so C107 catches the same 4 hoods the old absolute 1.0 did: live C106 median 0.675 × 1.45 = 0.98', 1, 4, false]
 ];
 
 function ensureEngine176Config_(ss) {

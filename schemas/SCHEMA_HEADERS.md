@@ -370,17 +370,22 @@ pointers:
 ## Crime_Metrics
 
 - **Rows:** 24
-- **Columns:** 7
+- **Columns:** 10 (H–J self-arm on the first engine.212 fire — append-only `ensureCrimeMetricsSchema_`)
 
 | Col | Header |
 |-----|--------|
 | A | Neighborhood |
-| B | PropertyCrimeIndex |
-| C | ViolentCrimeIndex |
+| B | PropertyCrimeIndex — OBSERVED this cycle (level × transient overlay + dice) |
+| C | ViolentCrimeIndex — observed |
 | D | ResponseTimeAvg |
 | E | ClearanceRate |
 | F | IncidentCount |
 | G | LastUpdated |
+| H | PropertyLevel — engine.212: the hood's PERSISTENT level, carried forward from last cycle; moved only by signed causes + a slow pull toward the city's own median |
+| I | ViolentLevel — same |
+| J | QolLevel — same (quality-of-life disorder) |
+
+A blank level cell (first fire after the columns arm) seeds from that row's last observed index; the authored profile (`NEIGHBORHOOD_CRIME_PROFILES`) seeds only a hood with no row. Written by `phase03-population/updateCrimeMetrics.js` v1.3.
 
 ---
 

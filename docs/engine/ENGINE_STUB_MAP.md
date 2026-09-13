@@ -588,6 +588,16 @@
   Config: ctx.config.enforcement
   RNG: ctx.rng / safeRand_(ctx)
 
+- **crimeLevelFrom_(prev, levelKey, indexKey, seed)**
+
+- **crimeMedian_(arr)**
+
+- **crimeCityMedianLevels_(currentMetrics)**
+
+- **crimeClampLevel_(n)**
+
+- **crimeCapPush_(n)**
+
 - **calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context, events, advanced, rng)**
 
 - **calculateCityWideFromMap_(metricsMap)**
@@ -2045,6 +2055,9 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runNeighborhoodEngine.js
+- **hoodCrimeBar_(ctx, S)**
+  Reads: S.neighborhoodState
+
 - **runNeighborhoodEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
@@ -3518,6 +3531,8 @@
 
 - **getCrimeMetrics_(ss)**
 
+- **crimeMetricsRowData_(neighborhood, m, cycle)**
+
 - **getCrimeMetricsForNeighborhood_(ss, neighborhood)**
 
 - **getCityWideCrimeStats_(ss)**
@@ -3968,4 +3983,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1370
+**Functions mapped:** 1377

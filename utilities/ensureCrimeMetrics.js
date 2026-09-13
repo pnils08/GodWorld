@@ -17,12 +17,20 @@
 
 var CRIME_METRICS_HEADERS = [
   'Neighborhood',
-  'PropertyCrimeIndex',    // 0-100 scale (higher = more crime)
-  'ViolentCrimeIndex',     // 0-100 scale (higher = more crime)
+  'PropertyCrimeIndex',    // 0-100 scale (higher = more crime) — OBSERVED this cycle (level × transient overlay)
+  'ViolentCrimeIndex',     // 0-100 scale (higher = more crime) — observed
   'ResponseTimeAvg',       // Minutes (lower = better)
   'ClearanceRate',         // 0-1 decimal (higher = more cases solved)
   'IncidentCount',         // Total incidents this cycle
-  'LastUpdated'            // CycleID
+  'LastUpdated',           // CycleID
+  // engine.212 (S451): the hood's PERSISTENT crime level, carried forward cycle to cycle and moved
+  // only by signed causes (unemployment, lagged economic stress, hotspot spillover, chaos residue,
+  // enforcement) plus a slow pull toward the CITY'S OWN median. The authored profile seeds a hood
+  // with no row and is never read again. Self-arming append-only columns H–J (blank on first read
+  // → seeded from that row's last observed index).
+  'PropertyLevel',
+  'ViolentLevel',
+  'QolLevel'
 ];
 
 var CRIME_METRICS_SHEET_NAME = 'Crime_Metrics';
@@ -314,8 +322,22 @@ function getCrimeMetrics_(ss) {
   var iClearanceRate = idx('ClearanceRate');
   var iIncidentCount = idx('IncidentCount');
   var iLastUpdated = idx('LastUpdated');
+  var iPropertyLevel = idx('PropertyLevel');   // engine.212 — may be -1 on a tab the ensure has not armed yet
+  var iViolentLevel = idx('ViolentLevel');
+  var iQolLevel = idx('QolLevel');
 
   var result = {};
+
+  // engine.212: a level cell that is blank / non-numeric reads as null, never 0 — the engine
+  // seeds it from the row's last observed index (crimeLevelFrom_), so a fresh column is not a
+  // crime-free city.
+  var levelOf = function(row, i) {
+    if (i < 0) return null;
+    var v = row[i];
+    if (v === '' || v === null || v === undefined) return null;
+    var n = Number(v);
+    return isFinite(n) ? n : null;
+  };
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -329,11 +351,32 @@ function getCrimeMetrics_(ss) {
       responseTimeAvg: Number(row[iResponseTime]) || 0,
       clearanceRate: Number(row[iClearanceRate]) || 0,
       incidentCount: Number(row[iIncidentCount]) || 0,
-      lastUpdated: Number(row[iLastUpdated]) || 0
+      lastUpdated: Number(row[iLastUpdated]) || 0,
+      propertyLevel: levelOf(row, iPropertyLevel),
+      violentLevel: levelOf(row, iViolentLevel),
+      qolLevel: levelOf(row, iQolLevel)
     };
   }
 
   return result;
+}
+
+// engine.212: one row's persisted values, in CRIME_METRICS_HEADERS order (positional write from
+// column A — the ensure appends any missing header at the end, so the order here IS the tab's).
+function crimeMetricsRowData_(neighborhood, m, cycle) {
+  var lv = function(v) { return (v === null || v === undefined || !isFinite(Number(v))) ? '' : Math.round(Number(v) * 100) / 100; };
+  return [
+    neighborhood,
+    m.propertyCrimeIndex || 0,
+    m.violentCrimeIndex || 0,
+    m.responseTimeAvg || 8,
+    m.clearanceRate || 0.35,
+    m.incidentCount || 0,
+    cycle,
+    lv(m.propertyLevel),
+    lv(m.violentLevel),
+    lv(m.qolLevel)
+  ];
 }
 
 /**
@@ -422,15 +465,7 @@ function updateCrimeMetrics_(ctx, neighborhood, metrics) {
   }
 
   var cycle = (ctx.summary && ctx.summary.absoluteCycle) || 0;
-  var rowData = [
-    neighborhood,
-    metrics.propertyCrimeIndex || 0,
-    metrics.violentCrimeIndex || 0,
-    metrics.responseTimeAvg || 8,
-    metrics.clearanceRate || 0.35,
-    metrics.incidentCount || 0,
-    cycle
-  ];
+  var rowData = crimeMetricsRowData_(neighborhood, metrics, cycle); // engine.212: carries the level columns
 
   if (rowIndex > 0) {
     // Update existing row
@@ -487,15 +522,7 @@ function batchUpdateCrimeMetrics_(ctx, metricsMap) {
     var neighborhood = neighborhoods[i];
     var m = metricsMap[neighborhood];
 
-    var rowData = [
-      neighborhood,
-      m.propertyCrimeIndex || 0,
-      m.violentCrimeIndex || 0,
-      m.responseTimeAvg || 8,
-      m.clearanceRate || 0.35,
-      m.incidentCount || 0,
-      cycle
-    ];
+    var rowData = crimeMetricsRowData_(neighborhood, m, cycle); // engine.212: carries the level columns
 
     if (existingMap[neighborhood]) {
       updates.push({ row: existingMap[neighborhood], data: rowData });
@@ -578,7 +605,11 @@ function seedCrimeMetricsFromProfiles_(ctx, demographicsOpt) {
       violentCrimeIndex: baseViolent,
       responseTimeAvg: responseTime,
       clearanceRate: clearanceRate,
-      incidentCount: profile.baseIncidents
+      incidentCount: profile.baseIncidents,
+      // engine.212: the one-time seed IS the opening level; the engine carries it from here
+      propertyLevel: baseProperty,
+      violentLevel: baseViolent,
+      qolLevel: Math.round(50 * (profile.qualityOfLifeMod || 0.9))
     };
   }
 

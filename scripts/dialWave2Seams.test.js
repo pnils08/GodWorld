@@ -128,12 +128,12 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     citizen('POP-99002', 'Synthetic', 'Beta', 'Synthetic Hood B')];
   function neighborhoodRun(pressured) {
     const ctx = context(rows.map(r => r.slice())); ctx.rng = () => 0;
-    ctx.config.dialHoodPressureBar = 2; ctx.config.dialHoodCrimeBar = 2;
+    ctx.config.dialHoodPressureBar = 2; ctx.config.dialHoodCrimeBar = 2; // engine.212: crime bar = 2 × city median (0.5 → 1.0)
     ctx.summary.neighborhoodState = {
-      'Synthetic Hood A': { retailVitality: 10, eventAttractiveness: 90, housingPressure: 0, crimeIndex: 0 },
-      'Synthetic Hood B': { retailVitality: 70, eventAttractiveness: 20, housingPressure: 0, crimeIndex: 0 },
-      'Synthetic Hood C': { retailVitality: 20, eventAttractiveness: 20, housingPressure: 0, crimeIndex: 0 },
-      'Synthetic Hood D': { retailVitality: 10, eventAttractiveness: 10, housingPressure: 0, crimeIndex: 0 }
+      'Synthetic Hood A': { retailVitality: 10, eventAttractiveness: 90, housingPressure: 0, crimeIndex: 0.5 },
+      'Synthetic Hood B': { retailVitality: 70, eventAttractiveness: 20, housingPressure: 0, crimeIndex: 0.5 },
+      'Synthetic Hood C': { retailVitality: 20, eventAttractiveness: 20, housingPressure: 0, crimeIndex: 0.5 },
+      'Synthetic Hood D': { retailVitality: 10, eventAttractiveness: 10, housingPressure: 0, crimeIndex: 0.5 }
     };
     if (pressured) ctx.summary.neighborhoodState['Synthetic Hood A'][pressure] = 3;
     writes.length = 0; w.runNeighborhoodEngine_(ctx);
@@ -242,6 +242,19 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
   const up = w.newCitizen_({ drive: 100 }); w.applyEvent_(up, { effects: { drive: 5 } });
   assert('S451 a pinned 100 moves only on a real downward event (down < 100, up stays 100)',
     w.current_(down, 'drive') < 100 && w.current_(up, 'drive') === 100, JSON.stringify({ down: w.current_(down, 'drive'), up: w.current_(up, 'drive') }));
+}
+{
+  // engine.212 (S451): the crime bar is dialHoodCrimeBar × the city median CrimeIndex off the persisted snapshot.
+  const live = { Downtown: 1.1, Temescal: 0.76, Rockridge: 0.48, Fruitvale: 1, 'West Oakland': 1.1, 'East Oakland': 1.11, 'Lake Merritt': 0.85,
+    'Jack London': 0.87, 'Piedmont Ave': 0.35, 'Grand Lake': 0.51, Chinatown: 0.9, 'Adams Point': 0.64, Dimond: 0.64, Glenview: 0.5, Laurel: 0.52,
+    Uptown: 0.71, KONO: 0.64, Brooklyn: 0.53, Eastlake: 0.6, 'Ivy Hill': 0.49, 'San Antonio': 0.82, 'Baylight District': 0.89 };
+  const st = {}; for (const h in live) st[h] = { crimeIndex: live[h] };
+  const bar = w.hoodCrimeBar_({ config: { dialHoodCrimeBar: 1.45 } }, { neighborhoodState: st });
+  const over = Object.keys(live).filter(h => live[h] >= bar).sort();
+  assert('212 live C106 shape: 1.45 × median 0.675 = 0.979 → the same four hoods the old absolute 1.0 caught',
+    Math.abs(bar - 0.97875) < 0.001 && JSON.stringify(over) === '["Downtown","East Oakland","Fruitvale","West Oakland"]', JSON.stringify({ bar, over }));
+  assert('212 no snapshot → bar Infinity, nothing tints; the bar is cached per ctx',
+    w.hoodCrimeBar_({ config: { dialHoodCrimeBar: 1.45 } }, {}) === Infinity && (() => { const c = { config: { dialHoodCrimeBar: 1.45 } }; w.hoodCrimeBar_(c, { neighborhoodState: st }); return c._hoodCrimeBar === bar; })());
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

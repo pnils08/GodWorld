@@ -150,6 +150,30 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
 // engine.201/201b activity-band + crime-bar hood retag helpers REMOVED S451 (builder ruling
 // 2026-09-13: dials follow EVENTS — the ordinary hood line is a plain day, never retagged by rank).
 
+// engine.212 (S451): the crime bar is RELATIVE — `dialHoodCrimeBar` × the city's median CrimeIndex
+// off the persisted snapshot (S.neighborhoodState). A hood is "rough" against its own city, so the
+// bar cannot rot as the city's level drifts (SIM_DOCTRINE §15). No median (empty / all-blank
+// snapshot) → Infinity: nothing tints. Cached per cycle on ctx.
+function hoodCrimeBar_(ctx, S) {
+  if (ctx && ctx._hoodCrimeBar !== undefined) return ctx._hoodCrimeBar;
+  var mult = pressureBar_(ctx, 'dialHoodCrimeBar');
+  var vals = [], st = S && S.neighborhoodState;
+  for (var h in st) {
+    if (!st.hasOwnProperty(h) || !st[h]) continue;
+    var v = Number(st[h].crimeIndex);
+    if (isFinite(v) && v > 0) vals.push(v);
+  }
+  var bar = Infinity;
+  if (vals.length) {
+    vals.sort(function(a, b) { return a - b; });
+    var mid = Math.floor(vals.length / 2);
+    var median = vals.length % 2 ? vals[mid] : (vals[mid - 1] + vals[mid]) / 2;
+    bar = mult * median;
+  }
+  if (ctx) ctx._hoodCrimeBar = bar;
+  return bar;
+}
+
 function runNeighborhoodEngine_(ctx) {
 
   var rng = safeRand_(ctx);
@@ -541,7 +565,7 @@ function runNeighborhoodEngine_(ctx) {
       // runs before Career/Money/Migration), so the collision emitters skip.
       var hoodSt = S.neighborhoodState ? S.neighborhoodState[neighborhood] : null;
       if (hoodSt && ((Number(hoodSt.housingPressure) >= pressureBar_(ctx, 'dialHoodPressureBar')) ||
-                     (Number(hoodSt.crimeIndex) >= pressureBar_(ctx, 'dialHoodCrimeBar')))) {
+                     (Number(hoodSt.crimeIndex) >= hoodCrimeBar_(ctx, S)))) {
         var tintTag = emitPressureTag_(ctx, row, iLife, String(row[iPopID] || ''), 'hood', pressureText_('hood', cycle + r),
           { name: ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(), hood: neighborhood });
         if (tintTag) {

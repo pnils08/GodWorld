@@ -16,7 +16,12 @@
  * Existing schema preserved:
  * - propertyCrimeIndex, violentCrimeIndex, responseTimeAvg, clearanceRate, incidentCount
  *
- * @version 1.2 (additive; CRIME_UPDATE_VERSION remains compatible)
+ * v1.3 (engine.212, S451): the per-hood level CARRIES FORWARD from last cycle (PropertyLevel /
+ * ViolentLevel / QolLevel on Crime_Metrics); the authored profile seeds only a hood with no row.
+ * Signed causes move the level, a slow pull toward the city's own median centres it, transient
+ * conditions overlay the observed index. No literal is read on the per-cycle path.
+ *
+ * @version 1.3 (additive; CRIME_UPDATE_VERSION remains compatible)
  * @tier 6.2
  */
 
@@ -143,11 +148,17 @@ function updateCrimeMetrics_Phase3_(ctx) {
 
   var chaosEvents = 0;
   var celebrationEvents = 0;
+  var chaosByHood = {};   // engine.212: CHAOS / CRIME events carry their hood (crisis spikes do) — count them where they happened
+  var chaosCityWide = 0;  // events with no neighborhood
 
   for (var e = 0; e < worldEvents.length; e++) {
     var evt = worldEvents[e] || {};
     var domain = (evt.domain || evt._domain || '').toString().toUpperCase();
-    if (domain === 'CHAOS' || domain === 'CRIME') chaosEvents++;
+    if (domain === 'CHAOS' || domain === 'CRIME') {
+      chaosEvents++;
+      var evHood = String(evt.neighborhood || '').trim();
+      if (evHood) chaosByHood[evHood] = (chaosByHood[evHood] || 0) + 1; else chaosCityWide++;
+    }
     else if (domain === 'CELEBRATION' || domain === 'FESTIVAL') celebrationEvents++;
   }
 
@@ -192,6 +203,9 @@ function updateCrimeMetrics_Phase3_(ctx) {
   // Precompute hotspot pressure from previous cycle
   var hotspotPressure = computeHotspotPressure_(currentMetrics, adjacency);
 
+  // engine.212: the reversion target is the city's own median level from LAST cycle's rows
+  var cityMedianLevel = crimeCityMedianLevels_(currentMetrics);
+
   // Track loads for enforcement
   var predictedCityIncidents = 0;
   for (var pi = 0; pi < neighborhoods.length; pi++) {
@@ -225,6 +239,8 @@ function updateCrimeMetrics_Phase3_(ctx) {
       },
       {
         chaos: chaosEvents,
+        chaosHere: chaosByHood[hood] || 0,   // engine.212
+        chaosCity: chaosCityWide,            // engine.212
         celebration: celebrationEvents,
         mediaCoverage: mediaCoverage,
         storySeedCount: storySeeds.length
@@ -234,6 +250,7 @@ function updateCrimeMetrics_Phase3_(ctx) {
         hotspotPressure: hotspotPressure[hood] || 0,
         adjacency: adjacency,
         lag: getNeighborhoodLag_(S, hood),
+        cityMedianLevel: cityMedianLevel, // engine.212
         policingCapacity: policingCapacity,
         cityLoad: cityLoad,
         patrolStrategy: patrolStrategy
@@ -301,173 +318,225 @@ function updateCrimeMetrics_Phase3_(ctx) {
 // CALCULATION FUNCTIONS
 // ============================================================================
 
+// engine.212 (S451, builder-direct 2026-09-13): a persistent ledger carries forward from LAST
+// CYCLE — it is never rebuilt from a hardcoded table. Before this the index was 70% prev +
+// 30% (50 × authored mod) every cycle, so the literal was the equilibrium and every hood sat
+// within a few points of its authored rank after 106 cycles (the real-Oakland ranking wearing a
+// physics costume). Now:
+//   LEVEL  — the hood's persistent crime level (Crime_Metrics PropertyLevel / ViolentLevel /
+//            QolLevel). Seeded from the row's last observed index the first time (so C107
+//            starts where C106 ended) and from the authored profile ONLY for a hood with no
+//            row at all. Moves by SIGNED CAUSES, bounded per cycle, plus a slow pull toward
+//            the city's OWN median level (never the literal). Persists.
+//   OVERLAY — this cycle's transient conditions (season, weather, celebration, nightlife
+//            strain, city sentiment, dice) multiply the level into the OBSERVED index. Not
+//            carried, so a 13-cycle summer does not compound.
+// rng draw count and order are unchanged from v1.2 (Phase 3 shares ctx.rng with every later phase).
+var CRIME_LEVEL = {
+  REVERT_RATE: 0.04,        // per-cycle pull toward the city median level (half-life ~17 cycles)
+  CAUSE_CAP: 3.0,           // max |signed cause push| per level per cycle (index points)
+  UNEMPLOYMENT_PUSH: 1.0,   // per 5 pts of unemployment above CRIME_FACTORS.UNEMPLOYMENT_THRESHOLD
+  ECON_LAG_PUSH: 1.0,       // × economicStressLag (0..1)
+  HOTSPOT_PUSH: 0.10,       // × hotspot pressure (0..HOTSPOT_PRESSURE_CAP)
+  CHAOS_PUSH: 0.5,          // per CHAOS/CRIME world event this cycle (residue, decays via reversion)
+  SENTIMENT_PUSH: 2.0,      // × (threshold − sentiment) when the city is below SENTIMENT_THRESHOLD
+  YOUTH_PUSH: 5.0,          // × (youthRatio − 0.3) when above
+  ENFORCEMENT_PULL: 1.5,    // × enforcementPower (0..1), property; violent ×2/3; qol ×1
+  INCIDENTS_PER_POINT: 1 / 5.5, // incidents ≈ (propertyLevel + violentLevel) / 2 / 5.5 (Downtown 60 → ~11)
+  MIN: 5, MAX: 95
+};
+
+// The persisted level for one axis, else the row's last observed index (first run after the
+// columns arm), else the authored/derived seed (a hood with no row). null/blank is NOT 0.
+function crimeLevelFrom_(prev, levelKey, indexKey, seed) {
+  if (prev) {
+    var lv = prev[levelKey];
+    if (lv !== null && lv !== undefined && isFinite(Number(lv)) && Number(lv) > 0) return Number(lv);
+    var ix = prev[indexKey];
+    if (ix !== null && ix !== undefined && isFinite(Number(ix)) && Number(ix) > 0) return Number(ix);
+  }
+  return seed;
+}
+
+function crimeMedian_(arr) {
+  var a = [];
+  for (var i = 0; i < arr.length; i++) { var n = Number(arr[i]); if (isFinite(n) && n > 0) a.push(n); }
+  if (!a.length) return null;
+  a.sort(function(x, y) { return x - y; });
+  var mid = Math.floor(a.length / 2);
+  return a.length % 2 ? a[mid] : (a[mid - 1] + a[mid]) / 2;
+}
+
+// City median of every hood's PREVIOUS level (falls back to the observed index where the level
+// column is still blank). The reversion target — the city's own centre, never a literal.
+function crimeCityMedianLevels_(currentMetrics) {
+  var keys = Object.keys(currentMetrics || {}), p = [], v = [], q = [];
+  for (var i = 0; i < keys.length; i++) {
+    var m = currentMetrics[keys[i]];
+    if (!m) continue;
+    p.push(crimeLevelFrom_(m, 'propertyLevel', 'propertyCrimeIndex', null));
+    v.push(crimeLevelFrom_(m, 'violentLevel', 'violentCrimeIndex', null));
+    q.push(crimeLevelFrom_(m, 'qolLevel', 'qualityOfLifeIndex', null));
+  }
+  return { property: crimeMedian_(p), violent: crimeMedian_(v), qol: crimeMedian_(q) };
+}
+
+function crimeClampLevel_(n) { return Math.max(CRIME_LEVEL.MIN, Math.min(CRIME_LEVEL.MAX, n)); }
+function crimeCapPush_(n) { return Math.max(-CRIME_LEVEL.CAUSE_CAP, Math.min(CRIME_LEVEL.CAUSE_CAP, n)); }
+
 function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context, events, advanced, rng) {
-  // Legacy base values
-  var baseProperty = 50 * profile.propertyCrimeMod;
-  var baseViolent = 50 * profile.violentCrimeMod;
+  // ---- the persistent level: last cycle's, or the seed for a hood with no row -------------------
+  var seedProperty = 50 * profile.propertyCrimeMod;
+  var seedViolent = 50 * profile.violentCrimeMod;
+  var seedQoL = 50 * (profile.qualityOfLifeMod || CRIME_ADVANCED.QOL_BASE_MOD);
+  var levelProperty = crimeLevelFrom_(prev, 'propertyLevel', 'propertyCrimeIndex', seedProperty);
+  var levelViolent = crimeLevelFrom_(prev, 'violentLevel', 'violentCrimeIndex', seedViolent);
+  var levelQoL = crimeLevelFrom_(prev, 'qolLevel', 'qualityOfLifeIndex', seedQoL);
+
   var baseResponse = 8 / profile.responseMod;
   var baseClearance = 0.35 * profile.responseMod;
-  var baseIncidents = profile.baseIncidents;
-
-  // QoL baseline (fallback if profile doesn't have it)
-  var baseQoL = 50 * (profile.qualityOfLifeMod || CRIME_ADVANCED.QOL_BASE_MOD);
 
   // Demographics
   var totalPop = (demo.students || 0) + (demo.adults || 0) + (demo.seniors || 0);
   var unemploymentRate = totalPop > 0 ? ((demo.unemployed || 0) / totalPop) : 0.08;
   var youthRatio = totalPop > 0 ? ((demo.students || 0) / totalPop) : 0.2;
 
-  // Unemployment impacts
+  // Enforcement (needed by both the level causes and the overlay)
+  var policingCapacity = advanced && advanced.policingCapacity ? advanced.policingCapacity : derivePolicingCapacity_({}, {}, { name: 'balanced' });
+  var cityLoad = advanced && advanced.cityLoad ? advanced.cityLoad : { loadRatio: 0.5 };
+  var patrolStrategy = advanced && advanced.patrolStrategy ? advanced.patrolStrategy : { name: 'balanced', displacementMult: 1.0, clearanceMult: 1.0, qolReduction: 0 };
+  var enforcementShare = clamp01_(policingCapacity.neighborhoodShare[neighborhood] || policingCapacity.defaultNeighborhoodShare);
+  var enforcementPower = clamp01_(enforcementShare * policingCapacity.strength);
+  var displacement = enforcementPower * CRIME_ADVANCED.DISPLACEMENT_RATE * patrolStrategy.displacementMult;
+
+  // ---- SIGNED CAUSES move the level (persist) ---------------------------------------------------
+  var pushProperty = 0, pushViolent = 0, pushQoL = 0;
   if (unemploymentRate > CRIME_FACTORS.UNEMPLOYMENT_THRESHOLD) {
     var excessUnemployment = unemploymentRate - CRIME_FACTORS.UNEMPLOYMENT_THRESHOLD;
-    baseProperty *= (1 + (excessUnemployment / 0.05) * (CRIME_FACTORS.UNEMPLOYMENT_CRIME_FACTOR - 1));
-    baseQoL *= (1 + (excessUnemployment / 0.05) * (CRIME_ADVANCED.QOL_UNEMPLOYMENT_SENS));
+    pushProperty += (excessUnemployment / 0.05) * CRIME_LEVEL.UNEMPLOYMENT_PUSH;
+    pushQoL += (excessUnemployment / 0.05) * CRIME_LEVEL.UNEMPLOYMENT_PUSH * CRIME_ADVANCED.QOL_UNEMPLOYMENT_SENS;
   }
-
-  // Youth ratio
   if (youthRatio > 0.3) {
-    baseViolent *= (1 + (youthRatio - 0.3) * 0.5);
-    baseQoL *= (1 + (youthRatio - 0.3) * 0.25);
+    pushViolent += (youthRatio - 0.3) * CRIME_LEVEL.YOUTH_PUSH;
+    pushQoL += (youthRatio - 0.3) * CRIME_LEVEL.YOUTH_PUSH * 0.5;
   }
-
-  // Sentiment impacts
+  var lag = advanced && advanced.lag ? advanced.lag : null;
+  var econStressLag = lag ? Number(lag.economicStressLag || 0) : 0;
+  pushProperty += econStressLag * CRIME_LEVEL.ECON_LAG_PUSH;
+  pushViolent += econStressLag * CRIME_LEVEL.ECON_LAG_PUSH * 0.5;
+  pushQoL += econStressLag * CRIME_LEVEL.ECON_LAG_PUSH * CRIME_ADVANCED.QOL_ECON_STRESS_LAG_SENS;
+  var pressure = Number((advanced && advanced.hotspotPressure) || 0);
+  if (pressure > 0) {
+    pushProperty += pressure * CRIME_LEVEL.HOTSPOT_PUSH;
+    pushViolent += pressure * CRIME_LEVEL.HOTSPOT_PUSH * 0.5;
+    pushQoL += pressure * CRIME_LEVEL.HOTSPOT_PUSH;
+  }
+  // chaos / crime world events: one IN this hood is a full push; a city-wide one (no neighborhood)
+  // a quarter push on every hood. events.chaosHere / events.chaosCity are counted by the caller.
+  var chaosWeight = (Number(events.chaosHere) || 0) + (Number(events.chaosCity) || 0) * 0.25;
+  if (chaosWeight > 0) {
+    pushProperty += chaosWeight * CRIME_LEVEL.CHAOS_PUSH;
+    pushViolent += chaosWeight * CRIME_LEVEL.CHAOS_PUSH * 0.5;
+    pushQoL += chaosWeight * CRIME_LEVEL.CHAOS_PUSH * 0.5;
+  }
   if (context.sentiment < CRIME_FACTORS.SENTIMENT_THRESHOLD) {
     var sentimentGap = CRIME_FACTORS.SENTIMENT_THRESHOLD - context.sentiment;
-    baseProperty *= (1 + sentimentGap * CRIME_FACTORS.SENTIMENT_CRIME_FACTOR * 10);
-    baseQoL *= (1 + sentimentGap * CRIME_ADVANCED.QOL_SENTIMENT_SENS * 10);
+    pushProperty += sentimentGap * CRIME_LEVEL.SENTIMENT_PUSH;
+    pushQoL += sentimentGap * CRIME_LEVEL.SENTIMENT_PUSH * 0.5;
   }
+  // Enforcement FIGHTS CAUSES — it can zero out this cycle's push, never sink a hood that has no
+  // cause (the 200-cycle proof: an always-on pull drained the whole city 41 → 16). With no cause
+  // the level is conserved; only the pull toward the city's own median moves it.
+  var enforceP = enforcementPower * CRIME_LEVEL.ENFORCEMENT_PULL + displacement * 2;
+  var enforceV = enforcementPower * CRIME_LEVEL.ENFORCEMENT_PULL * (2 / 3);
+  var enforceQ = enforcementPower * CRIME_LEVEL.ENFORCEMENT_PULL + patrolStrategy.qolReduction * 2;
+  pushProperty -= Math.min(enforceP, Math.max(0, pushProperty));
+  pushViolent -= Math.min(enforceV, Math.max(0, pushViolent));
+  pushQoL -= Math.min(enforceQ, Math.max(0, pushQoL));
 
-  // Weather impacts
+  // reversion toward the city's own median level — the only "centre", and it is the city's
+  var med = (advanced && advanced.cityMedianLevel) || {};
+  var revert = function(level, target) {
+    return (target === null || target === undefined || !isFinite(Number(target))) ? 0 : CRIME_LEVEL.REVERT_RATE * (Number(target) - level);
+  };
+  levelProperty = crimeClampLevel_(levelProperty + crimeCapPush_(pushProperty) + revert(levelProperty, med.property));
+  levelViolent = crimeClampLevel_(levelViolent + crimeCapPush_(pushViolent) + revert(levelViolent, med.violent));
+  levelQoL = crimeClampLevel_(levelQoL + crimeCapPush_(pushQoL) + revert(levelQoL, med.qol));
+
+  // ---- TRANSIENT OVERLAY on this cycle's observed index (not carried) ---------------------------
+  var ovProperty = 1, ovViolent = 1, ovQoL = 1;
+  var baseIncidents = (levelProperty + levelViolent) / 2 * CRIME_LEVEL.INCIDENTS_PER_POINT;
+
   var w = (context.weather || '').toString();
   var precipIntensity = (context.precipIntensity === 0 || context.precipIntensity) ? Number(context.precipIntensity) : 0;
   var windSpeed = (context.windSpeed === 0 || context.windSpeed) ? Number(context.windSpeed) : 5;
-
   var severe = (context.weatherImpact >= 1.4);
   if (w === 'storm' || (severe && precipIntensity >= 0.45)) {
-    baseProperty *= (1 - CRIME_FACTORS.STORM_CRIME_REDUCTION);
-    baseViolent *= (1 - CRIME_FACTORS.STORM_CRIME_REDUCTION);
-    baseQoL *= (1 - Math.min(0.22, CRIME_ADVANCED.QOL_WEATHER_SENS + precipIntensity * 0.15));
+    ovProperty *= (1 - CRIME_FACTORS.STORM_CRIME_REDUCTION);
+    ovViolent *= (1 - CRIME_FACTORS.STORM_CRIME_REDUCTION);
+    ovQoL *= (1 - Math.min(0.22, CRIME_ADVANCED.QOL_WEATHER_SENS + precipIntensity * 0.15));
     baseIncidents = Math.floor(baseIncidents * 0.72);
   } else if (w === 'heatwave' || w === 'hot') {
-    baseViolent *= (1 + Math.max(CRIME_FACTORS.HEATWAVE_CRIME_INCREASE, CRIME_ADVANCED.VIOLENT_HEAT_SENS));
-    baseQoL *= 1.05;
+    ovViolent *= (1 + Math.max(CRIME_FACTORS.HEATWAVE_CRIME_INCREASE, CRIME_ADVANCED.VIOLENT_HEAT_SENS));
+    ovQoL *= 1.05;
     baseIncidents = Math.ceil(baseIncidents * 1.10);
   }
   if (windSpeed >= 30) {
     baseIncidents = Math.max(0, Math.floor(baseIncidents * 0.96));
-    baseQoL *= 0.98;
+    ovQoL *= 0.98;
   }
 
-  // Seasonal impact
   var seasonMod = 1.0;
   var s = (context.season || '').toString().toLowerCase();
   if (s === 'summer') seasonMod = CRIME_FACTORS.SUMMER_CRIME_MOD;
   else if (s === 'winter') seasonMod = CRIME_FACTORS.WINTER_CRIME_MOD;
-  baseProperty *= seasonMod;
-  baseViolent *= seasonMod;
-  baseQoL *= (1 + (seasonMod - 1) * 0.6);
+  ovProperty *= seasonMod;
+  ovViolent *= seasonMod;
+  ovQoL *= (1 + (seasonMod - 1) * 0.6);
 
-  // Events
-  if (events.chaos > 0) {
-    baseProperty *= (1 + events.chaos * CRIME_FACTORS.CHAOS_CRIME_INCREASE);
-    baseViolent *= (1 + events.chaos * CRIME_FACTORS.CHAOS_CRIME_INCREASE * 0.5);
-    baseQoL *= (1 + events.chaos * 0.12);
-    baseIncidents += events.chaos * 2;
-  }
+  if (events.chaos > 0) baseIncidents += events.chaos * 2;
   if (events.celebration > 0) {
-    baseProperty *= (1 + events.celebration * CRIME_FACTORS.CELEBRATION_CRIME_INCREASE);
-    baseQoL *= (1 + events.celebration * CRIME_ADVANCED.QOL_CELEBRATION_SENS * 0.08);
+    ovProperty *= (1 + events.celebration * CRIME_FACTORS.CELEBRATION_CRIME_INCREASE);
+    ovQoL *= (1 + events.celebration * CRIME_ADVANCED.QOL_CELEBRATION_SENS * 0.08);
     baseIncidents += events.celebration;
   }
+  if (pressure > 0) baseIncidents += Math.round(pressure / 6);
 
-  // Lagged economic stress
-  var lag = advanced && advanced.lag ? advanced.lag : null;
-  if (lag) {
-    var econStressLag = Number(lag.economicStressLag || 0);
-    baseProperty *= (1 + econStressLag * CRIME_ADVANCED.PROPERTY_ECON_STRESS_LAG_SENS);
-    baseQoL *= (1 + econStressLag * CRIME_ADVANCED.QOL_ECON_STRESS_LAG_SENS);
-  }
-
-  // Hotspot spillover diffusion
-  var pressure = Number((advanced && advanced.hotspotPressure) || 0);
-  if (pressure > 0) {
-    baseProperty += pressure * 0.55;
-    baseViolent += pressure * 0.30;
-    baseQoL += pressure * 0.65;
-    baseIncidents += Math.round(pressure / 6);
-  }
-
-  // Neighborhood dynamics feedback
   var nd = context.neighborhoodDynamics || {};
   if (nd && typeof nd === 'object') {
     var nightlife = (nd.nightlife === 0 || nd.nightlife) ? Number(nd.nightlife) : 1;
     var publicSpaces = (nd.publicSpaces === 0 || nd.publicSpaces) ? Number(nd.publicSpaces) : 1;
     var traffic = (nd.traffic === 0 || nd.traffic) ? Number(nd.traffic) : 1;
-
-    if (nightlife >= 1.3) {
-      baseQoL *= 1.06;
-      baseViolent *= 1.03;
-      baseIncidents += 1;
-    }
-    if (publicSpaces >= 1.3) {
-      baseProperty *= 1.03;
-      baseQoL *= 1.03;
-    }
-    if (traffic >= 1.3) {
-      baseProperty *= 1.02;
-      baseIncidents += 1;
-    }
+    if (nightlife >= 1.3) { ovQoL *= 1.06; ovViolent *= 1.03; baseIncidents += 1; }
+    if (publicSpaces >= 1.3) { ovProperty *= 1.03; ovQoL *= 1.03; }
+    if (traffic >= 1.3) { ovProperty *= 1.02; baseIncidents += 1; }
   }
 
-  // Momentum
+  // Clearance momentum (same two draws as v1.2, same position)
   if (prev) {
-    baseProperty = prev.propertyCrimeIndex * 0.7 + baseProperty * 0.3;
-    baseViolent = prev.violentCrimeIndex * 0.7 + baseViolent * 0.3;
-
-    if (prev.qualityOfLifeIndex !== undefined) {
-      baseQoL = Number(prev.qualityOfLifeIndex) * 0.7 + baseQoL * 0.3;
-    } else {
-      baseQoL = 50 * 0.7 + baseQoL * 0.3;
-    }
-
     var clearanceDir = (rng() > 0.5) ? 1 : -1;
     var clearanceChange = clearanceDir * rng() * CRIME_FACTORS.CLEARANCE_RECOVERY;
     baseClearance = (prev.clearanceRate || baseClearance) + clearanceChange;
   }
 
-  // Random variance
+  var baseProperty = levelProperty * ovProperty;
+  var baseViolent = levelViolent * ovViolent;
+  var baseQoL = levelQoL * ovQoL;
+
+  // Random variance (same five draws as v1.2, same order)
   baseProperty += (rng() - 0.5) * 6;
   baseViolent += (rng() - 0.5) * 4;
   baseQoL += (rng() - 0.5) * 6;
   baseResponse += (rng() - 0.5) * CRIME_FACTORS.RESPONSE_TIME_VARIANCE;
   baseIncidents += Math.round((rng() - 0.5) * 4);
 
-  // Enforcement capacity + displacement
-  var policingCapacity = advanced && advanced.policingCapacity ? advanced.policingCapacity : derivePolicingCapacity_({}, {}, { name: 'balanced' });
-  var cityLoad = advanced && advanced.cityLoad ? advanced.cityLoad : { loadRatio: 0.5 };
-  var patrolStrategy = advanced && advanced.patrolStrategy ? advanced.patrolStrategy : { name: 'balanced', displacementMult: 1.0, clearanceMult: 1.0, qolReduction: 0 };
-
   var loadProxy = Math.max(0, baseIncidents) * CRIME_ADVANCED.UNITS_PER_INCIDENT;
-  var enforcementShare = clamp01_(policingCapacity.neighborhoodShare[neighborhood] || policingCapacity.defaultNeighborhoodShare);
-  var enforcementPower = clamp01_(enforcementShare * policingCapacity.strength);
 
-  // Overload penalties
+  // Overload penalties (response / clearance are same-cycle readings, not carried levels)
   var overload = clamp01_(cityLoad.loadRatio);
   baseResponse += overload * CRIME_ADVANCED.OVERLOAD_RESPONSE_PENALTY;
   baseClearance -= overload * CRIME_ADVANCED.OVERLOAD_CLEARANCE_PENALTY;
-
-  // Enforcement improves clearance (modified by strategy)
   baseClearance += enforcementPower * CRIME_ADVANCED.ENFORCEMENT_BOOST_CLEARANCE * patrolStrategy.clearanceMult;
-  baseProperty *= (1 - enforcementPower * 0.06);
-  baseQoL *= (1 - enforcementPower * 0.07);
-
-  // Community presence strategy reduces QoL issues specifically
-  baseQoL *= (1 - patrolStrategy.qolReduction);
-
-  // Displacement (modified by strategy)
-  var displacement = enforcementPower * CRIME_ADVANCED.DISPLACEMENT_RATE * patrolStrategy.displacementMult;
-  baseProperty *= (1 - displacement * 0.4);
-  baseQoL *= (1 - displacement * 0.5);
 
   // Reporting model
   var reportingSignal = (advanced && advanced.reportingSignal) ? advanced.reportingSignal : { reportingMultiplier: 1, effectiveRate: CRIME_ADVANCED.BASE_REPORTING_RATE };
@@ -483,7 +552,11 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
     violentCrimeIndex: Math.max(5, Math.min(95, Math.round(baseViolent))),
     responseTimeAvg: Math.max(3, Math.min(15, Math.round(baseResponse * 10) / 10)),
     clearanceRate: Math.max(0.15, Math.min(0.7, Math.round(baseClearance * 100) / 100)),
-    incidentCount: Math.max(0, trueIncidents)
+    incidentCount: Math.max(0, trueIncidents),
+    // engine.212: the carried levels
+    propertyLevel: Math.round(levelProperty * 100) / 100,
+    violentLevel: Math.round(levelViolent * 100) / 100,
+    qolLevel: Math.round(levelQoL * 100) / 100
   };
 
   // Additive fields
@@ -511,7 +584,10 @@ function calculateNeighborhoodCrime_(neighborhood, profile, demo, prev, context,
     unemploymentRate: Math.round(unemploymentRate * 1000) / 1000,
     youthRatio: Math.round(youthRatio * 1000) / 1000,
     hotspotPressure: Math.round(pressure * 100) / 100,
-    econStressLag: lag ? Math.round(Number(lag.economicStressLag || 0) * 100) / 100 : 0
+    econStressLag: Math.round(econStressLag * 100) / 100,
+    // engine.212: what moved the level this cycle (signed, pre-cap) and the city centre it leans on
+    levelPush: { property: Math.round(pushProperty * 100) / 100, violent: Math.round(pushViolent * 100) / 100, qol: Math.round(pushQoL * 100) / 100 },
+    cityMedianLevel: { property: med.property == null ? null : Math.round(med.property * 100) / 100, violent: med.violent == null ? null : Math.round(med.violent * 100) / 100 }
   };
 
   return out;

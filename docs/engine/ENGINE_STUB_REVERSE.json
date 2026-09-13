@@ -2,7 +2,7 @@
   "generated": "2026-09-13",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1370,
+  "functionsMapped": 1377,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -850,6 +850,7 @@
         "phase05-citizens/migrationTrackingEngine.js::processSettledInCheck_",
         "phase05-citizens/processAdvancementIntake.js::queueHouseholdIntake_",
         "phase05-citizens/runConductEngine.js::runConductEngine_",
+        "phase05-citizens/runNeighborhoodEngine.js::hoodCrimeBar_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
         "phase06-analysis/economicRippleEngine.js::primarySportsZone_",

@@ -32,6 +32,8 @@ pointers:
 
 **Author:** codex. **Terminal/reviewer/engine lander:** engine-sheet.
 
+**Current execution authority (Mike-direct, 2026-09-13 14:34):** codex leads engine.201 and has substrate, commit, deployment, bench and Sheet authority. Engine-sheet is optional execution support. Sim decisions on pressure and bond contact remain Mike's rulings; live C107 has not fired. The earlier review/lander assignment above records the original package.
+
 **Status:** ACCEPTED IN PART by engine-sheet S449 (2026-09-13). Findings D1–D14 verified in code; the repair was cut to widening the existing engine.176 pressure mechanism (no new phase, files, envelope, receipts or migration) and shipped as engine.201 PROD @77 — see [[2026-09-10-inactivity-is-regression]] §BUILD SPEC. Deferred: A3 receipts/settledThrough, A4 exp curve, B4 all-ledger evaluation phase. Original status: research complete; proposed implementation awaited Claude review and builder approval. No engine, schema, classifier, cron, Sheet, or deployment changed by this package. Diagnostic code only runs locally against in-memory fixtures and a historical snapshot.
 
 **Tracking:** Supplement to existing `engine.201`, prerequisite to closing `engine.197`. The owning plan links here. No competing rollout item. Suggested replacement row for Claude upon acceptance:
@@ -311,6 +313,7 @@ Approve or amend the five contract choices above, then authorize one bounded imp
 ## Changelog
 
 - 2026-09-13 (codex) — Completed source review, historical pool reproduction, defect probes and proposed engine.201 repair sequence; submitted for Claude review, implementation unstarted.
+- 2026-09-13 (codex) — Took execution lead; repaired S453 conduct scan and Deceased gate with failing-before regressions; deployment proof pending below.
 
 ## Final verification note — 2026-09-13 (codex)
 
@@ -331,3 +334,40 @@ The final tracker recheck at HEAD `d95f42d5` reports **19 oversized rows**, incl
 **Acceptance evidence.** The proofs to date count dial-contribution signs (traffic), not distinct citizens. @79 has one bench cycle; the multi-cycle runs included the retag and unpin remap since cut, so they cannot accept the final combination. Acceptance = a fixed cohort traced condition → personal response → persistent change → different later choice, including citizens who receive no wake.
 
 **Already closed from codex's diff review (830e05ac):** absent-POPID owner fallback, non-Active owner closure lines, cross-cause adaptation inheritance, compression erasing the layoff evidence, GC Inactive retag.
+
+## Conduct repair execution — codex, 2026-09-13
+
+**Status:** implemented and locally verified; bench/deployment proof pending. This closes neither pressure/contact decisions nor engine.201 acceptance.
+
+**Change:** `runConductEngine_` rotates its starting ledger position by a Cycle-derived coprime stride. A stable population visits every possible start once per population-length run; the stride spreads short runs rather than shifting the same privileged window one row each Cycle. It traverses existing row references without reordering the ledger. LIMIT remains 3; probability, integrity resolution, severity, tags and write paths are unchanged. Status exactly `Deceased` is skipped before dial lookup or a random draw, matching `updateNamedCitizens_`; Retired and blank legacy Status retain existing eligibility.
+
+**RNG scope:** selection adds no random draw. Changed recipients can have different eligibility/probabilities/resolution branches, so total consumed draws and downstream outcomes are not promised bit-identical to the old biased scan. An all-neutral forced-opportunity control still resolves three events with exactly nine draws.
+
+**Regression proof:** against unchanged engine HEAD `f11e1a12`, the added conduct groups produced 33 passes / 3 failures: full rotation kept selecting the first three rows, short-run coverage reached only those three, and Deceased received a BoundaryCompromised line and write. After the source change: 36/36. Controls cover Retired/Active/blank Status, cap and draws, unchanged row order, recipient/history correspondence and same-Cycle deterministic replay. Node syntax and diff-whitespace checks pass.
+
+**Population probe:** 1,000 seeded Cycle trials, 800 identical synthetic citizens with fixed dials: first 100 / last 100 resolutions changed from 1,140 / 13 to 362 / 388; citizens with no resolution changed from 260 to 19. These are isolated selection trials, not a 1,000-Cycle persistent-city run and not proof of character differentiation.
+
+**Broader checks:** offline `npm test` completed: 228/231 files passed. Failures outside the edited paths: `djDirect.schema-and-slot.test.js` (missing C94 sift fixture), `ingestEdition.test.js` (subprocess did not report the expected ingest-loop/rerun text), `rateEditionCoverage.test.js` (subprocess output assertions). This run does not claim a clean full suite or verified baseline causality for the latter two failures. `docLoopStatus --lint` reports 19 pre-existing oversized rows; engine.201 is not among them. No unrelated row was rewritten.
+
+### Conduct wiring card (Codex verified)
+
+The required Haiku engine-wiring invocation ran but exhausted its 30-turn budget without a usable final card. The following pointers were checked directly against source; they are the wiring evidence for this change.
+
+| Connection | Verified source |
+|---|---|
+| Both Cycle entrypoints call Conduct after Household, before Generational | `phase01-config/godWorldEngine2.js:362`, `phase01-config/godWorldEngine2.js:2107` |
+| Ledger contains every row; named-citizen Status convention excludes Deceased | `phase01-config/initSimulationLedger.js:48`, `phase01-config/godWorldEngine2.js:1655` |
+| Cycle, economic mood, crime state, shared RNG and cap | `phase05-citizens/runConductEngine.js:76`, `phase05-citizens/runConductEngine.js:107`, `utilities/safeRand.js:28` |
+| Rotating scan, Status gate and existing mode/tier/age eligibility | `phase05-citizens/runConductEngine.js:85`, `phase05-citizens/runConductEngine.js:177` |
+| Cached dial read, unchanged ordinary/crime resolution | `utilities/compressLifeHistory.js:1148`, `phase05-citizens/runConductEngine.js:225` |
+| LifeHistory cell plus queued LifeHistory_Log write; ledger dirty flag | `phase05-citizens/runConductEngine.js:285`, `phase05-citizens/runConductEngine.js:325` |
+| Ordinary integrity effects and neighborhood pulse | `utilities/citizenDialMap.js:174`, `utilities/neighborhoodPulseMap.js:44` |
+| Later Cycle netting folds tagged history | `utilities/compressLifeHistory.js:1467` |
+
+### Pending sim rulings and input work
+
+Pressure: decide whether the continuing neighborhood condition adapts after six Cycles independent of event draws, or whether separately experienced incidents should be the unit. Do not silently reinterpret a missed draw as relief.
+
+Bond primitives inspected: Simulation_Ledger HouseholdId is actual membership (`householdFormationEngine.js:575`); the household event summary carries one citizen and generic partner/household text (`runHouseholdEngine.js:610`); shared-arc growth is proximity, not proof of contact (`bondEngine.js:806`); confrontations carry both citizen IDs (`bondEngine.js:1463`). Ask Mike whether shared residence constitutes routine contact and what constitutes demonstrated neglect. Missing generated activity alone is not evidence of neglect. Pair events need identity retained through the producer; parsing generic household prose would reproduce the proxy defect.
+
+Owner/venture input and final fixed-cohort causal acceptance remain open under engine.201. Historical multi-Cycle metrics containing removed retags/remaps cannot accept the current build.

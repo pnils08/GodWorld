@@ -63,6 +63,7 @@ function runConductEngine_(ctx) {
   var iLast = idx('Last');
   var iTier = idx('Tier');
   var iClock = idx('ClockMode');
+  var iStatus = idx('Status');
   var iUNI = idx('UNI (y/n)');
   var iMED = idx('MED (y/n)');
   var iCIV = idx('CIV (y/n)');
@@ -80,6 +81,20 @@ function runConductEngine_(ctx) {
   var cRng = safeRand_(ctx);
   var count = 0;
   var LIMIT = 3; // resolved moral tests per cycle (committed OR resisted)
+
+  // engine.201 S453: spread the capped scan across the ledger each Cycle.
+  // A coprime stride visits every start exactly once per rows.length Cycles;
+  // start near the golden-ratio fraction to spread short runs too. No RNG
+  // draw, row reorder, or persisted cursor. Individual opportunity odds stay.
+  var scanStride = Math.max(1, Math.floor(rows.length * 0.618033988749895));
+  while (scanStride > 1) {
+    var scanA = rows.length, scanB = scanStride;
+    while (scanB) { var scanRem = scanA % scanB; scanA = scanB; scanB = scanRem; }
+    if (scanA === 1) break;
+    scanStride--;
+  }
+  var scanCycle = Math.floor(Number(cycle) || 0);
+  var scanStart = (((scanCycle % rows.length) * scanStride) % rows.length + rows.length) % rows.length;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // POPULATION COUNTERWEIGHT — crime pressure, hood-grain since engine.33 T8.
@@ -160,11 +175,16 @@ function runConductEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (var r = 0; r < rows.length; r++) {
+  for (var scanned = 0; scanned < rows.length; scanned++) {
 
     if (count >= LIMIT) break;
 
+    var r = (scanStart + scanned) % rows.length;
     var row = rows[r];
+
+    // Match updateNamedCitizens_: Retired and legacy blank statuses still
+    // live here; a Deceased citizen never receives another conduct event.
+    if ((row[iStatus] || 'Active') === 'Deceased') continue;
 
     var tier = Number(row[iTier] || 0);
     var mode = (row[iClock] || "").toString().trim();

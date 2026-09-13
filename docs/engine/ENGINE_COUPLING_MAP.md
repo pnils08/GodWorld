@@ -1,7 +1,7 @@
 ---
 title: Engine Coupling Map — how a citizen event becomes a dial, an essence, and a ripple
 created: 2026-06-30
-updated: 2026-06-30
+updated: 2026-09-13
 type: reference
 tags: [engine, citizens, events, dials, coupling, verified]
 sources:
@@ -142,9 +142,10 @@ All are pre-cap multipliers; `null` bands (no DialState) → base rates unchange
 - **Layer 2:** emits `Household`(family:5) / `Health`(composure:-2) / `Recovering`(composure:+2). **Circumstance gating (engine.32 T4):** `MaritalStatus`=married/partnered adds a partnered pool (L508); `NumChildren`>0 adds a parent pool (L512) — but both still emit the `Household` tag, so the column changes the *line*, not the dial. No state mutation.
 
 ### `runConductEngine.js` — VERIFIED
-- **Gate:** ENGINE Tier-3/4 non-UNI/MED/CIV, age ≥16 (L167–171). LIMIT 3/cycle.
+- **Selection (engine.201 S453):** scans from a Cycle-derived coprime-stride offset, spreading the capped scan across the ledger without reordering rows or adding selection RNG draws. The scan retains `LIMIT=3` resolved moral tests per Cycle. This changes who gets an opportunity over successive Cycles; it does not guarantee identical downstream RNG state when different recipients take different resolution branches.
+- **Gate:** all prior mode/tier/age/flag eligibility remains unchanged: ENGINE Tier-3/4, non-UNI/MED/CIV (source L196–207). Known birth years must be age ≥18; an unknown/blank birth year retains the existing behavior and is not age-filtered (L200–201). The scan skips only rows whose `Status` is exactly `Deceased` (L187–190); `Retired` and blank statuses remain eligible for the existing gate path.
 - **Layer 1:** moral-test chance scaled by composure dial + econ mood + **neighborhood crime counterweight** `crimeSpikeFor_` (0.6×hood crimeIndex from prev-cycle Neighborhood_Map + 0.4×citywide Crime_Metrics; a spike *lowers* test rate and commit odds).
-- **Layer 2:** integrity band sets commit-vs-resist + severity; emits `Transgression-*`/`Resisted` → integrity/composure deltas (real dial movement). **Throttle:** `crimeReachable` opens commit only for integrity band −2 (raw <20) per the `getCitizenDialBands_` accessor contract — so ~98% of eligible citizens *always resist*; transgressions arrive via drift to far-low integrity, not dice. Text is pooled (per-severity), not column-keyed.
+- **Layer 2:** `crimeReachable` controls which resolution ladder applies. Non-crime-reachable citizens resolve `BoundaryKept` (+1 integrity) or `BoundaryCompromised` (−1 integrity), with slip odds set by integrity band. Crime-reachable citizens retain the integrity-biased commit-vs-resist ladder and pooled `Transgression-*`/`Resisted` outcomes; the accessor opens crime for integrity band −2, or for integrity band −1 when composure is band −2 (source `utilities/compressLifeHistory.js` L1177–1180). Text is pooled (per outcome), not column-keyed.
 
 ### `runRelationshipEngine.js` — VERIFIED
 - **Gate:** Tier-3/4 ENGINE non-UNI/MED/CIV (L365–367; uses `=== "yes"` exact match — minor inconsistency vs `startsWith("y")` elsewhere). LIMIT 8/cycle.

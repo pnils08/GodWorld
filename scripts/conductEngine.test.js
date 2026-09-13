@@ -214,5 +214,61 @@ console.log('═══ T7 Section 4 — caps, write path, dial-loop closure');
   }
 }
 
+// engine.201 S453 — synthetic, local-only opportunity and lifecycle controls.
+// Force opportunities to isolate the scan from moral odds and dial evolution.
+{
+  const size = 80, totals = Array(size).fill(0), shortSeen = new Set();
+  const ds = dialState({ integrity: 50, composure: 50 });
+  let capAndDraws = true, ledgerStable = true, repeatable = true;
+  for (let cycle = 0; cycle < size; cycle++) {
+    const rows = totals.map((_, i) => makeRow('SYNTHETIC-ROTATE-' + i, ds));
+    const originalRows = rows.slice();
+    const ctx = makeCtx(rows); ctx.summary.absoluteCycle = cycle;
+    let draws = 0; rngImpl = () => { draws++; return 0; }; appended = [];
+    runConductEngine_(ctx);
+    const ids = appended.map(a => a.rowArr[1]);
+    capAndDraws = capAndDraws && ids.length === 3 && draws === 9;
+    ledgerStable = ledgerStable && rows.every((row, i) => row === originalRows[i] &&
+      row[0] === 'SYNTHETIC-ROTATE-' + i &&
+      Boolean(row[HEADERS.indexOf('LifeHistory')]) === ids.includes(row[0]));
+    for (const id of ids) {
+      const i = Number(id.slice('SYNTHETIC-ROTATE-'.length));
+      totals[i]++;
+      if (cycle < 8) shortSeen.add(i);
+    }
+    const again = makeCtx(totals.map((_, i) => makeRow('SYNTHETIC-ROTATE-' + i, ds)));
+    again.summary.absoluteCycle = cycle; rngImpl = () => 0; appended = [];
+    runConductEngine_(again);
+    repeatable = repeatable && JSON.stringify(ids) === JSON.stringify(appended.map(a => a.rowArr[1]));
+  }
+  assert('S453 every ledger position receives equal capped opportunities across a full rotation',
+    totals.every(n => n === 3), JSON.stringify(totals));
+  assert('S453 rotation reaches dispersed citizens in the first eight Cycles',
+    shortSeen.size >= 20 && Math.min(...shortSeen) < 20 && Math.max(...shortSeen) >= 60,
+    JSON.stringify([...shortSeen]));
+  assert('S453 selection retains cap three and nine resolution draws without a shuffle draw', capAndDraws);
+  assert('S453 scan leaves ledger order intact and writes only selected citizens', ledgerStable);
+  assert('S453 the same Cycle and draws reproduce the same recipients', repeatable);
+}
+{
+  function statusTrial(status) {
+    const row = makeRow('SYNTHETIC-STATUS', dialState({ integrity: 50, composure: 50 }));
+    const ctx = makeCtx([row]);
+    ctx.ledger.headers.push('Status'); row.push(status);
+    let draws = 0; rngImpl = () => { draws++; return 0; }; appended = [];
+    runConductEngine_(ctx);
+    return { draws, events: appended.length, life: row[HEADERS.indexOf('LifeHistory')], dirty: ctx.ledger.dirty };
+  }
+  const gone = statusTrial('Deceased');
+  assert('S453 Deceased citizen receives no opportunity, history, write intent, or dirty flag',
+    gone.draws === 0 && gone.events === 0 && gone.life === '' && !gone.dirty, JSON.stringify(gone));
+  for (const status of ['Active', 'Retired', '']) {
+    const alive = statusTrial(status);
+    assert('S453 living Status ' + (status || '(blank legacy)') + ' retains conduct eligibility',
+      alive.draws === 3 && alive.events === 1 && alive.life.includes('[BoundaryCompromised]') && alive.dirty,
+      JSON.stringify(alive));
+  }
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

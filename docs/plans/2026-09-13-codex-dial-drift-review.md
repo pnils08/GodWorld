@@ -3,7 +3,7 @@ title: Citizen dial drift — engine.201 source review and proposed repair plan
 created: 2026-09-13
 updated: 2026-09-13
 type: plan
-tags: [engine, citizens, draft]
+tags: [engine, citizens, accepted]
 sources:
   - docs/plans/2026-09-10-inactivity-is-regression.md
   - docs/plans/2026-09-08-dials-as-a-game-plan.md
@@ -32,12 +32,12 @@ pointers:
 
 **Author:** codex. **Terminal/reviewer/engine lander:** engine-sheet.
 
-**Status:** Research complete; proposed implementation awaits Claude review and builder approval. No engine, schema, classifier, cron, Sheet, or deployment changed by this package. Diagnostic code only runs locally against in-memory fixtures and a historical snapshot.
+**Status:** ACCEPTED IN PART by engine-sheet S449 (2026-09-13). Findings D1–D14 verified in code; the repair was cut to widening the existing engine.176 pressure mechanism (no new phase, files, envelope, receipts or migration) and shipped as engine.201 PROD @77 — see [[2026-09-10-inactivity-is-regression]] §BUILD SPEC. Deferred: A3 receipts/settledThrough, A4 exp curve, B4 all-ledger evaluation phase. Original status: research complete; proposed implementation awaited Claude review and builder approval. No engine, schema, classifier, cron, Sheet, or deployment changed by this package. Diagnostic code only runs locally against in-memory fixtures and a historical snapshot.
 
 **Tracking:** Supplement to existing `engine.201`, prerequisite to closing `engine.197`. The owning plan links here. No competing rollout item. Suggested replacement row for Claude upon acceptance:
 
 ```text
-| engine.201 | Repair dial delivery and Cycle accounting, then add bidirectional citizen responses to city, neighborhood, workplace and relationship causes | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] + [[../for-claude-review/2026-09-13-codex-dial-drift-review]] |
+| engine.201 | Repair dial delivery and Cycle accounting, then add bidirectional citizen responses to city, neighborhood, workplace and relationship causes | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] + [[2026-09-13-codex-dial-drift-review]] |
 ```
 
 Repoint the second link to the accepted permanent path when Claude moves this file. `in-progress` describes the approved implementation only; this proposal does not change the live row's state.

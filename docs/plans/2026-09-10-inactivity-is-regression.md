@@ -1,6 +1,6 @@
 # Inactivity is a regression — the sim's one-way ratchet
 
-**Status:** direction captured, mechanism verified, cuts not yet designed
+**Status:** engine.201 SHIPPED PROD @77 (S449, 2026-09-13) — bench-proven C107–C120; engine.197 still open on openness/sociability downward volume, neutral share, 5 seeded pins (§Acceptance results)
 **Filed:** S443 (2026-09-10), engine-sheet
 **Rows:** engine.197 (dials hard-fail), engine.193 (generators make no depression), engine.194 (sports record channel quiet)
 **Doctrine:** `docs/SIM_DOCTRINE.md` §15 (a gate that can't fire is a trick), §16 (drift over static backfill)
@@ -233,7 +233,7 @@ the engine.188 resting level to within a hundredth
 ## Codex review proposal — 2026-09-13
 
 The source review and proposed repair sequence are ready for Claude review in
-[[for-claude-review/2026-09-13-codex-dial-drift-review]]. This supplements
+[[plans/2026-09-13-codex-dial-drift-review]]. This supplements
 engine.201 under the corrected direction above; implementation remains unapproved.
 The package includes the required wiring card, runnable offline probes, a
 historical C106 reproduction of the full 223/930 wake pool, and adjacent defects.
@@ -297,8 +297,27 @@ Pressure tags carry their cause: `Friction-Rent`, `Strain-Hood`, `Stumble-Jobles
 
 12-cycle bench on live-synced state: 0 Engine_Errors; zero current-value pins at 0 or 100 at the endpoint; negative share ≥ 15% of nonzero signed per-citizen per-dial cycle contributions; every dial shows both signs; all-neutral share and wake-eligible share reported against the pre-fix bench.
 
+## Acceptance results (S449, bench SANDBOX 0908 resynced from live C106 → C118, @18 `f4dba779`; review fixes @19 C119–C120)
+
+| Criterion | Live C106 | Bench C118 | Verdict |
+|---|---|---|---|
+| Engine_Errors (C107–C120) | — | 0 | PASS |
+| Downward share of signed per-citizen per-dial cycle contributions | 5.1% (Wave 1 alone, C107) | 30.0% (C107–C118), 27.5% (C113–C118) | PASS (≥15%) |
+| New pins at 0 / 100 | — | 0 | PASS |
+| Historical pins (base seeded at exactly 100: POP-00001 drive; POP-00170/198/210/231 sociability) | 5 | 5 | OPEN — no downward event reached those dials |
+| Both signs on every dial (C107–C118) | 3 dials up-only | drive +682/−23, soc +699/−2, warmth +229/−403, **openness +392/−0**, composure +144/−372, integrity +58/−13, family +115/−118, outabout +330/−204 | PARTIAL — openness none down, sociability 2 |
+| All-neutral share (8 dials in 40–60) | 546 (59.4%) | 617 (60.0%) | FAIL vs "falls" — plain days no longer move anyone |
+| Deviation ≥ 60 | 226 | 232 | flat |
+
+Seam volumes C107–C118: Career-Layoff 10, Career-Hired 17, Career-FieldChange 4, BoundaryKept 19 / BoundaryCompromised 12, ConnectionWithdrawn 2, RoutineRetrenched 0, ActivityExpanded 323, TrustGuarded 410; pressure records 110 rows (debt 46, hood 35, overwork 23, rent 13, unemployed 5), 56 adapted. Cells: max LifeHistory 3,969 chars, max DialState 697.
+
+**Builder questions this leaves (sim, not mechanism):** (1) openness has no ordinary downward cause at volume — the approved ones (venture closure, field change then layoff) fired 0 times in 12 cycles; (2) sociability down rides bond dormancy, which live has never produced (0 dormant of 606); (3) the five seeded 100s stay until a downward event lands on that dial; (4) whether a mostly-neutral city under plain days is the intended resting state.
+
+Codex adversarial diff review of the build: `output/codex/engine201-diff-review.md` — 4 CONFIRMED + 1 PLAUSIBLE fixed in `830e05ac` (owner POPID fails closed, gone owners excluded, cross-cause seeding, unemployment evidence after trim, inactive retag) plus a 95% pole cap.
+
 ## Changelog
 
 - 2026-09-13 (codex) — Linked the completed engine.201 source review and proposed repair sequence for Claude approval; no implementation or live-state changes.
 - 2026-09-13 (engine-sheet S449) — Codex review accepted in part; builder rulings 1–5 captured; BUILD SPEC Wave 1 (plumbing) + Wave 2 (two-way vocabulary) written; deadline live C107.
 - 2026-09-13 (engine-sheet S449) — Wave 1 bench C107 clean (0 errors, pressure records live, no new pins) but negative share 5.1%; ruling 1b captured; Wave 2 built (table above).
+- 2026-09-13 (engine-sheet S449) — 12-cycle proof + review fixes; PROD @77; acceptance results recorded; engine.201 done-pending-archive, engine.197 open on the four builder questions.

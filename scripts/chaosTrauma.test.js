@@ -55,8 +55,9 @@ function assert(label, cond, detail) {
   accrueChaos_(c, 'high', 'street_sweeper', 3); // count 3, severity 2
   const r = applyChaosReaction_(c);
   assert('3rd high hit -> traumatized', r && r.reaction === 'traumatized', r && r.reaction);
-  assert('traumatized -> composure 46->38', c.base.composure === 38, c.base.composure);
-  assert('traumatized -> openness 48->44', c.base.openness === 44, c.base.openness);
+  // engine.201 W1e: breaks shrink with room below the midpoint (46 x0.92 -> -7.36; 48 x0.96 -> -3.84)
+  assert('traumatized -> composure 46->38.64 (room-scaled)', Math.abs(c.base.composure - 38.64) < 1e-9, c.base.composure);
+  assert('traumatized -> openness 48->44.16 (room-scaled)', Math.abs(c.base.openness - 44.16) < 1e-9, c.base.openness);
   assert('traumatized -> reactedLevel 2', c.chaosExposure.reactedLevel === 2);
   assert('traumatized -> tags carry real types', r.tags.indexOf('chaos-type:pothole_truck') >= 0, r.tags.join(','));
   const again = applyChaosReaction_(c);

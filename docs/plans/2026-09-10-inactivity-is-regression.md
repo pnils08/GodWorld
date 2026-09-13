@@ -243,6 +243,41 @@ this plan are flagged in that review for Claude reconciliation, not silently
 rewritten here. The proposed rollout row remains in the review document;
 the existing tracker row and its state are unchanged.
 
+## BUILD SPEC (engine-sheet S449) — codex review accepted in part, builder rulings 2026-09-13
+
+**Deadline:** bench-proven + PROD before live C107.
+
+**Review disposition.** Diagnosis D1–D14 verified against code (`citizenMemory.js:78-100` streak/harden/clamp; `runCareerEngine.js:275,:1283,:1409` push `logRows` only, nothing replays `LifeHistory_Log` into the cell — `godWorldEngine2.js:1270` intake writer, `citizenContextBuilder.js:492` read-only). Repair plan cut: no new phase, no new files, no `DialState.experience` envelope, no receipts, no 930-row migration. **The engine.176 pressure emitter already reaches every citizen regardless of wake — widen it, don't replace it.** Deferred: A3 receipts/settledThrough (D9/D10: no late writer found; one call per cycle in normal operation), A4 exp curve, B4 all-ledger evaluation phase, X5 schedule parity, X7 posture wake slot.
+
+**Builder rulings (Mike, 2026-09-13):**
+1. Plain days move nothing. `DEFAULT_AMBIENT` and the calm-day composure tints go to `{}`. Narrows the S253 "every logged event must move a dial" rule: real events move dials; a quiet day does not.
+2. Downward causes approved: sociability ← friend/neighbor moves away, bond goes cold (↑ bond holds); openness ← venture/field change fails, retreat to routine; outabout ← hood rougher/pricier, money tight, health limits (↑ hood nightlife/shops pick up); drive ← layoff, run of failed job searches; warmth ← conflict with someone known; family ← long hours crowd out home. Ordinary scale ±1.
+3. Ordinary non-criminal integrity slip for neutral citizens when a real chance comes up, −1.
+4. Dial coupling (S443 "composure low but sociability/drive high") DEFERRED — ship the two-way feed, measure, then decide. A deferral, not an answer.
+5. Chaos_Cars outcomes are never a calm day for the dials.
+
+### Wave 1 — plumbing (bench first, alone)
+
+| ID | Repair | Seam |
+|---|---|---|
+| W1a | Layoffs (both sites), `Career-Hired`, `Career-FieldChange` append the stamped line to the citizen's LifeHistory cell as well as the log. DIAL_MAP: `Career-Hired {drive:4, composure:2}`, `Career-FieldChange {drive:3, openness:3}` | `runCareerEngine.js:275,:1283,:1409` |
+| W1b | A jobless-pool citizen with income > 0 takes `unemployed` pressure when their latest career line (Layoff/Hired/FieldChange) is `Career-Layoff` | `runCareerEngine.js:1315` |
+| W1c | Fold groups stamped entries by cycle, nets each dial per cycle, one reinforcement step per cycle. A push continues a streak only while the dial's residual mood still points the same way; once `settleCycle_` has faded it to 0 the next push starts over. (Revised S449: "any gap resets" left sparse household events unable ever to harden — `engine32MultiCycle` B3 caught it) | `citizenMemory.js applyCycleEffects_`, `foldNewEntries_` |
+| W1d | Harden only when residual mood has the streak's sign; else reset without hardening | `applyEvent_` |
+| W1e | No pins: every signed change is scaled by room toward the edge it approaches, measured on the current value (base+mood): up × min(1,(100−cur)/50), down × min(1,cur/50). Applies to mood (events), base (reflection accretion, chaos reaction) | `citizenMemory.js` |
+| W1f | Pressure per cause: one slot per `popId|slot` (slot `housing` = rent+hood; debt, unemployed, overwork own slots). Run state persisted on `DialState.pressure = {cause:{n,l}}`: consecutive-cycle count survives adapted (silent) cycles; a genuinely absent cycle resets. Legacy rows seed from the text lookback | `emitPressureTag_`, DialState (de)serialize |
+| W1g | Ruling 1: `DEFAULT_AMBIENT {}`; `Background/Daily/Micro-Event/Life Event/Life/Weather {}`; the `quiet|calm|…|rest` content rule removed (also matched "interest", "restaurant") | `citizenDialMap.js` |
+| W1h | Ruling 5: chaos `pulled_over_warning`, `traffic_jam` → `Friction`; `vital_document_delivered` off `Background` | `chaosCarsConfig.js` |
+
+### Wave 2 — two-way vocabulary (bench second)
+
+Pressure tags carry their cause: `Friction-Rent`, `Strain-Hood`, `Stumble-Jobless`, `Strain-Overwork`, … = state effect + cause effect (rent/debt/hood `outabout −1`, unemployed `drive −1`, overwork `family −1`). Health `Hospitalized/Critical` add `outabout −1`. New producers at existing domain seams only, Codex review vocabulary: `ConnectionWithdrawn/ConnectionMaintained` (bonds, migration departures), `RoutineRetrenched` (layoff after a recent field change, venture closure), `TrustGuarded` (bond conflict outcome), `ActivityExpanded` (hood nightlife/retail in the city's top band — relative, §15), `BoundaryCompromised −1` (conduct engine, ruling 3). Seams to be wired against the code before cutting.
+
+### Acceptance (engine.197 criteria, unchanged)
+
+12-cycle bench on live-synced state: 0 Engine_Errors; zero current-value pins at 0 or 100 at the endpoint; negative share ≥ 15% of nonzero signed per-citizen per-dial cycle contributions; every dial shows both signs; all-neutral share and wake-eligible share reported against the pre-fix bench.
+
 ## Changelog
 
 - 2026-09-13 (codex) — Linked the completed engine.201 source review and proposed repair sequence for Claude approval; no implementation or live-state changes.
+- 2026-09-13 (engine-sheet S449) — Codex review accepted in part; builder rulings 1–5 captured; BUILD SPEC Wave 1 (plumbing) + Wave 2 (two-way vocabulary) written; deadline live C107.

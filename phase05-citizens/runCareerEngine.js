@@ -174,6 +174,25 @@ function hireSlotOrder_(a, b) {
   return a.pop < b.pop ? -1 : 1;
 }
 
+// engine.201 W1a (S449): a job loss or hire is a life event, so it lands in the citizen's
+// own LifeHistory cell — the only place the Phase-9 dial fold reads. Before S449 these
+// went to LifeHistory_Log alone and Career-Layoff's dial entry could never fire.
+function appendCareerLifeLine_(ctx, row, iLife, cycle, tag, text) {
+  if (!row || iLife < 0) return;
+  var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+  var line = stamp + ' — [' + tag + '] ' + text;
+  row[iLife] = row[iLife] ? String(row[iLife]) + '\n' + line : line;
+}
+
+// engine.201 W1b: true when the citizen's most recent career move on record is a layoff.
+var CAREER_MOVE_RE = /\[(Career-Layoff|Career-Hired|Career-FieldChange)\]/g;
+function latestCareerMoveIsLayoff_(lifeHistory) {
+  var s = String(lifeHistory || ''), last = null, m;
+  CAREER_MOVE_RE.lastIndex = 0;
+  while ((m = CAREER_MOVE_RE.exec(s)) !== null) last = m[1];
+  return last === 'Career-Layoff';
+}
+
 function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
   var out = { promotions: 0, layoffs: 0, businesses: 0 };
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
@@ -272,7 +291,9 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
       vRow[iIncome] = Math.round((Number(vRow[iIncome]) || 0) * (0.80 + roll() * 0.08)); // −12–20%, the reconciliation's cut
       vRow[iEmp] = '';
       if (iLastUpd >= 0) vRow[iLastUpd] = ctx.now;
-      logRows.push([ctx.now, vRow[iPop], '', 'Career-Layoff', 'Let go as ' + b.name + ' pulled back', '', cycle]);
+      var layoffText = 'Let go as ' + b.name + ' pulled back';
+      appendCareerLifeLine_(ctx, vRow, iLife, cycle, 'Career-Layoff', layoffText); // engine.201 W1a: the fold reads the cell, not the log
+      logRows.push([ctx.now, vRow[iPop], '', 'Career-Layoff', layoffText, '', cycle]);
       if (!S.careerSignals.businessDeltas[ids[k]]) S.careerSignals.businessDeltas[ids[k]] = { gained: 0, lost: 0 };
       S.careerSignals.businessDeltas[ids[k]].lost += 1;
       S.careerSignals.layoffs += 1;
@@ -1280,10 +1301,8 @@ function runCareerEngine_(ctx) {
         }
         hRow[iLastUpd] = ctx.now;
         var bizName = String(bNm >= 0 ? (bizData[br3][bNm] || bizId2) : bizId2);
-        logRows.push([
-          ctx.now, hRow[iPopID], '',
-          isCross ? 'Career-FieldChange' : 'Career-Hired',
-          isCross
+        var hireTag = isCross ? 'Career-FieldChange' : 'Career-Hired';
+        var hireText = isCross
             ? 'Changed fields — hired at ' + bizName + ' (' + cat + ')'
             : 'Hired at ' + bizName + (
                 // engine.151: the rung counted when the one left out was poorer on the raw band
@@ -1291,9 +1310,9 @@ function runCareerEngine_(ctx) {
                   ? ' (Tier ' + pool[hIdx].tier + ' counted)' :
                 (leftOut && hireIncomeBand_(leftOut.income, leftOut.tier) === hireIncomeBand_(pool[hIdx].income, pool[hIdx].tier) &&
                  (Number(leftOut.edu) || 0) < (Number(pool[hIdx].edu) || 0) && pool[hIdx].eduLabel)
-                  ? ' (the ' + pool[hIdx].eduLabel + ' counted)' : ''),
-          '', cycle
-        ]);
+                  ? ' (the ' + pool[hIdx].eduLabel + ' counted)' : '');
+        appendCareerLifeLine_(ctx, hRow, iLife, cycle, hireTag, hireText); // engine.201 W1a
+        logRows.push([ctx.now, hRow[iPopID], '', hireTag, hireText, '', cycle]);
         if (!S.careerSignals.businessDeltas[bizId2]) S.careerSignals.businessDeltas[bizId2] = { gained: 0, lost: 0 };
         S.careerSignals.businessDeltas[bizId2].gained += 1; // reconcile below grows stated with the hire
         S.careerSignals.transitions += 1;
@@ -1312,7 +1331,10 @@ function runCareerEngine_(ctx) {
       // the cause is no work AND no money coming in — the live pool is 19 self-employed
       // creatives at $55-90k (measured S438); an influencer without an EmployerBizId is
       // not jobless. Income 0 is the ledger's own record of a citizen out of work.
-      if (pool[up].income > 0) continue;
+      // engine.201 W1b (S449): EXCEPT a citizen the engine itself laid off. Both layoff paths
+      // keep 80-88% of pay, so the income test alone never saw them — the recorded job
+      // loss (latest career line is Career-Layoff, no hire since) is the evidence instead.
+      if (pool[up].income > 0 && !latestCareerMoveIsLayoff_(rows[pool[up].r][iLife])) continue;
       if (emitPressureTag_(ctx, rows[pool[up].r], iLife, pool[up].pop, 'unemployed', pressureText_('unemployed', cycle + up))) unmatched++;
     }
     S.careerSignals.rehires = { hired: hired, crossField: crossField, unemployedPool: pool.length, pressureTagged: unmatched };
@@ -1405,11 +1427,9 @@ function runCareerEngine_(ctx) {
         if (vIncome > 0) vRow[iIncome] = Math.round(vIncome * (0.80 + roll() * 0.08)); // same cut as the layoff path
         vRow[iEmployerBizId] = '';
         vRow[iLastUpd] = ctx.now;
-        logRows.push([
-          ctx.now, vRow[iPopID], '', 'Career-Layoff',
-          'Lost their job when ' + fInfo.name + ' cut ' + shortfall + ' position' + (shortfall > 1 ? 's' : ''),
-          '', cycle
-        ]);
+        var cutText = 'Lost their job when ' + fInfo.name + ' cut ' + shortfall + ' position' + (shortfall > 1 ? 's' : '');
+        appendCareerLifeLine_(ctx, vRow, iLife, cycle, 'Career-Layoff', cutText); // engine.201 W1a
+        logRows.push([ctx.now, vRow[iPopID], '', 'Career-Layoff', cutText, '', cycle]);
         if (!S.careerSignals.businessDeltas[fBizId]) S.careerSignals.businessDeltas[fBizId] = { gained: 0, lost: 0 };
         S.careerSignals.businessDeltas[fBizId].lost += 1; // Phase-6 ripple sees the contraction; stated is already reconciled
         S.careerSignals.layoffs += 1;

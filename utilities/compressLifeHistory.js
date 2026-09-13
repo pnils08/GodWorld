@@ -1239,6 +1239,7 @@ function serializeDialState_(c) {
   if (c.folded > 0) o.folded = c.folded;
   if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
   if (c.maneuver) o.maneuver = c.maneuver; // engine.157 posture memory {p, g, a, c} — additive, never wiped
+  if (c.pressure) o.pressure = c.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}} — written by emitPressureTag_ in Phase 5
   return JSON.stringify(o);
 }
 
@@ -1459,20 +1460,40 @@ function foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly) {
 // engine.177 (S438): the watermark fold. newEntries = stamped entries with
 // cycle > c.folded, in LifeHistory order (oldest first). Each folds exactly once
 // because the watermark moves to the highest cycle folded. Returns unlived captured.
+// engine.201 W1c (S449): entries fold PER CYCLE — each cycle's lines are netted per dial
+// and applied once (applyCycleEffects_), so reinforcement counts experienced cycles, not
+// log volume; a streak survives only while the last swing is still felt. Cycles apply in
+// ascending order whatever order the lines sit in the cell.
 function foldNewEntries_(c, newEntries, regs) {
-  var captured = 0, maxCycle = c.folded || 0;
+  var captured = 0, lastCycle = c.folded || 0;
+  var byCycle = {}, cycles = [];
   for (var i = 0; i < newEntries.length; i++) {
     var e = newEntries[i];
-    captured += foldOneEntry_(c, e, regs);
-    if (e.cycle > maxCycle) maxCycle = e.cycle;
+    captured += captureUnlived_(e, regs);
+    if (!byCycle[e.cycle]) { byCycle[e.cycle] = {}; cycles.push(e.cycle); }
+    var fx = nudgesForEvent_(e.tag, 1, e.text);
+    for (var d in fx) {
+      if (fx.hasOwnProperty(d) && fx[d]) byCycle[e.cycle][d] = (byCycle[e.cycle][d] || 0) + fx[d];
+    }
   }
-  c.folded = maxCycle;
+  cycles.sort(function(a, b) { return a - b; });
+  for (var k = 0; k < cycles.length; k++) {
+    var cy = cycles[k];
+    applyCycleEffects_(c, byCycle[cy]);
+    if (cy > lastCycle) lastCycle = cy;
+  }
+  c.folded = lastCycle;
   return captured;
 }
 
 // One entry -> applyEvent_ (structural markers map to {} -> no-op) + B3 unlived capture.
 function foldOneEntry_(c, e, regs) {
   applyEvent_(c, { label: e.tag, effects: nudgesForEvent_(e.tag, 1, e.text) });
+  return captureUnlived_(e, regs);
+}
+
+// engine.38 B3 unlived capture for one entry (shared by the legacy and per-cycle folds).
+function captureUnlived_(e, regs) {
   if (regs && UNLIVED_BRANCH_TAGS[String(e.tag || '').toLowerCase()]) {
     regs.unlived.push({
       tag: String(e.tag),

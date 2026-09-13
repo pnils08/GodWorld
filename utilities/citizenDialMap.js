@@ -1,10 +1,12 @@
 /**
  * citizenDialMap.js v2 — event tag/text -> { dial: delta } (engine.31, S253).
  *
- * RULE (Mike, S253): every event ever logged to a citizen MUST move a dial.
- * Nothing the engine has ever emitted — current or legacy — is dead output.
- * The ONLY inert entries are structural markers (Compressed / CareerState):
- * those are summaries OF events, not events, and mapping them would double-count.
+ * RULE (Mike, S253, NARROWED by builder ruling 2026-09-13 / engine.201): every REAL event
+ * logged to a citizen moves a dial. A plain day does not — the quiet-day tints
+ * (Background/Daily/Micro-Event/Life Event/Life/Weather) and an unmatched line resolve to {}.
+ * The always-on +composure drip outran every negative cause (population composure 59.8 on
+ * the C131 bench) — the same always-on shape engine.188 cut out of sentiment.
+ * Structural markers (Compressed / CareerState) stay inert: summaries OF events.
  *
  * Three resolution stages (in order):
  *   1. exact/normalized TAG  -> DIAL_MAP (+ edition + calendar-suffix handling)
@@ -73,6 +75,8 @@ var DIAL_MAP = {
   'Maneuver-Hold':      { composure: 1 },
   'PostCareer':         { family: 4, openness: 2 },
   'Career-Layoff':      { composure: -5, drive: -2 },  // engine.176: a layoff is a Setback with a drive cost (applyBusinessDynamics sheds)
+  'Career-Hired':       { drive: 4, composure: 2 },    // engine.201 W1a: rehire matcher — reaches the LifeHistory cell since S449
+  'Career-FieldChange': { drive: 3, openness: 3 },     // engine.201 W1a: a hire into a new field (same shape as Career-Transition)
 
   // --- Health / Composure ---
   'Health':             { composure: -2 },
@@ -142,19 +146,20 @@ var DIAL_MAP = {
   'Disappointment':     { composure: -2 },              // a hoped-for thing didn't land
   'Ailment':            { composure: -1 },              // an ordinary cold/ache (not Health/Critical)
 
-  // --- Ambient / daily life (small but NEVER zero — a quiet life IS a calm person) ---
-  'Background':         { composure: 1 },              // ordinary days at park/home -> settled (engine.176 tint)
-  'Daily':              { composure: 1 },              // quiet moment at home (engine.176 tint; was composure 2 + family 1)
-  'Micro-Event':        { composure: 1 },              // "quiet week, no major changes"
-  'Life Event':         { composure: 1 },
-  'Life':               { composure: 1 },
+  // --- Ambient / daily life. engine.201 ruling 1 (2026-09-13): a plain day moves nothing.
+  //     Entries kept (explicitly empty) so they read as known tags, not unmapped lines. ---
+  'Background':         {},                            // ordinary days at park/home
+  'Daily':              {},                            // quiet moment at home
+  'Micro-Event':        {},                            // "quiet week, no major changes"
+  'Life Event':         {},
+  'Life':               {},
   'Personal':           { openness: 1 },               // introspection / reflection (engine.176 tint)
   'PrevEvening':        { outabout: 1 },                // out in last night's city (engine.176 tint)
   'FirstFriday':        { outabout: 1 },                // the First Friday art walk (engine.176 tint)
   'Holiday':            { outabout: 1 },                // engine.176 tint
   'CreationDay':        { outabout: 1 },                // engine.176 tint
   'Sports':             { outabout: 1 },                // at / following the game (engine.176 tint)
-  'Weather':            { composure: 1 },               // attuned to place
+  'Weather':            {},                             // a plain day with weather in it (ruling 1)
   'Arrival':            { openness: 3 }                 // arrived in Oakland -> new start
 };
 
@@ -194,12 +199,14 @@ var CONTENT_RULES = [
   { re: /recognition|award|featured|honored|spotlight|public/,                fx: { sociability: 4 } },
   { re: /misunderstanding|conflict|argument|dispute|scandal/,                  fx: { composure: -4 } },
   { re: /tier 2|tier 3|tier 4|tier 5|advanced|elevated/,                       fx: { drive: 6 } },
-  { re: /relative|friend|neighbor|community|gathering/,                        fx: { sociability: 3, warmth: 2 } },
-  { re: /quiet|calm|unwind|routine|uneventful|relax|at home|rest/,             fx: { composure: 2 } }
+  { re: /relative|friend|neighbor|community|gathering/,                        fx: { sociability: 3, warmth: 2 } }
+  // engine.201 ruling 1: the quiet|calm|...|rest rule is gone — a plain day moves nothing
+  // (it also matched "interest", "restaurant", "forest").
 ];
 
-// Any non-structural event that matched nothing above = an ordinary logged day.
-var DEFAULT_AMBIENT = { composure: 1 };
+// Any non-structural event that matched nothing above = an ordinary logged day, which
+// moves nothing (engine.201 ruling 1). Was { composure: 1 } — the drip.
+var DEFAULT_AMBIENT = {};
 
 // Calendar suffixes are TEXTURE: a Career event on a holiday is still a Career
 // memory. Strip a known calendar half and route by the base tag. (Must NOT strip
@@ -232,14 +239,14 @@ function scale_(fx, mult) {
 
 // tag (+ optional text) -> { dial: delta }. severityMult scales (default 1).
 // Resolution: structural -> {} ; edition ; exact/normalized tag ; content rules ;
-// default ambient. Every NON-structural event returns at least a small nudge.
+// default ambient ({} since engine.201 ruling 1 — a plain day moves nothing).
 function nudgesForEvent_(tag, severityMult, text) {
   var tagS = String(tag == null ? '' : tag).trim();
   if (!tagS) return {};
   var norm = baseTag_(tagS);
   if (STRUCTURAL[norm] === true) return {};               // Compressed / CareerState
   if (EDITION_RE.test(tagS)) return scale_(EDITION_FX, severityMult);
-  if (DIAL_MAP[norm]) return scale_(DIAL_MAP[norm], severityMult);
+  if (DIAL_MAP.hasOwnProperty(norm)) return scale_(DIAL_MAP[norm], severityMult);
 
   // content routing on tag + text (handles Untagged / EngineEvent / sentence-tags)
   var hay = (tagS + ' ' + (text == null ? '' : String(text))).toLowerCase();
@@ -334,20 +341,72 @@ function pressureBar_(ctx, key) {
   return v;
 }
 
+// engine.201 W1f (S449): pressure is tracked PER CAUSE. rent and hood are one lived
+// exposure (housing) and share a slot; debt, unemployment and overwork are independent —
+// before S449 a hood line claimed the citizen's only slot and erased their overwork.
+var PRESSURE_SLOT = { rent: 'housing', hood: 'housing' };
+
+// Consecutive text-tagged cycles ending at cycle-1 — seeds a cause's run for a row that
+// has no persisted record yet (rows written before S449).
+function pressureRun_(lifeHistory, cycle) {
+  var lines = String(lifeHistory || '').split('\n');
+  var tagged = {};
+  for (var i = lines.length - 1; i >= 0 && i >= lines.length - PRESSURE_SCAN_LINES; i--) {
+    if (!PRESSURE_RE.test(lines[i])) continue;
+    var c = pressureAbsCycle_(lines[i]);
+    if (c != null && c < cycle) tagged[c] = true;
+  }
+  var run = 0;
+  for (var back = 1; back <= PRESSURE_ADAPT + 1; back++) { if (tagged[cycle - back]) run++; else break; }
+  return run;
+}
+
+// engine.201 W1f: the cause's run lives on DialState.pressure[cause] = { n, l } — n = the
+// consecutive cycles the condition has held (this one included), l = last cycle it held.
+// An adapted citizen writes no line, but the record still advances, so a silent adapted
+// cycle is no longer mistaken for relief (before S449 adaptation lasted exactly one cycle,
+// then the pressure restarted). A cycle the cause was genuinely absent breaks the run.
+// Returns n, or null when the row has no DialState to carry it (text lookback decides).
+function pressureRunFromState_(ctx, row, iLife, cause, cycle) {
+  var headers = ctx && ctx.ledger && ctx.ledger.headers;
+  var iDS = headers && headers.indexOf ? headers.indexOf('DialState') : -1;
+  if (iDS < 0 || !row[iDS]) return null;
+  var ds;
+  try { ds = JSON.parse(String(row[iDS])); } catch (e) { return null; }
+  if (!ds || typeof ds !== 'object') return null;
+  var rec = ds.pressure && ds.pressure[cause];
+  var n;
+  if (rec && Number(rec.l) === cycle) return Number(rec.n) || 1;        // same cycle re-entry: no double count
+  if (rec && Number(rec.l) === cycle - 1) n = (Number(rec.n) || 0) + 1;
+  else if (rec) n = 1;
+  else {
+    var run = pressureRun_(row[iLife], cycle);
+    n = run > 0 ? run + 1 : (pressureState_(row[iLife], cycle) === 'ongoing' ? 2 : 1);
+  }
+  if (!ds.pressure || typeof ds.pressure !== 'object') ds.pressure = {};
+  ds.pressure[cause] = { n: n, l: cycle };
+  row[iDS] = JSON.stringify(ds);
+  return n;
+}
+
 function emitPressureTag_(ctx, row, iLife, popId, cause, text, opts) {
   if (!ctx || !row || iLife < 0 || !popId) return null;
   var S = ctx.summary || (ctx.summary = {});
   if (!S.pressureTagged) S.pressureTagged = {};
-  if (S.pressureTagged[popId]) return null;
+  var slotKey = popId + '|' + (PRESSURE_SLOT[cause] || cause);
+  if (S.pressureTagged[slotKey]) return null;
   var cycle = Number(S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || 0);
-  var state = pressureState_(row[iLife], cycle);
   if (!S.pressureCounts) S.pressureCounts = {};
-  if (state === 'adapted' && !PRESSURE_NO_ADAPT[cause]) { S.pressureCounts[cause + ':adapted'] = (S.pressureCounts[cause + ':adapted'] || 0) + 1; S.pressureTagged[popId] = 'adapted'; return null; }
+  var n = pressureRunFromState_(ctx, row, iLife, cause, cycle);
+  var state;
+  if (n == null) state = pressureState_(row[iLife], cycle);              // no DialState: legacy text lookback
+  else state = n > PRESSURE_ADAPT ? 'adapted' : (n > 1 ? 'ongoing' : 'none');
+  if (state === 'adapted' && !PRESSURE_NO_ADAPT[cause]) { S.pressureCounts[cause + ':adapted'] = (S.pressureCounts[cause + ':adapted'] || 0) + 1; S.pressureTagged[slotKey] = 'adapted'; return null; }
   var tag = state === 'ongoing' ? PRESSURE_ONGOING : (PRESSURE_FIRST[cause] || 'Friction');
   var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
   var line = stamp + ' — [' + tag + '] ' + text;
   row[iLife] = row[iLife] ? row[iLife] + '\n' + line : line;
-  S.pressureTagged[popId] = tag;
+  S.pressureTagged[slotKey] = tag;
   S.pressureCounts[cause + ':' + tag] = (S.pressureCounts[cause + ':' + tag] || 0) + 1;
   if (typeof queueAppendIntent_ === 'function') {
     queueAppendIntent_(ctx, 'LifeHistory_Log',
@@ -374,7 +433,7 @@ function pressureText_(cause, seed) {
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     emitPressureTag_: emitPressureTag_, pressureState_: pressureState_, pressureAbsCycle_: pressureAbsCycle_,
-    pressureBar_: pressureBar_, pressureText_: pressureText_, PRESSURE_ADAPT: PRESSURE_ADAPT, PRESSURE_LOOKBACK: PRESSURE_LOOKBACK, PRESSURE_NO_ADAPT: PRESSURE_NO_ADAPT,
+    pressureBar_: pressureBar_, pressureText_: pressureText_, pressureRun_: pressureRun_, pressureRunFromState_: pressureRunFromState_, PRESSURE_SLOT: PRESSURE_SLOT, PRESSURE_ADAPT: PRESSURE_ADAPT, PRESSURE_LOOKBACK: PRESSURE_LOOKBACK, PRESSURE_NO_ADAPT: PRESSURE_NO_ADAPT,
     DIAL_MAP: DIAL_MAP, CONTENT_RULES: CONTENT_RULES, STRUCTURAL: STRUCTURAL,
     EDITION_RE: EDITION_RE, CALENDAR_SUFFIXES: CALENDAR_SUFFIXES, DEFAULT_AMBIENT: DEFAULT_AMBIENT,
     baseTag_: baseTag_, nudgesForEvent_: nudgesForEvent_,

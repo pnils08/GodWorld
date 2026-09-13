@@ -71,17 +71,32 @@ function newCitizen_(base) {
 // where a dial sits RIGHT NOW = permanent self + current swing
 function current_(c, dial) { return clamp100_(c.base[dial] + c.mood[dial]); }
 
+// engine.201 W1e (S449): every signed change shrinks as the CURRENT value (base+mood)
+// nears the edge it is heading for — full size up to the midpoint, zero at the pole.
+// engine.177 gave only base this room, so base+mood still clamped at 100 (5 live pins at
+// C106, 32 on the C131 bench). Toward-middle changes keep full size, so any extreme can
+// recover. Never overshoots while |delta| <= 50.
+function roomScaled_(cur, delta) {
+  if (!delta) return 0;
+  var r = delta > 0 ? (100 - cur) / 50 : cur / 50;
+  if (r > 1) r = 1;
+  if (r < 0) r = 0;
+  return delta * r;
+}
+
 // event = { label, effects: { dial: deltaInt, ... } } — effects come from citizenDialMap.
 // Chaos exposure does NOT route through here (the fold sees only the col-O primary tag,
 // which can't distinguish a chaos Setback from an ordinary one). The accumulator is fed
 // at chaos-cars emission time via accrueChaos_ below — see header note.
+// The Phase-9 fold calls this ONCE PER CYCLE with that cycle's netted effects
+// (compressLifeHistory.js foldNewEntries_), so a streak counts cycles, not log lines.
 function applyEvent_(c, event) {
   var fx = (event && event.effects) || {};
   for (var d in fx) {
     if (!fx.hasOwnProperty(d) || c.base[d] == null) continue;
     var delta = fx[d];
     if (!delta) continue;
-    c.mood[d] += delta;
+    c.mood[d] += roomScaled_(current_(c, d), delta);
     // reinforcement: same direction again -> streak builds; a flip resets it
     if (delta > 0) c.streak[d] = c.streak[d] >= 0 ? c.streak[d] + 1 : 1;
     else c.streak[d] = c.streak[d] <= 0 ? c.streak[d] - 1 : -1;
@@ -90,14 +105,36 @@ function applyEvent_(c, event) {
     // 0/100) so accumulation approaches an extreme and never pins it — the bounded
     // accumulator every source game keeps (research4_1 §3). Hardening back toward
     // the middle keeps full room, so a pinned citizen can always recover.
+    // engine.201 W1d (S449): only the swing that points the streak's way hardens. A
+    // positive streak sitting on a large negative residual mood no longer bakes the
+    // negative residual into base — the sequence just ends.
     if (Math.abs(c.streak[d]) >= HARDEN_STREAK) {
-      var towardEdge = (c.mood[d] > 0) === (c.base[d] >= MIDPOINT);
-      var room = towardEdge ? (1 - Math.abs(c.base[d] - MIDPOINT) / 50) : 1;
-      c.base[d] = clamp100_(c.base[d] + c.mood[d] * HARDEN_FRACTION * room);
-      c.mood[d] = c.mood[d] * (1 - HARDEN_FRACTION);
+      if (c.mood[d] !== 0 && (c.mood[d] > 0) === (c.streak[d] > 0)) {
+        var towardEdge = (c.mood[d] > 0) === (c.base[d] >= MIDPOINT);
+        var room = towardEdge ? (1 - Math.abs(c.base[d] - MIDPOINT) / 50) : 1;
+        c.base[d] = clamp100_(c.base[d] + c.mood[d] * HARDEN_FRACTION * room);
+        c.mood[d] = c.mood[d] * (1 - HARDEN_FRACTION);
+      }
       c.streak[d] = 0;
     }
   }
+}
+
+// engine.201 W1c (S449): one cycle of lived experience. netFx = the cycle's summed
+// { dial: delta }, applied once — three lines in one cycle are one step, not a habit.
+// A push continues a streak only while the previous swing is still FELT: the dial's
+// residual mood points the same way. Once settleCycle_ has faded that swing to zero,
+// the sequence is over and the next push starts a new one. So a household moment every
+// few cycles can harden into who someone is, while two pushes, thirty quiet cycles and
+// a third do not (the pre-S449 event counter hardened that).
+function applyCycleEffects_(c, netFx) {
+  var fx = netFx || {};
+  for (var i = 0; i < DIALS.length; i++) {
+    var d = DIALS[i];
+    if (!fx[d] || c.base[d] == null) continue;
+    if (c.mood[d] === 0 || (c.mood[d] > 0) !== (fx[d] > 0)) c.streak[d] = 0;
+  }
+  applyEvent_(c, { label: 'cycle', effects: fx });
 }
 
 // convenience: route a tagged event through the map + apply it (map injected to keep this file I/O-free)
@@ -141,7 +178,7 @@ function accreteReflectionsIntoBase_(c, reflections, dialMap, mult, frac) {
       if (!fx.hasOwnProperty(d) || c.base[d] == null) continue;
       var delta = fx[d] * frac;
       if (!delta) continue;
-      c.base[d] = clamp100_(c.base[d] + delta);
+      c.base[d] = clamp100_(c.base[d] + roomScaled_(current_(c, d), delta)); // engine.201 W1e
       any = true;
     }
     if (any) moved++;
@@ -201,6 +238,7 @@ function snapshot_(c) {
 function serialize_(c) {
   var o = { base: c.base, mood: c.mood, streak: c.streak };
   if (c.chaosExposure) o.chaosExposure = c.chaosExposure;
+  if (c.pressure) o.pressure = c.pressure;
   return o;
 }
 function deserialize_(obj) {
@@ -214,6 +252,7 @@ function deserialize_(obj) {
     if (obj.chaosExposure) c.chaosExposure = obj.chaosExposure;
     if (obj.maneuver) c.maneuver = obj.maneuver; // engine.157 posture memory rides along
     if (obj.folded > 0) c.folded = obj.folded;   // engine.177 watermark (last folded cycle)
+    if (obj.pressure) c.pressure = obj.pressure; // engine.201 W1f per-cause pressure run {cause:{n,l}}
   }
   return c;
 }
@@ -270,7 +309,7 @@ function applyChaosReaction_(c) {
   if (r.level <= (ce.reactedLevel || 0)) return null;   // already broke at/above this level
   for (var d in r.dialEffects) {
     if (r.dialEffects.hasOwnProperty(d) && c.base[d] != null) {
-      c.base[d] = clamp100_(c.base[d] + r.dialEffects[d]);
+      c.base[d] = clamp100_(c.base[d] + roomScaled_(current_(c, d), r.dialEffects[d])); // engine.201 W1e
     }
   }
   ce.reactedLevel = r.level;
@@ -354,6 +393,7 @@ if (typeof module !== 'undefined' && module.exports) {
     HARDEN_STREAK: HARDEN_STREAK,
     newCitizen_: newCitizen_, current_: current_,
     applyEvent_: applyEvent_, applyTaggedEvent_: applyTaggedEvent_,
+    roomScaled_: roomScaled_, applyCycleEffects_: applyCycleEffects_,
     applyReflectionDualTag_: applyReflectionDualTag_,
     accreteReflectionsIntoBase_: accreteReflectionsIntoBase_, settleCycle_: settleCycle_,
     bandIndex_: bandIndex_, band_: band_, bandMultiplier_: bandMultiplier_,

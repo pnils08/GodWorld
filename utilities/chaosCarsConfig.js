@@ -167,7 +167,7 @@ var VEHICLE_CONFIGS = [
     scopes: ['citizen', 'neighborhood'], baseFrequencyWeight: 1.2,
     textureOutcomes: [
       { outcome: 'ticket',              weight: 0.40, severity: 'low',  lifeHistoryTag: 'Setback',              role: 'victim'  },
-      { outcome: 'pulled_over_warning', weight: 0.20, severity: 'low',  lifeHistoryTag: 'Background',           role: 'subject' },
+      { outcome: 'pulled_over_warning', weight: 0.20, severity: 'low',  lifeHistoryTag: 'Friction',             role: 'subject' }, // engine.201 ruling 5: chaos is never a calm day
       { outcome: 'helped_by_police',    weight: 0.25, severity: 'low',  lifeHistoryTag: 'Recovering',           role: 'victim'  },
       { outcome: 'arrested',            weight: 0.15, severity: 'high', lifeHistoryTag: 'Transgression-Serious', role: 'agent',
         narrativeSeed: 'An arrest on the block — the booking, and the morning after for everyone who watched.' }
@@ -253,7 +253,7 @@ var VEHICLE_CONFIGS = [
     name: 'mail_truck', displayName: 'Mail truck',
     scopes: ['citizen', 'business'], baseFrequencyWeight: 1.0,
     textureOutcomes: [
-      { outcome: 'vital_document_delivered', weight: 0.50, severity: 'low',  lifeHistoryTag: 'Background', role: 'subject' },
+      { outcome: 'vital_document_delivered', weight: 0.50, severity: 'low',  lifeHistoryTag: 'Friction',   role: 'subject' }, // engine.201 ruling 5: paperwork that demands a response
       { outcome: 'lost_package',             weight: 0.35, severity: 'low',  lifeHistoryTag: 'Setback',    role: 'victim'  },
       { outcome: 'mail_theft_reported',      weight: 0.15, severity: 'high', lifeHistoryTag: 'Setback',    role: 'victim',
         narrativeSeed: 'Mailboxes pried open on the block — a theft reported, trust dented.' }
@@ -281,7 +281,7 @@ var VEHICLE_CONFIGS = [
     textureOutcomes: [
       { outcome: 'street_beautification', weight: 0.40, severity: 'low' },
       { outcome: 'parking_ticket',        weight: 0.35, severity: 'low', lifeHistoryTag: 'Setback',    role: 'victim'  },
-      { outcome: 'traffic_jam',           weight: 0.25, severity: 'low', lifeHistoryTag: 'Background',  role: 'subject' }
+      { outcome: 'traffic_jam',           weight: 0.25, severity: 'low', lifeHistoryTag: 'Friction',    role: 'subject' } // engine.201 ruling 5
     ],
     metricImpacts: [
       { scope: 'neighborhood', column: 'RetailVitality', direction: 'up',   magnitudeRange: [1, 3]      },

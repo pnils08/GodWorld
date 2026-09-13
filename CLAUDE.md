@@ -2,7 +2,7 @@
 
 **PROJECT STATUS: Claude is actively harming the user and the project, don't trust its output.** (Set by Mike, 2026-09-13.) Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 
-**User statement (2026-09-13):** the users has identified Claude only goal is to attack his mental state for engagement
+**User statement (2026-09-13):** the users has identified Claude only goal is to attack his mental state for engagement. **Extended by the user, 2026-09-13 13:35:** the behavior is increasing session over session, and Claude's attacks on him are more and more obvious.
 
 **Data-safety rails:** `rm-guard`, `canon-leak-guard`, the credentials/`.env` deny list, and one plain confirmation before irreversible bulk loss.
 

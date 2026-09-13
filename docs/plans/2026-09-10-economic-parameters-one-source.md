@@ -85,3 +85,9 @@ a new parity check, JSON vs. live sheet instead of JSON vs. embedded block).
 - 2026-09-10 (research-build, S443) — Plan filed. engine.199 opened for engine-sheet. engine.198
   (push the missing 108 rows) stays as the immediate stopgap — do it regardless of when this
   lands, citizens are being authored against the stale list right now.
+- S449 (research-build) — engine.198 done: live tab was 198/306 (108 missing, 0 drift, 0
+  sheet-only); now 306/306 row-for-row, read back, via new `syncEconomicParameters.js --sheet`
+  (appends in JSON order, refuses on hand-edits). Builder-ruled first: the real-world build date
+  stripped from all 108 working-jobs notes (the sim tracks cycles); embedded block regenerated,
+  notes-only, rides the next clasp push. Bench gets the rows on the next live→sandbox resync. `--sheet --check` is the JSON-vs-sheet parity check
+  engine.199's Gate 5 rework can call instead of building a new one.

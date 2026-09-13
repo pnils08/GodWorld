@@ -2783,7 +2783,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Building services. Night shifts common. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Building services. Night shifts common. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Custodian",
@@ -2797,7 +2797,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Building services. Night shifts common. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Building services. Night shifts common. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Server",
@@ -2811,7 +2811,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Waiter",
@@ -2825,7 +2825,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Waitress",
@@ -2839,7 +2839,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Front-of-house; tips carry the top of the band. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Bartender",
@@ -2853,7 +2853,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Tips carry the band. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Tips carry the band. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Barista",
@@ -2867,7 +2867,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Counter service. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Counter service. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Dishwasher",
@@ -2881,7 +2881,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Back-of-house entry job. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Back-of-house entry job. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Cook",
@@ -2895,7 +2895,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Kitchen line, one step above line cook. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Kitchen line, one step above line cook. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Prep Cook",
@@ -2909,7 +2909,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Kitchen line, one step above line cook. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Kitchen line, one step above line cook. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Bakery Worker",
@@ -2923,7 +2923,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Early shifts. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Early shifts. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Sourdough Baker",
@@ -2937,7 +2937,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Skilled bread work. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Skilled bread work. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Baker",
@@ -2951,7 +2951,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Skilled bread work. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Skilled bread work. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Food Truck Operator",
@@ -2965,7 +2965,7 @@
     "economicOutputCategory": "Food/Hospitality",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Same band as Food Truck Owner. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Same band as Food Truck Owner. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Mover",
@@ -2979,7 +2979,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Moving crews; physical, seasonal peaks. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Moving crews; physical, seasonal peaks. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Taxi driver",
@@ -2993,7 +2993,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Cab Driver",
@@ -3007,7 +3007,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Driver",
@@ -3021,7 +3021,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Owner-operator or fleet; medallion economics. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Delivery driver",
@@ -3035,7 +3035,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Same band as Rideshare / Delivery Driver. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Same band as Rideshare / Delivery Driver. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Bus driver",
@@ -3049,7 +3049,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Union transit wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Union transit wage. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "AC Transit Bus Driver",
@@ -3063,7 +3063,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Union transit wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Union transit wage. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Transit Operator (AC Transit)",
@@ -3077,7 +3077,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Union transit wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Union transit wage. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Parking garage manager",
@@ -3091,7 +3091,7 @@
     "economicOutputCategory": "Transit/Infrastructure",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Facility management. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Facility management. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Mechanic",
@@ -3105,7 +3105,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Shop mechanic; EV/autonomy certs push the top. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Shop mechanic; EV/autonomy certs push the top. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Auto Mechanic",
@@ -3119,7 +3119,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Shop mechanic; EV/autonomy certs push the top. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Shop mechanic; EV/autonomy certs push the top. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Appliance Repair Technician",
@@ -3133,7 +3133,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Field repair. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Field repair. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Maintenance tech",
@@ -3147,7 +3147,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Building maintenance; not a software job. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Building maintenance; not a software job. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Carpet Installer",
@@ -3161,7 +3161,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Flooring trade. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Flooring trade. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Painter",
@@ -3175,7 +3175,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "House and commercial painting. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "House and commercial painting. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Landscaper",
@@ -3189,7 +3189,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Grounds and gardens. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Grounds and gardens. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Licensed Plumber",
@@ -3203,7 +3203,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Licensed trade, same band as Plumber. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Licensed trade, same band as Plumber. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Master Electrician",
@@ -3217,7 +3217,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.3,
     "consumerProfile": "high-discretionary",
-    "notes": "Above Electrician. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Above Electrician. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Roofing Contractor",
@@ -3231,7 +3231,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Licensed contractor. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Licensed contractor. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Construction laborer",
@@ -3245,7 +3245,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Baylight-era demand keeps the floor up. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Baylight-era demand keeps the floor up. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Construction worker",
@@ -3259,7 +3259,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Baylight-era demand keeps the floor up. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Baylight-era demand keeps the floor up. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Construction Foreman",
@@ -3273,7 +3273,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Crew lead. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Crew lead. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Carpenter Apprentice",
@@ -3287,7 +3287,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Apprentice wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Apprentice wage. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Stone Mason",
@@ -3301,7 +3301,7 @@
     "economicOutputCategory": "Trades/Construction",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Skilled masonry. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Skilled masonry. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Warehouse worker",
@@ -3315,7 +3315,7 @@
     "economicOutputCategory": "Port/Industrial",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Port-adjacent warehousing. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Port-adjacent warehousing. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Warehouse Hand",
@@ -3329,7 +3329,7 @@
     "economicOutputCategory": "Port/Industrial",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Port-adjacent warehousing. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Port-adjacent warehousing. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Warehouse Supervisor",
@@ -3343,7 +3343,7 @@
     "economicOutputCategory": "Port/Industrial",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Shift supervision. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Shift supervision. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Port Worker",
@@ -3357,7 +3357,7 @@
     "economicOutputCategory": "Port/Industrial",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "General port labor below longshore. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "General port labor below longshore. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Nurse aide",
@@ -3371,7 +3371,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "CNA-level care, same band as Home Health Aide. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "CNA-level care, same band as Home Health Aide. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Nursing Assistant",
@@ -3385,7 +3385,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "CNA-level care, same band as Home Health Aide. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "CNA-level care, same band as Home Health Aide. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Community Health Worker",
@@ -3399,7 +3399,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Clinic outreach. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Clinic outreach. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Radiologic Technician",
@@ -3413,7 +3413,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Imaging. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Imaging. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Emergency Room Nurse",
@@ -3427,7 +3427,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.3,
     "consumerProfile": "high-discretionary",
-    "notes": "Hospital RN. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Hospital RN. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Emergency Room Nurse (Highland Hospital)",
@@ -3441,7 +3441,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.3,
     "consumerProfile": "high-discretionary",
-    "notes": "Hospital RN. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Hospital RN. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Registered Nurse",
@@ -3455,7 +3455,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.3,
     "consumerProfile": "high-discretionary",
-    "notes": "Hospital RN. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Hospital RN. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Nurse Practitioner",
@@ -3469,7 +3469,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.3,
     "consumerProfile": "high-discretionary",
-    "notes": "Advanced practice. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Advanced practice. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Pediatric Nurse Practitioner",
@@ -3483,7 +3483,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.3,
     "consumerProfile": "high-discretionary",
-    "notes": "Advanced practice. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Advanced practice. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Mobile Clinic Nurse",
@@ -3497,7 +3497,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.3,
     "consumerProfile": "high-discretionary",
-    "notes": "Advanced practice. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Advanced practice. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Pharmacist",
@@ -3511,7 +3511,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.3,
     "consumerProfile": "high-discretionary",
-    "notes": "Licensed pharmacist. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Licensed pharmacist. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Medical Social Worker",
@@ -3525,7 +3525,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Hospital social work. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Hospital social work. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Herbalist",
@@ -3539,7 +3539,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Chinatown and Fruitvale shops. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Chinatown and Fruitvale shops. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Acupuncturist",
@@ -3553,7 +3553,7 @@
     "economicOutputCategory": "Healthcare",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Licensed practice. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Licensed practice. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Retail worker",
@@ -3567,7 +3567,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Shop floor. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Shop floor. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Retail clerk",
@@ -3581,7 +3581,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Shop floor. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Shop floor. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Cashier",
@@ -3595,7 +3595,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Shop floor. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Shop floor. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Hair Stylist",
@@ -3609,7 +3609,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Chair rental or shop wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Chair rental or shop wage. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Barber",
@@ -3623,7 +3623,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Chair rental or shop wage. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Chair rental or shop wage. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Tailor",
@@ -3637,7 +3637,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Alterations and bespoke. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Alterations and bespoke. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Seamstress",
@@ -3651,7 +3651,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Alterations and bespoke. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Alterations and bespoke. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Bank teller",
@@ -3665,7 +3665,7 @@
     "economicOutputCategory": "Professional Services",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Branch teller. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Branch teller. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Office worker",
@@ -3679,7 +3679,7 @@
     "economicOutputCategory": "Professional Services",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Office administration. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Office administration. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Administrative Assistant",
@@ -3693,7 +3693,7 @@
     "economicOutputCategory": "Professional Services",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Office administration. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Office administration. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Receptionist",
@@ -3707,7 +3707,7 @@
     "economicOutputCategory": "Professional Services",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Office administration. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Office administration. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Bookkeeper",
@@ -3721,7 +3721,7 @@
     "economicOutputCategory": "Professional Services",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Small-firm books. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Small-firm books. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Junior Accountant",
@@ -3735,7 +3735,7 @@
     "economicOutputCategory": "Professional Services",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Entry accounting. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Entry accounting. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Insurance Adjuster",
@@ -3749,7 +3749,7 @@
     "economicOutputCategory": "Professional Services",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Claims. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Claims. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "IT Support Specialist",
@@ -3763,7 +3763,7 @@
     "economicOutputCategory": "Tech/Innovation",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Help desk and endpoint support. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Help desk and endpoint support. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Library Worker",
@@ -3777,7 +3777,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Library assistant. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Library assistant. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Librarian",
@@ -3791,7 +3791,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Credentialed librarian. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Credentialed librarian. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Teacher",
@@ -3805,7 +3805,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Middle School Teacher",
@@ -3819,7 +3819,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "High School Science Teacher",
@@ -3833,7 +3833,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Oakland Unified Elementary Teacher",
@@ -3847,7 +3847,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "ESL Teacher",
@@ -3861,7 +3861,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Creative Writing Teacher",
@@ -3875,7 +3875,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "GED Program Instructor",
@@ -3889,7 +3889,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "OUSD scale, same band as K-8 / High School Teacher. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "After-school program aide",
@@ -3903,7 +3903,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.57,
     "consumerProfile": "subsistence",
-    "notes": "Part-time-shaped work. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Part-time-shaped work. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "STEM Program Coordinator",
@@ -3917,7 +3917,7 @@
     "economicOutputCategory": "Education",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Program coordination. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Program coordination. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Youth Counselor",
@@ -3931,7 +3931,7 @@
     "economicOutputCategory": "Nonprofit/Community",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Youth and family counseling. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Youth and family counseling. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Counselor",
@@ -3945,7 +3945,7 @@
     "economicOutputCategory": "Nonprofit/Community",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Youth and family counseling. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Youth and family counseling. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Social Services Caseworker",
@@ -3959,7 +3959,7 @@
     "economicOutputCategory": "Nonprofit/Community",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "County caseload. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "County caseload. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Housing Authority Inspector",
@@ -3973,7 +3973,7 @@
     "economicOutputCategory": "Government/Civic",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Inspections. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Inspections. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "City Building Inspector",
@@ -3987,7 +3987,7 @@
     "economicOutputCategory": "Government/Civic",
     "housingBurdenPct": 0.35,
     "consumerProfile": "moderate",
-    "notes": "Permit inspections. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Permit inspections. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "City Permit Coordinator",
@@ -4001,7 +4001,7 @@
     "economicOutputCategory": "Government/Civic",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Permit desk. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Permit desk. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Musician",
@@ -4015,7 +4015,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Actor",
@@ -4029,7 +4029,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Actress",
@@ -4043,7 +4043,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Artist",
@@ -4057,7 +4057,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Sculptor",
@@ -4071,7 +4071,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Printmaker",
@@ -4085,7 +4085,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Glassblower",
@@ -4099,7 +4099,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Ceramicist",
@@ -4113,7 +4113,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Photographer",
@@ -4127,7 +4127,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Street Photographer",
@@ -4141,7 +4141,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Spoken Word Poet",
@@ -4155,7 +4155,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Rapper",
@@ -4169,7 +4169,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "singer",
@@ -4183,7 +4183,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Working artist; the top of the band is a good year. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Working artist; the top of the band is a good year. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Graphic Designer",
@@ -4197,7 +4197,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Studio and freelance design. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Studio and freelance design. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Sound Designer",
@@ -4211,7 +4211,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.41,
     "consumerProfile": "moderate",
-    "notes": "Studio and freelance design. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Studio and freelance design. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Freelance Writer",
@@ -4225,7 +4225,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Same family as Journalist / Reporter. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Same family as Journalist / Reporter. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Journalist",
@@ -4239,7 +4239,7 @@
     "economicOutputCategory": "Creative/Arts",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Same family as Journalist / Reporter. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Same family as Journalist / Reporter. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Yoga Instructor",
@@ -4253,7 +4253,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Same band as Personal Trainer. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Same band as Personal Trainer. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Tai Chi Instructor",
@@ -4267,7 +4267,7 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Same band as Personal Trainer. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Same band as Personal Trainer. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   },
   {
     "role": "Fitness Trainer",
@@ -4281,6 +4281,6 @@
     "economicOutputCategory": "Small Business",
     "housingBurdenPct": 0.47,
     "consumerProfile": "essential-heavy",
-    "notes": "Same band as Personal Trainer. (working-jobs fill, 2026-09-07 — the catalog had owners and professionals, not the jobs the engine mints)"
+    "notes": "Same band as Personal Trainer. (working-jobs fill — the catalog had owners and professionals, not the jobs the engine mints)"
   }
 ]

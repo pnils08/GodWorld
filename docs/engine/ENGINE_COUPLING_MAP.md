@@ -24,17 +24,17 @@ pointers:
 
 ---
 
-## The spine: every event moves a dial
+## The spine: every REAL event moves a dial; a plain day does not
 
-`utilities/citizenDialMap.js` carries the load-bearing rule (file header, S253, Mike):
+`utilities/citizenDialMap.js` carries the load-bearing rule (S253, Mike; **narrowed by builder rulings 1 / 1b, 2026-09-13, engine.201**):
 
-> **Every event ever logged to a citizen MUST move a dial. Nothing the engine emits is dead output.**
+> **Every real event logged to a citizen moves a dial. A plain day — a routine generator line or an unmatched line — moves nothing.** The crons read plain days as lived experience; the citizen's own reaction returns through the reflection path.
 
-`nudgesForEvent_(tag, severityMult, text)` resolves any event to `{ dial: delta }` in three stages, so *no real event is inert*:
+`nudgesForEvent_(tag, severityMult, text)` resolves an event to `{ dial: delta }` in three stages:
 
 1. **Exact / normalized tag → `DIAL_MAP`** (with edition-citation `E\d+` → `sociability:2`, and calendar-suffix stripping so `Career-Holiday` routes as `Career`).
 2. **Content routing on tag+text → `CONTENT_RULES`** — for untagged / `EngineEvent` / sentence-as-tag rows, regexes on the prose (e.g. `/diagnos|hospital/ → composure:-6`).
-3. **`DEFAULT_AMBIENT` → `composure:1`** — any other real event = an ordinary day lived.
+3. **`DEFAULT_AMBIENT` → `{}`** since engine.201 (was `composure:1` — the always-on drip that outran every negative cause). Pressure tags (`Friction/Strain/Stumble`) add their cause's second dial when the text is one of the emitter's own pool lines (rent/debt/hood outabout −1, unemployed drive −1, overwork family −1).
 
 The only legitimately inert tags are **structural markers** (`Compressed`, `CareerState`) — summaries *of* events, not events; mapping them would double-count.
 
@@ -42,9 +42,9 @@ The only legitimately inert tags are **structural markers** (`Compressed`, `Care
 
 Eight bipolar dials, 0–100, centered 50: **drive, sociability, warmth, openness, composure, integrity, family, outabout**. A citizen *is* where their dials sit.
 
-- An event lands its delta on **`mood`** (temporary swing).
-- `mood` **decays** 0.8/cycle back toward `base` (`settleCycle_` — live since engine.177, S438; before that the fold zeroed mood and the decay had no caller).
-- A **sustained same-direction run** (streak ≥ 3) **hardens** 0.4 of the swing permanently into `base` — the only way a person actually changes. Since engine.177 hardening TOWARD an edge has diminishing room (1 at 50 → 0 at 0/100), so accumulation approaches an extreme and never pins it; hardening back toward the middle keeps full room.
+- An event lands its delta on **`mood`** (temporary swing), scaled by **room toward the pole it approaches, measured on the current value** base+mood (`roomScaled_`, engine.201 W1e: full size to the midpoint, zero at the pole). The same room applies to reflection accretion and the chaos break on `base`. Before S449 only hardening had room, so base+mood still clamped at 100 (5 live pins at C106).
+- `mood` **decays** 0.8/cycle back toward `base` (`settleCycle_` — live since engine.177, S438).
+- The fold nets each cycle's lines per dial and applies them **once per cycle** (`applyCycleEffects_`, engine.201 W1c). A push continues a streak only while the dial's residual mood still points the same way; once settled to 0 the next push starts over. **Three consecutive felt cycles** in one direction **harden** 0.4 of the swing into `base`, and only when the residual mood has the streak's sign (W1d). Before S449 the streak counted log lines, so three lines in one cycle — or two pushes, thirty quiet cycles and a third — hardened. Hardening toward an edge keeps engine.177's diminishing room.
 - Consumers read the **band** (`BAND_CUTS [20,40,60,80]` → 5 bands; `BAND_MULT [0.5,0.75,1.0,1.25,1.5]`), not the raw value — so 73 and 78 behave identically, and a run of events drifts a citizen across a band over time.
 - **The same discipline holds for LLM-facing surfaces (research.22, S291):** no skill or agent reads `DialState` directly — the only path is `lib/citizenDials.js:disposition()`, a pure filter to prose (verified: zero `DialState` references anywhere in `.claude/skills/` or `.claude/agents/`). Raw dial floats never enter a prompt, same as they never drive engine logic directly. Detail: [[../research/2026-07-04-dial-essence-filter-layer]].
 
@@ -53,7 +53,7 @@ Eight bipolar dials, 0–100, centered 50: **drive, sociability, warmth, opennes
 **engine.177 (S438): the WATERMARK fold.** Every stamped entry (`Y<n>C<m>` → `entry.cycle`) newer than `DialState.folded` folds **the cycle it arrives** via `foldNewEntries_` → `applyEvent_(nudgesForEvent_(tag,1,text))`, and the watermark moves to the highest cycle folded — each event folds exactly once. The 20-line raw window (`KEEP_RAW_ENTRIES`) and the trim cadence are untouched; trim now folds only the **legacy** (unstamped, or cycle ≤ 0) lines aging out, once, via `foldAgedOutEntries_(…, unstampedOnly=true)`. Before S438 the fold ran only on trim, which reached the 221 citizens over 20 lines and left 546/911 all-neutral (research.28). Structural markers (`Compressed`/`CareerState`) fold to `{}`.
 - **Cadence:** per citizen at most once every `MIN_CYCLES_BETWEEN_COMPRESS = 5` cycles, and only with ≥3 entries.
 - **Stateful, never wipes:** v2.0 folds into permanent `base`; it does **not** recompute from scratch (the old erase-and-rebuild wiped identity each cycle). Requires the `DialState` column — **inert no-op without it** (fail-safe: never wipes a back-dated identity).
-- **`DialState` persists `{base, streak, mood, folded}`** (+ `chaosExposure`, `maneuver`) since engine.177; mood is settled (0.8 decay) once per citizen per cycle before new events land, and the wake gate reads base+mood. Before S438 only `{base, streak}` persisted and mood was zeroed at fold.
+- **`DialState` persists `{base, streak, mood, folded}`** (+ `chaosExposure`, `maneuver`, and since engine.201 `pressure: {cause: {n, l}}` — the consecutive cycles a pressure cause has held and the last cycle it held, written by `emitPressureTag_` in Phase 5 so adaptation survives its own silent cycles); mood is settled (0.8 decay) once per compress call before new events land, and the wake gate reads base+mood. Pressure slots are per cause (rent + hood share `housing`).
 - **The seam `getCitizenDialBands_`** exposes to generators: `crimeReachable = bandIndex(integrity) <= 0` (**only the lowest integrity band, raw <20** — this is the conduct throttle), `careerFreq = mult.drive`, `familyFreq = mult.family`, plus signed bands −2..+2 and 0.5–1.5 multipliers per dial. Returns `null` when DialState absent → generators fall back to base rates.
 - **Reflection drain (research.14, gated):** `readPendingReflections_` pulls `Reflection_Intake` and accretes a bounded fraction (`REFLECTION_MULT 0.45 × REFLECTION_ACCRETION_FRAC 0.5`) of subjective wake-reflections directly into `base` — the only path to the negative composure pole from daily life. Composed into the per-row RMW (not a Phase-9 sibling). Local/clasp-gated per S270.
 - **Bond write-back (engine.101, same drain/gate):** intake col I (`BondTarget`) + affect valence nudge the named bond's `Intensity` **in memory** (`ctx.summary.relationshipBonds`, ±0.25, ±0.5/pair/cycle cap, clamp [0,10]) — Phase 10 full-replaces the sheet from that array, so a cell intent would not survive. Cols J/K (tension/resolves) persist for audit, unconsumed in v1.
@@ -106,7 +106,7 @@ All are pre-cap multipliers; `null` bands (no DialState) → base rates unchange
 
 ### Layer 2 — Outcome: *what the event does to the citizen*. Always a dial nudge; real state-mutation only in some engines.
 
-- **Always:** the event's tag → dial delta (the spine). Even a generic `Daily`/`Household` line moves composure/family. So every logged event shapes the citizen's essence over time.
+- **Always:** a real event's tag → dial delta (the spine). `Household` moves family; a plain `Daily` / `Neighborhood` line moves nothing (engine.201 rulings 1 / 1b).
 - **Real state mutation (beyond dials):** verified in **career only** so far — transitions rewrite `Income`, swap `EmployerBizId`, and emit `businessDeltas` that the **Economic Ripple Engine** consumes → economy → sentiment → other citizens. This is the cross-sheet ripple.
 - **The cosmetic edge:** where a column gates *which text* is drawn but all those texts share **one tag**, the column changes the prose, not the dial outcome (e.g. household's married/parent pools all emit `Household`→`family:5`; conduct's per-severity strings). The column individuates the *story*, not the *mechanics*, in those spots. This is a depth residual, not "unwired."
 

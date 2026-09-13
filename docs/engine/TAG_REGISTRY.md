@@ -1,7 +1,7 @@
 ---
 title: Engine Tag Registry — the single source of truth for event tags, affect tags, and dial mapping
 created: 2026-06-01
-updated: 2026-07-20
+updated: 2026-09-13
 type: spec
 status: verified
 tags: [engine, citizens, tags, classifier, dials, registry]
@@ -38,13 +38,15 @@ These represent the concrete events and are mapped to dial deltas.
 
 | Category | Tags |
 |---|---|
-| **Work / Drive** | `Career`, `Career-Transition`, `Promotion`, `Education`, `Graduation` |
-| **Social** | `Relationship`, `Community`, `Neighborhood`, `Reputation`, `Media`, `Public`, `Cultural`, `Mentorship`, `Faith` |
+| **Work / Drive** | `Career`, `Career-Transition`, `Promotion`, `Education`, `Graduation`, `Career-Hired`, `Career-FieldChange`, `Career-Layoff` |
+| **Social** | `Relationship`, `Community`, `Reputation`, `Media`, `Public`, `Cultural`, `Mentorship`, `Faith`, `Bond` (warmth +1) |
 | **Family** | `Household`, `Wedding`, `Birth`, `Divorce`, `Retirement` |
-| **Health / Composure** | `Health`, `Critical`, `Hospitalized`, `Setback`, `Recovery` |
-| **Conduct / Integrity** | `Transgression-Petty`, `Transgression-Serious`, `Transgression-Grave`, `Resisted` |
-| **Civic** | `Civic` |
-| **Ambient / Other** | `Personal`, `Daily`, `Background`, `Sports`, `Weather`, `Arrival` |
+| **Health / Composure** | `Health`, `Critical` / `Hospitalized` (also outabout −1), `Setback`, `Recovery` |
+| **Conduct / Integrity** | `Transgression-Petty`, `Transgression-Serious`, `Transgression-Grave`, `Resisted` (crime-reachable citizens), `BoundaryKept` +1 / `BoundaryCompromised` −1 (everyone else) |
+| **Pressure (engine-emitted)** | `Friction`, `Strain`, `Stumble` — plus the cause's second dial, recovered from the emitter's own text pool: rent/debt/hood outabout −1, unemployed drive −1, overwork family −1 |
+| **Two-way causes (engine.201 Wave 2)** | `ConnectionWithdrawn` soc −1 / `ConnectionMaintained` soc +1 (bond goes cold / picks back up), `TrustGuarded` warmth −1 (confrontation, triangle), `RoutineRetrenched` openness −1 (venture closed, field change ended in layoff), `ActivityExpanded` outabout +1 (hood in the city's top quarter by retail + events) |
+| **Plain days — move nothing** (engine.201 rulings 1 / 1b, 2026-09-13) | `Neighborhood`, `Civic`, `Civic Perception`, `Personal`, `Lifestyle`, `PrevEvening`, `Sports`, `Team`, `Season`, `Holiday`, `FirstFriday`, `CreationDay`, `Daily`, `Background`, `Micro-Event`, `Life Event`, `Life`, `Weather`, `Faith-Drift`, and any unmatched line. The crons still read them as lived experience; the citizen's reaction reaches the dials through the reflection path. |
+| **Other** | `Arrival` |
 
 ### 2. Affect Tags (The Subjective Layer)
 
@@ -67,6 +69,7 @@ The moral-test generators use the Conduct vocabulary to test citizens based on t
 - `Transgression-Petty` (low severity, minor dishonesty)
 - `Transgression-Serious` (mid severity, theft/fraud)
 - `Transgression-Grave` (high severity, grave moral failure)
-- `Resisted` (moral win, accretes integrity)
+- `Resisted` (moral win, accretes integrity +5) — crime-reachable citizens only
+- `BoundaryKept` (+1) / `BoundaryCompromised` (−1, a non-criminal slip) — every citizen the crime ladder cannot reach; slip odds by integrity band −1 .35 / 0 .25 / +1 .15 / +2 .05 (engine.201 ruling 3)
 
 Only citizens in the lowest integrity band (<20) become reachable for transgression execution.

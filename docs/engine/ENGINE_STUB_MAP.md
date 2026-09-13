@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-11 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-13 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -882,6 +882,8 @@
 
 - **bizClamp_(n, lo, hi)**
 
+- **noteVentureClosedOwners_(ctx, keyPersonnelCell, bizName, cycle)**
+
 - **bizOwnerBands_(ctx, keyPersonnelCell)**
 
 - **bizDriftOne_(cfg, biz, prevState, inputs, cycle)**
@@ -1023,6 +1025,10 @@
   Config: ctx.config.cycleCount
 
 - **bondInWorldStamp_(cycle)**
+
+- **noteBondConnectionShift_(ctx, bond, tag, cycle)**
+  Reads: S.bondDialCounts, S.bondDialLined
+  Writes: S.bondDialCounts, S.bondDialLined
 
 - **appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle)**
 
@@ -1976,6 +1982,12 @@
 
 - **hireSlotOrder_(a, b)**
 
+- **appendCareerLifeLine_(ctx, row, iLife, cycle, tag, text)**
+
+- **noteRetrenchAfterFieldChange_(ctx, row, iLife, cycle)**
+
+- **latestCareerMoveIsLayoff_(lifeHistory)**
+
 - **applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor)**
   Reads: S.careerSignals, S.eventsGenerated
   Writes: S.eventsGenerated
@@ -2029,6 +2041,8 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runNeighborhoodEngine.js
+- **activityTopHoods_(state)**
+
 - **runNeighborhoodEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.neighborhoodState, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
@@ -3250,6 +3264,8 @@
 - **deriveCitizenProfile_(seed, age, neighborhood, ledgerFreq, options)**
 
 ### citizenDialMap.js
+- **pressureCauseOfText_(text)**
+
 - **baseTag_(tag)**
 
 - **scale_(fx, mult)**
@@ -3266,6 +3282,10 @@
 - **pressureState_(lifeHistory, cycle)**
 
 - **pressureBar_(ctx, key)**
+
+- **pressureRun_(lifeHistory, cycle)**
+
+- **pressureRunFromState_(ctx, row, iLife, cause, cycle)**
 
 - **emitPressureTag_(ctx, row, iLife, popId, cause, text, opts)**
   Reads: S.absoluteCycle, S.cycleId, S.pressureCounts, S.pressureTagged
@@ -3284,7 +3304,11 @@
 
 - **current_(c, dial)**
 
+- **roomScaled_(cur, delta)**
+
 - **applyEvent_(c, event)**
+
+- **applyCycleEffects_(c, netFx)**
 
 - **applyTaggedEvent_(c, tag, dialMap, severityMult)**
 
@@ -3405,6 +3429,8 @@
 - **foldNewEntries_(c, newEntries, regs)**
 
 - **foldOneEntry_(c, e, regs)**
+
+- **captureUnlived_(e, regs)**
 
 - **deriveArchetypeFromBands_(c)**
 
@@ -3940,4 +3966,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1357
+**Functions mapped:** 1369

@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-09-11 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-09-13 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 183 · **Functions mapped:** 1357 · **S.* fields:** 347 · **Sheets:** 57
+**Files scanned:** 183 · **Functions mapped:** 1369 · **S.* fields:** 349 · **Sheets:** 57
 
 ## S.* / ctx.summary reverse index
 
@@ -42,6 +42,8 @@
 | `S.bankRateDesc` | `phase05-citizens/generationalWealthEngine.js::processBankRate_` | `phase05-citizens/generationalWealthEngine.js::processBankRate_` | 1 | 1 |
 | `S.baylightOpenings` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | 1 | 1 |
 | `S.biasIntents` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `utilities/compressLifeHistory.js::compressLifeHistory_` | 1 | 2 |
+| `S.bondDialCounts` | `phase05-citizens/bondEngine.js::noteBondConnectionShift_` | `phase05-citizens/bondEngine.js::noteBondConnectionShift_` | 1 | 1 |
+| `S.bondDialLined` | `phase05-citizens/bondEngine.js::noteBondConnectionShift_` | `phase05-citizens/bondEngine.js::noteBondConnectionShift_` | 1 | 1 |
 | `S.bondSummary` | `phase05-citizens/bondEngine.js::generateBondSummary_`, `phase05-citizens/seedRelationBondsv1.js::seedRelationshipBonds_` | `phase05-citizens/seedRelationBondsv1.js::testBondSeeding_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 2 | 2 |
 | `S.businessClosures` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.js::archiveClosedBusinesses_`, `phase05-citizens/applyBusinessDynamics.test.js::ctxWith` | 1 | 2 |
 | `S.businessDeclines` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase05-citizens/runCareerEngine.js::runCareerEngine_` | 1 | 2 |

@@ -129,6 +129,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @78 — engine.201b: the four follow-ups (2026-09-13 ~06:40, S449 engine-sheet)
+
+Repo `61274362`, 6 engine files (`bondEngine.js`, `generateCitizensEvents.js`, `runNeighborhoodEngine.js`, `citizenDialMap.js`, `citizenMemory.js`, `neighborhoodPulseMap.js`). Pull-back 168 js byte-identical, 0 tests live. Builder 2026-09-13: acceptance questions 1–3 were broken code, 4 was the wrong cut (plan §engine.201b).
+
+- **Bench SANDBOX 0908**, resynced from live C106 at 05:10: @20 C107–C119 `ok:true` (C112/C114 404 HTML body, ran; one fire executed twice), @21 (feud rest) C120–C121 `ok:true`; 0 Engine_Errors. C120 ran @20 (propagation window).
+- **Proof C107–C121:** downward share 40.7% (engine.201 30.0%); openness +396/−907; sociability +750/−97; dormant bonds 0 → 40, `ConnectionWithdrawn` 119 / `ConnectionMaintained` 89; pins 5 → 0; all-neutral 59.7% — **not moved**; wake-eligible 21.8%.
+- **Live smoke = the builder's C107** (smokes @75–@78 together). Expect 0 Engine_Errors; `StreetsGuarded` lines for Downtown / Fruitvale / West Oakland / East Oakland residents, `ActivityExpanded` for Jack London / KONO / Chinatown, `ActivityContracted` for the small bottom-quarter hoods; POP-00001 drive and POP-00170/198/210/231 sociability DialState base 97.5 after the fold; no confrontations C107–C112 (every live feud carries a recent stamp), then a synchronized flare-up; bonds with an absent party lose intensity from C107 (none dormant expected the first cycle — live has 10 bonds under 3). First live fire also runs engine.177's catch-up fold: a one-time 3–5 point move in dial means.
+
 ### PROD @77 — engine.201: the dials move both ways, from causes (2026-09-13 ~04:25, S449 engine-sheet)
 
 Repo `830e05ac`, 12 engine files (+ research-build `9eea918b` catalog notes, text-only, inside the proven build). Pull-back 168 js byte-identical, 0 tests live. Builder rulings 1 / 1b / 2 / 3 / 5 (plan §BUILD SPEC). Also carries the unfired @75/@76 waves to their first live fire.

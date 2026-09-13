@@ -315,3 +315,19 @@ Approve or amend the five contract choices above, then authorize one bounded imp
 ## Final verification note — 2026-09-13 (codex)
 
 The final tracker recheck at HEAD `d95f42d5` reports **19 oversized rows**, including engine.203 and infrastructure.9 beyond the 17 recorded at the initial read. This package does not modify the tracker. The attached probes reproduce their captured JSON exactly after filing; all proposal wikilinks resolve, the proposed replacement row has five cells and a 140-character description, and the diagnostic script passes `node --check`. Core source/snapshot hashes remain identical to the captured evidence.
+
+## Shipped-work review — 2026-09-13 S453 (codex, verified at HEAD by engine-sheet)
+
+**Status: engine.201 NOT ACCEPTED.** Four defects confirmed in the code that remains after the @79 cut. Every line verified at HEAD `86c95bd2` by engine-sheet before filing.
+
+**(a) Hood pressure never adapts — §15 gate that can't fire.** The `hood` run record advances only inside the neighborhood event draw (`runNeighborhoodEngine.js:505`, `rng() < driftChance`, cap 0.12); any missed cycle resets n=1 (`citizenDialMap.js:433-434`). PRESSURE_ADAPT=6 consecutive hits at ≤12% per cycle does not happen. Hood is the ONLY emitter behind a draw — rent (`migrationTrackingEngine.js:269`), debt (`generationalWealthEngine.js:406`), overwork (`runCareerEngine.js:1034`) and unemployed (`runCareerEngine.js:1359`) are condition-gated every cycle. Mechanism fix is one site: observe the condition every cycle, emit on the draw. **Sim ruling needed first:** observe-every-cycle goes silent after 6 cycles (adapted residents produce ordinary neighborhood lines); draw-gated is Friction forever at 2–12%/cycle. What does living in a pressured hood do to a resident over time?
+
+**(b) Bond maintenance is co-presence, not contact.** `updateExistingBonds_` reads `S.cycleActiveCitizens` (`bondEngine.js:609`, `:653-656`) — any event for A and any event for B counts as "a shared cycle." Codex probe on a family bond at 5.0 with no shared event: neither present 4.30, one present 4.50, both present 5.15. The `:818` comment ("a cycle the pair did not share") overstates the mechanism. Because event participation is already dial-weighted (`generateCitizensEvents.js:2218`), low participation reads as neglect and feeds ConnectionWithdrawn. **Before any contact model:** inventory pair-level primitives the engine already has (arc proximity `bondEngine.js:806`, household, pair events). Sim ruling on what counts as contact.
+
+**(c) Conduct opportunity follows spreadsheet row order.** `runConductEngine.js:82` LIMIT=3; `:163-165` scans from row 0 and breaks at the cap. Codex: 1,000 seeded cycles × 800 identical synthetic rows → first 100 rows 1,140 resolutions, last 100 rows 13, 260 citizens never tested. Fix: rotate the scan start by a cycle-derived offset (no extra rng draw, stream unchanged). Mechanism, engine-sheet, one commit with a failing-pre-fix test.
+
+**(d) Conduct never reads Status.** `runConductEngine.js:176-187` checks mode/tier/flags/age/dials only; `initSimulationLedger.js:48` loads every row. A Deceased row receives BoundaryCompromised and a LifeHistory line. Live exposure today is zero (S453 boot audit: 0 Deceased, 44 Retired). Gate to match `godWorldEngine2.js:1657`, same commit as (c).
+
+**Acceptance evidence.** The proofs to date count dial-contribution signs (traffic), not distinct citizens. @79 has one bench cycle; the multi-cycle runs included the retag and unpin remap since cut, so they cannot accept the final combination. Acceptance = a fixed cohort traced condition → personal response → persistent change → different later choice, including citizens who receive no wake.
+
+**Already closed from codex's diff review (830e05ac):** absent-POPID owner fallback, non-Active owner closure lines, cross-cause adaptation inheritance, compression erasing the layoff evidence, GC Inactive retag.

@@ -313,7 +313,7 @@ Approve or amend the five contract choices above, then authorize one bounded imp
 ## Changelog
 
 - 2026-09-13 (codex) — Completed source review, historical pool reproduction, defect probes and proposed engine.201 repair sequence; submitted for Claude review, implementation unstarted.
-- 2026-09-13 (codex) — Took execution lead; repaired S453 conduct scan and Deceased gate with failing-before regressions; deployment proof pending below.
+- 2026-09-13 (codex) — Took execution lead; conduct repair `0a9306e1` proved on sandbox C108–C109 and deployed PROD @80 (Apps Script version 69); engine.201 remains unaccepted.
 
 ## Final verification note — 2026-09-13 (codex)
 
@@ -337,7 +337,7 @@ The final tracker recheck at HEAD `d95f42d5` reports **19 oversized rows**, incl
 
 ## Conduct repair execution — codex, 2026-09-13
 
-**Status:** implemented and locally verified; bench/deployment proof pending. This closes neither pressure/contact decisions nor engine.201 acceptance.
+**Status:** SHIPPED — commit `0a9306e1`, PROD @80 (deployment-ledger label), Apps Script version 69. S453 findings (c) and (d) are repaired. This closes neither pressure/contact decisions nor engine.201 acceptance.
 
 **Change:** `runConductEngine_` rotates its starting ledger position by a Cycle-derived coprime stride. A stable population visits every possible start once per population-length run; the stride spreads short runs rather than shifting the same privileged window one row each Cycle. It traverses existing row references without reordering the ledger. LIMIT remains 3; probability, integrity resolution, severity, tags and write paths are unchanged. Status exactly `Deceased` is skipped before dial lookup or a random draw, matching `updateNamedCitizens_`; Retired and blank legacy Status retain existing eligibility.
 
@@ -348,6 +348,10 @@ The final tracker recheck at HEAD `d95f42d5` reports **19 oversized rows**, incl
 **Population probe:** 1,000 seeded Cycle trials, 800 identical synthetic citizens with fixed dials: first 100 / last 100 resolutions changed from 1,140 / 13 to 362 / 388; citizens with no resolution changed from 260 to 19. These are isolated selection trials, not a 1,000-Cycle persistent-city run and not proof of character differentiation.
 
 **Broader checks:** offline `npm test` completed: 228/231 files passed. Failures outside the edited paths: `djDirect.schema-and-slot.test.js` (missing C94 sift fixture), `ingestEdition.test.js` (subprocess did not report the expected ingest-loop/rerun text), `rateEditionCoverage.test.js` (subprocess output assertions). This run does not claim a clean full suite or verified baseline causality for the latter two failures. `docLoopStatus --lint` reports 19 pre-existing oversized rows; engine.201 is not among them. No unrelated row was rewritten.
+
+**Bench proof:** SANDBOX 0908, pinned/read-back version 24. C108 `ok:true`, 226,472 ms; C109 `ok:true`, 144,788 ms. Each produced three conduct records, all Active citizens, with their event text in the LifeHistory cell and DialState.folded equal to the Cycle. Ledger positions C108: 771/918/177; C109: 179/291/421. Engine_Errors stayed empty. Crime_Metrics retained ten columns and stamped 22 active hoods each Cycle with bounded carried levels. Max LifeHistory characters 3,730 → 4,111; max DialState 719 → 764. This proves runtime/delivery across two Cycles, not full-city character differentiation. Evidence: [conduct proof](../../output/codex/engine201-conduct-0a9306e1-proof.json).
+
+**Deployment proof:** live and sandbox preflight each had exactly one changed file, `phase05-citizens/runConductEngine.js`, no additions/deletions. After upload, all 169 files matched the immutable payload on both targets; zero test files deployed. Production's existing web app was still pinned at version 68 despite newer editor code; explicitly repointed and read back at version 69. The version-1 Mags deployment was left alone. Live remains C106; no live Cycle was fired. Post-proof sandbox resync to live C106 completed: 82 tabs / 50,534 rows, 11 oversized cells sanitized by the existing sync helper; five largest-tab counts verified. Independent readback: Cycle 106, 930 ledger rows, zero Engine_Errors. Code remains bench version 24. Full trail: [[../reference/DEPLOY_HISTORY]] §PROD @80.
 
 ### Conduct wiring card (Codex verified)
 
@@ -371,3 +375,7 @@ Pressure: decide whether the continuing neighborhood condition adapts after six 
 Bond primitives inspected: Simulation_Ledger HouseholdId is actual membership (`householdFormationEngine.js:575`); the household event summary carries one citizen and generic partner/household text (`runHouseholdEngine.js:610`); shared-arc growth is proximity, not proof of contact (`bondEngine.js:806`); confrontations carry both citizen IDs (`bondEngine.js:1463`). Ask Mike whether shared residence constitutes routine contact and what constitutes demonstrated neglect. Missing generated activity alone is not evidence of neglect. Pair events need identity retained through the producer; parsing generic household prose would reproduce the proxy defect.
 
 Owner/venture input and final fixed-cohort causal acceptance remain open under engine.201. Historical multi-Cycle metrics containing removed retags/remaps cannot accept the current build.
+
+**Owner reader follow-up (CONFIRMED, same-session local probe):** `bizOwnerBands_` still falls back from an unresolved explicit POPID to a namesake, and its name cache overwrites duplicates (`applyBusinessDynamics.js:303–326`). Synthetic absent-ID owner returned drive band +2 instead of null. Two same-name rows with drive 90/10 returned −2; reversing their ledger order returned +2. This is separate from the already-repaired closure writer and can alter business growth/closure thresholds using the wrong person's dials. Next bounded mechanical repair: make the owner-dial reader fail closed on unresolved IDs and ambiguous names; preserve verified-ID and unique-name controls, prove actual business decision effects. No owner-reader source change landed in the conduct deployment.
+
+**Fresh input observation (live read only, C106):** Business_Ledger has 177 rows and 30 nonblank Key_Personnel cells; the older 21-cell figure is stale. Eight ledger rows with explicit founder/owner/principal/managing-partner-style RoleType prefixes were found; none had an exact unique business-name match with blank personnel. These counts do not prove all owners resolve, and blank personnel does not establish a missing individual owner for an institution. No backfill was performed.

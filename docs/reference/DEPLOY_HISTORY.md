@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-09-05
+updated: 2026-09-13
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -128,6 +128,16 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD @80 — engine.201 S453 conduct scan (2026-09-13 ~15:02 Chicago, Codex)
+
+Commit `0a9306e1`; @80 is the deployment-ledger label. Exactly one payload file changed on live and bench: `phase05-citizens/runConductEngine.js`. No additions or deletions. The repair rotates the capped scan, excludes Deceased, and preserves Retired plus prior eligibility. It adds no selection RNG draws.
+
+- **Bench @24:** C108 `ok:true` in 226,472 ms; C109 `ok:true` in 144,788 ms; zero Engine_Errors. Three conduct records per Cycle, all Active recipients, history present, DialState.folded equal to the Cycle. Crime_Metrics retained ten columns and stamped all 22 active hoods. Detailed recipient positions and cell-size measurements are in the [proof artifact](../../output/codex/engine201-conduct-0a9306e1-proof.json).
+- **Production:** all 169 files byte-identical after pull-back, zero tests deployed. Existing web app `AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ` explicitly pinned and read back at Apps Script version 69, formerly 68. Live remains C106; no live Cycle fired.
+- **Local checks:** conduct 36/36, with three repaired-behavior failures before the source fix. Offline full suite 228/231; the three outside-scope failures are recorded in the [owning plan](../plans/2026-09-13-codex-dial-drift-review.md). Engine.201 remains unaccepted pending its remaining causal repairs and population proof.
+
+The bench resync to live C106 was subsequently completed and verified: 82 tabs, 50,534 rows, 11 oversized cells sanitized, five largest-tab row counts read back OK, World_Config cycleCount 106, ledger 930 rows, and Engine_Errors 0.
 
 ### PROD @79 — S451: retag + pin-remap cut, engine.212 crime carry-forward (2026-09-13 ~13:40, S451 engine-sheet)
 

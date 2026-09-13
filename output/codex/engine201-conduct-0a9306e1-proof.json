@@ -1,0 +1,161 @@
+{
+  "commit": "0a9306e1",
+  "target": "SANDBOX 0908",
+  "sandboxVersion": 24,
+  "sourceFile": "phase05-citizens/runConductEngine.js",
+  "sourceSha256": "b84142829c5d3a33c9f15dbe86a343950abec164500ec62a90f21cd20dc5d07d",
+  "remoteBeforeChangedFiles": [
+    "phase05-citizens/runConductEngine.js"
+  ],
+  "remoteAfterByteIdenticalFiles": 169,
+  "remoteTestFiles": 0,
+  "production": {
+    "deploymentLedgerLabel": "PROD @80",
+    "appsScriptVersion": 69,
+    "previousWebAppVersion": 68,
+    "deploymentReadBack": true,
+    "byteIdenticalFiles": 169,
+    "testFiles": 0,
+    "liveCycle": 106,
+    "liveCycleFired": false
+  },
+  "postProofSandboxReset": {
+    "cycle": 106,
+    "ledgerRows": 930,
+    "tabsCopied": 82,
+    "rowsCopied": 50534,
+    "oversizedCellsSanitizedByExistingHelper": 11,
+    "largestFiveTabCountsVerified": true,
+    "independentCycleReadBack": true,
+    "engineErrors": 0
+  },
+  "conductTests": {
+    "before": {
+      "passed": 33,
+      "failed": 3
+    },
+    "after": {
+      "passed": 36,
+      "failed": 0
+    }
+  },
+  "offlineSuite": {
+    "passedFiles": 228,
+    "totalFiles": 231,
+    "failures": [
+      "scripts/djDirect.schema-and-slot.test.js",
+      "scripts/ingestEdition.test.js",
+      "scripts/rateEditionCoverage.test.js"
+    ]
+  },
+  "selectionTrials": {
+    "cycles": 1000,
+    "fixedCitizens": 800,
+    "before": {
+      "first100": 1140,
+      "last100": 13,
+      "zeroRecipients": 260
+    },
+    "after": {
+      "first100": 362,
+      "last100": 388,
+      "zeroRecipients": 19
+    }
+  },
+  "cycles": [
+    {
+      "cycle": 108,
+      "ranMs": 226472,
+      "engineErrors": 0,
+      "conductRecipients": [
+        {
+          "popid": "POP-00943",
+          "ledgerIndex": 771,
+          "status": "Active",
+          "tag": "BoundaryKept",
+          "folded": 108,
+          "historyContainsEvent": true
+        },
+        {
+          "popid": "POP-01091",
+          "ledgerIndex": 918,
+          "status": "Active",
+          "tag": "BoundaryCompromised",
+          "folded": 108,
+          "historyContainsEvent": true
+        },
+        {
+          "popid": "POP-00226",
+          "ledgerIndex": 177,
+          "status": "Active",
+          "tag": "BoundaryCompromised",
+          "folded": 108,
+          "historyContainsEvent": true
+        }
+      ],
+      "ledgerRows": 948,
+      "crimeRowsStamped": 22,
+      "crimeHeaders": [
+        "Neighborhood",
+        "PropertyCrimeIndex",
+        "ViolentCrimeIndex",
+        "ResponseTimeAvg",
+        "ClearanceRate",
+        "IncidentCount",
+        "LastUpdated",
+        "PropertyLevel",
+        "ViolentLevel",
+        "QolLevel"
+      ],
+      "maxLifeHistoryChars": 3730,
+      "maxDialStateChars": 719
+    },
+    {
+      "cycle": 109,
+      "ranMs": 144788,
+      "engineErrors": 0,
+      "conductRecipients": [
+        {
+          "popid": "POP-00228",
+          "ledgerIndex": 179,
+          "status": "Active",
+          "tag": "BoundaryKept",
+          "folded": 109,
+          "historyContainsEvent": true
+        },
+        {
+          "popid": "POP-00341",
+          "ledgerIndex": 291,
+          "status": "Active",
+          "tag": "BoundaryKept",
+          "folded": 109,
+          "historyContainsEvent": true
+        },
+        {
+          "popid": "POP-00534",
+          "ledgerIndex": 421,
+          "status": "Active",
+          "tag": "BoundaryKept",
+          "folded": 109,
+          "historyContainsEvent": true
+        }
+      ],
+      "ledgerRows": 956,
+      "crimeRowsStamped": 22,
+      "crimeHeaders": [
+        "Neighborhood",
+        "PropertyCrimeIndex",
+        "ViolentCrimeIndex",
+        "ResponseTimeAvg",
+        "ClearanceRate",
+        "IncidentCount",
+        "LastUpdated",
+        "PropertyLevel",
+        "ViolentLevel",
+        "QolLevel"
+      ],
+      "maxLifeHistoryChars": 4111,
+      "maxDialStateChars": 764
+    }
+  ]
+}

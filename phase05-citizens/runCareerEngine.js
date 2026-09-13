@@ -204,6 +204,15 @@ function noteRetrenchAfterFieldChange_(ctx, row, iLife, cycle) {
   return false;
 }
 
+function unemployedRunHeldLastCycle_(dialStateCell, cycle) {
+  if (!dialStateCell) return false;
+  try {
+    var o = JSON.parse(String(dialStateCell));
+    var rec = o && o.pressure && o.pressure.unemployed;
+    return !!rec && Number(rec.l) === cycle - 1;
+  } catch (e) { return false; }
+}
+
 // engine.201 W1b: true when the citizen's most recent career move on record is a layoff.
 var CAREER_MOVE_RE = /\[(Career-Layoff|Career-Hired|Career-FieldChange)\]/g;
 function latestCareerMoveIsLayoff_(lifeHistory) {
@@ -1355,7 +1364,11 @@ function runCareerEngine_(ctx) {
       // engine.201 W1b (S449): EXCEPT a citizen the engine itself laid off. Both layoff paths
       // keep 80-88% of pay, so the income test alone never saw them — the recorded job
       // loss (latest career line is Career-Layoff, no hire since) is the evidence instead.
-      if (pool[up].income > 0 && !latestCareerMoveIsLayoff_(rows[pool[up].r][iLife])) continue;
+      // codex review S449 P2: the layoff line can trim out of the raw window while the citizen is still
+      // out of work, so an unbroken unemployed pressure run (DialState.pressure.unemployed held last cycle)
+      // is the same evidence. A hire sets the employer and takes them out of this pool.
+      if (pool[up].income > 0 && !latestCareerMoveIsLayoff_(rows[pool[up].r][iLife]) &&
+          !unemployedRunHeldLastCycle_(iDialState >= 0 ? rows[pool[up].r][iDialState] : '', cycle)) continue;
       if (emitPressureTag_(ctx, rows[pool[up].r], iLife, pool[up].pop, 'unemployed', pressureText_('unemployed', cycle + up))) unmatched++;
     }
     S.careerSignals.rehires = { hired: hired, crossField: crossField, unemployedPool: pool.length, pressureTagged: unmatched };

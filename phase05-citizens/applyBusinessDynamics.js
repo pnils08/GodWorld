@@ -255,15 +255,19 @@ function bizClamp_(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 // the retreat to routine. Owners resolve exactly as bizOwnerBands_ does (POPID when the cell carries one,
 // else full name; a name shared by two ledger rows resolves nothing). Line lands in the owner's own
 // LifeHistory cell, the only place the Phase-9 fold reads. Returns owners lined.
+var VENTURE_GONE_STATUS = { deceased: 1, inactive: 1, traded: 1, pending: 1 };
 function noteVentureClosedOwners_(ctx, keyPersonnelCell, bizName, cycle) {
   if (!keyPersonnelCell || typeof parseKeyPersonnelOwners_ !== 'function' || !ctx.ledger || !ctx.ledger.headers) return 0;
-  var h = ctx.ledger.headers, iP = h.indexOf('POPID'), iF = h.indexOf('First'), iL = h.indexOf('Last'), iLife = h.indexOf('LifeHistory');
+  var h = ctx.ledger.headers, iP = h.indexOf('POPID'), iF = h.indexOf('First'), iL = h.indexOf('Last'), iLife = h.indexOf('LifeHistory'), iSt = h.indexOf('Status');
   if (iP < 0 || iLife < 0) return 0;
   if (!ctx._ventureRowByPop) {
     ctx._ventureRowByPop = {}; ctx._ventureRowByName = {};
     for (var r = 0; r < ctx.ledger.rows.length; r++) {
       var pp = String(ctx.ledger.rows[r][iP] || '').trim().toUpperCase();
       if (!pp) continue;
+      // codex review S449 P1: a gone citizen (deceased / inactive / traded / pending) lives no new memory
+      var vst = iSt >= 0 ? String(ctx.ledger.rows[r][iSt] || '').trim().toLowerCase() : '';
+      if (VENTURE_GONE_STATUS[vst]) continue;
       ctx._ventureRowByPop[pp] = r;
       if (iF >= 0 && iL >= 0) {
         var nk = (String(ctx.ledger.rows[r][iF] || '').trim() + ' ' + String(ctx.ledger.rows[r][iL] || '').trim()).trim().toLowerCase();
@@ -274,8 +278,10 @@ function noteVentureClosedOwners_(ctx, keyPersonnelCell, bizName, cycle) {
   var entries = parseKeyPersonnelOwners_(keyPersonnelCell), lined = 0, seen = {};
   for (var e = 0; e < entries.length; e++) {
     if (!entries[e].owner) continue;
-    var ri = entries[e].pop ? ctx._ventureRowByPop[String(entries[e].pop).toUpperCase()] : undefined;
-    if (ri == null && entries[e].name) ri = ctx._ventureRowByName[String(entries[e].name).trim().toLowerCase()];
+    // codex review S449 P1: a supplied POPID that does not resolve fails CLOSED — never re-routed to a
+    // namesake. Name resolution only for entries that carry no POPID.
+    var ri = entries[e].pop ? ctx._ventureRowByPop[String(entries[e].pop).toUpperCase()]
+                            : (entries[e].name ? ctx._ventureRowByName[String(entries[e].name).trim().toLowerCase()] : undefined);
     if (ri == null || ri < 0 || seen[ri]) continue;
     seen[ri] = true;
     var row = ctx.ledger.rows[ri];

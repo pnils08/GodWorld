@@ -78,10 +78,17 @@ function current_(c, dial) { return clamp100_(c.base[dial] + c.mood[dial]); }
 // recover. Never overshoots while |delta| <= 50.
 function roomScaled_(cur, delta) {
   if (!delta) return 0;
-  var r = delta > 0 ? (100 - cur) / 50 : cur / 50;
+  var room = delta > 0 ? (100 - cur) : cur;   // distance to the pole this change heads for
+  if (room <= 0) return 0;
+  var r = room / 50;
   if (r > 1) r = 1;
-  if (r < 0) r = 0;
-  return delta * r;
+  var eff = delta * r;
+  // codex review S449: a netted cycle can exceed 50 (seven Promotions = +56); never cover more than 95%
+  // of the remaining distance, so no single step lands on the pole.
+  var cap = room * 0.95;
+  if (eff > cap) eff = cap;
+  if (eff < -cap) eff = -cap;
+  return eff;
 }
 
 // event = { label, effects: { dial: deltaInt, ... } } — effects come from citizenDialMap.

@@ -13,8 +13,7 @@
  *   2. CONTENT routing on tag+text -> for Untagged / EngineEvent / sentence-tags
  *      (rows where the meaning is in the prose, not a clean tag — e.g. the old
  *      improper ingest that wrote "Serious health condition diagnosed." as a tag)
- *   3. DEFAULT_AMBIENT -> any other real event = an ordinary day lived (small
- *      +composure). Guarantees zero inert real events.
+ *   3. DEFAULT_AMBIENT -> {} (engine.201 ruling 1): an unmatched line is a plain day.
  *
  * The single source both the stateful compressor (Phase 2) and the back-dating
  * replay (Phase 3) read. Supersedes compressLifeHistory.js's TAG_TRAIT_MAP.
@@ -396,11 +395,17 @@ var PRESSURE_SLOT = { rent: 'housing', hood: 'housing' };
 
 // Consecutive text-tagged cycles ending at cycle-1 — seeds a cause's run for a row that
 // has no persisted record yet (rows written before S449).
-function pressureRun_(lifeHistory, cycle) {
+// codex review S449 P1: only lines whose text is THIS cause's own pool line count (a legacy overwork run
+// must not make a first rent breach look adapted). cause omitted -> any pressure line (legacy callers).
+function pressureRun_(lifeHistory, cycle, cause) {
   var lines = String(lifeHistory || '').split('\n');
   var tagged = {};
   for (var i = lines.length - 1; i >= 0 && i >= lines.length - PRESSURE_SCAN_LINES; i--) {
     if (!PRESSURE_RE.test(lines[i])) continue;
+    if (cause) {
+      var lt = /\]\s*(.*)$/.exec(lines[i]);
+      if (!lt || pressureCauseOfText_(lt[1]) !== cause) continue;
+    }
     var c = pressureAbsCycle_(lines[i]);
     if (c != null && c < cycle) tagged[c] = true;
   }
@@ -427,10 +432,8 @@ function pressureRunFromState_(ctx, row, iLife, cause, cycle) {
   if (rec && Number(rec.l) === cycle) return Number(rec.n) || 1;        // same cycle re-entry: no double count
   if (rec && Number(rec.l) === cycle - 1) n = (Number(rec.n) || 0) + 1;
   else if (rec) n = 1;
-  else {
-    var run = pressureRun_(row[iLife], cycle);
-    n = run > 0 ? run + 1 : (pressureState_(row[iLife], cycle) === 'ongoing' ? 2 : 1);
-  }
+  else if (ds.pressure && typeof ds.pressure === 'object') n = 1;   // initialized envelope: a cause with no record is new
+  else n = pressureRun_(row[iLife], cycle, cause) + 1;               // pre-S449 row: seed from this cause's own lines
   if (!ds.pressure || typeof ds.pressure !== 'object') ds.pressure = {};
   ds.pressure[cause] = { n: n, l: cycle };
   row[iDS] = JSON.stringify(ds);

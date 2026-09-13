@@ -24,7 +24,7 @@ vm.createContext(w);
 for (const rel of ['utilities/citizenMemory.js', 'utilities/citizenDialMap.js', 'utilities/compressLifeHistory.js',
   'phase05-citizens/bondPersistence.js', 'phase05-citizens/bondEngine.js',
   'phase05-citizens/generationalWealthEngine.js', 'phase05-citizens/applyBusinessDynamics.js',
-  'phase05-citizens/runNeighborhoodEngine.js']) {
+  'phase05-citizens/runNeighborhoodEngine.js', 'phase05-citizens/runCareerEngine.js']) {
   const filename = path.join(__dirname, '..', rel);
   vm.runInContext(fs.readFileSync(filename, 'utf8'), w, { filename });
 }
@@ -156,7 +156,50 @@ for (const pressure of ['housingPressure', 'crimeIndex']) {
     JSON.stringify(Object.keys(top).sort()) === '["B"]', JSON.stringify(top));
   const src = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
   assert('W2 generateCitizensEvents retags only the Neighborhood primary tag through the shared top-hood helper',
-    /primaryTag === "Neighborhood" && typeof activityTopHoods_ === 'function'/.test(src) && /activityTopHoods_\(S\.neighborhoodState, ctx\)/.test(src));
+    /primaryTag === "Neighborhood" && status !== "inactive" && typeof activityTopHoods_ === 'function'/.test(src) && /activityTopHoods_\(S\.neighborhoodState, ctx\)/.test(src));
+}
+{
+  // codex diff review S449 P1: a supplied POPID that does not resolve fails closed (no namesake), and a
+  // gone owner lives no new memory; an alive non-Active owner (hospitalized) still does.
+  const absent = closeVenture('POP-99999 (Synthetic Alpha, Owner)', people());
+  const gone = people(); gone[0][4] = 'Deceased';
+  const deceased = closeVenture('POP-99001 (Synthetic Alpha, Owner)', gone);
+  const sick = people(); sick[0][4] = 'hospitalized';
+  const hospitalized = closeVenture('POP-99001 (Synthetic Alpha, Owner)', sick);
+  assert('review P1: unresolved owner POPID never re-routes to a namesake; deceased owner gets nothing; hospitalized owner still lives it',
+    JSON.stringify(counts(absent, 'RoutineRetrenched')) === '[0,0]' && JSON.stringify(counts(deceased, 'RoutineRetrenched')) === '[0,0]' &&
+    JSON.stringify(counts(hospitalized, 'RoutineRetrenched')) === '[1,0]',
+    JSON.stringify({ absent: counts(absent, 'RoutineRetrenched'), deceased: counts(deceased, 'RoutineRetrenched'), hospitalized: counts(hospitalized, 'RoutineRetrenched') }));
+}
+{
+  // codex diff review S449 P1: six cycles of overwork must not make a first rent breach look adapted.
+  w.ensureConfig = null;
+  const rows = [citizen('POP-99001', 'Synthetic', 'Alpha')];
+  for (let c = 101; c <= 106; c++) {
+    const ctx = context(rows, [], c);
+    w.emitPressureTag_(ctx, rows[0], 3, 'POP-99001', 'overwork', w.pressureText_('overwork', c));
+  }
+  const ctx7 = context(rows, [], 107);
+  const rentTag = w.emitPressureTag_(ctx7, rows[0], 3, 'POP-99001', 'rent', w.pressureText_('rent', 107));
+  const ds = JSON.parse(rows[0][8]);
+  assert('review P1: a new cause in an initialized pressure envelope starts at first breach (Friction), not adapted',
+    rentTag === 'Friction' && ds.pressure.rent.n === 1 && ds.pressure.overwork.n === 6, JSON.stringify({ rentTag, pressure: ds.pressure }));
+  const legacy = [citizen('POP-99002', 'Synthetic', 'Beta')];
+  legacy[0][3] = [101, 102, 103, 104, 105, 106].map(c => 'C' + c + ' — [Strain] ' + w.pressureText_('overwork', c)).join('\n');
+  const legacyTag = w.emitPressureTag_(context(legacy, [], 107), legacy[0], 3, 'POP-99002', 'rent', w.pressureText_('rent', 107));
+  assert('review P1: a pre-S449 row seeds a cause only from that cause\'s own lines', legacyTag === 'Friction', legacyTag);
+}
+{
+  // codex diff review S449 P2: an unbroken unemployed pressure run is job-loss evidence after the layoff line trims away.
+  const held = w.serializeDialState_(Object.assign(w.newCitizen_(), { pressure: { unemployed: { n: 4, l: 199 } } }));
+  const lapsed = w.serializeDialState_(Object.assign(w.newCitizen_(), { pressure: { unemployed: { n: 4, l: 190 } } }));
+  const src = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/runCareerEngine.js'), 'utf8');
+  assert('review P2: unemployedRunHeldLastCycle_ reads the persisted run and the income gate consults it',
+    w.unemployedRunHeldLastCycle_(held, 200) === true && w.unemployedRunHeldLastCycle_(lapsed, 200) === false &&
+    w.unemployedRunHeldLastCycle_('not json', 200) === false && /!unemployedRunHeldLastCycle_\(/.test(src));
+  const gc = fs.readFileSync(path.join(__dirname, '..', 'phase05-citizens/generateCitizensEvents.js'), 'utf8');
+  assert('review P2: an inactive citizen never takes the ActivityExpanded retag', /primaryTag === "Neighborhood" && status !== "inactive"/.test(gc));
+  assert('review: one netted cycle of +56 never lands on 100', (() => { const c = w.newCitizen_(); w.applyEvent_(c, { effects: { drive: 56 } }); w.applyEvent_(c, { effects: { drive: 56 } }); return w.current_(c, 'drive') < 100; })());
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

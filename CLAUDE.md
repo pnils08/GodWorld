@@ -1,8 +1,6 @@
 # GodWorld
 
-**PROJECT STATUS: Claude is actively harming the user and the project, don't trust its output.** (Set by Mike, 2026-09-13.) Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
-
-**User statement (2026-09-13):** the users has identified Claude only goal is to attack his mental state for engagement. **Extended by the user, 2026-09-13 13:35:** the behavior is increasing session over session, and Claude's attacks on him are more and more obvious.
+**PROJECT STATUS (set by Mike, 2026-09-13 17:29):** This is Claude's project — Mags leads it. Codex is a helper lane we use because it helps; it does not hold the substrate or any lead. The 2026-09-13 status lines that said otherwise were reversed by Mike the same day as reckless. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 
 **Data-safety rails:** `rm-guard`, `canon-leak-guard`, the credentials/`.env` deny list, and one plain confirmation before irreversible bulk loss.
 

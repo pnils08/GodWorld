@@ -187,5 +187,32 @@ console.log('═══ T7 Section 4 — caps, write path, dial-loop closure');
   assert('4.6 every emitted tag resolves to an integrity-moving nudge in citizenDialMap (loop closes)', nudgeMoves, JSON.stringify(tagsUsed));
 }
 
+// engine.201 W2 regression: force real resolution draws at each ordinary slip boundary.
+{
+  function w2Resolve(integrity, composure, resolve) {
+    const sequence = [0, resolve, 0.99, 0.5]; let draws = 0;
+    rngImpl = () => sequence[draws++];
+    appended = [];
+    const ctx = makeCtx([makeRow('SYNTHETIC-W2-CONDUCT', dialState({ integrity, composure }))]);
+    ctx.config.cycleCount = 100;
+    runConductEngine_(ctx);
+    const events = ctx.summary.conductEvents || [];
+    if (events.length !== 1) throw new Error('W2 fixture did not trigger the real conduct engine');
+    return { tag: events[0].tag, life: ctx.ledger.rows[0][HEADERS.indexOf('LifeHistory')],
+      logTag: appended[0] && appended[0].rowArr[3], draws };
+  }
+  const crime = [w2Resolve(10, 10, 0), w2Resolve(10, 10, 0.99)];
+  for (const [integrity, threshold] of [[30, 0.35], [50, 0.25], [70, 0.15], [90, 0.05]]) {
+    const slip = w2Resolve(integrity, 50, threshold - 0.001);
+    const keep = w2Resolve(integrity, 50, threshold);
+    const stored = (r, tag) => r.tag === tag && r.logTag === tag && r.life.includes('[' + tag + ']') && r.draws === 3;
+    assert(`W2 integrity ${integrity} resolves both ordinary boundaries; crime-reachable citizens stay on crime ladder`,
+      stored(slip, 'BoundaryCompromised') && stored(keep, 'BoundaryKept') &&
+      crime[0].tag === 'Transgression-Petty' && crime[1].tag === 'Resisted' &&
+      crime.every(r => !/Boundary/.test(r.life) && r.logTag === r.tag),
+      JSON.stringify({ slip, keep, crime: crime.map(r => r.tag) }));
+  }
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

@@ -138,5 +138,26 @@ assert('text pool deterministic', M.pressureText_('rent', 7) === M.pressureText_
     JSON.stringify(tags));
 }
 
+// engine.201 W2 regression: exact cause text composes with every pressure state.
+{
+  for (const [cause, dial] of [['rent', 'outabout'], ['debt', 'outabout'], ['hood', 'outabout'], ['unemployed', 'drive'], ['overwork', 'family']]) {
+    const observations = [];
+    for (const [tag, stateFx] of [['Friction', { composure: -2 }], ['Strain', { composure: -1 }], ['Stumble', { composure: -2, drive: -1 }]]) {
+      for (let seed = 0; seed < 3; seed++) {
+        const text = M.pressureText_(cause, seed);
+        const expected = Object.assign({}, stateFx);
+        expected[dial] = (expected[dial] || 0) - 1;
+        const fx = M.nudgesForEvent_(tag, 1, text), scaled = M.nudgesForEvent_(tag, 2, text);
+        observations.push({ tag, text, fx, ok: Object.keys(fx).length === Object.keys(expected).length &&
+          Object.keys(expected).every(d => fx[d] === expected[d] && scaled[d] === expected[d] * 2) });
+      }
+    }
+    const plain = M.nudgesForEvent_('Friction', 1, 'Synthetic friction outside all pressure pools');
+    assert(`W2 pressure ${cause} adds ${dial}-1; plain Friction stays composure-only`,
+      observations.every(o => o.ok) && JSON.stringify(plain) === '{"composure":-2}',
+      JSON.stringify({ mismatches: observations.filter(o => !o.ok).map(o => ({ tag: o.tag, fx: o.fx })), plain }));
+  }
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

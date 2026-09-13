@@ -396,6 +396,23 @@ const bl = rows => [BLH].concat(rows);
     pressureCount(laidOff) === 1 && pressureLine(laidOff) &&
     pressureCount(selfEmployed) === 0 && !pressureLine(selfEmployed) && pressureCount(rehired) === 0 && !pressureLine(rehired),
     JSON.stringify({ laidOff: pressureCount(laidOff), independent: pressureCount(selfEmployed), laterHire: pressureCount(rehired) }));
+
+  // engine.201 W2 regression: reuse the full W1 career VM, never call the new helper directly.
+  for (const site of ['employer-success', 'headcount-reconciliation']) {
+    function w2Layoff(tag, age) {
+      const life = `C${200 - age} — [${tag}] Synthetic earlier move\n` + careerState;
+      const result = run(fixture({ SkillTags: '', LifeHistory: life }),
+        site === 'employer-success' ? -20 : 0, site === 'employer-success' ? 1 : 0,
+        site === 'employer-success' ? [0.999, 0.999, 0, 0.5] : [0.999, 0.999, 0.999, 0.5]);
+      if (result.logs.filter(x => x[3] === 'Career-Layoff').length !== 1) throw new Error('W2 layoff fixture missed ' + site);
+      return w.parseLifeHistoryEntries_(result.ctx.ledger.rows[0][ix('LifeHistory')]).entries
+        .filter(e => e.tag === 'RoutineRetrenched' && e.cycle === 200).length;
+    }
+    const recent = w2Layoff('Career-FieldChange', 1), edge = w2Layoff('Career-FieldChange', 13);
+    const expired = w2Layoff('Career-FieldChange', 14), hire = w2Layoff('Career-Hired', 1);
+    assert(`W2 ${site} layoff retrenches a field change through Cycle 13, excluding old changes and hires`,
+      recent === 1 && edge === 1 && expired === 0 && hire === 0, JSON.stringify({ recent, edge, expired, hire }));
+  }
 }
 
 console.log('\n' + passed + ' passed, ' + failed + ' failed');

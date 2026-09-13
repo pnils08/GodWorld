@@ -190,5 +190,22 @@ console.log('═══ Wave 1 — sign, current-value room, and meaningful tags'
   }
 }
 
+// engine.201 W2 regression: the approved vocabulary closes each producer's dial edge.
+{
+  const cases = [
+    ['ConnectionWithdrawn', { sociability: -1 }], ['ConnectionMaintained', { sociability: 1 }],
+    ['TrustGuarded', { warmth: -1 }], ['RoutineRetrenched', { openness: -1 }],
+    ['ActivityExpanded', { outabout: 1 }], ['BoundaryKept', { integrity: 1 }],
+    ['BoundaryCompromised', { integrity: -1 }], ['Bond', { warmth: 1 }],
+    ['Hospitalized', { composure: -6, outabout: -1 }], ['Critical', { composure: -8, outabout: -1 }]
+  ];
+  for (const [tag, expected] of cases) {
+    const fx = M.nudgesForEvent_(tag, 1, 'Synthetic W2 consequence');
+    assert(`W2 ${tag} has the approved dial effects`,
+      Object.keys(fx).length === Object.keys(expected).length && Object.keys(expected).every(d => fx[d] === expected[d]),
+      JSON.stringify({ actual: fx, expected }));
+  }
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

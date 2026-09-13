@@ -28,6 +28,7 @@ var PULSE_MAP = {
   // --- Community / neighborhood life ---
   'Community':          { sentiment: 2, attractiveness: 1 },
   'Neighborhood':       { sentiment: 1 },
+  'ActivityExpanded':   { sentiment: 1 },   // engine.201: the Neighborhood line retagged in a top-quarter hood — same pulse, never a sentiment change
   'Mentorship':         { sentiment: 1 },
   'CivicRole':          { sentiment: 1 },
   'Civic Role':         { sentiment: 1 },

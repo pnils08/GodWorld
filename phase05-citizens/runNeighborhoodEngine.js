@@ -149,8 +149,11 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
 
 // engine.201 Wave 2: the top quarter of hoods by retailVitality + eventAttractiveness off the PERSISTED
 // opening snapshot (S.neighborhoodState, never the same-cycle pulse). Ties at the cut are included.
-// Returns { hood: true }; empty when the snapshot is missing.
-function activityTopHoods_(state) {
+// A hood over either engine.176 pressure bar is excluded: pressure claims first, exactly as the
+// neighborhood engine's own fork does. Returns { hood: true }; empty when the snapshot is missing.
+function activityTopHoods_(state, ctx) {
+  var pBar = (ctx && typeof pressureBar_ === 'function') ? pressureBar_(ctx, 'dialHoodPressureBar') : Infinity;
+  var cBar = (ctx && typeof pressureBar_ === 'function') ? pressureBar_(ctx, 'dialHoodCrimeBar') : Infinity;
   var out = {}, list = [];
   if (!state) return out;
   for (var h in state) {
@@ -161,7 +164,12 @@ function activityTopHoods_(state) {
   if (!list.length) return out;
   list.sort(function(a, b) { return b.sc - a.sc; });
   var cut = list[Math.max(0, Math.ceil(list.length / 4) - 1)].sc;
-  for (var k = 0; k < list.length; k++) { if (list[k].sc >= cut) out[list[k].h] = true; }
+  for (var k = 0; k < list.length; k++) {
+    if (list[k].sc < cut) continue;
+    var st = state[list[k].h];
+    if (Number(st.housingPressure) >= pBar || Number(st.crimeIndex) >= cBar) continue;
+    out[list[k].h] = true;
+  }
   return out;
 }
 
@@ -574,7 +582,7 @@ function runNeighborhoodEngine_(ctx) {
       // city's own spread (SIM_DOCTRINE §15: a band cannot rot when the scale moves); pressured hoods
       // already took the pressure tint above. Holiday / First Friday / Creation Day lines below keep
       // their own tag (plain days).
-      if (!ctx._activityTopHoods) ctx._activityTopHoods = activityTopHoods_(S.neighborhoodState);
+      if (!ctx._activityTopHoods) ctx._activityTopHoods = activityTopHoods_(S.neighborhoodState, ctx);
       if (ctx._activityTopHoods[neighborhood]) eventTag = "ActivityExpanded";
 
       // Determine event tag (v2.2)

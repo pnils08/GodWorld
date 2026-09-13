@@ -3148,6 +3148,13 @@ function generateCitizensEvents_(ctx) {
     if (archetype && archetype !== 'Drifter') tags = mergeTags(tags, ["archetype:" + archetype]);
 
     var primaryTag = primaryFromTags(tags);
+    // engine.201 Wave 2 (builder ruling 2): the ordinary hood line in a hood whose shops and events
+    // run in the city's top quarter is the hood pulling people out — outabout +1 (activityTopHoods_,
+    // runNeighborhoodEngine.js; same persisted snapshot, same cache). Elsewhere it stays a plain day.
+    if (primaryTag === "Neighborhood" && typeof activityTopHoods_ === 'function') {
+      if (!ctx._activityTopHoods) ctx._activityTopHoods = activityTopHoods_(S.neighborhoodState, ctx);
+      if (ctx._activityTopHoods[neighborhood]) primaryTag = "ActivityExpanded";
+    }
     var tagString = [primaryTag].concat(tags).join("|");
 
     var stamp = inWorldStamp_(ctx);

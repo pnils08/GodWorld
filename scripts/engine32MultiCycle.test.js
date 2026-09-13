@@ -178,7 +178,8 @@ function runTrace(cycles, opts) {
     }
     for (const ev of (ctx.summary.conductEvents || [])) {
       tally.fires++;
-      if (ev.tag === 'Resisted') tally.resisted++;
+      if (ev.tag === 'Resisted' || ev.tag === 'BoundaryKept') tally.resisted++;
+      else if (ev.tag === 'BoundaryCompromised') tally.slips = (tally.slips || 0) + 1; // engine.201 ruling 3: not a crime
       else {
         tally.commits++;
         // attribute by cohort via the citizen name we seeded ("Outlaw N" / "Neutral N")

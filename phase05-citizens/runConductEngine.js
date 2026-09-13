@@ -133,6 +133,16 @@ function runConductEngine_(ctx) {
     "ran a small fraud on online buyers before going quiet"
   ];
 
+  // engine.201 Wave 2 (builder ruling 3, 2026-09-13): the ordinary, non-criminal slip an otherwise
+  // decent citizen can make when the chance comes up. Color only — the dial effect is integrity -1.
+  var slipPool = [
+    "kept the extra change the cashier handed back and said nothing",
+    "called in sick on a day they were not sick",
+    "let a coworker take the blame for a small mistake",
+    "rounded an expense report up and did not look at it again",
+    "told the landlord the check was already in the mail"
+  ];
+
   var resistPool = [
     "found a wallet full of cash and turned it in untouched",
     "was offered an under-the-table cut and walked away",
@@ -208,10 +218,24 @@ function runConductEngine_(ctx) {
       if (spike) commitP *= 0.6;
     }
 
-    var committed = cRng() < commitP;
+    var resolveRoll = cRng();
+    var committed = resolveRoll < commitP;
     var eventTag, pick;
 
-    if (!committed) {
+    if (!dialBands.crimeReachable) {
+      // engine.201 Wave 2 (ruling 3): a citizen the crime ladder cannot reach still meets ordinary
+      // temptations. Same draw as before (draw count unchanged); integrity band sets the odds — a
+      // principled citizen rarely slips, a slippery one often. Kept = integrity +1, slipped = -1:
+      // ordinary scale, so being tested no longer hands out a crime-sized +5.
+      var slipP = intBand <= -1 ? 0.35 : (intBand === 0 ? 0.25 : (intBand === 1 ? 0.15 : 0.05));
+      if (resolveRoll < slipP) {
+        eventTag = "BoundaryCompromised";
+        pick = slipPool[Math.floor(cRng() * slipPool.length)];
+      } else {
+        eventTag = "BoundaryKept";
+        pick = resistPool[Math.floor(cRng() * resistPool.length)];
+      }
+    } else if (!committed) {
       eventTag = "Resisted";
       pick = resistPool[Math.floor(cRng() * resistPool.length)];
     } else {

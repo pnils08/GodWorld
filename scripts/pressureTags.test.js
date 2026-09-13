@@ -42,8 +42,10 @@ assert('first rent breach -> Friction', t === 'Friction', t);
 assert('line appended with stamp + tag', /C110 — \[Friction\] rent bit$/.test(r[L]), r[L]);
 assert('LifeHistory_Log intent queued', appended.length === 1 && appended[0].tab === 'LifeHistory_Log');
 let t2 = M.emitPressureTag_(ctx, r, L, 'POP-1', 'debt', 'debt bit');
-assert('second cause same cycle -> null (one tag per citizen per cycle)', t2 === null);
-assert('S.pressureTagged marks the citizen', ctx.summary.pressureTagged['POP-1'] === 'Friction');
+// engine.201 W1f: debt is its own slot — a rent claim no longer erases it; a second housing cause (hood) still yields
+assert('second independent cause same cycle -> its own tag (per-cause slots)', t2 === 'Friction', t2);
+assert('S.pressureTagged marks the citizen per slot', ctx.summary.pressureTagged['POP-1|housing'] === 'Friction' && ctx.summary.pressureTagged['POP-1|debt'] === 'Friction');
+assert('same slot same cycle -> null (hood after rent)', M.emitPressureTag_(ctx, r, L, 'POP-1', 'hood', 'hood bit') === null);
 ctx = ctxAt(111);
 t = M.emitPressureTag_(ctx, r, L, 'POP-1', 'rent', 'rent again');
 assert('next cycle same breach -> Strain', t === 'Strain', t);
@@ -84,8 +86,11 @@ assert('overwork text pool', /switch off|late night|weekend/.test(M.pressureText
 
 // ---- the map: ambient tints, pressure tags move, casino/layoff route
 const sum = fx => Object.keys(fx).reduce((a, k) => a + fx[k], 0);
-assert('Neighborhood is a +1 tint', sum(M.nudgesForEvent_('Neighborhood', 1, 'x')) === 1);
-assert('Daily is a +1 tint', sum(M.nudgesForEvent_('Daily', 1, 'x')) === 1);
+assert('Neighborhood is a plain day (engine.201 ruling 1b)', sum(M.nudgesForEvent_('Neighborhood', 1, 'x')) === 0);
+assert('pressure line carries its cause: overwork Strain -> composure -1 family -1', JSON.stringify(M.nudgesForEvent_('Strain', 1, M.pressureText_('overwork', 0))) === JSON.stringify({ composure: -1, family: -1 }));
+assert('pressure line carries its cause: hood Friction -> outabout -1', M.nudgesForEvent_('Friction', 1, M.pressureText_('hood', 1)).outabout === -1);
+assert('a Friction line outside the pressure pools keeps its plain state effect', JSON.stringify(M.nudgesForEvent_('Friction', 1, 'parking ticket')) === JSON.stringify({ composure: -2 }));
+assert('Daily is a plain day and moves nothing (engine.201 ruling 1)', sum(M.nudgesForEvent_('Daily', 1, 'x')) === 0);
 assert('Friction -2 composure', M.nudgesForEvent_('Friction', 1, 'x').composure === -2);
 assert('Strain -1 composure', M.nudgesForEvent_('Strain', 1, 'x').composure === -1);
 assert('Stumble hits composure and drive', sum(M.nudgesForEvent_('Stumble', 1, 'x')) === -3);
@@ -95,6 +100,43 @@ assert('casino win text routes positive', M.nudgesForEvent_('Casino', 1, 'the wi
 assert('Promotion still reshapes (+8 drive)', M.nudgesForEvent_('Promotion', 1, 'x').drive === 8);
 assert('Divorce still reshapes (-8 family)', M.nudgesForEvent_('Divorce', 1, 'x').family === -8);
 assert('text pool deterministic', M.pressureText_('rent', 7) === M.pressureText_('rent', 7) && M.pressureText_('hood', 0).length > 10);
+
+// engine.201 W1f: synthetic rows carry their actual DialState across fresh contexts.
+{
+  const E = require('../utilities/citizenMemory.js');
+  function w1Row(id) { return [id, '', JSON.stringify(E.newCitizen_())]; }
+  function w1Ctx(cycle, r) {
+    return Object.assign(ctxAt(cycle), { ledger: { headers: ['POPID', 'LifeHistory', 'DialState'], rows: [r], dirty: false } });
+  }
+  function w1Emit(cycle, r, cause) {
+    return M.emitPressureTag_(w1Ctx(cycle, r), r, 1, r[0], cause, M.pressureText_(cause, cycle));
+  }
+  const continuous = w1Row('SYNTHETIC-W1-ADAPTED');
+  const emitted = [];
+  for (let cycle = 101; cycle <= 115; cycle++) emitted.push(w1Emit(cycle, continuous, 'rent'));
+  const rent = (JSON.parse(continuous[2]).pressure || {}).rent;
+  assert('W1f adapted rent stays silent across its own silent Cycles',
+    emitted[0] === 'Friction' && emitted.slice(1, 6).every(t => t === 'Strain') &&
+    emitted.slice(6).every(t => t === null) && rent && rent.n === 15 && rent.l === 115,
+    JSON.stringify({ emitted, rent: rent || null }));
+
+  const absent = w1Row('SYNTHETIC-W1-ABSENT');
+  for (let cycle = 101; cycle <= 106; cycle++) w1Emit(cycle, absent, 'rent');
+  // No rent breach at all in C107: distinguish absence from an adapted silent call.
+  const returning = w1Emit(108, absent, 'rent');
+  const reset = (JSON.parse(absent[2]).pressure || {}).rent;
+  assert('W1f a genuinely absent Cycle resets rent to first breach',
+    returning === 'Friction' && reset && reset.n === 1 && reset.l === 108,
+    JSON.stringify({ returning, rent: reset || null }));
+
+  const concurrent = w1Row('SYNTHETIC-W1-SLOTS');
+  const ctx = w1Ctx(101, concurrent);
+  const emit = cause => M.emitPressureTag_(ctx, concurrent, 1, concurrent[0], cause, M.pressureText_(cause, 101));
+  const tags = { rent: emit('rent'), hood: emit('hood'), overwork: emit('overwork'), debt: emit('debt'), unemployed: emit('unemployed') };
+  assert('W1f housing shares one slot but cannot suppress overwork, debt, or unemployment',
+    tags.rent === 'Friction' && tags.hood === null && tags.overwork === 'Strain' && tags.debt === 'Friction' && tags.unemployed === 'Stumble',
+    JSON.stringify(tags));
+}
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

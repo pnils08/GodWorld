@@ -255,6 +255,7 @@ the existing tracker row and its state are unchanged.
 3. Ordinary non-criminal integrity slip for neutral citizens when a real chance comes up, −1.
 4. Dial coupling (S443 "composure low but sociability/drive high") DEFERRED — ship the two-way feed, measure, then decide. A deferral, not an answer.
 5. Chaos_Cars outcomes are never a calm day for the dials.
+6. **Ruling 1b (Mike, 2026-09-13, after bench C107 showed ~1,300 routine generator lines/cycle pushing sociability/openness/outabout up, none down):** routine generator lines are plain days too — Neighborhood, Civic, Civic Perception, Personal, Lifestyle, PrevEvening, Sports, Team, Season, Holiday, FirstFriday, CreationDay → `{}`. Builder's reason, verbatim: "these events are fed to the crons as lived experiences and can speak on them, those outputs route back to sheets and to the dials." 
 
 ### Wave 1 — plumbing (bench first, alone)
 
@@ -273,6 +274,25 @@ the existing tracker row and its state are unchanged.
 
 Pressure tags carry their cause: `Friction-Rent`, `Strain-Hood`, `Stumble-Jobless`, `Strain-Overwork`, … = state effect + cause effect (rent/debt/hood `outabout −1`, unemployed `drive −1`, overwork `family −1`). Health `Hospitalized/Critical` add `outabout −1`. New producers at existing domain seams only, Codex review vocabulary: `ConnectionWithdrawn/ConnectionMaintained` (bonds, migration departures), `RoutineRetrenched` (layoff after a recent field change, venture closure), `TrustGuarded` (bond conflict outcome), `ActivityExpanded` (hood nightlife/retail in the city's top band — relative, §15), `BoundaryCompromised −1` (conduct engine, ruling 3). Seams to be wired against the code before cutting.
 
+### Wave 2 as built (S449)
+
+| Cause (ruling) | Tag / effect | Seam |
+|---|---|---|
+| bond goes cold / picks back up (2) | `ConnectionWithdrawn` soc −1 / `ConnectionMaintained` soc +1, both citizens, friendship/family/romantic/mentorship/alliance/neighbor/professional/festival only | `bondEngine.js updateExistingBonds_` status flip → `noteBondConnectionShift_` |
+| conflict with someone known (2) | `TrustGuarded` warmth −1 — confrontation (rivalry ≥ threshold) and the triangle sting (was `Bond`, unmapped) | `checkConfrontationTriggers_`, `detectTriangleRivalries_` |
+| venture fails (2) | `RoutineRetrenched` openness −1 to resolved owners | `applyBusinessDynamics.js` closure → `noteVentureClosedOwners_` |
+| field change ends in layoff (2) | `RoutineRetrenched` openness −1 (≤ 13 cycles) | both layoff sites → `noteRetrenchAfterFieldChange_` |
+| money tight / hood rougher (2) | pressure line + outabout −1 (rent, debt, hood) | `nudgesForEvent_` cause by exact pool text |
+| failed job search (2) | pressure line + drive −1 (unemployed) | same |
+| long hours (2) | pressure line + family −1 (overwork) | same |
+| health limits (2) | `Hospitalized` / `Critical` + outabout −1 | DIAL_MAP |
+| hood shops/events top band (2) | `ActivityExpanded` outabout +1 on the ordinary hood line, top quarter by retail+event (relative, §15) | `runNeighborhoodEngine.js activityTopHoods_` |
+| ordinary temptation (3) | `BoundaryCompromised` integrity −1 / `BoundaryKept` +1 for non-crime-reachable citizens; slip odds by band −1 .35 / 0 .25 / +1 .15 / +2 .05; crime-reachable keep Resisted +5 / Transgression | `runConductEngine.js` (same draw count) |
+| romance deepens | `Bond` warmth +1 (was the +composure fallback) | DIAL_MAP |
+| leaves a congregation | `Faith-Drift` {} (was Faith +3/+2 — leaving is not a benefit; direction unruled) | `bondEngine.js` faith drift |
+
+**Not available:** "a friend moves away" — no code path takes a citizen out of Oakland (`migrationTrackingEngine.js:85` MOVED_OUT unused; archive only moves deceased/traded). Bond dormancy carries the sociability-down side instead.
+
 ### Acceptance (engine.197 criteria, unchanged)
 
 12-cycle bench on live-synced state: 0 Engine_Errors; zero current-value pins at 0 or 100 at the endpoint; negative share ≥ 15% of nonzero signed per-citizen per-dial cycle contributions; every dial shows both signs; all-neutral share and wake-eligible share reported against the pre-fix bench.
@@ -281,3 +301,4 @@ Pressure tags carry their cause: `Friction-Rent`, `Strain-Hood`, `Stumble-Jobles
 
 - 2026-09-13 (codex) — Linked the completed engine.201 source review and proposed repair sequence for Claude approval; no implementation or live-state changes.
 - 2026-09-13 (engine-sheet S449) — Codex review accepted in part; builder rulings 1–5 captured; BUILD SPEC Wave 1 (plumbing) + Wave 2 (two-way vocabulary) written; deadline live C107.
+- 2026-09-13 (engine-sheet S449) — Wave 1 bench C107 clean (0 errors, pressure records live, no new pins) but negative share 5.1%; ruling 1b captured; Wave 2 built (table above).

@@ -839,8 +839,10 @@ function updateExistingBonds_(ctx) {
 
     if (intensity <= 1 && bond.status === BOND_STATUS.ACTIVE) {
       bond.status = BOND_STATUS.DORMANT;
+      noteBondConnectionShift_(ctx, bond, 'ConnectionWithdrawn', currentCycle); // engine.201 Wave 2
     } else if (intensity >= 3 && bond.status === BOND_STATUS.DORMANT) {
       bond.status = BOND_STATUS.ACTIVE;
+      noteBondConnectionShift_(ctx, bond, 'ConnectionMaintained', currentCycle); // engine.201 Wave 2
     }
 
     if (bond.bondType === BOND_TYPES.TENSION) {
@@ -1069,7 +1071,7 @@ function processFaithJoins_(ctx) {
         drifts++;
         var goneIdx = idxByPop[String(gonePop).trim().toUpperCase()];
         if (goneIdx !== undefined) {
-          appendBondLifeLine_(ctx, goneIdx, 'Faith', 'drifted from the congregation at ' + fv[fdr][fOrg] + ', quietly', cycle);
+          appendBondLifeLine_(ctx, goneIdx, 'Faith-Drift', 'drifted from the congregation at ' + fv[fdr][fOrg] + ', quietly', cycle);
         }
       }
     }
@@ -1452,6 +1454,7 @@ function checkConfrontationTriggers_(ctx) {
 
       bond.notes = (bond.notes || '') + ' [Confrontation C' + currentCycle + ']';
       bond.intensity -= 2;
+      noteBondConnectionShift_(ctx, bond, 'TrustGuarded', currentCycle); // engine.201 Wave 2: a confrontation with someone they know
 
       // v2.4 FIX: Clamp intensity after reduction
       if (bond.intensity < 0) bond.intensity = 0;
@@ -1871,6 +1874,38 @@ function bondInWorldStamp_(cycle) {
 // caller passes 5 args — tag/text/cycle each shifted one slot, so EVERY bond
 // LifeHistory line printed mangled ('YNaNCNaN — [married X...] 104'). Latent
 // since P5 shipped; surfaced by the first wedding ever fired (Hill, C104).
+// engine.201 Wave 2 (builder ruling 2, 2026-09-13): a named bond changing state is the world acting on
+// BOTH citizens — sociability down when it goes cold, up when it picks back up; warmth down on a
+// confrontation. Rivalry / tension / sports-rival bonds going quiet is not a lost connection, so only the
+// confrontation reads them. One line per citizen per tag per cycle (a citizen losing touch with five
+// people still nets -5 in the fold; the cell does not carry five lines).
+var BOND_CONNECTION_TYPES = { friendship: 1, family: 1, romantic: 1, mentorship: 1, alliance: 1, neighbor: 1, professional: 1, festival: 1 };
+var BOND_SHIFT_TEXT = {
+  ConnectionWithdrawn: function(name) { return 'had not really talked to ' + name + ' in a while'; },
+  ConnectionMaintained: function(name) { return 'picked things back up with ' + name; },
+  TrustGuarded: function(name) { return 'had it out with ' + name + ', and it did not settle'; }
+};
+function noteBondConnectionShift_(ctx, bond, tag, cycle) {
+  if (!bond || !ctx || !ctx.ledger) return;
+  if (tag !== 'TrustGuarded' && !BOND_CONNECTION_TYPES[String(bond.bondType || '').toLowerCase()]) return;
+  var S = ctx.summary || (ctx.summary = {});
+  if (!ctx._bondDialIndex) ctx._bondDialIndex = buildBondLedgerIndex_(ctx) || {};
+  var lined = S.bondDialLined || (S.bondDialLined = {});
+  var counts = S.bondDialCounts || (S.bondDialCounts = {});
+  var a = ctx._bondDialIndex[normalizeBondCitizenId_(ctx, bond.citizenA)];
+  var b = ctx._bondDialIndex[normalizeBondCitizenId_(ctx, bond.citizenB)];
+  if (!a || !b) return;
+  var pair = [[a, b], [b, a]];
+  for (var i = 0; i < 2; i++) {
+    var me = pair[i][0], other = pair[i][1];
+    var key = me.idx + '|' + tag;
+    counts[tag] = (counts[tag] || 0) + 1;
+    if (lined[key]) continue;
+    lined[key] = true;
+    appendBondLifeLine_(ctx, me.idx, tag, BOND_SHIFT_TEXT[tag](other.name || 'them'), cycle);
+  }
+}
+
 function appendBondLifeLine_(ctx, ledgerIdx, tag, text, cycle) {
   // ctx.ledger mutation (Phase 42 §5.6) — the citizen REMEMBERS the event;
   // wakes and interviews read LifeHistory, so this is what makes a bond real.
@@ -2634,8 +2669,9 @@ function detectTriangleRivalries_(ctx) {
         if (nb) {
           nb.intensity = TRIANGLE_BIRTH_INTENSITY;
           var si = people[suitors[i]], sj = people[suitors[j]];
-          if (si) appendBondLifeLine_(ctx, si.idx, 'Bond', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle);
-          if (sj) appendBondLifeLine_(ctx, sj.idx, 'Bond', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle);
+          // engine.201 Wave 2: the sting is guarded trust (warmth -1), not the romance line's warmth +1
+          if (si) appendBondLifeLine_(ctx, si.idx, 'TrustGuarded', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle);
+          if (sj) appendBondLifeLine_(ctx, sj.idx, 'TrustGuarded', 'there is someone else circling ' + ((people[popId] || {}).name || 'them') + ' — and it stings', cycle);
           Logger.log('P5 triangle rivalry: ' + suitors[i] + ' <-> ' + suitors[j] + ' over ' + popId);
         }
       }

@@ -43,23 +43,26 @@ var DIAL_MAP = {
   'Work':               { drive: 4 },                 // legacy generic work tag
   'CivicRole':          { sociability: 5, drive: 2 },
   'Civic Role':         { sociability: 5, drive: 2 }, // space variant
-  'Civic':              { sociability: 1 },                 // engine.176: ambient tint
-  'Civic Perception':   { sociability: 1 },                 // engine.176: ambient tint
+  // engine.201 ruling 1b (2026-09-13): a routine generator line is a plain day — it moves nothing.
+  //   The crons read these lines as lived experience; the citizen's own reaction routes back
+  //   through the reflection path. Before: +1 tints, ~1,300 upward pushes a cycle, none down.
+  'Civic':              {},
+  'Civic Perception':   {},
 
   // --- Social / Sociability ---
   'Relationship':       { sociability: 5, warmth: 2 },
   'Alliance':           { sociability: 4 },
   'Rivalry':            { sociability: 2, composure: -3 },
-  'Neighborhood':       { sociability: 1 },                 // engine.176: ambient tint (was 3 — the saint-maker, 3,086 live lines)
+  'Neighborhood':       {},                            // ruling 1b plain day (was +3 then +1 sociability — the saint-maker)
   'Community':          { sociability: 4, warmth: 2 },
   'Reputation':         { integrity: 3, sociability: 2 },
   'Media':              { sociability: 4 },
   'Quoted':             { sociability: 3 },
   'Public':             { sociability: 4 },           // public life / recognition
-  'Team':               { outabout: 1 },               // at the games (engine.176 tint)
-  'Season':             { outabout: 1 },               // following/competing through a season (engine.176 tint)
+  'Team':               {},                            // ruling 1b plain day
+  'Season':             {},                            // ruling 1b plain day
   'Cultural':           { openness: 4, outabout: 3 },  // a cultural night out
-  'Lifestyle':          { openness: 1 },                    // engine.176: ambient tint
+  'Lifestyle':          {},                            // ruling 1b plain day
   'Mentorship':         { warmth: 6, drive: 2 },
   'Faith':              { warmth: 3, composure: 2 },   // faith community + grounding
 
@@ -80,8 +83,8 @@ var DIAL_MAP = {
 
   // --- Health / Composure ---
   'Health':             { composure: -2 },
-  'Critical':           { composure: -8 },
-  'Hospitalized':       { composure: -6 },
+  'Critical':           { composure: -8, outabout: -1 },  // engine.201 ruling 2: health limits getting out
+  'Hospitalized':       { composure: -6, outabout: -1 },
   'Setback':            { composure: -5 },
   'Recovering':         { composure: 2 },
   'Recovery':           { composure: 6 },
@@ -153,15 +156,49 @@ var DIAL_MAP = {
   'Micro-Event':        {},                            // "quiet week, no major changes"
   'Life Event':         {},
   'Life':               {},
-  'Personal':           { openness: 1 },               // introspection / reflection (engine.176 tint)
-  'PrevEvening':        { outabout: 1 },                // out in last night's city (engine.176 tint)
-  'FirstFriday':        { outabout: 1 },                // the First Friday art walk (engine.176 tint)
-  'Holiday':            { outabout: 1 },                // engine.176 tint
-  'CreationDay':        { outabout: 1 },                // engine.176 tint
-  'Sports':             { outabout: 1 },                // at / following the game (engine.176 tint)
+  'Personal':           {},                            // ruling 1b plain day
+  'PrevEvening':        {},                            // ruling 1b plain day
+  'FirstFriday':        {},                            // ruling 1b plain day
+  'Holiday':            {},                            // ruling 1b plain day
+  'CreationDay':        {},                            // ruling 1b plain day
+  'Sports':             {},                            // ruling 1b plain day
   'Weather':            {},                             // a plain day with weather in it (ruling 1)
-  'Arrival':            { openness: 3 }                 // arrived in Oakland -> new start
+  'Arrival':            { openness: 3 },                // arrived in Oakland -> new start
+
+  // --- engine.201 Wave 2 (builder rulings 2+3, 2026-09-13): the world acting ON a citizen, ordinary
+  //     scale +-1, each emitted at a real domain seam (never by a narrator, never by wake attention) ---
+  'ConnectionWithdrawn': { sociability: -1 },           // a named bond went cold (bondEngine: active -> dormant)
+  'ConnectionMaintained': { sociability: 1 },           // a named bond picked back up (dormant -> active)
+  'TrustGuarded':        { warmth: -1 },                // a confrontation / someone else circling, with a person they know
+  'RoutineRetrenched':   { openness: -1 },              // a venture closed, or a field change ended in a layoff
+  'ActivityExpanded':    { outabout: 1 },               // the hood's shops and events run in the city's top band
+  'BoundaryKept':        { integrity: 1 },              // an ordinary chance to cut a corner, declined (non-crime-reachable citizens)
+  'BoundaryCompromised': { integrity: -1 },             // ruling 3: an ordinary non-criminal slip
+  'Bond':                { warmth: 1 },                 // a bond deepened ("more than friends now") — real event, was the +composure fallback
+  'Faith-Drift':         {}                             // left a congregation quietly: not a benefit (was Faith +3/+2); direction unruled
 };
+
+// engine.201 Wave 2 (ruling 2): pressure lines carry their CAUSE. The tag stays Friction/Strain/Stumble
+// (the pressure state); the cause is recovered from the emitter's own deterministic text pool (exact match,
+// no regex order) and adds the cause's second dial. Money tight / hood rougher -> out less; a job search
+// that keeps failing -> drive; long hours -> family. Built below PRESSURE_TEXT (resolved lazily).
+var PRESSURE_CAUSE_FX = {
+  rent: { outabout: -1 }, debt: { outabout: -1 }, hood: { outabout: -1 },
+  unemployed: { drive: -1 }, overwork: { family: -1 }
+};
+var PRESSURE_STATE_TAGS = { 'Friction': true, 'Strain': true, 'Stumble': true };
+var pressureCauseByText_ = null;
+function pressureCauseOfText_(text) {
+  if (!pressureCauseByText_) {
+    pressureCauseByText_ = {};
+    for (var cause in PRESSURE_TEXT) {
+      if (!PRESSURE_TEXT.hasOwnProperty(cause)) continue;
+      for (var i = 0; i < PRESSURE_TEXT[cause].length; i++) pressureCauseByText_[PRESSURE_TEXT[cause][i]] = cause;
+    }
+  }
+  var t = String(text == null ? '' : text).trim();
+  return pressureCauseByText_.hasOwnProperty(t) ? pressureCauseByText_[t] : null;
+}
 
 // Structural markers — summaries/state, NOT events. The only legitimately inert tags.
 var STRUCTURAL = { 'Compressed': true, 'CareerState': true, 'EngineEvent': false };
@@ -246,7 +283,18 @@ function nudgesForEvent_(tag, severityMult, text) {
   var norm = baseTag_(tagS);
   if (STRUCTURAL[norm] === true) return {};               // Compressed / CareerState
   if (EDITION_RE.test(tagS)) return scale_(EDITION_FX, severityMult);
-  if (DIAL_MAP.hasOwnProperty(norm)) return scale_(DIAL_MAP[norm], severityMult);
+  if (DIAL_MAP.hasOwnProperty(norm)) {
+    if (PRESSURE_STATE_TAGS[norm]) {
+      var pCause = pressureCauseOfText_(text);
+      if (pCause && PRESSURE_CAUSE_FX[pCause]) {
+        var both = scale_(DIAL_MAP[norm], 1);
+        var cfx = PRESSURE_CAUSE_FX[pCause];
+        for (var ck in cfx) { if (cfx.hasOwnProperty(ck)) both[ck] = (both[ck] || 0) + cfx[ck]; }
+        return scale_(both, severityMult);
+      }
+    }
+    return scale_(DIAL_MAP[norm], severityMult);
+  }
 
   // content routing on tag + text (handles Untagged / EngineEvent / sentence-tags)
   var hay = (tagS + ' ' + (text == null ? '' : String(text))).toLowerCase();
@@ -434,7 +482,7 @@ if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     emitPressureTag_: emitPressureTag_, pressureState_: pressureState_, pressureAbsCycle_: pressureAbsCycle_,
     pressureBar_: pressureBar_, pressureText_: pressureText_, pressureRun_: pressureRun_, pressureRunFromState_: pressureRunFromState_, PRESSURE_SLOT: PRESSURE_SLOT, PRESSURE_ADAPT: PRESSURE_ADAPT, PRESSURE_LOOKBACK: PRESSURE_LOOKBACK, PRESSURE_NO_ADAPT: PRESSURE_NO_ADAPT,
-    DIAL_MAP: DIAL_MAP, CONTENT_RULES: CONTENT_RULES, STRUCTURAL: STRUCTURAL,
+    DIAL_MAP: DIAL_MAP, CONTENT_RULES: CONTENT_RULES, STRUCTURAL: STRUCTURAL, PRESSURE_CAUSE_FX: PRESSURE_CAUSE_FX, pressureCauseOfText_: pressureCauseOfText_,
     EDITION_RE: EDITION_RE, CALENDAR_SUFFIXES: CALENDAR_SUFFIXES, DEFAULT_AMBIENT: DEFAULT_AMBIENT,
     baseTag_: baseTag_, nudgesForEvent_: nudgesForEvent_,
     nudgesForReflection_: nudgesForReflection_, hasTag_: hasTag_

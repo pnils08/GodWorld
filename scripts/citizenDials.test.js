@@ -82,14 +82,15 @@ console.log('═══ Section C — tag -> dial map');
   assert('C2 multi-dial: Wedding moves family AND warmth', M.nudgesForEvent_('Wedding').family > 0 && M.nudgesForEvent_('Wedding').warmth > 0);
   assert('C3 calendar suffix stripped: Career-FirstFriday == Career', JSON.stringify(M.nudgesForEvent_('Career-FirstFriday')) === JSON.stringify(M.nudgesForEvent_('Career')));
   assert('C4 real compound NOT stripped: Career-Transition carries openness', M.nudgesForEvent_('Career-Transition').openness > 0);
-  assert('C5 ambient tag (Weather) still nudges (every event counts)', M.hasTag_('Weather'));
+  assert('C5 plain-day tag (Weather) moves nothing (engine.201 ruling 1)', !M.hasTag_('Weather'));
   assert('C6 edition tag (E97) -> sociability (public recognition)', M.nudgesForEvent_('E97').sociability > 0);
   assert('C6b structural marker (Compressed) -> inert (summary, not an event)', JSON.stringify(M.nudgesForEvent_('Compressed')) === '{}');
   assert('C6c content-routed sentence-tag (health) -> composure down', M.nudgesForEvent_('Serious health condition diagnosed.').composure < 0);
-  assert('C6d untagged ordinary day -> small default nudge (never inert)', M.hasTag_('Untagged', 'just another day'));
+  assert('C6d untagged ordinary day -> no nudge (engine.201 ruling 1: a plain day moves nothing)', !M.hasTag_('Untagged', 'just another day'));
   // Out-and-About split: attendance/evening events feed outabout, NOT sociability
-  assert('C7a FirstFriday -> out-and-about, not sociability', M.nudgesForEvent_('FirstFriday').outabout > 0 && !M.nudgesForEvent_('FirstFriday').sociability);
-  assert('C7b Sports/Team -> out-and-about', M.nudgesForEvent_('Sports').outabout > 0 && M.nudgesForEvent_('Team').outabout > 0);
+  // engine.201 ruling 1b: routine attendance/evening generator lines are plain days; outabout moves from causes
+  assert('C7a FirstFriday is a plain day (moves nothing)', Object.keys(M.nudgesForEvent_('FirstFriday')).length === 0);
+  assert('C7b Sports/Team are plain days; ActivityExpanded is the out-and-about cause', Object.keys(M.nudgesForEvent_('Sports')).length === 0 && Object.keys(M.nudgesForEvent_('Team')).length === 0 && M.nudgesForEvent_('ActivityExpanded').outabout === 1 && !M.nudgesForEvent_('ActivityExpanded').sociability);
   assert('C7c Cultural -> out-and-about + openness', M.nudgesForEvent_('Cultural').outabout > 0 && M.nudgesForEvent_('Cultural').openness > 0);
   assert('C7d Relationship still feeds sociability (depth of connection)', M.nudgesForEvent_('Relationship').sociability > 0 && !M.nudgesForEvent_('Relationship').outabout);
   assert('C7 Conduct severity ladder: Grave erodes integrity more than Petty', M.nudgesForEvent_('Transgression-Grave').integrity < M.nudgesForEvent_('Transgression-Petty').integrity);
@@ -136,6 +137,57 @@ console.log('═══ Section E — storage round-trip (Phase 2 readiness)');
   const c2 = E.deserialize_(JSON.parse(json));
   assert('E1 serialize -> JSON -> deserialize preserves current dial values',
     E.DIALS.every(d => E.current_(c, d) === E.current_(c2, d)));
+}
+
+// engine.201 Wave 1 — synthetic, local-only regression fixtures.
+console.log('═══ Wave 1 — sign, current-value room, and meaningful tags');
+{
+  for (const sign of [1, -1]) {
+    const c = E.newCitizen_();
+    E.applyEvent_(c, { effects: { composure: -20 * sign } });
+    for (let n = 0; n < 3; n++) E.applyEvent_(c, { effects: { composure: sign } });
+    assert(`W1d streak ${sign} cannot harden opposite residual mood`,
+      c.base.composure === 50 && c.streak.composure === 0,
+      JSON.stringify({ base: c.base.composure, mood: c.mood.composure, streak: c.streak.composure }));
+  }
+  for (const sign of [1, -1]) {
+    const c = E.newCitizen_();
+    const values = [];
+    for (let cycle = 1; cycle <= 120; cycle++) {
+      E.settleCycle_(c);
+      E.applyEvent_(c, { effects: { sociability: 4 * sign } });
+      values.push(E.current_(c, 'sociability'));
+    }
+    assert(`W1e event ${sign} stays off both current-value rails for 120 Cycles`,
+      values.every(v => v > 0 && v < 100) && sign * (values[119] - 50) > 0,
+      `min=${Math.min(...values)}, max=${Math.max(...values)}, first pin Cycle=${values.findIndex(v => v === 0 || v === 100) + 1}`);
+  }
+  const C = require('../utilities/compressLifeHistory.js');
+  for (const [sign, event, affect, dial] of [[1, 'Community', 'Calm', 'sociability'], [-1, 'Transgression-Grave', 'Anxious', 'integrity']]) {
+    const c = E.newCitizen_();
+    const values = [];
+    for (let cycle = 1; cycle <= 120; cycle++) {
+      E.settleCycle_(c);
+      E.accreteReflectionsIntoBase_(c, [{ event, affect, text: 'Synthetic W1 reflection' }], M,
+        C.REFLECTION_MULT, C.REFLECTION_ACCRETION_FRAC);
+      values.push(E.current_(c, dial));
+    }
+    assert(`W1e reflection ${sign} stays off both current-value rails for 120 Cycles`,
+      values.every(v => v > 0 && v < 100) && sign * (values[119] - 50) > 0,
+      `min=${Math.min(...values)}, max=${Math.max(...values)}, first pin Cycle=${values.findIndex(v => v === 0 || v === 100) + 1}`);
+  }
+  assert('W1g DEFAULT_AMBIENT is empty', JSON.stringify(M.DEFAULT_AMBIENT) === '{}', JSON.stringify(M.DEFAULT_AMBIENT));
+  for (const tag of ['Background', 'Daily', 'Micro-Event', 'Life Event', 'Life', 'Weather']) {
+    const fx = M.nudgesForEvent_(tag, 1, 'Synthetic ordinary occurrence');
+    assert(`W1g ${tag} is dial-neutral`, JSON.stringify(fx) === '{}', JSON.stringify(fx));
+  }
+  const controls = ['Promotion', 'Setback', 'Friction', 'Strain', 'Stumble'];
+  for (const text of ['interest', 'restaurant', 'quiet calm rest']) {
+    const fx = M.nudgesForEvent_('Synthetic-Unmapped-W1', 1, text);
+    assert(`W1g ordinary text "${text}" is neutral while named consequences still move`,
+      JSON.stringify(fx) === '{}' && controls.every(tag => Object.values(M.nudgesForEvent_(tag)).some(v => v !== 0)),
+      JSON.stringify({ fx, controls: controls.map(tag => [tag, M.nudgesForEvent_(tag)]) }));
+  }
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -251,6 +251,43 @@ function bizClamp_(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
 // Pure: one business, one cycle. Returns { growth, revenue, drift, streak, win, disrupted, parts }.
 // engine.178 (S438): the owner's signed dial bands off Key_Personnel -> ledger DialState.
 // First owner/founder entry carrying a POPID wins; null when none resolves.
+// engine.201 Wave 2 (builder ruling 2, 2026-09-13): a venture that fails lowers its owner's openness —
+// the retreat to routine. Owners resolve exactly as bizOwnerBands_ does (POPID when the cell carries one,
+// else full name; a name shared by two ledger rows resolves nothing). Line lands in the owner's own
+// LifeHistory cell, the only place the Phase-9 fold reads. Returns owners lined.
+function noteVentureClosedOwners_(ctx, keyPersonnelCell, bizName, cycle) {
+  if (!keyPersonnelCell || typeof parseKeyPersonnelOwners_ !== 'function' || !ctx.ledger || !ctx.ledger.headers) return 0;
+  var h = ctx.ledger.headers, iP = h.indexOf('POPID'), iF = h.indexOf('First'), iL = h.indexOf('Last'), iLife = h.indexOf('LifeHistory');
+  if (iP < 0 || iLife < 0) return 0;
+  if (!ctx._ventureRowByPop) {
+    ctx._ventureRowByPop = {}; ctx._ventureRowByName = {};
+    for (var r = 0; r < ctx.ledger.rows.length; r++) {
+      var pp = String(ctx.ledger.rows[r][iP] || '').trim().toUpperCase();
+      if (!pp) continue;
+      ctx._ventureRowByPop[pp] = r;
+      if (iF >= 0 && iL >= 0) {
+        var nk = (String(ctx.ledger.rows[r][iF] || '').trim() + ' ' + String(ctx.ledger.rows[r][iL] || '').trim()).trim().toLowerCase();
+        if (nk) ctx._ventureRowByName[nk] = ctx._ventureRowByName.hasOwnProperty(nk) ? -1 : r;
+      }
+    }
+  }
+  var entries = parseKeyPersonnelOwners_(keyPersonnelCell), lined = 0, seen = {};
+  for (var e = 0; e < entries.length; e++) {
+    if (!entries[e].owner) continue;
+    var ri = entries[e].pop ? ctx._ventureRowByPop[String(entries[e].pop).toUpperCase()] : undefined;
+    if (ri == null && entries[e].name) ri = ctx._ventureRowByName[String(entries[e].name).trim().toLowerCase()];
+    if (ri == null || ri < 0 || seen[ri]) continue;
+    seen[ri] = true;
+    var row = ctx.ledger.rows[ri];
+    var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+    var line = stamp + ' — [RoutineRetrenched] watched ' + bizName + ' close its doors and went back to what they knew';
+    row[iLife] = row[iLife] ? String(row[iLife]) + '\n' + line : line;
+    lined++;
+  }
+  if (lined) ctx.ledger.dirty = true;
+  return lined;
+}
+
 function bizOwnerBands_(ctx, keyPersonnelCell) {
   if (!keyPersonnelCell || typeof parseKeyPersonnelOwners_ !== 'function' || typeof getCitizenDialBands_ !== 'function') return null;
   if (!ctx._bizDialByPop) {
@@ -417,6 +454,7 @@ function applyBusinessDynamics_(ctx) {
       if (stated > 0) { declines[id] = stated; out.shed += stated; }
       state[id] = [d.streak, 0, cycle];
       closures.push({ id: id, name: bName, hood: hood, sector: String(row[iSec] || ''), closedCycle: cycle, stated: stated });
+      out.ownersRetrenched = (out.ownersRetrenched || 0) + noteVentureClosedOwners_(ctx, iKP >= 0 ? row[iKP] : '', bName, cycle); // engine.201 Wave 2
       S.worldEvents = S.worldEvents || [];
       S.worldEvents.push({
         cycle: cycle, domain: 'COMMUNITY', subdomain: 'business-closure', neighborhood: hood,

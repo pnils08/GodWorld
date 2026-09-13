@@ -299,5 +299,104 @@ const bl = rows => [BLH].concat(rows);
   assert('deterministic', run() === run());
 }
 
+// engine.201 W1a/W1b: full career producer -> stored LifeHistory -> Phase 9.
+// All citizens/businesses below are explicitly synthetic and exist only in this VM.
+{
+  const errors = [], writes = [];
+  const w = {
+    console, Math, JSON, Object, Array, String, Number, Date, RegExp, isNaN, isFinite, parseInt, parseFloat,
+    Logger: { log: message => { if (/failed|error/i.test(String(message))) errors.push(String(message)); } },
+    safeRand_: ctx => ctx.rng,
+    inWorldStamp_: ctx => 'C' + ctx.summary.absoluteCycle,
+    queueAppendIntent_: (ctx, tab, row) => writes.push({ tab, row: row.slice() }),
+    queueBatchAppendIntent_: (ctx, tab, rows) => rows.forEach(row => writes.push({ tab, row: row.slice() })),
+    queueCellIntent_: () => {} // capture boundary only; never open a Sheet
+  };
+  vm.createContext(w);
+  for (const rel of [
+    'utilities/citizenMemory.js', 'utilities/citizenDialMap.js', 'utilities/compressLifeHistory.js',
+    'utilities/citizenDerivation.js', 'phase01-config/advanceSimulationCalendar.js',
+    'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/maneuverEngine.js',
+    'phase05-citizens/runCareerEngine.js'
+  ]) {
+    const filename = path.join(__dirname, '..', rel);
+    vm.runInContext(fs.readFileSync(filename, 'utf8'), w, { filename });
+  }
+  const headers = H.concat(['TraitProfile', 'DialState']);
+  const ix = name => headers.indexOf(name);
+  const careerState = 'C199 — [CareerState] industry=service|employer=small|level=1|tenure=4|skill=general:0.2';
+  function fixture(overrides) {
+    const c = w.newCitizen_(); c.folded = 199;
+    const r = row(Object.assign({ POPID: 'SYNTHETIC-W1-CAREER', First: 'Synthetic', Last: 'Fixture',
+      EmployerBizId: 'BIZ-SYNTHETIC-W1', LifeHistory: careerState }, overrides));
+    return r.concat(['Updated:c199', w.serializeDialState_(c)]);
+  }
+  function run(r, growth, stated, sequence, maneuver) {
+    errors.length = 0; writes.length = 0;
+    let draw = 0;
+    const business = [BLH.slice(), ['BIZ-SYNTHETIC-W1', 'Synthetic W1 Business', 'Bakery', 'Temescal', stated, 50000, 100000, growth]];
+    const ctx = { mode: {}, config: { cycleCount: 200 }, now: 'C200',
+      summary: { absoluteCycle: 200, maneuver: { byPop: maneuver || {} } },
+      rng: () => draw < sequence.length ? sequence[draw++] : 0.999,
+      ledger: { headers, rows: [r], dirty: false },
+      ss: { getSheetByName: tab => tab === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => business.map(row => row.slice()) }) } : null }
+    };
+    w.runCareerEngine_(ctx);
+    if (errors.length) throw new Error('W1 career fixture failed inside real engine: ' + errors.join('; '));
+    return { ctx, logs: writes.filter(x => x.tab === 'LifeHistory_Log').map(x => x.row) };
+  }
+  function proveFold(label, result, tag, effects, branchReady) {
+    const { ctx, logs } = result;
+    const r = ctx.ledger.rows[0];
+    const log = logs.filter(x => x[1] === r[0] && x[3] === tag);
+    if (!branchReady(ctx) || log.length !== 1) {
+      throw new Error('W1 fixture did not reach ' + label + ': ' + JSON.stringify({ signals: ctx.summary.careerSignals, logs }));
+    }
+    const lines = w.parseLifeHistoryEntries_(r[ix('LifeHistory')]).entries.filter(e => e.tag === tag && e.cycle === 200);
+    w.compressLifeHistory_(ctx);
+    const once = JSON.parse(r[ix('DialState')]);
+    // The next normal compress settles mood. Compare with that decay, not byte
+    // identity: a settledThrough/idempotent same-Cycle envelope is deferred.
+    const expectedNext = w.deserialize_(once); w.settleCycle_(expectedNext);
+    ctx.summary = { absoluteCycle: 201 }; ctx.config.cycleCount = 201;
+    w.compressLifeHistory_(ctx);
+    const twice = JSON.parse(r[ix('DialState')]);
+    const deltasMatch = w.DIALS.every(d => Math.abs(once.mood[d] - (effects[d] || 0)) < 1e-9 && once.base[d] === 50);
+    const noReplay = w.DIALS.every(d => twice.base[d] === once.base[d] && Math.abs(twice.mood[d] - expectedNext.mood[d]) < 1e-9);
+    assert(label, lines.length === 1 && deltasMatch && noReplay && once.folded === 200 && twice.folded === 200,
+      JSON.stringify({ stampedCellLines: lines.length, logRows: log.length, firstMood: once.mood, secondMood: twice.mood, folded: [once.folded, twice.folded] }));
+  }
+  // Two ordinary texture draws (XP, chance) miss; employer contraction draw hits.
+  proveFold('W1a employer-success layoff reaches the cell and folds once',
+    run(fixture({ SkillTags: '' }), -20, 1, [0.999, 0.999, 0, 0.5]),
+    'Career-Layoff', { drive: -2, composure: -5 },
+    ctx => ctx.summary.careerSignals.employerSuccess.layoffs === 1 && ctx.summary.careerSignals.headcountWriteBack.fired === 0);
+  proveFold('W1a headcount-reconciliation layoff reaches the cell and folds once',
+    run(fixture({ SkillTags: '' }), 0, 0, [0.999, 0.999, 0.999, 0.5]),
+    'Career-Layoff', { drive: -2, composure: -5 },
+    ctx => ctx.summary.careerSignals.employerSuccess.layoffs === 0 && ctx.summary.careerSignals.headcountWriteBack.fired === 1);
+  proveFold('W1a same-field hire reaches the cell and folds once with drive4 composure2',
+    run(fixture({ EmployerBizId: '', SkillTags: 'Food & Culture', RoleType: 'Baker' }), 100, 52, [0.999, 0.999, 0.5]),
+    'Career-Hired', { drive: 4, composure: 2 },
+    ctx => ctx.summary.careerSignals.rehires.hired === 1 && ctx.summary.careerSignals.rehires.crossField === 0);
+  proveFold('W1a willing field change reaches the cell and folds once with drive3 openness3',
+    run(fixture({ EmployerBizId: '', SkillTags: 'Healthcare', RoleType: 'Nurse' }), 100, 52, [0.999, 0.999, 0.5],
+      { 'SYNTHETIC-W1-CAREER': { posture: 'climb', openness: 80 } }),
+    'Career-FieldChange', { drive: 3, openness: 3 },
+    ctx => ctx.summary.careerSignals.rehires.hired === 1 && ctx.summary.careerSignals.rehires.crossField === 1);
+
+  const latestLayoff = careerState + '\nC199 — [Career-Layoff] Synthetic prior job loss';
+  const laidOff = run(fixture({ EmployerBizId: '', SkillTags: 'Food & Culture', Income: 40000, LifeHistory: latestLayoff }), 0, 1, [0.999, 0.999]);
+  const selfEmployed = run(fixture({ EmployerBizId: '', SkillTags: 'Food & Culture', Income: 60000 }), 0, 1, [0.999, 0.999]);
+  const rehired = run(fixture({ EmployerBizId: '', SkillTags: 'Food & Culture', Income: 60000,
+    LifeHistory: latestLayoff + '\nC199 — [Career-Hired] Synthetic subsequent independent work' }), 0, 1, [0.999, 0.999]);
+  const pressureCount = result => result.ctx.summary.careerSignals.rehires.pressureTagged;
+  const pressureLine = result => /C200 — \[Stumble\]/.test(result.ctx.ledger.rows[0][ix('LifeHistory')]);
+  assert('W1b positive-income latest-layoff gets unemployed pressure; independent earner and later hire do not',
+    pressureCount(laidOff) === 1 && pressureLine(laidOff) &&
+    pressureCount(selfEmployed) === 0 && !pressureLine(selfEmployed) && pressureCount(rehired) === 0 && !pressureLine(rehired),
+    JSON.stringify({ laidOff: pressureCount(laidOff), independent: pressureCount(selfEmployed), laterHire: pressureCount(rehired) }));
+}
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

@@ -88,7 +88,7 @@ function makeCtx(rows, opts) {
 
 // run N independent single-citizen cycles, return tag counts
 function trials(n, ds, opts) {
-  const counts = { Resisted: 0, 'Transgression-Petty': 0, 'Transgression-Serious': 0, 'Transgression-Grave': 0, total: 0 };
+  const counts = { Resisted: 0, BoundaryKept: 0, BoundaryCompromised: 0, 'Transgression-Petty': 0, 'Transgression-Serious': 0, 'Transgression-Grave': 0, total: 0 };
   for (let i = 0; i < n; i++) {
     rngImpl = mulberry32(i + 7);
     const ctx = makeCtx([makeRow('POP-T' + i, ds, opts)], opts);
@@ -123,14 +123,19 @@ console.log('═══ T7 Section 2 — the integrity ladder (commit odds + seve
   assert('2.2 saint: ZERO transgressions (crimeReachable gate)',
     saint['Transgression-Petty'] + saint['Transgression-Serious'] + saint['Transgression-Grave'] === 0,
     JSON.stringify(saint));
-  assert('2.3 saint: all resolutions are Resisted', saint.Resisted === saint.total);
+  // engine.201 ruling 3: a citizen the crime ladder cannot reach resolves as BoundaryKept / BoundaryCompromised
+  assert('2.3 saint: every resolution is an ordinary boundary test, slips rare (~5%)', saint.BoundaryKept + saint.BoundaryCompromised === saint.total && saint.BoundaryCompromised / saint.total < 0.08, JSON.stringify(saint));
 
   // accessor contract (engine.31, compressLifeHistory.js ~L800): crimeReachable
   // = bandIndex <= 0 = raw integrity < 20 = band -2 ONLY. Bands 0 and -1 resist.
   const neutral = trials(6000, dialState({}));            // integrity 50 -> band 0
   const midLow = trials(6000, dialState({ integrity: 30 })); // band -1 -> still unreachable
   const outlaw = trials(6000, dialState({ integrity: 10, composure: 10 })); // band -2 -> commitP .75
-  const commitShare = c => (c.total ? (c.total - c.Resisted) / c.total : 0);
+  const commitShare = c => (c.total ? (c['Transgression-Petty'] + c['Transgression-Serious'] + c['Transgression-Grave']) / c.total : 0);
+  const slipShare = c => (c.total ? c.BoundaryCompromised / c.total : 0);
+  assert('2.9 ruling 3: neutral citizens slip ~25% of ordinary tests', slipShare(neutral) > 0.2 && slipShare(neutral) < 0.3, slipShare(neutral).toFixed(3));
+  assert('2.10 ruling 3: slip odds order by integrity band (-1 > 0 > +2)', slipShare(midLow) > slipShare(neutral) && slipShare(neutral) > slipShare(saint), [slipShare(midLow), slipShare(neutral), slipShare(saint)].map(v => v.toFixed(3)).join(' '));
+  assert('2.11 crime-reachable citizens never take the ordinary-slip path', outlaw.BoundaryCompromised === 0 && outlaw.BoundaryKept === 0, JSON.stringify(outlaw));
   assert('2.4 neutral (band 0): ZERO commits — crimeReachable gate holds',
     commitShare(neutral) === 0 && neutral.total > 20, commitShare(neutral).toFixed(3) + ' of ' + neutral.total);
   assert('2.4b band -1: ZERO commits — only far-low integrity is reachable (accessor contract)',
@@ -149,7 +154,7 @@ console.log('═══ T7 Section 3 — the RimWorld counterweight (crime spike 
   const calm = trials(8000, dialState({ integrity: 10 }), { crimePressure: 50 });
   const spike = trials(8000, dialState({ integrity: 10 }), { crimePressure: 80 });
   assert('3.1 spike fires FEWER tests (rate ×0.7)', spike.total < calm.total, spike.total + ' vs ' + calm.total);
-  const commitShare = c => (c.total ? (c.total - c.Resisted) / c.total : 0);
+  const commitShare = c => (c.total ? (c['Transgression-Petty'] + c['Transgression-Serious'] + c['Transgression-Grave']) / c.total : 0);
   assert('3.2 spike commit share drops (×0.6 — resilience, no cohort darkening)',
     commitShare(spike) < commitShare(calm),
     commitShare(spike).toFixed(3) + ' vs ' + commitShare(calm).toFixed(3));

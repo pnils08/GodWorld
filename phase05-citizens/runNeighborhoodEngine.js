@@ -147,6 +147,24 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
   ]
 };
 
+// engine.201 Wave 2: the top quarter of hoods by retailVitality + eventAttractiveness off the PERSISTED
+// opening snapshot (S.neighborhoodState, never the same-cycle pulse). Ties at the cut are included.
+// Returns { hood: true }; empty when the snapshot is missing.
+function activityTopHoods_(state) {
+  var out = {}, list = [];
+  if (!state) return out;
+  for (var h in state) {
+    if (!state.hasOwnProperty(h) || !state[h]) continue;
+    var sc = (Number(state[h].retailVitality) || 0) + (Number(state[h].eventAttractiveness) || 0);
+    if (sc > 0) list.push({ h: h, sc: sc });
+  }
+  if (!list.length) return out;
+  list.sort(function(a, b) { return b.sc - a.sc; });
+  var cut = list[Math.max(0, Math.ceil(list.length / 4) - 1)].sc;
+  for (var k = 0; k < list.length; k++) { if (list[k].sc >= cut) out[list[k].h] = true; }
+  return out;
+}
+
 function runNeighborhoodEngine_(ctx) {
 
   var rng = safeRand_(ctx);
@@ -550,6 +568,14 @@ function runNeighborhoodEngine_(ctx) {
           continue;
         }
       }
+
+      // engine.201 Wave 2 (builder ruling 2, 2026-09-13): in a hood whose shops and events run in the
+      // city's top band, the ordinary line is the hood pulling people out — outabout +1. Relative to the
+      // city's own spread (SIM_DOCTRINE §15: a band cannot rot when the scale moves); pressured hoods
+      // already took the pressure tint above. Holiday / First Friday / Creation Day lines below keep
+      // their own tag (plain days).
+      if (!ctx._activityTopHoods) ctx._activityTopHoods = activityTopHoods_(S.neighborhoodState);
+      if (ctx._activityTopHoods[neighborhood]) eventTag = "ActivityExpanded";
 
       // Determine event tag (v2.2)
       if (isFirstFriday && firstFridayEvents[neighborhood] && firstFridayEvents[neighborhood].indexOf(entry) >= 0) {

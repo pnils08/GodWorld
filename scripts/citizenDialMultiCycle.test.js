@@ -129,5 +129,34 @@ assert('P0 drive actually climbed above neutral while active (non-vacuous)', pea
 assert('P1 drive HELD at peak through 8 quiet cycles (no erase)', persist.bases[11].drive >= peak - 0.001, `final=${persist.bases[11].drive} peak=${peak}`);
 assert('P2 face stayed pipe-delimited with Archetype: token throughout', /(^|\|)Archetype:/.test(persist.finalFace));
 
+// engine.201 W1c: real stamped-history fold, synthetic citizens, no forceAll.
+{
+  function w1Trace(batches) {
+    let state = E.newCitizen_(); state.folded = 100;
+    let ds = C.serializeDialState_(state), life = '', profile = 'Updated:c100';
+    const states = [];
+    for (const [cycle, tags] of batches) {
+      life = [life, ...tags.map(tag => `C${cycle} — [${tag}] Synthetic W1 consequence`)].filter(Boolean).join('\n');
+      const ctx = makeCtx('SYNTHETIC-W1-STREAK', life, profile, ds, cycle);
+      C.compressLifeHistory_(ctx);
+      ds = get(ctx, 'DialState'); life = get(ctx, 'LifeHistory'); profile = get(ctx, 'TraitProfile');
+      states.push(JSON.parse(ds));
+    }
+    return states;
+  }
+  const burst = w1Trace([[101, ['Promotion', 'Promotion', 'Promotion']]])[0];
+  assert('W1c three same-Cycle events count as one reinforcement',
+    burst.base.drive === 50 && burst.streak.drive === 1,
+    JSON.stringify({ base: burst.base.drive, streak: burst.streak.drive }));
+  // Revised W1c: elapsed distance alone does not reset a sparse-lived pattern.
+  // Wait until actual persisted mood is zero; only THEN must a push start over.
+  const gapStates = w1Trace([[101, ['Promotion']], [102, ['Promotion']],
+    ...Array.from({ length: 24 }, (_, i) => [103 + i, []]), [127, ['Promotion']]]);
+  const quiet = gapStates[gapStates.length - 2], gap = gapStates[gapStates.length - 1];
+  assert('W1c a push after residual mood settles to zero starts a new streak',
+    quiet.mood.drive === 0 && gap.base.drive === 50 && gap.streak.drive === 1,
+    JSON.stringify({ quietMood: quiet.mood.drive, base: gap.base.drive, streak: gap.streak.drive }));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

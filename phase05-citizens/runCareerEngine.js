@@ -184,6 +184,26 @@ function appendCareerLifeLine_(ctx, row, iLife, cycle, tag, text) {
   row[iLife] = row[iLife] ? String(row[iLife]) + '\n' + line : line;
 }
 
+// engine.201 Wave 2 (builder ruling 2): a layoff that ends a recent field change is a failed try at
+// something new — openness down, the retreat to the old line of work. Called right after the layoff
+// line is appended; looks at the career move BEFORE it. Window: one season (13 cycles).
+var RETRENCH_WINDOW = 13;
+function noteRetrenchAfterFieldChange_(ctx, row, iLife, cycle) {
+  if (!row || iLife < 0) return false;
+  var lines = String(row[iLife] || '').split('\n'), seenLayoff = false;
+  for (var i = lines.length - 1; i >= 0; i--) {
+    var m = /\[(Career-Layoff|Career-Hired|Career-FieldChange)\]/.exec(lines[i]);
+    if (!m) continue;
+    if (!seenLayoff) { if (m[1] === 'Career-Layoff') { seenLayoff = true; continue; } return false; }
+    if (m[1] !== 'Career-FieldChange') return false;
+    var c = (typeof pressureAbsCycle_ === 'function') ? pressureAbsCycle_(lines[i]) : null;
+    if (c == null || cycle - c > RETRENCH_WINDOW) return false;
+    appendCareerLifeLine_(ctx, row, iLife, cycle, 'RoutineRetrenched', 'the new field did not hold; started looking in the old line of work again');
+    return true;
+  }
+  return false;
+}
+
 // engine.201 W1b: true when the citizen's most recent career move on record is a layoff.
 var CAREER_MOVE_RE = /\[(Career-Layoff|Career-Hired|Career-FieldChange)\]/g;
 function latestCareerMoveIsLayoff_(lifeHistory) {
@@ -293,6 +313,7 @@ function applyEmployerSuccess_(ctx, cycle, roll, logRows, S, gapFactor) {
       if (iLastUpd >= 0) vRow[iLastUpd] = ctx.now;
       var layoffText = 'Let go as ' + b.name + ' pulled back';
       appendCareerLifeLine_(ctx, vRow, iLife, cycle, 'Career-Layoff', layoffText); // engine.201 W1a: the fold reads the cell, not the log
+      noteRetrenchAfterFieldChange_(ctx, vRow, iLife, cycle); // engine.201 Wave 2
       logRows.push([ctx.now, vRow[iPop], '', 'Career-Layoff', layoffText, '', cycle]);
       if (!S.careerSignals.businessDeltas[ids[k]]) S.careerSignals.businessDeltas[ids[k]] = { gained: 0, lost: 0 };
       S.careerSignals.businessDeltas[ids[k]].lost += 1;
@@ -1429,6 +1450,7 @@ function runCareerEngine_(ctx) {
         vRow[iLastUpd] = ctx.now;
         var cutText = 'Lost their job when ' + fInfo.name + ' cut ' + shortfall + ' position' + (shortfall > 1 ? 's' : '');
         appendCareerLifeLine_(ctx, vRow, iLife, cycle, 'Career-Layoff', cutText); // engine.201 W1a
+        noteRetrenchAfterFieldChange_(ctx, vRow, iLife, cycle); // engine.201 Wave 2
         logRows.push([ctx.now, vRow[iPopID], '', 'Career-Layoff', cutText, '', cycle]);
         if (!S.careerSignals.businessDeltas[fBizId]) S.careerSignals.businessDeltas[fBizId] = { gained: 0, lost: 0 };
         S.careerSignals.businessDeltas[fBizId].lost += 1; // Phase-6 ripple sees the contraction; stated is already reconciled

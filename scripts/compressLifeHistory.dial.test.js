@@ -240,7 +240,9 @@ console.log('═══ Section H — reflection drain accretes into base');
     [0, 1, 2, 3, 4].map(() => intk('POP-B', '', 'Anxious')), 100);
   C.compressLifeHistory_(ctx2, { forceAll: true });
   const comp5 = baseOf(ctx2, 0).composure;
-  assert('H2 5 sustained Anxious accrete ~5x (lock-in)', Math.abs(comp5 - (50 - 5 * 3 * STEP)) < 1e-9 && comp5 < comp, 'composure=' + comp5);
+  // engine.201 W1e: below the midpoint each push shrinks with room (cur/50), so five pushes land
+  // short of the linear 5x but clearly past one — lock-in without a straight line to the floor.
+  assert('H2 5 sustained Anxious accrete toward 5x with diminishing room (lock-in)', comp5 < comp && comp5 > (50 - 5 * 3 * STEP) && comp5 < 50 - 4 * 3 * STEP * 0.8, 'composure=' + comp5);
 
   // H3 resentful Promotion: composure nets DOWN (affect-only), drive still UP — not the +2 bug
   const ctx3 = drainCtx([{ POPID: 'POP-C', LifeHistory: '' }], [intk('POP-C', 'Promotion', 'Resentful')], 100);
@@ -260,7 +262,8 @@ console.log('═══ Section H — reflection drain accretes into base');
   const ctx5 = drainCtx([{ POPID: 'POP-D', DialState: dialJSON({ composure: 1 }) }],
     [0, 1, 2, 3, 4].map(() => intk('POP-D', '', 'Anxious')), 100);
   C.compressLifeHistory_(ctx5, { forceAll: true });
-  assert('H5 base clamps at 0 (no negative composure)', baseOf(ctx5, 0).composure === 0, 'composure=' + baseOf(ctx5, 0).composure);
+  // engine.201 W1e: room shrinks to zero at the pole, so a near-floor citizen falls toward 0 and never pins there
+  assert('H5 near-floor citizen stays inside (0, 1] — no negative composure, no pin at 0', baseOf(ctx5, 0).composure > 0 && baseOf(ctx5, 0).composure <= 1, 'composure=' + baseOf(ctx5, 0).composure);
 
   // H6 drain-only citizen (no LifeHistory -> no compress) still persists DialState + marks dirty
   const ctx6 = drainCtx([{ POPID: 'POP-E', LifeHistory: '' }], [intk('POP-E', '', 'Anxious')], 100);
@@ -289,6 +292,21 @@ console.log('═══ Section I — no-pending byte-identical regression (objec
   assert('I2 empty intake -> TraitProfile byte-identical', get(empty, 0, 'TraitProfile') === get(noSS, 0, 'TraitProfile'));
   assert('I3 applied=yes/other-pop intake -> DialState still byte-identical (filtered out)', get(otherApplied, 0, 'DialState') === get(noSS, 0, 'DialState'));
   assert('I4 ...and no applied intent queued for this citizen', otherApplied.persist.updates.length === 0);
+}
+
+// engine.201 W1f: pressure must survive the real Phase-9 read/modify/write.
+{
+  const state = E.newCitizen_();
+  state.folded = 105;
+  state.pressure = { rent: { n: 8, l: 106 }, overwork: { n: 3, l: 106 } };
+  const ctx = makeCtx([{ POPID: 'SYNTHETIC-W1-PRESSURE',
+    LifeHistory: 'C106 — [Promotion] Synthetic W1 promotion', TraitProfile: 'Updated:c105',
+    DialState: JSON.stringify(state) }], 106, true);
+  C.compressLifeHistory_(ctx);
+  const stored = JSON.parse(get(ctx, 0, 'DialState'));
+  assert('W1f pressure counters survive compressLifeHistory serialize',
+    JSON.stringify(stored.pressure) === JSON.stringify(state.pressure) && stored.folded === 106 && stored.mood.drive > 0,
+    JSON.stringify({ pressure: stored.pressure || null, folded: stored.folded, driveMood: stored.mood.drive }));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

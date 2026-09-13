@@ -41,6 +41,8 @@ var PULSE_MAP = {
   'Transgression-Serious': { crime: 3, sentiment: -2 },
   'Transgression-Grave':   { crime: 6, sentiment: -3 },
   'Resisted':              { crime: -1 },
+  'BoundaryKept':          { crime: -1 },   // engine.201: the non-crime-reachable resolution of the same test (was Resisted)
+  'BoundaryCompromised':   {},              // engine.201: a non-criminal slip moves no crime metric
 
   // --- Commerce / street life ---
   'Cultural':           { vitality: 1, attractiveness: 2 },

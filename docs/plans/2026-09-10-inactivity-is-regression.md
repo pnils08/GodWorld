@@ -315,9 +315,16 @@ Seam volumes C107–C118: Career-Layoff 10, Career-Hired 17, Career-FieldChange 
 
 Codex adversarial diff review of the build: `output/codex/engine201-diff-review.md` — 4 CONFIRMED + 1 PLAUSIBLE fixed in `830e05ac` (owner POPID fails closed, gone owners excluded, cross-cause seeding, unemployment evidence after trim, inactive retag) plus a 95% pole cap.
 
+**Proof scope:** the 12-cycle numbers above are @18 `f4dba779`. The shipped tree @19 `830e05ac` changed `roomScaled_` (pole cap) and pressure seeding and benched two cycles only (C119–C120, 0 errors). Live C107 is the smoke for `830e05ac`.
+
+**Live C107 expectation:** live has never fired engine.177+, so its first fire folds every stamped line in the 20-line window through the per-cycle netting at once — the catch-up seen on the bench's first cycle (all-neutral 546 → 424 at W1 C107). Expect a one-time 3–5 point move in dial means; it settles the next cycle.
+
+**Mechanism defect found in the proof (engine-sheet, not a builder ruling):** TrustGuarded 410 lines in 12 cycles ≈ 21 rivalries × 2 × most cycles. `updateExistingBonds_` adds +1.5/cycle to an active rivalry and `checkConfrontationTriggers_` fires at ≥ 8 then subtracts only 2, so a rivalry confronts nearly every cycle and both parties lose warmth each time (warmth +229/−403). Pre-existing bond shape; engine.201 made it reach the dials. Fix = confrontation cooldown or the Friction→Strain→adapt run already built for pressure. Filed under engine.197.
+
 ## Changelog
 
 - 2026-09-13 (codex) — Linked the completed engine.201 source review and proposed repair sequence for Claude approval; no implementation or live-state changes.
 - 2026-09-13 (engine-sheet S449) — Codex review accepted in part; builder rulings 1–5 captured; BUILD SPEC Wave 1 (plumbing) + Wave 2 (two-way vocabulary) written; deadline live C107.
 - 2026-09-13 (engine-sheet S449) — Wave 1 bench C107 clean (0 errors, pressure records live, no new pins) but negative share 5.1%; ruling 1b captured; Wave 2 built (table above).
+- 2026-09-13 (engine-sheet S449) — Proof scope stated (@18 twelve cycles, @19 two); live C107 first-fold expectation; rivalry confrontation cadence filed under engine.197.
 - 2026-09-13 (engine-sheet S449) — 12-cycle proof + review fixes; PROD @77; acceptance results recorded; engine.201 done-pending-archive, engine.197 open on the four builder questions.

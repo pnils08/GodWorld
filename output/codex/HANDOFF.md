@@ -1,99 +1,55 @@
 # Codex simulation repair handoff
 
-Updated 2026-09-14. Builder-requested checkpoint, not a claim that the sim is fixed.
+Updated 2026-09-14 after sandbox C108 and C109. Codex directs; engine-sheet applies substrate changes and executes directed builds. This supersedes the earlier unbenched/hospital-unimplemented checkpoint.
 
-## Current direction and authority
+## Current ruling
 
-Mike's current instruction is **"tell codex to take the lead and fix the sim."** This is broader than the earlier one-file reviews and ten-hood defect. Codex chooses and reviews repairs; engine-sheet is the hands-on partner for substrate edits, commits, bench builds and readbacks. Ask Mike directly in the Codex pane for genuinely necessary decisions. Do not ask him to re-scope the whole job again.
+**engine.217 passes its two-Cycle sandbox proof. engine.218 passes local regression and sandbox smoke checks; natural hospital-loss activation was not exercised. Diagnostics remain BENCH ONLY. Further fires, live deployment and push remain held.** Do not deploy mixed repository HEAD: it contains rejected engine.214.
 
-**All fires are held. No deployment, resync, or fire was performed in this repair session. engine.214 is unaccepted for firing.** The latest steering authorizes Codex to run the specific live-to-sandbox reset below when ready; it does not direct an immediate fire. Mike rejected leaving hood names and constants in the engine; use ledger truth and World_Config. The previous engine.214 LAND review only assessed that earlier implementation against its earlier specification, not this broader requirement.
+## Landed repairs
 
-The existing PIN and engine-sheet NEXT still describe Mags leading and firing engine.214. Those lines are stale against Mike's current direction; Codex must not edit them. The owning plan and rollout now record the changed direction. Only NEXT[codex] is ours to update.
+- **engine.217 `9189addf`:** removes the economy registry entry and scheduled duplicate from v3Integration. Phase 6 calculates once; intervening migration survives Phase 8. Compatibility wrapper remains. Six two-Cycle regression scenarios pass across both real scheduler entry points; all six fail against pre-cut source. Owning plan: `docs/plans/2026-09-13-run-cycle-packages-the-world.md`, Task 7.
+- **engine.218 `3e6a8ea1`:** four substrate files preserve recorded hospital income loss through Career, both Wealth floors, health transitions and LifeHistory compression. Unstamped `[HospitalIncomeState] statusStart=<current status key>|hit=<original admission key>` survives trimming. Transitions re-key statusStart; recovery clears the exception. The hit value is an admission/status key, not the Cycle when pay was cut. Actual scheduler order is Career → Generational health → Wealth, within Phase 5. Owner draws remain unchanged and separately unproven. Owning plan and verified wiring: `docs/plans/2026-08-29-employment-system-cascade.md`, D7.
+- **Sync correction `91ca74bc`:** syncSandboxFromLive.js now reads UNFORMATTED_VALUE with SERIAL_NUMBER before RAW writes; the original copy changed numeric/boolean types. Regression: original 3 pass / 1 fail, corrected 4/4. Corrected authorized reset copied 82 tabs / 53,053 rows; six critical tabs matched live exactly in values AND types at numeric C107. Five largest tab counts matched. Eleven oversized historical Media_Briefing cells retain existing truncation; no oversized engine/citizen source cells were found.
 
-## Committed repair: engine.217
+Hospital regression **39/39**; unpatched source **24 failures / 15 controls pass**. Related passing suites: hoodIncome 74, careerStage 83, hospitalTalkback 24, citizenDialMultiCycle 17, griefPeriod 38. Syntax/ES5 checks and partner collision audit passed. Synthetic fixtures never entered Sheets.
 
-**Commit `9189addf`**, authored/landed by engine-sheet under Codex direction, is local and unpushed. Five paths only:
+## Bench result and recipe
 
-- `phase08-v3-chicago/v3Integration.js`
-- `scripts/economicPhaseOwnership.test.js`
-- `docs/plans/2026-09-13-run-cycle-packages-the-world.md` (Task 7)
-- `docs/engine/ROLLOUT_PLAN.md` (engine.217, in-progress)
-- `docs/index.md`
+SANDBOX 0908 sheet `1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM` is **C109**, deployment **@33**. Apps Script `1XcrDvYB89zaEQcXCK3oe4ir8e9fyTTj_uFAxZbEfzj2QzjsDdHC4CNvL`; web deployment `AKfycby-f9gv5sEOj6wURRFk-7H7oDNqUPShLt7KNWbhcYnQJ4e5F85EWWsaDP4Vu3ouFhWs`. Verify current DEPLOY.md pointers before new actions.
 
-The economy ran in Phase 6 and again in Phase 8. C107 logs show 54.01 then 59.01 (`output/execution_log_c107.txt:150`, `:168`). Removing the economy registry entry and its scheduled call from v3Integration leaves Phase6-EconomicRipple the sole scheduled owner. The compatibility wrapper and all other integration modules remain. No economic coefficient or neighborhood membership was changed.
+Recipe: PROD `c37d85ea` + `9189addf:v3Integration.js` + four hospital files from `3e6a8ea1` + three-file diagnostic overlay `output/codex/engine217-diag-overlay.patch`. Both repairs ran from C108. Partner pinned the actual created version and pulled it back; intended files matched and applyCityDynamics.js stayed byte-identical to PROD. @31 and @32 were superseded without firing. Diagnostics are bench-only.
 
-The second calculation also overwrote intervening migration feedback: `applyMigrationDrift.js:498` changes city mood and `:531-538` changes neighborhood mood. Therefore acceptance is preservation of **post-migration** economic state through Phase 8, not equality with the earlier Phase-6 economy log value.
+| Evidence | C108 | C109 |
+|---|---|---|
+| Fire | ok:true, 206.354 s | ok:true, 130.292 s |
+| Economy runs / modules | 1 / 5/5 | 1 / 5/5 |
+| Money-loop prior mood | 59.01 | **48 = C108 final carry** |
+| Phase-6 completion mood | 48.81 | 48.59 |
+| Final persisted mood | 48 | 49 |
+| Engine_Errors | 0 | 0 |
+| Timing evidence | 133 reported; full list truncated | **133/133 ok**, full JSON parsed |
+| Hospital state markers | 0 | 0 |
 
-Verified locally:
+**Evidence gap:** C108's helper truncated the response at 3,000 characters. Full timing and carry-recovery diagnostics are lost; do not claim ghost-skip/recovery was directly observed. The copied C107 ring existed and C108 consumed mood 59.01. C109's corrected helper saved its full response; no carryForward events were emitted. fetchExecutionLog.js searches manually exported Drive files, not direct GAS logs. Never repeat a fire to recover output.
 
-```sh
-node scripts/economicPhaseOwnership.test.js
-node scripts/hoodIdentityRemainder.test.js
-node phase09-digest/finalizeCycleState.test.js
-node --check scripts/economicPhaseOwnership.test.js
-node --check phase08-v3-chicago/v3Integration.js
-git diff --check
-```
+Yu Zen (POP-00194) and Maurice Franklin (POP-00801) became recovering at C108, active at C109. Incomes remained 111,666 / 230,000. Yu was too early for a new admission-key hit at C108; Franklin's blank EconomicProfileKey excludes Career's hospital loss. No matching persistent state formed: **hospital activation is unproven on this bench**. All 15 baseline CareerState POPIDs survived; 17 were present after each Cycle. These are sandbox results, not live canon changes.
 
-Six two-Cycle scenarios pass in both real scheduler entry points; the test parses their actual calls and runs real economy, migration, and integration. The same final test fails all six against `75b45b5b`'s v3Integration. Neighborhood suite 38/38, carry suite all pass, ES5 Acorn parse passes. ROLLOUT lint reports 24 pre-existing unrelated violations; engine.217 itself conforms.
+Evidence in `output/codex/`: `bench-c108-fire-response.txt`, `bench-c108-prefire-carry.json`, `bench-c108-readback.json`, `bench-c109-fire-response.txt`, `bench-c109-readback.json`, `bench-readback-c108-c109.md`. Codex independently read typed config/carry/hospital/errors after each Cycle and asserted the full C109 JSON. Supporting temporary snapshots: `/tmp/codex-bench-c107-readback.json`, `/tmp/codex-bench-c108-readback.json`, `/tmp/codex-bench-c109-readback.json`.
 
-## Next repair: hospital income loss is erased
+## Next causal work
 
-**Not implemented.** `scripts/hospitalIncomePersistence.test.js` is a new, untracked Codex file. Preserve it. Syntax passes; current result is **10 controls pass, 6 regression cases fail**.
+1. **Economic event classification:** C108 persisted FACTORY_CLOSURE, impact −20, source **"road closure decision"**. economicRippleEngine.js:533-534 classifies any closure/shut down as a factory closure; a local VM call of the actual detector reproduced that exact input. Trace the typed event source and propose a bounded classification repair with controls. Do not clamp mood or erase the signal.
+2. **Prior mood versus Phase-6 initialization:** loadPreviousEvening.js:259-261 restores previousCycleState and ripples, not S.economicMood. economicRippleEngine.js:157 initializes the latter to 50; calculation starts at :660. Wealth explicitly reads previousCycleState.econMood at generationalWealthEngine.js:255-257. Thus 59.01→48.81 does not prove a −10 recurring calculation from carried mood. C108 persisted ripple strengths total −16.93; the real calculation with base 50, neutral retail and source calendar defaults gives 48.81. This numerical reproduction does not establish all transient runtime inputs. Decide intended city-mood carry before reconnecting it.
+3. **Calendar mismatch:** calendar writes S.simMonth (advanceSimulationCalendar.js:209), economy reads S.month || 0 (economicRippleEngine.js:187); no engine assignment to S.month was found. Lowercase seasonal checks also meet persisted Winter. Verify normalization and thresholds in a bounded repair.
+4. **engine.219, hood economic carry:** Phase 2 reads S.neighborhoodEconomies before Phase-6 production; finalize does not serialize it. Establish post-migration ranges, then bounded carry and next-Cycle behavior. diag217 did not instrument per-hood economies; no bench proof for them.
+5. **engine.214, neighborhood truth source:** rejected embedded clusters/constants remain excluded. Use ADR 0015 World_Config tunables and ADR 0016 ledger entity truth; inspect existing roster/character/weather/adjacency/scene/profile accessors first.
+6. **engine.220, media feedback duplicate:** audit intervening inputs before removing a call. engine.194 sports repricing belongs to the sports plan Task 7. These remain open.
 
-An initial offline probe using the existing hoodIncome harness and real Career/floor code produced **91,500 → 86,925 → 91,500**. The standalone regression uses a different clearly synthetic profile and produces **96,800 → 91,960 → 96,800**. Same defect; do not confuse the differing fixture values with live citizens.
+Income evidence remains corrected: eight C107 jumps recompute to newly deployed job references, not arbitrary doubling. Real layoffs clear EmployerBizId, so the earlier immediate re-floor claim was rejected. Hospital persistence is a separate reproduced defect; owner draw interaction remains open.
 
-The test drives real `runCareerEngine_`, `calculateCitizenIncomes_`, `applyTrackedEmployerFloor_`, and `applyUntrackedJobReference_`, in production order. It covers hospitalized and critical workers for UNTRACKED, SELF_EMPLOYED, and a synthetic BIZ employer. It intends to round-trip ledger rows and repeat the following Cycle. The first-cycle floor currently restores the lost income, so all six cases fail there. Healthy corrections, a different admission's old marker, recovery, and blank-employer pay cuts are controls. No synthetic data leaves the VM.
+## Resume and ownership
 
-Mechanism and source pointers:
+Check Git and current AGENTS. Mixed local commits remain unpushed; Codex must not push another lane's stack. Preserve unrelated runtime outputs and scripts/notebooklmCanonSources.json. Only engine-sheet applies substrate changes. Resolve its tmux pane live (last %71), confirm an idle empty prompt, send literal text, wait one second, then C-m. Dim suggested text is not user input; preserve ANSI when uncertain. Never submit unfinished user text.
 
-- `phase05-citizens/runCareerEngine.js:924-951`: after two Cycles in hospital/critical status, income is cut once and LifeHistory gains `[IncomeHit A<StatusStartCycle>]`.
-- `phase01-config/godWorldEngine2.js:360`, `:385` (second entry `:2105`, `:2130`): Career precedes GenerationalWealth.
-- `phase05-citizens/generationalWealthEngine.js:132`, `:138`: tracked and untracked floors run after Career; writes at `:639` and `:853` restore the reference.
-- `applyOwnerDraw_` runs after both floors (`:143`); its separate treatment of owners has not been repaired or proven here.
-
-**The next step I would take:** finish the smallest hospital exception, prove it in memory against this regression, then give engine-sheet the exact substrate patch. Proposed design, not yet applied: a shared pure predicate checks hospitalized/critical Status, a positive finite StatusStartCycle, and the exact current-admission `[IncomeHit A<n>]` marker in LifeHistory. Both income floors skip such a row. Do not globally disable floors, cap raises, invent a new pay scale, exempt all hospital admissions regardless of a recorded loss, or change owner draws in this cut. Recovery would restore normal floor eligibility. Check the actual status-transition and LifeHistory compression paths before finalizing the predicate: the current test does not exercise compression or hospital transitions.
-
-Run the test before/after, retain the controls, and run the existing `scripts/hoodIncome.test.js` suite. No engine.218 row or hospital plan addition has been made yet. Update the owning employment plan/rollout with the concrete cut and readback before landing; don't commit a failing regression as completed work.
-
-Required Haiku wiring runs were performed:
-
-- `output/agent_engine-wiring_2026-09-14T05-37-42.md`: neighborhood/city dynamics card, completed; verify its claims because some names/lines are wrong.
-- `output/agent_engine-wiring_2026-09-14T05-39-20.md`: duplicate economy investigation; turn limit reached before final card. Task 7 supplies a manually verified wiring card.
-- `output/agent_engine-wiring_2026-09-14T05-51-48.md`: hospital/floor investigation; also reached its limit without a final card. Its tool reads are not a completed card. Supply the verified card from the actual sources above before presenting the hospital patch; do not count the harness success/coverage label as proof.
-
-## Income evidence: retain the corrected conclusion
-
-Engine-sheet's evidence is `output/codex/g-ec82-income-trace.md`; current config dump is `output/codex/world_config_readonly_2026-09-14.json` (127 keys).
-
-All eight C107 jumps recompute exactly to the new job reference. New catalog bands and profile-based band positioning deployed between C106 and C107. This is evidence of a catalog correction, not proof of an arbitrary doubling bug. Do not impose an income cap to hide it.
-
-I rejected engine-sheet's initial claim that layoffs re-floor: both real layoff paths clear EmployerBizId (`runCareerEngine.js:321`, `:1462`), and floors exclude blank employers. The report was corrected. The "93 at reference" census does not prove 93 citizens cannot lose income. Hospital loss is separately reproduced; owner re-floor/draw interaction remains to investigate. C107 has two hospitalized citizens, one newly admitted; no claim that the synthetic failure has already affected either live row.
-
-## Bench proof: proposal needs correction before execution
-
-`output/codex/engine217-bench-build-proposal.md` is engine-sheet's proposal, **not approved instructions**. Its baseline captures are in `output/codex/baseline-c107/`.
-
-- Intended isolated code: PROD `c37d85ea` plus only `9189addf:phase08-v3-chicago/v3Integration.js`. Build in scratch, preserve the shared tree, exclude engine.214 byte-for-byte. Only applyCityDynamics and v3Integration currently differ from PROD under engine paths.
-- Active sandbox 0908 sheet: `1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`; deployment is @30 containing engine.214, **unfired**. Sheet remains bench-only C111. Resolve current script/deployment IDs from `docs/reference/DEPLOY.md` before doing anything.
-- Engine-sheet's earlier live→sandbox resync was rejected by its automatic approval classifier as `[Modify Shared Resources]`; it did not run. Latest steering corrects the diagnosis: the `--apply` operation itself is rejected, not command chaining, and its existing `Bash(node *)` permission does not solve it. Do not change permissions or disguise commands. The script overwrites sandbox tabs; live is its read-only source.
-- **Latest authorized route:** Mike will not run terminal commands or sign acceptance; the engineering lanes own execution and verification. Codex may run `node scripts/syncSandboxFromLive.js 1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM --apply` from its own pane when ready, using Codex's normal sandbox/approval controls, or direct one honest retry in engine-sheet and read the exact response. This is explicit current authorization for the named sandbox reset, not authority to disable controls. It has NOT been run. Review the remaining implementation of the sync script before execution (already read through the batched clear/write section); verify truncated cells are understood and the five-largest-tab readback completes. Engine-sheet then independently reads sandbox cycleCount 107 before any build. Do not ask Mike to run the command.
-- A possible safer alternative, **not yet directed**, is a structural once-per-Cycle proof on existing C111 bench state, explicitly not a live-equivalent rehearsal. It would avoid resync but needs an updated proof declaration and coordination with engine-sheet before any fire.
-- Correct the proposal's readback: C108 starts from unchanged C107 carried mood 59.01. This cut cannot retroactively alter C108's starting state. C109 should read C108's final post-migration mood, not necessarily its Phase-6 completion-log mood.
-- Correct the proposal's observability claim: economy per-hood values are not printed by the existing completion log. `buildCyclePacket.js:671-690` assembles them but KEEP_SECTIONS (`:767-773`) removes them. That filter was a deliberate consumer contract, not a license to re-enable all sections. A real per-hood readback needs an explicit diagnostic/readout path.
-- Correct the deployment recipe: explicitly pin the actual created version with `clasp deploy -i ... -V <version>` and read it back; don't assume @31 or rely on bare deploy. Codex must never set `CLAUDE_CTL=1`; that flag is Claude-only, even if it appears in the partner's recipe.
-
-## Remaining causal repairs, not completed
-
-1. **Neighborhood economic carry:** Phase 2 reads `S.neighborhoodEconomies` (`applyCityDynamics.js:98`), but producer runs Phase 6 and finalizeCycleState does not serialize it. The current economic branches are disconnected across Cycles. Establish the post-migration range, then add a bounded carry and real next-Cycle behavior proof. Don't activate thresholds only with extreme synthetic values and claim live behavior.
-2. **Neighborhood truth source:** engine.214 still embeds five authored clusters, 12 anchors, weights, capacities and place-name branches. Its 22-key test does not solve this. The standing ADRs are 0015 (World_Config tunables) and 0016 (ledger entity truth). Roster, character, weather, adjacency, scenes and structural profiles already have sheet accessors; read them before inventing a new table or graph rule.
-3. **Media feedback duplicate:** Phase 7 and Phase 8 call it; audit intervening inputs and consequences before copying engine.217's removal.
-4. Existing health/QoL, sports coupling, illness config, and citizen loop gaps are leads in ROLLOUT/C107 evidence. Follow actual causes; do not equate completing reports with repairing the sim.
-
-## Resume mechanics and workspace ownership
-
-Read current AGENTS and Git state. At checkpoint HEAD is `9189addf`, ahead of origin/main by four commits: `29ba3d75`, `f30b8000`, `75b45b5b`, `9189addf`. Subsequent Codex handoff commits may add to that stack. Do not push the mixed stack from Codex. No staged paths at checkpoint. Many pre-existing runtime output changes and `scripts/notebooklmCanonSources.json` are unrelated; preserve them.
-
-Engine-sheet is a Claude session. Last pane was `%71`, but resolve it live. Read `docs/reference/CROSS_LANE_MESSAGING.md`. Confirm an idle **empty** prompt before literal send-keys, wait one second, then C-m; verify receipt. Mike sometimes types into that pane during our work: never append to or submit his unfinished input. Substrate changes are applied by this partner only after the concrete patch and tests are ready.
-
-Earlier bounded review artifacts remain in `output/codex/`: `pipeline69-plan-review.md`, `engine214-cut-review.md`, `engine214-confirm.md`. Their scopes and historical verdicts do not supersede the current broad repair direction.
+Codex owns this handoff and NEXT[codex] only; Claude owns PIN and its own NEXT. No additional fires, live changes, push, memory writes or publication were authorized by bench acceptance.

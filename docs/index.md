@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Index
 created: 2026-04-14
-updated: 2026-09-13
+updated: 2026-09-14
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -46,7 +46,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 - **[[for-claude-review/README]]** — the house-guest inbox (builder-direct 2026-08-29). A finished research/plan MD from Kimi/Codex/Grok/Antigravity saved to `docs/for-claude-review/` is a message to Claude; the session-startup hook greets with `REVIEW INBOX: clean` or `N waiting — <files>` (count + names only, never contents). Claude reads on demand, then accepts (moves to `docs/research/` or `docs/plans/`, registers here, files the ROLLOUT row, updates the guest `NEXT` line) or sends back (dated `## Review` section appended, file stays). Clean inbox = no guest work waiting. *(reference, governance, house-guests, active)*
 
-- **[[plans/2026-09-13-run-cycle-packages-the-world]]** — pipeline.69: C107 coverage, neighborhood truth-source repairs, and personal wake events; Task 7 / engine.217 removes duplicate economic calculation before reconnecting its cross-Cycle consequences. Codex leads, engine-sheet executes; fires held for isolated proof. *(plan, engine, pipeline, citizen-loop, active)*
+- **[[plans/2026-09-13-run-cycle-packages-the-world]]** — pipeline.69: C107 coverage, neighborhood truth-source repairs, and personal wake events; Task 7 / engine.217 passed sandbox C108–C109. Economic input defects and carry remain open; live/further fires held. [[../output/codex/HANDOFF]] is the repair handoff and bench artifact manifest. *(plan, engine, pipeline, citizen-loop, active)*
 - **[[plans/2026-09-13-codex-dial-drift-review]]** — engine.201 review proposal: verified dial feed, timing, pressure and outcome defects; historical C106 pool reproduction; proposed bidirectional citizen responses and staged acceptance. ACCEPTED IN PART S449 — diagnosis verified, repair plan cut to widen the engine.176 pressure mechanism; shipped as engine.201 PROD @77. Diff review of the build: `output/codex/engine201-diff-review.md`. Offline evidence: `output/codex/dial-drift-review-20260913/` (probes.js, probes.json, wiring-card.txt). *(plan, engine, citizens, accepted)*
 
 ### Schema & navigation
@@ -536,6 +536,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 ## Changelog
 
+- 2026-09-14 (codex) — Linked the refreshed simulation repair handoff and bench evidence manifest from its owning Task 7 plan entry.
 _(Newest first, per SCHEMA §12 — normalized 2026-07-24.)_
 
 - 2026-09-04 (research-build, S418) — Registered [[reference/DEPLOY_HISTORY]]. DEPLOY.md restructured to protocol + current-state only (366 → 280 lines); full per-wave proving narrative relocated verbatim. Mike-direct: "deploy.md needs to be clear and concise + a changelog that serves it."

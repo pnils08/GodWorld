@@ -129,6 +129,27 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @84 — engine.213c+d: the mood is absolute and smoothed; the middle only orders (2026-09-13 ~19:52 Chicago, engine-sheet)
+
+Commits `548fe09d` (c) + `c37d85ea` (d); Apps Script version 73, `clasp deploy -i -V 73`, read back. Payload: `updateCivicApprovalRatings.js`, `engine94SheetContract.js` (ten `approval*` seeds: + `approvalMoodSmoothing` 0.3; `approvalLevelInertia` 0.2, `approvalStateGainDistrict` 5), `finalizeCycleState.js` (carries `approvalHoodMoodEma`). Pull-back 168/168, 0 test files. Supersedes @83 before any live fire.
+
+- **Why:** @83 compared a district's LEVEL to the city middle, so Baylight (a $2.1B site, retail 3.9) and West Oakland read as the city's worst districts forever — Rivers/Carter were headed to 46/49 with no event behind it. Now the MOOD term is absolute (mean smoothed hood sentiment; council half own district + half city, Mayor city) and the relative term (momentum 1.5, crime 1, sentiment 1, retail ¼ vs the middle) only orders the seats at gain 5.
+- **Reader test on the live C106 rows** (`civicApprovalState.test.js` §B2, real momentum): Mayor 62; D1 57, D2 63, D3 58, D4 60, D5 57, D6 64, D7 67, D8 63, D9 65. Every seat above 50, council inside 55..70, Ashford top.
+- **Bench @28 C109 / @29 C110–C111:** ok:true 182s / 133s / 139s, 0 Engine_Errors. Hood sentiment on the bench flipped +0.46 → −0.14 at C108 with zero world events and stayed negative (engine.165); targets fell to 41–50 and seats slid ~2–5/Cycle to ~50 by C111. That is the poll reporting an unhappy city; the smoothing (d) halves the per-Cycle pull, the cause is the sentiment channel. C111 Mayor reason also shows `West Oakland Stabilization Fund silence (-3)` — the bench tracker is the pre-18:36 copy, so its clocks expired; live rows are at 107.
+- **Live C107 readback:** Santana ≈67 (target 62, two phase moves +3), Ashford 45→49 or 51→54 if the rebase lands, Carter ≈74, Rivers ≈72, Vega ≈53; no seat beyond ±4; no campaign; approval-shift reasons carry `level target N (mood …, district … vs middle)`.
+- **Rebase (builder to run — the classifier blocks this seat's sheet write):** `output/civic_approval_rebase_c106.plan.json`, six seats back to authored (Ashford 45→51, Tran 52→59, Vega/Crane/Chen/Mobley 51→55); script at the scratchpad path in SESSION_CONTEXT.
+- **Tests:** civicApprovalState 41/41, ceiling 101/101, suite 234/234.
+
+### PROD @83 — engine.213b approval is a LEVEL the city sets (2026-09-13 ~19:30 Chicago, engine-sheet)
+
+Commit `935b820c`; Apps Script version 72, web app repointed `clasp deploy -i -V 72`, read back. Payload: `updateCivicApprovalRatings.js` (target level + inertia; decay retired), `engine94SheetContract.js` (nine `approval*` seeds: `approvalLevelBase` 50, `approvalLevelInertia` 0.35, `approvalStateGainDistrict` 10, `approvalStateGainCity` 8, `approvalStateGainPress` 3, `approvalStateCouncilCityShare` 0.5, `approvalStateCitySentimentUnit` 0.25, `approvalMediaStep1` 1, `approvalMediaStep2` 3). Pull-back 168/168 byte-identical, 0 test files.
+
+- **Why (Mike-direct S455):** a poll measures a level. @82 changed the slope only; Ashford (strongest district in the city) still read 45 after six cycles of −3/−1 for one opposed health-center row. Target = 50 + district composite vs city middle × 10 (council) + city level × 8 (Mayor full, council half) + press step × 3; approval closes 35% of the gap each Cycle; civic motion stays an event on top.
+- **Bench @27:** C107→C108 `ok:true` 183,008 ms, 0 Engine_Errors. Targets read on Ripple_Ledger: D1 50, D2 55, D3 54, D4 59, D5 53, D6 60, D7 61, D8 61, D9 59 (city +1.83 on the bench's C107 sentiment). Seats: Santana 65→65, Carter 75→66, Tran 52→53, Delgado 70→64, Vega 51→54, Rivers 75→67, Crane 52→55, Ashford 47→52, Chen 51→54, Mobley 52→55. Both directions fire on the same data.
+- **Live C107 readback:** every seat within 35% of the gap to its target (targets from the live C106 city are in `output/civic_approval_rebase_c106.plan.json`); no campaign; Ripple_Ledger approval-shift reasons carry `level target N (city …, district …)`.
+- **Rebase (one-time canon correction, builder-requested S455):** the ten seats set to their C106 targets so C107 starts from what the city says, not from the C101–C106 formula bleed. Before/after in the plan file; rollback = the `before` column.
+- **Tests:** civicApprovalState 33/33, civicApprovalCeiling 101/101, suite 234/234.
+
 ### PROD @82 — engine.213 approval reads the city (2026-09-13 ~19:12 Chicago, engine-sheet)
 
 Commit `35a087a7`; @82 is the deployment-ledger label; Apps Script version 71, web app repointed with `clasp deploy -i -V 71` and read back. Payload: `phase05-citizens/updateCivicApprovalRatings.js` (state + press terms, ladders), `phase01-config/engine94SheetContract.js` (`ENGINE213_CONFIG_SEEDS` + `ensureEngine213Config_`), `phase01-config/godWorldEngine2.js` (one ensure call). Pull-back 168/168 byte-identical, 0 test files.

@@ -94,6 +94,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ### Research
 - **[[research/RESEARCH_TEMPLATE]]** — research-file template (S250). Source-mining record shape: Source / What this addresses / What it does / Extraction-in-sim-terms / Not-applicable+hazard / Verdict (adopt|watch|take-nothing) / Ignited-plans / Applications-living / Changelog. Carries the verdict-not-state + never-archives rules. *(reference, research, active)*
+- **[[research/2026-09-13-approval-polls-interviews]]** — approval as a poll (S455): how real approval works, the poll-the-ledger mechanic, interviews, cron shape, the reader test; what the bench exposed (engine.165). *(reference, research, active)*
 - **[[research/index]]** — research sub-catalog (S250). Every per-topic research instance registers here, NOT top-level — keeps boot-burn flat as the corpus grows. *(reference, research, active)*
 - **[[RESEARCH]]** — **FROZEN legacy learning log** (S99–S248). Findings log + early AI-literacy research. New research → per-topic files via `research/TEMPLATE`. *(reference, research, frozen)*
 - **[[research4_1]]** — engineering patterns from adjacent systems. Bounded memory, death spirals, dual-output. *(reference, research, active)*

@@ -9,8 +9,8 @@
  *
  * Values-only (engine reads values; formatting irrelevant). Tabs present on
  * live are synced (created on the sandbox if missing); sandbox-only tabs are
- * left untouched and reported. PropertiesService carry-state is NOT touched —
- * the first post-sync fire is the documented groundhog cold-start.
+ * left untouched and reported. PropertiesService carry-state is NOT touched;
+ * verify the copied sheet ring and any ghost recovery on the first fire.
  *
  * Direction is hard-guarded: source = GODWORLD_SHEET_ID (live, read-only),
  * dest = explicit sandbox ID argument. Refuses dest === live.
@@ -67,6 +67,10 @@ async function main() {
     const res = await api.spreadsheets.values.batchGet({
       spreadsheetId: LIVE,
       ranges: chunk.map(t => `'${t.replace(/'/g, "''")}'`),
+      // RAW writes must receive underlying values, not currency/percent/date
+      // display strings; preserve numbers and booleans as their original types.
+      valueRenderOption: 'UNFORMATTED_VALUE',
+      dateTimeRenderOption: 'SERIAL_NUMBER',
     });
     res.data.valueRanges.forEach((vr, j) => { values[chunk[j]] = vr.values || []; });
   }
@@ -146,7 +150,7 @@ async function main() {
     console.log(`  verify ${top[i][0]}: bench ${got} rows vs live ${want} — ${ok ? 'OK' : 'MISMATCH'}`);
   });
   if (!pass) { console.error('READ-BACK MISMATCH — investigate before firing the bench.'); process.exit(1); }
-  console.log('Read-back verified. PropertiesService note: first post-sync fire is a groundhog cold-start.');
+  console.log('Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.');
 }
 
 main().catch(e => { console.error('ERR', e.message); process.exit(1); });

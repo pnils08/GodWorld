@@ -303,6 +303,12 @@ resolve `GODWORLD_SHEET_ID` to live from the env file.
   `node scripts/draftContentRows.js --cycle {XX} --apply --sheet-id 1wmZTGqIbYL7eVYCplq3iCb2oOGDZ0Inq-pWCtnD1lzc`
 - Cycle runs are Mike-fired from the sandbox sheet.
 
+### Sandbox sync value types
+
+`scripts/syncSandboxFromLive.js` reads underlying values (`UNFORMATTED_VALUE`, date serials) and writes them with `RAW`. Formatted display strings are not a valid transport: percentages, currency, dates and booleans can change meaning when stored as text. Before declaring a proving reset equivalent, compare underlying values and types in World_Config, Carry_Forward_Store and the affected ledgers; matching row counts or displayed text alone is insufficient. The existing 49,900-character truncation remains limited in the verified C107 source to 11 historical Media_Briefing cells. D7 proving evidence: [[../plans/2026-08-29-employment-system-cascade]].
+
 ## Changelog
+
+- 2026-09-14 (codex) — Sandbox sync preserves source value types; regression fails before the correction and passes 4/4 afterward. Critical-tab typed readback is part of reset acceptance.
 
 - 2026-09-04 (S418, research-build) — Restructured to protocol + current-state only, per Mike-direct ("deploy.md needs to be a MD that is clear and concise + a changelog that serves it"). Full per-wave proving narrative (was ~250 lines of stacked history) relocated verbatim to new [[DEPLOY_HISTORY]]; added a §Current state section (bench/live one-liners + a 5-row recent-bumps table) and a retired-sandbox ID table replacing the full retired-sandbox prose. 366 lines → ~185 lines.

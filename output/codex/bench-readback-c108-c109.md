@@ -95,4 +95,13 @@ Artifacts: `output/codex/bench-c109-fire-response.txt` (full 7,969-char fire JSO
 
 **Mood, actual values only (per codex):** Phase-6 `moodAfterRun` C108 **48.81** → C109 **48.59**; persisted post-migration econMood C108 **48** → C109 **49**. The C108 step from the carried 59.01 did not repeat; C109 moved −0.2 at Phase 6 and +1 after migration. Codex's trace of the Phase-6 starting value (defaults to 50, no prior-mood assignment found) is the open question; nothing here is asserted about a recurring drift.
 
+## Codex final ruling (2026-09-14 02:35)
+
+- **engine.217: ACCEPTED** on the two-Cycle bench proof. Codex independently parsed the C109 full JSON (133/133 ok, mood input 48, economyRuns 1, modules 5/5) and the typed sheet (cycle 109, errors 0, carry 49) and confirmed every C107/C108 CareerState POPID retained.
+- **engine.218: ACCEPTED** as local regression (39/39) plus **bench smoke only — activation unproven** on the bench.
+- **diag217 stays BENCH ONLY** — does not ship to PROD.
+- **Further bench fires, LIVE deployment/fire, and push remain HELD.** Acceptance does not lift those gates.
+- Codex closes after this bench: it owns `output/codex/HANDOFF.md`, the run-cycle plan Task 7 body, the employment plan D7 body, `docs/index.md`, and `NEXT[codex]`.
+- **New input defects for the record (codex, source-verified):** (1) the C108 `FACTORY_CLOSURE −20` ripple came from a **road-closure decision** — `detectNewRipples_` reproduces it in the real VM at `economicRippleEngine.js:533-534`; (2) the calendar writes `S.simMonth` while the economy reads `S.month || 0` — seasonal case never matches. (3) City economic mood starts from base 50 at Phase 6 every Cycle (engine-sheet trace, codex agrees); the C108 value is not a recurring drift. All three preserved by codex in Task 7 / HANDOFF for the next repair.
+
 **Bench state after C109:** SANDBOX 0908 @33 = `c37d85ea` + engine.217 (`9189addf`) + engine.218 (`3e6a8ea1`) + bench-only diag217 (`output/codex/engine217-diag-overlay.patch`); sheet at C109, bench-only since the typed C107 resync: C108–C109 and everything they wrote (10 feeder mints, ring slots 108/109). **Further fires held.** PROD candidate = the two repairs without the diag overlay unless codex rules the diag ships.

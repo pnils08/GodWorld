@@ -27,7 +27,7 @@ function check(name, cond, detail) { if (cond) { passed++; console.log('  ok  ' 
 function throws(fn, re) { try { fn(); } catch (e) { return re.test(String(e && e.message)); } return false; }
 
 const CFG_KEYS = {
-  approvalStateGainDistrict: 1.5, approvalStateGainCity: 1.5, approvalStateCouncilCityShare: 0.5,
+  approvalLevelBase: 50, approvalLevelInertia: 0.35, approvalStateGainDistrict: 10, approvalStateGainCity: 8, approvalStateGainPress: 3, approvalStateCouncilCityShare: 0.5,
   approvalStateCitySentimentUnit: 0.25, approvalMediaStep1: 1, approvalMediaStep2: 3
 };
 const CEILING = {
@@ -39,7 +39,7 @@ const CEILING = {
 console.log('═══ A. World_Config contract');
 {
   const cfg = A.getApprovalStateConfig_({ config: { ...CFG_KEYS } });
-  check('A1 six keys parse', cfg.gainDistrict === 1.5 && cfg.mediaStep2 === 3);
+  check('A1 nine keys parse', cfg.gainDistrict === 10 && cfg.levelBase === 50 && cfg.inertia === 0.35 && cfg.mediaStep2 === 3);
   const missing = { ...CFG_KEYS }; delete missing.approvalStateGainCity;
   check('A2 missing key fails loud', throws(() => A.getApprovalStateConfig_({ config: missing }), /approvalStateGainCity/));
   check('A3 step1 above step2 fails loud', throws(() => A.getApprovalStateConfig_({ config: { ...CFG_KEYS, approvalMediaStep1: 4 } }), /exceeds/));
@@ -181,10 +181,11 @@ console.log('═══ F. Full run on the live C106 seats — the C107 projectio
   console.log('    Carter  ' + appr('Denise Carter') + '  ← ' + why('Denise Carter'));
   console.log('    Ashford ' + appr('Warren Ashford') + '  ← ' + why('Warren Ashford'));
   console.log('    Vega    ' + appr('Ramon Vega') + '  ← ' + why('Ramon Vega'));
-  check('F1 the Mayor of a city at +0.37 with two phase moves RISES (64 → 66..70)', appr('Avery Santana') >= 66 && appr('Avery Santana') <= 70, String(appr('Avery Santana')));
-  check('F2 Ashford, holding the strongest district, rises from 45 (no challenger seeded)', appr('Warren Ashford') > 45 && appr('Warren Ashford') < 52, String(appr('Warren Ashford')));
-  check('F3 Carter (weak retail, high crime, one phase move) lands within ±3 of 76', Math.abs(appr('Denise Carter') - 76) <= 3, String(appr('Denise Carter')));
-  check('F4 a seat with no initiatives is graded on its district, not left to decay alone', by['Ramon Vega'] && /district|city/.test(why('Ramon Vega')), why('Ramon Vega'));
+  // Targets from the C106 state: Santana 50 + 1.48×8 = 61.8; Ashford 50 + 0.85×10 + 1.48×8×0.5 = 64.4; Carter 50 − 0.63×10 + 5.9 = 49.6; Vega 50 − 0.34×10 + 5.9 = 52.5
+  check('F1 the Mayor of a city at +0.37: level pulls toward 62, two phase moves add +3 → 66', appr('Avery Santana') === 66, String(appr('Avery Santana')));
+  check('F2 Ashford, holding the strongest district, closes a third of the gap to 64 in one Cycle (45 → 52)', appr('Warren Ashford') === 52, String(appr('Warren Ashford')));
+  check('F3 Carter (weak retail, highest crime) is pulled toward 50; a phase move softens it (76 → 69)', appr('Denise Carter') === 69, String(appr('Denise Carter')));
+  check('F4 a seat with no initiatives is graded on its district (Vega 51 → 52, target 52.5)', appr('Ramon Vega') === 52 && /district/.test(why('Ramon Vega')), why('Ramon Vega'));
   check('F5 no sitting row appears as a drain in any reason', !Object.keys(by).some(h => /sitting \(-/.test(why(h))));
   check('F6 campaigns: none started (nobody under 40)', ctx.summary.civicCampaigns.length === 0);
   check('F7 approval writes queued for every changed seat', intents.length === ctx.summary.approvalChanges.length);

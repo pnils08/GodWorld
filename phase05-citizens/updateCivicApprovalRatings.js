@@ -116,8 +116,11 @@ function getApprovalStateConfig_(ctx) {
     return value;
   };
   var config = {
-    gainDistrict: required('approvalStateGainDistrict', 0, 10),
-    gainCity: required('approvalStateGainCity', 0, 10),
+    levelBase: required('approvalLevelBase', 10, 95),
+    inertia: required('approvalLevelInertia', 0.05, 1),
+    gainDistrict: required('approvalStateGainDistrict', 0, 30),
+    gainCity: required('approvalStateGainCity', 0, 30),
+    gainPress: required('approvalStateGainPress', 0, 15),
     councilCityShare: required('approvalStateCouncilCityShare', 0, 1),
     citySentimentUnit: required('approvalStateCitySentimentUnit', 0.01, 1),
     mediaStep1: required('approvalMediaStep1', 0.1, 5),
@@ -581,52 +584,38 @@ function updateCivicApprovalRatings_(ctx) {
     // ─────────────────────────────────────────────────────────────────────
     // THE CITY (engine.213) — what the seat is responsible for
     // ─────────────────────────────────────────────────────────────────────
-    // Council: the district's hoods against the city middle, plus a share of
-    // the city's own level. Mayor: the city's level at full weight.
-    var stateDelta = 0;
-    if (cityScore !== null) {
-      var cityShare = isMayor ? 1 : stateConfig.councilCityShare;
-      var cityPart = Math.round(cityScore * stateConfig.gainCity * cityShare);
-      if (cityPart !== 0) {
-        stateDelta += cityPart;
-        reasons.push('city ' + (cityPart > 0 ? '+' : '') + cityPart + ' (sentiment ' + (cityScore >= 0 ? '+' : '') + cityScore.toFixed(2) + ' units)');
+    // Approval is a LEVEL, the way a poll reads one (Mike-direct S455): the
+    // city sets a target for the seat — base 50, the district against the
+    // city middle (council), the city's own level (Mayor full, council a
+    // share), the week's press across every desk — and the number closes a
+    // share of the gap to that target each Cycle (inertia). Civic motion
+    // (advanced / completed / silence / fail) stays an EVENT on top. The old
+    // "decay toward 50" is retired: the base IS the anchor. No neighborhood
+    // state → no target → the level term is inert and says so.
+    var cityShare = isMayor ? 1 : stateConfig.councilCityShare;
+    var districtScore = isMayor ? null : districtStateScore_(S, districtHoods, stateMiddle);
+    if (cityScore !== null || districtScore !== null) {
+      var target = stateConfig.levelBase;
+      var parts = [];
+      if (cityScore !== null) {
+        target += cityScore * stateConfig.gainCity * cityShare;
+        parts.push('city ' + (cityScore >= 0 ? '+' : '') + cityScore.toFixed(2));
       }
-    }
-    if (!isMayor) {
-      var districtScore = districtStateScore_(S, districtHoods, stateMiddle);
       if (districtScore !== null) {
-        var districtPart = Math.round(districtScore * stateConfig.gainDistrict);
-        if (districtPart !== 0) {
-          stateDelta += districtPart;
-          reasons.push('district ' + (districtPart > 0 ? '+' : '') + districtPart + ' (vs city middle ' + (districtScore >= 0 ? '+' : '') + districtScore.toFixed(2) + ')');
-        }
-      } else if (!stateMiddle.hoods) {
-        reasons.push('district state unavailable (no neighborhood state loaded)');
+        target += districtScore * stateConfig.gainDistrict;
+        parts.push('district ' + (districtScore >= 0 ? '+' : '') + districtScore.toFixed(2) + ' vs middle');
       }
-    } else if (cityScore === null) {
-      reasons.push('city state unavailable (no neighborhood state loaded)');
+      if (pressDelta !== 0) {
+        target += pressDelta * stateConfig.gainPress;
+        parts.push('press ' + (pressDelta > 0 ? '+' : '') + pressDelta);
+      }
+      target = Math.max(10, Math.min(95, target));
+      var levelMove = Math.round((target - currentApproval) * stateConfig.inertia);
+      delta += levelMove;
+      reasons.push('level target ' + Math.round(target) + ' (' + parts.join(', ') + ') → ' + (levelMove >= 0 ? '+' : '') + levelMove);
+    } else {
+      reasons.push('level: no neighborhood state loaded — city term inert this Cycle');
     }
-    delta += stateDelta;
-
-    // ─────────────────────────────────────────────────────────────────────
-    // THE PRESS (engine.213) — civic desk and the whole paper, both ways
-    // ─────────────────────────────────────────────────────────────────────
-    // engine.139 found the old `<= -3` civic-only threshold never fired in 15
-    // cycles (range -2..+3). Graded now on the live range, half civic desk and
-    // half every desk, so a glowing sports/economy week counts for the city.
-    if (pressDelta !== 0) {
-      delta += pressDelta;
-      reasons.push('press ' + (pressDelta > 0 ? '+' : '') + pressDelta + ' (score ' + (pressScore >= 0 ? '+' : '') + pressScore.toFixed(1) + ')');
-    }
-
-    // ─────────────────────────────────────────────────────────────────────
-    // BASELINE DECAY TOWARD 50
-    // ─────────────────────────────────────────────────────────────────────
-    if (currentApproval > 50) {
-      delta -= 1; // High approval decays
-      reasons.push('decay toward 50 (-1)');
-    }
-    // v1.3: no free recovery toward 50. They rise only by completing work.
 
     // ─────────────────────────────────────────────────────────────────────
     // APPLY AND CLAMP

@@ -68,8 +68,11 @@ const APPROVED = {
   approvalCeilingApprovalDrop: 12,
   approvalCeilingElectionPenalty: 25,
   // engine.213 (S455): approval reads the city — the six state/press keys
-  approvalStateGainDistrict: 1.5,
-  approvalStateGainCity: 1.5,
+  approvalLevelBase: 50,
+  approvalLevelInertia: 0.35,
+  approvalStateGainDistrict: 10,
+  approvalStateGainCity: 8,
+  approvalStateGainPress: 3,
   approvalStateCouncilCityShare: 0.5,
   approvalStateCitySentimentUnit: 0.25,
   approvalMediaStep1: 1,
@@ -219,7 +222,8 @@ console.log('═══ E. Every-Cycle writer integration');
   };
   A.updateCivicApprovalRatings_(ctx);
   const byColumn = new Map(intents.map(intent => [headers[intent.col - 1], intent.value]));
-  check('E1 every-Cycle writer queues approved approval drop', byColumn.get('Approval') === 77, JSON.stringify(intents));
+  // engine.213: 'decay toward 50' retired (the level base is the anchor); with no neighborhood state the level term is inert → 90 − 12 scandal drop = 78
+  check('E1 every-Cycle writer queues approved approval drop', byColumn.get('Approval') === 78, JSON.stringify(intents));
   check('E2 writer queues owned scandal state',
     byColumn.get('Status') === 'scandal' && byColumn.get('HighApprovalStreak') === 0 &&
       byColumn.get('AutoScandalUntilCycle') === 115 && byColumn.get('AutoScandalSource') === 'approval-ceiling');

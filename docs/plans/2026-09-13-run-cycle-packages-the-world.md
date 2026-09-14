@@ -133,7 +133,8 @@ Three causes, not one:
 ### Task 6: Thin-hood population — builder ruling
 
 - **Question for the builder (sim, not code):** six hoods carry 2–7 citizens. Options: (a) leave engine.174's feeder at ~8/cycle and let time fill them; (b) raise the short-hood mint for N cycles; (c) mint authored anchors (a corner store owner, a school secretary) into each so the hood has a face. (c) is the "top-tier seats are authored" rule applied to places.
-- **Status:** [ ] waiting on ruling
+- **RULED (builder, 2026-09-14): (a) — "the gate is open from GC to fill these."** The engine.148 emergence gate (World_Config `hoodCitizenFloor` = 12, `hoodFloorPromotePerCycle`, `hoodFloorSurfaceQuota`; `canonNeighborhoodLoader.js:357`) already draws the generic feeder heavier toward under-floor hoods. No accelerated mint, no authored anchors. Time fills them.
+- **Status:** [x] ruled — nothing to build; readback = thin-hood counts rising across C108–C112 on the Monday slices.
 
 ### Task 7: One economic calculation per Cycle (engine.217)
 
@@ -155,6 +156,7 @@ Three causes, not one:
 
 ## Changelog
 
+- 2026-09-14 (engine-sheet S459) — Task 6 ruled by the builder: the GC emergence gate fills the thin hoods; no build.
 - 2026-09-14 (codex) — Added Task 7 / engine.217 for the verified duplicate economy execution; recorded the failing regression, precise cut, wiring evidence, fire hold, and subsequent carry-path investigation.
 
 - 2026-09-13 S456 — created after the C107 chain and the texture v1.1.0 cut; baseline measured; causes split three ways.

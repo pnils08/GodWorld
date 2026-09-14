@@ -282,6 +282,9 @@ Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds
 
 ### Task 7 — engine.194: reprice sentiment
 Only after 1-4. Magnitude is downstream of the contract. Carries the `generateCitizensEvents.js:1707` saturation fix (`min(1,abs(boost)/0.15)`).
+**Builder 2026-09-14: folded to codex.** The open sim question on the ROLLOUT row (title magnitude vs the ±0.20 edition / ±0.15 initiative siblings) is decided here as part of the contract work, not posed separately. Owner codex; engine-sheet lands and benches the cut.
+
+Cuts carried from the drained engine.194 row (measured C101–C106, detail in the research doc §1 and §4): mean +0.015 vs a ±0.10 clamp that never fired in 48 cycles; the record term `(winPct-0.5)*0.06` caps at ±0.03 and is the weakest of five factors; `MediaProfile` multiplies everything ×0.8–1.5; postseason zeroes the record so the ×2 playoff multiplier multiplies nothing; calendar phase pays +0.06 flat for late-season vs +0.017 for going 127-35. The cut: record dominant and clamp-reachable; postseason reads the series record with the regular season as earned baseline; off-season decays the final record; MediaProfile stops multiplying the record; reprice `generateCitizensEvents.js:1707` game-night intensity in the same change.
 
 ### Task 8 — engine.208 (NEW): dial 9, fandom
 RULED by Mike S446. Ships with its negative pole or not at all (engine.197's lesson). **Prerequisite built locally (codex, S447; review pending):** the seven `DIALS` copies now use the existing exported source in `utilities/citizenMemory.js` (F6). Apps Script keeps its global `var`; Node keeps CommonJS imports. Remaining: poles, `DIAL_MAP` entries both directions, inheritance from household, and the cron-tone feedback channel. Verify against engine.197 criterion 4 (a spread, not two blobs) and engine.201 (does it wake citizens the pools never reach).
@@ -306,6 +309,7 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 
 ## Changelog
 
+- 2026-09-14 (engine-sheet S459) — engine.194 folded into Task 7 under codex (builder ruling); the magnitude question closes with the contract.
 - 2026-09-12 (codex) — engine.203 D1 + widened D4 built locally with 47 passing parser tests (23 fail pre-fix); D3 denied as proposed and deferred after engine.210 pending builder ruling; review pending, no push/deployment.
 - 2026-09-12 (codex) — engine.208 prerequisite built locally: consolidated seven DIALS copies onto citizenMemory's existing export, preserving the Apps Script/Node seam; corrected the census and paths; review pending, no deployment.
 - 2026-09-12 (engine-sheet S447) — measured live: C107 already carries A's `game-result` W1, so the 12 open slips settle on the next fire; "blocked settlement" retired. Filed engine.207b (pricing reads latest / settlement reads first; three C107 games, one settles; `EventId` never compared) as a SIM call for the builder.

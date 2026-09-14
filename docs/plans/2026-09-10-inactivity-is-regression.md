@@ -350,6 +350,10 @@ Hood groups at bench C118 (openness / outabout / all-neutral): crime-bar 51.82 /
 **Why #4 did not move:** a ±1 line reaches a hood resident about once every 2–4 cycles; with mood fading 20%/cycle and base hardening only after three felt pushes in a row, nobody leaves 40–60 in 12 cycles, and the new −1 lines pull the elevated citizens (gt60) back toward the band as often as they push anyone out. The shaping volume pre-201 lived in the ~14,000 other plain-day lines (Daily, Civic Perception, Personal, PrevEvening, Sports, Lifestyle, Background) at +1–+4 unsigned. Builder 2026-09-13: this whole approach (retagging texture to move dials) is wrong, and engine.201/201b were never approved — the event engines are what's broken. Two-way dials also shrink the wake pool short-term (24.6% → 21.8%): the one-way ratchet was inflating it.
 
 
+## Builder ruling 2026-09-14 — "remove the tagging and keep the rest, you can review it"
+
+The tagging = the engine.201b hood-rank retags (`ActivityExpanded` / `ActivityContracted` / `StreetsGuarded`). Already cut S451 PROD @79; verified absent in code this session — `generateCitizensEvents.js:3151` and `citizenDialMap.js:173` carry the REMOVED markers, and no live call to `hoodOverCrimeBar_` / `activityTopHoods_` remains. The rest stays: Wave 1 plumbing, the cause-carrying pressure seams, conduct @80, owner-reader @81, feud rest, neglect fade. Review is engine-sheet's; no further sim ruling is owed. What remains open under engine.201 is the fixed-cohort causal proof, read off the next live fires (held under codex's lead).
+
 ## Changelog
 
 - 2026-09-13 (codex) — Linked the completed engine.201 source review and proposed repair sequence for Claude approval; no implementation or live-state changes.
@@ -359,3 +363,4 @@ Hood groups at bench C118 (openness / outabout / all-neutral): crime-bar 51.82 /
 - 2026-09-13 (engine-sheet S449) — 12-cycle proof + review fixes; PROD @77; acceptance results recorded; engine.201 done-pending-archive, engine.197 open on the four builder questions.
 - 2026-09-13 (engine-sheet S449) — Builder: 1–3 broken code, 4 plain-days cut wrong. engine.201b built + benched (§engine.201b): openness/sociability down, pins 0, feud rest; all-neutral share unmoved — stays open.
 - 2026-09-13 (engine-sheet S449 close) — Builder verdict: engine.201/201b unapproved, broke the sim (StreetsGuarded read the real-Oakland crime ranking; dials moved by retagging texture, not events). Live @78 not fired. HOLD pending builder decision.
+- 2026-09-14 (engine-sheet S459) — Builder ruled: tagging out (already S451), the rest stays, engine-sheet reviews — §Builder ruling 2026-09-14. Hold lifted; open item is the fixed-cohort causal proof.

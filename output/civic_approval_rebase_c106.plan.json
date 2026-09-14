@@ -71,5 +71,23 @@
       "COUNCIL-D7": "live read 71, plan expected 45 — guard refused; no engine fire and no script writes Approval between 19:34 and 20:18, origin of 71 unattributed (Drive revisions not exposed to the service account)"
     },
     "readback": "D7=71 D2=59 D4=55 D6=55 D8=55 D9=55"
+  },
+  "superseded": {
+    "at": "2026-09-13 20:24 CDT S456",
+    "ruling": "Mike-direct: a seat reads what its district would read — no flat authored seed, no waiting five Cycles of inertia. Every elected seat set to the engine's own district level computed from live Neighborhood_Map C106 by the @84 reader (cityStateScore_/districtStateScore_/districtMoodLevel_, seeds = ENGINE213_CONFIG_SEEDS).",
+    "wrote": {
+      "MAYOR-01": "64→62",
+      "COUNCIL-D1": "76→57",
+      "COUNCIL-D2": "59→63",
+      "COUNCIL-D3": "71→58",
+      "COUNCIL-D4": "55→60",
+      "COUNCIL-D5": "76→57",
+      "COUNCIL-D6": "55→64",
+      "COUNCIL-D7": "71→67",
+      "COUNCIL-D8": "55→63",
+      "COUNCIL-D9": "55→65"
+    },
+    "readback": "all ten match",
+    "persistence": "updateCivicApprovalRatings.js:526 reads the cell; :667 moves it a fifth of the gap to target plus events; :907 queues the write. No reseed path — NaN→65 only on an empty cell (:532), successor→50 only on demotion (:796)."
   }
 }

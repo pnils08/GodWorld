@@ -225,6 +225,12 @@ Every column is a data point in someone's life. This maps who writes each column
 | X | 24 | ParentIds | JSON array: `["POP-00005","POP-00594"]` | `wireFamilyMatch_` (drip + household intake, engine.109); manual/script | — | **CAUSAL** — `generationalWealthEngine.js:727` inheritance flow; `educationCareerEngine.js:536` 18th-birthday settlement parent-edu leg; `bondEngine.js:1722` family bonds |
 | Y | 25 | ChildrenIds | JSON array: `["POP-00595","POP-00596"]` | `wireFamilyMatch_` + `formIntakeHouseholds_` (engine.109); manual/script | — | **CAUSAL** — `householdFormationEngine.js:297` family-tree reconcile branch logic; JSON array mirror of ParentIds |
 
+### Hospital income persistence (engine.218)
+
+Landed 2026-09-14 (codex-led, engine-sheet S459); bench and PROD status: [[plans/2026-08-29-employment-system-cascade]] D7. Hospital income protection uses existing LifeHistory (O), Income (AA), Status (L), and StatusStartCycle (AY); no column is added. The unstamped metadata line is `[HospitalIncomeState] statusStart=<current StatusStartCycle>|hit=<original IncomeHit admission key>`. `hit` retains the original `[IncomeHit A<n>]` key, not the loss-event Cycle.
+
+`runCareerEngine_` writes the state with a loss and migrates an existing exact-current legacy marker. `runGenerationalEngine_` carries it across hospitalized↔critical transitions and removes it on recovery. StatusStartCycle remains the duration clock for the current health status. Both wealth floors honor a matching active loss; owner draws remain separate. `compressLifeHistory_` retains the latest metadata line outside the raw event window and excludes it from event folding. The narrative Career-Health loss remains a normal event in LifeHistory_Log.
+
 ### Economics (Z–AE)
 
 | Col | # | Header | Valid Values | Writers | Readers | S321 Verdict |

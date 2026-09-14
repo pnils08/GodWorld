@@ -573,6 +573,42 @@ function calculateCitizenIncomes_(ctx) {
  * Reads Business_Ledger once (read-only; the Phase-10 ledger persist commits
  * the Income change like every other ctx.ledger mutation).
  */
+// Hospital pay state is separate from the narrative loss event. StatusStartCycle
+// measures the current health status, so transitions carry the original hit
+// forward under the new status start; recovery ends eligibility.
+function hospitalIncomeHit_(status, statusStart, lifeHistory) {
+  status = String(status || '').toLowerCase().trim();
+  var start = Number(statusStart);
+  if ((status !== 'hospitalized' && status !== 'critical') ||
+      !isFinite(start) || start <= 0) return 0;
+  var life = String(lifeHistory || '');
+  var lines = life.split('\n');
+  for (var i = lines.length - 1; i >= 0; i--) {
+    if (lines[i].indexOf('[HospitalIncomeState]') !== 0) continue;
+    var match = lines[i].match(/^\[HospitalIncomeState\] statusStart=(\d+)\|hit=(\d+)$/);
+    if (!match || !isFinite(Number(match[1])) || Number(match[1]) <= 0 ||
+        !isFinite(Number(match[2])) || Number(match[2]) <= 0 || Number(match[2]) > Number(match[1])) {
+      throw new Error('Invalid HospitalIncomeState metadata');
+    }
+    return Number(match[1]) === start ? Number(match[2]) : 0;
+  }
+  // Existing admissions already have a Career-Health marker, but no state line.
+  return life.indexOf('[IncomeHit A' + start + ']') >= 0 ? start : 0;
+}
+
+function setHospitalIncomeState_(lifeHistory, statusStart, hit) {
+  var life = String(lifeHistory || '');
+  var lines = life ? life.split('\n') : [];
+  var out = [];
+  for (var i = 0; i < lines.length; i++) {
+    if (lines[i].indexOf('[HospitalIncomeState]') !== 0) out.push(lines[i]);
+  }
+  if (statusStart > 0 && hit > 0) {
+    out.push('[HospitalIncomeState] statusStart=' + statusStart + '|hit=' + hit);
+  }
+  return out.join('\n');
+}
+
 function applyTrackedEmployerFloor_(ctx) {
   var out = { checked: 0, raised: 0 };
   var header = ctx.ledger && ctx.ledger.headers, rows = ctx.ledger && ctx.ledger.rows;
@@ -580,7 +616,8 @@ function applyTrackedEmployerFloor_(ctx) {
   var idx = function(n) { return header.indexOf(n); };
   var iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStage = idx('CareerStage'),
       iStatus = idx('Status'), iTier = idx('Tier'), iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey'),
-      iRole = idx('RoleType'), iTags = idx('SkillTags'), iPop = idx('POPID'); // engine.169
+      iRole = idx('RoleType'), iTags = idx('SkillTags'), iPop = idx('POPID'),
+      iStatusStart = idx('StatusStartCycle'), iLife = idx('LifeHistory'); // hospital income persistence
   if (iIncome < 0 || iEmp < 0 || iStage < 0) return out;
 
   var bizSheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
@@ -613,6 +650,7 @@ function applyTrackedEmployerFloor_(ctx) {
     if (isSportsLayerRow_(row, iClock, iEcon)) continue; // engine.162: GAME only; CIVIC/MEDIA rejoined 2026-09-04
     var status = String(row[iStatus] || 'active').toLowerCase();
     if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
+    if (hospitalIncomeHit_(status, row[iStatusStart], row[iLife])) continue;
     var tier = iTier >= 0 ? Number(row[iTier]) : 4;
     if (tier === 1 || tier === 2) continue;
     var employer = String(row[iEmp] || '').trim();
@@ -833,7 +871,8 @@ function applyUntrackedJobReference_(ctx) {
   var idx = function(n) { return header.indexOf(n); };
   var iIncome = idx('Income'), iEmp = idx('EmployerBizId'), iStage = idx('CareerStage'), iStatus = idx('Status'),
       iTier = idx('Tier'), iClock = idx('ClockMode'), iEcon = idx('EconomicProfileKey'), iHood = idx('Neighborhood'),
-      iRole = idx('RoleType'), iTags = idx('SkillTags'), iPop = idx('POPID');
+      iRole = idx('RoleType'), iTags = idx('SkillTags'), iPop = idx('POPID'),
+      iStatusStart = idx('StatusStartCycle'), iLife = idx('LifeHistory');
   if (iIncome < 0 || iEmp < 0 || iStage < 0) return out;
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -841,6 +880,7 @@ function applyUntrackedJobReference_(ctx) {
     if (isSportsLayerRow_(row, iClock, iEcon)) continue; // engine.162: GAME only; CIVIC/MEDIA rejoined 2026-09-04
     var status = String(row[iStatus] || 'active').toLowerCase();
     if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
+    if (hospitalIncomeHit_(status, row[iStatusStart], row[iLife])) continue;
     var tier = iTier >= 0 ? Number(row[iTier]) : 4;
     if (tier === 1 || tier === 2) continue;
     var employer = String(row[iEmp] || '').trim();

@@ -500,7 +500,8 @@ function compressLifeHistory_(ctx, options) {
       if (lastUpdate > 0 && (cycle - lastUpdate) < MIN_CYCLES_BETWEEN_COMPRESS) compressEligible = false;
     }
     var entries = lifeHistory ? parseLifeHistoryEntries_(lifeHistory).entries : null;
-    if (compressEligible && (!entries || entries.length < 3)) compressEligible = false;
+    var eventEntries = entries ? entries.filter(function(entry) { return entry.tag !== 'HospitalIncomeState'; }) : [];
+    if (compressEligible && eventEntries.length < 3) compressEligible = false;
 
     // engine.177 (S438): the WATERMARK fold. Every stamped entry (Y<n>C<m> -> entry.cycle)
     // newer than DialState.folded folds THIS cycle, whatever the trim cadence says. The
@@ -513,7 +514,7 @@ function compressLifeHistory_(ctx, options) {
     if (entries && entries.length) {
       for (var ne = 0; ne < entries.length; ne++) {
         var neC = entries[ne].cycle;
-        if (neC != null && neC > 0 && neC > foldedMark && entries[ne].tag !== 'CareerState') newEntries.push(entries[ne]); // cycle <= 0 (C0 / C?) = legacy, folds at trim
+        if (neC != null && neC > 0 && neC > foldedMark && entries[ne].tag !== 'CareerState' && entries[ne].tag !== 'HospitalIncomeState') newEntries.push(entries[ne]); // cycle <= 0 (C0 / C?) = legacy, folds at trim
       }
     }
     var moodPending = false;
@@ -630,8 +631,8 @@ function compressLifeHistory_(ctx, options) {
 
     if (compressEligible) {
       // derive the readable face from BASE (stable identity, no run-to-run flicker)
-      row[iTraitProfile] = formatDialFace_(c, entries, cycle);
-      if (trimHistory && entries.length > KEEP_RAW_ENTRIES) {
+      row[iTraitProfile] = formatDialFace_(c, eventEntries, cycle);
+      if (trimHistory && eventEntries.length > KEEP_RAW_ENTRIES) {
         row[iLifeHistory] = trimLifeHistory_(entries, KEEP_RAW_ENTRIES, dialFaceShim_(c), cycle);
       }
     }
@@ -1058,10 +1059,13 @@ function shortHash_(s) {
 function trimLifeHistory_(entries, keepCount, profile, cycle) {
   // Extract CareerState lines - these must persist (Career Engine reads them back)
   var careerStateEntry = null;
+  var hospitalIncomeEntry = null;
   var filteredEntries = [];
   for (var k = 0; k < entries.length; k++) {
     if (entries[k].tag === 'CareerState') {
       careerStateEntry = entries[k]; // Keep most recent CareerState
+    } else if (entries[k].tag === 'HospitalIncomeState') {
+      hospitalIncomeEntry = entries[k]; // Causal pay state, never a foldable life event
     } else {
       filteredEntries.push(entries[k]);
     }
@@ -1070,6 +1074,7 @@ function trimLifeHistory_(entries, keepCount, profile, cycle) {
   if (filteredEntries.length <= keepCount) {
     var lines = [];
     if (careerStateEntry) lines.push(careerStateEntry.raw);
+    if (hospitalIncomeEntry) lines.push(hospitalIncomeEntry.raw);
     for (var i = 0; i < filteredEntries.length; i++) lines.push(filteredEntries[i].raw);
     return lines.join('\n');
   }
@@ -1082,6 +1087,7 @@ function trimLifeHistory_(entries, keepCount, profile, cycle) {
 
   var newLines = [];
   if (careerStateEntry) newLines.push(careerStateEntry.raw);
+  if (hospitalIncomeEntry) newLines.push(hospitalIncomeEntry.raw);
   newLines.push(compressedLine);
   for (var j = 0; j < recentEntries.length; j++) newLines.push(recentEntries[j].raw);
 
@@ -1444,7 +1450,7 @@ var UNLIVED_BRANCH_TAGS = { careershift: 1, relocation: 1, divorce: 1, retiremen
 function foldAgedOutEntries_(c, entries, keepCount, regs, unstampedOnly) {
   var filtered = [];
   for (var k = 0; k < entries.length; k++) {
-    if (entries[k].tag !== 'CareerState') filtered.push(entries[k]);
+    if (entries[k].tag !== 'CareerState' && entries[k].tag !== 'HospitalIncomeState') filtered.push(entries[k]);
   }
   if (filtered.length <= keepCount) return 0; // nothing ages out -> nothing folds
   var oldCount = filtered.length - keepCount;

@@ -407,6 +407,10 @@ function runGenerationalEngine_(ctx) {
         });
 
         if (healthResult.newStatus !== status) {
+          var carriedIncomeHit = hospitalIncomeHit_(status, statusStartCycle, row[iLife]);
+          var continuesHospital = healthResult.newStatus === 'hospitalized' || healthResult.newStatus === 'critical';
+          row[iLife] = setHospitalIncomeState_(row[iLife], continuesHospital ? cycle : 0,
+            continuesHospital ? carriedIncomeHit : 0);
           if (iStatusStart >= 0) {
             row[iStatusStart] = (healthResult.newStatus === "active") ? "" : cycle;
           }

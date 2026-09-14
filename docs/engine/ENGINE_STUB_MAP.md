@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-09-13 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-09-14 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -255,7 +255,7 @@
 
 ### applyCityDynamics.js
 - **applyCityDynamics_(ctx)**
-  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.clusterDefinitions, S.commuteInbound, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.sentiment, S.shockFlag, S.sportsSeason, S.sportsSentimentBoost, S.storySeeds, S.weather, S.worldEvents
+  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.canonHoods, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.clusterDefinitions, S.commuteInbound, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodAdjacency, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.sentiment, S.shockFlag, S.sportsSeason, S.sportsSentimentBoost, S.storySeeds, S.weather, S.worldEvents
   Writes: S.activityObservations, S.approvalNeighborhoodEffects, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.clusterDefinitions, S.clusterDynamics, S.initiativeNeighborhoodEffects, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousClusterDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
 
@@ -1604,6 +1604,10 @@
   Config: ctx.config.cycleCount
   RNG: ctx.rng / safeRand_(ctx)
 
+- **hospitalIncomeHit_(status, statusStart, lifeHistory)**
+
+- **setHospitalIncomeState_(lifeHistory, statusStart, hit)**
+
 - **applyTrackedEmployerFloor_(ctx)**
   Sheets: Business_Ledger
 
@@ -2162,6 +2166,8 @@
 
 - **getApprovalStateConfig_(ctx)**
 
+- **districtMoodLevel_(S, hoods, cfg)**
+
 - **cityStateMiddle_(S)**
   Reads: S.neighborhoodState
 
@@ -2170,7 +2176,14 @@
 - **districtStateScore_(S, hoods, middle)**
   Reads: S.neighborhoodState
 
+- **hoodMoodEma_(S, cfg, cycle)**
+  Reads: S.neighborhoodState, S.previousCycleState
+
+- **moodLevelOf_(S, hoods, cfg)**
+  Reads: S.approvalHoodMoodEma
+
 - **cityStateScore_(S, cfg)**
+  Reads: S.approvalHoodMoodEma
 
 - **mediaScore_(domainBalance)**
 
@@ -2182,7 +2195,7 @@
 
 - **updateCivicApprovalRatings_(ctx)**
   Reads: S.absoluteCycle, S.approvalCeilingEvents, S.approvalNeighborhoodEffects, S.civicCampaigns, S.cycleId, S.editionDomainBalance, S.neighborhoodState, S.officeDepartures, S.previousCycleState, S.storyHooks
-  Writes: S.approvalCeilingEvents, S.approvalChanges, S.approvalNeighborhoodEffects, S.approvalTriggers, S.civicCampaigns, S.initiativePhases, S.officeDepartures, S.storyHooks
+  Writes: S.approvalCeilingEvents, S.approvalChanges, S.approvalHoodMoodEma, S.approvalNeighborhoodEffects, S.approvalTriggers, S.civicCampaigns, S.initiativePhases, S.officeDepartures, S.storyHooks
   Config: ctx.config.cycleCount
   Sheets: Civic_Office_Ledger, Initiative_Tracker
   RNG: ctx.rng / safeRand_(ctx)
@@ -2884,7 +2897,7 @@
 
 ### finalizeCycleState.js
 - **finalizeCycleState_(ctx)**
-  Reads: S.activeCooldowns, S.bankRate, S.businessDynamicsState, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
+  Reads: S.activeCooldowns, S.approvalHoodMoodEma, S.bankRate, S.businessDynamicsState, S.cityDynamics, S.civicLoad, S.civicLoadScore, S.crimeByNeighborhood, S.crimeMetrics, S.crimeSpikes, S.crisisArcsActive, S.cycle, S.cycleId, S.cycleWeight, S.cycleWeightScore, S.domainPresence, S.dominantDomain, S.economicMood, S.economicRipples, S.eventsGenerated, S.holiday, S.holidayPriority, S.hospitalEvents, S.initiativePhases, S.initiativeRipples, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.migrationDrift, S.migrationDriftFactors, S.neighborhoodDynamics, S.overloadScore, S.patternFlag, S.previousCycleState, S.recoveryLevel, S.season, S.shockFlag, S.shockStartCycle, S.sportsSeason, S.transitState, S.weather, S.weatherFrontTracking, S.weatherTracking, S.worldEvents
   Writes: S.cycleFinalState, S.cycleFinalizedAt, S.previousCycleState
   Config: ctx.config.cycleCount
 
@@ -4004,4 +4017,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1386
+**Functions mapped:** 1391

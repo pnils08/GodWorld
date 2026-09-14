@@ -1,8 +1,8 @@
 {
-  "generated": "2026-09-13",
+  "generated": "2026-09-14",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1386,
+  "functionsMapped": 1391,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -801,6 +801,7 @@
         "phase01-config/canonNeighborhoodLoader.js::hoodsWithScene_",
         "phase01-config/canonNeighborhoodLoader.js::isCanonNeighborhood_",
         "phase01-config/canonNeighborhoodLoader.js::resolveHoodOrChild_",
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "utilities/ensureCrimeMetrics.js::crimeIterationHoods_"
       ]
     },
@@ -810,6 +811,7 @@
       ],
       "readers": [
         "phase01-config/canonNeighborhoodLoader.js::getAdjacentHoods_",
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase03-population/updateCrimeMetrics.js::buildCrimeAdjacencyGraph_"
       ]
     },
@@ -854,6 +856,7 @@
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
         "phase05-citizens/updateCivicApprovalRatings.js::cityStateMiddle_",
         "phase05-citizens/updateCivicApprovalRatings.js::districtStateScore_",
+        "phase05-citizens/updateCivicApprovalRatings.js::hoodMoodEma_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
         "phase06-analysis/economicRippleEngine.js::primarySportsZone_",
@@ -1647,6 +1650,7 @@
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/bondEngine.js::updateExistingBonds_",
         "phase05-citizens/generationalWealthEngine.js::processBankRate_",
+        "phase05-citizens/updateCivicApprovalRatings.js::hoodMoodEma_",
         "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase06-analysis/applyShockMonitor.js::applyShockMonitor_",
         "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
@@ -3385,6 +3389,16 @@
         "phase05-citizens/runYouthEngine.js::runYouthEngine_"
       ],
       "readers": []
+    },
+    "approvalHoodMoodEma": {
+      "writers": [
+        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_"
+      ],
+      "readers": [
+        "phase05-citizens/updateCivicApprovalRatings.js::cityStateScore_",
+        "phase05-citizens/updateCivicApprovalRatings.js::moodLevelOf_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
     },
     "approvalCeilingEvents": {
       "writers": [

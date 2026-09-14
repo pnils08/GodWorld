@@ -935,6 +935,12 @@ function runCareerEngine_(ctx) {
     if (healthStatus === "hospitalized" || healthStatus === "critical") {
       var admitC = iStatusStart >= 0 ? (Number(row[iStatusStart]) || 0) : 0;
       var hitMarker = "[IncomeHit A" + admitC + "]";
+      var priorHit = hospitalIncomeHit_(healthStatus, admitC, existing);
+      if (priorHit) {
+        row[iLife] = setHospitalIncomeState_(existing, admitC, priorHit);
+        if (row[iLife] !== existing) ctx.ledger.dirty = true;
+        continue;
+      }
       var hospIncome = iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0;
       var hospEconOk = iEconKey >= 0 && row[iEconKey] &&
         String(row[iEconKey]).trim() !== "" && String(row[iEconKey]).trim() !== "SPORTS_OVERRIDE";
@@ -944,6 +950,7 @@ function runCareerEngine_(ctx) {
         var hitText = "Extended hospital stay cut into earnings";
         var hitLine = inWorldStamp_(ctx) + " — [Career-Health] " + hitText + " " + hitMarker;
         row[iLife] = existing ? (existing + "\n" + hitLine) : hitLine;
+        row[iLife] = setHospitalIncomeState_(row[iLife], admitC, admitC);
         row[iLastUpd] = ctx.now;
         logRows.push([ctx.now, row[iPopID], '', "Career-Health", hitText, '', cycle]);
         rows[r] = row;

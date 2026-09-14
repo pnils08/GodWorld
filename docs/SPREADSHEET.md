@@ -25,6 +25,8 @@ Last audited: Session 234 (2026-05-24, /doc-audit data group) — Simulation_Led
 
 These are read/written during every cycle run.
 
+Hospital income persistence (engine.218, landed 2026-09-14, codex-led) uses existing Simulation_Ledger cells; no tab or column is added. LifeHistory carries protected `[HospitalIncomeState]` metadata; LifeHistory_Log retains the narrative loss event. See [[SIMULATION_LEDGER]] §Hospital income persistence and [[plans/2026-08-29-employment-system-cascade]] D7 for the format, landing status and proof. The historical column counts below remain dated inventory; `schemas/SCHEMA_HEADERS.md` lists the current recorded headers.
+
 | Tab | Rows | Read By | Write By | Purpose |
 |-----|------|---------|----------|---------|
 | **World_Config** | 11 | ENGINE | ENGINE | Engine configuration parameters |

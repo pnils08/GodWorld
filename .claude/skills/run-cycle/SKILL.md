@@ -81,7 +81,7 @@ Translate the cycle's per-hood engine signal into the lived particulars a reside
 node scripts/buildNeighborhoodTexture.js {XX}
 ```
 
-Reads the same Riley_Digest + Neighborhood_Map sources as Step 5 (structured, not the world_summary markdown), runs ONE batched DeepSeek generation (~21 short blocks), deterministic real-name blocklist sweep (fail-loud). Output: `output/neighborhood_texture_c{XX}.md`, frozen for the cycle. Hoods with no engine signal get a quiet-week line (no invented drama). The cron `citizen-wake.js` reads each citizen's hood block via `loadNeighborhoodTexture` and injects it as `Around your neighborhood:`. Adds one cheap LLM gen/cycle; degrades gracefully (wake omits the line) if absent.
+Reads the same Riley_Digest + Neighborhood_Map sources as Step 5 (structured, not the world_summary markdown) **plus the engine's own `Story_Seed_Deck` for the cycle (v1.1.0, S456, Mike-direct)** — each seed's human clause per hood, names scrubbed, phase words and scores translated, hooks deliberately excluded (desk guidance, not what a resident sees). Runs ONE batched DeepSeek generation (~21 short blocks), deterministic real-name blocklist sweep (fail-loud). Output: `output/neighborhood_texture_c{XX}.md`, frozen for the cycle. Hoods with no engine signal get a quiet-week line (no invented drama). `TEXTURE_DEBUG=1` prints every hood's source bundle to stderr. C107 before/after: 8 → 15 of 22 hoods with signal; citizens waking into the quiet line 360 → ~80. The cron `citizen-wake.js` reads each citizen's hood block via `loadNeighborhoodTexture` and injects it as `Around your neighborhood:`. Adds one cheap LLM gen/cycle; degrades gracefully (wake omits the line) if absent.
 
 **Gate:** File exists on disk.
 
@@ -202,7 +202,7 @@ Nothing downstream is hand-run. The artifacts this chain leaves on disk are read
 
 **The acceptance test is the next unattended cron run, not a hand-driven demo.** If a step above fails, the cron that reads its artifact runs on the prior cycle — say which one in SESSION_CONTEXT.
 
-Known texture gap (S456): `buildNeighborhoodTexture` reads Riley_Digest + Neighborhood_Map only, so a hood with an active initiative and no digest signal reads "a quiet week" (C107: Temescal with the health center under construction, West Oakland with the fund disbursing). The initiative slice is not an input yet.
+Texture gap closed S456: `buildNeighborhoodTexture` v1.1.0 reads `Story_Seed_Deck`, so an initiative under construction or a household moving in reaches the hood block. Still open on the citizen side: the seeds name the citizens involved (who moved, who is climbing), and the wake does not yet tell that citizen their own event — that is a `citizen-wake` change, not texture.
 
 ## Legacy Reference
 

@@ -4,11 +4,11 @@ _Lived-particulars digest (research.19 T2). What a resident would notice this we
 
 ### Downtown
 
-The Telegraph Presbyterian Fellowship has their doors open this week, offering meals and company to seniors in the neighborhood. At lunchtime, the line at SpeedyBurger stretches out the door with office workers on their breaks.
+The Telegraph Presbyterian Fellowship opens its doors for community support, while the seniors lunch program celebrates a milestone. SpeedyBurger remains a quick stop for locals.
 
 ### Temescal
 
-A quiet week — nothing much out of the ordinary around the neighborhood.
+The Temescal Community Health Center construction continues, drawing attention on Telegraph Avenue. Gridiron Analytics has added new faces to its team.
 
 ### Laurel
 
@@ -16,19 +16,19 @@ A quiet week — nothing much out of the ordinary around the neighborhood.
 
 ### West Oakland
 
-A quiet week — nothing much out of the ordinary around the neighborhood.
+Residents receive payments from the West Oakland Stabilization Fund, and a new neighbor from Chinatown joins the block. The Varek Family Block Party brings the community together.
 
 ### Fruitvale
 
-St. Esperanza Parish still has their Epiphany decorations up, brightening the sidewalk outside the church. The Unity Gathering brings neighbors together near the transit plaza, where people linger to chat after grabbing coffee.
+The Fruitvale Transit Hub Phase II design process is underway, and traditional Epiphany rituals are observed at St. Esperanza Parish. The Fruitvale Unity Gathering draws a crowd.
 
 ### Jack London
 
-Dockhouse BBQ has a new special on the chalkboard out front—smoked pork with apple slaw. Early risers meet at the Misty Morning Coffee Club by the water, watching the fog roll off the estuary.
+Dockhouse BBQ and Harborline Grill buzz with activity as the neighborhood sees new arrivals from Temescal. The Paulson Line Founding Celebration and the Misty Morning Coffee Club mark the week.
 
 ### Rockridge
 
-OakHouse has a waitlist for dinner most nights, with couples and small groups filling the patio under string lights. The sidewalks stay busy even after dark, people walking home with takeout bags or stopping to window-shop.
+Residents discuss the Oakland Alternative Response Initiative, feeling safer and more connected. Rico Valez is spotted at Canopy Market, and OakHouse remains a favorite spot.
 
 ### Adams Point
 
@@ -40,15 +40,15 @@ A quiet week — nothing much out of the ordinary around the neighborhood.
 
 ### Piedmont Ave
 
-The Piedmont Pub’s neon sign glows orange in the evenings, drawing in regulars and newcomers for local beers. A few doors down, the florist arranges fresh bouquets in buckets outside their shop.
+Piedmont Pub continues to be a quiet evening retreat for locals.
 
 ### Chinatown
 
-The Dragon Gate Lounge keeps its red lanterns lit late, music spilling out onto the sidewalk. Down the block, seniors play mahjong outside the Oakland Asian Cultural Center, tiles clicking under the awning.
+New residents move in from West Oakland, driven by rising rents, while Dragon Gate Lounge stays lively.
 
 ### Brooklyn
 
-A quiet week — nothing much out of the ordinary around the neighborhood.
+Foot traffic slows, and storefronts feel quieter compared to the rest of the city.
 
 ### Eastlake
 
@@ -56,7 +56,7 @@ A quiet week — nothing much out of the ordinary around the neighborhood.
 
 ### Glenview
 
-A quiet week — nothing much out of the ordinary around the neighborhood.
+The neighborhood remains quiet, with less foot traffic along the Dimond strip.
 
 ### Dimond
 
@@ -72,24 +72,24 @@ A quiet week — nothing much out of the ordinary around the neighborhood.
 
 ### KONO
 
-A quiet week — nothing much out of the ordinary around the neighborhood.
+Telegraph Press and KONO Kitchen see familiar faces like GameGirl Gia and former A's Star Rodriguez, as the area continues to attract crowds.
 
 ### Lake Merritt
 
-The Cathedral of the Living Word still has its nativity scene displayed near the entrance, candles flickering in the evening breeze. Joggers circle the lake at dusk, dodging geese near the water’s edge.
+The Cathedral of the Living Word celebrates Epiphany, and new residents move in from Chinatown, Jack London, and Fruitvale.
 
 ### Uptown
 
-A quiet week — nothing much out of the ordinary around the neighborhood.
+The Coliseum District Development sparks curiosity as people imagine its future, while the neighborhood remains a bustling destination.
 
 ### Baylight District
 
-A quiet week — nothing much out of the ordinary around the neighborhood.
+A new resident joins the block from Laurel, adding to the growing community.
 
 ### East Oakland
 
-The Foothill Baptist Tabernacle’s food pantry has fresh produce stacked in crates outside, volunteers handing out bags to families in line. Down the street, someone’s grilling in their driveway, the smell of charcoal and spices drifting down the block.
+Foothill Baptist Tabernacle’s food pantry serves neighbors in need, providing essential support.
 
 ---
 
-_Generated by `scripts/buildNeighborhoodTexture.js` v1.0.0 from Riley_Digest + Neighborhood_Map (cycle 107). One batched generation, frozen for the cycle. 8/22 hoods with engine signal; 14 quiet._
+_Generated by `scripts/buildNeighborhoodTexture.js` v1.1.0 from Riley_Digest + Neighborhood_Map + Story_Seed_Deck (cycle 107). One batched generation, frozen for the cycle. 15/22 hoods with engine signal; 7 quiet._

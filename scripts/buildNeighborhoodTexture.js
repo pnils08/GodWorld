@@ -49,8 +49,107 @@ const { parseJsonField } = require('/root/GodWorld/scripts/buildWorldSummary');
 const { loadFaithBlocklist } = require('/root/GodWorld/lib/canonBlocklist');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
-const SCRIPT_VERSION = '1.0.0';
+const SCRIPT_VERSION = '1.1.0';
 const QUIET_LINE = 'A quiet week — nothing much out of the ordinary around the neighborhood.';
+
+// ── Story_Seed_Deck → lived-particular sources (S456, Mike-direct "Go") ─────────
+// Before 1.1.0 a hood had signal only from WorldEvents tagged to it, evening venues
+// in it, and CityEvents naming it. At C107 that left 14 of 22 hoods on the quiet
+// line and 360 of 943 citizens waking into "nothing much out of the ordinary" —
+// while the engine's own Story_Seed_Deck for the same cycle said Temescal had the
+// health center under construction and a sustained boom, West Oakland had the
+// fund paying out and a household moving in. The seed deck IS the engine's
+// per-hood account of what moved; it belongs in the table.
+//
+// What is fed: each seed's `Why` (the human clause), per its `Neighborhood`.
+// What is NOT fed: `What` (metric deltas), JSON blobs, approval-reason strings,
+// citywide / district rows (no hood), and citizen NAMES — names never enter the
+// shared block (the wake carries neighbours and bonds per citizen; a block every
+// resident reads must be about the place). Engine phrasing is translated before
+// the model sees it (phase words, "Tier 3 -> 2", "momentum 9/10") so the
+// generator is never handed system taxonomy to leak (C100 Rockridge lesson).
+// Story_Hook_Deck is deliberately not read: hook text is desk guidance
+// ("Explainer piece warranted", "Investigation warranted"), not what a resident
+// sees, and its specific rows duplicate seeds.
+const PHASE_WORDS = {
+  'construction-active': 'under construction',
+  'construction-planning': 'about to start construction',
+  'disbursement-active': 'paying out to neighbors who applied',
+  'implementation-active': 'rolling out on the street',
+  'design-phase': 'in design',
+  'design-development-active': 'in design',
+  'visioning': 'being talked about at community meetings',
+  'visioning-complete': 'past the community-meeting stage',
+  'pilot-active': 'running as a pilot',
+  'pilot_evaluation': 'being evaluated after its pilot',
+  'operational': 'up and running',
+  'legislation-filed': 'filed with the council',
+  'vote-scheduled': 'headed for a council vote',
+  'vote-ready': 'headed for a council vote',
+};
+
+function seedCitizenNames(seed) {
+  // "POP-00301 Lila Leap; POP-01034 Howard Perez" → ["Lila Leap", "Howard Perez"]
+  return String(seed.Citizens || '').split(';').map((s) => s.replace(/POP-\d+/g, '').trim()).filter((s) => s.length > 3);
+}
+
+// One seed → zero or more plain source lines for its hood. Pure; exported for tests.
+function seedSourceLines(seed) {
+  const hood = String(seed.Neighborhood || '').trim();
+  if (!hood || /^(citywide|d\d)$/i.test(hood)) return [];
+  const why = String(seed.Why || '').trim();
+  if (!why || why.startsWith('{')) return [];
+  if (/sitting \(0, capped\)|advanced \(\+\d|level target|Edition coverage lifted|Initiative work landed in \d/i.test(why)) return [];
+  const names = seedCitizenNames(seed);
+  const out = [];
+  for (let part of why.split(/\s*\|\s*/)) {
+    part = part.trim();
+    if (!part) continue;
+    // Ripple bookkeeping ("carryover: cycle 2 of 4") is the engine's, not the street's.
+    if (/^carryover:/i.test(part)) continue;
+    // "<City event> (<Hood>)" — the hood tag is routing, not text.
+    part = part.replace(/\s*\((?:[A-Z][A-Za-z' ]+)\)\s*$/, '');
+    // "<Name> — the city is watching: <observation>" → the observation.
+    part = part.replace(/^.+? — the city is watching:\s*/i, '');
+    // "<Name> — the city keeps saying the name: Tier 3 -> 2" → a place-level line.
+    if (/the city keeps saying the name/i.test(part)) { out.push('someone from the neighborhood keeps coming up in conversation around the city'); continue; }
+    // Relocation: the destination hood's line, no name.
+    let m = part.match(/^(.+?) moved from (.+?) to (.+?)(?: — (.*))?$/);
+    if (m) {
+      const who = /household/i.test(m[1]) ? 'a household' : 'someone new';
+      const tail = /priced out/i.test(m[4] || '') ? ', after rents pushed them out of ' + m[2] : '';
+      out.push(`${who} moved onto the block from ${m[2]}${tail}`);
+      continue;
+    }
+    // Initiative phase line: "<Name> is <phase> — ongoing <domain> effects in <hoods>".
+    m = part.match(/^(.+?) is ([a-z_-]+) — ongoing .* effects in .+$/i);
+    if (m) { out.push(`${m[1]} is ${PHASE_WORDS[m[2].toLowerCase()] || 'in progress'}`); continue; }
+    // Trajectory lines: drop the score, keep the picture.
+    part = part.replace(/\s*—\s*momentum \d+\/10,?\s*/i, ' — ').replace(/\s+—\s*$/, '');
+    // "1 citizen(s) joined the congregation at X" → a neighbor.
+    part = part.replace(/^\d+ citizen\(s\) joined/i, 'a neighbor joined');
+    // Names out, always.
+    for (const n of names) part = part.split(n).join('a neighbor');
+    // Anything still carrying a metric delta or system word is not a lived particular.
+    if (/[+-]\d|\d+\.\d|\b(sentiment|retail vitality|crime index|momentum|tier \d)\b/i.test(part)) continue;
+    part = part.replace(/\s+/g, ' ').trim();
+    if (part) out.push(part);
+  }
+  return out;
+}
+
+function seedsByHood(seeds, cycle) {
+  const by = {};
+  for (const s of seeds) {
+    if (String(s.Cycle) !== String(cycle)) continue;
+    for (const line of seedSourceLines(s)) {
+      const hood = String(s.Neighborhood).trim();
+      (by[hood] = by[hood] || []);
+      if (!by[hood].includes(line)) by[hood].push(line);
+    }
+  }
+  return by;
+}
 
 // ── source assembly (structured, per-hood, collision-safe) ────────────────────
 
@@ -79,8 +178,12 @@ function incomeBand(medianIncome) {
 
 // Assemble the per-hood source bundle from the structured Riley_Digest + slicer state.
 // Returns { hood, sources: [strings], grounding: [strings], hasSignal: bool }.
-function assembleHoodSources(hood, slicer, worldEvents, venues, cityEventsByHood) {
+function assembleHoodSources(hood, slicer, worldEvents, venues, cityEventsByHood, seedLinesByHood) {
   const sources = [];
+
+  // The engine's own week record for this hood (Story_Seed_Deck, v1.1.0) — first,
+  // because it is the part the other three sources were missing.
+  for (const line of ((seedLinesByHood || {})[hood] || [])) sources.push(`NOTED: ${line}`);
 
   // World events tagged to THIS hood (exact .neighborhood match) — incl. FAITH holy-days.
   // Feed ONLY the real human description — NEVER the engine domain/subdomain words
@@ -134,6 +237,7 @@ function buildPrompt(bundles, canon) {
     '- NEVER state numbers, metrics, percentages, scores, or system words (sentiment, retail, crime index, displacement pressure). Translate every fact into what a person SEES or HEARS.',
     '- NEVER invent drama, hardship, or events. If the sources are thin, write something small and ordinary. The GROUNDING notes only keep you truthful (don\'t describe hardship in a comfortable area, or wealth in a working-class one) — never print them.',
     '- NEVER name real-world people, sports figures, or real churches/clergy. Use only what the source lines name.',
+    '- NOTED lines are the city\'s own record of what moved in that neighborhood this week (a build underway, a program paying out, someone new on the block, the strip busier or quieter). They are things that happened; render what a person would see or hear of them, never the wording.',
     // G-PF23: identity is REGISTER, not content. It tells you what kind of place
     // this is so the observation lands in the right key — a quiet week in
     // Chinatown does not read like a quiet week in Baylight. It is never itself
@@ -358,10 +462,13 @@ async function buildNeighborhoodTexture(cycle) {
     throw new Error(`buildNeighborhoodTexture: cycle must be a positive integer, got ${cycle}`);
   }
 
-  const [rileyAll, neighborhoodsAll, ledgerObjs] = await Promise.all([
+  const [rileyAll, neighborhoodsAll, ledgerObjs, seedRows] = await Promise.all([
     sheets.getSheetAsObjects('Riley_Digest'),
     sheets.getSheetAsObjects('Neighborhood_Map'),
     sheets.getSheetAsObjects('Simulation_Ledger'),
+    // Read the tab, not output/beats/ — the beats dump runs AFTER this step in
+    // /run-cycle (5.56 vs 5.5), and a stale dump would feed last cycle's week.
+    sheets.getSheetAsObjects('Story_Seed_Deck').catch((e) => { console.warn('[texture] Story_Seed_Deck unreadable — seeds omitted: ' + e.message); return []; }),
   ]);
 
   const rileyCurr = rileyAll.find((r) => String(r.Cycle) === String(cycle));
@@ -385,8 +492,12 @@ async function buildNeighborhoodTexture(cycle) {
     ...(nightlife.spotDetails || []).map((v) => ({ ...v, kind: 'nightlife' })),
   ];
   const cityEventsByHood = assignCityEvents(rileyCurr.CityEvents, hoodsLongestFirst);
+  const seedLinesByHood = seedsByHood(seedRows, cycle);
+  const seedLineCount = Object.values(seedLinesByHood).reduce((n, a) => n + a.length, 0);
+  console.error(`[texture] Story_Seed_Deck: ${seedRows.filter((s) => String(s.Cycle) === String(cycle)).length} seeds at C${cycle} → ${seedLineCount} source lines across ${Object.keys(seedLinesByHood).length} hoods`);
 
-  const bundles = hoods.map((h) => assembleHoodSources(h, slicer, worldEvents, venues, cityEventsByHood));
+  const bundles = hoods.map((h) => assembleHoodSources(h, slicer, worldEvents, venues, cityEventsByHood, seedLinesByHood));
+  if (process.env.TEXTURE_DEBUG) for (const b of bundles) console.error(`[texture] ${b.hood}: ${b.sources.length ? b.sources.join(' || ') : '(quiet)'}`);
 
   // Hoods with NO source signal short-circuit to the quiet-week line — deterministic,
   // free, and structurally cannot invent drama (the grounding rule made code).
@@ -425,7 +536,7 @@ async function buildNeighborhoodTexture(cycle) {
   for (const h of hoods) {
     out.push(`### ${h}`, '', blocksMap[h] || QUIET_LINE, '');
   }
-  out.push('---', '', `_Generated by \`scripts/buildNeighborhoodTexture.js\` v${SCRIPT_VERSION} from Riley_Digest + Neighborhood_Map (cycle ${cycle}). One batched generation, frozen for the cycle. ${withSignal.length}/${hoods.length} hoods with engine signal; ${hoods.length - withSignal.length} quiet._`);
+  out.push('---', '', `_Generated by \`scripts/buildNeighborhoodTexture.js\` v${SCRIPT_VERSION} from Riley_Digest + Neighborhood_Map + Story_Seed_Deck (cycle ${cycle}). One batched generation, frozen for the cycle. ${withSignal.length}/${hoods.length} hoods with engine signal; ${hoods.length - withSignal.length} quiet._`);
 
   return { body: out.join('\n') + '\n', warns, signalCount: withSignal.length, hoodCount: hoods.length };
 }
@@ -464,6 +575,8 @@ module.exports = {
   assignCityEvents,
   incomeBand,
   assembleHoodSources,
+  seedSourceLines,
+  seedsByHood,
   parseBlocks,
   buildRealNameSweep,
   sweepBlocks,

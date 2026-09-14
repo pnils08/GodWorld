@@ -582,6 +582,17 @@ function applyCityDynamics_(ctx) {
   // ─────────────────────────────────────────────────────────────────────────
   // CLUSTER DEFINITIONS (exposed via S.clusterDefinitions)
   // ─────────────────────────────────────────────────────────────────────────
+  // engine.214 (S458): the five clusters are authored CHARACTER — weights,
+  // capacity sensitivity, place bias — and the hoods named in each `hoods`
+  // list are its ANCHORS, not its membership. Membership is sheet truth
+  // (ADR-0016): assignClusterMembership_ below walks every hood on
+  // Neighborhood_Map into a cluster through its Adjacent column, so all 22
+  // carry their own dynamics track. Before this, ten of 22 hoods (Adams Point,
+  // Baylight District, Brooklyn, Dimond, East Oakland, Eastlake, Glenview,
+  // Grand Lake, Ivy Hill, San Antonio) sat outside the table, got no
+  // neighborhoodDynamics entry, and rode the city scalar 1:1 in the Phase-8
+  // writer — the engine.165 sawtooth (C107 readback: +0.306 in lockstep for
+  // the ten, −0.037 for the twelve).
   var CLUSTERS = {
     'DOWNTOWN_CORE': {
       hoods: ['Downtown', 'Uptown', 'KONO', 'Chinatown'],
@@ -610,14 +621,132 @@ function applyCityDynamics_(ctx) {
     }
   };
 
-  // Adjacent clusters for sentiment bleed
-  var CLUSTER_ADJACENCY = {
-    'DOWNTOWN_CORE': ['WATERFRONT_WEST', 'LAKE_CORRIDOR', 'NORTH_HILLS'],
-    'WATERFRONT_WEST': ['DOWNTOWN_CORE', 'EAST_OAKLAND'],
-    'LAKE_CORRIDOR': ['DOWNTOWN_CORE', 'NORTH_HILLS', 'EAST_OAKLAND'],
-    'NORTH_HILLS': ['DOWNTOWN_CORE', 'LAKE_CORRIDOR'],
-    'EAST_OAKLAND': ['WATERFRONT_WEST', 'LAKE_CORRIDOR']
-  };
+  // engine.214: anchors → full membership. A pass-synchronous flood from the
+  // anchors: each pass, every unassigned canon hood scores the clusters its
+  // Adjacent hoods already sit in and joins the majority; a tie goes to the
+  // one cluster already holding a hood of the same council District; a tie
+  // District cannot break waits for the next pass, where the hoods seated
+  // meanwhile may break it. Only when a full pass seats nobody does the flood
+  // give up: a tie that still stands, an anchor the map does not carry, or a
+  // hood no pass can reach all throw — sheet drift is an Engine_Errors row,
+  // never a silent guess (ADR-0016). Inside safePhaseCall_ that throw leaves
+  // S.cityDynamics / S.neighborhoodDynamics unset for the cycle (every reader
+  // falls to its neutral default and the next snapshot carries no momentum) —
+  // the same wall the Phase-1 loader already throws for a bad Adjacent name.
+  // Order is deterministic: anchors in literal order, then each pass's joiners
+  // in sheet row order. Live map at S458: one pass seats all ten; Eastlake is
+  // the one District tie (Lake Merritt 1 : Chinatown 1, D8 → LAKE_CORRIDOR).
+  function assignClusterMembership_(clusters) {
+    var canon = getCanonNeighborhoods_(ctx);
+    var adjacency = S.neighborhoodAdjacency;
+    if (!adjacency) {
+      throw new Error('applyCityDynamics_: S.neighborhoodAdjacency not seeded — Neighborhood_Map.Adjacent is the cluster membership source (engine.214, ADR-0016).');
+    }
+    var district = (S.canonHoods && S.canonHoods.district) || {};
+    var clusterOf = {};
+    var ck, a, i;
+    for (ck in clusters) {
+      if (!clusters.hasOwnProperty(ck)) continue;
+      var anchors = (clusters[ck].hoods || []).slice();
+      clusters[ck].anchors = anchors;
+      clusters[ck].hoods = anchors.slice();
+      for (a = 0; a < anchors.length; a++) {
+        if (canon.indexOf(anchors[a]) < 0) {
+          throw new Error('applyCityDynamics_: cluster ' + ck + ' anchor "' + anchors[a] + '" is not a hood on Neighborhood_Map (engine.214).');
+        }
+        clusterOf[anchors[a]] = ck;
+      }
+    }
+
+    var unassigned = [];
+    for (i = 0; i < canon.length; i++) {
+      if (!clusterOf[canon[i]]) unassigned.push(canon[i]);
+    }
+
+    while (unassigned.length) {
+      var joins = [];   // [hood, cluster] resolved this pass, applied together
+      var left = [];    // not seated this pass — unreachable so far, or a tie the next pass may break
+      var tied = [];    // the subset of `left` that tied this pass (codex review S458: a tie is only unbreakable once no pass makes progress)
+      for (i = 0; i < unassigned.length; i++) {
+        var hood = unassigned[i];
+        var nbrs = adjacency[hood] || [];
+        var score = {};
+        var n;
+        for (n = 0; n < nbrs.length; n++) {
+          var c = clusterOf[nbrs[n]];
+          if (c) score[c] = (score[c] || 0) + 1;
+        }
+        var best = 0;
+        var top = [];
+        for (ck in clusters) {
+          if (!clusters.hasOwnProperty(ck) || !score[ck]) continue;
+          if (score[ck] > best) { best = score[ck]; top = [ck]; }
+          else if (score[ck] === best) top.push(ck);
+        }
+        if (!top.length) { left.push(hood); continue; }
+        if (top.length > 1) {
+          var sameDistrict = [];
+          for (a = 0; a < top.length; a++) {
+            var members = clusters[top[a]].hoods;
+            for (n = 0; n < members.length; n++) {
+              if (district[members[n]] && district[members[n]] === district[hood]) { sameDistrict.push(top[a]); break; }
+            }
+          }
+          if (sameDistrict.length !== 1) {
+            left.push(hood);
+            tied.push('"' + hood + '" (' + top.join(' / ') + ', District ' + (district[hood] || 'blank') + ')');
+            continue;
+          }
+          top = sameDistrict;
+        }
+        joins.push([hood, top[0]]);
+      }
+      if (!joins.length) {
+        if (tied.length) {
+          throw new Error('applyCityDynamics_: ' + tied.join('; ') + ' sit(s) evenly between clusters by Neighborhood_Map.Adjacent' +
+            ' and District does not break the tie (engine.214)' +
+            (left.length > tied.length ? '; also unreached: ' + left.length + ' hood(s)' : '') + '.');
+        }
+        throw new Error('applyCityDynamics_: no cluster reaches ' + left.join(', ') +
+          ' through Neighborhood_Map.Adjacent — every hood on the map needs a path to a cluster anchor (engine.214).');
+      }
+      for (i = 0; i < joins.length; i++) {
+        clusterOf[joins[i][0]] = joins[i][1];
+        clusters[joins[i][1]].hoods.push(joins[i][0]);
+      }
+      unassigned = left;
+    }
+  }
+
+  // engine.214: adjacent clusters for sentiment bleed, derived from the same
+  // sheet column — cluster A touches B when any member of A is Adjacent to any
+  // member of B. Against the retired literal this adds exactly one edge on the
+  // live map, WATERFRONT_WEST ↔ LAKE_CORRIDOR (Brooklyn – Eastlake).
+  function deriveClusterAdjacency_(clusters) {
+    var adjacency = S.neighborhoodAdjacency || {};
+    var clusterOf = {};
+    var ck, i;
+    for (ck in clusters) {
+      if (!clusters.hasOwnProperty(ck)) continue;
+      for (i = 0; i < clusters[ck].hoods.length; i++) clusterOf[clusters[ck].hoods[i]] = ck;
+    }
+    var out = {};
+    for (ck in clusters) {
+      if (!clusters.hasOwnProperty(ck)) continue;
+      out[ck] = [];
+      for (i = 0; i < clusters[ck].hoods.length; i++) {
+        var nbrs = adjacency[clusters[ck].hoods[i]] || [];
+        for (var n = 0; n < nbrs.length; n++) {
+          var other = clusterOf[nbrs[n]];
+          if (other && other !== ck && out[ck].indexOf(other) < 0) out[ck].push(other);
+        }
+      }
+    }
+    return out;
+  }
+
+  assignClusterMembership_(CLUSTERS);
+  var CLUSTER_ADJACENCY = deriveClusterAdjacency_(CLUSTERS);
 
   var clusterWeights = {
     'DOWNTOWN_CORE': 0.28,
@@ -633,6 +762,7 @@ function applyCityDynamics_(ctx) {
     if (!CLUSTERS.hasOwnProperty(ck)) continue;
     S.clusterDefinitions[ck] = {
       neighborhoods: CLUSTERS[ck].hoods.slice(),
+      anchors: CLUSTERS[ck].anchors.slice(),   // engine.214: the authored seats; neighborhoods is the sheet-derived membership
       adjacent: (CLUSTER_ADJACENCY[ck] || []).slice()
     };
   }

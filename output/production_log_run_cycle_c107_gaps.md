@@ -493,7 +493,7 @@
 - **Evidence:** C106→C107 ΔSentiment — 12 in-table hoods mean −0.037 (range −0.09..+0.02); 10 out-of-table hoods (Adams Point, Baylight District, Brooklyn, Dimond, East Oakland, Eastlake, Glenview, Grand Lake, Ivy Hill, San Antonio) mean +0.306 (+0.25..+0.35) while Riley CitySentiment moved 0.25→0.51. Reverse split at C106 (0.84→0.25). All ten have citizens on the ledger (1–7 each).
 - **Effect:** every mood-fed consumer (approval level engine.213, crime :231/:924, texture) inherits a sawtooth for ten hoods that the other twelve do not show. The auditor files the ten as `improvement` one cycle and `math-imbalance` the next.
 - **Fix:** cluster membership from the sheet (Neighborhood_Map District + Adjacent, all 22 rows), not a literal. Bench first. ROLLOUT engine.165.
-- **Status:** OPEN — engine-sheet, next cut
+- **Status:** CUT S458 (engine.214) — anchors + Adjacent-majority flood, District tie-break, drift throws; all 22 seated (LAKE 6, EAST 6, WATERFRONT 4, DOWNTOWN 4, NORTH_HILLS 2); test `scripts/clusterMembership.test.js` 37/37 (codex FIX-FIRST → fixed: tie deferral, wrapper-level proof). Bench fire pending the live-C107 resync; readback = 22 ΔSentiment vs the scalar move, two fires (momentum proves on the second)
 
 ### G-EC81 — `illnessConvergenceRate` missing from World_Config for three cycles; repeating-event detector reads the engine notice as a civic issue [judgment] [cross-cycle-debt] [MED]
 - **Source:** Riley_Digest.Issues C105–C107 (`World_Config key "illnessConvergenceRate" missing; using default 0.25 (engine.102 W2b)`); output/engine_audit_c107.json patterns[1] (`Issue "world" (+ 6 co-occurring tokens) recurred 3 cycles`)
@@ -528,3 +528,7 @@
 ### G-EC87 — buildWorldSummary.js crashed on C107 (`worldConfigAll is not defined`): World_Config was fetched but not passed from loadCycleData to buildWorldSummary since e358293c (2026-09-10) [judgment] [silent-fail] [MED]
 - **Fix:** returned through `data` and destructured with a `[]` default (this session). Test 234/234. Would have blocked every cron consumer of world_summary_c107 / desk_signal_c107.
 - **Status:** CLOSED
+
+## LEG: /city-hall (G-R)
+
+No gaps this run.

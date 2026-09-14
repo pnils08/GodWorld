@@ -57,5 +57,19 @@
     "COUNCIL-D1": "76 (target 57, drifts)",
     "COUNCIL-D3": "71 (target 58, drifts)",
     "COUNCIL-D5": "76 (target 57, drifts)"
+  },
+  "applied": {
+    "at": "2026-09-13 20:18 CDT S456",
+    "wrote": {
+      "COUNCIL-D2": "52→59",
+      "COUNCIL-D4": "51→55",
+      "COUNCIL-D6": "51→55",
+      "COUNCIL-D8": "51→55",
+      "COUNCIL-D9": "51→55"
+    },
+    "skipped": {
+      "COUNCIL-D7": "live read 71, plan expected 45 — guard refused; no engine fire and no script writes Approval between 19:34 and 20:18, origin of 71 unattributed (Drive revisions not exposed to the service account)"
+    },
+    "readback": "D7=71 D2=59 D4=55 D6=55 D8=55 D9=55"
   }
 }

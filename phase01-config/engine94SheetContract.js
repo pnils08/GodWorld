@@ -112,9 +112,9 @@ function ensureEngine160Config_(ss) {
 // asserts every key.
 var ENGINE213_CONFIG_SEEDS = [
   ['approvalLevelBase', 50, 'engine.213 the level a seat sits at when its district/city read exactly the middle and the press is flat', 10, 95, false],
-  ['approvalLevelInertia', 0.35, 'engine.213 share of the gap to the target level closed each Cycle (a poll with memory)', 0.05, 1, false],
-  ['approvalStateGainDistrict', 10, 'engine.213 target-level points per unit of district composite vs city middle (composite in [-2,2]); council seats', 0, 30, false],
-  ['approvalStateGainCity', 8, 'engine.213 target-level points per unit of city sentiment level (level in [-2,2]); Mayor full weight', 0, 30, false],
+  ['approvalLevelInertia', 0.2, 'engine.213 share of the gap to the target level closed each Cycle (a poll with memory; 0.2 ≈ 5 Cycles to settle)', 0.05, 1, false],
+  ['approvalStateGainDistrict', 5, 'engine.213 target-level points per unit of district composite vs city middle (momentum/crime/sentiment/¼retail, in [-2,2]); ordering term, council seats', 0, 30, false],
+  ['approvalStateGainCity', 8, 'engine.213 target-level points per unit of MOOD (mean hood Sentiment / approvalStateCitySentimentUnit, [-2,2]); Mayor = city, council = councilCityShare×city + rest×own district', 0, 30, false],
   ['approvalStateGainPress', 3, 'engine.213 target-level points per press step (steps ±1/±2)', 0, 15, false],
   ['approvalStateCouncilCityShare', 0.5, 'engine.213 share of the city-level term a council seat receives', 0, 1, false],
   ['approvalStateCitySentimentUnit', 0.25, 'engine.213 mean hood Sentiment that counts as one unit of city level (live C104-C106 means ran +0.25..+0.45)', 0.01, 1, false],

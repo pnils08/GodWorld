@@ -131,12 +131,30 @@ function getApprovalStateConfig_(ctx) {
   return config;
 }
 
+// Relative ordering only (see the level block): direction first, then crime,
+// then mood, and a quarter of retail — retail is the business ledger's job and
+// reads structurally low on a construction site or a residential hood.
 var APPROVAL_STATE_MEASURES_ = [
-  { key: 'sentiment', sign: 1, weight: 1 },
-  { key: 'retailVitality', sign: 1, weight: 1 },
+  { key: 'trajectoryMomentum', sign: 1, weight: 1.5 },
   { key: 'crimeIndex', sign: -1, weight: 1 },
-  { key: 'trajectoryMomentum', sign: 1, weight: 0.5 }
+  { key: 'sentiment', sign: 1, weight: 1 },
+  { key: 'retailVitality', sign: 1, weight: 0.25 }
 ];
+
+/** District residents' mood, absolute: mean hood sentiment in citySentimentUnit units, clamped [-2, 2]. */
+function districtMoodLevel_(S, hoods, cfg) {
+  var ns = (S && S.neighborhoodState) || {};
+  var acc = 0, n = 0;
+  for (var i = 0; i < hoods.length; i++) {
+    var v = ns[hoods[i]] && ns[hoods[i]].sentiment;
+    if (typeof v === 'number' && isFinite(v)) { acc += v; n++; }
+  }
+  if (!n) return null;
+  var s = (acc / n) / cfg.citySentimentUnit;
+  if (s > 2) s = 2;
+  if (s < -2) s = -2;
+  return s;
+}
 
 /**
  * City middle per measure over every hood with a number: mean + spread. The
@@ -592,14 +610,25 @@ function updateCivicApprovalRatings_(ctx) {
     // (advanced / completed / silence / fail) stays an EVENT on top. The old
     // "decay toward 50" is retired: the base IS the anchor. No neighborhood
     // state → no target → the level term is inert and says so.
+    // The MOOD term is absolute: a district whose residents read positive
+    // approves of its seat, whatever a richer district reads. Council blends
+    // its own residents' mood with the city's (councilCityShare); the Mayor
+    // reads the city. The RELATIVE term (momentum first, then crime, sentiment,
+    // a quarter of retail — against the city middle) orders the seats; it is
+    // small by design, so a district under construction or historically poor
+    // is not capped for its rep (Baylight's retail reads 3.9 because it is a
+    // $2.1B site, not a failure).
     var cityShare = isMayor ? 1 : stateConfig.councilCityShare;
     var districtScore = isMayor ? null : districtStateScore_(S, districtHoods, stateMiddle);
+    var districtMood = isMayor ? null : districtMoodLevel_(S, districtHoods, stateConfig);
     if (cityScore !== null || districtScore !== null) {
       var target = stateConfig.levelBase;
       var parts = [];
       if (cityScore !== null) {
-        target += cityScore * stateConfig.gainCity * cityShare;
-        parts.push('city ' + (cityScore >= 0 ? '+' : '') + cityScore.toFixed(2));
+        var mood = cityScore;
+        if (districtMood !== null) mood = cityShare * cityScore + (1 - cityShare) * districtMood;
+        target += mood * stateConfig.gainCity;
+        parts.push('mood ' + (mood >= 0 ? '+' : '') + mood.toFixed(2) + (districtMood !== null ? ' (district ' + districtMood.toFixed(2) + ', city ' + cityScore.toFixed(2) + ')' : ' city'));
       }
       if (districtScore !== null) {
         target += districtScore * stateConfig.gainDistrict;

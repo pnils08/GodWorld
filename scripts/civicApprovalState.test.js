@@ -18,7 +18,7 @@ const A = new Function(
   src('../phase01-config/advanceSimulationCalendar.js') +
   src('../phase01-config/canonNeighborhoodLoader.js') +
   src('../phase05-citizens/updateCivicApprovalRatings.js') +
-  '\nreturn { getApprovalStateConfig_, cityStateMiddle_, hoodStateComposite_, districtStateScore_, cityStateScore_,' +
+  '\nreturn { getApprovalStateConfig_, cityStateMiddle_, hoodStateComposite_, districtStateScore_, cityStateScore_, districtMoodLevel_,' +
   ' mediaScore_, mediaDelta_, updateCivicApprovalRatings_, MOTION_LADDERS_, approvalDeltaForInitiative_ };'
 )();
 
@@ -27,7 +27,7 @@ function check(name, cond, detail) { if (cond) { passed++; console.log('  ok  ' 
 function throws(fn, re) { try { fn(); } catch (e) { return re.test(String(e && e.message)); } return false; }
 
 const CFG_KEYS = {
-  approvalLevelBase: 50, approvalLevelInertia: 0.35, approvalStateGainDistrict: 10, approvalStateGainCity: 8, approvalStateGainPress: 3, approvalStateCouncilCityShare: 0.5,
+  approvalLevelBase: 50, approvalLevelInertia: 0.2, approvalStateGainDistrict: 5, approvalStateGainCity: 8, approvalStateGainPress: 3, approvalStateCouncilCityShare: 0.5,
   approvalStateCitySentimentUnit: 0.25, approvalMediaStep1: 1, approvalMediaStep2: 3
 };
 const CEILING = {
@@ -39,37 +39,37 @@ const CEILING = {
 console.log('═══ A. World_Config contract');
 {
   const cfg = A.getApprovalStateConfig_({ config: { ...CFG_KEYS } });
-  check('A1 nine keys parse', cfg.gainDistrict === 10 && cfg.levelBase === 50 && cfg.inertia === 0.35 && cfg.mediaStep2 === 3);
+  check('A1 nine keys parse', cfg.gainDistrict === 5 && cfg.levelBase === 50 && cfg.inertia === 0.2 && cfg.mediaStep2 === 3);
   const missing = { ...CFG_KEYS }; delete missing.approvalStateGainCity;
   check('A2 missing key fails loud', throws(() => A.getApprovalStateConfig_({ config: missing }), /approvalStateGainCity/));
   check('A3 step1 above step2 fails loud', throws(() => A.getApprovalStateConfig_({ config: { ...CFG_KEYS, approvalMediaStep1: 4 } }), /exceeds/));
 }
 const CFG = A.getApprovalStateConfig_({ config: { ...CFG_KEYS } });
 
-// Neighborhood_Map cycle 106, verbatim (world_summary_c106 §Neighborhood snapshot), momentum from the audit where present.
+// Neighborhood_Map cycle 106, verbatim from the live sheet (sentiment/retail/crime/TrajectoryMomentum).
 const C106 = {
-  'Temescal': { sentiment: 0.51, retailVitality: 10.24, crimeIndex: 0.76, trajectoryMomentum: 6 },
-  'Uptown': { sentiment: 0.43, retailVitality: 9.99, crimeIndex: 0.71, trajectoryMomentum: 5 },
-  'Rockridge': { sentiment: 0.46, retailVitality: 9.89, crimeIndex: 0.48, trajectoryMomentum: 4 },
+  'Temescal': { sentiment: 0.51, retailVitality: 10.24, crimeIndex: 0.76, trajectoryMomentum: 10 },
+  'Uptown': { sentiment: 0.43, retailVitality: 9.99, crimeIndex: 0.71, trajectoryMomentum: 8 },
+  'Rockridge': { sentiment: 0.46, retailVitality: 9.89, crimeIndex: 0.48, trajectoryMomentum: 8 },
   'Downtown': { sentiment: 0.41, retailVitality: 9.55, crimeIndex: 1.1, trajectoryMomentum: 8 },
-  'Jack London': { sentiment: 0.42, retailVitality: 9.47, crimeIndex: 0.87, trajectoryMomentum: 5 },
-  'Grand Lake': { sentiment: 0.32, retailVitality: 8.46, crimeIndex: 0.51, trajectoryMomentum: 3 },
-  'KONO': { sentiment: 0.33, retailVitality: 8.24, crimeIndex: 0.64, trajectoryMomentum: 3 },
-  'Chinatown': { sentiment: 0.39, retailVitality: 8.07, crimeIndex: 0.9, trajectoryMomentum: 2 },
-  'Fruitvale': { sentiment: 0.48, retailVitality: 8.05, crimeIndex: 1.0, trajectoryMomentum: 4 },
-  'Laurel': { sentiment: 0.36, retailVitality: 7.61, crimeIndex: 0.52, trajectoryMomentum: 2 },
-  'Lake Merritt': { sentiment: 0.46, retailVitality: 7.51, crimeIndex: 0.85, trajectoryMomentum: 3 },
-  'Piedmont Ave': { sentiment: 0.40, retailVitality: 7.30, crimeIndex: 0.35, trajectoryMomentum: 2 },
-  'Eastlake': { sentiment: 0.30, retailVitality: 6.77, crimeIndex: 0.6, trajectoryMomentum: 1 },
-  'Dimond': { sentiment: 0.33, retailVitality: 6.55, crimeIndex: 0.64, trajectoryMomentum: 1 },
-  'San Antonio': { sentiment: 0.23, retailVitality: 6.48, crimeIndex: 0.82, trajectoryMomentum: 0 },
-  'Adams Point': { sentiment: 0.35, retailVitality: 6.04, crimeIndex: 0.64, trajectoryMomentum: 1 },
-  'East Oakland': { sentiment: 0.28, retailVitality: 6.01, crimeIndex: 1.11, trajectoryMomentum: 0 },
-  'Glenview': { sentiment: 0.31, retailVitality: 5.66, crimeIndex: 0.5, trajectoryMomentum: 1 },
-  'Brooklyn': { sentiment: 0.26, retailVitality: 5.54, crimeIndex: 0.53, trajectoryMomentum: 0 },
+  'Jack London': { sentiment: 0.42, retailVitality: 9.47, crimeIndex: 0.87, trajectoryMomentum: 6 },
+  'Grand Lake': { sentiment: 0.32, retailVitality: 8.46, crimeIndex: 0.51, trajectoryMomentum: 8 },
+  'KONO': { sentiment: 0.33, retailVitality: 8.24, crimeIndex: 0.64, trajectoryMomentum: 5 },
+  'Chinatown': { sentiment: 0.39, retailVitality: 8.07, crimeIndex: 0.9, trajectoryMomentum: 5 },
+  'Fruitvale': { sentiment: 0.48, retailVitality: 8.05, crimeIndex: 1.0, trajectoryMomentum: 5 },
+  'Laurel': { sentiment: 0.36, retailVitality: 7.61, crimeIndex: 0.52, trajectoryMomentum: 5 },
+  'Lake Merritt': { sentiment: 0.46, retailVitality: 7.51, crimeIndex: 0.85, trajectoryMomentum: 8 },
+  'Piedmont Ave': { sentiment: 0.40, retailVitality: 7.30, crimeIndex: 0.35, trajectoryMomentum: 5 },
+  'Eastlake': { sentiment: 0.30, retailVitality: 6.77, crimeIndex: 0.6, trajectoryMomentum: 5 },
+  'Dimond': { sentiment: 0.33, retailVitality: 6.55, crimeIndex: 0.64, trajectoryMomentum: 5 },
+  'San Antonio': { sentiment: 0.23, retailVitality: 6.48, crimeIndex: 0.82, trajectoryMomentum: 3 },
+  'Adams Point': { sentiment: 0.35, retailVitality: 6.04, crimeIndex: 0.64, trajectoryMomentum: 5 },
+  'East Oakland': { sentiment: 0.28, retailVitality: 6.01, crimeIndex: 1.11, trajectoryMomentum: 6 },
+  'Glenview': { sentiment: 0.31, retailVitality: 5.66, crimeIndex: 0.5, trajectoryMomentum: 4 },
+  'Brooklyn': { sentiment: 0.26, retailVitality: 5.54, crimeIndex: 0.53, trajectoryMomentum: 4 },
   'West Oakland': { sentiment: 0.43, retailVitality: 5.01, crimeIndex: 1.1, trajectoryMomentum: 2 },
-  'Baylight District': { sentiment: 0.33, retailVitality: 3.93, crimeIndex: 0.89, trajectoryMomentum: 3 },
-  'Ivy Hill': { sentiment: 0.36, retailVitality: 3.66, crimeIndex: 0.49, trajectoryMomentum: 0 }
+  'Baylight District': { sentiment: 0.33, retailVitality: 3.93, crimeIndex: 0.89, trajectoryMomentum: 5 },
+  'Ivy Hill': { sentiment: 0.36, retailVitality: 3.66, crimeIndex: 0.49, trajectoryMomentum: 5 }
 };
 const DISTRICTS = {
   D1: ['West Oakland', 'Brooklyn'], D2: ['Downtown', 'Jack London', 'Chinatown'], D3: ['Fruitvale', 'San Antonio'],
@@ -97,6 +97,24 @@ console.log('═══ B. City middle and district composite (§15: bands relati
   const flat = {}; Object.keys(C106).forEach(h => { flat[h] = { sentiment: 0.3, retailVitality: 7, crimeIndex: 0.7, trajectoryMomentum: 2 }; });
   check('B10 a flat city reads 0 for every district (spread floor, no noise amplification)',
     Math.abs(A.districtStateScore_({ neighborhoodState: flat }, DISTRICTS.D7, A.cityStateMiddle_({ neighborhoodState: flat }))) < 1e-9);
+}
+
+console.log('═══ B2. The reader test — every seat\'s target on the live C106 rows (Mike-direct S455: would someone in Oakland say that about that person?)');
+{
+  const mid = A.cityStateMiddle_(S106); const city = A.cityStateScore_(S106, CFG);
+  const target = {};
+  Object.keys(DISTRICTS).forEach(d => {
+    const rel = A.districtStateScore_(S106, DISTRICTS[d], mid), mood = A.districtMoodLevel_(S106, DISTRICTS[d], CFG);
+    target[d] = Math.round(CFG.levelBase + (CFG.councilCityShare * city + (1 - CFG.councilCityShare) * mood) * CFG.gainCity + rel * CFG.gainDistrict);
+  });
+  target.MAYOR = Math.round(CFG.levelBase + city * CFG.gainCity);
+  console.log('    targets ' + JSON.stringify(target));
+  check('R1 every seat in a positive city sits above 50', Object.values(target).every(t => t > 50), JSON.stringify(target));
+  check('R2 the whole council sits inside 55..70 — no seat is a cliff', Object.keys(DISTRICTS).every(d => target[d] >= 55 && target[d] <= 70), JSON.stringify(target));
+  check('R3 Ashford (Temescal/Rockridge/KONO) is the top of the council', Object.keys(DISTRICTS).every(d => target[d] <= target.D7), JSON.stringify(target));
+  check('R4 Baylight/East Oakland (a $2.1B site + the city\'s investment) is NOT the bottom by a cliff — within 8 of the median', Math.abs(target.D5 - 61) <= 8, String(target.D5));
+  check('R5 West Oakland/Brooklyn (sentiment above the city mean, retail lowest) reads mid-50s, not a failure', target.D1 >= 55, String(target.D1));
+  check('R6 the Mayor of a +0.37 city reads low 60s', target.MAYOR >= 60 && target.MAYOR <= 66, String(target.MAYOR));
 }
 
 console.log('═══ C. City level (the Mayor holds the whole city)');
@@ -181,11 +199,11 @@ console.log('═══ F. Full run on the live C106 seats — the C107 projectio
   console.log('    Carter  ' + appr('Denise Carter') + '  ← ' + why('Denise Carter'));
   console.log('    Ashford ' + appr('Warren Ashford') + '  ← ' + why('Warren Ashford'));
   console.log('    Vega    ' + appr('Ramon Vega') + '  ← ' + why('Ramon Vega'));
-  // Targets from the C106 state: Santana 50 + 1.48×8 = 61.8; Ashford 50 + 0.85×10 + 1.48×8×0.5 = 64.4; Carter 50 − 0.63×10 + 5.9 = 49.6; Vega 50 − 0.34×10 + 5.9 = 52.5
-  check('F1 the Mayor of a city at +0.37: level pulls toward 62, two phase moves add +3 → 66', appr('Avery Santana') === 66, String(appr('Avery Santana')));
-  check('F2 Ashford, holding the strongest district, closes a third of the gap to 64 in one Cycle (45 → 52)', appr('Warren Ashford') === 52, String(appr('Warren Ashford')));
-  check('F3 Carter (weak retail, highest crime) is pulled toward 50; a phase move softens it (76 → 69)', appr('Denise Carter') === 69, String(appr('Denise Carter')));
-  check('F4 a seat with no initiatives is graded on its district (Vega 51 → 52, target 52.5)', appr('Ramon Vega') === 52 && /district/.test(why('Ramon Vega')), why('Ramon Vega'));
+  // Targets from the live C106 city (see B2): Mayor 62, Ashford 67, Carter 57, Vega 60; inertia 0.2.
+  check('F1 the Mayor of a +0.37 city: target 62, at 64 the level barely moves; two phase moves add +3 → 67', appr('Avery Santana') === 67, String(appr('Avery Santana')));
+  check('F2 Ashford, top of the council at target 67, climbs a fifth of the gap each Cycle (45 → 49)', appr('Warren Ashford') === 49, String(appr('Warren Ashford')));
+  check('F3 Carter (target 57, sitting at the C103-era 76) eases 4, a phase move gives 2 back (76 → 74) — a slide, never a cliff', appr('Denise Carter') === 74, String(appr('Denise Carter')));
+  check('F4 a seat with no initiatives is graded on its district (Vega 51 → 53, target 60)', appr('Ramon Vega') === 53 && /district/.test(why('Ramon Vega')), why('Ramon Vega'));
   check('F5 no sitting row appears as a drain in any reason', !Object.keys(by).some(h => /sitting \(-/.test(why(h))));
   check('F6 campaigns: none started (nobody under 40)', ctx.summary.civicCampaigns.length === 0);
   check('F7 approval writes queued for every changed seat', intents.length === ctx.summary.approvalChanges.length);

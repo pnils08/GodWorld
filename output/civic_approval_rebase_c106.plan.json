@@ -1,0 +1,61 @@
+{
+  "at": "2026-09-13 S455",
+  "cycle": 106,
+  "policy": "undo the C101-C106 formula bleed only where it took a seat BELOW its authored canon; seats above target drift under the level model (inertia 0.2), never jump",
+  "writes": [
+    {
+      "office": "COUNCIL-D7",
+      "holder": "Warren Ashford",
+      "cell": "S11",
+      "before": 45,
+      "after": 51,
+      "why": "authored 51; lost 12 over C101-C106 to one opposed health-center row; district target 67"
+    },
+    {
+      "office": "COUNCIL-D2",
+      "holder": "Leonard Tran",
+      "cell": "S6",
+      "before": 52,
+      "after": 59,
+      "why": "authored 59; decay-only bleed; target 63"
+    },
+    {
+      "office": "COUNCIL-D4",
+      "holder": "Ramon Vega",
+      "cell": "S8",
+      "before": 51,
+      "after": 55,
+      "why": "authored 55; decay-only bleed; target 60"
+    },
+    {
+      "office": "COUNCIL-D6",
+      "holder": "Elliott Crane",
+      "cell": "S10",
+      "before": 51,
+      "after": 55,
+      "why": "authored 55; decay-only bleed; target 64"
+    },
+    {
+      "office": "COUNCIL-D8",
+      "holder": "Nina Chen",
+      "cell": "S12",
+      "before": 51,
+      "after": 55,
+      "why": "authored 55; decay-only bleed; target 63"
+    },
+    {
+      "office": "COUNCIL-D9",
+      "holder": "Terrence Mobley",
+      "cell": "S13",
+      "before": 51,
+      "after": 55,
+      "why": "authored 55; decay-only bleed; target 65"
+    }
+  ],
+  "untouched": {
+    "MAYOR-01": "64 (target 62)",
+    "COUNCIL-D1": "76 (target 57, drifts)",
+    "COUNCIL-D3": "71 (target 58, drifts)",
+    "COUNCIL-D5": "76 (target 57, drifts)"
+  }
+}

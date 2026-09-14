@@ -69,8 +69,8 @@ const APPROVED = {
   approvalCeilingElectionPenalty: 25,
   // engine.213 (S455): approval reads the city — the six state/press keys
   approvalLevelBase: 50,
-  approvalLevelInertia: 0.35,
-  approvalStateGainDistrict: 10,
+  approvalLevelInertia: 0.2,
+  approvalStateGainDistrict: 5,
   approvalStateGainCity: 8,
   approvalStateGainPress: 3,
   approvalStateCouncilCityShare: 0.5,

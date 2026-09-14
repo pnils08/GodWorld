@@ -181,7 +181,8 @@ console.log('T7 anchors are the authored seats, copied — and the joiners now r
   check('DOWNTOWN_CORE anchors = Downtown, Uptown, KONO, Chinatown', S.clusterDefinitions.DOWNTOWN_CORE.anchors.join(',') === 'Downtown,Uptown,KONO,Chinatown');
   check('EAST_OAKLAND anchors = Fruitvale, Laurel', S.clusterDefinitions.EAST_OAKLAND.anchors.join(',') === 'Fruitvale,Laurel');
   S.clusterDefinitions.EAST_OAKLAND.anchors.push('X');
-  check('published anchors are a copy', run(sandbox()).clusterDefinitions.EAST_OAKLAND.anchors.length === 2);
+  check('published anchors are a copy — mutating them leaves the same result\'s membership untouched',
+    S.clusterDefinitions.EAST_OAKLAND.neighborhoods.indexOf('X') < 0 && S.clusterDefinitions.EAST_OAKLAND.neighborhoods.length === 6);
   // engine.93 Task 5 bus: an approval delta aimed at a joiner reaches its dynamics and clears; anchors do not move.
   const sb = sandbox();
   const base = run(sb);
@@ -220,7 +221,7 @@ console.log('T8 the ten carry through the real snapshot: compact → previousCyc
   check('a second cycle still seats 22', Object.keys(S2.neighborhoodDynamics).length === 22);
 }
 
-console.log('T9 through the real safePhaseCall_: a graph error is an Engine_Errors row and a cycle with no dynamics, not a silent seat');
+console.log('T9 through the real safePhaseCall_: a graph error returns false, reaches the error logger (spied — row persistence is not proven here), and publishes no dynamics');
 {
   const eng = fs.readFileSync(path.join(ROOT, 'phase01-config/godWorldEngine2.js'), 'utf8');
   const i0 = eng.indexOf('function safePhaseCall_(');

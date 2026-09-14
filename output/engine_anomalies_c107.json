@@ -1,0 +1,1489 @@
+{
+  "cycle": 107,
+  "generatedAt": "C107",
+  "detectorVersion": "1.0.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00260"
+        ],
+        "neighborhoods": [
+          "Lake Merritt"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00260",
+          "previousIncome": 215100,
+          "currentIncome": 60800,
+          "ratio": "0.283",
+          "peerShare": "0.01",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00260 income Δ -72% (215100 → 60800); peer move share 1%",
+      "historicalContext": {
+        "priorCycles": [
+          215100,
+          104500,
+          45400,
+          45400
+        ],
+        "currentCycle": 60800
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00268"
+        ],
+        "neighborhoods": [
+          "Lake Merritt"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00268",
+          "previousIncome": 283800,
+          "currentIncome": 93271,
+          "ratio": "0.329",
+          "peerShare": "0.01",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00268 income Δ -67% (283800 → 93271); peer move share 1%",
+      "historicalContext": {
+        "priorCycles": [
+          283800,
+          106000,
+          93271,
+          93271
+        ],
+        "currentCycle": 93271
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00784"
+        ],
+        "neighborhoods": [
+          "Ivy Hill"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00784",
+          "previousIncome": 45800,
+          "currentIncome": 99200,
+          "ratio": "2.166",
+          "peerShare": "0.00",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00784 income Δ 117% (45800 → 99200); peer move share 0%",
+      "historicalContext": {
+        "priorCycles": [
+          45800,
+          34400,
+          31186,
+          31186
+        ],
+        "currentCycle": 99200
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00812"
+        ],
+        "neighborhoods": [
+          "Chinatown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00812",
+          "previousIncome": 47800,
+          "currentIncome": 98900,
+          "ratio": "2.069",
+          "peerShare": "0.04",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00812 income Δ 107% (47800 → 98900); peer move share 4%",
+      "historicalContext": {
+        "priorCycles": [
+          47800,
+          47800,
+          30906,
+          30906
+        ],
+        "currentCycle": 98900
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00867"
+        ],
+        "neighborhoods": [
+          "KONO"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00867",
+          "previousIncome": 46800,
+          "currentIncome": 110200,
+          "ratio": "2.355",
+          "peerShare": "0.19",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00867 income Δ 135% (46800 → 110200); peer move share 19%",
+      "historicalContext": {
+        "priorCycles": [
+          46800,
+          46800,
+          33097,
+          33097
+        ],
+        "currentCycle": 110200
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00874"
+        ],
+        "neighborhoods": [
+          "Temescal"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00874",
+          "previousIncome": 28522,
+          "currentIncome": 61000,
+          "ratio": "2.139",
+          "peerShare": "0.03",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00874 income Δ 114% (28522 → 61000); peer move share 3%",
+      "historicalContext": {
+        "priorCycles": [
+          28522,
+          28522,
+          28522,
+          28522
+        ],
+        "currentCycle": 61000
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00889"
+        ],
+        "neighborhoods": [
+          "KONO"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00889",
+          "previousIncome": 44500,
+          "currentIncome": 121200,
+          "ratio": "2.724",
+          "peerShare": "0.19",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00889 income Δ 172% (44500 → 121200); peer move share 19%",
+      "historicalContext": {
+        "priorCycles": [
+          44500,
+          44500,
+          32398,
+          32398
+        ],
+        "currentCycle": 121200
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00899"
+        ],
+        "neighborhoods": [
+          "KONO"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00899",
+          "previousIncome": 60100,
+          "currentIncome": 126500,
+          "ratio": "2.105",
+          "peerShare": "0.19",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00899 income Δ 110% (60100 → 126500); peer move share 19%",
+      "historicalContext": {
+        "priorCycles": [
+          60100,
+          46300,
+          34465,
+          34465
+        ],
+        "currentCycle": 126500
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00909"
+        ],
+        "neighborhoods": [
+          "KONO"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00909",
+          "previousIncome": 46800,
+          "currentIncome": 109400,
+          "ratio": "2.338",
+          "peerShare": "0.19",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00909 income Δ 134% (46800 → 109400); peer move share 19%",
+      "historicalContext": {
+        "priorCycles": [
+          46800,
+          46800,
+          31667,
+          31667
+        ],
+        "currentCycle": 109400
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-00951"
+        ],
+        "neighborhoods": [
+          "Chinatown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-00951",
+          "previousIncome": 49300,
+          "currentIncome": 111300,
+          "ratio": "2.258",
+          "peerShare": "0.04",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-00951 income Δ 126% (49300 → 111300); peer move share 4%",
+      "historicalContext": {
+        "priorCycles": [
+          49300,
+          49300,
+          30849,
+          30849
+        ],
+        "currentCycle": 111300
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Downtown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          2
+        ],
+        "fields": {
+          "Neighborhood": "Downtown",
+          "ViolentCrimeIndex": 50,
+          "historicalMean": "54.50",
+          "stddev": "0.50",
+          "zScore": "-9.00",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Downtown violent crime 50 at -9.0σ from 4-cycle mean 54.50",
+      "historicalContext": {
+        "priorCycles": [
+          55,
+          54,
+          54,
+          55
+        ],
+        "currentCycle": 50
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Rockridge"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          4
+        ],
+        "fields": {
+          "Neighborhood": "Rockridge",
+          "ViolentCrimeIndex": 19,
+          "historicalMean": "22.00",
+          "stddev": "0.71",
+          "zScore": "-4.24",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Rockridge violent crime 19 at -4.2σ from 4-cycle mean 22.00",
+      "historicalContext": {
+        "priorCycles": [
+          21,
+          23,
+          22,
+          22
+        ],
+        "currentCycle": 19
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "West Oakland"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          6
+        ],
+        "fields": {
+          "Neighborhood": "West Oakland",
+          "ViolentCrimeIndex": 51,
+          "historicalMean": "59.25",
+          "stddev": "1.92",
+          "zScore": "-4.30",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "West Oakland violent crime 51 at -4.3σ from 4-cycle mean 59.25",
+      "historicalContext": {
+        "priorCycles": [
+          56,
+          60,
+          60,
+          61
+        ],
+        "currentCycle": 51
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "East Oakland"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          7
+        ],
+        "fields": {
+          "Neighborhood": "East Oakland",
+          "ViolentCrimeIndex": 53,
+          "historicalMean": "64.75",
+          "stddev": "2.77",
+          "zScore": "-4.24",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "East Oakland violent crime 53 at -4.2σ from 4-cycle mean 64.75",
+      "historicalContext": {
+        "priorCycles": [
+          60,
+          66,
+          67,
+          66
+        ],
+        "currentCycle": 53
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Jack London"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          9
+        ],
+        "fields": {
+          "Neighborhood": "Jack London",
+          "ViolentCrimeIndex": 36,
+          "historicalMean": "41.00",
+          "stddev": "1.41",
+          "zScore": "-3.54",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Jack London violent crime 36 at -3.5σ from 4-cycle mean 41.00",
+      "historicalContext": {
+        "priorCycles": [
+          39,
+          41,
+          41,
+          43
+        ],
+        "currentCycle": 36
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Chinatown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          13
+        ],
+        "fields": {
+          "Neighborhood": "Chinatown",
+          "ViolentCrimeIndex": 37,
+          "historicalMean": "40.75",
+          "stddev": "0.83",
+          "zScore": "-4.52",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Chinatown violent crime 37 at -4.5σ from 4-cycle mean 40.75",
+      "historicalContext": {
+        "priorCycles": [
+          41,
+          40,
+          40,
+          42
+        ],
+        "currentCycle": 37
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Adams Point"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          14
+        ],
+        "fields": {
+          "Neighborhood": "Adams Point",
+          "ViolentCrimeIndex": 22,
+          "historicalMean": "27.00",
+          "stddev": "1.22",
+          "zScore": "-4.08",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Adams Point violent crime 22 at -4.1σ from 4-cycle mean 27.00",
+      "historicalContext": {
+        "priorCycles": [
+          26,
+          26,
+          27,
+          29
+        ],
+        "currentCycle": 22
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Laurel"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          17
+        ],
+        "fields": {
+          "Neighborhood": "Laurel",
+          "ViolentCrimeIndex": 21,
+          "historicalMean": "23.75",
+          "stddev": "0.43",
+          "zScore": "-6.35",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Laurel violent crime 21 at -6.4σ from 4-cycle mean 23.75",
+      "historicalContext": {
+        "priorCycles": [
+          24,
+          24,
+          24,
+          23
+        ],
+        "currentCycle": 21
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Uptown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Crime_Metrics",
+        "rows": [
+          18
+        ],
+        "fields": {
+          "Neighborhood": "Uptown",
+          "ViolentCrimeIndex": 24,
+          "historicalMean": "27.00",
+          "stddev": "0.71",
+          "zScore": "-4.24",
+          "subCheck": "crime-outlier"
+        }
+      },
+      "description": "Uptown violent crime 24 at -4.2σ from 4-cycle mean 27.00",
+      "historicalContext": {
+        "priorCycles": [
+          27,
+          27,
+          28,
+          26
+        ],
+        "currentCycle": 24
+      },
+      "triagePath": "cover-as-story",
+      "confidence": "high",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Downtown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Downtown",
+          "previousMigrationFlow": 4,
+          "currentMigrationFlow": 5,
+          "delta": "1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Downtown migration flow shifted 4 → 5",
+      "historicalContext": {
+        "priorCycles": [
+          4
+        ],
+        "currentCycle": 5
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Temescal"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Temescal",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 4,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Temescal migration flow shifted 5 → 4",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 4
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Laurel"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Laurel",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 2,
+          "delta": "-3.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Laurel migration flow shifted 5 → 2",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "West Oakland"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "West Oakland",
+          "previousMigrationFlow": 2,
+          "currentMigrationFlow": -1,
+          "delta": "-3.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "West Oakland migration flow shifted 2 → -1",
+      "historicalContext": {
+        "priorCycles": [
+          2
+        ],
+        "currentCycle": -1
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Fruitvale"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Fruitvale",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 3,
+          "delta": "-2.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Fruitvale migration flow shifted 5 → 3",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Rockridge"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Rockridge",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 3,
+          "delta": "-2.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Rockridge migration flow shifted 5 → 3",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Adams Point"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Adams Point",
+          "previousMigrationFlow": 3,
+          "currentMigrationFlow": -1,
+          "delta": "-4.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Adams Point migration flow shifted 3 → -1",
+      "historicalContext": {
+        "priorCycles": [
+          3
+        ],
+        "currentCycle": -1
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Grand Lake"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Grand Lake",
+          "previousMigrationFlow": 4,
+          "currentMigrationFlow": 3,
+          "delta": "-1.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Grand Lake migration flow shifted 4 → 3",
+      "historicalContext": {
+        "priorCycles": [
+          4
+        ],
+        "currentCycle": 3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Piedmont Ave"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Piedmont Ave",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 2,
+          "delta": "-3.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Piedmont Ave migration flow shifted 5 → 2",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Chinatown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Chinatown",
+          "previousMigrationFlow": 4,
+          "currentMigrationFlow": -1,
+          "delta": "-5.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Chinatown migration flow shifted 4 → -1",
+      "historicalContext": {
+        "priorCycles": [
+          4
+        ],
+        "currentCycle": -1
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Brooklyn"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Brooklyn",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": -2,
+          "delta": "-7.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Brooklyn migration flow shifted 5 → -2",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": -2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Eastlake"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Eastlake",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": -2,
+          "delta": "-7.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Eastlake migration flow shifted 5 → -2",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": -2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Glenview"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Glenview",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": -2,
+          "delta": "-7.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Glenview migration flow shifted 5 → -2",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": -2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Dimond"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Dimond",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 1,
+          "delta": "-4.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Dimond migration flow shifted 5 → 1",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 1
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Ivy Hill"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Ivy Hill",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 2,
+          "delta": "-3.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Ivy Hill migration flow shifted 5 → 2",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "San Antonio"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "San Antonio",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": -3,
+          "delta": "-8.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "San Antonio migration flow shifted 5 → -3",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": -3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "KONO"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "KONO",
+          "previousMigrationFlow": 4,
+          "currentMigrationFlow": 2,
+          "delta": "-2.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "KONO migration flow shifted 4 → 2",
+      "historicalContext": {
+        "priorCycles": [
+          4
+        ],
+        "currentCycle": 2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Lake Merritt"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Lake Merritt",
+          "previousMigrationFlow": 4,
+          "currentMigrationFlow": 2,
+          "delta": "-2.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Lake Merritt migration flow shifted 4 → 2",
+      "historicalContext": {
+        "priorCycles": [
+          4
+        ],
+        "currentCycle": 2
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Uptown"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Uptown",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": 3,
+          "delta": "-2.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Uptown migration flow shifted 5 → 3",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": 3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Baylight District"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Baylight District",
+          "previousMigrationFlow": 4,
+          "currentMigrationFlow": -3,
+          "delta": "-7.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "Baylight District migration flow shifted 4 → -3",
+      "historicalContext": {
+        "priorCycles": [
+          4
+        ],
+        "currentCycle": -3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "East Oakland"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "East Oakland",
+          "previousMigrationFlow": 5,
+          "currentMigrationFlow": -3,
+          "delta": "-8.00",
+          "subCheck": "migration-shift"
+        }
+      },
+      "description": "East Oakland migration flow shifted 5 → -3",
+      "historicalContext": {
+        "priorCycles": [
+          5
+        ],
+        "currentCycle": -3
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.0.0"
+    }
+  ],
+  "summary": {
+    "total": 40,
+    "byTriage": {
+      "route-to-engine-debug": 6,
+      "suppress-until-verified": 25,
+      "cover-as-story": 9
+    }
+  }
+}

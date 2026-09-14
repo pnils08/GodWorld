@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-09-14",
   "updatedBy": "buildInitiativePackets.js (auto)",
   "initiatives": [
     {
@@ -17,9 +17,9 @@
       "implementation": {
         "status": "disbursement-active",
         "phase": "disbursement-active",
-        "summary": "C105: Month-six disbursement batch approved (12 households); canvass launched for slipping blocks.",
-        "nextScheduledAction": "Month-seven disbursement review",
-        "nextActionCycle": 106
+        "summary": "C106: Month-seven batch approved (12 households, total 69); Downtown outreach expansion authorized per storefront decline signals",
+        "nextScheduledAction": "Month-eight disbursement review and Downtown canvass deployment",
+        "nextActionCycle": 107
       }
     },
     {
@@ -39,8 +39,8 @@
       "implementation": {
         "status": "implementation-active",
         "phase": "implementation-active",
-        "summary": "C105: District 1 expansion launched; monthly reporting and audit framework in place.",
-        "nextScheduledAction": "First expansion-district evaluation",
+        "summary": "C106: Emergency expansion to East Oakland authorized; District 1 evaluation continues, monthly reporting to Mayor's office",
+        "nextScheduledAction": "East Oakland dispatch protocol deployment",
         "nextActionCycle": 107
       }
     },
@@ -57,11 +57,11 @@
         "Fruitvale"
       ],
       "implementation": {
-        "status": "visioning-complete",
-        "phase": "visioning-complete",
-        "summary": "C105: First visioning session conducted; feedback incorporated into design phase.",
-        "nextScheduledAction": "Design-phase kickoff",
-        "nextActionCycle": 106
+        "status": "design-phase",
+        "phase": "design-phase",
+        "summary": "C106: Design-phase kickoff approved with binding merchant protection covenants; outreach to District 3 businesses initiated",
+        "nextScheduledAction": "Merchant covenant signing and design RFP release",
+        "nextActionCycle": 107
       }
     },
     {
@@ -79,9 +79,9 @@
       "implementation": {
         "status": "construction-active",
         "phase": "construction-active",
-        "summary": "C105: Structural frame completed ahead of schedule, MEP rough-ins advancing with second shift",
-        "nextScheduledAction": "Interior wall framing and utility inspections",
-        "nextActionCycle": 106
+        "summary": "C106: Interior wall framing and utility inspections authorized; MEP rough-ins advancing with second shift",
+        "nextScheduledAction": "Utility inspections and interior systems rough-in completion",
+        "nextActionCycle": 107
       }
     },
     {
@@ -100,8 +100,8 @@
       "implementation": {
         "status": "construction-planning",
         "phase": "construction-planning",
-        "summary": "C105: Final council vote approved Phase II bid; construction planning phase begins.",
-        "nextScheduledAction": "Bid finalization and contract signing",
+        "summary": "C106: Final council approval received; construction planning active, contract signing in progress",
+        "nextScheduledAction": "Contract execution and site preparation mobilization",
         "nextActionCycle": 107
       }
     },
@@ -120,11 +120,11 @@
         "Fruitvale"
       ],
       "implementation": {
-        "status": "implementation-active",
-        "phase": "implementation-active",
-        "summary": "C105: Administrative order issued to clear backlog; intake processing targets mandated across agencies.",
-        "nextScheduledAction": "Backlog processing completion + town hall",
-        "nextActionCycle": 106
+        "status": "operational",
+        "phase": "operational",
+        "summary": "C106: Backlog cleared, zero applicants pending, town hall authorized for enrollment launch",
+        "nextScheduledAction": "Public town hall enrollment event",
+        "nextActionCycle": 107
       }
     }
   ]

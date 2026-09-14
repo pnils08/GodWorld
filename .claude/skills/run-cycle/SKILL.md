@@ -28,14 +28,35 @@ Scan engine code for determinism violations, dependency chain breaks, sheet head
 **Gate:** CLEAN → proceed. CRITICAL → stop and fix.
 
 ### Step 3: Run Cycle
-Tell Mike to run `runWorldCycle()` in Google Apps Script. The engine runs in Google's cloud — cannot be triggered from here. Wait for confirmation it finished.
+The builder fires `runWorldCycle()` on the live sheet. The engine runs in Google's cloud — nothing here triggers it, and the builder runs nothing else for this chain. Confirm the fire from the sheet, never from a message: `Neighborhood_Map` max Cycle = {XX}, `Engine_Errors` row count.
 
-**Gate:** Mike confirms engine completed.
+**Gate:** live sheet reads cycle {XX}.
+
+### Step 3.5: Execution log to disk (S456)
+
+The builder exports the Apps Script execution log to Drive as `Execution log LIVE {XX}.txt` (or shares a link). Save it next to the cycle's artifacts — the review reads phase timings, warnings and the `Cycle completed` line from disk, not from a pasted transcript, and a later session can diff C{XX} against C{XX−1}.
+
+```bash
+node scripts/fetchExecutionLog.js {XX} --summary                 # Drive search by name (service account reads anything shared with it)
+node scripts/fetchExecutionLog.js {XX} --file <drive id or url>  # explicit file
+```
+
+Output: `output/execution_log_c{XX}.txt`. `--summary` prints phases / totalMs / failed phases / slowest five / warning and error counts. Non-blocking: if the log is not on Drive yet, note "execution log not on disk" in the review header and continue — everything below reads the sheet, not the log.
+
+**Gate:** file on disk with `Execution started` … `Cycle completed`; `failedPhases: []`.
 
 ### Step 4: /engine-review
 Read world state from sheets. Identify ailments, improvements, incoherence. Produce 7-field briefs per finding. Output: `output/engine_review_c{XX}.md`
 
-**Gate:** File exists on disk.
+**Who reads what (S456 — the chain ships to crons, there is no sift / edition step downstream):**
+- `output/engine_audit_c{XX}.json` — `buildWorldSummary` (desk_signal civic lane = every pattern), `cron-civic-run`, `buildCivicOfficeSlice`, `buildJaxSlice`, `civicMustDecide`, `tierClassifier`.
+- `output/baseline_briefs_c{XX}.json` — **required input** of `cron-civic-run.js` (`mustJson`). A brief that is not a world event reaches the Sunday chain.
+- `output/engine_anomalies_c{XX}.json` — `tierClassifier` (optional).
+- `output/engine_review_c{XX}.md` — pointer only (`buildWorldState` links it; `rheaTwoPass` / `lintCivicPackets` read it). Write it for the next engine session and the civic chain's reader, not for a front page: what is real, what is mechanism, what is routed to engine-debug.
+
+**Hand writes between fires (G-EC86):** any sheet cell the builder or this seat set by hand after C{XX−1} fired is part of C{XX−1}'s closing state. Correct the prior audit snapshot (`engine_audit_c{XX-1}.json` `snapshots.*`, add a `snapshotNotes` entry) **before** running the auditor, or the diff files the write as a world event (C107: nine approval-shift briefs and an "Ashford 45→67" anomaly that were the approval rebase). Re-run the auditor after the correction; the run is idempotent.
+
+**Gate:** File exists on disk; briefs and anomalies carry no hand-write artifacts.
 
 ### Step 5: /build-world-summary
 Read Riley_Digest (3 cycles), Sports Feed (3 cycles), civic production log (if exists), and engine review output. Produce factual world summary. Output: `output/world_summary_c{XX}.md`. Ingest to world-data Supermemory. The writer also emits `output/desk_signal_c{XX}.json` (engine.76 W5 half 1) — per-desk signal partition, pointers only, consumed by `/desk-slice` and the headless writer-wakes.
@@ -150,7 +171,7 @@ node scripts/engineCycleAudit.js {XX} --write
 
 **Run-order dependency (G-EC1):** this step reads `engine_audit_c{XX}.json` from Step 4 — the script now aborts with a clear message (no gap log written) if the file is missing, instead of filing a false-HIGH `audit-input` finding. If it aborts, run Step 4 first.
 
-Writes `output/production_log_c{XX}_run_cycle_gaps.md` with `[mechanical]`-tagged entries across 5 detector classes (`writeback-drift`, `math-anomaly`, `cross-cycle-debt`, `determinism-break`, `header-drift`). 4 V2-runtime classes (`phase-skip`, `cohort-collision`, `phase-ordering`, `silent-fail`) appended as stubs — they need an engine-run-log ingest path that doesn't exist yet.
+Writes `output/production_log_run_cycle_c{XX}_gaps.md` (that is the script's actual filename — the older `production_log_c{XX}_run_cycle_gaps.md` spelling in this file was never what it wrote) with `[mechanical]`-tagged entries across 5 detector classes (`writeback-drift`, `math-anomaly`, `cross-cycle-debt`, `determinism-break`, `header-drift`). 4 V2-runtime classes (`phase-skip`, `cohort-collision`, `phase-ordering`, `silent-fail`) appended as stubs — they need an engine-run-log ingest path that doesn't exist yet.
 
 `header-drift` (S202 build) is a structural class — runs against repo state vs `schemas/SCHEMA_HEADERS.md`, flags writers whose field-name lookups or `setValues()` ranges don't match live headers. Self-test: `node scripts/engineCycleAuditTest.js` (synthetic fixture validating the detector would have caught the S201 Story_Seed_Deck/Story_Hook_Deck drift). Plan: `docs/plans/2026-05-05-writer-header-alignment-detector.md`.
 
@@ -164,16 +185,24 @@ If 0 mechanical entries observed: file states "0 mechanical gaps observed" with 
 
 Plan: `docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md` (Phase 2 done S199; Phase 3 validation runs at next /run-cycle invocation).
 
-## What Happens After
+## What Happens After — the crons (S456; no sift, no manual edition chain)
 
-These run as separate skills (may be same or different sessions):
+Nothing downstream is hand-run. The artifacts this chain leaves on disk are read by the scheduled jobs in `crontab -l`:
 
-- `/city-hall-prep` — reads world summary + engine review + sheets → writes pending decisions per voice
-- `/city-hall` — reads pending decisions → launches voice agents → applies tracker updates → production log
-- `/sift` (planned) — reads world summary + engine review + city-hall log → story picks + angle briefs
-- `/write-edition` — reads sift output → launches reporters → compile → publish
+| Artifact | Cron consumers |
+|---|---|
+| `output/world_summary_c{XX}.md` | `cron-desk-run` (06:15 angle / 13:15 report / 18:15 write, Mon–Fri), `cron-desk-writer`, `cron-civic-run` (Mon–Thu datawake, Sunday chain), `cron-saturday-run`, `notebooklmDailyNews` (08:00), `newsroom-digest` (06:00), every `scripts/build*Slice.js`, `lib/mags.js` (Discord), `lib/getCurrentCycle.js` |
+| `output/desk_signal_c{XX}.json` | `cron-desk-run`, `newsroom-fanout`, `cron-civic-run`, the desk slices (economic / safety / civic-domain / evening / Hal / Anthony / P Slayer / Jax), `stink-scanner` |
+| `output/engine_audit_c{XX}.json`, `output/baseline_briefs_c{XX}.json` | `cron-civic-run` (briefs are a **required** input), `buildCivicOfficeSlice`, `buildJaxSlice`, `civicMustDecide`, `tierClassifier` |
+| `output/beats/*.jsonl` (+ `prev/`) | economic / faith / health / safety / schools / transit / environment slices |
+| `output/neighborhood_texture_c{XX}.md`, `output/world_state.json` | `citizen-wake` (07:30 / 12:30 / 21:30), `citizen-exchange` (17:00), `discord-reflection`, `lib/wakePerception`, `lib/mags` |
+| `output/simulation_ledger_snapshot.jsonl` | `lib/mags.searchDisk`, MCP `search_everything`, `canon-name-check` |
+| `output/initiative_tracker.json`, `output/desk-packets/*` | civic office datawakes, desk agents |
+| `output/voice-disposition-cache/*.md` | citizen-voice agents, `citizen-wake` |
 
-**Handoff:** run-cycle produces `output/world_summary_c{XX}.md` and `output/engine_review_c{XX}.md`. City-hall-prep verifies both exist before starting.
+**The acceptance test is the next unattended cron run, not a hand-driven demo.** If a step above fails, the cron that reads its artifact runs on the prior cycle — say which one in SESSION_CONTEXT.
+
+Known texture gap (S456): `buildNeighborhoodTexture` reads Riley_Digest + Neighborhood_Map only, so a hood with an active initiative and no digest signal reads "a quiet week" (C107: Temescal with the health center under construction, West Oakland with the fund disbursing). The initiative slice is not an input yet.
 
 ## Legacy Reference
 

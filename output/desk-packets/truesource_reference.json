@@ -1,5 +1,5 @@
 {
-  "cycle": 106,
+  "cycle": 107,
   "mayor": "Avery Santana",
   "executiveBranch": {
     "mayor": "Avery Santana",
@@ -8,7 +8,7 @@
       "title": "Mayor",
       "popId": "POP-00034",
       "status": "active",
-      "approvalRating": "64"
+      "approvalRating": "65"
     },
     "deputyMayor": "Brenda Okoro",
     "deputyMayorDetail": {
@@ -346,7 +346,7 @@
       "position": "Manager, Oakland A's",
       "popId": "POP-00528",
       "tier": "2",
-      "status": "recovering"
+      "status": "active"
     },
     {
       "name": "Travis Coles",
@@ -507,8 +507,8 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 78: Passed 6-3. Ramon Vega voted yes. Leonard Tran voted no. (Elliott Crane voted yes remotely)",
       "implementationPhase": "disbursement-active",
-      "nextScheduledAction": "Month-seven disbursement review",
-      "nextActionCycle": 106
+      "nextScheduledAction": "Month-eight disbursement review and Downtown canvass deployment",
+      "nextActionCycle": 107
     },
     {
       "name": "Oakland Alternative Response Initiative",
@@ -516,7 +516,7 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 82: Passed 5-4. Ramon Vega voted no. Leonard Tran voted yes.",
       "implementationPhase": "implementation-active",
-      "nextScheduledAction": "First expansion-district evaluation",
+      "nextScheduledAction": "East Oakland dispatch protocol deployment",
       "nextActionCycle": 107
     },
     {
@@ -525,8 +525,8 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 80: Passed 6-2. Ramon Vega voted yes. Leonard Tran voted yes. (Elliott Crane absent)",
       "implementationPhase": "construction-active",
-      "nextScheduledAction": "Interior wall framing and utility inspections",
-      "nextActionCycle": 106
+      "nextScheduledAction": "Utility inspections and interior systems rough-in completion",
+      "nextActionCycle": 107
     },
     {
       "name": "Baylight District — Final Council Vote",
@@ -534,7 +534,7 @@
       "status": "PASSED",
       "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
       "implementationPhase": "construction-planning",
-      "nextScheduledAction": "Bid finalization and contract signing",
+      "nextScheduledAction": "Contract execution and site preparation mobilization",
       "nextActionCycle": 107
     }
   ]

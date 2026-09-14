@@ -1,8 +1,8 @@
 {
   "source": "Citizen_Archive",
-  "cycle": 106,
-  "rowCount": 54,
-  "generatedAt": "2026-09-07T02:42:31.715Z",
+  "cycle": 107,
+  "rowCount": 55,
+  "generatedAt": "2026-09-14T01:46:11.380Z",
   "generatedBy": "scripts/dumpLedger.js",
   "note": "engine.90 cold half of the ledger snapshot: every exit row (POPID, ExitCycle, ArchiveReason unique). Same stamp as the active snapshot."
 }

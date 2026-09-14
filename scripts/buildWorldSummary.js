@@ -1331,7 +1331,8 @@ async function loadCycleData(cycle) {
     sportsAll, calendarAll, chaosAll, hospitalAll,
     rippleAll, lhlAll, householdAll, storylineLedger,
     worldPopCurr, neighborhoodsC, approvalRows, priorApprovals,
-    bylinePools, bylineUsage
+    bylinePools, bylineUsage,
+    worldConfigAll
   };
 }
 
@@ -1341,7 +1342,8 @@ async function buildWorldSummary(cycle, preloaded) {
     auditJson, rileyCurr, rileyPrev1, rileyPrev2,
     sportsAll, calendarAll, chaosAll, hospitalAll,
     rippleAll, lhlAll, householdAll,
-    worldPopCurr, neighborhoodsC, approvalRows, priorApprovals
+    worldPopCurr, neighborhoodsC, approvalRows, priorApprovals,
+    worldConfigAll = []
   } = data;
 
   // Build sections

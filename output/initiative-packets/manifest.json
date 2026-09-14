@@ -1,66 +1,66 @@
 {
-  "cycle": 106,
-  "generatedAt": "2026-09-07T02:45:50.186Z",
+  "cycle": 107,
+  "generatedAt": "2026-09-14T01:46:20.331Z",
   "packets": {
     "stabilization_fund": {
-      "file": "stabilization_fund_c106.json",
+      "file": "stabilization_fund_c107.json",
       "initiativeId": "INIT-001",
       "status": "passed",
-      "citizenCount": 167,
+      "citizenCount": 169,
       "linkedCitizens": 1,
       "neighborhoods": 7,
       "businesses": 39,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 7
+      "previousDocCount": 8
     },
     "oari": {
-      "file": "oari_c106.json",
+      "file": "oari_c107.json",
       "initiativeId": "INIT-002",
       "status": "passed",
-      "citizenCount": 322,
+      "citizenCount": 323,
       "linkedCitizens": 0,
       "neighborhoods": 7,
       "businesses": 52,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 7
+      "previousDocCount": 8
     },
     "transit_hub": {
-      "file": "transit_hub_c106.json",
+      "file": "transit_hub_c107.json",
       "initiativeId": "INIT-003",
       "status": "visioning-complete",
-      "citizenCount": 92,
+      "citizenCount": 90,
       "linkedCitizens": 0,
       "neighborhoods": 2,
       "businesses": 12,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 5
+      "previousDocCount": 6
     },
     "health_center": {
-      "file": "health_center_c106.json",
+      "file": "health_center_c107.json",
       "initiativeId": "INIT-005",
       "status": "passed",
-      "citizenCount": 156,
+      "citizenCount": 158,
       "linkedCitizens": 0,
       "neighborhoods": 2,
       "businesses": 14,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 5
+      "previousDocCount": 6
     },
     "baylight": {
-      "file": "baylight_c106.json",
+      "file": "baylight_c107.json",
       "initiativeId": "INIT-006",
       "status": "passed",
-      "citizenCount": 160,
+      "citizenCount": 164,
       "linkedCitizens": 0,
       "neighborhoods": 4,
       "businesses": 33,
       "hasPreviousDecisions": true,
       "hasVoiceDecisions": false,
-      "previousDocCount": 9
+      "previousDocCount": 10
     }
   }
 }

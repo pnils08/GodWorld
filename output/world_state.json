@@ -1,44 +1,44 @@
 {
   "meta": {
-    "cycle": 106,
-    "builtAt": "2026-09-07T02:48:55.722Z",
+    "cycle": 107,
+    "builtAt": "2026-09-14T01:51:02.351Z",
     "sheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
     "script": "buildWorldState.js v1.0",
     "notes": []
   },
   "orientation": {
-    "cycle": 106,
+    "cycle": 107,
     "simYear": "3",
     "simMonth": "1",
-    "simDay": "2",
+    "simDay": "3",
     "season": "Winter",
-    "holiday": "none",
+    "holiday": "MLKDay",
     "weather": {
-      "temp": 52,
-      "temperature": 52,
-      "type": "overcast",
-      "impact": 1.05,
-      "humidity": 66,
-      "windSpeed": 10,
+      "temp": 44,
+      "temperature": 44,
+      "type": "fog",
+      "impact": 1.3,
+      "humidity": 74,
+      "windSpeed": 8,
       "windDirection": "W",
-      "windDirectionDeg": 283,
+      "windDirectionDeg": 254,
       "precipitationIntensity": 0,
       "precipitationType": "none",
-      "frontState": "OVERCAST",
-      "frontStrength": 0.53,
-      "visibility": 10
+      "frontState": "MARINE",
+      "frontStrength": 0.51,
+      "visibility": 4
     },
-    "citySentiment": "0.25",
+    "citySentiment": "0.51",
     "cycleWeight": "high-signal",
-    "cycleWeightReason": "High event volume (8); Shock event detected; Strain trend detected; 7 high-priority story hooks; 4 economic ripples active.",
+    "cycleWeightReason": "1 high-severity event(s); High event volume (11); Notable weather impact; Very positive sentiment; Civic load strain.",
     "patternFlag": "strain-trend",
     "shockFlag": "shock-flag",
-    "civicLoad": "minor-variance",
+    "civicLoad": "load-strain",
     "sportsSeason": "playoffs",
     "firstFriday": false
   },
   "canon": {
-    "sourceCycle": 106,
+    "sourceCycle": 107,
     "stale": false,
     "sourceSheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
     "asRoster": [
@@ -656,7 +656,7 @@
         "tier": "2",
         "roleType": "Manager, Oakland A's",
         "neighborhood": "Lake Merritt",
-        "status": "recovering",
+        "status": "active",
         "position": null,
         "overall": null,
         "potential": null,
@@ -1023,9 +1023,9 @@
         "affectedNeighborhoods": "West Oakland",
         "policyDomain": "economic",
         "implementationPhase": "disbursement-active",
-        "milestoneNotes": "C105: Month-six disbursement batch approved (12 households); canvass launched for slipping blocks.",
-        "nextScheduledAction": "Month-seven disbursement review",
-        "nextActionCycle": 106
+        "milestoneNotes": "C106: Month-seven batch approved (12 households, total 69); Downtown outreach expansion authorized per storefront decline signals",
+        "nextScheduledAction": "Month-eight disbursement review and Downtown canvass deployment",
+        "nextActionCycle": 107
       },
       {
         "name": "Oakland Alternative Response Initiative",
@@ -1039,8 +1039,8 @@
         "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
         "policyDomain": "safety",
         "implementationPhase": "implementation-active",
-        "milestoneNotes": "C105: District 1 expansion launched; monthly reporting and audit framework in place.",
-        "nextScheduledAction": "First expansion-district evaluation",
+        "milestoneNotes": "C106: Emergency expansion to East Oakland authorized; District 1 evaluation continues, monthly reporting to Mayor's office",
+        "nextScheduledAction": "East Oakland dispatch protocol deployment",
         "nextActionCycle": 107
       },
       {
@@ -1055,9 +1055,9 @@
         "affectedNeighborhoods": "Temescal",
         "policyDomain": "health",
         "implementationPhase": "construction-active",
-        "milestoneNotes": "C105: Structural frame completed ahead of schedule, MEP rough-ins advancing with second shift",
-        "nextScheduledAction": "Interior wall framing and utility inspections",
-        "nextActionCycle": 106
+        "milestoneNotes": "C106: Interior wall framing and utility inspections authorized; MEP rough-ins advancing with second shift",
+        "nextScheduledAction": "Utility inspections and interior systems rough-in completion",
+        "nextActionCycle": 107
       },
       {
         "name": "Baylight District — Final Council Vote",
@@ -1071,59 +1071,41 @@
         "affectedNeighborhoods": "Jack London, Downtown",
         "policyDomain": "sports",
         "implementationPhase": "construction-planning",
-        "milestoneNotes": "C105: Final council vote approved Phase II bid; construction planning phase begins.",
-        "nextScheduledAction": "Bid finalization and contract signing",
+        "milestoneNotes": "C106: Final council approval received; construction planning active, contract signing in progress",
+        "nextScheduledAction": "Contract execution and site preparation mobilization",
         "nextActionCycle": 107
       }
     ]
   },
   "hoods": {
-    "Downtown": "The towers stay lit late, same as last week. Someone's always coming out of Telegraph Presbyterian with a folder, heading toward the bus. SpeedyBurger has its usual lunch line, moving fast.",
+    "Downtown": "The Telegraph Presbyterian Fellowship has their doors open this week, offering meals and company to seniors in the neighborhood. At lunchtime, the line at SpeedyBurger stretches out the door with office workers on their breaks.",
     "Temescal": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "Laurel": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "West Oakland": "The rail yards go quiet earlier than they used to. Someone put up flyers for the neighborhood panel on the usual poles, already curling at the corners.",
-    "Fruitvale": "St. Esperanza has the doors open after Mass, people lingering in the plaza. The platform construction keeps its rhythm, same dust, same equipment beeping in reverse.",
-    "Jack London": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Rockridge": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "West Oakland": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Fruitvale": "St. Esperanza Parish still has their Epiphany decorations up, brightening the sidewalk outside the church. The Unity Gathering brings neighbors together near the transit plaza, where people linger to chat after grabbing coffee.",
+    "Jack London": "Dockhouse BBQ has a new special on the chalkboard out front—smoked pork with apple slaw. Early risers meet at the Misty Morning Coffee Club by the water, watching the fog roll off the estuary.",
+    "Rockridge": "OakHouse has a waitlist for dinner most nights, with couples and small groups filling the patio under string lights. The sidewalks stay busy even after dark, people walking home with takeout bags or stopping to window-shop.",
     "Adams Point": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Grand Lake": "Port Grind has its morning regulars at the window tables, laptops out. The theater marquee still shows last week's film, unchanged.",
-    "Piedmont Ave": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Chinatown": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Grand Lake": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Piedmont Ave": "The Piedmont Pub’s neon sign glows orange in the evenings, drawing in regulars and newcomers for local beers. A few doors down, the florist arranges fresh bouquets in buckets outside their shop.",
+    "Chinatown": "The Dragon Gate Lounge keeps its red lanterns lit late, music spilling out onto the sidewalk. Down the block, seniors play mahjong outside the Oakland Asian Cultural Center, tiles clicking under the awning.",
     "Brooklyn": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Eastlake": "Eastlake Kitchen opens at the usual hour, the same families at the counter. Walking east, the houses get smaller and closer together, then you're at the next neighborhood without a sign to tell you.",
+    "Eastlake": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "Glenview": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "Dimond": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "Ivy Hill": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "San Antonio": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "KONO": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Lake Merritt": "Cathedral of the Living Word has its Epiphany candles in the windows still. The book market tables were out Saturday, same sellers in their usual spots. Lakeside Whisper Bar keeps its door propped open until last call.",
+    "Lake Merritt": "The Cathedral of the Living Word still has its nativity scene displayed near the entrance, candles flickering in the evening breeze. Joggers circle the lake at dusk, dodging geese near the water’s edge.",
     "Uptown": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "Baylight District": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "East Oakland": "Foothill Baptist Tabernacle had folding tables out Saturday, people waiting for blood pressure checks in the parking lot. The construction fencing on the north end keeps spreading, same orange mesh, same equipment parked overnight.\n\n---\n\n_Generated by `scripts/buildNeighborhoodTexture.js` v1.0.0 from Riley_Digest + Neighborhood_Map (cycle 106). One batched generation, frozen for the cycle. 7/22 hoods with engine signal; 15 quiet._"
-  },
-  "dispositions": {
-    "POP-00001": {
-      "text": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family; often out in the neighborhood",
-      "refreshedCycle": 106
-    },
-    "POP-00018": {
-      "text": "relentless, can't stop working; draws people in, deep with them; warm, tender with people; curious, open to new things; unshakable, calm under anything; principled, plays it straight; close to family",
-      "refreshedCycle": 106
-    },
-    "POP-00528": {
-      "text": "driven, hard to sit still; draws people in, deep with them; warm, tender with people; curious, open to new things; steady, hard to shake; principled, plays it straight",
-      "refreshedCycle": 106
-    },
-    "POP-00789": {
-      "text": "relentless, can't stop working; magnetic, center of every room; curious, open to new things",
-      "refreshedCycle": 106
-    }
+    "East Oakland": "The Foothill Baptist Tabernacle’s food pantry has fresh produce stacked in crates outside, volunteers handing out bags to families in line. Down the street, someone’s grilling in their driveway, the smell of charcoal and spices drifting down the block.\n\n---\n\n_Generated by `scripts/buildNeighborhoodTexture.js` v1.0.0 from Riley_Digest + Neighborhood_Map (cycle 107). One batched generation, frozen for the cycle. 8/22 hoods with engine signal; 14 quiet._"
   },
   "pointers": {
-    "worldSummary": "output/world_summary_c106.md",
-    "deskSignal": "output/desk_signal_c106.json",
-    "neighborhoodTexture": "output/neighborhood_texture_c106.md",
-    "engineAudit": "output/engine_audit_c106.json",
-    "engineReview": "output/engine_review_c106.md"
+    "worldSummary": "output/world_summary_c107.md",
+    "deskSignal": "output/desk_signal_c107.json",
+    "neighborhoodTexture": "output/neighborhood_texture_c107.md",
+    "engineAudit": "output/engine_audit_c107.json",
+    "engineReview": "output/engine_review_c107.md"
   }
 }

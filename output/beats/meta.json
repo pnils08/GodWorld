@@ -1,24 +1,26 @@
 {
-  "source": "beat tabs (14)",
-  "cycle": 106,
-  "prevCycle": null,
+  "source": "beat tabs (16)",
+  "cycle": 107,
+  "prevCycle": 106,
   "rows": {
-    "Business_Ledger": 176,
+    "Business_Ledger": 177,
     "Employment_Roster": 859,
-    "Casino_Ledger": 13,
-    "Transit_Metrics": 522,
+    "Casino_Ledger": 36,
+    "Transit_Metrics": 540,
     "Crime_Metrics": 23,
     "Neighborhood_Demographics": 22,
     "Hospital_Ledger": 3,
     "Health_Cause_Queue": 3,
     "Community_Programs": 31,
     "Faith_Organizations": 16,
-    "Cycle_Weather": 31,
-    "Household_Ledger": 712,
-    "Story_Seed_Deck": 184,
-    "Story_Hook_Deck": 1716
+    "Faith_Ledger": 205,
+    "Cycle_Weather": 32,
+    "Household_Ledger": 748,
+    "Story_Seed_Deck": 230,
+    "Story_Hook_Deck": 1771,
+    "Business_Archive": 0
   },
-  "generatedAt": "2026-09-07T07:16:55.330Z",
+  "generatedAt": "2026-09-14T01:46:16.654Z",
   "generatedBy": "scripts/dumpBeatTabs.js",
   "note": "pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/."
 }

@@ -1,0 +1,190 @@
+fired-at 2026-09-14T07:21:26Z
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ override existing { override: true }
+HTTP 200 wall 213s
+{
+ "ok": true,
+ "ranMs": 206354,
+ "diag59": {
+  "cycle": 108,
+  "poolSize": 580,
+  "poolSample": [
+   "Carmen Delaine",
+   "Ramon Solano",
+   "Briar Crawford"
+  ],
+  "bonds": 607,
+  "friendGrowths": 133,
+  "factors": [
+   "POP-00870xPOP-01036:1.000",
+   "POP-00769xPOP-00194:1.063",
+   "POP-00779xPOP-00749:1.000",
+   "POP-00779xPOP-00040:1.000",
+   "POP-00230xPOP-00504:1.000"
+  ],
+  "mapKeys": 1156,
+  "mapSample": [
+   "Carmen Delaine",
+   "POP-00011",
+   "Ramon Solano",
+   "POP-00756"
+  ],
+  "gatePass": 224,
+  "friendBondSample": [
+   "POP-00476>active",
+   "POP-01001>active",
+   "POP-00017>active"
+  ],
+  "enumFriendship": "friendship"
+ },
+ "diag61": {
+  "rate": 5.4,
+  "desc": "steady",
+  "prevRate": 5.39,
+  "mood": 59.01,
+  "nudge": 0.03,
+  "jitter": 0.02,
+  "loop": {
+   "accrued": 825,
+   "debtUp": 1,
+   "debtDown": 60,
+   "deepDigs": 0,
+   "expense": 5,
+   "windfall": 3
+  },
+  "mobility": {
+   "events": 0,
+   "up": 0,
+   "down": 0
+  }
+ },
+ "diag217": {
+  "economyRuns": 1,
+  "moodAfterRun": 48.81,
+  "modules": "5/5"
+ },
+ "timing": {
+  "cycle": 108,
+  "totalMs": 200372,
+  "phaseCount": 133,
+  "slowest": [
+   {
+    "phase": "Phase5-Advancement",
+    "ms": 70218,
+    "ok": true
+   },
+   {
+    "phase": "Phase11-MaintainLifeHistoryLog",
+    "ms": 18902,
+    "ok": true
+   },
+   {
+    "phase": "Phase10-ExecuteIntents",
+    "ms": 14807,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-HouseholdFormation",
+    "ms": 9446,
+    "ok": true
+   },
+   {
+    "phase": "Phase5-GenerationalWealth",
+    "ms": 7655,
+    "ok": true
+   }
+  ],
+  "timings": [
+   {
+    "phase": "Phase1-LoadConfig",
+    "ms": 1263,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-CanonHoods",
+    "ms": 296,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-AdvanceTime",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-SeedRng",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-Calendar",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-ResetAudit",
+    "ms": 0,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-PrevEvening",
+    "ms": 41,
+    "ok": true
+   },
+   {
+    "phase": "Phase1-PrevCycleState",
+    "ms": 46,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-SeasonalWeights",
+    "ms": 1,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-SportsSeason",
+    "ms": 711,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-SportsFeed",
+    "ms": 778,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-CivicSentiment",
+    "ms": 2,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-EditionCoverage",
+    "ms": 313,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-InitiativeEffects",
+    "ms": 300,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-Weather",
+    "ms": 15,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-CommuteFlows",
+    "ms": 308,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-CityDynamics",
+    "ms": 379,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-NeighborhoodState",
+    "ms": 349,
+    "ok": true
+   },
+   {
+    "phase": "Phase2-ContentLedger",
+    "ms": 322,
+    "ok": true

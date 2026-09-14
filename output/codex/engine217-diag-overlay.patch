@@ -1,0 +1,44 @@
+--- a/phase06-analysis/economicRippleEngine.js
++++ b/phase06-analysis/economicRippleEngine.js
+@@ -1,3 +1,4 @@
++var ENGINE217_DIAG = null; // S459 diag-emit (pattern: ENGINE61_DIAG) — economy runs per fire, read from the fire JSON
+ /**
+  * ============================================================================
+  * ECONOMIC RIPPLE ENGINE v2.5
+@@ -147,6 +148,7 @@
+ // ═══════════════════════════════════════════════════════════════
+ 
+ function runEconomicRippleEngine_(ctx) {
++  ENGINE217_DIAG = ENGINE217_DIAG || { economyRuns: 0 }; ENGINE217_DIAG.economyRuns++;
+   var rng = safeRand_(ctx);
+   var S = ctx.summary || {};
+ 
+@@ -273,6 +275,7 @@
+   ctx.summary = S;
+   
+   var careerSignals = S.careerSignals || {};
++  if (ENGINE217_DIAG) ENGINE217_DIAG.moodAfterRun = S.economicMood;
+   Logger.log('runEconomicRippleEngine_ v2.5: mood=' + S.economicMood +
+     ' | ripples=' + S.economicRipples.length +
+     ' | prevMigration=' + prevMigration +
+--- a/phase08-v3-chicago/v3Integration.js
++++ b/phase08-v3-chicago/v3Integration.js
+@@ -176,6 +176,8 @@
+   var rippleCount = S.economicRipples ? S.economicRipples.length : 0;
+   var bondCount = S.relationshipBonds ? S.relationshipBonds.length : 0;
+ 
++  if (typeof ENGINE217_DIAG !== 'undefined' && ENGINE217_DIAG) ENGINE217_DIAG.modules = modulesRan.length + '/' + Object.keys(V3_FUNCTIONS).length;
++
+   Logger.log('v3Integration v3.4: Complete | Modules: ' + modulesRan.length + '/' + Object.keys(V3_FUNCTIONS).length + ' | Arcs: ' + arcCount + ' | Textures: ' + textureCount + ' | Domains: ' + domainCount + ' | Ripples: ' + rippleCount + ' | Bonds: ' + bondCount);
+ 
+   ctx.summary = S;
+--- a/utilities/webTrigger.js
++++ b/utilities/webTrigger.js
+@@ -46,6 +46,7 @@
+           if (typeof ENGINE59_DIAG !== 'undefined' && ENGINE59_DIAG) out.diag59 = ENGINE59_DIAG;
+           // engine.61 diag-emit: the rate walk's why (persistence is invisible from outside)
+           if (typeof ENGINE61_DIAG !== 'undefined' && ENGINE61_DIAG) out.diag61 = ENGINE61_DIAG;
++          if (typeof ENGINE217_DIAG !== 'undefined' && ENGINE217_DIAG) out.diag217 = ENGINE217_DIAG; // S459 diag-emit
+           // engine.95 Task 2: per-phase timings (no GCP project → clasp logs unavailable)
+           if (typeof ENGINE95_TIMING_DIAG !== 'undefined' && ENGINE95_TIMING_DIAG) out.timing = ENGINE95_TIMING_DIAG;
+           // engine.119 T3: carry-forward ghost skips / sheet recoveries (empty on a clean fire)

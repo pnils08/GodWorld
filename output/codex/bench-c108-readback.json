@@ -1,0 +1,60 @@
+{
+ "readAt": "2026-09-14T07:25:34.720Z",
+ "cycleCount": "108",
+ "engineErrors": [],
+ "carry": [
+  {
+   "cycle": "108",
+   "econMood": 48,
+   "sentiment": -0.19,
+   "shockFlag": "shock-flag",
+   "keys": 41
+  },
+  {
+   "cycle": "106",
+   "econMood": 59.54,
+   "sentiment": 0.25,
+   "shockFlag": "shock-flag",
+   "keys": 40
+  },
+  {
+   "cycle": "107",
+   "econMood": 59.01,
+   "sentiment": 0.51,
+   "shockFlag": "shock-flag",
+   "keys": 41
+  }
+ ],
+ "slRows": 948,
+ "careerStateCells": 17,
+ "hospitalIncomeStateCells": [],
+ "hospitalRows": [
+  {
+   "pop": "POP-00194",
+   "name": "Yu Zen",
+   "status": "recovering",
+   "start": "108",
+   "income": "111666",
+   "emp": "SELF_EMPLOYED",
+   "hospLines": [
+    "Y3C1 — [Hospitalized] Ambulance: workplace accident.",
+    "C105 — [Critical] Yu Zen's condition has worsened to critical",
+    "Y3C3 — [Career-Health] Extended hospital stay cut into earnings [IncomeHit A105]",
+    "C107 — [Stabilized] Yu Zen has stabilized and is no longer in critical condition",
+    "C108 — [Recovering] Yu Zen is now recovering and expected to be released soon"
+   ]
+  },
+  {
+   "pop": "POP-00801",
+   "name": "Maurice Franklin",
+   "status": "recovering",
+   "start": "108",
+   "income": "230000",
+   "emp": "BIZ-00052",
+   "hospLines": [
+    "C106 — [Health] required emergency medical care",
+    "C108 — [Recovering] Maurice Franklin is now recovering and expected to be released soon"
+   ]
+  }
+ ]
+}

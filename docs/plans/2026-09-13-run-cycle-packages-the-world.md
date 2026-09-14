@@ -157,6 +157,7 @@ Three causes, not one:
 ## Changelog
 
 - 2026-09-14 (engine-sheet S459) — Task 6 ruled by the builder: the GC emergence gate fills the thin hoods; no build.
+- 2026-09-14 (engine-sheet S459) — Task 7 / engine.217 bench-proven @33 C108–C109 (economyRuns 1, modules 5/5, money loop reads the carry); readback `output/codex/bench-readback-c108-c109.md`; PROD waits on codex.
 - 2026-09-14 (codex) — Added Task 7 / engine.217 for the verified duplicate economy execution; recorded the failing regression, precise cut, wiring evidence, fire hold, and subsequent carry-path investigation.
 
 - 2026-09-13 S456 — created after the C107 chain and the texture v1.1.0 cut; baseline measured; causes split three ways.

@@ -1,0 +1,76 @@
+{
+ "readAt": "2026-09-14T07:30:48.385Z",
+ "bench": "1FFpUs98…",
+ "typed": true,
+ "cycleCount": {
+  "value": 109,
+  "type": "number"
+ },
+ "engineErrorsRows": 0,
+ "carry": [
+  {
+   "cycle": 108,
+   "cycleType": "number",
+   "econMood": 48,
+   "sentiment": -0.19,
+   "jsonCycle": 108
+  },
+  {
+   "cycle": 109,
+   "cycleType": "number",
+   "econMood": 49,
+   "sentiment": -0.17,
+   "jsonCycle": 109
+  },
+  {
+   "cycle": 107,
+   "cycleType": "number",
+   "econMood": 59.01,
+   "sentiment": 0.51,
+   "jsonCycle": 107
+  }
+ ],
+ "slRows": 953,
+ "careerStatePopIds": [
+  "POP-00048",
+  "POP-00182",
+  "POP-00209",
+  "POP-00236",
+  "POP-00240",
+  "POP-00241",
+  "POP-00242",
+  "POP-00244",
+  "POP-00248",
+  "POP-00255",
+  "POP-00264",
+  "POP-00272",
+  "POP-00290",
+  "POP-00293",
+  "POP-00319",
+  "POP-00325",
+  "POP-00367"
+ ],
+ "hospitalIncomeStateCells": [],
+ "hospitalRows": [
+  {
+   "pop": "POP-00194",
+   "name": "Yu Zen",
+   "status": "active",
+   "start": "",
+   "startType": "string",
+   "income": 111666,
+   "incomeType": "number",
+   "last": "Y3C5 — [Neighborhood] dodged the running groups circling the lake and found a quiet bench near the pergola nea"
+  },
+  {
+   "pop": "POP-00801",
+   "name": "Maurice Franklin",
+   "status": "active",
+   "start": "",
+   "startType": "string",
+   "income": 230000,
+   "incomeType": "number",
+   "last": "Y3C5 — [Friction] the card statement was the first thing read and the last thing forgotten"
+  }
+ ]
+}

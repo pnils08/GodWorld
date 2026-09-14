@@ -19,7 +19,7 @@ const A = new Function(
   src('../phase01-config/canonNeighborhoodLoader.js') +
   src('../phase05-citizens/updateCivicApprovalRatings.js') +
   '\nreturn { getApprovalStateConfig_, cityStateMiddle_, hoodStateComposite_, districtStateScore_, cityStateScore_, districtMoodLevel_,' +
-  ' mediaScore_, mediaDelta_, updateCivicApprovalRatings_, MOTION_LADDERS_, approvalDeltaForInitiative_ };'
+  ' mediaScore_, mediaDelta_, updateCivicApprovalRatings_, MOTION_LADDERS_, approvalDeltaForInitiative_, hoodMoodEma_ };'
 )();
 
 let passed = 0, failed = 0;
@@ -28,7 +28,7 @@ function throws(fn, re) { try { fn(); } catch (e) { return re.test(String(e && e
 
 const CFG_KEYS = {
   approvalLevelBase: 50, approvalLevelInertia: 0.2, approvalStateGainDistrict: 5, approvalStateGainCity: 8, approvalStateGainPress: 3, approvalStateCouncilCityShare: 0.5,
-  approvalStateCitySentimentUnit: 0.25, approvalMediaStep1: 1, approvalMediaStep2: 3
+  approvalStateCitySentimentUnit: 0.25, approvalMoodSmoothing: 0.3, approvalMediaStep1: 1, approvalMediaStep2: 3
 };
 const CEILING = {
   approvalCeilingThreshold: 80, approvalCeilingMinStreakCycles: 3, approvalCeilingBaseChance: 0.05,
@@ -77,6 +77,7 @@ const DISTRICTS = {
   D7: ['Temescal', 'Rockridge', 'KONO'], D8: ['Adams Point', 'Grand Lake', 'Eastlake', 'Lake Merritt'], D9: ['Laurel', 'Uptown']
 };
 const S106 = { neighborhoodState: C106 };
+S106.approvalHoodMoodEma = A.hoodMoodEma_(S106, { moodSmoothing: 0.3 }, 107);   // no carry → EMA starts at the current read
 
 console.log('═══ B. City middle and district composite (§15: bands relative to the city\'s own middle)');
 {
@@ -122,9 +123,19 @@ console.log('═══ C. City level (the Mayor holds the whole city)');
   const c = A.cityStateScore_(S106, CFG);
   check('C1 C106 mean sentiment +0.37 → level ≈ +1.5 units', c > 1.4 && c < 1.6, String(c));
   const bad = {}; Object.keys(C106).forEach(h => { bad[h] = { ...C106[h], sentiment: -0.4 }; });
-  check('C2 a city at -0.4 reads -1.6 — the down direction exists', A.cityStateScore_({ neighborhoodState: bad }, CFG) < -1.5);
-  check('C3 clamped at ±2', A.cityStateScore_({ neighborhoodState: { x: { sentiment: 5 } } }, CFG) === 2);
-  check('C4 no state → null', A.cityStateScore_({ neighborhoodState: {} }, CFG) === null);
+  const Sbad = { neighborhoodState: bad }; Sbad.approvalHoodMoodEma = A.hoodMoodEma_(Sbad, CFG, 107);
+  check('C2 a city at -0.4 reads -1.6 — the down direction exists', A.cityStateScore_(Sbad, CFG) < -1.5);
+  const Sx = { neighborhoodState: { x: { sentiment: 5 } } }; Sx.approvalHoodMoodEma = A.hoodMoodEma_(Sx, CFG, 107);
+  check('C3 clamped at ±2', A.cityStateScore_(Sx, CFG) === 2);
+  check('C4 no state → null', A.cityStateScore_({ neighborhoodState: {}, approvalHoodMoodEma: {} }, CFG) === null);
+  // engine.165 sawtooth: the bench went +0.46 → -0.14 mean in one Cycle with zero world events. The poll answers from a season.
+  const up = {}, down = {}; Object.keys(C106).forEach(h => { up[h] = { ...C106[h], sentiment: 0.46 }; down[h] = { ...C106[h], sentiment: -0.14 }; });
+  const S1 = { neighborhoodState: up }; S1.approvalHoodMoodEma = A.hoodMoodEma_(S1, CFG, 108);
+  const S2 = { neighborhoodState: down, previousCycleState: { cycle: 108, approvalHoodMoodEma: S1.approvalHoodMoodEma } }; S2.approvalHoodMoodEma = A.hoodMoodEma_(S2, CFG, 109);
+  const m1 = A.cityStateScore_(S1, CFG), m2 = A.cityStateScore_(S2, CFG);
+  check('C5 a -0.60 sentiment sawtooth moves the smoothed mood by 30% of it (+1.84 → +1.12), not to -0.56', m1 > 1.8 && m2 > 1.0 && m2 < 1.2, m1 + ' → ' + m2);
+  const S3 = { neighborhoodState: down, previousCycleState: { cycle: 100, approvalHoodMoodEma: S1.approvalHoodMoodEma } }; S3.approvalHoodMoodEma = A.hoodMoodEma_(S3, CFG, 109);
+  check('C6 a stale carry (not exactly one Cycle old) is ignored — EMA restarts at the current read', A.cityStateScore_(S3, CFG) < -0.5);
 }
 
 console.log('═══ D. The press — every desk, both ways, on the live range');
@@ -181,7 +192,7 @@ console.log('═══ F. Full run on the live C106 seats — the C107 projectio
     mode: {},
     ledger: { headers: ['POPID', 'First', 'Last', 'DialState'], rows: [] },
     summary: {
-      cycleId: 107, absoluteCycle: 107, canonHoods: canon, neighborhoodState: C106,
+      cycleId: 107, absoluteCycle: 107, canonHoods: canon, neighborhoodState: C106,   // no approvalHoodMoodEma carry → EMA = current read
       previousCycleState: { cycle: 106, initiativePhases: prevPhases },
       editionDomainBalance: { ENVIRONMENT: { rating: 5 }, CULTURE: { rating: 3 }, SPORTS: { rating: 5 }, EDUCATION: { rating: 5 }, CIVIC: { rating: -3 }, ECONOMIC: { rating: 5 } }
     },

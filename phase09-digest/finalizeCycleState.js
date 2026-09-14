@@ -111,6 +111,12 @@ function finalizeCycleState_(ctx) {
     // detected", which is the conservative direction (nothing new pays).
     initiativePhases: S.initiativePhases || null,
 
+    // engine.213 (S455): smoothed hood mood for the approval level. City
+    // sentiment sawtooths ±0.5 Cycle to Cycle (engine.165); a poll built on
+    // the raw read would swing a seat's target 20 points on one noisy week.
+    // ~22 short numbers, same carry class as initiativePhases.
+    approvalHoodMoodEma: S.approvalHoodMoodEma || null,
+
     // v1.5 (engine.45 T2): migration→mood loop — economicRippleEngine reads
     // previousCycleState.migrationDrift, which was never serialized (always 0).
     migrationDrift: (typeof S.migrationDrift === 'number') ? S.migrationDrift : 0,

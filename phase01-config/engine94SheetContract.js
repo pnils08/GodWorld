@@ -117,6 +117,7 @@ var ENGINE213_CONFIG_SEEDS = [
   ['approvalStateGainCity', 8, 'engine.213 target-level points per unit of MOOD (mean hood Sentiment / approvalStateCitySentimentUnit, [-2,2]); Mayor = city, council = councilCityShare×city + rest×own district', 0, 30, false],
   ['approvalStateGainPress', 3, 'engine.213 target-level points per press step (steps ±1/±2)', 0, 15, false],
   ['approvalStateCouncilCityShare', 0.5, 'engine.213 share of the city-level term a council seat receives', 0, 1, false],
+  ['approvalMoodSmoothing', 0.3, 'engine.213 EMA weight of THIS Cycle\'s hood Sentiment in the smoothed mood the approval level reads (0.3 ≈ a 3-4 Cycle season; city sentiment sawtooths ±0.5/Cycle)', 0.05, 1, false],
   ['approvalStateCitySentimentUnit', 0.25, 'engine.213 mean hood Sentiment that counts as one unit of city level (live C104-C106 means ran +0.25..+0.45)', 0.01, 1, false],
   ['approvalMediaStep1', 1, 'engine.213 |press score| at which coverage moves approval +-1 (score = half CIVIC rating, half all-desk mean; live range -3..+5)', 0.1, 5, false],
   ['approvalMediaStep2', 3, 'engine.213 |press score| at which coverage moves approval +-2', 0.1, 5, false]

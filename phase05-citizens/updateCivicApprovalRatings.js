@@ -123,6 +123,7 @@ function getApprovalStateConfig_(ctx) {
     gainPress: required('approvalStateGainPress', 0, 15),
     councilCityShare: required('approvalStateCouncilCityShare', 0, 1),
     citySentimentUnit: required('approvalStateCitySentimentUnit', 0.01, 1),
+    moodSmoothing: required('approvalMoodSmoothing', 0.05, 1),
     mediaStep1: required('approvalMediaStep1', 0.1, 5),
     mediaStep2: required('approvalMediaStep2', 0.1, 5)
   };
@@ -141,19 +142,9 @@ var APPROVAL_STATE_MEASURES_ = [
   { key: 'retailVitality', sign: 1, weight: 0.25 }
 ];
 
-/** District residents' mood, absolute: mean hood sentiment in citySentimentUnit units, clamped [-2, 2]. */
+/** District residents' mood, absolute: mean SMOOTHED hood sentiment in citySentimentUnit units, clamped [-2, 2]. */
 function districtMoodLevel_(S, hoods, cfg) {
-  var ns = (S && S.neighborhoodState) || {};
-  var acc = 0, n = 0;
-  for (var i = 0; i < hoods.length; i++) {
-    var v = ns[hoods[i]] && ns[hoods[i]].sentiment;
-    if (typeof v === 'number' && isFinite(v)) { acc += v; n++; }
-  }
-  if (!n) return null;
-  var s = (acc / n) / cfg.citySentimentUnit;
-  if (s > 2) s = 2;
-  if (s < -2) s = -2;
-  return s;
+  return moodLevelOf_(S, hoods, cfg);
 }
 
 /**
@@ -218,17 +209,50 @@ function districtStateScore_(S, hoods, middle) {
 }
 
 /**
- * City score: mean hood sentiment in units of citySentimentUnit, clamped
- * [-2, 2]. The city's own level, not a relative band — the Mayor holds the
- * whole city, so "against the middle" would always read zero.
+ * Smoothed mood per hood: an EMA of Neighborhood_Map Sentiment carried across
+ * Cycles (previousCycleState.approvalHoodMoodEma, gated to exactly one Cycle
+ * old like initiativePhases). City sentiment sawtooths ±0.5 Cycle to Cycle
+ * (engine.165: live C95–C106 ran 0.59 0.70 0.23 0.63 0.80 0.21 0.00 0.44 0.42
+ * 0.84 0.25); a poll answers from a season, not a week. First Cycle, or a
+ * stale carry: the EMA starts at the current read.
  */
-function cityStateScore_(S, cfg) {
-  var mid = cityStateMiddle_(S).measures.sentiment;
-  if (!mid) return null;
-  var s = mid.mean / cfg.citySentimentUnit;
+function hoodMoodEma_(S, cfg, cycle) {
+  var ns = (S && S.neighborhoodState) || {};
+  var prevState = (S && S.previousCycleState) || {};
+  var prev = (Number(prevState.cycle) === Number(cycle) - 1 && prevState.approvalHoodMoodEma) ? prevState.approvalHoodMoodEma : null;
+  var a = cfg.moodSmoothing;
+  var out = {};
+  for (var h in ns) {
+    if (!ns.hasOwnProperty(h)) continue;
+    var v = ns[h] && ns[h].sentiment;
+    if (typeof v !== 'number' || !isFinite(v)) continue;
+    var p = prev && typeof prev[h] === 'number' && isFinite(prev[h]) ? prev[h] : null;
+    out[h] = p === null ? v : p + (v - p) * a;
+  }
+  return out;
+}
+
+function moodLevelOf_(S, hoods, cfg) {
+  var ema = (S && S.approvalHoodMoodEma) || {};
+  var acc = 0, n = 0;
+  for (var i = 0; i < hoods.length; i++) {
+    var v = ema[hoods[i]];
+    if (typeof v === 'number' && isFinite(v)) { acc += v; n++; }
+  }
+  if (!n) return null;
+  var s = (acc / n) / cfg.citySentimentUnit;
   if (s > 2) s = 2;
   if (s < -2) s = -2;
   return s;
+}
+
+/**
+ * City mood: mean smoothed hood sentiment in units of citySentimentUnit,
+ * clamped [-2, 2]. The city's own level, not a relative band — the Mayor
+ * holds the whole city, so "against the middle" would always read zero.
+ */
+function cityStateScore_(S, cfg) {
+  return moodLevelOf_(S, Object.keys((S && S.approvalHoodMoodEma) || {}), cfg);
 }
 
 /**
@@ -466,6 +490,7 @@ function updateCivicApprovalRatings_(ctx) {
 
   // engine.213 — the city and the press, computed once for every seat.
   var stateMiddle = cityStateMiddle_(S);
+  S.approvalHoodMoodEma = hoodMoodEma_(S, stateConfig, cycle);   // carried by Phase 9; read next Cycle
   var cityScore = cityStateScore_(S, stateConfig);
   var pressScore = mediaScore_(domainBalance);
   var pressDelta = mediaDelta_(pressScore, stateConfig);

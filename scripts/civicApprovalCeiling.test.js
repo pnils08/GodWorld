@@ -74,7 +74,7 @@ const APPROVED = {
   approvalStateGainCity: 8,
   approvalStateGainPress: 3,
   approvalStateCouncilCityShare: 0.5,
-  approvalStateCitySentimentUnit: 0.25,
+  approvalStateCitySentimentUnit: 0.25, approvalMoodSmoothing: 0.3,
   approvalMediaStep1: 1,
   approvalMediaStep2: 3
 };

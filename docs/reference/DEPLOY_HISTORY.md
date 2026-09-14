@@ -129,6 +129,15 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @82 — engine.213 approval reads the city (2026-09-13 ~19:12 Chicago, engine-sheet)
+
+Commit `35a087a7`; @82 is the deployment-ledger label; Apps Script version 71, web app repointed with `clasp deploy -i -V 71` and read back. Payload: `phase05-citizens/updateCivicApprovalRatings.js` (state + press terms, ladders), `phase01-config/engine94SheetContract.js` (`ENGINE213_CONFIG_SEEDS` + `ensureEngine213Config_`), `phase01-config/godWorldEngine2.js` (one ensure call). Pull-back 168/168 byte-identical, 0 test files.
+
+- **Why (Mike-direct S455):** the grade read the initiative tracker, a civic-only media step the live range never reached, and decay — nothing about the city. C106: every hood positive, employment 93.8%, five desks +3..+5, every official down (Santana 82→69→64; Ashford 45 holding the strongest district).
+- **Bench @26:** C106→C107 `ok:true` 181,898 ms, 0 Engine_Errors; six keys self-armed (`approvalStateGainDistrict` 1.5, `approvalStateGainCity` 1.5, `approvalStateCouncilCityShare` 0.5, `approvalStateCitySentimentUnit` 0.25, `approvalMediaStep1` 1, `approvalMediaStep2` 3). Seats: Santana 64→65, Carter 76→75, Tran 52→52, Delgado 71→70, Vega 51→51, Rivers 76→75, Crane 51→52, Ashford 45→47, Chen 51→51, Mobley 51→52. Reasons on Ripple_Ledger read `city +1 (sentiment +1.48 units); district ±1 (vs city middle ±0.xx)`; every tracker row `sitting (0, capped)`. The bench tracker is the pre-18:36 copy, so no phase move credited there.
+- **Live C107 readback (tracker written 18:36, two phase moves):** expect Santana ≈68 (`advanced +2/+1`, `city +2`, decay −1), Ashford ≈47, Carter ≈77, Vega ≈50; no seat moves more than ±4; no campaign seeded; `Ripple_Ledger` approval-shift causeDetail carries `city`/`district`/`press` reasons.
+- **Tests:** `civicApprovalState.test.js` 33/33 (cannot run pre-fix); `civicApprovalCeiling.test.js` retagged to the ruling, 101/101; full suite 234/234.
+
 ### PROD @81 — owner-reader repair (2026-09-13, Codex)
 
 Source commit `be0171cb`; @81 is the deployment-ledger label. Exactly one payload file changed: `phase05-citizens/applyBusinessDynamics.js`; no additions/deletions. Explicit owner POPIDs no longer fall back to namesakes, and ambiguous names supply no dial bands, including when a duplicate has blank DialState.

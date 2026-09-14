@@ -97,6 +97,9 @@
 
 ### engine94SheetContract.js
 - **ensureEngine160Config_(ss)**
+  Sheets: World_Config
+
+- **ensureEngine213Config_(ss)**
   Reads: S.neighborhoodState
   Sheets: World_Config
 
@@ -593,6 +596,8 @@
 - **crimeMedian_(arr)**
 
 - **crimeCityMedianLevels_(currentMetrics)**
+
+- **crimeCityMedianDemo_(demographics, hoods)**
 
 - **crimeClampLevel_(n)**
 
@@ -2155,12 +2160,28 @@
 ### updateCivicApprovalRatings.js
 - **getApprovalCeilingConfig_(ctx)**
 
+- **getApprovalStateConfig_(ctx)**
+
+- **cityStateMiddle_(S)**
+  Reads: S.neighborhoodState
+
+- **hoodStateComposite_(hoodState, middle)**
+
+- **districtStateScore_(S, hoods, middle)**
+  Reads: S.neighborhoodState
+
+- **cityStateScore_(S, cfg)**
+
+- **mediaScore_(domainBalance)**
+
+- **mediaDelta_(score, cfg)**
+
 - **resolveApprovalCeilingLifecycle_(state, cycle)**
 
 - **applyApprovalCeilingRisk_(state, config, rng)**
 
 - **updateCivicApprovalRatings_(ctx)**
-  Reads: S.absoluteCycle, S.approvalCeilingEvents, S.approvalNeighborhoodEffects, S.civicCampaigns, S.cycleId, S.editionDomainBalance, S.officeDepartures, S.previousCycleState, S.storyHooks
+  Reads: S.absoluteCycle, S.approvalCeilingEvents, S.approvalNeighborhoodEffects, S.civicCampaigns, S.cycleId, S.editionDomainBalance, S.neighborhoodState, S.officeDepartures, S.previousCycleState, S.storyHooks
   Writes: S.approvalCeilingEvents, S.approvalChanges, S.approvalNeighborhoodEffects, S.approvalTriggers, S.civicCampaigns, S.initiativePhases, S.officeDepartures, S.storyHooks
   Config: ctx.config.cycleCount
   Sheets: Civic_Office_Ledger, Initiative_Tracker
@@ -3983,4 +4004,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1377
+**Functions mapped:** 1386

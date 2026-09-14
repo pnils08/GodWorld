@@ -91,6 +91,152 @@ function getApprovalCeilingConfig_(ctx) {
   return config;
 }
 
+/**
+ * engine.213 (S455, Mike-direct 2026-09-13): approval reads the CITY, not the
+ * tracker. An official is an actor tasked with their district (the Mayor: the
+ * city); the number moves on the state of what they hold — hood sentiment,
+ * retail, crime, momentum against the city's own middle — plus the week's press
+ * across every desk, plus civic motion. Before this, the grade read three
+ * inputs: the initiative tracker (sitting cost every cycle), a civic-only media
+ * rating that never reached its ±2 step, and decay. At C106 every hood was
+ * positive, employment 93.8%, five desks rated the week +3..+5 — and every
+ * official fell. Bands are relative to the city middle (§15): they cannot rot
+ * into a one-way gate when the scale moves.
+ */
+function getApprovalStateConfig_(ctx) {
+  if (ctx && ctx._approvalStateConfig) return ctx._approvalStateConfig;
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('approval state: ctx.config required');
+  var required = function(key, min, max) {
+    var raw = source[key];
+    var value = Number(raw);
+    if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < min || value > max) {
+      throw new Error('approval state: invalid or missing World_Config.' + key);
+    }
+    return value;
+  };
+  var config = {
+    gainDistrict: required('approvalStateGainDistrict', 0, 10),
+    gainCity: required('approvalStateGainCity', 0, 10),
+    councilCityShare: required('approvalStateCouncilCityShare', 0, 1),
+    citySentimentUnit: required('approvalStateCitySentimentUnit', 0.01, 1),
+    mediaStep1: required('approvalMediaStep1', 0.1, 5),
+    mediaStep2: required('approvalMediaStep2', 0.1, 5)
+  };
+  if (config.mediaStep1 > config.mediaStep2) throw new Error('approval state: World_Config.approvalMediaStep1 exceeds approvalMediaStep2');
+  if (ctx) ctx._approvalStateConfig = config;
+  return config;
+}
+
+var APPROVAL_STATE_MEASURES_ = [
+  { key: 'sentiment', sign: 1, weight: 1 },
+  { key: 'retailVitality', sign: 1, weight: 1 },
+  { key: 'crimeIndex', sign: -1, weight: 1 },
+  { key: 'trajectoryMomentum', sign: 1, weight: 0.5 }
+];
+
+/**
+ * City middle per measure over every hood with a number: mean + spread. The
+ * spread floor (10% of |mean|, min 0.05) stops a flat city from turning noise
+ * into a full-scale band.
+ */
+function cityStateMiddle_(S) {
+  var ns = (S && S.neighborhoodState) || {};
+  var out = { hoods: 0, measures: {} };
+  var hoodNames = Object.keys(ns);
+  for (var m = 0; m < APPROVAL_STATE_MEASURES_.length; m++) {
+    var key = APPROVAL_STATE_MEASURES_[m].key;
+    var vals = [];
+    for (var h = 0; h < hoodNames.length; h++) {
+      var v = ns[hoodNames[h]] && ns[hoodNames[h]][key];
+      if (typeof v === 'number' && isFinite(v)) vals.push(v);
+    }
+    if (!vals.length) continue;
+    var sum = 0;
+    for (var i = 0; i < vals.length; i++) sum += vals[i];
+    var mean = sum / vals.length;
+    var sq = 0;
+    for (var j = 0; j < vals.length; j++) sq += (vals[j] - mean) * (vals[j] - mean);
+    var sd = Math.sqrt(sq / vals.length);
+    var floor = Math.max(0.05, Math.abs(mean) * 0.1);
+    out.measures[key] = { mean: mean, sd: sd < floor ? floor : sd, n: vals.length };
+    if (vals.length > out.hoods) out.hoods = vals.length;
+  }
+  return out;
+}
+
+/** One hood against the city middle, in [-2, 2]. null when the hood has no numbers. */
+function hoodStateComposite_(hoodState, middle) {
+  if (!hoodState || !middle || !middle.measures) return null;
+  var acc = 0, wsum = 0;
+  for (var m = 0; m < APPROVAL_STATE_MEASURES_.length; m++) {
+    var spec = APPROVAL_STATE_MEASURES_[m];
+    var mid = middle.measures[spec.key];
+    var v = hoodState[spec.key];
+    if (!mid || typeof v !== 'number' || !isFinite(v)) continue;
+    var rel = (v - mid.mean) / mid.sd * spec.sign;
+    if (rel > 2) rel = 2;
+    if (rel < -2) rel = -2;
+    acc += rel * spec.weight;
+    wsum += spec.weight;
+  }
+  if (!wsum) return null;
+  return acc / wsum;
+}
+
+/** District score = mean composite of its hoods, in [-2, 2]; null if none scored. */
+function districtStateScore_(S, hoods, middle) {
+  var ns = (S && S.neighborhoodState) || {};
+  var acc = 0, n = 0;
+  for (var i = 0; i < hoods.length; i++) {
+    var c = hoodStateComposite_(ns[hoods[i]], middle);
+    if (c === null) continue;
+    acc += c; n++;
+  }
+  return n ? acc / n : null;
+}
+
+/**
+ * City score: mean hood sentiment in units of citySentimentUnit, clamped
+ * [-2, 2]. The city's own level, not a relative band — the Mayor holds the
+ * whole city, so "against the middle" would always read zero.
+ */
+function cityStateScore_(S, cfg) {
+  var mid = cityStateMiddle_(S).measures.sentiment;
+  if (!mid) return null;
+  var s = mid.mean / cfg.citySentimentUnit;
+  if (s > 2) s = 2;
+  if (s < -2) s = -2;
+  return s;
+}
+
+/**
+ * The week's press: civic desk and the whole paper, blended half and half.
+ * Graded on the range the ratings actually occupy (C92–C106 CIVIC ran -3..+3):
+ * |score| ≥ step1 → ±1, ≥ step2 → ±2. null when no edition was rated.
+ */
+function mediaScore_(domainBalance) {
+  var civic = null, sum = 0, n = 0;
+  for (var k in domainBalance) {
+    if (!domainBalance.hasOwnProperty(k)) continue;
+    var r = domainBalance[k] && domainBalance[k].rating;
+    if (r === undefined || r === null || !isFinite(Number(r))) continue;
+    sum += Number(r); n++;
+    if (k === 'CIVIC') civic = Number(r);
+  }
+  if (!n) return null;
+  var all = sum / n;
+  return civic === null ? all : (civic + all) / 2;
+}
+
+function mediaDelta_(score, cfg) {
+  if (score === null || score === undefined) return 0;
+  var a = Math.abs(score);
+  if (a >= cfg.mediaStep2) return score > 0 ? 2 : -2;
+  if (a >= cfg.mediaStep1) return score > 0 ? 1 : -1;
+  return 0;
+}
+
 function resolveApprovalCeilingLifecycle_(state, cycle) {
   var out = {
     status: String(state.status || '').toLowerCase(),
@@ -179,6 +325,7 @@ function updateCivicApprovalRatings_(ctx) {
   S.civicCampaigns = [];
 
   var ceilingConfig = getApprovalCeilingConfig_(ctx);
+  var stateConfig = getApprovalStateConfig_(ctx);   // engine.213
   var rng = safeRand_(ctx);
   var cycle = Number(S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0);
 
@@ -295,6 +442,16 @@ function updateCivicApprovalRatings_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   var domainBalance = S.editionDomainBalance || {};
+
+  // engine.213 — the city and the press, computed once for every seat.
+  var stateMiddle = cityStateMiddle_(S);
+  var cityScore = cityStateScore_(S, stateConfig);
+  var pressScore = mediaScore_(domainBalance);
+  var pressDelta = mediaDelta_(pressScore, stateConfig);
+  Logger.log('updateCivicApprovalRatings_ engine.213: hoods scored ' + stateMiddle.hoods +
+    ', city level ' + (cityScore === null ? 'n/a' : cityScore.toFixed(2)) +
+    ', press score ' + (pressScore === null ? 'n/a' : pressScore.toFixed(2)) + ' → ' + pressDelta);
+  if (!stateMiddle.hoods) Logger.log('updateCivicApprovalRatings_ engine.213: no S.neighborhoodState — state term is 0 this Cycle (loadNeighborhoodState_ did not run?)');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALCULATE APPROVAL CHANGES
@@ -422,32 +579,44 @@ function updateCivicApprovalRatings_(ctx) {
     }
 
     // ─────────────────────────────────────────────────────────────────────
-    // MEDIA COVERAGE COMPOUND
+    // THE CITY (engine.213) — what the seat is responsible for
     // ─────────────────────────────────────────────────────────────────────
-    // If edition coverage of CIVIC domain was negative and this official's
-    // faction led the initiative → extra pressure
-    // engine.139 (G-PF34): media is symmetric, and graded inside the range the
-    // ratings actually occupy. The old rule was `<= -3 → -2` with no positive
-    // arm; across 15 cycles of live CIVIC ratings (1,0,2,1,0,2,3,-2,-2,-1,2,1,2,
-    // -2,-2 — range -2..+3) that threshold NEVER FIRED ONCE, so the channel was
-    // not "negative-only", it was switched off. The v1.3 note that positive
-    // coverage must not pay was written to stop approval inflation, but the real
-    // inflation was `complete` paying every cycle (fixed above) — not the
-    // existence of a positive input. Coverage is the medium the whole city moves
-    // on; it now moves officials both ways.
-    if (domainBalance['CIVIC'] && domainBalance['CIVIC'].rating !== undefined &&
-        domainBalance['CIVIC'].rating !== null) {
-      var civicRating = Number(domainBalance['CIVIC'].rating) || 0;
-      var mediaDelta = 0;
-      if (civicRating >= 4) mediaDelta = 2;
-      else if (civicRating >= 2) mediaDelta = 1;
-      else if (civicRating <= -4) mediaDelta = -2;
-      else if (civicRating <= -2) mediaDelta = -1;
-      if (mediaDelta !== 0) {
-        delta += mediaDelta;
-        reasons.push('civic media ' + (mediaDelta > 0 ? '+' : '') + mediaDelta +
-                     ' (rating ' + civicRating + ')');
+    // Council: the district's hoods against the city middle, plus a share of
+    // the city's own level. Mayor: the city's level at full weight.
+    var stateDelta = 0;
+    if (cityScore !== null) {
+      var cityShare = isMayor ? 1 : stateConfig.councilCityShare;
+      var cityPart = Math.round(cityScore * stateConfig.gainCity * cityShare);
+      if (cityPart !== 0) {
+        stateDelta += cityPart;
+        reasons.push('city ' + (cityPart > 0 ? '+' : '') + cityPart + ' (sentiment ' + (cityScore >= 0 ? '+' : '') + cityScore.toFixed(2) + ' units)');
       }
+    }
+    if (!isMayor) {
+      var districtScore = districtStateScore_(S, districtHoods, stateMiddle);
+      if (districtScore !== null) {
+        var districtPart = Math.round(districtScore * stateConfig.gainDistrict);
+        if (districtPart !== 0) {
+          stateDelta += districtPart;
+          reasons.push('district ' + (districtPart > 0 ? '+' : '') + districtPart + ' (vs city middle ' + (districtScore >= 0 ? '+' : '') + districtScore.toFixed(2) + ')');
+        }
+      } else if (!stateMiddle.hoods) {
+        reasons.push('district state unavailable (no neighborhood state loaded)');
+      }
+    } else if (cityScore === null) {
+      reasons.push('city state unavailable (no neighborhood state loaded)');
+    }
+    delta += stateDelta;
+
+    // ─────────────────────────────────────────────────────────────────────
+    // THE PRESS (engine.213) — civic desk and the whole paper, both ways
+    // ─────────────────────────────────────────────────────────────────────
+    // engine.139 found the old `<= -3` civic-only threshold never fired in 15
+    // cycles (range -2..+3). Graded now on the live range, half civic desk and
+    // half every desk, so a glowing sports/economy week counts for the city.
+    if (pressDelta !== 0) {
+      delta += pressDelta;
+      reasons.push('press ' + (pressDelta > 0 ? '+' : '') + pressDelta + ' (score ' + (pressScore >= 0 ? '+' : '') + pressScore.toFixed(1) + ')');
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -849,10 +1018,15 @@ function classifyInitiativeMotion_(phase, nextActionCycle, cycle, prevPhase) {
  * is worth +4 to an owner, a cycle in which every row stalls costs -4. Silence
  * keeps its heavier v1.7 curve because it means overdue, not merely unfinished.
  */
+// engine.213 (S455, Mike-direct): a scheduled row costs NOTHING. City hall meets
+// once a week; the seat works the district six days. Charging every fire for a
+// row that is on its clock made the tracker the whole grade (C104–C106: every
+// row "sitting", every official down). Silence — overdue, unscheduled — still
+// drains, at half the old curve; the city term is now the weight.
 var MOTION_LADDERS_ = {
-  silence:  { owned: [-6, -3, -2, -1], nearby: [-4, -2, -1] },
-  sitting:  { owned: [-2, -1, -1],     nearby: [-1, -1] },
-  advanced: { owned: [2, 1, 1],        nearby: [1, 1] }
+  silence:  { owned: [-3, -2, -1], nearby: [-2, -1] },
+  sitting:  { owned: [],           nearby: [] },
+  advanced: { owned: [2, 1, 1],    nearby: [1, 1] }
 };
 
 /**
@@ -876,16 +1050,16 @@ function approvalDeltaForInitiative_(motion, owns, opposed) {
     return { delta: 1, reason: 'advanced a phase (+1)' };
   }
   if (motion === 'failed') {
-    if (owns) return { delta: -3, reason: 'chose fail (-3)' };
+    if (owns) return { delta: -2, reason: 'chose fail (-2)' };  // engine.213: committal still costs less than silence (-3)
     if (opposed) return { delta: 1, reason: 'opposed a fail (+1)' };
     return { delta: -1, reason: 'chose fail (-1)' };
   }
   if (motion === 'silence') {
-    if (owns) return { delta: -6, reason: 'silence (-6)' };
-    return { delta: -4, reason: 'silence (-4)' };
+    if (owns) return { delta: -3, reason: 'silence (-3)' };
+    return { delta: -2, reason: 'silence (-2)' };
   }
-  if (owns) return { delta: -2, reason: 'sitting, nothing free (-2)' };
-  return { delta: -1, reason: 'sitting, nothing free (-1)' };
+  // engine.213: on the clock is not a fault. The seat is graded on the district.
+  return { delta: 0, reason: 'sitting, on the clock (0)' };
 }
 
 /**

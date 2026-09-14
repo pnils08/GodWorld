@@ -105,6 +105,34 @@ function ensureEngine160Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.213 (S455, Mike-direct 2026-09-13) — approval reads the city. Council
+// seats move on their district against the city middle plus a share of the
+// city's level; the Mayor on the city's level; everyone on the week's press
+// across every desk. Same self-arm contract; updateCivicApprovalRatings_
+// asserts every key.
+var ENGINE213_CONFIG_SEEDS = [
+  ['approvalStateGainDistrict', 1.5, 'engine.213 approval points per unit of district composite vs city middle (composite in [-2,2]); council seats', 0, 10, false],
+  ['approvalStateGainCity', 1.5, 'engine.213 approval points per unit of city sentiment level (level in [-2,2]); Mayor full weight', 0, 10, false],
+  ['approvalStateCouncilCityShare', 0.5, 'engine.213 share of the city-level term a council seat receives', 0, 1, false],
+  ['approvalStateCitySentimentUnit', 0.25, 'engine.213 mean hood Sentiment that counts as one unit of city level (live C104-C106 means ran +0.25..+0.45)', 0.01, 1, false],
+  ['approvalMediaStep1', 1, 'engine.213 |press score| at which coverage moves approval +-1 (score = half CIVIC rating, half all-desk mean; live range -3..+5)', 0.1, 5, false],
+  ['approvalMediaStep2', 3, 'engine.213 |press score| at which coverage moves approval +-2', 0.1, 5, false]
+];
+
+function ensureEngine213Config_(ss) {
+  if (!ss) throw new Error('engine.213 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.213 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE213_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE213_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.213 config: post-write verification failed');
+  }
+  Logger.log('engine.213 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE176_CONFIG_SEEDS = [
   ['dialFrictionRentBurden', 50, 'engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause', 10, 90, false],
   ['dialSetbackLossPct', 5, 'engine.176 a lost casino stake at/over this % of the citizen\'s net worth logs [Setback] instead of the ordinary [Casino] loss line', 1, 50, false],

@@ -222,6 +222,7 @@ function runWorldCycle() {
     ensureEngine135Config_(ss);  // engine.135 employment envelope keys, same self-arm contract
     ensureEngine96Config_(ss);   // engine.96 business lifecycle keys, same self-arm contract
     ensureEngine160Config_(ss);  // engine.160 hoodRentShare — the one hood rent rule, same self-arm contract
+    ensureEngine213Config_(ss);  // engine.213 approval-reads-the-city keys, same self-arm contract
     ensureEngine157Config_(ss);  // engine.157 maneuver posture keys, same self-arm contract
     ensureEngine161Config_(ss);  // engine.161 relocationMaxShare — the stampede guard, same self-arm contract
     ensureEngine148Config_(ss);  // engine.148 hood floor + GC surfacing dials, same self-arm contract

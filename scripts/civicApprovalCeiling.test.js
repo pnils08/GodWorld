@@ -66,7 +66,14 @@ const APPROVED = {
   approvalCeilingMaxChance: 0.30,
   approvalCeilingScandalDurationCycles: 3,
   approvalCeilingApprovalDrop: 12,
-  approvalCeilingElectionPenalty: 25
+  approvalCeilingElectionPenalty: 25,
+  // engine.213 (S455): approval reads the city — the six state/press keys
+  approvalStateGainDistrict: 1.5,
+  approvalStateGainCity: 1.5,
+  approvalStateCouncilCityShare: 0.5,
+  approvalStateCitySentimentUnit: 0.25,
+  approvalMediaStep1: 1,
+  approvalMediaStep2: 3
 };
 
 let passed = 0;
@@ -266,9 +273,10 @@ console.log('═══ F. v1.3 motion physics — nothing free, silence costs mo
     A.approvalDeltaForInitiative_('complete-held', true, false).delta === 0 &&
     A.approvalDeltaForInitiative_('advanced', true, false).delta === 2 &&
     A.approvalDeltaForInitiative_('failed', false, true).delta === 1 &&
-    A.approvalDeltaForInitiative_('sitting', true, false).delta === -2 &&
-    A.approvalDeltaForInitiative_('silence', true, false).delta === -6 &&
-    A.approvalDeltaForInitiative_('sitting', false, false).delta < 0 &&
+    // engine.213 (S455, Mike-direct): on the clock costs nothing; silence still drains (halved)
+    A.approvalDeltaForInitiative_('sitting', true, false).delta === 0 &&
+    A.approvalDeltaForInitiative_('silence', true, false).delta === -3 &&
+    A.approvalDeltaForInitiative_('sitting', false, false).delta === 0 &&
     A.approvalDeltaForInitiative_('silence', false, false).delta <
       A.approvalDeltaForInitiative_('sitting', true, false).delta);
   check('F7 silence is the biggest owner drain',
@@ -282,14 +290,14 @@ console.log('═══ F. v1.3 motion physics — nothing free, silence costs mo
     { motion: 'sitting' }, { motion: 'sitting' }, { motion: 'sitting' },
     { motion: 'sitting' }, { motion: 'sitting' }, { motion: 'sitting' }
   ].reduce((n, i) => n + A.approvalDeltaForInitiative_(i.motion, true, false).delta, 0);
-  check('F8 C103-style six sitters cannot raise a mayor', c103 === -12, String(c103));
+  check('F8 C103-style six sitters cannot raise a mayor (engine.213: nor drain one — 0)', c103 === 0, String(c103));
 
   const silentSunday = [
     { motion: 'silence' }, { motion: 'silence' }, { motion: 'silence' },
     { motion: 'silence' }, { motion: 'silence' }, { motion: 'silence' }
   ].reduce((n, i) => n + A.approvalDeltaForInitiative_(i.motion, true, false).delta, 0);
-  check('F9 six silences drop a mayor off the ceiling in one cycle',
-    95 + silentSunday + (-1) <= 58, String(95 + silentSunday - 1));
+  check('F9 six silences: per-row rule -3 each (engine.213 halved), the width ladder bounds the engine to -6',
+    silentSunday === -18 && A.MOTION_LADDERS_.silence.owned.reduce(function (x, y) { return x + y; }, 0) === -6, String(silentSunday));
 }
 
 console.log('═══ G. v1.4 leave office — unfit node leaves the chair');
@@ -482,9 +490,9 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   check('P4b a parked complete row cannot pay even without prior data',
     A.classifyInitiativeMotion_('complete', 105, 105, null) === 'complete-held');
 
-  check('P5 sitting still scores -2 owned / -1 nearby at the first rung',
-    A.approvalDeltaForInitiative_('sitting', true, false).delta === -2 &&
-    A.approvalDeltaForInitiative_('sitting', false, false).delta === -1);
+  check('P5 sitting scores 0 owned / 0 nearby (engine.213: the seat is graded on the district, not the clock)',
+    A.approvalDeltaForInitiative_('sitting', true, false).delta === 0 &&
+    A.approvalDeltaForInitiative_('sitting', false, false).delta === 0);
   check('P6 an un-restamped NextActionCycle=105 row is silence at C106',
     A.classifyInitiativeMotion_('implementation-active', 105, 106, null) === 'silence');
 
@@ -498,14 +506,14 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
   // Portfolio-width ladders — the pile-on that took Santana 82→69.
   const L = A.MOTION_LADDERS_;
   const sum = function (a) { return a.reduce(function (x, y) { return x + y; }, 0); };
-  check('P9 sitting is width-capped at -4 owned / -2 nearby',
-    sum(L.sitting.owned) === -4 && sum(L.sitting.nearby) === -2, JSON.stringify(L.sitting));
+  check('P9 sitting ladder is empty — a scheduled row costs nothing (engine.213)',
+    sum(L.sitting.owned) === 0 && sum(L.sitting.nearby) === 0, JSON.stringify(L.sitting));
   check('P10 advanced mirrors it at +4 owned / +2 nearby',
     sum(L.advanced.owned) === 4 && sum(L.advanced.nearby) === 2, JSON.stringify(L.advanced));
-  check('P11 silence keeps its heavier v1.7 curve (-12 owned)',
-    sum(L.silence.owned) === -12 && sum(L.silence.nearby) === -7, JSON.stringify(L.silence));
+  check('P11 silence keeps a heavier curve than advancement pays (-6 owned / -3 nearby, engine.213 halved v1.7)',
+    sum(L.silence.owned) === -6 && sum(L.silence.nearby) === -3, JSON.stringify(L.silence));
   check('P12 no ladder can be farmed past its rungs',
-    L.sitting.owned.length === 3 && L.advanced.owned.length === 3);
+    L.silence.owned.length === 3 && L.advanced.owned.length === 3);
 
   // The C105 counterfactual: six rows, none moving, under the new ladder.
   const mayorFlat = C105.reduce(function (acc, row) {
@@ -513,8 +521,8 @@ console.log('═══ H. v1.5 demotion campaign — the drop is the vote');
     const rung = L[m] ? L[m].owned : null;
     return { n: acc.n + 1, total: acc.total + (rung ? (acc.n < rung.length ? rung[acc.n] : 0) : 0) };
   }, { n: 0, total: 0 });
-  check('P13 a fully-stalled C105 now costs -4, not -12',
-    mayorFlat.total === -4, String(mayorFlat.total));
+  check('P13 a fully-scheduled C105 costs 0 (engine.213), not -12 or -4',
+    mayorFlat.total === 0, String(mayorFlat.total));
 }
 
 // ── G-PF34: civic media is symmetric and inside the live range ───────────────

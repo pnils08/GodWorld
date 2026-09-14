@@ -2,7 +2,7 @@
   "generated": "2026-09-13",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1377,
+  "functionsMapped": 1386,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -826,7 +826,7 @@
         "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_"
       ],
       "readers": [
-        "phase01-config/engine94SheetContract.js::ensureEngine160Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine213Config_",
         "phase02-world-state/loadNeighborhoodState.js::loadNeighborhoodState_",
         "phase03-population/generateCrisisBuckets.js::generateCrisisBuckets_",
         "phase03-population/generateCrisisSpikes.js::crisisHoodWeight_",
@@ -852,6 +852,9 @@
         "phase05-citizens/runConductEngine.js::runConductEngine_",
         "phase05-citizens/runNeighborhoodEngine.js::hoodCrimeBar_",
         "phase05-citizens/runNeighborhoodEngine.js::runNeighborhoodEngine_",
+        "phase05-citizens/updateCivicApprovalRatings.js::cityStateMiddle_",
+        "phase05-citizens/updateCivicApprovalRatings.js::districtStateScore_",
+        "phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_",
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
         "phase06-analysis/economicRippleEngine.js::primarySportsZone_",
         "phase07-evening-media/buildEveningFood.js::eveningFoodHoodsByCharacter_",
@@ -4216,6 +4219,7 @@
         "phase01-config/engine94SheetContract.js::ensureEngine161Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine176Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine178Config_",
+        "phase01-config/engine94SheetContract.js::ensureEngine213Config_",
         "phase01-config/engine94SheetContract.js::ensureEngine94SheetContract_",
         "phase01-config/engine94SheetContract.js::ensureEngine96Config_",
         "phase01-config/godWorldEngine2.js::verifyCycleCountPersisted_",

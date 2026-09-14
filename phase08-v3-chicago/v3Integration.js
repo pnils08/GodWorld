@@ -94,7 +94,12 @@ function v3Integration_(ctx) {
     'storyHookEngine_': typeof storyHookEngine_ === 'function' ? storyHookEngine_ : null,
     'textureTriggerEngine_': typeof textureTriggerEngine_ === 'function' ? textureTriggerEngine_ : null,
     'chicagoSatelliteEngine_': typeof chicagoSatelliteEngine_ === 'function' ? chicagoSatelliteEngine_ : null,
-    'economicRippleEngine_': typeof economicRippleEngine_ === 'function' ? economicRippleEngine_ : null,
+    // engine.217 (2026-09-14, codex-directed): economicRippleEngine_ REMOVED —
+    // the economy is owned by Phase6-EconomicRipple (godWorldEngine2 L412 /
+    // L2156). This second run recalculated economicMood from the already-
+    // modified Phase-6 value (C107 log: mood 54.01 then 59.01), applying
+    // effects and neutral drift twice per cycle. Same disable pattern as the
+    // engine.57 P5 bondEngine_ removal below; the wrapper above stays callable.
     'mediaFeedbackEngine_': typeof mediaFeedbackEngine_ === 'function' ? mediaFeedbackEngine_ : null
     // engine.57 P5: bondEngine_ REMOVED — it already runs at Phase5-Bonds
     // (godWorldEngine2 L306/L1852); this second run re-rolled bond detection
@@ -136,8 +141,8 @@ function v3Integration_(ctx) {
   // 5. Chicago snapshot
   if (safeCall('chicagoSatelliteEngine_')) modulesRan.push('chicagoSatelliteEngine');
 
-  // 6. Economic ripple effects (v3.4: now has wrapper)
-  if (safeCall('economicRippleEngine_')) modulesRan.push('economicRippleEngine');
+  // 6. Economic ripple effects — engine.217: no longer runs here. Phase6-EconomicRipple
+  // is the single owner (see the registry note); the v3.4 wrapper is retained for callers.
 
   // 7. Media feedback loop (v3.4: now has wrapper)
   if (safeCall('mediaFeedbackEngine_')) modulesRan.push('mediaFeedbackEngine');
@@ -197,7 +202,8 @@ function v3Integration_(ctx) {
  * 3. storyHookEngine_ - Story hook generation
  * 4. textureTriggerEngine_ - Environmental texture triggers
  * 5. chicagoSatelliteEngine_ - Chicago satellite data
- * 6. economicRippleEngine_ - Economic ripple effects (→ runEconomicRippleEngine_)
+ * 6. economicRippleEngine_ - REMOVED from this scheduler (engine.217): Phase6-EconomicRipple
+ *    owns the economy; the wrapper (→ runEconomicRippleEngine_) remains callable
  * 7. mediaFeedbackEngine_ - Media feedback loop (→ runMediaFeedbackEngine_)
  * 8. bondEngine_ - Citizen relationships (→ runBondEngine_)
  * 9. generateNewArcs_ - Generate new story arcs

@@ -1,7 +1,7 @@
 ---
 title: Run-Cycle Packages the World to Its Readers Plan
 created: 2026-09-13
-updated: 2026-09-13
+updated: 2026-09-14
 type: plan
 tags: [engine, pipeline, citizen-loop, active]
 sources:
@@ -20,6 +20,8 @@ pointers:
 **Goal:** every artifact `/run-cycle` leaves on disk carries the whole engine's week for all 22 neighborhoods and 943 citizens to the crons that read it — the desk slices Monday 06:15, the citizen wakes three times a day, the Sunday civic chain — so that a resident of Laurel and a resident of Temescal each wake into their own street, not into "nothing much out of the ordinary."
 
 **Architecture:** the engine fires once (Apps Script, the builder's hand); the chain reads sheets once and writes the package (`world_summary`, `desk_signal`, `beats/*.jsonl`, `neighborhood_texture`, `world_state.json`, `baseline_briefs`, snapshots); the crons read only the package, never the sheets. This plan wires the package to the engine's full output. It replaces nothing; it closes the gaps between what the engine writes and what the readers get. The engine-side sibling (ten hoods missing from 25 hood literals) is engine.214 + a literal sweep, filed here as Task 4 so the two halves are tracked in one place.
+
+**Execution correction, 2026-09-14 (codex, Mike-direct):** Codex leads the simulation repairs; engine-sheet executes directed changes and readbacks. The broader instruction is to fix the sim, not to limit work to the missing-hood count. Fires are held. Task 7 corrects duplicated economic calculation before its output is wired across Cycles. Task 4's existing cluster cut is not authorization to fire: its embedded names and coefficients still require the truth-source repair.
 
 **Terminal:** engine/sheet (Tasks 1–3, 5, 6); engine/sheet on the bench for Task 4.
 
@@ -133,6 +135,17 @@ Three causes, not one:
 - **Question for the builder (sim, not code):** six hoods carry 2–7 citizens. Options: (a) leave engine.174's feeder at ~8/cycle and let time fill them; (b) raise the short-hood mint for N cycles; (c) mint authored anchors (a corner store owner, a school secretary) into each so the hood has a face. (c) is the "top-tier seats are authored" rule applied to places.
 - **Status:** [ ] waiting on ruling
 
+### Task 7: One economic calculation per Cycle (engine.217)
+
+- **Problem:** C107 ran the economy at Phase 6 and again inside Phase 8: the execution log records mood 54.01, then 59.01 (`output/execution_log_c107.txt:150`, `:168`). Phase 8 recalculates mood from the already-modified current value, so effects and neutral drift are applied twice (`phase06-analysis/economicRippleEngine.js:660-673`). A guard on ripple attribution only prevents duplicate ledger rows; it does not guard the calculation (`:234-243`, `:261-270`).
+- **Precise cut:** remove `economicRippleEngine_` from the `v3Integration_` registry and execution list. Phase6-EconomicRipple remains the owner in both schedulers. Keep the compatibility wrapper callable, and preserve the other integration modules. No coefficient, neighborhood assignment, phase order, or ledger schema changes in this cut. This follows the existing Phase-8 duplicate-bond removal (`phase08-v3-chicago/v3Integration.js:104-106`, `:150-151`).
+- **Files:** `phase08-v3-chicago/v3Integration.js`; `scripts/economicPhaseOwnership.test.js`; this plan, its `docs/index.md` entry, and ROLLOUT engine.217. Codex authors the regression and directs the substrate patch; engine-sheet applies and lands it.
+- **Wiring card, manually verified against source:** production owns economy at `phase01-config/godWorldEngine2.js:412` and later invokes integration at `:520`; the second entry point repeats these at `:2156` and `:2265`. Integration's wrapper calls the same engine at `phase08-v3-chicago/v3Integration.js:36-38`; the removed registry entry and scheduled duplicate are at `:97` and `:140` in pre-cut commit `75b45b5b`. The engine calculates neighborhood economies and employment at `phase06-analysis/economicRippleEngine.js:263-267`; emits attribution through `recordRipple_` at `:246`; and publishes `S.neighborhoodEconomies` at `:871`. Intervening migration mutates city mood at `phase06-analysis/applyMigrationDrift.js:498` and neighborhood mood at `:531-538`; the second economy calculation also overwrote these neighborhood consequences. Required Haiku runs: `output/agent_engine-wiring_2026-09-14T05-37-42.md` (neighborhood path) and `output/agent_engine-wiring_2026-09-14T05-39-20.md` (economy/integration investigation, turn limit reached before its final card). The latter is incomplete; the verified pointers here supply the missing card rather than treating the harness completion signal as proof.
+- **Regression:** `node scripts/economicPhaseOwnership.test.js` executes the actual scheduler call expressions, real economy, real intervening migration feedback, and real integration. Six scenarios cover both entry points and positive, negative, and recovery conditions across two Cycles. They compare mood, employment, neighborhood economies, ripple state, summary, random draws, attribution counts, and unrelated integration modules against one economic pass plus migration. All six fail before the patch (two calculations instead of one); all six pass after the cut. The final neighborhood mood must equal migration feedback's `afterMood`. Synthetic scenarios never reach external systems.
+- **Readback declaration:** one economy completion per Cycle; the economic state after Phase6-Migration survives Phase 8 unchanged; independent contraction and expansion effects remain visible. C107's already-recorded values are not rewritten. Removing a second calculation can change final mood, employment estimates, narrative descriptors, and downstream random draws; equality with the duplicated result is not an acceptance criterion. No fire until engine-sheet supplies a baseline isolated from the unfinished engine.214 cut and Codex directs the comparison.
+- **Next causal break, separate cut:** Phase 2 reads `S.neighborhoodEconomies` (`phase02-world-state/applyCityDynamics.js:98`), whose producer runs later in Phase 6; `finalizeCycleState_` carries city `econMood` and neighborhood dynamics but no neighborhood economies (`phase09-digest/finalizeCycleState.js:58`, `:94-103`). Reconnect only after the single-pass output and live range are verified. Media feedback also has two scheduled paths (`phase08-v3-chicago/v3Integration.js:42-44`, `:148`); inspect intervening inputs before changing its ownership.
+- **Status:** [~] substrate patch applied by engine-sheet and reviewed by codex; six scenarios pass across two Cycles in both entry points. Commit pending; bench/live fires held.
+
 ---
 
 ## Watch List (found while measuring, not in scope)
@@ -141,6 +154,8 @@ Three causes, not one:
 - `buildEveningFamous` / venues: every hood shows exactly 6 businesses on the ledger except Downtown 19, West Oakland 14, Baylight 12 — the 6 is a seed floor, so venue draws favour the three.
 
 ## Changelog
+
+- 2026-09-14 (codex) — Added Task 7 / engine.217 for the verified duplicate economy execution; recorded the failing regression, precise cut, wiring evidence, fire hold, and subsequent carry-path investigation.
 
 - 2026-09-13 S456 — created after the C107 chain and the texture v1.1.0 cut; baseline measured; causes split three ways.
 - 2026-09-14 S458 — Task 4 engine.214 cut: sheet-derived cluster membership + adjacency, all 22 hoods on their own dynamics track; test 20/20; bench fire waits on the live-C107 resync.

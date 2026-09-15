@@ -236,8 +236,38 @@ function storyHookEngine_(ctx) {
       for (var un in hookUsage_) {
         if (hookUsage_.hasOwnProperty(un) && hookUsage_[un] >= cap) capped[un] = true;
       }
+      var deskKeys = deskEntry_(domain).keys;
       suggestion = suggestStoryAngle_(themes, mapHookTypeToSignal_(hookType, domain),
-        hookUsage_, capped, deskEntry_(domain).keys);
+        hookUsage_, capped, deskKeys);
+      // engine.232b (S463, Mike-direct): a name on every row. The daily wakes
+      // reach a reporter only through the deck's name (beatSliceKit.hooksFor)
+      // or a type regex — the desk packet a blank row routes into is a
+      // run-cycle artifact no daily cron opens. When the theme scorer and the
+      // signal seat are both capped or off-floor, the row goes to the desk's
+      // least-used byline-eligible name (roster order breaks ties) instead of
+      // blank. Blank remains only when the whole desk is capped.
+      if ((!suggestion || !suggestion.journalist) && deskKeys && typeof getJournalistsByDesk_ === 'function') {
+        var pool = [];
+        for (var dk = 0; dk < deskKeys.length; dk++) {
+          var members = getJournalistsByDesk_(deskKeys[dk]) || [];
+          for (var mi = 0; mi < members.length; mi++) if (pool.indexOf(members[mi]) < 0) pool.push(members[mi]);
+        }
+        var pick = null, pickUse = Infinity;
+        for (var pi = 0; pi < pool.length; pi++) {
+          var cand = pool[pi];
+          if (capped[cand]) continue;
+          if (typeof bylineEligible_ === 'function' && !bylineEligible_(cand)) continue;
+          var use = hookUsage_[cand] || 0;
+          if (use < pickUse) { pick = cand; pickUse = use; }
+        }
+        if (pick) {
+          suggestion = {
+            journalist: pick, angle: 'desk rotation',
+            voiceGuidance: (typeof getVoiceGuidance_ === 'function' && getVoiceGuidance_(pick, 'feature')) || '',
+            confidence: 'low'
+          };
+        }
+      }
       if (suggestion && suggestion.journalist) {
         hookUsage_[suggestion.journalist] = (hookUsage_[suggestion.journalist] || 0) + 1;
         hookNamed_++;

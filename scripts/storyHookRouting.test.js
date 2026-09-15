@@ -88,6 +88,16 @@ const cm = {}; comm.forEach(h => { cm[h.suggestedJournalist] = (cm[h.suggestedJo
 console.log('  8 COMMUNITY moves: ' + JSON.stringify(cm));
 check('COMMUNITY stays on culture, Maria Keen named first and capped at 25% (min 2)', comm.every(h => !h.suggestedJournalist || onDesk(h.suggestedJournalist, 'culture')) && comm[0].suggestedJournalist === 'Maria Keen' && (cm['Maria Keen'] || 0) >= 2 && (cm['Maria Keen'] || 0) <= 3, JSON.stringify(cm));
 
+console.log('engine.232b — a name on every row');
+check('8 SPORTS: no blank (desk rotation fills)', sportsNames.every(Boolean) && Object.keys(tally).length >= 4, JSON.stringify(tally));
+check('8 CIVIC: no blank', civic.every(h => h.suggestedJournalist), JSON.stringify(ct));
+check('8 COMMUNITY: no blank, filled names are culture-desk', comm.every(h => h.suggestedJournalist && onDesk(h.suggestedJournalist, 'culture')), JSON.stringify(cm));
+check('the rotation fill is marked low confidence / desk rotation', comm.some(h => h.matchConfidence === 'low' && h.suggestedAngle === 'desk rotation'));
+const big = run(mk('CITIZEN_RELOCATED', 'COMMUNITY', 40));
+const bt = {}; big.forEach(h => { const n = h.suggestedJournalist || '(blank)'; bt[n] = (bt[n] || 0) + 1; });
+console.log('  40 COMMUNITY moves: ' + JSON.stringify(bt));
+check('40 COMMUNITY: no blank, no name above 25% + 1', !bt['(blank)'] && Math.max(...Object.values(bt)) <= 11, JSON.stringify(bt));
+
 console.log('engine.190 — a high-severity world event hooks');
 (function () {
   const ctx = { config: { cycleCount: 110 }, summary: { absoluteCycle: 110, cycleOfYear: 6, storyHooks: [], eventArcs: [],

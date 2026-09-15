@@ -100,6 +100,9 @@
   Sheets: World_Config
 
 - **ensureEngine213Config_(ss)**
+  Sheets: World_Config
+
+- **ensureEngine221Config_(ss)**
   Reads: S.neighborhoodState
   Sheets: World_Config
 
@@ -244,8 +247,12 @@
   Writes: S.previousEvening
 
 - **loadPreviousCycleState_(ctx)**
-  Reads: S.previousCycleState
+  Reads: S.economicMood, S.previousCycleState
   Writes: S.previousCycleState
+
+- **seedCarriedEconomicMood_(S)**
+  Reads: S.economicMood, S.previousCycleState
+  Writes: S.economicMood, S.economicMoodDesc
 
 - **restoreCarriedRipples_(S)**
   Reads: S.economicRipples, S.initiativeRipples, S.previousCycleState
@@ -2336,7 +2343,11 @@
 
 - **calculateEconomicMood_(ctx)**
   Reads: S.cityDynamics, S.economicMood, S.economicRipples
-  Writes: S.economicMood, S.economicMoodDesc
+  Writes: S.economicMood, S.economicMoodDesc, S.economicMoodLevel
+
+- **describeEconomicMood_(mood)**
+
+- **getEconMoodCarryConfig_(ctx)**
 
 - **deriveEmploymentRate_(ctx)**
   Reads: S.derivedEmploymentRate, S.economicMood
@@ -4017,4 +4028,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1391
+**Functions mapped:** 1395

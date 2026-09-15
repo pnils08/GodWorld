@@ -137,6 +137,27 @@ function ensureEngine213Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.221 (S461) - the city economic mood has memory. Phase 6 computes this
+// Cycle's level from base 50 as before and the carried mood closes this share
+// of the gap to it. Same self-arm contract; getEconMoodCarryConfig_ asserts it.
+var ENGINE221_CONFIG_SEEDS = [
+  ['econMoodInertia', 0.3, 'engine.221 share of the gap between last Cycle\'s carried city economic mood and this Cycle\'s computed level closed at Phase 6 (a mood with memory; 0.3 ≈ 3-4 Cycles to settle; 1 = no memory, the pre-221 behaviour)', 0.05, 1, false]
+];
+
+function ensureEngine221Config_(ss) {
+  if (!ss) throw new Error('engine.221 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.221 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE221_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE221_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.221 config: post-write verification failed');
+  }
+  Logger.log('engine.221 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 var ENGINE176_CONFIG_SEEDS = [
   ['dialFrictionRentBurden', 50, 'engine.176 rent as % of household income above which an unbuffered renter takes a pressure tag (Friction, then Strain) — the negative pole from a cause', 10, 90, false],
   ['dialSetbackLossPct', 5, 'engine.176 a lost casino stake at/over this % of the citizen\'s net worth logs [Setback] instead of the ordinary [Casino] loss line', 1, 50, false],

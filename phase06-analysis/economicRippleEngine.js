@@ -154,7 +154,7 @@ function runEconomicRippleEngine_(ctx) {
   S._rng = rng;
 
   S.economicRipples = S.economicRipples || [];
-  S.economicMood = S.economicMood || 50;
+  if (typeof S.economicMood !== 'number') S.economicMood = 50;  // engine.221: a carried 0 is a value
   S.neighborhoodEconomies = S.neighborhoodEconomies || {};
   
   var currentCycle = S.cycleId || ctx.config.cycleCount || 0;
@@ -657,7 +657,17 @@ function calculateEconomicMood_(ctx) {
   var cal = ctx.economicCalendarContext || {};
   var migCtx = ctx.economicMigrationContext || {};
   
-  var baseMood = S.economicMood || 50;
+  // engine.221: the mood has memory. `S.economicMood` here is last Cycle's
+  // persisted mood (seeded at Phase 1 by seedCarriedEconomicMood_). The block
+  // below computes this Cycle's LEVEL from base 50 exactly as before - every
+  // term in it (ripples, retail, migration, calendar) is a level, not a rate -
+  // and the carried mood then closes World_Config.econMoodInertia of the gap
+  // to that level. Inertia 1 == the pre-221 output byte for byte. A plain carry
+  // (base = prev) would turn +1 summer / +2 playoffs into a per-Cycle tax and
+  // pin at 100 in ~15 Cycles (SIM_DOCTRINE section 15).
+  var carriedMood = (typeof S.economicMood === 'number') ? S.economicMood : 50;
+  var inertia = getEconMoodCarryConfig_(ctx).inertia;
+  var baseMood = 50;
   var rippleEffect = 0;
   
   for (var i = 0; i < S.economicRipples.length; i++) {
@@ -725,21 +735,46 @@ function calculateEconomicMood_(ctx) {
     newMood -= 2;
   }
   
+  // engine.221: close `inertia` of the gap from the carried mood to this Cycle's level
+  var levelMood = Math.max(0, Math.min(100, newMood));
+  S.economicMoodLevel = Math.round(levelMood * 100) / 100;
+  newMood = carriedMood + inertia * (levelMood - carriedMood);
+
   // Clamp
   S.economicMood = Math.round(Math.max(0, Math.min(100, newMood)) * 100) / 100;
   
   // Descriptor
-  if (S.economicMood >= 70) {
-    S.economicMoodDesc = 'booming';
-  } else if (S.economicMood >= 55) {
-    S.economicMoodDesc = 'optimistic';
-  } else if (S.economicMood >= 45) {
-    S.economicMoodDesc = 'stable';
-  } else if (S.economicMood >= 30) {
-    S.economicMoodDesc = 'uncertain';
-  } else {
-    S.economicMoodDesc = 'struggling';
+  S.economicMoodDesc = describeEconomicMood_(S.economicMood);
+}
+
+
+/** engine.221: one descriptor scale for the city economic mood (Phase 1 seed + Phase 6). */
+function describeEconomicMood_(mood) {
+  if (mood >= 70) return 'booming';
+  if (mood >= 55) return 'optimistic';
+  if (mood >= 45) return 'stable';
+  if (mood >= 30) return 'uncertain';
+  return 'struggling';
+}
+
+
+/**
+ * engine.221: World_Config.econMoodInertia, self-armed by ensureEngine221Config_
+ * before Phase 1 (engine94SheetContract.js). Same contract as engine.213's
+ * approval keys: missing or out of range fails loud (ADR-0015 rule 4).
+ */
+function getEconMoodCarryConfig_(ctx) {
+  if (ctx && ctx._econMoodCarryConfig) return ctx._econMoodCarryConfig;
+  var source = ctx && ctx.config;
+  if (!source) throw new Error('econ mood carry: ctx.config required');
+  var raw = source.econMoodInertia;
+  var value = Number(raw);
+  if (raw === '' || raw === null || raw === undefined || !isFinite(value) || value < 0.05 || value > 1) {
+    throw new Error('econ mood carry: invalid or missing World_Config.econMoodInertia');
   }
+  var config = { inertia: value };
+  if (ctx) ctx._econMoodCarryConfig = config;
+  return config;
 }
 
 

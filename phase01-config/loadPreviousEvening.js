@@ -259,6 +259,7 @@ function loadPreviousCycleState_(ctx) {
       S.previousCycleState = JSON.parse(json);
       Logger.log('loadPreviousCycleState_: Restored state from cycle ' + (S.previousCycleState.cycle || '?'));
       restoreCarriedRipples_(S);
+      seedCarriedEconomicMood_(S);
     } else {
       S.previousCycleState = null;
       Logger.log('loadPreviousCycleState_: No previous cycle state found (first cycle or cleared)');
@@ -267,6 +268,26 @@ function loadPreviousCycleState_(ctx) {
     S.previousCycleState = null;
     Logger.log('loadPreviousCycleState_: Failed - ' + e.message);
   }
+}
+
+
+/**
+ * seedCarriedEconomicMood_ (engine.221)
+ *
+ * The Cycle opens on last Cycle's persisted city economic mood. Before this,
+ * nothing wrote S.economicMood until Phase 6, so all 41 Phase 2-5 readers
+ * (`S.economicMood || 50`) saw 50 every Cycle and Phase 6 recomputed the mood
+ * from base 50 - the carry was serialized (finalizeCycleState_) and read only
+ * by the money loop and the shock monitor. A carried 0 is a value: typeof, not
+ * falsiness. Only seeds when Phase 6 has not run yet (back-to-back runs in one
+ * execution keep their in-memory mood).
+ */
+function seedCarriedEconomicMood_(S) {
+  var prev = S.previousCycleState || {};
+  if (typeof prev.econMood !== 'number' || !isFinite(prev.econMood)) return;
+  if (typeof S.economicMood === 'number') return;
+  S.economicMood = prev.econMood;
+  S.economicMoodDesc = describeEconomicMood_(prev.econMood);
 }
 
 

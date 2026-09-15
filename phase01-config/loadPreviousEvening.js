@@ -124,8 +124,20 @@ function readCarryForwardFromSheet_(ctx, key, beforeCycle) {
  */
 function saveCarryForwardBlob_(ctx, key, json, cycle) {
   var props = PropertiesService.getScriptProperties();
-  props.setProperty(key, json);
-  props.setProperty(key + '_CYCLE', String(Number(cycle) || 0));
+  // engine.223: PropertiesService caps a value at 9 KB. Before this, an oversize
+  // blob threw HERE, before the sheet mirror ran — the ring never got the Cycle,
+  // the prop kept the prior Cycle's stamp (no ghost), and the next fire opened on
+  // a two-Cycle-old world. Now the prop layer is best-effort: when it refuses,
+  // the stale prop is deleted so the loader's sheet fallback engages, and the
+  // ring (49,900-char cells) is always written.
+  try {
+    props.setProperty(key, json);
+    props.setProperty(key + '_CYCLE', String(Number(cycle) || 0));
+  } catch (e) {
+    try { props.deleteProperty(key); props.deleteProperty(key + '_CYCLE'); } catch (e2) {}
+    Logger.log('saveCarryForwardBlob_: ' + key + ' prop refused (' + json.length + ' chars: ' + e.message + ') — prop cleared, Carry_Forward_Store ring carries cycle ' + cycle);
+    CARRY_FORWARD_DIAG.push({ key: key, event: 'prop-too-large', bytes: json.length, cycle: Number(cycle) || 0 });
+  }
   mirrorCarryForwardToSheet_(ctx, key, json, cycle);
 }
 

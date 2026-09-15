@@ -279,6 +279,7 @@ function loadPreviousCycleState_(ctx) {
       Logger.log('loadPreviousCycleState_: Restored state from cycle ' + (S.previousCycleState.cycle || '?'));
       restoreCarriedRipples_(S);
       seedCarriedEconomicMood_(S);
+      seedCarriedNeighborhoodEconomies_(ctx, S);
     } else {
       S.previousCycleState = null;
       Logger.log('loadPreviousCycleState_: No previous cycle state found (first cycle or cleared)');
@@ -307,6 +308,42 @@ function seedCarriedEconomicMood_(S) {
   if (typeof S.economicMood === 'number') return;
   S.economicMood = prev.econMood;
   S.economicMoodDesc = describeEconomicMood_(prev.econMood);
+}
+
+
+/**
+ * seedCarriedNeighborhoodEconomies_ (engine.219)
+ *
+ * The Cycle opens on last Cycle's per-hood economic mood. Phase 2
+ * (applyCityDynamics_) reads S.neighborhoodEconomies before the Phase-6
+ * producer runs and nothing carried it, so it was `{}` every Cycle — the
+ * cluster-economy and per-hood micro branches never fired, and migration's
+ * post-Phase-6 ±2 died at the boundary. Own key (PREV_HOOD_ECON_JSON, ~400
+ * chars); a missing blob (first fire on this code) is a graceful no-op, not an
+ * abort — assertCarryForwardPresent_ gates only the two original keys. Phase 6
+ * replaces the carried set with this Cycle's production (no stacking).
+ */
+function seedCarriedNeighborhoodEconomies_(ctx, S) {
+  if (S.neighborhoodEconomies && Object.keys(S.neighborhoodEconomies).length) return;
+  var json = null;
+  try { json = loadCarryForwardBlob_(ctx, 'PREV_HOOD_ECON_JSON', carryForwardCycleId_(ctx)); } catch (e) { json = null; }
+  if (!json) return;
+  var carried;
+  try { carried = JSON.parse(json); } catch (e) { return; }
+  if (!carried || typeof carried !== 'object') return;
+  var out = {};
+  var n = 0;
+  for (var hood in carried) {
+    if (!carried.hasOwnProperty(hood)) continue;
+    var mood = Number(carried[hood]);
+    if (!isFinite(mood)) continue;
+    out[hood] = { mood: mood, descriptor: describeHoodEconomy_(mood), activeRipples: 0, sectors: [], isHolidayZone: false, isSportsZone: false, carried: true };
+    n++;
+  }
+  if (n) {
+    S.neighborhoodEconomies = out;
+    Logger.log('seedCarriedNeighborhoodEconomies_: ' + n + ' hood(s) opened on last Cycle\'s economic mood');
+  }
 }
 
 

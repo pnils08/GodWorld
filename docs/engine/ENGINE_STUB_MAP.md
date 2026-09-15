@@ -251,8 +251,12 @@
   Writes: S.previousCycleState
 
 - **seedCarriedEconomicMood_(S)**
-  Reads: S.economicMood, S.previousCycleState
+  Reads: S.economicMood, S.neighborhoodEconomies, S.previousCycleState
   Writes: S.economicMood, S.economicMoodDesc
+
+- **seedCarriedNeighborhoodEconomies_(ctx, S)**
+  Reads: S.neighborhoodEconomies
+  Writes: S.neighborhoodEconomies
 
 - **restoreCarriedRipples_(S)**
   Reads: S.economicRipples, S.initiativeRipples, S.previousCycleState
@@ -2347,6 +2351,8 @@
   Reads: S.cityDynamics, S.economicMood, S.economicRipples
   Writes: S.economicMood, S.economicMoodDesc, S.economicMoodLevel
 
+- **describeHoodEconomy_(mood)**
+
 - **describeEconomicMood_(mood)**
 
 - **getEconMoodCarryConfig_(ctx)**
@@ -2932,7 +2938,9 @@
   Reads: S.eveningSnapshot, S.previousCycleState
 
 - **savePreviousCycleState_(ctx)**
-  Reads: S.previousCycleState
+  Reads: S.neighborhoodEconomies, S.previousCycleState
+
+- **compactNeighborhoodEconomies_(ne)**
 
 - **compactNeighborhoodDynamics_(nd)**
 
@@ -4030,4 +4038,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1396
+**Functions mapped:** 1399

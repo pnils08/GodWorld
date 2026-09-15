@@ -2,7 +2,7 @@
   "generated": "2026-09-14",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1396,
+  "functionsMapped": 1399,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1749,6 +1749,24 @@
         "phase06-analysis/economicRippleEngine.js::generateEconomicSummary_"
       ]
     },
+    "neighborhoodEconomies": {
+      "writers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedNeighborhoodEconomies_",
+        "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
+        "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
+        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_"
+      ],
+      "readers": [
+        "phase01-config/loadPreviousEvening.js::seedCarriedEconomicMood_",
+        "phase01-config/loadPreviousEvening.js::seedCarriedNeighborhoodEconomies_",
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
+        "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
+        "phase06-analysis/economicRippleEngine.js::generateEconomicSummary_",
+        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase09-digest/finalizeCycleState.js::savePreviousCycleState_",
+        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
+      ]
+    },
     "economicRipples": {
       "writers": [
         "phase01-config/loadPreviousEvening.js::restoreCarriedRipples_",
@@ -1992,20 +2010,6 @@
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_"
-      ]
-    },
-    "neighborhoodEconomies": {
-      "writers": [
-        "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
-        "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
-        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_"
-      ],
-      "readers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_",
-        "phase06-analysis/economicRippleEngine.js::generateEconomicSummary_",
-        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
-        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_"
       ]
     },
     "neighborhoodWeather": {

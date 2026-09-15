@@ -439,6 +439,14 @@ function savePreviousCycleState_(ctx) {
     var json = JSON.stringify(snapshot);
     saveCarryForwardBlob_(ctx, 'PREV_CYCLE_STATE_JSON', json, snapshot.cycle);  // engine.122 layer 2 + engine.119 T3 cycle stamp
     Logger.log('savePreviousCycleState_: Saved ' + json.length + ' bytes for cycle ' + snapshot.cycle);
+    // engine.219: the per-hood economic mood rides its OWN key — PREV_CYCLE_STATE_JSON
+    // sits ~8.2 KB against the 9 KB prop cap; 22 hoods here are ~400 chars.
+    var hoodEcon = compactNeighborhoodEconomies_(S.neighborhoodEconomies);
+    if (hoodEcon) {
+      var hoodJson = JSON.stringify(hoodEcon);
+      saveCarryForwardBlob_(ctx, 'PREV_HOOD_ECON_JSON', hoodJson, snapshot.cycle);
+      Logger.log('savePreviousCycleState_: Saved ' + hoodJson.length + ' bytes of hood economies for cycle ' + snapshot.cycle);
+    }
   } catch (e) {
     Logger.log('savePreviousCycleState_: Failed - ' + e.message);
   }
@@ -449,6 +457,25 @@ function savePreviousCycleState_(ctx) {
  * Compact neighborhoodDynamics to core metrics for next cycle's momentum blend.
  * Keeps sentiment, nightlife, retail, tourism per neighborhood.
  */
+/**
+ * engine.219: {hood: mood} to one decimal — the one number Phase 2 reads next
+ * Cycle. Descriptor, ripple count, sectors and zone flags are recomputed by the
+ * producer every Cycle and by the seed on load (describeHoodEconomy_).
+ */
+function compactNeighborhoodEconomies_(ne) {
+  if (!ne) return null;
+  var out = {};
+  var n = 0;
+  for (var hood in ne) {
+    if (!ne.hasOwnProperty(hood) || !ne[hood]) continue;
+    var mood = Number(ne[hood].mood);
+    if (!isFinite(mood)) continue;
+    out[hood] = Math.round(mood * 10) / 10;
+    n++;
+  }
+  return n ? out : null;
+}
+
 function compactNeighborhoodDynamics_(nd) {
   if (!nd) return null;
   var compact = {};

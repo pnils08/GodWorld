@@ -768,6 +768,16 @@ function calculateEconomicMood_(ctx) {
 }
 
 
+/** engine.219: one descriptor scale for a hood's economic mood (Phase 1 seed + Phase 6 producer). */
+function describeHoodEconomy_(mood) {
+  if (mood >= 65) return 'thriving';
+  if (mood >= 55) return 'growing';
+  if (mood >= 45) return 'stable';
+  if (mood >= 35) return 'sluggish';
+  return 'struggling';
+}
+
+
 /** engine.221: one descriptor scale for the city economic mood (Phase 1 seed + Phase 6). */
 function describeEconomicMood_(mood) {
   if (mood >= 70) return 'booming';
@@ -904,12 +914,7 @@ function calculateNeighborhoodEconomies_(ctx) {
     
     localMood = Math.round(Math.max(0, Math.min(100, localMood)) * 100) / 100;
     
-    var desc = 'stable';
-    if (localMood >= 65) desc = 'thriving';
-    else if (localMood >= 55) desc = 'growing';
-    else if (localMood >= 45) desc = 'stable';
-    else if (localMood >= 35) desc = 'sluggish';
-    else desc = 'struggling';
+    var desc = describeHoodEconomy_(localMood);
     
     nhEconomies[nh] = {
       mood: localMood,

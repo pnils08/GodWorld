@@ -1,0 +1,149 @@
+{
+ "readAt": "2026-09-15T07:40:29.882Z",
+ "bench": "SANDBOX 0908 1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM",
+ "cycle": 107,
+ "cycleCount": "107",
+ "engineErrorsRows": 0,
+ "engineErrorsTail": [
+  "Timestamp | Cycle | Phase | Error | Stack | Class | Source | Severity | Resolved | Hash"
+ ],
+ "ringKeys": [
+  "CHAOS_NBHD_FOLD_JSON@105",
+  "PREV_EVENING_JSON@105",
+  "PREV_CYCLE_STATE_JSON@105",
+  "CHAOS_NBHD_FOLD_JSON@106",
+  "PREV_EVENING_JSON@106",
+  "PREV_CYCLE_STATE_JSON@106",
+  "CHAOS_NBHD_FOLD_JSON@107",
+  "PREV_EVENING_JSON@107",
+  "PREV_CYCLE_STATE_JSON@107"
+ ],
+ "hoodBlob": "MISSING for cycle 107",
+ "stateChars": 7348,
+ "econMood": 59.01,
+ "sentiment": 0.51,
+ "cycleWeight": "high-signal",
+ "neighborhoodDynamics": {
+  "Downtown": {
+   "sentiment": 0.19500960000000003,
+   "retail": 1.4236066083635204
+  },
+  "Uptown": {
+   "sentiment": 0.1790856,
+   "retail": 1.38667528781824
+  },
+  "KONO": {
+   "sentiment": 0.1790856,
+   "retail": 1.1929662024938021
+  },
+  "Chinatown": {
+   "sentiment": 0.1790856,
+   "retail": 1.2912019366641705
+  },
+  "Jack London": {
+   "sentiment": 0.18713460000000004,
+   "retail": 1.18399367733248
+  },
+  "West Oakland": {
+   "sentiment": 0.34709460000000003,
+   "retail": 1.32284954411008
+  },
+  "Lake Merritt": {
+   "sentiment": 0.1711476,
+   "retail": 1.1580929043255574
+  },
+  "Piedmont Ave": {
+   "sentiment": 0.1711476,
+   "retail": 1.1339867101528214
+  },
+  "Rockridge": {
+   "sentiment": 0.17398260000000002,
+   "retail": 1.3339899504484232
+  },
+  "Temescal": {
+   "sentiment": 0.2419986,
+   "retail": 1.4317080531353603
+  },
+  "Fruitvale": {
+   "sentiment": 0.2859996,
+   "retail": 1.2075975670169599
+  },
+  "Laurel": {
+   "sentiment": 0.1706436,
+   "retail": 1.0802505128593953
+  }
+ },
+ "stateKeys": [
+  "cycle",
+  "events",
+  "chaosCount",
+  "sentiment",
+  "econMood",
+  "pattern",
+  "shockFlag",
+  "shockStartCycle",
+  "civicLoad",
+  "civicLoadScore",
+  "weatherType",
+  "weatherImpact",
+  "cycleWeight",
+  "cycleWeightScore",
+  "recoveryLevel",
+  "overloadScore",
+  "activeCooldowns",
+  "holiday",
+  "holidayPriority",
+  "isFirstFriday",
+  "isCreationDay",
+  "sportsSeason",
+  "season",
+  "mediaEffects",
+  "neighborhoodDynamics",
+  "domainPresence",
+  "dominantDomain",
+  "economicRipples",
+  "initiativeRipples",
+  "initiativePhases",
+  "approvalHoodMoodEma",
+  "migrationDrift",
+  "migrationDriftFactors",
+  "bankRate",
+  "crimeSpikes",
+  "weatherTracking",
+  "weatherFrontTracking",
+  "transitDisrupted",
+  "crisisArcs",
+  "hospitalEvents",
+  "businessDynamics"
+ ],
+ "migrationFlow": {
+  "Downtown": "5",
+  "Temescal": "4",
+  "Laurel": "2",
+  "West Oakland": "-1",
+  "Fruitvale": "3",
+  "Jack London": "3",
+  "Rockridge": "3",
+  "Adams Point": "-1",
+  "Grand Lake": "3",
+  "Piedmont Ave": "2",
+  "Chinatown": "-1",
+  "Brooklyn": "-2",
+  "Eastlake": "-2",
+  "Glenview": "-2",
+  "Dimond": "1",
+  "Ivy Hill": "2",
+  "San Antonio": "-3",
+  "KONO": "2",
+  "Lake Merritt": "2",
+  "Uptown": "3",
+  "Baylight District": "-3",
+  "East Oakland": "-3"
+ },
+ "rileyDigest": {
+  "Cycle": "107",
+  "CycleWeight": "high-signal",
+  "CycleWeightReason": "1 high-severity event(s); High event volume (11); Notable weather impact; Very positive sentiment; Civic load strain.",
+  "CitySentiment": "0.51"
+ }
+}

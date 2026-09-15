@@ -2337,6 +2337,8 @@
 - **detectNewRipples_(ctx, currentCycle)**
   Reads: S.citizenEvents, S.crisisSpikes, S.domainPresence, S.weather, S.worldEvents
 
+- **isConstructionBoom_(evt, evtText)**
+
 - **isBusinessClosure_(evt, evtText)**
 
 - **createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, cal)**
@@ -4038,4 +4040,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1399
+**Functions mapped:** 1400

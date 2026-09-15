@@ -402,6 +402,10 @@ function applyMigrationDrift_(ctx) {
   // own middle. Ratio for the strictly-positive metrics; absolute offset for
   // sentiment, which centres near zero and would make a ratio meaningless.
   var HI = 1.15, LO = 0.85, SENT_BAND = 0.05;
+  // engine.225: hood economic moods sit within ±3 of their own median (54–57 on the 219 bench),
+  // so a ratio band (±8 points at 55) could never fire — an absolute offset, like sentiment's.
+  // 1.5 = half the observed full spread.
+  var MOOD_BAND = 1.5;
 
   // The city-wide term is a TILT, not the baseline. It was Math.round(drift / 8)
   // — at the C110 drift of 21 that spent 3 of the ±5 range before a single local
@@ -432,8 +436,8 @@ function applyMigrationDrift_(ctx) {
     if (medEvent > 0 && eventAttract >= medEvent * HI) { nhDrift += rInt(2); }
     else if (medEvent > 0 && eventAttract <= medEvent * LO) { nhDrift -= rInt(1); }
 
-    if (medMood > 0 && nhEcon.mood >= medMood * HI) { nhDrift += rInt(2); }
-    else if (medMood > 0 && nhEcon.mood <= medMood * LO) { nhDrift -= rInt(2); }
+    if (medMood > 0 && nhEcon.mood - medMood >= MOOD_BAND) { nhDrift += rInt(2); }
+    else if (medMood > 0 && nhEcon.mood - medMood <= -MOOD_BAND) { nhDrift -= rInt(2); }
 
     // Descriptor stays absolute — 'thriving'/'struggling' are named states, not
     // a scale that can drift out from under a threshold.
@@ -526,14 +530,16 @@ function applyMigrationDrift_(ctx) {
       if (rawNhDelta > 0 && econ.descriptor === 'struggling') rawNhDelta = rawNhDelta * 0.6;
       if (rawNhDelta < 0 && econ.descriptor === 'thriving') rawNhDelta = rawNhDelta * 0.6;
 
-      var delta = Math.round(clamp(rawNhDelta, -nhFeedbackMaxDelta, nhFeedbackMaxDelta));
+      // engine.225: delta and mood keep one decimal — the integer round moved hoods by up to
+      // ±0.5 on the 219 bench, the size of the ±2-max signal it carries. Descriptor on the one
+      // scale (describeHoodEconomy_, economicRippleEngine.js), not a 70/30 re-derivation that
+      // dropped growing / sluggish for every Phase 6–9 reader.
+      var delta = Math.round(clamp(rawNhDelta, -nhFeedbackMaxDelta, nhFeedbackMaxDelta) * 10) / 10;
       var beforeMood = Number(econ.mood || 50);
-      var afterMood = clamp(Math.round(beforeMood + delta), 0, 100);
+      var afterMood = clamp(Math.round((beforeMood + delta) * 10) / 10, 0, 100);
 
       econ.mood = afterMood;
-      if (afterMood >= 70) econ.descriptor = 'thriving';
-      else if (afterMood <= 30) econ.descriptor = 'struggling';
-      else econ.descriptor = 'stable';
+      econ.descriptor = describeHoodEconomy_(afterMood);
 
       S.neighborhoodEconomies[hood] = econ;
 
@@ -817,7 +823,7 @@ function renderMigrationBrief_(ctx) {
  * | RetailVitality <= 0.85x median   | -0 to -2 (outflow)      |
  * | EventAttract >= 1.15x median     | +0 to +2 (inflow)       |
  * | EventAttract <= 0.85x median     | -0 to -1 (outflow)      |
- * | economicMood >= / <= 1.15/0.85x  | +/- 0 to 2              |
+ * | hood mood >= / <= median ± 1.5   | +/- 0 to 2 (engine.225: offset, not ratio) |
  * | descriptor thriving / struggling | +/- 0 to 2 (named state, stays absolute) |
  * City-wide term is a TILT: Math.round(migrationDrift / 25), +/-2 at the extremes.
  *

@@ -96,6 +96,13 @@ function applyCityDynamics_(ctx) {
 
   // Neighborhood economies (optional)
   var neighborhoodEconomies = S.neighborhoodEconomies || {};
+  // engine.225: every hood-economy consumer in this file prices a hood against the hoods' OWN
+  // median, not an absolute bar. Hood moods sit within ±3 of the city (54–57 round 55.83 on the
+  // engine.219 bench; the city has lived 48–59), so the old ≥60/≥70/≤40/≤30 bars could only fire
+  // when the whole city moved — a city gate wearing a hood's clothes (§15). With 17 of 22 hoods
+  // at the city value the median IS that value, so only a rippled hood carries a delta — the
+  // engine.212 self-relative shape. null = nothing carried yet (first fire): no relative term.
+  var hoodMoodMedian = hoodMoodMedian_(neighborhoodEconomies);
 
   // Observations (optional)
   var worldEvents = S.worldEvents || [];
@@ -523,13 +530,39 @@ function applyCityDynamics_(ctx) {
     var mood = safeNum_(hoodEconomy.mood, 50);
     var desc = String(hoodEconomy.descriptor || 'stable');
 
+    // engine.225: priced by how far this hood sits from the hoods' own median — continuous,
+    // capped at the old inner tier's size (retail ±6%, sentiment ±0.05, reached at |delta| 5–6).
+    // The old ≥60 "ahead" tier is this term now. delta null/absent = nothing carried: no term.
+    var delta = (hoodEconomy.delta === null || hoodEconomy.delta === undefined) ? 0 : clamp(safeNum_(hoodEconomy.delta, 0), -6, 6);
+    if (delta !== 0) {
+      m.retail *= (1 + 0.01 * delta);
+      m.sentiment += clamp(0.01 * delta, -0.05, 0.05);
+      if (delta >= 3) m.tourism *= 1.02;
+      else if (delta <= -3) m.tourism *= 0.98;
+    }
+
+    // Named states stay absolute: a boom or a depression is a state a cause can still put a
+    // hood in (a FACTORY_CLOSURE ripple is −20), not a rank.
     if (mood >= 70) { m.retail *= 1.06; m.sentiment += 0.05; m.tourism *= 1.04; }
-    else if (mood >= 60) { m.retail *= 1.03; m.sentiment += 0.02; }
     else if (mood <= 30) { m.retail *= 0.90; m.sentiment -= 0.30; m.tourism *= 0.93; }  // engine.185: a depression
     else if (mood <= 40) { m.retail *= 0.95; m.sentiment -= 0.12; }
 
     if (desc === 'thriving') { m.retail *= 1.04; m.culturalActivity *= 1.03; }
     if (desc === 'struggling') { m.retail *= 0.95; m.sentiment -= 0.07; }
+  }
+
+  /** engine.225: median of the carried hood moods; null when nothing is carried. */
+  function hoodMoodMedian_(econ) {
+    var vals = [];
+    for (var h in econ) {
+      if (!econ.hasOwnProperty(h) || !econ[h] || econ[h].mood === undefined) continue;
+      var v = Number(econ[h].mood);
+      if (isFinite(v)) vals.push(v);
+    }
+    if (!vals.length) return null;
+    vals.sort(function(a, b) { return a - b; });
+    var mid = Math.floor(vals.length / 2);
+    return (vals.length % 2) ? vals[mid] : (vals[mid - 1] + vals[mid]) / 2;
   }
 
   function applyObservedFeedback_(m, obs) {
@@ -1104,11 +1137,13 @@ function applyCityDynamics_(ctx) {
     }
     if (econCount > 0) {
       var avgMood = econMoodSum / econCount;
+      var avgDelta = (hoodMoodMedian === null) ? null : (avgMood - hoodMoodMedian);
       applyEconomyLocal_(m, {
         mood: avgMood,
-        descriptor: (avgMood >= 70 ? 'thriving' : (avgMood <= 30 ? 'struggling' : 'stable'))
+        descriptor: describeHoodEconomy_(avgMood),   // engine.225: the one scale (economicRippleEngine.js), not a 70/30 re-derivation
+        delta: avgDelta
       });
-      m.economy = { mood: round2(avgMood) };
+      m.economy = { mood: round2(avgMood), delta: (avgDelta === null) ? null : round2(avgDelta) };
     }
 
     // Observed feedback
@@ -1326,11 +1361,17 @@ function applyCityDynamics_(ctx) {
         }
       }
 
-      // Economy micro
+      // Economy micro — engine.225: relative to the hoods' own median at half the cluster
+      // pricing; the boom / depression overlays stay absolute (named states).
       var e0 = neighborhoodEconomies[nhood];
       if (e0 && e0.mood !== undefined) {
-        if (e0.mood >= 70) { nm.retail *= 1.03; nm.sentiment += 0.02; }
-        else if (e0.mood <= 30) { nm.retail *= 0.95; nm.sentiment -= 0.20; }  // engine.185: local depression
+        var e0mood = safeNum_(e0.mood, 50);
+        if (hoodMoodMedian !== null) {
+          var d0 = clamp(e0mood - hoodMoodMedian, -6, 6);
+          if (d0 !== 0) { nm.retail *= (1 + 0.005 * d0); nm.sentiment += clamp(0.005 * d0, -0.03, 0.03); }
+        }
+        if (e0mood >= 70) { nm.retail *= 1.03; nm.sentiment += 0.02; }
+        else if (e0mood <= 30) { nm.retail *= 0.95; nm.sentiment -= 0.20; }  // engine.185: local depression
       }
 
       // Neighborhood-specific crime

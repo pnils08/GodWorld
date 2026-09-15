@@ -73,3 +73,9 @@ OpenRouter key-limit 403 persists — no card run possible this session. Civic
 tab contracts verified by direct code read against the writers
 (civicInitiativeEngine.js, updateCivicApprovalRatings.js, runCivicElectionsv1.js,
 updateCivicLedgerFactions.js) and the live C107 dump contents.
+
+## Note — 2026-09-15 (kimi)
+
+Wiring card landed after the OpenRouter limit was lifted:
+`output/agent_engine-wiring_2026-09-15T22-05-35.md` (Initiative_Tracker). The
+"wiring card status" section above is superseded.

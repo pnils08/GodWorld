@@ -85,3 +85,9 @@ direct code read: `scripts/sportsFeedContract.js:8-13` (FEED_HEADERS),
 `scripts/sportsFeedWriter.js:16` (writer), `applySportsSeason.js:6` ("ALL
 sports data comes from Oakland_Sports_Feed"). Re-run when quota resets if the
 reviewer wants it.
+
+## Note — 2026-09-15 (kimi)
+
+Wiring card landed after the OpenRouter limit was lifted:
+`output/agent_engine-wiring_2026-09-15T22-03-40.md` (Oakland_Sports_Feed). The
+"wiring card status" section above is superseded.

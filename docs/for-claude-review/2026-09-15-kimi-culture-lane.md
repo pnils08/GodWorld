@@ -90,3 +90,10 @@ trajectory writer `phase07-evening-media/updateTrendTrajectory.js:36-42`;
 readers engine-side only pre-fix (`culturalStatusByPop_` :73, fame map :103,
 `scripts/buildCulturalCards.js:566-579`). Re-run the card when quota resets if
 the reviewer wants it.
+
+## Note — 2026-09-15 (kimi)
+
+Wiring card landed after the OpenRouter limit was lifted:
+`output/agent_engine-wiring_2026-09-15T22-02-27.md` (Cultural_Ledger). The
+"wiring card status" section above is superseded — contract confirmed by card,
+not just code read.

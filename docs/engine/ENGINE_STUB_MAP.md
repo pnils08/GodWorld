@@ -16,8 +16,8 @@
 
 ### advanceSimulationCalendar.js
 - **advanceSimulationCalendar_(ctx)**
-  Reads: S.cycleId, S.holidayPriority, S.weather, S.weatherMood
-  Writes: S.absoluteCycle, S.creationDayAnniversary, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.godWorldYear, S.holiday, S.holidayDetails, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.monthName, S.season, S.simDay, S.simMonth, S.simYear, S.weather, S.weatherMood
+  Reads: S.cycleId, S.holidayPriority, S.month, S.weather, S.weatherMood
+  Writes: S.absoluteCycle, S.creationDayAnniversary, S.cycleInMonth, S.cycleOfYear, S.cycleRef, S.godWorldYear, S.holiday, S.holidayDetails, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.isWeekend, S.month, S.monthName, S.season, S.simDay, S.simMonth, S.simYear, S.weather, S.weatherMood
   Config: ctx.config.cycleCount
   Sheets: Simulation_Calendar
   RNG: ctx.rng / safeRand_(ctx)
@@ -2333,6 +2333,8 @@
 - **detectNewRipples_(ctx, currentCycle)**
   Reads: S.citizenEvents, S.crisisSpikes, S.domainPresence, S.weather, S.worldEvents
 
+- **isBusinessClosure_(evt, evtText)**
+
 - **createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, cal)**
   Reads: S._rng, S.economicRipples
   Writes: S.economicRipples
@@ -4028,4 +4030,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 183
-**Functions mapped:** 1395
+**Functions mapped:** 1396

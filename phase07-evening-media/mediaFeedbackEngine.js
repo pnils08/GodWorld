@@ -125,6 +125,7 @@ function runMediaFeedbackEngine_(ctx) {
     isCreationDay: S.isCreationDay || false,
     sportsSeason: S.sportsSeason || 'off-season',
     season: S.season || 'unknown',
+    seasonKey: String(S.season || 'unknown').toLowerCase(),   // engine.222: comparisons below were against lowercase and never matched the calendar's 'Winter'
     month: S.month || 0
   };
   ctx.mediaCalendarContext = calendarContext;
@@ -320,11 +321,11 @@ function applyCalendarMediaModifiers_(ctx) {
   // SEASONAL MOOD
   // ─────────────────────────────────────────────────────────────
 
-  if (cal.season === 'summer') {
+  if (cal.seasonKey === 'summer') {
     effects.hopeFactor += 0.1;
     effects.seasonalMood = 'summer_optimism';
     effects.coverageProfile.seasonalTone = 'upbeat';
-  } else if (cal.season === 'winter') {
+  } else if (cal.seasonKey === 'winter') {
     // Winter can go either way - cozy or gloomy
     if (cal.holiday !== 'none' || cal.month === 12) {
       effects.seasonalMood = 'winter_cozy';
@@ -334,11 +335,11 @@ function applyCalendarMediaModifiers_(ctx) {
       effects.seasonalMood = 'winter_doldrums';
       effects.coverageProfile.seasonalTone = 'somber';
     }
-  } else if (cal.season === 'spring') {
+  } else if (cal.seasonKey === 'spring') {
     effects.hopeFactor += 0.05;
     effects.seasonalMood = 'spring_renewal';
     effects.coverageProfile.seasonalTone = 'hopeful';
-  } else if (cal.season === 'fall') {
+  } else if (cal.seasonKey === 'fall') {
     effects.seasonalMood = 'fall_transition';
     effects.coverageProfile.seasonalTone = 'nostalgic';
   }

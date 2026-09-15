@@ -184,6 +184,7 @@ function runEconomicRippleEngine_(ctx) {
     sportsSeason: S.sportsSeason || 'off-season',
     sportsZones: S.sportsZones || [],   // engine.131 T7 — where the sport physically is
     season: S.season || 'unknown',
+    seasonKey: String(S.season || 'unknown').toLowerCase(),   // engine.222: the calendar writes 'Winter'; comparisons below were against 'winter' and never matched
     month: S.month || 0
   };
   ctx.economicCalendarContext = calendarContext;
@@ -464,7 +465,7 @@ function detectCalendarRipples_(ctx, currentCycle) {
   }
   
   // Seasonal
-  if (cal.season === 'summer' && cal.month >= 6 && cal.month <= 8) {
+  if (cal.seasonKey === 'summer' && cal.month >= 6 && cal.month <= 8) {
     var summerExists = false;
     for (var j = 0; j < S.economicRipples.length; j++) {
       if (S.economicRipples[j].type === 'SUMMER_TOURISM' && 
@@ -479,7 +480,7 @@ function detectCalendarRipples_(ctx, currentCycle) {
     }
   }
   
-  if (cal.season === 'winter' && (cal.month === 1 || cal.month === 2) && cal.holiday === 'none') {
+  if (cal.seasonKey === 'winter' && (cal.month === 1 || cal.month === 2) && cal.holiday === 'none') {
     var winterExists = false;
     for (var k = 0; k < S.economicRipples.length; k++) {
       if (S.economicRipples[k].type === 'WINTER_DOLDRUMS' && 
@@ -530,7 +531,9 @@ function detectNewRipples_(ctx, currentCycle) {
     else if (evtText.indexOf('layoff') >= 0 || evtText.indexOf('job cuts') >= 0) {
       createRipple_(S, 'MAJOR_LAYOFFS', currentCycle, evt, evtNeighborhood, cal);
     }
-    else if (evtText.indexOf('closure') >= 0 || evtText.indexOf('shut down') >= 0) {
+    else if ((evtText.indexOf('closure') >= 0 || evtText.indexOf('shut down') >= 0) && isBusinessClosure_(evt, evtText)) {
+      // engine.222: a closure is a FACTORY_CLOSURE (−20 for 12 Cycles) only when a business closed.
+      // The bench's C108 ripple came from the CIVIC texture line "road closure decision".
       createRipple_(S, 'FACTORY_CLOSURE', currentCycle, evt, evtNeighborhood, cal);
     }
     else if (evtText.indexOf('crime') >= 0 || evtText.indexOf('robbery') >= 0) {
@@ -562,6 +565,23 @@ function detectNewRipples_(ctx, currentCycle) {
   }
 }
 
+
+/**
+ * engine.222: does this closure/shut-down text describe a business closing? Typed domain
+ * first (worldEventsEngine / generateCitizensEvents tag `domain`), then a business noun
+ * in the text for untyped sources. A CIVIC "road closure decision" is neither.
+ */
+var BUSINESS_CLOSURE_NOUNS_ = ['factory', 'plant', 'business', 'store', 'shop', 'restaurant', 'warehouse',
+  'employer', 'company', 'firm', 'office', 'workers', 'jobs', 'mill', 'brewery', 'cafe', 'bar '];
+function isBusinessClosure_(evt, evtText) {
+  var domain = String((evt && evt.domain) || '').toUpperCase();
+  if (domain === 'BUSINESS') return true;
+  if (domain === 'CIVIC' || domain === 'TRAFFIC' || domain === 'INFRASTRUCTURE' || domain === 'WEATHER') return false;
+  for (var i = 0; i < BUSINESS_CLOSURE_NOUNS_.length; i++) {
+    if (evtText.indexOf(BUSINESS_CLOSURE_NOUNS_[i]) >= 0) return true;
+  }
+  return false;
+}
 
 function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, cal) {
   var trigger = ECONOMIC_TRIGGERS[triggerType];
@@ -727,7 +747,7 @@ function calculateEconomicMood_(ctx) {
     newMood += 1.5;
   }
   
-  if (cal.season === 'summer') {
+  if (cal.seasonKey === 'summer') {
     newMood += 1;
   }
   

@@ -207,6 +207,7 @@ function advanceSimulationCalendar_(ctx) {
   S.cycleInMonth = cycleInMonth;
   S.simYear = simYearFromCycle_(absoluteCycle);  // calendar year for age math (simYear - birthYear); godWorldYear stays the ordinal used by cycleRef/elections/display. S243 fix: was aliased to the ordinal, freezing every age-gated life event (age = 2 - birthYear ≈ -2000). engine.148: the ONE formula, see simYearFromCycle_ below.
   S.simMonth = simMonth;
+  S.month = simMonth;        // engine.222: five readers read S.month (economy, media feedback, generational events, World_Events record, cycle packet) — nothing wrote it, so every month-gated branch was dead
   S.simDay = cycleInMonth;   // Alias for backwards compatibility
   S.monthName = monthName;
   S.season = season;

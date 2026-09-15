@@ -2,7 +2,7 @@
   "generated": "2026-09-14",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 183,
-  "functionsMapped": 1395,
+  "functionsMapped": 1396,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -426,6 +426,21 @@
       ],
       "readers": [
         "phase02-world-state/applySeasonWeights.js::applySeasonalWeights_"
+      ]
+    },
+    "month": {
+      "writers": [
+        "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_"
+      ],
+      "readers": [
+        "phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_",
+        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
+        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
+        "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_",
+        "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_",
+        "phase08-v3-chicago/chicagoSatellite.js::chicagoSatelliteEngine_",
+        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
+        "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_"
       ]
     },
     "monthName": {
@@ -2748,18 +2763,6 @@
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::hospitalCapacity_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"
-      ]
-    },
-    "month": {
-      "writers": [],
-      "readers": [
-        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
-        "phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_",
-        "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_",
-        "phase07-evening-media/mediaRoomIntake.js::getCurrentCalendarContext_",
-        "phase08-v3-chicago/chicagoSatellite.js::chicagoSatelliteEngine_",
-        "phase10-persistence/buildCyclePacket.js::buildCyclePacket_",
-        "phase10-persistence/recordWorldEventsv25.js::recordWorldEvents25_"
       ]
     },
     "pendingCascades": {

@@ -90,13 +90,19 @@ function writeDump(dir, cycle) {
       { BIZ_ID: 'BIZ-T-TRANSIT', Name: 'Test Transit Agency', Sector: 'Public Transit', Neighborhood: 'Downtown', Employee_Count: '100' },
       { BIZ_ID: 'BIZ-T-BAR', Name: 'BART Bar', Sector: 'Bar / nightlife', Neighborhood: 'Downtown', Employee_Count: '5' },
       { BIZ_ID: 'BIZ-T-OPD', Name: 'Test Police Department', Sector: 'Public Safety', Neighborhood: 'Downtown', Employee_Count: '700' },
-      { BIZ_ID: 'BIZ-T-FARM', Name: 'Test Farm Systems', Sector: 'Science', Neighborhood: 'Downtown', Employee_Count: '9' }
+      { BIZ_ID: 'BIZ-T-FARM', Name: 'Test Farm Systems', Sector: 'Science', Neighborhood: 'Downtown', Employee_Count: '9' },
+      // The district card (BIZ-00016 by ID — canon.5 holds the rename)
+      { BIZ_ID: 'BIZ-00016', Name: 'Test Unified School District', Sector: 'Education', Neighborhood: 'City-wide', Employee_Count: '5201', Avg_Salary: '74000', Annual_Revenue: '-15', Growth_Rate: '8' }
     ],
     Story_Hook_Deck: [
       { Cycle: String(cycle), HookId: 'h1', HookType: 'cluster', Domain: 'HEALTH', Neighborhood: 'Chinatown', Priority: '3', HookText: 'Heavy health activity this cycle.', SuggestedJournalist: 'Dr. Lila Mezran', SuggestedAngle: 'general coverage' },
       { Cycle: String(cycle - 1), HookId: 'h0', HookType: 'cluster', Domain: 'HEALTH', Neighborhood: '', Priority: '3', HookText: 'STALE hook.', SuggestedJournalist: 'Dr. Lila Mezran', SuggestedAngle: '' },
       // The engine's deskMap has no FAITH key — this is how a faith hook actually arrives: City Desk, no journalist.
-      { Cycle: String(cycle), HookId: 'h2', HookType: 'signal', Domain: 'FAITH', Neighborhood: 'Chinatown', Priority: '2', HookText: 'Notable event: "Test Temple: Vesak observance held". Follow-up recommended.', SuggestedDesks: 'City Desk', SuggestedJournalist: '', SuggestedAngle: '' }
+      { Cycle: String(cycle), HookId: 'h2', HookType: 'signal', Domain: 'FAITH', Neighborhood: 'Chinatown', Priority: '2', HookText: 'Notable event: "Test Temple: Vesak observance held". Follow-up recommended.', SuggestedDesks: 'City Desk', SuggestedJournalist: '', SuggestedAngle: '' },
+      // EDUCATION hooks route to an "Education Desk" no roster carries and pre-match a culture generalist.
+      { Cycle: String(cycle), HookId: 'h3', HookType: 'demographic', Domain: 'EDUCATION', Neighborhood: 'Rockridge', Priority: '2', HookText: 'School-age population growing in Rockridge. Education story opportunity.', SuggestedDesks: 'Education Desk', SuggestedJournalist: 'Sharon Okafor', SuggestedAngle: '' },
+      // DROPOUT_WAVE bypasses makeHook — no desk, no journalist, reaches nobody.
+      { Cycle: String(cycle), HookId: 'h4', HookType: 'DROPOUT_WAVE', Domain: 'DROPOUT_WAVE', Neighborhood: 'West Oakland', Priority: '', HookText: 'DROPOUT_WAVE: West Oakland graduation rate at 62% — below the 65% line.', SuggestedDesks: '', SuggestedJournalist: '', SuggestedAngle: '' }
     ],
     Story_Seed_Deck: []
   };
@@ -162,10 +168,29 @@ try {
   ok('only this cycle\'s hook', h.prewrite.hooks.length === 1 && h.prewrite.hooks[0].text === 'Heavy health activity this cycle.');
 
   console.log('schools:');
+  // Enrollment moves: stage a prior-cycle demographics dump for this section only.
+  const prevDir = path.join(output, 'beats', 'prev');
+  fs.mkdirSync(prevDir, { recursive: true });
+  writeJsonl(path.join(prevDir, 'Neighborhood_Demographics.jsonl'), [
+    { Neighborhood: 'Rockridge', Students: '223', SchoolQualityIndex: '9' },
+    { Neighborhood: 'Chinatown', Students: '175', SchoolQualityIndex: '7' },
+    { Neighborhood: 'Fruitvale', Students: '200', SchoolQualityIndex: '8' }
+  ]);
+  fs.writeFileSync(path.join(prevDir, 'meta.json'), JSON.stringify({ cycle: CYCLE - 1, rows: { Neighborhood_Demographics: 3 } }));
   const s = schools.buildSchoolsSlice(CYCLE, { root });
   ok('odd cycle → bottom of the table', s.hood === 'Chinatown' && /weakest school record/.test(s.story.label));
   ok('row fact', s.facts.some(f => /Chinatown: school quality index 7, graduation 87%, college-ready 56%, teacher quality 7, funding 12,000, 180 students/.test(f.text)));
+  ok('enrollment movement leads', /Enrollment moved: Chinatown \+5 students vs C102/.test(s.facts[0].text));
+  ok('static quality table says so plainly', s.facts.some(f => /quality table is unchanged since C102/.test(f.text)));
+  ok('district card by BIZ_ID', s.facts.some(f => /The district: Test Unified School District — 5,201 employees citywide/.test(f.text) && /Business_Ledger\.jsonl BIZ-00016/.test(f.src)));
+  ok('EDUCATION hook reaches her despite the Education Desk misroute', s.prewrite.hooks.some(h => /School-age population growing in Rockridge/.test(h.text) && h.domain === 'EDUCATION'));
+  ok('DROPOUT_WAVE reaches her despite carrying no desk', s.prewrite.hooks.some(h => /West Oakland graduation rate at 62%/.test(h.text)));
   ok('students from the ledger snapshot in the lead hood', s.story.citizens.length === 1 && s.story.citizens[0] === 'Test College Student (POP-90032)');
+  ok('citywide educators when the lead hood has none', (() => {
+    const only = new Map([['POP-90040', { POPID: 'POP-90040', Name: 'Test Faraway Teacher', RoleType: 'High School Teacher', Neighborhood: 'Temescal' }]]);
+    const x = schools.buildSchoolsSlice(CYCLE, { root, profiles: only });
+    return x.citizens.some(c => c.popid === 'POP-90040' && /none in Chinatown/.test(c.why)) && /elsewhere in the city/.test(x.prewrite.note);
+  })());
   ok('even cycle → top of the table', (() => {
     const meta = path.join(output, 'beats', 'meta.json');
     const m = JSON.parse(fs.readFileSync(meta, 'utf8')); m.cycle = CYCLE + 1; fs.writeFileSync(meta, JSON.stringify(m));
@@ -173,6 +198,7 @@ try {
     m.cycle = CYCLE; fs.writeFileSync(meta, JSON.stringify(m));
     return even.hood === 'Rockridge' && even.story.citizens.length === 2;
   })());
+  fs.rmSync(prevDir, { recursive: true, force: true });
 
   console.log('environment:');
   const e = environment.buildEnvironmentSlice(CYCLE, { root });

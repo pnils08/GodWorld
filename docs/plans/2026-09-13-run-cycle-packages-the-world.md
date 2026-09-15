@@ -213,8 +213,10 @@ Cut `ea3fda33` (10 files + test): one nested `matchJournalist_` for makeHook and
 
 Predicted at the bench C110: 0 desk-empty rows on the new Cycle; ~25 COMMUNITY rows a Cycle name Maria Keen (the theme scorer's monopoly — the next cut's territory, expected here); FAME_WATCH → Kai; DROPOUT_WAVE → Angela on 'Education Desk' (phantom desk string, kimi cut 2, next); arc/cluster FAITH still → Hal/Luis because the hookType signal fires before the domain fallback (same next cut). `DOMAIN_TO_DESKS` has no BUSINESS key (newsroom side, noted).
 
+Bench SANDBOX 0908 @47 (`ea3fda33`, clean `git archive` stage — the DIAG229 flood overlay is gone with it), C109 fired 166 s ok:true, 0 Engine_Errors (`output/engine-sheet/bench-231-c109-fire-response.txt`, `bench-231-c109-readback.json`): 40 deck rows, **0 desk-empty, 0 journalist-empty, 0 Domain=HookType, 0 blank HookText/HookId** (C107 and C108 on the same bench, old code, carried the desk-empty class). As predicted: 21 COMMUNITY rows → Maria Keen high (move 7, boom 4, cooling 3, forced 2, rent 2, rising 1, heritage 1), FAME_WATCH ×2 → Kai Marston, CAREER_STAGNATION ×2 → Jordan Velez, cluster/FAITH → Luis (hookType signal first), arc/HEALTH → Hal Richmond and demographic/EDUCATION → Sharon Okafor (the same ordering defect — next cut).
+
 ## Changelog
-- 2026-09-15 (engine-sheet S463) — engine.231 filed and CUT `ea3fda33`: 52 desk-empty deck rows at C106–C107 — the carry loop now runs makeHook's match path, producers carry domain at the source, FAITH/EDUCATION signal holes closed; test 17/17; bench next.
+- 2026-09-15 (engine-sheet S463) — engine.231 BENCH-PROVEN SANDBOX 0908 @47 C109 (0 errors; 40 deck rows, 0 desk-empty). Filed and CUT `ea3fda33`: 52 desk-empty deck rows at C106–C107 — the carry loop now runs makeHook's match path, producers carry domain at the source, FAITH/EDUCATION signal holes closed; test 17/17; bench next.
 
 - 2026-09-15 (engine-sheet S462) — **PROD @92 (version 81)** = `47063de6`: engine.229 + 230 live on Mike's go after bench @46 C108–C109 completed with the synthetic flood; rows to done-pending-archive. Live smoke = Sunday's C108 (evening fire advised).
 

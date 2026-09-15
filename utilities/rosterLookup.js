@@ -323,6 +323,8 @@ function loadRoster_() {
       "food": "Mason Ortega",
       "restaurants": "Mason Ortega",
       "education": "Angela Reyes",
+      "faith": "Elliot Graye",        // engine.231: FAITH domain had no signal — event/FAITH hooks fell to human_interest (Dana)
+      "congregation": "Elliot Graye",
       "youth": "Angela Reyes",
       "weather": "Noah Tan",
       "environment": "Noah Tan",

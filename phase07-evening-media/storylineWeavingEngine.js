@@ -444,6 +444,7 @@ function detectCrossStorylineConflicts_(ss, storylines, multiCitizens, cycle) {
       // Generate CROSS_STORYLINE hook
       hooks.push({
         hookType: 'CROSS_STORYLINE',
+        domain: 'COMMUNITY',
         citizen: citizen,
         storylines: storylineIds,
         roles: roles,
@@ -454,6 +455,7 @@ function detectCrossStorylineConflicts_(ss, storylines, multiCitizens, cycle) {
       // Multiple storylines, but not conflicting roles
       hooks.push({
         hookType: 'CROSS_STORYLINE',
+        domain: 'COMMUNITY',
         citizen: citizen,
         storylines: storylineIds,
         roles: roles,
@@ -499,6 +501,7 @@ function detectRelationshipClashes_(ss, storylines, cycle) {
           if (antagonists1[k] === antagonists2[m]) {
             hooks.push({
               hookType: 'RELATIONSHIP_CLASH',
+              domain: 'COMMUNITY',
               citizen: antagonists1[k],
               storyline1: s1.storylineId,
               storyline2: s2.storylineId,
@@ -533,6 +536,7 @@ function detectAllianceOpportunities_(ss, storylines, cycle) {
           if (heroes1[k] === heroes2[m]) {
             hooks.push({
               hookType: 'ALLIANCE_OPPORTUNITY',
+              domain: 'COMMUNITY',
               citizen: heroes1[k],
               storyline1: s1.storylineId,
               storyline2: s2.storylineId,

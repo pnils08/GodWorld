@@ -112,6 +112,7 @@ function storyHookEngine_(ctx) {
     'GENERAL': 'City Desk',
     'HOLIDAY': 'Features Desk',
     'CULTURAL': 'Culture Desk',
+    'FAITH': 'Culture Desk',      // engine.231: no key → City Desk; Elliot Graye sits on culture
     'OAKLAND': 'Community Desk'
   };
 
@@ -168,7 +169,14 @@ function storyHookEngine_(ctx) {
       'CULTURE': 'arts',
       'BUSINESS': 'business',
       'INFRASTRUCTURE': 'transit',
-      'COMMUNITY': 'community'
+      'COMMUNITY': 'community',
+      // engine.231: the carried Phase-5 hooks and the FAITH/EDUCATION makeHook
+      // hooks reach this fallback (no hookType signal, no domain themes) — each
+      // domain names its seat instead of falling to human_interest.
+      'EDUCATION': 'education',
+      'FAITH': 'faith',
+      'WEATHER': 'weather',
+      'ENVIRONMENT': 'environment'
     };
 
     return domainSignals[domain] || 'human_interest';
@@ -177,22 +185,31 @@ function storyHookEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // HOOK BUILDER (v3.8: Theme-aware journalist matching)
   // ═══════════════════════════════════════════════════════════
+  /**
+   * engine.231: the one journalist-match path. makeHook and the Phase-5
+   * carry-over below both go through it — themes by domain + hookType, then
+   * the theme scorer with the signal fallback (suggestStoryAngle_).
+   */
+  function matchJournalist_(domain, hookType) {
+    var themes = [];
+    if (typeof getThemeKeywordsForDomain_ === 'function') {
+      themes = getThemeKeywordsForDomain_(domain, hookType);
+    }
+    var suggestion = null;
+    if (typeof suggestStoryAngle_ === 'function') {
+      suggestion = suggestStoryAngle_(themes, mapHookTypeToSignal_(hookType, domain));
+    }
+    return { themes: themes, suggestion: suggestion };
+  }
+
   function makeHook(domain, neighborhood, priority, text, linkedArcId, hookType) {
     var normalDomain = domain || 'GENERAL';
     var normalHookType = hookType || 'signal';
 
-    // v3.8: Determine themes for this hook
-    var themes = [];
-    if (typeof getThemeKeywordsForDomain_ === 'function') {
-      themes = getThemeKeywordsForDomain_(normalDomain, normalHookType);
-    }
-
-    // v3.8: Suggest journalist based on themes
-    var suggestion = null;
-    if (typeof suggestStoryAngle_ === 'function') {
-      var signalType = mapHookTypeToSignal_(normalHookType, normalDomain);
-      suggestion = suggestStoryAngle_(themes, signalType);
-    }
+    // v3.8: themes + journalist suggestion (engine.231: shared matcher)
+    var match = matchJournalist_(normalDomain, normalHookType);
+    var themes = match.themes;
+    var suggestion = match.suggestion;
 
     return {
       hookId: Utilities.getUuid().slice(0, 8),
@@ -1383,13 +1400,38 @@ function storyHookEngine_(ctx) {
   // before saveV3Hooks_ wrote the deck — the newsroom never saw a move.
   // Phase-5 hooks use description/severity; normalize to text/priority so
   // the deck writer (saveV3Hooks_ maps h.text, h.priority) can render them.
+  //
+  // engine.231 (S463): the carried hook goes through the same desk + journalist
+  // path makeHook uses. Before this the loop set text/priority only and, when
+  // the producer carried no domain, wrote the hookType INTO Domain
+  // ('NEIGHBORHOOD_BOOM', 'CITIZEN_RELOCATED'): 52 Story_Hook_Deck rows at live
+  // C106–C107 carried no desk and no journalist, so the per-seat slices (hooksFor
+  // by SuggestedJournalist) and the packet router (by Domain) never saw a move,
+  // a boom, a fame turn or a dropout wave. Producers now carry domain at the
+  // source; a hook that still lacks one lands on GENERAL and is logged — the
+  // hookType is never copied into Domain again.
   var carried = ctx.summary.storyHooks || [];
   for (var ci = 0; ci < carried.length; ci++) {
     var ch = carried[ci];
     if (!ch) continue;
     if (!ch.text && ch.description) ch.text = ch.description;
     if (!ch.priority && ch.severity) ch.priority = ch.severity;
-    if (!ch.domain && ch.hookType) ch.domain = ch.hookType;
+    if (!ch.domain) {
+      Logger.log('storyHookEngine_ engine.231: carried hook ' + (ch.hookType || '?') + ' has no domain — GENERAL');
+      ch.domain = 'GENERAL';
+    }
+    if (!ch.hookId) ch.hookId = Utilities.getUuid().slice(0, 8);
+    if (!ch.suggestedDesks) ch.suggestedDesks = getDesks(ch.domain);
+    if (!ch.suggestedJournalist) {
+      var cm = matchJournalist_(ch.domain, ch.hookType || 'signal');
+      ch.themes = ch.themes || cm.themes;
+      ch.suggestedJournalist = cm.suggestion ? cm.suggestion.journalist : null;
+      ch.suggestedAngle = ch.suggestedAngle || (cm.suggestion ? cm.suggestion.angle : null);
+      ch.voiceGuidance = ch.voiceGuidance || (cm.suggestion ? cm.suggestion.voiceGuidance : null);
+      ch.matchConfidence = cm.suggestion ? cm.suggestion.confidence : 'none';
+    }
+    if (!ch.cycle) ch.cycle = cycle;
+    if (!ch.cycleOfYear) ch.cycleOfYear = cycleOfYear;
     deduped.push(ch);
   }
 

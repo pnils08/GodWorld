@@ -702,6 +702,7 @@ function updateCivicApprovalRatings_(ctx) {
 
       var hook = {
         hookType: 'CIVIC_APPROVAL_SCANDAL',
+        domain: 'CIVIC',
         severity: 7,
         description: holder + ' entered scandal status after ' +
           (lifecycle.highStreak + 1) + ' consecutive Cycles at or above ' + ceilingConfig.threshold + ' approval',
@@ -761,6 +762,7 @@ function updateCivicApprovalRatings_(ctx) {
     if (campaign && !leaving && campaign.since === cycle) {
       var campHook = {
         hookType: 'CIVIC_CHALLENGER_CAMPAIGN',
+        domain: 'CIVIC',
         severity: 6,
         description: campaign.name + ' began campaigning to replace ' + holder +
           ' (approval ' + newApproval + ')',
@@ -834,6 +836,7 @@ function updateCivicApprovalRatings_(ctx) {
       S.officeDepartures.push(departure);
       var leaveHook = {
         hookType: seating ? 'CIVIC_DEMOTION' : 'CIVIC_LEFT_OFFICE',
+        domain: 'CIVIC',
         severity: 8,
         description: seating
           ? holder + ' demoted — ' + campaign.name + ' takes the seat'

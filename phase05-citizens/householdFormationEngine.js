@@ -1177,6 +1177,7 @@ function dissolveStressedHouseholds_(ctx, stressedHouseholds, cycle, rng) {
 function generateHouseholdFormedHook_(household) {
   return {
     hookType: 'HOUSEHOLD_FORMED',
+    domain: 'COMMUNITY',
     householdId: household.householdId,
     householdType: household.householdType,
     neighborhood: household.neighborhood,
@@ -1188,6 +1189,7 @@ function generateHouseholdFormedHook_(household) {
 function generateHouseholdDissolvedHook_(household) {
   return {
     hookType: 'HOUSEHOLD_DISSOLVED',
+    domain: 'COMMUNITY',
     householdId: household.householdId,
     householdType: household.householdType,
     neighborhood: household.neighborhood,
@@ -1202,6 +1204,7 @@ function generateRentBurdenHook_(stressed) {
 
   return {
     hookType: 'RENT_BURDEN_CRISIS',
+    domain: 'COMMUNITY',
     householdId: household.householdId,
     neighborhood: household.neighborhood,
     rentBurden: burden,

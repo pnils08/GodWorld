@@ -1249,6 +1249,7 @@ function processInheritance_(ctx, cycle) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
       ctx.summary.storyHooks.push({
         hookType: 'GENERATIONAL_WEALTH_TRANSFER',
+        domain: 'COMMUNITY',
         severity: totalInheritance > 200000 ? 7 : 5,
         description: 'Inheritance of $' + totalInheritance.toLocaleString() + ' distributed to ' + heirCount + ' heirs',
         cycleGenerated: cycle,

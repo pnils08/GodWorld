@@ -629,6 +629,7 @@ function detectCareerMobility_(ctx, cycle, rng) {
         ctx.summary.storyHooks = ctx.summary.storyHooks || [];
         ctx.summary.storyHooks.push({
           hookType: 'CAREER_STAGNATION',
+          domain: 'BUSINESS',
           severity: 3,
           description: name.trim() + ' has not advanced in ' + Math.floor(cyclesSincePromotion / 2) + ' years',
           cycleGenerated: cycle,
@@ -1353,6 +1354,7 @@ function checkSchoolQuality_(ss, ctx, cycle) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
       ctx.summary.storyHooks.push({
         hookType: 'SCHOOL_QUALITY_CRISIS',
+        domain: 'EDUCATION',
         severity: 8,
         description: neighborhood + ' schools rated critically low (quality: ' + quality + '/10)',
         cycleGenerated: cycle,
@@ -1368,6 +1370,7 @@ function checkSchoolQuality_(ss, ctx, cycle) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
       ctx.summary.storyHooks.push({
         hookType: 'DROPOUT_WAVE',
+        domain: 'EDUCATION',
         severity: 6,
         description: neighborhood + ' graduation rate at ' + gradRate + '% (below crisis threshold)',
         cycleGenerated: cycle,

@@ -758,6 +758,7 @@ function processRelocations_(ctx, cycle) {
     ctx.summary.storyHooks = ctx.summary.storyHooks || [];
     var moveHook = {
       hookType: 'CITIZEN_RELOCATED',
+      domain: 'COMMUNITY',
       severity: 5,
       description: who + ' moved from ' + unit.hood + ' to ' + bestName + ' — ' + phrase,
       cycleGenerated: cycle,
@@ -905,6 +906,7 @@ function generateMigrationHooks_(ctx, cycle) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
       var forcedHook = {
         hookType: 'FORCED_MIGRATION',
+        domain: 'COMMUNITY',
         severity: 7,
         description: first + ' ' + last + ' at severe displacement risk in ' + neighborhood + ' (risk: ' + displRisk + '/10)',
         cycleGenerated: cycle,
@@ -926,6 +928,7 @@ function generateMigrationHooks_(ctx, cycle) {
       ctx.summary.storyHooks = ctx.summary.storyHooks || [];
       var exodusHook = {
         hookType: 'MASS_EXODUS',
+        domain: 'COMMUNITY',
         severity: 8,
         description: hood + ' mass displacement risk: ' + count + ' residents planning to leave',
         cycleGenerated: cycle,

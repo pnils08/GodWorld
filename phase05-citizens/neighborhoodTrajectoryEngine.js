@@ -352,6 +352,7 @@ function emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajecto
   if (trajectory === TRAJECTORY_STATES.GROWTH && prevTrajectory !== TRAJECTORY_STATES.GROWTH) {
     push({
       hookType: 'NEIGHBORHOOD_RISING',
+      domain: 'COMMUNITY',
       severity: 5,
       description: neighborhood + ' turning upward: retail busy, events drawing crowds, people moving in',
       cycleGenerated: cycle,
@@ -363,6 +364,7 @@ function emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajecto
   if (trajectory === TRAJECTORY_STATES.DECAY && prevTrajectory !== TRAJECTORY_STATES.DECAY) {
     push({
       hookType: 'NEIGHBORHOOD_COOLING',
+      domain: 'COMMUNITY',
       severity: 6,
       description: neighborhood + ' cooling off: foot traffic down, storefronts quieter than the rest of the city',
       cycleGenerated: cycle,
@@ -374,6 +376,7 @@ function emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajecto
   if (trajectory === TRAJECTORY_STATES.GROWTH && momentum >= 8) {
     push({
       hookType: 'NEIGHBORHOOD_BOOM',
+      domain: 'COMMUNITY',
       severity: 7,
       description: neighborhood + ' boom sustained — momentum ' + momentum + '/10, the block everyone wants onto',
       cycleGenerated: cycle,
@@ -385,6 +388,7 @@ function emitTrajectoryHooks_(ctx, cycle, neighborhood, prevTrajectory, trajecto
   if (pressure >= 8) {
     push({
       hookType: 'HOUSING_PRESSURE_HIGH',
+      domain: 'COMMUNITY',
       severity: 7,
       description: neighborhood + ' housing pressure at ' + pressure + '/10: rents climbing, households stretching to stay',
       cycleGenerated: cycle,

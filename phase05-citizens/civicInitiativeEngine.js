@@ -2545,7 +2545,9 @@ function generateVetoStoryHook_(ctx, row, header, vetoData) {
   var hook = {
     hookType: 'MAYORAL_VETO',
     theme: 'CIVIC',
+    domain: 'CIVIC',
     severity: 7,
+    description: 'Mayor ' + vetoData.mayorName + ' vetoed ' + name + ' — ' + (vetoData.vetoReason || 'no reason given'),
     initiative: name,
     mayor: vetoData.mayorName,
     mayorFaction: vetoData.mayorFaction,
@@ -2582,7 +2584,10 @@ function generateOverrideStoryHook_(ctx, name, overrideResult, mayorName) {
   var hook = {
     hookType: hookType,
     theme: 'CIVIC',
+    domain: 'CIVIC',
     severity: severity,
+    description: (overrideResult.overridePassed ? 'Council overrode Mayor ' + mayorName + '\'s veto of ' : 'Mayor ' + mayorName + '\'s veto of ') +
+      name + ' ' + (overrideResult.overridePassed ? 'passed' : 'stands') + ' (' + overrideResult.voteCount + ')',
     initiative: name,
     overrideVote: overrideResult.voteCount,
     mayorStatus: overrideResult.overridePassed ?

@@ -12,7 +12,7 @@
     "reportedDayThreshold": 3,
     "audioFormat": "deep_dive",
     "audioLength": "default",
-    "driveDest": "edition",
+    "driveDest": "daily-news",
     "pingTime": "08:00 America/Chicago"
   },
   "saturdayAudio": true,

@@ -20,7 +20,13 @@
  *   node scripts/saveToDrive.js --test
  *
  * Destinations (shortcuts):
- *   edition              → Publications Archive / 1_The_Cycle_Pulse / Y_001
+ *   edition              → Publications Archive / 1_The_Cycle_Pulse / Y-002 (S461 housekeeping,
+ *                          Mike-direct 2026-09-14: rotated off Y_001 to the new Y-002 bucket —
+ *                          also the Saturday NotebookLM audio overview's Drive drop, via
+ *                          config/notebooklm.json top-level driveDest)
+ *   daily-news           → Publications Archive / 1_The_Cycle_Pulse / Daily_News (S461,
+ *                          Mike-direct 2026-09-14) — NotebookLM daily-brief audio Drive drop,
+ *                          via config/notebooklm.json dailyNews.driveDest
  *   supplement           → Publications Archive / 2_Oakland_Supplementals
  *   supplemental         → alias of supplement (matches --type spelling)
  *   interview            → alias of supplement (non-edition subfolder, T9)
@@ -102,7 +108,8 @@ function parseCycleFlag() {
 // Destination folder IDs — from combined manifest (mapSubfolders overrides at runtime)
 var DESTINATIONS = {
   // Publications Archive subfolders
-  edition:    '118tCh9stHjuocSUYXj0LjGnuzp5mLFhf',  // 1_The_Cycle_Pulse/Y_001
+  edition:    '1k8OEMFO90zppxelySqUZCWZ4G5amfkW9',  // 1_The_Cycle_Pulse/Y-002 (S461: rotated off Y_001, Mike-direct 2026-09-14)
+  'daily-news': '1G4pwonIvrad__5Y9TzcoO_1p7bT0d-22',  // 1_The_Cycle_Pulse/Daily_News (S461, Mike-direct 2026-09-14)
   supplement: '1rv1mTZ8A1ep8u6dIONsEsGmayNkCJg-F',  // 2_Oakland_Supplementals
   chicago:    '1C2TvHmPWNh0VeYnTA4Tq0XvKS0fNRhTy',  // Chicago_Supplementals
   mara:       '1LEClpCUeRpT91gUR3SUm-Yx-3MldMJ5G',  // Mara_Vance
@@ -124,7 +131,7 @@ var DESTINATIONS = {
   lore:       '1T5oSZzkGjVeORQJbBpAIj1ICXMN3QjBT',  // Mike-designated folder
   // Aliases
   briefing:   '1LEClpCUeRpT91gUR3SUm-Yx-3MldMJ5G',  // = mara (Mara directives & briefings)
-  pdf:        '118tCh9stHjuocSUYXj0LjGnuzp5mLFhf',  // = edition (PDFs go alongside editions)
+  pdf:        '1k8OEMFO90zppxelySqUZCWZ4G5amfkW9',  // = edition (PDFs go alongside editions)
   // T9 non-edition aliases — share the supplement folder; type-prefixed
   // filenames disambiguate. Spelling consistency with --type values.
   supplemental:           '1rv1mTZ8A1ep8u6dIONsEsGmayNkCJg-F',  // = supplement
@@ -366,7 +373,7 @@ async function mapSubfolders() {
   var folders = manifest.entries.filter(function(e) { return e.isFolder; });
 
   var mappings = {
-    edition:    { path: '/Publications Archive/1_The_Cycle_Pulse/Y_001' },
+    edition:    { path: '/Publications Archive/1_The_Cycle_Pulse/Y-002' },
     supplement: { path: '/Publications Archive/2_Oakland_Supplementals' },
     chicago:    { path: '/Publications Archive/Chicago_Supplementals' },
     mara:       { path: '/Publications Archive/Mara_Vance' },
@@ -427,7 +434,7 @@ async function main() {
     console.log('Usage: node scripts/saveToDrive.js <local-file> <destination>');
     console.log('       node scripts/saveToDrive.js <local-file> --type <type> [--cycle N]');
     console.log('');
-    console.log('Destinations: edition, supplement, supplemental, interview, dispatch,');
+    console.log('Destinations: edition, daily-news, supplement, supplemental, interview, dispatch,');
     console.log('              interview-transcript, chicago, mara, presser, player,');
     console.log('              prospect, bulls, briefing, pdf, civic, podcast, backup, lore');
     console.log('Or pass a raw Drive folder ID.');

@@ -1,0 +1,44 @@
+{
+ "cycle": 111,
+ "rows": 48,
+ "errors": 0,
+ "desks": {
+  "Civic Desk": 8,
+  "Culture Desk": 34,
+  "Business Desk": 6
+ },
+ "journalists": {
+  "Sgt. Rachel Torres": 2,
+  "Elliot Graye": 2,
+  "Dana Reeve": 1,
+  "Luis Navarro": 1,
+  "(blank)": 14,
+  "Maria Keen": 8,
+  "Dr. Lila Mezran": 2,
+  "Noah Tan": 1,
+  "Angela Reyes": 1,
+  "Jordan Velez": 5,
+  "Carmen Delaine": 1,
+  "Kai Marston": 4,
+  "Sharon Okafor": 6
+ },
+ "byDomain": {
+  "SAFETY → Sgt. Rachel Torres": 2,
+  "FAITH → Elliot Graye": 1,
+  "CIVIC → Dana Reeve": 1,
+  "CIVIC → Luis Navarro": 1,
+  "HEALTH → (blank)": 1,
+  "COMMUNITY → Maria Keen": 8,
+  "HEALTH → Dr. Lila Mezran": 2,
+  "WEATHER → Noah Tan": 1,
+  "HOLIDAY → (blank)": 1,
+  "EDUCATION → Angela Reyes": 1,
+  "BUSINESS → Jordan Velez": 5,
+  "CIVIC → Carmen Delaine": 1,
+  "CULTURE → Kai Marston": 4,
+  "COMMUNITY → Elliot Graye": 1,
+  "COMMUNITY → Sharon Okafor": 6,
+  "BUSINESS → (blank)": 1,
+  "COMMUNITY → (blank)": 11
+ }
+}

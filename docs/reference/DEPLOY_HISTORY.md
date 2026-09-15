@@ -129,6 +129,14 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @94 — engine.232: the hook names a desk that exists and a journalist on it (2026-09-15 ~18:20 Chicago, engine-sheet)
+
+Commit `fbb4af97` (engine tree = @93 `ea3fda33` + `storyHook.js` [DOMAIN_DESKS_, domain-first signal, in-Cycle rotation + 25% cap] + `rosterLookup.js` [deskKeys scoping]). Apps Script version 83, read back @83. Isolated `git archive` stage, repo-root `.clasp.json` copied in last; pull-back 169 files, 168 js byte-identical, 0 test files. Bench SANDBOX 0908 @48 C110 (67 rows, 0 errors) + @49 C111 (48 rows, 0 errors, 133 s).
+
+- **engine.232:** Hal Richmond on 71 arcs, P Slayer 32 of 38 SPORTS, Sharon Okafor on EDUCATION (never Angela) and BUSINESS, five phantom desk strings. Now one desk table mirroring the newsroom router, the theme scorer and signal fallbacks scoped to the domain's desk, the domain's seat before the hookType's, and the seed engine's max(2, 25%) in-Cycle cap on a name.
+- **Expect at the next live fire (C108), on top of §PROD @93–@86:** every new Story_Hook_Deck SuggestedDesks is one of `Civic Desk` / `Sports Desk` / `Culture Desk` / `Business Desk` (or the two-desk NIGHTLIFE / GENERAL strings) — no `Education Desk` / `Community Desk` / `Health Desk` / `City Desk` / `Features Desk`; no sports-desk name on a HEALTH/CIVIC arc; EDUCATION → Angela Reyes; FAITH → Elliot Graye; no name above 25% of the Cycle's named rows; some COMMUNITY rows carry a desk and no name (the cap — legal, the packet routes by Domain).
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 82` repoints to @93. No sheet migration.
+
 ### PROD @93 — engine.231: the raw-carried hook reaches a desk and a journalist (2026-09-15 ~17:45 Chicago, engine-sheet)
 
 Commit `ea3fda33` (engine tree = @92 `47063de6` + `storyHook.js`, `storylineWeavingEngine.js`, `rosterLookup.js` + seven Phase-5 producers carrying domain at the source: `neighborhoodTrajectoryEngine`, `migrationTrackingEngine`, `householdFormationEngine`, `educationCareerEngine`, `updateCivicApprovalRatings`, `civicInitiativeEngine`, `generationalWealthEngine`). Apps Script version 82, read back @82. Pushed from an isolated `git archive HEAD` stage (repo-root `.clasp.json` copied in last, sandbox id absent); pull-back 169 files, 168 js byte-identical, 0 test files, no overlays. Bench SANDBOX 0908 @47 C109: 166 s ok:true, 0 Engine_Errors, 40 deck rows, 0 desk-empty (C108 on the old code: 34 of 47).

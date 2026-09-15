@@ -158,6 +158,7 @@ Three causes, not one:
 
 ## Changelog
 
+- 2026-09-14 (engine-sheet S461) — Input findings 1 and 3 CUT as engine.222 `8efb8ec4` (calendar writes `S.month`; economy + media compare a lowercase `seasonKey`; a closure files FACTORY_CLOSURE only when a business closed — typed domain first); bench @35 C108–C109 on a fresh live-C107 resync matched the pre-declared numbers; PROD @87. Task 7's economic-input list is closed; engine.219 (hood economic carry) is the next causal break.
 - 2026-09-14 (engine-sheet S461) — Input finding 2 (prior mood vs Phase-6 initialization) CUT as engine.221 `a05aa6b1`: Phase 1 seeds `S.economicMood` from the carry, Phase 6 computes the level from base 50 and closes `econMoodInertia` (0.3) of the gap; bench @34 C108–C109 on a fresh live-C107 resync matched the pre-declared numbers (`output/engine-sheet/bench-readback-221-c108-c109.md`). Findings 1 and 3 are engine.222, next.
 - 2026-09-14 (codex) — Accepted engine.217 C108–C109 bench proof; recorded capture limits and economic input findings; diagnostics bench-only, live/further fires/push held.
 - 2026-09-14 (engine-sheet S459) — Task 6 ruled by the builder: the GC emergence gate fills the thin hoods; no build.

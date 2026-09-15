@@ -15,6 +15,8 @@
  *
  * Offline regression on the real scheduler call expressions (both entry points), the real media
  * engine and the real integration; unrelated v3 modules stubbed. Synthetic fixtures only.
+ * Pre-cut on this fixture: 2 runs, sentiment 0.20 → 0.38 (the arc, created after the Phase-7 slot, was
+ * amplified once either way — the Phase-8 run is the one that sees it). Post-cut: 1 run, 0.29.
  * Run: node scripts/mediaPhaseOwnership.test.js
  */
 const assert = require('assert');
@@ -59,7 +61,7 @@ function world() {
   for (const rel of ['phase07-evening-media/mediaFeedbackEngine.js', 'phase08-v3-chicago/v3Integration.js']) vm.runInContext(read(rel), sb, { filename: rel });
   // Phase7-ChaosArcs: this Cycle's new arc appears AFTER the Phase-7 media slot.
   sb.createChaosArcs_ = ctx => { ctx.summary.eventArcs.push({ arcId: 'SYNTHETIC_ARC', type: 'sports-run', domainTag: 'sports', phase: 'active', tension: 5 }); };
-  for (const name of ['domainTracker_', 'storyHookEngine_', 'textureTriggerEngine_', 'chicagoSatelliteEngine_', 'economicRippleEngine_']) {
+  for (const name of ['domainTracker_', 'storyHookEngine_', 'textureTriggerEngine_', 'chicagoSatelliteEngine_']) {
     sb[name] = () => { counts.modules[name] = (counts.modules[name] || 0) + 1; };
   }
   return { sb, counts };
@@ -78,10 +80,11 @@ for (const schedule of schedules) {
     const arc = S.eventArcs[0];
     // playoffs → sports arc boost 0.35 once (two runs read 5.70)
     assert.strictEqual(Math.round(arc.tension * 100) / 100, 5.35, 'this Cycle\'s arc amplified once, by the run that could see it (tension ' + arc.tension + ')');
-    // Creation Day → +0.05 once on the city sentiment (two runs read 0.30)
-    assert.strictEqual(S.cityDynamics.sentiment, 0.25, 'city sentiment shifted once (' + S.cityDynamics.sentiment + ')');
+    // The city sentiment moves by exactly ONE standalone run's shift (two runs moved it twice: 0.20 → 0.38 on this fixture).
+    const solo = world(); solo.sb.createChaosArcs_(solo.sb.ctx); solo.sb.runMediaFeedbackEngine_(solo.sb.ctx);
+    assert.strictEqual(S.cityDynamics.sentiment, solo.sb.ctx.summary.cityDynamics.sentiment, 'city sentiment shifted once (' + S.cityDynamics.sentiment + ' vs one run ' + solo.sb.ctx.summary.cityDynamics.sentiment + ')');
     assert(S.mediaEffects && S.mediaEffects.arcAmplification.length === 1, 'the persisted media effects carry the arc amplification');
-    assert.strictEqual(Object.keys(w.counts.modules).length, 5, 'unrelated integration modules still run');
+    assert.strictEqual(Object.keys(w.counts.modules).length, 4, 'the four unrelated integration modules still run (economy left the registry in engine.217)');
     passed++;
     console.log('PASS ' + schedule.name);
   } catch (error) {

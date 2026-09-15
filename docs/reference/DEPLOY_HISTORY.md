@@ -129,6 +129,15 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD @89 — engine.220: media feedback runs once per Cycle (2026-09-15 ~01:30 Chicago, engine-sheet)
+
+Commit `31e2f9d0` (engine tree = @88 `e31399b9` + `godWorldEngine2.js` from `f559f557`: the `Phase7-MediaFeedback` schedule line removed at both entry points). Apps Script version 78, `clasp deploy -i -V 78`, read back @78. Pushed from an isolated `git archive 31e2f9d0` stage; pull-back 169 files, byte-identical across all 11 engine dirs, 0 test files, no diag overlays, no `Phase7-MediaFeedback` call on the remote.
+
+- **What changed and why this way:** `runMediaFeedbackEngine_` ran at Phase7-MediaFeedback and again inside Phase8-V3Integration (live C107 log: two `v2.3` lines). The row said audit the intervening inputs before copying 217's removal — the audit went the other way: `Phase7-ChaosArcs` runs AFTER the Phase-7 slot, so only the Phase-8 run ever saw this Cycle's new arcs; the second run re-initialises `S.mediaEffects`, so run 1's analysis was read by nobody; `S.domainPresence` is read at `:360` and unused. What doubled was the side effect `applyMediaToCityDynamics_` (city sentiment += the media shift, twice) and, for any arc alive at Phase 7, `arc.tension += boost`. The Phase-8 run is the owner; the Phase-7 line was the duplicate. phaseCount 133 → 132. One reader moves a step: `applyStorySeeds_` (Phase 7) reads the city sentiment before this Cycle's media shift. Tests: `scripts/mediaPhaseOwnership.test.js` 2/2 entry points (pre-cut on the fixture: 2 runs, sentiment 0.20 → 0.38; post-cut 1 run, 0.29), suite 242/242.
+- **Bench proof (SANDBOX 0908 @37, fourth typed resync from live C107 this session):** C108 ok 249 s, C109 ok 168 s, 0 Engine_Errors, **132/132 both, 0 MediaFeedback timing entries**; economy identical to @36 (55.83/56 → 53.63/54); ring sentiment **−0.16 / −0.14** vs @36's −0.18 / −0.15 — the one removed shift; `mediaEffects` still carried. Readback `output/engine-sheet/bench-readback-220-c108-c109.md`.
+- **Expect at live C108 (Sunday's fire):** `timing.phaseCount` 132 and no `Phase7-MediaFeedback` entry; ONE `runMediaFeedbackEngine_ v2.3` line in the log; city sentiment a few hundredths higher than it would have been; everything in §PROD @88 / @87 / @86 still holds.
+- **Rollback:** `clasp deploy -i AKfycbwUvd4… -V 77` repoints to @88 (restores the double run). No sheet migration.
+
 ### PROD @88 — engine.219 + engine.223: a hood remembers last Cycle's economy; the carry cannot silently drop a Cycle (2026-09-14 ~23:18 Chicago, engine-sheet)
 
 Commit `e31399b9` (engine tree = @87 `8efb8ec4` + engine.223 `e8ac8b73` + 223b `87744bd0` + engine.219: `loadPreviousEvening.js`, `finalizeCycleState.js`, `economicRippleEngine.js`). Apps Script version 77, `clasp deploy -i -V 77`, read back @77. Pushed from an isolated `git archive e31399b9` stage with the PROD `.clasp.json` (rb and kimi active on the shared working tree); pull-back 169 files, byte-identical across all 11 engine dirs, 0 test files, no diag overlays. First push attempt classifier-blocked under auto mode; Mike lifted auto mode, retry ran.

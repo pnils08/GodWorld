@@ -207,6 +207,8 @@ The two loops (`processAdvancementIntake.js`): processed `Advancement_Intake1` r
 
 ## Changelog
 
+- 2026-09-15 (engine-sheet S462) — **PROD @92 (version 81)** = `47063de6`: engine.229 + 230 live on Mike's go after bench @46 C108–C109 completed with the synthetic flood; rows to done-pending-archive. Live smoke = Sunday's C108 (evening fire advised).
+
 - 2026-09-15 (engine-sheet S462) — engine.230 found and CUT: Advancement's per-row intake clears and emergence writes batched (the bench died at the 6-minute cap on an afternoon of doubled Sheets latency, flood or no flood); 229's flood proof recorded from @43 (ripple + hood blob right), clean-run proof pending on 229+230.
 
 - 2026-09-15 (engine-sheet S462) — engine.229 filed and CUT on Mike's go (flood −25): weather salient events reach the economy on their own hoods; phantom `S.crisisSpikes` read and the impact ≥ 1.4 literal gone; test 15/15; bench next with a bench-only flood overlay.

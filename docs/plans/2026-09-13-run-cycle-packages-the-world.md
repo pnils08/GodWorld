@@ -158,6 +158,7 @@ Three causes, not one:
 
 ## Changelog
 
+- 2026-09-14 (engine-sheet S461) — Input finding 2 (prior mood vs Phase-6 initialization) CUT as engine.221 `a05aa6b1`: Phase 1 seeds `S.economicMood` from the carry, Phase 6 computes the level from base 50 and closes `econMoodInertia` (0.3) of the gap; bench @34 C108–C109 on a fresh live-C107 resync matched the pre-declared numbers (`output/engine-sheet/bench-readback-221-c108-c109.md`). Findings 1 and 3 are engine.222, next.
 - 2026-09-14 (codex) — Accepted engine.217 C108–C109 bench proof; recorded capture limits and economic input findings; diagnostics bench-only, live/further fires/push held.
 - 2026-09-14 (engine-sheet S459) — Task 6 ruled by the builder: the GC emergence gate fills the thin hoods; no build.
 - 2026-09-14 (engine-sheet S459) — Task 7 / engine.217 bench-proven @33 C108–C109 (economyRuns 1, modules 5/5, money loop reads the carry); readback `output/codex/bench-readback-c108-c109.md`; PROD waits on codex.

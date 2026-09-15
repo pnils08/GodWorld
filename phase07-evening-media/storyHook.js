@@ -185,7 +185,16 @@ function storyHookEngine_(ctx) {
       'EDUCATION': 'education',
       'FAITH': 'faith',
       'WEATHER': 'weather',
-      'ENVIRONMENT': 'environment'
+      'ENVIRONMENT': 'environment',
+      // engine.232 bench C110: ARTS / CULTURAL / CELEBRITY / NIGHTLIFE rows went
+      // blank — no domain seat, the hookType fell to human_interest (Dana, off
+      // the culture desk). The culture-desk seats by domain:
+      'ARTS': 'arts',
+      'CULTURAL': 'arts',
+      'FESTIVAL': 'arts',
+      'CELEBRITY': 'lifestyle',
+      'NIGHTLIFE': 'lifestyle',
+      'FOOD': 'food'
     };
     if (domainSignals[domain]) return domainSignals[domain];
 

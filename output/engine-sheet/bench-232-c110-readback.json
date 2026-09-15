@@ -1,0 +1,53 @@
+{
+ "cycle": 110,
+ "rows": 67,
+ "errors": 0,
+ "desks": {
+  "Culture Desk": 52,
+  "Civic Desk": 8,
+  "Business Desk": 5,
+  "Civic Desk; Culture Desk": 1,
+  "Culture Desk; Business Desk": 1
+ },
+ "journalists": {
+  "Elliot Graye": 2,
+  "Dana Reeve": 1,
+  "Luis Navarro": 1,
+  "Dr. Lila Mezran": 2,
+  "Maria Keen": 10,
+  "Jordan Velez": 4,
+  "Sgt. Rachel Torres": 2,
+  "Kai Marston": 8,
+  "(blank)": 26,
+  "Noah Tan": 1,
+  "Trevor Shimizu": 1,
+  "Simon Leary": 1,
+  "Angela Reyes": 1,
+  "Carmen Delaine": 1,
+  "Sharon Okafor": 6
+ },
+ "byDomain": {
+  "FAITH → Elliot Graye": 1,
+  "CIVIC → Dana Reeve": 1,
+  "CIVIC → Luis Navarro": 1,
+  "HEALTH → Dr. Lila Mezran": 2,
+  "COMMUNITY → Maria Keen": 10,
+  "BUSINESS → Jordan Velez": 4,
+  "SAFETY → Sgt. Rachel Torres": 2,
+  "CULTURE → Kai Marston": 8,
+  "ARTS → (blank)": 1,
+  "CULTURAL → (blank)": 1,
+  "WEATHER → Noah Tan": 1,
+  "CULTURE → (blank)": 1,
+  "INFRASTRUCTURE → Trevor Shimizu": 1,
+  "CELEBRITY → (blank)": 1,
+  "GENERAL → Simon Leary": 1,
+  "EDUCATION → Angela Reyes": 1,
+  "CIVIC → Carmen Delaine": 1,
+  "NIGHTLIFE → (blank)": 1,
+  "BUSINESS → (blank)": 1,
+  "COMMUNITY → Elliot Graye": 1,
+  "COMMUNITY → Sharon Okafor": 6,
+  "COMMUNITY → (blank)": 20
+ }
+}

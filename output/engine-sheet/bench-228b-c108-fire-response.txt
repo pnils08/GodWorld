@@ -1,0 +1,3 @@
+fired-at 2026-09-15T08:25:56.400Z
+wall 199s
+{"ok":true,"ranMs":193254,"diag59":{"cycle":108,"poolSize":571,"poolSample":["Manfred Owens","Ilandra Tain","Andie Topez"],"bonds":607,"friendGrowths":103,"factors":["POP-00016xPOP-00885:1.000","POP-00121xPOP-00556:1.000","POP-00230xPOP-00504:1.000","POP-00860xPOP-00996:1.000","POP-00156xPOP-00725:1.000"],"mapKeys":1141,"mapSample":["Manfred Owens","POP-00028","Ilandra Tain","POP-00675"],"gatePass

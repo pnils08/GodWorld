@@ -195,6 +195,8 @@ Cut (219 shape): `compactActivityObservations_` (last 12 entries × six numbers,
 
 ## Changelog
 
+- 2026-09-15 (engine-sheet S462) — engine.228b bench-proven SANDBOX 0908 @42 C108–C109 (two real activity entries on the ring; dynamics = @40 with one prior night, ratio 1 by construction). Stack `8ea1624b` = 225 + 226 + 228b, five files, pre-flighted; PROD waits on Mike (classifier-blocked).
+
 - 2026-09-15 (engine-sheet S462) — engine.228 filed and CUT: the Phase-2 activity history never carried, so every relative gate's ratio was 1 — own carry key + Phase-1 seed, test 13/13; 227's shock-term loop ruled in §Status log 227.
 
 - 2026-09-15 (engine-sheet S462) — engine.226 bench-proven SANDBOX 0908 @40 C108–C109 on its own typed live-C107 resync: no change vs @39 (ripples, economy, hood blob, dynamics identical) — the declared proof for a latent gate. 225 + 226 stack on one live fire; PROD push waits on Mike (classifier-blocked).

@@ -468,7 +468,9 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
-  safePhaseCall_(ctx, 'Phase7-MediaFeedback', function() { runMediaFeedbackEngine_(ctx); });
+  // engine.220 (S461): media feedback runs ONCE per Cycle, inside Phase8-V3Integration
+  // (after this Cycle's arcs exist at Phase7-ChaosArcs). The Phase-7 slot that used to
+  // sit here doubled arc.tension and the media sentiment shift every Cycle.
   safePhaseCall_(ctx, 'Phase7-StorylineWeaving', function() { weaveStorylines_(ctx); });
 
   safePhaseCall_(ctx, 'Phase7-SeasonalSeeds', function() { applySeasonalStorySeeds_(ctx); });
@@ -2211,7 +2213,9 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
-  safePhaseCall_(ctx, 'Phase7-MediaFeedback', function() { runMediaFeedbackEngine_(ctx); });
+  // engine.220 (S461): media feedback runs ONCE per Cycle, inside Phase8-V3Integration
+  // (after this Cycle's arcs exist at Phase7-ChaosArcs). The Phase-7 slot that used to
+  // sit here doubled arc.tension and the media sentiment shift every Cycle.
   // S409 (G-PF30): was missing from this list only — production runs it.
   // Publishes S.storyHooks / S.storylineWeaving; its Storyline_Tracker direct
   // writes are an existing §9 carve-out (same class dry-run already carries

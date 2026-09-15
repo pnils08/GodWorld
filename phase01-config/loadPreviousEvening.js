@@ -172,8 +172,15 @@ function loadCarryForwardBlob_(ctx, key, cycleId) {
   }
   var rec = readCarryForwardFromSheet_(ctx, key, target);
   if (rec && rec.json) {
-    props.setProperty(key, rec.json);
-    props.setProperty(key + '_CYCLE', String(rec.cycle || 0));
+    // engine.223: the re-seed is best-effort too — a ring row past the 9 KB prop
+    // cap is still the Cycle's memory; the sheet stays the layer that holds it.
+    try {
+      props.setProperty(key, rec.json);
+      props.setProperty(key + '_CYCLE', String(rec.cycle || 0));
+    } catch (e) {
+      Logger.log('loadCarryForwardBlob_: ' + key + ' re-seed refused (' + rec.json.length + ' chars: ' + e.message + ') — serving the ring row directly');
+      CARRY_FORWARD_DIAG.push({ key: key, event: 'prop-too-large', bytes: rec.json.length, cycle: rec.cycle || 0, at: 'load' });
+    }
     Logger.log('loadCarryForwardBlob_: ' + key + ' RECOVERED cycle ' + rec.cycle + ' from Carry_Forward_Store (re-seeded the prop)');
     CARRY_FORWARD_DIAG.push({ key: key, event: 'recovered-from-sheet', cycle: rec.cycle, cycleId: target });
     return rec.json;
